@@ -1,0 +1,97 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.sauber-mercedes-c9",
+  "identity": {
+    "display_name": "Sauber Mercedes C9",
+    "manufacturer": "Sauber",
+    "model": "Mercedes C9",
+    "variant": "AMS2 Group C representation",
+    "year": { "from": 1989, "to": 1989, "label": "1989" },
+    "class": "Group C",
+    "real_world_identity_notes": "Naming follows the AMS2 community sheet; exact configuration remains to be checked against homologation or team material."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "dogleg-h",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "degrees_of_rotation": 540,
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "RM",
+        "notes": "Raw sheet rim code retained and normalized only to round."
+      }
+    },
+    "notes": ["H-Dogleg identifies layout, not whether the gearbox is synchronized or a dogbox; gearbox_type therefore remains unknown."]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [{ "kind": "telemetry-name", "value": "Sauber Mercedes C9" }],
+      "behavior": {
+        "shift_type": "H-Dogleg",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "steering_dor": 540,
+        "wheel_rim_type": { "normalized": "round", "source_label": "RM" },
+        "notes": ["Blank Auto Blip and Shift Cut indicators are No under the source's documented rule; DOR is optional reference metadata."]
+      },
+      "overrides": [],
+      "verified_game_version": "1.5.5.2",
+      "verified_at": "2024-01-17",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Community-maintained sheet with explicit version and indicator semantics; not independently checked in the current game."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/steering",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": ["ams2.coanda-sheet.v1.0.34"],
+        "confidence": "medium",
+        "basis": "Direct transcription and conservative normalization of the Sauber Mercedes C9 row."
+      },
+      {
+        "paths": ["/simulators/0/identities/0"],
+        "source_refs": ["simhub.local-ams2-identities.9.11.22"],
+        "confidence": "verified",
+        "basis": "Exact CarId/CarModel value observed in SimHub's generated AMS2 car settings."
+      }
+    ]
+  },
+  "updated_at": "2026-08-09"
+}

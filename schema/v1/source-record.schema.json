@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authentic-controls.example/schema/v1/source-record.schema.json",
+  "title": "Authentic Controls source registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sources"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "title",
+          "publisher",
+          "url",
+          "source_type",
+          "retrieved_at",
+          "reuse_status",
+          "notes"
+        ],
+        "properties": {
+          "source_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "publisher": { "type": "string", "minLength": 1 },
+          "author": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "archive_url": { "type": ["string", "null"], "format": "uri" },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "manufacturer",
+              "homologation",
+              "official-simulator",
+              "in-game-observation",
+              "community-research",
+              "secondary",
+              "other"
+            ]
+          },
+          "published_or_updated_at": { "type": ["string", "null"], "format": "date" },
+          "retrieved_at": { "type": "string", "format": "date" },
+          "reuse_status": {
+            "type": "string",
+            "enum": ["permitted", "facts-only-review", "permission-required", "unknown"]
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+

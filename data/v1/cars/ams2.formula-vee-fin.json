@@ -1,0 +1,117 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.formula-vee-fin",
+  "identity": {
+    "display_name": "Formula Vee + Fin",
+    "manufacturer": "Volkswagen",
+    "model": "Formula Vee",
+    "year": {
+      "label": "*2019-2023",
+      "from": 2019,
+      "to": 2023
+    },
+    "class": "Formula Vee Brazil",
+    "real_world_identity_notes": "AMS2 sheet identity for the fin-equipped Formula Vee entry covering 2019–2023; real-world variant naming remains provisional.",
+    "variant": "+ Fin"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "source_label": "RSFL3",
+        "notes": "Raw sheet rim code retained; normalization is conservative."
+      },
+      "degrees_of_rotation": 900
+    },
+    "notes": [
+      "Clutch and throttle technique remain unknown where the source only documents shift type, auto-blip, and shift cut.",
+      "Source chassis manufacturer: Volkswagen."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Vee Fin"
+        },
+        {
+          "kind": "display-name",
+          "value": "Formula Vee + Fin"
+        }
+      ],
+      "behavior": {
+        "shift_type": "H",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "source_label": "RSFL3"
+        },
+        "steering_dor": 900
+      },
+      "overrides": [],
+      "verified_game_version": "1.5.5.2",
+      "verified_at": "2024-01-17",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Control data comes from the versioned community sheet; the telemetry alias is an exact, reviewed SimHub observation."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/authentic_controls",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34"
+        ],
+        "confidence": "medium",
+        "basis": "Conservative promotion of AMS2 sheet row 5 with unsupported technique left unknown."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "Approved exact alias from the SimHub identity audit."
+      }
+    ]
+  },
+  "updated_at": "2026-08-10"
+}

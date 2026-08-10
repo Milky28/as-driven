@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authentic-controls.example/schema/v1/car-record.schema.json",
+  "title": "Authentic Controls car record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "record_id",
+    "identity",
+    "authentic_controls",
+    "simulators",
+    "provenance",
+    "updated_at"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "record_id": { "$ref": "#/$defs/id" },
+    "identity": { "$ref": "#/$defs/identity" },
+    "authentic_controls": { "$ref": "#/$defs/controls" },
+    "simulators": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/simulatorEntry" }
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "updated_at": { "$ref": "#/$defs/date" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "date": { "type": "string", "format": "date" },
+    "state": {
+      "type": "string",
+      "enum": ["yes", "no", "unknown", "not-applicable"]
+    },
+    "confidenceLevel": {
+      "type": "string",
+      "enum": ["verified", "high", "medium", "low", "unknown"]
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "basis"],
+      "properties": {
+        "level": { "$ref": "#/$defs/confidenceLevel" },
+        "basis": { "type": "string", "minLength": 1 }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["display_name", "manufacturer", "model", "year", "class"],
+      "properties": {
+        "display_name": { "type": "string", "minLength": 1 },
+        "manufacturer": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "variant": { "type": "string" },
+        "year": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label"],
+          "properties": {
+            "from": { "type": "integer", "minimum": 1885, "maximum": 2200 },
+            "to": { "type": "integer", "minimum": 1885, "maximum": 2200 },
+            "label": { "type": "string", "minLength": 1 }
+          }
+        },
+        "class": { "type": "string", "minLength": 1 },
+        "real_world_identity_notes": { "type": "string" }
+      }
+    },
+    "shiftAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clutch", "throttle_lift", "automatic_cut", "manual_blip", "automatic_blip"],
+      "properties": {
+        "clutch": {
+          "type": "string",
+          "enum": ["required", "not-required", "optional", "unknown", "not-applicable"]
+        },
+        "throttle_lift": {
+          "type": "string",
+          "enum": ["required", "not-required", "partial", "unknown", "not-applicable"]
+        },
+        "automatic_cut": { "$ref": "#/$defs/state" },
+        "manual_blip": {
+          "type": "string",
+          "enum": ["required", "not-required", "optional", "unknown", "not-applicable"]
+        },
+        "automatic_blip": { "$ref": "#/$defs/state" }
+      }
+    },
+    "transmission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forward_gears", "gearbox_type", "shift_actuation", "shift_pattern", "upshift", "downshift", "standing_start_clutch"],
+      "properties": {
+        "forward_gears": { "type": ["integer", "null"], "minimum": 1, "maximum": 20 },
+        "gearbox_type": {
+          "type": "string",
+          "enum": [
+            "synchromesh",
+            "dogbox",
+            "sequential",
+            "semi-automatic",
+            "dual-clutch",
+            "automatic",
+            "direct-drive",
+            "unknown"
+          ]
+        },
+        "shift_actuation": {
+          "type": "string",
+          "enum": [
+            "h-pattern",
+            "sequential-stick",
+            "sequential-paddles",
+            "automatic-lever",
+            "direct-selection",
+            "unknown"
+          ]
+        },
+        "shift_pattern": {
+          "type": "string",
+          "enum": ["standard-h", "dogleg-h", "sequential", "automatic-gate", "direct", "unknown"]
+        },
+        "upshift": { "$ref": "#/$defs/shiftAction" },
+        "downshift": { "$ref": "#/$defs/shiftAction" },
+        "standing_start_clutch": {
+          "type": "string",
+          "enum": ["required", "not-required", "anti-stall-available", "unknown", "not-applicable"]
+        }
+      }
+    },
+    "steering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wheel_rim"],
+      "properties": {
+        "degrees_of_rotation": { "type": "integer", "minimum": 90, "maximum": 1800 },
+        "wheel_rim": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["shape", "source_label"],
+          "properties": {
+            "shape": {
+              "type": "string",
+              "enum": ["round", "d-shaped", "formula", "yoke", "other", "unknown"]
+            },
+            "diameter_mm": { "type": ["integer", "null"], "minimum": 150, "maximum": 600 },
+            "source_label": { "type": "string" },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transmission", "steering"],
+      "properties": {
+        "transmission": { "$ref": "#/$defs/transmission" },
+        "steering": { "$ref": "#/$defs/steering" },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "simulatorIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["display-name", "telemetry-name", "internal-id", "car-path", "class-id", "alias"]
+        },
+        "value": { "type": "string", "minLength": 1 }
+      }
+    },
+    "simBehavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shift_type", "auto_blip", "shift_cut", "wheel_rim_type"],
+      "properties": {
+        "shift_type": { "type": "string", "minLength": 1 },
+        "auto_blip": { "$ref": "#/$defs/state" },
+        "shift_cut": { "$ref": "#/$defs/state" },
+        "steering_dor": { "type": "integer", "minimum": 90, "maximum": 1800 },
+        "wheel_rim_type": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["normalized", "source_label"],
+          "properties": {
+            "normalized": {
+              "type": "string",
+              "enum": ["round", "d-shaped", "formula", "yoke", "other", "unknown"]
+            },
+            "source_label": { "type": "string" }
+          }
+        },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "value", "condition", "source_refs", "confidence"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^/" },
+        "value": {},
+        "condition": { "type": "string", "minLength": 1 },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      }
+    },
+    "simulatorEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "simulator",
+        "identities",
+        "behavior",
+        "overrides",
+        "verified_game_version",
+        "verified_at",
+        "source_refs",
+        "confidence"
+      ],
+      "properties": {
+        "simulator": {
+          "type": "string",
+          "enum": ["ams2", "iracing", "ac-evo", "ac-rally", "other"]
+        },
+        "identities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/simulatorIdentity" }
+        },
+        "behavior": { "$ref": "#/$defs/simBehavior" },
+        "overrides": { "type": "array", "items": { "$ref": "#/$defs/override" } },
+        "verified_game_version": { "type": "string", "minLength": 1, "not": { "const": "latest" } },
+        "verified_at": { "$ref": "#/$defs/date" },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paths", "source_refs", "confidence", "basis"],
+      "properties": {
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^/" }
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "confidence": { "$ref": "#/$defs/confidenceLevel" },
+        "basis": { "type": "string", "minLength": 1 }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claims"],
+      "properties": {
+        "claims": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/claim" } }
+      }
+    }
+  }
+}

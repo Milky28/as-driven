@@ -1,0 +1,116 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.mclaren-720s-gt3-evo",
+  "identity": {
+    "display_name": "McLaren 720S GT3 EVO",
+    "manufacturer": "McLaren",
+    "model": "720S GT3 EVO",
+    "year": {
+      "label": "2023",
+      "from": 2023,
+      "to": 2023
+    },
+    "class": "GT3 Gen2",
+    "real_world_identity_notes": "AMS2 sheet identity for the 2023 GT3 Gen2 McLaren 720S GT3 EVO."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "source_label": "GTF1",
+        "notes": "Raw sheet rim code retained; normalization is conservative."
+      },
+      "degrees_of_rotation": 480
+    },
+    "notes": [
+      "Clutch and throttle technique remain unknown where the source only documents shift type, auto-blip, and shift cut.",
+      "Source chassis manufacturer: McLaren."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren 720S GT3 Evo"
+        },
+        {
+          "kind": "display-name",
+          "value": "McLaren 720S GT3 EVO"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "unknown",
+          "source_label": "GTF1"
+        },
+        "steering_dor": 480
+      },
+      "overrides": [],
+      "verified_game_version": "1.5.5.2",
+      "verified_at": "2024-01-17",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Control data comes from the versioned community sheet; the telemetry alias is an exact, reviewed SimHub observation."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/authentic_controls",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34"
+        ],
+        "confidence": "medium",
+        "basis": "Conservative promotion of AMS2 sheet row 181 with unsupported technique left unknown."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "Approved exact alias from the SimHub identity audit."
+      }
+    ]
+  },
+  "updated_at": "2026-08-10"
+}

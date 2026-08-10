@@ -1,0 +1,3 @@
+Car,Chassis Manufacturer,Class,Year,Auto Blip,Shift Cut,# of Gears,Shift Type,Wheel Rim Type
+name,chassis_make,class,year,auto_blip,shift_cut,gears_no,shift_type,steering_rim_type
+F301,Dallara,Formula 3 Brasil,2001,Y,Y,5,Seq-Stick,RSF1

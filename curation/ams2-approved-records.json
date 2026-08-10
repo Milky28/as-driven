@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.2.0",
+  "approved_at": "2026-08-10",
+  "verified_at": "2024-01-17",
+  "records": [
+    {
+      "source_row": 5,
+      "source_display_name": "Formula Vee + Fin",
+      "record_id": "ams2.formula-vee-fin",
+      "manufacturer": "Volkswagen",
+      "model": "Formula Vee",
+      "variant": "+ Fin",
+      "telemetry_name": "Formula Vee Fin",
+      "identity_notes": "AMS2 sheet identity for the fin-equipped Formula Vee entry covering 2019–2023; real-world variant naming remains provisional."
+    },
+    {
+      "source_row": 6,
+      "source_display_name": "Fórmula Inter MG15",
+      "record_id": "ams2.formula-inter-mg15",
+      "manufacturer": "Minelli",
+      "model": "MG15",
+      "telemetry_name": "Formula Inter MG-15",
+      "identity_notes": "AMS2 sheet identity for the Fórmula Inter MG15 entry covering 2015–2023; manufacturer and model are retained from the sheet context."
+    },
+    {
+      "source_row": 8,
+      "source_display_name": "F309",
+      "record_id": "ams2.f309",
+      "manufacturer": "Dallara",
+      "model": "F309",
+      "telemetry_name": "Dallara F309",
+      "identity_notes": "AMS2 sheet identity for the 2009 Formula 3 Brasil Dallara F309."
+    },
+    {
+      "source_row": 152,
+      "source_display_name": "Cadillac DPi-V.R",
+      "record_id": "ams2.cadillac-dpi-vr",
+      "manufacturer": "Cadillac",
+      "model": "DPi-V.R",
+      "telemetry_name": "Cadillac DPi-VR",
+      "identity_notes": "Cadillac-branded DPi-V.R identity; the sheet separately identifies Dallara as the chassis manufacturer."
+    },
+    {
+      "source_row": 161,
+      "source_display_name": "Chevrolet Corvette C3.R",
+      "record_id": "ams2.chevrolet-corvette-c3-r",
+      "manufacturer": "Chevrolet",
+      "model": "Corvette C3.R",
+      "telemetry_name": "Chevrolet Corvette C3-R",
+      "identity_notes": "AMS2 sheet identity for the 1971 GT Classics Chevrolet Corvette C3.R."
+    },
+    {
+      "source_row": 181,
+      "source_display_name": "McLaren 720S GT3 EVO",
+      "record_id": "ams2.mclaren-720s-gt3-evo",
+      "manufacturer": "McLaren",
+      "model": "720S GT3 EVO",
+      "telemetry_name": "McLaren 720S GT3 Evo",
+      "identity_notes": "AMS2 sheet identity for the 2023 GT3 Gen2 McLaren 720S GT3 EVO."
+    },
+    {
+      "source_row": 185,
+      "source_display_name": "Camaro GT4.R",
+      "record_id": "ams2.chevrolet-camaro-gt4-r",
+      "manufacturer": "Chevrolet",
+      "model": "Camaro GT4.R",
+      "telemetry_name": "Chevrolet Camaro GT4.R",
+      "identity_notes": "AMS2 sheet identity for the 2017 Chevrolet Camaro GT4.R."
+    }
+  ]
+}

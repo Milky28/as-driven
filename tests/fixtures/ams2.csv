@@ -1,0 +1,6 @@
+Car,Chassis Manufacturer,Class,Year,Auto Blip,Shift Cut,# of Gears,Shift Type,Steering DOR,Wheel Rim Type
+name,chassis_make,class,year,auto_blip,shift_cut,gears_no,shift_type,steering_dor,steering_rim_type
+Brazilian Formula,,,,,,,,,
+F301,Dallara,Formula 3 Brasil,2001,Y,Y,5,Seq-Stick,450,RSF1
+Sauber Mercedes C9,Sauber,Group C,1989,,,5,H-Dogleg,540,RM
+McLaren F1 GTR,McLaren,GT1,1997,,Y,6,Seq-Stick,450,RM

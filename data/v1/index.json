@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schema/v1/dataset-index.schema.json",
+  "schema_version": "1.0.0",
+  "dataset_version": "0.2.0",
+  "released_at": "2026-08-10",
+  "records": [
+    "cars/ams2.cadillac-dpi-vr.json",
+    "cars/ams2.chevrolet-camaro-gt4-r.json",
+    "cars/ams2.chevrolet-corvette-c3-r.json",
+    "cars/ams2.f301.json",
+    "cars/ams2.f309.json",
+    "cars/ams2.formula-inter-mg15.json",
+    "cars/ams2.formula-vee-fin.json",
+    "cars/ams2.mclaren-720s-gt3-evo.json",
+    "cars/ams2.mclaren-f1-gtr.json",
+    "cars/ams2.sauber-mercedes-c9.json"
+  ]
+}

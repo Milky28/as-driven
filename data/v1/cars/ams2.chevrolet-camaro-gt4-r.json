@@ -1,0 +1,116 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.chevrolet-camaro-gt4-r",
+  "identity": {
+    "display_name": "Camaro GT4.R",
+    "manufacturer": "Chevrolet",
+    "model": "Camaro GT4.R",
+    "year": {
+      "label": "2017",
+      "from": 2017,
+      "to": 2017
+    },
+    "class": "GT4",
+    "real_world_identity_notes": "AMS2 sheet identity for the 2017 Chevrolet Camaro GT4.R."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "source_label": "GTF1FL2",
+        "notes": "Raw sheet rim code retained; normalization is conservative."
+      },
+      "degrees_of_rotation": 720
+    },
+    "notes": [
+      "Clutch and throttle technique remain unknown where the source only documents shift type, auto-blip, and shift cut.",
+      "Source chassis manufacturer: Chevrolet."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Camaro GT4.R"
+        },
+        {
+          "kind": "display-name",
+          "value": "Camaro GT4.R"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "unknown",
+          "source_label": "GTF1FL2"
+        },
+        "steering_dor": 720
+      },
+      "overrides": [],
+      "verified_game_version": "1.5.5.2",
+      "verified_at": "2024-01-17",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Control data comes from the versioned community sheet; the telemetry alias is an exact, reviewed SimHub observation."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/authentic_controls",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34"
+        ],
+        "confidence": "medium",
+        "basis": "Conservative promotion of AMS2 sheet row 185 with unsupported technique left unknown."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "Approved exact alias from the SimHub identity audit."
+      }
+    ]
+  },
+  "updated_at": "2026-08-10"
+}

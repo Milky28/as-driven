@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authentic-controls.example/schema/v1/dataset-index.schema.json",
+  "title": "Authentic Controls dataset index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_version", "released_at", "records"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "dataset_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "released_at": { "type": "string", "format": "date" },
+    "records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^cars/[a-z0-9._-]+\\.json$" }
+    }
+  }
+}
+

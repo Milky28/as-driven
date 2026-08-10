@@ -1,0 +1,56 @@
+{
+  "$schema": "../../schema/v1/source-record.schema.json",
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "source_id": "ams2.coanda-sheet.v1.0.34",
+      "title": "AMS2 v1.5.5.2 - Extended Car Info v1.0.34",
+      "publisher": "Reiza Studios Forum community",
+      "author": "Coanda",
+      "url": "https://docs.google.com/spreadsheets/d/1tJ899Wf-ElgVdhXFcQOG8ofQDYKTf8J6Lg8IXavCRxA/edit?gid=2095352073#gid=2095352073",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": "2024-01-17",
+      "retrieved_at": "2026-08-09",
+      "reuse_status": "facts-only-review",
+      "notes": "Forum post labels the sheet AMS2 1.5.5.2 / spreadsheet 1.0.34 and explicitly states that blank indicator cells mean No. The importer projects only authentic-control fields and applies that blank rule to Auto Blip and Shift Cut. Initial records paraphrase selected factual cells; bulk redistribution requires a separate reuse review."
+    },
+    {
+      "source_id": "ams2.reiza-forum.extended-car-info",
+      "title": "Automobilista 2 - Extended Car Info Spreadsheet",
+      "publisher": "Reiza Studios Forum",
+      "author": "Coanda",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-extended-car-info-spreadsheet.16746/",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": "2024-01-17",
+      "retrieved_at": "2026-08-09",
+      "reuse_status": "facts-only-review",
+      "notes": "Provides version context and the blank-indicator interpretation for the linked sheet."
+    },
+    {
+      "source_id": "iracing.support.transmission.2026-06-22",
+      "title": "Transmission/Gearbox/Shifting Types & Method",
+      "publisher": "iRacing Support",
+      "url": "https://support.iracing.com/support/solutions/articles/31000157032-transmission-gearbox-shifting-types-method",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2026-06-22",
+      "retrieved_at": "2026-08-09",
+      "reuse_status": "facts-only-review",
+      "notes": "Official article used as the design target for the iRacing staging importer. No iRacing records are promoted in dataset 0.1.0."
+    },
+    {
+      "source_id": "simhub.local-ams2-identities.9.11.22",
+      "title": "Locally observed SimHub AMS2 car identity settings",
+      "publisher": "SimHub",
+      "url": "https://github.com/SHWotever/SimHub/wiki",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "SimHub 9.11.22 generated .shcarsettings files for locally observed AMS2 cars. The audit found 191 unique identities, with CarId equal to CarModel in every file. Used only to support exact telemetry-name aliases."
+    }
+  ]
+}

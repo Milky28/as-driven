@@ -1,0 +1,96 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.mclaren-f1-gtr",
+  "identity": {
+    "display_name": "McLaren F1 GTR",
+    "manufacturer": "McLaren",
+    "model": "F1 GTR",
+    "variant": "AMS2 GT1 representation",
+    "year": { "from": 1997, "to": 1997, "label": "1997" },
+    "class": "GT1",
+    "real_world_identity_notes": "The exact 1997 chassis specification represented by AMS2 remains to be verified."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "degrees_of_rotation": 450,
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "RM",
+        "notes": "Raw sheet rim code retained and normalized only to round."
+      }
+    },
+    "notes": ["A primary real-car source is still required before raising confidence above medium."]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [{ "kind": "telemetry-name", "value": "McLaren F1 GTR" }],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "steering_dor": 450,
+        "wheel_rim_type": { "normalized": "round", "source_label": "RM" },
+        "notes": ["Blank Auto Blip is No under the source's documented indicator rule; DOR is optional reference metadata."]
+      },
+      "overrides": [],
+      "verified_game_version": "1.5.5.2",
+      "verified_at": "2024-01-17",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Community-maintained sheet with explicit version and indicator semantics; not independently checked in the current game."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/steering",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": ["ams2.coanda-sheet.v1.0.34"],
+        "confidence": "medium",
+        "basis": "Direct transcription and conservative normalization of the McLaren F1 GTR row."
+      },
+      {
+        "paths": ["/simulators/0/identities/0"],
+        "source_refs": ["simhub.local-ams2-identities.9.11.22"],
+        "confidence": "verified",
+        "basis": "Exact CarId/CarModel value observed in SimHub's generated AMS2 car settings."
+      }
+    ]
+  },
+  "updated_at": "2026-08-09"
+}
