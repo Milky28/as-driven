@@ -3,7 +3,7 @@
 The SimHub guided verification workflow produces staging evidence; it does not
 edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.12.0
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.12.1
 prefills the exact live telemetry name, class, game/client versions, timestamp,
 and SimHub's reported maximum gear count. The tester confirms the gear count
 and supplies the observations that require judgment.
@@ -107,6 +107,10 @@ physical pedal. The guided drive therefore does not reject a maneuver merely
 because that value changes. The prompt supplies the no-pedal test condition,
 the live overlay labels the value `Vehicle clutch`, and any observed actuation
 is retained in the draft evidence notes for review.
+
+Move-off is accepted only after movement continues for at least 600 ms while
+the engine remains running. A car that rolls slightly when first gear engages
+and then stalls is recorded as requiring the standing-start clutch.
 
 Observation files belong in local or ignored staging storage until reviewed.
 Approved facts are copied into the appropriate simulator entry and cited by a

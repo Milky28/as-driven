@@ -66,6 +66,9 @@ namespace AuthenticControls.Core
 
     public sealed class GuidedVerificationDrive
     {
+        private static readonly TimeSpan MoveOffConfirmationWindow =
+            TimeSpan.FromMilliseconds(600.0);
+
         private enum Phase
         {
             Idle,
@@ -95,6 +98,7 @@ namespace AuthenticControls.Core
         private bool _fullThrottleTestFailed;
         private bool _coastDownshiftTestFailed;
         private bool _engineWasRunning;
+        private DateTime? _moveOffMovementStartedUtc;
         private string _result = string.Empty;
         private double _maximumClutch;
         private double _minimumThrottle;
@@ -286,7 +290,8 @@ namespace AuthenticControls.Core
             switch (_phase)
             {
                 case Phase.MoveOff:
-                    if (sample.EngineStarted && sample.Rpm >= 200.0)
+                    bool engineRunning = sample.EngineStarted && sample.Rpm >= 200.0;
+                    if (engineRunning)
                     {
                         _engineWasRunning = true;
                     }
@@ -294,18 +299,35 @@ namespace AuthenticControls.Core
                     {
                         _armed = true;
                     }
-                    if (_armed && sample.Gear > 0 && sample.SpeedKmh >= 2.0)
+                    if (_armed && _engineWasRunning && !engineRunning)
                     {
                         SetResult(
-                            true,
                             false,
-                            "The car moved from rest while the test required no physical clutch input."
-                                + VehicleClutchSummary());
+                            false,
+                            _moveOffMovementStartedUtc.HasValue || sample.SpeedKmh >= 1.0
+                                ? "The car rolled briefly, but the engine stalled; standing-start clutch is required."
+                                : "The engine stopped before the car moved; standing-start clutch is required.");
                     }
-                    else if (_armed && _engineWasRunning
-                        && (!sample.EngineStarted || sample.Rpm < 200.0))
+                    else if (_armed && engineRunning
+                        && sample.Gear > 0 && sample.SpeedKmh >= 2.0)
                     {
-                        SetResult(false, false, "The engine stopped before the car moved; standing-start clutch is required.");
+                        if (!_moveOffMovementStartedUtc.HasValue)
+                        {
+                            _moveOffMovementStartedUtc = sample.TimestampUtc;
+                        }
+                        else if (sample.TimestampUtc - _moveOffMovementStartedUtc.Value
+                            >= MoveOffConfirmationWindow)
+                        {
+                            SetResult(
+                                true,
+                                false,
+                                "The car sustained movement with the engine running while the test required no physical clutch input."
+                                    + VehicleClutchSummary());
+                        }
+                    }
+                    else if (_armed && sample.SpeedKmh < 1.0)
+                    {
+                        _moveOffMovementStartedUtc = null;
                     }
                     break;
                 case Phase.GearCount:
@@ -503,6 +525,7 @@ namespace AuthenticControls.Core
             _attemptAccepted = false;
             _automaticActionObserved = false;
             _engineWasRunning = false;
+            _moveOffMovementStartedUtc = null;
             _resultReady = false;
             _result = string.Empty;
             _maximumClutch = 0.0;
@@ -587,7 +610,7 @@ namespace AuthenticControls.Core
             switch (phase)
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Apply light throttle. Automatic engine start is fine.";
+                case Phase.MoveOff: return "Apply light throttle; keep moving briefly.";
                 case Phase.GearCount: return "Direct H-pattern selection is reviewed in the form.";
                 case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
                 case Phase.LiftedUpshift: return "Then request one upshift.";

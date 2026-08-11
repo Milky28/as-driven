@@ -205,7 +205,7 @@ and the separate guided-verification surface.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.12.0 packages dataset 0.3.13. It packages the approved high-fidelity 128x128 raster
+0.12.1 packages dataset 0.3.13. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -393,6 +393,10 @@ when a tester replaces an unresolved guided result with a definite answer.
 This preserves partial observations: reviewers can use a later, more complete
 draft to improve individual claims without silently replacing established
 evidence for the whole car.
+Version 0.12.1 prevents a brief roll caused by selecting first gear from being
+accepted as clutch-free move-off. The detector now requires at least 600 ms of
+sustained movement while the engine remains running; movement followed by an
+immediate stall is explicitly recorded as requiring the standing-start clutch.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

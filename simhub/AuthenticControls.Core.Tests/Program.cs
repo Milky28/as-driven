@@ -484,7 +484,9 @@ namespace AuthenticControls.Core.Tests
                     False(guidedDrive.GetSnapshot().ResultReady, "ignores an engine that was already stopped before the move-off test");
                     guidedDrive.AddSample(GuidedSample(now, 0, 100, 0, 1200, 0, 40, true));
                     guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 45, 0, 1300, 3, 60, true));
-                    True(guidedDrive.GetSnapshot().ResultReady, "detects clutch-free automatic creep from a stationary sample");
+                    False(guidedDrive.GetSnapshot().ResultReady, "does not accept a momentary initial roll as clutch-free move-off");
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(750), 1, 40, 0, 1350, 5, 65, true));
+                    True(guidedDrive.GetSnapshot().ResultReady, "detects sustained clutch-free automatic creep from stationary");
                     guidedDrive.Next();
                     for (int observedGear = 1; observedGear <= 6; observedGear++)
                     {
@@ -523,6 +525,17 @@ namespace AuthenticControls.Core.Tests
                     moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(200), 1, 0, 20, 0, 0, 0, false));
                     True(moveOffStall.GetSnapshot().ResultReady, "detects a stall only after first observing the engine running");
                     True(moveOffStall.GetSnapshot().Result.Contains("standing-start clutch is required"), "reports the post-start stall as a standing-start clutch requirement");
+
+                    var rollingStall = new GuidedVerificationDrive();
+                    rollingStall.Start(null);
+                    rollingStall.Next();
+                    rollingStall.AddSample(GuidedSample(now, 0, 0, 0, 1200, 0, 30, true));
+                    rollingStall.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 40, 20, 900, 3, 20, true));
+                    False(rollingStall.GetSnapshot().ResultReady, "waits before accepting initial movement");
+                    rollingStall.AddSample(GuidedSample(now.AddMilliseconds(200), 1, 0, 20, 0, 2, 0, false));
+                    True(rollingStall.GetSnapshot().ResultReady, "rejects brief movement followed by an immediate stall");
+                    False(rollingStall.GetSnapshot().ResultSuccessful, "classifies rolling stall as clutch required");
+                    True(rollingStall.GetSnapshot().Result.Contains("rolled briefly"), "explains why rolling stall is not clutch-free move-off");
 
                     var skippedAutomaticTests = new GuidedVerificationDrive();
                     skippedAutomaticTests.Start(null);
