@@ -76,6 +76,11 @@ try {
     $zipHash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
     "$zipHash  $([System.IO.Path]::GetFileName($zipPath))" |
         Set-Content -LiteralPath "$zipPath.sha256" -Encoding ASCII
+    & powershell -NoProfile -ExecutionPolicy Bypass -File `
+        (Join-Path $PSScriptRoot "test-install-database.ps1") -PackagePath $zipPath
+    if ($LASTEXITCODE -ne 0) {
+        throw "Database-only installer test failed."
+    }
     Write-Host "Built independent database release: $zipPath"
 }
 finally {

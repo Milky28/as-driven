@@ -90,6 +90,13 @@ Build a standalone database package without SimHub binaries:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-database.ps1
 ```
 
+Install that database snapshot into an existing SimHub installation without
+replacing the Authentic Controls plugin, dashboards, overlays, or settings:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\install-database.ps1
+```
+
 Database and plugin versions advance independently. A plugin package may carry
 a known-good data snapshot for first installation, while database-only releases
 can update compatible data without changing the client.
