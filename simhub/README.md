@@ -143,6 +143,8 @@ AuthenticControls.VerificationDriveStepNumber
 AuthenticControls.VerificationDriveStepCount
 AuthenticControls.VerificationDriveTitle
 AuthenticControls.VerificationDrivePrompt
+AuthenticControls.VerificationDrivePromptLine1
+AuthenticControls.VerificationDrivePromptLine2
 AuthenticControls.VerificationDriveStatus
 AuthenticControls.VerificationDriveResult
 AuthenticControls.VerificationDriveResultDetail
@@ -370,6 +372,11 @@ overlay, visibly labels every telemetry-populated form value `AUTO-FILLED`, and
 keeps the guided-start button disabled until assist settings are confirmed.
 Gear telemetry no longer auto-confirms direct H-pattern selection; choosing a
 sequential or paddle primary mechanism supplies `Not applicable` instead.
+Version 0.11.6 renders every maneuver prompt as two intentionally short fixed
+lines so the move-off instruction cannot be clipped by Dash Studio. Guided
+form badges now distinguish usable `AUTO-DETECTED` values from orange
+`REVIEW NEEDED` unknown/not-tested results; a valid `Not applicable` value
+inferred from the selected primary mechanism is labeled `DERIVED`.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

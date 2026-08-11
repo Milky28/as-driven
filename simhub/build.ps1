@@ -144,7 +144,8 @@ if (-not (Test-Path -LiteralPath $verificationDashboard)) {
 $verificationDashboardJson = Get-Content -LiteralPath $verificationDashboard -Raw
 foreach ($requiredProperty in @(
     "AuthenticControls.VerificationDriveVisible",
-    "AuthenticControls.VerificationDrivePrompt",
+    "AuthenticControls.VerificationDrivePromptLine1",
+    "AuthenticControls.VerificationDrivePromptLine2",
     "AuthenticControls.VerificationDriveResult"
 )) {
     if (-not $verificationDashboardJson.Contains($requiredProperty)) {

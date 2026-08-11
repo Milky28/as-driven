@@ -56,6 +56,8 @@ namespace AuthenticControls.Core
         public int StepCount { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
+        public string PromptLine1 { get; set; }
+        public string PromptLine2 { get; set; }
         public string Status { get; set; }
         public string Result { get; set; }
         public string ResultSummary { get; set; }
@@ -253,6 +255,8 @@ namespace AuthenticControls.Core
                     StepCount = 6,
                     Title = Title(_phase),
                     Prompt = Prompt(_phase),
+                    PromptLine1 = PromptLine1(_phase),
+                    PromptLine2 = PromptLine2(_phase),
                     Status = Status(_phase),
                     Result = _result,
                     ResultSummary = ResultSummary(_phase),
@@ -557,16 +561,39 @@ namespace AuthenticControls.Core
 
         private static string Prompt(Phase phase)
         {
+            string line1 = PromptLine1(phase);
+            string line2 = PromptLine2(phase);
+            return string.IsNullOrEmpty(line2) ? line1 : line1 + " " + line2;
+        }
+
+        private static string PromptLine1(Phase phase)
+        {
             switch (phase)
             {
-                case Phase.Intro: return "For each step: prepare, perform the maneuver, wait for CAPTURED, then press Next to accept. Use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Engine running (automatic start is fine). Stop, select first, leave the clutch untouched, then apply light throttle.";
-                case Phase.GearCount: return "Cycle through every forward gear. Direct H-pattern selection is reviewed separately in the form.";
-                case Phase.FullThrottleUpshift: return "While moving, keep the throttle above 70%, do not use the clutch, and request one upshift.";
-                case Phase.LiftedUpshift: return "Without using the clutch, lift the throttle and request one upshift.";
-                case Phase.CoastDownshift: return "At safe RPM, release the throttle, do not use the clutch, and request one downshift.";
-                case Phase.ManualBlipDownshift: return "Without using the clutch, manually blip the throttle while requesting one downshift.";
-                case Phase.Complete: return "The driving results are ready. Use Next to close this overlay after reading the summary.";
+                case Phase.Intro: return "Prepare, perform the maneuver, then wait for CAPTURED.";
+                case Phase.MoveOff: return "Engine on. Stop, select first, leave the clutch untouched.";
+                case Phase.GearCount: return "Cycle through every forward gear.";
+                case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
+                case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
+                case Phase.CoastDownshift: return "At safe RPM, release throttle and leave clutch untouched.";
+                case Phase.ManualBlipDownshift: return "Leave clutch untouched and manually blip the throttle.";
+                case Phase.Complete: return "Driving results are ready for review.";
+                default: return string.Empty;
+            }
+        }
+
+        private static string PromptLine2(Phase phase)
+        {
+            switch (phase)
+            {
+                case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
+                case Phase.MoveOff: return "Apply light throttle. Automatic engine start is fine.";
+                case Phase.GearCount: return "Direct H-pattern selection is reviewed in the form.";
+                case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
+                case Phase.LiftedUpshift: return "Then request one upshift.";
+                case Phase.CoastDownshift: return "Then request one downshift.";
+                case Phase.ManualBlipDownshift: return "Then request one downshift.";
+                case Phase.Complete: return "Press Next to close this overlay.";
                 default: return string.Empty;
             }
         }

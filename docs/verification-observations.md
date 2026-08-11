@@ -62,8 +62,12 @@ The in-sim introduction explains the repeated step cycle: prepare, perform the
 maneuver, wait for a captured result, then accept it or choose Retry/Skip. The
 overlay uses a short summary and green capture mark so completion is immediately
 visible; the longer falsifiable description is retained for form review.
-Fields populated from guided telemetry carry an `AUTO-FILLED` badge. Direct
-H-pattern selection is never inferred merely from a non-adjacent gear telemetry
+Usable values populated from guided telemetry carry an `AUTO-DETECTED` badge.
+An `unknown` or `not-tested` result is instead labeled `REVIEW NEEDED`, because
+automation did not settle that claim. A legitimate `Not applicable` value based
+on the selected primary mechanism is labeled `DERIVED`. Detailed evidence text
+copied from the guided result retains an `AUTO-FILLED` badge. Direct H-pattern
+selection is never inferred merely from a non-adjacent gear telemetry
 transition; it remains a cockpit/mechanism review, and sequential or paddle
 actuation makes it explicitly not applicable.
 

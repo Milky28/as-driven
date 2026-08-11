@@ -477,6 +477,9 @@ namespace AuthenticControls.Core.Tests
                     Equal("Before you begin", guidedDrive.GetSnapshot().Title, "starts with a guided-workflow introduction");
                     Equal(0, guidedDrive.GetSnapshot().StepNumber, "does not count the introduction as a driving test");
                     guidedDrive.Next();
+                    True(guidedDrive.GetSnapshot().PromptLine1.Length < 70, "keeps the move-off first prompt line short");
+                    True(guidedDrive.GetSnapshot().PromptLine2.Length < 70, "keeps the move-off second prompt line short");
+                    True(guidedDrive.GetSnapshot().Prompt.Contains(guidedDrive.GetSnapshot().PromptLine1), "retains a combined prompt for non-overlay consumers");
                     guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(-100), 0, 100, 0, 0, 0, 0, false));
                     False(guidedDrive.GetSnapshot().ResultReady, "ignores an engine that was already stopped before the move-off test");
                     guidedDrive.AddSample(GuidedSample(now, 0, 100, 0, 1200, 0, 40, true));

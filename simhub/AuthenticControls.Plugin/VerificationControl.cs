@@ -237,6 +237,17 @@ namespace AuthenticControls.Plugin
                 "How automatic blip was identified",
                 _automaticBlipMethod,
                 "For example: throttle telemetry spiked during a downshift without pedal input.");
+            foreach (ComboBox guidedChoice in new[]
+            {
+                _moveOff, _directGearSelection, _clutchlessUpshift,
+                _automaticCut, _clutchlessDownshift, _automaticBlip
+            })
+            {
+                guidedChoice.SelectionChanged += GuidedChoiceEdited;
+            }
+            _forwardGears.TextChanged += GuidedTextEdited;
+            _automaticCutMethod.TextChanged += GuidedTextEdited;
+            _automaticBlipMethod.TextChanged += GuidedTextEdited;
 
             AddSubheading(form, "Cockpit controls");
             form.Children.Add(new TextBlock
@@ -449,7 +460,7 @@ namespace AuthenticControls.Plugin
                 _clutchlessDownshift, _automaticBlip, _automaticBlipMethod
             })
             {
-                SetAutoFilled(control, false);
+                ClearFieldBadge(control);
             }
         }
 
@@ -589,7 +600,7 @@ namespace AuthenticControls.Plugin
             }
             SelectGuidedChoice(_moveOff, results.MoveOffWithoutPhysicalClutch);
             SelectChoice(_directGearSelection, results.DirectGearSelection);
-            SetAutoFilled(_directGearSelection, false);
+            SetFieldBadge(_directGearSelection, "REVIEW NEEDED", Brushes.Orange);
             SelectGuidedChoice(_clutchlessUpshift, results.ClutchlessUpshift);
             SelectGuidedChoice(_automaticCut, results.AutomaticCut);
             SelectGuidedChoice(_clutchlessDownshift, results.ClutchlessDownshift);
@@ -597,12 +608,18 @@ namespace AuthenticControls.Plugin
             if (results.ForwardGears.HasValue)
             {
                 _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);
-                SetAutoFilled(_forwardGears, true);
+                SetFieldBadge(_forwardGears, "AUTO-DETECTED", Brushes.LightGreen);
             }
             _automaticCutMethod.Text = results.AutomaticCutMethod ?? string.Empty;
             _automaticBlipMethod.Text = results.AutomaticBlipMethod ?? string.Empty;
-            SetAutoFilled(_automaticCutMethod, !string.IsNullOrWhiteSpace(_automaticCutMethod.Text));
-            SetAutoFilled(_automaticBlipMethod, !string.IsNullOrWhiteSpace(_automaticBlipMethod.Text));
+            SetFieldBadge(
+                _automaticCutMethod,
+                string.IsNullOrWhiteSpace(_automaticCutMethod.Text) ? string.Empty : "AUTO-FILLED",
+                Brushes.LightSkyBlue);
+            SetFieldBadge(
+                _automaticBlipMethod,
+                string.IsNullOrWhiteSpace(_automaticBlipMethod.Text) ? string.Empty : "AUTO-FILLED",
+                Brushes.LightSkyBlue);
             if (!string.IsNullOrWhiteSpace(results.EvidenceNote))
             {
                 _evidenceNotes.Text = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
@@ -705,17 +722,17 @@ namespace AuthenticControls.Plugin
                 FontWeight = FontWeights.SemiBold,
                 Margin = new Thickness(0, 0, 0, 5),
             });
-            var autoFilled = new TextBlock
+            var fieldBadge = new TextBlock
             {
-                Text = "AUTO-FILLED",
+                Text = string.Empty,
                 FontSize = 10,
                 FontWeight = FontWeights.Bold,
                 Foreground = Brushes.LightGreen,
                 Margin = new Thickness(8, 1, 0, 5),
                 Visibility = Visibility.Collapsed,
             };
-            labelRow.Children.Add(autoFilled);
-            control.Tag = autoFilled;
+            labelRow.Children.Add(fieldBadge);
+            control.Tag = fieldBadge;
             holder.Children.Add(labelRow);
             holder.Children.Add(control);
             return holder;
@@ -763,13 +780,13 @@ namespace AuthenticControls.Plugin
                 || actuation == "automatic-lever")
             {
                 SelectChoice(_directGearSelection, "not-applicable");
-                SetAutoFilled(_directGearSelection, true);
+                SetFieldBadge(_directGearSelection, "DERIVED", Brushes.LightSkyBlue);
             }
             else if ((actuation == "h-pattern" || actuation == "direct-selection")
                 && ChoiceValue(_directGearSelection) == "not-applicable")
             {
                 SelectChoice(_directGearSelection, "not-tested");
-                SetAutoFilled(_directGearSelection, false);
+                SetFieldBadge(_directGearSelection, "REVIEW NEEDED", Brushes.Orange);
             }
         }
 
@@ -779,18 +796,55 @@ namespace AuthenticControls.Plugin
                 && _assistSettingsConfirmed.IsChecked == true;
         }
 
+        private void GuidedChoiceEdited(object sender, SelectionChangedEventArgs eventArgs)
+        {
+            ComboBox combo = sender as ComboBox;
+            string value = ChoiceValue(combo);
+            if (string.Equals(value, "unknown", StringComparison.Ordinal)
+                || string.Equals(value, "not-tested", StringComparison.Ordinal))
+            {
+                SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
+            }
+            else
+            {
+                ClearFieldBadge(combo);
+            }
+        }
+
+        private void GuidedTextEdited(object sender, TextChangedEventArgs eventArgs)
+        {
+            ClearFieldBadge(sender as Control);
+        }
+
         private static void SelectGuidedChoice(ComboBox combo, string value)
         {
             SelectChoice(combo, value);
-            SetAutoFilled(combo, !string.Equals(value, "not-tested", StringComparison.Ordinal));
+            if (string.Equals(value, "unknown", StringComparison.Ordinal)
+                || string.Equals(value, "not-tested", StringComparison.Ordinal))
+            {
+                SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
+            }
+            else
+            {
+                SetFieldBadge(combo, "AUTO-DETECTED", Brushes.LightGreen);
+            }
         }
 
-        private static void SetAutoFilled(Control control, bool visible)
+        private static void ClearFieldBadge(Control control)
+        {
+            SetFieldBadge(control, string.Empty, Brushes.LightGreen);
+        }
+
+        private static void SetFieldBadge(Control control, string text, Brush foreground)
         {
             TextBlock badge = control == null ? null : control.Tag as TextBlock;
             if (badge != null)
             {
-                badge.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+                badge.Text = text ?? string.Empty;
+                badge.Foreground = foreground ?? Brushes.LightGreen;
+                badge.Visibility = string.IsNullOrWhiteSpace(text)
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
             }
         }
 

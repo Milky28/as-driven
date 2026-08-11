@@ -1264,6 +1264,12 @@ namespace AuthenticControls.Plugin
                 "VerificationDrivePrompt",
                 delegate { return _guidedVerificationDrive.GetSnapshot().Prompt; });
             this.AttachDelegate(
+                "VerificationDrivePromptLine1",
+                delegate { return _guidedVerificationDrive.GetSnapshot().PromptLine1; });
+            this.AttachDelegate(
+                "VerificationDrivePromptLine2",
+                delegate { return _guidedVerificationDrive.GetSnapshot().PromptLine2; });
+            this.AttachDelegate(
                 "VerificationDriveStatus",
                 delegate { return _guidedVerificationDrive.GetSnapshot().Status; });
             this.AttachDelegate(

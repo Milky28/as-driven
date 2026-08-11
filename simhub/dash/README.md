@@ -109,3 +109,7 @@ it is not dependent on the game-connected overlay host.
 
 The persistent display can be started like any other Dash Studio dashboard and
 does not depend on popup visibility or size properties.
+
+The guided verification surface uses two fixed, short prompt lines rather than
+depending on Dash Studio text wrapping. This keeps the full instruction visible
+at the packaged 700 x 220 size.

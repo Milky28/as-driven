@@ -89,6 +89,8 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("AuthenticControls.VerificationDriveStepCount", serialized)
         self.assertIn("AuthenticControls.VerificationDriveTitle", serialized)
         self.assertIn("AuthenticControls.VerificationDrivePrompt", serialized)
+        self.assertIn("AuthenticControls.VerificationDrivePromptLine1", serialized)
+        self.assertIn("AuthenticControls.VerificationDrivePromptLine2", serialized)
         self.assertIn("AuthenticControls.VerificationDriveResultReady", serialized)
         self.assertIn("AuthenticControls.VerificationDriveResultSuccessful", serialized)
         self.assertIn("AuthenticControls.VerificationDriveResult", serialized)
@@ -98,8 +100,12 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
         self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
         self.assertLessEqual(named["SuccessSummary"]["Height"], 28)
-        self.assertEqual(15, named["Prompt"]["FontSize"])
-        self.assertEqual(50, named["Prompt"]["Height"])
+        self.assertEqual(14, named["PromptLine1"]["FontSize"])
+        self.assertEqual(22, named["PromptLine1"]["Height"])
+        self.assertEqual(91, named["PromptLine1"]["Top"])
+        self.assertEqual(14, named["PromptLine2"]["FontSize"])
+        self.assertEqual(22, named["PromptLine2"]["Height"])
+        self.assertEqual(115, named["PromptLine2"]["Top"])
 
     def test_cards_reference_only_explicit_plugin_values(self):
         dashboard = self.generator.build_dashboard(overlay=True)
