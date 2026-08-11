@@ -92,6 +92,13 @@ shift tests, cut/blip measurement basis, cockpit actuation, and orthogonal wheel
 details. The convertible is a separate record so its verified technique is not
 silently inherited by the older closed C3.R. The curated dataset now contains
 51 records.
+Dataset 0.3.13 adds Audi R8 LMS GT3 Evo II, Lamborghini Huracan GT3 EVO2,
+Chevrolet Cruze Stock Car 2024, and Toyota Corolla Stock Car 2024 from a second
+reviewed guided-verification batch. Exact simulator identities, most technique,
+and cockpit controls are directly verified. Automatic cut remains a disclosed
+medium-confidence manual observation based on a brief throttle-graph
+interruption during no-lift upshifts. The curated dataset now contains 55
+records.
 The backlog now marks 42 release events as promoted, including aero and current
 specification variants that share a record, leaving 39 researched
 model/configuration events awaiting review or live validation.

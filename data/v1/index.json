@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.12",
+  "dataset_version": "0.3.13",
   "released_at": "2026-08-11",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -12,9 +12,11 @@
     "cars/ams2.aston-martin-vantage-gt4-evo.json",
     "cars/ams2.aston-martin-vantage-gte.json",
     "cars/ams2.audi-r8-lmp1.json",
+    "cars/ams2.audi-r8-lms-gt3-evo-ii.json",
     "cars/ams2.audi-r8-lms-gt4.json",
     "cars/ams2.cadillac-dpi-vr.json",
     "cars/ams2.chevrolet-camaro-gt4-r.json",
+    "cars/ams2.chevrolet-cruze-stock-car-2024.json",
     "cars/ams2.chevrolet-corvette-c3-r.json",
     "cars/ams2.chevrolet-corvette-c3-r-convertible.json",
     "cars/ams2.chevrolet-corvette-c5-r.json",
@@ -34,6 +36,7 @@
     "cars/ams2.formula-vee-gen2.json",
     "cars/ams2.gillet-vertigo-streiff.json",
     "cars/ams2.lamborghini-diablo-sv-r.json",
+    "cars/ams2.lamborghini-huracan-gt3-evo2.json",
     "cars/ams2.lamborghini-huracan-super-trofeo-evo2.json",
     "cars/ams2.lamborghini-murcielago-r-gt.json",
     "cars/ams2.lamborghini-sc63.json",
@@ -54,6 +57,7 @@
     "cars/ams2.saleen-s7-r-gt1.json",
     "cars/ams2.sauber-mercedes-c9.json",
     "cars/ams2.spyker-c8-spyder-gt2-r.json",
+    "cars/ams2.toyota-corolla-stock-car-2024.json",
     "cars/ams2.tvr-tuscan-t400r-gt2.json"
   ]
 }

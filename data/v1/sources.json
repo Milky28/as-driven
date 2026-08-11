@@ -1056,7 +1056,7 @@
       "published_or_updated_at": "2024-11-26",
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "Official Reiza announcement identifies the open-top Corvette C3.R alternative as a game variant of the existing closed car. It establishes simulator identity context, not a unique real-world chassis or control specification."
+      "notes": "Official Reiza announcement identifies the Audi R8 LMS GT3 Evo, Lamborghini Huracan GT3 EVO2, and the open-top Corvette C3.R alternative among the V1.6 cars. It establishes simulator identity context, not control behavior."
     },
     {
       "source_id": "alpine.a110-gt4-plus.release",
@@ -1177,6 +1177,138 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Guided draft ams2.chevrolet-corvette-c3-r-convertible.20260811t194923468z-f52a59d9 records AMS2 1.6.9.91 / TC70S with assists disabled: clutch required from rest, four direct-selection H-pattern gears, lift-required clutchless upshifts, manual-blip clutchless downshifts, no automatic cut or blip, and a closed round rim without display or shift lights."
+    },
+    {
+      "source_id": "audi.r8-lms-gt3-evo2.release",
+      "title": "Second evolution of the Audi R8 LMS GT3",
+      "publisher": "Audi MediaCenter",
+      "url": "https://www.audi.com/en/press-releases/second-evolution-of-the-audi-r8-lms-gt3-14114/download",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer release establishes the Evo II as the second evolution of the Audi R8 LMS GT3. It does not independently establish the driver's clutch, cut, or blip technique."
+    },
+    {
+      "source_id": "audi.r8-lms-gt3.technical",
+      "title": "Audi R8 LMS GT3 technical data",
+      "publisher": "Audi MediaCenter",
+      "url": "https://www.audi-mediacenter.com/en/audi-r8-lms-gt3-2020-12821/download",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer technical data specifies a six-speed sequential transmission with pneumatic operation from steering-wheel paddles. Evo II continuity is lineage evidence; simulator technique is verified separately."
+    },
+    {
+      "source_id": "lamborghini.huracan-gt3-evo2.model",
+      "title": "Huracan GT3 EVO2",
+      "publisher": "Automobili Lamborghini",
+      "url": "https://www.lamborghini.com/en-en/motorsport/motorsport-models/huracan-gt3-evo2",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official model page establishes the exact EVO2 identity and provides cockpit and racing-wheel imagery. The parsed text does not independently establish clutch, cut, or blip technique."
+    },
+    {
+      "source_id": "lamborghini.huracan-gt3-lineage.10-years",
+      "title": "Lamborghini celebrates 10 years since maiden Huracan GT3 victory",
+      "publisher": "Automobili Lamborghini",
+      "url": "https://www.lamborghini.com/fr-en/motorsport/nouvelles/lamborghini-celebrates-10-years-since-maiden-huracan-gt3-victory",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer history describes the Huracan GT3 lineage, including EVO and EVO2, with a six-speed sequential gearbox. Exact AMS2 actuation and technique are verified separately."
+    },
+    {
+      "source_id": "ams2.reiza-release.1.5.6.1.stock-car-2024",
+      "title": "Automobilista 2 V1.5.6.1 released",
+      "publisher": "Reiza Studios",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-5-6-1-released-now-updated-to-v1-5-6-3.33205/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2024-03-30",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official release post adds the Stock Car Pro Series 2024 season. Exact Chevrolet and Toyota telemetry identities are established by the guided AMS2 observations."
+    },
+    {
+      "source_id": "cba.stock-car-pro-2024.technical-regulations",
+      "title": "Campeonato Brasileiro de Stock Car Pro Series - Regulamento Tecnico 2024",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/722/stock-car-pro-series-regulamento-tecnico-2024-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official series regulations prescribe the Xtrac 396B023 transmission, semi-automatic paddle-shift actuation, and a multi-disc clutch. In-game technique is verified separately."
+    },
+    {
+      "source_id": "cba.stock-car-pro-2024.platform-annex",
+      "title": "Anexo Tecnico Plataforma Stock Car Pro Series Car 2024",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/722/anexo-tecnico-plataforma-stock-pro-series-car-2024-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official platform annex identifies the common prescribed steering wheel, pedals, transmission, and paddle-shift system used by the 2024 cars."
+    },
+    {
+      "source_id": "ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91",
+      "title": "Guided live AMS2 Audi R8 LMS GT3 evo II control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-developent-update-changelog-release-notes.34256/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.audi-r8-lms-gt3-evo-ii.20260811t214748271z-a4d7f775 records exact GT3_Gen2 identity, assists disabled/unavailable, clutch-free move-off, six paddle gears, automatic blip, and a closed GT-style rim without display or shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91",
+      "title": "Guided live AMS2 Lamborghini Huracan GT3 EVO2 control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.lamborghini-huracan-gt3-evo2.20260811t220202080z-42c94b66 records exact GT3_Gen2 identity, clutch-free move-off, six paddle gears, automatic blip, and a closed GT-style rim without display or shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-chevrolet-cruze-stock-car-2024-controls.1.6.9.91",
+      "title": "Guided live AMS2 Chevrolet Cruze Stock Car 2024 control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-5-6-1-released-now-updated-to-v1-5-6-3.33205/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.chevrolet-cruze-stock-car-2024.20260811t220752806z-9e447dc1 records exact StockCarV8_2024 identity, standing-start clutch, six paddle gears, automatic blip, and a closed GT-style display rim with shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-toyota-corolla-stock-car-2024-controls.1.6.9.91",
+      "title": "Guided live AMS2 Toyota Corolla Stock Car 2024 control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-5-6-1-released-now-updated-to-v1-5-6-3.33205/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.toyota-corolla-stock-car-2024.20260811t221207461z-84a62b25 records exact StockCarV8_2024 identity, standing-start clutch, six paddle gears, automatic blip, and a closed GT-style display rim with shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
     }
   ]
 }

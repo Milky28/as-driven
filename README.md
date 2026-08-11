@@ -74,7 +74,7 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
-Dataset 0.3.12 contains 51 reviewed records. Its four newest records were
+Dataset 0.3.13 contains 55 reviewed records. Its eight newest records were
 promoted from versioned guided AMS2 observations while retaining official or
 manufacturer evidence separately from simulator behavior.
 
@@ -156,7 +156,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.12 contains 51 curated AMS2 records promoted through the reviewed
+Dataset 0.3.13 contains 55 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -188,6 +188,11 @@ version remains independent.
 Dataset 0.3.12 promotes four separately reviewed guided-verification drafts:
 Alpine A110 GT4 Evo, Aston Martin Vantage GT3 Evo, Formula Vee Gen2, and
 Chevrolet Corvette C3.R Convertible.
+Dataset 0.3.13 promotes Audi R8 LMS GT3 Evo II, Lamborghini Huracan GT3 EVO2,
+Chevrolet Cruze Stock Car 2024, and Toyota Corolla Stock Car 2024. Guided
+telemetry directly established most controls; each automatic-cut claim is
+separately disclosed at medium confidence because the tester manually observed
+a brief throttle-graph interruption that the detector did not classify.
 
 ## Licensing
 

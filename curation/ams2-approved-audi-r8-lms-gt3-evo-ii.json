@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.13",
+  "approved_at": "2026-08-11",
+  "record_id": "ams2.audi-r8-lms-gt3-evo-ii",
+  "telemetry_name": "Audi R8 LMS GT3 evo II",
+  "telemetry_class": "GT3_Gen2",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-style",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "Guided testing directly established all listed behavior except automatic cut, which the observer manually confirmed from a brief throttle-graph interruption and is retained at medium confidence.",
+  "scope_notes": "Low Downforce inherits the verified base controls as an explicit untested aero-package assumption."
+}
