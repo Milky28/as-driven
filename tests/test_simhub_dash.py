@@ -98,6 +98,8 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
         self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
         self.assertLessEqual(named["SuccessSummary"]["Height"], 28)
+        self.assertEqual(15, named["Prompt"]["FontSize"])
+        self.assertEqual(50, named["Prompt"]["Height"])
 
     def test_cards_reference_only_explicit_plugin_values(self):
         dashboard = self.generator.build_dashboard(overlay=True)

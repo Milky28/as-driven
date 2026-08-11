@@ -671,7 +671,7 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         factory.text("Progress", "STEP 1 / 6", 520, 18, 152, 24, 13, MUTED, expression=progress_expression, horizontal_alignment=2, font_weight="Bold"),
         factory.rectangle("HeaderRule", 24, 48, 648, 1, SLATE),
         factory.text("Title", "Verification step", 24, 56, 648, 34, 24, WHITE, expression="[AuthenticControls.VerificationDriveTitle]", font_weight="Bold"),
-        factory.text("Prompt", "Follow the current test prompt.", 24, 91, 648, 46, 16, TEXT, expression="[AuthenticControls.VerificationDrivePrompt]", font_weight="Bold"),
+        factory.text("Prompt", "Follow the current test prompt.", 24, 91, 648, 50, 15, TEXT, expression="[AuthenticControls.VerificationDrivePrompt]", font_weight="Bold"),
         factory.rectangle("StatusPanel", 24, 143, 648, 34, "#FF102333", radius=7, border_color=SLATE, border=1),
         pending_status,
         successful_status,

@@ -365,6 +365,11 @@ screen, recommended AMS2 assist defaults with mandatory tester confirmation,
 short non-clipping result summaries, and a prominent green capture indicator.
 Selecting a sequential or paddle primary mechanism marks the direct H-pattern
 test `Not applicable`; full detection evidence remains in the review form.
+Version 0.11.5 shortens and slightly reduces the move-off prompt so it fits the
+overlay, visibly labels every telemetry-populated form value `AUTO-FILLED`, and
+keeps the guided-start button disabled until assist settings are confirmed.
+Gear telemetry no longer auto-confirms direct H-pattern selection; choosing a
+sequential or paddle primary mechanism supplies `Not applicable` instead.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

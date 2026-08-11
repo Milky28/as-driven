@@ -72,10 +72,12 @@ $verificationType = $pluginAssembly.GetType(
 $queue = New-Object System.Collections.Queue
 $queue.Enqueue($settingsControl)
 $verificationFound = $false
+$verificationControl = $null
 while ($queue.Count -gt 0) {
     $node = $queue.Dequeue()
     if ($verificationType.IsInstanceOfType($node)) {
         $verificationFound = $true
+        $verificationControl = $node
         break
     }
     if ($node -is [System.Windows.DependencyObject]) {
@@ -88,6 +90,13 @@ while ($queue.Count -gt 0) {
 }
 if (-not $verificationFound) {
     throw "The native settings page does not contain guided verification."
+}
+$guidedStartField = $verificationType.GetField(
+    "_guidedStart",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
+$guidedStartButton = $guidedStartField.GetValue($verificationControl)
+if ($null -eq $guidedStartButton -or $guidedStartButton.IsEnabled) {
+    throw "The guided-start button must remain disabled until assist settings are confirmed."
 }
 Write-Host "PASS: Authentic Controls menu icon, settings page, and guided verification"
 

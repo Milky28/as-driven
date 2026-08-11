@@ -43,6 +43,7 @@ namespace AuthenticControls.Plugin
         private readonly TextBox _wheelNotes;
         private readonly TextBox _evidenceNotes;
         private readonly Button _save;
+        private readonly Button _guidedStart;
         private readonly Expander _formExpander;
         private VerificationCaptureContext _capture;
         private bool _guidedDriveApplied;
@@ -155,11 +156,15 @@ namespace AuthenticControls.Plugin
             AddLabeledControl(form, "Assist notes", _assistNotes, null);
 
             var guidedActions = new WrapPanel { Margin = new Thickness(0, 2, 0, 8) };
-            guidedActions.Children.Add(CreateButton(
+            _guidedStart = CreateButton(
                 "Start in-sim guided drive",
                 205,
                 GuidedStartClicked,
-                new Thickness(0, 0, 10, 6)));
+                new Thickness(0, 0, 10, 6));
+            _guidedStart.IsEnabled = false;
+            _assistSettingsConfirmed.Checked += AssistSettingsConfirmationChanged;
+            _assistSettingsConfirmed.Unchecked += AssistSettingsConfirmationChanged;
+            guidedActions.Children.Add(_guidedStart);
             guidedActions.Children.Add(CreateButton(
                 "Next / accept",
                 125,
@@ -437,6 +442,15 @@ namespace AuthenticControls.Plugin
             _visibleSequentialStick.IsChecked = false;
             _visibleHPattern.IsChecked = false;
             _visibleAutomaticLever.IsChecked = false;
+            foreach (Control control in new Control[]
+            {
+                _moveOff, _forwardGears, _directGearSelection,
+                _clutchlessUpshift, _automaticCut, _automaticCutMethod,
+                _clutchlessDownshift, _automaticBlip, _automaticBlipMethod
+            })
+            {
+                SetAutoFilled(control, false);
+            }
         }
 
         private void SaveClicked(object sender, RoutedEventArgs eventArgs)
@@ -573,18 +587,22 @@ namespace AuthenticControls.Plugin
             {
                 return;
             }
-            SelectChoice(_moveOff, results.MoveOffWithoutPhysicalClutch);
+            SelectGuidedChoice(_moveOff, results.MoveOffWithoutPhysicalClutch);
             SelectChoice(_directGearSelection, results.DirectGearSelection);
-            SelectChoice(_clutchlessUpshift, results.ClutchlessUpshift);
-            SelectChoice(_automaticCut, results.AutomaticCut);
-            SelectChoice(_clutchlessDownshift, results.ClutchlessDownshift);
-            SelectChoice(_automaticBlip, results.AutomaticBlip);
+            SetAutoFilled(_directGearSelection, false);
+            SelectGuidedChoice(_clutchlessUpshift, results.ClutchlessUpshift);
+            SelectGuidedChoice(_automaticCut, results.AutomaticCut);
+            SelectGuidedChoice(_clutchlessDownshift, results.ClutchlessDownshift);
+            SelectGuidedChoice(_automaticBlip, results.AutomaticBlip);
             if (results.ForwardGears.HasValue)
             {
                 _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);
+                SetAutoFilled(_forwardGears, true);
             }
             _automaticCutMethod.Text = results.AutomaticCutMethod ?? string.Empty;
             _automaticBlipMethod.Text = results.AutomaticBlipMethod ?? string.Empty;
+            SetAutoFilled(_automaticCutMethod, !string.IsNullOrWhiteSpace(_automaticCutMethod.Text));
+            SetAutoFilled(_automaticBlipMethod, !string.IsNullOrWhiteSpace(_automaticBlipMethod.Text));
             if (!string.IsNullOrWhiteSpace(results.EvidenceNote))
             {
                 _evidenceNotes.Text = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
@@ -680,12 +698,25 @@ namespace AuthenticControls.Plugin
         private static StackPanel LabeledPanel(string label, Control control)
         {
             var holder = new StackPanel();
-            holder.Children.Add(new TextBlock
+            var labelRow = new StackPanel { Orientation = Orientation.Horizontal };
+            labelRow.Children.Add(new TextBlock
             {
                 Text = label,
                 FontWeight = FontWeights.SemiBold,
                 Margin = new Thickness(0, 0, 0, 5),
             });
+            var autoFilled = new TextBlock
+            {
+                Text = "AUTO-FILLED",
+                FontSize = 10,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.LightGreen,
+                Margin = new Thickness(8, 1, 0, 5),
+                Visibility = Visibility.Collapsed,
+            };
+            labelRow.Children.Add(autoFilled);
+            control.Tag = autoFilled;
+            holder.Children.Add(labelRow);
             holder.Children.Add(control);
             return holder;
         }
@@ -732,11 +763,34 @@ namespace AuthenticControls.Plugin
                 || actuation == "automatic-lever")
             {
                 SelectChoice(_directGearSelection, "not-applicable");
+                SetAutoFilled(_directGearSelection, true);
             }
             else if ((actuation == "h-pattern" || actuation == "direct-selection")
                 && ChoiceValue(_directGearSelection) == "not-applicable")
             {
                 SelectChoice(_directGearSelection, "not-tested");
+                SetAutoFilled(_directGearSelection, false);
+            }
+        }
+
+        private void AssistSettingsConfirmationChanged(object sender, RoutedEventArgs eventArgs)
+        {
+            _guidedStart.IsEnabled = _capture != null
+                && _assistSettingsConfirmed.IsChecked == true;
+        }
+
+        private static void SelectGuidedChoice(ComboBox combo, string value)
+        {
+            SelectChoice(combo, value);
+            SetAutoFilled(combo, !string.Equals(value, "not-tested", StringComparison.Ordinal));
+        }
+
+        private static void SetAutoFilled(Control control, bool visible)
+        {
+            TextBlock badge = control == null ? null : control.Tag as TextBlock;
+            if (badge != null)
+            {
+                badge.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

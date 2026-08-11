@@ -502,6 +502,7 @@ namespace AuthenticControls.Core.Tests
                     True(guidedDrive.GetSnapshot().Completed, "finishes after the positive automatic-blip path");
                     Equal("yes", guidedResults.MoveOffWithoutPhysicalClutch, "prefills clutch-free move-off");
                     Equal(6, guidedResults.ForwardGears.Value, "prefills observed forward gears");
+                    Equal("not-tested", guidedResults.DirectGearSelection, "does not infer direct H-pattern selection from gear telemetry alone");
                     Equal("yes", guidedResults.ClutchlessUpshift, "prefills accepted clutchless upshift");
                     Equal("yes", guidedResults.AutomaticCut, "prefills telemetry-supported automatic cut");
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");

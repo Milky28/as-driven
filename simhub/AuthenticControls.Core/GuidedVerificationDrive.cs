@@ -85,8 +85,6 @@ namespace AuthenticControls.Core
         private int? _suggestedGears;
         private int _baselineGear;
         private int _maximumGear;
-        private int _previousPositiveGear;
-        private bool _directJumpObserved;
         private bool _armed;
         private bool _attemptAccepted;
         private bool _automaticActionObserved;
@@ -166,8 +164,7 @@ namespace AuthenticControls.Core
                         {
                             _attemptAccepted = true;
                             _resultReady = true;
-                            _result = "Highest observed forward gear: " + _maximumGear
-                                + (_directJumpObserved ? ". Direct non-adjacent selection was observed." : ".");
+                            _result = "Highest observed forward gear: " + _maximumGear + ".";
                         }
                         break;
                     case Phase.FullThrottleUpshift:
@@ -277,12 +274,6 @@ namespace AuthenticControls.Core
             if (sample.Gear > 0)
             {
                 _maximumGear = Math.Max(_maximumGear, sample.Gear);
-                if (_previousPositiveGear > 0
-                    && Math.Abs(sample.Gear - _previousPositiveGear) > 1)
-                {
-                    _directJumpObserved = true;
-                }
-                _previousPositiveGear = sample.Gear;
             }
         }
 
@@ -318,8 +309,7 @@ namespace AuthenticControls.Core
                     {
                         _attemptAccepted = true;
                         _resultReady = true;
-                        _result = "Observed all " + _maximumGear + " suggested forward gears"
-                            + (_directJumpObserved ? " and a direct non-adjacent gear selection." : ".");
+                        _result = "Observed all " + _maximumGear + " suggested forward gears.";
                     }
                     break;
                 case Phase.FullThrottleUpshift:
@@ -415,7 +405,7 @@ namespace AuthenticControls.Core
                     break;
                 case Phase.GearCount:
                     _results.ForwardGears = _maximumGear > 0 ? (int?)_maximumGear : null;
-                    _results.DirectGearSelection = _directJumpObserved ? "yes" : "not-tested";
+                    _results.DirectGearSelection = "not-tested";
                     MoveTo(Phase.FullThrottleUpshift);
                     break;
                 case Phase.FullThrottleUpshift:
@@ -505,8 +495,6 @@ namespace AuthenticControls.Core
         {
             _baselineGear = 0;
             _maximumGear = 0;
-            _previousPositiveGear = 0;
-            _directJumpObserved = false;
             _armed = false;
             _attemptAccepted = false;
             _automaticActionObserved = false;
@@ -572,8 +560,8 @@ namespace AuthenticControls.Core
             switch (phase)
             {
                 case Phase.Intro: return "For each step: prepare, perform the maneuver, wait for CAPTURED, then press Next to accept. Use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Ensure the engine is running (automatic start is fine), stop completely, select first, do not press the clutch, then apply light throttle.";
-                case Phase.GearCount: return "Cycle through every forward gear. For an H-pattern, include a non-adjacent direct selection.";
+                case Phase.MoveOff: return "Engine running (automatic start is fine). Stop, select first, leave the clutch untouched, then apply light throttle.";
+                case Phase.GearCount: return "Cycle through every forward gear. Direct H-pattern selection is reviewed separately in the form.";
                 case Phase.FullThrottleUpshift: return "While moving, keep the throttle above 70%, do not use the clutch, and request one upshift.";
                 case Phase.LiftedUpshift: return "Without using the clutch, lift the throttle and request one upshift.";
                 case Phase.CoastDownshift: return "At safe RPM, release the throttle, do not use the clutch, and request one downshift.";
