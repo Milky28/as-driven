@@ -21,6 +21,7 @@ namespace AuthenticControls.Plugin
         private readonly ComboBox _automaticClutch;
         private readonly ComboBox _automaticShifting;
         private readonly ComboBox _automaticThrottleBlip;
+        private readonly CheckBox _assistSettingsConfirmed;
         private readonly TextBox _assistNotes;
         private readonly ComboBox _moveOff;
         private readonly ComboBox _clutchlessUpshift;
@@ -108,6 +109,15 @@ namespace AuthenticControls.Plugin
                 _observer,
                 "Saved with the draft so a later reviewer knows who performed the test.");
 
+            AddSubheading(form, "Tester workflow");
+            form.Children.Add(new TextBlock
+            {
+                Text = "1. Capture the live car.\n2. Verify the simulator assist settings below.\n3. Start the in-sim guided drive.\n4. Prepare and perform each prompted maneuver; accept, retry, or skip its result.\n5. Return here to identify cockpit controls and wheel details.\n6. Review the suggestions and save the draft.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.82,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+
             AddSubheading(form, "Simulator assist settings");
             form.Children.Add(new TextBlock
             {
@@ -130,6 +140,17 @@ namespace AuthenticControls.Plugin
                 "Automatic throttle-blip assist",
                 _automaticThrottleBlip,
                 "Choose Unavailable if the simulator has no separate assist setting.");
+            _assistSettingsConfirmed = CreateCheckBox(
+                "I verified these values against the simulator's current settings.");
+            _assistSettingsConfirmed.Margin = new Thickness(0, 0, 0, 8);
+            form.Children.Add(_assistSettingsConfirmed);
+            form.Children.Add(new TextBlock
+            {
+                Text = "AMS2 starts with the recommended test values: automatic clutch Disabled, automatic shifting Disabled, and throttle-blip assist Unavailable. Change a value to the actual state if you cannot use the recommendation, and explain the limitation below.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.68,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
             _assistNotes = CreateMultilineTextBox(54);
             AddLabeledControl(form, "Assist notes", _assistNotes, null);
 
@@ -177,7 +198,7 @@ namespace AuthenticControls.Plugin
                 _moveOff,
                 "Forward gears",
                 _forwardGears);
-            _directGearSelection = CreateObservedCombo();
+            _directGearSelection = CreateDirectSelectionCombo();
             AddLabeledControl(
                 form,
                 "Direct H-pattern selection confirmed",
@@ -245,6 +266,7 @@ namespace AuthenticControls.Plugin
                 new Choice("Automatic lever", "automatic-lever"),
                 new Choice("Direct selection", "direct-selection"),
             });
+            _primaryActuation.SelectionChanged += PrimaryActuationChanged;
             _actuationBasis = CreateTextBox();
             AddControlPair(
                 form,
@@ -395,6 +417,13 @@ namespace AuthenticControls.Plugin
             {
                 combo.SelectedIndex = 0;
             }
+            if (string.Equals(_capture.Simulator, "ams2", StringComparison.Ordinal))
+            {
+                SelectChoice(_automaticClutch, "disabled");
+                SelectChoice(_automaticShifting, "disabled");
+                SelectChoice(_automaticThrottleBlip, "unavailable");
+            }
+            _assistSettingsConfirmed.IsChecked = false;
             _forwardGears.Text = _capture.SuggestedForwardGears.HasValue
                 ? _capture.SuggestedForwardGears.Value.ToString(CultureInfo.InvariantCulture)
                 : string.Empty;
@@ -415,6 +444,11 @@ namespace AuthenticControls.Plugin
             if (_capture == null)
             {
                 _status.Text = "Start a verification from the live car first.";
+                return;
+            }
+            if (_assistSettingsConfirmed.IsChecked != true)
+            {
+                SetStatus("Verify the simulator assist settings and check the confirmation box before saving.", Brushes.Goldenrod, false);
                 return;
             }
             int parsedGears;
@@ -488,11 +522,23 @@ namespace AuthenticControls.Plugin
                 SetStatus("Start a verification from the live car first.", Brushes.Goldenrod, false);
                 return;
             }
+            if (_assistSettingsConfirmed.IsChecked != true)
+            {
+                SetStatus("Verify the simulator assist settings and check the confirmation box before starting the guided drive.", Brushes.Goldenrod, false);
+                return;
+            }
             if (ChoiceValue(_automaticClutch) == "unknown"
                 || ChoiceValue(_automaticShifting) == "unknown"
                 || ChoiceValue(_automaticThrottleBlip) == "unknown")
             {
                 SetStatus("Confirm all three simulator assist settings before starting the guided drive.", Brushes.Goldenrod, false);
+                return;
+            }
+            if (ChoiceValue(_automaticClutch) == "enabled"
+                || ChoiceValue(_automaticShifting) == "enabled"
+                || ChoiceValue(_automaticThrottleBlip) == "enabled")
+            {
+                SetStatus("The guided drive cannot safely attribute results while one of these assists is enabled. Disable it if possible; otherwise keep the affected results Not tested and complete the form manually.", Brushes.Goldenrod, false);
                 return;
             }
             _guidedDriveApplied = false;
@@ -664,6 +710,34 @@ namespace AuthenticControls.Plugin
                 new Choice("No", "no"),
                 new Choice("Unknown", "unknown"),
             });
+        }
+
+        private static ComboBox CreateDirectSelectionCombo()
+        {
+            return CreateChoiceCombo(new[]
+            {
+                new Choice("Not tested", "not-tested"),
+                new Choice("Not applicable", "not-applicable"),
+                new Choice("Yes", "yes"),
+                new Choice("No", "no"),
+                new Choice("Unknown", "unknown"),
+            });
+        }
+
+        private void PrimaryActuationChanged(object sender, SelectionChangedEventArgs eventArgs)
+        {
+            string actuation = ChoiceValue(_primaryActuation);
+            if (actuation == "sequential-paddles"
+                || actuation == "sequential-stick"
+                || actuation == "automatic-lever")
+            {
+                SelectChoice(_directGearSelection, "not-applicable");
+            }
+            else if ((actuation == "h-pattern" || actuation == "direct-selection")
+                && ChoiceValue(_directGearSelection) == "not-applicable")
+            {
+                SelectChoice(_directGearSelection, "not-tested");
+            }
         }
 
         private static ComboBox CreateChoiceCombo(IEnumerable<Choice> choices)

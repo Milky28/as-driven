@@ -474,6 +474,9 @@ namespace AuthenticControls.Core.Tests
 
                     var guidedDrive = new GuidedVerificationDrive();
                     guidedDrive.Start(6);
+                    Equal("Before you begin", guidedDrive.GetSnapshot().Title, "starts with a guided-workflow introduction");
+                    Equal(0, guidedDrive.GetSnapshot().StepNumber, "does not count the introduction as a driving test");
+                    guidedDrive.Next();
                     guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(-100), 0, 100, 0, 0, 0, 0, false));
                     False(guidedDrive.GetSnapshot().ResultReady, "ignores an engine that was already stopped before the move-off test");
                     guidedDrive.AddSample(GuidedSample(now, 0, 100, 0, 1200, 0, 40, true));
@@ -510,6 +513,7 @@ namespace AuthenticControls.Core.Tests
 
                     var moveOffStall = new GuidedVerificationDrive();
                     moveOffStall.Start(null);
+                    moveOffStall.Next();
                     moveOffStall.AddSample(GuidedSample(now, 0, 0, 0, 0, 0, 0, false));
                     moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(100), 0, 0, 0, 1200, 0, 30, true));
                     moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(200), 1, 0, 20, 0, 0, 0, false));
@@ -518,6 +522,7 @@ namespace AuthenticControls.Core.Tests
 
                     var skippedAutomaticTests = new GuidedVerificationDrive();
                     skippedAutomaticTests.Start(null);
+                    skippedAutomaticTests.Next();
                     skippedAutomaticTests.Skip();
                     skippedAutomaticTests.Skip();
                     skippedAutomaticTests.Skip();

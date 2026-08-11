@@ -1249,6 +1249,9 @@ namespace AuthenticControls.Plugin
                 "VerificationDriveResultReady",
                 delegate { return _guidedVerificationDrive.GetSnapshot().ResultReady; });
             this.AttachDelegate(
+                "VerificationDriveResultSuccessful",
+                delegate { return _guidedVerificationDrive.GetSnapshot().ResultSuccessful; });
+            this.AttachDelegate(
                 "VerificationDriveStepNumber",
                 delegate { return _guidedVerificationDrive.GetSnapshot().StepNumber; });
             this.AttachDelegate(
@@ -1265,6 +1268,9 @@ namespace AuthenticControls.Plugin
                 delegate { return _guidedVerificationDrive.GetSnapshot().Status; });
             this.AttachDelegate(
                 "VerificationDriveResult",
+                delegate { return _guidedVerificationDrive.GetSnapshot().ResultSummary; });
+            this.AttachDelegate(
+                "VerificationDriveResultDetail",
                 delegate { return _guidedVerificationDrive.GetSnapshot().Result; });
             this.AttachDelegate(
                 "VerificationDriveLiveValues",

@@ -51,12 +51,14 @@ namespace AuthenticControls.Core
         public bool Visible { get; set; }
         public bool Completed { get; set; }
         public bool ResultReady { get; set; }
+        public bool ResultSuccessful { get; set; }
         public int StepNumber { get; set; }
         public int StepCount { get; set; }
         public string Title { get; set; }
         public string Prompt { get; set; }
         public string Status { get; set; }
         public string Result { get; set; }
+        public string ResultSummary { get; set; }
         public string LiveValues { get; set; }
     }
 
@@ -65,6 +67,7 @@ namespace AuthenticControls.Core
         private enum Phase
         {
             Idle,
+            Intro,
             MoveOff,
             GearCount,
             FullThrottleUpshift,
@@ -108,7 +111,7 @@ namespace AuthenticControls.Core
                 _hasCompletedResults = false;
                 _fullThrottleTestFailed = false;
                 _coastDownshiftTestFailed = false;
-                _phase = Phase.MoveOff;
+                _phase = Phase.Intro;
                 ResetTrace();
             }
         }
@@ -193,6 +196,11 @@ namespace AuthenticControls.Core
                     ResetTrace();
                     return;
                 }
+                if (_phase == Phase.Intro)
+                {
+                    MoveTo(Phase.MoveOff);
+                    return;
+                }
                 if (!_resultReady)
                 {
                     FinishAttempt();
@@ -243,12 +251,14 @@ namespace AuthenticControls.Core
                     Visible = _phase != Phase.Idle && _phase != Phase.Cancelled,
                     Completed = _hasCompletedResults,
                     ResultReady = _resultReady,
+                    ResultSuccessful = _resultReady && _attemptAccepted,
                     StepNumber = step,
                     StepCount = 6,
                     Title = Title(_phase),
                     Prompt = Prompt(_phase),
                     Status = Status(_phase),
                     Result = _result,
+                    ResultSummary = ResultSummary(_phase),
                     LiveValues = LiveValues(_lastSample)
                 };
             }
@@ -519,7 +529,7 @@ namespace AuthenticControls.Core
         {
             if (phase >= Phase.MoveOff && phase <= Phase.ManualBlipDownshift)
             {
-                return ((int)phase);
+                return ((int)phase) - ((int)Phase.MoveOff) + 1;
             }
             return phase == Phase.Complete ? 6 : 0;
         }
@@ -529,6 +539,10 @@ namespace AuthenticControls.Core
             if (phase == Phase.Complete)
             {
                 return "Drive complete - return to SimHub to review cockpit details and save the draft.";
+            }
+            if (phase == Phase.Intro)
+            {
+                return "Press Next to begin the first maneuver.";
             }
             if (_resultReady)
             {
@@ -541,6 +555,7 @@ namespace AuthenticControls.Core
         {
             switch (phase)
             {
+                case Phase.Intro: return "Before you begin";
                 case Phase.MoveOff: return "Move-off clutch test";
                 case Phase.GearCount: return "Forward gears";
                 case Phase.FullThrottleUpshift: return "Full-throttle upshift";
@@ -556,7 +571,8 @@ namespace AuthenticControls.Core
         {
             switch (phase)
             {
-                case Phase.MoveOff: return "Start the engine, stop completely, select first, do not press the clutch, then apply light throttle.";
+                case Phase.Intro: return "For each step: prepare, perform the maneuver, wait for CAPTURED, then press Next to accept. Use Retry or Skip when needed.";
+                case Phase.MoveOff: return "Ensure the engine is running (automatic start is fine), stop completely, select first, do not press the clutch, then apply light throttle.";
                 case Phase.GearCount: return "Cycle through every forward gear. For an H-pattern, include a non-adjacent direct selection.";
                 case Phase.FullThrottleUpshift: return "While moving, keep the throttle above 70%, do not use the clutch, and request one upshift.";
                 case Phase.LiftedUpshift: return "Without using the clutch, lift the throttle and request one upshift.";
@@ -564,6 +580,42 @@ namespace AuthenticControls.Core
                 case Phase.ManualBlipDownshift: return "Without using the clutch, manually blip the throttle while requesting one downshift.";
                 case Phase.Complete: return "The driving results are ready. Use Next to close this overlay after reading the summary.";
                 default: return string.Empty;
+            }
+        }
+
+        private string ResultSummary(Phase phase)
+        {
+            if (!_resultReady)
+            {
+                return string.Empty;
+            }
+            switch (phase)
+            {
+                case Phase.MoveOff:
+                    return _attemptAccepted ? "Movement detected" : "No movement detected";
+                case Phase.GearCount:
+                    return _maximumGear > 0
+                        ? "Forward gears recorded: " + _maximumGear
+                        : "No forward gears recorded";
+                case Phase.FullThrottleUpshift:
+                    return _attemptAccepted
+                        ? "Full-throttle upshift detected"
+                        : "No full-throttle upshift detected";
+                case Phase.LiftedUpshift:
+                    return _attemptAccepted
+                        ? "Lifted-throttle upshift detected"
+                        : "No lifted-throttle upshift detected";
+                case Phase.CoastDownshift:
+                    if (!_attemptAccepted) return "No clutchless downshift detected";
+                    return _automaticActionObserved
+                        ? "Downshift and automatic blip detected"
+                        : "Downshift detected; no automatic blip";
+                case Phase.ManualBlipDownshift:
+                    return _attemptAccepted
+                        ? "Manual-blip downshift detected"
+                        : "No manual-blip downshift detected";
+                default:
+                    return string.Empty;
             }
         }
 

@@ -138,12 +138,14 @@ AuthenticControls.PopupGlanceVisible
 AuthenticControls.VerificationDriveVisible
 AuthenticControls.VerificationDriveCompleted
 AuthenticControls.VerificationDriveResultReady
+AuthenticControls.VerificationDriveResultSuccessful
 AuthenticControls.VerificationDriveStepNumber
 AuthenticControls.VerificationDriveStepCount
 AuthenticControls.VerificationDriveTitle
 AuthenticControls.VerificationDrivePrompt
 AuthenticControls.VerificationDriveStatus
 AuthenticControls.VerificationDriveResult
+AuthenticControls.VerificationDriveResultDetail
 AuthenticControls.VerificationDriveLiveValues
 ```
 
@@ -358,6 +360,11 @@ internal-clutch creep that begins as soon as a forward gear is selected.
 Version 0.11.3 ignores an engine that is already stopped when the move-off test
 begins. A standing-start stall is recorded only after telemetry first confirms
 that the engine was running; the overlay prompt now tells the tester to start it.
+Version 0.11.4 adds a numbered tester workflow and an introductory overlay
+screen, recommended AMS2 assist defaults with mandatory tester confirmation,
+short non-clipping result summaries, and a prominent green capture indicator.
+Selecting a sequential or paddle primary mechanism marks the direct H-pattern
+test `Not applicable`; full detection evidence remains in the review form.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

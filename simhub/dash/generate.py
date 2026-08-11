@@ -638,14 +638,31 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
 
 
 def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
-    status_expression = (
-        "if([AuthenticControls.VerificationDriveResultReady], "
-        "[AuthenticControls.VerificationDriveResult], "
-        "[AuthenticControls.VerificationDriveStatus])"
-    )
     progress_expression = (
+        "if([AuthenticControls.VerificationDriveStepNumber] == 0, 'READY', "
         "'STEP ' + [AuthenticControls.VerificationDriveStepNumber] + "
-        "' / ' + [AuthenticControls.VerificationDriveStepCount]"
+        "' / ' + [AuthenticControls.VerificationDriveStepCount])"
+    )
+    pending_status = factory.layer(
+        "PendingStatus",
+        [factory.text("PendingStatusText", "Waiting for telemetry", 34, 146, 628, 28, 12, WHITE, expression="[AuthenticControls.VerificationDriveStatus]")],
+        visible_expression="![AuthenticControls.VerificationDriveResultReady]",
+    )
+    successful_status = factory.layer(
+        "SuccessfulStatus",
+        [
+            factory.text("SuccessBadge", "✓ CAPTURED", 34, 146, 126, 28, 12, GREEN, font_weight="Bold"),
+            factory.text("SuccessSummary", "Result captured", 164, 146, 498, 28, 13, WHITE, expression="[AuthenticControls.VerificationDriveResult]", font_weight="Bold"),
+        ],
+        visible_expression="[AuthenticControls.VerificationDriveResultReady] && [AuthenticControls.VerificationDriveResultSuccessful]",
+    )
+    review_status = factory.layer(
+        "ReviewStatus",
+        [
+            factory.text("ReviewBadge", "REVIEW", 34, 146, 94, 28, 12, ORANGE, font_weight="Bold"),
+            factory.text("ReviewSummary", "Review result", 132, 146, 530, 28, 13, WHITE, expression="[AuthenticControls.VerificationDriveResult]", font_weight="Bold"),
+        ],
+        visible_expression="[AuthenticControls.VerificationDriveResultReady] && ![AuthenticControls.VerificationDriveResultSuccessful]",
     )
     return [
         factory.rectangle("Card", 4, 4, 692, 212, CARD, radius=18, border_color=SLATE, border=2),
@@ -656,7 +673,9 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         factory.text("Title", "Verification step", 24, 56, 648, 34, 24, WHITE, expression="[AuthenticControls.VerificationDriveTitle]", font_weight="Bold"),
         factory.text("Prompt", "Follow the current test prompt.", 24, 91, 648, 46, 16, TEXT, expression="[AuthenticControls.VerificationDrivePrompt]", font_weight="Bold"),
         factory.rectangle("StatusPanel", 24, 143, 648, 34, "#FF102333", radius=7, border_color=SLATE, border=1),
-        factory.text("Status", "Waiting for telemetry", 34, 146, 628, 28, 12, WHITE, expression=status_expression),
+        pending_status,
+        successful_status,
+        review_status,
         factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AuthenticControls.VerificationDriveLiveValues]"),
         factory.text("Controls", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, ACCENT, horizontal_alignment=2, font_weight="Bold"),
     ]

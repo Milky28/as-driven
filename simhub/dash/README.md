@@ -24,6 +24,9 @@ live gear/clutch/throttle/speed values, and the detected result. Map
 `VerificationDriveNext`, `VerificationDriveRetry`, `VerificationDriveSkip`, and
 `VerificationDriveCancel` to convenient wheel or button-box inputs so the test
 can be completed without alt-tabbing.
+An introductory screen explains the repeated tester workflow. Captured results
+use a short one-line summary and prominent green check, avoiding truncation in
+the overlay while the complete evidence text remains available to the form.
 
 Version 0.7.0 introduced a blue, letter-free visual identity. The current brand
 mark combines a steering wheel, physical shift lever, and simplified H-gate,

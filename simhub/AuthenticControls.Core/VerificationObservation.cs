@@ -47,6 +47,9 @@ namespace AuthenticControls.Core
         private static readonly HashSet<string> ObservedStates = new HashSet<string>(
             new[] { "yes", "no", "unknown", "not-tested" },
             StringComparer.Ordinal);
+        private static readonly HashSet<string> DirectSelectionStates = new HashSet<string>(
+            new[] { "yes", "no", "unknown", "not-tested", "not-applicable" },
+            StringComparer.Ordinal);
         private static readonly HashSet<string> AssistStates = new HashSet<string>(
             new[] { "enabled", "disabled", "unavailable", "unknown" },
             StringComparer.Ordinal);
@@ -103,7 +106,7 @@ namespace AuthenticControls.Core
             RequireChoice(draft.AutomaticThrottleBlip, AssistStates, "Automatic throttle-blip assist state");
             RequireChoice(draft.MoveOffWithoutPhysicalClutch, ObservedStates, "Move-off result");
             RequireChoice(draft.ClutchlessUpshift, ObservedStates, "Clutchless upshift result");
-            RequireChoice(draft.DirectGearSelectionBehavior, ObservedStates, "Direct gear-selection result");
+            RequireChoice(draft.DirectGearSelectionBehavior, DirectSelectionStates, "Direct gear-selection result");
             RequireChoice(draft.AutomaticCut, ObservedStates, "Automatic cut result");
             RequireChoice(draft.ClutchlessDownshift, ObservedStates, "Clutchless downshift result");
             RequireChoice(draft.AutomaticBlip, ObservedStates, "Automatic blip result");

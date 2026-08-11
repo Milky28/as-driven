@@ -48,7 +48,7 @@
       "properties": {
         "move_off_without_physical_clutch": { "$ref": "#/$defs/observedState" },
         "forward_gears": { "type": ["integer", "null"], "minimum": 1, "maximum": 20 },
-        "direct_gear_selection_behavior": { "$ref": "#/$defs/observedState" },
+        "direct_gear_selection_behavior": { "$ref": "#/$defs/directSelectionState" },
         "clutchless_upshift": { "$ref": "#/$defs/observedState" },
         "automatic_cut": { "$ref": "#/$defs/observedState" },
         "automatic_cut_method": { "type": "string" },
@@ -93,6 +93,7 @@
   },
   "$defs": {
     "observedState": { "type": "string", "enum": ["yes", "no", "unknown", "not-tested"] },
+    "directSelectionState": { "type": "string", "enum": ["yes", "no", "unknown", "not-tested", "not-applicable"] },
     "assistState": { "type": "string", "enum": ["enabled", "disabled", "unavailable", "unknown"] }
   }
 }

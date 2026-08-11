@@ -152,6 +152,9 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any("direct_gear_selection_behavior: invalid value" in error for error in errors))
 
         observation["tests"]["direct_gear_selection_behavior"] = "not-tested"
+        observation["tests"]["direct_gear_selection_behavior"] = "not-applicable"
+        self.assertEqual(validate_instance(observation, schema, "observation"), [])
+
         observation["observed_at"] = "2026-08-11T12:00:00"
         errors = validate_instance(observation, schema, "observation")
         self.assertTrue(any("expected an ISO date-time with timezone" in error for error in errors))

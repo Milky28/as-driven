@@ -90,10 +90,14 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("AuthenticControls.VerificationDriveTitle", serialized)
         self.assertIn("AuthenticControls.VerificationDrivePrompt", serialized)
         self.assertIn("AuthenticControls.VerificationDriveResultReady", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveResultSuccessful", serialized)
         self.assertIn("AuthenticControls.VerificationDriveResult", serialized)
         self.assertIn("AuthenticControls.VerificationDriveStatus", serialized)
         self.assertIn("AuthenticControls.VerificationDriveLiveValues", serialized)
         self.assertIn("NEXT / ACCEPT", named["Controls"]["Text"])
+        self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
+        self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
+        self.assertLessEqual(named["SuccessSummary"]["Height"], 28)
 
     def test_cards_reference_only_explicit_plugin_values(self):
         dashboard = self.generator.build_dashboard(overlay=True)

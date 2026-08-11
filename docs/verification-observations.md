@@ -51,6 +51,18 @@ the research backlog, or a curation approval.
    the next draft.
 8. Use **Open drafts folder** to retrieve the JSON for review.
 
+For AMS2, the form begins with the recommended test setup: automatic clutch
+and automatic shifting disabled, and the separate throttle-blip assist marked
+unavailable. These are proposed test settings, not assumed observations. The
+tester must compare them with the simulator and check the confirmation box.
+When a recommended setting cannot be used, record its actual state and explain
+the limitation; affected car behavior should remain unknown or not tested.
+
+The in-sim introduction explains the repeated step cycle: prepare, perform the
+maneuver, wait for a captured result, then accept it or choose Retry/Skip. The
+overlay uses a short summary and green capture mark so completion is immediately
+visible; the longer falsifiable description is retained for form review.
+
 Validate any exported draft from the repository root with:
 
 ```shell
