@@ -474,8 +474,8 @@ namespace AuthenticControls.Core.Tests
 
                     var guidedDrive = new GuidedVerificationDrive();
                     guidedDrive.Start(6);
-                    guidedDrive.AddSample(GuidedSample(now, 1, 0, 20, 1800, 0, 80, true));
-                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 0, 20, 2000, 3, 100, true));
+                    guidedDrive.AddSample(GuidedSample(now, 1, 100, 20, 1800, 0, 80, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 45, 20, 2000, 3, 100, true));
                     True(guidedDrive.GetSnapshot().ResultReady, "detects clutch-free movement from rest");
                     guidedDrive.Next();
                     for (int observedGear = 1; observedGear <= 6; observedGear++)
@@ -484,13 +484,13 @@ namespace AuthenticControls.Core.Tests
                     }
                     True(guidedDrive.GetSnapshot().ResultReady, "detects the suggested maximum gear");
                     guidedDrive.Next();
-                    guidedDrive.AddSample(GuidedSample(now, 2, 0, 90, 5000, 70, 220, true));
-                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(50), 2, 0, 90, 5100, 72, 40, true));
-                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 90, 4200, 74, 35, true));
+                    guidedDrive.AddSample(GuidedSample(now, 2, 55, 90, 5000, 70, 220, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(50), 2, 70, 90, 5100, 72, 40, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 45, 90, 4200, 74, 35, true));
                     True(guidedDrive.GetSnapshot().ResultReady, "detects a full-throttle clutchless upshift");
                     guidedDrive.Next();
-                    guidedDrive.AddSample(GuidedSample(now, 4, 0, 0, 4500, 80, 100, true));
-                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 4000, 78, 90, true));
+                    guidedDrive.AddSample(GuidedSample(now, 4, 60, 0, 4500, 80, 100, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 35, 25, 4000, 78, 90, true));
                     True(guidedDrive.GetSnapshot().ResultReady, "detects a clutchless downshift and throttle spike");
                     guidedDrive.Next();
                     GuidedDriveResults guidedResults = guidedDrive.GetResults();
@@ -501,6 +501,7 @@ namespace AuthenticControls.Core.Tests
                     Equal("yes", guidedResults.AutomaticCut, "prefills telemetry-supported automatic cut");
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
                     Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
+                    True(guidedResults.EvidenceNote.Contains("internal/automatic clutch state"), "documents vehicle clutch telemetry without treating it as pedal input");
                     guidedDrive.Next();
                     False(guidedDrive.GetSnapshot().Visible, "closes the completed in-sim prompt");
                     True(guidedDrive.GetSnapshot().Completed, "keeps completed results available for settings review after closing the prompt");

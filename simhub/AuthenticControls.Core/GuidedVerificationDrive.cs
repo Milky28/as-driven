@@ -25,6 +25,7 @@ namespace AuthenticControls.Core
         public string ClutchlessDownshift { get; set; }
         public string AutomaticBlip { get; set; }
         public string AutomaticBlipMethod { get; set; }
+        public string EvidenceNote { get; set; }
 
         public GuidedDriveResults()
         {
@@ -36,6 +37,7 @@ namespace AuthenticControls.Core
             AutomaticBlip = "not-tested";
             AutomaticCutMethod = string.Empty;
             AutomaticBlipMethod = string.Empty;
+            EvidenceNote = string.Empty;
         }
 
         public GuidedDriveResults Clone()
@@ -85,7 +87,6 @@ namespace AuthenticControls.Core
         private bool _armed;
         private bool _attemptAccepted;
         private bool _automaticActionObserved;
-        private bool _invalidAttempt;
         private bool _resultReady;
         private bool _hasCompletedResults;
         private bool _fullThrottleTestFailed;
@@ -151,13 +152,6 @@ namespace AuthenticControls.Core
                 {
                     return;
                 }
-                if (_maximumClutch > 20.0)
-                {
-                    _invalidAttempt = true;
-                    _resultReady = true;
-                    _result = "Clutch input was detected. Retry this step without pressing the clutch.";
-                    return;
-                }
                 switch (_phase)
                 {
                     case Phase.MoveOff:
@@ -201,10 +195,6 @@ namespace AuthenticControls.Core
                 if (!_resultReady)
                 {
                     FinishAttempt();
-                    return;
-                }
-                if (_invalidAttempt)
-                {
                     return;
                 }
                 AcceptResultAndAdvance();
@@ -291,13 +281,17 @@ namespace AuthenticControls.Core
             {
                 case Phase.MoveOff:
                     if (!_armed && sample.Gear > 0 && sample.SpeedKmh < 1.0
-                        && sample.Clutch <= 5.0 && sample.Throttle >= 8.0)
+                        && sample.Throttle >= 8.0)
                     {
                         _armed = true;
                     }
                     if (_armed && sample.SpeedKmh >= 2.0)
                     {
-                        SetResult(true, false, "The car moved from rest with no physical clutch input.");
+                        SetResult(
+                            true,
+                            false,
+                            "The car moved from rest while the test required no physical clutch input."
+                                + VehicleClutchSummary());
                     }
                     else if (_armed && (!sample.EngineStarted || sample.Rpm < 200.0))
                     {
@@ -331,13 +325,12 @@ namespace AuthenticControls.Core
         private void DetectUpshift(GuidedTelemetrySample sample, bool requireLift)
         {
             if (!_armed && sample.Gear > 0 && sample.SpeedKmh > 5.0
-                && sample.Clutch <= 5.0
                 && (requireLift || sample.Throttle >= 70.0))
             {
                 _armed = true;
                 _baselineGear = sample.Gear;
             }
-            if (!_armed || sample.Gear <= _baselineGear || _maximumClutch > 20.0)
+            if (!_armed || sample.Gear <= _baselineGear)
             {
                 return;
             }
@@ -356,20 +349,20 @@ namespace AuthenticControls.Core
                 : "Full-throttle clutchless upshift accepted. "
                     + (torqueCut
                         ? "A torque interruption was detected while pedal input stayed high."
-                        : "Automatic cut could not be established confidently from this trace.");
+                        : "Automatic cut could not be established confidently from this trace.")
+                    + VehicleClutchSummary();
             SetResult(true, torqueCut, message);
         }
 
         private void DetectDownshift(GuidedTelemetrySample sample, bool manualBlip)
         {
             if (!_armed && sample.Gear > 1 && sample.SpeedKmh > 5.0
-                && sample.Clutch <= 5.0 && (!manualBlip ? sample.Throttle <= 10.0 : true))
+                && (!manualBlip ? sample.Throttle <= 10.0 : true))
             {
                 _armed = true;
                 _baselineGear = sample.Gear;
             }
-            if (!_armed || sample.Gear <= 0 || sample.Gear >= _baselineGear
-                || _maximumClutch > 20.0)
+            if (!_armed || sample.Gear <= 0 || sample.Gear >= _baselineGear)
             {
                 return;
             }
@@ -384,7 +377,8 @@ namespace AuthenticControls.Core
                 manualBlip
                     ? "Clutchless downshift accepted after the driver's manual throttle blip."
                     : "Clutchless downshift accepted with no pedal input. "
-                        + (blip ? "A throttle spike was detected." : "No automatic throttle spike was detected."));
+                        + (blip ? "A throttle spike was detected." : "No automatic throttle spike was detected.")
+                        + VehicleClutchSummary());
         }
 
         private void SetResult(bool accepted, bool automaticAction, string message)
@@ -397,6 +391,7 @@ namespace AuthenticControls.Core
 
         private void AcceptResultAndAdvance()
         {
+            RememberVehicleClutchTelemetry();
             switch (_phase)
             {
                 case Phase.MoveOff:
@@ -451,6 +446,23 @@ namespace AuthenticControls.Core
             }
         }
 
+        private string VehicleClutchSummary()
+        {
+            return _maximumClutch > 20.0
+                ? " Vehicle clutch telemetry also actuated; it is treated as internal/automatic clutch state, not proof of pedal use."
+                : string.Empty;
+        }
+
+        private void RememberVehicleClutchTelemetry()
+        {
+            if (_maximumClutch <= 20.0 || !string.IsNullOrEmpty(_results.EvidenceNote))
+            {
+                return;
+            }
+            _results.EvidenceNote =
+                "Vehicle-reported clutch telemetry actuated during the guided drive even though the test instructions required no physical clutch input; treated as internal/automatic clutch state rather than proof of pedal use.";
+        }
+
         private void AdvanceAfterSkip()
         {
             switch (_phase)
@@ -483,7 +495,6 @@ namespace AuthenticControls.Core
             _armed = false;
             _attemptAccepted = false;
             _automaticActionObserved = false;
-            _invalidAttempt = false;
             _resultReady = false;
             _result = string.Empty;
             _maximumClutch = 0.0;
@@ -515,9 +526,7 @@ namespace AuthenticControls.Core
             }
             if (_resultReady)
             {
-                return _invalidAttempt
-                    ? "Retry required"
-                    : "Result ready - Next accepts it; Retry repeats this test.";
+                return "Result ready - Next accepts it; Retry repeats this test.";
             }
             return "Perform the maneuver. Press Next when finished if no result is detected automatically.";
         }
@@ -559,7 +568,7 @@ namespace AuthenticControls.Core
                 return "Waiting for live telemetry";
             }
             return "Gear " + (sample.Gear == 0 ? "N" : sample.Gear.ToString())
-                + "  |  Clutch " + Math.Round(sample.Clutch) + "%"
+                + "  |  Vehicle clutch " + Math.Round(sample.Clutch) + "%"
                 + "  |  Throttle " + Math.Round(sample.Throttle) + "%"
                 + "  |  " + Math.Round(sample.SpeedKmh) + " km/h";
         }

@@ -539,6 +539,12 @@ namespace AuthenticControls.Plugin
             }
             _automaticCutMethod.Text = results.AutomaticCutMethod ?? string.Empty;
             _automaticBlipMethod.Text = results.AutomaticBlipMethod ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(results.EvidenceNote))
+            {
+                _evidenceNotes.Text = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
+                    ? results.EvidenceNote
+                    : _evidenceNotes.Text.Trim() + Environment.NewLine + results.EvidenceNote;
+            }
         }
 
         private void SetStatus(string text, Brush foreground, bool emphasized)

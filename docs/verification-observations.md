@@ -61,11 +61,18 @@ python -m authentic_controls_db validate-observation path/to/observation.json
 
 The client automatically captures identity, versions, timestamp, and a
 suggested gear count. During the guided drive it can detect accepted shifts,
-clutch use, throttle input, an RPM/throttle blip, and a strong torque
+vehicle clutch state, throttle input, an RPM/throttle blip, and a strong torque
 interruption. These are reviewable suggestions, not automatic database facts;
 ambiguous cut detection remains `unknown`. Cockpit hardware and primary
 actuation remain human-reviewed because game input bindings accept both stick
 and paddles for a sequential gearbox.
+
+SimHub's clutch telemetry represents the vehicle clutch state and may include
+internal or automatic clutch operation even when the tester never touches the
+physical pedal. The guided drive therefore does not reject a maneuver merely
+because that value changes. The prompt supplies the no-pedal test condition,
+the live overlay labels the value `Vehicle clutch`, and any observed actuation
+is retained in the draft evidence notes for review.
 
 Observation files belong in local or ignored staging storage until reviewed.
 Approved facts are copied into the appropriate simulator entry and cited by a
