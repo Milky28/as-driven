@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.4",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.aston-martin-valkyrie-hypercar",
+  "telemetry_name": "Aston Martin Valkyrie Hypercar",
+  "telemetry_class": "LMDh",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "prototype"
+  },
+  "confidence_notes": "The exact identity, seven paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spike, and closed prototype display rim were directly tested. The mechanism behind clutch-free move-off is unknown and must not be described as electric because the race car is non-hybrid.",
+  "scope_notes": "Only the exact base telemetry identity was approved. No Low Downforce alias is introduced because no distinct exact telemetry identity was observed."
+}

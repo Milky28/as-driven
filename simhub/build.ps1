@@ -30,6 +30,45 @@ foreach ($project in $projects) {
     }
 }
 
+$pluginOutput = Join-Path $PSScriptRoot "AuthenticControls.Plugin\bin\$Configuration"
+foreach ($dependency in @(
+    "log4net.dll",
+    "SimHub.Logging.dll",
+    "GameReaderCommon.dll",
+    "SimHub.Plugins.dll"
+)) {
+    [System.Reflection.Assembly]::LoadFrom(
+        (Join-Path $SimHubInstallPath $dependency)) | Out-Null
+}
+[System.Reflection.Assembly]::LoadFrom(
+    (Join-Path $pluginOutput "AuthenticControls.Core.dll")) | Out-Null
+$pluginAssembly = [System.Reflection.Assembly]::LoadFrom(
+    (Join-Path $pluginOutput "AuthenticControls.Plugin.dll"))
+$pluginType = $pluginAssembly.GetType(
+    "AuthenticControls.Plugin.AuthenticControls", $true)
+$pluginInstance = [System.Activator]::CreateInstance($pluginType)
+$menuIcon = $pluginType.GetProperty("PictureIcon").GetValue(
+    $pluginInstance, $null)
+if ($null -eq $menuIcon -or $menuIcon.Width -ne 24 -or $menuIcon.Height -ne 24) {
+    throw "The Authentic Controls left-menu icon must be a non-null 24x24 image."
+}
+$stride = 24 * 4
+$pixels = New-Object byte[] ($stride * 24)
+$menuIcon.CopyPixels($pixels, $stride, 0)
+if ($pixels[3] -ne 0 -or -not ($pixels | Where-Object { $_ -ne 0 })) {
+    throw "The Authentic Controls left-menu glyph must have a transparent corner and visible content."
+}
+$resources = $pluginAssembly.GetManifestResourceNames()
+if ($resources -notcontains "AuthenticControls.Plugin.Assets.authentic-controls-mark.png") {
+    throw "The Authentic Controls production identity asset is not embedded."
+}
+$settingsControl = $pluginType.GetMethod("GetWPFSettingsControl").Invoke(
+    $pluginInstance, @($null))
+if ($null -eq $settingsControl -or $null -eq $settingsControl.Content) {
+    throw "The Authentic Controls native settings page could not be created."
+}
+Write-Host "PASS: Authentic Controls 24x24 menu icon and native settings page"
+
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 $tests = Join-Path $PSScriptRoot "AuthenticControls.Core.Tests\bin\$Configuration\AuthenticControls.Core.Tests.exe"
 & $tests $repositoryRoot
@@ -47,7 +86,6 @@ if (Test-Path -LiteralPath $distRoot) {
 }
 New-Item -ItemType Directory -Path $distRoot | Out-Null
 
-$pluginOutput = Join-Path $PSScriptRoot "AuthenticControls.Plugin\bin\$Configuration"
 Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Plugin.dll") -Destination $distRoot
 Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Plugin.pdb") -Destination $distRoot
 Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Core.dll") -Destination $distRoot
@@ -58,5 +96,19 @@ New-Item -ItemType Directory -Path $databaseTarget -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\index.json") -Destination $databaseTarget
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\sources.json") -Destination $databaseTarget
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\cars") -Destination $databaseTarget -Recurse
+
+$python = Get-Command python -ErrorAction SilentlyContinue
+if ($null -eq $python) {
+    throw "Python is required to generate the Dash Studio artifacts."
+}
+$dashboardTarget = Join-Path $distRoot "DashTemplates"
+& $python.Source (Join-Path $PSScriptRoot "dash\generate.py") --output $dashboardTarget
+if ($LASTEXITCODE -ne 0) {
+    throw "Dash Studio artifact generation failed."
+}
+
+$overlayLayoutTarget = Join-Path $distRoot "OverlayLayouts"
+New-Item -ItemType Directory -Path $overlayLayoutTarget -Force | Out-Null
+Copy-Item -Path (Join-Path $PSScriptRoot "overlay\*.olayout") -Destination $overlayLayoutTarget
 
 Write-Host "Built and tested Authentic Controls. SimHub-ready package: $distRoot"

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.4",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.ligier-js-p320",
+  "telemetry_name": "Ligier JS P320",
+  "telemetry_class": "P1Gen2",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "prototype"
+  },
+  "confidence_notes": "Direct testing confirmed that the car stalls from rest without physical clutch input. Six paddle-selected gears, no-lift clutch-free running upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed prototype display rim were also confirmed.",
+  "scope_notes": "The required standing-start clutch applies only to move-off; running upshifts and downshifts were directly verified as clutch-free."
+}

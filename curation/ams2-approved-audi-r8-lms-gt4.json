@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.4",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.audi-r8-lms-gt4",
+  "telemetry_name": "Audi R8 LMS GT4",
+  "telemetry_class": "GT4",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "gt-style"
+  },
+  "confidence_notes": "The exact identity, seven paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spike, and open-top no-display GT-style rim were directly tested. Audi's primary technical data independently establishes the seven-speed electrohydraulic dual-clutch paddle transmission.",
+  "scope_notes": "Only the exact Audi R8 LMS GT4 / GT4 telemetry identity is approved; no fuzzy aliases are introduced."
+}

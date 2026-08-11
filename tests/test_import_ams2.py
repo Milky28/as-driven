@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-from authentic_controls_db.importers.ams2 import _shift, import_ams2_csv
+from authentic_controls_db.importers.ams2 import _shift, _wheel, import_ams2_csv
 
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -53,6 +53,14 @@ class AMS2ImporterTests(unittest.TestCase):
         self.assertEqual(_shift("Automatic")["shift_actuation"], "automatic-lever")
         self.assertEqual(_shift("Seq")["gearbox_type"], "sequential")
         self.assertEqual(_shift("Seq")["shift_actuation"], "unknown")
+
+    def test_documented_gt_wheel_family_is_normalized(self) -> None:
+        self.assertEqual(_wheel("GTF1")["normalized"], "gt-style")
+        self.assertEqual(_wheel("GTF1FL2")["normalized"], "gt-style")
+        self.assertEqual(_wheel("F1")["normalized"], "formula")
+        self.assertEqual(_wheel("F1M")["normalized"], "formula")
+        self.assertEqual(_wheel("RSF1")["normalized"], "round")
+        self.assertEqual(_wheel("unmapped")["normalized"], "unknown")
 
 
 if __name__ == "__main__":

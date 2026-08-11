@@ -7,7 +7,12 @@ from pathlib import Path
 from .importers.ams2 import import_ams2_csv
 from .importers.iracing import import_iracing_html
 from .promote import promote_approved_ams2
-from .simhub import audit_ams2_identities, write_alias_review_csv
+from .simhub import (
+    audit_ams2_identities,
+    review_unmatched_ams2_observations,
+    write_alias_review_csv,
+    write_unmatched_review_csv,
+)
 from .validate import validate_repository
 
 
@@ -43,6 +48,16 @@ def _parser() -> argparse.ArgumentParser:
     simhub.add_argument("--output", type=Path, required=True)
     simhub.add_argument("--simhub-version", default="unknown")
     simhub.add_argument("--review-csv", type=Path)
+
+    unmatched = subparsers.add_parser(
+        "review-unmatched-ams2",
+        help="correlate plugin unmatched-identity JSONL with staged AMS2 candidates",
+    )
+    unmatched.add_argument("--log", type=Path, required=True)
+    unmatched.add_argument("--candidates", type=Path, required=True)
+    unmatched.add_argument("--output", type=Path, required=True)
+    unmatched.add_argument("--review-csv", type=Path)
+    unmatched.add_argument("--data-dir", type=Path, default=Path("data/v1"))
 
     promote = subparsers.add_parser(
         "promote-ams2",
@@ -104,6 +119,26 @@ def main(argv: list[str] | None = None) -> int:
         )
         if args.review_csv:
             print(f"Wrote alias review queue to {args.review_csv}")
+        return 0
+
+    if args.command == "review-unmatched-ams2":
+        candidates = json.loads(args.candidates.read_text(encoding="utf-8-sig"))
+        payload = review_unmatched_ams2_observations(
+            candidates,
+            args.log,
+            curated_data_directory=args.data_dir,
+        )
+        _write_json(args.output, payload)
+        if args.review_csv:
+            write_unmatched_review_csv(payload, args.review_csv)
+        stats = payload["stats"]
+        print(
+            "Wrote unmatched AMS2 review with "
+            f"{stats['unique_raw_identities']} unique raw identity/identities "
+            f"to {args.output}"
+        )
+        if args.review_csv:
+            print(f"Wrote unmatched review queue to {args.review_csv}")
         return 0
 
     if args.command == "promote-ams2":

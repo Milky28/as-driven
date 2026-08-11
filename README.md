@@ -44,6 +44,7 @@ tests/                       Unit tests and small source-layout fixtures
 docs/data-model.md           Field semantics and confidence policy
 docs/importers.md            AMS2 and iRacing import/review design
 docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
+docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
 docs/simhub-roadmap.md       Planned read-only SimHub client
 simhub/                      .NET lookup library, plugin adapter, and diagnostics
 ```
@@ -125,12 +126,30 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.2.0 contains ten curated AMS2 records: three seed records and seven
-records promoted through the reviewed identity workflow. They demonstrate the
-model; they are not a claim of broad coverage. Simulator fields reproduce
-selected values from Coanda's Extended Car Info sheet as published for AMS2
-1.5.5.2. Raw wheel-rim codes are retained, unsupported driving technique stays
-`unknown`, and only conservative identity normalization is applied.
+Dataset 0.3.10 contains 47 curated AMS2 records promoted through the reviewed
+identity workflow. They demonstrate the model and expand current-game coverage;
+they are not a claim of complete coverage. Older records retain selected values
+from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
+post-sheet cars use independent primary-source research and exact AMS2
+1.6.9.91 tests. Raw wheel-rim codes are retained, unsupported driving
+technique stays `unknown`, and only explicitly reviewed exact identities are
+matched.
+The 0.3.6 review resolves the five verified historical sequential-stick cars
+with no automatic blip to `manual_blip = required`, making the driver-supplied
+rev-matching technique explicit.
+The 0.3.7 review adds Aston Martin DBR9, Chevrolet Corvette C5-R, Saleen S7-R
+GT1, and Milano GT55 from exact AMS2 1.6.9.91 identities and live control
+tests. Each uses a six-speed sequential stick, standing-start clutch,
+automatic upshift cut, manual downshift blipping, and a round no-display rim.
+The 0.3.8 review adds Milano GT36, Porsche 996 GT3 RSR, Spyker C8 Spyder
+GT2-R, and TVR Tuscan T400R GT2. The Porsche directly verified automatic
+downshift blipping; the other three require driver blipping.
+The 0.3.9 review adds Audi R8 LMP1, Courage C60 Hybrid, and Dallara SP1. The
+Dallara's paddle classification is supported by visible paddles and replay
+animation while retaining its visible cockpit lever as an explicit caveat.
+The 0.3.10 review adds the Lola B05/40 V8 and Turbo. Both directly verified
+clutch-free move-off, six paddle gears, automatic cut and blip, and D-shaped
+display rims; the move-off mechanism remains unknown.
 
 ## Licensing
 

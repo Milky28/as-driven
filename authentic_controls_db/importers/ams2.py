@@ -62,9 +62,19 @@ def _shift(value: str) -> dict[str, str]:
 
 def _wheel(value: str) -> dict[str, str]:
     raw = value.strip()
-    # The sheet's compact legend is preserved. Only an initial R is treated as
-    # enough evidence for a round-family rim; all other shapes remain unknown.
-    shape = "round" if raw.upper().startswith("R") else "unknown"
+    code = raw.upper()
+    # The compact source code is preserved. The source discussion explicitly
+    # describes GTF1 as a modern GT/F1-style rim; F1 identifies the formula
+    # family; and an initial R establishes the round family. Other source codes
+    # continue to fail closed.
+    if code.startswith("GTF1"):
+        shape = "gt-style"
+    elif code.startswith("F1"):
+        shape = "formula"
+    elif code.startswith("R"):
+        shape = "round"
+    else:
+        shape = "unknown"
     return {"normalized": shape, "source_label": raw}
 
 
@@ -151,13 +161,13 @@ def import_ams2_csv(
             )
     return {
         "importer": "ams2-google-sheet-csv",
-        "importer_version": "0.1.0",
+        "importer_version": "0.1.1",
         "source_id": source_id,
         "imported_at": date.today().isoformat(),
         "review_required": True,
         "source_rules": [
             "Blank Auto Blip and Shift Cut indicators are No for this source only.",
-            "Compact wheel-rim labels are preserved; only an R prefix is normalized to round.",
+            "Compact wheel-rim labels are preserved; GTF1 prefixes normalize to GT-style, F1 prefixes normalize to Formula, and R prefixes normalize to round.",
             "H-Dogleg describes actuation/layout and does not establish synchromesh versus dogbox.",
             "Steering DOR is retained when present but is optional reference metadata.",
         ],

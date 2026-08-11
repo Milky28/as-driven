@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.4",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.chevrolet-corvette-z06-gt3r",
+  "telemetry_name": "Chevrolet Corvette Z06 GT3.R",
+  "telemetry_class": "GT3_Gen2",
+  "additional_telemetry_names": [
+    {
+      "value": "Chevrolet Corvette Z06 GT3.R - Low Downforce",
+      "basis": "Exact identity present in the reviewed SimHub AMS2 inventory. Approved as an aero-package alias inheriting the verified base controls; this configuration has not been separately live-tested."
+    }
+  ],
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "gt-style"
+  },
+  "confidence_notes": "The base exact identity, six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spike, and open-top no-display GT-style rim were directly tested. Chevrolet and Corvette Racing independently establish the six-speed sequential transmission.",
+  "scope_notes": "The base telemetry identity was live-tested. Chevrolet Corvette Z06 GT3.R - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested."
+}

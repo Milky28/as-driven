@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.5",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.lamborghini-diablo-sv-r",
+  "telemetry_name": "Lamborghini Diablo SV-R",
+  "telemetry_class": "ST96",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "dogleg-h",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "unknown",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round"
+  },
+  "confidence_notes": "Manufacturer-derived five-speed specification agrees with five accepted direct gears and the visible dogleg gate. Standing-start clutch, lift/rev-match upshifts, manual-blip/rev-match downshifts, lack of automatic cut/blip, and round no-display rim were directly tested. Historical running-shift clutch use remains unknown.",
+  "scope_notes": "The five-versus-six-speed source conflict is resolved for the exact AMS2 representation only."
+}

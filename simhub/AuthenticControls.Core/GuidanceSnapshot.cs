@@ -12,9 +12,15 @@ namespace AuthenticControls.Core
         public string CarClass { get; private set; }
         public string ShiftType { get; private set; }
         public string ShiftActuation { get; private set; }
+        public string ShiftPattern { get; private set; }
         public int GearCount { get; private set; }
         public string UpshiftGuidance { get; private set; }
         public string DownshiftGuidance { get; private set; }
+        public string TechniqueSummary { get; private set; }
+        public string TechniqueSummaryLine1 { get; private set; }
+        public string TechniqueSummaryLine2 { get; private set; }
+        public string TechniqueSummaryCompactLine1 { get; private set; }
+        public string TechniqueSummaryCompactLine2 { get; private set; }
         public string StandingStartClutch { get; private set; }
         public string AutoBlip { get; private set; }
         public string ShiftCut { get; private set; }
@@ -39,9 +45,11 @@ namespace AuthenticControls.Core
             string carClass,
             string shiftType,
             string shiftActuation,
+            string shiftPattern,
             int gearCount,
             string upshiftGuidance,
             string downshiftGuidance,
+            string techniqueSummary,
             string standingStartClutch,
             string autoBlip,
             string shiftCut,
@@ -53,6 +61,9 @@ namespace AuthenticControls.Core
             string confidence,
             string sourceSummary)
         {
+            string[] techniqueLines = SplitTechniqueSummary(techniqueSummary);
+            string[] compactTechniqueLines = SplitCompactTechniqueSummary(
+                techniqueSummary);
             return new GuidanceSnapshot
             {
                 HasMatch = true,
@@ -66,9 +77,15 @@ namespace AuthenticControls.Core
                 CarClass = carClass,
                 ShiftType = shiftType,
                 ShiftActuation = shiftActuation,
+                ShiftPattern = shiftPattern,
                 GearCount = gearCount,
                 UpshiftGuidance = upshiftGuidance,
                 DownshiftGuidance = downshiftGuidance,
+                TechniqueSummary = techniqueSummary,
+                TechniqueSummaryLine1 = techniqueLines[0],
+                TechniqueSummaryLine2 = techniqueLines[1],
+                TechniqueSummaryCompactLine1 = compactTechniqueLines[0],
+                TechniqueSummaryCompactLine2 = compactTechniqueLines[1],
                 StandingStartClutch = standingStartClutch,
                 AutoBlip = autoBlip,
                 ShiftCut = shiftCut,
@@ -79,8 +96,7 @@ namespace AuthenticControls.Core
                 VerifiedGameVersion = verifiedGameVersion,
                 Confidence = confidence,
                 SourceSummary = sourceSummary,
-                GuidanceSummary = displayName + " | " + shiftType + " | Upshift: "
-                    + upshiftGuidance + " | Downshift: " + downshiftGuidance
+                GuidanceSummary = displayName + " | " + techniqueSummary
             };
         }
 
@@ -102,9 +118,15 @@ namespace AuthenticControls.Core
                 CarClass = string.Empty,
                 ShiftType = string.Empty,
                 ShiftActuation = string.Empty,
+                ShiftPattern = string.Empty,
                 GearCount = 0,
                 UpshiftGuidance = string.Empty,
                 DownshiftGuidance = string.Empty,
+                TechniqueSummary = string.Empty,
+                TechniqueSummaryLine1 = string.Empty,
+                TechniqueSummaryLine2 = string.Empty,
+                TechniqueSummaryCompactLine1 = string.Empty,
+                TechniqueSummaryCompactLine2 = string.Empty,
                 StandingStartClutch = string.Empty,
                 AutoBlip = string.Empty,
                 ShiftCut = string.Empty,
@@ -124,6 +146,44 @@ namespace AuthenticControls.Core
         {
             PopupRevision = revision;
             return this;
+        }
+
+        private static string[] SplitTechniqueSummary(string value)
+        {
+            return SplitTechniqueSummary(value, 145, 120, 85);
+        }
+
+        private static string[] SplitCompactTechniqueSummary(string value)
+        {
+            return SplitTechniqueSummary(value, 112, 110, 80);
+        }
+
+        private static string[] SplitTechniqueSummary(
+            string value,
+            int singleLineLength,
+            int targetLength,
+            int minimumSplit)
+        {
+            value = value ?? string.Empty;
+            if (value.Length <= singleLineLength)
+            {
+                return new[] { value, string.Empty };
+            }
+
+            int split = value.LastIndexOf(' ', targetLength);
+            if (split < minimumSplit)
+            {
+                split = value.IndexOf(' ', targetLength);
+            }
+            if (split <= 0)
+            {
+                return new[] { value, string.Empty };
+            }
+            return new[]
+            {
+                value.Substring(0, split).TrimEnd(),
+                value.Substring(split + 1).TrimStart()
+            };
         }
     }
 }

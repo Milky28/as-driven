@@ -28,6 +28,12 @@ The model separates `manual_blip` from `automatic_blip`. “No blip required” 
 not automatically evidence of an electronic auto-blip; a gearbox may instead
 wait for an acceptable engine speed.
 
+Wheel-rim shapes include `round`, `d-shaped`, `gt-style`, `prototype`,
+`formula`, and `yoke`, plus explicit `other` and `unknown` states. `gt-style`
+covers the observed open-top/no-display GT rims. `prototype` covers closed
+rectangular prototype rims with an integrated display, while `formula` remains
+distinct for Formula-car rims even where the current artwork is shared.
+
 ## Simulator behavior and overrides
 
 Each simulator entry has lookup identities, a compact `behavior` view suitable

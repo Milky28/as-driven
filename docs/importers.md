@@ -36,6 +36,10 @@ Imported columns (all except Steering DOR are required by this adapter):
 
 The source author documents that blanks in indicator columns mean No. The
 adapter applies that rule only to the imported Auto Blip and Shift Cut fields.
+A documented `GTF1` prefix is normalized to `gt-style` (including compound
+codes such as `GTF1FL2`), an `F1` prefix is normalized to `formula` (including
+`F1M`), and an `R` prefix is normalized to `round`. Unrecognized rim codes
+remain `unknown`.
 A missing or blank DOR is omitted and an unknown shift label stays unknown. TC,
 ABS, handbrake, and general car specifications are not imported because they do
 not serve the project's pre-session hardware-and-technique purpose.
@@ -55,6 +59,39 @@ the identity audit's conservative alias suggestions. Approval manifests live in
 `curation/` so identity decisions remain visible in code review. The promoter
 refuses to overwrite an existing record and leaves unsupported clutch and
 throttle technique as `unknown`.
+
+### Unmatched diagnostics review
+
+Plugin `0.9.1` writes unmatched live identities as JSON Lines under the current
+user's Local AppData. Correlate that append-only log with staged candidates and
+the current curated dataset using:
+
+```powershell
+python -m authentic_controls_db review-unmatched-ams2 `
+  --log "$env:LOCALAPPDATA\SimHub\AuthenticControls\Diagnostics\unmatched-identities.jsonl" `
+  --candidates .\build\ams2-candidates.json `
+  --data-dir .\data\v1 `
+  --output .\build\ams2-unmatched-review.json `
+  --review-csv .\build\ams2-unmatched-review.csv
+```
+
+The command tolerates malformed lines, ignores non-AMS2 observations, removes
+exact duplicate log entries, and consolidates repeated observations by exact
+`CarModel` / `CarId` / class. The latest known game, SimHub, and dataset
+versions are preferred over `unknown`, while the complete observed version
+history remains in the output.
+
+Review statuses are conservative:
+
+- `already-curated`: the exact telemetry value is already in `data/v1`;
+- `exact-candidate`: exactly one staged source name equals the logged model;
+- `suggested-candidate`: one formatting-only or chassis-prefix rule matches;
+- `ambiguous-candidate`: more than one source row remains possible;
+- `no-candidate`: the source export has no conservative match.
+
+This command never creates records, aliases telemetry, or promotes candidates.
+Every status still requires source and identity review appropriate to the
+material claim.
 
 ## iRacing transmission article
 

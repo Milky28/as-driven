@@ -151,7 +151,7 @@
           "properties": {
             "shape": {
               "type": "string",
-              "enum": ["round", "d-shaped", "formula", "yoke", "other", "unknown"]
+              "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
             "diameter_mm": { "type": ["integer", "null"], "minimum": 150, "maximum": 600 },
             "source_label": { "type": "string" },
@@ -198,7 +198,7 @@
           "properties": {
             "normalized": {
               "type": "string",
-              "enum": ["round", "d-shaped", "formula", "yoke", "other", "unknown"]
+              "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
             "source_label": { "type": "string" }
           }

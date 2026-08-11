@@ -91,6 +91,48 @@ class Ams2PromotionTests(unittest.TestCase):
                     candidates, audit, approvals, data_directory
                 )
 
+    def test_accepts_checked_in_manual_review_of_observed_identity(self) -> None:
+        candidates, audit, approvals = self._inputs()
+        audit["alias_suggestions"] = []
+        approval = approvals["records"][0]
+        approval["telemetry_basis"] = "Fixture manual identity review."
+        approval["manual_identity_review"] = {
+            "observed_file": "Dallara F301.shcarsettings",
+            "basis": "The source F301 and observed Dallara F301 identity were explicitly reviewed.",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            data_directory = Path(directory) / "data" / "v1"
+            (data_directory / "cars").mkdir(parents=True)
+            (data_directory / "index.json").write_text(
+                json.dumps({"records": [], "dataset_version": "0.1.0"}),
+                encoding="utf-8",
+            )
+            outputs = promote_approved_ams2(
+                candidates, audit, approvals, data_directory
+            )
+            record = json.loads(outputs[0].read_text(encoding="utf-8"))
+            claim = record["provenance"]["claims"][1]
+            self.assertEqual(claim["basis"], "Fixture manual identity review.")
+
+    def test_rejects_manual_review_without_observed_identity(self) -> None:
+        candidates, audit, approvals = self._inputs()
+        audit["alias_suggestions"] = []
+        approval = approvals["records"][0]
+        approval["manual_identity_review"] = {
+            "observed_file": "Invented.shcarsettings",
+            "basis": "Fixture review.",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            data_directory = Path(directory) / "data" / "v1"
+            (data_directory / "cars").mkdir(parents=True)
+            (data_directory / "index.json").write_text(
+                json.dumps({"records": []}), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "not backed by the observed"):
+                promote_approved_ams2(
+                    candidates, audit, approvals, data_directory
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

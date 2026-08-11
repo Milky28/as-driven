@@ -1,0 +1,153 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.audi-r8-lms-gt4",
+  "identity": {
+    "display_name": "Audi R8 LMS GT4",
+    "manufacturer": "Audi",
+    "model": "R8 LMS GT4",
+    "variant": "AMS2 GT4 representation",
+    "year": {
+      "from": 2018,
+      "to": 2018,
+      "label": "2018 technical specification"
+    },
+    "class": "GT4",
+    "real_world_identity_notes": "Audi specifies the R8 LMS GT4 with a seven-speed dual-clutch S tronic transmission, steering-wheel paddles, and electrohydraulically operated wet multi-plate clutches."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "dual-clutch",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-style",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-gt",
+        "notes": "Direct AMS2 cockpit inspection showed an open-top GT-style rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, AMS2 1.6.9.91 moved the car from rest without physical clutch input, consistent with the manufacturer's electrohydraulically operated dual-clutch architecture.",
+      "All seven forward gears were selected by paddles, and clutch-free full-throttle upshifts were accepted with a perceptible automatic cut.",
+      "Clutch-free downshifts were accepted with the driver's foot off the throttle, and automatic blip was directly visible as a throttle-display spike."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Audi R8 LMS GT4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-style",
+          "source_label": "live-cockpit-gt"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Clutch-free move-off, seven paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and an open-top no-display GT-style rim were directly observed."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.3.endurance-pt2",
+        "audi.r8-lms-gt4.technical",
+        "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact identity and the complete user-facing control technique were directly checked in AMS2; Audi independently establishes the seven-speed dual-clutch paddle hardware."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity/display_name",
+          "/identity/class",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.endurance-pt2",
+          "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official addition plus the exact live telemetry name and GT4 class observed through SimHub 9.11.22."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "audi.r8-lms-gt4.technical",
+          "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Audi's technical data specifies a seven-speed dual-clutch transmission with steering-wheel paddles, and all seven forward gears were exercised in AMS2."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "audi.r8-lms-gt4.technical",
+          "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established clutch-free move-off, no-lift clutch-free upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip spike; the manufacturer documents automatic electrohydraulic clutch operation."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct cockpit inspection showed an open-top GT-style rim without an integrated display."
+      }
+    ]
+  },
+  "notes": [
+    "Simulator behavior and manufacturer hardware evidence agree that no physical clutch pedal action is required for normal use."
+  ],
+  "updated_at": "2026-08-10"
+}

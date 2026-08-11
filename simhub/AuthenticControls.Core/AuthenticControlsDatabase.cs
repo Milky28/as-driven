@@ -18,22 +18,28 @@ namespace AuthenticControls.Core
         };
 
         private readonly Dictionary<string, MatchEntry> _identities;
+        private readonly Dictionary<string, MatchEntry> _records;
 
         private AuthenticControlsDatabase(
             string dataDirectory,
             string datasetVersion,
             int recordCount,
-            Dictionary<string, MatchEntry> identities)
+            Dictionary<string, MatchEntry> identities,
+            Dictionary<string, MatchEntry> records,
+            CarCatalogEntry[] cars)
         {
             DataDirectory = dataDirectory;
             DatasetVersion = datasetVersion;
             RecordCount = recordCount;
             _identities = identities;
+            _records = records;
+            Cars = cars;
         }
 
         public string DataDirectory { get; private set; }
         public string DatasetVersion { get; private set; }
         public int RecordCount { get; private set; }
+        public CarCatalogEntry[] Cars { get; private set; }
 
         public static AuthenticControlsDatabase Load(string dataDirectory)
         {
@@ -54,6 +60,8 @@ namespace AuthenticControls.Core
             }
 
             var identities = new Dictionary<string, MatchEntry>(StringComparer.Ordinal);
+            var recordsBySimulator = new Dictionary<string, MatchEntry>(StringComparer.Ordinal);
+            var cars = new List<CarCatalogEntry>();
             int recordCount = 0;
             foreach (JToken recordPathToken in records)
             {
@@ -61,11 +69,33 @@ namespace AuthenticControls.Core
                 string recordPath = ResolveInside(root, relativePath);
                 JObject record = ReadObject(recordPath);
                 RequireVersion(record, recordPath);
-                IndexRecord(record, recordPath, datasetVersion, identities);
+                IndexRecord(
+                    record,
+                    recordPath,
+                    datasetVersion,
+                    identities,
+                    recordsBySimulator,
+                    cars);
                 recordCount++;
             }
 
-            return new AuthenticControlsDatabase(root, datasetVersion, recordCount, identities);
+            cars.Sort(delegate(CarCatalogEntry left, CarCatalogEntry right)
+            {
+                int nameOrder = string.Compare(
+                    left.DisplayName,
+                    right.DisplayName,
+                    StringComparison.OrdinalIgnoreCase);
+                return nameOrder != 0
+                    ? nameOrder
+                    : string.Compare(left.CarClass, right.CarClass, StringComparison.OrdinalIgnoreCase);
+            });
+            return new AuthenticControlsDatabase(
+                root,
+                datasetVersion,
+                recordCount,
+                identities,
+                recordsBySimulator,
+                cars.ToArray());
         }
 
         public GuidanceSnapshot Match(string rawGameName, string rawCarIdentifier)
@@ -95,6 +125,26 @@ namespace AuthenticControls.Core
                 "unmatched", rawGameName, rawCarIdentifier, DatasetVersion);
         }
 
+        public GuidanceSnapshot Preview(string simulatorName, string recordId)
+        {
+            string simulator = CanonicalizeSimulator(simulatorName);
+            MatchEntry entry;
+            if (simulator == null
+                || string.IsNullOrWhiteSpace(recordId)
+                || !_records.TryGetValue(RecordKey(simulator, recordId), out entry))
+            {
+                return GuidanceSnapshot.Empty(
+                    "preview-not-found",
+                    simulatorName,
+                    recordId,
+                    DatasetVersion);
+            }
+            return entry.CreateSnapshot(
+                SimulatorDisplayName(simulator),
+                entry.DisplayName,
+                "preview");
+        }
+
         public static string CanonicalizeSimulator(string gameName)
         {
             if (string.IsNullOrWhiteSpace(gameName))
@@ -118,7 +168,9 @@ namespace AuthenticControls.Core
             JObject record,
             string recordPath,
             string datasetVersion,
-            Dictionary<string, MatchEntry> identities)
+            Dictionary<string, MatchEntry> identities,
+            Dictionary<string, MatchEntry> records,
+            List<CarCatalogEntry> cars)
         {
             string recordId = RequiredString(record, "record_id", recordPath);
             JObject identity = RequiredObject(record, "identity", recordPath);
@@ -151,11 +203,13 @@ namespace AuthenticControls.Core
                     DisplayName = RequiredString(identity, "display_name", recordPath),
                     CarClass = RequiredString(identity, "class", recordPath),
                     ShiftActuation = RequiredString(transmission, "shift_actuation", recordPath),
+                    ShiftPattern = RequiredString(transmission, "shift_pattern", recordPath),
                     GearCount = OptionalInteger(transmission, "forward_gears"),
                     UpshiftGuidance = DescribeShiftAction(
                         RequiredObject(transmission, "upshift", recordPath), true),
                     DownshiftGuidance = DescribeShiftAction(
                         RequiredObject(transmission, "downshift", recordPath), false),
+                    TechniqueSummary = DescribeTechniqueSummary(transmission, behavior),
                     StandingStartClutch = RequiredString(
                         transmission, "standing_start_clutch", recordPath),
                     AutoBlip = RequiredString(behavior, "auto_blip", recordPath),
@@ -172,6 +226,19 @@ namespace AuthenticControls.Core
                         : string.Join(", ", sourceRefs.Values<string>().ToArray())
                 };
                 entry.ShiftType = DescribeShiftType(entry.GearCount, entry.ShiftActuation);
+                string recordKey = RecordKey(simulatorId, recordId);
+                if (records.ContainsKey(recordKey))
+                {
+                    throw new InvalidDataException(
+                        "Duplicate record and simulator pair '" + recordId + "' for "
+                        + simulatorId + " in " + recordPath);
+                }
+                records[recordKey] = entry;
+                cars.Add(new CarCatalogEntry(
+                    recordId,
+                    entry.DisplayName,
+                    entry.CarClass,
+                    simulatorId));
 
                 foreach (JObject simulatorIdentity in simulatorIdentities.OfType<JObject>())
                 {
@@ -238,18 +305,115 @@ namespace AuthenticControls.Core
                     RequiredString(action, "manual_blip", "shift action"),
                     "manual blip");
             }
-            return parts.Count == 0 ? "not applicable" : string.Join(" · ", parts.ToArray());
+            return parts.Count == 0 ? "Not applicable" : string.Join(" · ", parts.ToArray());
+        }
+
+        private static string DescribeTechniqueSummary(JObject transmission, JObject behavior)
+        {
+            var sentences = new List<string>();
+            string startClutch = RequiredString(
+                transmission, "standing_start_clutch", "transmission");
+            switch (startClutch)
+            {
+                case "required": sentences.Add("Use the clutch to pull away."); break;
+                case "not-required": sentences.Add("Pull away without clutch input."); break;
+                case "anti-stall-available": sentences.Add("Anti-stall is available when pulling away."); break;
+            }
+
+            var actions = new List<string>();
+            string actuation = RequiredString(transmission, "shift_actuation", "transmission");
+            string pattern = RequiredString(transmission, "shift_pattern", "transmission");
+            switch (actuation)
+            {
+                case "h-pattern":
+                    actions.Add(pattern == "dogleg-h"
+                        ? "use the dogleg H-pattern shifter"
+                        : "use the H-pattern shifter");
+                    break;
+                case "sequential-stick": actions.Add("use the sequential stick"); break;
+                case "sequential-paddles": actions.Add("shift with the paddles"); break;
+                case "automatic-lever": actions.Add("use the automatic lever"); break;
+                case "direct-selection": actions.Add("use direct gear selection"); break;
+            }
+
+            JObject upshift = RequiredObject(transmission, "upshift", "transmission");
+            JObject downshift = RequiredObject(transmission, "downshift", "transmission");
+            string upClutch = RequiredString(upshift, "clutch", "upshift");
+            string downClutch = RequiredString(downshift, "clutch", "downshift");
+            if (upClutch == "required" && downClutch == "required")
+            {
+                actions.Add("use the clutch for every shift");
+            }
+            else if (upClutch == "not-required" && downClutch == "not-required")
+            {
+                actions.Add("no clutch is needed once moving");
+            }
+            else
+            {
+                if (upClutch == "required") actions.Add("use the clutch on upshifts");
+                if (downClutch == "required") actions.Add("use the clutch on downshifts");
+            }
+
+            string throttleLift = RequiredString(upshift, "throttle_lift", "upshift");
+            string shiftCut = RequiredString(behavior, "shift_cut", "simulator behavior");
+            if (throttleLift == "required")
+            {
+                actions.Add("lift the throttle on upshifts");
+            }
+            else if (throttleLift == "partial")
+            {
+                actions.Add("partially lift the throttle on upshifts");
+            }
+            else if (throttleLift == "not-required" && shiftCut == "yes")
+            {
+                actions.Add("keep the throttle down on upshifts (automatic cut)");
+            }
+            else if (throttleLift == "not-required")
+            {
+                actions.Add("upshift without lifting the throttle");
+            }
+            else if (shiftCut == "yes")
+            {
+                actions.Add("automatic throttle cut handles upshifts");
+            }
+
+            string automaticBlip = RequiredString(behavior, "auto_blip", "simulator behavior");
+            string manualBlip = RequiredString(downshift, "manual_blip", "downshift");
+            if (automaticBlip == "yes")
+            {
+                actions.Add("automatic throttle blip handles downshifts");
+            }
+            else if (manualBlip == "required")
+            {
+                actions.Add("blip the throttle on downshifts");
+            }
+            else if (manualBlip == "not-required")
+            {
+                actions.Add("no throttle blip is needed on downshifts");
+            }
+            else if (automaticBlip == "no")
+            {
+                actions.Add("manual downshift blip technique is not yet verified");
+            }
+
+            if (actions.Count > 0)
+            {
+                sentences.Add(SentenceCase(string.Join("; ", actions.ToArray())) + ".");
+            }
+            return sentences.Count == 0
+                ? "Shifting technique is not yet verified."
+                : string.Join(" ", sentences.ToArray());
         }
 
         private static void AddRequirement(List<string> parts, string value, string label)
         {
             switch (value)
             {
-                case "required": parts.Add(label + " required"); break;
-                case "not-required": parts.Add(label + " not required"); break;
-                case "optional": parts.Add(label + " optional"); break;
-                case "partial": parts.Add("partial " + label); break;
-                case "unknown": parts.Add(label + " unknown"); break;
+                case "required": parts.Add(SentenceCase(label + " required")); break;
+                case "not-required": parts.Add(SentenceCase(label + " not required")); break;
+                case "optional": parts.Add(SentenceCase(label + " optional")); break;
+                case "partial": parts.Add(SentenceCase("partial " + label)); break;
+                case "unknown": parts.Add(SentenceCase(label + " unknown")); break;
             }
         }
 
@@ -258,10 +422,19 @@ namespace AuthenticControls.Core
         {
             switch (value)
             {
-                case "yes": parts.Add(yesLabel); break;
-                case "no": parts.Add(noLabel); break;
-                case "unknown": parts.Add(yesLabel + " unknown"); break;
+                case "yes": parts.Add(SentenceCase(yesLabel)); break;
+                case "no": parts.Add(SentenceCase(noLabel)); break;
+                case "unknown": parts.Add(SentenceCase(yesLabel + " unknown")); break;
             }
+        }
+
+        private static string SentenceCase(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+            return char.ToUpperInvariant(value[0]) + value.Substring(1);
         }
 
         private static JObject ReadObject(string path)
@@ -333,6 +506,21 @@ namespace AuthenticControls.Core
             return simulator + "\u001f" + kind + "\u001f" + value;
         }
 
+        private static string RecordKey(string simulator, string recordId)
+        {
+            return simulator + "\u001f" + recordId;
+        }
+
+        private static string SimulatorDisplayName(string simulator)
+        {
+            switch (simulator)
+            {
+                case "ams2": return "Automobilista2";
+                case "iracing": return "iRacing";
+                default: return simulator;
+            }
+        }
+
         private sealed class MatchEntry
         {
             public string DatasetVersion;
@@ -341,9 +529,11 @@ namespace AuthenticControls.Core
             public string CarClass;
             public string ShiftType;
             public string ShiftActuation;
+            public string ShiftPattern;
             public int GearCount;
             public string UpshiftGuidance;
             public string DownshiftGuidance;
+            public string TechniqueSummary;
             public string StandingStartClutch;
             public string AutoBlip;
             public string ShiftCut;
@@ -368,9 +558,11 @@ namespace AuthenticControls.Core
                     CarClass,
                     ShiftType,
                     ShiftActuation,
+                    ShiftPattern,
                     GearCount,
                     UpshiftGuidance,
                     DownshiftGuidance,
+                    TechniqueSummary,
                     StandingStartClutch,
                     AutoBlip,
                     ShiftCut,

@@ -38,9 +38,9 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "unknown",
+        "shape": "gt-style",
         "source_label": "GTF1FL2",
-        "notes": "Raw sheet rim code retained; normalization is conservative."
+        "notes": "Raw GTF1-family sheet code retained and normalized to GT-style."
       },
       "degrees_of_rotation": 720
     },
@@ -67,7 +67,7 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "unknown",
+          "normalized": "gt-style",
           "source_label": "GTF1FL2"
         },
         "steering_dor": 720
@@ -95,10 +95,11 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.coanda-sheet.v1.0.34"
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-forum.extended-car-info"
         ],
         "confidence": "medium",
-        "basis": "Conservative promotion of AMS2 sheet row 185 with unsupported technique left unknown."
+        "basis": "AMS2 sheet row 185 uses the GTF1-family code GTF1FL2; the source discussion identifies GTF1 as a modern GT/F1-style rim. Unsupported technique remains unknown."
       },
       {
         "paths": [

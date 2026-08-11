@@ -1,0 +1,133 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.formula-usa-2023",
+  "identity": {
+    "display_name": "Formula USA",
+    "manufacturer": "Reiza",
+    "model": "Formula USA",
+    "year": {
+      "label": "2023",
+      "from": 2023,
+      "to": 2023
+    },
+    "class": "F-USA G4",
+    "real_world_identity_notes": "AMS2 fictional 2023 Formula USA / F-USA G4 identity from the versioned source sheet.",
+    "variant": "2023"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "formula",
+        "source_label": "F1",
+        "notes": "Raw F1-family sheet code retained and normalized to Formula."
+      },
+      "degrees_of_rotation": 450
+    },
+    "notes": [
+      "Clutch and throttle technique remain unknown where the source only documents shift type, auto-blip, and shift cut.",
+      "Source chassis manufacturer: Reiza."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula USA 2023"
+        },
+        {
+          "kind": "display-name",
+          "value": "Formula USA"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula USA 2023 - High Downforce"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "formula",
+          "source_label": "F1"
+        },
+        "steering_dor": 450
+      },
+      "overrides": [],
+      "verified_game_version": "1.5.5.2",
+      "verified_at": "2024-01-17",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22",
+        "simhub.local-live-ams2-identities.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Control data comes from the versioned community sheet; the telemetry alias is an exact, reviewed SimHub observation."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/authentic_controls",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-forum.extended-car-info"
+        ],
+        "confidence": "medium",
+        "basis": "Conservative promotion of AMS2 sheet row 144 with unsupported technique left unknown."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "SimHub observes Formula USA 2023; the source identifies Formula USA with year 2023, and the appended-year alias was explicitly reviewed."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/2"
+        ],
+        "source_refs": [
+          "simhub.local-live-ams2-identities.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "AMS2 1.6.9.91 emitted the exact High Downforce telemetry identity during a live local test; it is explicitly reviewed as an aero configuration of Formula USA 2023."
+      }
+    ]
+  },
+  "updated_at": "2026-08-10"
+}

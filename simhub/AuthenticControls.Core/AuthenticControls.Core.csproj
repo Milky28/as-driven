@@ -36,8 +36,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticControlsDatabase.cs" />
+    <Compile Include="CarCatalogEntry.cs" />
     <Compile Include="GuidanceSnapshot.cs" />
+    <Compile Include="PopupState.cs" />
     <Compile Include="SessionState.cs" />
+    <Compile Include="UnmatchedIdentityLog.cs" />
+    <Compile Include="VersionText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

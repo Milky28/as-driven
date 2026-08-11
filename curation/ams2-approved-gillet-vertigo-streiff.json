@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.6",
+  "approved_at": "2026-08-11",
+  "record_id": "ams2.gillet-vertigo-streiff",
+  "telemetry_name": "Gillet Vertigo Streiff",
+  "telemetry_class": "GTR_04",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "d-shaped"
+  },
+  "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, and D-shaped no-display rim were directly observed. Specialist chassis evidence supports six-speed sequential hardware; manual blipping is approved as the authentic driver-supplied rev-matching technique.",
+  "scope_notes": "Exact historical year/chassis mapping remains qualified; only the exact AMS2 identity is approved."
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.saleen-s7-r-gt1",
+  "identity": {
+    "display_name": "Saleen S7-R GT1",
+    "manufacturer": "Saleen",
+    "model": "S7-R",
+    "variant": "AMS2 2005 GT1 representation",
+    "year": { "from": 2005, "label": "2005 GT1 representation" },
+    "class": "GT1 2005",
+    "real_world_identity_notes": "FIA evidence establishes the S7 competition identity, and specialist technical reporting supports a six-speed sequential transmission in the S7-R family. Exact AMS2 cockpit inspection confirms a sequential stick without paddles."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "required", "automatic_blip": "no" },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-round-no-display",
+        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
+      "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+      "The strongest opened transmission source describes a later S7-R, so exact 2005 historical revision details remain qualified."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        { "kind": "telemetry-name", "value": "Saleen S7-R GT1" },
+        { "kind": "class-id", "value": "GT1_05" }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": { "normalized": "round", "source_label": "live-cockpit-round-no-display" },
+        "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "fia.saleen-s7.gt-013", "racecar-engineering.saleen-s7r.2010", "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"],
+      "confidence": { "level": "verified", "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested; FIA and specialist evidence support the historical car and sequential transmission family while the exact 2005 revision remains qualified." }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": ["/identity", "/simulators/0/identities"],
+        "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "fia.saleen-s7.gt-013", "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Official release, homologation context, and exact live CarModel/class observation establish the simulated identity."
+      },
+      {
+        "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
+        "source_refs": ["racecar-engineering.saleen-s7r.2010", "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"],
+        "confidence": "high",
+        "basis": "Specialist family-level evidence and direct exercise of the modeled six-speed sequential stick agree; the historical source is from a later S7-R."
+      },
+      {
+        "paths": ["/authentic_controls/transmission/upshift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"],
+        "source_refs": ["ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      }
+    ]
+  },
+  "updated_at": "2026-08-11"
+}

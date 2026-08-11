@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.4",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.oreca-07",
+  "telemetry_name": "Oreca 07",
+  "telemetry_class": "LMP2",
+  "additional_telemetry_names": [
+    {
+      "value": "Oreca 07 - Low Downforce",
+      "basis": "Approved as an aero-package alias inheriting the verified base controls; this configuration has not been separately live-tested."
+    }
+  ],
+  "additional_telemetry_classes": [
+    "LMP2_Gen1"
+  ],
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "prototype"
+  },
+  "confidence_notes": "Gen1 and Gen2 were directly tested. Six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spikes, and the closed prototype display rim were confirmed. The simulator mechanism responsible for clutch-free move-off was not established.",
+  "scope_notes": "One shared telemetry-name record covers LMP2 and LMP2_Gen1. Oreca 07 - Low Downforce is approved as an exact aero-package alias with inherited controls; its behavior was not separately live-tested."
+}

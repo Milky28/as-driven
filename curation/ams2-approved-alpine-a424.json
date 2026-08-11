@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.4",
+  "approved_at": "2026-08-10",
+  "record_id": "ams2.alpine-a424",
+  "telemetry_name": "Alpine A424",
+  "telemetry_class": "LMDh",
+  "additional_telemetry_names": [
+    {
+      "value": "Alpine A424 - Low Downforce",
+      "basis": "Exact identity present in the reviewed SimHub AMS2 inventory. Approved as an aero-package alias inheriting the verified base controls; this configuration has not been separately live-tested."
+    }
+  ],
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "prototype"
+  },
+  "confidence_notes": "Exact identity, seven paddle-selected forward gears, clutch-free hybrid move-off, clutch-free full-throttle upshifts, clutch-free downshifts, automatic blip, and cockpit rim shape were directly tested. The automatic blip was visible as a throttle-display spike. Automatic cut is medium-confidence because no interruption was perceptible; it is inferred from the common LMDh transmission architecture, successful full-throttle shifts, and the three existing LMDh peer rows in the 1.5.5.2 source.",
+  "scope_notes": "The exact base telemetry identity Alpine A424 / LMDh was live-tested. Alpine A424 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested and that distinction must remain visible in the record notes."
+}

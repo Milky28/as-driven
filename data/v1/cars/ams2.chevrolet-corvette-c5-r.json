@@ -1,0 +1,91 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.chevrolet-corvette-c5-r",
+  "identity": {
+    "display_name": "Chevrolet Corvette C5-R",
+    "manufacturer": "Chevrolet",
+    "model": "Corvette C5-R",
+    "variant": "AMS2 2005 GT1 representation",
+    "year": { "label": "AMS2 2005 GT1-class representation" },
+    "class": "GT1 2005",
+    "real_world_identity_notes": "An archived General Motors specification identifies a six-speed sequential-manual transaxle for the 2003 C5-R. AMS2 cockpit inspection confirms a six-speed sequential stick without paddles, while the exact represented chassis year remains unspecified."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "required", "automatic_blip": "no" },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-round-no-display",
+        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
+      "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+      "The exact Low Downforce identity inherits the verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        { "kind": "telemetry-name", "value": "Chevrolet Corvette C5-R" },
+        { "kind": "telemetry-name", "value": "Chevrolet Corvette C5-R - Low Downforce" },
+        { "kind": "class-id", "value": "GT1_05" }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": { "normalized": "round", "source_label": "live-cockpit-round-no-display" },
+        "notes": ["Base car live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed.", "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "gm-archive.corvette-c5r.2003", "simhub.local-ams2-identities.9.11.22", "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"],
+      "confidence": { "level": "verified", "basis": "Exact simulator identity, cockpit controls, and technique were directly tested; archived manufacturer specifications independently support the six-speed sequential hardware family." }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": ["/identity", "/simulators/0/identities"],
+        "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
+      },
+      {
+        "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
+        "source_refs": ["gm-archive.corvette-c5r.2003", "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Archived manufacturer specification and direct exercise of the modeled six-speed sequential stick agree."
+      },
+      {
+        "paths": ["/simulators/0/identities/1", "/authentic_controls/notes/3"],
+        "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "simhub.local-ams2-identities.9.11.22"],
+        "confidence": "medium",
+        "basis": "The exact Low Downforce identity is observed and approved as an aero-only inheritance, but its controls were not separately tested."
+      },
+      {
+        "paths": ["/authentic_controls/transmission/upshift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"],
+        "source_refs": ["ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      }
+    ]
+  },
+  "notes": ["Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."],
+  "updated_at": "2026-08-11"
+}

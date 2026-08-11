@@ -66,9 +66,16 @@ def build_ams2_record(
 
     steering = dict(controls["steering"])
     steering["wheel_rim"] = dict(steering["wheel_rim"])
-    steering["wheel_rim"]["notes"] = (
-        "Raw sheet rim code retained; normalization is conservative."
-    )
+    rim_label = steering["wheel_rim"]["source_label"].upper()
+    if rim_label.startswith("GTF1"):
+        rim_note = "Raw GTF1-family sheet code retained and normalized to GT-style."
+    elif rim_label.startswith("F1"):
+        rim_note = "Raw F1-family sheet code retained and normalized to Formula."
+    elif rim_label.startswith("R"):
+        rim_note = "Raw round-family sheet code retained and normalized to round."
+    else:
+        rim_note = "Raw sheet rim code retained; normalization is conservative."
+    steering["wheel_rim"]["notes"] = rim_note
 
     record = {
         "$schema": "../../../schema/v1/car-record.schema.json",
@@ -126,7 +133,7 @@ def build_ams2_record(
                         "/authentic_controls",
                         "/simulators/0/behavior",
                     ],
-                    "source_refs": [SHEET_SOURCE],
+                    "source_refs": [SHEET_SOURCE, FORUM_SOURCE],
                     "confidence": "medium",
                     "basis": f"Conservative promotion of AMS2 sheet row {candidate['source_row']} with unsupported technique left unknown.",
                 },
@@ -134,7 +141,10 @@ def build_ams2_record(
                     "paths": ["/simulators/0/identities/0"],
                     "source_refs": [SIMHUB_SOURCE],
                     "confidence": "verified",
-                    "basis": "Approved exact alias from the SimHub identity audit.",
+                    "basis": approval.get(
+                        "telemetry_basis",
+                        "Approved exact alias from the SimHub identity audit.",
+                    ),
                 },
             ]
         },
@@ -153,9 +163,17 @@ def promote_approved_ams2(
         candidate["source_row"]: candidate
         for candidate in candidate_payload["candidates"]
     }
-    suggested_pairs = {
+    supported_pairs = {
         (item["source_row"], item["display_name"], item["telemetry_name"])
         for item in audit_payload["alias_suggestions"]
+    }
+    supported_pairs.update(
+        (item["source_row"], item["display_name"], item["telemetry_name"])
+        for item in audit_payload["exact_matches"]
+    )
+    observed_identities = {
+        (item["car_model"], item["file"])
+        for item in audit_payload["observed_identities"]
     }
     approved_at = approval_payload["approved_at"]
     verified_at = approval_payload["verified_at"]
@@ -172,8 +190,23 @@ def promote_approved_ams2(
             approval["source_display_name"],
             approval["telemetry_name"],
         )
-        if pair not in suggested_pairs:
-            raise ValueError(f"approval is not backed by an alias suggestion: {pair}")
+        if pair not in supported_pairs:
+            review = approval.get("manual_identity_review")
+            if not isinstance(review, dict):
+                raise ValueError(
+                    f"approval is not backed by an exact match, alias suggestion, or manual identity review: {pair}"
+                )
+            observed_file = review.get("observed_file")
+            basis = review.get("basis")
+            if not isinstance(observed_file, str) or not observed_file:
+                raise ValueError("manual identity review requires observed_file")
+            if not isinstance(basis, str) or not basis:
+                raise ValueError("manual identity review requires basis")
+            if (approval["telemetry_name"], observed_file) not in observed_identities:
+                raise ValueError(
+                    "manual identity review is not backed by the observed SimHub identity: "
+                    + repr((approval["telemetry_name"], observed_file))
+                )
         candidate = candidates_by_row.get(approval["source_row"])
         if candidate is None:
             raise ValueError(f"candidate row not found: {approval['source_row']}")

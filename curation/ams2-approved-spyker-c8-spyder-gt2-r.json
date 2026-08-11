@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0", "dataset_version": "0.3.8", "approved_at": "2026-08-11",
+  "record_id": "ams2.spyker-c8-spyder-gt2-r", "telemetry_name": "Spyker C8 Spyder GT2-R", "telemetry_class": "GT2_05",
+  "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22",
+  "approved_controls": {
+    "forward_gears": 6, "shift_actuation": "sequential-stick", "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes",
+    "automatic_blip": "no", "manual_blip": "required", "wheel_rim_shape": "round"
+  },
+  "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, manual rev matching, and round no-display rim were directly observed.",
+  "scope_notes": "The live test resolves the five-versus-six-speed source conflict only for the exact modeled AMS2 car, not every historical chassis."
+}

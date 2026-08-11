@@ -29,6 +29,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="GameReaderCommon">
       <HintPath>$(SimHubInstallPath)\GameReaderCommon.dll</HintPath>
       <Private>False</Private>
@@ -55,7 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticControls.cs" />
+    <Compile Include="AuthenticControlsMenuIcon.cs" />
+    <Compile Include="AuthenticControlsSettings.cs" />
+    <Compile Include="AuthenticControlsSettingsControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\authentic-controls-mark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

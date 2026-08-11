@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.0",
+  "approved_at": "2026-08-10",
+  "verified_at": "2024-01-17",
+  "records": [
+    {
+      "source_row": 122,
+      "source_display_name": "Formula V10 G2",
+      "record_id": "ams2.formula-v10-g2",
+      "manufacturer": "Reiza",
+      "model": "Formula V10",
+      "variant": "Gen2",
+      "telemetry_name": "Formula V10 Gen2",
+      "identity_notes": "AMS2 fictional Formula V10 second-generation identity; the source uses G2 while current SimHub telemetry uses Gen2.",
+      "telemetry_basis": "SimHub observes Formula V10 Gen2; the source name and class identify Formula V10 G2, with the G2/Gen2 generation equivalence explicitly reviewed.",
+      "manual_identity_review": {
+        "observed_file": "Formula V10 Gen2.shcarsettings",
+        "basis": "Source name and class both identify Formula V10 G2; the observed telemetry expands G2 to Gen2."
+      }
+    },
+    {
+      "source_row": 123,
+      "source_display_name": "Formula Reiza",
+      "record_id": "ams2.formula-reiza",
+      "manufacturer": "Reiza",
+      "model": "Formula Reiza",
+      "telemetry_name": "Formula Reiza",
+      "identity_notes": "AMS2 fictional Formula Reiza identity from the versioned source sheet.",
+      "telemetry_basis": "Formula Reiza is an exact source-name and SimHub telemetry-name match."
+    },
+    {
+      "source_row": 124,
+      "source_display_name": "Formula Ultimate 2019",
+      "record_id": "ams2.formula-ultimate-2019",
+      "manufacturer": "Reiza",
+      "model": "Formula Ultimate",
+      "variant": "2019 / Hybrid Gen1",
+      "telemetry_name": "Formula Ultimate Hybrid Gen1",
+      "identity_notes": "AMS2 fictional 2019 Formula Ultimate G1 identity; current SimHub telemetry names it Formula Ultimate Hybrid Gen1.",
+      "telemetry_basis": "SimHub observes Formula Ultimate Hybrid Gen1; the source identifies the 2019 Formula Ultimate G1, and the year plus G1/Gen1 context was explicitly reviewed.",
+      "manual_identity_review": {
+        "observed_file": "Formula Ultimate Hybrid Gen1.shcarsettings",
+        "basis": "The source year 2019 and class Formula Ultimate G1 align with the observed Hybrid Gen1 identity."
+      }
+    },
+    {
+      "source_row": 125,
+      "source_display_name": "Formula Ultimate 2022",
+      "record_id": "ams2.formula-ultimate-2022",
+      "manufacturer": "Reiza",
+      "model": "Formula Ultimate",
+      "variant": "2022 / Gen2",
+      "telemetry_name": "Formula Ultimate Gen2",
+      "identity_notes": "AMS2 fictional 2022 Formula Ultimate G2 identity; current SimHub telemetry names it Formula Ultimate Gen2.",
+      "telemetry_basis": "SimHub observes Formula Ultimate Gen2; the source identifies the 2022 Formula Ultimate G2, and the year plus G2/Gen2 context was explicitly reviewed.",
+      "manual_identity_review": {
+        "observed_file": "Formula Ultimate Gen2.shcarsettings",
+        "basis": "The source year 2022 and class Formula Ultimate G2 align with the observed Gen2 identity."
+      }
+    },
+    {
+      "source_row": 144,
+      "source_display_name": "Formula USA",
+      "record_id": "ams2.formula-usa-2023",
+      "manufacturer": "Reiza",
+      "model": "Formula USA",
+      "variant": "2023",
+      "telemetry_name": "Formula USA 2023",
+      "identity_notes": "AMS2 fictional 2023 Formula USA / F-USA G4 identity from the versioned source sheet.",
+      "telemetry_basis": "SimHub observes Formula USA 2023; the source identifies Formula USA with year 2023, and the appended-year alias was explicitly reviewed.",
+      "manual_identity_review": {
+        "observed_file": "Formula USA 2023.shcarsettings",
+        "basis": "The source Formula USA name and 2023 year align with the observed Formula USA 2023 identity."
+      }
+    }
+  ]
+}

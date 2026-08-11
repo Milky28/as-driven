@@ -1,0 +1,125 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.maserati-mc12-gt1",
+  "identity": {
+    "display_name": "Maserati MC12 GT1",
+    "manufacturer": "Maserati",
+    "model": "MC12 GT1",
+    "variant": "AMS2 2005 GT1 representation",
+    "year": { "from": 2004, "label": "2004-generation GT1" },
+    "class": "GT1 2005",
+    "real_world_identity_notes": "Maserati identifies the MC12 GT1 as using a manually operated sequential gearbox, distinct from the electro-actuated system of the later Versione Corse. AMS2 visibly models the manual sequential lever without paddles."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-d-shaped-no-display",
+        "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "All six sequential-stick gears accepted clutch-free full-throttle upshifts with perceptible automatic cut.",
+      "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+      "The exact Low Downforce identity inherits the verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        { "kind": "telemetry-name", "value": "Maserati MC12 GT1" },
+        { "kind": "telemetry-name", "value": "Maserati MC12 GT1 - Low Downforce" },
+        { "kind": "class-id", "value": "GT1_05" }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": { "normalized": "d-shaped", "source_label": "live-cockpit-d-shaped-no-display" },
+        "notes": [
+          "Base car live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Six-speed sequential-stick actuation, standing-start clutch, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed.",
+          "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "maserati.mc12-versione-corse.2006",
+        "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact base identity and simulator technique were directly tested; manufacturer evidence independently establishes manual sequential actuation. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip behavior; Low Downforce remains explicit inheritance."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": ["/identity", "/simulators/0/identities"],
+        "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Official release plus exact live CarModel and GT1_05 class observation."
+      },
+      {
+        "paths": ["/simulators/0/identities/1", "/authentic_controls/notes/3"],
+        "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "simhub.local-ams2-identities.9.11.22"],
+        "confidence": "medium",
+        "basis": "The exact Low Downforce identity is observed and approved as aero-only inheritance, but its controls were not separately tested."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": ["maserati.mc12-versione-corse.2006", "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Manufacturer evidence establishes manual sequential actuation and direct testing establishes six modeled ratios and the visible lever."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/simulators/0/behavior",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": ["ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      }
+    ]
+  },
+  "notes": ["Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."],
+  "updated_at": "2026-08-11"
+}
