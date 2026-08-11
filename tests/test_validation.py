@@ -5,6 +5,7 @@ import tempfile
 import unittest
 
 from authentic_controls_db.validate import _resolve_pointer, validate_repository
+from authentic_controls_db.schema_validation import validate_instance
 
 
 ROOT = Path(__file__).parents[1]
@@ -92,6 +93,62 @@ class ValidationTests(unittest.TestCase):
                 any("approved_controls.automatic_cut" in error for error in errors),
                 errors,
             )
+
+    def test_guided_verification_draft_contract(self) -> None:
+        schema = json.loads(
+            (ROOT / "schema" / "v1" / "verification-observation.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        observation = {
+            "$schema": "urn:authentic-controls:schema:v1:verification-observation",
+            "schema_version": "1.0.0",
+            "observation_id": "ams2.test-car.20260811t120000000z-1234abcd",
+            "simulator": "ams2",
+            "game_version": "1.6.9.91",
+            "client_version": "SimHub 9.11.22; Authentic Controls 0.10.11",
+            "observed_at": "2026-08-11T12:00:00.0000000Z",
+            "observer": "Test observer",
+            "identity": {
+                "telemetry_name": "Test Car",
+                "telemetry_class": "TEST_CLASS",
+                "internal_id": "Test Car",
+            },
+            "assists": {
+                "automatic_clutch": "disabled",
+                "automatic_shifting": "disabled",
+                "automatic_throttle_blip": "unavailable",
+            },
+            "tests": {
+                "move_off_without_physical_clutch": "no",
+                "forward_gears": 6,
+                "clutchless_upshift": "yes",
+                "automatic_cut": "yes",
+                "clutchless_downshift": "yes",
+                "automatic_blip": "yes",
+            },
+            "cockpit": {
+                "visible_shift_actuators": ["paddles"],
+                "primary_shift_actuation": "sequential-paddles",
+                "wheel_rim": {
+                    "shape": "prototype",
+                    "integrated_display": "yes",
+                    "shift_lights": "yes",
+                    "open_top": "no",
+                },
+            },
+            "review_status": "draft",
+        }
+        self.assertEqual(validate_instance(observation, schema, "observation"), [])
+
+        observation["review_status"] = "auto-approved"
+        errors = validate_instance(observation, schema, "observation")
+        self.assertTrue(any("review_status: invalid value 'auto-approved'" in error for error in errors))
+
+        observation["review_status"] = "draft"
+        observation["observed_at"] = "2026-08-11T12:00:00"
+        errors = validate_instance(observation, schema, "observation")
+        self.assertTrue(any("expected an ISO date-time with timezone" in error for error in errors))
 
     @staticmethod
     def _copy_repository_data(directory: Path, include_curation: bool = False) -> Path:

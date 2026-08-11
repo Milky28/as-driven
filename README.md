@@ -68,6 +68,12 @@ evidence separated:
 python -m authentic_controls_db audit-boundaries --output build/evidence-boundaries.json
 ```
 
+Validate a draft exported by SimHub's guided verification form:
+
+```shell
+python -m authentic_controls_db validate-observation observation.json
+```
+
 The optional SimHub adapter has its own build and test command on Windows:
 
 ```powershell

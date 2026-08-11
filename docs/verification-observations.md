@@ -1,11 +1,21 @@
 # Guided simulator verification observations
 
-The guided verification workflow produces staging evidence; it does not edit a
-curated car record or approve a database release.
+The SimHub guided verification workflow produces staging evidence; it does not
+edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. A future
-SimHub guided mode can populate the fields that telemetry can establish and ask
-the tester only for observations that require judgment.
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.10.11
+prefills the exact live telemetry name, class, game/client versions, timestamp,
+and SimHub's reported maximum gear count. The tester confirms the gear count
+and supplies the observations that require judgment.
+
+Drafts are stored under:
+
+```text
+%LOCALAPPDATA%\SimHub\AuthenticControls\Verification\Drafts
+```
+
+They always use `review_status: draft`. Saving one does not change `data/v1`,
+the research backlog, or a curation approval.
 
 ## Intended test sequence
 
@@ -24,13 +34,32 @@ the tester only for observations that require judgment.
    open-top construction.
 9. Save as `draft`; a reviewer promotes or rejects it separately.
 
+## SimHub workflow
+
+1. Load the car and open the Authentic Controls feature page.
+2. Expand **Guided in-game verification** and click
+   **Start verification from live car**.
+3. Confirm the captured identity and exact game version.
+4. Complete the form. `Unknown` and `Not tested` are valid and preferable to a
+   guess.
+5. Click **Save draft observation**. The observer name is remembered locally
+   for the next draft.
+6. Use **Open drafts folder** to retrieve the JSON for review.
+
+Validate any exported draft from the repository root with:
+
+```shell
+python -m authentic_controls_db validate-observation path/to/observation.json
+```
+
 ## Automation boundary
 
-The client may automatically capture identity, versions, timestamp, gear count,
-and telemetry traces. It should present suggested cut/blip results with the
-measurement basis and let the tester confirm them. Cockpit hardware and primary
-actuation remain human-reviewed because game input bindings accept both stick
-and paddles for a sequential gearbox.
+The client automatically captures identity, versions, timestamp, and a
+suggested gear count. Cut/blip interpretation remains human-confirmed because
+throttle, RPM, and accepted shifts do not by themselves establish the modeled
+mechanism. Cockpit hardware and primary actuation also remain human-reviewed
+because game input bindings accept both stick and paddles for a sequential
+gearbox.
 
 Observation files belong in local or ignored staging storage until reviewed.
 Approved facts are copied into the appropriate simulator entry and cited by a

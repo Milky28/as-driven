@@ -51,6 +51,7 @@ namespace AuthenticControls.Plugin
             "not-initialized", string.Empty, string.Empty, string.Empty);
         private readonly PopupState _popupState = new PopupState(
             TimeSpan.FromSeconds(DefaultPopupDurationSeconds));
+        private readonly object _verificationTelemetryLock = new object();
         private AuthenticControlsSettings _settings = new AuthenticControlsSettings();
         private AuthenticControlsDatabase _database;
         private SessionState _session;
@@ -70,6 +71,13 @@ namespace AuthenticControls.Plugin
         private string _lastRuntimeError = string.Empty;
         private string _lastUnmatchedLogError = string.Empty;
         private int _databaseRecordCount;
+        private bool _liveVerificationGameRunning;
+        private string _liveVerificationGameName = string.Empty;
+        private string _liveVerificationGameVersion = string.Empty;
+        private string _liveVerificationCarModel = string.Empty;
+        private string _liveVerificationCarId = string.Empty;
+        private string _liveVerificationCarClass = string.Empty;
+        private int _liveVerificationForwardGears;
 
         public PluginManager PluginManager { get; set; }
 
@@ -207,6 +215,16 @@ namespace AuthenticControls.Plugin
             get { return _previewActive; }
         }
 
+        internal string VerificationObserver
+        {
+            get { return _settings.VerificationObserver ?? string.Empty; }
+        }
+
+        internal string VerificationDraftDirectory
+        {
+            get { return ResolveVerificationDraftDirectory(); }
+        }
+
         public void Init(PluginManager pluginManager)
         {
             PluginManager = pluginManager;
@@ -240,6 +258,12 @@ namespace AuthenticControls.Plugin
                 {
                     ReturnToLiveCar();
                 });
+            this.AddAction(
+                "OpenVerificationFolder",
+                delegate(PluginManager manager, string parameter)
+                {
+                    OpenVerificationFolder();
+                });
             LoadDatabase();
         }
 
@@ -252,6 +276,7 @@ namespace AuthenticControls.Plugin
         {
             try
             {
+                UpdateLiveVerificationTelemetry(data);
                 SessionState session = _session;
                 if (session == null)
                 {
@@ -414,6 +439,70 @@ namespace AuthenticControls.Plugin
         internal void RefreshDatabase()
         {
             LoadDatabase();
+        }
+
+        internal VerificationCaptureContext CaptureVerificationContext()
+        {
+            lock (_verificationTelemetryLock)
+            {
+                if (!_liveVerificationGameRunning
+                    || string.IsNullOrWhiteSpace(_liveVerificationCarModel))
+                {
+                    return null;
+                }
+                string simulator = AuthenticControlsDatabase.CanonicalizeSimulator(
+                    _liveVerificationGameName);
+                return new VerificationCaptureContext
+                {
+                    Simulator = string.IsNullOrWhiteSpace(simulator) ? "other" : simulator,
+                    GameVersion = string.IsNullOrWhiteSpace(_liveVerificationGameVersion)
+                        ? "unknown"
+                        : _liveVerificationGameVersion,
+                    ClientVersion = "SimHub "
+                        + (string.IsNullOrWhiteSpace(_simHubVersion) ? "unknown" : _simHubVersion)
+                        + "; Authentic Controls " + PluginVersion,
+                    ObservedAtUtc = DateTime.UtcNow,
+                    TelemetryName = _liveVerificationCarModel,
+                    TelemetryClass = string.IsNullOrWhiteSpace(_liveVerificationCarClass)
+                        ? "unknown"
+                        : _liveVerificationCarClass,
+                    InternalId = _liveVerificationCarId,
+                    SuggestedForwardGears = _liveVerificationForwardGears > 0
+                        ? (int?)_liveVerificationForwardGears
+                        : null
+                };
+            }
+        }
+
+        internal string SaveVerificationDraft(
+            VerificationObservationDraft draft,
+            string observer)
+        {
+            if (draft == null)
+            {
+                throw new ArgumentNullException("draft");
+            }
+            draft.Observer = (observer ?? string.Empty).Trim();
+            if (!string.IsNullOrWhiteSpace(draft.Observer)
+                && !string.Equals(
+                    _settings.VerificationObserver,
+                    draft.Observer,
+                    StringComparison.Ordinal))
+            {
+                _settings.VerificationObserver = draft.Observer;
+                this.SaveCommonSettings("Settings", _settings);
+            }
+            return VerificationObservationWriter.WriteDraft(
+                ResolveVerificationDraftDirectory(),
+                draft);
+        }
+
+        internal string OpenVerificationFolder()
+        {
+            string directory = ResolveVerificationDraftDirectory();
+            Directory.CreateDirectory(directory);
+            Process.Start("explorer.exe", "\"" + directory + "\"");
+            return directory;
         }
 
         internal bool PreviewCar(CarCatalogEntry car)
@@ -733,6 +822,42 @@ namespace AuthenticControls.Plugin
             }
         }
 
+        private void UpdateLiveVerificationTelemetry(GameData data)
+        {
+            bool running = data.GameRunning && data.NewData != null;
+            if (!running)
+            {
+                lock (_verificationTelemetryLock)
+                {
+                    _liveVerificationGameRunning = false;
+                }
+                return;
+            }
+
+            string gameName = data.GameName ?? string.Empty;
+            string gameVersion = DetectGameVersion(gameName);
+            string carModel = data.NewData.CarModel ?? string.Empty;
+            string carId = data.NewData.CarId ?? string.Empty;
+            string carClass = data.NewData.CarClass ?? string.Empty;
+            int forwardGears = data.NewData.CarSettings_MaxGears;
+            int currentGear;
+            if (int.TryParse(data.NewData.Gear, out currentGear)
+                && currentGear > forwardGears)
+            {
+                forwardGears = currentGear;
+            }
+            lock (_verificationTelemetryLock)
+            {
+                _liveVerificationGameRunning = true;
+                _liveVerificationGameName = gameName;
+                _liveVerificationGameVersion = gameVersion;
+                _liveVerificationCarModel = carModel;
+                _liveVerificationCarId = carId;
+                _liveVerificationCarClass = carClass;
+                _liveVerificationForwardGears = forwardGears;
+            }
+        }
+
         private string DetectGameVersion(string gameName)
         {
             if (string.Equals(_detectedVersionGame, gameName, StringComparison.Ordinal)
@@ -906,6 +1031,16 @@ namespace AuthenticControls.Plugin
                 "AuthenticControls",
                 "Diagnostics",
                 "unmatched-identities.jsonl");
+        }
+
+        private static string ResolveVerificationDraftDirectory()
+        {
+            return Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "SimHub",
+                "AuthenticControls",
+                "Verification",
+                "Drafts");
         }
 
         private string DatasetVersion()

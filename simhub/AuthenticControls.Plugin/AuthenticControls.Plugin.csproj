@@ -63,6 +63,8 @@
     <Compile Include="AuthenticControlsMenuIcon.cs" />
     <Compile Include="AuthenticControlsSettings.cs" />
     <Compile Include="AuthenticControlsSettingsControl.cs" />
+    <Compile Include="VerificationCaptureContext.cs" />
+    <Compile Include="VerificationControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

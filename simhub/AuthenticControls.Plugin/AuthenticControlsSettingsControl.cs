@@ -20,6 +20,7 @@ namespace AuthenticControls.Plugin
         private readonly TextBlock _recordStatus;
         private readonly TextBlock _previewStatus;
         private readonly TextBlock _errorStatus;
+        private readonly VerificationControl _verification;
         private readonly DispatcherTimer _statusTimer;
 
         public AuthenticControlsSettingsControl(AuthenticControls plugin)
@@ -246,7 +247,14 @@ namespace AuthenticControls.Plugin
 
             panel.Children.Add(CreateButton("Save popup settings", 170, SaveClicked));
 
-            AddSectionHeading(panel, "Unmatched car diagnostics", new Thickness(0, 30, 0, 8));
+            AddSectionHeading(panel, "Guided in-game verification", new Thickness(0, 30, 0, 8));
+            _verification = new VerificationControl(plugin)
+            {
+                Margin = new Thickness(0, 0, 0, 24),
+            };
+            panel.Children.Add(_verification);
+
+            AddSectionHeading(panel, "Unmatched car diagnostics", new Thickness(0, 6, 0, 8));
             panel.Children.Add(new TextBlock
             {
                 Text = "When an exact match is not found, Authentic Controls records the game version, CarModel, CarId, class, dataset version, and timestamp once per unique identity. The JSON Lines file is preserved across plugin upgrades.",
@@ -362,6 +370,7 @@ namespace AuthenticControls.Plugin
                 ? string.Empty
                 : "Error: " + _plugin.CurrentRuntimeError;
             UpdatePreviewStatus();
+            _verification.UpdateLiveAvailability();
         }
 
         private void UpdatePreviewStatus()

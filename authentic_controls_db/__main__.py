@@ -15,6 +15,7 @@ from .simhub import (
     write_unmatched_review_csv,
 )
 from .validate import validate_repository
+from .schema_validation import validate_instance
 
 
 def _write_json(path: Path, payload: object) -> None:
@@ -35,6 +36,13 @@ def _parser() -> argparse.ArgumentParser:
     )
     boundaries.add_argument("--root", type=Path, default=Path.cwd())
     boundaries.add_argument("--output", type=Path)
+
+    observation = subparsers.add_parser(
+        "validate-observation",
+        help="validate a staged guided-verification observation",
+    )
+    observation.add_argument("input", type=Path)
+    observation.add_argument("--root", type=Path, default=Path.cwd())
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
     ams2.add_argument("input", type=Path)
@@ -103,6 +111,28 @@ def main(argv: list[str] | None = None) -> int:
             f"{stats['simulator_only_authentic_claims']} simulator-only authentic "
             f"claim(s) across {stats['affected_records']} record(s)."
         )
+        return 0
+
+    if args.command == "validate-observation":
+        try:
+            payload = json.loads(args.input.read_text(encoding="utf-8-sig"))
+            schema_path = (
+                args.root.resolve()
+                / "schema"
+                / "v1"
+                / "verification-observation.schema.json"
+            )
+            schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exception:
+            print(f"ERROR: Could not read observation or schema: {exception}")
+            return 1
+        errors = validate_instance(payload, schema, str(args.input))
+        if errors:
+            for error in errors:
+                print(f"ERROR: {error}")
+            print(f"Observation validation failed with {len(errors)} error(s).")
+            return 1
+        print("Observation validation passed.")
         return 0
 
     if args.command == "import-ams2":

@@ -1,0 +1,600 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using AuthenticControls.Core;
+
+namespace AuthenticControls.Plugin
+{
+    internal sealed class VerificationControl : Border
+    {
+        private readonly AuthenticControls _plugin;
+        private readonly TextBlock _liveAvailability;
+        private readonly TextBlock _capturedIdentity;
+        private readonly TextBlock _status;
+        private readonly TextBox _observer;
+        private readonly TextBox _forwardGears;
+        private readonly ComboBox _automaticClutch;
+        private readonly ComboBox _automaticShifting;
+        private readonly ComboBox _automaticThrottleBlip;
+        private readonly TextBox _assistNotes;
+        private readonly ComboBox _moveOff;
+        private readonly ComboBox _clutchlessUpshift;
+        private readonly ComboBox _automaticCut;
+        private readonly TextBox _automaticCutMethod;
+        private readonly ComboBox _clutchlessDownshift;
+        private readonly ComboBox _automaticBlip;
+        private readonly TextBox _automaticBlipMethod;
+        private readonly CheckBox _visiblePaddles;
+        private readonly CheckBox _visibleSequentialStick;
+        private readonly CheckBox _visibleHPattern;
+        private readonly CheckBox _visibleAutomaticLever;
+        private readonly ComboBox _primaryActuation;
+        private readonly TextBox _actuationBasis;
+        private readonly ComboBox _wheelShape;
+        private readonly ComboBox _wheelDisplay;
+        private readonly ComboBox _wheelShiftLights;
+        private readonly ComboBox _wheelOpenTop;
+        private readonly TextBox _wheelNotes;
+        private readonly TextBox _evidenceNotes;
+        private readonly Button _save;
+        private readonly Expander _formExpander;
+        private VerificationCaptureContext _capture;
+
+        public VerificationControl(AuthenticControls plugin)
+        {
+            _plugin = plugin;
+            BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
+            BorderThickness = new Thickness(1);
+            CornerRadius = new CornerRadius(5);
+            Padding = new Thickness(14);
+
+            var root = new StackPanel();
+            root.Children.Add(new TextBlock
+            {
+                Text = "Capture a versioned draft while a car is loaded. The draft is saved locally for review and never edits the database.",
+                FontSize = 15,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+            root.Children.Add(new TextBlock
+            {
+                Text = "Before testing, disable automatic clutch and automatic shifting where available. Leave anything uncertain as Unknown or Not tested.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.78,
+                Margin = new Thickness(0, 0, 0, 12),
+            });
+            _liveAvailability = new TextBlock
+            {
+                FontWeight = FontWeights.SemiBold,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 8),
+            };
+            root.Children.Add(_liveAvailability);
+            root.Children.Add(CreateButton(
+                "Start verification from live car",
+                235,
+                StartClicked,
+                new Thickness(0, 0, 0, 10)));
+            _capturedIdentity = new TextBlock
+            {
+                Text = "No verification started.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.78,
+                Margin = new Thickness(0, 0, 0, 12),
+            };
+            root.Children.Add(_capturedIdentity);
+
+            var form = new StackPanel();
+            _formExpander = new Expander
+            {
+                Header = "Verification form",
+                IsExpanded = false,
+                Content = form,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+            root.Children.Add(_formExpander);
+
+            _observer = CreateTextBox();
+            _observer.Text = plugin.VerificationObserver;
+            AddLabeledControl(
+                form,
+                "Observer name",
+                _observer,
+                "Saved with the draft so a later reviewer knows who performed the test.");
+
+            AddSubheading(form, "Assist setup");
+            _automaticClutch = CreateAssistCombo();
+            _automaticShifting = CreateAssistCombo();
+            _automaticThrottleBlip = CreateAssistCombo();
+            AddControlPair(
+                form,
+                "Automatic clutch",
+                _automaticClutch,
+                "Automatic shifting",
+                _automaticShifting);
+            AddLabeledControl(
+                form,
+                "Automatic throttle-blip assist",
+                _automaticThrottleBlip,
+                "Choose Unavailable if the simulator has no separate assist setting.");
+            _assistNotes = CreateMultilineTextBox(54);
+            AddLabeledControl(form, "Assist notes", _assistNotes, null);
+
+            AddSubheading(form, "Driving tests");
+            _moveOff = CreateObservedCombo();
+            _forwardGears = CreateTextBox();
+            AddControlPair(
+                form,
+                "Moves from rest without physical clutch",
+                _moveOff,
+                "Forward gears",
+                _forwardGears);
+            _clutchlessUpshift = CreateObservedCombo();
+            _automaticCut = CreateObservedCombo();
+            AddControlPair(
+                form,
+                "Clutchless upshift accepted",
+                _clutchlessUpshift,
+                "Automatic throttle cut observed",
+                _automaticCut);
+            _automaticCutMethod = CreateTextBox();
+            AddLabeledControl(
+                form,
+                "How automatic cut was identified",
+                _automaticCutMethod,
+                "For example: full-throttle shift accepted with a visible power interruption.");
+            _clutchlessDownshift = CreateObservedCombo();
+            _automaticBlip = CreateObservedCombo();
+            AddControlPair(
+                form,
+                "Clutchless downshift accepted",
+                _clutchlessDownshift,
+                "Automatic throttle blip observed",
+                _automaticBlip);
+            _automaticBlipMethod = CreateTextBox();
+            AddLabeledControl(
+                form,
+                "How automatic blip was identified",
+                _automaticBlipMethod,
+                "For example: throttle telemetry spiked during a downshift without pedal input.");
+
+            AddSubheading(form, "Cockpit controls");
+            form.Children.Add(new TextBlock
+            {
+                Text = "A sequential gearbox may accept both paddle and stick bindings in AMS2. Use visible hardware and driver animation to identify the modeled primary mechanism.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.72,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+            form.Children.Add(new TextBlock
+            {
+                Text = "Visible shift hardware",
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 6),
+            });
+            var actuatorRow = new WrapPanel { Margin = new Thickness(0, 0, 0, 12) };
+            _visiblePaddles = CreateCheckBox("Paddles");
+            _visibleSequentialStick = CreateCheckBox("Sequential stick");
+            _visibleHPattern = CreateCheckBox("H-pattern shifter");
+            _visibleAutomaticLever = CreateCheckBox("Automatic lever");
+            actuatorRow.Children.Add(_visiblePaddles);
+            actuatorRow.Children.Add(_visibleSequentialStick);
+            actuatorRow.Children.Add(_visibleHPattern);
+            actuatorRow.Children.Add(_visibleAutomaticLever);
+            form.Children.Add(actuatorRow);
+            _primaryActuation = CreateChoiceCombo(new[]
+            {
+                new Choice("Unknown", "unknown"),
+                new Choice("Sequential paddles", "sequential-paddles"),
+                new Choice("Sequential stick", "sequential-stick"),
+                new Choice("H-pattern", "h-pattern"),
+                new Choice("Automatic lever", "automatic-lever"),
+                new Choice("Direct selection", "direct-selection"),
+            });
+            _actuationBasis = CreateTextBox();
+            AddControlPair(
+                form,
+                "Primary shift mechanism",
+                _primaryActuation,
+                "How it was identified",
+                _actuationBasis);
+
+            AddSubheading(form, "Steering wheel");
+            _wheelShape = CreateChoiceCombo(new[]
+            {
+                new Choice("Unknown", "unknown"),
+                new Choice("Round", "round"),
+                new Choice("D-shaped", "d-shaped"),
+                new Choice("GT-style", "gt-style"),
+                new Choice("Prototype", "prototype"),
+                new Choice("Formula", "formula"),
+                new Choice("Yoke", "yoke"),
+                new Choice("Other", "other"),
+            });
+            _wheelDisplay = CreateObservedCombo();
+            AddControlPair(
+                form,
+                "Wheel shape",
+                _wheelShape,
+                "Integrated display",
+                _wheelDisplay);
+            _wheelShiftLights = CreateObservedCombo();
+            _wheelOpenTop = CreateObservedCombo();
+            AddControlPair(
+                form,
+                "Shift lights on wheel",
+                _wheelShiftLights,
+                "Open-top wheel construction",
+                _wheelOpenTop);
+            _wheelNotes = CreateMultilineTextBox(54);
+            AddLabeledControl(form, "Wheel notes", _wheelNotes, null);
+
+            AddSubheading(form, "Review notes");
+            _evidenceNotes = CreateMultilineTextBox(72);
+            AddLabeledControl(
+                form,
+                "Anything a reviewer should know",
+                _evidenceNotes,
+                "Include uncertainty, unusual hybrid starts, conflicting cockpit hardware, or tests that should be repeated.");
+
+            var actions = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 4, 0, 8),
+            };
+            _save = CreateButton(
+                "Save draft observation",
+                190,
+                SaveClicked,
+                new Thickness(0, 0, 10, 0));
+            _save.IsEnabled = false;
+            actions.Children.Add(_save);
+            actions.Children.Add(CreateButton(
+                "Open drafts folder",
+                160,
+                OpenFolderClicked,
+                new Thickness(0)));
+            root.Children.Add(actions);
+            root.Children.Add(new TextBlock
+            {
+                Text = plugin.VerificationDraftDirectory,
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.62,
+                Margin = new Thickness(0, 0, 0, 6),
+            });
+            _status = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 4, 0, 0),
+            };
+            root.Children.Add(_status);
+            Child = root;
+            UpdateLiveAvailability();
+        }
+
+        internal void UpdateLiveAvailability()
+        {
+            VerificationCaptureContext live = _plugin.CaptureVerificationContext();
+            _liveAvailability.Text = live == null
+                ? "Waiting for a live car. Start the simulator and load a car first."
+                : "Ready to capture: " + live.TelemetryName + " - " + live.TelemetryClass
+                    + " (game " + live.GameVersion + ")";
+            _liveAvailability.Foreground = live == null ? Brushes.Goldenrod : Brushes.LightGreen;
+        }
+
+        private void StartClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            VerificationCaptureContext live = _plugin.CaptureVerificationContext();
+            if (live == null)
+            {
+                _status.Text = "No live car telemetry is available. Load a car in the simulator, then try again.";
+                return;
+            }
+            _capture = live;
+            ResetForm();
+            _formExpander.IsExpanded = true;
+            _capturedIdentity.Text = "Captured: " + live.TelemetryName + " - "
+                + live.TelemetryClass + " | game " + live.GameVersion + " | "
+                + live.ClientVersion;
+            _save.IsEnabled = true;
+            _status.Text = live.SuggestedForwardGears.HasValue
+                ? "Verification started. SimHub suggested " + live.SuggestedForwardGears.Value
+                    + " forward gears; confirm it by selecting every gear."
+                : "Verification started. Complete the form, then save a draft.";
+        }
+
+        private void ResetForm()
+        {
+            foreach (ComboBox combo in new[]
+            {
+                _automaticClutch, _automaticShifting, _automaticThrottleBlip,
+                _moveOff, _clutchlessUpshift, _automaticCut,
+                _clutchlessDownshift, _automaticBlip, _primaryActuation,
+                _wheelShape, _wheelDisplay, _wheelShiftLights, _wheelOpenTop
+            })
+            {
+                combo.SelectedIndex = 0;
+            }
+            _forwardGears.Text = _capture.SuggestedForwardGears.HasValue
+                ? _capture.SuggestedForwardGears.Value.ToString(CultureInfo.InvariantCulture)
+                : string.Empty;
+            _assistNotes.Text = string.Empty;
+            _automaticCutMethod.Text = string.Empty;
+            _automaticBlipMethod.Text = string.Empty;
+            _actuationBasis.Text = string.Empty;
+            _wheelNotes.Text = string.Empty;
+            _evidenceNotes.Text = string.Empty;
+            _visiblePaddles.IsChecked = false;
+            _visibleSequentialStick.IsChecked = false;
+            _visibleHPattern.IsChecked = false;
+            _visibleAutomaticLever.IsChecked = false;
+        }
+
+        private void SaveClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            if (_capture == null)
+            {
+                _status.Text = "Start a verification from the live car first.";
+                return;
+            }
+            int parsedGears;
+            int? forwardGears = null;
+            if (!string.IsNullOrWhiteSpace(_forwardGears.Text))
+            {
+                if (!int.TryParse(_forwardGears.Text.Trim(), out parsedGears)
+                    || parsedGears < 1
+                    || parsedGears > 20)
+                {
+                    _status.Text = "Forward gears must be blank or a number from 1 to 20.";
+                    return;
+                }
+                forwardGears = parsedGears;
+            }
+
+            try
+            {
+                string[] visible = VisibleActuators();
+                var draft = new VerificationObservationDraft
+                {
+                    Simulator = _capture.Simulator,
+                    GameVersion = _capture.GameVersion,
+                    ClientVersion = _capture.ClientVersion,
+                    ObservedAtUtc = _capture.ObservedAtUtc,
+                    TelemetryName = _capture.TelemetryName,
+                    TelemetryClass = _capture.TelemetryClass,
+                    InternalId = _capture.InternalId,
+                    AutomaticClutch = ChoiceValue(_automaticClutch),
+                    AutomaticShifting = ChoiceValue(_automaticShifting),
+                    AutomaticThrottleBlip = ChoiceValue(_automaticThrottleBlip),
+                    AssistNotes = _assistNotes.Text,
+                    MoveOffWithoutPhysicalClutch = ChoiceValue(_moveOff),
+                    ForwardGears = forwardGears,
+                    ClutchlessUpshift = ChoiceValue(_clutchlessUpshift),
+                    AutomaticCut = ChoiceValue(_automaticCut),
+                    AutomaticCutMethod = _automaticCutMethod.Text,
+                    ClutchlessDownshift = ChoiceValue(_clutchlessDownshift),
+                    AutomaticBlip = ChoiceValue(_automaticBlip),
+                    AutomaticBlipMethod = _automaticBlipMethod.Text,
+                    VisibleShiftActuators = visible,
+                    PrimaryShiftActuation = ChoiceValue(_primaryActuation),
+                    ActuationBasis = _actuationBasis.Text,
+                    WheelShape = ChoiceValue(_wheelShape),
+                    WheelIntegratedDisplay = ChoiceValue(_wheelDisplay),
+                    WheelShiftLights = ChoiceValue(_wheelShiftLights),
+                    WheelOpenTop = ChoiceValue(_wheelOpenTop),
+                    WheelNotes = _wheelNotes.Text,
+                    EvidenceNotes = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
+                        ? new string[0]
+                        : new[] { _evidenceNotes.Text.Trim() }
+                };
+                string path = _plugin.SaveVerificationDraft(draft, _observer.Text);
+                _status.Text = "Draft saved for review: " + path;
+                _save.IsEnabled = false;
+            }
+            catch (Exception exception)
+            {
+                _status.Text = "Could not save the draft: " + exception.Message;
+            }
+        }
+
+        private string[] VisibleActuators()
+        {
+            var values = new List<string>();
+            if (_visiblePaddles.IsChecked == true) values.Add("paddles");
+            if (_visibleSequentialStick.IsChecked == true) values.Add("sequential-stick");
+            if (_visibleHPattern.IsChecked == true) values.Add("h-pattern");
+            if (_visibleAutomaticLever.IsChecked == true) values.Add("automatic-lever");
+            if (values.Count == 0) values.Add("unknown");
+            return values.ToArray();
+        }
+
+        private void OpenFolderClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                _status.Text = "Opened drafts folder: " + _plugin.OpenVerificationFolder();
+            }
+            catch (Exception exception)
+            {
+                _status.Text = "Could not open the drafts folder: " + exception.Message;
+            }
+        }
+
+        private static void AddSubheading(Panel panel, string text)
+        {
+            panel.Children.Add(new TextBlock
+            {
+                Text = text,
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+                Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
+                Margin = new Thickness(0, 18, 0, 10),
+            });
+        }
+
+        private static void AddControlPair(
+            Panel panel,
+            string leftLabel,
+            Control left,
+            string rightLabel,
+            Control right)
+        {
+            var grid = new Grid { Margin = new Thickness(0, 0, 0, 12) };
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(16) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            StackPanel leftPanel = LabeledPanel(leftLabel, left);
+            StackPanel rightPanel = LabeledPanel(rightLabel, right);
+            Grid.SetColumn(leftPanel, 0);
+            Grid.SetColumn(rightPanel, 2);
+            grid.Children.Add(leftPanel);
+            grid.Children.Add(rightPanel);
+            panel.Children.Add(grid);
+        }
+
+        private static void AddLabeledControl(
+            Panel panel,
+            string label,
+            Control control,
+            string help)
+        {
+            StackPanel holder = LabeledPanel(label, control);
+            if (!string.IsNullOrWhiteSpace(help))
+            {
+                holder.Children.Add(new TextBlock
+                {
+                    Text = help,
+                    TextWrapping = TextWrapping.Wrap,
+                    Opacity = 0.65,
+                    Margin = new Thickness(0, 4, 0, 0),
+                });
+            }
+            holder.Margin = new Thickness(0, 0, 0, 12);
+            panel.Children.Add(holder);
+        }
+
+        private static StackPanel LabeledPanel(string label, Control control)
+        {
+            var holder = new StackPanel();
+            holder.Children.Add(new TextBlock
+            {
+                Text = label,
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 5),
+            });
+            holder.Children.Add(control);
+            return holder;
+        }
+
+        private static ComboBox CreateAssistCombo()
+        {
+            return CreateChoiceCombo(new[]
+            {
+                new Choice("Unknown", "unknown"),
+                new Choice("Disabled", "disabled"),
+                new Choice("Enabled", "enabled"),
+                new Choice("Unavailable", "unavailable"),
+            });
+        }
+
+        private static ComboBox CreateObservedCombo()
+        {
+            return CreateChoiceCombo(new[]
+            {
+                new Choice("Not tested", "not-tested"),
+                new Choice("Yes", "yes"),
+                new Choice("No", "no"),
+                new Choice("Unknown", "unknown"),
+            });
+        }
+
+        private static ComboBox CreateChoiceCombo(IEnumerable<Choice> choices)
+        {
+            var combo = new ComboBox
+            {
+                Height = 30,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+            foreach (Choice choice in choices)
+            {
+                combo.Items.Add(choice);
+            }
+            combo.SelectedIndex = 0;
+            return combo;
+        }
+
+        private static TextBox CreateTextBox()
+        {
+            return new TextBox
+            {
+                Height = 30,
+                VerticalContentAlignment = VerticalAlignment.Center,
+            };
+        }
+
+        private static TextBox CreateMultilineTextBox(double height)
+        {
+            return new TextBox
+            {
+                Height = height,
+                AcceptsReturn = true,
+                TextWrapping = TextWrapping.Wrap,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            };
+        }
+
+        private static CheckBox CreateCheckBox(string label)
+        {
+            return new CheckBox
+            {
+                Content = label,
+                Margin = new Thickness(0, 0, 20, 6),
+            };
+        }
+
+        private static Button CreateButton(
+            string label,
+            double width,
+            RoutedEventHandler handler,
+            Thickness margin)
+        {
+            var button = new Button
+            {
+                Content = label,
+                Width = width,
+                Height = 32,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Margin = margin,
+            };
+            button.Click += handler;
+            return button;
+        }
+
+        private static string ChoiceValue(ComboBox combo)
+        {
+            Choice choice = combo.SelectedItem as Choice;
+            return choice == null ? string.Empty : choice.Value;
+        }
+
+        private sealed class Choice
+        {
+            public Choice(string label, string value)
+            {
+                Label = label;
+                Value = value;
+            }
+
+            public string Label { get; private set; }
+            public string Value { get; private set; }
+
+            public override string ToString()
+            {
+                return Label;
+            }
+        }
+    }
+}

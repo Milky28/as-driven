@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date
+from datetime import date, datetime
 from typing import Any
 from urllib.parse import urlsplit
 
@@ -102,6 +102,8 @@ def _validate(
         value_format = rule.get("format")
         if value_format == "date" and not _is_date(instance):
             errors.append(f"{path}: expected an ISO date")
+        elif value_format == "date-time" and not _is_datetime(instance):
+            errors.append(f"{path}: expected an ISO date-time with timezone")
         elif value_format == "uri" and not _is_uri(instance):
             errors.append(f"{path}: expected an absolute URI")
 
@@ -182,3 +184,11 @@ def _is_uri(value: str) -> bool:
     except ValueError:
         return False
     return bool(parsed.scheme and (parsed.netloc or parsed.scheme == "file"))
+
+
+def _is_datetime(value: str) -> bool:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return parsed.tzinfo is not None

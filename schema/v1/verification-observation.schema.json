@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://authentic-controls.example/schema/v1/verification-observation.schema.json",
+  "$id": "urn:authentic-controls:schema:v1:verification-observation",
   "title": "Authentic Controls staged simulator verification observation",
   "type": "object",
   "additionalProperties": false,

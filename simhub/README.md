@@ -143,7 +143,8 @@ the previous record and does not increment the revision.
 The plugin also registers `AuthenticControls.RefreshDatabase`,
 `AuthenticControls.ShowPopup`, `AuthenticControls.HidePopup`, and
 `AuthenticControls.TogglePopup`. It also registers
-`AuthenticControls.OpenDiagnosticsFolder` and
+`AuthenticControls.OpenDiagnosticsFolder`,
+`AuthenticControls.OpenVerificationFolder`, and
 `AuthenticControls.ReturnToLiveCar` for optional button/event mappings.
 A new car identity automatically shows the
 overlay card for ten seconds by default, including an unmatched identity that
@@ -179,7 +180,7 @@ to the preferred screen position. It already contains all three popup sizes.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.10.10 is compatible with dataset 0.3.11; the previously installed beta
+0.10.11 is compatible with dataset 0.3.11; the previously installed beta
 bundled dataset 0.3.10. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
@@ -319,6 +320,12 @@ Version 0.10.9 packages the three-car LMP1 2005 verification batch without
 further surface changes.
 Version 0.10.10 packages the two-car LMP2 2005 verification batch without
 further surface changes.
+Version 0.10.11 adds guided in-game verification to the native settings page.
+It captures exact live identity, game/client versions, timestamp, and SimHub's
+reported gear-count suggestion, then saves the tester's assist, shift,
+cut/blip, cockpit-actuation, and wheel-detail answers as a local draft JSON.
+Drafts are never promoted automatically and can be opened from the settings
+page or the `AuthenticControls.OpenVerificationFolder` action.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

@@ -67,7 +67,29 @@ $settingsControl = $pluginType.GetMethod("GetWPFSettingsControl").Invoke(
 if ($null -eq $settingsControl -or $null -eq $settingsControl.Content) {
     throw "The Authentic Controls native settings page could not be created."
 }
-Write-Host "PASS: Authentic Controls 24x24 menu icon and native settings page"
+$verificationType = $pluginAssembly.GetType(
+    "AuthenticControls.Plugin.VerificationControl", $true)
+$queue = New-Object System.Collections.Queue
+$queue.Enqueue($settingsControl)
+$verificationFound = $false
+while ($queue.Count -gt 0) {
+    $node = $queue.Dequeue()
+    if ($verificationType.IsInstanceOfType($node)) {
+        $verificationFound = $true
+        break
+    }
+    if ($node -is [System.Windows.DependencyObject]) {
+        foreach ($child in [System.Windows.LogicalTreeHelper]::GetChildren($node)) {
+            if ($null -ne $child) {
+                $queue.Enqueue($child)
+            }
+        }
+    }
+}
+if (-not $verificationFound) {
+    throw "The native settings page does not contain guided verification."
+}
+Write-Host "PASS: Authentic Controls menu icon, settings page, and guided verification"
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 $tests = Join-Path $PSScriptRoot "AuthenticControls.Core.Tests\bin\$Configuration\AuthenticControls.Core.Tests.exe"

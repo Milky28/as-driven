@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using AuthenticControls.Core;
+using Newtonsoft.Json.Linq;
 
 namespace AuthenticControls.Core.Tests
 {
@@ -403,6 +404,71 @@ namespace AuthenticControls.Core.Tests
                     File.AppendAllText(unmatchedPath, "{invalid-json}" + Environment.NewLine);
                     var tolerantLog = new UnmatchedIdentityLog(unmatchedPath);
                     Equal(2, tolerantLog.Count, "ignores a malformed manually edited line");
+
+                    string verificationDirectory = Path.Combine(
+                        unmatchedDirectory, "verification-drafts");
+                    var verificationDraft = new VerificationObservationDraft
+                    {
+                        Simulator = "ams2",
+                        GameVersion = "1.6.9.91",
+                        ClientVersion = "SimHub 9.11.22; Authentic Controls 0.10.11",
+                        ObservedAtUtc = now,
+                        Observer = "Test observer",
+                        TelemetryName = "Test Prototype",
+                        TelemetryClass = "TEST_CLASS",
+                        InternalId = "Test Prototype",
+                        AutomaticClutch = "disabled",
+                        AutomaticShifting = "disabled",
+                        AutomaticThrottleBlip = "unavailable",
+                        AssistNotes = "No separate auto-blip assist is exposed.",
+                        MoveOffWithoutPhysicalClutch = "no",
+                        ForwardGears = 6,
+                        ClutchlessUpshift = "yes",
+                        AutomaticCut = "yes",
+                        AutomaticCutMethod = "Full-throttle shift accepted with visible interruption.",
+                        ClutchlessDownshift = "yes",
+                        AutomaticBlip = "yes",
+                        AutomaticBlipMethod = "Throttle trace spiked without pedal input.",
+                        VisibleShiftActuators = new[] { "paddles", "sequential-stick" },
+                        PrimaryShiftActuation = "sequential-paddles",
+                        ActuationBasis = "Visible paddles and driver animation.",
+                        WheelShape = "prototype",
+                        WheelIntegratedDisplay = "yes",
+                        WheelShiftLights = "yes",
+                        WheelOpenTop = "no",
+                        WheelNotes = "Closed prototype rim.",
+                        EvidenceNotes = new[] { "Draft only; requires reviewer approval." }
+                    };
+                    string verificationPath = VerificationObservationWriter.WriteDraft(
+                        verificationDirectory,
+                        verificationDraft);
+                    True(File.Exists(verificationPath), "writes a guided verification draft");
+                    JObject verificationJson = JObject.Parse(
+                        File.ReadAllText(verificationPath));
+                    Equal(
+                        "urn:authentic-controls:schema:v1:verification-observation",
+                        (string)verificationJson["$schema"],
+                        "links the verification schema");
+                    Equal("draft", (string)verificationJson["review_status"], "never auto-approves a draft");
+                    Equal(6, (int)verificationJson["tests"]["forward_gears"], "records confirmed forward gears");
+                    Equal(2, ((JArray)verificationJson["cockpit"]["visible_shift_actuators"]).Count, "records multiple visible actuators");
+                    True(
+                        ((string)verificationJson["observation_id"]).StartsWith(
+                            "ams2.test-prototype.",
+                            StringComparison.Ordinal),
+                        "creates a stable safe observation-id prefix");
+
+                    bool rejectedMissingObserver = false;
+                    verificationDraft.Observer = string.Empty;
+                    try
+                    {
+                        VerificationObservationWriter.CreatePayload(verificationDraft);
+                    }
+                    catch (InvalidDataException)
+                    {
+                        rejectedMissingObserver = true;
+                    }
+                    True(rejectedMissingObserver, "rejects a draft without an observer");
                 }
                 finally
                 {
