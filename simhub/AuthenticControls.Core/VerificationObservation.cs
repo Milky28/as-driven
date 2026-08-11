@@ -24,6 +24,7 @@ namespace AuthenticControls.Core
         public string AssistNotes { get; set; }
         public string MoveOffWithoutPhysicalClutch { get; set; }
         public int? ForwardGears { get; set; }
+        public string DirectGearSelectionBehavior { get; set; }
         public string ClutchlessUpshift { get; set; }
         public string AutomaticCut { get; set; }
         public string AutomaticCutMethod { get; set; }
@@ -102,6 +103,7 @@ namespace AuthenticControls.Core
             RequireChoice(draft.AutomaticThrottleBlip, AssistStates, "Automatic throttle-blip assist state");
             RequireChoice(draft.MoveOffWithoutPhysicalClutch, ObservedStates, "Move-off result");
             RequireChoice(draft.ClutchlessUpshift, ObservedStates, "Clutchless upshift result");
+            RequireChoice(draft.DirectGearSelectionBehavior, ObservedStates, "Direct gear-selection result");
             RequireChoice(draft.AutomaticCut, ObservedStates, "Automatic cut result");
             RequireChoice(draft.ClutchlessDownshift, ObservedStates, "Clutchless downshift result");
             RequireChoice(draft.AutomaticBlip, ObservedStates, "Automatic blip result");
@@ -151,6 +153,7 @@ namespace AuthenticControls.Core
             {
                 { "move_off_without_physical_clutch", draft.MoveOffWithoutPhysicalClutch },
                 { "forward_gears", draft.ForwardGears.HasValue ? new JValue(draft.ForwardGears.Value) : JValue.CreateNull() },
+                { "direct_gear_selection_behavior", draft.DirectGearSelectionBehavior },
                 { "clutchless_upshift", draft.ClutchlessUpshift },
                 { "automatic_cut", draft.AutomaticCut },
                 { "clutchless_downshift", draft.ClutchlessDownshift },

@@ -1,8 +1,9 @@
 # Ready-made overlay layout
 
 Two native SimHub overlay presets contain the Detailed, Compact, and Glance
-popup templates. Only the size selected on the plugin settings page becomes
-visible:
+popup templates plus the Guided Verification surface. Only the popup size
+selected on the plugin settings page becomes visible during normal use; the
+verification surface appears separately while a guided drive is active:
 
 Detailed is 840×360, Compact is 520×300, and Glance is 320×120. Compact includes
 the smaller driving-technique summary; Glance intentionally remains icon-only.
@@ -27,4 +28,6 @@ layout auto-start after positioning it if desired.
 Edit the installed or user-saved layout to choose a different screen position;
 do not edit the source layout merely for a local monitor arrangement. The
 repository installer preserves existing layout files by default so plugin
-upgrades do not reset these personalized positions.
+upgrades do not reset these personalized positions. Version 0.11.0 adds the
+verification surface to an existing preserved layout relative to its Detailed
+card, without moving the user's existing parts.

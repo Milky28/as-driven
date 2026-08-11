@@ -63,15 +63,37 @@ class SimHubDashTests(unittest.TestCase):
             "detailed": (840, 360),
             "compact": (520, 300),
             "glance": (320, 120),
+            "verification": (700, 220),
         }
         for variant, expected_size in expected_sizes.items():
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
             self.assertEqual(expected_size, (dashboard["BaseWidth"], dashboard["BaseHeight"]))
             expression = dashboard["Screens"][0]["Items"][0]["Bindings"]["Visible"]["Formula"]["Expression"]
-            self.assertEqual(
-                "[AuthenticControls.Popup" + variant.title() + "Visible]",
-                expression,
+            expected_expression = (
+                "[AuthenticControls.VerificationDriveVisible]"
+                if variant == "verification"
+                else "[AuthenticControls.Popup" + variant.title() + "Visible]"
             )
+            self.assertEqual(expected_expression, expression)
+
+    def test_guided_verification_surface_exposes_live_prompt_and_results(self):
+        dashboard = self.generator.build_dashboard(overlay=True, variant="verification")
+        serialized = json.dumps(dashboard)
+        named = {
+            value["Name"]: value
+            for value in walk(dashboard)
+            if isinstance(value, dict) and "Name" in value
+        }
+        self.assertEqual("GUIDED VERIFICATION", named["Eyebrow"]["Text"])
+        self.assertIn("AuthenticControls.VerificationDriveStepNumber", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveStepCount", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveTitle", serialized)
+        self.assertIn("AuthenticControls.VerificationDrivePrompt", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveResultReady", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveResult", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveStatus", serialized)
+        self.assertIn("AuthenticControls.VerificationDriveLiveValues", serialized)
+        self.assertIn("NEXT / ACCEPT", named["Controls"]["Text"])
 
     def test_cards_reference_only_explicit_plugin_values(self):
         dashboard = self.generator.build_dashboard(overlay=True)
@@ -294,7 +316,7 @@ class SimHubDashTests(unittest.TestCase):
     def test_generator_writes_parseable_native_artifacts(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             paths = self.generator.write_dashboards(Path(temporary_directory))
-            self.assertEqual(12, len(paths))
+            self.assertEqual(15, len(paths))
             for path in paths:
                 self.assertTrue(path.is_file())
                 self.assertEqual(path.parent.name, path.name.split(".djson", 1)[0])
@@ -316,11 +338,12 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("Authentic Controls", layout["Name"])
         self.assertTrue(layout["ShowWhenPausedOrInMenu"])
         parts = layout["OverlayLayoutParts"]
-        self.assertEqual(3, len(parts))
+        self.assertEqual(4, len(parts))
         expected = {
             "Authentic Controls Preflight Overlay": ((840.0, 360.0), (540.0, 60.0)),
             "Authentic Controls Preflight Compact": ((520.0, 300.0), (700.0, 60.0)),
             "Authentic Controls Preflight Glance": ((320.0, 120.0), (800.0, 60.0)),
+            "Authentic Controls Verification Drive": ((700.0, 220.0), (610.0, 430.0)),
         }
         part_ids = set()
         for part in parts:
@@ -332,7 +355,7 @@ class SimHubDashTests(unittest.TestCase):
             self.assertTrue(part["Placed"])
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
-        self.assertEqual(3, len(part_ids))
+        self.assertEqual(4, len(part_ids))
 
     def test_5120_layout_centers_all_sizes_near_the_top(self):
         standard = json.loads(OVERLAY_LAYOUT_PATH.read_text(encoding="utf-8"))
@@ -341,12 +364,17 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotEqual(standard["UniqueId"], layout["UniqueId"])
         part_ids = set()
         for part in layout["OverlayLayoutParts"]:
-            self.assertEqual(60.0, part["Top"])
+            expected_top = (
+                430.0
+                if Path(part["DashboardName"]).stem == "Authentic Controls Verification Drive"
+                else 60.0
+            )
+            self.assertEqual(expected_top, part["Top"])
             self.assertEqual(2560.0, part["Left"] + part["Width"] / 2)
             self.assertTrue(part["Placed"])
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
-        self.assertEqual(3, len(part_ids))
+        self.assertEqual(4, len(part_ids))
 
 
 if __name__ == "__main__":

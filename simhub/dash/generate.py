@@ -36,6 +36,7 @@ TEMPLATES = (
     TemplateSpec("detailed", "Authentic Controls Preflight Overlay", 840, 360),
     TemplateSpec("compact", "Authentic Controls Preflight Compact", 520, 300),
     TemplateSpec("glance", "Authentic Controls Preflight Glance", 320, 120),
+    TemplateSpec("verification", "Authentic Controls Verification Drive", 700, 220),
     TemplateSpec("display", "Authentic Controls Preflight Display", 900, 360, False),
 )
 
@@ -636,6 +637,31 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
     return factory.layer("UnmatchedState" if unmatched else "WaitingState", children, visible_expression=expression)
 
 
+def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
+    status_expression = (
+        "if([AuthenticControls.VerificationDriveResultReady], "
+        "[AuthenticControls.VerificationDriveResult], "
+        "[AuthenticControls.VerificationDriveStatus])"
+    )
+    progress_expression = (
+        "'STEP ' + [AuthenticControls.VerificationDriveStepNumber] + "
+        "' / ' + [AuthenticControls.VerificationDriveStepCount]"
+    )
+    return [
+        factory.rectangle("Card", 4, 4, 692, 212, CARD, radius=18, border_color=SLATE, border=2),
+        factory.rectangle("Accent", 20, 4, 660, 5, ACCENT, radius=3),
+        factory.text("Eyebrow", "GUIDED VERIFICATION", 24, 18, 250, 24, 13, ACCENT, font_weight="Bold"),
+        factory.text("Progress", "STEP 1 / 6", 520, 18, 152, 24, 13, MUTED, expression=progress_expression, horizontal_alignment=2, font_weight="Bold"),
+        factory.rectangle("HeaderRule", 24, 48, 648, 1, SLATE),
+        factory.text("Title", "Verification step", 24, 56, 648, 34, 24, WHITE, expression="[AuthenticControls.VerificationDriveTitle]", font_weight="Bold"),
+        factory.text("Prompt", "Follow the current test prompt.", 24, 91, 648, 46, 16, TEXT, expression="[AuthenticControls.VerificationDrivePrompt]", font_weight="Bold"),
+        factory.rectangle("StatusPanel", 24, 143, 648, 34, "#FF102333", radius=7, border_color=SLATE, border=1),
+        factory.text("Status", "Waiting for telemetry", 34, 146, 628, 28, 12, WHITE, expression=status_expression),
+        factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AuthenticControls.VerificationDriveLiveValues]"),
+        factory.text("Controls", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, ACCENT, horizontal_alignment=2, font_weight="Bold"),
+    ]
+
+
 def _template_spec(overlay: bool, variant: str) -> TemplateSpec:
     key = variant if overlay else "display"
     for spec in TEMPLATES:
@@ -647,28 +673,38 @@ def _template_spec(overlay: bool, variant: str) -> TemplateSpec:
 def build_dashboard(*, overlay: bool, variant: str = "detailed") -> dict[str, Any]:
     spec = _template_spec(overlay, variant)
     factory = ItemFactory(spec.width, spec.height)
-    children = _frame(factory)
-    if spec.key in ("detailed", "display"):
-        children.append(_matched_detailed(factory))
-    elif spec.key == "compact":
-        children.append(_matched_compact(factory))
+    if spec.key == "verification":
+        children = _verification_drive(factory)
     else:
-        children.append(_matched_glance(factory))
-    children.extend([
-        _empty_state(factory, unmatched=True, compact=spec.key == "compact"),
-        _empty_state(factory, unmatched=False, compact=spec.key == "compact"),
-    ])
+        children = _frame(factory)
+        if spec.key in ("detailed", "display"):
+            children.append(_matched_detailed(factory))
+        elif spec.key == "compact":
+            children.append(_matched_compact(factory))
+        else:
+            children.append(_matched_glance(factory))
+        children.extend([
+            _empty_state(factory, unmatched=True, compact=spec.key == "compact"),
+            _empty_state(factory, unmatched=False, compact=spec.key == "compact"),
+        ])
     visible_expression = None
     if overlay:
         property_suffix = {
             "detailed": "Detailed",
             "compact": "Compact",
             "glance": "Glance",
+            "verification": "Verification",
         }[spec.key]
         visible_expression = (
-            "[AuthenticControls.Popup" + property_suffix + "Visible]"
+            "[AuthenticControls.VerificationDriveVisible]"
+            if spec.key == "verification"
+            else "[AuthenticControls.Popup" + property_suffix + "Visible]"
         )
-    outer = factory.layer("PreflightCard", children, visible_expression=visible_expression)
+    outer = factory.layer(
+        "VerificationCard" if spec.key == "verification" else "PreflightCard",
+        children,
+        visible_expression=visible_expression,
+    )
     dashboard_id = str(uuid.uuid5(uuid.NAMESPACE_URL, "authentic-controls/" + spec.key + "/dashboard"))
     screen_id = str(uuid.uuid5(uuid.NAMESPACE_URL, "authentic-controls/" + spec.key + "/screen"))
     metadata = build_metadata(overlay=overlay, variant=variant)
@@ -716,7 +752,9 @@ def build_metadata(*, overlay: bool, variant: str = "detailed") -> dict[str, Any
         "Category": "Authentic Controls",
         "Title": spec.stem,
         "Description": (
-            size_name + " car-change popup with packaged control and technique icons."
+            "In-simulator prompts for the guided control verification drive."
+            if spec.key == "verification"
+            else size_name + " car-change popup with packaged control and technique icons."
             if overlay
             else "Persistent detailed display for authentic controls guidance."
         ),

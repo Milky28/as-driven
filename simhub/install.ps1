@@ -42,7 +42,8 @@ foreach ($relativePath in @(
     "DashTemplates\Authentic Controls Preflight Overlay",
     "DashTemplates\Authentic Controls Preflight Compact",
     "DashTemplates\Authentic Controls Preflight Glance",
-    "DashTemplates\Authentic Controls Preflight Display"
+    "DashTemplates\Authentic Controls Preflight Display",
+    "DashTemplates\Authentic Controls Verification Drive"
 )) {
     Backup-RelativePath $relativePath
 }
@@ -68,6 +69,7 @@ Copy-Item -LiteralPath (Join-Path $packageRoot "DashTemplates") -Destination $si
 New-Item -ItemType Directory -Path $installedLayoutDirectory -Force | Out-Null
 $preservedLayouts = @()
 $resizedLayouts = @()
+$extendedLayouts = @()
 foreach ($sourceLayout in Get-ChildItem -LiteralPath (Join-Path $packageRoot "OverlayLayouts") -Filter "*.olayout") {
     $installedLayout = Join-Path $installedLayoutDirectory $sourceLayout.Name
     if ((Test-Path -LiteralPath $installedLayout) -and -not $ReplaceOverlayLayouts) {
@@ -80,7 +82,9 @@ foreach ($sourceLayout in Get-ChildItem -LiteralPath (Join-Path $packageRoot "Ov
 # Version 0.9.6 narrowed the Detailed surface. Version 0.10.3 adds technique
 # guidance to Compact and raises its height from 260 to 300. Preserve customized
 # positions by keeping each migrated part centered, and leave any already-custom-
-# sized part untouched. The pre-install backup makes this migration reversible.
+# sized part untouched. Version 0.11.0 adds the in-sim verification surface to
+# existing layouts without replacing their customized preflight positions. The
+# pre-install backup makes these migrations reversible.
 if (-not $ReplaceOverlayLayouts) {
     foreach ($layout in Get-ChildItem -LiteralPath $installedLayoutDirectory -Filter "Authentic Controls*.olayout") {
         $payload = Get-Content -LiteralPath $layout.FullName -Raw | ConvertFrom-Json
@@ -101,6 +105,36 @@ if (-not $ReplaceOverlayLayouts) {
                 $changed = $true
             }
         }
+        $verificationPart = $payload.OverlayLayoutParts | Where-Object {
+            $_.DashboardName -like "*Authentic Controls Verification Drive.djson"
+        } | Select-Object -First 1
+        if ($null -eq $verificationPart) {
+            $detailedPart = $payload.OverlayLayoutParts | Where-Object {
+                $_.DashboardName -like "*Authentic Controls Preflight Overlay.djson"
+            } | Select-Object -First 1
+            if ($null -ne $detailedPart) {
+                $verificationLeft = [double]$detailedPart.Left + ([double]$detailedPart.Width / 2.0) - 350.0
+                $verificationTop = [double]$detailedPart.Top + [double]$detailedPart.Height + 10.0
+            }
+            else {
+                $verificationLeft = 610.0
+                $verificationTop = 430.0
+            }
+            $newPart = [pscustomobject]@{
+                DashboardName = "DashTemplates\Authentic Controls Verification Drive\Authentic Controls Verification Drive.djson"
+                Top = $verificationTop
+                Left = $verificationLeft
+                Width = 700.0
+                Height = 220.0
+                Version = 1
+                PartId = [Guid]::NewGuid().ToString()
+                Placed = $true
+                Transparent = $true
+            }
+            $payload.OverlayLayoutParts = @($payload.OverlayLayoutParts) + $newPart
+            $extendedLayouts += $layout.Name
+            $changed = $true
+        }
         if ($changed) {
             $json = $payload | ConvertTo-Json -Depth 20
             [System.IO.File]::WriteAllText(
@@ -119,4 +153,7 @@ if ($preservedLayouts.Count -gt 0) {
 }
 if ($resizedLayouts.Count -gt 0) {
     Write-Host ("Centered and resized updated overlay surfaces in: " + ($resizedLayouts -join ", "))
+}
+if ($extendedLayouts.Count -gt 0) {
+    Write-Host ("Added the guided verification surface to: " + ($extendedLayouts -join ", "))
 }

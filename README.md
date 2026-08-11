@@ -156,7 +156,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.11 contains 47 curated AMS2 records promoted through the reviewed
+Dataset 0.3.12 contains 51 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -185,6 +185,9 @@ shift-light, and open-top construction without changing the five cars' shape
 categories. It also introduces schema-enforced approvals, automatic backlog
 reconciliation, and the staged guided-verification contract. The SimHub client
 version remains independent.
+Dataset 0.3.12 promotes four separately reviewed guided-verification drafts:
+Alpine A110 GT4 Evo, Aston Martin Vantage GT3 Evo, Formula Vee Gen2, and
+Chevrolet Corvette C3.R Convertible.
 
 ## Licensing
 

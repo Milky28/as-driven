@@ -5,6 +5,7 @@ namespace AuthenticControls.Plugin
     internal sealed class VerificationCaptureContext
     {
         public string Simulator { get; set; }
+        public string SimulatorDisplayName { get; set; }
         public string GameVersion { get; set; }
         public string ClientVersion { get; set; }
         public DateTime ObservedAtUtc { get; set; }

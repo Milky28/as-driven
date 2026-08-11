@@ -128,6 +128,20 @@ $dashboardTarget = Join-Path $distRoot "DashTemplates"
 if ($LASTEXITCODE -ne 0) {
     throw "Dash Studio artifact generation failed."
 }
+$verificationDashboard = Join-Path $dashboardTarget "Authentic Controls Verification Drive\Authentic Controls Verification Drive.djson"
+if (-not (Test-Path -LiteralPath $verificationDashboard)) {
+    throw "The guided verification Dash Studio surface was not generated."
+}
+$verificationDashboardJson = Get-Content -LiteralPath $verificationDashboard -Raw
+foreach ($requiredProperty in @(
+    "AuthenticControls.VerificationDriveVisible",
+    "AuthenticControls.VerificationDrivePrompt",
+    "AuthenticControls.VerificationDriveResult"
+)) {
+    if (-not $verificationDashboardJson.Contains($requiredProperty)) {
+        throw "The guided verification surface is missing property: $requiredProperty"
+    }
+}
 
 $overlayLayoutTarget = Join-Path $distRoot "OverlayLayouts"
 New-Item -ItemType Directory -Path $overlayLayoutTarget -Force | Out-Null

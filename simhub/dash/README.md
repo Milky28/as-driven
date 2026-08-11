@@ -1,12 +1,14 @@
 # Dash Studio pre-flight cards
 
-`generate.py` creates four native SimHub Dash Studio DJSON artifacts:
+`generate.py` creates five native SimHub Dash Studio DJSON artifacts:
 
 - **Authentic Controls Preflight Overlay** — Detailed, 840×360.
 - **Authentic Controls Preflight Compact** — Compact, 520×300.
 - **Authentic Controls Preflight Glance** — Glance, 320×120.
 - **Authentic Controls Preflight Display** — a persistent 900×360 auxiliary
   display that does not use popup visibility.
+- **Authentic Controls Verification Drive** — a 700×220 in-simulator prompt
+  surface for the guided verification drive.
 
 The three overlay templates are click-through. Each follows its own explicit
 boolean property (`PopupDetailedVisible`, `PopupCompactVisible`, or
@@ -15,6 +17,13 @@ change shows it for ten seconds
 by default. `AuthenticControls.ShowPopup` keeps it visible for button recall,
 `AuthenticControls.HidePopup` hides it, and `AuthenticControls.TogglePopup`
 supports both operations with one button.
+
+The verification surface is independent of popup size and timeout. It becomes
+visible only while a guided test drive is active and shows the current maneuver,
+live gear/clutch/throttle/speed values, and the detected result. Map
+`VerificationDriveNext`, `VerificationDriveRetry`, `VerificationDriveSkip`, and
+`VerificationDriveCancel` to convenient wheel or button-box inputs so the test
+can be completed without alt-tabbing.
 
 Version 0.7.0 introduced a blue, letter-free visual identity. The current brand
 mark combines a steering wheel, physical shift lever, and simplified H-gate,
@@ -73,6 +82,7 @@ simhub/dist/AuthenticControls/DashTemplates/
   Authentic Controls Preflight Compact/
   Authentic Controls Preflight Glance/
   Authentic Controls Preflight Display/
+  Authentic Controls Verification Drive/
 ```
 
 The build remains non-installing. The package also includes the ready-made

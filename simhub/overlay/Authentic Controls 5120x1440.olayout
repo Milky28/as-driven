@@ -32,6 +32,17 @@
       "PartId": "3ed97793-39bf-5f26-81a9-906ad68a222a",
       "Placed": true,
       "Transparent": true
+    },
+    {
+      "DashboardName": "DashTemplates\\Authentic Controls Verification Drive\\Authentic Controls Verification Drive.djson",
+      "Top": 430.0,
+      "Left": 2210.0,
+      "Width": 700.0,
+      "Height": 220.0,
+      "Version": 1,
+      "PartId": "e0a846bf-4ad0-5b9e-8ffd-114e59c26dfb",
+      "Placed": true,
+      "Transparent": true
     }
   ],
   "AutoMode": 0,

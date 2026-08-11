@@ -106,7 +106,7 @@ class ValidationTests(unittest.TestCase):
             "observation_id": "ams2.test-car.20260811t120000000z-1234abcd",
             "simulator": "ams2",
             "game_version": "1.6.9.91",
-            "client_version": "SimHub 9.11.22; Authentic Controls 0.10.11",
+            "client_version": "SimHub 9.11.22; Authentic Controls 0.11.0",
             "observed_at": "2026-08-11T12:00:00.0000000Z",
             "observer": "Test observer",
             "identity": {
@@ -122,6 +122,7 @@ class ValidationTests(unittest.TestCase):
             "tests": {
                 "move_off_without_physical_clutch": "no",
                 "forward_gears": 6,
+                "direct_gear_selection_behavior": "not-tested",
                 "clutchless_upshift": "yes",
                 "automatic_cut": "yes",
                 "clutchless_downshift": "yes",
@@ -146,6 +147,11 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any("review_status: invalid value 'auto-approved'" in error for error in errors))
 
         observation["review_status"] = "draft"
+        observation["tests"]["direct_gear_selection_behavior"] = "sequential-ish"
+        errors = validate_instance(observation, schema, "observation")
+        self.assertTrue(any("direct_gear_selection_behavior: invalid value" in error for error in errors))
+
+        observation["tests"]["direct_gear_selection_behavior"] = "not-tested"
         observation["observed_at"] = "2026-08-11T12:00:00"
         errors = validate_instance(observation, schema, "observation")
         self.assertTrue(any("expected an ISO date-time with timezone" in error for error in errors))

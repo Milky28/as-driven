@@ -411,7 +411,7 @@ namespace AuthenticControls.Core.Tests
                     {
                         Simulator = "ams2",
                         GameVersion = "1.6.9.91",
-                        ClientVersion = "SimHub 9.11.22; Authentic Controls 0.10.11",
+                        ClientVersion = "SimHub 9.11.22; Authentic Controls 0.11.0",
                         ObservedAtUtc = now,
                         Observer = "Test observer",
                         TelemetryName = "Test Prototype",
@@ -423,6 +423,7 @@ namespace AuthenticControls.Core.Tests
                         AssistNotes = "No separate auto-blip assist is exposed.",
                         MoveOffWithoutPhysicalClutch = "no",
                         ForwardGears = 6,
+                        DirectGearSelectionBehavior = "not-tested",
                         ClutchlessUpshift = "yes",
                         AutomaticCut = "yes",
                         AutomaticCutMethod = "Full-throttle shift accepted with visible interruption.",
@@ -451,6 +452,7 @@ namespace AuthenticControls.Core.Tests
                         "links the verification schema");
                     Equal("draft", (string)verificationJson["review_status"], "never auto-approves a draft");
                     Equal(6, (int)verificationJson["tests"]["forward_gears"], "records confirmed forward gears");
+                    Equal("not-tested", (string)verificationJson["tests"]["direct_gear_selection_behavior"], "records the direct-selection test state");
                     Equal(2, ((JArray)verificationJson["cockpit"]["visible_shift_actuators"]).Count, "records multiple visible actuators");
                     True(
                         ((string)verificationJson["observation_id"]).StartsWith(
@@ -469,6 +471,55 @@ namespace AuthenticControls.Core.Tests
                         rejectedMissingObserver = true;
                     }
                     True(rejectedMissingObserver, "rejects a draft without an observer");
+
+                    var guidedDrive = new GuidedVerificationDrive();
+                    guidedDrive.Start(6);
+                    guidedDrive.AddSample(GuidedSample(now, 1, 0, 20, 1800, 0, 80, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 0, 20, 2000, 3, 100, true));
+                    True(guidedDrive.GetSnapshot().ResultReady, "detects clutch-free movement from rest");
+                    guidedDrive.Next();
+                    for (int observedGear = 1; observedGear <= 6; observedGear++)
+                    {
+                        guidedDrive.AddSample(GuidedSample(now, observedGear, 0, 30, 3000, 30, 100, true));
+                    }
+                    True(guidedDrive.GetSnapshot().ResultReady, "detects the suggested maximum gear");
+                    guidedDrive.Next();
+                    guidedDrive.AddSample(GuidedSample(now, 2, 0, 90, 5000, 70, 220, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(50), 2, 0, 90, 5100, 72, 40, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 90, 4200, 74, 35, true));
+                    True(guidedDrive.GetSnapshot().ResultReady, "detects a full-throttle clutchless upshift");
+                    guidedDrive.Next();
+                    guidedDrive.AddSample(GuidedSample(now, 4, 0, 0, 4500, 80, 100, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 4000, 78, 90, true));
+                    True(guidedDrive.GetSnapshot().ResultReady, "detects a clutchless downshift and throttle spike");
+                    guidedDrive.Next();
+                    GuidedDriveResults guidedResults = guidedDrive.GetResults();
+                    True(guidedDrive.GetSnapshot().Completed, "finishes after the positive automatic-blip path");
+                    Equal("yes", guidedResults.MoveOffWithoutPhysicalClutch, "prefills clutch-free move-off");
+                    Equal(6, guidedResults.ForwardGears.Value, "prefills observed forward gears");
+                    Equal("yes", guidedResults.ClutchlessUpshift, "prefills accepted clutchless upshift");
+                    Equal("yes", guidedResults.AutomaticCut, "prefills telemetry-supported automatic cut");
+                    Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
+                    Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
+                    guidedDrive.Next();
+                    False(guidedDrive.GetSnapshot().Visible, "closes the completed in-sim prompt");
+                    True(guidedDrive.GetSnapshot().Completed, "keeps completed results available for settings review after closing the prompt");
+
+                    var skippedAutomaticTests = new GuidedVerificationDrive();
+                    skippedAutomaticTests.Start(null);
+                    skippedAutomaticTests.Skip();
+                    skippedAutomaticTests.Skip();
+                    skippedAutomaticTests.Skip();
+                    skippedAutomaticTests.AddSample(GuidedSample(now, 2, 0, 80, 4500, 60, 150, true));
+                    skippedAutomaticTests.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 20, 3900, 62, 140, true));
+                    skippedAutomaticTests.Next();
+                    skippedAutomaticTests.Skip();
+                    skippedAutomaticTests.AddSample(GuidedSample(now, 4, 0, 0, 4300, 70, 120, true));
+                    skippedAutomaticTests.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 3800, 68, 115, true));
+                    skippedAutomaticTests.Next();
+                    GuidedDriveResults skippedResults = skippedAutomaticTests.GetResults();
+                    Equal("not-tested", skippedResults.AutomaticCut, "does not infer no automatic cut when its test was skipped");
+                    Equal("not-tested", skippedResults.AutomaticBlip, "does not infer no automatic blip when its test was skipped");
                 }
                 finally
                 {
@@ -516,6 +567,29 @@ namespace AuthenticControls.Core.Tests
                 throw new InvalidOperationException(
                     label + ": expected '" + expected + "', got '" + actual + "'");
             }
+        }
+
+        private static GuidedTelemetrySample GuidedSample(
+            DateTime timestamp,
+            int gear,
+            double clutch,
+            double throttle,
+            double rpm,
+            double speedKmh,
+            double torque,
+            bool engineStarted)
+        {
+            return new GuidedTelemetrySample
+            {
+                TimestampUtc = timestamp,
+                Gear = gear,
+                Clutch = clutch,
+                Throttle = throttle,
+                Rpm = rpm,
+                SpeedKmh = speedKmh,
+                EngineTorque = torque,
+                EngineStarted = engineStarted
+            };
         }
     }
 }

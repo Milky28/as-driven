@@ -3,7 +3,7 @@
 The SimHub guided verification workflow produces staging evidence; it does not
 edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.10.11
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.11.0
 prefills the exact live telemetry name, class, game/client versions, timestamp,
 and SimHub's reported maximum gear count. The tester confirms the gear count
 and supplies the observations that require judgment.
@@ -40,11 +40,16 @@ the research backlog, or a curation approval.
 2. Expand **Guided in-game verification** and click
    **Start verification from live car**.
 3. Confirm the captured identity and exact game version.
-4. Complete the form. `Unknown` and `Not tested` are valid and preferable to a
-   guess.
-5. Click **Save draft observation**. The observer name is remembered locally
-   for the next draft.
-6. Use **Open drafts folder** to retrieve the JSON for review.
+4. Confirm that the listed assist settings describe the simulator's current
+   configuration, then click **Start in-sim guided drive**.
+5. Follow the overlay prompts. Map the Next, Retry, Skip, and Cancel actions to
+   convenient physical controls to avoid alt-tabbing.
+6. Return to the form to review the telemetry suggestions and complete cockpit
+   details. `Unknown` and `Not tested` are valid and preferable to a guess.
+7. Click **Save draft observation**. A prominent success message is shown and
+   the completed form collapses. The observer name is remembered locally for
+   the next draft.
+8. Use **Open drafts folder** to retrieve the JSON for review.
 
 Validate any exported draft from the repository root with:
 
@@ -55,11 +60,12 @@ python -m authentic_controls_db validate-observation path/to/observation.json
 ## Automation boundary
 
 The client automatically captures identity, versions, timestamp, and a
-suggested gear count. Cut/blip interpretation remains human-confirmed because
-throttle, RPM, and accepted shifts do not by themselves establish the modeled
-mechanism. Cockpit hardware and primary actuation also remain human-reviewed
-because game input bindings accept both stick and paddles for a sequential
-gearbox.
+suggested gear count. During the guided drive it can detect accepted shifts,
+clutch use, throttle input, an RPM/throttle blip, and a strong torque
+interruption. These are reviewable suggestions, not automatic database facts;
+ambiguous cut detection remains `unknown`. Cockpit hardware and primary
+actuation remain human-reviewed because game input bindings accept both stick
+and paddles for a sequential gearbox.
 
 Observation files belong in local or ignored staging storage until reviewed.
 Approved facts are copied into the appropriate simulator entry and cited by a

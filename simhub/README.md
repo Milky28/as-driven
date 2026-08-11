@@ -1,9 +1,9 @@
 # SimHub proof of concept
 
 This directory contains a read-only SimHub adapter for the independent JSON
-database. The plugin never rewrites curated data and does not contain overlay
-UI. Its job is to turn the current SimHub game/car identity into stable
-properties that a Dash Studio popup can consume.
+database. The plugin never rewrites curated data. It turns the current SimHub
+game/car identity into stable properties consumed by the packaged pre-flight
+cards and guided-verification overlay.
 
 ## Components
 
@@ -41,6 +41,7 @@ simhub/dist/AuthenticControls/
   DashTemplates/Authentic Controls Preflight Compact/...
   DashTemplates/Authentic Controls Preflight Glance/...
   DashTemplates/Authentic Controls Preflight Display/...
+  DashTemplates/Authentic Controls Verification Drive/...
   OverlayLayouts/Authentic Controls.olayout
   OverlayLayouts/Authentic Controls 5120x1440.olayout
   PluginsData/AuthenticControls/Database/data/v1/...
@@ -134,6 +135,16 @@ AuthenticControls.PopupSize
 AuthenticControls.PopupDetailedVisible
 AuthenticControls.PopupCompactVisible
 AuthenticControls.PopupGlanceVisible
+AuthenticControls.VerificationDriveVisible
+AuthenticControls.VerificationDriveCompleted
+AuthenticControls.VerificationDriveResultReady
+AuthenticControls.VerificationDriveStepNumber
+AuthenticControls.VerificationDriveStepCount
+AuthenticControls.VerificationDriveTitle
+AuthenticControls.VerificationDrivePrompt
+AuthenticControls.VerificationDriveStatus
+AuthenticControls.VerificationDriveResult
+AuthenticControls.VerificationDriveLiveValues
 ```
 
 `PopupRevision` increments once when a new matched car is observed. Repeated
@@ -146,6 +157,10 @@ The plugin also registers `AuthenticControls.RefreshDatabase`,
 `AuthenticControls.OpenDiagnosticsFolder`,
 `AuthenticControls.OpenVerificationFolder`, and
 `AuthenticControls.ReturnToLiveCar` for optional button/event mappings.
+Guided verification also registers `AuthenticControls.VerificationDriveNext`,
+`AuthenticControls.VerificationDriveRetry`,
+`AuthenticControls.VerificationDriveSkip`, and
+`AuthenticControls.VerificationDriveCancel`.
 A new car identity automatically shows the
 overlay card for ten seconds by default, including an unmatched identity that
 needs contribution. The duration can be set from 1–60 seconds on the
@@ -175,13 +190,13 @@ Controls** plugin page, choose Detailed (840×360), Compact (520×300), or Glanc
 (320×120), choose 1–60 seconds, and click **Save popup settings**. Compact and
 10 seconds are the defaults; both saved values are reused after restarting
 SimHub. Load the included **Authentic Controls** overlay layout once and move it
-to the preferred screen position. It already contains all three popup sizes.
+to the preferred screen position. It already contains all three popup sizes
+and the separate guided-verification surface.
 
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.10.11 is compatible with dataset 0.3.11; the previously installed beta
-bundled dataset 0.3.10. It packages the approved high-fidelity 128x128 raster
+0.11.0 packages dataset 0.3.12. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -326,6 +341,13 @@ reported gear-count suggestion, then saves the tester's assist, shift,
 cut/blip, cockpit-actuation, and wheel-detail answers as a local draft JSON.
 Drafts are never promoted automatically and can be opened from the settings
 page or the `AuthenticControls.OpenVerificationFolder` action.
+Version 0.11.0 adds a dedicated in-simulator verification surface and mapped
+Next, Retry, Skip, and Cancel actions. Telemetry can prefill reviewable results
+for move-off, gear count/direct selection, shift acceptance, cut, and blip;
+uncertain results remain unknown or not tested. The settings form now names the
+simulator beside its version, distinguishes simulator assist configuration,
+captures direct H-pattern selection, and makes successful draft saving more
+apparent before collapsing the completed form.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged
