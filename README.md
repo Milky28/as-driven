@@ -74,6 +74,10 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
+Dataset 0.3.12 contains 51 reviewed records. Its four newest records were
+promoted from versioned guided AMS2 observations while retaining official or
+manufacturer evidence separately from simulator behavior.
+
 The optional SimHub adapter has its own build and test command on Windows:
 
 ```powershell

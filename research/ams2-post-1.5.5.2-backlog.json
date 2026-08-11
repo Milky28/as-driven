@@ -37,7 +37,7 @@
     "model_events_with_verified_source_urls": 79,
     "model_events_with_explicit_source_gap": 2,
     "events_with_identity_comparison": 98,
-    "promoted_events": 37,
+    "promoted_events": 42,
     "non_standalone_source_events": 17,
     "unresearched_model_events": 0,
     "events_without_identity_comparison": 0
@@ -754,8 +754,12 @@
         "research_status": "weak_exact_real_world_mapping_in_game_validation_mandatory"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.chevrolet-corvette-c3-r-convertible",
+        "dataset_version": "0.3.12",
+        "scope": "This is a separate record so verified convertible behavior is not silently inherited by the closed C3.R. The unique real-world referent remains unknown."
+      }
     },
     {
       "calendar_year": 2024,
@@ -1691,8 +1695,12 @@
         "research_status": "partial-lineage-evidence"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.alpine-a110-gt4-evo",
+        "dataset_version": "0.3.12",
+        "scope": "Manufacturer GT4+ evidence is retained as successor lineage rather than silently substituted for the exact GT4 Evo."
+      }
     },
     {
       "calendar_year": 2025,
@@ -1927,8 +1935,12 @@
         "research_status": "partial-lineage-evidence"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.aston-martin-vantage-gt3-evo",
+        "dataset_version": "0.3.12",
+        "scope": "The mechanism permitting clutch-free move-off remains unknown. The unnamed second configuration mentioned by Reiza is not promoted."
+      }
     },
     {
       "calendar_year": 2025,
@@ -2279,8 +2291,12 @@
         "research_status": "partial-gear-count-only"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-vee-gen2",
+        "dataset_version": "0.3.12",
+        "scope": "Running shifts were accepted without clutch only with correct throttle technique. Gearbox construction remains unknown."
+      }
     },
     {
       "calendar_year": 2025,
@@ -5469,8 +5485,12 @@
         "research_status": "strong_for_h_pattern_partial_for_technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-vee-gen2",
+        "dataset_version": "0.3.12",
+        "scope": "Running shifts were accepted without clutch only with correct throttle technique. Gearbox construction remains unknown."
+      }
     },
     {
       "calendar_year": 2026,

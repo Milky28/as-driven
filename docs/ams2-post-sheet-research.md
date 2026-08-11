@@ -85,17 +85,23 @@ telemetry capture. Both moved without physical clutch input, used six paddle
 gears with automatic cut and blip, and showed D-shaped display rims. The V8
 Low Downforce identity inherits its verified base controls as an explicit
 untested aero assumption. The curated dataset now contains 47 records.
-The backlog now marks 37 release events as promoted, including aero variants
-that share a record, leaving 44 researched model/configuration events awaiting
-review or live validation.
+Dataset 0.3.12 promotes the first four guided-verification drafts: Alpine A110
+GT4 Evo, Aston Martin Vantage GT3 Evo, Formula Vee Gen2, and Chevrolet Corvette
+C3.R Convertible. The exact versioned drafts preserve assist setup, direct
+shift tests, cut/blip measurement basis, cockpit actuation, and orthogonal wheel
+details. The convertible is a separate record so its verified technique is not
+silently inherited by the older closed C3.R. The curated dataset now contains
+51 records.
+The backlog now marks 42 release events as promoted, including aero and current
+specification variants that share a record, leaving 39 researched
+model/configuration events awaiting review or live validation.
 
 ## Suggested verification order
 
-Start with cars that already have an exact observed SimHub identity and strong
-hardware evidence. This yields useful records with the least identity risk:
-
-1. Alpine A110 GT4 Evo, Aston Martin Vantage GT3 Evo, Formula Vee Gen2, and
-   Chevrolet Corvette C3.R Convertible.
+Continue with cars that already have an exact observed SimHub identity and
+strong hardware evidence. This yields useful records with the least identity
+risk; use the generated backlog's `promotion_status` and
+`recommended_action` columns rather than maintaining a duplicate static list.
 
 Keep generic Formula models, Stock USA generations, Super Trophy Truck, and
 Milano models in a later identity-first wave. Their release labels do not yet

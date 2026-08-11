@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.12",
+  "approved_at": "2026-08-11",
+  "record_id": "ams2.alpine-a110-gt4-evo",
+  "telemetry_name": "Alpine A110 GT4 Evo",
+  "telemetry_class": "GT4",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The guided draft directly records exact identity, standing-start clutch, six paddle gears, automatic cut/blip, and the closed round display rim with shift lights.",
+  "scope_notes": "Manufacturer GT4+ evidence is retained as successor lineage rather than silently substituted for the exact GT4 Evo."
+}

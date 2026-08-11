@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.12",
+  "approved_at": "2026-08-11",
+  "record_id": "ams2.chevrolet-corvette-c3-r-convertible",
+  "telemetry_name": "Chevrolet Corvette C3.R Convertible",
+  "telemetry_class": "TC70S",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The guided draft directly records exact identity, four direct H selections, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and the closed round rim.",
+  "scope_notes": "This is a separate record so verified convertible behavior is not silently inherited by the closed C3.R. The unique real-world referent remains unknown."
+}

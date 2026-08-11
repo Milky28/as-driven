@@ -11,6 +11,9 @@
     { "calendar_year": 2024, "item_name": "Lamborghini SC63", "record_id": "ams2.lamborghini-sc63" },
     { "calendar_year": 2024, "item_name": "Audi R8 LMS GT4", "record_id": "ams2.audi-r8-lms-gt4" },
     { "calendar_year": 2024, "item_name": "Ligier JS P320", "record_id": "ams2.ligier-js-p320" },
+    { "calendar_year": 2024, "item_name": "Chevrolet Corvette C3.R Convertible", "record_id": "ams2.chevrolet-corvette-c3-r-convertible" },
+    { "calendar_year": 2025, "item_name": "Alpine A110 GT4 Evo", "record_id": "ams2.alpine-a110-gt4-evo" },
+    { "calendar_year": 2025, "item_name": "Aston Martin Vantage GT3 Evo", "record_id": "ams2.aston-martin-vantage-gt3-evo" },
     { "calendar_year": 2025, "item_name": "Aston Martin Valkyrie Hypercar", "record_id": "ams2.aston-martin-valkyrie-hypercar" },
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GT4 Evo", "record_id": "ams2.aston-martin-vantage-gt4-evo" },
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GTE", "record_id": "ams2.aston-martin-vantage-gte" },
@@ -33,12 +36,14 @@
     { "calendar_year": 2025, "item_name": "Lola B0540 V8", "record_id": "ams2.lola-b05-40-v8" },
     { "calendar_year": 2025, "item_name": "Milano GT36 GT2", "record_id": "ams2.milano-gt36" },
     { "calendar_year": 2025, "item_name": "Porsche 996 RSR", "record_id": "ams2.porsche-996-gt3-rsr" },
+    { "calendar_year": 2025, "item_name": "Formula Vee Gen2", "record_id": "ams2.formula-vee-gen2" },
     { "calendar_year": 2026, "item_name": "Gillet Vertigo Streiff", "record_id": "ams2.gillet-vertigo-streiff" },
     { "calendar_year": 2026, "item_name": "Lister Storm GTM", "record_id": "ams2.lister-storm-gtm" },
     { "calendar_year": 2026, "item_name": "Panoz Esperante GTLM", "record_id": "ams2.panoz-esperante-gtlm" },
     { "calendar_year": 2026, "item_name": "Milano 55 GT1", "record_id": "ams2.milano-gt55" },
     { "calendar_year": 2026, "item_name": "Saleen S7-R", "record_id": "ams2.saleen-s7-r-gt1" },
     { "calendar_year": 2026, "item_name": "Spyker C8 Spyder GT2-R", "record_id": "ams2.spyker-c8-spyder-gt2-r" },
-    { "calendar_year": 2026, "item_name": "TVR Tuscan T400R", "record_id": "ams2.tvr-tuscan-t400r-gt2" }
+    { "calendar_year": 2026, "item_name": "TVR Tuscan T400R", "record_id": "ams2.tvr-tuscan-t400r-gt2" },
+    { "calendar_year": 2026, "item_name": "Formula Vee Gen2 2026 specification", "record_id": "ams2.formula-vee-gen2" }
   ]
 }

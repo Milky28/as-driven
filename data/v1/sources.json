@@ -248,7 +248,7 @@
       "published_or_updated_at": "2025-07-30",
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "Official release announcement adds the Aston Martin Valkyrie Hypercar, Vantage GT4 Evo, and Vantage GTE. Supports simulator identity and class placement, not control technique."
+      "notes": "Official release announcement adds the Alpine A110 GT4 Evo, Aston Martin Vantage GT3 Evo, Valkyrie Hypercar, Vantage GT4 Evo, and Vantage GTE. Supports simulator identity and class placement, not control technique."
     },
     {
       "source_id": "ams2.reiza-release.1.6.7.ligier-js-p4",
@@ -261,7 +261,7 @@
       "published_or_updated_at": "2025-08-30",
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "Official release announcement adds the Ligier JS P4 and Ligier European Series context. Supports simulator identity and class placement, not control technique."
+      "notes": "Official release announcement adds Formula Vee Gen2 with a five-speed gearbox and also adds the Ligier JS P4. Supports simulator identity, class placement, and Formula Vee gear count, but not driving technique."
     },
     {
       "source_id": "oreca.07.media-kit",
@@ -1044,6 +1044,139 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "AMS2 1.6.9.91 through SimHub 9.11.22 emitted Lola B05/40 Turbo / LMP2_05. Direct testing with Auto Clutch disabled confirmed clutch-free move-off, six paddle-selected gears, clutchless upshifts with automatic cut, clutchless downshifts with automatic blip, and a D-shaped display rim. The mechanism allowing move-off without physical clutch input was not established."
+    },
+    {
+      "source_id": "ams2.reiza-release.1.6.3.new-cars",
+      "title": "Automobilista 2 V1.6 Development Update - The New Cars",
+      "publisher": "Reiza Studios",
+      "author": "Renato Simioni",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2024-11-26",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official Reiza announcement identifies the open-top Corvette C3.R alternative as a game variant of the existing closed car. It establishes simulator identity context, not a unique real-world chassis or control specification."
+    },
+    {
+      "source_id": "alpine.a110-gt4-plus.release",
+      "title": "Alpine reveals the A110 GT4+",
+      "publisher": "Alpine",
+      "url": "https://media.alpinecars.com/alpine-reveals-the-a110-gt4/?lang=eng",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2025-03-20",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer source describes the GT4+ as a major evolution of the GT4 Evo and specifies a six-speed 3MO sequential gearbox, XAP paddle shift, and integrated-display wheel. This is strong lineage evidence but does not prove every control detail on the earlier Evo."
+    },
+    {
+      "source_id": "aston-martin.vantage-gt3-evo.release",
+      "title": "State-of-the-art Aston Martin Vantage GT3 spearheads new era in top-flight GT racing",
+      "publisher": "Aston Martin Lagonda",
+      "url": "https://media.astonmartin.com/state-of-the-art-aston-martin-vantage-gt3-spearheads-new-era-in-top-flight-gt-racing/?lang=eng",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2024-02-12",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer source identifies the exact 2024 Vantage GT3 as an evolution sharing the mechanical architecture of the retired 2018 Vantage GTE/GT3. It does not independently state the exact 2024 gear count or driving technique."
+    },
+    {
+      "source_id": "aston-martin.vantage-gt3-2018.release",
+      "title": "New Aston Martin Vantage GT3 and GT4 makes public debut at Le Mans",
+      "publisher": "Aston Martin Lagonda",
+      "url": "https://www.astonmartin.com/en-gb/our-world/news/2018/6/14/new-aston-martin-vantage-gt3-and-gt4-makes-public-debut-at-le-mans",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2018-06-14",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer source specifies the direct predecessor's Xtrac six-speed sequential gearbox and Alcon multi-plate clutch. Used as lineage evidence only; unchanged Evo details are not assumed without the live AMS2 check."
+    },
+    {
+      "source_id": "formula-vee-brasil.2026.h-pattern",
+      "title": "Formula Vee: o que e e como funciona a categoria",
+      "publisher": "Formula Vee Brasil",
+      "url": "https://fvee.com.br/blog/automobilismo/formula-vee-o-que-e-e-como-funciona/",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": "2026-03-06",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official category explainer specifies a manual H-pattern transmission for the current Formula Vee. It does not establish the AMS2 clutch, lift, blip, or wheel behavior by itself."
+    },
+    {
+      "source_id": "fasp.formula-vee-2025-regulations",
+      "title": "Formula Vee 2025 Regulamento Geral/Tecnico",
+      "publisher": "Federacao de Automobilismo de Sao Paulo",
+      "url": "https://fasp.faspnet.com.br/wp-content/uploads/2025/02/Formula-Vee-2025-tecnico.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": "2025-02-01",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official 2025 technical regulations specify the Naja01-D Formula Vee chassis with a longitudinal Volkswagen Gol five-speed gearbox and defined clutch system. The following season's exact shift technique is established separately by live testing."
+    },
+    {
+      "source_id": "fia.corvette.b-260.homologation",
+      "title": "Chevrolet Corvette homologation form B-260",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601078101/homologation_form_number_260_group_b.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official homologation evidence for a related C3-era Corvette shows a floor-shifted Doug Nash manual gearbox, conventional H gate, and hydraulic clutch. It does not uniquely identify Reiza's fictionalized C3.R Convertible or establish its exact control behavior."
+    },
+    {
+      "source_id": "ams2.local-live-alpine-a110-gt4-evo-controls.1.6.9.91",
+      "title": "Guided live AMS2 Alpine A110 GT4 Evo control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-6-nuerburgring-2025-endurance-pack-pt3-released-v1-6-6-3-live-now.35363/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.alpine-a110-gt4-evo.20260811t190704372z-1ca54bcc records AMS2 1.6.9.91 / GT4 with Auto Clutch and Auto Shifting disabled: clutch required from rest, six paddle gears, automatic cut and blip, and a closed round rim with integrated display and shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-aston-martin-vantage-gt3-evo-controls.1.6.9.91",
+      "title": "Guided live AMS2 Aston Martin Vantage GT3 Evo control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-6-nuerburgring-2025-endurance-pack-pt3-released-v1-6-6-3-live-now.35363/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.aston-martin-vantage-gt3-evo.20260811t192316072z-6669bc46 records AMS2 1.6.9.91 / GT3_Gen2 with Auto Clutch and Auto Shifting disabled: clutch-free move-off, six paddle gears, automatic cut and blip, and a closed GT-style rim without integrated display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-formula-vee-gen2-controls.1.6.9.91",
+      "title": "Guided live AMS2 Formula Vee Gen2 control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-7-released-now-updated-to-v1-6-7-2.35495/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.formula-vee-gen2.20260811t193625909z-a27eebe1 records AMS2 1.6.9.91 / F-Vee_Gen2 with assists disabled: clutch required from rest, five direct-selection H-pattern gears, lift-required clutchless upshifts, manual-blip clutchless downshifts, no automatic cut or blip, and an open-top yoke rim without display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-corvette-c3-r-convertible-controls.1.6.9.91",
+      "title": "Guided live AMS2 Chevrolet Corvette C3.R Convertible control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.chevrolet-corvette-c3-r-convertible.20260811t194923468z-f52a59d9 records AMS2 1.6.9.91 / TC70S with assists disabled: clutch required from rest, four direct-selection H-pattern gears, lift-required clutchless upshifts, manual-blip clutchless downshifts, no automatic cut or blip, and a closed round rim without display or shift lights."
     }
   ]
 }
