@@ -474,6 +474,8 @@ namespace AuthenticControls.Core.Tests
 
                     var guidedDrive = new GuidedVerificationDrive();
                     guidedDrive.Start(6);
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(-100), 0, 100, 0, 0, 0, 0, false));
+                    False(guidedDrive.GetSnapshot().ResultReady, "ignores an engine that was already stopped before the move-off test");
                     guidedDrive.AddSample(GuidedSample(now, 0, 100, 0, 1200, 0, 40, true));
                     guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 45, 0, 1300, 3, 60, true));
                     True(guidedDrive.GetSnapshot().ResultReady, "detects clutch-free automatic creep from a stationary sample");
@@ -505,6 +507,14 @@ namespace AuthenticControls.Core.Tests
                     guidedDrive.Next();
                     False(guidedDrive.GetSnapshot().Visible, "closes the completed in-sim prompt");
                     True(guidedDrive.GetSnapshot().Completed, "keeps completed results available for settings review after closing the prompt");
+
+                    var moveOffStall = new GuidedVerificationDrive();
+                    moveOffStall.Start(null);
+                    moveOffStall.AddSample(GuidedSample(now, 0, 0, 0, 0, 0, 0, false));
+                    moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(100), 0, 0, 0, 1200, 0, 30, true));
+                    moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(200), 1, 0, 20, 0, 0, 0, false));
+                    True(moveOffStall.GetSnapshot().ResultReady, "detects a stall only after first observing the engine running");
+                    True(moveOffStall.GetSnapshot().Result.Contains("standing-start clutch is required"), "reports the post-start stall as a standing-start clutch requirement");
 
                     var skippedAutomaticTests = new GuidedVerificationDrive();
                     skippedAutomaticTests.Start(null);

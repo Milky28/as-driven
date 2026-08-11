@@ -91,6 +91,7 @@ namespace AuthenticControls.Core
         private bool _hasCompletedResults;
         private bool _fullThrottleTestFailed;
         private bool _coastDownshiftTestFailed;
+        private bool _engineWasRunning;
         private string _result = string.Empty;
         private double _maximumClutch;
         private double _minimumThrottle;
@@ -280,7 +281,11 @@ namespace AuthenticControls.Core
             switch (_phase)
             {
                 case Phase.MoveOff:
-                    if (!_armed && sample.SpeedKmh < 1.0)
+                    if (sample.EngineStarted && sample.Rpm >= 200.0)
+                    {
+                        _engineWasRunning = true;
+                    }
+                    if (!_armed && _engineWasRunning && sample.SpeedKmh < 1.0)
                     {
                         _armed = true;
                     }
@@ -292,7 +297,8 @@ namespace AuthenticControls.Core
                             "The car moved from rest while the test required no physical clutch input."
                                 + VehicleClutchSummary());
                     }
-                    else if (_armed && (!sample.EngineStarted || sample.Rpm < 200.0))
+                    else if (_armed && _engineWasRunning
+                        && (!sample.EngineStarted || sample.Rpm < 200.0))
                     {
                         SetResult(false, false, "The engine stopped before the car moved; standing-start clutch is required.");
                     }
@@ -494,6 +500,7 @@ namespace AuthenticControls.Core
             _armed = false;
             _attemptAccepted = false;
             _automaticActionObserved = false;
+            _engineWasRunning = false;
             _resultReady = false;
             _result = string.Empty;
             _maximumClutch = 0.0;
@@ -549,7 +556,7 @@ namespace AuthenticControls.Core
         {
             switch (phase)
             {
-                case Phase.MoveOff: return "Stop, select first, do not press the clutch, then apply light throttle.";
+                case Phase.MoveOff: return "Start the engine, stop completely, select first, do not press the clutch, then apply light throttle.";
                 case Phase.GearCount: return "Cycle through every forward gear. For an H-pattern, include a non-adjacent direct selection.";
                 case Phase.FullThrottleUpshift: return "While moving, keep the throttle above 70%, do not use the clutch, and request one upshift.";
                 case Phase.LiftedUpshift: return "Without using the clutch, lift the throttle and request one upshift.";

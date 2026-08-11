@@ -355,6 +355,9 @@ shift tests. The activity is shown as `Vehicle clutch` and retained as evidence.
 Version 0.11.2 arms the move-off test from a stationary telemetry sample rather
 than requiring first gear and throttle to coincide at zero speed. This captures
 internal-clutch creep that begins as soon as a forward gear is selected.
+Version 0.11.3 ignores an engine that is already stopped when the move-off test
+begins. A standing-start stall is recorded only after telemetry first confirms
+that the engine was running; the overlay prompt now tells the tester to start it.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged
