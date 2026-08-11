@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .audit_boundaries import audit_evidence_boundaries
 from .importers.ams2 import import_ams2_csv
 from .importers.iracing import import_iracing_html
 from .promote import promote_approved_ams2
@@ -27,6 +28,13 @@ def _parser() -> argparse.ArgumentParser:
 
     validate = subparsers.add_parser("validate", help="validate the curated repository")
     validate.add_argument("--root", type=Path, default=Path.cwd())
+
+    boundaries = subparsers.add_parser(
+        "audit-boundaries",
+        help="report authentic-control claims supported only by simulator evidence",
+    )
+    boundaries.add_argument("--root", type=Path, default=Path.cwd())
+    boundaries.add_argument("--output", type=Path)
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
     ams2.add_argument("input", type=Path)
@@ -82,6 +90,19 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Validation failed with {len(errors)} error(s).")
             return 1
         print("Validation passed.")
+        return 0
+
+    if args.command == "audit-boundaries":
+        payload = audit_evidence_boundaries(args.root.resolve())
+        if args.output:
+            _write_json(args.output, payload)
+            print(f"Wrote evidence-boundary audit to {args.output}")
+        stats = payload["stats"]
+        print(
+            f"Audited {stats['records']} records: "
+            f"{stats['simulator_only_authentic_claims']} simulator-only authentic "
+            f"claim(s) across {stats['affected_records']} record(s)."
+        )
         return 0
 
     if args.command == "import-ams2":

@@ -6,6 +6,8 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from .schema_validation import validate_instance
+
 ID_RE = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 STATES = {"yes", "no", "unknown", "not-applicable"}
@@ -280,17 +282,169 @@ def _validate_record(
     return record_id
 
 
+def _simulator_identity_values(simulator: dict[str, Any], kind: str) -> set[str]:
+    return {
+        identity["value"]
+        for identity in simulator.get("identities", [])
+        if isinstance(identity, dict)
+        and identity.get("kind") == kind
+        and isinstance(identity.get("value"), str)
+    }
+
+
+def _validate_car_approval(
+    approval: dict[str, Any],
+    path: Path,
+    records: dict[str, dict[str, Any]],
+    errors: list[str],
+) -> None:
+    label = str(path)
+    record_id = approval.get("record_id")
+    record = records.get(record_id)
+    if record is None:
+        errors.append(f"{label}.record_id: no curated record {record_id!r}")
+        return
+
+    simulator = next(
+        (item for item in record.get("simulators", []) if item.get("simulator") == "ams2"),
+        None,
+    )
+    if simulator is None:
+        errors.append(f"{label}.record_id: curated record has no AMS2 simulator entry")
+        return
+
+    approved_names = [approval.get("telemetry_name")]
+    approved_names.extend(
+        item.get("value") if isinstance(item, dict) else item
+        for item in approval.get("additional_telemetry_names", [])
+    )
+    record_names = _simulator_identity_values(simulator, "telemetry-name")
+    for name in approved_names:
+        if name not in record_names:
+            errors.append(
+                f"{label}: approved telemetry name {name!r} is not an exact record identity"
+            )
+
+    approved_classes = [approval.get("telemetry_class")]
+    approved_classes.extend(approval.get("additional_telemetry_classes", []))
+    record_classes = _simulator_identity_values(simulator, "class-id")
+    for class_id in approved_classes:
+        if class_id not in record_classes:
+            errors.append(
+                f"{label}: approved telemetry class {class_id!r} is not an exact record identity"
+            )
+
+    if approval.get("observed_game_version") != simulator.get("verified_game_version"):
+        errors.append(
+            f"{label}.observed_game_version: does not match the curated AMS2 verification version"
+        )
+
+    controls = approval.get("approved_controls", {})
+    transmission = record["authentic_controls"]["transmission"]
+    expected = {
+        "forward_gears": transmission["forward_gears"],
+        "shift_actuation": transmission["shift_actuation"],
+        "shift_pattern": transmission["shift_pattern"],
+        "standing_start_clutch": transmission["standing_start_clutch"],
+        "throttle_lift": transmission["upshift"]["throttle_lift"],
+        "automatic_cut": simulator["behavior"]["shift_cut"],
+        "automatic_blip": simulator["behavior"]["auto_blip"],
+        "manual_blip": transmission["downshift"]["manual_blip"],
+        "wheel_rim_shape": simulator["behavior"]["wheel_rim_type"]["normalized"],
+    }
+    simulator_wheel = simulator["behavior"]["wheel_rim_type"]
+    for approval_name, behavior_name in (
+        ("wheel_integrated_display", "integrated_display"),
+        ("wheel_shift_lights", "shift_lights"),
+        ("wheel_open_top", "open_top"),
+    ):
+        if behavior_name in simulator_wheel:
+            expected[approval_name] = simulator_wheel[behavior_name]
+    if transmission["upshift"]["clutch"] == transmission["downshift"]["clutch"]:
+        expected["running_shift_clutch"] = transmission["upshift"]["clutch"]
+    elif "running_shift_clutch" in controls:
+        errors.append(
+            f"{label}.approved_controls.running_shift_clutch: cannot summarize different "
+            "upshift and downshift clutch requirements"
+        )
+
+    for name, value in controls.items():
+        if name in expected and value != expected[name]:
+            errors.append(
+                f"{label}.approved_controls.{name}: approved {value!r} does not match "
+                f"curated value {expected[name]!r}"
+            )
+
+
+def _validate_approval_record_references(
+    payload: dict[str, Any], path: Path, record_ids: set[str], errors: list[str]
+) -> None:
+    for collection_name in ("records", "identities"):
+        collection = payload.get(collection_name)
+        if not isinstance(collection, list):
+            continue
+        for index, item in enumerate(collection):
+            if not isinstance(item, dict) or "record_id" not in item:
+                continue
+            record_id = item["record_id"]
+            if record_id not in record_ids:
+                errors.append(
+                    f"{path}.{collection_name}[{index}].record_id: "
+                    f"no curated record {record_id!r}"
+                )
+    event_mappings = payload.get("event_mappings")
+    if isinstance(event_mappings, list):
+        seen: set[tuple[Any, Any]] = set()
+        for index, item in enumerate(event_mappings):
+            if not isinstance(item, dict):
+                continue
+            key = (item.get("calendar_year"), item.get("item_name"))
+            if key in seen:
+                errors.append(f"{path}.event_mappings[{index}]: duplicate release event {key!r}")
+            seen.add(key)
+            record_id = item.get("record_id")
+            if record_id not in record_ids:
+                errors.append(
+                    f"{path}.event_mappings[{index}].record_id: no curated record {record_id!r}"
+                )
+
+
 def validate_repository(root: Path) -> list[str]:
     errors: list[str] = []
     schema_dir = root / "schema" / "v1"
-    for name in ("car-record.schema.json", "source-record.schema.json", "dataset-index.schema.json"):
-        _load(schema_dir / name, errors)
+    schemas = {
+        name: _load(schema_dir / name, errors)
+        for name in (
+            "car-record.schema.json",
+            "source-record.schema.json",
+            "dataset-index.schema.json",
+            "curation-approval.schema.json",
+            "post-sheet-event-map.schema.json",
+            "verification-observation.schema.json",
+        )
+    }
 
     data_dir = root / "data" / "v1"
     sources = _load(data_dir / "sources.json", errors)
+    if sources is not None and schemas["source-record.schema.json"] is not None:
+        errors.extend(
+            validate_instance(
+                sources,
+                schemas["source-record.schema.json"],
+                str(data_dir / "sources.json"),
+            )
+        )
     source_ids = _validate_sources(sources, str(data_dir / "sources.json"), errors) if sources else set()
 
     index = _load(data_dir / "index.json", errors)
+    if index is not None and schemas["dataset-index.schema.json"] is not None:
+        errors.extend(
+            validate_instance(
+                index,
+                schemas["dataset-index.schema.json"],
+                str(data_dir / "index.json"),
+            )
+        )
     indexed: list[str] = []
     if index and _required(index, {"schema_version", "dataset_version", "released_at", "records"}, str(data_dir / "index.json"), errors):
         if index["schema_version"] != "1.0.0":
@@ -311,14 +465,39 @@ def validate_repository(root: Path) -> list[str]:
     if sorted(indexed) != actual_relative:
         errors.append("index.json: records must exactly match data/v1/cars/*.json")
 
-    record_ids: set[str] = set()
+    records: dict[str, dict[str, Any]] = {}
     for path in actual_paths:
         record = _load(path, errors)
         if record is None:
             continue
+        if schemas["car-record.schema.json"] is not None:
+            errors.extend(
+                validate_instance(
+                    record,
+                    schemas["car-record.schema.json"],
+                    str(path),
+                )
+            )
         record_id = _validate_record(record, path, source_ids, errors)
-        if record_id in record_ids:
+        if record_id in records:
             errors.append(f"{path}: duplicate record_id {record_id}")
         elif record_id:
-            record_ids.add(record_id)
+            records[record_id] = record
+
+    curation_dir = root / "curation"
+    for path in sorted(curation_dir.glob("*.json")):
+        approval = _load(path, errors)
+        if not isinstance(approval, dict):
+            continue
+        if "approved_controls" in approval:
+            approval_schema = schemas["curation-approval.schema.json"]
+            if approval_schema is not None:
+                errors.extend(validate_instance(approval, approval_schema, str(path)))
+            _validate_car_approval(approval, path, records, errors)
+        else:
+            if path.name == "ams2-post-sheet-event-map.json":
+                event_map_schema = schemas["post-sheet-event-map.schema.json"]
+                if event_map_schema is not None:
+                    errors.extend(validate_instance(approval, event_map_schema, str(path)))
+            _validate_approval_record_references(approval, path, set(records), errors)
     return errors

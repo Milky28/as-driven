@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "dataset_version", "released_at", "records"],
   "properties": {
+    "$schema": { "type": "string" },
     "schema_version": { "const": "1.0.0" },
     "dataset_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
     "released_at": { "type": "string", "format": "date" },
@@ -16,4 +17,3 @@
     }
   }
 }
-

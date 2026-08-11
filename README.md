@@ -42,11 +42,14 @@ curation/                    Explicit, reviewable promotion approvals
 authentic_controls_db/       Dependency-free validator and staging importers
 tests/                       Unit tests and small source-layout fixtures
 docs/data-model.md           Field semantics and confidence policy
+docs/evidence-boundaries.md  Real, simulated, and effective guidance layers
+docs/verification-observations.md  Guided in-game verification contract
 docs/importers.md            AMS2 and iRacing import/review design
 docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
 docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
 docs/simhub-roadmap.md       Planned read-only SimHub client
 simhub/                      .NET lookup library, plugin adapter, and diagnostics
+release/                     Independent database-release packaging
 ```
 
 ## Quick start
@@ -58,11 +61,28 @@ python -m authentic_controls_db validate
 python -m unittest discover -s tests -v
 ```
 
+Audit private-beta records that still need their real-world and simulator
+evidence separated:
+
+```shell
+python -m authentic_controls_db audit-boundaries --output build/evidence-boundaries.json
+```
+
 The optional SimHub adapter has its own build and test command on Windows:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\build.ps1
 ```
+
+Build a standalone database package without SimHub binaries:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-database.ps1
+```
+
+Database and plugin versions advance independently. A plugin package may carry
+a known-good data snapshot for first installation, while database-only releases
+can update compatible data without changing the client.
 
 See [simhub/README.md](simhub/README.md) for its properties, diagnostic command,
 packaging layout, and installation boundary.
@@ -126,7 +146,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.10 contains 47 curated AMS2 records promoted through the reviewed
+Dataset 0.3.11 contains 47 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -150,6 +170,11 @@ animation while retaining its visible cockpit lever as an explicit caveat.
 The 0.3.10 review adds the Lola B05/40 V8 and Turbo. Both directly verified
 clutch-free move-off, six paddle gears, automatic cut and blip, and D-shaped
 display rims; the move-off mechanism remains unknown.
+Dataset 0.3.11 adds orthogonal simulator wheel observations for display,
+shift-light, and open-top construction without changing the five cars' shape
+categories. It also introduces schema-enforced approvals, automatic backlog
+reconciliation, and the staged guided-verification contract. The SimHub client
+version remains independent.
 
 ## Licensing
 

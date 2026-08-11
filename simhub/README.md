@@ -178,8 +178,9 @@ to the preferred screen position. It already contains all three popup sizes.
 
 ## Current boundary
 
-It has been compiled against the installed SimHub 9.11.22 SDK. Version 0.10.10
-uses dataset 0.3.10 and packages the approved high-fidelity 128x128 raster
+It has been compiled against the installed SimHub 9.11.22 SDK. Client version
+0.10.10 is compatible with dataset 0.3.11; the previously installed beta
+bundled dataset 0.3.10. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous

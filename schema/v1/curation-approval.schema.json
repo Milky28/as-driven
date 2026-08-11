@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authentic-controls.example/schema/v1/curation-approval.schema.json",
+  "title": "Authentic Controls per-car curation approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_version",
+    "approved_at",
+    "record_id",
+    "telemetry_name",
+    "telemetry_class",
+    "observed_game_version",
+    "observed_through",
+    "approved_controls",
+    "confidence_notes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "dataset_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "approved_at": { "type": "string", "format": "date" },
+    "record_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "telemetry_name": { "type": "string", "minLength": 1 },
+    "additional_telemetry_names": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "basis"],
+        "properties": {
+          "value": { "type": "string", "minLength": 1 },
+          "basis": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "telemetry_class": { "type": "string", "minLength": 1 },
+    "additional_telemetry_classes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "observed_game_version": { "type": "string", "minLength": 1, "not": { "const": "latest" } },
+    "observed_through": { "type": "string", "minLength": 1 },
+    "approved_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "forward_gears",
+        "shift_actuation",
+        "standing_start_clutch",
+        "running_shift_clutch",
+        "automatic_cut",
+        "automatic_blip",
+        "wheel_rim_shape"
+      ],
+      "properties": {
+        "forward_gears": { "type": ["integer", "null"], "minimum": 1, "maximum": 20 },
+        "shift_actuation": {
+          "type": "string",
+          "enum": ["h-pattern", "sequential-stick", "sequential-paddles", "automatic-lever", "direct-selection", "unknown"]
+        },
+        "shift_pattern": {
+          "type": "string",
+          "enum": ["standard-h", "dogleg-h", "sequential", "automatic-gate", "direct", "unknown"]
+        },
+        "standing_start_clutch": {
+          "type": "string",
+          "enum": ["required", "not-required", "anti-stall-available", "unknown", "not-applicable"]
+        },
+        "running_shift_clutch": {
+          "type": "string",
+          "enum": ["required", "not-required", "optional", "unknown", "not-applicable"]
+        },
+        "throttle_lift": {
+          "type": "string",
+          "enum": ["required", "not-required", "partial", "unknown", "not-applicable"]
+        },
+        "automatic_cut": { "$ref": "#/$defs/state" },
+        "automatic_blip": { "$ref": "#/$defs/state" },
+        "manual_blip": {
+          "type": "string",
+          "enum": ["required", "not-required", "optional", "unknown", "not-applicable"]
+        },
+        "wheel_rim_shape": {
+          "type": "string",
+          "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
+        },
+        "wheel_integrated_display": { "$ref": "#/$defs/state" },
+        "wheel_shift_lights": { "$ref": "#/$defs/state" },
+        "wheel_open_top": { "$ref": "#/$defs/state" }
+      }
+    },
+    "confidence_notes": { "type": "string", "minLength": 1 },
+    "scope_notes": { "type": "string" },
+    "historical_notes": { "type": "string" }
+  },
+  "$defs": {
+    "state": {
+      "type": "string",
+      "enum": ["yes", "no", "unknown", "not-applicable"]
+    }
+  }
+}

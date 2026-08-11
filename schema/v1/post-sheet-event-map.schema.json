@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authentic-controls.example/schema/v1/post-sheet-event-map.schema.json",
+  "title": "AMS2 post-sheet release-event to curated-record map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema_version", "baseline_game_version", "event_mappings"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "baseline_game_version": { "type": "string", "minLength": 1 },
+    "event_mappings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["calendar_year", "item_name", "record_id"],
+        "properties": {
+          "calendar_year": { "type": "integer", "minimum": 2024, "maximum": 2200 },
+          "item_name": { "type": "string", "minLength": 1 },
+          "record_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" }
+        }
+      }
+    }
+  }
+}

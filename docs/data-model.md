@@ -29,10 +29,10 @@ not automatically evidence of an electronic auto-blip; a gearbox may instead
 wait for an acceptable engine speed.
 
 Wheel-rim shapes include `round`, `d-shaped`, `gt-style`, `prototype`,
-`formula`, and `yoke`, plus explicit `other` and `unknown` states. `gt-style`
-covers the observed open-top/no-display GT rims. `prototype` covers closed
-rectangular prototype rims with an integrated display, while `formula` remains
-distinct for Formula-car rims even where the current artwork is shared.
+`formula`, and `yoke`, plus explicit `other` and `unknown` states. Shape is
+separate from the optional `integrated_display`, `shift_lights`, and `open_top`
+fields. A D-shaped rim may therefore be represented with or without a display,
+and a prototype rim does not imply one merely because of its category.
 
 ## Simulator behavior and overrides
 
@@ -47,6 +47,11 @@ The v1 `behavior` block intentionally retains common source-facing fields:
 optional. This makes the initial AMS2 data useful without binding future
 consumers to a spreadsheet vocabulary or turning the project into a general
 vehicle database.
+
+Simulator-observed wheel details may also appear in
+`behavior.wheel_rim_type`. They do not silently establish the real rim. See
+`docs/evidence-boundaries.md` for the authentic, simulator, and effective
+guidance rules.
 
 ## Unknown, no, and not applicable
 

@@ -12,7 +12,10 @@ Review artifacts:
   source-evidence, uncertainty, and in-game-check detail;
 - `research/ams2-post-1.5.5.2-backlog.csv` is the compact sortable work queue;
 - `research/build_ams2_post_sheet_backlog.py` reproducibly merges the staged
-  annual research files in `build/`.
+  annual research files in `build/`;
+- `curation/ams2-post-sheet-event-map.json` explicitly connects release events
+  to records, while approval status and dataset version are resolved from the
+  checked-in per-car approval files.
 
 ## Inventory boundary
 
@@ -82,8 +85,8 @@ telemetry capture. Both moved without physical clutch input, used six paddle
 gears with automatic cut and blip, and showed D-shaped display rims. The V8
 Low Downforce identity inherits its verified base controls as an explicit
 untested aero assumption. The curated dataset now contains 47 records.
-The backlog now marks 21 release events as promoted, including aero variants
-that share a record, leaving 60 researched model/configuration events awaiting
+The backlog now marks 37 release events as promoted, including aero variants
+that share a record, leaving 44 researched model/configuration events awaiting
 review or live validation.
 
 ## Suggested verification order
@@ -91,8 +94,8 @@ review or live validation.
 Start with cars that already have an exact observed SimHub identity and strong
 hardware evidence. This yields useful records with the least identity risk:
 
-1. Alpine A110 GT4 Evo, Aston Martin Vantage GT3 Evo, Formula Vee Gen2, Spyker
-   C8 Spyder GT2-R, and Chevrolet Corvette C3.R Convertible.
+1. Alpine A110 GT4 Evo, Aston Martin Vantage GT3 Evo, Formula Vee Gen2, and
+   Chevrolet Corvette C3.R Convertible.
 
 Keep generic Formula models, Stock USA generations, Super Trophy Truck, and
 Milano models in a later identity-first wave. Their release labels do not yet

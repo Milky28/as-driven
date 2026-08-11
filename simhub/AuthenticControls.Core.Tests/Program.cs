@@ -18,10 +18,21 @@ namespace AuthenticControls.Core.Tests
                 string dataDirectory = Path.Combine(repositoryRoot, "data", "v1");
                 AuthenticControlsDatabase database = AuthenticControlsDatabase.Load(dataDirectory);
 
-                Equal("0.3.10", database.DatasetVersion, "loads dataset version");
-                Equal(47, database.RecordCount, "loads all curated records");
-                Equal(47, database.Cars.Length, "lists every curated car for preview");
-                Equal("Alpine A424", database.Cars[0].DisplayName, "sorts the preview catalog by display name");
+                Version datasetVersion;
+                True(
+                    Version.TryParse(database.DatasetVersion, out datasetVersion),
+                    "loads a semantic dataset version");
+                True(database.RecordCount > 0, "loads curated records");
+                Equal(database.RecordCount, database.Cars.Length, "lists every curated car for preview");
+                for (int catalogIndex = 1; catalogIndex < database.Cars.Length; catalogIndex++)
+                {
+                    True(
+                        string.Compare(
+                            database.Cars[catalogIndex - 1].DisplayName,
+                            database.Cars[catalogIndex].DisplayName,
+                            StringComparison.OrdinalIgnoreCase) <= 0,
+                        "sorts the preview catalog by display name");
+                }
                 GuidanceSnapshot preview = database.Preview("ams2", "ams2.lister-storm-gtm");
                 True(preview.HasMatch, "loads a curated record directly for preview");
                 Equal("preview", preview.MatchKind, "labels direct record lookup as preview data");

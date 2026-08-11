@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "sources"],
   "properties": {
+    "$schema": { "type": "string" },
     "schema_version": { "const": "1.0.0" },
     "sources": {
       "type": "array",
@@ -53,4 +54,3 @@
     }
   }
 }
-

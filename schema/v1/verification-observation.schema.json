@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authentic-controls.example/schema/v1/verification-observation.schema.json",
+  "title": "Authentic Controls staged simulator verification observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "observation_id", "simulator", "game_version", "observed_at",
+    "observer", "identity", "assists", "tests", "cockpit", "review_status"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "observation_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "simulator": { "type": "string", "enum": ["ams2", "iracing", "ac-evo", "ac-rally", "other"] },
+    "game_version": { "type": "string", "minLength": 1, "not": { "const": "latest" } },
+    "client_version": { "type": "string" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "observer": { "type": "string", "minLength": 1 },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["telemetry_name", "telemetry_class"],
+      "properties": {
+        "telemetry_name": { "type": "string", "minLength": 1 },
+        "telemetry_class": { "type": "string", "minLength": 1 },
+        "internal_id": { "type": "string" }
+      }
+    },
+    "assists": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["automatic_clutch", "automatic_shifting", "automatic_throttle_blip"],
+      "properties": {
+        "automatic_clutch": { "$ref": "#/$defs/assistState" },
+        "automatic_shifting": { "$ref": "#/$defs/assistState" },
+        "automatic_throttle_blip": { "$ref": "#/$defs/assistState" },
+        "notes": { "type": "string" }
+      }
+    },
+    "tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "move_off_without_physical_clutch", "forward_gears", "clutchless_upshift",
+        "automatic_cut", "clutchless_downshift", "automatic_blip"
+      ],
+      "properties": {
+        "move_off_without_physical_clutch": { "$ref": "#/$defs/observedState" },
+        "forward_gears": { "type": ["integer", "null"], "minimum": 1, "maximum": 20 },
+        "direct_gear_selection_behavior": { "type": "string" },
+        "clutchless_upshift": { "$ref": "#/$defs/observedState" },
+        "automatic_cut": { "$ref": "#/$defs/observedState" },
+        "automatic_cut_method": { "type": "string" },
+        "clutchless_downshift": { "$ref": "#/$defs/observedState" },
+        "automatic_blip": { "$ref": "#/$defs/observedState" },
+        "automatic_blip_method": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "cockpit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visible_shift_actuators", "primary_shift_actuation", "wheel_rim"],
+      "properties": {
+        "visible_shift_actuators": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["paddles", "sequential-stick", "h-pattern", "automatic-lever", "unknown"] }
+        },
+        "primary_shift_actuation": {
+          "type": "string",
+          "enum": ["h-pattern", "sequential-stick", "sequential-paddles", "automatic-lever", "direct-selection", "unknown"]
+        },
+        "actuation_basis": { "type": "string" },
+        "wheel_rim": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["shape", "integrated_display", "shift_lights", "open_top"],
+          "properties": {
+            "shape": { "type": "string", "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"] },
+            "integrated_display": { "$ref": "#/$defs/observedState" },
+            "shift_lights": { "$ref": "#/$defs/observedState" },
+            "open_top": { "$ref": "#/$defs/observedState" },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "evidence_notes": { "type": "array", "items": { "type": "string" } },
+    "review_status": { "type": "string", "enum": ["draft", "reviewed", "approved", "rejected"] },
+    "reviewer": { "type": "string" }
+  },
+  "$defs": {
+    "observedState": { "type": "string", "enum": ["yes", "no", "unknown", "not-tested"] },
+    "assistState": { "type": "string", "enum": ["enabled", "disabled", "unavailable", "unknown"] }
+  }
+}

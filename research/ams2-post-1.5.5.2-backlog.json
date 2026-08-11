@@ -37,7 +37,7 @@
     "model_events_with_verified_source_urls": 79,
     "model_events_with_explicit_source_gap": 2,
     "events_with_identity_comparison": 98,
-    "promoted_events": 21,
+    "promoted_events": 37,
     "non_standalone_source_events": 17,
     "unresearched_model_events": 0,
     "events_without_identity_comparison": 0
@@ -333,7 +333,7 @@
       "promotion": {
         "record_id": "ams2.alpine-a424",
         "dataset_version": "0.3.4",
-        "scope": "Base Alpine A424 / LMDh was live-tested; exact Low Downforce identity inherits controls as an approved aero-package assumption."
+        "scope": "The exact base telemetry identity Alpine A424 / LMDh was live-tested. Alpine A424 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested and that distinction must remain visible in the record notes."
       }
     },
     {
@@ -662,7 +662,7 @@
       "promotion": {
         "record_id": "ams2.audi-r8-lms-gt4",
         "dataset_version": "0.3.4",
-        "scope": "Exact GT4 identity and complete user-facing shift behavior directly verified."
+        "scope": "Only the exact Audi R8 LMS GT4 / GT4 telemetry identity is approved; no fuzzy aliases are introduced."
       }
     },
     {
@@ -918,7 +918,7 @@
       "promotion": {
         "record_id": "ams2.chevrolet-corvette-z06-gt3r",
         "dataset_version": "0.3.4",
-        "scope": "Base GT3 Gen2 identity directly verified; Low Downforce inherits the verified controls as an approved aero-only assumption."
+        "scope": "The base telemetry identity was live-tested. Chevrolet Corvette Z06 GT3.R - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested."
       }
     },
     {
@@ -1078,7 +1078,7 @@
       "promotion": {
         "record_id": "ams2.lamborghini-huracan-super-trofeo-evo2",
         "dataset_version": "0.3.4",
-        "scope": "Exact current EVO2 identity directly verified; the earlier LP 620-2 identity remains deliberately separate."
+        "scope": "Approval applies only to the exact Lamborghini Huracan Super Trofeo EVO2 / Super Trofeo identity. The older LamborghiniHuracanLP6202SuperTrofeo identity is a different predecessor and is not an alias."
       }
     },
     {
@@ -1166,7 +1166,7 @@
       "promotion": {
         "record_id": "ams2.lamborghini-sc63",
         "dataset_version": "0.3.4",
-        "scope": "Base LMDh identity directly verified; Low Downforce inherits the verified controls as an approved aero-only assumption."
+        "scope": "Lamborghini SC63 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested."
       }
     },
     {
@@ -1320,7 +1320,7 @@
       "promotion": {
         "record_id": "ams2.ligier-js-p217",
         "dataset_version": "0.3.4",
-        "scope": "Exact Ligier JS P217 model identity directly verified in LMP2 and LMP2_Gen1 class contexts."
+        "scope": "One shared telemetry-name record covers the two directly observed class contexts: LMP2 for Gen2 and LMP2_Gen1 for Gen1. No fuzzy or generation-suffix identity matching is used."
       }
     },
     {
@@ -1395,7 +1395,7 @@
       "promotion": {
         "record_id": "ams2.ligier-js-p320",
         "dataset_version": "0.3.4",
-        "scope": "Exact P1Gen2 identity directly verified, including the required standing-start clutch."
+        "scope": "The required standing-start clutch applies only to move-off; running upshifts and downshifts were directly verified as clutch-free."
       }
     },
     {
@@ -1471,7 +1471,7 @@
       "promotion": {
         "record_id": "ams2.oreca-07",
         "dataset_version": "0.3.4",
-        "scope": "Exact model directly verified in LMP2 and LMP2_Gen1; Low Downforce inherits the verified controls as an approved aero-only assumption."
+        "scope": "One shared telemetry-name record covers LMP2 and LMP2_Gen1. Oreca 07 - Low Downforce is approved as an exact aero-package alias with inherited controls; its behavior was not separately live-tested."
       }
     },
     {
@@ -1779,7 +1779,7 @@
       "promotion": {
         "record_id": "ams2.aston-martin-valkyrie-hypercar",
         "dataset_version": "0.3.4",
-        "scope": "Exact base LMDh identity directly verified; no unobserved Low Downforce alias was added."
+        "scope": "Only the exact base telemetry identity was approved. No Low Downforce alias is introduced because no distinct exact telemetry identity was observed."
       }
     },
     {
@@ -2035,7 +2035,7 @@
       "promotion": {
         "record_id": "ams2.aston-martin-vantage-gt4-evo",
         "dataset_version": "0.3.4",
-        "scope": "Exact GT4 identity and its six usable paddle-selected ratios directly verified."
+        "scope": "The official source describes a production-derived eight-speed transmission configured to use six forward ratios. Approval records the six-ratio sequential-paddle interface actually presented to the AMS2 driver without erasing that hardware distinction."
       }
     },
     {
@@ -2105,7 +2105,7 @@
       "promotion": {
         "record_id": "ams2.aston-martin-vantage-gte",
         "dataset_version": "0.3.4",
-        "scope": "Exact GTE identity and complete user-facing shift behavior directly verified."
+        "scope": "Approval applies to the exact Aston Martin Vantage GTE / GTE identity observed in AMS2 1.6.9.91."
       }
     },
     {
@@ -2350,7 +2350,7 @@
       "promotion": {
         "record_id": "ams2.ligier-js-p4",
         "dataset_version": "0.3.4",
-        "scope": "Exact Ligier European Series identity and complete user-facing shift behavior directly verified."
+        "scope": "The approval covers the exact Ligier JS P4 / LES_2025 telemetry identity only; no fuzzy matching is used."
       }
     },
     {
@@ -2420,7 +2420,7 @@
       "promotion": {
         "record_id": "ams2.lamborghini-diablo-sv-r",
         "dataset_version": "0.3.5",
-        "scope": "Exact ST96 identity directly verified as a five-speed dogleg H-pattern, resolving the source conflict for the AMS2 representation."
+        "scope": "The five-versus-six-speed source conflict is resolved for the exact AMS2 representation only."
       }
     },
     {
@@ -2571,8 +2571,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.lamborghini-murcielago-r-gt",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT1_05 base identity directly verified with six-speed sequential-stick controls."
+        "dataset_version": "0.3.6",
+        "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
     },
     {
@@ -2978,8 +2978,12 @@
         "research_status": "strong-variant-warning"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.aston-martin-dbr9",
+        "dataset_version": "0.3.7",
+        "scope": "Historical DBR9 gearbox variants exist; this approval applies only to the exact modeled AMS2 identity. Generic sequential input handling is not recorded as a car characteristic. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3041,8 +3045,12 @@
         "research_status": "base-source-only"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.aston-martin-dbr9",
+        "dataset_version": "0.3.7",
+        "scope": "Historical DBR9 gearbox variants exist; this approval applies only to the exact modeled AMS2 identity. Generic sequential input handling is not recorded as a car characteristic. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3108,8 +3116,12 @@
         "research_status": "usable-secondary-source"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.audi-r8-lmp1",
+        "dataset_version": "0.3.9",
+        "scope": "Historical paddle evidence is currently secondary and remains marked for primary-source replacement; simulator behavior applies to the exact identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3239,8 +3251,12 @@
         "research_status": "strong-gearbox-partial-technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.chevrolet-corvette-c5-r",
+        "dataset_version": "0.3.7",
+        "scope": "The exact historical chassis year remains qualified; the approval applies to the exact AMS2 telemetry identity. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3302,8 +3318,12 @@
         "research_status": "base-source-only"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.chevrolet-corvette-c5-r",
+        "dataset_version": "0.3.7",
+        "scope": "The exact historical chassis year remains qualified; the approval applies to the exact AMS2 telemetry identity. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3370,8 +3390,12 @@
         "research_status": "partial-secondary-source"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.courage-c60-hybrid",
+        "dataset_version": "0.3.9",
+        "scope": "Historical family evidence remains secondary; exact AMS2 telemetry resolves the release label to Courage C60 Hybrid."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3437,8 +3461,12 @@
         "research_status": "partial-secondary-source"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.dallara-sp1",
+        "dataset_version": "0.3.9",
+        "scope": "A cockpit sequential lever is also visible. Paddle actuation is the reviewed modeled control, but the animation-based distinction remains explicitly falsifiable."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3522,7 +3550,7 @@
       "promotion": {
         "record_id": "ams2.dodge-viper-gts-r",
         "dataset_version": "0.3.3",
-        "scope": "Exact GT1_05 identity was independently researched and live-tested before the post-sheet backlog was compiled."
+        "scope": "Sequential actuation and standing-start clutch behavior were directly tested. Automatic cut and blip appeared present but were not telemetry-measured, so the promoted record marks the combined simulator behavior medium-confidence."
       }
     },
     {
@@ -3588,8 +3616,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.lamborghini-murcielago-r-gt",
-        "dataset_version": "0.3.5",
-        "scope": "Exact Low Downforce identity inherits the verified base controls as an approved aero-only assumption and was not separately tested."
+        "dataset_version": "0.3.6",
+        "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
     },
     {
@@ -3652,8 +3680,12 @@
         "research_status": "base-source-only"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lola-b05-40-v8",
+        "dataset_version": "0.3.10",
+        "scope": "The move-off mechanism was not established. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3717,8 +3749,12 @@
         "research_status": "strong-gearbox-partial-technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lola-b05-40-turbo",
+        "dataset_version": "0.3.10",
+        "scope": "The mechanism allowing move-off without physical clutch input was not established and is not inferred."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3785,8 +3821,12 @@
         "research_status": "strong-gearbox-partial-technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lola-b05-40-v8",
+        "dataset_version": "0.3.10",
+        "scope": "The move-off mechanism was not established. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3856,8 +3896,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.maserati-mc12-gt1",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT1_05 base identity directly verified with six-speed sequential-stick controls."
+        "dataset_version": "0.3.6",
+        "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
     },
     {
@@ -3923,8 +3963,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.maserati-mc12-gt1",
-        "dataset_version": "0.3.5",
-        "scope": "Exact Low Downforce identity inherits the verified base controls as an approved aero-only assumption and was not separately tested."
+        "dataset_version": "0.3.6",
+        "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
     },
     {
@@ -3973,8 +4013,12 @@
         "research_status": "unresolved-fictional-model"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.milano-gt36",
+        "dataset_version": "0.3.8",
+        "scope": "No real-world analogue is approved; this record is limited to the exact fictional AMS2 identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4041,8 +4085,12 @@
         "research_status": "useful-control-specific-secondary"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.porsche-996-gt3-rsr",
+        "dataset_version": "0.3.8",
+        "scope": "Historical evidence supports the sequential gearbox and ignition cut; simulator-specific start and downshift behavior comes from the exact live test."
+      }
     },
     {
       "calendar_year": 2025,
@@ -6031,8 +6079,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.gillet-vertigo-streiff",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GTR_04 identity directly verified with six-speed sequential-stick controls."
+        "dataset_version": "0.3.6",
+        "scope": "Exact historical year/chassis mapping remains qualified; only the exact AMS2 identity is approved."
       }
     },
     {
@@ -6151,8 +6199,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.lister-storm-gtm",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT1_05 identity directly verified with six-speed sequential-stick controls."
+        "dataset_version": "0.3.6",
+        "scope": "The precise historical chassis represented remains qualified; only the exact AMS2 identity is approved."
       }
     },
     {
@@ -6300,8 +6348,12 @@
         "research_status": "conditional_on_unconfirmed_ferrari_575_gtc_analogue"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.milano-gt55",
+        "dataset_version": "0.3.7",
+        "scope": "No real-world analogue is approved. Ferrari 575 GTC material remains contextual only; the exact AMS2 telemetry identity is Milano GT55."
+      }
     },
     {
       "calendar_year": 2026,
@@ -6369,8 +6421,8 @@
       "promotion_status": "approved",
       "promotion": {
         "record_id": "ams2.panoz-esperante-gtlm",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT2_05 identity directly verified with six-speed sequential-stick controls."
+        "dataset_version": "0.3.6",
+        "scope": "Only the exact AMS2 identity and explicitly supported control claims are approved."
       }
     },
     {
@@ -6445,8 +6497,12 @@
         "research_status": "partial_adjacent_year_gearbox_evidence"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.saleen-s7-r-gt1",
+        "dataset_version": "0.3.7",
+        "scope": "Historical sources support the S7-R sequential family but not every 2005 gearbox revision; simulator behavior is approved only for the exact observed identity."
+      }
     },
     {
       "calendar_year": 2026,
@@ -6522,8 +6578,12 @@
         "research_status": "conflicting_secondary_sources"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.spyker-c8-spyder-gt2-r",
+        "dataset_version": "0.3.8",
+        "scope": "The live test resolves the five-versus-six-speed source conflict only for the exact modeled AMS2 car, not every historical chassis."
+      }
     },
     {
       "calendar_year": 2026,
@@ -6587,8 +6647,12 @@
         "research_status": "primary_family_evidence_exact_race_controls_partial"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.tvr-tuscan-t400r-gt2",
+        "dataset_version": "0.3.8",
+        "scope": "Period manufacturer evidence is family-level; the approved behavior applies to the exact observed AMS2 identity."
+      }
     }
   ]
 }

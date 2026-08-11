@@ -13,7 +13,7 @@
   },
   "simulators": [{
     "simulator": "ams2", "identities": [{ "kind": "telemetry-name", "value": "Lola B05/40 Turbo" }, { "kind": "class-id", "value": "LMP2_05" }],
-    "behavior": { "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes", "wheel_rim_type": { "normalized": "d-shaped", "source_label": "live-cockpit-d-shaped-display" }, "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Clutch-free move-off, six paddle gears, automatic cut and blip, and D-shaped display rim were directly observed; the move-off mechanism remains unknown."] },
+    "behavior": { "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes", "wheel_rim_type": { "normalized": "d-shaped", "integrated_display": "yes", "shift_lights": "unknown", "open_top": "no", "source_label": "live-cockpit-d-shaped-display" }, "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Clutch-free move-off, six paddle gears, automatic cut and blip, and D-shaped display rim were directly observed; the move-off mechanism remains unknown."] },
     "overrides": [], "verified_game_version": "1.6.9.91", "verified_at": "2026-08-11",
     "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "lola-heritage.b05-40-spec", "ams2.local-live-lola-b05-40-turbo-controls.1.6.9.91"],
     "confidence": { "level": "verified", "basis": "Exact simulator identity, cockpit hardware, and shift behavior were directly tested; constructor-attributed evidence supports the six-speed sequential turbo installation." }

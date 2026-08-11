@@ -154,6 +154,9 @@
               "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
             "diameter_mm": { "type": ["integer", "null"], "minimum": 150, "maximum": 600 },
+            "integrated_display": { "$ref": "#/$defs/state" },
+            "shift_lights": { "$ref": "#/$defs/state" },
+            "open_top": { "$ref": "#/$defs/state" },
             "source_label": { "type": "string" },
             "notes": { "type": "string" }
           }
@@ -200,6 +203,9 @@
               "type": "string",
               "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
+            "integrated_display": { "$ref": "#/$defs/state" },
+            "shift_lights": { "$ref": "#/$defs/state" },
+            "open_top": { "$ref": "#/$defs/state" },
             "source_label": { "type": "string" }
           }
         },

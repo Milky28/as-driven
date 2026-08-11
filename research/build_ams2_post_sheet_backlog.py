@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build"
 OUT_JSON = ROOT / "research" / "ams2-post-1.5.5.2-backlog.json"
 OUT_CSV = ROOT / "research" / "ams2-post-1.5.5.2-backlog.csv"
+EVENT_MAP = ROOT / "curation" / "ams2-post-sheet-event-map.json"
 
 # These release events are class/rename/configuration bookkeeping. Their model
 # members or predecessor records carry the actual control-source research.
@@ -41,115 +42,7 @@ NON_STANDALONE_SOURCE_ITEMS = {
     (2026, "GT2 2005 class"),
 }
 
-PROMOTED_RECORDS = {
-    (2024, "Alpine A424"): {
-        "record_id": "ams2.alpine-a424",
-        "dataset_version": "0.3.4",
-        "scope": "Base Alpine A424 / LMDh was live-tested; exact Low Downforce identity inherits controls as an approved aero-package assumption.",
-    },
-    (2024, "Ligier JS P217"): {
-        "record_id": "ams2.ligier-js-p217",
-        "dataset_version": "0.3.4",
-        "scope": "Exact Ligier JS P217 model identity directly verified in LMP2 and LMP2_Gen1 class contexts.",
-    },
-    (2024, "Oreca 07"): {
-        "record_id": "ams2.oreca-07",
-        "dataset_version": "0.3.4",
-        "scope": "Exact model directly verified in LMP2 and LMP2_Gen1; Low Downforce inherits the verified controls as an approved aero-only assumption.",
-    },
-    (2024, "Chevrolet Corvette Z06 GT3.R"): {
-        "record_id": "ams2.chevrolet-corvette-z06-gt3r",
-        "dataset_version": "0.3.4",
-        "scope": "Base GT3 Gen2 identity directly verified; Low Downforce inherits the verified controls as an approved aero-only assumption.",
-    },
-    (2024, "Lamborghini Huracan Super Trofeo EVO2"): {
-        "record_id": "ams2.lamborghini-huracan-super-trofeo-evo2",
-        "dataset_version": "0.3.4",
-        "scope": "Exact current EVO2 identity directly verified; the earlier LP 620-2 identity remains deliberately separate.",
-    },
-    (2024, "Lamborghini SC63"): {
-        "record_id": "ams2.lamborghini-sc63",
-        "dataset_version": "0.3.4",
-        "scope": "Base LMDh identity directly verified; Low Downforce inherits the verified controls as an approved aero-only assumption.",
-    },
-    (2024, "Audi R8 LMS GT4"): {
-        "record_id": "ams2.audi-r8-lms-gt4",
-        "dataset_version": "0.3.4",
-        "scope": "Exact GT4 identity and complete user-facing shift behavior directly verified.",
-    },
-    (2024, "Ligier JS P320"): {
-        "record_id": "ams2.ligier-js-p320",
-        "dataset_version": "0.3.4",
-        "scope": "Exact P1Gen2 identity directly verified, including the required standing-start clutch.",
-    },
-    (2025, "Aston Martin Valkyrie Hypercar"): {
-        "record_id": "ams2.aston-martin-valkyrie-hypercar",
-        "dataset_version": "0.3.4",
-        "scope": "Exact base LMDh identity directly verified; no unobserved Low Downforce alias was added.",
-    },
-    (2025, "Aston Martin Vantage GT4 Evo"): {
-        "record_id": "ams2.aston-martin-vantage-gt4-evo",
-        "dataset_version": "0.3.4",
-        "scope": "Exact GT4 identity and its six usable paddle-selected ratios directly verified.",
-    },
-    (2025, "Aston Martin Vantage GTE"): {
-        "record_id": "ams2.aston-martin-vantage-gte",
-        "dataset_version": "0.3.4",
-        "scope": "Exact GTE identity and complete user-facing shift behavior directly verified.",
-    },
-    (2025, "Ligier JS P4"): {
-        "record_id": "ams2.ligier-js-p4",
-        "dataset_version": "0.3.4",
-        "scope": "Exact Ligier European Series identity and complete user-facing shift behavior directly verified.",
-    },
-    (2025, "Dodge Viper GTS-R"): {
-        "record_id": "ams2.dodge-viper-gts-r",
-        "dataset_version": "0.3.3",
-        "scope": "Exact GT1_05 identity was independently researched and live-tested before the post-sheet backlog was compiled.",
-    },
-    (2025, "Lamborghini Diablo SV-R"): {
-        "record_id": "ams2.lamborghini-diablo-sv-r",
-        "dataset_version": "0.3.5",
-        "scope": "Exact ST96 identity directly verified as a five-speed dogleg H-pattern, resolving the source conflict for the AMS2 representation.",
-    },
-    (2025, "Lamborghini Murcielago R-GT"): {
-        "record_id": "ams2.lamborghini-murcielago-r-gt",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT1_05 base identity directly verified with six-speed sequential-stick controls.",
-    },
-    (2025, "Lamborghini Murcielago R-GT — low-downforce configuration"): {
-        "record_id": "ams2.lamborghini-murcielago-r-gt",
-        "dataset_version": "0.3.5",
-        "scope": "Exact Low Downforce identity inherits the verified base controls as an approved aero-only assumption and was not separately tested.",
-    },
-    (2025, "Maserati MC12 GT1"): {
-        "record_id": "ams2.maserati-mc12-gt1",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT1_05 base identity directly verified with six-speed sequential-stick controls.",
-    },
-    (2025, "Maserati MC12 GT1 — low-downforce configuration"): {
-        "record_id": "ams2.maserati-mc12-gt1",
-        "dataset_version": "0.3.5",
-        "scope": "Exact Low Downforce identity inherits the verified base controls as an approved aero-only assumption and was not separately tested.",
-    },
-    (2026, "Gillet Vertigo Streiff"): {
-        "record_id": "ams2.gillet-vertigo-streiff",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GTR_04 identity directly verified with six-speed sequential-stick controls.",
-    },
-    (2026, "Lister Storm GTM"): {
-        "record_id": "ams2.lister-storm-gtm",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT1_05 identity directly verified with six-speed sequential-stick controls.",
-    },
-    (2026, "Panoz Esperante GTLM"): {
-        "record_id": "ams2.panoz-esperante-gtlm",
-        "dataset_version": "0.3.5",
-        "scope": "Exact GT2_05 identity directly verified with six-speed sequential-stick controls.",
-    },
-}
-
-
+# Promotion state is resolved from EVENT_MAP and per-car approval manifests.
 def read_json(path: Path) -> Any:
     # PowerShell-authored staging files may include a UTF-8 BOM.
     return json.loads(path.read_text(encoding="utf-8-sig"))
@@ -186,7 +79,36 @@ def text_list(value: Any) -> str:
     return "" if value is None else str(value)
 
 
+def load_promoted_records() -> dict[tuple[int, str], dict[str, str]]:
+    """Resolve explicit release-event mappings through checked-in car approvals."""
+    approvals: dict[str, dict[str, Any]] = {}
+    for path in sorted((ROOT / "curation").glob("ams2-approved-*.json")):
+        payload = read_json(path)
+        if "approved_controls" in payload:
+            record_id = payload["record_id"]
+            if record_id in approvals:
+                raise ValueError(f"Duplicate per-car approval for {record_id}")
+            approvals[record_id] = payload
+
+    promoted: dict[tuple[int, str], dict[str, str]] = {}
+    for mapping in read_json(EVENT_MAP)["event_mappings"]:
+        key = (mapping["calendar_year"], mapping["item_name"])
+        if key in promoted:
+            raise ValueError(f"Duplicate post-sheet event mapping: {key}")
+        record_id = mapping["record_id"]
+        approval = approvals.get(record_id)
+        if approval is None:
+            continue
+        promoted[key] = {
+            "record_id": record_id,
+            "dataset_version": approval["dataset_version"],
+            "scope": approval.get("scope_notes", approval["confidence_notes"]),
+        }
+    return promoted
+
+
 def build_backlog() -> dict[str, Any]:
+    promoted_records = load_promoted_records()
     merged: list[dict[str, Any]] = []
     missing_source_research: list[str] = []
     missing_comparisons: list[str] = []
@@ -211,7 +133,7 @@ def build_backlog() -> dict[str, Any]:
 
         for event in inventory:
             name = event["item_name"]
-            promotion = PROMOTED_RECORDS.get((year, name))
+            promotion = promoted_records.get((year, name))
             source_research = sources.get(name)
             comparison = comparisons.get(name)
             source_disposition = "researched"

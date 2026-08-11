@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0", "dataset_version": "0.3.10", "approved_at": "2026-08-11",
   "record_id": "ams2.lola-b05-40-v8", "telemetry_name": "Lola B05/40 V8", "telemetry_class": "LMP2_05", "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22",
-  "approved_controls": { "forward_gears": 6, "shift_actuation": "sequential-paddles", "standing_start_clutch": "not-required", "running_shift_clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "automatic_blip": "yes", "manual_blip": "not-required", "wheel_rim_shape": "d-shaped" },
+  "approved_controls": { "forward_gears": 6, "shift_actuation": "sequential-paddles", "standing_start_clutch": "not-required", "running_shift_clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "automatic_blip": "yes", "manual_blip": "not-required", "wheel_rim_shape": "d-shaped", "wheel_integrated_display": "yes", "wheel_shift_lights": "unknown", "wheel_open_top": "no" },
   "confidence_notes": "Exact base identity, clutch-free move-off, six paddle gears, automatic cut and blip, and D-shaped display rim were directly observed.",
   "scope_notes": "The move-off mechanism was not established. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
 }
