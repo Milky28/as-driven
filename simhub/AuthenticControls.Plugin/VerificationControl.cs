@@ -13,6 +13,7 @@ namespace AuthenticControls.Plugin
     {
         private readonly AuthenticControls _plugin;
         private readonly TextBlock _liveAvailability;
+        private readonly TextBlock _workflowStatus;
         private readonly TextBlock _capturedIdentity;
         private readonly TextBlock _status;
         private readonly TextBox _observer;
@@ -22,6 +23,7 @@ namespace AuthenticControls.Plugin
         private readonly ComboBox _automaticShifting;
         private readonly ComboBox _automaticThrottleBlip;
         private readonly CheckBox _assistSettingsConfirmed;
+        private readonly TextBlock _assistConfirmationHint;
         private readonly TextBox _assistNotes;
         private readonly ComboBox _moveOff;
         private readonly ComboBox _clutchlessUpshift;
@@ -34,6 +36,7 @@ namespace AuthenticControls.Plugin
         private readonly CheckBox _visibleSequentialStick;
         private readonly CheckBox _visibleHPattern;
         private readonly CheckBox _visibleAutomaticLever;
+        private readonly TextBlock _visibleHardwareBadge;
         private readonly ComboBox _primaryActuation;
         private readonly TextBox _actuationBasis;
         private readonly ComboBox _wheelShape;
@@ -43,10 +46,20 @@ namespace AuthenticControls.Plugin
         private readonly TextBox _wheelNotes;
         private readonly TextBox _evidenceNotes;
         private readonly Button _save;
+        private readonly Button _captureStart;
         private readonly Button _guidedStart;
         private readonly Expander _formExpander;
+        private readonly Dictionary<ComboBox, string> _guidedOriginalChoices =
+            new Dictionary<ComboBox, string>();
+        private readonly HashSet<ComboBox> _manualOverrides =
+            new HashSet<ComboBox>();
         private VerificationCaptureContext _capture;
         private bool _guidedDriveApplied;
+        private bool _guidedDriveStarted;
+        private bool _applyingGuidedResults;
+        private string _guidedAutomaticCutMethod = string.Empty;
+        private string _guidedAutomaticBlipMethod = string.Empty;
+        private string _guidedEvidenceNotes = string.Empty;
 
         public VerificationControl(AuthenticControls plugin)
         {
@@ -78,11 +91,20 @@ namespace AuthenticControls.Plugin
                 Margin = new Thickness(0, 0, 0, 8),
             };
             root.Children.Add(_liveAvailability);
-            root.Children.Add(CreateButton(
+            _workflowStatus = new TextBlock
+            {
+                FontWeight = FontWeights.SemiBold,
+                TextWrapping = TextWrapping.Wrap,
+                Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
+                Margin = new Thickness(0, 0, 0, 8),
+            };
+            root.Children.Add(_workflowStatus);
+            _captureStart = CreateButton(
                 "Start verification from live car",
                 235,
                 StartClicked,
-                new Thickness(0, 0, 0, 10)));
+                new Thickness(0, 0, 0, 10));
+            root.Children.Add(_captureStart);
             _capturedIdentity = new TextBlock
             {
                 Text = "No verification started.",
@@ -145,6 +167,13 @@ namespace AuthenticControls.Plugin
                 "I verified these values against the simulator's current settings.");
             _assistSettingsConfirmed.Margin = new Thickness(0, 0, 0, 8);
             form.Children.Add(_assistSettingsConfirmed);
+            _assistConfirmationHint = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+            form.Children.Add(_assistConfirmationHint);
             form.Children.Add(new TextBlock
             {
                 Text = "AMS2 starts with the recommended test values: automatic clutch Disabled, automatic shifting Disabled, and throttle-blip assist Unavailable. Change a value to the actual state if you cannot use the recommendation, and explain the limitation below.",
@@ -257,17 +286,36 @@ namespace AuthenticControls.Plugin
                 Opacity = 0.72,
                 Margin = new Thickness(0, 0, 0, 10),
             });
-            form.Children.Add(new TextBlock
+            var visibleHardwareLabel = new StackPanel { Orientation = Orientation.Horizontal };
+            visibleHardwareLabel.Children.Add(new TextBlock
             {
                 Text = "Visible shift hardware",
                 FontWeight = FontWeights.SemiBold,
                 Margin = new Thickness(0, 0, 0, 6),
             });
+            _visibleHardwareBadge = new TextBlock
+            {
+                FontSize = 10,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.Orange,
+                Margin = new Thickness(8, 1, 0, 6),
+            };
+            visibleHardwareLabel.Children.Add(_visibleHardwareBadge);
+            form.Children.Add(visibleHardwareLabel);
             var actuatorRow = new WrapPanel { Margin = new Thickness(0, 0, 0, 12) };
             _visiblePaddles = CreateCheckBox("Paddles");
             _visibleSequentialStick = CreateCheckBox("Sequential stick");
             _visibleHPattern = CreateCheckBox("H-pattern shifter");
             _visibleAutomaticLever = CreateCheckBox("Automatic lever");
+            foreach (CheckBox visibleControl in new[]
+            {
+                _visiblePaddles, _visibleSequentialStick,
+                _visibleHPattern, _visibleAutomaticLever
+            })
+            {
+                visibleControl.Checked += VisibleHardwareChanged;
+                visibleControl.Unchecked += VisibleHardwareChanged;
+            }
             actuatorRow.Children.Add(_visiblePaddles);
             actuatorRow.Children.Add(_visibleSequentialStick);
             actuatorRow.Children.Add(_visibleHPattern);
@@ -284,6 +332,7 @@ namespace AuthenticControls.Plugin
             });
             _primaryActuation.SelectionChanged += PrimaryActuationChanged;
             _actuationBasis = CreateTextBox();
+            _actuationBasis.TextChanged += ManualEvidenceChanged;
             AddControlPair(
                 form,
                 "Primary shift mechanism",
@@ -320,6 +369,14 @@ namespace AuthenticControls.Plugin
                 _wheelOpenTop);
             _wheelNotes = CreateMultilineTextBox(54);
             AddLabeledControl(form, "Wheel notes", _wheelNotes, null);
+            foreach (ComboBox optionalChoice in new[]
+            {
+                _primaryActuation, _wheelShape, _wheelDisplay,
+                _wheelShiftLights, _wheelOpenTop
+            })
+            {
+                optionalChoice.SelectionChanged += OptionalChoiceChanged;
+            }
 
             AddSubheading(form, "Review notes");
             _evidenceNotes = CreateMultilineTextBox(72);
@@ -328,6 +385,7 @@ namespace AuthenticControls.Plugin
                 "Anything a reviewer should know",
                 _evidenceNotes,
                 "Include uncertainty, unusual hybrid starts, conflicting cockpit hardware, or tests that should be repeated.");
+            _evidenceNotes.TextChanged += ManualEvidenceChanged;
 
             var actions = new StackPanel
             {
@@ -390,6 +448,7 @@ namespace AuthenticControls.Plugin
                 }
                 if (_capture == null)
                 {
+                    UpdateWorkflowGuidance(live, guided);
                     return;
                 }
                 ApplyGuidedResults(_plugin.GetGuidedDriveResults());
@@ -397,6 +456,7 @@ namespace AuthenticControls.Plugin
                 _formExpander.IsExpanded = true;
                 SetStatus("Guided drive complete. Suggested driving results were filled in; review the cockpit and wheel fields before saving.", Brushes.LightGreen, true);
             }
+            UpdateWorkflowGuidance(live, guided);
         }
 
         private void StartClicked(object sender, RoutedEventArgs eventArgs)
@@ -407,8 +467,18 @@ namespace AuthenticControls.Plugin
                 _status.Text = "No live car telemetry is available. Load a car in the simulator, then try again.";
                 return;
             }
+            BeginFromCapture(live);
+        }
+
+        internal void BeginFromCapture(VerificationCaptureContext live)
+        {
+            if (live == null)
+            {
+                throw new ArgumentNullException("live");
+            }
             _capture = live;
             _guidedDriveApplied = true;
+            _guidedDriveStarted = false;
             ResetForm();
             _formExpander.IsExpanded = true;
             _capturedIdentity.Text = "Captured: " + live.TelemetryName + " - "
@@ -419,6 +489,7 @@ namespace AuthenticControls.Plugin
                 ? "Verification started. SimHub suggested " + live.SuggestedForwardGears.Value
                     + " forward gears; confirm it by selecting every gear."
                 : "Verification started. Complete the form, then save a draft.", Brushes.LightGreen, false);
+            UpdateWorkflowGuidance(_plugin.CaptureVerificationContext(), _plugin.GetGuidedDriveSnapshot());
         }
 
         private void ResetForm()
@@ -453,6 +524,13 @@ namespace AuthenticControls.Plugin
             _visibleSequentialStick.IsChecked = false;
             _visibleHPattern.IsChecked = false;
             _visibleAutomaticLever.IsChecked = false;
+            _guidedOriginalChoices.Clear();
+            _manualOverrides.Clear();
+            _guidedAutomaticCutMethod = string.Empty;
+            _guidedAutomaticBlipMethod = string.Empty;
+            _guidedEvidenceNotes = string.Empty;
+            _evidenceNotes.BorderThickness = new Thickness(1);
+            _evidenceNotes.BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
             foreach (Control control in new Control[]
             {
                 _moveOff, _forwardGears, _directGearSelection,
@@ -462,6 +540,7 @@ namespace AuthenticControls.Plugin
             {
                 ClearFieldBadge(control);
             }
+            UpdateOptionalBadges();
         }
 
         private void SaveClicked(object sender, RoutedEventArgs eventArgs)
@@ -474,6 +553,19 @@ namespace AuthenticControls.Plugin
             if (_assistSettingsConfirmed.IsChecked != true)
             {
                 SetStatus("Verify the simulator assist settings and check the confirmation box before saving.", Brushes.Goldenrod, false);
+                return;
+            }
+            string[] missingEvidence = MissingManualOverrideEvidence();
+            if (missingEvidence.Length > 0)
+            {
+                _evidenceNotes.BorderBrush = Brushes.Orange;
+                _evidenceNotes.BorderThickness = new Thickness(2);
+                SetStatus(
+                    "Supporting evidence is required for the manual override: "
+                        + string.Join(", ", missingEvidence)
+                        + ". Describe what you observed in the related method field or Review notes.",
+                    Brushes.Orange,
+                    true);
                 return;
             }
             int parsedGears;
@@ -530,9 +622,12 @@ namespace AuthenticControls.Plugin
                 string path = _plugin.SaveVerificationDraft(draft, _observer.Text);
                 _capturedIdentity.Text = "Completed: " + _capture.TelemetryName
                     + " - draft saved for review.";
-                SetStatus("✓ DRAFT SAVED SUCCESSFULLY\n" + path, Brushes.LightGreen, true);
+                SetStatus("\u2713 DRAFT SAVED SUCCESSFULLY\n" + path, Brushes.LightGreen, true);
                 _save.IsEnabled = false;
                 _formExpander.IsExpanded = false;
+                UpdateWorkflowGuidance(
+                    _plugin.CaptureVerificationContext(),
+                    _plugin.GetGuidedDriveSnapshot());
             }
             catch (Exception exception)
             {
@@ -567,8 +662,12 @@ namespace AuthenticControls.Plugin
                 return;
             }
             _guidedDriveApplied = false;
+            _guidedDriveStarted = true;
             _plugin.StartGuidedVerificationDrive(_capture);
             SetStatus("In-sim guided drive started. Follow the verification overlay prompts.", Brushes.LightGreen, true);
+            UpdateWorkflowGuidance(
+                _plugin.CaptureVerificationContext(),
+                _plugin.GetGuidedDriveSnapshot());
         }
 
         private void GuidedNextClicked(object sender, RoutedEventArgs eventArgs)
@@ -589,7 +688,11 @@ namespace AuthenticControls.Plugin
         private void GuidedCancelClicked(object sender, RoutedEventArgs eventArgs)
         {
             _plugin.GuidedVerificationCancel();
+            _guidedDriveStarted = false;
             SetStatus("Guided drive cancelled. Existing form entries were preserved.", Brushes.Goldenrod, false);
+            UpdateWorkflowGuidance(
+                _plugin.CaptureVerificationContext(),
+                _plugin.GetGuidedDriveSnapshot());
         }
 
         private void ApplyGuidedResults(GuidedDriveResults results)
@@ -598,34 +701,256 @@ namespace AuthenticControls.Plugin
             {
                 return;
             }
-            SelectGuidedChoice(_moveOff, results.MoveOffWithoutPhysicalClutch);
-            SelectChoice(_directGearSelection, results.DirectGearSelection);
-            SetFieldBadge(_directGearSelection, "REVIEW NEEDED", Brushes.Orange);
-            SelectGuidedChoice(_clutchlessUpshift, results.ClutchlessUpshift);
-            SelectGuidedChoice(_automaticCut, results.AutomaticCut);
-            SelectGuidedChoice(_clutchlessDownshift, results.ClutchlessDownshift);
-            SelectGuidedChoice(_automaticBlip, results.AutomaticBlip);
-            if (results.ForwardGears.HasValue)
+            _applyingGuidedResults = true;
+            try
             {
-                _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);
-                SetFieldBadge(_forwardGears, "AUTO-DETECTED", Brushes.LightGreen);
+                ApplyGuidedChoice(_moveOff, results.MoveOffWithoutPhysicalClutch);
+                ApplyGuidedChoice(_directGearSelection, results.DirectGearSelection);
+                ApplyGuidedChoice(_clutchlessUpshift, results.ClutchlessUpshift);
+                ApplyGuidedChoice(_automaticCut, results.AutomaticCut);
+                ApplyGuidedChoice(_clutchlessDownshift, results.ClutchlessDownshift);
+                ApplyGuidedChoice(_automaticBlip, results.AutomaticBlip);
+                if (results.ForwardGears.HasValue)
+                {
+                    _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);
+                    SetFieldBadge(_forwardGears, "AUTO-DETECTED", Brushes.LightGreen);
+                }
+                _automaticCutMethod.Text = results.AutomaticCutMethod ?? string.Empty;
+                _automaticBlipMethod.Text = results.AutomaticBlipMethod ?? string.Empty;
+                _guidedAutomaticCutMethod = _automaticCutMethod.Text;
+                _guidedAutomaticBlipMethod = _automaticBlipMethod.Text;
+                SetFieldBadge(
+                    _automaticCutMethod,
+                    string.IsNullOrWhiteSpace(_automaticCutMethod.Text) ? string.Empty : "AUTO-FILLED",
+                    Brushes.LightSkyBlue);
+                SetFieldBadge(
+                    _automaticBlipMethod,
+                    string.IsNullOrWhiteSpace(_automaticBlipMethod.Text) ? string.Empty : "AUTO-FILLED",
+                    Brushes.LightSkyBlue);
+                if (!string.IsNullOrWhiteSpace(results.EvidenceNote))
+                {
+                    _evidenceNotes.Text = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
+                        ? results.EvidenceNote
+                        : _evidenceNotes.Text.Trim() + Environment.NewLine + results.EvidenceNote;
+                }
+                _guidedEvidenceNotes = _evidenceNotes.Text;
             }
-            _automaticCutMethod.Text = results.AutomaticCutMethod ?? string.Empty;
-            _automaticBlipMethod.Text = results.AutomaticBlipMethod ?? string.Empty;
-            SetFieldBadge(
-                _automaticCutMethod,
-                string.IsNullOrWhiteSpace(_automaticCutMethod.Text) ? string.Empty : "AUTO-FILLED",
-                Brushes.LightSkyBlue);
-            SetFieldBadge(
-                _automaticBlipMethod,
-                string.IsNullOrWhiteSpace(_automaticBlipMethod.Text) ? string.Empty : "AUTO-FILLED",
-                Brushes.LightSkyBlue);
-            if (!string.IsNullOrWhiteSpace(results.EvidenceNote))
+            finally
             {
-                _evidenceNotes.Text = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
-                    ? results.EvidenceNote
-                    : _evidenceNotes.Text.Trim() + Environment.NewLine + results.EvidenceNote;
+                _applyingGuidedResults = false;
             }
+            RefreshManualOverrideBadges();
+            UpdateOptionalBadges();
+        }
+
+        private void UpdateWorkflowGuidance(
+            VerificationCaptureContext live,
+            GuidedDriveSnapshot guided)
+        {
+            _captureStart.IsEnabled = live != null;
+            SetNextStepButton(_captureStart, false);
+            SetNextStepButton(_guidedStart, false);
+            SetNextStepButton(_save, false);
+
+            if (_capture == null)
+            {
+                _workflowStatus.Text = live == null
+                    ? "STEP 1: Load a car in the simulator."
+                    : "NEXT STEP: Start verification from the live car.";
+                _assistConfirmationHint.Text = "Capture a live car before confirming the test setup.";
+                _assistConfirmationHint.Foreground = Brushes.Goldenrod;
+                SetNextStepButton(_captureStart, live != null);
+                _guidedStart.IsEnabled = false;
+                return;
+            }
+
+            if (!_save.IsEnabled
+                && _capturedIdentity.Text.StartsWith("Completed:", StringComparison.Ordinal))
+            {
+                _workflowStatus.Text = "COMPLETE: The local draft was saved for review.";
+                _assistConfirmationHint.Text = "Simulator assist settings were confirmed for this draft.";
+                _assistConfirmationHint.Foreground = Brushes.LightGreen;
+                _guidedStart.IsEnabled = false;
+                return;
+            }
+
+            bool assistsConfirmed = _assistSettingsConfirmed.IsChecked == true;
+            _guidedStart.IsEnabled = assistsConfirmed;
+            if (!assistsConfirmed)
+            {
+                _workflowStatus.Text = "NEXT STEP: Verify the three simulator assist settings, then select the confirmation checkbox.";
+                _assistConfirmationHint.Text = "REQUIRED: Select this checkbox to enable Start in-sim guided drive.";
+                _assistConfirmationHint.Foreground = Brushes.Orange;
+                return;
+            }
+
+            _assistConfirmationHint.Text = "\u2713 CONFIRMED: Start in-sim guided drive is enabled.";
+            _assistConfirmationHint.Foreground = Brushes.LightGreen;
+            if (!_guidedDriveStarted)
+            {
+                _workflowStatus.Text = "NEXT STEP: Start the in-sim guided drive and follow its overlay prompts.";
+                SetNextStepButton(_guidedStart, true);
+                return;
+            }
+
+            if (guided != null && !guided.Completed)
+            {
+                _workflowStatus.Text = "GUIDED DRIVE ACTIVE: Follow the current prompt inside the simulator.";
+                return;
+            }
+
+            int unresolved = OptionalUnresolvedCount();
+            _workflowStatus.Text = unresolved == 0
+                ? "NEXT STEP: Review the draft, then save it for review."
+                : "NEXT STEP: Review the draft. " + unresolved
+                    + " optional cockpit/wheel field(s) still need review; incomplete drafts are allowed.";
+            if (_save.IsEnabled)
+            {
+                SetNextStepButton(_save, true);
+            }
+        }
+
+        private static void SetNextStepButton(Button button, bool active)
+        {
+            if (button == null)
+            {
+                return;
+            }
+            button.BorderBrush = active
+                ? Brushes.LightGreen
+                : new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
+            button.BorderThickness = active ? new Thickness(2) : new Thickness(1);
+            button.FontWeight = active ? FontWeights.Bold : FontWeights.Normal;
+        }
+
+        private void UpdateOptionalBadges()
+        {
+            foreach (ComboBox combo in new[]
+            {
+                _primaryActuation, _wheelShape, _wheelDisplay,
+                _wheelShiftLights, _wheelOpenTop
+            })
+            {
+                bool unresolved = IsUnresolved(ChoiceValue(combo));
+                SetFieldBadge(
+                    combo,
+                    unresolved ? "OPTIONAL · REVIEW" : "REVIEWED",
+                    unresolved ? Brushes.Orange : Brushes.LightGreen);
+            }
+
+            bool hardwareSpecified = _visiblePaddles.IsChecked == true
+                || _visibleSequentialStick.IsChecked == true
+                || _visibleHPattern.IsChecked == true
+                || _visibleAutomaticLever.IsChecked == true;
+            _visibleHardwareBadge.Text = hardwareSpecified
+                ? "REVIEWED"
+                : "OPTIONAL · REVIEW";
+            _visibleHardwareBadge.Foreground = hardwareSpecified
+                ? Brushes.LightGreen
+                : Brushes.Orange;
+        }
+
+        private int OptionalUnresolvedCount()
+        {
+            int count = 0;
+            foreach (ComboBox combo in new[]
+            {
+                _primaryActuation, _wheelShape, _wheelDisplay,
+                _wheelShiftLights, _wheelOpenTop
+            })
+            {
+                if (IsUnresolved(ChoiceValue(combo)))
+                {
+                    count++;
+                }
+            }
+            if (_visiblePaddles.IsChecked != true
+                && _visibleSequentialStick.IsChecked != true
+                && _visibleHPattern.IsChecked != true
+                && _visibleAutomaticLever.IsChecked != true)
+            {
+                count++;
+            }
+            return count;
+        }
+
+        private void RefreshManualOverrideBadges()
+        {
+            foreach (ComboBox combo in _manualOverrides.ToArray())
+            {
+                UpdateManualOverrideBadge(combo);
+            }
+            bool missingEvidence = MissingManualOverrideEvidence().Length > 0;
+            _evidenceNotes.BorderBrush = missingEvidence
+                ? Brushes.Orange
+                : new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
+            _evidenceNotes.BorderThickness = missingEvidence
+                ? new Thickness(2)
+                : new Thickness(1);
+        }
+
+        private void UpdateManualOverrideBadge(ComboBox combo)
+        {
+            bool hasEvidence = HasManualOverrideEvidence(combo);
+            SetFieldBadge(
+                combo,
+                hasEvidence ? "MANUAL · EVIDENCE" : "EVIDENCE REQUIRED",
+                hasEvidence ? Brushes.LightSkyBlue : Brushes.Orange);
+        }
+
+        private string[] MissingManualOverrideEvidence()
+        {
+            return _manualOverrides
+                .Where(combo => !HasManualOverrideEvidence(combo))
+                .Select(ManualOverrideLabel)
+                .OrderBy(label => label, StringComparer.Ordinal)
+                .ToArray();
+        }
+
+        private bool HasManualOverrideEvidence(ComboBox combo)
+        {
+            string currentNotes = (_evidenceNotes.Text ?? string.Empty).Trim();
+            string guidedNotes = (_guidedEvidenceNotes ?? string.Empty).Trim();
+            bool reviewNotesChanged = !string.IsNullOrWhiteSpace(currentNotes)
+                && !string.Equals(currentNotes, guidedNotes, StringComparison.Ordinal);
+            if (reviewNotesChanged)
+            {
+                return true;
+            }
+            if (combo == _automaticCut)
+            {
+                string method = (_automaticCutMethod.Text ?? string.Empty).Trim();
+                return !string.IsNullOrWhiteSpace(method)
+                    && !string.Equals(
+                        method,
+                        (_guidedAutomaticCutMethod ?? string.Empty).Trim(),
+                        StringComparison.Ordinal);
+            }
+            if (combo == _automaticBlip)
+            {
+                string method = (_automaticBlipMethod.Text ?? string.Empty).Trim();
+                return !string.IsNullOrWhiteSpace(method)
+                    && !string.Equals(
+                        method,
+                        (_guidedAutomaticBlipMethod ?? string.Empty).Trim(),
+                        StringComparison.Ordinal);
+            }
+            if (combo == _directGearSelection)
+            {
+                return !string.IsNullOrWhiteSpace(_actuationBasis.Text);
+            }
+            return false;
+        }
+
+        private string ManualOverrideLabel(ComboBox combo)
+        {
+            if (combo == _moveOff) return "move-off result";
+            if (combo == _directGearSelection) return "direct H-pattern result";
+            if (combo == _clutchlessUpshift) return "clutchless upshift result";
+            if (combo == _automaticCut) return "automatic throttle-cut result";
+            if (combo == _clutchlessDownshift) return "clutchless downshift result";
+            if (combo == _automaticBlip) return "automatic throttle-blip result";
+            return "guided result";
         }
 
         private void SetStatus(string text, Brush foreground, bool emphasized)
@@ -780,6 +1105,7 @@ namespace AuthenticControls.Plugin
                 || actuation == "automatic-lever")
             {
                 SelectChoice(_directGearSelection, "not-applicable");
+                _manualOverrides.Remove(_directGearSelection);
                 SetFieldBadge(_directGearSelection, "DERIVED", Brushes.LightSkyBlue);
             }
             else if ((actuation == "h-pattern" || actuation == "direct-selection")
@@ -788,39 +1114,94 @@ namespace AuthenticControls.Plugin
                 SelectChoice(_directGearSelection, "not-tested");
                 SetFieldBadge(_directGearSelection, "REVIEW NEEDED", Brushes.Orange);
             }
+            UpdateOptionalBadges();
         }
 
         private void AssistSettingsConfirmationChanged(object sender, RoutedEventArgs eventArgs)
         {
             _guidedStart.IsEnabled = _capture != null
                 && _assistSettingsConfirmed.IsChecked == true;
+            UpdateWorkflowGuidance(
+                _plugin.CaptureVerificationContext(),
+                _plugin.GetGuidedDriveSnapshot());
         }
 
         private void GuidedChoiceEdited(object sender, SelectionChangedEventArgs eventArgs)
         {
             ComboBox combo = sender as ComboBox;
-            string value = ChoiceValue(combo);
-            if (string.Equals(value, "unknown", StringComparison.Ordinal)
-                || string.Equals(value, "not-tested", StringComparison.Ordinal))
+            if (combo == null || _applyingGuidedResults)
             {
+                return;
+            }
+            string value = ChoiceValue(combo);
+            string original;
+            if (!_guidedOriginalChoices.TryGetValue(combo, out original))
+            {
+                if (IsUnresolved(value))
+                {
+                    SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
+                }
+                else
+                {
+                    ClearFieldBadge(combo);
+                }
+                return;
+            }
+            if (string.Equals(value, original, StringComparison.Ordinal))
+            {
+                _manualOverrides.Remove(combo);
+                SetGuidedResultBadge(combo, value);
+            }
+            else if (IsUnresolved(value))
+            {
+                _manualOverrides.Remove(combo);
                 SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
             }
             else
             {
-                ClearFieldBadge(combo);
+                _manualOverrides.Add(combo);
+                UpdateManualOverrideBadge(combo);
             }
         }
 
         private void GuidedTextEdited(object sender, TextChangedEventArgs eventArgs)
         {
             ClearFieldBadge(sender as Control);
+            RefreshManualOverrideBadges();
         }
 
-        private static void SelectGuidedChoice(ComboBox combo, string value)
+        private void ManualEvidenceChanged(object sender, TextChangedEventArgs eventArgs)
         {
-            SelectChoice(combo, value);
-            if (string.Equals(value, "unknown", StringComparison.Ordinal)
-                || string.Equals(value, "not-tested", StringComparison.Ordinal))
+            RefreshManualOverrideBadges();
+        }
+
+        private void OptionalChoiceChanged(object sender, SelectionChangedEventArgs eventArgs)
+        {
+            UpdateOptionalBadges();
+            UpdateWorkflowGuidance(
+                _plugin.CaptureVerificationContext(),
+                _plugin.GetGuidedDriveSnapshot());
+        }
+
+        private void VisibleHardwareChanged(object sender, RoutedEventArgs eventArgs)
+        {
+            UpdateOptionalBadges();
+            UpdateWorkflowGuidance(
+                _plugin.CaptureVerificationContext(),
+                _plugin.GetGuidedDriveSnapshot());
+        }
+
+        private void ApplyGuidedChoice(ComboBox combo, string value)
+        {
+            string normalized = string.IsNullOrWhiteSpace(value) ? "not-tested" : value;
+            _guidedOriginalChoices[combo] = normalized;
+            SelectChoice(combo, normalized);
+            SetGuidedResultBadge(combo, normalized);
+        }
+
+        private static void SetGuidedResultBadge(ComboBox combo, string value)
+        {
+            if (IsUnresolved(value))
             {
                 SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
             }
@@ -828,6 +1209,12 @@ namespace AuthenticControls.Plugin
             {
                 SetFieldBadge(combo, "AUTO-DETECTED", Brushes.LightGreen);
             }
+        }
+
+        private static bool IsUnresolved(string value)
+        {
+            return string.Equals(value, "unknown", StringComparison.Ordinal)
+                || string.Equals(value, "not-tested", StringComparison.Ordinal);
         }
 
         private static void ClearFieldBadge(Control control)

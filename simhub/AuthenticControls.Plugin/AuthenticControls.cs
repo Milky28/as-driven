@@ -52,6 +52,7 @@ namespace AuthenticControls.Plugin
         private readonly PopupState _popupState = new PopupState(
             TimeSpan.FromSeconds(DefaultPopupDurationSeconds));
         private readonly object _verificationTelemetryLock = new object();
+        private readonly object _contributionRequestLock = new object();
         private readonly GuidedVerificationDrive _guidedVerificationDrive =
             new GuidedVerificationDrive();
         private AuthenticControlsSettings _settings = new AuthenticControlsSettings();
@@ -82,6 +83,9 @@ namespace AuthenticControls.Plugin
         private int _liveVerificationForwardGears;
         private string _guidedVerificationCarModel = string.Empty;
         private VerificationCaptureContext _guidedVerificationCapture;
+        private VerificationCaptureContext _pendingContributionCapture;
+        private int _contributionRequestRevision;
+        private bool _contributionRequestPending;
 
         public PluginManager PluginManager { get; set; }
 
@@ -267,6 +271,12 @@ namespace AuthenticControls.Plugin
                 delegate(PluginManager manager, string parameter)
                 {
                     OpenVerificationFolder();
+                });
+            this.AddAction(
+                "BeginCarContribution",
+                delegate(PluginManager manager, string parameter)
+                {
+                    RequestCarContributionFromLive();
                 });
             this.AddAction(
                 "VerificationDriveNext",
@@ -501,6 +511,65 @@ namespace AuthenticControls.Plugin
                         ? (int?)_liveVerificationForwardGears
                         : null
                 };
+            }
+        }
+
+        internal bool RequestCarContributionFromLive()
+        {
+            VerificationCaptureContext capture = CaptureVerificationContext();
+            if (capture == null)
+            {
+                return false;
+            }
+            lock (_contributionRequestLock)
+            {
+                _pendingContributionCapture = capture;
+                _contributionRequestRevision++;
+                _contributionRequestPending = true;
+            }
+            _popupState.Show();
+            return true;
+        }
+
+        internal int ContributionRequestRevision
+        {
+            get
+            {
+                lock (_contributionRequestLock)
+                {
+                    return _contributionRequestRevision;
+                }
+            }
+        }
+
+        internal bool ContributionRequestPending
+        {
+            get
+            {
+                lock (_contributionRequestLock)
+                {
+                    return _contributionRequestPending;
+                }
+            }
+        }
+
+        internal VerificationCaptureContext GetContributionRequestCapture()
+        {
+            lock (_contributionRequestLock)
+            {
+                return _pendingContributionCapture;
+            }
+        }
+
+        internal void AcknowledgeContributionRequest(int revision)
+        {
+            lock (_contributionRequestLock)
+            {
+                if (revision == _contributionRequestRevision)
+                {
+                    _contributionRequestPending = false;
+                    _popupState.Hide();
+                }
             }
         }
 
@@ -1180,6 +1249,9 @@ namespace AuthenticControls.Plugin
             this.AttachDelegate("LastUnmatchedCarClass", delegate { return _lastUnmatchedCarClass; });
             this.AttachDelegate("LastUnmatchedGameVersion", delegate { return _lastUnmatchedGameVersion; });
             this.AttachDelegate("UnmatchedLogError", delegate { return _lastUnmatchedLogError; });
+            this.AttachDelegate(
+                "ContributionRequestPending",
+                delegate { return ContributionRequestPending; });
             this.AttachDelegate("DatasetVersion", delegate { return _current.DatasetVersion; });
             this.AttachDelegate("RecordId", delegate { return _current.RecordId; });
             this.AttachDelegate("DisplayName", delegate { return _current.DisplayName; });

@@ -91,6 +91,22 @@ while ($queue.Count -gt 0) {
 if (-not $verificationFound) {
     throw "The native settings page does not contain guided verification."
 }
+$settingsType = $pluginAssembly.GetType(
+    "AuthenticControls.Plugin.AuthenticControlsSettingsControl", $true)
+$contributionExpanderField = $settingsType.GetField(
+    "_contributionExpander",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
+$contributionExpander = $contributionExpanderField.GetValue($settingsControl)
+if ($null -eq $contributionExpander -or $contributionExpander.IsExpanded) {
+    throw "The optional contributor workflow must be present and collapsed by default."
+}
+$captureStartField = $verificationType.GetField(
+    "_captureStart",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
+$captureStartButton = $captureStartField.GetValue($verificationControl)
+if ($null -eq $captureStartButton -or $captureStartButton.IsEnabled) {
+    throw "The contributor capture button must remain disabled without live telemetry."
+}
 $guidedStartField = $verificationType.GetField(
     "_guidedStart",
     [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
@@ -98,7 +114,7 @@ $guidedStartButton = $guidedStartField.GetValue($verificationControl)
 if ($null -eq $guidedStartButton -or $guidedStartButton.IsEnabled) {
     throw "The guided-start button must remain disabled until assist settings are confirmed."
 }
-Write-Host "PASS: Authentic Controls menu icon, settings page, and guided verification"
+Write-Host "PASS: Authentic Controls menu icon, settings page, and optional contributor workflow"
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 $tests = Join-Path $PSScriptRoot "AuthenticControls.Core.Tests\bin\$Configuration\AuthenticControls.Core.Tests.exe"

@@ -21,7 +21,11 @@ namespace AuthenticControls.Plugin
         private readonly TextBlock _previewStatus;
         private readonly TextBlock _errorStatus;
         private readonly VerificationControl _verification;
+        private readonly Expander _contributionExpander;
+        private readonly Button _contributeLiveButton;
+        private readonly ScrollViewer _scrollViewer;
         private readonly DispatcherTimer _statusTimer;
+        private int _handledContributionRequestRevision;
 
         public AuthenticControlsSettingsControl(AuthenticControls plugin)
         {
@@ -131,6 +135,15 @@ namespace AuthenticControls.Plugin
             actionRow.Children.Add(CreateButton("Hide popup", 122, HidePopupClicked));
             actionRow.Children.Add(CreateButton("Refresh database", 150, RefreshDatabaseClicked));
             panel.Children.Add(actionRow);
+            _contributeLiveButton = CreateButton(
+                "Contribute this car",
+                165,
+                ContributeLiveCarClicked);
+            _contributeLiveButton.Visibility = Visibility.Collapsed;
+            _contributeLiveButton.BorderBrush = new SolidColorBrush(Color.FromRgb(50, 190, 235));
+            _contributeLiveButton.BorderThickness = new Thickness(2);
+            _contributeLiveButton.Margin = new Thickness(0, 2, 0, 8);
+            panel.Children.Add(_contributeLiveButton);
 
             _status = new TextBlock
             {
@@ -247,13 +260,6 @@ namespace AuthenticControls.Plugin
 
             panel.Children.Add(CreateButton("Save popup settings", 170, SaveClicked));
 
-            AddSectionHeading(panel, "Guided in-game verification", new Thickness(0, 30, 0, 8));
-            _verification = new VerificationControl(plugin)
-            {
-                Margin = new Thickness(0, 0, 0, 24),
-            };
-            panel.Children.Add(_verification);
-
             AddSectionHeading(panel, "Unmatched car diagnostics", new Thickness(0, 6, 0, 8));
             panel.Children.Add(new TextBlock
             {
@@ -270,12 +276,72 @@ namespace AuthenticControls.Plugin
             });
             panel.Children.Add(CreateButton("Open diagnostics folder", 190, OpenDiagnosticsClicked));
 
-            Content = new ScrollViewer
+            var contributionPanel = new StackPanel();
+            contributionPanel.Children.Add(new TextBlock
+            {
+                Text = "OPTIONAL CONTRIBUTOR WORKFLOW",
+                FontSize = 12,
+                FontWeight = FontWeights.Bold,
+                Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
+                Margin = new Thickness(0, 0, 0, 5),
+            });
+            contributionPanel.Children.Add(new TextBlock
+            {
+                Text = "Contribute car data",
+                FontSize = 22,
+                FontWeight = FontWeights.Bold,
+                Margin = new Thickness(0, 0, 0, 5),
+            });
+            contributionPanel.Children.Add(new TextBlock
+            {
+                Text = "This is a separate data-contribution process, not another plugin setting. It creates a local review draft and never edits the curated database directly.",
+                FontSize = 14,
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.8,
+                Margin = new Thickness(0, 0, 0, 14),
+            });
+            _verification = new VerificationControl(plugin)
+            {
+                Margin = new Thickness(0, 10, 0, 0),
+            };
+            var contributionHeader = new StackPanel();
+            contributionHeader.Children.Add(new TextBlock
+            {
+                Text = "Open car-verification workflow",
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+            });
+            contributionHeader.Children.Add(new TextBlock
+            {
+                Text = "Capture a live car, run guided tests, review optional details, and save a draft.",
+                FontSize = 12,
+                Opacity = 0.7,
+            });
+            _contributionExpander = new Expander
+            {
+                Header = contributionHeader,
+                IsExpanded = false,
+                Content = _verification,
+            };
+            contributionPanel.Children.Add(_contributionExpander);
+            panel.Children.Add(new Border
+            {
+                Background = new SolidColorBrush(Color.FromArgb(24, 50, 190, 235)),
+                BorderBrush = new SolidColorBrush(Color.FromRgb(39, 151, 230)),
+                BorderThickness = new Thickness(1.5),
+                CornerRadius = new CornerRadius(8),
+                Padding = new Thickness(18),
+                Margin = new Thickness(0, 42, 0, 18),
+                Child = contributionPanel,
+            });
+
+            _scrollViewer = new ScrollViewer
             {
                 Content = panel,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             };
+            Content = _scrollViewer;
 
             _statusTimer = new DispatcherTimer
             {
@@ -360,6 +426,10 @@ namespace AuthenticControls.Plugin
                 _liveStatus.Text = "Status: " + state;
             }
 
+            _contributeLiveButton.Visibility = state == "unmatched"
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+
             _versionStatus.Text = "Plugin " + _plugin.PluginVersion
                 + "  •  Dataset " + EmptyAsUnknown(_plugin.CurrentDatasetVersion)
                 + "  •  " + _plugin.DatabaseRecordCount + " records";
@@ -371,6 +441,40 @@ namespace AuthenticControls.Plugin
                 : "Error: " + _plugin.CurrentRuntimeError;
             UpdatePreviewStatus();
             _verification.UpdateLiveAvailability();
+            HandleContributionRequest();
+        }
+
+        private void ContributeLiveCarClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            if (!_plugin.RequestCarContributionFromLive())
+            {
+                _status.Text = "No live car is available to contribute.";
+                return;
+            }
+            HandleContributionRequest();
+        }
+
+        private void HandleContributionRequest()
+        {
+            int revision = _plugin.ContributionRequestRevision;
+            if (revision <= 0 || revision == _handledContributionRequestRevision)
+            {
+                return;
+            }
+            VerificationCaptureContext capture = _plugin.GetContributionRequestCapture();
+            if (capture == null)
+            {
+                return;
+            }
+            _handledContributionRequestRevision = revision;
+            _contributionExpander.IsExpanded = true;
+            _verification.BeginFromCapture(capture);
+            _plugin.AcknowledgeContributionRequest(revision);
+            _status.Text = "Contribution draft started for " + capture.TelemetryName
+                + ". Continue in the highlighted contributor workflow below.";
+            _contributionExpander.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background,
+                new Action(delegate { _contributionExpander.BringIntoView(); }));
         }
 
         private void UpdatePreviewStatus()

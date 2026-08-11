@@ -621,7 +621,7 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
             factory.rectangle("StateMark", 12, 14, 28, 28, accent, radius=6),
             factory.text("StateMarkText", "!" if unmatched else "…", 12, 14, 28, 28, 16, "#FF111820", horizontal_alignment=1, font_weight="Bold"),
             factory.text("StateTitle", "Unmapped car" if unmatched else "Waiting for a car", 48, 12, 256, 28, 16, WHITE, expression=title_expression, font_weight="Bold"),
-            factory.text("StateBody", "No values assumed" if unmatched else "Start a supported session", 12, 54, 292, 34, 13, MUTED, font_weight="Bold"),
+            factory.text("StateBody", "Contribution available - no values assumed" if unmatched else "Start a supported session", 12, 54, 292, 34, 12, MUTED, font_weight="Bold"),
         ]
     else:
         left = 16 if compact else 28
@@ -633,6 +633,51 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
             factory.text("StateBody", "No curated record exists for this exact identity." if unmatched else "Start a supported simulator session to see authentic controls guidance.", left, 105 if compact else 140, factory.width - 2 * left, 48, 16 if compact else 22, TEXT, font_weight="Bold"),
             factory.text("StateSafety", "No hardware or technique values have been assumed." if unmatched else "Dataset ready • waiting for telemetry", left, factory.height - 50, factory.width - 2 * left, 28, 12 if compact else 15, MUTED),
         ])
+        if unmatched:
+            cta_top = 158 if compact else 205
+            hint_top = 196 if compact else 247
+            cta_expression = (
+                "if([AuthenticControls.ContributionRequestPending], "
+                "'CONTRIBUTION READY - OPEN AUTHENTIC CONTROLS', "
+                "'CONTRIBUTE THIS CAR')"
+            )
+            children.extend([
+                factory.rectangle(
+                    "ContributionCtaPanel",
+                    left,
+                    cta_top,
+                    factory.width - 2 * left,
+                    31,
+                    "#FF10352C",
+                    radius=7,
+                    border_color=GREEN,
+                    border=2,
+                ),
+                factory.text(
+                    "ContributionCta",
+                    "CONTRIBUTE THIS CAR",
+                    left + 10,
+                    cta_top + 2,
+                    factory.width - 2 * left - 20,
+                    27,
+                    11 if compact else 13,
+                    GREEN,
+                    expression=cta_expression,
+                    horizontal_alignment=1,
+                    font_weight="Bold",
+                ),
+                factory.text(
+                    "ContributionHint",
+                    "Open the Authentic Controls page, or map AuthenticControls.BeginCarContribution in Controls and events.",
+                    left,
+                    hint_top,
+                    factory.width - 2 * left,
+                    40,
+                    10 if compact else 12,
+                    MUTED,
+                    font_weight="Bold",
+                ),
+            ])
     expression = "![AuthenticControls.HasMatch] && [AuthenticControls.MatchStatus] == 'unmatched'" if unmatched else "![AuthenticControls.HasMatch] && [AuthenticControls.MatchStatus] != 'unmatched'"
     return factory.layer("UnmatchedState" if unmatched else "WaitingState", children, visible_expression=expression)
 

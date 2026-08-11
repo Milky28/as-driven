@@ -149,6 +149,7 @@ AuthenticControls.VerificationDriveStatus
 AuthenticControls.VerificationDriveResult
 AuthenticControls.VerificationDriveResultDetail
 AuthenticControls.VerificationDriveLiveValues
+AuthenticControls.ContributionRequestPending
 ```
 
 `PopupRevision` increments once when a new matched car is observed. Repeated
@@ -161,6 +162,10 @@ The plugin also registers `AuthenticControls.RefreshDatabase`,
 `AuthenticControls.OpenDiagnosticsFolder`,
 `AuthenticControls.OpenVerificationFolder`, and
 `AuthenticControls.ReturnToLiveCar` for optional button/event mappings.
+`AuthenticControls.BeginCarContribution` captures the current live identity and
+opens the optional contributor workflow the next time the Authentic Controls
+page is visible. The unmatched-car popup shows this action name because SimHub
+overlays normally run click-through; it can be mapped under Controls and events.
 Guided verification also registers `AuthenticControls.VerificationDriveNext`,
 `AuthenticControls.VerificationDriveRetry`,
 `AuthenticControls.VerificationDriveSkip`, and
@@ -200,7 +205,7 @@ and the separate guided-verification surface.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.11.0 packages dataset 0.3.12. It packages the approved high-fidelity 128x128 raster
+0.12.0 packages dataset 0.3.13. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -377,6 +382,17 @@ lines so the move-off instruction cannot be clipped by Dash Studio. Guided
 form badges now distinguish usable `AUTO-DETECTED` values from orange
 `REVIEW NEEDED` unknown/not-tested results; a valid `Not applicable` value
 inferred from the selected primary mechanism is labeled `DERIVED`.
+Version 0.12.0 separates contribution from ordinary plugin settings in a
+collapsed, visually distinct **Contribute car data** workflow. An unmatched
+live car exposes a **Contribute this car** handoff on the plugin page and the
+unmatched popup identifies the mapped `BeginCarContribution` action. The form
+now highlights the current next-step button, explicitly explains why the
+assist confirmation is required, marks optional cockpit and wheel fields for
+review without blocking incomplete drafts, and requires new supporting notes
+when a tester replaces an unresolved guided result with a definite answer.
+This preserves partial observations: reviewers can use a later, more complete
+draft to improve individual claims without silently replacing established
+evidence for the whole car.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

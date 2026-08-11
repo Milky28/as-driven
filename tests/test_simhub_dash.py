@@ -145,6 +145,18 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotIn("MANUAL CUT", serialized)
         self.assertNotIn("MANUAL BLIP", serialized)
 
+    def test_unmatched_card_offers_a_contribution_handoff_without_assuming_values(self):
+        for variant in ("detailed", "compact", "glance"):
+            dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
+            serialized = json.dumps(dashboard)
+            if variant == "glance":
+                self.assertIn("Contribution available", serialized)
+            else:
+                self.assertIn("No hardware or technique values have been assumed.", serialized)
+                self.assertIn("CONTRIBUTE THIS CAR", serialized)
+                self.assertIn("AuthenticControls.BeginCarContribution", serialized)
+                self.assertIn("AuthenticControls.ContributionRequestPending", serialized)
+
     def test_bitmap_icons_cover_supported_control_categories_and_unknowns(self):
         dashboards = [
             self.generator.build_dashboard(overlay=True, variant=variant)
