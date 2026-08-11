@@ -352,6 +352,9 @@ Version 0.11.1 corrects the guided detector's clutch interpretation. SimHub's
 reported value is vehicle clutch state, not a direct measurement of the user's
 pedal, so internal/automatic clutch activity no longer rejects move-off or
 shift tests. The activity is shown as `Vehicle clutch` and retained as evidence.
+Version 0.11.2 arms the move-off test from a stationary telemetry sample rather
+than requiring first gear and throttle to coincide at zero speed. This captures
+internal-clutch creep that begins as soon as a forward gear is selected.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

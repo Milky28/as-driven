@@ -280,12 +280,11 @@ namespace AuthenticControls.Core
             switch (_phase)
             {
                 case Phase.MoveOff:
-                    if (!_armed && sample.Gear > 0 && sample.SpeedKmh < 1.0
-                        && sample.Throttle >= 8.0)
+                    if (!_armed && sample.SpeedKmh < 1.0)
                     {
                         _armed = true;
                     }
-                    if (_armed && sample.SpeedKmh >= 2.0)
+                    if (_armed && sample.Gear > 0 && sample.SpeedKmh >= 2.0)
                     {
                         SetResult(
                             true,

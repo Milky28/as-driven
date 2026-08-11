@@ -474,9 +474,9 @@ namespace AuthenticControls.Core.Tests
 
                     var guidedDrive = new GuidedVerificationDrive();
                     guidedDrive.Start(6);
-                    guidedDrive.AddSample(GuidedSample(now, 1, 100, 20, 1800, 0, 80, true));
-                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 45, 20, 2000, 3, 100, true));
-                    True(guidedDrive.GetSnapshot().ResultReady, "detects clutch-free movement from rest");
+                    guidedDrive.AddSample(GuidedSample(now, 0, 100, 0, 1200, 0, 40, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 45, 0, 1300, 3, 60, true));
+                    True(guidedDrive.GetSnapshot().ResultReady, "detects clutch-free automatic creep from a stationary sample");
                     guidedDrive.Next();
                     for (int observedGear = 1; observedGear <= 6; observedGear++)
                     {
