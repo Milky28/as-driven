@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0", "dataset_version": "0.3.14", "approved_at": "2026-08-11",
+  "record_id": "ams2.super-trophy-trucks", "telemetry_name": "Super Trophy Trucks", "telemetry_class": "STT", "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": { "forward_gears": 3, "shift_actuation": "sequential-stick", "shift_pattern": "sequential", "standing_start_clutch": "not-applicable", "running_shift_clutch": "not-applicable", "throttle_lift": "not-applicable", "automatic_cut": "unknown", "automatic_blip": "yes", "manual_blip": "not-required", "wheel_rim_shape": "round", "wheel_integrated_display": "no", "wheel_shift_lights": "no", "wheel_open_top": "no" },
+  "confidence_notes": "The automatic shifting behavior, three ratios, visible sequential manual-override lever, automatic blip, and wheel were directly observed. Automatic cut remains unknown.",
+  "scope_notes": "Fictional Reiza series with no real-world model. Gearbox construction is automatic; sequential-stick records the modeled manual override interface."
+}

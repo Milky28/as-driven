@@ -1056,7 +1056,7 @@
       "published_or_updated_at": "2024-11-26",
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "Official Reiza announcement identifies the Audi R8 LMS GT3 Evo, Lamborghini Huracan GT3 EVO2, and the open-top Corvette C3.R alternative among the V1.6 cars. It establishes simulator identity context, not control behavior."
+      "notes": "Official Reiza announcement identifies the Audi V8 quattro DTM, Lamborghini Veneno Roadster, Audi R8 LMS GT3, Corvette C8 Z06 with Z07 upgrade, Audi R8 LMS GT3 Evo, Lamborghini Huracan GT3 EVO2, and the open-top Corvette C3.R alternative among the V1.6 cars. It establishes simulator identity context, not control behavior."
     },
     {
       "source_id": "alpine.a110-gt4-plus.release",
@@ -1309,6 +1309,126 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Guided draft ams2.toyota-corolla-stock-car-2024.20260811t221207461z-84a62b25 records exact StockCarV8_2024 identity, standing-start clutch, six paddle gears, automatic blip, and a closed GT-style display rim with shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
+    },
+    {
+      "source_id": "fia.audi-v8-quattro.homologation",
+      "title": "Audi V8 Quattro homologation record 5409",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/car/audi-v8-quattro",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": "1990-04-02",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official FIA identity and homologation context for the Group A Audi V8 Quattro. Exact gate and simulator technique are established separately."
+    },
+    {
+      "source_id": "auto-motor-sport.audi-v8-dtm-1990",
+      "title": "Audi V8 Quattro: 1. DTM Start 1990",
+      "publisher": "auto motor und sport",
+      "url": "https://www.auto-motor-und-sport.de/news/audi-v8-dtm-1990/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Reputable historical account specifies a fully synchronized six-speed gearbox derived from the rally quattro; exact H-pattern actuation and technique come from the AMS2 observation."
+    },
+    {
+      "source_id": "lamborghini.veneno-roadster.model",
+      "title": "Veneno Roadster technical specifications",
+      "publisher": "Automobili Lamborghini",
+      "url": "https://www.lamborghini.com/en-en/history/few-off/veneno-roadster",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official model archive identifies the Veneno Roadster and provides cockpit reference imagery. A related Lamborghini history article specifies the seven-speed ISR architecture; exact AMS2 controls were tested directly."
+    },
+    {
+      "source_id": "chevrolet.corvette-c8-z06-z07.release",
+      "title": "2023 Chevrolet Corvette Z06 Elevates the American Supercar",
+      "publisher": "Chevrolet Newsroom",
+      "url": "https://news.chevrolet.com/newsroom.detail.html/Pages/news/us/en/2021/oct/1026-corvette-z06.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2021-10-26",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer release establishes that Z07 is a Z06 performance package and specifies the eight-speed dual-clutch transmission with shift paddles. Exact AMS2 behavior and rim classification were tested directly."
+    },
+    {
+      "source_id": "ams2.reiza-release.1.6.4.2.super-trophy-trucks",
+      "title": "Automobilista 2 V1.6.4.2 - Super Trophy Trucks released",
+      "publisher": "Reiza Studios",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-4-2-super-trophy-trucks-released-now-updated-to-v1-6-4-3.34944/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2025-03-14",
+      "retrieved_at": "2026-08-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Official release identifies the fictional Super Trophy Trucks series and STT class. It does not establish control behavior."
+    },
+    {
+      "source_id": "ams2.local-guided-audi-v8-quattro-dtm-controls.1.6.9.91",
+      "title": "Guided live AMS2 Audi V8 quattro DTM control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.audi-v8-quattro-dtm.20260811t232248479z-b7b2386b records exact Group A identity, standing-start clutch, six direct H-pattern gears, lift-required clutchless upshifts, no automatic cut or blip, and a closed round rim without display or shift lights. A slight roll followed by an immediate stall was manually corrected to clutch required with explicit evidence."
+    },
+    {
+      "source_id": "ams2.local-guided-lamborghini-veneno-roadster-controls.1.6.9.91",
+      "title": "Guided live AMS2 Lamborghini Veneno Roadster control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.lamborghini-veneno-roadster.20260811t233641491z-32e007c5 records exact Hypercars identity, clutch-free move-off, seven paddle gears, automatic blip, and a closed round rim without display or shift lights. Automatic cut was manually confirmed from a brief throttle-graph interruption and remains medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-audi-r8-lms-gt3-controls.1.6.9.91",
+      "title": "Guided live AMS2 Audi R8 LMS GT3 control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.audi-r8-lms-gt3.20260811t234239650z-8d5adcd1 records exact GT3 identity, clutch-free move-off, six paddle gears, automatic blip, and an open-top GT-style rim without display or shift lights. Automatic cut was manually confirmed from a brief throttle-graph interruption and remains medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-chevrolet-corvette-c8-z06-z07-upgrade-controls.1.6.9.91",
+      "title": "Guided live AMS2 Chevrolet Corvette C8 Z06 (+Z07 Upgrade) control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.chevrolet-corvette-c8-z06-z07-upgrade.20260811t234813213z-c310bb1c establishes the exact upgraded Z06 telemetry identity, eight paddle gears, clutch-free move-off, automatic blip, and a closed round rim without display or shift lights. Automatic cut was manually confirmed and remains medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-super-trophy-trucks-controls.1.6.9.91",
+      "title": "Guided live AMS2 Super Trophy Trucks control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-4-2-super-trophy-trucks-released-now-updated-to-v1-6-4-3.34944/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided draft ams2.super-trophy-trucks.20260811t235202200z-4eeb3252 records exact STT identity, three forward gears, clutch-free move-off, sequential-style cockpit lever, automatic downshift blip, and a closed round rim without display or shift lights. The observer identified an automatic gearbox that shifts by itself while permitting manual sequential-lever override; automatic upshift cut remains unknown."
     }
   ]
 }

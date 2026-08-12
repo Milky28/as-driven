@@ -4,6 +4,10 @@
   "baseline_game_version": "1.5.5.2",
   "event_mappings": [
     { "calendar_year": 2024, "item_name": "Alpine A424", "record_id": "ams2.alpine-a424" },
+    { "calendar_year": 2024, "item_name": "Audi Quattro V8", "record_id": "ams2.audi-v8-quattro-dtm" },
+    { "calendar_year": 2024, "item_name": "Audi R8 LMS GT3", "record_id": "ams2.audi-r8-lms-gt3" },
+    { "calendar_year": 2024, "item_name": "Chevrolet Corvette C8 Z07", "record_id": "ams2.chevrolet-corvette-c8-z06-z07-upgrade" },
+    { "calendar_year": 2024, "item_name": "Lamborghini Veneno Roadster", "record_id": "ams2.lamborghini-veneno-roadster" },
     { "calendar_year": 2024, "item_name": "Ligier JS P217", "record_id": "ams2.ligier-js-p217" },
     { "calendar_year": 2024, "item_name": "Oreca 07", "record_id": "ams2.oreca-07" },
     { "calendar_year": 2024, "item_name": "Chevrolet Corvette Z06 GT3.R", "record_id": "ams2.chevrolet-corvette-z06-gt3r" },
@@ -36,6 +40,7 @@
     { "calendar_year": 2025, "item_name": "Lola B0540 V8", "record_id": "ams2.lola-b05-40-v8" },
     { "calendar_year": 2025, "item_name": "Milano GT36 GT2", "record_id": "ams2.milano-gt36" },
     { "calendar_year": 2025, "item_name": "Porsche 996 RSR", "record_id": "ams2.porsche-996-gt3-rsr" },
+    { "calendar_year": 2025, "item_name": "Super Trophy Truck", "record_id": "ams2.super-trophy-trucks" },
     { "calendar_year": 2025, "item_name": "Formula Vee Gen2", "record_id": "ams2.formula-vee-gen2" },
     { "calendar_year": 2026, "item_name": "Gillet Vertigo Streiff", "record_id": "ams2.gillet-vertigo-streiff" },
     { "calendar_year": 2026, "item_name": "Lister Storm GTM", "record_id": "ams2.lister-storm-gtm" },

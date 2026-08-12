@@ -11,7 +11,7 @@ class BoundaryAuditTests(unittest.TestCase):
     def test_current_migration_debt_is_reported_without_changing_data(self) -> None:
         report = audit_evidence_boundaries(ROOT)
         self.assertEqual(report["audit"], "evidence-boundaries")
-        self.assertEqual(report["stats"]["records"], 55)
+        self.assertEqual(report["stats"]["records"], 60)
         self.assertGreater(report["stats"]["simulator_only_authentic_claims"], 0)
         self.assertTrue(
             all(item["code"] == "authentic-claim-simulator-only" for item in report["findings"])

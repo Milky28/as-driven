@@ -74,8 +74,8 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
-Dataset 0.3.13 contains 55 reviewed records. Its eight newest records were
-promoted from versioned guided AMS2 observations while retaining official or
+Dataset 0.3.14 contains 60 reviewed records. Its newest records were promoted
+from versioned guided AMS2 observations while retaining official or
 manufacturer evidence separately from simulator behavior.
 
 The optional SimHub adapter has its own build and test command on Windows:
@@ -163,7 +163,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.13 contains 55 curated AMS2 records promoted through the reviewed
+Dataset 0.3.14 contains 60 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -200,6 +200,12 @@ Chevrolet Cruze Stock Car 2024, and Toyota Corolla Stock Car 2024. Guided
 telemetry directly established most controls; each automatic-cut claim is
 separately disclosed at medium confidence because the tester manually observed
 a brief throttle-graph interruption that the detector did not classify.
+Dataset 0.3.14 promotes Audi V8 quattro DTM, Lamborghini Veneno Roadster, Audi
+R8 LMS GT3, Chevrolet Corvette C8 Z06 (+Z07 Upgrade), and Super Trophy Trucks.
+The Audi DTM draft also demonstrates reviewed correction of a false move-off
+caused by a slight roll before stalling. Super Trophy Trucks preserves its
+automatic construction separately from its visible sequential manual-override
+lever, and all unresolved automatic-cut behavior remains `unknown`.
 
 ## Licensing
 

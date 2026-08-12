@@ -344,6 +344,7 @@ namespace AuthenticControls.Plugin
                     data.GameName ?? string.Empty,
                     carIdentifier))
                 {
+                    CancelStaleContributionRequest(carIdentifier);
                     _current = session.Current;
                     if (_current.MatchStatus == "unmatched")
                     {
@@ -569,6 +570,25 @@ namespace AuthenticControls.Plugin
                 {
                     _contributionRequestPending = false;
                     _popupState.Hide();
+                }
+            }
+        }
+
+        private void CancelStaleContributionRequest(string liveCarIdentifier)
+        {
+            lock (_contributionRequestLock)
+            {
+                if (!_contributionRequestPending || _pendingContributionCapture == null)
+                {
+                    return;
+                }
+                if (!string.Equals(
+                    _pendingContributionCapture.TelemetryName,
+                    liveCarIdentifier ?? string.Empty,
+                    StringComparison.Ordinal))
+                {
+                    _contributionRequestPending = false;
+                    _pendingContributionCapture = null;
                 }
             }
         }

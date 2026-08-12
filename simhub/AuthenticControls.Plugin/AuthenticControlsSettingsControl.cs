@@ -469,9 +469,8 @@ namespace AuthenticControls.Plugin
             _handledContributionRequestRevision = revision;
             _contributionExpander.IsExpanded = true;
             _verification.BeginFromCapture(capture);
-            _plugin.AcknowledgeContributionRequest(revision);
             _status.Text = "Contribution draft started for " + capture.TelemetryName
-                + ". Continue in the highlighted contributor workflow below.";
+                + ". Confirm the simulator setup below; the in-game reminder remains visible until then.";
             _contributionExpander.Dispatcher.BeginInvoke(
                 DispatcherPriority.Background,
                 new Action(delegate { _contributionExpander.BringIntoView(); }));

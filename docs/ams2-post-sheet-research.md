@@ -99,8 +99,14 @@ and cockpit controls are directly verified. Automatic cut remains a disclosed
 medium-confidence manual observation based on a brief throttle-graph
 interruption during no-lift upshifts. The curated dataset now contains 55
 records.
-The backlog now marks 42 release events as promoted, including aero and current
-specification variants that share a record, leaving 39 researched
+Dataset 0.3.14 adds Audi V8 quattro DTM, Lamborghini Veneno Roadster, the base
+Audi R8 LMS GT3, Chevrolet Corvette C8 Z06 (+Z07 Upgrade), and the fictional
+Super Trophy Trucks series. The DTM observation explicitly rejects a slight
+pre-stall roll as successful clutch-free move-off. The STT record models an
+automatic transmission and its visible sequential-lever manual override as
+separate facts. The curated dataset now contains 60 records.
+The backlog now marks 47 release events as promoted, including aero and current
+specification variants that share a record, leaving 34 researched
 model/configuration events awaiting review or live validation.
 
 ## Suggested verification order

@@ -1119,6 +1119,11 @@ namespace AuthenticControls.Plugin
 
         private void AssistSettingsConfirmationChanged(object sender, RoutedEventArgs eventArgs)
         {
+            if (_assistSettingsConfirmed.IsChecked == true)
+            {
+                _plugin.AcknowledgeContributionRequest(
+                    _plugin.ContributionRequestRevision);
+            }
             _guidedStart.IsEnabled = _capture != null
                 && _assistSettingsConfirmed.IsChecked == true;
             UpdateWorkflowGuidance(

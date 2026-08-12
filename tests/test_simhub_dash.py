@@ -154,6 +154,7 @@ class SimHubDashTests(unittest.TestCase):
             else:
                 self.assertIn("No hardware or technique values have been assumed.", serialized)
                 self.assertIn("CONTRIBUTE THIS CAR", serialized)
+                self.assertIn("CAR CAPTURED - CONFIRM SETUP", serialized)
                 self.assertIn("AuthenticControls.BeginCarContribution", serialized)
                 self.assertIn("AuthenticControls.ContributionRequestPending", serialized)
 

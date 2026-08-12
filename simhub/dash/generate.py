@@ -638,7 +638,7 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
             hint_top = 196 if compact else 247
             cta_expression = (
                 "if([AuthenticControls.ContributionRequestPending], "
-                "'CONTRIBUTION READY - OPEN AUTHENTIC CONTROLS', "
+                "'CAR CAPTURED - CONFIRM SETUP IN AUTHENTIC CONTROLS', "
                 "'CONTRIBUTE THIS CAR')"
             )
             children.extend([

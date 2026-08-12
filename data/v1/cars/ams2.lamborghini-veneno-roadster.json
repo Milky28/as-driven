@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.lamborghini-veneno-roadster",
+  "identity": { "display_name": "Lamborghini Veneno Roadster", "manufacturer": "Lamborghini", "model": "Veneno Roadster", "year": { "from": 2014, "label": "Veneno Roadster" }, "class": "Hypercars", "real_world_identity_notes": "Lamborghini's model archive establishes the Veneno Roadster identity and cockpit context; exact AMS2 behavior was guided-tested." },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7, "gearbox_type": "semi-automatic", "shift_actuation": "sequential-paddles", "shift_pattern": "sequential",
+      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "not-required", "automatic_blip": "yes" },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": { "wheel_rim": { "shape": "round", "diameter_mm": null, "integrated_display": "no", "shift_lights": "no", "open_top": "no", "source_label": "live-cockpit-round-closed-no-display", "notes": "Direct cockpit inspection showed a closed round rim without integrated display or shift lights." } },
+    "notes": ["The car moved from rest without physical clutch input.", "All seven paddle-selected gears accepted clutchless shifts and automatic downshift blip was directly observed.", "Automatic cut is a medium-confidence manual observation based on a brief throttle-graph interruption while pedal input was maintained."]
+  },
+  "simulators": [{
+    "simulator": "ams2",
+    "identities": [{ "kind": "telemetry-name", "value": "Lamborghini Veneno Roadster" }, { "kind": "internal-id", "value": "Lamborghini Veneno Roadster" }, { "kind": "class-id", "value": "Hypercars" }],
+    "behavior": { "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes", "wheel_rim_type": { "normalized": "round", "integrated_display": "no", "shift_lights": "no", "open_top": "no", "source_label": "live-cockpit-round-closed-no-display" }, "notes": ["Guided test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled.", "Automatic cut was manually confirmed from a brief throttle-graph interruption and is separately disclosed as medium confidence."] },
+    "overrides": [], "verified_game_version": "1.6.9.91", "verified_at": "2026-08-11",
+    "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "lamborghini.veneno-roadster.model", "ams2.local-guided-lamborghini-veneno-roadster-controls.1.6.9.91"],
+    "confidence": { "level": "high", "basis": "Exact identity and all user-facing controls were directly observed; automatic cut is separately retained at medium confidence." }
+  }],
+  "provenance": { "claims": [
+    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "lamborghini.veneno-roadster.model", "ams2.local-guided-lamborghini-veneno-roadster-controls.1.6.9.91"], "confidence": "verified", "basis": "Official sources and exact live identity agree." },
+    { "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim"], "source_refs": ["lamborghini.veneno-roadster.model", "ams2.local-guided-lamborghini-veneno-roadster-controls.1.6.9.91"], "confidence": "verified", "basis": "Manufacturer context and direct guided testing establish these values." },
+    { "paths": ["/authentic_controls/transmission/upshift/automatic_cut", "/simulators/0/behavior/shift_cut"], "source_refs": ["ams2.local-guided-lamborghini-veneno-roadster-controls.1.6.9.91"], "confidence": "medium", "basis": "Observer saw a brief throttle-graph interruption coincident with a no-lift upshift." }
+  ] },
+  "updated_at": "2026-08-11"
+}

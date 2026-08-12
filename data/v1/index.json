@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.13",
+  "dataset_version": "0.3.14",
   "released_at": "2026-08-11",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -12,14 +12,17 @@
     "cars/ams2.aston-martin-vantage-gt4-evo.json",
     "cars/ams2.aston-martin-vantage-gte.json",
     "cars/ams2.audi-r8-lmp1.json",
+    "cars/ams2.audi-r8-lms-gt3.json",
     "cars/ams2.audi-r8-lms-gt3-evo-ii.json",
     "cars/ams2.audi-r8-lms-gt4.json",
+    "cars/ams2.audi-v8-quattro-dtm.json",
     "cars/ams2.cadillac-dpi-vr.json",
     "cars/ams2.chevrolet-camaro-gt4-r.json",
     "cars/ams2.chevrolet-cruze-stock-car-2024.json",
     "cars/ams2.chevrolet-corvette-c3-r.json",
     "cars/ams2.chevrolet-corvette-c3-r-convertible.json",
     "cars/ams2.chevrolet-corvette-c5-r.json",
+    "cars/ams2.chevrolet-corvette-c8-z06-z07-upgrade.json",
     "cars/ams2.chevrolet-corvette-z06-gt3r.json",
     "cars/ams2.courage-c60-hybrid.json",
     "cars/ams2.dallara-sp1.json",
@@ -40,6 +43,7 @@
     "cars/ams2.lamborghini-huracan-super-trofeo-evo2.json",
     "cars/ams2.lamborghini-murcielago-r-gt.json",
     "cars/ams2.lamborghini-sc63.json",
+    "cars/ams2.lamborghini-veneno-roadster.json",
     "cars/ams2.ligier-js-p217.json",
     "cars/ams2.ligier-js-p320.json",
     "cars/ams2.ligier-js-p4.json",
@@ -57,6 +61,7 @@
     "cars/ams2.saleen-s7-r-gt1.json",
     "cars/ams2.sauber-mercedes-c9.json",
     "cars/ams2.spyker-c8-spyder-gt2-r.json",
+    "cars/ams2.super-trophy-trucks.json",
     "cars/ams2.toyota-corolla-stock-car-2024.json",
     "cars/ams2.tvr-tuscan-t400r-gt2.json"
   ]
