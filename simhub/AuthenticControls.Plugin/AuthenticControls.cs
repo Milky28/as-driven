@@ -22,10 +22,13 @@ namespace AuthenticControls.Plugin
     [PluginName("Authentic Controls")]
     public sealed class AuthenticControls : IPlugin, IDataPlugin, IWPFSettings, IWPFSettingsV2
     {
-        internal const double DefaultPopupDurationSeconds = 10.0;
-        internal const double MinimumPopupDurationSeconds = 1.0;
-        internal const double MaximumPopupDurationSeconds = 60.0;
-        internal const string DefaultPopupSize = "compact";
+        internal const double DefaultPopupDurationSeconds =
+            PopupPreferences.DefaultDurationSeconds;
+        internal const double MinimumPopupDurationSeconds =
+            PopupPreferences.MinimumDurationSeconds;
+        internal const double MaximumPopupDurationSeconds =
+            PopupPreferences.MaximumDurationSeconds;
+        internal const string DefaultPopupSize = PopupPreferences.DefaultSize;
         private const int ProcessQueryLimitedInformation = 0x1000;
         private static readonly System.Drawing.Bitmap MenuIcon =
             AuthenticControlsMenuIcon.Create();
@@ -691,13 +694,11 @@ namespace AuthenticControls.Plugin
             string previewLiveCarIdentifier,
             string currentLiveCarIdentifier)
         {
-            return previewActive
-                && gameRunning
-                && !string.IsNullOrWhiteSpace(currentLiveCarIdentifier)
-                && !string.Equals(
-                    previewLiveCarIdentifier ?? string.Empty,
-                    currentLiveCarIdentifier,
-                    StringComparison.Ordinal);
+            return PreviewRules.ShouldLeavePreview(
+                previewActive,
+                gameRunning,
+                previewLiveCarIdentifier,
+                currentLiveCarIdentifier);
         }
 
         internal void ReturnToLiveCar()
@@ -802,9 +803,8 @@ namespace AuthenticControls.Plugin
             {
                 return model.AutoStartLayout;
             }
-            string preferredName = SystemParameters.VirtualScreenWidth >= 3840
-                ? "Authentic Controls 5120x1440"
-                : "Authentic Controls";
+            string preferredName = PreviewRules.PreferredLayoutName(
+                SystemParameters.VirtualScreenWidth);
             return candidates.FirstOrDefault(delegate(OverlayLayout item)
             {
                 return string.Equals(
@@ -817,10 +817,7 @@ namespace AuthenticControls.Plugin
         private static bool IsAuthenticControlsLayout(OverlayLayout layout)
         {
             return layout != null
-                && !string.IsNullOrWhiteSpace(layout.Name)
-                && layout.Name.StartsWith(
-                    "Authentic Controls",
-                    StringComparison.OrdinalIgnoreCase);
+                && PreviewRules.IsAuthenticControlsLayoutName(layout.Name);
         }
 
         private static OverlayLayout CreatePreviewLayout(
@@ -1208,23 +1205,12 @@ namespace AuthenticControls.Plugin
 
         private static double NormalizePopupDuration(double seconds)
         {
-            if (double.IsNaN(seconds) || double.IsInfinity(seconds))
-            {
-                return DefaultPopupDurationSeconds;
-            }
-            return Math.Max(
-                MinimumPopupDurationSeconds,
-                Math.Min(MaximumPopupDurationSeconds, Math.Round(seconds)));
+            return PopupPreferences.NormalizeDuration(seconds);
         }
 
         private static string NormalizePopupSize(string popupSize)
         {
-            string normalized = (popupSize ?? string.Empty).Trim().ToLowerInvariant();
-            if (normalized == "detailed" || normalized == "compact" || normalized == "glance")
-            {
-                return normalized;
-            }
-            return DefaultPopupSize;
+            return PopupPreferences.NormalizeSize(popupSize);
         }
 
         private static string ResolveDatabasePath()

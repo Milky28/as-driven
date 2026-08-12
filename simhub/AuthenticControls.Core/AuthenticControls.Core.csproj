@@ -38,7 +38,9 @@
     <Compile Include="AuthenticControlsDatabase.cs" />
     <Compile Include="CarCatalogEntry.cs" />
     <Compile Include="GuidanceSnapshot.cs" />
+    <Compile Include="PopupPreferences.cs" />
     <Compile Include="PopupState.cs" />
+    <Compile Include="PreviewRules.cs" />
     <Compile Include="SessionState.cs" />
     <Compile Include="UnmatchedIdentityLog.cs" />
     <Compile Include="VerificationObservation.cs" />

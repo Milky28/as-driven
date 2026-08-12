@@ -641,6 +641,43 @@ namespace AuthenticControls.Core.Tests
                     "extracts the real SimHub product version from its startup log");
                 Equal("unknown", VersionText.ParseSimHubStartupLine("no version here"), "preserves unknown when a startup version is unavailable");
 
+                Equal(10.0, PopupPreferences.NormalizeDuration(double.NaN), "falls back to the default popup duration for a nonsense value");
+                Equal(10.0, PopupPreferences.NormalizeDuration(double.PositiveInfinity), "falls back to the default popup duration for infinity");
+                Equal(1.0, PopupPreferences.NormalizeDuration(0), "clamps a popup duration up to the supported minimum");
+                Equal(1.0, PopupPreferences.NormalizeDuration(-30), "clamps a negative popup duration to the minimum");
+                Equal(60.0, PopupPreferences.NormalizeDuration(900), "clamps a popup duration down to the supported maximum");
+                Equal(12.0, PopupPreferences.NormalizeDuration(11.6), "rounds a fractional popup duration");
+                Equal(7.0, PopupPreferences.NormalizeDuration(7), "keeps a supported popup duration");
+
+                Equal("compact", PopupPreferences.NormalizeSize(null), "falls back to the default popup size when unset");
+                Equal("compact", PopupPreferences.NormalizeSize("   "), "falls back to the default popup size when blank");
+                Equal("compact", PopupPreferences.NormalizeSize("enormous"), "falls back to the default popup size for an unrenderable value");
+                Equal("glance", PopupPreferences.NormalizeSize("  GLANCE "), "accepts a supported popup size regardless of case or padding");
+                Equal("detailed", PopupPreferences.NormalizeSize("detailed"), "keeps a supported popup size");
+
+                True(
+                    PreviewRules.ShouldLeavePreview(true, true, "Porsche 963", "BMW M Hybrid V8"),
+                    "leaves preview when the game reports a different live car");
+                False(
+                    PreviewRules.ShouldLeavePreview(true, true, "Porsche 963", "Porsche 963"),
+                    "stays in preview when the live car matches the previewed car");
+                False(
+                    PreviewRules.ShouldLeavePreview(true, true, "Porsche 963", "   "),
+                    "treats a blank live identity as no car change, so loading does not cancel preview");
+                False(
+                    PreviewRules.ShouldLeavePreview(true, false, "Porsche 963", "BMW M Hybrid V8"),
+                    "keeps preview available while the game is not running");
+                False(
+                    PreviewRules.ShouldLeavePreview(false, true, string.Empty, "BMW M Hybrid V8"),
+                    "does nothing when preview is not active");
+
+                True(PreviewRules.IsAuthenticControlsLayoutName("Authentic Controls"), "recognizes the plugin's own overlay layout");
+                True(PreviewRules.IsAuthenticControlsLayoutName("authentic controls 5120x1440"), "recognizes its layout regardless of case");
+                False(PreviewRules.IsAuthenticControlsLayoutName("My Custom Dash"), "never claims an unrelated user overlay");
+                False(PreviewRules.IsAuthenticControlsLayoutName(null), "treats a missing layout name as unrelated");
+                Equal("Authentic Controls", PreviewRules.PreferredLayoutName(1920), "prefers the standard layout on an ordinary desktop");
+                Equal("Authentic Controls 5120x1440", PreviewRules.PreferredLayoutName(5120), "prefers the wide layout on a triple-width desktop");
+
                 string syntheticRoot = Path.Combine(
                     Path.GetTempPath(), "AuthenticControlsTests-" + Guid.NewGuid().ToString("N"));
                 try
