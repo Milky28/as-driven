@@ -1263,7 +1263,7 @@
       "notes": "Official platform annex identifies the common prescribed steering wheel, pedals, transmission, and paddle-shift system used by the 2024 cars."
     },
     {
-      "source_id": "ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91",
+      "source_id": "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91",
       "title": "Guided live AMS2 Audi R8 LMS GT3 evo II control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-developent-update-changelog-release-notes.34256/",
@@ -1275,7 +1275,7 @@
       "notes": "Guided draft ams2.audi-r8-lms-gt3-evo-ii.20260811t214748271z-a4d7f775 records exact GT3_Gen2 identity, assists disabled/unavailable, clutch-free move-off, six paddle gears, automatic blip, and a closed GT-style rim without display or shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91",
+      "source_id": "ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91",
       "title": "Guided live AMS2 Lamborghini Huracan GT3 EVO2 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
@@ -1287,7 +1287,7 @@
       "notes": "Guided draft ams2.lamborghini-huracan-gt3-evo2.20260811t220202080z-42c94b66 records exact GT3_Gen2 identity, clutch-free move-off, six paddle gears, automatic blip, and a closed GT-style rim without display or shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-chevrolet-cruze-stock-car-2024-controls.1.6.9.91",
+      "source_id": "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91",
       "title": "Guided live AMS2 Chevrolet Cruze Stock Car 2024 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-5-6-1-released-now-updated-to-v1-5-6-3.33205/",
@@ -1299,7 +1299,7 @@
       "notes": "Guided draft ams2.chevrolet-cruze-stock-car-2024.20260811t220752806z-9e447dc1 records exact StockCarV8_2024 identity, standing-start clutch, six paddle gears, automatic blip, and a closed GT-style display rim with shift lights. The observer manually confirmed automatic cut from a brief throttle-graph interruption coincident with the no-lift upshift; this cut claim is medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-toyota-corolla-stock-car-2024-controls.1.6.9.91",
+      "source_id": "ams2.local-live-toyota-corolla-stock-car-2024-controls.1.6.9.91",
       "title": "Guided live AMS2 Toyota Corolla Stock Car 2024 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-5-6-1-released-now-updated-to-v1-5-6-3.33205/",
@@ -1371,7 +1371,7 @@
       "notes": "Official release identifies the fictional Super Trophy Trucks series and STT class. It does not establish control behavior."
     },
     {
-      "source_id": "ams2.local-guided-audi-v8-quattro-dtm-controls.1.6.9.91",
+      "source_id": "ams2.local-live-audi-v8-quattro-dtm-controls.1.6.9.91",
       "title": "Guided live AMS2 Audi V8 quattro DTM control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
@@ -1383,7 +1383,7 @@
       "notes": "Guided draft ams2.audi-v8-quattro-dtm.20260811t232248479z-b7b2386b records exact Group A identity, standing-start clutch, six direct H-pattern gears, lift-required clutchless upshifts, no automatic cut or blip, and a closed round rim without display or shift lights. A slight roll followed by an immediate stall was manually corrected to clutch required with explicit evidence."
     },
     {
-      "source_id": "ams2.local-guided-lamborghini-veneno-roadster-controls.1.6.9.91",
+      "source_id": "ams2.local-live-lamborghini-veneno-roadster-controls.1.6.9.91",
       "title": "Guided live AMS2 Lamborghini Veneno Roadster control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
@@ -1395,7 +1395,7 @@
       "notes": "Guided draft ams2.lamborghini-veneno-roadster.20260811t233641491z-32e007c5 records exact Hypercars identity, clutch-free move-off, seven paddle gears, automatic blip, and a closed round rim without display or shift lights. Automatic cut was manually confirmed from a brief throttle-graph interruption and remains medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-audi-r8-lms-gt3-controls.1.6.9.91",
+      "source_id": "ams2.local-live-audi-r8-lms-gt3-controls.1.6.9.91",
       "title": "Guided live AMS2 Audi R8 LMS GT3 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
@@ -1407,7 +1407,7 @@
       "notes": "Guided draft ams2.audi-r8-lms-gt3.20260811t234239650z-8d5adcd1 records exact GT3 identity, clutch-free move-off, six paddle gears, automatic blip, and an open-top GT-style rim without display or shift lights. Automatic cut was manually confirmed from a brief throttle-graph interruption and remains medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-chevrolet-corvette-c8-z06-z07-upgrade-controls.1.6.9.91",
+      "source_id": "ams2.local-live-chevrolet-corvette-c8-z06-z07-upgrade-controls.1.6.9.91",
       "title": "Guided live AMS2 Chevrolet Corvette C8 Z06 (+Z07 Upgrade) control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-development-update-the-new-cars.34156/",
@@ -1419,7 +1419,7 @@
       "notes": "Guided draft ams2.chevrolet-corvette-c8-z06-z07-upgrade.20260811t234813213z-c310bb1c establishes the exact upgraded Z06 telemetry identity, eight paddle gears, clutch-free move-off, automatic blip, and a closed round rim without display or shift lights. Automatic cut was manually confirmed and remains medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-super-trophy-trucks-controls.1.6.9.91",
+      "source_id": "ams2.local-live-super-trophy-trucks-controls.1.6.9.91",
       "title": "Guided live AMS2 Super Trophy Trucks control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-4-2-super-trophy-trucks-released-now-updated-to-v1-6-4-3.34944/",
@@ -1539,7 +1539,7 @@
       "notes": "Official period regulations cap 2008 Formula One gearboxes at seven forward ratios and describe hydraulic gear-selection actuation. Exact R28 controls come from live testing."
     },
     {
-      "source_id": "ams2.local-guided-maserati-gt2-stradale-controls.1.6.9.91",
+      "source_id": "ams2.local-live-maserati-gt2-stradale-controls.1.6.9.91",
       "title": "Guided live AMS2 Maserati GT2 Stradale control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1551,7 +1551,7 @@
       "notes": "Guided draft ams2.maserati-gt2-stradale.20260812t035715821z-ac896b31 records exact Supercars identity, clutch-free modeled move-off, eight paddle gears, automatic blip, and a round no-display rim with shift lights. The observer manually confirmed automatic cut after the automated trace was inconclusive; that cut claim remains medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-aston-martin-valkyrie-controls.1.6.9.91",
+      "source_id": "ams2.local-live-aston-martin-valkyrie-controls.1.6.9.91",
       "title": "Guided live AMS2 Aston Martin Valkyrie control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1563,7 +1563,7 @@
       "notes": "Guided draft ams2.aston-martin-valkyrie.20260812t040558970z-5c3b0877 records exact Hypercars identity, clutch-free modeled move-off, seven paddle gears, automatic blip, and a closed GT-style display rim with shift lights. The observer manually confirmed automatic cut after the automated trace was inconclusive; that cut claim remains medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-renault-r25-high-downforce-controls.1.6.9.91",
+      "source_id": "ams2.local-live-renault-r25-high-downforce-controls.1.6.9.91",
       "title": "Guided live AMS2 Renault R25 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -1575,7 +1575,7 @@
       "notes": "Guided draft ams2.renault-r25-high-downforce.20260812t041557124z-24df0c42 records exact F-V10_Gen3_HD identity, standing-start clutch, six paddle gears, automatically detected cut and blip, and a closed Formula display rim with shift lights."
     },
     {
-      "source_id": "ams2.local-guided-renault-r26-high-downforce-controls.1.6.9.91",
+      "source_id": "ams2.local-live-renault-r26-high-downforce-controls.1.6.9.91",
       "title": "Guided live AMS2 Renault R26 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -1587,7 +1587,7 @@
       "notes": "Guided draft ams2.renault-r26-high-downforce.20260812t042015228z-cdacbd2a records exact F-V8_Gen1_HD identity, standing-start clutch, seven paddle gears, automatically detected cut and blip, and a closed Formula display rim with shift lights."
     },
     {
-      "source_id": "ams2.local-guided-renault-r28-high-downforce-controls.1.6.9.91",
+      "source_id": "ams2.local-live-renault-r28-high-downforce-controls.1.6.9.91",
       "title": "Guided live AMS2 Renault R28 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -1719,7 +1719,7 @@
       "notes": "Chassis-specific dossier with manufacturer correspondence states a six-speed paddle-shift automated manual and three-spoke Momo wheel. Exact modeled technique is tested separately."
     },
     {
-      "source_id": "ams2.local-guided-ligier-js2-r-controls.1.6.9.91",
+      "source_id": "ams2.local-live-ligier-js2-r-controls.1.6.9.91",
       "title": "Guided live AMS2 Ligier JS2 R control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-7-released-now-updated-to-v1-6-7-2.35495/",
@@ -1731,7 +1731,7 @@
       "notes": "Draft ams2.ligier-js2-r.20260812t030703137z-e824bd7f records LES_2025 identity, standing-start clutch, six paddles, automatic blip, GT display rim, and manually confirmed cut retained at medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-lamborghini-miura-sv-controls.1.6.9.91",
+      "source_id": "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91",
       "title": "Guided live AMS2 Lamborghini Miura SV control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1743,7 +1743,7 @@
       "notes": "Draft ams2.lamborghini-miura-sv.20260812t031455374z-5745b059 records TC60S identity, standing-start clutch, five direct H selections, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-guided-lamborghini-revuelto-controls.1.6.9.91",
+      "source_id": "ams2.local-live-lamborghini-revuelto-controls.1.6.9.91",
       "title": "Guided live AMS2 Lamborghini Revuelto control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1755,7 +1755,7 @@
       "notes": "Draft ams2.lamborghini-revuelto.20260812t032025911z-fa7582fb records clutch-free move-off, eight paddles, automatic blip, round no-display rim, and manually confirmed cut at medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-audi-r8-v10-gt-controls.1.6.9.91",
+      "source_id": "ams2.local-live-audi-r8-v10-gt-controls.1.6.9.91",
       "title": "Guided live AMS2 Audi R8 V10 GT control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1767,7 +1767,7 @@
       "notes": "Draft ams2.audi-r8-v10-gt.20260812t032349367z-d8f81e6e records seven paddle gears, clutch-free move-off, automatic blip, round no-display rim, and manually confirmed cut at medium confidence."
     },
     {
-      "source_id": "ams2.local-guided-dodge-viper-acr-controls.1.6.9.91",
+      "source_id": "ams2.local-live-dodge-viper-acr-controls.1.6.9.91",
       "title": "Guided live AMS2 Dodge Viper ACR control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1779,7 +1779,7 @@
       "notes": "Draft ams2.dodge-viper-acr.20260812t032705828z-b0698bfc records six direct H selections, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-guided-bmw-m3-e46-gtr-controls.1.6.9.91",
+      "source_id": "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91",
       "title": "Guided live AMS2 BMW M3 E46 GTR control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-8-5-historical-endurance-pack-pt1-released-now-updated-to-v1-6-8-8.35671/",
@@ -1791,7 +1791,7 @@
       "notes": "Draft ams2.bmw-m3-e46-gtr.20260812t044903124z-b7486563 records GTR_04 identity, standing-start clutch, six sequential-stick gears, detected automatic cut, no automatic blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-guided-maserati-gransport-trofeo-controls.1.6.9.91",
+      "source_id": "ams2.local-live-maserati-gransport-trofeo-controls.1.6.9.91",
       "title": "Guided live AMS2 Maserati GranSport Trofeo control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-9-historical-endurance-pack-pt2-released.36527/",
@@ -1803,7 +1803,7 @@
       "notes": "Draft ams2.maserati-gransport-trofeo.20260812t045203160z-e795d82a records Trofeo_2005 identity, standing-start clutch, six paddles, detected torque cut and automatic blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-guided-stock-usa-gen1-speedway-controls.1.6.9.91",
+      "source_id": "ams2.local-live-stock-usa-gen1-speedway-controls.1.6.9.91",
       "title": "Guided live AMS2 Stock USA Gen1 Speedway control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1815,7 +1815,7 @@
       "notes": "Draft ams2.stock-usa-gen1-speedway.20260812t045716006z-f49b1bcd records exact Speedway identity, four H-pattern gears, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-guided-stock-usa-gen2-superspeedway-controls.1.6.9.91",
+      "source_id": "ams2.local-live-stock-usa-gen2-superspeedway-controls.1.6.9.91",
       "title": "Guided live AMS2 Stock USA Gen2 Superspeedway control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1827,7 +1827,7 @@
       "notes": "Draft ams2.stock-usa-gen2-superspeedway.20260812t050238416z-113f4415 records exact Superspeedway identity, four H-pattern gears, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-guided-stock-usa-gen3-superspeedway-controls.1.6.9.91",
+      "source_id": "ams2.local-live-stock-usa-gen3-superspeedway-controls.1.6.9.91",
       "title": "Guided live AMS2 Stock USA Gen3 Superspeedway control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -1839,7 +1839,7 @@
       "notes": "Draft ams2.stock-usa-gen3-superspeedway.20260812t050633302z-ae16ad01 records exact Superspeedway identity, five sequential-stick gears, standing-start clutch, detected automatic cut, no automatic blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.cadillac-dpi-vr.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-cadillac-dpi-vr-controls.1.6.9.91",
       "title": "Guided live AMS2 Cadillac DPi-VR control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1851,7 +1851,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.chevrolet-camaro-gt4-r.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-chevrolet-camaro-gt4-r-controls.1.6.9.91",
       "title": "Guided live AMS2 Chevrolet Camaro GT4.R control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1863,7 +1863,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.chevrolet-corvette-c3-r.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-chevrolet-corvette-c3-r-controls.1.6.9.91",
       "title": "Guided live AMS2 Chevrolet Corvette C3.R control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1875,7 +1875,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.f301.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-f301-controls.1.6.9.91",
       "title": "Guided live AMS2 Dallara F301 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1887,7 +1887,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.f309.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-f309-controls.1.6.9.91",
       "title": "Guided live AMS2 Dallara F309 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1899,7 +1899,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-inter-mg15.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-inter-mg15-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Inter MG-15 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1911,7 +1911,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-ultimate-2019.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-ultimate-2019-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Ultimate Hybrid Gen1 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1923,7 +1923,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-usa-2023.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-usa-2023-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula USA 2023 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1935,7 +1935,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-v10-g2.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-v10-g2-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V10 Gen2 (B) control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1947,7 +1947,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-vee-fin.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-vee-fin-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Vee Gen1 + Fin control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1959,7 +1959,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-reiza.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-reiza-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V8 Gen3 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1971,7 +1971,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.formula-ultimate-2022.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-ultimate-2022-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Ultimate Hybrid Gen3 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1983,7 +1983,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.mclaren-720s-gt3-evo.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-mclaren-720s-gt3-evo-controls.1.6.9.91",
       "title": "Guided live AMS2 McLaren 720S GT3 Evo control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -1995,7 +1995,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.mclaren-f1-gtr.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-mclaren-f1-gtr-controls.1.6.9.91",
       "title": "Guided live AMS2 McLaren F1 GTR control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -2007,7 +2007,7 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
-      "source_id": "ams2.sauber-mercedes-c9.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91",
       "title": "Guided live AMS2 Sauber Mercedes C9 control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/",
@@ -2043,7 +2043,7 @@
       "notes": "Official release replaces the former Formula V12 class with Formula Edge, identifies the former car as Model1, and adds V10-powered Model2 and V8-powered Model3. Exact High Downforce telemetry identities and controls are established separately."
     },
     {
-      "source_id": "ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-stock-usa-gen3-lm-controls.1.6.9.91",
       "title": "Guided live AMS2 Stock USA Gen3 LM control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
@@ -2055,7 +2055,7 @@
       "notes": "Draft ams2.stock-usa-gen3-lm.20260812t171834877z-e7fc8bec records clutch-free move-off, five paddle gears, detected automatic cut/blip, and a closed GT-style no-display rim."
     },
     {
-      "source_id": "ams2.formula-edge-model1-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Edge Model1 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-5-released.36259/",
@@ -2067,7 +2067,7 @@
       "notes": "Draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80 records standing-start clutch, six paddle gears, detected automatic cut/blip, and an open yoke rim with dash-mounted display and lights."
     },
     {
-      "source_id": "ams2.formula-edge-model2-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-edge-model2-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Edge Model2 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-5-released.36259/",
@@ -2079,7 +2079,7 @@
       "notes": "Draft ams2.formula-edge-model2-high-downforce.20260812t173111084z-2bd2b1c3 records standing-start clutch, seven paddle gears, detected automatic cut/blip, and a closed D-shaped no-display rim."
     },
     {
-      "source_id": "ams2.formula-edge-model3-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-edge-model3-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Edge Model3 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-5-released.36259/",
@@ -2091,7 +2091,7 @@
       "notes": "Draft ams2.formula-edge-model3-high-downforce.20260812t173528844z-d534209f records standing-start clutch, six paddle gears, detected automatic cut/blip, and a closed round no-display rim."
     },
     {
-      "source_id": "ams2.formula-v10-gen3-b-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-v10-gen3-b-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V10 Gen3 (B) High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -2103,7 +2103,7 @@
       "notes": "Draft ams2.formula-v10-gen3-b-high-downforce.20260812t173906657z-7278e265 records standing-start clutch, seven paddle gears, detected automatic cut/blip, and a Formula display rim with shift lights."
     },
     {
-      "source_id": "ams2.formula-v10-gen3-m-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V10 Gen3 (M) High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -2115,7 +2115,7 @@
       "notes": "Replacement draft ams2.formula-v10-gen3-m-high-downforce.20260812t175743478z-e3e818fe records standing-start clutch, seven paddle gears, detected automatic cut/blip, and a Formula display rim with shift lights."
     },
     {
-      "source_id": "ams2.formula-v8-gen1-b-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-v8-gen1-b-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V8 Gen1 (B) High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -2127,7 +2127,7 @@
       "notes": "Draft ams2.formula-v8-gen1-b-high-downforce.20260812t174602668z-8bfe9dfc records standing-start clutch, seven paddle gears, detected automatic cut/blip, and a Formula display rim with shift lights."
     },
     {
-      "source_id": "ams2.formula-v8-gen1-m-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-v8-gen1-m-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V8 Gen1 (M) High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",
@@ -2139,7 +2139,7 @@
       "notes": "Draft ams2.formula-v8-gen1-m-high-downforce.20260812t174847643z-a2e25ff6 records standing-start clutch, seven paddle gears, detected automatic cut/blip, and a Formula display rim with shift lights."
     },
     {
-      "source_id": "ams2.formula-v8-gen2-hd.local-guided-controls.1.6.9.91",
+      "source_id": "ams2.local-live-formula-v8-gen2-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula V8 Gen2 High Downforce control test",
       "publisher": "Local AMS2 observation",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-8-hungaroring-historic-track-pack-pt4-released-now-up-to-v1-6-9-81.36412/",

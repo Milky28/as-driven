@@ -24,6 +24,10 @@ behavior, or both; do not silently extend it to the other domain.
 ## Provenance rules
 
 - Add stable metadata to `data/v1/sources.json` and reference its `source_id`.
+- Name an AMS2 live-observation source
+  `ams2.local-live-<car>-controls.<game-version>`, matching the record slug and
+  the tested build. The validator enforces this so a car's drive evidence is
+  predictable from its name; other publishers keep their own prefixes.
 - Use JSON Pointer paths in `provenance.claims`. Group paths only when the same
   evidence and confidence apply.
 - State the basis: what the source directly says or what was observed.

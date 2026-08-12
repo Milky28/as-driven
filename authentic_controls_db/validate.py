@@ -18,6 +18,12 @@ DOC_STATUS_RE = re.compile(
     r"[Dd]ataset:? (\d+\.\d+\.\d+) (?:contains|with) (\d+) (?:curated|reviewed)"
 )
 DOC_RECORD_COUNT_RE = re.compile(r"currently contains (\d+) curated records")
+# One naming convention for AMS2 live-observation evidence, so a car's drive
+# source is predictable from its name. Tooling for other publishers (SimHub's
+# own identity inventories, for example) uses its own prefix and is not checked.
+LIVE_OBSERVATION_ID_RE = re.compile(
+    r"^ams2\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*$"
+)
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
 SIMULATORS = {"ams2", "iracing", "ac-evo", "ac-rally", "other"}
@@ -117,6 +123,15 @@ def _validate_sources(payload: Any, label: str, errors: list[str]) -> set[str]:
             errors.append(f"{item}: duplicate source_id {source_id}")
         else:
             ids.add(source_id)
+            if (
+                source.get("source_type") == "in-game-observation"
+                and source_id.startswith("ams2.")
+                and not LIVE_OBSERVATION_ID_RE.fullmatch(source_id)
+            ):
+                errors.append(
+                    f"{item}: in-game observation source_id must be "
+                    f"ams2.local-live-<car>-controls.<game-version>, got {source_id!r}"
+                )
         if not _valid_date(source["retrieved_at"]):
             errors.append(f"{item}: retrieved_at must be an ISO date")
         if source.get("published_or_updated_at") is not None and not _valid_date(

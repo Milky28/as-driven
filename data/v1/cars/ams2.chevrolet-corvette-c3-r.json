@@ -100,7 +100,7 @@
         "ams2.coanda-sheet.v1.0.34",
         "ams2.reiza-forum.extended-car-info",
         "simhub.local-ams2-identities.9.11.22",
-        "ams2.chevrolet-corvette-c3-r.local-guided-controls.1.6.9.91"
+        "ams2.local-live-chevrolet-corvette-c3-r-controls.1.6.9.91"
       ],
       "confidence": {
         "level": "verified",
@@ -140,7 +140,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.chevrolet-corvette-c3-r.local-guided-controls.1.6.9.91"
+          "ams2.local-live-chevrolet-corvette-c3-r-controls.1.6.9.91"
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash e65135ff."

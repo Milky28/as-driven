@@ -107,7 +107,7 @@
         "simhub.local-ams2-identities.9.11.22",
         "simhub.local-live-ams2-identities.1.6.9.91",
         "ams2.reiza-dev-update.2025-12.formula-rebrand",
-        "ams2.formula-ultimate-2022.local-guided-controls.1.6.9.91"
+        "ams2.local-live-formula-ultimate-2022-controls.1.6.9.91"
       ],
       "confidence": {
         "level": "verified",
@@ -166,7 +166,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.formula-ultimate-2022.local-guided-controls.1.6.9.91"
+          "ams2.local-live-formula-ultimate-2022-controls.1.6.9.91"
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 6bf554cd."

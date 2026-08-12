@@ -159,6 +159,52 @@ class ValidationTests(unittest.TestCase):
         errors = validate_instance(observation, schema, "observation")
         self.assertTrue(any("expected an ISO date-time with timezone" in error for error in errors))
 
+    def test_live_observation_source_id_convention_is_enforced(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            sources_path = temp_root / "data" / "v1" / "sources.json"
+            sources = json.loads(sources_path.read_text(encoding="utf-8"))
+
+            def _with_source_id(source_id: str) -> list[str]:
+                payload = json.loads(json.dumps(sources))
+                payload["sources"].append(
+                    {
+                        "source_id": source_id,
+                        "title": "Convention fixture",
+                        "publisher": "Tests",
+                        "url": "https://example.invalid/drive",
+                        "archive_url": None,
+                        "source_type": "in-game-observation",
+                        "published_or_updated_at": None,
+                        "retrieved_at": "2026-08-13",
+                        "reuse_status": "facts-only-review",
+                        "notes": "Fixture.",
+                    }
+                )
+                sources_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+                return validate_repository(temp_root)
+
+            # The retired conventions are rejected.
+            for retired in (
+                "ams2.local-guided-test-car-controls.1.6.9.91",
+                "ams2.test-car.local-guided-controls.1.6.9.91",
+            ):
+                errors = _with_source_id(retired)
+                self.assertTrue(
+                    any("must be ams2.local-live-" in error for error in errors),
+                    (retired, errors),
+                )
+
+            # The chosen convention is accepted.
+            self.assertEqual(
+                _with_source_id("ams2.local-live-test-car-controls.1.6.9.91"), []
+            )
+
+            # Other publishers keep their own prefixes.
+            self.assertEqual(
+                _with_source_id("simhub.local-ams2-identities.9.11.23"), []
+            )
+
     def test_documented_release_must_match_the_index(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp_root = self._copy_repository_data(Path(directory))

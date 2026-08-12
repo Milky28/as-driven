@@ -34,12 +34,12 @@
     "overrides": [],
     "verified_game_version": "1.6.9.91",
     "verified_at": "2026-08-12",
-    "source_refs": ["ams2.reiza-release.1.6.9.new-cars", "ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91"],
+    "source_refs": ["ams2.reiza-release.1.6.9.new-cars", "ams2.local-live-stock-usa-gen3-lm-controls.1.6.9.91"],
     "confidence": { "level": "verified", "basis": "The exact telemetry identity, move-off behavior, five paddle gears, cut/blip behavior, and cockpit controls were directly verified." }
   }],
   "provenance": { "claims": [
-    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.9.new-cars", "ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91"], "confidence": "verified", "basis": "Official release context and exact live telemetry establish the distinct LM identity." },
-    { "paths": ["/authentic_controls/transmission", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"], "source_refs": ["ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91"], "confidence": "verified", "basis": "Reviewed guided observation of the exact AMS2 identity; draft hash e7fc8bec." }
+    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.9.new-cars", "ams2.local-live-stock-usa-gen3-lm-controls.1.6.9.91"], "confidence": "verified", "basis": "Official release context and exact live telemetry establish the distinct LM identity." },
+    { "paths": ["/authentic_controls/transmission", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"], "source_refs": ["ams2.local-live-stock-usa-gen3-lm-controls.1.6.9.91"], "confidence": "verified", "basis": "Reviewed guided observation of the exact AMS2 identity; draft hash e7fc8bec." }
   ] },
   "updated_at": "2026-08-12"
 }

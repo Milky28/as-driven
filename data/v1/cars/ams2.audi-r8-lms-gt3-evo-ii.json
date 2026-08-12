@@ -65,38 +65,38 @@
       "ams2.reiza-release.1.6.3.new-cars",
       "audi.r8-lms-gt3-evo2.release",
       "audi.r8-lms-gt3.technical",
-      "ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
+      "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
     ],
     "confidence": { "level": "high", "basis": "Exact identity and most user-facing controls were directly verified; manufacturer lineage supports the six-speed paddle-sequential architecture. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation." }
   }],
   "provenance": { "claims": [
     {
       "paths": ["/identity", "/simulators/0/identities/0", "/simulators/0/identities/1", "/simulators/0/identities/3"],
-      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "audi.r8-lms-gt3-evo2.release", "ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
+      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "audi.r8-lms-gt3-evo2.release", "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
       "confidence": "verified",
       "basis": "Official simulator and manufacturer sources agree with the exact live telemetry identity and class."
     },
     {
       "paths": ["/simulators/0/identities/2", "/authentic_controls/notes/3"],
-      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
+      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
       "confidence": "medium",
       "basis": "Low Downforce is an exact observed identity whose controls explicitly inherit the tested base as an aero-package assumption."
     },
     {
       "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
-      "source_refs": ["audi.r8-lms-gt3.technical", "ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
+      "source_refs": ["audi.r8-lms-gt3.technical", "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
       "confidence": "high",
       "basis": "Audi lineage documentation and direct exercise of all six paddle-selected gears agree."
     },
     {
       "paths": ["/authentic_controls/transmission/upshift/clutch", "/authentic_controls/transmission/upshift/throttle_lift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim"],
-      "source_refs": ["ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
+      "source_refs": ["ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
       "confidence": "verified",
       "basis": "Guided current-game testing and cockpit inspection directly established these values."
     },
     {
       "paths": ["/authentic_controls/transmission/upshift/automatic_cut", "/simulators/0/behavior/shift_cut"],
-      "source_refs": ["ams2.local-guided-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
+      "source_refs": ["ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"],
       "confidence": "medium",
       "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
     }

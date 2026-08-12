@@ -102,7 +102,7 @@
         "ams2.reiza-forum.extended-car-info",
         "simhub.local-ams2-identities.9.11.22",
         "simhub.local-live-ams2-identities.1.6.9.91",
-        "ams2.formula-usa-2023.local-guided-controls.1.6.9.91"
+        "ams2.local-live-formula-usa-2023-controls.1.6.9.91"
       ],
       "confidence": {
         "level": "verified",
@@ -153,7 +153,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.formula-usa-2023.local-guided-controls.1.6.9.91"
+          "ams2.local-live-formula-usa-2023-controls.1.6.9.91"
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 83ac84cd."

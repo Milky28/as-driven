@@ -61,37 +61,37 @@
     "overrides": [],
     "verified_game_version": "1.6.9.91",
     "verified_at": "2026-08-11",
-    "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "lamborghini.huracan-gt3-evo2.model", "lamborghini.huracan-gt3-lineage.10-years", "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
+    "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "lamborghini.huracan-gt3-evo2.model", "lamborghini.huracan-gt3-lineage.10-years", "ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
     "confidence": { "level": "high", "basis": "Exact identity and most user-facing controls were directly verified; manufacturer sources support the GT3 EVO2 identity and six-speed sequential lineage. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation." }
   }],
   "provenance": { "claims": [
     {
       "paths": ["/identity", "/simulators/0/identities/0", "/simulators/0/identities/1", "/simulators/0/identities/3"],
-      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "lamborghini.huracan-gt3-evo2.model", "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
+      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "lamborghini.huracan-gt3-evo2.model", "ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
       "confidence": "verified",
       "basis": "Official simulator and manufacturer sources agree with the exact live telemetry identity and class."
     },
     {
       "paths": ["/simulators/0/identities/2", "/authentic_controls/notes/3"],
-      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
+      "source_refs": ["ams2.reiza-release.1.6.3.new-cars", "ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
       "confidence": "medium",
       "basis": "Low Downforce is an exact observed identity whose controls explicitly inherit the tested base as an aero-package assumption."
     },
     {
       "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
-      "source_refs": ["lamborghini.huracan-gt3-lineage.10-years", "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
+      "source_refs": ["lamborghini.huracan-gt3-lineage.10-years", "ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
       "confidence": "high",
       "basis": "Lamborghini lineage documentation and direct exercise of all six paddle-selected gears agree."
     },
     {
       "paths": ["/authentic_controls/transmission/upshift/clutch", "/authentic_controls/transmission/upshift/throttle_lift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim"],
-      "source_refs": ["lamborghini.huracan-gt3-evo2.model", "ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
+      "source_refs": ["lamborghini.huracan-gt3-evo2.model", "ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
       "confidence": "verified",
       "basis": "Guided current-game testing and cockpit inspection directly established these values."
     },
     {
       "paths": ["/authentic_controls/transmission/upshift/automatic_cut", "/simulators/0/behavior/shift_cut"],
-      "source_refs": ["ams2.local-guided-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
+      "source_refs": ["ams2.local-live-lamborghini-huracan-gt3-evo2-controls.1.6.9.91"],
       "confidence": "medium",
       "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
     }
