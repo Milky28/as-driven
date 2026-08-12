@@ -202,7 +202,7 @@ and the separate guided-verification surface.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.13.0 packages dataset 0.3.14. It packages the approved high-fidelity 128x128 raster
+0.13.1 packages dataset 0.3.14. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -401,6 +401,13 @@ clear next action, guided driving starts directly with the first maneuver, and
 the review highlight advances through unresolved optional fields. Captured
 driving details remain available in a collapsed section and incomplete drafts
 remain valid.
+Version 0.13.1 keeps a selected database preview active while telemetry from
+the same live car continues underneath it; preview mode now exits only when a
+different non-empty live identity arrives or the user closes it. Guided
+automatic-cut detection now uses an armed, shift-local trace, retains zero
+torque samples, and recognizes a brief throttle interruption only when it
+recovers immediately around the gear change. Ambiguous traces still remain
+`unknown`.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

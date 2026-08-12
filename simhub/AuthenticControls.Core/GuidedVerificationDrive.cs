@@ -105,6 +105,11 @@ namespace AuthenticControls.Core
         private double _maximumThrottle;
         private double _maximumTorque;
         private double _minimumTorque;
+        private double _upshiftMaximumTorque;
+        private double _upshiftMinimumTorque;
+        private double _upshiftMaximumThrottle;
+        private double _upshiftMinimumThrottle;
+        private DateTime? _upshiftGearChangedUtc;
 
         public void Start(int? suggestedForwardGears)
         {
@@ -355,29 +360,74 @@ namespace AuthenticControls.Core
             {
                 _armed = true;
                 _baselineGear = sample.Gear;
+                _upshiftMaximumTorque = sample.EngineTorque;
+                _upshiftMinimumTorque = sample.EngineTorque;
+                _upshiftMaximumThrottle = sample.Throttle;
+                _upshiftMinimumThrottle = sample.Throttle;
             }
-            if (!_armed || sample.Gear <= _baselineGear)
+            if (!_armed)
             {
                 return;
             }
-            bool liftObserved = _minimumThrottle <= 45.0;
+            if (!double.IsNaN(sample.EngineTorque)
+                && !double.IsInfinity(sample.EngineTorque))
+            {
+                _upshiftMaximumTorque = Math.Max(
+                    _upshiftMaximumTorque,
+                    sample.EngineTorque);
+                _upshiftMinimumTorque = Math.Min(
+                    _upshiftMinimumTorque,
+                    sample.EngineTorque);
+            }
+            _upshiftMaximumThrottle = Math.Max(
+                _upshiftMaximumThrottle,
+                sample.Throttle);
+            _upshiftMinimumThrottle = Math.Min(
+                _upshiftMinimumThrottle,
+                sample.Throttle);
+            if (sample.Gear <= _baselineGear)
+            {
+                return;
+            }
+            bool liftObserved = _upshiftMinimumThrottle <= 45.0;
             if (requireLift && !liftObserved)
             {
                 return;
             }
             bool torqueCut = !requireLift
-                && _maximumThrottle >= 70.0
-                && _minimumThrottle >= 60.0
-                && _maximumTorque > 20.0
-                && _minimumTorque <= (_maximumTorque * 0.35);
+                && _upshiftMaximumThrottle >= 70.0
+                && _upshiftMaximumTorque > 20.0
+                && _upshiftMinimumTorque <= (_upshiftMaximumTorque * 0.40);
+            if (!_upshiftGearChangedUtc.HasValue)
+            {
+                _upshiftGearChangedUtc = sample.TimestampUtc;
+            }
+            bool briefThrottleInterruption = !requireLift
+                && _upshiftMaximumThrottle >= 70.0
+                && _upshiftMinimumThrottle <= 45.0
+                && sample.Throttle >= 70.0
+                && sample.TimestampUtc - _upshiftGearChangedUtc.Value
+                    <= TimeSpan.FromMilliseconds(350.0);
+            if (!requireLift
+                && !torqueCut
+                && _upshiftMinimumThrottle <= 45.0
+                && sample.Throttle < 70.0
+                && sample.TimestampUtc - _upshiftGearChangedUtc.Value
+                    < TimeSpan.FromMilliseconds(350.0))
+            {
+                return;
+            }
+            bool automaticCut = torqueCut || briefThrottleInterruption;
             string message = requireLift
                 ? "Clutchless upshift accepted after a throttle lift."
                 : "Full-throttle clutchless upshift accepted. "
-                    + (torqueCut
-                        ? "A torque interruption was detected while pedal input stayed high."
+                    + (automaticCut
+                        ? (briefThrottleInterruption
+                            ? "A brief throttle interruption recovered immediately around the gear change."
+                            : "A shift-local torque interruption was detected while throttle demand stayed high.")
                         : "Automatic cut could not be established confidently from this trace.")
                     + VehicleClutchSummary();
-            SetResult(true, torqueCut, message);
+            SetResult(true, automaticCut, message);
         }
 
         private void DetectDownshift(GuidedTelemetrySample sample, bool manualBlip)
@@ -528,6 +578,11 @@ namespace AuthenticControls.Core
             _maximumThrottle = 0.0;
             _maximumTorque = 0.0;
             _minimumTorque = double.MaxValue;
+            _upshiftMaximumTorque = 0.0;
+            _upshiftMinimumTorque = double.MaxValue;
+            _upshiftMaximumThrottle = 0.0;
+            _upshiftMinimumThrottle = 100.0;
+            _upshiftGearChangedUtc = null;
         }
 
         private static bool IsTestPhase(Phase phase)

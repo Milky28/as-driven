@@ -3,7 +3,7 @@
 The SimHub guided verification workflow produces staging evidence; it does not
 edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.13.0
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.13.1
 prefills the exact live telemetry name, class, game/client versions, timestamp,
 and SimHub's reported maximum gear count. The tester confirms the gear count
 and supplies the observations that require judgment.

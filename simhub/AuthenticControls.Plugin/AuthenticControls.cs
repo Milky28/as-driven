@@ -59,6 +59,7 @@ namespace AuthenticControls.Plugin
         private AuthenticControlsDatabase _database;
         private SessionState _session;
         private bool _previewActive;
+        private string _previewLiveCarIdentifier = string.Empty;
         private OverlayLayoutManager _previewOverlayManager;
         private string _previewOverlaySize = string.Empty;
         private UnmatchedIdentityLog _unmatchedLog;
@@ -315,14 +316,27 @@ namespace AuthenticControls.Plugin
                 string carIdentifier = data.NewData == null
                     ? string.Empty
                     : data.NewData.CarModel ?? string.Empty;
-                bool leavingPreview = _previewActive && data.GameRunning;
+                bool leavingPreview = ShouldLeavePreview(
+                    _previewActive,
+                    data.GameRunning,
+                    _previewLiveCarIdentifier,
+                    carIdentifier);
                 if (_previewActive && !data.GameRunning)
                 {
+                    return;
+                }
+                if (_previewActive && !leavingPreview)
+                {
+                    session.Update(
+                        data.GameRunning,
+                        data.GameName ?? string.Empty,
+                        carIdentifier);
                     return;
                 }
                 if (leavingPreview)
                 {
                     _previewActive = false;
+                    _previewLiveCarIdentifier = string.Empty;
                     StopPreviewOverlay();
                     _current = session.Current;
                     _popupState.OnIdentityChanged(
@@ -369,6 +383,7 @@ namespace AuthenticControls.Plugin
         public void End(PluginManager pluginManager)
         {
             _previewActive = false;
+            _previewLiveCarIdentifier = string.Empty;
             StopPreviewOverlay();
             _popupState.Hide();
             _guidedVerificationDrive.Cancel();
@@ -385,6 +400,7 @@ namespace AuthenticControls.Plugin
                 _databaseRecordCount = database.RecordCount;
                 _session = new SessionState(database);
                 _previewActive = false;
+                _previewLiveCarIdentifier = string.Empty;
                 StopPreviewOverlay();
                 _current = _session.Current;
                 _lastRuntimeError = string.Empty;
@@ -397,6 +413,7 @@ namespace AuthenticControls.Plugin
                 _session = null;
                 _database = null;
                 _previewActive = false;
+                _previewLiveCarIdentifier = string.Empty;
                 StopPreviewOverlay();
                 _databaseRecordCount = 0;
                 _current = GuidanceSnapshot.Empty(
@@ -642,20 +659,41 @@ namespace AuthenticControls.Plugin
             }
             _current = preview;
             _previewActive = true;
+            VerificationCaptureContext live = CaptureVerificationContext();
+            _previewLiveCarIdentifier = live == null
+                ? string.Empty
+                : live.TelemetryName ?? string.Empty;
             _popupState.Show();
             if (StartPreviewOverlay())
             {
                 return true;
             }
             _previewActive = false;
+            _previewLiveCarIdentifier = string.Empty;
             _current = _session == null ? preview : _session.Current;
             _popupState.Hide();
             return false;
         }
 
+        internal static bool ShouldLeavePreview(
+            bool previewActive,
+            bool gameRunning,
+            string previewLiveCarIdentifier,
+            string currentLiveCarIdentifier)
+        {
+            return previewActive
+                && gameRunning
+                && !string.IsNullOrWhiteSpace(currentLiveCarIdentifier)
+                && !string.Equals(
+                    previewLiveCarIdentifier ?? string.Empty,
+                    currentLiveCarIdentifier,
+                    StringComparison.Ordinal);
+        }
+
         internal void ReturnToLiveCar()
         {
             _previewActive = false;
+            _previewLiveCarIdentifier = string.Empty;
             StopPreviewOverlay();
             _current = _session == null
                 ? GuidanceSnapshot.Empty(

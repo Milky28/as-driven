@@ -114,6 +114,15 @@ $guidedStartButton = $guidedStartField.GetValue($verificationControl)
 if ($null -eq $guidedStartButton -or $guidedStartButton.IsEnabled) {
     throw "The guided-start button must remain disabled until assist settings are confirmed."
 }
+$previewMethod = $pluginType.GetMethod(
+    "ShouldLeavePreview",
+    [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
+if ($null -eq $previewMethod `
+    -or $previewMethod.Invoke($null, @($true, $true, "Live Car", "Live Car")) `
+    -or -not $previewMethod.Invoke($null, @($true, $true, "Live Car", "Different Car")) `
+    -or $previewMethod.Invoke($null, @($true, $true, "Live Car", ""))) {
+    throw "Preview mode must survive same-car telemetry and exit only for a different live identity."
+}
 $formPanelField = $verificationType.GetField(
     "_formPanel",
     [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)

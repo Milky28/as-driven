@@ -549,6 +549,18 @@ namespace AuthenticControls.Core.Tests
                     GuidedDriveResults skippedResults = skippedAutomaticTests.GetResults();
                     Equal("not-tested", skippedResults.AutomaticCut, "does not infer no automatic cut when its test was skipped");
                     Equal("not-tested", skippedResults.AutomaticBlip, "does not infer no automatic blip when its test was skipped");
+
+                    var transientThrottleCut = new GuidedVerificationDrive();
+                    transientThrottleCut.Start(null);
+                    transientThrottleCut.Skip();
+                    transientThrottleCut.Skip();
+                    transientThrottleCut.AddSample(GuidedSample(now, 2, 0, 90, 5000, 70, 150, true));
+                    transientThrottleCut.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 20, 4300, 72, 100, true));
+                    False(transientThrottleCut.GetSnapshot().ResultReady, "waits briefly for interrupted throttle telemetry to recover");
+                    transientThrottleCut.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 90, 4200, 74, 95, true));
+                    True(transientThrottleCut.GetSnapshot().ResultReady, "detects a brief shift-local throttle interruption and recovery");
+                    transientThrottleCut.Next();
+                    Equal("yes", transientThrottleCut.GetResults().AutomaticCut, "records a controlled transient throttle interruption as automatic cut");
                 }
                 finally
                 {
