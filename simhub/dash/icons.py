@@ -420,6 +420,7 @@ def generate_icons(size: int = 128) -> dict[str, bytes]:
         "wheel-round": lambda canvas: _wheel(canvas, "round"),
         "wheel-d-shaped": lambda canvas: _wheel(canvas, "d-shaped"),
         "wheel-gt-style": lambda canvas: _wheel(canvas, "gt-style"),
+        "wheel-prototype": lambda canvas: _wheel(canvas, "formula"),
         "wheel-formula": lambda canvas: _wheel(canvas, "formula"),
         "wheel-yoke": lambda canvas: _wheel(canvas, "yoke"),
         "wheel-unknown": lambda canvas: _wheel(canvas, "unknown"),

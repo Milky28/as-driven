@@ -202,7 +202,7 @@ and the separate guided-verification surface.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.13.1 packages dataset 0.3.14. It packages the approved high-fidelity 128x128 raster
+0.13.2 packages dataset 0.3.15. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -408,6 +408,10 @@ automatic-cut detection now uses an armed, shift-local trace, retains zero
 torque samples, and recognizes a brief throttle interruption only when it
 recovers immediately around the gear change. Ambiguous traces still remain
 `unknown`.
+Version 0.13.2 packages the five-car guided-verification batch and gives Yoke
+and Prototype dedicated high-fidelity raster artwork. Every supported wheel,
+shifter, cut, blip, and lift category now has a checked packaged bitmap; the
+Prototype category no longer reuses the Formula icon.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

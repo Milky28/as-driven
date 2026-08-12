@@ -74,7 +74,7 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
-Dataset 0.3.14 contains 60 reviewed records. Its newest records were promoted
+Dataset 0.3.15 contains 65 reviewed records. Its newest records were promoted
 from versioned guided AMS2 observations while retaining official or
 manufacturer evidence separately from simulator behavior.
 
@@ -163,7 +163,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.14 contains 60 curated AMS2 records promoted through the reviewed
+Dataset 0.3.15 contains 65 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -206,6 +206,11 @@ The Audi DTM draft also demonstrates reviewed correction of a false move-off
 caused by a slight roll before stalling. Super Trophy Trucks preserves its
 automatic construction separately from its visible sequential manual-override
 lever, and all unresolved automatic-cut behavior remains `unknown`.
+Dataset 0.3.15 promotes Maserati GT2 Stradale, the road-going Aston Martin
+Valkyrie, and the exact High Downforce identities for Renault R25, R26, and
+R28. The two road cars retain medium-confidence manually confirmed automatic
+cut claims; the Renault guided tests captured shift-local automatic cut and
+blip traces directly. Untested Renault aero identities are not silently added.
 
 ## Licensing
 

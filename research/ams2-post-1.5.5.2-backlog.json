@@ -37,7 +37,7 @@
     "model_events_with_verified_source_urls": 79,
     "model_events_with_explicit_source_gap": 2,
     "events_with_identity_comparison": 98,
-    "promoted_events": 47,
+    "promoted_events": 52,
     "non_standalone_source_events": 17,
     "unresearched_model_events": 0,
     "events_without_identity_comparison": 0
@@ -4187,8 +4187,12 @@
         "research_status": "strong-transmission-partial-wheel"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.aston-martin-valkyrie",
+        "dataset_version": "0.3.15",
+        "scope": "Road-going Hypercars identity, distinct from Aston Martin Valkyrie Hypercar in LMDh."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4516,8 +4520,12 @@
         "research_status": "strong-control-source"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.maserati-gt2-stradale",
+        "dataset_version": "0.3.15",
+        "scope": "Exact road-going GT2 Stradale telemetry identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -5584,8 +5592,12 @@
         "research_status": "partial"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.renault-r25-high-downforce",
+        "dataset_version": "0.3.15",
+        "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5656,8 +5668,12 @@
         "research_status": "period_rules_strong_model_controls_partial"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.renault-r26-high-downforce",
+        "dataset_version": "0.3.15",
+        "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5728,8 +5744,12 @@
         "research_status": "period_rules_strong_model_controls_partial"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.renault-r28-high-downforce",
+        "dataset_version": "0.3.15",
+        "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
+      }
     },
     {
       "calendar_year": 2026,

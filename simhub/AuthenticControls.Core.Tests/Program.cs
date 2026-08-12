@@ -156,6 +156,30 @@ namespace AuthenticControls.Core.Tests
                     "Automobilista2", "Aston Martin Valkyrie Hypercar - Low Downforce");
                 False(unobservedValkyrieAero.HasMatch, "does not invent an unobserved Valkyrie aero alias");
 
+                GuidanceSnapshot roadValkyrie = database.Match("Automobilista2", "Aston Martin Valkyrie");
+                Equal("ams2.aston-martin-valkyrie", roadValkyrie.RecordId, "keeps the road Valkyrie distinct from the race car");
+                Equal("7-speed paddle shifters", roadValkyrie.ShiftType, "formats the road Valkyrie transmission");
+                Equal("gt-style", roadValkyrie.WheelRimShape, "uses the observed road Valkyrie rim category");
+
+                GuidanceSnapshot gt2Stradale = database.Match("Automobilista2", "Maserati GT2 Stradale");
+                Equal("8-speed paddle shifters", gt2Stradale.ShiftType, "formats the GT2 Stradale dual-clutch interface");
+                Equal("not-required", gt2Stradale.StandingStartClutch, "models automated GT2 Stradale pull-away");
+
+                foreach (string renaultFormula in new[] {
+                    "Renault R25 - High Downforce",
+                    "Renault R26 - High Downforce",
+                    "Renault R28 - High Downforce"
+                })
+                {
+                    GuidanceSnapshot renault = database.Match("Automobilista2", renaultFormula);
+                    True(renault.HasMatch, "matches exact Renault formula identity " + renaultFormula);
+                    Equal("sequential-paddles", renault.ShiftActuation, "uses Renault formula paddles for " + renaultFormula);
+                    Equal("required", renault.StandingStartClutch, "requires Renault formula standing-start clutch for " + renaultFormula);
+                    Equal("yes", renault.ShiftCut, "exposes detected automatic cut for " + renaultFormula);
+                    Equal("yes", renault.AutoBlip, "exposes detected automatic blip for " + renaultFormula);
+                    Equal("formula", renault.WheelRimShape, "uses Formula rim for " + renaultFormula);
+                }
+
                 GuidanceSnapshot audiGt4 = database.Match("Automobilista2", "Audi R8 LMS GT4");
                 Equal("7-speed paddle shifters", audiGt4.ShiftType, "formats the tested Audi GT4 transmission");
                 Equal("gt-style", audiGt4.WheelRimShape, "uses the open-top Audi GT-style rim");

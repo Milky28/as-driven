@@ -18,6 +18,7 @@
     { "calendar_year": 2024, "item_name": "Chevrolet Corvette C3.R Convertible", "record_id": "ams2.chevrolet-corvette-c3-r-convertible" },
     { "calendar_year": 2025, "item_name": "Alpine A110 GT4 Evo", "record_id": "ams2.alpine-a110-gt4-evo" },
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GT3 Evo", "record_id": "ams2.aston-martin-vantage-gt3-evo" },
+    { "calendar_year": 2025, "item_name": "Aston Martin Valkyrie", "record_id": "ams2.aston-martin-valkyrie" },
     { "calendar_year": 2025, "item_name": "Aston Martin Valkyrie Hypercar", "record_id": "ams2.aston-martin-valkyrie-hypercar" },
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GT4 Evo", "record_id": "ams2.aston-martin-vantage-gt4-evo" },
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GTE", "record_id": "ams2.aston-martin-vantage-gte" },
@@ -27,6 +28,7 @@
     { "calendar_year": 2025, "item_name": "Lamborghini Murcielago R-GT", "record_id": "ams2.lamborghini-murcielago-r-gt" },
     { "calendar_year": 2025, "item_name": "Lamborghini Murcielago R-GT — low-downforce configuration", "record_id": "ams2.lamborghini-murcielago-r-gt" },
     { "calendar_year": 2025, "item_name": "Maserati MC12 GT1", "record_id": "ams2.maserati-mc12-gt1" },
+    { "calendar_year": 2025, "item_name": "Maserati GT2 Stradale", "record_id": "ams2.maserati-gt2-stradale" },
     { "calendar_year": 2025, "item_name": "Maserati MC12 GT1 — low-downforce configuration", "record_id": "ams2.maserati-mc12-gt1" },
     { "calendar_year": 2025, "item_name": "Aston Martin DBR9 GT1", "record_id": "ams2.aston-martin-dbr9" },
     { "calendar_year": 2025, "item_name": "Aston Martin DBR9 GT1 — low-downforce configuration", "record_id": "ams2.aston-martin-dbr9" },
@@ -49,6 +51,9 @@
     { "calendar_year": 2026, "item_name": "Saleen S7-R", "record_id": "ams2.saleen-s7-r-gt1" },
     { "calendar_year": 2026, "item_name": "Spyker C8 Spyder GT2-R", "record_id": "ams2.spyker-c8-spyder-gt2-r" },
     { "calendar_year": 2026, "item_name": "TVR Tuscan T400R", "record_id": "ams2.tvr-tuscan-t400r-gt2" },
+    { "calendar_year": 2026, "item_name": "Renault R25", "record_id": "ams2.renault-r25-high-downforce" },
+    { "calendar_year": 2026, "item_name": "Renault R26", "record_id": "ams2.renault-r26-high-downforce" },
+    { "calendar_year": 2026, "item_name": "Renault R28", "record_id": "ams2.renault-r28-high-downforce" },
     { "calendar_year": 2026, "item_name": "Formula Vee Gen2 2026 specification", "record_id": "ams2.formula-vee-gen2" }
   ]
 }

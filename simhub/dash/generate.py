@@ -266,7 +266,7 @@ def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: fl
         ("Round", "wheel-round", prop + " == 'round'"),
         ("DShape", "wheel-d-shaped", prop + " == 'd-shaped'"),
         ("GTStyle", "wheel-gt-style", prop + " == 'gt-style'"),
-        ("Prototype", "wheel-formula", prop + " == 'prototype'"),
+        ("Prototype", "wheel-prototype", prop + " == 'prototype'"),
         ("Formula", "wheel-formula", prop + " == 'formula'"),
         ("Yoke", "wheel-yoke", prop + " == 'yoke'"),
         (

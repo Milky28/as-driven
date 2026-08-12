@@ -105,8 +105,12 @@ Super Trophy Trucks series. The DTM observation explicitly rejects a slight
 pre-stall roll as successful clutch-free move-off. The STT record models an
 automatic transmission and its visible sequential-lever manual override as
 separate facts. The curated dataset now contains 60 records.
-The backlog now marks 47 release events as promoted, including aero and current
-specification variants that share a record, leaving 34 researched
+Dataset 0.3.15 adds Maserati GT2 Stradale, the road-going Aston Martin
+Valkyrie, and the exact Renault R25, R26, and R28 High Downforce telemetry
+identities from guided AMS2 1.6.9.91 observations. The curated dataset now
+contains 65 records.
+The backlog now marks 52 release events as promoted, including aero and current
+specification variants that share a record, leaving 29 researched
 model/configuration events awaiting review or live validation.
 
 ## Suggested verification order
