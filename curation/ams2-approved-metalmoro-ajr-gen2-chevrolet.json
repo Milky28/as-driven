@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.19",
+  "approved_at": "2026-08-12",
+  "record_id": "ams2.metalmoro-ajr-gen2-chevrolet",
+  "telemetry_name": "MetalMoro AJR Gen2 Chevrolet",
+  "telemetry_class": "P1Gen2",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Simulator behavior directly observed in a guided drive with assists disabled; real-world identity and gearbox supported by registered sources.",
+  "scope_notes": "Single exact identity from one guided-verification drive; no aero alias."
+}

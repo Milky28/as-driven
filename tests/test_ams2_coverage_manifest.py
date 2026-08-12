@@ -21,7 +21,7 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         observed = [entry["car_model"] for entry in audit["observed_identities"]]
         self.assertEqual(sorted(names), sorted(observed))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(manifest["dataset_version"], "0.3.18")
+        self.assertEqual(manifest["dataset_version"], "0.3.19")
 
     def test_low_downforce_inheritance_requires_an_exact_base(self):
         manifest = json.loads(
@@ -29,11 +29,17 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         )
         entries = {entry["telemetry_name"]: entry for entry in manifest["entries"]}
         audi = entries["Audi R8 LMP1 - Low Downforce"]
-        bmw = entries["BMW M Hybrid V8 - Low Downforce"]
+        nissan = entries["Nissan R89C - Low Downforce"]
         self.assertEqual(audi["coverage_disposition"], "aero-inheritance-ready")
         self.assertEqual(audi["related_record_id"], "ams2.audi-r8-lmp1")
-        self.assertEqual(bmw["coverage_disposition"], "aero-inheritance-after-base")
-        self.assertIsNone(bmw["related_record_id"])
+        # A base car that is not yet curated keeps its Low Downforce alias pending.
+        self.assertEqual(nissan["coverage_disposition"], "aero-inheritance-after-base")
+        self.assertIsNone(nissan["related_record_id"])
+        # Once the base car is promoted with an explicit alias identity (as in the
+        # 0.3.19 prototype batch), the Low Downforce identity is covered exactly.
+        bmw = entries["BMW M Hybrid V8 - Low Downforce"]
+        self.assertEqual(bmw["coverage_disposition"], "covered-exact")
+        self.assertEqual(bmw["related_record_id"], "ams2.bmw-m-hybrid-v8")
 
     def test_qualified_formula_does_not_create_a_silent_plain_alias(self):
         manifest = json.loads(

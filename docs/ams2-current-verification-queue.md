@@ -1,8 +1,30 @@
 # AMS2 current verification queue
 
-Dataset 0.3.18 completes this audited queue. It deliberately counted selectable
-model/configuration identities, not release-note classes, renames, or generic
-aero announcements.
+Dataset 0.3.18 completes the earlier audited queue. It deliberately counted
+selectable model/configuration identities, not release-note classes, renames, or
+generic aero announcements.
+
+## Completed in dataset 0.3.19 (modern-prototype batch 01)
+
+Guided-verification drives promoted through the `import-observation` staging
+tool, then reviewed with registered real-world sources:
+
+1. BMW M Hybrid V8 (LMDh) — clutch-free move-off, seven paddle gears, automatic
+   cut and blip; prototype display rim.
+2. Porsche 963 (LMDh) — as above; the live drive confirmed seven forward gears.
+3. Chevrolet Corvette GTP (1988 IMSA GTP) — H-pattern, five gears, standing-start
+   clutch required, throttle lift to upshift, manual blip to downshift, no
+   automatic cut or blip (Hewland VGC racing gearbox).
+4. MetalMoro AJR Chevrolet (P1) — clutch-free move-off, six paddle gears,
+   automatic cut and blip.
+5. MetalMoro AJR Gen2 Chevrolet (P1Gen2) — reviewed independently from the base
+   AJR; six paddle gears, automatic cut and blip.
+
+The BMW, Porsche, and Corvette base records each carry their exact `- Low
+Downforce` alias as an explicit inherited identity with an untested-aero note.
+
+The next prototype batch is Mazda 787B, Nissan R89C, Porsche 962C, and MetalMoro
+MRX Duratec P4 (see `docs/ams2-coverage-plan.md`).
 
 ## Completed in dataset 0.3.18
 

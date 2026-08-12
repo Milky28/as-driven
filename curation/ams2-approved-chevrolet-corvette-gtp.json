@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.19",
+  "approved_at": "2026-08-12",
+  "record_id": "ams2.chevrolet-corvette-gtp",
+  "telemetry_name": "Chevrolet Corvette GTP",
+  "telemetry_class": "Group C",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "unknown",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Simulator behavior directly observed in a guided drive with assists disabled; real-world identity and gearbox supported by registered sources. Manual lift/blip set from the guided-drive method notes.",
+  "scope_notes": "'Chevrolet Corvette GTP - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "additional_telemetry_names": [
+    {
+      "value": "Chevrolet Corvette GTP - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ]
+}

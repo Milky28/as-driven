@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.18 contains 85 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.19 contains 90 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,9 +12,9 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 102 observed identities are covered exactly by curated records.
-- 123 observed identities require some action.
-- 95 currently appear to need full guided verification.
+- 110 observed identities are covered exactly by curated records.
+- 115 observed identities require some action.
+- 90 currently appear to need full guided verification.
 - 44 of those 95 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
@@ -46,17 +46,22 @@ untested aero inheritance is disclosed in record notes and provenance.
 
 ### 2. Verify modern prototypes
 
+Modern-prototype batch 01 was completed in dataset 0.3.19: BMW M Hybrid V8,
+Chevrolet Corvette GTP, Porsche 963, MetalMoro AJR Chevrolet, and MetalMoro AJR
+Gen2 Chevrolet, with the BMW/Corvette/Porsche `- Low Downforce` aliases carried
+as explicit inherited identities.
+
 Start the next guided batch with:
 
-1. BMW M Hybrid V8;
-2. Chevrolet Corvette GTP;
-3. Porsche 963;
-4. MetalMoro AJR Chevrolet;
-5. MetalMoro AJR Gen2 Chevrolet.
+1. Mazda 787B;
+2. Nissan R89C;
+3. Porsche 962C;
+4. MetalMoro MRX Duratec P4.
 
-This batch is small, has high pre-session hardware value, and establishes base
-records for three pending Low Downforce identities. Mazda 787B, Nissan R89C,
-Porsche 962C, and MetalMoro MRX Duratec P4 follow in the next prototype batch.
+This batch establishes base records for the Nissan R89C and Porsche 962C pending
+Low Downforce identities. The three historic Le Mans cars each carry a legacy
+control candidate to seed research; the guided drive still establishes current
+AMS2 behavior.
 
 ### 3. Verify contemporary GT cars
 
