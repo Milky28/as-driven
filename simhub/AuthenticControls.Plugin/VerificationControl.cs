@@ -3,55 +3,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Media;
 using AuthenticControls.Core;
 
 namespace AuthenticControls.Plugin
 {
-    internal sealed class VerificationControl : Border
+    internal sealed partial class VerificationControl : Border
     {
         private readonly AuthenticControls _plugin;
-        private readonly TextBlock _liveAvailability;
-        private readonly TextBlock _workflowStatus;
-        private readonly TextBlock _capturedIdentity;
-        private readonly TextBlock _status;
-        private readonly TextBox _observer;
-        private readonly TextBox _forwardGears;
-        private readonly ComboBox _directGearSelection;
-        private readonly ComboBox _automaticClutch;
-        private readonly ComboBox _automaticShifting;
-        private readonly ComboBox _automaticThrottleBlip;
-        private readonly CheckBox _assistSettingsConfirmed;
-        private readonly TextBlock _assistConfirmationHint;
-        private readonly TextBox _assistNotes;
-        private readonly ComboBox _moveOff;
-        private readonly ComboBox _clutchlessUpshift;
-        private readonly ComboBox _automaticCut;
-        private readonly TextBox _automaticCutMethod;
-        private readonly ComboBox _clutchlessDownshift;
-        private readonly ComboBox _automaticBlip;
-        private readonly TextBox _automaticBlipMethod;
-        private readonly CheckBox _visiblePaddles;
-        private readonly CheckBox _visibleSequentialStick;
-        private readonly CheckBox _visibleHPattern;
-        private readonly CheckBox _visibleAutomaticLever;
-        private readonly TextBlock _visibleHardwareBadge;
-        private readonly ComboBox _primaryActuation;
-        private readonly TextBox _actuationBasis;
-        private readonly ComboBox _wheelShape;
-        private readonly ComboBox _wheelDisplay;
-        private readonly ComboBox _wheelShiftLights;
-        private readonly ComboBox _wheelOpenTop;
-        private readonly TextBox _wheelNotes;
-        private readonly TextBox _evidenceNotes;
-        private readonly Button _save;
-        private readonly Button _captureStart;
-        private readonly Button _guidedStart;
-        private readonly StackPanel _formPanel;
-        private readonly TextBlock _reviewHint;
-        private readonly Border _visibleHardwareBorder;
-        private readonly Expander _drivingResultsExpander;
+        private readonly TextBlock[] _workflowSteps;
         private readonly Dictionary<ComboBox, string> _guidedOriginalChoices =
             new Dictionary<ComboBox, string>();
         private readonly HashSet<ComboBox> _manualOverrides =
@@ -68,232 +30,33 @@ namespace AuthenticControls.Plugin
         public VerificationControl(AuthenticControls plugin)
         {
             _plugin = plugin;
-            BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
-            BorderThickness = new Thickness(1);
-            CornerRadius = new CornerRadius(5);
-            Padding = new Thickness(14);
-
-            var root = new StackPanel();
-            root.Children.Add(new TextBlock
+            InitializeComponent();
+            _workflowSteps = new[]
             {
-                Text = "Capture a versioned draft while a car is loaded. The draft is saved locally for review and never edits the database.",
-                FontSize = 15,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 10),
-            });
-            root.Children.Add(new TextBlock
-            {
-                Text = "Capture the car, confirm the saved simulator setup, run the in-sim drive, then review only the remaining cockpit details.",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.78,
-                Margin = new Thickness(0, 0, 0, 12),
-            });
-
-            var workspace = new Grid();
-            workspace.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(320) });
-            workspace.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(18) });
-            workspace.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            var sidebar = new StackPanel();
-            var form = new StackPanel { Visibility = Visibility.Collapsed };
-            _formPanel = form;
-            var sidebarBorder = new Border
-            {
-                Background = new SolidColorBrush(Color.FromArgb(18, 50, 190, 235)),
-                BorderBrush = new SolidColorBrush(Color.FromArgb(90, 50, 190, 235)),
-                BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(6),
-                Padding = new Thickness(14),
-                Child = sidebar,
+                _workflowStep1,
+                _workflowStep2,
+                _workflowStep3,
+                _workflowStep4,
             };
-            var reviewBorder = new Border
-            {
-                BorderBrush = new SolidColorBrush(Color.FromArgb(55, 120, 150, 180)),
-                BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(6),
-                Padding = new Thickness(16),
-                Child = form,
-            };
-            Grid.SetColumn(sidebarBorder, 0);
-            Grid.SetColumn(reviewBorder, 2);
-            workspace.Children.Add(sidebarBorder);
-            workspace.Children.Add(reviewBorder);
-            root.Children.Add(workspace);
-
-            _liveAvailability = new TextBlock
-            {
-                FontWeight = FontWeights.SemiBold,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 8),
-            };
-            sidebar.Children.Add(_liveAvailability);
-            _workflowStatus = new TextBlock
-            {
-                FontWeight = FontWeights.SemiBold,
-                TextWrapping = TextWrapping.Wrap,
-                Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
-                Margin = new Thickness(0, 0, 0, 8),
-            };
-            sidebar.Children.Add(_workflowStatus);
-            _captureStart = CreateButton(
-                "Start verification from live car",
-                235,
-                StartClicked,
-                new Thickness(0, 0, 0, 10));
-            sidebar.Children.Add(_captureStart);
-            _capturedIdentity = new TextBlock
-            {
-                Text = "No verification started.",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.78,
-                Margin = new Thickness(0, 0, 0, 12),
-            };
-            sidebar.Children.Add(_capturedIdentity);
-
-            _observer = CreateTextBox();
             _observer.Text = plugin.VerificationObserver;
-            AddLabeledControl(
-                sidebar,
-                "Observer name",
-                _observer,
-                null);
-
-            AddSubheading(sidebar, "Workflow");
-            sidebar.Children.Add(new TextBlock
-            {
-                Text = "1  Capture\n2  Confirm setup\n3  Guided drive\n4  Review and save",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.82,
-                Margin = new Thickness(0, 0, 0, 10),
-            });
-
-            AddSubheading(sidebar, "Simulator test setup");
-            sidebar.Children.Add(new TextBlock
-            {
-                Text = "These are simulator assists, not systems built into the car. A confirmed profile is reused for this simulator.",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.72,
-                Margin = new Thickness(0, 0, 0, 10),
-            });
-            _automaticClutch = CreateAssistCombo();
-            _automaticShifting = CreateAssistCombo();
-            _automaticThrottleBlip = CreateAssistCombo();
+            _draftDirectory.Text = plugin.VerificationDraftDirectory;
+            AttachBadge(_moveOff, _moveOffBadge);
+            AttachBadge(_forwardGears, _forwardGearsBadge);
+            AttachBadge(_directGearSelection, _directGearSelectionBadge);
+            AttachBadge(_clutchlessUpshift, _clutchlessUpshiftBadge);
+            AttachBadge(_automaticCut, _automaticCutBadge);
+            AttachBadge(_clutchlessDownshift, _clutchlessDownshiftBadge);
+            AttachBadge(_automaticBlip, _automaticBlipBadge);
+            AttachBadge(_primaryActuation, _primaryActuationBadge);
+            AttachBadge(_wheelShape, _wheelShapeBadge);
+            AttachBadge(_wheelDisplay, _wheelDisplayBadge);
+            AttachBadge(_wheelShiftLights, _wheelShiftLightsBadge);
+            AttachBadge(_wheelOpenTop, _wheelOpenTopBadge);
             _automaticClutch.SelectionChanged += AssistChoiceChanged;
             _automaticShifting.SelectionChanged += AssistChoiceChanged;
             _automaticThrottleBlip.SelectionChanged += AssistChoiceChanged;
-            AddLabeledControl(sidebar, "Automatic clutch", _automaticClutch, null);
-            AddLabeledControl(sidebar, "Automatic shifting", _automaticShifting, null);
-            AddLabeledControl(
-                sidebar,
-                "Automatic throttle-blip assist",
-                _automaticThrottleBlip,
-                null);
-            _assistSettingsConfirmed = CreateCheckBox(
-                "Use this verified setup");
-            _assistSettingsConfirmed.Margin = new Thickness(0, 0, 0, 8);
-            _assistSettingsConfirmed.Padding = new Thickness(8);
-            sidebar.Children.Add(_assistSettingsConfirmed);
-            _assistConfirmationHint = new TextBlock
-            {
-                TextWrapping = TextWrapping.Wrap,
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 0, 0, 10),
-            };
-            sidebar.Children.Add(_assistConfirmationHint);
-            sidebar.Children.Add(new TextBlock
-            {
-                Text = "For AMS2 the recommended setup is Disabled / Disabled / Unavailable. Review it once; changing a value requires reconfirmation.",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.68,
-                Margin = new Thickness(0, 0, 0, 10),
-            });
-            _assistNotes = CreateMultilineTextBox(54);
-            AddLabeledControl(sidebar, "Assist notes", _assistNotes, null);
-
-            var guidedActions = new WrapPanel { Margin = new Thickness(0, 2, 0, 8) };
-            _guidedStart = CreateButton(
-                "Start in-sim guided drive",
-                205,
-                GuidedStartClicked,
-                new Thickness(0, 0, 10, 6));
-            _guidedStart.IsEnabled = false;
             _assistSettingsConfirmed.Checked += AssistSettingsConfirmationChanged;
             _assistSettingsConfirmed.Unchecked += AssistSettingsConfirmationChanged;
-            guidedActions.Children.Add(_guidedStart);
-            guidedActions.Children.Add(CreateButton(
-                "Cancel",
-                85,
-                GuidedCancelClicked,
-                new Thickness(0, 0, 0, 6)));
-            sidebar.Children.Add(guidedActions);
-            sidebar.Children.Add(new TextBlock
-            {
-                Text = "For in-car use, map AuthenticControls.VerificationDriveNext, AuthenticControls.VerificationDriveRetry, AuthenticControls.VerificationDriveSkip, and AuthenticControls.VerificationDriveCancel under SimHub Controls and events. Driving results are suggestions until you review and save the draft.",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.65,
-                Margin = new Thickness(0, 0, 0, 12),
-            });
-
-            _reviewHint = new TextBlock
-            {
-                Text = "Run the guided drive to populate driving results. Optional review fields will be highlighted here.",
-                TextWrapping = TextWrapping.Wrap,
-                FontWeight = FontWeights.SemiBold,
-                Foreground = Brushes.Goldenrod,
-                Margin = new Thickness(0, 0, 0, 10),
-            };
-            form.Children.Add(_reviewHint);
-
-            var drivingPanel = new StackPanel();
-            _drivingResultsExpander = new Expander
-            {
-                Header = "Guided driving results (expand to review)",
-                IsExpanded = false,
-                Content = drivingPanel,
-                Margin = new Thickness(0, 4, 0, 10),
-            };
-            form.Children.Add(_drivingResultsExpander);
-            _moveOff = CreateObservedCombo();
-            _forwardGears = CreateTextBox();
-            AddControlPair(
-                drivingPanel,
-                "Moves from rest without physical clutch",
-                _moveOff,
-                "Forward gears",
-                _forwardGears);
-            _directGearSelection = CreateDirectSelectionCombo();
-            AddLabeledControl(
-                drivingPanel,
-                "Direct H-pattern selection confirmed",
-                _directGearSelection,
-                "For an H-pattern car, verify that a non-adjacent requested gear engages directly rather than stepping sequentially.");
-            _clutchlessUpshift = CreateObservedCombo();
-            _automaticCut = CreateObservedCombo();
-            AddControlPair(
-                drivingPanel,
-                "Clutchless upshift accepted",
-                _clutchlessUpshift,
-                "Automatic throttle cut observed",
-                _automaticCut);
-            _automaticCutMethod = CreateTextBox();
-            AddLabeledControl(
-                drivingPanel,
-                "How automatic cut was identified",
-                _automaticCutMethod,
-                "For example: full-throttle shift accepted with a visible power interruption.");
-            _clutchlessDownshift = CreateObservedCombo();
-            _automaticBlip = CreateObservedCombo();
-            AddControlPair(
-                drivingPanel,
-                "Clutchless downshift accepted",
-                _clutchlessDownshift,
-                "Automatic throttle blip observed",
-                _automaticBlip);
-            _automaticBlipMethod = CreateTextBox();
-            AddLabeledControl(
-                drivingPanel,
-                "How automatic blip was identified",
-                _automaticBlipMethod,
-                "For example: throttle telemetry spiked during a downshift without pedal input.");
             foreach (ComboBox guidedChoice in new[]
             {
                 _moveOff, _directGearSelection, _clutchlessUpshift,
@@ -305,36 +68,6 @@ namespace AuthenticControls.Plugin
             _forwardGears.TextChanged += GuidedTextEdited;
             _automaticCutMethod.TextChanged += GuidedTextEdited;
             _automaticBlipMethod.TextChanged += GuidedTextEdited;
-
-            AddSubheading(form, "Cockpit controls");
-            form.Children.Add(new TextBlock
-            {
-                Text = "A sequential gearbox may accept both paddle and stick bindings in AMS2. Use visible hardware and driver animation to identify the modeled primary mechanism.",
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.72,
-                Margin = new Thickness(0, 0, 0, 10),
-            });
-            var visibleHardwareLabel = new StackPanel { Orientation = Orientation.Horizontal };
-            visibleHardwareLabel.Children.Add(new TextBlock
-            {
-                Text = "Visible shift hardware",
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 0, 0, 6),
-            });
-            _visibleHardwareBadge = new TextBlock
-            {
-                FontSize = 10,
-                FontWeight = FontWeights.Bold,
-                Foreground = Brushes.Orange,
-                Margin = new Thickness(8, 1, 0, 6),
-            };
-            visibleHardwareLabel.Children.Add(_visibleHardwareBadge);
-            form.Children.Add(visibleHardwareLabel);
-            var actuatorRow = new WrapPanel { Margin = new Thickness(0, 0, 0, 12) };
-            _visiblePaddles = CreateCheckBox("Paddles");
-            _visibleSequentialStick = CreateCheckBox("Sequential stick");
-            _visibleHPattern = CreateCheckBox("H-pattern shifter");
-            _visibleAutomaticLever = CreateCheckBox("Automatic lever");
             foreach (CheckBox visibleControl in new[]
             {
                 _visiblePaddles, _visibleSequentialStick,
@@ -344,68 +77,8 @@ namespace AuthenticControls.Plugin
                 visibleControl.Checked += VisibleHardwareChanged;
                 visibleControl.Unchecked += VisibleHardwareChanged;
             }
-            actuatorRow.Children.Add(_visiblePaddles);
-            actuatorRow.Children.Add(_visibleSequentialStick);
-            actuatorRow.Children.Add(_visibleHPattern);
-            actuatorRow.Children.Add(_visibleAutomaticLever);
-            _visibleHardwareBorder = new Border
-            {
-                BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180)),
-                BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(4),
-                Padding = new Thickness(6),
-                Margin = new Thickness(0, 0, 0, 12),
-                Child = actuatorRow,
-            };
-            form.Children.Add(_visibleHardwareBorder);
-            _primaryActuation = CreateChoiceCombo(new[]
-            {
-                new Choice("Unknown", "unknown"),
-                new Choice("Sequential paddles", "sequential-paddles"),
-                new Choice("Sequential stick", "sequential-stick"),
-                new Choice("H-pattern", "h-pattern"),
-                new Choice("Automatic lever", "automatic-lever"),
-                new Choice("Direct selection", "direct-selection"),
-            });
             _primaryActuation.SelectionChanged += PrimaryActuationChanged;
-            _actuationBasis = CreateTextBox();
             _actuationBasis.TextChanged += ManualEvidenceChanged;
-            AddControlPair(
-                form,
-                "Primary shift mechanism",
-                _primaryActuation,
-                "How it was identified",
-                _actuationBasis);
-
-            AddSubheading(form, "Steering wheel");
-            _wheelShape = CreateChoiceCombo(new[]
-            {
-                new Choice("Unknown", "unknown"),
-                new Choice("Round", "round"),
-                new Choice("D-shaped", "d-shaped"),
-                new Choice("GT-style", "gt-style"),
-                new Choice("Prototype", "prototype"),
-                new Choice("Formula", "formula"),
-                new Choice("Yoke", "yoke"),
-                new Choice("Other", "other"),
-            });
-            _wheelDisplay = CreateObservedCombo();
-            AddControlPair(
-                form,
-                "Wheel shape",
-                _wheelShape,
-                "Integrated display",
-                _wheelDisplay);
-            _wheelShiftLights = CreateObservedCombo();
-            _wheelOpenTop = CreateObservedCombo();
-            AddControlPair(
-                form,
-                "Shift lights on wheel",
-                _wheelShiftLights,
-                "Open-top wheel construction",
-                _wheelOpenTop);
-            _wheelNotes = CreateMultilineTextBox(54);
-            AddLabeledControl(form, "Wheel notes", _wheelNotes, null);
             foreach (ComboBox optionalChoice in new[]
             {
                 _primaryActuation, _wheelShape, _wheelDisplay,
@@ -414,48 +87,8 @@ namespace AuthenticControls.Plugin
             {
                 optionalChoice.SelectionChanged += OptionalChoiceChanged;
             }
-
-            AddSubheading(form, "Review notes");
-            _evidenceNotes = CreateMultilineTextBox(72);
-            AddLabeledControl(
-                form,
-                "Anything a reviewer should know",
-                _evidenceNotes,
-                "Include uncertainty, unusual hybrid starts, conflicting cockpit hardware, or tests that should be repeated.");
             _evidenceNotes.TextChanged += ManualEvidenceChanged;
-
-            var actions = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 4, 0, 8),
-            };
-            _save = CreateButton(
-                "Save draft observation",
-                190,
-                SaveClicked,
-                new Thickness(0, 0, 10, 0));
-            _save.IsEnabled = false;
-            actions.Children.Add(_save);
-            actions.Children.Add(CreateButton(
-                "Open drafts folder",
-                160,
-                OpenFolderClicked,
-                new Thickness(0)));
-            form.Children.Add(actions);
-            form.Children.Add(new TextBlock
-            {
-                Text = plugin.VerificationDraftDirectory,
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.62,
-                Margin = new Thickness(0, 0, 0, 6),
-            });
-            _status = new TextBlock
-            {
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 4, 0, 0),
-            };
-            sidebar.Children.Add(_status);
-            Child = root;
+            SizeChanged += VerificationControlSizeChanged;
             UpdateAssistConfirmationStyle();
             UpdateLiveAvailability();
         }
@@ -463,6 +96,12 @@ namespace AuthenticControls.Plugin
         internal void UpdateLiveAvailability()
         {
             VerificationCaptureContext live = _plugin.CaptureVerificationContext();
+            if (live != null
+                && DraftWasSaved()
+                && !SameLiveCar(_capture, live))
+            {
+                PrepareForNextCar(live);
+            }
             _liveAvailability.Text = live == null
                 ? "Waiting for a live car. Start the simulator and load a car first."
                 : "Ready to capture: " + live.TelemetryName + " - " + live.TelemetryClass
@@ -491,10 +130,45 @@ namespace AuthenticControls.Plugin
                 }
                 ApplyGuidedResults(_plugin.GetGuidedDriveResults());
                 _guidedDriveApplied = true;
-                _formPanel.Visibility = Visibility.Visible;
+                SetReviewVisibility(true);
                 SetStatus("Guided drive complete. Suggested driving results were filled in; review the cockpit and wheel fields before saving.", Brushes.LightGreen, true);
             }
             UpdateWorkflowGuidance(live, guided);
+        }
+
+        private bool DraftWasSaved()
+        {
+            return _capture != null
+                && !_save.IsEnabled
+                && _capturedIdentity.Text.StartsWith("Completed:", StringComparison.Ordinal);
+        }
+
+        private static bool SameLiveCar(
+            VerificationCaptureContext captured,
+            VerificationCaptureContext live)
+        {
+            return captured != null
+                && live != null
+                && string.Equals(captured.Simulator, live.Simulator, StringComparison.Ordinal)
+                && string.Equals(captured.TelemetryName, live.TelemetryName, StringComparison.Ordinal)
+                && (string.IsNullOrWhiteSpace(captured.InternalId)
+                    || string.IsNullOrWhiteSpace(live.InternalId)
+                    || string.Equals(captured.InternalId, live.InternalId, StringComparison.Ordinal));
+        }
+
+        private void PrepareForNextCar(VerificationCaptureContext live)
+        {
+            _capture = null;
+            _guidedDriveApplied = true;
+            _guidedDriveStarted = false;
+            _save.IsEnabled = false;
+            SetReviewVisibility(false);
+            _capturedIdentity.Text = "Ready for a new verification: "
+                + live.TelemetryName + " - " + live.TelemetryClass + ".";
+            SetStatus(
+                "A different live car was detected. Capture the current car to begin a fresh draft.",
+                Brushes.LightGreen,
+                true);
         }
 
         private void StartClicked(object sender, RoutedEventArgs eventArgs)
@@ -518,7 +192,7 @@ namespace AuthenticControls.Plugin
             _guidedDriveApplied = true;
             _guidedDriveStarted = false;
             ResetForm();
-            _formPanel.Visibility = Visibility.Visible;
+            SetReviewVisibility(true);
             _capturedIdentity.Text = "Captured: " + live.TelemetryName + " - "
                 + live.TelemetryClass + " | " + live.SimulatorDisplayName + " " + live.GameVersion + " | "
                 + live.ClientVersion;
@@ -532,6 +206,9 @@ namespace AuthenticControls.Plugin
 
         private void ResetForm()
         {
+            // Expansion is workflow state, not a user preference. Do not carry
+            // the previous car's review state into a fresh verification.
+            _drivingResultsExpander.IsExpanded = false;
             _loadingAssistProfile = true;
             foreach (ComboBox combo in new[]
             {
@@ -678,7 +355,7 @@ namespace AuthenticControls.Plugin
                     + " - draft saved for review.";
                 SetStatus("\u2713 DRAFT SAVED SUCCESSFULLY\n" + path, Brushes.LightGreen, true);
                 _save.IsEnabled = false;
-                _formPanel.Visibility = Visibility.Collapsed;
+                SetReviewVisibility(false);
                 UpdateWorkflowGuidance(
                     _plugin.CaptureVerificationContext(),
                     _plugin.GetGuidedDriveSnapshot());
@@ -794,7 +471,25 @@ namespace AuthenticControls.Plugin
                 _applyingGuidedResults = false;
             }
             RefreshManualOverrideBadges();
+            _drivingResultsExpander.IsExpanded = GuidedResultsNeedReview();
             UpdateOptionalBadges();
+        }
+
+        private bool GuidedResultsNeedReview()
+        {
+            foreach (ComboBox combo in new[]
+            {
+                _moveOff, _clutchlessUpshift, _automaticCut,
+                _clutchlessDownshift, _automaticBlip
+            })
+            {
+                if (IsUnresolved(ChoiceValue(combo)))
+                {
+                    return true;
+                }
+            }
+            return DirectGearSelectionApplies()
+                && IsUnresolved(ChoiceValue(_directGearSelection));
         }
 
         private void UpdateWorkflowGuidance(
@@ -808,6 +503,7 @@ namespace AuthenticControls.Plugin
 
             if (_capture == null)
             {
+                UpdateWorkflowSteps(0, 0);
                 _workflowStatus.Text = live == null
                     ? "STEP 1: Load a car in the simulator."
                     : "NEXT STEP: Start verification from the live car.";
@@ -818,9 +514,9 @@ namespace AuthenticControls.Plugin
                 return;
             }
 
-            if (!_save.IsEnabled
-                && _capturedIdentity.Text.StartsWith("Completed:", StringComparison.Ordinal))
+            if (DraftWasSaved())
             {
+                UpdateWorkflowSteps(-1, 4);
                 _workflowStatus.Text = "COMPLETE: The local draft was saved for review.";
                 _assistConfirmationHint.Text = "Simulator assist settings were confirmed for this draft.";
                 _assistConfirmationHint.Foreground = Brushes.LightGreen;
@@ -832,6 +528,7 @@ namespace AuthenticControls.Plugin
             _guidedStart.IsEnabled = assistsConfirmed;
             if (!assistsConfirmed)
             {
+                UpdateWorkflowSteps(1, 1);
                 _workflowStatus.Text = "NEXT STEP: Verify the simulator setup, then select the green confirmation.";
                 _assistConfirmationHint.Text = "REQUIRED ONCE PER SIMULATOR SETUP: Confirm to enable the guided drive.";
                 _assistConfirmationHint.Foreground = Brushes.Orange;
@@ -844,6 +541,7 @@ namespace AuthenticControls.Plugin
             _assistConfirmationHint.Foreground = Brushes.LightGreen;
             if (!_guidedDriveStarted)
             {
+                UpdateWorkflowSteps(2, 2);
                 _workflowStatus.Text = "NEXT STEP: Start the in-sim guided drive and follow its overlay prompts.";
                 SetNextStepButton(_guidedStart, true);
                 return;
@@ -851,11 +549,13 @@ namespace AuthenticControls.Plugin
 
             if (guided != null && !guided.Completed)
             {
+                UpdateWorkflowSteps(2, 2);
                 _workflowStatus.Text = "GUIDED DRIVE ACTIVE: Follow the current prompt inside the simulator.";
                 return;
             }
 
             int unresolved = OptionalUnresolvedCount();
+            UpdateWorkflowSteps(3, 3);
             _workflowStatus.Text = unresolved == 0
                 ? "NEXT STEP: Review the draft, then save it for review."
                 : "NEXT STEP: Review the draft. " + unresolved
@@ -872,11 +572,143 @@ namespace AuthenticControls.Plugin
             {
                 return;
             }
+            if (active)
+            {
+                button.Background = new SolidColorBrush(Color.FromRgb(70, 210, 125));
+                button.Foreground = new SolidColorBrush(Color.FromRgb(18, 32, 38));
+            }
+            else
+            {
+                button.ClearValue(Control.BackgroundProperty);
+                button.ClearValue(Control.ForegroundProperty);
+            }
             button.BorderBrush = active
-                ? Brushes.LightGreen
+                ? Brushes.White
                 : new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
             button.BorderThickness = active ? new Thickness(2) : new Thickness(1);
             button.FontWeight = active ? FontWeights.Bold : FontWeights.Normal;
+        }
+
+        private void UpdateWorkflowSteps(int activeIndex, int completedCount)
+        {
+            if (_workflowSteps == null)
+            {
+                return;
+            }
+            for (int index = 0; index < _workflowSteps.Length; index++)
+            {
+                TextBlock step = _workflowSteps[index];
+                if (index < completedCount)
+                {
+                    step.Foreground = Brushes.LightGreen;
+                    step.FontWeight = FontWeights.SemiBold;
+                    step.Text = "✓ " + WorkflowStepLabel(index);
+                }
+                else if (index == activeIndex)
+                {
+                    step.Foreground = Brushes.White;
+                    step.FontWeight = FontWeights.Bold;
+                    step.Text = "● " + WorkflowStepLabel(index);
+                }
+                else
+                {
+                    step.Foreground = new SolidColorBrush(Color.FromArgb(190, 210, 220, 230));
+                    step.FontWeight = FontWeights.Normal;
+                    step.Text = "○ " + WorkflowStepLabel(index);
+                }
+            }
+        }
+
+        private static string WorkflowStepLabel(int index)
+        {
+            switch (index)
+            {
+                case 0: return "1  Capture live car";
+                case 1: return "2  Confirm simulator setup";
+                case 2: return "3  Run guided drive";
+                default: return "4  Review and save";
+            }
+        }
+
+        private static TextBlock CreateWorkflowStep(string number, string label)
+        {
+            var step = new TextBlock
+            {
+                Text = "○ " + number + "  " + label,
+                FontSize = 13,
+                Margin = new Thickness(0, 0, 0, 5),
+            };
+            AutomationProperties.SetName(step, "Verification step " + number + ": " + label);
+            return step;
+        }
+
+        private void SetReviewVisibility(bool visible)
+        {
+            _formPanel.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+            _reviewBorder.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+            UpdateResponsiveLayout(ActualWidth);
+        }
+
+        private void VerificationControlSizeChanged(object sender, SizeChangedEventArgs eventArgs)
+        {
+            UpdateResponsiveLayout(eventArgs.NewSize.Width);
+        }
+
+        private void UpdateResponsiveLayout(double width)
+        {
+            bool reviewVisible = _reviewBorder.Visibility == Visibility.Visible;
+            bool stackedReview = width <= 0 || width < 1000;
+
+            // Before a car is captured there is no review form to occupy the
+            // second column. Let the setup workflow use the entire workspace
+            // instead of reserving a large blank area beside it.
+            if (!reviewVisible)
+            {
+                _workspace.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+                _workspace.ColumnDefinitions[1].Width = new GridLength(0);
+                _workspace.ColumnDefinitions[2].Width = new GridLength(0);
+                _workspace.RowDefinitions[0].Height = GridLength.Auto;
+                _workspace.RowDefinitions[1].Height = new GridLength(0);
+                _workspace.RowDefinitions[2].Height = new GridLength(0);
+                Grid.SetColumn(_sidebarBorder, 0);
+                Grid.SetRow(_sidebarBorder, 0);
+                Grid.SetColumnSpan(_sidebarBorder, 3);
+                Grid.SetColumn(_reviewBorder, 0);
+                Grid.SetRow(_reviewBorder, 2);
+                Grid.SetColumnSpan(_reviewBorder, 3);
+            }
+            else if (stackedReview)
+            {
+                _workspace.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+                _workspace.ColumnDefinitions[1].Width = new GridLength(0);
+                _workspace.ColumnDefinitions[2].Width = new GridLength(0);
+                _workspace.RowDefinitions[0].Height = GridLength.Auto;
+                _workspace.RowDefinitions[1].Height = new GridLength(18);
+                _workspace.RowDefinitions[2].Height = GridLength.Auto;
+                Grid.SetColumn(_sidebarBorder, 0);
+                Grid.SetRow(_sidebarBorder, 0);
+                Grid.SetColumnSpan(_sidebarBorder, 3);
+                Grid.SetColumn(_reviewBorder, 0);
+                Grid.SetRow(_reviewBorder, 2);
+                Grid.SetColumnSpan(_reviewBorder, 3);
+            }
+            else
+            {
+                // On genuinely wide pages, give both the workflow and review
+                // form useful space rather than pinning the workflow to 320px.
+                _workspace.ColumnDefinitions[0].Width = new GridLength(2, GridUnitType.Star);
+                _workspace.ColumnDefinitions[1].Width = new GridLength(18);
+                _workspace.ColumnDefinitions[2].Width = new GridLength(3, GridUnitType.Star);
+                _workspace.RowDefinitions[0].Height = GridLength.Auto;
+                _workspace.RowDefinitions[1].Height = new GridLength(0);
+                _workspace.RowDefinitions[2].Height = new GridLength(0);
+                Grid.SetColumn(_sidebarBorder, 0);
+                Grid.SetRow(_sidebarBorder, 0);
+                Grid.SetColumnSpan(_sidebarBorder, 1);
+                Grid.SetColumn(_reviewBorder, 2);
+                Grid.SetRow(_reviewBorder, 0);
+                Grid.SetColumnSpan(_reviewBorder, 1);
+            }
         }
 
         private void UpdateOptionalBadges()
@@ -887,23 +719,11 @@ namespace AuthenticControls.Plugin
                 _wheelShiftLights, _wheelOpenTop
             })
             {
-                bool unresolved = IsUnresolved(ChoiceValue(combo));
-                SetFieldBadge(
-                    combo,
-                    unresolved ? "OPTIONAL · REVIEW" : "REVIEWED",
-                    unresolved ? Brushes.Orange : Brushes.LightGreen);
+                ClearFieldBadge(combo);
             }
 
-            bool hardwareSpecified = _visiblePaddles.IsChecked == true
-                || _visibleSequentialStick.IsChecked == true
-                || _visibleHPattern.IsChecked == true
-                || _visibleAutomaticLever.IsChecked == true;
-            _visibleHardwareBadge.Text = hardwareSpecified
-                ? "REVIEWED"
-                : "OPTIONAL · REVIEW";
-            _visibleHardwareBadge.Foreground = hardwareSpecified
-                ? Brushes.LightGreen
-                : Brushes.Orange;
+            _visibleHardwareBadge.Text = string.Empty;
+            _visibleHardwareBadge.Visibility = Visibility.Collapsed;
             HighlightNextReviewField();
         }
 
@@ -937,6 +757,9 @@ namespace AuthenticControls.Plugin
                 && _visibleHPattern.IsChecked != true
                 && _visibleAutomaticLever.IsChecked != true)
             {
+                _visibleHardwareBadge.Text = "NEXT";
+                _visibleHardwareBadge.Foreground = Brushes.LightGreen;
+                _visibleHardwareBadge.Visibility = Visibility.Visible;
                 HighlightReviewTarget(
                     _visibleHardwareBorder,
                     "NEXT: Select the shift hardware visible in the cockpit.");
@@ -951,6 +774,7 @@ namespace AuthenticControls.Plugin
             {
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
+                    SetFieldBadge(combo, "NEXT", Brushes.LightGreen);
                     HighlightReviewTarget(
                         combo,
                         "NEXT: Review " + OptionalReviewLabel(combo) + ".");
@@ -964,6 +788,10 @@ namespace AuthenticControls.Plugin
                 _automaticCut, _clutchlessDownshift, _automaticBlip
             })
             {
+                if (combo == _directGearSelection && !DirectGearSelectionApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     _drivingResultsExpander.IsExpanded = true;
@@ -977,6 +805,13 @@ namespace AuthenticControls.Plugin
 
             _reviewHint.Text = "\u2713 REVIEW COMPLETE: Save the draft, or add optional notes first.";
             _reviewHint.Foreground = Brushes.LightGreen;
+        }
+
+        private bool DirectGearSelectionApplies()
+        {
+            string actuation = ChoiceValue(_primaryActuation);
+            return string.Equals(actuation, "h-pattern", StringComparison.Ordinal)
+                || string.Equals(actuation, "direct-selection", StringComparison.Ordinal);
         }
 
         private void HighlightReviewTarget(FrameworkElement control, string message)
@@ -1051,6 +886,11 @@ namespace AuthenticControls.Plugin
 
         private void UpdateManualOverrideBadge(ComboBox combo)
         {
+            if (combo == _directGearSelection)
+            {
+                SetFieldBadge(combo, "MANUAL", Brushes.LightSkyBlue);
+                return;
+            }
             bool hasEvidence = HasManualOverrideEvidence(combo);
             SetFieldBadge(
                 combo,
@@ -1069,6 +909,12 @@ namespace AuthenticControls.Plugin
 
         private bool HasManualOverrideEvidence(ComboBox combo)
         {
+            // The explicit direct-selection choice is itself the observation.
+            // Unlike cut/blip overrides, it does not need a second evidence note.
+            if (combo == _directGearSelection)
+            {
+                return true;
+            }
             string currentNotes = (_evidenceNotes.Text ?? string.Empty).Trim();
             string guidedNotes = (_guidedEvidenceNotes ?? string.Empty).Trim();
             bool reviewNotesChanged = !string.IsNullOrWhiteSpace(currentNotes)
@@ -1094,10 +940,6 @@ namespace AuthenticControls.Plugin
                         method,
                         (_guidedAutomaticBlipMethod ?? string.Empty).Trim(),
                         StringComparison.Ordinal);
-            }
-            if (combo == _directGearSelection)
-            {
-                return !string.IsNullOrWhiteSpace(_actuationBasis.Text);
             }
             return false;
         }
@@ -1142,119 +984,6 @@ namespace AuthenticControls.Plugin
             {
                 _status.Text = "Could not open the drafts folder: " + exception.Message;
             }
-        }
-
-        private static void AddSubheading(Panel panel, string text)
-        {
-            panel.Children.Add(new TextBlock
-            {
-                Text = text,
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-                Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
-                Margin = new Thickness(0, 18, 0, 10),
-            });
-        }
-
-        private static void AddControlPair(
-            Panel panel,
-            string leftLabel,
-            Control left,
-            string rightLabel,
-            Control right)
-        {
-            var grid = new Grid { Margin = new Thickness(0, 0, 0, 12) };
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(16) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            StackPanel leftPanel = LabeledPanel(leftLabel, left);
-            StackPanel rightPanel = LabeledPanel(rightLabel, right);
-            Grid.SetColumn(leftPanel, 0);
-            Grid.SetColumn(rightPanel, 2);
-            grid.Children.Add(leftPanel);
-            grid.Children.Add(rightPanel);
-            panel.Children.Add(grid);
-        }
-
-        private static void AddLabeledControl(
-            Panel panel,
-            string label,
-            Control control,
-            string help)
-        {
-            StackPanel holder = LabeledPanel(label, control);
-            if (!string.IsNullOrWhiteSpace(help))
-            {
-                holder.Children.Add(new TextBlock
-                {
-                    Text = help,
-                    TextWrapping = TextWrapping.Wrap,
-                    Opacity = 0.65,
-                    Margin = new Thickness(0, 4, 0, 0),
-                });
-            }
-            holder.Margin = new Thickness(0, 0, 0, 12);
-            panel.Children.Add(holder);
-        }
-
-        private static StackPanel LabeledPanel(string label, Control control)
-        {
-            var holder = new StackPanel();
-            var labelRow = new StackPanel { Orientation = Orientation.Horizontal };
-            labelRow.Children.Add(new TextBlock
-            {
-                Text = label,
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 0, 0, 5),
-            });
-            var fieldBadge = new TextBlock
-            {
-                Text = string.Empty,
-                FontSize = 10,
-                FontWeight = FontWeights.Bold,
-                Foreground = Brushes.LightGreen,
-                Margin = new Thickness(8, 1, 0, 5),
-                Visibility = Visibility.Collapsed,
-            };
-            labelRow.Children.Add(fieldBadge);
-            control.Tag = fieldBadge;
-            holder.Children.Add(labelRow);
-            holder.Children.Add(control);
-            return holder;
-        }
-
-        private static ComboBox CreateAssistCombo()
-        {
-            return CreateChoiceCombo(new[]
-            {
-                new Choice("Unknown", "unknown"),
-                new Choice("Disabled", "disabled"),
-                new Choice("Enabled", "enabled"),
-                new Choice("Unavailable", "unavailable"),
-            });
-        }
-
-        private static ComboBox CreateObservedCombo()
-        {
-            return CreateChoiceCombo(new[]
-            {
-                new Choice("Not tested", "not-tested"),
-                new Choice("Yes", "yes"),
-                new Choice("No", "no"),
-                new Choice("Unknown", "unknown"),
-            });
-        }
-
-        private static ComboBox CreateDirectSelectionCombo()
-        {
-            return CreateChoiceCombo(new[]
-            {
-                new Choice("Not tested", "not-tested"),
-                new Choice("Not applicable", "not-applicable"),
-                new Choice("Yes", "yes"),
-                new Choice("No", "no"),
-                new Choice("Unknown", "unknown"),
-            });
         }
 
         private void PrimaryActuationChanged(object sender, SelectionChangedEventArgs eventArgs)
@@ -1325,6 +1054,35 @@ namespace AuthenticControls.Plugin
             _assistSettingsConfirmed.FontWeight = confirmed
                 ? FontWeights.Normal
                 : FontWeights.Bold;
+            _assistEditorPanel.Visibility = confirmed
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+            _assistSummaryPanel.Visibility = confirmed
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+            if (confirmed)
+            {
+                _assistSummary.Text = "✓ "
+                    + (_capture == null
+                        ? "Simulator setup confirmed"
+                        : _capture.SimulatorDisplayName + " setup confirmed")
+                    + "\nAutomatic clutch: " + ChoiceLabel(_automaticClutch)
+                    + " · Shifting: " + ChoiceLabel(_automaticShifting)
+                    + " · Throttle-blip assist: " + ChoiceLabel(_automaticThrottleBlip);
+            }
+        }
+
+        private void AssistEditClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _assistSettingsConfirmed.IsChecked = false;
+            UpdateAssistConfirmationStyle();
+            _automaticClutch.Focus();
+        }
+
+        private static string ChoiceLabel(ComboBox combo)
+        {
+            ComboBoxItem item = combo.SelectedItem as ComboBoxItem;
+            return item == null ? "Unknown" : Convert.ToString(item.Content, CultureInfo.InvariantCulture);
         }
 
         private void GuidedChoiceEdited(object sender, SelectionChangedEventArgs eventArgs)
@@ -1436,81 +1194,32 @@ namespace AuthenticControls.Plugin
             }
         }
 
-        private static ComboBox CreateChoiceCombo(IEnumerable<Choice> choices)
+        private static void AttachBadge(Control control, TextBlock badge)
         {
-            var combo = new ComboBox
-            {
-                Height = 30,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-            };
-            foreach (Choice choice in choices)
-            {
-                combo.Items.Add(choice);
-            }
-            combo.SelectedIndex = 0;
-            return combo;
-        }
-
-        private static TextBox CreateTextBox()
-        {
-            return new TextBox
-            {
-                Height = 30,
-                VerticalContentAlignment = VerticalAlignment.Center,
-            };
-        }
-
-        private static TextBox CreateMultilineTextBox(double height)
-        {
-            return new TextBox
-            {
-                Height = height,
-                AcceptsReturn = true,
-                TextWrapping = TextWrapping.Wrap,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            };
-        }
-
-        private static CheckBox CreateCheckBox(string label)
-        {
-            return new CheckBox
-            {
-                Content = label,
-                Margin = new Thickness(0, 0, 20, 6),
-            };
-        }
-
-        private static Button CreateButton(
-            string label,
-            double width,
-            RoutedEventHandler handler,
-            Thickness margin)
-        {
-            var button = new Button
-            {
-                Content = label,
-                Width = width,
-                Height = 32,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Margin = margin,
-            };
-            button.Click += handler;
-            return button;
+            badge.FontSize = 12;
+            badge.FontWeight = FontWeights.Bold;
+            badge.Foreground = Brushes.LightGreen;
+            badge.Margin = new Thickness(8, 1, 0, 5);
+            badge.Visibility = Visibility.Collapsed;
+            control.Tag = badge;
         }
 
         private static string ChoiceValue(ComboBox combo)
         {
-            Choice choice = combo.SelectedItem as Choice;
-            return choice == null ? string.Empty : choice.Value;
+            ComboBoxItem item = combo.SelectedItem as ComboBoxItem;
+            return item == null ? string.Empty : Convert.ToString(item.Tag, CultureInfo.InvariantCulture);
         }
 
         private static void SelectChoice(ComboBox combo, string value)
         {
             foreach (object item in combo.Items)
             {
-                Choice choice = item as Choice;
-                if (choice != null
-                    && string.Equals(choice.Value, value, StringComparison.Ordinal))
+                ComboBoxItem comboItem = item as ComboBoxItem;
+                if (comboItem != null
+                    && string.Equals(
+                        Convert.ToString(comboItem.Tag, CultureInfo.InvariantCulture),
+                        value,
+                        StringComparison.Ordinal))
                 {
                     combo.SelectedItem = item;
                     return;
@@ -1518,21 +1227,5 @@ namespace AuthenticControls.Plugin
             }
         }
 
-        private sealed class Choice
-        {
-            public Choice(string label, string value)
-            {
-                Label = label;
-                Value = value;
-            }
-
-            public string Label { get; private set; }
-            public string Value { get; private set; }
-
-            public override string ToString()
-            {
-                return Label;
-            }
-        }
     }
 }

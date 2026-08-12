@@ -37,7 +37,7 @@
     "model_events_with_verified_source_urls": 79,
     "model_events_with_explicit_source_gap": 2,
     "events_with_identity_comparison": 98,
-    "promoted_events": 62,
+    "promoted_events": 81,
     "non_standalone_source_events": 17,
     "unresearched_model_events": 0,
     "events_without_identity_comparison": 0
@@ -152,8 +152,12 @@
         "research_status": "analogue_only_in_game_validation_mandatory"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-ultimate-2022",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce."
+      }
     },
     {
       "calendar_year": 2024,
@@ -596,8 +600,12 @@
         "research_status": "strong_lineage_evidence_evo_specific_validation_needed"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.audi-r8-lms-gt3-evo-ii",
+        "dataset_version": "0.3.13",
+        "scope": "Low Downforce inherits the verified base controls as an explicit untested aero-package assumption."
+      }
     },
     {
       "calendar_year": 2024,
@@ -1017,8 +1025,12 @@
         "research_status": "partial_primary_evidence_direct_gearbox_source_needed"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lamborghini-huracan-gt3-evo2",
+        "dataset_version": "0.3.13",
+        "scope": "Low Downforce inherits the verified base controls as an explicit untested aero-package assumption."
+      }
     },
     {
       "calendar_year": 2024,
@@ -1580,8 +1592,12 @@
         "research_status": "strong_base_car_evidence_variant_identity_check_needed"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.cadillac-v-series-r",
+        "dataset_version": "0.3.17",
+        "scope": "Low Downforce is approved as an exact aero-package alias with inherited controls; it was not separately live-tested."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4383,8 +4399,12 @@
       },
       "control_source_research": null,
       "control_source_research_disposition": "covered-by-model-member-or-predecessor",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-ultimate-2019",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen1 - High Downforce."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4425,8 +4445,12 @@
       },
       "control_source_research": null,
       "control_source_research_disposition": "covered-by-model-member-or-predecessor",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-ultimate-2022",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4467,8 +4491,12 @@
       },
       "control_source_research": null,
       "control_source_research_disposition": "covered-by-model-member-or-predecessor",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-reiza",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula V8 Gen3 - High Downforce."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4830,8 +4858,12 @@
         "research_status": "mapping-unresolved"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.stock-usa-gen3-lm",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.stock-usa-gen3-lm.20260812t171834877z-e7fc8bec."
+      }
     },
     {
       "calendar_year": 2026,
@@ -4911,8 +4943,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-edge-model1-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80."
+      }
     },
     {
       "calendar_year": 2026,
@@ -4977,8 +5013,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-edge-model2-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.formula-edge-model2-high-downforce.20260812t173111084z-2bd2b1c3."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5043,8 +5083,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-edge-model3-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.formula-edge-model3-high-downforce.20260812t173528844z-d534209f."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5127,8 +5171,12 @@
         "research_status": "strong_period_architecture_partial_model_controls"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-ultimate-2019",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen1 - High Downforce."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5295,8 +5343,12 @@
         "research_status": "tire_variant_not_shown_to_be_control_distinct"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v10-g2",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula V10 Gen2 (B) - High Downforce."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5360,8 +5412,12 @@
         "research_status": "tire_variant_not_shown_to_be_control_distinct"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v10-g2",
+        "dataset_version": "0.3.17",
+        "scope": "Reviewed guided observation for Formula V10 Gen2 (B) - High Downforce."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5848,8 +5904,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v10-gen3-b-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.formula-v10-gen3-b-high-downforce.20260812t173906657z-7278e265."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5912,8 +5972,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v10-gen3-m-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed replacement draft ams2.formula-v10-gen3-m-high-downforce.20260812t175743478z-e3e818fe."
+      }
     },
     {
       "calendar_year": 2026,
@@ -5978,8 +6042,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v8-gen1-b-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.formula-v8-gen1-b-high-downforce.20260812t174602668z-8bfe9dfc."
+      }
     },
     {
       "calendar_year": 2026,
@@ -6042,8 +6110,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v8-gen1-m-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed draft ams2.formula-v8-gen1-m-high-downforce.20260812t174847643z-a2e25ff6."
+      }
     },
     {
       "calendar_year": 2026,
@@ -6106,8 +6178,12 @@
         "research_status": "blocked_by_generic_identity"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.formula-v8-gen2-high-downforce",
+        "dataset_version": "0.3.18",
+        "scope": "Reviewed exact telemetry draft ams2.formula-v8-gen2-high-downforce.20260812t175201563z-8f9ff65c; no unobserved M1 alias is approved."
+      }
     },
     {
       "calendar_year": 2026,

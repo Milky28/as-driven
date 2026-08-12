@@ -23,6 +23,7 @@ EVENT_MAP = ROOT / "curation" / "ams2-post-sheet-event-map.json"
 # These release events are class/rename/configuration bookkeeping. Their model
 # members or predecessor records carry the actual control-source research.
 NON_STANDALONE_SOURCE_ITEMS = {
+    (2024, "Stock Car Pro Series 2024 season"),
     (2025, "Aston Martin Vantage GT3 Evo — second configuration not named by Reiza"),
     (2025, "Ligier European Series"),
     (2025, "Vintage Cars Tier 1"),
@@ -40,6 +41,7 @@ NON_STANDALONE_SOURCE_ITEMS = {
     (2026, "Formula V8 Gen1 class"),
     (2026, "Formula V8 Gen2 class"),
     (2026, "GT2 2005 class"),
+    (2026, "High-downforce formula configurations"),
 }
 
 # Promotion state is resolved from EVENT_MAP and per-car approval manifests.

@@ -114,9 +114,28 @@ drafts and the BMW, Maserati, and configuration-specific Stock USA batch. The
 Stock USA records intentionally do not alias untested configurations or claim
 an exact NASCAR generation mapping. The curated dataset now contains 75
 records.
-The backlog now marks 62 release events as promoted, including aero and current
-specification variants that share a record, leaving 19 researched
-model/configuration events awaiting review or live validation.
+Dataset 0.3.17 revalidates all fifteen remaining spreadsheet-era records in
+AMS2 1.6.9.91. It corrects exact current telemetry names, move-off and running
+shift technique, and orthogonal wheel details. Formula Vee Gen1 + Fin updates
+the existing fin-equipped record rather than creating a duplicate. Formula V10
+Gen2 removes the nonexistent plain telemetry identity and retains the actual
+Bridgestone and Michelin configurations, with the Bridgestone High Downforce
+configuration directly tested.
+
+The refreshed backlog marks 71 release events as explicitly promoted. Seventeen
+class, rename, replacement, or configuration events are non-standalone
+bookkeeping whose member/predecessor records carry the controls. The remaining
+live-verification queue is nine actual model/configuration identities: Stock
+USA Gen3 LM, three Formula Edge models, two generic Formula
+V10 Gen3 tyre models, two generic Formula V8 Gen1 tyre models, and Formula V8
+Gen2 M1. Unnamed or class-only release events remain research notes rather than
+being counted as cars.
+
+Dataset 0.3.18 promotes that nine-identity remainder. Broader AMS2 roster work
+now uses `docs/ams2-coverage-plan.md` and the generated
+`research/ams2-coverage-manifest.json`, which refresh the local SimHub inventory
+to 225 observed identities and classify every exact uncovered identity by the
+amount of review or testing still required.
 
 ## Suggested verification order
 

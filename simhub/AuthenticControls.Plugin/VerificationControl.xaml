@@ -1,0 +1,239 @@
+<Border x:Class="AuthenticControls.Plugin.VerificationControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:ClassModifier="internal"
+        BorderBrush="#507896B4" BorderThickness="1" CornerRadius="5" Padding="14">
+  <Border.Resources>
+    <Style TargetType="TextBox">
+      <Setter Property="MinHeight" Value="30" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+    <Style TargetType="ComboBox">
+      <Setter Property="MinHeight" Value="30" />
+      <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+    <Style TargetType="CheckBox">
+      <Setter Property="Margin" Value="0,0,12,6" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="Button">
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Padding" Value="12,5" />
+      <Setter Property="Margin" Value="0,0,10,6" />
+      <Setter Property="Foreground" Value="#FF202020" />
+      <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="False">
+          <Setter Property="Foreground" Value="#FF6C6C6C" />
+          <Setter Property="Opacity" Value="0.72" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <Style x:Key="Heading" TargetType="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="#FF32BEEB" />
+      <Setter Property="Margin" Value="0,12,0,8" />
+    </Style>
+    <Style x:Key="FieldLabel" TargetType="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Margin" Value="0,0,0,5" />
+    </Style>
+    <Style x:Key="Hint" TargetType="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Opacity" Value="0.76" />
+      <Setter Property="Margin" Value="0,-6,0,10" />
+    </Style>
+  </Border.Resources>
+  <StackPanel>
+    <TextBlock Text="Capture the live car, confirm simulator assists, follow the in-sim prompts, then review and save."
+               FontSize="15" TextWrapping="Wrap" Margin="0,0,0,12" />
+    <Grid x:Name="_workspace">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="320" />
+        <ColumnDefinition Width="18" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="0" />
+        <RowDefinition Height="0" />
+      </Grid.RowDefinitions>
+      <Border x:Name="_sidebarBorder" Grid.Column="0" Background="#1232BEEB"
+              BorderBrush="#5A32BEEB" BorderThickness="1" CornerRadius="6" Padding="14">
+        <StackPanel>
+          <TextBlock x:Name="_liveAvailability" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,8" />
+          <TextBlock x:Name="_workflowStatus" AutomationProperties.Name="Verification workflow status"
+                     FontWeight="SemiBold" TextWrapping="Wrap" Foreground="#FF32BEEB" Margin="0,0,0,8" />
+          <Button x:Name="_captureStart" Content="Capture current car" Width="235"
+                  HorizontalAlignment="Left" Click="StartClicked" Margin="0,0,0,10" />
+          <TextBlock x:Name="_capturedIdentity" Text="No verification started." TextWrapping="Wrap"
+                     Opacity="0.78" Margin="0,0,0,12" />
+          <TextBlock Text="Observer name" Style="{StaticResource FieldLabel}" />
+          <TextBox x:Name="_observer" AutomationProperties.Name="Observer name" />
+
+          <TextBlock Text="Workflow" Style="{StaticResource Heading}" />
+          <StackPanel Margin="0,0,0,10">
+            <TextBlock x:Name="_workflowStep1" Text="○ 1  Capture live car" Margin="0,0,0,5" />
+            <TextBlock x:Name="_workflowStep2" Text="○ 2  Confirm simulator setup" Margin="0,0,0,5" />
+            <TextBlock x:Name="_workflowStep3" Text="○ 3  Run guided drive" Margin="0,0,0,5" />
+            <TextBlock x:Name="_workflowStep4" Text="○ 4  Review and save" Margin="0,0,0,5" />
+          </StackPanel>
+
+          <TextBlock Text="Simulator test setup" Style="{StaticResource Heading}" />
+          <StackPanel x:Name="_assistEditorPanel">
+            <TextBlock Text="These are simulator assists, not systems built into the car. A confirmed profile is reused for this simulator."
+                       TextWrapping="Wrap" Opacity="0.78" Margin="0,0,0,10" />
+            <TextBlock Text="Automatic clutch" Style="{StaticResource FieldLabel}" />
+            <ComboBox x:Name="_automaticClutch" AutomationProperties.Name="Automatic clutch" SelectedIndex="0">
+              <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Disabled" Tag="disabled" />
+              <ComboBoxItem Content="Enabled" Tag="enabled" /><ComboBoxItem Content="Unavailable" Tag="unavailable" />
+            </ComboBox>
+            <TextBlock Text="Automatic shifting" Style="{StaticResource FieldLabel}" />
+            <ComboBox x:Name="_automaticShifting" AutomationProperties.Name="Automatic shifting" SelectedIndex="0">
+              <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Disabled" Tag="disabled" />
+              <ComboBoxItem Content="Enabled" Tag="enabled" /><ComboBoxItem Content="Unavailable" Tag="unavailable" />
+            </ComboBox>
+            <TextBlock Text="Automatic throttle-blip assist" Style="{StaticResource FieldLabel}" />
+            <ComboBox x:Name="_automaticThrottleBlip" AutomationProperties.Name="Automatic throttle-blip assist" SelectedIndex="0">
+              <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Disabled" Tag="disabled" />
+              <ComboBoxItem Content="Enabled" Tag="enabled" /><ComboBoxItem Content="Unavailable" Tag="unavailable" />
+            </ComboBox>
+            <CheckBox x:Name="_assistSettingsConfirmed" Content="Use this verified setup" Padding="8" />
+            <TextBlock x:Name="_assistConfirmationHint" TextWrapping="Wrap" FontWeight="SemiBold" Margin="0,0,0,10" />
+            <TextBlock Text="For AMS2 the recommended setup is Disabled / Disabled / Unavailable. Review it once; changing a value requires reconfirmation."
+                       TextWrapping="Wrap" Opacity="0.76" Margin="0,0,0,10" />
+            <TextBlock Text="Assist notes" Style="{StaticResource FieldLabel}" />
+            <TextBox x:Name="_assistNotes" AutomationProperties.Name="Assist notes" Height="54" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+          </StackPanel>
+          <Border x:Name="_assistSummaryPanel" BorderBrush="#6446D27D" BorderThickness="1" CornerRadius="5"
+                  Padding="10" Margin="0,0,0,10" Visibility="Collapsed">
+            <StackPanel>
+              <TextBlock x:Name="_assistSummary" TextWrapping="Wrap" FontWeight="SemiBold" Margin="0,0,0,8" />
+              <Button Content="Change setup" Width="125" HorizontalAlignment="Left" Click="AssistEditClicked" />
+            </StackPanel>
+          </Border>
+          <WrapPanel Margin="0,2,0,8">
+            <Button x:Name="_guidedStart" Content="Start in-sim guided drive" Width="205" IsEnabled="False" Click="GuidedStartClicked" />
+            <Button Content="Cancel" Width="85" Click="GuidedCancelClicked" />
+          </WrapPanel>
+          <TextBlock Text="For in-car use, map VerificationDriveNext, Retry, Skip, and Cancel under SimHub Controls and events. Driving results are suggestions until you review and save the draft."
+                     TextWrapping="Wrap" Opacity="0.76" Margin="0,0,0,12" />
+          <TextBlock x:Name="_status" AutomationProperties.Name="Verification status message" TextWrapping="Wrap" Margin="0,4,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Border x:Name="_reviewBorder" Grid.Column="2" BorderBrush="#377896B4" BorderThickness="1"
+              CornerRadius="6" Padding="16" Visibility="Collapsed">
+        <StackPanel x:Name="_formPanel" Visibility="Collapsed">
+          <TextBlock x:Name="_reviewHint" Text="Run the guided drive to populate driving results. Optional review fields will be highlighted here."
+                     TextWrapping="Wrap" FontWeight="SemiBold" Foreground="Goldenrod" Margin="0,0,0,10" />
+          <Expander x:Name="_drivingResultsExpander" Header="Guided driving results (expand to review)" Margin="0,4,0,10">
+            <StackPanel>
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Moves from rest without physical clutch" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_moveOffBadge" /></StackPanel>
+                  <ComboBox x:Name="_moveOff" AutomationProperties.Name="Moves from rest without physical clutch" SelectedIndex="0">
+                    <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" />
+                    <ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+                  </ComboBox></StackPanel>
+                <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Forward gears" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_forwardGearsBadge" /></StackPanel>
+                  <TextBox x:Name="_forwardGears" AutomationProperties.Name="Forward gears" /></StackPanel>
+              </Grid>
+              <StackPanel Orientation="Horizontal"><TextBlock Text="Direct H-pattern selection confirmed" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_directGearSelectionBadge" /></StackPanel>
+              <ComboBox x:Name="_directGearSelection" AutomationProperties.Name="Direct H-pattern selection confirmed" SelectedIndex="0">
+                <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Not applicable" Tag="not-applicable" />
+                <ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+              </ComboBox>
+              <TextBlock Text="For an H-pattern car, verify that a non-adjacent requested gear engages directly rather than stepping sequentially." Style="{StaticResource Hint}" />
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Clutchless upshift accepted" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_clutchlessUpshiftBadge" /></StackPanel>
+                  <ComboBox x:Name="_clutchlessUpshift" AutomationProperties.Name="Clutchless upshift accepted" SelectedIndex="0">
+                    <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+                  </ComboBox></StackPanel>
+                <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Automatic throttle cut observed" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_automaticCutBadge" /></StackPanel>
+                  <ComboBox x:Name="_automaticCut" AutomationProperties.Name="Automatic throttle cut observed" SelectedIndex="0">
+                    <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+                  </ComboBox></StackPanel>
+              </Grid>
+              <TextBlock Text="How automatic cut was identified" Style="{StaticResource FieldLabel}" />
+              <TextBox x:Name="_automaticCutMethod" AutomationProperties.Name="How automatic cut was identified" />
+              <TextBlock Text="For example: full-throttle shift accepted with a visible power interruption." Style="{StaticResource Hint}" />
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Clutchless downshift accepted" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_clutchlessDownshiftBadge" /></StackPanel>
+                  <ComboBox x:Name="_clutchlessDownshift" AutomationProperties.Name="Clutchless downshift accepted" SelectedIndex="0">
+                    <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+                  </ComboBox></StackPanel>
+                <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Automatic throttle blip observed" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_automaticBlipBadge" /></StackPanel>
+                  <ComboBox x:Name="_automaticBlip" AutomationProperties.Name="Automatic throttle blip observed" SelectedIndex="0">
+                    <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+                  </ComboBox></StackPanel>
+              </Grid>
+              <TextBlock Text="How automatic blip was identified" Style="{StaticResource FieldLabel}" />
+              <TextBox x:Name="_automaticBlipMethod" AutomationProperties.Name="How automatic blip was identified" />
+              <TextBlock Text="For example: throttle telemetry spiked during a downshift without pedal input." Style="{StaticResource Hint}" />
+            </StackPanel>
+          </Expander>
+
+          <TextBlock Text="Cockpit controls" Style="{StaticResource Heading}" />
+          <TextBlock Text="A sequential gearbox may accept both paddle and stick bindings in AMS2. Use visible hardware and driver animation to identify the modeled primary mechanism."
+                     TextWrapping="Wrap" Opacity="0.72" Margin="0,0,0,10" />
+          <StackPanel Orientation="Horizontal"><TextBlock Text="Visible shift hardware" Style="{StaticResource FieldLabel}" />
+            <TextBlock x:Name="_visibleHardwareBadge" FontSize="12" FontWeight="Bold" Foreground="Orange" Margin="8,1,0,6" Visibility="Collapsed" /></StackPanel>
+          <Border x:Name="_visibleHardwareBorder" BorderBrush="#507896B4" BorderThickness="1" CornerRadius="4" Padding="6" Margin="0,0,0,12">
+            <WrapPanel><CheckBox x:Name="_visiblePaddles" Content="Paddles" />
+              <CheckBox x:Name="_visibleSequentialStick" Content="Sequential stick" />
+              <CheckBox x:Name="_visibleHPattern" Content="H-pattern shifter" />
+              <CheckBox x:Name="_visibleAutomaticLever" Content="Automatic lever" /></WrapPanel>
+          </Border>
+          <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
+            <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Primary shift mechanism" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_primaryActuationBadge" /></StackPanel>
+              <ComboBox x:Name="_primaryActuation" AutomationProperties.Name="Primary shift mechanism" SelectedIndex="0">
+                <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Sequential paddles" Tag="sequential-paddles" />
+                <ComboBoxItem Content="Sequential stick" Tag="sequential-stick" /><ComboBoxItem Content="H-pattern" Tag="h-pattern" />
+                <ComboBoxItem Content="Automatic lever" Tag="automatic-lever" /><ComboBoxItem Content="Direct selection" Tag="direct-selection" />
+              </ComboBox></StackPanel>
+            <StackPanel Grid.Column="2"><TextBlock Text="How it was identified" Style="{StaticResource FieldLabel}" />
+              <TextBox x:Name="_actuationBasis" AutomationProperties.Name="How primary shift mechanism was identified" /></StackPanel>
+          </Grid>
+
+          <TextBlock Text="Steering wheel" Style="{StaticResource Heading}" />
+          <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
+            <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Wheel shape" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelShapeBadge" /></StackPanel>
+              <ComboBox x:Name="_wheelShape" AutomationProperties.Name="Wheel shape" SelectedIndex="0">
+                <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Round" Tag="round" /><ComboBoxItem Content="D-shaped" Tag="d-shaped" />
+                <ComboBoxItem Content="GT-style" Tag="gt-style" /><ComboBoxItem Content="Prototype" Tag="prototype" /><ComboBoxItem Content="Formula" Tag="formula" />
+                <ComboBoxItem Content="Yoke" Tag="yoke" /><ComboBoxItem Content="Other" Tag="other" />
+              </ComboBox></StackPanel>
+            <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Integrated display" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelDisplayBadge" /></StackPanel>
+              <ComboBox x:Name="_wheelDisplay" AutomationProperties.Name="Integrated display" SelectedIndex="0">
+                <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+              </ComboBox></StackPanel>
+          </Grid>
+          <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
+            <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Shift lights on wheel" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelShiftLightsBadge" /></StackPanel>
+              <ComboBox x:Name="_wheelShiftLights" AutomationProperties.Name="Shift lights on wheel" SelectedIndex="0">
+                <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+              </ComboBox></StackPanel>
+            <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Open-top wheel construction" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelOpenTopBadge" /></StackPanel>
+              <ComboBox x:Name="_wheelOpenTop" AutomationProperties.Name="Open-top wheel construction" SelectedIndex="0">
+                <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+              </ComboBox></StackPanel>
+          </Grid>
+          <TextBlock Text="Wheel notes" Style="{StaticResource FieldLabel}" /><TextBox x:Name="_wheelNotes" AutomationProperties.Name="Wheel notes" Height="54" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+          <TextBlock Text="Review notes" Style="{StaticResource Heading}" />
+          <TextBlock Text="Anything a reviewer should know" Style="{StaticResource FieldLabel}" />
+          <TextBox x:Name="_evidenceNotes" AutomationProperties.Name="Anything a reviewer should know" Height="72" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+          <TextBlock Text="Include uncertainty, unusual hybrid starts, conflicting cockpit hardware, or tests that should be repeated." Style="{StaticResource Hint}" />
+          <StackPanel Orientation="Horizontal" Margin="0,4,0,8"><Button x:Name="_save" Content="Save draft observation" Width="190" IsEnabled="False" Click="SaveClicked" />
+            <Button Content="Open drafts folder" Width="160" Click="OpenFolderClicked" /></StackPanel>
+          <TextBlock x:Name="_draftDirectory" TextWrapping="Wrap" Opacity="0.76" Margin="0,0,0,6" />
+        </StackPanel>
+      </Border>
+    </Grid>
+  </StackPanel>
+</Border>

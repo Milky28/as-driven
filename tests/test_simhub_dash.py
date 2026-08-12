@@ -114,7 +114,7 @@ class SimHubDashTests(unittest.TestCase):
             "AuthenticControls.HasMatch",
             "AuthenticControls.MatchStatus",
             "AuthenticControls.RawCarIdentifier",
-            "AuthenticControls.DisplayName",
+            "AuthenticControls.OverlayCarNameDetailed",
             "AuthenticControls.ShiftActuation",
             "AuthenticControls.ShiftPattern",
             "AuthenticControls.AutoBlip",
@@ -249,8 +249,16 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("AuthenticControls.TechniqueSummaryLine2", serialized)
         self.assertNotIn("AuthenticControls.UpshiftGuidance", serialized)
         self.assertNotIn("AuthenticControls.DownshiftGuidance", serialized)
-        self.assertEqual(326, named["Evidence"]["Top"])
-        self.assertEqual(24, named["Title"]["FontSize"])
+        self.assertEqual(333, named["Evidence"]["Top"])
+        self.assertEqual(21.5, named["Title"]["FontSize"])
+        self.assertIn(
+            "AuthenticControls.OverlayCarNameDetailed",
+            named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
+        self.assertIn(
+            "AuthenticControls.OverlayCarClassDetailed",
+            named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
 
     def test_compact_adds_smaller_technique_summary_but_glance_stays_icon_only(self):
         compact = self.generator.build_dashboard(overlay=True, variant="compact")
@@ -265,6 +273,14 @@ class SimHubDashTests(unittest.TestCase):
             "AuthenticControls.TechniqueSummaryCompactLine2",
             compact_named["TechniqueSummaryLine2"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
+        self.assertIn(
+            "AuthenticControls.OverlayCarNameCompact",
+            compact_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
+        self.assertIn(
+            "AuthenticControls.OverlayCarClassCompact",
+            compact_named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
 
         glance = self.generator.build_dashboard(overlay=True, variant="glance")
         glance_names = {
@@ -275,6 +291,10 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotIn("DrivingTechniqueHeading", glance_names)
         self.assertNotIn("TechniqueSummaryLine1", glance_names)
         self.assertNotIn("TechniqueSummaryLine2", glance_names)
+        self.assertIn(
+            "AuthenticControls.OverlayCarNameGlance",
+            glance["Screens"][0]["Items"][0]["Childrens"][3]["Childrens"][1]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
 
     def test_preview_badge_explicitly_says_preview_is_not_live(self):
         for variant in ("detailed", "compact", "glance"):
@@ -314,6 +334,11 @@ class SimHubDashTests(unittest.TestCase):
             self.assertNotIn("MarkText", named)
             self.assertEqual("PHYSICAL CONTROLS", named["PhysicalControlsHeading"]["Text"])
             self.assertEqual("SHIFTING TECHNIQUE", named["ShiftingTechniqueHeading"]["Text"])
+            self.assertEqual(self.generator.GROUP_PANEL, named["PhysicalControlsGroup"]["BackgroundColor"])
+            self.assertEqual(self.generator.GROUP_PANEL, named["ShiftingTechniqueGroup"]["BackgroundColor"])
+            self.assertEqual(self.generator.SLATE, named["PhysicalControlsGroup"]["BorderStyle"]["BorderColor"])
+            self.assertEqual(self.generator.SLATE, named["ShiftingTechniqueGroup"]["BorderStyle"]["BorderColor"])
+            self.assertNotIn("ControlTechniqueSeparator", named)
             self.assertNotIn("WheelTile", named)
             self.assertNotIn("ShiftTile", named)
             self.assertNotIn("CutTile", named)
@@ -321,7 +346,10 @@ class SimHubDashTests(unittest.TestCase):
             self.assertEqual(expected_icon_width, named["WheelIconRoundBitmap"]["Width"])
             self.assertEqual(self.generator.ACCENT, named["Accent"]["BackgroundColor"])
             self.assertEqual(20, named["Accent"]["Left"])
-            self.assertEqual(dashboard["BaseWidth"] - 24, named["Accent"]["Left"] + named["Accent"]["Width"])
+            self.assertEqual(dashboard["BaseWidth"] - 20, named["Accent"]["Left"] + named["Accent"]["Width"])
+            self.assertEqual(4, named["Card"]["Left"])
+            self.assertEqual(dashboard["BaseWidth"] - 4, named["Card"]["Left"] + named["Card"]["Width"])
+            self.assertEqual(dashboard["BaseHeight"] - 4, named["Card"]["Top"] + named["Card"]["Height"])
 
     def test_compact_uses_clear_match_mark_and_consistent_confidence_case(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="compact")

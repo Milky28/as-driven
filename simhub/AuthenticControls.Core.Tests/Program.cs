@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using AuthenticControls.Core;
 using Newtonsoft.Json.Linq;
@@ -47,15 +48,15 @@ namespace AuthenticControls.Core.Tests
                 Equal("5-speed sequential stick", f301.ShiftType, "formats hardware guidance");
                 Equal("sequential", f301.ShiftPattern, "exposes the curated shift pattern");
                 Equal("yes", f301.AutoBlip, "exposes simulator auto-blip behavior");
-                True(f301.UpshiftGuidance.Contains("Clutch unknown"), "does not invent clutch technique");
-                True(f301.UpshiftGuidance.Contains("Throttle lift unknown"), "uses sentence-style technique capitalization");
+                True(f301.UpshiftGuidance.Contains("Clutch not required"), "exposes verified running-shift clutch technique");
+                True(f301.UpshiftGuidance.Contains("Throttle lift not required"), "exposes verified automatic-cut technique");
                 True(f301.UpshiftGuidance.Contains("Automatic cut"), "capitalizes automation guidance consistently");
 
                 GuidanceSnapshot c9 = database.Match("Automobilista2", "Sauber Mercedes C9");
                 Equal("dogleg-h", c9.ShiftPattern, "preserves dogleg H-pattern evidence");
 
                 GuidanceSnapshot cadillac = database.Match("Automobilista2", "Cadillac DPi-VR");
-                Equal("gt-style", cadillac.WheelRimShape, "normalizes the documented GTF1 wheel family");
+                Equal("prototype", cadillac.WheelRimShape, "uses the verified current cockpit wheel category");
 
                 GuidanceSnapshot viper = database.Match("Automobilista2", "Dodge Viper GTS-R");
                 True(viper.HasMatch, "matches the live Dodge Viper GTS-R identity");
@@ -72,10 +73,16 @@ namespace AuthenticControls.Core.Tests
                 True(viper.TechniqueSummary.Contains("Use the clutch to pull away"), "gives actionable Viper start technique");
                 True(viper.TechniqueSummary.Contains("automatic cut"), "gives actionable Viper upshift technique");
                 True(viper.TechniqueSummary.Contains("automatic throttle blip"), "gives actionable Viper downshift technique");
-                Equal(viper.TechniqueSummary, (viper.TechniqueSummaryLine1 + " " + viper.TechniqueSummaryLine2).Trim(), "splits technique guidance without losing text");
-                True(viper.TechniqueSummaryLine1.Length <= 125, "keeps the first technique display line compact");
-                Equal(viper.TechniqueSummary, (viper.TechniqueSummaryCompactLine1 + " " + viper.TechniqueSummaryCompactLine2).Trim(), "splits compact technique guidance without losing text");
-                True(viper.TechniqueSummaryCompactLine1.Length <= 112, "fills the first compact technique line without exceeding its surface");
+                True(viper.TechniqueSummaryLine1.Length > 0, "provides a detailed technique first line");
+                True(viper.TechniqueSummaryCompactLine1.Length > 0, "provides a compact technique first line");
+                AssertOverlayTextFits(viper, "Viper overlay text");
+
+                foreach (CarCatalogEntry catalogEntry in database.Cars)
+                {
+                    AssertOverlayTextFits(
+                        database.Preview(catalogEntry.Simulator, catalogEntry.RecordId),
+                        "overlay text fits " + catalogEntry.RecordId);
+                }
 
                 GuidanceSnapshot alpine = database.Match("Automobilista2", "Alpine A424");
                 True(alpine.HasMatch, "matches the live Alpine A424 identity");
@@ -263,6 +270,18 @@ namespace AuthenticControls.Core.Tests
                     Equal(expectedRim, historical.WheelRimShape, "uses the observed rim for " + historicalSequentialCar);
                 }
 
+                GuidanceSnapshot saleenOverlay = database.Match(
+                    "Automobilista2", "Saleen S7-R GT1");
+                Equal(
+                    saleenOverlay.TechniqueSummary,
+                    (saleenOverlay.TechniqueSummaryLine1 + " "
+                        + saleenOverlay.TechniqueSummaryLine2).Trim(),
+                    "keeps the complete Saleen technique sentence across the Detailed card");
+                True(
+                    !saleenOverlay.TechniqueSummaryLine1.EndsWith("...", StringComparison.Ordinal)
+                        && !saleenOverlay.TechniqueSummaryLine2.EndsWith("...", StringComparison.Ordinal),
+                    "does not truncate the Saleen technique despite available second-line space");
+
                 GuidanceSnapshot dbr9LowDownforce = database.Match(
                     "Automobilista2", "Aston Martin DBR9 - Low Downforce");
                 Equal("ams2.aston-martin-dbr9", dbr9LowDownforce.RecordId, "inherits DBR9 controls for the aero package");
@@ -337,11 +356,10 @@ namespace AuthenticControls.Core.Tests
                 True(diablo.TechniqueSummary.Contains("dogleg H-pattern"), "describes the Diablo shifter technique");
                 True(diablo.TechniqueSummary.Contains("lift the throttle"), "describes the Diablo upshift technique");
                 True(diablo.TechniqueSummary.Contains("blip the throttle"), "describes the Diablo downshift technique");
-                Equal(string.Empty, diablo.TechniqueSummaryLine2, "keeps the Diablo technique on one line when it fits");
-                Equal("throttle on downshifts.", diablo.TechniqueSummaryCompactLine2, "moves the Diablo ending onto a safe second compact line");
+                Equal(diablo.TechniqueSummary, (diablo.TechniqueSummaryLine1 + " " + diablo.TechniqueSummaryLine2).Trim(), "preserves full detailed Diablo technique when it fits");
+                AssertOverlayTextFits(diablo, "Diablo overlay text");
 
                 foreach (string formulaCar in new[] {
-                    "Formula V10 Gen2",
                     "Formula Reiza",
                     "Formula Ultimate Hybrid Gen1",
                     "Formula Ultimate Gen2",
@@ -654,6 +672,69 @@ namespace AuthenticControls.Core.Tests
             {
                 throw new InvalidOperationException(
                     label + ": expected '" + expected + "', got '" + actual + "'");
+            }
+        }
+
+        private static void AssertOverlayTextFits(GuidanceSnapshot snapshot, string label)
+        {
+            // Dash Studio uses Segoe UI. GDI's typographic measurement includes
+            // glyph overhang and makes this a deliberately stricter fitting check
+            // than the bounding width handed to each generated TextItem.
+            True(FitsSegoeUi(snapshot.TechniqueSummaryLine1, 764, 13.5f, false), label + " detailed technique line 1 fits");
+            True(FitsSegoeUi(snapshot.TechniqueSummaryLine2, 764, 13.5f, false), label + " detailed technique line 2 fits");
+            True(FitsSegoeUi(snapshot.TechniqueSummaryCompactLine1, 472, 9.5f, false), label + " compact technique line 1 fits");
+            True(FitsSegoeUi(snapshot.TechniqueSummaryCompactLine2, 472, 9.5f, false), label + " compact technique line 2 fits");
+            True(FitsSegoeUi(snapshot.OverlayCarNameDetailed, 534, 21.5f, true), label + " detailed car name fits");
+            True(FitsSegoeUi(snapshot.OverlayCarClassDetailed, 534, 12f, true), label + " detailed car class fits");
+            True(FitsSegoeUi(snapshot.OverlayCarNameCompact, 310, 17.5f, true), label + " compact car name fits");
+            True(FitsSegoeUi(snapshot.OverlayCarClassCompact, 310, 9.5f, true), label + " compact car class fits");
+            True(FitsSegoeUi(snapshot.OverlayCarNameGlance, 174, 15f, true), label + " glance car name fits");
+            AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryLine1, snapshot.TechniqueSummaryLine2, label + " detailed technique");
+            AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryCompactLine1, snapshot.TechniqueSummaryCompactLine2, label + " compact technique");
+            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
+            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameCompact, label + " compact car name");
+            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameGlance, label + " glance car name");
+            AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassDetailed, label + " detailed car class");
+            AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassCompact, label + " compact car class");
+        }
+
+        private static void AssertTechniqueDisplay(string summary, string line1, string line2, string label)
+        {
+            string displayed = (line1 + " " + line2).Trim();
+            True(line1.Length >= Math.Min(12, summary.Length), label + " retains a meaningful first line");
+            AssertFittedPrefix(summary, line1, label + " starts at the guidance beginning");
+            if (!displayed.EndsWith("...", StringComparison.Ordinal))
+            {
+                Equal(summary, displayed, label + " preserves all guidance when no ellipsis is required");
+            }
+        }
+
+        private static void AssertFittedPrefix(string original, string fitted, string label)
+        {
+            if (string.IsNullOrEmpty(original))
+            {
+                Equal(string.Empty, fitted, label + " remains empty");
+                return;
+            }
+            string prefix = fitted.EndsWith("...", StringComparison.Ordinal)
+                ? fitted.Substring(0, fitted.Length - 3).TrimEnd()
+                : fitted;
+            True(prefix.Length >= Math.Min(4, original.Length), label + " retains meaningful text");
+            True(original.StartsWith(prefix, StringComparison.Ordinal), label + " preserves the source prefix");
+        }
+
+        private static bool FitsSegoeUi(string value, float width, float fontSize, bool bold)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return true;
+            }
+            using (var bitmap = new Bitmap(1, 1))
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            using (var font = new Font("Segoe UI", fontSize, bold ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Pixel))
+            {
+                SizeF size = graphics.MeasureString(value, font, int.MaxValue, StringFormat.GenericTypographic);
+                return size.Width <= width;
             }
         }
 

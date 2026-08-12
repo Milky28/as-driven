@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.stock-usa-gen3-lm",
+  "identity": {
+    "display_name": "Stock USA Gen3 LM",
+    "manufacturer": "Reiza",
+    "model": "Stock USA Gen3",
+    "variant": "LM",
+    "year": { "label": "Gen3 LM" },
+    "class": "Stock USA Gen3 LM",
+    "real_world_identity_notes": "Reiza's fictionalized LM configuration is retained as its own exact simulator identity; no exact real-world model mapping is claimed."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "not-required", "automatic_blip": "yes" },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": { "wheel_rim": { "shape": "gt-style", "diameter_mm": null, "integrated_display": "no", "shift_lights": "no", "open_top": "no", "source_label": "live-cockpit-gt-style-closed-no-display", "notes": "Direct cockpit inspection showed a closed GT-style rim without an integrated display or wheel-mounted shift lights." } },
+    "notes": [
+      "With simulator assists disabled, the car moved away without physical clutch input.",
+      "Five paddle-selected forward gears accepted clutchless shifts with detected automatic cut and blip."
+    ]
+  },
+  "simulators": [{
+    "simulator": "ams2",
+    "identities": [{ "kind": "telemetry-name", "value": "Stock USA Gen3 LM" }, { "kind": "internal-id", "value": "Stock USA Gen3 LM" }, { "kind": "class-id", "value": "Stock_USA_Gen3_LM" }],
+    "behavior": { "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes", "wheel_rim_type": { "normalized": "gt-style", "integrated_display": "no", "shift_lights": "no", "open_top": "no", "source_label": "live-cockpit-gt-style-closed-no-display" }, "notes": ["Exact guided testing detected an automatic upshift cut and downshift throttle spike.", "Vehicle clutch telemetry was treated as internal transmission state because no physical clutch input was used."] },
+    "overrides": [],
+    "verified_game_version": "1.6.9.91",
+    "verified_at": "2026-08-12",
+    "source_refs": ["ams2.reiza-release.1.6.9.new-cars", "ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91"],
+    "confidence": { "level": "verified", "basis": "The exact telemetry identity, move-off behavior, five paddle gears, cut/blip behavior, and cockpit controls were directly verified." }
+  }],
+  "provenance": { "claims": [
+    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.9.new-cars", "ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91"], "confidence": "verified", "basis": "Official release context and exact live telemetry establish the distinct LM identity." },
+    { "paths": ["/authentic_controls/transmission", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"], "source_refs": ["ams2.stock-usa-gen3-lm.local-guided-controls.1.6.9.91"], "confidence": "verified", "basis": "Reviewed guided observation of the exact AMS2 identity; draft hash e7fc8bec." }
+  ] },
+  "updated_at": "2026-08-12"
+}

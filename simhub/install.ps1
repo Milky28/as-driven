@@ -14,8 +14,24 @@ if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "AuthenticControls.Plug
 if (-not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe"))) {
     throw "The SimHub installation could not be verified: $simHubRoot"
 }
-if (Get-Process -Name "SimHubWPF" -ErrorAction SilentlyContinue) {
-    throw "Close SimHub before installing Authentic Controls."
+$targetExecutable = [System.IO.Path]::GetFullPath((Join-Path $simHubRoot "SimHubWPF.exe"))
+foreach ($process in @(Get-Process -Name "SimHubWPF" -ErrorAction SilentlyContinue)) {
+    try {
+        $runningExecutable = [System.IO.Path]::GetFullPath($process.MainModule.FileName)
+        if ($runningExecutable.Equals($targetExecutable, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Close SimHub before installing Authentic Controls."
+        }
+    }
+    catch [System.Management.Automation.RuntimeException] {
+        throw
+    }
+    catch {
+        if ($simHubRoot.Equals(
+            [System.IO.Path]::GetFullPath("C:\Program Files (x86)\SimHub"),
+            [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Close SimHub before installing Authentic Controls."
+        }
+    }
 }
 
 $backupRoot = Join-Path $env:TEMP ("AuthenticControls-SimHub-backup-" + (Get-Date -Format "yyyyMMdd-HHmmss"))

@@ -22,32 +22,36 @@
       "shift_actuation": "sequential-paddles",
       "shift_pattern": "sequential",
       "upshift": {
-        "clutch": "unknown",
-        "throttle_lift": "unknown",
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "unknown",
+        "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "not-required"
     },
     "steering": {
       "wheel_rim": {
         "shape": "formula",
-        "source_label": "F1",
-        "notes": "Raw F1-family sheet code retained and normalized to Formula."
+        "source_label": "live-cockpit-formula",
+        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no"
       },
       "degrees_of_rotation": 450
     },
     "notes": [
-      "Clutch and throttle technique remain unknown where the source only documents shift type, auto-blip, and shift cut.",
-      "Source chassis manufacturer: Reiza."
+      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
+      "The modeled car moves from rest without physical clutch input."
     ]
   },
   "simulators": [
@@ -56,43 +60,49 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula V10 Gen2"
-        },
-        {
-          "kind": "display-name",
-          "value": "Formula V10 G2"
-        },
-        {
-          "kind": "telemetry-name",
           "value": "Formula V10 Gen2 (B) - High Downforce"
         },
         {
           "kind": "telemetry-name",
           "value": "Formula V10 Gen2 (M) - High Downforce"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Formula V10 Gen2 (B) - High Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-V10_Gen2_HD"
         }
       ],
       "behavior": {
-        "shift_type": "Seq-Paddle",
+        "shift_type": "sequential-paddles",
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "formula",
-          "source_label": "F1"
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-formula"
         },
-        "steering_dor": 450
+        "notes": [
+          "Guided current-game testing directly established all user-facing controls."
+        ]
       },
       "overrides": [],
-      "verified_game_version": "1.5.5.2",
-      "verified_at": "2024-01-17",
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
       "source_refs": [
         "ams2.coanda-sheet.v1.0.34",
         "ams2.reiza-forum.extended-car-info",
         "simhub.local-ams2-identities.9.11.22",
-        "simhub.local-live-ams2-identities.1.6.9.91"
+        "simhub.local-live-ams2-identities.1.6.9.91",
+        "ams2.formula-v10-g2.local-guided-controls.1.6.9.91"
       ],
       "confidence": {
-        "level": "medium",
-        "basis": "Control data comes from the versioned community sheet; the telemetry alias is an exact, reviewed SimHub observation."
+        "level": "verified",
+        "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
     }
   ],
@@ -131,8 +141,21 @@
         ],
         "confidence": "verified",
         "basis": "AMS2 1.6.9.91 emitted the exact B- and M-tyre High Downforce telemetry identities during live local tests. Both are explicitly reviewed configuration variants of Formula V10 Gen2."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/identities",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.formula-v10-g2.local-guided-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 522a88aa."
       }
     ]
   },
-  "updated_at": "2026-08-10"
+  "updated_at": "2026-08-12"
 }

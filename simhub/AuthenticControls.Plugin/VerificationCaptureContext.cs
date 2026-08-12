@@ -13,5 +13,21 @@ namespace AuthenticControls.Plugin
         public string TelemetryClass { get; set; }
         public string InternalId { get; set; }
         public int? SuggestedForwardGears { get; set; }
+
+        public VerificationCaptureContext WithObservedAt(DateTime observedAtUtc)
+        {
+            return new VerificationCaptureContext
+            {
+                Simulator = Simulator,
+                SimulatorDisplayName = SimulatorDisplayName,
+                GameVersion = GameVersion,
+                ClientVersion = ClientVersion,
+                ObservedAtUtc = observedAtUtc,
+                TelemetryName = TelemetryName,
+                TelemetryClass = TelemetryClass,
+                InternalId = InternalId,
+                SuggestedForwardGears = SuggestedForwardGears
+            };
+        }
     }
 }

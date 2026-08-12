@@ -55,6 +55,7 @@ namespace AuthenticControls.Plugin
         private readonly object _verificationTelemetryLock = new object();
         private readonly GuidedVerificationDrive _guidedVerificationDrive =
             new GuidedVerificationDrive();
+        private volatile GuidedDriveSnapshot _guidedDriveSnapshot;
         private AuthenticControlsSettings _settings = new AuthenticControlsSettings();
         private AuthenticControlsDatabase _database;
         private SessionState _session;
@@ -75,15 +76,13 @@ namespace AuthenticControls.Plugin
         private string _lastRuntimeError = string.Empty;
         private string _lastUnmatchedLogError = string.Empty;
         private int _databaseRecordCount;
-        private bool _liveVerificationGameRunning;
-        private string _liveVerificationGameName = string.Empty;
-        private string _liveVerificationGameVersion = string.Empty;
-        private string _liveVerificationCarModel = string.Empty;
-        private string _liveVerificationCarId = string.Empty;
-        private string _liveVerificationCarClass = string.Empty;
-        private int _liveVerificationForwardGears;
-        private string _guidedVerificationCarModel = string.Empty;
+        private VerificationCaptureContext _liveVerificationContext;
         private VerificationCaptureContext _guidedVerificationCapture;
+
+        public AuthenticControls()
+        {
+            RefreshGuidedDriveSnapshot();
+        }
 
         public PluginManager PluginManager { get; set; }
 
@@ -159,6 +158,19 @@ namespace AuthenticControls.Plugin
         internal int DatabaseRecordCount
         {
             get { return _databaseRecordCount; }
+        }
+
+        internal bool CanShowPopup
+        {
+            get
+            {
+                string status = LiveMatchStatus;
+                return _previewActive
+                    || (status != "no-data"
+                        && status != "no-car"
+                        && status != "game-not-running"
+                        && status != "not-initialized");
+            }
         }
 
         internal string CurrentRuntimeError
@@ -242,15 +254,15 @@ namespace AuthenticControls.Plugin
                 delegate(PluginManager manager, string parameter) { LoadDatabase(); });
             this.AddAction(
                 "ShowPopup",
-                delegate(PluginManager manager, string parameter) { _popupState.Show(); });
+                delegate(PluginManager manager, string parameter) { ShowPopup(); });
             this.AddAction(
                 "HidePopup",
-                delegate(PluginManager manager, string parameter) { _popupState.Hide(); });
+                delegate(PluginManager manager, string parameter) { HidePopup(); });
             this.AddAction(
                 "TogglePopup",
                 delegate(PluginManager manager, string parameter)
                 {
-                    _popupState.Toggle(DateTime.UtcNow);
+                    TogglePopup();
                 });
             this.AddAction(
                 "OpenDiagnosticsFolder",
@@ -387,6 +399,7 @@ namespace AuthenticControls.Plugin
             StopPreviewOverlay();
             _popupState.Hide();
             _guidedVerificationDrive.Cancel();
+            RefreshGuidedDriveSnapshot();
         }
 
         private void LoadDatabase()
@@ -474,18 +487,33 @@ namespace AuthenticControls.Plugin
             }
         }
 
-        internal void ShowPopup()
+        internal bool ShowPopup()
         {
+            if (!CanShowPopup)
+            {
+                return false;
+            }
             _popupState.Show();
             if (_previewActive)
             {
                 StartPreviewOverlay();
             }
+            return true;
         }
 
         internal void HidePopup()
         {
             _popupState.Hide();
+        }
+
+        internal bool TogglePopup()
+        {
+            if (_popupState.IsVisible(DateTime.UtcNow))
+            {
+                HidePopup();
+                return false;
+            }
+            return ShowPopup();
         }
 
         internal void RefreshDatabase()
@@ -497,33 +525,12 @@ namespace AuthenticControls.Plugin
         {
             lock (_verificationTelemetryLock)
             {
-                if (!_liveVerificationGameRunning
-                    || string.IsNullOrWhiteSpace(_liveVerificationCarModel))
+                if (_liveVerificationContext == null
+                    || string.IsNullOrWhiteSpace(_liveVerificationContext.TelemetryName))
                 {
                     return null;
                 }
-                string simulator = AuthenticControlsDatabase.CanonicalizeSimulator(
-                    _liveVerificationGameName);
-                return new VerificationCaptureContext
-                {
-                    Simulator = string.IsNullOrWhiteSpace(simulator) ? "other" : simulator,
-                    SimulatorDisplayName = SimulatorDisplayName(simulator, _liveVerificationGameName),
-                    GameVersion = string.IsNullOrWhiteSpace(_liveVerificationGameVersion)
-                        ? "unknown"
-                        : _liveVerificationGameVersion,
-                    ClientVersion = "SimHub "
-                        + (string.IsNullOrWhiteSpace(_simHubVersion) ? "unknown" : _simHubVersion)
-                        + "; Authentic Controls " + PluginVersion,
-                    ObservedAtUtc = DateTime.UtcNow,
-                    TelemetryName = _liveVerificationCarModel,
-                    TelemetryClass = string.IsNullOrWhiteSpace(_liveVerificationCarClass)
-                        ? "unknown"
-                        : _liveVerificationCarClass,
-                    InternalId = _liveVerificationCarId,
-                    SuggestedForwardGears = _liveVerificationForwardGears > 0
-                        ? (int?)_liveVerificationForwardGears
-                        : null
-                };
+                return _liveVerificationContext.WithObservedAt(DateTime.UtcNow);
             }
         }
 
@@ -568,15 +575,15 @@ namespace AuthenticControls.Plugin
             {
                 throw new ArgumentNullException("capture");
             }
-            _guidedVerificationCarModel = capture.TelemetryName ?? string.Empty;
             _guidedVerificationCapture = capture;
             _popupState.Hide();
             _guidedVerificationDrive.Start(capture.SuggestedForwardGears);
+            RefreshGuidedDriveSnapshot();
         }
 
         internal GuidedDriveSnapshot GetGuidedDriveSnapshot()
         {
-            return _guidedVerificationDrive.GetSnapshot();
+            return _guidedDriveSnapshot;
         }
 
         internal GuidedDriveResults GetGuidedDriveResults()
@@ -592,23 +599,26 @@ namespace AuthenticControls.Plugin
         internal void GuidedVerificationNext()
         {
             _guidedVerificationDrive.Next();
+            RefreshGuidedDriveSnapshot();
         }
 
         internal void GuidedVerificationRetry()
         {
             _guidedVerificationDrive.Retry();
+            RefreshGuidedDriveSnapshot();
         }
 
         internal void GuidedVerificationSkip()
         {
             _guidedVerificationDrive.Skip();
+            RefreshGuidedDriveSnapshot();
         }
 
         internal void GuidedVerificationCancel()
         {
-            bool completed = _guidedVerificationDrive.GetSnapshot().Completed;
+            bool completed = _guidedDriveSnapshot != null && _guidedDriveSnapshot.Completed;
             _guidedVerificationDrive.Cancel();
-            _guidedVerificationCarModel = string.Empty;
+            RefreshGuidedDriveSnapshot();
             if (!completed)
             {
                 _guidedVerificationCapture = null;
@@ -991,7 +1001,7 @@ namespace AuthenticControls.Plugin
             {
                 lock (_verificationTelemetryLock)
                 {
-                    _liveVerificationGameRunning = false;
+                    _liveVerificationContext = null;
                 }
                 return;
             }
@@ -1010,18 +1020,28 @@ namespace AuthenticControls.Plugin
             }
             lock (_verificationTelemetryLock)
             {
-                _liveVerificationGameRunning = true;
-                _liveVerificationGameName = gameName;
-                _liveVerificationGameVersion = gameVersion;
-                _liveVerificationCarModel = carModel;
-                _liveVerificationCarId = carId;
-                _liveVerificationCarClass = carClass;
-                _liveVerificationForwardGears = forwardGears;
+                string simulator = AuthenticControlsDatabase.CanonicalizeSimulator(gameName);
+                _liveVerificationContext = new VerificationCaptureContext
+                {
+                    Simulator = string.IsNullOrWhiteSpace(simulator) ? "other" : simulator,
+                    SimulatorDisplayName = SimulatorDisplayName(simulator, gameName),
+                    GameVersion = string.IsNullOrWhiteSpace(gameVersion) ? "unknown" : gameVersion,
+                    ClientVersion = "SimHub "
+                        + (string.IsNullOrWhiteSpace(_simHubVersion) ? "unknown" : _simHubVersion)
+                        + "; Authentic Controls " + PluginVersion,
+                    ObservedAtUtc = DateTime.UtcNow,
+                    TelemetryName = carModel,
+                    TelemetryClass = string.IsNullOrWhiteSpace(carClass) ? "unknown" : carClass,
+                    InternalId = carId,
+                    SuggestedForwardGears = forwardGears > 0 ? (int?)forwardGears : null
+                };
             }
-            GuidedDriveSnapshot guided = _guidedVerificationDrive.GetSnapshot();
+            GuidedDriveSnapshot guided = _guidedDriveSnapshot;
             if (guided.Visible
                 && !string.Equals(
-                    _guidedVerificationCarModel,
+                    _guidedVerificationCapture == null
+                        ? string.Empty
+                        : _guidedVerificationCapture.TelemetryName,
                     carModel,
                     StringComparison.Ordinal))
             {
@@ -1041,7 +1061,13 @@ namespace AuthenticControls.Plugin
                     EngineTorque = data.NewData.EngineTorque,
                     EngineStarted = data.NewData.EngineStarted > 0
                 });
+                RefreshGuidedDriveSnapshot();
             }
+        }
+
+        private void RefreshGuidedDriveSnapshot()
+        {
+            _guidedDriveSnapshot = _guidedVerificationDrive.GetSnapshot();
         }
 
         private static string SimulatorDisplayName(string simulator, string rawGameName)
@@ -1263,6 +1289,11 @@ namespace AuthenticControls.Plugin
             this.AttachDelegate("RecordId", delegate { return _current.RecordId; });
             this.AttachDelegate("DisplayName", delegate { return _current.DisplayName; });
             this.AttachDelegate("CarClass", delegate { return _current.CarClass; });
+            this.AttachDelegate("OverlayCarNameDetailed", delegate { return _current.OverlayCarNameDetailed; });
+            this.AttachDelegate("OverlayCarClassDetailed", delegate { return _current.OverlayCarClassDetailed; });
+            this.AttachDelegate("OverlayCarNameCompact", delegate { return _current.OverlayCarNameCompact; });
+            this.AttachDelegate("OverlayCarClassCompact", delegate { return _current.OverlayCarClassCompact; });
+            this.AttachDelegate("OverlayCarNameGlance", delegate { return _current.OverlayCarNameGlance; });
             this.AttachDelegate("ShiftType", delegate { return _current.ShiftType; });
             this.AttachDelegate("ShiftActuation", delegate { return _current.ShiftActuation; });
             this.AttachDelegate("ShiftPattern", delegate { return _current.ShiftPattern; });
@@ -1320,46 +1351,46 @@ namespace AuthenticControls.Plugin
                 });
             this.AttachDelegate(
                 "VerificationDriveVisible",
-                delegate { return _guidedVerificationDrive.GetSnapshot().Visible; });
+                delegate { return _guidedDriveSnapshot.Visible; });
             this.AttachDelegate(
                 "VerificationDriveCompleted",
-                delegate { return _guidedVerificationDrive.GetSnapshot().Completed; });
+                delegate { return _guidedDriveSnapshot.Completed; });
             this.AttachDelegate(
                 "VerificationDriveResultReady",
-                delegate { return _guidedVerificationDrive.GetSnapshot().ResultReady; });
+                delegate { return _guidedDriveSnapshot.ResultReady; });
             this.AttachDelegate(
                 "VerificationDriveResultSuccessful",
-                delegate { return _guidedVerificationDrive.GetSnapshot().ResultSuccessful; });
+                delegate { return _guidedDriveSnapshot.ResultSuccessful; });
             this.AttachDelegate(
                 "VerificationDriveStepNumber",
-                delegate { return _guidedVerificationDrive.GetSnapshot().StepNumber; });
+                delegate { return _guidedDriveSnapshot.StepNumber; });
             this.AttachDelegate(
                 "VerificationDriveStepCount",
-                delegate { return _guidedVerificationDrive.GetSnapshot().StepCount; });
+                delegate { return _guidedDriveSnapshot.StepCount; });
             this.AttachDelegate(
                 "VerificationDriveTitle",
-                delegate { return _guidedVerificationDrive.GetSnapshot().Title; });
+                delegate { return _guidedDriveSnapshot.Title; });
             this.AttachDelegate(
                 "VerificationDrivePrompt",
-                delegate { return _guidedVerificationDrive.GetSnapshot().Prompt; });
+                delegate { return _guidedDriveSnapshot.Prompt; });
             this.AttachDelegate(
                 "VerificationDrivePromptLine1",
-                delegate { return _guidedVerificationDrive.GetSnapshot().PromptLine1; });
+                delegate { return _guidedDriveSnapshot.PromptLine1; });
             this.AttachDelegate(
                 "VerificationDrivePromptLine2",
-                delegate { return _guidedVerificationDrive.GetSnapshot().PromptLine2; });
+                delegate { return _guidedDriveSnapshot.PromptLine2; });
             this.AttachDelegate(
                 "VerificationDriveStatus",
-                delegate { return _guidedVerificationDrive.GetSnapshot().Status; });
+                delegate { return _guidedDriveSnapshot.Status; });
             this.AttachDelegate(
                 "VerificationDriveResult",
-                delegate { return _guidedVerificationDrive.GetSnapshot().ResultSummary; });
+                delegate { return _guidedDriveSnapshot.ResultSummary; });
             this.AttachDelegate(
                 "VerificationDriveResultDetail",
-                delegate { return _guidedVerificationDrive.GetSnapshot().Result; });
+                delegate { return _guidedDriveSnapshot.Result; });
             this.AttachDelegate(
                 "VerificationDriveLiveValues",
-                delegate { return _guidedVerificationDrive.GetSnapshot().LiveValues; });
+                delegate { return _guidedDriveSnapshot.LiveValues; });
         }
     }
 }

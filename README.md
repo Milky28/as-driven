@@ -48,6 +48,7 @@ docs/importers.md            AMS2 and iRacing import/review design
 docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
 docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
 docs/simhub-roadmap.md       Planned read-only SimHub client
+docs/releasing.md            Early-access build, QA, and publishing process
 simhub/                      .NET lookup library, plugin adapter, and diagnostics
 release/                     Independent database-release packaging
 ```
@@ -74,9 +75,10 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
-Dataset 0.3.16 contains 75 reviewed records. Its newest records were promoted
-from versioned guided AMS2 observations while retaining official or
-manufacturer evidence separately from simulator behavior.
+Dataset 0.3.18 contains 85 reviewed records. Its newest records complete the
+audited post-sheet queue while retaining official or manufacturer evidence
+separately from simulator behavior. Broader AMS2 roster coverage remains a
+versioned, explicitly classified backlog rather than guessed matches.
 
 The optional SimHub adapter has its own build and test command on Windows:
 
@@ -100,6 +102,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\release\install-database.p
 Database and plugin versions advance independently. A plugin package may carry
 a known-good data snapshot for first installation, while database-only releases
 can update compatible data without changing the client.
+
+Build the complete early-access release candidates on the supported Windows
+release machine:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-early-access.ps1
+```
+
+See [EARLY_ACCESS.md](EARLY_ACCESS.md) for supported versions, installation,
+known limitations, and rollback. The plugin is offline and stores optional
+diagnostics and verification drafts locally as described in
+[PRIVACY.md](PRIVACY.md).
 
 See [simhub/README.md](simhub/README.md) for its properties, diagnostic command,
 packaging layout, and installation boundary.
@@ -163,7 +177,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.16 contains 75 curated AMS2 records promoted through the reviewed
+Dataset 0.3.18 contains 85 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -217,6 +231,12 @@ E46 GTR, Maserati GranSport Trofeo, and three configuration-specific Stock USA
 records. Stock USA mappings remain fictionalized and configuration-scoped;
 the Audi record uses the later seven-speed S tronic generation rather than the
 unrelated 2010 six-speed R tronic car.
+Dataset 0.3.17 revalidates the fifteen remaining spreadsheet-era records in
+AMS2 1.6.9.91 and corrects their exact identities and simulator observations.
+Dataset 0.3.18 promotes the final nine reviewed entries from that audit,
+including exact high-downforce and tyre-specific identities. The separate AMS2
+coverage manifest now classifies the larger current roster for later research
+and verification; it is not silently included in the curated dataset.
 
 ## Licensing
 

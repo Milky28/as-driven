@@ -21,6 +21,14 @@ namespace AuthenticControls.Core
         public string TechniqueSummaryLine2 { get; private set; }
         public string TechniqueSummaryCompactLine1 { get; private set; }
         public string TechniqueSummaryCompactLine2 { get; private set; }
+        // Overlay-specific text is deliberately pre-fitted in the core model. Dash
+        // Studio text items do not offer reliable runtime trimming, so leaving this
+        // to the dashboard would make long telemetry names clip at the right edge.
+        public string OverlayCarNameDetailed { get; private set; }
+        public string OverlayCarClassDetailed { get; private set; }
+        public string OverlayCarNameCompact { get; private set; }
+        public string OverlayCarClassCompact { get; private set; }
+        public string OverlayCarNameGlance { get; private set; }
         public string StandingStartClutch { get; private set; }
         public string AutoBlip { get; private set; }
         public string ShiftCut { get; private set; }
@@ -62,8 +70,7 @@ namespace AuthenticControls.Core
             string sourceSummary)
         {
             string[] techniqueLines = SplitTechniqueSummary(techniqueSummary);
-            string[] compactTechniqueLines = SplitCompactTechniqueSummary(
-                techniqueSummary);
+            string[] compactTechniqueLines = SplitCompactTechniqueSummary(techniqueSummary);
             return new GuidanceSnapshot
             {
                 HasMatch = true,
@@ -86,6 +93,11 @@ namespace AuthenticControls.Core
                 TechniqueSummaryLine2 = techniqueLines[1],
                 TechniqueSummaryCompactLine1 = compactTechniqueLines[0],
                 TechniqueSummaryCompactLine2 = compactTechniqueLines[1],
+                OverlayCarNameDetailed = FitSingleLine(displayName, 530, 2150),
+                OverlayCarClassDetailed = FitSingleLine(carClass, 530, 1200),
+                OverlayCarNameCompact = FitSingleLine(displayName, 300, 1750),
+                OverlayCarClassCompact = FitSingleLine(carClass, 300, 950),
+                OverlayCarNameGlance = FitSingleLine(displayName, 166, 1500),
                 StandingStartClutch = standingStartClutch,
                 AutoBlip = autoBlip,
                 ShiftCut = shiftCut,
@@ -127,6 +139,11 @@ namespace AuthenticControls.Core
                 TechniqueSummaryLine2 = string.Empty,
                 TechniqueSummaryCompactLine1 = string.Empty,
                 TechniqueSummaryCompactLine2 = string.Empty,
+                OverlayCarNameDetailed = string.Empty,
+                OverlayCarClassDetailed = string.Empty,
+                OverlayCarNameCompact = string.Empty,
+                OverlayCarClassCompact = string.Empty,
+                OverlayCarNameGlance = string.Empty,
                 StandingStartClutch = string.Empty,
                 AutoBlip = string.Empty,
                 ShiftCut = string.Empty,
@@ -150,40 +167,118 @@ namespace AuthenticControls.Core
 
         private static string[] SplitTechniqueSummary(string value)
         {
-            return SplitTechniqueSummary(value, 145, 120, 85);
+            return SplitTechniqueSummary(value, 756, 1350);
         }
 
         private static string[] SplitCompactTechniqueSummary(string value)
         {
-            return SplitTechniqueSummary(value, 112, 110, 80);
+            return SplitTechniqueSummary(value, 464, 950);
         }
 
         private static string[] SplitTechniqueSummary(
             string value,
-            int singleLineLength,
-            int targetLength,
-            int minimumSplit)
+            int availableWidth,
+            int fontSize)
         {
-            value = value ?? string.Empty;
-            if (value.Length <= singleLineLength)
+            value = Normalize(value);
+            if (Fits(value, availableWidth, fontSize))
             {
                 return new[] { value, string.Empty };
             }
 
-            int split = value.LastIndexOf(' ', targetLength);
-            if (split < minimumSplit)
-            {
-                split = value.IndexOf(' ', targetLength);
-            }
-            if (split <= 0)
-            {
-                return new[] { value, string.Empty };
-            }
+            int split = LastFittingBreak(value, availableWidth, fontSize);
+            string first = split <= 0
+                ? FitSingleLine(value, availableWidth, fontSize)
+                : value.Substring(0, split).TrimEnd();
+            string remainder = split <= 0
+                ? string.Empty
+                : value.Substring(split + 1).TrimStart();
             return new[]
             {
-                value.Substring(0, split).TrimEnd(),
-                value.Substring(split + 1).TrimStart()
+                first,
+                FitSingleLine(remainder, availableWidth, fontSize)
             };
+        }
+
+        private static string FitSingleLine(string value, int availableWidth, int fontSize)
+        {
+            value = Normalize(value);
+            if (Fits(value, availableWidth, fontSize))
+            {
+                return value;
+            }
+
+            const string ellipsis = "...";
+            int lastBreak = LastFittingBreak(value, availableWidth - EstimatedWidth(ellipsis, fontSize), fontSize);
+            if (lastBreak > 0)
+            {
+                return value.Substring(0, lastBreak).TrimEnd() + ellipsis;
+            }
+
+            int length = value.Length;
+            while (length > 0 && !Fits(value.Substring(0, length) + ellipsis, availableWidth, fontSize))
+            {
+                length--;
+            }
+            return length == 0 ? ellipsis : value.Substring(0, length).TrimEnd() + ellipsis;
+        }
+
+        private static int LastFittingBreak(string value, int availableWidth, int fontSize)
+        {
+            int width = 0;
+            int lastBreak = -1;
+            for (int index = 0; index < value.Length; index++)
+            {
+                width += EstimatedWidth(value[index], fontSize);
+                if (width > availableWidth)
+                {
+                    break;
+                }
+                if (char.IsWhiteSpace(value[index]))
+                {
+                    lastBreak = index;
+                }
+            }
+            return lastBreak;
+        }
+
+        private static bool Fits(string value, int availableWidth, int fontSize)
+        {
+            return EstimatedWidth(value, fontSize) <= availableWidth;
+        }
+
+        // Values approximate Segoe UI's typographic advances with a modest safety
+        // margin. They are stored in thousandths of an em; fontSize is expressed
+        // in hundredths of a pixel. The previous deliberately loose upper bounds
+        // left nearly half of the Detailed text row unused and could ellipsize a
+        // sentence that fit comfortably across the available two lines.
+        private static int EstimatedWidth(string value, int fontSize)
+        {
+            int width = 0;
+            for (int index = 0; index < value.Length; index++)
+            {
+                width += EstimatedWidth(value[index], fontSize);
+            }
+            return width;
+        }
+
+        private static int EstimatedWidth(char value, int fontSize)
+        {
+            int units;
+            if (char.IsWhiteSpace(value)) units = 300;
+            else if ("ilI1|!.,:;'`".IndexOf(value) >= 0) units = 360;
+            else if ("mwMW@#%&QO".IndexOf(value) >= 0) units = 1000;
+            else if (char.IsUpper(value)) units = 800;
+            else if (char.IsDigit(value)) units = 650;
+            else if (char.IsPunctuation(value)) units = 500;
+            else if (value > 127) units = 1000;
+            else units = 600;
+            return (units * fontSize + 99999) / 100000;
+        }
+
+        private static string Normalize(string value)
+        {
+            return (value ?? string.Empty).Trim();
         }
     }
 }

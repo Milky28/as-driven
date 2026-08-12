@@ -7,7 +7,11 @@
     "manufacturer": "McLaren",
     "model": "F1 GTR",
     "variant": "AMS2 GT1 representation",
-    "year": { "from": 1997, "to": 1997, "label": "1997" },
+    "year": {
+      "from": 1997,
+      "to": 1997,
+      "label": "1997"
+    },
     "class": "GT1",
     "real_world_identity_notes": "The exact 1997 chassis specification represented by AMS2 remains to be verified."
   },
@@ -18,55 +22,82 @@
       "shift_actuation": "sequential-stick",
       "shift_pattern": "sequential",
       "upshift": {
-        "clutch": "unknown",
-        "throttle_lift": "unknown",
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "unknown",
+        "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "required",
         "automatic_blip": "no"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "degrees_of_rotation": 450,
       "wheel_rim": {
         "shape": "round",
         "diameter_mm": null,
-        "source_label": "RM",
-        "notes": "Raw sheet rim code retained and normalized only to round."
+        "source_label": "live-cockpit-round",
+        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no"
       }
     },
-    "notes": ["A primary real-car source is still required before raising confidence above medium."]
+    "notes": [
+      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
+      "A clutch is required from rest."
+    ]
   },
   "simulators": [
     {
       "simulator": "ams2",
-      "identities": [{ "kind": "telemetry-name", "value": "McLaren F1 GTR" }],
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren F1 GTR"
+        },
+        {
+          "kind": "internal-id",
+          "value": "McLaren F1 GTR"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
       "behavior": {
-        "shift_type": "Seq-Stick",
+        "shift_type": "sequential-stick",
         "auto_blip": "no",
         "shift_cut": "yes",
-        "steering_dor": 450,
-        "wheel_rim_type": { "normalized": "round", "source_label": "RM" },
-        "notes": ["Blank Auto Blip is No under the source's documented indicator rule; DOR is optional reference metadata."]
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round"
+        },
+        "notes": [
+          "Guided current-game testing directly established all user-facing controls."
+        ]
       },
       "overrides": [],
-      "verified_game_version": "1.5.5.2",
-      "verified_at": "2024-01-17",
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
       "source_refs": [
         "ams2.coanda-sheet.v1.0.34",
         "ams2.reiza-forum.extended-car-info",
-        "simhub.local-ams2-identities.9.11.22"
+        "simhub.local-ams2-identities.9.11.22",
+        "ams2.mclaren-f1-gtr.local-guided-controls.1.6.9.91"
       ],
       "confidence": {
-        "level": "medium",
-        "basis": "Community-maintained sheet with explicit version and indicator semantics; not independently checked in the current game."
+        "level": "verified",
+        "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
     }
   ],
@@ -80,17 +111,36 @@
           "/authentic_controls/steering",
           "/simulators/0/behavior"
         ],
-        "source_refs": ["ams2.coanda-sheet.v1.0.34"],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34"
+        ],
         "confidence": "medium",
         "basis": "Direct transcription and conservative normalization of the McLaren F1 GTR row."
       },
       {
-        "paths": ["/simulators/0/identities/0"],
-        "source_refs": ["simhub.local-ams2-identities.9.11.22"],
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
         "confidence": "verified",
         "basis": "Exact CarId/CarModel value observed in SimHub's generated AMS2 car settings."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/identities",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.mclaren-f1-gtr.local-guided-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 384887d1."
       }
     ]
   },
-  "updated_at": "2026-08-09"
+  "updated_at": "2026-08-12"
 }

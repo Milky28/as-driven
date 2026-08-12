@@ -52,6 +52,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="VerificationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AuthenticControls.Core\AuthenticControls.Core.csproj">
       <Project>{8D912D1F-A4B8-42E9-A301-54A25743C4CF}</Project>
       <Name>AuthenticControls.Core</Name>
@@ -64,7 +70,10 @@
     <Compile Include="AuthenticControlsSettings.cs" />
     <Compile Include="AuthenticControlsSettingsControl.cs" />
     <Compile Include="VerificationCaptureContext.cs" />
-    <Compile Include="VerificationControl.cs" />
+    <Compile Include="VerificationControl.cs">
+      <DependentUpon>VerificationControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

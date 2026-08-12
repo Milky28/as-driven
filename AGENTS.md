@@ -46,6 +46,14 @@ scope unless a future proposal establishes a direct authentic-controls use case.
 - `tests/`: Python regression tests and legally safe parser fixtures.
 - `docs/`: data-model, importer, provenance, audit, and integration guidance.
 
+## SimHub plugin development
+
+Act as an expert C# game telemetry developer. We are building a
+[**SimHub**](https://www.simhubdash.com/) custom plugin using the standard
+SimHub SDK. Adhere strictly to the required boilerplate classes (`IPlugin`,
+`PluginManager`). Do not add multi-layered architectures, hypothetical
+edge-case wrappers, or heavy abstractions. Use small, direct modifications.
+
 ## Required checks
 
 Run these after data, schema, importer, or Python tooling changes:

@@ -4,27 +4,40 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using AuthenticControls.Core;
+using SimHub.Plugins.Styles;
 
 namespace AuthenticControls.Plugin
 {
+    /// <summary>
+    /// SimHub settings entry point. The control deliberately uses standard WPF
+    /// controls so it follows the host application's active theme rather than
+    /// recreating a separate application inside SimHub.
+    /// </summary>
     public sealed class AuthenticControlsSettingsControl : UserControl
     {
         private readonly AuthenticControls _plugin;
-        private readonly Slider _duration;
-        private readonly TextBlock _durationValue;
-        private readonly ComboBox _popupSize;
-        private readonly ComboBox _previewCar;
-        private readonly TextBlock _status;
-        private readonly TextBlock _liveStatus;
-        private readonly TextBlock _versionStatus;
-        private readonly TextBlock _recordStatus;
-        private readonly TextBlock _previewStatus;
-        private readonly TextBlock _errorStatus;
-        private readonly VerificationControl _verification;
-        private readonly Expander _contributionExpander;
-        private readonly Button _contributeLiveButton;
+        private Slider _duration;
+        private TextBlock _durationValue;
+        private ComboBox _popupSize;
+        private ComboBox _previewCar;
+        private TextBlock _liveStatus;
+        private TextBlock _recordStatus;
+        private TextBlock _previewStatus;
+        private TextBlock _errorStatus;
+        private TextBlock _overlayFeedback;
+        private TextBlock _browserFeedback;
+        private TextBlock _contributionFeedback;
+        private TextBlock _advancedFeedback;
+        private TextBlock _installedDatasetStatus;
+        private VerificationControl _verification;
+        private Button _contributeLiveButton;
+        private Button _showPopupButton;
+        private Button _closePreviewButton;
+        private Button _savePopupSettingsButton;
+        private readonly SHTabControl _tabs;
         private readonly ScrollViewer _scrollViewer;
         private readonly DispatcherTimer _statusTimer;
+        private bool _popupSettingsDirty;
 
         public AuthenticControlsSettingsControl(AuthenticControls plugin)
         {
@@ -34,305 +47,44 @@ namespace AuthenticControls.Plugin
             {
                 Margin = new Thickness(24),
                 MaxWidth = 1180,
-                HorizontalAlignment = HorizontalAlignment.Left,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
-            var header = new StackPanel
+            // SimHub supplies the page title and navigation icon. Keep the
+            // client version near that header, while dataset details live in
+            // the Advanced workspace.
+            var introduction = new Grid { Margin = new Thickness(0, 0, 0, 16) };
+            introduction.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            introduction.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            var purpose = new TextBlock
             {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 8),
-            };
-            var headerIcon = new Image
-            {
-                Source = plugin.HeaderPictureIcon,
-                Width = 34,
-                Height = 34,
-                Stretch = Stretch.Uniform,
-            };
-            RenderOptions.SetBitmapScalingMode(
-                headerIcon,
-                BitmapScalingMode.HighQuality);
-            header.Children.Add(new Border
-            {
-                Width = 42,
-                Height = 42,
-                CornerRadius = new CornerRadius(8),
-                Background = new SolidColorBrush(Color.FromRgb(39, 151, 230)),
-                Child = headerIcon,
-                Margin = new Thickness(0, 0, 14, 0),
-            });
-            var heading = new StackPanel();
-            heading.Children.Add(new TextBlock
-            {
-                Text = "Authentic Controls",
-                FontSize = 26,
-                FontWeight = FontWeights.Bold,
-            });
-            heading.Children.Add(new TextBlock
-            {
-                Text = "Authentic hardware and shifting guidance for the current car",
+                Text = "Choose authentic controls for the current car, preview the curated database, or contribute a local verification draft.",
                 FontSize = 14,
-                Opacity = 0.76,
-            });
-            header.Children.Add(heading);
-            panel.Children.Add(header);
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Pin this page from SimHub's Add and remove features menu for quick access. Overlay positioning remains under Dash Studio > Overlays.",
-                FontSize = 14,
+                Opacity = 0.82,
                 TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 22),
-            });
+                Margin = new Thickness(0, 0, 18, 0),
+            };
+            introduction.Children.Add(purpose);
+            var pluginVersion = new TextBlock
+            {
+                Text = "Plugin " + _plugin.PluginVersion,
+                Opacity = 0.72,
+                VerticalAlignment = VerticalAlignment.Top,
+            };
+            Grid.SetColumn(pluginVersion, 1);
+            introduction.Children.Add(pluginVersion);
+            panel.Children.Add(introduction);
 
-            AddSectionHeading(panel, "Live telemetry");
-            var statusPanel = new StackPanel
+            _tabs = new SHTabControl
             {
-                Margin = new Thickness(14),
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                TabsHorizontalAlignement = HorizontalAlignment.Left,
             };
-            _liveStatus = new TextBlock
-            {
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-                TextWrapping = TextWrapping.Wrap,
-            };
-            _versionStatus = new TextBlock
-            {
-                Margin = new Thickness(0, 6, 0, 0),
-                Opacity = 0.78,
-            };
-            _recordStatus = new TextBlock
-            {
-                Margin = new Thickness(0, 4, 0, 0),
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.78,
-            };
-            _errorStatus = new TextBlock
-            {
-                Margin = new Thickness(0, 6, 0, 0),
-                Foreground = Brushes.IndianRed,
-                TextWrapping = TextWrapping.Wrap,
-            };
-            statusPanel.Children.Add(_liveStatus);
-            statusPanel.Children.Add(_versionStatus);
-            statusPanel.Children.Add(_recordStatus);
-            statusPanel.Children.Add(_errorStatus);
-            panel.Children.Add(new Border
-            {
-                BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180)),
-                BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(5),
-                Child = statusPanel,
-                Margin = new Thickness(0, 0, 0, 12),
-            });
-
-            var actionRow = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 8),
-            };
-            actionRow.Children.Add(CreateButton("Show popup", 122, ShowPopupClicked));
-            actionRow.Children.Add(CreateButton("Hide popup", 122, HidePopupClicked));
-            actionRow.Children.Add(CreateButton("Refresh database", 150, RefreshDatabaseClicked));
-            panel.Children.Add(actionRow);
-            _contributeLiveButton = CreateButton(
-                "Contribute this car",
-                165,
-                ContributeLiveCarClicked);
-            _contributeLiveButton.Visibility = Visibility.Collapsed;
-            _contributeLiveButton.BorderBrush = new SolidColorBrush(Color.FromRgb(50, 190, 235));
-            _contributeLiveButton.BorderThickness = new Thickness(2);
-            _contributeLiveButton.Margin = new Thickness(0, 2, 0, 8);
-            panel.Children.Add(_contributeLiveButton);
-
-            _status = new TextBlock
-            {
-                Margin = new Thickness(0, 2, 0, 18),
-                TextWrapping = TextWrapping.Wrap,
-            };
-            panel.Children.Add(_status);
-
-            AddSectionHeading(panel, "Browse and preview cars");
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Select any curated car to review its controls and driving technique before starting the simulator.",
-                FontSize = 15,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 12),
-            });
-            _previewStatus = new TextBlock
-            {
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 10),
-            };
-            panel.Children.Add(_previewStatus);
-            _previewCar = new ComboBox
-            {
-                Width = 520,
-                Height = 34,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                IsEditable = true,
-                IsTextSearchEnabled = true,
-                StaysOpenOnEdit = true,
-                DisplayMemberPath = "DisplayLabel",
-                Margin = new Thickness(0, 0, 0, 10),
-            };
-            TextSearch.SetTextPath(_previewCar, "DisplayLabel");
-            panel.Children.Add(_previewCar);
-            var previewActions = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 24),
-            };
-            previewActions.Children.Add(CreateButton(
-                "Preview selected car", 170, PreviewCarClicked));
-            previewActions.Children.Add(CreateButton(
-                "Close preview", 145, ReturnToLiveCarClicked));
-            panel.Children.Add(previewActions);
-
-            AddSectionHeading(panel, "Popup behavior");
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Choose the pre-flight popup size and how long it stays visible after SimHub detects a new car.",
-                FontSize = 15,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 18),
-            });
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Automatic popup duration",
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 0, 0, 8),
-            });
-
-            var durationRow = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-            };
-            _duration = new Slider
-            {
-                Minimum = AuthenticControls.MinimumPopupDurationSeconds,
-                Maximum = AuthenticControls.MaximumPopupDurationSeconds,
-                TickFrequency = 1.0,
-                IsSnapToTickEnabled = true,
-                Width = 420,
-                Value = plugin.PopupDurationSeconds,
-            };
-            _duration.ValueChanged += DurationValueChanged;
-            _durationValue = new TextBlock
-            {
-                Width = 100,
-                FontSize = 16,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(16, 0, 0, 0),
-            };
-            durationRow.Children.Add(_duration);
-            durationRow.Children.Add(_durationValue);
-            panel.Children.Add(durationRow);
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Popup size",
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 22, 0, 8),
-            });
-            _popupSize = new ComboBox
-            {
-                Width = 300,
-                Height = 32,
-                HorizontalAlignment = HorizontalAlignment.Left,
-            };
-            _popupSize.Items.Add(CreateSizeItem("Detailed — 840 × 360", "detailed"));
-            _popupSize.Items.Add(CreateSizeItem("Compact — 520 × 300", "compact"));
-            _popupSize.Items.Add(CreateSizeItem("Glance — 320 × 120", "glance"));
-            SelectPopupSize(plugin.PopupSize);
-            _popupSize.SelectionChanged += PopupSizeChanged;
-            panel.Children.Add(_popupSize);
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Load and position the packaged Authentic Controls layout once in Dash Studio. The selected size is the only surface SimHub makes visible. Manual Show or Toggle recall remains visible until hidden.",
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 10, 0, 14),
-            });
-
-            panel.Children.Add(CreateButton("Save popup settings", 170, SaveClicked));
-
-            AddSectionHeading(panel, "Unmatched car diagnostics", new Thickness(0, 6, 0, 8));
-            panel.Children.Add(new TextBlock
-            {
-                Text = "When an exact match is not found, Authentic Controls records the game version, CarModel, CarId, class, dataset version, and timestamp once per unique identity. The JSON Lines file is preserved across plugin upgrades.",
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 8),
-            });
-            panel.Children.Add(new TextBlock
-            {
-                Text = plugin.UnmatchedLogPath,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 10),
-                Opacity = 0.78,
-            });
-            panel.Children.Add(CreateButton("Open diagnostics folder", 190, OpenDiagnosticsClicked));
-
-            var contributionPanel = new StackPanel();
-            contributionPanel.Children.Add(new TextBlock
-            {
-                Text = "OPTIONAL CONTRIBUTOR WORKFLOW",
-                FontSize = 12,
-                FontWeight = FontWeights.Bold,
-                Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
-                Margin = new Thickness(0, 0, 0, 5),
-            });
-            contributionPanel.Children.Add(new TextBlock
-            {
-                Text = "Contribute car data",
-                FontSize = 22,
-                FontWeight = FontWeights.Bold,
-                Margin = new Thickness(0, 0, 0, 5),
-            });
-            contributionPanel.Children.Add(new TextBlock
-            {
-                Text = "This is a separate data-contribution process, not another plugin setting. It creates a local review draft and never edits the curated database directly.",
-                FontSize = 14,
-                TextWrapping = TextWrapping.Wrap,
-                Opacity = 0.8,
-                Margin = new Thickness(0, 0, 0, 14),
-            });
-            _verification = new VerificationControl(plugin)
-            {
-                Margin = new Thickness(0, 10, 0, 0),
-            };
-            var contributionHeader = new StackPanel();
-            contributionHeader.Children.Add(new TextBlock
-            {
-                Text = "Open car-verification workflow",
-                FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
-            });
-            contributionHeader.Children.Add(new TextBlock
-            {
-                Text = "Capture a live car, run guided tests, review optional details, and save a draft.",
-                FontSize = 12,
-                Opacity = 0.7,
-            });
-            _contributionExpander = new Expander
-            {
-                Header = contributionHeader,
-                IsExpanded = false,
-                Content = _verification,
-            };
-            contributionPanel.Children.Add(_contributionExpander);
-            panel.Children.Add(new Border
-            {
-                Background = new SolidColorBrush(Color.FromArgb(24, 50, 190, 235)),
-                BorderBrush = new SolidColorBrush(Color.FromRgb(39, 151, 230)),
-                BorderThickness = new Thickness(1.5),
-                CornerRadius = new CornerRadius(8),
-                Padding = new Thickness(18),
-                Margin = new Thickness(0, 42, 0, 18),
-                Child = contributionPanel,
-            });
+            _tabs.Items.Add(CreateTab("Overlay", CreateOverlayTab()));
+            _tabs.Items.Add(CreateTab("Car browser", CreateBrowserTab()));
+            _tabs.Items.Add(CreateTab("Contribute data", CreateContributionTab()));
+            _tabs.Items.Add(CreateTab("Advanced", CreateAdvancedTab()));
+            panel.Children.Add(_tabs);
 
             _scrollViewer = new ScrollViewer
             {
@@ -352,34 +104,363 @@ namespace AuthenticControls.Plugin
             UpdateDurationLabel();
             ReloadPreviewCars();
             UpdateLiveStatus();
+            UpdatePopupSettingsState();
         }
 
-        private static void AddSectionHeading(
-            Panel panel,
-            string text,
-            Thickness? margin = null)
+        private UIElement CreateOverlayTab()
         {
+            var panel = CreateTabPanel();
+            AddSectionHeading(panel, "Current car");
+            var statusPanel = new StackPanel
+            {
+                Margin = new Thickness(14),
+            };
+            _liveStatus = new TextBlock
+            {
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+                TextWrapping = TextWrapping.Wrap,
+            };
+            _recordStatus = new TextBlock
+            {
+                Margin = new Thickness(0, 4, 0, 0),
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.78,
+            };
+            _errorStatus = new TextBlock
+            {
+                Margin = new Thickness(0, 6, 0, 0),
+                Foreground = Brushes.IndianRed,
+                TextWrapping = TextWrapping.Wrap,
+            };
+            statusPanel.Children.Add(_liveStatus);
+            statusPanel.Children.Add(_recordStatus);
+            statusPanel.Children.Add(_errorStatus);
+            panel.Children.Add(CreateGroupBorder(statusPanel, new Thickness(0, 0, 0, 12)));
+
+            var actionRow = CreateActionRow(new Thickness(0, 0, 0, 5));
+            _showPopupButton = CreateSecondaryButton("Show popup", 122, ShowPopupClicked);
+            _showPopupButton.ToolTip = "Available when a live car or catalog preview is active.";
+            ToolTipService.SetShowOnDisabled(_showPopupButton, true);
+            actionRow.Children.Add(_showPopupButton);
+            actionRow.Children.Add(CreateSecondaryButton("Hide popup", 122, HidePopupClicked));
+            _contributeLiveButton = CreatePrimaryButton("Contribute this car", 165, ContributeLiveCarClicked);
+            _contributeLiveButton.Visibility = Visibility.Collapsed;
+            _contributeLiveButton.BorderBrush = new SolidColorBrush(Color.FromRgb(50, 190, 235));
+            _contributeLiveButton.BorderThickness = new Thickness(2);
+            actionRow.Children.Add(_contributeLiveButton);
+            panel.Children.Add(actionRow);
+            _overlayFeedback = CreateFeedbackText(new Thickness(0, 0, 0, 22));
+            panel.Children.Add(_overlayFeedback);
+
+            AddSectionHeading(panel, "Popup behavior");
             panel.Children.Add(new TextBlock
+            {
+                Text = "Choose the pre-flight popup size and how long it remains visible when SimHub detects a new car.",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 16),
+            });
+            panel.Children.Add(CreateFieldLabel("Automatic popup duration", new Thickness(0, 0, 0, 8)));
+            var durationRow = new Grid
+            {
+                MaxWidth = 540,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Margin = new Thickness(0, 0, 0, 18),
+            };
+            durationRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            durationRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            _duration = new Slider
+            {
+                Minimum = AuthenticControls.MinimumPopupDurationSeconds,
+                Maximum = AuthenticControls.MaximumPopupDurationSeconds,
+                TickFrequency = 1.0,
+                IsSnapToTickEnabled = true,
+                Value = _plugin.PopupDurationSeconds,
+                MinWidth = 230,
+            };
+            _duration.ValueChanged += DurationValueChanged;
+            _durationValue = new TextBlock
+            {
+                Width = 100,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(16, 0, 0, 0),
+            };
+            durationRow.Children.Add(_duration);
+            Grid.SetColumn(_durationValue, 1);
+            durationRow.Children.Add(_durationValue);
+            panel.Children.Add(durationRow);
+
+            panel.Children.Add(CreateFieldLabel("Popup size", new Thickness(0, 0, 0, 8)));
+            _popupSize = new ComboBox
+            {
+                Height = 32,
+                MinWidth = 240,
+                MaxWidth = 360,
+                HorizontalAlignment = HorizontalAlignment.Left,
+            };
+            _popupSize.Items.Add(CreateSizeItem("Detailed - 840 x 360", "detailed"));
+            _popupSize.Items.Add(CreateSizeItem("Compact - 520 x 300", "compact"));
+            _popupSize.Items.Add(CreateSizeItem("Glance - 320 x 120", "glance"));
+            SelectPopupSize(_plugin.PopupSize);
+            _popupSize.SelectionChanged += PopupSizeChanged;
+            panel.Children.Add(_popupSize);
+            panel.Children.Add(new TextBlock
+            {
+                Text = "Load and position the matching packaged layout once in Dash Studio. The selected size is the only overlay surface made visible.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.78,
+                Margin = new Thickness(0, 10, 0, 14),
+                MaxWidth = 720,
+            });
+            _savePopupSettingsButton = CreatePrimaryButton("Save changes", 150, SaveClicked);
+            panel.Children.Add(_savePopupSettingsButton);
+            return panel;
+        }
+
+        private UIElement CreateBrowserTab()
+        {
+            var panel = CreateTabPanel();
+            AddSectionHeading(panel, "Browse curated cars");
+            panel.Children.Add(new TextBlock
+            {
+                Text = "Review a car's controls and driving technique before starting the simulator. Preview data is clearly marked and does not replace live telemetry.",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 12),
+                MaxWidth = 720,
+            });
+            _previewStatus = new TextBlock
+            {
+                FontSize = 15,
+                FontWeight = FontWeights.SemiBold,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+            panel.Children.Add(_previewStatus);
+            _previewCar = new ComboBox
+            {
+                Height = 34,
+                MinWidth = 300,
+                MaxWidth = 640,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                IsEditable = true,
+                IsTextSearchEnabled = true,
+                StaysOpenOnEdit = true,
+                DisplayMemberPath = "DisplayLabel",
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+            TextSearch.SetTextPath(_previewCar, "DisplayLabel");
+            panel.Children.Add(_previewCar);
+            var actions = CreateActionRow(new Thickness(0, 0, 0, 5));
+            actions.Children.Add(CreatePrimaryButton("Preview selected car", 170, PreviewCarClicked));
+            _closePreviewButton = CreateSecondaryButton("Close preview", 145, ReturnToLiveCarClicked);
+            actions.Children.Add(_closePreviewButton);
+            panel.Children.Add(actions);
+            _browserFeedback = CreateFeedbackText(new Thickness(0, 0, 0, 8));
+            panel.Children.Add(_browserFeedback);
+            return panel;
+        }
+
+        private UIElement CreateContributionTab()
+        {
+            var panel = CreateTabPanel();
+            AddSectionHeading(panel, "Contribute car data");
+            panel.Children.Add(new TextBlock
+            {
+                Text = "Test a loaded car and create a versioned observation for maintainer review. Nothing is uploaded or added to the curated dataset automatically.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.82,
+                Margin = new Thickness(0, 0, 0, 12),
+                MaxWidth = 800,
+            });
+            var draftSharing = new StackPanel { Margin = new Thickness(14) };
+            draftSharing.Children.Add(new TextBlock
+            {
+                Text = "Saved drafts and review",
+                FontSize = 15,
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 5),
+            });
+            draftSharing.Children.Add(new TextBlock
+            {
+                Text = "Drafts remain on this PC until you explicitly share them. Public GitHub submission is not available in this development build; for now, open the folder and share the JSON draft with the project maintainer. Every contribution still requires validation and reviewer approval before release.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.82,
+                Margin = new Thickness(0, 0, 0, 10),
+                MaxWidth = 900,
+            });
+            draftSharing.Children.Add(CreateSecondaryButton(
+                "Open saved drafts folder", 190, OpenDraftsClicked));
+            _contributionFeedback = CreateFeedbackText(new Thickness(0, 7, 0, 0));
+            draftSharing.Children.Add(_contributionFeedback);
+            _verification = new VerificationControl(_plugin);
+            panel.Children.Add(_verification);
+            panel.Children.Add(CreateGroupBorder(draftSharing, new Thickness(0, 16, 0, 0)));
+            return panel;
+        }
+
+        private UIElement CreateAdvancedTab()
+        {
+            var panel = CreateTabPanel();
+            AddSectionHeading(panel, "Installed dataset");
+            _installedDatasetStatus = new TextBlock
+            {
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 7),
+                TextWrapping = TextWrapping.Wrap,
+            };
+            panel.Children.Add(_installedDatasetStatus);
+            panel.Children.Add(new TextBlock
+            {
+                Text = "Online dataset updates are not implemented in this development build. The planned public-release flow will check the database's GitHub releases, ask before downloading, validate the package, and preserve a rollback copy. Dataset updates will remain separate from plugin updates.",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 18),
+                MaxWidth = 860,
+            });
+
+            var reload = new SHExpander
+            {
+                Header = "Troubleshooting and manually replaced files",
+                IsExpanded = false,
+                Margin = new Thickness(0, 0, 0, 24),
+            };
+            var reloadContent = new StackPanel { Margin = new Thickness(0, 10, 0, 0) };
+            reloadContent.Children.Add(new TextBlock
+            {
+                Text = "Reload files from disk only after manually replacing the installed dataset, or if SimHub did not pick up an on-disk change. This action does not check GitHub, download an update, or modify a curated record.",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 10),
+                MaxWidth = 820,
+            });
+            reloadContent.Children.Add(CreateSecondaryButton("Reload files from disk", 190, RefreshDatabaseClicked));
+            _advancedFeedback = CreateFeedbackText(new Thickness(0, 7, 0, 0));
+            reloadContent.Children.Add(_advancedFeedback);
+            reload.Content = reloadContent;
+            panel.Children.Add(reload);
+
+            AddSectionHeading(panel, "Unmatched-car diagnostics");
+            var diagnostics = new SHExpander
+            {
+                Header = "View diagnostic storage details",
+                IsExpanded = false,
+            };
+            var diagnosticsContent = new StackPanel { Margin = new Thickness(0, 10, 0, 0) };
+            diagnosticsContent.Children.Add(new TextBlock
+            {
+                Text = "When no exact match is found, the plugin records the game version, CarModel, CarId, class, dataset version, and timestamp once per unique identity. The JSON Lines file is preserved across plugin upgrades.",
+                TextWrapping = TextWrapping.Wrap,
+                MaxWidth = 760,
+            });
+            diagnosticsContent.Children.Add(new TextBlock
+            {
+                Text = _plugin.UnmatchedLogPath,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 8, 0, 10),
+                Opacity = 0.78,
+                MaxWidth = 760,
+            });
+            diagnosticsContent.Children.Add(CreateSecondaryButton("Open diagnostics folder", 190, OpenDiagnosticsClicked));
+            diagnostics.Content = diagnosticsContent;
+            panel.Children.Add(diagnostics);
+            return panel;
+        }
+
+        private static SHTabItem CreateTab(string header, UIElement content)
+        {
+            return new SHTabItem
+            {
+                Header = header,
+                Content = content,
+            };
+        }
+
+        private static StackPanel CreateTabPanel()
+        {
+            return new StackPanel
+            {
+                Margin = new Thickness(18),
+                MaxWidth = 1120,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+        }
+
+        private static Border CreateGroupBorder(UIElement child, Thickness margin)
+        {
+            return new Border
+            {
+                BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180)),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(5),
+                Child = child,
+                Margin = margin,
+            };
+        }
+
+        private static WrapPanel CreateActionRow(Thickness margin)
+        {
+            return new WrapPanel
+            {
+                Margin = margin,
+            };
+        }
+
+        private static TextBlock CreateFeedbackText(Thickness margin)
+        {
+            return new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Margin = margin,
+                Opacity = 0.88,
+                MaxWidth = 760,
+            };
+        }
+
+        private static TextBlock CreateFieldLabel(string text, Thickness margin)
+        {
+            return new TextBlock
+            {
+                Text = text,
+                FontSize = 16,
+                FontWeight = FontWeights.SemiBold,
+                Margin = margin,
+            };
+        }
+
+        private static void AddSectionHeading(Panel panel, string text)
+        {
+            panel.Children.Add(new SHSectionTitle
             {
                 Text = text,
                 FontSize = 18,
                 FontWeight = FontWeights.SemiBold,
-                Margin = margin ?? new Thickness(0, 0, 0, 8),
+                Margin = new Thickness(0, 0, 0, 8),
             });
         }
 
-        private static Button CreateButton(
-            string label,
-            double width,
-            RoutedEventHandler handler)
+        private static Button CreatePrimaryButton(string label, double width, RoutedEventHandler handler)
         {
-            var button = new Button
+            var button = new SHButtonPrimary
             {
                 Content = label,
                 Width = width,
                 Height = 32,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(0, 0, 10, 0),
+                Margin = new Thickness(0, 0, 10, 8),
+            };
+            button.Click += handler;
+            return button;
+        }
+
+        private static Button CreateSecondaryButton(string label, double width, RoutedEventHandler handler)
+        {
+            var button = new SHButtonSecondary
+            {
+                Content = label,
+                Width = width,
+                Height = 32,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Margin = new Thickness(0, 0, 10, 8),
+                Foreground = new SolidColorBrush(Color.FromRgb(32, 32, 32)),
             };
             button.Click += handler;
             return button;
@@ -409,7 +490,7 @@ namespace AuthenticControls.Plugin
             if (state == "matched")
             {
                 _liveStatus.Text = "Matched: " + car
-                    + (string.IsNullOrWhiteSpace(carClass) ? string.Empty : " — " + carClass);
+                    + (string.IsNullOrWhiteSpace(carClass) ? string.Empty : " - " + carClass);
             }
             else if (state == "unmatched")
             {
@@ -428,10 +509,13 @@ namespace AuthenticControls.Plugin
             _contributeLiveButton.Visibility = state == "unmatched"
                 ? Visibility.Visible
                 : Visibility.Collapsed;
-
-            _versionStatus.Text = "Plugin " + _plugin.PluginVersion
-                + "  •  Dataset " + EmptyAsUnknown(_plugin.CurrentDatasetVersion)
-                + "  •  " + _plugin.DatabaseRecordCount + " records";
+            _showPopupButton.IsEnabled = _plugin.CanShowPopup;
+            if (_installedDatasetStatus != null)
+            {
+                _installedDatasetStatus.Text = "Dataset "
+                    + EmptyAsUnknown(_plugin.CurrentDatasetVersion)
+                    + "  /  " + _plugin.DatabaseRecordCount + " car records";
+            }
             _recordStatus.Text = string.IsNullOrWhiteSpace(_plugin.LiveRecordId)
                 ? string.Empty
                 : "Record: " + _plugin.LiveRecordId;
@@ -447,16 +531,14 @@ namespace AuthenticControls.Plugin
             VerificationCaptureContext capture = _plugin.CaptureVerificationContext();
             if (capture == null)
             {
-                _status.Text = "No live car is available to contribute.";
+                SetOverlayFeedback("No live car is available to contribute.", Brushes.IndianRed);
                 return;
             }
-            _contributionExpander.IsExpanded = true;
+            _tabs.SelectedIndex = 2;
             _verification.BeginFromCapture(capture);
-            _status.Text = "Contribution draft started for " + capture.TelemetryName
-                + ". Continue in the contributor workspace below.";
-            _contributionExpander.Dispatcher.BeginInvoke(
+            _verification.Dispatcher.BeginInvoke(
                 DispatcherPriority.Background,
-                new Action(delegate { _contributionExpander.BringIntoView(); }));
+                new Action(delegate { _verification.BringIntoView(); }));
         }
 
         private void UpdatePreviewStatus()
@@ -465,13 +547,14 @@ namespace AuthenticControls.Plugin
             {
                 return;
             }
-            _previewStatus.Text = _plugin.IsPreviewActive
-                ? "PREVIEW — NOT LIVE: " + _plugin.CurrentCarName
+            bool previewActive = _plugin.IsPreviewActive;
+            _previewStatus.Text = previewActive
+                ? "Previewing (not live): " + _plugin.CurrentCarName
                     + (string.IsNullOrWhiteSpace(_plugin.CurrentCarClass)
                         ? string.Empty
-                        : " — " + _plugin.CurrentCarClass)
-                    + ". Click Close preview when finished."
-                : "No preview active.";
+                        : " - " + _plugin.CurrentCarClass)
+                : "Live telemetry remains active.";
+            _closePreviewButton.IsEnabled = previewActive;
         }
 
         private static string EmptyAsUnknown(string value)
@@ -481,14 +564,20 @@ namespace AuthenticControls.Plugin
 
         private void ShowPopupClicked(object sender, RoutedEventArgs eventArgs)
         {
-            _plugin.ShowPopup();
-            _status.Text = "Popup shown. It will remain visible until hidden.";
+            if (!_plugin.ShowPopup())
+            {
+                SetOverlayFeedback(
+                    "No car is available. Start the simulator or preview a car from Car browser first.",
+                    Brushes.Goldenrod);
+                return;
+            }
+            SetOverlayFeedback("Popup shown. It remains visible until you hide it.", Brushes.LightGreen);
         }
 
         private void HidePopupClicked(object sender, RoutedEventArgs eventArgs)
         {
             _plugin.HidePopup();
-            _status.Text = "Popup hidden.";
+            SetOverlayFeedback("Popup hidden.", Brushes.LightGreen);
         }
 
         private void RefreshDatabaseClicked(object sender, RoutedEventArgs eventArgs)
@@ -496,9 +585,13 @@ namespace AuthenticControls.Plugin
             _plugin.RefreshDatabase();
             ReloadPreviewCars();
             UpdateLiveStatus();
-            _status.Text = string.IsNullOrWhiteSpace(_plugin.CurrentRuntimeError)
-                ? "Database refreshed successfully."
-                : "Database refresh failed: " + _plugin.CurrentRuntimeError;
+            SetAdvancedFeedback(
+                string.IsNullOrWhiteSpace(_plugin.CurrentRuntimeError)
+                    ? "Dataset files reloaded successfully."
+                    : "Dataset reload failed: " + _plugin.CurrentRuntimeError,
+                string.IsNullOrWhiteSpace(_plugin.CurrentRuntimeError)
+                    ? Brushes.LightGreen
+                    : Brushes.IndianRed);
         }
 
         private void ReloadPreviewCars()
@@ -532,33 +625,32 @@ namespace AuthenticControls.Plugin
             CarCatalogEntry selected = _previewCar.SelectedItem as CarCatalogEntry;
             if (selected == null)
             {
-                _status.Text = "Choose a car from the list first.";
+                SetBrowserFeedback("Choose a car from the list first.", Brushes.IndianRed);
                 return;
             }
             if (!_plugin.PreviewCar(selected))
             {
                 UpdateLiveStatus();
-                _status.Text = "Could not open the preview overlay. "
-                    + EmptyAsUnknown(_plugin.CurrentRuntimeError);
+                SetBrowserFeedback(
+                    "Could not open the preview overlay. " + EmptyAsUnknown(_plugin.CurrentRuntimeError),
+                    Brushes.IndianRed);
                 return;
             }
             UpdateLiveStatus();
-            _status.Text = string.Empty;
+            SetBrowserFeedback("Preview is showing in the selected overlay layout. It is not live telemetry.", Brushes.LightGreen);
         }
 
         private void ReturnToLiveCarClicked(object sender, RoutedEventArgs eventArgs)
         {
             _plugin.ReturnToLiveCar();
             UpdateLiveStatus();
-            _status.Text = "Preview closed. Live telemetry restored.";
+            SetBrowserFeedback("Preview closed. Live telemetry restored.", Brushes.LightGreen);
         }
 
-        private void DurationValueChanged(
-            object sender,
-            RoutedPropertyChangedEventArgs<double> eventArgs)
+        private void DurationValueChanged(object sender, RoutedPropertyChangedEventArgs<double> eventArgs)
         {
             UpdateDurationLabel();
-            _status.Text = string.Empty;
+            MarkPopupSettingsDirty();
         }
 
         private static ComboBoxItem CreateSizeItem(string label, string value)
@@ -575,10 +667,7 @@ namespace AuthenticControls.Plugin
             foreach (object item in _popupSize.Items)
             {
                 ComboBoxItem sizeItem = item as ComboBoxItem;
-                if (sizeItem != null && string.Equals(
-                    sizeItem.Tag as string,
-                    value,
-                    StringComparison.OrdinalIgnoreCase))
+                if (sizeItem != null && string.Equals(sizeItem.Tag as string, value, StringComparison.OrdinalIgnoreCase))
                 {
                     _popupSize.SelectedItem = sizeItem;
                     return;
@@ -589,7 +678,7 @@ namespace AuthenticControls.Plugin
 
         private void PopupSizeChanged(object sender, SelectionChangedEventArgs eventArgs)
         {
-            _status.Text = string.Empty;
+            MarkPopupSettingsDirty();
         }
 
         private void UpdateDurationLabel()
@@ -600,6 +689,26 @@ namespace AuthenticControls.Plugin
             }
         }
 
+        private void MarkPopupSettingsDirty()
+        {
+            _popupSettingsDirty = true;
+            if (_overlayFeedback != null)
+            {
+                SetOverlayFeedback("Unsaved popup changes.", Brushes.Goldenrod);
+            }
+            UpdatePopupSettingsState();
+        }
+
+        private void UpdatePopupSettingsState()
+        {
+            if (_savePopupSettingsButton == null)
+            {
+                return;
+            }
+            _savePopupSettingsButton.IsEnabled = _popupSettingsDirty;
+            _savePopupSettingsButton.Content = _popupSettingsDirty ? "Save changes" : "Changes saved";
+        }
+
         private void SaveClicked(object sender, RoutedEventArgs eventArgs)
         {
             double seconds = Math.Round(_duration.Value);
@@ -608,8 +717,11 @@ namespace AuthenticControls.Plugin
                 ? AuthenticControls.DefaultPopupSize
                 : selected.Tag as string;
             _plugin.SetPopupSettings(seconds, popupSize);
-            _status.Text = "Saved. New car changes will use the " + popupSize
-                + " popup for " + seconds + " seconds.";
+            _popupSettingsDirty = false;
+            UpdatePopupSettingsState();
+            SetOverlayFeedback(
+                "Saved. New car changes use the " + popupSize + " popup for " + seconds + " seconds.",
+                Brushes.LightGreen);
         }
 
         private void OpenDiagnosticsClicked(object sender, RoutedEventArgs eventArgs)
@@ -617,12 +729,56 @@ namespace AuthenticControls.Plugin
             try
             {
                 string folder = _plugin.OpenDiagnosticsFolder();
-                _status.Text = "Opened diagnostics folder: " + folder;
+                SetAdvancedFeedback("Opened diagnostics folder: " + folder, Brushes.LightGreen);
             }
             catch (Exception exception)
             {
-                _status.Text = "Could not open diagnostics folder: " + exception.Message;
+                SetAdvancedFeedback("Could not open diagnostics folder: " + exception.Message, Brushes.IndianRed);
             }
+        }
+
+        private void OpenDraftsClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                string folder = _plugin.OpenVerificationFolder();
+                SetFeedback(
+                    _contributionFeedback,
+                    "Opened saved drafts folder: " + folder,
+                    Brushes.LightGreen);
+            }
+            catch (Exception exception)
+            {
+                SetFeedback(
+                    _contributionFeedback,
+                    "Could not open saved drafts folder: " + exception.Message,
+                    Brushes.IndianRed);
+            }
+        }
+
+        private void SetOverlayFeedback(string message, Brush foreground)
+        {
+            SetFeedback(_overlayFeedback, message, foreground);
+        }
+
+        private void SetBrowserFeedback(string message, Brush foreground)
+        {
+            SetFeedback(_browserFeedback, message, foreground);
+        }
+
+        private void SetAdvancedFeedback(string message, Brush foreground)
+        {
+            SetFeedback(_advancedFeedback, message, foreground);
+        }
+
+        private static void SetFeedback(TextBlock control, string message, Brush foreground)
+        {
+            if (control == null)
+            {
+                return;
+            }
+            control.Text = message ?? string.Empty;
+            control.Foreground = foreground;
         }
     }
 }

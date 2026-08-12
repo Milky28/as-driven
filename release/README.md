@@ -8,6 +8,19 @@ Build a database-only ZIP and SHA-256 checksum with:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-database.ps1
 ```
 
+Build the complete early-access release candidates (plugin and database as
+separate checksummed ZIPs) with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-early-access.ps1
+```
+
+That command requires the supported SimHub SDK to be installed locally. It
+runs the database and .NET checks, builds the SimHub package, tests database
+installation and plugin removal in temporary directories, and writes release
+metadata under `dist/early-access`. See `docs/releasing.md` for manual release
+candidate checks and publishing steps.
+
 The archive contains `data/`, `schema/`, the data-model and evidence-boundary
 documentation, and license files. `release-manifest.json` identifies the
 dataset version and hashes every packaged file. It contains no SimHub binaries,

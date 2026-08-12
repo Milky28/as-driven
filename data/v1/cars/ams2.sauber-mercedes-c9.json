@@ -7,7 +7,11 @@
     "manufacturer": "Sauber",
     "model": "Mercedes C9",
     "variant": "AMS2 Group C representation",
-    "year": { "from": 1989, "to": 1989, "label": "1989" },
+    "year": {
+      "from": 1989,
+      "to": 1989,
+      "label": "1989"
+    },
     "class": "Group C",
     "real_world_identity_notes": "Naming follows the AMS2 community sheet; exact configuration remains to be checked against homologation or team material."
   },
@@ -18,55 +22,82 @@
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
       "upshift": {
-        "clutch": "unknown",
-        "throttle_lift": "unknown",
+        "clutch": "not-required",
+        "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "unknown",
+        "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "required",
         "automatic_blip": "no"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "degrees_of_rotation": 540,
       "wheel_rim": {
         "shape": "round",
         "diameter_mm": null,
-        "source_label": "RM",
-        "notes": "Raw sheet rim code retained and normalized only to round."
+        "source_label": "live-cockpit-round",
+        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no"
       }
     },
-    "notes": ["H-Dogleg identifies layout, not whether the gearbox is synchronized or a dogbox; gearbox_type therefore remains unknown."]
+    "notes": [
+      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
+      "A clutch is required from rest."
+    ]
   },
   "simulators": [
     {
       "simulator": "ams2",
-      "identities": [{ "kind": "telemetry-name", "value": "Sauber Mercedes C9" }],
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Sauber Mercedes C9"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Sauber Mercedes C9"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group C"
+        }
+      ],
       "behavior": {
-        "shift_type": "H-Dogleg",
+        "shift_type": "h-pattern",
         "auto_blip": "no",
         "shift_cut": "no",
-        "steering_dor": 540,
-        "wheel_rim_type": { "normalized": "round", "source_label": "RM" },
-        "notes": ["Blank Auto Blip and Shift Cut indicators are No under the source's documented rule; DOR is optional reference metadata."]
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round"
+        },
+        "notes": [
+          "Guided current-game testing directly established all user-facing controls."
+        ]
       },
       "overrides": [],
-      "verified_game_version": "1.5.5.2",
-      "verified_at": "2024-01-17",
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
       "source_refs": [
         "ams2.coanda-sheet.v1.0.34",
         "ams2.reiza-forum.extended-car-info",
-        "simhub.local-ams2-identities.9.11.22"
+        "simhub.local-ams2-identities.9.11.22",
+        "ams2.sauber-mercedes-c9.local-guided-controls.1.6.9.91"
       ],
       "confidence": {
-        "level": "medium",
-        "basis": "Community-maintained sheet with explicit version and indicator semantics; not independently checked in the current game."
+        "level": "verified",
+        "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
     }
   ],
@@ -81,17 +112,36 @@
           "/authentic_controls/steering",
           "/simulators/0/behavior"
         ],
-        "source_refs": ["ams2.coanda-sheet.v1.0.34"],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34"
+        ],
         "confidence": "medium",
         "basis": "Direct transcription and conservative normalization of the Sauber Mercedes C9 row."
       },
       {
-        "paths": ["/simulators/0/identities/0"],
-        "source_refs": ["simhub.local-ams2-identities.9.11.22"],
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
         "confidence": "verified",
         "basis": "Exact CarId/CarModel value observed in SimHub's generated AMS2 car settings."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/identities",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.sauber-mercedes-c9.local-guided-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667."
       }
     ]
   },
-  "updated_at": "2026-08-09"
+  "updated_at": "2026-08-12"
 }

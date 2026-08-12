@@ -15,6 +15,9 @@ AuthenticControls.Core.Tests    Dependency-free .NET regression runner
 dash/                           Native Dash Studio pre-flight card generator
 build.ps1                       Build, test, and create a SimHub-ready package
 install.ps1                     Back up and install without resetting layouts
+uninstall.ps1                   Back up and remove binaries while preserving data
+test-install.ps1                Exercise installation in a temporary directory
+test-uninstall.ps1              Exercise removal in a temporary directory
 ```
 
 The core library supports schema version `1.0.0`, rejects index paths outside
@@ -57,6 +60,13 @@ positions. The build script itself never performs installation.
 When upgrading from the former 900-pixel Detailed surface, the installer keeps
 its center position and changes only that part's width to 840 pixels. Any part
 already given a different custom width is left untouched.
+
+To remove the plugin, close SimHub and run `simhub/uninstall.ps1`. By default it
+backs up and removes only the Authentic Controls binaries and packaged Dash
+Studio templates. It preserves the database, settings, diagnostics,
+verification drafts, and customized overlay layouts. Pass
+`-RemovePackagedLayouts` only when those layout files should also be backed up
+and removed.
 
 ## Diagnostic lookup
 
@@ -202,7 +212,8 @@ and the separate guided-verification surface.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.13.3 packages dataset 0.3.16. It packages the approved high-fidelity 128x128 raster
+0.15.0 packages dataset 0.3.18 for the first documented early-access candidate.
+It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -416,6 +427,68 @@ Version 0.13.3 packages ten additional guided records without changing the
 client workflow. Stock USA identities remain exact to the tested Speedway or
 Superspeedway configurations, and the Audi R8 V10 GT record corrects the
 research lineage to the later seven-speed S tronic generation.
+Version 0.14.0 reorganizes the native settings page into Overlay, Car browser,
+Contribute data, and Advanced workspaces. Preview and popup actions now provide
+local feedback, popup settings show an explicit unsaved state, and the
+contributor workflow uses a responsive four-step progression with a compact
+persisted simulator-setup summary. The overlay frame and accent use symmetric
+safe areas, car name and class have separate fitted header lines, and Detailed
+and Compact technique text is fitted by rendered-width estimates with tests
+against every curated record.
+Version 0.14.1 recalibrates the Segoe UI width estimator used by Detailed and
+Compact driving-technique text. It uses the available second line before
+ellipsis, keeps the complete Saleen S7-R GT1 sentence visible, and retains
+rendered-width fit checks across every curated record.
+Version 0.14.2 makes the contribution workspace responsive to both page width
+and workflow state. Setup uses the full available width while the review form
+is absent; an active review stacks at ordinary window sizes and changes to a
+balanced two-column layout only when enough width is available. Settings tab
+content can also use up to 1120 pixels without stretching indefinitely.
+Version 0.14.3 identifies the installed dataset version, record count, and
+bundled plugin version on the Advanced page. It moves the disk reload control
+under troubleshooting and distinguishes that action from the planned,
+separately versioned GitHub dataset update flow. The contribution page removes
+repeated workflow copy, states that drafts are never uploaded automatically,
+and provides persistent access to the local drafts folder while public GitHub
+submission remains unavailable.
+Version 0.14.4 disables manual popup display when neither live telemetry nor a
+catalog preview can supply a car, and reports success only after a displayable
+state is available. The plugin version moves to the page introduction while
+dataset version and car count remain in Advanced. Detailed, Compact, and Glance
+cards now place physical controls and shifting technique in separate subtle
+outlined panels for faster category recognition.
+Version 0.14.5 adds ten pixels of clearance between Detailed section headings
+and their icons, extends the paired group panels to preserve value spacing, and
+reflows the technique and evidence rows within the same 840 by 360 surface. It
+also removes the redundant central cyan divider from all popup sizes; the panel
+borders and gutter now provide the category separation.
+Version 0.14.6 consolidates popup actions, guided-drive state, and live
+verification identity without changing the user interface. SimHub Show and
+Toggle mappings now use the same availability guard as the settings page; Dash
+properties share one snapshot refreshed after each telemetry update or user
+action; and one capture context replaces seven parallel live-identity fields.
+Version 0.14.7 moves the contribution form's static WPF layout into XAML while
+keeping its telemetry, validation, responsive behavior, and draft saving in
+direct code-behind. This removes the large imperative UI constructor and its
+obsolete control factories without adding MVVM, services, or another project.
+The SimHub build smoke test now validates rendered controls and behavior instead
+of depending on private field and method names, so routine layout edits are less
+brittle. Guided-result, next-step, and evidence badges remain intact.
+Version 0.14.8 retires a completed contribution automatically when a different
+live car is detected, presenting a fresh Capture current car action without
+discarding unsaved work or the confirmed simulator-assist profile. It moves the
+saved-drafts information below the tester workflow and increases enabled button
+contrast while keeping disabled actions visually distinct.
+Version 0.14.9 resets guided-result expansion for each captured car and opens it
+only when an applicable driving result needs review. Direct H-pattern selection
+now depends on choosing an H-pattern/direct-selection mechanism and its explicit
+confirmation no longer requires a duplicate evidence note. The active workflow
+button also uses a stronger filled highlight.
+Version 0.15.0 establishes the documented early-access compatibility boundary,
+aligns plugin and core binary versions, adds separate checksummed plugin and
+database release artifacts, and adds a tested uninstaller that preserves local
+data and customized layouts by default. The client remains offline; automatic
+GitHub update checking waits for a stable public release endpoint.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

@@ -21,32 +21,36 @@
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
-        "clutch": "unknown",
-        "throttle_lift": "unknown",
+        "clutch": "not-required",
+        "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "unknown",
+        "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "required",
         "automatic_blip": "no"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
         "shape": "round",
-        "source_label": "RML",
-        "notes": "Raw sheet rim code retained; normalization is conservative."
+        "source_label": "live-cockpit-round",
+        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no"
       },
       "degrees_of_rotation": 900
     },
     "notes": [
-      "Clutch and throttle technique remain unknown where the source only documents shift type, auto-blip, and shift cut.",
-      "Source chassis manufacturer: Chevrolet."
+      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
+      "A clutch is required from rest."
     ]
   },
   "simulators": [
@@ -55,34 +59,52 @@
       "identities": [
         {
           "kind": "telemetry-name",
+          "value": "Chevrolet Corvette C3.R"
+        },
+        {
+          "kind": "telemetry-name",
           "value": "Chevrolet Corvette C3-R"
         },
         {
           "kind": "display-name",
           "value": "Chevrolet Corvette C3.R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Chevrolet Corvette C3.R"
+        },
+        {
+          "kind": "class-id",
+          "value": "TC70S"
         }
       ],
       "behavior": {
-        "shift_type": "H",
+        "shift_type": "h-pattern",
         "auto_blip": "no",
         "shift_cut": "no",
         "wheel_rim_type": {
           "normalized": "round",
-          "source_label": "RML"
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round"
         },
-        "steering_dor": 900
+        "notes": [
+          "Guided current-game testing directly established all user-facing controls."
+        ]
       },
       "overrides": [],
-      "verified_game_version": "1.5.5.2",
-      "verified_at": "2024-01-17",
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
       "source_refs": [
         "ams2.coanda-sheet.v1.0.34",
         "ams2.reiza-forum.extended-car-info",
-        "simhub.local-ams2-identities.9.11.22"
+        "simhub.local-ams2-identities.9.11.22",
+        "ams2.chevrolet-corvette-c3-r.local-guided-controls.1.6.9.91"
       ],
       "confidence": {
-        "level": "medium",
-        "basis": "Control data comes from the versioned community sheet; the telemetry alias is an exact, reviewed SimHub observation."
+        "level": "verified",
+        "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
     }
   ],
@@ -109,8 +131,21 @@
         ],
         "confidence": "verified",
         "basis": "Approved exact alias from the SimHub identity audit."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/identities",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.chevrolet-corvette-c3-r.local-guided-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash e65135ff."
       }
     ]
   },
-  "updated_at": "2026-08-10"
+  "updated_at": "2026-08-12"
 }
