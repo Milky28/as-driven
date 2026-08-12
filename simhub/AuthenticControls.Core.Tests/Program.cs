@@ -474,9 +474,8 @@ namespace AuthenticControls.Core.Tests
 
                     var guidedDrive = new GuidedVerificationDrive();
                     guidedDrive.Start(6);
-                    Equal("Before you begin", guidedDrive.GetSnapshot().Title, "starts with a guided-workflow introduction");
-                    Equal(0, guidedDrive.GetSnapshot().StepNumber, "does not count the introduction as a driving test");
-                    guidedDrive.Next();
+                    Equal("Move-off clutch test", guidedDrive.GetSnapshot().Title, "starts immediately with the first maneuver");
+                    Equal(1, guidedDrive.GetSnapshot().StepNumber, "starts on driving test one without an extra introduction");
                     True(guidedDrive.GetSnapshot().PromptLine1.Length < 70, "keeps the move-off first prompt line short");
                     True(guidedDrive.GetSnapshot().PromptLine2.Length < 70, "keeps the move-off second prompt line short");
                     True(guidedDrive.GetSnapshot().Prompt.Contains(guidedDrive.GetSnapshot().PromptLine1), "retains a combined prompt for non-overlay consumers");
@@ -519,7 +518,6 @@ namespace AuthenticControls.Core.Tests
 
                     var moveOffStall = new GuidedVerificationDrive();
                     moveOffStall.Start(null);
-                    moveOffStall.Next();
                     moveOffStall.AddSample(GuidedSample(now, 0, 0, 0, 0, 0, 0, false));
                     moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(100), 0, 0, 0, 1200, 0, 30, true));
                     moveOffStall.AddSample(GuidedSample(now.AddMilliseconds(200), 1, 0, 20, 0, 0, 0, false));
@@ -528,7 +526,6 @@ namespace AuthenticControls.Core.Tests
 
                     var rollingStall = new GuidedVerificationDrive();
                     rollingStall.Start(null);
-                    rollingStall.Next();
                     rollingStall.AddSample(GuidedSample(now, 0, 0, 0, 1200, 0, 30, true));
                     rollingStall.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 40, 20, 900, 3, 20, true));
                     False(rollingStall.GetSnapshot().ResultReady, "waits before accepting initial movement");
@@ -539,7 +536,6 @@ namespace AuthenticControls.Core.Tests
 
                     var skippedAutomaticTests = new GuidedVerificationDrive();
                     skippedAutomaticTests.Start(null);
-                    skippedAutomaticTests.Next();
                     skippedAutomaticTests.Skip();
                     skippedAutomaticTests.Skip();
                     skippedAutomaticTests.Skip();

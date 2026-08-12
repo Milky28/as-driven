@@ -115,7 +115,7 @@ namespace AuthenticControls.Core
                 _hasCompletedResults = false;
                 _fullThrottleTestFailed = false;
                 _coastDownshiftTestFailed = false;
-                _phase = Phase.Intro;
+                _phase = Phase.MoveOff;
                 ResetTrace();
             }
         }
@@ -197,11 +197,6 @@ namespace AuthenticControls.Core
                 {
                     _phase = Phase.Idle;
                     ResetTrace();
-                    return;
-                }
-                if (_phase == Phase.Intro)
-                {
-                    MoveTo(Phase.MoveOff);
                     return;
                 }
                 if (!_resultReady)

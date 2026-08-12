@@ -25,7 +25,6 @@ namespace AuthenticControls.Plugin
         private readonly Button _contributeLiveButton;
         private readonly ScrollViewer _scrollViewer;
         private readonly DispatcherTimer _statusTimer;
-        private int _handledContributionRequestRevision;
 
         public AuthenticControlsSettingsControl(AuthenticControls plugin)
         {
@@ -34,7 +33,7 @@ namespace AuthenticControls.Plugin
             var panel = new StackPanel
             {
                 Margin = new Thickness(24),
-                MaxWidth = 760,
+                MaxWidth = 1180,
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
 
@@ -441,36 +440,20 @@ namespace AuthenticControls.Plugin
                 : "Error: " + _plugin.CurrentRuntimeError;
             UpdatePreviewStatus();
             _verification.UpdateLiveAvailability();
-            HandleContributionRequest();
         }
 
         private void ContributeLiveCarClicked(object sender, RoutedEventArgs eventArgs)
         {
-            if (!_plugin.RequestCarContributionFromLive())
+            VerificationCaptureContext capture = _plugin.CaptureVerificationContext();
+            if (capture == null)
             {
                 _status.Text = "No live car is available to contribute.";
                 return;
             }
-            HandleContributionRequest();
-        }
-
-        private void HandleContributionRequest()
-        {
-            int revision = _plugin.ContributionRequestRevision;
-            if (revision <= 0 || revision == _handledContributionRequestRevision)
-            {
-                return;
-            }
-            VerificationCaptureContext capture = _plugin.GetContributionRequestCapture();
-            if (capture == null)
-            {
-                return;
-            }
-            _handledContributionRequestRevision = revision;
             _contributionExpander.IsExpanded = true;
             _verification.BeginFromCapture(capture);
             _status.Text = "Contribution draft started for " + capture.TelemetryName
-                + ". Confirm the simulator setup below; the in-game reminder remains visible until then.";
+                + ". Continue in the contributor workspace below.";
             _contributionExpander.Dispatcher.BeginInvoke(
                 DispatcherPriority.Background,
                 new Action(delegate { _contributionExpander.BringIntoView(); }));

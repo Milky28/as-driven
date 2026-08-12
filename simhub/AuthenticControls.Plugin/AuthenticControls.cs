@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -52,7 +53,6 @@ namespace AuthenticControls.Plugin
         private readonly PopupState _popupState = new PopupState(
             TimeSpan.FromSeconds(DefaultPopupDurationSeconds));
         private readonly object _verificationTelemetryLock = new object();
-        private readonly object _contributionRequestLock = new object();
         private readonly GuidedVerificationDrive _guidedVerificationDrive =
             new GuidedVerificationDrive();
         private AuthenticControlsSettings _settings = new AuthenticControlsSettings();
@@ -83,9 +83,6 @@ namespace AuthenticControls.Plugin
         private int _liveVerificationForwardGears;
         private string _guidedVerificationCarModel = string.Empty;
         private VerificationCaptureContext _guidedVerificationCapture;
-        private VerificationCaptureContext _pendingContributionCapture;
-        private int _contributionRequestRevision;
-        private bool _contributionRequestPending;
 
         public PluginManager PluginManager { get; set; }
 
@@ -273,12 +270,6 @@ namespace AuthenticControls.Plugin
                     OpenVerificationFolder();
                 });
             this.AddAction(
-                "BeginCarContribution",
-                delegate(PluginManager manager, string parameter)
-                {
-                    RequestCarContributionFromLive();
-                });
-            this.AddAction(
                 "VerificationDriveNext",
                 delegate(PluginManager manager, string parameter)
                 {
@@ -344,7 +335,6 @@ namespace AuthenticControls.Plugin
                     data.GameName ?? string.Empty,
                     carIdentifier))
                 {
-                    CancelStaleContributionRequest(carIdentifier);
                     _current = session.Current;
                     if (_current.MatchStatus == "unmatched")
                     {
@@ -430,6 +420,11 @@ namespace AuthenticControls.Plugin
                     _settings.PopupDurationSeconds);
                 _settings.PopupDurationSeconds = seconds;
                 _settings.PopupSize = NormalizePopupSize(_settings.PopupSize);
+                if (_settings.VerificationAssistProfiles == null)
+                {
+                    _settings.VerificationAssistProfiles =
+                        new Dictionary<string, VerificationAssistProfile>();
+                }
                 _popupState.SetAutomaticDuration(TimeSpan.FromSeconds(seconds));
             }
             catch (Exception exception)
@@ -515,82 +510,39 @@ namespace AuthenticControls.Plugin
             }
         }
 
-        internal bool RequestCarContributionFromLive()
+        internal VerificationAssistProfile GetVerificationAssistProfile(string simulator)
         {
-            VerificationCaptureContext capture = CaptureVerificationContext();
-            if (capture == null)
+            VerificationAssistProfile profile;
+            if (_settings.VerificationAssistProfiles != null
+                && _settings.VerificationAssistProfiles.TryGetValue(
+                    simulator ?? string.Empty,
+                    out profile))
             {
-                return false;
+                return profile;
             }
-            lock (_contributionRequestLock)
-            {
-                _pendingContributionCapture = capture;
-                _contributionRequestRevision++;
-                _contributionRequestPending = true;
-            }
-            _popupState.Show();
-            return true;
+            return null;
         }
 
-        internal int ContributionRequestRevision
+        internal void SaveVerificationAssistProfile(
+            string simulator,
+            string automaticClutch,
+            string automaticShifting,
+            string automaticThrottleBlip)
         {
-            get
+            if (_settings.VerificationAssistProfiles == null)
             {
-                lock (_contributionRequestLock)
-                {
-                    return _contributionRequestRevision;
-                }
+                _settings.VerificationAssistProfiles =
+                    new Dictionary<string, VerificationAssistProfile>();
             }
-        }
-
-        internal bool ContributionRequestPending
-        {
-            get
-            {
-                lock (_contributionRequestLock)
+            _settings.VerificationAssistProfiles[simulator ?? string.Empty] =
+                new VerificationAssistProfile
                 {
-                    return _contributionRequestPending;
-                }
-            }
-        }
-
-        internal VerificationCaptureContext GetContributionRequestCapture()
-        {
-            lock (_contributionRequestLock)
-            {
-                return _pendingContributionCapture;
-            }
-        }
-
-        internal void AcknowledgeContributionRequest(int revision)
-        {
-            lock (_contributionRequestLock)
-            {
-                if (revision == _contributionRequestRevision)
-                {
-                    _contributionRequestPending = false;
-                    _popupState.Hide();
-                }
-            }
-        }
-
-        private void CancelStaleContributionRequest(string liveCarIdentifier)
-        {
-            lock (_contributionRequestLock)
-            {
-                if (!_contributionRequestPending || _pendingContributionCapture == null)
-                {
-                    return;
-                }
-                if (!string.Equals(
-                    _pendingContributionCapture.TelemetryName,
-                    liveCarIdentifier ?? string.Empty,
-                    StringComparison.Ordinal))
-                {
-                    _contributionRequestPending = false;
-                    _pendingContributionCapture = null;
-                }
-            }
+                    AutomaticClutch = automaticClutch ?? "unknown",
+                    AutomaticShifting = automaticShifting ?? "unknown",
+                    AutomaticThrottleBlip = automaticThrottleBlip ?? "unknown",
+                    Confirmed = true
+                };
+            this.SaveCommonSettings("Settings", _settings);
         }
 
         internal void StartGuidedVerificationDrive(VerificationCaptureContext capture)
@@ -1269,9 +1221,6 @@ namespace AuthenticControls.Plugin
             this.AttachDelegate("LastUnmatchedCarClass", delegate { return _lastUnmatchedCarClass; });
             this.AttachDelegate("LastUnmatchedGameVersion", delegate { return _lastUnmatchedGameVersion; });
             this.AttachDelegate("UnmatchedLogError", delegate { return _lastUnmatchedLogError; });
-            this.AttachDelegate(
-                "ContributionRequestPending",
-                delegate { return ContributionRequestPending; });
             this.AttachDelegate("DatasetVersion", delegate { return _current.DatasetVersion; });
             this.AttachDelegate("RecordId", delegate { return _current.RecordId; });
             this.AttachDelegate("DisplayName", delegate { return _current.DisplayName; });

@@ -48,7 +48,10 @@ namespace AuthenticControls.Plugin
         private readonly Button _save;
         private readonly Button _captureStart;
         private readonly Button _guidedStart;
-        private readonly Expander _formExpander;
+        private readonly StackPanel _formPanel;
+        private readonly TextBlock _reviewHint;
+        private readonly Border _visibleHardwareBorder;
+        private readonly Expander _drivingResultsExpander;
         private readonly Dictionary<ComboBox, string> _guidedOriginalChoices =
             new Dictionary<ComboBox, string>();
         private readonly HashSet<ComboBox> _manualOverrides =
@@ -57,6 +60,7 @@ namespace AuthenticControls.Plugin
         private bool _guidedDriveApplied;
         private bool _guidedDriveStarted;
         private bool _applyingGuidedResults;
+        private bool _loadingAssistProfile;
         private string _guidedAutomaticCutMethod = string.Empty;
         private string _guidedAutomaticBlipMethod = string.Empty;
         private string _guidedEvidenceNotes = string.Empty;
@@ -79,18 +83,49 @@ namespace AuthenticControls.Plugin
             });
             root.Children.Add(new TextBlock
             {
-                Text = "Before testing, disable automatic clutch and automatic shifting where available. Leave anything uncertain as Unknown or Not tested.",
+                Text = "Capture the car, confirm the saved simulator setup, run the in-sim drive, then review only the remaining cockpit details.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.78,
                 Margin = new Thickness(0, 0, 0, 12),
             });
+
+            var workspace = new Grid();
+            workspace.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(320) });
+            workspace.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(18) });
+            workspace.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            var sidebar = new StackPanel();
+            var form = new StackPanel { Visibility = Visibility.Collapsed };
+            _formPanel = form;
+            var sidebarBorder = new Border
+            {
+                Background = new SolidColorBrush(Color.FromArgb(18, 50, 190, 235)),
+                BorderBrush = new SolidColorBrush(Color.FromArgb(90, 50, 190, 235)),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(6),
+                Padding = new Thickness(14),
+                Child = sidebar,
+            };
+            var reviewBorder = new Border
+            {
+                BorderBrush = new SolidColorBrush(Color.FromArgb(55, 120, 150, 180)),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(6),
+                Padding = new Thickness(16),
+                Child = form,
+            };
+            Grid.SetColumn(sidebarBorder, 0);
+            Grid.SetColumn(reviewBorder, 2);
+            workspace.Children.Add(sidebarBorder);
+            workspace.Children.Add(reviewBorder);
+            root.Children.Add(workspace);
+
             _liveAvailability = new TextBlock
             {
                 FontWeight = FontWeights.SemiBold,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(0, 0, 0, 8),
             };
-            root.Children.Add(_liveAvailability);
+            sidebar.Children.Add(_liveAvailability);
             _workflowStatus = new TextBlock
             {
                 FontWeight = FontWeights.SemiBold,
@@ -98,13 +133,13 @@ namespace AuthenticControls.Plugin
                 Foreground = new SolidColorBrush(Color.FromRgb(50, 190, 235)),
                 Margin = new Thickness(0, 0, 0, 8),
             };
-            root.Children.Add(_workflowStatus);
+            sidebar.Children.Add(_workflowStatus);
             _captureStart = CreateButton(
                 "Start verification from live car",
                 235,
                 StartClicked,
                 new Thickness(0, 0, 0, 10));
-            root.Children.Add(_captureStart);
+            sidebar.Children.Add(_captureStart);
             _capturedIdentity = new TextBlock
             {
                 Text = "No verification started.",
@@ -112,39 +147,29 @@ namespace AuthenticControls.Plugin
                 Opacity = 0.78,
                 Margin = new Thickness(0, 0, 0, 12),
             };
-            root.Children.Add(_capturedIdentity);
-
-            var form = new StackPanel();
-            _formExpander = new Expander
-            {
-                Header = "Verification form",
-                IsExpanded = false,
-                Content = form,
-                Margin = new Thickness(0, 0, 0, 10),
-            };
-            root.Children.Add(_formExpander);
+            sidebar.Children.Add(_capturedIdentity);
 
             _observer = CreateTextBox();
             _observer.Text = plugin.VerificationObserver;
             AddLabeledControl(
-                form,
+                sidebar,
                 "Observer name",
                 _observer,
-                "Saved with the draft so a later reviewer knows who performed the test.");
+                null);
 
-            AddSubheading(form, "Tester workflow");
-            form.Children.Add(new TextBlock
+            AddSubheading(sidebar, "Workflow");
+            sidebar.Children.Add(new TextBlock
             {
-                Text = "1. Capture the live car.\n2. Verify the simulator assist settings below.\n3. Start the in-sim guided drive.\n4. Prepare and perform each prompted maneuver; accept, retry, or skip its result.\n5. Return here to identify cockpit controls and wheel details.\n6. Review the suggestions and save the draft.",
+                Text = "1  Capture\n2  Confirm setup\n3  Guided drive\n4  Review and save",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.82,
                 Margin = new Thickness(0, 0, 0, 10),
             });
 
-            AddSubheading(form, "Simulator assist settings");
-            form.Children.Add(new TextBlock
+            AddSubheading(sidebar, "Simulator test setup");
+            sidebar.Children.Add(new TextBlock
             {
-                Text = "Confirm the assist settings currently selected inside the simulator. These describe the test setup, not systems built into the car.",
+                Text = "These are simulator assists, not systems built into the car. A confirmed profile is reused for this simulator.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.72,
                 Margin = new Thickness(0, 0, 0, 10),
@@ -152,37 +177,37 @@ namespace AuthenticControls.Plugin
             _automaticClutch = CreateAssistCombo();
             _automaticShifting = CreateAssistCombo();
             _automaticThrottleBlip = CreateAssistCombo();
-            AddControlPair(
-                form,
-                "Automatic clutch",
-                _automaticClutch,
-                "Automatic shifting",
-                _automaticShifting);
+            _automaticClutch.SelectionChanged += AssistChoiceChanged;
+            _automaticShifting.SelectionChanged += AssistChoiceChanged;
+            _automaticThrottleBlip.SelectionChanged += AssistChoiceChanged;
+            AddLabeledControl(sidebar, "Automatic clutch", _automaticClutch, null);
+            AddLabeledControl(sidebar, "Automatic shifting", _automaticShifting, null);
             AddLabeledControl(
-                form,
+                sidebar,
                 "Automatic throttle-blip assist",
                 _automaticThrottleBlip,
-                "Choose Unavailable if the simulator has no separate assist setting.");
+                null);
             _assistSettingsConfirmed = CreateCheckBox(
-                "I verified these values against the simulator's current settings.");
+                "Use this verified setup");
             _assistSettingsConfirmed.Margin = new Thickness(0, 0, 0, 8);
-            form.Children.Add(_assistSettingsConfirmed);
+            _assistSettingsConfirmed.Padding = new Thickness(8);
+            sidebar.Children.Add(_assistSettingsConfirmed);
             _assistConfirmationHint = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap,
                 FontWeight = FontWeights.SemiBold,
                 Margin = new Thickness(0, 0, 0, 10),
             };
-            form.Children.Add(_assistConfirmationHint);
-            form.Children.Add(new TextBlock
+            sidebar.Children.Add(_assistConfirmationHint);
+            sidebar.Children.Add(new TextBlock
             {
-                Text = "AMS2 starts with the recommended test values: automatic clutch Disabled, automatic shifting Disabled, and throttle-blip assist Unavailable. Change a value to the actual state if you cannot use the recommendation, and explain the limitation below.",
+                Text = "For AMS2 the recommended setup is Disabled / Disabled / Unavailable. Review it once; changing a value requires reconfirmation.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.68,
                 Margin = new Thickness(0, 0, 0, 10),
             });
             _assistNotes = CreateMultilineTextBox(54);
-            AddLabeledControl(form, "Assist notes", _assistNotes, null);
+            AddLabeledControl(sidebar, "Assist notes", _assistNotes, null);
 
             var guidedActions = new WrapPanel { Margin = new Thickness(0, 2, 0, 8) };
             _guidedStart = CreateButton(
@@ -195,27 +220,12 @@ namespace AuthenticControls.Plugin
             _assistSettingsConfirmed.Unchecked += AssistSettingsConfirmationChanged;
             guidedActions.Children.Add(_guidedStart);
             guidedActions.Children.Add(CreateButton(
-                "Next / accept",
-                125,
-                GuidedNextClicked,
-                new Thickness(0, 0, 10, 6)));
-            guidedActions.Children.Add(CreateButton(
-                "Retry",
-                85,
-                GuidedRetryClicked,
-                new Thickness(0, 0, 10, 6)));
-            guidedActions.Children.Add(CreateButton(
-                "Skip",
-                80,
-                GuidedSkipClicked,
-                new Thickness(0, 0, 10, 6)));
-            guidedActions.Children.Add(CreateButton(
                 "Cancel",
                 85,
                 GuidedCancelClicked,
                 new Thickness(0, 0, 0, 6)));
-            form.Children.Add(guidedActions);
-            form.Children.Add(new TextBlock
+            sidebar.Children.Add(guidedActions);
+            sidebar.Children.Add(new TextBlock
             {
                 Text = "For in-car use, map AuthenticControls.VerificationDriveNext, AuthenticControls.VerificationDriveRetry, AuthenticControls.VerificationDriveSkip, and AuthenticControls.VerificationDriveCancel under SimHub Controls and events. Driving results are suggestions until you review and save the draft.",
                 TextWrapping = TextWrapping.Wrap,
@@ -223,46 +233,64 @@ namespace AuthenticControls.Plugin
                 Margin = new Thickness(0, 0, 0, 12),
             });
 
-            AddSubheading(form, "Driving tests");
+            _reviewHint = new TextBlock
+            {
+                Text = "Run the guided drive to populate driving results. Optional review fields will be highlighted here.",
+                TextWrapping = TextWrapping.Wrap,
+                FontWeight = FontWeights.SemiBold,
+                Foreground = Brushes.Goldenrod,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
+            form.Children.Add(_reviewHint);
+
+            var drivingPanel = new StackPanel();
+            _drivingResultsExpander = new Expander
+            {
+                Header = "Guided driving results (expand to review)",
+                IsExpanded = false,
+                Content = drivingPanel,
+                Margin = new Thickness(0, 4, 0, 10),
+            };
+            form.Children.Add(_drivingResultsExpander);
             _moveOff = CreateObservedCombo();
             _forwardGears = CreateTextBox();
             AddControlPair(
-                form,
+                drivingPanel,
                 "Moves from rest without physical clutch",
                 _moveOff,
                 "Forward gears",
                 _forwardGears);
             _directGearSelection = CreateDirectSelectionCombo();
             AddLabeledControl(
-                form,
+                drivingPanel,
                 "Direct H-pattern selection confirmed",
                 _directGearSelection,
                 "For an H-pattern car, verify that a non-adjacent requested gear engages directly rather than stepping sequentially.");
             _clutchlessUpshift = CreateObservedCombo();
             _automaticCut = CreateObservedCombo();
             AddControlPair(
-                form,
+                drivingPanel,
                 "Clutchless upshift accepted",
                 _clutchlessUpshift,
                 "Automatic throttle cut observed",
                 _automaticCut);
             _automaticCutMethod = CreateTextBox();
             AddLabeledControl(
-                form,
+                drivingPanel,
                 "How automatic cut was identified",
                 _automaticCutMethod,
                 "For example: full-throttle shift accepted with a visible power interruption.");
             _clutchlessDownshift = CreateObservedCombo();
             _automaticBlip = CreateObservedCombo();
             AddControlPair(
-                form,
+                drivingPanel,
                 "Clutchless downshift accepted",
                 _clutchlessDownshift,
                 "Automatic throttle blip observed",
                 _automaticBlip);
             _automaticBlipMethod = CreateTextBox();
             AddLabeledControl(
-                form,
+                drivingPanel,
                 "How automatic blip was identified",
                 _automaticBlipMethod,
                 "For example: throttle telemetry spiked during a downshift without pedal input.");
@@ -320,7 +348,16 @@ namespace AuthenticControls.Plugin
             actuatorRow.Children.Add(_visibleSequentialStick);
             actuatorRow.Children.Add(_visibleHPattern);
             actuatorRow.Children.Add(_visibleAutomaticLever);
-            form.Children.Add(actuatorRow);
+            _visibleHardwareBorder = new Border
+            {
+                BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180)),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(4),
+                Padding = new Thickness(6),
+                Margin = new Thickness(0, 0, 0, 12),
+                Child = actuatorRow,
+            };
+            form.Children.Add(_visibleHardwareBorder);
             _primaryActuation = CreateChoiceCombo(new[]
             {
                 new Choice("Unknown", "unknown"),
@@ -404,8 +441,8 @@ namespace AuthenticControls.Plugin
                 160,
                 OpenFolderClicked,
                 new Thickness(0)));
-            root.Children.Add(actions);
-            root.Children.Add(new TextBlock
+            form.Children.Add(actions);
+            form.Children.Add(new TextBlock
             {
                 Text = plugin.VerificationDraftDirectory,
                 TextWrapping = TextWrapping.Wrap,
@@ -417,8 +454,9 @@ namespace AuthenticControls.Plugin
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(0, 4, 0, 0),
             };
-            root.Children.Add(_status);
+            sidebar.Children.Add(_status);
             Child = root;
+            UpdateAssistConfirmationStyle();
             UpdateLiveAvailability();
         }
 
@@ -453,7 +491,7 @@ namespace AuthenticControls.Plugin
                 }
                 ApplyGuidedResults(_plugin.GetGuidedDriveResults());
                 _guidedDriveApplied = true;
-                _formExpander.IsExpanded = true;
+                _formPanel.Visibility = Visibility.Visible;
                 SetStatus("Guided drive complete. Suggested driving results were filled in; review the cockpit and wheel fields before saving.", Brushes.LightGreen, true);
             }
             UpdateWorkflowGuidance(live, guided);
@@ -480,7 +518,7 @@ namespace AuthenticControls.Plugin
             _guidedDriveApplied = true;
             _guidedDriveStarted = false;
             ResetForm();
-            _formExpander.IsExpanded = true;
+            _formPanel.Visibility = Visibility.Visible;
             _capturedIdentity.Text = "Captured: " + live.TelemetryName + " - "
                 + live.TelemetryClass + " | " + live.SimulatorDisplayName + " " + live.GameVersion + " | "
                 + live.ClientVersion;
@@ -494,6 +532,7 @@ namespace AuthenticControls.Plugin
 
         private void ResetForm()
         {
+            _loadingAssistProfile = true;
             foreach (ComboBox combo in new[]
             {
                 _automaticClutch, _automaticShifting, _automaticThrottleBlip,
@@ -504,13 +543,28 @@ namespace AuthenticControls.Plugin
             {
                 combo.SelectedIndex = 0;
             }
-            if (string.Equals(_capture.Simulator, "ams2", StringComparison.Ordinal))
+            VerificationAssistProfile savedProfile =
+                _plugin.GetVerificationAssistProfile(_capture.Simulator);
+            if (savedProfile != null && savedProfile.Confirmed)
+            {
+                SelectChoice(_automaticClutch, savedProfile.AutomaticClutch);
+                SelectChoice(_automaticShifting, savedProfile.AutomaticShifting);
+                SelectChoice(_automaticThrottleBlip, savedProfile.AutomaticThrottleBlip);
+                _assistSettingsConfirmed.IsChecked = true;
+            }
+            else if (string.Equals(_capture.Simulator, "ams2", StringComparison.Ordinal))
             {
                 SelectChoice(_automaticClutch, "disabled");
                 SelectChoice(_automaticShifting, "disabled");
                 SelectChoice(_automaticThrottleBlip, "unavailable");
+                _assistSettingsConfirmed.IsChecked = false;
             }
-            _assistSettingsConfirmed.IsChecked = false;
+            else
+            {
+                _assistSettingsConfirmed.IsChecked = false;
+            }
+            _loadingAssistProfile = false;
+            UpdateAssistConfirmationStyle();
             _forwardGears.Text = _capture.SuggestedForwardGears.HasValue
                 ? _capture.SuggestedForwardGears.Value.ToString(CultureInfo.InvariantCulture)
                 : string.Empty;
@@ -624,7 +678,7 @@ namespace AuthenticControls.Plugin
                     + " - draft saved for review.";
                 SetStatus("\u2713 DRAFT SAVED SUCCESSFULLY\n" + path, Brushes.LightGreen, true);
                 _save.IsEnabled = false;
-                _formExpander.IsExpanded = false;
+                _formPanel.Visibility = Visibility.Collapsed;
                 UpdateWorkflowGuidance(
                     _plugin.CaptureVerificationContext(),
                     _plugin.GetGuidedDriveSnapshot());
@@ -778,13 +832,15 @@ namespace AuthenticControls.Plugin
             _guidedStart.IsEnabled = assistsConfirmed;
             if (!assistsConfirmed)
             {
-                _workflowStatus.Text = "NEXT STEP: Verify the three simulator assist settings, then select the confirmation checkbox.";
-                _assistConfirmationHint.Text = "REQUIRED: Select this checkbox to enable Start in-sim guided drive.";
+                _workflowStatus.Text = "NEXT STEP: Verify the simulator setup, then select the green confirmation.";
+                _assistConfirmationHint.Text = "REQUIRED ONCE PER SIMULATOR SETUP: Confirm to enable the guided drive.";
                 _assistConfirmationHint.Foreground = Brushes.Orange;
                 return;
             }
 
-            _assistConfirmationHint.Text = "\u2713 CONFIRMED: Start in-sim guided drive is enabled.";
+            _assistConfirmationHint.Text = "\u2713 SAVED FOR "
+                + _capture.Simulator.ToUpperInvariant()
+                + ": Guided drive is enabled.";
             _assistConfirmationHint.Foreground = Brushes.LightGreen;
             if (!_guidedDriveStarted)
             {
@@ -848,6 +904,110 @@ namespace AuthenticControls.Plugin
             _visibleHardwareBadge.Foreground = hardwareSpecified
                 ? Brushes.LightGreen
                 : Brushes.Orange;
+            HighlightNextReviewField();
+        }
+
+        private void HighlightNextReviewField()
+        {
+            Brush normal = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
+            _visibleHardwareBorder.BorderBrush = normal;
+            _visibleHardwareBorder.BorderThickness = new Thickness(1);
+            foreach (ComboBox combo in new[]
+            {
+                _primaryActuation, _wheelShape, _wheelDisplay,
+                _wheelShiftLights, _wheelOpenTop, _moveOff,
+                _directGearSelection, _clutchlessUpshift, _automaticCut,
+                _clutchlessDownshift, _automaticBlip
+            })
+            {
+                combo.BorderBrush = normal;
+                combo.BorderThickness = new Thickness(1);
+            }
+
+            GuidedDriveSnapshot guided = _plugin.GetGuidedDriveSnapshot();
+            if (!_guidedDriveStarted || guided == null || !guided.Completed)
+            {
+                _reviewHint.Text = "Run the guided drive to populate driving results. Optional review fields will be highlighted here.";
+                _reviewHint.Foreground = Brushes.Goldenrod;
+                return;
+            }
+
+            if (_visiblePaddles.IsChecked != true
+                && _visibleSequentialStick.IsChecked != true
+                && _visibleHPattern.IsChecked != true
+                && _visibleAutomaticLever.IsChecked != true)
+            {
+                HighlightReviewTarget(
+                    _visibleHardwareBorder,
+                    "NEXT: Select the shift hardware visible in the cockpit.");
+                return;
+            }
+
+            foreach (ComboBox combo in new[]
+            {
+                _primaryActuation, _wheelShape, _wheelDisplay,
+                _wheelShiftLights, _wheelOpenTop
+            })
+            {
+                if (IsUnresolved(ChoiceValue(combo)))
+                {
+                    HighlightReviewTarget(
+                        combo,
+                        "NEXT: Review " + OptionalReviewLabel(combo) + ".");
+                    return;
+                }
+            }
+
+            foreach (ComboBox combo in new[]
+            {
+                _moveOff, _directGearSelection, _clutchlessUpshift,
+                _automaticCut, _clutchlessDownshift, _automaticBlip
+            })
+            {
+                if (IsUnresolved(ChoiceValue(combo)))
+                {
+                    _drivingResultsExpander.IsExpanded = true;
+                    HighlightReviewTarget(
+                        combo,
+                        "NEXT: Review the unresolved guided result for "
+                            + ManualOverrideLabel(combo) + ".");
+                    return;
+                }
+            }
+
+            _reviewHint.Text = "\u2713 REVIEW COMPLETE: Save the draft, or add optional notes first.";
+            _reviewHint.Foreground = Brushes.LightGreen;
+        }
+
+        private void HighlightReviewTarget(FrameworkElement control, string message)
+        {
+            Control field = control as Control;
+            Border panel = control as Border;
+            if (field != null)
+            {
+                field.BorderBrush = Brushes.LightGreen;
+                field.BorderThickness = new Thickness(2);
+            }
+            else if (panel != null)
+            {
+                panel.BorderBrush = Brushes.LightGreen;
+                panel.BorderThickness = new Thickness(2);
+            }
+            _reviewHint.Text = message + " Incomplete drafts are still allowed.";
+            _reviewHint.Foreground = Brushes.LightGreen;
+            control.Dispatcher.BeginInvoke(
+                System.Windows.Threading.DispatcherPriority.Background,
+                new Action(delegate { control.BringIntoView(); }));
+        }
+
+        private string OptionalReviewLabel(ComboBox combo)
+        {
+            if (combo == _primaryActuation) return "the primary shift mechanism";
+            if (combo == _wheelShape) return "the wheel shape";
+            if (combo == _wheelDisplay) return "whether the wheel has a display";
+            if (combo == _wheelShiftLights) return "whether the wheel has shift lights";
+            if (combo == _wheelOpenTop) return "whether the wheel has an open top";
+            return "this field";
         }
 
         private int OptionalUnresolvedCount()
@@ -1119,16 +1279,52 @@ namespace AuthenticControls.Plugin
 
         private void AssistSettingsConfirmationChanged(object sender, RoutedEventArgs eventArgs)
         {
-            if (_assistSettingsConfirmed.IsChecked == true)
+            if (!_loadingAssistProfile
+                && _capture != null
+                && _assistSettingsConfirmed.IsChecked == true)
             {
-                _plugin.AcknowledgeContributionRequest(
-                    _plugin.ContributionRequestRevision);
+                _plugin.SaveVerificationAssistProfile(
+                    _capture.Simulator,
+                    ChoiceValue(_automaticClutch),
+                    ChoiceValue(_automaticShifting),
+                    ChoiceValue(_automaticThrottleBlip));
             }
+            UpdateAssistConfirmationStyle();
             _guidedStart.IsEnabled = _capture != null
                 && _assistSettingsConfirmed.IsChecked == true;
             UpdateWorkflowGuidance(
                 _plugin.CaptureVerificationContext(),
                 _plugin.GetGuidedDriveSnapshot());
+        }
+
+        private void AssistChoiceChanged(object sender, SelectionChangedEventArgs eventArgs)
+        {
+            if (_loadingAssistProfile)
+            {
+                return;
+            }
+            if (_assistSettingsConfirmed.IsChecked == true)
+            {
+                _assistSettingsConfirmed.IsChecked = false;
+            }
+            UpdateAssistConfirmationStyle();
+            UpdateWorkflowGuidance(
+                _plugin.CaptureVerificationContext(),
+                _plugin.GetGuidedDriveSnapshot());
+        }
+
+        private void UpdateAssistConfirmationStyle()
+        {
+            bool confirmed = _assistSettingsConfirmed.IsChecked == true;
+            _assistSettingsConfirmed.BorderBrush = Brushes.LightGreen;
+            _assistSettingsConfirmed.BorderThickness = new Thickness(confirmed ? 1 : 2);
+            _assistSettingsConfirmed.Background = new SolidColorBrush(
+                confirmed
+                    ? Color.FromArgb(24, 70, 210, 125)
+                    : Color.FromArgb(40, 70, 210, 125));
+            _assistSettingsConfirmed.FontWeight = confirmed
+                ? FontWeights.Normal
+                : FontWeights.Bold;
         }
 
         private void GuidedChoiceEdited(object sender, SelectionChangedEventArgs eventArgs)

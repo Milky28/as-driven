@@ -114,6 +114,20 @@ $guidedStartButton = $guidedStartField.GetValue($verificationControl)
 if ($null -eq $guidedStartButton -or $guidedStartButton.IsEnabled) {
     throw "The guided-start button must remain disabled until assist settings are confirmed."
 }
+$formPanelField = $verificationType.GetField(
+    "_formPanel",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
+$formPanel = $formPanelField.GetValue($verificationControl)
+if ($null -eq $formPanel -or $formPanel.Visibility -ne [System.Windows.Visibility]::Collapsed) {
+    throw "The observation review area must remain hidden until a live car is captured."
+}
+$assistConfirmationField = $verificationType.GetField(
+    "_assistSettingsConfirmed",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic)
+$assistConfirmation = $assistConfirmationField.GetValue($verificationControl)
+if ($null -eq $assistConfirmation -or $assistConfirmation.BorderThickness.Left -lt 2) {
+    throw "The required assist confirmation must be visibly highlighted before selection."
+}
 Write-Host "PASS: Authentic Controls menu icon, settings page, and optional contributor workflow"
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent

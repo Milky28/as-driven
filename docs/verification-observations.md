@@ -3,7 +3,7 @@
 The SimHub guided verification workflow produces staging evidence; it does not
 edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.12.2
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.13.0
 prefills the exact live telemetry name, class, game/client versions, timestamp,
 and SimHub's reported maximum gear count. The tester confirms the gear count
 and supplies the observations that require judgment.
@@ -39,10 +39,11 @@ the research backlog, or a curation approval.
 1. Load the car and open the Authentic Controls feature page.
 2. Expand the visually separate **Contribute car data** workflow and click
    **Start verification from live car**.
-3. Confirm the captured identity and exact game version.
-4. Confirm that the listed assist settings describe the simulator's current
-   configuration, then click **Start in-sim guided drive**.
-5. Follow the overlay prompts. Map the Next, Retry, Skip, and Cancel actions to
+3. Confirm the captured identity and exact game version. The left workflow rail
+   reuses the last confirmed assist profile for that simulator; changing any
+   assist value requires it to be confirmed again.
+4. Click **Start in-sim guided drive**.
+5. Follow the first maneuver immediately. Map the Next, Retry, Skip, and Cancel actions to
    convenient physical controls to avoid alt-tabbing.
 6. Return to the form to review the telemetry suggestions and complete cockpit
    details. `Unknown` and `Not tested` are valid and preferable to a guess.
@@ -51,22 +52,22 @@ the research backlog, or a curation approval.
    the next draft.
 8. Use **Open drafts folder** to retrieve the JSON for review.
 
-When an exact identity is unmatched, the plugin page also shows **Contribute
-this car**. The unmatched popup names the mappable
-`AuthenticControls.BeginCarContribution` action; SimHub overlays are normally
-click-through, so the mapped action captures the live identity and opens the
-contributor workflow on the plugin page.
+When an exact identity is unmatched, the plugin page shows **Contribute this
+car**. The unmatched popup directs the tester to that page; capture and guided
+start both happen there so a redundant contribution action mapping is not
+required.
 
 For AMS2, the form begins with the recommended test setup: automatic clutch
 and automatic shifting disabled, and the separate throttle-blip assist marked
 unavailable. These are proposed test settings, not assumed observations. The
-tester must compare them with the simulator and check the confirmation box.
+tester must compare them with the simulator and check the green confirmation.
+That confirmed profile is stored per simulator and reused on later cars.
 When a recommended setting cannot be used, record its actual state and explain
 the limitation; affected car behavior should remain unknown or not tested.
 
-The in-sim introduction explains the repeated step cycle: prepare, perform the
-maneuver, wait for a captured result, then accept it or choose Retry/Skip. The
-overlay uses a short summary and green capture mark so completion is immediately
+The overlay starts directly with the move-off maneuver. Each test uses the same
+cycle: perform the maneuver, wait for a captured result, then accept it or choose
+Retry/Skip. The overlay uses a short summary and green capture mark so completion is immediately
 visible; the longer falsifiable description is retained for form review.
 Usable values populated from guided telemetry carry an `AUTO-DETECTED` badge.
 An `unknown` or `not-tested` result is instead labeled `REVIEW NEEDED`, because

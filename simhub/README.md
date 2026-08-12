@@ -149,7 +149,6 @@ AuthenticControls.VerificationDriveStatus
 AuthenticControls.VerificationDriveResult
 AuthenticControls.VerificationDriveResultDetail
 AuthenticControls.VerificationDriveLiveValues
-AuthenticControls.ContributionRequestPending
 ```
 
 `PopupRevision` increments once when a new matched car is observed. Repeated
@@ -162,10 +161,8 @@ The plugin also registers `AuthenticControls.RefreshDatabase`,
 `AuthenticControls.OpenDiagnosticsFolder`,
 `AuthenticControls.OpenVerificationFolder`, and
 `AuthenticControls.ReturnToLiveCar` for optional button/event mappings.
-`AuthenticControls.BeginCarContribution` captures the current live identity and
-opens the optional contributor workflow the next time the Authentic Controls
-page is visible. The unmatched-car popup shows this action name because SimHub
-overlays normally run click-through; it can be mapped under Controls and events.
+The unmatched-car popup directs contributors to the Authentic Controls page,
+where **Contribute this car** captures the live identity and opens the workflow.
 Guided verification also registers `AuthenticControls.VerificationDriveNext`,
 `AuthenticControls.VerificationDriveRetry`,
 `AuthenticControls.VerificationDriveSkip`, and
@@ -205,7 +202,7 @@ and the separate guided-verification surface.
 ## Current boundary
 
 It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.12.2 packages dataset 0.3.14. It packages the approved high-fidelity 128x128 raster
+0.13.0 packages dataset 0.3.14. It packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous
@@ -397,10 +394,13 @@ Version 0.12.1 prevents a brief roll caused by selecting first gear from being
 accepted as clutch-free move-off. The detector now requires at least 600 ms of
 sustained movement while the engine remains running; movement followed by an
 immediate stall is explicitly recorded as requiring the standing-start clutch.
-Version 0.12.2 keeps the mapped contribution reminder visible after a car is
-captured. It now tells the tester to confirm setup on the Authentic Controls
-page and remains visible until that assist confirmation is checked. Changing
-to another live car safely cancels the stale reminder.
+Version 0.13.0 removes the redundant contribution action mapping and redesigns
+the contributor UI as a left setup/workflow rail beside a focused review area.
+Confirmed assist profiles persist per simulator, the green confirmation is the
+clear next action, guided driving starts directly with the first maneuver, and
+the review highlight advances through unresolved optional fields. Captured
+driving details remain available in a collapsed section and incomplete drafts
+remain valid.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

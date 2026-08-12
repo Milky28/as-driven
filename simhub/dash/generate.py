@@ -636,11 +636,6 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
         if unmatched:
             cta_top = 158 if compact else 205
             hint_top = 196 if compact else 247
-            cta_expression = (
-                "if([AuthenticControls.ContributionRequestPending], "
-                "'CAR CAPTURED - CONFIRM SETUP IN AUTHENTIC CONTROLS', "
-                "'CONTRIBUTE THIS CAR')"
-            )
             children.extend([
                 factory.rectangle(
                     "ContributionCtaPanel",
@@ -655,20 +650,19 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
                 ),
                 factory.text(
                     "ContributionCta",
-                    "CONTRIBUTE THIS CAR",
+                    "CONTRIBUTE IN AUTHENTIC CONTROLS",
                     left + 10,
                     cta_top + 2,
                     factory.width - 2 * left - 20,
                     27,
                     11 if compact else 13,
                     GREEN,
-                    expression=cta_expression,
                     horizontal_alignment=1,
                     font_weight="Bold",
                 ),
                 factory.text(
                     "ContributionHint",
-                    "Open the Authentic Controls page, or map AuthenticControls.BeginCarContribution in Controls and events.",
+                    "Open the Authentic Controls page in SimHub and choose Contribute this car.",
                     left,
                     hint_top,
                     factory.width - 2 * left,

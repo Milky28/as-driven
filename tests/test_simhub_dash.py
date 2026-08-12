@@ -153,10 +153,10 @@ class SimHubDashTests(unittest.TestCase):
                 self.assertIn("Contribution available", serialized)
             else:
                 self.assertIn("No hardware or technique values have been assumed.", serialized)
-                self.assertIn("CONTRIBUTE THIS CAR", serialized)
-                self.assertIn("CAR CAPTURED - CONFIRM SETUP", serialized)
-                self.assertIn("AuthenticControls.BeginCarContribution", serialized)
-                self.assertIn("AuthenticControls.ContributionRequestPending", serialized)
+                self.assertIn("CONTRIBUTE IN AUTHENTIC CONTROLS", serialized)
+                self.assertIn("choose Contribute this car", serialized)
+                self.assertNotIn("AuthenticControls.BeginCarContribution", serialized)
+                self.assertNotIn("AuthenticControls.ContributionRequestPending", serialized)
 
     def test_bitmap_icons_cover_supported_control_categories_and_unknowns(self):
         dashboards = [
