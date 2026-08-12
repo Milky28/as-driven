@@ -7,6 +7,7 @@ from pathlib import Path
 from .audit_boundaries import audit_evidence_boundaries
 from .importers.ams2 import import_ams2_csv
 from .importers.iracing import import_iracing_html
+from .importers.observation import import_observation
 from .promote import promote_approved_ams2
 from .simhub import (
     audit_ams2_identities,
@@ -43,6 +44,19 @@ def _parser() -> argparse.ArgumentParser:
     )
     observation.add_argument("input", type=Path)
     observation.add_argument("--root", type=Path, default=Path.cwd())
+
+    observation_import = subparsers.add_parser(
+        "import-observation",
+        help="stage a curated-record candidate from a guided-verification observation",
+    )
+    observation_import.add_argument("input", type=Path)
+    observation_import.add_argument("--output", type=Path, required=True)
+    observation_import.add_argument("--root", type=Path, default=Path.cwd())
+    observation_import.add_argument(
+        "--skip-validate",
+        action="store_true",
+        help="do not validate the input against the observation schema first",
+    )
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
     ams2.add_argument("input", type=Path)
@@ -133,6 +147,40 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Observation validation failed with {len(errors)} error(s).")
             return 1
         print("Observation validation passed.")
+        return 0
+
+    if args.command == "import-observation":
+        try:
+            observation = json.loads(args.input.read_text(encoding="utf-8-sig"))
+        except (OSError, json.JSONDecodeError) as exception:
+            print(f"ERROR: Could not read observation: {exception}")
+            return 1
+        if not args.skip_validate:
+            schema_path = (
+                args.root.resolve()
+                / "schema"
+                / "v1"
+                / "verification-observation.schema.json"
+            )
+            try:
+                schema = json.loads(schema_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exception:
+                print(f"ERROR: Could not read observation schema: {exception}")
+                return 1
+            schema_errors = validate_instance(observation, schema, str(args.input))
+            if schema_errors:
+                for error in schema_errors:
+                    print(f"ERROR: {error}")
+                print(f"Observation validation failed with {len(schema_errors)} error(s).")
+                return 1
+        bundle = import_observation(observation)
+        _write_json(args.output, bundle)
+        print(
+            f"Staged record candidate {bundle['record']['record_id']} from "
+            f"observation {bundle['observation_id']} to {args.output}"
+        )
+        for note in bundle["review_notes"]:
+            print(f"REVIEW: {note}")
         return 0
 
     if args.command == "import-ams2":

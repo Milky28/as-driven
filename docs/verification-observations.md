@@ -92,6 +92,30 @@ Validate any exported draft from the repository root with:
 python -m authentic_controls_db validate-observation path/to/observation.json
 ```
 
+## Staging a record candidate from an observation
+
+An approved observation is still not a curated record. To do the mechanical half
+of the reviewer step, stage a candidate bundle from a draft:
+
+```shell
+python -m authentic_controls_db import-observation path/to/observation.json --output build/staged.json
+```
+
+The command validates the input against the observation schema (pass
+`--skip-validate` to bypass), then writes a single bundle containing a staged
+car record, a `sources.json` evidence-entry stub, and a `curation/` approval
+stub. It maps only what the drive supports: simulator behavior plus the
+authentic-control fields the observation establishes, leaving everything else
+`unknown`. Move-off and clutchless results degrade to `unknown` unless the
+observation confirms automatic clutch and shifting were both disabled, and it
+never infers real-world identity — manufacturer, model, year, and real-world
+notes are left as explicit `REVIEW-REQUIRED` placeholders, and any residual
+review actions are printed as `REVIEW:` lines. The approval stub's
+`approved_controls` are derived with the same mapping `validate` cross-checks,
+so once the reviewer fills the identity, registers the source, and sets the
+dataset version, promotion into `data/v1` validates cleanly. The bundle stays
+outside `data/v1` and `curation` until that explicit reviewer step.
+
 ## Automation boundary
 
 The client automatically captures identity, versions, timestamp, and a
