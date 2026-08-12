@@ -376,6 +376,13 @@ namespace AuthenticControls.Core
             {
                 actions.Add("automatic throttle cut handles upshifts");
             }
+            else if (throttleLift == "unknown")
+            {
+                // Say so rather than silently omitting upshift guidance. A
+                // "not-applicable" lift (an automatic gearbox) correctly stays
+                // silent because there is no upshift technique to describe.
+                actions.Add("upshift throttle technique is not yet verified");
+            }
 
             string automaticBlip = RequiredString(behavior, "auto_blip", "simulator behavior");
             string manualBlip = RequiredString(downshift, "manual_blip", "downshift");

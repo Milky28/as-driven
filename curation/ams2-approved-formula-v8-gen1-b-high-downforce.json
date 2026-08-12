@@ -1,1 +1,27 @@
-{"schema_version":"1.0.0","dataset_version":"0.3.18","approved_at":"2026-08-12","record_id":"ams2.formula-v8-gen1-b-high-downforce","telemetry_name":"Formula V8 Gen1 (B) - High Downforce","telemetry_class":"F-V8_Gen1_HD","observed_game_version":"1.6.9.91","observed_through":"SimHub 9.11.22 guided verification","approved_controls":{"forward_gears":7,"shift_actuation":"sequential-paddles","shift_pattern":"sequential","standing_start_clutch":"required","running_shift_clutch":"not-required","throttle_lift":"not-required","automatic_cut":"yes","automatic_blip":"yes","manual_blip":"not-required","wheel_rim_shape":"formula","wheel_integrated_display":"yes","wheel_shift_lights":"yes","wheel_open_top":"no"},"confidence_notes":"Exact current-game identity and all user-facing controls were directly verified.","scope_notes":"Reviewed draft ams2.formula-v8-gen1-b-high-downforce.20260812t174602668z-8bfe9dfc."}
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.18",
+  "approved_at": "2026-08-12",
+  "record_id": "ams2.formula-v8-gen1-b-high-downforce",
+  "telemetry_name": "Formula V8 Gen1 (B) - High Downforce",
+  "telemetry_class": "F-V8_Gen1_HD",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
+  "scope_notes": "Reviewed draft ams2.formula-v8-gen1-b-high-downforce.20260812t174602668z-8bfe9dfc."
+}

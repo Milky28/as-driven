@@ -641,6 +641,34 @@ namespace AuthenticControls.Core.Tests
                     "extracts the real SimHub product version from its startup log");
                 Equal("unknown", VersionText.ParseSimHubStartupLine("no version here"), "preserves unknown when a startup version is unavailable");
 
+                string syntheticRoot = Path.Combine(
+                    Path.GetTempPath(), "AuthenticControlsTests-" + Guid.NewGuid().ToString("N"));
+                try
+                {
+                    // An unverified upshift lift with no automatic cut must say so
+                    // instead of silently omitting upshift guidance.
+                    GuidanceSnapshot unverified = LoadSyntheticGuidance(
+                        syntheticRoot, "Unverified Upshift Car", "unknown", "no", "sequential-stick");
+                    True(
+                        unverified.TechniqueSummary.Contains("upshift throttle technique is not yet verified"),
+                        "discloses an unverified upshift technique instead of omitting it");
+
+                    // An automatic gearbox has no upshift technique to describe,
+                    // so it must stay silent rather than claim it is unverified.
+                    GuidanceSnapshot automatic = LoadSyntheticGuidance(
+                        syntheticRoot, "Automatic Car", "not-applicable", "unknown", "automatic-lever");
+                    False(
+                        automatic.TechniqueSummary.Contains("not yet verified"),
+                        "keeps an automatic gearbox silent about upshift throttle technique");
+                }
+                finally
+                {
+                    if (Directory.Exists(syntheticRoot))
+                    {
+                        Directory.Delete(syntheticRoot, true);
+                    }
+                }
+
                 Console.WriteLine("PASS: " + _assertions + " Authentic Controls .NET assertions");
                 return 0;
             }
@@ -736,6 +764,55 @@ namespace AuthenticControls.Core.Tests
                 SizeF size = graphics.MeasureString(value, font, int.MaxValue, StringFormat.GenericTypographic);
                 return size.Width <= width;
             }
+        }
+
+        /// <summary>
+        /// Writes a one-record dataset and returns its guidance, so technique
+        /// combinations absent from the curated data can still be asserted.
+        /// </summary>
+        private static GuidanceSnapshot LoadSyntheticGuidance(
+            string root,
+            string telemetryName,
+            string upshiftThrottleLift,
+            string simulatorShiftCut,
+            string shiftActuation)
+        {
+            string directory = Path.Combine(root, Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(Path.Combine(directory, "cars"));
+            string recordId = "ams2.synthetic";
+            string record = "{"
+                + "\"schema_version\":\"1.0.0\","
+                + "\"record_id\":\"" + recordId + "\","
+                + "\"identity\":{\"display_name\":\"" + telemetryName + "\","
+                + "\"manufacturer\":\"Test\",\"model\":\"Test\","
+                + "\"year\":{\"label\":\"test\"},\"class\":\"TEST\"},"
+                + "\"authentic_controls\":{\"transmission\":{"
+                + "\"forward_gears\":6,\"gearbox_type\":\"unknown\","
+                + "\"shift_actuation\":\"" + shiftActuation + "\",\"shift_pattern\":\"sequential\","
+                + "\"upshift\":{\"clutch\":\"not-required\",\"throttle_lift\":\"" + upshiftThrottleLift + "\","
+                + "\"automatic_cut\":\"" + simulatorShiftCut + "\",\"manual_blip\":\"not-applicable\",\"automatic_blip\":\"not-applicable\"},"
+                + "\"downshift\":{\"clutch\":\"not-required\",\"throttle_lift\":\"not-applicable\","
+                + "\"automatic_cut\":\"not-applicable\",\"manual_blip\":\"not-required\",\"automatic_blip\":\"yes\"},"
+                + "\"standing_start_clutch\":\"not-required\"},"
+                + "\"steering\":{\"wheel_rim\":{\"shape\":\"round\",\"source_label\":\"test\"}}},"
+                + "\"simulators\":[{\"simulator\":\"ams2\","
+                + "\"identities\":[{\"kind\":\"telemetry-name\",\"value\":\"" + telemetryName + "\"}],"
+                + "\"behavior\":{\"shift_type\":\"" + shiftActuation + "\",\"auto_blip\":\"yes\","
+                + "\"shift_cut\":\"" + simulatorShiftCut + "\","
+                + "\"wheel_rim_type\":{\"normalized\":\"round\",\"source_label\":\"test\"}},"
+                + "\"overrides\":[],\"verified_game_version\":\"1.6.9.91\",\"verified_at\":\"2026-08-13\","
+                + "\"source_refs\":[\"test.source\"],"
+                + "\"confidence\":{\"level\":\"medium\",\"basis\":\"synthetic test record\"}}],"
+                + "\"provenance\":{\"claims\":[{\"paths\":[\"/identity\"],\"source_refs\":[\"test.source\"],"
+                + "\"confidence\":\"medium\",\"basis\":\"synthetic\"}]},"
+                + "\"updated_at\":\"2026-08-13\"}";
+            File.WriteAllText(Path.Combine(directory, "cars", recordId + ".json"), record);
+            File.WriteAllText(
+                Path.Combine(directory, "index.json"),
+                "{\"schema_version\":\"1.0.0\",\"dataset_version\":\"0.0.0\","
+                    + "\"released_at\":\"2026-08-13\",\"records\":[\"cars/" + recordId + ".json\"]}");
+            AuthenticControlsDatabase database = AuthenticControlsDatabase.Load(directory);
+            return database.Match("Automobilista2", telemetryName);
         }
 
         private static GuidedTelemetrySample GuidedSample(
