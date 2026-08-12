@@ -116,6 +116,35 @@ so once the reviewer fills the identity, registers the source, and sets the
 dataset version, promotion into `data/v1` validates cleanly. The bundle stays
 outside `data/v1` and `curation` until that explicit reviewer step.
 
+## Promoting a reviewed bundle
+
+Staging does not curate anything. When the reviewer has resolved the real-world
+identity and registered the supporting sources, promote the bundle with an
+explicit review manifest:
+
+```shell
+python -m authentic_controls_db promote-observation curation/review-batch.json
+```
+
+Each entry names its bundle and supplies what a drive cannot establish:
+`manufacturer`, `model`, `year`, `real_world_identity_notes`, at least one
+registered `real_world_source_refs` entry, the `confidence` level, and the
+`confidence_basis`, `identity_basis`, and `specification_basis` statements.
+Optional keys cover an aero or configuration alias
+(`additional_telemetry_names`), reviewer corrections to fields the drive could
+not classify (`control_overrides`), and extra provenance (`additional_claims`).
+
+The command writes the curated record, its curation approval, the live-session
+source, and the dataset index together, and sets `dataset_version` from the
+manifest. It refuses to run when a required field is missing, when anything
+still contains `REVIEW-REQUIRED`, when a cited real-world source is not
+registered in `sources.json`, or when a curated record already exists. Nothing
+is written unless every entry in the manifest passes those checks.
+
+The approval's `approved_controls` are derived from the finished record with the
+same mapping `validate` cross-checks, so the promoted pair validates. Run
+`validate` and regenerate the coverage manifest afterwards.
+
 ## Automation boundary
 
 The client automatically captures identity, versions, timestamp, and a

@@ -159,6 +159,50 @@ class ValidationTests(unittest.TestCase):
         errors = validate_instance(observation, schema, "observation")
         self.assertTrue(any("expected an ISO date-time with timezone" in error for error in errors))
 
+    def test_documented_release_must_match_the_index(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            index = json.loads(
+                (temp_root / "data" / "v1" / "index.json").read_text(encoding="utf-8")
+            )
+            version = index["dataset_version"]
+            count = len(index["records"])
+
+            readme = temp_root / "README.md"
+            readme.write_text(
+                f"Dataset {version} contains {count} curated records.\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(validate_repository(temp_root), [])
+
+            # A stale count is reported.
+            readme.write_text(
+                f"Dataset {version} contains {count + 1} curated records.\n",
+                encoding="utf-8",
+            )
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("documented record count" in error for error in errors), errors
+            )
+
+            # A stale version is reported.
+            readme.write_text(
+                f"Dataset 0.0.1 contains {count} curated records.\n", encoding="utf-8"
+            )
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("documented dataset version" in error for error in errors), errors
+            )
+
+            # Historical release notes are deliberately not checked.
+            readme.write_text(
+                f"Dataset {version} contains {count} curated records.\n"
+                "Dataset 0.3.12 promotes four separately reviewed drafts.\n"
+                "Dataset 0.3.15 adds three exact identities.\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(validate_repository(temp_root), [])
+
     @staticmethod
     def _copy_repository_data(directory: Path, include_curation: bool = False) -> Path:
         shutil.copytree(ROOT / "schema", directory / "schema")

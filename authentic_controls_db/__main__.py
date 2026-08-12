@@ -9,6 +9,7 @@ from .importers.ams2 import import_ams2_csv
 from .importers.iracing import import_iracing_html
 from .importers.observation import import_observation
 from .promote import promote_approved_ams2
+from .promote_observation import promote_observations
 from .simhub import (
     audit_ams2_identities,
     review_unmatched_ams2_observations,
@@ -97,6 +98,15 @@ def _parser() -> argparse.ArgumentParser:
     promote.add_argument("--audit", type=Path, required=True)
     promote.add_argument("--approvals", type=Path, required=True)
     promote.add_argument("--data-dir", type=Path, default=Path("data/v1"))
+
+    promote_observation = subparsers.add_parser(
+        "promote-observation",
+        help="promote reviewed guided-verification bundles into curated records",
+    )
+    promote_observation.add_argument("review", type=Path)
+    promote_observation.add_argument("--root", type=Path, default=Path.cwd())
+    promote_observation.add_argument("--data-dir", type=Path, default=Path("data/v1"))
+    promote_observation.add_argument("--curation-dir", type=Path, default=Path("curation"))
 
     return parser
 
@@ -251,6 +261,28 @@ def main(argv: list[str] | None = None) -> int:
             args.data_dir,
         )
         print(f"Promoted {len(outputs)} AMS2 record(s) into {args.data_dir / 'cars'}")
+        return 0
+
+    if args.command == "promote-observation":
+        review = json.loads(args.review.read_text(encoding="utf-8-sig"))
+        try:
+            written = promote_observations(
+                review,
+                root=args.root.resolve(),
+                data_directory=args.data_dir,
+                curation_directory=args.curation_dir,
+            )
+        except (ValueError, FileExistsError, KeyError) as exception:
+            print(f"ERROR: {exception}")
+            return 1
+        records = [path for path in written if path.parent.name == "cars"]
+        print(
+            f"Promoted {len(records)} record(s) as dataset "
+            f"{review['dataset_version']}:"
+        )
+        for path in written:
+            print(f"  {path}")
+        print("Run validate and regenerate the coverage manifest next.")
         return 0
 
     return 2

@@ -21,7 +21,12 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         observed = [entry["car_model"] for entry in audit["observed_identities"]]
         self.assertEqual(sorted(names), sorted(observed))
         self.assertEqual(len(names), len(set(names)))
-        self.assertEqual(manifest["dataset_version"], "0.3.19")
+        # Derived from the index so a dataset release does not fail this test;
+        # it still catches a manifest that was not regenerated after promotion.
+        index = json.loads(
+            (ROOT / "data" / "v1" / "index.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(manifest["dataset_version"], index["dataset_version"])
 
     def test_low_downforce_inheritance_requires_an_exact_base(self):
         manifest = json.loads(

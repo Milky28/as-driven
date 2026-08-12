@@ -1,0 +1,244 @@
+"""Promote staged guided-verification bundles into curated records.
+
+`import-observation` stages a bundle from a guided drive; it deliberately leaves
+real-world identity as ``REVIEW-REQUIRED`` because a drive cannot establish it.
+This module applies the reviewer's decisions from an explicit review manifest and
+writes the curated record, its curation approval, the evidence sources, and the
+dataset index together, so a promotion is reproducible instead of hand-made.
+
+It refuses to promote anything still marked ``REVIEW-REQUIRED``, refuses to
+overwrite a curated record, and requires every cited source to be registered.
+"""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+from .importers.observation import REVIEW, derive_approved_controls
+
+
+def _required(entry: dict[str, Any], name: str, label: str) -> Any:
+    value = entry.get(name)
+    if value is None or value == "" or value == REVIEW:
+        raise ValueError(f"{label}: {name!r} is required for promotion")
+    return value
+
+
+def _contains_review_marker(value: Any) -> bool:
+    if isinstance(value, str):
+        return REVIEW in value
+    if isinstance(value, dict):
+        return any(_contains_review_marker(item) for item in value.values())
+    if isinstance(value, list):
+        return any(_contains_review_marker(item) for item in value)
+    return False
+
+
+def build_promoted_record(
+    bundle: dict[str, Any], entry: dict[str, Any], *, approved_at: str
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Return the (record, approval, source) a reviewed bundle promotes to."""
+    record = json.loads(json.dumps(bundle["record"]))
+    approval = json.loads(json.dumps(bundle["approval"]))
+    source = json.loads(json.dumps(bundle["source"]))
+    record_id = record["record_id"]
+    label = f"review entry {record_id}"
+
+    if entry.get("record_id") != record_id:
+        raise ValueError(
+            f"{label}: review record_id {entry.get('record_id')!r} does not match "
+            f"bundle record {record_id!r}"
+        )
+
+    simulator = record["simulators"][0]
+    live_source_id = source["source_id"]
+    real_world_refs = list(_required(entry, "real_world_source_refs", label))
+    if not real_world_refs:
+        raise ValueError(f"{label}: at least one real-world source ref is required")
+    all_refs = real_world_refs + [live_source_id]
+
+    # Reviewer-supplied real-world identity. The drive cannot establish these.
+    record["identity"]["manufacturer"] = _required(entry, "manufacturer", label)
+    record["identity"]["model"] = _required(entry, "model", label)
+    record["identity"]["year"] = _required(entry, "year", label)
+    record["identity"]["real_world_identity_notes"] = _required(
+        entry, "real_world_identity_notes", label
+    )
+    if entry.get("variant"):
+        record["identity"]["variant"] = entry["variant"]
+
+    # Optional reviewer corrections to controls the drive could not classify
+    # (for example a gearbox construction supported by a real-world source).
+    for name, value in (entry.get("control_overrides") or {}).items():
+        if name not in record["authentic_controls"]["transmission"]:
+            raise ValueError(f"{label}: unknown transmission field {name!r}")
+        record["authentic_controls"]["transmission"][name] = value
+
+    # Explicit aero or configuration aliases become exact record identities.
+    aliases = entry.get("additional_telemetry_names") or []
+    identities = [
+        item for item in simulator["identities"] if item["kind"] != "class-id"
+    ]
+    class_identities = [
+        item for item in simulator["identities"] if item["kind"] == "class-id"
+    ]
+    for alias in aliases:
+        value = _required(alias, "value", f"{label} alias")
+        _required(alias, "basis", f"{label} alias")
+        identities.append({"kind": "telemetry-name", "value": value})
+    simulator["identities"] = identities + class_identities
+
+    confidence = _required(entry, "confidence", label)
+    simulator["source_refs"] = all_refs
+    simulator["confidence"] = {
+        "level": confidence,
+        "basis": _required(entry, "confidence_basis", label),
+    }
+
+    record["provenance"] = {
+        "claims": [
+            {
+                "paths": ["/identity", "/simulators/0/identities"],
+                "source_refs": all_refs,
+                "confidence": confidence,
+                "basis": _required(entry, "identity_basis", label),
+            },
+            {
+                "paths": [
+                    "/authentic_controls/transmission/forward_gears",
+                    "/authentic_controls/transmission/gearbox_type",
+                    "/authentic_controls/transmission/shift_actuation",
+                    "/authentic_controls/transmission/shift_pattern",
+                ],
+                "source_refs": all_refs,
+                "confidence": confidence,
+                "basis": _required(entry, "specification_basis", label),
+            },
+            {
+                "paths": [
+                    "/authentic_controls/transmission/upshift",
+                    "/authentic_controls/transmission/downshift",
+                    "/authentic_controls/transmission/standing_start_clutch",
+                    "/authentic_controls/steering/wheel_rim",
+                    "/simulators/0/behavior",
+                ],
+                "source_refs": [live_source_id],
+                "confidence": confidence,
+                "basis": (
+                    "Directly observed during the guided drive: move-off, shift "
+                    "clutch use, automatic cut and blip, and the cockpit rim."
+                ),
+            },
+        ]
+    }
+    for claim in entry.get("additional_claims") or []:
+        record["provenance"]["claims"].append(claim)
+
+    record["authentic_controls"]["notes"] = list(
+        entry.get("control_notes")
+        or [
+            "Simulator behavior was directly observed in a guided drive with "
+            "automatic clutch and shifting disabled.",
+        ]
+    )
+    record["notes"] = list(entry.get("record_notes") or [])
+    if not record["notes"]:
+        record.pop("notes")
+    record["updated_at"] = approved_at
+
+    # The approval must agree with the record under validate's own mapping.
+    approval["approved_controls"] = derive_approved_controls(record)
+    approval["approved_at"] = approved_at
+    approval["confidence_notes"] = _required(entry, "confidence_notes", label)
+    if aliases:
+        approval["additional_telemetry_names"] = aliases
+    elif "additional_telemetry_names" in approval:
+        del approval["additional_telemetry_names"]
+    if entry.get("scope_notes"):
+        approval["scope_notes"] = entry["scope_notes"]
+
+    source["url"] = _required(entry, "live_source_url", label)
+    if entry.get("live_source_notes"):
+        source["notes"] = entry["live_source_notes"]
+
+    for name, payload in (("record", record), ("approval", approval), ("source", source)):
+        if _contains_review_marker(payload):
+            raise ValueError(
+                f"{label}: promoted {name} still contains {REVIEW}; complete the review first"
+            )
+    return record, approval, source
+
+
+def promote_observations(
+    review: dict[str, Any],
+    *,
+    root: Path,
+    data_directory: Path,
+    curation_directory: Path,
+) -> list[Path]:
+    """Promote every reviewed bundle, writing records, approvals, and sources."""
+    approved_at = review["approved_at"]
+    dataset_version = review["dataset_version"]
+
+    sources_path = data_directory / "sources.json"
+    index_path = data_directory / "index.json"
+    sources = json.loads(sources_path.read_text(encoding="utf-8"))
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    known_sources = {item["source_id"] for item in sources["sources"]}
+
+    generated: list[tuple[Path, dict[str, Any]]] = []
+    new_sources: list[dict[str, Any]] = []
+    for entry in review["records"]:
+        bundle_path = root / entry["bundle"]
+        bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        record, approval, source = build_promoted_record(
+            bundle, entry, approved_at=approved_at
+        )
+        record_id = record["record_id"]
+
+        missing = [
+            ref
+            for ref in entry["real_world_source_refs"]
+            if ref not in known_sources
+        ]
+        if missing:
+            raise ValueError(
+                f"{record_id}: real-world source(s) not registered in sources.json: "
+                + ", ".join(sorted(missing))
+            )
+
+        record_path = data_directory / "cars" / f"{record_id}.json"
+        if record_path.exists():
+            raise FileExistsError(f"refusing to overwrite curated record: {record_path}")
+
+        approval["dataset_version"] = dataset_version
+        approval_path = (
+            curation_directory / f"ams2-approved-{record_id.split('.', 1)[1]}.json"
+        )
+        generated.append((record_path, record))
+        generated.append((approval_path, approval))
+        if source["source_id"] not in known_sources:
+            new_sources.append(source)
+            known_sources.add(source["source_id"])
+
+    written: list[Path] = []
+    for path, payload in generated:
+        path.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        written.append(path)
+        if path.parent.name == "cars":
+            index["records"].append(path.relative_to(data_directory).as_posix())
+
+    sources["sources"].extend(new_sources)
+    sources_path.write_text(
+        json.dumps(sources, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    index["records"] = sorted(set(index["records"]))
+    index["dataset_version"] = dataset_version
+    index["released_at"] = approved_at
+    index_path.write_text(
+        json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    return written

@@ -121,6 +121,32 @@ class ImportObservationTests(unittest.TestCase):
         self.assertEqual(transmission["gearbox_type"], "unknown")
         self.assertEqual(transmission["shift_pattern"], "unknown")
 
+    def test_diverging_clutch_omits_the_unsummarizable_approval_field(self) -> None:
+        observation = _clean_observation()
+        # Clutchless upshifts accepted, clutchless downshifts refused.
+        observation["tests"]["clutchless_downshift"] = "no"
+        bundle = import_observation(observation)
+        transmission = bundle["record"]["authentic_controls"]["transmission"]
+        approval = bundle["approval"]
+
+        self.assertEqual(transmission["upshift"]["clutch"], "not-required")
+        self.assertEqual(transmission["downshift"]["clutch"], "required")
+        # validate cannot summarize differing clutch use, so the field is omitted
+        # rather than guessed; the schema allows that.
+        self.assertNotIn("running_shift_clutch", approval["approved_controls"])
+        self.assertTrue(
+            any("running_shift_clutch" in note for note in bundle["review_notes"])
+        )
+
+        errors: list[str] = []
+        _validate_car_approval(
+            approval,
+            Path("approval.json"),
+            {bundle["record"]["record_id"]: bundle["record"]},
+            errors,
+        )
+        self.assertEqual(errors, [])
+
     def test_h_pattern_actuation_leaves_layout_and_construction_unknown(self) -> None:
         observation = _clean_observation()
         observation["cockpit"]["primary_shift_actuation"] = "h-pattern"

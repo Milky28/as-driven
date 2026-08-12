@@ -10,6 +10,14 @@ from .schema_validation import validate_instance
 
 ID_RE = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
+# Documentation repeats the current release in prose. These patterns match only
+# present-tense status claims; historical release notes use verbs such as
+# "adds", "promotes", and "revalidates", so they are never checked.
+DOC_STATUS_FILES = ("README.md", "CLAUDE.md", "EARLY_ACCESS.md")
+DOC_STATUS_RE = re.compile(
+    r"[Dd]ataset:? (\d+\.\d+\.\d+) (?:contains|with) (\d+) (?:curated|reviewed)"
+)
+DOC_RECORD_COUNT_RE = re.compile(r"currently contains (\d+) curated records")
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
 SIMULATORS = {"ams2", "iracing", "ac-evo", "ac-rally", "other"}
@@ -409,6 +417,54 @@ def _validate_approval_record_references(
                 )
 
 
+def _validate_documentation_claims(
+    root: Path, index: Any, errors: list[str]
+) -> None:
+    """Keep prose statements of the current release in step with index.json.
+
+    Only present-tense status claims are compared. Historical release notes are
+    left alone so the dataset narrative in README.md stays readable.
+    """
+    if not isinstance(index, dict):
+        return
+    version = index.get("dataset_version")
+    records = index.get("records")
+    if not isinstance(version, str) or not isinstance(records, list):
+        return
+    count = len(records)
+
+    paths = [root / name for name in DOC_STATUS_FILES]
+    paths.extend(sorted((root / "docs").glob("*.md")))
+    for path in paths:
+        if not path.exists():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as exception:
+            errors.append(f"{path}: could not read documentation ({exception})")
+            continue
+        label = path.relative_to(root).as_posix()
+        for number, line in enumerate(text.splitlines(), start=1):
+            status = DOC_STATUS_RE.search(line)
+            if status:
+                if status.group(1) != version:
+                    errors.append(
+                        f"{label}:{number}: documented dataset version "
+                        f"{status.group(1)!r} does not match index.json {version!r}"
+                    )
+                if int(status.group(2)) != count:
+                    errors.append(
+                        f"{label}:{number}: documented record count "
+                        f"{status.group(2)} does not match index.json {count}"
+                    )
+            only_count = DOC_RECORD_COUNT_RE.search(line)
+            if only_count and int(only_count.group(1)) != count:
+                errors.append(
+                    f"{label}:{number}: documented record count "
+                    f"{only_count.group(1)} does not match index.json {count}"
+                )
+
+
 def validate_repository(root: Path) -> list[str]:
     errors: list[str] = []
     schema_dir = root / "schema" / "v1"
@@ -500,4 +556,6 @@ def validate_repository(root: Path) -> list[str]:
                 if event_map_schema is not None:
                     errors.extend(validate_instance(approval, event_map_schema, str(path)))
             _validate_approval_record_references(approval, path, set(records), errors)
+
+    _validate_documentation_claims(root, index, errors)
     return errors

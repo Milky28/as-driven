@@ -27,7 +27,7 @@ that behavior was reverified after a game update.
 - independent, checksummed database updates with backup and rollback;
 - a SimHub installer that preserves customized overlay positions by default.
 
-The database currently contains 85 curated records. AMS2 coverage is useful but
+The database currently contains 90 curated records. AMS2 coverage is useful but
 incomplete, and unsupported cars are deliberately shown as unmatched instead of
 receiving guessed controls. The generated coverage plan remains development
 material and is not a promise that every listed identity is a distinct vehicle.

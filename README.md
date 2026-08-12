@@ -75,10 +75,22 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
-Dataset 0.3.18 contains 85 reviewed records. Its newest records complete the
-audited post-sheet queue while retaining official or manufacturer evidence
-separately from simulator behavior. Broader AMS2 roster coverage remains a
-versioned, explicitly classified backlog rather than guessed matches.
+Stage a curated-record candidate from that draft, then promote the reviewed
+bundle once its real-world identity and sources are resolved:
+
+```shell
+python -m authentic_controls_db import-observation observation.json --output build/staged.json
+```
+
+```shell
+python -m authentic_controls_db promote-observation curation/review-batch.json
+```
+
+Dataset 0.3.19 contains 90 reviewed records. Its newest records complete the
+audited post-sheet queue and the first modern-prototype verification batch,
+while retaining official or manufacturer evidence separately from simulator
+behavior. Broader AMS2 roster coverage remains a versioned, explicitly
+classified backlog rather than guessed matches.
 
 The optional SimHub adapter has its own build and test command on Windows:
 
@@ -177,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.18 contains 85 curated AMS2 records promoted through the reviewed
+Dataset 0.3.19 contains 90 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while

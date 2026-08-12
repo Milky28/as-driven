@@ -80,6 +80,40 @@ def _slug(name: str) -> str:
     return slug or "unknown"
 
 
+def derive_approved_controls(record: dict[str, Any]) -> dict[str, Any]:
+    """Summarize a curated record the way ``validate`` cross-checks approvals.
+
+    Mirrors ``_validate_car_approval`` so a generated approval agrees with its
+    record. ``running_shift_clutch`` is omitted when the upshift and downshift
+    clutch requirements differ, because one value cannot summarize them.
+    """
+    transmission = record["authentic_controls"]["transmission"]
+    behavior = record["simulators"][0]["behavior"]
+    wheel = behavior["wheel_rim_type"]
+    controls: dict[str, Any] = {
+        "forward_gears": transmission["forward_gears"],
+        "shift_actuation": transmission["shift_actuation"],
+        "shift_pattern": transmission["shift_pattern"],
+        "standing_start_clutch": transmission["standing_start_clutch"],
+        "throttle_lift": transmission["upshift"]["throttle_lift"],
+        "automatic_cut": behavior["shift_cut"],
+        "automatic_blip": behavior["auto_blip"],
+        "manual_blip": transmission["downshift"]["manual_blip"],
+        "wheel_rim_shape": wheel["normalized"],
+    }
+    for approval_name, behavior_name in (
+        ("wheel_integrated_display", "integrated_display"),
+        ("wheel_shift_lights", "shift_lights"),
+        ("wheel_open_top", "open_top"),
+    ):
+        if behavior_name in wheel:
+            controls[approval_name] = wheel[behavior_name]
+    upshift_clutch = transmission["upshift"]["clutch"]
+    if upshift_clutch == transmission["downshift"]["clutch"]:
+        controls["running_shift_clutch"] = upshift_clutch
+    return controls
+
+
 def import_observation(
     observation: dict[str, Any], *, imported_at: str | None = None
 ) -> dict[str, Any]:
@@ -265,28 +299,11 @@ def import_observation(
 
     # Derive approved_controls from the record with the SAME mapping validate.py
     # uses (see _validate_car_approval), so a filled-in promotion validates.
-    approved_controls: dict[str, Any] = {
-        "forward_gears": record["authentic_controls"]["transmission"]["forward_gears"],
-        "shift_actuation": actuation,
-        "shift_pattern": shift_pattern,
-        "standing_start_clutch": standing_start_clutch,
-        "throttle_lift": upshift["throttle_lift"],
-        "automatic_cut": behavior["shift_cut"],
-        "automatic_blip": behavior["auto_blip"],
-        "manual_blip": downshift["manual_blip"],
-        "wheel_rim_shape": behavior_wheel["normalized"],
-        "wheel_integrated_display": behavior_wheel["integrated_display"],
-        "wheel_shift_lights": behavior_wheel["shift_lights"],
-        "wheel_open_top": behavior_wheel["open_top"],
-    }
-    if up_clutch == down_clutch:
-        approved_controls["running_shift_clutch"] = up_clutch
-    else:
-        # validate cannot summarize differing up/down clutch into one value.
-        approved_controls["running_shift_clutch"] = "unknown"
+    approved_controls = derive_approved_controls(record)
+    if "running_shift_clutch" not in approved_controls:
         review_notes.append(
-            "Upshift and downshift clutch requirements differ; running_shift_clutch "
-            "cannot be summarized. Reconcile the clutch modeling before promotion."
+            "Upshift and downshift clutch requirements differ, so the approval "
+            "omits running_shift_clutch. Confirm the clutch modeling before promotion."
         )
 
     source = {

@@ -51,7 +51,6 @@
         "forward_gears",
         "shift_actuation",
         "standing_start_clutch",
-        "running_shift_clutch",
         "automatic_cut",
         "automatic_blip",
         "wheel_rim_shape"
@@ -71,6 +70,7 @@
           "enum": ["required", "not-required", "anti-stall-available", "unknown", "not-applicable"]
         },
         "running_shift_clutch": {
+          "description": "Single summary of the clutch requirement for running shifts. Optional: it is omitted when the upshift and downshift clutch requirements differ, because one value cannot summarize them.",
           "type": "string",
           "enum": ["required", "not-required", "optional", "unknown", "not-applicable"]
         },
