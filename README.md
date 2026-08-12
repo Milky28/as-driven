@@ -74,7 +74,7 @@ Validate a draft exported by SimHub's guided verification form:
 python -m authentic_controls_db validate-observation observation.json
 ```
 
-Dataset 0.3.15 contains 65 reviewed records. Its newest records were promoted
+Dataset 0.3.16 contains 75 reviewed records. Its newest records were promoted
 from versioned guided AMS2 observations while retaining official or
 manufacturer evidence separately from simulator behavior.
 
@@ -163,7 +163,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.15 contains 65 curated AMS2 records promoted through the reviewed
+Dataset 0.3.16 contains 75 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -211,6 +211,12 @@ Valkyrie, and the exact High Downforce identities for Renault R25, R26, and
 R28. The two road cars retain medium-confidence manually confirmed automatic
 cut claims; the Renault guided tests captured shift-local automatic cut and
 blip traces directly. Untested Renault aero identities are not silently added.
+Dataset 0.3.16 promotes ten exact guided identities: Ligier JS2 R,
+Lamborghini Miura SV and Revuelto, Audi R8 V10 GT, Dodge Viper ACR, BMW M3
+E46 GTR, Maserati GranSport Trofeo, and three configuration-specific Stock USA
+records. Stock USA mappings remain fictionalized and configuration-scoped;
+the Audi record uses the later seven-speed S tronic generation rather than the
+unrelated 2010 six-speed R tronic car.
 
 ## Licensing
 

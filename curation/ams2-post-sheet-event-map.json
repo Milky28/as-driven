@@ -23,6 +23,7 @@
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GT4 Evo", "record_id": "ams2.aston-martin-vantage-gt4-evo" },
     { "calendar_year": 2025, "item_name": "Aston Martin Vantage GTE", "record_id": "ams2.aston-martin-vantage-gte" },
     { "calendar_year": 2025, "item_name": "Ligier JS P4", "record_id": "ams2.ligier-js-p4" },
+    { "calendar_year": 2025, "item_name": "Ligier JS2-R", "record_id": "ams2.ligier-js2-r" },
     { "calendar_year": 2025, "item_name": "Dodge Viper GTS-R", "record_id": "ams2.dodge-viper-gts-r" },
     { "calendar_year": 2025, "item_name": "Lamborghini Diablo SV-R", "record_id": "ams2.lamborghini-diablo-sv-r" },
     { "calendar_year": 2025, "item_name": "Lamborghini Murcielago R-GT", "record_id": "ams2.lamborghini-murcielago-r-gt" },
@@ -44,6 +45,14 @@
     { "calendar_year": 2025, "item_name": "Porsche 996 RSR", "record_id": "ams2.porsche-996-gt3-rsr" },
     { "calendar_year": 2025, "item_name": "Super Trophy Truck", "record_id": "ams2.super-trophy-trucks" },
     { "calendar_year": 2025, "item_name": "Formula Vee Gen2", "record_id": "ams2.formula-vee-gen2" },
+    { "calendar_year": 2025, "item_name": "Lamborghini Miura SV", "record_id": "ams2.lamborghini-miura-sv" },
+    { "calendar_year": 2025, "item_name": "Lamborghini Revuelto", "record_id": "ams2.lamborghini-revuelto" },
+    { "calendar_year": 2025, "item_name": "Audi R8 V10 GT", "record_id": "ams2.audi-r8-v10-gt" },
+    { "calendar_year": 2025, "item_name": "Dodge Viper ACR", "record_id": "ams2.dodge-viper-acr" },
+    { "calendar_year": 2025, "item_name": "BMW M3 GTR", "record_id": "ams2.bmw-m3-e46-gtr" },
+    { "calendar_year": 2025, "item_name": "Stock USA Gen1", "record_id": "ams2.stock-usa-gen1-speedway" },
+    { "calendar_year": 2025, "item_name": "Stock USA Gen2", "record_id": "ams2.stock-usa-gen2-superspeedway" },
+    { "calendar_year": 2025, "item_name": "Stock USA Gen3", "record_id": "ams2.stock-usa-gen3-superspeedway" },
     { "calendar_year": 2026, "item_name": "Gillet Vertigo Streiff", "record_id": "ams2.gillet-vertigo-streiff" },
     { "calendar_year": 2026, "item_name": "Lister Storm GTM", "record_id": "ams2.lister-storm-gtm" },
     { "calendar_year": 2026, "item_name": "Panoz Esperante GTLM", "record_id": "ams2.panoz-esperante-gtlm" },
@@ -54,6 +63,7 @@
     { "calendar_year": 2026, "item_name": "Renault R25", "record_id": "ams2.renault-r25-high-downforce" },
     { "calendar_year": 2026, "item_name": "Renault R26", "record_id": "ams2.renault-r26-high-downforce" },
     { "calendar_year": 2026, "item_name": "Renault R28", "record_id": "ams2.renault-r28-high-downforce" },
+    { "calendar_year": 2026, "item_name": "Maserati Grandsport", "record_id": "ams2.maserati-gransport-trofeo" },
     { "calendar_year": 2026, "item_name": "Formula Vee Gen2 2026 specification", "record_id": "ams2.formula-vee-gen2" }
   ]
 }

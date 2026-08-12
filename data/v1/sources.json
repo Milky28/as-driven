@@ -1597,6 +1597,66 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Guided draft ams2.renault-r28-high-downforce.20260812t042259104z-690ca1c2 records exact F-V8_Gen2_HD identity, standing-start clutch, seven paddle gears, automatically detected cut and blip, and a closed Formula display rim with shift lights."
+    },
+    {
+      "source_id": "ligier.js2-r.technical", "title": "Ligier JS2 R technical sheet", "publisher": "Ligier Automotive", "url": "https://ligierautomotive.com/en/vehicles/silhouette/js2r/", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Manufacturer specification states a six-speed sequential gearbox, centrifugal twin-disc clutch, pneumatic paddle shift, and bespoke integrated-display wheel. Driver technique is established separately."
+    },
+    {
+      "source_id": "lamborghini.miura.history", "title": "Lamborghini Miura: The first supercar in history", "publisher": "Automobili Lamborghini / Polo Storico", "url": "https://www.lamborghini.com/fr-en/nouvelles/lamborghini-miura-first-supercar-history", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Official Miura family history identifies the SV and a five-speed manual transmission. Exact SV gate and technique come from live testing."
+    },
+    {
+      "source_id": "lamborghini.revuelto.brochure", "title": "Revuelto digital brochure 2024", "publisher": "Automobili Lamborghini", "url": "https://www.lamborghini.com/original/DAM/lamborghini/facelift_2019/model_detail/revuelto/2024/brochure/REVUELTO_DIGITAL_BROCHURE_EN_2024.pdf", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": "2024-01-01", "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Manufacturer brochure specifies an eight-gear automated dual-clutch transmission. Exact simulator controls are supported separately."
+    },
+    {
+      "source_id": "audi.r8-v10-performance.transmission", "title": "Audi R8 transmission", "publisher": "Audi AG", "url": "https://www.audi.com/en/the-audi-r8-until-2024-updated-dynamics-for-the-high-performance-sports-car-11734/transmission-11739", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": "2019-06-18", "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Audi specifies a seven-speed S tronic dual-clutch transmission with driver-selectable shifting and launch control that manages clutch engagement. This later-generation source replaces an inapplicable 2010 six-speed R tronic research lead."
+    },
+    {
+      "source_id": "dodge.viper-acr.2016-specifications", "title": "2016 Dodge Viper specifications", "publisher": "FCA North America", "url": "https://s3.amazonaws.com/chryslermedia.iconicweb.com/mediasite/attachments/2016_Dodge_Viper_Specs8p8494relih5em1i7jbcj7sinc.pdf", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": "2015-01-01", "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Manufacturer press specifications identify the ACR's synchronized six-speed manual and ACR-specific sixth ratio. Gate and technique are supported by live testing."
+    },
+    {
+      "source_id": "bmw.m3-gtr.strassenversion", "title": "The BMW M3 GTR Strassenversion", "publisher": "BMW M", "url": "https://www.bmw-m.com/en/topics/magazine-article-pool/bmw-m3-gtr-strassenversion.html", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": "2021-08-02", "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "BMW contrasts the road car's six-speed manual with the race M3 GTR's sequential transmission. Exact race gear count and actuation are supported by live testing."
+    },
+    {
+      "source_id": "nascar.stock-car-evolution", "title": "NASCAR 75 Stock Car Evolution", "publisher": "NASCAR", "url": "https://www.nascar.com/nascar75-stock-car-evolution/", "archive_url": null, "source_type": "other", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Official series history supplies generation context and notes the Next Gen sequential shifter. It is not treated as proof that Reiza's fictional Gen1/Gen2/Gen3 labels map exactly to NASCAR generations."
+    },
+    {
+      "source_id": "xtrac.p1334-nascar-transaxle", "title": "P1334 NASCAR Transaxle", "publisher": "Xtrac", "url": "https://www.xtrac.com/product/p1334-nascar-transaxle/", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Supplier specification identifies the real NASCAR Next Gen five-speed manual sequential-change transaxle. Applicability to Reiza Stock USA Gen3 is treated as context and explicitly caveated."
+    },
+    {
+      "source_id": "maserati.gransport.brochure", "title": "Maserati GranSport brochure", "publisher": "Maserati", "url": "https://www.maseraticlub.co.uk/wp-content/uploads/2018/04/brochure_gransport_en.pdf", "archive_url": null, "source_type": "manufacturer", "published_or_updated_at": "2005-01-01", "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Archived original manufacturer brochure specifies the production GranSport's six-speed electrohydraulic Cambiocorsa gearbox, paddle controls, and simulated heel-and-toe. Race-car continuity is separately checked."
+    },
+    {
+      "source_id": "rm-sothebys.maserati-gransport-trofeo.2005", "title": "2005 Maserati GranSport Trofeo", "publisher": "RM Sotheby's", "url": "https://rmsothebys.com/auctions/0125/lots/r0013-2005-maserati-gransport-trofeo/", "archive_url": null, "source_type": "secondary", "published_or_updated_at": "2025-01-01", "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Chassis-specific dossier with manufacturer correspondence states a six-speed paddle-shift automated manual and three-spoke Momo wheel. Exact modeled technique is tested separately."
+    },
+    {
+      "source_id": "ams2.local-guided-ligier-js2-r-controls.1.6.9.91", "title": "Guided live AMS2 Ligier JS2 R control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-7-released-now-updated-to-v1-6-7-2.35495/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.ligier-js2-r.20260812t030703137z-e824bd7f records LES_2025 identity, standing-start clutch, six paddles, automatic blip, GT display rim, and manually confirmed cut retained at medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-lamborghini-miura-sv-controls.1.6.9.91", "title": "Guided live AMS2 Lamborghini Miura SV control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.lamborghini-miura-sv.20260812t031455374z-5745b059 records TC60S identity, standing-start clutch, five direct H selections, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-guided-lamborghini-revuelto-controls.1.6.9.91", "title": "Guided live AMS2 Lamborghini Revuelto control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.lamborghini-revuelto.20260812t032025911z-fa7582fb records clutch-free move-off, eight paddles, automatic blip, round no-display rim, and manually confirmed cut at medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-audi-r8-v10-gt-controls.1.6.9.91", "title": "Guided live AMS2 Audi R8 V10 GT control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.audi-r8-v10-gt.20260812t032349367z-d8f81e6e records seven paddle gears, clutch-free move-off, automatic blip, round no-display rim, and manually confirmed cut at medium confidence."
+    },
+    {
+      "source_id": "ams2.local-guided-dodge-viper-acr-controls.1.6.9.91", "title": "Guided live AMS2 Dodge Viper ACR control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.dodge-viper-acr.20260812t032705828z-b0698bfc records six direct H selections, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-guided-bmw-m3-e46-gtr-controls.1.6.9.91", "title": "Guided live AMS2 BMW M3 E46 GTR control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-8-5-historical-endurance-pack-pt1-released-now-updated-to-v1-6-8-8.35671/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.bmw-m3-e46-gtr.20260812t044903124z-b7486563 records GTR_04 identity, standing-start clutch, six sequential-stick gears, detected automatic cut, no automatic blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-guided-maserati-gransport-trofeo-controls.1.6.9.91", "title": "Guided live AMS2 Maserati GranSport Trofeo control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-9-historical-endurance-pack-pt2-released.36527/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.maserati-gransport-trofeo.20260812t045203160z-e795d82a records Trofeo_2005 identity, standing-start clutch, six paddles, detected torque cut and automatic blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-guided-stock-usa-gen1-speedway-controls.1.6.9.91", "title": "Guided live AMS2 Stock USA Gen1 Speedway control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.stock-usa-gen1-speedway.20260812t045716006z-f49b1bcd records exact Speedway identity, four H-pattern gears, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-guided-stock-usa-gen2-superspeedway-controls.1.6.9.91", "title": "Guided live AMS2 Stock USA Gen2 Superspeedway control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.stock-usa-gen2-superspeedway.20260812t050238416z-113f4415 records exact Superspeedway identity, four H-pattern gears, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-guided-stock-usa-gen3-superspeedway-controls.1.6.9.91", "title": "Guided live AMS2 Stock USA Gen3 Superspeedway control test", "publisher": "Local AMS2 observation", "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/", "archive_url": null, "source_type": "in-game-observation", "published_or_updated_at": null, "retrieved_at": "2026-08-11", "reuse_status": "facts-only-review", "notes": "Draft ams2.stock-usa-gen3-superspeedway.20260812t050633302z-ae16ad01 records exact Superspeedway identity, five sequential-stick gears, standing-start clutch, detected automatic cut, no automatic blip, and round no-display rim."
     }
   ]
 }

@@ -37,7 +37,7 @@
     "model_events_with_verified_source_urls": 79,
     "model_events_with_explicit_source_gap": 2,
     "events_with_identity_comparison": 98,
-    "promoted_events": 52,
+    "promoted_events": 62,
     "non_standalone_source_events": 17,
     "unresearched_model_events": 0,
     "events_without_identity_comparison": 0
@@ -2240,8 +2240,12 @@
         "research_status": "strong-gearbox-partial-technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.ligier-js2-r",
+        "dataset_version": "0.3.16",
+        "scope": "Exact Ligier JS2 R / LES_2025 identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -2521,8 +2525,12 @@
         "research_status": "partial-family-level-evidence"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lamborghini-miura-sv",
+        "dataset_version": "0.3.16",
+        "scope": "Exact Miura SV identity; family-level transmission evidence is explicitly supplemented by live selection tests."
+      }
     },
     {
       "calendar_year": 2025,
@@ -2671,8 +2679,12 @@
         "research_status": "strong-transmission-partial-controls"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lamborghini-revuelto",
+        "dataset_version": "0.3.16",
+        "scope": "Exact Revuelto Hypercars identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -3223,8 +3235,12 @@
         "research_status": "partial-primary-evidence"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.bmw-m3-e46-gtr",
+        "dataset_version": "0.3.16",
+        "scope": "Exact BMW M3 E46 GTR telemetry identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4253,8 +4269,12 @@
         "research_status": "strong-control-source"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.audi-r8-v10-gt",
+        "dataset_version": "0.3.16",
+        "scope": "Later seven-speed R8 V10 GT, not the 2010 six-speed R tronic car."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4317,8 +4337,12 @@
         "research_status": "strong-transmission-partial-technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.dodge-viper-acr",
+        "dataset_version": "0.3.16",
+        "scope": "Exact Dodge Viper ACR Supercars identity."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4589,8 +4613,12 @@
         "research_status": "mapping-unresolved"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.stock-usa-gen1-speedway",
+        "dataset_version": "0.3.16",
+        "scope": "Speedway configuration only; no aliases for other Gen1 configurations."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4654,8 +4682,12 @@
         "research_status": "mapping-unresolved"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.stock-usa-gen2-superspeedway",
+        "dataset_version": "0.3.16",
+        "scope": "Superspeedway configuration only; no aliases for other Gen2 configurations."
+      }
     },
     {
       "calendar_year": 2025,
@@ -4733,8 +4765,12 @@
         "research_status": "conditional-primary-evidence"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.stock-usa-gen3-superspeedway",
+        "dataset_version": "0.3.16",
+        "scope": "Superspeedway configuration only; no aliases for other Gen3 or LM configurations."
+      }
     },
     {
       "calendar_year": 2025,
@@ -6333,8 +6369,12 @@
         "research_status": "strong_hardware_partial_technique"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.maserati-gransport-trofeo",
+        "dataset_version": "0.3.16",
+        "scope": "Exact 2005 GranSport Trofeo identity."
+      }
     },
     {
       "calendar_year": 2026,

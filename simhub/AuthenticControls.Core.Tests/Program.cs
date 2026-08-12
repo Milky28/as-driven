@@ -165,6 +165,29 @@ namespace AuthenticControls.Core.Tests
                 Equal("8-speed paddle shifters", gt2Stradale.ShiftType, "formats the GT2 Stradale dual-clutch interface");
                 Equal("not-required", gt2Stradale.StandingStartClutch, "models automated GT2 Stradale pull-away");
 
+                foreach (string promotedIdentity in new[] {
+                    "Ligier JS2 R",
+                    "Lamborghini Miura SV",
+                    "Lamborghini Revuelto",
+                    "Audi R8 V10 GT",
+                    "Dodge Viper ACR",
+                    "BMW M3 E46 GTR",
+                    "Maserati GranSport Trofeo",
+                    "Stock USA Gen1 - Speedway",
+                    "Stock USA Gen2 - Superspeedway",
+                    "Stock USA Gen3 - Superspeedway"
+                })
+                {
+                    GuidanceSnapshot promoted = database.Match("Automobilista2", promotedIdentity);
+                    True(promoted.HasMatch, "matches exact guided identity " + promotedIdentity);
+                    Equal("telemetry-name", promoted.MatchKind, "uses exact telemetry identity for " + promotedIdentity);
+                }
+
+                Equal(7, database.Match("Automobilista2", "Audi R8 V10 GT").GearCount, "uses the later seven-speed R8 GT generation");
+                Equal("h-pattern", database.Match("Automobilista2", "Stock USA Gen1 - Speedway").ShiftActuation, "uses Gen1 H-pattern hardware");
+                Equal("sequential-stick", database.Match("Automobilista2", "Stock USA Gen3 - Superspeedway").ShiftActuation, "uses Gen3 sequential-stick hardware");
+                False(database.Match("Automobilista2", "Stock USA Gen3").HasMatch, "does not invent an untested generic Gen3 alias");
+
                 foreach (string renaultFormula in new[] {
                     "Renault R25 - High Downforce",
                     "Renault R26 - High Downforce",
