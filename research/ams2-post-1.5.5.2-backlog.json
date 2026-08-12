@@ -37,7 +37,7 @@
     "model_events_with_verified_source_urls": 79,
     "model_events_with_explicit_source_gap": 2,
     "events_with_identity_comparison": 98,
-    "promoted_events": 42,
+    "promoted_events": 47,
     "non_standalone_source_events": 17,
     "unresearched_model_events": 0,
     "events_without_identity_comparison": 0
@@ -416,8 +416,12 @@
         "research_status": "good_manual_gearbox_evidence_gate_and_technique_need_validation"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.audi-v8-quattro-dtm",
+        "dataset_version": "0.3.14",
+        "scope": "A slight roll after selecting first was followed immediately by a stall and was correctly reviewed as a required standing-start clutch."
+      }
     },
     {
       "calendar_year": 2024,
@@ -501,8 +505,12 @@
         "research_status": "strong_hardware_evidence_technique_in_game_required"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.audi-r8-lms-gt3",
+        "dataset_version": "0.3.14",
+        "scope": "Base R8 LMS GT3 identity, not the separately curated Evo II."
+      }
     },
     {
       "calendar_year": 2024,
@@ -829,8 +837,12 @@
         "research_status": "strong_hardware_evidence_game_behavior_check_needed"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.chevrolet-corvette-c8-z06-z07-upgrade",
+        "dataset_version": "0.3.14",
+        "scope": "Z07 is represented as a Z06 package, matching Chevrolet's terminology and the exact AMS2 telemetry name."
+      }
     },
     {
       "calendar_year": 2024,
@@ -1250,8 +1262,12 @@
         "research_status": "strong_transmission_count_partial_controls"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.lamborghini-veneno-roadster",
+        "dataset_version": "0.3.14",
+        "scope": "Exact Veneno Roadster identity only."
+      }
     },
     {
       "calendar_year": 2024,
@@ -1614,8 +1630,12 @@
         "research_status": "unresolved-model-exact-source"
       },
       "control_source_research_disposition": "researched",
-      "promotion_status": "research-only-not-approved",
-      "promotion": null
+      "promotion_status": "approved",
+      "promotion": {
+        "record_id": "ams2.super-trophy-trucks",
+        "dataset_version": "0.3.14",
+        "scope": "Fictional Reiza series with no real-world model. Gearbox construction is automatic; sequential-stick records the modeled manual override interface."
+      }
     },
     {
       "calendar_year": 2025,
