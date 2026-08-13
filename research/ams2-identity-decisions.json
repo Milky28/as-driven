@@ -24,8 +24,8 @@
       "last_observed": "2024-12-07",
       "superseded_by": "Lamborghini Murcielago R-GT",
       "related_record_id": "ams2.lamborghini-murcielago-r-gt",
-      "source_refs": [],
-      "basis": "Stored 2024 observation using the retired FIA-GT1 class prefix. Maintainer confirmed the in-game car is the Murcielago R-GT, so the successor is the curated R-GT record and the earlier R-SV wording was a naming difference rather than a different modeled car. Not aliased: the prefixed name is not selectable in AMS2 1.6.9.91, so inherited controls could not be verified there."
+      "source_refs": ["ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2"],
+      "basis": "Stored 2024-12-07 observation using the retired FIA-GT1 class prefix. Maintainer confirmed the only Murcielago now in game is the R-GT, which is the curated successor in the car list. Succession is recorded for the selector, not as an identity equivalence: the release notes add the R-GT to GT1 2005 as Dream Pack Pt2 content in v1.6.8 on 2025-10-02, which is after this identity was observed, and the Reiter R-SV and R-GT are distinct cars in the real world. Not aliased: the stored name is not selectable in AMS2 1.6.9.91, so inherited controls could not be verified there, and an equivalence claim is not supported."
     },
     {
       "telemetry_name": "Formula V10 Gen2",
