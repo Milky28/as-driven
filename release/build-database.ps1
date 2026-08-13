@@ -32,10 +32,10 @@ if ($datasetVersion -notmatch '^\d+\.\d+\.\d+$') {
 
 New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
 $staging = Join-Path ([System.IO.Path]::GetTempPath()) (
-    "AuthenticControlsDatabase-" + [Guid]::NewGuid().ToString("N"))
+    "AsDrivenDatabase-" + [Guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $staging | Out-Null
 try {
-    $packageRoot = Join-Path $staging "authentic-controls-db-$datasetVersion"
+    $packageRoot = Join-Path $staging "as-driven-db-$datasetVersion"
     New-Item -ItemType Directory -Path $packageRoot | Out-Null
     Copy-Item -LiteralPath (Join-Path $repositoryRoot "data") -Destination $packageRoot -Recurse
     Copy-Item -LiteralPath (Join-Path $repositoryRoot "schema") -Destination $packageRoot -Recurse
@@ -58,7 +58,7 @@ try {
             }
         }
     $manifest = [ordered]@{
-        package_format = "authentic-controls-database"
+        package_format = "as-driven-database"
         package_format_version = "1.0.0"
         dataset_version = $datasetVersion
         schema_major = 1
@@ -68,7 +68,7 @@ try {
     $manifest | ConvertTo-Json -Depth 6 |
         Set-Content -LiteralPath (Join-Path $packageRoot "release-manifest.json") -Encoding UTF8
 
-    $zipPath = Join-Path $OutputDirectory "authentic-controls-db-$datasetVersion.zip"
+    $zipPath = Join-Path $OutputDirectory "as-driven-db-$datasetVersion.zip"
     if (Test-Path -LiteralPath $zipPath) {
         Remove-Item -LiteralPath $zipPath -Force
     }

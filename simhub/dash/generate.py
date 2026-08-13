@@ -34,11 +34,11 @@ class TemplateSpec(NamedTuple):
 
 
 TEMPLATES = (
-    TemplateSpec("detailed", "Authentic Controls Preflight Overlay", 840, 360),
-    TemplateSpec("compact", "Authentic Controls Preflight Compact", 520, 300),
-    TemplateSpec("glance", "Authentic Controls Preflight Glance", 320, 120),
-    TemplateSpec("verification", "Authentic Controls Verification Drive", 700, 220),
-    TemplateSpec("display", "Authentic Controls Preflight Display", 900, 360, False),
+    TemplateSpec("detailed", "As Driven Preflight Overlay", 840, 360),
+    TemplateSpec("compact", "As Driven Preflight Compact", 520, 300),
+    TemplateSpec("glance", "As Driven Preflight Glance", 320, 120),
+    TemplateSpec("verification", "As Driven Verification Drive", 700, 220),
+    TemplateSpec("display", "As Driven Preflight Display", 900, 360, False),
 )
 
 
@@ -262,7 +262,7 @@ def _line(
 
 def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: float) -> list[dict[str, Any]]:
     size = 46 * scale
-    prop = "[AuthenticControls.WheelRimShape]"
+    prop = "[AsDriven.WheelRimShape]"
     variants = (
         ("Round", "wheel-round", prop + " == 'round'"),
         ("DShape", "wheel-d-shaped", prop + " == 'd-shaped'"),
@@ -289,11 +289,11 @@ def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: fl
 
 
 def _shift_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: float) -> list[dict[str, Any]]:
-    prop = "[AuthenticControls.ShiftActuation]"
+    prop = "[AsDriven.ShiftActuation]"
     size = 46 * scale
     variants = (
-        ("HPattern", "shift-h-pattern", prop + " == 'h-pattern' && [AuthenticControls.ShiftPattern] != 'dogleg-h'"),
-        ("DoglegH", "shift-dogleg-h", prop + " == 'h-pattern' && [AuthenticControls.ShiftPattern] == 'dogleg-h'"),
+        ("HPattern", "shift-h-pattern", prop + " == 'h-pattern' && [AsDriven.ShiftPattern] != 'dogleg-h'"),
+        ("DoglegH", "shift-dogleg-h", prop + " == 'h-pattern' && [AsDriven.ShiftPattern] == 'dogleg-h'"),
         ("Stick", "shift-sequential-stick", prop + " == 'sequential-stick'"),
         ("Paddles", "shift-sequential-paddles", prop + " == 'sequential-paddles'"),
         ("Automatic", "shift-automatic-lever", prop + " == 'automatic-lever'"),
@@ -325,7 +325,7 @@ def _automation_icon(
     property_name: str,
     kind: str,
 ) -> list[dict[str, Any]]:
-    prop = "[AuthenticControls." + property_name + "]"
+    prop = "[AsDriven." + property_name + "]"
     size = 46 * scale
     if kind == "cut":
         variants = (
@@ -428,7 +428,7 @@ def _header(factory: ItemFactory, compact: bool = False) -> list[dict[str, Any]]
 
 
 def _wheel_value_expression() -> str:
-    prop = "[AuthenticControls.WheelRimShape]"
+    prop = "[AsDriven.WheelRimShape]"
     return (
         f"if({prop} == 'round', 'Round', "
         f"if({prop} == 'd-shaped', 'D-shaped', "
@@ -440,8 +440,8 @@ def _wheel_value_expression() -> str:
 
 
 def _shift_value_expression() -> str:
-    actuation = "[AuthenticControls.ShiftActuation]"
-    pattern = "[AuthenticControls.ShiftPattern]"
+    actuation = "[AsDriven.ShiftActuation]"
+    pattern = "[AsDriven.ShiftPattern]"
     return (
         f"if({pattern} == 'dogleg-h', 'Dogleg H-pattern', "
         f"if({actuation} == 'h-pattern', 'H-pattern', "
@@ -453,7 +453,7 @@ def _shift_value_expression() -> str:
 
 
 def _automation_value_expression(property_name: str, action: str) -> str:
-    prop = "[AuthenticControls." + property_name + "]"
+    prop = "[AsDriven." + property_name + "]"
     return (
         f"if({prop} == 'yes', 'Automatic throttle {action}', "
         f"if({prop} == 'no', 'Manual {action}', 'Unknown'))"
@@ -461,7 +461,7 @@ def _automation_value_expression(property_name: str, action: str) -> str:
 
 
 def _upshift_value_expression() -> str:
-    prop = "[AuthenticControls.ShiftCut]"
+    prop = "[AsDriven.ShiftCut]"
     return (
         f"if({prop} == 'yes', 'Automatic throttle cut', "
         f"if({prop} == 'no', 'Lift throttle', 'Unknown'))"
@@ -469,7 +469,7 @@ def _upshift_value_expression() -> str:
 
 
 def _match_value_expression(*, include_match: bool) -> str:
-    prop = "[AuthenticControls.MatchKind]"
+    prop = "[AsDriven.MatchKind]"
     suffix = " match" if include_match else ""
     return (
         f"if({prop} == 'preview', 'Preview', "
@@ -483,7 +483,7 @@ def _match_value_expression(*, include_match: bool) -> str:
 
 
 def _confidence_value_expression() -> str:
-    prop = "[AuthenticControls.Confidence]"
+    prop = "[AsDriven.Confidence]"
     return (
         f"if({prop} == 'verified', 'Verified', "
         f"if({prop} == 'high', 'High', "
@@ -513,7 +513,7 @@ def _preview_badge(
     return factory.layer(
         "PreviewBadge",
         [factory.rectangle("PreviewBadgeBackground", left, top, width, height, ACCENT, radius=6)] + text_items,
-        visible_expression="[AuthenticControls.MatchKind] == 'preview'",
+        visible_expression="[AsDriven.MatchKind] == 'preview'",
     )
 
 
@@ -528,9 +528,9 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
     title_width = match_left - title_left - 12
     children = _header(factory)
     children.extend([
-        factory.text("Title", "Current car", title_left, 19, title_width, 29, 21.5, WHITE, expression="[AuthenticControls.OverlayCarNameDetailed]", font_weight="Bold"),
-        factory.text("CarClass", "", title_left, 48, title_width, 20, 12, MUTED, expression="[AuthenticControls.OverlayCarClassDetailed]", font_weight="Bold"),
-        factory.text("Match", "Matched", match_left, 27, match_width, 22, 11, GREEN, expression="if([AuthenticControls.MatchKind] == 'preview', '', '✓  ' + " + _match_value_expression(include_match=True) + ")", horizontal_alignment=2, font_weight="Bold"),
+        factory.text("Title", "Current car", title_left, 19, title_width, 29, 21.5, WHITE, expression="[AsDriven.OverlayCarNameDetailed]", font_weight="Bold"),
+        factory.text("CarClass", "", title_left, 48, title_width, 20, 12, MUTED, expression="[AsDriven.OverlayCarClassDetailed]", font_weight="Bold"),
+        factory.text("Match", "Matched", match_left, 27, match_width, 22, 11, GREEN, expression="if([AsDriven.MatchKind] == 'preview', '', '✓  ' + " + _match_value_expression(include_match=True) + ")", horizontal_alignment=2, font_weight="Bold"),
         _preview_badge(factory, match_left, 22, match_width, 30),
         factory.rectangle("Rule", content_left, 78, content_width, 2, SLATE),
         factory.rectangle("PhysicalControlsGroup", content_left, 86, column_width * 2 - 4, 164, GROUP_PANEL, radius=7, border_color=SLATE, border=1),
@@ -548,25 +548,25 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
     children.extend(_rail_item(factory, "Shift", columns[1], column_width, 116, 84, 202, _shift_icon, "SHIFT", shift_value, label_size=9.5, value_size=11))
     children.extend(_rail_item(factory, "Cut", columns[2], column_width, 116, 84, 202, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "ShiftCut", "cut"), "UPSHIFT", cut_value, label_size=9.5, value_size=11))
     children.extend(_rail_item(factory, "Blip", columns[3], column_width, 116, 84, 202, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "AutoBlip", "blip"), "DOWNSHIFT", blip_value, label_size=9.5, value_size=11))
-    evidence_expression = "'Verified for ' + if([AuthenticControls.RawGameName] == 'Automobilista2', 'AMS2', if([AuthenticControls.RawGameName] == '', 'Unknown simulator', [AuthenticControls.RawGameName])) + ' ' + if([AuthenticControls.VerifiedGameVersion] == '', 'Unknown', [AuthenticControls.VerifiedGameVersion]) + '  •  Confidence: ' + " + _confidence_value_expression()
+    evidence_expression = "'Verified for ' + if([AsDriven.RawGameName] == 'Automobilista2', 'AMS2', if([AsDriven.RawGameName] == '', 'Unknown simulator', [AsDriven.RawGameName])) + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'Unknown', [AsDriven.VerifiedGameVersion]) + '  •  Confidence: ' + " + _confidence_value_expression()
     children.extend([
         factory.rectangle("TechniqueRule", content_left, 252, content_width, 1, SLATE),
         _group_heading(factory, "DrivingTechniqueHeading", "DRIVING TECHNIQUE", content_left, 258, content_width, 10),
-        factory.text("TechniqueSummaryLine1", "Shifting technique", content_left + 10, 277, content_width - 20, 21, 13.5, TEXT, expression="[AuthenticControls.TechniqueSummaryLine1]"),
-        factory.text("TechniqueSummaryLine2", "", content_left + 10, 298, content_width - 20, 21, 13.5, TEXT, expression="[AuthenticControls.TechniqueSummaryLine2]"),
+        factory.text("TechniqueSummaryLine1", "Shifting technique", content_left + 10, 277, content_width - 20, 21, 13.5, TEXT, expression="[AsDriven.TechniqueSummaryLine1]"),
+        factory.text("TechniqueSummaryLine2", "", content_left + 10, 298, content_width - 20, 21, 13.5, TEXT, expression="[AsDriven.TechniqueSummaryLine2]"),
         factory.rectangle("EvidenceRule", content_left, 327, content_width, 1, SLATE),
         factory.text("Evidence", "Evidence", content_left, 333, content_width - 206, 22, 10, MUTED, expression=evidence_expression),
-        factory.text("Dataset", "Dataset", content_left + content_width - 188, 333, 188, 22, 10, MUTED, expression="'Dataset ' + [AuthenticControls.DatasetVersion]", horizontal_alignment=2),
+        factory.text("Dataset", "Dataset", content_left + content_width - 188, 333, 188, 22, 10, MUTED, expression="'Dataset ' + [AsDriven.DatasetVersion]", horizontal_alignment=2),
     ])
-    return factory.layer("MatchedState", children, visible_expression="[AuthenticControls.HasMatch]")
+    return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 
 def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
     children = _header(factory, compact=True)
     children.extend([
-        factory.text("Title", "Current car", 68, 13, 310, 23, 17.5, WHITE, expression="[AuthenticControls.OverlayCarNameCompact]", font_weight="Bold"),
-        factory.text("CarClass", "", 68, 37, 310, 14, 9.5, MUTED, expression="[AuthenticControls.OverlayCarClassCompact]", font_weight="Bold"),
-        factory.text("Match", "✓", 422, 20, 78, 22, 11, GREEN, expression="if([AuthenticControls.MatchKind] == 'preview', '', '✓')", horizontal_alignment=2, font_weight="Bold"),
+        factory.text("Title", "Current car", 68, 13, 310, 23, 17.5, WHITE, expression="[AsDriven.OverlayCarNameCompact]", font_weight="Bold"),
+        factory.text("CarClass", "", 68, 37, 310, 14, 9.5, MUTED, expression="[AsDriven.OverlayCarClassCompact]", font_weight="Bold"),
+        factory.text("Match", "✓", 422, 20, 78, 22, 11, GREEN, expression="if([AsDriven.MatchKind] == 'preview', '', '✓')", horizontal_alignment=2, font_weight="Bold"),
         _preview_badge(factory, 390, 15, 110, 30, compact=True),
         factory.rectangle("Rule", 16, 62, 488, 1, SLATE),
         factory.rectangle("PhysicalControlsGroup", 16, 68, 240, 139, GROUP_PANEL, radius=6, border_color=SLATE, border=1),
@@ -584,24 +584,24 @@ def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
     children.extend(_rail_item(factory, "Shift", 138, 122, 88, 62, 153, _shift_icon, "SHIFT", shift_value, label_size=8.5, value_size=9.5))
     children.extend(_rail_item(factory, "Cut", 260, 122, 88, 62, 153, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "ShiftCut", "cut"), "UPSHIFT", cut_value, label_size=8.5, value_size=9.5))
     children.extend(_rail_item(factory, "Blip", 382, 122, 88, 62, 153, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "AutoBlip", "blip"), "DOWNSHIFT", blip_value, label_size=8.5, value_size=9.5))
-    evidence_expression = "'Verified ' + if([AuthenticControls.VerifiedGameVersion] == '', 'version unknown', [AuthenticControls.VerifiedGameVersion]) + '  •  Confidence: ' + " + _confidence_value_expression()
+    evidence_expression = "'Verified ' + if([AsDriven.VerifiedGameVersion] == '', 'version unknown', [AsDriven.VerifiedGameVersion]) + '  •  Confidence: ' + " + _confidence_value_expression()
     children.extend([
         factory.rectangle("TechniqueRule", 16, 209, 488, 1, SLATE),
         _group_heading(factory, "DrivingTechniqueHeading", "DRIVING TECHNIQUE", 16, 214, 488, 8.5),
-        factory.text("TechniqueSummaryLine1", "Shifting technique", 24, 231, 472, 17, 9.5, TEXT, expression="[AuthenticControls.TechniqueSummaryCompactLine1]"),
-        factory.text("TechniqueSummaryLine2", "", 24, 248, 472, 17, 9.5, TEXT, expression="[AuthenticControls.TechniqueSummaryCompactLine2]"),
+        factory.text("TechniqueSummaryLine1", "Shifting technique", 24, 231, 472, 17, 9.5, TEXT, expression="[AsDriven.TechniqueSummaryCompactLine1]"),
+        factory.text("TechniqueSummaryLine2", "", 24, 248, 472, 17, 9.5, TEXT, expression="[AsDriven.TechniqueSummaryCompactLine2]"),
         factory.rectangle("EvidenceRule", 16, 270, 488, 1, SLATE),
         factory.text("Evidence", "Evidence", 16, 276, 360, 18, 8.5, MUTED, expression=evidence_expression),
-        factory.text("Dataset", "Dataset", 380, 276, 124, 18, 8.5, MUTED, expression="'Dataset ' + [AuthenticControls.DatasetVersion]", horizontal_alignment=2),
+        factory.text("Dataset", "Dataset", 380, 276, 124, 18, 8.5, MUTED, expression="'Dataset ' + [AsDriven.DatasetVersion]", horizontal_alignment=2),
     ])
-    return factory.layer("MatchedState", children, visible_expression="[AuthenticControls.HasMatch]")
+    return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 
 def _matched_glance(factory: ItemFactory) -> dict[str, Any]:
     children = [
         factory.image("Mark", "brand-mark", 12, 8, 30, 30),
-        factory.text("Title", "Current car", 50, 8, 174, 24, 15, WHITE, expression="[AuthenticControls.OverlayCarNameGlance]", font_weight="Bold"),
-        factory.text("Match", "✓", 278, 9, 26, 22, 12, GREEN, expression="if([AuthenticControls.MatchKind] == 'preview', '', '✓')", horizontal_alignment=1, font_weight="Bold"),
+        factory.text("Title", "Current car", 50, 8, 174, 24, 15, WHITE, expression="[AsDriven.OverlayCarNameGlance]", font_weight="Bold"),
+        factory.text("Match", "✓", 278, 9, 26, 22, 12, GREEN, expression="if([AsDriven.MatchKind] == 'preview', '', '✓')", horizontal_alignment=1, font_weight="Bold"),
         _preview_badge(factory, 232, 6, 72, 30, compact=True),
         factory.rectangle("Rule", 12, 39, 292, 1, SLATE),
         factory.rectangle("PhysicalControlsGroup", 12, 41, 142, 69, GROUP_PANEL, radius=4, border_color=SLATE, border=1),
@@ -615,16 +615,16 @@ def _matched_glance(factory: ItemFactory) -> dict[str, Any]:
     children.extend(_rail_item(factory, "Shift", 85, 73, 54, 38, 94, _shift_icon, "SHIFT", "''", label_size=7, value_size=7, show_value=False))
     children.extend(_rail_item(factory, "Cut", 158, 73, 54, 38, 94, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "ShiftCut", "cut"), "UPSHIFT", "''", label_size=7, value_size=7, show_value=False))
     children.extend(_rail_item(factory, "Blip", 231, 73, 54, 38, 94, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "AutoBlip", "blip"), "BLIP", "''", label_size=7, value_size=7, show_value=False))
-    return factory.layer("MatchedState", children, visible_expression="[AuthenticControls.HasMatch]")
+    return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 
 def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[str, Any]:
     is_glance = factory.height <= 120
     accent = ORANGE if unmatched else ACCENT
     title_expression = (
-        "if([AuthenticControls.RawCarIdentifier] == '', 'Unknown car', [AuthenticControls.RawCarIdentifier])"
+        "if([AsDriven.RawCarIdentifier] == '', 'Unknown car', [AsDriven.RawCarIdentifier])"
         if unmatched
-        else "if([AuthenticControls.MatchStatus] == 'database-error', 'Database unavailable', if([AuthenticControls.MatchStatus] == 'runtime-error', 'Plugin runtime error', 'Waiting for a car'))"
+        else "if([AsDriven.MatchStatus] == 'database-error', 'Database unavailable', if([AsDriven.MatchStatus] == 'runtime-error', 'Plugin runtime error', 'Waiting for a car'))"
     )
     if is_glance:
         children = [
@@ -672,7 +672,7 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
                 ),
                 factory.text(
                     "ContributionHint",
-                    "Open the Authentic Controls page in SimHub and choose Contribute this car.",
+                    "Open the As Driven page in SimHub and choose Contribute this car.",
                     left,
                     hint_top,
                     factory.width - 2 * left,
@@ -682,36 +682,36 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
                     font_weight="Bold",
                 ),
             ])
-    expression = "![AuthenticControls.HasMatch] && [AuthenticControls.MatchStatus] == 'unmatched'" if unmatched else "![AuthenticControls.HasMatch] && [AuthenticControls.MatchStatus] != 'unmatched'"
+    expression = "![AsDriven.HasMatch] && [AsDriven.MatchStatus] == 'unmatched'" if unmatched else "![AsDriven.HasMatch] && [AsDriven.MatchStatus] != 'unmatched'"
     return factory.layer("UnmatchedState" if unmatched else "WaitingState", children, visible_expression=expression)
 
 
 def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
     progress_expression = (
-        "if([AuthenticControls.VerificationDriveStepNumber] == 0, 'READY', "
-        "'STEP ' + [AuthenticControls.VerificationDriveStepNumber] + "
-        "' / ' + [AuthenticControls.VerificationDriveStepCount])"
+        "if([AsDriven.VerificationDriveStepNumber] == 0, 'READY', "
+        "'STEP ' + [AsDriven.VerificationDriveStepNumber] + "
+        "' / ' + [AsDriven.VerificationDriveStepCount])"
     )
     pending_status = factory.layer(
         "PendingStatus",
-        [factory.text("PendingStatusText", "Waiting for telemetry", 34, 146, 628, 28, 12, WHITE, expression="[AuthenticControls.VerificationDriveStatus]")],
-        visible_expression="![AuthenticControls.VerificationDriveResultReady]",
+        [factory.text("PendingStatusText", "Waiting for telemetry", 34, 146, 628, 28, 12, WHITE, expression="[AsDriven.VerificationDriveStatus]")],
+        visible_expression="![AsDriven.VerificationDriveResultReady]",
     )
     successful_status = factory.layer(
         "SuccessfulStatus",
         [
             factory.text("SuccessBadge", "✓ CAPTURED", 34, 146, 126, 28, 12, GREEN, font_weight="Bold"),
-            factory.text("SuccessSummary", "Result captured", 164, 146, 498, 28, 13, WHITE, expression="[AuthenticControls.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("SuccessSummary", "Result captured", 164, 146, 498, 28, 13, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
-        visible_expression="[AuthenticControls.VerificationDriveResultReady] && [AuthenticControls.VerificationDriveResultSuccessful]",
+        visible_expression="[AsDriven.VerificationDriveResultReady] && [AsDriven.VerificationDriveResultSuccessful]",
     )
     review_status = factory.layer(
         "ReviewStatus",
         [
             factory.text("ReviewBadge", "REVIEW", 34, 146, 94, 28, 12, ORANGE, font_weight="Bold"),
-            factory.text("ReviewSummary", "Review result", 132, 146, 530, 28, 13, WHITE, expression="[AuthenticControls.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("ReviewSummary", "Review result", 132, 146, 530, 28, 13, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
-        visible_expression="[AuthenticControls.VerificationDriveResultReady] && ![AuthenticControls.VerificationDriveResultSuccessful]",
+        visible_expression="[AsDriven.VerificationDriveResultReady] && ![AsDriven.VerificationDriveResultSuccessful]",
     )
     return [
         factory.rectangle("Card", 4, 4, 692, 212, CARD, radius=18, border_color=SLATE, border=2),
@@ -719,14 +719,14 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         factory.text("Eyebrow", "GUIDED VERIFICATION", 24, 18, 250, 24, 13, ACCENT, font_weight="Bold"),
         factory.text("Progress", "STEP 1 / 6", 520, 18, 152, 24, 13, MUTED, expression=progress_expression, horizontal_alignment=2, font_weight="Bold"),
         factory.rectangle("HeaderRule", 24, 48, 648, 1, SLATE),
-        factory.text("Title", "Verification step", 24, 56, 648, 34, 24, WHITE, expression="[AuthenticControls.VerificationDriveTitle]", font_weight="Bold"),
-        factory.text("PromptLine1", "Follow the current test prompt.", 24, 91, 648, 22, 14, TEXT, expression="[AuthenticControls.VerificationDrivePromptLine1]", font_weight="Bold"),
-        factory.text("PromptLine2", "Then continue to the next step.", 24, 115, 648, 22, 14, TEXT, expression="[AuthenticControls.VerificationDrivePromptLine2]", font_weight="Bold"),
+        factory.text("Title", "Verification step", 24, 56, 648, 34, 24, WHITE, expression="[AsDriven.VerificationDriveTitle]", font_weight="Bold"),
+        factory.text("PromptLine1", "Follow the current test prompt.", 24, 91, 648, 22, 14, TEXT, expression="[AsDriven.VerificationDrivePromptLine1]", font_weight="Bold"),
+        factory.text("PromptLine2", "Then continue to the next step.", 24, 115, 648, 22, 14, TEXT, expression="[AsDriven.VerificationDrivePromptLine2]", font_weight="Bold"),
         factory.rectangle("StatusPanel", 24, 143, 648, 34, "#FF102333", radius=7, border_color=SLATE, border=1),
         pending_status,
         successful_status,
         review_status,
-        factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AuthenticControls.VerificationDriveLiveValues]"),
+        factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AsDriven.VerificationDriveLiveValues]"),
         factory.text("Controls", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, ACCENT, horizontal_alignment=2, font_weight="Bold"),
     ]
 
@@ -765,17 +765,17 @@ def build_dashboard(*, overlay: bool, variant: str = "detailed") -> dict[str, An
             "verification": "Verification",
         }[spec.key]
         visible_expression = (
-            "[AuthenticControls.VerificationDriveVisible]"
+            "[AsDriven.VerificationDriveVisible]"
             if spec.key == "verification"
-            else "[AuthenticControls.Popup" + property_suffix + "Visible]"
+            else "[AsDriven.Popup" + property_suffix + "Visible]"
         )
     outer = factory.layer(
         "VerificationCard" if spec.key == "verification" else "PreflightCard",
         children,
         visible_expression=visible_expression,
     )
-    dashboard_id = str(uuid.uuid5(uuid.NAMESPACE_URL, "authentic-controls/" + spec.key + "/dashboard"))
-    screen_id = str(uuid.uuid5(uuid.NAMESPACE_URL, "authentic-controls/" + spec.key + "/screen"))
+    dashboard_id = str(uuid.uuid5(uuid.NAMESPACE_URL, "as-driven/" + spec.key + "/dashboard"))
+    screen_id = str(uuid.uuid5(uuid.NAMESPACE_URL, "as-driven/" + spec.key + "/screen"))
     metadata = build_metadata(overlay=overlay, variant=variant)
     return {
         "Version": 2,
@@ -818,7 +818,7 @@ def build_metadata(*, overlay: bool, variant: str = "detailed") -> dict[str, Any
     spec = _template_spec(overlay, variant)
     size_name = spec.key.title() if spec.key != "display" else "Detailed"
     return {
-        "Category": "Authentic Controls",
+        "Category": "As Driven",
         "Title": spec.stem,
         "Description": (
             "In-simulator prompts for the guided control verification drive."
@@ -865,7 +865,7 @@ def write_dashboards(output_directory: Path) -> list[Path]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate Authentic Controls SimHub Dash Studio artifacts.")
+    parser = argparse.ArgumentParser(description="Generate As Driven SimHub Dash Studio artifacts.")
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     for path in write_dashboards(args.output):

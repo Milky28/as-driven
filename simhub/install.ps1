@@ -1,6 +1,6 @@
 param(
     [string]$SimHubInstallPath = "C:\Program Files (x86)\SimHub",
-    [string]$PackagePath = (Join-Path $PSScriptRoot "dist\AuthenticControls"),
+    [string]$PackagePath = (Join-Path $PSScriptRoot "dist\AsDriven"),
     [switch]$ReplaceOverlayLayouts
 )
 
@@ -8,8 +8,8 @@ $ErrorActionPreference = "Stop"
 $packageRoot = [System.IO.Path]::GetFullPath($PackagePath)
 $simHubRoot = [System.IO.Path]::GetFullPath($SimHubInstallPath)
 
-if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "AuthenticControls.Plugin.dll"))) {
-    throw "The built Authentic Controls package was not found: $packageRoot"
+if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "AsDriven.Plugin.dll"))) {
+    throw "The built As Driven package was not found: $packageRoot"
 }
 if (-not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe"))) {
     throw "The SimHub installation could not be verified: $simHubRoot"
@@ -19,7 +19,7 @@ foreach ($process in @(Get-Process -Name "SimHubWPF" -ErrorAction SilentlyContin
     try {
         $runningExecutable = [System.IO.Path]::GetFullPath($process.MainModule.FileName)
         if ($runningExecutable.Equals($targetExecutable, [StringComparison]::OrdinalIgnoreCase)) {
-            throw "Close SimHub before installing Authentic Controls."
+            throw "Close SimHub before installing As Driven."
         }
     }
     catch [System.Management.Automation.RuntimeException] {
@@ -29,12 +29,12 @@ foreach ($process in @(Get-Process -Name "SimHubWPF" -ErrorAction SilentlyContin
         if ($simHubRoot.Equals(
             [System.IO.Path]::GetFullPath("C:\Program Files (x86)\SimHub"),
             [StringComparison]::OrdinalIgnoreCase)) {
-            throw "Close SimHub before installing Authentic Controls."
+            throw "Close SimHub before installing As Driven."
         }
     }
 }
 
-$backupRoot = Join-Path $env:TEMP ("AuthenticControls-SimHub-backup-" + (Get-Date -Format "yyyyMMdd-HHmmss"))
+$backupRoot = Join-Path $env:TEMP ("AsDriven-SimHub-backup-" + (Get-Date -Format "yyyyMMdd-HHmmss"))
 New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
 
 function Backup-RelativePath {
@@ -50,32 +50,32 @@ function Backup-RelativePath {
 }
 
 foreach ($relativePath in @(
-    "AuthenticControls.Plugin.dll",
-    "AuthenticControls.Plugin.pdb",
-    "AuthenticControls.Core.dll",
-    "AuthenticControls.Core.pdb",
-    "PluginsData\AuthenticControls",
-    "DashTemplates\Authentic Controls Preflight Overlay",
-    "DashTemplates\Authentic Controls Preflight Compact",
-    "DashTemplates\Authentic Controls Preflight Glance",
-    "DashTemplates\Authentic Controls Preflight Display",
-    "DashTemplates\Authentic Controls Verification Drive"
+    "AsDriven.Plugin.dll",
+    "AsDriven.Plugin.pdb",
+    "AsDriven.Core.dll",
+    "AsDriven.Core.pdb",
+    "PluginsData\AsDriven",
+    "DashTemplates\As Driven Preflight Overlay",
+    "DashTemplates\As Driven Preflight Compact",
+    "DashTemplates\As Driven Preflight Glance",
+    "DashTemplates\As Driven Preflight Display",
+    "DashTemplates\As Driven Verification Drive"
 )) {
     Backup-RelativePath $relativePath
 }
 
 $installedLayoutDirectory = Join-Path $simHubRoot "OverlayLayouts"
 if (Test-Path -LiteralPath $installedLayoutDirectory) {
-    foreach ($layout in Get-ChildItem -LiteralPath $installedLayoutDirectory -Filter "Authentic Controls*.olayout") {
+    foreach ($layout in Get-ChildItem -LiteralPath $installedLayoutDirectory -Filter "As Driven*.olayout") {
         Backup-RelativePath ("OverlayLayouts\" + $layout.Name)
     }
 }
 
 foreach ($fileName in @(
-    "AuthenticControls.Plugin.dll",
-    "AuthenticControls.Plugin.pdb",
-    "AuthenticControls.Core.dll",
-    "AuthenticControls.Core.pdb"
+    "AsDriven.Plugin.dll",
+    "AsDriven.Plugin.pdb",
+    "AsDriven.Core.dll",
+    "AsDriven.Core.pdb"
 )) {
     Copy-Item -LiteralPath (Join-Path $packageRoot $fileName) -Destination $simHubRoot -Force
 }
@@ -102,18 +102,18 @@ foreach ($sourceLayout in Get-ChildItem -LiteralPath (Join-Path $packageRoot "Ov
 # existing layouts without replacing their customized preflight positions. The
 # pre-install backup makes these migrations reversible.
 if (-not $ReplaceOverlayLayouts) {
-    foreach ($layout in Get-ChildItem -LiteralPath $installedLayoutDirectory -Filter "Authentic Controls*.olayout") {
+    foreach ($layout in Get-ChildItem -LiteralPath $installedLayoutDirectory -Filter "As Driven*.olayout") {
         $payload = Get-Content -LiteralPath $layout.FullName -Raw | ConvertFrom-Json
         $changed = $false
         foreach ($part in $payload.OverlayLayoutParts) {
-            if ($part.DashboardName -like "*Authentic Controls Preflight Overlay.djson" -and
+            if ($part.DashboardName -like "*As Driven Preflight Overlay.djson" -and
                 [double]$part.Width -eq 900.0) {
                 $center = [double]$part.Left + ([double]$part.Width / 2.0)
                 $part.Width = 840.0
                 $part.Left = $center - 420.0
                 $changed = $true
             }
-            if ($part.DashboardName -like "*Authentic Controls Preflight Compact.djson" -and
+            if ($part.DashboardName -like "*As Driven Preflight Compact.djson" -and
                 [double]$part.Height -eq 260.0) {
                 $center = [double]$part.Top + ([double]$part.Height / 2.0)
                 $part.Height = 300.0
@@ -122,11 +122,11 @@ if (-not $ReplaceOverlayLayouts) {
             }
         }
         $verificationPart = $payload.OverlayLayoutParts | Where-Object {
-            $_.DashboardName -like "*Authentic Controls Verification Drive.djson"
+            $_.DashboardName -like "*As Driven Verification Drive.djson"
         } | Select-Object -First 1
         if ($null -eq $verificationPart) {
             $detailedPart = $payload.OverlayLayoutParts | Where-Object {
-                $_.DashboardName -like "*Authentic Controls Preflight Overlay.djson"
+                $_.DashboardName -like "*As Driven Preflight Overlay.djson"
             } | Select-Object -First 1
             if ($null -ne $detailedPart) {
                 $verificationLeft = [double]$detailedPart.Left + ([double]$detailedPart.Width / 2.0) - 350.0
@@ -137,7 +137,7 @@ if (-not $ReplaceOverlayLayouts) {
                 $verificationTop = 430.0
             }
             $newPart = [pscustomobject]@{
-                DashboardName = "DashTemplates\Authentic Controls Verification Drive\Authentic Controls Verification Drive.djson"
+                DashboardName = "DashTemplates\As Driven Verification Drive\As Driven Verification Drive.djson"
                 Top = $verificationTop
                 Left = $verificationLeft
                 Width = 700.0
@@ -162,7 +162,7 @@ if (-not $ReplaceOverlayLayouts) {
     }
 }
 
-Write-Host "Installed Authentic Controls from: $packageRoot"
+Write-Host "Installed As Driven from: $packageRoot"
 Write-Host "Rollback backup: $backupRoot"
 if ($preservedLayouts.Count -gt 0) {
     Write-Host ("Preserved customized overlay layouts: " + ($preservedLayouts -join ", "))

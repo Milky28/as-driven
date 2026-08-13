@@ -18,10 +18,10 @@ if (-not (Test-Path -LiteralPath (Join-Path $SimHubInstallPath "SimHub.Plugins.d
 }
 
 $projects = @(
-    "AuthenticControls.Core\AuthenticControls.Core.csproj",
-    "AuthenticControls.Core.Tests\AuthenticControls.Core.Tests.csproj",
-    "AuthenticControls.Diagnostics\AuthenticControls.Diagnostics.csproj",
-    "AuthenticControls.Plugin\AuthenticControls.Plugin.csproj"
+    "AsDriven.Core\AsDriven.Core.csproj",
+    "AsDriven.Core.Tests\AsDriven.Core.Tests.csproj",
+    "AsDriven.Diagnostics\AsDriven.Diagnostics.csproj",
+    "AsDriven.Plugin\AsDriven.Plugin.csproj"
 )
 foreach ($project in $projects) {
     & $msbuild (Join-Path $PSScriptRoot $project) /nologo /verbosity:minimal /target:Rebuild "/property:Configuration=$Configuration" "/property:Platform=AnyCPU" "/property:FrameworkPathOverride=$frameworkDirectory" "/property:SimHubInstallPath=$SimHubInstallPath"
@@ -30,7 +30,7 @@ foreach ($project in $projects) {
     }
 }
 
-$pluginOutput = Join-Path $PSScriptRoot "AuthenticControls.Plugin\bin\$Configuration"
+$pluginOutput = Join-Path $PSScriptRoot "AsDriven.Plugin\bin\$Configuration"
 foreach ($dependency in @(
     # Native SimHub settings controls merge host UI dictionaries when they are
     # constructed. Preload those installed assemblies for the headless settings
@@ -50,11 +50,11 @@ foreach ($dependency in @(
         (Join-Path $SimHubInstallPath $dependency)) | Out-Null
 }
 [System.Reflection.Assembly]::LoadFrom(
-    (Join-Path $pluginOutput "AuthenticControls.Core.dll")) | Out-Null
+    (Join-Path $pluginOutput "AsDriven.Core.dll")) | Out-Null
 $pluginAssembly = [System.Reflection.Assembly]::LoadFrom(
-    (Join-Path $pluginOutput "AuthenticControls.Plugin.dll"))
+    (Join-Path $pluginOutput "AsDriven.Plugin.dll"))
 $pluginType = $pluginAssembly.GetType(
-    "AuthenticControls.Plugin.AuthenticControls", $true)
+    "AsDriven.Plugin.AsDriven", $true)
 $pluginInstance = [System.Activator]::CreateInstance($pluginType)
 $instanceFlags = [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic
 $showPopupMethod = $pluginType.GetMethod("ShowPopup", $instanceFlags)
@@ -82,17 +82,17 @@ if ([object]::ReferenceEquals($firstSnapshot, $refreshedSnapshot)) {
 $menuIcon = $pluginType.GetProperty("PictureIcon").GetValue(
     $pluginInstance, $null)
 if ($null -eq $menuIcon -or $menuIcon.Width -ne 24 -or $menuIcon.Height -ne 24) {
-    throw "The Authentic Controls left-menu icon must be a non-null 24x24 image."
+    throw "The As Driven left-menu icon must be a non-null 24x24 image."
 }
 $stride = 24 * 4
 $pixels = New-Object byte[] ($stride * 24)
 $menuIcon.CopyPixels($pixels, $stride, 0)
 if ($pixels[3] -ne 0 -or -not ($pixels | Where-Object { $_ -ne 0 })) {
-    throw "The Authentic Controls left-menu glyph must have a transparent corner and visible content."
+    throw "The As Driven left-menu glyph must have a transparent corner and visible content."
 }
 $resources = $pluginAssembly.GetManifestResourceNames()
-if ($resources -notcontains "AuthenticControls.Plugin.Assets.authentic-controls-mark.png") {
-    throw "The Authentic Controls production identity asset is not embedded."
+if ($resources -notcontains "AsDriven.Plugin.Assets.as-driven-mark.png") {
+    throw "The As Driven production identity asset is not embedded."
 }
 try {
     $settingsControl = $pluginType.GetMethod("GetWPFSettingsControl").Invoke(
@@ -108,10 +108,10 @@ catch {
     throw $errorDetail
 }
 if ($null -eq $settingsControl -or $null -eq $settingsControl.Content) {
-    throw "The Authentic Controls native settings page could not be created."
+    throw "The As Driven native settings page could not be created."
 }
 $verificationType = $pluginAssembly.GetType(
-    "AuthenticControls.Plugin.VerificationControl", $true)
+    "AsDriven.Plugin.VerificationControl", $true)
 function Get-UiDescendants {
     param([System.Windows.DependencyObject]$Root)
 
@@ -265,16 +265,16 @@ $assistConfirmation = @($ui | Where-Object {
 if ($assistConfirmation.Count -ne 1 -or $assistConfirmation[0].BorderThickness.Left -lt 2) {
     throw "The required assist confirmation must be visibly highlighted before selection."
 }
-Write-Host "PASS: Authentic Controls menu icon, settings page, and optional contributor workflow"
+Write-Host "PASS: As Driven menu icon, settings page, and optional contributor workflow"
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
-$tests = Join-Path $PSScriptRoot "AuthenticControls.Core.Tests\bin\$Configuration\AuthenticControls.Core.Tests.exe"
+$tests = Join-Path $PSScriptRoot "AsDriven.Core.Tests\bin\$Configuration\AsDriven.Core.Tests.exe"
 & $tests $repositoryRoot
 if ($LASTEXITCODE -ne 0) {
     throw "The .NET lookup tests failed."
 }
 
-$distRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "dist\AuthenticControls"))
+$distRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "dist\AsDriven"))
 $expectedParent = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "dist")) + [System.IO.Path]::DirectorySeparatorChar
 if (-not $distRoot.StartsWith($expectedParent, [System.StringComparison]::OrdinalIgnoreCase)) {
     throw "Refusing to package outside the SimHub dist directory: $distRoot"
@@ -284,12 +284,12 @@ if (Test-Path -LiteralPath $distRoot) {
 }
 New-Item -ItemType Directory -Path $distRoot | Out-Null
 
-Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Plugin.dll") -Destination $distRoot
-Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Plugin.pdb") -Destination $distRoot
-Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Core.dll") -Destination $distRoot
-Copy-Item -LiteralPath (Join-Path $pluginOutput "AuthenticControls.Core.pdb") -Destination $distRoot
+Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Plugin.dll") -Destination $distRoot
+Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Plugin.pdb") -Destination $distRoot
+Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Core.dll") -Destination $distRoot
+Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Core.pdb") -Destination $distRoot
 
-$databaseTarget = Join-Path $distRoot "PluginsData\AuthenticControls\Database\data\v1"
+$databaseTarget = Join-Path $distRoot "PluginsData\AsDriven\Database\data\v1"
 New-Item -ItemType Directory -Path $databaseTarget -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\index.json") -Destination $databaseTarget
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\sources.json") -Destination $databaseTarget
@@ -304,16 +304,16 @@ $dashboardTarget = Join-Path $distRoot "DashTemplates"
 if ($LASTEXITCODE -ne 0) {
     throw "Dash Studio artifact generation failed."
 }
-$verificationDashboard = Join-Path $dashboardTarget "Authentic Controls Verification Drive\Authentic Controls Verification Drive.djson"
+$verificationDashboard = Join-Path $dashboardTarget "As Driven Verification Drive\As Driven Verification Drive.djson"
 if (-not (Test-Path -LiteralPath $verificationDashboard)) {
     throw "The guided verification Dash Studio surface was not generated."
 }
 $verificationDashboardJson = Get-Content -LiteralPath $verificationDashboard -Raw
 foreach ($requiredProperty in @(
-    "AuthenticControls.VerificationDriveVisible",
-    "AuthenticControls.VerificationDrivePromptLine1",
-    "AuthenticControls.VerificationDrivePromptLine2",
-    "AuthenticControls.VerificationDriveResult"
+    "AsDriven.VerificationDriveVisible",
+    "AsDriven.VerificationDrivePromptLine1",
+    "AsDriven.VerificationDrivePromptLine2",
+    "AsDriven.VerificationDriveResult"
 )) {
     if (-not $verificationDashboardJson.Contains($requiredProperty)) {
         throw "The guided verification surface is missing property: $requiredProperty"
@@ -324,4 +324,4 @@ $overlayLayoutTarget = Join-Path $distRoot "OverlayLayouts"
 New-Item -ItemType Directory -Path $overlayLayoutTarget -Force | Out-Null
 Copy-Item -Path (Join-Path $PSScriptRoot "overlay\*.olayout") -Destination $overlayLayoutTarget
 
-Write-Host "Built and tested Authentic Controls. SimHub-ready package: $distRoot"
+Write-Host "Built and tested As Driven. SimHub-ready package: $distRoot"

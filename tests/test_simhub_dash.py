@@ -10,13 +10,13 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 GENERATOR_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "generate.py"
 OVERLAY_LAYOUT_PATH = (
-    REPOSITORY_ROOT / "simhub" / "overlay" / "Authentic Controls.olayout"
+    REPOSITORY_ROOT / "simhub" / "overlay" / "As Driven.olayout"
 )
 ULTRAWIDE_LAYOUT_PATH = (
     REPOSITORY_ROOT
     / "simhub"
     / "overlay"
-    / "Authentic Controls 5120x1440.olayout"
+    / "As Driven 5120x1440.olayout"
 )
 RASTER_ASSET_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "assets"
 
@@ -54,7 +54,7 @@ class SimHubDashTests(unittest.TestCase):
         overlay_card = overlay["Screens"][0]["Items"][0]
         display_card = display["Screens"][0]["Items"][0]
         self.assertEqual(
-            "[AuthenticControls.PopupDetailedVisible]",
+            "[AsDriven.PopupDetailedVisible]",
             overlay_card["Bindings"]["Visible"]["Formula"]["Expression"],
         )
         self.assertNotIn("Bindings", display_card)
@@ -70,9 +70,9 @@ class SimHubDashTests(unittest.TestCase):
             self.assertEqual(expected_size, (dashboard["BaseWidth"], dashboard["BaseHeight"]))
             expression = dashboard["Screens"][0]["Items"][0]["Bindings"]["Visible"]["Formula"]["Expression"]
             expected_expression = (
-                "[AuthenticControls.VerificationDriveVisible]"
+                "[AsDriven.VerificationDriveVisible]"
                 if variant == "verification"
-                else "[AuthenticControls.Popup" + variant.title() + "Visible]"
+                else "[AsDriven.Popup" + variant.title() + "Visible]"
             )
             self.assertEqual(expected_expression, expression)
 
@@ -85,17 +85,17 @@ class SimHubDashTests(unittest.TestCase):
             if isinstance(value, dict) and "Name" in value
         }
         self.assertEqual("GUIDED VERIFICATION", named["Eyebrow"]["Text"])
-        self.assertIn("AuthenticControls.VerificationDriveStepNumber", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveStepCount", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveTitle", serialized)
-        self.assertIn("AuthenticControls.VerificationDrivePrompt", serialized)
-        self.assertIn("AuthenticControls.VerificationDrivePromptLine1", serialized)
-        self.assertIn("AuthenticControls.VerificationDrivePromptLine2", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveResultReady", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveResultSuccessful", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveResult", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveStatus", serialized)
-        self.assertIn("AuthenticControls.VerificationDriveLiveValues", serialized)
+        self.assertIn("AsDriven.VerificationDriveStepNumber", serialized)
+        self.assertIn("AsDriven.VerificationDriveStepCount", serialized)
+        self.assertIn("AsDriven.VerificationDriveTitle", serialized)
+        self.assertIn("AsDriven.VerificationDrivePrompt", serialized)
+        self.assertIn("AsDriven.VerificationDrivePromptLine1", serialized)
+        self.assertIn("AsDriven.VerificationDrivePromptLine2", serialized)
+        self.assertIn("AsDriven.VerificationDriveResultReady", serialized)
+        self.assertIn("AsDriven.VerificationDriveResultSuccessful", serialized)
+        self.assertIn("AsDriven.VerificationDriveResult", serialized)
+        self.assertIn("AsDriven.VerificationDriveStatus", serialized)
+        self.assertIn("AsDriven.VerificationDriveLiveValues", serialized)
         self.assertIn("NEXT / ACCEPT", named["Controls"]["Text"])
         self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
         self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
@@ -111,19 +111,19 @@ class SimHubDashTests(unittest.TestCase):
         dashboard = self.generator.build_dashboard(overlay=True)
         serialized = json.dumps(dashboard)
         for property_name in (
-            "AuthenticControls.HasMatch",
-            "AuthenticControls.MatchStatus",
-            "AuthenticControls.RawCarIdentifier",
-            "AuthenticControls.OverlayCarNameDetailed",
-            "AuthenticControls.ShiftActuation",
-            "AuthenticControls.ShiftPattern",
-            "AuthenticControls.AutoBlip",
-            "AuthenticControls.ShiftCut",
-            "AuthenticControls.TechniqueSummaryLine1",
-            "AuthenticControls.TechniqueSummaryLine2",
-            "AuthenticControls.VerifiedGameVersion",
-            "AuthenticControls.Confidence",
-            "AuthenticControls.PopupDetailedVisible",
+            "AsDriven.HasMatch",
+            "AsDriven.MatchStatus",
+            "AsDriven.RawCarIdentifier",
+            "AsDriven.OverlayCarNameDetailed",
+            "AsDriven.ShiftActuation",
+            "AsDriven.ShiftPattern",
+            "AsDriven.AutoBlip",
+            "AsDriven.ShiftCut",
+            "AsDriven.TechniqueSummaryLine1",
+            "AsDriven.TechniqueSummaryLine2",
+            "AsDriven.VerifiedGameVersion",
+            "AsDriven.Confidence",
+            "AsDriven.PopupDetailedVisible",
         ):
             self.assertIn(property_name, serialized)
         self.assertIn("No hardware or technique values have been assumed.", serialized)
@@ -155,8 +155,8 @@ class SimHubDashTests(unittest.TestCase):
                 self.assertIn("No hardware or technique values have been assumed.", serialized)
                 self.assertIn("CONTRIBUTE IN AUTHENTIC CONTROLS", serialized)
                 self.assertIn("choose Contribute this car", serialized)
-                self.assertNotIn("AuthenticControls.BeginCarContribution", serialized)
-                self.assertNotIn("AuthenticControls.ContributionRequestPending", serialized)
+                self.assertNotIn("AsDriven.BeginCarContribution", serialized)
+                self.assertNotIn("AsDriven.ContributionRequestPending", serialized)
 
     def test_bitmap_icons_cover_supported_control_categories_and_unknowns(self):
         dashboards = [
@@ -245,18 +245,18 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("TechniqueSummaryLine1", named)
         self.assertIn("TechniqueSummaryLine2", named)
         self.assertEqual("DRIVING TECHNIQUE", named["DrivingTechniqueHeading"]["Text"])
-        self.assertIn("AuthenticControls.TechniqueSummaryLine1", serialized)
-        self.assertIn("AuthenticControls.TechniqueSummaryLine2", serialized)
-        self.assertNotIn("AuthenticControls.UpshiftGuidance", serialized)
-        self.assertNotIn("AuthenticControls.DownshiftGuidance", serialized)
+        self.assertIn("AsDriven.TechniqueSummaryLine1", serialized)
+        self.assertIn("AsDriven.TechniqueSummaryLine2", serialized)
+        self.assertNotIn("AsDriven.UpshiftGuidance", serialized)
+        self.assertNotIn("AsDriven.DownshiftGuidance", serialized)
         self.assertEqual(333, named["Evidence"]["Top"])
         self.assertEqual(21.5, named["Title"]["FontSize"])
         self.assertIn(
-            "AuthenticControls.OverlayCarNameDetailed",
+            "AsDriven.OverlayCarNameDetailed",
             named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
         self.assertIn(
-            "AuthenticControls.OverlayCarClassDetailed",
+            "AsDriven.OverlayCarClassDetailed",
             named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
@@ -270,15 +270,15 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("DRIVING TECHNIQUE", compact_named["DrivingTechniqueHeading"]["Text"])
         self.assertEqual(9.5, compact_named["TechniqueSummaryLine1"]["FontSize"])
         self.assertIn(
-            "AuthenticControls.TechniqueSummaryCompactLine2",
+            "AsDriven.TechniqueSummaryCompactLine2",
             compact_named["TechniqueSummaryLine2"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
         self.assertIn(
-            "AuthenticControls.OverlayCarNameCompact",
+            "AsDriven.OverlayCarNameCompact",
             compact_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
         self.assertIn(
-            "AuthenticControls.OverlayCarClassCompact",
+            "AsDriven.OverlayCarClassCompact",
             compact_named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
@@ -292,7 +292,7 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotIn("TechniqueSummaryLine1", glance_names)
         self.assertNotIn("TechniqueSummaryLine2", glance_names)
         self.assertIn(
-            "AuthenticControls.OverlayCarNameGlance",
+            "AsDriven.OverlayCarNameGlance",
             glance["Screens"][0]["Items"][0]["Childrens"][3]["Childrens"][1]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
@@ -306,7 +306,7 @@ class SimHubDashTests(unittest.TestCase):
             }
             self.assertIn("PreviewBadge", named)
             self.assertEqual(
-                "[AuthenticControls.MatchKind] == 'preview'",
+                "[AsDriven.MatchKind] == 'preview'",
                 named["PreviewBadge"]["Bindings"]["Visible"]["Formula"]["Expression"],
             )
             badge_text = " ".join(
@@ -390,15 +390,15 @@ class SimHubDashTests(unittest.TestCase):
 
     def test_ready_made_overlay_layout_contains_all_native_sizes(self):
         layout = json.loads(OVERLAY_LAYOUT_PATH.read_text(encoding="utf-8"))
-        self.assertEqual("Authentic Controls", layout["Name"])
+        self.assertEqual("As Driven", layout["Name"])
         self.assertTrue(layout["ShowWhenPausedOrInMenu"])
         parts = layout["OverlayLayoutParts"]
         self.assertEqual(4, len(parts))
         expected = {
-            "Authentic Controls Preflight Overlay": ((840.0, 360.0), (540.0, 60.0)),
-            "Authentic Controls Preflight Compact": ((520.0, 300.0), (700.0, 60.0)),
-            "Authentic Controls Preflight Glance": ((320.0, 120.0), (800.0, 60.0)),
-            "Authentic Controls Verification Drive": ((700.0, 220.0), (610.0, 430.0)),
+            "As Driven Preflight Overlay": ((840.0, 360.0), (540.0, 60.0)),
+            "As Driven Preflight Compact": ((520.0, 300.0), (700.0, 60.0)),
+            "As Driven Preflight Glance": ((320.0, 120.0), (800.0, 60.0)),
+            "As Driven Verification Drive": ((700.0, 220.0), (610.0, 430.0)),
         }
         part_ids = set()
         for part in parts:
@@ -415,13 +415,13 @@ class SimHubDashTests(unittest.TestCase):
     def test_5120_layout_centers_all_sizes_near_the_top(self):
         standard = json.loads(OVERLAY_LAYOUT_PATH.read_text(encoding="utf-8"))
         layout = json.loads(ULTRAWIDE_LAYOUT_PATH.read_text(encoding="utf-8"))
-        self.assertEqual("Authentic Controls 5120x1440", layout["Name"])
+        self.assertEqual("As Driven 5120x1440", layout["Name"])
         self.assertNotEqual(standard["UniqueId"], layout["UniqueId"])
         part_ids = set()
         for part in layout["OverlayLayoutParts"]:
             expected_top = (
                 430.0
-                if Path(part["DashboardName"]).stem == "Authentic Controls Verification Drive"
+                if Path(part["DashboardName"]).stem == "As Driven Verification Drive"
                 else 60.0
             )
             self.assertEqual(expected_top, part["Top"])

@@ -101,12 +101,12 @@ class ValidationTests(unittest.TestCase):
             )
         )
         observation = {
-            "$schema": "urn:authentic-controls:schema:v1:verification-observation",
+            "$schema": "urn:as-driven:schema:v1:verification-observation",
             "schema_version": "1.0.0",
             "observation_id": "ams2.test-car.20260811t120000000z-1234abcd",
             "simulator": "ams2",
             "game_version": "1.6.9.91",
-            "client_version": "SimHub 9.11.22; Authentic Controls 0.11.0",
+            "client_version": "SimHub 9.11.22; As Driven 0.11.0",
             "observed_at": "2026-08-11T12:00:00.0000000Z",
             "observer": "Test observer",
             "identity": {

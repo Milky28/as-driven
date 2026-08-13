@@ -49,9 +49,9 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 $pluginAssembly = [System.Reflection.AssemblyName]::GetAssemblyName(
-    (Join-Path $repositoryRoot "simhub\dist\AuthenticControls\AuthenticControls.Plugin.dll"))
+    (Join-Path $repositoryRoot "simhub\dist\AsDriven\AsDriven.Plugin.dll"))
 $coreAssembly = [System.Reflection.AssemblyName]::GetAssemblyName(
-    (Join-Path $repositoryRoot "simhub\dist\AuthenticControls\AuthenticControls.Core.dll"))
+    (Join-Path $repositoryRoot "simhub\dist\AsDriven\AsDriven.Core.dll"))
 $pluginVersion = $pluginAssembly.Version.ToString(3)
 $coreVersion = $coreAssembly.Version.ToString(3)
 if ($pluginVersion -ne $coreVersion) {
@@ -66,12 +66,12 @@ $staging = Join-Path ([System.IO.Path]::GetTempPath()) (
     "ACea-" + [Guid]::NewGuid().ToString("N").Substring(0, 8))
 New-Item -ItemType Directory -Path $staging | Out-Null
 try {
-    $releaseName = "authentic-controls-simhub-$pluginVersion-early-access"
+    $releaseName = "as-driven-simhub-$pluginVersion-early-access"
     # Keep temporary paths short: Dash Studio filenames are descriptive and
     # older PowerShell/.NET Framework file APIs still enforce MAX_PATH.
-    $packageRoot = Join-Path $staging "AuthenticControls"
+    $packageRoot = Join-Path $staging "AsDriven"
     New-Item -ItemType Directory -Path (Join-Path $packageRoot "simhub\dist") -Force | Out-Null
-    Copy-Item -LiteralPath (Join-Path $repositoryRoot "simhub\dist\AuthenticControls") `
+    Copy-Item -LiteralPath (Join-Path $repositoryRoot "simhub\dist\AsDriven") `
         -Destination (Join-Path $packageRoot "simhub\dist") -Recurse
     foreach ($script in @("install.ps1", "uninstall.ps1")) {
         Copy-Item -LiteralPath (Join-Path $repositoryRoot "simhub\$script") `
@@ -89,7 +89,7 @@ try {
     }
 
     $manifest = [ordered]@{
-        package_format = "authentic-controls-simhub"
+        package_format = "as-driven-simhub"
         package_format_version = "1.0.0"
         release_channel = "early-access"
         plugin_version = $pluginVersion
@@ -139,9 +139,9 @@ try {
         record_count = $recordCount
         plugin_package = [System.IO.Path]::GetFileName($zipPath)
         plugin_sha256 = $zipHash
-        database_package = "authentic-controls-db-$datasetVersion.zip"
+        database_package = "as-driven-db-$datasetVersion.zip"
         database_sha256 = (Get-FileHash -LiteralPath (
-            Join-Path $outputRoot "authentic-controls-db-$datasetVersion.zip") -Algorithm SHA256).Hash.ToLowerInvariant()
+            Join-Path $outputRoot "as-driven-db-$datasetVersion.zip") -Algorithm SHA256).Hash.ToLowerInvariant()
         tested_simhub_version = "9.11.22"
         tested_ams2_version = "1.6.9.91"
         generated_at = [DateTime]::UtcNow.ToString("o")

@@ -10,9 +10,9 @@ $repositoryRoot = Split-Path $PSScriptRoot -Parent
 
 function Resolve-DefaultPackage {
     $releaseDirectory = Join-Path $repositoryRoot "dist\database"
-    $packages = @(Get-ChildItem -LiteralPath $releaseDirectory -File -Filter "authentic-controls-db-*.zip" |
+    $packages = @(Get-ChildItem -LiteralPath $releaseDirectory -File -Filter "as-driven-db-*.zip" |
         ForEach-Object {
-            $versionText = $_.BaseName.Substring("authentic-controls-db-".Length)
+            $versionText = $_.BaseName.Substring("as-driven-db-".Length)
             $parsedVersion = $null
             if ([Version]::TryParse($versionText, [ref]$parsedVersion)) {
                 [pscustomobject]@{ File = $_; Version = $parsedVersion }
@@ -75,28 +75,28 @@ if (Test-Path -LiteralPath $checksumPath) {
 }
 
 $extractionRoot = Join-Path ([System.IO.Path]::GetTempPath()) (
-    "AuthenticControlsDatabaseInstall-" + [Guid]::NewGuid().ToString("N"))
+    "AsDrivenDatabaseInstall-" + [Guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $extractionRoot | Out-Null
 
-$authenticControlsRoot = Join-Path $simHubRoot "PluginsData\AuthenticControls"
-$databaseRoot = Join-Path $authenticControlsRoot "Database"
-$stagingRoot = Join-Path $authenticControlsRoot (
+$asDrivenRoot = Join-Path $simHubRoot "PluginsData\AsDriven"
+$databaseRoot = Join-Path $asDrivenRoot "Database"
+$stagingRoot = Join-Path $asDrivenRoot (
     ".Database-staging-" + [Guid]::NewGuid().ToString("N"))
-$previousRoot = Join-Path $authenticControlsRoot (
+$previousRoot = Join-Path $asDrivenRoot (
     ".Database-previous-" + [Guid]::NewGuid().ToString("N"))
 if ([string]::IsNullOrWhiteSpace($BackupDirectory)) {
     $backupRoot = Join-Path ([System.IO.Path]::GetTempPath()) (
-        "AuthenticControls-Database-backup-" + (Get-Date -Format "yyyyMMdd-HHmmss") +
+        "AsDriven-Database-backup-" + (Get-Date -Format "yyyyMMdd-HHmmss") +
         "-" + [Guid]::NewGuid().ToString("N").Substring(0, 8))
 }
 else {
     $backupRoot = [System.IO.Path]::GetFullPath($BackupDirectory)
 }
-$authenticControlsPrefix = [System.IO.Path]::GetFullPath($authenticControlsRoot).TrimEnd('\') + '\'
+$asDrivenPrefix = [System.IO.Path]::GetFullPath($asDrivenRoot).TrimEnd('\') + '\'
 if ($backupRoot.StartsWith(
-    $authenticControlsPrefix,
+    $asDrivenPrefix,
     [System.StringComparison]::OrdinalIgnoreCase)) {
-    throw "The rollback backup must be outside the installed Authentic Controls directory."
+    throw "The rollback backup must be outside the installed As Driven directory."
 }
 
 try {
@@ -126,8 +126,8 @@ try {
 
     Expand-Archive -LiteralPath $packageFile -DestinationPath $extractionRoot
     $packageRoots = @(Get-ChildItem -LiteralPath $extractionRoot -Directory)
-    if ($packageRoots.Count -ne 1 -or $packageRoots[0].Name -notlike "authentic-controls-db-*") {
-        throw "The database package must contain exactly one authentic-controls-db-* root directory."
+    if ($packageRoots.Count -ne 1 -or $packageRoots[0].Name -notlike "as-driven-db-*") {
+        throw "The database package must contain exactly one as-driven-db-* root directory."
     }
     $expandedPackageRoot = $packageRoots[0].FullName
     $manifestPath = Join-Path $expandedPackageRoot "release-manifest.json"
@@ -135,7 +135,7 @@ try {
         throw "The database package does not contain release-manifest.json."
     }
     $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-    if ($manifest.package_format -ne "authentic-controls-database" -or
+    if ($manifest.package_format -ne "as-driven-database" -or
         $manifest.package_format_version -ne "1.0.0") {
         throw "The database package format is not supported."
     }
@@ -197,7 +197,7 @@ try {
         }
     }
 
-    New-Item -ItemType Directory -Path $authenticControlsRoot -Force | Out-Null
+    New-Item -ItemType Directory -Path $asDrivenRoot -Force | Out-Null
     New-Item -ItemType Directory -Path $stagingRoot | Out-Null
     Get-ChildItem -LiteralPath $expandedPackageRoot -Force |
         Copy-Item -Destination $stagingRoot -Recurse -Force
@@ -220,25 +220,25 @@ try {
         }
     }
     catch {
-        Remove-VerifiedTree $authenticControlsRoot $databaseRoot
+        Remove-VerifiedTree $asDrivenRoot $databaseRoot
         if (Test-Path -LiteralPath $previousRoot) {
             Move-Item -LiteralPath $previousRoot -Destination $databaseRoot
         }
         throw
     }
 
-    Remove-VerifiedTree $authenticControlsRoot $previousRoot
-    Write-Host "Installed Authentic Controls dataset $newVersion only."
+    Remove-VerifiedTree $asDrivenRoot $previousRoot
+    Write-Host "Installed As Driven dataset $newVersion only."
     if ($null -ne $currentVersion) {
         Write-Host "Previous dataset: $currentVersion"
     }
     Write-Host "Installed database: $databaseRoot"
     Write-Host "Rollback backup: $backupRoot"
     if (Get-Process -Name "SimHubWPF" -ErrorAction SilentlyContinue) {
-        Write-Host "SimHub is running. Use Authentic Controls > Refresh database to load the update."
+        Write-Host "SimHub is running. Use As Driven > Refresh database to load the update."
     }
 }
 finally {
     Remove-VerifiedTree ([System.IO.Path]::GetTempPath()) $extractionRoot
-    Remove-VerifiedTree $authenticControlsRoot $stagingRoot
+    Remove-VerifiedTree $asDrivenRoot $stagingRoot
 }

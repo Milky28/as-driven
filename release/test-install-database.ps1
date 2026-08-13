@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 $packageFile = [System.IO.Path]::GetFullPath($PackagePath)
 $testRoot = Join-Path ([System.IO.Path]::GetTempPath()) (
-    "AuthenticControlsDatabaseInstallerTest-" + [Guid]::NewGuid().ToString("N"))
+    "AsDrivenDatabaseInstallerTest-" + [Guid]::NewGuid().ToString("N"))
 $tempParent = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath()).TrimEnd('\') + '\'
 $resolvedTestRoot = [System.IO.Path]::GetFullPath($testRoot)
 if (-not $resolvedTestRoot.StartsWith(
@@ -21,11 +21,11 @@ try {
     $simHubRoot = Join-Path $testRoot "SimHub"
     New-Item -ItemType Directory -Path $simHubRoot | Out-Null
     New-Item -ItemType File -Path (Join-Path $simHubRoot "SimHubWPF.exe") | Out-Null
-    $pluginPath = Join-Path $simHubRoot "AuthenticControls.Plugin.dll"
+    $pluginPath = Join-Path $simHubRoot "AsDriven.Plugin.dll"
     Set-Content -LiteralPath $pluginPath -Value "plugin-sentinel" -Encoding ASCII
     $pluginHash = (Get-FileHash -LiteralPath $pluginPath -Algorithm SHA256).Hash
 
-    $oldDataRoot = Join-Path $simHubRoot "PluginsData\AuthenticControls\Database\data\v1"
+    $oldDataRoot = Join-Path $simHubRoot "PluginsData\AsDriven\Database\data\v1"
     New-Item -ItemType Directory -Path $oldDataRoot -Force | Out-Null
     '{"dataset_version":"0.3.12"}' |
         Set-Content -LiteralPath (Join-Path $oldDataRoot "index.json") -Encoding UTF8
@@ -37,10 +37,10 @@ try {
         -BackupDirectory $backupRoot
 
     $installedIndexPath = Join-Path $simHubRoot (
-        "PluginsData\AuthenticControls\Database\data\v1\index.json")
+        "PluginsData\AsDriven\Database\data\v1\index.json")
     $installedIndex = Get-Content -LiteralPath $installedIndexPath -Raw | ConvertFrom-Json
     $packageRootName = [System.IO.Path]::GetFileNameWithoutExtension($packageFile)
-    $expectedVersion = $packageRootName.Substring("authentic-controls-db-".Length)
+    $expectedVersion = $packageRootName.Substring("as-driven-db-".Length)
     if ([string]$installedIndex.dataset_version -ne $expectedVersion) {
         throw "Installer test expected dataset $expectedVersion but found $($installedIndex.dataset_version)."
     }
@@ -52,12 +52,12 @@ try {
     if ([string]$backupIndex.dataset_version -ne "0.3.12") {
         throw "The database-only installer did not preserve the previous dataset backup."
     }
-    if (Get-ChildItem -LiteralPath (Join-Path $simHubRoot "PluginsData\AuthenticControls") `
+    if (Get-ChildItem -LiteralPath (Join-Path $simHubRoot "PluginsData\AsDriven") `
         -Directory -Filter ".Database-previous-*") {
         throw "The database-only installer left a previous-directory swap artifact behind."
     }
 
-    $badPackage = Join-Path $testRoot "authentic-controls-db-corrupt-checksum.zip"
+    $badPackage = Join-Path $testRoot "as-driven-db-corrupt-checksum.zip"
     Copy-Item -LiteralPath $packageFile -Destination $badPackage
     ("0" * 64) + "  " + [System.IO.Path]::GetFileName($badPackage) |
         Set-Content -LiteralPath "$badPackage.sha256" -Encoding ASCII

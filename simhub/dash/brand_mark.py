@@ -1,4 +1,4 @@
-"""Deterministic brand-mark candidates for the Authentic Controls plugin.
+"""Deterministic brand-mark candidates for the As Driven plugin.
 
 The production mark is a checked-in PNG that cannot be reviewed in a diff. These
 candidates are generated from code the same way the control icons are, so a
@@ -80,8 +80,8 @@ def build(variant: str, *, size: int = 128, on_dark: bool = False) -> bytes:
 PRODUCTION_VARIANT = "rim-lever"
 _REPO = Path(__file__).resolve().parents[2]
 PRODUCTION_TARGETS = (
-    (_REPO / "simhub" / "AuthenticControls.Plugin" / "Assets"
-     / "authentic-controls-mark.png", 512),
+    (_REPO / "simhub" / "AsDriven.Plugin" / "Assets"
+     / "as-driven-mark.png", 512),
     (_REPO / "simhub" / "dash" / "assets" / "brand-mark.png", 128),
 )
 

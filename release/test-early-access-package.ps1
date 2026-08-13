@@ -34,7 +34,7 @@ try {
         throw "The early-access package manifests are missing."
     }
     $releaseManifest = Get-Content -LiteralPath $releaseManifestPath -Raw | ConvertFrom-Json
-    if ([string]$releaseManifest.package_format -ne "authentic-controls-simhub" `
+    if ([string]$releaseManifest.package_format -ne "as-driven-simhub" `
         -or [string]$releaseManifest.release_channel -ne "early-access" `
         -or [string]$releaseManifest.plugin_version -notmatch '^\d+\.\d+\.\d+$' `
         -or [string]$releaseManifest.bundled_dataset_version -notmatch '^\d+\.\d+\.\d+$') {
@@ -62,11 +62,11 @@ try {
         }
     }
 
-    $pluginPackage = Join-Path $packageRoot "simhub\dist\AuthenticControls"
+    $pluginPackage = Join-Path $packageRoot "simhub\dist\AsDriven"
     foreach ($requiredPath in @(
-        "AuthenticControls.Plugin.dll",
-        "AuthenticControls.Core.dll",
-        "PluginsData\AuthenticControls\Database\data\v1\index.json",
+        "AsDriven.Plugin.dll",
+        "AsDriven.Core.dll",
+        "PluginsData\AsDriven\Database\data\v1\index.json",
         "DashTemplates",
         "OverlayLayouts"
     )) {
