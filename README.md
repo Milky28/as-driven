@@ -86,7 +86,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.23 contains 93 reviewed records. Its newest records complete the
+Dataset 0.3.24 contains 101 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.23 contains 93 curated AMS2 records promoted through the reviewed
+Dataset 0.3.24 contains 101 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -279,6 +279,11 @@ confidence as the configuration modeled in AMS2. Verifying these bases makes the
 R89C and 962C Low Downforce identities inheritance-ready.
 Dataset 0.3.23 promotes those two as explicit Low Downforce aliases, again without
 driving and without changing any control value.
+Dataset 0.3.24 promotes the first contemporary GT batch: seven paddle-shift GT3
+cars whose controls proved identical, and the Ginetta G55 GT3, which AMS2 classes
+as GT Open and which uses a sequential lever and needs the clutch to pull away.
+Its throttle lift and manual blip stay unknown because a lever paired with
+automatic cut and blip has no precedent among curated cars.
 
 ## Licensing
 

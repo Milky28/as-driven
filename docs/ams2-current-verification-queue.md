@@ -1,5 +1,25 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.24 (contemporary GT batch 03)
+
+Eight GT cars, promoted through `import-observation` and `promote-observation`.
+
+Seven are paddle-shift GT3 cars with identical controls: clutch-free move-off,
+six paddle gears, automatic cut and blip. BMW M4 GT3 and M6 GT3, Mercedes-AMG
+GT3 and GT3 Evo, Nissan GT-R NISMO GT3, and Porsche 911 GT3 R (991.2) and 911
+GT3 R (992). Each carries a manufacturer source for its six-speed sequential
+transmission; BMW state that the M4 GT3 has no clutch pedal at all, which
+corroborates the clutch-free move-off rather than merely matching it.
+
+Ginetta G55 GT3 is the outlier and was verified independently: AMS2 classes it
+as GT Open, it is shifted by a sequential lever, and it requires the clutch to
+pull away. The drive detected automatic cut and blip despite the lever, a
+pairing with no precedent among curated cars, so its throttle lift and manual
+blip stay `unknown` rather than being inferred.
+
+Verifying the BMW M4 GT3 and Porsche 992 GT3 R makes their `- Low Downforce`
+identities inheritance-ready.
+
 ## Completed in dataset 0.3.23 (aero inheritance, no driving)
 
 `Nissan R89C - Low Downforce` and `Porsche 962C - Low Downforce` became explicit

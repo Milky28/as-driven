@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.ginetta-g55-gt3",
+  "identity": {
+    "display_name": "Ginetta G55 GT3",
+    "manufacturer": "Ginetta",
+    "model": "G55 GT3",
+    "year": {
+      "from": 2012,
+      "label": "2012 GT3 specification"
+    },
+    "class": "GTOpen",
+    "real_world_identity_notes": "British customer racing car introduced in 2012 with a Ginetta Racing 4.35 litre V8 and a Hewland six-speed. Unlike every other car in this batch it is driven through a sequential lever rather than paddles, and it requires the clutch to pull away. The reviewed source does not differentiate the GT3 gearbox type from the Cup car sequential manual, and its paddle-shift description applies to the later G55 GTA rather than this car.",
+    "variant": "AMS2 GT Open representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "Unlike the paddle-shift GT3 cars this one is shifted by a sequential lever and requires the clutch to move off from rest.",
+      "The drive detected automatic cut and automatic blip despite the sequential lever. That pairing has no precedent among curated cars, so the upshift throttle lift and the downshift manual blip are deliberately left unknown rather than inferred from the automation."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ginetta G55 GT3"
+        },
+        {
+          "kind": "class-id",
+          "value": "GTOpen"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g55-gt3.20260813t155637372z-2d1a84f9 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "wikipedia.ginetta-g55",
+        "ams2.local-live-ginetta-g55-gt3-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The real-world Hewland six-speed and 2012 GT3 specification are supported by a registered secondary source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.ginetta-g55",
+          "ams2.local-live-ginetta-g55-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered secondary source establishes the 2012 GT3 specification, its V8 and its Hewland six-speed, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.ginetta-g55",
+          "ams2.local-live-ginetta-g55-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source establishes a Hewland six-speed and the live drive confirmed six gears through a visible sequential lever. The source does not state whether the GT3 uses a lever or paddles, so the actuation rests on direct cockpit observation."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-ginetta-g55-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

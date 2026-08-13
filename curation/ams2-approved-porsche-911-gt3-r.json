@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.24",
+  "approved_at": "2026-08-13",
+  "record_id": "ams2.porsche-911-gt3-r",
+  "telemetry_name": "Porsche 911 GT3 R",
+  "telemetry_class": "GT3",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.porsche-911-gt3-r.20260813t161631591z-4b6f6c96",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Controls were directly observed with assists disabled; the real-world transmission is supported by a registered source.",
+  "scope_notes": "Single exact identity from one guided-verification drive."
+}
