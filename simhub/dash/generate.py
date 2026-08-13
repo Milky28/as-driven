@@ -660,7 +660,7 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
                 ),
                 factory.text(
                     "ContributionCta",
-                    "CONTRIBUTE IN AUTHENTIC CONTROLS",
+                    "CONTRIBUTE IN AS DRIVEN",
                     left + 10,
                     cta_top + 2,
                     factory.width - 2 * left - 20,

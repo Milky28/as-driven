@@ -26,7 +26,7 @@ def _write_json(path: Path, payload: object) -> None:
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="authentic-controls-db")
+    parser = argparse.ArgumentParser(prog="as-driven-db")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     validate = subparsers.add_parser("validate", help="validate the curated repository")

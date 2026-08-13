@@ -65,7 +65,7 @@ Dash Studio templates, overlay layouts, or settings. Restart SimHub or use
 The ZIP's adjacent `.sha256` file can be checked before installation:
 
 ```powershell
-Get-FileHash .\authentic-controls-simhub-0.15.0-early-access.zip -Algorithm SHA256
+Get-FileHash .\as-driven-simhub-0.16.0-early-access.zip -Algorithm SHA256
 ```
 
 Compare the displayed hash with the value in the downloaded `.sha256` file.
