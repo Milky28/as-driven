@@ -1,0 +1,153 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.chevrolet-omega-stock-car-1999",
+  "identity": {
+    "display_name": "Chevrolet Omega Stock Car 1999",
+    "manufacturer": "Chevrolet",
+    "model": "Omega Stock Car",
+    "year": {
+      "from": 1999,
+      "label": "1999 Stock Car Brasil season"
+    },
+    "class": "StockCar99",
+    "real_world_identity_notes": "Stock Car Brasil entry from the Omega era that ran from 1994 to 1999. The 1999 cars kept a heavily modified straight six derived from the 1979 Opala rather than the V8 introduced in 2001, and 1999 was the last season built on production-car chassis. The reviewed source does not document the gearbox, so its five H-pattern gears rest on direct observation rather than a specification.",
+    "variant": "AMS2 Stock Car Brasil 1999 representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+      "The gate was observed as a standard H rather than a dogleg, unlike the period European touring cars in this batch.",
+      "The registered source does not document the gearbox, so the transmission rests on the guided drive alone."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Omega Stock Car 1999"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCar99"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.chevrolet-omega-stock-car-1999.20260813t204024023z-7243ac0f by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "wikipedia.chevrolet-omega",
+        "ams2.local-live-chevrolet-omega-stock-car-1999-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.chevrolet-omega",
+          "ams2.local-live-chevrolet-omega-stock-car-1999-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.chevrolet-omega",
+          "ams2.local-live-chevrolet-omega-stock-car-1999-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The source establishes the 1999 Omega Stock Car identity and its straight-six engine but not its transmission. The five gears and H-pattern gate come from the live drive, and the maintainer recorded the gate as a standard H rather than a dogleg."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-omega-stock-car-1999-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-omega-stock-car-1999-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

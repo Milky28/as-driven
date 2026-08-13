@@ -1,0 +1,316 @@
+{
+  "review": "ams2-touring-stock-batch-06",
+  "dataset_version": "0.3.28",
+  "approved_at": "2026-08-13",
+  "records": [
+    {
+      "record_id": "ams2.bmw-m1-procar",
+      "bundle": "build/observation-bundles/ams2.bmw-m1-procar.json",
+      "manufacturer": "BMW",
+      "model": "M1 Procar",
+      "variant": "AMS2 Procar representation",
+      "year": {
+        "from": 1979,
+        "label": "1979 Procar championship"
+      },
+      "real_world_identity_notes": "Mid-engined racing version of the M1 built for the one-make Procar series that supported Formula One in 1979 and 1980. It keeps the road car's ZF five-speed, whose first gear sits on a dogleg so that first, third and fifth share the lower plane, with revised ratios and an added oil cooler for racing.",
+      "real_world_source_refs": [
+        "wikipedia.bmw-m1",
+        "supercars-net.dogleg-transmissions"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The sources establish a ZF five-speed with a dogleg first gear, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "shift_pattern": "dogleg-h"
+      },
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+        "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the gearbox and its gate are supported by registered sources.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://en.wikipedia.org/wiki/BMW_M1",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, five H-pattern gears on a dogleg gate, no automatic cut or blip, round rim with no display or shift lights.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": [
+            "ams2.local-live-bmw-m1-procar-controls.1.6.9.91"
+          ],
+          "confidence": "high",
+          "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+        }
+      ]
+    },
+    {
+      "record_id": "ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm",
+      "bundle": "build/observation-bundles/ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm.json",
+      "manufacturer": "Mercedes-Benz",
+      "model": "190E 2.5-16 Evolution II",
+      "variant": "AMS2 DTM representation",
+      "year": {
+        "from": 1990,
+        "label": "1990 DTM homologation special"
+      },
+      "real_world_identity_notes": "DTM homologation special built to beat the E30 M3 in the German championship. The 2.5-16 Evolution cars use a dog-leg five-speed Getrag manual in which first gear sits left and rearward, deliberately moved out of the racing shift plane, with a limited-slip differential.",
+      "real_world_source_refs": [
+        "mercedes-190e-evo.dogleg-getrag",
+        "trade-unique-cars.e30-m3-190e"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The sources establish a dog-leg five-speed Getrag manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "shift_pattern": "dogleg-h"
+      },
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+        "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the gearbox and its gate are supported by registered sources.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://notenoughcylinders.com/en/mercedes-190e-evolution-ii-dtm-history/",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, five H-pattern gears on a dogleg gate, no automatic cut or blip, round rim with no display or shift lights.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": [
+            "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+          ],
+          "confidence": "high",
+          "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+        }
+      ]
+    },
+    {
+      "record_id": "ams2.bmw-m3-sport-evo-group-a",
+      "bundle": "build/observation-bundles/ams2.bmw-m3-sport-evo-group-a.json",
+      "manufacturer": "BMW",
+      "model": "M3 Sport Evolution",
+      "variant": "AMS2 Group A representation",
+      "year": {
+        "from": 1990,
+        "label": "1990 Group A homologation special"
+      },
+      "real_world_identity_notes": "Final and most extreme E30 M3 homologation special, built for Group A touring car racing against the 190E Evolution. It uses a Getrag 265 five-speed dogleg manual with a limited-slip differential.",
+      "real_world_source_refs": [
+        "trade-unique-cars.e30-m3-190e",
+        "supercars-net.dogleg-transmissions"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The sources establish a Getrag 265 five-speed dogleg manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "shift_pattern": "dogleg-h"
+      },
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+        "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the gearbox and its gate are supported by registered sources.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://tradeuniquecars.com.au/feature-cars/2206/touring-cars-bmw-e30-m3-mercedes-benz-190e",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, five H-pattern gears on a dogleg gate, no automatic cut or blip, round rim with no display or shift lights.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": [
+            "ams2.local-live-bmw-m3-sport-evo-group-a-controls.1.6.9.91"
+          ],
+          "confidence": "high",
+          "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+        }
+      ]
+    },
+    {
+      "record_id": "ams2.chevrolet-omega-stock-car-1999",
+      "bundle": "build/observation-bundles/ams2.chevrolet-omega-stock-car-1999.json",
+      "manufacturer": "Chevrolet",
+      "model": "Omega Stock Car",
+      "variant": "AMS2 Stock Car Brasil 1999 representation",
+      "year": {
+        "from": 1999,
+        "label": "1999 Stock Car Brasil season"
+      },
+      "real_world_identity_notes": "Stock Car Brasil entry from the Omega era that ran from 1994 to 1999. The 1999 cars kept a heavily modified straight six derived from the 1979 Opala rather than the V8 introduced in 2001, and 1999 was the last season built on production-car chassis. The reviewed source does not document the gearbox, so its five H-pattern gears rest on direct observation rather than a specification.",
+      "real_world_source_refs": [
+        "wikipedia.chevrolet-omega"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The source establishes the 1999 Omega Stock Car identity and its straight-six engine but not its transmission. The five gears and H-pattern gate come from the live drive, and the maintainer recorded the gate as a standard H rather than a dogleg.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+        "The gate was observed as a standard H rather than a dogleg, unlike the period European touring cars in this batch.",
+        "The registered source does not document the gearbox, so the transmission rests on the guided drive alone."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled. The identity and engine are sourced, but no reviewed source documents the gearbox, so the transmission is recorded at medium confidence.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://en.wikipedia.org/wiki/Chevrolet_Omega",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, five H-pattern gears on a standard gate, no automatic cut or blip, round rim with no display or shift lights.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": [
+            "ams2.local-live-chevrolet-omega-stock-car-1999-controls.1.6.9.91"
+          ],
+          "confidence": "high",
+          "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+        }
+      ]
+    },
+    {
+      "record_id": "ams2.super-v8",
+      "bundle": "build/observation-bundles/ams2.super-v8.json",
+      "manufacturer": "Reiza",
+      "model": "Super V8",
+      "variant": "AMS2 Australian Supercars representation",
+      "year": {
+        "label": "Contemporary Supercars architecture"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised take on the Australian Supercars category. The real championship runs an Albins six-speed sequential transaxle, a 1100 Nm unit developed for the Next Generation cars in 2012 that integrates gearbox, differential and drive-axle components, and the championship confirmed for Gen3 that the manual stick-shift mechanism is retained rather than moving to paddles. That is why this car is shifted by a lever where a modern GT would use paddles. The dataset does not claim the AMS2 labels are an exact identity match for any specific entrant.",
+      "real_world_source_refs": [
+        "supercars.gen3-manual-stick-shift",
+        "albins.st6-sequential-transaxle"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the category's six-speed sequential transaxle and retained stick shift are established by the championship and the transmission manufacturer.",
+      "identity_basis": "The championship and transmission manufacturer establish the category architecture, and the exact simulator identity was observed live. The car is a fictionalised representation rather than a named entrant.",
+      "specification_basis": "The category uses an Albins six-speed sequential transaxle with a retained manual stick shift, and the live drive confirmed six gears through a sequential lever with the clutch required to move off.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "The category deliberately retains a manual stick shift on a six-speed sequential transaxle, so the car is shifted by a lever rather than paddles.",
+        "No throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with automatic cut detected. No automatic blip was detected, so the driver supplies the downshift blip, matching the curated convention for a sequential stick without automatic blip."
+      ],
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "confidence_notes": "Controls were directly observed with assists disabled; the category's sequential transaxle and retained stick shift are supported by registered sources.",
+      "scope_notes": "Single exact identity from one guided-verification drive. The car is Reiza's fictionalised Supercars representation and is not claimed to match a specific entrant.",
+      "live_source_url": "https://www.supercars.com/news/manual-stick-shift-system-confirmed-for-gen3",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six gears through a sequential lever, automatic cut detected, no automatic blip, round rim with no display or shift lights."
+    },
+    {
+      "record_id": "ams2.toyota-corolla-stock-car-2022",
+      "bundle": "build/observation-bundles/ams2.toyota-corolla-stock-car-2022.json",
+      "manufacturer": "Toyota",
+      "model": "Corolla Stock Car",
+      "variant": "AMS2 Stock Car Pro Series 2022 representation",
+      "year": {
+        "from": 2022,
+        "label": "2022 Stock Car Pro Series"
+      },
+      "real_world_identity_notes": "Stock Car Pro Series entry on the series' control platform, which pairs a common chassis and V8 with a six-speed sequential paddle-shift transmission. The registered regulations describe the current platform rather than the 2022 season specifically, and this car is reviewed independently of the curated 2024 Corolla rather than inheriting from it.",
+      "real_world_source_refs": [
+        "cba.stock-car-pro-2024.technical-regulations",
+        "cba.stock-car-pro-2024.platform-annex"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the series platform's six-speed sequential paddle transmission is established by the registered regulations.",
+      "identity_basis": "The series regulations establish the control platform and its transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The regulations establish a six-speed sequential paddle-shift transmission on the series control platform, and the live drive confirmed six paddle gears with clutch-free move-off.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip.",
+        "The registered regulations document the current control platform rather than the 2022 season specifically."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the series regulations establish the control platform's transmission.",
+      "scope_notes": "Single exact identity from one guided-verification drive, reviewed independently of the curated 2024 Corolla.",
+      "live_source_url": "https://www.stockcar.com.br/",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
+    }
+  ]
+}

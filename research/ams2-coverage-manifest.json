@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.27",
+  "dataset_version": "0.3.28",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,14 +15,14 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 112,
-    "covered_exact_identities": 150,
-    "uncovered_identities": 75,
-    "full_guided_verifications": 64,
+    "curated_records": 118,
+    "covered_exact_identities": 156,
+    "uncovered_identities": 69,
+    "full_guided_verifications": 58,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 150,
-      "full-guided-verification": 64,
+      "covered-exact": 156,
+      "full-guided-verification": 58,
       "out-of-scope": 1,
       "retired-identity": 3,
       "third-party-content": 6
@@ -30,12 +30,11 @@
     "full_verifications_by_family": {
       "club-road": 10,
       "open-wheel": 42,
-      "other": 6,
-      "touring-stock": 6
+      "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 40,
-      "legacy-controls-candidate-available": 24
+      "independent-control-research-needed": 35,
+      "legacy-controls-candidate-available": 23
     }
   },
   "entries": [
@@ -319,10 +318,10 @@
       "telemetry_name": "BMW M1 Procar",
       "car_id": "BMW M1 Procar",
       "identity_file": "BMW M1 Procar.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.bmw-m1-procar",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1719448787.74672,
       "legacy_sheet_candidate": {
@@ -361,13 +360,13 @@
       "telemetry_name": "BMW M3 Sport Evo Group A",
       "car_id": "BMW M3 Sport Evo Group A",
       "identity_file": "BMW M3 Sport Evo Group A.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.bmw-m3-sport-evo-group-a",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1733533976.2966456,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "BMW M4 GT3",
@@ -745,13 +744,13 @@
       "telemetry_name": "Chevrolet Omega Stock Car 1999",
       "car_id": "Chevrolet Omega Stock Car 1999",
       "identity_file": "Chevrolet Omega Stock Car 1999.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.chevrolet-omega-stock-car-1999",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736037515.4037943,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Copa Fusca",
@@ -2251,13 +2250,13 @@
       "telemetry_name": "Mercedes-Benz 190E 2.5-16 Evo II DTM",
       "car_id": "Mercedes-Benz 190E 2.5-16 Evo II DTM",
       "identity_file": "Mercedes-Benz 190E 2.5-16 Evo II DTM.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1719785976.5184302,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Mercedes-Benz CLK LM",
@@ -2983,25 +2982,25 @@
       "telemetry_name": "Super V8",
       "car_id": "Super V8",
       "identity_file": "Super V8.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": 5,
-      "identity_file_modified_at": 1732063078.9337556,
-      "research_readiness": "independent-control-research-needed"
+      "related_record_id": "ams2.super-v8",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 6,
+      "identity_file_modified_at": 1786654503.6693127,
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Toyota Corolla Stock Car 2022",
       "car_id": "Toyota Corolla Stock Car 2022",
       "identity_file": "Toyota Corolla Stock Car 2022.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": 5,
-      "identity_file_modified_at": 1719028670.5869172,
-      "research_readiness": "independent-control-research-needed"
+      "related_record_id": "ams2.toyota-corolla-stock-car-2022",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 6,
+      "identity_file_modified_at": 1786654503.6818326,
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Toyota Corolla Stock Car 2024",

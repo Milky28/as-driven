@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.27 contains 112 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.28 contains 118 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,19 +12,19 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 150 observed identities are covered exactly by curated records.
-- 75 observed identities are not covered.
-- 66 of those need full guided verification, and they are now the only work
+- 156 observed identities are covered exactly by curated records.
+- 69 observed identities are not covered.
+- 58 of those need full guided verification, and they are now the only work
   that requires driving.
-- 39 of those 85 have an exact legacy spreadsheet candidate that can seed
+- 23 of those 58 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 46 require independent control research in addition to current-game testing.
-- No Low Downforce identity is inheritance-ready: dataset 0.3.25 promoted the two
-  that batch 03 unblocked. Three more wait on unverified bases.
-- Seven identities are closed by explicit review rather than driving: three
-  retired pre-rename observations of official cars, three third-party mod
-  identities, and one out of product scope. Each carries a written basis in
+- 35 require independent control research in addition to current-game testing.
+- 1 Low Downforce identities wait on unverified base cars; none is
+  inheritance-ready.
+- 10 identities are closed by explicit review rather than driving: retired
+  pre-rename observations of official cars, third-party mod content, and one
+  vehicle out of product scope. Each carries a written basis in
   `research/ams2-identity-decisions.json`.
 
 Every review-only queue is now empty. Dataset 0.3.20 promoted the seven

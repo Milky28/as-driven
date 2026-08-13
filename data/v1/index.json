@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.27",
+  "dataset_version": "0.3.28",
   "released_at": "2026-08-13",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -19,7 +19,9 @@
     "cars/ams2.audi-r8-v10-gt.json",
     "cars/ams2.audi-v8-quattro-dtm.json",
     "cars/ams2.bmw-m-hybrid-v8.json",
+    "cars/ams2.bmw-m1-procar.json",
     "cars/ams2.bmw-m3-e46-gtr.json",
+    "cars/ams2.bmw-m3-sport-evo-group-a.json",
     "cars/ams2.bmw-m4-gt3.json",
     "cars/ams2.bmw-m4-gt4.json",
     "cars/ams2.bmw-m6-gt3.json",
@@ -34,6 +36,7 @@
     "cars/ams2.chevrolet-corvette-gtp.json",
     "cars/ams2.chevrolet-corvette-z06-gt3r.json",
     "cars/ams2.chevrolet-cruze-stock-car-2024.json",
+    "cars/ams2.chevrolet-omega-stock-car-1999.json",
     "cars/ams2.courage-c60-hybrid.json",
     "cars/ams2.dallara-sp1.json",
     "cars/ams2.dodge-viper-acr.json",
@@ -84,6 +87,7 @@
     "cars/ams2.mercedes-amg-gt3-evo.json",
     "cars/ams2.mercedes-amg-gt3.json",
     "cars/ams2.mercedes-amg-gt4.json",
+    "cars/ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm.json",
     "cars/ams2.metalmoro-ajr-chevrolet.json",
     "cars/ams2.metalmoro-ajr-gen2-chevrolet.json",
     "cars/ams2.metalmoro-mrx-duratec-p4.json",
@@ -114,6 +118,8 @@
     "cars/ams2.stock-usa-gen3-lm.json",
     "cars/ams2.stock-usa-gen3-superspeedway.json",
     "cars/ams2.super-trophy-trucks.json",
+    "cars/ams2.super-v8.json",
+    "cars/ams2.toyota-corolla-stock-car-2022.json",
     "cars/ams2.toyota-corolla-stock-car-2024.json",
     "cars/ams2.tvr-tuscan-t400r-gt2.json"
   ]

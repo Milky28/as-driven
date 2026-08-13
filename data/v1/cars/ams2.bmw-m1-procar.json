@@ -1,0 +1,155 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.bmw-m1-procar",
+  "identity": {
+    "display_name": "BMW M1 Procar",
+    "manufacturer": "BMW",
+    "model": "M1 Procar",
+    "year": {
+      "from": 1979,
+      "label": "1979 Procar championship"
+    },
+    "class": "Procar",
+    "real_world_identity_notes": "Mid-engined racing version of the M1 built for the one-make Procar series that supported Formula One in 1979 and 1980. It keeps the road car's ZF five-speed, whose first gear sits on a dogleg so that first, third and fifth share the lower plane, with revised ratios and an added oil cooler for racing.",
+    "variant": "AMS2 Procar representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "dogleg-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+      "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M1 Procar"
+        },
+        {
+          "kind": "class-id",
+          "value": "Procar"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.bmw-m1-procar.20260813t202518185z-ae57bdec by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "wikipedia.bmw-m1",
+        "supercars-net.dogleg-transmissions",
+        "ams2.local-live-bmw-m1-procar-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.bmw-m1",
+          "supercars-net.dogleg-transmissions",
+          "ams2.local-live-bmw-m1-procar-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.bmw-m1",
+          "supercars-net.dogleg-transmissions",
+          "ams2.local-live-bmw-m1-procar-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The sources establish a ZF five-speed with a dogleg first gear, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-bmw-m1-procar-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-bmw-m1-procar-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

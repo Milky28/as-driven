@@ -86,7 +86,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.27 contains 112 reviewed records. Its newest records complete the
+Dataset 0.3.28 contains 118 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.27 contains 112 curated AMS2 records promoted through the reviewed
+Dataset 0.3.28 contains 118 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -295,6 +295,12 @@ requires clutch input to move off.
 Dataset 0.3.27 completes the GT family with two late-1990s Le Mans GT1 cars, two
 modern GTE cars, and the Puma GTE, which despite its name is a 1970s Brazilian
 road car on Volkswagen running gear with four H-pattern gears and no automation.
+Dataset 0.3.28 promotes the touring and stock batch, whose three period European
+cars carry the first dogleg gates recorded from a guided drive rather than from a
+specification: the BMW M1 Procar, the Mercedes-Benz 190E 2.5-16 Evolution II and
+the BMW M3 Sport Evolution. Super V8 is Reiza's fictionalised Australian
+Supercars car, which retains a manual stick shift on a six-speed sequential
+transaxle.
 
 ## Licensing
 

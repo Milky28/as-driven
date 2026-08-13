@@ -1,5 +1,33 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.28 (touring and stock batch 06)
+
+Six cars, and the first records whose gate pattern comes from a guided drive
+rather than a reviewer reading a specification.
+
+BMW M1 Procar, Mercedes-Benz 190E 2.5-16 Evolution II and BMW M3 Sport Evolution
+were all observed with a dogleg gate in the cockpit, and all three are
+independently corroborated: a ZF five-speed with first out of the shift plane for
+the M1, a dog-leg Getrag for the 190E, and a Getrag 265 for the M3. Each needs
+the clutch to pull away, a throttle lift to upshift and a manual blip to
+downshift.
+
+Chevrolet Omega Stock Car 1999 shares that manual technique but was observed on a
+standard gate. Its identity and straight-six engine are sourced; no reviewed
+source documents its gearbox, so its transmission rests on the drive alone and
+the record is medium confidence.
+
+Super V8 is Reiza's fictionalised Australian Supercars car. The championship
+confirmed that Gen3 retains a manual stick shift on the Albins six-speed
+sequential transaxle, which is why it is shifted by a lever where a modern GT
+uses paddles.
+
+Toyota Corolla Stock Car 2022 is the modern outlier: paddles, six gears and full
+automation, reviewed independently of the curated 2024 Corolla.
+
+Zakspeed Ford Capri Group 5 and BMW 320 Turbo Gr5 were dropped from the batch as
+third-party content that is not installed.
+
 ## Completed in dataset 0.3.27 (historic GT and GTE batch 05)
 
 Five cars that complete the GT family, splitting three ways.
