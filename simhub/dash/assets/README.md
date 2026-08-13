@@ -1,8 +1,19 @@
 # Popup raster assets
 
-`brand-mark.png` uses the selected wheel, physical lever, and simplified H-gate
-identity on the established blue badge. The same transparent ImageGen-derived
-master supplies the SimHub sidebar and settings-page marks.
+`brand-mark.png` is generated, not hand-cropped. It is the `rim-lever` silhouette
+from `simhub/dash/brand_mark.py`: a thin rim with a raked lever set off-centre
+inside it. Regenerate both shipped copies, this one and the plugin's embedded
+`Assets/authentic-controls-mark.png`, with:
+
+```powershell
+python simhub/dash/brand_mark.py --production
+```
+
+It replaced an ImageGen-derived mark that read as a helmeted face, because a
+closed rim, symmetric spokes, a centred mass, and a bar cluster below it stacked
+into brow, nose, and mouth. Offsetting the lever and dropping the spokes removes
+the reading; `docs/design/2026-08-12-mark-candidates/` records the alternatives
+and why the first attempt failed.
 
 These 128x128 PNG files are the production crops of the user-reviewed raster
 icon sheets generated with the built-in ImageGen workflow. The crops retain a

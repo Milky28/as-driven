@@ -74,16 +74,50 @@ def build(variant: str, *, size: int = 128, on_dark: bool = False) -> bytes:
     return canvas.png()
 
 
+# The selected production silhouette, and the two places it ships. The plugin
+# embeds its copy and downscales to 24 and 64 pixels at runtime; the dashboard
+# generator packs a 128-pixel raster.
+PRODUCTION_VARIANT = "rim-lever"
+_REPO = Path(__file__).resolve().parents[2]
+PRODUCTION_TARGETS = (
+    (_REPO / "simhub" / "AuthenticControls.Plugin" / "Assets"
+     / "authentic-controls-mark.png", 512),
+    (_REPO / "simhub" / "dash" / "assets" / "brand-mark.png", 128),
+)
+
+
+def write_production() -> list[Path]:
+    """Write the selected mark to both shipped locations."""
+    written = []
+    for path, size in PRODUCTION_TARGETS:
+        path.write_bytes(build(PRODUCTION_VARIANT, size=size))
+        written.append(path)
+    return written
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render brand-mark candidates.")
-    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--size", type=int, default=128)
     parser.add_argument(
         "--on-dark",
         action="store_true",
         help="render on an ink disk so a white mark is visible in review",
     )
+    parser.add_argument(
+        "--production",
+        action="store_true",
+        help=f"write the selected {PRODUCTION_VARIANT} mark to both shipped assets",
+    )
     args = parser.parse_args()
+
+    if args.production:
+        for path in write_production():
+            print(f"wrote {path.relative_to(_REPO).as_posix()}")
+        return
+
+    if args.output is None:
+        raise SystemExit("--output is required unless --production is given")
     args.output.mkdir(parents=True, exist_ok=True)
     for variant in VARIANTS:
         path = args.output / f"mark-{variant}-{args.size}.png"
