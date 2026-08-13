@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.17",
+  "dataset_version": "0.3.20",
   "approved_at": "2026-08-12",
   "record_id": "ams2.mclaren-720s-gt3-evo",
   "telemetry_name": "McLaren 720S GT3 Evo",
@@ -23,5 +23,11 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed guided observation for McLaren 720S GT3 Evo."
+  "scope_notes": "Reviewed guided observation for McLaren 720S GT3 Evo. 'McLaren 720S GT3 Evo - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "additional_telemetry_names": [
+    {
+      "value": "McLaren 720S GT3 Evo - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ]
 }

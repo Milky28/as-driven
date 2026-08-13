@@ -49,7 +49,8 @@
       "AMS2 1.6.9.91 accepted sequential-stick shifts without clutch once moving and required clutch engagement to move from a stop.",
       "The observed automatic cut and blip are medium-confidence perceptual tests; no input or engine-throttle telemetry trace was recorded.",
       "FIA homologation documents the original six-speed manual Borg-Warner T56, while Carsport Holland documents that at least one privateer Viper was converted from the Oreca H-pattern arrangement to a Holinger sequential.",
-      "AMS2's sequential behavior is historically plausible for a privateer specification, but it must not be generalized to every Viper GTS-R and does not identify Reiza's exact reference chassis."
+      "AMS2's sequential behavior is historically plausible for a privateer specification, but it must not be generalized to every Viper GTS-R and does not identify Reiza's exact reference chassis.",
+      "'Dodge Viper GTS-R - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
   "simulators": [
@@ -59,6 +60,10 @@
         {
           "kind": "telemetry-name",
           "value": "Dodge Viper GTS-R"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Dodge Viper GTS-R - Low Downforce"
         },
         {
           "kind": "class-id",
@@ -76,7 +81,8 @@
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with a sequential shifter; the driver manually used the clutch only to move from a stop.",
           "Clutch was required to move from a stop but not for normal running shifts.",
-          "Automatic cut and blip were perceived during the live test and remain medium-confidence until telemetry-measured."
+          "Automatic cut and blip were perceived during the live test and remain medium-confidence until telemetry-measured.",
+          "'Dodge Viper GTS-R - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
       "overrides": [],
@@ -151,7 +157,8 @@
     ]
   },
   "notes": [
-    "This record deliberately preserves the distinction between original FIA homologation, documented privateer conversions, and the behavior of Reiza's simulated representation."
+    "This record deliberately preserves the distinction between original FIA homologation, documented privateer conversions, and the behavior of Reiza's simulated representation.",
+    "'Dodge Viper GTS-R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-10"
+  "updated_at": "2026-08-12"
 }

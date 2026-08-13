@@ -1,31 +1,150 @@
 {
-  "$schema": "../../../schema/v1/car-record.schema.json", "schema_version": "1.0.0", "record_id": "ams2.audi-r8-lmp1",
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.audi-r8-lmp1",
   "identity": {
-    "display_name": "Audi R8 LMP1", "manufacturer": "Audi", "model": "R8 LMP",
-    "variant": "AMS2 2005 LMP1 representation", "year": { "from": 2005, "label": "2005 LMP1 representation" }, "class": "LMP1 2005",
+    "display_name": "Audi R8 LMP1",
+    "manufacturer": "Audi",
+    "model": "R8 LMP",
+    "variant": "AMS2 2005 LMP1 representation",
+    "year": {
+      "from": 2005,
+      "label": "2005 LMP1 representation"
+    },
+    "class": "LMP1 2005",
     "real_world_identity_notes": "Secondary historical context describes a six-speed sequential transmission with electropneumatic paddle shift; exact AMS2 cockpit inspection independently confirms visible paddles. A primary technical replacement remains desirable."
   },
   "authentic_controls": {
     "transmission": {
-      "forward_gears": 6, "gearbox_type": "sequential", "shift_actuation": "sequential-paddles", "shift_pattern": "sequential",
-      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
-      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "not-required", "automatic_blip": "yes" },
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
       "standing_start_clutch": "required"
     },
-    "steering": { "wheel_rim": { "shape": "yoke", "diameter_mm": null, "source_label": "live-cockpit-flat-bottom-yoke-no-display", "notes": "Direct cockpit inspection showed a flat-bottom yoke-style rim without an integrated display; exact diameter remains unknown." } },
-    "notes": ["With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.", "All six paddle-selected gears accepted clutch-free full-throttle upshifts with automatic cut.", "Clutch-free downshifts were accepted with automatic throttle blip."]
+    "steering": {
+      "wheel_rim": {
+        "shape": "yoke",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-flat-bottom-yoke-no-display",
+        "notes": "Direct cockpit inspection showed a flat-bottom yoke-style rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "All six paddle-selected gears accepted clutch-free full-throttle upshifts with automatic cut.",
+      "Clutch-free downshifts were accepted with automatic throttle blip.",
+      "'Audi R8 LMP1 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
   },
-  "simulators": [{
-    "simulator": "ams2", "identities": [{ "kind": "telemetry-name", "value": "Audi R8 LMP1" }, { "kind": "class-id", "value": "LMP1_05" }],
-    "behavior": { "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes", "wheel_rim_type": { "normalized": "yoke", "integrated_display": "no", "shift_lights": "unknown", "open_top": "unknown", "source_label": "live-cockpit-flat-bottom-yoke-no-display" }, "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Standing-start clutch, six paddle gears, automatic cut and blip, and flat-bottom yoke-style no-display rim were directly observed."] },
-    "overrides": [], "verified_game_version": "1.6.9.91", "verified_at": "2026-08-11",
-    "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "wikipedia.audi-r8-lmp", "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"],
-    "confidence": { "level": "verified", "basis": "Exact simulator identity, modeled controls, and shift behavior were directly tested; secondary historical context supports paddle actuation but remains marked for primary-source replacement." }
-  }],
-  "provenance": { "claims": [
-    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.8.5.historical-endurance", "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"], "confidence": "verified", "basis": "Official release context and exact live CarModel/class observation establish the simulated identity." },
-    { "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"], "source_refs": ["wikipedia.audi-r8-lmp", "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"], "confidence": "high", "basis": "Provisional historical context and direct cockpit/shift observation agree on six-speed paddle sequential hardware." },
-    { "paths": ["/authentic_controls/transmission/upshift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"], "source_refs": ["ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"], "confidence": "verified", "basis": "Direct current-game testing and cockpit inspection establish technique and wheel category." }
-  ] },
-  "updated_at": "2026-08-11"
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Audi R8 LMP1"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Audi R8 LMP1 - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMP1_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "yoke",
+          "integrated_display": "no",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "live-cockpit-flat-bottom-yoke-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Standing-start clutch, six paddle gears, automatic cut and blip, and flat-bottom yoke-style no-display rim were directly observed.",
+          "'Audi R8 LMP1 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "wikipedia.audi-r8-lmp",
+        "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity, modeled controls, and shift behavior were directly tested; secondary historical context supports paddle actuation but remains marked for primary-source replacement."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.audi-r8-lmp",
+          "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Provisional historical context and direct cockpit/shift observation agree on six-speed paddle sequential hardware."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-audi-r8-lmp1-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game testing and cockpit inspection establish technique and wheel category."
+      }
+    ]
+  },
+  "updated_at": "2026-08-12",
+  "notes": [
+    "'Audi R8 LMP1 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ]
 }

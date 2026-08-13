@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.19 contains 90 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.20 contains 90 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,16 +12,16 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 110 observed identities are covered exactly by curated records.
-- 115 observed identities require some action.
+- 117 observed identities are covered exactly by curated records.
+- 108 observed identities require some action.
 - 90 currently appear to need full guided verification.
-- 44 of those 95 have an exact legacy spreadsheet candidate that can seed
+- 41 of those 90 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 51 require independent control research in addition to current-game testing.
-- Seven exact Low Downforce identities already have a curated base record and
-  can be reviewed as explicitly untested aero inheritance.
-- Ten more Low Downforce identities can inherit only after their base car is
+- 49 require independent control research in addition to current-game testing.
+- No `aero-inheritance-ready` identities remain: dataset 0.3.20 promoted the
+  last seven as explicit aliases with untested-aero disclosure.
+- Seven more Low Downforce identities can inherit only after their base car is
   verified.
 - Four unqualified/configuration identities require an explicit relationship
   review against an already curated qualified configuration.
@@ -29,6 +29,11 @@ The machine-readable queue is checked in at:
   whether to test them.
 - One whitespace-only identity needs an explicit alias review.
 - The BMW M3 Safety Car is held for a product-scope decision.
+
+`simhub_max_gears` in the manifest is a weak hint, not evidence. It is the
+highest gear index SimHub observed, so a spurious reading inflates it; the
+inventory contains values such as 42, 119, and 150. Use it to prompt a
+question, never to set a gear count.
 
 These counts describe observed telemetry identities, not guaranteed current
 selector entries. SimHub retains a file after observing a car, so an identity
@@ -38,11 +43,12 @@ can outlive a rename or removal.
 
 ### 1. Resolve inexpensive identity work
 
-Review the seven `aero-inheritance-ready`, four
-`configuration-inheritance-review`, one `formatting-only-review`, five
-`identity-history-review`, and one `special-purpose-review` entries first.
-Nothing is silently aliased. Every accepted identity remains explicit and any
-untested aero inheritance is disclosed in record notes and provenance.
+The seven `aero-inheritance-ready` entries were resolved in dataset 0.3.20.
+Four `configuration-inheritance-review`, one `formatting-only-review`, five
+`identity-history-review`, and one `special-purpose-review` entry remain, and
+none of them require driving. Nothing is silently aliased. Every accepted
+identity remains explicit and any untested aero inheritance is disclosed in
+record notes and provenance.
 
 ### 2. Verify modern prototypes
 

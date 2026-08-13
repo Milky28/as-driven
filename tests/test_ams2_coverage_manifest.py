@@ -33,18 +33,35 @@ class AMS2CoverageManifestTests(unittest.TestCase):
             (ROOT / "research" / "ams2-coverage-manifest.json").read_text(encoding="utf-8")
         )
         entries = {entry["telemetry_name"]: entry for entry in manifest["entries"]}
-        audi = entries["Audi R8 LMP1 - Low Downforce"]
-        nissan = entries["Nissan R89C - Low Downforce"]
-        self.assertEqual(audi["coverage_disposition"], "aero-inheritance-ready")
-        self.assertEqual(audi["related_record_id"], "ams2.audi-r8-lmp1")
+
+        # The rule, asserted over every aero variant rather than over one car,
+        # because an individual identity moves between states as it is promoted.
+        # An aero variant may only point at a base record once that base is
+        # curated; otherwise it stays pending, or needs its own verification
+        # when no base identity was ever observed.
+        linked = {"aero-inheritance-ready", "covered-exact"}
+        unlinked = {"aero-inheritance-after-base", "full-guided-verification"}
+        for name, entry in entries.items():
+            if not name.endswith(" - Low Downforce"):
+                continue
+            disposition = entry["coverage_disposition"]
+            if entry["related_record_id"] is None:
+                self.assertIn(disposition, unlinked, name)
+            else:
+                self.assertIn(disposition, linked, name)
+
         # A base car that is not yet curated keeps its Low Downforce alias pending.
+        nissan = entries["Nissan R89C - Low Downforce"]
         self.assertEqual(nissan["coverage_disposition"], "aero-inheritance-after-base")
         self.assertIsNone(nissan["related_record_id"])
-        # Once the base car is promoted with an explicit alias identity (as in the
-        # 0.3.19 prototype batch), the Low Downforce identity is covered exactly.
+        # Once the base car carries the alias as an explicit identity, the
+        # Low Downforce identity is covered exactly rather than inherited silently.
         bmw = entries["BMW M Hybrid V8 - Low Downforce"]
         self.assertEqual(bmw["coverage_disposition"], "covered-exact")
         self.assertEqual(bmw["related_record_id"], "ams2.bmw-m-hybrid-v8")
+        audi = entries["Audi R8 LMP1 - Low Downforce"]
+        self.assertEqual(audi["coverage_disposition"], "covered-exact")
+        self.assertEqual(audi["related_record_id"], "ams2.audi-r8-lmp1")
 
     def test_qualified_formula_does_not_create_a_silent_plain_alias(self):
         manifest = json.loads(

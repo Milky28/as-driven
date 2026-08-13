@@ -86,7 +86,7 @@ python -m authentic_controls_db import-observation observation.json --output bui
 python -m authentic_controls_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.19 contains 90 reviewed records. Its newest records complete the
+Dataset 0.3.20 contains 90 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.19 contains 90 curated AMS2 records promoted through the reviewed
+Dataset 0.3.20 contains 90 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -249,6 +249,18 @@ Dataset 0.3.18 promotes the final nine reviewed entries from that audit,
 including exact high-downforce and tyre-specific identities. The separate AMS2
 coverage manifest now classifies the larger current roster for later research
 and verification; it is not silently included in the curated dataset.
+Dataset 0.3.19 promotes the first modern-prototype verification batch: BMW M
+Hybrid V8, Porsche 963, Chevrolet Corvette GTP, MetalMoro AJR Chevrolet, and
+MetalMoro AJR Gen2 Chevrolet. The two LMDh cars use the category's spec
+seven-speed paddle transmission with automatic cut and blip, while the 1988
+IMSA GTP Corvette is the batch's only manual-technique car: a five-speed
+H-pattern requiring the clutch to pull away, a throttle lift to upshift, and a
+manual blip to downshift. The two MetalMoro prototypes are reviewed
+independently of one another rather than inherited across the generation.
+Dataset 0.3.20 promotes the seven remaining aero-inheritance-ready identities
+as explicit Low Downforce aliases of already verified base records. No control
+value changes and no record is added; each alias is disclosed as an untested
+aero configuration in its record notes and curation approval.
 
 ## Licensing
 

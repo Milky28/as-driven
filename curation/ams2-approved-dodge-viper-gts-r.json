@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.3",
+  "dataset_version": "0.3.20",
   "approved_at": "2026-08-10",
   "record_id": "ams2.dodge-viper-gts-r",
   "telemetry_name": "Dodge Viper GTS-R",
@@ -17,5 +17,12 @@
     "wheel_rim_shape": "round"
   },
   "confidence_notes": "Sequential actuation and standing-start clutch behavior were directly tested. Automatic cut and blip appeared present but were not telemetry-measured, so the promoted record marks the combined simulator behavior medium-confidence.",
-  "historical_notes": "FIA GT2-005 documents the original manual Borg-Warner T56. A first-person Carsport Holland account documents a privateer Holinger sequential conversion. Approval applies to the AMS2 representation and must not be generalized to every historical Viper GTS-R."
+  "historical_notes": "FIA GT2-005 documents the original manual Borg-Warner T56. A first-person Carsport Holland account documents a privateer Holinger sequential conversion. Approval applies to the AMS2 representation and must not be generalized to every historical Viper GTS-R.",
+  "additional_telemetry_names": [
+    {
+      "value": "Dodge Viper GTS-R - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ],
+  "scope_notes": "'Dodge Viper GTS-R - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested."
 }

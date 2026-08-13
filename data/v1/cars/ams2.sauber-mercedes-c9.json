@@ -51,7 +51,8 @@
     },
     "notes": [
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
-      "A clutch is required from rest."
+      "A clutch is required from rest.",
+      "'Sauber Mercedes C9 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
   "simulators": [
@@ -65,6 +66,10 @@
         {
           "kind": "internal-id",
           "value": "Sauber Mercedes C9"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Sauber Mercedes C9 - Low Downforce"
         },
         {
           "kind": "class-id",
@@ -83,7 +88,8 @@
           "source_label": "live-cockpit-round"
         },
         "notes": [
-          "Guided current-game testing directly established all user-facing controls."
+          "Guided current-game testing directly established all user-facing controls.",
+          "'Sauber Mercedes C9 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
       "overrides": [],
@@ -143,5 +149,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-12",
+  "notes": [
+    "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ]
 }

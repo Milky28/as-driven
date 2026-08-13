@@ -4,6 +4,16 @@ Dataset 0.3.18 completes the earlier audited queue. It deliberately counted
 selectable model/configuration identities, not release-note classes, renames, or
 generic aero announcements.
 
+## Completed in dataset 0.3.20 (aero-inheritance review, no driving)
+
+Seven exact `- Low Downforce` identities whose base record was already verified
+became explicit aliases with an untested-aero disclosure: Audi R8 LMP1, Courage
+C60 Hybrid, Dallara SP1, Dodge Viper GTS-R, McLaren 720S GT3 Evo, McLaren F1
+GTR, and Sauber Mercedes C9. No control value changed and no record was added.
+
+The `aero-inheritance-ready` queue is now empty. Seven Low Downforce identities
+remain blocked behind an unverified base car.
+
 ## Completed in dataset 0.3.19 (modern-prototype batch 01)
 
 Guided-verification drives promoted through the `import-observation` staging

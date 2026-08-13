@@ -50,7 +50,8 @@
     },
     "notes": [
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
-      "The modeled car moves from rest without physical clutch input."
+      "The modeled car moves from rest without physical clutch input.",
+      "'McLaren 720S GT3 Evo - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
   "simulators": [
@@ -70,6 +71,10 @@
           "value": "McLaren 720S GT3 Evo"
         },
         {
+          "kind": "telemetry-name",
+          "value": "McLaren 720S GT3 Evo - Low Downforce"
+        },
+        {
           "kind": "class-id",
           "value": "GT3_Gen2"
         }
@@ -86,7 +91,8 @@
           "source_label": "live-cockpit-gt-style"
         },
         "notes": [
-          "Guided current-game testing directly established all user-facing controls."
+          "Guided current-game testing directly established all user-facing controls.",
+          "'McLaren 720S GT3 Evo - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
       "overrides": [],
@@ -144,5 +150,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-12",
+  "notes": [
+    "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ]
 }
