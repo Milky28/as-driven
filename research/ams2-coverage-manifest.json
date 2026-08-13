@@ -24,8 +24,8 @@
       "covered-exact": 122,
       "full-guided-verification": 90,
       "out-of-scope": 1,
-      "retired-identity": 4,
-      "third-party-content": 1
+      "retired-identity": 3,
+      "third-party-content": 2
     },
     "full_verifications_by_family": {
       "club-road": 10,
@@ -891,10 +891,10 @@
       "telemetry_name": "FIA-GT1 Maserati MC12 GT1",
       "car_id": "FIA-GT1 Maserati MC12 GT1",
       "identity_file": "FIA-GT1 Maserati MC12 GT1.shcarsettings",
-      "coverage_disposition": "retired-identity",
+      "coverage_disposition": "third-party-content",
       "family": "gt",
-      "related_record_id": "ams2.maserati-mc12-gt1",
-      "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Maserati MC12 GT1. No guided drive is scheduled.",
+      "related_record_id": null,
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1717879371.2236454,
       "research_readiness": "not-applicable"

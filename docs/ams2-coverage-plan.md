@@ -42,10 +42,20 @@ can outlive a rename or removal.
 
 An observed identity is also not proof of official content. SimHub records any
 car it sees, including third-party mods, so the inventory can contain cars AMS2
-never shipped. The FIA-GT1 prefixed Murcielago R-SV is one confirmed example.
-Treat an identity that predates the official car's release announcement as a
-prompt to check provenance before scheduling verification work, and record the
-outcome in `research/ams2-identity-decisions.json`.
+never shipped. Both FIA-GT1 prefixed identities are confirmed examples from the
+FIA-GT1 mod in the ThunderFlash mods pack.
+
+Two signals identified them, and neither is an observation date on its own:
+
+- a class-style prefix or a run-together internal name that does not match
+  Reiza's spacing convention;
+- an observation that predates the official car's release announcement, where
+  the official car exists separately under its own name.
+
+Forty queued identities were last observed before 2025 and are ordinary
+official cars, so age alone proves nothing. Check provenance when a name looks
+irregular, and record the outcome in
+`research/ams2-identity-decisions.json`.
 
 ## Work order
 

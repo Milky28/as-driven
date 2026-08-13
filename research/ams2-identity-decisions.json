@@ -11,12 +11,12 @@
   "decisions_list": [
     {
       "telemetry_name": "FIA-GT1 Maserati MC12 GT1",
-      "disposition": "retired-identity",
+      "disposition": "third-party-content",
       "last_observed": "2024-06-08",
-      "superseded_by": "Maserati MC12 GT1",
-      "related_record_id": "ams2.maserati-mc12-gt1",
+      "superseded_by": null,
+      "related_record_id": null,
       "source_refs": [],
-      "basis": "Stored 2024 observation using the retired FIA-GT1 class prefix. The current selectable identity drops the prefix and is curated. Not aliased: the prefixed name is not selectable in AMS2 1.6.9.91, so inherited controls could not be verified there."
+      "basis": "Maintainer confirmed this identity comes from the FIA-GT1 mod in the ThunderFlash mods pack, not from official AMS2 content. The official Maserati MC12 GT1 is a separate car added in Historical Endurance Pack Pt1 on 2025-10-31, well after this 2024-06-08 observation, and it is curated under its own unprefixed identity. The modded car is not that record and must not be aliased onto it. Not curated and not queued for verification."
     },
     {
       "telemetry_name": "FIA-GT1 Lamborghini Murcielago R-SV GT1",
@@ -25,7 +25,7 @@
       "superseded_by": null,
       "related_record_id": null,
       "source_refs": [],
-      "basis": "Maintainer confirmed AMS2 never shipped a Murcielago R-SV; only unofficial mods provided one. This stored identity therefore comes from third-party content, not from official AMS2, and the database curates official simulator content. It has no successor: the official Murcielago R-GT is a different car added later as Dream Pack Pt2 content on 2025-10-02, not a rename of this identity. Observing it in 2024-12-07, before any official Murcielago existed, is consistent with modded content. Not curated and not queued for verification."
+      "basis": "Maintainer confirmed AMS2 never shipped a Murcielago R-SV; only unofficial mods provided one, and this identity comes from the FIA-GT1 mod in the ThunderFlash mods pack. It has no successor: the official Murcielago R-GT is a different car added later as Dream Pack Pt2 content on 2025-10-02, not a rename of this identity. Observing it on 2024-12-07, before any official Murcielago existed, is consistent with modded content. Not curated and not queued for verification."
     },
     {
       "telemetry_name": "Formula V10 Gen2",
