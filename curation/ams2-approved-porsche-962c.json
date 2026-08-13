@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.22",
+  "dataset_version": "0.3.23",
   "approved_at": "2026-08-12",
   "record_id": "ams2.porsche-962c",
   "telemetry_name": "Porsche 962C",
@@ -23,5 +23,11 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the real-world five-speed manual transmission is supported by a registered source, while gearbox construction stays unknown.",
-  "scope_notes": "Single exact identity from one guided-verification drive. The 'Porsche 962C - Low Downforce' identity is not included and remains an untested aero configuration."
+  "scope_notes": "Single exact identity from one guided-verification drive. 'Porsche 962C - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "additional_telemetry_names": [
+    {
+      "value": "Porsche 962C - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ]
 }

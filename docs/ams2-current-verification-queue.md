@@ -1,5 +1,12 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.23 (aero inheritance, no driving)
+
+`Nissan R89C - Low Downforce` and `Porsche 962C - Low Downforce` became explicit
+aliases of the base records verified in batch 02, each disclosed as an untested
+aero configuration. No control value changed and no record was added. Five Low
+Downforce identities still wait on unverified base cars.
+
 ## Completed in dataset 0.3.22 (modern-prototype batch 02)
 
 Promoted through `import-observation` and `promote-observation`, the first batch

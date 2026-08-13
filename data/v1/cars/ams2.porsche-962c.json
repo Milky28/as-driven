@@ -49,7 +49,8 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift required the driver's own blip.",
-      "Gearbox construction and H-pattern layout remain unknown; the reviewed sources establish only a five-speed manual transmission."
+      "Gearbox construction and H-pattern layout remain unknown; the reviewed sources establish only a five-speed manual transmission.",
+      "'Porsche 962C - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
   "simulators": [
@@ -59,6 +60,10 @@
         {
           "kind": "telemetry-name",
           "value": "Porsche 962C"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 962C - Low Downforce"
         },
         {
           "kind": "class-id",
@@ -77,7 +82,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-962c.20260813t050441473z-25173c43 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-962c.20260813t050441473z-25173c43 by Jason Kinslow.",
+          "'Porsche 962C - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
       "overrides": [],
@@ -148,5 +154,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-12",
+  "notes": [
+    "'Porsche 962C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ]
 }

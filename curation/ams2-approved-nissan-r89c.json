@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.22",
+  "dataset_version": "0.3.23",
   "approved_at": "2026-08-12",
   "record_id": "ams2.nissan-r89c",
   "telemetry_name": "Nissan R89C",
@@ -23,5 +23,11 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the real-world identity and five-speed VGC transmission are supported by Nissan's heritage record.",
-  "scope_notes": "Single exact identity from one guided-verification drive. The 'Nissan R89C - Low Downforce' identity is not included and remains an untested aero configuration."
+  "scope_notes": "Single exact identity from one guided-verification drive. 'Nissan R89C - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "additional_telemetry_names": [
+    {
+      "value": "Nissan R89C - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ]
 }

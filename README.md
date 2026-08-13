@@ -86,7 +86,7 @@ python -m authentic_controls_db import-observation observation.json --output bui
 python -m authentic_controls_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.22 contains 93 reviewed records. Its newest records complete the
+Dataset 0.3.23 contains 93 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.22 contains 93 curated AMS2 records promoted through the reviewed
+Dataset 0.3.23 contains 93 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -277,6 +277,8 @@ R89C five-speed VGC transmission and Lola-built chassis, while Metalmoro states
 the MRX fixes no transmission, so its sequential six-speed is recorded at medium
 confidence as the configuration modeled in AMS2. Verifying these bases makes the
 R89C and 962C Low Downforce identities inheritance-ready.
+Dataset 0.3.23 promotes those two as explicit Low Downforce aliases, again without
+driving and without changing any control value.
 
 ## Licensing
 

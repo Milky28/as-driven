@@ -49,7 +49,8 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift after the driver's own blip.",
-      "The gearbox is modeled as a dog-engagement racing box from the manufacturer's VGC specification together with the observed clutchless running shifts. The H-pattern layout is not established and stays unknown."
+      "The gearbox is modeled as a dog-engagement racing box from the manufacturer's VGC specification together with the observed clutchless running shifts. The H-pattern layout is not established and stays unknown.",
+      "'Nissan R89C - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
   "simulators": [
@@ -59,6 +60,10 @@
         {
           "kind": "telemetry-name",
           "value": "Nissan R89C"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Nissan R89C - Low Downforce"
         },
         {
           "kind": "class-id",
@@ -77,7 +82,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-r89c.20260813t050039446z-0de58672 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-r89c.20260813t050039446z-0de58672 by Jason Kinslow.",
+          "'Nissan R89C - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
       "overrides": [],
@@ -148,5 +154,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-12",
+  "notes": [
+    "'Nissan R89C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ]
 }
