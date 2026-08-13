@@ -150,6 +150,17 @@ def import_observation(
     gearbox_type, shift_pattern = _ACTUATION_DERIVATION.get(
         actuation, ("unknown", "unknown")
     )
+    # A gate pattern seen in the cockpit beats one derived from the mechanism.
+    # Deriving can only ever say "sequential" or "unknown"; it cannot tell a
+    # dogleg layout from a standard H, and that difference moves first gear.
+    observed_pattern = cockpit.get("shift_pattern")
+    if observed_pattern and observed_pattern != "unknown":
+        shift_pattern = observed_pattern
+        if observed_pattern in {"standard-h", "dogleg-h"} and actuation == "h-pattern":
+            review_notes.append(
+                f"Gate pattern {observed_pattern} was read from the cockpit. Confirm it "
+                "against a real-world source before treating it as a real-car claim."
+            )
     if actuation == "unknown":
         review_notes.append(
             "Primary shift actuation was left unknown; shift_actuation, gearbox_type, "

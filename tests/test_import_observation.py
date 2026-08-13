@@ -147,6 +147,29 @@ class ImportObservationTests(unittest.TestCase):
         )
         self.assertEqual(errors, [])
 
+    def test_observed_gate_pattern_beats_derivation(self) -> None:
+        observation = _clean_observation()
+        observation["cockpit"]["primary_shift_actuation"] = "h-pattern"
+        observation["cockpit"]["shift_pattern"] = "dogleg-h"
+        bundle = import_observation(observation)
+        transmission = bundle["record"]["authentic_controls"]["transmission"]
+
+        # Derivation can never produce dogleg; only the cockpit can establish it.
+        self.assertEqual("dogleg-h", transmission["shift_pattern"])
+        self.assertEqual("h-pattern", transmission["shift_actuation"])
+        self.assertTrue(
+            any("dogleg-h" in note for note in bundle["review_notes"]),
+            bundle["review_notes"],
+        )
+
+    def test_unknown_gate_pattern_falls_back_to_derivation(self) -> None:
+        observation = _clean_observation()
+        observation["cockpit"]["shift_pattern"] = "unknown"
+        bundle = import_observation(observation)
+        transmission = bundle["record"]["authentic_controls"]["transmission"]
+        # Paddles still derive sequential; an unknown observation adds nothing.
+        self.assertEqual("sequential", transmission["shift_pattern"])
+
     def test_h_pattern_actuation_leaves_layout_and_construction_unknown(self) -> None:
         observation = _clean_observation()
         observation["cockpit"]["primary_shift_actuation"] = "h-pattern"

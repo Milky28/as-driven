@@ -200,9 +200,15 @@
                 <ComboBoxItem Content="Sequential stick" Tag="sequential-stick" /><ComboBoxItem Content="H-pattern" Tag="h-pattern" />
                 <ComboBoxItem Content="Automatic lever" Tag="automatic-lever" /><ComboBoxItem Content="Direct selection" Tag="direct-selection" />
               </ComboBox></StackPanel>
-            <StackPanel Grid.Column="2"><TextBlock Text="How it was identified" Style="{StaticResource FieldLabel}" />
-              <TextBox x:Name="_actuationBasis" AutomationProperties.Name="How primary shift mechanism was identified" /></StackPanel>
+            <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Gate pattern seen in the cockpit" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_shiftPatternBadge" /></StackPanel>
+              <ComboBox x:Name="_shiftPattern" AutomationProperties.Name="Gate pattern seen in the cockpit" SelectedIndex="0">
+                <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Standard H" Tag="standard-h" />
+                <ComboBoxItem Content="Dogleg H (first down-left)" Tag="dogleg-h" /><ComboBoxItem Content="Sequential" Tag="sequential" />
+                <ComboBoxItem Content="Automatic gate" Tag="automatic-gate" /><ComboBoxItem Content="Direct" Tag="direct" />
+              </ComboBox></StackPanel>
           </Grid>
+          <StackPanel><TextBlock Text="How it was identified" Style="{StaticResource FieldLabel}" />
+            <TextBox x:Name="_actuationBasis" AutomationProperties.Name="How primary shift mechanism was identified" /></StackPanel>
 
           <TextBlock Text="Steering wheel" Style="{StaticResource Heading}" />
           <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>

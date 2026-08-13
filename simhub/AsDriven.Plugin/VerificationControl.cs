@@ -48,6 +48,7 @@ namespace AsDriven.Plugin
             AttachBadge(_clutchlessDownshift, _clutchlessDownshiftBadge);
             AttachBadge(_automaticBlip, _automaticBlipBadge);
             AttachBadge(_primaryActuation, _primaryActuationBadge);
+            AttachBadge(_shiftPattern, _shiftPatternBadge);
             AttachBadge(_wheelShape, _wheelShapeBadge);
             AttachBadge(_wheelDisplay, _wheelDisplayBadge);
             AttachBadge(_wheelShiftLights, _wheelShiftLightsBadge);
@@ -81,7 +82,7 @@ namespace AsDriven.Plugin
             _actuationBasis.TextChanged += ManualEvidenceChanged;
             foreach (ComboBox optionalChoice in new[]
             {
-                _primaryActuation, _wheelShape, _wheelDisplay,
+                _primaryActuation, _shiftPattern, _wheelShape, _wheelDisplay,
                 _wheelShiftLights, _wheelOpenTop
             })
             {
@@ -340,6 +341,7 @@ namespace AsDriven.Plugin
                     AutomaticBlipMethod = _automaticBlipMethod.Text,
                     VisibleShiftActuators = visible,
                     PrimaryShiftActuation = ChoiceValue(_primaryActuation),
+                    ShiftPattern = ChoiceValue(_shiftPattern),
                     ActuationBasis = _actuationBasis.Text,
                     WheelShape = ChoiceValue(_wheelShape),
                     WheelIntegratedDisplay = ChoiceValue(_wheelDisplay),
@@ -444,7 +446,7 @@ namespace AsDriven.Plugin
                 if (results.ForwardGears.HasValue)
                 {
                     _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);
-                    SetFieldBadge(_forwardGears, "AUTO-DETECTED", Brushes.LightGreen);
+                    SetFieldBadge(_forwardGears, "AUTO-DETECTED", Brushes.Gray);
                 }
                 _automaticCutMethod.Text = results.AutomaticCutMethod ?? string.Empty;
                 _automaticBlipMethod.Text = results.AutomaticBlipMethod ?? string.Empty;
@@ -453,11 +455,11 @@ namespace AsDriven.Plugin
                 SetFieldBadge(
                     _automaticCutMethod,
                     string.IsNullOrWhiteSpace(_automaticCutMethod.Text) ? string.Empty : "AUTO-FILLED",
-                    Brushes.LightSkyBlue);
+                    Brushes.Gray);
                 SetFieldBadge(
                     _automaticBlipMethod,
                     string.IsNullOrWhiteSpace(_automaticBlipMethod.Text) ? string.Empty : "AUTO-FILLED",
-                    Brushes.LightSkyBlue);
+                    Brushes.Gray);
                 if (!string.IsNullOrWhiteSpace(results.EvidenceNote))
                 {
                     _evidenceNotes.Text = string.IsNullOrWhiteSpace(_evidenceNotes.Text)
@@ -715,7 +717,7 @@ namespace AsDriven.Plugin
         {
             foreach (ComboBox combo in new[]
             {
-                _primaryActuation, _wheelShape, _wheelDisplay,
+                _primaryActuation, _shiftPattern, _wheelShape, _wheelDisplay,
                 _wheelShiftLights, _wheelOpenTop
             })
             {
@@ -734,7 +736,7 @@ namespace AsDriven.Plugin
             _visibleHardwareBorder.BorderThickness = new Thickness(1);
             foreach (ComboBox combo in new[]
             {
-                _primaryActuation, _wheelShape, _wheelDisplay,
+                _primaryActuation, _shiftPattern, _wheelShape, _wheelDisplay,
                 _wheelShiftLights, _wheelOpenTop, _moveOff,
                 _directGearSelection, _clutchlessUpshift, _automaticCut,
                 _clutchlessDownshift, _automaticBlip
@@ -768,7 +770,7 @@ namespace AsDriven.Plugin
 
             foreach (ComboBox combo in new[]
             {
-                _primaryActuation, _wheelShape, _wheelDisplay,
+                _primaryActuation, _shiftPattern, _wheelShape, _wheelDisplay,
                 _wheelShiftLights, _wheelOpenTop
             })
             {
@@ -850,7 +852,7 @@ namespace AsDriven.Plugin
             int count = 0;
             foreach (ComboBox combo in new[]
             {
-                _primaryActuation, _wheelShape, _wheelDisplay,
+                _primaryActuation, _shiftPattern, _wheelShape, _wheelDisplay,
                 _wheelShiftLights, _wheelOpenTop
             })
             {
@@ -888,14 +890,14 @@ namespace AsDriven.Plugin
         {
             if (combo == _directGearSelection)
             {
-                SetFieldBadge(combo, "MANUAL", Brushes.LightSkyBlue);
+                SetFieldBadge(combo, "MANUAL", Brushes.Gray);
                 return;
             }
             bool hasEvidence = HasManualOverrideEvidence(combo);
             SetFieldBadge(
                 combo,
                 hasEvidence ? "MANUAL · EVIDENCE" : "EVIDENCE REQUIRED",
-                hasEvidence ? Brushes.LightSkyBlue : Brushes.Orange);
+                hasEvidence ? Brushes.Gray : Brushes.Orange);
         }
 
         private string[] MissingManualOverrideEvidence()
@@ -995,7 +997,7 @@ namespace AsDriven.Plugin
             {
                 SelectChoice(_directGearSelection, "not-applicable");
                 _manualOverrides.Remove(_directGearSelection);
-                SetFieldBadge(_directGearSelection, "DERIVED", Brushes.LightSkyBlue);
+                SetFieldBadge(_directGearSelection, "DERIVED", Brushes.Gray);
             }
             else if ((actuation == "h-pattern" || actuation == "direct-selection")
                 && ChoiceValue(_directGearSelection) == "not-applicable")
@@ -1166,7 +1168,7 @@ namespace AsDriven.Plugin
             }
             else
             {
-                SetFieldBadge(combo, "AUTO-DETECTED", Brushes.LightGreen);
+                SetFieldBadge(combo, "AUTO-DETECTED", Brushes.Gray);
             }
         }
 
@@ -1178,7 +1180,7 @@ namespace AsDriven.Plugin
 
         private static void ClearFieldBadge(Control control)
         {
-            SetFieldBadge(control, string.Empty, Brushes.LightGreen);
+            SetFieldBadge(control, string.Empty, Brushes.Gray);
         }
 
         private static void SetFieldBadge(Control control, string text, Brush foreground)

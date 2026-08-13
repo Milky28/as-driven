@@ -18,23 +18,23 @@
     "curated_records": 112,
     "covered_exact_identities": 150,
     "uncovered_identities": 75,
-    "full_guided_verifications": 66,
+    "full_guided_verifications": 64,
     "dispositions": {
       "aero-inheritance-after-base": 1,
       "covered-exact": 150,
-      "full-guided-verification": 66,
+      "full-guided-verification": 64,
       "out-of-scope": 1,
       "retired-identity": 3,
-      "third-party-content": 4
+      "third-party-content": 6
     },
     "full_verifications_by_family": {
       "club-road": 10,
       "open-wheel": 42,
       "other": 6,
-      "touring-stock": 8
+      "touring-stock": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 42,
+      "independent-control-research-needed": 40,
       "legacy-controls-candidate-available": 24
     }
   },
@@ -277,13 +277,13 @@
       "telemetry_name": "BMW 320 Turbo Gr5",
       "car_id": "BMW 320 Turbo Gr5",
       "identity_file": "BMW 320 Turbo Gr5.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "third-party-content",
       "family": "touring-stock",
       "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1733629929.837935,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "BMW M Hybrid V8",
@@ -3031,13 +3031,13 @@
       "telemetry_name": "Zakspeed Ford Capri Group 5",
       "car_id": "Zakspeed Ford Capri Group 5",
       "identity_file": "Zakspeed Ford Capri Group 5.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "third-party-content",
       "family": "touring-stock",
       "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1717879371.2242582,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     }
   ]
 }

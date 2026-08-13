@@ -33,6 +33,7 @@ namespace AsDriven.Core
         public string AutomaticBlipMethod { get; set; }
         public string[] VisibleShiftActuators { get; set; }
         public string PrimaryShiftActuation { get; set; }
+        public string ShiftPattern { get; set; }
         public string ActuationBasis { get; set; }
         public string WheelShape { get; set; }
         public string WheelIntegratedDisplay { get; set; }
@@ -58,6 +59,9 @@ namespace AsDriven.Core
             StringComparer.Ordinal);
         private static readonly HashSet<string> ShiftActuations = new HashSet<string>(
             new[] { "h-pattern", "sequential-stick", "sequential-paddles", "automatic-lever", "direct-selection", "unknown" },
+            StringComparer.Ordinal);
+        private static readonly HashSet<string> ShiftPatterns = new HashSet<string>(
+            new[] { "standard-h", "dogleg-h", "sequential", "automatic-gate", "direct", "unknown" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> VisibleActuators = new HashSet<string>(
             new[] { "paddles", "sequential-stick", "h-pattern", "automatic-lever", "unknown" },
@@ -111,6 +115,10 @@ namespace AsDriven.Core
             RequireChoice(draft.ClutchlessDownshift, ObservedStates, "Clutchless downshift result");
             RequireChoice(draft.AutomaticBlip, ObservedStates, "Automatic blip result");
             RequireChoice(draft.PrimaryShiftActuation, ShiftActuations, "Primary shift actuation");
+            if (!string.IsNullOrWhiteSpace(draft.ShiftPattern))
+            {
+                RequireChoice(draft.ShiftPattern, ShiftPatterns, "Shift pattern");
+            }
             RequireChoice(draft.WheelShape, WheelShapes, "Wheel shape");
             RequireChoice(draft.WheelIntegratedDisplay, ObservedStates, "Integrated-display result");
             RequireChoice(draft.WheelShiftLights, ObservedStates, "Shift-light result");
@@ -180,6 +188,7 @@ namespace AsDriven.Core
                 { "wheel_rim", wheel }
             };
             AddOptional(cockpit, "actuation_basis", draft.ActuationBasis);
+            AddOptional(cockpit, "shift_pattern", draft.ShiftPattern);
 
             var payload = new JObject
             {
