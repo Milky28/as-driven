@@ -20,10 +20,15 @@ Closed as reviewed decisions in `research/ams2-identity-decisions.json`:
 
 - Five retired pre-rename identities last observed in 2024: FIA-GT1 Maserati
   MC12 GT1, FIA-GT1 Lamborghini Murcielago R-SV GT1, Formula V10 Gen2, Formula
-  Vee Fin, and Formula V12. None is aliased onto its renamed record, because
-  none is selectable in AMS2 1.6.9.91. Two remain genuinely unresolved: the
-  Murcielago R-SV and R-GT relationship, and Formula V12, which has no
-  identified successor.
+  Vee Fin, and Formula V12. Every successor is now identified. The Murcielago
+  in game is the R-GT, and AMS2 v1.6.9.5 rebranded the single-make Formula V12
+  class as Formula Edge, identifying the former V12 car as Model 1. Formula V10
+  Gen2 is the only one without a single successor, because it predates the tyre
+  and aero split into two curated records.
+- None of the five is aliased onto its renamed record, because none is
+  selectable in AMS2 1.6.9.91. Formula V12 additionally must not inherit, since
+  its rebrand accompanied the rule changes that caused the largest downforce
+  drop since 1983, so the retired identity is not the same car to drive.
 - BMW M3 Safety Car is out of product scope as a non-racing vehicle and stays
   unmatched in the client rather than receiving guessed controls.
 

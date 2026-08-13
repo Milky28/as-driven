@@ -120,12 +120,26 @@ class AMS2CoverageManifestTests(unittest.TestCase):
                 self.assertIn(entry["telemetry_name"], reviewed)
                 self.assertEqual(reviewed[entry["telemetry_name"]], disposition)
 
+        sources = json.loads(
+            (ROOT / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+        )
+        source_ids = {item["source_id"] for item in sources["sources"]}
+        record_ids = {
+            json.loads(path.read_text(encoding="utf-8"))["record_id"]
+            for path in (ROOT / "data" / "v1" / "cars").glob("*.json")
+        }
         for item in decisions["decisions_list"]:
             self.assertTrue(item["basis"].strip(), item["telemetry_name"])
             self.assertEqual(
                 entries[item["telemetry_name"]]["coverage_disposition"],
                 item["disposition"],
             )
+            # A cited source must be registered, and a named successor record
+            # must exist, so a decision cannot point at something imaginary.
+            for ref in item.get("source_refs", []):
+                self.assertIn(ref, source_ids, item["telemetry_name"])
+            if item["related_record_id"] is not None:
+                self.assertIn(item["related_record_id"], record_ids, item["telemetry_name"])
 
         # A retired identity is never aliased onto a curated record.
         for item in decisions["decisions_list"]:
