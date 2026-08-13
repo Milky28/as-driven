@@ -38,13 +38,57 @@ scope unless a future proposal establishes a direct authentic-controls use case.
 
 - `schema/v1/`: versioned JSON Schema contracts.
 - `data/v1/`: curated release index, sources, and car records.
-- `curation/`: checked-in reviewer approvals.
+- `curation/`: checked-in reviewer approvals and promotion review manifests.
 - `authentic_controls_db/`: dependency-free Python import, audit, promotion,
   and validation tools.
+- `research/`: checked-in research manifests, deterministic generators, and
+  `ams2-identity-decisions.json`, the written reviewer outcomes for observed
+  identities that are retired, third-party, or out of scope.
 - `simhub/`: read-only .NET lookup library, SimHub adapter, diagnostics, and
   packaging.
 - `tests/`: Python regression tests and legally safe parser fixtures.
 - `docs/`: data-model, importer, provenance, audit, and integration guidance.
+
+## Verification pipeline
+
+A car reaches the database through this sequence. The user drives; that step
+cannot be automated.
+
+1. The user records a guided drive in the SimHub plugin's contribution
+   workflow. Drafts land in
+   `%LOCALAPPDATA%\SimHub\AuthenticControls\Verification\Drafts`.
+2. `python -m authentic_controls_db import-observation <draft> --output
+   build/staged.json` stages a bundle. Real-world identity is deliberately left
+   as `REVIEW-REQUIRED`, because a drive cannot establish it.
+3. A reviewer supplies identity and registered sources in a manifest under
+   `curation/`.
+4. `python -m authentic_controls_db promote-observation <manifest>` writes the
+   record, approval, source, and index together. It refuses missing fields, any
+   remaining `REVIEW-REQUIRED`, unregistered sources, and overwriting a curated
+   record, and writes nothing unless every entry passes.
+5. Regenerate `python research/build_ams2_coverage_manifest.py`, then validate.
+
+An observed SimHub identity is not proof of official content. SimHub records any
+car it sees, including mods. Check provenance when a name looks irregular or
+predates the official car's release, and record the outcome as a decision rather
+than silently queueing verification work.
+
+## Current handoff state
+
+- Branch: `codex/stabilization`; private remote `origin` at
+  `github.com/Milky28/authentic-controls-db`.
+- Early-access client: 0.15.0.
+- Dataset: 0.3.23 with 93 curated records.
+- Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
+- Exact coverage is 127 of 225 observed AMS2 identities. Guided verification is
+  the only remaining category of open work; see `docs/ams2-coverage-plan.md`.
+- Next planned batch is contemporary GT3 and GTE cars.
+- `validate` compares the dataset version and record count quoted in this file,
+  `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
+  `data/v1/index.json`. Update the line above with the dataset, or validation
+  fails.
+- Icon and brand-mark concepts under `docs/design/` are review-only and are not
+  wired into production assets.
 
 ## SimHub plugin development
 

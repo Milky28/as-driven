@@ -13,7 +13,7 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 # Documentation repeats the current release in prose. These patterns match only
 # present-tense status claims; historical release notes use verbs such as
 # "adds", "promotes", and "revalidates", so they are never checked.
-DOC_STATUS_FILES = ("README.md", "CLAUDE.md", "EARLY_ACCESS.md")
+DOC_STATUS_FILES = ("README.md", "CLAUDE.md", "AGENTS.md", "EARLY_ACCESS.md")
 DOC_STATUS_RE = re.compile(
     r"[Dd]ataset:? (\d+\.\d+\.\d+) (?:contains|with) (\d+) (?:curated|reviewed)"
 )
