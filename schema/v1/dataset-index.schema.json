@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://authentic-controls.example/schema/v1/dataset-index.schema.json",
-  "title": "Authentic Controls dataset index",
+  "$id": "https://as-driven.example/schema/v1/dataset-index.schema.json",
+  "title": "As Driven dataset index",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "dataset_version", "released_at", "records"],

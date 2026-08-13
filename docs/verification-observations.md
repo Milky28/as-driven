@@ -11,7 +11,7 @@ and supplies the observations that require judgment.
 Drafts are stored under:
 
 ```text
-%LOCALAPPDATA%\SimHub\AuthenticControls\Verification\Drafts
+%LOCALAPPDATA%\SimHub\AsDriven\Verification\Drafts
 ```
 
 They always use `review_status: draft`. Saving one does not change `data/v1`,
@@ -36,7 +36,7 @@ the research backlog, or a curation approval.
 
 ## SimHub workflow
 
-1. Load the car and open the Authentic Controls feature page.
+1. Load the car and open the As Driven feature page.
 2. Expand the visually separate **Contribute car data** workflow and click
    **Start verification from live car**.
 3. Confirm the captured identity and exact game version. The left workflow rail

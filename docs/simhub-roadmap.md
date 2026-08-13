@@ -44,35 +44,35 @@ properties. It does not draw UI and does not own the database.
 Suggested properties:
 
 ```text
-AuthenticControls.RecordId
-AuthenticControls.MatchStatus
-AuthenticControls.DisplayName
-AuthenticControls.ShiftType
-AuthenticControls.TechniqueSummary
-AuthenticControls.TechniqueSummaryLine1
-AuthenticControls.TechniqueSummaryLine2
-AuthenticControls.PreviewActive
-AuthenticControls.GearCount
-AuthenticControls.AutoBlip
-AuthenticControls.ShiftCut
-AuthenticControls.WheelRimShape
-AuthenticControls.WheelRimSourceLabel
-AuthenticControls.SteeringDOR                 (optional reference)
-AuthenticControls.VerifiedGameVersion
-AuthenticControls.Confidence
-AuthenticControls.SourceSummary
-AuthenticControls.PopupRevision
+AsDriven.RecordId
+AsDriven.MatchStatus
+AsDriven.DisplayName
+AsDriven.ShiftType
+AsDriven.TechniqueSummary
+AsDriven.TechniqueSummaryLine1
+AsDriven.TechniqueSummaryLine2
+AsDriven.PreviewActive
+AsDriven.GearCount
+AsDriven.AutoBlip
+AsDriven.ShiftCut
+AsDriven.WheelRimShape
+AsDriven.WheelRimSourceLabel
+AsDriven.SteeringDOR                 (optional reference)
+AsDriven.VerifiedGameVersion
+AsDriven.Confidence
+AsDriven.SourceSummary
+AsDriven.PopupRevision
 ```
 
 Suggested actions:
 
 ```text
-AuthenticControls.ShowPopup
-AuthenticControls.HidePopup
-AuthenticControls.TogglePopup
-AuthenticControls.RefreshDatabase
-AuthenticControls.OpenDiagnosticsFolder
-AuthenticControls.ReturnToLiveCar
+AsDriven.ShowPopup
+AsDriven.HidePopup
+AsDriven.TogglePopup
+AsDriven.RefreshDatabase
+AsDriven.OpenDiagnosticsFolder
+AsDriven.ReturnToLiveCar
 ```
 
 `PopupRevision` increments on a matched car/session change. Dash Studio can use
@@ -205,7 +205,7 @@ Exact Murcielago and MC12 Low Downforce identities inherit their verified base
 controls and remain explicitly marked as not separately tested.
 Version `0.9.5` adds the supported SimHub native feature-page presentation: a
 24x24 monochrome-compatible wheel-and-shift-gate menu icon, pinnable
-**Authentic Controls** left-menu entry, live car/match/version/error status,
+**As Driven** left-menu entry, live car/match/version/error status,
 Show/Hide popup controls, database refresh, saved popup settings, and
 diagnostics access. Overlay layout and positioning deliberately remain in Dash
 Studio. The build smoke-tests both the menu icon dimensions and settings-page
@@ -229,7 +229,7 @@ simulator, labels the rendered card `PREVIEW`, and automatically yields to live
 telemetry when a game session starts. Short technique summaries such as the
 Diablo's remain on one line when their rendered space is sufficient.
 Version `0.10.1` corrects idle preview behavior by starting the selected
-Authentic Controls layout through SimHub's public forced-overlay mode. It also
+As Driven layout through SimHub's public forced-overlay mode. It also
 separates live telemetry status from preview status and tears down the
 temporary preview layout when live data resumes.
 Version `0.10.2` keeps one forced-preview layout running while the selected car
@@ -290,7 +290,7 @@ Glance correctly with AMS2 telemetry and dynamic icons. The explicit boolean
 visibility properties added in `0.4.1` avoid string comparison in SimHub's
 formula engine.
 
-Version `0.5.0` packages a ready-made **Authentic Controls** `.olayout` with all
+Version `0.5.0` packages a ready-made **As Driven** `.olayout` with all
 three surfaces aligned at one safe default position. Users load and position a
 single layout instead of constructing three layout parts manually. Automated
 tests verify the referenced templates, dimensions, placement, transparency,

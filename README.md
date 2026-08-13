@@ -1,4 +1,4 @@
-# Authentic Controls Database
+# As Driven Database
 
 A simulator-independent, versioned JSON database describing how a real car is
 controlled and how individual simulators implement or override that behavior.
@@ -105,7 +105,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-database.ps1
 ```
 
 Install that database snapshot into an existing SimHub installation without
-replacing the Authentic Controls plugin, dashboards, overlays, or settings:
+replacing the As Driven plugin, dashboards, overlays, or settings:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\release\install-database.ps1

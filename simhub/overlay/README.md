@@ -8,16 +8,16 @@ verification surface appears separately while a guided drive is active:
 Detailed is 840×360, Compact is 520×300, and Glance is 320×120. Compact includes
 the smaller driving-technique summary; Glance intentionally remains icon-only.
 
-- `Authentic Controls.olayout` centers all sizes near the top of a 1920-wide
+- `As Driven.olayout` centers all sizes near the top of a 1920-wide
   display.
-- `Authentic Controls 5120x1440.olayout` centers all sizes near the top of a
+- `As Driven 5120x1440.olayout` centers all sizes near the top of a
   5120x1440 super-ultrawide display.
 
 The package installs it under:
 
 ```text
-<SimHub>/OverlayLayouts/Authentic Controls.olayout
-<SimHub>/OverlayLayouts/Authentic Controls 5120x1440.olayout
+<SimHub>/OverlayLayouts/As Driven.olayout
+<SimHub>/OverlayLayouts/As Driven 5120x1440.olayout
 ```
 
 In SimHub, open **Dash Studio > Overlays** and click **Load** beside

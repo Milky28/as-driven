@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://authentic-controls.example/schema/v1/car-record.schema.json",
-  "title": "Authentic Controls car record",
+  "$id": "https://as-driven.example/schema/v1/car-record.schema.json",
+  "title": "As Driven car record",
   "type": "object",
   "additionalProperties": false,
   "required": [

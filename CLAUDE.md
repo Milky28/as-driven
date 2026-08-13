@@ -1,8 +1,8 @@
-# Authentic Controls development guide
+# As Driven development guide
 
 ## Project purpose
 
-Authentic Controls is a simulator-independent, open-source database that tells
+As Driven is a simulator-independent, open-source database that tells
 sim racers which physical controls and shifting technique to use for an
 authentic experience. SimHub is the first client; it does not own the data
 format.
@@ -40,8 +40,8 @@ SimHub SDK binaries into the repository or release package.
 - `as_driven_db/`: dependency-free Python validation, import, audit,
   and promotion tools.
 - `research/`: checked-in research manifests and deterministic generators.
-- `simhub/AuthenticControls.Core/`: exact-match JSON reader and guidance logic.
-- `simhub/AuthenticControls.Plugin/`: direct SimHub adapter and settings UI.
+- `simhub/AsDriven.Core/`: exact-match JSON reader and guidance logic.
+- `simhub/AsDriven.Plugin/`: direct SimHub adapter and settings UI.
 - `simhub/dash/`: generated Dash Studio source and approved raster assets.
 - `tests/`: Python regression tests and legally safe fixtures.
 - `release/`: separate database and early-access release tooling.
@@ -90,7 +90,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\install.ps1
 
 The installer creates a timestamped rollback backup, updates plugin binaries,
 Dash Studio templates, and the bundled database, and preserves customized
-`Authentic Controls*.olayout` files by default.
+`As Driven*.olayout` files by default.
 
 Remove packaged plugin components while preserving the database, settings,
 diagnostics, contribution drafts, and customized layouts:
@@ -157,7 +157,7 @@ approval, relevant research/backlog documentation, and tests together. Follow
 
 The plugin is offline. It has no analytics, account, background update check, or
 automatic telemetry upload. Unmatched diagnostics and guided-verification
-drafts stay under `%LOCALAPPDATA%\SimHub\AuthenticControls`. A draft never edits
+drafts stay under `%LOCALAPPDATA%\SimHub\AsDriven`. A draft never edits
 the curated database or uploads itself. Maintainer validation and explicit
 approval are required before release. See `PRIVACY.md` and
 `docs/verification-observations.md`.
@@ -165,7 +165,7 @@ approval are required before release. See `PRIVACY.md` and
 ## Current handoff state
 
 - Branch: `codex/stabilization`.
-- Early-access client: 0.15.0.
+- Early-access client: 0.16.0.
 - Dataset: 0.3.23 with 93 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Broader AMS2 verification is deliberately deferred; use

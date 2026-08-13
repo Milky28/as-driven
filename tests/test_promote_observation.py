@@ -20,7 +20,7 @@ def _observation() -> dict:
         "observation_id": "ams2.test-prototype.20260813t120000000z-abcd1234",
         "simulator": "ams2",
         "game_version": "1.6.9.91",
-        "client_version": "SimHub 9.11.22; As Driven 0.15.0",
+        "client_version": "SimHub 9.11.22; As Driven 0.16.0",
         "observed_at": "2026-08-13T12:00:00.0000000Z",
         "observer": "Test observer",
         "identity": {

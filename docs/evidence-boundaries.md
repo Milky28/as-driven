@@ -1,6 +1,6 @@
 # Real, simulated, and effective controls
 
-Authentic Controls keeps three related answers separate so one simulator cannot
+As Driven keeps three related answers separate so one simulator cannot
 silently redefine the database's real-car facts.
 
 ## Layer 1: represented real car

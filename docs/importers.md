@@ -68,7 +68,7 @@ the current curated dataset using:
 
 ```powershell
 python -m as_driven_db review-unmatched-ams2 `
-  --log "$env:LOCALAPPDATA\SimHub\AuthenticControls\Diagnostics\unmatched-identities.jsonl" `
+  --log "$env:LOCALAPPDATA\SimHub\AsDriven\Diagnostics\unmatched-identities.jsonl" `
   --candidates .\build\ams2-candidates.json `
   --data-dir .\data\v1 `
   --output .\build\ams2-unmatched-review.json `

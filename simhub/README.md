@@ -8,10 +8,10 @@ cards and guided-verification overlay.
 ## Components
 
 ```text
-AuthenticControls.Core          JSON reader, exact matcher, guidance formatter
-AuthenticControls.Plugin        Minimal SimHub IDataPlugin adapter
-AuthenticControls.Diagnostics   Lookup without launching SimHub
-AuthenticControls.Core.Tests    Dependency-free .NET regression runner
+AsDriven.Core          JSON reader, exact matcher, guidance formatter
+AsDriven.Plugin        Minimal SimHub IDataPlugin adapter
+AsDriven.Diagnostics   Lookup without launching SimHub
+AsDriven.Core.Tests    Dependency-free .NET regression runner
 dash/                           Native Dash Studio pre-flight card generator
 build.ps1                       Build, test, and create a SimHub-ready package
 install.ps1                     Back up and install without resetting layouts
@@ -37,23 +37,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\build.ps1
 A successful build runs the .NET lookup assertions and creates:
 
 ```text
-simhub/dist/AuthenticControls/
-  AuthenticControls.Plugin.dll
-  AuthenticControls.Core.dll
-  DashTemplates/Authentic Controls Preflight Overlay/...
-  DashTemplates/Authentic Controls Preflight Compact/...
-  DashTemplates/Authentic Controls Preflight Glance/...
-  DashTemplates/Authentic Controls Preflight Display/...
-  DashTemplates/Authentic Controls Verification Drive/...
-  OverlayLayouts/Authentic Controls.olayout
-  OverlayLayouts/Authentic Controls 5120x1440.olayout
-  PluginsData/AuthenticControls/Database/data/v1/...
+simhub/dist/AsDriven/
+  AsDriven.Plugin.dll
+  AsDriven.Core.dll
+  DashTemplates/As Driven Preflight Overlay/...
+  DashTemplates/As Driven Preflight Compact/...
+  DashTemplates/As Driven Preflight Glance/...
+  DashTemplates/As Driven Preflight Display/...
+  DashTemplates/As Driven Verification Drive/...
+  OverlayLayouts/As Driven.olayout
+  OverlayLayouts/As Driven 5120x1440.olayout
+  PluginsData/AsDriven/Database/data/v1/...
 ```
 
 The package mirrors SimHub's folder layout. Installing it is a separate,
 explicit step: close SimHub, run `simhub/install.ps1`, restart SimHub, and enable
-**Authentic Controls** under Settings > Plugins. The installer creates a
-timestamped rollback backup and preserves existing `Authentic Controls*.olayout`
+**As Driven** under Settings > Plugins. The installer creates a
+timestamped rollback backup and preserves existing `As Driven*.olayout`
 files by default, so upgrades do not reset personalized positions. Pass
 `-ReplaceOverlayLayouts` only when intentionally restoring the packaged
 positions. The build script itself never performs installation.
@@ -62,7 +62,7 @@ its center position and changes only that part's width to 840 pixels. Any part
 already given a different custom width is left untouched.
 
 To remove the plugin, close SimHub and run `simhub/uninstall.ps1`. By default it
-backs up and removes only the Authentic Controls binaries and packaged Dash
+backs up and removes only the As Driven binaries and packaged Dash
 Studio templates. It preserves the database, settings, diagnostics,
 verification drafts, and customized overlay layouts. Pass
 `-RemovePackagedLayouts` only when those layout files should also be backed up
@@ -73,7 +73,7 @@ and removed.
 After building, test a telemetry identity without starting SimHub:
 
 ```powershell
-.\simhub\AuthenticControls.Diagnostics\bin\Release\AuthenticControls.Diagnostics.exe .\data\v1 Automobilista2 "Dallara F301"
+.\simhub\AsDriven.Diagnostics\bin\Release\AsDriven.Diagnostics.exe .\data\v1 Automobilista2 "Dallara F301"
 ```
 
 An exact match exits with code 0. An unknown car exits with code 1 and prints
@@ -82,111 +82,111 @@ An exact match exits with code 0. An unknown car exits with code 1 and prints
 Plugin version 0.9.5 records live unmatched identities automatically in:
 
 ```text
-%LOCALAPPDATA%\SimHub\AuthenticControls\Diagnostics\unmatched-identities.jsonl
+%LOCALAPPDATA%\SimHub\AsDriven\Diagnostics\unmatched-identities.jsonl
 ```
 
 Each JSON Lines entry contains the UTC timestamp, game name and detected
 executable version, exact `CarModel`, `CarId`, and class, plus the active
 dataset and SimHub versions. Entries are deduplicated by game version and raw
 identity across SimHub restarts. A malformed manually edited line does not
-prevent later observations from being appended. The **Authentic Controls**
+prevent later observations from being appended. The **As Driven**
 settings page displays this path and provides **Open diagnostics folder**.
 
 ## Published SimHub properties
 
-The plugin class is named `AuthenticControls`, so its attached properties are
+The plugin class is named `AsDriven`, so its attached properties are
 available under that prefix:
 
 ```text
-AuthenticControls.HasMatch
-AuthenticControls.MatchStatus
-AuthenticControls.RawGameName
-AuthenticControls.RawCarIdentifier
-AuthenticControls.DatabasePath
-AuthenticControls.UnmatchedLogPath
-AuthenticControls.UnmatchedLogCount
-AuthenticControls.LastUnmatchedCarModel
-AuthenticControls.LastUnmatchedCarId
-AuthenticControls.LastUnmatchedCarClass
-AuthenticControls.LastUnmatchedGameVersion
-AuthenticControls.UnmatchedLogError
-AuthenticControls.DatasetVersion
-AuthenticControls.RecordId
-AuthenticControls.DisplayName
-AuthenticControls.CarClass
-AuthenticControls.ShiftType
-AuthenticControls.ShiftActuation
-AuthenticControls.ShiftPattern
-AuthenticControls.GearCount
-AuthenticControls.UpshiftGuidance
-AuthenticControls.DownshiftGuidance
-AuthenticControls.TechniqueSummary
-AuthenticControls.TechniqueSummaryLine1
-AuthenticControls.TechniqueSummaryLine2
-AuthenticControls.TechniqueSummaryCompactLine1
-AuthenticControls.TechniqueSummaryCompactLine2
-AuthenticControls.StandingStartClutch
-AuthenticControls.AutoBlip
-AuthenticControls.ShiftCut
-AuthenticControls.WheelRimShape
-AuthenticControls.WheelRimSourceLabel
-AuthenticControls.HasSteeringDOR
-AuthenticControls.SteeringDOR
-AuthenticControls.VerifiedGameVersion
-AuthenticControls.Confidence
-AuthenticControls.SourceSummary
-AuthenticControls.MatchKind
-AuthenticControls.GuidanceSummary
-AuthenticControls.PreviewActive
-AuthenticControls.PopupRevision
-AuthenticControls.PopupVisible
-AuthenticControls.PopupDurationSeconds
-AuthenticControls.PopupSize
-AuthenticControls.PopupDetailedVisible
-AuthenticControls.PopupCompactVisible
-AuthenticControls.PopupGlanceVisible
-AuthenticControls.VerificationDriveVisible
-AuthenticControls.VerificationDriveCompleted
-AuthenticControls.VerificationDriveResultReady
-AuthenticControls.VerificationDriveResultSuccessful
-AuthenticControls.VerificationDriveStepNumber
-AuthenticControls.VerificationDriveStepCount
-AuthenticControls.VerificationDriveTitle
-AuthenticControls.VerificationDrivePrompt
-AuthenticControls.VerificationDrivePromptLine1
-AuthenticControls.VerificationDrivePromptLine2
-AuthenticControls.VerificationDriveStatus
-AuthenticControls.VerificationDriveResult
-AuthenticControls.VerificationDriveResultDetail
-AuthenticControls.VerificationDriveLiveValues
+AsDriven.HasMatch
+AsDriven.MatchStatus
+AsDriven.RawGameName
+AsDriven.RawCarIdentifier
+AsDriven.DatabasePath
+AsDriven.UnmatchedLogPath
+AsDriven.UnmatchedLogCount
+AsDriven.LastUnmatchedCarModel
+AsDriven.LastUnmatchedCarId
+AsDriven.LastUnmatchedCarClass
+AsDriven.LastUnmatchedGameVersion
+AsDriven.UnmatchedLogError
+AsDriven.DatasetVersion
+AsDriven.RecordId
+AsDriven.DisplayName
+AsDriven.CarClass
+AsDriven.ShiftType
+AsDriven.ShiftActuation
+AsDriven.ShiftPattern
+AsDriven.GearCount
+AsDriven.UpshiftGuidance
+AsDriven.DownshiftGuidance
+AsDriven.TechniqueSummary
+AsDriven.TechniqueSummaryLine1
+AsDriven.TechniqueSummaryLine2
+AsDriven.TechniqueSummaryCompactLine1
+AsDriven.TechniqueSummaryCompactLine2
+AsDriven.StandingStartClutch
+AsDriven.AutoBlip
+AsDriven.ShiftCut
+AsDriven.WheelRimShape
+AsDriven.WheelRimSourceLabel
+AsDriven.HasSteeringDOR
+AsDriven.SteeringDOR
+AsDriven.VerifiedGameVersion
+AsDriven.Confidence
+AsDriven.SourceSummary
+AsDriven.MatchKind
+AsDriven.GuidanceSummary
+AsDriven.PreviewActive
+AsDriven.PopupRevision
+AsDriven.PopupVisible
+AsDriven.PopupDurationSeconds
+AsDriven.PopupSize
+AsDriven.PopupDetailedVisible
+AsDriven.PopupCompactVisible
+AsDriven.PopupGlanceVisible
+AsDriven.VerificationDriveVisible
+AsDriven.VerificationDriveCompleted
+AsDriven.VerificationDriveResultReady
+AsDriven.VerificationDriveResultSuccessful
+AsDriven.VerificationDriveStepNumber
+AsDriven.VerificationDriveStepCount
+AsDriven.VerificationDriveTitle
+AsDriven.VerificationDrivePrompt
+AsDriven.VerificationDrivePromptLine1
+AsDriven.VerificationDrivePromptLine2
+AsDriven.VerificationDriveStatus
+AsDriven.VerificationDriveResult
+AsDriven.VerificationDriveResultDetail
+AsDriven.VerificationDriveLiveValues
 ```
 
 `PopupRevision` increments once when a new matched car is observed. Repeated
 telemetry frames do not change it. Moving to an unknown car immediately clears
 the previous record and does not increment the revision.
 
-The plugin also registers `AuthenticControls.RefreshDatabase`,
-`AuthenticControls.ShowPopup`, `AuthenticControls.HidePopup`, and
-`AuthenticControls.TogglePopup`. It also registers
-`AuthenticControls.OpenDiagnosticsFolder`,
-`AuthenticControls.OpenVerificationFolder`, and
-`AuthenticControls.ReturnToLiveCar` for optional button/event mappings.
-The unmatched-car popup directs contributors to the Authentic Controls page,
+The plugin also registers `AsDriven.RefreshDatabase`,
+`AsDriven.ShowPopup`, `AsDriven.HidePopup`, and
+`AsDriven.TogglePopup`. It also registers
+`AsDriven.OpenDiagnosticsFolder`,
+`AsDriven.OpenVerificationFolder`, and
+`AsDriven.ReturnToLiveCar` for optional button/event mappings.
+The unmatched-car popup directs contributors to the As Driven page,
 where **Contribute this car** captures the live identity and opens the workflow.
-Guided verification also registers `AuthenticControls.VerificationDriveNext`,
-`AuthenticControls.VerificationDriveRetry`,
-`AuthenticControls.VerificationDriveSkip`, and
-`AuthenticControls.VerificationDriveCancel`.
+Guided verification also registers `AsDriven.VerificationDriveNext`,
+`AsDriven.VerificationDriveRetry`,
+`AsDriven.VerificationDriveSkip`, and
+`AsDriven.VerificationDriveCancel`.
 A new car identity automatically shows the
 overlay card for ten seconds by default, including an unmatched identity that
 needs contribution. The duration can be set from 1–60 seconds on the
-**Authentic Controls** SimHub settings page and persists across restarts.
+**As Driven** SimHub settings page and persists across restarts.
 `ShowPopup` keeps the card visible until `HidePopup` is called; `TogglePopup`
 provides the same behavior with one mapped button. The database is normally
 loaded from:
 
 ```text
-<SimHub>/PluginsData/AuthenticControls/Database/data/v1
+<SimHub>/PluginsData/AsDriven/Database/data/v1
 ```
 
 For local development, the `AUTHENTIC_CONTROLS_DATA` environment variable can
@@ -196,16 +196,16 @@ override that path.
 
 In SimHub, open **Controls and events > Controls**, choose **New mapping**, and
 capture the wheel or button-box input. In the action picker, search for
-`AuthenticControls` and select `AuthenticControls.TogglePopup`. That single
+`AsDriven` and select `AsDriven.TogglePopup`. That single
 mapping shows the card persistently when it is hidden and hides it when it is
 visible. For separate buttons, create one mapping each for
-`AuthenticControls.ShowPopup` and `AuthenticControls.HidePopup`.
+`AsDriven.ShowPopup` and `AsDriven.HidePopup`.
 
 The automatic timeout is separate from manual recall. Open the **Authentic
 Controls** plugin page, choose Detailed (840×360), Compact (520×300), or Glance
 (320×120), choose 1–60 seconds, and click **Save popup settings**. Compact and
 10 seconds are the defaults; both saved values are reused after restarting
-SimHub. Load the included **Authentic Controls** overlay layout once and move it
+SimHub. Load the included **As Driven** overlay layout once and move it
 to the preferred screen position. It already contains all three popup sizes
 and the separate guided-verification surface.
 
@@ -304,7 +304,7 @@ identity inherits its verified base controls as an explicit untested aero
 assumption.
 Version 0.9.5 also follows SimHub's native feature-page convention. A branded
 blue-and-white 24x24 wheel-and-shift-gate mark supplies the left-menu icon,
-so **Authentic Controls** can be pinned through **Add and remove features**.
+so **As Driven** can be pinned through **Add and remove features**.
 The native page shows live match state, current car and record, plugin and
 dataset versions, record count, runtime errors, popup Show/Hide controls,
 database refresh, popup settings, and diagnostics access. Dash Studio remains
@@ -357,7 +357,7 @@ It captures exact live identity, game/client versions, timestamp, and SimHub's
 reported gear-count suggestion, then saves the tester's assist, shift,
 cut/blip, cockpit-actuation, and wheel-detail answers as a local draft JSON.
 Drafts are never promoted automatically and can be opened from the settings
-page or the `AuthenticControls.OpenVerificationFolder` action.
+page or the `AsDriven.OpenVerificationFolder` action.
 Version 0.11.0 adds a dedicated in-simulator verification surface and mapped
 Next, Retry, Skip, and Cancel actions. Telemetry can prefill reviewable results
 for move-off, gear count/direct selection, shift acceptance, cut, and blip;
@@ -492,5 +492,5 @@ GitHub update checking waits for a stable public release endpoint.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged
-**Authentic Controls** layout was then loaded, positioned, and confirmed to
+**As Driven** layout was then loaded, positioned, and confirmed to
 survive full SimHub and AMS2 restarts with automatic popup behavior intact.

@@ -1,6 +1,6 @@
 # Plugin identity asset
 
-`authentic-controls-mark.png` is the transparent production master for the
+`as-driven-mark.png` is the transparent production master for the
 SimHub sidebar and native settings-page mark. It combines a steering wheel, a
 physical shift lever, and a simplified H-gate in one bold small-size silhouette.
 

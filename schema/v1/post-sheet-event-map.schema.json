@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://authentic-controls.example/schema/v1/post-sheet-event-map.schema.json",
+  "$id": "https://as-driven.example/schema/v1/post-sheet-event-map.schema.json",
   "title": "AMS2 post-sheet release-event to curated-record map",
   "type": "object",
   "additionalProperties": false,

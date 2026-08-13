@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://authentic-controls.example/schema/v1/curation-approval.schema.json",
-  "title": "Authentic Controls per-car curation approval",
+  "$id": "https://as-driven.example/schema/v1/curation-approval.schema.json",
+  "title": "As Driven per-car curation approval",
   "type": "object",
   "additionalProperties": false,
   "required": [

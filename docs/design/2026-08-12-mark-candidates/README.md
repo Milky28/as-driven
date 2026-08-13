@@ -1,7 +1,7 @@
 # Generated brand-mark candidates
 
 Review-only. These do not replace the production mark at
-`simhub/AuthenticControls.Plugin/Assets/authentic-controls-mark.png`, and the
+`simhub/AsDriven.Plugin/Assets/as-driven-mark.png`, and the
 plugin does not reference them.
 
 Unlike the earlier ImageGen concept boards, these are produced by

@@ -1,6 +1,6 @@
 # Privacy
 
-Authentic Controls has no telemetry upload, analytics, advertising, account,
+As Driven has no telemetry upload, analytics, advertising, account,
 background update check, or other network feature.
 
 The SimHub client reads the current simulator identity and limited telemetry
@@ -9,9 +9,9 @@ verification. It stores the following information locally:
 
 - plugin preferences under SimHub's normal plugin settings storage;
 - deduplicated unmatched simulator identities under
-  `%LOCALAPPDATA%\SimHub\AuthenticControls\Diagnostics`;
+  `%LOCALAPPDATA%\SimHub\AsDriven\Diagnostics`;
 - user-requested verification drafts under
-  `%LOCALAPPDATA%\SimHub\AuthenticControls\Verification\Drafts`.
+  `%LOCALAPPDATA%\SimHub\AsDriven\Verification\Drafts`.
 
 Verification drafts may contain the observer name entered in the form, exact
 simulator and vehicle identity, game and SimHub versions, test observations,

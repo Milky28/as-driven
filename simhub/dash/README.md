@@ -2,20 +2,20 @@
 
 `generate.py` creates five native SimHub Dash Studio DJSON artifacts:
 
-- **Authentic Controls Preflight Overlay** — Detailed, 840×360.
-- **Authentic Controls Preflight Compact** — Compact, 520×300.
-- **Authentic Controls Preflight Glance** — Glance, 320×120.
-- **Authentic Controls Preflight Display** — a persistent 900×360 auxiliary
+- **As Driven Preflight Overlay** — Detailed, 840×360.
+- **As Driven Preflight Compact** — Compact, 520×300.
+- **As Driven Preflight Glance** — Glance, 320×120.
+- **As Driven Preflight Display** — a persistent 900×360 auxiliary
   display that does not use popup visibility.
-- **Authentic Controls Verification Drive** — a 700×220 in-simulator prompt
+- **As Driven Verification Drive** — a 700×220 in-simulator prompt
   surface for the guided verification drive.
 
 The three overlay templates are click-through. Each follows its own explicit
 boolean property (`PopupDetailedVisible`, `PopupCompactVisible`, or
 `PopupGlanceVisible`), so only the selected size becomes visible. A car identity
 change shows it for ten seconds
-by default. `AuthenticControls.ShowPopup` keeps it visible for button recall,
-`AuthenticControls.HidePopup` hides it, and `AuthenticControls.TogglePopup`
+by default. `AsDriven.ShowPopup` keeps it visible for button recall,
+`AsDriven.HidePopup` hides it, and `AsDriven.TogglePopup`
 supports both operations with one button.
 
 The verification surface is independent of popup size and timeout. It becomes
@@ -80,19 +80,19 @@ No automatic cut`.
 The normal `simhub/build.ps1` command generates the artifacts under:
 
 ```text
-simhub/dist/AuthenticControls/DashTemplates/
-  Authentic Controls Preflight Overlay/
-  Authentic Controls Preflight Compact/
-  Authentic Controls Preflight Glance/
-  Authentic Controls Preflight Display/
-  Authentic Controls Verification Drive/
+simhub/dist/AsDriven/DashTemplates/
+  As Driven Preflight Overlay/
+  As Driven Preflight Compact/
+  As Driven Preflight Glance/
+  As Driven Preflight Display/
+  As Driven Verification Drive/
 ```
 
 The build remains non-installing. The package also includes the ready-made
-**Authentic Controls** overlay layout; load that once instead of creating three
+**As Driven** overlay layout; load that once instead of creating three
 layout parts manually. See [`../overlay/README.md`](../overlay/README.md). The
 layout may stay running because the plugin makes only the selected size visible.
-Choose the size and 1–60 second automatic duration on the **Authentic Controls**
+Choose the size and 1–60 second automatic duration on the **As Driven**
 settings page. Map `TogglePopup` for one show/hide button, or map `ShowPopup`
 and `HidePopup` separately.
 

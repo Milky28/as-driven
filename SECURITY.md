@@ -1,6 +1,6 @@
 # Security policy
 
-Authentic Controls is an early-access local SimHub plugin. It does not run a
+As Driven is an early-access local SimHub plugin. It does not run a
 service, accept remote connections, or automatically download data.
 
 Please report a suspected security issue privately to the project maintainer

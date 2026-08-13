@@ -1,4 +1,4 @@
-# Authentic Controls Database project guidance
+# As Driven Database project guidance
 
 ## Purpose
 
@@ -56,7 +56,7 @@ cannot be automated.
 
 1. The user records a guided drive in the SimHub plugin's contribution
    workflow. Drafts land in
-   `%LOCALAPPDATA%\SimHub\AuthenticControls\Verification\Drafts`.
+   `%LOCALAPPDATA%\SimHub\AsDriven\Verification\Drafts`.
 2. `python -m as_driven_db import-observation <draft> --output
    build/staged.json` stages a bundle. Real-world identity is deliberately left
    as `REVIEW-REQUIRED`, because a drive cannot establish it.
@@ -76,8 +76,8 @@ than silently queueing verification work.
 ## Current handoff state
 
 - Branch: `codex/stabilization`; private remote `origin` at
-  `github.com/Milky28/authentic-controls-db`.
-- Early-access client: 0.15.0.
+  `github.com/Milky28/as-driven`.
+- Early-access client: 0.16.0.
 - Dataset: 0.3.23 with 93 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Exact coverage is 127 of 225 observed AMS2 identities. Guided verification is

@@ -3,7 +3,7 @@
 `brand-mark.png` is generated, not hand-cropped. It is the `rim-lever` silhouette
 from `simhub/dash/brand_mark.py`: a thin rim with a raked lever set off-centre
 inside it. Regenerate both shipped copies, this one and the plugin's embedded
-`Assets/authentic-controls-mark.png`, with:
+`Assets/as-driven-mark.png`, with:
 
 ```powershell
 python simhub/dash/brand_mark.py --production

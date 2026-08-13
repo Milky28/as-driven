@@ -1,6 +1,6 @@
-# Authentic Controls early access
+# As Driven early access
 
-Authentic Controls is ready for an early-access release, not a claim of
+As Driven is ready for an early-access release, not a claim of
 complete simulator or vehicle coverage. The release is intended for testers
 who are comfortable reporting incorrect or missing data.
 
@@ -8,8 +8,8 @@ who are comfortable reporting incorrect or missing data.
 
 - Windows with SimHub 9.11.22;
 - Automobilista 2 executable version 1.6.9.91;
-- Authentic Controls SimHub client 0.15.0;
-- Authentic Controls dataset 0.3.18 and schema v1.
+- As Driven SimHub client 0.16.0;
+- As Driven dataset 0.3.23 and schema v1.
 
 Newer SimHub or AMS2 versions may work, but have not been certified for this
 release. The overlay always displays the exact game version associated with a
@@ -52,9 +52,9 @@ material and is not a promise that every listed identity is a distinct vehicle.
 1. Close SimHub.
 2. Extract the SimHub release ZIP.
 3. Run `simhub/install.ps1` from PowerShell.
-4. Start SimHub, enable **Authentic Controls**, and pin it to the left menu if
+4. Start SimHub, enable **As Driven**, and pin it to the left menu if
    desired.
-5. Load one included Authentic Controls overlay layout in Dash Studio and place
+5. Load one included As Driven overlay layout in Dash Studio and place
    it where desired.
 
 Plugin and database versions advance independently. A database-only release can

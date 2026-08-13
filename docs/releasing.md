@@ -6,8 +6,8 @@ only curated data.
 
 ## Compatibility and versioning
 
-- `AuthenticControls.Plugin` is the client version shown in SimHub.
-- `AuthenticControls.Core` ships with the plugin and uses the same release
+- `AsDriven.Plugin` is the client version shown in SimHub.
+- `AsDriven.Core` ships with the plugin and uses the same release
   version to keep installed binaries easy to audit.
 - `data/v1/index.json` owns the independent dataset version.
 - Schema v1 clients accept compatible schema-v1 dataset updates.
