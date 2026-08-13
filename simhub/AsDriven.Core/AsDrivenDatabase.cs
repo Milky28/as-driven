@@ -188,6 +188,18 @@ namespace AsDriven.Core
             {
                 string simulatorId = RequiredString(simulator, "simulator", recordPath);
                 JObject behavior = RequiredObject(simulator, "behavior", recordPath);
+
+                // Guidance is the effective layer: authentic controls with this
+                // simulator's explicit overrides applied. A car whose real gearbox
+                // has no clutch pedal can still require clutch input in a given
+                // simulator, and the driver needs the value that works in the sim.
+                JObject effectiveControls = ApplyOverrides(controls, simulator, recordPath);
+                JObject effectiveTransmission = RequiredObject(
+                    effectiveControls, "transmission", recordPath);
+                JObject effectiveSteering = RequiredObject(
+                    effectiveControls, "steering", recordPath);
+                JObject effectiveWheelRim = RequiredObject(
+                    effectiveSteering, "wheel_rim", recordPath);
                 JObject confidence = RequiredObject(simulator, "confidence", recordPath);
                 JArray sourceRefs = simulator["source_refs"] as JArray;
                 JArray simulatorIdentities = simulator["identities"] as JArray;
@@ -202,22 +214,22 @@ namespace AsDriven.Core
                     RecordId = recordId,
                     DisplayName = RequiredString(identity, "display_name", recordPath),
                     CarClass = RequiredString(identity, "class", recordPath),
-                    ShiftActuation = RequiredString(transmission, "shift_actuation", recordPath),
-                    ShiftPattern = RequiredString(transmission, "shift_pattern", recordPath),
-                    GearCount = OptionalInteger(transmission, "forward_gears"),
+                    ShiftActuation = RequiredString(effectiveTransmission, "shift_actuation", recordPath),
+                    ShiftPattern = RequiredString(effectiveTransmission, "shift_pattern", recordPath),
+                    GearCount = OptionalInteger(effectiveTransmission, "forward_gears"),
                     UpshiftGuidance = DescribeShiftAction(
-                        RequiredObject(transmission, "upshift", recordPath), true),
+                        RequiredObject(effectiveTransmission, "upshift", recordPath), true),
                     DownshiftGuidance = DescribeShiftAction(
-                        RequiredObject(transmission, "downshift", recordPath), false),
-                    TechniqueSummary = DescribeTechniqueSummary(transmission, behavior),
+                        RequiredObject(effectiveTransmission, "downshift", recordPath), false),
+                    TechniqueSummary = DescribeTechniqueSummary(effectiveTransmission, behavior),
                     StandingStartClutch = RequiredString(
-                        transmission, "standing_start_clutch", recordPath),
+                        effectiveTransmission, "standing_start_clutch", recordPath),
                     AutoBlip = RequiredString(behavior, "auto_blip", recordPath),
                     ShiftCut = RequiredString(behavior, "shift_cut", recordPath),
-                    WheelRimShape = RequiredString(wheelRim, "shape", recordPath),
-                    WheelRimSourceLabel = RequiredString(wheelRim, "source_label", recordPath),
-                    HasSteeringDOR = steering["degrees_of_rotation"] != null,
-                    SteeringDOR = OptionalInteger(steering, "degrees_of_rotation"),
+                    WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
+                    WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
+                    HasSteeringDOR = effectiveSteering["degrees_of_rotation"] != null,
+                    SteeringDOR = OptionalInteger(effectiveSteering, "degrees_of_rotation"),
                     VerifiedGameVersion = RequiredString(
                         simulator, "verified_game_version", recordPath),
                     Confidence = RequiredString(confidence, "level", recordPath),
@@ -260,6 +272,63 @@ namespace AsDriven.Core
                     identities[key] = entry;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the authentic controls with this simulator's overrides applied.
+        /// An override states an explicit, sourced deviation: the real car's value
+        /// stays in the record, while guidance uses the value that is true in the
+        /// simulator. Records without overrides are returned unchanged, so the
+        /// common case costs nothing.
+        /// </summary>
+        private static JObject ApplyOverrides(
+            JObject controls, JObject simulator, string recordPath)
+        {
+            JArray overrides = simulator["overrides"] as JArray;
+            if (overrides == null || overrides.Count == 0)
+            {
+                return controls;
+            }
+
+            var effective = (JObject)controls.DeepClone();
+            foreach (JObject entry in overrides.OfType<JObject>())
+            {
+                string path = RequiredString(entry, "path", recordPath);
+                JToken value = entry["value"];
+                if (value == null)
+                {
+                    throw new InvalidDataException(
+                        "Override has no value: " + path + " in " + recordPath);
+                }
+
+                const string prefix = "/authentic_controls/";
+                if (!path.StartsWith(prefix, StringComparison.Ordinal))
+                {
+                    // Only the authentic layer feeds guidance. Anything else is
+                    // data for reviewers and must not silently change the popup.
+                    continue;
+                }
+
+                string[] segments = path.Substring(prefix.Length).Split('/');
+                JObject parent = effective;
+                for (int index = 0; index < segments.Length - 1; index++)
+                {
+                    parent = parent[segments[index]] as JObject;
+                    if (parent == null)
+                    {
+                        throw new InvalidDataException(
+                            "Override path does not exist: " + path + " in " + recordPath);
+                    }
+                }
+                string leaf = segments[segments.Length - 1];
+                if (parent[leaf] == null)
+                {
+                    throw new InvalidDataException(
+                        "Override path does not exist: " + path + " in " + recordPath);
+                }
+                parent[leaf] = value.DeepClone();
+            }
+            return effective;
         }
 
         private static string DescribeShiftType(int gears, string actuation)

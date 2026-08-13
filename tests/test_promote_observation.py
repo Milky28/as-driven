@@ -168,6 +168,54 @@ class PromoteObservationTests(unittest.TestCase):
             self.assertIn("class-id", kinds)
             self.assertEqual(validate_repository(temp), [])
 
+    def test_simulator_override_is_written_and_scoped(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = _review_entry()
+            # The real car has no clutch pedal, but the simulator requires clutch
+            # input to move off. The record keeps the real value and states the
+            # deviation explicitly.
+            entry["control_overrides"] = {"standing_start_clutch": "not-required"}
+            entry["simulator_overrides"] = [
+                {
+                    "path": "/authentic_controls/transmission/standing_start_clutch",
+                    "value": "required",
+                    "condition": "AMS2 1.6.9.91 requires clutch input to move off.",
+                    "confidence": {"level": "verified", "basis": "Observed in the guided drive."},
+                }
+            ]
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "ams2.test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            transmission = record["authentic_controls"]["transmission"]
+            self.assertEqual("not-required", transmission["standing_start_clutch"])
+            overrides = record["simulators"][0]["overrides"]
+            self.assertEqual(1, len(overrides))
+            self.assertEqual("required", overrides[0]["value"])
+            # The live source is attached automatically when none is given.
+            self.assertTrue(overrides[0]["source_refs"])
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_override_must_target_the_authentic_layer(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = _review_entry()
+            entry["simulator_overrides"] = [
+                {
+                    "path": "/simulators/0/behavior/auto_blip",
+                    "value": "no",
+                    "condition": "irrelevant",
+                    "confidence": {"level": "low", "basis": "test"},
+                }
+            ]
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("/authentic_controls/", str(caught.exception))
+
     def test_incomplete_review_is_refused(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = self._prepare(Path(directory))

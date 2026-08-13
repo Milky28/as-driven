@@ -690,6 +690,28 @@ namespace AsDriven.Core.Tests
                         unverified.TechniqueSummary.Contains("upshift throttle technique is not yet verified"),
                         "discloses an unverified upshift technique instead of omitting it");
 
+                    // An override makes guidance use the simulator's value while the
+                    // record keeps the real car's. Without this the popup would tell
+                    // a PDK driver no clutch is needed in a sim that stalls without it.
+                    string clutchOverride =
+                        "[{\"path\":\"/authentic_controls/transmission/standing_start_clutch\","
+                        + "\"value\":\"required\",\"condition\":\"AMS2 requires clutch input to move off.\","
+                        + "\"source_refs\":[\"test.source\"],"
+                        + "\"confidence\":{\"level\":\"verified\",\"basis\":\"observed\"}}]";
+                    GuidanceSnapshot overridden = LoadSyntheticGuidance(
+                        syntheticRoot, "Override Car", "not-required", "yes", "sequential-paddles",
+                        clutchOverride);
+                    Equal("required", overridden.StandingStartClutch,
+                        "applies a simulator override to the standing-start clutch");
+                    True(
+                        overridden.TechniqueSummary.Contains("Use the clutch to pull away"),
+                        "derives technique guidance from the overridden value");
+
+                    GuidanceSnapshot notOverridden = LoadSyntheticGuidance(
+                        syntheticRoot, "Plain Car", "not-required", "yes", "sequential-paddles");
+                    Equal("not-required", notOverridden.StandingStartClutch,
+                        "leaves a record without overrides untouched");
+
                     // An automatic gearbox has no upshift technique to describe,
                     // so it must stay silent rather than claim it is unverified.
                     GuidanceSnapshot automatic = LoadSyntheticGuidance(
@@ -812,11 +834,13 @@ namespace AsDriven.Core.Tests
             string telemetryName,
             string upshiftThrottleLift,
             string simulatorShiftCut,
-            string shiftActuation)
+            string shiftActuation,
+            string overrideJson = null)
         {
             string directory = Path.Combine(root, Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(Path.Combine(directory, "cars"));
             string recordId = "ams2.synthetic";
+            string overrides = overrideJson ?? "[]";
             string record = "{"
                 + "\"schema_version\":\"1.0.0\","
                 + "\"record_id\":\"" + recordId + "\","
@@ -837,7 +861,7 @@ namespace AsDriven.Core.Tests
                 + "\"behavior\":{\"shift_type\":\"" + shiftActuation + "\",\"auto_blip\":\"yes\","
                 + "\"shift_cut\":\"" + simulatorShiftCut + "\","
                 + "\"wheel_rim_type\":{\"normalized\":\"round\",\"source_label\":\"test\"}},"
-                + "\"overrides\":[],\"verified_game_version\":\"1.6.9.91\",\"verified_at\":\"2026-08-13\","
+                + "\"overrides\":" + overrides + ",\"verified_game_version\":\"1.6.9.91\",\"verified_at\":\"2026-08-13\","
                 + "\"source_refs\":[\"test.source\"],"
                 + "\"confidence\":{\"level\":\"medium\",\"basis\":\"synthetic test record\"}}],"
                 + "\"provenance\":{\"claims\":[{\"paths\":[\"/identity\"],\"source_refs\":[\"test.source\"],"

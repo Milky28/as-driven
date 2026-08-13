@@ -89,6 +89,21 @@ def build_promoted_record(
         identities.append({"kind": "telemetry-name", "value": value})
     simulator["identities"] = identities + class_identities
 
+    # An explicit, sourced deviation where the simulator differs from the real
+    # car. The record keeps the real value and the client applies the override
+    # when it builds guidance, so both layers stay true.
+    for override in entry.get("simulator_overrides") or []:
+        for field in ("path", "value", "condition", "confidence"):
+            if field not in override:
+                raise ValueError(f"{label}: override is missing {field!r}")
+        if not str(override["path"]).startswith("/authentic_controls/"):
+            raise ValueError(
+                f"{label}: override path must point into /authentic_controls/, "
+                f"got {override['path']!r}"
+            )
+        override.setdefault("source_refs", [live_source_id])
+    simulator["overrides"] = list(entry.get("simulator_overrides") or [])
+
     confidence = _required(entry, "confidence", label)
     simulator["source_refs"] = all_refs
     simulator["confidence"] = {
