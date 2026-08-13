@@ -117,9 +117,12 @@
           </Border>
           <WrapPanel Margin="0,2,0,8">
             <Button x:Name="_guidedStart" Content="Start in-sim guided drive" Width="205" IsEnabled="False" Click="GuidedStartClicked" />
+            <Button Content="Next / accept" Width="110" Click="GuidedNextClicked" />
+            <Button Content="Retry" Width="75" Click="GuidedRetryClicked" />
+            <Button Content="Skip" Width="75" Click="GuidedSkipClicked" />
             <Button Content="Cancel" Width="85" Click="GuidedCancelClicked" />
           </WrapPanel>
-          <TextBlock Text="For in-car use, map VerificationDriveNext, Retry, Skip, and Cancel under SimHub Controls and events. Driving results are suggestions until you review and save the draft."
+          <TextBlock Text="Accept a captured result with Next, redo it with Retry, or Skip to leave that step unanswered and finish it in the form below. These buttons work at the desk; for in-car use map VerificationDriveNext, Retry, Skip, and Cancel under SimHub Controls and events so you never need to alt-tab. Driving results are suggestions until you review and save the draft."
                      TextWrapping="Wrap" Opacity="0.76" Margin="0,0,0,12" />
           <TextBlock x:Name="_status" AutomationProperties.Name="Verification status message" TextWrapping="Wrap" Margin="0,4,0,0" />
         </StackPanel>

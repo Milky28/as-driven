@@ -1,5 +1,12 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.25 (aero inheritance, no driving)
+
+`BMW M4 GT3 - Low Downforce` and `Porsche 992 GT3 R - Low Downforce` became
+explicit aliases of the base records verified in batch 03, each disclosed as an
+untested aero configuration. No control value changed and no record was added.
+Three Low Downforce identities still wait on unverified base cars.
+
 ## Completed in dataset 0.3.24 (contemporary GT batch 03)
 
 Eight GT cars, promoted through `import-observation` and `promote-observation`.

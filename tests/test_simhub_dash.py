@@ -96,9 +96,19 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("AsDriven.VerificationDriveResult", serialized)
         self.assertIn("AsDriven.VerificationDriveStatus", serialized)
         self.assertIn("AsDriven.VerificationDriveLiveValues", serialized)
-        self.assertIn("NEXT / ACCEPT", named["Controls"]["Text"])
         self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
         self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
+
+        # The action row tells the driver what to do only once a result exists.
+        # Before that the verbs are reference, so they stay muted.
+        self.assertIn("NEXT / ACCEPT", named["ControlsIdleText"]["Text"])
+        self.assertEqual(self.generator.MUTED, named["ControlsIdleText"]["TextColor"])
+        ready = named["ControlsReadyText"]["Text"]
+        self.assertIn("NEXT accept", ready)
+        self.assertIn("RETRY redo", ready)
+        # "Skip" is not self-explanatory; the row has to say where it is resolved.
+        self.assertIn("SKIP fix in form", ready)
+        self.assertEqual(self.generator.ACCENT, named["ControlsReadyText"]["TextColor"])
         self.assertLessEqual(named["SuccessSummary"]["Height"], 28)
         self.assertEqual(14, named["PromptLine1"]["FontSize"])
         self.assertEqual(22, named["PromptLine1"]["Height"])

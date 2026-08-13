@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.24",
+  "dataset_version": "0.3.25",
   "approved_at": "2026-08-13",
   "record_id": "ams2.bmw-m4-gt3",
   "telemetry_name": "BMW M4 GT3",
@@ -23,5 +23,11 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the real-world transmission is supported by a registered source.",
-  "scope_notes": "Single exact identity from one guided-verification drive."
+  "scope_notes": "Single exact identity from one guided-verification drive. 'BMW M4 GT3 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "additional_telemetry_names": [
+    {
+      "value": "BMW M4 GT3 - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ]
 }

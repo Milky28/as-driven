@@ -713,6 +713,21 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && ![AsDriven.VerificationDriveResultSuccessful]",
     )
+    # The action row is deliberately state-dependent. Before a result exists the
+    # verbs are only reference, so they stay muted; once a result is captured the
+    # driver has a decision to make, so the row brightens and says what each verb
+    # does. "Skip" in particular is not self-explanatory: it means leave this step
+    # unanswered and complete it in the form afterwards.
+    controls_idle = factory.layer(
+        "ControlsIdle",
+        [factory.text("ControlsIdleText", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, MUTED, horizontal_alignment=2, font_weight="Bold")],
+        visible_expression="![AsDriven.VerificationDriveResultReady]",
+    )
+    controls_ready = factory.layer(
+        "ControlsReady",
+        [factory.text("ControlsReadyText", "NEXT accept   •   RETRY redo   •   SKIP fix in form", 370, 181, 302, 23, 10, ACCENT, horizontal_alignment=2, font_weight="Bold")],
+        visible_expression="[AsDriven.VerificationDriveResultReady]",
+    )
     return [
         factory.rectangle("Card", 4, 4, 692, 212, CARD, radius=18, border_color=SLATE, border=2),
         factory.rectangle("Accent", 20, 4, 660, 5, ACCENT, radius=3),
@@ -727,7 +742,8 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         successful_status,
         review_status,
         factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AsDriven.VerificationDriveLiveValues]"),
-        factory.text("Controls", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, ACCENT, horizontal_alignment=2, font_weight="Bold"),
+        controls_idle,
+        controls_ready,
     ]
 
 
