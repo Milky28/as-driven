@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.20 contains 90 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.21 contains 90 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,23 +12,24 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 117 observed identities are covered exactly by curated records.
-- 108 observed identities require some action.
-- 90 currently appear to need full guided verification.
+- 122 observed identities are covered exactly by curated records.
+- 103 observed identities are not covered.
+- 90 of those need full guided verification, and they are now the only work
+  that requires driving.
 - 41 of those 90 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
 - 49 require independent control research in addition to current-game testing.
-- No `aero-inheritance-ready` identities remain: dataset 0.3.20 promoted the
-  last seven as explicit aliases with untested-aero disclosure.
-- Seven more Low Downforce identities can inherit only after their base car is
-  verified.
-- Four unqualified/configuration identities require an explicit relationship
-  review against an already curated qualified configuration.
-- Five stored identities need rename/removal/history review before deciding
-  whether to test them.
-- One whitespace-only identity needs an explicit alias review.
-- The BMW M3 Safety Car is held for a product-scope decision.
+- Seven Low Downforce identities can inherit only after their base car is
+  verified; they resolve as a side effect of the batches below.
+- Five identities are reviewed as retired pre-rename observations and one as
+  out of product scope. Both outcomes are recorded with a written basis in
+  `research/ams2-identity-decisions.json`.
+
+Every review-only queue is now empty. Dataset 0.3.20 promoted the seven
+`aero-inheritance-ready` identities, and 0.3.21 promoted the four unqualified
+configuration identities and the single whitespace-only identity as explicit
+aliases, then recorded the retired and out-of-scope decisions.
 
 `simhub_max_gears` in the manifest is a weak hint, not evidence. It is the
 highest gear index SimHub observed, so a spurious reading inflates it; the
@@ -43,12 +44,19 @@ can outlive a rename or removal.
 
 ### 1. Resolve inexpensive identity work
 
-The seven `aero-inheritance-ready` entries were resolved in dataset 0.3.20.
-Four `configuration-inheritance-review`, one `formatting-only-review`, five
-`identity-history-review`, and one `special-purpose-review` entry remain, and
-none of them require driving. Nothing is silently aliased. Every accepted
-identity remains explicit and any untested aero inheritance is disclosed in
-record notes and provenance.
+Complete. Datasets 0.3.20 and 0.3.21 cleared every review-only queue: seven
+aero inheritances, four unqualified configurations, and one whitespace-only
+identity became explicit aliases, and six identities were closed as reviewed
+decisions rather than pending work.
+
+Nothing was silently aliased. Every accepted identity is written into the
+record and disclosed in its curation approval, and any untested aero or
+configuration inheritance says so in the record notes.
+
+A retired identity is deliberately not aliased onto its renamed record. It is
+not selectable in the certified build, so inherited controls could not be
+verified there; `research/ams2-identity-decisions.json` records the successor
+name and the reasoning instead.
 
 ### 2. Verify modern prototypes
 

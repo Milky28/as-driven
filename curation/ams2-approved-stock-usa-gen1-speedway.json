@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.16",
+  "dataset_version": "0.3.21",
   "approved_at": "2026-08-11",
   "record_id": "ams2.stock-usa-gen1-speedway",
   "telemetry_name": "Stock USA Gen1 - Speedway",
@@ -23,5 +23,11 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact configuration behavior is directly verified; real-world generation mapping remains unresolved.",
-  "scope_notes": "Speedway configuration only; no aliases for other Gen1 configurations."
+  "scope_notes": "Speedway configuration only; no aliases for other Gen1 configurations.",
+  "additional_telemetry_names": [
+    {
+      "value": "Stock USA Gen1 - Speedway ",
+      "basis": "Approved formatting-only alias. The stored identity differs from the curated name by trailing whitespace only; runtime matching is exact and untrimmed, so the alias is required for the padded form to match."
+    }
+  ]
 }

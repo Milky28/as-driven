@@ -70,13 +70,33 @@ def family(name: str) -> str:
     return "other"
 
 
+def reviewer_decisions() -> dict[str, dict[str, Any]]:
+    """Explicit review outcomes for identities that are neither curated nor queued."""
+    payload = read_json(ROOT / "research" / "ams2-identity-decisions.json")
+    return {item["telemetry_name"]: item for item in payload["decisions_list"]}
+
+
 def classify(
     name: str,
     curated: dict[str, str],
     observed_names: set[str],
+    decisions: dict[str, dict[str, Any]],
 ) -> tuple[str, str, str | None]:
     if name in curated:
         return "covered-exact", "No verification needed; exact runtime identity is curated.", curated[name]
+
+    decision = decisions.get(name)
+    if decision is not None:
+        if decision["disposition"] == "retired-identity":
+            superseded = decision.get("superseded_by")
+            action = (
+                "Reviewed as a retired pre-rename identity"
+                + (f"; superseded by {superseded}." if superseded else " with no identified successor.")
+                + " No guided drive is scheduled."
+            )
+        else:
+            action = "Reviewed as outside product scope; no controls are curated for it."
+        return decision["disposition"], action, decision.get("related_record_id")
 
     stripped = name.strip()
     formatting = [value for value in curated if value.strip().casefold() == stripped.casefold()]
@@ -122,21 +142,6 @@ def classify(
             None,
         )
 
-    historical_names = {
-        "Formula V10 Gen2",
-        "Formula V12",
-        "Formula V8 Gen1 (B)",
-        "Formula Vee Fin",
-        "FIA-GT1 Lamborghini Murcielago R-SV GT1",
-        "FIA-GT1 Maserati MC12 GT1",
-    }
-    if name in historical_names:
-        return (
-            "identity-history-review",
-            "Resolve whether this stored identity is current, replaced, or a distinct selectable car before testing.",
-            None,
-        )
-
     return (
         "full-guided-verification",
         "Capture the current exact identity and complete the guided driving and cockpit review.",
@@ -154,9 +159,10 @@ def build(audit_path: Path, cars_dir: Path) -> dict[str, Any]:
     }
     entries: list[dict[str, Any]] = []
 
+    decisions = reviewer_decisions()
     for item in observed:
         name = item["car_model"]
-        disposition, action, related = classify(name, curated, observed_names)
+        disposition, action, related = classify(name, curated, observed_names, decisions)
         entry = {
             "telemetry_name": name,
             "car_id": item["car_id"],
@@ -199,6 +205,8 @@ def build(audit_path: Path, cars_dir: Path) -> dict[str, Any]:
             "Aero inheritance is a review suggestion and must explicitly state that the variant was not separately tested.",
             "Stored SimHub identities prove prior observation, not that the car still exists in the current selector.",
             "Full guided verification remains required when no reviewed base profile safely establishes controls.",
+            "Retired and out-of-scope outcomes come from research/ams2-identity-decisions.json, not from generator heuristics.",
+            "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build.",
         ],
         "stats": {
             "observed_identities": len(entries),

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.18",
+  "dataset_version": "0.3.21",
   "approved_at": "2026-08-12",
   "record_id": "ams2.formula-edge-model2-high-downforce",
   "telemetry_name": "Formula Edge Model2 - High Downforce",
@@ -23,5 +23,11 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed draft ams2.formula-edge-model2-high-downforce.20260812t173111084z-2bd2b1c3."
+  "scope_notes": "Reviewed draft ams2.formula-edge-model2-high-downforce.20260812t173111084z-2bd2b1c3.",
+  "additional_telemetry_names": [
+    {
+      "value": "Formula Edge Model2",
+      "basis": "Approved pre-aero-split configuration alias: the unqualified identity is the same car observed before its aero suffix existed. Controls are inherited from the verified qualified configuration and that unqualified form was not separately live-tested."
+    }
+  ]
 }

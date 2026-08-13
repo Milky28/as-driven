@@ -70,8 +70,79 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         entry = next(
             item for item in manifest["entries"] if item["telemetry_name"] == "Formula Edge Model1"
         )
-        self.assertEqual(entry["coverage_disposition"], "configuration-inheritance-review")
+        # The plain identity is now covered, but only because the alias is
+        # written into the record and disclosed in its approval. Coverage must
+        # never come from the generator inferring the relationship.
+        self.assertEqual(entry["coverage_disposition"], "covered-exact")
         self.assertEqual(entry["related_record_id"], "ams2.formula-edge-model1-high-downforce")
+
+        record = json.loads(
+            (
+                ROOT / "data" / "v1" / "cars" / "ams2.formula-edge-model1-high-downforce.json"
+            ).read_text(encoding="utf-8")
+        )
+        names = [
+            item["value"]
+            for item in record["simulators"][0]["identities"]
+            if item["kind"] == "telemetry-name"
+        ]
+        self.assertIn("Formula Edge Model1", names)
+        self.assertIn("Formula Edge Model1 - High Downforce", names)
+
+        approval = json.loads(
+            (
+                ROOT / "curation" / "ams2-approved-formula-edge-model1-high-downforce.json"
+            ).read_text(encoding="utf-8")
+        )
+        disclosed = [
+            item["value"] for item in approval.get("additional_telemetry_names", [])
+        ]
+        self.assertIn("Formula Edge Model1", disclosed)
+
+    def test_reviewed_identities_are_data_not_generator_heuristics(self):
+        manifest = json.loads(
+            (ROOT / "research" / "ams2-coverage-manifest.json").read_text(encoding="utf-8")
+        )
+        decisions = json.loads(
+            (ROOT / "research" / "ams2-identity-decisions.json").read_text(encoding="utf-8")
+        )
+        reviewed = {
+            item["telemetry_name"]: item["disposition"]
+            for item in decisions["decisions_list"]
+        }
+        entries = {entry["telemetry_name"]: entry for entry in manifest["entries"]}
+
+        # Every retired or out-of-scope disposition must come from a checked-in
+        # decision carrying a written basis, never from a hardcoded name list.
+        for entry in manifest["entries"]:
+            disposition = entry["coverage_disposition"]
+            if disposition in {"retired-identity", "out-of-scope"}:
+                self.assertIn(entry["telemetry_name"], reviewed)
+                self.assertEqual(reviewed[entry["telemetry_name"]], disposition)
+
+        for item in decisions["decisions_list"]:
+            self.assertTrue(item["basis"].strip(), item["telemetry_name"])
+            self.assertEqual(
+                entries[item["telemetry_name"]]["coverage_disposition"],
+                item["disposition"],
+            )
+
+        # A retired identity is never aliased onto a curated record.
+        for item in decisions["decisions_list"]:
+            if item["disposition"] != "retired-identity":
+                continue
+            self.assertNotIn(
+                item["telemetry_name"],
+                {
+                    name
+                    for path in (ROOT / "data" / "v1" / "cars").glob("*.json")
+                    for record in [json.loads(path.read_text(encoding="utf-8"))]
+                    for simulator in record["simulators"]
+                    for identity in simulator["identities"]
+                    if identity["kind"] == "telemetry-name"
+                    for name in [identity["value"]]
+                },
+            )
 
 
 if __name__ == "__main__":

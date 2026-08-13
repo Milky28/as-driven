@@ -1,0 +1,60 @@
+{
+  "decisions": "ams2-identity-review",
+  "schema_version": "1.0.0",
+  "reviewed_at": "2026-08-12",
+  "notes": [
+    "Explicit reviewer outcomes for observed SimHub identities that are not curated and are not queued for a guided drive.",
+    "A retired identity is a stored pre-rename observation. It is deliberately not aliased onto the renamed record, because it is not selectable in the certified build and cannot be verified there.",
+    "These decisions replace hardcoded review outcomes in the manifest generator so the reasoning is reviewable data."
+  ],
+  "decisions_list": [
+    {
+      "telemetry_name": "FIA-GT1 Maserati MC12 GT1",
+      "disposition": "retired-identity",
+      "last_observed": "2024-06-08",
+      "superseded_by": "Maserati MC12 GT1",
+      "related_record_id": "ams2.maserati-mc12-gt1",
+      "basis": "Stored 2024 observation using the retired FIA-GT1 class prefix. The current selectable identity drops the prefix and is curated. Not aliased: the prefixed name is not selectable in AMS2 1.6.9.91, so inherited controls could not be verified there."
+    },
+    {
+      "telemetry_name": "FIA-GT1 Lamborghini Murcielago R-SV GT1",
+      "disposition": "retired-identity",
+      "last_observed": "2024-12-07",
+      "superseded_by": "Lamborghini Murcielago R-GT",
+      "related_record_id": null,
+      "basis": "Stored 2024 observation. The curated current identity is Lamborghini Murcielago R-GT, but R-SV and R-GT are distinct Reiter models in the real world, so no record link is asserted. Resolve the real-world relationship before any future alias."
+    },
+    {
+      "telemetry_name": "Formula V10 Gen2",
+      "disposition": "retired-identity",
+      "last_observed": "2024-04-08",
+      "superseded_by": "Formula V10 Gen2 (B) - High Downforce, Formula V10 Gen2 (M) - High Downforce",
+      "related_record_id": null,
+      "basis": "Stored 2024 class-level observation from before the tyre and aero split. It maps to two curated records rather than one, so a single alias would be ambiguous."
+    },
+    {
+      "telemetry_name": "Formula Vee Fin",
+      "disposition": "retired-identity",
+      "last_observed": "2024-06-23",
+      "superseded_by": "Formula Vee Gen1 + Fin",
+      "related_record_id": "ams2.formula-vee-fin",
+      "basis": "Stored 2024 observation of the pre-rename name. The renamed identity is curated and verified. Not aliased because the old name is not selectable in the certified build."
+    },
+    {
+      "telemetry_name": "Formula V12",
+      "disposition": "retired-identity",
+      "last_observed": "2024-04-08",
+      "superseded_by": null,
+      "related_record_id": null,
+      "basis": "Stored 2024 observation with no curated counterpart and no current name identified. Unresolved: confirm against the current selector before any verification work is scheduled."
+    },
+    {
+      "telemetry_name": "BMW M3 Safety Car",
+      "disposition": "out-of-scope",
+      "last_observed": "2026-04-26",
+      "superseded_by": null,
+      "related_record_id": null,
+      "basis": "Non-racing safety vehicle. The database answers which physical controls and shifting technique to use for a competition car, so a safety car is outside product scope. It stays unmatched in the client rather than receiving guessed controls."
+    }
+  ]
+}

@@ -4,6 +4,29 @@ Dataset 0.3.18 completes the earlier audited queue. It deliberately counted
 selectable model/configuration identities, not release-note classes, renames, or
 generic aero announcements.
 
+## Completed in dataset 0.3.21 (identity review, no driving)
+
+Explicit aliases added to already curated records:
+
+1. Formula Edge Model1, Model2, and Model3, and Formula V8 Gen1 (B). Each plain
+   name is the same car observed before its aero suffix existed, inherited from
+   the verified `- High Downforce` configuration and disclosed as not separately
+   tested.
+2. `Stock USA Gen1 - Speedway ` with trailing whitespace. Runtime matching is
+   exact and untrimmed, so without this alias that stored identity would be
+   reported unmatched to the driver.
+
+Closed as reviewed decisions in `research/ams2-identity-decisions.json`:
+
+- Five retired pre-rename identities last observed in 2024: FIA-GT1 Maserati
+  MC12 GT1, FIA-GT1 Lamborghini Murcielago R-SV GT1, Formula V10 Gen2, Formula
+  Vee Fin, and Formula V12. None is aliased onto its renamed record, because
+  none is selectable in AMS2 1.6.9.91. Two remain genuinely unresolved: the
+  Murcielago R-SV and R-GT relationship, and Formula V12, which has no
+  identified successor.
+- BMW M3 Safety Car is out of product scope as a non-racing vehicle and stays
+  unmatched in the client rather than receiving guessed controls.
+
 ## Completed in dataset 0.3.20 (aero-inheritance review, no driving)
 
 Seven exact `- Low Downforce` identities whose base record was already verified

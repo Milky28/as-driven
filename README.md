@@ -86,7 +86,7 @@ python -m authentic_controls_db import-observation observation.json --output bui
 python -m authentic_controls_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.20 contains 90 reviewed records. Its newest records complete the
+Dataset 0.3.21 contains 90 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.20 contains 90 curated AMS2 records promoted through the reviewed
+Dataset 0.3.21 contains 90 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -261,6 +261,13 @@ Dataset 0.3.20 promotes the seven remaining aero-inheritance-ready identities
 as explicit Low Downforce aliases of already verified base records. No control
 value changes and no record is added; each alias is disclosed as an untested
 aero configuration in its record notes and curation approval.
+Dataset 0.3.21 closes the remaining review-only queue. Four unqualified Formula
+identities and one whitespace-only Stock USA identity become explicit aliases of
+their curated records, and six identities are closed as written decisions in
+`research/ams2-identity-decisions.json`: five retired pre-rename observations
+that are deliberately not aliased because they are not selectable in the
+certified build, and the BMW M3 Safety Car as outside product scope. Guided
+verification is now the only remaining category of open work.
 
 ## Licensing
 
