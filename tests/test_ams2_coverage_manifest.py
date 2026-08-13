@@ -116,7 +116,7 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         # decision carrying a written basis, never from a hardcoded name list.
         for entry in manifest["entries"]:
             disposition = entry["coverage_disposition"]
-            if disposition in {"retired-identity", "out-of-scope"}:
+            if disposition in {"retired-identity", "out-of-scope", "third-party-content"}:
                 self.assertIn(entry["telemetry_name"], reviewed)
                 self.assertEqual(reviewed[entry["telemetry_name"]], disposition)
 

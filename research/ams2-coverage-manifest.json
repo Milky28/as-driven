@@ -24,7 +24,8 @@
       "covered-exact": 122,
       "full-guided-verification": 90,
       "out-of-scope": 1,
-      "retired-identity": 5
+      "retired-identity": 4,
+      "third-party-content": 1
     },
     "full_verifications_by_family": {
       "club-road": 10,
@@ -878,10 +879,10 @@
       "telemetry_name": "FIA-GT1 Lamborghini Murcielago R-SV GT1",
       "car_id": "FIA-GT1 Lamborghini Murcielago R-SV GT1",
       "identity_file": "FIA-GT1 Lamborghini Murcielago R-SV GT1.shcarsettings",
-      "coverage_disposition": "retired-identity",
+      "coverage_disposition": "third-party-content",
       "family": "gt",
-      "related_record_id": "ams2.lamborghini-murcielago-r-gt",
-      "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Lamborghini Murcielago R-GT. No guided drive is scheduled.",
+      "related_record_id": null,
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733629929.8409333,
       "research_readiness": "not-applicable"

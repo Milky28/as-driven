@@ -40,6 +40,13 @@ These counts describe observed telemetry identities, not guaranteed current
 selector entries. SimHub retains a file after observing a car, so an identity
 can outlive a rename or removal.
 
+An observed identity is also not proof of official content. SimHub records any
+car it sees, including third-party mods, so the inventory can contain cars AMS2
+never shipped. The FIA-GT1 prefixed Murcielago R-SV is one confirmed example.
+Treat an identity that predates the official car's release announcement as a
+prompt to check provenance before scheduling verification work, and record the
+outcome in `research/ams2-identity-decisions.json`.
+
 ## Work order
 
 ### 1. Resolve inexpensive identity work

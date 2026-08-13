@@ -94,6 +94,11 @@ def classify(
                 + (f"; superseded by {superseded}." if superseded else " with no identified successor.")
                 + " No guided drive is scheduled."
             )
+        elif decision["disposition"] == "third-party-content":
+            action = (
+                "Reviewed as third-party content that AMS2 never shipped; "
+                "outside the curated scope of official simulator cars."
+            )
         else:
             action = "Reviewed as outside product scope; no controls are curated for it."
         return decision["disposition"], action, decision.get("related_record_id")
