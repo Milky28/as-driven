@@ -1,0 +1,153 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.puma-gte",
+  "identity": {
+    "display_name": "Puma GTE",
+    "manufacturer": "Puma",
+    "model": "GTE",
+    "year": {
+      "from": 1970,
+      "to": 1980,
+      "label": "1970 to 1980 production"
+    },
+    "class": "CopaClassicB",
+    "real_world_identity_notes": "Brazilian sports car built between 1970 and 1980 on Volkswagen running gear, with a fibreglass body, an air-cooled flat four and a four-speed manual gearbox. Despite the GTE name it is a classic road-derived car rather than a GTE-class racer, and AMS2 classes it under Copa Classic B. Its controls match that: an H-pattern shift, the clutch needed to pull away, and no automation at all.",
+    "variant": "AMS2 Copa Classic B representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "This is a classic road-derived car rather than a GTE racer: H-pattern shift, clutch required to move off, and no automatic cut or blip.",
+      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes, which record that the upshift was accepted after a throttle lift and the downshift after the driver's own blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Puma GTE"
+        },
+        {
+          "kind": "class-id",
+          "value": "CopaClassicB"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.puma-gte.20260813t200837646z-e450e3e2 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "supercars-net.puma-gte",
+        "ams2.local-live-puma-gte-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the four-speed manual gearbox on Volkswagen running gear is supported by a registered secondary source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "supercars-net.puma-gte",
+          "ams2.local-live-puma-gte-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered secondary source establishes the Puma GTE identity, its Volkswagen mechanicals and its four-speed manual gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "supercars-net.puma-gte",
+          "ams2.local-live-puma-gte-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source specifies a four-speed manual gearbox, and the live drive confirmed four gears through an H-pattern shift. Whether that gearbox is synchromesh or dog engaged is not established and stays unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-puma-gte-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-puma-gte-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The guided drive recorded that a clutchless upshift was accepted after a throttle lift and a clutchless downshift after the driver's manual throttle blip, with no automatic cut or blip detected."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

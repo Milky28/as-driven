@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.26",
+  "dataset_version": "0.3.27",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,28 +15,27 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 107,
-    "covered_exact_identities": 143,
-    "uncovered_identities": 82,
-    "full_guided_verifications": 71,
+    "curated_records": 112,
+    "covered_exact_identities": 150,
+    "uncovered_identities": 75,
+    "full_guided_verifications": 66,
     "dispositions": {
-      "aero-inheritance-after-base": 3,
-      "covered-exact": 143,
-      "full-guided-verification": 71,
+      "aero-inheritance-after-base": 1,
+      "covered-exact": 150,
+      "full-guided-verification": 66,
       "out-of-scope": 1,
       "retired-identity": 3,
       "third-party-content": 4
     },
     "full_verifications_by_family": {
       "club-road": 10,
-      "gt": 5,
       "open-wheel": 42,
       "other": 6,
       "touring-stock": 8
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 43,
-      "legacy-controls-candidate-available": 28
+      "independent-control-research-needed": 42,
+      "legacy-controls-candidate-available": 24
     }
   },
   "entries": [
@@ -662,10 +661,10 @@
       "telemetry_name": "Chevrolet Corvette C8.R",
       "car_id": "Chevrolet Corvette C8.R",
       "identity_file": "Chevrolet Corvette C8.R.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.chevrolet-corvette-c8-r",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1755198594.6942918,
       "legacy_sheet_candidate": {
@@ -2372,10 +2371,10 @@
       "telemetry_name": "Nissan R390 GT1",
       "car_id": "Nissan R390 GT1",
       "identity_file": "Nissan R390 GT1.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.nissan-r390-gt1",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 42,
       "identity_file_modified_at": 1759703502.1276586,
       "legacy_sheet_candidate": {
@@ -2390,10 +2389,10 @@
       "telemetry_name": "Nissan R390 GT1 - Low Downforce",
       "car_id": "Nissan R390 GT1 - Low Downforce",
       "identity_file": "Nissan R390 GT1 - Low Downforce.shcarsettings",
-      "coverage_disposition": "aero-inheritance-after-base",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Verify the observed base car first, then review this exact aero identity as inherited.",
+      "related_record_id": "ams2.nissan-r390-gt1",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733608482.5229075,
       "research_readiness": "not-applicable"
@@ -2468,10 +2467,10 @@
       "telemetry_name": "Porsche 911 GT1-98",
       "car_id": "Porsche 911 GT1-98",
       "identity_file": "Porsche 911 GT1-98.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.porsche-911-gt1-98",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 35,
       "identity_file_modified_at": 1756593711.5297527,
       "legacy_sheet_candidate": {
@@ -2486,10 +2485,10 @@
       "telemetry_name": "Porsche 911 GT1-98 - Low Downforce",
       "car_id": "Porsche 911 GT1-98 - Low Downforce",
       "identity_file": "Porsche 911 GT1-98 - Low Downforce.shcarsettings",
-      "coverage_disposition": "aero-inheritance-after-base",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Verify the observed base car first, then review this exact aero identity as inherited.",
+      "related_record_id": "ams2.porsche-911-gt1-98",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733619011.2677484,
       "research_readiness": "not-applicable"
@@ -2540,13 +2539,13 @@
       "telemetry_name": "Porsche 911 RSR GTE",
       "car_id": "Porsche 911 RSR GTE",
       "identity_file": "Porsche 911 RSR GTE.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.porsche-911-rsr-gte",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753060209.760928,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Porsche 935/77",
@@ -2696,10 +2695,10 @@
       "telemetry_name": "Puma GTE",
       "car_id": "Puma GTE",
       "identity_file": "Puma GTE.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.puma-gte",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 150,
       "identity_file_modified_at": 1722805111.2144022,
       "legacy_sheet_candidate": {

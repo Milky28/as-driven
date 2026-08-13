@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.26 contains 107 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.27 contains 112 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,9 +12,9 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 143 observed identities are covered exactly by curated records.
-- 82 observed identities are not covered.
-- 71 of those need full guided verification, and they are now the only work
+- 150 observed identities are covered exactly by curated records.
+- 75 observed identities are not covered.
+- 66 of those need full guided verification, and they are now the only work
   that requires driving.
 - 39 of those 85 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current

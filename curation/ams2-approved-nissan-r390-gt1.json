@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.27",
+  "approved_at": "2026-08-13",
+  "record_id": "ams2.nissan-r390-gt1",
+  "telemetry_name": "Nissan R390 GT1",
+  "telemetry_class": "GT1",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.nissan-r390-gt1.20260813t195441014z-0cff25f1",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Controls were directly observed with assists disabled; the Xtrac six-speed sequential and its lever are supported by a registered source.",
+  "scope_notes": "'Nissan R390 GT1 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "additional_telemetry_names": [
+    {
+      "value": "Nissan R390 GT1 - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ]
+}

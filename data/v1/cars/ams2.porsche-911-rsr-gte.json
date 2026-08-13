@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.porsche-911-rsr-gte",
+  "identity": {
+    "display_name": "Porsche 911 RSR GTE",
+    "manufacturer": "Porsche",
+    "model": "911 RSR",
+    "year": {
+      "from": 2019,
+      "label": "2019 model year"
+    },
+    "class": "GTE",
+    "real_world_identity_notes": "Mid-engine GTE car with a naturally aspirated flat six. Porsche's media guide specifies a weight-optimised six-speed sequential constant-mesh gearbox in a magnesium casing, shifted by an electronic actuator through steering-wheel paddles.",
+    "variant": "AMS2 GTE representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "prototype",
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 RSR GTE"
+        },
+        {
+          "kind": "class-id",
+          "value": "GTE"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "prototype",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-rsr-gte.20260813t200336168z-ccc5802f by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "porsche.911-rsr.2019-media-guide",
+        "ams2.local-live-porsche-911-rsr-gte-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the manufacturer specifies the six-speed sequential paddle-shifted gearbox."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "porsche.911-rsr.2019-media-guide",
+          "ams2.local-live-porsche-911-rsr-gte-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The manufacturer media guide establishes the 2019 911 RSR identity and its transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "porsche.911-rsr.2019-media-guide",
+          "ams2.local-live-porsche-911-rsr-gte-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The manufacturer specifies a six-speed sequential constant-mesh gearbox with an electronic shift actuator and paddles, and the live drive confirmed six paddle gears with clutch-free move-off."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-911-rsr-gte-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

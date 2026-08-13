@@ -86,7 +86,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.26 contains 107 reviewed records. Its newest records complete the
+Dataset 0.3.27 contains 112 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.26 contains 107 curated AMS2 records promoted through the reviewed
+Dataset 0.3.27 contains 112 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -292,6 +292,9 @@ conventional racing sequentials. The Cayman carries the first simulator override
 in the dataset: its real PDK has no clutch pedal, so the record says the
 standing-start clutch is not required while a sourced override records that AMS2
 requires clutch input to move off.
+Dataset 0.3.27 completes the GT family with two late-1990s Le Mans GT1 cars, two
+modern GTE cars, and the Puma GTE, which despite its name is a 1970s Brazilian
+road car on Volkswagen running gear with four H-pattern gears and no automation.
 
 ## Licensing
 

@@ -1,5 +1,25 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.27 (historic GT and GTE batch 05)
+
+Five cars that complete the GT family, splitting three ways.
+
+Nissan R390 GT1 and Porsche 911 GT1-98 are late-1990s Le Mans cars: sequential
+lever, six gears, clutch to pull away, automatic cut but no automatic blip, so
+the driver supplies the downshift blip. Both carry their `- Low Downforce` alias
+as an explicit inherited identity.
+
+Chevrolet Corvette C8.R and Porsche 911 RSR are modern GTE cars and behave like
+the GT3 group: clutch-free move-off, six paddle gears, automatic cut and blip.
+
+Puma GTE is not a GTE racer at all. It is a Brazilian road car built from 1970
+to 1980 on Volkswagen running gear, classed by AMS2 under Copa Classic B, and it
+has no automation whatever: four H-pattern gears, clutch to pull away, a throttle
+lift to upshift and a manual blip to downshift. Its 150-gear telemetry hint was
+the worst seen in the inventory; the real count is four.
+
+The GT family is now fully verified.
+
 ## Completed in dataset 0.3.26 (GT4 batch 04)
 
 Six GT4 cars, and unlike the GT3 batch they are not uniform.

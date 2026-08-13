@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.chevrolet-corvette-c8-r",
+  "identity": {
+    "display_name": "Chevrolet Corvette C8.R",
+    "manufacturer": "Chevrolet",
+    "model": "Corvette C8.R",
+    "year": {
+      "from": 2020,
+      "label": "2020 GTE debut"
+    },
+    "class": "GTE",
+    "real_world_identity_notes": "Mid-engine GTE car with the naturally aspirated LT6.R 5.5 litre V8. Xtrac built a bespoke, unusually compact P529 six-speed sequential transaxle so the car could carry a larger rear diffuser.",
+    "variant": "AMS2 GTE representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-style",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Corvette C8.R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GTE"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-style",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.chevrolet-corvette-c8-r.20260813t200108578z-68512894 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "wikipedia.chevrolet-corvette-c8r",
+        "ams2.local-live-chevrolet-corvette-c8-r-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the Xtrac P529 six-speed sequential transaxle is supported by a registered secondary source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.chevrolet-corvette-c8r",
+          "ams2.local-live-chevrolet-corvette-c8-r-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered secondary source establishes the C8.R identity and its Xtrac P529 transaxle, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.chevrolet-corvette-c8r",
+          "ams2.local-live-chevrolet-corvette-c8-r-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source specifies a six-speed sequential Xtrac transaxle, and the live drive confirmed six paddle-selected gears with clutch-free move-off."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-corvette-c8-r-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

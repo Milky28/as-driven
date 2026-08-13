@@ -1,0 +1,157 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.porsche-911-gt1-98",
+  "identity": {
+    "display_name": "Porsche 911 GT1-98",
+    "manufacturer": "Porsche",
+    "model": "911 GT1-98",
+    "year": {
+      "from": 1998,
+      "label": "1998 Le Mans winner"
+    },
+    "class": "GT1",
+    "real_world_identity_notes": "Le Mans-winning GT1 car with a carbon monocoque and a water-cooled 3.2 litre flat six derived from the 962. For 1998 Porsche fitted a new six-speed sequential gearbox to cut shift times, which matches the six gears and sequential lever seen in the cockpit.",
+    "variant": "AMS2 base-downforce GT1 representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "yes",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "The clutch is required to move off, and the gear lever is a sequential stick rather than paddles.",
+      "No throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with automatic cut detected. No automatic blip was detected, so the driver supplies the downshift blip, matching the curated convention for a sequential stick without automatic blip.",
+      "'Porsche 911 GT1-98 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 GT1-98"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 GT1-98 - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt1-98.20260813t195737728z-58cdca22 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "wikipedia.porsche-911-gt1",
+        "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the 1998 six-speed sequential gearbox is supported by a registered secondary source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.porsche-911-gt1",
+          "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered secondary source establishes the 1998 GT1-98 identity and its new six-speed sequential gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.porsche-911-gt1",
+          "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source specifies a six-speed sequential gearbox introduced for 1998, and the live drive confirmed six gears through a sequential stick."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The drive accepted a full-throttle clutchless upshift with automatic cut, so no lift is required, and detected no automatic blip on downshifts, so the driver supplies the rev-matching blip."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

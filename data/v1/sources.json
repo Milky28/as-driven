@@ -2653,6 +2653,126 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch input required to move off, six paddle gears, automatic cut and blip, round rim with no display or shift lights."
+    },
+    {
+      "source_id": "wikipedia.nissan-r390-gt1",
+      "title": "Nissan R390 GT1",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Nissan_R390_GT1",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Secondary reference for the 1998 GT1 car: twin-turbo 3.5 litre V8 driving the rear wheels through an Xtrac six-speed sequential gearbox operated by a short-throw gear lever, which matches the lever observed in the cockpit rather than paddles."
+    },
+    {
+      "source_id": "wikipedia.porsche-911-gt1",
+      "title": "Porsche 911 GT1",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Porsche_911_GT1",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Secondary reference for the 911 GT1-98: carbon monocoque, water-cooled 3.2 litre flat six derived from the 962, and a new six-speed sequential gearbox fitted for 1998 to reduce shift time."
+    },
+    {
+      "source_id": "wikipedia.chevrolet-corvette-c8r",
+      "title": "Chevrolet Corvette C8.R",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Chevrolet_Corvette_C8.R",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Secondary reference for the C8.R: naturally aspirated LT6.R 5.5 litre V8 and a bespoke compact Xtrac P529 six-speed sequential transaxle, packaged to free room for the rear diffuser."
+    },
+    {
+      "source_id": "porsche.911-rsr.2019-media-guide",
+      "title": "Porsche 911 RSR (2019 model year)",
+      "publisher": "Dr. Ing. h.c. F. Porsche AG",
+      "url": "https://newsroom.porsche.com/en_US/motorsport/us-media-guide/race-cars/porsche-911-rsr.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer media guide for the 2019 911 RSR: a weight-optimised six-speed sequential constant-mesh gearbox in magnesium casing, shifted by an electronic actuator through steering-wheel paddles."
+    },
+    {
+      "source_id": "supercars-net.puma-gte",
+      "title": "1970-1980 Puma GTE",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1970%E2%86%921980-puma-gte/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Secondary reference for the Brazilian Puma GTE built between 1970 and 1980: fibreglass body on Volkswagen running gear with an air-cooled flat four and a four-speed manual gearbox. Despite the GTE name it is a classic road-derived car, not a GTE-class racer, and AMS2 classes it under Copa Classic B."
+    },
+    {
+      "source_id": "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91",
+      "title": "Live AMS2 Nissan R390 GT1 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://en.wikipedia.org/wiki/Nissan_R390_GT1",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six gears through a sequential stick, automatic cut detected, no automatic blip, round rim with shift lights and no integrated display."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 GT1-98 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://en.wikipedia.org/wiki/Porsche_911_GT1",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six gears through a sequential stick, automatic cut detected, no automatic blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-corvette-c8-r-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Corvette C8.R guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://en.wikipedia.org/wiki/Chevrolet_Corvette_C8.R",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-911-rsr-gte-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 RSR GTE guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://newsroom.porsche.com/en_US/motorsport/us-media-guide/race-cars/porsche-911-rsr.html",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, prototype-style rim with shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-puma-gte-controls.1.6.9.91",
+      "title": "Live AMS2 Puma GTE guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.supercars.net/blog/1970%E2%86%921980-puma-gte/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, four H-pattern gears, no automatic cut or blip, upshift after a throttle lift, downshift after a manual blip, round rim with no display or shift lights."
     }
   ]
 }
