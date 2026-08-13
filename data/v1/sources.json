@@ -2521,6 +2521,138 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six gears through a sequential lever, automatic cut and blip detected, D-shaped rim with no display or shift lights."
+    },
+    {
+      "source_id": "bmw.m4-gt4-f82.sales-launch",
+      "title": "Sales launch for the newly developed BMW M4 GT4",
+      "publisher": "BMW Group PressClub",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0271176EN/sales-launch-for-the-newly-developed-bmw-m4-gt4?language=en",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer launch material for the F82 M4 GT4 sold from 2018. Its technical data lists a 2,979 cc six-cylinder in-line M TwinPower turbo engine and, verbatim, a 7-gear dual clutch transmission with motorsport software."
+    },
+    {
+      "source_id": "mercedes-amg.gt4.official",
+      "title": "Mercedes-AMG GT4",
+      "publisher": "Mercedes-AMG",
+      "url": "https://www.mercedes-amg.com/en/mercedes-amg-gt4",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer page for the AMG GT4: a sequential six-speed racing gearbox in transaxle configuration on the rear axle, pneumatically operated with shift paddles on the steering wheel, behind the AMG 4.0 litre V8 biturbo."
+    },
+    {
+      "source_id": "porsche.718-cayman-gt4-clubsport.world-premiere",
+      "title": "New Porsche 718 Cayman GT4 Clubsport featuring natural-fibre body panels",
+      "publisher": "Dr. Ing. h.c. F. Porsche AG",
+      "url": "https://newsroom.porsche.com/en/products/porsche-world-premiere-new-718-cayman-gt4-clubsport-16733.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Official launch material for the 718 Cayman GT4 Clubsport: a 3.8 litre flat six driving the rear wheels through a Porsche dual-clutch gearbox with six gears. A PDK has no clutch pedal, so the car cannot require clutch input to move off in the real world."
+    },
+    {
+      "source_id": "manthey.718-gt4-clubsport-mr.kit",
+      "title": "Kit 718 GT4 Clubsport MR (982)",
+      "publisher": "Manthey-Racing GmbH",
+      "url": "https://www.manthey-racing.com/kit-718-gt4-clubsport-mr-982",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Manthey Racing's MR kit for the 718 Cayman GT4 Clubsport. The kit revises aerodynamics and suspension and makes no powertrain change, so the six-speed PDK of the base Clubsport is retained."
+    },
+    {
+      "source_id": "mclaren.570s-gt4.customer-racing",
+      "title": "McLaren 570S GT4",
+      "publisher": "McLaren Automotive",
+      "url": "https://cars.mclaren.com/us_en/customer-racing/models-customer/570s-gt4",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer customer-racing page for the 570S GT4: MonoCell II carbon chassis, 3.8 litre twin-turbo V8, and the Oerlikon Graziano seven-speed dual clutch Sequential Shift Gearbox whose electrically actuated wet clutches pre-select the next gear."
+    },
+    {
+      "source_id": "ams2.local-live-bmw-m4-gt4-controls.1.6.9.91",
+      "title": "Live AMS2 BMW M4 GT4 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0271176EN/sales-launch-for-the-newly-developed-bmw-m4-gt4?language=en",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, seven paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-mclaren-570s-gt4-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren 570S GT4 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://cars.mclaren.com/us_en/customer-racing/models-customer/570s-gt4",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, seven paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-mercedes-amg-gt4-controls.1.6.9.91",
+      "title": "Live AMS2 Mercedes-AMG GT4 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.mercedes-amg.com/en/mercedes-amg-gt4",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91",
+      "title": "Live AMS2 Ginetta G55 GT4 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://en.wikipedia.org/wiki/Ginetta_G55",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-ginetta-g55-gt4-supercup-controls.1.6.9.91",
+      "title": "Live AMS2 Ginetta G55 GT4 Supercup guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://en.wikipedia.org/wiki/Ginetta_G55",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche Cayman GT4 Clubsport MR guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://newsroom.porsche.com/en/products/porsche-world-premiere-new-718-cayman-gt4-clubsport-16733.html",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch input required to move off, six paddle gears, automatic cut and blip, round rim with no display or shift lights."
     }
   ]
 }

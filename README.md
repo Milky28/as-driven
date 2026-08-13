@@ -86,7 +86,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.25 contains 101 reviewed records. Its newest records complete the
+Dataset 0.3.26 contains 107 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.25 contains 101 curated AMS2 records promoted through the reviewed
+Dataset 0.3.26 contains 107 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -284,6 +284,14 @@ cars whose controls proved identical, and the Ginetta G55 GT3, which AMS2 classe
 as GT Open and which uses a sequential lever and needs the clutch to pull away.
 Its throttle lift and manual blip stay unknown because a lever paired with
 automatic cut and blip has no precedent among curated cars.
+Dataset 0.3.26 promotes the GT4 batch, which is deliberately not uniform. BMW M4
+GT4, McLaren 570S GT4, and Porsche 718 Cayman GT4 Clubsport MR carry road-derived
+dual-clutch gearboxes, which is why two of them have seven gears where most GT4
+cars have six, while the Mercedes-AMG GT4 and both Ginetta G55 variants use
+conventional racing sequentials. The Cayman carries the first simulator override
+in the dataset: its real PDK has no clutch pedal, so the record says the
+standing-start clutch is not required while a sourced override records that AMS2
+requires clutch input to move off.
 
 ## Licensing
 

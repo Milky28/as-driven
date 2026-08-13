@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.bmw-m4-gt4",
+  "identity": {
+    "display_name": "BMW M4 GT4",
+    "manufacturer": "BMW",
+    "model": "M4 GT4",
+    "year": {
+      "from": 2018,
+      "label": "2018 customer-racing debut (F82)"
+    },
+    "class": "GT4",
+    "real_world_identity_notes": "Customer GT4 racing car based on the F82 M4 Coupe, sold from 2018. BMW's launch material lists a 2,979 cc six-cylinder in-line M TwinPower turbo engine and a seven-gear dual clutch transmission with motorsport software, carried over from the production car rather than a bespoke racing sequential. That matches the seven forward gears exercised in the drive.",
+    "variant": "AMS2 GT4 representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "dual-clutch",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-style",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "The gearbox is a production-derived seven-speed dual clutch rather than a racing sequential, which is why it has seven gears where most GT4 cars have six.",
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M4 GT4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-style",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.bmw-m4-gt4.20260813t164859994z-2a3b64ae by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "bmw.m4-gt4-f82.sales-launch",
+        "ams2.local-live-bmw-m4-gt4-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "bmw.m4-gt4-f82.sales-launch",
+          "ams2.local-live-bmw-m4-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "bmw.m4-gt4-f82.sales-launch",
+          "ams2.local-live-bmw-m4-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "BMW specifies a seven-gear dual clutch transmission with motorsport software; the live drive confirmed seven paddle-selected gears and clutch-free move-off."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-bmw-m4-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

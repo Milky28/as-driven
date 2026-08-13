@@ -1,5 +1,27 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.26 (GT4 batch 04)
+
+Six GT4 cars, and unlike the GT3 batch they are not uniform.
+
+Three are dual-clutch cars whose gearbox comes from the road car rather than a
+racing sequential, which is why they carry seven gears where most GT4 cars have
+six: BMW M4 GT4 (F82, a seven-gear dual clutch with motorsport software),
+McLaren 570S GT4 (Oerlikon Graziano seven-speed dual clutch SSG), and Porsche
+718 Cayman GT4 Clubsport MR (six-speed PDK).
+
+Mercedes-AMG GT4 uses a purpose-built pneumatic sequential six-speed transaxle.
+Ginetta G55 GT4 and G55 GT4 Supercup use the Hewland six-speed of the G55
+platform and require the clutch to pull away; the Supercup is classed separately
+by AMS2 and is reviewed independently rather than inherited from the GT4 car.
+
+The Cayman carries the first `simulators[].overrides` entry in the dataset. Its
+real gearbox is a PDK with no clutch pedal, so the record states that the
+standing-start clutch is not required, while an explicit sourced override
+records that AMS2 1.6.9.91 requires clutch input to move off. The client applies
+overrides when building guidance, so the driver is told to use the clutch
+in-sim while the real-car value stays true.
+
 ## Completed in dataset 0.3.25 (aero inheritance, no driving)
 
 `BMW M4 GT3 - Low Downforce` and `Porsche 992 GT3 R - Low Downforce` became

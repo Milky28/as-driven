@@ -1,0 +1,209 @@
+{
+  "review": "ams2-gt4-batch-04",
+  "dataset_version": "0.3.26",
+  "approved_at": "2026-08-13",
+  "records": [
+    {
+      "record_id": "ams2.bmw-m4-gt4",
+      "bundle": "build/observation-bundles/ams2.bmw-m4-gt4.json",
+      "manufacturer": "BMW",
+      "model": "M4 GT4",
+      "variant": "AMS2 GT4 representation",
+      "year": {
+        "from": 2018,
+        "label": "2018 customer-racing debut (F82)"
+      },
+      "real_world_identity_notes": "Customer GT4 racing car based on the F82 M4 Coupe, sold from 2018. BMW's launch material lists a 2,979 cc six-cylinder in-line M TwinPower turbo engine and a seven-gear dual clutch transmission with motorsport software, carried over from the production car rather than a bespoke racing sequential. That matches the seven forward gears exercised in the drive.",
+      "real_world_source_refs": [
+        "bmw.m4-gt4-f82.sales-launch"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source.",
+      "identity_basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "BMW specifies a seven-gear dual clutch transmission with motorsport software; the live drive confirmed seven paddle-selected gears and clutch-free move-off.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "The gearbox is a production-derived seven-speed dual clutch rather than a racing sequential, which is why it has seven gears where most GT4 cars have six.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; BMW's own launch material establishes the seven-speed dual clutch transmission.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://www.press.bmwgroup.com/global/article/detail/T0271176EN/sales-launch-for-the-newly-developed-bmw-m4-gt4?language=en",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, seven paddle gears, automatic cut and blip, GT-style rim with no display or shift lights.",
+      "control_overrides": {
+        "gearbox_type": "dual-clutch"
+      }
+    },
+    {
+      "record_id": "ams2.mclaren-570s-gt4",
+      "bundle": "build/observation-bundles/ams2.mclaren-570s-gt4.json",
+      "manufacturer": "McLaren",
+      "model": "570S GT4",
+      "variant": "AMS2 GT4 representation",
+      "year": {
+        "from": 2017,
+        "label": "2017 customer-racing debut"
+      },
+      "real_world_identity_notes": "Customer GT4 racing car on the McLaren MonoCell II carbon chassis with the 3.8 litre twin-turbo V8. It uses the road car's Oerlikon Graziano seven-speed dual clutch Sequential Shift Gearbox, whose electrically actuated wet clutches pre-select the next gear while one is engaged, matching the seven forward gears seen in the drive.",
+      "real_world_source_refs": [
+        "mclaren.570s-gt4.customer-racing"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source.",
+      "identity_basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "McLaren specifies a seven-speed dual clutch SSG transmission; the live drive confirmed seven paddle-selected gears and clutch-free move-off.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "The gearbox is a road-derived seven-speed dual clutch rather than a racing sequential, which is why it has seven gears where most GT4 cars have six.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; McLaren's customer-racing material establishes the seven-speed dual clutch SSG.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://cars.mclaren.com/us_en/customer-racing/models-customer/570s-gt4",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, seven paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights.",
+      "control_overrides": {
+        "gearbox_type": "dual-clutch"
+      }
+    },
+    {
+      "record_id": "ams2.mercedes-amg-gt4",
+      "bundle": "build/observation-bundles/ams2.mercedes-amg-gt4.json",
+      "manufacturer": "Mercedes-AMG",
+      "model": "GT4",
+      "variant": "AMS2 GT4 representation",
+      "year": {
+        "from": 2018,
+        "label": "2018 customer-racing debut"
+      },
+      "real_world_identity_notes": "Customer GT4 racing car on the AMG GT platform with the 4.0 litre V8 biturbo. Unlike the dual-clutch GT4 cars it uses a purpose-built sequential six-speed racing gearbox in transaxle configuration on the rear axle, pneumatically operated through steering wheel paddles.",
+      "real_world_source_refs": [
+        "mercedes-amg.gt4.official"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source.",
+      "identity_basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "Mercedes-AMG specifies a pneumatically operated sequential six-speed racing gearbox in a rear transaxle; the live drive confirmed six paddle gears and clutch-free move-off.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the manufacturer establishes the sequential six-speed racing gearbox.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://www.mercedes-amg.com/en/mercedes-amg-gt4",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
+    },
+    {
+      "record_id": "ams2.ginetta-g55-gt4",
+      "bundle": "build/observation-bundles/ams2.ginetta-g55-gt4.json",
+      "manufacturer": "Ginetta",
+      "model": "G55 GT4",
+      "variant": "AMS2 GT4 representation",
+      "year": {
+        "from": 2012,
+        "label": "G55 platform"
+      },
+      "real_world_identity_notes": "British customer racing car in the GT4 category, built on the same G55 platform as the GT3 and Supercup cars and using a Hewland six-speed rather than a dual clutch. Like the other G55 variants it requires the clutch to pull away, which separates it from every dual-clutch car in this batch.",
+      "real_world_source_refs": [
+        "wikipedia.ginetta-g55"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source.",
+      "identity_basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The registered source establishes the G55 platform and its Hewland six-speed; the live drive confirmed six paddle-selected gears and that the clutch is required to move off. The source does not differentiate this variant's gearbox internals, so the construction is recorded conservatively as sequential.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "Unlike the dual-clutch cars in this batch the clutch is required to move off, which is consistent with a conventional racing gearbox rather than a PDK or DCT.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled. The G55 platform and its Hewland six-speed are supported by a registered secondary source.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://en.wikipedia.org/wiki/Ginetta_G55",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "record_id": "ams2.ginetta-g55-gt4-supercup",
+      "bundle": "build/observation-bundles/ams2.ginetta-g55-gt4-supercup.json",
+      "manufacturer": "Ginetta",
+      "model": "G55 GT4 Supercup",
+      "variant": "AMS2 GT4 representation",
+      "year": {
+        "from": 2012,
+        "label": "G55 platform"
+      },
+      "real_world_identity_notes": "One-make Supercup specification of the G55, classed separately by AMS2 as G55Supercup rather than GT4. It shares the platform and the six-speed Hewland gearbox and likewise requires the clutch to pull away, but it is recorded independently of the GT4 car rather than inherited from it.",
+      "real_world_source_refs": [
+        "wikipedia.ginetta-g55"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source.",
+      "identity_basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The registered source establishes the G55 platform and its Hewland six-speed; the live drive confirmed six paddle-selected gears and that the clutch is required to move off. The source does not differentiate this variant's gearbox internals, so the construction is recorded conservatively as sequential.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "Unlike the dual-clutch cars in this batch the clutch is required to move off, which is consistent with a conventional racing gearbox rather than a PDK or DCT.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled. The G55 platform and its Hewland six-speed are supported by a registered secondary source.",
+      "scope_notes": "Single exact identity from one guided-verification drive. AMS2 classes this car as G55Supercup rather than GT4, and it is reviewed independently of the G55 GT4.",
+      "live_source_url": "https://en.wikipedia.org/wiki/Ginetta_G55",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "record_id": "ams2.porsche-cayman-gt4-clubsport-mr",
+      "bundle": "build/observation-bundles/ams2.porsche-cayman-gt4-clubsport-mr.json",
+      "manufacturer": "Porsche",
+      "model": "718 Cayman GT4 Clubsport MR",
+      "variant": "AMS2 Manthey Racing MR representation",
+      "year": {
+        "from": 2019,
+        "label": "2019 Clubsport with the Manthey MR kit"
+      },
+      "real_world_identity_notes": "Customer racing 718 Cayman with the Manthey Racing MR kit. Porsche drives the rear wheels through a dual-clutch PDK gearbox with six gears, and the MR kit revises aerodynamics and suspension without changing the powertrain. A PDK has no clutch pedal, so the real car cannot require clutch input to pull away, even though AMS2 does; that difference is recorded as an explicit simulator override rather than by asserting something false about the car.",
+      "real_world_source_refs": [
+        "porsche.718-cayman-gt4-clubsport.world-premiere",
+        "manthey.718-gt4-clubsport-mr.kit"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source.",
+      "identity_basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "Porsche specifies a six-speed dual-clutch PDK and Manthey confirms the MR kit leaves the powertrain unchanged; the live drive confirmed six paddle-selected gears.",
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "The real car is a six-speed PDK dual clutch and has no clutch pedal, so its standing-start clutch is recorded as not required.",
+        "AMS2 1.6.9.91 nonetheless required clutch input to move off. That is recorded as an explicit simulator override, so the in-sim guidance tells the driver to use the clutch while the record keeps the real car's value.",
+        "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled. Porsche and Manthey establish the six-speed PDK, and the simulator's differing standing-start behavior is carried as a sourced override rather than changing the real-car value.",
+      "scope_notes": "Single exact identity from one guided-verification drive.",
+      "live_source_url": "https://newsroom.porsche.com/en/products/porsche-world-premiere-new-718-cayman-gt4-clubsport-16733.html",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch input required to move off, six paddle gears, automatic cut and blip, round rim with no display or shift lights.",
+      "control_overrides": {
+        "gearbox_type": "dual-clutch",
+        "standing_start_clutch": "not-required"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 requires clutch input to move off, although the real car's PDK has no clutch pedal.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Directly observed in the guided drive with automatic clutch and shifting disabled."
+          }
+        }
+      ],
+      "additional_claims": [
+        {
+          "paths": [
+            "/simulators/0/overrides"
+          ],
+          "source_refs": [
+            "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+          ],
+          "confidence": "verified",
+          "basis": "The guided drive established that AMS2 requires clutch input to move off, which differs from the real car's clutch-pedal-free PDK."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.26",
+  "approved_at": "2026-08-13",
+  "record_id": "ams2.ginetta-g55-gt4-supercup",
+  "telemetry_name": "Ginetta G55 GT4 Supercup",
+  "telemetry_class": "G55Supercup",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.ginetta-g55-gt4-supercup.20260813t170235026z-27deda7a",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Controls were directly observed with assists disabled. The G55 platform and its Hewland six-speed are supported by a registered secondary source.",
+  "scope_notes": "Single exact identity from one guided-verification drive. AMS2 classes this car as G55Supercup rather than GT4, and it is reviewed independently of the G55 GT4."
+}

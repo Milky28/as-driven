@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.25",
+  "dataset_version": "0.3.26",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,28 +15,28 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 101,
-    "covered_exact_identities": 137,
-    "uncovered_identities": 88,
-    "full_guided_verifications": 77,
+    "curated_records": 107,
+    "covered_exact_identities": 143,
+    "uncovered_identities": 82,
+    "full_guided_verifications": 71,
     "dispositions": {
       "aero-inheritance-after-base": 3,
-      "covered-exact": 137,
-      "full-guided-verification": 77,
+      "covered-exact": 143,
+      "full-guided-verification": 71,
       "out-of-scope": 1,
       "retired-identity": 3,
       "third-party-content": 4
     },
     "full_verifications_by_family": {
       "club-road": 10,
-      "gt": 11,
+      "gt": 5,
       "open-wheel": 42,
       "other": 6,
       "touring-stock": 8
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 46,
-      "legacy-controls-candidate-available": 31
+      "independent-control-research-needed": 43,
+      "legacy-controls-candidate-available": 28
     }
   },
   "entries": [
@@ -404,12 +404,12 @@
       "telemetry_name": "BMW M4 GT4",
       "car_id": "BMW M4 GT4",
       "identity_file": "BMW M4 GT4.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": 6,
-      "identity_file_modified_at": 1733363713.8098407,
+      "related_record_id": "ams2.bmw-m4-gt4",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 7,
+      "identity_file_modified_at": 1786641267.4923751,
       "legacy_sheet_candidate": {
         "source_row": 184,
         "display_name": "BMW M4 GT4",
@@ -1590,8 +1590,8 @@
       "family": "gt",
       "related_record_id": "ams2.ginetta-g55-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
-      "simhub_max_gears": 5,
-      "identity_file_modified_at": 1743307378.656955,
+      "simhub_max_gears": 6,
+      "identity_file_modified_at": 1786639526.013937,
       "legacy_sheet_candidate": {
         "source_row": 166,
         "display_name": "Ginetta G55 GT3",
@@ -1604,10 +1604,10 @@
       "telemetry_name": "Ginetta G55 GT4",
       "car_id": "Ginetta G55 GT4",
       "identity_file": "Ginetta G55 GT4.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.ginetta-g55-gt4",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1752713306.6730485,
       "legacy_sheet_candidate": {
@@ -1622,13 +1622,13 @@
       "telemetry_name": "Ginetta G55 GT4 Supercup",
       "car_id": "Ginetta G55 GT4 Supercup",
       "identity_file": "Ginetta G55 GT4 Supercup.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": 5,
-      "identity_file_modified_at": 1720635015.748981,
-      "research_readiness": "independent-control-research-needed"
+      "related_record_id": "ams2.ginetta-g55-gt4-supercup",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 6,
+      "identity_file_modified_at": 1786641267.5043855,
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Gol Classic B",
@@ -2042,13 +2042,13 @@
       "telemetry_name": "McLaren 570S GT4",
       "car_id": "McLaren 570S GT4",
       "identity_file": "McLaren 570S GT4.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": 6,
-      "identity_file_modified_at": 1751842188.658338,
-      "research_readiness": "independent-control-research-needed"
+      "related_record_id": "ams2.mclaren-570s-gt4",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 7,
+      "identity_file_modified_at": 1786641267.519391,
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "McLaren 720S GT3 Evo",
@@ -2234,10 +2234,10 @@
       "telemetry_name": "Mercedes-AMG GT4",
       "car_id": "Mercedes-AMG GT4",
       "identity_file": "Mercedes-AMG GT4.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.mercedes-amg-gt4",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1737323607.3891397,
       "legacy_sheet_candidate": {
@@ -2358,8 +2358,8 @@
       "family": "gt",
       "related_record_id": "ams2.nissan-gt-r-nismo-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
-      "simhub_max_gears": 5,
-      "identity_file_modified_at": 1743307378.6592314,
+      "simhub_max_gears": 6,
+      "identity_file_modified_at": 1786639526.0229495,
       "legacy_sheet_candidate": {
         "source_row": 178,
         "display_name": "Nissan GT-R Nismo GT3",
@@ -2666,13 +2666,13 @@
       "telemetry_name": "Porsche Cayman GT4 Clubsport MR",
       "car_id": "Porsche Cayman GT4 Clubsport MR",
       "identity_file": "Porsche Cayman GT4 Clubsport MR.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "gt",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.porsche-cayman-gt4-clubsport-mr",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1759088501.7648172,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Puma GTB",

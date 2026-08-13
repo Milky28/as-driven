@@ -78,9 +78,9 @@ than silently queueing verification work.
 - Branch: `codex/stabilization`; private remote `origin` at
   `github.com/Milky28/as-driven`.
 - Early-access client: 0.16.0.
-- Dataset: 0.3.25 with 101 curated records.
+- Dataset: 0.3.26 with 107 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- Exact coverage is 137 of 225 observed AMS2 identities. Guided verification is
+- Exact coverage is 143 of 225 observed AMS2 identities. Guided verification is
   the only remaining category of open work; see `docs/ams2-coverage-plan.md`.
 - Next planned batch is contemporary GT3 and GTE cars.
 - `validate` compares the dataset version and record count quoted in this file,
