@@ -89,7 +89,7 @@ drive itself does not satisfy this manual-override requirement.
 Validate any exported draft from the repository root with:
 
 ```shell
-python -m authentic_controls_db validate-observation path/to/observation.json
+python -m as_driven_db validate-observation path/to/observation.json
 ```
 
 ## Staging a record candidate from an observation
@@ -98,7 +98,7 @@ An approved observation is still not a curated record. To do the mechanical half
 of the reviewer step, stage a candidate bundle from a draft:
 
 ```shell
-python -m authentic_controls_db import-observation path/to/observation.json --output build/staged.json
+python -m as_driven_db import-observation path/to/observation.json --output build/staged.json
 ```
 
 The command validates the input against the observation schema (pass
@@ -123,7 +123,7 @@ identity and registered the supporting sources, promote the bundle with an
 explicit review manifest:
 
 ```shell
-python -m authentic_controls_db promote-observation curation/review-batch.json
+python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
 Each entry names its bundle and supplies what a drive cannot establish:

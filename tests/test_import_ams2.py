@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-from authentic_controls_db.importers.ams2 import _shift, _wheel, import_ams2_csv
+from as_driven_db.importers.ams2 import _shift, _wheel, import_ams2_csv
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

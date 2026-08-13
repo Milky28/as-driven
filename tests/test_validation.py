@@ -4,8 +4,8 @@ import shutil
 import tempfile
 import unittest
 
-from authentic_controls_db.validate import _resolve_pointer, validate_repository
-from authentic_controls_db.schema_validation import validate_instance
+from as_driven_db.validate import _resolve_pointer, validate_repository
+from as_driven_db.schema_validation import validate_instance
 
 
 ROOT = Path(__file__).parents[1]

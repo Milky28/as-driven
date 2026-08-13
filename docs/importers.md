@@ -67,7 +67,7 @@ user's Local AppData. Correlate that append-only log with staged candidates and
 the current curated dataset using:
 
 ```powershell
-python -m authentic_controls_db review-unmatched-ams2 `
+python -m as_driven_db review-unmatched-ams2 `
   --log "$env:LOCALAPPDATA\SimHub\AuthenticControls\Diagnostics\unmatched-identities.jsonl" `
   --candidates .\build\ams2-candidates.json `
   --data-dir .\data\v1 `

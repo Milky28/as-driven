@@ -121,7 +121,7 @@ After AMS2 or SimHub adds identities, regenerate the exact identity audit and
 manifest:
 
 ```powershell
-python -m authentic_controls_db audit-simhub-ams2 `
+python -m as_driven_db audit-simhub-ams2 `
   --candidates build/ams2-candidates.json `
   --cars-dir "C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars" `
   --simhub-version 9.11.22 `

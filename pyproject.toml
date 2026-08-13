@@ -3,18 +3,18 @@ requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "authentic-controls-db"
+name = "as-driven-db"
 version = "0.1.0"
 description = "A simulator-independent database of authentic car controls"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "Authentic Controls Database contributors" }]
+authors = [{ name = "As Driven contributors" }]
 dependencies = []
 
 [project.scripts]
-authentic-controls-db = "authentic_controls_db.__main__:main"
+as-driven-db = "as_driven_db.__main__:main"
 
 [tool.setuptools.packages.find]
-include = ["authentic_controls_db*"]
+include = ["as_driven_db*"]
 

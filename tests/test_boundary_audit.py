@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import unittest
 
-from authentic_controls_db.audit_boundaries import audit_evidence_boundaries
+from as_driven_db.audit_boundaries import audit_evidence_boundaries
 
 
 ROOT = Path(__file__).parents[1]

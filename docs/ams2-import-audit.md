@@ -189,13 +189,13 @@ record IDs during promotion.
 ## Reproduce the audit
 
 ```shell
-python -m authentic_controls_db import-ams2 ams2.csv --output build/ams2-candidates.json
+python -m as_driven_db import-ams2 ams2.csv --output build/ams2-candidates.json
 
-python -m authentic_controls_db audit-simhub-ams2 --candidates build/ams2-candidates.json --cars-dir "C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars" --simhub-version 9.11.22 --output build/ams2-simhub-identity-audit.json --review-csv build/ams2-alias-review.csv
+python -m as_driven_db audit-simhub-ams2 --candidates build/ams2-candidates.json --cars-dir "C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars" --simhub-version 9.11.22 --output build/ams2-simhub-identity-audit.json --review-csv build/ams2-alias-review.csv
 
-python -m authentic_controls_db review-unmatched-ams2 --log "%LOCALAPPDATA%\SimHub\AuthenticControls\Diagnostics\unmatched-identities.jsonl" --candidates build/ams2-candidates.json --data-dir data/v1 --output build/ams2-unmatched-review.json --review-csv build/ams2-unmatched-review.csv
+python -m as_driven_db review-unmatched-ams2 --log "%LOCALAPPDATA%\SimHub\AuthenticControls\Diagnostics\unmatched-identities.jsonl" --candidates build/ams2-candidates.json --data-dir data/v1 --output build/ams2-unmatched-review.json --review-csv build/ams2-unmatched-review.csv
 
-python -m authentic_controls_db promote-ams2 --candidates build/ams2-candidates.json --audit build/ams2-simhub-identity-audit.json --approvals curation/ams2-approved-records.json --data-dir data/v1
+python -m as_driven_db promote-ams2 --candidates build/ams2-candidates.json --audit build/ams2-simhub-identity-audit.json --approvals curation/ams2-approved-records.json --data-dir data/v1
 ```
 
 The audit preserves unmatched rows for human review. Its suggestion rules are

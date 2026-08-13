@@ -3,9 +3,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from authentic_controls_db.importers.ams2 import import_ams2_csv
-from authentic_controls_db.promote import promote_approved_ams2
-from authentic_controls_db.simhub import audit_ams2_identities
+from as_driven_db.importers.ams2 import import_ams2_csv
+from as_driven_db.promote import promote_approved_ams2
+from as_driven_db.simhub import audit_ams2_identities
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

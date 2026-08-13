@@ -44,7 +44,7 @@ into authentic fields. They remain visible rather than being bulk-rewritten to
 guesses. Run this report to find the migration queue:
 
 ```shell
-python -m authentic_controls_db audit-boundaries --output build/evidence-boundaries.json
+python -m as_driven_db audit-boundaries --output build/evidence-boundaries.json
 ```
 
 Each finding must be resolved by adding real-world evidence, moving a claim to

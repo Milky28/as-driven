@@ -3,8 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 import unittest
 
-from authentic_controls_db.importers.observation import import_observation
-from authentic_controls_db.validate import _validate_car_approval
+from as_driven_db.importers.observation import import_observation
+from as_driven_db.validate import _validate_car_approval
 
 
 def _clean_observation() -> dict:

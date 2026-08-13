@@ -37,7 +37,7 @@ SimHub SDK binaries into the repository or release package.
 - `schema/v1/`: versioned JSON Schema contracts.
 - `data/v1/`: curated index, sources, and one JSON record per car.
 - `curation/`: explicit reviewer approvals required for promotion.
-- `authentic_controls_db/`: dependency-free Python validation, import, audit,
+- `as_driven_db/`: dependency-free Python validation, import, audit,
   and promotion tools.
 - `research/`: checked-in research manifests and deterministic generators.
 - `simhub/AuthenticControls.Core/`: exact-match JSON reader and guidance logic.
@@ -55,7 +55,7 @@ artifacts are ignored. Never commit them.
 Run after data, schema, Python tooling, research-manifest, or importer changes:
 
 ```powershell
-python -m authentic_controls_db validate
+python -m as_driven_db validate
 python -m unittest discover -s tests -v
 ```
 

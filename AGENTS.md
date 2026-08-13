@@ -39,7 +39,7 @@ scope unless a future proposal establishes a direct authentic-controls use case.
 - `schema/v1/`: versioned JSON Schema contracts.
 - `data/v1/`: curated release index, sources, and car records.
 - `curation/`: checked-in reviewer approvals and promotion review manifests.
-- `authentic_controls_db/`: dependency-free Python import, audit, promotion,
+- `as_driven_db/`: dependency-free Python import, audit, promotion,
   and validation tools.
 - `research/`: checked-in research manifests, deterministic generators, and
   `ams2-identity-decisions.json`, the written reviewer outcomes for observed
@@ -57,12 +57,12 @@ cannot be automated.
 1. The user records a guided drive in the SimHub plugin's contribution
    workflow. Drafts land in
    `%LOCALAPPDATA%\SimHub\AuthenticControls\Verification\Drafts`.
-2. `python -m authentic_controls_db import-observation <draft> --output
+2. `python -m as_driven_db import-observation <draft> --output
    build/staged.json` stages a bundle. Real-world identity is deliberately left
    as `REVIEW-REQUIRED`, because a drive cannot establish it.
 3. A reviewer supplies identity and registered sources in a manifest under
    `curation/`.
-4. `python -m authentic_controls_db promote-observation <manifest>` writes the
+4. `python -m as_driven_db promote-observation <manifest>` writes the
    record, approval, source, and index together. It refuses missing fields, any
    remaining `REVIEW-REQUIRED`, unregistered sources, and overwriting a curated
    record, and writes nothing unless every entry passes.
@@ -103,7 +103,7 @@ edge-case wrappers, or heavy abstractions. Use small, direct modifications.
 Run these after data, schema, importer, or Python tooling changes:
 
 ```powershell
-python -m authentic_controls_db validate
+python -m as_driven_db validate
 python -m unittest discover -s tests -v
 ```
 

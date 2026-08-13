@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-from authentic_controls_db.importers.iracing import import_iracing_html
+from as_driven_db.importers.iracing import import_iracing_html
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

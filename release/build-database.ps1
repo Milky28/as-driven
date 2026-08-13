@@ -13,7 +13,7 @@ $OutputDirectory = [System.IO.Path]::GetFullPath($OutputDirectory)
 if (-not $SkipChecks) {
     Push-Location $repositoryRoot
     try {
-        & python -m authentic_controls_db validate
+        & python -m as_driven_db validate
         if ($LASTEXITCODE -ne 0) { throw "Database validation failed." }
         & python -m unittest discover -s tests -v
         if ($LASTEXITCODE -ne 0) { throw "Database tests failed." }

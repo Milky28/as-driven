@@ -13,7 +13,7 @@ New-Item -ItemType Directory -Path $outputRoot -Force | Out-Null
 
 Push-Location $repositoryRoot
 try {
-    & python -m authentic_controls_db validate
+    & python -m as_driven_db validate
     if ($LASTEXITCODE -ne 0) {
         throw "Database validation failed."
     }

@@ -6,9 +6,9 @@ import shutil
 import tempfile
 import unittest
 
-from authentic_controls_db.importers.observation import import_observation
-from authentic_controls_db.promote_observation import promote_observations
-from authentic_controls_db.validate import validate_repository
+from as_driven_db.importers.observation import import_observation
+from as_driven_db.promote_observation import promote_observations
+from as_driven_db.validate import validate_repository
 
 
 ROOT = Path(__file__).parents[1]

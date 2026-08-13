@@ -59,5 +59,5 @@ Confidence measures evidence, not contributor certainty.
   match a game limitation.
 - Include `verified_game_version`, `verified_at`, and source references.
 - Update `data/v1/index.json` for added or removed records.
-- Run `python -m authentic_controls_db validate` and the unit tests.
+- Run `python -m as_driven_db validate` and the unit tests.
 - Explain licensing or reuse terms for any proposed bulk import.

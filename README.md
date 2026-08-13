@@ -39,7 +39,7 @@ data/v1/index.json           Dataset release manifest
 data/v1/sources.json         Reusable provenance/source records
 data/v1/cars/*.json          One curated car record per file
 curation/                    Explicit, reviewable promotion approvals
-authentic_controls_db/       Dependency-free validator and staging importers
+as_driven_db/                Dependency-free validator and staging importers
 tests/                       Unit tests and small source-layout fixtures
 docs/data-model.md           Field semantics and confidence policy
 docs/evidence-boundaries.md  Real, simulated, and effective guidance layers
@@ -58,7 +58,7 @@ release/                     Independent database-release packaging
 Python 3.11 or newer is the only requirement.
 
 ```shell
-python -m authentic_controls_db validate
+python -m as_driven_db validate
 python -m unittest discover -s tests -v
 ```
 
@@ -66,24 +66,24 @@ Audit private-beta records that still need their real-world and simulator
 evidence separated:
 
 ```shell
-python -m authentic_controls_db audit-boundaries --output build/evidence-boundaries.json
+python -m as_driven_db audit-boundaries --output build/evidence-boundaries.json
 ```
 
 Validate a draft exported by SimHub's guided verification form:
 
 ```shell
-python -m authentic_controls_db validate-observation observation.json
+python -m as_driven_db validate-observation observation.json
 ```
 
 Stage a curated-record candidate from that draft, then promote the reviewed
 bundle once its real-world identity and sources are resolved:
 
 ```shell
-python -m authentic_controls_db import-observation observation.json --output build/staged.json
+python -m as_driven_db import-observation observation.json --output build/staged.json
 ```
 
 ```shell
-python -m authentic_controls_db promote-observation curation/review-batch.json
+python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
 Dataset 0.3.23 contains 93 reviewed records. Its newest records complete the
@@ -133,25 +133,25 @@ packaging layout, and installation boundary.
 Stage a local export of the AMS2 sheet for review:
 
 ```shell
-python -m authentic_controls_db import-ams2 ams2.csv --output build/ams2-candidates.json
+python -m as_driven_db import-ams2 ams2.csv --output build/ams2-candidates.json
 ```
 
 Stage a saved copy of the official iRacing transmission article:
 
 ```shell
-python -m authentic_controls_db import-iracing iracing.html --output build/iracing-candidates.json
+python -m as_driven_db import-iracing iracing.html --output build/iracing-candidates.json
 ```
 
 Compare AMS2 candidates with car identities already observed by SimHub:
 
 ```shell
-python -m authentic_controls_db audit-simhub-ams2 --candidates build/ams2-candidates.json --cars-dir "C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars" --output build/ams2-simhub-identity-audit.json --review-csv build/ams2-alias-review.csv
+python -m as_driven_db audit-simhub-ams2 --candidates build/ams2-candidates.json --cars-dir "C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars" --output build/ams2-simhub-identity-audit.json --review-csv build/ams2-alias-review.csv
 ```
 
 Promote only the aliases recorded in the reviewed approval manifest:
 
 ```shell
-python -m authentic_controls_db promote-ams2 --candidates build/ams2-candidates.json --audit build/ams2-simhub-identity-audit.json --approvals curation/ams2-approved-records.json --data-dir data/v1
+python -m as_driven_db promote-ams2 --candidates build/ams2-candidates.json --audit build/ams2-simhub-identity-audit.json --approvals curation/ams2-approved-records.json --data-dir data/v1
 ```
 
 Importers and audits do not modify `data/`. They produce candidates containing

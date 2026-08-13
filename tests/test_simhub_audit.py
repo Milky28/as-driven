@@ -4,8 +4,8 @@ import json
 import tempfile
 import unittest
 
-from authentic_controls_db.importers.ams2 import import_ams2_csv
-from authentic_controls_db.simhub import (
+from as_driven_db.importers.ams2 import import_ams2_csv
+from as_driven_db.simhub import (
     _normalized_name,
     audit_ams2_identities,
     review_unmatched_ams2_observations,
