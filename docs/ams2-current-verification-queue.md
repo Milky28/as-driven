@@ -1,5 +1,27 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.22 (modern-prototype batch 02)
+
+Promoted through `import-observation` and `promote-observation`, the first batch
+to use that command end to end rather than an ad-hoc script:
+
+1. Nissan R89C (Group C, 1989) - clutch to pull away, five H-pattern gears,
+   throttle lift to upshift, manual blip to downshift, no automatic cut or blip.
+   Nissan's heritage record supplies the VGC five-speed and Lola-built chassis.
+2. Porsche 962C (Group C, 1987) - same manual technique. Gearbox construction
+   and H-pattern layout stay unknown: the reviewed sources establish only a
+   five-speed manual.
+3. MetalMoro MRX Duratec P4 - sequential stick, six gears, clutch to pull away,
+   automatic cut, no automatic blip, so the driver supplies the downshift blip.
+   Metalmoro fixes no transmission for the MRX, so the sequential six-speed is
+   medium confidence as the configuration modeled in AMS2.
+
+Mazda 787b was dropped from the batch: it is modded content, and Reiza holds no
+Mazda licence, so AMS2 ships no official Mazda.
+
+Verifying these bases moves `Nissan R89C - Low Downforce` and
+`Porsche 962C - Low Downforce` to inheritance-ready.
+
 Dataset 0.3.18 completes the earlier audited queue. It deliberately counted
 selectable model/configuration identities, not release-note classes, renames, or
 generic aero announcements.

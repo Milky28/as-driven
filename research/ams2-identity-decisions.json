@@ -7,7 +7,8 @@
     "A retired identity is a stored pre-rename observation. It is deliberately not aliased onto the renamed record, because it is not selectable in the certified build and cannot be verified there.",
     "These decisions replace hardcoded review outcomes in the manifest generator so the reasoning is reviewable data.",
     "A decision may cite registered source_refs from data/v1/sources.json when an official release establishes the rename.",
-    "Third-party content is identified by an irregular name or by an observation that predates the official car's release; the observation date alone is not evidence."
+    "Third-party content is identified by an irregular name or by an observation that predates the official car's release; the observation date alone is not evidence.",
+    "Licensing is a further signal: a manufacturer Reiza does not licence cannot appear as official content."
   ],
   "decisions_list": [
     {
@@ -65,6 +66,15 @@
       "related_record_id": null,
       "source_refs": [],
       "basis": "Maintainer confirmed this identity comes from the ThunderFlash mods pack as a mod ported from Project CARS 2, not from official AMS2 content. Its run-together internal name is the only one in the observed inventory that does not follow Reiza's spacing convention, and it was observed on the same day as the pack's FIA-GT1 cars. The official Lamborghini Huracan Super Trofeo EVO2 is a separate car curated under its own properly spaced identity. Not curated and removed from the guided-verification queue."
+    },
+    {
+      "telemetry_name": "Mazda 787b",
+      "disposition": "third-party-content",
+      "last_observed": "2024-06-08",
+      "superseded_by": null,
+      "related_record_id": null,
+      "source_refs": [],
+      "basis": "Maintainer determined this is modded content that is not installed on the verification PC: the car could not be found in AMS2 1.6.9.91 when the guided batch was driven. Reiza does not hold a Mazda licence, so AMS2 ships no official Mazda and no official car can carry this identity. The lowercase 'b' also breaks Reiza's naming convention, which would render the model as 787B. Not curated and removed from the guided-verification queue."
     },
     {
       "telemetry_name": "BMW M3 Safety Car",

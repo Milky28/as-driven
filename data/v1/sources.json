@@ -2269,6 +2269,78 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.metalmoro-ajr-gen2-chevrolet.20260812t210833987z-e09cfc05 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "nissan.heritage-collection.r89c",
+      "title": "Nissan Heritage Collection - Nissan R89C",
+      "publisher": "Nissan Motor Corporation",
+      "url": "https://www.nissan-global.com/EN/HERITAGE_COLLECTION/Nissan_R89C.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer heritage record for the 1989 R89C: VRH35 3,496cc DOHC V8, chassis built by Lola Cars International after the switch from March Engineering, and a VGC five-speed transmission. It establishes real-world identity and gear count, not driver technique."
+    },
+    {
+      "source_id": "wikipedia.porsche-962",
+      "title": "Porsche 962",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Porsche_962",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Secondary reference for the Group C 962C designation and a five-speed manual transmission. It does not establish synchromesh versus dog engagement or the shift pattern, which remain unknown."
+    },
+    {
+      "source_id": "metalmoro.mrx.official",
+      "title": "Metalmoro - MRX",
+      "publisher": "Metalmoro",
+      "url": "https://www.metalmoro.com.br/novosite/mrx/",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Constructor page for the MRX customer prototype, successor to the MCR, with a 2016 chassis revision. It states the car accepts diverse engine and transmission options, so no single real-world gearbox is fixed; the AMS2 Duratec P4 is one such configuration."
+    },
+    {
+      "source_id": "ams2.local-live-nissan-r89c-controls.1.6.9.91",
+      "title": "Live AMS2 Nissan R89C guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.nissan-global.com/EN/HERITAGE_COLLECTION/Nissan_R89C.html",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, five H-pattern gears, clutchless running shifts accepted, upshift after a throttle lift, downshift after a manual blip, no automatic cut or blip, round rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-962c-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 962C guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://en.wikipedia.org/wiki/Porsche_962",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, five H-pattern gears, clutchless running shifts accepted, upshift after a throttle lift, downshift with a manual blip, no automatic cut or blip, round rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-mrx-duratec-p4-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro MRX Duratec P4 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.metalmoro.com.br/novosite/mrx/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-13",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, six sequential-stick gears, full-throttle clutchless upshift with automatic cut detected, clutchless downshift with no automatic blip, round rim with no display or shift lights."
     }
   ]
 }

@@ -1,0 +1,113 @@
+{
+  "review": "ams2-prototype-batch-02",
+  "dataset_version": "0.3.22",
+  "approved_at": "2026-08-12",
+  "records": [
+    {
+      "record_id": "ams2.nissan-r89c",
+      "bundle": "build/observation-bundles/ams2.nissan-r89c.json",
+      "manufacturer": "Nissan",
+      "model": "R89C",
+      "variant": "AMS2 base-downforce Group C representation",
+      "year": { "from": 1989, "label": "1989 World Sportscar Championship" },
+      "real_world_identity_notes": "Group C prototype campaigned by Nissan in 1989, powered by the VRH35 3,496cc twin-turbo DOHC V8. The chassis was built by Lola Cars International after Nissan switched from March Engineering for that season, so the chassis constructor is identity context rather than the marque. Nissan's heritage record specifies a VGC five-speed transmission, matching the five forward gears exercised in the live drive.",
+      "real_world_source_refs": ["nissan.heritage-collection.r89c"],
+      "confidence": "verified",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the manufacturer heritage record independently establishes the real-world identity and the five-speed VGC transmission.",
+      "identity_basis": "Nissan's own heritage record establishes the 1989 identity, engine, and Lola-built chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "The manufacturer specifies a VGC five-speed transmission and the live drive confirmed five forward gears with H-pattern actuation. VGC is a racing transaxle and the drive accepted clutchless running shifts, which is consistent with dog engagement; the H-pattern layout, standard versus dogleg, is not established and stays unknown.",
+      "control_overrides": {
+        "gearbox_type": "dogbox"
+      },
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": ["ams2.local-live-nissan-r89c-controls.1.6.9.91"],
+          "confidence": "high",
+          "basis": "The guided drive recorded that a clutchless upshift was accepted after a throttle lift and a clutchless downshift after the driver's manual throttle blip, with no automatic cut or blip detected."
+        }
+      ],
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift after the driver's own blip.",
+        "The gearbox is modeled as a dog-engagement racing box from the manufacturer's VGC specification together with the observed clutchless running shifts. The H-pattern layout is not established and stays unknown."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the real-world identity and five-speed VGC transmission are supported by Nissan's heritage record.",
+      "scope_notes": "Single exact identity from one guided-verification drive. The 'Nissan R89C - Low Downforce' identity is not included and remains an untested aero configuration.",
+      "live_source_url": "https://www.nissan-global.com/EN/HERITAGE_COLLECTION/Nissan_R89C.html",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, five H-pattern gears, clutchless running shifts accepted, upshift after a throttle lift, downshift after a manual blip, no automatic cut or blip, round rim with no display or shift lights."
+    },
+    {
+      "record_id": "ams2.porsche-962c",
+      "bundle": "build/observation-bundles/ams2.porsche-962c.json",
+      "manufacturer": "Porsche",
+      "model": "962C",
+      "variant": "AMS2 base-downforce Group C representation",
+      "year": { "from": 1987, "label": "1987 World Sportscar Championship" },
+      "real_world_identity_notes": "Group C prototype derived from the 956, with the 962C designation distinguishing the World Sportscar Championship cars from their IMSA GTP counterparts. It uses a five-speed manual transmission. Whether that gearbox is synchromesh or dog engaged, and whether its H-pattern is standard or dogleg, is not established by the sources reviewed and is deliberately left unknown.",
+      "real_world_source_refs": ["wikipedia.porsche-962"],
+      "confidence": "high",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled; the real-world five-speed manual transmission and 962C designation are supported by a registered secondary source.",
+      "identity_basis": "A registered secondary source establishes the Group C 962C designation and its five-speed manual transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The source establishes a five-speed manual transmission and the live drive confirmed five forward gears with H-pattern actuation. Gearbox construction and the H-pattern layout are not established by the reviewed sources and stay unknown.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": ["ams2.local-live-porsche-962c-controls.1.6.9.91"],
+          "confidence": "high",
+          "basis": "The guided drive recorded that a clutchless upshift was accepted after a throttle lift and a clutchless downshift with a manual blip, with no automatic throttle spike detected."
+        }
+      ],
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift required the driver's own blip.",
+        "Gearbox construction and H-pattern layout remain unknown; the reviewed sources establish only a five-speed manual transmission."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled; the real-world five-speed manual transmission is supported by a registered source, while gearbox construction stays unknown.",
+      "scope_notes": "Single exact identity from one guided-verification drive. The 'Porsche 962C - Low Downforce' identity is not included and remains an untested aero configuration.",
+      "live_source_url": "https://en.wikipedia.org/wiki/Porsche_962",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, five H-pattern gears, clutchless running shifts accepted, upshift after a throttle lift, downshift with a manual blip, no automatic cut or blip, round rim with no display or shift lights."
+    },
+    {
+      "record_id": "ams2.metalmoro-mrx-duratec-p4",
+      "bundle": "build/observation-bundles/ams2.metalmoro-mrx-duratec-p4.json",
+      "manufacturer": "Metalmoro",
+      "model": "MRX Duratec P4",
+      "variant": "AMS2 P4-class Duratec configuration",
+      "year": { "label": "MRX customer prototype; AMS2 Duratec P4 configuration" },
+      "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro as the successor to the MCR, later revised with a new chassis. 'Duratec' denotes the Ford engine and 'P4' the Endurance Brasil class, neither of which is the marque. The constructor states the MRX accepts diverse engine and transmission options, so no single real-world gearbox is fixed and entrants have run different sequential units. The AMS2 car is one such configuration, and its six-speed sequential stick is established by the live drive rather than by a fixed factory specification.",
+      "real_world_source_refs": ["metalmoro.mrx.official"],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The constructor establishes the MRX identity but fixes no transmission, so the real-world gearbox for this exact configuration is not independently confirmed.",
+      "identity_basis": "The constructor's own page establishes the MRX as a Metalmoro customer prototype, and the exact simulator identity was observed live. The specific real-world build behind the AMS2 Duratec P4 is not identified.",
+      "specification_basis": "The live drive exercised six sequential gears through a visible sequential stick. The constructor states transmission options vary by customer, so the sequential six-speed is recorded at medium confidence as the configuration modeled in AMS2, not as a fixed factory specification.",
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift/throttle_lift",
+            "/authentic_controls/transmission/downshift/manual_blip"
+          ],
+          "source_refs": ["ams2.local-live-metalmoro-mrx-duratec-p4-controls.1.6.9.91"],
+          "confidence": "medium",
+          "basis": "The guided drive accepted a full-throttle clutchless upshift with a detected automatic cut, so no lift is required. No automatic blip was detected on downshifts, and this record follows the curated convention for a sequential stick without automatic blip, where the driver supplies the rev-matching blip."
+        }
+      ],
+      "control_notes": [
+        "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+        "No throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with an automatic cut detected.",
+        "No automatic blip was detected, so the driver supplies the downshift blip, matching the curated convention for a sequential stick without automatic blip.",
+        "The constructor fixes no transmission for the MRX, so the sequential six-speed is recorded as the configuration modeled in AMS2 rather than a factory specification."
+      ],
+      "confidence_notes": "Controls were directly observed with assists disabled. The constructor establishes the MRX identity but fixes no transmission, so the real-world gearbox for this configuration stays at medium confidence.",
+      "scope_notes": "Single exact identity from one guided-verification drive; no aero alias exists for this car.",
+      "live_source_url": "https://www.metalmoro.com.br/novosite/mrx/",
+      "live_source_notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, six sequential-stick gears, full-throttle clutchless upshift with automatic cut detected, clutchless downshift with no automatic blip, round rim with no display or shift lights."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.22",
+  "approved_at": "2026-08-12",
+  "record_id": "ams2.metalmoro-mrx-duratec-p4",
+  "telemetry_name": "MetalMoro MRX Duratec P4",
+  "telemetry_class": "P4",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.metalmoro-mrx-duratec-p4.20260813t050853501z-63285bd6",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "manual_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Controls were directly observed with assists disabled. The constructor establishes the MRX identity but fixes no transmission, so the real-world gearbox for this configuration stays at medium confidence.",
+  "scope_notes": "Single exact identity from one guided-verification drive; no aero alias exists for this car."
+}

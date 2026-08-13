@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.21",
+  "dataset_version": "0.3.22",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,29 +15,29 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 90,
-    "covered_exact_identities": 122,
-    "uncovered_identities": 103,
-    "full_guided_verifications": 89,
+    "curated_records": 93,
+    "covered_exact_identities": 125,
+    "uncovered_identities": 100,
+    "full_guided_verifications": 85,
     "dispositions": {
-      "aero-inheritance-after-base": 7,
-      "covered-exact": 122,
-      "full-guided-verification": 89,
+      "aero-inheritance-after-base": 5,
+      "aero-inheritance-ready": 2,
+      "covered-exact": 125,
+      "full-guided-verification": 85,
       "out-of-scope": 1,
       "retired-identity": 3,
-      "third-party-content": 3
+      "third-party-content": 4
     },
     "full_verifications_by_family": {
       "club-road": 10,
       "gt": 19,
       "open-wheel": 42,
       "other": 6,
-      "prototype": 4,
       "touring-stock": 8
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 48,
-      "legacy-controls-candidate-available": 41
+      "independent-control-research-needed": 46,
+      "legacy-controls-candidate-available": 39
     }
   },
   "entries": [
@@ -2031,13 +2031,13 @@
       "telemetry_name": "Mazda 787b",
       "car_id": "Mazda 787b",
       "identity_file": "Mazda 787b.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "third-party-content",
       "family": "prototype",
       "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1717879371.2242582,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "McLaren 570S GT4",
@@ -2319,13 +2319,13 @@
       "telemetry_name": "MetalMoro MRX Duratec P4",
       "car_id": "MetalMoro MRX Duratec P4",
       "identity_file": "MetalMoro MRX Duratec P4.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.metalmoro-mrx-duratec-p4",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1720905131.52318,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Milano GT36",
@@ -2403,10 +2403,10 @@
       "telemetry_name": "Nissan R89C",
       "car_id": "Nissan R89C",
       "identity_file": "Nissan R89C.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.nissan-r89c",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712417925.0784225,
       "legacy_sheet_candidate": {
@@ -2421,10 +2421,10 @@
       "telemetry_name": "Nissan R89C - Low Downforce",
       "car_id": "Nissan R89C - Low Downforce",
       "identity_file": "Nissan R89C - Low Downforce.shcarsettings",
-      "coverage_disposition": "aero-inheritance-after-base",
+      "coverage_disposition": "aero-inheritance-ready",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Verify the observed base car first, then review this exact aero identity as inherited.",
+      "related_record_id": "ams2.nissan-r89c",
+      "recommended_action": "Base identity is curated; review this exact aero identity as inherited and explicitly untested.",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1762020769.3769073,
       "research_readiness": "not-applicable"
@@ -2565,10 +2565,10 @@
       "telemetry_name": "Porsche 962C",
       "car_id": "Porsche 962C",
       "identity_file": "Porsche 962C.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.porsche-962c",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736037515.4091458,
       "legacy_sheet_candidate": {
@@ -2583,10 +2583,10 @@
       "telemetry_name": "Porsche 962C - Low Downforce",
       "car_id": "Porsche 962C - Low Downforce",
       "identity_file": "Porsche 962C - Low Downforce.shcarsettings",
-      "coverage_disposition": "aero-inheritance-after-base",
+      "coverage_disposition": "aero-inheritance-ready",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Verify the observed base car first, then review this exact aero identity as inherited.",
+      "related_record_id": "ams2.porsche-962c",
+      "recommended_action": "Base identity is curated; review this exact aero identity as inherited and explicitly untested.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1717349996.715784,
       "research_readiness": "not-applicable"

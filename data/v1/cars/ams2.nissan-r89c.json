@@ -1,0 +1,152 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.nissan-r89c",
+  "identity": {
+    "display_name": "Nissan R89C",
+    "manufacturer": "Nissan",
+    "model": "R89C",
+    "year": {
+      "from": 1989,
+      "label": "1989 World Sportscar Championship"
+    },
+    "class": "Group C",
+    "real_world_identity_notes": "Group C prototype campaigned by Nissan in 1989, powered by the VRH35 3,496cc twin-turbo DOHC V8. The chassis was built by Lola Cars International after Nissan switched from March Engineering for that season, so the chassis constructor is identity context rather than the marque. Nissan's heritage record specifies a VGC five-speed transmission, matching the five forward gears exercised in the live drive.",
+    "variant": "AMS2 base-downforce Group C representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift after the driver's own blip.",
+      "The gearbox is modeled as a dog-engagement racing box from the manufacturer's VGC specification together with the observed clutchless running shifts. The H-pattern layout is not established and stays unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Nissan R89C"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group C"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-r89c.20260813t050039446z-0de58672 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "nissan.heritage-collection.r89c",
+        "ams2.local-live-nissan-r89c-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the manufacturer heritage record independently establishes the real-world identity and the five-speed VGC transmission."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "nissan.heritage-collection.r89c",
+          "ams2.local-live-nissan-r89c-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Nissan's own heritage record establishes the 1989 identity, engine, and Lola-built chassis, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "nissan.heritage-collection.r89c",
+          "ams2.local-live-nissan-r89c-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The manufacturer specifies a VGC five-speed transmission and the live drive confirmed five forward gears with H-pattern actuation. VGC is a racing transaxle and the drive accepted clutchless running shifts, which is consistent with dog engagement; the H-pattern layout, standard versus dogleg, is not established and stays unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-nissan-r89c-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-nissan-r89c-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The guided drive recorded that a clutchless upshift was accepted after a throttle lift and a clutchless downshift after the driver's manual throttle blip, with no automatic cut or blip detected."
+      }
+    ]
+  },
+  "updated_at": "2026-08-12"
+}

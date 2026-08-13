@@ -86,7 +86,7 @@ python -m authentic_controls_db import-observation observation.json --output bui
 python -m authentic_controls_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.21 contains 90 reviewed records. Its newest records complete the
+Dataset 0.3.22 contains 93 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.21 contains 90 curated AMS2 records promoted through the reviewed
+Dataset 0.3.22 contains 93 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -268,6 +268,15 @@ their curated records, and six identities are closed as written decisions in
 that are deliberately not aliased because they are not selectable in the
 certified build, and the BMW M3 Safety Car as outside product scope. Guided
 verification is now the only remaining category of open work.
+Dataset 0.3.22 promotes modern-prototype batch 02: Nissan R89C, Porsche 962C,
+and MetalMoro MRX Duratec P4. The two Group C cars are manual-technique cars,
+each a five-speed H-pattern needing the clutch to pull away, a throttle lift to
+upshift, and a manual blip to downshift. The MRX uses a sequential stick with an
+automatic cut but no automatic blip. Nissan's own heritage record supplies the
+R89C five-speed VGC transmission and Lola-built chassis, while Metalmoro states
+the MRX fixes no transmission, so its sequential six-speed is recorded at medium
+confidence as the configuration modeled in AMS2. Verifying these bases makes the
+R89C and 962C Low Downforce identities inheritance-ready.
 
 ## Licensing
 

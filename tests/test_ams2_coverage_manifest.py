@@ -50,10 +50,18 @@ class AMS2CoverageManifestTests(unittest.TestCase):
             else:
                 self.assertIn(disposition, linked, name)
 
-        # A base car that is not yet curated keeps its Low Downforce alias pending.
-        nissan = entries["Nissan R89C - Low Downforce"]
-        self.assertEqual(nissan["coverage_disposition"], "aero-inheritance-after-base")
-        self.assertIsNone(nissan["related_record_id"])
+        # A base car that is not yet curated keeps its Low Downforce alias
+        # pending. Chosen dynamically: naming a car here only holds until that
+        # car is verified, which has already retired two earlier examples.
+        pending = [
+            entry
+            for entry in manifest["entries"]
+            if entry["coverage_disposition"] == "aero-inheritance-after-base"
+        ]
+        self.assertTrue(pending, "expected at least one pending aero variant")
+        for entry in pending:
+            self.assertTrue(entry["telemetry_name"].endswith(" - Low Downforce"))
+            self.assertIsNone(entry["related_record_id"], entry["telemetry_name"])
         # Once the base car carries the alias as an explicit identity, the
         # Low Downforce identity is covered exactly rather than inherited silently.
         bmw = entries["BMW M Hybrid V8 - Low Downforce"]
