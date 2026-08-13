@@ -14,16 +14,17 @@ The machine-readable queue is checked in at:
 
 - 122 observed identities are covered exactly by curated records.
 - 103 observed identities are not covered.
-- 90 of those need full guided verification, and they are now the only work
+- 89 of those need full guided verification, and they are now the only work
   that requires driving.
-- 41 of those 90 have an exact legacy spreadsheet candidate that can seed
+- 41 of those 89 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 49 require independent control research in addition to current-game testing.
+- 48 require independent control research in addition to current-game testing.
 - Seven Low Downforce identities can inherit only after their base car is
   verified; they resolve as a side effect of the batches below.
-- Five identities are reviewed as retired pre-rename observations and one as
-  out of product scope. Both outcomes are recorded with a written basis in
+- Seven identities are closed by explicit review rather than driving: three
+  retired pre-rename observations of official cars, three third-party mod
+  identities, and one out of product scope. Each carries a written basis in
   `research/ams2-identity-decisions.json`.
 
 Every review-only queue is now empty. Dataset 0.3.20 promoted the seven
@@ -42,8 +43,10 @@ can outlive a rename or removal.
 
 An observed identity is also not proof of official content. SimHub records any
 car it sees, including third-party mods, so the inventory can contain cars AMS2
-never shipped. Both FIA-GT1 prefixed identities are confirmed examples from the
-FIA-GT1 mod in the ThunderFlash mods pack.
+never shipped. Three confirmed examples come from the ThunderFlash mods pack:
+the two FIA-GT1 prefixed cars and a Huracan Super Trofeo ported from Project
+CARS 2. AMS2 and Project CARS 2 share an engine lineage, so ports are common
+and their identities look plausible at a glance.
 
 Two signals identified them, and neither is an observation date on its own:
 
@@ -52,7 +55,7 @@ Two signals identified them, and neither is an observation date on its own:
 - an observation that predates the official car's release announcement, where
   the official car exists separately under its own name.
 
-Forty queued identities were last observed before 2025 and are ordinary
+Thirty-nine queued identities were last observed before 2025 and are ordinary
 official cars, so age alone proves nothing. Check provenance when a name looks
 irregular, and record the outcome in
 `research/ams2-identity-decisions.json`.

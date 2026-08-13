@@ -27,11 +27,14 @@ Closed as reviewed decisions in `research/ams2-identity-decisions.json`:
   selectable in AMS2 1.6.9.91. Formula V12 additionally must not inherit, since
   its rebrand accompanied the rule changes that caused the largest downforce
   drop since 1983, so the retired identity is not the same car to drive.
-- Two third-party identities from the FIA-GT1 mod in the ThunderFlash mods
-  pack: FIA-GT1 Lamborghini Murcielago R-SV GT1 and FIA-GT1 Maserati MC12 GT1.
-  AMS2 never shipped a Murcielago R-SV, and the official Murcielago R-GT and
-  Maserati MC12 GT1 are separate cars added later and curated under their own
-  unprefixed identities. Neither modded identity is aliased onto them.
+- Three third-party identities from the ThunderFlash mods pack: FIA-GT1
+  Lamborghini Murcielago R-SV GT1, FIA-GT1 Maserati MC12 GT1, and
+  LamborghiniHuracanLP6202SuperTrofeo, the last a mod ported from Project CARS
+  2. AMS2 never shipped a Murcielago R-SV, and the official Murcielago R-GT,
+  Maserati MC12 GT1, and Huracan Super Trofeo EVO2 are separate cars curated
+  under their own identities. None of the modded identities is aliased onto
+  them, and the Huracan one leaves the guided-verification queue, which drops
+  from 90 to 89.
 - BMW M3 Safety Car is out of product scope as a non-racing vehicle and stays
   unmatched in the client rather than receiving guessed controls.
 

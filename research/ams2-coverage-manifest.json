@@ -18,25 +18,25 @@
     "curated_records": 90,
     "covered_exact_identities": 122,
     "uncovered_identities": 103,
-    "full_guided_verifications": 90,
+    "full_guided_verifications": 89,
     "dispositions": {
       "aero-inheritance-after-base": 7,
       "covered-exact": 122,
-      "full-guided-verification": 90,
+      "full-guided-verification": 89,
       "out-of-scope": 1,
       "retired-identity": 3,
-      "third-party-content": 2
+      "third-party-content": 3
     },
     "full_verifications_by_family": {
       "club-road": 10,
       "gt": 19,
       "open-wheel": 42,
-      "other": 7,
+      "other": 6,
       "prototype": 4,
       "touring-stock": 8
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 49,
+      "independent-control-research-needed": 48,
       "legacy-controls-candidate-available": 41
     }
   },
@@ -1791,13 +1791,13 @@
       "telemetry_name": "LamborghiniHuracanLP6202SuperTrofeo",
       "car_id": "LamborghiniHuracanLP6202SuperTrofeo",
       "identity_file": "LamborghiniHuracanLP6202SuperTrofeo.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "third-party-content",
       "family": "other",
       "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1717879371.2236454,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Ligier JS P217",

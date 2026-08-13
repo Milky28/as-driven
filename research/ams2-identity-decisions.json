@@ -6,7 +6,8 @@
     "Explicit reviewer outcomes for observed SimHub identities that are not curated and are not queued for a guided drive.",
     "A retired identity is a stored pre-rename observation. It is deliberately not aliased onto the renamed record, because it is not selectable in the certified build and cannot be verified there.",
     "These decisions replace hardcoded review outcomes in the manifest generator so the reasoning is reviewable data.",
-    "A decision may cite registered source_refs from data/v1/sources.json when an official release establishes the rename."
+    "A decision may cite registered source_refs from data/v1/sources.json when an official release establishes the rename.",
+    "Third-party content is identified by an irregular name or by an observation that predates the official car's release; the observation date alone is not evidence."
   ],
   "decisions_list": [
     {
@@ -55,6 +56,15 @@
         "ams2.reiza-release.1.6.9.5.formula-edge"
       ],
       "basis": "AMS2 v1.6.9.5 rebranded and replaced the single-make Formula V12 class with Formula Edge, and the release notes identify the former V12 car as Model 1 by warning that old F-V12 liveries need updating for F-Edge Model 1. Deliberately not aliased for two reasons: the name is not selectable in AMS2 1.6.9.91, and the rebrand accompanied rule changes described as the largest downforce drop since 1983, so the retired identity must not inherit the current car's verified controls."
+    },
+    {
+      "telemetry_name": "LamborghiniHuracanLP6202SuperTrofeo",
+      "disposition": "third-party-content",
+      "last_observed": "2024-06-08",
+      "superseded_by": null,
+      "related_record_id": null,
+      "source_refs": [],
+      "basis": "Maintainer confirmed this identity comes from the ThunderFlash mods pack as a mod ported from Project CARS 2, not from official AMS2 content. Its run-together internal name is the only one in the observed inventory that does not follow Reiza's spacing convention, and it was observed on the same day as the pack's FIA-GT1 cars. The official Lamborghini Huracan Super Trofeo EVO2 is a separate car curated under its own properly spaced identity. Not curated and removed from the guided-verification queue."
     },
     {
       "telemetry_name": "BMW M3 Safety Car",
