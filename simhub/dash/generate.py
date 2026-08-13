@@ -705,27 +705,35 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && [AsDriven.VerificationDriveResultSuccessful]",
     )
+    # A negative outcome is still a captured result: the drive sets the result as
+    # ready either way, and a stalled move-off is the finding that the car needs
+    # the clutch. Badging it REVIEW read as a fault and hid that anything had been
+    # captured at all, so both states say CAPTURED and only the colour differs.
     review_status = factory.layer(
         "ReviewStatus",
         [
-            factory.text("ReviewBadge", "REVIEW", 34, 146, 94, 28, 12, ORANGE, font_weight="Bold"),
-            factory.text("ReviewSummary", "Review result", 132, 146, 530, 28, 13, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("ReviewBadge", "✓ CAPTURED", 34, 146, 126, 28, 12, ORANGE, font_weight="Bold"),
+            factory.text("ReviewSummary", "Result captured", 164, 146, 498, 28, 13, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && ![AsDriven.VerificationDriveResultSuccessful]",
     )
-    # The action row is deliberately state-dependent. Before a result exists the
-    # verbs are only reference, so they stay muted; once a result is captured the
-    # driver has a decision to make, so the row brightens and says what each verb
-    # does. "Skip" in particular is not self-explanatory: it means leave this step
-    # unanswered and complete it in the form afterwards.
+    # Before a result exists the driver is still performing the manoeuvre, so the
+    # bottom row shows live telemetry with the verbs muted for reference. Once a
+    # result is captured the telemetry stops mattering and a decision starts, so
+    # the whole row becomes one full-width sentence. Abbreviations like "RETRY
+    # redo" did not fit in the 302-pixel corner and were not readable; at 648
+    # pixels each verb can say what it actually does.
     controls_idle = factory.layer(
         "ControlsIdle",
-        [factory.text("ControlsIdleText", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, MUTED, horizontal_alignment=2, font_weight="Bold")],
+        [
+            factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AsDriven.VerificationDriveLiveValues]"),
+            factory.text("ControlsIdleText", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, MUTED, horizontal_alignment=2, font_weight="Bold"),
+        ],
         visible_expression="![AsDriven.VerificationDriveResultReady]",
     )
     controls_ready = factory.layer(
         "ControlsReady",
-        [factory.text("ControlsReadyText", "NEXT accept   •   RETRY redo   •   SKIP fix in form", 370, 181, 302, 23, 10, ACCENT, horizontal_alignment=2, font_weight="Bold")],
+        [factory.text("ControlsReadyText", "NEXT to accept this result   •   RETRY to drive this test again   •   SKIP to answer it in the form", 24, 181, 648, 23, 11, ACCENT, font_weight="Bold")],
         visible_expression="[AsDriven.VerificationDriveResultReady]",
     )
     return [
@@ -741,7 +749,6 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         pending_status,
         successful_status,
         review_status,
-        factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AsDriven.VerificationDriveLiveValues]"),
         controls_idle,
         controls_ready,
     ]

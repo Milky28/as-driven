@@ -99,16 +99,24 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
         self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
 
+        # A negative outcome is still a captured result, so both status states say
+        # CAPTURED and only the colour differs. Badging one REVIEW read as a fault.
+        self.assertEqual("✓ CAPTURED", named["ReviewBadge"]["Text"])
+        self.assertEqual(self.generator.ORANGE, named["ReviewBadge"]["TextColor"])
+
         # The action row tells the driver what to do only once a result exists.
-        # Before that the verbs are reference, so they stay muted.
+        # Before that the verbs are reference, so they stay muted beside telemetry.
         self.assertIn("NEXT / ACCEPT", named["ControlsIdleText"]["Text"])
         self.assertEqual(self.generator.MUTED, named["ControlsIdleText"]["TextColor"])
+
+        # Once captured the row is one full-width sentence: each verb states what
+        # it does, rather than an abbreviation squeezed into the corner.
         ready = named["ControlsReadyText"]["Text"]
-        self.assertIn("NEXT accept", ready)
-        self.assertIn("RETRY redo", ready)
-        # "Skip" is not self-explanatory; the row has to say where it is resolved.
-        self.assertIn("SKIP fix in form", ready)
+        self.assertIn("NEXT to accept this result", ready)
+        self.assertIn("RETRY to drive this test again", ready)
+        self.assertIn("SKIP to answer it in the form", ready)
         self.assertEqual(self.generator.ACCENT, named["ControlsReadyText"]["TextColor"])
+        self.assertEqual(648, named["ControlsReadyText"]["Width"])
         self.assertLessEqual(named["SuccessSummary"]["Height"], 28)
         self.assertEqual(14, named["PromptLine1"]["FontSize"])
         self.assertEqual(22, named["PromptLine1"]["Height"])
