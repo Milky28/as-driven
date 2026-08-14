@@ -577,21 +577,48 @@ namespace AsDriven.Core
             }
         }
 
+        /// <summary>
+        /// True when a test that assumes no clutch was nonetheless accepted
+        /// while clutch input was present.
+        ///
+        /// The telemetry is SimHub's clutch channel, which cannot be separated
+        /// into pedal movement and any clutch the car works itself. That
+        /// ambiguity only matters when the result claims the car did something
+        /// without a clutch, because then the reading may be measuring the
+        /// driver instead. A rejected attempt is unremarkable: needing the
+        /// clutch is exactly what it found.
+        /// </summary>
+        private bool ClutchContradictsAcceptedResult()
+        {
+            if (_maximumClutch <= 20.0 || !_attemptAccepted)
+            {
+                return false;
+            }
+            return _phase == Phase.MoveOff
+                || _phase == Phase.FullThrottleUpshift
+                || _phase == Phase.LiftedUpshift
+                || _phase == Phase.CoastDownshift
+                || _phase == Phase.ManualBlipDownshift;
+        }
+
         private string VehicleClutchSummary()
         {
             return _maximumClutch > 20.0
-                ? " Vehicle clutch telemetry also actuated; it is treated as internal/automatic clutch state, not proof of pedal use."
+                ? " Clutch input was present; confirm it was the car and not the pedal."
                 : string.Empty;
         }
 
         private void RememberVehicleClutchTelemetry()
         {
-            if (_maximumClutch <= 20.0 || !string.IsNullOrEmpty(_results.EvidenceNote))
+            if (!ClutchContradictsAcceptedResult() || !string.IsNullOrEmpty(_results.EvidenceNote))
             {
                 return;
             }
             _results.EvidenceNote =
-                "Vehicle-reported clutch telemetry actuated during the guided drive even though the test instructions required no physical clutch input; treated as internal/automatic clutch state rather than proof of pedal use.";
+                "Clutch input was detected during a test that was accepted as needing no clutch. "
+                + "The telemetry does not separate the pedal from a clutch the car works itself, so "
+                + "this result may be measuring the driver. Re-run the test, or confirm the reading "
+                + "before relying on it.";
         }
 
         private void AdvanceAfterSkip()

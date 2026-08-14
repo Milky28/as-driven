@@ -578,7 +578,10 @@ namespace AsDriven.Core.Tests
                     Equal("yes", guidedResults.AutomaticCut, "prefills telemetry-supported automatic cut");
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
                     Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
-                    True(guidedResults.EvidenceNote.Contains("internal/automatic clutch state"), "documents vehicle clutch telemetry without treating it as pedal input");
+                    // This car crept away with the clutch channel high and the
+                    // result was accepted as clutch-free, which is the one
+                    // combination worth questioning.
+                    True(guidedResults.EvidenceNote.Contains("may be measuring the driver"), "warns when a clutch-free result was accepted with clutch input present");
                     guidedDrive.Next();
                     False(guidedDrive.GetSnapshot().Visible, "closes the completed in-sim prompt");
                     True(guidedDrive.GetSnapshot().Completed, "keeps completed results available for settings review after closing the prompt");
@@ -617,6 +620,20 @@ namespace AsDriven.Core.Tests
                     GuidedDriveResults skippedResults = skippedAutomaticTests.GetResults();
                     Equal("not-tested", skippedResults.AutomaticCut, "does not infer no automatic cut when its test was skipped");
                     Equal("not-tested", skippedResults.AutomaticBlip, "does not infer no automatic blip when its test was skipped");
+
+                    // A manual car needs the clutch to pull away, so the driver
+                    // uses the pedal and the test correctly reports that a
+                    // clutch is required. Clutch input is the expected finding
+                    // here, not a doubt about it, so no warning is raised.
+                    var manualMoveOff = new GuidedVerificationDrive();
+                    manualMoveOff.Start(null);
+                    manualMoveOff.AddSample(GuidedSample(now, 0, 0, 0, 1000, 0, 0, true));
+                    manualMoveOff.AddSample(GuidedSample(now.AddMilliseconds(100), 1, 95, 30, 1400, 0, 20, true));
+                    manualMoveOff.AddSample(GuidedSample(now.AddMilliseconds(900), 1, 20, 40, 1800, 12, 60, true));
+                    manualMoveOff.Next();
+                    manualMoveOff.Next();
+                    Equal("no", manualMoveOff.GetResults().MoveOffWithoutPhysicalClutch, "records that this car needs the clutch to pull away");
+                    Equal(string.Empty, manualMoveOff.GetResults().EvidenceNote ?? string.Empty, "stays quiet when needing the clutch is the result itself");
 
                     // A damaged dog box selects the lower gear and then sits in
                     // neutral. The simulator still reports the selected gear,
