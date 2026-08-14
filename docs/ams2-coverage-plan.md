@@ -119,11 +119,24 @@ inference from road-legality and say so.
 
 ### 5. Verify open-wheel cars by historical era
 
-The 42-car open-wheel queue is now all that remains besides six unclassified
-cars, and should be split into Formula Vintage/Retro/Classic, Formula HiTech,
+The 42-car open-wheel queue is now all that remains besides six sports and
+touring cars, and is split into Formula Vintage/Retro/Classic, Formula HiTech,
 CART/Formula USA historical chassis, and modern Formula groups. Similar class
 names are batching aids only; each exact selectable identity remains
 independently reviewable.
+
+**The current next batch is the earliest era, 1967 to 1979:** Formula Vintage
+Gen1 Model1, Formula Vintage Gen1 Model2, Brabham BT26A, Lotus 49C, Formula
+Retro V12, and Formula Retro Gen2. All six report five gears.
+
+Expect gate patterns to matter most here. Period Formula gearboxes of this era
+frequently placed first out of the shift plane, so the cockpit gate must be read
+per car and never assumed standard.
+
+Two identities in the wider queue need provenance review before driving rather
+than after: `Porsche 911 RSR 1974` and `Porsche 911 RSR 74` are more likely a
+rename pair than two cars. Neither is open-wheel, so this does not block the
+batch above.
 
 ## Refresh procedure
 
