@@ -1053,6 +1053,7 @@ namespace AsDriven.Plugin
                     Gear = currentGear,
                     Clutch = data.NewData.Clutch,
                     Throttle = data.NewData.Throttle,
+                    Brake = data.NewData.Brake,
                     Rpm = data.NewData.Rpms,
                     SpeedKmh = data.NewData.SpeedKmh,
                     EngineTorque = data.NewData.EngineTorque,

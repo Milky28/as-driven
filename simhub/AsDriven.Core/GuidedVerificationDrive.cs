@@ -8,6 +8,7 @@ namespace AsDriven.Core
         public int Gear { get; set; }
         public double Clutch { get; set; }
         public double Throttle { get; set; }
+        public double Brake { get; set; }
         public double Rpm { get; set; }
         public double SpeedKmh { get; set; }
         public double EngineTorque { get; set; }
@@ -354,8 +355,10 @@ namespace AsDriven.Core
                         // of waiting for movement that cannot come.
                         // The prompt asks for light throttle, which is often
                         // well under fifteen percent, so the attempt has to
-                        // count from a genuinely light application.
-                        if (engineRunning && sample.Throttle >= 8.0)
+                        // count from a genuinely light application. Holding the
+                        // brake is part of the test, not a refusal to move, so
+                        // it never counts towards this.
+                        if (engineRunning && sample.Throttle >= 8.0 && sample.Brake < 10.0)
                         {
                             if (!_moveOffRefusalStartedUtc.HasValue)
                             {
@@ -775,7 +778,13 @@ namespace AsDriven.Core
                 // manual gearbox to destruction, which also ended the drive.
                 // Stalling is how such a car answers, so the prompt says so
                 // rather than reading as an instruction that failed.
-                case Phase.MoveOff: return "Stopped in 1st, engine on. Clutch fully released.";
+                //
+                // The brake is what makes the answer unambiguous. Released
+                // gently against a free car, a manual clutch can be slipped
+                // into a creep instead of a stall, which would read as moving
+                // off without one. Held against the brake there is nowhere for
+                // that creep to go, so the engine either stalls or it does not.
+                case Phase.MoveOff: return "Stopped in 1st, brake on. Release the clutch fully.";
                 case Phase.GearCount: return "Cycle through every forward gear.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
@@ -791,7 +800,7 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Apply throttle. Stalling is a valid result.";
+                case Phase.MoveOff: return "Stall = clutch required. If not, brake off, throttle.";
                 case Phase.GearCount: return "Direct H-pattern selection is reviewed in the form.";
                 case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
                 case Phase.LiftedUpshift: return "Then request one upshift.";

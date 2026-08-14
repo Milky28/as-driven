@@ -639,6 +639,22 @@ namespace AsDriven.Core.Tests
                     refusedMoveOff.Next();
                     Equal("no", refusedMoveOff.GetResults().MoveOffWithoutPhysicalClutch, "records that the car cannot pull away without the clutch");
 
+                    // The test asks the driver to hold the brake, so a car sat
+                    // still under throttle against it has not refused anything
+                    // yet. Concluding there would fail an automatic-clutch car
+                    // for following the instructions.
+                    var heldOnBrake = new GuidedVerificationDrive();
+                    heldOnBrake.Start(null);
+                    heldOnBrake.AddSample(GuidedSample(now, 0, 0, 0, 1000, 0, 0, true, 90.0));
+                    heldOnBrake.AddSample(GuidedSample(now.AddSeconds(2), 1, 0, 30, 1500, 0, 40, true, 90.0));
+                    heldOnBrake.AddSample(GuidedSample(now.AddSeconds(6), 1, 0, 30, 1500, 0, 40, true, 90.0));
+                    False(heldOnBrake.GetSnapshot().ResultReady, "never counts time spent held on the brake as a refusal to move");
+                    heldOnBrake.AddSample(GuidedSample(now.AddSeconds(7), 1, 0, 30, 1600, 4, 50, true));
+                    heldOnBrake.AddSample(GuidedSample(now.AddSeconds(8), 1, 0, 30, 1700, 9, 55, true));
+                    True(heldOnBrake.GetSnapshot().ResultReady, "accepts the car once the brake is released and it pulls away");
+                    heldOnBrake.Next();
+                    Equal("yes", heldOnBrake.GetResults().MoveOffWithoutPhysicalClutch, "records a clutch-free move-off after a braked hold");
+
                     // A slow automatic clutch must still reach the positive
                     // path rather than be judged by the refusal timeout.
                     var slowCreep = new GuidedVerificationDrive();
@@ -998,7 +1014,8 @@ namespace AsDriven.Core.Tests
             double rpm,
             double speedKmh,
             double torque,
-            bool engineStarted)
+            bool engineStarted,
+            double brake = 0.0)
         {
             return new GuidedTelemetrySample
             {
@@ -1006,6 +1023,7 @@ namespace AsDriven.Core.Tests
                 Gear = gear,
                 Clutch = clutch,
                 Throttle = throttle,
+                Brake = brake,
                 Rpm = rpm,
                 SpeedKmh = speedKmh,
                 EngineTorque = torque,

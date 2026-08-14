@@ -26,6 +26,11 @@ the research backlog, or a curation approval.
    clutch may be used to engage first; the question is only whether moving
    off needs it. Demanding the gear without the clutch made testers grind a
    manual gearbox to destruction, which also ended the rest of the drive.
+   The brake is held while the clutch is released, because a clutch let out
+   gently against a free car can be slipped into a creep rather than a stall,
+   and that creep reads as moving off without a clutch. Held against the
+   brake the engine either stalls or it does not. Time spent stationary under
+   throttle while braking is therefore never counted as a refusal to move.
 4. Count accepted forward gears.
 5. Test clutchless upshift and downshift acceptance.
 6. Capture or confirm automatic cut and blip, including the observation method.
