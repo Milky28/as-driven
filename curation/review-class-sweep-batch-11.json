@@ -1,0 +1,271 @@
+{
+  "review": "class-sweep-batch-11",
+  "dataset_version": "0.3.34",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.iveco-stralis",
+      "bundle": "build/class-sweep-batch-11/iveco-stralis.staged.json",
+      "manufacturer": "Iveco",
+      "model": "Stralis",
+      "variant": "Copa Truck racing specification",
+      "year": {
+        "label": "Copa Truck championship"
+      },
+      "real_world_identity_notes": "Iveco racing truck of the Brazilian Copa Truck championship, one of the manufacturers the series lists among its competitors.",
+      "real_world_source_refs": [
+        "wikipedia.copa-truck",
+        "ams2wiki.mercedes-benz-actros"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the championship and its mandated gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1.",
+      "confidence_notes": "Guided testing directly established the six H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+        "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.man-tgx",
+      "bundle": "build/class-sweep-batch-11/man-tgx.staged.json",
+      "manufacturer": "MAN",
+      "model": "TGX",
+      "variant": "Copa Truck racing specification",
+      "year": {
+        "label": "Copa Truck championship"
+      },
+      "real_world_identity_notes": "MAN racing truck of the Brazilian Copa Truck championship, one of the manufacturers the series lists among its competitors.",
+      "real_world_source_refs": [
+        "wikipedia.copa-truck",
+        "ams2wiki.mercedes-benz-actros"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the championship and its mandated gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1.",
+      "confidence_notes": "Guided testing directly established the six H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+        "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mercedes-benz-actros",
+      "bundle": "build/class-sweep-batch-11/mercedes-benz-actros.staged.json",
+      "manufacturer": "Mercedes-Benz",
+      "model": "Actros",
+      "variant": "Copa Truck racing specification",
+      "year": {
+        "label": "Copa Truck championship"
+      },
+      "real_world_identity_notes": "Mercedes-Benz racing truck of the Brazilian Copa Truck championship, running the OM 460 12.8-litre six at a racing weight of about 4,950 kg, over two tonnes below the road variants.",
+      "real_world_source_refs": [
+        "wikipedia.copa-truck",
+        "ams2wiki.mercedes-benz-actros"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the championship and its mandated gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1.",
+      "confidence_notes": "Guided testing directly established the six H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+        "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.volkswagen-constellation",
+      "bundle": "build/class-sweep-batch-11/volkswagen-constellation.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Constellation",
+      "variant": "Copa Truck racing specification",
+      "year": {
+        "label": "Copa Truck championship"
+      },
+      "real_world_identity_notes": "Volkswagen racing truck of the Brazilian Copa Truck championship, one of the manufacturers the series lists among its competitors.",
+      "real_world_source_refs": [
+        "wikipedia.copa-truck",
+        "ams2wiki.mercedes-benz-actros"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the championship and its mandated gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1.",
+      "confidence_notes": "Guided testing directly established the six H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+        "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.vulkan-truck",
+      "bundle": "build/class-sweep-batch-11/vulkan-truck.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Vulkan Truck",
+      "variant": "Copa Truck racing specification",
+      "year": {
+        "label": "Copa Truck championship"
+      },
+      "real_world_identity_notes": "Racing truck in AMS2's Copa Truck field. Vulkan is not among the manufacturers the championship lists, so it is treated as Reiza's own entry rather than assigned a real marque, and no real-world chassis identity is claimed.",
+      "real_world_source_refs": [
+        "wikipedia.copa-truck",
+        "ams2wiki.mercedes-benz-actros"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the championship and its mandated gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1.",
+      "confidence_notes": "Guided testing directly established the six H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+        "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice.",
+        "Vulkan does not appear in the championship's list of competing manufacturers, so no real-world truck is identified. Its controls are recorded from the drive and the class regulations that all Copa Truck entries share."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.copa-montana",
+      "bundle": "build/class-sweep-batch-11/copa-montana.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Montana",
+      "variant": "Copa Montana racing specification",
+      "year": {
+        "label": "2010 to 2012",
+        "from": 2010,
+        "to": 2012
+      },
+      "real_world_identity_notes": "Pickup-bodied racer of the Brazilian Copa Chevrolet Montana, a series that ran from 2010 to 2012. It carries a 5.7-litre carburetted V8 of about 369 hp at some 1,360 kg, shifted by a sequential stick.",
+      "real_world_source_refs": [
+        "ams2cars.chevrolet-montana"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered reference establishes the series and its sequential gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The reference gives a sequential stick gearbox with five gears, and the live drive selected five gears through a sequential stick with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established five gears through a sequential stick, the standing-start clutch, the clutchless running shift, and automatic cut and blip. Confidence is medium because the only reviewed source is a community reference rather than a championship or manufacturer publication.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

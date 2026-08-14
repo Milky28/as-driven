@@ -1,0 +1,143 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.iveco-stralis",
+  "identity": {
+    "display_name": "Iveco Stralis",
+    "manufacturer": "Iveco",
+    "model": "Stralis",
+    "year": {
+      "label": "Copa Truck championship"
+    },
+    "class": "CopaTruck",
+    "real_world_identity_notes": "Iveco racing truck of the Brazilian Copa Truck championship, one of the manufacturers the series lists among its competitors.",
+    "variant": "Copa Truck racing specification"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+      "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+      "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Iveco Stralis"
+        },
+        {
+          "kind": "class-id",
+          "value": "CopaTruck"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.iveco-stralis.20260814t193645192z-54adb5fc by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "wikipedia.copa-truck",
+        "ams2wiki.mercedes-benz-actros",
+        "ams2.local-live-iveco-stralis-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.copa-truck",
+          "ams2wiki.mercedes-benz-actros",
+          "ams2.local-live-iveco-stralis-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Registered sources establish the championship and its mandated gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.copa-truck",
+          "ams2wiki.mercedes-benz-actros",
+          "ams2.local-live-iveco-stralis-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-iveco-stralis-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-14"
+}

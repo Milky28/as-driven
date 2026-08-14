@@ -76,6 +76,18 @@
       "notes": "Direct test with Auto Clutch disabled in AMS2 1.6.9.91 through SimHub 9.11.22. Exact live identity was Alpine A424 / LMDh. The car moved from rest without a clutch, accepted seven full-throttle paddle upshifts without clutch or lift, and accepted clutch-free downshifts. An automatic downshift blip was directly visible as a throttle-display spike. No upshift power interruption was perceptible; automatic cut is retained at medium confidence from the common LMDh architecture, successful full-throttle shifts, and the existing 1.5.5.2 LMDh peer records. Cockpit inspection showed a closed prototype-style rim with an integrated display."
     },
     {
+      "source_id": "ams2.local-live-arc-camaro-controls.1.6.9.91",
+      "title": "Live AMS2 ARC Camaro guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.aussieracingcars.com.au/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.arc-camaro.20260814t175800351z-784b4617 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91",
       "title": "Live AMS2 Aston Martin DBR9 control test",
       "publisher": "Local AMS2 observation",
@@ -1957,6 +1969,30 @@
       "notes": "Official release identifies the Aston Martin Valkyrie road car in Hypercars and the Maserati GT2 Stradale in Supercars. Exact telemetry identities and controls are established separately by guided observations."
     },
     {
+      "source_id": "ams2cars.chevrolet-montana",
+      "title": "Chevrolet Montana",
+      "publisher": "Cars of AMS2",
+      "url": "https://ams2cars.info/brazilian-series/copa-montana/",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Community AMS2 reference for the Copa Montana entry. Gives a 5.7-litre carburetted V8 of 369 hp, 1,360 kg, and a sequential stick gearbox with five gears. Dates the series 2010 to 2012."
+    },
+    {
+      "source_id": "ams2wiki.mercedes-benz-actros",
+      "title": "Mercedes-Benz Actros",
+      "publisher": "Automobilista 2 Wiki",
+      "url": "https://automobilista2.wiki.gg/wiki/Mercedes-Benz_Actros",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Community AMS2 reference for the Copa Truck entry. States a 5-speed + 1 transmission with the first gear only being used to launch the truck, and that the regulations mandate a mechanically operated H-pattern manual gearbox with freedom in design. Gives the OM 460 12.8-litre six and a 4,950 kg racing weight."
+    },
+    {
       "source_id": "aston-martin.valkyrie-hypercar-race",
       "title": "Valkyrie takes the ultimate hypercar from the road to the track as new quest for Le Mans glory begins",
       "publisher": "Aston Martin Lagonda",
@@ -3327,6 +3363,18 @@
       "notes": "Secondary reference for the Omega used in Stock Car Brasil from 1994 to 1999. The 1999 cars retained a heavily modified straight six derived from the 1979 Opala rather than the V8 introduced in 2001, and 1999 was the last season built on production-car chassis. It does not document the gearbox."
     },
     {
+      "source_id": "wikipedia.copa-truck",
+      "title": "Copa Truck",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Copa_Truck",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Brazilian racing-truck championship descended from Formula Truck. States the trucks have 1,000 horsepower, twice that of an average transport truck, and brake from over 200 km/h. Lists the competing manufacturers as Ford, Iveco, MAN, Mercedes-Benz, Scania, Volvo and Volkswagen. It gives no gearbox detail."
+    },
+    {
       "source_id": "wikipedia.courage-c60",
       "title": "Courage C60",
       "publisher": "Wikipedia contributors",
@@ -3543,16 +3591,76 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-arc-camaro-controls.1.6.9.91",
-      "title": "Live AMS2 ARC Camaro guided-verification drive",
+      "source_id": "ams2.local-live-iveco-stralis-controls.1.6.9.91",
+      "title": "Live AMS2 Iveco Stralis guided-verification drive",
       "publisher": "Local AMS2 observation",
-      "url": "https://www.aussieracingcars.com.au/",
+      "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.arc-camaro.20260814t175800351z-784b4617 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.iveco-stralis.20260814t193645192z-54adb5fc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-man-tgx-controls.1.6.9.91",
+      "title": "Live AMS2 MAN TGX guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.man-tgx.20260814t194142749z-6073fa87 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mercedes-benz-actros-controls.1.6.9.91",
+      "title": "Live AMS2 Mercedes-Benz Actros guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mercedes-benz-actros.20260814t194520339z-752f10a3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-volkswagen-constellation-controls.1.6.9.91",
+      "title": "Live AMS2 Volkswagen Constellation guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.volkswagen-constellation.20260814t195049095z-dedbdeac by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-vulkan-truck-controls.1.6.9.91",
+      "title": "Live AMS2 Vulkan Truck guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.vulkan-truck.20260814t195408740z-abe0c4aa by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-copa-montana-controls.1.6.9.91",
+      "title": "Live AMS2 Copa Montana guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.copa-montana.20260814t192441105z-397e56ce by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -1,5 +1,33 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.34 (class sweep batch 11)
+
+Six of seven promoted, from three classes the queue had never seen.
+
+The five Copa Trucks are the interesting ones. A tester found first gear
+effectively unavailable in normal running and took it for a fault; it is the
+real specification faithfully modelled. The championship's trucks use a
+five-speed plus a launch gear, with first only used to pull away, which is
+exactly the six gears the drive observed. The regulations mandate a
+mechanically operated H-pattern manual gearbox but leave its design free, so
+engagement type is not established and the downshift blip stays `unknown`.
+
+Iveco Stralis, MAN TGX, Mercedes-Benz Actros and Volkswagen Constellation all
+appear in the championship's own list of competing manufacturers. Vulkan does
+not, so it is recorded as Reiza's own entry with no real-world truck claimed,
+at medium confidence.
+
+Chevrolet Montana is a pickup-bodied racer of the 2010 to 2012 Copa Chevrolet
+Montana: a 5.7-litre V8 on a sequential stick, with automatic cut and blip, so
+the driver supplies neither.
+
+Copa Uno is held back. The drive read an H-pattern with no automation, while a
+community AMS2 reference lists a sequential stick. The same reference was wrong
+about the ARC Camaro's gear count, and the tester distinguished a sequential
+stick on the Montana in this very batch, so the observation is the stronger
+evidence. It is worth one confirming look before a record tells drivers to fit
+the wrong shifter.
+
 ## Completed in dataset 0.3.32 (class sweep batch 10)
 
 The first batch driven by walking the simulator's own class list rather than the

@@ -2,26 +2,34 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.33",
+  "dataset_version": "0.3.34",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 58,
+    "live_identities_seen": 66,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
       "Caterham 620R",
       "Caterham Superlight",
+      "Copa Montana",
+      "Copa Uno",
       "Formula Classic Gen1 Model1 - High Downforce",
       "Formula Classic Gen1 Model2 - High Downforce",
       "Fusca Classic FL",
+      "Iveco Stralis",
       "Lotus Renault 98T",
       "Lotus Renault 98T - High Downforce",
+      "MAN TGX",
       "MINI Cooper S 1965 B",
       "McLaren Cosworth MP4/1C - High Downforce",
+      "Mercedes-Benz Actros",
       "Passat Classic B",
-      "Uno Classic B"
+      "Passat Classic FL",
+      "Uno Classic B",
+      "Volkswagen Constellation",
+      "Vulkan Truck"
     ]
   },
   "rules": [
@@ -35,15 +43,15 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 238,
-    "curated_records": 145,
-    "covered_exact_identities": 188,
-    "uncovered_identities": 50,
-    "full_guided_verifications": 38,
+    "observed_identities": 246,
+    "curated_records": 151,
+    "covered_exact_identities": 194,
+    "uncovered_identities": 52,
+    "full_guided_verifications": 40,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 188,
-      "full-guided-verification": 38,
+      "covered-exact": 194,
+      "full-guided-verification": 40,
       "out-of-scope": 1,
       "retired-identity": 4,
       "third-party-content": 6
@@ -51,10 +59,10 @@
     "full_verifications_by_family": {
       "club-road": 1,
       "open-wheel": 31,
-      "other": 6
+      "other": 8
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 23,
+      "independent-control-research-needed": 25,
       "legacy-controls-candidate-available": 15
     }
   },
@@ -933,6 +941,34 @@
       "live_observed_at": "2026-08-14T04:27:10.5603684Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Copa Montana",
+      "car_id": "Copa Montana",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.copa-montana",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "Montana",
+      "live_observed_at": "2026-08-14T19:24:03.8195021Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Copa Uno",
+      "car_id": "Copa Uno",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaUno",
+      "live_observed_at": "2026-08-14T19:20:21.3653236Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Courage C60 Hybrid",
@@ -1973,6 +2009,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Iveco Stralis",
+      "car_id": "Iveco Stralis",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.iveco-stralis",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaTruck",
+      "live_observed_at": "2026-08-14T19:27:14.4004004Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Lamborghini Diablo SV-R",
       "car_id": "Lamborghini Diablo SV-R",
       "identity_file": "Lamborghini Diablo SV-R.shcarsettings",
@@ -2353,6 +2403,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "MAN TGX",
+      "car_id": "MAN TGX",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.man-tgx",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaTruck",
+      "live_observed_at": "2026-08-14T19:41:09.2684404Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Maserati GranSport Trofeo",
       "car_id": "Maserati GranSport Trofeo",
       "identity_file": "Maserati GranSport Trofeo.shcarsettings",
@@ -2688,6 +2752,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Mercedes-Benz Actros",
+      "car_id": "Mercedes-Benz Actros",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.mercedes-benz-actros",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaTruck",
+      "live_observed_at": "2026-08-14T19:44:51.9529314Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Mercedes-Benz CLK LM",
       "car_id": "Mercedes-Benz CLK LM",
       "identity_file": "Mercedes-Benz CLK LM.shcarsettings",
@@ -2939,6 +3017,20 @@
       "live_observed_at": "2026-08-14T18:14:00.4654641Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Passat Classic FL",
+      "car_id": "Passat Classic FL",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaClassicFL",
+      "live_observed_at": "2026-08-14T18:55:54.0190969Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Porsche 911 GT1-98",
@@ -3585,6 +3677,34 @@
       "identity_source": "live-diagnostics",
       "telemetry_class": "CopaClassicB",
       "live_observed_at": "2026-08-14T18:18:22.2158879Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Volkswagen Constellation",
+      "car_id": "Volkswagen Constellation",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.volkswagen-constellation",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaTruck",
+      "live_observed_at": "2026-08-14T19:50:26.1877294Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Vulkan Truck",
+      "car_id": "Vulkan Truck",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.vulkan-truck",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaTruck",
+      "live_observed_at": "2026-08-14T19:53:41.4687403Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },

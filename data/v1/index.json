@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.33",
+  "dataset_version": "0.3.34",
   "released_at": "2026-08-14",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -46,6 +46,7 @@
     "cars/ams2.chevrolet-cruze-stock-car-2024.json",
     "cars/ams2.chevrolet-omega-stock-car-1999.json",
     "cars/ams2.copa-fusca.json",
+    "cars/ams2.copa-montana.json",
     "cars/ams2.courage-c60-hybrid.json",
     "cars/ams2.dallara-sp1.json",
     "cars/ams2.dodge-viper-acr.json",
@@ -82,6 +83,7 @@
     "cars/ams2.ginetta-g55-gt4.json",
     "cars/ams2.gol-classic-b.json",
     "cars/ams2.gol-classic-fl.json",
+    "cars/ams2.iveco-stralis.json",
     "cars/ams2.lamborghini-diablo-sv-r.json",
     "cars/ams2.lamborghini-huracan-gt3-evo2.json",
     "cars/ams2.lamborghini-huracan-super-trofeo-evo2.json",
@@ -99,6 +101,7 @@
     "cars/ams2.lola-b05-40-v8.json",
     "cars/ams2.lotus-49c.json",
     "cars/ams2.lotus-renault-98t-high-downforce.json",
+    "cars/ams2.man-tgx.json",
     "cars/ams2.maserati-gransport-trofeo.json",
     "cars/ams2.maserati-gt2-stradale.json",
     "cars/ams2.maserati-mc12-gt1.json",
@@ -110,6 +113,7 @@
     "cars/ams2.mercedes-amg-gt3.json",
     "cars/ams2.mercedes-amg-gt4.json",
     "cars/ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm.json",
+    "cars/ams2.mercedes-benz-actros.json",
     "cars/ams2.metalmoro-ajr-chevrolet.json",
     "cars/ams2.metalmoro-ajr-gen2-chevrolet.json",
     "cars/ams2.metalmoro-mrx-duratec-p4.json",
@@ -148,6 +152,8 @@
     "cars/ams2.toyota-corolla-stock-car-2022.json",
     "cars/ams2.toyota-corolla-stock-car-2024.json",
     "cars/ams2.tvr-tuscan-t400r-gt2.json",
-    "cars/ams2.uno-classic-b.json"
+    "cars/ams2.uno-classic-b.json",
+    "cars/ams2.volkswagen-constellation.json",
+    "cars/ams2.vulkan-truck.json"
   ]
 }
