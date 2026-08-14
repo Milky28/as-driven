@@ -75,6 +75,14 @@ namespace AsDriven.Core
         private static readonly TimeSpan MoveOffRefusalWindow =
             TimeSpan.FromSeconds(4.0);
 
+        // A running shift that will not go through without the clutch leaves
+        // the gearbox in neutral with the car still moving, and it grinds for
+        // as long as the driver holds it there. Long enough to ignore the
+        // instant of neutral every ordinary shift passes through, short enough
+        // to stop the grinding quickly.
+        private static readonly TimeSpan RunningShiftRefusalWindow =
+            TimeSpan.FromMilliseconds(900.0);
+
         private enum Phase
         {
             Idle,
@@ -119,6 +127,7 @@ namespace AsDriven.Core
         private bool _engineWasRunning;
         private DateTime? _moveOffMovementStartedUtc;
         private DateTime? _moveOffRefusalStartedUtc;
+        private DateTime? _neutralWhileMovingSinceUtc;
         private string _result = string.Empty;
         private double _maximumClutch;
         private double _minimumThrottle;
@@ -195,7 +204,7 @@ namespace AsDriven.Core
                         {
                             _attemptAccepted = true;
                             _resultReady = true;
-                            _result = "Highest observed forward gear: " + _maximumGear + ".";
+                            _result = "Highest gear reached: " + _maximumGear + ".";
                         }
                         break;
                     case Phase.FullThrottleUpshift:
@@ -381,12 +390,15 @@ namespace AsDriven.Core
                     }
                     break;
                 case Phase.GearCount:
-                    if (_suggestedGears.HasValue && _maximumGear >= _suggestedGears.Value)
-                    {
-                        _attemptAccepted = true;
-                        _resultReady = true;
-                        _result = "Observed all " + _maximumGear + " suggested forward gears.";
-                    }
+                    // Deliberately never completes on its own. It used to stop
+                    // as soon as the observed gear reached SimHub's suggested
+                    // count, which is CarSettings_MaxGears: a hint the project
+                    // treats as unreliable and forbids from setting a gear
+                    // count, having seen it report 42, 119 and 150. Completing
+                    // on it made the drive confirm the hint rather than measure
+                    // the car, and told the driver they were finished at
+                    // whatever the hint said. Only the driver can know that the
+                    // gearbox will not go higher, so the driver ends this test.
                     break;
                 case Phase.FullThrottleUpshift:
                     DetectUpshift(sample, requireLift: false);
@@ -401,6 +413,33 @@ namespace AsDriven.Core
                     DetectDownshift(sample, manualBlip: true);
                     break;
             }
+        }
+
+        /// <summary>
+        /// True once the gearbox has sat in neutral with the car still moving
+        /// for long enough to mean the shift was attempted and refused.
+        ///
+        /// A running shift that will not go through without the clutch leaves
+        /// the box in neutral and grinds there for as long as the driver holds
+        /// it. The test cannot see the shift request, only that no higher or
+        /// lower gear ever arrives, so it used to wait indefinitely while the
+        /// gearbox was destroyed. Every ordinary shift passes through neutral
+        /// for an instant, which is why this needs to persist.
+        /// </summary>
+        private bool RefusedIntoNeutral(GuidedTelemetrySample sample)
+        {
+            if (sample.Gear > 0 || sample.SpeedKmh <= 5.0)
+            {
+                _neutralWhileMovingSinceUtc = null;
+                return false;
+            }
+            if (!_neutralWhileMovingSinceUtc.HasValue)
+            {
+                _neutralWhileMovingSinceUtc = sample.TimestampUtc;
+                return false;
+            }
+            return sample.TimestampUtc - _neutralWhileMovingSinceUtc.Value
+                >= RunningShiftRefusalWindow;
         }
 
         private void DetectUpshift(GuidedTelemetrySample sample, bool requireLift)
@@ -435,6 +474,18 @@ namespace AsDriven.Core
             _upshiftMinimumThrottle = Math.Min(
                 _upshiftMinimumThrottle,
                 sample.Throttle);
+            if (RefusedIntoNeutral(sample))
+            {
+                SetResult(
+                    false,
+                    false,
+                    requireLift
+                        ? "The gearbox sat in neutral and would not take the next gear without the "
+                            + "clutch, so running upshifts need it."
+                        : "The gearbox sat in neutral and would not take the next gear at full "
+                            + "throttle. Accept to try again with a throttle lift.");
+                return;
+            }
             if (sample.Gear <= _baselineGear)
             {
                 return;
@@ -496,6 +547,18 @@ namespace AsDriven.Core
 
             if (_downshiftCandidateGear == 0)
             {
+                if (RefusedIntoNeutral(sample))
+                {
+                    SetResult(
+                        false,
+                        false,
+                        manualBlip
+                            ? "The gearbox sat in neutral and would not take the lower gear even "
+                                + "with a blip, so running downshifts need the clutch."
+                            : "The gearbox sat in neutral and would not take the lower gear. "
+                                + "Accept to retry with a manual throttle blip.");
+                    return;
+                }
                 if (sample.Gear <= 0 || sample.Gear >= _baselineGear)
                 {
                     return;
@@ -691,6 +754,7 @@ namespace AsDriven.Core
             _baselineGear = 0;
             _downshiftCandidateGear = 0;
             _downshiftCandidateAtUtc = DateTime.MinValue;
+            _neutralWhileMovingSinceUtc = null;
             _baselineDriveRatio = 0.0;
             _maximumGear = 0;
             _armed = false;
@@ -785,7 +849,7 @@ namespace AsDriven.Core
                 // off without one. Held against the brake there is nowhere for
                 // that creep to go, so the engine either stalls or it does not.
                 case Phase.MoveOff: return "Stopped in 1st, brake on. Release the clutch fully.";
-                case Phase.GearCount: return "Cycle through every forward gear.";
+                case Phase.GearCount: return "Shift up until the gearbox will not go higher.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
                 case Phase.CoastDownshift: return "At safe RPM, release throttle and leave clutch untouched.";
@@ -801,7 +865,7 @@ namespace AsDriven.Core
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
                 case Phase.MoveOff: return "Stall = clutch required. If not, brake off, throttle.";
-                case Phase.GearCount: return "Direct H-pattern selection is reviewed in the form.";
+                case Phase.GearCount: return "Then press NEXT. Only you can see the top gear.";
                 case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
                 case Phase.LiftedUpshift: return "Then request one upshift.";
                 case Phase.CoastDownshift: return "Then request one downshift.";

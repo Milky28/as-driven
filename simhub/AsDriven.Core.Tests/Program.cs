@@ -556,7 +556,15 @@ namespace AsDriven.Core.Tests
                     {
                         guidedDrive.AddSample(GuidedSample(now, observedGear, 0, 30, 3000, 30, 100, true));
                     }
-                    True(guidedDrive.GetSnapshot().ResultReady, "detects the suggested maximum gear");
+                    // Reaching SimHub's suggested count must not end the test.
+                    // That hint is CarSettings_MaxGears, which the project
+                    // forbids from setting a gear count, and completing on it
+                    // would make the drive confirm the hint instead of
+                    // measuring the car.
+                    False(guidedDrive.GetSnapshot().ResultReady, "never ends the gear count on the suggested number");
+                    guidedDrive.Next();
+                    True(guidedDrive.GetSnapshot().ResultReady, "records the highest gear reached when the driver ends the test");
+                    True(guidedDrive.GetSnapshot().Result.Contains("Highest gear reached: 6"), "reports the gear actually reached");
                     guidedDrive.Next();
                     guidedDrive.AddSample(GuidedSample(now, 2, 55, 90, 5000, 70, 220, true));
                     guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(50), 2, 70, 90, 5100, 72, 40, true));
@@ -638,6 +646,51 @@ namespace AsDriven.Core.Tests
                     True(refusedMoveOff.GetSnapshot().Result.Contains("standing-start clutch is required"), "states what the refusal means");
                     refusedMoveOff.Next();
                     Equal("no", refusedMoveOff.GetResults().MoveOffWithoutPhysicalClutch, "records that the car cannot pull away without the clutch");
+
+                    // A running shift that will not go through leaves the box in
+                    // neutral and grinds there. The test used to wait for a
+                    // gear that could never arrive while the gearbox was
+                    // destroyed, until the driver pressed Next.
+                    var refusedUpshift = new GuidedVerificationDrive();
+                    refusedUpshift.Start(null);
+                    refusedUpshift.Skip();
+                    refusedUpshift.Skip();
+                    refusedUpshift.AddSample(GuidedSample(now, 3, 0, 90, 5000, 80, 150, true));
+                    refusedUpshift.AddSample(GuidedSample(now.AddMilliseconds(200), 0, 0, 90, 5200, 80, 20, true));
+                    False(refusedUpshift.GetSnapshot().ResultReady, "ignores the instant of neutral an ordinary shift passes through");
+                    refusedUpshift.AddSample(GuidedSample(now.AddMilliseconds(1300), 0, 0, 90, 5300, 79, 20, true));
+                    True(refusedUpshift.GetSnapshot().ResultReady, "concludes once the gearbox has plainly refused the gear");
+                    True(refusedUpshift.GetSnapshot().Result.Contains("sat in neutral"), "says the gearbox would not take the gear");
+                    refusedUpshift.Next();
+                    Equal("not-tested", refusedUpshift.GetResults().ClutchlessUpshift, "moves to the lifted-throttle attempt rather than recording a failure");
+
+                    var refusedDownshift = new GuidedVerificationDrive();
+                    refusedDownshift.Start(null);
+                    refusedDownshift.Skip();
+                    refusedDownshift.Skip();
+                    refusedDownshift.Skip();
+                    refusedDownshift.Skip();
+                    refusedDownshift.AddSample(GuidedSample(now, 4, 0, 0, 4300, 70, 120, true));
+                    refusedDownshift.AddSample(GuidedSample(now.AddMilliseconds(200), 0, 0, 0, 4000, 69, 0, true));
+                    False(refusedDownshift.GetSnapshot().ResultReady, "ignores a brief neutral on the way down");
+                    refusedDownshift.AddSample(GuidedSample(now.AddMilliseconds(1300), 0, 0, 0, 3600, 68, 0, true));
+                    True(refusedDownshift.GetSnapshot().ResultReady, "concludes a refused clutchless downshift without waiting for Next");
+                    True(refusedDownshift.GetSnapshot().Result.Contains("sat in neutral"), "says the gearbox would not take the lower gear");
+
+                    // A hint that understates the gearbox must not cap the
+                    // count. This is how a real six-speed would have been
+                    // recorded as a five-speed and never questioned.
+                    var understatedHint = new GuidedVerificationDrive();
+                    understatedHint.Start(5);
+                    understatedHint.Skip();
+                    for (int observedGear = 1; observedGear <= 6; observedGear++)
+                    {
+                        understatedHint.AddSample(GuidedSample(now, observedGear, 0, 30, 3000, 40, 100, true));
+                    }
+                    False(understatedHint.GetSnapshot().ResultReady, "keeps counting past a hint of five");
+                    understatedHint.Next();
+                    understatedHint.Next();
+                    Equal(6, understatedHint.GetResults().ForwardGears.Value, "records the six gears observed, not the five suggested");
 
                     // The test asks the driver to hold the brake, so a car sat
                     // still under throttle against it has not refused anything
