@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.34",
+  "dataset_version": "0.3.35",
   "released_at": "2026-08-14",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -75,6 +75,7 @@
     "cars/ams2.formula-vee-gen2.json",
     "cars/ams2.formula-vintage-gen1-model1.json",
     "cars/ams2.formula-vintage-gen1-model2.json",
+    "cars/ams2.fusca-classic-fl.json",
     "cars/ams2.gillet-vertigo-streiff.json",
     "cars/ams2.ginetta-g40-cup.json",
     "cars/ams2.ginetta-g40.json",
@@ -126,6 +127,7 @@
     "cars/ams2.oreca-07.json",
     "cars/ams2.panoz-esperante-gtlm.json",
     "cars/ams2.passat-classic-b.json",
+    "cars/ams2.passat-classic-fl.json",
     "cars/ams2.porsche-911-gt1-98.json",
     "cars/ams2.porsche-911-gt3-r.json",
     "cars/ams2.porsche-911-rsr-gte.json",

@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.34",
+  "dataset_version": "0.3.35",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
@@ -44,25 +44,24 @@
   ],
   "stats": {
     "observed_identities": 246,
-    "curated_records": 151,
-    "covered_exact_identities": 194,
-    "uncovered_identities": 52,
-    "full_guided_verifications": 40,
+    "curated_records": 153,
+    "covered_exact_identities": 196,
+    "uncovered_identities": 50,
+    "full_guided_verifications": 38,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 194,
-      "full-guided-verification": 40,
+      "covered-exact": 196,
+      "full-guided-verification": 38,
       "out-of-scope": 1,
       "retired-identity": 4,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "club-road": 1,
       "open-wheel": 31,
-      "other": 8
+      "other": 7
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 25,
+      "independent-control-research-needed": 23,
       "legacy-controls-candidate-available": 15
     }
   },
@@ -1855,15 +1854,15 @@
       "telemetry_name": "Fusca Classic FL",
       "car_id": "Fusca Classic FL",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.fusca-classic-fl",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "CopaClassicFL",
       "live_observed_at": "2026-08-14T18:33:25.7410974Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Gillet Vertigo Streiff",
@@ -3022,15 +3021,15 @@
       "telemetry_name": "Passat Classic FL",
       "car_id": "Passat Classic FL",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "other",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.passat-classic-fl",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "CopaClassicFL",
       "live_observed_at": "2026-08-14T18:55:54.0190969Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Porsche 911 GT1-98",

@@ -1,0 +1,95 @@
+{
+  "review": "copa-classic-fl",
+  "dataset_version": "0.3.35",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.fusca-classic-fl",
+      "bundle": "build/copa-classic-fl/fusca-classic-fl.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Fusca",
+      "variant": "Copa Classic FL division",
+      "year": {
+        "label": "Copa Classic FL Fusca",
+        "from": 1970
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Beetle, known locally as the Fusca, raced in the FL division of AMS2's Copa Classic. It keeps the air-cooled Beetle's rear transaxle with four forward gears.",
+      "real_world_source_refs": [
+        "ratwell.vw-transaxle"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Beetle transaxle, and the exact simulator identity was observed live.",
+      "specification_basis": "The source describes the transaxle gears as constant-mesh with balk ring synchronisers on all four forward gears, and the live drive selected four H-pattern gears.",
+      "confidence_notes": "Guided testing directly established the 4 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Recorded independently of Copa Fusca, which is a separate selectable identity in its own class. The two are not inherited from one another, although the drives agree on four H-pattern gears with no automation."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.passat-classic-fl",
+      "bundle": "build/copa-classic-fl/passat-classic-fl.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Passat",
+      "variant": "Copa Classic FL division",
+      "year": {
+        "label": "Copa Classic FL Passat",
+        "from": 1974
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Passat B1, produced from 1974 until 1988, raced in the FL division of AMS2's Copa Classic. Improvements from the B2 platform arrived during its life, including a five-speed gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.volkswagen-passat-b1"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Brazilian Passat and its five-speed gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states a five-speed gearbox arrived with the B2-derived improvements, and the live drive selected five H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Recorded independently of Passat Classic B, the same model in the other Copa Classic division. The two are separate selectable identities and are not inherited from one another, although the drives agree on five H-pattern gears with no automation."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

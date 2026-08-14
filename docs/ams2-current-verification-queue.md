@@ -1,5 +1,20 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.35 (Copa Classic FL)
+
+Fusca Classic FL and Passat Classic FL, both four- and five-speed H-pattern cars
+with no automation, recorded independently of their Copa Classic B counterparts.
+Same models, separate selectable identities, nothing inherited between them.
+
+These two were missed when batch 10 and batch 11 were processed, because drafts
+were selected by the time they were written rather than by whether their
+identity was already curated. One fell between the two windows and the other
+three minutes before a cutoff. Selecting drafts by what is not yet covered finds
+them regardless of when they were driven, and is what should be used.
+
+Copa Classic FL now holds four curated identities: Fusca, Gol, Passat and Puma
+GTB.
+
 ## Completed in dataset 0.3.34 (class sweep batch 11)
 
 Six of seven promoted, from three classes the queue had never seen.

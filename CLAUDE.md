@@ -166,7 +166,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.16.0.
-- Dataset: 0.3.34 with 151 curated records.
+- Dataset: 0.3.35 with 153 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Broader AMS2 verification is deliberately deferred; use
   `docs/ams2-coverage-plan.md` and `research/ams2-coverage-manifest.json` when it
