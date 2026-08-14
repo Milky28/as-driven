@@ -22,13 +22,20 @@ recorded `optional`, because the synchronised gears are the ones changed while
 racing, and the first-gear exception is written into the record notes rather than
 forced into a field that cannot express it.
 
-ARC Camaro is held back. It is an Aussie Racing Car: a real Australian category
-on a Yamaha FJR1300 motorcycle engine with, in the championship's own words, an
-`integral close ratio straight cut gear sequential dog engagement gearbox`. The
-drive selected five gears while a community AMS2 database lists six, and the
-championship does not state a count. As with the Lotus Renault 98T, a guided
-drive establishes only the highest gear actually selected, so the count needs
-confirming in-game before the record is written.
+ARC Camaro followed in dataset 0.3.33 once its gear count was settled. It is an
+Aussie Racing Car: a silhouette racer of the Australian one-make championship
+carrying a Camaro body on a spaceframe, powered by a second-hand Yamaha FJR1300
+motorcycle engine whose gearbox it uses. Chevrolet is not its manufacturer.
+
+A community AMS2 database lists six gears. The drive found five, the driver
+confirmed five in-game, and the donor FJR1300 is a five-speed until 2016, so
+five is recorded and independently corroborated by the engine it came from.
+
+Its downshift blip is `required` on the reasoning that a motorcycle-derived
+racing sequential engages by dogs. Descriptions of the championship car as
+having a dog engagement gearbox appear in search results attributed to the
+championship but could not be retrieved from its site, so that wording is not
+cited and the construction is recorded as an inference.
 
 ## Completed in dataset 0.3.31 (open-wheel batch 09, 1983 to 1986 turbo era)
 

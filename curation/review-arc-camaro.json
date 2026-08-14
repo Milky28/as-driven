@@ -1,0 +1,52 @@
+{
+  "review": "arc-camaro",
+  "dataset_version": "0.3.33",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.arc-camaro",
+      "bundle": "build/class-sweep-batch-10/arc-camaro.staged.json",
+      "manufacturer": "Aussie Racing Cars",
+      "model": "Camaro",
+      "variant": "Aussie Racing Car silhouette",
+      "year": {
+        "label": "Aussie Racing Cars Championship"
+      },
+      "real_world_identity_notes": "Aussie Racing Car: a silhouette racer of the Australian one-make championship, carrying a Chevrolet Camaro body on a purpose-built steel tubular spaceframe and powered by a second-hand Yamaha FJR1300 motorcycle engine of about 1.3 litres. The gearbox is integral to that motorcycle unit and is operated by a sequential quick-shift lever mounted close to the steering wheel. The Camaro body is a silhouette, so Chevrolet is not the manufacturer of this car.",
+      "real_world_source_refs": [
+        "aussieracingcars.faq",
+        "wikipedia.yamaha-fjr1300"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The championship's own FAQ establishes the car and its sequential gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship states a sequential gearbox on a quick-shift lever, and the drive selected five gears through a sequential stick. The count was then confirmed in-game by the driver, and it agrees with the donor motorcycle: the FJR1300 is a five-speed until 2016 and these engines are bought second-hand.",
+      "confidence_notes": "Guided testing directly established five gears through a sequential stick, the standing-start clutch, the clutchless running shift, automatic cut, and no automatic blip. The gear count was separately confirmed in-game because a guided drive establishes only the highest gear actually selected.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+        "A community AMS2 database lists six gears. The drive found five, the driver confirmed five in-game, and the donor FJR1300 is a five-speed before 2016, so five is recorded.",
+        "The downshift blip is required because a motorcycle-derived racing sequential engages by dogs rather than synchronisers. Descriptions of the championship car as having a dog engagement gearbox appear in search results attributed to the championship, but could not be retrieved from its site, so that wording is not cited as a source and the construction remains an inference. A source showing a synchronised gearbox would make the blip optional.",
+        "The championship describes gears being changed as quickly as the driver can lift and re-depress the throttle, while the drive found an automatic cut in AMS2. The simulator behaviour is recorded as observed; the description may reflect driver practice rather than a required lift."
+      ],
+      "live_source_url": "https://www.aussieracingcars.com.au/"
+    }
+  ]
+}

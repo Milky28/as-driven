@@ -1,0 +1,144 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.arc-camaro",
+  "identity": {
+    "display_name": "ARC Camaro",
+    "manufacturer": "Aussie Racing Cars",
+    "model": "Camaro",
+    "year": {
+      "label": "Aussie Racing Cars Championship"
+    },
+    "class": "ARC_Cam",
+    "real_world_identity_notes": "Aussie Racing Car: a silhouette racer of the Australian one-make championship, carrying a Chevrolet Camaro body on a purpose-built steel tubular spaceframe and powered by a second-hand Yamaha FJR1300 motorcycle engine of about 1.3 litres. The gearbox is integral to that motorcycle unit and is operated by a sequential quick-shift lever mounted close to the steering wheel. The Camaro body is a silhouette, so Chevrolet is not the manufacturer of this car.",
+    "variant": "Aussie Racing Car silhouette"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+      "A community AMS2 database lists six gears. The drive found five, the driver confirmed five in-game, and the donor FJR1300 is a five-speed before 2016, so five is recorded.",
+      "The downshift blip is required because a motorcycle-derived racing sequential engages by dogs rather than synchronisers. Descriptions of the championship car as having a dog engagement gearbox appear in search results attributed to the championship, but could not be retrieved from its site, so that wording is not cited as a source and the construction remains an inference. A source showing a synchronised gearbox would make the blip optional.",
+      "The championship describes gears being changed as quickly as the driver can lift and re-depress the throttle, while the drive found an automatic cut in AMS2. The simulator behaviour is recorded as observed; the description may reflect driver practice rather than a required lift."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "ARC Camaro"
+        },
+        {
+          "kind": "class-id",
+          "value": "ARC_Cam"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.arc-camaro.20260814t175800351z-784b4617 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "aussieracingcars.faq",
+        "wikipedia.yamaha-fjr1300",
+        "ams2.local-live-arc-camaro-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "aussieracingcars.faq",
+          "wikipedia.yamaha-fjr1300",
+          "ams2.local-live-arc-camaro-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The championship's own FAQ establishes the car and its sequential gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "aussieracingcars.faq",
+          "wikipedia.yamaha-fjr1300",
+          "ams2.local-live-arc-camaro-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The championship states a sequential gearbox on a quick-shift lever, and the drive selected five gears through a sequential stick. The count was then confirmed in-game by the driver, and it agrees with the donor motorcycle: the FJR1300 is a five-speed until 2016 and these engines are bought second-hand."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-arc-camaro-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-14"
+}

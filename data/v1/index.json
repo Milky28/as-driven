@@ -1,11 +1,12 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.32",
+  "dataset_version": "0.3.33",
   "released_at": "2026-08-14",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
     "cars/ams2.alpine-a424.json",
+    "cars/ams2.arc-camaro.json",
     "cars/ams2.aston-martin-dbr9.json",
     "cars/ams2.aston-martin-valkyrie-hypercar.json",
     "cars/ams2.aston-martin-valkyrie.json",

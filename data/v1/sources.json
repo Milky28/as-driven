@@ -352,6 +352,18 @@
       "notes": "The base car's hybrid move-off, seven paddle gears, automatic cut/blip, and closed prototype display rim were verified. Low Downforce inherits the base controls and was not separately tested; shift lights remain unknown."
     },
     {
+      "source_id": "ams2.local-live-caterham-620r-controls.1.6.9.91",
+      "title": "Live AMS2 Caterham 620R guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.caterham-620r.20260814t180043110z-be2e3dd4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-caterham-academy-controls.1.6.9.91",
       "title": "Live AMS2 Caterham Academy guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -362,6 +374,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.caterham-academy.20260814t041617582z-761900de by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-caterham-superlight-controls.1.6.9.91",
+      "title": "Live AMS2 Caterham Superlight guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.caterham-superlight.20260814t180424879z-f64dc772 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-caterham-supersport-controls.1.6.9.91",
@@ -1336,6 +1360,18 @@
       "notes": "AMS2 1.6.9.91 through SimHub 9.11.22 emitted Milano GT55 / GT1_05. Direct testing with Auto Clutch disabled confirmed clutch required from rest, six-speed sequential stick with no paddles, clutchless upshifts with automatic cut, clutchless downshifts with no automatic blip, and a round no-display rim."
     },
     {
+      "source_id": "ams2.local-live-mini-cooper-s-1965-b-controls.1.6.9.91",
+      "title": "Live AMS2 MINI Cooper S 1965 B guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mini-cooper-s-1965-b.20260814t181100249z-0251aae4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91",
       "title": "Live AMS2 Nissan GT-R Nismo GT3 guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -1394,6 +1430,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "AMS2 1.6.9.91 direct test confirmed Panoz Esperante GTLM / GT2_05, clutch required from rest, six-speed sequential stick with no paddles, automatic cut, no automatic blip, and a D-shaped no-display rim."
+    },
+    {
+      "source_id": "ams2.local-live-passat-classic-b-controls.1.6.9.91",
+      "title": "Live AMS2 Passat Classic B guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.passat-classic-b.20260814t181405124z-baf8e361 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91",
@@ -1706,6 +1754,18 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "AMS2 1.6.9.91 through SimHub 9.11.22 emitted TVR Tuscan T400R GT2 / GT2_05. Direct testing with Auto Clutch disabled confirmed clutch required from rest, six-speed sequential stick with no paddles, clutchless upshifts with automatic cut, clutchless downshifts with no automatic blip, and a round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-live-uno-classic-b-controls.1.6.9.91",
+      "title": "Live AMS2 Uno Classic B guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.uno-classic-b.20260814t181826261z-af324a9f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-viper-controls.1.6.9.91",
@@ -2027,6 +2087,18 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Audi specifies a seven-speed S tronic dual-clutch transmission with driver-selectable shifting and launch control that manages clutch engagement. This later-generation source replaces an inapplicable 2010 six-speed R tronic research lead."
+    },
+    {
+      "source_id": "aussieracingcars.faq",
+      "title": "Battery World Aussie Racing Cars Championship: FAQ",
+      "publisher": "Aussie Racing Cars",
+      "url": "https://www.aussieracingcars.com.au/about/faq",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "The championship's own FAQ. States the sequential gearbox is connected to a V8 Supercar style quick shift lever mounted close to the steering wheel, that clicking back changes up and forward changes down, and that gears are changed as quickly as the driver can lift and re-depress the throttle. It gives no gear count."
     },
     {
       "source_id": "auto-motor-sport.audi-v8-dtm-1990",
@@ -3435,6 +3507,18 @@
       "notes": "States the Passat B1 was produced in Brazil from 1974 until 1988 and that improvements from the B2 platform were introduced during its life cycle, including the 1.6 and 1.8-litre engines and a five-speed gearbox."
     },
     {
+      "source_id": "wikipedia.yamaha-fjr1300",
+      "title": "Yamaha FJR1300",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Yamaha_FJR1300",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Specifies the FJR1300 as a 1,298 cc transverse inline-four with a 5-speed manual gearbox, becoming 6-speed from 2016. Aussie Racing Cars use second-hand FJR1300 engines, so the donor units are the five-speed generation."
+    },
+    {
       "source_id": "xtrac.p1334-nascar-transaxle",
       "title": "P1334 NASCAR Transaxle",
       "publisher": "Xtrac",
@@ -3459,64 +3543,16 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-caterham-620r-controls.1.6.9.91",
-      "title": "Live AMS2 Caterham 620R guided-verification drive",
+      "source_id": "ams2.local-live-arc-camaro-controls.1.6.9.91",
+      "title": "Live AMS2 ARC Camaro guided-verification drive",
       "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
+      "url": "https://www.aussieracingcars.com.au/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.caterham-620r.20260814t180043110z-be2e3dd4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-caterham-superlight-controls.1.6.9.91",
-      "title": "Live AMS2 Caterham Superlight guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.caterham-superlight.20260814t180424879z-f64dc772 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mini-cooper-s-1965-b-controls.1.6.9.91",
-      "title": "Live AMS2 MINI Cooper S 1965 B guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mini-cooper-s-1965-b.20260814t181100249z-0251aae4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-passat-classic-b-controls.1.6.9.91",
-      "title": "Live AMS2 Passat Classic B guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.passat-classic-b.20260814t181405124z-baf8e361 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-uno-classic-b-controls.1.6.9.91",
-      "title": "Live AMS2 Uno Classic B guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.uno-classic-b.20260814t181826261z-af324a9f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.arc-camaro.20260814t175800351z-784b4617 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }
