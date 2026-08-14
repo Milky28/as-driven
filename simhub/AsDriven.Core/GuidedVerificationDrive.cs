@@ -734,7 +734,10 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.Intro: return "Prepare, perform the maneuver, then wait for CAPTURED.";
-                case Phase.MoveOff: return "Engine on. Stop, select first, leave the clutch untouched.";
+                // Refusing to move is a result, not a failed attempt: it is how
+                // a car that needs its clutch answers this test. Say so, or the
+                // prompt reads as an instruction the driver cannot carry out.
+                case Phase.MoveOff: return "Stopped, engine on. Select 1st, then light throttle.";
                 case Phase.GearCount: return "Cycle through every forward gear.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
@@ -750,7 +753,7 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Apply light throttle; keep moving briefly.";
+                case Phase.MoveOff: return "Never touch the clutch. Not moving is a valid result.";
                 case Phase.GearCount: return "Direct H-pattern selection is reviewed in the form.";
                 case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
                 case Phase.LiftedUpshift: return "Then request one upshift.";
@@ -770,7 +773,9 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.MoveOff:
-                    return _attemptAccepted ? "Movement detected" : "No movement detected";
+                    return _attemptAccepted
+                        ? "Moved off without the clutch"
+                        : "No movement without the clutch; this car needs it";
                 case Phase.GearCount:
                     return _maximumGear > 0
                         ? "Forward gears recorded: " + _maximumGear

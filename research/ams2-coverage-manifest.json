@@ -2,19 +2,26 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.31",
+  "dataset_version": "0.3.32",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 51,
+    "live_identities_seen": 58,
     "live_only_identities": [
+      "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
+      "Caterham 620R",
+      "Caterham Superlight",
       "Formula Classic Gen1 Model1 - High Downforce",
       "Formula Classic Gen1 Model2 - High Downforce",
+      "Fusca Classic FL",
       "Lotus Renault 98T",
       "Lotus Renault 98T - High Downforce",
-      "McLaren Cosworth MP4/1C - High Downforce"
+      "MINI Cooper S 1965 B",
+      "McLaren Cosworth MP4/1C - High Downforce",
+      "Passat Classic B",
+      "Uno Classic B"
     ]
   },
   "rules": [
@@ -28,25 +35,26 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 231,
-    "curated_records": 139,
-    "covered_exact_identities": 182,
-    "uncovered_identities": 49,
-    "full_guided_verifications": 37,
+    "observed_identities": 238,
+    "curated_records": 144,
+    "covered_exact_identities": 187,
+    "uncovered_identities": 51,
+    "full_guided_verifications": 39,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 182,
-      "full-guided-verification": 37,
+      "covered-exact": 187,
+      "full-guided-verification": 39,
       "out-of-scope": 1,
       "retired-identity": 4,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
+      "club-road": 1,
       "open-wheel": 31,
-      "other": 6
+      "other": 7
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 22,
+      "independent-control-research-needed": 24,
       "legacy-controls-candidate-available": 15
     }
   },
@@ -89,6 +97,20 @@
       "simhub_max_gears": null,
       "identity_file_modified_at": 1732927841.734412,
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "ARC Camaro",
+      "car_id": "ARC Camaro",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "ARC_Cam",
+      "live_observed_at": "2026-08-14T17:57:55.3346442Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Aston Martin DBR9",
@@ -590,6 +612,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Caterham 620R",
+      "car_id": "Caterham 620R",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "club-road",
+      "related_record_id": "ams2.caterham-620r",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "Cat620R",
+      "live_observed_at": "2026-08-14T18:00:37.5002246Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Caterham Academy",
       "car_id": "Caterham Academy",
       "identity_file": "Caterham Academy.shcarsettings",
@@ -602,6 +638,20 @@
       "identity_file_modified_at": 1786684522.5328033,
       "telemetry_class": "Cat_Academy",
       "live_observed_at": "2026-08-14T04:16:02.5802826Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Caterham Superlight",
+      "car_id": "Caterham Superlight",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "club-road",
+      "related_record_id": "ams2.caterham-superlight",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "Cat_Superlight",
+      "live_observed_at": "2026-08-14T18:04:19.4459632Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
@@ -1766,6 +1816,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Fusca Classic FL",
+      "car_id": "Fusca Classic FL",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "club-road",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaClassicFL",
+      "live_observed_at": "2026-08-14T18:33:25.7410974Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
       "telemetry_name": "Gillet Vertigo Streiff",
       "car_id": "Gillet Vertigo Streiff",
       "identity_file": "Gillet Vertigo Streiff.shcarsettings",
@@ -2721,6 +2785,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "MINI Cooper S 1965 B",
+      "car_id": "MINI Cooper S 1965 B",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.mini-cooper-s-1965-b",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaClassicB",
+      "live_observed_at": "2026-08-14T18:10:55.1167254Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Nissan GT-R Nismo GT3",
       "car_id": "Nissan GT-R Nismo GT3",
       "identity_file": "Nissan GT-R Nismo GT3.shcarsettings",
@@ -2846,6 +2924,20 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783202013.1253364,
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Passat Classic B",
+      "car_id": "Passat Classic B",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.passat-classic-b",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaClassicB",
+      "live_observed_at": "2026-08-14T18:14:00.4654641Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -3480,6 +3572,20 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783202013.1293993,
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Uno Classic B",
+      "car_id": "Uno Classic B",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.uno-classic-b",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "CopaClassicB",
+      "live_observed_at": "2026-08-14T18:18:22.2158879Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {

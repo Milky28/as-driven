@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.31",
+  "dataset_version": "0.3.32",
   "released_at": "2026-08-14",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -29,7 +29,9 @@
     "cars/ams2.brabham-bt26a.json",
     "cars/ams2.cadillac-dpi-vr.json",
     "cars/ams2.cadillac-v-series-r.json",
+    "cars/ams2.caterham-620r.json",
     "cars/ams2.caterham-academy.json",
+    "cars/ams2.caterham-superlight.json",
     "cars/ams2.caterham-supersport.json",
     "cars/ams2.chevrolet-camaro-gt4-r.json",
     "cars/ams2.chevrolet-chevette.json",
@@ -112,11 +114,13 @@
     "cars/ams2.metalmoro-mrx-duratec-p4.json",
     "cars/ams2.milano-gt36.json",
     "cars/ams2.milano-gt55.json",
+    "cars/ams2.mini-cooper-s-1965-b.json",
     "cars/ams2.nissan-gt-r-nismo-gt3.json",
     "cars/ams2.nissan-r390-gt1.json",
     "cars/ams2.nissan-r89c.json",
     "cars/ams2.oreca-07.json",
     "cars/ams2.panoz-esperante-gtlm.json",
+    "cars/ams2.passat-classic-b.json",
     "cars/ams2.porsche-911-gt1-98.json",
     "cars/ams2.porsche-911-gt3-r.json",
     "cars/ams2.porsche-911-rsr-gte.json",
@@ -142,6 +146,7 @@
     "cars/ams2.super-v8.json",
     "cars/ams2.toyota-corolla-stock-car-2022.json",
     "cars/ams2.toyota-corolla-stock-car-2024.json",
-    "cars/ams2.tvr-tuscan-t400r-gt2.json"
+    "cars/ams2.tvr-tuscan-t400r-gt2.json",
+    "cars/ams2.uno-classic-b.json"
   ]
 }

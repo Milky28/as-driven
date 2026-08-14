@@ -304,6 +304,18 @@
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with shift lights and no integrated display."
     },
     {
+      "source_id": "ams2.local-live-brabham-bmw-bt52-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Brabham BMW BT52 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.brabham-bmw-bt52-high-downforce.20260814t153856963z-620346be by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-brabham-bt26a-controls.1.6.9.91",
       "title": "Live AMS2 Brabham BT26A guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -566,6 +578,30 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
+    },
+    {
+      "source_id": "ams2.local-live-formula-classic-gen1-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen1 Model1 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-classic-gen1-model1-high-downforce.20260814t154707560z-48304c12 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-classic-gen1-model2-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen1 Model2 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-classic-gen1-model2-high-downforce.20260814t154943451z-a6174c7b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
@@ -1096,6 +1132,18 @@
       "notes": "Guided-verification observation ams2.lotus-49c.20260814t054846492z-6f53d533 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-lotus-renault-98t-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Lotus Renault 98T - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.lotus-renault-98t-high-downforce.20260814t154354295z-af25e11d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-maserati-gransport-trofeo-controls.1.6.9.91",
       "title": "Guided live AMS2 Maserati GranSport Trofeo control test",
       "publisher": "Local AMS2 observation",
@@ -1154,6 +1202,18 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
+    },
+    {
+      "source_id": "ams2.local-live-mclaren-cosworth-mp4-1c-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Cosworth MP4/1C - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-cosworth-mp4-1c-high-downforce.20260814t154108247z-58d5f5b7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-mclaren-f1-gtr-controls.1.6.9.91",
@@ -2666,6 +2726,18 @@
       "notes": "Constructor page for the MRX customer prototype, successor to the MCR, with a 2016 chassis revision. It states the car accepts diverse engine and transmission options, so no single real-world gearbox is fixed; the AMS2 Duratec P4 is one such configuration."
     },
     {
+      "source_id": "minispares.classic-mini-gearbox",
+      "title": "Classic Mini Gearbox",
+      "publisher": "Mini Spares",
+      "url": "https://www.minispares.com/blog/2026/06/03/classic-mini-gearbox/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "States the 3 synchromesh gearbox was fitted to all Minis between 1959 and 1968, with synchromesh only on 2nd, 3rd and 4th and first gear of the crash engagement type, and that a full synchromesh first gear arrived in 1968."
+    },
+    {
       "source_id": "motorsport-magazine.ginetta-g40-buying-guide",
       "title": "Ginetta G40: race car buying guide",
       "publisher": "Motor Sport Magazine",
@@ -2701,6 +2773,18 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Official series history supplies generation context and notes the Next Gen sequential shifter. It is not treated as proof that Reiza's fictional Gen1/Gen2/Gen3 labels map exactly to NASCAR generations."
+    },
+    {
+      "source_id": "newatlas.caterham-620r",
+      "title": "Caterham 620 R brings extreme to Goodwood",
+      "publisher": "New Atlas",
+      "url": "https://newatlas.com/caterham-seven-620-r/28215/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "States the 620R uses a six-speed sequential gearbox with flat-shift behind a supercharged two-litre Ford Duratec of 310 bhp."
     },
     {
       "source_id": "nismo.gt-r-nismo-gt3.2018-spec",
@@ -2955,6 +3039,18 @@
       "notes": "Marque-specialist model history specifying a six-speed sequential gearbox with ignition cut for full-throttle upshifts. It does not establish actuation, start clutch, automatic blip, or wheel shape."
     },
     {
+      "source_id": "supercars-net.caterham-r500-superlight",
+      "title": "2008 Caterham Seven R500 Superlight",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/2008-caterham-seven-r500-superlight/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Lists a 6 Speed Caterham Gearbox and states the power is transmitted by either the standard six-speed gearbox or the optional Caterham Motorsport engineered sequential transmission."
+    },
+    {
       "source_id": "supercars-net.dogleg-transmissions",
       "title": "10 Iconic Cars with Dogleg Transmissions",
       "publisher": "Supercars.net",
@@ -3183,6 +3279,18 @@
       "notes": "Secondary model history describing an Xtrac six-speed sequential gearbox and a 2005 Rollcentre paddle-shift conversion. Retained as provisional context pending a primary technical replacement; exact modeled actuation is resolved by live animation."
     },
     {
+      "source_id": "wikipedia.fiat-uno",
+      "title": "Fiat Uno",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Fiat_Uno",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Lists 4- or 5-speed manual transmissions for the first-generation Uno, notes cars built from 1985 to late 1987 used a Ritmo/Strada-derived five-speed gearbox, and dates Brazilian production from 1984."
+    },
+    {
       "source_id": "wikipedia.ginetta-g40",
       "title": "Ginetta G40",
       "publisher": "Wikipedia",
@@ -3315,6 +3423,18 @@
       "notes": "First-generation Gol from 1980. Early air-cooled cars used a four-speed manual; of the Gol GT 1.8 (1984-1986) it states the first series still had a four-speed manual gearbox, but soon this was changed to a five-speed unit."
     },
     {
+      "source_id": "wikipedia.volkswagen-passat-b1",
+      "title": "Volkswagen Passat (B1)",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Volkswagen_Passat_(B1)",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "States the Passat B1 was produced in Brazil from 1974 until 1988 and that improvements from the B2 platform were introduced during its life cycle, including the 1.6 and 1.8-litre engines and a five-speed gearbox."
+    },
+    {
       "source_id": "xtrac.p1334-nascar-transaxle",
       "title": "P1334 NASCAR Transaxle",
       "publisher": "Xtrac",
@@ -3339,8 +3459,8 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-brabham-bmw-bt52-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Brabham BMW BT52 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-caterham-620r-controls.1.6.9.91",
+      "title": "Live AMS2 Caterham 620R guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -3348,11 +3468,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.brabham-bmw-bt52-high-downforce.20260814t153856963z-620346be by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.caterham-620r.20260814t180043110z-be2e3dd4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-mclaren-cosworth-mp4-1c-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 McLaren Cosworth MP4/1C - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-caterham-superlight-controls.1.6.9.91",
+      "title": "Live AMS2 Caterham Superlight guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -3360,11 +3480,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mclaren-cosworth-mp4-1c-high-downforce.20260814t154108247z-58d5f5b7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.caterham-superlight.20260814t180424879z-f64dc772 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-lotus-renault-98t-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Lotus Renault 98T - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-mini-cooper-s-1965-b-controls.1.6.9.91",
+      "title": "Live AMS2 MINI Cooper S 1965 B guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -3372,11 +3492,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.lotus-renault-98t-high-downforce.20260814t154354295z-af25e11d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mini-cooper-s-1965-b.20260814t181100249z-0251aae4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-classic-gen1-model1-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Classic Gen1 Model1 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-passat-classic-b-controls.1.6.9.91",
+      "title": "Live AMS2 Passat Classic B guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -3384,11 +3504,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-classic-gen1-model1-high-downforce.20260814t154707560z-48304c12 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.passat-classic-b.20260814t181405124z-baf8e361 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-classic-gen1-model2-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Classic Gen1 Model2 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-uno-classic-b-controls.1.6.9.91",
+      "title": "Live AMS2 Uno Classic B guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -3396,7 +3516,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-classic-gen1-model2-high-downforce.20260814t154943451z-a6174c7b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.uno-classic-b.20260814t181826261z-af324a9f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

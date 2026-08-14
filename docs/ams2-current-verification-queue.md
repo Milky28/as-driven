@@ -1,5 +1,35 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.32 (class sweep batch 10)
+
+The first batch driven by walking the simulator's own class list rather than the
+generated queue, and it justified the change immediately: **all six cars were
+absent from the 231-identity queue entirely.** Not queued and unverified, but
+invisible, because nothing in the pipeline can see a car that has never been
+loaded on this PC. Copa Classic B was known to hold three cars; this sweep found
+three more in it.
+
+Five are promoted here. Caterham 620R and Caterham Superlight are sequential
+six-speeds with automatic cut, which makes them different cars from the curated
+Caterham Academy and Supersport, five-speed H-pattern cars sharing only the Seven
+name. Nothing is inherited between them. MINI Cooper S 1965 B, Passat Classic B
+and Uno Classic B are H-pattern road cars with no automation.
+
+The Mini exposes a limit of the `manual_blip` field. Its four-speed is the
+three-synchromesh type fitted to all Minis from 1959 to 1968, so second, third
+and fourth are synchronised but **first gear is unsynchronised**. The blip is
+recorded `optional`, because the synchronised gears are the ones changed while
+racing, and the first-gear exception is written into the record notes rather than
+forced into a field that cannot express it.
+
+ARC Camaro is held back. It is an Aussie Racing Car: a real Australian category
+on a Yamaha FJR1300 motorcycle engine with, in the championship's own words, an
+`integral close ratio straight cut gear sequential dog engagement gearbox`. The
+drive selected five gears while a community AMS2 database lists six, and the
+championship does not state a count. As with the Lotus Renault 98T, a guided
+drive establishes only the highest gear actually selected, so the count needs
+confirming in-game before the record is written.
+
 ## Completed in dataset 0.3.31 (open-wheel batch 09, 1983 to 1986 turbo era)
 
 Five cars, each carrying two identities. Brabham BMW BT52, McLaren Cosworth

@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.31 contains 139 curated records. The identity inventory contains 231
+Dataset 0.3.32 contains 144 curated records. The identity inventory contains 238
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -25,14 +25,14 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 182 observed identities are covered exactly by curated records.
-- 49 observed identities are not covered.
-- 37 of those need full guided verification, and they are now the only work
+- 187 observed identities are covered exactly by curated records.
+- 51 observed identities are not covered.
+- 39 of those need full guided verification, and they are now the only work
   that requires driving.
-- 15 of those 37 have an exact legacy spreadsheet candidate that can seed
+- 15 of those 39 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 22 require independent control research in addition to current-game testing.
+- 24 require independent control research in addition to current-game testing.
 - 1 Low Downforce identities wait on unverified base cars; none is
   inheritance-ready.
 - 11 identities are closed by explicit review rather than driving: retired
@@ -129,6 +129,26 @@ That makes `gearbox_type` load-bearing rather than descriptive, and it is not
 always sourceable: Caterham's own motorsport partner offers the Type 9 five-speed
 in both synchronised and dog-engagement variants, so those two records rest on an
 inference from road-legality and say so.
+
+### 6. Sweep the simulator's class list
+
+Adopted after batch 10. The generated queue cannot see a car that has never been
+loaded on this PC, and the published roster is around 253 cars against roughly
+179 distinct cars observed here, so a queue-driven order leaves about 74 cars
+permanently invisible. Walking the in-sim class list replaces inference with
+enumeration and is the only source that reflects current content.
+
+Per class: load every car, including ones believed already covered, because the
+plugin reports matched or unmatched and memory does not. Drive the unmatched
+ones. A rename is invisible to memory and obvious to the plugin, which is how
+`Lotus 98T` was missed.
+
+A sweep captures one aero configuration per car, whichever the current circuit
+selects, so cars with variants still need a pass at a low-downforce circuit such
+as Daytona. Loading is enough; no drive is needed to capture an identity.
+
+Batch 10 in dataset 0.3.32 was the first sweep: six cars, all six absent from the
+queue beforehand.
 
 ### 5. Verify open-wheel cars by historical era
 

@@ -1,0 +1,222 @@
+{
+  "review": "class-sweep-batch-10",
+  "dataset_version": "0.3.32",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.caterham-620r",
+      "bundle": "build/class-sweep-batch-10/caterham-620r.staged.json",
+      "manufacturer": "Caterham",
+      "model": "Seven 620R",
+      "year": {
+        "label": "620R, from 2013",
+        "from": 2013
+      },
+      "real_world_identity_notes": "Caterham Seven 620R, the supercharged two-litre Ford Duratec car of 310 bhp that replaced the Superlight R500 as the most extreme Seven. It uses a six-speed sequential gearbox with flat-shift.",
+      "real_world_source_refs": [
+        "newatlas.caterham-620r"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the 620R and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states a six-speed sequential gearbox with flat-shift, and the live drive selected six gears through a sequential stick with automatic cut on upshifts. Flat-shift is the manufacturer's term for that cut, so source and drive describe the same mechanism.",
+      "confidence_notes": "Guided testing directly established 6 gears through a sequential stick, the standing-start clutch, the clutchless running shift, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+        "This is a different car from the curated Caterham Academy and Supersport, which are five-speed H-pattern cars. The Seven name is shared; the gearbox is not, and no controls are inherited between them.",
+        "The downshift blip is required because a racing sequential of this type engages by dogs rather than synchronisers. The reviewed source names the gearbox but not its engagement, so that is an inference; a source showing a synchronised sequential would make the blip optional."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.caterham-superlight",
+      "bundle": "build/class-sweep-batch-10/caterham-superlight.staged.json",
+      "manufacturer": "Caterham",
+      "model": "Seven Superlight",
+      "year": {
+        "label": "Superlight R500",
+        "from": 2008
+      },
+      "real_world_identity_notes": "Caterham Seven Superlight, the lightweight Duratec-engined Seven. AMS2 does not qualify which Superlight it models; the drive matches the sequential specification rather than the standard six-speed manual.",
+      "real_world_source_refs": [
+        "supercars-net.caterham-r500-superlight"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Superlight R500 and its gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states power is transmitted by either the standard six-speed gearbox or the optional Caterham Motorsport engineered sequential transmission, and the live drive selected six gears through a sequential stick, which is the sequential option.",
+      "confidence_notes": "Guided testing directly established 6 gears through a sequential stick, the standing-start clutch, the clutchless running shift, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+        "This is a different car from the curated Caterham Academy and Supersport, which are five-speed H-pattern cars. No controls are inherited between them.",
+        "The downshift blip is required because a racing sequential of this type engages by dogs rather than synchronisers. The reviewed source names the gearbox but not its engagement, so that is an inference.",
+        "AMS2 gives no variant suffix, so the exact Superlight is not established beyond the sequential six-speed the drive observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mini-cooper-s-1965-b",
+      "bundle": "build/class-sweep-batch-10/mini-cooper-s-1965-b.staged.json",
+      "manufacturer": "Mini",
+      "model": "Cooper S",
+      "year": {
+        "label": "1965 Cooper S",
+        "from": 1965
+      },
+      "real_world_identity_notes": "Classic Mini Cooper S of 1965, classed by AMS2 under Copa Classic B. Its four-speed gearbox is the three-synchromesh type fitted to all Minis between 1959 and 1968.",
+      "real_world_source_refs": [
+        "minispares.classic-mini-gearbox"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the classic Mini gearbox of this period, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states the three-synchromesh gearbox was fitted to all Minis between 1959 and 1968, and the live drive selected four H-pattern gears.",
+      "confidence_notes": "Guided testing directly established the 4 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "First gear is not synchronised on this gearbox. The source describes synchromesh on second, third and fourth only, with first of the crash engagement type, and dates full synchromesh to 1968. The downshift blip is recorded as optional because the synchronised gears are the ones changed while racing; a downshift into first while moving would still need double-declutching, which the single field cannot express."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.passat-classic-b",
+      "bundle": "build/class-sweep-batch-10/passat-classic-b.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Passat",
+      "year": {
+        "label": "Brazilian Passat B1, five-speed",
+        "from": 1974
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Passat B1, produced from 1974 until 1988 and classed by AMS2 under Copa Classic B. Improvements from the B2 platform arrived during its life, including the 1.6 and 1.8-litre engines and a five-speed gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.volkswagen-passat-b1"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Brazilian Passat and its five-speed gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states a five-speed gearbox arrived with the B2-derived improvements, and the live drive selected five H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.uno-classic-b",
+      "bundle": "build/class-sweep-batch-10/uno-classic-b.staged.json",
+      "manufacturer": "Fiat",
+      "model": "Uno",
+      "year": {
+        "label": "Brazilian Uno, five-speed",
+        "from": 1984
+      },
+      "real_world_identity_notes": "Brazilian-built Fiat Uno, produced from 1984 and classed by AMS2 under Copa Classic B. The first generation was offered with four- or five-speed manual gearboxes, the five-speed being Ritmo/Strada-derived.",
+      "real_world_source_refs": [
+        "wikipedia.fiat-uno"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Uno and its gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source lists 4- or 5-speed manual transmissions and a Ritmo/Strada-derived five-speed, and the live drive selected five H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "The only D-shaped rim in this batch; the other five cars carry round wheels."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}
