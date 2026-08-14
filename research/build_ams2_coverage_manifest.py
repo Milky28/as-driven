@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -18,12 +19,59 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_AUDIT = ROOT / "build" / "ams2-simhub-identity-audit.json"
 DEFAULT_CARS = Path(r"C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars")
+DEFAULT_LIVE_LOG = (
+    Path(os.environ.get("LOCALAPPDATA", ""))
+    / "SimHub"
+    / "AsDriven"
+    / "Diagnostics"
+    / "unmatched-identities.jsonl"
+)
 OUT_JSON = ROOT / "research" / "ams2-coverage-manifest.json"
 OUT_CSV = ROOT / "research" / "ams2-coverage-manifest.csv"
 
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def live_observations(log_path: Path) -> dict[str, dict[str, Any]]:
+    """Identities the plugin saw in live telemetry, newest wins.
+
+    SimHub stores one settings file per car it has seen and does not rewrite it
+    when the game renames a car, so that inventory drifts: it can name
+    identities the game no longer reports and miss the ones it does. The
+    plugin's unmatched-identity log is written from live telemetry on every
+    uncurated load, so it carries the current model, id and class.
+
+    It covers only uncurated cars, because a curated one stops being logged.
+    That is exactly the population this queue is about, so it is used to add and
+    correct identities, never to remove them.
+    """
+    if not log_path.exists():
+        return {}
+    observations: dict[str, dict[str, Any]] = {}
+    for line in log_path.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            payload = json.loads(line)
+        except ValueError:
+            continue
+        name = payload.get("car_model")
+        if not name:
+            continue
+        seen = payload.get("observed_at_utc") or ""
+        previous = observations.get(name)
+        if previous is not None and previous["live_observed_at"] >= seen:
+            continue
+        observations[name] = {
+            "car_id": payload.get("car_id"),
+            "telemetry_class": payload.get("car_class"),
+            "live_observed_at": seen,
+            "live_game_version": payload.get("game_version"),
+        }
+    return observations
 
 
 def curated_identities() -> tuple[dict[str, str], dict[str, dict[str, Any]]]:
@@ -154,10 +202,20 @@ def classify(
     )
 
 
-def build(audit_path: Path, cars_dir: Path) -> dict[str, Any]:
+def build(audit_path: Path, cars_dir: Path, live_log_path: Path | None = None) -> dict[str, Any]:
     audit = read_json(audit_path)
     curated, records = curated_identities()
-    observed = sorted(audit["observed_identities"], key=lambda item: item["car_model"].casefold())
+    live = live_observations(live_log_path) if live_log_path else {}
+
+    observed = list(audit["observed_identities"])
+    stored_names = {item["car_model"] for item in observed}
+    # An identity the game reports but the stored inventory has never held.
+    # These are the ones a queue built from car files alone silently omits.
+    for name in sorted(live):
+        if name in stored_names:
+            continue
+        observed.append({"car_model": name, "car_id": live[name]["car_id"], "file": None})
+    observed.sort(key=lambda item: item["car_model"].casefold())
     observed_names = {item["car_model"] for item in observed}
     exact_candidates = {
         item["telemetry_name"]: item for item in audit.get("exact_matches", [])
@@ -168,6 +226,8 @@ def build(audit_path: Path, cars_dir: Path) -> dict[str, Any]:
     for item in observed:
         name = item["car_model"]
         disposition, action, related = classify(name, curated, observed_names, decisions)
+        stored = item["file"] is not None
+        seen_live = live.get(name)
         entry = {
             "telemetry_name": name,
             "car_id": item["car_id"],
@@ -176,8 +236,19 @@ def build(audit_path: Path, cars_dir: Path) -> dict[str, Any]:
             "family": family(name),
             "related_record_id": related,
             "recommended_action": action,
-            **load_car_metadata(cars_dir, item["file"]),
+            "identity_source": (
+                "stored-and-live" if stored and seen_live
+                else "live-diagnostics" if seen_live
+                else "stored-car-file"
+            ),
         }
+        if stored:
+            entry.update(load_car_metadata(cars_dir, item["file"]))
+        if seen_live:
+            # Live telemetry wins on class and confirms the name is current.
+            entry["telemetry_class"] = seen_live["telemetry_class"]
+            entry["live_observed_at"] = seen_live["live_observed_at"]
+            entry["live_game_version"] = seen_live["live_game_version"]
         candidate = exact_candidates.get(name)
         if candidate is not None:
             entry["legacy_sheet_candidate"] = {
@@ -204,11 +275,22 @@ def build(audit_path: Path, cars_dir: Path) -> dict[str, Any]:
         "generated_at": "2026-08-12",
         "dataset_version": read_json(ROOT / "data" / "v1" / "index.json")["dataset_version"],
         "simhub_version": audit.get("simhub_version"),
-        "identity_source": str(cars_dir),
+        "identity_sources": {
+            "stored_car_files": str(cars_dir),
+            "live_diagnostics_log": str(live_log_path) if live_log_path else None,
+            "live_identities_seen": len(live),
+            "live_only_identities": sorted(
+                entry["telemetry_name"]
+                for entry in entries
+                if entry["identity_source"] == "live-diagnostics"
+            ),
+        },
         "rules": [
             "Every runtime match remains exact; this manifest never creates fuzzy aliases.",
             "Aero inheritance is a review suggestion and must explicitly state that the variant was not separately tested.",
             "Stored SimHub identities prove prior observation, not that the car still exists in the current selector.",
+            "Stored car files are not rewritten when the game renames a car, so the live diagnostics log is preferred for the current name and class.",
+            "Neither source is a roster: an identity absent here may simply never have been loaded on this PC.",
             "Full guided verification remains required when no reviewed base profile safely establishes controls.",
             "Retired and out-of-scope outcomes come from research/ams2-identity-decisions.json, not from generator heuristics.",
             "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build.",
@@ -237,6 +319,9 @@ def write_csv(manifest: dict[str, Any]) -> None:
         "related_record_id",
         "research_readiness",
         "recommended_action",
+        "identity_source",
+        "telemetry_class",
+        "live_observed_at",
         "identity_file",
     ]
     with OUT_CSV.open("w", encoding="utf-8", newline="") as handle:
@@ -250,8 +335,14 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--audit", type=Path, default=DEFAULT_AUDIT)
     parser.add_argument("--cars-dir", type=Path, default=DEFAULT_CARS)
+    parser.add_argument(
+        "--live-log",
+        type=Path,
+        default=DEFAULT_LIVE_LOG,
+        help="Plugin unmatched-identity diagnostics log; corrects stale stored car files.",
+    )
     args = parser.parse_args()
-    manifest = build(args.audit, args.cars_dir)
+    manifest = build(args.audit, args.cars_dir, args.live_log)
     OUT_JSON.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     write_csv(manifest)
     print(json.dumps(manifest["stats"], indent=2))

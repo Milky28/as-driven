@@ -4,24 +4,38 @@
   "generated_at": "2026-08-12",
   "dataset_version": "0.3.31",
   "simhub_version": "9.11.22",
-  "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
+  "identity_sources": {
+    "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
+    "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
+    "live_identities_seen": 51,
+    "live_only_identities": [
+      "Brabham BMW BT52 - High Downforce",
+      "Formula Classic Gen1 Model1 - High Downforce",
+      "Formula Classic Gen1 Model2 - High Downforce",
+      "Lotus Renault 98T",
+      "Lotus Renault 98T - High Downforce",
+      "McLaren Cosworth MP4/1C - High Downforce"
+    ]
+  },
   "rules": [
     "Every runtime match remains exact; this manifest never creates fuzzy aliases.",
     "Aero inheritance is a review suggestion and must explicitly state that the variant was not separately tested.",
     "Stored SimHub identities prove prior observation, not that the car still exists in the current selector.",
+    "Stored car files are not rewritten when the game renames a car, so the live diagnostics log is preferred for the current name and class.",
+    "Neither source is a roster: an identity absent here may simply never have been loaded on this PC.",
     "Full guided verification remains required when no reviewed base profile safely establishes controls.",
     "Retired and out-of-scope outcomes come from research/ams2-identity-decisions.json, not from generator heuristics.",
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 225,
+    "observed_identities": 231,
     "curated_records": 139,
-    "covered_exact_identities": 176,
+    "covered_exact_identities": 182,
     "uncovered_identities": 49,
     "full_guided_verifications": 37,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 176,
+      "covered-exact": 182,
       "full-guided-verification": 37,
       "out-of-scope": 1,
       "retired-identity": 4,
@@ -45,6 +59,7 @@
       "family": "gt",
       "related_record_id": "ams2.alpine-a110-gt4-evo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753910017.3511543,
       "research_readiness": "not-applicable"
@@ -57,6 +72,7 @@
       "family": "other",
       "related_record_id": "ams2.alpine-a424",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1732927841.7364168,
       "research_readiness": "not-applicable"
@@ -69,6 +85,7 @@
       "family": "other",
       "related_record_id": "ams2.alpine-a424",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1732927841.734412,
       "research_readiness": "not-applicable"
@@ -81,6 +98,7 @@
       "family": "other",
       "related_record_id": "ams2.aston-martin-dbr9",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1761947241.9251049,
       "research_readiness": "not-applicable"
@@ -93,6 +111,7 @@
       "family": "other",
       "related_record_id": "ams2.aston-martin-dbr9",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1763168435.376653,
       "research_readiness": "not-applicable"
@@ -105,6 +124,7 @@
       "family": "other",
       "related_record_id": "ams2.aston-martin-valkyrie",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786507793.6847413,
       "research_readiness": "not-applicable"
@@ -117,6 +137,7 @@
       "family": "other",
       "related_record_id": "ams2.aston-martin-valkyrie-hypercar",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1755041333.179945,
       "research_readiness": "not-applicable"
@@ -129,6 +150,7 @@
       "family": "gt",
       "related_record_id": "ams2.aston-martin-vantage-gt3-evo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786479120.144393,
       "research_readiness": "not-applicable"
@@ -141,6 +163,7 @@
       "family": "gt",
       "related_record_id": "ams2.aston-martin-vantage-gt4-evo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753910017.3567195,
       "research_readiness": "not-applicable"
@@ -153,6 +176,7 @@
       "family": "gt",
       "related_record_id": "ams2.aston-martin-vantage-gte",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753910017.3597205,
       "research_readiness": "not-applicable"
@@ -165,6 +189,7 @@
       "family": "other",
       "related_record_id": "ams2.audi-r8-lmp1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786470887.6105392,
       "research_readiness": "not-applicable"
@@ -177,6 +202,7 @@
       "family": "other",
       "related_record_id": "ams2.audi-r8-lmp1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1761947241.926605,
       "research_readiness": "not-applicable"
@@ -189,6 +215,7 @@
       "family": "gt",
       "related_record_id": "ams2.audi-r8-lms-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786492554.7248454,
       "research_readiness": "not-applicable"
@@ -201,6 +228,7 @@
       "family": "gt",
       "related_record_id": "ams2.audi-r8-lms-gt3-evo-ii",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1755198594.690272,
       "research_readiness": "not-applicable"
@@ -213,6 +241,7 @@
       "family": "gt",
       "related_record_id": "ams2.audi-r8-lms-gt3-evo-ii",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1732927841.7394176,
       "research_readiness": "not-applicable"
@@ -225,6 +254,7 @@
       "family": "gt",
       "related_record_id": "ams2.audi-r8-lms-gt4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786421474.345479,
       "research_readiness": "not-applicable"
@@ -237,6 +267,7 @@
       "family": "other",
       "related_record_id": "ams2.audi-r8-v10-gt",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786506398.8392692,
       "research_readiness": "not-applicable"
@@ -249,6 +280,7 @@
       "family": "touring-stock",
       "related_record_id": "ams2.audi-v8-quattro-dtm",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733079579.5059986,
       "research_readiness": "not-applicable"
@@ -261,6 +293,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 3,
       "identity_file_modified_at": 1736037515.400794,
       "legacy_sheet_candidate": {
@@ -279,6 +312,7 @@
       "family": "touring-stock",
       "related_record_id": null,
       "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1733629929.837935,
       "research_readiness": "not-applicable"
@@ -291,6 +325,7 @@
       "family": "prototype",
       "related_record_id": "ams2.bmw-m-hybrid-v8",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1753394868.6679204,
       "legacy_sheet_candidate": {
@@ -309,6 +344,7 @@
       "family": "prototype",
       "related_record_id": "ams2.bmw-m-hybrid-v8",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1739131492.5555599,
       "research_readiness": "not-applicable"
@@ -321,8 +357,12 @@
       "family": "touring-stock",
       "related_record_id": "ams2.bmw-m1-procar",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1719448787.74672,
+      "telemetry_class": "Procar",
+      "live_observed_at": "2026-08-13T20:25:11.7523008Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 163,
         "display_name": "BMW M1 Procar",
@@ -339,6 +379,7 @@
       "family": "other",
       "related_record_id": "ams2.bmw-m3-e46-gtr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786511972.1603136,
       "research_readiness": "not-applicable"
@@ -351,6 +392,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Reviewed as outside product scope; no controls are curated for it.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1777246081.0632694,
       "research_readiness": "not-applicable"
@@ -363,8 +405,12 @@
       "family": "touring-stock",
       "related_record_id": "ams2.bmw-m3-sport-evo-group-a",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1733533976.2966456,
+      "telemetry_class": "Group A",
+      "live_observed_at": "2026-08-13T20:32:58.5757226Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -375,8 +421,12 @@
       "family": "gt",
       "related_record_id": "ams2.bmw-m4-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753308287.08786,
+      "telemetry_class": "GT3_Gen2",
+      "live_observed_at": "2026-08-13T15:37:43.8342314Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 180,
         "display_name": "BMW M4 GT3",
@@ -393,6 +443,7 @@
       "family": "gt",
       "related_record_id": "ams2.bmw-m4-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1755916049.1258163,
       "research_readiness": "not-applicable"
@@ -405,8 +456,12 @@
       "family": "gt",
       "related_record_id": "ams2.bmw-m4-gt4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786641267.4923751,
+      "telemetry_class": "GT4",
+      "live_observed_at": "2026-08-13T16:48:48.5693981Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 184,
         "display_name": "BMW M4 GT4",
@@ -423,8 +478,12 @@
       "family": "gt",
       "related_record_id": "ams2.bmw-m6-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1727039273.4592147,
+      "telemetry_class": "GT3",
+      "live_observed_at": "2026-08-13T15:50:18.9352312Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 175,
         "display_name": "BMW M6 GT3",
@@ -441,8 +500,26 @@
       "family": "open-wheel",
       "related_record_id": "ams2.brabham-bmw-bt52-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1743121556.2917664,
+      "telemetry_class": "F-Retro_Gen3",
+      "live_observed_at": "2026-08-14T15:55:20.5763008Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Brabham BMW BT52 - High Downforce",
+      "car_id": "Brabham BMW BT52 - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.brabham-bmw-bt52-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Retro_Gen3_HD",
+      "live_observed_at": "2026-08-14T15:02:39.3932818Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -453,8 +530,12 @@
       "family": "open-wheel",
       "related_record_id": "ams2.brabham-bt26a",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
+      "telemetry_class": "F-Vintage_Gen2",
+      "live_observed_at": "2026-08-14T05:42:37.3735877Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 77,
         "display_name": "Brabham BT26A",
@@ -471,6 +552,7 @@
       "family": "other",
       "related_record_id": "ams2.cadillac-dpi-vr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1732063078.9254153,
       "research_readiness": "not-applicable"
@@ -483,6 +565,7 @@
       "family": "other",
       "related_record_id": "ams2.cadillac-v-series-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1746935084.1897018,
       "legacy_sheet_candidate": {
@@ -501,6 +584,7 @@
       "family": "other",
       "related_record_id": "ams2.cadillac-v-series-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1732927841.7454827,
       "research_readiness": "not-applicable"
@@ -513,8 +597,12 @@
       "family": "club-road",
       "related_record_id": "ams2.caterham-academy",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1786684522.5328033,
+      "telemetry_class": "Cat_Academy",
+      "live_observed_at": "2026-08-14T04:16:02.5802826Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -525,8 +613,12 @@
       "family": "club-road",
       "related_record_id": "ams2.caterham-supersport",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712417925.0759096,
+      "telemetry_class": "Cat_Supersport",
+      "live_observed_at": "2026-08-14T04:19:52.9414035Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -537,6 +629,7 @@
       "family": "gt",
       "related_record_id": "ams2.chevrolet-camaro-gt4-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1752713306.6630342,
       "research_readiness": "not-applicable"
@@ -549,8 +642,12 @@
       "family": "club-road",
       "related_record_id": "ams2.chevrolet-chevette",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1715462366.7439916,
+      "telemetry_class": "CopaClassicB",
+      "live_observed_at": "2026-08-14T04:24:16.9664790Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 55,
         "display_name": "Chevrolet Chevette",
@@ -567,6 +664,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1785514332.8334925,
       "legacy_sheet_candidate": {
@@ -585,6 +683,7 @@
       "family": "other",
       "related_record_id": "ams2.chevrolet-corvette-c3-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1720198857.4622173,
       "research_readiness": "not-applicable"
@@ -597,6 +696,7 @@
       "family": "other",
       "related_record_id": "ams2.chevrolet-corvette-c3-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1786382842.161962,
       "legacy_sheet_candidate": {
@@ -615,6 +715,7 @@
       "family": "other",
       "related_record_id": "ams2.chevrolet-corvette-c3-r-convertible",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1732927841.7484846,
       "research_readiness": "not-applicable"
@@ -627,6 +728,7 @@
       "family": "other",
       "related_record_id": "ams2.chevrolet-corvette-c5-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 13,
       "identity_file_modified_at": 1764720991.043911,
       "research_readiness": "not-applicable"
@@ -639,6 +741,7 @@
       "family": "other",
       "related_record_id": "ams2.chevrolet-corvette-c5-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1762020769.3589597,
       "research_readiness": "not-applicable"
@@ -651,6 +754,7 @@
       "family": "other",
       "related_record_id": "ams2.chevrolet-corvette-c8-z06-z07-upgrade",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1786492554.7283554,
       "research_readiness": "not-applicable"
@@ -663,8 +767,12 @@
       "family": "gt",
       "related_record_id": "ams2.chevrolet-corvette-c8-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1755198594.6942918,
+      "telemetry_class": "GTE",
+      "live_observed_at": "2026-08-13T20:00:53.2855376Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 173,
         "display_name": "Chevrolet Corvette C8.R",
@@ -681,6 +789,7 @@
       "family": "prototype",
       "related_record_id": "ams2.chevrolet-corvette-gtp",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1737243337.3160646,
       "legacy_sheet_candidate": {
@@ -699,6 +808,7 @@
       "family": "prototype",
       "related_record_id": "ams2.chevrolet-corvette-gtp",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1762020769.3612337,
       "research_readiness": "not-applicable"
@@ -711,6 +821,7 @@
       "family": "gt",
       "related_record_id": "ams2.chevrolet-corvette-z06-gt3r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786421474.3585103,
       "research_readiness": "not-applicable"
@@ -723,6 +834,7 @@
       "family": "gt",
       "related_record_id": "ams2.chevrolet-corvette-z06-gt3r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1737758268.104961,
       "research_readiness": "not-applicable"
@@ -735,6 +847,7 @@
       "family": "touring-stock",
       "related_record_id": "ams2.chevrolet-cruze-stock-car-2024",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 149,
       "identity_file_modified_at": 1717528979.637606,
       "research_readiness": "not-applicable"
@@ -747,8 +860,12 @@
       "family": "touring-stock",
       "related_record_id": "ams2.chevrolet-omega-stock-car-1999",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736037515.4037943,
+      "telemetry_class": "StockCar99",
+      "live_observed_at": "2026-08-13T20:40:15.3741067Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -759,8 +876,12 @@
       "family": "club-road",
       "related_record_id": "ams2.copa-fusca",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1714958076.8127933,
+      "telemetry_class": "CopaFusca",
+      "live_observed_at": "2026-08-14T04:27:10.5603684Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -771,6 +892,7 @@
       "family": "prototype",
       "related_record_id": "ams2.courage-c60-hybrid",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786470887.6130393,
       "research_readiness": "not-applicable"
@@ -783,6 +905,7 @@
       "family": "prototype",
       "related_record_id": "ams2.courage-c60-hybrid",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1761947241.930767,
       "research_readiness": "not-applicable"
@@ -795,6 +918,7 @@
       "family": "other",
       "related_record_id": "ams2.f301",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1753044493.3994584,
       "research_readiness": "not-applicable"
@@ -807,6 +931,7 @@
       "family": "other",
       "related_record_id": "ams2.f309",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1732927841.7514868,
       "research_readiness": "not-applicable"
@@ -819,6 +944,7 @@
       "family": "other",
       "related_record_id": "ams2.dallara-sp1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786470887.6150415,
       "research_readiness": "not-applicable"
@@ -831,6 +957,7 @@
       "family": "other",
       "related_record_id": "ams2.dallara-sp1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1764615886.4104695,
       "research_readiness": "not-applicable"
@@ -843,6 +970,7 @@
       "family": "other",
       "related_record_id": "ams2.dodge-viper-acr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786506398.8427732,
       "research_readiness": "not-applicable"
@@ -855,6 +983,7 @@
       "family": "other",
       "related_record_id": "ams2.dodge-viper-gts-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 10,
       "identity_file_modified_at": 1762105399.0867667,
       "research_readiness": "not-applicable"
@@ -867,6 +996,7 @@
       "family": "other",
       "related_record_id": "ams2.dodge-viper-gts-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1762391519.5342493,
       "research_readiness": "not-applicable"
@@ -879,6 +1009,7 @@
       "family": "gt",
       "related_record_id": null,
       "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733629929.8409333,
       "research_readiness": "not-applicable"
@@ -891,6 +1022,7 @@
       "family": "gt",
       "related_record_id": null,
       "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1717879371.2236454,
       "research_readiness": "not-applicable"
@@ -903,8 +1035,26 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-classic-gen1-model1-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712619576.9483383,
+      "telemetry_class": "F-Classic_Gen1",
+      "live_observed_at": "2026-08-14T15:58:27.7982815Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Formula Classic Gen1 Model1 - High Downforce",
+      "car_id": "Formula Classic Gen1 Model1 - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.formula-classic-gen1-model1-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Classic_Gen1_HD",
+      "live_observed_at": "2026-08-14T15:15:19.2730126Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -915,8 +1065,26 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-classic-gen1-model2-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712619576.9493382,
+      "telemetry_class": "F-Classic_Gen1",
+      "live_observed_at": "2026-08-14T15:59:26.9822575Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Formula Classic Gen1 Model2 - High Downforce",
+      "car_id": "Formula Classic Gen1 Model2 - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.formula-classic-gen1-model2-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Classic_Gen1_HD",
+      "live_observed_at": "2026-08-14T15:17:56.5782922Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -927,6 +1095,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1712619576.9504457,
       "research_readiness": "independent-control-research-needed"
@@ -939,6 +1108,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1712619576.9851868,
       "research_readiness": "independent-control-research-needed"
@@ -951,6 +1121,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1712619576.9861941,
       "research_readiness": "independent-control-research-needed"
@@ -963,6 +1134,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1736037515.4061046,
       "research_readiness": "independent-control-research-needed"
@@ -975,6 +1147,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1732927841.7555418,
       "research_readiness": "independent-control-research-needed"
@@ -987,6 +1160,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model1-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 9,
       "identity_file_modified_at": 1777246081.0782921,
       "research_readiness": "not-applicable"
@@ -999,6 +1173,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model1-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786558749.0174725,
       "research_readiness": "not-applicable"
@@ -1011,6 +1186,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model2-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1775154605.298077,
       "research_readiness": "not-applicable"
@@ -1023,6 +1199,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model2-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786558749.0204718,
       "research_readiness": "not-applicable"
@@ -1035,6 +1212,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model3-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1777246081.0797932,
       "research_readiness": "not-applicable"
@@ -1047,6 +1225,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model3-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786558749.0239704,
       "research_readiness": "not-applicable"
@@ -1059,6 +1238,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1712619576.9871926,
       "research_readiness": "independent-control-research-needed"
@@ -1071,6 +1251,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1712619576.9881928,
       "research_readiness": "independent-control-research-needed"
@@ -1083,6 +1264,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1739756671.2608302,
       "research_readiness": "independent-control-research-needed"
@@ -1095,6 +1277,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3433125,
       "research_readiness": "independent-control-research-needed"
@@ -1107,6 +1290,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1716263370.4475265,
       "research_readiness": "independent-control-research-needed"
@@ -1119,6 +1303,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1742662156.766384,
       "research_readiness": "independent-control-research-needed"
@@ -1131,6 +1316,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-inter-mg15",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1720198857.4632182,
       "research_readiness": "not-applicable"
@@ -1143,6 +1329,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 2,
       "identity_file_modified_at": 1712508691.9651482,
       "legacy_sheet_candidate": {
@@ -1161,6 +1348,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-reiza",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1756569893.1568668,
       "legacy_sheet_candidate": {
@@ -1179,8 +1367,12 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-retro-gen2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
+      "telemetry_class": "F-Retro_Gen2",
+      "live_observed_at": "2026-08-14T05:55:30.8872391Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 88,
         "display_name": "Formula Retro Gen2",
@@ -1197,8 +1389,12 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-retro-v12",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
+      "telemetry_class": "F-Retro_Gen1",
+      "live_observed_at": "2026-08-14T05:52:04.7909304Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 82,
         "display_name": "Formula Retro V12",
@@ -1215,6 +1411,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1751661767.3292425,
       "legacy_sheet_candidate": {
@@ -1233,6 +1430,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1719172608.1844673,
       "legacy_sheet_candidate": {
@@ -1251,6 +1449,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-ultimate-2022",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1712508691.9651482,
       "research_readiness": "not-applicable"
@@ -1263,6 +1462,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-ultimate-2019",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1775154605.3000824,
       "research_readiness": "not-applicable"
@@ -1275,6 +1475,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-ultimate-2019",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1786554392.3499775,
       "research_readiness": "not-applicable"
@@ -1287,6 +1488,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1786402536.5485966,
       "research_readiness": "independent-control-research-needed"
@@ -1299,6 +1501,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-ultimate-2022",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1786554392.3624902,
       "research_readiness": "not-applicable"
@@ -1311,6 +1514,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-usa-2023",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1743305690.3646727,
       "research_readiness": "not-applicable"
@@ -1323,6 +1527,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-usa-2023",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786401506.7470899,
       "research_readiness": "not-applicable"
@@ -1335,6 +1540,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Formula V10 Gen2 (B) - High Downforce, Formula V10 Gen2 (M) - High Downforce. No guided drive is scheduled.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1712619576.9901931,
       "research_readiness": "not-applicable"
@@ -1347,6 +1553,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v10-g2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786554392.3739886,
       "research_readiness": "not-applicable"
@@ -1359,6 +1566,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v10-g2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1786401506.751092,
       "research_readiness": "not-applicable"
@@ -1371,6 +1579,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v10-gen3-b-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786558749.0269759,
       "research_readiness": "not-applicable"
@@ -1383,6 +1592,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v10-gen3-m-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786558749.030304,
       "research_readiness": "not-applicable"
@@ -1395,6 +1605,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-edge-model1-high-downforce",
       "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Formula Edge Model1. No guided drive is scheduled.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1712619576.9901931,
       "legacy_sheet_candidate": {
@@ -1413,6 +1624,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v8-gen1-b-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1782015741.0834696,
       "research_readiness": "not-applicable"
@@ -1425,6 +1637,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v8-gen1-b-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786558749.0328028,
       "research_readiness": "not-applicable"
@@ -1437,6 +1650,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v8-gen1-m-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786558749.035816,
       "research_readiness": "not-applicable"
@@ -1449,6 +1663,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-v8-gen2-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786558749.0393736,
       "research_readiness": "not-applicable"
@@ -1461,6 +1676,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-reiza",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786554392.3845067,
       "research_readiness": "not-applicable"
@@ -1473,6 +1689,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-vee-fin",
       "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Formula Vee Gen1 + Fin. No guided drive is scheduled.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1719172608.1844673,
       "research_readiness": "not-applicable"
@@ -1485,6 +1702,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1785514332.8354926,
       "research_readiness": "independent-control-research-needed"
@@ -1497,6 +1715,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-vee-fin",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1786554392.3965187,
       "research_readiness": "not-applicable"
@@ -1509,6 +1728,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-vee-gen2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1756593711.523738,
       "research_readiness": "not-applicable"
@@ -1521,8 +1741,12 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-vintage-gen1-model1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
+      "telemetry_class": "F-Vintage_Gen1",
+      "live_observed_at": "2026-08-14T05:36:42.7652098Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1533,8 +1757,12 @@
       "family": "open-wheel",
       "related_record_id": "ams2.formula-vintage-gen1-model2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1785535275.5598154,
+      "telemetry_class": "F-Vintage_Gen1",
+      "live_observed_at": "2026-08-14T05:39:32.1036633Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1545,6 +1773,7 @@
       "family": "other",
       "related_record_id": "ams2.gillet-vertigo-streiff",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786424344.6421762,
       "research_readiness": "not-applicable"
@@ -1557,8 +1786,12 @@
       "family": "club-road",
       "related_record_id": "ams2.ginetta-g40",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1785514332.8445206,
+      "telemetry_class": "GT5",
+      "live_observed_at": "2026-08-14T04:52:25.3467547Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 200,
         "display_name": "Ginetta G40",
@@ -1575,8 +1808,12 @@
       "family": "club-road",
       "related_record_id": "ams2.ginetta-g40-cup",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1722805111.2124033,
+      "telemetry_class": "G40Cup",
+      "live_observed_at": "2026-08-14T04:31:07.1670522Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1587,8 +1824,12 @@
       "family": "gt",
       "related_record_id": "ams2.ginetta-g55-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786639526.013937,
+      "telemetry_class": "GTOpen",
+      "live_observed_at": "2026-08-13T15:55:46.2312520Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 166,
         "display_name": "Ginetta G55 GT3",
@@ -1605,8 +1846,12 @@
       "family": "gt",
       "related_record_id": "ams2.ginetta-g55-gt4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1752713306.6730485,
+      "telemetry_class": "GT4",
+      "live_observed_at": "2026-08-13T16:55:02.5639801Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 186,
         "display_name": "Ginetta G55 GT4",
@@ -1623,8 +1868,12 @@
       "family": "gt",
       "related_record_id": "ams2.ginetta-g55-gt4-supercup",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786641267.5043855,
+      "telemetry_class": "G55Supercup",
+      "live_observed_at": "2026-08-13T17:02:14.5454530Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1635,8 +1884,12 @@
       "family": "club-road",
       "related_record_id": "ams2.gol-classic-b",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1715214435.2760682,
+      "telemetry_class": "CopaClassicB",
+      "live_observed_at": "2026-08-14T04:34:23.3840848Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1647,8 +1900,12 @@
       "family": "club-road",
       "related_record_id": "ams2.gol-classic-fl",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1712417925.0769086,
+      "telemetry_class": "CopaClassicFL",
+      "live_observed_at": "2026-08-14T04:37:23.7091657Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1659,6 +1916,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-diablo-sv-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1759703502.1166134,
       "research_readiness": "not-applicable"
@@ -1671,6 +1929,7 @@
       "family": "gt",
       "related_record_id": "ams2.lamborghini-huracan-gt3-evo2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 119,
       "identity_file_modified_at": 1752196960.806605,
       "research_readiness": "not-applicable"
@@ -1683,6 +1942,7 @@
       "family": "gt",
       "related_record_id": "ams2.lamborghini-huracan-gt3-evo2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1737758268.111474,
       "research_readiness": "not-applicable"
@@ -1695,6 +1955,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-huracan-super-trofeo-evo2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 75,
       "identity_file_modified_at": 1746935084.199294,
       "research_readiness": "not-applicable"
@@ -1707,6 +1968,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-miura-sv",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1786506398.8467803,
       "research_readiness": "not-applicable"
@@ -1719,6 +1981,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-murcielago-r-gt",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1759428567.6735334,
       "research_readiness": "not-applicable"
@@ -1731,6 +1994,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-murcielago-r-gt",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1760823556.5005236,
       "research_readiness": "not-applicable"
@@ -1743,6 +2007,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-revuelto",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1786506398.8497806,
       "research_readiness": "not-applicable"
@@ -1755,6 +2020,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-sc63",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 20,
       "identity_file_modified_at": 1753668480.075256,
       "research_readiness": "not-applicable"
@@ -1767,6 +2033,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-sc63",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1737758268.117994,
       "research_readiness": "not-applicable"
@@ -1779,6 +2046,7 @@
       "family": "other",
       "related_record_id": "ams2.lamborghini-veneno-roadster",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786492554.7318535,
       "research_readiness": "not-applicable"
@@ -1791,6 +2059,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1717879371.2236454,
       "research_readiness": "not-applicable"
@@ -1803,6 +2072,7 @@
       "family": "other",
       "related_record_id": "ams2.ligier-js-p217",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1755386063.993474,
       "research_readiness": "not-applicable"
@@ -1815,6 +2085,7 @@
       "family": "other",
       "related_record_id": "ams2.ligier-js-p320",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736618771.4474225,
       "research_readiness": "not-applicable"
@@ -1827,6 +2098,7 @@
       "family": "other",
       "related_record_id": "ams2.ligier-js-p4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1756593711.5257406,
       "research_readiness": "not-applicable"
@@ -1839,6 +2111,7 @@
       "family": "other",
       "related_record_id": "ams2.ligier-js2-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786506398.8532808,
       "research_readiness": "not-applicable"
@@ -1851,6 +2124,7 @@
       "family": "other",
       "related_record_id": "ams2.lister-storm-gtm",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783199424.0418627,
       "research_readiness": "not-applicable"
@@ -1863,6 +2137,7 @@
       "family": "other",
       "related_record_id": "ams2.lola-b05-40-turbo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786470887.6170497,
       "research_readiness": "not-applicable"
@@ -1875,6 +2150,7 @@
       "family": "other",
       "related_record_id": "ams2.lola-b05-40-v8",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1761947241.934279,
       "research_readiness": "not-applicable"
@@ -1887,6 +2163,7 @@
       "family": "other",
       "related_record_id": "ams2.lola-b05-40-v8",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": null,
       "identity_file_modified_at": 1764615886.41246,
       "research_readiness": "not-applicable"
@@ -1899,6 +2176,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750895492.5965383,
       "legacy_sheet_candidate": {
@@ -1917,6 +2195,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1753060209.748388,
       "legacy_sheet_candidate": {
@@ -1935,6 +2214,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3592803,
       "legacy_sheet_candidate": {
@@ -1953,8 +2233,12 @@
       "family": "open-wheel",
       "related_record_id": "ams2.lotus-49c",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736037515.407102,
+      "telemetry_class": "F-Vintage_Gen2",
+      "live_observed_at": "2026-08-14T05:48:38.5490183Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1965,6 +2249,7 @@
       "family": "open-wheel",
       "related_record_id": "ams2.lotus-renault-98t-high-downforce",
       "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Lotus Renault 98T - High Downforce, Lotus Renault 98T. No guided drive is scheduled.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712417925.0774148,
       "legacy_sheet_candidate": {
@@ -1976,6 +2261,34 @@
       "research_readiness": "legacy-controls-candidate-available"
     },
     {
+      "telemetry_name": "Lotus Renault 98T",
+      "car_id": "Lotus Renault 98T",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.lotus-renault-98t-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Classic_Gen1",
+      "live_observed_at": "2026-08-14T15:57:31.0609822Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Lotus Renault 98T - High Downforce",
+      "car_id": "Lotus Renault 98T - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.lotus-renault-98t-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Classic_Gen1_HD",
+      "live_observed_at": "2026-08-14T15:12:41.9253103Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Maserati GranSport Trofeo",
       "car_id": "Maserati GranSport Trofeo",
       "identity_file": "Maserati GranSport Trofeo.shcarsettings",
@@ -1983,6 +2296,7 @@
       "family": "other",
       "related_record_id": "ams2.maserati-gransport-trofeo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786511972.1728346,
       "research_readiness": "not-applicable"
@@ -1995,6 +2309,7 @@
       "family": "other",
       "related_record_id": "ams2.maserati-gt2-stradale",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1786507793.6877508,
       "research_readiness": "not-applicable"
@@ -2007,6 +2322,7 @@
       "family": "gt",
       "related_record_id": "ams2.maserati-mc12-gt1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786424344.6567059,
       "research_readiness": "not-applicable"
@@ -2019,6 +2335,7 @@
       "family": "gt",
       "related_record_id": "ams2.maserati-mc12-gt1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1764615886.4139638,
       "research_readiness": "not-applicable"
@@ -2031,6 +2348,7 @@
       "family": "prototype",
       "related_record_id": null,
       "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1717879371.2242582,
       "research_readiness": "not-applicable"
@@ -2043,8 +2361,12 @@
       "family": "gt",
       "related_record_id": "ams2.mclaren-570s-gt4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786641267.519391,
+      "telemetry_class": "GT4",
+      "live_observed_at": "2026-08-13T17:05:07.5807484Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -2055,6 +2377,7 @@
       "family": "gt",
       "related_record_id": "ams2.mclaren-720s-gt3-evo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733363713.8268783,
       "research_readiness": "not-applicable"
@@ -2067,6 +2390,7 @@
       "family": "gt",
       "related_record_id": "ams2.mclaren-720s-gt3-evo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1739131492.5597663,
       "research_readiness": "not-applicable"
@@ -2079,8 +2403,26 @@
       "family": "open-wheel",
       "related_record_id": "ams2.mclaren-cosworth-mp4-1c-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3749208,
+      "telemetry_class": "F-Retro_Gen3",
+      "live_observed_at": "2026-08-14T15:56:22.6958252Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "McLaren Cosworth MP4/1C - High Downforce",
+      "car_id": "McLaren Cosworth MP4/1C - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.mclaren-cosworth-mp4-1c-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Retro_Gen3_HD",
+      "live_observed_at": "2026-08-14T15:05:51.4149498Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -2091,6 +2433,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1742662156.7773516,
       "research_readiness": "independent-control-research-needed"
@@ -2103,6 +2446,7 @@
       "family": "other",
       "related_record_id": "ams2.mclaren-f1-gtr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786554392.4015293,
       "legacy_sheet_candidate": {
@@ -2121,6 +2465,7 @@
       "family": "other",
       "related_record_id": "ams2.mclaren-f1-gtr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733533976.2991533,
       "research_readiness": "not-applicable"
@@ -2133,6 +2478,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3824291,
       "research_readiness": "independent-control-research-needed"
@@ -2145,6 +2491,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3824291,
       "research_readiness": "independent-control-research-needed"
@@ -2157,6 +2504,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3824291,
       "research_readiness": "independent-control-research-needed"
@@ -2169,6 +2517,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3824291,
       "research_readiness": "independent-control-research-needed"
@@ -2181,6 +2530,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1715298874.6285682,
       "legacy_sheet_candidate": {
@@ -2199,8 +2549,12 @@
       "family": "gt",
       "related_record_id": "ams2.mercedes-amg-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753314072.5379164,
+      "telemetry_class": "GT3",
+      "live_observed_at": "2026-08-13T16:00:04.1147341Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 177,
         "display_name": "Mercedes-AMG GT3",
@@ -2217,8 +2571,12 @@
       "family": "gt",
       "related_record_id": "ams2.mercedes-amg-gt3-evo",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753060209.751898,
+      "telemetry_class": "GT3_Gen2",
+      "live_observed_at": "2026-08-13T16:02:11.6628277Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 182,
         "display_name": "Mercedes-AMG GT3 Evo",
@@ -2235,8 +2593,12 @@
       "family": "gt",
       "related_record_id": "ams2.mercedes-amg-gt4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1737323607.3891397,
+      "telemetry_class": "GT4",
+      "live_observed_at": "2026-08-13T17:07:51.3029094Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 188,
         "display_name": "Mercedes-AMG GT4",
@@ -2253,8 +2615,12 @@
       "family": "touring-stock",
       "related_record_id": "ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1719785976.5184302,
+      "telemetry_class": "Group A",
+      "live_observed_at": "2026-08-13T20:29:16.6453471Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -2265,6 +2631,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1714091186.6622236,
       "legacy_sheet_candidate": {
@@ -2283,6 +2650,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Verify the observed base car first, then review this exact aero identity as inherited.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733608482.5199015,
       "research_readiness": "not-applicable"
@@ -2295,6 +2663,7 @@
       "family": "prototype",
       "related_record_id": "ams2.metalmoro-ajr-chevrolet",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1719530468.1576302,
       "research_readiness": "not-applicable"
@@ -2307,6 +2676,7 @@
       "family": "prototype",
       "related_record_id": "ams2.metalmoro-ajr-gen2-chevrolet",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736618771.4484246,
       "research_readiness": "not-applicable"
@@ -2319,6 +2689,7 @@
       "family": "prototype",
       "related_record_id": "ams2.metalmoro-mrx-duratec-p4",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1720905131.52318,
       "research_readiness": "not-applicable"
@@ -2331,6 +2702,7 @@
       "family": "gt",
       "related_record_id": "ams2.milano-gt36",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786469047.6878817,
       "research_readiness": "not-applicable"
@@ -2343,6 +2715,7 @@
       "family": "other",
       "related_record_id": "ams2.milano-gt55",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1785360602.5480332,
       "research_readiness": "not-applicable"
@@ -2355,8 +2728,12 @@
       "family": "gt",
       "related_record_id": "ams2.nissan-gt-r-nismo-gt3",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786639526.0229495,
+      "telemetry_class": "GT3",
+      "live_observed_at": "2026-08-13T16:04:13.9521029Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 178,
         "display_name": "Nissan GT-R Nismo GT3",
@@ -2373,8 +2750,12 @@
       "family": "gt",
       "related_record_id": "ams2.nissan-r390-gt1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 42,
       "identity_file_modified_at": 1759703502.1276586,
+      "telemetry_class": "GT1",
+      "live_observed_at": "2026-08-13T19:54:31.8352342Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 170,
         "display_name": "Nissan R390 GT1",
@@ -2391,6 +2772,7 @@
       "family": "gt",
       "related_record_id": "ams2.nissan-r390-gt1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733608482.5229075,
       "research_readiness": "not-applicable"
@@ -2403,6 +2785,7 @@
       "family": "prototype",
       "related_record_id": "ams2.nissan-r89c",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712417925.0784225,
       "legacy_sheet_candidate": {
@@ -2421,6 +2804,7 @@
       "family": "prototype",
       "related_record_id": "ams2.nissan-r89c",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1762020769.3769073,
       "research_readiness": "not-applicable"
@@ -2433,6 +2817,7 @@
       "family": "other",
       "related_record_id": "ams2.oreca-07",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1743440369.8909903,
       "research_readiness": "not-applicable"
@@ -2445,6 +2830,7 @@
       "family": "other",
       "related_record_id": "ams2.oreca-07",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1737758268.1210518,
       "research_readiness": "not-applicable"
@@ -2457,6 +2843,7 @@
       "family": "other",
       "related_record_id": "ams2.panoz-esperante-gtlm",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783202013.1253364,
       "research_readiness": "not-applicable"
@@ -2469,8 +2856,12 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-911-gt1-98",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 35,
       "identity_file_modified_at": 1756593711.5297527,
+      "telemetry_class": "GT1",
+      "live_observed_at": "2026-08-13T19:57:29.8400911Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 171,
         "display_name": "Porsche 911 GT1-98",
@@ -2487,6 +2878,7 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-911-gt1-98",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733619011.2677484,
       "research_readiness": "not-applicable"
@@ -2499,8 +2891,12 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-911-gt3-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1716263370.4475265,
+      "telemetry_class": "GT3",
+      "live_observed_at": "2026-08-13T16:13:33.0587153Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 179,
         "display_name": "Porsche 911 GT3 R",
@@ -2517,6 +2913,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1743121556.2927718,
       "research_readiness": "independent-control-research-needed"
@@ -2529,6 +2926,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1720905131.52318,
       "research_readiness": "independent-control-research-needed"
@@ -2541,8 +2939,12 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-911-rsr-gte",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1753060209.760928,
+      "telemetry_class": "GTE",
+      "live_observed_at": "2026-08-13T20:03:23.4360832Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -2553,6 +2955,7 @@
       "family": "other",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1733629929.8454506,
       "research_readiness": "independent-control-research-needed"
@@ -2565,6 +2968,7 @@
       "family": "prototype",
       "related_record_id": "ams2.porsche-962c",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736037515.4091458,
       "legacy_sheet_candidate": {
@@ -2583,6 +2987,7 @@
       "family": "prototype",
       "related_record_id": "ams2.porsche-962c",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1717349996.715784,
       "research_readiness": "not-applicable"
@@ -2595,6 +3000,7 @@
       "family": "prototype",
       "related_record_id": "ams2.porsche-963",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786569369.8987963,
       "legacy_sheet_candidate": {
@@ -2613,6 +3019,7 @@
       "family": "prototype",
       "related_record_id": "ams2.porsche-963",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 10,
       "identity_file_modified_at": 1737758268.1240518,
       "research_readiness": "not-applicable"
@@ -2625,8 +3032,12 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-992-gt3-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1743457400.4935243,
+      "telemetry_class": "GT3_Gen2",
+      "live_observed_at": "2026-08-13T16:19:09.2884792Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 183,
         "display_name": "Porsche 992 GT3 R",
@@ -2643,6 +3054,7 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-992-gt3-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 3,
       "identity_file_modified_at": 1737758268.1295605,
       "research_readiness": "not-applicable"
@@ -2655,6 +3067,7 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-996-gt3-rsr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786469047.6979074,
       "research_readiness": "not-applicable"
@@ -2667,8 +3080,12 @@
       "family": "gt",
       "related_record_id": "ams2.porsche-cayman-gt4-clubsport-mr",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1759088501.7648172,
+      "telemetry_class": "GT4",
+      "live_observed_at": "2026-08-13T17:10:22.7297282Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -2679,8 +3096,12 @@
       "family": "club-road",
       "related_record_id": "ams2.puma-gtb",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1723844231.3179896,
+      "telemetry_class": "CopaClassicFL",
+      "live_observed_at": "2026-08-14T04:40:12.3744055Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 61,
         "display_name": "Puma GTB",
@@ -2697,8 +3118,12 @@
       "family": "gt",
       "related_record_id": "ams2.puma-gte",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 150,
       "identity_file_modified_at": 1722805111.2144022,
+      "telemetry_class": "CopaClassicB",
+      "live_observed_at": "2026-08-13T20:08:25.8818049Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 58,
         "display_name": "Puma GTE",
@@ -2715,8 +3140,12 @@
       "family": "club-road",
       "related_record_id": "ams2.puma-p052",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1786684522.544321,
+      "telemetry_class": "GT5",
+      "live_observed_at": "2026-08-14T04:56:55.9399178Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 201,
         "display_name": "Puma P052",
@@ -2733,6 +3162,7 @@
       "family": "other",
       "related_record_id": "ams2.renault-r25-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1782015741.087465,
       "research_readiness": "not-applicable"
@@ -2745,6 +3175,7 @@
       "family": "other",
       "related_record_id": "ams2.renault-r26-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786508796.9905455,
       "research_readiness": "not-applicable"
@@ -2757,6 +3188,7 @@
       "family": "other",
       "related_record_id": "ams2.renault-r28-high-downforce",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1786508796.9935443,
       "research_readiness": "not-applicable"
@@ -2769,6 +3201,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1737243337.3181238,
       "legacy_sheet_candidate": {
@@ -2787,6 +3220,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3824291,
       "legacy_sheet_candidate": {
@@ -2805,6 +3239,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750546097.5084946,
       "legacy_sheet_candidate": {
@@ -2823,6 +3258,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750551958.517955,
       "research_readiness": "independent-control-research-needed"
@@ -2835,6 +3271,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750895492.5965383,
       "legacy_sheet_candidate": {
@@ -2853,6 +3290,7 @@
       "family": "open-wheel",
       "related_record_id": null,
       "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1716765456.2147443,
       "legacy_sheet_candidate": {
@@ -2871,6 +3309,7 @@
       "family": "gt",
       "related_record_id": "ams2.saleen-s7-r-gt1",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783199424.045875,
       "research_readiness": "not-applicable"
@@ -2883,6 +3322,7 @@
       "family": "other",
       "related_record_id": "ams2.sauber-mercedes-c9",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1737243337.3206346,
       "legacy_sheet_candidate": {
@@ -2901,6 +3341,7 @@
       "family": "other",
       "related_record_id": "ams2.sauber-mercedes-c9",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1762020769.379421,
       "research_readiness": "not-applicable"
@@ -2913,6 +3354,7 @@
       "family": "other",
       "related_record_id": "ams2.spyker-c8-spyder-gt2-r",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783202013.1278837,
       "research_readiness": "not-applicable"
@@ -2925,6 +3367,7 @@
       "family": "other",
       "related_record_id": "ams2.stock-usa-gen1-speedway",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1766528502.8127308,
       "research_readiness": "not-applicable"
@@ -2937,6 +3380,7 @@
       "family": "other",
       "related_record_id": "ams2.stock-usa-gen2-superspeedway",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 10,
       "identity_file_modified_at": 1766528502.8142555,
       "research_readiness": "not-applicable"
@@ -2949,6 +3393,7 @@
       "family": "other",
       "related_record_id": "ams2.stock-usa-gen3-superspeedway",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1766528502.8162568,
       "research_readiness": "not-applicable"
@@ -2961,6 +3406,7 @@
       "family": "other",
       "related_record_id": "ams2.stock-usa-gen3-lm",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1786558749.0433729,
       "research_readiness": "not-applicable"
@@ -2973,6 +3419,7 @@
       "family": "other",
       "related_record_id": "ams2.super-trophy-trucks",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 3,
       "identity_file_modified_at": 1741975953.4456115,
       "research_readiness": "not-applicable"
@@ -2985,8 +3432,12 @@
       "family": "touring-stock",
       "related_record_id": "ams2.super-v8",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786654503.6693127,
+      "telemetry_class": "SuperV8",
+      "live_observed_at": "2026-08-13T20:37:05.0577897Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -2997,8 +3448,12 @@
       "family": "touring-stock",
       "related_record_id": "ams2.toyota-corolla-stock-car-2022",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786654503.6818326,
+      "telemetry_class": "StockCarV8_2022",
+      "live_observed_at": "2026-08-13T20:45:26.0745243Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -3009,6 +3464,7 @@
       "family": "touring-stock",
       "related_record_id": "ams2.toyota-corolla-stock-car-2024",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1719530468.1587644,
       "research_readiness": "not-applicable"
@@ -3021,6 +3477,7 @@
       "family": "other",
       "related_record_id": "ams2.tvr-tuscan-t400r-gt2",
       "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783202013.1293993,
       "research_readiness": "not-applicable"
@@ -3033,6 +3490,7 @@
       "family": "touring-stock",
       "related_record_id": null,
       "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
+      "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1717879371.2242582,
       "research_readiness": "not-applicable"

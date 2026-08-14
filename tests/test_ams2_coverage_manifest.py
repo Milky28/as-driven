@@ -19,8 +19,25 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         )
         names = [entry["telemetry_name"] for entry in manifest["entries"]]
         observed = [entry["car_model"] for entry in audit["observed_identities"]]
-        self.assertEqual(sorted(names), sorted(observed))
+        # The manifest draws on two sources: the stored SimHub car files behind
+        # the audit, and the plugin's live diagnostics log. Stored identities
+        # must never be dropped, and nothing may appear twice.
+        self.assertTrue(set(observed) <= set(names), sorted(set(observed) - set(names)))
         self.assertEqual(len(names), len(set(names)))
+        # Anything the manifest adds beyond the stored inventory has to declare
+        # that it came from live telemetry, so an extra identity can never be an
+        # accident of generation.
+        entries = {entry["telemetry_name"]: entry for entry in manifest["entries"]}
+        for extra in set(names) - set(observed):
+            self.assertEqual(
+                entries[extra]["identity_source"], "live-diagnostics", extra
+            )
+        for entry in manifest["entries"]:
+            self.assertIn(
+                entry["identity_source"],
+                {"stored-car-file", "stored-and-live", "live-diagnostics"},
+                entry["telemetry_name"],
+            )
         # Derived from the index so a dataset release does not fail this test;
         # it still catches a manifest that was not regenerated after promotion.
         index = json.loads(

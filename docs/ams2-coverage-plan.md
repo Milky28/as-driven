@@ -1,8 +1,21 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.31 contains 139 curated records. The refreshed SimHub 9.11.22
-identity inventory contains 225 exact AMS2 identities observed on this PC. The
-generated coverage manifest compares those two sources without fuzzy matching.
+Dataset 0.3.31 contains 139 curated records. The identity inventory contains 231
+exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
+stored car files, and the plugin's live unmatched-identity diagnostics log. The
+generated coverage manifest compares those against curated records without fuzzy
+matching.
+
+Neither source is a roster. An identity absent here may simply never have been
+loaded on this PC, so these counts are a floor on the identity space rather than
+a count of the cars AMS2 ships. A published car list is also not directly
+comparable, because one car can present several telemetry identities: AMS2
+selects the aero configuration from the circuit, and only observation reveals
+which cars have variants.
+
+Each entry records which source it came from. Stored car files are not rewritten
+when Reiza renames a car, so an entry seen only in stored files may carry a name
+the game no longer reports, while `live-diagnostics` entries are current.
 
 The machine-readable queue is checked in at:
 
@@ -12,7 +25,7 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 176 observed identities are covered exactly by curated records.
+- 182 observed identities are covered exactly by curated records.
 - 49 observed identities are not covered.
 - 37 of those need full guided verification, and they are now the only work
   that requires driving.
@@ -206,6 +219,13 @@ python -m as_driven_db audit-simhub-ams2 `
 
 python research/build_ams2_coverage_manifest.py
 ```
+
+The refresh reads the plugin's diagnostics log by default and accepts
+`--live-log` to point elsewhere. The log records the live model, id and class of
+every uncurated car the plugin sees, so loading a car is enough to correct its
+entry; no guided drive is needed. Load the candidates for a batch before relying
+on the names in this queue, because an entry that has only ever come from stored
+car files may carry a name Reiza has since changed.
 
 The SimHub inventory is opportunistic: cars not yet loaded on this PC do not
 appear. Final roster completeness therefore also requires comparison with the
