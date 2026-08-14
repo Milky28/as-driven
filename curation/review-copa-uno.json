@@ -1,0 +1,52 @@
+{
+  "review": "copa-uno",
+  "dataset_version": "0.3.36",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.copa-uno",
+      "bundle": "build/class-sweep-batch-11/copa-uno.staged.json",
+      "manufacturer": "Fiat",
+      "model": "Uno",
+      "variant": "Copa Uno one-make specification",
+      "year": {
+        "label": "Copa Uno one-make series",
+        "from": 1992
+      },
+      "real_world_identity_notes": "Fiat Uno prepared for the Brazilian Copa Uno one-make series, which began in 1992 and grew large enough to need further divisions in the following seasons. AMS2's car carries a 1.6-litre naturally aspirated four of about 131 hp at some 860 kg.",
+      "real_world_source_refs": [
+        "ams2cars.copa-uno"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the shifter was confirmed by a second cockpit inspection after a reviewed source disagreed.",
+      "identity_basis": "A registered reference establishes the car and its output, and the exact simulator identity was observed live.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip, and the driver confirmed the H-pattern lever in a second look after the reviewed reference listed a sequential stick.",
+      "confidence_notes": "Guided testing directly established the five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip. Confidence is medium because the only reviewed source disagrees on the shifter and no championship or manufacturer publication was found.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The reviewed reference lists a sequential stick and the cockpit shows an H-pattern lever. The observation is preferred and was deliberately re-checked: the same driver identified a sequential stick on the Chevrolet Montana in the same session, so the two were being told apart rather than defaulted, and the absence of automatic cut and blip fits a road-derived H-pattern gearbox rather than a racing sequential. The same reference also overstates the ARC Camaro gear count.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. Construction is inferred from a one-make series using the production Uno gearbox rather than stated by a source.",
+        "Recorded independently of Uno Classic B, the Copa Classic B division car. They are separate selectable identities and neither inherits from the other."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

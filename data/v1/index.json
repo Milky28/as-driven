@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.35",
+  "dataset_version": "0.3.36",
   "released_at": "2026-08-14",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -47,6 +47,7 @@
     "cars/ams2.chevrolet-omega-stock-car-1999.json",
     "cars/ams2.copa-fusca.json",
     "cars/ams2.copa-montana.json",
+    "cars/ams2.copa-uno.json",
     "cars/ams2.courage-c60-hybrid.json",
     "cars/ams2.dallara-sp1.json",
     "cars/ams2.dodge-viper-acr.json",

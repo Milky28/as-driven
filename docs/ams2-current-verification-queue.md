@@ -1,5 +1,20 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.36 (Copa Uno)
+
+Held back from batch 11 because the drive read an H-pattern while the reviewed
+reference lists a sequential stick. The driver re-checked the cockpit and
+confirmed the H-pattern, so the observation is recorded and the disagreement is
+written into the record.
+
+The observation was preferred on three grounds rather than one: the same driver
+identified a sequential stick on the Chevrolet Montana in the same session, so
+the two were being told apart; the absence of automatic cut and blip fits a
+road-derived H-pattern rather than a racing sequential; and the same reference
+overstates the ARC Camaro gear count. That reference is still registered,
+because it supplies the engine, output and weight, with its shifter field noted
+as contradicted.
+
 ## Completed in dataset 0.3.35 (Copa Classic FL)
 
 Fusca Classic FL and Passat Classic FL, both four- and five-speed H-pattern cars

@@ -556,6 +556,18 @@
       "notes": "Guided-verification observation ams2.copa-fusca.20260814t042724969z-bc50b201 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-copa-montana-controls.1.6.9.91",
+      "title": "Live AMS2 Copa Montana guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.copa-montana.20260814t192441105z-397e56ce by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-courage-c60-hybrid-controls.1.6.9.91",
       "title": "Live AMS2 Courage C60 Hybrid control test",
       "publisher": "Local AMS2 observation",
@@ -880,6 +892,18 @@
       "notes": "Guided-verification observation ams2.formula-vintage-gen1-model2.20260814t053941056z-79d9ad54 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-fusca-classic-fl-controls.1.6.9.91",
+      "title": "Live AMS2 Fusca Classic FL guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.fusca-classic-fl.20260814t183505180z-9b944390 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91",
       "title": "Live AMS2 Gillet Vertigo Streiff control test",
       "publisher": "Local AMS2 observation",
@@ -974,6 +998,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.gol-classic-fl.20260814t043755126z-c81103b6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-iveco-stralis-controls.1.6.9.91",
+      "title": "Live AMS2 Iveco Stralis guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.iveco-stralis.20260814t193645192z-54adb5fc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91",
@@ -1180,6 +1216,18 @@
       "notes": "Guided-verification observation ams2.lotus-renault-98t-high-downforce.20260814t154354295z-af25e11d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-man-tgx-controls.1.6.9.91",
+      "title": "Live AMS2 MAN TGX guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.man-tgx.20260814t194142749z-6073fa87 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-maserati-gransport-trofeo-controls.1.6.9.91",
       "title": "Guided live AMS2 Maserati GranSport Trofeo control test",
       "publisher": "Local AMS2 observation",
@@ -1310,6 +1358,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, five H-pattern gears on a dogleg gate, no automatic cut or blip, round rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-mercedes-benz-actros-controls.1.6.9.91",
+      "title": "Live AMS2 Mercedes-Benz Actros guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mercedes-benz-actros.20260814t194520339z-752f10a3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-metalmoro-ajr-chevrolet-controls.1.6.9.91",
@@ -1454,6 +1514,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.passat-classic-b.20260814t181405124z-baf8e361 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-passat-classic-fl-controls.1.6.9.91",
+      "title": "Live AMS2 Passat Classic FL guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.passat-classic-fl.20260814t190917549z-4ac36379 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91",
@@ -1792,6 +1864,30 @@
       "notes": "Direct user test in AMS2 executable version 1.6.9.91: the car accepted sequential-stick shifts without clutch once moving, required clutch to move from a stop, and appeared to perform an automatic throttle cut on upshift and automatic throttle blip on downshift. Cut and blip remain medium-confidence perceptual observations rather than channel-level telemetry measurements."
     },
     {
+      "source_id": "ams2.local-live-volkswagen-constellation-controls.1.6.9.91",
+      "title": "Live AMS2 Volkswagen Constellation guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.volkswagen-constellation.20260814t195049095z-dedbdeac by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-vulkan-truck-controls.1.6.9.91",
+      "title": "Live AMS2 Vulkan Truck guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.vulkan-truck.20260814t195408740z-abe0c4aa by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.reiza-dev-update.2025-12.formula-rebrand",
       "title": "Automobilista 2 December 2025 Development Update",
       "publisher": "Reiza Studios",
@@ -1979,6 +2075,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Community AMS2 reference for the Copa Montana entry. Gives a 5.7-litre carburetted V8 of 369 hp, 1,360 kg, and a sequential stick gearbox with five gears. Dates the series 2010 to 2012."
+    },
+    {
+      "source_id": "ams2cars.copa-uno",
+      "title": "Fiat Uno (Copa Uno)",
+      "publisher": "Cars of AMS2",
+      "url": "https://ams2cars.info/brazilian-series/brazilian-historics/copa-uno/",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Community AMS2 reference for the Copa Uno entry. Gives a 1.6-litre Type R naturally aspirated four of 131 hp at 860 kg with five gears. It describes the shifter as a sequential stick, which the cockpit observation contradicts; the same reference also overstates the ARC Camaro gear count, so its shifter field is not treated as authoritative."
     },
     {
       "source_id": "ams2wiki.mercedes-benz-actros",
@@ -3591,8 +3699,8 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-iveco-stralis-controls.1.6.9.91",
-      "title": "Live AMS2 Iveco Stralis guided-verification drive",
+      "source_id": "ams2.local-live-copa-uno-controls.1.6.9.91",
+      "title": "Live AMS2 Copa Uno guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -3600,91 +3708,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.iveco-stralis.20260814t193645192z-54adb5fc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-man-tgx-controls.1.6.9.91",
-      "title": "Live AMS2 MAN TGX guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.man-tgx.20260814t194142749z-6073fa87 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mercedes-benz-actros-controls.1.6.9.91",
-      "title": "Live AMS2 Mercedes-Benz Actros guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mercedes-benz-actros.20260814t194520339z-752f10a3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-volkswagen-constellation-controls.1.6.9.91",
-      "title": "Live AMS2 Volkswagen Constellation guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.volkswagen-constellation.20260814t195049095z-dedbdeac by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-vulkan-truck-controls.1.6.9.91",
-      "title": "Live AMS2 Vulkan Truck guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.vulkan-truck.20260814t195408740z-abe0c4aa by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-copa-montana-controls.1.6.9.91",
-      "title": "Live AMS2 Copa Montana guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.copa-montana.20260814t192441105z-397e56ce by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-fusca-classic-fl-controls.1.6.9.91",
-      "title": "Live AMS2 Fusca Classic FL guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.fusca-classic-fl.20260814t183505180z-9b944390 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-passat-classic-fl-controls.1.6.9.91",
-      "title": "Live AMS2 Passat Classic FL guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.passat-classic-fl.20260814t190917549z-4ac36379 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.copa-uno.20260814t192029139z-97984302 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

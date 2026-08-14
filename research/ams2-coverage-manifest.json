@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.35",
+  "dataset_version": "0.3.36",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 66,
+    "live_identities_seen": 68,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -17,6 +17,8 @@
       "Copa Uno",
       "Formula Classic Gen1 Model1 - High Downforce",
       "Formula Classic Gen1 Model2 - High Downforce",
+      "Formula HiTech Gen1 Model1 - High Downforce",
+      "Formula HiTech Gen1 Model2 - High Downforce",
       "Fusca Classic FL",
       "Iveco Stralis",
       "Lotus Renault 98T",
@@ -43,25 +45,25 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 246,
-    "curated_records": 153,
-    "covered_exact_identities": 196,
-    "uncovered_identities": 50,
-    "full_guided_verifications": 38,
+    "observed_identities": 248,
+    "curated_records": 154,
+    "covered_exact_identities": 197,
+    "uncovered_identities": 51,
+    "full_guided_verifications": 39,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 196,
-      "full-guided-verification": 38,
+      "covered-exact": 197,
+      "full-guided-verification": 39,
       "out-of-scope": 1,
       "retired-identity": 4,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "open-wheel": 31,
-      "other": 7
+      "open-wheel": 33,
+      "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 23,
+      "independent-control-research-needed": 24,
       "legacy-controls-candidate-available": 15
     }
   },
@@ -959,15 +961,15 @@
       "telemetry_name": "Copa Uno",
       "car_id": "Copa Uno",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "other",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.copa-uno",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "CopaUno",
       "live_observed_at": "2026-08-14T19:20:21.3653236Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Courage C60 Hybrid",
@@ -1329,6 +1331,20 @@
       "research_readiness": "independent-control-research-needed"
     },
     {
+      "telemetry_name": "Formula HiTech Gen1 Model1 - High Downforce",
+      "car_id": "Formula HiTech Gen1 Model1 - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "open-wheel",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Hitech_Gen1_HD",
+      "live_observed_at": "2026-08-14T22:23:11.0369787Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
       "telemetry_name": "Formula HiTech Gen1 Model2",
       "car_id": "Formula HiTech Gen1 Model2",
       "identity_file": "Formula HiTech Gen1 Model2.shcarsettings",
@@ -1339,6 +1355,20 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1712619576.9881928,
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
+      "telemetry_name": "Formula HiTech Gen1 Model2 - High Downforce",
+      "car_id": "Formula HiTech Gen1 Model2 - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "open-wheel",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Hitech_Gen1_HD",
+      "live_observed_at": "2026-08-14T22:28:08.5684704Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "independent-control-research-needed"
     },
     {
