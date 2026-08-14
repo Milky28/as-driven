@@ -22,7 +22,10 @@ the research backlog, or a curation approval.
 1. Capture exact telemetry name, class, game version, client version, and time.
 2. Record relevant assist state. A result is not comparable when automatic
    clutch or shifting state is unknown.
-3. Ask whether the car moves from rest without physical clutch input.
+3. Ask whether the car pulls away from rest with the clutch released. The
+   clutch may be used to engage first; the question is only whether moving
+   off needs it. Demanding the gear without the clutch made testers grind a
+   manual gearbox to destruction, which also ended the rest of the drive.
 4. Count accepted forward gears.
 5. Test clutchless upshift and downshift acceptance.
 6. Capture or confirm automatic cut and blip, including the observation method.
@@ -155,12 +158,12 @@ ambiguous cut detection remains `unknown`. Cockpit hardware and primary
 actuation remain human-reviewed because game input bindings accept both stick
 and paddles for a sequential gearbox.
 
-SimHub's clutch telemetry represents the vehicle clutch state and may include
-internal or automatic clutch operation even when the tester never touches the
-physical pedal. The guided drive therefore does not reject a maneuver merely
-because that value changes. The prompt supplies the no-pedal test condition,
-the live overlay labels the value `Vehicle clutch`, and any observed actuation
-is retained in the draft evidence notes for review.
+SimHub's clutch channel cannot be separated into pedal movement and any clutch
+the car works itself, so the guided drive never rejects a maneuver merely
+because that value changes. It raises a note only where the ambiguity could
+change an answer: a test accepted as needing no clutch while clutch input was
+present, which may be measuring the driver rather than the car. A rejected
+attempt is unremarkable, because needing the clutch is what it found.
 
 Move-off is accepted only after movement continues for at least 600 ms while
 the engine remains running. A car that rolls slightly when first gear engages

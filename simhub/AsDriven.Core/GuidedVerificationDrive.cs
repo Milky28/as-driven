@@ -347,14 +347,15 @@ namespace AsDriven.Core
                     else if (_armed && sample.SpeedKmh < 1.0)
                     {
                         _moveOffMovementStartedUtc = null;
-                        // A car that needs its clutch never engages first, or
-                        // engages and refuses to pull, so nothing ever happens
-                        // for the test to detect. Waiting for movement that
-                        // cannot come is what forced the driver to press Next
-                        // to record an answer the drive already had. Sustained
-                        // throttle against a stationary car is the attempt, and
-                        // it settles the test on its own.
-                        if (engineRunning && sample.Throttle >= 15.0)
+                        // A car needing its clutch normally stalls the moment
+                        // it is released in gear, which the stall branch above
+                        // catches. This is the backstop for one that neither
+                        // stalls nor pulls, so the test still settles instead
+                        // of waiting for movement that cannot come.
+                        // The prompt asks for light throttle, which is often
+                        // well under fifteen percent, so the attempt has to
+                        // count from a genuinely light application.
+                        if (engineRunning && sample.Throttle >= 8.0)
                         {
                             if (!_moveOffRefusalStartedUtc.HasValue)
                             {
@@ -768,10 +769,13 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.Intro: return "Prepare, perform the maneuver, then wait for CAPTURED.";
-                // Refusing to move is a result, not a failed attempt: it is how
-                // a car that needs its clutch answers this test. Say so, or the
-                // prompt reads as an instruction the driver cannot carry out.
-                case Phase.MoveOff: return "Stopped, engine on. Select 1st, then light throttle.";
+                // The clutch may be used to engage first. The question is only
+                // whether the car can pull away once it is released, and asking
+                // for the gear without the clutch made the driver grind a
+                // manual gearbox to destruction, which also ended the drive.
+                // Stalling is how such a car answers, so the prompt says so
+                // rather than reading as an instruction that failed.
+                case Phase.MoveOff: return "Stopped in 1st, engine on. Clutch fully released.";
                 case Phase.GearCount: return "Cycle through every forward gear.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
@@ -787,7 +791,7 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Never touch the clutch. Not moving is a valid result.";
+                case Phase.MoveOff: return "Apply throttle. Stalling is a valid result.";
                 case Phase.GearCount: return "Direct H-pattern selection is reviewed in the form.";
                 case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
                 case Phase.LiftedUpshift: return "Then request one upshift.";
