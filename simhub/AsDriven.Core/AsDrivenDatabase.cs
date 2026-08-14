@@ -226,6 +226,14 @@ namespace AsDriven.Core
                         effectiveTransmission, "standing_start_clutch", recordPath),
                     AutoBlip = RequiredString(behavior, "auto_blip", recordPath),
                     ShiftCut = RequiredString(behavior, "shift_cut", recordPath),
+                    ManualBlip = RequiredString(
+                        RequiredObject(effectiveTransmission, "downshift", recordPath),
+                        "manual_blip",
+                        recordPath),
+                    ThrottleLift = RequiredString(
+                        RequiredObject(effectiveTransmission, "upshift", recordPath),
+                        "throttle_lift",
+                        recordPath),
                     WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
                     WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
                     HasSteeringDOR = effectiveSteering["degrees_of_rotation"] != null,
@@ -613,6 +621,8 @@ namespace AsDriven.Core
             public string StandingStartClutch;
             public string AutoBlip;
             public string ShiftCut;
+            public string ManualBlip;
+            public string ThrottleLift;
             public string WheelRimShape;
             public string WheelRimSourceLabel;
             public bool HasSteeringDOR;
@@ -642,6 +652,8 @@ namespace AsDriven.Core
                     StandingStartClutch,
                     AutoBlip,
                     ShiftCut,
+                    ManualBlip,
+                    ThrottleLift,
                     WheelRimShape,
                     WheelRimSourceLabel,
                     HasSteeringDOR,

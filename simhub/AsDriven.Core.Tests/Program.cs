@@ -686,6 +686,17 @@ namespace AsDriven.Core.Tests
                 // legitimate, so the driver reports which one the cockpit shows.
                 True(ShiftPatternRules.DerivedGate("h-pattern") == null, "never guesses the gate of an H-pattern car");
                 True(ShiftPatternRules.DerivedGate("unknown") == null, "derives no gate from an unknown mechanism");
+                // A car with no automatic blip may still have an unknown manual
+                // blip. The two must stay separate, or the overlay turns an
+                // unknown into an instruction to blip.
+                GuidanceSnapshot retro = database.Preview("ams2", "ams2.formula-retro-v12");
+                Equal("no", retro.AutoBlip, "Formula Retro V12 has no automatic blip in the simulator");
+                Equal("unknown", retro.ManualBlip, "but its manual downshift blip is not established");
+                GuidanceSnapshot brabham = database.Preview("ams2", "ams2.brabham-bt26a");
+                Equal("no", brabham.AutoBlip, "Brabham BT26A also has no automatic blip");
+                Equal("required", brabham.ManualBlip, "and its dog box does require a driver blip");
+                Equal("required", brabham.ThrottleLift, "the driver lifts to upshift the Brabham");
+
                 True(ShiftPatternRules.IsDerivedGate("sequential"), "treats a sequential gate as mechanism-implied");
                 False(ShiftPatternRules.IsDerivedGate("dogleg-h"), "never discards an observed dogleg gate as mechanism-implied");
                 False(ShiftPatternRules.IsDerivedGate("standard-h"), "never discards an observed standard gate as mechanism-implied");

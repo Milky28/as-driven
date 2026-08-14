@@ -32,6 +32,13 @@ namespace AsDriven.Core
         public string StandingStartClutch { get; private set; }
         public string AutoBlip { get; private set; }
         public string ShiftCut { get; private set; }
+
+        // What the driver must do, from authentic_controls after any simulator
+        // override. AutoBlip and ShiftCut above describe what the simulator
+        // does instead, and the two are not interchangeable: a car with no
+        // automatic blip may still have an unknown manual blip.
+        public string ManualBlip { get; private set; }
+        public string ThrottleLift { get; private set; }
         public string WheelRimShape { get; private set; }
         public string WheelRimSourceLabel { get; private set; }
         public bool HasSteeringDOR { get; private set; }
@@ -61,6 +68,8 @@ namespace AsDriven.Core
             string standingStartClutch,
             string autoBlip,
             string shiftCut,
+            string manualBlip,
+            string throttleLift,
             string wheelRimShape,
             string wheelRimSourceLabel,
             bool hasSteeringDOR,
@@ -101,6 +110,8 @@ namespace AsDriven.Core
                 StandingStartClutch = standingStartClutch,
                 AutoBlip = autoBlip,
                 ShiftCut = shiftCut,
+                ManualBlip = manualBlip,
+                ThrottleLift = throttleLift,
                 WheelRimShape = wheelRimShape,
                 WheelRimSourceLabel = wheelRimSourceLabel,
                 HasSteeringDOR = hasSteeringDOR,
@@ -147,6 +158,8 @@ namespace AsDriven.Core
                 StandingStartClutch = string.Empty,
                 AutoBlip = string.Empty,
                 ShiftCut = string.Empty,
+                ManualBlip = string.Empty,
+                ThrottleLift = string.Empty,
                 WheelRimShape = string.Empty,
                 WheelRimSourceLabel = string.Empty,
                 HasSteeringDOR = false,

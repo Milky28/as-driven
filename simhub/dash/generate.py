@@ -453,18 +453,35 @@ def _shift_value_expression() -> str:
 
 
 def _automation_value_expression(property_name: str, action: str) -> str:
-    prop = "[AsDriven." + property_name + "]"
+    """Downshift tile.
+
+    The simulator blipping for the driver settles the tile on its own. Where it
+    does not, the tile states what the driver must do, which is a separate
+    curated value: a car with no automatic blip may still have an unknown manual
+    blip, and saying 'Manual blip' there would turn an unknown into an
+    instruction.
+    """
+    auto = "[AsDriven." + property_name + "]"
+    manual = "[AsDriven.ManualBlip]"
     return (
-        f"if({prop} == 'yes', 'Automatic throttle {action}', "
-        f"if({prop} == 'no', 'Manual {action}', 'Unknown'))"
+        f"if({auto} == 'yes', 'Automatic throttle {action}', "
+        f"if({manual} == 'required', 'Manual {action}', "
+        f"if({manual} == 'optional', 'Blip optional', "
+        f"if({manual} == 'not-required', 'No blip needed', "
+        f"if({manual} == 'not-applicable', 'Not applicable', 'Not verified')))))"
     )
 
 
 def _upshift_value_expression() -> str:
-    prop = "[AsDriven.ShiftCut]"
+    """Upshift tile, on the same rule as the downshift tile above."""
+    cut = "[AsDriven.ShiftCut]"
+    lift = "[AsDriven.ThrottleLift]"
     return (
-        f"if({prop} == 'yes', 'Automatic throttle cut', "
-        f"if({prop} == 'no', 'Lift throttle', 'Unknown'))"
+        f"if({cut} == 'yes', 'Automatic throttle cut', "
+        f"if({lift} == 'required', 'Lift throttle', "
+        f"if({lift} == 'partial', 'Partial lift', "
+        f"if({lift} == 'not-required', 'No lift needed', "
+        f"if({lift} == 'not-applicable', 'Not applicable', 'Not verified')))))"
     )
 
 

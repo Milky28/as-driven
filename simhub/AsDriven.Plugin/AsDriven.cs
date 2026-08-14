@@ -1294,6 +1294,8 @@ namespace AsDriven.Plugin
             this.AttachDelegate("StandingStartClutch", delegate { return _current.StandingStartClutch; });
             this.AttachDelegate("AutoBlip", delegate { return _current.AutoBlip; });
             this.AttachDelegate("ShiftCut", delegate { return _current.ShiftCut; });
+            this.AttachDelegate("ManualBlip", delegate { return _current.ManualBlip; });
+            this.AttachDelegate("ThrottleLift", delegate { return _current.ThrottleLift; });
             this.AttachDelegate("WheelRimShape", delegate { return _current.WheelRimShape; });
             this.AttachDelegate("WheelRimSourceLabel", delegate { return _current.WheelRimSourceLabel; });
             this.AttachDelegate("HasSteeringDOR", delegate { return _current.HasSteeringDOR; });
