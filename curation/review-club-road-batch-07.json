@@ -1,0 +1,443 @@
+{
+  "review": "club-road-batch-07",
+  "dataset_version": "0.3.29",
+  "approved_at": "2026-08-13",
+  "records": [
+    {
+      "record_id": "ams2.caterham-academy",
+      "bundle": "build/club-road-batch-07/caterham-academy.staged.json",
+      "manufacturer": "Caterham",
+      "model": "Seven Academy",
+      "year": {
+        "from": 2014,
+        "label": "Academy championship specification"
+      },
+      "real_world_identity_notes": "Entry-level one-make Caterham Seven built to a sealed Academy specification around a Ford Sigma 1.6 and a five-speed gearbox. Caterham list the Academy car as road legal, which is central to the formula: competitors drive to and from circuits.",
+      "real_world_source_refs": [
+        "wikipedia.caterham-academy",
+        "caterham.academy-championship",
+        "westermann.caterham-5-speed-gearbox-variants"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the Academy specification and the exact simulator identity was observed live.",
+      "specification_basis": "The sources establish a sealed Ford Sigma engine with a five-speed gearbox and the live drive selected five H-pattern gears. Construction is inferred from road-legality: Caterham's own motorsport partner offers the Type 9 in both synchronised and unsynchronised dog-engagement variants, and describes the dog box as suited only to purists for road use.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Confidence is medium because no reviewed source states the construction of the sealed Academy gearbox directly. The claim is falsifiable: a source showing the Academy specification uses the dog-engagement Type 9 would change the gearbox type and make the downshift blip required."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Academy specification"
+    },
+    {
+      "record_id": "ams2.caterham-supersport",
+      "bundle": "build/club-road-batch-07/caterham-supersport.staged.json",
+      "manufacturer": "Caterham",
+      "model": "Seven Supersport",
+      "year": {
+        "from": 2012,
+        "label": "Supersport specification"
+      },
+      "real_world_identity_notes": "Caterham Seven Supersport, a road-going Seven with a Ford Sigma 1.6 and a five-speed gearbox with sprint ratios, also raced in the one-make Supersport championship.",
+      "real_world_source_refs": [
+        "wikipedia.caterham-7",
+        "westermann.caterham-5-speed-gearbox-variants"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the Supersport variant and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia lists the Supersport with a Caterham-Ford Sigma engine and Seven transmissions as five-speed manual, six-speed manual and six-speed sequential manual; the live drive selected five H-pattern gears, which is the non-sequential five-speed. Construction is inferred from the road-going five-speed manual rather than stated by a source.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Confidence is medium because the construction of the five-speed is inferred rather than stated. A source showing a dog-engagement box in this specification would make the downshift blip required."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Supersport specification"
+    },
+    {
+      "record_id": "ams2.chevrolet-chevette",
+      "bundle": "build/club-road-batch-07/chevrolet-chevette.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Chevette",
+      "year": {
+        "from": 1983,
+        "label": "Brazilian Chevette, five-speed 1.6"
+      },
+      "real_world_identity_notes": "Brazilian Chevette built by General Motors do Brasil from 1973 to 1993. A five-speed manual became available as an option on the 1.6 from 1983; AMS2 classes this car under Copa Classic B.",
+      "real_world_source_refs": [
+        "wikipedia.chevrolet-chevette"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Brazilian Chevette and its gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states 4/5-speed manual gearboxes with a five-speed available as an option on the 1.6 from 1983, and the live drive selected five H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.copa-fusca",
+      "bundle": "build/club-road-batch-07/copa-fusca.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Fusca",
+      "year": {
+        "from": 1970,
+        "label": "Copa Fusca, Brazilian Beetle one-make racing"
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Beetle, known locally as the Fusca, raced as a one-make category. It keeps the air-cooled Beetle's rear transaxle with four forward gears.",
+      "real_world_source_refs": [
+        "ratwell.vw-transaxle"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Beetle transaxle and the exact simulator identity was observed live.",
+      "specification_basis": "The source describes the transaxle gears as constant-mesh with balk ring synchronisers and places synchronisers on all four forward gears; the live drive selected four H-pattern gears.",
+      "confidence_notes": "Guided testing directly established the 4 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.ginetta-g40-cup",
+      "bundle": "build/club-road-batch-07/ginetta-g40-cup.staged.json",
+      "manufacturer": "Ginetta",
+      "model": "G40 Cup",
+      "year": {
+        "from": 2011,
+        "label": "G40 Cup one-make specification"
+      },
+      "real_world_identity_notes": "One-make racing Ginetta G40 built to Cup specification with a 1.8 Ford Zetec and a five-speed synchromesh gearbox. It is the road-legal-derived member of the G40 family and is a different car from the GT5 Challenge car curated as Ginetta G40.",
+      "real_world_source_refs": [
+        "motorsport-magazine.ginetta-g40-buying-guide",
+        "wikipedia.ginetta-g40"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the Cup specification and the exact simulator identity was observed live.",
+      "specification_basis": "Motor Sport Magazine describes the car with adjustable suspension, a five-speed synchromesh gearbox and a 1.8 Ford Zetec engine, and the live drive selected five H-pattern gears.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "The Cup car's controls are recorded independently of the GT5 Challenge car curated as Ginetta G40. They share a nameplate but not a gearbox: this one is a five-speed synchromesh H-pattern, the other a six-speed Quaife sequential."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Cup specification"
+    },
+    {
+      "record_id": "ams2.ginetta-g40",
+      "bundle": "build/club-road-batch-07/ginetta-g40.staged.json",
+      "manufacturer": "Ginetta",
+      "model": "G40 Challenge",
+      "year": {
+        "from": 2017,
+        "label": "GT5 Challenge specification"
+      },
+      "real_world_identity_notes": "Racing Ginetta G40 in GT5 Challenge specification, which Wikipedia records as moving to six-speed Quaife sequential gearboxes. AMS2 classes it under GT5 alongside the Puma P052, and it is a different car from the five-speed H-pattern G40 Cup.",
+      "real_world_source_refs": [
+        "wikipedia.ginetta-g40"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the GT5 Challenge specification and the exact simulator identity was observed live.",
+      "specification_basis": "The source states the race G40 moved to six-speed Quaife sequential gearboxes, and the live drive selected six gears through a sequential stick.",
+      "confidence_notes": "Guided testing directly established six gears through a sequential stick, the standing-start clutch, and automatic blip without automatic cut. The downshift blip of the real gearbox is left unknown rather than inferred from the simulator's assistance.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The drive found automatic blip without automatic cut. Every other curated sequential-stick car has automatic cut, so this pairing has no precedent in the dataset and the observation is recorded as seen rather than normalised.",
+        "The downshift blip stays unknown. AMS2 blips for the driver, but no reviewed source establishes whether the real Quaife sequential does, and a dog-engagement sequential would normally need a driver blip. Recording not-required would claim the real car blips for itself, which the evidence does not support."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "GT5 Challenge specification"
+    },
+    {
+      "record_id": "ams2.gol-classic-b",
+      "bundle": "build/club-road-batch-07/gol-classic-b.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Gol GT",
+      "year": {
+        "from": 1984,
+        "label": "Gol GT 1.8, five-speed"
+      },
+      "real_world_identity_notes": "First-generation Volkswagen Gol built by Volkswagen do Brasil from 1980. The Gol GT 1.8 of 1984 to 1986 began with a four-speed and changed to a five-speed unit, which matches this car's five gears. AMS2 classes it under Copa Classic B.",
+      "real_world_source_refs": [
+        "wikipedia.volkswagen-gol"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Gol GT and its change to a five-speed, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states the Gol GT 1.8's first series had a four-speed manual gearbox but soon changed to a five-speed unit, and the live drive selected five H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Recorded independently of Gol Classic FL, which is the earlier four-speed car; the two are separate selectable identities and are not inherited from one another."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.gol-classic-fl",
+      "bundle": "build/club-road-batch-07/gol-classic-fl.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Gol",
+      "year": {
+        "from": 1980,
+        "label": "Early air-cooled Gol, four-speed"
+      },
+      "real_world_identity_notes": "First-generation Volkswagen Gol in its early air-cooled form, launched in 1980 with a 1.3 boxer and a four-speed manual, joined by a 1.6 boxer in 1981. AMS2 classes it under Copa Classic FL.",
+      "real_world_source_refs": [
+        "wikipedia.volkswagen-gol"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the early air-cooled Gol and its four-speed gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states the first Gol had an air-cooled boxer engine and a four-speed manual gearbox, and the live drive selected four H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 4 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Recorded independently of Gol Classic B, which is the later five-speed GT car."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.puma-gtb",
+      "bundle": "build/club-road-batch-07/puma-gtb.staged.json",
+      "manufacturer": "Puma",
+      "model": "GTB",
+      "year": {
+        "from": 1973,
+        "label": "Puma GTB, 1973 to 1984"
+      },
+      "real_world_identity_notes": "Brazilian road car built by Puma from 1973 to 1984 on a 4.1-litre Chevrolet 250 inline-six with a four-speed manual, and a luxurious touring interior rather than a racing one. AMS2 classes it under Copa Classic FL.",
+      "real_world_source_refs": [
+        "wikipedia.puma-gtb"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Puma GTB and its four-speed manual, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states a 4-speed manual, rear-wheel drive with a Chevrolet 250 inline-six, and the live drive selected four H-pattern gears. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the 4 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "This is a road car, like the Puma GTE curated earlier despite its racing-sounding name. Its D-shaped rim was the only non-round wheel observed in this batch."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.puma-p052",
+      "bundle": "build/club-road-batch-07/puma-p052.staged.json",
+      "manufacturer": "Puma",
+      "model": "P052",
+      "year": {
+        "from": 2017,
+        "label": "Revived Puma P052"
+      },
+      "real_world_identity_notes": "First product of the revived Puma marque after Puma production ended in 1999: a mid-engined rear-wheel-drive sports car on a steel tubular chassis with a fibreglass body, a transverse rear 1,598 cc 16-valve four of 120 CV and a five-speed manual. AMS2 classes it under GT5 alongside the Ginetta G40.",
+      "real_world_source_refs": [
+        "drivingyourdream.puma-p052"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the revived P052 and its five-speed manual, and the exact simulator identity was observed live.",
+      "specification_basis": "The source states a 5-speed manual, rear-wheel drive with a 1,598 cc 16-valve four, and the live drive selected five H-pattern gears. Construction is inferred from an ordinary road-derived manual; no reviewed source states it.",
+      "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "Confidence is medium because the single reviewed source is a specification listing rather than a manufacturer or technical publication."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

@@ -1,5 +1,38 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.29 (club and road batch 07)
+
+Ten cars, which finish every category except open-wheel.
+
+Eight are ordinary synchromesh H-pattern cars with no automation of any kind:
+Caterham Academy and Supersport, Chevrolet Chevette, Copa Fusca, Ginetta G40 Cup,
+Gol Classic B and FL, Puma GTB and Puma P052. Each needs the clutch to pull away
+and a throttle lift to upshift, and each takes an optional downshift blip.
+
+The two GT5 cars were found under a class of their own, and one of them is the
+batch's real finding. **Ginetta G40 is not the G40 Cup.** The Cup car is a
+five-speed synchromesh H-pattern; the GT5 Challenge car is a six-speed Quaife
+sequential, and the drive found automatic blip without automatic cut, a pairing
+no other curated sequential-stick car has. Its downshift blip stays `unknown`:
+AMS2 blips for the driver, but nothing establishes that the real Quaife box does,
+and a dog-engagement sequential would normally need one. Sharing a nameplate was
+never grounds to share controls, and here it would have been badly wrong.
+
+This batch also settled what `manual_blip` asserts. It now means mechanical
+necessity, so `required` is reserved for gearboxes that cannot engage without a
+blip and synchromesh cars are `optional`. Audi V8 quattro DTM, Dodge Viper ACR
+and Lamborghini Miura SV were corrected to match; they had been recorded under
+two contradictory readings of the same field. The Miura's basis was rewritten
+too, because it asserted synchromesh from evidence that mentioned only a
+five-speed H-pattern manual, and the blip now depends on that construction.
+
+Both Caterhams are `medium` confidence for the same reason: Caterham's own
+motorsport partner offers the Type 9 five-speed in synchronised and
+dog-engagement forms, so their construction is inferred from the cars being road
+legal rather than stated by a source, and each record says so.
+
+The Caterham Academy drove as a five-speed against a SimHub hint of four.
+
 ## Completed in dataset 0.3.28 (touring and stock batch 06)
 
 Six cars, and the first records whose gate pattern comes from a guided drive

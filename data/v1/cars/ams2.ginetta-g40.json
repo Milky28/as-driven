@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.ginetta-g40",
+  "identity": {
+    "display_name": "Ginetta G40",
+    "manufacturer": "Ginetta",
+    "model": "G40 Challenge",
+    "year": {
+      "from": 2017,
+      "label": "GT5 Challenge specification"
+    },
+    "class": "GT5",
+    "real_world_identity_notes": "Racing Ginetta G40 in GT5 Challenge specification, which Wikipedia records as moving to six-speed Quaife sequential gearboxes. AMS2 classes it under GT5 alongside the Puma P052, and it is a different car from the five-speed H-pattern G40 Cup.",
+    "variant": "GT5 Challenge specification"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+      "The drive found automatic blip without automatic cut. Every other curated sequential-stick car has automatic cut, so this pairing has no precedent in the dataset and the observation is recorded as seen rather than normalised.",
+      "The downshift blip stays unknown. AMS2 blips for the driver, but no reviewed source establishes whether the real Quaife sequential does, and a dog-engagement sequential would normally need a driver blip. Recording not-required would claim the real car blips for itself, which the evidence does not support."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ginetta G40"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT5"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g40.20260814t045231829z-63a60fdf by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "wikipedia.ginetta-g40",
+        "ams2.local-live-ginetta-g40-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.ginetta-g40",
+          "ams2.local-live-ginetta-g40-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the GT5 Challenge specification and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.ginetta-g40",
+          "ams2.local-live-ginetta-g40-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source states the race G40 moved to six-speed Quaife sequential gearboxes, and the live drive selected six gears through a sequential stick."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-ginetta-g40-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

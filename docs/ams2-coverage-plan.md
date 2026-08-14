@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.28 contains 118 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.29 contains 128 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,14 +12,14 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 156 observed identities are covered exactly by curated records.
-- 69 observed identities are not covered.
-- 58 of those need full guided verification, and they are now the only work
+- 166 observed identities are covered exactly by curated records.
+- 59 observed identities are not covered.
+- 48 of those need full guided verification, and they are now the only work
   that requires driving.
-- 23 of those 58 have an exact legacy spreadsheet candidate that can seed
+- 19 of those 48 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 35 require independent control research in addition to current-game testing.
+- 29 require independent control research in addition to current-game testing.
 - 1 Low Downforce identities wait on unverified base cars; none is
   inheritance-ready.
 - 10 identities are closed by explicit review rather than driving: retired
@@ -101,25 +101,29 @@ three of its six cars carry seven gears from a road-car dual clutch.
 
 ### 4. Verify touring, stock, club, and road cars
 
-In progress. Batch 06 in dataset 0.3.28 completed the touring and stock cars, and
+Complete. Batch 06 in dataset 0.3.28 completed the touring and stock cars and
 produced the first records whose gate pattern was read from a guided drive rather
-than a specification.
+than a specification. Batch 07 in 0.3.29 completed the club and road cars.
 
-**The current next batch is the ten remaining club and road cars:** Caterham
-Academy, Caterham Supersport, Chevrolet Chevette, Copa Fusca, Ginetta G40,
-Ginetta G40 Cup, Gol Classic B, Gol Classic FL, Puma GTB, and Puma P052.
+Batch 07 also settled what `manual_blip` asserts. It now states mechanical
+necessity: `required` is reserved for a gearbox that cannot engage the gear
+without a blip, and a synchronised gearbox is `optional`, because the blip is
+authentic technique and eases the synchros but is not needed. Three earlier
+synchromesh records were corrected to match, since they had been recorded under
+two different readings of the same field.
 
-These are the last cars likely to need H-pattern hardware and manual rev
-matching, so their guidance most directly changes a user's pre-session hardware.
-Four carry a legacy spreadsheet candidate to seed research; the other six need
-independent control research.
+That makes `gearbox_type` load-bearing rather than descriptive, and it is not
+always sourceable: Caterham's own motorsport partner offers the Type 9 five-speed
+in both synchronised and dog-engagement variants, so those two records rest on an
+inference from road-legality and say so.
 
 ### 5. Verify open-wheel cars by historical era
 
-The 42-car open-wheel queue is the largest and last, and should be split into
-Formula Vintage/Retro/Classic, Formula HiTech, CART/Formula USA historical
-chassis, and modern Formula groups. Similar class names are batching aids only;
-each exact selectable identity remains independently reviewable.
+The 42-car open-wheel queue is now all that remains besides six unclassified
+cars, and should be split into Formula Vintage/Retro/Classic, Formula HiTech,
+CART/Formula USA historical chassis, and modern Formula groups. Similar class
+names are batching aids only; each exact selectable identity remains
+independently reviewable.
 
 ## Refresh procedure
 

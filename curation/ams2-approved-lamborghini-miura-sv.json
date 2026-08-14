@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.16",
-  "approved_at": "2026-08-11",
+  "dataset_version": "0.3.29",
+  "approved_at": "2026-08-13",
   "record_id": "ams2.lamborghini-miura-sv",
   "telemetry_name": "Lamborghini Miura SV",
   "telemetry_class": "TC60S",
@@ -16,12 +16,12 @@
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "optional",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no"
   },
   "confidence_notes": "Manufacturer family history and exact guided testing establish the five-speed H-pattern and technique.",
-  "scope_notes": "Exact Miura SV identity; family-level transmission evidence is explicitly supplemented by live selection tests."
+  "scope_notes": "Exact Miura SV identity; family-level transmission evidence is explicitly supplemented by live selection tests. Revised for dataset 0.3.29: the downshift blip now states mechanical necessity, so a synchronised gearbox is optional rather than required or not-required."
 }

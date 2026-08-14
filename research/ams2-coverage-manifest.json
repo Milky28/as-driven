@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.28",
+  "dataset_version": "0.3.29",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,26 +15,25 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 118,
-    "covered_exact_identities": 156,
-    "uncovered_identities": 69,
-    "full_guided_verifications": 58,
+    "curated_records": 128,
+    "covered_exact_identities": 166,
+    "uncovered_identities": 59,
+    "full_guided_verifications": 48,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 156,
-      "full-guided-verification": 58,
+      "covered-exact": 166,
+      "full-guided-verification": 48,
       "out-of-scope": 1,
       "retired-identity": 3,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "club-road": 10,
       "open-wheel": 42,
       "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 35,
-      "legacy-controls-candidate-available": 23
+      "independent-control-research-needed": 29,
+      "legacy-controls-candidate-available": 19
     }
   },
   "entries": [
@@ -510,25 +509,25 @@
       "telemetry_name": "Caterham Academy",
       "car_id": "Caterham Academy",
       "identity_file": "Caterham Academy.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": 4,
-      "identity_file_modified_at": 1785447572.132472,
-      "research_readiness": "independent-control-research-needed"
+      "related_record_id": "ams2.caterham-academy",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 5,
+      "identity_file_modified_at": 1786684522.5328033,
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Caterham Supersport",
       "car_id": "Caterham Supersport",
       "identity_file": "Caterham Supersport.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.caterham-supersport",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712417925.0759096,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Chevrolet Camaro GT4.R",
@@ -546,10 +545,10 @@
       "telemetry_name": "Chevrolet Chevette",
       "car_id": "Chevrolet Chevette",
       "identity_file": "Chevrolet Chevette.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.chevrolet-chevette",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1715462366.7439916,
       "legacy_sheet_candidate": {
@@ -756,13 +755,13 @@
       "telemetry_name": "Copa Fusca",
       "car_id": "Copa Fusca",
       "identity_file": "Copa Fusca.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.copa-fusca",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1714958076.8127933,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Courage C60 Hybrid",
@@ -1554,10 +1553,10 @@
       "telemetry_name": "Ginetta G40",
       "car_id": "Ginetta G40",
       "identity_file": "Ginetta G40.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.ginetta-g40",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 7,
       "identity_file_modified_at": 1785514332.8445206,
       "legacy_sheet_candidate": {
@@ -1572,13 +1571,13 @@
       "telemetry_name": "Ginetta G40 Cup",
       "car_id": "Ginetta G40 Cup",
       "identity_file": "Ginetta G40 Cup.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.ginetta-g40-cup",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1722805111.2124033,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Ginetta G55 GT3",
@@ -1632,25 +1631,25 @@
       "telemetry_name": "Gol Classic B",
       "car_id": "Gol Classic B",
       "identity_file": "Gol Classic B.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.gol-classic-b",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1715214435.2760682,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Gol Classic FL",
       "car_id": "Gol Classic FL",
       "identity_file": "Gol Classic FL.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.gol-classic-fl",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1712417925.0769086,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Lamborghini Diablo SV-R",
@@ -2676,10 +2675,10 @@
       "telemetry_name": "Puma GTB",
       "car_id": "Puma GTB",
       "identity_file": "Puma GTB.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.puma-gtb",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1723844231.3179896,
       "legacy_sheet_candidate": {
@@ -2712,12 +2711,12 @@
       "telemetry_name": "Puma P052",
       "car_id": "Puma P052",
       "identity_file": "Puma P052.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "simhub_max_gears": null,
-      "identity_file_modified_at": 1786122829.0511515,
+      "related_record_id": "ams2.puma-p052",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "simhub_max_gears": 5,
+      "identity_file_modified_at": 1786684522.544321,
       "legacy_sheet_candidate": {
         "source_row": 201,
         "display_name": "Puma P052",

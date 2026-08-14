@@ -1,0 +1,147 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.caterham-academy",
+  "identity": {
+    "display_name": "Caterham Academy",
+    "manufacturer": "Caterham",
+    "model": "Seven Academy",
+    "year": {
+      "from": 2014,
+      "label": "Academy championship specification"
+    },
+    "class": "Cat_Academy",
+    "real_world_identity_notes": "Entry-level one-make Caterham Seven built to a sealed Academy specification around a Ford Sigma 1.6 and a five-speed gearbox. Caterham list the Academy car as road legal, which is central to the formula: competitors drive to and from circuits.",
+    "variant": "Academy specification"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
+      "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+      "Confidence is medium because no reviewed source states the construction of the sealed Academy gearbox directly. The claim is falsifiable: a source showing the Academy specification uses the dog-engagement Type 9 would change the gearbox type and make the downshift blip required."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Caterham Academy"
+        },
+        {
+          "kind": "class-id",
+          "value": "Cat_Academy"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.caterham-academy.20260814t041617582z-761900de by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "wikipedia.caterham-academy",
+        "caterham.academy-championship",
+        "westermann.caterham-5-speed-gearbox-variants",
+        "ams2.local-live-caterham-academy-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.caterham-academy",
+          "caterham.academy-championship",
+          "westermann.caterham-5-speed-gearbox-variants",
+          "ams2.local-live-caterham-academy-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Registered sources establish the Academy specification and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.caterham-academy",
+          "caterham.academy-championship",
+          "westermann.caterham-5-speed-gearbox-variants",
+          "ams2.local-live-caterham-academy-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The sources establish a sealed Ford Sigma engine with a five-speed gearbox and the live drive selected five H-pattern gears. Construction is inferred from road-legality: Caterham's own motorsport partner offers the Type 9 in both synchronised and unsynchronised dog-engagement variants, and describes the dog box as suited only to purists for road use."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-caterham-academy-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

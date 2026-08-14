@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.29",
+  "approved_at": "2026-08-13",
+  "record_id": "ams2.caterham-academy",
+  "telemetry_name": "Caterham Academy",
+  "telemetry_class": "Cat_Academy",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.caterham-academy.20260814t041617582z-761900de",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "optional",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, the absence of automatic cut and blip, and the cockpit wheel. The downshift blip is optional because the gearbox is synchronised.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

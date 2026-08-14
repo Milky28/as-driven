@@ -86,7 +86,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.28 contains 118 reviewed records. Its newest records complete the
+Dataset 0.3.29 contains 128 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.28 contains 118 curated AMS2 records promoted through the reviewed
+Dataset 0.3.29 contains 128 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -301,6 +301,15 @@ specification: the BMW M1 Procar, the Mercedes-Benz 190E 2.5-16 Evolution II and
 the BMW M3 Sport Evolution. Super V8 is Reiza's fictionalised Australian
 Supercars car, which retains a manual stick shift on a six-speed sequential
 transaxle.
+Dataset 0.3.29 promotes the club and road batch, finishing every category except
+open-wheel. Eight are ordinary synchromesh H-pattern cars with no automation. The
+tenth is the batch's finding: `Ginetta G40` is the GT5 Challenge car on a
+six-speed Quaife sequential, not the five-speed synchromesh H-pattern of
+`Ginetta G40 Cup`, so a shared nameplate again proved to be no basis for shared
+controls. This release also settles what `manual_blip` asserts: mechanical
+necessity, so `required` is reserved for gearboxes that cannot engage without a
+blip and synchromesh cars are `optional`. Three earlier records were corrected to
+match.
 
 ## Licensing
 
