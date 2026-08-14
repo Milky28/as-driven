@@ -621,6 +621,36 @@ namespace AsDriven.Core.Tests
                     Equal("not-tested", skippedResults.AutomaticCut, "does not infer no automatic cut when its test was skipped");
                     Equal("not-tested", skippedResults.AutomaticBlip, "does not infer no automatic blip when its test was skipped");
 
+                    // A manual car will not even engage first without the
+                    // clutch, so nothing happens for the test to detect and it
+                    // used to wait forever. Sustained throttle against a
+                    // stationary car settles it without the driver having to
+                    // press anything.
+                    var refusedMoveOff = new GuidedVerificationDrive();
+                    refusedMoveOff.Start(null);
+                    refusedMoveOff.AddSample(GuidedSample(now, 0, 0, 0, 1000, 0, 0, true));
+                    refusedMoveOff.AddSample(GuidedSample(now.AddSeconds(1), 0, 0, 40, 1900, 0, 0, true));
+                    False(refusedMoveOff.GetSnapshot().ResultReady, "gives the car time to pull away before concluding it cannot");
+                    refusedMoveOff.AddSample(GuidedSample(now.AddSeconds(3), 0, 0, 40, 2000, 0, 0, true));
+                    False(refusedMoveOff.GetSnapshot().ResultReady, "still waiting inside the window");
+                    refusedMoveOff.AddSample(GuidedSample(now.AddSeconds(5.5), 0, 0, 40, 2000, 0, 0, true));
+                    True(refusedMoveOff.GetSnapshot().ResultReady, "concludes on its own once the car has plainly refused to move");
+                    True(refusedMoveOff.GetSnapshot().Result.Contains("standing-start clutch is required"), "states what the refusal means");
+                    refusedMoveOff.Next();
+                    Equal("no", refusedMoveOff.GetResults().MoveOffWithoutPhysicalClutch, "records that the car cannot pull away without the clutch");
+
+                    // A slow automatic clutch must still reach the positive
+                    // path rather than be judged by the refusal timeout.
+                    var slowCreep = new GuidedVerificationDrive();
+                    slowCreep.Start(null);
+                    slowCreep.AddSample(GuidedSample(now, 0, 0, 0, 1000, 0, 0, true));
+                    slowCreep.AddSample(GuidedSample(now.AddSeconds(1), 1, 0, 40, 1300, 0, 30, true));
+                    slowCreep.AddSample(GuidedSample(now.AddSeconds(3), 1, 0, 40, 1500, 3, 45, true));
+                    slowCreep.AddSample(GuidedSample(now.AddSeconds(4), 1, 0, 40, 1600, 6, 55, true));
+                    True(slowCreep.GetSnapshot().ResultReady, "accepts a slow automatic clutch that eventually creeps away");
+                    slowCreep.Next();
+                    Equal("yes", slowCreep.GetResults().MoveOffWithoutPhysicalClutch, "does not fail a slow creep on the refusal timeout");
+
                     // A manual car needs the clutch to pull away, so the driver
                     // uses the pedal and the test correctly reports that a
                     // clutch is required. Clutch input is the expected finding

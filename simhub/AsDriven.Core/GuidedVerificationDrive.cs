@@ -69,6 +69,11 @@ namespace AsDriven.Core
         private static readonly TimeSpan MoveOffConfirmationWindow =
             TimeSpan.FromMilliseconds(600.0);
 
+        // Long enough that a slow automatic clutch still gets to creep away and
+        // pass on the positive path before this concludes the opposite.
+        private static readonly TimeSpan MoveOffRefusalWindow =
+            TimeSpan.FromSeconds(4.0);
+
         private enum Phase
         {
             Idle,
@@ -112,6 +117,7 @@ namespace AsDriven.Core
         private bool _coastDownshiftTestFailed;
         private bool _engineWasRunning;
         private DateTime? _moveOffMovementStartedUtc;
+        private DateTime? _moveOffRefusalStartedUtc;
         private string _result = string.Empty;
         private double _maximumClutch;
         private double _minimumThrottle;
@@ -341,6 +347,33 @@ namespace AsDriven.Core
                     else if (_armed && sample.SpeedKmh < 1.0)
                     {
                         _moveOffMovementStartedUtc = null;
+                        // A car that needs its clutch never engages first, or
+                        // engages and refuses to pull, so nothing ever happens
+                        // for the test to detect. Waiting for movement that
+                        // cannot come is what forced the driver to press Next
+                        // to record an answer the drive already had. Sustained
+                        // throttle against a stationary car is the attempt, and
+                        // it settles the test on its own.
+                        if (engineRunning && sample.Throttle >= 15.0)
+                        {
+                            if (!_moveOffRefusalStartedUtc.HasValue)
+                            {
+                                _moveOffRefusalStartedUtc = sample.TimestampUtc;
+                            }
+                            else if (sample.TimestampUtc - _moveOffRefusalStartedUtc.Value
+                                >= MoveOffRefusalWindow)
+                            {
+                                SetResult(
+                                    false,
+                                    false,
+                                    "Sustained throttle moved the car nowhere without the clutch, "
+                                        + "so a standing-start clutch is required.");
+                            }
+                        }
+                        else
+                        {
+                            _moveOffRefusalStartedUtc = null;
+                        }
                     }
                     break;
                 case Phase.GearCount:
@@ -661,6 +694,7 @@ namespace AsDriven.Core
             _automaticActionObserved = false;
             _engineWasRunning = false;
             _moveOffMovementStartedUtc = null;
+            _moveOffRefusalStartedUtc = null;
             _resultReady = false;
             _result = string.Empty;
             _maximumClutch = 0.0;
