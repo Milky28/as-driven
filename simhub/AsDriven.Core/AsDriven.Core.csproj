@@ -42,6 +42,7 @@
     <Compile Include="PopupState.cs" />
     <Compile Include="PreviewRules.cs" />
     <Compile Include="SessionState.cs" />
+    <Compile Include="ShiftPatternRules.cs" />
     <Compile Include="UnmatchedIdentityLog.cs" />
     <Compile Include="VerificationObservation.cs" />
     <Compile Include="GuidedVerificationDrive.cs" />

@@ -678,6 +678,18 @@ namespace AsDriven.Core.Tests
                 Equal("As Driven", PreviewRules.PreferredLayoutName(1920), "prefers the standard layout on an ordinary desktop");
                 Equal("As Driven 5120x1440", PreviewRules.PreferredLayoutName(5120), "prefers the wide layout on a triple-width desktop");
 
+                Equal("sequential", ShiftPatternRules.DerivedGate("sequential-paddles"), "derives a sequential gate from paddles");
+                Equal("sequential", ShiftPatternRules.DerivedGate("sequential-stick"), "derives a sequential gate from a sequential stick");
+                Equal("automatic-gate", ShiftPatternRules.DerivedGate("automatic-lever"), "derives an automatic gate from an automatic lever");
+                Equal("direct", ShiftPatternRules.DerivedGate("direct-selection"), "derives a direct gate from direct selection");
+                // The whole point of the field: standard and dogleg are both
+                // legitimate, so the driver reports which one the cockpit shows.
+                True(ShiftPatternRules.DerivedGate("h-pattern") == null, "never guesses the gate of an H-pattern car");
+                True(ShiftPatternRules.DerivedGate("unknown") == null, "derives no gate from an unknown mechanism");
+                True(ShiftPatternRules.IsDerivedGate("sequential"), "treats a sequential gate as mechanism-implied");
+                False(ShiftPatternRules.IsDerivedGate("dogleg-h"), "never discards an observed dogleg gate as mechanism-implied");
+                False(ShiftPatternRules.IsDerivedGate("standard-h"), "never discards an observed standard gate as mechanism-implied");
+
                 string syntheticRoot = Path.Combine(
                     Path.GetTempPath(), "AsDrivenTests-" + Guid.NewGuid().ToString("N"));
                 try

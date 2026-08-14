@@ -216,7 +216,8 @@ namespace AsDriven.Plugin
                 _automaticClutch, _automaticShifting, _automaticThrottleBlip,
                 _moveOff, _directGearSelection, _clutchlessUpshift, _automaticCut,
                 _clutchlessDownshift, _automaticBlip, _primaryActuation,
-                _wheelShape, _wheelDisplay, _wheelShiftLights, _wheelOpenTop
+                _shiftPattern, _wheelShape, _wheelDisplay, _wheelShiftLights,
+                _wheelOpenTop
             })
             {
                 combo.SelectedIndex = 0;
@@ -724,9 +725,29 @@ namespace AsDriven.Plugin
                 ClearFieldBadge(combo);
             }
 
+            // Re-apply the gate badge the mechanism implies. Derived here rather
+            // than remembered, so it cannot disagree with the current mechanism.
+            string derivedPattern = DerivedShiftPattern(ChoiceValue(_primaryActuation));
+            if (derivedPattern != null
+                && string.Equals(
+                    ChoiceValue(_shiftPattern), derivedPattern, StringComparison.Ordinal))
+            {
+                SetFieldBadge(_shiftPattern, "DERIVED", Brushes.Gray);
+            }
+
             _visibleHardwareBadge.Text = string.Empty;
             _visibleHardwareBadge.Visibility = Visibility.Collapsed;
             HighlightNextReviewField();
+        }
+
+        private static string DerivedShiftPattern(string actuation)
+        {
+            return ShiftPatternRules.DerivedGate(actuation);
+        }
+
+        private static bool IsDerivedGateValue(string value)
+        {
+            return ShiftPatternRules.IsDerivedGate(value);
         }
 
         private void HighlightNextReviewField()
@@ -1004,6 +1025,18 @@ namespace AsDriven.Plugin
             {
                 SelectChoice(_directGearSelection, "not-tested");
                 SetFieldBadge(_directGearSelection, "REVIEW NEEDED", Brushes.Orange);
+            }
+
+            string derivedPattern = DerivedShiftPattern(actuation);
+            if (derivedPattern != null)
+            {
+                SelectChoice(_shiftPattern, derivedPattern);
+            }
+            else if (IsDerivedGateValue(ChoiceValue(_shiftPattern)))
+            {
+                // The mechanism no longer implies a gate, so drop the value it
+                // implied rather than leaving the previous mechanism's answer.
+                SelectChoice(_shiftPattern, "unknown");
             }
             UpdateOptionalBadges();
         }
