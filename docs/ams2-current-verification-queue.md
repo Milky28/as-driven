@@ -1,5 +1,49 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.37 (formula batch 12)
+
+Twelve cars across three classes, and the batch reads as a history of how
+Formula One gearboxes changed between 1988 and 1993.
+
+**Formula Classic Gen2, the 1988 manual cars.** Six H-pattern gears, a clutch to
+pull away, and no automatic cut or blip, so the driver lifts and blips. Running
+shifts went through without the clutch, which a tester found strange. It is
+period-correct and is itself a sign of dog engagement: a dog box is routinely
+shifted clutchlessly where a synchronised gearbox resists it. That is recorded as
+a supporting observation, and the gearbox type stays `unknown` until a source
+states the engagement.
+
+McLaren Honda MP4/4 is the real car of that group, on a Weismann-McLaren
+six-speed manual. Its gate is a dogleg **mirrored horizontally**, with first at
+the bottom right rather than the bottom left, which no other dogleg in the
+dataset does. The schema records `dogleg-h`, which is true of it, and the
+mirroring is kept in the record notes because no enum value expresses it.
+
+Formula Classic Gen2 Model2 alone returned an inconclusive automatic-cut test, so
+its cut and upshift lift stay `unknown` rather than being borrowed from the other
+Gen2 cars.
+
+**Formula HiTech Gen1, 1991 to 1992.** Semi-automatic paddles with automatic cut
+and blip, but a clutch still needed to pull away, which is the pattern of the
+era. McLaren Honda MP4/7A is the exception and the explanation: it was the first
+McLaren with a semi-automatic transmission, and its electro-hydraulic clutch is
+why it pulls away without one. Model1 carries seven gears where the others carry
+six, so nothing is inherited between them.
+
+**Formula HiTech Gen2, 1993, and the batch's find.** All four upshift by
+themselves. That is the gearbox rather than an assist, because automatic shifting
+was disabled for every drive, and it is period-correct: the MP4/8's transmission
+is recorded as semi-automatic *"which could be switched over to fully
+automatic"*. A tester flagged the behaviour as unusual and the source explained
+it. The upshift fields, which describe an automatic cut, understate this, so each
+record says plainly that the driver does not request upshifts at all.
+
+Every car in this batch was observed only in its high-downforce configuration.
+The low-downforce identities are not recorded, because they have not been seen
+and an exact match cannot be guessed. A Daytona pass would capture them, and
+would also settle whether `McLaren MP4/8` in the queue is the low-downforce name
+or a retired pre-rename identity like `Lotus 98T` proved to be.
+
 ## Completed in dataset 0.3.36 (Copa Uno)
 
 Held back from batch 11 because the drive read an H-pattern while the reviewed

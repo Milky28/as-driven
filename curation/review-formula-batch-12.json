@@ -1,0 +1,530 @@
+{
+  "review": "formula-batch-12",
+  "dataset_version": "0.3.37",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.formula-classic-gen2-model1-high-downforce",
+      "bundle": "build/formula-batch-12/formula-classic-gen2-model1-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Classic Gen2 Model1",
+      "year": {
+        "label": "Formula Classic Gen2 Model1"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised late-1980s Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected six H-pattern gears with no automatic cut or blip, so the driver lifts to upshift. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-classic-gen2-model3-high-downforce",
+      "bundle": "build/formula-batch-12/formula-classic-gen2-model3-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Classic Gen2 Model3",
+      "year": {
+        "label": "Formula Classic Gen2 Model3"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised late-1980s Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected six H-pattern gears with no automatic cut or blip, so the driver lifts to upshift. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-classic-gen2-model2-high-downforce",
+      "bundle": "build/formula-batch-12/formula-classic-gen2-model2-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Classic Gen2 Model2",
+      "year": {
+        "label": "Formula Classic Gen2 Model2"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised late-1980s Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected six H-pattern gears and found no automatic blip. The automatic cut test was inconclusive, so both it and the upshift throttle lift stay unknown rather than being assumed from the other Gen2 cars.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The automatic cut test did not resolve, so the upshift is recorded unknown. The other Gen2 cars found no automatic cut, but that is not inherited across models without evidence.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-honda-mp4-4-high-downforce",
+      "bundle": "build/formula-batch-12/mclaren-honda-mp4-4-high-downforce.staged.json",
+      "manufacturer": "McLaren",
+      "model": "MP4/4",
+      "year": {
+        "label": "1988 Formula One season",
+        "from": 1988
+      },
+      "real_world_identity_notes": "McLaren MP4/4, the Honda RA168E turbocharged car of the 1988 season, using a Weismann-McLaren six-speed manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-4"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the MP4/4 and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a Weismann-McLaren 6-speed manual, and the live drive selected six H-pattern gears with no automatic cut or blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "dogleg-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gate is a dogleg, and the driver reports first at the bottom right rather than the bottom left, so the pattern is mirrored horizontally against every other dogleg in the dataset. The schema records the gate as dogleg-h, which is true of it, and the mirroring is kept here because no value expresses it.",
+        "Gearbox construction is not established. The source names Weismann-McLaren but not its engagement, so the downshift blip stays unknown rather than being inferred from racing practice.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-hitech-gen1-model1-high-downforce",
+      "bundle": "build/formula-batch-12/formula-hitech-gen1-model1-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula HiTech Gen1 Model1",
+      "year": {
+        "label": "Formula HiTech Gen1 Model1"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised early-1990s Formula One car, reviewed independently of the other Gen1 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-7a"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected the gears through paddles with automatic cut and blip, and the car needed the clutch to pull away, which is the semi-automatic pattern of the era: a driver clutch for the start and the car's own clutch for every running shift.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut and blip on running shifts, and a clutch needed to pull away.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-hitech-gen1-model2-high-downforce",
+      "bundle": "build/formula-batch-12/formula-hitech-gen1-model2-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula HiTech Gen1 Model2",
+      "year": {
+        "label": "Formula HiTech Gen1 Model2"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised early-1990s Formula One car, reviewed independently of the other Gen1 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-7a"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected the gears through paddles with automatic cut and blip, and the car needed the clutch to pull away, which is the semi-automatic pattern of the era: a driver clutch for the start and the car's own clutch for every running shift.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut and blip on running shifts, and a clutch needed to pull away.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-hitech-gen1-model4-high-downforce",
+      "bundle": "build/formula-batch-12/formula-hitech-gen1-model4-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula HiTech Gen1 Model4",
+      "year": {
+        "label": "Formula HiTech Gen1 Model4"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised early-1990s Formula One car, reviewed independently of the other Gen1 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-7a"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected the gears through paddles with automatic cut and blip, and the car needed the clutch to pull away, which is the semi-automatic pattern of the era: a driver clutch for the start and the car's own clutch for every running shift.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut and blip on running shifts, and a clutch needed to pull away.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-honda-mp4-7a-high-downforce",
+      "bundle": "build/formula-batch-12/mclaren-honda-mp4-7a-high-downforce.staged.json",
+      "manufacturer": "McLaren",
+      "model": "MP4/7A",
+      "year": {
+        "label": "1992 Formula One season",
+        "from": 1992
+      },
+      "real_world_identity_notes": "McLaren MP4/7A, the Honda RA122E/B V12 car of 1992 and the first McLaren with a semi-automatic transmission: a McLaren transverse six-speed with an electro-hydraulic clutch and paddle shift that let the driver hold the throttle while the system changed gear.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-7a"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the MP4/7A and its transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a McLaren transverse 6-speed semi-automatic with an electro-hydraulic clutch and paddle shift, and the live drive selected six paddle gears with automatic cut and blip and no clutch needed to pull away.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "not-required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut and blip, and the car pulled away without a clutch.",
+        "The electro-hydraulic clutch is why no driver clutch is needed to pull away, unlike the Gen1 cars in the same class, which is recorded rather than smoothed over.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-hitech-gen2-model1-high-downforce",
+      "bundle": "build/formula-batch-12/formula-hitech-gen2-model1-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula HiTech Gen2 Model1",
+      "year": {
+        "label": "Formula HiTech Gen2 Model1"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised 1993 Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-8"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected six paddle gears with automatic cut and blip, no clutch needed to pull away, and upshifts happening without a request. A registered source for the era's McLaren records a semi-automatic transmission that could be switched to fully automatic, which is the behaviour observed.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "not-required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The car upshifts by itself. This is the gearbox, not an assist: automatic shifting was disabled for the drive. It is period-correct, because the 1993 cars ran semi-automatic transmissions that could be switched to fully automatic. The driver therefore does not request upshifts at all, which the upshift fields, describing an automatic cut, understate.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-hitech-gen2-model2-high-downforce",
+      "bundle": "build/formula-batch-12/formula-hitech-gen2-model2-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula HiTech Gen2 Model2",
+      "year": {
+        "label": "Formula HiTech Gen2 Model2"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised 1993 Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-8"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected six paddle gears with automatic cut and blip, no clutch needed to pull away, and upshifts happening without a request. A registered source for the era's McLaren records a semi-automatic transmission that could be switched to fully automatic, which is the behaviour observed.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "not-required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The car upshifts by itself. This is the gearbox, not an assist: automatic shifting was disabled for the drive. It is period-correct, because the 1993 cars ran semi-automatic transmissions that could be switched to fully automatic. The driver therefore does not request upshifts at all, which the upshift fields, describing an automatic cut, understate.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-hitech-gen2-model3-high-downforce",
+      "bundle": "build/formula-batch-12/formula-hitech-gen2-model3-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula HiTech Gen2 Model3",
+      "year": {
+        "label": "Formula HiTech Gen2 Model3"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised 1993 Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-8"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected six paddle gears with automatic cut and blip, no clutch needed to pull away, and upshifts happening without a request. A registered source for the era's McLaren records a semi-automatic transmission that could be switched to fully automatic, which is the behaviour observed.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "not-required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The car upshifts by itself. This is the gearbox, not an assist: automatic shifting was disabled for the drive. It is period-correct, because the 1993 cars ran semi-automatic transmissions that could be switched to fully automatic. The driver therefore does not request upshifts at all, which the upshift fields, describing an automatic cut, understate.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-cosworth-mp4-8-high-downforce",
+      "bundle": "build/formula-batch-12/mclaren-cosworth-mp4-8-high-downforce.staged.json",
+      "manufacturer": "McLaren",
+      "model": "MP4/8",
+      "year": {
+        "label": "1993 Formula One season",
+        "from": 1993
+      },
+      "real_world_identity_notes": "McLaren MP4/8, the Ford HBD7 V8 car of 1993, using a McLaren transverse six-speed semi-automatic sequential gearbox developed with Techniques d'Avant Garde which could be switched over to fully automatic.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-8"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the MP4/8 and its transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a McLaren transverse 6-speed semi-automatic sequential that could be switched to fully automatic, and the live drive selected six paddle gears with automatic cut and blip and upshifts happening without a request.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "not-required",
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The car upshifts by itself. This is the gearbox, not an assist: automatic shifting was disabled for the drive. It is period-correct, because the 1993 cars ran semi-automatic transmissions that could be switched to fully automatic. The driver therefore does not request upshifts at all, which the upshift fields, describing an automatic cut, understate. The source for this car states the switch to fully automatic directly.",
+        "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+        "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

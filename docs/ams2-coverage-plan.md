@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.36 contains 154 curated records. The identity inventory contains 248
+Dataset 0.3.37 contains 166 curated records. The identity inventory contains 258
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -25,14 +25,14 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 197 observed identities are covered exactly by curated records.
-- 51 observed identities are not covered.
-- 39 of those need full guided verification, and they are now the only work
+- 209 observed identities are covered exactly by curated records.
+- 49 observed identities are not covered.
+- 27 of those need full guided verification, and they are now the only work
   that requires driving.
-- 15 of those 39 have an exact legacy spreadsheet candidate that can seed
+- 15 of those 27 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 24 require independent control research in addition to current-game testing.
+- 12 require independent control research in addition to current-game testing.
 - 1 Low Downforce identities wait on unverified base cars; none is
   inheritance-ready.
 - 11 identities are closed by explicit review rather than driving: retired
