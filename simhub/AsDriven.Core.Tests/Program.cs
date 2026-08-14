@@ -564,7 +564,9 @@ namespace AsDriven.Core.Tests
                     True(guidedDrive.GetSnapshot().ResultReady, "detects a full-throttle clutchless upshift");
                     guidedDrive.Next();
                     guidedDrive.AddSample(GuidedSample(now, 4, 60, 0, 4500, 80, 100, true));
-                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 35, 25, 4000, 78, 90, true));
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 35, 25, 5200, 79, 90, true));
+                    False(guidedDrive.GetSnapshot().ResultReady, "holds the downshift result until the gearbox proves it took drive");
+                    guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(700), 3, 0, 0, 6000, 78, 90, true));
                     True(guidedDrive.GetSnapshot().ResultReady, "detects a clutchless downshift and throttle spike");
                     guidedDrive.Next();
                     GuidedDriveResults guidedResults = guidedDrive.GetResults();
@@ -609,11 +611,53 @@ namespace AsDriven.Core.Tests
                     skippedAutomaticTests.Next();
                     skippedAutomaticTests.Skip();
                     skippedAutomaticTests.AddSample(GuidedSample(now, 4, 0, 0, 4300, 70, 120, true));
-                    skippedAutomaticTests.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 3800, 68, 115, true));
+                    skippedAutomaticTests.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 4800, 69, 115, true));
+                    skippedAutomaticTests.AddSample(GuidedSample(now.AddMilliseconds(700), 3, 0, 0, 5600, 68, 115, true));
                     skippedAutomaticTests.Next();
                     GuidedDriveResults skippedResults = skippedAutomaticTests.GetResults();
                     Equal("not-tested", skippedResults.AutomaticCut, "does not infer no automatic cut when its test was skipped");
                     Equal("not-tested", skippedResults.AutomaticBlip, "does not infer no automatic blip when its test was skipped");
+
+                    // A damaged dog box selects the lower gear and then sits in
+                    // neutral. The simulator still reports the selected gear,
+                    // so without an engagement check this reads as a successful
+                    // clutchless downshift and writes a wrong record.
+                    var damagedDownshift = new GuidedVerificationDrive();
+                    damagedDownshift.Start(null);
+                    damagedDownshift.Skip();
+                    damagedDownshift.Skip();
+                    damagedDownshift.Skip();
+                    damagedDownshift.AddSample(GuidedSample(now, 2, 0, 80, 4500, 60, 150, true));
+                    damagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 20, 3900, 62, 140, true));
+                    damagedDownshift.Next();
+                    damagedDownshift.Skip();
+                    damagedDownshift.AddSample(GuidedSample(now, 4, 0, 0, 4300, 70, 120, true));
+                    damagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 4600, 69, 115, true));
+                    False(damagedDownshift.GetSnapshot().ResultReady, "does not accept the selected gear on its own");
+                    damagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(400), 0, 0, 0, 3000, 68, 0, true));
+                    True(damagedDownshift.GetSnapshot().ResultReady, "reports a result once the gearbox drops back to neutral");
+                    True(damagedDownshift.GetSnapshot().Result.Contains("did not stay engaged"), "explains that the gear did not stay engaged");
+                    damagedDownshift.Next();
+                    Equal("no", damagedDownshift.GetResults().ClutchlessDownshift, "never records a failed engagement as a clutchless downshift");
+
+                    // The gear index holds but the engine never takes drive, so
+                    // engine speed per unit of road speed stays where it was.
+                    var unengagedDownshift = new GuidedVerificationDrive();
+                    unengagedDownshift.Start(null);
+                    unengagedDownshift.Skip();
+                    unengagedDownshift.Skip();
+                    unengagedDownshift.Skip();
+                    unengagedDownshift.AddSample(GuidedSample(now, 2, 0, 80, 4500, 60, 150, true));
+                    unengagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 20, 3900, 62, 140, true));
+                    unengagedDownshift.Next();
+                    unengagedDownshift.Skip();
+                    unengagedDownshift.AddSample(GuidedSample(now, 4, 0, 0, 4300, 70, 120, true));
+                    unengagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 25, 4400, 69, 115, true));
+                    unengagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(700), 3, 0, 0, 2000, 68, 0, true));
+                    False(unengagedDownshift.GetSnapshot().ResultReady, "keeps waiting while engine speed stays decoupled from the wheels");
+                    unengagedDownshift.AddSample(GuidedSample(now.AddMilliseconds(2600), 3, 0, 0, 1500, 65, 0, true));
+                    True(unengagedDownshift.GetSnapshot().ResultReady, "gives up once the engine never takes drive");
+                    True(unengagedDownshift.GetSnapshot().Result.Contains("never took drive"), "explains that the gearbox did not engage");
 
                     var transientThrottleCut = new GuidedVerificationDrive();
                     transientThrottleCut.Start(null);

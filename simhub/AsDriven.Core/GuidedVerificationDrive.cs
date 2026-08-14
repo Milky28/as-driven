@@ -89,6 +89,19 @@ namespace AsDriven.Core
         private GuidedTelemetrySample _lastSample;
         private int? _suggestedGears;
         private int _baselineGear;
+
+        // A downshift is not accepted on the gear index alone. The simulator
+        // reports the gear the driver selected, so a gearbox that failed to
+        // engage still reads as a successful shift. Engine speed per unit of
+        // road speed settles it: a lower gear raises that ratio and holds it,
+        // while a box left in neutral decays towards idle with the car still
+        // moving.
+        private const double EngagementRatioMargin = 1.05;
+        private const double EngagementConfirmSeconds = 0.5;
+        private const double EngagementTimeoutSeconds = 2.5;
+        private int _downshiftCandidateGear;
+        private DateTime _downshiftCandidateAtUtc;
+        private double _baselineDriveRatio;
         private int _maximumGear;
         private bool _armed;
         private bool _attemptAccepted;
@@ -437,24 +450,66 @@ namespace AsDriven.Core
             {
                 _armed = true;
                 _baselineGear = sample.Gear;
+                _baselineDriveRatio = DriveRatio(sample);
             }
-            if (!_armed || sample.Gear <= 0 || sample.Gear >= _baselineGear)
+            if (!_armed)
             {
                 return;
             }
+
+            if (_downshiftCandidateGear == 0)
+            {
+                if (sample.Gear <= 0 || sample.Gear >= _baselineGear)
+                {
+                    return;
+                }
+                // A lower gear was selected. Hold the result until the gearbox
+                // proves it took drive.
+                _downshiftCandidateGear = sample.Gear;
+                _downshiftCandidateAtUtc = sample.TimestampUtc;
+                return;
+            }
+
+            if (sample.Gear <= 0 || sample.Gear >= _baselineGear)
+            {
+                SetResult(
+                    false,
+                    false,
+                    "The selected gear did not stay engaged. The gearbox may be damaged and left in "
+                        + "neutral, so this attempt proves nothing about clutchless downshifting. "
+                        + "Retry after repairing, or skip and answer it in the form.");
+                return;
+            }
+
+            double elapsed = (sample.TimestampUtc - _downshiftCandidateAtUtc).TotalSeconds;
             bool blip = _maximumThrottle >= 15.0;
-            if (manualBlip && !blip)
+            if (sample.Throttle <= 10.0 && elapsed >= EngagementConfirmSeconds)
             {
-                return;
+                if (DriveRatio(sample) >= _baselineDriveRatio * EngagementRatioMargin)
+                {
+                    if (manualBlip && !blip)
+                    {
+                        return;
+                    }
+                    SetResult(
+                        true,
+                        blip,
+                        manualBlip
+                            ? "Clutchless downshift accepted after the driver's manual throttle blip."
+                            : "Clutchless downshift accepted with no pedal input. "
+                                + (blip ? "A throttle spike was detected." : "No automatic throttle spike was detected.")
+                                + VehicleClutchSummary());
+                    return;
+                }
             }
-            SetResult(
-                true,
-                blip,
-                manualBlip
-                    ? "Clutchless downshift accepted after the driver's manual throttle blip."
-                    : "Clutchless downshift accepted with no pedal input. "
-                        + (blip ? "A throttle spike was detected." : "No automatic throttle spike was detected.")
-                        + VehicleClutchSummary());
+            if (elapsed >= EngagementTimeoutSeconds)
+            {
+                SetResult(
+                    false,
+                    false,
+                    "The lower gear was selected but the engine never took drive from the wheels, so "
+                        + "the gearbox did not engage. Retry, or skip and answer it in the form.");
+            }
         }
 
         private void SetResult(bool accepted, bool automaticAction, string message)
@@ -562,9 +617,17 @@ namespace AsDriven.Core
             ResetTrace();
         }
 
+        private static double DriveRatio(GuidedTelemetrySample sample)
+        {
+            return sample.Rpm / Math.Max(sample.SpeedKmh, 1.0);
+        }
+
         private void ResetTrace()
         {
             _baselineGear = 0;
+            _downshiftCandidateGear = 0;
+            _downshiftCandidateAtUtc = DateTime.MinValue;
+            _baselineDriveRatio = 0.0;
             _maximumGear = 0;
             _armed = false;
             _attemptAccepted = false;
