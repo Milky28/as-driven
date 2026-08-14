@@ -1,5 +1,31 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.30 (open-wheel batch 08, earliest era)
+
+Six cars from 1967 to 1979, and they are uniform: five H-pattern gears on a
+standard gate, clutch to pull away, a throttle lift to upshift, and no automatic
+cut or blip anywhere. Round rims with no display or shift lights.
+
+A dogleg gate was expected here and none was found. The expectation came from a
+search summary of a forum post claiming most early Hewlands place first left and
+back; the reachable sources do not support it, so no dogleg was recorded. These
+cars have no gate plate, and the gates were read by watching the lever and the
+driver's hand through a shift. That method read three doglegs in dataset 0.3.28
+which registered sources then corroborated, so it distinguishes the two gates
+rather than defaulting to one.
+
+Brabham BT26A and Lotus 49C are the first `dogbox` records established from
+evidence rather than observed behaviour. Both use racing Hewlands, engaged by
+dog rings rather than synchronisers, so a downshift blip is `required`. Their
+sources name the gearbox model but not its engagement, so the dog-ring
+construction is an inference from Hewland's design approach and each record says
+what would falsify it.
+
+Formula Vintage Gen1 Model1 and Model2, Formula Retro V12 and Formula Retro Gen2
+are Reiza's fictionalised cars. No real-world chassis is assigned, so their
+gearbox construction and downshift blip stay `unknown`. The two Vintage models
+were reviewed independently of each other.
+
 ## Completed in dataset 0.3.29 (club and road batch 07)
 
 Ten cars, which finish every category except open-wheel.

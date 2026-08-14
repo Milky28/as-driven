@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.29 contains 128 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.30 contains 134 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,14 +12,14 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 166 observed identities are covered exactly by curated records.
-- 59 observed identities are not covered.
-- 48 of those need full guided verification, and they are now the only work
+- 172 observed identities are covered exactly by curated records.
+- 53 observed identities are not covered.
+- 42 of those need full guided verification, and they are now the only work
   that requires driving.
-- 19 of those 48 have an exact legacy spreadsheet candidate that can seed
+- 16 of those 42 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 29 require independent control research in addition to current-game testing.
+- 26 require independent control research in addition to current-game testing.
 - 1 Low Downforce identities wait on unverified base cars; none is
   inheritance-ready.
 - 10 identities are closed by explicit review rather than driving: retired
@@ -125,13 +125,25 @@ CART/Formula USA historical chassis, and modern Formula groups. Similar class
 names are batching aids only; each exact selectable identity remains
 independently reviewable.
 
-**The current next batch is the earliest era, 1967 to 1979:** Formula Vintage
-Gen1 Model1, Formula Vintage Gen1 Model2, Brabham BT26A, Lotus 49C, Formula
-Retro V12, and Formula Retro Gen2. All six report five gears.
+Batch 08 in dataset 0.3.30 completed the earliest era, 1967 to 1979: Formula
+Vintage Gen1 Model1 and Model2, Brabham BT26A, Lotus 49C, Formula Retro V12 and
+Formula Retro Gen2. All six are five-speed H-pattern cars on a standard gate with
+no automation whatever.
 
-Expect gate patterns to matter most here. Period Formula gearboxes of this era
-frequently placed first out of the shift plane, so the cockpit gate must be read
-per car and never assumed standard.
+A dogleg gate was expected in this era and none was found. The prediction rested
+on a search summary of a forum post; the reachable sources do not support it, and
+no dogleg was recorded on that basis. The gates were read by watching the lever
+and the driver's hand through a shift, because these cars have no gate plate.
+
+Batch 08 also produced the dataset's first `dogbox` records from evidence rather
+than from a drive. Brabham BT26A and Lotus 49C use racing Hewlands, engaged by
+dog rings rather than synchronisers, so their downshift blip is `required`. The
+four Reiza cars carry no real-world chassis, so their gearbox construction and
+downshift blip stay `unknown` rather than being inferred from period practice.
+
+**The current next batch is the remaining Formula Vintage/Retro/Classic cars:**
+the seven Formula Classic identities, plus Lotus 98T and Brabham BMW BT52 from
+the same era.
 
 Two identities in the wider queue need provenance review before driving rather
 than after: `Porsche 911 RSR 1974` and `Porsche 911 RSR 74` are more likely a

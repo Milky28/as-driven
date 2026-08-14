@@ -1,0 +1,267 @@
+{
+  "review": "open-wheel-batch-08",
+  "dataset_version": "0.3.30",
+  "approved_at": "2026-08-13",
+  "records": [
+    {
+      "record_id": "ams2.brabham-bt26a",
+      "bundle": "build/open-wheel-batch-08/brabham-bt26a.staged.json",
+      "manufacturer": "Brabham",
+      "model": "BT26A",
+      "year": {
+        "label": "1969 Formula One season",
+        "from": 1969
+      },
+      "real_world_identity_notes": "Brabham BT26A, the Ford-Cosworth DFV-engined version of the BT26 that finished runner-up in the 1969 World Constructors' Championship. It used a Hewland DG 300 five-speed manual gearbox with a ZF differential.",
+      "real_world_source_refs": [
+        "wikipedia.brabham-bt26",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the BT26A and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia states a Hewland DG 300, 5-speed manual, and the live drive selected five H-pattern gears. Dog-ring engagement is Hewland's design approach rather than a stated property of the DG300, so it is an inference from the make and is recorded as such.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift rather than from a gate plate, which these cars do not have. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated, so it distinguishes the two gates rather than defaulting to one.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
+        "The dog-ring construction of the DG300 is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing the DG300 was synchronised would change the gearbox type and make the downshift blip optional."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.lotus-49c",
+      "bundle": "build/open-wheel-batch-08/lotus-49c.staged.json",
+      "manufacturer": "Lotus",
+      "model": "49C",
+      "year": {
+        "label": "1969 to 1971",
+        "from": 1969
+      },
+      "real_world_identity_notes": "Final development of the Lotus 49, the Ford Cosworth DFV-engined car pressed back into service after the Lotus 63 proved unsuccessful, racing until 1971. It used a Hewland-Lotus five-speed manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.lotus-49",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the 49C and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia states a Hewland-Lotus 5-speed manual gearbox, and the live drive selected five H-pattern gears. Dog-ring engagement is Hewland's design approach rather than a stated property of this gearbox, so it is an inference from the make and is recorded as such.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift rather than from a gate plate, which these cars do not have. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated, so it distinguishes the two gates rather than defaulting to one.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
+        "The dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing this gearbox was synchronised would change the gearbox type and make the downshift blip optional."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-vintage-gen1-model1",
+      "bundle": "build/open-wheel-batch-08/formula-vintage-gen1-model1.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Vintage Gen1 Model1",
+      "year": {
+        "label": "Formula Vintage Gen1 Model1"
+      },
+      "real_world_identity_notes": "First of Reiza's two Formula Vintage Gen1 models, a fictionalised late-1960s Formula One car. The dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip. No real-world chassis is assigned, so the gearbox construction is not established.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift rather than from a gate plate, which these cars do not have. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated, so it distinguishes the two gates rather than defaulting to one.",
+        "Reiza's fictionalised representation of the era. No real-world chassis identity is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-vintage-gen1-model2",
+      "bundle": "build/open-wheel-batch-08/formula-vintage-gen1-model2.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Vintage Gen1 Model2",
+      "year": {
+        "label": "Formula Vintage Gen1 Model2"
+      },
+      "real_world_identity_notes": "Second of Reiza's two Formula Vintage Gen1 models, a fictionalised late-1960s Formula One car reviewed independently of Model1. The dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip. No real-world chassis is assigned, so the gearbox construction is not established.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift rather than from a gate plate, which these cars do not have. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated, so it distinguishes the two gates rather than defaulting to one.",
+        "Reiza's fictionalised representation of the era. No real-world chassis identity is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-retro-v12",
+      "bundle": "build/open-wheel-batch-08/formula-retro-v12.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Retro V12",
+      "year": {
+        "label": "Formula Retro V12"
+      },
+      "real_world_identity_notes": "Reiza's V12-engined Formula Retro car, a fictionalised mid-1970s Formula One machine. The dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip. No real-world chassis is assigned, so the gearbox construction is not established.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift rather than from a gate plate, which these cars do not have. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated, so it distinguishes the two gates rather than defaulting to one.",
+        "Reiza's fictionalised representation of the era. No real-world chassis identity is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-retro-gen2",
+      "bundle": "build/open-wheel-batch-08/formula-retro-gen2.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Retro Gen2",
+      "year": {
+        "label": "Formula Retro Gen2"
+      },
+      "real_world_identity_notes": "Reiza's second-generation Formula Retro car, a fictionalised late-1970s Formula One machine. The dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip. No real-world chassis is assigned, so the gearbox construction is not established.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift rather than from a gate plate, which these cars do not have. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated, so it distinguishes the two gates rather than defaulting to one.",
+        "Reiza's fictionalised representation of the era. No real-world chassis identity is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

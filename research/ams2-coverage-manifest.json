@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.29",
+  "dataset_version": "0.3.30",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,25 +15,25 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 128,
-    "covered_exact_identities": 166,
-    "uncovered_identities": 59,
-    "full_guided_verifications": 48,
+    "curated_records": 134,
+    "covered_exact_identities": 172,
+    "uncovered_identities": 53,
+    "full_guided_verifications": 42,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 166,
-      "full-guided-verification": 48,
+      "covered-exact": 172,
+      "full-guided-verification": 42,
       "out-of-scope": 1,
       "retired-identity": 3,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "open-wheel": 42,
+      "open-wheel": 36,
       "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 29,
-      "legacy-controls-candidate-available": 19
+      "independent-control-research-needed": 26,
+      "legacy-controls-candidate-available": 16
     }
   },
   "entries": [
@@ -449,10 +449,10 @@
       "telemetry_name": "Brabham BT26A",
       "car_id": "Brabham BT26A",
       "identity_file": "Brabham BT26A.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.brabham-bt26a",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
       "legacy_sheet_candidate": {
@@ -1175,10 +1175,10 @@
       "telemetry_name": "Formula Retro Gen2",
       "car_id": "Formula Retro Gen2",
       "identity_file": "Formula Retro Gen2.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.formula-retro-gen2",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
       "legacy_sheet_candidate": {
@@ -1193,10 +1193,10 @@
       "telemetry_name": "Formula Retro V12",
       "car_id": "Formula Retro V12",
       "identity_file": "Formula Retro V12.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.formula-retro-v12",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
       "legacy_sheet_candidate": {
@@ -1517,25 +1517,25 @@
       "telemetry_name": "Formula Vintage Gen1 Model1",
       "car_id": "Formula Vintage Gen1 Model1",
       "identity_file": "Formula Vintage Gen1 Model1.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.formula-vintage-gen1-model1",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3433125,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Formula Vintage Gen1 Model2",
       "car_id": "Formula Vintage Gen1 Model2",
       "identity_file": "Formula Vintage Gen1 Model2.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.formula-vintage-gen1-model2",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1785535275.5598154,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Gillet Vertigo Streiff",
@@ -1949,13 +1949,13 @@
       "telemetry_name": "Lotus 49C",
       "car_id": "Lotus 49C",
       "identity_file": "Lotus 49C.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.lotus-49c",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736037515.407102,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Lotus 98T",
