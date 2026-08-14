@@ -20,8 +20,8 @@
       "shift_pattern": "standard-h",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
-        "automatic_cut": "unknown",
+        "throttle_lift": "not-required",
+        "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -29,7 +29,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "not-required",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -49,7 +49,8 @@
       "The automatic cut test did not resolve, so the upshift is recorded unknown. The other Gen2 cars found no automatic cut, but that is not inherited across models without evidence.",
       "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
       "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed.",
-      "Running shifts went through without the clutch while the gearbox provides no automatic cut or blip, so the driver shifts clutchlessly and supplies the lift and the blip. That combination is period-correct for a Formula One car of this era and is itself a sign of dog engagement: a dog box is routinely shifted without the clutch, where a synchronised gearbox resists it. It is recorded as a supporting observation, not as proof, and the gearbox type stays unknown until a source states the engagement."
+      "This car engages every gear immediately, up and down, without a lift, a blip, or any cut or blip from the car. Its three classmates only engage once the revs match and need the driver to lift and blip; this one does not, which the driver confirmed after the drive. The automatic-cut test could not classify it because there is no cut to find: the gearbox simply takes the gear.",
+      "The combination is unusual and is recorded as observed rather than as period practice. A 1988 Formula One gearbox would not behave this way, so this most likely reflects how the simulator models this particular car. No real-world chassis is assigned to it, so there is no separate real-car value for the observation to contradict."
     ]
   },
   "simulators": [
@@ -68,7 +69,7 @@
       "behavior": {
         "shift_type": "h-pattern",
         "auto_blip": "no",
-        "shift_cut": "unknown",
+        "shift_cut": "no",
         "wheel_rim_type": {
           "normalized": "d-shaped",
           "integrated_display": "no",
@@ -77,7 +78,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-classic-gen2-model2-high-downforce.20260814t225644082z-fec531da by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-classic-gen2-model2-high-downforce.20260814t225644082z-fec531da by Jason Kinslow.",
+          "The guided drive could not classify an automatic cut from the trace, because there is none to find: the gearbox takes the gear immediately at full throttle. The driver confirmed after the drive that no cut, blip, lift or rev match is needed, so the simulator behaviour is recorded as no automatic cut rather than left unresolved."
         ]
       },
       "overrides": [],

@@ -19,9 +19,15 @@ the bottom right rather than the bottom left, which no other dogleg in the
 dataset does. The schema records `dogleg-h`, which is true of it, and the
 mirroring is kept in the record notes because no enum value expresses it.
 
-Formula Classic Gen2 Model2 alone returned an inconclusive automatic-cut test, so
-its cut and upshift lift stay `unknown` rather than being borrowed from the other
-Gen2 cars.
+Formula Classic Gen2 Model2 is the exception in its own class, corrected in
+dataset 0.3.38. It engages every gear immediately, up and down, with no lift, no
+blip, and no cut or blip from the car, while its three classmates only engage
+once the revs match. The automatic-cut test returned inconclusive because there
+is no cut to find: the gearbox simply takes the gear. That was first recorded as
+`unknown`, which understated a behaviour the drive had established and the driver
+then confirmed. It is now recorded as observed, with a note that a 1988 gearbox
+would not behave this way and that this most likely reflects how the simulator
+models this car.
 
 **Formula HiTech Gen1, 1991 to 1992.** Semi-automatic paddles with automatic cut
 and blip, but a clutch still needed to pull away, which is the pattern of the

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.37",
+  "dataset_version": "0.3.38",
   "approved_at": "2026-08-14",
   "record_id": "ams2.formula-classic-gen2-model2-high-downforce",
   "telemetry_name": "Formula Classic Gen2 Model2 - High Downforce",
@@ -12,16 +12,16 @@
     "shift_actuation": "h-pattern",
     "shift_pattern": "standard-h",
     "standing_start_clutch": "required",
-    "throttle_lift": "unknown",
-    "automatic_cut": "unknown",
+    "throttle_lift": "not-required",
+    "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "unknown",
+    "manual_blip": "not-required",
     "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+  "confidence_notes": "Guided testing established six H-pattern gears, the standing-start clutch, and clutchless running shifts that engage immediately without a lift or blip and with no cut or blip from the car. The driver confirmed the behaviour after the drive, distinguishing it from the three classmates that require rev matching.",
   "scope_notes": "Single exact identity staged from one guided-verification drive."
 }
