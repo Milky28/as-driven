@@ -86,7 +86,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.30 contains 134 reviewed records. Its newest records complete the
+Dataset 0.3.31 contains 139 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -189,7 +189,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.30 contains 134 curated AMS2 records promoted through the reviewed
+Dataset 0.3.31 contains 139 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
@@ -316,6 +316,13 @@ first `dogbox` records established from evidence rather than observed behavior,
 because both use racing Hewlands engaged by dog rings rather than synchronisers,
 which makes their downshift blip required. The four Reiza cars carry no
 real-world chassis, so their gearbox construction stays `unknown`.
+Dataset 0.3.31 adds the 1983 to 1986 turbo era and establishes how simulator aero
+configurations reach a driver. AMS2 selects the downforce variant from the
+circuit rather than from the player, so one car reports different telemetry
+identities at different tracks; each record now carries every observed aero
+identity, or a driver would be reported unmatched purely for choosing a
+different track. Lotus Renault 98T carries the first gear-count override: its
+real gearbox is a six-speed and AMS2 models five.
 
 ## Licensing
 

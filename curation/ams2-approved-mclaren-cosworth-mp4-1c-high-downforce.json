@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.31",
+  "approved_at": "2026-08-14",
+  "record_id": "ams2.mclaren-cosworth-mp4-1c-high-downforce",
+  "telemetry_name": "McLaren Cosworth MP4/1C - High Downforce",
+  "telemetry_class": "F-Retro_Gen3_HD",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.mclaren-cosworth-mp4-1c-high-downforce.20260814t154108247z-58d5f5b7",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "additional_telemetry_names": [
+    {
+      "value": "McLaren Cosworth MP4/1C",
+      "basis": "Low-downforce configuration of the same car, observed exactly at Daytona. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+    }
+  ]
+}

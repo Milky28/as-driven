@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.30 contains 134 curated records. The refreshed SimHub 9.11.22
+Dataset 0.3.31 contains 139 curated records. The refreshed SimHub 9.11.22
 identity inventory contains 225 exact AMS2 identities observed on this PC. The
 generated coverage manifest compares those two sources without fuzzy matching.
 
@@ -12,17 +12,17 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 172 observed identities are covered exactly by curated records.
-- 53 observed identities are not covered.
-- 42 of those need full guided verification, and they are now the only work
+- 176 observed identities are covered exactly by curated records.
+- 49 observed identities are not covered.
+- 37 of those need full guided verification, and they are now the only work
   that requires driving.
-- 16 of those 42 have an exact legacy spreadsheet candidate that can seed
+- 15 of those 37 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 26 require independent control research in addition to current-game testing.
+- 22 require independent control research in addition to current-game testing.
 - 1 Low Downforce identities wait on unverified base cars; none is
   inheritance-ready.
-- 10 identities are closed by explicit review rather than driving: retired
+- 11 identities are closed by explicit review rather than driving: retired
   pre-rename observations of official cars, third-party mod content, and one
   vehicle out of product scope. Each carries a written basis in
   `research/ams2-identity-decisions.json`.
@@ -141,9 +141,50 @@ dog rings rather than synchronisers, so their downshift blip is `required`. The
 four Reiza cars carry no real-world chassis, so their gearbox construction and
 downshift blip stay `unknown` rather than being inferred from period practice.
 
-**The current next batch is the remaining Formula Vintage/Retro/Classic cars:**
-the seven Formula Classic identities, plus Lotus 98T and Brabham BMW BT52 from
-the same era.
+Batch 09 in dataset 0.3.31 completed the 1983 to 1986 turbo era: Brabham BMW
+BT52, McLaren Cosworth MP4/1C, Lotus Renault 98T, and Formula Classic Gen1
+Model1 and Model2. All five are five-speed H-pattern cars, and the three real
+cars all use Hewlands, so their downshift blip is `required`.
+
+Batch 09 established how AMS2 aero configurations reach the driver, which
+changes how identities must be read.
+
+The configuration follows the circuit, not the driver. Reiza's v1.4.1.0 release
+notes state that vehicle selection, showroom and lobby display the appropriate
+downforce variant for the current circuit, and driving each car at Laguna Seca
+and then loading it at Daytona produced two different identities. A record
+therefore needs every aero identity of its car, or a driver is reported unmatched
+purely because of the track they chose.
+
+Which name means which variant is not inferable. For these formula classes the
+suffixed name is high downforce and the plain name is low; for the sports and GT
+cars already curated, the plain name is the default and the suffix marks low
+downforce. The suffix marks the non-default variant, and the default differs by
+class, so a plain name proves nothing on its own.
+
+The SimHub inventory that generates this queue is keyed on a stored car file per
+observed identity, and those files are not rewritten when Reiza renames a car.
+The queue therefore listed `Lotus 98T` and plain `Brabham BMW BT52` while the
+current game reports `Lotus Renault 98T - High Downforce` and
+`Brabham BMW BT52 - High Downforce`. Five current identities were missing from
+this queue entirely, and `Lotus 98T` proved to be a genuine rename rather than an
+aero variant; it is recorded as a retired identity.
+
+The plugin's unmatched-identity diagnostics log is the accurate source. It
+records the live car model, car id, class, game version and date every time an
+uncurated car is loaded, needs no guided drive, and captured all five current
+identities plus their aero counterparts in a few minutes. This queue should
+reconcile against that log rather than the stored car files alone.
+
+Lotus Renault 98T carries the dataset's first gear-count override. Its real
+gearbox is a Lotus/Hewland six-speed and AMS2 models five, confirmed deliberately
+in-game, because a guided drive establishes only the highest gear actually
+selected and cannot distinguish an unreached gear from an absent one.
+
+**The current next batch is the remaining Formula Classic cars:** Gen2 Model1 and
+Model2, Gen3 Model1, Gen4 Model1, and Gen4 Model2 - Low Downforce. Their queued
+names predate the aero reorganisation, so confirm each exact identity from the
+diagnostics log after loading rather than trusting the name recorded here.
 
 Two identities in the wider queue need provenance review before driving rather
 than after: `Porsche 911 RSR 1974` and `Porsche 911 RSR 74` are more likely a

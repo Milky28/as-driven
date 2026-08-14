@@ -1,0 +1,277 @@
+{
+  "review": "open-wheel-batch-09",
+  "dataset_version": "0.3.31",
+  "approved_at": "2026-08-14",
+  "records": [
+    {
+      "record_id": "ams2.brabham-bmw-bt52-high-downforce",
+      "bundle": "build/open-wheel-batch-09/brabham-bmw-bt52-high-downforce.staged.json",
+      "manufacturer": "Brabham",
+      "model": "BT52",
+      "year": {
+        "label": "1983 Formula One season",
+        "from": 1983
+      },
+      "real_world_identity_notes": "Brabham BT52, the BMW M12/13 turbocharged car in which Nelson Piquet took the 1983 drivers' title. It used a Brabham/Hewland five- or six-speed manual gearbox with a Weismann differential.",
+      "real_world_source_refs": [
+        "wikipedia.brabham-bt52",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the BT52 and its gearbox, and both exact simulator identities were observed live.",
+      "specification_basis": "Wikipedia gives a Brabham/Hewland 5/6-speed manual, and the live drive selected five H-pattern gears, which matches the five-speed of that pair.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
+        "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed low-downforce name seen at Daytona. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
+        "Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing this gearbox was synchronised would change the gearbox type and make the downshift blip optional."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Brabham BMW BT52",
+          "basis": "Low-downforce configuration of the same car, observed exactly at Daytona. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-cosworth-mp4-1c-high-downforce",
+      "bundle": "build/open-wheel-batch-09/mclaren-cosworth-mp4-1c-high-downforce.staged.json",
+      "manufacturer": "McLaren",
+      "model": "MP4/1C",
+      "year": {
+        "label": "1983 Formula One season",
+        "from": 1983
+      },
+      "real_world_identity_notes": "McLaren MP4/1C, the 1983 development of the carbon-composite MP4/1 running the Ford-Cosworth DFV before the team's late-season switch to TAG-Porsche turbo power.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-1",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the MP4/1C and its gearbox, and both exact simulator identities were observed live.",
+      "specification_basis": "Wikipedia gives a McLaren / Hewland FGA 400 5-speed manual, and the live drive selected five H-pattern gears.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
+        "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed low-downforce name seen at Daytona. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
+        "Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing this gearbox was synchronised would change the gearbox type and make the downshift blip optional."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "McLaren Cosworth MP4/1C",
+          "basis": "Low-downforce configuration of the same car, observed exactly at Daytona. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.lotus-renault-98t-high-downforce",
+      "bundle": "build/open-wheel-batch-09/lotus-renault-98t-high-downforce.staged.json",
+      "manufacturer": "Lotus",
+      "model": "98T",
+      "year": {
+        "label": "1986 Formula One season",
+        "from": 1986
+      },
+      "real_world_identity_notes": "Lotus 98T, the Renault Gordini EF15B turbocharged car driven by Ayrton Senna and Johnny Dumfries in 1986. Its real gearbox is a Lotus/Hewland six-speed manual.",
+      "real_world_source_refs": [
+        "wikipedia.lotus-98t",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the 98T and its gearbox, and both exact simulator identities were observed live.",
+      "specification_basis": "Wikipedia gives a Lotus / Hewland 6-speed manual. The live drive selected five gears, and the driver then confirmed in-game that no sixth gear exists, so the real six-speed is recorded with an explicit simulator override for the five modelled in AMS2.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears in the simulator on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip. The real car's sixth gear comes from a registered source and is recorded as a simulator override.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "forward_gears": 6
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
+        "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed low-downforce name seen at Daytona. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
+        "Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing this gearbox was synchronised would change the gearbox type and make the downshift blip optional.",
+        "The real car has six forward gears and AMS2 models five. The record keeps the sourced six and states the deviation as an explicit override, so the client tells the driver five in-session while the real-car value stays true. The count was checked deliberately rather than inferred: a guided drive establishes only the highest gear actually selected, so an unreached gear and an absent one look identical."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Lotus Renault 98T",
+          "basis": "Low-downforce configuration of the same car, observed exactly at Daytona. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/forward_gears",
+          "value": 5,
+          "condition": "AMS2 1.6.9.91 models five forward gears for this car.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Observed in the guided drive and confirmed in-game by the driver."
+          }
+        }
+      ]
+    },
+    {
+      "record_id": "ams2.formula-classic-gen1-model1-high-downforce",
+      "bundle": "build/open-wheel-batch-09/formula-classic-gen1-model1-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Classic Gen1 Model1",
+      "year": {
+        "label": "Formula Classic Gen1 Model1"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised mid-1980s Formula One car, reviewed independently of the other Gen1 model. The dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry in both aero configurations; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip. No real-world chassis is assigned, so the gearbox construction is not established.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
+        "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed low-downforce name seen at Daytona. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+        "No real-world chassis is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Formula Classic Gen1 Model1",
+          "basis": "Low-downforce configuration of the same car, observed exactly at Daytona. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-classic-gen1-model2-high-downforce",
+      "bundle": "build/open-wheel-batch-09/formula-classic-gen1-model2-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Classic Gen1 Model2",
+      "year": {
+        "label": "Formula Classic Gen1 Model2"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised mid-1980s Formula One car, reviewed independently of the other Gen1 model. The dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry in both aero configurations; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip. No real-world chassis is assigned, so the gearbox construction is not established.",
+      "confidence_notes": "Guided testing directly established five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
+        "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed low-downforce name seen at Daytona. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+        "No real-world chassis is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Formula Classic Gen1 Model2",
+          "basis": "Low-downforce configuration of the same car, observed exactly at Daytona. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

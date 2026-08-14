@@ -1,5 +1,40 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.31 (open-wheel batch 09, 1983 to 1986 turbo era)
+
+Five cars, each carrying two identities. Brabham BMW BT52, McLaren Cosworth
+MP4/1C and Lotus Renault 98T are real cars on racing Hewlands, so their downshift
+blip is `required`; Formula Classic Gen1 Model1 and Model2 are Reiza's
+fictionalised cars and keep `unknown` gearbox construction. All five are
+five-speed H-pattern on a standard gate with no automation.
+
+These were driven twice. The first pass used the guided drive before its
+downshift engagement check existed, and that detector could accept a damaged
+gearbox that never engaged. The redrive on the fixed build returned identical
+values for all five, so the readings stand on an instrument that cannot
+false-pass.
+
+**Aero configurations follow the circuit, not the driver.** Reiza's v1.4.1.0
+notes state that selection screens show the variant appropriate to the current
+circuit, and driving at Laguna Seca then loading at Daytona produced two
+identities per car. Each record therefore carries both: the driven
+`- High Downforce` identity and the plain low-downforce name as an untested aero
+configuration. Without that, a driver would be reported unmatched purely for
+choosing a different track.
+
+Which name means which variant cannot be guessed. Here the suffix marks high
+downforce and the plain name is low; among the curated sports and GT cars the
+plain name is the default and the suffix marks low downforce.
+
+**Lotus Renault 98T carries the first gear-count override.** Its real gearbox is
+a Lotus/Hewland six-speed; AMS2 models five. The drive reported five, which is
+only a minimum, so the count was confirmed deliberately in-game before recording
+the deviation. The record keeps the sourced six and states five as an explicit
+simulator override.
+
+`Lotus 98T` is retired rather than aliased. It is a pre-rename identity that the
+certified build no longer produces in either aero configuration.
+
 ## Completed in dataset 0.3.30 (open-wheel batch 08, earliest era)
 
 Six cars from 1967 to 1979, and they are uniform: five H-pattern gears on a

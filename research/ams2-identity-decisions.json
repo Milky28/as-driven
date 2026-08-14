@@ -1,7 +1,7 @@
 {
   "decisions": "ams2-identity-review",
   "schema_version": "1.0.0",
-  "reviewed_at": "2026-08-12",
+  "reviewed_at": "2026-08-14",
   "notes": [
     "Explicit reviewer outcomes for observed SimHub identities that are not curated and are not queued for a guided drive.",
     "A retired identity is a stored pre-rename observation. It is deliberately not aliased onto the renamed record, because it is not selectable in the certified build and cannot be verified there.",
@@ -102,6 +102,15 @@
       "related_record_id": null,
       "source_refs": [],
       "basis": "Maintainer determined this is modded content that is not installed on the verification PC: the car could not be found in AMS2 1.6.9.91 when the touring-stock batch was driven. It was observed alongside other Group 5 mod content and AMS2 ships no BMW 320 Turbo Group 5. Not curated and removed from the guided-verification queue."
+    },
+    {
+      "telemetry_name": "Lotus 98T",
+      "disposition": "retired-identity",
+      "last_observed": "2024-04-06",
+      "superseded_by": "Lotus Renault 98T - High Downforce, Lotus Renault 98T",
+      "related_record_id": "ams2.lotus-renault-98t-high-downforce",
+      "source_refs": [],
+      "basis": "Stored 2024 observation from before the car was renamed. Loading it in AMS2 1.6.9.91 reports Lotus Renault 98T, in both the high- and low-downforce configurations, so this exact string is no longer produced by the certified build and is not aliased onto the record. Both current identities are carried by ams2.lotus-renault-98t-high-downforce."
     }
   ]
 }

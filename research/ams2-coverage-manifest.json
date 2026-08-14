@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.30",
+  "dataset_version": "0.3.31",
   "simhub_version": "9.11.22",
   "identity_source": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
   "rules": [
@@ -15,25 +15,25 @@
   ],
   "stats": {
     "observed_identities": 225,
-    "curated_records": 134,
-    "covered_exact_identities": 172,
-    "uncovered_identities": 53,
-    "full_guided_verifications": 42,
+    "curated_records": 139,
+    "covered_exact_identities": 176,
+    "uncovered_identities": 49,
+    "full_guided_verifications": 37,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 172,
-      "full-guided-verification": 42,
+      "covered-exact": 176,
+      "full-guided-verification": 37,
       "out-of-scope": 1,
-      "retired-identity": 3,
+      "retired-identity": 4,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "open-wheel": 36,
+      "open-wheel": 31,
       "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 26,
-      "legacy-controls-candidate-available": 16
+      "independent-control-research-needed": 22,
+      "legacy-controls-candidate-available": 15
     }
   },
   "entries": [
@@ -437,13 +437,13 @@
       "telemetry_name": "Brabham BMW BT52",
       "car_id": "Brabham BMW BT52",
       "identity_file": "Brabham BMW BT52.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.brabham-bmw-bt52-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1743121556.2917664,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Brabham BT26A",
@@ -899,25 +899,25 @@
       "telemetry_name": "Formula Classic Gen1 Model1",
       "car_id": "Formula Classic Gen1 Model1",
       "identity_file": "Formula Classic Gen1 Model1.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.formula-classic-gen1-model1-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712619576.9483383,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Formula Classic Gen1 Model2",
       "car_id": "Formula Classic Gen1 Model2",
       "identity_file": "Formula Classic Gen1 Model2.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.formula-classic-gen1-model2-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712619576.9493382,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Formula Classic Gen2 Model1",
@@ -1961,10 +1961,10 @@
       "telemetry_name": "Lotus 98T",
       "car_id": "Lotus 98T",
       "identity_file": "Lotus 98T.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "retired-identity",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.lotus-renault-98t-high-downforce",
+      "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Lotus Renault 98T - High Downforce, Lotus Renault 98T. No guided drive is scheduled.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1712417925.0774148,
       "legacy_sheet_candidate": {
@@ -2075,13 +2075,13 @@
       "telemetry_name": "McLaren Cosworth MP4/1C",
       "car_id": "McLaren Cosworth MP4/1C",
       "identity_file": "McLaren Cosworth MP4_1C.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.mclaren-cosworth-mp4-1c-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1736992674.3749208,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "McLaren Cosworth MP4/8",
