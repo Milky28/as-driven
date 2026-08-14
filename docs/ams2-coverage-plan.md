@@ -80,40 +80,46 @@ name and the reasoning instead.
 
 ### 2. Verify modern prototypes
 
-Modern-prototype batch 01 was completed in dataset 0.3.19: BMW M Hybrid V8,
-Chevrolet Corvette GTP, Porsche 963, MetalMoro AJR Chevrolet, and MetalMoro AJR
-Gen2 Chevrolet, with the BMW/Corvette/Porsche `- Low Downforce` aliases carried
-as explicit inherited identities.
-
-Start the next guided batch with:
-
-1. Mazda 787B;
-2. Nissan R89C;
-3. Porsche 962C;
-4. MetalMoro MRX Duratec P4.
-
-This batch establishes base records for the Nissan R89C and Porsche 962C pending
-Low Downforce identities. The three historic Le Mans cars each carry a legacy
-control candidate to seed research; the guided drive still establishes current
-AMS2 behavior.
+Complete. Batch 01 in dataset 0.3.19 covered BMW M Hybrid V8, Chevrolet Corvette
+GTP, Porsche 963, MetalMoro AJR Chevrolet, and MetalMoro AJR Gen2 Chevrolet.
+Batch 02 in 0.3.22 covered Nissan R89C, Porsche 962C, and MetalMoro MRX Duratec
+P4; Mazda 787B was dropped as modded content, because Reiza holds no Mazda
+licence. Datasets 0.3.20 and 0.3.23 promoted the unlocked `- Low Downforce`
+aliases.
 
 ### 3. Verify contemporary GT cars
 
-Process GT3/GTE first, then GT4/one-make cars. Grouping similar cars improves
-testing speed but does not permit controls to be inherited across different
-models without evidence.
+Complete. Batch 03 in dataset 0.3.24 covered seven paddle-shift GT3 cars plus the
+sequential-lever Ginetta G55 GT3; batch 04 in 0.3.26 covered six GT4 cars and
+introduced the dataset's first simulator override; batch 05 in 0.3.27 covered the
+late-1990s GT1 cars, two modern GTE cars, and the misclassified Puma GTE road
+car. Datasets 0.3.23 and 0.3.25 promoted the unlocked `- Low Downforce` aliases.
+
+Grouping similar cars improved testing speed but never permitted controls to be
+inherited across different models without evidence, and the GT4 batch proved why:
+three of its six cars carry seven gears from a road-car dual clutch.
 
 ### 4. Verify touring, stock, club, and road cars
 
-Prioritize cars likely to need H-pattern hardware or manual rev matching,
-because their guidance most directly changes a user's pre-session hardware.
+In progress. Batch 06 in dataset 0.3.28 completed the touring and stock cars, and
+produced the first records whose gate pattern was read from a guided drive rather
+than a specification.
+
+**The current next batch is the ten remaining club and road cars:** Caterham
+Academy, Caterham Supersport, Chevrolet Chevette, Copa Fusca, Ginetta G40,
+Ginetta G40 Cup, Gol Classic B, Gol Classic FL, Puma GTB, and Puma P052.
+
+These are the last cars likely to need H-pattern hardware and manual rev
+matching, so their guidance most directly changes a user's pre-session hardware.
+Four carry a legacy spreadsheet candidate to seed research; the other six need
+independent control research.
 
 ### 5. Verify open-wheel cars by historical era
 
-The 42-car open-wheel queue is the largest and should be split into Formula
-Vintage/Retro/Classic, Formula HiTech, CART/Formula USA historical chassis, and
-modern Formula groups. Similar class names are batching aids only; each exact
-selectable identity remains independently reviewable.
+The 42-car open-wheel queue is the largest and last, and should be split into
+Formula Vintage/Retro/Classic, Formula HiTech, CART/Formula USA historical
+chassis, and modern Formula groups. Similar class names are batching aids only;
+each exact selectable identity remains independently reviewable.
 
 ## Refresh procedure
 

@@ -82,7 +82,8 @@ than silently queueing verification work.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Exact coverage is 156 of 225 observed AMS2 identities. Guided verification is
   the only remaining category of open work; see `docs/ams2-coverage-plan.md`.
-- Next planned batch is contemporary GT3 and GTE cars.
+- `docs/ams2-coverage-plan.md` owns the batch order and names the current next
+  batch. Do not restate that batch here, so the two cannot drift apart.
 - `validate` compares the dataset version and record count quoted in this file,
   `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
   `data/v1/index.json`. Update the line above with the dataset, or validation
