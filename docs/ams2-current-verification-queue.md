@@ -1,5 +1,29 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.46 (CART batch 16, F-USA Gen1)
+
+Four of the five 1995 IndyCar chassis: Lola T95/00 in Ford-Cosworth and
+Mercedes-Benz form, and Reynard 95i in Ford-Cosworth and Honda form. All are
+six-speed sequential sticks with automatic cut, no automatic blip and a clutch
+to pull away, so the driver supplies the downshift blip.
+
+Reynard 95i Honda was absent from the coverage queue entirely until it was
+loaded. Wikipedia lists the Honda Indy V8 turbo among the 95I's engines, so it is
+official content that had simply never been seen on this PC.
+
+This class runs three configurations rather than two: base, high downforce and
+`- Speedway`, an oval package. Lola T95/00 Ford-Cosworth was observed in all
+three and anchors the identity format for the rest; the others take their extra
+identities from SimHub's stored inventory where it holds them, and by derivation
+where it does not, each labelled accordingly.
+
+Reynard 95i Mercedes-Benz is held back. It is the only one of the five whose
+drive reported an automatic blip, and the guided drive reads any throttle above
+fifteen percent during the attempt as a spike, so a brushed pedal and a car
+blipping for itself look identical. Four identical classmates make an artefact
+the likelier reading, and the answer changes whether the record tells a driver to
+blip.
+
 ## Completed in dataset 0.3.44 (Formula Ultimate Hybrid Gen2 and a Speedway identity)
 
 Formula Ultimate Hybrid Gen2 is a new record: eight paddle gears with automatic

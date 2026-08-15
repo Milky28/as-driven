@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.45",
+  "dataset_version": "0.3.46",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 120,
+    "live_identities_seen": 128,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -57,6 +57,9 @@
       "Formula V8 Gen3 - Low Downforce",
       "Fusca Classic FL",
       "Iveco Stralis",
+      "Lola T95/00 Ford-Cosworth - High Downforce",
+      "Lola T95/00 Ford-Cosworth - Speedway",
+      "Lola T95/00 Mercedes-Benz - High Downforce",
       "Lotus 72E",
       "Lotus Renault 98T",
       "Lotus Renault 98T - High Downforce",
@@ -72,6 +75,10 @@
       "Mercedes-Benz Actros",
       "Passat Classic B",
       "Passat Classic FL",
+      "Reynard 95i Ford-Cosworth - High Downforce",
+      "Reynard 95i Honda - High Downforce",
+      "Reynard 95i Mercedes-Benz - High Downforce",
+      "Reynard 95i Mercedes-Benz - Speedway",
       "Uno Classic B",
       "Volkswagen Constellation",
       "Vulkan Truck"
@@ -88,26 +95,26 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 291,
-    "curated_records": 184,
-    "covered_exact_identities": 260,
-    "uncovered_identities": 31,
-    "full_guided_verifications": 18,
+    "observed_identities": 298,
+    "curated_records": 188,
+    "covered_exact_identities": 269,
+    "uncovered_identities": 29,
+    "full_guided_verifications": 16,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 260,
-      "full-guided-verification": 18,
+      "covered-exact": 269,
+      "full-guided-verification": 16,
       "out-of-scope": 1,
       "retired-identity": 5,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "open-wheel": 12,
+      "open-wheel": 10,
       "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 6,
-      "legacy-controls-candidate-available": 12
+      "independent-control-research-needed": 7,
+      "legacy-controls-candidate-available": 9
     }
   },
   "entries": [
@@ -2889,13 +2896,16 @@
       "telemetry_name": "Lola T95/00 Ford-Cosworth",
       "car_id": "Lola T95/00 Ford-Cosworth",
       "identity_file": "Lola T95_00 Ford-Cosworth.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "identity_source": "stored-car-file",
+      "related_record_id": "ams2.lola-t95-00-ford-cosworth-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750895492.5965383,
+      "telemetry_class": "F-USA_Gen1",
+      "live_observed_at": "2026-08-15T22:09:46.2922162Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 126,
         "display_name": "Lola T95/00 Ford-Cosworth",
@@ -2905,13 +2915,41 @@
       "research_readiness": "legacy-controls-candidate-available"
     },
     {
+      "telemetry_name": "Lola T95/00 Ford-Cosworth - High Downforce",
+      "car_id": "Lola T95/00 Ford-Cosworth - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.lola-t95-00-ford-cosworth-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_HD",
+      "live_observed_at": "2026-08-15T21:57:23.5882248Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Lola T95/00 Ford-Cosworth - Speedway",
+      "car_id": "Lola T95/00 Ford-Cosworth - Speedway",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.lola-t95-00-ford-cosworth-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_SW",
+      "live_observed_at": "2026-08-15T22:11:02.4212386Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Lola T95/00 Mercedes-Benz",
       "car_id": "Lola T95/00 Mercedes-Benz",
       "identity_file": "Lola T95_00 Mercedes-Benz.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.lola-t95-00-mercedes-benz-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1753060209.748388,
@@ -2922,6 +2960,20 @@
         "year": "1995"
       },
       "research_readiness": "legacy-controls-candidate-available"
+    },
+    {
+      "telemetry_name": "Lola T95/00 Mercedes-Benz - High Downforce",
+      "car_id": "Lola T95/00 Mercedes-Benz - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.lola-t95-00-mercedes-benz-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_HD",
+      "live_observed_at": "2026-08-15T22:00:28.0171824Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Lola T98/00 Ford-Cosworth",
@@ -4120,10 +4172,10 @@
       "telemetry_name": "Reynard 95i Ford-Cosworth",
       "car_id": "Reynard 95i Ford-Cosworth",
       "identity_file": "Reynard 95i Ford-Cosworth.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.reynard-95i-ford-cosworth-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750546097.5084946,
@@ -4136,17 +4188,45 @@
       "research_readiness": "legacy-controls-candidate-available"
     },
     {
+      "telemetry_name": "Reynard 95i Ford-Cosworth - High Downforce",
+      "car_id": "Reynard 95i Ford-Cosworth - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.reynard-95i-ford-cosworth-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_HD",
+      "live_observed_at": "2026-08-15T22:02:48.3263908Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Reynard 95i Ford-Cosworth - Speedway",
       "car_id": "Reynard 95i Ford-Cosworth - Speedway",
       "identity_file": "Reynard 95i Ford-Cosworth - Speedway.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.reynard-95i-ford-cosworth-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750551958.517955,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Reynard 95i Honda - High Downforce",
+      "car_id": "Reynard 95i Honda - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.reynard-95i-honda-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_HD",
+      "live_observed_at": "2026-08-15T22:05:04.9103595Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Reynard 95i Mercedes-Benz",
@@ -4166,6 +4246,34 @@
         "year": "1995"
       },
       "research_readiness": "legacy-controls-candidate-available"
+    },
+    {
+      "telemetry_name": "Reynard 95i Mercedes-Benz - High Downforce",
+      "car_id": "Reynard 95i Mercedes-Benz - High Downforce",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "open-wheel",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_HD",
+      "live_observed_at": "2026-08-15T22:07:21.1799048Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
+      "telemetry_name": "Reynard 95i Mercedes-Benz - Speedway",
+      "car_id": "Reynard 95i Mercedes-Benz - Speedway",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "open-wheel",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-USA_Gen1_SW",
+      "live_observed_at": "2026-08-15T22:14:50.5495969Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Reynard 98i Ford-Cosworth",
