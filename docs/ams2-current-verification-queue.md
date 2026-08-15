@@ -1,5 +1,32 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.44 (Formula Ultimate Hybrid Gen2 and a Speedway identity)
+
+Formula Ultimate Hybrid Gen2 is a new record: eight paddle gears with automatic
+cut and blip and no clutch needed to pull away. All three of its aero identities
+were observed, so nothing is derived.
+
+It also untangles a naming trap. **AMS2's Formula Ultimate class numbering is
+offset from its car numbering by one.** The Gen2 car sits in `F-Ultimate`,
+`F-Ultimate_HD` and `F-Ultimate_LD`; the Gen3 car sits in `F-Ultimate_Gen2`,
+`F-Ultimate_Gen2_HD` and `F-Ultimate_Gen2_LD`. Reading either number as the other
+would merge two separate cars.
+
+`Formula USA 2023 - Speedway` was driven rather than inherited, and returned the
+same six paddle gears, clutch-free move-off, automatic cut and automatic blip as
+the high-downforce car. It is carried on the existing record as a confirmed match
+rather than an untested configuration, which is the first time a `- Speedway`
+identity has been established by driving it.
+
+One question is left open. `Formula Ultimate Gen2` is the primary identity of
+`ams2.formula-ultimate-2022`, whose every other identity is a
+`Formula Ultimate Hybrid Gen3` name. The certified build did not report it while
+every Gen2 and Gen3 configuration was being loaded, so it is a pre-rename
+identity, and which of the two cars it named is not established. The stored car
+files cannot separate them: every Formula Ultimate shares eight gears, 12,500 rpm
+and a 147-litre tank. It is left in place pending a decision rather than moved or
+removed on a guess.
+
 ## Completed in dataset 0.3.43 (formula batch 14)
 
 Eight cars from five classes, none of which offers an aero variant: the

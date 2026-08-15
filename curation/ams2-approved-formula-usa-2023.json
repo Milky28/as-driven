@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.17",
-  "approved_at": "2026-08-12",
+  "dataset_version": "0.3.44",
+  "approved_at": "2026-08-15",
   "record_id": "ams2.formula-usa-2023",
   "telemetry_name": "Formula USA 2023 - High Downforce",
   "telemetry_class": "F-USA_2023_HD",
@@ -23,5 +23,11 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed guided observation for Formula USA 2023 - High Downforce."
+  "scope_notes": "Reviewed guided observation for Formula USA 2023 - High Downforce.",
+  "additional_telemetry_names": [
+    {
+      "value": "Formula USA 2023 - Speedway",
+      "basis": "Speedway configuration of the same car, observed exactly in live telemetry and driven in its own guided verification. The drive returned the same six paddle gears, clutch-free move-off, automatic cut and automatic blip as the high-downforce car, so this identity is confirmed rather than inherited untested."
+    }
+  ]
 }

@@ -51,7 +51,8 @@
     },
     "notes": [
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
-      "The modeled car moves from rest without physical clutch input."
+      "The modeled car moves from rest without physical clutch input.",
+      "The speedway configuration was driven separately rather than inherited. It returned the same six paddle gears, clutch-free move-off, automatic cut and automatic blip as the high-downforce car, so the identity is carried on this record as a confirmed match rather than an untested configuration."
     ]
   },
   "simulators": [
@@ -77,6 +78,10 @@
         {
           "kind": "class-id",
           "value": "F-USA_2023_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula USA 2023 - Speedway"
         }
       ],
       "behavior": {
@@ -160,5 +165,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-15"
 }

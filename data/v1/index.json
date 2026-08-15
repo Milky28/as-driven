@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.43",
+  "dataset_version": "0.3.44",
   "released_at": "2026-08-15",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -87,6 +87,7 @@
     "cars/ams2.formula-trainer.json",
     "cars/ams2.formula-ultimate-2019.json",
     "cars/ams2.formula-ultimate-2022.json",
+    "cars/ams2.formula-ultimate-hybrid-gen2-high-downforce.json",
     "cars/ams2.formula-usa-2023.json",
     "cars/ams2.formula-v10-g2.json",
     "cars/ams2.formula-v10-gen3-b-high-downforce.json",

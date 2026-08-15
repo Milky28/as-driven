@@ -1,0 +1,60 @@
+{
+  "review": "formula-batch-15",
+  "dataset_version": "0.3.44",
+  "approved_at": "2026-08-15",
+  "records": [
+    {
+      "record_id": "ams2.formula-ultimate-hybrid-gen2-high-downforce",
+      "bundle": "build/formula-batch-15/formula-ultimate-hybrid-gen2-high-downforce.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Ultimate",
+      "variant": "Hybrid Gen2",
+      "year": {
+        "label": "Formula Ultimate Hybrid Gen2"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised modern hybrid Formula car, the Gen2 of the Formula Ultimate line. No real-world chassis identity is assigned. It is a separate car from Formula Ultimate Hybrid Gen3, which AMS2 places in its own class family.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-8"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and all three of the car's aero identities were observed in live telemetry.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry in all three of its aero configurations; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected eight paddle gears with automatic cut and blip and no clutch needed to pull away, which is the modern hybrid Formula pattern the class represents.",
+      "confidence_notes": "Guided testing directly established the eight paddle gears, the clutch-free move-off, the clutchless running shifts, and automatic cut and blip.",
+      "control_overrides": {
+        "gearbox_type": "semi-automatic",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, automatic blip on downshifts, and no clutch needed to pull away, so the driver supplies none of the three.",
+        "Eight forward gears, matching the modern Formula One hybrid era the class represents and the other Formula Ultimate records.",
+        "This is a different car from Formula Ultimate Hybrid Gen3. AMS2 places Gen2 in the F-Ultimate class family and Gen3 in F-Ultimate_Gen2, so the class numbering is offset from the car numbering by one. Nothing is inherited between them."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Formula Ultimate Hybrid Gen2",
+          "basis": "Base configuration of the same car, observed exactly in live telemetry in the F-Ultimate class. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Formula Ultimate Hybrid Gen2 - Low Downforce",
+          "basis": "Low-downforce configuration of the same car, observed exactly in live telemetry in the F-Ultimate_LD class. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}
