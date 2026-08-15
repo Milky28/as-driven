@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.40",
+  "dataset_version": "0.3.41",
   "approved_at": "2026-08-14",
   "record_id": "ams2.formula-classic-gen1-model1-high-downforce",
   "telemetry_name": "Formula Classic Gen1 Model1 - High Downforce",
@@ -27,7 +27,7 @@
   "additional_telemetry_names": [
     {
       "value": "Formula Classic Gen1 Model1",
-      "basis": "Unsuffixed configuration of the same car, observed exactly at Daytona. Which aero package that is was not established: these cars carry a base package as well as high and low downforce, and the unsuffixed name may be the base rather than the low-downforce one. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+      "basis": "Base configuration of the same car, observed exactly at Daytona. The vehicle selection screen offers no low-downforce package for this class, so the unsuffixed name is the base and this car has two aero identities rather than three, both of which are recorded here. AMS2 selects it by circuit, so a driver reaches it without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
     }
   ]
 }

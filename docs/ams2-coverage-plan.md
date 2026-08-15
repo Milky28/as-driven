@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.40 contains 175 curated records. The identity inventory contains 267
+Dataset 0.3.41 contains 175 curated records. The identity inventory contains 267
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -150,7 +150,7 @@ enough; no drive is needed to capture an identity.
 There are at least three aero states, not two. A tester found the same car
 showing high downforce at Laguna Seca, low downforce at Daytona, and no package
 at all at Imola, so a base configuration exists alongside the two suffixed ones.
-An unsuffixed name is therefore not evidence of low downforce, and dataset 0.3.40
+An unsuffixed name is therefore not evidence of low downforce, and dataset 0.3.41
 corrected five records that had described it that way.
 
 The vehicle selection screen names the package, which makes it the cheap way to
