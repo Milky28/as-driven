@@ -1,0 +1,355 @@
+{
+  "review": "cart-batch-17",
+  "dataset_version": "0.3.48",
+  "approved_at": "2026-08-15",
+  "records": [
+    {
+      "record_id": "ams2.lola-t98-00-ford-cosworth-high-downforce",
+      "bundle": "build/cart-batch-17/lola-t98-00-ford-cosworth-high-downforce.staged.json",
+      "manufacturer": "Lola",
+      "model": "T98/00 Ford-Cosworth",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1998 CART season",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Lola T98/00 of the 1998 CART season, raced with the Ford/Cosworth XB turbo and Honda Indy V8 engines and fitted with a six-speed manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.lola-t98-00"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a 6-speed manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere in the dataset.",
+        "This car was observed in all four of the class's configurations, so it anchors the identity format for the others."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Lola T98/00 Ford-Cosworth",
+          "basis": "Base configuration of the same car, observed exactly in live telemetry. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Lola T98/00 Ford-Cosworth - Speedway",
+          "basis": "Speedway configuration of the same car, observed exactly in live telemetry. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Lola T98/00 Ford-Cosworth - Superspeedway",
+          "basis": "Superspeedway configuration of the same car, observed exactly in live telemetry. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-98i-ford-cosworth-high-downforce",
+      "bundle": "build/cart-batch-17/reynard-98i-ford-cosworth-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "98I Ford-Cosworth",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1998 CART season",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Reynard 98I of the 1998 CART season, the chassis that took both titles that year with Alex Zanardi, fitted with a six-speed sequential manual gearbox and raced with Honda, Mercedes-Benz, Toyota and Ford/Cosworth engines.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-98i"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a 6-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere in the dataset."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 98i Ford-Cosworth",
+          "basis": "Base configuration of the same car, recorded in SimHub's stored inventory from an earlier observation and matching the derivation from this car's observed high-downforce name. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Reynard 98i Ford-Cosworth - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Ford-Cosworth - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-98i-honda-high-downforce",
+      "bundle": "build/cart-batch-17/reynard-98i-honda-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "98I Honda",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1998 CART season",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Reynard 98I of the 1998 CART season, the chassis that took both titles that year with Alex Zanardi, fitted with a six-speed sequential manual gearbox and raced with Honda, Mercedes-Benz, Toyota and Ford/Cosworth engines.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-98i"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a 6-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere in the dataset.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the 98I's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 98i Honda",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Honda - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Honda - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-98i-mercedes-benz-high-downforce",
+      "bundle": "build/cart-batch-17/reynard-98i-mercedes-benz-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "98I Mercedes-Benz",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1998 CART season",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Reynard 98I of the 1998 CART season, the chassis that took both titles that year with Alex Zanardi, fitted with a six-speed sequential manual gearbox and raced with Honda, Mercedes-Benz, Toyota and Ford/Cosworth engines.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-98i"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a 6-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere in the dataset.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the 98I's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 98i Mercedes-Benz",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Mercedes-Benz - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Mercedes-Benz - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-98i-toyota-high-downforce",
+      "bundle": "build/cart-batch-17/reynard-98i-toyota-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "98I Toyota",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1998 CART season",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Reynard 98I of the 1998 CART season, the chassis that took both titles that year with Alex Zanardi, fitted with a six-speed sequential manual gearbox and raced with Honda, Mercedes-Benz, Toyota and Ford/Cosworth engines.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-98i"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "Wikipedia gives a 6-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere in the dataset.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the 98I's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 98i Toyota",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Toyota - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 98i Toyota - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.swift-009c-ford-cosworth-high-downforce",
+      "bundle": "build/cart-batch-17/swift-009c-ford-cosworth-high-downforce.staged.json",
+      "manufacturer": "Swift",
+      "model": "009.c Ford-Cosworth",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1998 CART season",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Swift 009.c of the 1998 CART season, Swift Engineering's second CART chassis, a carbon fibre monocoque running the Ford-XD 2,650 cc V8 turbo.",
+      "real_world_source_refs": [
+        "wikipedia.swift-009c"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis, and the exact simulator identity was observed live.",
+      "specification_basis": "The source establishes the chassis and engine but states no transmission, so the six sequential gears, automatic cut and absent automatic blip rest on the guided drive alone.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere in the dataset.",
+        "The reviewed source gives no transmission for this chassis, so unlike its classmates the gearbox is not corroborated by a real-world specification. The controls are recorded from the drive, and the gearbox type is the sequential the drive observed rather than a sourced claim.",
+        "This car was absent from the coverage queue until it was loaded."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Swift 009c Ford-Cosworth",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Swift 009c Ford-Cosworth - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Swift 009c Ford-Cosworth - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola T98/00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

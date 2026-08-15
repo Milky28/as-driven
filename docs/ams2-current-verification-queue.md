@@ -1,5 +1,27 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.48 (CART batch 17, F-USA Gen2)
+
+Six cars of the 1998 CART season, and the class is uniform: six gears through a
+sequential stick, automatic cut, no automatic blip, and a clutch to pull away.
+
+Four of the six were invisible to the coverage queue until they were loaded. Only
+Lola T98/00 Ford-Cosworth and Reynard 98i Ford-Cosworth were known; the Reynard's
+Honda, Mercedes-Benz and Toyota variants and the entire Swift 009.c had never
+been seen on this PC. The source lists all four Reynard engines, so they are
+official content rather than anything irregular.
+
+This class runs **four** configurations: base, high downforce, Speedway and
+Superspeedway. Lola T98/00 Ford-Cosworth was observed in all four and anchors the
+identity format; the rest take their extra identities from the stored inventory
+where it holds them and by derivation where it does not, each labelled
+accordingly.
+
+Swift 009.c is `medium` confidence alone among the six. Its Wikipedia entry
+establishes the chassis and the Ford-XD V8 but states no transmission at all, so
+its gearbox rests on the guided drive rather than on a real-world specification,
+and the record says so.
+
 ## Completed in dataset 0.3.46 (CART batch 16, F-USA Gen1)
 
 Four of the five 1995 IndyCar chassis: Lola T95/00 in Ford-Cosworth and
