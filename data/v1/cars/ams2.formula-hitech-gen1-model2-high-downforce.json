@@ -61,6 +61,14 @@
         {
           "kind": "class-id",
           "value": "F-Hitech_Gen1_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula HiTech Gen1 Model2"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula HiTech Gen1 Model2 - Low Downforce"
         }
       ],
       "behavior": {

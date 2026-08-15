@@ -81,6 +81,14 @@
         {
           "kind": "class-id",
           "value": "F-Ultimate_Gen2_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Ultimate Hybrid Gen3"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Ultimate Hybrid Gen3 - Low Downforce"
         }
       ],
       "behavior": {
@@ -173,5 +181,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-14"
 }

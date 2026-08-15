@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.41 contains 175 curated records. The identity inventory contains 267
+Dataset 0.3.42 contains 175 curated records. The identity inventory contains 282
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -25,14 +25,14 @@ The machine-readable queue is checked in at:
 
 ## Current coverage snapshot
 
-- 218 observed identities are covered exactly by curated records.
-- 49 observed identities are not covered.
-- 23 of those need full guided verification, and they are now the only work
+- 248 observed identities are covered exactly by curated records.
+- 34 observed identities are not covered.
+- 22 of those need full guided verification, and they are now the only work
   that requires driving.
-- 15 of those 23 have an exact legacy spreadsheet candidate that can seed
+- 15 of those 22 have an exact legacy spreadsheet candidate that can seed
   historical controls research; the guided drive must still establish current
   AMS2 behavior and cockpit controls.
-- 8 require independent control research in addition to current-game testing.
+- 7 require independent control research in addition to current-game testing.
 - 1 Low Downforce identities wait on unverified base cars; none is
   inheritance-ready.
 - 11 identities are closed by explicit review rather than driving: retired
@@ -155,10 +155,22 @@ the two suffixed ones. The batch 09 classes, `F-Retro_Gen3` and
 the base, and they have two aero identities rather than three.
 
 An unsuffixed name is therefore not evidence of low downforce. Dataset 0.3.40
-corrected five records that had described it that way, and 0.3.41 recorded them
+corrected five records that had described it that way, and 0.3.42 recorded them
 as base configurations once the selection screen confirmed no low-downforce
 package exists for those classes. The number of variants has to be read per
 class; it cannot be assumed from another car.
+
+Dataset 0.3.42 completed the aero identities for the classes that offer more
+than one package. Twenty of the added identities were observed directly; the
+other forty-two were derived from each car's observed high-downforce name by
+removing or replacing the suffix, and each is recorded as derived rather than
+observed in both the record and its approval.
+
+The derivation is checked, not assumed. Every class carries at least one car that
+was loaded in all of its packages, and for all fifteen cars where more than one
+form was observed the derivation reproduces the observed strings exactly. A
+derived identity that is nonetheless wrong simply never matches, which is what a
+driver sees today, so the failure mode is the status quo rather than a wrong car.
 
 The vehicle selection screen names the package, which makes it the cheap way to
 learn which variants a car has. It does not give the exact telemetry string, and

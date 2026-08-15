@@ -76,6 +76,10 @@
         {
           "kind": "class-id",
           "value": "F-Reiza_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula V8 Gen3 - Low Downforce"
         }
       ],
       "behavior": {
@@ -167,5 +171,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-14"
 }

@@ -1,7 +1,37 @@
 {
-  "schema_version": "1.0.0", "dataset_version": "0.3.15", "approved_at": "2026-08-11",
-  "record_id": "ams2.renault-r25-high-downforce", "telemetry_name": "Renault R25 - High Downforce", "telemetry_class": "F-V10_Gen3_HD", "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22 guided verification",
-  "approved_controls": { "forward_gears": 6, "shift_actuation": "sequential-paddles", "shift_pattern": "sequential", "standing_start_clutch": "required", "running_shift_clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "automatic_blip": "yes", "manual_blip": "not-required", "wheel_rim_shape": "formula", "wheel_integrated_display": "yes", "wheel_shift_lights": "yes", "wheel_open_top": "no" },
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.42",
+  "approved_at": "2026-08-14",
+  "record_id": "ams2.renault-r25-high-downforce",
+  "telemetry_name": "Renault R25 - High Downforce",
+  "telemetry_class": "F-V10_Gen3_HD",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
+  },
   "confidence_notes": "Exact guided testing established six paddle gears, standing-start clutch, automatic cut/blip, and the Formula display rim.",
-  "scope_notes": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
+  "scope_notes": "Exact High Downforce identity only; no unobserved setup suffix is silently added.",
+  "additional_telemetry_names": [
+    {
+      "value": "Renault R25",
+      "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix, which the class confirms. Another car in F-V10_Gen3 was loaded in all of its packages and the same derivation reproduces its observed names exactly, as it does for every one of the fifteen cars where both forms were seen. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    },
+    {
+      "value": "Renault R25 - Low Downforce",
+      "basis": "Low-downforce configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix, which the class confirms. Another car in F-V10_Gen3 was loaded in all of its packages and the same derivation reproduces its observed names exactly, as it does for every one of the fifteen cars where both forms were seen. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    }
+  ]
 }

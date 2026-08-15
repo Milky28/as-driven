@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.21",
-  "approved_at": "2026-08-12",
+  "dataset_version": "0.3.42",
+  "approved_at": "2026-08-14",
   "record_id": "ams2.formula-v8-gen1-b-high-downforce",
   "telemetry_name": "Formula V8 Gen1 (B) - High Downforce",
   "telemetry_class": "F-V8_Gen1_HD",
@@ -28,6 +28,10 @@
     {
       "value": "Formula V8 Gen1 (B)",
       "basis": "Approved pre-aero-split configuration alias: the unqualified identity is the same car observed before its aero suffix existed. Controls are inherited from the verified qualified configuration and that unqualified form was not separately live-tested."
+    },
+    {
+      "value": "Formula V8 Gen1 (B) - Low Downforce",
+      "basis": "Low-downforce configuration of the same car, observed exactly in live telemetry. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
     }
   ]
 }

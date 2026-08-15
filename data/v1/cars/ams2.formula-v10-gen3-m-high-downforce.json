@@ -1,14 +1,136 @@
 {
-  "$schema": "../../../schema/v1/car-record.schema.json", "schema_version": "1.0.0", "record_id": "ams2.formula-v10-gen3-m-high-downforce",
-  "identity": { "display_name": "Formula V10 Gen3 (M) - High Downforce", "manufacturer": "Reiza", "model": "Formula V10 Gen3 (M)", "variant": "High Downforce", "year": { "label": "Formula V10 Gen3 Michelin representation" }, "class": "Formula V10 Gen3", "real_world_identity_notes": "Reiza identifies this as the Michelin generic member of Formula V10 Gen3; no unverified real-world chassis identity is assigned." },
-  "authentic_controls": {
-    "transmission": { "forward_gears": 7, "gearbox_type": "sequential", "shift_actuation": "sequential-paddles", "shift_pattern": "sequential", "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }, "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "not-required", "automatic_blip": "yes" }, "standing_start_clutch": "required" },
-    "steering": { "wheel_rim": { "shape": "formula", "diameter_mm": null, "integrated_display": "yes", "shift_lights": "yes", "open_top": "no", "source_label": "live-cockpit-formula-display-shift-lights", "notes": "Direct cockpit inspection showed a closed Formula rim with integrated display, shift lights, and paddles." } },
-    "notes": ["A physical clutch is required to pull away.", "Seven paddle gears accept clutchless running shifts with automatic cut and blip."]
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.formula-v10-gen3-m-high-downforce",
+  "identity": {
+    "display_name": "Formula V10 Gen3 (M) - High Downforce",
+    "manufacturer": "Reiza",
+    "model": "Formula V10 Gen3 (M)",
+    "variant": "High Downforce",
+    "year": {
+      "label": "Formula V10 Gen3 Michelin representation"
+    },
+    "class": "Formula V10 Gen3",
+    "real_world_identity_notes": "Reiza identifies this as the Michelin generic member of Formula V10 Gen3; no unverified real-world chassis identity is assigned."
   },
-  "simulators": [{ "simulator": "ams2", "identities": [{ "kind": "telemetry-name", "value": "Formula V10 Gen3 (M) - High Downforce" }, { "kind": "internal-id", "value": "Formula V10 Gen3 (M) - High Downforce" }, { "kind": "class-id", "value": "F-V10_Gen3_HD" }], "behavior": { "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes", "wheel_rim_type": { "normalized": "formula", "integrated_display": "yes", "shift_lights": "yes", "open_top": "no", "source_label": "live-cockpit-formula-display-shift-lights" }, "notes": ["Exact guided testing detected automatic cut and blip with assists disabled."] }, "overrides": [], "verified_game_version": "1.6.9.91", "verified_at": "2026-08-12", "source_refs": ["ams2.reiza-release.1.6.9.8.renault-formulas", "ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91"], "confidence": { "level": "verified", "basis": "Exact identity, start requirement, seven gears, technique, and wheel controls were directly verified." } }],
-  "provenance": { "claims": [
-    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.9.8.renault-formulas", "ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91"], "confidence": "verified", "basis": "Official class/model context and exact live telemetry establish the generic Michelin identity." },
-    { "paths": ["/authentic_controls/transmission", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"], "source_refs": ["ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91"], "confidence": "verified", "basis": "Reviewed replacement guided observation; draft hash e3e818fe." }
-  ] }, "updated_at": "2026-08-12"
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "formula",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-formula-display-shift-lights",
+        "notes": "Direct cockpit inspection showed a closed Formula rim with integrated display, shift lights, and paddles."
+      }
+    },
+    "notes": [
+      "A physical clutch is required to pull away.",
+      "Seven paddle gears accept clutchless running shifts with automatic cut and blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula V10 Gen3 (M) - High Downforce"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Formula V10 Gen3 (M) - High Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-V10_Gen3_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula V10 Gen3 (M)"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula V10 Gen3 (M) - Low Downforce"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-formula-display-shift-lights"
+        },
+        "notes": [
+          "Exact guided testing detected automatic cut and blip with assists disabled."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
+      "source_refs": [
+        "ams2.reiza-release.1.6.9.8.renault-formulas",
+        "ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact identity, start requirement, seven gears, technique, and wheel controls were directly verified."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.8.renault-formulas",
+          "ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official class/model context and exact live telemetry establish the generic Michelin identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-v10-gen3-m-hd-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed replacement guided observation; draft hash e3e818fe."
+      }
+    ]
+  },
+  "updated_at": "2026-08-14"
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.17",
-  "approved_at": "2026-08-12",
+  "dataset_version": "0.3.42",
+  "approved_at": "2026-08-14",
   "record_id": "ams2.formula-reiza",
   "telemetry_name": "Formula V8 Gen3 - High Downforce",
   "telemetry_class": "F-Reiza_HD",
@@ -23,5 +23,11 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed guided observation for Formula V8 Gen3 - High Downforce."
+  "scope_notes": "Reviewed guided observation for Formula V8 Gen3 - High Downforce.",
+  "additional_telemetry_names": [
+    {
+      "value": "Formula V8 Gen3 - Low Downforce",
+      "basis": "Low-downforce configuration of the same car, observed exactly in live telemetry. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+    }
+  ]
 }

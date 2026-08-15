@@ -63,6 +63,14 @@
         {
           "kind": "class-id",
           "value": "F-Hitech_Gen1_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Honda MP4/7A"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Honda MP4/7A - Low Downforce"
         }
       ],
       "behavior": {

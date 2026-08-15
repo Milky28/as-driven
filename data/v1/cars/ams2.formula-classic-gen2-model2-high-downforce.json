@@ -64,6 +64,14 @@
         {
           "kind": "class-id",
           "value": "F-Classic_Gen2_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Classic Gen2 Model2"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Classic Gen2 Model2 - Low Downforce"
         }
       ],
       "behavior": {

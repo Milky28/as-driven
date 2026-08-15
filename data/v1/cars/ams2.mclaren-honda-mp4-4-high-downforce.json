@@ -65,6 +65,14 @@
         {
           "kind": "class-id",
           "value": "F-Classic_Gen2_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Honda MP4/4"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Honda MP4/4 - Low Downforce"
         }
       ],
       "behavior": {

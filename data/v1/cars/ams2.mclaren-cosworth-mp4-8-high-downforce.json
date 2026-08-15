@@ -63,6 +63,14 @@
         {
           "kind": "class-id",
           "value": "F-Hitech_Gen2_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Cosworth MP4/8"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Cosworth MP4/8 - Low Downforce"
         }
       ],
       "behavior": {

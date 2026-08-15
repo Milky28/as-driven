@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.37",
+  "dataset_version": "0.3.42",
   "approved_at": "2026-08-14",
   "record_id": "ams2.mclaren-honda-mp4-7a-high-downforce",
   "telemetry_name": "McLaren Honda MP4/7A - High Downforce",
@@ -23,5 +23,15 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
-  "scope_notes": "Single exact identity staged from one guided-verification drive."
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "additional_telemetry_names": [
+    {
+      "value": "McLaren Honda MP4/7A",
+      "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix, which the class confirms. Another car in F-Hitech_Gen1 was loaded in all of its packages and the same derivation reproduces its observed names exactly, as it does for every one of the fifteen cars where both forms were seen. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    },
+    {
+      "value": "McLaren Honda MP4/7A - Low Downforce",
+      "basis": "Low-downforce configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix, which the class confirms. Another car in F-Hitech_Gen1 was loaded in all of its packages and the same derivation reproduces its observed names exactly, as it does for every one of the fifteen cars where both forms were seen. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    }
+  ]
 }
