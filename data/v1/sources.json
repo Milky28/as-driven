@@ -4261,6 +4261,18 @@
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.reynard-95i-honda-high-downforce.20260815t220527161z-d994a296 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-reynard-95i-mercedes-benz-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Reynard 95i Mercedes-Benz - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.reynard-95i-mercedes-benz-high-downforce.20260815t220739550z-a7698e90 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

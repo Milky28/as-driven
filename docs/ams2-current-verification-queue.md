@@ -17,12 +17,18 @@ three and anchors the identity format for the rest; the others take their extra
 identities from SimHub's stored inventory where it holds them, and by derivation
 where it does not, each labelled accordingly.
 
-Reynard 95i Mercedes-Benz is held back. It is the only one of the five whose
-drive reported an automatic blip, and the guided drive reads any throttle above
-fifteen percent during the attempt as a spike, so a brushed pedal and a car
-blipping for itself look identical. Four identical classmates make an artefact
-the likelier reading, and the answer changes whether the record tells a driver to
-blip.
+Reynard 95i Mercedes-Benz followed in dataset 0.3.47. Its high-downforce attempt
+was the only one of the class's five cars to report an automatic blip. The same
+car was then driven in its Speedway configuration and reported none, and aero
+configuration does not change a gearbox, so the same car contradicted itself. The
+guided drive reads any throttle above fifteen percent during the attempt as a
+spike, which makes a brushed pedal and a car blipping for itself
+indistinguishable. The spike is recorded as an artefact of that one attempt and
+the blip as absent, matching the second drive and the four classmates.
+
+That second drive also confirmed the Speedway identity rather than inheriting it,
+which is the second Speedway configuration in the dataset established by driving
+it.
 
 ## Completed in dataset 0.3.44 (Formula Ultimate Hybrid Gen2 and a Speedway identity)
 

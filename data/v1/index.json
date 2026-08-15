@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.46",
+  "dataset_version": "0.3.47",
   "released_at": "2026-08-15",
   "records": [
     "cars/ams2.alpine-a110-gt4-evo.json",
@@ -177,6 +177,7 @@
     "cars/ams2.renault-r28-high-downforce.json",
     "cars/ams2.reynard-95i-ford-cosworth-high-downforce.json",
     "cars/ams2.reynard-95i-honda-high-downforce.json",
+    "cars/ams2.reynard-95i-mercedes-benz-high-downforce.json",
     "cars/ams2.saleen-s7-r-gt1.json",
     "cars/ams2.sauber-mercedes-c9.json",
     "cars/ams2.spyker-c8-spyder-gt2-r.json",

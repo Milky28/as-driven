@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.47",
+  "approved_at": "2026-08-15",
+  "record_id": "ams2.reynard-95i-mercedes-benz-high-downforce",
+  "telemetry_name": "Reynard 95i Mercedes-Benz - High Downforce",
+  "telemetry_class": "F-USA_Gen1_HD",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.reynard-95i-mercedes-benz-high-downforce.20260815t220739550z-a7698e90",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts and automatic cut. The automatic blip is recorded as absent on the weight of a second drive of the same car and four classmates, against a single attempt that reported a throttle spike.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "additional_telemetry_names": [
+    {
+      "value": "Reynard 95i Mercedes-Benz",
+      "basis": "Base configuration of the same car, recorded in SimHub's stored inventory from an earlier observation and matching the derivation from this car's observed high-downforce name. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven configurations and were not separately tested."
+    },
+    {
+      "value": "Reynard 95i Mercedes-Benz - Speedway",
+      "basis": "Speedway configuration of the same car, observed exactly in live telemetry and driven in its own guided verification. That drive returned the same six sequential gears, standing-start clutch and automatic cut as the high-downforce car, and no automatic blip, so this identity is confirmed rather than inherited untested."
+    }
+  ]
+}

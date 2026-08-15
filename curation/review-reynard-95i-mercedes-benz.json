@@ -1,0 +1,61 @@
+{
+  "review": "reynard-95i-mercedes-benz",
+  "dataset_version": "0.3.47",
+  "approved_at": "2026-08-15",
+  "records": [
+    {
+      "record_id": "ams2.reynard-95i-mercedes-benz-high-downforce",
+      "bundle": "build/cart-batch-16/reynard-95i-mercedes-benz-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "95I Mercedes-Benz",
+      "variant": "High Downforce",
+      "year": {
+        "label": "1995 IndyCar season",
+        "from": 1995
+      },
+      "real_world_identity_notes": "Reynard 95I of the 1995 IndyCar season in Mercedes-Benz IC108 form, a chassis raced with Honda, Ford/Cosworth XB and Mercedes-Benz engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-95i"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, in two of the car's configurations, and the real-world transmission is supported by a registered source.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drives selected six gears through a sequential stick with automatic cut and a clutch needed to pull away.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts and automatic cut. The automatic blip is recorded as absent on the weight of a second drive of the same car and four classmates, against a single attempt that reported a throttle spike.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "The high-downforce attempt reported a throttle spike and was the only one of the class's five cars to do so. The same car was then driven in its Speedway configuration and reported none, and aero configuration does not change a gearbox. The guided drive reads any throttle above fifteen percent during the attempt as a spike, so a brushed pedal and a car blipping for itself are indistinguishable to it. The spike is treated as an artefact of that one attempt, and the blip is recorded as absent to match the second drive and the four classmates.",
+        "This class runs three configurations rather than two: base, high downforce and Speedway, an oval package, which is why the suffix differs from the downforce pairs used elsewhere in the dataset."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 95i Mercedes-Benz",
+          "basis": "Base configuration of the same car, recorded in SimHub's stored inventory from an earlier observation and matching the derivation from this car's observed high-downforce name. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven configurations and were not separately tested."
+        },
+        {
+          "value": "Reynard 95i Mercedes-Benz - Speedway",
+          "basis": "Speedway configuration of the same car, observed exactly in live telemetry and driven in its own guided verification. That drive returned the same six sequential gears, standing-start clutch and automatic cut as the high-downforce car, and no automatic blip, so this identity is confirmed rather than inherited untested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

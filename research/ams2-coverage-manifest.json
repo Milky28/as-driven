@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.46",
+  "dataset_version": "0.3.47",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
@@ -96,25 +96,25 @@
   ],
   "stats": {
     "observed_identities": 298,
-    "curated_records": 188,
-    "covered_exact_identities": 269,
-    "uncovered_identities": 29,
-    "full_guided_verifications": 16,
+    "curated_records": 189,
+    "covered_exact_identities": 272,
+    "uncovered_identities": 26,
+    "full_guided_verifications": 13,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 269,
-      "full-guided-verification": 16,
+      "covered-exact": 272,
+      "full-guided-verification": 13,
       "out-of-scope": 1,
       "retired-identity": 5,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "open-wheel": 10,
+      "open-wheel": 7,
       "other": 6
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 7,
-      "legacy-controls-candidate-available": 9
+      "independent-control-research-needed": 5,
+      "legacy-controls-candidate-available": 8
     }
   },
   "entries": [
@@ -4232,10 +4232,10 @@
       "telemetry_name": "Reynard 95i Mercedes-Benz",
       "car_id": "Reynard 95i Mercedes-Benz",
       "identity_file": "Reynard 95i Mercedes-Benz.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.reynard-95i-mercedes-benz-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1750895492.5965383,
@@ -4251,29 +4251,29 @@
       "telemetry_name": "Reynard 95i Mercedes-Benz - High Downforce",
       "car_id": "Reynard 95i Mercedes-Benz - High Downforce",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.reynard-95i-mercedes-benz-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "F-USA_Gen1_HD",
       "live_observed_at": "2026-08-15T22:07:21.1799048Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Reynard 95i Mercedes-Benz - Speedway",
       "car_id": "Reynard 95i Mercedes-Benz - Speedway",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.reynard-95i-mercedes-benz-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "F-USA_Gen1_SW",
       "live_observed_at": "2026-08-15T22:14:50.5495969Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Reynard 98i Ford-Cosworth",
