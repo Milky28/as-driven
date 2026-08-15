@@ -201,13 +201,22 @@ mapping shows the card persistently when it is hidden and hides it when it is
 visible. For separate buttons, create one mapping each for
 `AsDriven.ShowPopup` and `AsDriven.HidePopup`.
 
-The automatic timeout is separate from manual recall. Open the **Authentic
-Controls** plugin page, choose Detailed (840×360), Compact (520×300), or Glance
-(320×120), choose 1–60 seconds, and click **Save popup settings**. Compact and
-10 seconds are the defaults; both saved values are reused after restarting
-SimHub. Load the included **As Driven** overlay layout once and move it
-to the preferred screen position. It already contains all three popup sizes
-and the separate guided-verification surface.
+The automatic timeout is separate from manual recall. Open the **As Driven**
+plugin page, choose Detailed (840×360), Compact (520×300), or Glance (320×120),
+choose 1–60 seconds, and click **Save popup settings**. Compact and 10 seconds
+are the defaults; both saved values are reused after restarting SimHub.
+
+Load the included **As Driven** overlay layout once and move it to the preferred
+screen position. It places the Compact card and the guided-verification surface,
+which matches the default popup size. Detailed and Glance ship inside the same
+layout but are not placed, because the three are alternative sizes of one card
+rather than three things to show together: SimHub renders every placed overlay in
+its own window, so placing all three costs three renderers and three alt-tab
+entries to show the same information. Place whichever size is preferred from Dash
+Studio and unplace Compact.
+
+This is the packaged default. `install.ps1` preserves existing `As Driven*.olayout`
+files, so an installation that already has a customized layout keeps it.
 
 ## Current boundary
 

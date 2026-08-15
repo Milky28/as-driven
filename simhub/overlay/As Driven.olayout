@@ -8,7 +8,7 @@
       "Height": 360.0,
       "Version": 1,
       "PartId": "ef8c8d45-5fee-5276-abf6-070022fbb1b4",
-      "Placed": true,
+      "Placed": false,
       "Transparent": true
     },
     {
@@ -30,7 +30,7 @@
       "Height": 120.0,
       "Version": 1,
       "PartId": "728d60d2-aae8-57ec-80e7-d575d5092dde",
-      "Placed": true,
+      "Placed": false,
       "Transparent": true
     },
     {
