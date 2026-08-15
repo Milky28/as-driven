@@ -1,5 +1,30 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.39 (formula batch 13, Classic Gen3 and Gen4)
+
+Nine cars, and the classes are deliberately mixed rather than uniform. Formula
+Classic Gen3 holds three H-pattern manual cars and one paddle car; Gen4 holds two
+paddle cars and one manual, plus the MP4/6. That is period-correct: teams adopted
+semi-automatic gearboxes at different times around 1990, so a manual car and a
+paddle car raced in the same field. Nothing is inherited between models on the
+strength of a shared class, and this batch is the clearest reason why.
+
+McLaren Honda MP4/5B is the 1990 car on the transverse Weismann/McLaren six-speed
+manual.
+
+**McLaren Honda MP4/6 is the standout, and its cockpit disagrees with itself.**
+The visible lever and its animation are those of a sequential stick, while the
+gearbox accepts direct gear selection, which a sequential cannot do, and requires
+the driver to match revs. Wikipedia gives it a Weismann/McLaren transverse
+six-speed manual and records it as the last Formula One car to win a World
+Championship using a manual transmission, so the mechanics agree with the real
+car and the lever is the outlier.
+
+The mechanism is therefore recorded as `h-pattern`, and the gate as `unknown`: a
+lever animated as a sequential cannot be read for a gate, and no reviewed source
+describes the MP4/6's shift pattern. The sequential-looking lever is treated as a
+modelling detail, not as evidence about the transmission.
+
 ## Completed in dataset 0.3.37 (formula batch 12)
 
 Twelve cars across three classes, and the batch reads as a history of how

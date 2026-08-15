@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.39",
+  "approved_at": "2026-08-14",
+  "record_id": "ams2.formula-classic-gen4-model3-high-downforce",
+  "telemetry_name": "Formula Classic Gen4 Model3 - High Downforce",
+  "telemetry_class": "F-Classic_Gen4_HD",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.formula-classic-gen4-model3-high-downforce.20260815t040549557z-cf8d34a2",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "unknown",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

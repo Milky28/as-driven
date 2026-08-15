@@ -664,6 +664,42 @@
       "notes": "Guided-verification observation ams2.formula-classic-gen1-model2-high-downforce.20260814t154943451z-a6174c7b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-formula-classic-gen2-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen2 Model1 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-classic-gen2-model1-high-downforce.20260814t225314357z-019def4a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-classic-gen2-model2-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen2 Model2 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-classic-gen2-model2-high-downforce.20260814t225644082z-fec531da by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-classic-gen2-model3-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen2 Model3 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-classic-gen2-model3-high-downforce.20260814t225958720z-a5ea647a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Edge Model1 High Downforce control test",
       "publisher": "Local AMS2 observation",
@@ -698,6 +734,78 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Draft ams2.formula-edge-model3-high-downforce.20260812t173528844z-d534209f records standing-start clutch, six paddle gears, detected automatic cut/blip, and a closed round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-live-formula-hitech-gen1-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula HiTech Gen1 Model1 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-hitech-gen1-model1-high-downforce.20260814t222353136z-5fe3b3cc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-hitech-gen1-model2-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula HiTech Gen1 Model2 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-hitech-gen1-model2-high-downforce.20260814t222826438z-2e25f808 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-hitech-gen1-model4-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula HiTech Gen1 Model4 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-hitech-gen1-model4-high-downforce.20260814t223528606z-3e255344 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-hitech-gen2-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula HiTech Gen2 Model1 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-hitech-gen2-model1-high-downforce.20260814t224046516z-4e179c0d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-hitech-gen2-model2-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula HiTech Gen2 Model2 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-hitech-gen2-model2-high-downforce.20260814t224340260z-e67f774b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-hitech-gen2-model3-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula HiTech Gen2 Model3 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-hitech-gen2-model3-high-downforce.20260814t224615928z-4d91749a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-formula-inter-mg15-controls.1.6.9.91",
@@ -1312,6 +1420,18 @@
       "notes": "Guided-verification observation ams2.mclaren-cosworth-mp4-1c-high-downforce.20260814t154108247z-58d5f5b7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-mclaren-cosworth-mp4-8-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Cosworth MP4/8 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-cosworth-mp4-8-high-downforce.20260814t224833402z-520770ba by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-mclaren-f1-gtr-controls.1.6.9.91",
       "title": "Guided live AMS2 McLaren F1 GTR control test",
       "publisher": "Local AMS2 observation",
@@ -1322,6 +1442,30 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
+    },
+    {
+      "source_id": "ams2.local-live-mclaren-honda-mp4-4-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Honda MP4/4 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-honda-mp4-4-high-downforce.20260814t230415755z-357c0656 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mclaren-honda-mp4-7a-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Honda MP4/7A - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-honda-mp4-7a-high-downforce.20260814t223806640z-12e37430 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-mercedes-amg-gt3-controls.1.6.9.91",
@@ -3603,6 +3747,30 @@
       "notes": "Gives the 1988 MP4/4 a Weismann-McLaren 6-speed manual gearbox behind the Honda RA168E 1.5-litre turbocharged V6. It says nothing about the gate or shift pattern."
     },
     {
+      "source_id": "wikipedia.mclaren-mp4-5",
+      "title": "McLaren MP4/5",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/McLaren_MP4/5",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the MP4/5 and MP4/5B a Weismann/McLaren longitudinal and transverse 6-speed manual gearbox. The MP4/5B of 1990 ran the Honda RA100E V10 with the transverse Weismann transmission."
+    },
+    {
+      "source_id": "wikipedia.mclaren-mp4-6",
+      "title": "McLaren MP4/6",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/McLaren_MP4/6",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-14",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the 1991 MP4/6 a Weismann/McLaren transverse 6-speed manual gearbox behind the Honda RA121/E V12, and records it as the last Formula One car to win a World Championship using a manual transmission."
+    },
+    {
       "source_id": "wikipedia.mclaren-mp4-7a",
       "title": "McLaren MP4/7A",
       "publisher": "Wikipedia",
@@ -3747,148 +3915,112 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-formula-classic-gen2-model1-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Classic Gen2 Model1 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen3-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen3 Model1 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-classic-gen2-model1-high-downforce.20260814t225314357z-019def4a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen3-model1-high-downforce.20260815t034551076z-4bd7efa6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-classic-gen2-model3-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Classic Gen2 Model3 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen3-model3-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen3 Model3 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-classic-gen2-model3-high-downforce.20260814t225958720z-a5ea647a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen3-model3-high-downforce.20260815t035225109z-d9f27a80 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-classic-gen2-model2-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Classic Gen2 Model2 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen3-model4-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen3 Model4 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-classic-gen2-model2-high-downforce.20260814t225644082z-fec531da by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen3-model4-high-downforce.20260815t035528261z-48df1e2c by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-mclaren-honda-mp4-4-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 McLaren Honda MP4/4 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen4-model3-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen4 Model3 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mclaren-honda-mp4-4-high-downforce.20260814t230415755z-357c0656 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen4-model3-high-downforce.20260815t040549557z-cf8d34a2 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-hitech-gen1-model1-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula HiTech Gen1 Model1 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen3-model2-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen3 Model2 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-hitech-gen1-model1-high-downforce.20260814t222353136z-5fe3b3cc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen3-model2-high-downforce.20260815t035004372z-beede05a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-hitech-gen1-model2-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula HiTech Gen1 Model2 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen4-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen4 Model1 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-hitech-gen1-model2-high-downforce.20260814t222826438z-2e25f808 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen4-model1-high-downforce.20260815t040131701z-9c4bc2c1 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-hitech-gen1-model4-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula HiTech Gen1 Model4 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-formula-classic-gen4-model2-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Classic Gen4 Model2 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-hitech-gen1-model4-high-downforce.20260814t223528606z-3e255344 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.formula-classic-gen4-model2-high-downforce.20260815t040327105z-e10efb1b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-mclaren-honda-mp4-7a-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 McLaren Honda MP4/7A - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-mclaren-honda-mp4-5b-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Honda MP4/5B - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mclaren-honda-mp4-7a-high-downforce.20260814t223806640z-12e37430 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mclaren-honda-mp4-5b-high-downforce.20260815t035745748z-3482622a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-formula-hitech-gen2-model1-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula HiTech Gen2 Model1 - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-mclaren-honda-mp4-6-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Honda MP4/6 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
+      "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-hitech-gen2-model1-high-downforce.20260814t224046516z-4e179c0d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-formula-hitech-gen2-model2-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula HiTech Gen2 Model2 - High Downforce guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-hitech-gen2-model2-high-downforce.20260814t224340260z-e67f774b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-formula-hitech-gen2-model3-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Formula HiTech Gen2 Model3 - High Downforce guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-hitech-gen2-model3-high-downforce.20260814t224615928z-4d91749a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mclaren-cosworth-mp4-8-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 McLaren Cosworth MP4/8 - High Downforce guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-14",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mclaren-cosworth-mp4-8-high-downforce.20260814t224833402z-520770ba by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mclaren-honda-mp4-6-high-downforce.20260815t040832936z-f73b08c6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

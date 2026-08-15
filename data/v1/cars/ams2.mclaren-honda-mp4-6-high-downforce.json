@@ -1,0 +1,144 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.mclaren-honda-mp4-6-high-downforce",
+  "identity": {
+    "display_name": "McLaren Honda MP4/6 - High Downforce",
+    "manufacturer": "McLaren",
+    "model": "MP4/6",
+    "year": {
+      "label": "1991 Formula One season",
+      "from": 1991
+    },
+    "class": "F-Classic_Gen4_HD",
+    "real_world_identity_notes": "McLaren MP4/6, the Honda RA121/E V12 car in which Ayrton Senna took the 1991 title. Wikipedia records it as the last Formula One car to win a World Championship using a manual transmission, on a Weismann/McLaren transverse six-speed manual gearbox."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "The cockpit disagrees with itself. The visible lever and its animation are those of a sequential stick, while the gearbox accepts direct gear selection, which a sequential cannot do, and needs the driver to match revs. The mechanism is recorded as an H-pattern because that is what the gearbox does and what the real car had; the sequential-looking lever is treated as a modelling detail rather than evidence about the transmission.",
+      "The gate is recorded unknown for the same reason. A lever animated as a sequential cannot be read for a gate, and no reviewed source describes the MP4/6's shift pattern, so neither the cockpit nor the sources establish it.",
+      "Gearbox construction is not established either. The source names Weismann/McLaren but not its engagement, so the downshift blip stays unknown.",
+      "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, so the accepted results stand; the driver confirmed no pedal was used.",
+      "This class mixes technologies, which is period-correct. Teams adopted semi-automatic gearboxes at different times around 1990, so a manual car and a paddle car raced in the same field. Nothing is inherited between models on the strength of a shared class.",
+      "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Honda MP4/6 - High Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Classic_Gen4_HD"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mclaren-honda-mp4-6-high-downforce.20260815t040832936z-f73b08c6 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "wikipedia.mclaren-mp4-6",
+        "ams2.local-live-mclaren-honda-mp4-6-high-downforce-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-mp4-6",
+          "ams2.local-live-mclaren-honda-mp4-6-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the MP4/6 and its manual gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-mp4-6",
+          "ams2.local-live-mclaren-honda-mp4-6-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Wikipedia gives a Weismann/McLaren transverse 6-speed manual and records the car as the last champion with a manual transmission. The live drive selected six gears with no automatic cut or blip and accepted direct gear selection, both of which agree with a manual gearbox."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mclaren-honda-mp4-6-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-14"
+}
