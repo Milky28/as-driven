@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.39 contains 175 curated records. The identity inventory contains 267
+Dataset 0.3.40 contains 175 curated records. The identity inventory contains 267
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -144,8 +144,22 @@ ones. A rename is invisible to memory and obvious to the plugin, which is how
 `Lotus 98T` was missed.
 
 A sweep captures one aero configuration per car, whichever the current circuit
-selects, so cars with variants still need a pass at a low-downforce circuit such
-as Daytona. Loading is enough; no drive is needed to capture an identity.
+selects, so cars with variants still need passes at other circuits. Loading is
+enough; no drive is needed to capture an identity.
+
+There are at least three aero states, not two. A tester found the same car
+showing high downforce at Laguna Seca, low downforce at Daytona, and no package
+at all at Imola, so a base configuration exists alongside the two suffixed ones.
+An unsuffixed name is therefore not evidence of low downforce, and dataset 0.3.40
+corrected five records that had described it that way.
+
+The vehicle selection screen names the package, which makes it the cheap way to
+learn which variants a car has. It does not give the exact telemetry string, and
+those cannot safely be constructed: this inventory contains
+`Stock USA Gen1 - Speedway ` with a trailing space, along with `- Speedway` and
+`- Superspeedway` suffixes, none of which a screen would reveal. Use the
+selection screen to enumerate the variants, and load at least one car per class
+per package to anchor the exact string.
 
 Batch 10 in dataset 0.3.32 was the first sweep: six cars, all six absent from the
 queue beforehand.

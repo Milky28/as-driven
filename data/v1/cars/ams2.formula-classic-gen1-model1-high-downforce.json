@@ -47,7 +47,7 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
-      "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed low-downforce name seen at Daytona. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+      "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed name seen at Daytona, whose aero package was not established. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
       "No real-world chassis is assigned, so the gearbox construction is unknown and the downshift blip stays unknown rather than being inferred from period practice."
     ]
   },
