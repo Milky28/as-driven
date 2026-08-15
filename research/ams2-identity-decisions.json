@@ -1,7 +1,7 @@
 {
   "decisions": "ams2-identity-review",
   "schema_version": "1.0.0",
-  "reviewed_at": "2026-08-14",
+  "reviewed_at": "2026-08-15",
   "notes": [
     "Explicit reviewer outcomes for observed SimHub identities that are not curated and are not queued for a guided drive.",
     "A retired identity is a stored pre-rename observation. It is deliberately not aliased onto the renamed record, because it is not selectable in the certified build and cannot be verified there.",
@@ -111,6 +111,15 @@
       "related_record_id": "ams2.lotus-renault-98t-high-downforce",
       "source_refs": [],
       "basis": "Stored 2024 observation from before the car was renamed. Loading it in AMS2 1.6.9.91 reports Lotus Renault 98T, in both the high- and low-downforce configurations, so this exact string is no longer produced by the certified build and is not aliased onto the record. Both current identities are carried by ams2.lotus-renault-98t-high-downforce."
+    },
+    {
+      "telemetry_name": "Formula Ultimate Gen2",
+      "disposition": "retired-identity",
+      "last_observed": "2026-08-12",
+      "superseded_by": "Formula Ultimate Hybrid Gen3",
+      "related_record_id": "ams2.formula-ultimate-2022",
+      "source_refs": [],
+      "basis": "Reiza shipped the 2022 to 2025 ground-effect car as Formula Ultimate Gen2 and later rebranded it to Formula Ultimate Hybrid Gen3, reclassifying the older 2017 to 2021 hybrid cars as Gen2. The certified build reported neither this string nor its class while every Formula Ultimate configuration was being loaded, so it is retired. It is deliberately not aliased onto ams2.formula-ultimate-2022: the name is also one digit away from the separate car curated as Formula Ultimate Hybrid Gen2, and carrying a retired string that close to a live one invites the two being merged."
     }
   ]
 }

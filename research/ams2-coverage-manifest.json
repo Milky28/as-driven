@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.44",
+  "dataset_version": "0.3.45",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
@@ -90,15 +90,15 @@
   "stats": {
     "observed_identities": 291,
     "curated_records": 184,
-    "covered_exact_identities": 261,
-    "uncovered_identities": 30,
+    "covered_exact_identities": 260,
+    "uncovered_identities": 31,
     "full_guided_verifications": 18,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 261,
+      "covered-exact": 260,
       "full-guided-verification": 18,
       "out-of-scope": 1,
-      "retired-identity": 4,
+      "retired-identity": 5,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
@@ -1949,10 +1949,10 @@
       "telemetry_name": "Formula Ultimate Gen2",
       "car_id": "Formula Ultimate Gen2",
       "identity_file": "Formula Ultimate Gen2.shcarsettings",
-      "coverage_disposition": "covered-exact",
+      "coverage_disposition": "retired-identity",
       "family": "open-wheel",
       "related_record_id": "ams2.formula-ultimate-2022",
-      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Formula Ultimate Hybrid Gen3. No guided drive is scheduled.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 8,
       "identity_file_modified_at": 1712508691.9651482,

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.42",
-  "approved_at": "2026-08-14",
+  "dataset_version": "0.3.45",
+  "approved_at": "2026-08-15",
   "record_id": "ams2.formula-ultimate-2022",
   "telemetry_name": "Formula Ultimate Hybrid Gen3 - High Downforce",
   "telemetry_class": "F-Ultimate_Gen2_HD",
@@ -23,7 +23,7 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce.",
+  "scope_notes": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce. Formula Ultimate Gen2 was this car's pre-rename name and is now recorded as a retired identity rather than carried here, because the certified build no longer reports it and the string is one digit away from the separate Formula Ultimate Hybrid Gen2 car.",
   "additional_telemetry_names": [
     {
       "value": "Formula Ultimate Hybrid Gen3",

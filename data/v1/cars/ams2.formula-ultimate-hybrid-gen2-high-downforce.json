@@ -7,10 +7,12 @@
     "manufacturer": "Reiza",
     "model": "Formula Ultimate",
     "year": {
-      "label": "Formula Ultimate Hybrid Gen2"
+      "label": "2017 to 2021",
+      "from": 2017,
+      "to": 2021
     },
     "class": "F-Ultimate_HD",
-    "real_world_identity_notes": "Reiza's fictionalised modern hybrid Formula car, the Gen2 of the Formula Ultimate line. No real-world chassis identity is assigned. It is a separate car from Formula Ultimate Hybrid Gen3, which AMS2 places in its own class family.",
+    "real_world_identity_notes": "Reiza's fictionalised modern hybrid Formula car, the Gen2 of the Formula Ultimate line. No real-world chassis identity is assigned. It is a separate car from Formula Ultimate Hybrid Gen3, which AMS2 places in its own class family. Reiza's fictionalised Formula car for the 2017 to 2021 hybrid era. It was reclassified as Gen2 when Reiza rebranded the 2022 ground-effect car from Formula Ultimate Gen2 to Formula Ultimate Hybrid Gen3.",
     "variant": "Hybrid Gen2"
   },
   "authentic_controls": {
@@ -48,7 +50,8 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, automatic blip on downshifts, and no clutch needed to pull away, so the driver supplies none of the three.",
       "Eight forward gears, matching the modern Formula One hybrid era the class represents and the other Formula Ultimate records.",
-      "This is a different car from Formula Ultimate Hybrid Gen3. AMS2 places Gen2 in the F-Ultimate class family and Gen3 in F-Ultimate_Gen2, so the class numbering is offset from the car numbering by one. Nothing is inherited between them."
+      "This is a different car from Formula Ultimate Hybrid Gen3. AMS2 places Gen2 in the F-Ultimate class family and Gen3 in F-Ultimate_Gen2, so the class numbering is offset from the car numbering by one. Nothing is inherited between them.",
+      "This is the 2017 to 2021 hybrid car. It became Gen2 only when Reiza rebranded the newer ground-effect car to Gen3, which is why the class numbering trails the car numbering."
     ]
   },
   "simulators": [

@@ -12,7 +12,7 @@
       "to": 2022
     },
     "class": "Formula Ultimate G2",
-    "real_world_identity_notes": "AMS2 fictional 2022 Formula Ultimate G2 identity; officially rebranded Formula Hybrid Gen3 in AMS2 V1.6.9, while current telemetry retains the Formula Ultimate Hybrid Gen3 family name.",
+    "real_world_identity_notes": "Reiza's fictionalised Formula car for the 2022 to 2025 ground-effect regulations. It shipped as Formula Ultimate Gen2 and was officially rebranded to the Formula Ultimate Hybrid Gen3 family in AMS2 v1.6.9, at which point the older 2017 to 2021 hybrid cars became Gen2. No real-world chassis identity is assigned.",
     "variant": "2022 / Gen2"
   },
   "authentic_controls": {
@@ -51,17 +51,14 @@
     },
     "notes": [
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
-      "The modeled car moves from rest without physical clutch input."
+      "The modeled car moves from rest without physical clutch input.",
+      "This car represents the 2022 to 2025 ground-effect Formula One regulations. Reiza originally shipped it as Formula Ultimate Gen2 and later rebranded it to Formula Ultimate Hybrid Gen3, reclassifying the older 2017 to 2021 hybrid cars as Gen2. The pre-rename name is recorded as a retired identity rather than carried here, because the certified build no longer reports it."
     ]
   },
   "simulators": [
     {
       "simulator": "ams2",
       "identities": [
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Ultimate Gen2"
-        },
         {
           "kind": "display-name",
           "value": "Formula Ultimate 2022"
@@ -181,5 +178,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-15"
 }
