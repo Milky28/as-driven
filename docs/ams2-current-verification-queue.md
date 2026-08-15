@@ -1,5 +1,33 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.43 (formula batch 14)
+
+Eight cars from five classes, none of which offers an aero variant: the
+selection screen shows no package for `F-Dirt`, `F-Junior`, `F-Retro_Gen1`,
+`F-Trainer` or `F-Trainer_A`, and only the plain identity has ever been
+observed. That is the first time a sweep has closed classes outright rather than
+leaving aero work behind.
+
+Brabham BT44, Lotus 72E and McLaren M23 are the real cars, all on the Hewland
+FG400 five-speed, so they carry the same dog-engagement reasoning as the Brabham
+BT26A and Lotus 49C: the downshift blip is `required`, inferred from Hewland's
+design approach rather than stated by the sources. Formula Retro V8 shares their
+class and is Reiza's fictionalised car, so its construction stays unknown, as do
+Formula Dirt and Formula Junior.
+
+**Formula Trainer and Formula Trainer Advanced are sequential, not H-pattern.**
+Community summaries report a four-speed H-pattern, and the drive found a
+sequential stick with automatic cut and blip. A Reiza forum thread settles it: a
+member who tested the car states it is definitely sequential for both, and a
+Reiza internal tester explains that an H-shifter can be bound to a sequential
+gearbox in game for players without sequential hardware, and that the selection
+menu states no transmission at all. That menu gap is where the mistake comes
+from, and the drive read the gearbox rather than the menu.
+
+Formula Edge gained its low-downforce identities. The tester loaded Model1 at
+Daytona, which proved the `FE-G1` class offers the package; Model2 and Model3
+are derived from their observed high-downforce names and recorded as derived.
+
 ## Completed in dataset 0.3.39 (formula batch 13, Classic Gen3 and Gen4)
 
 Nine cars, and the classes are deliberately mixed rather than uniform. Formula

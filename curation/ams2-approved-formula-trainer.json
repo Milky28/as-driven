@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.43",
+  "approved_at": "2026-08-15",
+  "record_id": "ams2.formula-trainer",
+  "telemetry_name": "Formula Trainer",
+  "telemetry_class": "F-Trainer",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.formula-trainer.20260815t193249957z-9b053a92",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "yes",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

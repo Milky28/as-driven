@@ -40,6 +40,12 @@ def walk(value):
             yield from walk(child)
 
 
+# Exactly one preflight size ships placed, alongside the verification surface.
+PLACED_BY_DEFAULT = frozenset(
+    {"As Driven Preflight Compact", "As Driven Verification Drive"}
+)
+
+
 class SimHubDashTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -425,10 +431,17 @@ class SimHubDashTests(unittest.TestCase):
             expected_size, expected_position = expected[stem]
             self.assertEqual(expected_size, (part["Width"], part["Height"]))
             self.assertEqual(expected_position, (part["Left"], part["Top"]))
-            self.assertTrue(part["Placed"])
+            # Only one preflight size is placed. The three sizes are
+            # alternatives, and SimHub renders every placed overlay in its own
+            # window, so placing all three would show the same card three times
+            # and put three entries in the alt-tab list. Compact is the one the
+            # plugin's own default popup size selects.
+            self.assertEqual(stem in PLACED_BY_DEFAULT, part["Placed"], stem)
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
         self.assertEqual(4, len(part_ids))
+        # The unplaced sizes still ship, so they remain one drag away.
+        self.assertEqual(4, len(expected))
 
     def test_5120_layout_centers_all_sizes_near_the_top(self):
         standard = json.loads(OVERLAY_LAYOUT_PATH.read_text(encoding="utf-8"))
@@ -444,7 +457,9 @@ class SimHubDashTests(unittest.TestCase):
             )
             self.assertEqual(expected_top, part["Top"])
             self.assertEqual(2560.0, part["Left"] + part["Width"] / 2)
-            self.assertTrue(part["Placed"])
+            self.assertEqual(
+                Path(part["DashboardName"]).stem in PLACED_BY_DEFAULT, part["Placed"]
+            )
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
         self.assertEqual(4, len(part_ids))

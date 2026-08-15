@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.21",
-  "approved_at": "2026-08-12",
+  "dataset_version": "0.3.43",
+  "approved_at": "2026-08-15",
   "record_id": "ams2.formula-edge-model3-high-downforce",
   "telemetry_name": "Formula Edge Model3 - High Downforce",
   "telemetry_class": "FE-G1_HD",
@@ -28,6 +28,10 @@
     {
       "value": "Formula Edge Model3",
       "basis": "Approved pre-aero-split configuration alias: the unqualified identity is the same car observed before its aero suffix existed. Controls are inherited from the verified qualified configuration and that unqualified form was not separately live-tested."
+    },
+    {
+      "value": "Formula Edge Model3 - Low Downforce",
+      "basis": "Low-downforce configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Formula Edge Model1 was loaded in its low-downforce package and the same derivation reproduces its observed name exactly, as it does for every car where both forms were seen. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
     }
   ]
 }

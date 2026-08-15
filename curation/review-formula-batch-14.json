@@ -1,0 +1,351 @@
+{
+  "review": "formula-batch-14",
+  "dataset_version": "0.3.43",
+  "approved_at": "2026-08-15",
+  "records": [
+    {
+      "record_id": "ams2.brabham-bt44",
+      "bundle": "build/formula-batch-14/brabham-bt44.staged.json",
+      "manufacturer": "Brabham",
+      "model": "BT44",
+      "year": {
+        "label": "1974 to 1976 Formula One seasons",
+        "from": 1974
+      },
+      "real_world_identity_notes": "Brabham BT44, the Cosworth DFV car raced from 1974 to 1976, on a Hewland FG400 with five forward gears.",
+      "real_world_source_refs": [
+        "wikipedia.brabham-bt44",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the car and its Hewland gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source names a Hewland FG400, and the live drive selected five H-pattern gears with no automatic cut or blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "dogbox"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required. Dog-ring construction is inferred from Hewland's design approach rather than stated by the source, and a source showing a synchronised FG400 would make the blip optional.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.lotus-72e",
+      "bundle": "build/formula-batch-14/lotus-72e.staged.json",
+      "manufacturer": "Lotus",
+      "model": "72E",
+      "year": {
+        "label": "1973 to 1975 Formula One seasons",
+        "from": 1973
+      },
+      "real_world_identity_notes": "Lotus 72E, the final development of the Lotus 72 raced from 1973 to 1975, running the Ford Cosworth DFV on a Hewland FG400 five-speed manual.",
+      "real_world_source_refs": [
+        "wikipedia.lotus-72",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the car and its Hewland gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source names a Hewland FG400, and the live drive selected five H-pattern gears with no automatic cut or blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "dogbox"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required. Dog-ring construction is inferred from Hewland's design approach rather than stated by the source, and a source showing a synchronised FG400 would make the blip optional.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-m23",
+      "bundle": "build/formula-batch-14/mclaren-m23.staged.json",
+      "manufacturer": "McLaren",
+      "model": "M23",
+      "year": {
+        "label": "1973 to 1978 Formula One seasons",
+        "from": 1973
+      },
+      "real_world_identity_notes": "McLaren M23, raced in Formula One from 1973 through 1978 with the Ford-Cosworth DFV and a Hewland FG400 gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-m23",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the car and its Hewland gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source names a Hewland FG400, and the live drive selected five H-pattern gears with no automatic cut or blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "dogbox"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required. Dog-ring construction is inferred from Hewland's design approach rather than stated by the source, and a source showing a synchronised FG400 would make the blip optional.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-retro-v8",
+      "bundle": "build/formula-batch-14/formula-retro-v8.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Retro V8",
+      "year": {
+        "label": "Formula Retro V8"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised mid-1970s open-wheel car, reviewed independently of the other cars in its class. Reiza's fictionalised car. No real-world chassis identity is assigned, so the gearbox construction is not established and the downshift blip stays unknown rather than being inferred from period practice.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected 5 H-pattern gears with no automatic cut or blip, so the driver lifts and blips. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-dirt",
+      "bundle": "build/formula-batch-14/formula-dirt.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Dirt",
+      "year": {
+        "label": "Formula Dirt"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised dirt open-wheel open-wheel car, reviewed independently of the other cars in its class. Reiza's fictionalised car. No real-world chassis identity is assigned, so the gearbox construction is not established and the downshift blip stays unknown rather than being inferred from period practice.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected 4 H-pattern gears with no automatic cut or blip, so the driver lifts and blips. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-junior",
+      "bundle": "build/formula-batch-14/formula-junior.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Junior",
+      "year": {
+        "label": "Formula Junior"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised Formula Junior category open-wheel car, reviewed independently of the other cars in its class. Reiza's fictionalised car. No real-world chassis identity is assigned, so the gearbox construction is not established and the downshift blip stays unknown rather than being inferred from period practice.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected 4 H-pattern gears with no automatic cut or blip, so the driver lifts and blips. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-trainer",
+      "bundle": "build/formula-batch-14/formula-trainer.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Trainer",
+      "year": {
+        "label": "Formula Trainer"
+      },
+      "real_world_identity_notes": "Reiza's fictional entry-level open-wheel car, described as a category intended for new racing drivers with a car that appears to be based on the Formula Ford.",
+      "real_world_source_refs": [
+        "ams2wiki.formula-trainer",
+        "reiza-forum.formula-trainer-gearbox"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected four gears through a sequential stick with automatic cut and blip. A Reiza forum thread resolves the recurring question about this car: a member who tested it states it is definitely sequential, for both the Trainer and the Trainer Advanced.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+        "The gearbox is widely reported as an H-pattern, including in community summaries, and it is not. A Reiza internal tester explains that an H-shifter can be bound to a sequential gearbox in game as an accommodation for players without sequential hardware, and that the selection menu does not state transmissions, which is what the mistake comes from. The drive read the gearbox rather than the menu.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-trainer-advanced",
+      "bundle": "build/formula-batch-14/formula-trainer-advanced.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Trainer Advanced",
+      "year": {
+        "label": "Formula Trainer Advanced"
+      },
+      "real_world_identity_notes": "Reiza's fictional entry-level open-wheel car, described as a category intended for new racing drivers with a car that appears to be based on the Formula Ford.",
+      "real_world_source_refs": [
+        "ams2wiki.formula-trainer",
+        "reiza-forum.formula-trainer-gearbox"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected four gears through a sequential stick with automatic cut and blip. A Reiza forum thread resolves the recurring question about this car: a member who tested it states it is definitely sequential, for both the Trainer and the Trainer Advanced.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+        "The gearbox is widely reported as an H-pattern, including in community summaries, and it is not. A Reiza internal tester explains that an H-shifter can be bound to a sequential gearbox in game as an accommodation for players without sequential hardware, and that the selection menu does not state transmissions, which is what the mistake comes from. The drive read the gearbox rather than the menu.",
+        "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

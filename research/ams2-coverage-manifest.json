@@ -2,15 +2,16 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.42",
+  "dataset_version": "0.3.43",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 107,
+    "live_identities_seen": 116,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
+      "Brabham BT44",
       "Caterham 620R",
       "Caterham Superlight",
       "Copa Montana",
@@ -30,6 +31,8 @@
       "Formula Classic Gen4 Model1 - Low Downforce",
       "Formula Classic Gen4 Model2 - High Downforce",
       "Formula Classic Gen4 Model3 - High Downforce",
+      "Formula Dirt",
+      "Formula Edge Model1 - Low Downforce",
       "Formula HiTech Gen1 Model1 - High Downforce",
       "Formula HiTech Gen1 Model1 - Low Downforce",
       "Formula HiTech Gen1 Model2 - High Downforce",
@@ -38,6 +41,7 @@
       "Formula HiTech Gen2 Model1 - Low Downforce",
       "Formula HiTech Gen2 Model2 - High Downforce",
       "Formula HiTech Gen2 Model3 - High Downforce",
+      "Formula Retro V8",
       "Formula Ultimate Hybrid Gen3",
       "Formula Ultimate Hybrid Gen3 - Low Downforce",
       "Formula V10 Gen2 (B)",
@@ -50,6 +54,7 @@
       "Formula V8 Gen3 - Low Downforce",
       "Fusca Classic FL",
       "Iveco Stralis",
+      "Lotus 72E",
       "Lotus Renault 98T",
       "Lotus Renault 98T - High Downforce",
       "MAN TGX",
@@ -60,6 +65,7 @@
       "McLaren Honda MP4/5B - High Downforce",
       "McLaren Honda MP4/6 - High Downforce",
       "McLaren Honda MP4/7A - High Downforce",
+      "McLaren M23",
       "Mercedes-Benz Actros",
       "Passat Classic B",
       "Passat Classic FL",
@@ -79,26 +85,26 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 282,
-    "curated_records": 175,
-    "covered_exact_identities": 248,
-    "uncovered_identities": 34,
-    "full_guided_verifications": 22,
+    "observed_identities": 288,
+    "curated_records": 183,
+    "covered_exact_identities": 257,
+    "uncovered_identities": 31,
+    "full_guided_verifications": 19,
     "dispositions": {
       "aero-inheritance-after-base": 1,
-      "covered-exact": 248,
-      "full-guided-verification": 22,
+      "covered-exact": 257,
+      "full-guided-verification": 19,
       "out-of-scope": 1,
       "retired-identity": 4,
       "third-party-content": 6
     },
     "full_verifications_by_family": {
-      "open-wheel": 16,
+      "open-wheel": 13,
       "other": 6
     },
     "full_verifications_by_research_readiness": {
       "independent-control-research-needed": 7,
-      "legacy-controls-candidate-available": 15
+      "legacy-controls-candidate-available": 12
     }
   },
   "entries": [
@@ -608,6 +614,20 @@
         "year": "1969"
       },
       "research_readiness": "legacy-controls-candidate-available"
+    },
+    {
+      "telemetry_name": "Brabham BT44",
+      "car_id": "Brabham BT44",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.brabham-bt44",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Retro_Gen1",
+      "live_observed_at": "2026-08-15T19:19:08.3970761Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Cadillac DPi-VR",
@@ -1465,6 +1485,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Formula Dirt",
+      "car_id": "Formula Dirt",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.formula-dirt",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Dirt",
+      "live_observed_at": "2026-08-15T19:01:20.7829115Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Formula Edge Model1",
       "car_id": "Formula Edge Model1",
       "identity_file": "Formula Edge Model1.shcarsettings",
@@ -1488,6 +1522,20 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1786558749.0174725,
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Formula Edge Model1 - Low Downforce",
+      "car_id": "Formula Edge Model1 - Low Downforce",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.formula-edge-model1-high-downforce",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "FE-G1_LD",
+      "live_observed_at": "2026-08-15T19:30:41.9664595Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -1755,13 +1803,16 @@
       "telemetry_name": "Formula Junior",
       "car_id": "Formula Junior",
       "identity_file": "Formula Junior.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "identity_source": "stored-car-file",
+      "related_record_id": "ams2.formula-junior",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 2,
       "identity_file_modified_at": 1712508691.9651482,
+      "telemetry_class": "F-Junior",
+      "live_observed_at": "2026-08-15T19:15:39.4043348Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 74,
         "display_name": "Formula Junior",
@@ -1834,16 +1885,33 @@
       "research_readiness": "legacy-controls-candidate-available"
     },
     {
+      "telemetry_name": "Formula Retro V8",
+      "car_id": "Formula Retro V8",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "open-wheel",
+      "related_record_id": "ams2.formula-retro-v8",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Retro_Gen1",
+      "live_observed_at": "2026-08-15T19:23:03.3731190Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Formula Trainer",
       "car_id": "Formula Trainer",
       "identity_file": "Formula Trainer.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "identity_source": "stored-car-file",
+      "related_record_id": "ams2.formula-trainer",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1751661767.3292425,
+      "telemetry_class": "F-Trainer",
+      "live_observed_at": "2026-08-15T19:32:06.1893172Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 145,
         "display_name": "Formula Trainer",
@@ -1856,13 +1924,16 @@
       "telemetry_name": "Formula Trainer Advanced",
       "car_id": "Formula Trainer Advanced",
       "identity_file": "Formula Trainer Advanced.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
-      "identity_source": "stored-car-file",
+      "related_record_id": "ams2.formula-trainer-advanced",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "stored-and-live",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1719172608.1844673,
+      "telemetry_class": "F-Trainer_A",
+      "live_observed_at": "2026-08-15T19:35:04.5303790Z",
+      "live_game_version": "1.6.9.91",
       "legacy_sheet_candidate": {
         "source_row": 146,
         "display_name": "Formula Trainer Advanced",
@@ -2840,6 +2911,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Lotus 72E",
+      "car_id": "Lotus 72E",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.lotus-72e",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Retro_Gen1",
+      "live_observed_at": "2026-08-15T19:25:31.8047244Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Lotus 98T",
       "car_id": "Lotus 98T",
       "identity_file": "Lotus 98T.shcarsettings",
@@ -3188,6 +3273,20 @@
       "identity_source": "live-diagnostics",
       "telemetry_class": "F-Hitech_Gen1_HD",
       "live_observed_at": "2026-08-14T22:37:37.6474369Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "McLaren M23",
+      "car_id": "McLaren M23",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.mclaren-m23",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "F-Retro_Gen1",
+      "live_observed_at": "2026-08-15T19:27:52.0874058Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },

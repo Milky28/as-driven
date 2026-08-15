@@ -71,6 +71,10 @@
         {
           "kind": "class-id",
           "value": "FE-G1_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Edge Model2 - Low Downforce"
         }
       ],
       "behavior": {
@@ -130,7 +134,7 @@
       }
     ]
   },
-  "updated_at": "2026-08-12",
+  "updated_at": "2026-08-15",
   "notes": [
     "'Formula Edge Model2' is the same car observed before the aero suffix existed. It inherits these verified controls as an approved configuration alias and was not separately live-tested."
   ]
