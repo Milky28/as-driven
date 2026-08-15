@@ -147,11 +147,18 @@ A sweep captures one aero configuration per car, whichever the current circuit
 selects, so cars with variants still need passes at other circuits. Loading is
 enough; no drive is needed to capture an identity.
 
-There are at least three aero states, not two. A tester found the same car
-showing high downforce at Laguna Seca, low downforce at Daytona, and no package
-at all at Imola, so a base configuration exists alongside the two suffixed ones.
-An unsuffixed name is therefore not evidence of low downforce, and dataset 0.3.41
-corrected five records that had described it that way.
+There are up to three aero states, and how many a car has depends on its class.
+A tester found one car showing high downforce at Laguna Seca, low downforce at
+Daytona, and no package at all at Imola, so a base configuration exists alongside
+the two suffixed ones. The batch 09 classes, `F-Retro_Gen3` and
+`F-Classic_Gen1`, offer no low-downforce package at all: their unsuffixed name is
+the base, and they have two aero identities rather than three.
+
+An unsuffixed name is therefore not evidence of low downforce. Dataset 0.3.40
+corrected five records that had described it that way, and 0.3.41 recorded them
+as base configurations once the selection screen confirmed no low-downforce
+package exists for those classes. The number of variants has to be read per
+class; it cannot be assumed from another car.
 
 The vehicle selection screen names the package, which makes it the cheap way to
 learn which variants a car has. It does not give the exact telemetry string, and
