@@ -1,0 +1,154 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.reynard-2ki-toyota-high-downforce",
+  "identity": {
+    "display_name": "Reynard 2Ki Toyota - High Downforce",
+    "manufacturer": "Reynard",
+    "model": "2KI Toyota",
+    "year": {
+      "label": "2000 CART season",
+      "from": 2000
+    },
+    "class": "F-USA_Gen3_HD",
+    "real_world_identity_notes": "Reynard 2KI of the 2000 CART season, raced with Honda Indy V8 turbo, Mercedes-Benz IC108, Toyota RV8E and Ford-Cosworth XD engines and fitted with a six-speed sequential manual gearbox.",
+    "variant": "High Downforce"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+      "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+      "The Reynard carries a D-shaped rim where the Lola of the same class carries a round one, which the drives recorded separately rather than sharing across the class.",
+      "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the chassis's engine options, so it is official content that had never been seen on this PC."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Reynard 2Ki Toyota - High Downforce"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Reynard 2Ki Toyota"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Reynard 2Ki Toyota - Speedway"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Reynard 2Ki Toyota - Superspeedway"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-USA_Gen3_HD"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.reynard-2ki-toyota-high-downforce.20260815t230614733z-f454b4cc by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "wikipedia.reynard-2ki",
+        "ams2.local-live-reynard-2ki-toyota-high-downforce-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.reynard-2ki",
+          "ams2.local-live-reynard-2ki-toyota-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.reynard-2ki",
+          "ams2.local-live-reynard-2ki-toyota-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-reynard-2ki-toyota-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-15"
+}

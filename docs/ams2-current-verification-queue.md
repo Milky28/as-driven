@@ -1,5 +1,31 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.49 (batch 18: F-USA Gen3, Formula Vee, Formula Vintage Gen2)
+
+Ten cars, and the open-wheel queue is now empty.
+
+The seven 2000-season CART cars are uniform: six gears through a sequential
+stick, automatic cut, no automatic blip, a clutch to pull away. Five of the seven
+were invisible to the queue until loaded, and the sources list every one of their
+engines, so all are official content. Lola B2K00 Ford-Cosworth anchors the four
+configurations, base, high downforce, Speedway and Superspeedway.
+
+The Reynards carry a D-shaped rim where the Lolas of the same class carry a round
+one. The drives recorded that per car rather than sharing a rim across the class.
+
+Formula Vee Gen1 is the first record whose gate is `unknown` because the driver
+could not read it rather than because a lever hid it. Its gearbox is sourced
+twice over: the category runs the Volkswagen Beetle four-speed, and the transaxle
+source already registered describes that unit as constant-mesh with balk ring
+synchronisers, so the downshift blip is `optional`.
+
+Formula Vintage Gen2 Model1 and Model2 were found in a class believed finished.
+The Brabham BT26A and Lotus 49C were curated from it in dataset 0.3.30, and these
+two were never in the queue at all. They inherit nothing from those cars: the
+Brabham and Lotus run racing Hewlands and carry a required blip, while these are
+Reiza's fictionalised cars with no chassis assigned, so their construction stays
+unknown.
+
 ## Completed in dataset 0.3.48 (CART batch 17, F-USA Gen2)
 
 Six cars of the 1998 CART season, and the class is uniform: six gears through a

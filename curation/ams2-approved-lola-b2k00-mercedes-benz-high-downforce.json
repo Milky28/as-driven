@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.49",
+  "approved_at": "2026-08-15",
+  "record_id": "ams2.lola-b2k00-mercedes-benz-high-downforce",
+  "telemetry_name": "Lola B2K00 Mercedes-Benz - High Downforce",
+  "telemetry_class": "F-USA_Gen3_HD",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.lola-b2k00-mercedes-benz-high-downforce.20260815t225350268z-2d39deff",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "additional_telemetry_names": [
+    {
+      "value": "Lola B2K00 Mercedes-Benz",
+      "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    },
+    {
+      "value": "Lola B2K00 Mercedes-Benz - Speedway",
+      "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    },
+    {
+      "value": "Lola B2K00 Mercedes-Benz - Superspeedway",
+      "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+    }
+  ]
+}

@@ -1,0 +1,546 @@
+{
+  "review": "batch-18",
+  "dataset_version": "0.3.49",
+  "approved_at": "2026-08-15",
+  "records": [
+    {
+      "record_id": "ams2.lola-b2k00-ford-cosworth-high-downforce",
+      "bundle": "build/batch-18/lola-b2k00-ford-cosworth-high-downforce.staged.json",
+      "manufacturer": "Lola",
+      "model": "B2K/00 Ford-Cosworth",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Lola B2K/00 of the 2000 CART season, raced with Mercedes-Benz IC108E, Toyota RV8E and Ford/Cosworth XF engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.lola-b2k-00"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "This car was observed in all four of the class's configurations, so it anchors the identity format for the others."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Lola B2K00 Ford-Cosworth",
+          "basis": "Base configuration of the same car, observed exactly in live telemetry. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Lola B2K00 Ford-Cosworth - Speedway",
+          "basis": "Speedway configuration of the same car, observed exactly in live telemetry. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Lola B2K00 Ford-Cosworth - Superspeedway",
+          "basis": "Superspeedway configuration of the same car, observed exactly in live telemetry. AMS2 selects the configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.lola-b2k00-mercedes-benz-high-downforce",
+      "bundle": "build/batch-18/lola-b2k00-mercedes-benz-high-downforce.staged.json",
+      "manufacturer": "Lola",
+      "model": "B2K/00 Mercedes-Benz",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Lola B2K/00 of the 2000 CART season, raced with Mercedes-Benz IC108E, Toyota RV8E and Ford/Cosworth XF engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.lola-b2k-00"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the chassis's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Lola B2K00 Mercedes-Benz",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Lola B2K00 Mercedes-Benz - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Lola B2K00 Mercedes-Benz - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.lola-b2k00-toyota-high-downforce",
+      "bundle": "build/batch-18/lola-b2k00-toyota-high-downforce.staged.json",
+      "manufacturer": "Lola",
+      "model": "B2K/00 Toyota",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Lola B2K/00 of the 2000 CART season, raced with Mercedes-Benz IC108E, Toyota RV8E and Ford/Cosworth XF engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.lola-b2k-00"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the chassis's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Lola B2K00 Toyota",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Lola B2K00 Toyota - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Lola B2K00 Toyota - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-2ki-ford-cosworth-high-downforce",
+      "bundle": "build/batch-18/reynard-2ki-ford-cosworth-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "2KI Ford-Cosworth",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Reynard 2KI of the 2000 CART season, raced with Honda Indy V8 turbo, Mercedes-Benz IC108, Toyota RV8E and Ford-Cosworth XD engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-2ki"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "The Reynard carries a D-shaped rim where the Lola of the same class carries a round one, which the drives recorded separately rather than sharing across the class."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 2Ki Ford-Cosworth",
+          "basis": "Base configuration of the same car, recorded in SimHub's stored inventory from an earlier observation and matching the derivation from this car's observed high-downforce name. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Reynard 2Ki Ford-Cosworth - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 2Ki Ford-Cosworth - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-2ki-honda-high-downforce",
+      "bundle": "build/batch-18/reynard-2ki-honda-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "2KI Honda",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Reynard 2KI of the 2000 CART season, raced with Honda Indy V8 turbo, Mercedes-Benz IC108, Toyota RV8E and Ford-Cosworth XD engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-2ki"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "The Reynard carries a D-shaped rim where the Lola of the same class carries a round one, which the drives recorded separately rather than sharing across the class."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 2Ki Honda",
+          "basis": "Base configuration of the same car, recorded in SimHub's stored inventory from an earlier observation and matching the derivation from this car's observed high-downforce name. Controls are inherited from the driven high-downforce configuration and were not separately tested."
+        },
+        {
+          "value": "Reynard 2Ki Honda - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 2Ki Honda - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-2ki-mercedes-benz-high-downforce",
+      "bundle": "build/batch-18/reynard-2ki-mercedes-benz-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "2KI Mercedes-Benz",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Reynard 2KI of the 2000 CART season, raced with Honda Indy V8 turbo, Mercedes-Benz IC108, Toyota RV8E and Ford-Cosworth XD engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-2ki"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "The Reynard carries a D-shaped rim where the Lola of the same class carries a round one, which the drives recorded separately rather than sharing across the class.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the chassis's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 2Ki Mercedes-Benz",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 2Ki Mercedes-Benz - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 2Ki Mercedes-Benz - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.reynard-2ki-toyota-high-downforce",
+      "bundle": "build/batch-18/reynard-2ki-toyota-high-downforce.staged.json",
+      "manufacturer": "Reynard",
+      "model": "2KI Toyota",
+      "variant": "High Downforce",
+      "year": {
+        "label": "2000 CART season",
+        "from": 2000
+      },
+      "real_world_identity_notes": "Reynard 2KI of the 2000 CART season, raced with Honda Indy V8 turbo, Mercedes-Benz IC108, Toyota RV8E and Ford-Cosworth XD engines and fitted with a six-speed sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.reynard-2ki"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts, automatic cut, and no automatic blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+        "The Reynard carries a D-shaped rim where the Lola of the same class carries a round one, which the drives recorded separately rather than sharing across the class.",
+        "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the chassis's engine options, so it is official content that had never been seen on this PC."
+      ],
+      "additional_telemetry_names": [
+        {
+          "value": "Reynard 2Ki Toyota",
+          "basis": "Base configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by removing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 2Ki Toyota - Speedway",
+          "basis": "Speedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        },
+        {
+          "value": "Reynard 2Ki Toyota - Superspeedway",
+          "basis": "Superspeedway configuration of the same car. This exact string was not observed: it is derived from the car's observed high-downforce identity by replacing the suffix. Lola B2K00 Ford-Cosworth was seen in all four of this class's configurations and the same derivation reproduces its observed names exactly. Controls are inherited from the driven high-downforce configuration and were not separately tested. If the derivation is wrong the identity simply never matches, which is what a driver sees today."
+        }
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-vee-gen1",
+      "bundle": "build/batch-18/formula-vee-gen1.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Vee",
+      "variant": "Gen1",
+      "year": {
+        "label": "Formula Vee"
+      },
+      "real_world_identity_notes": "Formula Vee, the low-cost open-wheel category built from Volkswagen Beetle parts. Cars use the Beetle 1600 engine of about 70 to 75 hp and the VW four-speed gearbox, sealed and restricted to reliability modifications.",
+      "real_world_source_refs": [
+        "autoaction.formula-vee",
+        "ratwell.vw-transaxle"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the category's Volkswagen basis, and the exact simulator identity was observed live.",
+      "specification_basis": "The category source gives a VW four-speed gearbox and the transaxle source describes that unit as constant-mesh with balk ring synchronisers, and the live drive selected four H-pattern gears with no automatic cut or blip.",
+      "confidence_notes": "Guided testing directly established the four H-pattern gears, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is the Volkswagen Beetle four-speed transaxle, which the registered source describes as constant-mesh with balk ring synchronisers on all four forward gears. A downshift blip is therefore authentic technique and eases the synchros but is not needed to engage the gear, so it is recorded as optional.",
+        "The gate is recorded unknown. The driver could not read it in the cockpit, and no reviewed source describes the shift pattern of a Formula Vee, so neither the drive nor the sources establish it.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-vintage-gen2-model1",
+      "bundle": "build/batch-18/formula-vintage-gen2-model1.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Vintage Gen2 Model1",
+      "year": {
+        "label": "Formula Vintage Gen2 Model1"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised late-1960s Formula One car, sharing the Formula Vintage Gen2 class with the curated Brabham BT26A and Lotus 49C. No real-world chassis identity is assigned, so the gearbox construction is not established.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip, so the driver lifts and blips. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "This car shares a class with the curated Brabham BT26A and Lotus 49C, which run racing Hewlands and therefore carry a required downshift blip. Nothing is inherited from them: no real-world chassis is assigned here, so the construction stays unknown.",
+        "The class was thought complete after the Brabham and the Lotus were curated. Both of these models were absent from the coverage queue until the class was swept.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.formula-vintage-gen2-model2",
+      "bundle": "build/batch-18/formula-vintage-gen2-model2.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Formula Vintage Gen2 Model2",
+      "year": {
+        "label": "Formula Vintage Gen2 Model2"
+      },
+      "real_world_identity_notes": "Reiza's fictionalised late-1960s Formula One car, sharing the Formula Vintage Gen2 class with the curated Brabham BT26A and Lotus 49C. No real-world chassis identity is assigned, so the gearbox construction is not established.",
+      "real_world_source_refs": [
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip, so the driver lifts and blips. Gearbox construction is not established, so the downshift blip stays unknown.",
+      "confidence_notes": "Guided testing directly established the five H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "This car shares a class with the curated Brabham BT26A and Lotus 49C, which run racing Hewlands and therefore carry a required downshift blip. Nothing is inherited from them: no real-world chassis is assigned here, so the construction stays unknown.",
+        "The class was thought complete after the Brabham and the Lotus were curated. Both of these models were absent from the coverage queue until the class was swept.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}
