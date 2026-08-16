@@ -17,15 +17,15 @@ namespace AsDriven.Core
             "car-path"
         };
 
-        private readonly Dictionary<string, MatchEntry> _identities;
-        private readonly Dictionary<string, MatchEntry> _records;
+        private readonly Dictionary<string, CarRecordValues> _identities;
+        private readonly Dictionary<string, CarRecordValues> _records;
 
         private AsDrivenDatabase(
             string dataDirectory,
             string datasetVersion,
             int recordCount,
-            Dictionary<string, MatchEntry> identities,
-            Dictionary<string, MatchEntry> records,
+            Dictionary<string, CarRecordValues> identities,
+            Dictionary<string, CarRecordValues> records,
             CarCatalogEntry[] cars,
             SimulatorCoverage[] simulators)
         {
@@ -67,8 +67,8 @@ namespace AsDriven.Core
                 throw new InvalidDataException("Dataset index has no records array: " + indexPath);
             }
 
-            var identities = new Dictionary<string, MatchEntry>(StringComparer.Ordinal);
-            var recordsBySimulator = new Dictionary<string, MatchEntry>(StringComparer.Ordinal);
+            var identities = new Dictionary<string, CarRecordValues>(StringComparer.Ordinal);
+            var recordsBySimulator = new Dictionary<string, CarRecordValues>(StringComparer.Ordinal);
             var cars = new List<CarCatalogEntry>();
             int recordCount = 0;
             foreach (JToken recordPathToken in records)
@@ -159,7 +159,7 @@ namespace AsDriven.Core
 
             foreach (string kind in MatchPriority)
             {
-                MatchEntry entry;
+                CarRecordValues entry;
                 if (_identities.TryGetValue(Key(simulator, kind, rawCarIdentifier), out entry))
                 {
                     return entry.CreateSnapshot(rawGameName, rawCarIdentifier, kind);
@@ -173,7 +173,7 @@ namespace AsDriven.Core
         public GuidanceSnapshot Preview(string simulatorName, string recordId)
         {
             string simulator = CanonicalizeSimulator(simulatorName);
-            MatchEntry entry;
+            CarRecordValues entry;
             if (simulator == null
                 || string.IsNullOrWhiteSpace(recordId)
                 || !_records.TryGetValue(RecordKey(simulator, recordId), out entry))
@@ -236,8 +236,8 @@ namespace AsDriven.Core
             JObject record,
             string recordPath,
             string datasetVersion,
-            Dictionary<string, MatchEntry> identities,
-            Dictionary<string, MatchEntry> records,
+            Dictionary<string, CarRecordValues> identities,
+            Dictionary<string, CarRecordValues> records,
             List<CarCatalogEntry> cars)
         {
             string recordId = RequiredString(record, "record_id", recordPath);
@@ -277,7 +277,7 @@ namespace AsDriven.Core
                     throw new InvalidDataException("Simulator entry has no identities: " + recordPath);
                 }
 
-                var entry = new MatchEntry
+                var entry = new CarRecordValues
                 {
                     DatasetVersion = datasetVersion,
                     RecordId = recordId,
@@ -351,7 +351,7 @@ namespace AsDriven.Core
                     }
                     string value = RequiredString(simulatorIdentity, "value", recordPath);
                     string key = Key(simulatorId, kind, value);
-                    MatchEntry existing;
+                    CarRecordValues existing;
                     if (identities.TryGetValue(key, out existing)
                         && existing.RecordId != entry.RecordId)
                     {
@@ -777,79 +777,6 @@ namespace AsDriven.Core
                 case "ams2": return "Automobilista 2";
                 case "iracing": return "iRacing";
                 default: return simulator;
-            }
-        }
-
-        private sealed class MatchEntry
-        {
-            public string DatasetVersion;
-            public string RecordId;
-            public string DisplayName;
-            public string CarClass;
-            public string ShiftType;
-            public string ShiftActuation;
-            public string ShiftPattern;
-            public int GearCount;
-            public string UpshiftGuidance;
-            public string DownshiftGuidance;
-            public string TechniqueSummary;
-            public string StandingStartClutch;
-            public string AutoBlip;
-            public string ShiftCut;
-            public string ManualBlip;
-            public string ThrottleLift;
-            public string UpshiftClutch;
-            public string DownshiftClutch;
-            public string DriverSummary;
-            public string[] OverriddenPaths;
-            public string SimulatorDifference;
-            public string WheelRimShape;
-            public string WheelRimSourceLabel;
-            public string WheelIntegratedDisplay;
-            public string WheelShiftLights;
-            public bool HasSteeringDOR;
-            public int SteeringDOR;
-            public string VerifiedGameVersion;
-            public string Confidence;
-            public string SourceSummary;
-
-            public GuidanceSnapshot CreateSnapshot(
-                string rawGameName, string rawCarIdentifier, string matchKind)
-            {
-                return GuidanceSnapshot.Matched(
-                    rawGameName,
-                    rawCarIdentifier,
-                    DatasetVersion,
-                    matchKind,
-                    RecordId,
-                    DisplayName,
-                    CarClass,
-                    ShiftType,
-                    ShiftActuation,
-                    ShiftPattern,
-                    GearCount,
-                    UpshiftGuidance,
-                    DownshiftGuidance,
-                    TechniqueSummary,
-                    StandingStartClutch,
-                    AutoBlip,
-                    ShiftCut,
-                    ManualBlip,
-                    ThrottleLift,
-                    UpshiftClutch,
-                    DownshiftClutch,
-                    WheelRimShape,
-                    WheelRimSourceLabel,
-                    DriverSummary,
-                    OverriddenPaths,
-                    SimulatorDifference,
-                    WheelIntegratedDisplay,
-                    WheelShiftLights,
-                    HasSteeringDOR,
-                    SteeringDOR,
-                    VerifiedGameVersion,
-                    Confidence,
-                    SourceSummary);
             }
         }
     }
