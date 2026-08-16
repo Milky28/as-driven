@@ -140,6 +140,6 @@
       }
     ]
   },
-  "driver_summary": "Synchronised gearbox. The downshift blip is authentic technique and eases the synchros, but the gear will engage without it.",
-  "updated_at": "2026-08-13"
+  "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Construction is inferred from a road-derived manual rather than stated by a reviewed source.",
+  "updated_at": "2026-08-16"
 }

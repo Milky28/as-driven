@@ -114,7 +114,6 @@
       {
         "paths": [
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
@@ -126,6 +125,17 @@
         ],
         "confidence": "high",
         "basis": "Wikipedia states a Hewland-Lotus 5-speed manual gearbox, and the live drive selected five H-pattern gears. Dog-ring engagement is Hewland's design approach rather than a stated property of this gearbox, so it is an inference from the make and is recorded as such."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement"
+        ],
+        "confidence": "medium",
+        "basis": "The registered source names a Hewland-Lotus five-speed manual but does not state how it engages. Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source, so this value is medium confidence: a source showing the gearbox was synchronised would change it, and would make the downshift blip optional."
       },
       {
         "paths": [

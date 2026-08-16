@@ -113,7 +113,6 @@
       {
         "paths": [
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
@@ -125,6 +124,17 @@
         ],
         "confidence": "high",
         "basis": "The source names a Hewland FG400, and the live drive selected five H-pattern gears with no automatic cut or blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement"
+        ],
+        "confidence": "medium",
+        "basis": "The registered source names a Hewland FG400 but does not state how it engages. Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source, so this value is medium confidence: a source showing the gearbox was synchronised would change it, and would make the downshift blip optional."
       },
       {
         "paths": [

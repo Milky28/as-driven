@@ -15,35 +15,54 @@ class ValidationTests(unittest.TestCase):
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repository(ROOT), [])
 
-    def test_driver_summary_never_outruns_the_record_it_describes(self) -> None:
-        """A summary may not assert what its own record calls an inference.
+    def test_an_inferred_gearbox_is_never_claimed_at_high_confidence(self) -> None:
+        """A mechanism nobody sourced cannot be a high-confidence claim.
 
-        The summary is the only free prose the overlay shows, so it is the one
-        place an inference can quietly become a fact in front of a driver. Ten
-        records once said "the dog rings engage on matched revs" while their
-        notes said that construction was inferred from Hewland's design
-        approach rather than stated by any source.
+        Eight Hewland cars stated dog-ring construction at high confidence
+        while their own notes called it inferred from Hewland's design
+        approach. The claim now sits at medium, which is both honest and
+        checkable - unlike the prose hedge, which nothing could key off.
         """
         import re
 
-        asserts_mechanism = re.compile(
-            r"(the dog rings engage|^synchronised gearbox\.)", re.IGNORECASE
-        )
-        notes_hedge = re.compile(
-            r"(construction is inferred"
-            r"|inferred from .{0,40}design approach"
-            r"|rather than stated by (the|a) (reviewed )?source"
+        inferred = re.compile(
+            r"(is inferred|rather than stated by (the|a) (reviewed )?source"
             r"|is the ordinary reading of)",
             re.IGNORECASE,
         )
         offenders = []
         for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
             record = json.loads(path.read_text(encoding="utf-8"))
+            for claim in record["provenance"]["claims"]:
+                if not any(p.endswith("/gearbox_type") for p in claim["paths"]):
+                    continue
+                if inferred.search(claim["basis"]) and claim["confidence"] in {"high", "verified"}:
+                    offenders.append(f"{record['record_id']}: {claim['confidence']}")
+        self.assertEqual([], offenders)
+
+    def test_driver_summary_never_asserts_a_mechanism_that_was_inferred(self) -> None:
+        """The card's prose may not be firmer than the claim behind it.
+
+        This now reads the claim's confidence rather than matching sentences
+        in the notes, so it holds for any wording a future summary uses.
+        """
+        import re
+
+        asserts_mechanism = re.compile(
+            r"(the dog rings engage|^synchronised gearbox\.)", re.IGNORECASE
+        )
+        offenders = []
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
             summary = record.get("driver_summary") or ""
-            if not summary:
+            if not summary or not asserts_mechanism.search(summary):
                 continue
-            notes = " ".join(record["authentic_controls"].get("notes") or [])
-            if asserts_mechanism.search(summary) and notes_hedge.search(notes):
+            claim = next(
+                (c for c in record["provenance"]["claims"]
+                 if any(p.endswith("/gearbox_type") for p in c["paths"])),
+                None,
+            )
+            if claim is not None and claim["confidence"] not in {"high", "verified"}:
                 offenders.append(record["record_id"])
         self.assertEqual([], offenders)
 

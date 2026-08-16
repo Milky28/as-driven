@@ -117,7 +117,6 @@
       {
         "paths": [
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
@@ -126,7 +125,18 @@
           "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Manufacturer history and direct selection agree on a five-speed H-pattern manual. The synchromesh construction is the ordinary reading of a road-car manual of this period rather than a stated specification, and it is what the optional downshift blip rests on."
+        "basis": "Manufacturer history and direct selection agree on a five-speed H-pattern manual."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "lamborghini.miura.history",
+          "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The synchromesh construction is the ordinary reading of a road-car manual of this period rather than a stated specification, so it is medium confidence. It is what the optional downshift blip rests on."
       },
       {
         "paths": [
@@ -144,6 +154,6 @@
       }
     ]
   },
-  "driver_summary": "Synchronised gearbox. The downshift blip is authentic technique and eases the synchros, but the gear will engage without it.",
-  "updated_at": "2026-08-13"
+  "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Synchromesh is the ordinary reading of a road-car manual of this period rather than a stated specification.",
+  "updated_at": "2026-08-16"
 }
