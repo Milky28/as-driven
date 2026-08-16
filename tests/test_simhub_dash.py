@@ -336,6 +336,17 @@ class SimHubDashTests(unittest.TestCase):
         # Three moments, in the order they happen.
         for moment in ("Launch", "Upshift", "Downshift"):
             self.assertIn(f"UseValue{moment}", named)
+        # Both running shifts state their clutch outright. Leaving it unsaid
+        # would be indistinguishable from never having checked it.
+        self.assertEqual(
+            "[AsDriven.UpshiftClutchLabel]",
+            named["UseClutchUpshift"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
+        self.assertEqual(
+            "[AsDriven.DownshiftClutchLabel]",
+            named["UseClutchDownshift"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
+        self.assertLess(named["UseValueUpshift"]["Top"], named["UseClutchUpshift"]["Top"])
         self.assertLess(named["UseValueLaunch"]["Left"], named["UseValueUpshift"]["Left"])
         self.assertLess(named["UseValueUpshift"]["Left"], named["UseValueDownshift"]["Left"])
         # The rail and every cell carry their own tone, so a cell that

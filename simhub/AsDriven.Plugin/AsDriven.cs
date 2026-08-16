@@ -1340,6 +1340,11 @@ namespace AsDriven.Plugin
             this.AttachDelegate("UpshiftDiffers", delegate { return _current.UpshiftDiffers; });
             this.AttachDelegate("DownshiftDiffers", delegate { return _current.DownshiftDiffers; });
             this.AttachDelegate("WheelDiffers", delegate { return _current.WheelDiffers; });
+            this.AttachDelegate("UpshiftClutch", delegate { return _current.UpshiftClutch; });
+            this.AttachDelegate("DownshiftClutch", delegate { return _current.DownshiftClutch; });
+            this.AttachDelegate("UpshiftClutchLabel", delegate { return _current.UpshiftClutchLabel; });
+            this.AttachDelegate("DownshiftClutchLabel", delegate { return _current.DownshiftClutchLabel; });
+            this.AttachDelegate("LaunchDetailLabel", delegate { return _current.LaunchDetailLabel; });
             this.AttachDelegate("HasSteeringDOR", delegate { return _current.HasSteeringDOR; });
             this.AttachDelegate("SteeringDOR", delegate { return _current.SteeringDOR; });
             this.AttachDelegate("VerifiedGameVersion", delegate { return _current.VerifiedGameVersion; });

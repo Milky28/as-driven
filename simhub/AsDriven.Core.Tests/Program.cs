@@ -467,7 +467,7 @@ namespace AsDriven.Core.Tests
                 Equal("Clutch required", PreflightLabels.Launch("required"), "launch clutch");
                 Equal("No clutch needed", PreflightLabels.Launch("not-required"), "clutch-free launch");
                 Equal("Not established", PreflightLabels.Launch("unknown"), "unknown launch");
-                Equal("Lift - no clutch", PreflightLabels.Upshift("required", "no"), "lift upshift");
+                Equal("Lift the throttle", PreflightLabels.Upshift("required", "no"), "lift upshift");
                 Equal("Stay flat - car cuts", PreflightLabels.Upshift("not-required", "yes"),
                     "says the car cuts when it does");
                 Equal("Stay flat", PreflightLabels.Upshift("not-required", "no"),
@@ -484,7 +484,7 @@ namespace AsDriven.Core.Tests
                 Equal("you", PreflightLabels.LaunchTone("required"), "required launch is the driver's");
                 Equal("car", PreflightLabels.LaunchTone("not-required"), "clutch-free launch is the car's");
                 Equal("unknown", PreflightLabels.LaunchTone("unknown"), "unknown launch stays unresolved");
-                Equal("optional", PreflightLabels.DownshiftTone("optional"),
+                Equal("optional", PreflightLabels.DownshiftTone("optional", "not-required"),
                     "an optional blip is neither demanded nor handled");
                 Equal("you", PreflightLabels.BandTone("car", "car", "you"),
                     "one driver action turns the whole band");
@@ -498,7 +498,7 @@ namespace AsDriven.Core.Tests
                 True(dogBox.HasMatch, "matches the Brabham dog box");
                 Equal("5-speed H-pattern", dogBox.ShifterLabel, "Brabham shifter");
                 Equal("Clutch required", dogBox.LaunchLabel, "Brabham launch");
-                Equal("Lift - no clutch", dogBox.UpshiftLabel, "Brabham upshift");
+                Equal("Lift the throttle", dogBox.UpshiftLabel, "Brabham upshift");
                 Equal("Blip - rev-match", dogBox.DownshiftLabel, "Brabham downshift");
                 Equal("you", dogBox.UseBandTone, "every Brabham moment is the driver's");
 
@@ -520,9 +520,9 @@ namespace AsDriven.Core.Tests
 
                 // "optional" is a settled answer, not a gap. Colouring it grey
                 // would say the evidence is missing when the record states it.
-                Equal("optional", PreflightLabels.DownshiftTone("optional"),
+                Equal("optional", PreflightLabels.DownshiftTone("optional", "not-required"),
                     "an optional blip has its own tone");
-                Equal("unknown", PreflightLabels.DownshiftTone("unknown"),
+                Equal("unknown", PreflightLabels.DownshiftTone("unknown", "not-required"),
                     "only an unestablished blip reads as unknown");
                 Equal("car", PreflightLabels.BandTone("car", "car", "optional"),
                     "a band whose only outstanding item is optional demands nothing");
@@ -544,6 +544,31 @@ namespace AsDriven.Core.Tests
                 // The card shows effective behaviour, so a simulator deviation
                 // would otherwise read as though it were authentic. Only the
                 // record's own override can raise the marker.
+                // A running shift always states its clutch. 222 of 224 records
+                // read "not required", and saying so is the point: silence
+                // there would be indistinguishable from never having checked.
+                Equal("No clutch needed", PreflightLabels.RunningClutch("not-required"),
+                    "states a clutch-free running shift outright");
+                Equal("Clutch not established", PreflightLabels.RunningClutch("unknown"),
+                    "an unchecked clutch says so rather than staying blank");
+                Equal("No clutch fitted", PreflightLabels.RunningClutch("not-applicable"),
+                    "a car with no clutch says that instead");
+                Equal("you", PreflightLabels.UpshiftTone("not-required", "required"),
+                    "a clutch the driver must work makes the shift theirs");
+                Equal("you", PreflightLabels.DownshiftTone("not-required", "required"),
+                    "on the downshift too");
+                Equal("No clutch needed", dogBoxNote.UpshiftClutchLabel,
+                    "the Brabham upshift is clutch-free and says so");
+                Equal("No clutch needed", dogBoxNote.DownshiftClutchLabel,
+                    "and its downshift too");
+                GuidanceSnapshot untestedClutch = database.Match(
+                    "Automobilista2", "Lamborghini Diablo SV-R");
+                if (untestedClutch.HasMatch)
+                {
+                    Equal("Clutch not established", untestedClutch.UpshiftClutchLabel,
+                        "the one car whose running clutch was never established says so");
+                }
+
                 GuidanceSnapshot lotus = database.Match(
                     "Automobilista2", "Lotus 98T - High Downforce");
                 if (lotus.HasMatch)

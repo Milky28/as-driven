@@ -100,12 +100,39 @@ namespace AsDriven.Core
             }
         }
 
+        /// <summary>
+        /// Whether the clutch is needed for a shift already under way. Always
+        /// shown, even though it is "not required" on almost every car: without
+        /// it the driver cannot tell a clutch-free gearbox from one nobody
+        /// checked, and those are different facts.
+        /// </summary>
+        public static string RunningClutch(string clutch)
+        {
+            switch (clutch)
+            {
+                case "required": return "Clutch required";
+                case "optional": return "Clutch optional";
+                case "not-required": return "No clutch needed";
+                case "not-applicable": return "No clutch fitted";
+                default: return "Clutch not established";
+            }
+        }
+
+        /// <summary>The launch cell's second line, empty when there is nothing
+        /// further the record establishes.</summary>
+        public static string LaunchDetail(string standingStartClutch)
+        {
+            return standingStartClutch == "anti-stall-available"
+                ? "Anti-stall will catch it"
+                : string.Empty;
+        }
+
         public static string Upshift(string throttleLift, string automaticCut)
         {
             switch (throttleLift)
             {
-                case "required": return "Lift - no clutch";
-                case "partial": return "Part lift - no clutch";
+                case "required": return "Lift the throttle";
+                case "partial": return "Part lift";
                 case "not-required":
                     return automaticCut == "yes" ? "Stay flat - car cuts" : "Stay flat";
                 case "not-applicable": return "Nothing to do";
@@ -113,8 +140,9 @@ namespace AsDriven.Core
             }
         }
 
-        public static string UpshiftTone(string throttleLift)
+        public static string UpshiftTone(string throttleLift, string clutch)
         {
+            if (clutch == "required") { return ToneDriver; }
             switch (throttleLift)
             {
                 case "required":
@@ -141,8 +169,9 @@ namespace AsDriven.Core
             }
         }
 
-        public static string DownshiftTone(string manualBlip)
+        public static string DownshiftTone(string manualBlip, string clutch)
         {
+            if (clutch == "required") { return ToneDriver; }
             switch (manualBlip)
             {
                 case "required": return ToneDriver;

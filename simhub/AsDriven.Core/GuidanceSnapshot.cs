@@ -41,6 +41,12 @@ namespace AsDriven.Core
         // automatic blip may still have an unknown manual blip.
         public string ManualBlip { get; private set; }
         public string ThrottleLift { get; private set; }
+
+        /// <summary>Clutch requirement for a running upshift.</summary>
+        public string UpshiftClutch { get; private set; }
+
+        /// <summary>Clutch requirement for a running downshift.</summary>
+        public string DownshiftClutch { get; private set; }
         public string WheelRimShape { get; private set; }
         public string WheelRimSourceLabel { get; private set; }
 
@@ -171,14 +177,31 @@ namespace AsDriven.Core
             get { return PreflightLabels.LaunchTone(StandingStartClutch); }
         }
 
+        /// <summary>Whether the clutch is needed for a running upshift.</summary>
+        public string UpshiftClutchLabel
+        {
+            get { return PreflightLabels.RunningClutch(UpshiftClutch); }
+        }
+
+        /// <summary>Whether the clutch is needed for a running downshift.</summary>
+        public string DownshiftClutchLabel
+        {
+            get { return PreflightLabels.RunningClutch(DownshiftClutch); }
+        }
+
+        public string LaunchDetailLabel
+        {
+            get { return PreflightLabels.LaunchDetail(StandingStartClutch); }
+        }
+
         public string UpshiftTone
         {
-            get { return PreflightLabels.UpshiftTone(ThrottleLift); }
+            get { return PreflightLabels.UpshiftTone(ThrottleLift, UpshiftClutch); }
         }
 
         public string DownshiftTone
         {
-            get { return PreflightLabels.DownshiftTone(ManualBlip); }
+            get { return PreflightLabels.DownshiftTone(ManualBlip, DownshiftClutch); }
         }
 
         /// <summary>Tone for the whole USE band, and so for its rail.</summary>
@@ -215,6 +238,8 @@ namespace AsDriven.Core
             string shiftCut,
             string manualBlip,
             string throttleLift,
+            string upshiftClutch,
+            string downshiftClutch,
             string wheelRimShape,
             string wheelRimSourceLabel,
             string driverSummary,
@@ -264,6 +289,8 @@ namespace AsDriven.Core
                 ShiftCut = shiftCut,
                 ManualBlip = manualBlip,
                 ThrottleLift = throttleLift,
+                UpshiftClutch = upshiftClutch,
+                DownshiftClutch = downshiftClutch,
                 WheelRimShape = wheelRimShape,
                 WheelRimSourceLabel = wheelRimSourceLabel,
                 DriverSummary = driverSummary,
@@ -323,6 +350,8 @@ namespace AsDriven.Core
                 ShiftCut = string.Empty,
                 ManualBlip = string.Empty,
                 ThrottleLift = string.Empty,
+                UpshiftClutch = string.Empty,
+                DownshiftClutch = string.Empty,
                 WheelRimShape = string.Empty,
                 WheelRimSourceLabel = string.Empty,
                 DriverSummary = string.Empty,

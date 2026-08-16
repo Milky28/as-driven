@@ -560,11 +560,12 @@ def _use_band(
     cell_left = left + rail_width + 1
     cell_width = (width - rail_width - 2) / 3
     moments = (
-        ("Launch", "LaunchTone", "[AsDriven.LaunchLabel]"),
-        ("Upshift", "UpshiftTone", "[AsDriven.UpshiftLabel]"),
-        ("Downshift", "DownshiftTone", "[AsDriven.DownshiftLabel]"),
+        ("Launch", "LaunchTone", "[AsDriven.LaunchLabel]", "[AsDriven.LaunchDetailLabel]"),
+        ("Upshift", "UpshiftTone", "[AsDriven.UpshiftLabel]", "[AsDriven.UpshiftClutchLabel]"),
+        ("Downshift", "DownshiftTone", "[AsDriven.DownshiftLabel]",
+         "[AsDriven.DownshiftClutchLabel]"),
     )
-    for index, (title, tone, value) in enumerate(moments):
+    for index, (title, tone, value, detail) in enumerate(moments):
         x = cell_left + cell_width * index
         children.extend(_tone_layers(
             factory, "UseCell" + title, tone, x + 1, top + 2, cell_width - 2, height - 4,
@@ -574,15 +575,21 @@ def _use_band(
                 factory.rectangle("UseDivider" + title, x, top + 8, 1, height - 16, SLATE))
         children.extend(_tone_text(
             factory, "UseHead" + title, tone, title,
-            x + 14, top + height / 2 - head_size - 4, cell_width - 24, head_size + 6,
+            x + 14, top + 10, cell_width - 60, head_size + 6,
             head_size, expression="'" + title + "'"))
         children.append(
-            factory.text("UseValue" + title, "", x + 14, top + height / 2 + 1,
-                         cell_width - 24, value_size + 7, value_size, TEXT,
+            factory.text("UseValue" + title, "", x + 14, top + head_size + 16,
+                         cell_width - 24, value_size + 6, value_size, TEXT,
                          expression=value))
+        # Every running shift states its clutch, even when the answer is no.
+        # Silence there reads as "not checked", which is a different fact.
+        children.append(
+            factory.text("UseClutch" + title, "", x + 14, top + head_size + value_size + 21,
+                         cell_width - 24, value_size + 5, value_size - 1.5, MUTED,
+                         expression=detail))
         children.append(_differs_marker(
             factory, "UseDiffers" + title, title + "Differs",
-            x + 14, top + height - 19, value_size - 2.5))
+            x + cell_width - 48, top + 11, head_size - 4.5))
     return children
 
 

@@ -303,6 +303,14 @@ namespace AsDriven.Core
                         RequiredObject(effectiveTransmission, "upshift", recordPath),
                         "throttle_lift",
                         recordPath),
+                    UpshiftClutch = RequiredString(
+                        RequiredObject(effectiveTransmission, "upshift", recordPath),
+                        "clutch",
+                        recordPath),
+                    DownshiftClutch = RequiredString(
+                        RequiredObject(effectiveTransmission, "downshift", recordPath),
+                        "clutch",
+                        recordPath),
                     WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
                     WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
                     DriverSummary = OptionalText(record, "driver_summary"),
@@ -790,6 +798,8 @@ namespace AsDriven.Core
             public string ShiftCut;
             public string ManualBlip;
             public string ThrottleLift;
+            public string UpshiftClutch;
+            public string DownshiftClutch;
             public string DriverSummary;
             public string[] OverriddenPaths;
             public string SimulatorDifference;
@@ -826,6 +836,8 @@ namespace AsDriven.Core
                     ShiftCut,
                     ManualBlip,
                     ThrottleLift,
+                    UpshiftClutch,
+                    DownshiftClutch,
                     WheelRimShape,
                     WheelRimSourceLabel,
                     DriverSummary,
