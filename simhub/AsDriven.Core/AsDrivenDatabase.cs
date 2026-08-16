@@ -304,6 +304,8 @@ namespace AsDriven.Core
                         recordPath),
                     WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
                     WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
+                    WheelIntegratedDisplay = OptionalState(effectiveWheelRim, "integrated_display"),
+                    WheelShiftLights = OptionalState(effectiveWheelRim, "shift_lights"),
                     HasSteeringDOR = effectiveSteering["degrees_of_rotation"] != null,
                     SteeringDOR = OptionalInteger(effectiveSteering, "degrees_of_rotation"),
                     VerifiedGameVersion = RequiredString(
@@ -653,6 +655,20 @@ namespace AsDriven.Core
             return token == null || token.Type == JTokenType.Null ? 0 : token.Value<int>();
         }
 
+        /// <summary>
+        /// Reads an optional state field, returning "unknown" when the record
+        /// does not carry it. The wheel modifiers are optional in the schema, so
+        /// an absent value means it was never observed and must never be shown
+        /// to the driver as a "no".
+        /// </summary>
+        private static string OptionalState(JObject value, string name)
+        {
+            JToken token = value[name];
+            return token == null || token.Type == JTokenType.Null
+                ? "unknown"
+                : token.Value<string>();
+        }
+
         private static string Key(string simulator, string kind, string value)
         {
             return simulator + "\u001f" + kind + "\u001f" + value;
@@ -711,6 +727,8 @@ namespace AsDriven.Core
             public string ThrottleLift;
             public string WheelRimShape;
             public string WheelRimSourceLabel;
+            public string WheelIntegratedDisplay;
+            public string WheelShiftLights;
             public bool HasSteeringDOR;
             public int SteeringDOR;
             public string VerifiedGameVersion;
@@ -742,6 +760,8 @@ namespace AsDriven.Core
                     ThrottleLift,
                     WheelRimShape,
                     WheelRimSourceLabel,
+                    WheelIntegratedDisplay,
+                    WheelShiftLights,
                     HasSteeringDOR,
                     SteeringDOR,
                     VerifiedGameVersion,

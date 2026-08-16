@@ -38,6 +38,7 @@
     <Compile Include="AsDrivenDatabase.cs" />
     <Compile Include="CarCatalogEntry.cs" />
     <Compile Include="GuidanceSnapshot.cs" />
+    <Compile Include="PreflightLabels.cs" />
     <Compile Include="PopupPreferences.cs" />
     <Compile Include="PopupState.cs" />
     <Compile Include="PreviewRules.cs" />

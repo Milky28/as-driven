@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <title>As Driven</title>
+  <circle cx="64" cy="64" r="47" fill="none" stroke="#fff" stroke-width="7"/>
+  <line x1="71.6" y1="54.8" x2="60.8" y2="83" stroke="#fff" stroke-width="8.4" stroke-linecap="round"/>
+  <circle cx="75.2" cy="47" r="10.2" fill="#fff"/>
+  <line x1="50" y1="86.6" x2="71.6" y2="86.6" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/>
+</svg>

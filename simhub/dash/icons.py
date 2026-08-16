@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import math
 import struct
 import zlib
@@ -15,6 +16,7 @@ MUTED: RGBA = (142, 160, 178, 255)
 GHOST: RGBA = (217, 226, 236, 118)
 INK: RGBA = (17, 26, 36, 255)
 RASTER_ASSET_DIRECTORY = Path(__file__).with_name("assets")
+PREFLIGHT_ASSET_DIRECTORY = Path(__file__).with_name("preflight-assets")
 
 
 class Canvas:
@@ -448,3 +450,216 @@ def generate_icons(size: int = 128) -> dict[str, bytes]:
         builder(canvas)
         icons[name] = canvas.png()
     return icons
+
+
+def _flat_wheel(canvas: Canvas, kind: str) -> None:
+    """Monochrome wheel-rim symbols for the row-based preflight overlay."""
+    if kind == "unknown":
+        _question(canvas, WHITE)
+        return
+
+    if kind == "gt-formula":
+        # Broad modern race-wheel body with molded side grips, a control face,
+        # and a continuous lower rim. Display presence remains separate data;
+        # the rectangle identifies the wheel category, not fitted equipment.
+        rim = [
+            (35, 23), (93, 23), (105, 29), (113, 48),
+            (111, 76), (99, 99), (83, 106), (45, 106),
+            (29, 99), (17, 76), (15, 48), (23, 29),
+        ]
+        canvas.line(rim, 11, WHITE, closed=True)
+        canvas.rectangle(43, 35, 85, 65, 6, WHITE)
+        for x in (35, 93):
+            canvas.disk(x, 43, 4, WHITE)
+            canvas.disk(x, 57, 4, WHITE)
+        for x in (52, 64, 76):
+            canvas.disk(x, 80, 5, WHITE)
+        canvas.line([(42, 94), (86, 94)], 7, WHITE)
+        return
+
+    if kind == "yoke":
+        # A broad open-top U reads as steering hardware rather than the narrow
+        # fork/antenna silhouette produced by the earlier concept.
+        canvas.line([(23, 30), (31, 72), (48, 94), (64, 102), (80, 94), (97, 72), (105, 30)], 11, WHITE)
+        canvas.disk(64, 70, 8, WHITE)
+        canvas.line([(58, 68), (35, 58)], 8, WHITE)
+        canvas.line([(70, 68), (93, 58)], 8, WHITE)
+        canvas.line([(64, 77), (64, 98)], 8, WHITE)
+        return
+
+    if kind == "other":
+        rim = [(64, 17), (96, 28), (111, 57), (101, 91), (64, 109), (27, 91), (17, 57), (32, 28)]
+        canvas.line(rim, 9, WHITE, closed=True)
+        canvas.disk(64, 64, 8, WHITE)
+        canvas.line([(58, 60), (33, 45)], 8, WHITE)
+        canvas.line([(70, 60), (95, 45)], 8, WHITE)
+        canvas.line([(64, 71), (64, 96)], 8, WHITE)
+        return
+
+    if kind == "d-shaped":
+        arc = [
+            (64 + math.cos(math.pi + index * math.pi / 32) * 45,
+             62 + math.sin(math.pi + index * math.pi / 32) * 45)
+            for index in range(33)
+        ]
+        rim = arc + [(101, 94), (27, 94)]
+        canvas.line(rim, 9, WHITE, closed=True)
+    else:
+        canvas.ellipse(64, 64, 46, 46, 9, WHITE)
+
+    canvas.disk(64, 64, 8, WHITE)
+    canvas.line([(58, 60), (34, 47)], 8, WHITE)
+    canvas.line([(70, 60), (94, 47)], 8, WHITE)
+    canvas.line([(64, 71), (64, 96 if kind == "round" else 89)], 8, WHITE)
+
+
+def _flat_gate(canvas: Canvas, *, dogleg: bool) -> None:
+    xs = (34, 64, 94)
+    for x in xs:
+        canvas.line([(x, 32), (x, 96)], 7, WHITE)
+    canvas.line([(34, 64), (94, 64)], 7, WHITE)
+    canvas.disk(34, 94 if dogleg else 34, 8, WHITE)
+    if dogleg:
+        # The heavier rising route makes the isolated first-gear position read
+        # even after the 128-pixel master is reduced to a 24-pixel row glyph.
+        canvas.line([(34, 90), (34, 64), (64, 64), (64, 38)], 10, WHITE)
+
+
+def _flat_shifter(canvas: Canvas, kind: str) -> None:
+    if kind == "unknown":
+        _question(canvas, WHITE)
+    elif kind == "h-pattern":
+        _flat_gate(canvas, dogleg=False)
+    elif kind == "dogleg-h":
+        _flat_gate(canvas, dogleg=True)
+    elif kind == "sequential-stick":
+        # Tall cylindrical motorsport handle rather than a road-car ball knob.
+        canvas.ellipse(64, 17, 15, 6, 7, WHITE, start=math.pi, end=math.tau)
+        canvas.line([(49, 17), (49, 52)], 7, WHITE)
+        canvas.line([(79, 17), (79, 52)], 7, WHITE)
+        canvas.ellipse(64, 52, 15, 6, 7, WHITE, start=0, end=math.pi)
+        canvas.line([(64, 58), (64, 84)], 11, WHITE)
+        canvas.line([(43, 88), (85, 88)], 10, WHITE)
+        canvas.line([(35, 103), (93, 103)], 10, WHITE)
+    elif kind == "sequential-paddles":
+        # Two independent solid blades, based on the familiar OEM-style paddle
+        # profile. The wider center gap keeps them distinct at row-icon size;
+        # no hub or bridge is implied because the paddles are separate controls.
+        left = [
+            (38, 16), (24, 33), (15, 57), (16, 84), (28, 108),
+            (43, 116), (38, 98), (34, 81), (35, 63), (43, 40),
+        ]
+        right = [(128 - x, y) for x, y in left]
+        canvas.polygon(left, WHITE)
+        canvas.polygon(right, WHITE)
+    elif kind == "automatic-lever":
+        # Side-view automatic selector with its P-R-N-D positions, rather than
+        # a manual-style gate. The compact stroke letters remain useful marks
+        # when the icon is reduced below the size where they can be read.
+        knob = [
+            (22, 13), (46, 13), (51, 18), (51, 47),
+            (46, 52), (22, 52), (17, 47), (17, 18),
+        ]
+        canvas.polygon(knob, WHITE)
+        canvas.line([(13, 57), (57, 57)], 11, WHITE)
+        canvas.line([(34, 62), (34, 108), (51, 108), (51, 78)], 9, WHITE)
+
+        rows = (20, 46, 72, 98)
+        for y in rows:
+            canvas.line([(61, y), (70, y)], 4, WHITE)
+
+        # P
+        canvas.line([(78, 29), (78, 11), (91, 11), (95, 15), (95, 20), (91, 24), (78, 24)], 4, WHITE)
+        # R
+        canvas.line([(78, 55), (78, 37), (91, 37), (95, 41), (95, 46), (91, 49), (78, 49)], 4, WHITE)
+        canvas.line([(88, 49), (96, 56)], 4, WHITE)
+        # N
+        canvas.line([(78, 81), (78, 63), (96, 81), (96, 63)], 4, WHITE)
+        # D
+        canvas.line([(78, 107), (78, 89), (89, 89), (96, 96), (96, 100), (89, 107), (78, 107)], 4, WHITE)
+    elif kind == "direct-selection":
+        for index, x in enumerate((30, 64, 98)):
+            canvas.ellipse(x, 64, 15, 15, 7, WHITE)
+            if index == 0:
+                canvas.disk(x, 64, 7, WHITE)
+        canvas.line([(17, 99), (111, 99)], 8, WHITE)
+
+
+def _flat_clutch(canvas: Canvas) -> None:
+    # A broad solid pad and centered stem read as a pedal rather than a hand at
+    # small sizes. Punched grip holes preserve the familiar motorsport face.
+    canvas.line([(64, 12), (64, 52)], 12, WHITE)
+    face = [
+        (31, 48), (97, 48), (104, 56), (99, 109),
+        (92, 116), (36, 116), (29, 109), (24, 56),
+    ]
+    canvas.polygon(face, WHITE)
+    for x, y in ((47, 68), (81, 68), (64, 84), (47, 101), (81, 101)):
+        canvas.clear_disk(x, y, 6)
+
+
+def _flat_throttle(canvas: Canvas) -> None:
+    # A narrower, taller pad and offset bent stem distinguish the accelerator
+    # from the clutch before the grip-hole pattern can be resolved.
+    canvas.line([(39, 10), (39, 34), (54, 51)], 12, WHITE)
+    face = [
+        (47, 45), (85, 45), (92, 52), (96, 115),
+        (90, 121), (42, 121), (36, 115), (40, 52),
+    ]
+    canvas.polygon(face, WHITE)
+    for x, y in ((56, 62), (76, 62), (66, 77), (56, 92), (76, 92), (66, 108)):
+        canvas.clear_disk(x, y, 5.2)
+
+
+def _flat_info(canvas: Canvas) -> None:
+    canvas.ellipse(64, 64, 45, 45, 8, WHITE)
+    canvas.disk(64, 42, 6, WHITE)
+    canvas.line([(64, 57), (64, 88)], 10, WHITE)
+
+
+def generate_preflight_icons(size: int = 128) -> dict[str, bytes]:
+    """Build the flat, single-colour family used by the row-based proposal."""
+    if size != 128:
+        raise ValueError("Preflight icon masters are authored on a 128-pixel grid")
+    builders: dict[str, Callable[[Canvas], None]] = {
+        "wheel-round": lambda canvas: _flat_wheel(canvas, "round"),
+        "wheel-d-shaped": lambda canvas: _flat_wheel(canvas, "d-shaped"),
+        "wheel-gt-formula": lambda canvas: _flat_wheel(canvas, "gt-formula"),
+        "wheel-yoke": lambda canvas: _flat_wheel(canvas, "yoke"),
+        "wheel-other": lambda canvas: _flat_wheel(canvas, "other"),
+        "wheel-unknown": lambda canvas: _flat_wheel(canvas, "unknown"),
+        "shift-h-pattern": lambda canvas: _flat_shifter(canvas, "h-pattern"),
+        "shift-dogleg-h": lambda canvas: _flat_shifter(canvas, "dogleg-h"),
+        "shift-sequential-stick": lambda canvas: _flat_shifter(canvas, "sequential-stick"),
+        "shift-sequential-paddles": lambda canvas: _flat_shifter(canvas, "sequential-paddles"),
+        "shift-automatic-lever": lambda canvas: _flat_shifter(canvas, "automatic-lever"),
+        "shift-direct-selection": lambda canvas: _flat_shifter(canvas, "direct-selection"),
+        "shift-unknown": lambda canvas: _flat_shifter(canvas, "unknown"),
+        "control-clutch": _flat_clutch,
+        "control-throttle": _flat_throttle,
+        "note-info": _flat_info,
+    }
+    output: dict[str, bytes] = {}
+    for name, builder in builders.items():
+        canvas = Canvas(size=size)
+        builder(canvas)
+        output[name] = canvas.png()
+    return output
+
+
+def write_preflight_icons(output_directory: Path = PREFLIGHT_ASSET_DIRECTORY) -> None:
+    output_directory.mkdir(parents=True, exist_ok=True)
+    for name, data in generate_preflight_icons().items():
+        (output_directory / f"{name}.png").write_bytes(data)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Render the flat preflight icon family.")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=PREFLIGHT_ASSET_DIRECTORY,
+        help="directory for the 128x128 transparent PNG masters",
+    )
+    arguments = parser.parse_args()
+    write_preflight_icons(arguments.output)

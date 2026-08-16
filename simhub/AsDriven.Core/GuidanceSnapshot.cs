@@ -41,6 +41,75 @@ namespace AsDriven.Core
         public string ThrottleLift { get; private set; }
         public string WheelRimShape { get; private set; }
         public string WheelRimSourceLabel { get; private set; }
+
+        /// <summary>Whether the rim itself carries a readout. Optional in the
+        /// schema, so an unobserved value reads "unknown", never "no".</summary>
+        public string WheelIntegratedDisplay { get; private set; }
+
+        /// <summary>Whether the rim carries shift or rev lights.</summary>
+        public string WheelShiftLights { get; private set; }
+
+        // ---- preflight card wording, derived from the values above ----
+
+        /// <summary>Rim construction, as the card names it.</summary>
+        public string WheelRimLabel
+        {
+            get { return PreflightLabels.WheelRim(WheelRimShape); }
+        }
+
+        /// <summary>What the rim carries, kept as text per the icon contract.</summary>
+        public string WheelFeatureLabel
+        {
+            get { return PreflightLabels.WheelFeatures(WheelIntegratedDisplay, WheelShiftLights); }
+        }
+
+        /// <summary>Gear count and actuation, e.g. "5-speed H-pattern".</summary>
+        public string ShifterLabel
+        {
+            get { return PreflightLabels.Shifter(GearCount, ShiftActuation); }
+        }
+
+        /// <summary>Where the gears sit, e.g. "Dogleg gate - 1st down and left".</summary>
+        public string ShifterGateLabel
+        {
+            get { return PreflightLabels.Gate(ShiftActuation, ShiftPattern); }
+        }
+
+        public string LaunchLabel
+        {
+            get { return PreflightLabels.Launch(StandingStartClutch); }
+        }
+
+        public string UpshiftLabel
+        {
+            get { return PreflightLabels.Upshift(ThrottleLift, ShiftCut); }
+        }
+
+        public string DownshiftLabel
+        {
+            get { return PreflightLabels.Downshift(ManualBlip, AutoBlip); }
+        }
+
+        public string LaunchTone
+        {
+            get { return PreflightLabels.LaunchTone(StandingStartClutch); }
+        }
+
+        public string UpshiftTone
+        {
+            get { return PreflightLabels.UpshiftTone(ThrottleLift); }
+        }
+
+        public string DownshiftTone
+        {
+            get { return PreflightLabels.DownshiftTone(ManualBlip); }
+        }
+
+        /// <summary>Tone for the whole USE band, and so for its rail.</summary>
+        public string UseBandTone
+        {
+            get { return PreflightLabels.BandTone(LaunchTone, UpshiftTone, DownshiftTone); }
+        }
         public bool HasSteeringDOR { get; private set; }
         public int SteeringDOR { get; private set; }
         public string VerifiedGameVersion { get; private set; }
@@ -72,6 +141,8 @@ namespace AsDriven.Core
             string throttleLift,
             string wheelRimShape,
             string wheelRimSourceLabel,
+            string wheelIntegratedDisplay,
+            string wheelShiftLights,
             bool hasSteeringDOR,
             int steeringDOR,
             string verifiedGameVersion,
@@ -114,6 +185,8 @@ namespace AsDriven.Core
                 ThrottleLift = throttleLift,
                 WheelRimShape = wheelRimShape,
                 WheelRimSourceLabel = wheelRimSourceLabel,
+                WheelIntegratedDisplay = wheelIntegratedDisplay,
+                WheelShiftLights = wheelShiftLights,
                 HasSteeringDOR = hasSteeringDOR,
                 SteeringDOR = steeringDOR,
                 VerifiedGameVersion = verifiedGameVersion,
@@ -162,6 +235,8 @@ namespace AsDriven.Core
                 ThrottleLift = string.Empty,
                 WheelRimShape = string.Empty,
                 WheelRimSourceLabel = string.Empty,
+                WheelIntegratedDisplay = string.Empty,
+                WheelShiftLights = string.Empty,
                 HasSteeringDOR = false,
                 SteeringDOR = 0,
                 VerifiedGameVersion = string.Empty,

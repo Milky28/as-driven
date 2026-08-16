@@ -84,14 +84,31 @@ PRODUCTION_TARGETS = (
      / "as-driven-mark.png", 512),
     (_REPO / "simhub" / "dash" / "assets" / "brand-mark.png", 128),
 )
+PRODUCTION_SVG_TARGET = (
+    _REPO / "simhub" / "dash" / "assets" / "brand-mark.svg"
+)
+
+
+def build_svg() -> bytes:
+    """Return the production rim-and-lever mark as a scalable SVG master."""
+    return b"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <title>As Driven</title>
+  <circle cx="64" cy="64" r="47" fill="none" stroke="#fff" stroke-width="7"/>
+  <line x1="71.6" y1="54.8" x2="60.8" y2="83" stroke="#fff" stroke-width="8.4" stroke-linecap="round"/>
+  <circle cx="75.2" cy="47" r="10.2" fill="#fff"/>
+  <line x1="50" y1="86.6" x2="71.6" y2="86.6" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/>
+</svg>
+"""
 
 
 def write_production() -> list[Path]:
-    """Write the selected mark to both shipped locations."""
+    """Write the selected mark to both raster locations and its SVG master."""
     written = []
     for path, size in PRODUCTION_TARGETS:
         path.write_bytes(build(PRODUCTION_VARIANT, size=size))
         written.append(path)
+    PRODUCTION_SVG_TARGET.write_bytes(build_svg())
+    written.append(PRODUCTION_SVG_TARGET)
     return written
 
 

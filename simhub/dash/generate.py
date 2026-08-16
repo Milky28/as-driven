@@ -9,7 +9,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Callable, NamedTuple
 
-from icons import generate_icons
+from icons import RASTER_ASSET_DIRECTORY, generate_preflight_icons
 
 
 ACCENT = "#FF27C7F3"
@@ -44,7 +44,14 @@ TEMPLATES = (
 
 @lru_cache(maxsize=1)
 def _icon_assets() -> dict[str, bytes]:
-    return generate_icons(size=ICON_SIZE)
+    """The flat preflight family, plus the brand mark used in the card title.
+
+    The mark is a reviewed raster rather than generated geometry, so it is read
+    from the approved asset directory instead of being redrawn here.
+    """
+    assets = generate_preflight_icons(size=ICON_SIZE)
+    assets["brand-mark"] = (RASTER_ASSET_DIRECTORY / "brand-mark.png").read_bytes()
+    return assets
 
 
 def _image_metadata() -> list[dict[str, Any]]:
@@ -245,21 +252,6 @@ class ItemFactory:
         return layer
 
 
-def _line(
-    factory: ItemFactory,
-    name: str,
-    x: float,
-    y: float,
-    length: float,
-    thickness: float,
-    rotation: float = 0,
-    color: str = WHITE,
-) -> dict[str, Any]:
-    return factory.rectangle(
-        name, x, y, length, thickness, color, radius=max(1, int(thickness / 2)), rotation=rotation
-    )
-
-
 def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: float) -> list[dict[str, Any]]:
     size = 46 * scale
     prop = "[AsDriven.WheelRimShape]"
@@ -321,99 +313,6 @@ def _shift_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: fl
     ]
 
 
-def _automation_icon(
-    factory: ItemFactory,
-    prefix: str,
-    x: float,
-    y: float,
-    scale: float,
-    property_name: str,
-    kind: str,
-) -> list[dict[str, Any]]:
-    prop = "[AsDriven." + property_name + "]"
-    size = 46 * scale
-    if kind == "cut":
-        variants = (
-            ("Yes", "cut-auto", prop + " == 'yes'"),
-            ("No", "lift-required", prop + " == 'no'"),
-            ("Unknown", "cut-unknown", prop + " != 'yes' && " + prop + " != 'no'"),
-        )
-    else:
-        variants = (
-            ("Yes", "blip-auto", prop + " == 'yes'"),
-            ("No", "blip-manual", prop + " == 'no'"),
-            ("Unknown", "blip-unknown", prop + " != 'yes' && " + prop + " != 'no'"),
-        )
-    return [
-        factory.layer(
-            prefix + suffix,
-            [factory.image(prefix + suffix + "Bitmap", asset, x, y, size, size)],
-            visible_expression=expression,
-        )
-        for suffix, asset, expression in variants
-    ]
-
-
-def _rail_item(
-    factory: ItemFactory,
-    name: str,
-    x: float,
-    width: float,
-    icon_top: float,
-    icon_size: float,
-    label_top: float,
-    icon_builder: Callable[[ItemFactory, str, float, float, float], list[dict[str, Any]]],
-    label: str,
-    value_expression: str,
-    *,
-    label_size: float,
-    value_size: float,
-    show_value: bool = True,
-) -> list[dict[str, Any]]:
-    scale = icon_size / 46
-    icon_x = x + (width - icon_size) / 2
-    children = icon_builder(factory, name + "Icon", icon_x, icon_top, scale)
-    children.append(factory.text(name + "Label", label, x + 4, label_top, width - 8, 18, label_size, ACCENT, horizontal_alignment=1, font_weight="Bold"))
-    if show_value:
-        children.append(factory.text(name + "Value", "Unknown", x + 5, label_top + 18, width - 10, 28, value_size, WHITE, expression=value_expression, horizontal_alignment=1, font_weight="Bold"))
-    return children
-
-
-def _group_heading(
-    factory: ItemFactory,
-    name: str,
-    text: str,
-    x: float,
-    y: float,
-    width: float,
-    font_size: float,
-) -> dict[str, Any]:
-    return factory.text(
-        name,
-        text,
-        x,
-        y,
-        width,
-        18,
-        font_size,
-        ACCENT,
-        horizontal_alignment=1,
-        font_weight="Bold",
-    )
-
-
-def _separator(
-    factory: ItemFactory,
-    name: str,
-    x: float,
-    top: float,
-    height: float,
-    *,
-    group: bool = False,
-) -> dict[str, Any]:
-    return factory.rectangle(name, x, top, 2 if group else 1, height, ACCENT if group else SLATE)
-
-
 def _frame(factory: ItemFactory) -> list[dict[str, Any]]:
     margin = 4
     return [
@@ -430,79 +329,6 @@ def _header(factory: ItemFactory, compact: bool = False) -> list[dict[str, Any]]
     left = 16 if compact else 28
     top = 15 if compact else 22
     return [factory.image("Mark", "brand-mark", left, top, mark_size, mark_size)]
-
-
-def _wheel_value_expression() -> str:
-    prop = "[AsDriven.WheelRimShape]"
-    return (
-        # gt-style, prototype and formula are retired into gt-formula. They are
-        # still matched so an older installed dataset keeps a correct label.
-        f"if({prop} == 'round', 'Round', "
-        f"if({prop} == 'd-shaped', 'D-shaped', "
-        f"if({prop} == 'gt-formula' || {prop} == 'gt-style' || {prop} == 'prototype'"
-        f" || {prop} == 'formula', 'GT / Formula', "
-        f"if({prop} == 'yoke', 'Yoke', 'Unknown'))))"
-    )
-
-
-def _shift_value_expression() -> str:
-    actuation = "[AsDriven.ShiftActuation]"
-    pattern = "[AsDriven.ShiftPattern]"
-    return (
-        f"if({pattern} == 'dogleg-h', 'Dogleg H-pattern', "
-        f"if({actuation} == 'h-pattern', 'H-pattern', "
-        f"if({actuation} == 'sequential-stick', 'Sequential stick', "
-        f"if({actuation} == 'sequential-paddles', 'Sequential paddles', "
-        f"if({actuation} == 'automatic-lever', 'Automatic lever', "
-        f"if({actuation} == 'direct-selection', 'Direct selection', 'Unknown'))))))"
-    )
-
-
-def _automation_value_expression(property_name: str, action: str) -> str:
-    """Downshift tile.
-
-    The simulator blipping for the driver settles the tile on its own. Where it
-    does not, the tile states what the driver must do, which is a separate
-    curated value: a car with no automatic blip may still have an unknown manual
-    blip, and saying 'Manual blip' there would turn an unknown into an
-    instruction.
-    """
-    auto = "[AsDriven." + property_name + "]"
-    manual = "[AsDriven.ManualBlip]"
-    return (
-        f"if({auto} == 'yes', 'Automatic throttle {action}', "
-        f"if({manual} == 'required', 'Manual {action}', "
-        f"if({manual} == 'optional', 'Blip optional', "
-        f"if({manual} == 'not-required', 'No blip needed', "
-        f"if({manual} == 'not-applicable', 'Not applicable', 'Not verified')))))"
-    )
-
-
-def _upshift_value_expression() -> str:
-    """Upshift tile, on the same rule as the downshift tile above."""
-    cut = "[AsDriven.ShiftCut]"
-    lift = "[AsDriven.ThrottleLift]"
-    return (
-        f"if({cut} == 'yes', 'Automatic throttle cut', "
-        f"if({lift} == 'required', 'Lift throttle', "
-        f"if({lift} == 'partial', 'Partial lift', "
-        f"if({lift} == 'not-required', 'No lift needed', "
-        f"if({lift} == 'not-applicable', 'Not applicable', 'Not verified')))))"
-    )
-
-
-def _match_value_expression(*, include_match: bool) -> str:
-    prop = "[AsDriven.MatchKind]"
-    suffix = " match" if include_match else ""
-    return (
-        f"if({prop} == 'preview', 'Preview', "
-        f"if({prop} == 'telemetry-name', 'Telemetry name{suffix}', "
-        f"if({prop} == 'display-name', 'Display name{suffix}', "
-        f"if({prop} == 'internal-id', 'Internal ID{suffix}', "
-        f"if({prop} == 'car-path', 'Car path{suffix}', "
-        f"if({prop} == 'class-id', 'Class ID{suffix}', "
-        f"if({prop} == 'alias', 'Alias{suffix}', 'Matched')))))))"
-    )
 
 
 def _confidence_value_expression() -> str:
@@ -540,104 +366,328 @@ def _preview_badge(
     )
 
 
-def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
-    content_left = 28
-    content_width = factory.width - 2 * content_left
-    column_width = content_width / 4
-    columns = [content_left + column_width * index for index in range(4)]
-    match_width = 176
-    match_left = factory.width - content_left - match_width
-    title_left = 90
-    title_width = match_left - title_left - 12
-    children = _header(factory)
+
+BAND_PANEL = "#6B102030"
+RAIL_FIT = "#2227C7F3"
+RAIL_YOU = "#26FF875B"
+RAIL_CAR = "#2145D483"
+CELL_YOU = "#1AFF875B"
+CELL_CAR = "#1745D483"
+
+
+def _tone_layers(
+    factory: ItemFactory,
+    prefix: str,
+    tone_property: str,
+    left: float,
+    top: float,
+    width: float,
+    height: float,
+    *,
+    you: str,
+    car: str,
+    unknown: str | None = None,
+    radius: int = 0,
+) -> list[dict[str, Any]]:
+    """Stack one rectangle per tone and let visibility pick between them.
+
+    A rectangle's fill is a fixed value in the dashboard model, so a colour that
+    depends on the car has to be expressed as overlapping items. This is the
+    same mechanism the icon variants already use.
+    """
+    prop = "[AsDriven." + tone_property + "]"
+    variants = [("You", you, prop + " == 'you'"), ("Car", car, prop + " == 'car'")]
+    if unknown is not None:
+        variants.append(("Unknown", unknown, prop + " != 'you' && " + prop + " != 'car'"))
+    return [
+        factory.layer(
+            prefix + suffix,
+            [factory.rectangle(prefix + suffix + "Fill", left, top, width, height, color, radius=radius)],
+            visible_expression=expression,
+        )
+        for suffix, color, expression in variants
+    ]
+
+
+def _tone_text(
+    factory: ItemFactory,
+    prefix: str,
+    tone_property: str,
+    text: str,
+    left: float,
+    top: float,
+    width: float,
+    height: float,
+    size: float,
+    *,
+    expression: str,
+    rotation: float = 0,
+    alignment: int | None = None,
+) -> list[dict[str, Any]]:
+    """The same trick for text colour."""
+    prop = "[AsDriven." + tone_property + "]"
+    variants = [
+        ("You", ORANGE, prop + " == 'you'"),
+        ("Car", GREEN, prop + " == 'car'"),
+        ("Unknown", MUTED, prop + " != 'you' && " + prop + " != 'car'"),
+    ]
+    return [
+        factory.layer(
+            prefix + suffix,
+            [factory.text(prefix + suffix + "Text", text, left, top, width, height, size,
+                          color, expression=expression, font_weight="Bold",
+                          horizontal_alignment=(
+                              alignment if alignment is not None
+                              else (1 if rotation else 0)),
+                          rotation=rotation)],
+            visible_expression=visible,
+        )
+        for suffix, color, visible in variants
+    ]
+
+
+def _rail(
+    factory: ItemFactory,
+    name: str,
+    label: str,
+    left: float,
+    top: float,
+    height: float,
+    *,
+    width: float,
+    color: str,
+    fill: str,
+    size: float,
+) -> list[dict[str, Any]]:
+    """A band's vertical spine. The label reads bottom to top beside the cells."""
+    return [
+        factory.rectangle(name + "Fill", left, top, width, height, fill),
+        factory.text(
+            name + "Label", label,
+            left + width / 2 - height / 2, top + height / 2 - width / 2,
+            height, width, size, color,
+            horizontal_alignment=1, font_weight="Bold", rotation=270,
+        ),
+    ]
+
+
+def _fit_band(
+    factory: ItemFactory,
+    left: float,
+    top: float,
+    width: float,
+    height: float,
+    *,
+    rail_width: float,
+    rail_size: float,
+    head_size: float,
+    sub_size: float,
+    icon_size: float,
+) -> list[dict[str, Any]]:
+    children: list[dict[str, Any]] = [
+        factory.rectangle("FitBand", left, top, width, height, BAND_PANEL, radius=7,
+                          border_color=SLATE, border=1),
+    ]
+    children.extend(_rail(factory, "FitRail", "FIT", left + 1, top + 1, height - 2,
+                          width=rail_width, color=ACCENT, fill=RAIL_FIT, size=rail_size))
+    cell_left = left + rail_width + 1
+    cell_width = (width - rail_width - 2) / 2
+    icon_top = top + (height - icon_size) / 2
+    text_left = cell_left + icon_size + 22
+    text_width = cell_width - icon_size - 30
+    children.extend(_wheel_icon(factory, "FitWheel", cell_left + 14, icon_top, icon_size / 128))
     children.extend([
-        factory.text("Title", "Current car", title_left, 19, title_width, 29, 21.5, WHITE, expression="[AsDriven.OverlayCarNameDetailed]", font_weight="Bold"),
-        factory.text("CarClass", "", title_left, 48, title_width, 20, 12, MUTED, expression="[AsDriven.OverlayCarClassDetailed]", font_weight="Bold"),
-        factory.text("Match", "Matched", match_left, 27, match_width, 22, 11, GREEN, expression="if([AsDriven.MatchKind] == 'preview', '', '✓  ' + " + _match_value_expression(include_match=True) + ")", horizontal_alignment=2, font_weight="Bold"),
-        _preview_badge(factory, match_left, 22, match_width, 30),
-        factory.rectangle("Rule", content_left, 78, content_width, 2, SLATE),
-        factory.rectangle("PhysicalControlsGroup", content_left, 86, column_width * 2 - 4, 164, GROUP_PANEL, radius=7, border_color=SLATE, border=1),
-        factory.rectangle("ShiftingTechniqueGroup", columns[2] + 4, 86, column_width * 2 - 4, 164, GROUP_PANEL, radius=7, border_color=SLATE, border=1),
-        _group_heading(factory, "PhysicalControlsHeading", "PHYSICAL CONTROLS", columns[0], 90, column_width * 2 - 4, 11),
-        _group_heading(factory, "ShiftingTechniqueHeading", "SHIFTING TECHNIQUE", columns[2] + 4, 90, column_width * 2 - 4, 11),
-        _separator(factory, "WheelShiftSeparator", columns[1], 116, 132),
-        _separator(factory, "UpshiftDownshiftSeparator", columns[3], 116, 132),
+        factory.text("FitWheelHead", "Rim", text_left, top + height / 2 - head_size - 3,
+                     text_width, head_size + 6, head_size, WHITE,
+                     expression="[AsDriven.WheelRimLabel]", font_weight="Bold"),
+        factory.text("FitWheelSub", "", text_left, top + height / 2 + 2,
+                     text_width, sub_size + 6, sub_size, MUTED,
+                     expression="[AsDriven.WheelFeatureLabel]"),
+        factory.rectangle("FitDivider", cell_left + cell_width, top + 8, 1, height - 16, SLATE),
     ])
-    wheel_value = _wheel_value_expression()
-    shift_value = _shift_value_expression()
-    cut_value = _upshift_value_expression()
-    blip_value = _automation_value_expression("AutoBlip", "blip")
-    children.extend(_rail_item(factory, "Wheel", columns[0], column_width, 116, 84, 202, _wheel_icon, "WHEEL", wheel_value, label_size=9.5, value_size=11))
-    children.extend(_rail_item(factory, "Shift", columns[1], column_width, 116, 84, 202, _shift_icon, "SHIFT", shift_value, label_size=9.5, value_size=11))
-    children.extend(_rail_item(factory, "Cut", columns[2], column_width, 116, 84, 202, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "ShiftCut", "cut"), "UPSHIFT", cut_value, label_size=9.5, value_size=11))
-    children.extend(_rail_item(factory, "Blip", columns[3], column_width, 116, 84, 202, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "AutoBlip", "blip"), "DOWNSHIFT", blip_value, label_size=9.5, value_size=11))
-    evidence_expression = "'Verified for ' + if([AsDriven.RawGameName] == 'Automobilista2', 'AMS2', if([AsDriven.RawGameName] == '', 'Unknown simulator', [AsDriven.RawGameName])) + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'Unknown', [AsDriven.VerifiedGameVersion]) + '  •  Confidence: ' + " + _confidence_value_expression()
+    second_left = cell_left + cell_width
+    second_text = second_left + icon_size + 22
+    children.extend(_shift_icon(factory, "FitShift", second_left + 14, icon_top, icon_size / 128))
     children.extend([
-        factory.rectangle("TechniqueRule", content_left, 252, content_width, 1, SLATE),
-        _group_heading(factory, "DrivingTechniqueHeading", "DRIVING TECHNIQUE", content_left, 258, content_width, 10),
-        factory.text("TechniqueSummaryLine1", "Shifting technique", content_left + 10, 277, content_width - 20, 21, 13.5, TEXT, expression="[AsDriven.TechniqueSummaryLine1]"),
-        factory.text("TechniqueSummaryLine2", "", content_left + 10, 298, content_width - 20, 21, 13.5, TEXT, expression="[AsDriven.TechniqueSummaryLine2]"),
-        factory.rectangle("EvidenceRule", content_left, 327, content_width, 1, SLATE),
-        factory.text("Evidence", "Evidence", content_left, 333, content_width - 206, 22, 10, MUTED, expression=evidence_expression),
-        factory.text("Dataset", "Dataset", content_left + content_width - 188, 333, 188, 22, 10, MUTED, expression="'Dataset ' + [AsDriven.DatasetVersion]", horizontal_alignment=2),
+        factory.text("FitShiftHead", "Shifter", second_text, top + height / 2 - head_size - 3,
+                     text_width, head_size + 6, head_size, WHITE,
+                     expression="[AsDriven.ShifterLabel]", font_weight="Bold"),
+        factory.text("FitShiftSub", "", second_text, top + height / 2 + 2,
+                     text_width, sub_size + 6, sub_size, MUTED,
+                     expression="[AsDriven.ShifterGateLabel]"),
+    ])
+    return children
+
+
+def _use_band(
+    factory: ItemFactory,
+    left: float,
+    top: float,
+    width: float,
+    height: float,
+    *,
+    rail_width: float,
+    rail_size: float,
+    head_size: float,
+    value_size: float,
+) -> list[dict[str, Any]]:
+    children: list[dict[str, Any]] = [
+        factory.rectangle("UseBand", left, top, width, height, BAND_PANEL, radius=7,
+                          border_color=SLATE, border=1),
+    ]
+    # The rail states the band's answer; each cell then states its own, so a
+    # cell that disagrees is never overpainted by the band.
+    children.extend(_tone_layers(
+        factory, "UseRail", "UseBandTone", left + 1, top + 1, rail_width, height - 2,
+        you=RAIL_YOU, car=RAIL_CAR, unknown=RAIL_FIT))
+    children.extend(_tone_text(
+        factory, "UseRailLabel", "UseBandTone", "USE",
+        left + 1 + rail_width / 2 - (height - 2) / 2,
+        top + 1 + (height - 2) / 2 - rail_width / 2,
+        height - 2, rail_width, rail_size, expression="'USE'", rotation=270))
+    cell_left = left + rail_width + 1
+    cell_width = (width - rail_width - 2) / 3
+    moments = (
+        ("Launch", "LaunchTone", "[AsDriven.LaunchLabel]"),
+        ("Upshift", "UpshiftTone", "[AsDriven.UpshiftLabel]"),
+        ("Downshift", "DownshiftTone", "[AsDriven.DownshiftLabel]"),
+    )
+    for index, (title, tone, value) in enumerate(moments):
+        x = cell_left + cell_width * index
+        children.extend(_tone_layers(
+            factory, "UseCell" + title, tone, x + 1, top + 2, cell_width - 2, height - 4,
+            you=CELL_YOU, car=CELL_CAR, unknown=TRANSPARENT))
+        if index:
+            children.append(
+                factory.rectangle("UseDivider" + title, x, top + 8, 1, height - 16, SLATE))
+        children.extend(_tone_text(
+            factory, "UseHead" + title, tone, title,
+            x + 14, top + height / 2 - head_size - 4, cell_width - 24, head_size + 6,
+            head_size, expression="'" + title + "'"))
+        children.append(
+            factory.text("UseValue" + title, "", x + 14, top + height / 2 + 1,
+                         cell_width - 24, value_size + 7, value_size, TEXT,
+                         expression=value))
+    return children
+
+
+def _card_header(
+    factory: ItemFactory,
+    *,
+    left: float,
+    top: float,
+    mark: float,
+    name_size: float,
+    class_size: float,
+    match_size: float,
+    width: float,
+    show_class: bool = True,
+) -> list[dict[str, Any]]:
+    text_left = left + mark + 14
+    match_width = 150 if match_size >= 12 else 118
+    match_left = left + width - match_width
+    children = [
+        factory.image("Mark", "brand-mark", left, top + 1, mark, mark),
+        factory.text("Title", "Current car", text_left, top - 1,
+                     match_left - text_left - 10, name_size + 9, name_size, WHITE,
+                     expression="[AsDriven.OverlayCarNameDetailed]", font_weight="Bold"),
+    ]
+    if show_class:
+        children.append(
+            factory.text("CarClass", "", text_left, top + name_size + 6,
+                         match_left - text_left - 10, class_size + 6, class_size, MUTED,
+                         expression="[AsDriven.OverlayCarClassDetailed]"))
+    children.extend([
+        factory.ellipse("MatchDot", match_left, top + mark / 2 - 4, 8, 8, GREEN,
+                        thickness=4, fill=GREEN),
+        factory.text("Match", "Telemetry matched", match_left + 13, top + mark / 2 - match_size,
+                     match_width - 13, match_size + 8, match_size, GREEN,
+                     expression="if([AsDriven.MatchKind] == 'preview', 'Preview - not live', "
+                                "'Telemetry matched')",
+                     font_weight="Bold"),
+    ])
+    return children
+
+
+def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
+    left = 24
+    width = factory.width - 2 * left
+    children = _card_header(factory, left=left, top=17, mark=34, name_size=21,
+                            class_size=12, match_size=13, width=width)
+    children.append(factory.rectangle("HeaderRule", left, 68, width, 1, SLATE))
+    children.extend(_fit_band(factory, left, 82, width, 88, rail_width=26, rail_size=10.5,
+                              head_size=15, sub_size=12, icon_size=34))
+    children.extend(_use_band(factory, left, 180, width, 88, rail_width=26, rail_size=10.5,
+                              head_size=14, value_size=12.5))
+    children.extend([
+        _preview_badge(factory, factory.width - left - 150, 14, 150, 30),
+        factory.rectangle("FooterRule", left, 292, width, 1, SLATE),
+        factory.text("Evidence", "", left, 300, width - 190, 20, 11.5, MUTED,
+                     expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
+                                "[AsDriven.VerifiedGameVersion]) + '  -  Confidence: ' + "
+                                + _confidence_value_expression()),
+        factory.text("Dataset", "", left + width - 190, 300, 190, 20, 11.5, MUTED,
+                     expression="'Dataset ' + [AsDriven.DatasetVersion]",
+                     horizontal_alignment=2),
     ])
     return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 
 def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
-    children = _header(factory, compact=True)
+    left = 18
+    width = factory.width - 2 * left
+    children = _card_header(factory, left=left, top=13, mark=28, name_size=17,
+                            class_size=10.5, match_size=11, width=width)
+    children.append(factory.rectangle("HeaderRule", left, 57, width, 1, SLATE))
+    children.extend(_fit_band(factory, left, 68, width, 72, rail_width=21, rail_size=9.5,
+                              head_size=12.5, sub_size=10.5, icon_size=26))
+    children.extend(_use_band(factory, left, 148, width, 72, rail_width=21, rail_size=9.5,
+                              head_size=11.5, value_size=10.5))
     children.extend([
-        factory.text("Title", "Current car", 68, 13, 310, 23, 17.5, WHITE, expression="[AsDriven.OverlayCarNameCompact]", font_weight="Bold"),
-        factory.text("CarClass", "", 68, 37, 310, 14, 9.5, MUTED, expression="[AsDriven.OverlayCarClassCompact]", font_weight="Bold"),
-        factory.text("Match", "✓", 422, 20, 78, 22, 11, GREEN, expression="if([AsDriven.MatchKind] == 'preview', '', '✓')", horizontal_alignment=2, font_weight="Bold"),
-        _preview_badge(factory, 390, 15, 110, 30, compact=True),
-        factory.rectangle("Rule", 16, 62, 488, 1, SLATE),
-        factory.rectangle("PhysicalControlsGroup", 16, 68, 240, 139, GROUP_PANEL, radius=6, border_color=SLATE, border=1),
-        factory.rectangle("ShiftingTechniqueGroup", 264, 68, 240, 139, GROUP_PANEL, radius=6, border_color=SLATE, border=1),
-        _group_heading(factory, "PhysicalControlsHeading", "PHYSICAL CONTROLS", 16, 71, 240, 9),
-        _group_heading(factory, "ShiftingTechniqueHeading", "SHIFTING TECHNIQUE", 264, 71, 240, 9),
-        _separator(factory, "WheelShiftSeparator", 138, 87, 120),
-        _separator(factory, "UpshiftDownshiftSeparator", 382, 87, 120),
-    ])
-    wheel_value = _wheel_value_expression()
-    shift_value = _shift_value_expression()
-    cut_value = _upshift_value_expression()
-    blip_value = _automation_value_expression("AutoBlip", "blip")
-    children.extend(_rail_item(factory, "Wheel", 16, 122, 88, 62, 153, _wheel_icon, "WHEEL", wheel_value, label_size=8.5, value_size=9.5))
-    children.extend(_rail_item(factory, "Shift", 138, 122, 88, 62, 153, _shift_icon, "SHIFT", shift_value, label_size=8.5, value_size=9.5))
-    children.extend(_rail_item(factory, "Cut", 260, 122, 88, 62, 153, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "ShiftCut", "cut"), "UPSHIFT", cut_value, label_size=8.5, value_size=9.5))
-    children.extend(_rail_item(factory, "Blip", 382, 122, 88, 62, 153, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "AutoBlip", "blip"), "DOWNSHIFT", blip_value, label_size=8.5, value_size=9.5))
-    evidence_expression = "'Verified ' + if([AsDriven.VerifiedGameVersion] == '', 'version unknown', [AsDriven.VerifiedGameVersion]) + '  •  Confidence: ' + " + _confidence_value_expression()
-    children.extend([
-        factory.rectangle("TechniqueRule", 16, 209, 488, 1, SLATE),
-        _group_heading(factory, "DrivingTechniqueHeading", "DRIVING TECHNIQUE", 16, 214, 488, 8.5),
-        factory.text("TechniqueSummaryLine1", "Shifting technique", 24, 231, 472, 17, 9.5, TEXT, expression="[AsDriven.TechniqueSummaryCompactLine1]"),
-        factory.text("TechniqueSummaryLine2", "", 24, 248, 472, 17, 9.5, TEXT, expression="[AsDriven.TechniqueSummaryCompactLine2]"),
-        factory.rectangle("EvidenceRule", 16, 270, 488, 1, SLATE),
-        factory.text("Evidence", "Evidence", 16, 276, 360, 18, 8.5, MUTED, expression=evidence_expression),
-        factory.text("Dataset", "Dataset", 380, 276, 124, 18, 8.5, MUTED, expression="'Dataset ' + [AsDriven.DatasetVersion]", horizontal_alignment=2),
+        _preview_badge(factory, factory.width - left - 118, 11, 118, 26, compact=True),
+        factory.rectangle("FooterRule", left, 240, width, 1, SLATE),
+        factory.text("Evidence", "", left, 248, width - 150, 18, 10, MUTED,
+                     expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
+                                "[AsDriven.VerifiedGameVersion]) + '  -  ' + "
+                                + _confidence_value_expression()),
+        factory.text("Dataset", "", left + width - 150, 248, 150, 18, 10, MUTED,
+                     expression="'Dataset ' + [AsDriven.DatasetVersion]",
+                     horizontal_alignment=2),
     ])
     return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 
 def _matched_glance(factory: ItemFactory) -> dict[str, Any]:
+    """Glance carries only what changes the driver's hands.
+
+    There is no room for the gate subtitle or the evidence footer, so the card
+    states the shifter and the driver's share of the work and stops. It never
+    shows a partial sentence in place of a whole one.
+    """
+    left = 14
+    width = factory.width - 2 * left
     children = [
-        factory.image("Mark", "brand-mark", 12, 8, 30, 30),
-        factory.text("Title", "Current car", 50, 8, 174, 24, 15, WHITE, expression="[AsDriven.OverlayCarNameGlance]", font_weight="Bold"),
-        factory.text("Match", "✓", 278, 9, 26, 22, 12, GREEN, expression="if([AsDriven.MatchKind] == 'preview', '', '✓')", horizontal_alignment=1, font_weight="Bold"),
-        _preview_badge(factory, 232, 6, 72, 30, compact=True),
-        factory.rectangle("Rule", 12, 39, 292, 1, SLATE),
-        factory.rectangle("PhysicalControlsGroup", 12, 41, 142, 69, GROUP_PANEL, radius=4, border_color=SLATE, border=1),
-        factory.rectangle("ShiftingTechniqueGroup", 162, 41, 142, 69, GROUP_PANEL, radius=4, border_color=SLATE, border=1),
-        _group_heading(factory, "PhysicalControlsHeading", "PHYSICAL CONTROLS", 12, 43, 142, 7),
-        _group_heading(factory, "ShiftingTechniqueHeading", "SHIFTING TECHNIQUE", 162, 43, 142, 7),
-        _separator(factory, "WheelShiftSeparator", 85, 54, 54),
-        _separator(factory, "UpshiftDownshiftSeparator", 231, 54, 54),
+        factory.image("Mark", "brand-mark", left, 10, 20, 20),
+        factory.text("Title", "Current car", left + 28, 8, width - 28, 22, 14, WHITE,
+                     expression="[AsDriven.OverlayCarNameGlance]", font_weight="Bold"),
+        factory.rectangle("FitChip", left, 40, 26, 15, RAIL_FIT, radius=3),
+        factory.text("FitChipText", "FIT", left, 41, 26, 13, 8, ACCENT,
+                     horizontal_alignment=1, font_weight="Bold"),
+        factory.text("FitValue", "", left + 33, 38, width - 33, 19, 13, WHITE,
+                     expression="[AsDriven.ShifterLabel]", font_weight="Bold"),
     ]
-    children.extend(_rail_item(factory, "Wheel", 12, 73, 54, 38, 94, _wheel_icon, "WHEEL", "''", label_size=7, value_size=7, show_value=False))
-    children.extend(_rail_item(factory, "Shift", 85, 73, 54, 38, 94, _shift_icon, "SHIFT", "''", label_size=7, value_size=7, show_value=False))
-    children.extend(_rail_item(factory, "Cut", 158, 73, 54, 38, 94, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "ShiftCut", "cut"), "UPSHIFT", "''", label_size=7, value_size=7, show_value=False))
-    children.extend(_rail_item(factory, "Blip", 231, 73, 54, 38, 94, lambda f, p, x, y, s: _automation_icon(f, p, x, y, s, "AutoBlip", "blip"), "BLIP", "''", label_size=7, value_size=7, show_value=False))
+    children.extend(_tone_layers(factory, "UseChip", "UseBandTone", left, 66, 26, 15,
+                                 you=RAIL_YOU, car=RAIL_CAR, unknown=RAIL_FIT, radius=3))
+    children.extend(_tone_text(factory, "UseChipText", "UseBandTone", "USE",
+                               left, 67, 26, 13, 8, expression="'USE'", alignment=1))
+    children.extend(_tone_text(factory, "UseValue", "UseBandTone", "",
+                               left + 33, 64, width - 33, 19, 12.5,
+                               expression="[AsDriven.LaunchLabel] + '  -  ' + "
+                                          "[AsDriven.UpshiftLabel]"))
+    children.append(
+        factory.text("Downshift", "", left + 33, 88, width - 33, 18, 11.5, MUTED,
+                     expression="[AsDriven.DownshiftLabel]"))
+    children.append(_preview_badge(factory, factory.width - left - 72, 8, 72, 24, compact=True))
     return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 

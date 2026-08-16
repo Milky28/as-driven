@@ -19,11 +19,24 @@ ULTRAWIDE_LAYOUT_PATH = (
     / "As Driven 5120x1440.olayout"
 )
 RASTER_ASSET_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "assets"
+PREFLIGHT_ASSET_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "preflight-assets"
+BRAND_MARK_GENERATOR_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "brand_mark.py"
 
 
 def load_generator():
     sys.path.insert(0, str(GENERATOR_PATH.parent))
     spec = importlib.util.spec_from_file_location("simhub_dash_generator", GENERATOR_PATH)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_brand_mark_generator():
+    sys.path.insert(0, str(BRAND_MARK_GENERATOR_PATH.parent))
+    spec = importlib.util.spec_from_file_location(
+        "simhub_brand_mark_generator", BRAND_MARK_GENERATOR_PATH
+    )
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
@@ -50,6 +63,15 @@ class SimHubDashTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.generator = load_generator()
+
+    def test_brand_mark_has_a_deterministic_svg_master(self):
+        brand_mark = load_brand_mark_generator()
+        svg_path = RASTER_ASSET_PATH / "brand-mark.svg"
+        self.assertEqual(brand_mark.build_svg(), svg_path.read_bytes())
+        svg = svg_path.read_text(encoding="utf-8")
+        self.assertIn('viewBox="0 0 128 128"', svg)
+        self.assertIn('stroke="#fff"', svg)
+        self.assertNotIn("<rect", svg)
 
     def test_overlay_variants_and_display_have_distinct_visibility_contracts(self):
         overlay = self.generator.build_dashboard(overlay=True, variant="detailed")
@@ -134,17 +156,25 @@ class SimHubDashTests(unittest.TestCase):
     def test_cards_reference_only_explicit_plugin_values(self):
         dashboard = self.generator.build_dashboard(overlay=True)
         serialized = json.dumps(dashboard)
+        # The card binds to properties; the wording itself lives in
+        # AsDriven.Core.PreflightLabels so every surface says the same thing and
+        # the phrasing is asserted in the .NET suite rather than in a formula.
         for property_name in (
             "AsDriven.HasMatch",
             "AsDriven.MatchStatus",
             "AsDriven.RawCarIdentifier",
             "AsDriven.OverlayCarNameDetailed",
-            "AsDriven.ShiftActuation",
-            "AsDriven.ShiftPattern",
-            "AsDriven.AutoBlip",
-            "AsDriven.ShiftCut",
-            "AsDriven.TechniqueSummaryLine1",
-            "AsDriven.TechniqueSummaryLine2",
+            "AsDriven.WheelRimLabel",
+            "AsDriven.WheelFeatureLabel",
+            "AsDriven.ShifterLabel",
+            "AsDriven.ShifterGateLabel",
+            "AsDriven.LaunchLabel",
+            "AsDriven.UpshiftLabel",
+            "AsDriven.DownshiftLabel",
+            "AsDriven.LaunchTone",
+            "AsDriven.UpshiftTone",
+            "AsDriven.DownshiftTone",
+            "AsDriven.UseBandTone",
             "AsDriven.VerifiedGameVersion",
             "AsDriven.Confidence",
             "AsDriven.PopupDetailedVisible",
@@ -152,20 +182,17 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn(property_name, serialized)
         self.assertIn("No hardware or technique values have been assumed.", serialized)
         self.assertIn("Unknown", serialized)
-        for display_label in (
-            "Round",
-            "D-shaped",
-            "H-pattern",
-            "Sequential stick",
-            "Lift throttle",
+        # The four-tile vocabulary is gone with the tiles that carried it.
+        for retired in (
+            "AsDriven.TechniqueSummaryLine1",
+            "AsDriven.TechniqueSummaryLine2",
             "Automatic throttle cut",
-            "Manual blip",
             "Automatic throttle blip",
-            "Display name match",
-            "Telemetry name match",
-            "Preview",
+            "PHYSICAL CONTROLS",
+            "SHIFTING TECHNIQUE",
+            "DRIVING TECHNIQUE",
         ):
-            self.assertIn(display_label, serialized)
+            self.assertNotIn(retired, serialized)
         self.assertNotIn("MANUAL CUT", serialized)
         self.assertNotIn("MANUAL BLIP", serialized)
 
@@ -188,9 +215,13 @@ class SimHubDashTests(unittest.TestCase):
             for variant in ("detailed", "compact", "glance")
         ]
         serialized = json.dumps(dashboards)
+        # Every rim and shifter value the schema allows still selects an icon,
+        # including the three retired rim values, so an older installed dataset
+        # never falls through to the unknown mark.
         for value in (
             "round",
             "d-shaped",
+            "gt-formula",
             "gt-style",
             "prototype",
             "formula",
@@ -205,19 +236,21 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn(value, serialized)
         for asset in (
             "wheel-round",
+            "wheel-d-shaped",
             "wheel-gt-formula",
+            "wheel-yoke",
             "shift-dogleg-h",
+            "shift-h-pattern",
             "shift-sequential-stick",
             "shift-sequential-paddles",
-            "cut-auto",
-            "blip-auto",
-            "blip-manual",
-            "lift-required",
+            "brand-mark",
         ):
             self.assertIn(asset, serialized)
         self.assertIn("GraphicalDash.Models.ImageItem", serialized)
-        self.assertNotIn("cut-manual", serialized)
-        self.assertEqual(19, len(dashboards[0]["Images"]))
+        # The cut, blip and lift tiles were replaced by the Use band's text.
+        for retired in ("cut-auto", "cut-manual", "blip-auto", "blip-manual", "lift-required"):
+            self.assertNotIn(retired, serialized)
+        self.assertEqual(17, len(dashboards[0]["Images"]))
         self.assertTrue(all(image["Extension"] == ".png" for image in dashboards[0]["Images"]))
         self.assertTrue(all(image["Width"] == 128 for image in dashboards[0]["Images"]))
         for dashboard in dashboards:
@@ -229,14 +262,28 @@ class SimHubDashTests(unittest.TestCase):
             self.assertEqual(len(sids), len(set(sids)))
 
     def test_approved_raster_assets_are_packaged_without_falling_back(self):
+        # The card draws the flat preflight family; the only reviewed raster it
+        # still takes from the popup asset directory is the brand mark, which is
+        # generated geometry rather than an icon and must ship byte for byte.
+        packaged = self.generator._icon_assets()
+        self.assertEqual(
+            (RASTER_ASSET_PATH / "brand-mark.png").read_bytes(), packaged["brand-mark"]
+        )
+        family = self.generator.generate_preflight_icons(size=128)
+        self.assertEqual(set(packaged), set(family) | {"brand-mark"})
+        for name, data in family.items():
+            self.assertEqual(data, packaged[name])
+            self.assertEqual(
+                (PREFLIGHT_ASSET_PATH / f"{name}.png").read_bytes(),
+                data,
+                f"{name} on disk differs from the generated master",
+            )
+
+    def test_flat_preflight_icon_family_is_complete_and_deterministic(self):
         expected = {
-            "brand-mark",
-            "blip-auto",
-            "blip-manual",
-            "blip-unknown",
-            "cut-auto",
-            "cut-unknown",
-            "lift-required",
+            "control-clutch",
+            "control-throttle",
+            "note-info",
             "shift-automatic-lever",
             "shift-direct-selection",
             "shift-dogleg-h",
@@ -246,75 +293,95 @@ class SimHubDashTests(unittest.TestCase):
             "shift-unknown",
             "wheel-d-shaped",
             "wheel-gt-formula",
+            "wheel-other",
             "wheel-round",
-            "wheel-yoke",
             "wheel-unknown",
+            "wheel-yoke",
         }
-        self.assertEqual(expected, {path.stem for path in RASTER_ASSET_PATH.glob("*.png")})
-        packaged = self.generator._icon_assets()
-        for name in expected:
-            self.assertEqual((RASTER_ASSET_PATH / f"{name}.png").read_bytes(), packaged[name])
+        paths = {
+            path.stem: path
+            for path in PREFLIGHT_ASSET_PATH.glob("*.png")
+        }
+        self.assertEqual(expected, set(paths))
 
-    def test_detailed_adds_actionable_driving_technique_summary(self):
+        icon_module = sys.modules["icons"]
+        generated = icon_module.generate_preflight_icons()
+        self.assertEqual(expected, set(generated))
+        for name, path in paths.items():
+            data = path.read_bytes()
+            self.assertEqual(b"\x89PNG\r\n\x1a\n", data[:8])
+            self.assertEqual((128, 128), tuple(int.from_bytes(data[offset:offset + 4], "big") for offset in (16, 20)))
+            self.assertEqual(data, generated[name])
+
+    def test_detailed_separates_what_to_fit_from_what_to_do(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
-        serialized = json.dumps(dashboard)
         named = {
             value["Name"]: value
             for value in walk(dashboard)
             if isinstance(value, dict) and "Name" in value
         }
-        self.assertIn("TechniqueSummaryLine1", named)
-        self.assertIn("TechniqueSummaryLine2", named)
-        self.assertEqual("DRIVING TECHNIQUE", named["DrivingTechniqueHeading"]["Text"])
-        self.assertIn("AsDriven.TechniqueSummaryLine1", serialized)
-        self.assertIn("AsDriven.TechniqueSummaryLine2", serialized)
-        self.assertNotIn("AsDriven.UpshiftGuidance", serialized)
-        self.assertNotIn("AsDriven.DownshiftGuidance", serialized)
-        self.assertEqual(333, named["Evidence"]["Top"])
-        self.assertEqual(21.5, named["Title"]["FontSize"])
-        self.assertIn(
-            "AsDriven.OverlayCarNameDetailed",
-            named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
+        # Two bands, each with its own spine, and the Use band below the Fit
+        # band because hardware is settled before the car moves.
+        self.assertEqual("FIT", named["FitRailLabel"]["Text"])
+        self.assertEqual(270, named["FitRailLabel"]["Rotation"])
+        self.assertLess(named["FitBand"]["Top"], named["UseBand"]["Top"])
+        self.assertEqual(
+            "AsDriven.WheelRimLabel",
+            named["FitWheelHead"]["Bindings"]["Text"]["Formula"]["Expression"].strip("[]"),
         )
-        self.assertIn(
-            "AsDriven.OverlayCarClassDetailed",
-            named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
+        self.assertEqual(
+            "AsDriven.ShifterLabel",
+            named["FitShiftHead"]["Bindings"]["Text"]["Formula"]["Expression"].strip("[]"),
+        )
+        # Three moments, in the order they happen.
+        for moment in ("Launch", "Upshift", "Downshift"):
+            self.assertIn(f"UseValue{moment}", named)
+        self.assertLess(named["UseValueLaunch"]["Left"], named["UseValueUpshift"]["Left"])
+        self.assertLess(named["UseValueUpshift"]["Left"], named["UseValueDownshift"]["Left"])
+        # The rail and every cell carry their own tone, so a cell that
+        # disagrees with the band is never overpainted by it.
+        for suffix in ("You", "Car", "Unknown"):
+            self.assertIn(f"UseRail{suffix}", named)
+            self.assertIn(f"UseCellUpshift{suffix}", named)
+        self.assertEqual(
+            self.generator.CELL_CAR, named["UseCellUpshiftCarFill"]["BackgroundColor"]
+        )
+        self.assertEqual(
+            self.generator.CELL_YOU, named["UseCellUpshiftYouFill"]["BackgroundColor"]
         )
 
-    def test_compact_adds_smaller_technique_summary_but_glance_stays_icon_only(self):
+    def test_compact_keeps_both_bands_and_glance_keeps_only_the_hands(self):
         compact = self.generator.build_dashboard(overlay=True, variant="compact")
         compact_named = {
             value["Name"]: value
             for value in walk(compact)
             if isinstance(value, dict) and "Name" in value
         }
-        self.assertEqual("DRIVING TECHNIQUE", compact_named["DrivingTechniqueHeading"]["Text"])
-        self.assertEqual(9.5, compact_named["TechniqueSummaryLine1"]["FontSize"])
+        self.assertEqual("FIT", compact_named["FitRailLabel"]["Text"])
+        for moment in ("Launch", "Upshift", "Downshift"):
+            self.assertIn(f"UseValue{moment}", compact_named)
         self.assertIn(
-            "AsDriven.TechniqueSummaryCompactLine2",
-            compact_named["TechniqueSummaryLine2"]["Bindings"]["Text"]["Formula"]["Expression"],
-        )
-        self.assertIn(
-            "AsDriven.OverlayCarNameCompact",
+            "AsDriven.OverlayCarNameDetailed",
             compact_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
-        )
-        self.assertIn(
-            "AsDriven.OverlayCarClassCompact",
-            compact_named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
         glance = self.generator.build_dashboard(overlay=True, variant="glance")
-        glance_names = {
-            value["Name"]
+        glance_named = {
+            value["Name"]: value
             for value in walk(glance)
             if isinstance(value, dict) and "Name" in value
         }
-        self.assertNotIn("DrivingTechniqueHeading", glance_names)
-        self.assertNotIn("TechniqueSummaryLine1", glance_names)
-        self.assertNotIn("TechniqueSummaryLine2", glance_names)
+        # Glance has room for the shifter and the driver's share of the work
+        # and nothing else. It never shows half of a sentence.
+        self.assertIn("FitValue", glance_named)
+        self.assertIn("UseValueYouText", glance_named)
+        self.assertNotIn("FitBand", glance_named)
+        self.assertNotIn("UseBand", glance_named)
+        self.assertNotIn("FitWheelSub", glance_named)
+        self.assertNotIn("Evidence", glance_named)
         self.assertIn(
             "AsDriven.OverlayCarNameGlance",
-            glance["Screens"][0]["Items"][0]["Childrens"][3]["Childrens"][1]["Bindings"]["Text"]["Formula"]["Expression"],
+            glance_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
     def test_preview_badge_explicitly_says_preview_is_not_live(self):
@@ -338,54 +405,47 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn("PREVIEW", badge_text)
             self.assertIn("NOT LIVE", badge_text)
 
-    def test_blue_open_rail_layout_uses_brand_mark_and_group_headings(self):
-        expected_icon_widths = {
-            "detailed": 84.0,
-            "compact": 62.0,
-            "glance": 38.0,
-        }
-        for variant, expected_icon_width in expected_icon_widths.items():
+    def test_every_size_titles_the_card_with_the_brand_mark(self):
+        for variant in ("detailed", "compact", "glance"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
             named = {
                 value["Name"]: value
                 for value in walk(dashboard)
                 if isinstance(value, dict) and "Name" in value
             }
-            self.assertEqual("brand-mark", named["Mark"]["Image"])
+            self.assertEqual("brand-mark", named["Mark"]["Image"], variant)
             self.assertNotIn("MarkText", named)
-            self.assertEqual("PHYSICAL CONTROLS", named["PhysicalControlsHeading"]["Text"])
-            self.assertEqual("SHIFTING TECHNIQUE", named["ShiftingTechniqueHeading"]["Text"])
-            self.assertEqual(self.generator.GROUP_PANEL, named["PhysicalControlsGroup"]["BackgroundColor"])
-            self.assertEqual(self.generator.GROUP_PANEL, named["ShiftingTechniqueGroup"]["BackgroundColor"])
-            self.assertEqual(self.generator.SLATE, named["PhysicalControlsGroup"]["BorderStyle"]["BorderColor"])
-            self.assertEqual(self.generator.SLATE, named["ShiftingTechniqueGroup"]["BorderStyle"]["BorderColor"])
-            self.assertNotIn("ControlTechniqueSeparator", named)
-            self.assertNotIn("WheelTile", named)
-            self.assertNotIn("ShiftTile", named)
-            self.assertNotIn("CutTile", named)
-            self.assertNotIn("BlipTile", named)
-            self.assertEqual(expected_icon_width, named["WheelIconRoundBitmap"]["Width"])
+            # The retired four-tile furniture is gone from every size.
+            for retired in (
+                "PhysicalControlsHeading",
+                "ShiftingTechniqueHeading",
+                "PhysicalControlsGroup",
+                "ShiftingTechniqueGroup",
+                "WheelTile",
+                "ShiftTile",
+                "CutTile",
+                "BlipTile",
+                "DrivingTechniqueHeading",
+            ):
+                self.assertNotIn(retired, named, f"{retired} still in {variant}")
             self.assertEqual(self.generator.ACCENT, named["Accent"]["BackgroundColor"])
-            self.assertEqual(20, named["Accent"]["Left"])
-            self.assertEqual(dashboard["BaseWidth"] - 20, named["Accent"]["Left"] + named["Accent"]["Width"])
             self.assertEqual(4, named["Card"]["Left"])
-            self.assertEqual(dashboard["BaseWidth"] - 4, named["Card"]["Left"] + named["Card"]["Width"])
-            self.assertEqual(dashboard["BaseHeight"] - 4, named["Card"]["Top"] + named["Card"]["Height"])
 
-    def test_compact_uses_clear_match_mark_and_consistent_confidence_case(self):
+    def test_compact_states_the_match_in_words_and_keeps_confidence_case(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="compact")
         named = {
             value["Name"]: value
             for value in walk(dashboard)
             if isinstance(value, dict) and "Name" in value
         }
-        self.assertEqual("✓", named["Match"]["Text"])
-        self.assertIn("Bindings", named["Match"])
+        # A tick alone did not say what had matched. The header now states it,
+        # with a dot carrying the colour so the words stay readable.
+        self.assertEqual("Telemetry matched", named["Match"]["Text"])
+        self.assertEqual(self.generator.GREEN, named["MatchDot"]["FillColor"])
         self.assertIn("MatchKind", named["Match"]["Bindings"]["Text"]["Formula"]["Expression"])
         self.assertEqual("PREVIEW", named["PreviewBadgeTitle"]["Text"])
         self.assertEqual("NOT LIVE", named["PreviewBadgeLive"]["Text"])
         evidence = named["Evidence"]["Bindings"]["Text"]["Formula"]["Expression"]
-        self.assertIn("Confidence: ", evidence)
         self.assertIn("'Verified'", evidence)
         self.assertIn("'Medium'", evidence)
 
@@ -399,10 +459,11 @@ class SimHubDashTests(unittest.TestCase):
                 if path.name.endswith(".ressources"):
                     with zipfile.ZipFile(path) as archive:
                         names = archive.namelist()
-                        self.assertEqual(19, len(names))
+                        self.assertEqual(17, len(names))
                         self.assertIn("brand-mark.png", names)
-                        self.assertNotIn("cut-manual.png", names)
-                        self.assertIn("lift-required.png", names)
+                        self.assertIn("wheel-gt-formula.png", names)
+                        self.assertNotIn("cut-auto.png", names)
+                        self.assertNotIn("lift-required.png", names)
                         for name in names:
                             self.assertTrue(archive.read(name).startswith(b"\x89PNG\r\n\x1a\n"))
                 else:

@@ -427,6 +427,97 @@ namespace AsDriven.Core.Tests
                     }
                 }
 
+                // ---- preflight card wording -------------------------------
+                // The card's words live in PreflightLabels rather than in a
+                // dashboard formula, so they are asserted here and every
+                // surface is guaranteed to say the same thing.
+                Equal("Round rim", PreflightLabels.WheelRim("round"), "names a round rim");
+                Equal("D-shaped rim", PreflightLabels.WheelRim("d-shaped"), "names a D-shaped rim");
+                Equal("Yoke", PreflightLabels.WheelRim("yoke"), "names a yoke");
+                Equal("Rim not recorded", PreflightLabels.WheelRim("unknown"),
+                    "says the rim was not recorded rather than inventing one");
+                foreach (string merged in new[] { "gt-formula", "gt-style", "prototype", "formula" })
+                {
+                    Equal("GT / Formula rim", PreflightLabels.WheelRim(merged),
+                        "an older dataset's retired rim value still reads correctly: " + merged);
+                }
+
+                Equal("No display or shift lights", PreflightLabels.WheelFeatures("no", "no"),
+                    "states plainly that the rim carries nothing");
+                Equal("Display and shift lights", PreflightLabels.WheelFeatures("yes", "yes"),
+                    "states both when both are present");
+                Equal("Integrated display", PreflightLabels.WheelFeatures("yes", "no"), "display alone");
+                Equal("Shift lights", PreflightLabels.WheelFeatures("no", "yes"), "lights alone");
+                Equal("Display not recorded", PreflightLabels.WheelFeatures("unknown", "no"),
+                    "an unobserved modifier is never rendered as a no");
+
+                Equal("5-speed H-pattern", PreflightLabels.Shifter(5, "h-pattern"), "names the shifter");
+                Equal("6-speed paddles", PreflightLabels.Shifter(6, "sequential-paddles"), "names paddles");
+                Equal("5-speed sequential", PreflightLabels.Shifter(5, "sequential-stick"), "names a stick");
+                Equal("H-pattern", PreflightLabels.Shifter(0, "h-pattern"),
+                    "omits the gear count when it is not known");
+
+                Equal("Dogleg gate - 1st down and left", PreflightLabels.Gate("h-pattern", "dogleg-h"),
+                    "says where first gear is on a dogleg");
+                Equal("Standard gate - 1st up and left", PreflightLabels.Gate("h-pattern", "standard-h"),
+                    "says where first gear is on a standard gate");
+                Equal("Gate not recorded", PreflightLabels.Gate("h-pattern", "unknown"),
+                    "never guesses an unobserved gate");
+
+                Equal("Clutch required", PreflightLabels.Launch("required"), "launch clutch");
+                Equal("No clutch needed", PreflightLabels.Launch("not-required"), "clutch-free launch");
+                Equal("Not established", PreflightLabels.Launch("unknown"), "unknown launch");
+                Equal("Lift - no clutch", PreflightLabels.Upshift("required", "no"), "lift upshift");
+                Equal("Stay flat - car cuts", PreflightLabels.Upshift("not-required", "yes"),
+                    "says the car cuts when it does");
+                Equal("Stay flat", PreflightLabels.Upshift("not-required", "no"),
+                    "does not claim an automatic cut that was not observed");
+                Equal("Blip - rev-match", PreflightLabels.Downshift("required", "no"), "required blip");
+                Equal("Blip optional", PreflightLabels.Downshift("optional", "no"),
+                    "keeps optional as its own answer");
+                Equal("Car blips for you", PreflightLabels.Downshift("not-required", "yes"), "auto blip");
+                Equal("No blip needed", PreflightLabels.Downshift("not-required", "no"),
+                    "no blip needed without claiming automation");
+
+                // The tone decides colour, and an unresolved value must never
+                // read as though the car handles it.
+                Equal("you", PreflightLabels.LaunchTone("required"), "required launch is the driver's");
+                Equal("car", PreflightLabels.LaunchTone("not-required"), "clutch-free launch is the car's");
+                Equal("unknown", PreflightLabels.LaunchTone("unknown"), "unknown launch stays unresolved");
+                Equal("unknown", PreflightLabels.DownshiftTone("optional"),
+                    "an optional blip is never coloured as handled");
+                Equal("you", PreflightLabels.BandTone("car", "car", "you"),
+                    "one driver action turns the whole band");
+                Equal("car", PreflightLabels.BandTone("car", "car", "car"), "all handled reads as the car");
+                Equal("unknown", PreflightLabels.BandTone("car", "unknown", "car"),
+                    "an unresolved moment leaves the band unresolved");
+
+                // Three real records spanning the range the card must survive.
+                GuidanceSnapshot dogBox = database.Match(
+                    "Automobilista2", "Brabham BMW BT52 - High Downforce");
+                True(dogBox.HasMatch, "matches the Brabham dog box");
+                Equal("5-speed H-pattern", dogBox.ShifterLabel, "Brabham shifter");
+                Equal("Clutch required", dogBox.LaunchLabel, "Brabham launch");
+                Equal("Lift - no clutch", dogBox.UpshiftLabel, "Brabham upshift");
+                Equal("Blip - rev-match", dogBox.DownshiftLabel, "Brabham downshift");
+                Equal("you", dogBox.UseBandTone, "every Brabham moment is the driver's");
+
+                GuidanceSnapshot paddles = database.Match("Automobilista2", "Porsche 911 GT3 R");
+                True(paddles.HasMatch, "matches the 911 GT3 R");
+                Equal("6-speed paddles", paddles.ShifterLabel, "911 shifter");
+                Equal("No clutch needed", paddles.LaunchLabel, "911 launch");
+                Equal("Car blips for you", paddles.DownshiftLabel, "911 downshift");
+                Equal("car", paddles.LaunchTone, "911 launch is handled");
+                Equal("car", paddles.DownshiftTone, "911 downshift is handled");
+
+                GuidanceSnapshot mixed = database.Match("Automobilista2", "ARC Camaro");
+                True(mixed.HasMatch, "matches the ARC Camaro");
+                Equal("you", mixed.LaunchTone, "Camaro launch is the driver's");
+                Equal("car", mixed.UpshiftTone, "the Camaro gearbox cuts its own upshift");
+                Equal("you", mixed.DownshiftTone, "the Camaro downshift blip is the driver's");
+                Equal("you", mixed.UseBandTone,
+                    "a mixed band still reads as the driver's, while its upshift cell does not");
+
                 GuidanceSnapshot wrongCase = database.Match("Automobilista2", "dallara f301");
                 False(wrongCase.HasMatch, "matching is case-sensitive and exact");
                 Equal("unmatched", wrongCase.MatchStatus, "reports unmatched telemetry");

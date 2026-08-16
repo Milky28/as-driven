@@ -1,9 +1,11 @@
 # Popup raster assets
 
-`brand-mark.png` is generated, not hand-cropped. It is the `rim-lever` silhouette
-from `simhub/dash/brand_mark.py`: a thin rim with a raked lever set off-centre
-inside it. Regenerate both shipped copies, this one and the plugin's embedded
-`Assets/as-driven-mark.png`, with:
+`brand-mark.svg` is the scalable production master for the As Driven mark.
+`brand-mark.png` is its generated raster counterpart used by the current SimHub
+dashboard package. Both use the `rim-lever` geometry from
+`simhub/dash/brand_mark.py`: a thin rim with a raked lever set off-centre inside
+it. Regenerate the SVG and both shipped PNG copies, including the plugin's
+embedded `Assets/as-driven-mark.png`, with:
 
 ```powershell
 python simhub/dash/brand_mark.py --production
