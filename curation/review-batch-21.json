@@ -1,0 +1,315 @@
+{
+  "review": "batch-21",
+  "dataset_version": "0.3.53",
+  "approved_at": "2026-08-16",
+  "records": [
+    {
+      "record_id": "ams2.fusca-1-hot-cars",
+      "bundle": "build/batch-21/fusca-1-hot-cars.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Fusca",
+      "year": {
+        "label": "Hot Cars"
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Beetle, known locally as the Fusca, raced in the Hot Cars series. It keeps the air-cooled Beetle's rear transaxle with four forward gears.",
+      "real_world_source_refs": [
+        "ams2wiki.hot-cars",
+        "ratwell.vw-transaxle"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the series and the car's Volkswagen basis, and the exact simulator identity was observed live.",
+      "specification_basis": "The live drive selected four H-pattern gears with no automatic cut or blip. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "AMS2 classes this car under Hot Cars, a Brazilian historic touring car series also known as Divisao 3. The class reference states no engine or gearbox, so the transmission rests on the road car's and on the drive.",
+        "Recorded independently of Fusca 2 Hot Cars, Copa Fusca and Fusca Classic FL. All are separate selectable identities and none inherits from another."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Hot Cars 1"
+    },
+    {
+      "record_id": "ams2.fusca-2-hot-cars",
+      "bundle": "build/batch-21/fusca-2-hot-cars.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Fusca",
+      "year": {
+        "label": "Hot Cars"
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Beetle, known locally as the Fusca, raced in the Hot Cars series as the second of the class's two Fuscas.",
+      "real_world_source_refs": [
+        "ams2wiki.hot-cars",
+        "ratwell.vw-transaxle"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the series and the car's Volkswagen basis, and the exact simulator identity was observed live.",
+      "specification_basis": "The live drive selected four H-pattern gears with no automatic cut or blip. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "AMS2 classes this car under Hot Cars, a Brazilian historic touring car series also known as Divisao 3. The class reference states no engine or gearbox, so the transmission rests on the road car's and on the drive.",
+        "Recorded independently of Fusca 1 Hot Cars, which shares the class. The drives agree on four H-pattern gears with no automation, but nothing is inherited between them."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Hot Cars 2"
+    },
+    {
+      "record_id": "ams2.passat-hot-cars",
+      "bundle": "build/batch-21/passat-hot-cars.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Passat",
+      "year": {
+        "label": "Hot Cars"
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Passat raced in the Hot Cars series. The Brazilian Passat began with a four-speed, the five-speed arriving later with the B2-derived improvements.",
+      "real_world_source_refs": [
+        "ams2wiki.hot-cars",
+        "wikipedia.volkswagen-passat-b1"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the series and the car's Volkswagen basis, and the exact simulator identity was observed live.",
+      "specification_basis": "The live drive selected four H-pattern gears with no automatic cut or blip. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "AMS2 classes this car under Hot Cars, a Brazilian historic touring car series also known as Divisao 3. The class reference states no engine or gearbox, so the transmission rests on the road car's and on the drive.",
+        "The drive found four gears, which is the earlier four-speed rather than the five-speed carried by the curated Passat Classic B and Passat Classic FL."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Hot Cars"
+    },
+    {
+      "record_id": "ams2.gol-hot-cars",
+      "bundle": "build/batch-21/gol-hot-cars.staged.json",
+      "manufacturer": "Volkswagen",
+      "model": "Gol",
+      "year": {
+        "label": "Hot Cars"
+      },
+      "real_world_identity_notes": "Brazilian-built Volkswagen Gol raced in the Hot Cars series. The early air-cooled Gol used a four-speed manual, the five-speed arriving with the Gol GT 1.8.",
+      "real_world_source_refs": [
+        "ams2wiki.hot-cars",
+        "wikipedia.volkswagen-gol"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "Registered sources establish the series and the Gol, and the exact simulator identity was observed live.",
+      "specification_basis": "The live drive selected four H-pattern gears with no automatic cut or blip, which matches the early four-speed Gol.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "AMS2 classes this car under Hot Cars, a Brazilian historic touring car series also known as Divisao 3. The class reference states no engine or gearbox, so the transmission rests on the road car's and on the drive.",
+        "The gate is recorded unknown. The driver could not read it in the cockpit, and no reviewed source describes this car's shift pattern, so neither the drive nor the sources establish it. Its three classmates were read as standard gates, but a gate is not inherited across cars.",
+        "Recorded independently of Gol Classic B and Gol Classic FL."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.brabham-bt62",
+      "bundle": "build/batch-21/brabham-bt62.staged.json",
+      "manufacturer": "Brabham",
+      "model": "BT62",
+      "year": {
+        "label": "2018",
+        "from": 2018
+      },
+      "real_world_identity_notes": "Brabham BT62 track hypercar, in production from 2018, running the 5.4-litre Ford Modular V8 through a six-speed Holinger sequential manual gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.brabham-bt62"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the BT62 and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a 6-speed Holinger sequential manual, and the live drive selected six paddle gears with automatic cut and blip and no clutch needed to pull away.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch-free move-off, automatic cut on upshifts and automatic blip on downshifts, so the driver supplies none of the three.",
+        "The source names a Holinger sequential but not its engagement, and the car provides its own blip, so no claim is made about whether a driver blip would otherwise be needed.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-senna",
+      "bundle": "build/batch-21/mclaren-senna.staged.json",
+      "manufacturer": "McLaren",
+      "model": "Senna",
+      "year": {
+        "label": "2019 to 2020",
+        "from": 2019
+      },
+      "real_world_identity_notes": "McLaren Senna, built for model years 2019 and 2020, running the 4.0-litre Ricardo-built McLaren M840TR twin-turbocharged V8 through an in-house seven-speed dual-clutch transmission.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-senna"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Senna and its transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives an in-house 7-speed dual-clutch, and the live drive selected seven paddle gears with automatic cut and blip and no clutch needed to pull away.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "dual-clutch"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch-free move-off, automatic cut on upshifts and automatic blip on downshifts, so the driver supplies none of the three.",
+        "The car upshifts by itself. This is the gearbox rather than an assist, because automatic shifting was disabled for the drive, and it is what a road-car dual clutch does in its automatic mode. The driver therefore does not request upshifts at all, which the upshift fields, describing an automatic cut, understate. The same behaviour is recorded on the 1993 Formula HiTech Gen2 cars, whose transmissions could also be switched to fully automatic.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.kart-cross",
+      "bundle": "build/batch-21/kart-cross.staged.json",
+      "manufacturer": "Reiza",
+      "model": "Kartcross",
+      "year": {
+        "label": "Kartcross"
+      },
+      "real_world_identity_notes": "AMS2's generic Kartcross, a single 0.6-litre model introduced with the Adrenaline Pack that brought dirt racing to the game. No specific real-world chassis is identified.",
+      "real_world_source_refs": [
+        "ams2wiki.kartcross"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered reference establishes the class and its single generic model, and the exact simulator identity was observed live.",
+      "specification_basis": "The reference gives a 0.6-litre engine but no transmission, so the six sequential gears, automatic cut and absent automatic blip rest on the guided drive alone.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch-free move-off, automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+        "No real-world chassis is identified and the reference states no transmission, so the gearbox type is the sequential the drive observed rather than a sourced claim.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

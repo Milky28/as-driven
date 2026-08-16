@@ -1708,6 +1708,18 @@
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, seven paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
     },
     {
+      "source_id": "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren 720S GT3 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-720s-gt3.20260816t000803309z-39c312fd by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-mclaren-720s-gt3-evo-controls.1.6.9.91",
       "title": "Guided live AMS2 McLaren 720S GT3 Evo control test",
       "publisher": "Local AMS2 observation",
@@ -2783,6 +2795,30 @@
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
       "notes": "Describes Formula Trainer as a fictional open-wheel category intended for new racing drivers, with a car that appears to be based on the Formula Ford. It states no transmission specification."
+    },
+    {
+      "source_id": "ams2wiki.hot-cars",
+      "title": "Hot Cars",
+      "publisher": "Automobilista 2 Wiki",
+      "url": "https://automobilista2.wiki.gg/wiki/Hot_Cars",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Describes Hot Cars as a Brazilian historic touring car series also known as Divisao 3, and lists its four Volkswagen cars: Fusca 1, Fusca 2, Gol and Passat. It states no engine or gearbox detail."
+    },
+    {
+      "source_id": "ams2wiki.kartcross",
+      "title": "Kartcross (class)",
+      "publisher": "Automobilista 2 Wiki",
+      "url": "https://automobilista2.wiki.gg/wiki/Kartcross_(class)",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Describes the AMS2 Kartcross class as a single generic model with a 0.6-litre engine, introduced with the Adrenaline Pack that brought dirt racing to the game. It states no gearbox detail."
     },
     {
       "source_id": "ams2wiki.mercedes-benz-actros",
@@ -4167,6 +4203,18 @@
       "notes": "Gives the BT52 a Brabham/Hewland 5/6-speed manual with a Weismann differential behind the BMW M12/13 turbocharged four, raced in the 1983 Formula One World Championship."
     },
     {
+      "source_id": "wikipedia.brabham-bt62",
+      "title": "Brabham BT62",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Brabham_BT62",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the Brabham BT62 a 6-speed Holinger sequential manual gearbox behind the 5.4-litre Ford Modular V8, in production from 2018."
+    },
+    {
       "source_id": "wikipedia.caterham-7",
       "title": "Caterham 7",
       "publisher": "Wikipedia",
@@ -4491,6 +4539,18 @@
       "notes": "Gives the 1993 MP4/8 a McLaren transverse 6-speed semi-automatic sequential gearbox behind the Ford HBD7 V8, and states the semi-automatic transmission could be switched over to fully automatic, developed with Techniques d'Avant Garde."
     },
     {
+      "source_id": "wikipedia.mclaren-senna",
+      "title": "McLaren Senna",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/McLaren_Senna",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the McLaren Senna an in-house 7-speed dual-clutch transmission behind the 4.0-litre Ricardo-built McLaren M840TR twin-turbocharged V8, for model years 2019 and 2020."
+    },
+    {
       "source_id": "wikipedia.mercedes-clk-lm",
       "title": "Mercedes-Benz CLK LM",
       "publisher": "Wikipedia",
@@ -4671,8 +4731,8 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91",
-      "title": "Live AMS2 McLaren 720S GT3 guided-verification drive",
+      "source_id": "ams2.local-live-fusca-1-hot-cars-controls.1.6.9.91",
+      "title": "Live AMS2 Fusca 1 Hot Cars guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -4680,7 +4740,79 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-16",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mclaren-720s-gt3.20260816t000803309z-39c312fd by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.fusca-1-hot-cars.20260816t033132824z-0234e5cd by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-fusca-2-hot-cars-controls.1.6.9.91",
+      "title": "Live AMS2 Fusca 2 Hot Cars guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.fusca-2-hot-cars.20260816t033407658z-2967e3f4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-passat-hot-cars-controls.1.6.9.91",
+      "title": "Live AMS2 Passat Hot Cars guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.passat-hot-cars.20260816t033926997z-af281b1d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-gol-hot-cars-controls.1.6.9.91",
+      "title": "Live AMS2 Gol Hot Cars guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.gol-hot-cars.20260816t033635506z-6522c2a6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-brabham-bt62-controls.1.6.9.91",
+      "title": "Live AMS2 Brabham BT62 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.brabham-bt62.20260816t034225128z-86c33ce9 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mclaren-senna-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Senna guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-senna.20260816t034507196z-234a2b83 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-kart-cross-controls.1.6.9.91",
+      "title": "Live AMS2 Kart Cross guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.kart-cross.20260816t034844362z-96cd83b9 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

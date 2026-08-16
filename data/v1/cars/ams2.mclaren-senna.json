@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.mclaren-senna",
+  "identity": {
+    "display_name": "McLaren Senna",
+    "manufacturer": "McLaren",
+    "model": "Senna",
+    "year": {
+      "label": "2019 to 2020",
+      "from": 2019
+    },
+    "class": "Hypercars",
+    "real_world_identity_notes": "McLaren Senna, built for model years 2019 and 2020, running the 4.0-litre Ricardo-built McLaren M840TR twin-turbocharged V8 through an in-house seven-speed dual-clutch transmission."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "dual-clutch",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch-free move-off, automatic cut on upshifts and automatic blip on downshifts, so the driver supplies none of the three.",
+      "The car upshifts by itself. This is the gearbox rather than an assist, because automatic shifting was disabled for the drive, and it is what a road-car dual clutch does in its automatic mode. The driver therefore does not request upshifts at all, which the upshift fields, describing an automatic cut, understate. The same behaviour is recorded on the 1993 Formula HiTech Gen2 cars, whose transmissions could also be switched to fully automatic.",
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Senna"
+        },
+        {
+          "kind": "class-id",
+          "value": "Hypercars"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mclaren-senna.20260816t034507196z-234a2b83 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-16",
+      "source_refs": [
+        "wikipedia.mclaren-senna",
+        "ams2.local-live-mclaren-senna-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-senna",
+          "ams2.local-live-mclaren-senna-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the Senna and its transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-senna",
+          "ams2.local-live-mclaren-senna-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source gives an in-house 7-speed dual-clutch, and the live drive selected seven paddle gears with automatic cut and blip and no clutch needed to pull away."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mclaren-senna-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}

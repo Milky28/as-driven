@@ -1,5 +1,31 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.53 (batch 21: Hot Cars, Hypercars, Kartcross)
+
+Seven cars from three classes found while re-walking the class list.
+
+The four Hot Cars are Volkswagens of the Brazilian historic touring series also
+known as Divisao 3: two Fuscas, a Gol and a Passat, all four-speed H-pattern with
+no automation. The Passat is the earlier four-speed rather than the five-speed
+carried by the curated Passat Classic B and FL, and the Gol likewise. Each is
+recorded independently of its namesakes in the Copa Classic classes.
+
+Gol Hot Cars has an `unknown` gate. The driver could not read it, and its three
+classmates were read as standard gates, but a gate is not inherited across cars.
+
+**McLaren Senna upshifts by itself.** That is the gearbox rather than an assist,
+since automatic shifting was disabled for the drive, and it is what a road-car
+dual clutch does in automatic mode. Its seven speeds match McLaren's in-house
+seven-speed dual clutch. The only other cars in the dataset that behave this way
+are the 1993 Formula HiTech Gen2 cars, whose transmissions could also be switched
+to fully automatic, so the behaviour now spans a road hypercar and a Formula One
+generation thirty years apart.
+
+Brabham BT62 runs the sourced six-speed Holinger sequential with automatic cut
+and blip. Kartcross is `medium` confidence: its reference gives a 0.6-litre engine
+and no transmission, and no real-world chassis is identified, so its gearbox is
+the sequential the drive observed rather than a sourced claim.
+
 ## Completed in dataset 0.3.52 (McLaren 720S GT3)
 
 Found while re-walking the class list for cars missed earlier. Six paddle gears

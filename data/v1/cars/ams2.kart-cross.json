@@ -1,0 +1,139 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.kart-cross",
+  "identity": {
+    "display_name": "Kart Cross",
+    "manufacturer": "Reiza",
+    "model": "Kartcross",
+    "year": {
+      "label": "Kartcross"
+    },
+    "class": "Kartcross",
+    "real_world_identity_notes": "AMS2's generic Kartcross, a single 0.6-litre model introduced with the Adrenaline Pack that brought dirt racing to the game. No specific real-world chassis is identified."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch-free move-off, automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+      "No real-world chassis is identified and the reference states no transmission, so the gearbox type is the sequential the drive observed rather than a sourced claim.",
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Kart Cross"
+        },
+        {
+          "kind": "class-id",
+          "value": "Kartcross"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.kart-cross.20260816t034844362z-96cd83b9 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-16",
+      "source_refs": [
+        "ams2wiki.kartcross",
+        "ams2.local-live-kart-cross-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2wiki.kartcross",
+          "ams2.local-live-kart-cross-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "A registered reference establishes the class and its single generic model, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2wiki.kartcross",
+          "ams2.local-live-kart-cross-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The reference gives a 0.6-litre engine but no transmission, so the six sequential gears, automatic cut and absent automatic blip rest on the guided drive alone."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-kart-cross-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}
