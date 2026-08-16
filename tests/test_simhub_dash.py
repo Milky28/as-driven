@@ -399,6 +399,52 @@ class SimHubDashTests(unittest.TestCase):
             glance_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
+    def test_card_content_stays_inside_the_box_that_holds_it(self):
+        """Nothing overlaps its neighbour or escapes its container.
+
+        The simulator-difference marker was 150px wide and anchored near a
+        cell's right edge, so it ran across the divider and printed over the
+        next moment's heading. Screenshots caught that; this catches the next
+        one.
+        """
+        for variant in ("detailed", "compact"):
+            dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
+            named = {
+                value["Name"]: value
+                for value in walk(dashboard)
+                if isinstance(value, dict) and "Name" in value
+            }
+
+            def box(name):
+                item = named[name]
+                return (item["Left"], item["Top"],
+                        item["Left"] + item["Width"], item["Top"] + item["Height"])
+
+            band = named["UseBand"]
+            cell_width = (band["Width"] - 30) / 3
+            # Every text item in a moment stays within that moment's column.
+            for index, moment in enumerate(("Launch", "Upshift", "Downshift")):
+                left_edge = band["Left"] + 30 + cell_width * index
+                for part in ("UseValue", "UseClutch", "UseDiffers"):
+                    key = part + moment + ("Text" if part == "UseDiffers" else "")
+                    x1, _, x2, _ = box(key)
+                    self.assertGreaterEqual(x1, left_edge - 1, f"{variant} {key} starts left of its cell")
+                    self.assertLessEqual(
+                        x2, left_edge + cell_width + 1,
+                        f"{variant} {key} runs into the next moment",
+                    )
+
+            # The vertical stack never collides, and the last row stays on the card.
+            order = ["HeaderRule", "FitBand", "UseBand", "NotePanel", "FooterRule"]
+            for upper, lower in zip(order, order[1:]):
+                self.assertLessEqual(
+                    box(upper)[3], box(lower)[1],
+                    f"{variant}: {upper} overlaps {lower}",
+                )
+            self.assertLessEqual(box("UseDiffersDownshiftText")[3], box("UseBand")[3], variant)
+            self.assertLessEqual(box("NoteLine3")[3], box("NotePanel")[3], variant)
+            self.assertLessEqual(box("Dataset")[3], dashboard["BaseHeight"], variant)
+
     def test_note_panel_only_appears_when_the_record_carries_a_summary(self):
         for variant in ("detailed", "compact"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
