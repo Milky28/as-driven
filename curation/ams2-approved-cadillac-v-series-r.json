@@ -5,7 +5,12 @@
   "record_id": "ams2.cadillac-v-series-r",
   "telemetry_name": "Cadillac V-Series.R",
   "telemetry_class": "LMDh",
-  "additional_telemetry_names": [{ "value": "Cadillac V-Series.R - Low Downforce", "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested." }],
+  "additional_telemetry_names": [
+    {
+      "value": "Cadillac V-Series.R - Low Downforce",
+      "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
+    }
+  ],
   "observed_game_version": "1.6.9.91",
   "observed_through": "SimHub 9.11.22 live verification",
   "approved_controls": {
@@ -18,11 +23,11 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "prototype",
+    "wheel_rim_shape": "gt-style",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "unknown",
     "wheel_open_top": "no"
   },
-  "confidence_notes": "The base car's hybrid move-off, seven paddle gears, automatic cut/blip, and closed prototype display rim were directly verified.",
-  "scope_notes": "Low Downforce is approved as an exact aero-package alias with inherited controls; it was not separately live-tested."
+  "confidence_notes": "The base car's hybrid move-off, seven paddle gears, automatic cut/blip, and closed GT-style display rim were directly verified.",
+  "scope_notes": "Low Downforce is approved as an exact aero-package alias with inherited controls; it was not separately live-tested. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

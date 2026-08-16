@@ -16,12 +16,12 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "prototype",
+    "wheel_rim_shape": "gt-style",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the manufacturer establishes the six-speed sequential paddle-shifted gearbox.",
-  "scope_notes": "Single exact identity from one guided-verification drive."
+  "scope_notes": "Single exact identity from one guided-verification drive. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

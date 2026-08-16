@@ -38,10 +38,10 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "prototype",
+        "shape": "gt-style",
         "diameter_mm": null,
-        "source_label": "live-cockpit-prototype-display",
-        "notes": "Direct cockpit inspection showed a prototype-style rim with an integrated display; exact diameter remains unknown."
+        "source_label": "live-cockpit-observation",
+        "notes": "Direct cockpit inspection showed a GT-style rim with an integrated display; exact diameter remains unknown."
       }
     },
     "notes": [
@@ -74,15 +74,15 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "prototype",
+          "normalized": "gt-style",
           "integrated_display": "yes",
           "shift_lights": "unknown",
           "open_top": "no",
-          "source_label": "live-cockpit-prototype-display"
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Standing-start clutch, six gears, automatic cut and blip, and prototype display rim were directly observed.",
+          "Standing-start clutch, six gears, automatic cut and blip, and GT-style display rim were directly observed.",
           "Paddle actuation is based on visible paddles plus replay animation retaining both hands on the wheel; a cockpit lever is also present.",
           "'Dallara SP1 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
@@ -156,8 +156,9 @@
       }
     ]
   },
-  "updated_at": "2026-08-12",
+  "updated_at": "2026-08-16",
   "notes": [
-    "'Dallara SP1 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+    "'Dallara SP1 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again."
   ]
 }

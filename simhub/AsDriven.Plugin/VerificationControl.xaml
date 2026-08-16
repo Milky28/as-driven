@@ -211,28 +211,35 @@
             <TextBox x:Name="_actuationBasis" AutomationProperties.Name="How primary shift mechanism was identified" /></StackPanel>
 
           <TextBlock Text="Steering wheel" Style="{StaticResource Heading}" />
+          <TextBlock Text="Judge the rim by its outline only. It does not matter what class the car races in: a 1967 single-seater with a plain circular wheel is Round, not Formula. Pick the first shape in the list that matches." Style="{StaticResource Hint}" Margin="0,0,0,8" />
           <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
             <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Wheel shape" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelShapeBadge" /></StackPanel>
               <ComboBox x:Name="_wheelShape" AutomationProperties.Name="Wheel shape" SelectedIndex="0">
-                <ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Round" Tag="round" /><ComboBoxItem Content="D-shaped" Tag="d-shaped" />
-                <ComboBoxItem Content="GT-style" Tag="gt-style" /><ComboBoxItem Content="Prototype" Tag="prototype" /><ComboBoxItem Content="Formula" Tag="formula" />
-                <ComboBoxItem Content="Yoke" Tag="yoke" /><ComboBoxItem Content="Other" Tag="other" />
+                <ComboBoxItem Content="Unknown - rim not seen" Tag="unknown" />
+                <ComboBoxItem Content="Yoke - two grips, nothing joining them" Tag="yoke" />
+                <ComboBoxItem Content="Formula - open across the top, grips at 9 and 3" Tag="formula" />
+                <ComboBoxItem Content="GT-style - closed, flat top AND flat bottom" Tag="gt-style" />
+                <ComboBoxItem Content="D-shaped - closed, flat bottom only" Tag="d-shaped" />
+                <ComboBoxItem Content="Round - a continuous circle" Tag="round" />
+                <ComboBoxItem Content="Other - matches none of these" Tag="other" />
               </ComboBox></StackPanel>
             <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Integrated display" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelDisplayBadge" /></StackPanel>
               <ComboBox x:Name="_wheelDisplay" AutomationProperties.Name="Integrated display" SelectedIndex="0">
                 <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
               </ComboBox></StackPanel>
           </Grid>
+          <TextBlock Text="A display is any readout on the rim itself: a graphical screen, an LED gear number, or a segment readout all count as Yes. A dash mounted on the car does not, and shift lights on their own do not." Style="{StaticResource Hint}" />
           <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
             <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Shift lights on wheel" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelShiftLightsBadge" /></StackPanel>
               <ComboBox x:Name="_wheelShiftLights" AutomationProperties.Name="Shift lights on wheel" SelectedIndex="0">
                 <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
               </ComboBox></StackPanel>
-            <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Open-top wheel construction" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelOpenTopBadge" /></StackPanel>
-              <ComboBox x:Name="_wheelOpenTop" AutomationProperties.Name="Open-top wheel construction" SelectedIndex="0">
+            <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Rim open across the top" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelOpenTopBadge" /></StackPanel>
+              <ComboBox x:Name="_wheelOpenTop" AutomationProperties.Name="Rim open across the top" SelectedIndex="0">
                 <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
               </ComboBox></StackPanel>
           </Grid>
+          <TextBlock Text="Open across the top asks one thing: is there rim material joining the grips over the top? A Formula rim or a Yoke is Yes. A GT-style, D-shaped or Round rim is No." Style="{StaticResource Hint}" />
           <TextBlock Text="Wheel notes" Style="{StaticResource FieldLabel}" /><TextBox x:Name="_wheelNotes" AutomationProperties.Name="Wheel notes" Height="54" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
           <TextBlock Text="Review notes" Style="{StaticResource Heading}" />
           <TextBlock Text="Anything a reviewer should know" Style="{StaticResource FieldLabel}" />

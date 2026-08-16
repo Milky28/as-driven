@@ -21,8 +21,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "prototype"
+    "wheel_rim_shape": "gt-style"
   },
-  "confidence_notes": "The base car was directly tested. Hybrid clutch-free move-off, seven paddle-selected gears, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed prototype display rim were confirmed.",
-  "scope_notes": "Lamborghini SC63 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested."
+  "confidence_notes": "The base car was directly tested. Hybrid clutch-free move-off, seven paddle-selected gears, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed GT-style display rim were confirmed.",
+  "scope_notes": "Lamborghini SC63 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

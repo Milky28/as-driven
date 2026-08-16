@@ -16,14 +16,14 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "prototype",
+    "wheel_rim_shape": "gt-style",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Simulator behavior directly observed in a guided drive with assists disabled; real-world identity and gearbox supported by registered sources.",
-  "scope_notes": "'Porsche 963 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "scope_notes": "'Porsche 963 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again.",
   "additional_telemetry_names": [
     {
       "value": "Porsche 963 - Low Downforce",

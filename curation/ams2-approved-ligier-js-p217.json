@@ -18,8 +18,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "prototype"
+    "wheel_rim_shape": "gt-style"
   },
-  "confidence_notes": "Gen1 and Gen2 were both directly tested. Six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spikes, and the closed prototype display rim were confirmed. The simulator mechanism responsible for clutch-free move-off was not established and is intentionally left undescribed.",
-  "scope_notes": "One shared telemetry-name record covers the two directly observed class contexts: LMP2 for Gen2 and LMP2_Gen1 for Gen1. No fuzzy or generation-suffix identity matching is used."
+  "confidence_notes": "Gen1 and Gen2 were both directly tested. Six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spikes, and the closed GT-style display rim were confirmed. The simulator mechanism responsible for clutch-free move-off was not established and is intentionally left undescribed.",
+  "scope_notes": "One shared telemetry-name record covers the two directly observed class contexts: LMP2 for Gen2 and LMP2_Gen1 for Gen1. No fuzzy or generation-suffix identity matching is used. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

@@ -39,10 +39,10 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "prototype",
+        "shape": "gt-style",
         "diameter_mm": null,
-        "source_label": "live-cockpit-prototype",
-        "notes": "Direct AMS2 cockpit inspection showed a closed prototype-style rim with an integrated display; exact diameter remains unknown."
+        "source_label": "live-cockpit-observation",
+        "notes": "Direct AMS2 cockpit inspection showed a closed GT-style rim with an integrated display; exact diameter remains unknown."
       }
     },
     "notes": [
@@ -70,12 +70,12 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "prototype",
-          "source_label": "live-cockpit-prototype"
+          "normalized": "gt-style",
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Clutch-free move-off, seven paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and a closed prototype display rim were directly observed.",
+          "Clutch-free move-off, seven paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and a closed GT-style display rim were directly observed.",
           "The mechanism behind clutch-free move-off remains unknown; the non-hybrid car is not characterized as using electric launch."
         ]
       },
@@ -146,13 +146,14 @@
           "ams2.local-live-aston-martin-valkyrie-hypercar-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Direct cockpit inspection showed a closed prototype-style rim with an integrated display; the manufacturer source independently documents the closely related display wheel."
+        "basis": "Direct cockpit inspection showed a closed GT-style rim with an integrated display; the manufacturer source independently documents the closely related display wheel."
       }
     ]
   },
   "notes": [
     "This record deliberately distinguishes the non-hybrid competition Valkyrie from LMDh cars that can move under electric power.",
-    "No Low Downforce telemetry alias is approved because no exact distinct identity was observed."
+    "No Low Downforce telemetry alias is approved because no exact distinct identity was observed.",
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again."
   ],
-  "updated_at": "2026-08-10"
+  "updated_at": "2026-08-16"
 }

@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.54",
+  "dataset_version": "0.3.55",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 169,
+    "live_identities_seen": 173,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -64,6 +64,7 @@
       "Fusca 1 Hot Cars",
       "Fusca 2 Hot Cars",
       "Fusca Classic FL",
+      "Ginetta G58",
       "Gol Hot Cars",
       "Iveco Stralis",
       "Kart Cross",
@@ -96,6 +97,9 @@
       "McLaren Mercedes MP4/12 - High Downforce",
       "McLaren Senna",
       "Mercedes-Benz Actros",
+      "MetalMoro AJR Honda",
+      "MetalMoro AJR Judd",
+      "MetalMoro AJR Nissan",
       "Mitsubishi Lancer R",
       "Mitsubishi Lancer RS",
       "Passat Classic B",
@@ -130,19 +134,25 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 333,
+    "observed_identities": 337,
     "curated_records": 224,
     "covered_exact_identities": 318,
-    "uncovered_identities": 15,
-    "full_guided_verifications": 0,
+    "uncovered_identities": 19,
+    "full_guided_verifications": 4,
     "dispositions": {
       "covered-exact": 318,
+      "full-guided-verification": 4,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
-    "full_verifications_by_family": {},
-    "full_verifications_by_research_readiness": {}
+    "full_verifications_by_family": {
+      "club-road": 1,
+      "prototype": 3
+    },
+    "full_verifications_by_research_readiness": {
+      "independent-control-research-needed": 4
+    }
   },
   "entries": [
     {
@@ -2735,6 +2745,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Ginetta G58",
+      "car_id": "Ginetta G58",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "club-road",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1",
+      "live_observed_at": "2026-08-16T15:09:24.0670155Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
       "telemetry_name": "Gol Classic B",
       "car_id": "Gol Classic B",
       "identity_file": "Gol Classic B.shcarsettings",
@@ -3925,6 +3949,48 @@
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736618771.4484246,
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MetalMoro AJR Honda",
+      "car_id": "MetalMoro AJR Honda",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "prototype",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1",
+      "live_observed_at": "2026-08-16T15:12:35.4034074Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
+      "telemetry_name": "MetalMoro AJR Judd",
+      "car_id": "MetalMoro AJR Judd",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "prototype",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1",
+      "live_observed_at": "2026-08-16T15:14:44.2117822Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
+      "telemetry_name": "MetalMoro AJR Nissan",
+      "car_id": "MetalMoro AJR Nissan",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "prototype",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1",
+      "live_observed_at": "2026-08-16T15:16:46.2039401Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "MetalMoro MRX Duratec P4",

@@ -7,7 +7,10 @@
     "manufacturer": "Cadillac",
     "model": "V-Series.R",
     "variant": "AMS2 base-downforce LMDh representation",
-    "year": { "from": 2023, "label": "2023 competition debut" },
+    "year": {
+      "from": 2023,
+      "label": "2023 competition debut"
+    },
     "class": "LMDh",
     "real_world_identity_notes": "The Cadillac V-Series.R is an LMDh prototype using the category's seven-speed sequential hybrid transmission. The base AMS2 identity was live-tested; Low Downforce is an explicit aero-package alias inheriting those controls and was not separately tested."
   },
@@ -17,19 +20,31 @@
       "gearbox_type": "sequential",
       "shift_actuation": "sequential-paddles",
       "shift_pattern": "sequential",
-      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
-      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "not-required", "automatic_blip": "yes" },
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
       "standing_start_clutch": "not-required"
     },
     "steering": {
       "wheel_rim": {
-        "shape": "prototype",
+        "shape": "gt-style",
         "diameter_mm": null,
         "integrated_display": "yes",
         "shift_lights": "unknown",
         "open_top": "no",
-        "source_label": "live-cockpit-prototype-display",
-        "notes": "Direct cockpit inspection showed a closed prototype-style rim with an integrated display. Shift lights were not explicitly checked."
+        "source_label": "live-cockpit-observation",
+        "notes": "Direct cockpit inspection showed a closed GT-style rim with an integrated display. Shift lights were not explicitly checked."
       }
     },
     "notes": [
@@ -38,34 +53,100 @@
       "Cadillac V-Series.R - Low Downforce inherits the verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
-  "simulators": [{
-    "simulator": "ams2",
-    "identities": [
-      { "kind": "telemetry-name", "value": "Cadillac V-Series.R" },
-      { "kind": "telemetry-name", "value": "Cadillac V-Series.R - Low Downforce" },
-      { "kind": "class-id", "value": "LMDh" }
-    ],
-    "behavior": {
-      "shift_type": "sequential-paddles",
-      "auto_blip": "yes",
-      "shift_cut": "yes",
-      "wheel_rim_type": { "normalized": "prototype", "integrated_display": "yes", "shift_lights": "unknown", "open_top": "no", "source_label": "live-cockpit-prototype-display" },
-      "notes": [
-        "The base configuration was live-tested in AMS2 1.6.9.91 with simulator assists disabled.",
-        "Low Downforce is an exact observed identity inheriting base controls; that aero configuration was not separately live-tested."
-      ]
-    },
-    "overrides": [],
-    "verified_game_version": "1.6.9.91",
-    "verified_at": "2026-08-10",
-    "source_refs": ["ams2.reiza-release.1.6.3.endurance-pt2", "xtrac.p1359.lmdh", "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"],
-    "confidence": { "level": "verified", "basis": "The exact base identity, seven gears, hybrid move-off, paddle controls, automatic cut/blip, and prototype display rim were directly tested. Low Downforce is explicitly marked as inherited." }
-  }],
-  "provenance": { "claims": [
-    { "paths": ["/identity", "/simulators/0/identities"], "source_refs": ["ams2.reiza-release.1.6.3.endurance-pt2", "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"], "confidence": "verified", "basis": "Official release context and exact live telemetry establish the base and Low Downforce identities." },
-    { "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"], "source_refs": ["xtrac.p1359.lmdh", "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"], "confidence": "verified", "basis": "Primary LMDh gearbox evidence and direct exercise of all seven paddle-selected gears agree." },
-    { "paths": ["/authentic_controls/transmission/upshift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"], "source_refs": ["ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"], "confidence": "verified", "basis": "Direct testing established hybrid move-off, automatic cut/blip, and the cockpit rim; wheel shift lights remain unknown." }
-  ] },
-  "notes": ["Low Downforce is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."],
-  "updated_at": "2026-08-12"
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Cadillac V-Series.R"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Cadillac V-Series.R - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMDh"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-style",
+          "integrated_display": "yes",
+          "shift_lights": "unknown",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "The base configuration was live-tested in AMS2 1.6.9.91 with simulator assists disabled.",
+          "Low Downforce is an exact observed identity inheriting base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.3.endurance-pt2",
+        "xtrac.p1359.lmdh",
+        "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "The exact base identity, seven gears, hybrid move-off, paddle controls, automatic cut/blip, and GT-style display rim were directly tested. Low Downforce is explicitly marked as inherited."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.endurance-pt2",
+          "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live telemetry establish the base and Low Downforce identities."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "xtrac.p1359.lmdh",
+          "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Primary LMDh gearbox evidence and direct exercise of all seven paddle-selected gears agree."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established hybrid move-off, automatic cut/blip, and the cockpit rim; wheel shift lights remain unknown."
+      }
+    ]
+  },
+  "notes": [
+    "Low Downforce is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again."
+  ],
+  "updated_at": "2026-08-16"
 }

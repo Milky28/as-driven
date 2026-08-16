@@ -38,8 +38,8 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "prototype",
-        "source_label": "live-cockpit-prototype",
+        "shape": "gt-style",
+        "source_label": "live-cockpit-observation",
         "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
         "diameter_mm": null,
         "integrated_display": "yes",
@@ -79,11 +79,11 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "prototype",
+          "normalized": "gt-style",
           "integrated_display": "yes",
           "shift_lights": "yes",
           "open_top": "no",
-          "source_label": "live-cockpit-prototype"
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
           "Guided current-game testing directly established all user-facing controls."
@@ -144,5 +144,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-16",
+  "notes": [
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again."
+  ]
 }

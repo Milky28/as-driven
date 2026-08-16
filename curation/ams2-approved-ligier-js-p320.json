@@ -15,8 +15,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "prototype"
+    "wheel_rim_shape": "gt-style"
   },
-  "confidence_notes": "Direct testing confirmed that the car stalls from rest without physical clutch input. Six paddle-selected gears, no-lift clutch-free running upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed prototype display rim were also confirmed.",
-  "scope_notes": "The required standing-start clutch applies only to move-off; running upshifts and downshifts were directly verified as clutch-free."
+  "confidence_notes": "Direct testing confirmed that the car stalls from rest without physical clutch input. Six paddle-selected gears, no-lift clutch-free running upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed GT-style display rim were also confirmed.",
+  "scope_notes": "The required standing-start clutch applies only to move-off; running upshifts and downshifts were directly verified as clutch-free. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

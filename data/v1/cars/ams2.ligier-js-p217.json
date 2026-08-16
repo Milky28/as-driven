@@ -37,10 +37,10 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "prototype",
+        "shape": "gt-style",
         "diameter_mm": null,
-        "source_label": "live-cockpit-prototype",
-        "notes": "Direct cockpit checks in both AMS2 class generations showed the same closed prototype-style rim with an integrated display; exact diameter remains unknown."
+        "source_label": "live-cockpit-observation",
+        "notes": "Direct cockpit checks in both AMS2 class generations showed the same closed GT-style rim with an integrated display; exact diameter remains unknown."
       }
     },
     "notes": [
@@ -73,12 +73,12 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "prototype",
-          "source_label": "live-cockpit-prototype"
+          "normalized": "gt-style",
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
           "Gen1 and Gen2 were live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Both class contexts confirmed six paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and the same prototype-style display rim.",
+          "Both class contexts confirmed six paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and the same GT-style display rim.",
           "Physical clutch input was not required to move from rest, but the underlying simulator mechanism was not determined."
         ]
       },
@@ -146,12 +146,13 @@
           "ams2.local-live-ligier-js-p217-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Direct cockpit inspection in both class generations showed the same closed prototype-style display rim."
+        "basis": "Direct cockpit inspection in both class generations showed the same closed GT-style display rim."
       }
     ]
   },
   "notes": [
-    "One record covers both explicitly observed AMS2 class contexts because their exact model identity and tested controls are the same."
+    "One record covers both explicitly observed AMS2 class contexts because their exact model identity and tested controls are the same.",
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again."
   ],
-  "updated_at": "2026-08-10"
+  "updated_at": "2026-08-16"
 }

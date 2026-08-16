@@ -28,11 +28,45 @@ The model separates `manual_blip` from `automatic_blip`. “No blip required” 
 not automatically evidence of an electronic auto-blip; a gearbox may instead
 wait for an acceptable engine speed.
 
-Wheel-rim shapes include `round`, `d-shaped`, `gt-style`, `prototype`,
-`formula`, and `yoke`, plus explicit `other` and `unknown` states. Shape is
-separate from the optional `integrated_display`, `shift_lights`, and `open_top`
-fields. A D-shaped rim may therefore be represented with or without a display,
-and a prototype rim does not imply one merely because of its category.
+### Wheel-rim shape
+
+Shape is decided **by the rim's outline alone**. The car's racing class never
+enters into it, because the question the field answers is which rim a driver
+should fit, not what the car is entered as. A 1967 single-seater with a plain
+circular wooden rim is `round`, not `formula`.
+
+Take the first value that matches:
+
+1. `yoke` — two separate grips with nothing connecting them, neither across the
+   top nor across the middle.
+2. `formula` — no rim material across the top, with grips at roughly 9 and 3.
+   The bottom may be closed.
+3. `gt-style` — a closed rim flattened at **both** the top and the bottom.
+4. `d-shaped` — a closed rim flattened at the bottom only, with a round top.
+5. `round` — a continuous circle.
+
+Use `other` for a rim that genuinely matches none of these, and `unknown` when
+the rim was not seen. `prototype` is **deprecated**: it described a category
+rather than an outline, and the rims it covered are the same flat-top,
+flat-bottom form as `gt-style`. It remains in the enum so existing records and
+drafts stay valid, but new records must not use it.
+
+Shape is separate from the optional `integrated_display`, `shift_lights`, and
+`open_top` fields, so any shape may be recorded with or without each of them.
+
+- `integrated_display` — any readout carried **on the rim itself**: a graphical
+  LCD, an LED numeric gear indicator, or a segment display. A dash mounted on
+  the car rather than the rim does not count, and shift lights alone do not
+  count.
+- `shift_lights` — shift or rev lights on the rim, recorded independently of
+  `integrated_display`.
+- `open_top` — whether the rim is open across the top. It is a modifier that
+  applies to any shape, so a `formula` rim records `open_top: yes` and a
+  `gt-style` rim records `no`. A `yoke` is always `open_top: yes`.
+
+Because these definitions replaced an ambiguous earlier rule, values recorded
+before them may not follow the decision order. See
+`docs/wheel-rim-reverification.md` for the records that need another look.
 
 ## Simulator behavior and overrides
 

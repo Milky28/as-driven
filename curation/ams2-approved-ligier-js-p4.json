@@ -15,8 +15,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "prototype"
+    "wheel_rim_shape": "gt-style"
   },
-  "confidence_notes": "Direct testing confirmed clutch-free move-off, six paddle-selected gears, no-lift clutch-free upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed prototype display rim. The simulator mechanism responsible for clutch-free move-off was not established.",
-  "scope_notes": "The approval covers the exact Ligier JS P4 / LES_2025 telemetry identity only; no fuzzy matching is used."
+  "confidence_notes": "Direct testing confirmed clutch-free move-off, six paddle-selected gears, no-lift clutch-free upshifts, perceptible automatic cut, clutch-free downshifts, a visible automatic-blip throttle spike, and the closed GT-style display rim. The simulator mechanism responsible for clutch-free move-off was not established.",
+  "scope_notes": "The approval covers the exact Ligier JS P4 / LES_2025 telemetry identity only; no fuzzy matching is used. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

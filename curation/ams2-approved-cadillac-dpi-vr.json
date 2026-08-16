@@ -17,11 +17,11 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "prototype",
+    "wheel_rim_shape": "gt-style",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed guided observation for Cadillac DPi-VR."
+  "scope_notes": "Reviewed guided observation for Cadillac DPi-VR. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

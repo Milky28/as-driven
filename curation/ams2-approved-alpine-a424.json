@@ -21,8 +21,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "prototype"
+    "wheel_rim_shape": "gt-style"
   },
   "confidence_notes": "Exact identity, seven paddle-selected forward gears, clutch-free hybrid move-off, clutch-free full-throttle upshifts, clutch-free downshifts, automatic blip, and cockpit rim shape were directly tested. The automatic blip was visible as a throttle-display spike. Automatic cut is medium-confidence because no interruption was perceptible; it is inferred from the common LMDh transmission architecture, successful full-throttle shifts, and the three existing LMDh peer rows in the 1.5.5.2 source.",
-  "scope_notes": "The exact base telemetry identity Alpine A424 / LMDh was live-tested. Alpine A424 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested and that distinction must remain visible in the record notes."
+  "scope_notes": "The exact base telemetry identity Alpine A424 / LMDh was live-tested. Alpine A424 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested and that distinction must remain visible in the record notes. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }
