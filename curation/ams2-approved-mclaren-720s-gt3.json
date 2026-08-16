@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.52",
+  "approved_at": "2026-08-16",
+  "record_id": "ams2.mclaren-720s-gt3",
+  "telemetry_name": "McLaren 720S GT3",
+  "telemetry_class": "GT3",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.mclaren-720s-gt3.20260816t000803309z-39c312fd",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-style",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Guided testing directly established the six paddle gears, the clutch-free move-off, the clutchless running shifts, and automatic cut and blip.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

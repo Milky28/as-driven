@@ -232,6 +232,18 @@
       "notes": "Guided draft ams2.audi-v8-quattro-dtm.20260811t232248479z-b7b2386b records exact Group A identity, standing-start clutch, six direct H-pattern gears, lift-required clutchless upshifts, no automatic cut or blip, and a closed round rim without display or shift lights. A slight roll followed by an immediate stall was manually corrected to clutch required with explicit evidence."
     },
     {
+      "source_id": "ams2.local-live-bmw-2002-turbo-controls.1.6.9.91",
+      "title": "Live AMS2 BMW 2002 Turbo guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.bmw-2002-turbo.20260815t233506221z-c747ae70 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-bmw-m-hybrid-v8-controls.1.6.9.91",
       "title": "Live AMS2 BMW M Hybrid V8 guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -446,6 +458,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.chevrolet-chevette.20260814t042425880z-aa76223d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-corvette-c3-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Corvette C3 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.chevrolet-corvette-c3.20260815t233851406z-a0ef2751 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-chevrolet-corvette-c3-r-controls.1.6.9.91",
@@ -1792,6 +1816,18 @@
       "notes": "Guided-verification observation ams2.mclaren-m23.20260815t192817312z-bbd608ec by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-mclaren-mercedes-mp4-12-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Mercedes MP4/12 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-mercedes-mp4-12-high-downforce.20260815t234827608z-e8100197 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-mercedes-amg-gt3-controls.1.6.9.91",
       "title": "Live AMS2 Mercedes-AMG GT3 guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -1850,6 +1886,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.mercedes-benz-actros.20260814t194520339z-752f10a3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mercedes-benz-clk-lm-controls.1.6.9.91",
+      "title": "Live AMS2 Mercedes-Benz CLK LM guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mercedes-benz-clk-lm.20260815t234325634z-7a6a292a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-metalmoro-ajr-chevrolet-controls.1.6.9.91",
@@ -2030,6 +2078,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 RSR 1974 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.porsche-911-rsr-1974.20260815t235226416z-9a542f4f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-porsche-911-rsr-gte-controls.1.6.9.91",
@@ -3639,6 +3699,18 @@
       "notes": "Official series history supplies generation context and notes the Next Gen sequential shifter. It is not treated as proof that Reiza's fictional Gen1/Gen2/Gen3 labels map exactly to NASCAR generations."
     },
     {
+      "source_id": "netcarshow.mclaren-720s-gt3",
+      "title": "McLaren 720S GT3 (2019)",
+      "publisher": "NetCarShow",
+      "url": "https://www.netcarshow.com/mclaren/2019-720s_gt3/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Reproduces McLaren's launch material for the 2019 720S GT3: a six-speed sequential paddle gearbox with a new electronic shift actuator, behind a race-prepared version of the McLaren M840T 4.0-litre twin-turbo V8."
+    },
+    {
       "source_id": "newatlas.caterham-620r",
       "title": "Caterham 620 R brings extreme to Goodwood",
       "publisher": "New Atlas",
@@ -4599,64 +4671,16 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-bmw-2002-turbo-controls.1.6.9.91",
-      "title": "Live AMS2 BMW 2002 Turbo guided-verification drive",
+      "source_id": "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren 720S GT3 guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
+      "retrieved_at": "2026-08-16",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.bmw-2002-turbo.20260815t233506221z-c747ae70 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-chevrolet-corvette-c3-controls.1.6.9.91",
-      "title": "Live AMS2 Chevrolet Corvette C3 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.chevrolet-corvette-c3.20260815t233851406z-a0ef2751 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91",
-      "title": "Live AMS2 Porsche 911 RSR 1974 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.porsche-911-rsr-1974.20260815t235226416z-9a542f4f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mercedes-benz-clk-lm-controls.1.6.9.91",
-      "title": "Live AMS2 Mercedes-Benz CLK LM guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mercedes-benz-clk-lm.20260815t234325634z-7a6a292a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mclaren-mercedes-mp4-12-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 McLaren Mercedes MP4/12 - High Downforce guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mclaren-mercedes-mp4-12-high-downforce.20260815t234827608z-e8100197 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mclaren-720s-gt3.20260816t000803309z-39c312fd by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

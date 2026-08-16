@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.mclaren-720s-gt3",
+  "identity": {
+    "display_name": "McLaren 720S GT3",
+    "manufacturer": "McLaren",
+    "model": "720S GT3",
+    "year": {
+      "label": "2019",
+      "from": 2019
+    },
+    "class": "GT3",
+    "real_world_identity_notes": "McLaren 720S GT3 of 2019, running a race-prepared version of the McLaren M840T 4.0-litre twin-turbo V8 through a six-speed sequential paddle gearbox with an electronic shift actuator. It is the model that preceded the 720S GT3 Evo, which AMS2 curates separately in its own class."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-style",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch-free move-off, automatic cut on upshifts and automatic blip on downshifts, so the driver supplies none of the three.",
+      "This is a different car from the curated McLaren 720S GT3 Evo. AMS2 places this one in the GT3 class and the Evo in GT3_Gen2, and nothing is inherited between them even though both are six-speed paddle cars.",
+      "Only the plain identity has been observed for this car and its class has reported no aero package, so no further identity is carried."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren 720S GT3"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-style",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mclaren-720s-gt3.20260816t000803309z-39c312fd by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-16",
+      "source_refs": [
+        "netcarshow.mclaren-720s-gt3",
+        "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "netcarshow.mclaren-720s-gt3",
+          "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the 2019 720S GT3 and its gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "netcarshow.mclaren-720s-gt3",
+          "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source gives a six-speed sequential paddle gearbox, and the live drive selected six paddle gears with automatic cut and blip and no clutch needed to pull away."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}

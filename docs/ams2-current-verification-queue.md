@@ -1,6 +1,16 @@
 # AMS2 current verification queue
 
-## The queue is empty as of dataset 0.3.51
+## Completed in dataset 0.3.52 (McLaren 720S GT3)
+
+Found while re-walking the class list for cars missed earlier. Six paddle gears
+with automatic cut and blip and a clutch-free move-off, matching McLaren's own
+launch specification of a six-speed sequential paddle gearbox.
+
+It is a different car from the curated McLaren 720S GT3 Evo, which is why both
+exist: AMS2 places this one in the `GT3` class and the Evo in `GT3_Gen2`. Nothing
+is inherited between them.
+
+## The queue was empty as of dataset 0.3.51
 
 Every AMS2 identity observed on this PC is now either curated or closed by a
 written reviewer decision. Nothing is waiting to be driven.
