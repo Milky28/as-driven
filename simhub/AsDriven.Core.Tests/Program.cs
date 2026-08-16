@@ -362,7 +362,8 @@ namespace AsDriven.Core.Tests
                 foreach (string formulaCar in new[] {
                     "Formula Reiza",
                     "Formula Ultimate Hybrid Gen1",
-                    "Formula Ultimate Gen2",
+                    "Formula Ultimate Hybrid Gen2",
+                    "Formula Ultimate Hybrid Gen3",
                     "Formula USA 2023"
                 })
                 {
@@ -394,8 +395,23 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot hybridGen3 = database.Match(
                     "Automobilista2", "Formula Ultimate Hybrid Gen3 - High Downforce");
                 True(hybridGen3.HasMatch, "matches the current Formula Hybrid Gen3 telemetry identity");
-                Equal("ams2.formula-ultimate-2022", hybridGen3.RecordId, "maps Formula Hybrid Gen3 to the retained Formula Ultimate Gen2 record");
+                Equal("ams2.formula-ultimate-2022", hybridGen3.RecordId, "maps Formula Hybrid Gen3 to the 2022 ground-effect record");
                 Equal("Formula Hybrid Gen3", hybridGen3.DisplayName, "uses the current official Formula Hybrid Gen3 display name");
+
+                // Retired identities must not match. Formula Ultimate Gen2 was
+                // this car's pre-rename name, and the string is one digit away
+                // from the separate Formula Ultimate Hybrid Gen2 car, so a
+                // lingering alias would hand a driver the wrong car's guidance.
+                GuidanceSnapshot retiredUltimate = database.Match(
+                    "Automobilista2", "Formula Ultimate Gen2");
+                False(retiredUltimate.HasMatch, "never matches the retired Formula Ultimate Gen2 identity");
+                foreach (string retired in new[] {
+                    "Lotus 98T", "McLaren MP4/8", "Porsche 911 RSR 74"
+                })
+                {
+                    False(database.Match("Automobilista2", retired).HasMatch,
+                        "never matches retired identity " + retired);
+                }
 
                 GuidanceSnapshot wrongCase = database.Match("Automobilista2", "dallara f301");
                 False(wrongCase.HasMatch, "matching is case-sensitive and exact");
