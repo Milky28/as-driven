@@ -1,0 +1,224 @@
+{
+  "review": "batch-19",
+  "dataset_version": "0.3.50",
+  "approved_at": "2026-08-15",
+  "records": [
+    {
+      "record_id": "ams2.bmw-2002-turbo",
+      "bundle": "build/batch-19/bmw-2002-turbo.staged.json",
+      "manufacturer": "BMW",
+      "model": "2002 turbo",
+      "year": {
+        "label": "1973 to 1975",
+        "from": 1973
+      },
+      "real_world_identity_notes": "BMW 2002 turbo of 1973 to 1975, the 170 PS turbocharged 02, offered with a strengthened Getrag 232 four-speed unique to the turbo or the optional Getrag 235/5 close-ratio five-speed.",
+      "real_world_source_refs": [
+        "wikipedia.bmw-02-series"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source.",
+      "identity_basis": "A registered source establishes the 2002 turbo and its gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a four-speed or an optional Getrag 235/5 five-speed, and the live drive selected five H-pattern gears, which is the five-speed of that pair.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The drive found five gears, so AMS2 models the optional Getrag 235/5 close-ratio five-speed rather than the four-speed that was standard on this car.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.chevrolet-corvette-c3",
+      "bundle": "build/batch-19/chevrolet-corvette-c3.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Corvette",
+      "year": {
+        "label": "C3",
+        "from": 1968
+      },
+      "real_world_identity_notes": "Third-generation Chevrolet Corvette. Its four-speed manual came in wide-ratio M20, close-ratio M21 and heavy-duty close-ratio M22 forms, standard from 1970 and available through 1981.",
+      "real_world_source_refs": [
+        "wikipedia.chevrolet-corvette-c3"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source.",
+      "identity_basis": "A registered source establishes the C3 Corvette and its four-speed manual, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a four-speed manual in three ratio sets, and the live drive selected four H-pattern gears. The source does not say which of the three AMS2 models.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The source names three four-speed variants and the drive cannot distinguish them, so no specific gearbox is claimed beyond the four-speed manual itself.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "C3"
+    },
+    {
+      "record_id": "ams2.porsche-911-rsr-1974",
+      "bundle": "build/batch-19/porsche-911-rsr-1974.staged.json",
+      "manufacturer": "Porsche",
+      "model": "911 Carrera RSR 3.0",
+      "year": {
+        "label": "1974",
+        "from": 1974
+      },
+      "real_world_identity_notes": "Porsche 911 Carrera RSR 3.0 of 1974, running the Type 911/75 flat-six of 330 bhp with a reinforced clutch and the five-speed gearbox carried over from the RS.",
+      "real_world_source_refs": [
+        "stuttcars.porsche-911-carrera-rsr-3-0"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source.",
+      "identity_basis": "A registered source establishes the 1974 Carrera RSR 3.0 and its five-speed gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a five-speed gearbox carried over from the RS, and the live drive selected five H-pattern gears with no automatic cut or blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "unknown"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The source states a five-speed gearbox but not its construction, so the downshift blip stays unknown rather than being inferred from the road car's synchromesh or from racing practice.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mercedes-benz-clk-lm",
+      "bundle": "build/batch-19/mercedes-benz-clk-lm.staged.json",
+      "manufacturer": "Mercedes-Benz",
+      "model": "CLK LM",
+      "year": {
+        "label": "1998",
+        "from": 1998
+      },
+      "real_world_identity_notes": "Mercedes-Benz CLK LM of 1998, the GT1 car running the naturally aspirated GT108B 4,986 cc V8 with a six-speed sequential gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.mercedes-clk-lm"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source.",
+      "identity_basis": "A registered source establishes the CLK LM and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a 6-speed sequential, and the live drive selected six gears through a sequential stick with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mclaren-mercedes-mp4-12-high-downforce",
+      "bundle": "build/batch-19/mclaren-mercedes-mp4-12-high-downforce.staged.json",
+      "manufacturer": "McLaren",
+      "model": "MP4/12",
+      "year": {
+        "label": "1997 Formula One season",
+        "from": 1997
+      },
+      "real_world_identity_notes": "McLaren MP4/12 of 1997, running Mercedes-Benz FO110E and FO110F V10s with a McLaren six-speed longitudinal semi-automatic sequential gearbox.",
+      "real_world_source_refs": [
+        "wikipedia.mclaren-mp4-12"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source.",
+      "identity_basis": "A registered source establishes the MP4/12 and its transmission, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a McLaren six-speed longitudinal semi-automatic sequential, and the live drive selected six paddle gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "semi-automatic"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away, which is the semi-automatic pattern of the era.",
+        "Only the high-downforce identity has been observed for this car, and no other configuration of its class has ever been reported, so no further identity is carried."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "High Downforce"
+    }
+  ]
+}

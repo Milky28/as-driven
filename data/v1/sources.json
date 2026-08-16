@@ -1144,6 +1144,18 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
+      "source_id": "ams2.local-live-formula-vee-gen1-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Vee Gen1 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-vee-gen1.20260815t231602548z-d616fb3b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-formula-vee-gen2-controls.1.6.9.91",
       "title": "Guided live AMS2 Formula Vee Gen2 control test",
       "publisher": "Local AMS2 observation",
@@ -1178,6 +1190,30 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.formula-vintage-gen1-model2.20260814t053941056z-79d9ad54 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-vintage-gen2-model1-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Vintage Gen2 Model1 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-vintage-gen2-model1.20260815t232117319z-63a101b3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-vintage-gen2-model2-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Vintage Gen2 Model2 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-vintage-gen2-model2.20260815t232503762z-748aeef7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-fusca-classic-fl-controls.1.6.9.91",
@@ -1478,6 +1514,42 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "AMS2 1.6.9.91 through SimHub 9.11.22 emitted Lola B05/40 V8 / LMP2_05. Direct testing with Auto Clutch disabled confirmed clutch-free move-off, six paddle-selected gears, clutchless upshifts with automatic cut, clutchless downshifts with automatic blip, and a D-shaped display rim. The exact Low Downforce identity inherits these base controls and was not separately tested."
+    },
+    {
+      "source_id": "ams2.local-live-lola-b2k00-ford-cosworth-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Lola B2K00 Ford-Cosworth - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.lola-b2k00-ford-cosworth-high-downforce.20260815t224901340z-308e1c98 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-lola-b2k00-mercedes-benz-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Lola B2K00 Mercedes-Benz - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.lola-b2k00-mercedes-benz-high-downforce.20260815t225350268z-2d39deff by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-lola-b2k00-toyota-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Lola B2K00 Toyota - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.lola-b2k00-toyota-high-downforce.20260815t225635031z-3dd9cbf4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-lola-t95-00-ford-cosworth-high-downforce-controls.1.6.9.91",
@@ -2102,6 +2174,54 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Guided draft ams2.renault-r28-high-downforce.20260812t042259104z-690ca1c2 records exact F-V8_Gen2_HD identity, standing-start clutch, seven paddle gears, automatically detected cut and blip, and a closed Formula display rim with shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-reynard-2ki-ford-cosworth-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Reynard 2Ki Ford-Cosworth - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.reynard-2ki-ford-cosworth-high-downforce.20260815t225914392z-9bf288d2 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-reynard-2ki-honda-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Reynard 2Ki Honda - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.reynard-2ki-honda-high-downforce.20260815t230131704z-94dfa25c by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-reynard-2ki-mercedes-benz-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Reynard 2Ki Mercedes-Benz - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.reynard-2ki-mercedes-benz-high-downforce.20260815t230348435z-52c3d1a7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-reynard-2ki-toyota-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Reynard 2Ki Toyota - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.reynard-2ki-toyota-high-downforce.20260815t230614733z-f454b4cc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-reynard-95i-ford-cosworth-high-downforce-controls.1.6.9.91",
@@ -3783,6 +3903,18 @@
       "notes": "Exact CarModel and CarId values emitted by AMS2 1.6.9.91 and observed through SimHub 9.11.22 during local live tests. The observed Formula identities were Formula V10 Gen2 (B) - High Downforce, Formula V10 Gen2 (M) - High Downforce, Formula Ultimate Hybrid Gen1 - High Downforce, Formula USA 2023 - High Downforce, Formula V8 Gen3 - High Downforce, and Formula Ultimate Hybrid Gen3 - High Downforce. These observations support identity matching only; control behavior remains verified against the separately versioned control source."
     },
     {
+      "source_id": "stuttcars.porsche-911-carrera-rsr-3-0",
+      "title": "Porsche 911 Carrera RSR 3.0 (1974-1975)",
+      "publisher": "StuttCars",
+      "url": "https://www.stuttcars.com/porsche-911-carrera-rsr-3-0-1974/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Describes the 1974 Carrera RSR 3.0 with the Type 911/75 flat-six of 330 bhp, a reinforced clutch and a five-speed gearbox carried over from the RS. It states no gearbox construction."
+    },
+    {
       "source_id": "stuttcars.porsche-996-gt3-rsr",
       "title": "Porsche 911 GT3 RSR (996), 2004-2005",
       "publisher": "Stuttcars",
@@ -3903,6 +4035,18 @@
       "notes": "Secondary summary describing a six-speed Ricardo sequential transmission with electropneumatic paddle shift. Retained as provisional historical context pending a primary technical replacement; simulator technique and wheel details are sourced separately."
     },
     {
+      "source_id": "wikipedia.bmw-02-series",
+      "title": "BMW 02 Series",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/BMW_02_Series",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "States the 2002 turbo of 1973 to 1975 made 170 PS and that its gearbox was either a strengthened Getrag 232 four-speed unique to the turbo, or the Getrag 235/5 close-ratio five-speed also optional on the 2002 tii."
+    },
+    {
       "source_id": "wikipedia.bmw-m1",
       "title": "BMW M1",
       "publisher": "Wikipedia",
@@ -3985,6 +4129,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Brazilian Chevette built 1973 to 1993 with 4/5-speed manual gearboxes; a five-speed manual became available as an option on the 1.6 from 1983."
+    },
+    {
+      "source_id": "wikipedia.chevrolet-corvette-c3",
+      "title": "Chevrolet Corvette (C3)",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Chevrolet_Corvette_(C3)",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Records the C3 Corvette's four-speed manual in wide-ratio M20, close-ratio M21 and heavy-duty close-ratio M22 forms, standard from 1970 and available through 1981."
     },
     {
       "source_id": "wikipedia.chevrolet-corvette-c8r",
@@ -4191,6 +4347,18 @@
       "notes": "Gives the 1983 MP4/1C a McLaren / Hewland FGA 400 5-speed manual behind the Ford-Cosworth DFV, before the late-season switch to TAG-Porsche turbo power."
     },
     {
+      "source_id": "wikipedia.mclaren-mp4-12",
+      "title": "McLaren MP4/12",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/McLaren_MP4/12",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the 1997 MP4/12 a McLaren six-speed longitudinal semi-automatic sequential gearbox behind the Mercedes-Benz FO110E and FO110F V10s."
+    },
+    {
       "source_id": "wikipedia.mclaren-mp4-4",
       "title": "McLaren MP4/4",
       "publisher": "Wikipedia",
@@ -4249,6 +4417,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Gives the 1993 MP4/8 a McLaren transverse 6-speed semi-automatic sequential gearbox behind the Ford HBD7 V8, and states the semi-automatic transmission could be switched over to fully automatic, developed with Techniques d'Avant Garde."
+    },
+    {
+      "source_id": "wikipedia.mercedes-clk-lm",
+      "title": "Mercedes-Benz CLK LM",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_CLK_LM",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-15",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the 1998 CLK LM a 6-speed sequential gearbox behind the naturally aspirated Mercedes-Benz GT108B 4,986 cc V8, raced in the GT1 class."
     },
     {
       "source_id": "wikipedia.metalmoro-jlm-ajr",
@@ -4419,8 +4599,8 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-lola-b2k00-ford-cosworth-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Lola B2K00 Ford-Cosworth - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-bmw-2002-turbo-controls.1.6.9.91",
+      "title": "Live AMS2 BMW 2002 Turbo guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -4428,11 +4608,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.lola-b2k00-ford-cosworth-high-downforce.20260815t224901340z-308e1c98 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.bmw-2002-turbo.20260815t233506221z-c747ae70 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-lola-b2k00-mercedes-benz-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Lola B2K00 Mercedes-Benz - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-chevrolet-corvette-c3-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Corvette C3 guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -4440,11 +4620,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.lola-b2k00-mercedes-benz-high-downforce.20260815t225350268z-2d39deff by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.chevrolet-corvette-c3.20260815t233851406z-a0ef2751 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-lola-b2k00-toyota-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Lola B2K00 Toyota - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 RSR 1974 guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -4452,11 +4632,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.lola-b2k00-toyota-high-downforce.20260815t225635031z-3dd9cbf4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.porsche-911-rsr-1974.20260815t235226416z-9a542f4f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-reynard-2ki-ford-cosworth-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Reynard 2Ki Ford-Cosworth - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-mercedes-benz-clk-lm-controls.1.6.9.91",
+      "title": "Live AMS2 Mercedes-Benz CLK LM guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -4464,11 +4644,11 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.reynard-2ki-ford-cosworth-high-downforce.20260815t225914392z-9bf288d2 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mercedes-benz-clk-lm.20260815t234325634z-7a6a292a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-reynard-2ki-honda-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Reynard 2Ki Honda - High Downforce guided-verification drive",
+      "source_id": "ams2.local-live-mclaren-mercedes-mp4-12-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren Mercedes MP4/12 - High Downforce guided-verification drive",
       "publisher": "Local AMS2 observation",
       "url": "https://www.game-automobilista2.com/",
       "archive_url": null,
@@ -4476,67 +4656,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.reynard-2ki-honda-high-downforce.20260815t230131704z-94dfa25c by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-reynard-2ki-mercedes-benz-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Reynard 2Ki Mercedes-Benz - High Downforce guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.reynard-2ki-mercedes-benz-high-downforce.20260815t230348435z-52c3d1a7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-reynard-2ki-toyota-high-downforce-controls.1.6.9.91",
-      "title": "Live AMS2 Reynard 2Ki Toyota - High Downforce guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.reynard-2ki-toyota-high-downforce.20260815t230614733z-f454b4cc by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-formula-vee-gen1-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Vee Gen1 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-vee-gen1.20260815t231602548z-d616fb3b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-formula-vintage-gen2-model1-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Vintage Gen2 Model1 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-vintage-gen2-model1.20260815t232117319z-63a101b3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-formula-vintage-gen2-model2-controls.1.6.9.91",
-      "title": "Live AMS2 Formula Vintage Gen2 Model2 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-15",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.formula-vintage-gen2-model2.20260815t232503762z-748aeef7 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mclaren-mercedes-mp4-12-high-downforce.20260815t234827608z-e8100197 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

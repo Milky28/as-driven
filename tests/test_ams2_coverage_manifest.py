@@ -68,14 +68,15 @@ class AMS2CoverageManifestTests(unittest.TestCase):
                 self.assertIn(disposition, linked, name)
 
         # A base car that is not yet curated keeps its Low Downforce alias
-        # pending. Chosen dynamically: naming a car here only holds until that
-        # car is verified, which has already retired two earlier examples.
+        # pending. The list is allowed to be empty: it drains as base cars are
+        # verified, and it reached zero in dataset 0.3.50 when the last of them
+        # was driven. What must hold is the shape of any entry still in it, not
+        # that one exists.
         pending = [
             entry
             for entry in manifest["entries"]
             if entry["coverage_disposition"] == "aero-inheritance-after-base"
         ]
-        self.assertTrue(pending, "expected at least one pending aero variant")
         for entry in pending:
             self.assertTrue(entry["telemetry_name"].endswith(" - Low Downforce"))
             self.assertIsNone(entry["related_record_id"], entry["telemetry_name"])

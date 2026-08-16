@@ -1,5 +1,30 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.50 (batch 19: the last five drives)
+
+Five cars, and the drive queue is down to three identities that need a decision
+rather than a drive.
+
+BMW 2002 turbo returned five gears. The source gives the turbo a strengthened
+Getrag 232 four-speed unique to that model, or the optional Getrag 235/5
+close-ratio five-speed, so AMS2 models the optional gearbox rather than the
+standard one. Chevrolet Corvette C3 returned four, and the source names three
+different four-speeds, so no specific unit is claimed.
+
+Porsche 911 RSR 1974 is selectable and was driven, which settles half of a
+pending question: `Porsche 911 RSR 74` is the doubtful name, not this one. Its
+source gives a five-speed carried over from the RS but no construction, so the
+downshift blip stays unknown.
+
+Mercedes-Benz CLK LM and McLaren Mercedes MP4/12 both carry automatic cut and
+blip, the CLK LM on a six-speed sequential and the MP4/12 on McLaren's six-speed
+longitudinal semi-automatic sequential.
+
+The manifest test that required at least one pending aero variant was relaxed. It
+drains as base cars are verified and reached zero here, so the assertion that one
+must exist was reporting success as failure. The invariant it guards, the shape
+of any entry still pending, is unchanged.
+
 ## Completed in dataset 0.3.49 (batch 18: F-USA Gen3, Formula Vee, Formula Vintage Gen2)
 
 Ten cars, and the open-wheel queue is now empty.
