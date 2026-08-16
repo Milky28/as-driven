@@ -7,7 +7,10 @@
     "manufacturer": "Gillet",
     "model": "Vertigo Streiff",
     "variant": "AMS2 GTR 2004 representation",
-    "year": { "from": 2004, "label": "2004/2005 FIA GT configuration" },
+    "year": {
+      "from": 2004,
+      "label": "2004/2005 FIA GT configuration"
+    },
     "class": "GTR 2004",
     "real_world_identity_notes": "A specialist dossier for the surviving period FIA GT chassis specifies a Tractive six-speed sequential gearbox. AMS2 visibly models a sequential lever without paddles. The exact year/chassis specification represented remains qualified."
   },
@@ -51,15 +54,27 @@
     {
       "simulator": "ams2",
       "identities": [
-        { "kind": "telemetry-name", "value": "Gillet Vertigo Streiff" },
-        { "kind": "class-id", "value": "GTR_04" }
+        {
+          "kind": "telemetry-name",
+          "value": "Gillet Vertigo Streiff"
+        },
+        {
+          "kind": "class-id",
+          "value": "GTR_04"
+        }
       ],
       "behavior": {
         "shift_type": "Seq-Stick",
         "auto_blip": "no",
         "shift_cut": "yes",
-        "wheel_rim_type": { "normalized": "d-shaped", "source_label": "live-cockpit-d-shaped-no-display" },
-        "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Standing-start clutch, six-speed sequential stick, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed."]
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "source_label": "live-cockpit-d-shaped-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Standing-start clutch, six-speed sequential stick, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed."
+        ]
       },
       "overrides": [],
       "verified_game_version": "1.6.9.91",
@@ -69,14 +84,23 @@
         "raceart.gillet-vertigo",
         "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
       ],
-      "confidence": { "level": "verified", "basis": "Exact simulator identity and behavior were directly tested; the specialist chassis dossier independently supports six-speed sequential hardware. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip behavior; exact historical chassis mapping remains qualified." }
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity and behavior were directly tested; the specialist chassis dossier independently supports six-speed sequential hardware. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip behavior; exact historical chassis mapping remains qualified."
+      }
     }
   ],
   "provenance": {
     "claims": [
       {
-        "paths": ["/identity", "/simulators/0/identities"],
-        "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"],
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+          "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+        ],
         "confidence": "verified",
         "basis": "Official release plus exact live CarModel and GTR_04 class observation."
       },
@@ -87,7 +111,10 @@
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
-        "source_refs": ["raceart.gillet-vertigo", "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"],
+        "source_refs": [
+          "raceart.gillet-vertigo",
+          "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+        ],
         "confidence": "high",
         "basis": "Specialist evidence establishes six-speed sequential hardware and direct AMS2 observation establishes the visible lever interface."
       },
@@ -99,7 +126,9 @@
           "/simulators/0/behavior",
           "/authentic_controls/steering/wheel_rim"
         ],
-        "source_refs": ["ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"],
+        "source_refs": [
+          "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+        ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
       }

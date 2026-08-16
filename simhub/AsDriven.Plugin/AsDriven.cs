@@ -1326,6 +1326,7 @@ namespace AsDriven.Plugin
             this.AttachDelegate("UpshiftTone", delegate { return _current.UpshiftTone; });
             this.AttachDelegate("DownshiftTone", delegate { return _current.DownshiftTone; });
             this.AttachDelegate("UseBandTone", delegate { return _current.UseBandTone; });
+            this.AttachDelegate("DriverSummary", delegate { return _current.DriverSummary; });
             this.AttachDelegate("HasSteeringDOR", delegate { return _current.HasSteeringDOR; });
             this.AttachDelegate("SteeringDOR", delegate { return _current.SteeringDOR; });
             this.AttachDelegate("VerifiedGameVersion", delegate { return _current.VerifiedGameVersion; });

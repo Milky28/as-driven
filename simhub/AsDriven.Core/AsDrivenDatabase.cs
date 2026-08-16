@@ -304,6 +304,7 @@ namespace AsDriven.Core
                         recordPath),
                     WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
                     WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
+                    DriverSummary = OptionalText(record, "driver_summary"),
                     WheelIntegratedDisplay = OptionalState(effectiveWheelRim, "integrated_display"),
                     WheelShiftLights = OptionalState(effectiveWheelRim, "shift_lights"),
                     HasSteeringDOR = effectiveSteering["degrees_of_rotation"] != null,
@@ -661,6 +662,15 @@ namespace AsDriven.Core
         /// an absent value means it was never observed and must never be shown
         /// to the driver as a "no".
         /// </summary>
+        /// <summary>Reads an optional free-text field, empty when absent.</summary>
+        private static string OptionalText(JObject value, string name)
+        {
+            JToken token = value[name];
+            return token == null || token.Type == JTokenType.Null
+                ? string.Empty
+                : token.Value<string>();
+        }
+
         private static string OptionalState(JObject value, string name)
         {
             JToken token = value[name];
@@ -725,6 +735,7 @@ namespace AsDriven.Core
             public string ShiftCut;
             public string ManualBlip;
             public string ThrottleLift;
+            public string DriverSummary;
             public string WheelRimShape;
             public string WheelRimSourceLabel;
             public string WheelIntegratedDisplay;
@@ -760,6 +771,7 @@ namespace AsDriven.Core
                     ThrottleLift,
                     WheelRimShape,
                     WheelRimSourceLabel,
+                    DriverSummary,
                     WheelIntegratedDisplay,
                     WheelShiftLights,
                     HasSteeringDOR,

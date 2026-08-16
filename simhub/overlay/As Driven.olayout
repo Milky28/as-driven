@@ -3,8 +3,8 @@
     {
       "DashboardName": "DashTemplates\\As Driven Preflight Overlay\\As Driven Preflight Overlay.djson",
       "Top": 60.0,
-      "Left": 540.0,
-      "Width": 840.0,
+      "Left": 600.0,
+      "Width": 720.0,
       "Height": 360.0,
       "Version": 1,
       "PartId": "ef8c8d45-5fee-5276-abf6-070022fbb1b4",

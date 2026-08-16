@@ -133,8 +133,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12",
   "notes": [
     "'Stock USA Gen1 - Speedway' is also stored with trailing whitespace. That padded identity is approved as a formatting-only alias so exact matching still resolves it; no control claim changes."
-  ]
+  ],
+  "updated_at": "2026-08-12"
 }

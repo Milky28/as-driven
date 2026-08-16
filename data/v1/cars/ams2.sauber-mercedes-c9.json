@@ -149,8 +149,9 @@
       }
     ]
   },
-  "updated_at": "2026-08-12",
+  "driver_summary": "Dogleg gate - first is down and left, outside the racing plane. Second through top then fall in one straight fore-and-aft line.",
   "notes": [
     "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
-  ]
+  ],
+  "updated_at": "2026-08-12"
 }

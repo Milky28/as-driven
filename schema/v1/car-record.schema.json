@@ -26,6 +26,12 @@
       "items": { "$ref": "#/$defs/simulatorEntry" }
     },
     "provenance": { "$ref": "#/$defs/provenance" },
+    "driver_summary": {
+      "description": "One short paragraph telling the driver what to do differently in this car, and why. It is the only free text the preflight overlay shows, so it must say something the Fit and Use rows do not already state: \"this is a dog box\" is already carried by the gearbox type, while \"rev-match every downshift or the dogs will not engage\" is the reason to read it. Optional. When absent the overlay shows no note panel at all rather than padding the card with restatement. Every claim in it must be supported by the record's own curated values or its cited sources.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
     "notes": { "type": "array", "items": { "type": "string" } },
     "updated_at": { "$ref": "#/$defs/date" }
   },

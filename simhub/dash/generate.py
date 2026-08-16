@@ -34,11 +34,11 @@ class TemplateSpec(NamedTuple):
 
 
 TEMPLATES = (
-    TemplateSpec("detailed", "As Driven Preflight Overlay", 840, 360),
+    TemplateSpec("detailed", "As Driven Preflight Overlay", 720, 360),
     TemplateSpec("compact", "As Driven Preflight Compact", 520, 300),
     TemplateSpec("glance", "As Driven Preflight Glance", 320, 120),
     TemplateSpec("verification", "As Driven Verification Drive", 700, 220),
-    TemplateSpec("display", "As Driven Preflight Display", 900, 360, False),
+    TemplateSpec("display", "As Driven Preflight Display", 780, 360, False),
 )
 
 
@@ -368,6 +368,7 @@ def _preview_badge(
 
 
 BAND_PANEL = "#6B102030"
+NOTE_PANEL = "#1427C7F3"
 RAIL_FIT = "#2227C7F3"
 RAIL_YOU = "#26FF875B"
 RAIL_CAR = "#2145D483"
@@ -398,7 +399,10 @@ def _tone_layers(
     prop = "[AsDriven." + tone_property + "]"
     variants = [("You", you, prop + " == 'you'"), ("Car", car, prop + " == 'car'")]
     if unknown is not None:
-        variants.append(("Unknown", unknown, prop + " != 'you' && " + prop + " != 'car'"))
+        # Optional and unknown share a transparent cell: neither is demanded of
+        # the driver, and neither is handled by the car.
+        variants.append((
+            "Rest", unknown, prop + " != 'you' && " + prop + " != 'car'"))
     return [
         factory.layer(
             prefix + suffix,
@@ -426,10 +430,14 @@ def _tone_text(
 ) -> list[dict[str, Any]]:
     """The same trick for text colour."""
     prop = "[AsDriven." + tone_property + "]"
+    # Optional is a settled answer and reads in ordinary text; only a genuinely
+    # unestablished value is greyed, so grey always means "not known".
     variants = [
         ("You", ORANGE, prop + " == 'you'"),
         ("Car", GREEN, prop + " == 'car'"),
-        ("Unknown", MUTED, prop + " != 'you' && " + prop + " != 'car'"),
+        ("Optional", TEXT, prop + " == 'optional'"),
+        ("Unknown", MUTED,
+         prop + " != 'you' && " + prop + " != 'car' && " + prop + " != 'optional'"),
     ]
     return [
         factory.layer(
@@ -495,7 +503,7 @@ def _fit_band(
     icon_top = top + (height - icon_size) / 2
     text_left = cell_left + icon_size + 22
     text_width = cell_width - icon_size - 30
-    children.extend(_wheel_icon(factory, "FitWheel", cell_left + 14, icon_top, icon_size / 128))
+    children.extend(_wheel_icon(factory, "FitWheel", cell_left + 14, icon_top, icon_size / 46))
     children.extend([
         factory.text("FitWheelHead", "Rim", text_left, top + height / 2 - head_size - 3,
                      text_width, head_size + 6, head_size, WHITE,
@@ -507,7 +515,7 @@ def _fit_band(
     ])
     second_left = cell_left + cell_width
     second_text = second_left + icon_size + 22
-    children.extend(_shift_icon(factory, "FitShift", second_left + 14, icon_top, icon_size / 128))
+    children.extend(_shift_icon(factory, "FitShift", second_left + 14, icon_top, icon_size / 46))
     children.extend([
         factory.text("FitShiftHead", "Shifter", second_text, top + height / 2 - head_size - 3,
                      text_width, head_size + 6, head_size, WHITE,
@@ -571,6 +579,31 @@ def _use_band(
     return children
 
 
+def _driver_note(
+    factory: ItemFactory,
+    left: float,
+    top: float,
+    width: float,
+    height: float,
+    *,
+    size: float,
+) -> list[dict[str, Any]]:
+    """The one place the card can say why a car behaves as it does.
+
+    The whole group hides when the record carries no summary, so a card without
+    one simply ends after the Use band rather than reserving an empty panel.
+    """
+    present = "[AsDriven.DriverSummary] != ''"
+    children = [
+        factory.rectangle("NotePanel", left, top, width, height, NOTE_PANEL, radius=6),
+        factory.rectangle("NoteRail", left, top, 2, height, ACCENT),
+        factory.image("NoteIcon", "note-info", left + 13, top + 10, 16, 16),
+        factory.text("NoteText", "", left + 38, top + 6, width - 50, height - 12, size, TEXT,
+                     expression="[AsDriven.DriverSummary]"),
+    ]
+    return [factory.layer("DriverNote", children, visible_expression=present)]
+
+
 def _card_header(
     factory: ItemFactory,
     *,
@@ -610,23 +643,24 @@ def _card_header(
 
 
 def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
-    left = 24
+    left = 22
     width = factory.width - 2 * left
-    children = _card_header(factory, left=left, top=17, mark=34, name_size=21,
+    children = _card_header(factory, left=left, top=16, mark=36, name_size=22,
                             class_size=12, match_size=13, width=width)
     children.append(factory.rectangle("HeaderRule", left, 68, width, 1, SLATE))
-    children.extend(_fit_band(factory, left, 82, width, 88, rail_width=26, rail_size=10.5,
-                              head_size=15, sub_size=12, icon_size=34))
-    children.extend(_use_band(factory, left, 180, width, 88, rail_width=26, rail_size=10.5,
-                              head_size=14, value_size=12.5))
+    children.extend(_fit_band(factory, left, 80, width, 82, rail_width=30, rail_size=13,
+                              head_size=16, sub_size=12.5, icon_size=42))
+    children.extend(_use_band(factory, left, 170, width, 82, rail_width=30, rail_size=13,
+                              head_size=15, value_size=13))
+    children.extend(_driver_note(factory, left, 260, width, 46, size=12.5))
     children.extend([
         _preview_badge(factory, factory.width - left - 150, 14, 150, 30),
-        factory.rectangle("FooterRule", left, 292, width, 1, SLATE),
-        factory.text("Evidence", "", left, 300, width - 190, 20, 11.5, MUTED,
+        factory.rectangle("FooterRule", left, 316, width, 1, SLATE),
+        factory.text("Evidence", "", left, 324, width - 180, 20, 11.5, MUTED,
                      expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + '  -  Confidence: ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 190, 300, 190, 20, 11.5, MUTED,
+        factory.text("Dataset", "", left + width - 180, 324, 180, 20, 11.5, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])
@@ -634,23 +668,24 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
 
 
 def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
-    left = 18
+    left = 16
     width = factory.width - 2 * left
-    children = _card_header(factory, left=left, top=13, mark=28, name_size=17,
+    children = _card_header(factory, left=left, top=12, mark=28, name_size=17,
                             class_size=10.5, match_size=11, width=width)
-    children.append(factory.rectangle("HeaderRule", left, 57, width, 1, SLATE))
-    children.extend(_fit_band(factory, left, 68, width, 72, rail_width=21, rail_size=9.5,
-                              head_size=12.5, sub_size=10.5, icon_size=26))
-    children.extend(_use_band(factory, left, 148, width, 72, rail_width=21, rail_size=9.5,
-                              head_size=11.5, value_size=10.5))
+    children.append(factory.rectangle("HeaderRule", left, 55, width, 1, SLATE))
+    children.extend(_fit_band(factory, left, 65, width, 66, rail_width=24, rail_size=11,
+                              head_size=13, sub_size=10.5, icon_size=32))
+    children.extend(_use_band(factory, left, 139, width, 66, rail_width=24, rail_size=11,
+                              head_size=12, value_size=11))
+    children.extend(_driver_note(factory, left, 213, width, 34, size=11))
     children.extend([
-        _preview_badge(factory, factory.width - left - 118, 11, 118, 26, compact=True),
-        factory.rectangle("FooterRule", left, 240, width, 1, SLATE),
-        factory.text("Evidence", "", left, 248, width - 150, 18, 10, MUTED,
+        _preview_badge(factory, factory.width - left - 118, 10, 118, 26, compact=True),
+        factory.rectangle("FooterRule", left, 256, width, 1, SLATE),
+        factory.text("Evidence", "", left, 264, width - 150, 18, 10, MUTED,
                      expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + '  -  ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 150, 248, 150, 18, 10, MUTED,
+        factory.text("Dataset", "", left + width - 150, 264, 150, 18, 10, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])

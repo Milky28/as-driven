@@ -42,6 +42,13 @@ namespace AsDriven.Core
         public string WheelRimShape { get; private set; }
         public string WheelRimSourceLabel { get; private set; }
 
+        /// <summary>
+        /// The record's driver-facing note, empty when it carries none. The
+        /// overlay hides its note panel entirely rather than showing a blank
+        /// one, so an empty value is a supported state and not a defect.
+        /// </summary>
+        public string DriverSummary { get; private set; }
+
         /// <summary>Whether the rim itself carries a readout. Optional in the
         /// schema, so an unobserved value reads "unknown", never "no".</summary>
         public string WheelIntegratedDisplay { get; private set; }
@@ -141,6 +148,7 @@ namespace AsDriven.Core
             string throttleLift,
             string wheelRimShape,
             string wheelRimSourceLabel,
+            string driverSummary,
             string wheelIntegratedDisplay,
             string wheelShiftLights,
             bool hasSteeringDOR,
@@ -185,6 +193,7 @@ namespace AsDriven.Core
                 ThrottleLift = throttleLift,
                 WheelRimShape = wheelRimShape,
                 WheelRimSourceLabel = wheelRimSourceLabel,
+                DriverSummary = driverSummary,
                 WheelIntegratedDisplay = wheelIntegratedDisplay,
                 WheelShiftLights = wheelShiftLights,
                 HasSteeringDOR = hasSteeringDOR,
@@ -235,6 +244,7 @@ namespace AsDriven.Core
                 ThrottleLift = string.Empty,
                 WheelRimShape = string.Empty,
                 WheelRimSourceLabel = string.Empty,
+                DriverSummary = string.Empty,
                 WheelIntegratedDisplay = string.Empty,
                 WheelShiftLights = string.Empty,
                 HasSteeringDOR = false,

@@ -88,7 +88,7 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotIn("Bindings", display_card)
 
         expected_sizes = {
-            "detailed": (840, 360),
+            "detailed": (720, 360),
             "compact": (520, 300),
             "glance": (320, 120),
             "verification": (700, 220),
@@ -340,9 +340,13 @@ class SimHubDashTests(unittest.TestCase):
         self.assertLess(named["UseValueUpshift"]["Left"], named["UseValueDownshift"]["Left"])
         # The rail and every cell carry their own tone, so a cell that
         # disagrees with the band is never overpainted by it.
-        for suffix in ("You", "Car", "Unknown"):
+        for suffix in ("You", "Car", "Rest"):
             self.assertIn(f"UseRail{suffix}", named)
             self.assertIn(f"UseCellUpshift{suffix}", named)
+        # The heading has a fourth state: optional is settled and reads in
+        # ordinary text, so grey is left to mean "not established".
+        for suffix in ("You", "Car", "Optional", "Unknown"):
+            self.assertIn(f"UseHeadUpshift{suffix}", named)
         self.assertEqual(
             self.generator.CELL_CAR, named["UseCellUpshiftCarFill"]["BackgroundColor"]
         )
@@ -383,6 +387,39 @@ class SimHubDashTests(unittest.TestCase):
             "AsDriven.OverlayCarNameGlance",
             glance_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
+
+    def test_note_panel_only_appears_when_the_record_carries_a_summary(self):
+        for variant in ("detailed", "compact"):
+            dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
+            named = {
+                value["Name"]: value
+                for value in walk(dashboard)
+                if isinstance(value, dict) and "Name" in value
+            }
+            self.assertIn(
+                "AsDriven.DriverSummary",
+                named["NoteText"]["Bindings"]["Text"]["Formula"]["Expression"],
+                variant,
+            )
+            # The whole group hides when there is nothing to say, so a record
+            # without a summary ends after the Use band instead of reserving an
+            # empty panel.
+            self.assertEqual(
+                "[AsDriven.DriverSummary] != ''",
+                named["DriverNote"]["Bindings"]["Visible"]["Formula"]["Expression"],
+                variant,
+            )
+            self.assertEqual("note-info", named["NoteIcon"]["Image"], variant)
+
+        # Glance has no room for one and must not claim otherwise.
+        glance = self.generator.build_dashboard(overlay=True, variant="glance")
+        glance_named = {
+            value["Name"]
+            for value in walk(glance)
+            if isinstance(value, dict) and "Name" in value
+        }
+        self.assertNotIn("DriverNote", glance_named)
+        self.assertNotIn("NoteText", glance_named)
 
     def test_preview_badge_explicitly_says_preview_is_not_live(self):
         for variant in ("detailed", "compact", "glance"):
@@ -477,7 +514,7 @@ class SimHubDashTests(unittest.TestCase):
         parts = layout["OverlayLayoutParts"]
         self.assertEqual(4, len(parts))
         expected = {
-            "As Driven Preflight Overlay": ((840.0, 360.0), (540.0, 60.0)),
+            "As Driven Preflight Overlay": ((720.0, 360.0), (600.0, 60.0)),
             "As Driven Preflight Compact": ((520.0, 300.0), (700.0, 60.0)),
             "As Driven Preflight Glance": ((320.0, 120.0), (800.0, 60.0)),
             "As Driven Verification Drive": ((700.0, 220.0), (610.0, 430.0)),

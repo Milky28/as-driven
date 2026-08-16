@@ -484,13 +484,13 @@ namespace AsDriven.Core.Tests
                 Equal("you", PreflightLabels.LaunchTone("required"), "required launch is the driver's");
                 Equal("car", PreflightLabels.LaunchTone("not-required"), "clutch-free launch is the car's");
                 Equal("unknown", PreflightLabels.LaunchTone("unknown"), "unknown launch stays unresolved");
-                Equal("unknown", PreflightLabels.DownshiftTone("optional"),
-                    "an optional blip is never coloured as handled");
+                Equal("optional", PreflightLabels.DownshiftTone("optional"),
+                    "an optional blip is neither demanded nor handled");
                 Equal("you", PreflightLabels.BandTone("car", "car", "you"),
                     "one driver action turns the whole band");
                 Equal("car", PreflightLabels.BandTone("car", "car", "car"), "all handled reads as the car");
                 Equal("unknown", PreflightLabels.BandTone("car", "unknown", "car"),
-                    "an unresolved moment leaves the band unresolved");
+                    "an unestablished moment leaves the band unresolved");
 
                 // Three real records spanning the range the card must survive.
                 GuidanceSnapshot dogBox = database.Match(
@@ -517,6 +517,24 @@ namespace AsDriven.Core.Tests
                 Equal("you", mixed.DownshiftTone, "the Camaro downshift blip is the driver's");
                 Equal("you", mixed.UseBandTone,
                     "a mixed band still reads as the driver's, while its upshift cell does not");
+
+                // "optional" is a settled answer, not a gap. Colouring it grey
+                // would say the evidence is missing when the record states it.
+                Equal("optional", PreflightLabels.DownshiftTone("optional"),
+                    "an optional blip has its own tone");
+                Equal("unknown", PreflightLabels.DownshiftTone("unknown"),
+                    "only an unestablished blip reads as unknown");
+                Equal("car", PreflightLabels.BandTone("car", "car", "optional"),
+                    "a band whose only outstanding item is optional demands nothing");
+                Equal("unknown", PreflightLabels.BandTone("car", "car", "unknown"),
+                    "an unestablished moment leaves the band unresolved");
+                GuidanceSnapshot chevette = database.Match("Automobilista2", "Chevrolet Chevette");
+                if (chevette.HasMatch)
+                {
+                    Equal("Blip optional", chevette.DownshiftLabel, "Chevette downshift wording");
+                    Equal("optional", chevette.DownshiftTone, "Chevette downshift tone");
+                }
+
 
                 GuidanceSnapshot wrongCase = database.Match("Automobilista2", "dallara f301");
                 False(wrongCase.HasMatch, "matching is case-sensitive and exact");

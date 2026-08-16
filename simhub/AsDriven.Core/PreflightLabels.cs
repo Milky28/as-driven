@@ -15,6 +15,10 @@ namespace AsDriven.Core
     {
         public const string ToneDriver = "you";
         public const string ToneCar = "car";
+        /// <summary>Established, and the driver's choice. Distinct from
+        /// <see cref="ToneUnknown"/>: an optional blip is a decided fact, not a
+        /// gap in the evidence, and must not be shown as though it were.</summary>
+        public const string ToneOptional = "optional";
         public const string ToneUnknown = "unknown";
 
         public static string WheelRim(string shape)
@@ -142,6 +146,7 @@ namespace AsDriven.Core
             switch (manualBlip)
             {
                 case "required": return ToneDriver;
+                case "optional": return ToneOptional;
                 case "not-required":
                 case "not-applicable": return ToneCar;
                 default: return ToneUnknown;
@@ -159,11 +164,14 @@ namespace AsDriven.Core
             {
                 return ToneDriver;
             }
-            if (launchTone == ToneCar && upshiftTone == ToneCar && downshiftTone == ToneCar)
+            if (launchTone == ToneUnknown || upshiftTone == ToneUnknown
+                || downshiftTone == ToneUnknown)
             {
-                return ToneCar;
+                return ToneUnknown;
             }
-            return ToneUnknown;
+            // Optional actions are not demanded of the driver, so a band whose
+            // only outstanding item is optional still reads as handled.
+            return ToneCar;
         }
     }
 }

@@ -7,7 +7,10 @@
     "manufacturer": "Spyker",
     "model": "C8 Spyder GT2-R",
     "variant": "AMS2 2005 GT2 representation",
-    "year": { "from": 2005, "label": "2005 GT2-R" },
+    "year": {
+      "from": 2005,
+      "label": "2005 GT2-R"
+    },
     "class": "GT2 2005",
     "real_world_identity_notes": "Opened secondary sources conflict between five-speed manual and six-speed sequential descriptions. Exact AMS2 testing resolves the modeled car to a six-speed sequential stick without paddles without claiming that every historical chassis matched it."
   },
@@ -17,11 +20,30 @@
       "gearbox_type": "sequential",
       "shift_actuation": "sequential-stick",
       "shift_pattern": "sequential",
-      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
-      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "required", "automatic_blip": "no" },
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
       "standing_start_clutch": "required"
     },
-    "steering": { "wheel_rim": { "shape": "round", "diameter_mm": null, "source_label": "live-cockpit-round-no-display", "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown." } },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-round-no-display",
+        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+      }
+    },
     "notes": [
       "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
       "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
@@ -29,39 +51,92 @@
       "The six modeled gears resolve the conflicting opened sources only for this exact AMS2 representation."
     ]
   },
-  "simulators": [{
-    "simulator": "ams2",
-    "identities": [{ "kind": "telemetry-name", "value": "Spyker C8 Spyder GT2-R" }, { "kind": "class-id", "value": "GT2_05" }],
-    "behavior": {
-      "shift_type": "Seq-Stick", "auto_blip": "no", "shift_cut": "yes",
-      "wheel_rim_type": { "normalized": "round", "source_label": "live-cockpit-round-no-display" },
-      "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Six modeled gears, standing-start clutch, sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."]
-    },
-    "overrides": [],
-    "verified_game_version": "1.6.9.91",
-    "verified_at": "2026-08-11",
-    "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "racecarsdirect.spyker-c8-gt2r.046", "ultimatecarpage.spyker-c8-spyder-gt2r", "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"],
-    "confidence": { "level": "verified", "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested. Conflicting historical sources remain explicit and are not generalized beyond the modeled car." }
-  }],
-  "provenance": { "claims": [
+  "simulators": [
     {
-      "paths": ["/identity", "/simulators/0/identities"],
-      "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
-    },
-    {
-      "paths": ["/identity/real_world_identity_notes", "/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
-      "source_refs": ["racecarsdirect.spyker-c8-gt2r.046", "ultimatecarpage.spyker-c8-spyder-gt2r", "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "The record preserves the historical source conflict while direct testing resolves the exact modeled car to six-speed sequential-stick operation."
-    },
-    {
-      "paths": ["/authentic_controls/transmission/upshift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"],
-      "source_refs": ["ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Direct current-game tests and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Spyker C8 Spyder GT2-R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT2_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "source_label": "live-cockpit-round-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Six modeled gears, standing-start clutch, sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+        "racecarsdirect.spyker-c8-gt2r.046",
+        "ultimatecarpage.spyker-c8-spyder-gt2r",
+        "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested. Conflicting historical sources remain explicit and are not generalized beyond the modeled car."
+      }
     }
-  ] },
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+          "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
+      },
+      {
+        "paths": [
+          "/identity/real_world_identity_notes",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "racecarsdirect.spyker-c8-gt2r.046",
+          "ultimatecarpage.spyker-c8-spyder-gt2r",
+          "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The record preserves the historical source conflict while direct testing resolves the exact modeled car to six-speed sequential-stick operation."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      }
+    ]
+  },
   "updated_at": "2026-08-11"
 }

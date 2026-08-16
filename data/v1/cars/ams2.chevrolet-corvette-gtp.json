@@ -158,6 +158,7 @@
       }
     ]
   },
+  "driver_summary": "Dog box - rev-match every downshift. The dog rings engage on matched revs and there are no synchros to smooth over a lazy blip.",
   "notes": [
     "'Chevrolet Corvette GTP - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],

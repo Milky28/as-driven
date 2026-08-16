@@ -7,7 +7,10 @@
     "manufacturer": "Lister",
     "model": "Storm GTM",
     "variant": "AMS2 2005 GT1 representation",
-    "year": { "from": 2000, "label": "late-period Storm GTM" },
+    "year": {
+      "from": 2000,
+      "label": "late-period Storm GTM"
+    },
     "class": "GT1 2005",
     "real_world_identity_notes": "FIA material establishes six manual ratios for the Storm family, and a documented Storm GTM uses a Hewland TGTA six-speed sequential push-pull lever. AMS2 visibly models the sequential lever without paddles."
   },
@@ -52,15 +55,27 @@
     {
       "simulator": "ams2",
       "identities": [
-        { "kind": "telemetry-name", "value": "Lister Storm GTM" },
-        { "kind": "class-id", "value": "GT1_05" }
+        {
+          "kind": "telemetry-name",
+          "value": "Lister Storm GTM"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1_05"
+        }
       ],
       "behavior": {
         "shift_type": "Seq-Stick",
         "auto_blip": "no",
         "shift_cut": "yes",
-        "wheel_rim_type": { "normalized": "d-shaped", "source_label": "live-cockpit-d-shaped-no-display" },
-        "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Standing-start clutch, six-speed sequential stick, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed."]
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "source_label": "live-cockpit-d-shaped-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Standing-start clutch, six-speed sequential stick, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed."
+        ]
       },
       "overrides": [],
       "verified_game_version": "1.6.9.91",
@@ -71,14 +86,23 @@
         "custodian.lister-storm-gtm.2000",
         "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
       ],
-      "confidence": { "level": "verified", "basis": "Exact simulator identity and behavior were directly tested; FIA and specialist chassis evidence independently support the six-speed sequential-stick hardware family. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip downshift behavior." }
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity and behavior were directly tested; FIA and specialist chassis evidence independently support the six-speed sequential-stick hardware family. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip downshift behavior."
+      }
     }
   ],
   "provenance": {
     "claims": [
       {
-        "paths": ["/identity", "/simulators/0/identities"],
-        "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"],
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+          "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+        ],
         "confidence": "verified",
         "basis": "Official release plus exact live CarModel and GT1_05 class observation."
       },
@@ -89,7 +113,11 @@
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
-        "source_refs": ["fia.lister-storm.gt-008", "custodian.lister-storm-gtm.2000", "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"],
+        "source_refs": [
+          "fia.lister-storm.gt-008",
+          "custodian.lister-storm-gtm.2000",
+          "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+        ],
         "confidence": "high",
         "basis": "Historical sources and direct observation agree on six-speed sequential lever hardware, while the exact chassis mapping remains qualified."
       },
@@ -101,7 +129,9 @@
           "/simulators/0/behavior",
           "/authentic_controls/steering/wheel_rim"
         ],
-        "source_refs": ["ams2.local-live-lister-storm-gtm-controls.1.6.9.91"],
+        "source_refs": [
+          "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+        ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
       }

@@ -7,7 +7,10 @@
     "manufacturer": "TVR",
     "model": "Tuscan T400R",
     "variant": "AMS2 2005 GT2 representation",
-    "year": { "from": 2004, "label": "T400R GT2-era representation" },
+    "year": {
+      "from": 2004,
+      "label": "T400R GT2-era representation"
+    },
     "class": "GT2 2005",
     "real_world_identity_notes": "TVR's period press kit connects the T400R family to Le Mans and describes a six-speed sequential gearbox. Exact AMS2 cockpit inspection confirms a sequential stick without paddles for the modeled GT2 car."
   },
@@ -17,11 +20,30 @@
       "gearbox_type": "sequential",
       "shift_actuation": "sequential-stick",
       "shift_pattern": "sequential",
-      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
-      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "required", "automatic_blip": "no" },
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
       "standing_start_clutch": "required"
     },
-    "steering": { "wheel_rim": { "shape": "round", "diameter_mm": null, "source_label": "live-cockpit-round-no-display", "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown." } },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-round-no-display",
+        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+      }
+    },
     "notes": [
       "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
       "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
@@ -29,39 +51,89 @@
       "The manufacturer source establishes family-level transmission context, not every exact race-chassis technique detail."
     ]
   },
-  "simulators": [{
-    "simulator": "ams2",
-    "identities": [{ "kind": "telemetry-name", "value": "TVR Tuscan T400R GT2" }, { "kind": "class-id", "value": "GT2_05" }],
-    "behavior": {
-      "shift_type": "Seq-Stick", "auto_blip": "no", "shift_cut": "yes",
-      "wheel_rim_type": { "normalized": "round", "source_label": "live-cockpit-round-no-display" },
-      "notes": ["Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.", "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."]
-    },
-    "overrides": [],
-    "verified_game_version": "1.6.9.91",
-    "verified_at": "2026-08-11",
-    "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "tvr.press-kit.2004-t400r", "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"],
-    "confidence": { "level": "verified", "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested; period manufacturer evidence independently supports the six-speed sequential family." }
-  }],
-  "provenance": { "claims": [
+  "simulators": [
     {
-      "paths": ["/identity", "/simulators/0/identities"],
-      "source_refs": ["ams2.reiza-release.1.6.9.9.historical-endurance-pt2", "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
-    },
-    {
-      "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
-      "source_refs": ["tvr.press-kit.2004-t400r", "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Period manufacturer family evidence and direct exercise of the modeled six-speed sequential stick agree."
-    },
-    {
-      "paths": ["/authentic_controls/transmission/upshift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim", "/simulators/0/behavior"],
-      "source_refs": ["ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Direct current-game tests and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "TVR Tuscan T400R GT2"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT2_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "source_label": "live-cockpit-round-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+        "tvr.press-kit.2004-t400r",
+        "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested; period manufacturer evidence independently supports the six-speed sequential family."
+      }
     }
-  ] },
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+          "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "tvr.press-kit.2004-t400r",
+          "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Period manufacturer family evidence and direct exercise of the modeled six-speed sequential stick agree."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      }
+    ]
+  },
   "updated_at": "2026-08-11"
 }
