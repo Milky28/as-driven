@@ -15,6 +15,49 @@ class ValidationTests(unittest.TestCase):
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repository(ROOT), [])
 
+    def test_driver_summary_never_outruns_the_record_it_describes(self) -> None:
+        """A summary may not assert what its own record calls an inference.
+
+        The summary is the only free prose the overlay shows, so it is the one
+        place an inference can quietly become a fact in front of a driver. Ten
+        records once said "the dog rings engage on matched revs" while their
+        notes said that construction was inferred from Hewland's design
+        approach rather than stated by any source.
+        """
+        import re
+
+        asserts_mechanism = re.compile(
+            r"(the dog rings engage|^synchronised gearbox\.)", re.IGNORECASE
+        )
+        notes_hedge = re.compile(
+            r"(construction is inferred"
+            r"|inferred from .{0,40}design approach"
+            r"|rather than stated by (the|a) (reviewed )?source"
+            r"|is the ordinary reading of)",
+            re.IGNORECASE,
+        )
+        offenders = []
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            summary = record.get("driver_summary") or ""
+            if not summary:
+                continue
+            notes = " ".join(record["authentic_controls"].get("notes") or [])
+            if asserts_mechanism.search(summary) and notes_hedge.search(notes):
+                offenders.append(record["record_id"])
+        self.assertEqual([], offenders)
+
+    def test_driver_summary_stays_within_the_length_the_card_can_draw(self) -> None:
+        # The overlay draws three pre-broken lines; beyond that the last one
+        # ellipsises, which loses the reason the summary exists to give.
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            summary = record.get("driver_summary")
+            if summary is None:
+                continue
+            self.assertLessEqual(len(summary), 300, record["record_id"])
+            self.assertEqual(summary, summary.strip(), record["record_id"])
+
     def test_json_pointer_resolution(self) -> None:
         document = {"simulators": [{"behavior": {"shift_cut": "yes"}}]}
         self.assertTrue(_resolve_pointer(document, "/simulators/0/behavior/shift_cut"))

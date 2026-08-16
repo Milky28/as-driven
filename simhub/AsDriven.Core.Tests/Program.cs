@@ -534,6 +534,14 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot dogBoxNote = database.Match("Automobilista2", "Brabham BT44");
                 True(dogBoxNote.HasMatch, "matches the Brabham BT44");
                 True(dogBoxNote.DriverSummary.Length > 90, "the dog box summary is long enough to wrap");
+                // The BT44's record calls its dog-ring construction inferred rather
+                // than sourced, so the summary the driver reads must hedge with it.
+                // A summary firmer than its own evidence is the failure this
+                // whole layer exists to avoid.
+                True(dogBoxNote.DriverSummary.IndexOf("inferred", StringComparison.Ordinal) >= 0,
+                    "an inferred mechanism is labelled as inference on the card");
+                False(dogBoxNote.DriverSummary.IndexOf("The dog rings engage", StringComparison.Ordinal) >= 0,
+                    "and is never asserted as settled fact");
                 True(dogBoxNote.DriverSummaryLine2.Length > 0, "it wraps onto a second line");
                 Equal(dogBoxNote.DriverSummary.Replace("  ", " "),
                     (dogBoxNote.DriverSummaryLine1 + " " + dogBoxNote.DriverSummaryLine2 + " "
