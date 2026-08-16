@@ -2,7 +2,9 @@
 
 The wheel-rim vocabulary was defined in dataset 0.3.55, after most records had already been curated. Until then the enum mixed two axes: `round`, `d-shaped` and `yoke` describe a rim's outline, while `gt-style`, `prototype` and `formula` described the kind of car. Most rims satisfy one of each, so both answers were always defensible and the recorded values drifted.
 
-`docs/data-model.md` now defines shape by outline alone. This file lists the records whose recorded values cannot be reconciled with those definitions. Nothing here has been corrected by inference: a rim that was not looked at again is not re-described.
+`docs/data-model.md` now defines shape by the rim itself. This file lists the records whose recorded values cannot be reconciled with those definitions. Nothing here has been corrected by inference: a rim that was not looked at again is not re-described.
+
+One caveat applies to every record, not only those listed below. The definitions ask first whether a rim is a control-panel rim (molded grips at 9 and 3, hands fixed) or a conventional one (a continuous band gripped anywhere). That question was never put to a reviewer before these definitions existed, so the boundary between `gt-style`, `d-shaped` and `round` was drawn without it throughout. No curated record is currently on the wrong side of it - nothing older than 2001 sits in `gt-style` - but the distinction is untested rather than confirmed.
 
 ## Already resolved
 

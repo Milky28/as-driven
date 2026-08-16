@@ -150,13 +150,23 @@
           "required": ["shape", "source_label"],
           "properties": {
             "shape": {
+              "description": "Rim shape, decided by the rim itself; the car's racing class never enters into it. First decide how the hands use it: a control-panel rim has molded grips at about 9 and 3 with a control face between them and the hands stay put, while a conventional rim is a continuous band you can grip anywhere. Then take the first that matches: yoke (two separate grips with nothing connecting them), formula (a control-panel rim open across the top, with no material joining the grips over the top), gt-style (a control-panel rim with a closed perimeter, usually flattened top and bottom), d-shaped (a conventional rim flattened at the bottom, the top, or both), round (a conventional continuous circle). A closed perimeter is not a grippable one: a GT rim has the same molded grips a formula rim has, and only the material over the top separates them. Use other when none match and unknown when the rim was not seen. prototype is deprecated: it named a racing category rather than a rim and covered the same closed control-panel form as gt-style. It stays in the enum so existing records remain valid, but must not be used for new records.",
               "type": "string",
               "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
             "diameter_mm": { "type": ["integer", "null"], "minimum": 150, "maximum": 600 },
-            "integrated_display": { "$ref": "#/$defs/state" },
-            "shift_lights": { "$ref": "#/$defs/state" },
-            "open_top": { "$ref": "#/$defs/state" },
+            "integrated_display": {
+              "description": "Whether the rim itself carries a readout: a graphical LCD, an LED numeric gear indicator, or a segment display all count. A dash mounted on the car rather than the rim does not, and shift lights alone do not.",
+              "$ref": "#/$defs/state"
+            },
+            "shift_lights": {
+              "description": "Whether the rim carries shift or rev lights, recorded independently of integrated_display.",
+              "$ref": "#/$defs/state"
+            },
+            "open_top": {
+              "description": "Whether rim material joins the grips over the top of the rim. It asks about material, not about where the rim is held: a formula rim is yes, a yoke is always yes, and a gt-style, d-shaped or round rim is no.",
+              "$ref": "#/$defs/state"
+            },
             "source_label": { "type": "string" },
             "notes": { "type": "string" }
           }
@@ -200,7 +210,7 @@
           "required": ["normalized", "source_label"],
           "properties": {
             "normalized": {
-              "description": "Rim outline, decided by shape alone; the car's racing class never enters into it. Take the first that matches: yoke (two separate grips with nothing connecting them), formula (no rim across the top, grips at about 9 and 3), gt-style (closed rim flattened at both top and bottom), d-shaped (closed rim flattened at the bottom only), round (a continuous circle). Use other when none match and unknown when the rim was not seen. prototype is deprecated: it named a category rather than an outline and covered the same form as gt-style. It stays in the enum so existing records remain valid, but must not be used for new records.",
+              "description": "Rim shape, decided by the rim itself; the car's racing class never enters into it. First decide how the hands use it: a control-panel rim has molded grips at about 9 and 3 with a control face between them and the hands stay put, while a conventional rim is a continuous band you can grip anywhere. Then take the first that matches: yoke (two separate grips with nothing connecting them), formula (a control-panel rim open across the top, with no material joining the grips over the top), gt-style (a control-panel rim with a closed perimeter, usually flattened top and bottom), d-shaped (a conventional rim flattened at the bottom, the top, or both), round (a conventional continuous circle). A closed perimeter is not a grippable one: a GT rim has the same molded grips a formula rim has, and only the material over the top separates them. Use other when none match and unknown when the rim was not seen. prototype is deprecated: it named a racing category rather than a rim and covered the same closed control-panel form as gt-style. It stays in the enum so existing records remain valid, but must not be used for new records.",
               "type": "string",
               "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
@@ -213,7 +223,7 @@
               "$ref": "#/$defs/state"
             },
             "open_top": {
-              "description": "Whether the rim is open across the top. A modifier that applies to any shape: a formula rim is yes, a gt-style or d-shaped rim is no, and a yoke is always yes.",
+              "description": "Whether rim material joins the grips over the top of the rim. It asks about material, not about where the rim is held: a formula rim is yes, a yoke is always yes, and a gt-style, d-shaped or round rim is no.",
               "$ref": "#/$defs/state"
             },
             "source_label": { "type": "string" }

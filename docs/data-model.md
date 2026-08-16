@@ -30,26 +30,45 @@ wait for an acceptable engine speed.
 
 ### Wheel-rim shape
 
-Shape is decided **by the rim's outline alone**. The car's racing class never
-enters into it, because the question the field answers is which rim a driver
-should fit, not what the car is entered as. A 1967 single-seater with a plain
-circular wooden rim is `round`, not `formula`.
+Shape is decided **by the rim itself**, never by the car's racing class. The
+question the field answers is which rim a driver should fit, not what the car is
+entered as, so a 1967 single-seater with a plain circular wooden rim is `round`,
+not `formula`.
+
+The first question is how your hands use the rim, because that decides which
+family of hardware you would fit:
+
+- A **control-panel rim** has molded grips at roughly 9 and 3 with a control
+  face between them. Your hands stay where they are put. Modern formula and GT
+  rims are both this.
+- A **conventional rim** is a continuous band you can grip anywhere and slide
+  your hands around, whatever its outline.
 
 Take the first value that matches:
 
 1. `yoke` — two separate grips with nothing connecting them, neither across the
    top nor across the middle.
-2. `formula` — no rim material across the top, with grips at roughly 9 and 3.
-   The bottom may be closed.
-3. `gt-style` — a closed rim flattened at **both** the top and the bottom.
-4. `d-shaped` — a closed rim flattened at the bottom only, with a round top.
-5. `round` — a continuous circle.
+2. `formula` — a control-panel rim that is **open across the top**: no rim
+   material joins the two grips over the top.
+3. `gt-style` — a control-panel rim with a **closed perimeter**, usually
+   flattened at the top and the bottom.
+4. `d-shaped` — a conventional rim flattened at the bottom, the top, or both.
+5. `round` — a conventional rim that is a continuous circle.
 
 Use `other` for a rim that genuinely matches none of these, and `unknown` when
-the rim was not seen. `prototype` is **deprecated**: it described a category
-rather than an outline, and the rims it covered are the same flat-top,
-flat-bottom form as `gt-style`. It remains in the enum so existing records and
-drafts stay valid, but new records must not use it.
+the rim was not seen.
+
+A closed perimeter is not a grippable one. A GT rim carries molded grips at 9
+and 3 exactly as a formula rim does; what separates them is only whether rim
+material arcs over the top, not where you would hold it. Equally, an older road
+or touring wheel with its top and bottom flattened is a conventional rim and is
+recorded `d-shaped`, not `gt-style`, because you still grip it all the way
+around.
+
+`prototype` is **deprecated**: it described a racing category rather than a rim,
+and the rims it covered are the same closed control-panel form as `gt-style`. It
+remains in the enum so existing records and drafts stay valid, but new records
+must not use it.
 
 Shape is separate from the optional `integrated_display`, `shift_lights`, and
 `open_top` fields, so any shape may be recorded with or without each of them.
