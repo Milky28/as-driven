@@ -163,6 +163,20 @@ namespace AsDriven.Plugin
             get { return _databaseRecordCount; }
         }
 
+        /// <summary>
+        /// The simulators the installed dataset covers, so the settings page can
+        /// answer "will this work in my game?" before the game is started.
+        /// </summary>
+        internal SimulatorCoverage[] SupportedSimulators
+        {
+            get
+            {
+                return _database == null
+                    ? new SimulatorCoverage[0]
+                    : _database.Simulators;
+            }
+        }
+
         internal bool CanShowPopup
         {
             get

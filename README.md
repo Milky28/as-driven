@@ -31,6 +31,12 @@ electronics, and handbrake construction are intentionally outside the MVP.
 Importers select only relevant source columns rather than mirroring a general
 car spreadsheet.
 
+The format is simulator-independent, but a released dataset only covers the
+simulators it carries records for. That list is derived from the records
+themselves rather than declared, so the SimHub client can show it on its
+settings page and report an uncovered game plainly instead of reporting every
+car in it as unmatched. Automobilista 2 is the only covered simulator today.
+
 ## Repository layout
 
 ```text

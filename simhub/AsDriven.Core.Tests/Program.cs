@@ -420,6 +420,33 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot unsupported = database.Match("Other Simulator", "Dallara F301");
                 Equal("unsupported-game", unsupported.MatchStatus, "gates by simulator");
 
+                // The supported list is what the settings page shows before a
+                // game is started, so it must come from the loaded records. A
+                // simulator the matcher knows by name but has no data for is
+                // not supported, and must say so instead of reporting every car
+                // as unmatched.
+                True(database.Simulators.Length > 0, "reports at least one supported simulator");
+                foreach (SimulatorCoverage coverage in database.Simulators)
+                {
+                    True(coverage.RecordCount > 0,
+                        "only lists a simulator that carries records: " + coverage.Id);
+                    True(!string.IsNullOrEmpty(coverage.DisplayName),
+                        "names the simulator for display: " + coverage.Id);
+                }
+                Equal("ams2", database.Simulators[0].Id, "lists the best-covered simulator first");
+                Equal("Automobilista 2", database.Simulators[0].DisplayName,
+                    "shows the product name rather than the SimHub game name");
+                Equal(database.RecordCount, database.Simulators[0].RecordCount,
+                    "the single curated simulator accounts for every record");
+                True(database.Supports("Automobilista2"), "supports the curated simulator");
+                True(database.Supports("AMS2"), "supports the curated simulator by short name");
+                False(database.Supports("Other Simulator"), "does not support an unknown game");
+                False(database.Supports("iRacing"),
+                    "a recognized name without records is not supported");
+                Equal("unsupported-game",
+                    database.Match("iRacing", "Dallara F301").MatchStatus,
+                    "a recognized game with no records reports unsupported, never unmatched");
+
                 var session = new SessionState(database);
                 True(session.Update(true, "Automobilista2", "Dallara F301"), "detects first identity");
                 Equal(1, session.Current.PopupRevision, "increments popup revision for a match");

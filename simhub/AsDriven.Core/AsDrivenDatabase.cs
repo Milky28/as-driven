@@ -26,7 +26,8 @@ namespace AsDriven.Core
             int recordCount,
             Dictionary<string, MatchEntry> identities,
             Dictionary<string, MatchEntry> records,
-            CarCatalogEntry[] cars)
+            CarCatalogEntry[] cars,
+            SimulatorCoverage[] simulators)
         {
             DataDirectory = dataDirectory;
             DatasetVersion = datasetVersion;
@@ -34,12 +35,19 @@ namespace AsDriven.Core
             _identities = identities;
             _records = records;
             Cars = cars;
+            Simulators = simulators;
         }
 
         public string DataDirectory { get; private set; }
         public string DatasetVersion { get; private set; }
         public int RecordCount { get; private set; }
         public CarCatalogEntry[] Cars { get; private set; }
+
+        /// <summary>
+        /// The simulators this installed dataset can actually answer for, most
+        /// covered first. Derived from the loaded records, never declared.
+        /// </summary>
+        public SimulatorCoverage[] Simulators { get; private set; }
 
         public static AsDrivenDatabase Load(string dataDirectory)
         {
@@ -95,13 +103,50 @@ namespace AsDriven.Core
                 recordCount,
                 identities,
                 recordsBySimulator,
-                cars.ToArray());
+                cars.ToArray(),
+                SummarizeSimulators(cars));
+        }
+
+        /// <summary>
+        /// Counts the curated records per simulator so the plugin can tell the
+        /// user which games are covered before they start one.
+        /// </summary>
+        private static SimulatorCoverage[] SummarizeSimulators(List<CarCatalogEntry> cars)
+        {
+            var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+            foreach (CarCatalogEntry car in cars)
+            {
+                int existing;
+                counts.TryGetValue(car.Simulator, out existing);
+                counts[car.Simulator] = existing + 1;
+            }
+
+            var coverage = new List<SimulatorCoverage>();
+            foreach (KeyValuePair<string, int> pair in counts)
+            {
+                coverage.Add(new SimulatorCoverage(
+                    pair.Key, SimulatorProductName(pair.Key), pair.Value));
+            }
+
+            coverage.Sort(delegate(SimulatorCoverage left, SimulatorCoverage right)
+            {
+                int byCount = right.RecordCount.CompareTo(left.RecordCount);
+                return byCount != 0
+                    ? byCount
+                    : string.Compare(
+                        left.DisplayName, right.DisplayName, StringComparison.OrdinalIgnoreCase);
+            });
+            return coverage.ToArray();
         }
 
         public GuidanceSnapshot Match(string rawGameName, string rawCarIdentifier)
         {
             string simulator = CanonicalizeSimulator(rawGameName);
-            if (simulator == null)
+            // A name the matcher recognizes is not the same as a game this
+            // dataset can answer for. Without the record check, a simulator with
+            // no curated cars reports every car as unmatched instead of saying
+            // plainly that the game is not covered yet.
+            if (simulator == null || !IsCovered(simulator))
             {
                 return GuidanceSnapshot.Empty(
                     "unsupported-game", rawGameName, rawCarIdentifier, DatasetVersion);
@@ -143,6 +188,29 @@ namespace AsDriven.Core
                 SimulatorDisplayName(simulator),
                 entry.DisplayName,
                 "preview");
+        }
+
+        /// <summary>
+        /// True when the installed dataset carries at least one record for the
+        /// SimHub game name, so the plugin can answer "will this work?" without
+        /// the user starting the game.
+        /// </summary>
+        public bool Supports(string rawGameName)
+        {
+            string simulator = CanonicalizeSimulator(rawGameName);
+            return simulator != null && IsCovered(simulator);
+        }
+
+        private bool IsCovered(string simulator)
+        {
+            foreach (SimulatorCoverage entry in Simulators)
+            {
+                if (string.Equals(entry.Id, simulator, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static string CanonicalizeSimulator(string gameName)
@@ -595,11 +663,29 @@ namespace AsDriven.Core
             return simulator + "\u001f" + recordId;
         }
 
+        /// <summary>
+        /// The SimHub game name for a simulator. Matching and preview snapshots
+        /// depend on this exact spelling; use <see cref="SimulatorProductName"/>
+        /// for anything shown to the user.
+        /// </summary>
         private static string SimulatorDisplayName(string simulator)
         {
             switch (simulator)
             {
                 case "ams2": return "Automobilista2";
+                case "iracing": return "iRacing";
+                default: return simulator;
+            }
+        }
+
+        /// <summary>
+        /// The simulator's real product name, for display only.
+        /// </summary>
+        private static string SimulatorProductName(string simulator)
+        {
+            switch (simulator)
+            {
+                case "ams2": return "Automobilista 2";
                 case "iracing": return "iRacing";
                 default: return simulator;
             }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -29,6 +30,7 @@ namespace AsDriven.Plugin
         private TextBlock _contributionFeedback;
         private TextBlock _advancedFeedback;
         private TextBlock _installedDatasetStatus;
+        private TextBlock _supportedSimulators;
         private VerificationControl _verification;
         private Button _contributeLiveButton;
         private Button _showPopupButton;
@@ -152,6 +154,24 @@ namespace AsDriven.Plugin
             panel.Children.Add(actionRow);
             _overlayFeedback = CreateFeedbackText(new Thickness(0, 0, 0, 22));
             panel.Children.Add(_overlayFeedback);
+
+            AddSectionHeading(panel, "Supported simulators");
+            panel.Children.Add(new TextBlock
+            {
+                Text = "As Driven only shows guidance for the simulators the installed dataset covers. In any other game the plugin stays quiet rather than guessing.",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 10),
+                MaxWidth = 720,
+            });
+            _supportedSimulators = new TextBlock
+            {
+                FontSize = 15,
+                FontWeight = FontWeights.SemiBold,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(0, 0, 0, 22),
+                MaxWidth = 720,
+            };
+            panel.Children.Add(_supportedSimulators);
 
             AddSectionHeading(panel, "Popup behavior");
             panel.Children.Add(new TextBlock
@@ -497,6 +517,10 @@ namespace AsDriven.Plugin
                 _liveStatus.Text = "Unmatched car: "
                     + (string.IsNullOrWhiteSpace(car) ? "Unknown" : car);
             }
+            else if (state == "unsupported-game")
+            {
+                _liveStatus.Text = "Not a supported simulator - the installed dataset has no records for this game";
+            }
             else if (state == "game-not-running" || state == "no-car" || state == "no-data")
             {
                 _liveStatus.Text = "Waiting for car telemetry";
@@ -515,6 +539,10 @@ namespace AsDriven.Plugin
                 _installedDatasetStatus.Text = "Dataset "
                     + EmptyAsUnknown(_plugin.CurrentDatasetVersion)
                     + "  /  " + _plugin.DatabaseRecordCount + " car records";
+            }
+            if (_supportedSimulators != null)
+            {
+                _supportedSimulators.Text = DescribeSupportedSimulators();
             }
             _recordStatus.Text = string.IsNullOrWhiteSpace(_plugin.LiveRecordId)
                 ? string.Empty
@@ -560,6 +588,27 @@ namespace AsDriven.Plugin
         private static string EmptyAsUnknown(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "unknown" : value;
+        }
+
+        /// <summary>
+        /// Lists the simulators the installed dataset covers, one per line, with
+        /// the number of curated cars behind each. The list comes from the
+        /// loaded records, so it stays honest when a dataset is swapped.
+        /// </summary>
+        private string DescribeSupportedSimulators()
+        {
+            SimulatorCoverage[] simulators = _plugin.SupportedSimulators;
+            if (simulators.Length == 0)
+            {
+                return "No dataset is loaded, so no simulator is covered right now.";
+            }
+
+            var lines = new List<string>();
+            foreach (SimulatorCoverage simulator in simulators)
+            {
+                lines.Add(simulator.DisplayLabel);
+            }
+            return string.Join(Environment.NewLine, lines.ToArray());
         }
 
         private void ShowPopupClicked(object sender, RoutedEventArgs eventArgs)
