@@ -87,6 +87,7 @@ namespace AsDriven.Core
                 recordCount++;
             }
 
+            ResolveBrowserNames(cars);
             cars.Sort(delegate(CarCatalogEntry left, CarCatalogEntry right)
             {
                 int nameOrder = string.Compare(
@@ -105,6 +106,29 @@ namespace AsDriven.Core
                 recordsBySimulator,
                 cars.ToArray(),
                 SummarizeSimulators(cars));
+        }
+
+        /// <summary>
+        /// Decides which catalog entries have to keep their aero package.
+        /// Only those whose name and class would otherwise collide with another
+        /// entry do; for the rest the package is repetition, and the browser
+        /// list reads as a list of cars rather than of configurations.
+        /// </summary>
+        private static void ResolveBrowserNames(List<CarCatalogEntry> cars)
+        {
+            var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            foreach (CarCatalogEntry car in cars)
+            {
+                string key = PreflightLabels.BaseName(car.DisplayName) + "" + car.CarClass;
+                int seen;
+                counts.TryGetValue(key, out seen);
+                counts[key] = seen + 1;
+            }
+            foreach (CarCatalogEntry car in cars)
+            {
+                string key = PreflightLabels.BaseName(car.DisplayName) + "" + car.CarClass;
+                car.ShowAeroPackage = counts[key] > 1;
+            }
         }
 
         /// <summary>

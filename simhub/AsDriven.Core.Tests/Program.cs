@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using AsDriven.Core;
@@ -76,6 +77,41 @@ namespace AsDriven.Core.Tests
                 True(viper.TechniqueSummaryLine1.Length > 0, "provides a detailed technique first line");
                 True(viper.TechniqueSummaryCompactLine1.Length > 0, "provides a compact technique first line");
                 AssertOverlayTextFits(viper, "Viper overlay text");
+
+                // The browser lists cars, not configurations. AMS2 appends an
+                // aero package to 60 curated names, and repeating it down the
+                // list says nothing while pushing the car's own name along.
+                int packagesShown = 0;
+                var browserLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                foreach (CarCatalogEntry entry in database.Cars)
+                {
+                    if (entry.ShowAeroPackage) { packagesShown++; }
+                    // Whatever it decides, no two entries may read the same.
+                    False(browserLabels.ContainsKey(entry.DisplayLabel),
+                        "browser labels stay distinct: " + entry.DisplayLabel);
+                    browserLabels[entry.DisplayLabel] = entry.RecordId;
+                    // A package is kept only to break a tie, never by default.
+                    if (entry.ShowAeroPackage)
+                    {
+                        True(PreflightLabels.AeroPackage(entry.DisplayName).Length > 0,
+                            "only a car with a package can be asked to show one: " + entry.RecordId);
+                    }
+                }
+                Equal(0, packagesShown,
+                    "no curated car currently needs its package to stay distinct");
+                GuidanceSnapshot mp412 = database.Match(
+                    "Automobilista2", "McLaren Mercedes MP4/12 - High Downforce");
+                if (mp412.HasMatch)
+                {
+                    CarCatalogEntry browsed = null;
+                    foreach (CarCatalogEntry entry in database.Cars)
+                    {
+                        if (entry.RecordId == mp412.RecordId) { browsed = entry; }
+                    }
+                    True(browsed != null, "the MP4/12 appears in the browser");
+                    Equal("McLaren Mercedes MP4/12", browsed.BrowserName,
+                        "the browser drops a package it does not need");
+                }
 
                 foreach (CarCatalogEntry catalogEntry in database.Cars)
                 {
