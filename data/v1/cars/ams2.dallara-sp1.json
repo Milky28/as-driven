@@ -40,6 +40,7 @@
       "wheel_rim": {
         "shape": "gt-formula",
         "diameter_mm": null,
+        "integrated_display": "yes",
         "source_label": "live-cockpit-observation",
         "notes": "Direct cockpit inspection showed a GT/Formula rim with an integrated display; exact diameter remains unknown."
       }

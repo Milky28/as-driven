@@ -396,11 +396,15 @@ class SimHubDashTests(unittest.TestCase):
                 for value in walk(dashboard)
                 if isinstance(value, dict) and "Name" in value
             }
-            self.assertIn(
-                "AsDriven.DriverSummary",
-                named["NoteText"]["Bindings"]["Text"]["Formula"]["Expression"],
-                variant,
-            )
+            prefix = "DriverSummary" if variant == "detailed" else "DriverSummaryCompact"
+            # Dashboard text items do not wrap, so the summary is drawn as three
+            # pre-broken lines rather than one item that would clip.
+            for index in (1, 2, 3):
+                self.assertEqual(
+                    f"[AsDriven.{prefix}Line{index}]",
+                    named[f"NoteLine{index}"]["Bindings"]["Text"]["Formula"]["Expression"],
+                    variant,
+                )
             # The whole group hides when there is nothing to say, so a record
             # without a summary ends after the Use band instead of reserving an
             # empty panel.
@@ -411,6 +415,29 @@ class SimHubDashTests(unittest.TestCase):
             )
             self.assertEqual("note-info", named["NoteIcon"]["Image"], variant)
 
+    def test_rows_mark_where_the_simulator_departs_from_the_real_car(self):
+        dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
+        named = {
+            value["Name"]: value
+            for value in walk(dashboard)
+            if isinstance(value, dict) and "Name" in value
+        }
+        # The card renders effective behaviour, so each row that an override can
+        # change carries its own marker, hidden unless that override exists.
+        for name, flag in (
+            ("FitShiftDiffers", "ShifterDiffers"),
+            ("FitWheelDiffers", "WheelDiffers"),
+            ("UseDiffersLaunch", "LaunchDiffers"),
+            ("UseDiffersUpshift", "UpshiftDiffers"),
+            ("UseDiffersDownshift", "DownshiftDiffers"),
+        ):
+            self.assertEqual(
+                f"[AsDriven.{flag}]",
+                named[name]["Bindings"]["Visible"]["Formula"]["Expression"],
+                name,
+            )
+            self.assertEqual("* not as the real car", named[name + "Text"]["Text"])
+
         # Glance has no room for one and must not claim otherwise.
         glance = self.generator.build_dashboard(overlay=True, variant="glance")
         glance_named = {
@@ -419,7 +446,7 @@ class SimHubDashTests(unittest.TestCase):
             if isinstance(value, dict) and "Name" in value
         }
         self.assertNotIn("DriverNote", glance_named)
-        self.assertNotIn("NoteText", glance_named)
+        self.assertNotIn("NoteLine1", glance_named)
 
     def test_preview_badge_explicitly_says_preview_is_not_live(self):
         for variant in ("detailed", "compact", "glance"):

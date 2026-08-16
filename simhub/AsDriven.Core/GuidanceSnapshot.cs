@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 namespace AsDriven.Core
 {
     public sealed class GuidanceSnapshot
@@ -48,6 +50,73 @@ namespace AsDriven.Core
         /// one, so an empty value is a supported state and not a defect.
         /// </summary>
         public string DriverSummary { get; private set; }
+
+        /// <summary>
+        /// JSON Pointer paths the simulator entry overrides, empty when the
+        /// simulator matches the real car on every curated value.
+        /// </summary>
+        public string[] OverriddenPaths { get; private set; }
+
+        /// <summary>The reviewer's stated reason for each override.</summary>
+        public string SimulatorDifference { get; private set; }
+
+        /// <summary>True when this simulator departs from the real car at all.</summary>
+        public bool SimulatorDiffers
+        {
+            get { return OverriddenPaths != null && OverriddenPaths.Length > 0; }
+        }
+
+        private bool Overrides(string fragment)
+        {
+            if (OverriddenPaths == null) { return false; }
+            foreach (string path in OverriddenPaths)
+            {
+                if (path != null && path.IndexOf(fragment, StringComparison.Ordinal) >= 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>Gear count or actuation differ from the real car.</summary>
+        public bool ShifterDiffers
+        {
+            get
+            {
+                return Overrides("/forward_gears")
+                    || Overrides("/shift_actuation")
+                    || Overrides("/shift_pattern");
+            }
+        }
+
+        public bool LaunchDiffers
+        {
+            get { return Overrides("/standing_start_clutch"); }
+        }
+
+        public bool UpshiftDiffers
+        {
+            get { return Overrides("/upshift"); }
+        }
+
+        public bool DownshiftDiffers
+        {
+            get { return Overrides("/downshift"); }
+        }
+
+        public bool WheelDiffers
+        {
+            get { return Overrides("/wheel_rim"); }
+        }
+
+        // Dashboard text items do not wrap, so the summary is pre-broken here.
+        public string DriverSummaryLine1 { get; private set; }
+        public string DriverSummaryLine2 { get; private set; }
+        public string DriverSummaryLine3 { get; private set; }
+        public string DriverSummaryCompactLine1 { get; private set; }
+        public string DriverSummaryCompactLine2 { get; private set; }
+        public string DriverSummaryCompactLine3 { get; private set; }
 
         /// <summary>Whether the rim itself carries a readout. Optional in the
         /// schema, so an unobserved value reads "unknown", never "no".</summary>
@@ -149,6 +218,8 @@ namespace AsDriven.Core
             string wheelRimShape,
             string wheelRimSourceLabel,
             string driverSummary,
+            string[] overriddenPaths,
+            string simulatorDifference,
             string wheelIntegratedDisplay,
             string wheelShiftLights,
             bool hasSteeringDOR,
@@ -158,6 +229,8 @@ namespace AsDriven.Core
             string sourceSummary)
         {
             string[] techniqueLines = SplitTechniqueSummary(techniqueSummary);
+            string[] summaryLines = WrapLines(driverSummary, 620, 1250, 3);
+            string[] compactSummaryLines = WrapLines(driverSummary, 432, 1100, 3);
             string[] compactTechniqueLines = SplitCompactTechniqueSummary(techniqueSummary);
             return new GuidanceSnapshot
             {
@@ -194,6 +267,14 @@ namespace AsDriven.Core
                 WheelRimShape = wheelRimShape,
                 WheelRimSourceLabel = wheelRimSourceLabel,
                 DriverSummary = driverSummary,
+                OverriddenPaths = overriddenPaths ?? new string[0],
+                SimulatorDifference = simulatorDifference,
+                DriverSummaryLine1 = summaryLines[0],
+                DriverSummaryLine2 = summaryLines[1],
+                DriverSummaryLine3 = summaryLines[2],
+                DriverSummaryCompactLine1 = compactSummaryLines[0],
+                DriverSummaryCompactLine2 = compactSummaryLines[1],
+                DriverSummaryCompactLine3 = compactSummaryLines[2],
                 WheelIntegratedDisplay = wheelIntegratedDisplay,
                 WheelShiftLights = wheelShiftLights,
                 HasSteeringDOR = hasSteeringDOR,
@@ -245,6 +326,14 @@ namespace AsDriven.Core
                 WheelRimShape = string.Empty,
                 WheelRimSourceLabel = string.Empty,
                 DriverSummary = string.Empty,
+                OverriddenPaths = new string[0],
+                SimulatorDifference = string.Empty,
+                DriverSummaryLine1 = string.Empty,
+                DriverSummaryLine2 = string.Empty,
+                DriverSummaryLine3 = string.Empty,
+                DriverSummaryCompactLine1 = string.Empty,
+                DriverSummaryCompactLine2 = string.Empty,
+                DriverSummaryCompactLine3 = string.Empty,
                 WheelIntegratedDisplay = string.Empty,
                 WheelShiftLights = string.Empty,
                 HasSteeringDOR = false,
@@ -261,6 +350,50 @@ namespace AsDriven.Core
         {
             PopupRevision = revision;
             return this;
+        }
+
+        /// <summary>
+        /// Wraps free text across a fixed number of lines. Dashboard text items
+        /// do not wrap, so any paragraph the overlay shows has to be broken here
+        /// and drawn one item per line. The last line ellipsises rather than
+        /// clipping mid-word, so a summary is never cut off silently.
+        /// </summary>
+        private static string[] WrapLines(
+            string value, int availableWidth, int fontSize, int maxLines)
+        {
+            value = Normalize(value);
+            var lines = new List<string>();
+            for (int index = 0; index < maxLines; index++)
+            {
+                if (value.Length == 0)
+                {
+                    lines.Add(string.Empty);
+                    continue;
+                }
+                bool last = index == maxLines - 1;
+                if (!last && Fits(value, availableWidth, fontSize))
+                {
+                    lines.Add(value);
+                    value = string.Empty;
+                    continue;
+                }
+                if (last)
+                {
+                    lines.Add(FitSingleLine(value, availableWidth, fontSize));
+                    value = string.Empty;
+                    continue;
+                }
+                int split = LastFittingBreak(value, availableWidth, fontSize);
+                if (split <= 0)
+                {
+                    lines.Add(FitSingleLine(value, availableWidth, fontSize));
+                    value = string.Empty;
+                    continue;
+                }
+                lines.Add(value.Substring(0, split).TrimEnd());
+                value = value.Substring(split + 1).TrimStart();
+            }
+            return lines.ToArray();
         }
 
         private static string[] SplitTechniqueSummary(string value)

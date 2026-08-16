@@ -40,6 +40,7 @@
       "wheel_rim": {
         "shape": "d-shaped",
         "diameter_mm": null,
+        "integrated_display": "yes",
         "source_label": "live-cockpit-d-shaped-display",
         "notes": "Direct cockpit inspection showed a D-shaped rim with an integrated display; exact diameter remains unknown."
       }
@@ -159,5 +160,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-11"
+  "updated_at": "2026-08-16"
 }

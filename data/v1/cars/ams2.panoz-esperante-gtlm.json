@@ -40,6 +40,7 @@
       "wheel_rim": {
         "shape": "d-shaped",
         "diameter_mm": null,
+        "integrated_display": "no",
         "source_label": "live-cockpit-d-shaped-no-display",
         "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown."
       }
@@ -69,6 +70,7 @@
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "d-shaped",
+          "integrated_display": "no",
           "source_label": "live-cockpit-d-shaped-no-display"
         },
         "notes": [
@@ -134,5 +136,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-11"
+  "updated_at": "2026-08-16"
 }

@@ -40,6 +40,7 @@
       "wheel_rim": {
         "shape": "round",
         "diameter_mm": null,
+        "integrated_display": "no",
         "source_label": "live-cockpit-round-no-display",
         "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
       }
@@ -70,6 +71,7 @@
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "round",
+          "integrated_display": "no",
           "source_label": "live-cockpit-round-no-display"
         },
         "notes": [
@@ -137,5 +139,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-11"
+  "updated_at": "2026-08-16"
 }

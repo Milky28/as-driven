@@ -523,6 +523,10 @@ def _fit_band(
         factory.text("FitShiftSub", "", second_text, top + height / 2 + 2,
                      text_width, sub_size + 6, sub_size, MUTED,
                      expression="[AsDriven.ShifterGateLabel]"),
+        _differs_marker(factory, "FitShiftDiffers", "ShifterDiffers",
+                        second_text, top + height - 20, sub_size - 1),
+        _differs_marker(factory, "FitWheelDiffers", "WheelDiffers",
+                        text_left, top + height - 20, sub_size - 1),
     ])
     return children
 
@@ -576,7 +580,32 @@ def _use_band(
             factory.text("UseValue" + title, "", x + 14, top + height / 2 + 1,
                          cell_width - 24, value_size + 7, value_size, TEXT,
                          expression=value))
+        children.append(_differs_marker(
+            factory, "UseDiffers" + title, title + "Differs",
+            x + 14, top + height - 19, value_size - 2.5))
     return children
+
+
+def _differs_marker(
+    factory: ItemFactory,
+    name: str,
+    flag_property: str,
+    left: float,
+    top: float,
+    size: float,
+) -> dict[str, Any]:
+    """Marks a row whose value the simulator overrides.
+
+    The card shows effective behaviour, so without this a deviation from the
+    real car reads as though it were authentic. The record's own override is
+    the only thing that can raise it.
+    """
+    return factory.layer(
+        name,
+        [factory.text(name + "Text", "* not as the real car", left, top, 150, size + 7,
+                      size, ACCENT, expression="'* not as the real car'")],
+        visible_expression="[AsDriven." + flag_property + "]",
+    )
 
 
 def _driver_note(
@@ -587,20 +616,28 @@ def _driver_note(
     height: float,
     *,
     size: float,
+    line_height: float,
+    prefix: str,
 ) -> list[dict[str, Any]]:
     """The one place the card can say why a car behaves as it does.
 
-    The whole group hides when the record carries no summary, so a card without
-    one simply ends after the Use band rather than reserving an empty panel.
+    Dashboard text items do not wrap, so the summary arrives pre-broken as three
+    line properties and is drawn one item per line. The whole group hides when
+    the record carries no summary, so a card without one ends after the Use band
+    rather than reserving an empty panel.
     """
     present = "[AsDriven.DriverSummary] != ''"
     children = [
         factory.rectangle("NotePanel", left, top, width, height, NOTE_PANEL, radius=6),
         factory.rectangle("NoteRail", left, top, 2, height, ACCENT),
-        factory.image("NoteIcon", "note-info", left + 13, top + 10, 16, 16),
-        factory.text("NoteText", "", left + 38, top + 6, width - 50, height - 12, size, TEXT,
-                     expression="[AsDriven.DriverSummary]"),
+        factory.image("NoteIcon", "note-info", left + 13, top + 9, 16, 16),
     ]
+    for index in range(3):
+        children.append(factory.text(
+            "NoteLine" + str(index + 1), "",
+            left + 38, top + 6 + line_height * index, width - 50, line_height + 3,
+            size, TEXT,
+            expression="[AsDriven." + prefix + "Line" + str(index + 1) + "]"))
     return [factory.layer("DriverNote", children, visible_expression=present)]
 
 
@@ -650,17 +687,18 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
     children.append(factory.rectangle("HeaderRule", left, 68, width, 1, SLATE))
     children.extend(_fit_band(factory, left, 80, width, 82, rail_width=30, rail_size=13,
                               head_size=16, sub_size=12.5, icon_size=42))
-    children.extend(_use_band(factory, left, 170, width, 82, rail_width=30, rail_size=13,
+    children.extend(_use_band(factory, left, 168, width, 80, rail_width=30, rail_size=13,
                               head_size=15, value_size=13))
-    children.extend(_driver_note(factory, left, 260, width, 46, size=12.5))
+    children.extend(_driver_note(factory, left, 256, width, 60, size=12.5,
+                                 line_height=17, prefix="DriverSummary"))
     children.extend([
         _preview_badge(factory, factory.width - left - 150, 14, 150, 30),
-        factory.rectangle("FooterRule", left, 316, width, 1, SLATE),
-        factory.text("Evidence", "", left, 324, width - 180, 20, 11.5, MUTED,
+        factory.rectangle("FooterRule", left, 322, width, 1, SLATE),
+        factory.text("Evidence", "", left, 330, width - 180, 20, 11.5, MUTED,
                      expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + '  -  Confidence: ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 180, 324, 180, 20, 11.5, MUTED,
+        factory.text("Dataset", "", left + width - 180, 330, 180, 20, 11.5, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])
@@ -673,19 +711,20 @@ def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
     children = _card_header(factory, left=left, top=12, mark=28, name_size=17,
                             class_size=10.5, match_size=11, width=width)
     children.append(factory.rectangle("HeaderRule", left, 55, width, 1, SLATE))
-    children.extend(_fit_band(factory, left, 65, width, 66, rail_width=24, rail_size=11,
-                              head_size=13, sub_size=10.5, icon_size=32))
-    children.extend(_use_band(factory, left, 139, width, 66, rail_width=24, rail_size=11,
+    children.extend(_fit_band(factory, left, 62, width, 62, rail_width=24, rail_size=11,
+                              head_size=13, sub_size=10.5, icon_size=30))
+    children.extend(_use_band(factory, left, 130, width, 62, rail_width=24, rail_size=11,
                               head_size=12, value_size=11))
-    children.extend(_driver_note(factory, left, 213, width, 34, size=11))
+    children.extend(_driver_note(factory, left, 198, width, 52, size=11,
+                                 line_height=15, prefix="DriverSummaryCompact"))
     children.extend([
         _preview_badge(factory, factory.width - left - 118, 10, 118, 26, compact=True),
-        factory.rectangle("FooterRule", left, 256, width, 1, SLATE),
-        factory.text("Evidence", "", left, 264, width - 150, 18, 10, MUTED,
+        factory.rectangle("FooterRule", left, 258, width, 1, SLATE),
+        factory.text("Evidence", "", left, 265, width - 150, 18, 10, MUTED,
                      expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + '  -  ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 150, 264, 150, 18, 10, MUTED,
+        factory.text("Dataset", "", left + width - 150, 265, 150, 18, 10, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])

@@ -38,6 +38,8 @@
       "wheel_rim": {
         "shape": "gt-formula",
         "diameter_mm": null,
+        "integrated_display": "no",
+        "open_top": "yes",
         "source_label": "live-cockpit-open-top-no-display",
         "notes": "Direct AMS2 cockpit inspection showed an open-top racing rim without an integrated display; exact diameter remains unknown."
       }
@@ -67,6 +69,8 @@
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "gt-formula",
+          "integrated_display": "no",
+          "open_top": "yes",
           "source_label": "live-cockpit-open-top-no-display"
         },
         "notes": [

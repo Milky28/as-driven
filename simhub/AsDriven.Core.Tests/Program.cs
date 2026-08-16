@@ -528,6 +528,48 @@ namespace AsDriven.Core.Tests
                     "a band whose only outstanding item is optional demands nothing");
                 Equal("unknown", PreflightLabels.BandTone("car", "car", "unknown"),
                     "an unestablished moment leaves the band unresolved");
+                // A summary must arrive pre-broken and never clipped mid-word:
+                // the card draws one text item per line, so an unwrapped value
+                // would simply disappear past the panel edge.
+                GuidanceSnapshot dogBoxNote = database.Match("Automobilista2", "Brabham BT44");
+                True(dogBoxNote.HasMatch, "matches the Brabham BT44");
+                True(dogBoxNote.DriverSummary.Length > 90, "the dog box summary is long enough to wrap");
+                True(dogBoxNote.DriverSummaryLine2.Length > 0, "it wraps onto a second line");
+                Equal(dogBoxNote.DriverSummary.Replace("  ", " "),
+                    (dogBoxNote.DriverSummaryLine1 + " " + dogBoxNote.DriverSummaryLine2 + " "
+                        + dogBoxNote.DriverSummaryLine3).Trim(),
+                    "the wrapped lines rejoin into the original summary with nothing lost");
+                False(dogBoxNote.DriverSummaryLine3.EndsWith("..."),
+                    "a summary within the cap is never ellipsised");
+                // The card shows effective behaviour, so a simulator deviation
+                // would otherwise read as though it were authentic. Only the
+                // record's own override can raise the marker.
+                GuidanceSnapshot lotus = database.Match(
+                    "Automobilista2", "Lotus 98T - High Downforce");
+                if (lotus.HasMatch)
+                {
+                    True(lotus.SimulatorDiffers, "the 98T records a simulator deviation");
+                    True(lotus.ShifterDiffers, "its gear count is the overridden value");
+                    False(lotus.LaunchDiffers, "and its launch clutch is not");
+                    True(lotus.SimulatorDifference.Length > 0, "the reviewer's reason is carried");
+                    Equal(5, lotus.GearCount, "the client shows the simulator's five gears");
+                }
+                GuidanceSnapshot cayman = database.Match(
+                    "Automobilista2", "Porsche Cayman GT4 Clubsport MR");
+                if (cayman.HasMatch)
+                {
+                    True(cayman.LaunchDiffers, "the Cayman overrides its standing-start clutch");
+                    False(cayman.ShifterDiffers, "but not its shifter");
+                }
+                GuidanceSnapshot noOverride = database.Match("Automobilista2", "Brabham BT44");
+                False(noOverride.SimulatorDiffers,
+                    "a record with no override never claims the simulator differs");
+                False(noOverride.ShifterDiffers, "and marks no row");
+
+                GuidanceSnapshot noNote = database.Match("Automobilista2", "Porsche 911 GT3 R");
+                Equal(string.Empty, noNote.DriverSummary, "a record without a summary carries none");
+                Equal(string.Empty, noNote.DriverSummaryLine1, "and no wrapped lines either");
+
                 GuidanceSnapshot chevette = database.Match("Automobilista2", "Chevrolet Chevette");
                 if (chevette.HasMatch)
                 {

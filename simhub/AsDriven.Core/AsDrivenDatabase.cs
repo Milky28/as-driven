@@ -261,6 +261,7 @@ namespace AsDriven.Core
                 // simulator's explicit overrides applied. A car whose real gearbox
                 // has no clutch pedal can still require clutch input in a given
                 // simulator, and the driver needs the value that works in the sim.
+                string[] overriddenPaths = OverriddenPaths(simulator);
                 JObject effectiveControls = ApplyOverrides(controls, simulator, recordPath);
                 JObject effectiveTransmission = RequiredObject(
                     effectiveControls, "transmission", recordPath);
@@ -305,6 +306,8 @@ namespace AsDriven.Core
                     WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
                     WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
                     DriverSummary = OptionalText(record, "driver_summary"),
+                    OverriddenPaths = overriddenPaths,
+                    SimulatorDifference = DescribeOverrides(simulator),
                     WheelIntegratedDisplay = OptionalState(effectiveWheelRim, "integrated_display"),
                     WheelShiftLights = OptionalState(effectiveWheelRim, "shift_lights"),
                     HasSteeringDOR = effectiveSteering["degrees_of_rotation"] != null,
@@ -360,6 +363,58 @@ namespace AsDriven.Core
         /// simulator. Records without overrides are returned unchanged, so the
         /// common case costs nothing.
         /// </summary>
+        /// <summary>
+        /// The JSON Pointer paths this simulator overrides. An override is the
+        /// record's explicit statement that the simulator does something the
+        /// real car did not, so these are what the card marks.
+        /// </summary>
+        private static string[] OverriddenPaths(JObject simulator)
+        {
+            JArray overrides = simulator["overrides"] as JArray;
+            if (overrides == null || overrides.Count == 0)
+            {
+                return new string[0];
+            }
+            var paths = new List<string>();
+            foreach (JObject entry in overrides.OfType<JObject>())
+            {
+                JToken path = entry["path"];
+                if (path != null && path.Type != JTokenType.Null)
+                {
+                    paths.Add(path.Value<string>());
+                }
+            }
+            return paths.ToArray();
+        }
+
+        /// <summary>
+        /// The reviewer's own words for why the simulator differs, taken from
+        /// each override's condition. Never generated: if a record states no
+        /// condition there is nothing to show.
+        /// </summary>
+        private static string DescribeOverrides(JObject simulator)
+        {
+            JArray overrides = simulator["overrides"] as JArray;
+            if (overrides == null || overrides.Count == 0)
+            {
+                return string.Empty;
+            }
+            var conditions = new List<string>();
+            foreach (JObject entry in overrides.OfType<JObject>())
+            {
+                JToken condition = entry["condition"];
+                if (condition != null && condition.Type != JTokenType.Null)
+                {
+                    string text = condition.Value<string>();
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        conditions.Add(text.Trim());
+                    }
+                }
+            }
+            return string.Join(" ", conditions.ToArray());
+        }
+
         private static JObject ApplyOverrides(
             JObject controls, JObject simulator, string recordPath)
         {
@@ -736,6 +791,8 @@ namespace AsDriven.Core
             public string ManualBlip;
             public string ThrottleLift;
             public string DriverSummary;
+            public string[] OverriddenPaths;
+            public string SimulatorDifference;
             public string WheelRimShape;
             public string WheelRimSourceLabel;
             public string WheelIntegratedDisplay;
@@ -772,6 +829,8 @@ namespace AsDriven.Core
                     WheelRimShape,
                     WheelRimSourceLabel,
                     DriverSummary,
+                    OverriddenPaths,
+                    SimulatorDifference,
                     WheelIntegratedDisplay,
                     WheelShiftLights,
                     HasSteeringDOR,
