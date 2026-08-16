@@ -40,7 +40,7 @@
     "steering": {
       "degrees_of_rotation": 450,
       "wheel_rim": {
-        "shape": "gt-style",
+        "shape": "gt-formula",
         "diameter_mm": null,
         "source_label": "live-cockpit-gt-style",
         "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
@@ -80,7 +80,7 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "gt-style",
+          "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "yes",
           "open_top": "no",
@@ -146,5 +146,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-16",
+  "notes": [
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ]
 }

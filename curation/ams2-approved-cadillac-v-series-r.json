@@ -23,11 +23,11 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "gt-style",
+    "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "unknown",
     "wheel_open_top": "no"
   },
-  "confidence_notes": "The base car's hybrid move-off, seven paddle gears, automatic cut/blip, and closed GT-style display rim were directly verified.",
+  "confidence_notes": "The base car's hybrid move-off, seven paddle gears, automatic cut/blip, and closed GT/Formula display rim were directly verified.",
   "scope_notes": "Low Downforce is approved as an exact aero-package alias with inherited controls; it was not separately live-tested. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

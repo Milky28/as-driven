@@ -1,12 +1,26 @@
 {
-  "schema_version": "1.0.0", "dataset_version": "0.3.13", "approved_at": "2026-08-11",
-  "record_id": "ams2.toyota-corolla-stock-car-2024", "telemetry_name": "Toyota Corolla Stock Car 2024", "telemetry_class": "StockCarV8_2024",
-  "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22 guided verification",
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.13",
+  "approved_at": "2026-08-11",
+  "record_id": "ams2.toyota-corolla-stock-car-2024",
+  "telemetry_name": "Toyota Corolla Stock Car 2024",
+  "telemetry_class": "StockCarV8_2024",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
   "approved_controls": {
-    "forward_gears": 6, "shift_actuation": "sequential-paddles", "shift_pattern": "sequential",
-    "standing_start_clutch": "required", "running_shift_clutch": "not-required", "throttle_lift": "not-required",
-    "automatic_cut": "yes", "automatic_blip": "yes", "manual_blip": "not-required",
-    "wheel_rim_shape": "gt-style", "wheel_integrated_display": "yes", "wheel_shift_lights": "yes", "wheel_open_top": "no"
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Guided testing directly established all listed behavior except automatic cut, which the observer manually confirmed from a brief throttle-graph interruption and is retained at medium confidence.",
   "scope_notes": "Exact Toyota identity; common-platform evidence does not silently merge the separate Chevrolet record."

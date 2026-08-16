@@ -17,7 +17,7 @@
     "automatic_cut": "no",
     "automatic_blip": "no",
     "manual_blip": "required",
-    "wheel_rim_shape": "formula",
+    "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
     "wheel_open_top": "no"

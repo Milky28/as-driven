@@ -15,7 +15,7 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "gt-style"
+    "wheel_rim_shape": "gt-formula"
   },
   "confidence_notes": "The exact identity, six paddle-selected usable ratios, clutch-free move-off, no-lift full-throttle upshifts with perceptible automatic cut, clutch-free downshifts with a visible automatic-blip spike, and open-top no-display rim were directly tested. The simulator mechanism responsible for clutch-free move-off was not established.",
   "scope_notes": "The official source describes a production-derived eight-speed transmission configured to use six forward ratios. Approval records the six-ratio sequential-paddle interface actually presented to the AMS2 driver without erasing that hardware distinction."

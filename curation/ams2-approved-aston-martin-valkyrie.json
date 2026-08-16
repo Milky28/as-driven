@@ -1,7 +1,27 @@
 {
-  "schema_version": "1.0.0", "dataset_version": "0.3.15", "approved_at": "2026-08-11",
-  "record_id": "ams2.aston-martin-valkyrie", "telemetry_name": "Aston Martin Valkyrie", "telemetry_class": "Hypercars", "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22 guided verification",
-  "approved_controls": { "forward_gears": 7, "shift_actuation": "sequential-paddles", "shift_pattern": "sequential", "standing_start_clutch": "not-required", "running_shift_clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "automatic_blip": "yes", "manual_blip": "not-required", "wheel_rim_shape": "gt-style", "wheel_integrated_display": "yes", "wheel_shift_lights": "yes", "wheel_open_top": "no" },
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.15",
+  "approved_at": "2026-08-11",
+  "record_id": "ams2.aston-martin-valkyrie",
+  "telemetry_name": "Aston Martin Valkyrie",
+  "telemetry_class": "Hypercars",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
+  },
   "confidence_notes": "Manufacturer specifications and exact guided testing establish the seven-speed paddle interface, automated pull-away, automatic blip, and cockpit wheel. Automatic cut was manually confirmed and remains medium confidence.",
   "scope_notes": "Road-going Hypercars identity, distinct from Aston Martin Valkyrie Hypercar in LMDh."
 }

@@ -24,8 +24,8 @@ legible against the popup tile at Detailed, Compact, and Glance sizes.
 validates their PNG signature and dimensions. The fallback currently remains
 for the yoke category until a distinct yoke design is approved.
 
-`wheel-gt-style.png` is the approved open-top, no-display GT wheel.
-`wheel-formula.png` is the approved closed display-rim artwork. The generator
-currently reuses it for the separate `prototype` category while displaying a
-`Prototype` label; a distinct prototype bitmap can replace that alias later
-without changing database records.
+`wheel-gt-formula.png` is the approved closed display-rim artwork, previously
+shipped as `wheel-formula.png`. It now covers the single merged `gt-formula`
+category: the rim modern GT, formula and prototype cars share. The separate
+`wheel-gt-style.png` and `wheel-prototype.png` crops were removed with those
+categories; both remain in git history if a distinct design is ever wanted.

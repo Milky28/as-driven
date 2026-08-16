@@ -17,11 +17,11 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "gt-style",
+    "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no"
   },
-  "confidence_notes": "The guided draft directly records exact identity, clutch-free move-off, six paddle gears, automatic cut/blip, and a closed GT-style rim without display or shift lights.",
+  "confidence_notes": "The guided draft directly records exact identity, clutch-free move-off, six paddle gears, automatic cut/blip, and a closed GT/Formula rim without display or shift lights.",
   "scope_notes": "The mechanism permitting clutch-free move-off remains unknown. The unnamed second configuration mentioned by Reiza is not promoted."
 }

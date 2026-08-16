@@ -273,13 +273,7 @@ def _wheel(canvas: Canvas, kind: str) -> None:
     if kind == "unknown":
         _question(canvas)
         return
-    if kind == "formula":
-        canvas.rectangle(39, 43, 89, 84, 6, WHITE)
-        canvas.line([(39, 46), (24, 35), (19, 43), (22, 84), (34, 94), (42, 83)], 10, WHITE)
-        canvas.line([(89, 46), (104, 35), (109, 43), (106, 84), (94, 94), (86, 83)], 10, WHITE)
-        canvas.disk(64, 64, 7, WHITE)
-        return
-    if kind == "gt-style":
+    if kind == "gt-formula":
         canvas.rectangle(34, 38, 94, 88, 7, WHITE)
         canvas.line([(34, 43), (22, 36), (18, 47), (22, 88), (35, 96), (42, 84)], 10, WHITE)
         canvas.line([(94, 43), (106, 36), (110, 47), (106, 88), (93, 96), (86, 84)], 10, WHITE)
@@ -419,9 +413,7 @@ def generate_icons(size: int = 128) -> dict[str, bytes]:
         "brand-mark": lambda canvas: _wheel(canvas, "round"),
         "wheel-round": lambda canvas: _wheel(canvas, "round"),
         "wheel-d-shaped": lambda canvas: _wheel(canvas, "d-shaped"),
-        "wheel-gt-style": lambda canvas: _wheel(canvas, "gt-style"),
-        "wheel-prototype": lambda canvas: _wheel(canvas, "formula"),
-        "wheel-formula": lambda canvas: _wheel(canvas, "formula"),
+        "wheel-gt-formula": lambda canvas: _wheel(canvas, "gt-formula"),
         "wheel-yoke": lambda canvas: _wheel(canvas, "yoke"),
         "wheel-unknown": lambda canvas: _wheel(canvas, "unknown"),
         "shift-h-pattern": lambda canvas: _shift(canvas, "h-pattern"),

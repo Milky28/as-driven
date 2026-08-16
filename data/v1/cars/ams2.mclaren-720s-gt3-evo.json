@@ -38,7 +38,7 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "gt-style",
+        "shape": "gt-formula",
         "source_label": "live-cockpit-gt-style",
         "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
         "diameter_mm": null,
@@ -84,7 +84,7 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "gt-style",
+          "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
           "open_top": "no",
@@ -150,8 +150,9 @@
       }
     ]
   },
-  "updated_at": "2026-08-12",
+  "updated_at": "2026-08-16",
   "notes": [
-    "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+    "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ]
 }

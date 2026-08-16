@@ -64,13 +64,11 @@ def _wheel(value: str) -> dict[str, str]:
     raw = value.strip()
     code = raw.upper()
     # The compact source code is preserved. The source discussion explicitly
-    # describes GTF1 as a modern GT/F1-style rim; F1 identifies the formula
-    # family; and an initial R establishes the round family. Other source codes
-    # continue to fail closed.
-    if code.startswith("GTF1"):
-        shape = "gt-style"
-    elif code.startswith("F1"):
-        shape = "formula"
+    # describes GTF1 as a modern GT/F1-style rim, and F1 identifies the formula
+    # family; both are the merged gt-formula rim. An initial R establishes the
+    # round family. Other source codes continue to fail closed.
+    if code.startswith("GTF1") or code.startswith("F1"):
+        shape = "gt-formula"
     elif code.startswith("R"):
         shape = "round"
     else:

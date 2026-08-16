@@ -15,7 +15,7 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "gt-style"
+    "wheel_rim_shape": "gt-formula"
   },
   "confidence_notes": "The exact identity, six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts with perceptible automatic cut, clutch-free downshifts with a visible automatic-blip spike, and open-top no-display rim were directly tested. The simulator mechanism responsible for clutch-free move-off was not established.",
   "scope_notes": "Approval applies to the exact Aston Martin Vantage GTE / GTE identity observed in AMS2 1.6.9.91."

@@ -15,8 +15,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "gt-style"
+    "wheel_rim_shape": "gt-formula"
   },
-  "confidence_notes": "The exact identity, seven paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spike, and closed GT-style display rim were directly tested. The mechanism behind clutch-free move-off is unknown and must not be described as electric because the race car is non-hybrid.",
+  "confidence_notes": "The exact identity, seven paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spike, and closed GT/Formula display rim were directly tested. The mechanism behind clutch-free move-off is unknown and must not be described as electric because the race car is non-hybrid.",
   "scope_notes": "Only the exact base telemetry identity was approved. No Low Downforce alias is introduced because no distinct exact telemetry identity was observed. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

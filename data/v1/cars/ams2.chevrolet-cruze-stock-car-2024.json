@@ -6,7 +6,11 @@
     "display_name": "Chevrolet Cruze Stock Car 2024",
     "manufacturer": "Chevrolet",
     "model": "Cruze Stock Car 2024",
-    "year": { "from": 2024, "to": 2024, "label": "Stock Car Pro Series 2024" },
+    "year": {
+      "from": 2024,
+      "to": 2024,
+      "label": "Stock Car Pro Series 2024"
+    },
     "class": "Stock Car 2024",
     "real_world_identity_notes": "The exact Chevrolet identity is established by AMS2 telemetry. Official 2024 series regulations define the common prescribed platform and paddle-shift transmission hardware."
   },
@@ -16,19 +20,31 @@
       "gearbox_type": "sequential",
       "shift_actuation": "sequential-paddles",
       "shift_pattern": "sequential",
-      "upshift": { "clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
-      "downshift": { "clutch": "not-required", "throttle_lift": "not-applicable", "automatic_cut": "not-applicable", "manual_blip": "not-required", "automatic_blip": "yes" },
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
       "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
-        "shape": "gt-style",
+        "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "yes",
         "shift_lights": "yes",
         "open_top": "no",
         "source_label": "live-cockpit-gt-closed-display-shift-lights",
-        "notes": "Direct cockpit inspection showed a closed GT-style rim with an integrated display and wheel-mounted shift lights."
+        "notes": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display and wheel-mounted shift lights."
       }
     },
     "notes": [
@@ -37,54 +53,114 @@
       "Automatic cut is a medium-confidence manual observation based on a brief throttle-graph interruption during an upshift while pedal input was maintained."
     ]
   },
-  "simulators": [{
-    "simulator": "ams2",
-    "identities": [
-      { "kind": "telemetry-name", "value": "Chevrolet Cruze Stock Car 2024" },
-      { "kind": "internal-id", "value": "Chevrolet Cruze Stock Car 2024" },
-      { "kind": "class-id", "value": "StockCarV8_2024" }
-    ],
-    "behavior": {
-      "shift_type": "Paddles", "auto_blip": "yes", "shift_cut": "yes",
-      "wheel_rim_type": { "normalized": "gt-style", "integrated_display": "yes", "shift_lights": "yes", "open_top": "no", "source_label": "live-cockpit-gt-closed-display-shift-lights" },
-      "notes": [
-        "Guided test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled.",
-        "Standing-start clutch, six paddle gears, automatic blip, and the closed display rim with shift lights were directly observed.",
-        "Automatic cut was manually confirmed from a brief throttle-graph interruption; the guided detector did not establish it confidently."
-      ]
-    },
-    "overrides": [],
-    "verified_game_version": "1.6.9.91",
-    "verified_at": "2026-08-11",
-    "source_refs": ["ams2.reiza-release.1.5.6.1.stock-car-2024", "cba.stock-car-pro-2024.technical-regulations", "cba.stock-car-pro-2024.platform-annex", "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"],
-    "confidence": { "level": "high", "basis": "Exact identity and most user-facing controls were directly verified; official series regulations support the common paddle-shift hardware. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation." }
-  }],
-  "provenance": { "claims": [
+  "simulators": [
     {
-      "paths": ["/identity", "/simulators/0/identities"],
-      "source_refs": ["ams2.reiza-release.1.5.6.1.stock-car-2024", "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Official season addition and exact live telemetry establish the Chevrolet identity and simulator class."
-    },
-    {
-      "paths": ["/authentic_controls/transmission/forward_gears", "/authentic_controls/transmission/gearbox_type", "/authentic_controls/transmission/shift_actuation", "/authentic_controls/transmission/shift_pattern"],
-      "source_refs": ["cba.stock-car-pro-2024.technical-regulations", "cba.stock-car-pro-2024.platform-annex", "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Official common-platform rules establish the paddle-shift system; the guided test exercised all six forward gears."
-    },
-    {
-      "paths": ["/authentic_controls/transmission/upshift/clutch", "/authentic_controls/transmission/upshift/throttle_lift", "/authentic_controls/transmission/downshift", "/authentic_controls/transmission/standing_start_clutch", "/authentic_controls/steering/wheel_rim"],
-      "source_refs": ["ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"],
-      "confidence": "verified",
-      "basis": "Guided current-game testing and cockpit inspection directly established these values."
-    },
-    {
-      "paths": ["/authentic_controls/transmission/upshift/automatic_cut", "/simulators/0/behavior/shift_cut"],
-      "source_refs": ["ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"],
-      "confidence": "medium",
-      "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Cruze Stock Car 2024"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Chevrolet Cruze Stock Car 2024"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCarV8_2024"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-gt-closed-display-shift-lights"
+        },
+        "notes": [
+          "Guided test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled.",
+          "Standing-start clutch, six paddle gears, automatic blip, and the closed display rim with shift lights were directly observed.",
+          "Automatic cut was manually confirmed from a brief throttle-graph interruption; the guided detector did not establish it confidently."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.5.6.1.stock-car-2024",
+        "cba.stock-car-pro-2024.technical-regulations",
+        "cba.stock-car-pro-2024.platform-annex",
+        "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Exact identity and most user-facing controls were directly verified; official series regulations support the common paddle-shift hardware. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation."
+      }
     }
-  ] },
-  "notes": ["The Toyota Corolla is a separate exact simulator identity using the same regulated 2024 platform."],
-  "updated_at": "2026-08-11"
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.5.6.1.stock-car-2024",
+          "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official season addition and exact live telemetry establish the Chevrolet identity and simulator class."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "cba.stock-car-pro-2024.technical-regulations",
+          "cba.stock-car-pro-2024.platform-annex",
+          "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official common-platform rules establish the paddle-shift system; the guided test exercised all six forward gears."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Guided current-game testing and cockpit inspection directly established these values."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/simulators/0/behavior/shift_cut"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
+      }
+    ]
+  },
+  "notes": [
+    "The Toyota Corolla is a separate exact simulator identity using the same regulated 2024 platform.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
 }

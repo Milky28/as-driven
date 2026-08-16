@@ -37,13 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "formula",
+        "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "yes",
         "shift_lights": "yes",
         "open_top": "no",
         "source_label": "live-cockpit-formula-display-shift-lights",
-        "notes": "Direct cockpit inspection showed a closed Formula rim with integrated display, shift lights, and paddles."
+        "notes": "Direct cockpit inspection showed a closed GT/Formula rim with integrated display, shift lights, and paddles."
       }
     },
     "notes": [
@@ -82,7 +82,7 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "formula",
+          "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "yes",
           "open_top": "no",
@@ -133,5 +133,8 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-16",
+  "notes": [
+    "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ]
 }

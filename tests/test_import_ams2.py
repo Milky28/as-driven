@@ -55,10 +55,12 @@ class AMS2ImporterTests(unittest.TestCase):
         self.assertEqual(_shift("Seq")["shift_actuation"], "unknown")
 
     def test_documented_gt_wheel_family_is_normalized(self) -> None:
-        self.assertEqual(_wheel("GTF1")["normalized"], "gt-style")
-        self.assertEqual(_wheel("GTF1FL2")["normalized"], "gt-style")
-        self.assertEqual(_wheel("F1")["normalized"], "formula")
-        self.assertEqual(_wheel("F1M")["normalized"], "formula")
+        # GTF1 and F1 both describe the one control-panel rim that modern GT,
+        # formula and prototype cars share, so both normalize to gt-formula.
+        self.assertEqual(_wheel("GTF1")["normalized"], "gt-formula")
+        self.assertEqual(_wheel("GTF1FL2")["normalized"], "gt-formula")
+        self.assertEqual(_wheel("F1")["normalized"], "gt-formula")
+        self.assertEqual(_wheel("F1M")["normalized"], "gt-formula")
         self.assertEqual(_wheel("RSF1")["normalized"], "round")
         self.assertEqual(_wheel("unmapped")["normalized"], "unknown")
 

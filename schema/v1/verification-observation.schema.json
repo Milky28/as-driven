@@ -209,11 +209,12 @@
           ],
           "properties": {
             "shape": {
-              "description": "Rim shape, decided by the rim itself; the car's racing class never enters into it. First decide how the hands use it: a control-panel rim has molded grips at about 9 and 3 with a control face between them and the hands stay put, while a conventional rim is a continuous band you can grip anywhere. Then take the first that matches: yoke (two separate grips with nothing connecting them), formula (a control-panel rim open across the top, with no material joining the grips over the top), gt-style (a control-panel rim with a closed perimeter, usually flattened top and bottom), d-shaped (a conventional rim flattened at the bottom, the top, or both), round (a conventional continuous circle). A closed perimeter is not a grippable one: a GT rim has the same molded grips a formula rim has, and only the material over the top separates them. Use other when none match and unknown when the rim was not seen. prototype is deprecated: it named a racing category rather than a rim and covered the same closed control-panel form as gt-style. It stays in the enum so existing records remain valid, but must not be used for new records.",
+              "description": "Rim shape, decided by the rim itself; the car's racing class never enters into it. Take the first that matches: gt-formula (molded grips at about 9 and 3 with a control face between them, so the hands stay put - the rim modern GT, formula and prototype cars all share, usually carrying a display and rev lights), yoke (two grips with nothing joining them over the top), d-shaped (a conventional rim you can grip anywhere, flattened at the bottom, the top, or both), round (a conventional continuous circle). Use other when none match and unknown when the rim was not seen. gt-style, formula and prototype are deprecated: they split one rim three ways by racing class, produced the same client icon, and asked reviewers for a judgment that changed no advice. They stay in the enum so existing records remain valid, but must not be used for new records.",
               "type": "string",
               "enum": [
                 "round",
                 "d-shaped",
+                "gt-formula",
                 "gt-style",
                 "prototype",
                 "formula",
@@ -231,7 +232,7 @@
               "$ref": "#/$defs/observedState"
             },
             "open_top": {
-              "description": "Whether rim material joins the grips over the top of the rim. It asks about material, not about where the rim is held: a formula rim is yes, a yoke is always yes, and a gt-style, d-shaped or round rim is no.",
+              "description": "Whether rim material joins the grips over the top of the rim. It asks about material, not about where the rim is held, and it describes the rim rather than deciding its shape: a gt-formula rim may be either, a yoke is always yes, and a d-shaped or round rim is no.",
               "$ref": "#/$defs/observedState"
             },
             "notes": {

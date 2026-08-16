@@ -56,7 +56,7 @@ namespace AsDriven.Core.Tests
                 Equal("dogleg-h", c9.ShiftPattern, "preserves dogleg H-pattern evidence");
 
                 GuidanceSnapshot cadillac = database.Match("Automobilista2", "Cadillac DPi-VR");
-                Equal("gt-style", cadillac.WheelRimShape, "uses the closed GT-style Cadillac rim");
+                Equal("gt-formula", cadillac.WheelRimShape, "uses the merged GT/Formula Cadillac rim");
 
                 GuidanceSnapshot viper = database.Match("Automobilista2", "Dodge Viper GTS-R");
                 True(viper.HasMatch, "matches the live Dodge Viper GTS-R identity");
@@ -91,7 +91,7 @@ namespace AsDriven.Core.Tests
                 Equal("not-required", alpine.StandingStartClutch, "does not require a physical clutch for Alpine hybrid move-off");
                 Equal("yes", alpine.ShiftCut, "exposes the reviewed Alpine automatic cut");
                 Equal("yes", alpine.AutoBlip, "exposes the directly observed Alpine automatic blip");
-                Equal("gt-style", alpine.WheelRimShape, "uses the closed GT-style Alpine rim");
+                Equal("gt-formula", alpine.WheelRimShape, "uses the merged GT/Formula Alpine rim");
                 True(alpine.UpshiftGuidance.Contains("Throttle lift not required"), "describes no-lift Alpine upshifts");
                 True(alpine.DownshiftGuidance.Contains("Automatic blip"), "describes the Alpine automatic downshift blip");
                 True(alpine.TechniqueSummary.Contains("Pull away without clutch input"), "describes Alpine pull-away technique without assuming a generic aid");
@@ -110,7 +110,7 @@ namespace AsDriven.Core.Tests
                 Equal("not-required", ligier.StandingStartClutch, "does not require physical clutch input for Ligier move-off");
                 Equal("yes", ligier.ShiftCut, "exposes the directly observed Ligier automatic cut");
                 Equal("yes", ligier.AutoBlip, "exposes the directly observed Ligier automatic blip");
-                Equal("gt-style", ligier.WheelRimShape, "uses the closed GT-style Ligier rim");
+                Equal("gt-formula", ligier.WheelRimShape, "uses the merged GT/Formula Ligier rim");
 
                 foreach (string verifiedBatchCar in new[] {
                     "Oreca 07",
@@ -135,7 +135,7 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot oreca = database.Match("Automobilista2", "Oreca 07");
                 Equal("ams2.oreca-07", oreca.RecordId, "returns the shared Oreca Gen1 and Gen2 record");
                 Equal("6-speed paddle shifters", oreca.ShiftType, "formats the tested Oreca transmission");
-                Equal("gt-style", oreca.WheelRimShape, "uses the closed GT-style Oreca rim");
+                Equal("gt-formula", oreca.WheelRimShape, "uses the merged GT/Formula Oreca rim");
                 GuidanceSnapshot orecaLowDownforce = database.Match(
                     "Automobilista2", "Oreca 07 - Low Downforce");
                 Equal("ams2.oreca-07", orecaLowDownforce.RecordId, "inherits Oreca controls for the aero package");
@@ -143,22 +143,22 @@ namespace AsDriven.Core.Tests
 
                 GuidanceSnapshot sc63 = database.Match("Automobilista2", "Lamborghini SC63");
                 Equal("7-speed paddle shifters", sc63.ShiftType, "formats the tested SC63 transmission");
-                Equal("gt-style", sc63.WheelRimShape, "uses the closed GT-style SC63 rim");
+                Equal("gt-formula", sc63.WheelRimShape, "uses the merged GT/Formula SC63 rim");
                 GuidanceSnapshot sc63LowDownforce = database.Match(
                     "Automobilista2", "Lamborghini SC63 - Low Downforce");
                 Equal("ams2.lamborghini-sc63", sc63LowDownforce.RecordId, "inherits SC63 controls for the aero package");
 
                 GuidanceSnapshot p320 = database.Match("Automobilista2", "Ligier JS P320");
                 Equal("required", p320.StandingStartClutch, "requires physical clutch input for the P320 standing start");
-                Equal("gt-style", p320.WheelRimShape, "uses the closed GT-style P320 rim");
+                Equal("gt-formula", p320.WheelRimShape, "uses the merged GT/Formula P320 rim");
 
                 GuidanceSnapshot p4 = database.Match("Automobilista2", "Ligier JS P4");
                 Equal("not-required", p4.StandingStartClutch, "does not require physical clutch input for P4 move-off");
-                Equal("gt-style", p4.WheelRimShape, "uses the closed GT-style P4 rim");
+                Equal("gt-formula", p4.WheelRimShape, "uses the merged GT/Formula P4 rim");
 
                 GuidanceSnapshot valkyrie = database.Match("Automobilista2", "Aston Martin Valkyrie Hypercar");
                 Equal("7-speed paddle shifters", valkyrie.ShiftType, "formats the tested Valkyrie transmission");
-                Equal("gt-style", valkyrie.WheelRimShape, "uses the closed GT-style Valkyrie rim");
+                Equal("gt-formula", valkyrie.WheelRimShape, "uses the merged GT/Formula Valkyrie rim");
                 GuidanceSnapshot unobservedValkyrieAero = database.Match(
                     "Automobilista2", "Aston Martin Valkyrie Hypercar - Low Downforce");
                 False(unobservedValkyrieAero.HasMatch, "does not invent an unobserved Valkyrie aero alias");
@@ -166,7 +166,7 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot roadValkyrie = database.Match("Automobilista2", "Aston Martin Valkyrie");
                 Equal("ams2.aston-martin-valkyrie", roadValkyrie.RecordId, "keeps the road Valkyrie distinct from the race car");
                 Equal("7-speed paddle shifters", roadValkyrie.ShiftType, "formats the road Valkyrie transmission");
-                Equal("gt-style", roadValkyrie.WheelRimShape, "uses the observed road Valkyrie rim category");
+                Equal("gt-formula", roadValkyrie.WheelRimShape, "uses the merged GT/Formula road Valkyrie rim");
 
                 GuidanceSnapshot gt2Stradale = database.Match("Automobilista2", "Maserati GT2 Stradale");
                 Equal("8-speed paddle shifters", gt2Stradale.ShiftType, "formats the GT2 Stradale dual-clutch interface");
@@ -207,34 +207,34 @@ namespace AsDriven.Core.Tests
                     Equal("required", renault.StandingStartClutch, "requires Renault formula standing-start clutch for " + renaultFormula);
                     Equal("yes", renault.ShiftCut, "exposes detected automatic cut for " + renaultFormula);
                     Equal("yes", renault.AutoBlip, "exposes detected automatic blip for " + renaultFormula);
-                    Equal("formula", renault.WheelRimShape, "uses Formula rim for " + renaultFormula);
+                    Equal("gt-formula", renault.WheelRimShape, "uses the merged GT/Formula rim for " + renaultFormula);
                 }
 
                 GuidanceSnapshot audiGt4 = database.Match("Automobilista2", "Audi R8 LMS GT4");
                 Equal("7-speed paddle shifters", audiGt4.ShiftType, "formats the tested Audi GT4 transmission");
-                Equal("gt-style", audiGt4.WheelRimShape, "uses the open-top Audi GT-style rim");
+                Equal("gt-formula", audiGt4.WheelRimShape, "uses the merged GT/Formula Audi GT-style rim");
 
                 GuidanceSnapshot corvetteGt3 = database.Match("Automobilista2", "Chevrolet Corvette Z06 GT3.R");
                 Equal("6-speed paddle shifters", corvetteGt3.ShiftType, "formats the tested Corvette GT3 transmission");
-                Equal("gt-style", corvetteGt3.WheelRimShape, "uses the open-top Corvette GT-style rim");
+                Equal("gt-formula", corvetteGt3.WheelRimShape, "uses the merged GT/Formula Corvette GT-style rim");
                 GuidanceSnapshot corvetteLowDownforce = database.Match(
                     "Automobilista2", "Chevrolet Corvette Z06 GT3.R - Low Downforce");
                 Equal("ams2.chevrolet-corvette-z06-gt3r", corvetteLowDownforce.RecordId, "inherits Corvette controls for the aero package");
 
                 GuidanceSnapshot huracanEvo2 = database.Match(
                     "Automobilista2", "Lamborghini Huracan Super Trofeo EVO2");
-                Equal("gt-style", huracanEvo2.WheelRimShape, "uses the open-top Huracan GT-style rim");
+                Equal("gt-formula", huracanEvo2.WheelRimShape, "uses the merged GT/Formula Huracan GT-style rim");
                 GuidanceSnapshot huracanPredecessor = database.Match(
                     "Automobilista2", "LamborghiniHuracanLP6202SuperTrofeo");
                 False(huracanPredecessor.HasMatch, "does not silently match the earlier Huracan predecessor");
 
                 GuidanceSnapshot vantageGt4 = database.Match("Automobilista2", "Aston Martin Vantage GT4 Evo");
                 Equal("6-speed paddle shifters", vantageGt4.ShiftType, "reports the six usable Vantage GT4 ratios");
-                Equal("gt-style", vantageGt4.WheelRimShape, "uses the open-top Vantage GT4 rim");
+                Equal("gt-formula", vantageGt4.WheelRimShape, "uses the merged GT/Formula Vantage GT4 rim");
 
                 GuidanceSnapshot vantageGte = database.Match("Automobilista2", "Aston Martin Vantage GTE");
                 Equal("6-speed paddle shifters", vantageGte.ShiftType, "formats the tested Vantage GTE transmission");
-                Equal("gt-style", vantageGte.WheelRimShape, "uses the open-top Vantage GTE rim");
+                Equal("gt-formula", vantageGte.WheelRimShape, "uses the merged GT/Formula Vantage GTE rim");
 
                 foreach (string historicalSequentialCar in new[] {
                     "Lamborghini Murcielago R-GT",
@@ -316,7 +316,7 @@ namespace AsDriven.Core.Tests
                 Equal("6-speed paddle shifters", dallaraSp1.ShiftType, "uses the animated Dallara paddle actuation");
                 Equal("yes", dallaraSp1.ShiftCut, "exposes the Dallara automatic cut");
                 Equal("yes", dallaraSp1.AutoBlip, "exposes the Dallara automatic blip");
-                Equal("gt-style", dallaraSp1.WheelRimShape, "uses the closed GT-style Dallara display rim");
+                Equal("gt-formula", dallaraSp1.WheelRimShape, "uses the merged GT/Formula Dallara display rim");
 
                 foreach (string lolaVariant in new[] { "Lola B05/40 V8", "Lola B05/40 Turbo" })
                 {
@@ -369,7 +369,7 @@ namespace AsDriven.Core.Tests
                 {
                     GuidanceSnapshot formula = database.Match("Automobilista2", formulaCar);
                     True(formula.HasMatch, "matches curated Formula identity " + formulaCar);
-                    Equal("formula", formula.WheelRimShape, "uses Formula rim for " + formulaCar);
+                    Equal("gt-formula", formula.WheelRimShape, "uses the merged GT/Formula rim for " + formulaCar);
                     Equal("sequential-paddles", formula.ShiftActuation, "uses paddle shift for " + formulaCar);
                 }
 
@@ -383,7 +383,7 @@ namespace AsDriven.Core.Tests
                     GuidanceSnapshot formula = database.Match("Automobilista2", liveFormulaVariant);
                     True(formula.HasMatch, "matches live AMS2 Formula identity " + liveFormulaVariant);
                     Equal("telemetry-name", formula.MatchKind, "keeps live Formula matching exact");
-                    Equal("formula", formula.WheelRimShape, "uses Formula rim for live variant " + liveFormulaVariant);
+                    Equal("gt-formula", formula.WheelRimShape, "uses the merged GT/Formula rim for live variant " + liveFormulaVariant);
                 }
 
                 GuidanceSnapshot v8Gen3 = database.Match(
@@ -413,15 +413,18 @@ namespace AsDriven.Core.Tests
                         "never matches retired identity " + retired);
                 }
 
-                // "prototype" named a racing category rather than a rim
-                // outline, so it was retired in favour of "gt-style". It stays
-                // in the schema enum so older drafts still validate, but no
-                // curated record may carry it.
+                // "gt-style", "prototype" and "formula" split one rim three
+                // ways by racing class. They are retired into "gt-formula" and
+                // stay in the schema enum so older drafts still validate, but no
+                // curated record may carry any of them.
                 foreach (CarCatalogEntry car in database.Cars)
                 {
                     GuidanceSnapshot shape = database.Preview("Automobilista2", car.RecordId);
-                    False(string.Equals(shape.WheelRimShape, "prototype", StringComparison.Ordinal),
-                        "never curates the retired prototype rim shape: " + car.RecordId);
+                    foreach (string retired in new[] { "gt-style", "prototype", "formula" })
+                    {
+                        False(string.Equals(shape.WheelRimShape, retired, StringComparison.Ordinal),
+                            "never curates the retired " + retired + " rim shape: " + car.RecordId);
+                    }
                 }
 
                 GuidanceSnapshot wrongCase = database.Match("Automobilista2", "dallara f301");

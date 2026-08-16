@@ -67,7 +67,9 @@ namespace AsDriven.Core
             new[] { "paddles", "sequential-stick", "h-pattern", "automatic-lever", "unknown" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> WheelShapes = new HashSet<string>(
-            new[] { "round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown" },
+            // gt-style, prototype and formula are retired into gt-formula. They
+            // stay accepted so a draft saved before the merge still loads.
+            new[] { "round", "d-shaped", "gt-formula", "gt-style", "prototype", "formula", "yoke", "other", "unknown" },
             StringComparer.Ordinal);
 
         public static string WriteDraft(string directory, VerificationObservationDraft draft)

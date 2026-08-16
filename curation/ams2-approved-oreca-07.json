@@ -24,8 +24,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "gt-style"
+    "wheel_rim_shape": "gt-formula"
   },
-  "confidence_notes": "Gen1 and Gen2 were directly tested. Six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spikes, and the closed GT-style display rim were confirmed. The simulator mechanism responsible for clutch-free move-off was not established.",
+  "confidence_notes": "Gen1 and Gen2 were directly tested. Six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spikes, and the closed GT/Formula display rim were confirmed. The simulator mechanism responsible for clutch-free move-off was not established.",
   "scope_notes": "One shared telemetry-name record covers LMP2 and LMP2_Gen1. Oreca 07 - Low Downforce is approved as an exact aero-package alias with inherited controls; its behavior was not separately live-tested. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again."
 }

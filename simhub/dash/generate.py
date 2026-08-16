@@ -263,19 +263,24 @@ def _line(
 def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: float) -> list[dict[str, Any]]:
     size = 46 * scale
     prop = "[AsDriven.WheelRimShape]"
+    # gt-style, prototype and formula are retired into gt-formula and share its
+    # icon. They stay matched so an older installed dataset still renders.
+    merged = (
+        prop + " == 'gt-formula' || " + prop + " == 'gt-style' || "
+        + prop + " == 'prototype' || " + prop + " == 'formula'"
+    )
     variants = (
         ("Round", "wheel-round", prop + " == 'round'"),
         ("DShape", "wheel-d-shaped", prop + " == 'd-shaped'"),
-        ("GTStyle", "wheel-gt-style", prop + " == 'gt-style'"),
-        ("Prototype", "wheel-prototype", prop + " == 'prototype'"),
-        ("Formula", "wheel-formula", prop + " == 'formula'"),
+        ("GTFormula", "wheel-gt-formula", merged),
         ("Yoke", "wheel-yoke", prop + " == 'yoke'"),
         (
             "Unknown",
             "wheel-unknown",
             prop + " != 'round' && " + prop + " != 'd-shaped' && "
-            + prop + " != 'gt-style' && " + prop + " != 'prototype' && "
-            + prop + " != 'formula' && " + prop + " != 'yoke'",
+            + prop + " != 'gt-formula' && " + prop + " != 'gt-style' && "
+            + prop + " != 'prototype' && " + prop + " != 'formula' && "
+            + prop + " != 'yoke'",
         ),
     )
     return [
@@ -430,12 +435,13 @@ def _header(factory: ItemFactory, compact: bool = False) -> list[dict[str, Any]]
 def _wheel_value_expression() -> str:
     prop = "[AsDriven.WheelRimShape]"
     return (
+        # gt-style, prototype and formula are retired into gt-formula. They are
+        # still matched so an older installed dataset keeps a correct label.
         f"if({prop} == 'round', 'Round', "
         f"if({prop} == 'd-shaped', 'D-shaped', "
-        f"if({prop} == 'gt-style', 'GT-style', "
-        f"if({prop} == 'prototype', 'Prototype', "
-        f"if({prop} == 'formula', 'Formula', "
-        f"if({prop} == 'yoke', 'Yoke', 'Unknown'))))))"
+        f"if({prop} == 'gt-formula' || {prop} == 'gt-style' || {prop} == 'prototype'"
+        f" || {prop} == 'formula', 'GT / Formula', "
+        f"if({prop} == 'yoke', 'Yoke', 'Unknown'))))"
     )
 
 

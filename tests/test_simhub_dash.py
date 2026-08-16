@@ -205,8 +205,7 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn(value, serialized)
         for asset in (
             "wheel-round",
-            "wheel-formula",
-            "wheel-gt-style",
+            "wheel-gt-formula",
             "shift-dogleg-h",
             "shift-sequential-stick",
             "shift-sequential-paddles",
@@ -218,7 +217,7 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn(asset, serialized)
         self.assertIn("GraphicalDash.Models.ImageItem", serialized)
         self.assertNotIn("cut-manual", serialized)
-        self.assertEqual(21, len(dashboards[0]["Images"]))
+        self.assertEqual(19, len(dashboards[0]["Images"]))
         self.assertTrue(all(image["Extension"] == ".png" for image in dashboards[0]["Images"]))
         self.assertTrue(all(image["Width"] == 128 for image in dashboards[0]["Images"]))
         for dashboard in dashboards:
@@ -246,9 +245,7 @@ class SimHubDashTests(unittest.TestCase):
             "shift-sequential-stick",
             "shift-unknown",
             "wheel-d-shaped",
-            "wheel-formula",
-            "wheel-gt-style",
-            "wheel-prototype",
+            "wheel-gt-formula",
             "wheel-round",
             "wheel-yoke",
             "wheel-unknown",
@@ -402,7 +399,7 @@ class SimHubDashTests(unittest.TestCase):
                 if path.name.endswith(".ressources"):
                     with zipfile.ZipFile(path) as archive:
                         names = archive.namelist()
-                        self.assertEqual(21, len(names))
+                        self.assertEqual(19, len(names))
                         self.assertIn("brand-mark.png", names)
                         self.assertNotIn("cut-manual.png", names)
                         self.assertIn("lift-required.png", names)

@@ -38,10 +38,10 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "gt-style",
+        "shape": "gt-formula",
         "diameter_mm": null,
         "source_label": "live-cockpit-observation",
-        "notes": "Direct cockpit inspection showed a closed GT-style rim with an integrated display; exact diameter remains unknown."
+        "notes": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display; exact diameter remains unknown."
       }
     },
     "notes": [
@@ -77,12 +77,12 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "gt-style",
+          "normalized": "gt-formula",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
           "Gen1 and Gen2 were live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Both contexts confirmed six paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and the same closed GT-style display rim.",
+          "Both contexts confirmed six paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and the same closed GT/Formula display rim.",
           "Physical clutch input was not required to move from rest, but the underlying mechanism was not determined.",
           "The Low Downforce identity inherits the base controls as an approved aero-package assumption and was not separately live-tested."
         ]
@@ -162,14 +162,15 @@
           "ams2.local-live-oreca-07-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Direct cockpit inspection showed a closed GT-style rim with an integrated display."
+        "basis": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display."
       }
     ]
   },
   "notes": [
     "One record covers both directly observed AMS2 class contexts because their exact model identity and tested controls are the same.",
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car; it has not been separately live-tested.",
-    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again."
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
   "updated_at": "2026-08-16"
 }

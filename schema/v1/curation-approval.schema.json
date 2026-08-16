@@ -85,8 +85,9 @@
           "enum": ["required", "not-required", "optional", "unknown", "not-applicable"]
         },
         "wheel_rim_shape": {
+          "description": "Approved rim shape, matching the record's simulator behavior. gt-style, prototype and formula are retired into gt-formula and remain accepted only so existing approvals stay valid.",
           "type": "string",
-          "enum": ["round", "d-shaped", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
+          "enum": ["round", "d-shaped", "gt-formula", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
         },
         "wheel_integrated_display": { "$ref": "#/$defs/state" },
         "wheel_shift_lights": { "$ref": "#/$defs/state" },

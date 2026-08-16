@@ -36,7 +36,7 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "gt-style",
+        "shape": "gt-formula",
         "diameter_mm": null,
         "source_label": "live-cockpit-open-top-no-display",
         "notes": "Direct AMS2 cockpit inspection matched the Aston Martin racing wheel reference: an open-top GT rim without an integrated display. Exact diameter remains unknown."
@@ -67,7 +67,7 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "gt-style",
+          "normalized": "gt-formula",
           "source_label": "live-cockpit-open-top-no-display"
         },
         "notes": [
@@ -155,7 +155,8 @@
     ]
   },
   "notes": [
-    "The difference between the real production-derived gearbox hardware and the normalized simulated paddle interface is intentionally retained."
+    "The difference between the real production-derived gearbox hardware and the normalized simulated paddle interface is intentionally retained.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-10"
+  "updated_at": "2026-08-16"
 }
