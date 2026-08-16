@@ -1,0 +1,274 @@
+{
+  "review": "batch-22",
+  "dataset_version": "0.3.54",
+  "approved_at": "2026-08-16",
+  "records": [
+    {
+      "record_id": "ams2.chevrolet-opala-old-stock-race",
+      "bundle": "build/batch-22/chevrolet-opala-old-stock-race.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Opala",
+      "year": {
+        "label": "Old Stock Race"
+      },
+      "real_world_identity_notes": "Brazilian Chevrolet Opala, built by General Motors do Brasil from 1968 to 1992 and a mainstay of Brazilian racing from the 1973 endurance era onward. Its floor-shift manuals were offered in four-speed and five-speed form.",
+      "real_world_source_refs": [
+        "wikipedia.chevrolet-opala"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Opala and its manual gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source lists four-speed and five-speed floor-shift manuals, and the live drive selected 5 H-pattern gears with no automatic cut or blip. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "The source lists four-speed and five-speed floor-shift manuals without dating either, so which one a given racing specification used is not established by it; the gear count here comes from the drive.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
+        "The drive found five gears, where the two Stock Cars records in this batch found four. The three are separate selectable identities in separate classes and none inherits from another."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Old Stock Race"
+    },
+    {
+      "record_id": "ams2.chevrolet-opala-stock-cars-1979",
+      "bundle": "build/batch-22/chevrolet-opala-stock-cars-1979.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Opala",
+      "year": {
+        "label": "1979",
+        "from": 1979
+      },
+      "real_world_identity_notes": "Brazilian Chevrolet Opala, built by General Motors do Brasil from 1968 to 1992 and a mainstay of Brazilian racing from the 1973 endurance era onward. Its floor-shift manuals were offered in four-speed and five-speed form.",
+      "real_world_source_refs": [
+        "wikipedia.chevrolet-opala"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Opala and its manual gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source lists four-speed and five-speed floor-shift manuals, and the live drive selected 4 H-pattern gears with no automatic cut or blip. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "The source lists four-speed and five-speed floor-shift manuals without dating either, so which one a given racing specification used is not established by it; the gear count here comes from the drive.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Stock Cars 1979"
+    },
+    {
+      "record_id": "ams2.chevrolet-opala-stock-cars-1986",
+      "bundle": "build/batch-22/chevrolet-opala-stock-cars-1986.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Opala",
+      "year": {
+        "label": "1986",
+        "from": 1986
+      },
+      "real_world_identity_notes": "Brazilian Chevrolet Opala, built by General Motors do Brasil from 1968 to 1992 and a mainstay of Brazilian racing from the 1973 endurance era onward. Its floor-shift manuals were offered in four-speed and five-speed form.",
+      "real_world_source_refs": [
+        "wikipedia.chevrolet-opala"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered source establishes the Opala and its manual gearbox options, and the exact simulator identity was observed live.",
+      "specification_basis": "The source lists four-speed and five-speed floor-shift manuals, and the live drive selected 4 H-pattern gears with no automatic cut or blip. An ordinary production road-car manual of this period is synchronised.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "The source lists four-speed and five-speed floor-shift manuals without dating either, so which one a given racing specification used is not established by it; the gear count here comes from the drive.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
+        "Recorded independently of the 1979 car. The drives agree on four H-pattern gears with no automation, but seven years separate the two specifications and nothing is inherited."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Stock Cars 1986"
+    },
+    {
+      "record_id": "ams2.mitsubishi-lancer-r",
+      "bundle": "build/batch-22/mitsubishi-lancer-r.staged.json",
+      "manufacturer": "Mitsubishi",
+      "model": "Lancer",
+      "year": {
+        "label": "Lancer Cup R"
+      },
+      "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup one-make series in R specification, the H-shifter car of the class's two entries.",
+      "real_world_source_refs": [
+        "ams2cars.mitsubishi-lancer-rs"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered reference establishes the Lancer Cup and its two cars, and the exact simulator identity was observed live.",
+      "specification_basis": "The live drive selected five H-pattern gears with no automatic cut or blip, which matches the R specification the reference distinguishes from the sequential RS.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "synchromesh"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
+        "The R and the RS share the Lancer Cup class and are entirely different to drive: this car is a five-speed H-pattern with no automation, and the RS is a six-speed sequential with an automatic cut. Nothing is inherited between them.",
+        "The reviewed reference covers the RS rather than this car, so the R's gearbox construction is the ordinary reading of a road-derived manual rather than a stated specification.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "R"
+    },
+    {
+      "record_id": "ams2.mitsubishi-lancer-rs",
+      "bundle": "build/batch-22/mitsubishi-lancer-rs.staged.json",
+      "manufacturer": "Mitsubishi",
+      "model": "Lancer",
+      "year": {
+        "label": "Lancer Cup RS"
+      },
+      "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup one-make series in RS specification, with a 2.0-litre 4B11T MIVEC turbo of about 301 hp at some 1,490 kg and six gears through a sequential stick.",
+      "real_world_source_refs": [
+        "ams2cars.mitsubishi-lancer-rs"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "A registered reference establishes the Lancer RS and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The reference gives six gears through a sequential stick, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+        "The RS and the R share the Lancer Cup class and are entirely different to drive. Nothing is inherited between them.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "RS"
+    },
+    {
+      "record_id": "ams2.mini-cooper-jcw",
+      "bundle": "build/batch-22/mini-cooper-jcw.staged.json",
+      "manufacturer": "MINI",
+      "model": "Cooper JCW",
+      "year": {
+        "label": "MINI CHALLENGE JCW"
+      },
+      "real_world_identity_notes": "MINI prepared for the MINI CHALLENGE championship's JCW class, running a Damico-tuned 2.0-litre turbo to a 255 bhp target through a Quaife sequential gearbox.",
+      "real_world_source_refs": [
+        "minichallenge.classes"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources.",
+      "identity_basis": "The championship's own class page establishes the JCW car and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The championship states a Quaife sequential gearbox, and the live drive selected six gears through a sequential stick with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "shift_pattern": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "gearbox_type": "sequential"
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+        "The championship names the gearbox but not its gear count, so the six gears come from the drive. It is a racing Quaife sequential, and the car provides its own blip, so no claim is made about whether a driver blip would otherwise be needed.",
+        "This is a different car from the road-going MINI John Cooper Works Challenge, which is sold with a six-speed manual rather than a sequential.",
+        "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

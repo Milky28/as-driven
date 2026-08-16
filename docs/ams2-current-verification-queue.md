@@ -1,5 +1,28 @@
 # AMS2 current verification queue
 
+## Completed in dataset 0.3.54 (batch 22: Lancer Cup, MINI Challenge, Opala)
+
+Six cars from four classes, and two of them sit in the same class while being
+entirely different to drive.
+
+**Mitsubishi Lancer R and RS share the Lancer Cup class.** The R is a five-speed
+H-pattern with no automation; the RS is a six-speed sequential with an automatic
+cut. A driver who assumed one from the other would bring the wrong hardware.
+Nothing is inherited between them. The reviewed reference covers the RS, so the
+R's gearbox construction is the ordinary reading of a road-derived manual rather
+than a stated specification, and it is recorded at medium confidence for that
+reason.
+
+MINI Cooper JCW is sourced from the championship itself, which specifies a Quaife
+sequential gearbox for the JCW class. It is a different car from the road-going
+MINI John Cooper Works Challenge, which is sold with a six-speed manual.
+
+The three Chevrolet Opalas sit in three separate classes at two gear counts: Old
+Stock Race on five, and the 1979 and 1986 Stock Cars on four. The source lists
+four- and five-speed floor-shift manuals without dating either, so which
+specification used which is not established by it and the counts come from the
+drives.
+
 ## Completed in dataset 0.3.53 (batch 21: Hot Cars, Hypercars, Kartcross)
 
 Seven cars from three classes found while re-walking the class list.
