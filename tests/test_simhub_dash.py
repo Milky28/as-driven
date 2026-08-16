@@ -399,6 +399,36 @@ class SimHubDashTests(unittest.TestCase):
             glance_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
+    def test_every_size_binds_its_own_fitted_name_and_class(self):
+        """Each size measures the name for its own width.
+
+        The aero package now rides on the class line, so the name binding must
+        be the fitted one for that surface rather than the raw display name,
+        which is 45 characters at its longest and was being cut off.
+        """
+        for variant, name_property in (
+            ("detailed", "OverlayCarNameDetailed"),
+            ("compact", "OverlayCarNameDetailed"),
+            ("glance", "OverlayCarNameGlance"),
+        ):
+            dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
+            named = {
+                value["Name"]: value
+                for value in walk(dashboard)
+                if isinstance(value, dict) and "Name" in value
+            }
+            self.assertIn(
+                f"AsDriven.{name_property}",
+                named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
+                variant,
+            )
+            if variant != "glance":
+                self.assertIn(
+                    "AsDriven.OverlayCarClassDetailed",
+                    named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
+                    variant,
+                )
+
     def test_card_content_stays_inside_the_box_that_holds_it(self):
         """Nothing overlaps its neighbour or escapes its container.
 

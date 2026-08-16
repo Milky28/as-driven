@@ -1202,11 +1202,25 @@ namespace AsDriven.Core.Tests
             True(FitsSegoeUi(snapshot.OverlayCarNameGlance, 174, 15f, true), label + " glance car name fits");
             AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryLine1, snapshot.TechniqueSummaryLine2, label + " detailed technique");
             AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryCompactLine1, snapshot.TechniqueSummaryCompactLine2, label + " compact technique");
-            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
-            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameCompact, label + " compact car name");
-            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameGlance, label + " glance car name");
-            AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassDetailed, label + " detailed car class");
-            AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassCompact, label + " compact car class");
+            // The aero package is shown on the class line rather than the name,
+            // so the name is measured against the car without it and the class
+            // line against the two composed together.
+            string baseName = PreflightLabels.BaseName(snapshot.DisplayName);
+            string classLine = PreflightLabels.ClassLine(snapshot.DisplayName, snapshot.CarClass);
+            AssertFittedPrefix(baseName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
+            AssertFittedPrefix(baseName, snapshot.OverlayCarNameCompact, label + " compact car name");
+            AssertFittedPrefix(baseName, snapshot.OverlayCarNameGlance, label + " glance car name");
+            AssertFittedPrefix(classLine, snapshot.OverlayCarClassDetailed, label + " detailed car class");
+            AssertFittedPrefix(classLine, snapshot.OverlayCarClassCompact, label + " compact car class");
+            // A name that used to be cut off must now survive whole on the
+            // detailed card, which is the point of moving the package.
+            if (snapshot.AeroPackage.Length > 0)
+            {
+                False(snapshot.OverlayCarNameDetailed.EndsWith("...", StringComparison.Ordinal),
+                    label + " detailed car name is no longer truncated by its aero package");
+                True(snapshot.OverlayCarClassDetailed.IndexOf(snapshot.AeroPackage, StringComparison.Ordinal) >= 0,
+                    label + " detailed class line carries the aero package");
+            }
         }
 
         private static void AssertTechniqueDisplay(string summary, string line1, string line2, string label)

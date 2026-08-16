@@ -1,3 +1,5 @@
+using System;
+
 namespace AsDriven.Core
 {
     /// <summary>
@@ -20,6 +22,53 @@ namespace AsDriven.Core
         /// gap in the evidence, and must not be shown as though it were.</summary>
         public const string ToneOptional = "optional";
         public const string ToneUnknown = "unknown";
+
+        /// <summary>
+        /// The aero packages AMS2 appends to a car's name. The simulator picks
+        /// these from the circuit rather than the driver, so which one is loaded
+        /// is worth showing - but appended to a name it pushes the car itself
+        /// off the end of the card.
+        /// </summary>
+        private static readonly string[] AeroPackages =
+        {
+            "High Downforce", "Low Downforce", "Superspeedway", "Speedway"
+        };
+
+        /// <summary>The aero package in a display name, or empty when it carries none.</summary>
+        public static string AeroPackage(string displayName)
+        {
+            if (string.IsNullOrEmpty(displayName)) { return string.Empty; }
+            foreach (string package in AeroPackages)
+            {
+                if (displayName.EndsWith(" - " + package, StringComparison.Ordinal))
+                {
+                    return package;
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>The car's name without its aero package.</summary>
+        public static string BaseName(string displayName)
+        {
+            string package = AeroPackage(displayName);
+            return package.Length == 0
+                ? displayName
+                : displayName.Substring(0, displayName.Length - package.Length - 3);
+        }
+
+        /// <summary>
+        /// The line under the car's name: its aero package where it has one,
+        /// then the class the simulator reports.
+        /// </summary>
+        public static string ClassLine(string displayName, string carClass)
+        {
+            string package = AeroPackage(displayName);
+            if (package.Length == 0) { return carClass; }
+            return string.IsNullOrEmpty(carClass)
+                ? package
+                : package + "  -  " + carClass;
+        }
 
         public static string WheelRim(string shape)
         {

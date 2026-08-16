@@ -31,6 +31,9 @@ namespace AsDriven.Core
         public string OverlayCarNameCompact { get; private set; }
         public string OverlayCarClassCompact { get; private set; }
         public string OverlayCarNameGlance { get; private set; }
+
+        /// <summary>The aero package AMS2 selected, empty when the car has none.</summary>
+        public string AeroPackage { get; private set; }
         public string StandingStartClutch { get; private set; }
         public string AutoBlip { get; private set; }
         public string ShiftCut { get; private set; }
@@ -227,6 +230,8 @@ namespace AsDriven.Core
             string rawCarIdentifier,
             string matchKind)
         {
+            string baseName = PreflightLabels.BaseName(values.DisplayName);
+            string classLine = PreflightLabels.ClassLine(values.DisplayName, values.CarClass);
             string[] techniqueLines = SplitTechniqueSummary(values.TechniqueSummary);
             string[] summaryLines = WrapLines(values.DriverSummary, 620, 1250, 3);
             string[] compactSummaryLines = WrapLines(values.DriverSummary, 432, 1100, 3);
@@ -253,11 +258,14 @@ namespace AsDriven.Core
                 TechniqueSummaryLine2 = techniqueLines[1],
                 TechniqueSummaryCompactLine1 = compactTechniqueLines[0],
                 TechniqueSummaryCompactLine2 = compactTechniqueLines[1],
-                OverlayCarNameDetailed = FitSingleLine(values.DisplayName, 530, 2150),
-                OverlayCarClassDetailed = FitSingleLine(values.CarClass, 530, 1200),
-                OverlayCarNameCompact = FitSingleLine(values.DisplayName, 300, 1750),
-                OverlayCarClassCompact = FitSingleLine(values.CarClass, 300, 950),
-                OverlayCarNameGlance = FitSingleLine(values.DisplayName, 166, 1500),
+                // The aero package moves to the class line: appended to the name
+                // it pushed the car itself off the end of the card.
+                OverlayCarNameDetailed = FitSingleLine(baseName, 530, 2150),
+                OverlayCarClassDetailed = FitSingleLine(classLine, 530, 1200),
+                OverlayCarNameCompact = FitSingleLine(baseName, 300, 1750),
+                OverlayCarClassCompact = FitSingleLine(classLine, 300, 950),
+                OverlayCarNameGlance = FitSingleLine(baseName, 166, 1500),
+                AeroPackage = PreflightLabels.AeroPackage(values.DisplayName),
                 StandingStartClutch = values.StandingStartClutch,
                 AutoBlip = values.AutoBlip,
                 ShiftCut = values.ShiftCut,
@@ -319,6 +327,7 @@ namespace AsDriven.Core
                 OverlayCarNameCompact = string.Empty,
                 OverlayCarClassCompact = string.Empty,
                 OverlayCarNameGlance = string.Empty,
+                AeroPackage = string.Empty,
                 StandingStartClutch = string.Empty,
                 AutoBlip = string.Empty,
                 ShiftCut = string.Empty,
