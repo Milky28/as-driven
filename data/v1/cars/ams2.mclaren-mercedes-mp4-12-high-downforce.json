@@ -48,7 +48,7 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away, which is the semi-automatic pattern of the era.",
-      "Only the high-downforce identity has been observed for this car, and no other configuration of its class has ever been reported, so no further identity is carried."
+      "The unsuffixed identity is held in SimHub's stored inventory from an earlier observation and is carried here. An earlier note said no other configuration had been reported, which was drawn from the live diagnostics log alone and missed the stored one."
     ]
   },
   "simulators": [
@@ -62,6 +62,10 @@
         {
           "kind": "class-id",
           "value": "F-V10_Gen1_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren Mercedes MP4/12"
         }
       ],
       "behavior": {

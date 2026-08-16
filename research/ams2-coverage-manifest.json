@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.50",
+  "dataset_version": "0.3.51",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
@@ -118,26 +118,17 @@
   "stats": {
     "observed_identities": 319,
     "curated_records": 210,
-    "covered_exact_identities": 302,
-    "uncovered_identities": 17,
-    "full_guided_verifications": 3,
+    "covered_exact_identities": 304,
+    "uncovered_identities": 15,
+    "full_guided_verifications": 0,
     "dispositions": {
-      "aero-inheritance-ready": 1,
-      "configuration-inheritance-review": 1,
-      "covered-exact": 302,
-      "full-guided-verification": 3,
+      "covered-exact": 304,
       "out-of-scope": 1,
-      "retired-identity": 5,
-      "third-party-content": 6
+      "retired-identity": 7,
+      "third-party-content": 7
     },
-    "full_verifications_by_family": {
-      "open-wheel": 1,
-      "other": 2
-    },
-    "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 2,
-      "legacy-controls-candidate-available": 1
-    }
+    "full_verifications_by_family": {},
+    "full_verifications_by_research_readiness": {}
   },
   "entries": [
     {
@@ -3582,10 +3573,10 @@
       "telemetry_name": "McLaren Mercedes MP4/12",
       "car_id": "McLaren Mercedes MP4/12",
       "identity_file": "McLaren Mercedes MP4_12.shcarsettings",
-      "coverage_disposition": "configuration-inheritance-review",
+      "coverage_disposition": "covered-exact",
       "family": "open-wheel",
       "related_record_id": "ams2.mclaren-mercedes-mp4-12-high-downforce",
-      "recommended_action": "A qualified configuration is curated; confirm this exact identity is the same controls before adding it.",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1736992674.3824291,
@@ -3609,10 +3600,10 @@
       "telemetry_name": "McLaren MP4/8",
       "car_id": "McLaren MP4/8",
       "identity_file": "McLaren MP4_8.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "retired-identity",
       "family": "open-wheel",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.mclaren-cosworth-mp4-8-high-downforce",
+      "recommended_action": "Reviewed as a retired pre-rename identity; superseded by McLaren Cosworth MP4/8 - High Downforce. No guided drive is scheduled.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1715298874.6285682,
@@ -3746,10 +3737,10 @@
       "telemetry_name": "Mercedes-Benz CLK LM - Low Downforce",
       "car_id": "Mercedes-Benz CLK LM - Low Downforce",
       "identity_file": "Mercedes-Benz CLK LM - Low Downforce.shcarsettings",
-      "coverage_disposition": "aero-inheritance-ready",
+      "coverage_disposition": "covered-exact",
       "family": "other",
       "related_record_id": "ams2.mercedes-benz-clk-lm",
-      "recommended_action": "Base identity is curated; review this exact aero identity as inherited and explicitly untested.",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733608482.5199015,
@@ -4067,14 +4058,14 @@
       "telemetry_name": "Porsche 911 RSR 74",
       "car_id": "Porsche 911 RSR 74",
       "identity_file": "Porsche 911 RSR 74.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "retired-identity",
       "family": "other",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.porsche-911-rsr-1974",
+      "recommended_action": "Reviewed as a retired pre-rename identity; superseded by Porsche 911 RSR 1974. No guided drive is scheduled.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1720905131.52318,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Porsche 911 RSR GTE",
@@ -4096,14 +4087,14 @@
       "telemetry_name": "Porsche 935/77",
       "car_id": "Porsche 935/77",
       "identity_file": "Porsche 935_77.shcarsettings",
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "third-party-content",
       "family": "other",
       "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "recommended_action": "Reviewed as third-party content that AMS2 never shipped; outside the curated scope of official simulator cars.",
       "identity_source": "stored-car-file",
       "simhub_max_gears": 4,
       "identity_file_modified_at": 1733629929.8454506,
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Porsche 962C",

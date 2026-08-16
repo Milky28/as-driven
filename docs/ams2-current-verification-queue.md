@@ -1,5 +1,30 @@
 # AMS2 current verification queue
 
+## The queue is empty as of dataset 0.3.51
+
+Every AMS2 identity observed on this PC is now either curated or closed by a
+written reviewer decision. Nothing is waiting to be driven.
+
+The last three were closed as decisions rather than drives. `Porsche 911 RSR 74`
+is an abbreviated pre-rename form of the curated `Porsche 911 RSR 1974`, and
+`McLaren MP4/8` is the pre-rename form of the curated `McLaren Cosworth MP4/8`,
+which gained its engine maker the way `Lotus Renault 98T` did. Neither is
+aliased onto its record, because the certified build no longer produces either
+string. `Porsche 935/77` is modded content the maintainer no longer has
+installed; SimHub stored the identity while the mod was present, which is how it
+entered the inventory.
+
+Promoting the last two cars created two review-only items, both now closed:
+`McLaren Mercedes MP4/12` and `Mercedes-Benz CLK LM - Low Downforce` were held in
+SimHub's stored inventory and are carried on their records as untested
+configurations.
+
+This is a floor, not a finish. The inventory only holds identities that have been
+loaded on this PC, so a car nobody has selected is invisible rather than missing,
+and the class sweep found dozens of exactly those. New AMS2 content will need the
+same treatment.
+
+
 ## Completed in dataset 0.3.50 (batch 19: the last five drives)
 
 Five cars, and the drive queue is down to three identities that need a decision

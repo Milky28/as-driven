@@ -61,6 +61,10 @@
         {
           "kind": "class-id",
           "value": "GT1"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Mercedes-Benz CLK LM - Low Downforce"
         }
       ],
       "behavior": {
