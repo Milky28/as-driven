@@ -10,7 +10,7 @@
       "label": "620R, from 2013",
       "from": 2013
     },
-    "class": "Cat620R",
+    "class": "Caterham 620R",
     "real_world_identity_notes": "Caterham Seven 620R, the supercharged two-litre Ford Duratec car of 310 bhp that replaced the Superlight R500 as the most extreme Seven. It uses a six-speed sequential gearbox with flat-shift."
   },
   "authentic_controls": {
@@ -136,5 +136,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

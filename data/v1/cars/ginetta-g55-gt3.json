@@ -10,7 +10,7 @@
       "from": 2012,
       "label": "2012 GT3 specification"
     },
-    "class": "GTOpen",
+    "class": "GT Open",
     "real_world_identity_notes": "British customer racing car introduced in 2012 with a Ginetta Racing 4.35 litre V8 and a Hewland six-speed. Unlike every other car in this batch it is driven through a sequential lever rather than paddles, and it requires the clutch to pull away. The reviewed source does not differentiate the GT3 gearbox type from the Cup car sequential manual, and its paddle-shift description applies to the later G55 GTA rather than this car."
   },
   "authentic_controls": {

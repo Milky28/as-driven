@@ -19,7 +19,7 @@
     {
       "simulator": "ams2",
       "class_id": "Cat620R",
-      "name": "Cat620R",
+      "name": "Caterham 620R",
       "records": 1,
       "overridden_by": []
     },
@@ -338,14 +338,14 @@
     {
       "simulator": "ams2",
       "class_id": "G40Cup",
-      "name": "G40Cup",
+      "name": "Ginetta G40 Cup",
       "records": 1,
       "overridden_by": []
     },
     {
       "simulator": "ams2",
       "class_id": "G55Supercup",
-      "name": "G55Supercup",
+      "name": "Ginetta GT4 Supercup",
       "records": 1,
       "overridden_by": []
     },
@@ -408,7 +408,7 @@
     {
       "simulator": "ams2",
       "class_id": "GTOpen",
-      "name": "GTOpen",
+      "name": "GT Open",
       "records": 1,
       "overridden_by": []
     },
@@ -527,14 +527,14 @@
     {
       "simulator": "ams2",
       "class_id": "Opala79",
-      "name": "Opala79",
+      "name": "Stock Opala Cars '79",
       "records": 1,
       "overridden_by": []
     },
     {
       "simulator": "ams2",
       "class_id": "Opala86",
-      "name": "Opala86",
+      "name": "Stock Opala Cars '86",
       "records": 1,
       "overridden_by": []
     },

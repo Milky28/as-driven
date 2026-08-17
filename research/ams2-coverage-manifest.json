@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.71",
+  "dataset_version": "0.3.72",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 189,
+    "live_identities_seen": 191,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -111,6 +111,7 @@
       "MetalMoro MRX Duratec Turbo P2",
       "MetalMoro MRX Duratec Turbo P3",
       "MetalMoro MRX Honda P3",
+      "Mitsubishi Lancer Evo10 RX",
       "Mitsubishi Lancer R",
       "Mitsubishi Lancer RS",
       "Passat Classic B",
@@ -136,6 +137,7 @@
       "Swift 009c Ford-Cosworth - High Downforce",
       "Uno Classic B",
       "Volkswagen Constellation",
+      "Volkswagen Polo RX",
       "Vulkan Truck"
     ]
   },
@@ -150,23 +152,23 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 353,
+    "observed_identities": 355,
     "curated_records": 242,
     "covered_exact_identities": 336,
-    "uncovered_identities": 17,
-    "full_guided_verifications": 2,
+    "uncovered_identities": 19,
+    "full_guided_verifications": 4,
     "dispositions": {
       "covered-exact": 336,
-      "full-guided-verification": 2,
+      "full-guided-verification": 4,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
     "full_verifications_by_family": {
-      "other": 2
+      "other": 4
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 2
+      "independent-control-research-needed": 4
     }
   },
   "entries": [
@@ -4229,6 +4231,20 @@
       "research_readiness": "independent-control-research-needed"
     },
     {
+      "telemetry_name": "Mitsubishi Lancer Evo10 RX",
+      "car_id": "Mitsubishi Lancer Evo10 RX",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "RX",
+      "live_observed_at": "2026-08-17T19:44:39.3567008Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
       "telemetry_name": "Mitsubishi Lancer R",
       "car_id": "Mitsubishi Lancer R",
       "identity_file": null,
@@ -5342,6 +5358,20 @@
       "live_observed_at": "2026-08-14T19:50:26.1877294Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Volkswagen Polo RX",
+      "car_id": "Volkswagen Polo RX",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "RX",
+      "live_observed_at": "2026-08-17T19:46:28.3277989Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Vulkan Truck",
