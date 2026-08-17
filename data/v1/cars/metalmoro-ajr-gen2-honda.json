@@ -9,7 +9,7 @@
     "year": {
       "label": "AMS2 configuration"
     },
-    "class": "P1Gen2",
+    "class": "P1 Gen2",
     "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. Second-generation AJR configuration as modelled in AMS2. The registered source describes one generation of the AJR and no Gen2, so the generation is simulator content rather than a documented revision.",
     "variant": "Gen2 Honda"
   },
@@ -137,5 +137,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

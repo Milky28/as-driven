@@ -10,7 +10,7 @@
       "from": 2023,
       "label": "GT3 EVO2"
     },
-    "class": "GT3 Gen2",
+    "class": "GT3",
     "real_world_identity_notes": "Lamborghini identifies the EVO2 as part of the six-speed sequential Huracan GT3 lineage. The exact base AMS2 identity was guided-tested; Low Downforce is an explicit aero-package alias inheriting the base controls and was not separately tested."
   },
   "authentic_controls": {
@@ -182,5 +182,5 @@
     "Low Downforce is an explicit inherited alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

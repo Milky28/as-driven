@@ -10,7 +10,7 @@
       "from": 2017,
       "label": "AJR platform (2017); AMS2 Gen2 configuration"
     },
-    "class": "P1Gen2",
+    "class": "P1 Gen2",
     "real_world_identity_notes": "Second-generation configuration of the Metalmoro AJR sports prototype as modeled in AMS2; 'Chevrolet' denotes the engine, not the marque. A distinct selectable identity from the base AJR and reviewed independently, not inherited. Uses a sequential six-speed gearbox. Live testing confirmed clutch-free move-off, six paddle-selected gears, and automatic cut and blip."
   },
   "authentic_controls": {

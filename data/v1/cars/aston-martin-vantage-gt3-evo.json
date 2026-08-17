@@ -10,7 +10,7 @@
       "from": 2024,
       "label": "2024 Evo"
     },
-    "class": "GT3 Gen2",
+    "class": "GT3",
     "real_world_identity_notes": "Aston Martin identifies the 2024 Vantage GT3 as a comprehensive evolution sharing the mechanical architecture of the previous Vantage GT3/GTE. The predecessor's six-speed sequential hardware and the exact AMS2 paddle interface are kept distinct in provenance."
   },
   "authentic_controls": {
@@ -150,5 +150,5 @@
     "The simulator mechanism permitting clutch-free move-off remains explicitly unknown.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

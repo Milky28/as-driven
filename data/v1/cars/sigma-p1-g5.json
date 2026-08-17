@@ -9,7 +9,7 @@
     "year": {
       "label": "G5 configuration"
     },
-    "class": "P1Gen2",
+    "class": "P1 Gen2",
     "real_world_identity_notes": "Brazilian sports prototype built by Sigma; the G5 is a later development of the P1 with revised safety structures and aerodynamics."
   },
   "authentic_controls": {
@@ -139,5 +139,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

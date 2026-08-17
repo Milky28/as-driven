@@ -11,7 +11,7 @@
       "from": 2023,
       "to": 2023
     },
-    "class": "GT3 Gen2",
+    "class": "GT3",
     "real_world_identity_notes": "AMS2 sheet identity for the 2023 GT3 Gen2 McLaren 720S GT3 EVO."
   },
   "authentic_controls": {
@@ -155,5 +155,5 @@
     "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

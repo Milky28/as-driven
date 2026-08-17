@@ -9,7 +9,7 @@
     "year": {
       "label": "AMS2 configuration"
     },
-    "class": "P1Gen2",
+    "class": "P1 Gen2",
     "real_world_identity_notes": "British sports prototype built by Ginetta, developed from its LMP3 car with a carbon fibre monocoque and a 6,162 cc LS3 of about 575 bhp. Second-generation configuration as modelled in AMS2; the registered source describes no such revision, so the generation is simulator content."
   },
   "authentic_controls": {
@@ -136,5 +136,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

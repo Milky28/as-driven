@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.69",
+  "dataset_version": "0.3.70",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 185,
+    "live_identities_seen": 188,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -18,6 +18,7 @@
       "Chevrolet Opala Old Stock Race",
       "Chevrolet Opala Stock Cars 1979",
       "Chevrolet Opala Stock Cars 1986",
+      "Citroen DS3 RX",
       "Copa Montana",
       "Copa Uno",
       "Formula Classic Gen1 Model1 - High Downforce",
@@ -81,12 +82,14 @@
       "Lola T98/00 Ford-Cosworth - High Downforce",
       "Lola T98/00 Ford-Cosworth - Speedway",
       "Lola T98/00 Ford-Cosworth - Superspeedway",
+      "Lotus 23",
       "Lotus 72E",
       "Lotus Renault 98T",
       "Lotus Renault 98T - High Downforce",
       "MAN TGX",
       "MCR S2000",
       "MINI Cooper JCW",
+      "MINI Cooper S 1965",
       "MINI Cooper S 1965 B",
       "McLaren 720S GT3",
       "McLaren Cosworth MP4/1C - High Downforce",
@@ -146,19 +149,24 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 349,
+    "observed_identities": 352,
     "curated_records": 240,
     "covered_exact_identities": 334,
-    "uncovered_identities": 15,
-    "full_guided_verifications": 0,
+    "uncovered_identities": 18,
+    "full_guided_verifications": 3,
     "dispositions": {
       "covered-exact": 334,
+      "full-guided-verification": 3,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
-    "full_verifications_by_family": {},
-    "full_verifications_by_research_readiness": {}
+    "full_verifications_by_family": {
+      "other": 3
+    },
+    "full_verifications_by_research_readiness": {
+      "independent-control-research-needed": 3
+    }
   },
   "entries": [
     {
@@ -1095,6 +1103,20 @@
       "live_observed_at": "2026-08-16T04:37:20.0483508Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Citroen DS3 RX",
+      "car_id": "Citroen DS3 RX",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "RX",
+      "live_observed_at": "2026-08-17T19:36:04.8492156Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Copa Fusca",
@@ -3344,6 +3366,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Lotus 23",
+      "car_id": "Lotus 23",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "TC60S2",
+      "live_observed_at": "2026-08-17T19:26:26.0474223Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
+    },
+    {
       "telemetry_name": "Lotus 49C",
       "car_id": "Lotus 49C",
       "identity_file": "Lotus 49C.shcarsettings",
@@ -4148,6 +4184,20 @@
       "live_observed_at": "2026-08-16T04:29:45.6244036Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MINI Cooper S 1965",
+      "car_id": "MINI Cooper S 1965",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "TC60S2",
+      "live_observed_at": "2026-08-17T19:29:46.6149337Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "MINI Cooper S 1965 B",
