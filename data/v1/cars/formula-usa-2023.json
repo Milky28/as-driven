@@ -11,7 +11,7 @@
       "from": 2023,
       "to": 2023
     },
-    "class": "F-USA G4",
+    "class": "Formula USA",
     "real_world_identity_notes": "AMS2 fictional 2023 Formula USA / F-USA G4 identity from the versioned source sheet.",
     "variant": "2023"
   },
@@ -169,5 +169,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

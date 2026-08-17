@@ -10,7 +10,7 @@
       "label": "2000 CART season",
       "from": 2000
     },
-    "class": "F-USA_Gen3_HD",
+    "class": "CART",
     "real_world_identity_notes": "Reynard 2KI of the 2000 CART season, raced with Honda Indy V8 turbo, Mercedes-Benz IC108, Toyota RV8E and Ford-Cosworth XD engines and fitted with a six-speed sequential manual gearbox.",
     "variant": "High Downforce"
   },
@@ -150,5 +150,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

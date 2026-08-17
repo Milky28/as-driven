@@ -10,7 +10,7 @@
       "label": "1992 Formula One season",
       "from": 1992
     },
-    "class": "F-Hitech_Gen1_HD",
+    "class": "Formula One",
     "real_world_identity_notes": "McLaren MP4/7A, the Honda RA122E/B V12 car of 1992 and the first McLaren with a semi-automatic transmission: a McLaren transverse six-speed with an electro-hydraulic clutch and paddle shift that let the driver hold the throttle while the system changed gear."
   },
   "authentic_controls": {
@@ -145,5 +145,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

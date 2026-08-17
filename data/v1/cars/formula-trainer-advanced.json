@@ -9,7 +9,7 @@
     "year": {
       "label": "Formula Trainer Advanced"
     },
-    "class": "F-Trainer_A",
+    "class": "Formula Trainer Advanced",
     "real_world_identity_notes": "Reiza's fictional entry-level open-wheel car, described as a category intended for new racing drivers with a car that appears to be based on the Formula Ford."
   },
   "authentic_controls": {
@@ -138,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

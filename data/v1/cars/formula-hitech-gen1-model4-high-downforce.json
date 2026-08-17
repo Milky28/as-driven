@@ -9,7 +9,7 @@
     "year": {
       "label": "Formula HiTech Gen1 Model4"
     },
-    "class": "F-Hitech_Gen1_HD",
+    "class": "Formula HiTech Gen1",
     "real_world_identity_notes": "Reiza's fictionalised early-1990s Formula One car, reviewed independently of the other Gen1 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show."
   },
   "authentic_controls": {
@@ -143,5 +143,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

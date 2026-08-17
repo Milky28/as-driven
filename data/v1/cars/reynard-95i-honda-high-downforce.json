@@ -10,7 +10,7 @@
       "label": "1995 IndyCar season",
       "from": 1995
     },
-    "class": "F-USA_Gen1_HD",
+    "class": "IndyCar",
     "real_world_identity_notes": "Reynard 95I of the 1995 IndyCar season, a chassis raced with Honda, Ford/Cosworth XB and Mercedes-Benz IC108 engines and fitted with a six-speed sequential manual gearbox.",
     "variant": "High Downforce"
   },
@@ -145,5 +145,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

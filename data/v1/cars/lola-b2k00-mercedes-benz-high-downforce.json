@@ -10,7 +10,7 @@
       "label": "2000 CART season",
       "from": 2000
     },
-    "class": "F-USA_Gen3_HD",
+    "class": "CART",
     "real_world_identity_notes": "Lola B2K/00 of the 2000 CART season, raced with Mercedes-Benz IC108E, Toyota RV8E and Ford/Cosworth XF engines and fitted with a six-speed sequential manual gearbox.",
     "variant": "High Downforce"
   },
@@ -149,5 +149,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

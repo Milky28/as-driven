@@ -11,7 +11,7 @@
       "from": 2017,
       "to": 2021
     },
-    "class": "F-Ultimate_HD",
+    "class": "Formula Ultimate Hybrid Gen2",
     "real_world_identity_notes": "Reiza's fictionalised modern hybrid Formula car, the Gen2 of the Formula Ultimate line. No real-world chassis identity is assigned. It is a separate car from Formula Ultimate Hybrid Gen3, which AMS2 places in its own class family. Reiza's fictionalised Formula car for the 2017 to 2021 hybrid era. It was reclassified as Gen2 when Reiza rebranded the 2022 ground-effect car from Formula Ultimate Gen2 to Formula Ultimate Hybrid Gen3.",
     "variant": "Hybrid Gen2"
   },
@@ -150,5 +150,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

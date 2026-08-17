@@ -10,7 +10,7 @@
       "label": "1993 Formula One season",
       "from": 1993
     },
-    "class": "F-Hitech_Gen2_HD",
+    "class": "Formula One",
     "real_world_identity_notes": "McLaren MP4/8, the Ford HBD7 V8 car of 1993, using a McLaren transverse six-speed semi-automatic sequential gearbox developed with Techniques d'Avant Garde which could be switched over to fully automatic."
   },
   "authentic_controls": {
@@ -145,5 +145,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

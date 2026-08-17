@@ -9,7 +9,7 @@
     "year": {
       "label": "Formula Classic Gen2 Model2"
     },
-    "class": "F-Classic_Gen2_HD",
+    "class": "Formula Classic Gen2",
     "real_world_identity_notes": "Reiza's fictionalised late-1980s Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show."
   },
   "authentic_controls": {
@@ -147,5 +147,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

@@ -10,7 +10,7 @@
       "label": "1998 CART season",
       "from": 1998
     },
-    "class": "F-USA_Gen2_HD",
+    "class": "CART",
     "real_world_identity_notes": "Swift 009.c of the 1998 CART season, Swift Engineering's second CART chassis, a carbon fibre monocoque running the Ford-XD 2,650 cc V8 turbo.",
     "variant": "High Downforce"
   },
@@ -150,5 +150,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

@@ -10,7 +10,7 @@
       "label": "1998 CART season",
       "from": 1998
     },
-    "class": "F-USA_Gen2_HD",
+    "class": "CART",
     "real_world_identity_notes": "Reynard 98I of the 1998 CART season, the chassis that took both titles that year with Alex Zanardi, fitted with a six-speed sequential manual gearbox and raced with Honda, Mercedes-Benz, Toyota and Ford/Cosworth engines.",
     "variant": "High Downforce"
   },
@@ -148,5 +148,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

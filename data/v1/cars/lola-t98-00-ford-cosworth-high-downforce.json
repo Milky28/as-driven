@@ -10,7 +10,7 @@
       "label": "1998 CART season",
       "from": 1998
     },
-    "class": "F-USA_Gen2_HD",
+    "class": "CART",
     "real_world_identity_notes": "Lola T98/00 of the 1998 CART season, raced with the Ford/Cosworth XB turbo and Honda Indy V8 engines and fitted with a six-speed manual gearbox.",
     "variant": "High Downforce"
   },
@@ -149,5 +149,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }

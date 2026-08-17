@@ -9,7 +9,7 @@
     "year": {
       "label": "Formula Classic Gen3 Model2"
     },
-    "class": "F-Classic_Gen3_HD",
+    "class": "Formula Classic Gen3",
     "real_world_identity_notes": "Reiza's fictionalised semi-automatic car of the era when Formula One was moving away from manual gearboxes, reviewed independently of the other models in its class. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show."
   },
   "authentic_controls": {
@@ -144,5 +144,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

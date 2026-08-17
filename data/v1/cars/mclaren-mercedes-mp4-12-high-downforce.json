@@ -10,7 +10,7 @@
       "label": "1997 Formula One season",
       "from": 1997
     },
-    "class": "F-V10_Gen1_HD",
+    "class": "Formula One",
     "real_world_identity_notes": "McLaren MP4/12 of 1997, running Mercedes-Benz FO110E and FO110F V10s with a McLaren six-speed longitudinal semi-automatic sequential gearbox.",
     "variant": "High Downforce"
   },
@@ -140,5 +140,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-17"
 }
