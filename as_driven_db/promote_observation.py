@@ -59,6 +59,10 @@ def build_promoted_record(
     all_refs = real_world_refs + [live_source_id]
 
     # Reviewer-supplied real-world identity. The drive cannot establish these.
+    # The staged class is the simulator's class token. A real category is a
+    # human judgement - AMS2's TC60S is called Vintage Cars Tier 1 in game, and
+    # nothing in the draft says so - and the client draws it onto the overlay.
+    record["identity"]["class"] = _required(entry, "class", label)
     record["identity"]["manufacturer"] = _required(entry, "manufacturer", label)
     record["identity"]["model"] = _required(entry, "model", label)
     record["identity"]["year"] = _required(entry, "year", label)

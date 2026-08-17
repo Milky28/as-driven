@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.70",
+  "dataset_version": "0.3.71",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 188,
+    "live_identities_seen": 189,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -91,6 +91,7 @@
       "MINI Cooper JCW",
       "MINI Cooper S 1965",
       "MINI Cooper S 1965 B",
+      "MINI Countryman R60 RX",
       "McLaren 720S GT3",
       "McLaren Cosworth MP4/1C - High Downforce",
       "McLaren Cosworth MP4/8 - High Downforce",
@@ -149,23 +150,23 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 352,
-    "curated_records": 240,
-    "covered_exact_identities": 334,
-    "uncovered_identities": 18,
-    "full_guided_verifications": 3,
+    "observed_identities": 353,
+    "curated_records": 242,
+    "covered_exact_identities": 336,
+    "uncovered_identities": 17,
+    "full_guided_verifications": 2,
     "dispositions": {
-      "covered-exact": 334,
-      "full-guided-verification": 3,
+      "covered-exact": 336,
+      "full-guided-verification": 2,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
     "full_verifications_by_family": {
-      "other": 3
+      "other": 2
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 3
+      "independent-control-research-needed": 2
     }
   },
   "entries": [
@@ -3369,15 +3370,15 @@
       "telemetry_name": "Lotus 23",
       "car_id": "Lotus 23",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "other",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "lotus-23",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "TC60S2",
       "live_observed_at": "2026-08-17T19:26:26.0474223Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Lotus 49C",
@@ -4189,15 +4190,15 @@
       "telemetry_name": "MINI Cooper S 1965",
       "car_id": "MINI Cooper S 1965",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "other",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "mini-cooper-s-1965",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "TC60S2",
       "live_observed_at": "2026-08-17T19:29:46.6149337Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "MINI Cooper S 1965 B",
@@ -4212,6 +4213,20 @@
       "live_observed_at": "2026-08-14T18:10:55.1167254Z",
       "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MINI Countryman R60 RX",
+      "car_id": "MINI Countryman R60 RX",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "RX",
+      "live_observed_at": "2026-08-17T19:42:25.2482990Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Mitsubishi Lancer R",

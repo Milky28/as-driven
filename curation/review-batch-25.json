@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.71",
+  "approved_at": "2026-08-17",
+  "records": [
+    {
+      "record_id": "lotus-23",
+      "bundle": "build/batch-25/lotus-23.staged.json",
+      "manufacturer": "Lotus",
+      "model": "Type 23",
+      "year": {
+        "from": 1962,
+        "label": "1962 Group 4 sports racer"
+      },
+      "real_world_identity_notes": "Purpose-built two-seat sports racer introduced by Lotus in 1962 for FIA Group 4. Lotus states that gearbox choices typically included Renault or Volkswagen units, without giving a gear count, and the drive found four forward gears. Which unit AMS2 models is therefore not established, and neither is whether it engages by dogs or synchronisers.",
+      "real_world_source_refs": [
+        "lotuscars.type-23"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Controls observed live with automatic clutch and shifting disabled; the real car's identity and gearbox options come from Lotus's own history of the type.",
+      "identity_basis": "Lotus's own account of the Type 23 as a 1962 Group 4 sports racer, matched to the exact observed AMS2 telemetry identity.",
+      "specification_basis": "Lotus names Renault or Volkswagen gearbox choices without stating a gear count, and the guided drive selected four forward gears through an H-pattern gate. No source establishes which unit this is, so the construction stays unknown rather than being read from either option.",
+      "confidence_notes": "Four gears, an H-pattern standard gate, a clutch to pull away, and clutchless shifts in both directions were directly observed. The gearbox construction is deliberately unrecorded.",
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "Lotus offered the 23 with a choice of gearboxes, and no source establishes which one AMS2 models. The construction therefore stays unknown and the downshift blip is not inferred from either candidate."
+      ],
+      "driver_summary": "Lotus offered the 23 with a choice of Renault or Volkswagen gearboxes, and the drive found four gears. Which one this is, and whether it engages by dogs or synchros, is not established, so blip on downshifts to be safe.",
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "class": "Vintage Cars Tier 2"
+    },
+    {
+      "record_id": "mini-cooper-s-1965",
+      "bundle": "build/batch-25/mini-cooper-s-1965.staged.json",
+      "manufacturer": "Mini",
+      "model": "Cooper S",
+      "year": {
+        "from": 1965,
+        "label": "1965 Cooper S"
+      },
+      "real_world_identity_notes": "Classic Mini Cooper S of 1965, classed by AMS2 under Vintage Cars Tier 2. AMS2 also carries this car under Copa Classic B as a separate entry, curated as mini-cooper-s-1965-b; the two are kept as separate records by reviewer decision rather than sharing one. Its four-speed gearbox is the three-synchromesh type fitted to all Minis between 1959 and 1968.",
+      "real_world_source_refs": [
+        "minispares.classic-mini-gearbox"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Controls observed live with automatic clutch and shifting disabled; the gearbox is established by a marque specialist covering the classic Mini's boxes from 1959 to 1968.",
+      "identity_basis": "Marque-specialist history of the classic Mini gearbox, matched to the exact observed AMS2 telemetry identity.",
+      "specification_basis": "The specialist source records the three-synchromesh gearbox fitted to every Mini until September 1968, with synchronisers on second, third and fourth and none on first. The guided drive selected four forward gears through an H-pattern gate.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "confidence_notes": "Four gears, an H-pattern standard gate, a clutch to pull away, and clutchless shifts in both directions were directly observed. The synchromesh construction and the optional downshift blip come from the registered specialist source, not from the drive.",
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+        "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional for that reason.",
+        "First gear has no synchroniser on the three-synchromesh box fitted until September 1968, so a downshift into first needs the driver to match revs. The other three gears are synchronised."
+      ],
+      "driver_summary": "Three-synchromesh gearbox: second, third and fourth have synchronisers and first does not, on every Mini until September 1968. Blip to ease the synchronised gears, and match revs yourself for any downshift into first.",
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "class": "Vintage Cars Tier 2"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.70",
+  "dataset_version": "0.3.71",
   "released_at": "2026-08-17",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -145,6 +145,7 @@
     "cars/lola-t95-00-ford-cosworth-high-downforce.json",
     "cars/lola-t95-00-mercedes-benz-high-downforce.json",
     "cars/lola-t98-00-ford-cosworth-high-downforce.json",
+    "cars/lotus-23.json",
     "cars/lotus-49c.json",
     "cars/lotus-72e.json",
     "cars/lotus-renault-98t-high-downforce.json",
@@ -187,6 +188,7 @@
     "cars/milano-gt55.json",
     "cars/mini-cooper-jcw.json",
     "cars/mini-cooper-s-1965-b.json",
+    "cars/mini-cooper-s-1965.json",
     "cars/mitsubishi-lancer-r.json",
     "cars/mitsubishi-lancer-rs.json",
     "cars/nissan-gt-r-nismo-gt3.json",

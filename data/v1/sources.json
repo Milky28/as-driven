@@ -2368,6 +2368,30 @@
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six gears through a sequential stick, automatic cut detected, no automatic blip, D-shaped rim with no display or shift lights."
     },
     {
+      "source_id": "ams2.local-live-porsche-911-gt3-cup-3-8-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 GT3 Cup 3.8 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.porsche-911-gt3-cup-3-8.20260817t053322815z-2b4d7f70 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 GT3 Cup 4.0 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.porsche-911-gt3-cup-4-0.20260817t053533610z-cdfa71d6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-porsche-911-gt3-r-controls.1.6.9.91",
       "title": "Live AMS2 Porsche 911 GT3 R guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -3950,6 +3974,18 @@
       "notes": "Chassis-builder heritage record for the Lola T710 that underpins the Corvette GTP. Used for real-world chassis identity context."
     },
     {
+      "source_id": "lotuscars.type-23",
+      "title": "Lotus Type 23",
+      "publisher": "Lotus Cars",
+      "url": "https://www.lotuscars.com/en/lotus-story/race-cars/type-23",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Lotus's own history of the Type 23, a purpose-built two-seat sports racer introduced in 1962 for FIA Group 4. States that gearbox choices typically included Renault or Volkswagen units, and that the Renault box was often preferred for its shift ergonomics in right-hand drive. Gives no gear count and names no Hewland option."
+    },
+    {
       "source_id": "manthey.718-gt4-clubsport-mr.kit",
       "title": "Kit 718 GT4 Clubsport MR (982)",
       "publisher": "Manthey-Racing GmbH",
@@ -5223,28 +5259,28 @@
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
     },
     {
-      "source_id": "ams2.local-live-porsche-911-gt3-cup-3-8-controls.1.6.9.91",
-      "title": "Live AMS2 Porsche 911 GT3 Cup 3.8 guided-verification drive",
+      "source_id": "ams2.local-live-lotus-23-controls.1.6.9.91",
+      "title": "Live AMS2 Lotus 23 guided-verification drive",
       "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
+      "url": "https://localhost/as-driven/guided-verification",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-17",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.porsche-911-gt3-cup-3-8.20260817t053322815z-2b4d7f70 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.lotus-23.20260817t192722843z-5965cd35 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
-      "source_id": "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91",
-      "title": "Live AMS2 Porsche 911 GT3 Cup 4.0 guided-verification drive",
+      "source_id": "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91",
+      "title": "Live AMS2 MINI Cooper S 1965 guided-verification drive",
       "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
+      "url": "https://localhost/as-driven/guided-verification",
       "archive_url": null,
       "source_type": "in-game-observation",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-17",
       "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.porsche-911-gt3-cup-4-0.20260817t053533610z-cdfa71d6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+      "notes": "Guided-verification observation ams2.mini-cooper-s-1965.20260817t193016084z-732907cf by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

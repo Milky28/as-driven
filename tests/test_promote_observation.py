@@ -60,6 +60,7 @@ def _review_entry() -> dict:
     return {
         "record_id": "test-prototype",
         "bundle": "build/bundle.json",
+        "class": "Test Prototype Cup",
         "manufacturer": "Test Motors",
         "model": "Prototype",
         "year": {"from": 2024, "label": "2024 test season"},
@@ -155,6 +156,32 @@ class PromoteObservationTests(unittest.TestCase):
 
             # The whole point: the promoted pair survives the real validator.
             self.assertEqual(validate_repository(temp), [])
+
+    def test_promotion_refuses_a_simulator_class_token(self) -> None:
+        """The staged class is AMS2's token; a real category is a human call.
+
+        AMS2's TC60S is called Vintage Cars Tier 1 in game and nothing in a
+        draft says so, and the client draws the class onto the overlay.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = _review_entry()
+            del entry["class"]
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("class", str(caught.exception))
+
+    def test_promoted_class_is_the_reviewers_not_the_drafts(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(record["identity"]["class"], "Test Prototype Cup")
+            self.assertNotEqual(record["identity"]["class"], "TESTP1")
 
     def test_a_second_simulator_joins_the_record_instead_of_forking_it(self) -> None:
         """One real car, one record, an entry per simulator.

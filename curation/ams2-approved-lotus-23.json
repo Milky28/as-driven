@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.71",
+  "approved_at": "2026-08-17",
+  "record_id": "lotus-23",
+  "simulator": "ams2",
+  "telemetry_name": "Lotus 23",
+  "telemetry_class": "TC60S2",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.lotus-23.20260817t192722843z-5965cd35",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "unknown",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Four gears, an H-pattern standard gate, a clutch to pull away, and clutchless shifts in both directions were directly observed. The gearbox construction is deliberately unrecorded.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

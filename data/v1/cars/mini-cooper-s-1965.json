@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mini-cooper-s-1965",
+  "identity": {
+    "display_name": "MINI Cooper S 1965",
+    "manufacturer": "Mini",
+    "model": "Cooper S",
+    "year": {
+      "from": 1965,
+      "label": "1965 Cooper S"
+    },
+    "class": "Vintage Cars Tier 2",
+    "real_world_identity_notes": "Classic Mini Cooper S of 1965, classed by AMS2 under Vintage Cars Tier 2. AMS2 also carries this car under Copa Classic B as a separate entry, curated as mini-cooper-s-1965-b; the two are kept as separate records by reviewer decision rather than sharing one. Its four-speed gearbox is the three-synchromesh type fitted to all Minis between 1959 and 1968."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+      "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional for that reason.",
+      "First gear has no synchroniser on the three-synchromesh box fitted until September 1968, so a downshift into first needs the driver to match revs. The other three gears are synchronised."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "MINI Cooper S 1965"
+        },
+        {
+          "kind": "class-id",
+          "value": "TC60S2"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mini-cooper-s-1965.20260817t193016084z-732907cf by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-17",
+      "source_refs": [
+        "minispares.classic-mini-gearbox",
+        "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Controls observed live with automatic clutch and shifting disabled; the gearbox is established by a marque specialist covering the classic Mini's boxes from 1959 to 1968."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "minispares.classic-mini-gearbox",
+          "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Marque-specialist history of the classic Mini gearbox, matched to the exact observed AMS2 telemetry identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "minispares.classic-mini-gearbox",
+          "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The specialist source records the three-synchromesh gearbox fitted to every Mini until September 1968, with synchronisers on second, third and fourth and none on first. The guided drive selected four forward gears through an H-pattern gate."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-17",
+  "driver_summary": "Three-synchromesh gearbox: second, third and fourth have synchronisers and first does not, on every Mini until September 1968. Blip to ease the synchronised gears, and match revs yourself for any downshift into first."
+}

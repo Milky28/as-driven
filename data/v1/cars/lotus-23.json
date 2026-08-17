@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lotus-23",
+  "identity": {
+    "display_name": "Lotus 23",
+    "manufacturer": "Lotus",
+    "model": "Type 23",
+    "year": {
+      "from": 1962,
+      "label": "1962 Group 4 sports racer"
+    },
+    "class": "Vintage Cars Tier 2",
+    "real_world_identity_notes": "Purpose-built two-seat sports racer introduced by Lotus in 1962 for FIA Group 4. Lotus states that gearbox choices typically included Renault or Volkswagen units, without giving a gear count, and the drive found four forward gears. Which unit AMS2 models is therefore not established, and neither is whether it engages by dogs or synchronisers."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+      "Lotus offered the 23 with a choice of gearboxes, and no source establishes which one AMS2 models. The construction therefore stays unknown and the downshift blip is not inferred from either candidate."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lotus 23"
+        },
+        {
+          "kind": "class-id",
+          "value": "TC60S2"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.lotus-23.20260817t192722843z-5965cd35 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-17",
+      "source_refs": [
+        "lotuscars.type-23",
+        "ams2.local-live-lotus-23-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Controls observed live with automatic clutch and shifting disabled; the real car's identity and gearbox options come from Lotus's own history of the type."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "lotuscars.type-23",
+          "ams2.local-live-lotus-23-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Lotus's own account of the Type 23 as a 1962 Group 4 sports racer, matched to the exact observed AMS2 telemetry identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "lotuscars.type-23",
+          "ams2.local-live-lotus-23-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Lotus names Renault or Volkswagen gearbox choices without stating a gear count, and the guided drive selected four forward gears through an H-pattern gate. No source establishes which unit this is, so the construction stays unknown rather than being read from either option."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lotus-23-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-17",
+  "driver_summary": "Lotus offered the 23 with a choice of Renault or Volkswagen gearboxes, and the drive found four gears. Which one this is, and whether it engages by dogs or synchros, is not established, so blip on downshifts to be safe."
+}

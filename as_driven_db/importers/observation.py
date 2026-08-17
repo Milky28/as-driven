@@ -237,6 +237,9 @@ def import_observation(
             "manufacturer": REVIEW,
             "model": REVIEW,
             "year": {"label": REVIEW},
+            # The simulator's own class token, a placeholder only: the review
+            # manifest must replace it with the real category. Promotion
+            # refuses without one, so this never reaches a curated record.
             "class": telemetry_class,
             "real_world_identity_notes": (
                 "Real-world identity (manufacturer, model, year) and any real-car "
