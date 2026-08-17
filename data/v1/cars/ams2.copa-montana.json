@@ -12,7 +12,7 @@
       "to": 2012
     },
     "class": "Montana",
-    "real_world_identity_notes": "Pickup-bodied racer of the Brazilian Copa Chevrolet Montana, a series that ran from 2010 to 2012. It carries a 5.7-litre carburetted V8 of about 369 hp at some 1,360 kg, shifted by a sequential stick.",
+    "real_world_identity_notes": "Pickup-bodied racer of the Brazilian Copa Chevrolet Montana, which ran from 2010 to 2012 as an access division to Stock Car Brasil. The cars used a tubular chassis built by JL Racing and a carburetted Chevrolet 5.7-litre V8 of 350 cv, shifted sequentially.",
     "variant": "Copa Montana racing specification"
   },
   "authentic_controls": {
@@ -48,7 +48,8 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither."
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+      "The earlier record cited a community site for this car's transmission and power. That site is generated from Coanda's AMS2 spreadsheet and so describes the simulator, not the real car; Portuguese Wikipedia replaces it, and the power figure follows the source at 350 cv."
     ]
   },
   "simulators": [
@@ -83,8 +84,8 @@
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-14",
       "source_refs": [
-        "ams2cars.chevrolet-montana",
-        "ams2.local-live-copa-montana-controls.1.6.9.91"
+        "ams2.local-live-copa-montana-controls.1.6.9.91",
+        "wikipedia-pt.copa-chevrolet-montana"
       ],
       "confidence": {
         "level": "medium",
@@ -114,11 +115,11 @@
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "ams2cars.chevrolet-montana",
-          "ams2.local-live-copa-montana-controls.1.6.9.91"
+          "ams2.local-live-copa-montana-controls.1.6.9.91",
+          "wikipedia-pt.copa-chevrolet-montana"
         ],
         "confidence": "medium",
-        "basis": "The reference gives a sequential stick gearbox with five gears, and the live drive selected five gears through a sequential stick with automatic cut and blip."
+        "basis": "Portuguese Wikipedia gives the series car a sequential gearbox on a tubular JL Racing chassis, and the live drive selected five gears through a sequential stick with automatic cut and blip. The source does not state the gear count, so the five gears are the drive's result."
       },
       {
         "paths": [
@@ -129,12 +130,13 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-copa-montana-controls.1.6.9.91"
+          "ams2.local-live-copa-montana-controls.1.6.9.91",
+          "wikipedia-pt.copa-chevrolet-montana"
         ],
         "confidence": "medium",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Portuguese Wikipedia gives the series car a sequential gearbox on a tubular JL Racing chassis, and the live drive selected five gears through a sequential stick with automatic cut and blip. The source does not state the gear count, so the five gears are the drive's result."
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-16"
 }

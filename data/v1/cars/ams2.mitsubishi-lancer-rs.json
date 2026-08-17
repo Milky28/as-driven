@@ -10,7 +10,7 @@
       "label": "Lancer Cup RS"
     },
     "class": "LancerCup",
-    "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup one-make series in RS specification, with a 2.0-litre 4B11T MIVEC turbo of about 301 hp at some 1,490 kg and six gears through a sequential stick.",
+    "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup in RS specification, built from the Lancer Evolution X at about 340 cv with a six-speed sequential gearbox and powershift for clutchless changes.",
     "variant": "RS"
   },
   "authentic_controls": {
@@ -48,7 +48,8 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
       "The RS and the R share the Lancer Cup class and are entirely different to drive. Nothing is inherited between them.",
-      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
+      "The earlier record cited a community site generated from Coanda's AMS2 spreadsheet. An independent Brazilian feature replaces it and states the gearbox directly, including the powershift that matches the clutchless running shifts the drive observed."
     ]
   },
   "simulators": [
@@ -83,8 +84,8 @@
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-16",
       "source_refs": [
-        "ams2cars.mitsubishi-lancer-rs",
-        "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91"
+        "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91",
+        "linkezine.mitsubishi-lancer-cup"
       ],
       "confidence": {
         "level": "medium",
@@ -114,11 +115,11 @@
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "ams2cars.mitsubishi-lancer-rs",
-          "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91"
+          "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91",
+          "linkezine.mitsubishi-lancer-cup"
         ],
-        "confidence": "medium",
-        "basis": "The reference gives six gears through a sequential stick, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip."
+        "confidence": "high",
+        "basis": "The registered feature gives the RS a six-speed sequential gearbox with powershift, meaning clutchless gear changes, and the live drive selected six gears through a sequential stick with automatic cut and clutchless running shifts."
       },
       {
         "paths": [
@@ -129,10 +130,11 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91"
+          "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91",
+          "linkezine.mitsubishi-lancer-cup"
         ],
-        "confidence": "medium",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "confidence": "high",
+        "basis": "The registered feature gives the RS a six-speed sequential gearbox with powershift, meaning clutchless gear changes, and the live drive selected six gears through a sequential stick with automatic cut and clutchless running shifts."
       }
     ]
   },

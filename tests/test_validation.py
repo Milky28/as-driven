@@ -15,6 +15,62 @@ class ValidationTests(unittest.TestCase):
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repository(ROOT), [])
 
+    def test_no_real_world_claim_rests_on_a_simulator_source(self) -> None:
+        """The simulator's own material cannot establish a real car's controls.
+
+        ams2cars.info is generated from Coanda's AMS2 spreadsheet, so it reports
+        what the game models while reading as independent research. Four records
+        cited it for /authentic_controls/transmission values.
+
+        This is deliberately narrow. Recording an authentic control from a
+        guided drive where no real-world source reaches it is this project's
+        documented practice, and `audit-boundaries` already tracks those; the
+        rule here is only that material published by or derived from the
+        simulator may not be dressed up as evidence about the real car.
+        """
+        sources = json.loads(
+            (ROOT / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+        )["sources"]
+        # in-game-observation is this project's own guided drives, which are how
+        # the simulator layer is evidenced and are cited by design.
+        # official-simulator is the simulator's own published material, which
+        # describes what the game models and can never establish a real car.
+        by_type = {source["source_id"]: source["source_type"] for source in sources}
+        simulator_side = {
+            source_id for source_id, kind in by_type.items()
+            if kind == "official-simulator"
+        }
+        # This project's own guided drives evidence the simulator layer and are
+        # cited on authentic paths by design, so they are neither the offence
+        # nor the independent support that excuses one.
+        own_drives = {
+            source_id for source_id, kind in by_type.items()
+            if kind == "in-game-observation"
+        }
+        self.assertTrue(simulator_side, "expected at least one simulator-side source")
+
+        offenders = []
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            for claim in record["provenance"]["claims"]:
+                # Notes are prose about the record, not control values; a
+                # release note legitimately supports one.
+                real_world = [
+                    pointer for pointer in claim["paths"]
+                    if pointer.startswith("/authentic_controls")
+                    and not pointer.startswith("/authentic_controls/notes")
+                ]
+                if not real_world:
+                    continue
+                refs = set(claim["source_refs"])
+                cited = refs & simulator_side
+                independent = refs - simulator_side - own_drives
+                # Simulator material may sit beside real research as context.
+                # It may not be the only thing holding a real-world claim up.
+                if cited and not independent:
+                    offenders.append(f"{record['record_id']}: {sorted(cited)}")
+        self.assertEqual([], offenders)
+
     def test_an_inferred_gearbox_is_never_claimed_at_high_confidence(self) -> None:
         """A mechanism nobody sourced cannot be a high-confidence claim.
 

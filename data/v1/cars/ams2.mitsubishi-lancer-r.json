@@ -10,7 +10,7 @@
       "label": "Lancer Cup R"
     },
     "class": "LancerCup",
-    "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup one-make series in R specification, the H-shifter car of the class's two entries.",
+    "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup in R specification, built from the Lancer Evolution X. It ran as a separate class from the sequential RS and was later discontinued.",
     "variant": "R"
   },
   "authentic_controls": {
@@ -50,7 +50,8 @@
       "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
       "The R and the RS share the Lancer Cup class and are entirely different to drive: this car is a five-speed H-pattern with no automation, and the RS is a six-speed sequential with an automatic cut. Nothing is inherited between them.",
       "The reviewed reference covers the RS rather than this car, so the R's gearbox construction is the ordinary reading of a road-derived manual rather than a stated specification.",
-      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
+      "The earlier record cited a community site generated from Coanda's AMS2 spreadsheet, and read this car's H-pattern as the specification that reference distinguished from the RS. The independent sources describe the R's preparation but not its gearbox, so the H-pattern now rests on the drive alone."
     ]
   },
   "simulators": [
@@ -85,8 +86,9 @@
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-16",
       "source_refs": [
-        "ams2cars.mitsubishi-lancer-rs",
-        "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91"
+        "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91",
+        "linkezine.mitsubishi-lancer-cup",
+        "motorshow.lancer-cup"
       ],
       "confidence": {
         "level": "medium",
@@ -116,11 +118,12 @@
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "ams2cars.mitsubishi-lancer-rs",
-          "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91"
+          "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91",
+          "linkezine.mitsubishi-lancer-cup",
+          "motorshow.lancer-cup"
         ],
         "confidence": "medium",
-        "basis": "The live drive selected five H-pattern gears with no automatic cut or blip, which matches the R specification the reference distinguishes from the sequential RS."
+        "basis": "The registered sources establish the Lancer Cup and its R car, prepared from the Evolution X, but neither states the R's gearbox. The five H-pattern gears come from the live drive, and synchromesh is the ordinary reading of a road-derived manual rather than a stated specification."
       },
       {
         "paths": [
@@ -131,10 +134,12 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91"
+          "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91",
+          "linkezine.mitsubishi-lancer-cup",
+          "motorshow.lancer-cup"
         ],
         "confidence": "medium",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "The registered sources establish the Lancer Cup and its R car, prepared from the Evolution X, but neither states the R's gearbox. The five H-pattern gears come from the live drive, and synchromesh is the ordinary reading of a road-derived manual rather than a stated specification."
       }
     ]
   },

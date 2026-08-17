@@ -1396,6 +1396,30 @@
       "notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
     },
     {
+      "source_id": "ams2.local-live-ginetta-g58-controls.1.6.9.91",
+      "title": "Live AMS2 Ginetta G58 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.ginetta-g58.20260816t150953718z-ea537c38 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-ginetta-g58-gen2-controls.1.6.9.91",
+      "title": "Live AMS2 Ginetta G58 Gen2 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.ginetta-g58-gen2.20260817t042106739z-b256483d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-gol-classic-b-controls.1.6.9.91",
       "title": "Live AMS2 Gol Classic B guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -1948,6 +1972,18 @@
       "notes": "Guided-verification observation ams2.mclaren-senna.20260816t034507196z-234a2b83 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-mcr-s2000-controls.1.6.9.91",
+      "title": "Live AMS2 MCR S2000 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mcr-s2000.20260817t044512882z-83f67c74 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-mercedes-amg-gt3-controls.1.6.9.91",
       "title": "Live AMS2 Mercedes-AMG GT3 guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -2044,6 +2080,66 @@
       "notes": "Guided-verification observation ams2.metalmoro-ajr-gen2-chevrolet.20260812t210833987z-e09cfc05 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-metalmoro-ajr-gen2-honda-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro AJR Gen2 Honda guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-ajr-gen2-honda.20260817t042609406z-fbc5cc49 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-ajr-gen2-nissan-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro AJR Gen2 Nissan guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-ajr-gen2-nissan.20260817t042800860z-e4911129 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-ajr-honda-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro AJR Honda guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-ajr-honda.20260816t151304690z-bd3227c2 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-ajr-judd-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro AJR Judd guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-ajr-judd.20260816t151456905z-e3febd0b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-ajr-nissan-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro AJR Nissan guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-ajr-nissan.20260816t151657608z-4d799695 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-metalmoro-mrx-duratec-p4-controls.1.6.9.91",
       "title": "Live AMS2 MetalMoro MRX Duratec P4 guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -2054,6 +2150,42 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, six sequential-stick gears, full-throttle clutchless upshift with automatic cut detected, clutchless downshift with no automatic blip, round rim with no display or shift lights."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-mrx-duratec-turbo-p2-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro MRX Duratec Turbo P2 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-mrx-duratec-turbo-p2.20260817t043226978z-3f9b785f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-mrx-duratec-turbo-p3-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro MRX Duratec Turbo P3 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-mrx-duratec-turbo-p3.20260817t043659674z-d771315f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-metalmoro-mrx-honda-p3-controls.1.6.9.91",
+      "title": "Live AMS2 MetalMoro MRX Honda P3 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.metalmoro-mrx-honda-p3.20260817t043937857z-3caf7179 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-milano-gt36-controls.1.6.9.91",
@@ -2536,6 +2668,18 @@
       "notes": "Guided-verification observation ams2.reynard-98i-toyota-high-downforce.20260815t223142304z-9f9021f0 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-roco-001-controls.1.6.9.91",
+      "title": "Live AMS2 Roco 001 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.roco-001.20260817t044215491z-d4927fd9 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91",
       "title": "Live AMS2 Saleen S7-R GT1 control test",
       "publisher": "Local AMS2 observation",
@@ -2558,6 +2702,30 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
+    },
+    {
+      "source_id": "ams2.local-live-sigma-p1-controls.1.6.9.91",
+      "title": "Live AMS2 Sigma P1 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.sigma-p1.20260817t043429032z-4f562a18 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-sigma-p1-g5-controls.1.6.9.91",
+      "title": "Live AMS2 Sigma P1 G5 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.sigma-p1-g5.20260817t042956953z-ddbd2025 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-spyker-c8-spyder-gt2r-controls.1.6.9.91",
@@ -2922,11 +3090,11 @@
       "publisher": "Cars of AMS2",
       "url": "https://ams2cars.info/brazilian-series/copa-montana/",
       "archive_url": null,
-      "source_type": "community-research",
+      "source_type": "official-simulator",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Community AMS2 reference for the Copa Montana entry. Gives a 5.7-litre carburetted V8 of 369 hp, 1,360 kg, and a sequential stick gearbox with five gears. Dates the series 2010 to 2012."
+      "notes": "Community AMS2 reference for the Copa Montana entry. Gives a 5.7-litre carburetted V8 of 369 hp, 1,360 kg, and a sequential stick gearbox with five gears. Dates the series 2010 to 2012. This site states that its content is generated from Coanda's AMS2 spreadsheet, so it reports what the simulator models rather than what the real car had. It must not be cited for a real-world claim."
     },
     {
       "source_id": "ams2cars.copa-uno",
@@ -2934,11 +3102,11 @@
       "publisher": "Cars of AMS2",
       "url": "https://ams2cars.info/brazilian-series/brazilian-historics/copa-uno/",
       "archive_url": null,
-      "source_type": "community-research",
+      "source_type": "official-simulator",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Community AMS2 reference for the Copa Uno entry. Gives a 1.6-litre Type R naturally aspirated four of 131 hp at 860 kg with five gears. It describes the shifter as a sequential stick, which the cockpit observation contradicts; the same reference also overstates the ARC Camaro gear count, so its shifter field is not treated as authoritative."
+      "notes": "Community AMS2 reference for the Copa Uno entry. Gives a 1.6-litre Type R naturally aspirated four of 131 hp at 860 kg with five gears. It describes the shifter as a sequential stick, which the cockpit observation contradicts; the same reference also overstates the ARC Camaro gear count, so its shifter field is not treated as authoritative. This site states that its content is generated from Coanda's AMS2 spreadsheet, so it reports what the simulator models rather than what the real car had. It must not be cited for a real-world claim."
     },
     {
       "source_id": "ams2cars.mitsubishi-lancer-rs",
@@ -2946,11 +3114,11 @@
       "publisher": "Cars of AMS2",
       "url": "https://ams2cars.info/brazilian-series/lancer-cup/lancer-rs/",
       "archive_url": null,
-      "source_type": "community-research",
+      "source_type": "official-simulator",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-16",
       "reuse_status": "facts-only-review",
-      "notes": "Community AMS2 reference for the Lancer Cup entry. Gives the Lancer RS a 2.0-litre 4B11T MIVEC turbo of 301 hp at 1,490 kg, with six gears through a sequential stick."
+      "notes": "Community AMS2 reference for the Lancer Cup entry. Gives the Lancer RS a 2.0-litre 4B11T MIVEC turbo of 301 hp at 1,490 kg, with six gears through a sequential stick. This site states that its content is generated from Coanda's AMS2 spreadsheet, so it reports what the simulator models rather than what the real car had. It must not be cited for a real-world claim."
     },
     {
       "source_id": "ams2wiki.formula-trainer",
@@ -3167,6 +3335,18 @@
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
       "notes": "Describes Formula Vee's technical basis: a Volkswagen Beetle 1600 cc engine of 70 to 75 hp and a VW four-speed gearbox, sealed and restricted to reliability modifications."
+    },
+    {
+      "source_id": "blogdocarelli.copa-uno-1992",
+      "title": "Copa Onyx Jeans de Formula Uno - Temporada de 1992",
+      "publisher": "Blog do Carelli",
+      "url": "http://blogdocarelli.blogspot.com/2021/08/copa-onyx-jeans-de-formula-uno.html",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Brazilian motorsport history of the 1992 Copa Uno, organised by Luis Antonio Greco. The cars were built on the Fiat Uno 1.6R with 1,600 cc engines prepared by Greco Competicoes and drawn by lot each round. It describes the engine preparation and standardised suspension in detail and does not mention the gearbox at all."
     },
     {
       "source_id": "bmw.m-hybrid-v8.race-car",
@@ -3734,6 +3914,18 @@
       "notes": "Manufacturer specification states a six-speed sequential gearbox, centrifugal twin-disc clutch, pneumatic paddle shift, and bespoke integrated-display wheel. Driver technique is established separately."
     },
     {
+      "source_id": "linkezine.mitsubishi-lancer-cup",
+      "title": "O Mitsubishi Lancer Cup",
+      "publisher": "Linkezine",
+      "url": "https://linkezine.com.br/2016/08/16/o-mitsubishi-lancer-cup/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Brazilian feature on the Lancer Cup. States the RS runs a \"cambio sequencial de 6 marchas com powershift (trocas de marcha sem embreagem)\" - a six-speed sequential with clutchless gear changes - at 340 cv. It mentions the R only as a discontinued class and gives it no specification."
+    },
+    {
       "source_id": "lola-heritage.b05-40-spec",
       "title": "Lola B05/40, B05/42, MG EX264 specifications",
       "publisher": "Lola Heritage mirror",
@@ -3900,6 +4092,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "States the 3 synchromesh gearbox was fitted to all Minis between 1959 and 1968, with synchromesh only on 2nd, 3rd and 4th and first gear of the crash engagement type, and that a full synchromesh first gear arrived in 1968."
+    },
+    {
+      "source_id": "motorshow.lancer-cup",
+      "title": "Lancer Cup",
+      "publisher": "Motor Show",
+      "url": "https://motorshow.com.br/lancer-cup/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Brazilian magazine feature on the Lancer Cup's R car, prepared from the Lancer Evolution X with fibre body panels, a safety cage, bucket seats and revised suspension. It does not describe the gearbox."
     },
     {
       "source_id": "motorsport-magazine.ginetta-g40-buying-guide",
@@ -4304,7 +4508,7 @@
       "publisher": "Supercars Championship",
       "url": "https://www.supercars.com/news/manual-stick-shift-system-confirmed-for-gen3",
       "archive_url": null,
-      "source_type": "official-simulator",
+      "source_type": "manufacturer",
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
@@ -4357,6 +4561,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Lists the Type 9 five-speed in synchronized variants and one unsynchronized dog-engagement variant described as a motorsport application only purists find suitable for road use. Used as the falsifying alternative for the Caterham gearbox inference."
+    },
+    {
+      "source_id": "wikipedia-pt.copa-chevrolet-montana",
+      "title": "Copa Chevrolet Montana",
+      "publisher": "Wikipedia (Portuguese)",
+      "url": "https://pt.wikipedia.org/wiki/Copa_Chevrolet_Montana",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-16",
+      "reuse_status": "facts-only-review",
+      "notes": "Portuguese Wikipedia on the Brazilian one-make series, which ran from 2010 to 2012. Gives the cars a tubular chassis built by JL Racing, a carburetted Chevrolet 5.7 V8 of 350 cv, and a sequential gearbox. It does not state the gear count."
     },
     {
       "source_id": "wikipedia.audi-r8-lmp",
@@ -4981,174 +5197,6 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-ajr-honda-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro AJR Honda guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-16",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-ajr-honda.20260816t151304690z-bd3227c2 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-ajr-judd-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro AJR Judd guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-16",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-ajr-judd.20260816t151456905z-e3febd0b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-ajr-nissan-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro AJR Nissan guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-16",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-ajr-nissan.20260816t151657608z-4d799695 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-ajr-gen2-honda-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro AJR Gen2 Honda guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-ajr-gen2-honda.20260817t042609406z-fbc5cc49 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-ajr-gen2-nissan-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro AJR Gen2 Nissan guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-ajr-gen2-nissan.20260817t042800860z-e4911129 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-mrx-duratec-turbo-p2-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro MRX Duratec Turbo P2 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-mrx-duratec-turbo-p2.20260817t043226978z-3f9b785f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-mrx-duratec-turbo-p3-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro MRX Duratec Turbo P3 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-mrx-duratec-turbo-p3.20260817t043659674z-d771315f by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-metalmoro-mrx-honda-p3-controls.1.6.9.91",
-      "title": "Live AMS2 MetalMoro MRX Honda P3 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.metalmoro-mrx-honda-p3.20260817t043937857z-3caf7179 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-ginetta-g58-controls.1.6.9.91",
-      "title": "Live AMS2 Ginetta G58 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-16",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.ginetta-g58.20260816t150953718z-ea537c38 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-ginetta-g58-gen2-controls.1.6.9.91",
-      "title": "Live AMS2 Ginetta G58 Gen2 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.ginetta-g58-gen2.20260817t042106739z-b256483d by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-sigma-p1-controls.1.6.9.91",
-      "title": "Live AMS2 Sigma P1 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.sigma-p1.20260817t043429032z-4f562a18 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-sigma-p1-g5-controls.1.6.9.91",
-      "title": "Live AMS2 Sigma P1 G5 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.sigma-p1-g5.20260817t042956953z-ddbd2025 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mcr-s2000-controls.1.6.9.91",
-      "title": "Live AMS2 MCR S2000 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mcr-s2000.20260817t044512882z-83f67c74 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-roco-001-controls.1.6.9.91",
-      "title": "Live AMS2 Roco 001 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://www.game-automobilista2.com/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.roco-001.20260817t044215491z-d4927fd9 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }
