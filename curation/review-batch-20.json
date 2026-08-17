@@ -4,7 +4,7 @@
   "approved_at": "2026-08-16",
   "records": [
     {
-      "record_id": "ams2.mclaren-720s-gt3",
+      "record_id": "mclaren-720s-gt3",
       "bundle": "build/batch-20/mclaren-720s-gt3.staged.json",
       "manufacturer": "McLaren",
       "model": "720S GT3",

@@ -43,7 +43,7 @@
       "disposition": "retired-identity",
       "last_observed": "2024-06-23",
       "superseded_by": "Formula Vee Gen1 + Fin",
-      "related_record_id": "ams2.formula-vee-fin",
+      "related_record_id": "formula-vee-fin",
       "source_refs": [],
       "basis": "Stored 2024 observation of the pre-rename name. The renamed identity is curated and verified. Not aliased because the old name is not selectable in the certified build."
     },
@@ -52,7 +52,7 @@
       "disposition": "retired-identity",
       "last_observed": "2024-04-08",
       "superseded_by": "Formula Edge Model1",
-      "related_record_id": "ams2.formula-edge-model1-high-downforce",
+      "related_record_id": "formula-edge-model1-high-downforce",
       "source_refs": [
         "ams2.reiza-release.1.6.9.5.formula-edge"
       ],
@@ -108,7 +108,7 @@
       "disposition": "retired-identity",
       "last_observed": "2024-04-06",
       "superseded_by": "Lotus Renault 98T - High Downforce, Lotus Renault 98T",
-      "related_record_id": "ams2.lotus-renault-98t-high-downforce",
+      "related_record_id": "lotus-renault-98t-high-downforce",
       "source_refs": [],
       "basis": "Stored 2024 observation from before the car was renamed. Loading it in AMS2 1.6.9.91 reports Lotus Renault 98T, in both the high- and low-downforce configurations, so this exact string is no longer produced by the certified build and is not aliased onto the record. Both current identities are carried by ams2.lotus-renault-98t-high-downforce."
     },
@@ -117,16 +117,16 @@
       "disposition": "retired-identity",
       "last_observed": "2026-08-12",
       "superseded_by": "Formula Ultimate Hybrid Gen3",
-      "related_record_id": "ams2.formula-ultimate-2022",
+      "related_record_id": "formula-ultimate-2022",
       "source_refs": [],
-      "basis": "Reiza shipped the 2022 to 2025 ground-effect car as Formula Ultimate Gen2 and later rebranded it to Formula Ultimate Hybrid Gen3, reclassifying the older 2017 to 2021 hybrid cars as Gen2. The certified build reported neither this string nor its class while every Formula Ultimate configuration was being loaded, so it is retired. It is deliberately not aliased onto ams2.formula-ultimate-2022: the name is also one digit away from the separate car curated as Formula Ultimate Hybrid Gen2, and carrying a retired string that close to a live one invites the two being merged."
+      "basis": "Reiza shipped the 2022 to 2025 ground-effect car as Formula Ultimate Gen2 and later rebranded it to Formula Ultimate Hybrid Gen3, reclassifying the older 2017 to 2021 hybrid cars as Gen2. The certified build reported neither this string nor its class while every Formula Ultimate configuration was being loaded, so it is retired. It is deliberately not aliased onto formula-ultimate-2022: the name is also one digit away from the separate car curated as Formula Ultimate Hybrid Gen2, and carrying a retired string that close to a live one invites the two being merged."
     },
     {
       "telemetry_name": "Porsche 911 RSR 74",
       "disposition": "retired-identity",
       "last_observed": "2024-04-08",
       "superseded_by": "Porsche 911 RSR 1974",
-      "related_record_id": "ams2.porsche-911-rsr-1974",
+      "related_record_id": "porsche-911-rsr-1974",
       "source_refs": [],
       "basis": "Abbreviated form of the same car. The maintainer swept the TC70S class and reports that only Porsche 911 RSR 1974 appears in the selector, and that car was driven and curated in dataset 0.3.50. This string is a stored pre-rename observation that the certified build no longer produces, so it is not aliased onto the record."
     },
@@ -135,7 +135,7 @@
       "disposition": "retired-identity",
       "last_observed": "2025-01-15",
       "superseded_by": "McLaren Cosworth MP4/8 - High Downforce",
-      "related_record_id": "ams2.mclaren-cosworth-mp4-8-high-downforce",
+      "related_record_id": "mclaren-cosworth-mp4-8-high-downforce",
       "source_refs": [],
       "basis": "Pre-rename form of the same car. The maintainer reports that only McLaren Cosworth MP4/8 appears in the selector, and that car was driven and curated in dataset 0.3.37. Reiza added the engine maker to the name, as it did for Lotus Renault 98T. The bare string is a stored observation the certified build no longer produces, so it is not aliased onto the record."
     },

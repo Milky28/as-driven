@@ -1,0 +1,149 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "chevrolet-corvette-c3-r-convertible",
+  "identity": {
+    "display_name": "Chevrolet Corvette C3.R Convertible",
+    "manufacturer": "Chevrolet",
+    "model": "Corvette C3.R",
+    "variant": "Convertible",
+    "year": {
+      "label": "C3.R open-top game variant"
+    },
+    "class": "TC70S",
+    "real_world_identity_notes": "Reiza presents this as an open-top alternative to its existing closed C3.R. A unique real-world referent is not established, so related FIA homologation evidence is used only for manual-gearbox context and exact controls come from the guided AMS2 test."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-round-closed-no-display",
+        "notes": "Direct cockpit inspection showed a closed-top round rim without integrated display or wheel-mounted shift lights. Open-top describes the vehicle body, not the steering rim."
+      }
+    },
+    "notes": [
+      "The clutch is required to move from rest, but correctly rev-matched running shifts were accepted without it.",
+      "Full-throttle clutchless upshifts were rejected and succeeded only after a throttle lift; clutchless downshifts were rejected until the driver supplied a manual blip.",
+      "This is a separate record so the directly verified convertible technique is not silently applied to the older closed-car record."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Corvette C3.R Convertible"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Chevrolet Corvette C3.R Convertible"
+        },
+        {
+          "kind": "class-id",
+          "value": "TC70S"
+        }
+      ],
+      "behavior": {
+        "shift_type": "H-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round-closed-no-display"
+        },
+        "notes": [
+          "Guided live test completed with Auto Clutch and Auto Shifting disabled.",
+          "Standing-start clutch, four direct H selections, required lift/manual blip, and the closed round rim were directly observed."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.3.new-cars",
+        "fia.corvette.b-260.homologation",
+        "ams2.local-live-chevrolet-corvette-c3-r-convertible-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "The exact AMS2 identity and complete user-facing controls were directly tested. Real-world identity remains explicitly uncertain rather than being inferred from the related homologation form."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.new-cars",
+          "ams2.local-live-chevrolet-corvette-c3-r-convertible-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official Reiza context and exact live telemetry establish the distinct open-top game variant and class."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "fia.corvette.b-260.homologation",
+          "ams2.local-live-chevrolet-corvette-c3-r-convertible-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Related FIA evidence supports conventional manual H hardware, while direct AMS2 testing establishes the exact four-gear interface."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-corvette-c3-r-convertible-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Guided current-game A/B tests directly established standing-start clutch, lift/manual-blip requirements, absence of automatic cut/blip, and wheel details."
+      }
+    ]
+  },
+  "notes": [
+    "The unique real-world referent remains unknown; simulator behavior is exact and versioned."
+  ],
+  "updated_at": "2026-08-11"
+}

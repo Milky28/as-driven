@@ -4,7 +4,7 @@
   "approved_at": "2026-08-13",
   "records": [
     {
-      "record_id": "ams2.bmw-m4-gt3",
+      "record_id": "bmw-m4-gt3",
       "bundle": "build/observation-bundles/ams2.bmw-m4-gt3.json",
       "manufacturer": "BMW",
       "model": "M4 GT3",
@@ -31,7 +31,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.bmw-m6-gt3",
+      "record_id": "bmw-m6-gt3",
       "bundle": "build/observation-bundles/ams2.bmw-m6-gt3.json",
       "manufacturer": "BMW",
       "model": "M6 GT3",
@@ -58,7 +58,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with shift lights and no integrated display."
     },
     {
-      "record_id": "ams2.mercedes-amg-gt3",
+      "record_id": "mercedes-amg-gt3",
       "bundle": "build/observation-bundles/ams2.mercedes-amg-gt3.json",
       "manufacturer": "Mercedes-AMG",
       "model": "GT3",
@@ -85,7 +85,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.mercedes-amg-gt3-evo",
+      "record_id": "mercedes-amg-gt3-evo",
       "bundle": "build/observation-bundles/ams2.mercedes-amg-gt3-evo.json",
       "manufacturer": "Mercedes-AMG",
       "model": "GT3 Evo",
@@ -112,7 +112,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.nissan-gt-r-nismo-gt3",
+      "record_id": "nissan-gt-r-nismo-gt3",
       "bundle": "build/observation-bundles/ams2.nissan-gt-r-nismo-gt3.json",
       "manufacturer": "Nissan",
       "model": "GT-R NISMO GT3",
@@ -139,7 +139,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, round rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.porsche-911-gt3-r",
+      "record_id": "porsche-911-gt3-r",
       "bundle": "build/observation-bundles/ams2.porsche-911-gt3-r.json",
       "manufacturer": "Porsche",
       "model": "911 GT3 R",
@@ -166,7 +166,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, D-shaped rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.porsche-992-gt3-r",
+      "record_id": "porsche-992-gt3-r",
       "bundle": "build/observation-bundles/ams2.porsche-992-gt3-r.json",
       "manufacturer": "Porsche",
       "model": "911 GT3 R (992)",
@@ -193,7 +193,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.ginetta-g55-gt3",
+      "record_id": "ginetta-g55-gt3",
       "bundle": "build/observation-bundles/ams2.ginetta-g55-gt3.json",
       "manufacturer": "Ginetta",
       "model": "G55 GT3",

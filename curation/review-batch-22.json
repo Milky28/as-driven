@@ -4,7 +4,7 @@
   "approved_at": "2026-08-16",
   "records": [
     {
-      "record_id": "ams2.chevrolet-opala-old-stock-race",
+      "record_id": "chevrolet-opala-old-stock-race",
       "bundle": "build/batch-22/chevrolet-opala-old-stock-race.staged.json",
       "manufacturer": "Chevrolet",
       "model": "Opala",
@@ -49,7 +49,7 @@
       "variant": "Old Stock Race"
     },
     {
-      "record_id": "ams2.chevrolet-opala-stock-cars-1979",
+      "record_id": "chevrolet-opala-stock-cars-1979",
       "bundle": "build/batch-22/chevrolet-opala-stock-cars-1979.staged.json",
       "manufacturer": "Chevrolet",
       "model": "Opala",
@@ -94,7 +94,7 @@
       "variant": "Stock Cars 1979"
     },
     {
-      "record_id": "ams2.chevrolet-opala-stock-cars-1986",
+      "record_id": "chevrolet-opala-stock-cars-1986",
       "bundle": "build/batch-22/chevrolet-opala-stock-cars-1986.staged.json",
       "manufacturer": "Chevrolet",
       "model": "Opala",
@@ -140,7 +140,7 @@
       "variant": "Stock Cars 1986"
     },
     {
-      "record_id": "ams2.mitsubishi-lancer-r",
+      "record_id": "mitsubishi-lancer-r",
       "bundle": "build/batch-22/mitsubishi-lancer-r.staged.json",
       "manufacturer": "Mitsubishi",
       "model": "Lancer",
@@ -185,7 +185,7 @@
       "variant": "R"
     },
     {
-      "record_id": "ams2.mitsubishi-lancer-rs",
+      "record_id": "mitsubishi-lancer-rs",
       "bundle": "build/batch-22/mitsubishi-lancer-rs.staged.json",
       "manufacturer": "Mitsubishi",
       "model": "Lancer",
@@ -228,7 +228,7 @@
       "variant": "RS"
     },
     {
-      "record_id": "ams2.mini-cooper-jcw",
+      "record_id": "mini-cooper-jcw",
       "bundle": "build/batch-22/mini-cooper-jcw.staged.json",
       "manufacturer": "MINI",
       "model": "Cooper JCW",

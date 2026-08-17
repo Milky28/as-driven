@@ -58,7 +58,7 @@ def _observation() -> dict:
 
 def _review_entry() -> dict:
     return {
-        "record_id": "ams2.test-prototype",
+        "record_id": "test-prototype",
         "bundle": "build/bundle.json",
         "manufacturer": "Test Motors",
         "model": "Prototype",
@@ -74,7 +74,23 @@ def _review_entry() -> dict:
     }
 
 
+def _second_simulator_observation() -> dict:
+    """The same real car, driven in a different simulator."""
+    observation = _observation()
+    observation["observation_id"] = "ac-evo.test-prototype.20260817t120000000z-beef5678"
+    observation["simulator"] = "ac-evo"
+    observation["game_version"] = "0.3.1"
+    return observation
+
+
 class PromoteObservationTests(unittest.TestCase):
+    def _add_bundle(self, temp: Path, observation: dict, name: str) -> str:
+        bundle = import_observation(observation, imported_at="2026-08-17")
+        (temp / "build" / name).write_text(
+            json.dumps(bundle, indent=2), encoding="utf-8"
+        )
+        return f"build/{name}"
+
     def _prepare(self, temp: Path) -> Path:
         shutil.copytree(ROOT / "schema", temp / "schema")
         shutil.copytree(ROOT / "data", temp / "data")
@@ -125,7 +141,7 @@ class PromoteObservationTests(unittest.TestCase):
             temp = self._prepare(Path(directory))
             self._promote(temp, self._manifest(_review_entry()))
 
-            record_path = temp / "data" / "v1" / "cars" / "ams2.test-prototype.json"
+            record_path = temp / "data" / "v1" / "cars" / "test-prototype.json"
             self.assertTrue(record_path.exists())
             self.assertTrue(
                 (temp / "curation" / "ams2-approved-test-prototype.json").exists()
@@ -135,10 +151,87 @@ class PromoteObservationTests(unittest.TestCase):
                 (temp / "data" / "v1" / "index.json").read_text(encoding="utf-8")
             )
             self.assertEqual(index["dataset_version"], "9.9.9")
-            self.assertIn("cars/ams2.test-prototype.json", index["records"])
+            self.assertIn("cars/test-prototype.json", index["records"])
 
             # The whole point: the promoted pair survives the real validator.
             self.assertEqual(validate_repository(temp), [])
+
+    def test_a_second_simulator_joins_the_record_instead_of_forking_it(self) -> None:
+        """One real car, one record, an entry per simulator.
+
+        This is what the ``ams2.`` prefix used to prevent: the same car verified
+        in a second simulator would have been a second record, and the client
+        would have had two answers for one car.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            entry = _review_entry()
+            entry["bundle"] = self._add_bundle(
+                temp, _second_simulator_observation(), "bundle-ac-evo.json"
+            )
+            self._promote(temp, self._manifest(entry))
+
+            cars = sorted(p.name for p in (temp / "data" / "v1" / "cars").glob("*.json"))
+            self.assertEqual(cars.count("test-prototype.json"), 1)
+            self.assertNotIn("ac-evo.test-prototype.json", cars)
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                [item["simulator"] for item in record["simulators"]], ["ams2", "ac-evo"]
+            )
+            self.assertEqual(record["simulators"][1]["verified_game_version"], "0.3.1")
+
+            # The second entry's claims must point at it, not at the first.
+            second = [
+                claim
+                for claim in record["provenance"]["claims"]
+                if any(p.startswith("/simulators/1") for p in claim["paths"])
+            ]
+            self.assertTrue(second, "expected claims scoped to the second simulator")
+            self.assertFalse(
+                any(
+                    p.startswith("/authentic_controls")
+                    for claim in second
+                    for p in claim["paths"]
+                ),
+                "a second simulator must not restate the real car's claims",
+            )
+
+            # One approval per simulator, each naming its own.
+            approvals = sorted(p.name for p in (temp / "curation").glob("*-test-prototype.json"))
+            self.assertEqual(
+                approvals,
+                ["ac-evo-approved-test-prototype.json", "ams2-approved-test-prototype.json"],
+            )
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_the_same_simulator_cannot_be_promoted_onto_a_record_twice(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+            with self.assertRaises(FileExistsError):
+                self._promote(temp, self._manifest(_review_entry()))
+
+    def test_a_second_simulator_may_not_quietly_rewrite_the_real_car(self) -> None:
+        """A disagreement is a review decision, not a silent overwrite."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _second_simulator_observation()
+            observation["tests"]["forward_gears"] = 5
+            entry = _review_entry()
+            entry["bundle"] = self._add_bundle(temp, observation, "bundle-disagree.json")
+
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("forward_gears", str(caught.exception))
 
     def test_aero_alias_becomes_an_exact_record_identity(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -153,7 +246,7 @@ class PromoteObservationTests(unittest.TestCase):
             self._promote(temp, self._manifest(entry))
 
             record = json.loads(
-                (temp / "data" / "v1" / "cars" / "ams2.test-prototype.json").read_text(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
                     encoding="utf-8"
                 )
             )
@@ -187,7 +280,7 @@ class PromoteObservationTests(unittest.TestCase):
             self._promote(temp, self._manifest(entry))
 
             record = json.loads(
-                (temp / "data" / "v1" / "cars" / "ams2.test-prototype.json").read_text(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
                     encoding="utf-8"
                 )
             )
@@ -249,7 +342,7 @@ class PromoteObservationTests(unittest.TestCase):
             self._promote(temp, self._manifest(entry))
 
             record = json.loads(
-                (temp / "data" / "v1" / "cars" / "ams2.test-prototype.json").read_text(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
                     encoding="utf-8"
                 )
             )

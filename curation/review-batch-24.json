@@ -4,7 +4,7 @@
   "approved_at": "2026-08-17",
   "records": [
     {
-      "record_id": "ams2.porsche-911-gt3-cup-3-8",
+      "record_id": "porsche-911-gt3-cup-3-8",
       "bundle": "build/batch-24/porsche-911-gt3-cup-3-8.staged.json",
       "manufacturer": "Porsche",
       "model": "911 GT3 Cup 3.8",
@@ -51,7 +51,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.porsche-911-gt3-cup-4-0",
+      "record_id": "porsche-911-gt3-cup-4-0",
       "bundle": "build/batch-24/porsche-911-gt3-cup-4-0.staged.json",
       "manufacturer": "Porsche",
       "model": "911 GT3 Cup 4.0",

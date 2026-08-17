@@ -184,7 +184,7 @@ class SimHubIdentityAuditTests(unittest.TestCase):
             (cars / "f301.json").write_text(
                 json.dumps(
                     {
-                        "record_id": "ams2.f301",
+                        "record_id": "f301",
                         "simulators": [
                             {
                                 "simulator": "ams2",
@@ -205,7 +205,7 @@ class SimHubIdentityAuditTests(unittest.TestCase):
 
         item = review["review_items"][0]
         self.assertEqual(item["status"], "already-curated")
-        self.assertEqual(item["curated_record_id"], "ams2.f301")
+        self.assertEqual(item["curated_record_id"], "f301")
 
 
 if __name__ == "__main__":

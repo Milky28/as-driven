@@ -2,11 +2,15 @@
   "schema_version": "1.0.0",
   "dataset_version": "0.3.6",
   "approved_at": "2026-08-11",
-  "record_id": "ams2.lamborghini-murcielago-r-gt",
+  "record_id": "lamborghini-murcielago-r-gt",
+  "simulator": "ams2",
   "telemetry_name": "Lamborghini Murcielago R-GT",
   "telemetry_class": "GT1_05",
   "additional_telemetry_names": [
-    { "value": "Lamborghini Murcielago R-GT - Low Downforce", "basis": "Approved as an aero-package alias inheriting the verified base controls; this configuration was not separately live-tested." }
+    {
+      "value": "Lamborghini Murcielago R-GT - Low Downforce",
+      "basis": "Approved as an aero-package alias inheriting the verified base controls; this configuration was not separately live-tested."
+    }
   ],
   "observed_game_version": "1.6.9.91",
   "observed_through": "SimHub 9.11.22",

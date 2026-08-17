@@ -6,22 +6,22 @@
   "observed_through": "SimHub 9.11.22",
   "identities": [
     {
-      "record_id": "ams2.formula-v10-g2",
+      "record_id": "formula-v10-g2",
       "telemetry_name": "Formula V10 Gen2 (B) - High Downforce",
       "basis": "Exact live CarModel and CarId; B tyre and High Downforce are configuration qualifiers on Formula V10 Gen2."
     },
     {
-      "record_id": "ams2.formula-v10-g2",
+      "record_id": "formula-v10-g2",
       "telemetry_name": "Formula V10 Gen2 (M) - High Downforce",
       "basis": "Exact live CarModel and CarId; M tyre and High Downforce are configuration qualifiers on Formula V10 Gen2."
     },
     {
-      "record_id": "ams2.formula-ultimate-2019",
+      "record_id": "formula-ultimate-2019",
       "telemetry_name": "Formula Ultimate Hybrid Gen1 - High Downforce",
       "basis": "Exact live CarModel and CarId; High Downforce is an aero configuration qualifier on Formula Ultimate Hybrid Gen1."
     },
     {
-      "record_id": "ams2.formula-usa-2023",
+      "record_id": "formula-usa-2023",
       "telemetry_name": "Formula USA 2023 - High Downforce",
       "basis": "Exact live CarModel and CarId; High Downforce is an aero configuration qualifier on Formula USA 2023."
     }

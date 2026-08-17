@@ -4,7 +4,7 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "ams2.formula-ultimate-hybrid-gen2-high-downforce",
+      "record_id": "formula-ultimate-hybrid-gen2-high-downforce",
       "bundle": "build/formula-batch-15/formula-ultimate-hybrid-gen2-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Ultimate",

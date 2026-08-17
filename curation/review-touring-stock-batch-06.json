@@ -4,7 +4,7 @@
   "approved_at": "2026-08-13",
   "records": [
     {
-      "record_id": "ams2.bmw-m1-procar",
+      "record_id": "bmw-m1-procar",
       "bundle": "build/observation-bundles/ams2.bmw-m1-procar.json",
       "manufacturer": "BMW",
       "model": "M1 Procar",
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "record_id": "ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm",
+      "record_id": "mercedes-benz-190e-2-5-16-evo-ii-dtm",
       "bundle": "build/observation-bundles/ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm.json",
       "manufacturer": "Mercedes-Benz",
       "model": "190E 2.5-16 Evolution II",
@@ -122,7 +122,7 @@
       ]
     },
     {
-      "record_id": "ams2.bmw-m3-sport-evo-group-a",
+      "record_id": "bmw-m3-sport-evo-group-a",
       "bundle": "build/observation-bundles/ams2.bmw-m3-sport-evo-group-a.json",
       "manufacturer": "BMW",
       "model": "M3 Sport Evolution",
@@ -181,7 +181,7 @@
       ]
     },
     {
-      "record_id": "ams2.chevrolet-omega-stock-car-1999",
+      "record_id": "chevrolet-omega-stock-car-1999",
       "bundle": "build/observation-bundles/ams2.chevrolet-omega-stock-car-1999.json",
       "manufacturer": "Chevrolet",
       "model": "Omega Stock Car",
@@ -240,7 +240,7 @@
       ]
     },
     {
-      "record_id": "ams2.super-v8",
+      "record_id": "super-v8",
       "bundle": "build/observation-bundles/ams2.super-v8.json",
       "manufacturer": "Reiza",
       "model": "Super V8",
@@ -284,7 +284,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch required to move off, six gears through a sequential lever, automatic cut detected, no automatic blip, round rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.toyota-corolla-stock-car-2022",
+      "record_id": "toyota-corolla-stock-car-2022",
       "bundle": "build/observation-bundles/ams2.toyota-corolla-stock-car-2022.json",
       "manufacturer": "Toyota",
       "model": "Corolla Stock Car",

@@ -4,7 +4,7 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "ams2.fusca-classic-fl",
+      "record_id": "fusca-classic-fl",
       "bundle": "build/copa-classic-fl/fusca-classic-fl.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Fusca",
@@ -48,7 +48,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.passat-classic-fl",
+      "record_id": "passat-classic-fl",
       "bundle": "build/copa-classic-fl/passat-classic-fl.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Passat",

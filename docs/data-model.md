@@ -15,6 +15,18 @@ Simulator lookup keys live in `simulators[].identities`. Multiple typed values
 allow a consumer to try a stable internal ID first and a display-name alias
 last. Record IDs are stable project keys and must not be derived at runtime.
 
+A record is **one real car**, with an entry in `simulators[]` for each simulator
+that covers it, so its `record_id` names the car and never the simulator. Until
+dataset 0.3.67 every id carried an `ams2.` prefix, which was true only because
+AMS2 happened to cover them first; the same car verified in a second simulator
+would have collided with its own prefix and forked into two records for one car.
+A second simulator's drive joins the existing record instead, and it never
+rewrites the real car: a disagreement is either a correction made deliberately
+or a deviation recorded as an override.
+
+`source_id` keeps its simulator prefix, and so does an observation id. That
+evidence really does belong to one drive in one game.
+
 ## Authentic controls
 
 `authentic_controls` describes the represented car independently of any game:

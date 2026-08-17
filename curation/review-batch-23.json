@@ -4,7 +4,7 @@
   "approved_at": "2026-08-16",
   "records": [
     {
-      "record_id": "ams2.metalmoro-ajr-honda",
+      "record_id": "metalmoro-ajr-honda",
       "bundle": "build/batch-23/metalmoro-ajr-honda.staged.json",
       "manufacturer": "Metalmoro",
       "model": "AJR",
@@ -50,7 +50,7 @@
       "variant": "Honda"
     },
     {
-      "record_id": "ams2.metalmoro-ajr-judd",
+      "record_id": "metalmoro-ajr-judd",
       "bundle": "build/batch-23/metalmoro-ajr-judd.staged.json",
       "manufacturer": "Metalmoro",
       "model": "AJR",
@@ -96,7 +96,7 @@
       "variant": "Judd"
     },
     {
-      "record_id": "ams2.metalmoro-ajr-nissan",
+      "record_id": "metalmoro-ajr-nissan",
       "bundle": "build/batch-23/metalmoro-ajr-nissan.staged.json",
       "manufacturer": "Metalmoro",
       "model": "AJR",
@@ -142,7 +142,7 @@
       "variant": "Nissan"
     },
     {
-      "record_id": "ams2.metalmoro-ajr-gen2-honda",
+      "record_id": "metalmoro-ajr-gen2-honda",
       "bundle": "build/batch-23/metalmoro-ajr-gen2-honda.staged.json",
       "manufacturer": "Metalmoro",
       "model": "AJR",
@@ -188,7 +188,7 @@
       "variant": "Gen2 Honda"
     },
     {
-      "record_id": "ams2.metalmoro-ajr-gen2-nissan",
+      "record_id": "metalmoro-ajr-gen2-nissan",
       "bundle": "build/batch-23/metalmoro-ajr-gen2-nissan.staged.json",
       "manufacturer": "Metalmoro",
       "model": "AJR",
@@ -234,7 +234,7 @@
       "variant": "Gen2 Nissan"
     },
     {
-      "record_id": "ams2.metalmoro-mrx-duratec-turbo-p2",
+      "record_id": "metalmoro-mrx-duratec-turbo-p2",
       "bundle": "build/batch-23/metalmoro-mrx-duratec-turbo-p2.staged.json",
       "manufacturer": "Metalmoro",
       "model": "MRX",
@@ -280,7 +280,7 @@
       "variant": "Duratec Turbo P2"
     },
     {
-      "record_id": "ams2.metalmoro-mrx-duratec-turbo-p3",
+      "record_id": "metalmoro-mrx-duratec-turbo-p3",
       "bundle": "build/batch-23/metalmoro-mrx-duratec-turbo-p3.staged.json",
       "manufacturer": "Metalmoro",
       "model": "MRX",
@@ -328,7 +328,7 @@
       "variant": "Duratec Turbo P3"
     },
     {
-      "record_id": "ams2.metalmoro-mrx-honda-p3",
+      "record_id": "metalmoro-mrx-honda-p3",
       "bundle": "build/batch-23/metalmoro-mrx-honda-p3.staged.json",
       "manufacturer": "Metalmoro",
       "model": "MRX",
@@ -375,7 +375,7 @@
       "variant": "Honda P3"
     },
     {
-      "record_id": "ams2.ginetta-g58",
+      "record_id": "ginetta-g58",
       "bundle": "build/batch-23/ginetta-g58.staged.json",
       "manufacturer": "Ginetta",
       "model": "G58",
@@ -420,7 +420,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.ginetta-g58-gen2",
+      "record_id": "ginetta-g58-gen2",
       "bundle": "build/batch-23/ginetta-g58-gen2.staged.json",
       "manufacturer": "Ginetta",
       "model": "G58",
@@ -465,7 +465,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.sigma-p1",
+      "record_id": "sigma-p1",
       "bundle": "build/batch-23/sigma-p1.staged.json",
       "manufacturer": "Sigma",
       "model": "P1",
@@ -510,7 +510,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.sigma-p1-g5",
+      "record_id": "sigma-p1-g5",
       "bundle": "build/batch-23/sigma-p1-g5.staged.json",
       "manufacturer": "Sigma",
       "model": "P1 G5",
@@ -556,7 +556,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mcr-s2000",
+      "record_id": "mcr-s2000",
       "bundle": "build/batch-23/mcr-s2000.staged.json",
       "manufacturer": "MCR Race Cars",
       "model": "S2000",
@@ -601,7 +601,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.roco-001",
+      "record_id": "roco-001",
       "bundle": "build/batch-23/roco-001.staged.json",
       "manufacturer": "Roco",
       "model": "001",

@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "caterham-superlight",
+  "identity": {
+    "display_name": "Caterham Superlight",
+    "manufacturer": "Caterham",
+    "model": "Seven Superlight",
+    "year": {
+      "label": "Superlight R500",
+      "from": 2008
+    },
+    "class": "Cat_Superlight",
+    "real_world_identity_notes": "Caterham Seven Superlight, the lightweight Duratec-engined Seven. AMS2 does not qualify which Superlight it models; the drive matches the sequential specification rather than the standard six-speed manual."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+      "This is a different car from the curated Caterham Academy and Supersport, which are five-speed H-pattern cars. No controls are inherited between them.",
+      "The downshift blip is required because a racing sequential of this type engages by dogs rather than synchronisers. The reviewed source names the gearbox but not its engagement, so that is an inference.",
+      "AMS2 gives no variant suffix, so the exact Superlight is not established beyond the sequential six-speed the drive observed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Caterham Superlight"
+        },
+        {
+          "kind": "class-id",
+          "value": "Cat_Superlight"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.caterham-superlight.20260814t180424879z-f64dc772 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "supercars-net.caterham-r500-superlight",
+        "ams2.local-live-caterham-superlight-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "supercars-net.caterham-r500-superlight",
+          "ams2.local-live-caterham-superlight-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "A registered source establishes the Superlight R500 and its gearbox options, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "supercars-net.caterham-r500-superlight",
+          "ams2.local-live-caterham-superlight-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The source states power is transmitted by either the standard six-speed gearbox or the optional Caterham Motorsport engineered sequential transmission, and the live drive selected six gears through a sequential stick, which is the sequential option."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-caterham-superlight-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-14"
+}

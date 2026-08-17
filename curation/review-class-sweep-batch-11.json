@@ -4,7 +4,7 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "ams2.iveco-stralis",
+      "record_id": "iveco-stralis",
       "bundle": "build/class-sweep-batch-11/iveco-stralis.staged.json",
       "manufacturer": "Iveco",
       "model": "Stralis",
@@ -48,7 +48,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.man-tgx",
+      "record_id": "man-tgx",
       "bundle": "build/class-sweep-batch-11/man-tgx.staged.json",
       "manufacturer": "MAN",
       "model": "TGX",
@@ -92,7 +92,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mercedes-benz-actros",
+      "record_id": "mercedes-benz-actros",
       "bundle": "build/class-sweep-batch-11/mercedes-benz-actros.staged.json",
       "manufacturer": "Mercedes-Benz",
       "model": "Actros",
@@ -136,7 +136,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.volkswagen-constellation",
+      "record_id": "volkswagen-constellation",
       "bundle": "build/class-sweep-batch-11/volkswagen-constellation.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Constellation",
@@ -180,7 +180,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.vulkan-truck",
+      "record_id": "vulkan-truck",
       "bundle": "build/class-sweep-batch-11/vulkan-truck.staged.json",
       "manufacturer": "Reiza",
       "model": "Vulkan Truck",
@@ -225,7 +225,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.copa-montana",
+      "record_id": "copa-montana",
       "bundle": "build/class-sweep-batch-11/copa-montana.staged.json",
       "manufacturer": "Chevrolet",
       "model": "Montana",

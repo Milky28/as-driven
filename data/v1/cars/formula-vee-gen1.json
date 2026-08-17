@@ -1,0 +1,145 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "formula-vee-gen1",
+  "identity": {
+    "display_name": "Formula Vee Gen1",
+    "manufacturer": "Reiza",
+    "model": "Formula Vee",
+    "year": {
+      "label": "Formula Vee"
+    },
+    "class": "F-Vee",
+    "real_world_identity_notes": "Formula Vee, the low-cost open-wheel category built from Volkswagen Beetle parts. Cars use the Beetle 1600 engine of about 70 to 75 hp and the VW four-speed gearbox, sealed and restricted to reliability modifications.",
+    "variant": "Gen1"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "The gearbox is the Volkswagen Beetle four-speed transaxle, which the registered source describes as constant-mesh with balk ring synchronisers on all four forward gears. A downshift blip is therefore authentic technique and eases the synchros but is not needed to engage the gear, so it is recorded as optional.",
+      "The gate is recorded unknown. The driver could not read it in the cockpit, and no reviewed source describes the shift pattern of a Formula Vee, so neither the drive nor the sources establish it.",
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Vee Gen1"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Vee"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-vee-gen1.20260815t231602548z-d616fb3b by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "autoaction.formula-vee",
+        "ratwell.vw-transaxle",
+        "ams2.local-live-formula-vee-gen1-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "autoaction.formula-vee",
+          "ratwell.vw-transaxle",
+          "ams2.local-live-formula-vee-gen1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Registered sources establish the category's Volkswagen basis, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "autoaction.formula-vee",
+          "ratwell.vw-transaxle",
+          "ams2.local-live-formula-vee-gen1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The category source gives a VW four-speed gearbox and the transaxle source describes that unit as constant-mesh with balk ring synchronisers, and the live drive selected four H-pattern gears with no automatic cut or blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-vee-gen1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "driver_summary": "Formula Vee runs the Beetle's VW four-speed, a constant-mesh transaxle with balk-ring synchronisers on all four forward gears, so the blip eases the synchros but the gear engages without it.",
+  "updated_at": "2026-08-17"
+}

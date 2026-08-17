@@ -1,0 +1,139 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "formula-junior",
+  "identity": {
+    "display_name": "Formula Junior",
+    "manufacturer": "Reiza",
+    "model": "Formula Junior",
+    "year": {
+      "label": "Formula Junior"
+    },
+    "class": "F-Junior",
+    "real_world_identity_notes": "Reiza's fictionalised Formula Junior category open-wheel car, reviewed independently of the other cars in its class. Reiza's fictionalised car. No real-world chassis identity is assigned, so the gearbox construction is not established and the downshift blip stays unknown rather than being inferred from period practice."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Junior"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Junior"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-junior.20260815t191610671z-ecac0b81 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "calverst.syncro-vs-dog-engagement",
+        "ams2.local-live-formula-junior-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-formula-junior-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-formula-junior-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The live drive selected 4 H-pattern gears with no automatic cut or blip, so the driver lifts and blips. Gearbox construction is not established, so the downshift blip stays unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-junior-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "driver_summary": "Reiza's own car, with no real-world chassis behind it, so there is nothing to establish the gearbox from. Blip on downshifts to be safe: nothing records whether the gear needs it.",
+  "updated_at": "2026-08-17"
+}

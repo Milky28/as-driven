@@ -142,7 +142,7 @@ class ValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             temp_root = self._copy_repository_data(Path(directory))
 
-            target = temp_root / "data" / "v1" / "cars" / "ams2.f301.json"
+            target = temp_root / "data" / "v1" / "cars" / "f301.json"
             record = json.loads(target.read_text(encoding="utf-8"))
             record["simulators"][0]["source_refs"] = ["missing.source"]
             target.write_text(json.dumps(record), encoding="utf-8")
@@ -153,7 +153,7 @@ class ValidationTests(unittest.TestCase):
     def test_schema_rejects_invalid_shift_actuation(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp_root = self._copy_repository_data(Path(directory))
-            target = temp_root / "data" / "v1" / "cars" / "ams2.f301.json"
+            target = temp_root / "data" / "v1" / "cars" / "f301.json"
             record = json.loads(target.read_text(encoding="utf-8"))
             record["authentic_controls"]["transmission"]["shift_actuation"] = "magic"
             target.write_text(json.dumps(record), encoding="utf-8")
@@ -166,7 +166,7 @@ class ValidationTests(unittest.TestCase):
     def test_schema_rejects_unexpected_record_property(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp_root = self._copy_repository_data(Path(directory))
-            target = temp_root / "data" / "v1" / "cars" / "ams2.f301.json"
+            target = temp_root / "data" / "v1" / "cars" / "f301.json"
             record = json.loads(target.read_text(encoding="utf-8"))
             record["unreviewed_guess"] = True
             target.write_text(json.dumps(record), encoding="utf-8")
@@ -201,7 +201,7 @@ class ValidationTests(unittest.TestCase):
     def test_simulator_approval_checks_simulator_cut_not_authentic_cut(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp_root = self._copy_repository_data(Path(directory), include_curation=True)
-            target = temp_root / "data" / "v1" / "cars" / "ams2.audi-r8-lmp1.json"
+            target = temp_root / "data" / "v1" / "cars" / "audi-r8-lmp1.json"
             record = json.loads(target.read_text(encoding="utf-8"))
             record["authentic_controls"]["transmission"]["upshift"]["automatic_cut"] = "no"
             target.write_text(json.dumps(record), encoding="utf-8")
@@ -221,7 +221,7 @@ class ValidationTests(unittest.TestCase):
         observation = {
             "$schema": "urn:as-driven:schema:v1:verification-observation",
             "schema_version": "1.0.0",
-            "observation_id": "ams2.test-car.20260811t120000000z-1234abcd",
+            "observation_id": "test-car.20260811t120000000z-1234abcd",
             "simulator": "ams2",
             "game_version": "1.6.9.91",
             "client_version": "SimHub 9.11.22; As Driven 0.11.0",
@@ -408,7 +408,7 @@ class ValidationTests(unittest.TestCase):
     def test_a_dogleg_cannot_put_first_gear_up(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp_root = self._copy_repository_data(Path(directory))
-            path = temp_root / "data" / "v1" / "cars" / "ams2.bmw-m1-procar.json"
+            path = temp_root / "data" / "v1" / "cars" / "bmw-m1-procar.json"
             record = json.loads(path.read_text(encoding="utf-8"))
             record["authentic_controls"]["transmission"]["first_gear_position"] = "up-left"
             path.write_text(json.dumps(record, indent=2), encoding="utf-8")

@@ -2,7 +2,8 @@
   "schema_version": "1.0.0",
   "dataset_version": "0.3.4",
   "approved_at": "2026-08-10",
-  "record_id": "ams2.ligier-js-p217",
+  "record_id": "ligier-js-p217",
+  "simulator": "ams2",
   "telemetry_name": "Ligier JS P217",
   "telemetry_class": "LMP2",
   "additional_telemetry_classes": [

@@ -1,0 +1,158 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mercedes-benz-190e-2-5-16-evo-ii-dtm",
+  "identity": {
+    "display_name": "Mercedes-Benz 190E 2.5-16 Evo II DTM",
+    "manufacturer": "Mercedes-Benz",
+    "model": "190E 2.5-16 Evolution II",
+    "year": {
+      "from": 1990,
+      "label": "1990 DTM homologation special"
+    },
+    "class": "Group A",
+    "real_world_identity_notes": "DTM homologation special built to beat the E30 M3 in the German championship. The 2.5-16 Evolution cars use a dog-leg five-speed Getrag manual in which first gear sits left and rearward, deliberately moved out of the racing shift plane, with a limited-slip differential.",
+    "variant": "AMS2 DTM representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-left",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
+      "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mercedes-Benz 190E 2.5-16 Evo II DTM"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group A"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mercedes-benz-190e-2-5-16-evo-ii-dtm.20260813t202923808z-ec6dd926 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "mercedes-190e-evo.dogleg-getrag",
+        "trade-unique-cars.e30-m3-190e",
+        "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "mercedes-190e-evo.dogleg-getrag",
+          "trade-unique-cars.e30-m3-190e",
+          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Registered sources establish the real-world identity and transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/first_gear_position",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "mercedes-190e-evo.dogleg-getrag",
+          "trade-unique-cars.e30-m3-190e",
+          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The sources establish a dog-leg five-speed Getrag manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+      }
+    ]
+  },
+  "driver_summary": "Getrag five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
+  "updated_at": "2026-08-17"
+}

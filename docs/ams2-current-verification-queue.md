@@ -206,7 +206,7 @@ rather than an untested configuration, which is the first time a `- Speedway`
 identity has been established by driving it.
 
 One question is left open. `Formula Ultimate Gen2` is the primary identity of
-`ams2.formula-ultimate-2022`, whose every other identity is a
+`formula-ultimate-2022`, whose every other identity is a
 `Formula Ultimate Hybrid Gen3` name. The certified build did not report it while
 every Gen2 and Gen3 configuration was being loaded, so it is a pre-rename
 identity, and which of the two cars it named is not established. The stored car

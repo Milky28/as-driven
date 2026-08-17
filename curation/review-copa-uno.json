@@ -4,7 +4,7 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "ams2.copa-uno",
+      "record_id": "copa-uno",
       "bundle": "build/class-sweep-batch-11/copa-uno.staged.json",
       "manufacturer": "Fiat",
       "model": "Uno",

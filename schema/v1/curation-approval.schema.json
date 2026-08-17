@@ -9,6 +9,7 @@
     "dataset_version",
     "approved_at",
     "record_id",
+    "simulator",
     "telemetry_name",
     "telemetry_class",
     "observed_game_version",
@@ -22,6 +23,7 @@
     "dataset_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
     "approved_at": { "type": "string", "format": "date" },
     "record_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "simulator": { "enum": ["ams2", "iracing", "ac-evo", "ac-rally", "other"] },
     "telemetry_name": { "type": "string", "minLength": 1 },
     "additional_telemetry_names": {
       "type": "array",

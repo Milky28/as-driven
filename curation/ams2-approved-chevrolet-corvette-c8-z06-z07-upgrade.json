@@ -1,7 +1,28 @@
 {
-  "schema_version": "1.0.0", "dataset_version": "0.3.14", "approved_at": "2026-08-11",
-  "record_id": "ams2.chevrolet-corvette-c8-z06-z07-upgrade", "telemetry_name": "Chevrolet Corvette C8 Z06 (+Z07 Upgrade)", "telemetry_class": "Supercars", "observed_game_version": "1.6.9.91", "observed_through": "SimHub 9.11.22 guided verification",
-  "approved_controls": { "forward_gears": 8, "shift_actuation": "sequential-paddles", "shift_pattern": "sequential", "standing_start_clutch": "not-required", "running_shift_clutch": "not-required", "throttle_lift": "not-required", "automatic_cut": "yes", "automatic_blip": "yes", "manual_blip": "not-required", "wheel_rim_shape": "round", "wheel_integrated_display": "no", "wheel_shift_lights": "no", "wheel_open_top": "no" },
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.14",
+  "approved_at": "2026-08-11",
+  "record_id": "chevrolet-corvette-c8-z06-z07-upgrade",
+  "simulator": "ams2",
+  "telemetry_name": "Chevrolet Corvette C8 Z06 (+Z07 Upgrade)",
+  "telemetry_class": "Supercars",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 8,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
   "confidence_notes": "Guided testing directly established all listed behavior except automatic cut, manually confirmed from a brief throttle-graph interruption and retained at medium confidence.",
   "scope_notes": "Z07 is represented as a Z06 package, matching Chevrolet's terminology and the exact AMS2 telemetry name."
 }

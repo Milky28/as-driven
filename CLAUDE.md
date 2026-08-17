@@ -166,10 +166,14 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.16.0.
-- Dataset: 0.3.66 with 240 curated records.
+- Dataset: 0.3.67 with 240 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- Broader AMS2 verification is deliberately deferred; use
-  `docs/ams2-coverage-plan.md` and `research/ams2-coverage-manifest.json` when it
-  resumes.
+- Every AMS2 identity observed on this PC is curated or closed by a written
+  decision; the guided queue is empty. The inventory only holds cars that have
+  been loaded here, so new content still needs `docs/ams2-coverage-plan.md` and
+  `research/ams2-coverage-manifest.json`.
+- Record IDs name the real car with no simulator prefix. A second simulator's
+  drive joins the existing record as another `simulators[]` entry rather than
+  forking a second record, and an approval names the simulator it approves.
 - Icon and naming redesign concepts under `docs/design/` are review-only and are
   not wired into production assets.

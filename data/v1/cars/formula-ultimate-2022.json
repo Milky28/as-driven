@@ -1,0 +1,186 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "formula-ultimate-2022",
+  "identity": {
+    "display_name": "Formula Hybrid Gen3",
+    "manufacturer": "Reiza",
+    "model": "Formula Ultimate",
+    "year": {
+      "label": "2022",
+      "from": 2022,
+      "to": 2022
+    },
+    "class": "Formula Ultimate G2",
+    "real_world_identity_notes": "Reiza's fictionalised Formula car for the 2022 to 2025 ground-effect regulations. It shipped as Formula Ultimate Gen2 and was officially rebranded to the Formula Ultimate Hybrid Gen3 family in AMS2 v1.6.9, at which point the older 2017 to 2021 hybrid cars became Gen2. No real-world chassis identity is assigned.",
+    "variant": "2022 / Gen2"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 8,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "source_label": "live-cockpit-formula",
+        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no"
+      }
+    },
+    "notes": [
+      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
+      "The modeled car moves from rest without physical clutch input.",
+      "This car represents the 2022 to 2025 ground-effect Formula One regulations. Reiza originally shipped it as Formula Ultimate Gen2 and later rebranded it to Formula Ultimate Hybrid Gen3, reclassifying the older 2017 to 2021 hybrid cars as Gen2. The pre-rename name is recorded as a retired identity rather than carried here, because the certified build no longer reports it.",
+      "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
+      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "display-name",
+          "value": "Formula Ultimate 2022"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Ultimate Hybrid Gen3 - High Downforce"
+        },
+        {
+          "kind": "display-name",
+          "value": "Formula Hybrid Gen3"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Formula Ultimate Hybrid Gen3 - High Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Ultimate_Gen2_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Ultimate Hybrid Gen3"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Ultimate Hybrid Gen3 - Low Downforce"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-formula"
+        },
+        "notes": [
+          "Guided current-game testing directly established all user-facing controls."
+        ],
+        "steering_dor": 380
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22",
+        "simhub.local-live-ams2-identities.1.6.9.91",
+        "ams2.reiza-dev-update.2025-12.formula-rebrand",
+        "ams2.local-live-formula-ultimate-2022-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity/manufacturer",
+          "/identity/model",
+          "/identity/year",
+          "/identity/class",
+          "/identity/variant",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-forum.extended-car-info"
+        ],
+        "confidence": "medium",
+        "basis": "Conservative promotion of AMS2 sheet row 125 with unsupported technique left unknown."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "SimHub observes Formula Ultimate Gen2; the source identifies the 2022 Formula Ultimate G2, and the year plus G2/Gen2 context was explicitly reviewed."
+      },
+      {
+        "paths": [
+          "/identity/display_name",
+          "/identity/real_world_identity_notes",
+          "/simulators/0/identities/2",
+          "/simulators/0/identities/3"
+        ],
+        "source_refs": [
+          "ams2.reiza-dev-update.2025-12.formula-rebrand",
+          "simhub.local-live-ams2-identities.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reiza officially identifies Formula Hybrid Gen3 as the V1.6.9 successor in the Formula Ultimate line; AMS2 1.6.9.91 emitted Formula Ultimate Hybrid Gen3 - High Downforce with internal class F-Ultimate_Gen2_HD during a live local test."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/identities",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-ultimate-2022-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 6bf554cd."
+      }
+    ]
+  },
+  "notes": [
+    "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}

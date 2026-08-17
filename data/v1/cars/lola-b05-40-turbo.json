@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lola-b05-40-turbo",
+  "identity": {
+    "display_name": "Lola B05/40 Turbo",
+    "manufacturer": "Lola",
+    "model": "B05/40",
+    "variant": "Turbo, AMS2 2005 LMP2 representation",
+    "year": {
+      "from": 2005,
+      "label": "2005 LMP2 turbo"
+    },
+    "class": "LMP2 2005",
+    "real_world_identity_notes": "Archived constructor-attributed specifications identify a six-speed sequential gearbox for the AER turbo installation. Exact AMS2 inspection confirms paddle actuation for the Turbo representation."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "source_label": "live-cockpit-d-shaped-display",
+        "notes": "Direct cockpit inspection showed a D-shaped rim with an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "The car moved from rest without physical clutch input; the mechanism was not established.",
+      "All six paddle-selected gears accepted clutch-free full-throttle upshifts with automatic cut and clutch-free downshifts with automatic blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lola B05/40 Turbo"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMP2_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "yes",
+          "shift_lights": "unknown",
+          "open_top": "no",
+          "source_label": "live-cockpit-d-shaped-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Clutch-free move-off, six paddle gears, automatic cut and blip, and D-shaped display rim were directly observed; the move-off mechanism remains unknown."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "lola-heritage.b05-40-spec",
+        "ams2.local-live-lola-b05-40-turbo-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity, cockpit hardware, and shift behavior were directly tested; constructor-attributed evidence supports the six-speed sequential turbo installation."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "ams2.local-live-lola-b05-40-turbo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live CarModel/class observation establish the simulated Turbo identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "lola-heritage.b05-40-spec",
+          "ams2.local-live-lola-b05-40-turbo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Constructor-attributed specification and direct exercise of the modeled six-speed paddle sequential agree."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lola-b05-40-turbo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game testing and cockpit inspection establish move-off behavior, automatic cut/blip, and wheel category."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}

@@ -1,0 +1,207 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "alpine-a424",
+  "identity": {
+    "display_name": "Alpine A424",
+    "manufacturer": "Alpine",
+    "model": "A424",
+    "variant": "AMS2 base-downforce LMDh representation",
+    "year": {
+      "from": 2024,
+      "to": 2024,
+      "label": "2024 competition debut"
+    },
+    "class": "LMDh",
+    "real_world_identity_notes": "The Alpine A424 is an LMDh prototype using the category's common Xtrac P1359 hybrid transmission. The base AMS2 telemetry identity was live-tested. The exact Low Downforce identity is treated as an aero-package alias inheriting the base controls and has not been separately live-tested."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Direct AMS2 cockpit inspection showed a closed GT/Formula rim with an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, AMS2 1.6.9.91 moved the car from rest without physical clutch input. The common LMDh hybrid architecture supports interpreting this as electric launch behavior rather than a generic driving aid.",
+      "Seven forward gears were selected by paddles while holding full throttle, without clutch input or throttle lift. Every upshift was accepted.",
+      "No upshift power interruption was perceptible. Automatic cut is therefore medium-confidence, supported by the common LMDh transmission, successful full-throttle shifts, and the three shift-cut-positive LMDh peers in the 1.5.5.2 source.",
+      "Clutch-free downshifts were accepted with the driver's foot fully off the throttle. Automatic blip was directly visible as a throttle-display spike.",
+      "The exact Alpine A424 - Low Downforce telemetry identity is approved as an aero-package alias inheriting these controls. Only the base identity was live-tested; the Low Downforce configuration remains an explicit assumption to revisit if contrary behavior is observed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Alpine A424"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Alpine A424 - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMDh"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Hybrid move-off, seven paddle-selected forward gears, no-lift clutch-free upshifts, clutch-free downshifts, and a visible automatic throttle blip were observed directly.",
+          "Automatic cut remains medium-confidence because no discrete power interruption was perceptible during full-throttle shifts.",
+          "Base controls were live-tested; the exact Low Downforce identity inherits them as an approved aero-package assumption."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.3.endurance-pt2",
+        "alpine.media.a424-track-debut",
+        "xtrac.p1359.lmdh",
+        "imsa.hybrid-101.lmdh.2022",
+        "ams2.coanda-sheet.v1.0.34",
+        "simhub.local-ams2-identities.9.11.22",
+        "ams2.local-live-alpine-a424-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Identity and most control behavior were directly observed and hardware is supported by primary sources; automatic cut is a medium-confidence class and behavior inference rather than a measured interruption."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity/display_name",
+          "/identity/class",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.endurance-pt2",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release listing plus exact live CarModel, CarId, and LMDh CarClass values observed through SimHub 9.11.22."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/1",
+          "/authentic_controls/notes/4"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22",
+          "xtrac.p1359.lmdh",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The Low Downforce name is an exact observed SimHub identity. Its controls are explicitly inherited from the live-tested base car because the variant is understood to be an aero package; the variant itself has not been live-tested."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "alpine.media.a424-track-debut",
+          "xtrac.p1359.lmdh",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Alpine identifies the Xtrac gearbox, Xtrac specifies seven-speed sequential pneumatic actuation, and all seven paddle-selected forward gears were exercised in AMS2."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "xtrac.p1359.lmdh",
+          "imsa.hybrid-101.lmdh.2022",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The clutch-free move-off was directly observed with Auto Clutch disabled; primary LMDh sources establish the integrated MGU and electric-only low-speed movement that explain the behavior."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/simulators/0/behavior/shift_cut"
+        ],
+        "source_refs": [
+          "xtrac.p1359.lmdh",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Seven clutch-free full-throttle upshifts establish that no lift is required. Automatic cut is inferred from the common LMDh gearbox and the three shift-cut-positive LMDh peers in the older source because no interruption was perceptible in this test."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift",
+          "/simulators/0/behavior/auto_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Clutch-free downshifts were accepted with no driver throttle input, and the automatic blip was directly visible as a throttle-display spike."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display."
+      }
+    ]
+  },
+  "notes": [
+    "Simulator-specific behavior is kept distinct from the real LMDh hardware evidence, especially for automatic shift cut.",
+    "Low Downforce is an exact approved alias whose controls are inherited from the verified base car; it has not been separately live-tested.",
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}

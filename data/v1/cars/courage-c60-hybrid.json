@@ -1,0 +1,153 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "courage-c60-hybrid",
+  "identity": {
+    "display_name": "Courage C60 Hybrid",
+    "manufacturer": "Courage",
+    "model": "C60 Hybrid",
+    "variant": "AMS2 2005 LMP1 representation",
+    "year": {
+      "from": 2005,
+      "label": "2005 Hybrid representation"
+    },
+    "class": "LMP1 2005",
+    "real_world_identity_notes": "Current telemetry resolves Reiza's broader Courage C60 release label to Courage C60 Hybrid. Secondary historical context supports a six-speed sequential gearbox for the family, while exact stick actuation comes from direct cockpit inspection."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "source_label": "live-cockpit-d-shaped-small-display-shift-leds",
+        "notes": "Cockpit inspection and the supplied reference image show a flat-bottom D-shaped rim with a small central data display and a row of shift LEDs."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic cut.",
+      "Clutch-free downshifts were accepted with automatic throttle blip.",
+      "No paddles were visible; the cockpit sequential stick was directly observed.",
+      "'Courage C60 Hybrid - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Courage C60 Hybrid"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Courage C60 Hybrid - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMP1_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-d-shaped-small-display-shift-leds"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Standing-start clutch, six-speed sequential stick without paddles, automatic cut and blip, and D-shaped small-display rim were directly observed.",
+          "'Courage C60 Hybrid - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "wikipedia.courage-c60",
+        "ams2.local-live-courage-c60-hybrid-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity, modeled controls, and shift behavior were directly tested; secondary historical context is retained only as provisional family evidence."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "ams2.local-live-courage-c60-hybrid-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live Courage C60 Hybrid / LMP1_05 observation establish the simulated identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.courage-c60",
+          "ams2.local-live-courage-c60-hybrid-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Provisional family evidence and direct exercise of the modeled six-speed sequential stick agree."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-courage-c60-hybrid-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game testing, cockpit inspection, and the supplied reference image establish technique and wheel details."
+      }
+    ]
+  },
+  "notes": [
+    "'Courage C60 Hybrid - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ],
+  "updated_at": "2026-08-16"
+}

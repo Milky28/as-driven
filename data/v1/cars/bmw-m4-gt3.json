@@ -1,0 +1,150 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "bmw-m4-gt3",
+  "identity": {
+    "display_name": "BMW M4 GT3",
+    "manufacturer": "BMW",
+    "model": "M4 GT3",
+    "year": {
+      "from": 2022,
+      "label": "2022 customer-racing debut"
+    },
+    "class": "GT3_Gen2",
+    "real_world_identity_notes": "Customer GT3 racing car built on the G82 M4 and powered by the P58 twin-turbo straight-six. Power reaches the rear wheels through a six-speed sequential Xtrac transaxle derived from the M8 GTE programme. Its electro-hydraulic clutch is operated by steering-wheel paddles, so the car has no clutch pedal and includes stall prevention, which matches the clutch-free move-off observed in the drive.",
+    "variant": "AMS2 GT3 Gen2 representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip. This matches every other curated paddle-shift GT3 car.",
+      "'BMW M4 GT3 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M4 GT3"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M4 GT3 - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3_Gen2"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.bmw-m4-gt3.20260813t154502355z-834dd6e6 by Jason Kinslow.",
+          "'BMW M4 GT3 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "bmw.m4-gt3.usa-motorsport",
+        "ams2.local-live-bmw-m4-gt3-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "bmw.m4-gt3.usa-motorsport",
+          "ams2.local-live-bmw-m4-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The registered source establishes the real-world identity and transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "bmw.m4-gt3.usa-motorsport",
+          "ams2.local-live-bmw-m4-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The manufacturer specifies a six-speed sequential Xtrac transaxle with a paddle-operated electro-hydraulic clutch and no clutch pedal; the live drive confirmed six paddle gears and clutch-free move-off."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-bmw-m4-gt3-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "notes": [
+    "'BMW M4 GT3 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}

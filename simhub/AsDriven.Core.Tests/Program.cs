@@ -36,7 +36,7 @@ namespace AsDriven.Core.Tests
                             StringComparison.OrdinalIgnoreCase) <= 0,
                         "sorts the preview catalog by display name");
                 }
-                GuidanceSnapshot preview = database.Preview("ams2", "ams2.lister-storm-gtm");
+                GuidanceSnapshot preview = database.Preview("ams2", "lister-storm-gtm");
                 True(preview.HasMatch, "loads a curated record directly for preview");
                 Equal("preview", preview.MatchKind, "labels direct record lookup as preview data");
                 Equal("Lister Storm GTM", preview.DisplayName, "previews the requested car");
@@ -44,7 +44,7 @@ namespace AsDriven.Core.Tests
 
                 GuidanceSnapshot f301 = database.Match("Automobilista2", "Dallara F301");
                 True(f301.HasMatch, "matches the exact AMS2 telemetry name");
-                Equal("ams2.f301", f301.RecordId, "returns the correct record");
+                Equal("f301", f301.RecordId, "returns the correct record");
                 Equal("telemetry-name", f301.MatchKind, "reports the identity kind");
                 Equal("5-speed sequential stick", f301.ShiftType, "formats hardware guidance");
                 Equal("sequential", f301.ShiftPattern, "exposes the curated shift pattern");
@@ -61,7 +61,7 @@ namespace AsDriven.Core.Tests
 
                 GuidanceSnapshot viper = database.Match("Automobilista2", "Dodge Viper GTS-R");
                 True(viper.HasMatch, "matches the live Dodge Viper GTS-R identity");
-                Equal("ams2.dodge-viper-gts-r", viper.RecordId, "returns the curated Viper record");
+                Equal("dodge-viper-gts-r", viper.RecordId, "returns the curated Viper record");
                 Equal("6-speed sequential stick", viper.ShiftType, "formats the tested Viper shifter");
                 Equal("sequential", viper.ShiftPattern, "exposes the Viper sequential pattern");
                 Equal("required", viper.StandingStartClutch, "requires the Viper clutch from a stop");
@@ -122,7 +122,7 @@ namespace AsDriven.Core.Tests
 
                 GuidanceSnapshot alpine = database.Match("Automobilista2", "Alpine A424");
                 True(alpine.HasMatch, "matches the live Alpine A424 identity");
-                Equal("ams2.alpine-a424", alpine.RecordId, "returns the curated Alpine record");
+                Equal("alpine-a424", alpine.RecordId, "returns the curated Alpine record");
                 Equal("7-speed paddle shifters", alpine.ShiftType, "formats the tested Alpine transmission");
                 Equal("not-required", alpine.StandingStartClutch, "does not require a physical clutch for Alpine hybrid move-off");
                 Equal("yes", alpine.ShiftCut, "exposes the reviewed Alpine automatic cut");
@@ -136,12 +136,12 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot alpineLowDownforce = database.Match(
                     "Automobilista2", "Alpine A424 - Low Downforce");
                 True(alpineLowDownforce.HasMatch, "matches the approved Alpine Low Downforce aero identity");
-                Equal("ams2.alpine-a424", alpineLowDownforce.RecordId, "inherits Alpine controls for the aero package");
+                Equal("alpine-a424", alpineLowDownforce.RecordId, "inherits Alpine controls for the aero package");
                 Equal("telemetry-name", alpineLowDownforce.MatchKind, "keeps the Low Downforce alias exact");
 
                 GuidanceSnapshot ligier = database.Match("Automobilista2", "Ligier JS P217");
                 True(ligier.HasMatch, "matches the live Ligier JS P217 identity");
-                Equal("ams2.ligier-js-p217", ligier.RecordId, "returns the shared Gen1 and Gen2 Ligier record");
+                Equal("ligier-js-p217", ligier.RecordId, "returns the shared Gen1 and Gen2 Ligier record");
                 Equal("6-speed paddle shifters", ligier.ShiftType, "formats the tested Ligier transmission");
                 Equal("not-required", ligier.StandingStartClutch, "does not require physical clutch input for Ligier move-off");
                 Equal("yes", ligier.ShiftCut, "exposes the directly observed Ligier automatic cut");
@@ -169,12 +169,12 @@ namespace AsDriven.Core.Tests
                 }
 
                 GuidanceSnapshot oreca = database.Match("Automobilista2", "Oreca 07");
-                Equal("ams2.oreca-07", oreca.RecordId, "returns the shared Oreca Gen1 and Gen2 record");
+                Equal("oreca-07", oreca.RecordId, "returns the shared Oreca Gen1 and Gen2 record");
                 Equal("6-speed paddle shifters", oreca.ShiftType, "formats the tested Oreca transmission");
                 Equal("gt-formula", oreca.WheelRimShape, "uses the merged GT/Formula Oreca rim");
                 GuidanceSnapshot orecaLowDownforce = database.Match(
                     "Automobilista2", "Oreca 07 - Low Downforce");
-                Equal("ams2.oreca-07", orecaLowDownforce.RecordId, "inherits Oreca controls for the aero package");
+                Equal("oreca-07", orecaLowDownforce.RecordId, "inherits Oreca controls for the aero package");
                 Equal("telemetry-name", orecaLowDownforce.MatchKind, "keeps the Oreca aero alias exact");
 
                 GuidanceSnapshot sc63 = database.Match("Automobilista2", "Lamborghini SC63");
@@ -182,7 +182,7 @@ namespace AsDriven.Core.Tests
                 Equal("gt-formula", sc63.WheelRimShape, "uses the merged GT/Formula SC63 rim");
                 GuidanceSnapshot sc63LowDownforce = database.Match(
                     "Automobilista2", "Lamborghini SC63 - Low Downforce");
-                Equal("ams2.lamborghini-sc63", sc63LowDownforce.RecordId, "inherits SC63 controls for the aero package");
+                Equal("lamborghini-sc63", sc63LowDownforce.RecordId, "inherits SC63 controls for the aero package");
 
                 GuidanceSnapshot p320 = database.Match("Automobilista2", "Ligier JS P320");
                 Equal("required", p320.StandingStartClutch, "requires physical clutch input for the P320 standing start");
@@ -200,7 +200,7 @@ namespace AsDriven.Core.Tests
                 False(unobservedValkyrieAero.HasMatch, "does not invent an unobserved Valkyrie aero alias");
 
                 GuidanceSnapshot roadValkyrie = database.Match("Automobilista2", "Aston Martin Valkyrie");
-                Equal("ams2.aston-martin-valkyrie", roadValkyrie.RecordId, "keeps the road Valkyrie distinct from the race car");
+                Equal("aston-martin-valkyrie", roadValkyrie.RecordId, "keeps the road Valkyrie distinct from the race car");
                 Equal("7-speed paddle shifters", roadValkyrie.ShiftType, "formats the road Valkyrie transmission");
                 Equal("gt-formula", roadValkyrie.WheelRimShape, "uses the merged GT/Formula road Valkyrie rim");
 
@@ -255,7 +255,7 @@ namespace AsDriven.Core.Tests
                 Equal("gt-formula", corvetteGt3.WheelRimShape, "uses the merged GT/Formula Corvette GT-style rim");
                 GuidanceSnapshot corvetteLowDownforce = database.Match(
                     "Automobilista2", "Chevrolet Corvette Z06 GT3.R - Low Downforce");
-                Equal("ams2.chevrolet-corvette-z06-gt3r", corvetteLowDownforce.RecordId, "inherits Corvette controls for the aero package");
+                Equal("chevrolet-corvette-z06-gt3r", corvetteLowDownforce.RecordId, "inherits Corvette controls for the aero package");
 
                 GuidanceSnapshot huracanEvo2 = database.Match(
                     "Automobilista2", "Lamborghini Huracan Super Trofeo EVO2");
@@ -320,10 +320,10 @@ namespace AsDriven.Core.Tests
 
                 GuidanceSnapshot dbr9LowDownforce = database.Match(
                     "Automobilista2", "Aston Martin DBR9 - Low Downforce");
-                Equal("ams2.aston-martin-dbr9", dbr9LowDownforce.RecordId, "inherits DBR9 controls for the aero package");
+                Equal("aston-martin-dbr9", dbr9LowDownforce.RecordId, "inherits DBR9 controls for the aero package");
                 GuidanceSnapshot c5rLowDownforce = database.Match(
                     "Automobilista2", "Chevrolet Corvette C5-R - Low Downforce");
-                Equal("ams2.chevrolet-corvette-c5-r", c5rLowDownforce.RecordId, "inherits C5-R controls for the aero package");
+                Equal("chevrolet-corvette-c5-r", c5rLowDownforce.RecordId, "inherits C5-R controls for the aero package");
 
                 GuidanceSnapshot porsche996 = database.Match(
                     "Automobilista2", "Porsche 996 GT3 RSR");
@@ -365,21 +365,21 @@ namespace AsDriven.Core.Tests
                 }
                 GuidanceSnapshot lolaV8LowDownforce = database.Match(
                     "Automobilista2", "Lola B05/40 V8 - Low Downforce");
-                Equal("ams2.lola-b05-40-v8", lolaV8LowDownforce.RecordId, "inherits Lola V8 controls for the aero package");
+                Equal("lola-b05-40-v8", lolaV8LowDownforce.RecordId, "inherits Lola V8 controls for the aero package");
 
                 GuidanceSnapshot murcielagoLowDownforce = database.Match(
                     "Automobilista2", "Lamborghini Murcielago R-GT - Low Downforce");
-                Equal("ams2.lamborghini-murcielago-r-gt", murcielagoLowDownforce.RecordId, "inherits Murcielago controls for the aero package");
+                Equal("lamborghini-murcielago-r-gt", murcielagoLowDownforce.RecordId, "inherits Murcielago controls for the aero package");
                 Equal("telemetry-name", murcielagoLowDownforce.MatchKind, "keeps the Murcielago aero alias exact");
 
                 GuidanceSnapshot mc12LowDownforce = database.Match(
                     "Automobilista2", "Maserati MC12 GT1 - Low Downforce");
-                Equal("ams2.maserati-mc12-gt1", mc12LowDownforce.RecordId, "inherits MC12 controls for the aero package");
+                Equal("maserati-mc12-gt1", mc12LowDownforce.RecordId, "inherits MC12 controls for the aero package");
                 Equal("telemetry-name", mc12LowDownforce.MatchKind, "keeps the MC12 aero alias exact");
 
                 GuidanceSnapshot diablo = database.Match("Automobilista2", "Lamborghini Diablo SV-R");
                 True(diablo.HasMatch, "matches the exact Diablo SV-R identity");
-                Equal("ams2.lamborghini-diablo-sv-r", diablo.RecordId, "returns the curated Diablo record");
+                Equal("lamborghini-diablo-sv-r", diablo.RecordId, "returns the curated Diablo record");
                 Equal(5, diablo.GearCount, "resolves the Diablo source conflict to five modeled gears");
                 Equal("h-pattern", diablo.ShiftActuation, "uses the Diablo H-pattern shifter");
                 Equal("dogleg-h", diablo.ShiftPattern, "uses the observed Diablo dogleg gate");
@@ -425,13 +425,13 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot v8Gen3 = database.Match(
                     "Automobilista2", "Formula V8 Gen3 - High Downforce");
                 True(v8Gen3.HasMatch, "matches the current Formula V8 Gen3 telemetry identity");
-                Equal("ams2.formula-reiza", v8Gen3.RecordId, "maps Formula V8 Gen3 to the retained Formula Reiza record");
+                Equal("formula-reiza", v8Gen3.RecordId, "maps Formula V8 Gen3 to the retained Formula Reiza record");
                 Equal("Formula V8 Gen3", v8Gen3.DisplayName, "uses the current official Formula V8 Gen3 display name");
 
                 GuidanceSnapshot hybridGen3 = database.Match(
                     "Automobilista2", "Formula Ultimate Hybrid Gen3 - High Downforce");
                 True(hybridGen3.HasMatch, "matches the current Formula Hybrid Gen3 telemetry identity");
-                Equal("ams2.formula-ultimate-2022", hybridGen3.RecordId, "maps Formula Hybrid Gen3 to the 2022 ground-effect record");
+                Equal("formula-ultimate-2022", hybridGen3.RecordId, "maps Formula Hybrid Gen3 to the 2022 ground-effect record");
                 Equal("Formula Hybrid Gen3", hybridGen3.DisplayName, "uses the current official Formula Hybrid Gen3 display name");
 
                 // Retired identities must not match. Formula Ultimate Gen2 was
@@ -1179,10 +1179,10 @@ namespace AsDriven.Core.Tests
                 // A car with no automatic blip may still have an unknown manual
                 // blip. The two must stay separate, or the overlay turns an
                 // unknown into an instruction to blip.
-                GuidanceSnapshot retro = database.Preview("ams2", "ams2.formula-retro-v12");
+                GuidanceSnapshot retro = database.Preview("ams2", "formula-retro-v12");
                 Equal("no", retro.AutoBlip, "Formula Retro V12 has no automatic blip in the simulator");
                 Equal("unknown", retro.ManualBlip, "but its manual downshift blip is not established");
-                GuidanceSnapshot brabham = database.Preview("ams2", "ams2.brabham-bt26a");
+                GuidanceSnapshot brabham = database.Preview("ams2", "brabham-bt26a");
                 Equal("no", brabham.AutoBlip, "Brabham BT26A also has no automatic blip");
                 Equal("required", brabham.ManualBlip, "and its dog box does require a driver blip");
                 Equal("required", brabham.ThrottleLift, "the driver lifts to upshift the Brabham");

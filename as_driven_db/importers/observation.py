@@ -134,7 +134,11 @@ def import_observation(
     observer = observation.get("observer", "unknown")
 
     slug = _slug(telemetry_name)
-    record_id = f"{simulator}.{slug}"
+    # A record is one real car with an entry per simulator, so its id names the
+    # car and not the simulator that happened to cover it first. The source id
+    # keeps its simulator prefix: that evidence really does belong to one drive
+    # in one game.
+    record_id = slug
     source_id = f"{simulator}.local-live-{slug}-controls.{game_version}"
 
     clean = _assists_clean(assists)
@@ -346,6 +350,9 @@ def import_observation(
         "dataset_version": "0.0.0",  # REVIEW: set to the next dataset version at promotion.
         "approved_at": imported_at,
         "record_id": record_id,
+        # Which simulator's evidence this approves. The record id no longer
+        # carries it, and a car may be approved once per simulator.
+        "simulator": simulator,
         "telemetry_name": telemetry_name,
         "telemetry_class": telemetry_class,
         "observed_game_version": game_version,

@@ -1,0 +1,148 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "dodge-viper-acr",
+  "identity": {
+    "display_name": "Dodge Viper ACR",
+    "manufacturer": "Dodge",
+    "model": "Viper ACR",
+    "year": {
+      "from": 2016,
+      "label": "Viper ACR"
+    },
+    "class": "Supercars",
+    "real_world_identity_notes": "FCA specifications identify the ACR's synchronized six-speed manual transmission; exact H-pattern selection and technique were established in AMS2."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-round-closed-no-display",
+        "notes": "Direct cockpit inspection showed a closed round rim without display or shift lights."
+      }
+    },
+    "notes": [
+      "The clutch is required from rest.",
+      "All six H-pattern positions directly selected the requested gears.",
+      "Clutchless running shifts require throttle lift on upshift and driver manual blip/rev matching on downshift; no automatic cut or blip was observed.",
+      "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Dodge Viper ACR"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Dodge Viper ACR"
+        },
+        {
+          "kind": "class-id",
+          "value": "Supercars"
+        }
+      ],
+      "behavior": {
+        "shift_type": "H-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round-closed-no-display"
+        },
+        "notes": [
+          "Guided exact-model testing directly established all user-facing controls."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.9.new-cars",
+        "dodge.viper-acr.2016-specifications",
+        "ams2.local-live-dodge-viper-acr-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Manufacturer specifications and exact guided testing agree on the six-speed H-pattern manual and technique."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.new-cars",
+          "ams2.local-live-dodge-viper-acr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact telemetry establish identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "dodge.viper-acr.2016-specifications",
+          "ams2.local-live-dodge-viper-acr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Manufacturer specifications and direct selection agree on the six-speed manual."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-dodge-viper-acr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Guided A/B testing and cockpit inspection establish technique and wheel details."
+      }
+    ]
+  },
+  "driver_summary": "FCA specify a synchronised six-speed manual, so the blip eases the synchros but the gear engages without it.",
+  "updated_at": "2026-08-17"
+}

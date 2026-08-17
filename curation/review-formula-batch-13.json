@@ -4,7 +4,7 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "ams2.formula-classic-gen3-model1-high-downforce",
+      "record_id": "formula-classic-gen3-model1-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen3-model1-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model1",
@@ -47,7 +47,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-classic-gen3-model3-high-downforce",
+      "record_id": "formula-classic-gen3-model3-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen3-model3-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model3",
@@ -90,7 +90,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-classic-gen3-model4-high-downforce",
+      "record_id": "formula-classic-gen3-model4-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen3-model4-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model4",
@@ -133,7 +133,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-classic-gen4-model3-high-downforce",
+      "record_id": "formula-classic-gen4-model3-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen4-model3-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen4 Model3",
@@ -176,7 +176,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-classic-gen3-model2-high-downforce",
+      "record_id": "formula-classic-gen3-model2-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen3-model2-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model2",
@@ -219,7 +219,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-classic-gen4-model1-high-downforce",
+      "record_id": "formula-classic-gen4-model1-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen4-model1-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen4 Model1",
@@ -262,7 +262,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-classic-gen4-model2-high-downforce",
+      "record_id": "formula-classic-gen4-model2-high-downforce",
       "bundle": "build/formula-batch-13/formula-classic-gen4-model2-high-downforce.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen4 Model2",
@@ -305,7 +305,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mclaren-honda-mp4-5b-high-downforce",
+      "record_id": "mclaren-honda-mp4-5b-high-downforce",
       "bundle": "build/formula-batch-13/mclaren-honda-mp4-5b-high-downforce.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/5B",
@@ -350,7 +350,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mclaren-honda-mp4-6-high-downforce",
+      "record_id": "mclaren-honda-mp4-6-high-downforce",
       "bundle": "build/formula-batch-13/mclaren-honda-mp4-6-high-downforce.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/6",

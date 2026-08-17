@@ -1,0 +1,156 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "sauber-mercedes-c9",
+  "identity": {
+    "display_name": "Sauber Mercedes C9",
+    "manufacturer": "Sauber",
+    "model": "Mercedes C9",
+    "variant": "AMS2 Group C representation",
+    "year": {
+      "from": 1989,
+      "to": 1989,
+      "label": "1989"
+    },
+    "class": "Group C",
+    "real_world_identity_notes": "Naming follows the AMS2 community sheet; exact configuration remains to be checked against homologation or team material."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-left",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "live-cockpit-round",
+        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no"
+      }
+    },
+    "notes": [
+      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
+      "A clutch is required from rest.",
+      "'Sauber Mercedes C9 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested.",
+      "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
+      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Sauber Mercedes C9"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Sauber Mercedes C9"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Sauber Mercedes C9 - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group C"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round"
+        },
+        "notes": [
+          "Guided current-game testing directly established all user-facing controls.",
+          "'Sauber Mercedes C9 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ],
+        "steering_dor": 540
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-12",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "simhub.local-ams2-identities.9.11.22",
+        "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34"
+        ],
+        "confidence": "medium",
+        "basis": "Direct transcription and conservative normalization of the Sauber Mercedes C9 row."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "Exact CarId/CarModel value observed in SimHub's generated AMS2 car settings."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/identities",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      }
+    ]
+  },
+  "driver_summary": "Dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight line. The gate was seen in the cockpit; no reviewed source establishes the real car's gearbox.",
+  "notes": [
+    "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ],
+  "updated_at": "2026-08-17"
+}

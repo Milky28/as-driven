@@ -1,0 +1,149 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lamborghini-diablo-sv-r",
+  "identity": {
+    "display_name": "Lamborghini Diablo SV-R",
+    "manufacturer": "Lamborghini",
+    "model": "Diablo SV-R",
+    "variant": "AMS2 Diablo Super Trofeo representation",
+    "year": {
+      "from": 1996,
+      "label": "1996 Diablo SV-R"
+    },
+    "class": "Diablo Super Trofeo",
+    "real_world_identity_notes": "Manufacturer-derived heritage data specifies a five-speed Lamborghini manual and dry single-plate clutch. AMS2 accepts five forward gears and visibly models a five-speed dogleg H-pattern, resolving a conflicting secondary six-speed listing in favor of the manufacturer specification for this record."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-left",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "source_label": "live-cockpit-round-no-display",
+        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "Only five forward direct-gear bindings were accepted, and the cockpit showed a five-speed dogleg H-pattern.",
+      "There is no automatic throttle cut: clutchless upshifts were possible only after lifting and matching revs.",
+      "There is no automatic throttle blip: clutchless downshifts required a manual blip and rev match.",
+      "The simulator tests establish when clutchless shifts can be made, but do not establish whether historical authentic running shifts should use the clutch; those clutch fields remain unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Diablo SV-R"
+        },
+        {
+          "kind": "class-id",
+          "value": "ST96"
+        }
+      ],
+      "behavior": {
+        "shift_type": "H-Dogleg",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "source_label": "live-cockpit-round-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "The car required clutch input from rest and accepted five direct-selected dogleg gears.",
+          "Clutchless shifts required manual rev matching: throttle lift on upshift and manual blip on downshift. No automatic cut or blip was observed."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2",
+        "lamborghini.diablo-35-years.2025",
+        "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Manufacturer-derived five-speed evidence agrees with all five accepted AMS2 gears and direct cockpit inspection of the dogleg gate. Start, cut, blip, and rev-match behavior were directly tested; authentic running-shift clutch use remains unknown."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2",
+          "lamborghini.diablo-35-years.2025",
+          "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release and manufacturer identity evidence agree with the exact live CarModel and ST96 class observation."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/first_gear_position",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "lamborghini.diablo-35-years.2025",
+          "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Manufacturer-derived five-speed specification agrees with the five accepted direct gears and visibly modeled dogleg gate. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/simulators/0/behavior",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish the asserted start, lift, manual-blip, automation, pattern, and rim behavior; unsupported historical running-clutch claims remain unknown."
+      }
+    ]
+  },
+  "driver_summary": "Lamborghini five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
+  "notes": [
+    "The source conflict is resolved only for this AMS2 representation: both manufacturer-derived evidence and the simulator support five forward gears."
+  ],
+  "updated_at": "2026-08-17"
+}

@@ -4,7 +4,7 @@
   "approved_at": "2026-08-13",
   "records": [
     {
-      "record_id": "ams2.caterham-academy",
+      "record_id": "caterham-academy",
       "bundle": "build/club-road-batch-07/caterham-academy.staged.json",
       "manufacturer": "Caterham",
       "model": "Seven Academy",
@@ -50,7 +50,7 @@
       "variant": "Academy specification"
     },
     {
-      "record_id": "ams2.caterham-supersport",
+      "record_id": "caterham-supersport",
       "bundle": "build/club-road-batch-07/caterham-supersport.staged.json",
       "manufacturer": "Caterham",
       "model": "Seven Supersport",
@@ -95,7 +95,7 @@
       "variant": "Supersport specification"
     },
     {
-      "record_id": "ams2.chevrolet-chevette",
+      "record_id": "chevrolet-chevette",
       "bundle": "build/club-road-batch-07/chevrolet-chevette.staged.json",
       "manufacturer": "Chevrolet",
       "model": "Chevette",
@@ -137,7 +137,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.copa-fusca",
+      "record_id": "copa-fusca",
       "bundle": "build/club-road-batch-07/copa-fusca.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Fusca",
@@ -179,7 +179,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.ginetta-g40-cup",
+      "record_id": "ginetta-g40-cup",
       "bundle": "build/club-road-batch-07/ginetta-g40-cup.staged.json",
       "manufacturer": "Ginetta",
       "model": "G40 Cup",
@@ -224,7 +224,7 @@
       "variant": "Cup specification"
     },
     {
-      "record_id": "ams2.ginetta-g40",
+      "record_id": "ginetta-g40",
       "bundle": "build/club-road-batch-07/ginetta-g40.staged.json",
       "manufacturer": "Ginetta",
       "model": "G40 Challenge",
@@ -268,7 +268,7 @@
       "variant": "GT5 Challenge specification"
     },
     {
-      "record_id": "ams2.gol-classic-b",
+      "record_id": "gol-classic-b",
       "bundle": "build/club-road-batch-07/gol-classic-b.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Gol GT",
@@ -311,7 +311,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.gol-classic-fl",
+      "record_id": "gol-classic-fl",
       "bundle": "build/club-road-batch-07/gol-classic-fl.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Gol",
@@ -354,7 +354,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.puma-gtb",
+      "record_id": "puma-gtb",
       "bundle": "build/club-road-batch-07/puma-gtb.staged.json",
       "manufacturer": "Puma",
       "model": "GTB",
@@ -397,7 +397,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.puma-p052",
+      "record_id": "puma-p052",
       "bundle": "build/club-road-batch-07/puma-p052.staged.json",
       "manufacturer": "Puma",
       "model": "P052",

@@ -1,0 +1,168 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "porsche-cayman-gt4-clubsport-mr",
+  "identity": {
+    "display_name": "Porsche Cayman GT4 Clubsport MR",
+    "manufacturer": "Porsche",
+    "model": "718 Cayman GT4 Clubsport MR",
+    "year": {
+      "from": 2019,
+      "label": "2019 Clubsport with the Manthey MR kit"
+    },
+    "class": "GT4",
+    "real_world_identity_notes": "Customer racing 718 Cayman with the Manthey Racing MR kit. Porsche drives the rear wheels through a dual-clutch PDK gearbox with six gears, and the MR kit revises aerodynamics and suspension without changing the powertrain. A PDK has no clutch pedal, so the real car cannot require clutch input to pull away, even though AMS2 does; that difference is recorded as an explicit simulator override rather than by asserting something false about the car.",
+    "variant": "AMS2 Manthey Racing MR representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dual-clutch",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "The real car is a six-speed PDK dual clutch and has no clutch pedal, so its standing-start clutch is recorded as not required.",
+      "AMS2 1.6.9.91 nonetheless required clutch input to move off. That is recorded as an explicit simulator override, so the in-sim guidance tells the driver to use the clutch while the record keeps the real car's value.",
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche Cayman GT4 Clubsport MR"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-cayman-gt4-clubsport-mr.20260813t171028562z-e4f6b4a0 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 requires clutch input to move off, although the real car's PDK has no clutch pedal.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Directly observed in the guided drive with automatic clutch and shifting disabled."
+          },
+          "source_refs": [
+            "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "porsche.718-cayman-gt4-clubsport.world-premiere",
+        "manthey.718-gt4-clubsport-mr.kit",
+        "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "porsche.718-cayman-gt4-clubsport.world-premiere",
+          "manthey.718-gt4-clubsport-mr.kit",
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "porsche.718-cayman-gt4-clubsport.world-premiere",
+          "manthey.718-gt4-clubsport-mr.kit",
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Porsche specifies a six-speed dual-clutch PDK and Manthey confirms the MR kit leaves the powertrain unchanged; the live drive confirmed six paddle-selected gears."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/overrides"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The guided drive established that AMS2 requires clutch input to move off, which differs from the real car's clutch-pedal-free PDK."
+      }
+    ]
+  },
+  "updated_at": "2026-08-13"
+}

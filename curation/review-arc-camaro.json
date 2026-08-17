@@ -4,7 +4,7 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "ams2.arc-camaro",
+      "record_id": "arc-camaro",
       "bundle": "build/class-sweep-batch-10/arc-camaro.staged.json",
       "manufacturer": "Aussie Racing Cars",
       "model": "Camaro",

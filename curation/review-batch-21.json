@@ -4,7 +4,7 @@
   "approved_at": "2026-08-16",
   "records": [
     {
-      "record_id": "ams2.fusca-1-hot-cars",
+      "record_id": "fusca-1-hot-cars",
       "bundle": "build/batch-21/fusca-1-hot-cars.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Fusca",
@@ -49,7 +49,7 @@
       "variant": "Hot Cars 1"
     },
     {
-      "record_id": "ams2.fusca-2-hot-cars",
+      "record_id": "fusca-2-hot-cars",
       "bundle": "build/batch-21/fusca-2-hot-cars.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Fusca",
@@ -94,7 +94,7 @@
       "variant": "Hot Cars 2"
     },
     {
-      "record_id": "ams2.passat-hot-cars",
+      "record_id": "passat-hot-cars",
       "bundle": "build/batch-21/passat-hot-cars.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Passat",
@@ -139,7 +139,7 @@
       "variant": "Hot Cars"
     },
     {
-      "record_id": "ams2.gol-hot-cars",
+      "record_id": "gol-hot-cars",
       "bundle": "build/batch-21/gol-hot-cars.staged.json",
       "manufacturer": "Volkswagen",
       "model": "Gol",
@@ -184,7 +184,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.brabham-bt62",
+      "record_id": "brabham-bt62",
       "bundle": "build/batch-21/brabham-bt62.staged.json",
       "manufacturer": "Brabham",
       "model": "BT62",
@@ -227,7 +227,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mclaren-senna",
+      "record_id": "mclaren-senna",
       "bundle": "build/batch-21/mclaren-senna.staged.json",
       "manufacturer": "McLaren",
       "model": "Senna",
@@ -270,7 +270,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.kart-cross",
+      "record_id": "kart-cross",
       "bundle": "build/batch-21/kart-cross.staged.json",
       "manufacturer": "Reiza",
       "model": "Kartcross",

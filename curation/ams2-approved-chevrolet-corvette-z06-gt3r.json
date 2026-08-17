@@ -2,7 +2,8 @@
   "schema_version": "1.0.0",
   "dataset_version": "0.3.4",
   "approved_at": "2026-08-10",
-  "record_id": "ams2.chevrolet-corvette-z06-gt3r",
+  "record_id": "chevrolet-corvette-z06-gt3r",
+  "simulator": "ams2",
   "telemetry_name": "Chevrolet Corvette Z06 GT3.R",
   "telemetry_class": "GT3_Gen2",
   "additional_telemetry_names": [

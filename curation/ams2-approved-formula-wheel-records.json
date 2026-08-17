@@ -7,7 +7,7 @@
     {
       "source_row": 122,
       "source_display_name": "Formula V10 G2",
-      "record_id": "ams2.formula-v10-g2",
+      "record_id": "formula-v10-g2",
       "manufacturer": "Reiza",
       "model": "Formula V10",
       "variant": "Gen2",
@@ -22,7 +22,7 @@
     {
       "source_row": 123,
       "source_display_name": "Formula Reiza",
-      "record_id": "ams2.formula-reiza",
+      "record_id": "formula-reiza",
       "manufacturer": "Reiza",
       "model": "Formula Reiza",
       "telemetry_name": "Formula Reiza",
@@ -32,7 +32,7 @@
     {
       "source_row": 124,
       "source_display_name": "Formula Ultimate 2019",
-      "record_id": "ams2.formula-ultimate-2019",
+      "record_id": "formula-ultimate-2019",
       "manufacturer": "Reiza",
       "model": "Formula Ultimate",
       "variant": "2019 / Hybrid Gen1",
@@ -47,7 +47,7 @@
     {
       "source_row": 125,
       "source_display_name": "Formula Ultimate 2022",
-      "record_id": "ams2.formula-ultimate-2022",
+      "record_id": "formula-ultimate-2022",
       "manufacturer": "Reiza",
       "model": "Formula Ultimate",
       "variant": "2022 / Gen2",
@@ -62,7 +62,7 @@
     {
       "source_row": 144,
       "source_display_name": "Formula USA",
-      "record_id": "ams2.formula-usa-2023",
+      "record_id": "formula-usa-2023",
       "manufacturer": "Reiza",
       "model": "Formula USA",
       "variant": "2023",

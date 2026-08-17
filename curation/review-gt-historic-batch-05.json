@@ -4,7 +4,7 @@
   "approved_at": "2026-08-13",
   "records": [
     {
-      "record_id": "ams2.nissan-r390-gt1",
+      "record_id": "nissan-r390-gt1",
       "bundle": "build/observation-bundles/ams2.nissan-r390-gt1.json",
       "manufacturer": "Nissan",
       "model": "R390 GT1",
@@ -68,7 +68,7 @@
       }
     },
     {
-      "record_id": "ams2.porsche-911-gt1-98",
+      "record_id": "porsche-911-gt1-98",
       "bundle": "build/observation-bundles/ams2.porsche-911-gt1-98.json",
       "manufacturer": "Porsche",
       "model": "911 GT1-98",
@@ -132,7 +132,7 @@
       }
     },
     {
-      "record_id": "ams2.chevrolet-corvette-c8-r",
+      "record_id": "chevrolet-corvette-c8-r",
       "bundle": "build/observation-bundles/ams2.chevrolet-corvette-c8-r.json",
       "manufacturer": "Chevrolet",
       "model": "Corvette C8.R",
@@ -159,7 +159,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, GT-style rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.porsche-911-rsr-gte",
+      "record_id": "porsche-911-rsr-gte",
       "bundle": "build/observation-bundles/ams2.porsche-911-rsr-gte.json",
       "manufacturer": "Porsche",
       "model": "911 RSR",
@@ -186,7 +186,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with assists disabled: clutch-free move-off, six paddle gears, automatic cut and blip, prototype-style rim with shift lights."
     },
     {
-      "record_id": "ams2.puma-gte",
+      "record_id": "puma-gte",
       "bundle": "build/observation-bundles/ams2.puma-gte.json",
       "manufacturer": "Puma",
       "model": "GTE",

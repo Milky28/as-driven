@@ -4,7 +4,7 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "ams2.brabham-bt44",
+      "record_id": "brabham-bt44",
       "bundle": "build/formula-batch-14/brabham-bt44.staged.json",
       "manufacturer": "Brabham",
       "model": "BT44",
@@ -49,7 +49,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.lotus-72e",
+      "record_id": "lotus-72e",
       "bundle": "build/formula-batch-14/lotus-72e.staged.json",
       "manufacturer": "Lotus",
       "model": "72E",
@@ -94,7 +94,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mclaren-m23",
+      "record_id": "mclaren-m23",
       "bundle": "build/formula-batch-14/mclaren-m23.staged.json",
       "manufacturer": "McLaren",
       "model": "M23",
@@ -139,7 +139,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-retro-v8",
+      "record_id": "formula-retro-v8",
       "bundle": "build/formula-batch-14/formula-retro-v8.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Retro V8",
@@ -180,7 +180,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-dirt",
+      "record_id": "formula-dirt",
       "bundle": "build/formula-batch-14/formula-dirt.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Dirt",
@@ -221,7 +221,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-junior",
+      "record_id": "formula-junior",
       "bundle": "build/formula-batch-14/formula-junior.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Junior",
@@ -262,7 +262,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-trainer",
+      "record_id": "formula-trainer",
       "bundle": "build/formula-batch-14/formula-trainer.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Trainer",
@@ -305,7 +305,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-trainer-advanced",
+      "record_id": "formula-trainer-advanced",
       "bundle": "build/formula-batch-14/formula-trainer-advanced.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Trainer Advanced",

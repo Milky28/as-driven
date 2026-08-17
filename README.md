@@ -92,7 +92,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.66 contains 240 reviewed records. Its newest records complete the
+Dataset 0.3.67 contains 240 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -195,7 +195,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.66 contains 240 curated AMS2 records promoted through the reviewed
+Dataset 0.3.67 contains 240 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while

@@ -90,7 +90,7 @@
         "curated": {
           "status": "existing_record_with_exact_observed_identity",
           "record_ids": [
-            "ams2.formula-ultimate-2022"
+            "formula-ultimate-2022"
           ]
         },
         "observed_simhub": {
@@ -154,7 +154,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-ultimate-2022",
+        "record_id": "formula-ultimate-2022",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce."
       }
@@ -335,7 +335,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.alpine-a424",
+        "record_id": "alpine-a424",
         "dataset_version": "0.3.4",
         "scope": "The exact base telemetry identity Alpine A424 / LMDh was live-tested. Alpine A424 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested and that distinction must remain visible in the record notes."
       }
@@ -422,7 +422,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.audi-v8-quattro-dtm",
+        "record_id": "audi-v8-quattro-dtm",
         "dataset_version": "0.3.14",
         "scope": "A slight roll after selecting first was followed immediately by a stall and was correctly reviewed as a required standing-start clutch."
       }
@@ -511,7 +511,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.audi-r8-lms-gt3",
+        "record_id": "audi-r8-lms-gt3",
         "dataset_version": "0.3.14",
         "scope": "Base R8 LMS GT3 identity, not the separately curated Evo II."
       }
@@ -602,7 +602,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.audi-r8-lms-gt3-evo-ii",
+        "record_id": "audi-r8-lms-gt3-evo-ii",
         "dataset_version": "0.3.13",
         "scope": "Low Downforce inherits the verified base controls as an explicit untested aero-package assumption."
       }
@@ -676,7 +676,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.audi-r8-lms-gt4",
+        "record_id": "audi-r8-lms-gt4",
         "dataset_version": "0.3.4",
         "scope": "Only the exact Audi R8 LMS GT4 / GT4 telemetry identity is approved; no fuzzy aliases are introduced."
       }
@@ -705,7 +705,7 @@
         "curated": {
           "status": "related_closed_variant_record",
           "record_ids": [
-            "ams2.chevrolet-corvette-c3-r"
+            "chevrolet-corvette-c3-r"
           ]
         },
         "observed_simhub": {
@@ -772,7 +772,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.chevrolet-corvette-c3-r-convertible",
+        "record_id": "chevrolet-corvette-c3-r-convertible",
         "dataset_version": "0.3.12",
         "scope": "This is a separate record so verified convertible behavior is not silently inherited by the closed C3.R. The unique real-world referent remains unknown."
       }
@@ -847,7 +847,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.chevrolet-corvette-c8-z06-z07-upgrade",
+        "record_id": "chevrolet-corvette-c8-z06-z07-upgrade",
         "dataset_version": "0.3.14",
         "scope": "Z07 is represented as a Z06 package, matching Chevrolet's terminology and the exact AMS2 telemetry name."
       }
@@ -940,7 +940,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.chevrolet-corvette-z06-gt3r",
+        "record_id": "chevrolet-corvette-z06-gt3r",
         "dataset_version": "0.3.4",
         "scope": "The base telemetry identity was live-tested. Chevrolet Corvette Z06 GT3.R - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested."
       }
@@ -1027,7 +1027,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-huracan-gt3-evo2",
+        "record_id": "lamborghini-huracan-gt3-evo2",
         "dataset_version": "0.3.13",
         "scope": "Low Downforce inherits the verified base controls as an explicit untested aero-package assumption."
       }
@@ -1104,7 +1104,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-huracan-super-trofeo-evo2",
+        "record_id": "lamborghini-huracan-super-trofeo-evo2",
         "dataset_version": "0.3.4",
         "scope": "Approval applies only to the exact Lamborghini Huracan Super Trofeo EVO2 / Super Trofeo identity. The older LamborghiniHuracanLP6202SuperTrofeo identity is a different predecessor and is not an alias."
       }
@@ -1192,7 +1192,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-sc63",
+        "record_id": "lamborghini-sc63",
         "dataset_version": "0.3.4",
         "scope": "Lamborghini SC63 - Low Downforce is approved as an exact aero-package alias with inherited controls; its control behavior has not been separately live-tested."
       }
@@ -1276,7 +1276,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-veneno-roadster",
+        "record_id": "lamborghini-veneno-roadster",
         "dataset_version": "0.3.14",
         "scope": "Exact Veneno Roadster identity only."
       }
@@ -1350,7 +1350,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.ligier-js-p217",
+        "record_id": "ligier-js-p217",
         "dataset_version": "0.3.4",
         "scope": "One shared telemetry-name record covers the two directly observed class contexts: LMP2 for Gen2 and LMP2_Gen1 for Gen1. No fuzzy or generation-suffix identity matching is used."
       }
@@ -1425,7 +1425,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.ligier-js-p320",
+        "record_id": "ligier-js-p320",
         "dataset_version": "0.3.4",
         "scope": "The required standing-start clutch applies only to move-off; running upshifts and downshifts were directly verified as clutch-free."
       }
@@ -1501,7 +1501,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.oreca-07",
+        "record_id": "oreca-07",
         "dataset_version": "0.3.4",
         "scope": "One shared telemetry-name record covers LMP2 and LMP2_Gen1. Oreca 07 - Low Downforce is approved as an exact aero-package alias with inherited controls; its behavior was not separately live-tested."
       }
@@ -1594,7 +1594,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.cadillac-v-series-r",
+        "record_id": "cadillac-v-series-r",
         "dataset_version": "0.3.17",
         "scope": "Low Downforce is approved as an exact aero-package alias with inherited controls; it was not separately live-tested."
       }
@@ -1648,7 +1648,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.super-trophy-trucks",
+        "record_id": "super-trophy-trucks",
         "dataset_version": "0.3.14",
         "scope": "Fictional Reiza series with no real-world model. Gearbox construction is automatic; sequential-stick records the modeled manual override interface."
       }
@@ -1733,7 +1733,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.alpine-a110-gt4-evo",
+        "record_id": "alpine-a110-gt4-evo",
         "dataset_version": "0.3.12",
         "scope": "Manufacturer GT4+ evidence is retained as successor lineage rather than silently substituted for the exact GT4 Evo."
       }
@@ -1821,7 +1821,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-valkyrie-hypercar",
+        "record_id": "aston-martin-valkyrie-hypercar",
         "dataset_version": "0.3.4",
         "scope": "Only the exact base telemetry identity was approved. No Low Downforce alias is introduced because no distinct exact telemetry identity was observed."
       }
@@ -1973,7 +1973,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-vantage-gt3-evo",
+        "record_id": "aston-martin-vantage-gt3-evo",
         "dataset_version": "0.3.12",
         "scope": "The mechanism permitting clutch-free move-off remains unknown. The unnamed second configuration mentioned by Reiza is not promoted."
       }
@@ -2081,7 +2081,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-vantage-gt4-evo",
+        "record_id": "aston-martin-vantage-gt4-evo",
         "dataset_version": "0.3.4",
         "scope": "The official source describes a production-derived eight-speed transmission configured to use six forward ratios. Approval records the six-ratio sequential-paddle interface actually presented to the AMS2 driver without erasing that hardware distinction."
       }
@@ -2151,7 +2151,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-vantage-gte",
+        "record_id": "aston-martin-vantage-gte",
         "dataset_version": "0.3.4",
         "scope": "Approval applies to the exact Aston Martin Vantage GTE / GTE identity observed in AMS2 1.6.9.91."
       }
@@ -2258,7 +2258,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.ligier-js2-r",
+        "record_id": "ligier-js2-r",
         "dataset_version": "0.3.16",
         "scope": "Exact Ligier JS2 R / LES_2025 identity."
       }
@@ -2333,7 +2333,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-vee-gen2",
+        "record_id": "formula-vee-gen2",
         "dataset_version": "0.3.12",
         "scope": "Running shifts were accepted without clutch only with correct throttle technique. Gearbox construction remains unknown."
       }
@@ -2404,7 +2404,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.ligier-js-p4",
+        "record_id": "ligier-js-p4",
         "dataset_version": "0.3.4",
         "scope": "The approval covers the exact Ligier JS P4 / LES_2025 telemetry identity only; no fuzzy matching is used."
       }
@@ -2474,7 +2474,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-diablo-sv-r",
+        "record_id": "lamborghini-diablo-sv-r",
         "dataset_version": "0.3.5",
         "scope": "The five-versus-six-speed source conflict is resolved for the exact AMS2 representation only."
       }
@@ -2543,7 +2543,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-miura-sv",
+        "record_id": "lamborghini-miura-sv",
         "dataset_version": "0.3.16",
         "scope": "Exact Miura SV identity; family-level transmission evidence is explicitly supplemented by live selection tests."
       }
@@ -2630,7 +2630,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-murcielago-r-gt",
+        "record_id": "lamborghini-murcielago-r-gt",
         "dataset_version": "0.3.6",
         "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -2697,7 +2697,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-revuelto",
+        "record_id": "lamborghini-revuelto",
         "dataset_version": "0.3.16",
         "scope": "Exact Revuelto Hypercars identity."
       }
@@ -3044,7 +3044,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-dbr9",
+        "record_id": "aston-martin-dbr9",
         "dataset_version": "0.3.7",
         "scope": "Historical DBR9 gearbox variants exist; this approval applies only to the exact modeled AMS2 identity. Generic sequential input handling is not recorded as a car characteristic. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3111,7 +3111,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-dbr9",
+        "record_id": "aston-martin-dbr9",
         "dataset_version": "0.3.7",
         "scope": "Historical DBR9 gearbox variants exist; this approval applies only to the exact modeled AMS2 identity. Generic sequential input handling is not recorded as a car characteristic. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3182,7 +3182,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.audi-r8-lmp1",
+        "record_id": "audi-r8-lmp1",
         "dataset_version": "0.3.9",
         "scope": "Historical paddle evidence is currently secondary and remains marked for primary-source replacement; simulator behavior applies to the exact identity."
       }
@@ -3253,7 +3253,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.bmw-m3-e46-gtr",
+        "record_id": "bmw-m3-e46-gtr",
         "dataset_version": "0.3.16",
         "scope": "Exact BMW M3 E46 GTR telemetry identity."
       }
@@ -3321,7 +3321,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.chevrolet-corvette-c5-r",
+        "record_id": "chevrolet-corvette-c5-r",
         "dataset_version": "0.3.7",
         "scope": "The exact historical chassis year remains qualified; the approval applies to the exact AMS2 telemetry identity. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3388,7 +3388,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.chevrolet-corvette-c5-r",
+        "record_id": "chevrolet-corvette-c5-r",
         "dataset_version": "0.3.7",
         "scope": "The exact historical chassis year remains qualified; the approval applies to the exact AMS2 telemetry identity. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3460,7 +3460,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.courage-c60-hybrid",
+        "record_id": "courage-c60-hybrid",
         "dataset_version": "0.3.9",
         "scope": "Historical family evidence remains secondary; exact AMS2 telemetry resolves the release label to Courage C60 Hybrid."
       }
@@ -3531,7 +3531,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.dallara-sp1",
+        "record_id": "dallara-sp1",
         "dataset_version": "0.3.9",
         "scope": "A cockpit sequential lever is also visible. Paddle actuation is the reviewed modeled control, but the animation-based distinction remains explicitly falsifiable."
       }
@@ -3558,7 +3558,7 @@
         "curated": {
           "status": "exact_record",
           "record_ids": [
-            "ams2.dodge-viper-gts-r"
+            "dodge-viper-gts-r"
           ]
         },
         "observed_simhub": {
@@ -3616,7 +3616,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.dodge-viper-gts-r",
+        "record_id": "dodge-viper-gts-r",
         "dataset_version": "0.3.3",
         "scope": "Sequential actuation and standing-start clutch behavior were directly tested. Automatic cut and blip appeared present but were not telemetry-measured, so the promoted record marks the combined simulator behavior medium-confidence."
       }
@@ -3683,7 +3683,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lamborghini-murcielago-r-gt",
+        "record_id": "lamborghini-murcielago-r-gt",
         "dataset_version": "0.3.6",
         "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3750,7 +3750,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lola-b05-40-v8",
+        "record_id": "lola-b05-40-v8",
         "dataset_version": "0.3.10",
         "scope": "The move-off mechanism was not established. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3819,7 +3819,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lola-b05-40-turbo",
+        "record_id": "lola-b05-40-turbo",
         "dataset_version": "0.3.10",
         "scope": "The mechanism allowing move-off without physical clutch input was not established and is not inferred."
       }
@@ -3891,7 +3891,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lola-b05-40-v8",
+        "record_id": "lola-b05-40-v8",
         "dataset_version": "0.3.10",
         "scope": "The move-off mechanism was not established. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -3963,7 +3963,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.maserati-mc12-gt1",
+        "record_id": "maserati-mc12-gt1",
         "dataset_version": "0.3.6",
         "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -4030,7 +4030,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.maserati-mc12-gt1",
+        "record_id": "maserati-mc12-gt1",
         "dataset_version": "0.3.6",
         "scope": "The exact Low Downforce alias inherits the base controls as an approved aero-only assumption and was not separately tested."
       }
@@ -4083,7 +4083,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.milano-gt36",
+        "record_id": "milano-gt36",
         "dataset_version": "0.3.8",
         "scope": "No real-world analogue is approved; this record is limited to the exact fictional AMS2 identity."
       }
@@ -4155,7 +4155,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.porsche-996-gt3-rsr",
+        "record_id": "porsche-996-gt3-rsr",
         "dataset_version": "0.3.8",
         "scope": "Historical evidence supports the sequential gearbox and ignition cut; simulator-specific start and downshift behavior comes from the exact live test."
       }
@@ -4221,7 +4221,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.aston-martin-valkyrie",
+        "record_id": "aston-martin-valkyrie",
         "dataset_version": "0.3.15",
         "scope": "Road-going Hypercars identity, distinct from Aston Martin Valkyrie Hypercar in LMDh."
       }
@@ -4287,7 +4287,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.audi-r8-v10-gt",
+        "record_id": "audi-r8-v10-gt",
         "dataset_version": "0.3.16",
         "scope": "Later seven-speed R8 V10 GT, not the 2010 six-speed R tronic car."
       }
@@ -4355,7 +4355,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.dodge-viper-acr",
+        "record_id": "dodge-viper-acr",
         "dataset_version": "0.3.16",
         "scope": "Exact Dodge Viper ACR Supercars identity."
       }
@@ -4384,7 +4384,7 @@
         "curated": {
           "status": "predecessor_record_for_review",
           "record_ids": [
-            "ams2.formula-ultimate-2019"
+            "formula-ultimate-2019"
           ]
         },
         "observed_simhub": {
@@ -4401,7 +4401,7 @@
       "control_source_research_disposition": "covered-by-model-member-or-predecessor",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-ultimate-2019",
+        "record_id": "formula-ultimate-2019",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen1 - High Downforce."
       }
@@ -4430,7 +4430,7 @@
         "curated": {
           "status": "renamed_existing_record",
           "record_ids": [
-            "ams2.formula-ultimate-2022"
+            "formula-ultimate-2022"
           ]
         },
         "observed_simhub": {
@@ -4447,7 +4447,7 @@
       "control_source_research_disposition": "covered-by-model-member-or-predecessor",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-ultimate-2022",
+        "record_id": "formula-ultimate-2022",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce."
       }
@@ -4476,7 +4476,7 @@
         "curated": {
           "status": "renamed_existing_record",
           "record_ids": [
-            "ams2.formula-reiza"
+            "formula-reiza"
           ]
         },
         "observed_simhub": {
@@ -4493,7 +4493,7 @@
       "control_source_research_disposition": "covered-by-model-member-or-predecessor",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-reiza",
+        "record_id": "formula-reiza",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula V8 Gen3 - High Downforce."
       }
@@ -4574,7 +4574,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.maserati-gt2-stradale",
+        "record_id": "maserati-gt2-stradale",
         "dataset_version": "0.3.15",
         "scope": "Exact road-going GT2 Stradale telemetry identity."
       }
@@ -4643,7 +4643,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.stock-usa-gen1-speedway",
+        "record_id": "stock-usa-gen1-speedway",
         "dataset_version": "0.3.16",
         "scope": "Speedway configuration only; no aliases for other Gen1 configurations."
       }
@@ -4712,7 +4712,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.stock-usa-gen2-superspeedway",
+        "record_id": "stock-usa-gen2-superspeedway",
         "dataset_version": "0.3.16",
         "scope": "Superspeedway configuration only; no aliases for other Gen2 configurations."
       }
@@ -4795,7 +4795,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.stock-usa-gen3-superspeedway",
+        "record_id": "stock-usa-gen3-superspeedway",
         "dataset_version": "0.3.16",
         "scope": "Superspeedway configuration only; no aliases for other Gen3 or LM configurations."
       }
@@ -4860,7 +4860,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.stock-usa-gen3-lm",
+        "record_id": "stock-usa-gen3-lm",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.stock-usa-gen3-lm.20260812t171834877z-e7fc8bec."
       }
@@ -4945,7 +4945,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-edge-model1-high-downforce",
+        "record_id": "formula-edge-model1-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80."
       }
@@ -5015,7 +5015,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-edge-model2-high-downforce",
+        "record_id": "formula-edge-model2-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-edge-model2-high-downforce.20260812t173111084z-2bd2b1c3."
       }
@@ -5085,7 +5085,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-edge-model3-high-downforce",
+        "record_id": "formula-edge-model3-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-edge-model3-high-downforce.20260812t173528844z-d534209f."
       }
@@ -5173,7 +5173,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-ultimate-2019",
+        "record_id": "formula-ultimate-2019",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula Ultimate Hybrid Gen1 - High Downforce."
       }
@@ -5305,7 +5305,7 @@
         "curated": {
           "status": "configuration_aliases_in_existing_record",
           "record_ids": [
-            "ams2.formula-v10-g2"
+            "formula-v10-g2"
           ]
         },
         "observed_simhub": {
@@ -5345,7 +5345,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v10-g2",
+        "record_id": "formula-v10-g2",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula V10 Gen2 (B) - High Downforce."
       }
@@ -5374,7 +5374,7 @@
         "curated": {
           "status": "configuration_aliases_in_existing_record",
           "record_ids": [
-            "ams2.formula-v10-g2"
+            "formula-v10-g2"
           ]
         },
         "observed_simhub": {
@@ -5414,7 +5414,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v10-g2",
+        "record_id": "formula-v10-g2",
         "dataset_version": "0.3.17",
         "scope": "Reviewed guided observation for Formula V10 Gen2 (B) - High Downforce."
       }
@@ -5607,7 +5607,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-vee-gen2",
+        "record_id": "formula-vee-gen2",
         "dataset_version": "0.3.12",
         "scope": "Running shifts were accepted without clutch only with correct throttle technique. Gearbox construction remains unknown."
       }
@@ -5686,7 +5686,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.renault-r25-high-downforce",
+        "record_id": "renault-r25-high-downforce",
         "dataset_version": "0.3.15",
         "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
       }
@@ -5762,7 +5762,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.renault-r26-high-downforce",
+        "record_id": "renault-r26-high-downforce",
         "dataset_version": "0.3.15",
         "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
       }
@@ -5838,7 +5838,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.renault-r28-high-downforce",
+        "record_id": "renault-r28-high-downforce",
         "dataset_version": "0.3.15",
         "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
       }
@@ -5906,7 +5906,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v10-gen3-b-high-downforce",
+        "record_id": "formula-v10-gen3-b-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-v10-gen3-b-high-downforce.20260812t173906657z-7278e265."
       }
@@ -5974,7 +5974,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v10-gen3-m-high-downforce",
+        "record_id": "formula-v10-gen3-m-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed replacement draft ams2.formula-v10-gen3-m-high-downforce.20260812t175743478z-e3e818fe."
       }
@@ -6044,7 +6044,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v8-gen1-b-high-downforce",
+        "record_id": "formula-v8-gen1-b-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-v8-gen1-b-high-downforce.20260812t174602668z-8bfe9dfc."
       }
@@ -6112,7 +6112,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v8-gen1-m-high-downforce",
+        "record_id": "formula-v8-gen1-m-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-v8-gen1-m-high-downforce.20260812t174847643z-a2e25ff6."
       }
@@ -6180,7 +6180,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.formula-v8-gen2-high-downforce",
+        "record_id": "formula-v8-gen2-high-downforce",
         "dataset_version": "0.3.18",
         "scope": "Reviewed exact telemetry draft ams2.formula-v8-gen2-high-downforce.20260812t175201563z-8f9ff65c; no unobserved M1 alias is approved."
       }
@@ -6250,7 +6250,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.gillet-vertigo-streiff",
+        "record_id": "gillet-vertigo-streiff",
         "dataset_version": "0.3.6",
         "scope": "Exact historical year/chassis mapping remains qualified; only the exact AMS2 identity is approved."
       }
@@ -6370,7 +6370,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.lister-storm-gtm",
+        "record_id": "lister-storm-gtm",
         "dataset_version": "0.3.6",
         "scope": "The precise historical chassis represented remains qualified; only the exact AMS2 identity is approved."
       }
@@ -6447,7 +6447,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.maserati-gransport-trofeo",
+        "record_id": "maserati-gransport-trofeo",
         "dataset_version": "0.3.16",
         "scope": "Exact 2005 GranSport Trofeo identity."
       }
@@ -6526,7 +6526,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.milano-gt55",
+        "record_id": "milano-gt55",
         "dataset_version": "0.3.7",
         "scope": "No real-world analogue is approved. Ferrari 575 GTC material remains contextual only; the exact AMS2 telemetry identity is Milano GT55."
       }
@@ -6596,7 +6596,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.panoz-esperante-gtlm",
+        "record_id": "panoz-esperante-gtlm",
         "dataset_version": "0.3.6",
         "scope": "Only the exact AMS2 identity and explicitly supported control claims are approved."
       }
@@ -6675,7 +6675,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.saleen-s7-r-gt1",
+        "record_id": "saleen-s7-r-gt1",
         "dataset_version": "0.3.7",
         "scope": "Historical sources support the S7-R sequential family but not every 2005 gearbox revision; simulator behavior is approved only for the exact observed identity."
       }
@@ -6756,7 +6756,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.spyker-c8-spyder-gt2-r",
+        "record_id": "spyker-c8-spyder-gt2-r",
         "dataset_version": "0.3.8",
         "scope": "The live test resolves the five-versus-six-speed source conflict only for the exact modeled AMS2 car, not every historical chassis."
       }
@@ -6825,7 +6825,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "ams2.tvr-tuscan-t400r-gt2",
+        "record_id": "tvr-tuscan-t400r-gt2",
         "dataset_version": "0.3.8",
         "scope": "Period manufacturer evidence is family-level; the approved behavior applies to the exact observed AMS2 identity."
       }

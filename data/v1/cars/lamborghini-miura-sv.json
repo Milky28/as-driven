@@ -1,0 +1,159 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lamborghini-miura-sv",
+  "identity": {
+    "display_name": "Lamborghini Miura SV",
+    "manufacturer": "Lamborghini",
+    "model": "Miura SV",
+    "year": {
+      "from": 1971,
+      "label": "Miura SV"
+    },
+    "class": "Touring Cars 1960s",
+    "real_world_identity_notes": "Lamborghini's Miura family history specifies a five-speed manual and identifies the SV as the final version; exact H-pattern behavior and technique were established in AMS2."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-round-closed-no-display",
+        "notes": "Direct cockpit inspection showed a closed round rim without display or shift lights."
+      }
+    },
+    "notes": [
+      "The clutch is required from rest.",
+      "Five non-adjacent H-pattern selections directly engaged the requested gears.",
+      "Clutchless running shifts require throttle lift on upshift and driver rev matching/manual blip on downshift; no automatic cut or blip was observed.",
+      "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Miura SV"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Lamborghini Miura SV"
+        },
+        {
+          "kind": "class-id",
+          "value": "TC60S"
+        }
+      ],
+      "behavior": {
+        "shift_type": "H-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-round-closed-no-display"
+        },
+        "notes": [
+          "Guided exact-model testing directly established the five-speed H-pattern interface and technique."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.9.new-cars",
+        "lamborghini.miura.history",
+        "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Manufacturer family documentation and exact guided tests agree on the five-speed manual architecture and all user-facing behavior."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.new-cars",
+          "lamborghini.miura.history",
+          "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official sources and exact telemetry establish the identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "lamborghini.miura.history",
+          "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Manufacturer history and direct selection agree on a five-speed H-pattern manual."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "lamborghini.miura.history",
+          "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The synchromesh construction is the ordinary reading of a road-car manual of this period rather than a stated specification, so it is medium confidence. It is what the optional downshift blip rests on."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Guided A/B testing and cockpit inspection directly established technique and wheel details."
+      }
+    ]
+  },
+  "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Synchromesh is the ordinary reading of a road-car manual of this period rather than a stated specification.",
+  "updated_at": "2026-08-16"
+}

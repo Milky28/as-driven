@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mini-cooper-jcw",
+  "identity": {
+    "display_name": "MINI Cooper JCW",
+    "manufacturer": "MINI",
+    "model": "Cooper JCW",
+    "year": {
+      "label": "MINI CHALLENGE JCW"
+    },
+    "class": "MiniChallenge",
+    "real_world_identity_notes": "MINI prepared for the MINI CHALLENGE championship's JCW class, running a Damico-tuned 2.0-litre turbo to a 255 bhp target through a Quaife sequential gearbox."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+      "The championship names the gearbox but not its gear count, so the six gears come from the drive. It is a racing Quaife sequential, and the car provides its own blip, so no claim is made about whether a driver blip would otherwise be needed.",
+      "This is a different car from the road-going MINI John Cooper Works Challenge, which is sold with a six-speed manual rather than a sequential.",
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "MINI Cooper JCW"
+        },
+        {
+          "kind": "class-id",
+          "value": "MiniChallenge"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mini-cooper-jcw.20260816t043015744z-26d913b2 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-16",
+      "source_refs": [
+        "minichallenge.classes",
+        "ams2.local-live-mini-cooper-jcw-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "minichallenge.classes",
+          "ams2.local-live-mini-cooper-jcw-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The championship's own class page establishes the JCW car and its gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "minichallenge.classes",
+          "ams2.local-live-mini-cooper-jcw-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The championship states a Quaife sequential gearbox, and the live drive selected six gears through a sequential stick with automatic cut and blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mini-cooper-jcw-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}

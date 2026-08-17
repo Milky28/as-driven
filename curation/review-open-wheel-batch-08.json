@@ -4,7 +4,7 @@
   "approved_at": "2026-08-13",
   "records": [
     {
-      "record_id": "ams2.brabham-bt26a",
+      "record_id": "brabham-bt26a",
       "bundle": "build/open-wheel-batch-08/brabham-bt26a.staged.json",
       "manufacturer": "Brabham",
       "model": "BT26A",
@@ -50,7 +50,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.lotus-49c",
+      "record_id": "lotus-49c",
       "bundle": "build/open-wheel-batch-08/lotus-49c.staged.json",
       "manufacturer": "Lotus",
       "model": "49C",
@@ -96,7 +96,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-vintage-gen1-model1",
+      "record_id": "formula-vintage-gen1-model1",
       "bundle": "build/open-wheel-batch-08/formula-vintage-gen1-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Vintage Gen1 Model1",
@@ -138,7 +138,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-vintage-gen1-model2",
+      "record_id": "formula-vintage-gen1-model2",
       "bundle": "build/open-wheel-batch-08/formula-vintage-gen1-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Vintage Gen1 Model2",
@@ -180,7 +180,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-retro-v12",
+      "record_id": "formula-retro-v12",
       "bundle": "build/open-wheel-batch-08/formula-retro-v12.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Retro V12",
@@ -222,7 +222,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.formula-retro-gen2",
+      "record_id": "formula-retro-gen2",
       "bundle": "build/open-wheel-batch-08/formula-retro-gen2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Retro Gen2",

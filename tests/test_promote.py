@@ -33,7 +33,7 @@ class Ams2PromotionTests(unittest.TestCase):
                 {
                     "source_row": f301["source_row"],
                     "source_display_name": "F301",
-                    "record_id": "ams2.f301",
+                    "record_id": "f301",
                     "manufacturer": "Dallara",
                     "model": "F301",
                     "telemetry_name": "Dallara F301",
@@ -75,7 +75,7 @@ class Ams2PromotionTests(unittest.TestCase):
                 (data_directory / "index.json").read_text(encoding="utf-8")
             )
             self.assertEqual(index["dataset_version"], "0.2.0")
-            self.assertEqual(index["records"], ["cars/ams2.f301.json"])
+            self.assertEqual(index["records"], ["cars/f301.json"])
 
     def test_rejects_alias_not_present_in_audit(self) -> None:
         candidates, audit, approvals = self._inputs()

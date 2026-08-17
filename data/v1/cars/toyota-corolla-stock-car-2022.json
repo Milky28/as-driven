@@ -1,0 +1,147 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "toyota-corolla-stock-car-2022",
+  "identity": {
+    "display_name": "Toyota Corolla Stock Car 2022",
+    "manufacturer": "Toyota",
+    "model": "Corolla Stock Car",
+    "year": {
+      "from": 2022,
+      "label": "2022 Stock Car Pro Series"
+    },
+    "class": "StockCarV8_2022",
+    "real_world_identity_notes": "Stock Car Pro Series entry on the series' control platform, which pairs a common chassis and V8 with a six-speed sequential paddle-shift transmission. The registered regulations describe the current platform rather than the 2022 season specifically, and this car is reviewed independently of the curated 2024 Corolla rather than inheriting from it.",
+    "variant": "AMS2 Stock Car Pro Series 2022 representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip.",
+      "The registered regulations document the current control platform rather than the 2022 season specifically."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Toyota Corolla Stock Car 2022"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCarV8_2022"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.toyota-corolla-stock-car-2022.20260813t204533740z-e16e06b2 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "cba.stock-car-pro-2024.technical-regulations",
+        "cba.stock-car-pro-2024.platform-annex",
+        "ams2.local-live-toyota-corolla-stock-car-2022-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the series platform's six-speed sequential paddle transmission is established by the registered regulations."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "cba.stock-car-pro-2024.technical-regulations",
+          "cba.stock-car-pro-2024.platform-annex",
+          "ams2.local-live-toyota-corolla-stock-car-2022-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The series regulations establish the control platform and its transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "cba.stock-car-pro-2024.technical-regulations",
+          "cba.stock-car-pro-2024.platform-annex",
+          "ams2.local-live-toyota-corolla-stock-car-2022-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The regulations establish a six-speed sequential paddle-shift transmission on the series control platform, and the live drive confirmed six paddle gears with clutch-free move-off."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-toyota-corolla-stock-car-2022-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "notes": [
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}

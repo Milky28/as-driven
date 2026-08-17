@@ -193,6 +193,74 @@ def build_promoted_record(
     return record, approval, source
 
 
+def _control_differences(existing: dict[str, Any], incoming: dict[str, Any]) -> list[str]:
+    """Where two drives disagree about the real car, ignoring prose notes."""
+    differences = []
+    for section in ("transmission", "steering"):
+        left = existing.get(section) or {}
+        right = incoming.get(section) or {}
+        for field in sorted(set(left) | set(right)):
+            if field == "notes":
+                continue
+            if left.get(field) != right.get(field):
+                differences.append(
+                    f"{section}.{field} ({left.get(field)!r} vs {right.get(field)!r})"
+                )
+    return differences
+
+
+def merge_simulator_entry(
+    existing: dict[str, Any], incoming: dict[str, Any], *, label: str
+) -> dict[str, Any]:
+    """Add a simulator's entry to the curated record for the same real car.
+
+    The existing record owns the real car. A second simulator contributes its
+    own entry and the claims that describe it, and never rewrites identity or
+    `authentic_controls` behind the reviewer's back. If the new drive disagrees
+    about the real car, that is either a correction to make deliberately or a
+    deviation to record as an override, so it stops here instead.
+    """
+    entry = incoming["simulators"][0]
+    simulator_id = entry["simulator"]
+    covered = [item.get("simulator") for item in existing.get("simulators", [])]
+    if simulator_id in covered:
+        raise FileExistsError(
+            f"{label}: {simulator_id} already has an entry on this record; "
+            "promoting would replace curated evidence"
+        )
+
+    differences = _control_differences(
+        existing["authentic_controls"], incoming["authentic_controls"]
+    )
+    if differences:
+        raise ValueError(
+            f"{label}: the {simulator_id} drive disagrees with the curated real car at "
+            + "; ".join(differences)
+            + ". Record a simulator override for a genuine deviation, or correct the "
+            "record deliberately; a second simulator never rewrites the real car."
+        )
+
+    merged = json.loads(json.dumps(existing))
+    position = len(merged["simulators"])
+    merged["simulators"].append(entry)
+
+    # Claims arrive pointing at /simulators/0 because the bundle held one entry.
+    # Only the simulator-scoped ones carry over: the real car's claims already
+    # stand on the existing record, and duplicating them would double-count the
+    # evidence behind a value.
+    for claim in incoming["provenance"]["claims"]:
+        paths = [
+            path.replace("/simulators/0", f"/simulators/{position}")
+            for path in claim["paths"]
+            if path.startswith("/simulators/0")
+        ]
+        if paths:
+            merged["provenance"]["claims"].append(dict(claim, paths=paths))
+
+    merged["updated_at"] = incoming["updated_at"]
+    return merged
+
+
 def promote_observations(
     review: dict[str, Any],
     *,
@@ -231,14 +299,25 @@ def promote_observations(
                 + ", ".join(sorted(missing))
             )
 
+        simulator_id = record["simulators"][0]["simulator"]
         record_path = data_directory / "cars" / f"{record_id}.json"
         if record_path.exists():
-            raise FileExistsError(f"refusing to overwrite curated record: {record_path}")
+            # The same real car, already curated from another simulator: the
+            # drive adds an entry to it rather than forking a second record.
+            existing = json.loads(record_path.read_text(encoding="utf-8"))
+            record = merge_simulator_entry(
+                existing, record, label=f"review entry {record_id}"
+            )
 
         approval["dataset_version"] = dataset_version
+        approval["simulator"] = simulator_id
         approval_path = (
-            curation_directory / f"ams2-approved-{record_id.split('.', 1)[1]}.json"
+            curation_directory / f"{simulator_id}-approved-{record_id}.json"
         )
+        if approval_path.exists():
+            raise FileExistsError(
+                f"refusing to overwrite curation approval: {approval_path}"
+            )
         generated.append((record_path, record))
         generated.append((approval_path, approval))
         if source["source_id"] not in known_sources:

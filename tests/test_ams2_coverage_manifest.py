@@ -84,10 +84,10 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         # Low Downforce identity is covered exactly rather than inherited silently.
         bmw = entries["BMW M Hybrid V8 - Low Downforce"]
         self.assertEqual(bmw["coverage_disposition"], "covered-exact")
-        self.assertEqual(bmw["related_record_id"], "ams2.bmw-m-hybrid-v8")
+        self.assertEqual(bmw["related_record_id"], "bmw-m-hybrid-v8")
         audi = entries["Audi R8 LMP1 - Low Downforce"]
         self.assertEqual(audi["coverage_disposition"], "covered-exact")
-        self.assertEqual(audi["related_record_id"], "ams2.audi-r8-lmp1")
+        self.assertEqual(audi["related_record_id"], "audi-r8-lmp1")
 
     def test_qualified_formula_does_not_create_a_silent_plain_alias(self):
         manifest = json.loads(
@@ -100,11 +100,11 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         # written into the record and disclosed in its approval. Coverage must
         # never come from the generator inferring the relationship.
         self.assertEqual(entry["coverage_disposition"], "covered-exact")
-        self.assertEqual(entry["related_record_id"], "ams2.formula-edge-model1-high-downforce")
+        self.assertEqual(entry["related_record_id"], "formula-edge-model1-high-downforce")
 
         record = json.loads(
             (
-                ROOT / "data" / "v1" / "cars" / "ams2.formula-edge-model1-high-downforce.json"
+                ROOT / "data" / "v1" / "cars" / "formula-edge-model1-high-downforce.json"
             ).read_text(encoding="utf-8")
         )
         names = [

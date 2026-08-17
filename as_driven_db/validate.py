@@ -336,12 +336,21 @@ def _validate_car_approval(
         errors.append(f"{label}.record_id: no curated record {record_id!r}")
         return
 
+    # An approval accepts one simulator's evidence for a car, and a car may be
+    # covered by several, so the approval says which rather than assuming AMS2.
+    approved_simulator = approval.get("simulator")
     simulator = next(
-        (item for item in record.get("simulators", []) if item.get("simulator") == "ams2"),
+        (
+            item
+            for item in record.get("simulators", [])
+            if item.get("simulator") == approved_simulator
+        ),
         None,
     )
     if simulator is None:
-        errors.append(f"{label}.record_id: curated record has no AMS2 simulator entry")
+        errors.append(
+            f"{label}.simulator: curated record has no {approved_simulator!r} entry"
+        )
         return
 
     approved_names = [approval.get("telemetry_name")]
@@ -367,7 +376,8 @@ def _validate_car_approval(
 
     if approval.get("observed_game_version") != simulator.get("verified_game_version"):
         errors.append(
-            f"{label}.observed_game_version: does not match the curated AMS2 verification version"
+            f"{label}.observed_game_version: does not match the curated "
+            f"{approved_simulator} verification version"
         )
 
     controls = approval.get("approved_controls", {})

@@ -4,7 +4,7 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "ams2.lola-t98-00-ford-cosworth-high-downforce",
+      "record_id": "lola-t98-00-ford-cosworth-high-downforce",
       "bundle": "build/cart-batch-17/lola-t98-00-ford-cosworth-high-downforce.staged.json",
       "manufacturer": "Lola",
       "model": "T98/00 Ford-Cosworth",
@@ -62,7 +62,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.reynard-98i-ford-cosworth-high-downforce",
+      "record_id": "reynard-98i-ford-cosworth-high-downforce",
       "bundle": "build/cart-batch-17/reynard-98i-ford-cosworth-high-downforce.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Ford-Cosworth",
@@ -119,7 +119,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.reynard-98i-honda-high-downforce",
+      "record_id": "reynard-98i-honda-high-downforce",
       "bundle": "build/cart-batch-17/reynard-98i-honda-high-downforce.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Honda",
@@ -177,7 +177,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.reynard-98i-mercedes-benz-high-downforce",
+      "record_id": "reynard-98i-mercedes-benz-high-downforce",
       "bundle": "build/cart-batch-17/reynard-98i-mercedes-benz-high-downforce.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Mercedes-Benz",
@@ -235,7 +235,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.reynard-98i-toyota-high-downforce",
+      "record_id": "reynard-98i-toyota-high-downforce",
       "bundle": "build/cart-batch-17/reynard-98i-toyota-high-downforce.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Toyota",
@@ -293,7 +293,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.swift-009c-ford-cosworth-high-downforce",
+      "record_id": "swift-009c-ford-cosworth-high-downforce",
       "bundle": "build/cart-batch-17/swift-009c-ford-cosworth-high-downforce.staged.json",
       "manufacturer": "Swift",
       "model": "009.c Ford-Cosworth",

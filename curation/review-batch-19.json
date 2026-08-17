@@ -4,7 +4,7 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "ams2.bmw-2002-turbo",
+      "record_id": "bmw-2002-turbo",
       "bundle": "build/batch-19/bmw-2002-turbo.staged.json",
       "manufacturer": "BMW",
       "model": "2002 turbo",
@@ -48,7 +48,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.chevrolet-corvette-c3",
+      "record_id": "chevrolet-corvette-c3",
       "bundle": "build/batch-19/chevrolet-corvette-c3.staged.json",
       "manufacturer": "Chevrolet",
       "model": "Corvette",
@@ -93,7 +93,7 @@
       "variant": "C3"
     },
     {
-      "record_id": "ams2.porsche-911-rsr-1974",
+      "record_id": "porsche-911-rsr-1974",
       "bundle": "build/batch-19/porsche-911-rsr-1974.staged.json",
       "manufacturer": "Porsche",
       "model": "911 Carrera RSR 3.0",
@@ -136,7 +136,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mercedes-benz-clk-lm",
+      "record_id": "mercedes-benz-clk-lm",
       "bundle": "build/batch-19/mercedes-benz-clk-lm.staged.json",
       "manufacturer": "Mercedes-Benz",
       "model": "CLK LM",
@@ -178,7 +178,7 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "ams2.mclaren-mercedes-mp4-12-high-downforce",
+      "record_id": "mclaren-mercedes-mp4-12-high-downforce",
       "bundle": "build/batch-19/mclaren-mercedes-mp4-12-high-downforce.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/12",

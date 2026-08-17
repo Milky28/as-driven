@@ -2,7 +2,8 @@
   "schema_version": "1.0.0",
   "dataset_version": "0.3.4",
   "approved_at": "2026-08-10",
-  "record_id": "ams2.oreca-07",
+  "record_id": "oreca-07",
+  "simulator": "ams2",
   "telemetry_name": "Oreca 07",
   "telemetry_class": "LMP2",
   "additional_telemetry_names": [

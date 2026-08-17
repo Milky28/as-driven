@@ -51,7 +51,7 @@ class ImportObservationTests(unittest.TestCase):
         record = bundle["record"]
         transmission = record["authentic_controls"]["transmission"]
 
-        self.assertEqual(record["record_id"], "ams2.porsche-963")
+        self.assertEqual(record["record_id"], "porsche-963")
         self.assertEqual(
             bundle["source"]["source_id"],
             "ams2.local-live-porsche-963-controls.1.6.9.91",

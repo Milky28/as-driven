@@ -48,7 +48,7 @@ class, rename, or configuration bookkeeping covered by a model member or
 predecessor rather than duplicated as standalone control research. Across the
 model research there are 110 source citations representing 87 unique URLs.
 The base Alpine A424 identity has since completed live verification and was
-promoted as `ams2.alpine-a424` in dataset 0.3.4; its Low Downforce identity
+promoted as `alpine-a424` in dataset 0.3.4; its Low Downforce identity
 is approved as an exact aero-package alias inheriting the base controls, with
 the lack of a separate live control test explicitly documented.
 The Ligier JS P217 was also promoted in dataset 0.3.4 after direct tests of its

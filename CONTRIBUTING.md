@@ -52,7 +52,9 @@ Confidence measures evidence, not contributor certainty.
 
 ## Pull request checklist
 
-- Keep record IDs stable and lowercase (`simulator.slug`).
+- Keep record IDs stable and lowercase, naming the real car (`porsche-963`).
+  A record is one real car with an entry per simulator, so the id carries no
+  simulator prefix. Source and observation IDs still do.
 - Put real-world facts in `authentic_controls` and game behavior in
   `simulators[].behavior`.
 - Represent a difference with an override; do not rewrite authentic history to

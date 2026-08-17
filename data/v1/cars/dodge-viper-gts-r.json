@@ -1,0 +1,164 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "dodge-viper-gts-r",
+  "identity": {
+    "display_name": "Dodge Viper GTS-R",
+    "manufacturer": "Dodge",
+    "model": "Viper GTS-R",
+    "variant": "AMS2 2005 GT1 representation",
+    "year": {
+      "from": 2005,
+      "to": 2005,
+      "label": "2005 competition context"
+    },
+    "class": "GT1 2005",
+    "real_world_identity_notes": "Reiza places the Viper GTS-R in its 2005 GT1 class. FIA form GT2-005 originally homologated the Chrysler Corporation Dodge Viper GTS in Group GT2; the differing labels reflect simulator competition context versus the car's original homologation. The exact historical chassis represented by AMS2 has not been established."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "diameter_mm": null,
+        "source_label": "period-cockpit",
+        "notes": "Round rim supported by documented period-spec cockpit photography; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "AMS2 1.6.9.91 accepted sequential-stick shifts without clutch once moving and required clutch engagement to move from a stop.",
+      "The observed automatic cut and blip are medium-confidence perceptual tests; no input or engine-throttle telemetry trace was recorded.",
+      "FIA homologation documents the original six-speed manual Borg-Warner T56, while Carsport Holland documents that at least one privateer Viper was converted from the Oreca H-pattern arrangement to a Holinger sequential.",
+      "AMS2's sequential behavior is historically plausible for a privateer specification, but it must not be generalized to every Viper GTS-R and does not identify Reiza's exact reference chassis.",
+      "'Dodge Viper GTS-R - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Dodge Viper GTS-R"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Dodge Viper GTS-R - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Stick",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "source_label": "period-cockpit"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with a sequential shifter; the driver manually used the clutch only to move from a stop.",
+          "Clutch was required to move from a stop but not for normal running shifts.",
+          "Automatic cut and blip were perceived during the live test and remain medium-confidence until telemetry-measured.",
+          "'Dodge Viper GTS-R - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "simhub.local-ams2-identities.9.11.22",
+        "ams2.local-live-viper-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Exact identity and sequential/start behavior were observed directly; automatic cut and blip were perceptual rather than telemetry-measured."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity/display_name",
+          "/identity/class",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "verified",
+        "basis": "Official DLC listing plus exact CarModel, CarId, and GT1_05 class values observed through SimHub 9.11.22."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/notes/2"
+        ],
+        "source_refs": [
+          "fia.historic-homologation.gt2-005",
+          "motortrend.viper-gts-r.1995",
+          "carsport-holland.viper-c38-sequential"
+        ],
+        "confidence": "high",
+        "basis": "FIA and contemporary engineering evidence establish the six-speed original configuration; the first-person Carsport account establishes that a privateer sequential conversion existed."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-viper-controls.1.6.9.91",
+          "carsport-holland.viper-c38-sequential"
+        ],
+        "confidence": "medium",
+        "basis": "Direct current-game control test, with cut and blip conservatively limited to medium confidence; historical source establishes privateer sequential plausibility rather than an exact Reiza chassis link."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "rm-sothebys.viper-gts-r-c3.2023"
+        ],
+        "confidence": "medium",
+        "basis": "Visual classification from documented cockpit photographs; the exact late privateer reference chassis remains unknown."
+      }
+    ]
+  },
+  "notes": [
+    "This record deliberately preserves the distinction between original FIA homologation, documented privateer conversions, and the behavior of Reiza's simulated representation.",
+    "'Dodge Viper GTS-R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ],
+  "updated_at": "2026-08-12"
+}

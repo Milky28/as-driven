@@ -1,0 +1,162 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "porsche-962c",
+  "identity": {
+    "display_name": "Porsche 962C",
+    "manufacturer": "Porsche",
+    "model": "962C",
+    "year": {
+      "from": 1987,
+      "label": "1987 World Sportscar Championship"
+    },
+    "class": "Group C",
+    "real_world_identity_notes": "Group C prototype derived from the 956, with the 962C designation distinguishing the World Sportscar Championship cars from their IMSA GTP counterparts. It uses a five-speed manual transmission. Whether that gearbox is synchromesh or dog engaged, and whether its H-pattern is standard or dogleg, is not established by the sources reviewed and is deliberately left unknown.",
+    "variant": "AMS2 base-downforce Group C representation"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift required the driver's own blip.",
+      "Gearbox construction and H-pattern layout remain unknown; the reviewed sources establish only a five-speed manual transmission.",
+      "'Porsche 962C - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 962C"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 962C - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group C"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-962c.20260813t050441473z-25173c43 by Jason Kinslow.",
+          "'Porsche 962C - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-13",
+      "source_refs": [
+        "wikipedia.porsche-962",
+        "ams2.local-live-porsche-962c-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled; the real-world five-speed manual transmission and 962C designation are supported by a registered secondary source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.porsche-962",
+          "ams2.local-live-porsche-962c-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered secondary source establishes the Group C 962C designation and its five-speed manual transmission, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.porsche-962",
+          "ams2.local-live-porsche-962c-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source establishes a five-speed manual transmission and the live drive confirmed five forward gears with H-pattern actuation. Gearbox construction and the H-pattern layout are not established by the reviewed sources and stay unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-962c-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-962c-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The guided drive recorded that a clutchless upshift was accepted after a throttle lift and a clutchless downshift with a manual blip, with no automatic throttle spike detected."
+      }
+    ]
+  },
+  "driver_summary": "Five-speed manual. Neither the gate nor how the gearbox engages is established by a source, so the H-pattern is what the cockpit showed, and blipping on downshifts is the safe assumption.",
+  "notes": [
+    "'Porsche 962C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
+  ],
+  "updated_at": "2026-08-17"
+}

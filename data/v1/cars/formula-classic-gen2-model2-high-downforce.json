@@ -1,0 +1,151 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "formula-classic-gen2-model2-high-downforce",
+  "identity": {
+    "display_name": "Formula Classic Gen2 Model2 - High Downforce",
+    "manufacturer": "Reiza",
+    "model": "Formula Classic Gen2 Model2",
+    "year": {
+      "label": "Formula Classic Gen2 Model2"
+    },
+    "class": "F-Classic_Gen2_HD",
+    "real_world_identity_notes": "Reiza's fictionalised late-1980s Formula One car, reviewed independently of the other Gen2 models. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "The automatic cut test did not resolve, so the upshift is recorded unknown. The other Gen2 cars found no automatic cut, but that is not inherited across models without evidence.",
+      "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, and this gearbox works its own on every shift, so the accepted results stand. The driver confirmed no pedal was used.",
+      "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed.",
+      "This car engages every gear immediately, up and down, without a lift, a blip, or any cut or blip from the car. Its three classmates only engage once the revs match and need the driver to lift and blip; this one does not, which the driver confirmed after the drive. The automatic-cut test could not classify it because there is no cut to find: the gearbox simply takes the gear.",
+      "The combination is unusual and is recorded as observed rather than as period practice. A 1988 Formula One gearbox would not behave this way, so this most likely reflects how the simulator models this particular car. No real-world chassis is assigned to it, so there is no separate real-car value for the observation to contradict."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Classic Gen2 Model2 - High Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Classic_Gen2_HD"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Classic Gen2 Model2"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Classic Gen2 Model2 - Low Downforce"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-classic-gen2-model2-high-downforce.20260814t225644082z-fec531da by Jason Kinslow.",
+          "The guided drive could not classify an automatic cut from the trace, because there is none to find: the gearbox takes the gear immediately at full throttle. The driver confirmed after the drive that no cut, blip, lift or rev match is needed, so the simulator behaviour is recorded as no automatic cut rather than left unresolved."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "calverst.syncro-vs-dog-engagement",
+        "ams2.local-live-formula-classic-gen2-model2-high-downforce-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-formula-classic-gen2-model2-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-formula-classic-gen2-model2-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The live drive selected six H-pattern gears and found no automatic blip. The automatic cut test was inconclusive, so both it and the upshift throttle lift stay unknown rather than being assumed from the other Gen2 cars."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-classic-gen2-model2-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-14"
+}

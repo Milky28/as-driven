@@ -4,7 +4,7 @@
   "approved_at": "2026-08-12",
   "records": [
     {
-      "record_id": "ams2.nissan-r89c",
+      "record_id": "nissan-r89c",
       "bundle": "build/observation-bundles/ams2.nissan-r89c.json",
       "manufacturer": "Nissan",
       "model": "R89C",
@@ -41,7 +41,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, five H-pattern gears, clutchless running shifts accepted, upshift after a throttle lift, downshift after a manual blip, no automatic cut or blip, round rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.porsche-962c",
+      "record_id": "porsche-962c",
       "bundle": "build/observation-bundles/ams2.porsche-962c.json",
       "manufacturer": "Porsche",
       "model": "962C",
@@ -75,7 +75,7 @@
       "live_source_notes": "Guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: clutch required to move off, five H-pattern gears, clutchless running shifts accepted, upshift after a throttle lift, downshift with a manual blip, no automatic cut or blip, round rim with no display or shift lights."
     },
     {
-      "record_id": "ams2.metalmoro-mrx-duratec-p4",
+      "record_id": "metalmoro-mrx-duratec-p4",
       "bundle": "build/observation-bundles/ams2.metalmoro-mrx-duratec-p4.json",
       "manufacturer": "Metalmoro",
       "model": "MRX Duratec P4",

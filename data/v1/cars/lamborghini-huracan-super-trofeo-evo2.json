@@ -1,0 +1,155 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lamborghini-huracan-super-trofeo-evo2",
+  "identity": {
+    "display_name": "Lamborghini Huracan Super Trofeo EVO2",
+    "manufacturer": "Lamborghini",
+    "model": "Huracan Super Trofeo EVO2",
+    "year": {
+      "label": "Super Trofeo EVO2"
+    },
+    "class": "Super Trofeo",
+    "real_world_identity_notes": "The EVO2 is distinct from the earlier Huracan LP 620-2 Super Trofeo. No predecessor telemetry alias is attached to this record."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "open_top": "yes",
+        "source_label": "live-cockpit-open-top-no-display",
+        "notes": "Direct AMS2 cockpit inspection showed an open-top racing rim without an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car moved from rest without physical clutch input. The underlying simulator mechanism was not established.",
+      "All six paddle-selected forward gears accepted clutch-free full-throttle upshifts without driver lift, with automatic cut perceptible.",
+      "Clutch-free downshifts were accepted with no driver throttle input, and automatic blip was directly visible as a throttle-display spike."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Huracan Super Trofeo EVO2"
+        },
+        {
+          "kind": "class-id",
+          "value": "Super Trofeo"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-open-top-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Clutch-free move-off, six no-lift paddle upshifts with automatic cut, clutch-free downshifts with automatic blip, and the open-top no-display rim were directly observed.",
+          "The mechanism permitting clutch-free move-off was not determined."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.3.endurance-pt2",
+        "lamborghini.super-trofeo-evo2.brochure.2022",
+        "ams2.local-live-lamborghini-huracan-super-trofeo-evo2-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "The exact identity and complete user-facing control technique were directly checked in AMS2; official sources independently establish the car identity and transmission hardware."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.endurance-pt2",
+          "lamborghini.super-trofeo-evo2.brochure.2022",
+          "ams2.local-live-lamborghini-huracan-super-trofeo-evo2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release and manufacturer material agree with the exact live model and class identity observed through SimHub 9.11.22."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "lamborghini.super-trofeo-evo2.brochure.2022",
+          "ams2.local-live-lamborghini-huracan-super-trofeo-evo2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Manufacturer documentation and direct exercise of all six paddle-selected forward gears agree."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-huracan-super-trofeo-evo2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established clutch-free move-off, clutch-free no-lift upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip spike. The move-off mechanism remains explicitly unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-huracan-super-trofeo-evo2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct cockpit inspection classified the open-top no-display rim as GT-style in the project vocabulary."
+      }
+    ]
+  },
+  "notes": [
+    "The old LamborghiniHuracanLP6202SuperTrofeo identity belongs to a different predecessor and is intentionally not included.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}

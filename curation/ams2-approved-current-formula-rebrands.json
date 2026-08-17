@@ -7,14 +7,14 @@
   "observed_through": "SimHub 9.11.22",
   "identities": [
     {
-      "record_id": "ams2.formula-reiza",
+      "record_id": "formula-reiza",
       "current_display_name": "Formula V8 Gen3",
       "telemetry_name": "Formula V8 Gen3 - High Downforce",
       "telemetry_class": "F-Reiza_HD",
       "basis": "Official V1.6.9 rebrand plus exact live CarModel, CarId, and retained F-Reiza class identity."
     },
     {
-      "record_id": "ams2.formula-ultimate-2022",
+      "record_id": "formula-ultimate-2022",
       "current_display_name": "Formula Hybrid Gen3",
       "telemetry_name": "Formula Ultimate Hybrid Gen3 - High Downforce",
       "telemetry_class": "F-Ultimate_Gen2_HD",

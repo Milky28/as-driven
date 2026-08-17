@@ -2,11 +2,15 @@
   "schema_version": "1.0.0",
   "dataset_version": "0.3.6",
   "approved_at": "2026-08-11",
-  "record_id": "ams2.maserati-mc12-gt1",
+  "record_id": "maserati-mc12-gt1",
+  "simulator": "ams2",
   "telemetry_name": "Maserati MC12 GT1",
   "telemetry_class": "GT1_05",
   "additional_telemetry_names": [
-    { "value": "Maserati MC12 GT1 - Low Downforce", "basis": "Approved as an aero-package alias inheriting the verified base controls; this configuration was not separately live-tested." }
+    {
+      "value": "Maserati MC12 GT1 - Low Downforce",
+      "basis": "Approved as an aero-package alias inheriting the verified base controls; this configuration was not separately live-tested."
+    }
   ],
   "observed_game_version": "1.6.9.91",
   "observed_through": "SimHub 9.11.22",

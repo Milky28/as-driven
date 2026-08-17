@@ -1,0 +1,143 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "metalmoro-mrx-duratec-turbo-p3",
+  "identity": {
+    "display_name": "MetalMoro MRX Duratec Turbo P3",
+    "manufacturer": "Metalmoro",
+    "model": "MRX",
+    "year": {
+      "label": "P3 configuration"
+    },
+    "class": "P3",
+    "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro, sold in several prototype classes. The manufacturer states the car accepts a choice of engine and gearbox rather than specifying either. Duratec Turbo denotes the Ford engine.",
+    "variant": "Duratec Turbo P3"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "yes",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+      "The clutch is needed to pull away.",
+      "Whether a downshift blip is needed to engage a gear was not tested and no reviewed source establishes the gearbox construction, so it stays unknown rather than being inferred from the absent automation.",
+      "This P3 configuration differs from its P2 sibling on both counts the drive tested: it needs the clutch to move off and it does not blip its own downshifts. Nothing is inherited between them.",
+      "Metalmoro states only that the MRX accepts several engine and gearbox options, so no reviewed source establishes which gearbox this configuration carries. The sequential construction is what the drive showed.",
+      "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "MetalMoro MRX Duratec Turbo P3"
+        },
+        {
+          "kind": "class-id",
+          "value": "P3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.metalmoro-mrx-duratec-turbo-p3.20260817t043659674z-d771315f by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-17",
+      "source_refs": [
+        "metalmoro.mrx.official",
+        "ams2.local-live-metalmoro-mrx-duratec-turbo-p3-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "metalmoro.mrx.official",
+          "ams2.local-live-metalmoro-mrx-duratec-turbo-p3-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The manufacturer's own page establishes the MRX; the class and engine configuration were observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "metalmoro.mrx.official",
+          "ams2.local-live-metalmoro-mrx-duratec-turbo-p3-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The manufacturer does not state a gearbox, so the six sequential gears and the automatic cut come from the live drive rather than from the source."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-metalmoro-mrx-duratec-turbo-p3-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}

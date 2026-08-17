@@ -1,0 +1,166 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "dallara-sp1",
+  "identity": {
+    "display_name": "Dallara SP1",
+    "manufacturer": "Dallara",
+    "model": "SP1",
+    "variant": "AMS2 2005 LMP1 representation",
+    "year": {
+      "from": 2005,
+      "label": "2005 LMP1 representation"
+    },
+    "class": "LMP1 2005",
+    "real_world_identity_notes": "Secondary model history describes six-speed sequential hardware and a 2005 paddle-shift conversion. AMS2 shows both paddles and a cockpit lever, but the modeled driver retains both hands on the wheel through replay shifts, supporting paddle actuation for this representation."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "diameter_mm": null,
+        "integrated_display": "yes",
+        "source_label": "live-cockpit-observation",
+        "notes": "Direct cockpit inspection showed a GT/Formula rim with an integrated display; exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+      "All six gears accepted clutch-free full-throttle upshifts with automatic cut; clutch-free downshifts were accepted with automatic throttle blip.",
+      "Both paddles and a cockpit sequential lever are visible, but exterior replay animation showed no driver hand leaving the wheel during shifts; paddle actuation is therefore the reviewed modeled control.",
+      "A future animation or cockpit-behavior change can falsify and trigger review of this actuation choice.",
+      "'Dallara SP1 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Dallara SP1"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Dallara SP1 - Low Downforce"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMP1_05"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "unknown",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Standing-start clutch, six gears, automatic cut and blip, and GT/Formula display rim were directly observed.",
+          "Paddle actuation is based on visible paddles plus replay animation retaining both hands on the wheel; a cockpit lever is also present.",
+          "'Dallara SP1 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-11",
+      "source_refs": [
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "wikipedia.dallara-sp1",
+        "ams2.local-live-dallara-sp1-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Exact simulator identity and shift behavior were directly tested. Paddle actuation is supported by visible hardware, period secondary context, and modeled replay animation, with the visible lever explicitly retained as a review caveat."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "ams2.local-live-dallara-sp1-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release context and exact live CarModel/class observation establish the simulated identity."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.dallara-sp1",
+          "ams2.local-live-dallara-sp1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Provisional historical context and direct exercise agree on six-speed sequential hardware."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/notes/2",
+          "/simulators/0/behavior/shift_type"
+        ],
+        "source_refs": [
+          "wikipedia.dallara-sp1",
+          "ams2.local-live-dallara-sp1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Visible paddles, a period paddle-conversion context, and replay animation retaining both hands on the wheel support paddle actuation despite the additional cockpit lever."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-dallara-sp1-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish technique and wheel category."
+      }
+    ]
+  },
+  "notes": [
+    "'Dallara SP1 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
+    "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}

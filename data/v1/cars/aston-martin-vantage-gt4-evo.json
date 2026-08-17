@@ -1,0 +1,166 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "aston-martin-vantage-gt4-evo",
+  "identity": {
+    "display_name": "Aston Martin Vantage GT4 Evo",
+    "manufacturer": "Aston Martin",
+    "model": "Vantage GT4 Evo",
+    "year": {
+      "label": "Vantage GT4 Evo"
+    },
+    "class": "GT4",
+    "real_world_identity_notes": "Aston Martin documents the Vantage GT4 Evo with a production-derived eight-speed transmission configured to use six forward ratios. AMS2 presents those six usable ratios through steering-wheel paddles."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "diameter_mm": null,
+        "integrated_display": "no",
+        "open_top": "yes",
+        "source_label": "live-cockpit-open-top-no-display",
+        "notes": "Direct AMS2 cockpit inspection matched the Aston Martin racing wheel reference: an open-top GT rim without an integrated display. Exact diameter remains unknown."
+      }
+    },
+    "notes": [
+      "With Auto Clutch disabled, the car moved from rest without physical clutch input. The underlying simulator mechanism was not established.",
+      "All six usable paddle-selected forward gears accepted clutch-free full-throttle upshifts without driver lift, with automatic cut perceptible.",
+      "Clutch-free downshifts were accepted with no driver throttle input, and automatic blip was directly visible as a throttle-display spike.",
+      "The normalized sequential-paddle description represents the driver's six-ratio control interface in AMS2; the official source describes the underlying real transmission as a production-derived eight-speed unit configured to use six ratios."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Aston Martin Vantage GT4 Evo"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "Seq-Paddle",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-open-top-no-display"
+        },
+        "notes": [
+          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
+          "Clutch-free move-off, six no-lift paddle upshifts with automatic cut, clutch-free downshifts with automatic blip, and the open-top no-display rim were directly observed.",
+          "The mechanism permitting clutch-free move-off was not determined."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-10",
+      "source_refs": [
+        "ams2.reiza-release.1.6.6.endurance-pt3",
+        "aston-martin.vantage-gt4-evo.release",
+        "ams2.local-live-aston-martin-vantage-gt4-evo-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "The exact identity and complete user-facing six-ratio paddle control technique were directly checked in AMS2; Aston Martin independently documents the production-derived transmission and six usable forward ratios."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.6.endurance-pt3",
+          "aston-martin.vantage-gt4-evo.release",
+          "ams2.local-live-aston-martin-vantage-gt4-evo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official release and manufacturer material agree with the exact live model and class identity observed through SimHub 9.11.22."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "aston-martin.vantage-gt4-evo.release",
+          "ams2.local-live-aston-martin-vantage-gt4-evo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Aston Martin documents the production-derived eight-speed transmission as using six forward ratios, and all six were directly exercised through the paddles in AMS2."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "aston-martin.vantage-gt4-evo.release",
+          "ams2.local-live-aston-martin-vantage-gt4-evo-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Sequential is the normalized project category for the simulated driver's ordered paddle interface; the record explicitly preserves the underlying production-derived eight-speed hardware description."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-aston-martin-vantage-gt4-evo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established clutch-free move-off, clutch-free no-lift upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip spike. The move-off mechanism remains explicitly unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-aston-martin-vantage-gt4-evo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct cockpit inspection and the supplied Aston Martin wheel reference classified the open-top no-display rim as GT-style in the project vocabulary."
+      }
+    ]
+  },
+  "notes": [
+    "The difference between the real production-derived gearbox hardware and the normalized simulated paddle interface is intentionally retained.",
+    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-16"
+}
