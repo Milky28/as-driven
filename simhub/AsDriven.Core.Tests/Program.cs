@@ -997,6 +997,29 @@ namespace AsDriven.Core.Tests
                         True(prompt.GetResults().ClutchlessDownshift == "yes",
                             "records the immediate lift-and-shift as a clutchless downshift");
                     }
+
+                    // Getting back on the power before the result confirms is a
+                    // driver timing miss, not a gearbox that failed to engage.
+                    // Both used to report the same thing, which points the
+                    // driver at recording a false negative.
+                    {
+                        GuidedVerificationDrive early = new GuidedVerificationDrive();
+                        early.Start(6);
+                        for (int guard = 0; guard < 40
+                            && early.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            early.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            early.Next();
+                        }
+                        early.AddSample(GuidedSample(now, 4, 0, 90, 5200, 80, 220, true));
+                        early.AddSample(GuidedSample(now.AddMilliseconds(60), 3, 0, 0, 6100, 79, 90, true));
+                        // Back on the throttle well inside the confirm window.
+                        early.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 80, 6300, 80, 210, true));
+                        early.AddSample(GuidedSample(now.AddMilliseconds(3000), 3, 0, 80, 6500, 85, 210, true));
+                        True(early.GetSnapshot().ResultReady, "concludes the attempt");
+                        True(early.GetSnapshot().Result.Contains("throttle came back"),
+                            "names the throttle rather than blaming the gearbox");
+                    }
                     // This car crept away with the clutch channel high and the
                     // result was accepted as clutch-free, which is the one
                     // combination worth questioning.

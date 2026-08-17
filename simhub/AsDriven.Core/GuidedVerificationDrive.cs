@@ -140,6 +140,13 @@ namespace AsDriven.Core
         /// driver's own pedal as an automatic blip.
         /// </summary>
         private double _downshiftArmedThrottle;
+        /// <summary>
+        /// Whether the throttle came back while the attempt was waiting to
+        /// confirm engagement. Confirmation needs a closed throttle, so this
+        /// separates a driver who got back on the power from a gearbox that
+        /// never took drive; the two used to report the same failure.
+        /// </summary>
+        private bool _downshiftThrottleReturned;
         private double _maximumTorque;
         private double _minimumTorque;
         private double _upshiftMaximumTorque;
@@ -607,6 +614,10 @@ namespace AsDriven.Core
 
             double elapsed = (sample.TimestampUtc - _downshiftCandidateAtUtc).TotalSeconds;
             bool blip = _downshiftArmedThrottle >= 15.0;
+            if (sample.Throttle > 10.0)
+            {
+                _downshiftThrottleReturned = true;
+            }
             if (sample.Throttle <= 10.0 && elapsed >= EngagementConfirmSeconds)
             {
                 if (DriveRatio(sample) >= _baselineDriveRatio * EngagementRatioMargin)
@@ -631,8 +642,13 @@ namespace AsDriven.Core
                 SetResult(
                     false,
                     false,
-                    "The lower gear was selected but the engine never took drive from the wheels, so "
-                        + "the gearbox did not engage. Retry, or skip and answer it in the form.");
+                    _downshiftThrottleReturned
+                        ? "The downshift was seen, but the throttle came back before the result was "
+                            + "confirmed. Confirming needs a closed throttle, so stay off it until "
+                            + "the result appears, then retry."
+                        : "The lower gear was selected but the engine never took drive from the "
+                            + "wheels, so the gearbox did not engage. Retry, or skip and answer it "
+                            + "in the form.");
             }
         }
 
@@ -793,6 +809,7 @@ namespace AsDriven.Core
             _minimumThrottle = 100.0;
             _maximumThrottle = 0.0;
             _downshiftArmedThrottle = 0.0;
+            _downshiftThrottleReturned = false;
             _maximumTorque = 0.0;
             _minimumTorque = double.MaxValue;
             _upshiftMaximumTorque = 0.0;
@@ -877,7 +894,7 @@ namespace AsDriven.Core
                 case Phase.GearCount: return "Shift up until the gearbox will not go higher.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
-                case Phase.CoastDownshift: return "At safe RPM, release the throttle, then downshift. Leave the clutch untouched.";
+                case Phase.CoastDownshift: return "At safe RPM, release the throttle, then downshift. Stay off the throttle until the result appears, and leave the clutch untouched.";
                 case Phase.ManualBlipDownshift: return "Leave clutch untouched and manually blip the throttle.";
                 case Phase.Complete: return "Driving results are ready for review.";
                 default: return string.Empty;
