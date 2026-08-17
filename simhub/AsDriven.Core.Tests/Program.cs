@@ -971,6 +971,32 @@ namespace AsDriven.Core.Tests
                         True(carried.GetSnapshot().Result.Contains("No automatic throttle spike"),
                             "never reports throttle carried in before the lift as the car's blip");
                     }
+
+                    // Lifting and downshifting inside one telemetry sample is
+                    // an ordinary way to drive the test. The baseline used to be
+                    // captured at arming, so it landed on the gear already
+                    // selected and the attempt timed out on a shift that plainly
+                    // happened.
+                    {
+                        GuidedVerificationDrive prompt = new GuidedVerificationDrive();
+                        prompt.Start(6);
+                        for (int guard = 0; guard < 40
+                            && prompt.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            prompt.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            prompt.Next();
+                        }
+                        // On throttle in fourth, then closed throttle and third
+                        // in the very next sample.
+                        prompt.AddSample(GuidedSample(now, 4, 0, 90, 5200, 80, 220, true));
+                        prompt.AddSample(GuidedSample(now.AddMilliseconds(60), 3, 0, 0, 6100, 79, 90, true));
+                        prompt.AddSample(GuidedSample(now.AddMilliseconds(700), 3, 0, 0, 6000, 78, 90, true));
+                        True(prompt.GetSnapshot().ResultReady,
+                            "detects a downshift taken immediately after the lift");
+                        prompt.Next();
+                        True(prompt.GetResults().ClutchlessDownshift == "yes",
+                            "records the immediate lift-and-shift as a clutchless downshift");
+                    }
                     // This car crept away with the clutch channel high and the
                     // result was accepted as clutch-free, which is the one
                     // combination worth questioning.

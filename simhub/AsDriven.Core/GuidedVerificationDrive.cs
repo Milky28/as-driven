@@ -541,12 +541,24 @@ namespace AsDriven.Core
 
         private void DetectDownshift(GuidedTelemetrySample sample, bool manualBlip)
         {
-            if (!_armed && sample.Gear > 1 && sample.SpeedKmh > 5.0
-                && (!manualBlip ? sample.Throttle <= 10.0 : true))
+            if (!_armed && sample.Gear > 1 && sample.SpeedKmh > 5.0)
             {
-                _armed = true;
-                _baselineGear = sample.Gear;
-                _baselineDriveRatio = DriveRatio(sample);
+                bool throttleClosed = !manualBlip ? sample.Throttle <= 10.0 : true;
+                // The gear to compare against is the one the driver was in
+                // *before* lifting. Capturing it at arming meant a driver who
+                // lifted and downshifted inside one telemetry sample armed on
+                // the gear they had already selected, so the attempt waited for
+                // something lower, found nothing, and timed out as "no
+                // clutchless downshift" on a shift that plainly happened.
+                if (!throttleClosed || _baselineGear == 0)
+                {
+                    _baselineGear = sample.Gear;
+                    _baselineDriveRatio = DriveRatio(sample);
+                }
+                if (throttleClosed)
+                {
+                    _armed = true;
+                }
             }
             if (!_armed)
             {
@@ -865,7 +877,7 @@ namespace AsDriven.Core
                 case Phase.GearCount: return "Shift up until the gearbox will not go higher.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
-                case Phase.CoastDownshift: return "At safe RPM, release throttle and leave clutch untouched.";
+                case Phase.CoastDownshift: return "At safe RPM, release the throttle, then downshift. Leave the clutch untouched.";
                 case Phase.ManualBlipDownshift: return "Leave clutch untouched and manually blip the throttle.";
                 case Phase.Complete: return "Driving results are ready for review.";
                 default: return string.Empty;
