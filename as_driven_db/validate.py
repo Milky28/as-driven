@@ -456,6 +456,24 @@ def _validate_documentation_claims(
         return
     count = len(records)
 
+    # A truncated status file has nothing to disagree with, so the checks below
+    # would pass it silently. Dataset 0.3.65 shipped four of these emptied by a
+    # bad version bump and validation stayed green, so require the content.
+    for name in DOC_STATUS_FILES:
+        path = root / name
+        if not path.exists():
+            # Test fixtures build a repository from schema and data alone.
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as exception:
+            errors.append(f"{name}: could not read documentation ({exception})")
+            continue
+        if not text.strip():
+            errors.append(f"{name}: status document is empty")
+        elif version not in text:
+            errors.append(f"{name}: does not state the current dataset version {version}")
+
     paths = [root / name for name in DOC_STATUS_FILES]
     paths.extend(sorted((root / "docs").glob("*.md")))
     for path in paths:

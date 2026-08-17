@@ -367,6 +367,29 @@ class ValidationTests(unittest.TestCase):
             )
             self.assertEqual(validate_repository(temp_root), [])
 
+    def test_an_emptied_status_document_is_reported(self) -> None:
+        # Dataset 0.3.65 shipped README.md, CLAUDE.md, AGENTS.md and
+        # EARLY_ACCESS.md truncated to nothing by a bad version bump, and
+        # validation passed: an empty file states no version to disagree with.
+        for name in ("README.md", "CLAUDE.md", "AGENTS.md", "EARLY_ACCESS.md"):
+            with self.subTest(name), tempfile.TemporaryDirectory() as directory:
+                temp_root = self._copy_repository_data(Path(directory))
+                index = json.loads(
+                    (temp_root / "data" / "v1" / "index.json").read_text(encoding="utf-8")
+                )
+                version = index["dataset_version"]
+                for other in ("README.md", "CLAUDE.md", "AGENTS.md", "EARLY_ACCESS.md"):
+                    (temp_root / other).write_text(f"Dataset {version}\n", encoding="utf-8")
+
+                self.assertEqual(validate_repository(temp_root), [])
+
+                (temp_root / name).write_text("", encoding="utf-8")
+                errors = validate_repository(temp_root)
+                self.assertTrue(
+                    any(name in error and "empty" in error for error in errors),
+                    f"expected {name} to be reported as empty, got {errors}",
+                )
+
     def test_every_dogleg_records_which_side_first_gear_sits_on(self) -> None:
         # A dogleg only establishes that first is outside the racing plane. The
         # McLaren MP4/4 mirrors the gate, so a record that leaves the side unset
