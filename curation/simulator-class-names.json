@@ -582,6 +582,13 @@
     },
     {
       "simulator": "ams2",
+      "class_id": "RX",
+      "name": "RX",
+      "records": 0,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
       "class_id": "ST96",
       "name": "Diablo Super Trofeo",
       "records": 1,
