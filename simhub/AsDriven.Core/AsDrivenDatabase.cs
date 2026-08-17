@@ -309,6 +309,7 @@ namespace AsDriven.Core
                     CarClass = RequiredString(identity, "class", recordPath),
                     ShiftActuation = RequiredString(effectiveTransmission, "shift_actuation", recordPath),
                     ShiftPattern = RequiredString(effectiveTransmission, "shift_pattern", recordPath),
+                    FirstGearPosition = OptionalState(effectiveTransmission, "first_gear_position"),
                     GearCount = OptionalInteger(effectiveTransmission, "forward_gears"),
                     UpshiftGuidance = DescribeShiftAction(
                         RequiredObject(effectiveTransmission, "upshift", recordPath), true),

@@ -250,7 +250,7 @@ class SimHubDashTests(unittest.TestCase):
         # The cut, blip and lift tiles were replaced by the Use band's text.
         for retired in ("cut-auto", "cut-manual", "blip-auto", "blip-manual", "lift-required"):
             self.assertNotIn(retired, serialized)
-        self.assertEqual(17, len(dashboards[0]["Images"]))
+        self.assertEqual(18, len(dashboards[0]["Images"]))
         self.assertTrue(all(image["Extension"] == ".png" for image in dashboards[0]["Images"]))
         self.assertTrue(all(image["Width"] == 128 for image in dashboards[0]["Images"]))
         for dashboard in dashboards:
@@ -287,6 +287,7 @@ class SimHubDashTests(unittest.TestCase):
             "shift-automatic-lever",
             "shift-direct-selection",
             "shift-dogleg-h",
+            "shift-dogleg-h-mirrored",
             "shift-h-pattern",
             "shift-sequential-paddles",
             "shift-sequential-stick",
@@ -610,7 +611,7 @@ class SimHubDashTests(unittest.TestCase):
                 if path.name.endswith(".ressources"):
                     with zipfile.ZipFile(path) as archive:
                         names = archive.namelist()
-                        self.assertEqual(17, len(names))
+                        self.assertEqual(18, len(names))
                         self.assertIn("brand-mark.png", names)
                         self.assertIn("wheel-gt-formula.png", names)
                         self.assertNotIn("cut-auto.png", names)

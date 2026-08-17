@@ -290,7 +290,18 @@ def _shift_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: fl
     size = 46 * scale
     variants = (
         ("HPattern", "shift-h-pattern", prop + " == 'h-pattern' && [AsDriven.ShiftPattern] != 'dogleg-h'"),
-        ("DoglegH", "shift-dogleg-h", prop + " == 'h-pattern' && [AsDriven.ShiftPattern] == 'dogleg-h'"),
+        (
+            "DoglegH",
+            "shift-dogleg-h",
+            prop + " == 'h-pattern' && [AsDriven.ShiftPattern] == 'dogleg-h'"
+            " && [AsDriven.FirstGearPosition] != 'down-right'",
+        ),
+        (
+            "DoglegHMirrored",
+            "shift-dogleg-h-mirrored",
+            prop + " == 'h-pattern' && [AsDriven.ShiftPattern] == 'dogleg-h'"
+            " && [AsDriven.FirstGearPosition] == 'down-right'",
+        ),
         ("Stick", "shift-sequential-stick", prop + " == 'sequential-stick'"),
         ("Paddles", "shift-sequential-paddles", prop + " == 'sequential-paddles'"),
         ("Automatic", "shift-automatic-lever", prop + " == 'automatic-lever'"),

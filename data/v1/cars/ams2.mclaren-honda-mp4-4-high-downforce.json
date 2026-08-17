@@ -19,6 +19,7 @@
       "gearbox_type": "unknown",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-right",
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "required",
@@ -119,6 +120,7 @@
       },
       {
         "paths": [
+          "/authentic_controls/transmission/first_gear_position",
           "/authentic_controls/transmission/forward_gears",
           "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
@@ -129,7 +131,7 @@
           "ams2.local-live-mclaren-honda-mp4-4-high-downforce-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "Wikipedia gives a Weismann-McLaren 6-speed manual, and the live drive selected six H-pattern gears with no automatic cut or blip."
+        "basis": "Wikipedia gives a Weismann-McLaren 6-speed manual, and the live drive selected six H-pattern gears with no automatic cut or blip. The guided drive observed first at the bottom right of the gate, mirrored against the other doglegs in the dataset."
       },
       {
         "paths": [

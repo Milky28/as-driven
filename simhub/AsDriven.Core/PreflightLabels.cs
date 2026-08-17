@@ -116,8 +116,28 @@ namespace AsDriven.Core
 
         public static string Gate(string actuation, string pattern)
         {
-            if (pattern == "dogleg-h") { return "Dogleg gate - 1st down and left"; }
-            if (pattern == "standard-h") { return "Standard gate - 1st up and left"; }
+            return Gate(actuation, pattern, "unknown");
+        }
+
+        /// <summary>
+        /// A dogleg only establishes that first sits outside the racing plane. Which
+        /// side is a separate fact - the McLaren MP4/4 mirrors it - so the side is
+        /// stated only when the record records it, never assumed from the pattern.
+        /// </summary>
+        public static string Gate(string actuation, string pattern, string firstGearPosition)
+        {
+            if (pattern == "dogleg-h")
+            {
+                if (firstGearPosition == "down-left") { return "Dogleg gate - 1st down and left"; }
+                if (firstGearPosition == "down-right") { return "Dogleg gate - 1st down and right"; }
+                return "Dogleg gate - 1st outside the plane";
+            }
+            if (pattern == "standard-h")
+            {
+                if (firstGearPosition == "up-right") { return "Standard gate - 1st up and right"; }
+                if (firstGearPosition == "down-left") { return "Standard gate - 1st down and left"; }
+                return "Standard gate - 1st up and left";
+            }
             if (actuation == "sequential-paddles") { return "Sequential - one gear at a time"; }
             if (actuation == "sequential-stick") { return "Fore and aft - one gear at a time"; }
             if (pattern == "sequential") { return "Sequential - one gear at a time"; }

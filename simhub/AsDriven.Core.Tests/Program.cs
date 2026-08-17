@@ -493,8 +493,15 @@ namespace AsDriven.Core.Tests
                 Equal("H-pattern", PreflightLabels.Shifter(0, "h-pattern"),
                     "omits the gear count when it is not known");
 
-                Equal("Dogleg gate - 1st down and left", PreflightLabels.Gate("h-pattern", "dogleg-h"),
+                Equal("Dogleg gate - 1st down and left",
+                    PreflightLabels.Gate("h-pattern", "dogleg-h", "down-left"),
                     "says where first gear is on a dogleg");
+                Equal("Dogleg gate - 1st down and right",
+                    PreflightLabels.Gate("h-pattern", "dogleg-h", "down-right"),
+                    "follows the record when the gate is mirrored, as on the McLaren MP4/4");
+                Equal("Dogleg gate - 1st outside the plane",
+                    PreflightLabels.Gate("h-pattern", "dogleg-h", "unknown"),
+                    "never assumes a dogleg puts first on the left");
                 Equal("Standard gate - 1st up and left", PreflightLabels.Gate("h-pattern", "standard-h"),
                     "says where first gear is on a standard gate");
                 Equal("Gate not recorded", PreflightLabels.Gate("h-pattern", "unknown"),

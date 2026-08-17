@@ -136,6 +136,11 @@
           "type": "string",
           "enum": ["standard-h", "dogleg-h", "sequential", "automatic-gate", "direct", "unknown"]
         },
+        "first_gear_position": {
+          "description": "Where first gear sits in the gate. A dogleg pattern only states that first is outside the racing plane; it does not establish which side, and at least one car mirrors it.",
+          "type": ["string", "null"],
+          "enum": ["up-left", "up-right", "down-left", "down-right", "unknown", null]
+        },
         "upshift": { "$ref": "#/$defs/shiftAction" },
         "downshift": { "$ref": "#/$defs/shiftAction" },
         "standing_start_clutch": {

@@ -15,6 +15,7 @@ namespace AsDriven.Core
         public string ShiftType { get; private set; }
         public string ShiftActuation { get; private set; }
         public string ShiftPattern { get; private set; }
+        public string FirstGearPosition { get; private set; }
         public int GearCount { get; private set; }
         public string UpshiftGuidance { get; private set; }
         public string DownshiftGuidance { get; private set; }
@@ -157,7 +158,7 @@ namespace AsDriven.Core
         /// <summary>Where the gears sit, e.g. "Dogleg gate - 1st down and left".</summary>
         public string ShifterGateLabel
         {
-            get { return PreflightLabels.Gate(ShiftActuation, ShiftPattern); }
+            get { return PreflightLabels.Gate(ShiftActuation, ShiftPattern, FirstGearPosition); }
         }
 
         public string LaunchLabel
@@ -250,6 +251,7 @@ namespace AsDriven.Core
                 ShiftType = values.ShiftType,
                 ShiftActuation = values.ShiftActuation,
                 ShiftPattern = values.ShiftPattern,
+                FirstGearPosition = values.FirstGearPosition,
                 GearCount = values.GearCount,
                 UpshiftGuidance = values.UpshiftGuidance,
                 DownshiftGuidance = values.DownshiftGuidance,
@@ -314,6 +316,7 @@ namespace AsDriven.Core
                 ShiftType = string.Empty,
                 ShiftActuation = string.Empty,
                 ShiftPattern = string.Empty,
+                FirstGearPosition = string.Empty,
                 GearCount = 0,
                 UpshiftGuidance = string.Empty,
                 DownshiftGuidance = string.Empty,

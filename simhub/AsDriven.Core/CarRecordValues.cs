@@ -20,6 +20,7 @@ namespace AsDriven.Core
         public string ShiftType;
         public string ShiftActuation;
         public string ShiftPattern;
+        public string FirstGearPosition;
         public int GearCount;
         public string UpshiftGuidance;
         public string DownshiftGuidance;

@@ -367,6 +367,34 @@ class ValidationTests(unittest.TestCase):
             )
             self.assertEqual(validate_repository(temp_root), [])
 
+    def test_every_dogleg_records_which_side_first_gear_sits_on(self) -> None:
+        # A dogleg only establishes that first is outside the racing plane. The
+        # McLaren MP4/4 mirrors the gate, so a record that leaves the side unset
+        # must not have the side guessed for it downstream.
+        cars = ROOT / "data" / "v1" / "cars"
+        missing = []
+        for path in sorted(cars.glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            transmission = record["authentic_controls"]["transmission"]
+            if transmission["shift_pattern"] != "dogleg-h":
+                continue
+            if transmission.get("first_gear_position") in (None, "unknown"):
+                missing.append(record["record_id"])
+        self.assertEqual(missing, [], "dogleg records must state which side first gear is on")
+
+    def test_a_dogleg_cannot_put_first_gear_up(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "ams2.bmw-m1-procar.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            record["authentic_controls"]["transmission"]["first_gear_position"] = "up-left"
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("first_gear_position" in error for error in errors),
+                f"expected a first_gear_position error, got {errors}",
+            )
+
     @staticmethod
     def _copy_repository_data(directory: Path, include_curation: bool = False) -> Path:
         shutil.copytree(ROOT / "schema", directory / "schema")

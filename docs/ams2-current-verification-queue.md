@@ -283,8 +283,13 @@ states the engagement.
 McLaren Honda MP4/4 is the real car of that group, on a Weismann-McLaren
 six-speed manual. Its gate is a dogleg **mirrored horizontally**, with first at
 the bottom right rather than the bottom left, which no other dogleg in the
-dataset does. The schema records `dogleg-h`, which is true of it, and the
-mirroring is kept in the record notes because no enum value expresses it.
+dataset does. The schema records `dogleg-h`, which is true of it, and dataset
+0.3.65 added `first_gear_position` so the side is carried as data rather than
+only as prose. Until then the overlay derived the side from the pattern alone
+and told this car's driver first was down and left, which is the one thing about
+its gate that is not true. A dogleg establishes only that first sits outside the
+racing plane; the side is a separate observation, and a record that omits it now
+reads "1st outside the plane" rather than having a side assumed for it.
 
 Formula Classic Gen2 Model2 is the exception in its own class, corrected in
 dataset 0.3.38. It engages every gear immediately, up and down, with no lift, no

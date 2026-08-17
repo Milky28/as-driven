@@ -315,16 +315,19 @@ def _flat_wheel(canvas: Canvas, kind: str) -> None:
     canvas.line([(64, 71), (64, 96 if kind == "round" else 89)], 8, WHITE)
 
 
-def _flat_gate(canvas: Canvas, *, dogleg: bool) -> None:
+def _flat_gate(canvas: Canvas, *, dogleg: bool, mirrored: bool = False) -> None:
     xs = (34, 64, 94)
     for x in xs:
         canvas.line([(x, 32), (x, 96)], 7, WHITE)
     canvas.line([(34, 64), (94, 64)], 7, WHITE)
-    canvas.disk(34, 94 if dogleg else 34, 8, WHITE)
+    # A dogleg puts first outside the racing plane, but not always on the left:
+    # the McLaren MP4/4 mirrors the gate, so the glyph has to mirror with it.
+    first_x = 94 if mirrored else 34
+    canvas.disk(first_x, 94 if dogleg else 34, 8, WHITE)
     if dogleg:
         # The heavier rising route makes the isolated first-gear position read
         # even after the 128-pixel master is reduced to a 24-pixel row glyph.
-        canvas.line([(34, 90), (34, 64), (64, 64), (64, 38)], 10, WHITE)
+        canvas.line([(first_x, 90), (first_x, 64), (64, 64), (64, 38)], 10, WHITE)
 
 
 def _flat_shifter(canvas: Canvas, kind: str) -> None:
@@ -334,6 +337,8 @@ def _flat_shifter(canvas: Canvas, kind: str) -> None:
         _flat_gate(canvas, dogleg=False)
     elif kind == "dogleg-h":
         _flat_gate(canvas, dogleg=True)
+    elif kind == "dogleg-h-mirrored":
+        _flat_gate(canvas, dogleg=True, mirrored=True)
     elif kind == "sequential-stick":
         # Tall cylindrical motorsport handle rather than a road-car ball knob.
         canvas.ellipse(64, 17, 15, 6, 7, WHITE, start=math.pi, end=math.tau)
@@ -432,6 +437,7 @@ def generate_preflight_icons(size: int = 128) -> dict[str, bytes]:
         "wheel-unknown": lambda canvas: _flat_wheel(canvas, "unknown"),
         "shift-h-pattern": lambda canvas: _flat_shifter(canvas, "h-pattern"),
         "shift-dogleg-h": lambda canvas: _flat_shifter(canvas, "dogleg-h"),
+        "shift-dogleg-h-mirrored": lambda canvas: _flat_shifter(canvas, "dogleg-h-mirrored"),
         "shift-sequential-stick": lambda canvas: _flat_shifter(canvas, "sequential-stick"),
         "shift-sequential-paddles": lambda canvas: _flat_shifter(canvas, "sequential-paddles"),
         "shift-automatic-lever": lambda canvas: _flat_shifter(canvas, "automatic-lever"),

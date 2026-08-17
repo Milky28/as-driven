@@ -28,6 +28,16 @@ The model separates `manual_blip` from `automatic_blip`. “No blip required” 
 not automatically evidence of an electronic auto-blip; a gearbox may instead
 wait for an acceptable engine speed.
 
+### Where first gear sits
+
+`shift_pattern` names the layout; optional `first_gear_position` says where
+first gear actually is. The two are not the same fact. `dogleg-h` establishes
+that first sits outside the racing plane, but not which side of it: the McLaren
+MP4/4's gate is mirrored, with first at the bottom right. A client must not
+infer the side from the pattern. Where the field is absent or `unknown` the
+guidance says first is outside the plane and stops there, and a dogleg may not
+record first as being up.
+
 ### Wheel-rim shape
 
 Shape is decided **by the rim itself**, never by the car's racing class. The

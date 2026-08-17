@@ -1298,6 +1298,7 @@ namespace AsDriven.Plugin
             this.AttachDelegate("ShiftType", delegate { return _current.ShiftType; });
             this.AttachDelegate("ShiftActuation", delegate { return _current.ShiftActuation; });
             this.AttachDelegate("ShiftPattern", delegate { return _current.ShiftPattern; });
+            this.AttachDelegate("FirstGearPosition", delegate { return _current.FirstGearPosition; });
             this.AttachDelegate("GearCount", delegate { return _current.GearCount; });
             this.AttachDelegate("UpshiftGuidance", delegate { return _current.UpshiftGuidance; });
             this.AttachDelegate("DownshiftGuidance", delegate { return _current.DownshiftGuidance; });

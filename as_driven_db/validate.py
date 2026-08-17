@@ -31,6 +31,7 @@ CLUTCH_USE = {"required", "not-required", "optional", "unknown", "not-applicable
 THROTTLE_LIFT = {"required", "not-required", "partial", "unknown", "not-applicable"}
 BLIP_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
 START_CLUTCH = {"required", "not-required", "anti-stall-available", "unknown", "not-applicable"}
+FIRST_GEAR_POSITION = {"up-left", "up-right", "down-left", "down-right", "unknown"}
 
 
 def _load(path: Path, errors: list[str]) -> Any | None:
@@ -178,6 +179,13 @@ def _validate_transmission(transmission: Any, label: str, errors: list[str]) -> 
         errors.append(f"{label}.forward_gears: expected null or 1..20")
     if transmission["standing_start_clutch"] not in START_CLUTCH:
         errors.append(f"{label}.standing_start_clutch: invalid value")
+    position = transmission.get("first_gear_position")
+    if position is not None and position not in FIRST_GEAR_POSITION:
+        errors.append(f"{label}.first_gear_position: invalid value")
+    # A dogleg only says first is outside the racing plane. Which side is a
+    # separate fact, and the McLaren MP4/4 mirrors it, so it is never assumed.
+    if position in {"up-left", "up-right"} and transmission["shift_pattern"] == "dogleg-h":
+        errors.append(f"{label}.first_gear_position: a dogleg puts first down, not up")
     action_required = {
         "clutch",
         "throttle_lift",

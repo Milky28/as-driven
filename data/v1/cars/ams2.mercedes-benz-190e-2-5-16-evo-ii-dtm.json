@@ -20,6 +20,7 @@
       "gearbox_type": "unknown",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-left",
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "required",
@@ -111,6 +112,7 @@
       },
       {
         "paths": [
+          "/authentic_controls/transmission/first_gear_position",
           "/authentic_controls/transmission/forward_gears",
           "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
@@ -122,7 +124,7 @@
           "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The sources establish a dog-leg five-speed Getrag manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg."
+        "basis": "The sources establish a dog-leg five-speed Getrag manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
       },
       {
         "paths": [

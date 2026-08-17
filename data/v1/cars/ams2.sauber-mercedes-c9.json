@@ -21,6 +21,7 @@
       "gearbox_type": "unknown",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-left",
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "required",
@@ -143,7 +144,7 @@
           "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667."
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
       }
     ]
   },

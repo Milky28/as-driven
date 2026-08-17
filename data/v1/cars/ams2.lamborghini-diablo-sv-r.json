@@ -20,6 +20,7 @@
       "gearbox_type": "unknown",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
+      "first_gear_position": "down-left",
       "upshift": {
         "clutch": "unknown",
         "throttle_lift": "required",
@@ -112,6 +113,7 @@
       },
       {
         "paths": [
+          "/authentic_controls/transmission/first_gear_position",
           "/authentic_controls/transmission/forward_gears",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
@@ -121,7 +123,7 @@
           "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Manufacturer-derived five-speed specification agrees with the five accepted direct gears and visibly modeled dogleg gate."
+        "basis": "Manufacturer-derived five-speed specification agrees with the five accepted direct gears and visibly modeled dogleg gate. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
       },
       {
         "paths": [
