@@ -1732,6 +1732,18 @@
       "notes": "Guided-verification observation ams2.lola-t98-00-ford-cosworth-high-downforce.20260815t222047199z-c9e52595 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "ams2.local-live-lotus-23-controls.1.6.9.91",
+      "title": "Live AMS2 Lotus 23 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.lotus-23.20260817t192722843z-5965cd35 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "ams2.local-live-lotus-49c-controls.1.6.9.91",
       "title": "Live AMS2 Lotus 49C guided-verification drive",
       "publisher": "Local AMS2 observation",
@@ -2234,6 +2246,18 @@
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.mini-cooper-s-1965-b.20260814t181100249z-0251aae4 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91",
+      "title": "Live AMS2 MINI Cooper S 1965 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mini-cooper-s-1965.20260817t193016084z-732907cf by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
       "source_id": "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91",
@@ -4491,6 +4515,18 @@
       "notes": "Exact CarModel and CarId values emitted by AMS2 1.6.9.91 and observed through SimHub 9.11.22 during local live tests. The observed Formula identities were Formula V10 Gen2 (B) - High Downforce, Formula V10 Gen2 (M) - High Downforce, Formula Ultimate Hybrid Gen1 - High Downforce, Formula USA 2023 - High Downforce, Formula V8 Gen3 - High Downforce, and Formula Ultimate Hybrid Gen3 - High Downforce. These observations support identity matching only; control behavior remains verified against the separately versioned control source."
     },
     {
+      "source_id": "stadiumsupertrucks.truck-specification",
+      "title": "Stadium Super Trucks chassis #22 nears completion",
+      "publisher": "Stadium Super Trucks",
+      "url": "https://stadiumsupertrucks.com/stadium-super-trucks-chassis-22-nears-completion/",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "The series' own specification for the trucks it builds: a 2 or 3 speed transmission depending on track configuration, a 600 hp EFI V-8, 3000 lb, 104-inch wheelbase. It does not say whether the transmission is automatic and does not name the unit."
+    },
+    {
       "source_id": "stuttcars.porsche-911-carrera-rsr-3-0",
       "title": "Porsche 911 Carrera RSR 3.0 (1974-1975)",
       "publisher": "StuttCars",
@@ -5257,30 +5293,6 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
-    },
-    {
-      "source_id": "ams2.local-live-lotus-23-controls.1.6.9.91",
-      "title": "Live AMS2 Lotus 23 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://localhost/as-driven/guided-verification",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.lotus-23.20260817t192722843z-5965cd35 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ams2.local-live-mini-cooper-s-1965-controls.1.6.9.91",
-      "title": "Live AMS2 MINI Cooper S 1965 guided-verification drive",
-      "publisher": "Local AMS2 observation",
-      "url": "https://localhost/as-driven/guided-verification",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-17",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ams2.mini-cooper-s-1965.20260817t193016084z-732907cf by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -4,14 +4,14 @@
   "record_id": "super-trophy-trucks",
   "identity": {
     "display_name": "Super Trophy Trucks",
-    "manufacturer": "Reiza Studios",
-    "model": "Super Trophy Trucks",
+    "manufacturer": "Stadium Super Trucks",
+    "model": "Stadium Super Truck",
     "year": {
-      "from": 2025,
-      "label": "AMS2 fictional series"
+      "from": 2013,
+      "label": "Stadium Super Trucks spec truck"
     },
     "class": "Super Trophy Trucks",
-    "real_world_identity_notes": "Reiza describes Super Trophy Trucks as a fictional series, so there is no real-world model whose hardware can independently establish the controls. The record describes the exact simulated vehicle and visibly modeled cockpit interface."
+    "real_world_identity_notes": "Reiza's version of the Stadium Super Trucks, the stadium off-road series Robby Gordon created in 2013, carried in AMS2 under a changed name. Reiza describes the series as fictional, and this record previously took that to mean no real car stood behind it; the maintainer identified the real series. The series' own specification gives a two or three speed transmission depending on track configuration behind a 600 hp EFI V-8, and the drive found three ratios, so the count agrees. That source does not say whether the real transmission is automatic and does not name the unit, so the automatic behaviour and the self-blipping downshift remain the simulator's, observed rather than corroborated."
   },
   "authentic_controls": {
     "transmission": {
@@ -49,7 +49,8 @@
     "notes": [
       "The gearbox shifts automatically but permits manual override through the visible sequential cockpit lever.",
       "The vehicle moved from rest without physical clutch input and all three forward ratios were observed.",
-      "Automatic downshift blip was observed; automatic upshift cut remains unknown rather than inferred."
+      "Automatic downshift blip was observed; automatic upshift cut remains unknown rather than inferred.",
+      "The three forward ratios agree with the series' own two-or-three-speed specification. Whether the real transmission is automatic is not established by that source, so the automatic shifting is recorded from the drive."
     ]
   },
   "simulators": [
@@ -106,11 +107,12 @@
           "/simulators/0/identities"
         ],
         "source_refs": [
+          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91",
           "ams2.reiza-release.1.6.4.2.super-trophy-trucks",
-          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91"
+          "stadiumsupertrucks.truck-specification"
         ],
         "confidence": "verified",
-        "basis": "Official release context and exact live telemetry establish the fictional STT identity."
+        "basis": "The series' own specification for the trucks it builds, matched to the exact live telemetry identity. AMS2 carries the series under a changed name, so the record names the real series rather than treating the renaming as a fictional car."
       },
       {
         "paths": [
@@ -124,7 +126,8 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91"
+          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91",
+          "stadiumsupertrucks.truck-specification"
         ],
         "confidence": "verified",
         "basis": "Guided current-game testing and cockpit inspection directly established the automatic behavior, manual lever override, ratios, blip, and wheel."
