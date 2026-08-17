@@ -47,7 +47,7 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
-      "The gearbox is a five-speed plus a launch gear, and first is only used to pull away. A tester found first effectively unavailable in normal running and thought it a fault; it is the real specification faithfully modelled, and the six observed gears are that 5+1.",
+      "The gearbox is a five-speed plus a launch gear, and first is locked out: it cannot be selected to pull away, so the driver starts in second and races on the remaining five. A tester found first unavailable in normal running and thought it a fault, which is the lockout rather than a modelling error, and the six observed gears are that 5+1.",
       "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice.",
       "Vulkan does not appear in the championship's list of competing manufacturers, so no real-world truck is identified. Its controls are recorded from the drive and the class regulations that all Copa Truck entries share."
     ]
@@ -122,7 +122,7 @@
           "ams2.local-live-vulkan-truck-controls.1.6.9.91"
         ],
         "confidence": "medium",
-        "basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1."
+        "basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1. The guided drive found first locked out and pulled away in second, so the launch gear is not selectable in normal running."
       },
       {
         "paths": [
@@ -140,6 +140,6 @@
       }
     ]
   },
-  "driver_summary": "Copa Truck regulations mandate a mechanically operated H-pattern manual, a five-speed with a launch gear. Vulkan is not a championship manufacturer, so this is Reiza's own entry with no real chassis behind it. Blip on downshifts to be safe.",
+  "driver_summary": "Copa Truck regulations mandate a mechanically operated H-pattern manual: five racing gears plus a launch gear, and first is locked out, so pull away in second. Vulkan is not a championship manufacturer, so this is Reiza's own entry. Blip on downshifts to be safe.",
   "updated_at": "2026-08-17"
 }
