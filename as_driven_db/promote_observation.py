@@ -157,6 +157,14 @@ def build_promoted_record(
             "automatic clutch and shifting disabled.",
         ]
     )
+    # The one line the overlay shows the driver. Optional: a car whose Fit and
+    # Use rows already say everything shows no note panel at all.
+    driver_summary = entry.get("driver_summary")
+    if driver_summary:
+        record["driver_summary"] = driver_summary.strip()
+    else:
+        record.pop("driver_summary", None)
+
     record["notes"] = list(entry.get("record_notes") or [])
     if not record["notes"]:
         record.pop("notes")

@@ -1,0 +1,142 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.porsche-911-gt3-cup-4-0",
+  "identity": {
+    "display_name": "Porsche 911 GT3 Cup 4.0",
+    "manufacturer": "Porsche",
+    "model": "911 GT3 Cup 4.0",
+    "year": {
+      "label": "991.2 generation",
+      "from": 2017
+    },
+    "class": "Carrera Cup",
+    "real_world_identity_notes": "Porsche 911 GT3 Cup built by Porsche Motorsport for its one-make Carrera Cup and Supercup championships, running a 3,996 cc flat six of 485 hp through a six-speed dog-type gearbox shifted by paddles."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and the clutch is needed to pull away.",
+      "The gearbox is dog-type, which is stated by the registered source rather than inferred. A dog box would ordinarily want a rev-matched downshift, but this car blips its own, so the driver is not asked for one.",
+      "The registered source adds a triple-disc sintered metal racing clutch and pneumatic gearshift activation.",
+      "The two Cup cars share a gearbox specification and were driven separately; nothing is inherited between them."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 GT3 Cup 4.0"
+        },
+        {
+          "kind": "class-id",
+          "value": "Carrera Cup"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt3-cup-4-0.20260817t053533610z-cdfa71d6 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-17",
+      "source_refs": [
+        "racecarsforyou.porsche-991-2-gt3-cup",
+        "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is stated by a registered source."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "racecarsforyou.porsche-991-2-gt3-cup",
+          "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the car, its engine and its gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "racecarsforyou.porsche-991-2-gt3-cup",
+          "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source states a six-speed dog-type gearbox operated by paddles, and the live drive selected six paddle gears with automatic cut and blip and a clutch needed to pull away."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-17",
+  "driver_summary": "Porsche dog-type gearbox, but the car blips its own downshifts, so there is no rev-matching to do. The clutch is needed only to pull away."
+}

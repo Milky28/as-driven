@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.62",
+  "dataset_version": "0.3.63",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 183,
+    "live_identities_seen": 185,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -112,6 +112,8 @@
       "Passat Classic B",
       "Passat Classic FL",
       "Passat Hot Cars",
+      "Porsche 911 GT3 Cup 3.8",
+      "Porsche 911 GT3 Cup 4.0",
       "Reynard 2Ki Ford-Cosworth - High Downforce",
       "Reynard 2Ki Honda - High Downforce",
       "Reynard 2Ki Mercedes-Benz - High Downforce",
@@ -144,13 +146,13 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 347,
-    "curated_records": 238,
-    "covered_exact_identities": 332,
+    "observed_identities": 349,
+    "curated_records": 240,
+    "covered_exact_identities": 334,
     "uncovered_identities": 15,
     "full_guided_verifications": 0,
     "dispositions": {
-      "covered-exact": 332,
+      "covered-exact": 334,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
@@ -4392,6 +4394,34 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1733619011.2677484,
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Porsche 911 GT3 Cup 3.8",
+      "car_id": "Porsche 911 GT3 Cup 3.8",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "gt",
+      "related_record_id": "ams2.porsche-911-gt3-cup-3-8",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "Carrera Cup",
+      "live_observed_at": "2026-08-17T05:32:49.4553466Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Porsche 911 GT3 Cup 4.0",
+      "car_id": "Porsche 911 GT3 Cup 4.0",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "gt",
+      "related_record_id": "ams2.porsche-911-gt3-cup-4-0",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "Carrera Cup",
+      "live_observed_at": "2026-08-17T05:35:18.2986761Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {

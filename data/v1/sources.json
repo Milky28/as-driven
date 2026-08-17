@@ -4323,6 +4323,18 @@
       "notes": "Chassis-specific auction listing stating that the 2005 works car used a Hewland six-speed sequential gearbox. It does not establish actuation, technique, cut/blip, or wheel shape."
     },
     {
+      "source_id": "racecarsforyou.porsche-991-2-gt3-cup",
+      "title": "Porsche 991.2 GT3 Cup Info",
+      "publisher": "Race Cars For You",
+      "url": "https://racecarsforyou.com/porsche-991-2-gt3-cup-info/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the 991.2 GT3 Cup a 3,996 cc flat six of 485 hp at 7,500 rpm, a \"Porsche six-speed sequential dog-type transmission\" with \"pneumatic gearshift activation (paddle shift)\", and a triple-disc sintered metal racing clutch."
+    },
+    {
       "source_id": "ratwell.vw-transaxle",
       "title": "VW Transaxle",
       "publisher": "Ratwell technical reference",
@@ -4453,6 +4465,18 @@
       "retrieved_at": "2026-08-15",
       "reuse_status": "facts-only-review",
       "notes": "Describes the 1974 Carrera RSR 3.0 with the Type 911/75 flat-six of 330 bhp, a reinforced clutch and a five-speed gearbox carried over from the RS. It states no gearbox construction."
+    },
+    {
+      "source_id": "stuttcars.porsche-911-gt3-cup-991",
+      "title": "Porsche 911 GT3 Cup (991) (2013 - 2016)",
+      "publisher": "StuttCars",
+      "url": "https://www.stuttcars.com/porsche-911-gt3-cup-991-2013-2016/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Gives the 991 GT3 Cup a 3.8-litre flat six of 460 hp at 7,500 rpm and \"a six-speed dog-type gearbox developed by Porsche Motorsport which is operated via shift paddles at the steering wheel\", noting it was the first Porsche brand trophy car shifted by paddles rather than a lever."
     },
     {
       "source_id": "stuttcars.porsche-996-gt3-rsr",
@@ -5197,6 +5221,30 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-911-gt3-cup-3-8-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 GT3 Cup 3.8 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.porsche-911-gt3-cup-3-8.20260817t053322815z-2b4d7f70 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-porsche-911-gt3-cup-4-0-controls.1.6.9.91",
+      "title": "Live AMS2 Porsche 911 GT3 Cup 4.0 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://www.game-automobilista2.com/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-17",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.porsche-911-gt3-cup-4-0.20260817t053533610z-cdfa71d6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }
