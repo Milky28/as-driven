@@ -4,14 +4,16 @@
   "record_id": "milano-gt55",
   "identity": {
     "display_name": "Milano 55 GT1",
-    "manufacturer": "Milano",
-    "model": "GT55",
+    "manufacturer": "Ferrari",
+    "model": "550 GTS Maranello",
     "year": {
-      "from": 2005,
-      "label": "fictional 2005 GT1 representation"
+      "from": 2001,
+      "to": 2006,
+      "label": "Prodrive 550 GTS Maranello"
     },
     "class": "GT1 2005",
-    "real_world_identity_notes": "Reiza officially names the fictional addition Milano 55 GT1 while current telemetry reports Milano GT55. Ferrari 575 GTC sources provide useful period hardware context but do not establish that it is the real-world analogue, so no such identity is asserted."
+    "real_world_identity_notes": "Reiza's renamed Ferrari 550 Maranello: the GT1 car Prodrive built for Care Racing Development, which raced the FIA GT Championship from 2001 to 2005 and Le Mans through 2006. AMS2 carries it as Milano 55 GT1. The record previously treated the renaming as a fictional car and declined to name an analogue; the maintainer identified it. A six-speed Xtrac sequential and a 600 bhp V12 agree with the six sequential gears and the automatic cut found in the drive, the cut being the car's flat-shift facility worked by an optical sensor at the base of the gearlever.",
+    "variant": "Prodrive GT1"
   },
   "authentic_controls": {
     "transmission": {
@@ -27,7 +29,7 @@
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "required",
@@ -48,7 +50,8 @@
       "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
       "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
       "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
-      "The Ferrari 575 GTC resemblance remains unconfirmed and is not used as an identity match."
+      "The Ferrari 575 GTC resemblance remains unconfirmed and is not used as an identity match.",
+      "The real car needs the clutch for every downshift and does not need it for an upshift when flat-shifting. AMS2 accepts a clutchless downshift, which is recorded as a simulator override so both layers stay true: the authentic technique is to use the clutch on the way down."
     ]
   },
   "simulators": [
@@ -78,7 +81,20 @@
           "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "AMS2 accepts a downshift with no clutch input, where the real car requires it.",
+          "source_refs": [
+            "ams2.local-live-milano-gt55-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "high",
+            "basis": "Observed directly in the guided drive: the downshift was accepted with no clutch input, while the registered technical account says the real car requires the clutch for every downshift."
+          }
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-11",
       "source_refs": [
@@ -101,8 +117,9 @@
           "/simulators/0/identities"
         ],
         "source_refs": [
+          "ams2.local-live-milano-gt55-controls.1.6.9.91",
           "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
-          "ams2.local-live-milano-gt55-controls.1.6.9.91"
+          "evo.ferrari-550-maranello-prodrive"
         ],
         "confidence": "verified",
         "basis": "Official release context and exact live Milano GT55 / GT1_05 observation establish the simulated identity without asserting a real-world analogue."
@@ -132,7 +149,8 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-milano-gt55-controls.1.6.9.91"
+          "ams2.local-live-milano-gt55-controls.1.6.9.91",
+          "evo.ferrari-550-maranello-prodrive"
         ],
         "confidence": "verified",
         "basis": "Direct current-game testing and cockpit inspection establish the modeled hardware, start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."

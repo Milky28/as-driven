@@ -11,7 +11,7 @@
       "label": "fictional 2005 GT2 representation"
     },
     "class": "GT2 2005",
-    "real_world_identity_notes": "Reiza lists this fictional model as Milano GT36 GT2 while current telemetry reports Milano GT36. No model-exact real-world analogue or external hardware source has been established."
+    "real_world_identity_notes": "Reiza's renamed Ferrari 360 GT, the GT2 car of the same period, carried in AMS2 as Milano GT36. The record previously said no real-world analogue had been established; the maintainer identified it, in the same renaming that makes Milano 55 GT1 the Prodrive 550 Maranello. No source for the 360 GT's transmission has been consulted, so unlike its GT1 stablemate nothing here is corroborated: the six sequential gears and the automatic cut are the drive's, and whether the real car needs the clutch to go down a gear is not established. The 550 requires it, but that is a different car and is not inherited."
   },
   "authentic_controls": {
     "transmission": {
