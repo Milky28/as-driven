@@ -10,7 +10,10 @@
       "class": "RX",
       "manufacturer": "Citroen",
       "model": "DS3 RX",
-      "year": { "from": 2014, "label": "World RX Supercar" },
+      "year": {
+        "from": 2014,
+        "label": "World RX Supercar"
+      },
       "real_world_identity_notes": "Citroen DS3 prepared to FIA Supercar regulations for the World Rallycross Championship: a four-wheel-drive silhouette car on a two-litre turbocharged engine of around 560 to 600 bhp, sharing only its shape with the road DS3. CONFIRM: a Sadev transverse six-speed sequential gearbox is reported for this car, and the drive found six gears through a sequential stick, but that attribution comes from a source I could not open directly.",
       "real_world_source_refs": [],
       "confidence": "high",
@@ -31,7 +34,10 @@
       "class": "RX",
       "manufacturer": "MINI",
       "model": "Countryman RX",
-      "year": { "from": 2015, "label": "World RX Supercar" },
+      "year": {
+        "from": 2015,
+        "label": "World RX Supercar"
+      },
       "real_world_identity_notes": "MINI Countryman built to FIA Supercar regulations for the World Rallycross Championship. The project began at Prodrive, which intended to run the car in 2014 but did not secure a driver; JRM Racing bought it at the end of 2014 and campaigned it from 2015. Derived from the MINI John Cooper Works WRC and reported at around 480 bhp from a 1.6-litre BMW turbo. CONFIRM: no source consulted states its gearbox, so the sequential comes from the cockpit rather than a specification.",
       "real_world_source_refs": [],
       "confidence": "high",
@@ -61,15 +67,18 @@
       "bundle": "build/batch-26/mitsubishi-lancer-evo10-rx.staged.json",
       "class": "RX",
       "manufacturer": "Mitsubishi",
-      "model": "Lancer Evolution X RX",
-      "year": { "from": 2008, "label": "rallycross Lancer Evolution X" },
-      "real_world_identity_notes": "CONFIRM, and this is the one to settle first. The Lancer Evo has a long rallycross history, but in the four-wheel-drive Group N category rather than as a Supercar: a rallycross history consulted reports that attempts to move the Evo up to Supercar failed for lack of budget. If no Evo X ever raced as a Supercar, this car has no single real-world referent and should say so plainly, the way Reiza's fictionalised cars do, rather than claim a World RX identity it never had.",
+      "model": "Lancer Evolution X rallycross",
+      "year": {
+        "from": 2008,
+        "label": "Lancer Evolution X, privateer rallycross conversions"
+      },
+      "real_world_identity_notes": "Mitsubishi Lancer Evolution X converted for rallycross, matching no single identifiable build. The Evo's rallycross record is in the four-wheel-drive Group N category rather than at Supercar level: no works or homologated rallycross Evolution X was built, and the maintainer's research found the car common in video games while real examples are privateer and small-team conversions run at national and regional events, which differ from one another. The chassis is real and the category is real, but no particular car is, so nothing real-world establishes its controls; they come from the guided drive and are recorded as the simulator's behaviour.",
       "real_world_source_refs": [],
       "confidence": "medium",
-      "confidence_basis": "Controls observed live with automatic clutch and shifting disabled. The real-world identity is unsettled, which is why this sits below the others.",
-      "identity_basis": "CONFIRM: whether this represents a car that raced, and in which category.",
-      "specification_basis": "The guided drive selected six forward gears through a sequential stick with an automatic cut. No source establishes the gearbox unit.",
-      "confidence_notes": "Six gears, a sequential stick, a clutch to pull away, clutchless shifts both ways and an automatic cut were directly observed. The automatic blip was re-measured in a second drive after a detector fault and changed from yes to no.",
+      "confidence_basis": "Controls observed live with automatic clutch and shifting disabled. Confidence sits at medium because the real car behind the model is a class of privateer conversions rather than one identifiable car.",
+      "identity_basis": "Reviewer determination that AMS2's rallycross Evolution X corresponds to no works or homologated build, matched to the exact observed AMS2 telemetry identity. CONFIRM: register an AMS2 release source for the car the way the fictional entries do, since no real-world source can name it.",
+      "specification_basis": "The guided drive selected six forward gears through a sequential stick with an automatic cut. No real-world specification applies, because no particular rallycross Evolution X is identified, so the gearbox is sequential by observed mechanism alone.",
+      "confidence_notes": "Six gears, a sequential stick, a clutch to pull away, clutchless shifts both ways and an automatic cut were directly observed. The automatic blip was re-measured in a second drive after a detector fault and changed from yes to no. No works rallycross Evolution X exists to check the real-world layer against, so every control here rests on the drive.",
       "control_overrides": {
         "downshift": {
           "clutch": "not-required",
@@ -84,7 +93,7 @@
         "The car does not blip its own downshifts. The first drive recorded that it did, from a measurement that could read throttle the driver was still carrying before the lift as the car's blip; a second drive with that corrected found no spike.",
         "The downshift was accepted with no pedal input at all, so a manual blip is not required to engage the gear."
       ],
-      "driver_summary": "DRAFT: Rallycross car with a sequential stick. It cuts for upshifts but does not blip, and the gear goes in without one, so no pedal work is needed on the way down.",
+      "driver_summary": "DRAFT: A privateer-style rallycross Evo X rather than any one real car. Sequential stick, the car cuts for upshifts, and it does not blip - the gear goes in without one, so no pedal work on the way down.",
       "live_source_url": "https://localhost/as-driven/guided-verification"
     },
     {
@@ -93,9 +102,14 @@
       "class": "RX",
       "manufacturer": "Volkswagen",
       "model": "Polo R Supercar",
-      "year": { "from": 2018, "label": "World RX Supercar" },
+      "year": {
+        "from": 2018,
+        "label": "World RX Supercar"
+      },
       "real_world_identity_notes": "Volkswagen's rallycross Polo for the FIA World Rallycross Championship, which Volkswagen describes as a 570 hp four-wheel-drive car. The lineage runs from the 2017 Polo GTI Supercar that PSRX Volkswagen Sweden built on a 2014 Polo R WRC chassis to the revised 2018 Polo R Supercar. CONFIRM which season AMS2 models; the year here follows Volkswagen's 2018 announcement. Volkswagen's own release gives no transmission detail, so the sequential comes from the cockpit rather than a specification.",
-      "real_world_source_refs": ["volkswagen.polo-r-supercar-2018"],
+      "real_world_source_refs": [
+        "volkswagen.polo-r-supercar-2018"
+      ],
       "confidence": "high",
       "confidence_basis": "Controls observed live with automatic clutch and shifting disabled; the car's identity and output come from Volkswagen's own announcement.",
       "identity_basis": "Volkswagen's announcement of the Polo R Supercar for the FIA World Rallycross Championship, matched to the exact observed AMS2 telemetry identity.",
