@@ -1,0 +1,696 @@
+{
+  "schema_version": "1.0.0",
+  "notes": "What each simulator calls one of its classes, so a promotion does not ask the driver to read a class name off a car-select screen once per car. A class name is a property of the class, not of each car in it: filled once here, every later car in that class inherits it. A review entry may still set `class` explicitly, which wins - an AMS2 formula class holds a real Grand Prix car beside Reiza's fictional ones, and the real car says Formula One. `overridden_by` records the names in use that differ from the default, so those splits are visible rather than looking like drift.",
+  "classes": [
+    {
+      "simulator": "ams2",
+      "class_id": "ARC_Cam",
+      "name": "Aussie Racing Cars",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Carrera Cup",
+      "name": "Carrera Cup",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Cat620R",
+      "name": "Cat620R",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Cat_Academy",
+      "name": "Caterham Academy",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Cat_Superlight",
+      "name": "Caterham Superlight",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Cat_Supersport",
+      "name": "Caterham Supersport",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "CopaClassicB",
+      "name": "Copa Classic B",
+      "records": 6,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "CopaClassicFL",
+      "name": "Copa Classic FL",
+      "records": 4,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "CopaFusca",
+      "name": "Copa Fusca",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "CopaTruck",
+      "name": "Copa Truck",
+      "records": 5,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "CopaUno",
+      "name": "Copa Uno",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "DPI",
+      "name": "DPi",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-3",
+      "name": "Formula 3 Brasil",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Classic_Gen1_HD",
+      "name": "Formula Classic Gen1",
+      "records": 3,
+      "overridden_by": [
+        "Formula One"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Classic_Gen2_HD",
+      "name": "Formula Classic Gen2",
+      "records": 4,
+      "overridden_by": [
+        "Formula One"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Classic_Gen3_HD",
+      "name": "Formula Classic Gen3",
+      "records": 5,
+      "overridden_by": [
+        "Formula One"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Classic_Gen4_HD",
+      "name": "Formula Classic Gen4",
+      "records": 4,
+      "overridden_by": [
+        "Formula One"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Dirt",
+      "name": "Formula Dirt",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Hitech_Gen1_HD",
+      "name": "Formula HiTech Gen1",
+      "records": 4,
+      "overridden_by": [
+        "Formula One"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Hitech_Gen2_HD",
+      "name": "Formula HiTech Gen2",
+      "records": 4,
+      "overridden_by": [
+        "Formula One"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Inter",
+      "name": "Formula Inter",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Junior",
+      "name": "Formula Junior",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Reiza_HD",
+      "name": "Formula Reiza",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Retro_Gen1",
+      "name": "Formula One",
+      "records": 5,
+      "overridden_by": [
+        "Formula Retro Gen1"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Retro_Gen2",
+      "name": "Formula Retro Gen2",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Retro_Gen3_HD",
+      "name": "Formula One",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Trainer",
+      "name": "Formula Trainer",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Trainer_A",
+      "name": "Formula Trainer Advanced",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-USA_2023_HD",
+      "name": "Formula USA",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-USA_Gen1_HD",
+      "name": "IndyCar",
+      "records": 5,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-USA_Gen2_HD",
+      "name": "CART",
+      "records": 6,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-USA_Gen3_HD",
+      "name": "CART",
+      "records": 7,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Ultimate_Gen1_HD",
+      "name": "Formula Ultimate G1",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Ultimate_Gen2_HD",
+      "name": "Formula Ultimate G2",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Ultimate_HD",
+      "name": "Formula Ultimate Hybrid Gen2",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-V10_Gen1_HD",
+      "name": "Formula One",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-V10_Gen2_HD",
+      "name": "Formula V10 G2",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-V10_Gen3_HD",
+      "name": "Formula V10 Gen3",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-V8_Gen1_HD",
+      "name": "Formula V8 Gen1",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-V8_Gen2_HD",
+      "name": "Formula V8 Gen2",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Vee",
+      "name": "Formula Vee Brazil",
+      "records": 2,
+      "overridden_by": [
+        "Formula Vee"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Vee_Gen2",
+      "name": "Formula Vee Gen2",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Vintage_Gen1",
+      "name": "Formula Vintage Gen1",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "F-Vintage_Gen2",
+      "name": "Formula One",
+      "records": 4,
+      "overridden_by": [
+        "Formula Vintage Gen2"
+      ]
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "FE-G1_HD",
+      "name": "Formula Edge",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "G40Cup",
+      "name": "G40Cup",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "G55Supercup",
+      "name": "G55Supercup",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT1",
+      "name": "GT1",
+      "records": 4,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT1_05",
+      "name": "GT1 2005",
+      "records": 8,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT2_05",
+      "name": "GT2 2005",
+      "records": 5,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT3",
+      "name": "GT3",
+      "records": 6,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT3_Gen2",
+      "name": "GT3",
+      "records": 8,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT4",
+      "name": "GT4",
+      "records": 9,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GT5",
+      "name": "GT5",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GTE",
+      "name": "GTE",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GTOpen",
+      "name": "GTOpen",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "GTR_04",
+      "name": "GTR 2004",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Group A",
+      "name": "Group A",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Group C",
+      "name": "Group C",
+      "records": 4,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Hot Cars",
+      "name": "Hot Cars",
+      "records": 4,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Hypercars",
+      "name": "Hypercars",
+      "records": 5,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Kartcross",
+      "name": "Kartcross",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LES_2025",
+      "name": "Ligier European Series",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LMDh",
+      "name": "LMDh",
+      "records": 6,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LMP1_05",
+      "name": "LMP1 2005",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LMP2",
+      "name": "LMP2",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LMP2_05",
+      "name": "LMP2 2005",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LMP2_Gen1",
+      "name": "LMP2",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "LancerCup",
+      "name": "Lancer Cup",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "MiniChallenge",
+      "name": "MINI Challenge JCW",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Montana",
+      "name": "Montana",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "OldStock",
+      "name": "Old Stock Race",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Opala79",
+      "name": "Opala79",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Opala86",
+      "name": "Opala86",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "P1",
+      "name": "P1",
+      "records": 5,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "P1Gen2",
+      "name": "P1 Gen2",
+      "records": 6,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "P2",
+      "name": "P2",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "P3",
+      "name": "P3",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "P4",
+      "name": "P4",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Procar",
+      "name": "Procar",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "ST96",
+      "name": "Diablo Super Trofeo",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "STT",
+      "name": "Super Trophy Trucks",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "StockCar99",
+      "name": "Stock Car Brasil",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "StockCarV8_2022",
+      "name": "Stock Car Pro Series",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "StockCarV8_2024",
+      "name": "Stock Car 2024",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Stock_USA_Gen1_SW",
+      "name": "Stock USA Gen1",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Stock_USA_Gen2_SS",
+      "name": "Stock USA Gen2",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Stock_USA_Gen3_LM",
+      "name": "Stock USA Gen3 LM",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Stock_USA_Gen3_SS",
+      "name": "Stock USA Gen3",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Super Trofeo",
+      "name": "Super Trofeo",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "SuperV8",
+      "name": "Super V8",
+      "records": 1,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Supercars",
+      "name": "Supercars",
+      "records": 4,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "TC60S",
+      "name": "Vintage Cars Tier 1",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "TC60S2",
+      "name": "Vintage Cars Tier 2",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "TC70S",
+      "name": "GT Classics",
+      "records": 3,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
+      "class_id": "Trofeo_2005",
+      "name": "Maserati Trofeo",
+      "records": 1,
+      "overridden_by": []
+    }
+  ]
+}

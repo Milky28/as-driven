@@ -157,6 +157,49 @@ class PromoteObservationTests(unittest.TestCase):
             # The whole point: the promoted pair survives the real validator.
             self.assertEqual(validate_repository(temp), [])
 
+    def test_a_known_class_needs_no_answer_from_the_driver(self) -> None:
+        """The class name is a property of the class, not of each car.
+
+        Reading it means leaving a running session for the car-select screen,
+        once per car, so it is recorded once per class and inherited.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            names = json.loads(
+                (temp / "curation" / "simulator-class-names.json").read_text(encoding="utf-8")
+            )
+            names["classes"].append(
+                {"simulator": "ams2", "class_id": "TESTP1", "name": "Test Prototype Cup",
+                 "records": 0, "overridden_by": []}
+            )
+            (temp / "curation" / "simulator-class-names.json").write_text(
+                json.dumps(names, indent=2), encoding="utf-8"
+            )
+
+            entry = _review_entry()
+            del entry["class"]
+            self._promote(temp, self._manifest(entry))
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(record["identity"]["class"], "Test Prototype Cup")
+
+    def test_an_entry_may_override_the_class_map(self) -> None:
+        # A real Grand Prix car sits in an AMS2 formula class beside Reiza's
+        # fictional ones, and belongs to Formula One rather than to that class.
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = dict(_review_entry(), **{"class": "Formula One"})
+            self._promote(temp, self._manifest(entry))
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(record["identity"]["class"], "Formula One")
+
     def test_promotion_refuses_a_simulator_class_token(self) -> None:
         """The staged class is AMS2's token; a real category is a human call.
 

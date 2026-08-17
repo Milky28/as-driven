@@ -197,6 +197,50 @@ def build_promoted_record(
     return record, approval, source
 
 
+CLASS_NAMES = "simulator-class-names.json"
+
+
+def resolve_class(entry: dict[str, Any], bundle: dict[str, Any], curation_directory: Path) -> str:
+    """The real category for a promotion, without asking the driver for it.
+
+    A class name is a property of the class, not of each car in it, and it is
+    awkward to read from inside a running session - the driver would have to
+    leave for the car-select screen, once per car, in whatever wording that
+    simulator uses. So it is recorded once per class in
+    ``curation/simulator-class-names.json`` and every later car in that class
+    inherits it.
+
+    A review entry may still name the class itself, which wins: an AMS2 formula
+    class holds a real Grand Prix car beside Reiza's fictional ones, and the
+    real car belongs to Formula One rather than to Reiza's category.
+    """
+    if entry.get("class"):
+        return entry["class"]
+
+    simulator_entry = bundle["record"]["simulators"][0]
+    simulator = simulator_entry["simulator"]
+    class_ids = [
+        item["value"] for item in simulator_entry["identities"]
+        if item["kind"] == "class-id"
+    ]
+    path = curation_directory / CLASS_NAMES
+    known = {}
+    if path.exists():
+        for row in json.loads(path.read_text(encoding="utf-8"))["classes"]:
+            known[(row["simulator"], row["class_id"])] = row["name"]
+    for class_id in class_ids:
+        name = known.get((simulator, class_id))
+        if name:
+            return name
+    raise ValueError(
+        f"review entry {bundle['record']['record_id']}: no class name for "
+        f"{simulator} {class_ids!r}. Add it once to curation/{CLASS_NAMES} - it is "
+        "the name the simulator shows on its car-select screen - or set 'class' on "
+        "this entry. The staged value is the simulator's own class token and must "
+        "not reach a curated record."
+    )
+
+
 def _control_differences(existing: dict[str, Any], incoming: dict[str, Any]) -> list[str]:
     """Where two drives disagree about the real car, ignoring prose notes."""
     differences = []
@@ -287,6 +331,7 @@ def promote_observations(
     for entry in review["records"]:
         bundle_path = root / entry["bundle"]
         bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        entry = dict(entry, **{"class": resolve_class(entry, bundle, curation_directory)})
         record, approval, source = build_promoted_record(
             bundle, entry, approved_at=approved_at
         )
