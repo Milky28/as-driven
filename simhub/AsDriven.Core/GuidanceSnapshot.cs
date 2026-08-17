@@ -231,8 +231,10 @@ namespace AsDriven.Core
             string rawCarIdentifier,
             string matchKind)
         {
+            string aeroPackage = PreflightLabels.MatchedAeroPackage(
+                matchKind, rawCarIdentifier, values.DisplayName);
             string baseName = PreflightLabels.BaseName(values.DisplayName);
-            string classLine = PreflightLabels.ClassLine(values.DisplayName, values.CarClass);
+            string classLine = PreflightLabels.ClassLine(aeroPackage, values.CarClass);
             string[] techniqueLines = SplitTechniqueSummary(values.TechniqueSummary);
             string[] summaryLines = WrapLines(values.DriverSummary, 620, 1250, 3);
             string[] compactSummaryLines = WrapLines(values.DriverSummary, 432, 1100, 3);
@@ -267,7 +269,7 @@ namespace AsDriven.Core
                 OverlayCarNameCompact = FitSingleLine(baseName, 300, 1750),
                 OverlayCarClassCompact = FitSingleLine(classLine, 300, 950),
                 OverlayCarNameGlance = FitSingleLine(baseName, 166, 1500),
-                AeroPackage = PreflightLabels.AeroPackage(values.DisplayName),
+                AeroPackage = aeroPackage,
                 StandingStartClutch = values.StandingStartClutch,
                 AutoBlip = values.AutoBlip,
                 ShiftCut = values.ShiftCut,

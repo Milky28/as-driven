@@ -42,6 +42,29 @@ namespace AsDriven.Core.Tests
                 Equal("Lister Storm GTM", preview.DisplayName, "previews the requested car");
                 Equal("preview-not-found", database.Preview("ams2", "missing.record").MatchStatus, "rejects an unknown preview record");
 
+                // One record is the exact identity for several aero packages, so
+                // the card must read the package off the car that was loaded.
+                // Reading it off the record's own name told a Speedway driver
+                // they were in the High Downforce car.
+                GuidanceSnapshot speedway = database.Match(
+                    "Automobilista2", "Reynard 98i Mercedes-Benz - Speedway");
+                True(speedway.HasMatch, "matches an aero configuration of a curated car");
+                Equal("Speedway", speedway.AeroPackage, "reports the loaded aero package");
+                Equal("Speedway  -  CART", speedway.OverlayCarClassDetailed,
+                    "shows the loaded package on the class line");
+
+                GuidanceSnapshot basePackage = database.Match(
+                    "Automobilista2", "Reynard 98i Mercedes-Benz");
+                Equal(string.Empty, basePackage.AeroPackage,
+                    "the base car has no aero package, even when the record's name carries one");
+                Equal("CART", basePackage.OverlayCarClassDetailed,
+                    "shows the class alone when no package is loaded");
+
+                GuidanceSnapshot lowDownforce = database.Match(
+                    "Automobilista2", "BMW M4 GT3 - Low Downforce");
+                Equal("Low Downforce", lowDownforce.AeroPackage,
+                    "reports a package the record's own name does not carry");
+
                 GuidanceSnapshot f301 = database.Match("Automobilista2", "Dallara F301");
                 True(f301.HasMatch, "matches the exact AMS2 telemetry name");
                 Equal("f301", f301.RecordId, "returns the correct record");
@@ -1295,7 +1318,7 @@ namespace AsDriven.Core.Tests
             // so the name is measured against the car without it and the class
             // line against the two composed together.
             string baseName = PreflightLabels.BaseName(snapshot.DisplayName);
-            string classLine = PreflightLabels.ClassLine(snapshot.DisplayName, snapshot.CarClass);
+            string classLine = PreflightLabels.ClassLine(snapshot.AeroPackage, snapshot.CarClass);
             AssertFittedPrefix(baseName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
             AssertFittedPrefix(baseName, snapshot.OverlayCarNameCompact, label + " compact car name");
             AssertFittedPrefix(baseName, snapshot.OverlayCarNameGlance, label + " glance car name");

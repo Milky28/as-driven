@@ -48,6 +48,30 @@ namespace AsDriven.Core
             return string.Empty;
         }
 
+        /// <summary>
+        /// The aero package of the car that was actually loaded.
+        ///
+        /// One record is the exact identity for several aero configurations -
+        /// the Reynard 98i covers the base car, High Downforce, Speedway and
+        /// Superspeedway - so reading the package off the record's own name
+        /// told a Speedway driver they were in the High Downforce car, and told
+        /// a Low Downforce driver nothing at all. A name-shaped match carries
+        /// the package the driver loaded, and its silence is meaningful: the
+        /// base car has none. An opaque match has no name to read, so it falls
+        /// back to the record, which is the best the record can say.
+        /// </summary>
+        public static string MatchedAeroPackage(
+            string matchKind, string rawCarIdentifier, string displayName)
+        {
+            if (matchKind == "telemetry-name"
+                || matchKind == "display-name"
+                || matchKind == "alias")
+            {
+                return AeroPackage(rawCarIdentifier);
+            }
+            return AeroPackage(displayName);
+        }
+
         /// <summary>The car's name without its aero package.</summary>
         public static string BaseName(string displayName)
         {
@@ -61,9 +85,9 @@ namespace AsDriven.Core
         /// The line under the car's name: its aero package where it has one,
         /// then the class the simulator reports.
         /// </summary>
-        public static string ClassLine(string displayName, string carClass)
+        public static string ClassLine(string aeroPackage, string carClass)
         {
-            string package = AeroPackage(displayName);
+            string package = aeroPackage ?? string.Empty;
             if (package.Length == 0) { return carClass; }
             return string.IsNullOrEmpty(carClass)
                 ? package
