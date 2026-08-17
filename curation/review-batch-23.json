@@ -1,0 +1,650 @@
+{
+  "review": "batch-23",
+  "dataset_version": "0.3.61",
+  "approved_at": "2026-08-16",
+  "records": [
+    {
+      "record_id": "ams2.metalmoro-ajr-honda",
+      "bundle": "build/batch-23/metalmoro-ajr-honda.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "AJR",
+      "year": {
+        "label": "2017 onward",
+        "from": 2017
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. Honda denotes the K20 turbocharged four the registered source lists as one of the AJR's two documented engines.",
+      "real_world_source_refs": [
+        "wikipedia.metalmoro-jlm-ajr"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "A registered source establishes the AJR and its Honda K20 engine option, and the exact simulator identity was observed live.",
+      "specification_basis": "The registered source gives the AJR a six-speed sequential semi-automatic gearbox, and the live drive selected six paddle gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "The AJR shares its chassis and gearbox across engine options; only the engine differs."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Honda"
+    },
+    {
+      "record_id": "ams2.metalmoro-ajr-judd",
+      "bundle": "build/batch-23/metalmoro-ajr-judd.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "AJR",
+      "year": {
+        "label": "AMS2 configuration"
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. A Judd-engined AJR is not documented by the registered source, which lists only Chevrolet LS3 and Honda K20 engines. This configuration is treated as simulator content rather than a documented real car.",
+      "real_world_source_refs": [
+        "wikipedia.metalmoro-jlm-ajr"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The registered source establishes the AJR chassis and gearbox. It does not document a Judd-engined car, so only the chassis identity is carried and the engine is not claimed.",
+      "specification_basis": "The registered source gives the AJR a six-speed sequential semi-automatic gearbox, and the live drive selected six paddle gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "No reviewed source documents a Judd-engined AJR. The gearbox and chassis come from the documented AJR; the engine is recorded as an unverified simulator configuration.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Judd"
+    },
+    {
+      "record_id": "ams2.metalmoro-ajr-nissan",
+      "bundle": "build/batch-23/metalmoro-ajr-nissan.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "AJR",
+      "year": {
+        "label": "AMS2 configuration"
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. A Nissan-engined AJR is not documented by the registered source, which lists only Chevrolet LS3 and Honda K20 engines.",
+      "real_world_source_refs": [
+        "wikipedia.metalmoro-jlm-ajr"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The registered source establishes the AJR chassis and gearbox but not this engine option.",
+      "specification_basis": "The registered source gives the AJR a six-speed sequential semi-automatic gearbox, and the live drive selected six paddle gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "No reviewed source documents a Nissan-engined AJR. Only the chassis and gearbox are carried from the documented car.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Nissan"
+    },
+    {
+      "record_id": "ams2.metalmoro-ajr-gen2-honda",
+      "bundle": "build/batch-23/metalmoro-ajr-gen2-honda.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "AJR",
+      "year": {
+        "label": "AMS2 configuration"
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. Second-generation AJR configuration as modelled in AMS2. The registered source describes one generation of the AJR and no Gen2, so the generation is simulator content rather than a documented revision.",
+      "real_world_source_refs": [
+        "wikipedia.metalmoro-jlm-ajr"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The registered source establishes the AJR chassis and gearbox. Neither the second generation nor this engine option is documented, so neither is claimed.",
+      "specification_basis": "The registered source gives the AJR a six-speed sequential semi-automatic gearbox, and the live drive selected six paddle gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "AMS2 classes this separately from the first-generation AJR. Nothing is inherited between them; each was driven on its own.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Gen2 Honda"
+    },
+    {
+      "record_id": "ams2.metalmoro-ajr-gen2-nissan",
+      "bundle": "build/batch-23/metalmoro-ajr-gen2-nissan.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "AJR",
+      "year": {
+        "label": "AMS2 configuration"
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. Second-generation AJR configuration as modelled in AMS2. The registered source describes one generation of the AJR and no Gen2, so the generation is simulator content rather than a documented revision.",
+      "real_world_source_refs": [
+        "wikipedia.metalmoro-jlm-ajr"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The registered source establishes the AJR chassis and gearbox. Neither the second generation nor this engine option is documented, so neither is claimed.",
+      "specification_basis": "The registered source gives the AJR a six-speed sequential semi-automatic gearbox, and the live drive selected six paddle gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "AMS2 classes this separately from the first-generation AJR. Nothing is inherited between them; each was driven on its own.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Gen2 Nissan"
+    },
+    {
+      "record_id": "ams2.metalmoro-mrx-duratec-turbo-p2",
+      "bundle": "build/batch-23/metalmoro-mrx-duratec-turbo-p2.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "MRX",
+      "year": {
+        "label": "P2 configuration"
+      },
+      "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro, sold in several prototype classes. The manufacturer states the car accepts a choice of engine and gearbox rather than specifying either. Duratec Turbo denotes the Ford engine.",
+      "real_world_source_refs": [
+        "metalmoro.mrx.official"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The manufacturer's own page establishes the MRX; the class and engine configuration were observed live.",
+      "specification_basis": "The manufacturer does not state a gearbox, so the six sequential gears and the automatic cut come from the live drive rather than from the source.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "Metalmoro states only that the MRX accepts several engine and gearbox options, so no reviewed source establishes which gearbox this configuration carries. The sequential construction is what the drive showed.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Duratec Turbo P2"
+    },
+    {
+      "record_id": "ams2.metalmoro-mrx-duratec-turbo-p3",
+      "bundle": "build/batch-23/metalmoro-mrx-duratec-turbo-p3.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "MRX",
+      "year": {
+        "label": "P3 configuration"
+      },
+      "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro, sold in several prototype classes. The manufacturer states the car accepts a choice of engine and gearbox rather than specifying either. Duratec Turbo denotes the Ford engine.",
+      "real_world_source_refs": [
+        "metalmoro.mrx.official"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The manufacturer's own page establishes the MRX; the class and engine configuration were observed live.",
+      "specification_basis": "The manufacturer does not state a gearbox, so the six sequential gears and the automatic cut come from the live drive rather than from the source.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+        "The clutch is needed to pull away.",
+        "Whether a downshift blip is needed to engage a gear was not tested and no reviewed source establishes the gearbox construction, so it stays unknown rather than being inferred from the absent automation.",
+        "This P3 configuration differs from its P2 sibling on both counts the drive tested: it needs the clutch to move off and it does not blip its own downshifts. Nothing is inherited between them.",
+        "Metalmoro states only that the MRX accepts several engine and gearbox options, so no reviewed source establishes which gearbox this configuration carries. The sequential construction is what the drive showed.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Duratec Turbo P3"
+    },
+    {
+      "record_id": "ams2.metalmoro-mrx-honda-p3",
+      "bundle": "build/batch-23/metalmoro-mrx-honda-p3.staged.json",
+      "manufacturer": "Metalmoro",
+      "model": "MRX",
+      "year": {
+        "label": "P3 configuration"
+      },
+      "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro, sold in several prototype classes. The manufacturer states the car accepts a choice of engine and gearbox rather than specifying either. Honda denotes the engine.",
+      "real_world_source_refs": [
+        "metalmoro.mrx.official"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The manufacturer's own page establishes the MRX; the class and engine configuration were observed live.",
+      "specification_basis": "The manufacturer does not state a gearbox, so the six sequential gears and the automatic cut come from the live drive rather than from the source.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is not needed to pull away.",
+        "Shares the P3 class with the MRX Duratec Turbo P3 and behaves differently: this car pulls away without the clutch and blips its own downshifts. Both were driven separately.",
+        "Metalmoro states only that the MRX accepts several engine and gearbox options, so no reviewed source establishes which gearbox this configuration carries. The sequential construction is what the drive showed.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/",
+      "variant": "Honda P3"
+    },
+    {
+      "record_id": "ams2.ginetta-g58",
+      "bundle": "build/batch-23/ginetta-g58.staged.json",
+      "manufacturer": "Ginetta",
+      "model": "G58",
+      "year": {
+        "label": "2018 onward",
+        "from": 2018
+      },
+      "real_world_identity_notes": "British sports prototype built by Ginetta, developed from its LMP3 car with a carbon fibre monocoque and a 6,162 cc LS3 of about 575 bhp.",
+      "real_world_source_refs": [
+        "wikipedia.ginetta-g58"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "A registered source establishes the G58 and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives an X-Trac P1152 six-speed sequential gearbox, and the live drive selected six sequential gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is needed to pull away, which the drive established directly.",
+        "The source names the gearbox but not its shift mechanism, so the paddle actuation comes from the drive."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.ginetta-g58-gen2",
+      "bundle": "build/batch-23/ginetta-g58-gen2.staged.json",
+      "manufacturer": "Ginetta",
+      "model": "G58",
+      "year": {
+        "label": "AMS2 configuration"
+      },
+      "real_world_identity_notes": "British sports prototype built by Ginetta, developed from its LMP3 car with a carbon fibre monocoque and a 6,162 cc LS3 of about 575 bhp. Second-generation configuration as modelled in AMS2; the registered source describes no such revision, so the generation is simulator content.",
+      "real_world_source_refs": [
+        "wikipedia.ginetta-g58"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "The registered source establishes the G58 chassis and gearbox. The second generation is not documented and is not claimed as a real-world revision.",
+      "specification_basis": "The source gives an X-Trac P1152 six-speed sequential gearbox, and the live drive selected six sequential gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is needed to pull away.",
+        "AMS2 classes this separately from the first-generation G58. Both were driven; nothing is inherited between them.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.sigma-p1",
+      "bundle": "build/batch-23/sigma-p1.staged.json",
+      "manufacturer": "Sigma",
+      "model": "P1",
+      "year": {
+        "label": "2020 onward",
+        "from": 2020
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Sigma on a tubular chassis, running a 6.2-litre GM LT1 of about 600 bhp in competition form.",
+      "real_world_source_refs": [
+        "dailysportscar.sigma-p1"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "A registered source establishes the Sigma P1 and its gearbox family, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives the competition car an LMP3-derived XTrac gearbox, and the live drive selected six sequential gears with automatic cut and blip. The source does not state the gear count, which comes from the drive.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is needed to pull away.",
+        "The source names an XTrac gearbox without a model or gear count, so the six gears are the drive's result rather than a stated specification."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.sigma-p1-g5",
+      "bundle": "build/batch-23/sigma-p1-g5.staged.json",
+      "manufacturer": "Sigma",
+      "model": "P1 G5",
+      "year": {
+        "label": "G5 configuration"
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built by Sigma; the G5 is a later development of the P1 with revised safety structures and aerodynamics.",
+      "real_world_source_refs": [
+        "dailysportscar.sigma-p1",
+        "sadev.sigma-p1-g5-evo"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "Registered sources establish the Sigma P1 line and the later G5 Evo, and the exact simulator identity was observed live.",
+      "specification_basis": "The gearbox maker states the G5 Evo is the first Sigma P1 to run a SADEV gearbox, so the G5 modelled here predates that change and carries the XTrac the line was previously given. The six gears come from the live drive.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is needed to pull away.",
+        "The G5 Evo is a different and later car: it runs a SADEV SLR90-20 six-speed and a detuned 450 bhp engine. This record is the pre-Evo G5 and does not carry those values.",
+        "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.mcr-s2000",
+      "bundle": "build/batch-23/mcr-s2000.staged.json",
+      "manufacturer": "MCR Race Cars",
+      "model": "S2000",
+      "year": {
+        "label": "Sports 2000 specification"
+      },
+      "real_world_identity_notes": "British mid-engined sports prototype built by MCR Race Cars to Sports 2000 specification, running a two-litre Ford Duratec of about 200 bhp.",
+      "real_world_source_refs": [
+        "britishbuiltcars.mcr-s2"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "A registered source establishes the MCR S2 and its gearbox, and the exact simulator identity was observed live.",
+      "specification_basis": "The source gives a Sadev or Hewland five-speed sequential gearbox, and the live drive selected five sequential gears with automatic cut and blip.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 5,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+        "The clutch is needed to pull away.",
+        "The source offers two gearbox makes for the car and does not say which this specification carries. Both are five-speed sequentials, which is what the drive found, so the gear count and construction stand while the make is not claimed.",
+        "The only five-speed car in this batch; its classmates all selected six."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    },
+    {
+      "record_id": "ams2.roco-001",
+      "bundle": "build/batch-23/roco-001.staged.json",
+      "manufacturer": "Roco",
+      "model": "001",
+      "year": {
+        "label": "2019 onward",
+        "from": 2019
+      },
+      "real_world_identity_notes": "Brazilian sports prototype built for the P3 class of Imperio Endurance Brasil by Robbi Perez and Jose Cordova, on the monocoque of a Ralt RT34 Formula 3 car. It carries a transversely mounted Suzuki Hayabusa motorcycle engine, later taken to 1,500 cc and about 280 hp, driving the rear differential by chain rather than a shaft.",
+      "real_world_source_refs": [
+        "nivelandoaengenharia.roco-001"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "identity_basis": "A registered source establishes the car, its builders, its Ralt RT34 monocoque and its Hayabusa engine, and the exact simulator identity was observed live.",
+      "specification_basis": "The source does not state the gearbox. The six sequential gears and the automatic cut are the live drive's results, and the construction is not claimed.",
+      "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_pattern": "sequential",
+        "forward_gears": 6,
+        "standing_start_clutch": "required",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "no"
+        }
+      },
+      "control_notes": [
+        "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip, so the driver supplies the downshift blip.",
+        "The clutch is needed to pull away.",
+        "The source describes a motorcycle engine driving by chain but never names the gearbox. A motorcycle-derived box would ordinarily engage by dogs and want a rev-matched downshift, but that is not stated by any reviewed source and is deliberately not recorded here.",
+        "Whether a downshift blip is needed to engage a gear stays unknown for the same reason."
+      ],
+      "live_source_url": "https://www.game-automobilista2.com/"
+    }
+  ]
+}

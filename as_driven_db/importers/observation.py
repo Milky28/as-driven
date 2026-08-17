@@ -178,7 +178,14 @@ def import_observation(
     blip_state = _state(tests.get("automatic_blip"))
 
     rim = cockpit["wheel_rim"]
+    # Drafts saved before the rim vocabulary was merged still carry the retired
+    # values. They named a racing class rather than a rim, and all three
+    # described the one control-panel form, so an old draft is migrated on the
+    # way in rather than reintroducing a value no curated record may hold.
+    RETIRED_RIM_SHAPES = {"gt-style": "gt-formula", "prototype": "gt-formula",
+                          "formula": "gt-formula"}
     rim_shape = rim.get("shape", "unknown")
+    rim_shape = RETIRED_RIM_SHAPES.get(rim_shape, rim_shape)
     rim_display = _state(rim.get("integrated_display"))
     rim_lights = _state(rim.get("shift_lights"))
     rim_open_top = _state(rim.get("open_top"))

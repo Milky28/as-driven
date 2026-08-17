@@ -49,7 +49,8 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
       "The high-downforce attempt reported a throttle spike and was the only one of the class's five cars to do so. The same car was then driven in its Speedway configuration and reported none, and aero configuration does not change a gearbox. The guided drive reads any throttle above fifteen percent during the attempt as a spike, so a brushed pedal and a car blipping for itself are indistinguishable to it. The spike is treated as an artefact of that one attempt, and the blip is recorded as absent to match the second drive and the four classmates.",
-      "This class runs three configurations rather than two: base, high downforce and Speedway, an oval package, which is why the suffix differs from the downforce pairs used elsewhere in the dataset."
+      "This class runs three configurations rather than two: base, high downforce and Speedway, an oval package, which is why the suffix differs from the downforce pairs used elsewhere in the dataset.",
+      "The recorded automatic blip did not follow the reasoning above it. The note concluded the blip was absent, the four classmates and the car's own Speedway drive agree, and the driver was already recorded as supplying it, yet the value stayed yes until this correction."
     ]
   },
   "simulators": [
@@ -75,7 +76,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "round",
@@ -145,5 +146,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-16"
 }

@@ -68,7 +68,13 @@ class ImportObservationTests(unittest.TestCase):
         behavior = record["simulators"][0]["behavior"]
         self.assertEqual(behavior["shift_cut"], "yes")
         self.assertEqual(behavior["auto_blip"], "yes")
-        self.assertEqual(behavior["wheel_rim_type"]["normalized"], "prototype")
+        # The fixture draft carries the retired "prototype" value, as any draft
+        # saved before the rim vocabulary was merged does. The importer migrates
+        # it rather than letting a value no curated record may hold back in.
+        self.assertEqual(behavior["wheel_rim_type"]["normalized"], "gt-formula")
+        self.assertEqual(
+            record["authentic_controls"]["steering"]["wheel_rim"]["shape"], "gt-formula"
+        )
         self.assertEqual(record["simulators"][0]["verified_at"], "2026-08-12")
 
     def test_real_world_identity_is_left_for_review(self) -> None:
@@ -180,6 +186,38 @@ class ImportObservationTests(unittest.TestCase):
         self.assertEqual(transmission["gearbox_type"], "unknown")
         self.assertEqual(transmission["shift_pattern"], "unknown")
 
+
+    def test_every_retired_rim_value_is_migrated_on_import(self) -> None:
+        """An old draft cannot reintroduce a retired rim value.
+
+        gt-style, prototype and formula named a racing class rather than a rim
+        and all three described the same control-panel form. A drive recorded
+        before the merge still carries one, and promoting it unmigrated would
+        put a value into the dataset that no curated record may hold.
+        """
+        for retired in ("gt-style", "prototype", "formula"):
+            observation = _clean_observation()
+            observation["cockpit"]["wheel_rim"]["shape"] = retired
+            staged = import_observation(observation)
+            record = staged["record"]
+            self.assertEqual(
+                "gt-formula",
+                record["simulators"][0]["behavior"]["wheel_rim_type"]["normalized"],
+                retired,
+            )
+            self.assertEqual(
+                "gt-formula",
+                record["authentic_controls"]["steering"]["wheel_rim"]["shape"],
+                retired,
+            )
+        # A live value passes through untouched.
+        observation = _clean_observation()
+        observation["cockpit"]["wheel_rim"]["shape"] = "d-shaped"
+        staged = import_observation(observation)
+        self.assertEqual(
+            "d-shaped",
+            staged["record"]["simulators"][0]["behavior"]["wheel_rim_type"]["normalized"],
+        )
 
 if __name__ == "__main__":
     unittest.main()

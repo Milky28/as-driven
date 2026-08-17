@@ -1,0 +1,141 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ams2.metalmoro-ajr-nissan",
+  "identity": {
+    "display_name": "MetalMoro AJR Nissan",
+    "manufacturer": "Metalmoro",
+    "model": "AJR",
+    "year": {
+      "label": "AMS2 configuration"
+    },
+    "class": "P1",
+    "real_world_identity_notes": "Brazilian sports prototype built by Metalmoro, raced in Imperio Endurance Brasil. The chassis is shared across the class's engine options; the name denotes the engine rather than the marque. A Nissan-engined AJR is not documented by the registered source, which lists only Chevrolet LS3 and Honda K20 engines.",
+    "variant": "Nissan"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+      "The clutch is not needed to pull away.",
+      "No reviewed source documents a Nissan-engined AJR. Only the chassis and gearbox are carried from the documented car.",
+      "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "MetalMoro AJR Nissan"
+        },
+        {
+          "kind": "class-id",
+          "value": "P1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.metalmoro-ajr-nissan.20260816t151657608z-4d799695 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-16",
+      "source_refs": [
+        "wikipedia.metalmoro-jlm-ajr",
+        "ams2.local-live-metalmoro-ajr-nissan-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.metalmoro-jlm-ajr",
+          "ams2.local-live-metalmoro-ajr-nissan-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The registered source establishes the AJR chassis and gearbox but not this engine option."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.metalmoro-jlm-ajr",
+          "ams2.local-live-metalmoro-ajr-nissan-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The registered source gives the AJR a six-speed sequential semi-automatic gearbox, and the live drive selected six paddle gears with automatic cut and blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-metalmoro-ajr-nissan-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-16"
+}

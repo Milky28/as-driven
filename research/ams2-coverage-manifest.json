@@ -2,12 +2,12 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.3.60",
+  "dataset_version": "0.3.61",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 173,
+    "live_identities_seen": 183,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -65,6 +65,7 @@
       "Fusca 2 Hot Cars",
       "Fusca Classic FL",
       "Ginetta G58",
+      "Ginetta G58 Gen2",
       "Gol Hot Cars",
       "Iveco Stralis",
       "Kart Cross",
@@ -84,6 +85,7 @@
       "Lotus Renault 98T",
       "Lotus Renault 98T - High Downforce",
       "MAN TGX",
+      "MCR S2000",
       "MINI Cooper JCW",
       "MINI Cooper S 1965 B",
       "McLaren 720S GT3",
@@ -97,9 +99,14 @@
       "McLaren Mercedes MP4/12 - High Downforce",
       "McLaren Senna",
       "Mercedes-Benz Actros",
+      "MetalMoro AJR Gen2 Honda",
+      "MetalMoro AJR Gen2 Nissan",
       "MetalMoro AJR Honda",
       "MetalMoro AJR Judd",
       "MetalMoro AJR Nissan",
+      "MetalMoro MRX Duratec Turbo P2",
+      "MetalMoro MRX Duratec Turbo P3",
+      "MetalMoro MRX Honda P3",
       "Mitsubishi Lancer R",
       "Mitsubishi Lancer RS",
       "Passat Classic B",
@@ -117,6 +124,9 @@
       "Reynard 98i Honda - High Downforce",
       "Reynard 98i Mercedes-Benz - High Downforce",
       "Reynard 98i Toyota - High Downforce",
+      "Roco 001",
+      "Sigma P1",
+      "Sigma P1 G5",
       "Swift 009c Ford-Cosworth - High Downforce",
       "Uno Classic B",
       "Volkswagen Constellation",
@@ -134,25 +144,19 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 337,
-    "curated_records": 224,
-    "covered_exact_identities": 318,
-    "uncovered_identities": 19,
-    "full_guided_verifications": 4,
+    "observed_identities": 347,
+    "curated_records": 238,
+    "covered_exact_identities": 332,
+    "uncovered_identities": 15,
+    "full_guided_verifications": 0,
     "dispositions": {
-      "covered-exact": 318,
-      "full-guided-verification": 4,
+      "covered-exact": 332,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
-    "full_verifications_by_family": {
-      "club-road": 1,
-      "prototype": 3
-    },
-    "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 4
-    }
+    "full_verifications_by_family": {},
+    "full_verifications_by_research_readiness": {}
   },
   "entries": [
     {
@@ -2748,15 +2752,29 @@
       "telemetry_name": "Ginetta G58",
       "car_id": "Ginetta G58",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "club-road",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.ginetta-g58",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "P1",
       "live_observed_at": "2026-08-16T15:09:24.0670155Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Ginetta G58 Gen2",
+      "car_id": "Ginetta G58 Gen2",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "club-road",
+      "related_record_id": "ams2.ginetta-g58-gen2",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1Gen2",
+      "live_observed_at": "2026-08-17T04:20:36.6251321Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Gol Classic B",
@@ -3794,6 +3812,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "MCR S2000",
+      "car_id": "MCR S2000",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.mcr-s2000",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P4",
+      "live_observed_at": "2026-08-17T04:44:43.7291016Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Mercedes-AMG GT3",
       "car_id": "Mercedes-AMG GT3",
       "identity_file": "Mercedes-AMG GT3.shcarsettings",
@@ -3951,46 +3983,74 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "MetalMoro AJR Gen2 Honda",
+      "car_id": "MetalMoro AJR Gen2 Honda",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "prototype",
+      "related_record_id": "ams2.metalmoro-ajr-gen2-honda",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1Gen2",
+      "live_observed_at": "2026-08-17T04:25:42.7851224Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MetalMoro AJR Gen2 Nissan",
+      "car_id": "MetalMoro AJR Gen2 Nissan",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "prototype",
+      "related_record_id": "ams2.metalmoro-ajr-gen2-nissan",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1Gen2",
+      "live_observed_at": "2026-08-17T04:27:53.8652020Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "MetalMoro AJR Honda",
       "car_id": "MetalMoro AJR Honda",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.metalmoro-ajr-honda",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "P1",
       "live_observed_at": "2026-08-16T15:12:35.4034074Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "MetalMoro AJR Judd",
       "car_id": "MetalMoro AJR Judd",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.metalmoro-ajr-judd",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "P1",
       "live_observed_at": "2026-08-16T15:14:44.2117822Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "MetalMoro AJR Nissan",
       "car_id": "MetalMoro AJR Nissan",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "prototype",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "ams2.metalmoro-ajr-nissan",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "P1",
       "live_observed_at": "2026-08-16T15:16:46.2039401Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "MetalMoro MRX Duratec P4",
@@ -4003,6 +4063,48 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1720905131.52318,
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MetalMoro MRX Duratec Turbo P2",
+      "car_id": "MetalMoro MRX Duratec Turbo P2",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "prototype",
+      "related_record_id": "ams2.metalmoro-mrx-duratec-turbo-p2",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P2",
+      "live_observed_at": "2026-08-17T04:31:56.8261114Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MetalMoro MRX Duratec Turbo P3",
+      "car_id": "MetalMoro MRX Duratec Turbo P3",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "prototype",
+      "related_record_id": "ams2.metalmoro-mrx-duratec-turbo-p3",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P3",
+      "live_observed_at": "2026-08-17T04:36:29.4606906Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "MetalMoro MRX Honda P3",
+      "car_id": "MetalMoro MRX Honda P3",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "prototype",
+      "related_record_id": "ams2.metalmoro-mrx-honda-p3",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P3",
+      "live_observed_at": "2026-08-17T04:39:15.0812961Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {
@@ -4882,6 +4984,20 @@
       "research_readiness": "not-applicable"
     },
     {
+      "telemetry_name": "Roco 001",
+      "car_id": "Roco 001",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.roco-001",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P3",
+      "live_observed_at": "2026-08-17T04:41:32.5778500Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
       "telemetry_name": "Saleen S7-R GT1",
       "car_id": "Saleen S7-R GT1",
       "identity_file": "Saleen S7-R GT1.shcarsettings",
@@ -4924,6 +5040,34 @@
       "identity_source": "stored-car-file",
       "simhub_max_gears": 5,
       "identity_file_modified_at": 1762020769.379421,
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Sigma P1",
+      "car_id": "Sigma P1",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.sigma-p1",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P2",
+      "live_observed_at": "2026-08-17T04:34:05.1106255Z",
+      "live_game_version": "1.6.9.91",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Sigma P1 G5",
+      "car_id": "Sigma P1 G5",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "ams2.sigma-p1-g5",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "P1Gen2",
+      "live_observed_at": "2026-08-17T04:29:39.9142103Z",
+      "live_game_version": "1.6.9.91",
       "research_readiness": "not-applicable"
     },
     {

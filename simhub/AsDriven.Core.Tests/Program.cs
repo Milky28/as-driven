@@ -605,6 +605,41 @@ namespace AsDriven.Core.Tests
                     "the Brabham upshift is clutch-free and says so");
                 Equal("No clutch needed", dogBoxNote.DownshiftClutchLabel,
                     "and its downshift too");
+                // Batch 23: the prototypes split on the two things the drive
+                // tested, so the class alone never predicts the answer.
+                foreach (string clutchFree in new[] {
+                    "MetalMoro AJR Honda", "MetalMoro AJR Judd", "MetalMoro AJR Nissan",
+                    "MetalMoro AJR Gen2 Honda", "MetalMoro AJR Gen2 Nissan",
+                    "MetalMoro MRX Duratec Turbo P2", "MetalMoro MRX Honda P3"
+                })
+                {
+                    GuidanceSnapshot car = database.Match("Automobilista2", clutchFree);
+                    True(car.HasMatch, "matches " + clutchFree);
+                    Equal("not-required", car.StandingStartClutch,
+                        clutchFree + " pulls away without the clutch");
+                }
+                foreach (string needsClutch in new[] {
+                    "Ginetta G58", "Ginetta G58 Gen2", "Sigma P1", "Sigma P1 G5",
+                    "MCR S2000", "Roco 001", "MetalMoro MRX Duratec Turbo P3"
+                })
+                {
+                    GuidanceSnapshot car = database.Match("Automobilista2", needsClutch);
+                    True(car.HasMatch, "matches " + needsClutch);
+                    Equal("required", car.StandingStartClutch,
+                        needsClutch + " needs the clutch to pull away");
+                }
+                Equal(5, database.Match("Automobilista2", "MCR S2000").GearCount,
+                    "the MCR is the batch's only five-speed");
+                // Two P3 cars, opposite answers, driven separately.
+                Equal("no", database.Match("Automobilista2", "MetalMoro MRX Duratec Turbo P3").AutoBlip,
+                    "the Duratec Turbo P3 does not blip for the driver");
+                Equal("yes", database.Match("Automobilista2", "MetalMoro MRX Honda P3").AutoBlip,
+                    "its Honda classmate does");
+                // A gearbox no source names must not claim a blip requirement.
+                Equal("unknown",
+                    database.Match("Automobilista2", "Roco 001").ManualBlip,
+                    "the Roco's blip requirement stays unknown, not inferred from the missing automation");
+
                 GuidanceSnapshot untestedClutch = database.Match(
                     "Automobilista2", "Lamborghini Diablo SV-R");
                 if (untestedClutch.HasMatch)

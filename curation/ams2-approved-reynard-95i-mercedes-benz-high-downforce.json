@@ -14,7 +14,7 @@
     "standing_start_clutch": "required",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
-    "automatic_blip": "yes",
+    "automatic_blip": "no",
     "manual_blip": "required",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
@@ -22,7 +22,7 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts and automatic cut. The automatic blip is recorded as absent on the weight of a second drive of the same car and four classmates, against a single attempt that reported a throttle spike.",
+  "confidence_notes": "Guided testing directly established the six gears through a sequential stick, the standing-start clutch, the clutchless running shifts and automatic cut. The automatic blip is recorded as absent on the weight of a second drive of the same car and four classmates, against a single attempt that reported a throttle spike. The automatic blip is corrected to absent, matching the note's own conclusion, the Speedway drive of this car, and the four classmates.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",
   "additional_telemetry_names": [
     {
