@@ -1020,6 +1020,50 @@ namespace AsDriven.Core.Tests
                         True(early.GetSnapshot().Result.Contains("throttle came back"),
                             "names the throttle rather than blaming the gearbox");
                     }
+
+                    // Moving past a test with Next, having never attempted it,
+                    // used to write the negative: a car that stalls, a gearbox
+                    // that refuses. Nothing was measured, so nothing is recorded.
+                    {
+                        GuidedVerificationDrive untried = new GuidedVerificationDrive();
+                        untried.Start(6);
+                        // Reach the move-off test without concluding it: Next on
+                        // an unfinished phase finishes it, so no sample may be
+                        // fed after that point.
+                        for (int guard = 0; guard < 5
+                            && untried.GetSnapshot().Title != "Move-off clutch test"; guard++)
+                        {
+                            untried.Next();
+                        }
+                        Equal("Move-off clutch test", untried.GetSnapshot().Title, "reaches the move-off test");
+                        // Sitting still, engine running, never asked to move.
+                        untried.AddSample(GuidedSample(now, 0, 0, 0, 900, 0, 0, true));
+                        untried.Next();
+                        True(untried.GetSnapshot().Result.Contains("Nothing was measured"),
+                            "says nothing was measured rather than recording a stall");
+                        untried.Next();
+                        Equal("not-tested", untried.GetResults().MoveOffWithoutPhysicalClutch,
+                            "leaves an unattempted move-off unanswered");
+
+                        for (int guard = 0; guard < 40
+                            && untried.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            untried.AddSample(GuidedSample(now, 3, 0, 50, 4000, 80, 200, true));
+                            untried.Next();
+                        }
+                        Equal("Full-throttle upshift", untried.GetSnapshot().Title, "reaches the upshift test");
+                        // Driving along in one gear, never shifting.
+                        untried.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 90, 5000, 85, 220, true));
+                        untried.AddSample(GuidedSample(now.AddMilliseconds(600), 3, 0, 90, 5200, 88, 220, true));
+                        untried.Next();
+                        True(untried.GetSnapshot().Result.Contains("no gear change was seen"),
+                            "says no gear change was seen rather than recording a refusal");
+                        untried.Next();
+                        Equal("not-tested", untried.GetResults().ClutchlessUpshift,
+                            "leaves an unattempted upshift unanswered");
+                        Equal("not-tested", untried.GetResults().AutomaticCut,
+                            "never infers an automatic cut from a test nobody ran");
+                    }
                     // This car crept away with the clutch channel high and the
                     // result was accepted as clutch-free, which is the one
                     // combination worth questioning.

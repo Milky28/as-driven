@@ -118,6 +118,15 @@ namespace AsDriven.Core
         private double _baselineDriveRatio;
         private int _maximumGear;
         private bool _armed;
+        /// <summary>
+        /// Whether the gear ever changed during this attempt, including into
+        /// neutral. It is the difference between a driver who tried and a car
+        /// that refused, and a driver who never tried at all.
+        /// </summary>
+        private bool _gearChangeSeen;
+        private int _previousGear;
+        /// <summary>Nothing was measured, so the answer stays unrecorded.</summary>
+        private bool _attemptNotTested;
         private bool _attemptAccepted;
         private bool _automaticActionObserved;
         private bool _resultReady;
@@ -207,6 +216,18 @@ namespace AsDriven.Core
             {
                 if (!IsTestPhase(_phase) || _resultReady)
                 {
+                    return;
+                }
+                // Ending a phase that was never attempted used to write the
+                // negative, so a driver moving on with Next recorded a car that
+                // stalls, or a gearbox that refuses, having measured neither.
+                // An unattempted phase now records nothing, the way Skip does.
+                if (!WasAttempted())
+                {
+                    _attemptNotTested = true;
+                    _resultReady = true;
+                    _attemptAccepted = false;
+                    _result = NothingMeasuredMessage(_phase);
                     return;
                 }
                 switch (_phase)
@@ -315,6 +336,11 @@ namespace AsDriven.Core
 
         private void UpdateTrace(GuidedTelemetrySample sample)
         {
+            if (_previousGear != int.MinValue && sample.Gear != _previousGear)
+            {
+                _gearChangeSeen = true;
+            }
+            _previousGear = sample.Gear;
             _maximumClutch = Math.Max(_maximumClutch, sample.Clutch);
             _minimumThrottle = Math.Min(_minimumThrottle, sample.Throttle);
             _maximumThrottle = Math.Max(_maximumThrottle, sample.Throttle);
@@ -663,6 +689,13 @@ namespace AsDriven.Core
         private void AcceptResultAndAdvance()
         {
             RememberVehicleClutchTelemetry();
+            if (_attemptNotTested)
+            {
+                // Nothing was measured, so every downstream flag stays as it
+                // was and the answer is left for the form.
+                AdvanceAfterSkip();
+                return;
+            }
             switch (_phase)
             {
                 case Phase.MoveOff:
@@ -761,6 +794,37 @@ namespace AsDriven.Core
                 + "before relying on it.";
         }
 
+        /// <summary>
+        /// Whether this phase saw enough to conclude anything. A move-off needs
+        /// the driver to have asked the car to move; a shift test needs a gear
+        /// to have changed, which a refusal into neutral also satisfies.
+        /// </summary>
+        private bool WasAttempted()
+        {
+            switch (_phase)
+            {
+                case Phase.MoveOff:
+                    return _maximumThrottle >= 5.0 || _maximumGear > 0;
+                case Phase.GearCount:
+                    return true;
+                default:
+                    return _gearChangeSeen;
+            }
+        }
+
+        private static string NothingMeasuredMessage(Phase phase)
+        {
+            if (phase == Phase.MoveOff)
+            {
+                return "Nothing was measured: the car was never asked to pull away. This is left "
+                    + "unanswered rather than recorded as needing a clutch. Retry, or answer it in "
+                    + "the form.";
+            }
+            return "Nothing was measured: no gear change was seen during this test. This is left "
+                + "unanswered rather than recorded as a gearbox that refused. Retry, or answer it "
+                + "in the form.";
+        }
+
         private void AdvanceAfterSkip()
         {
             switch (_phase)
@@ -798,6 +862,9 @@ namespace AsDriven.Core
             _baselineDriveRatio = 0.0;
             _maximumGear = 0;
             _armed = false;
+            _gearChangeSeen = false;
+            _previousGear = int.MinValue;
+            _attemptNotTested = false;
             _attemptAccepted = false;
             _automaticActionObserved = false;
             _engineWasRunning = false;
