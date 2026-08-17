@@ -342,8 +342,16 @@ namespace AsDriven.Core
                     SimulatorDifference = DescribeOverrides(simulator),
                     WheelIntegratedDisplay = OptionalState(effectiveWheelRim, "integrated_display"),
                     WheelShiftLights = OptionalState(effectiveWheelRim, "shift_lights"),
-                    HasSteeringDOR = effectiveSteering["degrees_of_rotation"] != null,
-                    SteeringDOR = OptionalInteger(effectiveSteering, "degrees_of_rotation"),
+                    // The steering lock lives on the simulator entry: every
+                    // curated value for it came from the AMS2 spreadsheet, which
+                    // records what the game applies rather than how the real car
+                    // was built. The authentic path is still read so a record
+                    // that one day sources a real lock is not ignored.
+                    HasSteeringDOR = behavior["steering_dor"] != null
+                        || effectiveSteering["degrees_of_rotation"] != null,
+                    SteeringDOR = behavior["steering_dor"] != null
+                        ? OptionalInteger(behavior, "steering_dor")
+                        : OptionalInteger(effectiveSteering, "degrees_of_rotation"),
                     VerifiedGameVersion = RequiredString(
                         simulator, "verified_game_version", recordPath),
                     Confidence = RequiredString(confidence, "level", recordPath),

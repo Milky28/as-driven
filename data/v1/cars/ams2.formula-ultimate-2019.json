@@ -46,12 +46,13 @@
         "integrated_display": "yes",
         "shift_lights": "yes",
         "open_top": "no"
-      },
-      "degrees_of_rotation": 380
+      }
     },
     "notes": [
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
-      "The modeled car moves from rest without physical clutch input."
+      "The modeled car moves from rest without physical clutch input.",
+      "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
+      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had."
     ]
   },
   "simulators": [
@@ -92,7 +93,8 @@
         },
         "notes": [
           "Guided current-game testing directly established all user-facing controls."
-        ]
+        ],
+        "steering_dor": 380
       },
       "overrides": [],
       "verified_game_version": "1.6.9.91",
@@ -115,7 +117,6 @@
       {
         "paths": [
           "/identity",
-          "/authentic_controls",
           "/simulators/0/behavior"
         ],
         "source_refs": [

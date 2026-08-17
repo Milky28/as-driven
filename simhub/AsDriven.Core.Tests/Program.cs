@@ -605,6 +605,17 @@ namespace AsDriven.Core.Tests
                     "the Brabham upshift is clutch-free and says so");
                 Equal("No clutch needed", dogBoxNote.DownshiftClutchLabel,
                     "and its downshift too");
+                // The steering lock moved to the simulator entry, because every
+                // curated value for it came from the AMS2 spreadsheet. The
+                // client must still read it, or the move would have silently
+                // dropped a value the overlay shows.
+                GuidanceSnapshot lockCar = database.Match("Automobilista2", "Dallara F301");
+                if (lockCar.HasMatch)
+                {
+                    True(lockCar.HasSteeringDOR, "the F301 still reports a steering lock");
+                    Equal(450, lockCar.SteeringDOR, "and reports the value it always had");
+                }
+
                 // Batch 23: the prototypes split on the two things the drive
                 // tested, so the class alone never predicts the answer.
                 foreach (string clutchFree in new[] {

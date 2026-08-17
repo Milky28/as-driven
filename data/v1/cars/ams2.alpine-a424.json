@@ -169,7 +169,6 @@
         ],
         "source_refs": [
           "xtrac.p1359.lmdh",
-          "ams2.coanda-sheet.v1.0.34",
           "ams2.local-live-alpine-a424-controls.1.6.9.91"
         ],
         "confidence": "medium",

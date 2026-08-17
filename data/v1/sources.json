@@ -45,11 +45,11 @@
       "author": "Coanda",
       "url": "https://docs.google.com/spreadsheets/d/1tJ899Wf-ElgVdhXFcQOG8ofQDYKTf8J6Lg8IXavCRxA/edit?gid=2095352073#gid=2095352073",
       "archive_url": null,
-      "source_type": "community-research",
+      "source_type": "official-simulator",
       "published_or_updated_at": "2024-01-17",
       "retrieved_at": "2026-08-09",
       "reuse_status": "facts-only-review",
-      "notes": "Forum post labels the sheet AMS2 1.5.5.2 / spreadsheet 1.0.34 and explicitly states that blank indicator cells mean No. The importer projects only authentic-control fields and applies that blank rule to Auto Blip and Shift Cut. Initial records paraphrase selected factual cells; bulk redistribution requires a separate reuse review."
+      "notes": "Forum post labels the sheet AMS2 1.5.5.2 / spreadsheet 1.0.34 and explicitly states that blank indicator cells mean No. The importer projects only authentic-control fields and applies that blank rule to Auto Blip and Shift Cut. Initial records paraphrase selected factual cells; bulk redistribution requires a separate reuse review. It records what the simulator models rather than what the real car had, so it cannot establish a real-world control value on its own."
     },
     {
       "source_id": "ams2.local-live-alpine-a110-gt4-evo-controls.1.6.9.91",
@@ -2927,11 +2927,11 @@
       "author": "Coanda",
       "url": "https://forum.reizastudios.com/threads/automobilista-2-extended-car-info-spreadsheet.16746/",
       "archive_url": null,
-      "source_type": "community-research",
+      "source_type": "official-simulator",
       "published_or_updated_at": "2024-01-17",
       "retrieved_at": "2026-08-09",
       "reuse_status": "facts-only-review",
-      "notes": "Provides version context, the blank-indicator interpretation, and the source author's description of GTF1 as a modern GT/F1-style wheel rim."
+      "notes": "Provides version context, the blank-indicator interpretation, and the source author's description of GTF1 as a modern GT/F1-style wheel rim. It records what the simulator models rather than what the real car had, so it cannot establish a real-world control value on its own."
     },
     {
       "source_id": "ams2.reiza-release.1.5.6.1.stock-car-2024",
