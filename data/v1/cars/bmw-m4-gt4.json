@@ -11,8 +11,7 @@
       "label": "2018 customer-racing debut (F82)"
     },
     "class": "GT4",
-    "real_world_identity_notes": "Customer GT4 racing car based on the F82 M4 Coupe, sold from 2018. BMW's launch material lists a 2,979 cc six-cylinder in-line M TwinPower turbo engine and a seven-gear dual clutch transmission with motorsport software, carried over from the production car rather than a bespoke racing sequential. That matches the seven forward gears exercised in the drive.",
-    "variant": "AMS2 GT4 representation"
+    "real_world_identity_notes": "Customer GT4 racing car based on the F82 M4 Coupe, sold from 2018. BMW's launch material lists a 2,979 cc six-cylinder in-line M TwinPower turbo engine and a seven-gear dual clutch transmission with motorsport software, carried over from the production car rather than a bespoke racing sequential. That matches the seven forward gears exercised in the drive."
   },
   "authentic_controls": {
     "transmission": {
@@ -140,5 +139,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

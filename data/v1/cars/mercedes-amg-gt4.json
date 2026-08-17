@@ -11,8 +11,7 @@
       "label": "2018 customer-racing debut"
     },
     "class": "GT4",
-    "real_world_identity_notes": "Customer GT4 racing car on the AMG GT platform with the 4.0 litre V8 biturbo. Unlike the dual-clutch GT4 cars it uses a purpose-built sequential six-speed racing gearbox in transaxle configuration on the rear axle, pneumatically operated through steering wheel paddles.",
-    "variant": "AMS2 GT4 representation"
+    "real_world_identity_notes": "Customer GT4 racing car on the AMG GT platform with the 4.0 litre V8 biturbo. Unlike the dual-clutch GT4 cars it uses a purpose-built sequential six-speed racing gearbox in transaxle configuration on the rear axle, pneumatically operated through steering wheel paddles."
   },
   "authentic_controls": {
     "transmission": {
@@ -139,5 +138,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

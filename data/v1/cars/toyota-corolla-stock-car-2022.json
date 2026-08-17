@@ -10,9 +10,8 @@
       "from": 2022,
       "label": "2022 Stock Car Pro Series"
     },
-    "class": "StockCarV8_2022",
-    "real_world_identity_notes": "Stock Car Pro Series entry on the series' control platform, which pairs a common chassis and V8 with a six-speed sequential paddle-shift transmission. The registered regulations describe the current platform rather than the 2022 season specifically, and this car is reviewed independently of the curated 2024 Corolla rather than inheriting from it.",
-    "variant": "AMS2 Stock Car Pro Series 2022 representation"
+    "class": "Stock Car Pro Series",
+    "real_world_identity_notes": "Stock Car Pro Series entry on the series' control platform, which pairs a common chassis and V8 with a six-speed sequential paddle-shift transmission. The registered regulations describe the current platform rather than the 2022 season specifically, and this car is reviewed independently of the curated 2024 Corolla rather than inheriting from it."
   },
   "authentic_controls": {
     "transmission": {
@@ -143,5 +142,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

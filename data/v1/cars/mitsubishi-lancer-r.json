@@ -9,7 +9,7 @@
     "year": {
       "label": "Lancer Cup R"
     },
-    "class": "LancerCup",
+    "class": "Lancer Cup",
     "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup in R specification, built from the Lancer Evolution X. It ran as a separate class from the sequential RS and was later discontinued.",
     "variant": "R"
   },
@@ -144,5 +144,5 @@
     ]
   },
   "driver_summary": "Probably a synchronised road-derived manual, so the downshift blip is technique rather than necessity. The reviewed reference covers the RS, not this car, so the construction is the ordinary reading.",
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

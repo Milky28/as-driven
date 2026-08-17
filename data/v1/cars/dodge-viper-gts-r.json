@@ -6,7 +6,6 @@
     "display_name": "Dodge Viper GTS-R",
     "manufacturer": "Dodge",
     "model": "Viper GTS-R",
-    "variant": "AMS2 2005 GT1 representation",
     "year": {
       "from": 2005,
       "to": 2005,
@@ -160,5 +159,5 @@
     "This record deliberately preserves the distinction between original FIA homologation, documented privateer conversions, and the behavior of Reiza's simulated representation.",
     "'Dodge Viper GTS-R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-17"
 }

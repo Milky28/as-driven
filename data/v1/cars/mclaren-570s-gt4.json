@@ -11,8 +11,7 @@
       "label": "2017 customer-racing debut"
     },
     "class": "GT4",
-    "real_world_identity_notes": "Customer GT4 racing car on the McLaren MonoCell II carbon chassis with the 3.8 litre twin-turbo V8. It uses the road car's Oerlikon Graziano seven-speed dual clutch Sequential Shift Gearbox, whose electrically actuated wet clutches pre-select the next gear while one is engaged, matching the seven forward gears seen in the drive.",
-    "variant": "AMS2 GT4 representation"
+    "real_world_identity_notes": "Customer GT4 racing car on the McLaren MonoCell II carbon chassis with the 3.8 litre twin-turbo V8. It uses the road car's Oerlikon Graziano seven-speed dual clutch Sequential Shift Gearbox, whose electrically actuated wet clutches pre-select the next gear while one is engaged, matching the seven forward gears seen in the drive."
   },
   "authentic_controls": {
     "transmission": {
@@ -137,5 +136,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

@@ -9,7 +9,7 @@
     "year": {
       "label": "Lancer Cup RS"
     },
-    "class": "LancerCup",
+    "class": "Lancer Cup",
     "real_world_identity_notes": "Mitsubishi Lancer prepared for the Brazilian Lancer Cup in RS specification, built from the Lancer Evolution X at about 340 cv with a six-speed sequential gearbox and powershift for clutchless changes.",
     "variant": "RS"
   },
@@ -138,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

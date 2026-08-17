@@ -6,7 +6,6 @@
     "display_name": "MetalMoro AJR Gen2 Chevrolet",
     "manufacturer": "Metalmoro",
     "model": "AJR Gen2 Chevrolet",
-    "variant": "AMS2 sports-prototype representation (second generation)",
     "year": {
       "from": 2017,
       "label": "AJR platform (2017); AMS2 Gen2 configuration"
@@ -140,5 +139,5 @@
   "notes": [
     "Promoted from a guided-verification drive; a single exact identity with no aero alias."
   ],
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-17"
 }

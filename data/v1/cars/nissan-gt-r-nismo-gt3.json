@@ -11,8 +11,7 @@
       "label": "2018 specification"
     },
     "class": "GT3",
-    "real_world_identity_notes": "Customer GT3 racing car built on the R35 GT-R with the VR38DETT twin-turbo V6. The NISMO customer-racing specification lists a six-speed sequential transmission with semi-automatic paddle shift as standard equipment.",
-    "variant": "AMS2 GT3 representation"
+    "real_world_identity_notes": "Customer GT3 racing car built on the R35 GT-R with the VR38DETT twin-turbo V6. The NISMO customer-racing specification lists a six-speed sequential transmission with semi-automatic paddle shift as standard equipment."
   },
   "authentic_controls": {
     "transmission": {
@@ -136,5 +135,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

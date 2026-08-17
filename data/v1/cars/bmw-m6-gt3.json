@@ -11,8 +11,7 @@
       "label": "2016 customer-racing debut"
     },
     "class": "GT3",
-    "real_world_identity_notes": "Customer GT3 racing car based on the F13 M6 with the 4.4 litre twin-turbo V8, campaigned by privateer teams from 2016. Ricardo, which engineered the unit, describes a semi-automatic transverse transaxle carrying a sequential six-speed plus reverse racing gearbox in a magnesium casing, shifted by paddles.",
-    "variant": "AMS2 GT3 representation"
+    "real_world_identity_notes": "Customer GT3 racing car based on the F13 M6 with the 4.4 litre twin-turbo V8, campaigned by privateer teams from 2016. Ricardo, which engineered the unit, describes a semi-automatic transverse transaxle carrying a sequential six-speed plus reverse racing gearbox in a magnesium casing, shifted by paddles."
   },
   "authentic_controls": {
     "transmission": {
@@ -139,5 +138,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

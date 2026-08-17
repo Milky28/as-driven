@@ -11,8 +11,7 @@
       "label": "1998 Le Mans specification"
     },
     "class": "GT1",
-    "real_world_identity_notes": "GT1 car built for Le Mans around a twin-turbo 3.5 litre V8, with the road-going homologation special sharing its name. Power reaches the rear wheels through an Xtrac six-speed sequential gearbox worked by a short-throw gear lever, which matches the sequential stick seen in the cockpit rather than paddles.",
-    "variant": "AMS2 base-downforce GT1 representation"
+    "real_world_identity_notes": "GT1 car built for Le Mans around a twin-turbo 3.5 litre V8, with the road-going homologation special sharing its name. Power reaches the rear wheels through an Xtrac six-speed sequential gearbox worked by a short-throw gear lever, which matches the sequential stick seen in the cockpit rather than paddles."
   },
   "authentic_controls": {
     "transmission": {
@@ -153,5 +152,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

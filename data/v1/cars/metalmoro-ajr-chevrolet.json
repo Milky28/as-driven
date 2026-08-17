@@ -6,7 +6,6 @@
     "display_name": "MetalMoro AJR Chevrolet",
     "manufacturer": "Metalmoro",
     "model": "AJR Chevrolet",
-    "variant": "AMS2 sports-prototype representation",
     "year": {
       "from": 2017,
       "label": "2017 sports prototype"
@@ -140,5 +139,5 @@
   "notes": [
     "Promoted from a guided-verification drive; a single exact identity with no aero alias."
   ],
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-17"
 }

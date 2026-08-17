@@ -10,9 +10,8 @@
       "from": 2020,
       "label": "2020 Evo update"
     },
-    "class": "GT3_Gen2",
-    "real_world_identity_notes": "Updated version of the AMG GT3 introduced for 2020, retaining the naturally aspirated V8 and the sequential six-speed rear transaxle of the car it revises. The registered manufacturer page documents the GT3 family transmission rather than the Evo update specifically.",
-    "variant": "AMS2 GT3 Gen2 representation"
+    "class": "GT3",
+    "real_world_identity_notes": "Updated version of the AMG GT3 introduced for 2020, retaining the naturally aspirated V8 and the sequential six-speed rear transaxle of the car it revises. The registered manufacturer page documents the GT3 family transmission rather than the Evo update specifically."
   },
   "authentic_controls": {
     "transmission": {
@@ -139,5 +138,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

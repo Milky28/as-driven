@@ -10,7 +10,7 @@
       "label": "Copa Uno one-make series",
       "from": 1992
     },
-    "class": "CopaUno",
+    "class": "Copa Uno",
     "real_world_identity_notes": "Fiat Uno prepared for the Brazilian Copa Uno one-make series, which began in 1992 under Greco Competicoes with official Fiat support. It was built on the Uno 1.6R with a 1,600 cc engine prepared by the organiser and drawn by lot each round.",
     "variant": "Copa Uno one-make specification"
   },
@@ -141,5 +141,5 @@
     ]
   },
   "driver_summary": "Synchronised gearbox, so the blip eases the synchros but is not needed to engage the gear. Construction is inferred from a one-make series running the production Uno gearbox rather than stated by a source.",
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

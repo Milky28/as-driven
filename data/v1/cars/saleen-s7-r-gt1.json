@@ -6,7 +6,6 @@
     "display_name": "Saleen S7-R GT1",
     "manufacturer": "Saleen",
     "model": "S7-R",
-    "variant": "AMS2 2005 GT1 representation",
     "year": {
       "from": 2005,
       "label": "2005 GT1 representation"
@@ -139,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

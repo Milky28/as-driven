@@ -6,7 +6,6 @@
     "display_name": "Lister Storm GTM",
     "manufacturer": "Lister",
     "model": "Storm GTM",
-    "variant": "AMS2 2005 GT1 representation",
     "year": {
       "from": 2000,
       "label": "late-period Storm GTM"
@@ -139,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

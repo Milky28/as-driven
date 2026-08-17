@@ -6,7 +6,6 @@
     "display_name": "TVR Tuscan T400R GT2",
     "manufacturer": "TVR",
     "model": "Tuscan T400R",
-    "variant": "AMS2 2005 GT2 representation",
     "year": {
       "from": 2004,
       "label": "T400R GT2-era representation"
@@ -137,5 +136,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

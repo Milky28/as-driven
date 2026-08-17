@@ -11,8 +11,7 @@
       "label": "1998 Le Mans winner"
     },
     "class": "GT1",
-    "real_world_identity_notes": "Le Mans-winning GT1 car with a carbon monocoque and a water-cooled 3.2 litre flat six derived from the 962. For 1998 Porsche fitted a new six-speed sequential gearbox to cut shift times, which matches the six gears and sequential lever seen in the cockpit.",
-    "variant": "AMS2 base-downforce GT1 representation"
+    "real_world_identity_notes": "Le Mans-winning GT1 car with a carbon monocoque and a water-cooled 3.2 litre flat six derived from the 962. For 1998 Porsche fitted a new six-speed sequential gearbox to cut shift times, which matches the six gears and sequential lever seen in the cockpit."
   },
   "authentic_controls": {
     "transmission": {
@@ -153,5 +152,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

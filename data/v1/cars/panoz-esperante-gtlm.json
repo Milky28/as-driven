@@ -6,7 +6,6 @@
     "display_name": "Panoz Esperante GTLM",
     "manufacturer": "Panoz",
     "model": "Esperante GTLM",
-    "variant": "AMS2 2005 GT2 representation",
     "year": {
       "from": 2005,
       "label": "2005 GTLM"
@@ -136,5 +135,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

@@ -10,8 +10,7 @@
       "label": "MRX customer prototype; AMS2 Duratec P4 configuration"
     },
     "class": "P4",
-    "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro as the successor to the MCR, later revised with a new chassis. 'Duratec' denotes the Ford engine and 'P4' the Endurance Brasil class, neither of which is the marque. The constructor states the MRX accepts diverse engine and transmission options, so no single real-world gearbox is fixed and entrants have run different sequential units. The AMS2 car is one such configuration, and its six-speed sequential stick is established by the live drive rather than by a fixed factory specification.",
-    "variant": "AMS2 P4-class Duratec configuration"
+    "real_world_identity_notes": "Brazilian customer sports prototype built by Metalmoro as the successor to the MCR, later revised with a new chassis. 'Duratec' denotes the Ford engine and 'P4' the Endurance Brasil class, neither of which is the marque. The constructor states the MRX accepts diverse engine and transmission options, so no single real-world gearbox is fixed and entrants have run different sequential units. The AMS2 car is one such configuration, and its six-speed sequential stick is established by the live drive rather than by a fixed factory specification."
   },
   "authentic_controls": {
     "transmission": {
@@ -148,5 +147,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-17"
 }

@@ -78,6 +78,12 @@
           }
         },
         "class": { "type": "string", "minLength": 1 },
+        "additional_classes": {
+          "description": "Further real-world categories the same car competes in, where one car carries more than one category name: a Porsche 963 is GTP in IMSA and Hypercar in the WEC. `class` stays the primary category so existing consumers keep working.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
         "real_world_identity_notes": { "type": "string" }
       }
     },

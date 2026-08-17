@@ -9,7 +9,7 @@
     "year": {
       "label": "Aussie Racing Cars Championship"
     },
-    "class": "ARC_Cam",
+    "class": "Aussie Racing Cars",
     "real_world_identity_notes": "Aussie Racing Car: a silhouette racer of the Australian one-make championship, carrying a Chevrolet Camaro body on a purpose-built steel tubular spaceframe and powered by a second-hand Yamaha FJR1300 motorcycle engine of about 1.3 litres. The gearbox is integral to that motorcycle unit and is operated by a sequential quick-shift lever mounted close to the steering wheel. The Camaro body is a silhouette, so Chevrolet is not the manufacturer of this car.",
     "variant": "Aussie Racing Car silhouette"
   },
@@ -140,5 +140,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

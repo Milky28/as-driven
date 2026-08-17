@@ -6,7 +6,6 @@
     "display_name": "Porsche 996 GT3 RSR",
     "manufacturer": "Porsche",
     "model": "911 GT3 RSR (996)",
-    "variant": "AMS2 2005 GT2 representation",
     "year": {
       "from": 2004,
       "to": 2005,
@@ -138,5 +137,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

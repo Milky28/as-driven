@@ -11,8 +11,7 @@
       "label": "G55 platform"
     },
     "class": "GT4",
-    "real_world_identity_notes": "British customer racing car in the GT4 category, built on the same G55 platform as the GT3 and Supercup cars and using a Hewland six-speed rather than a dual clutch. Like the other G55 variants it requires the clutch to pull away, which separates it from every dual-clutch car in this batch.",
-    "variant": "AMS2 GT4 representation"
+    "real_world_identity_notes": "British customer racing car in the GT4 category, built on the same G55 platform as the GT3 and Supercup cars and using a Hewland six-speed rather than a dual clutch. Like the other G55 variants it requires the clutch to pull away, which separates it from every dual-clutch car in this batch."
   },
   "authentic_controls": {
     "transmission": {
@@ -137,5 +136,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

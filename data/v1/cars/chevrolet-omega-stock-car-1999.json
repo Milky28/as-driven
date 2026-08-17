@@ -10,9 +10,8 @@
       "from": 1999,
       "label": "1999 Stock Car Brasil season"
     },
-    "class": "StockCar99",
-    "real_world_identity_notes": "Stock Car Brasil entry from the Omega era that ran from 1994 to 1999. The 1999 cars kept a heavily modified straight six derived from the 1979 Opala rather than the V8 introduced in 2001, and 1999 was the last season built on production-car chassis. The reviewed source does not document the gearbox, so its five H-pattern gears rest on direct observation rather than a specification.",
-    "variant": "AMS2 Stock Car Brasil 1999 representation"
+    "class": "Stock Car Brasil",
+    "real_world_identity_notes": "Stock Car Brasil entry from the Omega era that ran from 1994 to 1999. The 1999 cars kept a heavily modified straight six derived from the 1979 Opala rather than the V8 introduced in 2001, and 1999 was the last season built on production-car chassis. The reviewed source does not document the gearbox, so its five H-pattern gears rest on direct observation rather than a specification."
   },
   "authentic_controls": {
     "transmission": {
@@ -149,5 +148,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

@@ -6,7 +6,6 @@
     "display_name": "Chevrolet Corvette C5-R",
     "manufacturer": "Chevrolet",
     "model": "Corvette C5-R",
-    "variant": "AMS2 2005 GT1 representation",
     "year": {
       "label": "AMS2 2005 GT1-class representation"
     },
@@ -157,5 +156,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

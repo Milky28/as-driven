@@ -6,7 +6,6 @@
     "display_name": "Lamborghini Murcielago R-GT",
     "manufacturer": "Lamborghini",
     "model": "Murcielago R-GT",
-    "variant": "AMS2 2005 GT1 representation",
     "year": {
       "from": 2004,
       "label": "2004-generation GT1"
@@ -161,5 +160,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

@@ -11,8 +11,7 @@
       "label": "2019 (991.2) customer racing car"
     },
     "class": "GT3",
-    "real_world_identity_notes": "Customer GT3 racing car on the 991.2 generation 911, with a four-litre water-cooled flat six. Porsche specifies a sequential six-speed constant-mesh gearbox with an electronic shift actuator, changed by steering-wheel paddles.",
-    "variant": "AMS2 991.2 representation"
+    "real_world_identity_notes": "Customer GT3 racing car on the 991.2 generation 911, with a four-litre water-cooled flat six. Porsche specifies a sequential six-speed constant-mesh gearbox with an electronic shift actuator, changed by steering-wheel paddles."
   },
   "authentic_controls": {
     "transmission": {
@@ -136,5 +135,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

@@ -6,7 +6,6 @@
     "display_name": "Chevrolet Corvette GTP",
     "manufacturer": "Chevrolet",
     "model": "Corvette GTP",
-    "variant": "AMS2 base-downforce IMSA GTP representation",
     "year": {
       "from": 1988,
       "label": "1988 IMSA GTP"

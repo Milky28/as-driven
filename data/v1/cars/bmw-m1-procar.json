@@ -11,8 +11,7 @@
       "label": "1979 Procar championship"
     },
     "class": "Procar",
-    "real_world_identity_notes": "Mid-engined racing version of the M1 built for the one-make Procar series that supported Formula One in 1979 and 1980. It keeps the road car's ZF five-speed, whose first gear sits on a dogleg so that first, third and fifth share the lower plane, with revised ratios and an added oil cooler for racing.",
-    "variant": "AMS2 Procar representation"
+    "real_world_identity_notes": "Mid-engined racing version of the M1 built for the one-make Procar series that supported Formula One in 1979 and 1980. It keeps the road car's ZF five-speed, whose first gear sits on a dogleg so that first, third and fifth share the lower plane, with revised ratios and an added oil cooler for racing."
   },
   "authentic_controls": {
     "transmission": {

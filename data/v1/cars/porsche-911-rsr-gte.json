@@ -11,8 +11,7 @@
       "label": "2019 model year"
     },
     "class": "GTE",
-    "real_world_identity_notes": "Mid-engine GTE car with a naturally aspirated flat six. Porsche's media guide specifies a weight-optimised six-speed sequential constant-mesh gearbox in a magnesium casing, shifted by an electronic actuator through steering-wheel paddles.",
-    "variant": "AMS2 GTE representation"
+    "real_world_identity_notes": "Mid-engine GTE car with a naturally aspirated flat six. Porsche's media guide specifies a weight-optimised six-speed sequential constant-mesh gearbox in a magnesium casing, shifted by an electronic actuator through steering-wheel paddles."
   },
   "authentic_controls": {
     "transmission": {
@@ -140,5 +139,5 @@
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

@@ -6,7 +6,6 @@
     "display_name": "Milano GT36",
     "manufacturer": "Milano",
     "model": "GT36",
-    "variant": "fictional AMS2 2005 GT2 model",
     "year": {
       "from": 2005,
       "label": "fictional 2005 GT2 representation"
@@ -120,5 +119,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

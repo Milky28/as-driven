@@ -6,7 +6,6 @@
     "display_name": "Courage C60 Hybrid",
     "manufacturer": "Courage",
     "model": "C60 Hybrid",
-    "variant": "AMS2 2005 LMP1 representation",
     "year": {
       "from": 2005,
       "label": "2005 Hybrid representation"
@@ -149,5 +148,5 @@
   "notes": [
     "'Courage C60 Hybrid - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

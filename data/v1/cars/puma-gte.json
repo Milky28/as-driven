@@ -12,8 +12,7 @@
       "label": "1970 to 1980 production"
     },
     "class": "CopaClassicB",
-    "real_world_identity_notes": "Brazilian sports car built between 1970 and 1980 on Volkswagen running gear, with a fibreglass body, an air-cooled flat four and a four-speed manual gearbox. Despite the GTE name it is a classic road-derived car rather than a GTE-class racer, and AMS2 classes it under Copa Classic B. Its controls match that: an H-pattern shift, the clutch needed to pull away, and no automation at all.",
-    "variant": "AMS2 Copa Classic B representation"
+    "real_world_identity_notes": "Brazilian sports car built between 1970 and 1980 on Volkswagen running gear, with a fibreglass body, an air-cooled flat four and a four-speed manual gearbox. Despite the GTE name it is a classic road-derived car rather than a GTE-class racer, and AMS2 classes it under Copa Classic B. Its controls match that: an H-pattern shift, the clutch needed to pull away, and no automation at all."
   },
   "authentic_controls": {
     "transmission": {
@@ -149,5 +148,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

@@ -10,7 +10,7 @@
       "label": "Superlight R500",
       "from": 2008
     },
-    "class": "Cat_Superlight",
+    "class": "Caterham Superlight",
     "real_world_identity_notes": "Caterham Seven Superlight, the lightweight Duratec-engined Seven. AMS2 does not qualify which Superlight it models; the drive matches the sequential specification rather than the standard six-speed manual."
   },
   "authentic_controls": {
@@ -137,5 +137,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-14"
+  "updated_at": "2026-08-17"
 }

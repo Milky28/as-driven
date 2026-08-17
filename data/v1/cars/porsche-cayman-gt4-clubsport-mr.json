@@ -11,8 +11,7 @@
       "label": "2019 Clubsport with the Manthey MR kit"
     },
     "class": "GT4",
-    "real_world_identity_notes": "Customer racing 718 Cayman with the Manthey Racing MR kit. Porsche drives the rear wheels through a dual-clutch PDK gearbox with six gears, and the MR kit revises aerodynamics and suspension without changing the powertrain. A PDK has no clutch pedal, so the real car cannot require clutch input to pull away, even though AMS2 does; that difference is recorded as an explicit simulator override rather than by asserting something false about the car.",
-    "variant": "AMS2 Manthey Racing MR representation"
+    "real_world_identity_notes": "Customer racing 718 Cayman with the Manthey Racing MR kit. Porsche drives the rear wheels through a dual-clutch PDK gearbox with six gears, and the MR kit revises aerodynamics and suspension without changing the powertrain. A PDK has no clutch pedal, so the real car cannot require clutch input to pull away, even though AMS2 does; that difference is recorded as an explicit simulator override rather than by asserting something false about the car."
   },
   "authentic_controls": {
     "transmission": {
@@ -164,5 +163,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-17"
 }

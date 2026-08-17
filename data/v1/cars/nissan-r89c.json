@@ -11,8 +11,7 @@
       "label": "1989 World Sportscar Championship"
     },
     "class": "Group C",
-    "real_world_identity_notes": "Group C prototype campaigned by Nissan in 1989, powered by the VRH35 3,496cc twin-turbo DOHC V8. The chassis was built by Lola Cars International after Nissan switched from March Engineering for that season, so the chassis constructor is identity context rather than the marque. Nissan's heritage record specifies a VGC five-speed transmission, matching the five forward gears exercised in the live drive.",
-    "variant": "AMS2 base-downforce Group C representation"
+    "real_world_identity_notes": "Group C prototype campaigned by Nissan in 1989, powered by the VRH35 3,496cc twin-turbo DOHC V8. The chassis was built by Lola Cars International after Nissan switched from March Engineering for that season, so the chassis constructor is identity context rather than the marque. Nissan's heritage record specifies a VGC five-speed transmission, matching the five forward gears exercised in the live drive."
   },
   "authentic_controls": {
     "transmission": {

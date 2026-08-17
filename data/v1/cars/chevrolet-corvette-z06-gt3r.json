@@ -6,13 +6,12 @@
     "display_name": "Chevrolet Corvette Z06 GT3.R",
     "manufacturer": "Chevrolet",
     "model": "Corvette Z06 GT3.R",
-    "variant": "AMS2 base-downforce GT3 Gen2 representation",
     "year": {
       "from": 2024,
       "to": 2024,
       "label": "2024 competition debut"
     },
-    "class": "GT3_Gen2",
+    "class": "GT3",
     "real_world_identity_notes": "Chevrolet and Corvette Racing specify the Z06 GT3.R with a six-speed sequential motorsport transaxle. The base AMS2 telemetry identity was live-tested; the exact Low Downforce identity is treated as an aero-package alias inheriting the base controls and has not been separately live-tested."
   },
   "authentic_controls": {
@@ -174,5 +173,5 @@
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

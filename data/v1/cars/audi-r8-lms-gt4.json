@@ -6,7 +6,6 @@
     "display_name": "Audi R8 LMS GT4",
     "manufacturer": "Audi",
     "model": "R8 LMS GT4",
-    "variant": "AMS2 GT4 representation",
     "year": {
       "from": 2018,
       "to": 2018,
@@ -154,5 +153,5 @@
     "Simulator behavior and manufacturer hardware evidence agree that no physical clutch pedal action is required for normal use.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

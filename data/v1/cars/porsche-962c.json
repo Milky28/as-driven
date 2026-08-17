@@ -11,8 +11,7 @@
       "label": "1987 World Sportscar Championship"
     },
     "class": "Group C",
-    "real_world_identity_notes": "Group C prototype derived from the 956, with the 962C designation distinguishing the World Sportscar Championship cars from their IMSA GTP counterparts. It uses a five-speed manual transmission. Whether that gearbox is synchromesh or dog engaged, and whether its H-pattern is standard or dogleg, is not established by the sources reviewed and is deliberately left unknown.",
-    "variant": "AMS2 base-downforce Group C representation"
+    "real_world_identity_notes": "Group C prototype derived from the 956, with the 962C designation distinguishing the World Sportscar Championship cars from their IMSA GTP counterparts. It uses a five-speed manual transmission. Whether that gearbox is synchromesh or dog engaged, and whether its H-pattern is standard or dogleg, is not established by the sources reviewed and is deliberately left unknown."
   },
   "authentic_controls": {
     "transmission": {

@@ -6,7 +6,6 @@
     "display_name": "Oreca 07",
     "manufacturer": "ORECA",
     "model": "07",
-    "variant": "AMS2 LMP2 Gen1 and Gen2 representation",
     "year": {
       "from": 2017,
       "label": "2017-generation LMP2 prototype"
@@ -176,5 +175,5 @@
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

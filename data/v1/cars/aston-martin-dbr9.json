@@ -6,7 +6,6 @@
     "display_name": "Aston Martin DBR9",
     "manufacturer": "Aston Martin",
     "model": "DBR9",
-    "variant": "AMS2 2005 GT1 representation",
     "year": {
       "from": 2005,
       "label": "2005-generation GT1"
@@ -159,5 +158,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }
