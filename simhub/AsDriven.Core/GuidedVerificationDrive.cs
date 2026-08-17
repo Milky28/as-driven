@@ -132,6 +132,14 @@ namespace AsDriven.Core
         private double _maximumClutch;
         private double _minimumThrottle;
         private double _maximumThrottle;
+        /// <summary>
+        /// Throttle seen since the downshift attempt armed, which is the only
+        /// window in which a spike can be the car's. <see cref="_maximumThrottle"/>
+        /// starts at the attempt, so it banks the throttle the driver was still
+        /// carrying before lifting, and reading a blip from it reported the
+        /// driver's own pedal as an automatic blip.
+        /// </summary>
+        private double _downshiftArmedThrottle;
         private double _maximumTorque;
         private double _minimumTorque;
         private double _upshiftMaximumTorque;
@@ -544,6 +552,10 @@ namespace AsDriven.Core
             {
                 return;
             }
+            // Arming already required a closed throttle, so anything above it
+            // from here is the car blipping or a pedal the driver was asked not
+            // to touch. Either way it is not throttle carried in from before.
+            _downshiftArmedThrottle = Math.Max(_downshiftArmedThrottle, sample.Throttle);
 
             if (_downshiftCandidateGear == 0)
             {
@@ -582,7 +594,7 @@ namespace AsDriven.Core
             }
 
             double elapsed = (sample.TimestampUtc - _downshiftCandidateAtUtc).TotalSeconds;
-            bool blip = _maximumThrottle >= 15.0;
+            bool blip = _downshiftArmedThrottle >= 15.0;
             if (sample.Throttle <= 10.0 && elapsed >= EngagementConfirmSeconds)
             {
                 if (DriveRatio(sample) >= _baselineDriveRatio * EngagementRatioMargin)
@@ -768,6 +780,7 @@ namespace AsDriven.Core
             _maximumClutch = 0.0;
             _minimumThrottle = 100.0;
             _maximumThrottle = 0.0;
+            _downshiftArmedThrottle = 0.0;
             _maximumTorque = 0.0;
             _minimumTorque = double.MaxValue;
             _upshiftMaximumTorque = 0.0;

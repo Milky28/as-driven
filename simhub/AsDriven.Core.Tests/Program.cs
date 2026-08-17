@@ -939,6 +939,38 @@ namespace AsDriven.Core.Tests
                     Equal("yes", guidedResults.AutomaticCut, "prefills telemetry-supported automatic cut");
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
                     Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
+
+                    // A driver still carrying throttle when the attempt begins
+                    // must not have their own pedal reported as the car's blip.
+                    // The measurement banked throttle from the whole attempt, so
+                    // lifting into a downshift read as an automatic blip on any
+                    // car. Only throttle after arming can be the car's.
+                    {
+                        GuidedVerificationDrive carried = new GuidedVerificationDrive();
+                        carried.Start(6);
+                        // Skip forward without answering: an unanswered phase
+                        // advances on Next, which is what a driver skipping a
+                        // test does.
+                        for (int guard = 0; guard < 40
+                            && carried.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            // The gear-count phase needs telemetry before it can
+                            // conclude; everything else advances on Next alone.
+                            carried.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            carried.Next();
+                        }
+                        Equal("Downshift without pedal input", carried.GetSnapshot().Title,
+                            "reaches the coast-downshift test");
+                        // Driving along on throttle, before any lift.
+                        carried.AddSample(GuidedSample(now, 4, 0, 85, 5200, 80, 220, true));
+                        // Lift, downshift, and no spike of the car's own.
+                        carried.AddSample(GuidedSample(now.AddMilliseconds(100), 4, 0, 0, 4500, 80, 100, true));
+                        carried.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 0, 5200, 79, 90, true));
+                        carried.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
+                        True(carried.GetSnapshot().ResultReady, "accepts the clutchless downshift");
+                        True(carried.GetSnapshot().Result.Contains("No automatic throttle spike"),
+                            "never reports throttle carried in before the lift as the car's blip");
+                    }
                     // This car crept away with the clutch channel high and the
                     // result was accepted as clutch-free, which is the one
                     // combination worth questioning.
