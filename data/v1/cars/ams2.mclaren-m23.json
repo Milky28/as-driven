@@ -152,6 +152,6 @@
       }
     ]
   },
-  "driver_summary": "Most likely a dog box, so blip every downshift to be safe. Both the dog-ring construction and the blip requirement are inferred from Hewland's design approach rather than established.",
-  "updated_at": "2026-08-16"
+  "driver_summary": "Hewland FG400, most likely a dog box, so blip every downshift to be safe. Whether the gear needs it was never tested, and the dog-ring construction is inferred from Hewland's practice rather than named by a source.",
+  "updated_at": "2026-08-17"
 }

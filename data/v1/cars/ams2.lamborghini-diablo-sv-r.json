@@ -139,9 +139,9 @@
       }
     ]
   },
-  "driver_summary": "Dogleg gate - first is down and left, outside the racing plane. Second through top then fall in one straight fore-and-aft line.",
+  "driver_summary": "Lamborghini five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
   "notes": [
     "The source conflict is resolved only for this AMS2 representation: both manufacturer-derived evidence and the simulator support five forward gears."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-17"
 }

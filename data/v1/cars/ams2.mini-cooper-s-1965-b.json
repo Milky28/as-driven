@@ -48,7 +48,8 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that cannot engage without it.",
-      "First gear is not synchronised on this gearbox. The source describes synchromesh on second, third and fourth only, with first of the crash engagement type, and dates full synchromesh to 1968. The downshift blip is recorded as optional because the synchronised gears are the ones changed while racing; a downshift into first while moving would still need double-declutching, which the single field cannot express."
+      "First gear is not synchronised on this gearbox. The source describes synchromesh on second, third and fourth only, with first of the crash engagement type, and dates full synchromesh to 1968. The downshift blip is recorded as optional because the synchronised gears are the ones changed while racing; a downshift into first while moving would still need double-declutching, which the single field cannot express.",
+      "First gear has no synchroniser on the three-synchromesh box fitted until September 1968, so a downshift into first needs the driver to match revs. The other three gears are synchronised."
     ]
   },
   "simulators": [
@@ -118,7 +119,7 @@
           "ams2.local-live-mini-cooper-s-1965-b-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The source states the three-synchromesh gearbox was fitted to all Minis between 1959 and 1968, and the live drive selected four H-pattern gears."
+        "basis": "The source states the three-synchromesh gearbox was fitted to all Minis between 1959 and 1968, and the live drive selected four H-pattern gears. The gearbox specialist source records these boxes as having a non-synchro first gear, with all-synchromesh boxes phased in from September 1968."
       },
       {
         "paths": [
@@ -136,6 +137,6 @@
       }
     ]
   },
-  "driver_summary": "Synchronised gearbox. The downshift blip is authentic technique and eases the synchros, but the gear will engage without it.",
-  "updated_at": "2026-08-14"
+  "driver_summary": "Three-synchromesh gearbox: second, third and fourth have synchronisers and first does not, on every Mini until September 1968. Blip to ease the synchronised gears, and match revs yourself for any downshift into first.",
+  "updated_at": "2026-08-17"
 }

@@ -143,6 +143,6 @@
       }
     ]
   },
-  "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Construction is inferred from a road-derived manual rather than stated by a reviewed source.",
-  "updated_at": "2026-08-16"
+  "driver_summary": "Type 9 gearbox, which Caterham's motorsport partner sells both synchronised and unsynchronised. This car has to be road legal, which is why it is read as synchronised, so blip to ease it but the gear should engage without one.",
+  "updated_at": "2026-08-17"
 }

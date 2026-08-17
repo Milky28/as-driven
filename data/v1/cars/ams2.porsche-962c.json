@@ -154,9 +154,9 @@
       }
     ]
   },
-  "driver_summary": "The gearbox construction was never established for this car, so whether a downshift blip is needed is untested. Blip to be safe.",
+  "driver_summary": "Five-speed manual. Neither the gate nor how the gearbox engages is established by a source, so the H-pattern is what the cockpit showed, and blipping on downshifts is the safe assumption.",
   "notes": [
     "'Porsche 962C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-17"
 }

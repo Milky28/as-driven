@@ -154,9 +154,9 @@
       }
     ]
   },
-  "driver_summary": "Dog box - rev-match every downshift. The dog rings engage on matched revs and there are no synchros to smooth over a lazy blip.",
+  "driver_summary": "Nissan specifies a Hewland VGC five-speed, a racing dog box, so blip every downshift to be safe. The gearbox is established, but whether a blip is needed to engage the gear was never tested.",
   "notes": [
     "'Nissan R89C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-17"
 }
