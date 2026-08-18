@@ -823,6 +823,23 @@ namespace AsDriven.Core
                     // With no gear ever seen there is nothing to report, and the
                     // phase used to sit there refusing to conclude or advance.
                     return _maximumGear > 0;
+                case Phase.FullThrottleUpshift:
+                    // A shift the test would have counted: one taken with the
+                    // throttle where the phase asks for it. Any gear change at
+                    // all is too loose, because a driver getting up to speed
+                    // changes gear on the way, and that recorded a gearbox
+                    // needing its clutch on a test nobody ran.
+                    return !double.IsNaN(_upshiftThrottleAtChange)
+                        && _upshiftThrottleAtChange >= 70.0;
+                case Phase.LiftedUpshift:
+                    return !double.IsNaN(_upshiftThrottleAtChange)
+                        && _upshiftThrottleAtChange <= 45.0;
+                case Phase.CoastDownshift:
+                case Phase.ManualBlipDownshift:
+                    // A lower gear has to have been selected. A refusal into
+                    // neutral settles the attempt on its own and never reaches
+                    // here.
+                    return _downshiftCandidateGear > 0;
                 default:
                     return _gearChangeSeen;
             }

@@ -12,21 +12,13 @@
     "low": "Left as measured: a paddle car with a semi-automatic, dual-clutch or modern sequential gearbox, where blipping on downshift is what the electronics are for."
   },
   "counts": {
-    "recheck": 12,
+    "recheck": 11,
     "low": 86
   },
   "records": [
     {
       "record_id": "courage-c60-hybrid",
       "class": "LMP1 2005",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "formula-trainer",
-      "class": "Formula Trainer",
       "shift_actuation": "sequential-stick",
       "gearbox_type": "sequential",
       "manual_blip": "not-required",
@@ -813,6 +805,12 @@
       "record_id": "porsche-911-gt3-cup-4-0",
       "outcome": "confirmed",
       "observation_id": "ams2.porsche-911-gt3-cup-4-0.20260818t032529960z-914b1df5",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "formula-trainer",
+      "outcome": "corrected",
+      "observation_id": "ams2.formula-trainer.20260818t034145797z-f69de300",
       "rechecked_at": "2026-08-18"
     }
   ],

@@ -30,7 +30,7 @@
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
     },
@@ -47,7 +47,8 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
       "The gearbox is widely reported as an H-pattern, including in community summaries, and it is not. A Reiza internal tester explains that an H-shifter can be bound to a sequential gearbox in game as an accommodation for players without sequential hardware, and that the selection menu does not state transmissions, which is what the mistake comes from. The drive read the gearbox rather than the menu.",
-      "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
+      "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry.",
+      "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
   "simulators": [
@@ -65,7 +66,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "d-shaped",
@@ -75,7 +76,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-trainer.20260815t193249957z-9b053a92 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-trainer.20260815t193249957z-9b053a92 by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.formula-trainer.20260818t034145797z-f69de300, after the first measurement was found to read throttle carried in before the lift as the car's own. The car does not blip: the first reading was that fault. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -138,5 +140,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

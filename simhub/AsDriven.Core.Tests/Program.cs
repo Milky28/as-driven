@@ -1114,6 +1114,30 @@ namespace AsDriven.Core.Tests
                         False(noLift.GetSnapshot().ResultReady,
                             "never accepts a full-throttle shift as a lifted-throttle upshift");
                     }
+
+                    // Changing gear while getting up to speed is not an attempt
+                    // at the lifted-throttle test. Counting any gear change
+                    // recorded a gearbox needing its clutch on a test the driver
+                    // was skipping past.
+                    {
+                        GuidedVerificationDrive rolling = new GuidedVerificationDrive();
+                        rolling.Start(6);
+                        for (int guard = 0; guard < 40
+                            && rolling.GetSnapshot().Title != "Lifted-throttle upshift"; guard++)
+                        {
+                            rolling.AddSample(GuidedSample(now, 3, 0, 0, 3000, 60, 100, true));
+                            rolling.Next();
+                        }
+                        // Driving along, shifting up on the power, never lifting.
+                        rolling.AddSample(GuidedSample(now, 3, 0, 95, 5400, 75, 240, true));
+                        rolling.AddSample(GuidedSample(now.AddMilliseconds(120), 4, 0, 95, 4600, 78, 235, true));
+                        rolling.Next();
+                        True(rolling.GetSnapshot().Result.Contains("Nothing was measured"),
+                            "a shift taken on the power is not an attempt at the lifted test");
+                        rolling.Next();
+                        Equal("not-tested", rolling.GetResults().ClutchlessUpshift,
+                            "never records a clutch requirement from a test nobody ran");
+                    }
                     }
                     // This car crept away with the clutch channel high and the
                     // result was accepted as clutch-free, which is the one
