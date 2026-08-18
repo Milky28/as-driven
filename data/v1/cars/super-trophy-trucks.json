@@ -116,7 +116,6 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/forward_gears",
           "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern",
@@ -126,8 +125,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91",
-          "stadiumsupertrucks.truck-specification"
+          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91"
         ],
         "confidence": "verified",
         "basis": "Guided current-game testing and cockpit inspection directly established the automatic behavior, manual lever override, ratios, blip, and wheel."
@@ -141,6 +139,17 @@
         ],
         "confidence": "unknown",
         "basis": "The test did not reliably establish whether the automatic transmission performs an observable throttle cut."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears"
+        ],
+        "source_refs": [
+          "ams2.local-live-super-trophy-trucks-controls.1.6.9.91",
+          "stadiumsupertrucks.truck-specification"
+        ],
+        "confidence": "high",
+        "basis": "The series' own specification gives a two or three speed transmission depending on track configuration, and the drive found three ratios. The same source says nothing about how the gearbox is operated, so it backs the count alone."
       }
     ]
   },

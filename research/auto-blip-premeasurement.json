@@ -1,0 +1,821 @@
+{
+  "schema_version": "1.0.0",
+  "recorded_at": "2026-08-17",
+  "title": "Automatic-blip readings taken before the measurement was corrected",
+  "why": "Until 2026-08-17 the guided drive decided the automatic blip from the highest throttle seen since the attempt began. A coast-downshift attempt normally starts with the driver still on throttle - up to speed in a high gear, then lift, then downshift - so throttle carried in before the lift was read as the car blipping. The blip is now measured only from the lift, when arming has already required a closed throttle.",
+  "why_it_is_one_sided": "The fault could only invent a blip, never hide one. A recorded 'no' means the threshold was never crossed at all, so every no in the dataset is sound and only yes is exposed. Records whose behaviour is corroborated by something other than the drive are also excluded here.",
+  "what_it_costs": "A false yes corrupts two fields. The importer derives manual_blip as not-required whenever an automatic blip was seen, so the card tells the driver no blip is needed on a car that needs one. That is wrong technique, not just wrong metadata.",
+  "evidence": "Four rallycross cars were re-driven after the fix. Two of the four - MINI Countryman R60 RX and Mitsubishi Lancer Evo10 RX - had recorded a blip they do not have. The Citroen DS3 RX kept its blip and the Volkswagen Polo RX kept its absence, so the corrected measurement discriminates rather than simply reporting no. All four are sequential-stick cars, which is why stick and dog gearboxes are the priority below.",
+  "how_to_clear_an_entry": "Re-drive the coast-downshift test on the fixed build and promote the result. Only that one step is needed: skipping the others records nothing rather than a negative, as of the same day. An entry also clears if a real-world source establishes the blip.",
+  "priorities": {
+    "recheck": "Re-drive the downshift test: a stick or dog gearbox, where an automatic blip is least expected and the one batch that was rechecked came back half wrong.",
+    "low": "Left as measured: a paddle car with a semi-automatic, dual-clutch or modern sequential gearbox, where blipping on downshift is what the electronics are for."
+  },
+  "counts": {
+    "recheck": 14,
+    "low": 86
+  },
+  "records": [
+    {
+      "record_id": "courage-c60-hybrid",
+      "class": "LMP1 2005",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "formula-trainer",
+      "class": "Formula Trainer",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "formula-trainer-advanced",
+      "class": "Formula Trainer Advanced",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "ginetta-g40",
+      "class": "GT5",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "unknown",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "ginetta-g55-gt3",
+      "class": "GT Open",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "unknown",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "mcr-s2000",
+      "class": "P4",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "mercedes-benz-clk-lm",
+      "class": "GT1",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "metalmoro-mrx-duratec-turbo-p2",
+      "class": "P2",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "metalmoro-mrx-honda-p3",
+      "class": "P3",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "mini-cooper-jcw",
+      "class": "MINI Challenge JCW",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "porsche-911-gt3-cup-3-8",
+      "class": "Carrera Cup",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dogbox",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "porsche-911-gt3-cup-4-0",
+      "class": "Carrera Cup",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dogbox",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "porsche-996-gt3-rsr",
+      "class": "GT2 2005",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "super-trophy-trucks",
+      "class": "Super Trophy Trucks",
+      "shift_actuation": "sequential-stick",
+      "gearbox_type": "automatic",
+      "manual_blip": "not-required",
+      "priority": "recheck"
+    },
+    {
+      "record_id": "alpine-a110-gt4-evo",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "aston-martin-valkyrie",
+      "class": "Hypercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "aston-martin-valkyrie-hypercar",
+      "class": "LMDh",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "aston-martin-vantage-gt3-evo",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "aston-martin-vantage-gt4-evo",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "aston-martin-vantage-gte",
+      "class": "GTE",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "audi-r8-lmp1",
+      "class": "LMP1 2005",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "audi-r8-lms-gt3",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "audi-r8-lms-gt3-evo-ii",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "audi-r8-v10-gt",
+      "class": "Supercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "bmw-m-hybrid-v8",
+      "class": "LMDh",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "bmw-m4-gt3",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "bmw-m4-gt4",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "bmw-m6-gt3",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "brabham-bt62",
+      "class": "Hypercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "cadillac-v-series-r",
+      "class": "LMDh",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "chevrolet-corvette-c8-r",
+      "class": "GTE",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "chevrolet-corvette-c8-z06-z07-upgrade",
+      "class": "Supercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "chevrolet-corvette-z06-gt3r",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "chevrolet-cruze-stock-car-2024",
+      "class": "Stock Car 2024",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-classic-gen3-model2-high-downforce",
+      "class": "Formula Classic Gen3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-classic-gen4-model1-high-downforce",
+      "class": "Formula Classic Gen4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-classic-gen4-model2-high-downforce",
+      "class": "Formula Classic Gen4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-edge-model1-high-downforce",
+      "class": "Formula Edge",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-edge-model2-high-downforce",
+      "class": "Formula Edge",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-edge-model3-high-downforce",
+      "class": "Formula Edge",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-hitech-gen1-model1-high-downforce",
+      "class": "Formula HiTech Gen1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-hitech-gen1-model2-high-downforce",
+      "class": "Formula HiTech Gen1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-hitech-gen1-model4-high-downforce",
+      "class": "Formula HiTech Gen1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-hitech-gen2-model1-high-downforce",
+      "class": "Formula HiTech Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-hitech-gen2-model2-high-downforce",
+      "class": "Formula HiTech Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-hitech-gen2-model3-high-downforce",
+      "class": "Formula HiTech Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-ultimate-hybrid-gen2-high-downforce",
+      "class": "Formula Ultimate Hybrid Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-v10-gen3-b-high-downforce",
+      "class": "Formula V10 Gen3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-v10-gen3-m-high-downforce",
+      "class": "Formula V10 Gen3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-v8-gen1-b-high-downforce",
+      "class": "Formula V8 Gen1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-v8-gen1-m-high-downforce",
+      "class": "Formula V8 Gen1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "formula-v8-gen2-high-downforce",
+      "class": "Formula V8 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ginetta-g55-gt4",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ginetta-g55-gt4-supercup",
+      "class": "Ginetta GT4 Supercup",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ginetta-g58",
+      "class": "P1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ginetta-g58-gen2",
+      "class": "P1 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lamborghini-huracan-gt3-evo2",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lamborghini-huracan-super-trofeo-evo2",
+      "class": "Super Trofeo",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lamborghini-revuelto",
+      "class": "Hypercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lamborghini-sc63",
+      "class": "LMDh",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lamborghini-veneno-roadster",
+      "class": "Hypercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ligier-js-p217",
+      "class": "LMP2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ligier-js-p320",
+      "class": "P1 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ligier-js-p4",
+      "class": "Ligier European Series",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "ligier-js2-r",
+      "class": "Ligier European Series",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lola-b05-40-turbo",
+      "class": "LMP2 2005",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "lola-b05-40-v8",
+      "class": "LMP2 2005",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "maserati-gransport-trofeo",
+      "class": "Maserati Trofeo",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "maserati-gt2-stradale",
+      "class": "Supercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mclaren-570s-gt4",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mclaren-720s-gt3",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mclaren-cosworth-mp4-8-high-downforce",
+      "class": "Formula One",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mclaren-honda-mp4-7a-high-downforce",
+      "class": "Formula One",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mclaren-mercedes-mp4-12-high-downforce",
+      "class": "Formula One",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "semi-automatic",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mclaren-senna",
+      "class": "Hypercars",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mercedes-amg-gt3",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mercedes-amg-gt3-evo",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "mercedes-amg-gt4",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-chevrolet",
+      "class": "P1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-gen2-chevrolet",
+      "class": "P1 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-gen2-honda",
+      "class": "P1 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-gen2-nissan",
+      "class": "P1 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-honda",
+      "class": "P1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-judd",
+      "class": "P1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "metalmoro-ajr-nissan",
+      "class": "P1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "nissan-gt-r-nismo-gt3",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "oreca-07",
+      "class": "LMP2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "porsche-911-gt3-r",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "porsche-911-rsr-gte",
+      "class": "GTE",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "porsche-963",
+      "class": "LMDh",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "porsche-992-gt3-r",
+      "class": "GT3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "porsche-cayman-gt4-clubsport-mr",
+      "class": "GT4",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "dual-clutch",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "renault-r25-high-downforce",
+      "class": "Formula V10 Gen3",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "renault-r26-high-downforce",
+      "class": "Formula V8 Gen1",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "renault-r28-high-downforce",
+      "class": "Formula V8 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "sigma-p1",
+      "class": "P2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "sigma-p1-g5",
+      "class": "P1 Gen2",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "stock-usa-gen3-lm",
+      "class": "Stock USA Gen3 LM",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "toyota-corolla-stock-car-2022",
+      "class": "Stock Car Pro Series",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    },
+    {
+      "record_id": "toyota-corolla-stock-car-2024",
+      "class": "Stock Car 2024",
+      "shift_actuation": "sequential-paddles",
+      "gearbox_type": "sequential",
+      "manual_blip": "not-required",
+      "priority": "low"
+    }
+  ],
+  "excluded": "Records whose simulator behaviour is cited to something besides the drive are not listed. That exclusion is only sound where the other source actually speaks to the blip: two records had a real-world source attached to a claim that happened to bundle the simulator's behaviour with the real car's gearbox, which made a spec sheet look like corroboration of a blip it never mentions. Those claims were split."
+}

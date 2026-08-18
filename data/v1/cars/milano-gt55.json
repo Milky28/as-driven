@@ -138,22 +138,31 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
-          "/authentic_controls/transmission/shift_actuation",
-          "/authentic_controls/transmission/shift_pattern",
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.local-live-milano-gt55-controls.1.6.9.91",
-          "evo.ferrari-550-maranello-prodrive"
+          "ams2.local-live-milano-gt55-controls.1.6.9.91"
         ],
         "confidence": "verified",
         "basis": "Direct current-game testing and cockpit inspection establish the modeled hardware, start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift"
+        ],
+        "source_refs": [
+          "ams2.local-live-milano-gt55-controls.1.6.9.91",
+          "evo.ferrari-550-maranello-prodrive"
+        ],
+        "confidence": "high",
+        "basis": "The registered technical account gives a six-speed Xtrac sequential with a flat-shift facility, needing no clutch for an upshift and the clutch for every downshift, which the drive's six gears and automatic cut agree with. It says nothing about the rim or about what the simulator does, so those stay on the drive."
       }
     ]
   },
