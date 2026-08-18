@@ -11,13 +11,15 @@
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "not-required",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "round"
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut and blip, and round no-display rim were directly observed.",
   "scope_notes": "Historical evidence supports the sequential gearbox and ignition cut; simulator-specific start and downshift behavior comes from the exact live test."

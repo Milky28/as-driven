@@ -77,7 +77,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.metalmoro-mrx-duratec-turbo-p2.20260817t043226978z-3f9b785f by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.metalmoro-mrx-duratec-turbo-p2.20260817t043226978z-3f9b785f by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.metalmoro-mrx-duratec-turbo-p2.20260818t041706692z-3bcf03f9, and held under the corrected measurement: the spike is the car's."
         ]
       },
       "overrides": [],
@@ -137,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-18"
 }

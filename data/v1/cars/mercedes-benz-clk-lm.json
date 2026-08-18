@@ -31,7 +31,7 @@
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
     },
@@ -47,7 +47,8 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
-      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
+      "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
   "simulators": [
@@ -69,7 +70,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "round",
@@ -79,7 +80,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mercedes-benz-clk-lm.20260815t234325634z-7a6a292a by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mercedes-benz-clk-lm.20260815t234325634z-7a6a292a by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.mercedes-benz-clk-lm.20260818t040207012z-4b0694be. The car does not blip: the first reading was the old measurement seeing throttle carried in before the lift. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -139,5 +141,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-15"
+  "updated_at": "2026-08-18"
 }

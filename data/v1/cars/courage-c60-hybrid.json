@@ -84,7 +84,8 @@
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
           "Standing-start clutch, six-speed sequential stick without paddles, automatic cut and blip, and D-shaped small-display rim were directly observed.",
-          "'Courage C60 Hybrid - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
+          "'Courage C60 Hybrid - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.courage-c60-hybrid.20260818t041205635z-c8e29c25, and held under the corrected measurement: the spike is the car's."
         ]
       },
       "overrides": [],
@@ -148,5 +149,5 @@
   "notes": [
     "'Courage C60 Hybrid - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

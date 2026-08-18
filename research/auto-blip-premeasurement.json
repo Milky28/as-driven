@@ -12,82 +12,10 @@
     "low": "Left as measured: a paddle car with a semi-automatic, dual-clutch or modern sequential gearbox, where blipping on downshift is what the electronics are for."
   },
   "counts": {
-    "recheck": 9,
+    "recheck": 0,
     "low": 86
   },
   "records": [
-    {
-      "record_id": "courage-c60-hybrid",
-      "class": "LMP1 2005",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "ginetta-g40",
-      "class": "GT5",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "unknown",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "mcr-s2000",
-      "class": "P4",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "mercedes-benz-clk-lm",
-      "class": "GT1",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "metalmoro-mrx-duratec-turbo-p2",
-      "class": "P2",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "metalmoro-mrx-honda-p3",
-      "class": "P3",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "mini-cooper-jcw",
-      "class": "MINI Challenge JCW",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "porsche-996-gt3-rsr",
-      "class": "GT2 2005",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "super-trophy-trucks",
-      "class": "Super Trophy Trucks",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "automatic",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
     {
       "record_id": "alpine-a110-gt4-evo",
       "class": "GT4",
@@ -808,7 +736,62 @@
       "outcome": "confirmed",
       "observation_id": "ams2.ginetta-g55-gt3.20260818t035447338z-28cd06b0",
       "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "mercedes-benz-clk-lm",
+      "outcome": "corrected",
+      "observation_id": "ams2.mercedes-benz-clk-lm.20260818t040207012z-4b0694be",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "ginetta-g40",
+      "outcome": "corrected",
+      "observation_id": "ams2.ginetta-g40.20260818t040816521z-8b28290b",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "mini-cooper-jcw",
+      "outcome": "corrected",
+      "observation_id": "ams2.mini-cooper-jcw.20260818t041508376z-da98c806",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "metalmoro-mrx-honda-p3",
+      "outcome": "corrected",
+      "observation_id": "ams2.metalmoro-mrx-honda-p3.20260818t041859673z-d8236075",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "mcr-s2000",
+      "outcome": "corrected",
+      "observation_id": "ams2.mcr-s2000.20260818t042136047z-843e9442",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "porsche-996-gt3-rsr",
+      "outcome": "confirmed",
+      "observation_id": "ams2.porsche-996-gt3-rsr.20260818t040508728z-3d936a61",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "courage-c60-hybrid",
+      "outcome": "confirmed",
+      "observation_id": "ams2.courage-c60-hybrid.20260818t041205635z-c8e29c25",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "metalmoro-mrx-duratec-turbo-p2",
+      "outcome": "confirmed",
+      "observation_id": "ams2.metalmoro-mrx-duratec-turbo-p2.20260818t041706692z-3bcf03f9",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "super-trophy-trucks",
+      "outcome": "confirmed",
+      "observation_id": "ams2.super-trophy-trucks.20260818t042330792z-e8e64ebc",
+      "rechecked_at": "2026-08-18"
     }
   ],
-  "cleared_note": "Re-driven on the corrected measurement and resolved. A confirmed entry keeps the value it had; a corrected one had the blip removed. Both Carrera Cup cars held their blip, which is worth recording because they are dog gearboxes, where a self-blipping downshift is the less expected answer."
+  "cleared_note": "Re-driven on the corrected measurement and resolved. A confirmed entry keeps the value it had; a corrected one had the blip removed. Both Carrera Cup cars held their blip, which is worth recording because they are dog gearboxes, where a self-blipping downshift is the less expected answer.",
+  "outcome": "The whole recheck tier is done: 14 records re-driven, 7 corrected and 7 confirmed. The corrections all ran the same way - a blip the car does not have, read from throttle the driver was still carrying before the lift. The confirmations matter as much: the corrected measurement keeps a blip where there is one, so it discriminates rather than simply reporting no."
 }

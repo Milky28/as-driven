@@ -30,7 +30,7 @@
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
     },
@@ -48,7 +48,8 @@
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
       "The championship names the gearbox but not its gear count, so the six gears come from the drive. It is a racing Quaife sequential, and the car provides its own blip, so no claim is made about whether a driver blip would otherwise be needed.",
       "This is a different car from the road-going MINI John Cooper Works Challenge, which is sold with a six-speed manual rather than a sequential.",
-      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
+      "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
+      "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
   "simulators": [
@@ -66,7 +67,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "round",
@@ -76,7 +77,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mini-cooper-jcw.20260816t043015744z-26d913b2 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mini-cooper-jcw.20260816t043015744z-26d913b2 by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.mini-cooper-jcw.20260818t041508376z-da98c806. The car does not blip: the first reading was the old measurement seeing throttle carried in before the lift. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -136,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

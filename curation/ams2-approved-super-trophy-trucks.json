@@ -13,7 +13,6 @@
     "shift_actuation": "sequential-stick",
     "shift_pattern": "sequential",
     "standing_start_clutch": "not-applicable",
-    "running_shift_clutch": "not-applicable",
     "throttle_lift": "not-applicable",
     "automatic_cut": "unknown",
     "automatic_blip": "yes",
@@ -21,7 +20,8 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no"
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-applicable"
   },
   "confidence_notes": "The automatic shifting behavior, three ratios, visible sequential manual-override lever, automatic blip, and wheel were directly observed. Automatic cut remains unknown.",
   "scope_notes": "Fictional Reiza series with no real-world model. Gearbox construction is automatic; sequential-stick records the modeled manual override interface."

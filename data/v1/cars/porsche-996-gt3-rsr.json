@@ -76,7 +76,8 @@
         },
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Standing-start clutch, six-speed sequential stick without paddles, automatic cut and blip, and round no-display rim were directly observed."
+          "Standing-start clutch, six-speed sequential stick without paddles, automatic cut and blip, and round no-display rim were directly observed.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.porsche-996-gt3-rsr.20260818t040508728z-3d936a61, and held under the corrected measurement: the spike is the car's."
         ]
       },
       "overrides": [],
@@ -137,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

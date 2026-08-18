@@ -30,7 +30,7 @@
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
     },
@@ -48,7 +48,8 @@
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
       "The clutch is needed to pull away.",
       "The source offers two gearbox makes for the car and does not say which this specification carries. Both are five-speed sequentials, which is what the drive found, so the gear count and construction stand while the make is not claimed.",
-      "The only five-speed car in this batch; its classmates all selected six."
+      "The only five-speed car in this batch; its classmates all selected six.",
+      "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
   "simulators": [
@@ -66,7 +67,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "d-shaped",
@@ -76,7 +77,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mcr-s2000.20260817t044512882z-83f67c74 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mcr-s2000.20260817t044512882z-83f67c74 by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.mcr-s2000.20260818t042136047z-843e9442. The car does not blip: the first reading was the old measurement seeing throttle carried in before the lift. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -136,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-18"
 }

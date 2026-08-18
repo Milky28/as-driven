@@ -31,7 +31,7 @@
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "not-required"
     },
@@ -50,7 +50,8 @@
       "The clutch is not needed to pull away.",
       "Shares the P3 class with the MRX Duratec Turbo P3 and behaves differently: this car pulls away without the clutch and blips its own downshifts. Both were driven separately.",
       "Metalmoro states only that the MRX accepts several engine and gearbox options, so no reviewed source establishes which gearbox this configuration carries. The sequential construction is what the drive showed.",
-      "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence."
+      "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence.",
+      "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
   "simulators": [
@@ -68,7 +69,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "round",
@@ -78,7 +79,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.metalmoro-mrx-honda-p3.20260817t043937857z-3caf7179 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.metalmoro-mrx-honda-p3.20260817t043937857z-3caf7179 by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.metalmoro-mrx-honda-p3.20260818t041859673z-d8236075. The car does not blip: the first reading was the old measurement seeing throttle carried in before the lift. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -138,5 +140,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-18"
 }

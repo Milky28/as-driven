@@ -83,7 +83,8 @@
         },
         "notes": [
           "Guided test completed in AMS2 1.6.9.91.",
-          "The automatic transmission shifted itself; the visible sequential lever provides a manual override and is the modeled physical selector."
+          "The automatic transmission shifted itself; the visible sequential lever provides a manual override and is the modeled physical selector.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.super-trophy-trucks.20260818t042330792z-e8e64ebc, and held under the corrected measurement: the spike is the car's."
         ]
       },
       "overrides": [],
@@ -154,5 +155,5 @@
     ]
   },
   "driver_summary": "It shifts itself. The sequential lever in the cockpit overrides the automatic box but is never required.",
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

@@ -31,8 +31,8 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
-        "automatic_blip": "yes"
+        "manual_blip": "not-required",
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
     },
@@ -49,7 +49,8 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
       "The drive found automatic blip without automatic cut. Every other curated sequential-stick car has automatic cut, so this pairing has no precedent in the dataset and the observation is recorded as seen rather than normalised.",
-      "The downshift blip stays unknown. AMS2 blips for the driver, but no reviewed source establishes whether the real Quaife sequential does, and a dog-engagement sequential would normally need a driver blip. Recording not-required would claim the real car blips for itself, which the evidence does not support."
+      "The downshift blip stays unknown. AMS2 blips for the driver, but no reviewed source establishes whether the real Quaife sequential does, and a dog-engagement sequential would normally need a driver blip. Recording not-required would claim the real car blips for itself, which the evidence does not support.",
+      "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
   "simulators": [
@@ -67,7 +68,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "no",
         "wheel_rim_type": {
           "normalized": "round",
@@ -77,7 +78,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g40.20260814t045231829z-63a60fdf by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g40.20260814t045231829z-63a60fdf by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.ginetta-g40.20260818t040816521z-8b28290b. The car does not blip: the first reading was the old measurement seeing throttle carried in before the lift. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -137,5 +139,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-13"
+  "updated_at": "2026-08-18"
 }
