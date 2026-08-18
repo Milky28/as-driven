@@ -671,11 +671,14 @@ namespace AsDriven.Core.Tests
                 }
                 Equal(5, database.Match("Automobilista2", "MCR S2000").GearCount,
                     "the MCR is the batch's only five-speed");
-                // Two P3 cars, opposite answers, driven separately.
+                // Both P3 cars leave the blip to the driver. They were recorded
+                // as disagreeing, which was the old blip measurement reading the
+                // driver's throttle as the Honda's; a re-drive corrected it, and
+                // the contrast this used to assert was the fault itself.
                 Equal("no", database.Match("Automobilista2", "MetalMoro MRX Duratec Turbo P3").AutoBlip,
                     "the Duratec Turbo P3 does not blip for the driver");
-                Equal("yes", database.Match("Automobilista2", "MetalMoro MRX Honda P3").AutoBlip,
-                    "its Honda classmate does");
+                Equal("no", database.Match("Automobilista2", "MetalMoro MRX Honda P3").AutoBlip,
+                    "and neither does its Honda classmate");
                 // A gearbox no source names must not claim a blip requirement.
                 Equal("unknown",
                     database.Match("Automobilista2", "Roco 001").ManualBlip,
