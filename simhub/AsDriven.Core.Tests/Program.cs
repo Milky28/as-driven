@@ -1063,6 +1063,57 @@ namespace AsDriven.Core.Tests
                             "leaves an unattempted upshift unanswered");
                         Equal("not-tested", untried.GetResults().AutomaticCut,
                             "never infers an automatic cut from a test nobody ran");
+
+                    // Sitting at the line in gear is where a driver waits, not
+                    // an attempt to pull away. Counting the gear recorded a car
+                    // that needs its clutch on a test nobody ran.
+                    {
+                        GuidedVerificationDrive waiting = new GuidedVerificationDrive();
+                        waiting.Start(6);
+                        for (int guard = 0; guard < 5
+                            && waiting.GetSnapshot().Title != "Move-off clutch test"; guard++)
+                        {
+                            waiting.Next();
+                        }
+                        waiting.AddSample(GuidedSample(now, 1, 0, 0, 1200, 0, 40, true));
+                        waiting.Next();
+                        True(waiting.GetSnapshot().Result.Contains("Nothing was measured"),
+                            "waiting in gear is not an attempt to pull away");
+                        waiting.Next();
+                        Equal("not-tested", waiting.GetResults().MoveOffWithoutPhysicalClutch,
+                            "leaves the move-off unanswered when the car was never asked to move");
+
+                        // And the gear count concludes instead of hanging when
+                        // no gear was ever engaged.
+                        Equal("Forward gears", waiting.GetSnapshot().Title, "reaches the gear count");
+                        waiting.Next();
+                        True(waiting.GetSnapshot().Result.Contains("no gear was ever engaged"),
+                            "the gear count concludes rather than refusing to advance");
+                        waiting.Next();
+                        True(waiting.GetSnapshot().Title != "Forward gears", "the gear count advances");
+                    }
+
+                    // A shift taken at full throttle is not a lifted-throttle
+                    // upshift, however long the driver coasted beforehand.
+                    {
+                        GuidedVerificationDrive noLift = new GuidedVerificationDrive();
+                        noLift.Start(6);
+                        for (int guard = 0; guard < 40
+                            && noLift.GetSnapshot().Title != "Lifted-throttle upshift"; guard++)
+                        {
+                            noLift.AddSample(GuidedSample(now, 3, 0, 0, 3000, 60, 100, true));
+                            noLift.Next();
+                        }
+                        Equal("Lifted-throttle upshift", noLift.GetSnapshot().Title, "reaches the lifted upshift");
+                        // Coasting when the test arms, then full throttle through
+                        // the shift without ever lifting for it.
+                        noLift.AddSample(GuidedSample(now, 3, 0, 0, 4000, 70, 90, true));
+                        noLift.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 95, 5400, 75, 240, true));
+                        noLift.AddSample(GuidedSample(now.AddMilliseconds(200), 4, 0, 95, 4600, 77, 235, true));
+                        noLift.AddSample(GuidedSample(now.AddMilliseconds(900), 4, 0, 95, 4900, 82, 235, true));
+                        False(noLift.GetSnapshot().ResultReady,
+                            "never accepts a full-throttle shift as a lifted-throttle upshift");
+                    }
                     }
                     // This car crept away with the clutch channel high and the
                     // result was accepted as clutch-free, which is the one

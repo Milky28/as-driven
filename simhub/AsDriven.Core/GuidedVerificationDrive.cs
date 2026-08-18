@@ -127,6 +127,13 @@ namespace AsDriven.Core
         private int _previousGear;
         /// <summary>Nothing was measured, so the answer stays unrecorded.</summary>
         private bool _attemptNotTested;
+        /// <summary>
+        /// Throttle at the moment the gear went up. The lift check used the
+        /// lowest throttle since arming, and arming only needs the car to be
+        /// rolling, so coasting up to the test counted as the lift and a
+        /// shift taken at full throttle passed as a lifted one.
+        /// </summary>
+        private double _upshiftThrottleAtChange;
         private bool _attemptAccepted;
         private bool _automaticActionObserved;
         private bool _resultReady;
@@ -531,7 +538,11 @@ namespace AsDriven.Core
             {
                 return;
             }
-            bool liftObserved = _upshiftMinimumThrottle <= 45.0;
+            if (double.IsNaN(_upshiftThrottleAtChange))
+            {
+                _upshiftThrottleAtChange = sample.Throttle;
+            }
+            bool liftObserved = _upshiftThrottleAtChange <= 45.0;
             if (requireLift && !liftObserved)
             {
                 return;
@@ -804,9 +815,14 @@ namespace AsDriven.Core
             switch (_phase)
             {
                 case Phase.MoveOff:
-                    return _maximumThrottle >= 5.0 || _maximumGear > 0;
+                    // Being in gear is where a driver waits, not something they
+                    // did. Only asking the car to move counts, by throttle or by
+                    // a car that creeps away without any.
+                    return _maximumThrottle >= 5.0 || _moveOffMovementStartedUtc.HasValue;
                 case Phase.GearCount:
-                    return true;
+                    // With no gear ever seen there is nothing to report, and the
+                    // phase used to sit there refusing to conclude or advance.
+                    return _maximumGear > 0;
                 default:
                     return _gearChangeSeen;
             }
@@ -814,6 +830,11 @@ namespace AsDriven.Core
 
         private static string NothingMeasuredMessage(Phase phase)
         {
+            if (phase == Phase.GearCount)
+            {
+                return "Nothing was measured: no gear was ever engaged, so no gear count is recorded. "
+                    + "Retry, or answer it in the form.";
+            }
             if (phase == Phase.MoveOff)
             {
                 return "Nothing was measured: the car was never asked to pull away. This is left "
@@ -865,6 +886,7 @@ namespace AsDriven.Core
             _gearChangeSeen = false;
             _previousGear = int.MinValue;
             _attemptNotTested = false;
+            _upshiftThrottleAtChange = double.NaN;
             _attemptAccepted = false;
             _automaticActionObserved = false;
             _engineWasRunning = false;
