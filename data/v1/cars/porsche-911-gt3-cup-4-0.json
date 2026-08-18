@@ -77,7 +77,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt3-cup-4-0.20260817t053533610z-cdfa71d6 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt3-cup-4-0.20260817t053533610z-cdfa71d6 by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.porsche-911-gt3-cup-4-0.20260818t032529960z-914b1df5, after the first measurement was found to read throttle carried in before the lift as the car's own. It held: the spike is the car's."
         ]
       },
       "overrides": [],
@@ -137,6 +138,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-17",
+  "updated_at": "2026-08-18",
   "driver_summary": "Porsche dog-type gearbox, but the car blips its own downshifts, so there is no rev-matching to do. The clutch is needed only to pull away."
 }

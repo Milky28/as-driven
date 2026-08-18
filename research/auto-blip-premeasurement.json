@@ -12,7 +12,7 @@
     "low": "Left as measured: a paddle car with a semi-automatic, dual-clutch or modern sequential gearbox, where blipping on downshift is what the electronics are for."
   },
   "counts": {
-    "recheck": 14,
+    "recheck": 12,
     "low": 86
   },
   "records": [
@@ -93,22 +93,6 @@
       "class": "MINI Challenge JCW",
       "shift_actuation": "sequential-stick",
       "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "porsche-911-gt3-cup-3-8",
-      "class": "Carrera Cup",
-      "shift_actuation": "sequential-paddles",
-      "gearbox_type": "dogbox",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "porsche-911-gt3-cup-4-0",
-      "class": "Carrera Cup",
-      "shift_actuation": "sequential-paddles",
-      "gearbox_type": "dogbox",
       "manual_blip": "not-required",
       "priority": "recheck"
     },
@@ -817,5 +801,20 @@
       "priority": "low"
     }
   ],
-  "excluded": "Records whose simulator behaviour is cited to something besides the drive are not listed. That exclusion is only sound where the other source actually speaks to the blip: two records had a real-world source attached to a claim that happened to bundle the simulator's behaviour with the real car's gearbox, which made a spec sheet look like corroboration of a blip it never mentions. Those claims were split."
+  "excluded": "Records whose simulator behaviour is cited to something besides the drive are not listed. That exclusion is only sound where the other source actually speaks to the blip: two records had a real-world source attached to a claim that happened to bundle the simulator's behaviour with the real car's gearbox, which made a spec sheet look like corroboration of a blip it never mentions. Those claims were split.",
+  "cleared": [
+    {
+      "record_id": "porsche-911-gt3-cup-3-8",
+      "outcome": "confirmed",
+      "observation_id": "ams2.porsche-911-gt3-cup-3-8.20260818t032356462z-3035906b",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "porsche-911-gt3-cup-4-0",
+      "outcome": "confirmed",
+      "observation_id": "ams2.porsche-911-gt3-cup-4-0.20260818t032529960z-914b1df5",
+      "rechecked_at": "2026-08-18"
+    }
+  ],
+  "cleared_note": "Re-driven on the corrected measurement and resolved. A confirmed entry keeps the value it had; a corrected one had the blip removed. Both Carrera Cup cars held their blip, which is worth recording because they are dog gearboxes, where a self-blipping downshift is the less expected answer."
 }
