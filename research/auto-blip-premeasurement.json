@@ -12,7 +12,7 @@
     "low": "Left as measured: a paddle car with a semi-automatic, dual-clutch or modern sequential gearbox, where blipping on downshift is what the electronics are for."
   },
   "counts": {
-    "recheck": 11,
+    "recheck": 9,
     "low": 86
   },
   "records": [
@@ -25,24 +25,8 @@
       "priority": "recheck"
     },
     {
-      "record_id": "formula-trainer-advanced",
-      "class": "Formula Trainer Advanced",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "recheck"
-    },
-    {
       "record_id": "ginetta-g40",
       "class": "GT5",
-      "shift_actuation": "sequential-stick",
-      "gearbox_type": "sequential",
-      "manual_blip": "unknown",
-      "priority": "recheck"
-    },
-    {
-      "record_id": "ginetta-g55-gt3",
-      "class": "GT Open",
       "shift_actuation": "sequential-stick",
       "gearbox_type": "sequential",
       "manual_blip": "unknown",
@@ -811,6 +795,18 @@
       "record_id": "formula-trainer",
       "outcome": "corrected",
       "observation_id": "ams2.formula-trainer.20260818t034145797z-f69de300",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "formula-trainer-advanced",
+      "outcome": "corrected",
+      "observation_id": "ams2.formula-trainer-advanced.20260818t035006434z-59e6a110",
+      "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "ginetta-g55-gt3",
+      "outcome": "confirmed",
+      "observation_id": "ams2.ginetta-g55-gt3.20260818t035447338z-28cd06b0",
       "rechecked_at": "2026-08-18"
     }
   ],

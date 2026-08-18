@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -30,7 +30,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
       "standing_start_clutch": "required"
@@ -48,7 +48,8 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "Unlike the paddle-shift GT3 cars this one is shifted by a sequential lever and requires the clutch to move off from rest.",
-      "The drive detected automatic cut and automatic blip despite the sequential lever. That pairing has no precedent among curated cars, so the upshift throttle lift and the downshift manual blip are deliberately left unknown rather than inferred from the automation."
+      "The drive detected automatic cut and automatic blip despite the sequential lever. That pairing has no precedent among curated cars, so the upshift throttle lift and the downshift manual blip are deliberately left unknown rather than inferred from the automation.",
+      "The car cuts for upshifts and blips its own downshifts, both observed live, so neither a lift nor a blip is required of the driver."
     ]
   },
   "simulators": [
@@ -76,7 +77,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g55-gt3.20260813t155637372z-2d1a84f9 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g55-gt3.20260813t155637372z-2d1a84f9 by Jason Kinslow.",
+          "Re-driven in full on 2026-08-18 in AMS2 1.6.9.91, observation ams2.ginetta-g55-gt3.20260818t035447338z-28cd06b0. The automatic blip held under the corrected measurement, and the drive took a clutchless upshift at full throttle, which settles the throttle lift and the manual blip that the record had left unknown."
         ]
       },
       "overrides": [],
@@ -136,5 +138,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

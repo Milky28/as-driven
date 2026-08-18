@@ -30,7 +30,7 @@
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
     },
@@ -65,7 +65,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "d-shaped",
@@ -75,7 +75,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-trainer-advanced.20260815t193525122z-0e83d30a by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-trainer-advanced.20260815t193525122z-0e83d30a by Jason Kinslow.",
+          "The automatic blip was re-measured on 2026-08-18 in AMS2 1.6.9.91, observation ams2.formula-trainer-advanced.20260818t035006434z-59e6a110. The car does not blip: the first reading was the old measurement seeing throttle carried in before the lift. The downshift was still accepted with no pedal input, so no blip is needed to engage the gear."
         ]
       },
       "overrides": [],
@@ -138,5 +139,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-18"
 }

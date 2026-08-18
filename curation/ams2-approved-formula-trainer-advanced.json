@@ -15,7 +15,7 @@
     "standing_start_clutch": "required",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
-    "automatic_blip": "yes",
+    "automatic_blip": "no",
     "manual_blip": "not-required",
     "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
