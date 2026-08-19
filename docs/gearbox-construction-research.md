@@ -38,7 +38,7 @@ search, and it is where the remaining work has to go.
 
 | Group | Records | Status |
 | --- | --- | --- |
-| Copa Truck | 5 | **Answered.** The regulation leaves the gearbox free |
+| Copa Truck | 5 | **Settled.** The regulation leaves the gearbox free, and is now cited |
 | Formula Vee | 2 | **Candidate**, on a primary Brazilian regulation |
 | Porsche 911 RSR 1974 | 1 | **Candidate**, at medium confidence |
 | Reiza's fictionalised cars | 17 | **Not researchable.** No source can exist |
@@ -47,7 +47,7 @@ search, and it is where the remaining work has to go.
 The 17 is the number that should change how this queue is read: nearly two in
 five of these records are not waiting on a source anyone could find.
 
-## Answered: Copa Truck
+## Settled: Copa Truck
 
 `iveco-stralis`, `man-tgx`, `mercedes-benz-actros`, `volkswagen-constellation`,
 `vulkan-truck`.
@@ -75,24 +75,36 @@ currently rest on the drive alone.
 leaves the unit to the team, and *sincronizado* and *garras* appear nowhere in
 the document. There is no single construction to curate.
 
-**Recommendation: leave `gearbox_type` unknown on all five, and record the
-regulation as the reason.** This is the better of the two available outcomes -
-not a gap awaiting a source, but a closed question with a citation. It would be
-the first place in the dataset where `unknown` is documented as the correct final
-answer rather than outstanding work, which is worth deciding deliberately.
+**Decided: `gearbox_type` stays unknown on all five, with the regulation cited as
+the reason.** Registered as `cba.copa-truck-2025.technical-regulations`
+(`homologation`, retrieved 2026-08-18) and added to the claim that covers the gear
+count, actuation, pattern and gearbox type on each record.
 
-Source if accepted: CBA Copa Truck technical regulations 2025, publisher
-Confederação Brasileira de Automobilismo, type `homologation`, retrieved
-2026-08-18,
-`https://www.cba.org.br/upload/downloads//806/copa-truck-regulamento-tecnico-2025-.pdf`
+This is the first place in the dataset where `unknown` is a documented conclusion
+rather than outstanding work, and the records say so: the deviation basis now
+reads that no further reading of the regulations will close it.
+
+It is also an evidence upgrade rather than only a citation. The records already
+asserted that "the regulations mandate a mechanically operated H-pattern manual
+gearbox but leave its design free" - but the claim rested on a Wikipedia article
+and a community AMS2 wiki restating the regulations. It now rests on Article 15.
 
 ## Candidate: Formula Vee
 
 `formula-vee-fin` (four-speed), `formula-vee-gen2` (five-speed).
 
-These were nearly missed. Formula Vee is a real category with a technical
-formula, not one of Reiza's inventions, and it was in the unresearchable pile
-until the grouping was checked.
+**Correction to an earlier draft of this note.** These were described as a new
+find. They are not: `fasp.formula-vee-2025-regulations` was already registered
+and is already cited by `formula-vee-gen2`, which still carries
+`gearbox_type: unknown`. Someone has read this source and left the field open,
+so what follows argues against a standing decision rather than filling a gap, and
+should be read that way.
+
+What is new here is narrower: Article 7.1 quoted directly, the four-speed variant
+identified alongside the five-speed, the observation that the two permitted
+transmissions match the two records' gear counts, and the independent
+corroboration from other national Formula Vee regulations. `formula-vee-fin` does
+not currently cite the FASP source at all.
 
 FASP 2025 Fórmula Vee technical regulations, Article 7 (TRANSMISSÕES):
 
@@ -196,11 +208,10 @@ construction. Listed so the search is not repeated.
 
 ## What to decide next
 
-1. **Copa Truck.** The only group where an answer exists now, and the answer is
-   that the regulation leaves the gearbox free. Deciding this also decides
-   whether a documented, permanent `unknown` is a state this project wants.
+1. ~~Copa Truck.~~ Decided: unknown, with Article 15 cited.
 2. **Formula Vee.** Whether the sealed-production-unit chain clears the bar at
-   medium, for two records.
+   medium, for two records - and note this reopens a question someone already
+   answered the other way with the same source in hand.
 3. **The 911 RSR**, on a weaker version of the same kind of chain.
 4. **Retire the 17 fictionalised records** from the queue, or decide what could
    ever settle them.

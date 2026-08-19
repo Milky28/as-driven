@@ -48,7 +48,7 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "The gearbox is a five-speed plus a launch gear, and first is locked out: it cannot be selected to pull away, so the driver starts in second and races on the remaining five. A tester found first unavailable in normal running and thought it a fault, which is the lockout rather than a modelling error, and the six observed gears are that 5+1.",
-      "The regulations mandate a mechanically operated H-pattern manual gearbox but leave its design free, so the engagement type is not established and the downshift blip stays unknown rather than being inferred from racing practice.",
+      "Article 15 of the series technical regulations mandates a lever and a mechanically operated H-pattern manual change, and in the same article leaves the gearbox itself free for all makes. The gate is therefore established by regulation, and the engagement type is left open by the series rather than merely unresearched, so the downshift blip stays unknown rather than being inferred from racing practice.",
       "Vulkan does not appear in the championship's list of competing manufacturers, so no real-world truck is identified. Its controls are recorded from the drive and the class regulations that all Copa Truck entries share."
     ]
   },
@@ -119,10 +119,11 @@
         "source_refs": [
           "wikipedia.copa-truck",
           "ams2wiki.mercedes-benz-actros",
-          "ams2.local-live-vulkan-truck-controls.1.6.9.91"
+          "ams2.local-live-vulkan-truck-controls.1.6.9.91",
+          "cba.copa-truck-2025.technical-regulations"
         ],
         "confidence": "medium",
-        "basis": "The championship regulations mandate a mechanically operated H-pattern manual gearbox, and the reference gives a 5-speed plus launch gear. The live drive selected six H-pattern gears, which is that 5+1. The guided drive found first locked out and pulled away in second, so the launch gear is not selectable in normal running."
+        "basis": "The series technical regulations fix the gate - a lever, a manual H-pattern change and a mechanical linkage - and in the same article leave the gearbox free for all makes, which is why the gear count and actuation stand while the construction does not. The drive found the same gate."
       },
       {
         "paths": [
@@ -151,7 +152,7 @@
       },
       {
         "path": "/authentic_controls/transmission/gearbox_type",
-        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+        "basis": "The gearbox type is not established, and the series is the reason. Article 15 of the Copa Truck technical regulations leaves the gearbox free for all makes, so trucks in the same field may carry different construction and there is no single value to curate. This is a settled answer rather than an outstanding one: no further reading of the regulations will close it."
       }
     ]
   },

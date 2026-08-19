@@ -3493,6 +3493,18 @@
       "notes": "Caterham list the Academy car as road legal. The current page describes the later six-speed specification; road-legality is the constant of the formula and is what the gearbox construction is inferred from."
     },
     {
+      "source_id": "cba.copa-truck-2025.technical-regulations",
+      "title": "Copa Truck - Regulamento Tecnico 2025",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads//806/copa-truck-regulamento-tecnico-2025-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-18",
+      "reuse_status": "facts-only-review",
+      "notes": "Official series regulations. Article 15 (CAMBIO) requires the gearbox to be coupled directly to the engine and states that the gearbox itself is free for all makes. Article 15.1a prohibits automatic and automated gearboxes and mandates a lever for a manual H-pattern change; 15.1b restricts the change mechanism to a rod or steel cable. The words sincronizado and garras appear nowhere in the document, so it fixes the gate and leaves the engagement type open by design rather than by omission."
+    },
+    {
       "source_id": "cba.stock-car-pro-2024.platform-annex",
       "title": "Anexo Tecnico Plataforma Stock Car Pro Series Car 2024",
       "publisher": "Confederacao Brasileira de Automobilismo",

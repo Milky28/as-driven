@@ -1,8 +1,8 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.82",
-  "released_at": "2026-08-18",
+  "dataset_version": "0.3.83",
+  "released_at": "2026-08-19",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
     "cars/alpine-a424.json",
