@@ -422,6 +422,43 @@ class ValidationTests(unittest.TestCase):
                 f"expected a first_gear_position error, got {errors}",
             )
 
+    def test_a_fictionalised_car_is_never_given_a_gearbox_it_cannot_have(self) -> None:
+        """The retirement, pinned so a later pass cannot undo it helpfully.
+
+        These cars stand in for an era rather than representing a chassis, so no
+        manufacturer, homologation sheet or registry exists to consult. The
+        failure mode this guards is the tempting one: filling the field in from
+        the era the car evokes, which is reasoning about a period rather than
+        evidence about a car. Each record's archetype basis has to say the gap is
+        permanent, or the queue will keep collecting them.
+        """
+        families = ("formula-classic", "formula-retro", "formula-vintage", "formula-dirt")
+        retired = 0
+        established = 0
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            if not record["record_id"].startswith(families):
+                continue
+            transmission = record["authentic_controls"]["transmission"]
+            if transmission["gearbox_type"] == "unknown":
+                self.assertIn(
+                    "Retired from the gearbox research queue",
+                    json.dumps(record["archetype"]),
+                    record["record_id"],
+                )
+                retired += 1
+                continue
+            # Being fictionalised does not make the field unreachable by itself.
+            # Where the mechanism is visible from the cockpit the drive settles
+            # it, and paddles are visible. What no drive can see, and no chassis
+            # exists to research, is whether an H-pattern box engages through
+            # synchronisers or dog rings - which is every one of the retired 17.
+            self.assertEqual(
+                transmission["shift_actuation"], "sequential-paddles", record["record_id"]
+            )
+            established += 1
+        self.assertEqual((retired, established), (17, 3))
+
     def test_archetypes_in_the_registry_are_fully_specified_and_unique(self) -> None:
         """An archetype that is itself uncertain cannot describe anything.
 

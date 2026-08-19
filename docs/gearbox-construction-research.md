@@ -41,7 +41,7 @@ search, and it is where the remaining work has to go.
 | Copa Truck | 5 | **Settled.** The regulation leaves the gearbox free, and is now cited |
 | Formula Vee | 2 | **Candidate**, on a primary Brazilian regulation |
 | Porsche 911 RSR 1974 | 1 | **Candidate**, at medium confidence |
-| Reiza's fictionalised cars | 17 | **Not researchable.** No source can exist |
+| Reiza's fictionalised cars | 17 | **Retired.** No source can exist for these |
 | Other real cars | 18 | Open, and needing homologation-class sources |
 
 The 17 is the number that should change how this queue is read: nearly two in
@@ -176,7 +176,7 @@ refuse. The same applies to `mercedes-benz-190e-2-5-16-evo-ii-dtm` and the rest
 of the Group A and DTM entries. What would settle it is the FIA Group A
 homologation papers, which list the permitted transmission variants.
 
-## Not researchable: the fictionalised cars
+## Retired: the fictionalised cars
 
 `formula-classic-gen1` through `gen4` (9), `formula-retro-*` (3),
 `formula-vintage-*` (4), `formula-dirt` (1).
@@ -184,16 +184,27 @@ homologation papers, which list the permitted transmission variants.
 These are Reiza's own cars, standing in for an era rather than representing a
 chassis. There is no manufacturer, no homologation sheet and no registry, so no
 real-world source could establish their construction, and any value assigned
-would be reasoning from the era the car evokes.
+would be reasoning from the era the car evokes rather than evidence about the
+car.
 
-**Recommendation: leave unknown and stop counting them as research debt.** They
-are not waiting on a source that exists. Classifying them would need a deliberate
-decision about what a fictionalised car's authentic controls mean, which is a
-data-model question rather than a research one.
+**Done: all 17 are retired from the queue**, each stating in its archetype basis
+that the gap is permanent. Nine were `undetermined` and eight `deviates`; the
+classifications are unchanged and so is every value. The only thing that changed
+is that the records no longer promise a reviewed source will eventually settle
+them, which both bases previously did.
 
-`formula-junior` is deliberately not in this list. Formula Junior was a real
-international category with a technical formula, so it belongs with the
-researchable records even though it has not been researched yet.
+**Being fictionalised is not on its own what makes the field unreachable**, and
+the first version of this note got that wrong. Three cars in these same families
+- `formula-classic-gen3-model2`, `gen4-model1` and `gen4-model2` - carry an
+established `semi-automatic` gearbox, because they are paddle-shift and the
+mechanism is visible from the cockpit. What no drive can see and no chassis
+exists to research is whether an H-pattern box engages through synchronisers or
+dog rings, and every one of the retired 17 is H-pattern. A test pins that
+distinction so a later pass cannot fill the field in from the era.
+
+`formula-junior` is deliberately not retired. Formula Junior was a real
+international category with a technical formula, so it stays in the researchable
+group even though it has not been researched yet.
 
 ## Corroborated, but no further
 
@@ -213,7 +224,11 @@ construction. Listed so the search is not repeated.
    medium, for two records - and note this reopens a question someone already
    answered the other way with the same source in hand.
 3. **The 911 RSR**, on a weaker version of the same kind of chain.
-4. **Retire the 17 fictionalised records** from the queue, or decide what could
-   ever settle them.
-5. For the remaining 18 real cars, look for homologation papers and period
-   workshop documentation. Car histories have been tried and do not reach it.
+4. ~~Retire the 17 fictionalised records.~~ Done.
+5. For the remaining real cars, look for homologation papers and period workshop
+   documentation. Car histories have been tried and do not reach it.
+
+The live queue is now 21 records: the 18 real cars, plus `formula-junior` and the
+two Formula Vee records, which are real categories rather than Reiza's
+inventions. 22 of the original 43 are closed with a written reason - 5 by the
+Copa Truck regulation and 17 by retirement.

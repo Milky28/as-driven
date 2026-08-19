@@ -145,7 +145,7 @@
       },
       {
         "path": "/authentic_controls/transmission/gearbox_type",
-        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+        "basis": "The gearbox type is not established and cannot become established. This car is Reiza's own, standing in for an era rather than representing a chassis, so there is no manufacturer, homologation sheet or registry to consult and no drive can separate a synchromesh from a dog box. Assigning a value would mean reasoning from the era the car evokes, which is not evidence about this car. Retired from the gearbox research queue: this is a settled answer, not an outstanding one."
       }
     ]
   },
