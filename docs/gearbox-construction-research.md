@@ -334,6 +334,39 @@ upgrades the 190E form from a future lead to a checked source. It still does not
 show that the AMS2 DTM car ran one of these synchronised variants, so it is not a
 basis for changing the curated `gearbox_type` from `unknown`.
 
+## Open: are the five-speeds unanimous?
+
+The recommendation to leave both records unknown rests on the forms listing
+gearboxes of differing construction, so that picking one would be a guess. That
+is plainly right for the six-speeds. It may not be right for these two records,
+because **both curate a five-speed** - `forward_gears: 5`, and both identity
+notes name a five-speed Getrag dogleg.
+
+Every option read so far that is not clearly synchronised is a six-speed: the
+M3's blank-column 12/08 VO and its unstated Hollinger 38/20 VO. Restricted to
+five forward ratios, every option read so far on both forms is synchronised. If
+that is the complete picture, the forms do not leave a choice for these cars -
+the options agree, and `synchromesh` follows without selecting between them.
+
+That turns on a question only a reader of the scans can answer:
+
+> On A-5327 and A-5269, enumerate **every** homologated gearbox with **five**
+> forward ratios - the base entry, any alternative on the same page, and any VO,
+> ES or ET extension. For each one, quote the synchro column verbatim for every
+> forward gear, and say explicitly where a marking is blank, dashed or absent
+> rather than reading it as a no. Give the page number for each.
+>
+> The claim to defeat: *no five-speed variant on either form lacks an explicit
+> synchronised marking.* A single five-speed with a blank synchro column defeats
+> it, and the records stay unknown.
+
+If the five-speeds are unanimous, both records can take `synchromesh` at medium,
+which would make them the first fully specified dogleg pair in the dataset and
+create the dogleg archetype the four remaining dogleg cars are waiting on. It
+would also put a required blip on a synchromesh, the same shape as the Formula
+Vee pair, which is handled as a simulator override rather than by revising the
+construction.
+
 ## Group C cannot be settled this way at all
 
 `sauber-mercedes-c9` and `porsche-962c` were listed as homologation candidates.
