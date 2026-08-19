@@ -139,7 +139,24 @@ has a regulation using the word.
 Falsifiable by a Brazilian clause or a promoter's specification showing the
 sealed boxes carry dog engagement.
 
-**The blip was left exactly where it was, and it does not agree.** Both records
+**Resolved: the blip moved to the simulator layer.** The real car's blip is now
+`optional`, which is what a synchromesh leaves it, and AMS2's demand is a sourced
+override. The client builds its card from the effective controls, so a driver in
+AMS2 is still told to blip; the record simply stopped claiming the real car needs
+it. Both records now match their synchromesh archetype exactly rather than
+deviating, which is the tell that the value was in the wrong layer rather than
+wrong.
+
+The approvals were amended to match, following the pattern the 98T and the Cayman
+already set: `approved_controls` records the real car's value and
+`confidence_notes` explains the simulator difference. The note says the blip was
+approved as required from the drive and revised when the construction was
+established, so the amendment is legible rather than silent.
+
+What follows is the reasoning as it stood before that, kept because it is why the
+override is shaped this way.
+
+**The blip was left where the drive put it at first, and it did not agree.** Both records
 carry `manual_blip: required` from a guided drive at `verified` confidence - the
 simulator rejected a clutchless downshift until the driver blipped. A synchromesh
 does not need a blip to engage, so a required blip sits oddly against the

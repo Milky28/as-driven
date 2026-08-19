@@ -17,12 +17,12 @@
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "optional",
     "wheel_rim_shape": "yoke",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "yes"
   },
-  "confidence_notes": "The guided draft directly records exact identity, five direct H selections, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and the open yoke rim.",
+  "confidence_notes": "The guided draft directly records exact identity, five direct H selections, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and the open yoke rim. The downshift blip was approved as required from that drive, and was revised to optional once the category's synchromesh gearbox was established: a synchromesh does not need a blip for the gear to engage. What the simulator demands is carried as a sourced override rather than changing the real-car value.",
   "scope_notes": "Running shifts were accepted without clutch only with correct throttle technique. Gearbox construction remains unknown."
 }

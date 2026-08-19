@@ -30,7 +30,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
+        "manual_blip": "optional",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -51,7 +51,7 @@
       "Full-throttle clutchless upshifts were rejected and succeeded only after a throttle lift; clutchless downshifts were rejected until the driver supplied a manual blip.",
       "Non-adjacent H-pattern inputs directly selected the requested gears.",
       "The gearbox is the longitudinal Volkswagen Gol five-speed the Brazilian regulations mandate, supplied sealed. It is a production road unit and the regulation forbids opening it, so its construction is synchromesh - but no reviewed source says so for this gearbox in particular, and the corroborating Formula Vee rule covers only the air-cooled four-speed, so the value is recorded at medium confidence.",
-      "The downshift blip stays as the drive found it: clutchless downshifts were rejected until the driver blipped. A synchromesh does not need a blip to engage, so this is the record's declared departure from the archetype rather than something the construction revises.",
+      "The category's gearbox is a synchromesh, which does not need a blip for the gear to engage, so the real car's downshift blip is optional rather than required. AMS2 disagrees: the guided drive rejected a clutchless downshift until the driver blipped. That difference is carried as a simulator override, so the in-sim card still tells the driver to blip while the record stops claiming the real car needs it. The blip was recorded as required only because the drive was the sole evidence that reached the field before the construction was established.",
       "Recorded after this field had been left unknown once with the same Brazilian regulation already cited. The reversal is deliberate: the regulation names the unit rather than its construction, and the construction is taken from the unit being an unmodified production road gearbox."
     ]
   },
@@ -88,7 +88,20 @@
           "Standing-start clutch, five direct H selections, required lift/manual blip, and the open yoke rim were directly observed."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 rejects a clutchless downshift until the driver blips, where the real car's synchromesh leaves the blip optional.",
+          "source_refs": [
+            "ams2.local-live-formula-vee-gen2-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "high",
+            "basis": "Directly observed in the guided drive with automatic clutch and shifting disabled: the downshift was refused without a blip and accepted with one."
+          }
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-11",
       "source_refs": [
@@ -137,7 +150,10 @@
       {
         "paths": [
           "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/automatic_blip",
           "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
@@ -157,18 +173,22 @@
         ],
         "confidence": "medium",
         "basis": "The Brazilian regulations permit two transmissions and this car runs the second: five gears originating from the longitudinal Gol, supplied sealed by the promoter. The Gol gearbox is a production Volkswagen road unit and the regulation forbids opening it, so the construction is synchromesh. No reviewed source uses that word for this unit, and the corroborating Formula Vee regulation covers only the air-cooled Type 1 and 3 four-speed, so this is inferred from the unit rather than stated by a source and sits at medium."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "fasp.formula-vee-2025-regulations"
+        ],
+        "confidence": "medium",
+        "basis": "A synchromesh does not need the driver to match revs for the gear to engage, so the blip is the driver's choice rather than a requirement. This follows from the established construction rather than being stated by a source, and cannot be more certain than the construction it comes from. What the simulator demands is recorded separately as an override."
       }
     ]
   },
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/downshift/manual_blip",
-        "basis": "The driver must blip on downshifts, where the archetype leaves it optional. The value came from a guided drive that rejected a clutchless downshift without one. It sits oddly with a synchromesh, which does not need a blip to engage, and that tension is left standing rather than resolved: the construction is only a medium-confidence claim and cannot overrule a drive."
-      }
-    ]
+    "classification": "matches"
   },
   "notes": [
     "Gearbox construction remains unknown rather than being inferred from successful rev-matched clutchless shifts."
