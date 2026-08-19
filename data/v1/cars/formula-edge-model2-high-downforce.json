@@ -134,6 +134,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-7-seq-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "'Formula Edge Model2' is the same car observed before the aero suffix existed. It inherits these verified controls as an approved configuration alias and was not separately live-tested."
   ],

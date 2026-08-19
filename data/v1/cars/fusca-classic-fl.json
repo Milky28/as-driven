@@ -138,5 +138,9 @@
     ]
   },
   "driver_summary": "The Beetle transaxle is constant-mesh with balk-ring synchronisers on all four forward gears, so the blip eases the synchros but the gear engages without it.",
+  "archetype": {
+    "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

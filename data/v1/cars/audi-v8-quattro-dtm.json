@@ -147,5 +147,9 @@
     ]
   },
   "driver_summary": "A fully synchronised six-speed, stated by period documentation rather than assumed, so the blip eases the synchros but the gear engages without it.",
+  "archetype": {
+    "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

@@ -155,5 +155,9 @@
     ]
   },
   "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Synchromesh is the ordinary reading of a road-car manual of this period rather than a stated specification.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

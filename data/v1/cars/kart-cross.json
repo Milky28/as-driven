@@ -135,5 +135,15 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/standing_start_clutch",
+        "basis": "The guided drive moved the car off with no clutch input, where the archetype's cars stall without it. No real-world chassis is identified for AMS2's generic Kartcross, so the gearbox is what the drive showed rather than a sourced claim."
+      }
+    ]
+  },
   "updated_at": "2026-08-16"
 }

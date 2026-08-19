@@ -169,6 +169,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "One record covers both directly observed AMS2 class contexts because their exact model identity and tested controls are the same.",
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car; it has not been separately live-tested.",

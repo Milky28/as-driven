@@ -45,7 +45,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip on downshifts. The downshift was accepted with no pedal input, so no blip is needed to engage the gear, and a clutch is still needed to pull away.",
       "The gearbox is widely reported as an H-pattern, including in community summaries, and it is not. A Reiza internal tester explains that an H-shifter can be bound to a sequential gearbox in game as an accommodation for players without sequential hardware, and that the selection menu does not state transmissions, which is what the mistake comes from. The drive read the gearbox rather than the menu.",
       "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry.",
       "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
@@ -139,6 +139,10 @@
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
+  },
+  "archetype": {
+    "archetype_id": "stick-4-seq-clutch-start-flat-up-no-blip",
+    "classification": "matches"
   },
   "updated_at": "2026-08-18"
 }

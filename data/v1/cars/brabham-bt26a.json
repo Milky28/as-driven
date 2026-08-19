@@ -154,5 +154,9 @@
     ]
   },
   "driver_summary": "Hewland DG 300 - rev-match every downshift. The dog rings are inferred from Hewland's design approach rather than stated by a source, so one showing this gearbox was synchronised would make the blip optional.",
+  "archetype": {
+    "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

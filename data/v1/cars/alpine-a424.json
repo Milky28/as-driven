@@ -196,6 +196,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-7-seq-no-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "Simulator-specific behavior is kept distinct from the real LMDh hardware evidence, especially for automatic shift cut.",
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car; it has not been separately live-tested.",

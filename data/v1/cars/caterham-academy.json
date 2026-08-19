@@ -144,5 +144,9 @@
     ]
   },
   "driver_summary": "Type 9 gearbox, which Caterham's motorsport partner sells both synchronised and unsynchronised. This car has to be road legal, which is why it is read as synchronised, so blip to ease it but the gear should engage without one.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

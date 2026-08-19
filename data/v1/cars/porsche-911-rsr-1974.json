@@ -137,5 +137,9 @@
     ]
   },
   "driver_summary": "The five-speed carried over from the RS, behind a reinforced clutch. Whether it engages by dogs or synchros is not recorded, so blip on downshifts to be safe.",
+  "archetype": {
+    "classification": "undetermined",
+    "basis": "Two archetypes survive the gaps: h-5-dogbox-clutch-start-lift-up-blip-down and h-5-synchro-clutch-start-lift-up-blip-optional. They differ on gearbox_type and downshift.manual_blip together, and those are one question rather than two: dog rings need the driver to match revs for the gear to engage, where a synchromesh leaves the blip optional. A reviewed source establishing the gearbox construction settles both, and no drive can, because a drive cannot separate a synchromesh from a dog box."
+  },
   "updated_at": "2026-08-17"
 }

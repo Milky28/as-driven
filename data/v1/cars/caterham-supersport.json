@@ -141,5 +141,9 @@
     ]
   },
   "driver_summary": "The Seven is offered with a five-speed manual, a six-speed manual and a six-speed sequential; the drive selected the five-speed manual. Probably synchronised, so the blip eases it but should not be needed to engage the gear.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

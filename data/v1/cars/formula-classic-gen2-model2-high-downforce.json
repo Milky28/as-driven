@@ -147,5 +147,23 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "This car engages every gear immediately, up and down, with no lift. Its three classmates only engage once the revs match and need the driver to lift, which is what the archetype describes."
+      },
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "No blip is needed either, where the archetype leaves it optional. The lift and the blip are one finding: the gearbox takes the gear without the revs being matched at all."
+      },
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }

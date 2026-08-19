@@ -155,5 +155,9 @@
     ]
   },
   "driver_summary": "It shifts itself. The sequential lever in the cockpit overrides the automatic box but is never required.",
+  "archetype": {
+    "classification": "no-archetype",
+    "basis": "A different mechanism rather than a departure from one. Its nearest peer of the same actuation is seven fields away: three forward ratios against five or six, a gearbox that shifts itself, and no clutch fitted anywhere, so every field a clutch would touch is not-applicable. Nothing registered describes a car the driver neither clutches nor shifts."
+  },
   "updated_at": "2026-08-18"
 }

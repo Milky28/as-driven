@@ -153,6 +153,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "One record covers both explicitly observed AMS2 class contexts because their exact model identity and tested controls are the same.",
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",

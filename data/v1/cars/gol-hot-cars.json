@@ -141,5 +141,15 @@
     ]
   },
   "driver_summary": "Synchronised is the ordinary reading of a road-derived manual rather than a stated specification, so the blip eases it but should not be needed.",
+  "archetype": {
+    "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/shift_pattern",
+        "basis": "The gate is not established. It is read from the cockpit by watching the lever and the driver's hand through a shift, the method that read three dogleg gates in dataset 0.3.28 and that registered sources then corroborated."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }

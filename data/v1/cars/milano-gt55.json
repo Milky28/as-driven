@@ -166,5 +166,15 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/clutch",
+        "basis": "The Prodrive-built Xtrac sequential takes the clutch on every downshift, where the archetype's cars need it only to pull away. This is the only curated record that needs the clutch for a shift already under way. AMS2 accepts a clutchless downshift, which is carried as a simulator override rather than changing the real car."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }

@@ -157,6 +157,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+    "classification": "matches"
+  },
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],

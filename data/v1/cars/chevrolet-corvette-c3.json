@@ -139,5 +139,9 @@
     ]
   },
   "driver_summary": "The C3's four-speed came in wide-ratio M20, close-ratio M21 and heavy-duty M22 forms, and no source says which AMS2 models. Synchronised either way, so the blip eases the synchros but the gear engages without it.",
+  "archetype": {
+    "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

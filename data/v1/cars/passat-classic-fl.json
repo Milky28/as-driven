@@ -138,5 +138,9 @@
     ]
   },
   "driver_summary": "The Brazilian Passat gained its five-speed with the B2-derived improvements, and the drive found it. Synchronised is the ordinary reading of a road-derived manual rather than a stated specification, so the blip eases it but should not be needed.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

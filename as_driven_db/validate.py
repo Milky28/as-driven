@@ -516,6 +516,234 @@ def _validate_documentation_claims(
                 )
 
 
+TRANSMISSION_POINTER = "/authentic_controls/transmission"
+
+
+def _flatten_transmission(transmission: Any) -> dict[str, Any]:
+    """The transmission block as JSON Pointer paths into the record."""
+    flat: dict[str, Any] = {}
+
+    def walk(node: Any, prefix: str) -> None:
+        if not isinstance(node, dict):
+            return
+        for key, value in node.items():
+            path = f"{prefix}/{key}"
+            if isinstance(value, dict):
+                walk(value, path)
+            else:
+                flat[path] = value
+
+    walk(transmission, TRANSMISSION_POINTER)
+    return flat
+
+
+def _archetype_consistent(record: dict[str, Any], archetype: dict[str, Any]) -> bool:
+    """Whether an archetype could still describe a record that has gaps in it.
+
+    An `unknown` is a wildcard here and nothing else is. This is the only place
+    an archetype is allowed to look past a gap, and it still never fills one:
+    the answer decides whether a reviewer can classify the record at all.
+    """
+    for path in set(record) | set(archetype):
+        if record.get(path) == "unknown":
+            continue
+        if record.get(path) != archetype.get(path):
+            return False
+    return True
+
+
+def _validate_archetype_registry(
+    payload: Any,
+    label: str,
+    transmission_schema: dict[str, Any] | None,
+    errors: list[str],
+) -> dict[str, dict[str, Any]]:
+    """Checks the archetype registry and returns each flattened block by id."""
+    if not _required(payload, {"schema_version", "archetypes"}, label, errors):
+        return {}
+    if payload["schema_version"] != "1.0.0":
+        errors.append(f"{label}: schema_version must be 1.0.0")
+    archetypes = payload["archetypes"]
+    if not isinstance(archetypes, list):
+        errors.append(f"{label}: archetypes must be an array")
+        return {}
+
+    flattened: dict[str, dict[str, Any]] = {}
+    blocks: dict[str, str] = {}
+    for index, archetype in enumerate(archetypes):
+        item = f"{label}.archetypes[{index}]"
+        if not _required(
+            archetype, {"archetype_id", "label", "transmission", "basis"}, item, errors
+        ):
+            continue
+        archetype_id = archetype["archetype_id"]
+        if not isinstance(archetype_id, str) or not ID_RE.fullmatch(archetype_id):
+            errors.append(f"{item}: invalid archetype_id")
+            continue
+        if archetype_id in flattened:
+            errors.append(f"{item}: duplicate archetype_id {archetype_id}")
+            continue
+
+        transmission = archetype["transmission"]
+        # The shape is enforced against the car record's own definition rather
+        # than restated in the archetype schema, so the two cannot drift apart.
+        if transmission_schema is not None:
+            errors.extend(
+                validate_instance(
+                    transmission, transmission_schema, f"{item}.transmission"
+                )
+            )
+        flat = _flatten_transmission(transmission)
+        gaps = sorted(path for path, value in flat.items() if value == "unknown")
+        if gaps:
+            errors.append(
+                f"{item}: archetype {archetype_id} must be fully specified; "
+                f"unknown at {', '.join(gaps)}"
+            )
+
+        signature = json.dumps(transmission, sort_keys=True)
+        if signature in blocks:
+            errors.append(
+                f"{item}: archetype {archetype_id} has the same transmission block "
+                f"as {blocks[signature]}"
+            )
+        else:
+            blocks[signature] = archetype_id
+        flattened[archetype_id] = flat
+    return flattened
+
+
+def _validate_record_archetype(
+    record: dict[str, Any],
+    label: str,
+    archetypes: dict[str, dict[str, Any]],
+    errors: list[str],
+) -> None:
+    """Checks a record's declared archetype against the registry.
+
+    Nothing here changes a record. The archetype describes the transmission the
+    record already states, so every rule is a comparison: a departure the record
+    does not declare is an error, and so is a declared departure that turns out
+    to agree. That is what keeps an unintended change loud.
+    """
+    block = record.get("archetype")
+    if block is None:
+        return
+    if not isinstance(block, dict) or "classification" not in block:
+        errors.append(f"{label}: archetype must declare a classification")
+        return
+
+    classification = block["classification"]
+    archetype_id = block.get("archetype_id")
+    deviations = block.get("deviations", [])
+    basis = block.get("basis")
+    if not isinstance(deviations, list):
+        errors.append(f"{label}: archetype.deviations must be an array")
+        return
+
+    classified = classification in {"matches", "deviates"}
+    if classified and not archetype_id:
+        errors.append(
+            f"{label}: archetype.archetype_id is required when classification "
+            f"is {classification}"
+        )
+    if not classified and archetype_id:
+        errors.append(
+            f"{label}: archetype.archetype_id must be absent when classification "
+            f"is {classification}"
+        )
+    if not classified and not basis:
+        errors.append(
+            f"{label}: archetype.basis is required when classification "
+            f"is {classification}"
+        )
+    if classification == "deviates" and not deviations:
+        errors.append(
+            f"{label}: archetype.deviations must list at least one departure "
+            "when classification is deviates"
+        )
+    if classification != "deviates" and deviations:
+        errors.append(
+            f"{label}: archetype.deviations must be empty when classification "
+            f"is {classification}"
+        )
+
+    controls = record.get("authentic_controls")
+    if not isinstance(controls, dict):
+        return
+    record_flat = _flatten_transmission(controls.get("transmission"))
+
+    declared: set[str] = set()
+    for index, deviation in enumerate(deviations):
+        item = f"{label}: archetype.deviations[{index}]"
+        if not isinstance(deviation, dict) or "path" not in deviation:
+            errors.append(f"{item}: must declare a path")
+            continue
+        path = deviation["path"]
+        if path not in record_flat:
+            errors.append(
+                f"{item}: {path} is not a field of this record's transmission"
+            )
+            continue
+        if path in declared:
+            errors.append(f"{item}: duplicate deviation path {path}")
+            continue
+        declared.add(path)
+
+    if archetype_id and archetype_id not in archetypes:
+        if classified:
+            errors.append(f"{label}: unknown archetype_id {archetype_id}")
+        return
+
+    if classified and archetype_id:
+        archetype_flat = archetypes[archetype_id]
+        differing = {
+            path
+            for path in set(record_flat) | set(archetype_flat)
+            if record_flat.get(path) != archetype_flat.get(path)
+        }
+        if classification == "matches" and differing:
+            errors.append(
+                f"{label}: archetype {archetype_id} is declared as matched but the "
+                f"record differs at {', '.join(sorted(differing))}"
+            )
+        if classification == "deviates":
+            undeclared = sorted(differing - declared)
+            if undeclared:
+                errors.append(
+                    f"{label}: undeclared departure from archetype {archetype_id} "
+                    f"at {', '.join(undeclared)}"
+                )
+            agreeing = sorted(declared - differing)
+            if agreeing:
+                errors.append(
+                    f"{label}: archetype.deviations names {', '.join(agreeing)}, "
+                    f"where the record agrees with archetype {archetype_id}"
+                )
+
+    if classification == "undetermined":
+        # Undetermined is a gap, not a verdict. It has to be caused by a gap in
+        # this record, and the gap has to actually leave the choice open: with
+        # one candidate left there is nothing further for a drive to settle.
+        if not any(value == "unknown" for value in record_flat.values()):
+            errors.append(
+                f"{label}: archetype classification undetermined requires an "
+                "unknown in the transmission block"
+            )
+        candidates = sorted(
+            identifier
+            for identifier, archetype_flat in archetypes.items()
+            if _archetype_consistent(record_flat, archetype_flat)
+        )
+        if len(candidates) < 2:
+            errors.append(
+                f"{label}: archetype classification undetermined requires at least "
+                f"two candidate archetypes; found "
+                f"{len(candidates) if candidates else 'none'}"
+                + (f" ({candidates[0]})" if candidates else "")
+            )
+
+
 def validate_repository(root: Path) -> list[str]:
     errors: list[str] = []
     schema_dir = root / "schema" / "v1"
@@ -528,8 +756,15 @@ def validate_repository(root: Path) -> list[str]:
             "curation-approval.schema.json",
             "post-sheet-event-map.schema.json",
             "verification-observation.schema.json",
+            "control-archetype.schema.json",
         )
     }
+    car_schema = schemas["car-record.schema.json"]
+    transmission_schema = (
+        {"$defs": car_schema["$defs"], "$ref": "#/$defs/transmission"}
+        if isinstance(car_schema, dict) and "$defs" in car_schema
+        else None
+    )
 
     data_dir = root / "data" / "v1"
     sources = _load(data_dir / "sources.json", errors)
@@ -542,6 +777,24 @@ def validate_repository(root: Path) -> list[str]:
             )
         )
     source_ids = _validate_sources(sources, str(data_dir / "sources.json"), errors) if sources else set()
+
+    archetypes_path = data_dir / "archetypes.json"
+    archetype_payload = _load(archetypes_path, errors)
+    if archetype_payload is not None and schemas["control-archetype.schema.json"] is not None:
+        errors.extend(
+            validate_instance(
+                archetype_payload,
+                schemas["control-archetype.schema.json"],
+                str(archetypes_path),
+            )
+        )
+    archetypes = (
+        _validate_archetype_registry(
+            archetype_payload, str(archetypes_path), transmission_schema, errors
+        )
+        if archetype_payload is not None
+        else {}
+    )
 
     index = _load(data_dir / "index.json", errors)
     if index is not None and schemas["dataset-index.schema.json"] is not None:
@@ -585,6 +838,7 @@ def validate_repository(root: Path) -> list[str]:
                     str(path),
                 )
             )
+        _validate_record_archetype(record, str(path), archetypes, errors)
         record_id = _validate_record(record, path, source_ids, errors)
         if record_id in records:
             errors.append(f"{path}: duplicate record_id {record_id}")

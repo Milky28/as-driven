@@ -32,6 +32,7 @@
       "minLength": 1,
       "maxLength": 300
     },
+    "archetype": { "$ref": "#/$defs/archetypeClassification" },
     "notes": { "type": "array", "items": { "type": "string" } },
     "updated_at": { "$ref": "#/$defs/date" }
   },
@@ -56,6 +57,49 @@
       "properties": {
         "level": { "$ref": "#/$defs/confidenceLevel" },
         "basis": { "type": "string", "minLength": 1 }
+      }
+    },
+    "archetypeClassification": {
+      "description": "Which control archetype this record's transmission matches, declared by a reviewer and never derived by tooling. Optional: a record without it is unreviewed for archetype, which is different from one reviewed and found to match none. The archetype supplies no values - authentic_controls.transmission stays the authoritative, fully written-out description of the car - so this block can only ever describe the record, never change it. It is a curation and review aid and carries no evidence: it must never appear in a provenance claim or a source reference. See docs/archetypes.md.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification"],
+      "properties": {
+        "archetype_id": {
+          "description": "The archetype in data/v1/archetypes.json. Required when classification is matches or deviates, and must be absent otherwise.",
+          "$ref": "#/$defs/id"
+        },
+        "classification": {
+          "description": "matches - every field equals the archetype. deviates - the record departs from it in the declared ways, and nowhere else. no-archetype - reviewed, and this mechanism genuinely matches none. undetermined - cannot be classified yet, because an unknown sits in a field that separates two or more archetypes. The last two mirror the no/unknown distinction the rest of the dataset draws: one is a conclusion, the other is a gap, and collapsing them would lose the reason to drive the car again.",
+          "type": "string",
+          "enum": ["matches", "deviates", "no-archetype", "undetermined"]
+        },
+        "deviations": {
+          "description": "Every field where the record departs from its archetype, each declared with a reason. Required and non-empty when classification is deviates, and empty or absent otherwise. A departure the record does not declare is a validation failure, which is what keeps an unintended change loud rather than letting it pass as one more record that happens to differ.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "basis"],
+            "properties": {
+              "path": {
+                "description": "JSON Pointer to the departing field, inside this record's transmission block.",
+                "type": "string",
+                "pattern": "^/authentic_controls/transmission(/[^/]+)+$"
+              },
+              "basis": {
+                "description": "Why this car departs. The departure is usually the research finding, so this line is the one a reviewer reads first.",
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "basis": {
+          "description": "Why this classification was reached. Required when classification is no-archetype or undetermined, where nothing else records the reviewer's reasoning. For undetermined, name the field whose unknown blocks the decision: that is what a future drive has to settle.",
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
     "identity": {

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://as-driven.example/schema/v1/control-archetype.schema.json",
+  "title": "As Driven control archetype registry",
+  "description": "Named bundles of transmission control values that many cars share. An archetype is descriptive: it never supplies a value to a record, and a record always keeps its own resolved controls. See docs/archetypes.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "archetypes"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "archetypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["archetype_id", "label", "transmission", "basis"],
+        "properties": {
+          "archetype_id": {
+            "description": "Stable key naming the mechanism, never a racing class. Class predicts controls badly enough that the dataset disproves it: the nine curated GT4 cars split on both forward gears and standing-start clutch, and the largest single mechanism spans CART, GT1, IndyCar and GTR entries. Name what the driver does, as in sequential-stick-6-clutch-start-blip-down.",
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          },
+          "label": {
+            "description": "Short human phrase for review output and curation notes. Not shown to drivers; the preflight card keeps rendering resolved values.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "transmission": {
+            "description": "The complete transmission block this archetype stands for, in the same shape as a car record's authentic_controls.transmission. Its structure is enforced against the car record schema's $defs/transmission during validation rather than being restated here, so the two cannot drift. An archetype must be fully specified: no member field may be unknown, because an archetype that is itself uncertain cannot describe anything.",
+            "type": "object"
+          },
+          "basis": {
+            "description": "Why this archetype exists as a distinct mechanism, and what separates it from its nearest neighbour. A reviewer should be able to tell from this line alone whether a given car belongs.",
+            "type": "string",
+            "minLength": 1
+          },
+          "notes": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -141,6 +141,10 @@
     ]
   },
   "driver_summary": "Lamborghini five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
+  "archetype": {
+    "classification": "no-archetype",
+    "basis": "No registered archetype has a dogleg gate. Six curated dogleg cars share an identical block - five forward gears, first down and left, clutch to pull away, a lift on upshifts and a blip on every downshift - and would form one, but every one of them leaves gearbox_type unknown and an archetype must be fully specified. A reviewed source establishing the construction on any of them creates the archetype this record belongs to."
+  },
   "notes": [
     "The source conflict is resolved only for this AMS2 representation: both manufacturer-derived evidence and the simulator support five forward gears."
   ],

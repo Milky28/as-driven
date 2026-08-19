@@ -163,5 +163,19 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The real car is a six-speed PDK dual clutch with no clutch pedal, where the archetype's cars carry a racing sequential. AMS2 nonetheless required clutch input to move off, which is carried as a simulator override rather than changing the real car."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }

@@ -1,0 +1,587 @@
+{
+  "$schema": "../../schema/v1/control-archetype.schema.json",
+  "schema_version": "1.0.0",
+  "archetypes": [
+    {
+      "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+      "label": "Six-speed sequential stick, clutch to pull away, flat upshift with cut, blip every downshift",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-stick",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "37 curated records share this exact block. It is separated from stick-5-seq-clutch-start-flat-up-blip-down only by forward gears; stick-6-seq-clutch-start-flat-up-no-blip only by manual blip."
+    },
+    {
+      "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+      "label": "Six-speed sequential paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "23 curated records share this exact block. It is separated from paddles-6-semiauto-no-clutch-start-flat-up-auto-blip only by gearbox type; paddles-6-seq-clutch-start-flat-up-auto-blip only by the standing-start clutch; paddles-7-seq-no-clutch-start-flat-up-auto-blip only by forward gears. 1 further archetype differs by one field."
+    },
+    {
+      "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
+      "label": "Six-speed sequential paddles, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "15 curated records share this exact block. It is separated from paddles-6-dogbox-clutch-start-flat-up-auto-blip only by gearbox type; paddles-6-semiauto-clutch-start-flat-up-auto-blip only by gearbox type; paddles-6-seq-no-clutch-start-flat-up-auto-blip only by the standing-start clutch. 2 further archetypes differ by one field."
+    },
+    {
+      "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+      "label": "Five-speed synchromesh H-pattern, clutch to pull away, lift on upshift, optional blip",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "optional",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 5,
+        "gearbox_type": "synchromesh",
+        "shift_actuation": "h-pattern",
+        "shift_pattern": "standard-h",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "no",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "required"
+        }
+      },
+      "basis": "14 curated records share this exact block. It is separated from h-4-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-6-synchro-clutch-start-lift-up-blip-optional only by forward gears."
+    },
+    {
+      "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
+      "label": "Four-speed synchromesh H-pattern, clutch to pull away, lift on upshift, optional blip",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "optional",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 4,
+        "gearbox_type": "synchromesh",
+        "shift_actuation": "h-pattern",
+        "shift_pattern": "standard-h",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "no",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "required"
+        }
+      },
+      "basis": "11 curated records share this exact block. It is separated from h-5-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-6-synchro-clutch-start-lift-up-blip-optional only by forward gears."
+    },
+    {
+      "archetype_id": "paddles-7-seq-clutch-start-flat-up-auto-blip",
+      "label": "Seven-speed sequential paddles, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 7,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "8 curated records share this exact block. It is separated from paddles-6-seq-clutch-start-flat-up-auto-blip only by forward gears; paddles-7-semiauto-clutch-start-flat-up-auto-blip only by gearbox type; paddles-7-seq-no-clutch-start-flat-up-auto-blip only by the standing-start clutch."
+    },
+    {
+      "archetype_id": "paddles-6-semiauto-clutch-start-flat-up-auto-blip",
+      "label": "Six-speed semi-automatic paddles, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "semi-automatic",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "6 curated records share this exact block. It is separated from paddles-6-dogbox-clutch-start-flat-up-auto-blip only by gearbox type; paddles-6-semiauto-no-clutch-start-flat-up-auto-blip only by the standing-start clutch; paddles-6-seq-clutch-start-flat-up-auto-blip only by gearbox type. 1 further archetype differs by one field."
+    },
+    {
+      "archetype_id": "paddles-6-semiauto-no-clutch-start-flat-up-auto-blip",
+      "label": "Six-speed semi-automatic paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "semi-automatic",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "5 curated records share this exact block. It is separated from paddles-6-semiauto-clutch-start-flat-up-auto-blip only by the standing-start clutch; paddles-6-seq-no-clutch-start-flat-up-auto-blip only by gearbox type; paddles-7-semiauto-no-clutch-start-flat-up-auto-blip only by forward gears."
+    },
+    {
+      "archetype_id": "paddles-7-seq-no-clutch-start-flat-up-auto-blip",
+      "label": "Seven-speed sequential paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 7,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "5 curated records share this exact block. It is separated from paddles-6-seq-no-clutch-start-flat-up-auto-blip only by forward gears; paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip only by gearbox type; paddles-7-semiauto-no-clutch-start-flat-up-auto-blip only by gearbox type. 2 further archetypes differ by one field."
+    },
+    {
+      "archetype_id": "stick-6-seq-clutch-start-flat-up-auto-blip",
+      "label": "Six-speed sequential stick, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-stick",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "5 curated records share this exact block. It is separated from paddles-6-seq-clutch-start-flat-up-auto-blip only by shift actuation; stick-5-seq-clutch-start-flat-up-auto-blip only by forward gears; stick-6-seq-clutch-start-flat-up-no-blip only by automatic blip."
+    },
+    {
+      "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+      "label": "Five-speed dog box H-pattern, clutch to pull away, lift on upshift, blip every downshift",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 5,
+        "gearbox_type": "dogbox",
+        "shift_actuation": "h-pattern",
+        "shift_pattern": "standard-h",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "no",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "required"
+        }
+      },
+      "basis": "4 curated records share this exact block. No other archetype differs from it by a single field."
+    },
+    {
+      "archetype_id": "paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip",
+      "label": "Seven-speed dual-clutch paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 7,
+        "gearbox_type": "dual-clutch",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "3 curated records share this exact block. It is separated from paddles-7-semiauto-no-clutch-start-flat-up-auto-blip only by gearbox type; paddles-7-seq-no-clutch-start-flat-up-auto-blip only by gearbox type; paddles-8-dualclutch-no-clutch-start-flat-up-auto-blip only by forward gears."
+    },
+    {
+      "archetype_id": "paddles-7-semiauto-no-clutch-start-flat-up-auto-blip",
+      "label": "Seven-speed semi-automatic paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 7,
+        "gearbox_type": "semi-automatic",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "3 curated records share this exact block. It is separated from paddles-6-semiauto-no-clutch-start-flat-up-auto-blip only by forward gears; paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip only by gearbox type; paddles-7-semiauto-clutch-start-flat-up-auto-blip only by the standing-start clutch. 1 further archetype differs by one field."
+    },
+    {
+      "archetype_id": "paddles-8-dualclutch-no-clutch-start-flat-up-auto-blip",
+      "label": "Eight-speed dual-clutch paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 8,
+        "gearbox_type": "dual-clutch",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "3 curated records share this exact block. It is separated from paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip only by forward gears; paddles-8-seq-no-clutch-start-flat-up-auto-blip only by gearbox type."
+    },
+    {
+      "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
+      "label": "Six-speed synchromesh H-pattern, clutch to pull away, lift on upshift, optional blip",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "optional",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "synchromesh",
+        "shift_actuation": "h-pattern",
+        "shift_pattern": "standard-h",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "no",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from h-4-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-5-synchro-clutch-start-lift-up-blip-optional only by forward gears."
+    },
+    {
+      "archetype_id": "paddles-6-dogbox-clutch-start-flat-up-auto-blip",
+      "label": "Six-speed dog box paddles, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "dogbox",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from paddles-6-semiauto-clutch-start-flat-up-auto-blip only by gearbox type; paddles-6-seq-clutch-start-flat-up-auto-blip only by gearbox type.",
+      "notes": [
+        "Both members are variants of one car, so this block has not yet been seen to recur across unrelated cars. Review whether it should be an archetype at all."
+      ]
+    },
+    {
+      "archetype_id": "paddles-7-semiauto-clutch-start-flat-up-auto-blip",
+      "label": "Seven-speed semi-automatic paddles, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 7,
+        "gearbox_type": "semi-automatic",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from paddles-6-semiauto-clutch-start-flat-up-auto-blip only by forward gears; paddles-7-semiauto-no-clutch-start-flat-up-auto-blip only by the standing-start clutch; paddles-7-seq-clutch-start-flat-up-auto-blip only by gearbox type."
+    },
+    {
+      "archetype_id": "paddles-8-seq-no-clutch-start-flat-up-auto-blip",
+      "label": "Eight-speed sequential paddles, no clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 8,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-paddles",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "not-required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from paddles-6-seq-no-clutch-start-flat-up-auto-blip only by forward gears; paddles-7-seq-no-clutch-start-flat-up-auto-blip only by forward gears; paddles-8-dualclutch-no-clutch-start-flat-up-auto-blip only by gearbox type.",
+      "notes": [
+        "Both members are variants of one car, so this block has not yet been seen to recur across unrelated cars. Review whether it should be an archetype at all."
+      ]
+    },
+    {
+      "archetype_id": "stick-4-seq-clutch-start-flat-up-no-blip",
+      "label": "Four-speed sequential stick, clutch to pull away, flat upshift with cut, no blip needed",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 4,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-stick",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from stick-6-seq-clutch-start-flat-up-no-blip only by forward gears.",
+      "notes": [
+        "Both members are variants of one car, so this block has not yet been seen to recur across unrelated cars. Review whether it should be an archetype at all."
+      ]
+    },
+    {
+      "archetype_id": "stick-5-seq-clutch-start-flat-up-auto-blip",
+      "label": "Five-speed sequential stick, clutch to pull away, flat upshift with cut, car blips",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "yes",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 5,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-stick",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from stick-6-seq-clutch-start-flat-up-auto-blip only by forward gears."
+    },
+    {
+      "archetype_id": "stick-5-seq-clutch-start-flat-up-blip-down",
+      "label": "Five-speed sequential stick, clutch to pull away, flat upshift with cut, blip every downshift",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 5,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-stick",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from stick-6-seq-clutch-start-flat-up-blip-down only by forward gears."
+    },
+    {
+      "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+      "label": "Six-speed sequential stick, clutch to pull away, flat upshift with cut, no blip needed",
+      "transmission": {
+        "downshift": {
+          "automatic_blip": "no",
+          "automatic_cut": "not-applicable",
+          "clutch": "not-required",
+          "manual_blip": "not-required",
+          "throttle_lift": "not-applicable"
+        },
+        "forward_gears": 6,
+        "gearbox_type": "sequential",
+        "shift_actuation": "sequential-stick",
+        "shift_pattern": "sequential",
+        "standing_start_clutch": "required",
+        "upshift": {
+          "automatic_blip": "not-applicable",
+          "automatic_cut": "yes",
+          "clutch": "not-required",
+          "manual_blip": "not-applicable",
+          "throttle_lift": "not-required"
+        }
+      },
+      "basis": "2 curated records share this exact block. It is separated from stick-4-seq-clutch-start-flat-up-no-blip only by forward gears; stick-6-seq-clutch-start-flat-up-auto-blip only by automatic blip; stick-6-seq-clutch-start-flat-up-blip-down only by manual blip."
+    }
+  ]
+}

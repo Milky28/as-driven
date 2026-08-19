@@ -173,5 +173,15 @@
     ]
   },
   "driver_summary": "Lotus/Hewland six-speed - rev-match every downshift. AMS2 gives this car five gears where the real one has six. The dog rings are inferred from Hewland's design approach rather than stated by a source.",
+  "archetype": {
+    "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "The real Lotus/Hewland gearbox has six forward gears where the archetype's cars have five. AMS2 models five, and that difference is carried as a simulator override, so the client tells the driver five in session while the real-car count stays true."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }

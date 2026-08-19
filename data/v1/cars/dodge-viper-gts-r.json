@@ -155,6 +155,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "This record deliberately preserves the distinction between original FIA homologation, documented privateer conversions, and the behavior of Reiza's simulated representation.",
     "'Dodge Viper GTS-R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."

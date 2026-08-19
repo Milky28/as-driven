@@ -135,6 +135,24 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
+      },
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
+      }
+    ]
+  },
   "updated_at": "2026-08-17",
   "driver_summary": "Lotus offered the 23 with a choice of Renault or Volkswagen gearboxes, and the drive found four gears. Which one this is, and whether it engages by dogs or synchros, is not established, so blip on downshifts to be safe."
 }

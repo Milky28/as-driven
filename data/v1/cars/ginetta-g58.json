@@ -136,6 +136,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-16",
   "notes": [
     "The guided drive that produced this record predates the rim-vocabulary merge and recorded the retired \"gt-style\" value. It is migrated to \"gt-formula\", which describes the same control-panel rim; the rim was not observed again."

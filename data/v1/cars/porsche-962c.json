@@ -154,6 +154,10 @@
     ]
   },
   "driver_summary": "Five-speed manual. Neither the gate nor how the gearbox engages is established by a source, so the H-pattern is what the cockpit showed, and blipping on downshifts is the safe assumption.",
+  "archetype": {
+    "classification": "undetermined",
+    "basis": "Two archetypes survive the gaps: h-5-dogbox-clutch-start-lift-up-blip-down and h-5-synchro-clutch-start-lift-up-blip-optional. They differ on gearbox_type and downshift.manual_blip together, and those are one question rather than two: dog rings need the driver to match revs for the gear to engage, where a synchromesh leaves the blip optional. A reviewed source establishing the gearbox construction settles both, and no drive can, because a drive cannot separate a synchromesh from a dog box. Also open, though not affecting the choice because both candidates agree there: shift_pattern, upshift/throttle_lift."
+  },
   "notes": [
     "'Porsche 962C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],

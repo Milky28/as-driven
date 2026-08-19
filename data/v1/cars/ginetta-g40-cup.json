@@ -141,5 +141,9 @@
     ]
   },
   "driver_summary": "Motor Sport describes a five-speed synchromesh gearbox behind the 1.8 Zetec, so the blip eases the synchros but the gear engages without it.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

@@ -137,5 +137,9 @@
       }
     ]
   },
+  "archetype": {
+    "classification": "undetermined",
+    "basis": "Two archetypes survive the gap: stick-6-seq-clutch-start-flat-up-blip-down and stick-6-seq-clutch-start-flat-up-no-blip. They differ only on downshift.manual_blip. A guided drive settles it, by downshifting with no throttle input and seeing whether the gear engages."
+  },
   "updated_at": "2026-08-16"
 }

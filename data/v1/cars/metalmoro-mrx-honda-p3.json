@@ -46,9 +46,9 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip on downshifts. The downshift was accepted with no pedal input, so no blip is needed to engage the gear.",
       "The clutch is not needed to pull away.",
-      "Shares the P3 class with the MRX Duratec Turbo P3 and behaves differently: this car pulls away without the clutch and blips its own downshifts. Both were driven separately.",
+      "Shares the P3 class with the MRX Duratec Turbo P3 and pulls away without the clutch where that car needs it. Both were driven separately. The two agree on the automatic blip: neither car blips its own downshifts.",
       "Metalmoro states only that the MRX accepts several engine and gearbox options, so no reviewed source establishes which gearbox this configuration carries. The sequential construction is what the drive showed.",
       "Community references for this car are generated from Coanda's AMS2 spreadsheet, so they describe the simulator rather than the real car and are not cited here as real-world evidence.",
       "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
@@ -137,6 +137,16 @@
         ],
         "confidence": "medium",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/standing_start_clutch",
+        "basis": "The guided drive pulled away with no clutch input, where the archetype's cars need it. Metalmoro states only that the MRX accepts a choice of gearbox, so no reviewed source establishes which one this configuration carries and the sequential construction is what the drive showed."
       }
     ]
   },

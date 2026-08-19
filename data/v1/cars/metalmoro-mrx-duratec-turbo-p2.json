@@ -138,5 +138,15 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/standing_start_clutch",
+        "basis": "The guided drive pulled away with no clutch input, where the archetype's cars need it. Metalmoro states only that the MRX accepts a choice of gearbox, so no reviewed source establishes which one this configuration carries and the sequential construction is what the drive showed."
+      }
+    ]
+  },
   "updated_at": "2026-08-18"
 }

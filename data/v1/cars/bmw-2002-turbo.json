@@ -138,5 +138,9 @@
     ]
   },
   "driver_summary": "AMS2 models the optional Getrag 235/5 close-ratio five-speed rather than the four-speed that was standard on this car. Synchronised, so the blip eases the synchros but the gear engages without it.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

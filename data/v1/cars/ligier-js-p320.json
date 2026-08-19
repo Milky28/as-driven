@@ -148,6 +148,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "The required standing-start clutch is deliberately distinct from clutch-free running shifts.",
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",

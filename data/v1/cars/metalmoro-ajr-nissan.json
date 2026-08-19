@@ -137,5 +137,9 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-16"
 }

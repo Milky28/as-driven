@@ -144,5 +144,9 @@
     ]
   },
   "driver_summary": "Probably a synchronised road-derived manual, so the downshift blip is technique rather than necessity. The reviewed reference covers the RS, not this car, so the construction is the ordinary reading.",
+  "archetype": {
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-17"
 }

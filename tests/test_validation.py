@@ -418,6 +418,169 @@ class ValidationTests(unittest.TestCase):
                 f"expected a first_gear_position error, got {errors}",
             )
 
+    def test_archetypes_in_the_registry_are_fully_specified_and_unique(self) -> None:
+        """An archetype that is itself uncertain cannot describe anything.
+
+        The registry is the one place where every field has to be settled: a
+        record may carry gaps, but the thing it is compared against may not.
+        """
+        payload = json.loads(
+            (ROOT / "data" / "v1" / "archetypes.json").read_text(encoding="utf-8")
+        )
+        identifiers = [entry["archetype_id"] for entry in payload["archetypes"]]
+        self.assertEqual(len(identifiers), len(set(identifiers)))
+        for entry in payload["archetypes"]:
+            self.assertNotIn(
+                "unknown",
+                json.dumps(entry["transmission"]),
+                entry["archetype_id"],
+            )
+            # An archetype names a mechanism. Racing class predicts one badly
+            # enough that the dataset disproves it, so a class name in an id
+            # would re-import an error the GT4 records already settle.
+            self.assertNotRegex(entry["archetype_id"], r"(?:^|-)gt[0-9](?:-|$)")
+
+    def test_a_declared_archetype_match_must_actually_match(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "milano-gt55.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            # milano-gt55 is the only curated record needing the clutch on a
+            # downshift, so it cannot match the archetype it otherwise shares.
+            record["archetype"] = {
+                "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+                "classification": "matches",
+            }
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any(
+                    "declared as matched" in error
+                    and "/authentic_controls/transmission/downshift/clutch" in error
+                    for error in errors
+                ),
+                f"expected a match error naming the downshift clutch, got {errors}",
+            )
+
+    def test_a_declared_deviation_records_the_departure_and_nothing_else(self) -> None:
+        """Classifying a record adds no claim, so it needs no further approval.
+
+        The archetype block sits outside `authentic_controls` and only describes
+        values the record already states and an approval already covers. This
+        copies `curation/` in so the approval checks actually run: a classified
+        record must stay valid against the approval it already had.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory), include_curation=True)
+            path = temp_root / "data" / "v1" / "cars" / "milano-gt55.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            record["archetype"] = {
+                "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+                "classification": "deviates",
+                "deviations": [
+                    {
+                        "path": "/authentic_controls/transmission/downshift/clutch",
+                        "basis": "The real car requires the clutch for every downshift.",
+                    }
+                ],
+            }
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            self.assertEqual(validate_repository(temp_root), [])
+
+    def test_an_undeclared_departure_from_an_archetype_is_reported(self) -> None:
+        """The rule the whole mechanism rests on.
+
+        A record that quietly stops agreeing with its archetype has to fail,
+        or an unintended change reads as one more car that happens to differ.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "milano-gt55.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            record["archetype"] = {
+                "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+                "classification": "deviates",
+                "deviations": [
+                    {
+                        "path": "/authentic_controls/transmission/forward_gears",
+                        "basis": "Wrong field: the gear count agrees with the archetype.",
+                    }
+                ],
+            }
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("undeclared departure" in error for error in errors),
+                f"expected an undeclared departure error, got {errors}",
+            )
+            # And the reverse: naming a field that agrees is just as wrong,
+            # because it describes a finding the record does not contain.
+            self.assertTrue(
+                any("where the record agrees" in error for error in errors),
+                f"expected a spurious-deviation error, got {errors}",
+            )
+
+    def test_undetermined_needs_a_gap_that_leaves_the_choice_open(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+
+            # formula-retro-gen2 leaves the gearbox and the downshift blip open,
+            # and those are exactly what separate the five-speed synchromesh
+            # archetype from the five-speed dog box. A drive settles it.
+            open_choice = temp_root / "data" / "v1" / "cars" / "formula-retro-gen2.json"
+            record = json.loads(open_choice.read_text(encoding="utf-8"))
+            record["archetype"] = {
+                "classification": "undetermined",
+                "basis": "gearbox_type is unknown, which is what separates the two candidates.",
+            }
+            open_choice.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            self.assertEqual(validate_repository(temp_root), [])
+
+            # bmw-m4-gt3 has a gap too, but only one archetype survives it, so
+            # there is nothing left for a drive to decide.
+            settled = temp_root / "data" / "v1" / "cars" / "bmw-m4-gt3.json"
+            record = json.loads(settled.read_text(encoding="utf-8"))
+            record["archetype"] = {
+                "classification": "undetermined",
+                "basis": "upshift throttle lift is unknown.",
+            }
+            settled.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("at least two candidate archetypes" in error for error in errors),
+                f"expected a candidate-count error, got {errors}",
+            )
+
+    def test_an_unclassified_record_never_names_an_archetype(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "milano-gt55.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            record["archetype"] = {
+                "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+                "classification": "no-archetype",
+                "basis": "Reviewed and found to match none.",
+            }
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("must be absent when classification" in error for error in errors),
+                f"expected an archetype_id error, got {errors}",
+            )
+
+    def test_an_archetype_with_a_gap_in_it_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "archetypes.json"
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            payload["archetypes"][0]["transmission"]["gearbox_type"] = "unknown"
+            path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("must be fully specified" in error for error in errors),
+                f"expected a fully-specified error, got {errors}",
+            )
+
     @staticmethod
     def _copy_repository_data(directory: Path, include_curation: bool = False) -> Path:
         shutil.copytree(ROOT / "schema", directory / "schema")

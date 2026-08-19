@@ -146,6 +146,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+    "classification": "matches"
+  },
   "notes": [
     "'McLaren F1 GTR - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],

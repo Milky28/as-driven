@@ -48,8 +48,7 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. No automatic cut or blip was present, so the driver supplies the upshift lift.",
-      "The drive found automatic blip without automatic cut. Every other curated sequential-stick car has automatic cut, so this pairing has no precedent in the dataset and the observation is recorded as seen rather than normalised.",
-      "The downshift blip stays unknown. AMS2 blips for the driver, but no reviewed source establishes whether the real Quaife sequential does, and a dog-engagement sequential would normally need a driver blip. Recording not-required would claim the real car blips for itself, which the evidence does not support.",
+      "No reviewed source establishes whether the real Quaife sequential needs a driver blip. The re-measured drive found the car does not blip and the downshift was still accepted with no pedal input, so the blip is recorded as not required because the gear engages without one, not because anything blips for the driver.",
       "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
   },
@@ -136,6 +135,20 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/upshift/automatic_cut",
+        "basis": "The drive found no automatic cut, which every other curated sequential-stick car has. The observation is recorded as seen rather than normalised to the archetype."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "With no automatic cut the driver supplies the lift, where the archetype's cars stay flat. The two fields are one finding: the lift follows from the absent cut."
       }
     ]
   },

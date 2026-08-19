@@ -147,5 +147,19 @@
     ]
   },
   "driver_summary": "Weismann/McLaren transverse six-speed manual. Whether it engages by dogs or synchros is not recorded, so blip on downshifts to be safe.",
+  "archetype": {
+    "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
+      },
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }

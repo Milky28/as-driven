@@ -46,7 +46,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and automatic blip on downshifts, so the driver supplies neither, and a clutch is still needed to pull away.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts and no automatic blip on downshifts. The downshift was accepted with no pedal input, so no blip is needed to engage the gear, and a clutch is still needed to pull away.",
       "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed.",
       "The car does not blip its own downshifts. An earlier drive recorded that it did, from a measurement that could read the driver's throttle as the car's blip."
     ]
@@ -140,6 +140,10 @@
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+    "classification": "matches"
   },
   "updated_at": "2026-08-18"
 }

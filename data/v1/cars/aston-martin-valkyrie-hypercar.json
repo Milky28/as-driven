@@ -153,6 +153,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-7-semiauto-no-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "This record deliberately distinguishes the non-hybrid competition Valkyrie from LMDh cars that can move under electric power.",
     "No Low Downforce telemetry alias is approved because no exact distinct identity was observed.",

@@ -154,6 +154,24 @@
     ]
   },
   "driver_summary": "Nissan specifies a Hewland VGC five-speed, a racing dog box, so blip every downshift to be safe. The gearbox is established, but whether a blip is needed to engage the gear was never tested.",
+  "archetype": {
+    "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
+      },
+      {
+        "path": "/authentic_controls/transmission/shift_pattern",
+        "basis": "The gate is not established. It is read from the cockpit by watching the lever and the driver's hand through a shift, the method that read three dogleg gates in dataset 0.3.28 and that registered sources then corroborated."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
+      }
+    ]
+  },
   "notes": [
     "'Nissan R89C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],

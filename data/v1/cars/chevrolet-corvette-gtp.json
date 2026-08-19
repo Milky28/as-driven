@@ -158,6 +158,16 @@
     ]
   },
   "driver_summary": "Hewland VGC five-speed, a racing dog box - rev-match every downshift for the gear to engage cleanly. Real-world sources name this gearbox, so the dog engagement is established rather than inferred.",
+  "archetype": {
+    "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/shift_pattern",
+        "basis": "The gate is not established. It is read from the cockpit by watching the lever and the driver's hand through a shift, the method that read three dogleg gates in dataset 0.3.28 and that registered sources then corroborated."
+      }
+    ]
+  },
   "notes": [
     "'Chevrolet Corvette GTP - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],

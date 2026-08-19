@@ -138,6 +138,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-dogbox-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "updated_at": "2026-08-18",
   "driver_summary": "Porsche dog-type gearbox, but the car blips its own downshifts, so there is no rev-matching to do. The clutch is needed only to pull away."
 }

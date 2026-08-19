@@ -146,6 +146,10 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
   "notes": [
     "'Courage C60 Hybrid - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],

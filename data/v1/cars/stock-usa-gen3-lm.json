@@ -125,6 +125,16 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "Five paddle-selected forward gears against the archetype's six, observed directly in the drive. Reiza's fictionalised LM configuration claims no real-world model, so the count stands on the drive alone."
+      }
+    ]
+  },
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],

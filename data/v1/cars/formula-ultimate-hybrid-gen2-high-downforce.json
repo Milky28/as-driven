@@ -147,6 +147,16 @@
       }
     ]
   },
+  "archetype": {
+    "archetype_id": "paddles-6-semiauto-no-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "Eight forward gears against the archetype's six, matching the modern Formula One hybrid era the class represents and the other Formula Ultimate records. Everything the driver does is the archetype's: no clutch to pull away, flat upshifts, and the car blips."
+      }
+    ]
+  },
   "notes": [
     "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],

@@ -149,5 +149,23 @@
     ]
   },
   "driver_summary": "Weismann/McLaren transverse six-speed - the last gearbox to win a Formula One title without paddles. Neither how it engages nor the gate layout is recorded, so blip on downshifts to be safe.",
+  "archetype": {
+    "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
+      },
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+      },
+      {
+        "path": "/authentic_controls/transmission/shift_pattern",
+        "basis": "The gate is not established. It is read from the cockpit by watching the lever and the driver's hand through a shift, the method that read three dogleg gates in dataset 0.3.28 and that registered sources then corroborated."
+      }
+    ]
+  },
   "updated_at": "2026-08-17"
 }
