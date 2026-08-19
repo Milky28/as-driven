@@ -22,12 +22,11 @@ inference. Each still needs its own basis.
 This was previously described as desk research rather than seat time. That was
 too optimistic, and the correction matters more than the optimism did.
 
-Five well-documented cars were searched - BMW M1 Procar, Porsche 962C, Porsche
-911 RSR 1974, BMW M3 Group A, Mercedes-Benz 190E Evo II DTM. Every search
-returned gear count, manufacturer and often the gate immediately. **Not one
-returned whether the gears engage through synchronisers or dog rings.**
-Specification pages, marque histories and auction listings all stop in the same
-place.
+The initial car-level source pass covered BMW M1 Procar, Porsche 962C, Porsche
+911 RSR 1974, BMW M3 Group A, and Mercedes-Benz 190E Evo II DTM. It returned
+gear count, manufacturer and often the gate immediately, but no specification
+page, marque history or auction listing stated whether the gears engage through
+synchronisers or dog rings. Those sources all stop in the same place.
 
 The fact is reachable, but not from anything written about the *car*. What
 reached it was a governing body's technical regulations and a specialist writing
@@ -218,19 +217,26 @@ Sources: `https://www.paul-stephens.com/magazine/type-915-gearbox-vs-g50-gearbox
 
 ## Not proposed: BMW M3 Group A, and why
 
-The road and homologation car used the Getrag 265 dogleg five-speed, a
-synchromesh production gearbox. Group A cars commonly ran dog-engaged
-straight-cut gearkits fitted into that same case; several vendors sell exactly
-that and describe it as a Group A homologated fitment.
+The FIA form now supplies the missing construction detail for several permitted
+M3 gearboxes, but not the identity of the gearbox used by the simulated car.
 
-That establishes period practice. It does not establish what this car ran, and
-the sources are commercial listings.
+- The base Getrag five-speed marks all five forward gears as `synchro`.
+- 12/08 VO, valid 1 July 1988, is a six-speed whose `synchro` column is blank
+  (a dash) for every forward gear, reverse and the constant ratio.
+- 24/11 VO, valid 1 April 1989, is a six-speed that marks all six forward gears
+  as `synchro`; it is limited to the named 04/01 ET and 14/01 ES evolutions.
+- 38/20 VO, valid 1 November 1991, identifies a six-speed **Hollinger** box but
+  does not state synchroniser or dog engagement.
 
-**Recommendation: leave unknown.** A medium dogbox claim here would rest on "cars
-like this often had one", which is the shape of reasoning this dataset exists to
-refuse. The same applies to `mercedes-benz-190e-2-5-16-evo-ii-dtm` and the rest
-of the Group A and DTM entries. What would settle it is the FIA Group A
-homologation papers, which list the permitted transmission variants.
+The non-synchronised 12/08 VO is material evidence, but it is not a statement of
+dog engagement. An unsynchronised gearbox must not be promoted to `dogbox` by
+assumption. Nor can the current record select one homologated option from the
+form without evidence tying that option to the particular car represented in the
+simulator.
+
+**Recommendation: leave `gearbox_type` unknown.** The same conclusion applies to
+`mercedes-benz-190e-2-5-16-evo-ii-dtm`: the form establishes permitted
+synchromesh alternatives, not the DTM car's installed gearbox.
 
 ## Retired: the fictionalised cars
 
@@ -271,7 +277,7 @@ construction. Listed so the search is not repeated.
 | --- | --- | --- |
 | `bmw-m1-procar` | ZF five-speed, dogleg, 1st down and left | construction |
 | `porsche-962c` | five-speed manual | construction |
-| `mercedes-benz-190e-2-5-16-evo-ii-dtm` | Group A five-speed dogleg | construction |
+| `mercedes-benz-190e-2-5-16-evo-ii-dtm` | FIA form lists synchronised five- and six-speed alternatives, including a Prodrive six-speed | exact fitted construction |
 
 ## What to decide next
 
@@ -290,7 +296,7 @@ original 43, three are answered - the 911 RSR and the two Formula Vee cars - and
 retirement.
 
 
-## The homologation papers: located, unreadable here
+## The homologation papers: read, with a curation limit
 
 The FIA Historic Database at `historicdb.fia.com` is the archive, and this
 project already cites six of its forms. Two of the queue's cars have theirs:
@@ -300,22 +306,33 @@ project already cites six of its forms. Two of the queue's cars have theirs:
 | BMW M3 Group A | 5327, Group A, 2 March 1987 | `https://historicdb.fia.com/sites/default/files/car_attachment/1662735601/homologation_form_number_5327_group_a.pdf` |
 | Mercedes-Benz 190E | 5269, Group A, from 2 May 1985 | `https://historicdb.fia.com/sites/default/files/car_attachment/1601062201/homologation_form_number_5269_group_a.pdf` |
 
-The M3's record lists extensions for Gearbox and Transmission specifically, which
-is exactly where the construction would be stated. The 190E's form is for the
-2.3-16; the 2.5-16 Evolution II we curate is a later evolution and probably
-carries its own extension, which has not been located yet.
+Both scans were rendered and read on 2026-08-19. The M3 form has 131 pages and
+the 190E form 173. The direct PDF links remain live; the FIA HTML pages are not
+needed to inspect the forms.
 
-**Neither could be read in this environment, and the reason is worth recording so
-nobody repeats the attempt.** The forms are scans: 131 pages of CCITT Group 4 fax
-images with a text layer of 131 characters in total. There is no PDF renderer
-here (`pdftoppm` is absent, only `pdftotext`), no imaging library, and no OCR.
-Rewrapping the fax data as TIFF works - Group 4 is a TIFF compression, so the
-bytes move across untouched - but nothing available can display a TIFF either.
-The database's HTML car pages return 403, while the PDFs themselves fetch fine.
+**BMW M3, A-5327.** Page 6 establishes the base five-speed manual Getrag as
+synchromesh. It also lists an alternative five-speed, likewise synchronised.
+Later extensions list the explicitly non-synchronised 12/08 VO six-speed, the
+synchronised 24/11 VO six-speed, and the 38/20 VO six-speed by Hollinger name
+only. This is strong evidence about the variants homologated, but it does not
+identify the installed gearbox of the simulator car.
 
-So the documents are in hand and the reading is not. Anyone opening those two
-URLs in a PDF viewer can settle the M3 and probably the 190E in a few minutes,
-which is the shortest path left on this queue.
+**Mercedes-Benz 190E, A-5269.** The form's 29/02 ES sport evolution, valid 1
+June 1990, explicitly renames the model to **Mercedes-Benz 190 E 2.5-16/EVO II**.
+The base page 6 Getrag five-speed and its alternative five-speed both mark every
+forward gear `synchro`. The subsequently listed six-speeds are also explicit:
+
+- 19/18 VO, valid 1 April 1988: six forward ratios, every gear marked
+  `synchr.: ja/yes`.
+- 24/21 VO, valid 1 July 1989 and restricted to 21/01 ES: six forward ratios,
+  every gear marked `synchr.: ja/yes`.
+- 33/27 VO, valid 1 April 1992: an additional **Prodrive** gearbox, a six-speed
+  with every forward gear marked `synchro`.
+
+This closes the earlier claim that the Evo II extension had not been located and
+upgrades the 190E form from a future lead to a checked source. It still does not
+show that the AMS2 DTM car ran one of these synchronised variants, so it is not a
+basis for changing the curated `gearbox_type` from `unknown`.
 
 ## Group C cannot be settled this way at all
 
