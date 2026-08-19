@@ -121,6 +121,93 @@ def downshift(manual: str, automatic: str, clutch: str) -> tuple[str, str]:
     return "Not established", TONE_UNKNOWN
 
 
+def running_clutch(value: str) -> str:
+    """Whether the clutch is wanted for a shift already under way."""
+    return {
+        "required": "Clutch required",
+        "optional": "Clutch optional",
+        "not-required": "No clutch needed",
+        "not-applicable": "No clutch fitted",
+    }.get(value, "Clutch not established")
+
+
+# How to describe each field a simulator is known to override. The renderer is
+# given a whole transmission block so it can answer in the page's own words
+# rather than echoing a raw enum, and so a field that reads differently
+# depending on its neighbours - a blip depends on whether anything blips - still
+# reads correctly.
+DIFFERENCE_FIELDS = {
+    "/forward_gears": (
+        "Gears",
+        lambda t: shifter(t["forward_gears"], t["shift_actuation"]),
+    ),
+    "/standing_start_clutch": (
+        "Pulling away",
+        lambda t: launch(t["standing_start_clutch"])[0],
+    ),
+    "/upshift/throttle_lift": (
+        "Upshift",
+        lambda t: upshift(
+            t["upshift"]["throttle_lift"], t["upshift"]["automatic_cut"],
+            t["upshift"]["clutch"],
+        )[0],
+    ),
+    "/upshift/clutch": ("Clutch on an upshift", lambda t: running_clutch(t["upshift"]["clutch"])),
+    "/downshift/manual_blip": (
+        "Downshift",
+        lambda t: downshift(
+            t["downshift"]["manual_blip"], t["downshift"]["automatic_blip"],
+            t["downshift"]["clutch"],
+        )[0],
+    ),
+    "/downshift/clutch": (
+        "Clutch on a downshift",
+        lambda t: running_clutch(t["downshift"]["clutch"]),
+    ),
+}
+TRANSMISSION_PREFIX = "/authentic_controls/transmission"
+
+
+def _apply(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -> dict[str, Any]:
+    effective = json.loads(json.dumps(transmission))
+    for override in overrides:
+        path = override.get("path", "")
+        if not path.startswith(TRANSMISSION_PREFIX):
+            continue
+        parts = [part for part in path[len(TRANSMISSION_PREFIX):].split("/") if part]
+        node = effective
+        for part in parts[:-1]:
+            node = node.get(part, {})
+        if parts:
+            node[parts[-1]] = override["value"]
+    return effective
+
+
+def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -> list[dict[str, str]]:
+    """What the simulator does differently, in the same words as the card.
+
+    An override is the record saying the two layers genuinely disagree, so the
+    page shows both rather than silently preferring one. The real car's value is
+    what the table above states; this is the departure from it.
+    """
+    if not overrides:
+        return []
+    effective = _apply(transmission, overrides)
+    out = []
+    for override in overrides:
+        path = override.get("path", "")
+        field = path[len(TRANSMISSION_PREFIX):] if path.startswith(TRANSMISSION_PREFIX) else path
+        name, render = DIFFERENCE_FIELDS.get(
+            field, (field.strip("/").replace("/", " ").replace("_", " "), None)
+        )
+        if render is None:
+            real, sim = "", str(override["value"])
+        else:
+            real, sim = render(transmission), render(effective)
+        out.append({"name": name, "real": real, "sim": sim, "why": override.get("condition", "")})
+    return out
+
+
 def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
     identity = record["identity"]
     controls = record["authentic_controls"]
@@ -172,6 +259,7 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
         ],
         "archetype_basis": block.get("basis", ""),
         "open_fields": open_fields,
+        "differences": differences(transmission, entry.get("overrides") or []),
         "simulator": entry.get("simulator", ""),
         "game_version": entry.get("verified_game_version", ""),
         "verified_at": entry.get("verified_at", ""),
@@ -253,6 +341,25 @@ def _row(car: dict[str, Any]) -> str:
             '<div class="block"><h4>Not established</h4>'
             f'<div class="chips">{chips}</div></div>'
         )
+    if car["differences"]:
+        rows = "".join(
+            '<li><span class="field">{name}</span>'
+            '<span class="was">{real}</span>'
+            '<span class="arrow" aria-hidden="true">→</span>'
+            '<span class="now">{sim}</span>'
+            '<p class="why">{why}</p></li>'.format(
+                name=_e(item["name"]), real=_e(item["real"]),
+                sim=_e(item["sim"]), why=_e(item["why"]),
+            )
+            for item in car["differences"]
+        )
+        detail.append(
+            '<div class="block"><h4>{sim} does it differently</h4>'
+            '<ul class="differs">{rows}</ul></div>'.format(
+                sim=_e(car["simulator"].upper() or "The simulator"), rows=rows
+            )
+        )
+
     provenance = " · ".join(
         part
         for part in (
@@ -272,7 +379,14 @@ def _row(car: dict[str, Any]) -> str:
         f'data-start="{_e(car["start"])}" data-blip="{_e(car["blip"])}" tabindex="0" '
         f'aria-expanded="false">'
         f'<td class="car-name"><span class="name">{_e(car["name"])}</span>'
-        f'<span class="meta">{_e(car["car_class"])}</span></td>'
+        f'<span class="meta">{_e(car["car_class"])}</span>'
+        + (
+            '<span class="differs-flag" title="This simulator does something '
+            'differently from the real car">sim differs</span>'
+            if car["differences"]
+            else ""
+        )
+        + "</td>"
         f'<td class="spec"><span class="shifter">{_e(car["shifter"])}</span>'
         f'<span class="meta">{_e(car["gate"])}</span></td>'
         f"{_cell(car['launch'])}{_cell(car['up'])}{_cell(car['down'])}"
@@ -288,6 +402,7 @@ def render(payload: dict[str, Any]) -> str:
     clutch_start = sum(1 for car in cars if car["start"] == "required")
     you_blip = sum(1 for car in cars if car["blip"] == "required")
     open_any = sum(1 for car in cars if car["open_fields"])
+    differing = sum(1 for car in cars if car["differences"])
     rows = "\n".join(_row(car) for car in cars)
     page = TEMPLATE.format(
         version=_e(payload["version"]),
@@ -296,6 +411,7 @@ def render(payload: dict[str, Any]) -> str:
         clutch_start=clutch_start,
         you_blip=you_blip,
         open_any=open_any,
+        differing=differing,
         rows=rows,
     )
     # The page owns no <head>, so it cannot declare a charset. Emitting numeric
@@ -506,6 +622,18 @@ tr.detail > td {{ padding: 0; border-bottom: 1px solid var(--line); background: 
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 12px; color: var(--accent);
 }}
+.differs-flag {{
+  display: inline-block; margin-top: 5px; padding: 1px 6px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px; letter-spacing: 0.04em;
+  color: var(--accent); border: 1px solid currentColor; border-radius: 2px;
+}}
+.differs {{ gap: 12px; }}
+.differs li {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }}
+.differs .was {{ color: var(--faint); text-decoration: line-through; }}
+.differs .arrow {{ color: var(--faint); }}
+.differs .now {{ color: var(--ink); font-weight: 600; }}
+.differs .why {{ flex: 1 0 100%; margin: 2px 0 0; font-size: 13.5px; color: var(--muted); }}
 .chips {{ display: flex; flex-wrap: wrap; gap: 6px; }}
 .chip {{
   font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -550,6 +678,7 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     <div class="stat"><b>{clutch_start}</b><span>need the clutch to pull away</span></div>
     <div class="stat"><b>{you_blip}</b><span>need you to blip</span></div>
     <div class="stat"><b>{open_any}</b><span>have something unestablished</span></div>
+    <div class="stat"><b>{differing}</b><span>differ in the simulator</span></div>
     <div class="stat"><b>{version}</b><span>dataset · {released}</span></div>
   </div>
 </header>
@@ -599,9 +728,11 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 </div>
 
 <footer>Select a car for the mechanism it shares with others, where it departs
-from that, and what a drive or a source would still have to settle. Simulator
-behaviour that differs from the real car is recorded separately and never
-overwrites it.</footer>
+from that, and what a drive or a source would still have to settle. Every row
+describes the real car. Where a simulator does something else - a gear it does
+not model, a clutch it demands anyway - the car is marked and the difference is
+listed against it, because the two are separate facts and neither overwrites the
+other.</footer>
 </div>
 
 <script>

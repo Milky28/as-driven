@@ -5,6 +5,7 @@ from pathlib import Path
 
 from as_driven_db.site import (
     TONE_CAR,
+    differences,
     TONE_DRIVER,
     TONE_OPTIONAL,
     TONE_UNKNOWN,
@@ -73,6 +74,59 @@ class SiteTests(unittest.TestCase):
         for car in payload["cars"]:
             for package in (" Downforce", " - Speedway", " - Superspeedway"):
                 self.assertFalse(car["name"].endswith(package), car["id"])
+
+    def test_a_simulator_difference_is_shown_without_altering_the_car(self) -> None:
+        """Both layers, and neither one overwriting the other.
+
+        A row states the real car. Where a simulator does something else the
+        record says so with an override, and the page has to show that too -
+        otherwise a reader is told the Cayman needs no clutch to pull away while
+        the game they are about to load demands one.
+        """
+        payload = collect(ROOT)
+        page = build_site(ROOT)
+        differing = [car for car in payload["cars"] if car["differences"]]
+        self.assertEqual(page.count('class="differs-flag"'), len(differing))
+        self.assertEqual(page.count('<ul class="differs">'), len(differing))
+
+        by_name = {car["name"]: car for car in differing}
+        # Rendered in the page's own words rather than as raw enum values, and
+        # in both directions, so the reader can see which is which.
+        cayman = by_name["Porsche Cayman GT4 Clubsport MR"]["differences"][0]
+        self.assertEqual(cayman["name"], "Pulling away")
+        self.assertEqual(cayman["real"], "No clutch needed")
+        self.assertEqual(cayman["sim"], "Clutch required")
+        self.assertTrue(cayman["why"])
+
+        # The table above still states the real car; the override belongs to the
+        # detail panel and must not leak into the row.
+        self.assertEqual(
+            by_name["Porsche Cayman GT4 Clubsport MR"]["launch"][0], "No clutch needed"
+        )
+
+    def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
+        # The Milano's override is the clutch on a downshift, which the table
+        # does not show at all. Diffing the rendered rows would have missed it,
+        # so each overridden field is described on its own terms.
+        milano = next(
+            car for car in collect(ROOT)["cars"] if car["name"] == "Milano 55 GT1"
+        )
+        self.assertEqual(
+            milano["differences"],
+            [
+                {
+                    "name": "Clutch on a downshift",
+                    "real": "Clutch required",
+                    "sim": "No clutch needed",
+                    "why": milano["differences"][0]["why"],
+                }
+            ],
+        )
+
+    def test_a_car_the_simulator_models_faithfully_says_nothing(self) -> None:
+        self.assertEqual(differences({"forward_gears": 6}, []), [])
+        quiet = [car for car in collect(ROOT)["cars"] if not car["differences"]]
+        self.assertGreater(len(quiet), 200)
 
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:
         page = build_site(ROOT)
