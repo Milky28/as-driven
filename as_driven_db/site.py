@@ -490,7 +490,8 @@ body {{
   -webkit-font-smoothing: antialiased;
 }}
 .wrap {{ max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }}
-header {{ display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }}
+header {{ display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }}
+header .provenance {{ margin-top: -4px; }}
 .topline {{
   display: flex; flex-wrap: wrap; gap: 16px;
   align-items: baseline; justify-content: space-between;
@@ -558,7 +559,15 @@ input:focus-visible, select:focus-visible, tr:focus-visible, button:focus-visibl
   font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums;
 }}
 .table-scroll {{ overflow-x: auto; }}
-table {{ width: 100%; border-collapse: collapse; min-width: 880px; }}
+/* A table inherits neither colour nor font in quirks mode, and this page ships
+   without a doctype because its host supplies one - so opened as a local file it
+   lands in quirks mode and the whole table reverts to the light palette on a dark
+   ground. Stating both here is what standards mode would have done anyway, and it
+   makes the page readable wherever the file is opened. */
+table {{
+  width: 100%; border-collapse: collapse; min-width: 880px;
+  color: var(--ink); font: inherit;
+}}
 /* Not sticky. The wide-content wrapper needs overflow-x, which makes it a
    scroll container, and a sticky header inside one anchors to the container
    rather than to the viewport - so it parks itself over the first row and
@@ -679,8 +688,8 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     <div class="stat"><b>{you_blip}</b><span>need you to blip</span></div>
     <div class="stat"><b>{open_any}</b><span>have something unestablished</span></div>
     <div class="stat"><b>{differing}</b><span>differ in the simulator</span></div>
-    <div class="stat"><b>{version}</b><span>dataset · {released}</span></div>
   </div>
+  <p class="provenance">Dataset {version}, released {released}.</p>
 </header>
 
 <div class="controls">

@@ -197,6 +197,21 @@ class SiteTests(unittest.TestCase):
         self.assertIn('data-theme-set="system" aria-pressed="true"', page)
         self.assertNotIn("<html", page)
 
+    def test_the_table_does_not_rely_on_inheriting_colour_or_font(self) -> None:
+        """The page has no doctype, so it can be rendered in quirks mode.
+
+        It ships without one because the artifact host supplies it, but the
+        documented workflow also writes the file to disk, and a local file with
+        no doctype renders in quirks mode - where a table inherits neither colour
+        nor font. That put the light palette's ink on the dark ground for every
+        row while the surrounding page was correct, and nothing above the table
+        looked wrong. The rule states both explicitly.
+        """
+        page = build_site(ROOT)
+        rule = re.search(r"\ntable \{(.*?)\}", page, re.S).group(1)
+        self.assertIn("color: var(--ink)", rule)
+        self.assertIn("font: inherit", rule)
+
     def test_a_theme_token_is_never_defined_only_behind_a_media_query(self) -> None:
         """The viewer's theme has three states, not two.
 
