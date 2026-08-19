@@ -16,7 +16,7 @@
   "authentic_controls": {
     "transmission": {
       "forward_gears": 5,
-      "gearbox_type": "unknown",
+      "gearbox_type": "synchromesh",
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
@@ -47,7 +47,9 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
-      "The source states a five-speed gearbox but not its construction, so the downshift blip stays unknown rather than being inferred from the road car's synchromesh or from racing practice.",
+      "The 915 family is established as a synchromesh design by an air-cooled Porsche specialist, and the RSR ran the magnesium-cased 915/08 within that family. No reviewed source says the race variant replaced the synchronisers, so the construction is recorded at medium confidence rather than high.",
+      "The downshift blip stays unknown. A synchromesh leaves a blip optional where dog rings demand one, but reading the blip off the construction would answer one unestablished field with another, so it is left for evidence of its own.",
+      "The gate is a standard H with first up and left. Secondary sources sometimes describe the 915 as a dogleg, which belongs to the 901 it replaced: Porsche announced the change to a conventional pattern in 1972. Recorded here so the gate is not 'corrected' to a dogleg on the strength of that confusion.",
       "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
     ]
   },
@@ -109,16 +111,27 @@
       {
         "paths": [
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
           "stuttcars.porsche-911-carrera-rsr-3-0",
-          "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91"
+          "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91",
+          "twinsparkracing.porsche-915-replaced-the-dogleg"
         ],
         "confidence": "high",
-        "basis": "The source gives a five-speed gearbox carried over from the RS, and the live drive selected five H-pattern gears with no automatic cut or blip."
+        "basis": "The source gives a five-speed gearbox carried over from the RS, and the live drive selected five H-pattern gears with no automatic cut or blip. The gate is the 915's conventional H with first up and left, which replaced the 901's dogleg in 1972."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "paul-stephens.porsche-915-vs-g50",
+          "stuttcars.porsche-911-carrera-rsr-3-0"
+        ],
+        "confidence": "medium",
+        "basis": "The 915 family uses Porsche's own synchromesh design, and the RSR ran the magnesium-cased 915/08 within that family. That the race variant kept the synchronisers rather than adopting dog rings is inferred from the family rather than stated by a reviewed source, which is why this sits at medium. Falsifiable by a period Porsche workshop manual or homologation sheet for the 915/08."
       },
       {
         "paths": [
@@ -138,8 +151,14 @@
   },
   "driver_summary": "The five-speed carried over from the RS, behind a reinforced clutch. Whether it engages by dogs or synchros is not recorded, so blip on downshifts to be safe.",
   "archetype": {
-    "classification": "undetermined",
-    "basis": "Two archetypes survive the gaps: h-5-dogbox-clutch-start-lift-up-blip-down and h-5-synchro-clutch-start-lift-up-blip-optional. They differ on gearbox_type and downshift.manual_blip together, and those are one question rather than two: dog rings need the driver to match revs for the gear to engage, where a synchromesh leaves the blip optional. A reviewed source establishing the gearbox construction settles both, and no drive can, because a drive cannot separate a synchromesh from a dog box."
+    "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Whether the driver must blip on downshifts is not established. The archetype leaves it optional, which is what a synchromesh usually allows, but taking that reading would derive one unestablished field from another that is itself only at medium confidence. It is left open for evidence of its own."
+      }
+    ]
   },
   "updated_at": "2026-08-17"
 }

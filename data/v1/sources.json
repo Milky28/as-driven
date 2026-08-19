@@ -2812,18 +2812,6 @@
       "notes": "Draft ams2.stock-usa-gen2-superspeedway.20260812t050238416z-113f4415 records exact Superspeedway identity, four H-pattern gears, standing-start clutch, lift/manual-blip technique, no automatic cut/blip, and round no-display rim."
     },
     {
-      "source_id": "ams2.local-live-stock-usa-gen3-lm-controls.1.6.9.91",
-      "title": "Guided live AMS2 Stock USA Gen3 LM control test",
-      "publisher": "Local AMS2 observation",
-      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-12",
-      "reuse_status": "facts-only-review",
-      "notes": "Draft ams2.stock-usa-gen3-lm.20260812t171834877z-e7fc8bec records clutch-free move-off, five paddle gears, detected automatic cut/blip, and a closed GT-style no-display rim."
-    },
-    {
       "source_id": "ams2.local-live-stock-usa-gen3-controls.1.6.9.91",
       "title": "Guided live AMS2 Stock USA Gen3 Superspeedway control test",
       "publisher": "Local AMS2 observation",
@@ -2834,6 +2822,18 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Draft ams2.stock-usa-gen3-superspeedway.20260812t050633302z-ae16ad01 records exact Superspeedway identity, five sequential-stick gears, standing-start clutch, detected automatic cut, no automatic blip, and round no-display rim."
+    },
+    {
+      "source_id": "ams2.local-live-stock-usa-gen3-lm-controls.1.6.9.91",
+      "title": "Guided live AMS2 Stock USA Gen3 LM control test",
+      "publisher": "Local AMS2 observation",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-6-9-released-now-updated-to-v1-6-9-3.35936/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Draft ams2.stock-usa-gen3-lm.20260812t171834877z-e7fc8bec records clutch-free move-off, five paddle gears, detected automatic cut/blip, and a closed GT-style no-display rim."
     },
     {
       "source_id": "ams2.local-live-super-trophy-trucks-controls.1.6.9.91",
@@ -4299,6 +4299,18 @@
       "notes": "Primary constructor media kit specifies an Xtrac six-speed sequential gearbox and pneumatic steering-wheel paddle shift. It does not establish launch-clutch technique or simulator cut/blip behavior."
     },
     {
+      "source_id": "paul-stephens.porsche-915-vs-g50",
+      "title": "Porsche 915 Gearbox vs G50 Gearbox, Porsche 911 3.2 Carrera",
+      "publisher": "Paul Stephens",
+      "url": "https://www.paul-stephens.com/magazine/type-915-gearbox-vs-g50-gearbox/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Air-cooled Porsche specialist comparing the two gearboxes. States that the 915 uses Porsche's own synchromesh design where the later G50 uses a Borg-Warner synchro. Describes the road gearbox family and does not address the race-specification 915/08 separately."
+    },
+    {
       "source_id": "pegasus.hewland-dog-rings",
       "title": "Gear Sets and Dog Rings for Webster and Hewland Gearboxes",
       "publisher": "Pegasus Auto Racing Supplies",
@@ -4657,6 +4669,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Archived original manufacturer press kit connecting the T400R platform to the Le Mans program and describing a TVR six-speed sequential gearbox for the model family. It does not unambiguously establish the exact 2005 race-car technique."
+    },
+    {
+      "source_id": "twinsparkracing.porsche-915-replaced-the-dogleg",
+      "title": "Why Your 911 lost its Dog-Leg Five-Speed Transmission",
+      "publisher": "TwinSpark Racing",
+      "url": "https://www.twinsparkracing.com/porsche-dog-leg-transmission-915-1972/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Records that the 915 replaced the 901/911 dog-leg first gear with a conventional H pattern, first up and left, citing a 1972 Porsche press release. Registered because secondary sources sometimes attribute the 901's dogleg to the 915, which would put first gear in the wrong place for any car running a 915."
     },
     {
       "source_id": "ultimatecarpage.spyker-c8-spyder-gt2r",

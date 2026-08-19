@@ -40,7 +40,7 @@ search, and it is where the remaining work has to go.
 | --- | --- | --- |
 | Copa Truck | 5 | **Settled.** The regulation leaves the gearbox free, and is now cited |
 | Formula Vee | 2 | **Candidate**, on a primary Brazilian regulation |
-| Porsche 911 RSR 1974 | 1 | **Candidate**, at medium confidence |
+| Porsche 911 RSR 1974 | 1 | **Taken.** synchromesh at medium confidence |
 | Reiza's fictionalised cars | 17 | **Retired.** No source can exist for these |
 | Other real cars | 18 | Open, and needing homologation-class sources |
 
@@ -140,22 +140,37 @@ Sources: `https://fasp.faspnet.com.br/wp-content/uploads/2025/02/Formula-Vee-202
 (category promoter), and for the corroboration
 `https://www.iccr.ie/wp-content/uploads/2021/06/2021-Tech-Regs-Formula-Vee.pdf`.
 
-## Candidate: Porsche 911 RSR 1974
+## Taken: Porsche 911 RSR 1974
 
 The Type 915 is described by a marque specialist as using "Porsche's own
 synchromesh design", distinguished from the later G50's Borg-Warner synchro. The
 RSR ran the 915/08, described elsewhere as a magnesium-cased race-type 915 with
 the dogleg first the family is known for.
 
-**Candidate: `synchromesh`, confidence `medium`.** Basis: the 915 family is
-established as synchromesh by a specialist source and the RSR's 915/08 is a
-variant within it; no reviewed source says the race variant replaced the
-synchronisers with dog rings. Falsifiable by a period Porsche workshop manual or
-homologation sheet showing dog engagement in the 915/08.
+**Recorded: `synchromesh` at `medium`.** The bundled claim that held the gear
+count, actuation, pattern and construction together at `high` was split, because
+the construction could not ride at that confidence. It now has a claim of its own
+whose basis says the last step is inferred from the family rather than stated by
+a source - which is what keeps it honest and what the confidence test keys on.
 
-**Do not let this decide the blip.** This record's `downshift.manual_blip` is
-also unestablished, and resolving it from a medium-confidence construction would
-answer one unknown with another.
+**The blip was not taken with it.** `downshift.manual_blip` stays unknown and is
+now the record's declared deviation from the synchromesh archetype. A synchromesh
+usually leaves a blip optional, and following that through would derive one
+unestablished field from another that is itself only at medium.
+
+**A trap was found and closed on the way.** The record's gate had no evidence of
+its own - the claim's basis established H-pattern actuation, not the gate - and
+one secondary source describes the 915 as having a dogleg first gear. It does
+not. The 915 *replaced* the 901's dogleg with a conventional H, first up and
+left, announced by Porsche in 1972. Had anyone acted on that description the card
+would have sent drivers to the wrong side of the gate for first. The correcting
+source is registered and cited, so the record's `standard-h` is now evidenced
+rather than defaulted.
+
+`first_gear_position` was deliberately not added, though the same source
+supports `up-left`. The archetype carries no value there, so recording one would
+manufacture a second deviation, and the card already renders a standard gate as
+first up and left. Worth taking only if the archetype gains the field too.
 
 Sources: `https://www.paul-stephens.com/magazine/type-915-gearbox-vs-g50-gearbox/`,
 `https://www.stuttcars.com/porsche-911-carrera-rsr-3-0-1974-1975-specifications-performance/`
@@ -223,12 +238,12 @@ construction. Listed so the search is not repeated.
 2. **Formula Vee.** Whether the sealed-production-unit chain clears the bar at
    medium, for two records - and note this reopens a question someone already
    answered the other way with the same source in hand.
-3. **The 911 RSR**, on a weaker version of the same kind of chain.
+3. ~~The 911 RSR.~~ Taken: synchromesh at medium.
 4. ~~Retire the 17 fictionalised records.~~ Done.
 5. For the remaining real cars, look for homologation papers and period workshop
    documentation. Car histories have been tried and do not reach it.
 
-The live queue is now 21 records: the 18 real cars, plus `formula-junior` and the
-two Formula Vee records, which are real categories rather than Reiza's
-inventions. 22 of the original 43 are closed with a written reason - 5 by the
-Copa Truck regulation and 17 by retirement.
+The live queue is now 20 records: 17 real cars, plus `formula-junior` and the two
+Formula Vee records, which are real categories rather than Reiza's inventions. Of
+the original 43, one is answered and 22 are closed with a written reason - 5 by
+the Copa Truck regulation and 17 by retirement.
