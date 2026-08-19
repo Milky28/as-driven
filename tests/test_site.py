@@ -106,6 +106,28 @@ class SiteTests(unittest.TestCase):
             sum(1 for car in cars if car["open_fields"]),
         )
 
+    def test_the_four_states_are_told_apart_by_more_than_hue(self) -> None:
+        """Two warm fills side by side read as the same answer.
+
+        Optional used to be a second amber fill next to the driver's, and at a
+        glance the pair was indistinguishable. Each state now differs from the
+        others in form as well as colour: the fill says something is being asked
+        of somebody, and the border style separates a decided option from a gap.
+        """
+        page = build_site(ROOT)
+        rules = {
+            tone: re.search(r"\.tone-%s \{(.*?)\}" % tone, page, re.S).group(1)
+            for tone in ("you", "car", "optional", "unknown")
+        }
+        colors = {tone: re.search(r"color: ([^;]+);", body).group(1) for tone, body in rules.items()}
+        self.assertEqual(len(set(colors.values())), 4, colors)
+
+        filled = {tone for tone, body in rules.items() if "background: var(" in body}
+        self.assertEqual(filled, {"you", "car"}, filled)
+        # The two hollow states are separated by their border, not their hue alone.
+        self.assertIn("1px solid", rules["optional"])
+        self.assertIn("1px dotted", rules["unknown"])
+
     def test_a_theme_token_is_never_defined_only_behind_a_media_query(self) -> None:
         """The viewer's theme has three states, not two.
 

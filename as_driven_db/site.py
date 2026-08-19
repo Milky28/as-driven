@@ -318,16 +318,15 @@ TEMPLATE = """<title>As Driven Controls</title>
   --surface: #ffffff;
   --surface-2: #eceef2;
   --ink: #16181d;
-  --muted: #5c626e;
-  --faint: #878d9a;
+  --muted: #4a505c;
+  --faint: #5f6572;
   --line: #dfe2e8;
   --accent: #c2610a;
   --driver: #a8520a;
   --driver-bg: #fbeedd;
   --car: #2e6b5e;
   --car-bg: #e4efec;
-  --optional: #7a5c1f;
-  --optional-bg: #f5eddb;
+  --optional: #6b5aa6;
   --focus: #1f5fa8;
 }}
 @media (prefers-color-scheme: dark) {{
@@ -336,16 +335,15 @@ TEMPLATE = """<title>As Driven Controls</title>
     --surface: #171a20;
     --surface-2: #1e222a;
     --ink: #e8eaee;
-    --muted: #99a0ad;
-    --faint: #737b88;
+    --muted: #a2a9b6;
+    --faint: #8d95a3;
     --line: #272b33;
     --accent: #f0a03c;
     --driver: #f0a03c;
     --driver-bg: #33240f;
     --car: #5bb39b;
     --car-bg: #122b26;
-    --optional: #c9a15e;
-    --optional-bg: #2b2416;
+    --optional: #a893e0;
     --focus: #6fa8e8;
   }}
 }}
@@ -354,16 +352,15 @@ TEMPLATE = """<title>As Driven Controls</title>
   --surface: #171a20;
   --surface-2: #1e222a;
   --ink: #e8eaee;
-  --muted: #99a0ad;
-  --faint: #737b88;
+  --muted: #a2a9b6;
+  --faint: #8d95a3;
   --line: #272b33;
   --accent: #f0a03c;
   --driver: #f0a03c;
   --driver-bg: #33240f;
   --car: #5bb39b;
   --car-bg: #122b26;
-  --optional: #c9a15e;
-  --optional-bg: #2b2416;
+  --optional: #a893e0;
   --focus: #6fa8e8;
 }}
 * {{ box-sizing: border-box; }}
@@ -457,10 +454,19 @@ tr.car td {{ padding: 11px 12px; vertical-align: top; }}
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 12px; line-height: 1.45;
 }}
+/* The fill carries the meaning: something is being asked of somebody. Amber is
+   asked of the driver, teal is handled by the car, and the two hollow states are
+   asked of nobody - which is why neither of them is filled. */
 .tone-you {{ background: var(--driver-bg); color: var(--driver); font-weight: 500; }}
 .tone-car {{ background: var(--car-bg); color: var(--car); }}
-.tone-optional {{ background: var(--optional-bg); color: var(--optional); }}
-/* No fill. A gap in the evidence must never read as a state the car handles. */
+/* Optional is a decided fact, not a demand and not a gap. Its own hue keeps it
+   off the amber it used to sit beside, where two warm fills read alike. */
+.tone-optional {{
+  background: none; color: var(--optional);
+  border: 1px solid currentColor; padding: 2px 8px;
+}}
+/* A gap in the evidence must never read as a state the car handles. Dotted,
+   and in the neutral, so it separates from the optional outline too. */
 .tone-unknown {{
   background: none; color: var(--faint);
   border: 1px dotted currentColor; padding: 2px 8px;
