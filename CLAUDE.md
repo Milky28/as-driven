@@ -173,6 +173,13 @@ approval are required before release. See `PRIVACY.md` and
   decision; the guided queue is empty. The inventory only holds cars that have
   been loaded here, so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
+- Every record carries an `archetype` classification: 158 match one of the 22
+  registered mechanisms, 56 deviate, 14 are undetermined and 14 match none. An
+  archetype is descriptive and supplies no values, so a classification can never
+  change a record. `gearbox_type` is what blocks the dataset: it is open in 19
+  deviations, decides 11 of the 14 undetermined, and holds back the dogleg and
+  four-speed archetypes behind the 14 that match none. It is also the one open
+  field a drive cannot settle. See `docs/archetypes.md`.
 - Record IDs name the real car with no simulator prefix. A second simulator's
   drive joins the existing record as another `simulators[]` entry rather than
   forking a second record, and an approval names the simulator it approves.
