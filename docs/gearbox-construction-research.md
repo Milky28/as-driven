@@ -39,7 +39,7 @@ search, and it is where the remaining work has to go.
 | Group | Records | Status |
 | --- | --- | --- |
 | Copa Truck | 5 | **Settled.** The regulation leaves the gearbox free, and is now cited |
-| Formula Vee | 2 | **Candidate**, on a primary Brazilian regulation |
+| Formula Vee | 2 | **Taken.** synchromesh at medium, reversing an earlier call |
 | Porsche 911 RSR 1974 | 1 | **Taken.** synchromesh at medium confidence |
 | Reiza's fictionalised cars | 17 | **Retired.** No source can exist for these |
 | Other real cars | 18 | Open, and needing homologation-class sources |
@@ -89,7 +89,7 @@ asserted that "the regulations mandate a mechanically operated H-pattern manual
 gearbox but leave its design free" - but the claim rested on a Wikipedia article
 and a community AMS2 wiki restating the regulations. It now rests on Article 15.
 
-## Candidate: Formula Vee
+## Taken: Formula Vee
 
 `formula-vee-fin` (four-speed), `formula-vee-gen2` (five-speed).
 
@@ -118,22 +118,35 @@ air-cooled VW box, the Naja 01-D the five-speed longitudinal Gol box. **Those ar
 the two records' gear counts exactly**, which is good corroboration that the
 records model these two variants.
 
-**Candidate: `synchromesh` for both, confidence `medium`.**
+**Recorded: `synchromesh` for both at `medium`**, and both records say the field
+was contested rather than merely unfilled, because a reader who finds a value
+here should know it had been left open once with the same source cited.
 
-The basis is a chain, and the weak link should be visible: the regulation
-mandates specific unmodified production Volkswagen road gearboxes and requires
-them sealed, and production VW road gearboxes are synchromesh. The regulation
-itself never says *sincronizada* - that last step is the inference. It is
-corroborated independently: national Formula Vee regulations elsewhere state the
-requirement outright, that "a fully synchromesh VW Type 1 or 3 gearbox must be
-used".
+**The two are not equally evidenced, and their bases differ accordingly.** The
+Irish Formula Vee regulations were fetched and read rather than taken from a
+search summary, and Section 3 says outright: "A fully synchromesh VW Type 1 or 3
+gearbox must be used. All four forward gears as well as reverse gear must be
+present and in operative condition", with the internals "assembled as originally
+intended by the manufacturer".
 
-That is a much stronger basis than era or period practice, but it is still one
-step short of a Brazilian clause using the word. A reviewer could reasonably
-argue for higher than medium; medium is what a researcher should propose.
+That covers the **air-cooled four-speed**, which is `formula-vee-fin`, and covers
+it well. It says nothing about the **Brazilian five-speed Gol** unit in
+`formula-vee-gen2`, which is a different production gearbox in a different
+championship. That one rests on the Brazilian regulation naming the unit and
+sealing it, plus the Gol being a production road car. Both are medium; only one
+has a regulation using the word.
 
 Falsifiable by a Brazilian clause or a promoter's specification showing the
 sealed boxes carry dog engagement.
+
+**The blip was left exactly where it was, and it does not agree.** Both records
+carry `manual_blip: required` from a guided drive at `verified` confidence - the
+simulator rejected a clutchless downshift until the driver blipped. A synchromesh
+does not need a blip to engage, so a required blip sits oddly against the
+construction now recorded. That tension is left standing as each record's
+declared deviation rather than resolved, because the construction is a
+medium-confidence claim and cannot overrule a drive. If it is ever resolved the
+likely shape is a simulator override, not a change to the real car's value.
 
 Sources: `https://fasp.faspnet.com.br/wp-content/uploads/2025/02/Formula-Vee-2025-tecnico.pdf`
 (FASP, type `homologation`), `https://fvee.com.br/index.php/a-categoria/os-carros`
@@ -235,15 +248,14 @@ construction. Listed so the search is not repeated.
 ## What to decide next
 
 1. ~~Copa Truck.~~ Decided: unknown, with Article 15 cited.
-2. **Formula Vee.** Whether the sealed-production-unit chain clears the bar at
-   medium, for two records - and note this reopens a question someone already
-   answered the other way with the same source in hand.
+2. ~~Formula Vee.~~ Taken: synchromesh at medium on both, knowingly reversing the
+   earlier call. The blip tension it exposes is the thing left to look at.
 3. ~~The 911 RSR.~~ Taken: synchromesh at medium.
 4. ~~Retire the 17 fictionalised records.~~ Done.
 5. For the remaining real cars, look for homologation papers and period workshop
    documentation. Car histories have been tried and do not reach it.
 
-The live queue is now 20 records: 17 real cars, plus `formula-junior` and the two
-Formula Vee records, which are real categories rather than Reiza's inventions. Of
-the original 43, one is answered and 22 are closed with a written reason - 5 by
-the Copa Truck regulation and 17 by retirement.
+The live queue is now 18 records: 17 real cars plus `formula-junior`. Of the
+original 43, three are answered - the 911 RSR and the two Formula Vee cars - and
+22 are closed with a written reason, 5 by the Copa Truck regulation and 17 by
+retirement.

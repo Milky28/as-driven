@@ -18,7 +18,7 @@
   "authentic_controls": {
     "transmission": {
       "forward_gears": 4,
-      "gearbox_type": "unknown",
+      "gearbox_type": "synchromesh",
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
@@ -52,7 +52,10 @@
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
       "A clutch is required from rest.",
       "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
-      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had."
+      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had.",
+      "The gearbox is the category's air-cooled Volkswagen four-speed, which Formula Vee regulations require to be fully synchromesh with its internals as the manufacturer assembled them. The Brazilian regulation names the unit and requires it sealed; the word synchromesh comes from the category's regulations elsewhere, so the construction is recorded at medium confidence rather than high.",
+      "The downshift blip stays as the drive found it. A synchromesh does not need one to engage, so a required blip sits oddly with the construction and is the record's declared departure from the archetype. It is not revised here: the value came from a guided drive, and the construction is only a medium-confidence claim, so it cannot overrule it.",
+      "Recorded after this field had been left unknown once with the same Brazilian regulation already cited. The reversal is deliberate: the regulation names the unit rather than its construction, and the construction is taken from the unit being an unmodified production road gearbox."
     ]
   },
   "simulators": [
@@ -132,7 +135,12 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/identities",
           "/simulators/0/behavior"
@@ -142,12 +150,29 @@
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash fc6d817a."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "fasp.formula-vee-2025-regulations",
+          "iccr.formula-vee-technical-regulations"
+        ],
+        "confidence": "medium",
+        "basis": "The Brazilian regulations permit two transmissions and this car runs the first: four gears originating from the Fusca, Kombi and other air-cooled Volkswagens, supplied sealed. A Formula Vee technical regulation for the same category states outright that a fully synchromesh VW Type 1 or 3 gearbox must be used with its internals assembled as the manufacturer intended. That the Brazilian sealed unit is the same synchromesh box is inferred from the category rather than stated by a Brazilian clause, which is why this sits at medium. The car's real-world variant naming is provisional, but the category mandates the transmission whichever variant it is."
       }
     ]
   },
   "archetype": {
-    "classification": "no-archetype",
-    "basis": "No registered archetype is a four-speed H-pattern that needs the blip. The registered four-speed leaves it optional, and this car requires it. Whether that is a departure or a different mechanism turns on gearbox_type, which is unestablished: dog rings need the driver to match revs, which would make these cars an archetype of their own rather than a variation on the synchromesh one. Six curated cars sit in exactly this position. A reviewed source settles all of them together."
+    "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "The driver must blip on downshifts, where the archetype leaves it optional. The value came from a guided drive that rejected a clutchless downshift without one. It sits oddly with a synchromesh, which does not need a blip to engage, and that tension is left standing rather than resolved: the construction is only a medium-confidence claim and cannot overrule a drive."
+      }
+    ]
   },
   "updated_at": "2026-08-16"
 }

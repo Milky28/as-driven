@@ -3817,6 +3817,18 @@
       "notes": "Reputable historical overview stating that most DBR9s used a six-speed sequential gearbox while some used H-pattern manuals. This supports the hardware family but requires exact simulator inspection to resolve the modeled variant."
     },
     {
+      "source_id": "iccr.formula-vee-technical-regulations",
+      "title": "Formula Vee Technical Regulations - The Gears and Axle Drive",
+      "publisher": "Irish Circuit Racing Championships",
+      "url": "https://www.iccr.ie/wp-content/uploads/2021/06/2021-Tech-Regs-Formula-Vee.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Section 3 requires that a fully synchromesh VW Type 1 or 3 gearbox must be used, with all four forward gears and reverse present and operative, and that the gearbox internals be assembled as originally intended by the manufacturer. Registered as corroboration that the category's air-cooled four-speed unit is a synchromesh one; it is an Irish championship and says nothing about the Brazilian five-speed Gol gearbox."
+    },
+    {
       "source_id": "imsa.hybrid-101.lmdh.2022",
       "title": "Hybrid 101: Learn More about How LMDh Hybrid Power Works",
       "publisher": "IMSA",
