@@ -52,7 +52,7 @@
       "disposition": "retired-identity",
       "last_observed": "2024-04-08",
       "superseded_by": "Formula Edge Model1",
-      "related_record_id": "formula-edge-model1-high-downforce",
+      "related_record_id": "formula-edge-model1",
       "source_refs": [
         "ams2.reiza-release.1.6.9.5.formula-edge"
       ],
@@ -108,9 +108,9 @@
       "disposition": "retired-identity",
       "last_observed": "2024-04-06",
       "superseded_by": "Lotus Renault 98T - High Downforce, Lotus Renault 98T",
-      "related_record_id": "lotus-renault-98t-high-downforce",
+      "related_record_id": "lotus-renault-98t",
       "source_refs": [],
-      "basis": "Stored 2024 observation from before the car was renamed. Loading it in AMS2 1.6.9.91 reports Lotus Renault 98T, in both the high- and low-downforce configurations, so this exact string is no longer produced by the certified build and is not aliased onto the record. Both current identities are carried by ams2.lotus-renault-98t-high-downforce."
+      "basis": "Stored 2024 observation from before the car was renamed. Loading it in AMS2 1.6.9.91 reports Lotus Renault 98T, in both the high- and low-downforce configurations, so this exact string is no longer produced by the certified build and is not aliased onto the record. Both current identities are carried by ams2.lotus-renault-98t."
     },
     {
       "telemetry_name": "Formula Ultimate Gen2",
@@ -135,7 +135,7 @@
       "disposition": "retired-identity",
       "last_observed": "2025-01-15",
       "superseded_by": "McLaren Cosworth MP4/8 - High Downforce",
-      "related_record_id": "mclaren-cosworth-mp4-8-high-downforce",
+      "related_record_id": "mclaren-cosworth-mp4-8",
       "source_refs": [],
       "basis": "Pre-rename form of the same car. The maintainer reports that only McLaren Cosworth MP4/8 appears in the selector, and that car was driven and curated in dataset 0.3.37. Reiza added the engine maker to the name, as it did for Lotus Renault 98T. The bare string is a stored observation the certified build no longer produces, so it is not aliased onto the record."
     },

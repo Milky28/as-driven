@@ -4,8 +4,8 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "reynard-95i-mercedes-benz-high-downforce",
-      "bundle": "build/cart-batch-16/reynard-95i-mercedes-benz-high-downforce.staged.json",
+      "record_id": "reynard-95i-mercedes-benz",
+      "bundle": "build/cart-batch-16/reynard-95i-mercedes-benz.staged.json",
       "manufacturer": "Reynard",
       "model": "95I Mercedes-Benz",
       "variant": "High Downforce",

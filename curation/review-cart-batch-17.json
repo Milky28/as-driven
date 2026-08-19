@@ -4,8 +4,8 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "lola-t98-00-ford-cosworth-high-downforce",
-      "bundle": "build/cart-batch-17/lola-t98-00-ford-cosworth-high-downforce.staged.json",
+      "record_id": "lola-t98-00-ford-cosworth",
+      "bundle": "build/cart-batch-17/lola-t98-00-ford-cosworth.staged.json",
       "manufacturer": "Lola",
       "model": "T98/00 Ford-Cosworth",
       "variant": "High Downforce",
@@ -62,8 +62,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-98i-ford-cosworth-high-downforce",
-      "bundle": "build/cart-batch-17/reynard-98i-ford-cosworth-high-downforce.staged.json",
+      "record_id": "reynard-98i-ford-cosworth",
+      "bundle": "build/cart-batch-17/reynard-98i-ford-cosworth.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Ford-Cosworth",
       "variant": "High Downforce",
@@ -119,8 +119,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-98i-honda-high-downforce",
-      "bundle": "build/cart-batch-17/reynard-98i-honda-high-downforce.staged.json",
+      "record_id": "reynard-98i-honda",
+      "bundle": "build/cart-batch-17/reynard-98i-honda.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Honda",
       "variant": "High Downforce",
@@ -177,8 +177,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-98i-mercedes-benz-high-downforce",
-      "bundle": "build/cart-batch-17/reynard-98i-mercedes-benz-high-downforce.staged.json",
+      "record_id": "reynard-98i-mercedes-benz",
+      "bundle": "build/cart-batch-17/reynard-98i-mercedes-benz.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Mercedes-Benz",
       "variant": "High Downforce",
@@ -235,8 +235,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-98i-toyota-high-downforce",
-      "bundle": "build/cart-batch-17/reynard-98i-toyota-high-downforce.staged.json",
+      "record_id": "reynard-98i-toyota",
+      "bundle": "build/cart-batch-17/reynard-98i-toyota.staged.json",
       "manufacturer": "Reynard",
       "model": "98I Toyota",
       "variant": "High Downforce",
@@ -293,8 +293,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "swift-009c-ford-cosworth-high-downforce",
-      "bundle": "build/cart-batch-17/swift-009c-ford-cosworth-high-downforce.staged.json",
+      "record_id": "swift-009c-ford-cosworth",
+      "bundle": "build/cart-batch-17/swift-009c-ford-cosworth.staged.json",
       "manufacturer": "Swift",
       "model": "009.c Ford-Cosworth",
       "variant": "High Downforce",

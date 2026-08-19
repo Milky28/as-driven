@@ -4,8 +4,8 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "formula-classic-gen2-model1-high-downforce",
-      "bundle": "build/formula-batch-12/formula-classic-gen2-model1-high-downforce.staged.json",
+      "record_id": "formula-classic-gen2-model1",
+      "bundle": "build/formula-batch-12/formula-classic-gen2-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen2 Model1",
       "year": {
@@ -46,8 +46,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen2-model3-high-downforce",
-      "bundle": "build/formula-batch-12/formula-classic-gen2-model3-high-downforce.staged.json",
+      "record_id": "formula-classic-gen2-model3",
+      "bundle": "build/formula-batch-12/formula-classic-gen2-model3.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen2 Model3",
       "year": {
@@ -88,8 +88,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen2-model2-high-downforce",
-      "bundle": "build/formula-batch-12/formula-classic-gen2-model2-high-downforce.staged.json",
+      "record_id": "formula-classic-gen2-model2",
+      "bundle": "build/formula-batch-12/formula-classic-gen2-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen2 Model2",
       "year": {
@@ -131,8 +131,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-honda-mp4-4-high-downforce",
-      "bundle": "build/formula-batch-12/mclaren-honda-mp4-4-high-downforce.staged.json",
+      "record_id": "mclaren-honda-mp4-4",
+      "bundle": "build/formula-batch-12/mclaren-honda-mp4-4.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/4",
       "year": {
@@ -176,8 +176,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-hitech-gen1-model1-high-downforce",
-      "bundle": "build/formula-batch-12/formula-hitech-gen1-model1-high-downforce.staged.json",
+      "record_id": "formula-hitech-gen1-model1",
+      "bundle": "build/formula-batch-12/formula-hitech-gen1-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula HiTech Gen1 Model1",
       "year": {
@@ -219,8 +219,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-hitech-gen1-model2-high-downforce",
-      "bundle": "build/formula-batch-12/formula-hitech-gen1-model2-high-downforce.staged.json",
+      "record_id": "formula-hitech-gen1-model2",
+      "bundle": "build/formula-batch-12/formula-hitech-gen1-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula HiTech Gen1 Model2",
       "year": {
@@ -262,8 +262,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-hitech-gen1-model4-high-downforce",
-      "bundle": "build/formula-batch-12/formula-hitech-gen1-model4-high-downforce.staged.json",
+      "record_id": "formula-hitech-gen1-model4",
+      "bundle": "build/formula-batch-12/formula-hitech-gen1-model4.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula HiTech Gen1 Model4",
       "year": {
@@ -305,8 +305,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-honda-mp4-7a-high-downforce",
-      "bundle": "build/formula-batch-12/mclaren-honda-mp4-7a-high-downforce.staged.json",
+      "record_id": "mclaren-honda-mp4-7a",
+      "bundle": "build/formula-batch-12/mclaren-honda-mp4-7a.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/7A",
       "year": {
@@ -350,8 +350,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-hitech-gen2-model1-high-downforce",
-      "bundle": "build/formula-batch-12/formula-hitech-gen2-model1-high-downforce.staged.json",
+      "record_id": "formula-hitech-gen2-model1",
+      "bundle": "build/formula-batch-12/formula-hitech-gen2-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula HiTech Gen2 Model1",
       "year": {
@@ -394,8 +394,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-hitech-gen2-model2-high-downforce",
-      "bundle": "build/formula-batch-12/formula-hitech-gen2-model2-high-downforce.staged.json",
+      "record_id": "formula-hitech-gen2-model2",
+      "bundle": "build/formula-batch-12/formula-hitech-gen2-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula HiTech Gen2 Model2",
       "year": {
@@ -438,8 +438,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-hitech-gen2-model3-high-downforce",
-      "bundle": "build/formula-batch-12/formula-hitech-gen2-model3-high-downforce.staged.json",
+      "record_id": "formula-hitech-gen2-model3",
+      "bundle": "build/formula-batch-12/formula-hitech-gen2-model3.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula HiTech Gen2 Model3",
       "year": {
@@ -482,8 +482,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-cosworth-mp4-8-high-downforce",
-      "bundle": "build/formula-batch-12/mclaren-cosworth-mp4-8-high-downforce.staged.json",
+      "record_id": "mclaren-cosworth-mp4-8",
+      "bundle": "build/formula-batch-12/mclaren-cosworth-mp4-8.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/8",
       "year": {

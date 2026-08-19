@@ -1,0 +1,161 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "formula-ultimate-hybrid-gen2",
+  "identity": {
+    "display_name": "Formula Ultimate Hybrid Gen2",
+    "manufacturer": "Reiza",
+    "model": "Formula Ultimate",
+    "year": {
+      "label": "2017 to 2021",
+      "from": 2017,
+      "to": 2021
+    },
+    "class": "Formula Ultimate Hybrid Gen2",
+    "real_world_identity_notes": "Reiza's fictionalised modern hybrid Formula car, the Gen2 of the Formula Ultimate line. No real-world chassis identity is assigned. It is a separate car from Formula Ultimate Hybrid Gen3, which AMS2 places in its own class family. Reiza's fictionalised Formula car for the 2017 to 2021 hybrid era. It was reclassified as Gen2 when Reiza rebranded the 2022 ground-effect car from Formula Ultimate Gen2 to Formula Ultimate Hybrid Gen3.",
+    "variant": "Hybrid Gen2"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 8,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, automatic blip on downshifts, and no clutch needed to pull away, so the driver supplies none of the three.",
+      "Eight forward gears, matching the modern Formula One hybrid era the class represents and the other Formula Ultimate records.",
+      "This is a different car from Formula Ultimate Hybrid Gen3. AMS2 places Gen2 in the F-Ultimate class family and Gen3 in F-Ultimate_Gen2, so the class numbering is offset from the car numbering by one. Nothing is inherited between them.",
+      "This is the 2017 to 2021 hybrid car. It became Gen2 only when Reiza rebranded the newer ground-effect car to Gen3, which is why the class numbering trails the car numbering."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Ultimate Hybrid Gen2",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Ultimate_HD"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-ultimate-hybrid-gen2-high-downforce.20260815t194547375z-f1422fef by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "wikipedia.mclaren-mp4-8",
+        "ams2.local-live-formula-ultimate-hybrid-gen2-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and all three of the car's aero identities were observed in live telemetry."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-mp4-8",
+          "ams2.local-live-formula-ultimate-hybrid-gen2-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The identity is Reiza's own model name, observed exactly in live telemetry in all three of its aero configurations; no real-world chassis identity is assigned."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-mp4-8",
+          "ams2.local-live-formula-ultimate-hybrid-gen2-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The live drive selected eight paddle gears with automatic cut and blip and no clutch needed to pull away, which is the modern hybrid Formula pattern the class represents."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-ultimate-hybrid-gen2-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "paddles-6-semiauto-no-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "Eight forward gears against the archetype's six, matching the modern Formula One hybrid era the class represents and the other Formula Ultimate records. Everything the driver does is the archetype's: no clutch to pull away, flat upshifts, and the car blips."
+      }
+    ]
+  },
+  "notes": [
+    "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
+  ],
+  "updated_at": "2026-08-17"
+}

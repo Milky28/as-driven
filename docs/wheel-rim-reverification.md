@@ -22,7 +22,7 @@ Merging also settled the largest contradiction this file used to list. All 15 `f
 | `f309` | round | yes |
 | `formula-trainer-advanced` | d-shaped | yes |
 | `formula-trainer` | d-shaped | yes |
-| `mclaren-mercedes-mp4-12-high-downforce` | round | yes |
+| `mclaren-mercedes-mp4-12` | round | yes |
 | `porsche-911-gt1-98` | d-shaped | yes |
 
 Count: 6.
@@ -35,37 +35,37 @@ A split is not automatically an error: cars in one class can genuinely carry dif
 
 Recorded as: d-shaped x3, round x9.
 
-- `formula-classic-gen1-model2-high-downforce` - d-shaped
-- `formula-classic-gen2-model2-high-downforce` - d-shaped
-- `formula-classic-gen4-model3-high-downforce` - d-shaped
-- `formula-classic-gen1-model1-high-downforce` - round
-- `formula-classic-gen2-model1-high-downforce` - round
-- `formula-classic-gen2-model3-high-downforce` - round
-- `formula-classic-gen3-model1-high-downforce` - round
-- `formula-classic-gen3-model2-high-downforce` - round
-- `formula-classic-gen3-model3-high-downforce` - round
-- `formula-classic-gen3-model4-high-downforce` - round
-- `formula-classic-gen4-model1-high-downforce` - round
-- `formula-classic-gen4-model2-high-downforce` - round
+- `formula-classic-gen1-model2` - d-shaped
+- `formula-classic-gen2-model2` - d-shaped
+- `formula-classic-gen4-model3` - d-shaped
+- `formula-classic-gen1-model1` - round
+- `formula-classic-gen2-model1` - round
+- `formula-classic-gen2-model3` - round
+- `formula-classic-gen3-model1` - round
+- `formula-classic-gen3-model2` - round
+- `formula-classic-gen3-model3` - round
+- `formula-classic-gen3-model4` - round
+- `formula-classic-gen4-model1` - round
+- `formula-classic-gen4-model2` - round
 
 ### Formula Edge (3 records)
 
 Recorded as: d-shaped x1, round x1, yoke x1.
 
-- `formula-edge-model2-high-downforce` - d-shaped
-- `formula-edge-model3-high-downforce` - round
-- `formula-edge-model1-high-downforce` - yoke
+- `formula-edge-model2` - d-shaped
+- `formula-edge-model3` - round
+- `formula-edge-model1` - yoke
 
 ### Formula HiTech (6 records)
 
 Recorded as: d-shaped x1, round x5.
 
-- `formula-hitech-gen2-model3-high-downforce` - d-shaped
-- `formula-hitech-gen1-model1-high-downforce` - round
-- `formula-hitech-gen1-model2-high-downforce` - round
-- `formula-hitech-gen1-model4-high-downforce` - round
-- `formula-hitech-gen2-model1-high-downforce` - round
-- `formula-hitech-gen2-model2-high-downforce` - round
+- `formula-hitech-gen2-model3` - d-shaped
+- `formula-hitech-gen1-model1` - round
+- `formula-hitech-gen1-model2` - round
+- `formula-hitech-gen1-model4` - round
+- `formula-hitech-gen2-model1` - round
+- `formula-hitech-gen2-model2` - round
 
 ### Formula Vee (3 records)
 

@@ -4,8 +4,8 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "formula-classic-gen3-model1-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen3-model1-high-downforce.staged.json",
+      "record_id": "formula-classic-gen3-model1",
+      "bundle": "build/formula-batch-13/formula-classic-gen3-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model1",
       "year": {
@@ -47,8 +47,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen3-model3-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen3-model3-high-downforce.staged.json",
+      "record_id": "formula-classic-gen3-model3",
+      "bundle": "build/formula-batch-13/formula-classic-gen3-model3.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model3",
       "year": {
@@ -90,8 +90,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen3-model4-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen3-model4-high-downforce.staged.json",
+      "record_id": "formula-classic-gen3-model4",
+      "bundle": "build/formula-batch-13/formula-classic-gen3-model4.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model4",
       "year": {
@@ -133,8 +133,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen4-model3-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen4-model3-high-downforce.staged.json",
+      "record_id": "formula-classic-gen4-model3",
+      "bundle": "build/formula-batch-13/formula-classic-gen4-model3.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen4 Model3",
       "year": {
@@ -176,8 +176,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen3-model2-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen3-model2-high-downforce.staged.json",
+      "record_id": "formula-classic-gen3-model2",
+      "bundle": "build/formula-batch-13/formula-classic-gen3-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen3 Model2",
       "year": {
@@ -219,8 +219,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen4-model1-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen4-model1-high-downforce.staged.json",
+      "record_id": "formula-classic-gen4-model1",
+      "bundle": "build/formula-batch-13/formula-classic-gen4-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen4 Model1",
       "year": {
@@ -262,8 +262,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen4-model2-high-downforce",
-      "bundle": "build/formula-batch-13/formula-classic-gen4-model2-high-downforce.staged.json",
+      "record_id": "formula-classic-gen4-model2",
+      "bundle": "build/formula-batch-13/formula-classic-gen4-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen4 Model2",
       "year": {
@@ -305,8 +305,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-honda-mp4-5b-high-downforce",
-      "bundle": "build/formula-batch-13/mclaren-honda-mp4-5b-high-downforce.staged.json",
+      "record_id": "mclaren-honda-mp4-5b",
+      "bundle": "build/formula-batch-13/mclaren-honda-mp4-5b.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/5B",
       "year": {
@@ -350,8 +350,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-honda-mp4-6-high-downforce",
-      "bundle": "build/formula-batch-13/mclaren-honda-mp4-6-high-downforce.staged.json",
+      "record_id": "mclaren-honda-mp4-6",
+      "bundle": "build/formula-batch-13/mclaren-honda-mp4-6.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/6",
       "year": {

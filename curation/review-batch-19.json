@@ -178,8 +178,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-mercedes-mp4-12-high-downforce",
-      "bundle": "build/batch-19/mclaren-mercedes-mp4-12-high-downforce.staged.json",
+      "record_id": "mclaren-mercedes-mp4-12",
+      "bundle": "build/batch-19/mclaren-mercedes-mp4-12.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/12",
       "year": {

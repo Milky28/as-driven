@@ -55,9 +55,9 @@
     { "calendar_year": 2025, "item_name": "Audi R8 V10 GT", "record_id": "audi-r8-v10-gt" },
     { "calendar_year": 2025, "item_name": "Dodge Viper ACR", "record_id": "dodge-viper-acr" },
     { "calendar_year": 2025, "item_name": "BMW M3 GTR", "record_id": "bmw-m3-e46-gtr" },
-    { "calendar_year": 2025, "item_name": "Stock USA Gen1", "record_id": "stock-usa-gen1-speedway" },
-    { "calendar_year": 2025, "item_name": "Stock USA Gen2", "record_id": "stock-usa-gen2-superspeedway" },
-    { "calendar_year": 2025, "item_name": "Stock USA Gen3", "record_id": "stock-usa-gen3-superspeedway" },
+    { "calendar_year": 2025, "item_name": "Stock USA Gen1", "record_id": "stock-usa-gen1" },
+    { "calendar_year": 2025, "item_name": "Stock USA Gen2", "record_id": "stock-usa-gen2" },
+    { "calendar_year": 2025, "item_name": "Stock USA Gen3", "record_id": "stock-usa-gen3" },
     { "calendar_year": 2025, "item_name": "Stock USA Gen3 LM", "record_id": "stock-usa-gen3-lm" },
     { "calendar_year": 2025, "item_name": "F-Hybrid Gen2", "record_id": "formula-ultimate-2019" },
     { "calendar_year": 2025, "item_name": "F-Hybrid Gen3", "record_id": "formula-ultimate-2022" },
@@ -69,21 +69,21 @@
     { "calendar_year": 2026, "item_name": "Saleen S7-R", "record_id": "saleen-s7-r-gt1" },
     { "calendar_year": 2026, "item_name": "Spyker C8 Spyder GT2-R", "record_id": "spyker-c8-spyder-gt2-r" },
     { "calendar_year": 2026, "item_name": "TVR Tuscan T400R", "record_id": "tvr-tuscan-t400r-gt2" },
-    { "calendar_year": 2026, "item_name": "Renault R25", "record_id": "renault-r25-high-downforce" },
-    { "calendar_year": 2026, "item_name": "Renault R26", "record_id": "renault-r26-high-downforce" },
-    { "calendar_year": 2026, "item_name": "Renault R28", "record_id": "renault-r28-high-downforce" },
+    { "calendar_year": 2026, "item_name": "Renault R25", "record_id": "renault-r25" },
+    { "calendar_year": 2026, "item_name": "Renault R26", "record_id": "renault-r26" },
+    { "calendar_year": 2026, "item_name": "Renault R28", "record_id": "renault-r28" },
     { "calendar_year": 2026, "item_name": "F-Hybrid Gen1", "record_id": "formula-ultimate-2019" },
     { "calendar_year": 2026, "item_name": "F-V10 Gen2 Bridgestone configuration", "record_id": "formula-v10-g2" },
     { "calendar_year": 2026, "item_name": "F-V10 Gen2 Michelin configuration", "record_id": "formula-v10-g2" },
     { "calendar_year": 2026, "item_name": "Maserati Grandsport", "record_id": "maserati-gransport-trofeo" },
     { "calendar_year": 2026, "item_name": "Formula Vee Gen2 2026 specification", "record_id": "formula-vee-gen2" }
-    ,{ "calendar_year": 2026, "item_name": "F-Edge Model1", "record_id": "formula-edge-model1-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "F-Edge Model2", "record_id": "formula-edge-model2-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "F-Edge Model3", "record_id": "formula-edge-model3-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "V10 Gen3 Bridgestone", "record_id": "formula-v10-gen3-b-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "V10 Gen3 Michelin", "record_id": "formula-v10-gen3-m-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "V8 Gen1 Bridgestone", "record_id": "formula-v8-gen1-b-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "V8 Gen1 Michelin", "record_id": "formula-v8-gen1-m-high-downforce" }
-    ,{ "calendar_year": 2026, "item_name": "V8 Gen2 M1", "record_id": "formula-v8-gen2-high-downforce" }
+    ,{ "calendar_year": 2026, "item_name": "F-Edge Model1", "record_id": "formula-edge-model1" }
+    ,{ "calendar_year": 2026, "item_name": "F-Edge Model2", "record_id": "formula-edge-model2" }
+    ,{ "calendar_year": 2026, "item_name": "F-Edge Model3", "record_id": "formula-edge-model3" }
+    ,{ "calendar_year": 2026, "item_name": "V10 Gen3 Bridgestone", "record_id": "formula-v10-gen3-b" }
+    ,{ "calendar_year": 2026, "item_name": "V10 Gen3 Michelin", "record_id": "formula-v10-gen3-m" }
+    ,{ "calendar_year": 2026, "item_name": "V8 Gen1 Bridgestone", "record_id": "formula-v8-gen1-b" }
+    ,{ "calendar_year": 2026, "item_name": "V8 Gen1 Michelin", "record_id": "formula-v8-gen1-m" }
+    ,{ "calendar_year": 2026, "item_name": "V8 Gen2 M1", "record_id": "formula-v8-gen2" }
   ]
 }

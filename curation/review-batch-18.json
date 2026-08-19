@@ -4,8 +4,8 @@
   "approved_at": "2026-08-15",
   "records": [
     {
-      "record_id": "lola-b2k00-ford-cosworth-high-downforce",
-      "bundle": "build/batch-18/lola-b2k00-ford-cosworth-high-downforce.staged.json",
+      "record_id": "lola-b2k00-ford-cosworth",
+      "bundle": "build/batch-18/lola-b2k00-ford-cosworth.staged.json",
       "manufacturer": "Lola",
       "model": "B2K/00 Ford-Cosworth",
       "variant": "High Downforce",
@@ -62,8 +62,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "lola-b2k00-mercedes-benz-high-downforce",
-      "bundle": "build/batch-18/lola-b2k00-mercedes-benz-high-downforce.staged.json",
+      "record_id": "lola-b2k00-mercedes-benz",
+      "bundle": "build/batch-18/lola-b2k00-mercedes-benz.staged.json",
       "manufacturer": "Lola",
       "model": "B2K/00 Mercedes-Benz",
       "variant": "High Downforce",
@@ -120,8 +120,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "lola-b2k00-toyota-high-downforce",
-      "bundle": "build/batch-18/lola-b2k00-toyota-high-downforce.staged.json",
+      "record_id": "lola-b2k00-toyota",
+      "bundle": "build/batch-18/lola-b2k00-toyota.staged.json",
       "manufacturer": "Lola",
       "model": "B2K/00 Toyota",
       "variant": "High Downforce",
@@ -178,8 +178,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-2ki-ford-cosworth-high-downforce",
-      "bundle": "build/batch-18/reynard-2ki-ford-cosworth-high-downforce.staged.json",
+      "record_id": "reynard-2ki-ford-cosworth",
+      "bundle": "build/batch-18/reynard-2ki-ford-cosworth.staged.json",
       "manufacturer": "Reynard",
       "model": "2KI Ford-Cosworth",
       "variant": "High Downforce",
@@ -236,8 +236,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-2ki-honda-high-downforce",
-      "bundle": "build/batch-18/reynard-2ki-honda-high-downforce.staged.json",
+      "record_id": "reynard-2ki-honda",
+      "bundle": "build/batch-18/reynard-2ki-honda.staged.json",
       "manufacturer": "Reynard",
       "model": "2KI Honda",
       "variant": "High Downforce",
@@ -294,8 +294,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-2ki-mercedes-benz-high-downforce",
-      "bundle": "build/batch-18/reynard-2ki-mercedes-benz-high-downforce.staged.json",
+      "record_id": "reynard-2ki-mercedes-benz",
+      "bundle": "build/batch-18/reynard-2ki-mercedes-benz.staged.json",
       "manufacturer": "Reynard",
       "model": "2KI Mercedes-Benz",
       "variant": "High Downforce",
@@ -353,8 +353,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "reynard-2ki-toyota-high-downforce",
-      "bundle": "build/batch-18/reynard-2ki-toyota-high-downforce.staged.json",
+      "record_id": "reynard-2ki-toyota",
+      "bundle": "build/batch-18/reynard-2ki-toyota.staged.json",
       "manufacturer": "Reynard",
       "model": "2KI Toyota",
       "variant": "High Downforce",

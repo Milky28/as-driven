@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.16",
+  "approved_at": "2026-08-11",
+  "record_id": "stock-usa-gen2",
+  "simulator": "ams2",
+  "telemetry_name": "Stock USA Gen2 - Superspeedway",
+  "telemetry_class": "Stock_USA_Gen2_SS",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub 9.11.22 guided verification",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "Exact configuration behavior is directly verified; real-world generation mapping remains unresolved.",
+  "scope_notes": "Superspeedway configuration only; no aliases for other Gen2 configurations."
+}

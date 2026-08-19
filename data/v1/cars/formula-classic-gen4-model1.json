@@ -1,0 +1,149 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "formula-classic-gen4-model1",
+  "identity": {
+    "display_name": "Formula Classic Gen4 Model1",
+    "manufacturer": "Reiza",
+    "model": "Formula Classic Gen4 Model1",
+    "year": {
+      "label": "Formula Classic Gen4 Model1"
+    },
+    "class": "Formula Classic Gen4",
+    "real_world_identity_notes": "Reiza's fictionalised semi-automatic car of the era when Formula One was moving away from manual gearboxes, reviewed independently of the other models in its class. Reiza's fictionalised car for the era. No real-world chassis identity is assigned, so the gearbox construction is not established beyond what the drive and the class show."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut and blip on running shifts, and a clutch still needed to pull away.",
+      "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, so the accepted results stand; the driver confirmed no pedal was used.",
+      "This class mixes technologies, which is period-correct. Teams adopted semi-automatic gearboxes at different times around 1990, so a manual car and a paddle car raced in the same field. Nothing is inherited between models on the strength of a shared class.",
+      "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Formula Classic Gen4 Model1",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Classic_Gen4_HD"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-classic-gen4-model1-high-downforce.20260815t040131701z-9c4bc2c1 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "wikipedia.mclaren-mp4-7a",
+        "ams2.local-live-formula-classic-gen4-model1-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-mp4-7a",
+          "ams2.local-live-formula-classic-gen4-model1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The identity is Reiza's own model name, observed exactly in live telemetry; no real-world chassis identity is assigned."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.mclaren-mp4-7a",
+          "ams2.local-live-formula-classic-gen4-model1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The live drive selected 7 paddle gears with automatic cut and blip, and the car needed the clutch to pull away, which is the semi-automatic pattern of the era: a driver clutch for the start and the car's own clutch for every running shift."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-classic-gen4-model1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "paddles-7-semiauto-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
+  "updated_at": "2026-08-17"
+}

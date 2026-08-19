@@ -101,11 +101,11 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         # written into the record and disclosed in its approval. Coverage must
         # never come from the generator inferring the relationship.
         self.assertEqual(entry["coverage_disposition"], "covered-exact")
-        self.assertEqual(entry["related_record_id"], "formula-edge-model1-high-downforce")
+        self.assertEqual(entry["related_record_id"], "formula-edge-model1")
 
         record = json.loads(
             (
-                ROOT / "data" / "v1" / "cars" / "formula-edge-model1-high-downforce.json"
+                ROOT / "data" / "v1" / "cars" / "formula-edge-model1.json"
             ).read_text(encoding="utf-8")
         )
         # Declared aero packages are expanded, because the guarantee is that the
@@ -125,7 +125,7 @@ class AMS2CoverageManifestTests(unittest.TestCase):
 
         approval = json.loads(
             (
-                ROOT / "curation" / "ams2-approved-formula-edge-model1-high-downforce.json"
+                ROOT / "curation" / "ams2-approved-formula-edge-model1.json"
             ).read_text(encoding="utf-8")
         )
         disclosed = [

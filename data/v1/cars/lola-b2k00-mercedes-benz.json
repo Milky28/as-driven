@@ -1,0 +1,151 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lola-b2k00-mercedes-benz",
+  "identity": {
+    "display_name": "Lola B2K00 Mercedes-Benz",
+    "manufacturer": "Lola",
+    "model": "B2K/00 Mercedes-Benz",
+    "year": {
+      "label": "2000 CART season",
+      "from": 2000
+    },
+    "class": "CART",
+    "real_world_identity_notes": "Lola B2K/00 of the 2000 CART season, raced with Mercedes-Benz IC108E, Toyota RV8E and Ford/Cosworth XF engines and fitted with a six-speed sequential manual gearbox.",
+    "variant": "High Downforce"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled: automatic cut on upshifts, no automatic blip, and a clutch needed to pull away, so the driver supplies the downshift blip.",
+      "This class runs four configurations: base, high downforce, Speedway and Superspeedway. The two oval packages are why the suffixes differ from the downforce pairs used elsewhere.",
+      "This engine variant was absent from the coverage queue until it was loaded. The source lists it among the chassis's engine options, so it is official content that had never been seen on this PC."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lola B2K00 Mercedes-Benz",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
+        },
+        {
+          "kind": "class-id",
+          "value": "F-USA_Gen3_HD"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.lola-b2k00-mercedes-benz-high-downforce.20260815t225350268z-2d39deff by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-15",
+      "source_refs": [
+        "wikipedia.lola-b2k-00",
+        "ams2.local-live-lola-b2k00-mercedes-benz-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.lola-b2k-00",
+          "ams2.local-live-lola-b2k00-mercedes-benz-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the chassis and its gearbox, and the exact simulator identity was observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.lola-b2k-00",
+          "ams2.local-live-lola-b2k00-mercedes-benz-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The source gives a six-speed sequential manual, and the live drive selected six gears through a sequential stick with automatic cut and no automatic blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lola-b2k00-mercedes-benz-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
+    "classification": "matches"
+  },
+  "updated_at": "2026-08-17"
+}

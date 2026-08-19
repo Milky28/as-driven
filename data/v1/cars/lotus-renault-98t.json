@@ -1,0 +1,187 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lotus-renault-98t",
+  "identity": {
+    "display_name": "Lotus Renault 98T",
+    "manufacturer": "Lotus",
+    "model": "98T",
+    "year": {
+      "label": "1986 Formula One season",
+      "from": 1986
+    },
+    "class": "Formula One",
+    "real_world_identity_notes": "Lotus 98T, the Renault Gordini EF15B turbocharged car driven by Ayrton Senna and Johnny Dumfries in 1986. Its real gearbox is a Lotus/Hewland six-speed manual."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
+      "The standard gate was read from the cockpit by watching the lever and the driver's hand through a shift, because these cars have no gate plate. The same method read three dogleg gates in dataset 0.3.28 that registered sources then corroborated.",
+      "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed base name seen at Daytona. The selection screen offers no low-downforce package for this class, so this car has two aero identities and both are recorded. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
+      "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
+      "Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing this gearbox was synchronised would change the gearbox type and make the downshift blip optional.",
+      "The real car has six forward gears and AMS2 models five. The record keeps the sourced six and states the deviation as an explicit override, so the client tells the driver five in-session while the real-car value stays true. The count was checked deliberately rather than inferred: a guided drive establishes only the highest gear actually selected, so an unreached gear and an absent one look identical."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lotus Renault 98T",
+          "aero_packages": [
+            "base",
+            "high-downforce"
+          ]
+        },
+        {
+          "kind": "class-id",
+          "value": "F-Classic_Gen1_HD"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.lotus-renault-98t-high-downforce.20260814t154354295z-af25e11d by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/forward_gears",
+          "value": 5,
+          "condition": "AMS2 1.6.9.91 models five forward gears for this car.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Observed in the guided drive and confirmed in-game by the driver."
+          },
+          "source_refs": [
+            "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-14",
+      "source_refs": [
+        "wikipedia.lotus-98t",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement",
+        "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.lotus-98t",
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A registered source establishes the 98T and its gearbox, and both exact simulator identities were observed live."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.lotus-98t",
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Wikipedia gives a Lotus / Hewland 6-speed manual. The live drive selected five gears, and the driver then confirmed in-game that no sixth gear exists, so the real six-speed is recorded with an explicit simulator override for the five modelled in AMS2."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement"
+        ],
+        "confidence": "medium",
+        "basis": "The registered source names a Lotus / Hewland six-speed manual but does not state how it engages. Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source, so this value is medium confidence: a source showing the gearbox was synchronised would change it, and would make the downshift blip optional."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "driver_summary": "Lotus/Hewland six-speed - rev-match every downshift. AMS2 gives this car five gears where the real one has six. The dog rings are inferred from Hewland's design approach rather than stated by a source.",
+  "archetype": {
+    "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "The real Lotus/Hewland gearbox has six forward gears where the archetype's cars have five. AMS2 models five, and that difference is carried as a simulator override, so the client tells the driver five in session while the real-car count stays true."
+      }
+    ]
+  },
+  "updated_at": "2026-08-17"
+}

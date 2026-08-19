@@ -4643,7 +4643,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "stock-usa-gen1-speedway",
+        "record_id": "stock-usa-gen1",
         "dataset_version": "0.3.16",
         "scope": "Speedway configuration only; no aliases for other Gen1 configurations."
       }
@@ -4712,7 +4712,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "stock-usa-gen2-superspeedway",
+        "record_id": "stock-usa-gen2",
         "dataset_version": "0.3.16",
         "scope": "Superspeedway configuration only; no aliases for other Gen2 configurations."
       }
@@ -4795,7 +4795,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "stock-usa-gen3-superspeedway",
+        "record_id": "stock-usa-gen3",
         "dataset_version": "0.3.16",
         "scope": "Superspeedway configuration only; no aliases for other Gen3 or LM configurations."
       }
@@ -4945,7 +4945,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-edge-model1-high-downforce",
+        "record_id": "formula-edge-model1",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80."
       }
@@ -5015,7 +5015,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-edge-model2-high-downforce",
+        "record_id": "formula-edge-model2",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-edge-model2-high-downforce.20260812t173111084z-2bd2b1c3."
       }
@@ -5085,7 +5085,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-edge-model3-high-downforce",
+        "record_id": "formula-edge-model3",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-edge-model3-high-downforce.20260812t173528844z-d534209f."
       }
@@ -5686,7 +5686,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "renault-r25-high-downforce",
+        "record_id": "renault-r25",
         "dataset_version": "0.3.15",
         "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
       }
@@ -5762,7 +5762,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "renault-r26-high-downforce",
+        "record_id": "renault-r26",
         "dataset_version": "0.3.15",
         "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
       }
@@ -5838,7 +5838,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "renault-r28-high-downforce",
+        "record_id": "renault-r28",
         "dataset_version": "0.3.15",
         "scope": "Exact High Downforce identity only; no unobserved setup suffix is silently added."
       }
@@ -5906,7 +5906,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-v10-gen3-b-high-downforce",
+        "record_id": "formula-v10-gen3-b",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-v10-gen3-b-high-downforce.20260812t173906657z-7278e265."
       }
@@ -5974,7 +5974,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-v10-gen3-m-high-downforce",
+        "record_id": "formula-v10-gen3-m",
         "dataset_version": "0.3.18",
         "scope": "Reviewed replacement draft ams2.formula-v10-gen3-m-high-downforce.20260812t175743478z-e3e818fe."
       }
@@ -6044,7 +6044,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-v8-gen1-b-high-downforce",
+        "record_id": "formula-v8-gen1-b",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-v8-gen1-b-high-downforce.20260812t174602668z-8bfe9dfc."
       }
@@ -6112,7 +6112,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-v8-gen1-m-high-downforce",
+        "record_id": "formula-v8-gen1-m",
         "dataset_version": "0.3.18",
         "scope": "Reviewed draft ams2.formula-v8-gen1-m-high-downforce.20260812t174847643z-a2e25ff6."
       }
@@ -6180,7 +6180,7 @@
       "control_source_research_disposition": "researched",
       "promotion_status": "approved",
       "promotion": {
-        "record_id": "formula-v8-gen2-high-downforce",
+        "record_id": "formula-v8-gen2",
         "dataset_version": "0.3.18",
         "scope": "Reviewed exact telemetry draft ams2.formula-v8-gen2-high-downforce.20260812t175201563z-8f9ff65c; no unobserved M1 alias is approved."
       }

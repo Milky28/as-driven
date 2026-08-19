@@ -4,8 +4,8 @@
   "approved_at": "2026-08-14",
   "records": [
     {
-      "record_id": "brabham-bmw-bt52-high-downforce",
-      "bundle": "build/open-wheel-batch-09/brabham-bmw-bt52-high-downforce.staged.json",
+      "record_id": "brabham-bmw-bt52",
+      "bundle": "build/open-wheel-batch-09/brabham-bmw-bt52.staged.json",
       "manufacturer": "Brabham",
       "model": "BT52",
       "year": {
@@ -57,8 +57,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "mclaren-cosworth-mp4-1c-high-downforce",
-      "bundle": "build/open-wheel-batch-09/mclaren-cosworth-mp4-1c-high-downforce.staged.json",
+      "record_id": "mclaren-cosworth-mp4-1c",
+      "bundle": "build/open-wheel-batch-09/mclaren-cosworth-mp4-1c.staged.json",
       "manufacturer": "McLaren",
       "model": "MP4/1C",
       "year": {
@@ -110,8 +110,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "lotus-renault-98t-high-downforce",
-      "bundle": "build/open-wheel-batch-09/lotus-renault-98t-high-downforce.staged.json",
+      "record_id": "lotus-renault-98t",
+      "bundle": "build/open-wheel-batch-09/lotus-renault-98t.staged.json",
       "manufacturer": "Lotus",
       "model": "98T",
       "year": {
@@ -176,8 +176,8 @@
       ]
     },
     {
-      "record_id": "formula-classic-gen1-model1-high-downforce",
-      "bundle": "build/open-wheel-batch-09/formula-classic-gen1-model1-high-downforce.staged.json",
+      "record_id": "formula-classic-gen1-model1",
+      "bundle": "build/open-wheel-batch-09/formula-classic-gen1-model1.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen1 Model1",
       "year": {
@@ -225,8 +225,8 @@
       "live_source_url": "https://www.game-automobilista2.com/"
     },
     {
-      "record_id": "formula-classic-gen1-model2-high-downforce",
-      "bundle": "build/open-wheel-batch-09/formula-classic-gen1-model2-high-downforce.staged.json",
+      "record_id": "formula-classic-gen1-model2",
+      "bundle": "build/open-wheel-batch-09/formula-classic-gen1-model2.staged.json",
       "manufacturer": "Reiza",
       "model": "Formula Classic Gen1 Model2",
       "year": {

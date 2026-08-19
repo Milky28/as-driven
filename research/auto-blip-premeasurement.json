@@ -177,7 +177,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-classic-gen3-model2-high-downforce",
+      "record_id": "formula-classic-gen3-model2",
       "class": "Formula Classic Gen3",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -185,7 +185,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-classic-gen4-model1-high-downforce",
+      "record_id": "formula-classic-gen4-model1",
       "class": "Formula Classic Gen4",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -193,7 +193,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-classic-gen4-model2-high-downforce",
+      "record_id": "formula-classic-gen4-model2",
       "class": "Formula Classic Gen4",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -201,7 +201,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-edge-model1-high-downforce",
+      "record_id": "formula-edge-model1",
       "class": "Formula Edge",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -209,7 +209,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-edge-model2-high-downforce",
+      "record_id": "formula-edge-model2",
       "class": "Formula Edge",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -217,7 +217,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-edge-model3-high-downforce",
+      "record_id": "formula-edge-model3",
       "class": "Formula Edge",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -225,7 +225,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-hitech-gen1-model1-high-downforce",
+      "record_id": "formula-hitech-gen1-model1",
       "class": "Formula HiTech Gen1",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -233,7 +233,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-hitech-gen1-model2-high-downforce",
+      "record_id": "formula-hitech-gen1-model2",
       "class": "Formula HiTech Gen1",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -241,7 +241,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-hitech-gen1-model4-high-downforce",
+      "record_id": "formula-hitech-gen1-model4",
       "class": "Formula HiTech Gen1",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -249,7 +249,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-hitech-gen2-model1-high-downforce",
+      "record_id": "formula-hitech-gen2-model1",
       "class": "Formula HiTech Gen2",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -257,7 +257,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-hitech-gen2-model2-high-downforce",
+      "record_id": "formula-hitech-gen2-model2",
       "class": "Formula HiTech Gen2",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -265,7 +265,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-hitech-gen2-model3-high-downforce",
+      "record_id": "formula-hitech-gen2-model3",
       "class": "Formula HiTech Gen2",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -273,7 +273,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-ultimate-hybrid-gen2-high-downforce",
+      "record_id": "formula-ultimate-hybrid-gen2",
       "class": "Formula Ultimate Hybrid Gen2",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -281,7 +281,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-v10-gen3-b-high-downforce",
+      "record_id": "formula-v10-gen3-b",
       "class": "Formula V10 Gen3",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -289,7 +289,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-v10-gen3-m-high-downforce",
+      "record_id": "formula-v10-gen3-m",
       "class": "Formula V10 Gen3",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -297,7 +297,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-v8-gen1-b-high-downforce",
+      "record_id": "formula-v8-gen1-b",
       "class": "Formula V8 Gen1",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -305,7 +305,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-v8-gen1-m-high-downforce",
+      "record_id": "formula-v8-gen1-m",
       "class": "Formula V8 Gen1",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -313,7 +313,7 @@
       "priority": "low"
     },
     {
-      "record_id": "formula-v8-gen2-high-downforce",
+      "record_id": "formula-v8-gen2",
       "class": "Formula V8 Gen2",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -473,7 +473,7 @@
       "priority": "low"
     },
     {
-      "record_id": "mclaren-cosworth-mp4-8-high-downforce",
+      "record_id": "mclaren-cosworth-mp4-8",
       "class": "Formula One",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -481,7 +481,7 @@
       "priority": "low"
     },
     {
-      "record_id": "mclaren-honda-mp4-7a-high-downforce",
+      "record_id": "mclaren-honda-mp4-7a",
       "class": "Formula One",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -489,7 +489,7 @@
       "priority": "low"
     },
     {
-      "record_id": "mclaren-mercedes-mp4-12-high-downforce",
+      "record_id": "mclaren-mercedes-mp4-12",
       "class": "Formula One",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "semi-automatic",
@@ -641,7 +641,7 @@
       "priority": "low"
     },
     {
-      "record_id": "renault-r25-high-downforce",
+      "record_id": "renault-r25",
       "class": "Formula V10 Gen3",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -649,7 +649,7 @@
       "priority": "low"
     },
     {
-      "record_id": "renault-r26-high-downforce",
+      "record_id": "renault-r26",
       "class": "Formula V8 Gen1",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
@@ -657,7 +657,7 @@
       "priority": "low"
     },
     {
-      "record_id": "renault-r28-high-downforce",
+      "record_id": "renault-r28",
       "class": "Formula V8 Gen2",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
