@@ -281,9 +281,54 @@ construction. Listed so the search is not repeated.
 3. ~~The 911 RSR.~~ Taken: synchromesh at medium.
 4. ~~Retire the 17 fictionalised records.~~ Done.
 5. For the remaining real cars, look for homologation papers and period workshop
-   documentation. Car histories have been tried and do not reach it.
+   documentation. Car histories have been tried and do not reach it. What that
+   search found is below.
 
 The live queue is now 18 records: 17 real cars plus `formula-junior`. Of the
 original 43, three are answered - the 911 RSR and the two Formula Vee cars - and
 22 are closed with a written reason, 5 by the Copa Truck regulation and 17 by
 retirement.
+
+
+## The homologation papers: located, unreadable here
+
+The FIA Historic Database at `historicdb.fia.com` is the archive, and this
+project already cites six of its forms. Two of the queue's cars have theirs:
+
+| Car | Form | URL |
+| --- | --- | --- |
+| BMW M3 Group A | 5327, Group A, 2 March 1987 | `https://historicdb.fia.com/sites/default/files/car_attachment/1662735601/homologation_form_number_5327_group_a.pdf` |
+| Mercedes-Benz 190E | 5269, Group A, from 2 May 1985 | `https://historicdb.fia.com/sites/default/files/car_attachment/1601062201/homologation_form_number_5269_group_a.pdf` |
+
+The M3's record lists extensions for Gearbox and Transmission specifically, which
+is exactly where the construction would be stated. The 190E's form is for the
+2.3-16; the 2.5-16 Evolution II we curate is a later evolution and probably
+carries its own extension, which has not been located yet.
+
+**Neither could be read in this environment, and the reason is worth recording so
+nobody repeats the attempt.** The forms are scans: 131 pages of CCITT Group 4 fax
+images with a text layer of 131 characters in total. There is no PDF renderer
+here (`pdftoppm` is absent, only `pdftotext`), no imaging library, and no OCR.
+Rewrapping the fax data as TIFF works - Group 4 is a TIFF compression, so the
+bytes move across untouched - but nothing available can display a TIFF either.
+The database's HTML car pages return 403, while the PDFs themselves fetch fine.
+
+So the documents are in hand and the reading is not. Anyone opening those two
+URLs in a PDF viewer can settle the M3 and probably the 190E in a few minutes,
+which is the shortest path left on this queue.
+
+## Group C cannot be settled this way at all
+
+`sauber-mercedes-c9` and `porsche-962c` were listed as homologation candidates.
+They are not, and no amount of searching will change it: **Group C was a pure
+prototype class with no homologation requirement**, neither a minimum production
+run nor the use of series components. Cars were built to the formula rather than
+homologated, so no form exists for either and none ever will.
+
+Those two need a different source class entirely - constructor or team
+documentation, or a specialist on the specific gearbox, which is the route that
+worked for the 911 RSR's Type 915.
+
+Of the dogleg six, `bmw-m1-procar`, `formula-inter-mg15` and
+`lamborghini-diablo-sv-r` have not been searched for papers yet. The M1 is the
+most promising: it was homologated for Group 4, so a form should exist.
