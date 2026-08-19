@@ -148,6 +148,17 @@ declared deviation rather than resolved, because the construction is a
 medium-confidence claim and cannot overrule a drive. If it is ever resolved the
 likely shape is a simulator override, not a change to the real car's value.
 
+**The tension is confined to these two.** A sweep of all 242 records for a
+construction that disagrees with its blip found nothing else. Two Carrera Cup
+cars looked like the inverse case - dog rings with no blip demanded - until their
+`automatic_blip: yes` explained it: the gearbox needs rev-matching and the car
+supplies it, which is consistent rather than contradictory. Seven sequential cars
+need no blip while nothing blips for them, and each says in its own notes that
+the downshift was accepted with no pedal input; those are the records the 0.3.79
+blip recheck corrected, and they are observed rather than inconsistent. A test
+now requires any record whose construction disagrees with its blip to say so, so
+the combination cannot spread silently.
+
 Sources: `https://fasp.faspnet.com.br/wp-content/uploads/2025/02/Formula-Vee-2025-tecnico.pdf`
 (FASP, type `homologation`), `https://fvee.com.br/index.php/a-categoria/os-carros`
 (category promoter), and for the corroboration

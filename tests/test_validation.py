@@ -422,6 +422,37 @@ class ValidationTests(unittest.TestCase):
                 f"expected a first_gear_position error, got {errors}",
             )
 
+    def test_a_gearbox_that_disagrees_with_its_blip_says_so(self) -> None:
+        """A synchromesh does not need a blip for the gear to engage.
+
+        Where a record demands one anyway and nothing else rev-matches, the two
+        facts disagree. That is allowed - the drive found what it found - but it
+        must be visible, because the usual explanation is that the simulator
+        demands something the real gearbox does not, which is an override
+        waiting to be written rather than a value to quietly adjust.
+
+        The check deliberately ignores cars whose automatic blip is yes: a dog
+        box that needs rev-matching and gets it electronically is consistent,
+        and the two Carrera Cup entries are exactly that.
+        """
+        undeclared = []
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            transmission = record["authentic_controls"]["transmission"]
+            downshift = transmission["downshift"]
+            if downshift["automatic_blip"] == "yes":
+                continue
+            if transmission["gearbox_type"] != "synchromesh":
+                continue
+            if downshift["manual_blip"] != "required":
+                continue
+            prose = json.dumps(record.get("archetype", {})) + json.dumps(
+                record["authentic_controls"].get("notes", [])
+            )
+            if "synchromesh" not in prose:
+                undeclared.append(record["record_id"])
+        self.assertEqual([], undeclared)
+
     def test_a_fictionalised_car_is_never_given_a_gearbox_it_cannot_have(self) -> None:
         """The retirement, pinned so a later pass cannot undo it helpfully.
 
