@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.3.80 contains 242 curated records. The identity inventory contains 333
+Dataset 0.3.81 contains 242 curated records. The identity inventory contains 333
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -155,24 +155,24 @@ package exists for those classes. The number of variants has to be read per
 class; it cannot be assumed from another car.
 
 Dataset 0.3.42 completed the aero identities for the classes that offer more
-than one package. Twenty of the added identities were observed directly; the
-other forty-two were derived from each car's observed high-downforce name by
-removing or replacing the suffix, and each is recorded as derived rather than
-observed in both the record and its approval.
+than one package: twenty observed directly, and forty-two derived by a reviewer
+from each car's observed high-downforce name and marked as derived.
 
-The derivation is checked, not assumed. Every class carries at least one car that
-was loaded in all of its packages, and for all fifteen cars where more than one
-form was observed the derivation reproduces the observed strings exactly. A
-derived identity that is nonetheless wrong simply never matches, which is what a
-driver sees today, so the failure mode is the status quo rather than a wrong car.
+Dataset 0.3.81 replaced all of that with a declaration. A record names its base
+telemetry name once and lists the packages it covers, and the exact spellings are
+produced when the database is read. Nothing is derived by hand any more, so the
+forty-two derived identities and the approvals disclosing them are gone; what
+remains to establish is only **which** packages a car offers, never how they are
+spelled. See `docs/data-model.md`.
 
-The vehicle selection screen names the package, which makes it the cheap way to
-learn which variants a car has. It does not give the exact telemetry string, and
-those cannot safely be constructed: this inventory contains
-`Stock USA Gen1 - Speedway ` with a trailing space, along with `- Speedway` and
-`- Superspeedway` suffixes, none of which a screen would reveal. Use the
-selection screen to enumerate the variants, and load at least one car per class
-per package to anchor the exact string.
+That still has to be read per class rather than assumed from another car, and
+the vehicle selection screen is the cheap way to read it: it names the packages
+a car has without needing the car loaded at every circuit.
+
+One caution survives the change. The inventory contains
+`Stock USA Gen1 - Speedway ` with a trailing space, which no selection screen
+would reveal and no declaration can produce. An identity like that is written out
+literally, as its own exact string, and stays that way.
 
 Batch 10 in dataset 0.3.32 was the first sweep: six cars, all six absent from the
 queue beforehand.

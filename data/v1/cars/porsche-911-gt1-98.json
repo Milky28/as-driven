@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Porsche 911 GT1-98"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Porsche 911 GT1-98 - Low Downforce"
+          "value": "Porsche 911 GT1-98",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

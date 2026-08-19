@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-2ki-mercedes-benz-high-downforce",
   "identity": {
-    "display_name": "Reynard 2Ki Mercedes-Benz - High Downforce",
+    "display_name": "Reynard 2Ki Mercedes-Benz",
     "manufacturer": "Reynard",
     "model": "2KI Mercedes-Benz",
     "year": {
@@ -59,19 +59,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 2Ki Mercedes-Benz - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Mercedes-Benz"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Mercedes-Benz - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Mercedes-Benz - Superspeedway"
+          "value": "Reynard 2Ki Mercedes-Benz",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "brabham-bmw-bt52-high-downforce",
   "identity": {
-    "display_name": "Brabham BMW BT52 - High Downforce",
+    "display_name": "Brabham BMW BT52",
     "manufacturer": "Brabham",
     "model": "BT52",
     "year": {
@@ -59,11 +59,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Brabham BMW BT52 - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Brabham BMW BT52"
+          "value": "Brabham BMW BT52",
+          "aero_packages": [
+            "base",
+            "high-downforce"
+          ]
         },
         {
           "kind": "class-id",

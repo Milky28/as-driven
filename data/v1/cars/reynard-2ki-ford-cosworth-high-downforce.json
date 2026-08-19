@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-2ki-ford-cosworth-high-downforce",
   "identity": {
-    "display_name": "Reynard 2Ki Ford-Cosworth - High Downforce",
+    "display_name": "Reynard 2Ki Ford-Cosworth",
     "manufacturer": "Reynard",
     "model": "2KI Ford-Cosworth",
     "year": {
@@ -58,19 +58,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 2Ki Ford-Cosworth - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Ford-Cosworth"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Ford-Cosworth - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Ford-Cosworth - Superspeedway"
+          "value": "Reynard 2Ki Ford-Cosworth",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

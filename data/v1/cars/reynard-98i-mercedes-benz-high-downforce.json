@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-98i-mercedes-benz-high-downforce",
   "identity": {
-    "display_name": "Reynard 98i Mercedes-Benz - High Downforce",
+    "display_name": "Reynard 98i Mercedes-Benz",
     "manufacturer": "Reynard",
     "model": "98I Mercedes-Benz",
     "year": {
@@ -58,19 +58,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 98i Mercedes-Benz - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Mercedes-Benz"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Mercedes-Benz - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Mercedes-Benz - Superspeedway"
+          "value": "Reynard 98i Mercedes-Benz",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

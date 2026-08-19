@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Cadillac V-Series.R"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Cadillac V-Series.R - Low Downforce"
+          "value": "Cadillac V-Series.R",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

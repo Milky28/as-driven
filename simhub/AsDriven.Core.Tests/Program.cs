@@ -42,28 +42,41 @@ namespace AsDriven.Core.Tests
                 Equal("Lister Storm GTM", preview.DisplayName, "previews the requested car");
                 Equal("preview-not-found", database.Preview("ams2", "missing.record").MatchStatus, "rejects an unknown preview record");
 
-                // One record is the exact identity for several aero packages, so
-                // the card must read the package off the car that was loaded.
-                // Reading it off the record's own name told a Speedway driver
-                // they were in the High Downforce car.
+                // A record declares the aero packages it covers and the database
+                // expands them into one exact key each. Every configuration of a
+                // car has to reach that car's guidance, and the card says the
+                // same thing for all of them: the circuit picks the package, so
+                // it changes no rim, no shifter and no technique.
                 GuidanceSnapshot speedway = database.Match(
                     "Automobilista2", "Reynard 98i Mercedes-Benz - Speedway");
-                True(speedway.HasMatch, "matches an aero configuration of a curated car");
-                Equal("Speedway", speedway.AeroPackage, "reports the loaded aero package");
-                Equal("Speedway  -  CART", speedway.OverlayCarClassDetailed,
-                    "shows the loaded package on the class line");
+                True(speedway.HasMatch, "matches an expanded aero configuration");
+                Equal("CART", speedway.OverlayCarClassDetailed,
+                    "the class line carries the class alone");
 
                 GuidanceSnapshot basePackage = database.Match(
                     "Automobilista2", "Reynard 98i Mercedes-Benz");
-                Equal(string.Empty, basePackage.AeroPackage,
-                    "the base car has no aero package, even when the record's name carries one");
-                Equal("CART", basePackage.OverlayCarClassDetailed,
-                    "shows the class alone when no package is loaded");
+                True(basePackage.HasMatch, "matches the base configuration");
+                Equal(speedway.RecordId, basePackage.RecordId,
+                    "every aero configuration resolves to the same record");
+                Equal(speedway.OverlayCarClassDetailed, basePackage.OverlayCarClassDetailed,
+                    "and to the same card, because the package changes nothing on it");
+
+                GuidanceSnapshot superspeedway = database.Match(
+                    "Automobilista2", "Reynard 98i Mercedes-Benz - Superspeedway");
+                Equal(speedway.RecordId, superspeedway.RecordId,
+                    "a declared package the record never spelled out still matches");
 
                 GuidanceSnapshot lowDownforce = database.Match(
                     "Automobilista2", "BMW M4 GT3 - Low Downforce");
-                Equal("Low Downforce", lowDownforce.AeroPackage,
-                    "reports a package the record's own name does not carry");
+                Equal("bmw-m4-gt3", lowDownforce.RecordId,
+                    "an expanded package resolves to its base car's record");
+                Equal("BMW M4 GT3", lowDownforce.DisplayName,
+                    "and the card names the car, not the configuration");
+
+                // A package nothing declares is still nobody's car. Expansion
+                // adds keys; it never softens the comparison.
+                False(database.Match("Automobilista2", "BMW M4 GT3 - Speedway").HasMatch,
+                    "an undeclared package does not match");
 
                 GuidanceSnapshot f301 = database.Match("Automobilista2", "Dallara F301");
                 True(f301.HasMatch, "matches the exact AMS2 telemetry name");
@@ -101,27 +114,22 @@ namespace AsDriven.Core.Tests
                 True(viper.TechniqueSummaryCompactLine1.Length > 0, "provides a compact technique first line");
                 AssertOverlayTextFits(viper, "Viper overlay text");
 
-                // The browser lists cars, not configurations. AMS2 appends an
-                // aero package to 60 curated names, and repeating it down the
-                // list says nothing while pushing the car's own name along.
-                int packagesShown = 0;
+                // The browser lists cars, not configurations. No curated name
+                // carries an aero package any more, so nothing has to be stripped
+                // and no two entries can collide over one.
                 var browserLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 foreach (CarCatalogEntry entry in database.Cars)
                 {
-                    if (entry.ShowAeroPackage) { packagesShown++; }
-                    // Whatever it decides, no two entries may read the same.
                     False(browserLabels.ContainsKey(entry.DisplayLabel),
                         "browser labels stay distinct: " + entry.DisplayLabel);
                     browserLabels[entry.DisplayLabel] = entry.RecordId;
-                    // A package is kept only to break a tie, never by default.
-                    if (entry.ShowAeroPackage)
-                    {
-                        True(PreflightLabels.AeroPackage(entry.DisplayName).Length > 0,
-                            "only a car with a package can be asked to show one: " + entry.RecordId);
-                    }
+                    Equal(entry.DisplayName, entry.BrowserName,
+                        "a browser name is the car's name: " + entry.RecordId);
+                    False(entry.DisplayName.EndsWith(" Downforce", StringComparison.Ordinal)
+                        || entry.DisplayName.EndsWith("speedway", StringComparison.Ordinal)
+                        || entry.DisplayName.EndsWith(" - Speedway", StringComparison.Ordinal),
+                        "no curated name carries an aero package: " + entry.RecordId);
                 }
-                Equal(0, packagesShown,
-                    "no curated car currently needs its package to stay distinct");
                 GuidanceSnapshot mp412 = database.Match(
                     "Automobilista2", "McLaren Mercedes MP4/12 - High Downforce");
                 if (mp412.HasMatch)
@@ -133,7 +141,7 @@ namespace AsDriven.Core.Tests
                     }
                     True(browsed != null, "the MP4/12 appears in the browser");
                     Equal("McLaren Mercedes MP4/12", browsed.BrowserName,
-                        "the browser drops a package it does not need");
+                        "under the car's own name");
                 }
 
                 foreach (CarCatalogEntry catalogEntry in database.Cars)
@@ -1517,25 +1525,17 @@ namespace AsDriven.Core.Tests
             True(FitsSegoeUi(snapshot.OverlayCarNameGlance, 174, 15f, true), label + " glance car name fits");
             AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryLine1, snapshot.TechniqueSummaryLine2, label + " detailed technique");
             AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryCompactLine1, snapshot.TechniqueSummaryCompactLine2, label + " compact technique");
-            // The aero package is shown on the class line rather than the name,
-            // so the name is measured against the car without it and the class
-            // line against the two composed together.
-            string baseName = PreflightLabels.BaseName(snapshot.DisplayName);
-            string classLine = PreflightLabels.ClassLine(snapshot.AeroPackage, snapshot.CarClass);
-            AssertFittedPrefix(baseName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
-            AssertFittedPrefix(baseName, snapshot.OverlayCarNameCompact, label + " compact car name");
-            AssertFittedPrefix(baseName, snapshot.OverlayCarNameGlance, label + " glance car name");
-            AssertFittedPrefix(classLine, snapshot.OverlayCarClassDetailed, label + " detailed car class");
-            AssertFittedPrefix(classLine, snapshot.OverlayCarClassCompact, label + " compact car class");
-            // A name that used to be cut off must now survive whole on the
-            // detailed card, which is the point of moving the package.
-            if (snapshot.AeroPackage.Length > 0)
-            {
-                False(snapshot.OverlayCarNameDetailed.EndsWith("...", StringComparison.Ordinal),
-                    label + " detailed car name is no longer truncated by its aero package");
-                True(snapshot.OverlayCarClassDetailed.IndexOf(snapshot.AeroPackage, StringComparison.Ordinal) >= 0,
-                    label + " detailed class line carries the aero package");
-            }
+            // Nothing is composed into either line any more: the name is the
+            // car's name and the class line is the class the simulator reports.
+            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
+            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameCompact, label + " compact car name");
+            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameGlance, label + " glance car name");
+            AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassDetailed, label + " detailed car class");
+            AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassCompact, label + " compact car class");
+            // The names an aero package used to lengthen were the ones that got
+            // cut off. None of them carries one now, so none of them should be.
+            False(snapshot.OverlayCarNameDetailed.EndsWith("...", StringComparison.Ordinal),
+                label + " detailed car name is not truncated");
         }
 
         private static void AssertTechniqueDisplay(string summary, string line1, string line2, string label)

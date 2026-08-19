@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Nissan R89C"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Nissan R89C - Low Downforce"
+          "value": "Nissan R89C",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

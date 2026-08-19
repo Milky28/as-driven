@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Porsche 962C"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Porsche 962C - Low Downforce"
+          "value": "Porsche 962C",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

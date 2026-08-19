@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "formula-classic-gen3-model4-high-downforce",
   "identity": {
-    "display_name": "Formula Classic Gen3 Model4 - High Downforce",
+    "display_name": "Formula Classic Gen3 Model4",
     "manufacturer": "Reiza",
     "model": "Formula Classic Gen3 Model4",
     "year": {
@@ -57,19 +57,16 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula Classic Gen3 Model4 - High Downforce"
+          "value": "Formula Classic Gen3 Model4",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
           "value": "F-Classic_Gen3_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Classic Gen3 Model4"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Classic Gen3 Model4 - Low Downforce"
         }
       ],
       "behavior": {

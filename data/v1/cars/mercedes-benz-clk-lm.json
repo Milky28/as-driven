@@ -57,15 +57,15 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Mercedes-Benz CLK LM"
+          "value": "Mercedes-Benz CLK LM",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
           "value": "GT1"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Mercedes-Benz CLK LM - Low Downforce"
         }
       ],
       "behavior": {

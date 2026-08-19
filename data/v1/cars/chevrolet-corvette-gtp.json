@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Chevrolet Corvette GTP"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Chevrolet Corvette GTP - Low Downforce"
+          "value": "Chevrolet Corvette GTP",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

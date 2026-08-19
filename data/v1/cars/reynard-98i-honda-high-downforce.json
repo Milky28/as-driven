@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-98i-honda-high-downforce",
   "identity": {
-    "display_name": "Reynard 98i Honda - High Downforce",
+    "display_name": "Reynard 98i Honda",
     "manufacturer": "Reynard",
     "model": "98I Honda",
     "year": {
@@ -58,19 +58,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 98i Honda - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Honda"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Honda - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Honda - Superspeedway"
+          "value": "Reynard 98i Honda",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

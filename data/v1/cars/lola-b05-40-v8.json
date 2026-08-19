@@ -56,11 +56,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lola B05/40 V8"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lola B05/40 V8 - Low Downforce"
+          "value": "Lola B05/40 V8",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -144,7 +144,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/2"
         ],
         "source_refs": [

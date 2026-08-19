@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "renault-r25-high-downforce",
   "identity": {
-    "display_name": "Renault R25 - High Downforce",
+    "display_name": "Renault R25",
     "manufacturer": "Renault",
     "model": "R25",
     "variant": "High Downforce",
@@ -60,7 +60,12 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Renault R25 - High Downforce"
+          "value": "Renault R25",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
@@ -69,14 +74,6 @@
         {
           "kind": "class-id",
           "value": "F-V10_Gen3_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Renault R25"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Renault R25 - Low Downforce"
         }
       ],
       "behavior": {

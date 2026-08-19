@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-2ki-honda-high-downforce",
   "identity": {
-    "display_name": "Reynard 2Ki Honda - High Downforce",
+    "display_name": "Reynard 2Ki Honda",
     "manufacturer": "Reynard",
     "model": "2KI Honda",
     "year": {
@@ -58,19 +58,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 2Ki Honda - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Honda"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Honda - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Honda - Superspeedway"
+          "value": "Reynard 2Ki Honda",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

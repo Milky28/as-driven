@@ -61,15 +61,15 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula Ultimate Hybrid Gen1"
+          "value": "Formula Ultimate Hybrid Gen1",
+          "aero_packages": [
+            "base",
+            "high-downforce"
+          ]
         },
         {
           "kind": "display-name",
           "value": "Formula Ultimate 2019"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Ultimate Hybrid Gen1 - High Downforce"
         },
         {
           "kind": "internal-id",
@@ -138,7 +138,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/2"
+          "/simulators/0/identities/0"
         ],
         "source_refs": [
           "simhub.local-live-ams2-identities.1.6.9.91"

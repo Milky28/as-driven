@@ -66,7 +66,12 @@
         },
         {
           "kind": "telemetry-name",
-          "value": "Formula Ultimate Hybrid Gen3 - High Downforce"
+          "value": "Formula Ultimate Hybrid Gen3",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "display-name",
@@ -79,14 +84,6 @@
         {
           "kind": "class-id",
           "value": "F-Ultimate_Gen2_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Ultimate Hybrid Gen3"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Ultimate Hybrid Gen3 - Low Downforce"
         }
       ],
       "behavior": {

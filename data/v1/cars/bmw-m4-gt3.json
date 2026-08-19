@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "BMW M4 GT3"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "BMW M4 GT3 - Low Downforce"
+          "value": "BMW M4 GT3",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-2ki-toyota-high-downforce",
   "identity": {
-    "display_name": "Reynard 2Ki Toyota - High Downforce",
+    "display_name": "Reynard 2Ki Toyota",
     "manufacturer": "Reynard",
     "model": "2KI Toyota",
     "year": {
@@ -59,19 +59,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 2Ki Toyota - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Toyota"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Toyota - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 2Ki Toyota - Superspeedway"
+          "value": "Reynard 2Ki Toyota",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

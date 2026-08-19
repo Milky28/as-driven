@@ -61,7 +61,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "McLaren 720S GT3 Evo"
+          "value": "McLaren 720S GT3 Evo",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "display-name",
@@ -70,10 +74,6 @@
         {
           "kind": "internal-id",
           "value": "McLaren 720S GT3 Evo"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren 720S GT3 Evo - Low Downforce"
         },
         {
           "kind": "class-id",

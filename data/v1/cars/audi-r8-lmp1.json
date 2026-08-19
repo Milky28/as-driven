@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Audi R8 LMP1"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Audi R8 LMP1 - Low Downforce"
+          "value": "Audi R8 LMP1",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

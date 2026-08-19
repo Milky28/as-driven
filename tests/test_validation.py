@@ -4,7 +4,11 @@ import shutil
 import tempfile
 import unittest
 
-from as_driven_db.validate import _resolve_pointer, validate_repository
+from as_driven_db.validate import (
+    _resolve_pointer,
+    expand_identity,
+    validate_repository,
+)
 from as_driven_db.schema_validation import validate_instance
 
 
@@ -579,6 +583,121 @@ class ValidationTests(unittest.TestCase):
             self.assertTrue(
                 any("must be fully specified" in error for error in errors),
                 f"expected a fully-specified error, got {errors}",
+            )
+
+    def test_declared_aero_packages_reproduce_the_written_identities(self) -> None:
+        """The migration's safety proof, kept as a test.
+
+        Declaring packages is only sound if expanding them gives back exactly the
+        strings the records used to spell out. Every curated AMS2 telemetry name
+        is grouped back into a base name and its packages, expanded again, and
+        required to match what the record actually carries.
+        """
+        suffixes = {
+            " - High Downforce": "high-downforce",
+            " - Low Downforce": "low-downforce",
+            " - Superspeedway": "superspeedway",
+            " - Speedway": "speedway",
+        }
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            for simulator in record["simulators"]:
+                if simulator["simulator"] != "ams2":
+                    continue
+                names = [
+                    identity["value"]
+                    for identity in simulator["identities"]
+                    if identity["kind"] == "telemetry-name"
+                ]
+                groups: dict[str, set[str]] = {}
+                for name in names:
+                    for suffix, package in suffixes.items():
+                        if name.endswith(suffix):
+                            groups.setdefault(name[: -len(suffix)], set()).add(package)
+                            break
+                    else:
+                        groups.setdefault(name, set()).add("base")
+                rebuilt: set[str] = set()
+                for base, packages in groups.items():
+                    rebuilt.update(expand_identity("ams2", base, sorted(packages)))
+                self.assertEqual(rebuilt, set(names), record["record_id"])
+
+    def test_an_identity_two_records_both_claim_is_rejected(self) -> None:
+        """The client throws on a duplicate exact identity while loading.
+
+        Nothing on this side used to notice, so a dataset could validate and then
+        fail to open. Expansion makes the collision easier to write by accident,
+        which is what makes the check worth having now.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "bmw-m4-gt3.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            record["simulators"][0]["identities"].append(
+                {"kind": "telemetry-name", "value": "Audi R8 LMS GT3"}
+            )
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("is already claimed by" in error for error in errors),
+                f"expected a collision error, got {errors}",
+            )
+
+    def test_a_record_cannot_claim_the_same_identity_twice(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "bmw-m4-gt3.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            # A declared package alongside the hand-written spelling it replaces
+            # is what a half-finished migration looks like.
+            record["simulators"][0]["identities"].append(
+                {
+                    "kind": "telemetry-name",
+                    "value": "BMW M4 GT3",
+                    "aero_packages": ["base"],
+                }
+            )
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            errors = validate_repository(temp_root)
+            self.assertTrue(
+                any("claimed twice by this record" in error for error in errors),
+                f"expected a self-duplicate error, got {errors}",
+            )
+
+    def test_aero_packages_expand_a_base_name_on_a_telemetry_name(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "bmw-m4-gt3.json"
+            base = json.loads(path.read_text(encoding="utf-8"))
+
+            # A name that already carries a package would expand to a doubled one.
+            record = json.loads(json.dumps(base))
+            record["simulators"][0]["identities"].append(
+                {
+                    "kind": "telemetry-name",
+                    "value": "Something - Low Downforce",
+                    "aero_packages": ["base"],
+                }
+            )
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            self.assertTrue(
+                any(
+                    "aero_packages expands a base name" in error
+                    for error in validate_repository(temp_root)
+                )
+            )
+
+            # A class is not a name, so it has no package to expand.
+            record = json.loads(json.dumps(base))
+            record["simulators"][0]["identities"].append(
+                {"kind": "class-id", "value": "Made_Up", "aero_packages": ["base"]}
+            )
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            self.assertTrue(
+                any(
+                    "only valid on a telemetry-name" in error
+                    for error in validate_repository(temp_root)
+                )
             )
 
     @staticmethod

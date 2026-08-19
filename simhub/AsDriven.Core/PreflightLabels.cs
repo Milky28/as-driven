@@ -23,76 +23,12 @@ namespace AsDriven.Core
         public const string ToneOptional = "optional";
         public const string ToneUnknown = "unknown";
 
-        /// <summary>
-        /// The aero packages AMS2 appends to a car's name. The simulator picks
-        /// these from the circuit rather than the driver, so which one is loaded
-        /// is worth showing - but appended to a name it pushes the car itself
-        /// off the end of the card.
-        /// </summary>
-        private static readonly string[] AeroPackages =
-        {
-            "High Downforce", "Low Downforce", "Superspeedway", "Speedway"
-        };
-
-        /// <summary>The aero package in a display name, or empty when it carries none.</summary>
-        public static string AeroPackage(string displayName)
-        {
-            if (string.IsNullOrEmpty(displayName)) { return string.Empty; }
-            foreach (string package in AeroPackages)
-            {
-                if (displayName.EndsWith(" - " + package, StringComparison.Ordinal))
-                {
-                    return package;
-                }
-            }
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// The aero package of the car that was actually loaded.
-        ///
-        /// One record is the exact identity for several aero configurations -
-        /// the Reynard 98i covers the base car, High Downforce, Speedway and
-        /// Superspeedway - so reading the package off the record's own name
-        /// told a Speedway driver they were in the High Downforce car, and told
-        /// a Low Downforce driver nothing at all. A name-shaped match carries
-        /// the package the driver loaded, and its silence is meaningful: the
-        /// base car has none. An opaque match has no name to read, so it falls
-        /// back to the record, which is the best the record can say.
-        /// </summary>
-        public static string MatchedAeroPackage(
-            string matchKind, string rawCarIdentifier, string displayName)
-        {
-            if (matchKind == "telemetry-name"
-                || matchKind == "display-name"
-                || matchKind == "alias")
-            {
-                return AeroPackage(rawCarIdentifier);
-            }
-            return AeroPackage(displayName);
-        }
-
-        /// <summary>The car's name without its aero package.</summary>
-        public static string BaseName(string displayName)
-        {
-            string package = AeroPackage(displayName);
-            return package.Length == 0
-                ? displayName
-                : displayName.Substring(0, displayName.Length - package.Length - 3);
-        }
-
-        /// <summary>
-        /// The line under the car's name: its aero package where it has one,
-        /// then the class the simulator reports.
-        /// </summary>
-        public static string ClassLine(string aeroPackage, string carClass)
-        {
-            string package = aeroPackage ?? string.Empty;
-            if (package.Length == 0) { return carClass; }
-            return string.IsNullOrEmpty(carClass)
-                ? package
-                : package + "  -  " + carClass;
-        }
+        // The aero package the simulator loaded is deliberately not shown and not
+        // read. It is chosen by the circuit rather than by the driver, so it
+        // changes no rim, no shifter and no technique, and a preflight card that
+        // named it was answering a question nobody had to act on. A record now
+        // declares its packages and every one of them resolves to the same
+        // guidance, so there is nothing left to tell them apart with.
 
         public static string WheelRim(string shape)
         {

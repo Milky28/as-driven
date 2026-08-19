@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Aston Martin DBR9"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Aston Martin DBR9 - Low Downforce"
+          "value": "Aston Martin DBR9",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -129,7 +129,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/4"
         ],
         "source_refs": [

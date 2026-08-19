@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "mclaren-honda-mp4-7a-high-downforce",
   "identity": {
-    "display_name": "McLaren Honda MP4/7A - High Downforce",
+    "display_name": "McLaren Honda MP4/7A",
     "manufacturer": "McLaren",
     "model": "MP4/7A",
     "year": {
@@ -58,19 +58,16 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "McLaren Honda MP4/7A - High Downforce"
+          "value": "McLaren Honda MP4/7A",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
           "value": "F-Hitech_Gen1_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Honda MP4/7A"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Honda MP4/7A - Low Downforce"
         }
       ],
       "behavior": {

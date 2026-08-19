@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "lotus-renault-98t-high-downforce",
   "identity": {
-    "display_name": "Lotus Renault 98T - High Downforce",
+    "display_name": "Lotus Renault 98T",
     "manufacturer": "Lotus",
     "model": "98T",
     "year": {
@@ -60,11 +60,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lotus Renault 98T - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lotus Renault 98T"
+          "value": "Lotus Renault 98T",
+          "aero_packages": [
+            "base",
+            "high-downforce"
+          ]
         },
         {
           "kind": "class-id",

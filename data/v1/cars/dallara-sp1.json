@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Dallara SP1"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Dallara SP1 - Low Downforce"
+          "value": "Dallara SP1",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

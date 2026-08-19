@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "swift-009c-ford-cosworth-high-downforce",
   "identity": {
-    "display_name": "Swift 009c Ford-Cosworth - High Downforce",
+    "display_name": "Swift 009c Ford-Cosworth",
     "manufacturer": "Swift",
     "model": "009.c Ford-Cosworth",
     "year": {
@@ -59,19 +59,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Swift 009c Ford-Cosworth - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Swift 009c Ford-Cosworth"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Swift 009c Ford-Cosworth - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Swift 009c Ford-Cosworth - Superspeedway"
+          "value": "Swift 009c Ford-Cosworth",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

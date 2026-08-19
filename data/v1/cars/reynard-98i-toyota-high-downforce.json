@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-98i-toyota-high-downforce",
   "identity": {
-    "display_name": "Reynard 98i Toyota - High Downforce",
+    "display_name": "Reynard 98i Toyota",
     "manufacturer": "Reynard",
     "model": "98I Toyota",
     "year": {
@@ -58,19 +58,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 98i Toyota - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Toyota"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Toyota - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 98i Toyota - Superspeedway"
+          "value": "Reynard 98i Toyota",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

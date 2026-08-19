@@ -59,11 +59,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Courage C60 Hybrid"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Courage C60 Hybrid - Low Downforce"
+          "value": "Courage C60 Hybrid",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

@@ -56,11 +56,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Chevrolet Corvette C5-R"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Chevrolet Corvette C5-R - Low Downforce"
+          "value": "Chevrolet Corvette C5-R",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -127,7 +127,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
         ],
         "source_refs": [

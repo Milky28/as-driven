@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "lola-t95-00-ford-cosworth-high-downforce",
   "identity": {
-    "display_name": "Lola T95/00 Ford-Cosworth - High Downforce",
+    "display_name": "Lola T95/00 Ford-Cosworth",
     "manufacturer": "Lola",
     "model": "T95/00 Ford-Cosworth",
     "year": {
@@ -58,15 +58,12 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lola T95/00 Ford-Cosworth - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lola T95/00 Ford-Cosworth"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lola T95/00 Ford-Cosworth - Speedway"
+          "value": "Lola T95/00 Ford-Cosworth",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway"
+          ]
         },
         {
           "kind": "class-id",

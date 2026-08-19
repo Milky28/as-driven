@@ -62,15 +62,16 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula USA 2023"
+          "value": "Formula USA 2023",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway"
+          ]
         },
         {
           "kind": "display-name",
           "value": "Formula USA"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula USA 2023 - High Downforce"
         },
         {
           "kind": "internal-id",
@@ -79,10 +80,6 @@
         {
           "kind": "class-id",
           "value": "F-USA_2023_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula USA 2023 - Speedway"
         }
       ],
       "behavior": {
@@ -143,7 +140,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/2"
+          "/simulators/0/identities/0"
         ],
         "source_refs": [
           "simhub.local-live-ams2-identities.1.6.9.91"

@@ -59,15 +59,15 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lamborghini Huracan GT3 EVO2"
+          "value": "Lamborghini Huracan GT3 EVO2",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
           "value": "Lamborghini Huracan GT3 EVO2"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lamborghini Huracan GT3 EVO2 - Low Downforce"
         },
         {
           "kind": "class-id",
@@ -114,7 +114,7 @@
           "/identity",
           "/simulators/0/identities/0",
           "/simulators/0/identities/1",
-          "/simulators/0/identities/3"
+          "/simulators/0/identities/2"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.3.new-cars",
@@ -126,7 +126,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/2",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
         ],
         "source_refs": [

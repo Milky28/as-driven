@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "mclaren-cosworth-mp4-8-high-downforce",
   "identity": {
-    "display_name": "McLaren Cosworth MP4/8 - High Downforce",
+    "display_name": "McLaren Cosworth MP4/8",
     "manufacturer": "McLaren",
     "model": "MP4/8",
     "year": {
@@ -58,19 +58,16 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "McLaren Cosworth MP4/8 - High Downforce"
+          "value": "McLaren Cosworth MP4/8",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
           "value": "F-Hitech_Gen2_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Cosworth MP4/8"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Cosworth MP4/8 - Low Downforce"
         }
       ],
       "behavior": {

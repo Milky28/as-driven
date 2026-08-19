@@ -61,15 +61,15 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "McLaren F1 GTR"
+          "value": "McLaren F1 GTR",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
           "value": "McLaren F1 GTR"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren F1 GTR - Low Downforce"
         },
         {
           "kind": "class-id",

@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "lola-b2k00-toyota-high-downforce",
   "identity": {
-    "display_name": "Lola B2K00 Toyota - High Downforce",
+    "display_name": "Lola B2K00 Toyota",
     "manufacturer": "Lola",
     "model": "B2K/00 Toyota",
     "year": {
@@ -58,19 +58,13 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lola B2K00 Toyota - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lola B2K00 Toyota"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lola B2K00 Toyota - Speedway"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lola B2K00 Toyota - Superspeedway"
+          "value": "Lola B2K00 Toyota",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway",
+            "superspeedway"
+          ]
         },
         {
           "kind": "class-id",

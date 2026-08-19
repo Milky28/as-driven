@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Dodge Viper GTS-R"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Dodge Viper GTS-R - Low Downforce"
+          "value": "Dodge Viper GTS-R",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

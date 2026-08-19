@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lamborghini Murcielago R-GT"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lamborghini Murcielago R-GT - Low Downforce"
+          "value": "Lamborghini Murcielago R-GT",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -117,7 +117,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
         ],
         "source_refs": [

@@ -244,6 +244,11 @@
         "notes": { "type": "array", "items": { "type": "string" } }
       }
     },
+    "aeroPackage": {
+      "description": "An aero configuration a simulator selects from the circuit rather than from the driver. The vocabulary is closed: these are the only packages any curated simulator applies, and a name-shaped identity carries at most one of them.",
+      "type": "string",
+      "enum": ["base", "high-downforce", "low-downforce", "speedway", "superspeedway"]
+    },
     "simulatorIdentity": {
       "type": "object",
       "additionalProperties": false,
@@ -253,7 +258,18 @@
           "type": "string",
           "enum": ["display-name", "telemetry-name", "internal-id", "car-path", "class-id", "alias"]
         },
-        "value": { "type": "string", "minLength": 1 }
+        "value": {
+          "description": "The exact string the simulator reports. Where aero_packages is present this is the base name with no package suffix, and the suffixed forms are derived from it; everywhere else it is the whole identity, written out.",
+          "type": "string",
+          "minLength": 1
+        },
+        "aero_packages": {
+          "description": "The aero configurations this identity covers, expanded into one exact lookup key each when the database is loaded. It replaces writing every suffixed spelling by hand: 164 of 404 curated telemetry names were a base name plus one of four suffixes, and 42 of those were never observed at all but derived by a reviewer and marked as such.\n\nThis is not fuzzy matching and does not relax exact matching. Expansion produces exact strings and nothing is rewritten at match time, so an identity a record does not declare still fails to match, still logs as unmatched, and still shows the driver a blank card rather than another car's answer. The failure mode stays what it is today.\n\nHow a package renders is a property of the simulator, not of the record: AMS2 appends ' - High Downforce' and its siblings to the base name, and renders `base` as the bare name. A simulator that names its variants unsystematically declares nothing here and writes its identities out literally, exactly as every record does today.\n\nOnly a telemetry-name may carry this, and the packages a car offers differ by class and must be read per class rather than assumed from another car: two of the AMS2 open-wheel classes offer no low-downforce package at all.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/aeroPackage" }
+        }
       }
     },
     "simBehavior": {

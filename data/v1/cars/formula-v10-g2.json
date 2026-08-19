@@ -61,11 +61,21 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula V10 Gen2 (B) - High Downforce"
+          "value": "Formula V10 Gen2 (B)",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "telemetry-name",
-          "value": "Formula V10 Gen2 (M) - High Downforce"
+          "value": "Formula V10 Gen2 (M)",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
@@ -74,22 +84,6 @@
         {
           "kind": "class-id",
           "value": "F-V10_Gen2_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V10 Gen2 (B)"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V10 Gen2 (B) - Low Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V10 Gen2 (M)"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V10 Gen2 (M) - Low Downforce"
         }
       ],
       "behavior": {

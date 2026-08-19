@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "formula-v10-gen3-b-high-downforce",
   "identity": {
-    "display_name": "Formula V10 Gen3 (B) - High Downforce",
+    "display_name": "Formula V10 Gen3 (B)",
     "manufacturer": "Reiza",
     "model": "Formula V10 Gen3 (B)",
     "variant": "High Downforce",
@@ -57,7 +57,12 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula V10 Gen3 (B) - High Downforce"
+          "value": "Formula V10 Gen3 (B)",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
@@ -66,14 +71,6 @@
         {
           "kind": "class-id",
           "value": "F-V10_Gen3_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V10 Gen3 (B)"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V10 Gen3 (B) - Low Downforce"
         }
       ],
       "behavior": {

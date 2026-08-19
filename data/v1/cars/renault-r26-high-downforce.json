@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "renault-r26-high-downforce",
   "identity": {
-    "display_name": "Renault R26 - High Downforce",
+    "display_name": "Renault R26",
     "manufacturer": "Renault",
     "model": "R26",
     "variant": "High Downforce",
@@ -60,7 +60,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Renault R26 - High Downforce"
+          "value": "Renault R26",
+          "aero_packages": [
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
@@ -69,10 +73,6 @@
         {
           "kind": "class-id",
           "value": "F-V8_Gen1_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Renault R26 - Low Downforce"
         }
       ],
       "behavior": {

@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Porsche 992 GT3 R"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Porsche 992 GT3 R - Low Downforce"
+          "value": "Porsche 992 GT3 R",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

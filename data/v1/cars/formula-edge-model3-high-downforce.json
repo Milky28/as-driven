@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "formula-edge-model3-high-downforce",
   "identity": {
-    "display_name": "Formula Edge Model3 - High Downforce",
+    "display_name": "Formula Edge Model3",
     "manufacturer": "Reiza",
     "model": "Formula Edge Model3",
     "variant": "High Downforce",
@@ -58,23 +58,20 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula Edge Model3 - High Downforce"
+          "value": "Formula Edge Model3",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
           "value": "Formula Edge Model3 - High Downforce"
         },
         {
-          "kind": "telemetry-name",
-          "value": "Formula Edge Model3"
-        },
-        {
           "kind": "class-id",
           "value": "FE-G1_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Edge Model3 - Low Downforce"
         }
       ],
       "behavior": {

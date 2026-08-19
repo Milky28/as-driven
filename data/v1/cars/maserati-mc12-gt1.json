@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Maserati MC12 GT1"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Maserati MC12 GT1 - Low Downforce"
+          "value": "Maserati MC12 GT1",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -113,7 +113,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
         ],
         "source_refs": [

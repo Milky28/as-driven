@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "mclaren-cosworth-mp4-1c-high-downforce",
   "identity": {
-    "display_name": "McLaren Cosworth MP4/1C - High Downforce",
+    "display_name": "McLaren Cosworth MP4/1C",
     "manufacturer": "McLaren",
     "model": "MP4/1C",
     "year": {
@@ -59,11 +59,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "McLaren Cosworth MP4/1C - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Cosworth MP4/1C"
+          "value": "McLaren Cosworth MP4/1C",
+          "aero_packages": [
+            "base",
+            "high-downforce"
+          ]
         },
         {
           "kind": "class-id",

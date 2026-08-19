@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from as_driven_db.validate import expand_identity
 from research.build_ams2_coverage_manifest import build
 
 
@@ -107,10 +108,17 @@ class AMS2CoverageManifestTests(unittest.TestCase):
                 ROOT / "data" / "v1" / "cars" / "formula-edge-model1-high-downforce.json"
             ).read_text(encoding="utf-8")
         )
+        # Declared aero packages are expanded, because the guarantee is that the
+        # record carries both spellings itself - not that it spells them out.
         names = [
-            item["value"]
+            expanded
             for item in record["simulators"][0]["identities"]
             if item["kind"] == "telemetry-name"
+            for expanded in expand_identity(
+                record["simulators"][0]["simulator"],
+                item["value"],
+                item.get("aero_packages"),
+            )
         ]
         self.assertIn("Formula Edge Model1", names)
         self.assertIn("Formula Edge Model1 - High Downforce", names)

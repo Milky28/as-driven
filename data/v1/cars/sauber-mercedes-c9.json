@@ -62,15 +62,15 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Sauber Mercedes C9"
+          "value": "Sauber Mercedes C9",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
           "value": "Sauber Mercedes C9"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Sauber Mercedes C9 - Low Downforce"
         },
         {
           "kind": "class-id",

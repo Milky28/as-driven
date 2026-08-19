@@ -15,6 +15,40 @@ Simulator lookup keys live in `simulators[].identities`. Multiple typed values
 allow a consumer to try a stable internal ID first and a display-name alias
 last. Record IDs are stable project keys and must not be derived at runtime.
 
+### Aero packages
+
+A simulator may report one car under several names, one per aero configuration,
+and it picks the configuration from the circuit rather than from the driver.
+Writing every spelling out by hand cost 158 of 404 curated telemetry names and
+forty-two reviewer-derived identities that nobody had ever observed.
+
+A `telemetry-name` may instead declare `aero_packages`, and the base name grows
+one exact key per package when the database is read:
+
+```json
+{ "kind": "telemetry-name",
+  "value": "Lola B2K00 Ford-Cosworth",
+  "aero_packages": ["base", "high-downforce", "speedway", "superspeedway"] }
+```
+
+This is not fuzzy matching and it does not soften exact matching. Expansion
+produces exact strings once, at load, and nothing is rewritten when an incoming
+name is compared, so a package a record does not declare still fails to match,
+still logs as unmatched, and still shows a blank card rather than another car's
+answer. Which packages a car offers is read per class and never assumed from
+another car: two AMS2 open-wheel classes offer no low-downforce package at all.
+
+How a package is spelled belongs to the simulator, not the record. AMS2 appends
+` - High Downforce` and its siblings and renders `base` as the bare name; a
+simulator that names its variants unsystematically declares nothing and writes
+its identities out literally. `as_driven_db.validate` and the client hold the
+same table, and a round-trip test requires expansion to reproduce every string
+the records used to spell out.
+
+The package is deliberately absent from guidance. It changes no rim, no shifter
+and no technique, so every configuration of a car resolves to one record and one
+card, and a curated `display_name` carries no package either.
+
 A record is **one real car**, with an entry in `simulators[]` for each simulator
 that covers it, so its `record_id` names the car and never the simulator. Until
 dataset 0.3.67 every id carried an `ams2.` prefix, which was true only because

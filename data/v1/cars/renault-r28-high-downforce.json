@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "renault-r28-high-downforce",
   "identity": {
-    "display_name": "Renault R28 - High Downforce",
+    "display_name": "Renault R28",
     "manufacturer": "Renault",
     "model": "R28",
     "variant": "High Downforce",
@@ -60,7 +60,12 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Renault R28 - High Downforce"
+          "value": "Renault R28",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
@@ -69,14 +74,6 @@
         {
           "kind": "class-id",
           "value": "F-V8_Gen2_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Renault R28"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Renault R28 - Low Downforce"
         }
       ],
       "behavior": {

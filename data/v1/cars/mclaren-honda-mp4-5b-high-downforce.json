@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "mclaren-honda-mp4-5b-high-downforce",
   "identity": {
-    "display_name": "McLaren Honda MP4/5B - High Downforce",
+    "display_name": "McLaren Honda MP4/5B",
     "manufacturer": "McLaren",
     "model": "MP4/5B",
     "year": {
@@ -59,19 +59,16 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "McLaren Honda MP4/5B - High Downforce"
+          "value": "McLaren Honda MP4/5B",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
           "value": "F-Classic_Gen3_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Honda MP4/5B"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "McLaren Honda MP4/5B - Low Downforce"
         }
       ],
       "behavior": {

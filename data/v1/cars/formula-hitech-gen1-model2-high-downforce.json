@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "formula-hitech-gen1-model2-high-downforce",
   "identity": {
-    "display_name": "Formula HiTech Gen1 Model2 - High Downforce",
+    "display_name": "Formula HiTech Gen1 Model2",
     "manufacturer": "Reiza",
     "model": "Formula HiTech Gen1 Model2",
     "year": {
@@ -56,19 +56,16 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula HiTech Gen1 Model2 - High Downforce"
+          "value": "Formula HiTech Gen1 Model2",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
           "value": "F-Hitech_Gen1_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula HiTech Gen1 Model2"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula HiTech Gen1 Model2 - Low Downforce"
         }
       ],
       "behavior": {

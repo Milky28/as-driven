@@ -64,7 +64,11 @@
         },
         {
           "kind": "telemetry-name",
-          "value": "Formula V8 Gen3 - High Downforce"
+          "value": "Formula V8 Gen3",
+          "aero_packages": [
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "display-name",
@@ -77,10 +81,6 @@
         {
           "kind": "class-id",
           "value": "F-Reiza_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V8 Gen3 - Low Downforce"
         }
       ],
       "behavior": {

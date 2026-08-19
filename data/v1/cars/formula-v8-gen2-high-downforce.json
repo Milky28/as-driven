@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "formula-v8-gen2-high-downforce",
   "identity": {
-    "display_name": "Formula V8 Gen2 - High Downforce",
+    "display_name": "Formula V8 Gen2",
     "manufacturer": "Reiza",
     "model": "Formula V8 Gen2",
     "variant": "High Downforce",
@@ -58,7 +58,12 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula V8 Gen2 - High Downforce"
+          "value": "Formula V8 Gen2",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "low-downforce"
+          ]
         },
         {
           "kind": "internal-id",
@@ -67,14 +72,6 @@
         {
           "kind": "class-id",
           "value": "F-V8_Gen2_HD"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V8 Gen2"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula V8 Gen2 - Low Downforce"
         }
       ],
       "behavior": {

@@ -60,11 +60,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Alpine A424"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Alpine A424 - Low Downforce"
+          "value": "Alpine A424",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -123,7 +123,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/4"
         ],
         "source_refs": [

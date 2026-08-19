@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Nissan R390 GT1"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Nissan R390 GT1 - Low Downforce"
+          "value": "Nissan R390 GT1",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

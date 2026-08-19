@@ -13,7 +13,6 @@ namespace AsDriven.Core
             CarClass = carClass;
             Simulator = simulator;
             // Assume the package is not needed until the catalog proves it is.
-            ShowAeroPackage = false;
         }
 
         public string RecordId { get; private set; }
@@ -22,22 +21,13 @@ namespace AsDriven.Core
         public string Simulator { get; private set; }
 
         /// <summary>
-        /// Whether this entry has to name its aero package to stay distinct.
-        /// AMS2 appends the package to 60 of the curated names, and repeating it
-        /// down a browser list is noise unless two entries would otherwise read
-        /// the same. The catalog decides this once, when it is built.
+        /// The car's name as the browser lists it. Curated names no longer carry
+        /// an aero package, so there is nothing to strip and nothing that two
+        /// entries could collide over: the name is the name.
         /// </summary>
-        public bool ShowAeroPackage { get; internal set; }
-
-        /// <summary>The car's name, without its aero package unless it needs it.</summary>
         public string BrowserName
         {
-            get
-            {
-                return ShowAeroPackage
-                    ? DisplayName
-                    : PreflightLabels.BaseName(DisplayName);
-            }
+            get { return DisplayName; }
         }
 
         public string DisplayLabel

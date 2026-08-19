@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 import unicodedata
 
+from .validate import expand_identity
+
 
 def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
@@ -550,6 +552,12 @@ def _load_curated_ams2_identities(data_directory: Path | None) -> dict[str, str]
                 continue
             for identity in simulator.get("identities", []):
                 value = identity.get("value")
-                if isinstance(value, str) and isinstance(record_id, str):
-                    identities[value] = record_id
+                if not isinstance(value, str) or not isinstance(record_id, str):
+                    continue
+                # Declared aero packages are expanded here too, or a curated car
+                # would read as uncovered at every circuit but one.
+                for expanded in expand_identity(
+                    simulator.get("simulator"), value, identity.get("aero_packages")
+                ):
+                    identities[expanded] = record_id
     return identities

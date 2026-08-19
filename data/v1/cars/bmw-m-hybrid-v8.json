@@ -56,11 +56,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "BMW M Hybrid V8"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "BMW M Hybrid V8 - Low Downforce"
+          "value": "BMW M Hybrid V8",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",

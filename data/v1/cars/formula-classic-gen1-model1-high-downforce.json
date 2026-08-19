@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "formula-classic-gen1-model1-high-downforce",
   "identity": {
-    "display_name": "Formula Classic Gen1 Model1 - High Downforce",
+    "display_name": "Formula Classic Gen1 Model1",
     "manufacturer": "Reiza",
     "model": "Formula Classic Gen1 Model1",
     "year": {
@@ -57,11 +57,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Formula Classic Gen1 Model1 - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Formula Classic Gen1 Model1"
+          "value": "Formula Classic Gen1 Model1",
+          "aero_packages": [
+            "base",
+            "high-downforce"
+          ]
         },
         {
           "kind": "class-id",

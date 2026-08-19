@@ -17,6 +17,36 @@ namespace AsDriven.Core
             "car-path"
         };
 
+        /// <summary>
+        /// How a simulator spells an aero package on the end of a car's name.
+        /// AMS2 picks the package from the circuit rather than from the driver,
+        /// so one car reports several names; a record declares which packages it
+        /// covers and the base name grows one key per package here, rather than
+        /// every spelling being written out by hand.
+        ///
+        /// Nothing is rewritten at match time. The expansion happens once, while
+        /// the database is read, and produces keys still compared byte for byte,
+        /// so a name no record declares still fails to match rather than
+        /// resolving to a neighbour. as_driven_db.validate holds the same table
+        /// and its round-trip test pins these exact strings.
+        /// </summary>
+        private static readonly Dictionary<string, Dictionary<string, string>> AeroSuffixes =
+            BuildAeroSuffixes();
+
+        private static Dictionary<string, Dictionary<string, string>> BuildAeroSuffixes()
+        {
+            var ams2 = new Dictionary<string, string>(StringComparer.Ordinal);
+            ams2["base"] = string.Empty;
+            ams2["high-downforce"] = " - High Downforce";
+            ams2["low-downforce"] = " - Low Downforce";
+            ams2["speedway"] = " - Speedway";
+            ams2["superspeedway"] = " - Superspeedway";
+
+            var all = new Dictionary<string, Dictionary<string, string>>(StringComparer.Ordinal);
+            all["ams2"] = ams2;
+            return all;
+        }
+
         private readonly Dictionary<string, CarRecordValues> _identities;
         private readonly Dictionary<string, CarRecordValues> _records;
 
@@ -87,7 +117,6 @@ namespace AsDriven.Core
                 recordCount++;
             }
 
-            ResolveBrowserNames(cars);
             cars.Sort(delegate(CarCatalogEntry left, CarCatalogEntry right)
             {
                 int nameOrder = string.Compare(
@@ -106,29 +135,6 @@ namespace AsDriven.Core
                 recordsBySimulator,
                 cars.ToArray(),
                 SummarizeSimulators(cars));
-        }
-
-        /// <summary>
-        /// Decides which catalog entries have to keep their aero package.
-        /// Only those whose name and class would otherwise collide with another
-        /// entry do; for the rest the package is repetition, and the browser
-        /// list reads as a list of cars rather than of configurations.
-        /// </summary>
-        private static void ResolveBrowserNames(List<CarCatalogEntry> cars)
-        {
-            var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            foreach (CarCatalogEntry car in cars)
-            {
-                string key = PreflightLabels.BaseName(car.DisplayName) + "" + car.CarClass;
-                int seen;
-                counts.TryGetValue(key, out seen);
-                counts[key] = seen + 1;
-            }
-            foreach (CarCatalogEntry car in cars)
-            {
-                string key = PreflightLabels.BaseName(car.DisplayName) + "" + car.CarClass;
-                car.ShowAeroPackage = counts[key] > 1;
-            }
         }
 
         /// <summary>
@@ -383,16 +389,20 @@ namespace AsDriven.Core
                         continue;
                     }
                     string value = RequiredString(simulatorIdentity, "value", recordPath);
-                    string key = Key(simulatorId, kind, value);
-                    CarRecordValues existing;
-                    if (identities.TryGetValue(key, out existing)
-                        && existing.RecordId != entry.RecordId)
+                    foreach (string expanded in ExpandIdentity(
+                        simulatorId, kind, simulatorIdentity, value, recordPath))
                     {
-                        throw new InvalidDataException(
-                            "Duplicate exact identity '" + value + "' for " + simulatorId
-                            + " (" + kind + ") in " + recordPath);
+                        string key = Key(simulatorId, kind, expanded);
+                        CarRecordValues existing;
+                        if (identities.TryGetValue(key, out existing)
+                            && existing.RecordId != entry.RecordId)
+                        {
+                            throw new InvalidDataException(
+                                "Duplicate exact identity '" + expanded + "' for " + simulatorId
+                                + " (" + kind + ") in " + recordPath);
+                        }
+                        identities[key] = entry;
                     }
-                    identities[key] = entry;
                 }
             }
         }
@@ -773,6 +783,49 @@ namespace AsDriven.Core
             return token == null || token.Type == JTokenType.Null
                 ? "unknown"
                 : token.Value<string>();
+        }
+
+        /// <summary>
+        /// The exact names one declared identity stands for.
+        ///
+        /// An identity with no declared packages is a single literal string,
+        /// which is what every record wrote before this existed and what a
+        /// simulator that names its variants unsystematically still writes. A
+        /// package this table does not know is a fault in the data rather than a
+        /// name to guess at, so it throws instead of being skipped: skipping it
+        /// would leave the car quietly unmatched at one kind of circuit.
+        /// </summary>
+        private static List<string> ExpandIdentity(
+            string simulatorId,
+            string kind,
+            JObject simulatorIdentity,
+            string value,
+            string recordPath)
+        {
+            var expanded = new List<string>();
+            JArray packages = simulatorIdentity["aero_packages"] as JArray;
+            Dictionary<string, string> suffixes;
+            if (packages == null
+                || kind != "telemetry-name"
+                || !AeroSuffixes.TryGetValue(simulatorId, out suffixes))
+            {
+                expanded.Add(value);
+                return expanded;
+            }
+
+            foreach (JToken token in packages)
+            {
+                string package = token.Value<string>();
+                string suffix;
+                if (package == null || !suffixes.TryGetValue(package, out suffix))
+                {
+                    throw new InvalidDataException(
+                        "Unknown aero package '" + package + "' for " + simulatorId
+                        + " in " + recordPath);
+                }
+                expanded.Add(value + suffix);
+            }
+            return expanded;
         }
 
         private static string Key(string simulator, string kind, string value)

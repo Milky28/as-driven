@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "reynard-95i-honda-high-downforce",
   "identity": {
-    "display_name": "Reynard 95i Honda - High Downforce",
+    "display_name": "Reynard 95i Honda",
     "manufacturer": "Reynard",
     "model": "95I Honda",
     "year": {
@@ -58,15 +58,12 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Reynard 95i Honda - High Downforce"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 95i Honda"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Reynard 95i Honda - Speedway"
+          "value": "Reynard 95i Honda",
+          "aero_packages": [
+            "base",
+            "high-downforce",
+            "speedway"
+          ]
         },
         {
           "kind": "class-id",

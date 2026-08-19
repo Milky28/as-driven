@@ -58,11 +58,11 @@
       "identities": [
         {
           "kind": "telemetry-name",
-          "value": "Lamborghini SC63"
-        },
-        {
-          "kind": "telemetry-name",
-          "value": "Lamborghini SC63 - Low Downforce"
+          "value": "Lamborghini SC63",
+          "aero_packages": [
+            "base",
+            "low-downforce"
+          ]
         },
         {
           "kind": "class-id",
@@ -117,7 +117,7 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/1",
+          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
         ],
         "source_refs": [

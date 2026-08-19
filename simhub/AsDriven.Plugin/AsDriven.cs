@@ -1346,7 +1346,6 @@ namespace AsDriven.Plugin
             this.AttachDelegate("UpshiftClutchLabel", delegate { return _current.UpshiftClutchLabel; });
             this.AttachDelegate("DownshiftClutchLabel", delegate { return _current.DownshiftClutchLabel; });
             this.AttachDelegate("LaunchDetailLabel", delegate { return _current.LaunchDetailLabel; });
-            this.AttachDelegate("AeroPackage", delegate { return _current.AeroPackage; });
             this.AttachDelegate("HasSteeringDOR", delegate { return _current.HasSteeringDOR; });
             this.AttachDelegate("SteeringDOR", delegate { return _current.SteeringDOR; });
             this.AttachDelegate("VerifiedGameVersion", delegate { return _current.VerifiedGameVersion; });

@@ -34,6 +34,44 @@ START_CLUTCH = {"required", "not-required", "anti-stall-available", "unknown", "
 FIRST_GEAR_POSITION = {"up-left", "up-right", "down-left", "down-right", "unknown"}
 
 
+# How each simulator spells an aero package, and the only kinds a match is ever
+# looked up by. AsDrivenDatabase.MatchPriority in the client is the same list;
+# class-id is deliberately absent from both, which is why dozens of records
+# share a class key without colliding.
+MATCHED_IDENTITY_KINDS = {
+    "telemetry-name",
+    "display-name",
+    "alias",
+    "internal-id",
+    "car-path",
+}
+AERO_SUFFIXES = {
+    "ams2": {
+        "base": "",
+        "high-downforce": " - High Downforce",
+        "low-downforce": " - Low Downforce",
+        "speedway": " - Speedway",
+        "superspeedway": " - Superspeedway",
+    }
+}
+
+
+def expand_identity(simulator: str, value: str, packages: list[str] | None) -> list[str]:
+    """The exact strings an identity stands for.
+
+    Without a package list an identity is one literal string, which is what every
+    record wrote by hand before this existed and what a simulator that names its
+    variants unsystematically still writes. With one, the base name grows a
+    suffix per declared package. Nothing here is applied to an incoming name at
+    match time: the expansion happens once, when the database is read, and
+    produces keys that are still compared byte for byte.
+    """
+    if not packages:
+        return [value]
+    suffixes = AERO_SUFFIXES.get(simulator, {})
+    return [value + suffixes[package] for package in packages if package in suffixes]
+
+
 def _load(path: Path, errors: list[str]) -> Any | None:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -209,6 +247,55 @@ def _validate_transmission(transmission: Any, label: str, errors: list[str]) -> 
                 errors.append(f"{action_label}.{name}: invalid state")
 
 
+def _validate_identities(
+    simulator: dict[str, Any], sim_name: str, label: str, errors: list[str]
+) -> None:
+    """Checks the identities of one simulator entry.
+
+    A declared aero package is only a shorthand for strings the record could have
+    written out, so the rules here are the ones that keep the shorthand honest:
+    the name it grows from must be a base name, and the simulator must actually
+    spell its packages as a suffix. Where either fails, the record writes its
+    identities out literally instead and nothing is lost.
+    """
+    identities = simulator.get("identities")
+    if not isinstance(identities, list):
+        return
+    suffixes = AERO_SUFFIXES.get(sim_name, {})
+    for index, identity in enumerate(identities):
+        if not isinstance(identity, dict):
+            continue
+        item = f"{label}.identities[{index}]"
+        packages = identity.get("aero_packages")
+        value = identity.get("value")
+        if packages is None or not isinstance(value, str):
+            continue
+        if identity.get("kind") != "telemetry-name":
+            errors.append(
+                f"{item}: aero_packages is only valid on a telemetry-name, "
+                f"not {identity.get('kind')!r}"
+            )
+            continue
+        if not suffixes:
+            errors.append(
+                f"{item}: {sim_name} has no declared aero package spelling, so this "
+                "identity must be written out literally"
+            )
+            continue
+        if value != value.strip():
+            errors.append(
+                f"{item}: a base name carries no leading or trailing whitespace; "
+                f"{value!r} does"
+            )
+        for suffix in suffixes.values():
+            if suffix and value.endswith(suffix):
+                errors.append(
+                    f"{item}: value {value!r} already carries the {suffix.strip(' -')!r} "
+                    "package; aero_packages expands a base name"
+                )
+                break
+
+
 def _validate_record(
     record: Any, path: Path, source_ids: set[str], errors: list[str]
 ) -> str | None:
@@ -289,6 +376,7 @@ def _validate_record(
                 if confidence["level"] not in CONFIDENCE:
                     errors.append(f"{sim_label}.confidence: invalid level")
             _validate_behavior(simulator["behavior"], f"{sim_label}.behavior", errors)
+            _validate_identities(simulator, sim_name, sim_label, errors)
 
     provenance = record["provenance"]
     if _required(provenance, {"claims"}, f"{label}.provenance", errors):
@@ -314,13 +402,25 @@ def _validate_record(
 
 
 def _simulator_identity_values(simulator: dict[str, Any], kind: str) -> set[str]:
-    return {
-        identity["value"]
-        for identity in simulator.get("identities", [])
-        if isinstance(identity, dict)
-        and identity.get("kind") == kind
-        and isinstance(identity.get("value"), str)
-    }
+    """Every exact name of one kind, declared packages expanded.
+
+    An approval names the strings the simulator reports, not the shorthand a
+    record stores them as, so this has to answer in the simulator's terms or a
+    reviewed name would stop being found the moment its record declared packages
+    instead of spelling them out.
+    """
+    simulator_id = simulator.get("simulator")
+    values: set[str] = set()
+    for identity in simulator.get("identities", []):
+        if not isinstance(identity, dict) or identity.get("kind") != kind:
+            continue
+        value = identity.get("value")
+        if not isinstance(value, str):
+            continue
+        values.update(
+            expand_identity(simulator_id, value, identity.get("aero_packages"))
+        )
+    return values
 
 
 def _validate_car_approval(
@@ -744,6 +844,50 @@ def _validate_record_archetype(
             )
 
 
+def _collect_identities(
+    record: dict[str, Any],
+    label: str,
+    claimed: dict[tuple[str, str, str], str],
+    errors: list[str],
+) -> None:
+    """Records every exact key this record claims, and reports a second claimant."""
+    record_id = record.get("record_id")
+    own: set[tuple[str, str, str]] = set()
+    for simulator in record.get("simulators", []) or []:
+        if not isinstance(simulator, dict):
+            continue
+        sim_name = simulator.get("simulator")
+        for identity in simulator.get("identities", []) or []:
+            if not isinstance(identity, dict):
+                continue
+            kind = identity.get("kind")
+            value = identity.get("value")
+            if kind not in MATCHED_IDENTITY_KINDS or not isinstance(value, str):
+                continue
+            packages = identity.get("aero_packages")
+            for expanded in expand_identity(sim_name, value, packages):
+                key = (sim_name, kind, expanded)
+                owner = claimed.get(key)
+                if owner is not None and owner != record_id:
+                    errors.append(
+                        f"{label}: exact identity {expanded!r} ({sim_name}, {kind}) "
+                        f"is already claimed by {owner}"
+                    )
+                    continue
+                # A record claiming its own key twice is redundant rather than
+                # ambiguous, and the client tolerates it - which is precisely how
+                # a half-finished migration would go unnoticed, with a declared
+                # package and the hand-written spelling it replaced side by side.
+                if key in own:
+                    errors.append(
+                        f"{label}: exact identity {expanded!r} ({sim_name}, {kind}) "
+                        "is claimed twice by this record"
+                    )
+                    continue
+                own.add(key)
+                claimed[key] = record_id
+
+
 def validate_repository(root: Path) -> list[str]:
     errors: list[str] = []
     schema_dir = root / "schema" / "v1"
@@ -826,6 +970,10 @@ def validate_repository(root: Path) -> list[str]:
         errors.append("index.json: records must exactly match data/v1/cars/*.json")
 
     records: dict[str, dict[str, Any]] = {}
+    # Every exact key a match can resolve to, expansions included. The client
+    # throws on a duplicate while loading the database, so a collision that only
+    # surfaced there would be a validated dataset that will not open.
+    claimed_identities: dict[tuple[str, str, str], str] = {}
     for path in actual_paths:
         record = _load(path, errors)
         if record is None:
@@ -839,6 +987,7 @@ def validate_repository(root: Path) -> list[str]:
                 )
             )
         _validate_record_archetype(record, str(path), archetypes, errors)
+        _collect_identities(record, str(path), claimed_identities, errors)
         record_id = _validate_record(record, path, source_ids, errors)
         if record_id in records:
             errors.append(f"{path}: duplicate record_id {record_id}")

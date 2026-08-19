@@ -16,6 +16,9 @@ from pathlib import Path
 from typing import Any
 
 
+
+from as_driven_db.validate import expand_identity
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_AUDIT = ROOT / "build" / "ams2-simhub-identity-audit.json"
 DEFAULT_CARS = Path(r"C:\Program Files (x86)\SimHub\PluginsData\Automobilista2\Cars")
@@ -85,8 +88,15 @@ def curated_identities() -> tuple[dict[str, str], dict[str, dict[str, Any]]]:
             if simulator["simulator"] != "ams2":
                 continue
             for identity in simulator["identities"]:
-                if identity["kind"] in {"telemetry-name", "internal-id", "alias"}:
-                    identities[identity["value"]] = record["record_id"]
+                if identity["kind"] not in {"telemetry-name", "internal-id", "alias"}:
+                    continue
+                # A declared aero package is curated coverage exactly as a
+                # spelled-out name was; without expanding here a curated car
+                # would queue itself for verification at every circuit but one.
+                for expanded in expand_identity(
+                    simulator["simulator"], identity["value"], identity.get("aero_packages")
+                ):
+                    identities[expanded] = record["record_id"]
     return identities, records
 
 
