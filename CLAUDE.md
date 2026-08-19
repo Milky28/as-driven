@@ -35,7 +35,8 @@ SimHub SDK binaries into the repository or release package.
 ## Repository map
 
 - `schema/v1/`: versioned JSON Schema contracts.
-- `data/v1/`: curated index, sources, and one JSON record per car.
+- `data/v1/`: curated index, sources, control archetypes, and one JSON record
+  per car.
 - `curation/`: explicit reviewer approvals required for promotion.
 - `as_driven_db/`: dependency-free Python validation, import, audit,
   and promotion tools.
@@ -166,7 +167,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.16.0.
-- Dataset: 0.3.79 with 242 curated records.
+- Dataset: 0.3.80 with 242 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
   decision; the guided queue is empty. The inventory only holds cars that have

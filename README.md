@@ -43,6 +43,7 @@ car in it as unmatched. Automobilista 2 is the only covered simulator today.
 schema/v1/                   JSON Schemas for records, sources, and the index
 data/v1/index.json           Dataset release manifest
 data/v1/sources.json         Reusable provenance/source records
+data/v1/archetypes.json      Named control mechanisms records classify against
 data/v1/cars/*.json          One curated car record per file
 curation/                    Explicit, reviewable promotion approvals
 as_driven_db/                Dependency-free validator and staging importers
@@ -92,7 +93,7 @@ python -m as_driven_db import-observation observation.json --output build/staged
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
-Dataset 0.3.79 contains 242 reviewed records. Its newest records complete the
+Dataset 0.3.80 contains 242 reviewed records. Its newest records complete the
 audited post-sheet queue and the first modern-prototype verification batch,
 while retaining official or manufacturer evidence separately from simulator
 behavior. Broader AMS2 roster coverage remains a versioned, explicitly
@@ -195,7 +196,7 @@ the full review policy.
 
 ## Initial data status
 
-Dataset 0.3.79 contains 242 curated AMS2 records promoted through the reviewed
+Dataset 0.3.80 contains 242 curated AMS2 records promoted through the reviewed
 identity workflow. They demonstrate the model and expand current-game coverage;
 they are not a claim of complete coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
