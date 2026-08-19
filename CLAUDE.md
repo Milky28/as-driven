@@ -39,7 +39,7 @@ SimHub SDK binaries into the repository or release package.
   per car.
 - `curation/`: explicit reviewer approvals required for promotion.
 - `as_driven_db/`: dependency-free Python validation, import, audit,
-  and promotion tools.
+  promotion, and site-rendering tools.
 - `research/`: checked-in research manifests and deterministic generators.
 - `simhub/AsDriven.Core/`: exact-match JSON reader and guidance logic.
 - `simhub/AsDriven.Plugin/`: direct SimHub adapter and settings UI.

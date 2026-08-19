@@ -16,6 +16,7 @@ from .simhub import (
     write_alias_review_csv,
     write_unmatched_review_csv,
 )
+from .site import build_site
 from .validate import validate_repository
 from .schema_validation import validate_instance
 
@@ -31,6 +32,15 @@ def _parser() -> argparse.ArgumentParser:
 
     validate = subparsers.add_parser("validate", help="validate the curated repository")
     validate.add_argument("--root", type=Path, default=Path.cwd())
+
+    site = subparsers.add_parser(
+        "build-site",
+        help="render the curated database as one self-contained HTML page",
+    )
+    site.add_argument("--root", type=Path, default=Path.cwd())
+    site.add_argument(
+        "--output", type=Path, default=Path("dist") / "site" / "index.html"
+    )
 
     boundaries = subparsers.add_parser(
         "audit-boundaries",
@@ -122,6 +132,13 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Validation failed with {len(errors)} error(s).")
             return 1
         print("Validation passed.")
+        return 0
+
+    if args.command == "build-site":
+        page = build_site(args.root.resolve())
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(page, encoding="utf-8")
+        print(f"Wrote {len(page):,} bytes to {args.output}")
         return 0
 
     if args.command == "audit-boundaries":

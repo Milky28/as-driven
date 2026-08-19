@@ -47,6 +47,7 @@ data/v1/archetypes.json      Named control mechanisms records classify against
 data/v1/cars/*.json          One curated car record per file
 curation/                    Explicit, reviewable promotion approvals
 as_driven_db/                Dependency-free validator and staging importers
+as_driven_db/site.py         Renders the database as one browsable page
 tests/                       Unit tests and small source-layout fixtures
 docs/data-model.md           Field semantics and confidence policy
 docs/evidence-boundaries.md  Real, simulated, and effective guidance layers
@@ -91,6 +92,14 @@ python -m as_driven_db import-observation observation.json --output build/staged
 
 ```shell
 python -m as_driven_db promote-observation curation/review-batch.json
+```
+
+Read the whole database in a browser, with no install and no JSON. One
+self-contained page, filterable by shifter, clutch and blip, written to the
+ignored `dist/` directory:
+
+```shell
+python -m as_driven_db build-site
 ```
 
 Dataset 0.3.81 contains 242 reviewed records. Its newest records complete the
