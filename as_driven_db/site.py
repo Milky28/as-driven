@@ -375,6 +375,20 @@ body {{
 }}
 .wrap {{ max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }}
 header {{ display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }}
+.topline {{
+  display: flex; flex-wrap: wrap; gap: 16px;
+  align-items: baseline; justify-content: space-between;
+}}
+.theme {{ display: flex; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }}
+.theme button {{
+  padding: 6px 11px; margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11.5px; color: var(--muted);
+  background: var(--surface); border: 0; cursor: pointer;
+}}
+.theme button + button {{ border-left: 1px solid var(--line); }}
+.theme button:hover {{ color: var(--ink); }}
+.theme button[aria-pressed="true"] {{ background: var(--surface-2); color: var(--ink); }}
 h1 {{
   font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
@@ -419,7 +433,7 @@ select {{
   color: var(--ink); background: var(--surface);
   border: 1px solid var(--line); border-radius: 3px;
 }}
-input:focus-visible, select:focus-visible, tr:focus-visible {{
+input:focus-visible, select:focus-visible, tr:focus-visible, button:focus-visible {{
   outline: 2px solid var(--focus); outline-offset: 1px;
 }}
 .count {{
@@ -519,7 +533,14 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 
 <div class="wrap">
 <header>
-  <h1>As Driven</h1>
+  <div class="topline">
+    <h1>As Driven</h1>
+    <div class="theme" role="group" aria-label="Colour theme">
+      <button type="button" data-theme-set="system" aria-pressed="true">System</button>
+      <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
   <p class="lede">Which physical controls to fit, and how to shift, for an authentic
   drive. {total} cars, curated from manufacturer and homologation sources and
   verified in-sim. Where the evidence does not settle something, this says so
@@ -633,6 +654,40 @@ overwrites it.</footer>
       }}
     }});
   }});
+  // Three states, because that is what the stylesheet answers to: an explicit
+  // choice stamps the root element, and following the system stamps nothing.
+  // Without the third button a reader who picked one could never hand the
+  // decision back to their machine.
+  var root = document.documentElement;
+  var themeButtons = Array.prototype.slice.call(
+    document.querySelectorAll('[data-theme-set]'));
+
+  function setTheme(choice, remember) {{
+    if (choice === 'light' || choice === 'dark') {{
+      root.setAttribute('data-theme', choice);
+    }} else {{
+      root.removeAttribute('data-theme');
+      choice = 'system';
+    }}
+    themeButtons.forEach(function (button) {{
+      button.setAttribute(
+        'aria-pressed', button.getAttribute('data-theme-set') === choice ? 'true' : 'false');
+    }});
+    if (remember) {{
+      try {{ localStorage.setItem('as-driven-theme', choice); }} catch (error) {{}}
+    }}
+  }}
+
+  themeButtons.forEach(function (button) {{
+    button.addEventListener('click', function () {{
+      setTheme(button.getAttribute('data-theme-set'), true);
+    }});
+  }});
+
+  var remembered = null;
+  try {{ remembered = localStorage.getItem('as-driven-theme'); }} catch (error) {{}}
+  setTheme(remembered || 'system', false);
+
   q.addEventListener('input', apply);
   filters.forEach(function (filter) {{ filter.node.addEventListener('change', apply); }});
   apply();

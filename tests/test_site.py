@@ -128,6 +128,21 @@ class SiteTests(unittest.TestCase):
         self.assertIn("1px solid", rules["optional"])
         self.assertIn("1px dotted", rules["unknown"])
 
+    def test_the_theme_control_offers_the_three_states_the_page_has(self) -> None:
+        """Following the system is a state, not the absence of one.
+
+        An explicit choice stamps the root element and following the system
+        stamps nothing, so a control with only Light and Dark would let a reader
+        leave the default and never hand the decision back to their machine.
+        """
+        page = build_site(ROOT)
+        offered = re.findall(r'data-theme-set="([a-z]+)"', page)
+        self.assertEqual(offered, ["system", "light", "dark"])
+        # Nothing is stamped until someone chooses, so the default follows the
+        # viewer and the un-stamped palette stays the one that renders.
+        self.assertIn('data-theme-set="system" aria-pressed="true"', page)
+        self.assertNotIn("<html", page)
+
     def test_a_theme_token_is_never_defined_only_behind_a_media_query(self) -> None:
         """The viewer's theme has three states, not two.
 
