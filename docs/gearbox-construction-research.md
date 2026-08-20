@@ -588,6 +588,45 @@ What it does not clear is identity: the record is an AMS2 sheet identity for a
 bridge, not the evidence at the far end of it - which is a different kind of gap
 from the rest of this queue, and the one open judgment left in it.
 
+## Open: the C3.R's identity bridge
+
+This is the only record in the queue whose gap is identity rather than evidence.
+Form 3039, contemporary and explicit, says all four forward ratios are
+synchronised. What is missing is anything tying the AMS2 identity to the car that
+form homologates rather than to the C3 family at large.
+
+The bridge is a different kind of claim from the construction, and it takes a
+different kind of source. A Reiza statement is `official-simulator`, which this
+project forbids as evidence about a real car - but the bridge is a question about
+**what the game models**, which is exactly what a simulator source can answer.
+So the two halves have different sources by design: a simulator source
+establishes `/identity`, and the homologation form establishes the construction of
+whatever that identity turns out to name.
+
+> For AMS2's **Chevrolet Corvette C3.R** - class id `TC70S`, recorded as 1971:
+>
+> 1. Does **Reiza** state what real car it represents? Release notes, development
+>    updates, forum posts by the team, or the in-game car description. A year, a
+>    model designation, an engine or a racing series would each be a bridge.
+> 2. Does the **Coanda Extended Car Info sheet** carry identity notes for this
+>    entry beyond the name, and where does the **1971** in the record come from -
+>    the sheet, or an assumption?
+> 3. **Was "C3.R" ever a real designation?** Chevrolet never sold a car by that
+>    name as far as this project can tell. If it is Reiza's own construction for a
+>    generic C3-era racer, say so.
+> 4. What era or class does `TC70S` place it in?
+>
+> **This question can close the record either way, and both outcomes are better
+> than the present one.** If a source names a real 1971 Corvette, the construction
+> follows from form 3039 and the record takes `synchromesh`. If nothing ties it to
+> a specific car, then it has no unique real-world referent - which is precisely
+> the finding that retired its own Convertible variant, whose note reads "a unique
+> real-world referent is not established". That would close it as a car Reiza
+> assembled rather than represents, and retire it from this queue permanently.
+>
+> A null result here is therefore not a failed search. It is the second of two
+> answers.
+
 ## Open: the Puma GTE, one link short
 
 `puma-gte` is a real car and the chain is nearly closed with sources already in
