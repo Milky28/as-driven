@@ -837,11 +837,21 @@ than a production Lamborghini five-speed.
 > 4. Does any source state whether the clutch was used for **running shifts**?
 >    Both clutch fields are open and the drive cannot answer them.
 >
+> 5. Whatever is found, confirm it describes **this** car: the 1996 SV-R built for
+>    the Supertrofeo, not the road Diablo SV it derives from and not the later
+>    Diablo GTR. The C3.R was nearly promoted on a homologation form that was
+>    real, contemporary and explicit and described a different engine, and only
+>    the displacement separated them. Quote the specification the source names.
+>
 > Unlike most of this queue, a **dog box is the likelier answer here**, and it
 > would be the first in the dataset established from a source rather than
 > inferred. It would also make the Diablo the founding member of a dogleg dog-box
 > archetype, which is the pairing that would finally put the other dogleg cars
 > genuinely between two archetypes instead of matching none.
+>
+> One caution against the lead itself: a dogleg can be produced by re-gating a
+> gearbox rather than replacing it, so the gate is a reason to look and not an
+> answer on its own.
 
 ## Group C cannot be settled this way at all
 
