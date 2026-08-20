@@ -22,6 +22,10 @@ namespace AsDriven.Core
         /// gap in the evidence, and must not be shown as though it were.</summary>
         public const string ToneOptional = "optional";
         public const string ToneUnknown = "unknown";
+        /// <summary>Established, with no question of who acts on it. Used where
+        /// a line states a fact about the car rather than dividing work between
+        /// the driver and the car.</summary>
+        public const string ToneKnown = "known";
 
         // The aero package the simulator loaded is deliberately not shown and not
         // read. It is chosen by the circuit rather than by the driver, so it
@@ -57,6 +61,27 @@ namespace AsDriven.Core
             if (hasLights) { return "Shift lights"; }
             if (display == "no" && shiftLights == "no") { return "No display or shift lights"; }
             return "Display not recorded";
+        }
+
+        /// <summary>
+        /// Whether the rim's display and shift-light state is established.
+        ///
+        /// The card greys only what is not known, which is the same rule the
+        /// technique band follows: an optional blip reads in ordinary text
+        /// because it is a decided fact. A rim that plainly carries neither a
+        /// display nor shift lights is a decided fact too - it tells the driver
+        /// to fit the plain rim rather than the one with a screen - so it must
+        /// not be shown in the colour that means "no evidence".
+        ///
+        /// This matters more than it looks. The feature does not follow from the
+        /// rim shape: GT / Formula rims split almost evenly on whether they
+        /// carry a display, so the line is the only place a driver can learn it.
+        /// </summary>
+        public static string WheelFeatureTone(string display, string shiftLights)
+        {
+            return WheelFeatures(display, shiftLights) == "Display not recorded"
+                ? ToneUnknown
+                : ToneKnown;
         }
 
         public static string Shifter(int gears, string actuation)

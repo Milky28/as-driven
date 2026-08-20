@@ -148,6 +148,12 @@ namespace AsDriven.Core
             get { return PreflightLabels.WheelFeatures(WheelIntegratedDisplay, WheelShiftLights); }
         }
 
+        /// <summary>Whether <see cref="WheelFeatureLabel"/> states a fact or a gap.</summary>
+        public string WheelFeatureTone
+        {
+            get { return PreflightLabels.WheelFeatureTone(WheelIntegratedDisplay, WheelShiftLights); }
+        }
+
         /// <summary>Gear count and actuation, e.g. "5-speed H-pattern".</summary>
         public string ShifterLabel
         {

@@ -424,6 +424,41 @@ def _tone_layers(
     ]
 
 
+def _known_text(
+    factory: ItemFactory,
+    prefix: str,
+    tone_property: str,
+    left: float,
+    top: float,
+    width: float,
+    height: float,
+    size: float,
+    *,
+    expression: str,
+) -> list[dict[str, Any]]:
+    """Ordinary text for an established value, grey for a gap.
+
+    A simpler split than `_tone_text`: this line states a fact about the car
+    rather than dividing work between the driver and the car, so there is no
+    "you" or "car" colour to pick. Same mechanism though - a text item's colour
+    is fixed in the dashboard model, so the choice is overlapping layers.
+    """
+    prop = "[AsDriven." + tone_property + "]"
+    variants = [
+        ("Known", TEXT, prop + " == 'known'"),
+        ("Unknown", MUTED, prop + " != 'known'"),
+    ]
+    return [
+        factory.layer(
+            prefix + suffix,
+            [factory.text(prefix + suffix + "Text", "", left, top, width, height, size,
+                          color, expression=expression)],
+            visible_expression=visible,
+        )
+        for suffix, color, visible in variants
+    ]
+
+
 def _tone_text(
     factory: ItemFactory,
     prefix: str,
@@ -519,9 +554,17 @@ def _fit_band(
         factory.text("FitWheelHead", "Rim", text_left, top + height / 2 - head_size - 3,
                      text_width, head_size + 6, head_size, WHITE,
                      expression="[AsDriven.WheelRimLabel]", font_weight="Bold"),
-        factory.text("FitWheelSub", "", text_left, top + height / 2 + 2,
-                     text_width, sub_size + 6, sub_size, MUTED,
-                     expression="[AsDriven.WheelFeatureLabel]"),
+    ])
+    # Whether the rim carries a display or shift lights does not follow from its
+    # shape - GT / Formula rims split almost evenly - so this line is the only
+    # place a driver learns it, and greying it made a known fact look like a gap.
+    # Grey now means the same thing here as everywhere else on the card: no
+    # evidence. A rim that plainly has neither reads as the settled answer it is.
+    children.extend(
+        _known_text(factory, "FitWheelSub", "WheelFeatureTone", text_left,
+                    top + height / 2 + 2, text_width, sub_size + 6, sub_size,
+                    expression="[AsDriven.WheelFeatureLabel]"))
+    children.extend([
         factory.rectangle("FitDivider", cell_left + cell_width, top + 8, 1, height - 16, SLATE),
     ])
     second_left = cell_left + cell_width

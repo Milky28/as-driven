@@ -1343,6 +1343,7 @@ namespace AsDriven.Plugin
             this.AttachDelegate("WheelShiftLights", delegate { return _current.WheelShiftLights; });
             this.AttachDelegate("WheelRimLabel", delegate { return _current.WheelRimLabel; });
             this.AttachDelegate("WheelFeatureLabel", delegate { return _current.WheelFeatureLabel; });
+            this.AttachDelegate("WheelFeatureTone", delegate { return _current.WheelFeatureTone; });
             this.AttachDelegate("ShifterLabel", delegate { return _current.ShifterLabel; });
             this.AttachDelegate("ShifterGateLabel", delegate { return _current.ShifterGateLabel; });
             this.AttachDelegate("LaunchLabel", delegate { return _current.LaunchLabel; });

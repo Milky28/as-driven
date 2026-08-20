@@ -539,6 +539,18 @@ namespace AsDriven.Core.Tests
                     "states both when both are present");
                 Equal("Integrated display", PreflightLabels.WheelFeatures("yes", "no"), "display alone");
                 Equal("Shift lights", PreflightLabels.WheelFeatures("no", "yes"), "lights alone");
+                // Grey means "no evidence" everywhere else on the card, and this
+                // line used to grey settled answers too. A rim that plainly
+                // carries neither a display nor lights is a fact - it says fit
+                // the plain rim - and only a genuine gap is greyed now.
+                Equal("known", PreflightLabels.WheelFeatureTone("no", "no"),
+                    "a rim with neither is a settled answer, not a gap");
+                Equal("known", PreflightLabels.WheelFeatureTone("yes", "yes"),
+                    "a rim with both is established");
+                Equal("known", PreflightLabels.WheelFeatureTone("no", "yes"),
+                    "shift lights alone are established");
+                Equal("unknown", PreflightLabels.WheelFeatureTone("unknown", "no"),
+                    "an unrecorded display is the only greyed case");
                 Equal("Display not recorded", PreflightLabels.WheelFeatures("unknown", "no"),
                     "an unobserved modifier is never rendered as a no");
 
