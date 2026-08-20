@@ -15,6 +15,39 @@ Simulator lookup keys live in `simulators[].identities`. Multiple typed values
 allow a consumer to try a stable internal ID first and a display-name alias
 last. Record IDs are stable project keys and must not be derived at runtime.
 
+### A shared name is not a shared car
+
+A second simulator's drive joins an existing record as another `simulators[]`
+entry, which makes it tempting to match on the name the two games print. That is
+the one place where this dataset can be wrong in the direction it is otherwise
+designed against. Exact-match identity fails closed: a name no record claims
+finds nothing and the driver is told so. Attaching a second simulator's entry to
+the wrong record fails *open* - the plugin answers confidently, with another
+car's controls.
+
+So before merging, confirm the two games model the same specification, not just
+the same nameplate. The recurring traps are:
+
+- **Road against racing.** A homologation special and the car homologated from
+  it are different cars with different gearboxes. The E30 M3 Sport Evolution and
+  the 190E 2.5-16 Evo II each exist as both, and this dataset's records are the
+  racing specifications.
+- **Evolution suffixes.** `GT3` and `GT3 EVO`, `GT4` and `GT4 Evo` are different
+  cars, and the suffix is often dropped in one game's naming and not the other's.
+- **Generations behind one model name.** A 911 GT3 Cup is a 992 in one game and a
+  991.2 in another; both are "911 GT3 Cup".
+- **Kit variants.** A car and its tuner-kit version - a Cayman GT4 Clubsport
+  against the Manthey MR - differ in ways that reach the controls.
+
+Where the specification differs, the answer is a **new record**, not a second
+entry: the road car and the racing car are two real cars, and one record per real
+car means one each. Record the relationship in `real_world_identity_notes` rather
+than letting the pair inherit from each other silently.
+
+Evidence does not cross the same boundary. A homologation form establishing the
+racing car's gearbox says nothing about the road car sold under that name, and
+the reverse. See `docs/evidence-boundaries.md`.
+
 ### Aero packages
 
 A simulator may report one car under several names, one per aero configuration,

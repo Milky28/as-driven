@@ -8,7 +8,7 @@ who are comfortable reporting incorrect or missing data.
 
 - Windows with SimHub 9.11.22;
 - Automobilista 2 executable version 1.6.9.91;
-- As Driven SimHub client 0.16.0;
+- As Driven SimHub client 0.17.0;
 - As Driven dataset 0.3.96 and schema v1.
 
 Newer SimHub or AMS2 versions may work, but have not been certified for this
@@ -65,7 +65,7 @@ Dash Studio templates, overlay layouts, or settings. Restart SimHub or use
 The ZIP's adjacent `.sha256` file can be checked before installation:
 
 ```powershell
-Get-FileHash .\as-driven-simhub-0.16.0-early-access.zip -Algorithm SHA256
+Get-FileHash .\as-driven-simhub-0.17.0-early-access.zip -Algorithm SHA256
 ```
 
 Compare the displayed hash with the value in the downloaded `.sha256` file.

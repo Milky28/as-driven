@@ -166,7 +166,7 @@ approval are required before release. See `PRIVACY.md` and
 ## Current handoff state
 
 - Branch: `codex/stabilization`.
-- Early-access client: 0.16.0.
+- Early-access client: 0.17.0.
 - Dataset: 0.3.96 with 242 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
@@ -193,10 +193,21 @@ approval are required before release. See `PRIVACY.md` and
   demand moved to an override. Five real cars still carry it knowingly; four
   cars a simulator invented are outside the rule, because a car with no real
   referent has no real gearbox to be wrong about. See `docs/data-model.md`.
-- Next simulator: **Assetto Corsa Evo**, chosen for a relatively small car count,
+- Next simulator: **Assetto Corsa EVO**, chosen for a relatively small car count,
   no mod ecosystem yet and no DLC. It is the first test of the sim-independence
   the schema claims, and a second simulator's drive joins an existing record as
-  another `simulators[]` entry rather than forking a new one.
+  another `simulators[]` entry rather than forking a new one. The client
+  canonicalises SimHub's `AssettoCorsaEvo` to `ac-evo`; no record names it yet, so
+  the plugin reports the game as not yet covered while still logging car
+  identities locally, which is how the first record gets written. Roster
+  overlaps, drive order and the name matches to avoid are in
+  `docs/ac-evo-coverage-plan.md`.
+- A shared name across simulators is not a shared car. Exact matching fails
+  closed, but merging a second simulator's entry onto the wrong record fails
+  open - the plugin answers confidently with another car's controls. Road against
+  racing, evolution suffixes, generations and kit variants are the recurring
+  traps, and a differing specification wants a new record rather than a second
+  entry. See `docs/data-model.md`.
 - Record IDs name the real car with no simulator prefix. A second simulator's
   drive joins the existing record as another `simulators[]` entry rather than
   forking a second record, and an approval names the simulator it approves.
