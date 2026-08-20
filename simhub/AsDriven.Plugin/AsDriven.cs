@@ -379,7 +379,7 @@ namespace AsDriven.Plugin
                     carIdentifier))
                 {
                     _current = session.Current;
-                    if (_current.MatchStatus == "unmatched")
+                    if (ShouldRecordIdentity(_current.MatchStatus, data.GameName))
                     {
                         RecordUnmatchedIdentity(data);
                     }
@@ -954,6 +954,31 @@ namespace AsDriven.Plugin
                     "As Driven could not initialize unmatched identity diagnostics: "
                     + _lastUnmatchedLogError);
             }
+        }
+
+        /// <summary>
+        /// Whether an identity is worth writing to the local diagnostics log.
+        ///
+        /// "unmatched" is the obvious case: a covered game whose car this dataset
+        /// does not carry. The second case is how a new simulator starts. Until
+        /// one record names it, a game reports "unsupported-game" however well
+        /// the matcher knows it, and recording nothing would leave no way to
+        /// learn the car identities needed to write that first record. So a game
+        /// the matcher recognizes is logged even while the dataset is empty for
+        /// it, and a game it does not recognize still writes nothing at all.
+        ///
+        /// This changes no user-facing message: the popup still says the game is
+        /// not covered yet. The log stays local under %LOCALAPPDATA% and is never
+        /// uploaded.
+        /// </summary>
+        internal static bool ShouldRecordIdentity(string matchStatus, string gameName)
+        {
+            if (matchStatus == "unmatched")
+            {
+                return true;
+            }
+            return matchStatus == "unsupported-game"
+                && AsDrivenDatabase.CanonicalizeSimulator(gameName ?? string.Empty) != null;
         }
 
         private void RecordUnmatchedIdentity(GameData data)

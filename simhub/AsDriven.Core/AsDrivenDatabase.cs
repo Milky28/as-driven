@@ -259,6 +259,13 @@ namespace AsDriven.Core
             {
                 return "iracing";
             }
+            // SimHub names this game "AssettoCorsaEvo". Compared whole rather
+            // than by prefix, so plain Assetto Corsa and Competizione - both
+            // separate games with separate cars - never resolve here.
+            if (compact == "assettocorsaevo" || compact == "acevo")
+            {
+                return "ac-evo";
+            }
             return null;
         }
 
@@ -849,6 +856,7 @@ namespace AsDriven.Core
             {
                 case "ams2": return "Automobilista2";
                 case "iracing": return "iRacing";
+                case "ac-evo": return "AssettoCorsaEvo";
                 default: return simulator;
             }
         }
@@ -862,6 +870,7 @@ namespace AsDriven.Core
             {
                 case "ams2": return "Automobilista 2";
                 case "iracing": return "iRacing";
+                case "ac-evo": return "Assetto Corsa EVO";
                 default: return simulator;
             }
         }

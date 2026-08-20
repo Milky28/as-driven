@@ -42,6 +42,30 @@ namespace AsDriven.Core.Tests
                 Equal("Lister Storm GTM", preview.DisplayName, "previews the requested car");
                 Equal("preview-not-found", database.Preview("ams2", "missing.record").MatchStatus, "rejects an unknown preview record");
 
+                // The second simulator. SimHub calls this game "AssettoCorsaEvo",
+                // and the matcher has to recognize it before any drive in it can
+                // be recorded. Compared whole rather than by prefix: plain
+                // Assetto Corsa and Competizione are separate games with separate
+                // cars, and resolving either here would match them against AC
+                // EVO records.
+                Equal("ac-evo", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaEvo"),
+                    "recognizes SimHub's Assetto Corsa EVO game name");
+                Equal("ac-evo", AsDrivenDatabase.CanonicalizeSimulator("Assetto Corsa EVO"),
+                    "recognizes the product spelling of Assetto Corsa EVO");
+                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsa"),
+                    "does not resolve plain Assetto Corsa to the EVO dataset");
+                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),
+                    "does not resolve Competizione to the EVO dataset");
+
+                // Until one record names it, a recognized game is still reported
+                // as uncovered - that message is for the driver and does not
+                // change. What changes is that its car identities are written to
+                // the local diagnostics log anyway, because otherwise there is no
+                // way to learn the identities the first record needs.
+                Equal("unsupported-game",
+                    database.Match("AssettoCorsaEvo", "Lamborghini Huracan ST EVO2").MatchStatus,
+                    "reports a recognized game with no records as not yet covered");
+
                 // A record declares the aero packages it covers and the database
                 // expands them into one exact key each. Every configuration of a
                 // car has to reach that car's guidance, and the card says the
