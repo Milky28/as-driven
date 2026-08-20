@@ -782,30 +782,61 @@ counts and describe clutch control; they say nothing about engagement.
 ## Open: Formula Inter, a record with no real-world source
 
 `formula-inter-mg15` is the thinnest record still live. Its identity is an AMS2
-sheet identity for the Formula Inter MG15 covering 2015-2023, and its sources are
-the Coanda spreadsheet, the SimHub identity audit and the guided drive - every one
-of them simulator-derived. Nothing in it describes the real car, so the gearbox is
-not the only thing missing, just the thing being counted.
+sheet identity for the Formula Inter MG15 covering 2015-2023, held at medium
+confidence on the Coanda spreadsheet alone; its other sources are the SimHub
+identity audit and the guided drive. Every one of them is simulator-derived.
+Nothing in this record describes a real car, so the gearbox is not the only thing
+missing, just the thing being counted.
 
-Formula Inter is a real Brazilian single-seater category of that era, which puts
-it in reach of the route that settled Formula Vee and Copa Truck: a Brazilian
-governing body's technical regulations.
+**One field decides more here than on any other car in the queue.** Both clutch
+fields are already established as `not-required` and everything else is set, so
+`gearbox_type` is the only thing open. If it is synchromesh, the blip follows to
+optional and the record becomes an **exact match** for
+`h-5-synchro-dogleg-clutch-start-lift-up-blip-optional` - no gaps, no deviations.
+If it is dog-engaged, this car founds the dogleg dog-box archetype the Diablo
+failed to found, which still has no member and no evidence behind it.
+
+**Both outcomes are live and the gate does not favour either.** A dogleg on a
+junior formula car suggests a purpose-built racing gearbox, which would be
+dog-engaged. Against that, the route that settled Formula Vee - a production
+gearbox supplied sealed by the promoter, therefore synchromesh - is exactly the
+kind of arrangement a cheap national category uses, and the Vee reached medium
+that way. The tension is real: the Vee's production box is a standard H, and this
+car is a dogleg.
+
+That tension is not a lead. The Diablo's question was built on reading a dogleg as
+evidence of racing internals, and the road Diablo turned out to be a dogleg too;
+the reasoning was wrong before the search started. Here it is recorded as an open
+tension for evidence to resolve, not as a reason to expect an answer.
 
 > For **Formula Inter**, the Brazilian category running roughly 2015-2023:
 >
-> 1. Is a **technical regulation** published by the CBA, a state federation such
+> 1. **Is the category real, and is the MG15 a real car?** This record's identity
+>    rests on a simulator spreadsheet and nothing else, so this comes first. What
+>    is the "MG15" - a chassis designation, a builder, a model year? Identifying
+>    the constructor would give this record its first real-world source of any
+>    kind, which matters well beyond the gearbox. If the category or the car turns
+>    out to be a simulator construction, it retires like the other 22 and that is
+>    a complete answer.
+> 2. Is a **technical regulation** published by the CBA, a state federation such
 >    as FASP, or the category promoter? Formula Vee's came from FASP and Copa
 >    Truck's from the CBA, so both are worth trying.
-> 2. If one exists, quote the gearbox article: forward ratio count, whether the
->    gearbox is prescribed or free, and any wording on synchronisers
->    (`sincronizado`) or dog engagement (`garras`). Copa Truck's "o cambio e
->    livre" is a real possible outcome and would close the record.
-> 3. What is the **MG15**? Identifying the chassis and its builder would give this
->    record its first real-world source of any kind, which matters beyond the
->    gearbox.
+> 3. If one exists, quote the gearbox article: forward ratio count, whether the
+>    gearbox is prescribed, sealed or free, whether it names a donor production
+>    unit, and any wording on synchronisers (`sincronizado`) or dog engagement
+>    (`garras`). A regulation that frees the gearbox - Copa Truck's "o cambio e
+>    livre" - closes this record with a written reason and is a real outcome, not
+>    a failed search.
 > 4. Does anything describe the **gate**? The drive found a dogleg with first down
->    and left, which is unusual enough in a junior category to be worth
->    corroborating.
+>    and left. Corroborating it from a real source is worth having on its own, and
+>    a source that explains *why* it is a dogleg would likely settle the
+>    construction as a side effect.
+>
+> Standards as before. Quote verbatim with page or article numbers. Where a field
+> is blank or absent, say so explicitly - an absent synchroniser field is silence,
+> not a no. Confirm that whatever is found describes this car and this era rather
+> than a neighbouring category, and name the specification it states. A negative
+> result is a real finding.
 
 ## Settled: the Diablo SV-R, and a lead that did not survive
 
