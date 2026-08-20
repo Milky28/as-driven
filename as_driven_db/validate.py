@@ -18,15 +18,22 @@ DOC_STATUS_RE = re.compile(
     r"[Dd]ataset:? (\d+\.\d+\.\d+) (?:contains|with) (\d+) (?:curated|reviewed)"
 )
 DOC_RECORD_COUNT_RE = re.compile(r"currently contains (\d+) curated records")
-# One naming convention for AMS2 live-observation evidence, so a car's drive
-# source is predictable from its name. Tooling for other publishers (SimHub's
-# own identity inventories, for example) uses its own prefix and is not checked.
-LIVE_OBSERVATION_ID_RE = re.compile(
-    r"^ams2\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*$"
-)
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
 SIMULATORS = {"ams2", "iracing", "ac-evo", "ac-rally", "other"}
+# Every simulator that can publish a drive. `other` is a placeholder for a
+# simulator the enum does not name yet, so it owns no source prefix and its
+# observations are not held to the convention below.
+OBSERVING_SIMULATORS = tuple(sorted(SIMULATORS - {"other"}))
+# One naming convention for live-observation evidence, so a car's drive source is
+# predictable from its name whichever simulator recorded it. Tooling for other
+# publishers (SimHub's own identity inventories, for example) uses its own prefix
+# and is not checked.
+LIVE_OBSERVATION_ID_RE = re.compile(
+    r"^(?:"
+    + "|".join(re.escape(simulator) for simulator in OBSERVING_SIMULATORS)
+    + r")\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*$"
+)
 CLUTCH_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
 THROTTLE_LIFT = {"required", "not-required", "partial", "unknown", "not-applicable"}
 BLIP_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
@@ -65,11 +72,27 @@ def expand_identity(simulator: str, value: str, packages: list[str] | None) -> l
     suffix per declared package. Nothing here is applied to an incoming name at
     match time: the expansion happens once, when the database is read, and
     produces keys that are still compared byte for byte.
+
+    Two failure modes are answered the same way AsDrivenDatabase.ExpandIdentity
+    answers them, because a client and a validator that disagree about what a
+    record means are worse than either being wrong alone. A simulator this table
+    does not know falls back to the literal name, so its records match on exactly
+    what they spell out. A package the table does not know is a fault in the data
+    rather than a name to guess at, and raises: dropping it would expand the
+    identity to nothing and leave the car quietly unmatched at one kind of
+    circuit.
     """
     if not packages:
         return [value]
-    suffixes = AERO_SUFFIXES.get(simulator, {})
-    return [value + suffixes[package] for package in packages if package in suffixes]
+    suffixes = AERO_SUFFIXES.get(simulator)
+    if not suffixes:
+        return [value]
+    unknown = [package for package in packages if package not in suffixes]
+    if unknown:
+        raise ValueError(
+            f"unknown aero package(s) {unknown!r} for {simulator}"
+        )
+    return [value + suffixes[package] for package in packages]
 
 
 def _load(path: Path, errors: list[str]) -> Any | None:
@@ -162,14 +185,15 @@ def _validate_sources(payload: Any, label: str, errors: list[str]) -> set[str]:
             errors.append(f"{item}: duplicate source_id {source_id}")
         else:
             ids.add(source_id)
+            prefix = source_id.split(".", 1)[0]
             if (
                 source.get("source_type") == "in-game-observation"
-                and source_id.startswith("ams2.")
+                and prefix in OBSERVING_SIMULATORS
                 and not LIVE_OBSERVATION_ID_RE.fullmatch(source_id)
             ):
                 errors.append(
                     f"{item}: in-game observation source_id must be "
-                    f"ams2.local-live-<car>-controls.<game-version>, got {source_id!r}"
+                    f"{prefix}.local-live-<car>-controls.<game-version>, got {source_id!r}"
                 )
         if not _valid_date(source["retrieved_at"]):
             errors.append(f"{item}: retrieved_at must be an ISO date")
@@ -280,6 +304,20 @@ def _validate_identities(
             errors.append(
                 f"{item}: {sim_name} has no declared aero package spelling, so this "
                 "identity must be written out literally"
+            )
+            continue
+        unknown = [
+            package
+            for package in packages
+            if isinstance(packages, list) and package not in suffixes
+        ]
+        if unknown:
+            # The schema's enum and AERO_SUFFIXES are two lists that have to say
+            # the same thing. If they ever drift, this is where it surfaces, and
+            # it surfaces as an error rather than as a name quietly not expanded.
+            errors.append(
+                f"{item}: {sim_name} has no spelling for aero package(s) "
+                f"{unknown!r}; the suffix table and the schema enum disagree"
             )
             continue
         if value != value.strip():
@@ -417,9 +455,15 @@ def _simulator_identity_values(simulator: dict[str, Any], kind: str) -> set[str]
         value = identity.get("value")
         if not isinstance(value, str):
             continue
-        values.update(
-            expand_identity(simulator_id, value, identity.get("aero_packages"))
-        )
+        try:
+            values.update(
+                expand_identity(simulator_id, value, identity.get("aero_packages"))
+            )
+        except ValueError:
+            # _validate_identities reports the drift itself, with the record and
+            # the offending package named. Skipping here keeps the approval check
+            # running so the rest of its findings still reach the reviewer.
+            continue
     return values
 
 
@@ -865,7 +909,13 @@ def _collect_identities(
             if kind not in MATCHED_IDENTITY_KINDS or not isinstance(value, str):
                 continue
             packages = identity.get("aero_packages")
-            for expanded in expand_identity(sim_name, value, packages):
+            try:
+                expansion = expand_identity(sim_name, value, packages)
+            except ValueError:
+                # Reported against the record by _validate_identities. Collision
+                # detection skips it rather than crashing the whole run.
+                continue
+            for expanded in expansion:
                 key = (sim_name, kind, expanded)
                 owner = claimed.get(key)
                 if owner is not None and owner != record_id:

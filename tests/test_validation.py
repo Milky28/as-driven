@@ -6,6 +6,9 @@ import tempfile
 import unittest
 
 from as_driven_db.validate import (
+    AERO_SUFFIXES,
+    LIVE_OBSERVATION_ID_RE,
+    OBSERVING_SIMULATORS,
     _resolve_pointer,
     expand_identity,
     validate_repository,
@@ -781,6 +784,103 @@ class ValidationTests(unittest.TestCase):
                     "only valid on a telemetry-name" in error
                     for error in validate_repository(temp_root)
                 )
+            )
+
+    def test_the_aero_suffix_table_and_the_schema_enum_say_the_same_thing(self) -> None:
+        """Two lists that must agree, with nothing making them agree.
+
+        `AERO_SUFFIXES` decides what a declared package expands to and the schema's
+        `aeroPackage` enum decides which packages a record may declare. A package
+        in the enum but not the table used to expand to nothing, which is a car
+        that silently stops matching rather than a validation failure.
+        """
+        schema = json.loads(
+            (ROOT / "schema" / "v1" / "car-record.schema.json").read_text(encoding="utf-8")
+        )
+        enum = set(schema["$defs"]["aeroPackage"]["enum"])
+        for simulator, suffixes in AERO_SUFFIXES.items():
+            self.assertEqual(
+                set(suffixes),
+                enum,
+                f"{simulator}'s suffix table and the schema enum disagree",
+            )
+
+    def test_the_client_and_the_validator_spell_aero_packages_identically(self) -> None:
+        """The client builds its own table in C#; a drift there is a silent miss.
+
+        AsDrivenDatabase.BuildAeroSuffixes is the matching side of the same
+        contract. If it and AERO_SUFFIXES ever disagree by a character, a car
+        matches in validation and not in the plugin, or the reverse.
+        """
+        source = (
+            ROOT / "simhub" / "AsDriven.Core" / "AsDrivenDatabase.cs"
+        ).read_text(encoding="utf-8")
+        for simulator, suffixes in AERO_SUFFIXES.items():
+            for package, suffix in suffixes.items():
+                literal = '"' + suffix + '"' if suffix else "string.Empty"
+                expected = f'{simulator}["{package}"] = {literal};'
+                self.assertIn(
+                    expected,
+                    source,
+                    f"AsDrivenDatabase.cs does not spell {simulator}/{package} as {suffix!r}",
+                )
+
+    def test_an_unknown_aero_package_is_a_fault_rather_than_a_dropped_name(self) -> None:
+        """Matches AsDrivenDatabase.ExpandIdentity, which throws on the same input.
+
+        Dropping the package would expand the identity to nothing and leave the
+        car unmatched at one kind of circuit, with no error anywhere.
+        """
+        with self.assertRaises(ValueError):
+            expand_identity("ams2", "Some Car", ["medium-downforce"])
+
+    def test_a_simulator_without_a_suffix_table_keeps_its_literal_name(self) -> None:
+        """Also matching the client: an unknown simulator falls back to the literal.
+
+        Returning an empty list here was the actual bug - the first `ac-evo`
+        record to declare packages would have expanded to no names at all.
+        """
+        self.assertEqual(expand_identity("ac-evo", "Some Car", ["base"]), ["Some Car"])
+
+    def test_a_second_simulators_drive_source_follows_the_naming_convention(self) -> None:
+        """The convention was enforced only for source ids beginning `ams2.`.
+
+        An `ac-evo` drive could therefore be named anything at all, which is the
+        one thing that had to change before a second simulator's evidence could
+        be trusted to be findable from its name.
+        """
+        self.assertTrue(
+            LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.local-live-porsche-911-gt3-controls.0.1.2")
+        )
+        self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
+        self.assertNotIn("other", OBSERVING_SIMULATORS)
+
+    def test_an_ac_evo_observation_source_must_be_named_by_the_convention(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            temp_root = self._copy_repository_data(Path(temp))
+            path = temp_root / "data" / "v1" / "sources.json"
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            payload["sources"].append(
+                {
+                    "source_id": "ac-evo.a-drive-i-did",
+                    "title": "A drive",
+                    "publisher": "local",
+                    "url": None,
+                    "archive_url": None,
+                    "source_type": "in-game-observation",
+                    "published_or_updated_at": None,
+                    "retrieved_at": "2026-08-20",
+                    "reuse_status": "facts-only-review",
+                    "notes": "Staged to prove the convention now covers a second simulator.",
+                }
+            )
+            path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            self.assertTrue(
+                any(
+                    "ac-evo.local-live-<car>-controls" in error
+                    for error in validate_repository(temp_root)
+                ),
+                "an ac-evo observation escaped the naming convention",
             )
 
     @staticmethod
