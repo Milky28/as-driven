@@ -674,6 +674,70 @@ counts and describe clutch control; they say nothing about engagement.
 > settles both fields on three cars, under the rule in `docs/data-model.md`, with
 > no override question to resolve.
 
+## Open: Formula Inter, a record with no real-world source
+
+`formula-inter-mg15` is the thinnest record still live. Its identity is an AMS2
+sheet identity for the Formula Inter MG15 covering 2015-2023, and its sources are
+the Coanda spreadsheet, the SimHub identity audit and the guided drive - every one
+of them simulator-derived. Nothing in it describes the real car, so the gearbox is
+not the only thing missing, just the thing being counted.
+
+Formula Inter is a real Brazilian single-seater category of that era, which puts
+it in reach of the route that settled Formula Vee and Copa Truck: a Brazilian
+governing body's technical regulations.
+
+> For **Formula Inter**, the Brazilian category running roughly 2015-2023:
+>
+> 1. Is a **technical regulation** published by the CBA, a state federation such
+>    as FASP, or the category promoter? Formula Vee's came from FASP and Copa
+>    Truck's from the CBA, so both are worth trying.
+> 2. If one exists, quote the gearbox article: forward ratio count, whether the
+>    gearbox is prescribed or free, and any wording on synchronisers
+>    (`sincronizado`) or dog engagement (`garras`). Copa Truck's "o cambio e
+>    livre" is a real possible outcome and would close the record.
+> 3. What is the **MG15**? Identifying the chassis and its builder would give this
+>    record its first real-world source of any kind, which matters beyond the
+>    gearbox.
+> 4. Does anything describe the **gate**? The drive found a dogleg with first down
+>    and left, which is unusual enough in a junior category to be worth
+>    corroborating.
+
+## Open: the Diablo SV-R, and a gate that suggests an answer
+
+`lamborghini-diablo-sv-r` has a manufacturer-derived source specifying a
+five-speed Lamborghini manual and a dry single-plate clutch, which establishes the
+gearbox exists and not how it engages. Three fields are open: the construction and
+the clutch on both upshift and downshift, the latter two because the drive
+established when a clutchless shift is *possible* rather than what the authentic
+technique was.
+
+**The gate is the lead worth following.** The cockpit shows a dogleg with first
+down and left. A dogleg on a road-derived car is not a road-car gate, so either
+the SV-R took a different gearbox from the Diablo it derives from, or the road car
+shares it. Which of those is true bears directly on the construction, because a
+racing gearbox fitted for a one-make series is far more likely to be dog-engaged
+than a production Lamborghini five-speed.
+
+> For the **Lamborghini Diablo SV-R**, built for the 1996 Diablo Supertrofeo:
+>
+> 1. What **gate** does the road Diablo's five-speed use? If it is a standard H,
+>    then the SV-R's dogleg means the gearbox was changed for racing, and what it
+>    was changed to is the question.
+> 2. Does any Lamborghini or Supertrofeo source describe the SV-R's gearbox as
+>    **synchronised or dog-engaged**, or name a supplier?
+> 3. Was the SV-R **homologated**? It was built for a one-make series, which is
+>    the same position as the M1 Procar - and there the FIA record turned out to
+>    describe the road car rather than the racer. Worth checking rather than
+>    assuming either way.
+> 4. Does any source state whether the clutch was used for **running shifts**?
+>    Both clutch fields are open and the drive cannot answer them.
+>
+> Unlike most of this queue, a **dog box is the likelier answer here**, and it
+> would be the first in the dataset established from a source rather than
+> inferred. It would also make the Diablo the founding member of a dogleg dog-box
+> archetype, which is the pairing that would finally put the other dogleg cars
+> genuinely between two archetypes instead of matching none.
+
 ## Group C cannot be settled this way at all
 
 `sauber-mercedes-c9` and `porsche-962c` were listed as homologation candidates.
