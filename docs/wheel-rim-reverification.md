@@ -110,39 +110,83 @@ Recorded as: d-shaped x5, gt-formula x19, round x6.
 - `porsche-cayman-gt4-clubsport-mr` - round
 - `puma-gte` - round
 
-## 3. Rim modifiers never recorded
+## 3. Shift lights never observed
 
-These records carry a shape but no `integrated_display`, `shift_lights` or `open_top` value. That is an honest gap rather than a contradiction: the fields are optional and were not observed. They are listed so a future pass can fill them in.
+`integrated_display` and `shift_lights` are recorded independently: a rim can
+carry a readout, shift lights, both or neither. The guided-drive vocabulary only
+grew to capture lights partway through curation - later source labels say so
+outright (`live-cockpit-round-shift-lights`,
+`live-cockpit-formula-display-shift-lights`), while these records carry the older
+forms (`live-cockpit-round-no-display`, `live-cockpit-gt`, or a plain
+`live-cockpit-observation`). So this is one vocabulary change rather than 32
+separate mysteries, and only a look at the cockpit closes it.
 
-- `gillet-vertigo-streiff` - d-shaped
-- `lamborghini-murcielago-r-gt` - d-shaped
-- `lister-storm-gtm` - d-shaped
-- `maserati-mc12-gt1` - d-shaped
-- `panoz-esperante-gtlm` - d-shaped
-- `alpine-a424` - gt-formula
-- `aston-martin-valkyrie-hypercar` - gt-formula
-- `aston-martin-vantage-gt4-evo` - gt-formula
-- `aston-martin-vantage-gte` - gt-formula
-- `audi-r8-lms-gt4` - gt-formula
-- `chevrolet-corvette-z06-gt3r` - gt-formula
-- `lamborghini-huracan-super-trofeo-evo2` - gt-formula
-- `lamborghini-sc63` - gt-formula
-- `ligier-js-p217` - gt-formula
-- `ligier-js-p320` - gt-formula
-- `ligier-js-p4` - gt-formula
-- `oreca-07` - gt-formula
-- `aston-martin-dbr9` - round
-- `chevrolet-corvette-c5-r` - round
-- `dodge-viper-gts-r` - round
-- `lamborghini-diablo-sv-r` - round
-- `milano-gt36` - round
-- `milano-gt55` - round
-- `porsche-996-gt3-rsr` - round
-- `saleen-s7-r-gt1` - round
-- `spyker-c8-spyder-gt2-r` - round
-- `tvr-tuscan-t400r-gt2` - round
+The field was absent from 31 of these rather than recorded as `unknown`. It is
+now `unknown` everywhere, which changes nothing a driver sees - the client
+already read an absent state as unknown - but makes the gap countable and puts
+the one record that already said `unknown` in with the rest.
 
-Count: 27.
+**20 records have a known display and unobserved lights.** These are the useful
+ones to re-check: half the answer is already there.
+
+| Record | Display | Shape |
+| --- | --- | --- |
+| `aston-martin-dbr9` | no | round |
+| `aston-martin-vantage-gt4-evo` | no | gt-formula |
+| `aston-martin-vantage-gte` | no | gt-formula |
+| `audi-r8-lmp1` | no | yoke |
+| `audi-r8-lms-gt4` | no | gt-formula |
+| `chevrolet-corvette-c5-r` | no | round |
+| `chevrolet-corvette-z06-gt3r` | no | gt-formula |
+| `gillet-vertigo-streiff` | no | d-shaped |
+| `lamborghini-diablo-sv-r` | no | round |
+| `lamborghini-huracan-super-trofeo-evo2` | no | gt-formula |
+| `lamborghini-murcielago-r-gt` | no | d-shaped |
+| `lister-storm-gtm` | no | d-shaped |
+| `maserati-mc12-gt1` | no | d-shaped |
+| `milano-gt36` | no | round |
+| `milano-gt55` | no | round |
+| `panoz-esperante-gtlm` | no | d-shaped |
+| `porsche-996-gt3-rsr` | no | round |
+| `saleen-s7-r-gt1` | no | round |
+| `spyker-c8-spyder-gt2-r` | no | round |
+| `tvr-tuscan-t400r-gt2` | no | round |
+
+**11 records have a display and unobserved lights.** Worth noting that a rim with
+a readout is the likelier one to also carry lights, so these are not safely
+assumed either way.
+
+| Record | Display | Shape |
+| --- | --- | --- |
+| `alpine-a424` | yes | gt-formula |
+| `aston-martin-valkyrie-hypercar` | yes | gt-formula |
+| `cadillac-v-series-r` | yes | gt-formula |
+| `dallara-sp1` | yes | gt-formula |
+| `lamborghini-sc63` | yes | gt-formula |
+| `ligier-js-p217` | yes | gt-formula |
+| `ligier-js-p320` | yes | gt-formula |
+| `ligier-js-p4` | yes | gt-formula |
+| `lola-b05-40-turbo` | yes | d-shaped |
+| `lola-b05-40-v8` | yes | d-shaped |
+| `oreca-07` | yes | gt-formula |
+
+**One record has neither observed.** `dodge-viper-gts-r` is sourced from
+`period-cockpit` rather than a drive, so it is a different problem from the rest
+of this list: there is no simulator cockpit to go back to for the real car's rim.
+
+Count: 32.
+
+### What the card shows meanwhile
+
+The FIT band used to answer "Display not recorded" whenever lights were absent,
+which was wrong in both directions. For the 20 records with `display: no` it
+denied a display that had been recorded. For the 11 with `display: yes` it read
+as a complete answer - ordinary text, no hedge - while dropping the lights
+silently, which is the worse of the two.
+
+It now says which half is missing: "No display, lights unknown" or "Display,
+lights unknown", and both halves must be established before the line loses its
+grey. See `PreflightLabels.WheelFeatures`.
 
 ## Working through this list
 

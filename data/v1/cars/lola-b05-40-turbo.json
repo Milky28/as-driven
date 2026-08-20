@@ -40,6 +40,7 @@
         "shape": "d-shaped",
         "diameter_mm": null,
         "integrated_display": "yes",
+        "shift_lights": "unknown",
         "source_label": "live-cockpit-d-shaped-display",
         "notes": "Direct cockpit inspection showed a D-shaped rim with an integrated display; exact diameter remains unknown."
       }

@@ -40,6 +40,8 @@
       "wheel_rim": {
         "shape": "round",
         "diameter_mm": null,
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
         "source_label": "period-cockpit",
         "notes": "Round rim supported by documented period-spec cockpit photography; exact diameter remains unknown."
       }

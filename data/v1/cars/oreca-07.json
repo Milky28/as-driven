@@ -40,6 +40,7 @@
         "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "yes",
+        "shift_lights": "unknown",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
         "notes": "Direct cockpit inspection showed a closed GT/Formula rim with an integrated display; exact diameter remains unknown."

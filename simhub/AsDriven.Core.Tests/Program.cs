@@ -550,7 +550,28 @@ namespace AsDriven.Core.Tests
                 Equal("known", PreflightLabels.WheelFeatureTone("no", "yes"),
                     "shift lights alone are established");
                 Equal("unknown", PreflightLabels.WheelFeatureTone("unknown", "no"),
-                    "an unrecorded display is the only greyed case");
+                    "an unrecorded display is greyed");
+
+                // The two fields are recorded independently, so a half-known rim
+                // says which half is missing. Answering "Display not recorded"
+                // for these denied a display that had been recorded, and where
+                // the display was a yes it read as complete while dropping the
+                // lights entirely. Both halves must be known to lose the grey.
+                Equal("No display, lights unknown",
+                    PreflightLabels.WheelFeatures("no", "unknown"),
+                    "a recorded absent display is not called unrecorded");
+                Equal("Display, lights unknown",
+                    PreflightLabels.WheelFeatures("yes", "unknown"),
+                    "a display with unrecorded lights does not read as complete");
+                Equal("unknown", PreflightLabels.WheelFeatureTone("no", "unknown"),
+                    "half an answer is still a gap");
+                Equal("unknown", PreflightLabels.WheelFeatureTone("yes", "unknown"),
+                    "a known display does not settle the lights");
+                foreach (string half in new[]
+                    { "No display, lights unknown", "Display, lights unknown" })
+                {
+                    True(half.Length <= 26, "half-known label fits the band: " + half);
+                }
                 Equal("Display not recorded", PreflightLabels.WheelFeatures("unknown", "no"),
                     "an unobserved modifier is never rendered as a no");
 

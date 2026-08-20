@@ -41,6 +41,7 @@
         "shape": "round",
         "diameter_mm": null,
         "integrated_display": "no",
+        "shift_lights": "unknown",
         "source_label": "live-cockpit-round-no-display",
         "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
       }

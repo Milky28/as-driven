@@ -52,15 +52,37 @@ namespace AsDriven.Core
             }
         }
 
+        /// <summary>
+        /// What the rim carries, over two fields recorded independently.
+        ///
+        /// The two can be known separately, so the label says which half is
+        /// missing rather than collapsing every gap into one sentence. It used
+        /// to answer "Display not recorded" whenever shift lights were absent,
+        /// which was wrong twice over: it denied a display that had been
+        /// recorded, and where the display was a `yes` it read as a complete
+        /// answer while silently dropping the lights.
+        ///
+        /// Kept inside the width the band allows - the longest string here is
+        /// 26 characters, and the compact template clips beyond about thirty.
+        /// </summary>
         public static string WheelFeatures(string display, string shiftLights)
         {
+            bool displayKnown = display == "yes" || display == "no";
+            bool lightsKnown = shiftLights == "yes" || shiftLights == "no";
+            if (!displayKnown)
+            {
+                return "Display not recorded";
+            }
+            if (!lightsKnown)
+            {
+                return display == "yes" ? "Display, lights unknown" : "No display, lights unknown";
+            }
             bool hasDisplay = display == "yes";
             bool hasLights = shiftLights == "yes";
             if (hasDisplay && hasLights) { return "Display and shift lights"; }
             if (hasDisplay) { return "Integrated display"; }
             if (hasLights) { return "Shift lights"; }
-            if (display == "no" && shiftLights == "no") { return "No display or shift lights"; }
-            return "Display not recorded";
+            return "No display or shift lights";
         }
 
         /// <summary>
@@ -79,9 +101,9 @@ namespace AsDriven.Core
         /// </summary>
         public static string WheelFeatureTone(string display, string shiftLights)
         {
-            return WheelFeatures(display, shiftLights) == "Display not recorded"
-                ? ToneUnknown
-                : ToneKnown;
+            bool displayKnown = display == "yes" || display == "no";
+            bool lightsKnown = shiftLights == "yes" || shiftLights == "no";
+            return displayKnown && lightsKnown ? ToneKnown : ToneUnknown;
         }
 
         public static string Shifter(int gears, string actuation)

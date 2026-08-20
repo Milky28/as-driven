@@ -39,6 +39,7 @@
         "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "no",
+        "shift_lights": "unknown",
         "open_top": "yes",
         "source_label": "live-cockpit-open-top-no-display",
         "notes": "Direct AMS2 cockpit inspection matched the Aston Martin racing wheel reference: an open-top GT rim without an integrated display. Exact diameter remains unknown."
