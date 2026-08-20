@@ -405,6 +405,37 @@ would also put a required blip on a synchromesh, the same shape as the Formula
 Vee pair, which is handled as a simulator override rather than by revising the
 construction.
 
+## Open: the M1 Procar's gearbox
+
+`bmw-m1-procar` now deviates from the dogleg archetype on `gearbox_type` alone.
+It is the best remaining candidate for the FIA route, because unlike the Group C
+cars the M1 was homologated - for Group 4 - so a form should exist. What is
+already established: a ZF five-speed, dogleg, first down and left, with first,
+third and fifth sharing the lower plane.
+
+> Find the FIA homologation form for the **BMW M1 (E26)** on
+> `historicdb.fia.com` - Group 4, and note any later Group B form or extension.
+> From **article 603 Getriebe**:
+>
+> 1. **603 b)** the manual gearbox make as written.
+> 2. **603 e)** every homologated gearbox with **five** forward ratios - the base
+>    `Handschaltung`, any `Zusätzl. Getriebe` on the same sheet, and any VO, ES or
+>    ET extension carrying its own ratio table. Quote the **synchro column
+>    verbatim per gear**, and say explicitly where a marking is blank, dashed or
+>    absent rather than reading it as a no. Page number for each.
+> 3. **603 f)** the `Schalt-Schema`, described as drawn - which positions carry
+>    reverse and first, and which gears share the lower plane.
+> 4. Whether any extension describes the **Procar** specification specifically,
+>    rather than the road car. The Procar was a one-make series and its gearbox
+>    may be covered by an extension, or may not appear on the form at all.
+>
+> **The answer matters in both directions.** If the five-speeds are synchronised,
+> the M1 joins the archetype. If any is dog-engaged, that is the more interesting
+> result: it would mean a dogleg five-speed can be either construction, and
+> `formula-inter-mg15`, `lamborghini-diablo-sv-r` and `sauber-mercedes-c9` would
+> move from deviating on a gap to genuinely undetermined between two archetypes.
+> A blank or absent marking is a real finding, not a failed search.
+
 ## Group C cannot be settled this way at all
 
 `sauber-mercedes-c9` and `porsche-962c` were listed as homologation candidates.
