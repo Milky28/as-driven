@@ -610,6 +610,70 @@ era of the same championship.
 > fixes it: it would close this record the way Copa Truck closed five, as a
 > documented permanent unknown rather than an outstanding task.
 
+## Open: the Lotus 23, where the options may agree again
+
+`lotus-23` is a real 1962 Group 4 sports racer and its own note carries the
+shape that settled the M3 and the 190E. Lotus states the gearbox choices
+"typically included Renault or Volkswagen units", and the drive found four
+forward gears. Both of those are production road transaxles, and one of them is
+already established: `iccr.formula-vee-technical-regulations` has the VW Type 1
+and 3 four-speed as fully synchromesh.
+
+So if the Renault unit is synchromesh too, the two candidates agree and the
+construction follows without choosing between them - which is exactly the
+argument that carried the Group A pair, and it does not need the specific unit
+identified.
+
+> For the **Lotus 23** (1962, four-speed):
+>
+> 1. Which **Renault** transaxle did the Type 23 use, and is it synchronised? A
+>    period Lotus specification, a Type 23 restoration guide or a Renault
+>    workshop source would all do.
+> 2. Does any source list a **third** gearbox option beyond Renault and
+>    Volkswagen - a Hewland, for instance? A Hewland would be dog-engaged and
+>    would break the agreement, which makes it the finding to look for rather
+>    than a footnote.
+> 3. Does any source say which unit the **23 as raced in period** carried, as
+>    against the choices offered?
+>
+> The claim to defeat: *every gearbox the Type 23 was offered with is a
+> synchronised production transaxle.* One racing dog box among the options and it
+> stays unknown.
+
+## Open: one gearbox, three McLarens
+
+`mclaren-honda-mp4-4`, `mclaren-honda-mp4-5b` and `mclaren-honda-mp4-6` all name
+the same unit - a **Weismann/McLaren transverse six-speed manual** - so a single
+source settles three records. The MP4/6 is recorded as the last car to win a world
+championship with a manual gearbox, which makes this a well-documented corner of
+the sport.
+
+**Do not look for a homologation form.** Formula One cars are built to technical
+regulations and were never homologated, the same reason the Group C cars have no
+paperwork. Five of the twelve records still live are in classes that never
+homologated anything, and that route is permanently closed for all five. The
+period Formula One technical regulations this project already registers cap ratio
+counts and describe clutch control; they say nothing about engagement.
+
+> For the **Weismann/McLaren transverse six-speed** of 1988-1991:
+>
+> 1. Does any source state whether it engages through **dog rings or
+>    synchronisers**? A Weismann company description, a period technical
+>    write-up, a McLaren team account or a restorer of these cars are the likely
+>    places - the equivalent of the specialist source that settled the Porsche
+>    915.
+> 2. Is the gearbox in the **MP4/4** the same unit as in the **MP4/5B** and
+>    **MP4/6**, or did it change across those seasons? The records assume one
+>    family; a change would split them.
+> 3. The three disagree on the gate: MP4/4 is recorded dogleg with first down and
+>    to the **right**, MP4/5B standard, MP4/6 unrecorded. Does any source describe
+>    the gate for any of them?
+>
+> All three have `manual_blip: unknown` as well as an unknown construction, so
+> unlike most of this queue they assert nothing they cannot support. One answer
+> settles both fields on three cars, under the rule in `docs/data-model.md`, with
+> no override question to resolve.
+
 ## Group C cannot be settled this way at all
 
 `sauber-mercedes-c9` and `porsche-962c` were listed as homologation candidates.
