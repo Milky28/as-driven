@@ -16,7 +16,7 @@
   "authentic_controls": {
     "transmission": {
       "forward_gears": 5,
-      "gearbox_type": "unknown",
+      "gearbox_type": "synchromesh",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
       "first_gear_position": "down-left",
@@ -49,7 +49,9 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
-      "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence."
+      "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence.",
+      "The gearbox construction comes from the car's FIA Group A homologation form. Every five-speed the form homologates is marked synchronised, so whichever of them this car carried it was a synchromesh. The form also homologates six-speeds of other construction - one has a blank synchro column - which is why the gear count is what makes this answerable rather than a guess.",
+      "The driver still blips every downshift here, which a synchromesh does not need to engage a gear. That value came from a guided drive and is left as it was: a medium-confidence construction cannot overrule a drive, and if the two are ever reconciled the likely shape is a simulator override rather than a change to the real car."
     ]
   },
   "simulators": [
@@ -113,17 +115,28 @@
         "paths": [
           "/authentic_controls/transmission/first_gear_position",
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
           "mercedes-190e-evo.dogleg-getrag",
           "trade-unique-cars.e30-m3-190e",
-          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91",
+          "fia.mercedes-benz-190e.a-5269"
         ],
         "confidence": "high",
-        "basis": "The sources establish a dog-leg five-speed Getrag manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+        "basis": "The sources establish a dog-leg five-speed Getrag manual, and the live drive confirmed five gears through an H-pattern gate observed as a dogleg. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane. The homologation form corroborates both from a primary source: article 603 tabulates five forward ratios, and 603 f) draws the gate with reverse above first and 1, 3 and 5 on the lower plane."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "fia.mercedes-benz-190e.a-5269",
+          "mercedes-190e-evo.dogleg-getrag"
+        ],
+        "confidence": "medium",
+        "basis": "Every gearbox with five forward ratios homologated on this form is explicitly marked synchronised - the base Getrag, the additional gearbox on the same sheet, and the further five-speed added by extension. The form does homologate gearboxes of other construction, including one whose synchro column is blank throughout, but those are six-speeds and this car has five. So no choice is being made between permitted options: at five ratios they agree. The remaining step, from what the form permits to what this car was built with, is inferred rather than stated by the source, which is why this sits at medium and not higher."
       },
       {
         "paths": [
@@ -154,8 +167,8 @@
   },
   "driver_summary": "Getrag five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
   "archetype": {
-    "classification": "no-archetype",
-    "basis": "No registered archetype has a dogleg gate. Six curated dogleg cars share an identical block - five forward gears, first down and left, clutch to pull away, a lift on upshifts and a blip on every downshift - and would form one, but every one of them leaves gearbox_type unknown and an archetype must be fully specified. A reviewed source establishing the construction on any of them creates the archetype this record belongs to."
+    "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-down",
+    "classification": "matches"
   },
   "updated_at": "2026-08-17"
 }

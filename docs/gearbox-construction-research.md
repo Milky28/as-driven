@@ -334,7 +334,45 @@ upgrades the 190E form from a future lead to a checked source. It still does not
 show that the AMS2 DTM car ran one of these synchronised variants, so it is not a
 basis for changing the curated `gearbox_type` from `unknown`.
 
-## Open: are the five-speeds unanimous?
+## Settled: the M3 and the 190E are synchromesh
+
+The five-speeds are unanimous, and the pages were read here as well as by Codex:
+A-5327 p.6, A-5269 p.6 and A-5269 p.101 were inspected directly, and the two
+tables not inspected match the same pattern verbatim.
+
+Both records now carry `gearbox_type: synchromesh` at `medium`, cited to their own
+form. The remaining step - from what a form permits to what a car was built with -
+is inference, which is what keeps it at medium rather than higher.
+
+**The gear count is what makes this answerable.** The M3's form does homologate a
+gearbox of other construction: 12/08 VO, whose synchro column is blank throughout.
+It is a six-speed, and both records are five-speeds. Restricted to five ratios
+every option on both forms is marked synchronised, so nothing is being chosen
+between - which is a different thing from picking the convenient option, and the
+basis on each record says so.
+
+**The forms also settled something nobody was looking for.** Section 603 f) of
+each draws the gear-change gate - reverse above first, 1, 3 and 5 on the lower
+plane - so the dogleg and first-down-left now rest on a primary source rather
+than on the cockpit alone. That went to the existing claim, which was already at
+high confidence and is now better supported.
+
+### What it unlocked
+
+The pair share a byte-identical block, which made them the first fully specified
+dogleg cars in the dataset and registered
+`h-5-synchro-dogleg-clutch-start-lift-up-blip-down`. Its id carries the gate where
+no other id does, because without it the archetype would be indistinguishable
+from the standard-gate five-speed synchromesh one.
+
+Four dogleg cars that had been `no-archetype` purely because that archetype could
+not exist - `bmw-m1-procar`, `formula-inter-mg15`, `lamborghini-diablo-sv-r` and
+`sauber-mercedes-c9` - now deviate from it, each declaring the gearbox gap and
+pointing at the FIA form as the route to close it. `mclaren-honda-mp4-4` still
+matches nothing, and its basis now says why: six gears, and first down and to the
+right, the mirrored gate.
+
+## Superseded: were the five-speeds unanimous?
 
 The recommendation to leave both records unknown rests on the forms listing
 gearboxes of differing construction, so that picking one would be a guess. That

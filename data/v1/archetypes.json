@@ -582,6 +582,33 @@
         }
       },
       "basis": "2 curated records share this exact block. It is separated from stick-4-seq-clutch-start-flat-up-no-blip only by forward gears; stick-6-seq-clutch-start-flat-up-auto-blip only by automatic blip; stick-6-seq-clutch-start-flat-up-blip-down only by manual blip."
+    },
+    {
+      "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-down",
+      "label": "Five-speed synchromesh H-pattern, dogleg gate with 1st down and left, clutch to pull away, lift on upshift, blip every downshift",
+      "transmission": {
+        "forward_gears": 5,
+        "gearbox_type": "synchromesh",
+        "shift_actuation": "h-pattern",
+        "shift_pattern": "dogleg-h",
+        "first_gear_position": "down-left",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "standing_start_clutch": "required"
+      },
+      "basis": "The first archetype with a dogleg gate, and the reason the id carries one where no other does: the gate is mechanism, and without it this would be indistinguishable from the standard-gate five-speed synchromesh archetype it otherwise resembles. Two curated records share this exact block, both Group A homologation specials built to race each other, and both had their construction established from their own FIA form. Four further dogleg cars share every field but the construction and are waiting on it."
     }
   ]
 }

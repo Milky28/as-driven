@@ -3673,6 +3673,18 @@
       "notes": "Official FIA identity and homologation context for the Group A Audi V8 Quattro. Exact gate and simulator technique are established separately."
     },
     {
+      "source_id": "fia.bmw-m3.a-5327",
+      "title": "Homologation form A-5327, Group A: BMW M3",
+      "publisher": "Federation Internationale du Sport Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1662735601/homologation_form_number_5327_group_a.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Article 603 names a Getrag manual gearbox and tabulates two homologated five-speed sets, the base Handschaltung and an additional gearbox, with every forward gear of both marked synchro. Section 603 f) draws the gear change gate: reverse above first, with 1, 3 and 5 on the lower plane - a dogleg with first down and left. Later extensions homologate six-speeds of differing construction, including 12/08 VO whose synchro column is blank throughout and 38/20 VO which names a Hollinger without stating engagement. Extension 01/01 VO offers only a reinforced gearbox and gives no ratio table."
+    },
+    {
       "source_id": "fia.corvette.b-260.homologation",
       "title": "Chevrolet Corvette homologation form B-260",
       "publisher": "FIA Historic Database",
@@ -3731,6 +3743,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary homologation form documents six manual forward ratios and period transmission extensions. It does not unambiguously establish the late GTM actuation or technique."
+    },
+    {
+      "source_id": "fia.mercedes-benz-190e.a-5269",
+      "title": "Homologation form A-5269, Group A: Mercedes-Benz 190 E 2.3-16 (W 201)",
+      "publisher": "Federation Internationale du Sport Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601062201/homologation_form_number_5269_group_a.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Article 603 names a Getrag manual gearbox and tabulates two homologated five-speed sets, every forward gear of both marked synchro, and reverse synchronised as well. Section 603 f) draws the gear change gate: reverse above first, with 1, 3 and 5 on the lower plane - a dogleg with first down and left. Extension 26/22 VO, valid 1 April 1990, homologates a further five-speed with reinforced mountings and gear lever, every ratio marked synchr. The base sheet is headed 190 E 2.3-16; extension 29/02 ES carries the homologation to the 190 E 2.5-16/EVO II."
     },
     {
       "source_id": "fia.murcielago.gt-015",

@@ -149,7 +149,7 @@
   "driver_summary": "Weismann-McLaren six-speed with a mirrored dogleg gate: first is down and to the right on this car, not the left as on every other dogleg here. Second through sixth then fall in one straight line.",
   "archetype": {
     "classification": "no-archetype",
-    "basis": "No registered archetype has a dogleg gate. This car does not join the six curated dogleg cars that share a block either: it has six forward gears rather than five, and first sits down and to the right, the mirrored gate. Its gearbox_type and downshift blip are both unestablished, so it cannot yet be compared with them on equal terms."
+    "basis": "A dogleg archetype now exists, and this car still matches none. It has six forward gears where that archetype has five, and first sits down and to the right - the mirrored gate, which the data model keeps as a fact separate from the pattern because at least one car reverses it. Its gearbox type and downshift blip are both unestablished as well, so it could not join a five-speed archetype even if the gear count matched."
   },
   "updated_at": "2026-08-17"
 }
