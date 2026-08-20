@@ -50,7 +50,11 @@
       "Only five forward direct-gear bindings were accepted, and the cockpit showed a five-speed dogleg H-pattern.",
       "There is no automatic throttle cut: clutchless upshifts were possible only after lifting and matching revs.",
       "There is no automatic throttle blip: clutchless downshifts required a manual blip and rev match.",
-      "The simulator tests establish when clutchless shifts can be made, but do not establish whether historical authentic running shifts should use the clutch; those clutch fields remain unknown."
+      "The simulator tests establish when clutchless shifts can be made, but do not establish whether historical authentic running shifts should use the clutch; those clutch fields remain unknown.",
+      "The identity is confirmed against the correct specification, which is the check the C3.R failed. Lamborghini's heritage sheet gives this car a 5,707 cm3 V12 of 540 CV and lists the later Diablo GTR separately at 5,992 cm3 and 590 CV, so the gearbox wording read here belongs to the SV-R rather than to a neighbouring model.",
+      "The dogleg gate is not evidence of a racing gearbox. The contemporary road Diablo SV is itself described as a gated dogleg five-speed, so the gate came with the car this one derives from and implies neither different internals nor dog engagement. The dataset already holds two dogleg synchromesh cars in the M3 Sport Evolution and the 190E Evo II, so the pairing is unremarkable.",
+      "The car was not homologated as a vehicle, as expected for a one-make series car. No FIA HistoricDB vehicle form exists for the SV-R, and ACI Sport's safety-cage register lists it with an explicit \"/\" in the form-number column. That register has no gearbox or technique columns, so no homologation route to the construction exists for this car and none should be sought again.",
+      "Clutch use on running shifts is unestablished and no reviewed source speaks to it. Lamborghini's sheet gives the clutch hardware - dry, single plate - which is what the clutch is and not when the driver uses it, and no Supertrofeo regulation or period technical source found states either. Both fields stay unknown."
     ]
   },
   "simulators": [

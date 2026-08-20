@@ -3,6 +3,18 @@
   "schema_version": "1.0.0",
   "sources": [
     {
+      "source_id": "acisport.safety-cage-homologations",
+      "title": "Armature di sicurezza omologate (homologated safety cages)",
+      "publisher": "ACI Sport",
+      "url": "https://www.acisport.it/public_federazione/2017/pdf/Omologazioni_ACI_Sport/armature_di_sicurezza_omologate.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Register of homologated safety cages, not of vehicles. Page 2 (\"Pagina 2 di 6\") carries the row \"27-CS | 10-06-1996 | Lamborghini | / | LAMBORGHINI DIABLO SV-R\", where the \"/\" in the \"FIA-CSAI Hom. Form N°\" column is an explicit absent vehicle-form number rather than an unfilled field. The register has no gearbox, synchroniser or technique columns at all. Together with the absence of any FIA HistoricDB vehicle form for the SV-R, it establishes that the car was not homologated as a vehicle, which is the expected position for a one-make series car."
+    },
+    {
       "source_id": "albins.st6-sequential-transaxle",
       "title": "Albins ST6 sequential transaxle",
       "publisher": "Albins Off Road Gear",
@@ -3950,6 +3962,18 @@
       "notes": "Official article used as the design target for the iRacing staging importer. No iRacing records are promoted in dataset 0.1.0."
     },
     {
+      "source_id": "lambocars.diablo-sv-r-specs",
+      "title": "Lamborghini Diablo SV-R specifications and performance",
+      "publisher": "LamboCars",
+      "url": "https://www.lambocars.com/diablo-sv-r-specs-performance/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Marque-specialist technical sheet for the 1996 SV-R. The only reviewed source that characterises the gearbox construction: \"Lamborghini five-speed + reverse manual all-synchromesh\". The synchro wording is explicit rather than a blank or a dash. It names ZF as the final-drive supplier, which is the final drive and not necessarily the gearbox. It states nothing about clutch use on running shifts."
+    },
+    {
       "source_id": "lamborghini.diablo-35-years.2025",
       "title": "Lamborghini Diablo: celebrating 35 years of an icon",
       "publisher": "Automobili Lamborghini, syndicated by TheNewsMarket",
@@ -3959,7 +3983,7 @@
       "published_or_updated_at": "2025-01-21",
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "Manufacturer-derived heritage data specifies a five-speed Lamborghini manual plus reverse and a dry single-plate clutch for the Diablo SV-R. It does not establish the dogleg gate or running-shift technique."
+      "notes": "Manufacturer heritage data sheet. Specifies for the 1996 SV-R a 5,707 cm3 V12 of 397 kW / 540 CV, a \"5-speed Lamborghini manual gearbox + reverse\" and a \"Dry, single plate\" clutch. The same source lists the later Diablo GTR separately at 5,992 cm3 and 590 CV, so the two are not conflated and this record's identity is confirmed against the correct specification. The sheet carries no synchroniser or dog-engagement wording, names no gearbox supplier, and gives no running-shift instruction: those fields are absent rather than negative. It does not establish the dogleg gate."
     },
     {
       "source_id": "lamborghini.huracan-gt3-evo2.model",
@@ -4813,6 +4837,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Lists the Type 9 five-speed in synchronized variants and one unsynchronized dog-engagement variant described as a motorsport application only purists find suitable for road use. Used as the falsifying alternative for the Caterham gearbox inference."
+    },
+    {
+      "source_id": "whichcar.diablo-sv-modern-classic",
+      "title": "Modern classic: Lamborghini Diablo SV",
+      "publisher": "Wheels / WhichCar",
+      "url": "https://www.whichcar.com.au/features/modern-classic-lamborghini-diablo-sv",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Describes the contemporary road Diablo SV as a \"gated manual dog-leg five-speed\". Establishes that the dogleg gate was the road car's own and not a racing modification, which removes the contrast the SV-R's gate was thought to draw. Says nothing about synchronisers or dog engagement."
     },
     {
       "source_id": "wikipedia-pt.copa-chevrolet-montana",
