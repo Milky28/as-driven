@@ -74,6 +74,29 @@ The model separates `manual_blip` from `automatic_blip`. “No blip required” 
 not automatically evidence of an electronic auto-blip; a gearbox may instead
 wait for an acceptable engine speed.
 
+### Construction and the downshift blip
+
+A synchromesh matches the shaft speeds itself, so a blip on the way down eases
+the synchros and is authentic technique rather than a requirement. Dog rings do
+not, so the driver must match revs or the gear will not engage cleanly. The
+dataset records that difference consistently:
+
+- `synchromesh` takes `manual_blip: optional` - a decided fact, not a hedge;
+- `required` is reserved for gearboxes that need the blip to engage.
+
+**The mapping runs one way only.** An established construction settles the
+technique. The technique does not settle the construction: a record carrying
+`manual_blip: required` while `gearbox_type` is `unknown` has not thereby
+established a dog box, and must not be promoted to one. Ten records are in that
+position today, and every one of them takes its blip from a guided drive rather
+than from a source about the real car.
+
+That is also why the two can disagree without either being wrong. Where a
+simulator demands a blip the real gearbox does not need, the real car keeps the
+construction's answer and the simulator's demand is recorded as an override - and
+an override needs a drive that found the shift *refused* without a blip, not one
+that merely found it accepted with one.
+
 ### Where first gear sits
 
 `shift_pattern` names the layout; optional `first_gear_position` says where

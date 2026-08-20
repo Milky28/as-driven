@@ -149,14 +149,8 @@
   },
   "driver_summary": "Dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight line. The gate was seen in the cockpit; no reviewed source establishes the real car's gearbox.",
   "archetype": {
-    "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-down",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/gearbox_type",
-        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so this one is closed by a reviewed source rather than by driving the car. The two cars that define this archetype were both settled from their own FIA Group A homologation form, whose article 603 tabulates every homologated gearbox and marks each forward gear synchronised or not. That is the route to try here."
-      }
-    ]
+    "classification": "no-archetype",
+    "basis": "A dogleg archetype now exists and this car matches none, for a reason worth stating precisely. Its construction is unestablished, which alone would leave it deviating on a gap. What excludes it is the downshift blip, recorded as required - a known value, not a gap - where the archetype has it optional because a synchromesh does not need one to engage.\n\nThat is the dataset's own rule: required is reserved for gearboxes that need the blip. So this record asserts, through the blip, a construction its gearbox_type does not establish. Ten records are in that position and it predates this classification; the note records it as a question rather than resolving it here. Establishing the construction settles both fields at once."
   },
   "notes": [
     "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."

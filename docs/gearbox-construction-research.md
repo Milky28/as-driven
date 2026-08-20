@@ -405,6 +405,55 @@ would also put a required blip on a synchromesh, the same shape as the Formula
 Vee pair, which is handled as a simulator override rather than by revising the
 construction.
 
+## The blip follows the construction, and ten records are ahead of theirs
+
+A synchromesh does not need a blip to engage a gear, so the dataset records
+`optional` for one and reserves `required` for gearboxes that do. That rule was
+already in the data - the same sentence appears in thirty-two records - but it
+was written down nowhere central until now. It is in `docs/data-model.md`.
+
+Stating it exposed that the M3 and 190E had broken it. Establishing their
+construction while leaving their blip at `required` made them the only
+synchromesh records in 242 demanding a blip, and it was inconsistent with the
+Formula Vee pair handled one step earlier. Both are corrected: the blip is
+`optional`, the archetype they define is now
+`h-5-synchro-dogleg-clutch-start-lift-up-blip-optional`, and the synchromesh
+column reads 34 optional, 1 unknown and no required at all.
+
+**No override was written for them, and that distinction is the useful part.**
+The Formula Vee drives recorded a clutchless downshift *refused* until the driver
+blipped, which is a simulator requirement and belongs in an override. These
+drives recorded a downshift *accepted after* a blip, which shows blipping works
+and nothing more. Writing an override from that would assert a test nobody ran.
+
+### The cost, and what it exposed
+
+The four dogleg cars that briefly deviated from the archetype - `bmw-m1-procar`,
+`formula-inter-mg15`, `lamborghini-diablo-sv-r`, `sauber-mercedes-c9` - are back
+to `no-archetype`, and for a sharper reason than before. It is not their
+unestablished construction that excludes them, which would be a gap. It is their
+blip: `required` is a known value, and the archetype has `optional`.
+
+So through the blip they assert a construction their `gearbox_type` does not
+establish. Ten records are in that position:
+
+`bmw-m1-procar`, `chevrolet-corvette-c3-r`, `chevrolet-corvette-c3-r-convertible`,
+`chevrolet-omega-stock-car-1999`, `formula-inter-mg15`, `lamborghini-diablo-sv-r`,
+`puma-gte`, `sauber-mercedes-c9`, `stock-usa-gen1`, `stock-usa-gen2`.
+
+**They are not being changed here.** Every one takes its blip from a guided
+drive, so the value is a real observation, and the honest reading is that they
+are waiting on the same fact the gearbox queue is waiting on. Establishing the
+construction settles the blip too, under the rule - which is why these ten are
+not a separate backlog but the same one seen from another angle.
+
+What does differ between them, and has to be read per record rather than swept,
+is what the drive actually recorded. `stock-usa-gen1` says clutchless running
+shifts *require* a lift and a blip, which would justify an override the moment
+its construction turns out synchromesh. `sauber-mercedes-c9` says only that a
+guided drive established the running-shift technique. Those two do not support
+the same conclusion, and the difference decides whether an override belongs.
+
 ## Open: the M1 Procar's gearbox
 
 `bmw-m1-procar` now deviates from the dogleg archetype on `gearbox_type` alone.

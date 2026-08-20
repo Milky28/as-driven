@@ -31,7 +31,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
+        "manual_blip": "optional",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -51,7 +51,7 @@
       "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
       "The dogleg gate was seen directly in the cockpit during the guided drive and is independently corroborated by the registered sources. First gear sits out of the racing shift plane, so second through fifth fall in one straight sequence.",
       "The gearbox construction comes from the car's FIA Group A homologation form. Every five-speed the form homologates is marked synchronised, so whichever of them this car carried it was a synchromesh. The form also homologates six-speeds of other construction - one has a blank synchro column - which is why the gear count is what makes this answerable rather than a guess.",
-      "The driver still blips every downshift here, which a synchromesh does not need to engage a gear. That value came from a guided drive and is left as it was: a medium-confidence construction cannot overrule a drive, and if the two are ever reconciled the likely shape is a simulator override rather than a change to the real car."
+      "The gearbox is synchronised, so a downshift blip is authentic technique and eases the synchros but is not needed to engage the gear. It is recorded as optional rather than required, which is reserved for gearboxes that need it to engage. The guided drive recorded a downshift accepted after the driver blipped; it did not record one being refused without a blip, so nothing here says the simulator demands it. A drive that attempted an unblipped downshift would settle whether a simulator override belongs here."
     ]
   },
   "simulators": [
@@ -154,20 +154,30 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift/throttle_lift",
-          "/authentic_controls/transmission/downshift/manual_blip"
+          "/authentic_controls/transmission/upshift/throttle_lift"
         ],
         "source_refs": [
           "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The guided drive recorded that the upshift was accepted after a throttle lift and the downshift after the driver's manual blip, with no automatic cut or blip detected."
+        "basis": "The guided drive recorded that the upshift was accepted after a throttle lift, with no automatic cut detected."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "fia.mercedes-benz-190e.a-5269",
+          "ams2.local-live-mercedes-benz-190e-2-5-16-evo-ii-dtm-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "A synchromesh matches the shaft speeds itself, so the blip eases the synchros and is authentic technique rather than a requirement to engage the gear. This follows from the established construction rather than being stated by a source, and cannot be more certain than the construction it comes from. The guided drive is consistent with it: the downshift was accepted after a blip, and no unblipped downshift was attempted."
       }
     ]
   },
   "driver_summary": "Getrag five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
   "archetype": {
-    "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-down",
+    "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
   "updated_at": "2026-08-17"

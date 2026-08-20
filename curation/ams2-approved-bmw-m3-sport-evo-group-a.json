@@ -16,13 +16,13 @@
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "optional",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Controls were directly observed with assists disabled; the gearbox and its gate are supported by registered sources.",
+  "confidence_notes": "Controls were directly observed with assists disabled; the gearbox and its gate are supported by registered sources. The downshift blip was approved as required from that drive, and was revised to optional once the FIA homologation form established a synchromesh: a synchromesh does not need a blip to engage the gear, and required is reserved for gearboxes that do. No simulator override accompanies it, because the drive recorded a downshift accepted after a blip rather than one refused without it.",
   "scope_notes": "Single exact identity from one guided-verification drive."
 }
