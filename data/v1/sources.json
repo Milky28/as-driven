@@ -3385,6 +3385,18 @@
       "notes": "Describes Formula Vee's technical basis: a Volkswagen Beetle 1600 cc engine of 70 to 75 hp and a VW four-speed gearbox, sealed and restricted to reliability modifications."
     },
     {
+      "source_id": "autosport.1962-12-21.lotus-23-road-test",
+      "title": "Autosport, 21 December 1962: Lotus 23 test",
+      "publisher": "Autosport",
+      "url": "https://porschecarshistory.com/wp-content/old/lib/magazines/autosport/1962/AS1962.12.21.pdf",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "1962-12-21",
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Period test of an as-raced Type 23, page 844. Identifies that car's gearbox as a four-speed Renault and contrasts it with the five-speed Hewland it describes as now fitted as standard. Establishes that the Type 23 was offered with gearboxes of different construction rather than one family, and that both a four-speed and a five-speed were in use in period."
+    },
+    {
       "source_id": "blogdocarelli.copa-uno-1992",
       "title": "Copa Onyx Jeans de Formula Uno - Temporada de 1992",
       "publisher": "Blog do Carelli",
@@ -3661,6 +3673,18 @@
       "notes": "Manufacturer page describing the 575 GTC and its 2005 evolution with a sequential six-speed transmission and multi-plate clutch. Reiza has not established that the fictional Milano GT55 is the Ferrari, so this is context only."
     },
     {
+      "source_id": "fga.copa-classic-2024.technical-regulations",
+      "title": "FGA Copa Classic - Regulamento Tecnico 2024",
+      "publisher": "Federacao Gaucha de Automobilismo",
+      "url": "https://pt.scribd.com/document/784637081/FGA-COPA-CLASSIC-Regulamento-Tecnico-2024-pdf2024-01-16T18-39-02-729400Z",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Official series regulations, consulted through a third-party host. Article 8.1 requires a casing from the car or engine maker but allows it to be freely reworked and states the gears themselves are free - \"Carcaca da marca do veiculo ou do fabricante do motor com livre retrabalho. Engrenagens: livres\" - and 8.2 frees the differential. Category B also permits a more modern gearbox matched to the engine used. The category therefore does not preserve a car's original internals, so a car raced in it is no evidence of the road car's construction."
+    },
+    {
       "source_id": "fia.audi-v8-quattro.homologation",
       "title": "Audi V8 Quattro homologation record 5409",
       "publisher": "FIA Historic Database",
@@ -3709,6 +3733,18 @@
       "notes": "Article 603 names a Getrag manual gearbox and tabulates two homologated five-speed sets, the base Handschaltung and an additional gearbox, with every forward gear of both marked synchro. Section 603 f) draws the gear change gate: reverse above first, with 1, 3 and 5 on the lower plane - a dogleg with first down and left. Later extensions homologate six-speeds of differing construction, including 12/08 VO whose synchro column is blank throughout and 38/20 VO which names a Hollinger without stating engagement. Extension 01/01 VO offers only a reinforced gearbox and gives no ratio table."
     },
     {
+      "source_id": "fia.corvette.3039-group-3",
+      "title": "Homologation form 3039, Group 3: Chevrolet Corvette Sting Ray LS6",
+      "publisher": "Federation Internationale du Sport Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601076301/homologation_form_number_3039_group_3.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Homologated 2 June 1971, contemporary with the 1971 Corvette AMS2 models. Page 9 records four forward ratios and states verbatim \"Synchronised forward ratios: all four\". Across the FIA's Corvette forms no four-speed is marked non-synchronised: 1966 form 523 and 1968 form 583 also state four synchronised ratios, while the 1962 and 1965 forms carry four-speed tables with no synchroniser field at all and are silent rather than negative."
+    },
+    {
       "source_id": "fia.corvette.b-260.homologation",
       "title": "Chevrolet Corvette homologation form B-260",
       "publisher": "FIA Historic Database",
@@ -3718,7 +3754,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "Official homologation evidence for a related C3-era Corvette shows a floor-shifted Doug Nash manual gearbox, conventional H gate, and hydraulic clutch. It does not uniquely identify Reiza's fictionalized C3.R Convertible or establish its exact control behavior."
+      "notes": "Official homologation evidence for a related C3-era Corvette, homologated 1984. Article 603 on page 6 has a synchroniser column and marks the Doug Nash four-speed synchronised on all four forward gears, with reverse not synchronised; the fifth-gear row is blank because the gearbox has four speeds, which is not a negative marking. It shows a floor-shifted manual with a conventional H gate and a hydraulic clutch. It does not uniquely identify Reiza's fictionalized C3.R Convertible or establish its exact control behavior."
     },
     {
       "source_id": "fia.formula-one.2006-technical-regulations",

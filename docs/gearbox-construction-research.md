@@ -548,6 +548,46 @@ third and fifth sharing the lower plane.
 > move from deviating on a gap to genuinely undetermined between two archetypes.
 > A blank or absent marking is a real finding, not a failed search.
 
+## Searched: Puma, Lotus 23 and the C3.R
+
+All three came back, none changed a value, and each failed differently. Three
+sources are registered and B-260's note is corrected, because it turned out to be
+explicit where it had been described as context.
+
+**Puma GTE - closed by the category, not by a missing source.** No source names
+the transaxle, but that stopped mattering. Copa Classic article 8.1 requires a
+casing from the car or engine maker while allowing it to be freely reworked, and
+makes the gears themselves free; category B also permits a more modern gearbox
+matched to the engine. So the category does not preserve the road car's internals,
+and naming the Volkswagen unit would not have established what the raced car
+turns. Both `gearbox_type` and `shift_pattern` stay unknown.
+
+**Lotus 23 - the claim is defeated.** A period Autosport test of an as-raced Type
+23 names a four-speed Renault and contrasts it with the five-speed Hewland it
+calls standard by late 1962. The Renault is a synchromesh production unit; the
+Hewland runs dog rings. The options do not agree, so the argument that carried the
+Group A pair does not apply here.
+
+The tempting move is to let the gear count decide, as it did for the M3: the
+record has four gears and the Hewland Mk3 is a five-speed. It is not taken.
+Hewland's earliest boxes were four-speed conversions, so a gear count does not
+separate the two families without a source that says it does - and the whole point
+of the M3 argument was that the form itself made the separation.
+
+**Corvette C3.R - the evidence is there and the identity is not.** Form 3039,
+homologated 2 June 1971 and contemporary with the car AMS2 models, states
+"Synchronised forward ratios: all four". The 1966 and 1968 forms agree, the 1984
+Group B form marks its Doug Nash four-speed synchronised on every forward gear,
+and **no FIA Corvette four-speed is marked non-synchronised anywhere**. The 1962
+and 1965 forms carry no synchroniser field and are silent rather than negative.
+
+This clears the bar the M1 failed, where the contemporary form was the silent one.
+What it does not clear is identity: the record is an AMS2 sheet identity for a
+1971 GT Classics Corvette, and no reviewed source ties it to the LS6 that form
+3039 homologates rather than to the C3 family at large. The missing piece is the
+bridge, not the evidence at the far end of it - which is a different kind of gap
+from the rest of this queue, and the one open judgment left in it.
+
 ## Open: the Puma GTE, one link short
 
 `puma-gte` is a real car and the chain is nearly closed with sources already in

@@ -49,7 +49,8 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "This is a classic road-derived car rather than a GTE racer: H-pattern shift, clutch required to move off, and no automatic cut or blip.",
-      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes, which record that the upshift was accepted after a throttle lift and the downshift after the driver's own blip."
+      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes, which record that the upshift was accepted after a throttle lift and the downshift after the driver's own blip.",
+      "The category the simulator races this car in does not preserve its original gearbox. Copa Classic article 8.1 requires a casing from the car or engine maker but allows it to be freely reworked and makes the gears themselves free, and category B permits a more modern gearbox matched to the engine. So even naming the road car's Volkswagen transaxle would not establish what the raced car turns, and no reviewed source names it in any case."
     ]
   },
   "simulators": [

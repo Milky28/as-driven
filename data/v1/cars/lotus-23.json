@@ -47,7 +47,9 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
-      "Lotus offered the 23 with a choice of gearboxes, and no source establishes which one AMS2 models. The construction therefore stays unknown and the downshift blip is not inferred from either candidate."
+      "Lotus offered the 23 with a choice of gearboxes, and no source establishes which one AMS2 models. The construction therefore stays unknown and the downshift blip is not inferred from either candidate.",
+      "The Type 23's gearbox options do not agree with each other, which is what a search for them established. A period Autosport test of an as-raced car names a four-speed Renault and contrasts it with the five-speed Hewland it calls standard by late 1962. The Renault is a synchromesh production unit; the Hewland runs dog rings. Both were in use, so the construction cannot follow from the choices the way it did for cars whose options were unanimous.",
+      "The drive found four forward gears, which is the Renault's count rather than the five-speed Hewland's. That is suggestive and is not taken: Hewland's earliest boxes were four-speed conversions, so a gear count does not separate the two families without a source that says so."
     ]
   },
   "simulators": [
