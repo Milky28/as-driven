@@ -16,7 +16,7 @@
   "authentic_controls": {
     "transmission": {
       "forward_gears": 5,
-      "gearbox_type": "unknown",
+      "gearbox_type": "synchromesh",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
       "first_gear_position": "down-left",
@@ -31,7 +31,7 @@
         "clutch": "unknown",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
+        "manual_blip": "optional",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -54,7 +54,8 @@
       "The identity is confirmed against the correct specification, which is the check the C3.R failed. Lamborghini's heritage sheet gives this car a 5,707 cm3 V12 of 540 CV and lists the later Diablo GTR separately at 5,992 cm3 and 590 CV, so the gearbox wording read here belongs to the SV-R rather than to a neighbouring model.",
       "The dogleg gate is not evidence of a racing gearbox. The contemporary road Diablo SV is itself described as a gated dogleg five-speed, so the gate came with the car this one derives from and implies neither different internals nor dog engagement. The dataset already holds two dogleg synchromesh cars in the M3 Sport Evolution and the 190E Evo II, so the pairing is unremarkable.",
       "The car was not homologated as a vehicle, as expected for a one-make series car. No FIA HistoricDB vehicle form exists for the SV-R, and ACI Sport's safety-cage register lists it with an explicit \"/\" in the form-number column. That register has no gearbox or technique columns, so no homologation route to the construction exists for this car and none should be sought again.",
-      "Clutch use on running shifts is unestablished and no reviewed source speaks to it. Lamborghini's sheet gives the clutch hardware - dry, single plate - which is what the clutch is and not when the driver uses it, and no Supertrofeo regulation or period technical source found states either. Both fields stay unknown."
+      "Clutch use on running shifts is unestablished and no reviewed source speaks to it. Lamborghini's sheet gives the clutch hardware - dry, single plate - which is what the clutch is and not when the driver uses it, and no Supertrofeo regulation or period technical source found states either. Both fields stay unknown.",
+      "The construction is established as synchromesh from the one source that characterises it, and it settles the downshift blip with it. The blip becomes optional as authentic technique, and the requirement the guided drive found is carried as an AMS2 override. That dissolves the contradiction the previous classification recorded: the record no longer asserts through the blip a construction its gearbox_type leaves open. It now deviates from the dogleg synchromesh archetype on its two clutch gaps alone, which are the only fields still open on this car."
     ]
   },
   "simulators": [
@@ -85,7 +86,20 @@
           "Clutchless shifts required manual rev matching: throttle lift on upshift and manual blip on downshift. No automatic cut or blip was observed."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 rejects a clutchless downshift until the driver blips, where the real car's synchromesh leaves the blip optional.",
+          "source_refs": [
+            "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "high",
+            "basis": "Directly observed in the guided drive with Auto Clutch disabled: clutchless downshifts required a manual blip, and no automatic blip was present to supply it."
+          }
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-10",
       "source_refs": [
@@ -131,7 +145,10 @@
       {
         "paths": [
           "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/automatic_blip",
           "/authentic_controls/transmission/standing_start_clutch",
           "/simulators/0/behavior",
           "/authentic_controls/steering/wheel_rim"
@@ -141,13 +158,44 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish the asserted start, lift, manual-blip, automation, pattern, and rim behavior; unsupported historical running-clutch claims remain unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "lambocars.diablo-sv-r-specs"
+        ],
+        "confidence": "medium",
+        "basis": "A marque-specialist technical sheet for the 1996 SV-R states \"Lamborghini five-speed + reverse manual all-synchromesh\". The wording is explicit rather than a blank or a dash, and it describes this car: the identity is confirmed against the manufacturer sheet's 5,707 cm3 and 540 CV, which separate the SV-R from the 5,992 cm3 GTR. It sits at medium because it is one secondary source rather than a manufacturer or series-primary statement - Lamborghini's own sheet is silent on construction rather than negative - and because the car was never homologated as a vehicle, so no primary route to the field exists. Falsified by a Lamborghini, Supertrofeo or period technical source describing the SV-R gearbox as dog-engaged, or by a gearbox supplier's own documentation."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "lambocars.diablo-sv-r-specs",
+          "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "A synchromesh matches the shaft speeds itself, so the blip is authentic technique rather than a requirement to engage the gear. This follows from the established construction rather than being stated by a source, and cannot be more certain than the construction it comes from. What the simulator demands is recorded separately as an override."
       }
     ]
   },
   "driver_summary": "Lamborghini five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
   "archetype": {
-    "classification": "no-archetype",
-    "basis": "A dogleg archetype now exists and this car matches none, for a reason worth stating precisely. Its construction is unestablished, which alone would leave it deviating on a gap. What excludes it is the downshift blip, recorded as required - a known value, not a gap - where the archetype has it optional because a synchromesh does not need one to engage.\n\nThat is the dataset's own rule: required is reserved for gearboxes that need the blip. So this record asserts, through the blip, a construction its gearbox_type does not establish. Ten records are in that position and it predates this classification; the note records it as a question rather than resolving it here. Establishing the construction settles both fields at once."
+    "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-optional",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/upshift/clutch",
+        "basis": "The clutch's use on running upshifts is not established, and this is a gap rather than a difference from the archetype. Lamborghini's sheet gives the clutch hardware - dry, single plate - which is what the clutch is and not when the driver uses it, and no Supertrofeo regulation, driver instruction or period technical source reviewed states either. The car was never homologated as a vehicle, so no form carries the answer. The simulator accepts clutchless shifts, but that is the simulator's behaviour and not the real car's technique."
+      },
+      {
+        "path": "/authentic_controls/transmission/downshift/clutch",
+        "basis": "The clutch's use on running downshifts is not established, and this is a gap rather than a difference from the archetype. Lamborghini's sheet gives the clutch hardware - dry, single plate - which is what the clutch is and not when the driver uses it, and no Supertrofeo regulation, driver instruction or period technical source reviewed states either. The car was never homologated as a vehicle, so no form carries the answer. The simulator accepts clutchless shifts, but that is the simulator's behaviour and not the real car's technique."
+      }
+    ]
   },
   "notes": [
     "The source conflict is resolved only for this AMS2 representation: both manufacturer-derived evidence and the simulator support five forward gears."

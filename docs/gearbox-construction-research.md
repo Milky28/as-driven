@@ -807,51 +807,60 @@ governing body's technical regulations.
 >    and left, which is unusual enough in a junior category to be worth
 >    corroborating.
 
-## Open: the Diablo SV-R, and a gate that suggests an answer
+## Settled: the Diablo SV-R, and a lead that did not survive
 
-`lamborghini-diablo-sv-r` has a manufacturer-derived source specifying a
-five-speed Lamborghini manual and a dry single-plate clutch, which establishes the
-gearbox exists and not how it engages. Three fields are open: the construction and
-the clutch on both upshift and downshift, the latter two because the drive
-established when a clutchless shift is *possible* rather than what the authentic
-technique was.
+`lamborghini-diablo-sv-r` is **synchromesh at medium confidence**, and the
+downshift blip is **optional** with the simulator's demand carried as an override.
+Both clutch fields stay `unknown`. The interesting part is how it got there: the
+lead this search was built on was wrong, and the search is what showed it.
 
-**The gate is the lead worth following.** The cockpit shows a dogleg with first
-down and left. A dogleg on a road-derived car is not a road-car gate, so either
-the SV-R took a different gearbox from the Diablo it derives from, or the road car
-shares it. Which of those is true bears directly on the construction, because a
-racing gearbox fitted for a one-make series is far more likely to be dog-engaged
-than a production Lamborghini five-speed.
+**The lead was that a dogleg is not a road-car gate.** If the road Diablo used a
+standard H, the SV-R's dogleg would mean a gearbox changed for racing, and a
+racing gearbox for a one-make series is far likelier to be dog-engaged. That
+reasoning was recorded here as making a dog box "the likelier answer".
 
-> For the **Lamborghini Diablo SV-R**, built for the 1996 Diablo Supertrofeo:
->
-> 1. What **gate** does the road Diablo's five-speed use? If it is a standard H,
->    then the SV-R's dogleg means the gearbox was changed for racing, and what it
->    was changed to is the question.
-> 2. Does any Lamborghini or Supertrofeo source describe the SV-R's gearbox as
->    **synchronised or dog-engaged**, or name a supplier?
-> 3. Was the SV-R **homologated**? It was built for a one-make series, which is
->    the same position as the M1 Procar - and there the FIA record turned out to
->    describe the road car rather than the racer. Worth checking rather than
->    assuming either way.
-> 4. Does any source state whether the clutch was used for **running shifts**?
->    Both clutch fields are open and the drive cannot answer them.
->
-> 5. Whatever is found, confirm it describes **this** car: the 1996 SV-R built for
->    the Supertrofeo, not the road Diablo SV it derives from and not the later
->    Diablo GTR. The C3.R was nearly promoted on a homologation form that was
->    real, contemporary and explicit and described a different engine, and only
->    the displacement separated them. Quote the specification the source names.
->
-> Unlike most of this queue, a **dog box is the likelier answer here**, and it
-> would be the first in the dataset established from a source rather than
-> inferred. It would also make the Diablo the founding member of a dogleg dog-box
-> archetype, which is the pairing that would finally put the other dogleg cars
-> genuinely between two archetypes instead of matching none.
->
-> One caution against the lead itself: a dogleg can be produced by re-gating a
-> gearbox rather than replacing it, so the gate is a reason to look and not an
-> answer on its own.
+**The road Diablo SV is itself a gated dogleg five-speed.** So the gate came with
+the car the SV-R derives from, implies no change of internals, and was never
+evidence of anything. The caution added to the question - that a dogleg can be
+produced by re-gating rather than replacing a box - understated it: there was no
+re-gating either. The dataset already held two dogleg synchromesh cars in the M3
+Sport Evolution and the 190E Evo II, which should have made the pairing look
+unremarkable before the question was written rather than after.
+
+The one source that characterises the construction says the opposite of what the
+lead predicted: a marque-specialist sheet reading "Lamborghini five-speed +
+reverse manual all-synchromesh". Explicit wording, not a blank or a dash.
+
+**Why medium.** It is one secondary source. Lamborghini's own heritage sheet gives
+the hardware - a five-speed manual, a dry single-plate clutch - and is silent on
+construction rather than negative, so it neither corroborates nor contradicts.
+That is the 1974 911 RSR's standard exactly: marque-specialist secondary sources,
+no homologation, taken at medium. The identity check the C3.R failed passes here,
+and it mattered: the heritage sheet's 5,707 cm3 and 540 CV separate this car from
+the 5,992 cm3, 590 CV Diablo GTR listed beside it.
+
+**The homologation route is closed for good.** No FIA HistoricDB vehicle form
+exists for the SV-R, and ACI Sport's safety-cage register lists it with an
+explicit `/` in the vehicle form-number column - an absent number, not an unfilled
+field. That register has no gearbox or synchroniser columns at all. A one-make
+series car with no vehicle form has no primary route to this field, so "retain
+`unknown` pending better evidence" would have been a permanent hold rather than an
+interim one. That is what made deciding now the right call rather than waiting.
+
+**What it did not do.** It does not found a dogleg dog-box archetype; that pairing
+still has no member and no evidence behind it. Nor does the record `match` the
+dogleg synchromesh archetype, because `matches` demands exact equality and the two
+clutch fields are still open - `unknown` is a wildcard only when deciding whether
+an archetype remains a candidate. The record `deviates` on those two gaps against
+a single candidate archetype. What did change is that the contradiction its old
+`no-archetype` note recorded is gone: it no longer asserts through a required blip
+a construction its `gearbox_type` leaves open.
+
+**Clutch use on running shifts is unestablished and stays that way.** The factory
+sheet gives the clutch hardware, which is what the clutch is and not when the
+driver uses it. No Supertrofeo regulation, driver instruction or period technical
+source found speaks to it. The simulator accepts clutchless shifts, but that is
+the simulator's behaviour, not the real car's technique.
 
 ## Group C cannot be settled this way at all
 
@@ -865,6 +874,8 @@ Those two need a different source class entirely - constructor or team
 documentation, or a specialist on the specific gearbox, which is the route that
 worked for the 911 RSR's Type 915.
 
-Of the dogleg six, `bmw-m1-procar`, `formula-inter-mg15` and
-`lamborghini-diablo-sv-r` have not been searched for papers yet. The M1 is the
-most promising: it was homologated for Group 4, so a form should exist.
+Of the dogleg six, `formula-inter-mg15` has not been searched for papers yet.
+`bmw-m1-procar` has: its Group 4 form exists but predates the article 603 layout
+and carries no synchroniser field, so it is silent rather than negative.
+`lamborghini-diablo-sv-r` is settled above, and its search established that the
+car was never homologated as a vehicle at all.

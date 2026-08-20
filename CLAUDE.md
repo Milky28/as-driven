@@ -167,19 +167,20 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.16.0.
-- Dataset: 0.3.93 with 242 curated records.
+- Dataset: 0.3.94 with 242 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
   decision; the guided queue is empty. The inventory only holds cars that have
   been loaded here, so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Every record carries an `archetype` classification: 158 match one of the 22
-  registered mechanisms, 56 deviate, 14 are undetermined and 14 match none. An
+- Every record carries an `archetype` classification: 162 match one of the 23
+  registered mechanisms, 57 deviate, 13 are undetermined and 10 match none. An
   archetype is descriptive and supplies no values, so a classification can never
-  change a record. `gearbox_type` is what blocks the dataset: it is open in 19
-  deviations, decides 11 of the 14 undetermined, and holds back the dogleg and
-  four-speed archetypes behind the 14 that match none. It is also the one open
-  field a drive cannot settle. See `docs/archetypes.md`.
+  change a record. `gearbox_type` is still what blocks the dataset: it is open in
+  37 records, 18 of them deviations, and decides 10 of the 13 undetermined. Of
+  those 37, 22 are retired as cars a simulator invented and 5 are Copa Truck
+  records a regulation frees, so the live research queue is 10 cars. It is also
+  the one open field a drive cannot settle. See `docs/archetypes.md`.
 - Record IDs name the real car with no simulator prefix. A second simulator's
   drive joins the existing record as another `simulators[]` entry rather than
   forking a second record, and an approval names the simulator it approves.

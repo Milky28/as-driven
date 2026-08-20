@@ -1,7 +1,7 @@
 # Control archetypes
 
-**Status: complete. All 242 records are classified** - 158 exact matches, 56
-deviations, 14 undetermined and 14 with no archetype. `data/v1/archetypes.json` holds 22 archetypes,
+**Status: complete. All 242 records are classified** - 162 exact matches, 57
+deviations, 13 undetermined and 10 with no archetype. `data/v1/archetypes.json` holds 23 archetypes,
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
 the rules below, and every record carries a classification.
@@ -195,12 +195,13 @@ Against that registry:
 
 | | Records |
 | --- | --- |
-| `matches` an archetype exactly | 158 |
+| `matches` an archetype exactly | 162 |
 | `deviates` by one field | 8 |
-| `deviates` by two fields | 1 |
-| `undetermined` - a gap leaves two or more candidates | 14 |
-| a gap, but only one candidate survives it | 45 |
-| a gap, and no candidate survives it | 16 |
+| `deviates` by two fields | 2 |
+| `deviates` by three fields | 1 |
+| `undetermined` - a gap leaves two or more candidates | 13 |
+| a gap, but only one candidate survives it | 46 |
+| a gap, and no candidate survives it | 10 |
 
 ### Where `no-archetype` actually landed
 
@@ -247,11 +248,11 @@ field, because the fields are not settled the same way:
 | `shift_pattern` | 5 | the cockpit - watch the lever through a shift |
 
 `gearbox_type` is the one that does not yield to seat time, and it is the field
-blocking the most records overall once the undetermined 14 are counted.
+blocking the most records overall once the undetermined 13 are counted.
 
 ### The by-product
 
-The 14 undetermined records are a queue that generates itself, and classifying
+The undetermined records are a queue that generates itself, and classifying
 them showed the queue is shorter than it looks. They fall into two questions,
 not fourteen:
 
