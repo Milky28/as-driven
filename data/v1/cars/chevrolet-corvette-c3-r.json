@@ -12,7 +12,7 @@
       "to": 1971
     },
     "class": "GT Classics",
-    "real_world_identity_notes": "AMS2 sheet identity for the 1971 GT Classics Chevrolet Corvette C3.R."
+    "real_world_identity_notes": "AMS2 entry for the GT Classics Corvette C3.R, which Reiza's release adds as the Corvette C3 \"R\" Spec. A unique real-world referent is not established: no Reiza or sheet source names a model year, chassis, engine, team or series, and the 1971 and the 7.0-litre L88 come from the simulator specification sheet rather than from a real car. Related FIA Corvette homologation evidence describes other specifications and is not inherited here."
   },
   "authentic_controls": {
     "transmission": {
@@ -52,8 +52,8 @@
       "A clutch is required from rest.",
       "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
       "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had.",
-      "The Corvette's own FIA record is consistent and one form is contemporary with this car. Form 3039, homologated 2 June 1971 for the Sting Ray LS6, records four forward ratios and states \"Synchronised forward ratios: all four\". The 1966 and 1968 forms say the same, the 1984 Group B form marks its Doug Nash four-speed synchronised on every forward gear, and no FIA Corvette four-speed is marked non-synchronised anywhere. The 1962 and 1965 forms carry no synchroniser field and are silent rather than negative.",
-      "The construction stays unestablished all the same, and the reason is identity rather than construction. This record is an AMS2 sheet identity for a 1971 GT Classics Corvette, and no reviewed source ties it to the LS6 that form 3039 homologates rather than to the C3 family at large. What is missing is the bridge, not the evidence at the far end of it."
+      "No real car stands behind this entry. Reiza's release adds the Corvette C3 and the Corvette C3 \"R\" Spec and names no model year, chassis, engine, team or series; \"C3.R\" is not a Chevrolet designation but a rendering of \"R Spec\". The 1971 in this record comes from the Coanda sheet, which is simulator specification data rather than an identity note and cites no source for the year.",
+      "The FIA's Corvette forms were consulted and cannot be inherited. Form 3039 is contemporary and explicit - all four forward ratios synchronised - but it homologates the Sting Ray LS6 at 7,446 cc, where the sheet specifies a 7.0-litre L88. Those are different engines, so the form was never evidence about this specification waiting on a bridge; there is nothing to bridge to. The synchroniser finding must not be attached to this record."
     ]
   },
   "simulators": [
@@ -120,7 +120,8 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-          "ams2.coanda-sheet.v1.0.34"
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-release.1.2.3.corvette-c3"
         ],
         "confidence": "medium",
         "basis": "Conservative promotion of AMS2 sheet row 161 with unsupported technique left unknown."
@@ -152,7 +153,7 @@
   },
   "archetype": {
     "classification": "no-archetype",
-    "basis": "No registered archetype is a four-speed H-pattern that needs the blip. The registered four-speed leaves it optional, and this car requires it. Whether that is a departure or a different mechanism turns on gearbox_type, which is unestablished: dog rings need the driver to match revs, which would make these cars an archetype of their own rather than a variation on the synchromesh one. Six curated cars sit in exactly this position. A reviewed source settles all of them together."
+    "basis": "A variant Reiza assembled rather than a car it represents, so no manufacturer, homologation sheet or registry describes it. The FIA's Corvette forms describe other specifications - form 3039's Sting Ray LS6 is a 7,446 cc car where this one is specified as a 7.0-litre L88 - so the synchroniser finding on those forms is not inherited here. It also matches no archetype on its own terms: its downshift blip is required, a known value, where the four-speed archetype has it optional. Retired from the gearbox research queue: this is a settled answer, not an outstanding one, and the controls the guided drive observed stand as what the simulator does."
   },
   "updated_at": "2026-08-16"
 }

@@ -503,7 +503,7 @@ class ValidationTests(unittest.TestCase):
                 transmission["shift_actuation"], "h-pattern", record["record_id"]
             )
             established += 1
-        self.assertEqual((retired, established), (21, 14))
+        self.assertEqual((retired, established), (22, 14))
 
     def test_archetypes_in_the_registry_are_fully_specified_and_unique(self) -> None:
         """An archetype that is itself uncertain cannot describe anything.

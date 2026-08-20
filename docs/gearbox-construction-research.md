@@ -588,7 +588,33 @@ What it does not clear is identity: the record is an AMS2 sheet identity for a
 bridge, not the evidence at the far end of it - which is a different kind of gap
 from the rest of this queue, and the one open judgment left in it.
 
-## Open: the C3.R's identity bridge
+## Retired: the C3.R has nothing to bridge to
+
+The search for an identity bridge found there is none, and the record is retired
+on the Convertible's logic - "a unique real-world referent is not established".
+
+Reiza's release adds the Corvette C3 and the Corvette C3 "R" Spec and names no
+model year, chassis, engine, team or series. "C3.R" is not a Chevrolet
+designation; it renders "R Spec". The 1971 in the record comes from the Coanda
+sheet, which is simulator specification data rather than an identity note and
+cites nothing for the year. `TC70S` is an internal runtime class id, not a real
+racing class - Reiza's published class is GT Classics, which also holds the real
+1974 Porsche 911 RSR, so the class says nothing either way.
+
+**The sharper correction is about form 3039, and it is a correction to this
+note.** The previous entry described the Corvette forms as the right evidence
+waiting on a bridge. They are not: form 3039 homologates the Sting Ray LS6 at
+7,446 cc, and the sheet specifies a 7.0-litre L88. Different engines. The form was
+never about this specification, so there was nothing at the far end of the bridge
+to reach. The synchroniser finding stands for the cars those forms describe and is
+explicitly not inherited here.
+
+That is a failure mode worth naming, because it nearly worked. The evidence was
+real, contemporary, explicit and consistent across two decades of forms, and it
+was about a different car. Checking the displacement is what separated them, and
+nothing in the earlier reasoning had asked.
+
+## Superseded: the C3.R's identity bridge
 
 This is the only record in the queue whose gap is identity rather than evidence.
 Form 3039, contemporary and explicit, says all four forward ratios are

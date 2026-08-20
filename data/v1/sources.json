@@ -2982,6 +2982,18 @@
       "notes": "Provides version context, the blank-indicator interpretation, and the source author's description of GTF1 as a modern GT/F1-style wheel rim. It records what the simulator models rather than what the real car had, so it cannot establish a real-world control value on its own."
     },
     {
+      "source_id": "ams2.reiza-release.1.2.3.corvette-c3",
+      "title": "Automobilista 2 V1.2.3.0 released",
+      "publisher": "Reiza Studios",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-v1-2-3-0-released-now-updated-to-v1-2-3-1.20127/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Official Reiza announcement adding the Corvette C3 and the Corvette C3 \"R\" Spec, the latter in GT Classics. It names no model year, chassis, engine, team, series or real racing car for either, and \"R Spec\" is the authoritative wording that the identity C3.R and C3-R later render. Establishes what the simulator adds; establishes nothing about a real car."
+    },
+    {
       "source_id": "ams2.reiza-release.1.5.6.1.stock-car-2024",
       "title": "Automobilista 2 V1.5.6.1 released",
       "publisher": "Reiza Studios",
