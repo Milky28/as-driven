@@ -3409,6 +3409,18 @@
       "notes": "Describes Formula Vee's technical basis: a Volkswagen Beetle 1600 cc engine of 70 to 75 hp and a VW four-speed gearbox, sealed and restricted to reliability modifications."
     },
     {
+      "source_id": "autoracing.formula-inter.launch",
+      "title": "Nova categoria no automobilismo brasileiro: nasce a Fórmula Inter",
+      "publisher": "AutoRacing",
+      "url": "https://www.autoracing.com.br/nova-categoria-no-automobilismo-brasileiro-nasce-a-formula-inter/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Second launch account of the same car, also naming the F-Inter MG-15 and Minelli Racing. It conflicts with the first on ratio count, describing a \"caixa de câmbio nacional com 4 marchas em 'h'\" where the other says five. No source found explains the difference, which may be a prototype or a specification change. It carries no construction wording either. The conflict must not be used to infer synchronisers or dogs in either direction."
+    },
+    {
       "source_id": "autosport.1962-12-21.lotus-23-road-test",
       "title": "Autosport, 21 December 1962: Lotus 23 test",
       "publisher": "Autosport",
@@ -3683,6 +3695,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Official 2025 technical regulations specify the Naja01-D Formula Vee chassis with a longitudinal Volkswagen Gol five-speed gearbox and defined clutch system. The following season's exact shift technique is established separately by live testing."
+    },
+    {
+      "source_id": "fasp.paulista-2024-sporting-regulations",
+      "title": "FASP - Regulamento Desportivo Geral 2024, com anexos 1 a 6",
+      "publisher": "Federação de Automobilismo de São Paulo",
+      "url": "https://fasp.faspnet.com.br/wp-content/uploads/2024/11/2024-regulamento-desportivo-geral-com-anexo-1-2-3-4-5-e-6.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Confirms Fórmula Inter ran under FASP's Paulista championship: page 38 carries \"ANEXO 5 - FÓRMULA INTER\". The complete annex is a \"Tabela de Pontuação\" and nothing else. It has no gearbox article, no prescribed, sealed or free rule, no ratio count, no donor unit and no synchroniser or dog field; those items are absent rather than negatively marked. This is a sporting regulation, not a technical one, and no published CBA, FASP or promoter technical regulation governing the 2015-2023 MG-15's gearbox was located."
     },
     {
       "source_id": "ferrari.575-gtc",
@@ -4561,6 +4585,18 @@
       "retrieved_at": "2026-08-17",
       "reuse_status": "facts-only-review",
       "notes": "Gives the 991.2 GT3 Cup a 3,996 cc flat six of 485 hp at 7,500 rpm, a \"Porsche six-speed sequential dog-type transmission\" with \"pneumatic gearshift activation (paddle shift)\", and a triple-disc sintered metal racing clutch."
+    },
+    {
+      "source_id": "racingonline.formula-inter-mg-15.launch",
+      "title": "Conheça o Fórmula Inter MG-15",
+      "publisher": "Racing Online",
+      "url": "https://racingonline.com.br/super-carros/conheca-o-formula-inter-mg-15/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-20",
+      "reuse_status": "facts-only-review",
+      "notes": "Launch report for the F-Inter MG-15, naming the model and its constructor, Minelli Racing, and establishing Fórmula Inter as a real Brazilian category. On the gearbox it states \"Produzida pela própria equipe técnica da Fórmula Inter, a caixa de câmbio conta com cinco marchas dispostas em 'H'\" - a five-speed made in-category rather than a named donor production unit. It uses neither \"sincronizado\" nor \"garras\": the construction is absent rather than negative. It describes the gate only as an H, which neither corroborates nor contradicts a dogleg, and does not give first-gear position. No expansion of \"MG\" appears, so it is the model designation and must not be read as a person or a year."
     },
     {
       "source_id": "ratwell.vw-transaxle",

@@ -779,64 +779,58 @@ counts and describe clutch control; they say nothing about engagement.
 > settles both fields on three cars, under the rule in `docs/data-model.md`, with
 > no override question to resolve.
 
-## Open: Formula Inter, a record with no real-world source
+## Part-settled: Formula Inter, a real car with an unreachable gearbox
 
-`formula-inter-mg15` is the thinnest record still live. Its identity is an AMS2
-sheet identity for the Formula Inter MG15 covering 2015-2023, held at medium
-confidence on the Coanda spreadsheet alone; its other sources are the SimHub
-identity audit and the guided drive. Every one of them is simulator-derived.
-Nothing in this record describes a real car, so the gearbox is not the only thing
-missing, just the thing being counted.
+`formula-inter-mg15` keeps `gearbox_type: unknown`, and the search was still worth
+running. It answered a bigger question than the one being counted.
 
-**One field decides more here than on any other car in the queue.** Both clutch
-fields are already established as `not-required` and everything else is set, so
-`gearbox_type` is the only thing open. If it is synchromesh, the blip follows to
-optional and the record becomes an **exact match** for
-`h-5-synchro-dogleg-clutch-start-lift-up-blip-optional` - no gaps, no deviations.
-If it is dog-engaged, this car founds the dogleg dog-box archetype the Diablo
-failed to found, which still has no member and no evidence behind it.
+**The car is real and the record does not retire.** The F-Inter MG-15 is a
+purpose-built Brazilian single-seater constructed by **Minelli Racing** for
+Fórmula Inter, a category FASP ran in its Paulista championship. This record's
+identity had rested on the Coanda spreadsheet alone - every source on it
+simulator-derived - and it is now held at high on a 2015 launch report naming the
+model and its constructor. No reliable source expands "MG", so it stays a model
+designation rather than a person or a year.
 
-**Both outcomes are live and the gate does not favour either.** A dogleg on a
-junior formula car suggests a purpose-built racing gearbox, which would be
-dog-engaged. Against that, the route that settled Formula Vee - a production
-gearbox supplied sealed by the promoter, therefore synchromesh - is exactly the
-kind of arrangement a cheap national category uses, and the Vee reached medium
-that way. The tension is real: the Vee's production box is a standard H, and this
-car is a dogleg.
+Putting the identity question first is what produced that. Had the question opened
+on the gearbox, the search would have returned nothing and the record would have
+kept a simulator-only identity indefinitely.
 
-That tension is not a lead. The Diablo's question was built on reading a dogleg as
-evidence of racing internals, and the road Diablo turned out to be a dogleg too;
-the reasoning was wrong before the search started. Here it is recorded as an open
-tension for evidence to resolve, not as a reason to expect an answer.
+**The gearbox routes are narrower than expected, not merely unsearched.** Two
+findings close them:
 
-> For **Formula Inter**, the Brazilian category running roughly 2015-2023:
->
-> 1. **Is the category real, and is the MG15 a real car?** This record's identity
->    rests on a simulator spreadsheet and nothing else, so this comes first. What
->    is the "MG15" - a chassis designation, a builder, a model year? Identifying
->    the constructor would give this record its first real-world source of any
->    kind, which matters well beyond the gearbox. If the category or the car turns
->    out to be a simulator construction, it retires like the other 22 and that is
->    a complete answer.
-> 2. Is a **technical regulation** published by the CBA, a state federation such
->    as FASP, or the category promoter? Formula Vee's came from FASP and Copa
->    Truck's from the CBA, so both are worth trying.
-> 3. If one exists, quote the gearbox article: forward ratio count, whether the
->    gearbox is prescribed, sealed or free, whether it names a donor production
->    unit, and any wording on synchronisers (`sincronizado`) or dog engagement
->    (`garras`). A regulation that frees the gearbox - Copa Truck's "o cambio e
->    livre" - closes this record with a written reason and is a real outcome, not
->    a failed search.
-> 4. Does anything describe the **gate**? The drive found a dogleg with first down
->    and left. Corroborating it from a real source is worth having on its own, and
->    a source that explains *why* it is a dogleg would likely settle the
->    construction as a side effect.
->
-> Standards as before. Quote verbatim with page or article numbers. Where a field
-> is blank or absent, say so explicitly - an absent synchroniser field is silence,
-> not a no. Confirm that whatever is found describes this car and this era rather
-> than a neighbouring category, and name the specification it states. A negative
-> result is a real finding.
+- The gearbox was **made in-category**: "Produzida pela própria equipe técnica da
+  Fórmula Inter, a caixa de câmbio conta com cinco marchas dispostas em 'H'".
+  Because no donor production unit is named, the reasoning that settled Formula
+  Vee - a sealed production gearbox is a road unit, therefore synchromesh - does
+  not reach this car. The one route that looked most promising is the one this
+  finding removes.
+- FASP's 2024 sporting regulation carries "ANEXO 5 - FÓRMULA INTER" on page 38,
+  which proves the category and contains a **points table and nothing else**: no
+  gearbox article, no prescribed, sealed or free rule, no ratios. No CBA, FASP or
+  promoter *technical* regulation for the 2015-2023 MG-15 was located. A bounded
+  negative, not an unfinished search.
+
+Neither launch account uses `sincronizado` or `garras`. The construction is absent
+from the record rather than denied.
+
+**Two things recorded rather than resolved.** The launch accounts disagree on
+ratio count - five in one, four in the other, both naming this car and Minelli
+Racing. The record keeps five, which the guided drive established directly and the
+more detailed account corroborates; no source explains the difference and it is
+not read as evidence about the construction either way. And the **dogleg has no
+real-world corroboration at all**: both accounts say only "H", which is generic,
+and neither gives a first-gear position. The dogleg with first down and left is
+simulator-observed only.
+
+That last point is worth carrying beyond this record. The archetype note excludes
+this car because its blip is `required` - a known value - where the dogleg
+synchromesh archetype has it optional. The gate that puts it near that archetype
+in the first place is itself only observed in the simulator.
+
+**What would still settle it**: Minelli Racing's own documentation, a gearbox
+specialist writing about the category, or a technical regulation that is published
+somewhere the public web does not reach. The routes tried are exhausted.
 
 ## Settled: the Diablo SV-R, and a lead that did not survive
 

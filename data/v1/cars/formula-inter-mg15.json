@@ -12,7 +12,7 @@
       "to": 2023
     },
     "class": "Formula Inter",
-    "real_world_identity_notes": "AMS2 sheet identity for the Fórmula Inter MG15 entry covering 2015–2023; manufacturer and model are retained from the sheet context."
+    "real_world_identity_notes": "The F-Inter MG-15, a purpose-built Brazilian single-seater constructed by Minelli Racing for the real Fórmula Inter category, which ran under FASP's Paulista championship. The record previously carried only an AMS2 sheet identity for the 2015-2023 entry; a launch report now names the model and its constructor. No reliable source expands \"MG\", so it is treated as part of the model designation and not as a person or a year."
   },
   "authentic_controls": {
     "transmission": {
@@ -52,7 +52,12 @@
       "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
       "A clutch is required from rest.",
       "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
-      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had."
+      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had.",
+      "The category and the car are real, which was the first question asked of this record and the one that decided whether it survives. The F-Inter MG-15 was built by Minelli Racing for Fórmula Inter, a category FASP ran in its Paulista championship. This record does not retire as a simulator construction.",
+      "The gearbox was made in-category, and that narrows the routes to its construction rather than opening them. The launch report says it was \"produzida pela própria equipe técnica da Fórmula Inter\" with five ratios in an H. Because it names no donor production unit, the reasoning that settled Formula Vee - a sealed production gearbox is a road unit, therefore synchromesh - does not reach this car. No source uses \"sincronizado\" or \"garras\", so the construction is absent from the record rather than denied.",
+      "The regulation route is closed as far as published material goes. FASP's 2024 sporting regulation carries \"ANEXO 5 - FÓRMULA INTER\" on page 38, which proves the category but is a points table in full: no gearbox article, no prescribed, sealed or free rule, no ratios. No CBA, FASP or promoter technical regulation for the 2015-2023 MG-15 was located. This is a bounded negative finding rather than an unfinished search.",
+      "Two launch accounts disagree on ratio count: five in one, four in the other, both naming this car and its constructor. The record keeps five, which the guided drive established directly and which the more detailed account corroborates. No source explains the difference and it may be a prototype or a specification change, so it is recorded rather than resolved, and it is not read as evidence about the construction in either direction.",
+      "The dogleg gate has no real-world corroboration. Both launch accounts describe the gate only as an \"H\", which is generic and neither confirms nor denies a dogleg, and neither gives a first-gear position. The dogleg with first down and left remains observed in the simulator only."
     ]
   },
   "simulators": [
@@ -111,7 +116,17 @@
     "claims": [
       {
         "paths": [
-          "/identity",
+          "/identity"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34",
+          "racingonline.formula-inter-mg-15.launch"
+        ],
+        "confidence": "high",
+        "basis": "A 2015 launch report names the F-Inter MG-15 and its constructor, Minelli Racing, and establishes Fórmula Inter as a real Brazilian category, matching the simulator's telemetry name for this car. That replaces an identity held on a simulator spreadsheet alone. Short of verified because no source ties the simulator's model to a specific chassis or season within the 2015-2023 span, and two launch accounts disagree on the car's ratio count. Falsified by a source showing the MG-15 designation or the constructor to be something else, or by evidence that the simulator models a different Fórmula Inter car."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [
