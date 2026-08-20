@@ -454,7 +454,39 @@ its construction turns out synchromesh. `sauber-mercedes-c9` says only that a
 guided drive established the running-shift technique. Those two do not support
 the same conclusion, and the difference decides whether an override belongs.
 
-## Open: the M1 Procar's gearbox
+## Answered, and left unknown: the M1 Procar
+
+The M1 has three FIA records - 670 in Group 4 and its FISA transfer to Group B,
+both dated 2 December 1980, and 240 in Group B from 2 March 1983. Codex read all
+three. The falsification test came back negative in the direction that matters:
+**no M1 five-speed is shown dog-engaged on any of them**, so the dogleg
+archetype's shape is not challenged and the other dogleg cars do not become
+ambiguous between two archetypes.
+
+**The construction stays unknown, and the reason is the point.** The form
+contemporary with the Procar is 670, and it predates the article 603 layout: its
+equivalent fields are 92, 93 and 96, which carry **no synchroniser field at all**.
+Its three five-speeds are therefore silent, not negative, and an absent field is
+not a no. B-240 does mark both its five-speeds synchronised, and they are
+recognisably the same ZF unit by their ratios - but it postdates the Procar by
+three years, the Procar has no form of its own, and 670's one ratio set that
+appears nowhere else was struck through on the transfer.
+
+**This is where the M3 and 190E differ, and why the answers differ.** There,
+every five-speed on each car's *own contemporary* form carried an explicit mark,
+so the options were unanimous and nothing was being chosen between. Here the
+contemporary form does not ask the question and the marks come from a later one.
+That is a longer reach, and the same criterion that promoted the first pair
+declines the second.
+
+What the forms did settle is the gate. B-240's 603 f) draws reverse above first
+with 1, 3 and 5 on the lower plane, so the M1's dogleg and first-down-left now
+rest on a primary source as well as the cockpit - the third car to gain that from
+these forms. Both M1 forms are registered.
+
+Codex also confirmed there is no Procar-labelled gearbox or Procar-specific
+extension on any M1 form. The series was one-make and bespoke, and the FIA record
+does not describe it, which is worth knowing before anyone searches again.
 
 `bmw-m1-procar` now deviates from the dogleg archetype on `gearbox_type` alone.
 It is the best remaining candidate for the FIA route, because unlike the Group C

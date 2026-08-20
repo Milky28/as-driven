@@ -3673,6 +3673,30 @@
       "notes": "Official FIA identity and homologation context for the Group A Audi V8 Quattro. Exact gate and simulator technique are established separately."
     },
     {
+      "source_id": "fia.bmw-m1.670-group-4",
+      "title": "Homologation form 670, Group 4: BMW M1",
+      "publisher": "Federation Internationale du Sport Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601036101/homologation_form_number_670_group_4.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Homologated 2 December 1980, the M1's own Group 4 form and the one contemporary with the Procar series. Page 5 lists a ZF manual five-speed and two further five-speed ratio sets. It predates the article 603 layout and uses articles 92, 93 and 96 instead, which carry no synchroniser field at all, so the form is silent on construction rather than negative. It draws no gear-change gate. Neither of its two extensions carries a gearbox ratio table."
+    },
+    {
+      "source_id": "fia.bmw-m1.b-240",
+      "title": "Homologation form 240, Group B: BMW M1",
+      "publisher": "Federation Internationale du Sport Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601078401/homologation_form_number_240_group_b.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-19",
+      "reuse_status": "facts-only-review",
+      "notes": "Homologated 2 March 1983, after the Procar series ended. Article 603 names a ZF manual gearbox and marks every forward gear of both its five-speeds synchronised - the base set and an additional set, which share ratios with the earlier Group 4 form. Section 603 f) draws the gear-change gate with reverse above first and 1, 3 and 5 on the lower plane, a dogleg with first down and left. None of its seven extensions carries a gearbox ratio table, and no extension on any M1 form describes a Procar specification."
+    },
+    {
       "source_id": "fia.bmw-m3.a-5327",
       "title": "Homologation form A-5327, Group A: BMW M3",
       "publisher": "Federation Internationale du Sport Automobile",
