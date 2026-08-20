@@ -548,6 +548,68 @@ third and fifth sharing the lower plane.
 > move from deviating on a gap to genuinely undetermined between two archetypes.
 > A blank or absent marking is a real finding, not a failed search.
 
+## Open: the Puma GTE, one link short
+
+`puma-gte` is a real car and the chain is nearly closed with sources already in
+the registry. `supercars-net.puma-gte` has it built "on Volkswagen running gear,
+with an air-cooled flat four and a four-speed manual gearbox", and
+`iccr.formula-vee-technical-regulations` states that a fully synchromesh VW Type
+1 or 3 gearbox has four forward gears with its internals as the manufacturer
+assembled them. A fact about a component carries to any car using that component.
+
+The loose link is the identification. The Puma source says "Volkswagen running
+gear" and "four-speed manual", not "Type 1" - so reading it as the Fusca or
+Brasilia transaxle is currently inference rather than something a source states.
+
+> For the **Puma GTE** (Brazil, 1970-1980, VW-based, four-speed):
+>
+> 1. Does any reviewed source **name the transaxle** - Type 1, Fusca, Brasilia,
+>    or a VW part number - rather than saying "Volkswagen running gear"? A
+>    Brazilian source, a Puma factory brochure or a Copa Classic technical
+>    regulation would all do.
+> 2. Does any source state the **gear-change gate**? This record has
+>    `shift_pattern: unknown`, which is unusual for a road-derived car, and a
+>    standard H with first up and left is the expectation rather than a finding.
+>    Note that a cockpit read settles this one, so it does not need a document.
+> 3. Does any source describe the Copa Classic B specification as modifying the
+>    gearbox internals?
+>
+> If the transaxle is named, the construction follows from a regulation already
+> registered and the record can take `synchromesh` at medium. If nothing names
+> it, it stays unknown - "VW running gear" is not the same claim as "the Type 1
+> transaxle", and the difference is exactly what medium confidence is for.
+
+## Open: the Omega Stock Car, and a period regulation
+
+`chevrolet-omega-stock-car-1999` is a real car in a real championship, and its
+own note says the reviewed source does not document the gearbox, so the
+transmission currently rests on the guided drive alone. 1999 was the last Stock
+Car Brasil season built on production-car chassis, which makes the gearbox
+question live: a production Chevrolet unit and a purpose-built racing box have
+different constructions and the record cannot tell them apart.
+
+The route that worked twice already is a governing body's technical regulations.
+The project already registers `cba.stock-car-pro-2024.technical-regulations`,
+which prescribes an Xtrac paddle-shift and so describes a completely different
+era of the same championship.
+
+> For **Stock Car Brasil in the Omega era, 1994-1999**:
+>
+> 1. Is a **period technical regulation** archived by the CBA or elsewhere? The
+>    CBA site serves recent years; 1999 may only exist in a motorsport archive,
+>    a period press kit or a team document.
+> 2. If one exists, quote the gearbox article: how many forward ratios, whether
+>    the gearbox must be a production unit or is free, and whether it says
+>    anything about synchronisers or dog engagement. Copa Truck's article 15 is
+>    the shape to look for, and its answer - "o cambio e livre" - is a real
+>    possible outcome here too.
+> 3. Failing a regulation, does any period source name the gearbox fitted to the
+>    1999 Omega?
+>
+> A regulation that leaves the gearbox free is as good an answer as one that
+> fixes it: it would close this record the way Copa Truck closed five, as a
+> documented permanent unknown rather than an outstanding task.
+
 ## Group C cannot be settled this way at all
 
 `sauber-mercedes-c9` and `porsche-962c` were listed as homologation candidates.
