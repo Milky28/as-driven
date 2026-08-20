@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -463,12 +464,25 @@ class ValidationTests(unittest.TestCase):
         evidence about a car. Each record's archetype basis has to say the gap is
         permanent, or the queue will keep collecting them.
         """
-        families = ("formula-classic", "formula-retro", "formula-vintage", "formula-dirt")
+        # Keyed on what the record says about itself, not on its name. Keying it
+        # on the name is how four fictionalised cars were missed the first time,
+        # including one argued back into the queue because its category is real
+        # even though the car is not.
+        invented = re.compile(
+            r"fictionalis|fictionaliz|no real-world chassis"
+            r"|unique real-world referent is not established",
+            re.IGNORECASE,
+        )
         retired = 0
         established = 0
         for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
             record = json.loads(path.read_text(encoding="utf-8"))
-            if not record["record_id"].startswith(families):
+            identity = record["identity"].get("real_world_identity_notes") or ""
+            if not invented.search(identity):
+                continue
+            # A series whose regulation leaves the gearbox free is closed for its
+            # own reason and is not a retirement.
+            if "livre" in json.dumps(record) or "free for all makes" in json.dumps(record):
                 continue
             transmission = record["authentic_controls"]["transmission"]
             if transmission["gearbox_type"] == "unknown":
@@ -480,15 +494,16 @@ class ValidationTests(unittest.TestCase):
                 retired += 1
                 continue
             # Being fictionalised does not make the field unreachable by itself.
-            # Where the mechanism is visible from the cockpit the drive settles
-            # it, and paddles are visible. What no drive can see, and no chassis
-            # exists to research, is whether an H-pattern box engages through
-            # synchronisers or dog rings - which is every one of the retired 17.
-            self.assertEqual(
-                transmission["shift_actuation"], "sequential-paddles", record["record_id"]
+            # Where the mechanism is visible the drive settles it: paddles are
+            # visible, and so is a sequential stick moving one gear at a time.
+            # What no drive can see, and no chassis exists to research, is
+            # whether an H-pattern box engages through synchronisers or dog
+            # rings - which is every one of the retired records.
+            self.assertNotEqual(
+                transmission["shift_actuation"], "h-pattern", record["record_id"]
             )
             established += 1
-        self.assertEqual((retired, established), (17, 3))
+        self.assertEqual((retired, established), (21, 14))
 
     def test_archetypes_in_the_registry_are_fully_specified_and_unique(self) -> None:
         """An archetype that is itself uncertain cannot describe anything.

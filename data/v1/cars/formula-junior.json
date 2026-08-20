@@ -141,11 +141,11 @@
     "deviations": [
       {
         "path": "/authentic_controls/transmission/downshift/manual_blip",
-        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
+        "basis": "Whether the driver must blip on downshifts is not established. It travels with the construction - dog rings need the driver to match revs where a synchromesh leaves the blip optional - and the construction cannot be established for a car Reiza invented. So this one is retired with it rather than left as work."
       },
       {
         "path": "/authentic_controls/transmission/gearbox_type",
-        "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
+        "basis": "The gearbox type is not established and cannot become established. Retired from the gearbox research queue. This is a car Reiza invented rather than one it represents, so there is no manufacturer, homologation sheet or registry to consult and no drive can separate a synchromesh from a dog box. Assigning a value would mean reasoning from the era or the category the car evokes, which is not evidence about this car. This is a settled answer, not an outstanding one."
       }
     ]
   },

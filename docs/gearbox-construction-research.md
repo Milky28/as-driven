@@ -454,6 +454,37 @@ its construction turns out synchromesh. `sauber-mercedes-c9` says only that a
 guided drive established the running-shift technique. Those two do not support
 the same conclusion, and the difference decides whether an override belongs.
 
+## The retirement was keyed on the wrong thing
+
+The first retirement matched record ids - `formula-classic`, `formula-retro`,
+`formula-vintage`, `formula-dirt` - rather than asking whether the car is one
+Reiza invented. Four records meet the criterion and do not match those names:
+`chevrolet-corvette-c3-r-convertible`, `stock-usa-gen1`, `stock-usa-gen2` and
+`formula-junior`. All four are retired now, and the test is re-keyed on what the
+record says about itself.
+
+**`formula-junior` was not merely missed, it was argued out.** The earlier note
+kept it in the queue on the grounds that Formula Junior was a real international
+category with a technical formula, which is true of the category and irrelevant to
+this car. Its own identity note reads: "Reiza's fictionalised Formula Junior
+category open-wheel car ... No real-world chassis identity is assigned, so the
+gearbox construction is not established". The record had the answer in it, and a
+plausible argument about the category name talked over it.
+
+The Corvette Convertible is the same shape: B-260's own source note calls it
+"Reiza's fictionalized C3.R Convertible" and says the form gives manual-gearbox
+context rather than this car's construction. Only the closed **C3.R coupe** has a
+real referent - a 1971 sheet identity - and it does not cite B-260 at all.
+
+Re-keying the test also caught the same error inside the test. It asserted that a
+fictionalised car with an established gearbox must be paddle-shifted, which was a
+proxy for the real principle rather than the principle. `stock-usa-gen3` and
+`super-v8` are sequential sticks, equally visible from the cockpit. What no drive
+can see is whether an **H-pattern** box engages through synchronisers or dog
+rings, and that is what the test now asserts.
+
+The live queue is 12.
+
 ## Answered, and left unknown: the M1 Procar
 
 The M1 has three FIA records - 670 in Group 4 and its FISA transfer to Group B,
