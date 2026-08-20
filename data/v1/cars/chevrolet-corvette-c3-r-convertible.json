@@ -49,7 +49,9 @@
     "notes": [
       "The clutch is required to move from rest, but correctly rev-matched running shifts were accepted without it.",
       "Full-throttle clutchless upshifts were rejected and succeeded only after a throttle lift; clutchless downshifts were rejected until the driver supplied a manual blip.",
-      "This is a separate record so the directly verified convertible technique is not silently applied to the older closed-car record."
+      "This is a separate record so the directly verified convertible technique is not silently applied to the older closed-car record.",
+      "The downshift blip does not assert an unestablished construction here, and the reason is that this car has no real referent. For a car a simulator invented there is no real gearbox to be right or wrong about, so the simulator is the only authority that exists and its demand is the complete fact about the only version of this car there is. The dataset's rule - that `required` is reserved for gearboxes needing the blip to engage - governs claims about real cars and does not reach a record with no real car behind it. `required` stands as a known value.",
+      "That does not make the construction knowable. A required blip in AMS2 is not evidence of dog engagement: the simulator demands one on cars established as synchromesh, including both Formula Vee records and the Diablo SV-R. The demand establishes the technique the driver must use, not how the gearbox engages, so `gearbox_type` stays unknown here and would stay unknown even if this car were real."
     ]
   },
   "simulators": [
@@ -144,7 +146,7 @@
   },
   "archetype": {
     "classification": "no-archetype",
-    "basis": "Reiza presents this as an open-top alternative to its closed C3.R and no unique real-world referent is established for it, so the FIA form registered against it gives manual-gearbox context rather than this car's construction. It matches no archetype: its downshift blip is required, a known value, where the four-speed archetype has it optional. Retired from the gearbox research queue. This is a car Reiza invented rather than one it represents, so there is no manufacturer, homologation sheet or registry to consult and no drive can separate a synchromesh from a dog box. Assigning a value would mean reasoning from the era or the category the car evokes, which is not evidence about this car. This is a settled answer, not an outstanding one."
+    "basis": "Reiza presents this as an open-top alternative to its closed C3.R and no unique real-world referent is established for it, so the FIA form registered against it gives manual-gearbox context rather than this car's construction. It matches no archetype: its downshift blip is required, a known value, where the four-speed archetype has it optional. Retired from the gearbox research queue. This is a car Reiza invented rather than one it represents, so there is no manufacturer, homologation sheet or registry to consult and no drive can separate a synchromesh from a dog box. Assigning a value would mean reasoning from the era or the category the car evokes, which is not evidence about this car. This is a settled answer, not an outstanding one.\n\nThe downshift blip does not assert an unestablished construction here, and the reason is that this car has no real referent. For a car a simulator invented there is no real gearbox to be right or wrong about, so the simulator is the only authority that exists and its demand is the complete fact about the only version of this car there is. The dataset's rule - that `required` is reserved for gearboxes needing the blip to engage - governs claims about real cars and does not reach a record with no real car behind it. `required` stands as a known value."
   },
   "notes": [
     "The unique real-world referent remains unknown; simulator behavior is exact and versioned."

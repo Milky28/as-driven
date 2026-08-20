@@ -49,7 +49,9 @@
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "There is no automation: the clutch is needed to pull away, the driver lifts the throttle to upshift and blips it to downshift.",
       "The gate was observed as a standard H rather than a dogleg, unlike the period European touring cars in this batch.",
-      "The registered source does not document the gearbox, so the transmission rests on the guided drive alone."
+      "The registered source does not document the gearbox, so the transmission rests on the guided drive alone.",
+      "Knowingly blocked on the downshift blip, recorded rather than carried quietly. The blip is `required` in authentic_controls on the strength of the guided drive, and a drive establishes what AMS2 demands rather than what the real car needed. Where the construction was later established for a car in this position - Formula Vee Gen2, Formula Vee FIN and the Diablo SV-R - the authentic value was revised to optional every time and the simulator's demand moved to an override. Three out of three. So this value is carried without corroboration and is more likely wrong than right; it stays because no source establishes the construction that would settle it, and the dataset does not convert a value by assumption.",
+      "What would unblock it: a Stock Car Brasil technical regulation of the period, or constructor documentation. The registered source does not document the gearbox, so the transmission rests on the guided drive alone."
     ]
   },
   "simulators": [

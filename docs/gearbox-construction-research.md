@@ -405,7 +405,7 @@ would also put a required blip on a synchromesh, the same shape as the Formula
 Vee pair, which is handled as a simulator override rather than by revising the
 construction.
 
-## The blip follows the construction, and ten records are ahead of theirs
+## The blip follows the construction, and nine records were ahead of theirs
 
 A synchromesh does not need a blip to engage a gear, so the dataset records
 `optional` for one and reserves `required` for gearboxes that do. That rule was
@@ -435,17 +435,37 @@ unestablished construction that excludes them, which would be a gap. It is their
 blip: `required` is a known value, and the archetype has `optional`.
 
 So through the blip they assert a construction their `gearbox_type` does not
-establish. Ten records are in that position:
+establish. Ten records were in that position when this was written. The Diablo
+SV-R has since been settled, and the remaining nine were closed out in two
+groups.
 
-`bmw-m1-procar`, `chevrolet-corvette-c3-r`, `chevrolet-corvette-c3-r-convertible`,
-`chevrolet-omega-stock-car-1999`, `formula-inter-mg15`, `lamborghini-diablo-sv-r`,
-`puma-gte`, `sauber-mercedes-c9`, `stock-usa-gen1`, `stock-usa-gen2`.
+**Four dissolved.** `chevrolet-corvette-c3-r`,
+`chevrolet-corvette-c3-r-convertible`, `stock-usa-gen1` and `stock-usa-gen2` are
+cars a simulator invented. For a car with no real referent there is no real
+gearbox to be right or wrong about, so the simulator is the only authority that
+exists and its demand is the complete fact about the only version of the car
+there is. The rule reserving `required` for gearboxes that need the blip governs
+claims about real cars; it never reached these four. `required` stands as a known
+value.
 
-**They are not being changed here.** Every one takes its blip from a guided
-drive, so the value is a real observation, and the honest reading is that they
-are waiting on the same fact the gearbox queue is waiting on. Establishing the
-construction settles the blip too, under the rule - which is why these ten are
-not a separate backlog but the same one seen from another angle.
+**Five stand, knowingly.** `bmw-m1-procar`, `chevrolet-omega-stock-car-1999`,
+`formula-inter-mg15`, `puma-gte` and `sauber-mercedes-c9` are real cars whose
+construction is unestablished and whose research routes are exhausted. Each now
+records what would unblock it.
+
+The uncomfortable part is recorded with them. Where the construction was later
+established for a car in this position - Formula Vee Gen2, Formula Vee FIN and
+the Diablo SV-R - the authentic blip was revised to `optional` every time and the
+simulator's demand moved to an override. Three out of three. So these five carry
+a value that is more likely wrong than right. It stays because no source
+establishes the construction that would settle it, and the dataset does not
+convert a value by assumption - but it is carried in the open rather than
+quietly.
+
+That also disposes of any temptation to read the blip as evidence of a dog box.
+AMS2 demands a blip on gearboxes established as synchromesh, so its demand
+establishes the technique a driver must use and says nothing about how the
+gearbox engages.
 
 What does differ between them, and has to be read per record rather than swept,
 is what the drive actually recorded. `stock-usa-gen1` says clutchless running

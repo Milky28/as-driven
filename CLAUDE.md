@@ -167,7 +167,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.16.0.
-- Dataset: 0.3.95 with 242 curated records.
+- Dataset: 0.3.96 with 242 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
   decision; the guided queue is empty. The inventory only holds cars that have
@@ -176,11 +176,27 @@ approval are required before release. See `PRIVACY.md` and
 - Every record carries an `archetype` classification: 162 match one of the 23
   registered mechanisms, 57 deviate, 13 are undetermined and 10 match none. An
   archetype is descriptive and supplies no values, so a classification can never
-  change a record. `gearbox_type` is still what blocks the dataset: it is open in
-  37 records, 18 of them deviations, and decides 10 of the 13 undetermined. Of
-  those 37, 22 are retired as cars a simulator invented and 5 are Copa Truck
-  records a regulation frees, so the live research queue is 10 cars. It is also
-  the one open field a drive cannot settle. See `docs/archetypes.md`.
+  change a record. See `docs/archetypes.md`.
+- **The gearbox construction research is closed.** `gearbox_type` is open in 37
+  records: 22 are retired as cars a simulator invented, 5 are Copa Truck records
+  a regulation frees, and the remaining 10 have each been searched and documented
+  with what would unblock them. Six of those ten can never be settled by
+  homologation - Formula One and Group C homologated nothing, and the M1's
+  contemporary form predates the FIA synchroniser field - so what is left needs
+  constructor or gearbox-specialist documentation. Reopen a record only when such
+  a source appears, not by re-running the searches already recorded in
+  `docs/gearbox-construction-research.md`.
+- A drive-derived `downshift.manual_blip: required` over an unknown construction
+  is unsupported rather than established. Every time the construction was later
+  established for a car in that position - both Formula Vee records and the
+  Diablo SV-R - the authentic value was revised to `optional` and the simulator's
+  demand moved to an override. Five real cars still carry it knowingly; four
+  cars a simulator invented are outside the rule, because a car with no real
+  referent has no real gearbox to be wrong about. See `docs/data-model.md`.
+- Next simulator: **Assetto Corsa Evo**, chosen for a relatively small car count,
+  no mod ecosystem yet and no DLC. It is the first test of the sim-independence
+  the schema claims, and a second simulator's drive joins an existing record as
+  another `simulators[]` entry rather than forking a new one.
 - Record IDs name the real car with no simulator prefix. A second simulator's
   drive joins the existing record as another `simulators[]` entry rather than
   forking a second record, and an approval names the simulator it approves.

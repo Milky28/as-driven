@@ -87,9 +87,22 @@ dataset records that difference consistently:
 **The mapping runs one way only.** An established construction settles the
 technique. The technique does not settle the construction: a record carrying
 `manual_blip: required` while `gearbox_type` is `unknown` has not thereby
-established a dog box, and must not be promoted to one. Ten records are in that
+established a dog box, and must not be promoted to one. Five records are in that
 position today, and every one of them takes its blip from a guided drive rather
 than from a source about the real car.
+
+**Treat a drive-derived `required` as unsupported, not as a value.** Every time the
+construction was later established for a car in that position - Formula Vee Gen2,
+Formula Vee FIN, the Diablo SV-R - the authentic value was revised to `optional`
+and the simulator's demand moved to an override. Three out of three. A simulator
+demanding a blip is therefore no evidence at all about how the gearbox engages,
+because it demands one on gearboxes established as synchromesh. The five records
+still carrying `required` over an unknown construction are carrying it knowingly.
+
+A car a simulator invented is outside this rule entirely. There is no real gearbox
+to be wrong about, so the simulator is the only authority that exists and its
+demand is the complete fact about the only version of the car there is. Four
+records are in that position and are not counted among the five.
 
 That is also why the two can disagree without either being wrong. Where a
 simulator demands a blip the real gearbox does not need, the real car keeps the
