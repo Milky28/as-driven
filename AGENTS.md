@@ -1,10 +1,11 @@
-# As Driven Database project guidance
+# As Driven project guidance
 
 ## Purpose
 
-Build and maintain a simulator-independent, open-source database that tells a
-sim racer which physical controls and shifting technique to use for an
-authentic experience. SimHub is the first client, not the data format owner.
+Build and maintain an open, simulator-independent authentic-controls layer that
+tells a sim racer which physical controls and shifting technique to use for an
+authentic experience. The versioned JSON database is the source of truth;
+SimHub is the reference client, not the data format owner.
 
 ## Scope
 
@@ -80,10 +81,13 @@ than silently queueing verification work.
 - Early-access client: 0.17.0.
 - Dataset: 0.4.1 with 242 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- Exact coverage is 318 of 333 observed AMS2 identities. Guided verification is
-  the only remaining category of open work; see `docs/ams2-coverage-plan.md`.
-- `docs/ams2-coverage-plan.md` owns the batch order and names the current next
-  batch. Do not restate that batch here, so the two cannot drift apart.
+- Every AMS2 identity observed on this PC is curated or closed by a written
+  decision; the guided queue is empty. New content can still be absent because
+  the inventory only contains cars loaded here. See `docs/ams2-coverage-plan.md`.
+- Assetto Corsa EVO is the active second-simulator development track. Three
+  records now carry reviewed AC EVO entries; this is development coverage, not
+  part of the certified early-access target. `docs/ac-evo-coverage-plan.md` owns
+  its drive order and open questions.
 - `validate` compares the dataset version and record count quoted in this file,
   `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
   `data/v1/index.json`. Update the line above with the dataset, or validation

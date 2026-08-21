@@ -2,10 +2,10 @@
 
 ## Project purpose
 
-As Driven is a simulator-independent, open-source database that tells
+As Driven is an open, simulator-independent authentic-controls layer that tells
 sim racers which physical controls and shifting technique to use for an
-authentic experience. SimHub is the first client; it does not own the data
-format.
+authentic experience. The versioned JSON database is the source of truth;
+SimHub is the reference client and does not own the data format.
 
 Keep the core dataset focused on choices that affect pre-session hardware or
 driving technique:
@@ -193,15 +193,14 @@ approval are required before release. See `PRIVACY.md` and
   demand moved to an override. Five real cars still carry it knowingly; four
   cars a simulator invented are outside the rule, because a car with no real
   referent has no real gearbox to be wrong about. See `docs/data-model.md`.
-- Next simulator: **Assetto Corsa EVO**, chosen for a relatively small car count,
-  no mod ecosystem yet and no DLC. It is the first test of the sim-independence
-  the schema claims, and a second simulator's drive joins an existing record as
-  another `simulators[]` entry rather than forking a new one. The client
-  canonicalises SimHub's `AssettoCorsaEvo` to `ac-evo`; no record names it yet, so
-  the plugin reports the game as not yet covered while still logging car
-  identities locally, which is how the first record gets written. Roster
-  overlaps, drive order and the name matches to avoid are in
-  `docs/ac-evo-coverage-plan.md`.
+- Active second simulator: **Assetto Corsa EVO**, chosen for a relatively small
+  car count, no mod ecosystem yet and no DLC. Three existing real-car records
+  now carry separately reviewed `ac-evo` entries, proving that a second
+  simulator's drive can join a record without inheriting another simulator's
+  behavior. The client canonicalises SimHub's `AssettoCorsaEvo` to `ac-evo`;
+  this remains development coverage rather than part of the certified
+  early-access target. Roster overlaps, drive order and name matches to avoid
+  are in `docs/ac-evo-coverage-plan.md`.
 - A shared name across simulators is not a shared car. Exact matching fails
   closed, but merging a second simulator's entry onto the wrong record fails
   open - the plugin answers confidently with another car's controls. Road against

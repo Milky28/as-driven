@@ -1,7 +1,8 @@
 # SimHub client roadmap
 
-The SimHub integration is a read-only client. The JSON database remains useful
-to websites, hardware selectors, voice assistants, Stream Deck tools, or other
+The SimHub integration is the read-only reference client for the As Driven
+authentic-controls layer. The JSON database remains independently useful to
+websites, hardware selectors, voice assistants, Stream Deck tools, or other
 telemetry applications without SimHub installed.
 
 ## Phase 0 — data contracts (this repository)
@@ -303,7 +304,10 @@ behavior remained operational after the restart.
 - Ship a pinned dataset with the plugin and optionally poll signed GitHub
   releases, never a moving branch.
 - Show dataset version and changelog before applying an update.
-- Expand curated coverage to iRacing, then AC EVO and AC Rally.
+- Continue the active AC EVO development track, then choose the next simulator
+  from available telemetry, test access, and source quality rather than a
+  promised product order. The existing iRacing importer and AC Rally identifier
+  are foundations, not coverage claims.
 - Provide an opt-in unmatched-identifier export; do not upload telemetry by
   default.
 

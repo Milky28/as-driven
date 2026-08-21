@@ -1,9 +1,10 @@
-# SimHub proof of concept
+# SimHub reference client
 
-This directory contains a read-only SimHub adapter for the independent JSON
+This directory contains the reference client for the independent As Driven JSON
 database. The plugin never rewrites curated data. It turns the current SimHub
 game/car identity into stable properties consumed by the packaged pre-flight
-cards and guided-verification overlay.
+cards and guided-verification overlay, and it writes local draft observations
+for later human review.
 
 ## Components
 
@@ -218,11 +219,15 @@ Studio and unplace Compact.
 This is the packaged default. `install.ps1` preserves existing `As Driven*.olayout`
 files, so an installation that already has a customized layout keeps it.
 
-## Current boundary
+## Certified boundary and development coverage
 
-It has been compiled against the installed SimHub 9.11.22 SDK. Client version
-0.15.0 packages dataset 0.3.18 for the first documented early-access candidate.
-It packages the approved high-fidelity 128x128 raster
+Client version 0.17.0 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.4.1. The certified early-access target is AMS2 1.6.9.91 on Windows.
+The client also recognizes Assetto Corsa EVO for active development, and the
+dataset contains its first three reviewed cross-simulator entries; that does not
+yet make AC EVO part of the certified release target.
+
+The reference client packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel
 and Shift under `PHYSICAL CONTROLS`, groups Upshift and Downshift under
 `SHIFTING TECHNIQUE`, enlarges the existing icons, and replaces the ambiguous

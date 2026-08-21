@@ -1,8 +1,10 @@
 # As Driven early access
 
-As Driven is ready for an early-access release, not a claim of
-complete simulator or vehicle coverage. The release is intended for testers
-who are comfortable reporting incorrect or missing data.
+As Driven is an open authentic-controls layer with a SimHub reference client.
+This early-access release is one certified client target, not a claim that every
+simulator or vehicle represented by the independent dataset is supported here.
+It is intended for testers who are comfortable reporting incorrect or missing
+data.
 
 ## Supported release target
 
@@ -27,14 +29,17 @@ that behavior was reverified after a game update.
 - independent, checksummed database updates with backup and rollback;
 - a SimHub installer that preserves customized overlay positions by default.
 
-The database currently contains 242 curated records. AMS2 coverage is useful but
-incomplete, and unsupported cars are deliberately shown as unmatched instead of
-receiving guessed controls. The generated coverage plan remains development
-material and is not a promise that every listed identity is a distinct vehicle.
+The database currently contains 242 curated car records. All carry AMS2 entries;
+three also carry reviewed Assetto Corsa EVO development entries. This release is
+certified only for the AMS2 target above. Unsupported cars and simulators are
+deliberately shown as unmatched instead of receiving guessed controls. The
+generated coverage plans remain development material and are not promises that
+every listed identity is a distinct vehicle.
 
 ## Known early-access limitations
 
-- Only AMS2 is supported by the SimHub client in this release.
+- Only the AMS2 target above is certified for this SimHub client release. Other
+  simulator entries in the dataset remain development coverage.
 - The plugin and PowerShell installers are not code-signed. Windows may show a
   warning for downloaded files or scripts.
 - Updates are manual. There is no background network check or automatic

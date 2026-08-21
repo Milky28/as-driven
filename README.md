@@ -1,9 +1,15 @@
-# As Driven Database
+# As Driven
 
-A simulator-independent, versioned JSON database describing how a real car is
-controlled and how individual simulators implement or override that behavior.
-The first consumer is planned to be a SimHub popup, but SimHub is deliberately
-not part of the data format.
+An open, simulator-independent authentic-controls layer for sim racing. As
+Driven tells a driver which physical controls to use for a car and how to shift
+it authentically, while keeping simulator-specific behavior separate from the
+real car.
+
+The versioned JSON database is the source of truth. The working SimHub
+integration is the reference client: it turns the data into pre-flight cards,
+exact live-car matching, and a guided contribution workflow, but it does not own
+the format. Websites, hardware selectors, voice assistants, and other telemetry
+clients can consume the same releases without SimHub.
 
 The project separates three questions:
 
@@ -14,6 +20,21 @@ The project separates three questions:
 
 An explicit `unknown` is different from `no`. A blank source cell is converted
 to `no` only when that source documents that convention.
+
+## What ships today
+
+- Dataset 0.4.1 contains 242 reviewed car records under the open v1 JSON
+  contract.
+- The SimHub reference client is at 0.17.0, with exact matching, three pre-flight
+  card sizes, offline preview, local diagnostics, and guided verification.
+- The certified early-access target is Windows, SimHub 9.11.22, and AMS2
+  1.6.9.91. Assetto Corsa EVO is the active second-simulator development track;
+  its first reviewed observations are already in the dataset but are not part of
+  that certified release target.
+
+Dataset coverage, client recognition, and certified release support are
+deliberately different claims. See [EARLY_ACCESS.md](EARLY_ACCESS.md) for the
+supported release boundary.
 
 ## Project scope
 
@@ -32,10 +53,11 @@ Importers select only relevant source columns rather than mirroring a general
 car spreadsheet.
 
 The format is simulator-independent, but a released dataset only covers the
-simulators it carries records for. That list is derived from the records
-themselves rather than declared, so the SimHub client can show it on its
-settings page and report an uncovered game plainly instead of reporting every
-car in it as unmatched. Automobilista 2 is the only covered simulator today.
+simulators for which it carries reviewed entries. That list is derived from the
+records themselves rather than declared, so a client can report an uncovered
+game plainly instead of reporting every car in it as unmatched. AMS2 has broad
+curated coverage; Assetto Corsa EVO currently has the first three reviewed
+cross-simulator entries and remains a development target.
 
 ## Repository layout
 
@@ -55,7 +77,7 @@ docs/verification-observations.md  Guided in-game verification contract
 docs/importers.md            AMS2 and iRacing import/review design
 docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
 docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
-docs/simhub-roadmap.md       Planned read-only SimHub client
+docs/simhub-roadmap.md       Reference-client design and remaining roadmap
 docs/releasing.md            Early-access build, QA, and publishing process
 simhub/                      .NET lookup library, plugin adapter, and diagnostics
 release/                     Independent database-release packaging
@@ -102,13 +124,13 @@ ignored `dist/` directory:
 python -m as_driven_db build-site
 ```
 
-Dataset 0.4.1 contains 242 reviewed records. Its newest records complete the
-audited post-sheet queue and the first modern-prototype verification batch,
-while retaining official or manufacturer evidence separately from simulator
-behavior. Broader AMS2 roster coverage remains a versioned, explicitly
-classified backlog rather than guessed matches.
+Dataset 0.4.1 contains 242 reviewed records. Every AMS2 identity observed on the
+development machine is curated or closed by a written decision, while new
+content still fails closed until it is observed and reviewed. Three records now
+also carry independent Assetto Corsa EVO entries, exercising the same real-car
+record across two simulators without sharing unverified behavior between them.
 
-The optional SimHub adapter has its own build and test command on Windows:
+The SimHub reference client has its own build and test command on Windows:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\build.ps1
@@ -203,11 +225,12 @@ identified as such. Search snippets, unattributed reposts, and AI-generated
 claims are not acceptable sources. See [CONTRIBUTING.md](CONTRIBUTING.md) for
 the full review policy.
 
-## Initial data status
+## Dataset status
 
-Dataset 0.4.1 contains 242 curated AMS2 records promoted through the reviewed
-identity workflow. They demonstrate the model and expand current-game coverage;
-they are not a claim of complete coverage. Older records retain selected values
+Dataset 0.4.1 contains 242 curated car records promoted through the reviewed
+identity workflow. All carry AMS2 entries, and three also carry separately
+reviewed Assetto Corsa EVO entries. They demonstrate useful coverage, not a
+claim of complete vehicle or simulator coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
 post-sheet cars use independent primary-source research and exact AMS2
 1.6.9.91 tests. Raw wheel-rim codes are retained, unsupported driving
