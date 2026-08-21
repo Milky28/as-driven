@@ -7,6 +7,7 @@ import unittest
 
 from as_driven_db.validate import (
     AERO_SUFFIXES,
+    SHIFT_ACTUATION,
     LIVE_OBSERVATION_ID_RE,
     OBSERVING_SIMULATORS,
     _resolve_pointer,
@@ -785,6 +786,51 @@ class ValidationTests(unittest.TestCase):
                     for error in validate_repository(temp_root)
                 )
             )
+
+    def test_behavior_shift_type_restates_the_actuation_rather_than_respelling_it(
+        self,
+    ) -> None:
+        """`shift_type` was an unconstrained string and grew nine spellings.
+
+        Three mechanisms, spelled nine ways across the AMS2 spreadsheet era:
+        h-pattern beside H-pattern and H-Dogleg, sequential-paddles beside
+        Paddles and Seq-Paddle, sequential-stick beside Seq-Stick and
+        "Sequential stick". None ever disagreed with its own record's actuation,
+        so the invariant worth stating is equality, not a list of spellings.
+
+        Two ways to break it: an old spelling of the right mechanism, and the
+        right spelling of the wrong one.
+        """
+        for value in ("Paddles", "h-pattern"):
+            with tempfile.TemporaryDirectory() as temp:
+                temp_root = self._copy_repository_data(Path(temp))
+                path = temp_root / "data" / "v1" / "cars" / "audi-r8-lms-gt3-evo-ii.json"
+                record = json.loads(path.read_text(encoding="utf-8"))
+                self.assertEqual(
+                    record["authentic_controls"]["transmission"]["shift_actuation"],
+                    "sequential-paddles",
+                    "fixture car changed; pick another paddle car",
+                )
+                record["simulators"][0]["behavior"]["shift_type"] = value
+                path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+                self.assertTrue(
+                    any(
+                        "does not match the effective shift_actuation" in error
+                        for error in validate_repository(temp_root)
+                    ),
+                    f"{value!r} was accepted as a shift_type",
+                )
+
+    def test_every_curated_shift_type_uses_the_actuation_vocabulary(self) -> None:
+        """The normalisation itself, asserted over the whole dataset."""
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            for simulator in record["simulators"]:
+                self.assertIn(
+                    simulator["behavior"]["shift_type"],
+                    SHIFT_ACTUATION,
+                    f"{record['record_id']} ({simulator['simulator']})",
+                )
 
     def test_an_undetected_game_version_cannot_reach_a_curated_record(self) -> None:
         """"unknown" is what the plugin writes when it cannot read a version.

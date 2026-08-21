@@ -65,7 +65,7 @@
         }
       ],
       "behavior": {
-        "shift_type": "Seq-Stick",
+        "shift_type": "sequential-stick",
         "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {

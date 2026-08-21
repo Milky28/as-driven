@@ -39,6 +39,17 @@ THROTTLE_LIFT = {"required", "not-required", "partial", "unknown", "not-applicab
 BLIP_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
 START_CLUTCH = {"required", "not-required", "anti-stall-available", "unknown", "not-applicable"}
 FIRST_GEAR_POSITION = {"up-left", "up-right", "down-left", "down-right", "unknown"}
+# The one vocabulary for how a driver changes gear. The schema pins it on
+# authentic_controls; `behavior.shift_type` restates it and must not invent a
+# second spelling of the same mechanism.
+SHIFT_ACTUATION = {
+    "h-pattern",
+    "sequential-stick",
+    "sequential-paddles",
+    "automatic-lever",
+    "direct-selection",
+    "unknown",
+}
 
 
 # How each simulator spells an aero package, and the only kinds a match is ever
@@ -213,6 +224,19 @@ def _validate_behavior(behavior: Any, label: str, errors: list[str]) -> None:
     }
     if not _required(behavior, required, label, errors):
         return
+    # `shift_type` was an unconstrained string, and nine spellings of three
+    # mechanisms accumulated: H-pattern beside h-pattern and H-Dogleg, Paddles
+    # beside Seq-Paddle and sequential-paddles. None of them ever disagreed with
+    # the record's own actuation, which is the invariant worth stating rather
+    # than a list of accepted spellings - the client does not read this field at
+    # all, deriving what it shows from authentic_controls, so anything else here
+    # is a second copy free to rot.
+    if behavior["shift_type"] not in SHIFT_ACTUATION:
+        errors.append(
+            f"{label}.shift_type: {behavior['shift_type']!r} is not one of "
+            f"{sorted(SHIFT_ACTUATION)}; it restates the effective shift_actuation "
+            "and must use the same vocabulary"
+        )
     for name in ("auto_blip", "shift_cut"):
         if behavior[name] not in STATES:
             errors.append(f"{label}.{name}: invalid state {behavior[name]!r}")
@@ -404,6 +428,22 @@ def _validate_record(
             elif sim_name in seen_simulators:
                 errors.append(f"{sim_label}: duplicate simulator {sim_name!r}")
             seen_simulators.add(sim_name)
+            # ...and it must restate this record's actuation, not some other
+            # mechanism. An override moves it, so compare against the effective
+            # value rather than the authentic one.
+            effective_actuation = (record.get("authentic_controls", {})
+                                   .get("transmission", {})
+                                   .get("shift_actuation"))
+            for override in simulator.get("overrides") or []:
+                if str(override.get("path", "")).endswith("/shift_actuation"):
+                    effective_actuation = override.get("value")
+            if (simulator.get("behavior", {}).get("shift_type") is not None
+                    and simulator["behavior"]["shift_type"] != effective_actuation):
+                errors.append(
+                    f"{sim_label}.behavior.shift_type: "
+                    f"{simulator['behavior']['shift_type']!r} does not match the "
+                    f"effective shift_actuation {effective_actuation!r}"
+                )
             # "latest" moves under the record; "unknown" is what the plugin
             # writes when it cannot read a version off a running process, and at
             # least one simulator - Assetto Corsa EVO - exposes none anywhere on

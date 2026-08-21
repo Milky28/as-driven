@@ -75,7 +75,7 @@
         }
       ],
       "behavior": {
-        "shift_type": "Paddles",
+        "shift_type": "sequential-paddles",
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {

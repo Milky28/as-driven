@@ -77,7 +77,7 @@
         }
       ],
       "behavior": {
-        "shift_type": "H-pattern",
+        "shift_type": "h-pattern",
         "auto_blip": "no",
         "shift_cut": "no",
         "wheel_rim_type": {
