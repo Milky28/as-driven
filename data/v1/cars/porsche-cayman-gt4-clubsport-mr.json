@@ -5,18 +5,18 @@
   "identity": {
     "display_name": "Porsche Cayman GT4 Clubsport MR",
     "manufacturer": "Porsche",
-    "model": "718 Cayman GT4 Clubsport MR",
+    "model": "Cayman GT4 Clubsport MR",
     "year": {
       "from": 2016,
       "label": "2016 Cayman GT4 Clubsport with the Manthey MR kit"
     },
     "class": "GT4",
-    "real_world_identity_notes": "Customer racing Cayman GT4 Clubsport of the 981 generation, with the Manthey Racing MR kit. Curated first as the 2019 718 Clubsport of the 982 generation, which was wrong: the Extended Car Info spreadsheet this record was imported from carried the wrong year, and its author has since corrected it, noting that AMS2's interior matches the previous version. The simulator said so all along - AMS2 names the car \"Porsche Cayman GT4 Clubsport MR\" without the \"718\" that marks the 982. The error surfaced when Assetto Corsa EVO's 718 Clubsport turned out to model a different steering wheel and dash; that is a different real car and wants its own record rather than a second entry here."
+    "real_world_identity_notes": "Customer racing Cayman GT4 Clubsport of the 981 generation, model year 2016, with the Manthey Racing MR kit. Curated first as the 2019 718 Clubsport of the 982 generation, which was wrong: the Extended Car Info spreadsheet this record was imported from carried the wrong year, and its author has since corrected it, noting that AMS2's interior matches the previous version. The simulator said so all along - AMS2 names the car \"Porsche Cayman GT4 Clubsport MR\" without the \"718\" that marks the 982. Assetto Corsa EVO's 718 Clubsport is that later car and wants its own record rather than a second entry here.\n\nThe MR kit leaves the powertrain alone, and the basis for saying so is the series regulations rather than a Manthey statement: Porsche Sprint Challenge gives the base 981 Clubsport MY2016 and the 981 Clubsport MR MY2016 one shared engine and one shared six-speed PDK with identical ratios. Manthey's own kit list adds suspension, aerodynamics, bodywork, fuel system, electronics and safety equipment, and includes no engine or gearbox modification."
   },
   "authentic_controls": {
     "transmission": {
       "forward_gears": 6,
-      "gearbox_type": "unknown",
+      "gearbox_type": "dual-clutch",
       "shift_actuation": "sequential-paddles",
       "shift_pattern": "sequential",
       "upshift": {
@@ -33,7 +33,7 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "not-required"
     },
     "steering": {
       "wheel_rim": {
@@ -41,16 +41,16 @@
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "no",
-        "source_label": "live-cockpit-observation",
-        "notes": "Re-observed in the AMS2 cockpit as a conventional rim flattened at the bottom, which is d-shaped in this project's vocabulary; it was first recorded as round. It is a conventional rim rather than a control-panel one, and flattening alone never makes a rim gt-formula. This describes the 981 cockpit AMS2 models. No reviewed source establishes the real car's rim."
+        "source_label": "homologation-dashboard-photograph",
+        "notes": "A continuous conventional rim flattened at the bottom and closed over the top, with conventional spokes and a few buttons: d-shaped in this project's vocabulary. It is not a control-panel rim - there is no control face spanning two dedicated hand grips - and flattening alone never makes a rim gt-formula. Read from the complete dashboard photograph on page 88 of the MR's homologation dossier, which is this exact car including the kit's added wheel controls. Porsche's motorsport display elements are in the dashboard cluster rather than on the rim."
       }
     },
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "AMS2 1.6.9.91 nonetheless required clutch input to move off. That is recorded as an explicit simulator override, so the in-sim guidance tells the driver to use the clutch while the record keeps the real car's value.",
       "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip.",
-      "AMS2 models the 2016 Clubsport of the 981 generation. The record first described the 2019 718 of the 982 generation, and the gearbox construction and standing-start clutch were inherited from that car's manufacturer material. Both are now unknown and need sources for the 981.",
-      "AMS2 requires clutch input to move off, which the guided drive established and an override records. Whether the real car has a clutch pedal at all depends on its gearbox, which is no longer established, so the override no longer claims to be a deviation from a known real-car value."
+      "The real-car fields were withdrawn when the generation error was found and are restored here on 981 evidence. They came back to the same values - six-speed dual clutch, no clutch pedal - because both generations use a six-speed PDK, which is exactly why the error survived so long. The record now rests on sources about the car AMS2 models rather than on a coincidence.",
+      "AMS2 requires clutch input to move off, which the real car cannot: its clutches are worked by the gearbox control unit and there is no third pedal. That is a genuine simulator departure and stays recorded as an override."
     ]
   },
   "simulators": [
@@ -139,7 +139,6 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
         ],
         "source_refs": [
@@ -160,20 +159,69 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "porsche.981-gt4-clubsport.vehicle-description-2016",
+          "porsche.981-gt4-clubsport.world-premiere",
+          "porsche.sprint-challenge-regulations.2021",
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Porsche's vehicle description for the 981 Clubsport, model year 2016, specifies a \"Rigidly mounted six-speed PDK-gearbox (DCT, dual clutch transmission)\" on page 2, and the launch release independently describes a modified six-speed double-clutch transmission with steering-wheel paddles. The Sprint Challenge regulations carry the MR under the same power-transmission heading as the base car on page 47 with identical ratios, which is what extends the specification to this car rather than an assumption that the kit changes nothing. The guided drive counted six paddle-selected gears. Falsified by 981 material specifying a different gearbox, or by regulations separating the MR from the base car."
+      },
+      {
+        "paths": [
           "/authentic_controls/transmission/standing_start_clutch"
         ],
         "source_refs": [
-          "ams2.coanda-sheet-thread.cayman-gt4-clubsport-year"
+          "porsche.981-gt4-clubsport.nat-gt4-024-homologation",
+          "road-and-track.981-gt4-clubsport.first-drive-2016"
         ],
-        "confidence": "unknown",
-        "basis": "Both were inherited from the wrong generation. Porsche's 718 launch material specifies a six-speed dual-clutch PDK for the 982, and the record reasoned from it that a PDK has no clutch pedal so a standing start needs none. Neither reaches the 981 this simulator models, and neither is observable in a drive: a guided drive sees how a driver asks for a gear, not how the gearbox is built, and AMS2's demand for clutch input is what the simulator does rather than what the car requires. Established by material for the 2016 Clubsport - the Manthey technical manual of that year is the likeliest source."
+        "confidence": "high",
+        "basis": "The MR's homologation dossier records \"Clutch control system: GEARBOX CONTROL UNIT\" on page 59 and a hydraulically actuated, normally-open dual clutch, so the clutches are worked by the gearbox ECU rather than by a driver, and a contemporary Road & Track first drive describes the car as running \"without a third pedal\". Short of verified because no manufacturer source states the absence of a clutch pedal or documents a standing-start procedure: the direct statement is a road test. Falsified by Porsche or Manthey material showing a clutch pedal in the footwell or describing a clutch-operated start."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/open_top"
+        ],
+        "source_refs": [
+          "porsche.981-gt4-clubsport.nat-gt4-024-homologation",
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The complete dashboard photograph on page 88 of the MR's homologation dossier shows the whole steering-wheel face: a continuous conventional rim, visibly flattened at the bottom and closed over the top, with conventional spokes rather than a control face spanning two hand grips. That is d-shaped, and the AMS2 cockpit agrees. Short of verified because it is read from a photograph rather than stated in prose. Falsified by a clearer view of the same car showing molded grips and a control face, which would make it gt-formula."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "porsche.981-gt4-clubsport.nat-gt4-024-homologation",
+          "porsche.981-gt4-clubsport.vehicle-description-2016",
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Neither is visible on the wheel face in the homologation photograph, and Porsche's vehicle description places the GT4 instrument cluster's motorsport display elements in the dashboard rather than on the rim. The AMS2 cockpit shows the same. Held at medium because this is an absence in a photograph: no reviewed source writes that the wheel carries no display or shift lights, and the MR kit does add controls to the wheel, so a later specification could differ. Falsified by a photograph or parts list showing a wheel-mounted display or shift-light array on this car."
       }
     ]
   },
   "archetype": {
-    "classification": "undetermined",
-    "basis": "Five archetypes survive the gaps, and that is the cost of the correction made visible. The record used to deviate from one mechanism because Porsche's 718 material named a dual-clutch PDK and the reasoning that a PDK has no clutch pedal settled the standing start. That material describes the 982; AMS2 models the 2016 Clubsport of the 981 generation, so both values came out and three fields are now open together: gearbox_type, standing_start_clutch and throttle_lift.\n\nWhat survives is every six-speed paddle mechanism with an automatic cut and blip - sequential, semi-automatic and dog box, each with and without a clutch from rest. One source for the 981's gearbox would close most of them at once, because the construction and the clutch pedal travel together on a car of this kind."
+    "archetype_id": "paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "Six forward gears where the archetype has seven. The construction is the archetype's - Porsche's own vehicle description for the 981 Clubsport specifies a six-speed PDK dual clutch - and no six-speed dual-clutch archetype is registered, so this deviates on the gear count rather than crossing to a sequential archetype that would misdescribe the gearbox. That is the settled preference: a gear-count deviation over a technique or construction one."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "Whether the car needs a throttle lift on upshifts is not established. The AMS2 drive predates the two-stage upshift test, so it recorded that a clutchless upshift worked without recording whether full throttle was refused first. A re-drive on the current client settles it, and the Assetto Corsa EVO drive of the 718 already answers it for that car."
+      }
+    ]
   },
   "updated_at": "2026-08-17"
 }

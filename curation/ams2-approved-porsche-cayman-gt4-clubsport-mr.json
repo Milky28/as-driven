@@ -12,7 +12,7 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "unknown",
+    "standing_start_clutch": "not-required",
     "throttle_lift": "unknown",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
@@ -23,6 +23,6 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Controls were directly observed with assists disabled. The record was approved as the 2019 718 Clubsport and is corrected to the 2016 Clubsport of the 981 generation, on the spreadsheet author's own correction of the year. Porsche's and Manthey's 718 material no longer supports this record: the gearbox construction and the standing-start clutch rested on it and are now unknown. The rim is corrected from round to d-shaped, a conventional rim flattened at the bottom. The simulator's demand for clutch input at a standing start is still carried as a sourced override.",
+  "confidence_notes": "Controls were directly observed with assists disabled. The record was approved as the 2019 718 Clubsport and is corrected to the 2016 Clubsport of the 981 generation, on the spreadsheet author's own correction of the year. The real-car fields are re-established on 981 material: Porsche's vehicle description and launch release for the six-speed PDK, the Sprint Challenge regulations for carrying that specification to the MR, the MR's homologation dossier for the gearbox-controlled clutch and the steering wheel, and a contemporary road test for the absent third pedal. The rim is d-shaped, a conventional rim flattened at the bottom. AMS2's demand for clutch input at a standing start is a genuine departure from a car with no clutch pedal and stays as a sourced override.",
   "scope_notes": "Single exact identity from one guided-verification drive."
 }

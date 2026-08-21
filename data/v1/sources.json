@@ -4250,6 +4250,18 @@
       "notes": "Manthey Racing's MR kit for the 718 Cayman GT4 Clubsport. The kit revises aerodynamics and suspension and makes no powertrain change, so the six-speed PDK of the base Clubsport is retained."
     },
     {
+      "source_id": "manthey.981-gt4-clubsport-mr.brochure-2016",
+      "title": "Porsche Cayman GT4 Clubsport MR (981), model year 2016 - Manthey brochure",
+      "publisher": "Manthey Racing",
+      "url": "https://porschecarshistory.com/wp-content/old/brochures4/58/2016%20981GT4CSMR.pdf",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Manthey's own brochure for the 981-based MR, consulted through a third-party host. Printed pages 6-9 itemise the MR vehicle and the retrofit kit: two-way racing suspension, adjustable front anti-roll bar, larger rear wing with reinforced adjustable supports, driveshaft spacer, brake-balance adjustment, carbon bonnet and doors, polycarbonate glazing, a 100-litre fuel system with rapid filling, a steering-wheel hub extension with additional wheel controls, a CAN gateway and data-logger interface, safety equipment, and an optional lightweight battery. The list contains no engine or gearbox modification, and Manthey's technical manual for the same car has no engine or gearbox conversion section - but neither states in words that the powertrain is unchanged. The kit does add controls to the wheel, which is why the rim's fittings are read from the homologation photograph of this exact car rather than from the base Clubsport."
+    },
+    {
       "source_id": "maserati.gransport.brochure",
       "title": "Maserati GranSport brochure",
       "publisher": "Maserati",
@@ -4587,6 +4599,54 @@
       "notes": "Official Porsche Motorsport page for the 963 LMDh (Porsche 9RD V8, spec Xtrac seven-speed, 2023 debut). Used for real-world identity context."
     },
     {
+      "source_id": "porsche.981-gt4-clubsport.nat-gt4-024-homologation",
+      "title": "Homologation form Nat-GT4-024: Porsche Cayman GT4 Clubsport MR (981)",
+      "publisher": "Porsche / national GT4 homologation",
+      "url": "https://porschecup.ru/wp-content/uploads/2020/06/PA10_0701_2020_Tech_Info_981_GT4_CS_Homologation_information_en.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "The MR's own homologation dossier. Page 59 of 97 records \"Clutch control system: GEARBOX CONTROL UNIT\" and identifies a hydraulically actuated, normally-open dual clutch, so the clutches are worked by the gearbox ECU rather than by a driver. Page 88 of 97 carries a complete dashboard photograph showing the whole steering-wheel face: a continuous conventional rim, visibly flattened at the bottom, closed over the top, with conventional spokes and a few buttons, no control face spanning two dedicated hand grips, no wheel-mounted display and no wheel-mounted shift lights. The dossier does not state in prose whether a clutch pedal is fitted, and the absent wheel electronics are an absence in a photograph rather than a written negative."
+    },
+    {
+      "source_id": "porsche.981-gt4-clubsport.vehicle-description-2016",
+      "title": "Porsche Cayman GT4 Clubsport (Typ 981), Model Year 2016 - vehicle description",
+      "publisher": "Dr. Ing. h.c. F. Porsche AG",
+      "url": "https://porschecarshistory.com/wp-content/old/brochures3/87/2016%20GT4%20Clubsport%20-%20Vehicle%20description.pdf",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Porsche's own vehicle description for the 981 Clubsport, titled for model year 2016, consulted through a third-party host. Page 2 specifies a \"Rigidly mounted six-speed PDK-gearbox (DCT, dual clutch transmission)\". Page 3 names an Alcantara motorsport steering wheel with paddles and page 6 a GT4 instrument cluster with motorsport display elements - the display instrumentation is in the dashboard cluster, not carried on the rim. It does not state whether a clutch pedal is fitted."
+    },
+    {
+      "source_id": "porsche.981-gt4-clubsport.world-premiere",
+      "title": "Porsche Cayman GT4 Clubsport world premiere, Los Angeles Auto Show",
+      "publisher": "Porsche Newsroom",
+      "url": "https://newsroom.porsche.com/en/products/porsche-cayman-gt4-clubsport-world-premiere-los-angeles-auto-show-12021.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Official launch release for the 981 Cayman GT4 Clubsport, describing a modified six-speed Porsche double-clutch transmission operated by steering-wheel paddles. Independent of the vehicle description and agrees with it. Not to be confused with the 718 Clubsport launch of 2019, which is a different generation and is registered separately."
+    },
+    {
+      "source_id": "porsche.sprint-challenge-regulations.2021",
+      "title": "Porsche Sprint Challenge Scandinavia - Sporting and Technical Regulations, 2021 Edition 01",
+      "publisher": "Porsche Sprint Challenge Scandinavia",
+      "url": "https://www.sprintchallenge.se/app/uploads/2021/01/PSCS-Sporting-Technical-Regulations-2021-Edition-01.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Series regulations that treat the 981 Clubsport MY2016 and the 981 Clubsport MR MY2016 as one specification. Page 47 puts both under a shared power-transmission heading specifying \"Six-speed Porsche Doppelkupplung (PDK)\" with identical ratios, and pages 43-44 give both the same 385 hp engine. The 982 cars are listed separately immediately afterwards. This is what establishes that the MR kit leaves the powertrain of the base car alone: the regulations specify one gearbox for both, rather than any source saying the kit changes nothing."
+    },
+    {
       "source_id": "raceart.gillet-vertigo",
       "title": "Gillet Vertigo - only remaining FIA GT chassis",
       "publisher": "RaceArt",
@@ -4729,6 +4789,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Documented chassis history and cockpit photography used as visual evidence for a round racing wheel. The restored early chassis does not by itself establish every late privateer detail."
+    },
+    {
+      "source_id": "road-and-track.981-gt4-clubsport.first-drive-2016",
+      "title": "Porsche Cayman GT4 Clubsport first drive",
+      "publisher": "Road & Track",
+      "url": "https://www.roadandtrack.com/new-cars/first-drives/a29246/porsche-cayman-gt4-clubsport-review/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Contemporary first drive of the 981 Clubsport, describing the car as operating \"without a third pedal\". This is the only reviewed source that states the absence of a clutch pedal directly; neither Porsche nor Manthey writes it, and neither documents a standing-start procedure."
     },
     {
       "source_id": "sadev.sigma-p1-g5-evo",

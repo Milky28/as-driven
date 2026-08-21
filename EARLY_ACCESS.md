@@ -11,7 +11,7 @@ data.
 - Windows with SimHub 9.11.22;
 - Automobilista 2 executable version 1.6.9.91;
 - As Driven SimHub client 0.17.0;
-- As Driven dataset 0.4.3 and schema v1.
+- As Driven dataset 0.4.4 and schema v1.
 
 Newer SimHub or AMS2 versions may work, but have not been certified for this
 release. The overlay always displays the exact game version associated with a

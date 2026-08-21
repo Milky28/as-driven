@@ -141,18 +141,19 @@ class SiteTests(unittest.TestCase):
         # detail panel and must not leak into the row.
         self.assertEqual(diablo_car["launch"][0], "Clutch required")
 
-        # An override does not need an established real value underneath it. The
-        # Cayman's was withdrawn when the record turned out to describe the wrong
-        # generation, and the simulator's demand still has to reach the driver -
-        # otherwise the page says nothing about a game that will refuse to move.
+        # A second car, because the two differ in kind. The Diablo's override
+        # softens what the driver must do; this one adds a requirement the real
+        # car has no pedal for, and a reader told only the real answer would be
+        # told nothing about a game that will refuse to move.
         cayman_car = by_name["Porsche Cayman GT4 Clubsport MR"]
         cayman = next(
             simulator for simulator in cayman_car["simulators"]
             if simulator["id"] == "ams2"
         )["differences"][0]
         self.assertEqual(cayman["name"], "Pulling away")
-        self.assertEqual(cayman["real"], "Not established")
+        self.assertEqual(cayman["real"], "No clutch needed")
         self.assertEqual(cayman["sim"], "Clutch required")
+        self.assertEqual(cayman_car["launch"][0], "No clutch needed")
 
     def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
         # The Milano's override is the clutch on a downshift, which the table
