@@ -105,6 +105,42 @@
         "level": "high",
         "basis": "Exact identity and most user-facing controls were directly verified; manufacturer lineage supports the six-speed paddle-sequential architecture. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation."
       }
+    },
+    {
+      "simulator": "ac-evo",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Audi R8 LMS GT3 Evo II"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC-EVO 0.8.1 via guided verification observation ac-evo.audi-r8-lms-gt3-evo-ii.20260821t044035209z-f4353d69 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "0.8.1",
+      "verified_at": "2026-08-21",
+      "source_refs": [
+        "ams2.reiza-release.1.6.3.new-cars",
+        "audi.r8-lms-gt3-evo2.release",
+        "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Controls directly observed in a guided Assetto Corsa EVO drive with automatic clutch and shifting disabled, agreeing with the curated AMS2 drive on every field both established."
+      }
     }
   ],
   "provenance": {
@@ -174,6 +210,28 @@
         ],
         "confidence": "medium",
         "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.new-cars",
+          "audi.r8-lms-gt3-evo2.release",
+          "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Assetto Corsa EVO reports the car as \"Audi R8 LMS GT3 Evo II\", which differs only in the case of \"Evo\" from the AMS2 name for the same car and is recorded as its own identity rather than assumed to match."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -185,5 +243,5 @@
     "Low Downforce is an explicit inherited alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-21"
 }

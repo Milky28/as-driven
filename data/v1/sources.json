@@ -5545,6 +5545,18 @@
       "retrieved_at": "2026-08-21",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ac-evo.caterham-academy.20260821t041640059z-eaf15a20 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1",
+      "title": "Live AC-EVO Audi R8 LMS GT3 Evo II guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-early-access-0-7-now-available/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.audi-r8-lms-gt3-evo-ii.20260821t044035209z-f4353d69 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }
