@@ -40,15 +40,16 @@
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "unknown",
-        "open_top": "yes",
-        "source_label": "live-cockpit-open-top-no-display",
-        "notes": "Direct AMS2 cockpit inspection showed an open-top racing rim without an integrated display; exact diameter remains unknown."
+        "open_top": "no",
+        "source_label": "live-cockpit-gt-closed-no-display",
+        "notes": "Direct cockpit inspection in two simulators shows a GT rim closed over the top, without an integrated display; exact diameter remains unknown. The AMS2 observation first recorded this rim as open-topped, which was wrong: the first Assetto Corsa EVO drive of the same car showed it closed, and re-checking AMS2 confirmed the original reading rather than a difference between the games. No override is written because there is no deviation - both model the same rim."
       }
     },
     "notes": [
       "With Auto Clutch disabled, the car moved from rest without physical clutch input. The underlying simulator mechanism was not established.",
       "All six paddle-selected forward gears accepted clutch-free full-throttle upshifts without driver lift, with automatic cut perceptible.",
-      "Clutch-free downshifts were accepted with no driver throttle input, and automatic blip was directly visible as a throttle-display spike."
+      "Clutch-free downshifts were accepted with no driver throttle input, and automatic blip was directly visible as a throttle-display spike.",
+      "The rim's top was corrected from open to closed. A second simulator is what found it: `gt-formula` implies nothing about the top, so an open-top value contradicted no rule and validated cleanly, and no amount of checking this record against itself would have surfaced it. It took another game modelling the same car."
     ]
   },
   "simulators": [
@@ -71,8 +72,8 @@
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "no",
-          "open_top": "yes",
-          "source_label": "live-cockpit-open-top-no-display"
+          "open_top": "no",
+          "source_label": "live-cockpit-gt-closed-no-display"
         },
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
@@ -144,7 +145,7 @@
           "ams2.local-live-lamborghini-huracan-super-trofeo-evo2-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Direct cockpit inspection classified the open-top no-display rim as GT-style in the project vocabulary."
+        "basis": "Direct cockpit inspection classified a closed-top, no-display rim as GT-style in the project vocabulary. The top was corrected after a second simulator's drive of the same car disagreed and a re-check of AMS2 showed the first reading was the error. Falsified by a cockpit view, in either game, showing rim material absent over the top."
       }
     ]
   },
