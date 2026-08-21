@@ -79,6 +79,7 @@ docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
 docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
 docs/simhub-roadmap.md       Reference-client design and remaining roadmap
 docs/releasing.md            Early-access build, QA, and publishing process
+docs/plugin-distribution.md  Single-DLL drop-in question and what it would cost
 simhub/                      .NET lookup library, plugin adapter, and diagnostics
 release/                     Independent database-release packaging
 ```
