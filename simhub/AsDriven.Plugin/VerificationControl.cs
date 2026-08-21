@@ -94,6 +94,36 @@ namespace AsDriven.Plugin
             UpdateLiveAvailability();
         }
 
+        /// <summary>
+        /// The car and its class, with the class left out when the simulator
+        /// reports none. Assetto Corsa EVO groups no cars, and printing the word
+        /// "unknown" there read as a fault in the capture rather than as
+        /// something the game does not publish.
+        /// </summary>
+        private static string DescribeLiveCarName(VerificationCaptureContext live)
+        {
+            return string.IsNullOrWhiteSpace(live.TelemetryClass)
+                    || live.TelemetryClass == "unknown"
+                ? live.TelemetryName
+                : live.TelemetryName + " - " + live.TelemetryClass;
+        }
+
+        /// <summary>
+        /// The live car as the capture line names it, with the simulator and its
+        /// build. Assetto Corsa EVO ships an executable with no version resource,
+        /// so the plugin has no build to report there and says so rather than
+        /// showing a gap the reader would take for a fault.
+        /// </summary>
+        private static string DescribeLiveCar(VerificationCaptureContext live)
+        {
+            string car = DescribeLiveCarName(live);
+            string version =
+                string.IsNullOrWhiteSpace(live.GameVersion) || live.GameVersion == "unknown"
+                    ? "version not reported"
+                    : live.GameVersion;
+            return car + " (" + live.SimulatorDisplayName + ", " + version + ")";
+        }
+
         internal void UpdateLiveAvailability()
         {
             VerificationCaptureContext live = _plugin.CaptureVerificationContext();
@@ -105,8 +135,7 @@ namespace AsDriven.Plugin
             }
             _liveAvailability.Text = live == null
                 ? "Waiting for a live car. Start the simulator and load a car first."
-                : "Ready to capture: " + live.TelemetryName + " - " + live.TelemetryClass
-                    + " (" + live.SimulatorDisplayName + " " + live.GameVersion + ")";
+                : "Ready to capture: " + DescribeLiveCar(live);
             _liveAvailability.Foreground = live == null ? Brushes.Goldenrod : Brushes.LightGreen;
 
             GuidedDriveSnapshot guided = _plugin.GetGuidedDriveSnapshot();
@@ -118,9 +147,8 @@ namespace AsDriven.Plugin
                     if (_capture != null)
                     {
                         ResetForm();
-                        _capturedIdentity.Text = "Captured: " + _capture.TelemetryName + " - "
-                            + _capture.TelemetryClass + " | " + _capture.SimulatorDisplayName + " "
-                            + _capture.GameVersion + " | " + _capture.ClientVersion;
+                        _capturedIdentity.Text = "Captured: " + DescribeLiveCar(_capture)
+                            + " | " + _capture.ClientVersion;
                         _save.IsEnabled = true;
                     }
                 }
@@ -165,7 +193,7 @@ namespace AsDriven.Plugin
             _save.IsEnabled = false;
             SetReviewVisibility(false);
             _capturedIdentity.Text = "Ready for a new verification: "
-                + live.TelemetryName + " - " + live.TelemetryClass + ".";
+                + DescribeLiveCarName(live) + ".";
             SetStatus(
                 "A different live car was detected. Capture the current car to begin a fresh draft.",
                 Brushes.LightGreen,
@@ -194,9 +222,8 @@ namespace AsDriven.Plugin
             _guidedDriveStarted = false;
             ResetForm();
             SetReviewVisibility(true);
-            _capturedIdentity.Text = "Captured: " + live.TelemetryName + " - "
-                + live.TelemetryClass + " | " + live.SimulatorDisplayName + " " + live.GameVersion + " | "
-                + live.ClientVersion;
+            _capturedIdentity.Text = "Captured: " + DescribeLiveCar(live)
+                + " | " + live.ClientVersion;
             _save.IsEnabled = true;
             SetStatus(live.SuggestedForwardGears.HasValue
                 ? "Verification started. SimHub suggested " + live.SuggestedForwardGears.Value
