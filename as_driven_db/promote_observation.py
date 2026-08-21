@@ -268,6 +268,44 @@ def _control_differences(existing: dict[str, Any], incoming: dict[str, Any]) -> 
     return differences
 
 
+def _redirect_to_existing_record(
+    bundle: dict[str, Any], entry: dict[str, Any], data_directory: Path
+) -> dict[str, Any]:
+    """Point a drive at the curated record for the same real car.
+
+    A bundle's record id is slugged from the telemetry name, so two simulators
+    agree on it only when they spell the car the same way. They usually do not:
+    Assetto Corsa EVO calls the Huracan one-make car "Lamborghini Huracan ST
+    EVO2" where AMS2 calls it "Lamborghini Huracan Super Trofeo EVO2", which
+    slug to different ids for the same real car.
+
+    Left alone that forks a second record, which is the one outcome the
+    cross-simulator design exists to prevent - and it forks silently, because
+    both records are individually valid. So a review entry may name a different
+    record id from the bundle's, meaning "this drive belongs to that car".
+
+    It only ever redirects onto a record that already exists. A name that
+    matches nothing is still an error, so a typo cannot quietly mint a record
+    whose id has no relation to what any simulator calls the car.
+    """
+    derived_id = bundle["record"]["record_id"]
+    target_id = entry.get("record_id")
+    if not target_id or target_id == derived_id:
+        return bundle
+    if not (data_directory / "cars" / f"{target_id}.json").exists():
+        raise ValueError(
+            f"review entry {target_id!r}: the bundle is for {derived_id!r} and no curated "
+            f"record {target_id!r} exists to merge into. A review entry may name a "
+            "different record only to add this drive to the car already curated under "
+            "that id; to promote a new car, name the id the bundle derived."
+        )
+    bundle = json.loads(json.dumps(bundle))
+    bundle["record"]["record_id"] = target_id
+    if "record_id" in bundle.get("approval", {}):
+        bundle["approval"]["record_id"] = target_id
+    return bundle
+
+
 def merge_simulator_entry(
     existing: dict[str, Any], incoming: dict[str, Any], *, label: str
 ) -> dict[str, Any]:
@@ -342,6 +380,7 @@ def promote_observations(
     for entry in review["records"]:
         bundle_path = root / entry["bundle"]
         bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        bundle = _redirect_to_existing_record(bundle, entry, data_directory)
         entry = dict(entry, **{"class": resolve_class(entry, bundle, curation_directory)})
         record, approval, source = build_promoted_record(
             bundle, entry, approved_at=approved_at
