@@ -786,6 +786,31 @@ class ValidationTests(unittest.TestCase):
                 )
             )
 
+    def test_an_undetected_game_version_cannot_reach_a_curated_record(self) -> None:
+        """"unknown" is what the plugin writes when it cannot read a version.
+
+        Assetto Corsa EVO exposes none anywhere on disk - its executable has no
+        version resource at all - so the first AC EVO drive logged
+        `game_version: "unknown"` while the game's own settings screen said
+        0.8.1. A draft may carry that honestly; a curated record may not, because
+        an observation is only reproducible against an exact build. Only "latest"
+        was refused before, so "unknown" would have been curated silently.
+        """
+        for value in ("unknown", "UNKNOWN", "  ", "latest"):
+            with tempfile.TemporaryDirectory() as temp:
+                temp_root = self._copy_repository_data(Path(temp))
+                path = temp_root / "data" / "v1" / "cars" / "audi-r8-lmp1.json"
+                record = json.loads(path.read_text(encoding="utf-8"))
+                record["simulators"][0]["verified_game_version"] = value
+                path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+                self.assertTrue(
+                    any(
+                        "verified_game_version cannot be" in error
+                        for error in validate_repository(temp_root)
+                    ),
+                    f"{value!r} was accepted as a game version",
+                )
+
     def test_the_aero_suffix_table_and_the_schema_enum_say_the_same_thing(self) -> None:
         """Two lists that must agree, with nothing making them agree.
 

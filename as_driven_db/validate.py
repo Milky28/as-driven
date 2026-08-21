@@ -404,8 +404,20 @@ def _validate_record(
             elif sim_name in seen_simulators:
                 errors.append(f"{sim_label}: duplicate simulator {sim_name!r}")
             seen_simulators.add(sim_name)
-            if simulator["verified_game_version"].lower() == "latest":
-                errors.append(f"{sim_label}: verified_game_version cannot be 'latest'")
+            # "latest" moves under the record; "unknown" is what the plugin
+            # writes when it cannot read a version off a running process, and at
+            # least one simulator - Assetto Corsa EVO - exposes none anywhere on
+            # disk. A draft may carry that honestly, but a curated record may
+            # not: an observation is only reproducible against an exact build,
+            # so the reviewer has to supply the version the game itself shows.
+            game_version = simulator["verified_game_version"].strip().lower()
+            if game_version in ("latest", "unknown", ""):
+                errors.append(
+                    f"{sim_label}: verified_game_version cannot be "
+                    f"{simulator['verified_game_version']!r}; record the exact build the "
+                    "simulator reports, which for a game that exposes no version to the "
+                    "plugin is the one shown on its own settings screen"
+                )
             if not _valid_date(simulator["verified_at"]):
                 errors.append(f"{sim_label}: verified_at must be an ISO date")
             _source_refs(simulator["source_refs"], source_ids, sim_label, errors)

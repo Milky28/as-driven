@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 from as_driven_db.importers.observation import import_observation
-from as_driven_db.promote_observation import promote_observations
+from as_driven_db.promote_observation import promote_observations, resolve_class
 from as_driven_db.validate import validate_repository
 
 
@@ -213,6 +213,56 @@ class PromoteObservationTests(unittest.TestCase):
             with self.assertRaises(ValueError) as caught:
                 self._promote(temp, self._manifest(entry))
             self.assertIn("class", str(caught.exception))
+
+    def test_a_simulator_with_no_class_says_so_instead_of_sending_the_reviewer_hunting(
+        self,
+    ) -> None:
+        """Assetto Corsa EVO reports an empty class through SimHub.
+
+        Observed on the first AC EVO drive: the Huracan Super Trofeo logged
+        `car_class: ""` where AMS2 gives "Super Trofeo". With no class token
+        there is nothing to key a name on, so the standing advice - add a row to
+        the class-names file - sends the reviewer looking for a row they cannot
+        write. The advice has to change with the situation.
+        """
+        bundle = {
+            "record": {
+                "record_id": "huracan-under-test",
+                "simulators": [
+                    {
+                        "simulator": "ac-evo",
+                        "identities": [
+                            {"kind": "telemetry-name", "value": "Lamborghini Huracan ST EVO2"}
+                        ],
+                    }
+                ],
+            }
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(ValueError) as caught:
+                resolve_class({}, bundle, Path(directory))
+        message = str(caught.exception)
+        self.assertIn("reports no class", message)
+        self.assertIn("Set 'class' on this entry", message)
+        self.assertNotIn("car-select screen", message)
+
+    def test_a_missing_class_name_still_points_at_the_class_map(self) -> None:
+        """The other branch keeps its own advice: here there is a token to key on."""
+        bundle = {
+            "record": {
+                "record_id": "car-under-test",
+                "simulators": [
+                    {
+                        "simulator": "ams2",
+                        "identities": [{"kind": "class-id", "value": "NEVER_SEEN"}],
+                    }
+                ],
+            }
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(ValueError) as caught:
+                resolve_class({}, bundle, Path(directory))
+        self.assertIn("car-select screen", str(caught.exception))
 
     def test_promoted_class_is_the_reviewers_not_the_drafts(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

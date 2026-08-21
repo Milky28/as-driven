@@ -232,6 +232,17 @@ def resolve_class(entry: dict[str, Any], bundle: dict[str, Any], curation_direct
         name = known.get((simulator, class_id))
         if name:
             return name
+    if not class_ids:
+        # Not every simulator groups its cars. Assetto Corsa EVO reports an empty
+        # class through SimHub, so there is no token to key a name on and the
+        # class-names file cannot help - pointing the reviewer at it would send
+        # them looking for something that does not exist.
+        raise ValueError(
+            f"review entry {bundle['record']['record_id']}: {simulator} reports no class "
+            "for this car, so there is nothing to look up. Set 'class' on this entry to "
+            "the category the car actually raced in - it is identity context for a real "
+            f"car, not a simulator token, so curation/{CLASS_NAMES} does not apply."
+        )
     raise ValueError(
         f"review entry {bundle['record']['record_id']}: no class name for "
         f"{simulator} {class_ids!r}. Add it once to curation/{CLASS_NAMES} - it is "

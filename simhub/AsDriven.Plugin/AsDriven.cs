@@ -1116,6 +1116,28 @@ namespace AsDriven.Plugin
             return string.IsNullOrWhiteSpace(rawGameName) ? "Simulator" : rawGameName;
         }
 
+        /// <summary>
+        /// The processes whose file version states a simulator's build.
+        ///
+        /// Not every simulator answers this way. Assetto Corsa EVO ships an
+        /// executable with no version resource at all - the file reports 0.0.0.0
+        /// and its only versioned DLL belongs to middleware - so the version a
+        /// driver reads on its settings screen exists nowhere on disk. It is
+        /// deliberately absent from this table rather than given a process that
+        /// would return a middleware version or a Steam build id: a wrong exact
+        /// answer is worse here than an admitted gap, and validation refuses to
+        /// curate a record whose verified_game_version is "unknown", so the
+        /// reviewer has to supply the real one before anything is promoted.
+        /// </summary>
+        private static string[] VersionProcessNames(string simulator)
+        {
+            switch (simulator)
+            {
+                case "ams2": return new[] { "AMS2AVX", "AMS2" };
+                default: return new string[0];
+            }
+        }
+
         private string DetectGameVersion(string gameName)
         {
             if (string.Equals(_detectedVersionGame, gameName, StringComparison.Ordinal)
@@ -1126,12 +1148,14 @@ namespace AsDriven.Plugin
 
             _detectedVersionGame = gameName;
             _detectedGameVersion = "unknown";
-            if (AsDrivenDatabase.CanonicalizeSimulator(gameName) != "ams2")
+            string[] processNames = VersionProcessNames(
+                AsDrivenDatabase.CanonicalizeSimulator(gameName));
+            if (processNames.Length == 0)
             {
                 return _detectedGameVersion;
             }
 
-            foreach (string processName in new[] { "AMS2AVX", "AMS2" })
+            foreach (string processName in processNames)
             {
                 Process[] processes = null;
                 try
