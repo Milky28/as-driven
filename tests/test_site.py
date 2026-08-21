@@ -126,22 +126,33 @@ class SiteTests(unittest.TestCase):
         by_name = {car["name"]: car for car in differing}
         # Rendered in the page's own words rather than as raw enum values, and
         # in both directions, so the reader can see which is which.
-        cayman_car = by_name["Porsche Cayman GT4 Clubsport MR"]
-        cayman_view = next(
-            simulator for simulator in cayman_car["simulators"]
+        diablo_car = by_name["Lamborghini Diablo SV-R"]
+        diablo_view = next(
+            simulator for simulator in diablo_car["simulators"]
             if simulator["id"] == "ams2"
         )
-        cayman = cayman_view["differences"][0]
-        self.assertEqual(cayman["name"], "Pulling away")
-        self.assertEqual(cayman["real"], "No clutch needed")
-        self.assertEqual(cayman["sim"], "Clutch required")
-        self.assertTrue(cayman["why"])
+        diablo = diablo_view["differences"][0]
+        self.assertEqual(diablo["name"], "Downshift")
+        self.assertEqual(diablo["real"], "Blip optional")
+        self.assertEqual(diablo["sim"], "Blip to rev-match")
+        self.assertTrue(diablo["why"])
 
         # The table above still states the real car; the override belongs to the
         # detail panel and must not leak into the row.
-        self.assertEqual(
-            cayman_car["launch"][0], "No clutch needed"
-        )
+        self.assertEqual(diablo_car["launch"][0], "Clutch required")
+
+        # An override does not need an established real value underneath it. The
+        # Cayman's was withdrawn when the record turned out to describe the wrong
+        # generation, and the simulator's demand still has to reach the driver -
+        # otherwise the page says nothing about a game that will refuse to move.
+        cayman_car = by_name["Porsche Cayman GT4 Clubsport MR"]
+        cayman = next(
+            simulator for simulator in cayman_car["simulators"]
+            if simulator["id"] == "ams2"
+        )["differences"][0]
+        self.assertEqual(cayman["name"], "Pulling away")
+        self.assertEqual(cayman["real"], "Not established")
+        self.assertEqual(cayman["sim"], "Clutch required")
 
     def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
         # The Milano's override is the clutch on a downshift, which the table

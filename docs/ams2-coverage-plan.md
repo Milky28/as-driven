@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.4.2 contains 242 curated records. The identity inventory contains 333
+Dataset 0.4.3 contains 242 curated records. The identity inventory contains 333
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy
@@ -158,7 +158,7 @@ Dataset 0.3.42 completed the aero identities for the classes that offer more
 than one package: twenty observed directly, and forty-two derived by a reviewer
 from each car's observed high-downforce name and marked as derived.
 
-Dataset 0.4.2 replaced all of that with a declaration. A record names its base
+Dataset 0.4.3 replaced all of that with a declaration. A record names its base
 telemetry name once and lists the packages it covers, and the exact spellings are
 produced when the database is read. Nothing is derived by hand any more, so the
 forty-two derived identities and the approvals disclosing them are gone; what

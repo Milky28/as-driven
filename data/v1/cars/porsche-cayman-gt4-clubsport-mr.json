@@ -7,16 +7,16 @@
     "manufacturer": "Porsche",
     "model": "718 Cayman GT4 Clubsport MR",
     "year": {
-      "from": 2019,
-      "label": "2019 Clubsport with the Manthey MR kit"
+      "from": 2016,
+      "label": "2016 Cayman GT4 Clubsport with the Manthey MR kit"
     },
     "class": "GT4",
-    "real_world_identity_notes": "Customer racing 718 Cayman with the Manthey Racing MR kit. Porsche drives the rear wheels through a dual-clutch PDK gearbox with six gears, and the MR kit revises aerodynamics and suspension without changing the powertrain. A PDK has no clutch pedal, so the real car cannot require clutch input to pull away, even though AMS2 does; that difference is recorded as an explicit simulator override rather than by asserting something false about the car."
+    "real_world_identity_notes": "Customer racing Cayman GT4 Clubsport of the 981 generation, with the Manthey Racing MR kit. Curated first as the 2019 718 Clubsport of the 982 generation, which was wrong: the Extended Car Info spreadsheet this record was imported from carried the wrong year, and its author has since corrected it, noting that AMS2's interior matches the previous version. The simulator said so all along - AMS2 names the car \"Porsche Cayman GT4 Clubsport MR\" without the \"718\" that marks the 982. The error surfaced when Assetto Corsa EVO's 718 Clubsport turned out to model a different steering wheel and dash; that is a different real car and wants its own record rather than a second entry here."
   },
   "authentic_controls": {
     "transmission": {
       "forward_gears": 6,
-      "gearbox_type": "dual-clutch",
+      "gearbox_type": "unknown",
       "shift_actuation": "sequential-paddles",
       "shift_pattern": "sequential",
       "upshift": {
@@ -33,23 +33,24 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "unknown"
     },
     "steering": {
       "wheel_rim": {
-        "shape": "round",
+        "shape": "d-shaped",
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
-        "notes": "Observed from the cockpit during the guided drive."
+        "notes": "Re-observed in the AMS2 cockpit as a conventional rim flattened at the bottom, which is d-shaped in this project's vocabulary; it was first recorded as round. It is a conventional rim rather than a control-panel one, and flattening alone never makes a rim gt-formula. This describes the 981 cockpit AMS2 models. No reviewed source establishes the real car's rim."
       }
     },
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
-      "The real car is a six-speed PDK dual clutch and has no clutch pedal, so its standing-start clutch is recorded as not required.",
       "AMS2 1.6.9.91 nonetheless required clutch input to move off. That is recorded as an explicit simulator override, so the in-sim guidance tells the driver to use the clutch while the record keeps the real car's value.",
-      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip."
+      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip.",
+      "AMS2 models the 2016 Clubsport of the 981 generation. The record first described the 2019 718 of the 982 generation, and the gearbox construction and standing-start clutch were inherited from that car's manufacturer material. Both are now unknown and need sources for the 981.",
+      "AMS2 requires clutch input to move off, which the guided drive established and an override records. Whether the real car has a clutch pedal at all depends on its gearbox, which is no longer established, so the override no longer claims to be a deviation from a known real-car value."
     ]
   },
   "simulators": [
@@ -70,7 +71,7 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "round",
+          "normalized": "d-shaped",
           "integrated_display": "no",
           "shift_lights": "no",
           "open_top": "no",
@@ -84,7 +85,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "required",
-          "condition": "AMS2 1.6.9.91 requires clutch input to move off, although the real car's PDK has no clutch pedal.",
+          "condition": "AMS2 1.6.9.91 requires clutch input to move off. Recorded so the driver is told to use the clutch in this simulator while the real car's requirement stays unknown; it previously read as a deviation from a clutch-pedal-free PDK, which was the 982's specification rather than this car's.",
           "confidence": {
             "level": "verified",
             "basis": "Directly observed in the guided drive with automatic clutch and shifting disabled."
@@ -115,27 +116,23 @@
           "/simulators/0/identities"
         ],
         "source_refs": [
-          "porsche.718-cayman-gt4-clubsport.world-premiere",
-          "manthey.718-gt4-clubsport-mr.kit",
+          "ams2.coanda-sheet-thread.cayman-gt4-clubsport-year",
           "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
         ],
-        "confidence": "verified",
-        "basis": "The registered manufacturer source establishes the real-world identity and transmission, and the exact simulator identity was observed live."
+        "confidence": "high",
+        "basis": "The spreadsheet author's own correction establishes that AMS2 models the 2016 Clubsport of the 981 generation, and the exact simulator identity was observed live. Short of verified because the correction is a forum post rather than manufacturer material, and no 981 source has been reviewed for this record yet. Falsified by Reiza or Coanda stating a different model year, or by 981 material that does not match the modelled car."
       },
       {
         "paths": [
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/gearbox_type",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "porsche.718-cayman-gt4-clubsport.world-premiere",
-          "manthey.718-gt4-clubsport-mr.kit",
           "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Porsche specifies a six-speed dual-clutch PDK and Manthey confirms the MR kit leaves the powertrain unchanged; the live drive confirmed six paddle-selected gears."
+        "basis": "Six paddle-selected gears on a sequential gate were counted directly in the guided drive. Porsche's and Manthey's material previously supported this and has been removed: both describe the 982, which is not the car AMS2 models. The gearbox construction rested on them alone and is now unknown; the gear count and actuation did not, because the drive saw them."
       },
       {
         "paths": [
@@ -160,22 +157,23 @@
         ],
         "confidence": "verified",
         "basis": "The guided drive established that AMS2 requires clutch input to move off, which differs from the real car's clutch-pedal-free PDK."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet-thread.cayman-gt4-clubsport-year"
+        ],
+        "confidence": "unknown",
+        "basis": "Both were inherited from the wrong generation. Porsche's 718 launch material specifies a six-speed dual-clutch PDK for the 982, and the record reasoned from it that a PDK has no clutch pedal so a standing start needs none. Neither reaches the 981 this simulator models, and neither is observable in a drive: a guided drive sees how a driver asks for a gear, not how the gearbox is built, and AMS2's demand for clutch input is what the simulator does rather than what the car requires. Established by material for the 2016 Clubsport - the Manthey technical manual of that year is the likeliest source."
       }
     ]
   },
   "archetype": {
-    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/gearbox_type",
-        "basis": "The real car is a six-speed PDK dual clutch with no clutch pedal, where the archetype's cars carry a racing sequential. AMS2 nonetheless required clutch input to move off, which is carried as a simulator override rather than changing the real car."
-      },
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
-      }
-    ]
+    "classification": "undetermined",
+    "basis": "Five archetypes survive the gaps, and that is the cost of the correction made visible. The record used to deviate from one mechanism because Porsche's 718 material named a dual-clutch PDK and the reasoning that a PDK has no clutch pedal settled the standing start. That material describes the 982; AMS2 models the 2016 Clubsport of the 981 generation, so both values came out and three fields are now open together: gearbox_type, standing_start_clutch and throttle_lift.\n\nWhat survives is every six-speed paddle mechanism with an automatic cut and blip - sequential, semi-automatic and dog box, each with and without a clutch from rest. One source for the 981's gearbox would close most of them at once, because the construction and the clutch pedal travel together on a car of this kind."
   },
   "updated_at": "2026-08-17"
 }

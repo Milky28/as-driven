@@ -3,6 +3,42 @@
   "schema_version": "1.0.0",
   "sources": [
     {
+      "source_id": "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1",
+      "title": "Live AC-EVO Audi R8 LMS GT3 Evo II guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-early-access-0-7-now-available/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.audi-r8-lms-gt3-evo-ii.20260821t044035209z-f4353d69 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ac-evo.local-live-caterham-academy-controls.0.8.1",
+      "title": "Live AC-EVO Caterham Academy guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-3-out-now/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.caterham-academy.20260821t041640059z-eaf15a20 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ac-evo.local-live-lamborghini-huracan-st-evo2-controls.0.8.1",
+      "title": "Live AC-EVO Lamborghini Huracan ST EVO2 guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-3-out-now/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
       "source_id": "acisport.safety-cage-homologations",
       "title": "Armature di sicurezza omologate (homologated safety cages)",
       "publisher": "ACI Sport",
@@ -49,6 +85,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Manufacturer release identifies the A424's Xtrac gearbox. It does not independently establish driver clutch technique, automatic cut or blip calibration, or wheel-rim shape."
+    },
+    {
+      "source_id": "ams2.coanda-sheet-thread.cayman-gt4-clubsport-year",
+      "title": "Automobilista 2 Extended Car Info spreadsheet thread, page 9",
+      "publisher": "Reiza Studios forum",
+      "url": "https://forum.reizastudios.com/threads/automobilista-2-extended-car-info-spreadsheet.16746/page-9",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Coanda, the author of the Extended Car Info spreadsheet this record was imported from, correcting his own data: \"Firstly the year I have for this vehicle is wrong therefore that has created some confusion with the interiors. It should be listed as the previous version; the one shown in your PDF which aligns with the interior from AMS2.\" Establishes that AMS2 models the 2016 Cayman GT4 Clubsport MR of the 981 generation rather than the 2019 718 of the 982 generation, and the thread references a 2016 Manthey Racing technical manual. It settles which car AMS2 models; it establishes no control value."
     },
     {
       "source_id": "ams2.coanda-sheet.v1.0.34",
@@ -5521,42 +5569,6 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
-    },
-    {
-      "source_id": "ac-evo.local-live-lamborghini-huracan-st-evo2-controls.0.8.1",
-      "title": "Live AC-EVO Lamborghini Huracan ST EVO2 guided-verification drive",
-      "publisher": "Local AC-EVO observation",
-      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-3-out-now/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-21",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ac-evo.local-live-caterham-academy-controls.0.8.1",
-      "title": "Live AC-EVO Caterham Academy guided-verification drive",
-      "publisher": "Local AC-EVO observation",
-      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-3-out-now/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-21",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ac-evo.caterham-academy.20260821t041640059z-eaf15a20 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
-    },
-    {
-      "source_id": "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1",
-      "title": "Live AC-EVO Audi R8 LMS GT3 Evo II guided-verification drive",
-      "publisher": "Local AC-EVO observation",
-      "url": "https://assettocorsa.gg/assetto-corsa-evo-early-access-0-7-now-available/",
-      "archive_url": null,
-      "source_type": "in-game-observation",
-      "published_or_updated_at": null,
-      "retrieved_at": "2026-08-21",
-      "reuse_status": "facts-only-review",
-      "notes": "Guided-verification observation ac-evo.audi-r8-lms-gt3-evo-ii.20260821t044035209z-f4353d69 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

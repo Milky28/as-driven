@@ -12,17 +12,17 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "not-required",
+    "standing_start_clutch": "unknown",
     "throttle_lift": "unknown",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "round",
+    "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Controls were directly observed with assists disabled. Porsche and Manthey establish the six-speed PDK, and the simulator's differing standing-start behavior is carried as a sourced override rather than changing the real-car value.",
+  "confidence_notes": "Controls were directly observed with assists disabled. The record was approved as the 2019 718 Clubsport and is corrected to the 2016 Clubsport of the 981 generation, on the spreadsheet author's own correction of the year. Porsche's and Manthey's 718 material no longer supports this record: the gearbox construction and the standing-start clutch rested on it and are now unknown. The rim is corrected from round to d-shaped, a conventional rim flattened at the bottom. The simulator's demand for clutch input at a standing start is still carried as a sourced override.",
   "scope_notes": "Single exact identity from one guided-verification drive."
 }
