@@ -1525,7 +1525,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
-      "notes": "AMS2 1.6.9.91 direct test confirmed Lamborghini Huracan Super Trofeo EVO2 / Super Trofeo, clutch-free move-off, six paddle gears, automatic cut and blip, and an open-top no-display GT-style rim."
+      "notes": "AMS2 1.6.9.91 direct test confirmed Lamborghini Huracan Super Trofeo EVO2 / Super Trofeo, clutch-free move-off, six paddle gears, automatic cut and blip, and a closed-top no-display GT-style rim (corrected: the drive first recorded it as open-topped)."
     },
     {
       "source_id": "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91",
@@ -5521,6 +5521,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
+    },
+    {
+      "source_id": "ac-evo.local-live-lamborghini-huracan-st-evo2-controls.0.8.1",
+      "title": "Live AC-EVO Lamborghini Huracan ST EVO2 guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-3-out-now/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.3.99",
+  "approved_at": "2026-08-21",
+  "record_id": "lamborghini-huracan-super-trofeo-evo2",
+  "simulator": "ac-evo",
+  "telemetry_name": "Lamborghini Huracan ST EVO2",
+  "observed_game_version": "0.8.1",
+  "observed_through": "SimHub guided verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Second simulator entry for a car curated from AMS2. Clutch-free move-off, six gears, clutchless upshifts and downshifts, and an automatic blip were directly observed. The rim was inspected in the cockpit and carries no display and no shift lights, which settles a field the AMS2 observation left unknown. The automatic cut is not established and cannot be by this method: Assetto Corsa EVO publishes no engine torque to SimHub, and the cut is ignition-side so the throttle channel cannot show it either. AMS2 established the cut independently and that value is unchanged.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

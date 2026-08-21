@@ -39,7 +39,7 @@
         "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "no",
-        "shift_lights": "unknown",
+        "shift_lights": "no",
         "open_top": "no",
         "source_label": "live-cockpit-gt-closed-no-display",
         "notes": "Direct cockpit inspection in two simulators shows a GT rim closed over the top, without an integrated display; exact diameter remains unknown. The AMS2 observation first recorded this rim as open-topped, which was wrong: the first Assetto Corsa EVO drive of the same car showed it closed, and re-checking AMS2 confirmed the original reading rather than a difference between the games. No override is written because there is no deviation - both model the same rim."
@@ -92,6 +92,41 @@
       "confidence": {
         "level": "verified",
         "basis": "The exact identity and complete user-facing control technique were directly checked in AMS2; official sources independently establish the car identity and transmission hardware."
+      }
+    },
+    {
+      "simulator": "ac-evo",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Huracan ST EVO2"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC-EVO 0.8.1 via guided verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "0.8.1",
+      "verified_at": "2026-08-21",
+      "source_refs": [
+        "lamborghini.super-trofeo-evo2.brochure.2022",
+        "ac-evo.local-live-lamborghini-huracan-st-evo2-controls.0.8.1"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Controls directly observed in a guided Assetto Corsa EVO drive with automatic clutch and shifting disabled, and they agree with the AMS2 drive already curated for this car on every field both established."
       }
     }
   ],
@@ -146,6 +181,27 @@
         ],
         "confidence": "verified",
         "basis": "Direct cockpit inspection classified a closed-top, no-display rim as GT-style in the project vocabulary. The top was corrected after a second simulator's drive of the same car disagreed and a re-check of AMS2 showed the first reading was the error. Falsified by a cockpit view, in either game, showing rim material absent over the top."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "lamborghini.super-trofeo-evo2.brochure.2022",
+          "ac-evo.local-live-lamborghini-huracan-st-evo2-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Manufacturer brochure for the EVO2 plus the exact telemetry identity Assetto Corsa EVO reports, which differs in wording from the AMS2 name for the same car and is recorded as its own identity."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac-evo.local-live-lamborghini-huracan-st-evo2-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -157,5 +213,5 @@
     "The old LamborghiniHuracanLP6202SuperTrofeo identity belongs to a different predecessor and is intentionally not included.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-21"
 }
