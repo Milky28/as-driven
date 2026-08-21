@@ -5533,6 +5533,18 @@
       "retrieved_at": "2026-08-21",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ac-evo.local-live-caterham-academy-controls.0.8.1",
+      "title": "Live AC-EVO Caterham Academy guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-3-out-now/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.caterham-academy.20260821t041640059z-eaf15a20 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

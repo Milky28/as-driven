@@ -8,10 +8,11 @@
     "model": "Seven Academy",
     "year": {
       "from": 2014,
-      "label": "Academy championship specification"
+      "to": 2025,
+      "label": "Ford Sigma five-speed Academy specification"
     },
     "class": "Caterham Academy",
-    "real_world_identity_notes": "Entry-level one-make Caterham Seven built to a sealed Academy specification around a Ford Sigma 1.6 and a five-speed gearbox. Caterham list the Academy car as road legal, which is central to the formula: competitors drive to and from circuits.",
+    "real_world_identity_notes": "Entry-level one-make Caterham Seven built to a sealed Academy specification around a Ford Sigma 1.6 and a five-speed gearbox. Caterham list the Academy car as road legal, which is central to the formula: competitors drive to and from circuits. The record covers the sealed Ford Sigma five-speed package rather than one season: AMS2's observation is of a 2014 car and Assetto Corsa EVO's is of a 2023 one, and they agree on every curated control. Caterham replaces the five-speed with a six-speed Mazda gearbox for 2026, so an Academy from that season is a different specification and wants its own record rather than a third entry here.",
     "variant": "Academy specification"
   },
   "authentic_controls": {
@@ -93,6 +94,43 @@
         "level": "medium",
         "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
       }
+    },
+    {
+      "simulator": "ac-evo",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Caterham Academy"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC-EVO 0.8.1 via guided verification observation ac-evo.caterham-academy.20260821t041640059z-eaf15a20 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "0.8.1",
+      "verified_at": "2026-08-21",
+      "source_refs": [
+        "caterham.academy-championship",
+        "westermann.caterham-5-speed-gearbox-variants",
+        "wikipedia.caterham-academy",
+        "ac-evo.local-live-caterham-academy-controls.0.8.1"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Controls directly observed in a guided Assetto Corsa EVO drive with automatic clutch and shifting disabled, agreeing with the curated AMS2 drive on every field both established."
+      }
     }
   ],
   "provenance": {
@@ -140,6 +178,29 @@
         ],
         "confidence": "medium",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "caterham.academy-championship",
+          "westermann.caterham-5-speed-gearbox-variants",
+          "wikipedia.caterham-academy",
+          "ac-evo.local-live-caterham-academy-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Assetto Corsa EVO names the car Caterham Academy and gives a 2023 Academy Racer with a 1.6-litre four and five gears, which is the sealed Ford Sigma five-speed package this record already describes."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac-evo.local-live-caterham-academy-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -148,5 +209,5 @@
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-21"
 }
