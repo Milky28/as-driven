@@ -58,7 +58,13 @@ class ImportObservationTests(unittest.TestCase):
         )
         self.assertEqual(transmission["forward_gears"], 7)
         self.assertEqual(transmission["shift_actuation"], "sequential-paddles")
-        self.assertEqual(transmission["gearbox_type"], "sequential")
+        # The gate the drive genuinely saw, and no claim about how the gearbox is
+        # built. Paddles used to derive `sequential`, which is a construction
+        # read off an actuation: of the curated paddle cars 71 are sequential but
+        # 17 are semi-automatic, 9 are dual-clutch and 2 are dog boxes. The AC EVO
+        # Cayman drive asserted `sequential` over a PDK Porsche calls a six-speed
+        # dual-clutch, and only the curated record refusing the merge caught it.
+        self.assertEqual(transmission["gearbox_type"], "unknown")
         self.assertEqual(transmission["shift_pattern"], "sequential")
         self.assertEqual(transmission["standing_start_clutch"], "not-required")
         self.assertEqual(transmission["upshift"]["clutch"], "not-required")

@@ -61,13 +61,25 @@ def _standing_start_clutch(move_off: str | None) -> str:
     return "unknown"
 
 
-# The observation records only the primary actuation mechanism. Derive gearbox
-# and pattern only where the mechanism makes them unambiguous; H-pattern stays
-# ``unknown`` because standard/dogleg layout and synchro/dog construction are
-# not established by a guided drive.
+# The observation records only the primary actuation mechanism. A drive sees how
+# the driver asks for a gear; it does not see how the gearbox is built, and the
+# two are separate fields for that reason.
+#
+# Paddles used to derive `sequential`, which is a construction claim made from an
+# actuation. The dataset says why that is wrong: of its paddle-shifted cars, 71
+# are sequential but 17 are semi-automatic, 9 are dual-clutch and 2 are dog
+# boxes. The first AC EVO drive of the Cayman GT4 Clubsport MR asserted
+# `sequential` over a PDK that Porsche's own launch material calls a six-speed
+# dual-clutch, and it was caught only because the record already held the right
+# answer and the merge refused. On a new car it would have been curated.
+#
+# So the two sequentials now derive the gate they genuinely show and leave the
+# construction alone, which is what H-pattern already did. `automatic-lever` and
+# `direct-selection` keep theirs: those name the transmission, not just the
+# control, and a lever marked P-R-N-D is not a way of operating something else.
 _ACTUATION_DERIVATION = {
-    "sequential-paddles": ("sequential", "sequential"),
-    "sequential-stick": ("sequential", "sequential"),
+    "sequential-paddles": ("unknown", "sequential"),
+    "sequential-stick": ("unknown", "sequential"),
     "automatic-lever": ("automatic", "automatic-gate"),
     "direct-selection": ("direct-drive", "direct"),
     "h-pattern": ("unknown", "unknown"),
