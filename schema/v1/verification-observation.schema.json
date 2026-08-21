@@ -146,6 +146,14 @@
         },
         "notes": {
           "type": "string"
+        },
+        "full_throttle_upshift": {
+          "description": "Whether a clutchless upshift went through at sustained full throttle. The first stage of a two-stage test: a 'no' here followed by an accepted lifted upshift is what establishes that the driver must lift, where the lifted result alone shows only that lifting works.",
+          "$ref": "#/$defs/observedState"
+        },
+        "coast_downshift": {
+          "description": "Whether a clutchless downshift went through on a closed throttle. The first stage of a two-stage test: a 'no' here followed by an accepted blipped downshift is what establishes that the driver must blip.",
+          "$ref": "#/$defs/observedState"
         }
       }
     },

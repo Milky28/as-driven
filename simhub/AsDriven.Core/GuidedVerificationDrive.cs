@@ -26,6 +26,16 @@ namespace AsDriven.Core
         public string ClutchlessDownshift { get; set; }
         public string AutomaticBlip { get; set; }
         public string AutomaticBlipMethod { get; set; }
+        /// <summary>
+        /// Whether the upshift went through at sustained full throttle, and
+        /// whether the downshift went through on a closed throttle. They are
+        /// the first attempt of a two-stage test, and the stage that failed is
+        /// what establishes the technique: a lift or a blip the driver had to
+        /// supply. Without them only the second stage survives, which shows the
+        /// technique works and not that it was needed.
+        /// </summary>
+        public string FullThrottleUpshift { get; set; }
+        public string CoastDownshift { get; set; }
         public string EvidenceNote { get; set; }
 
         public GuidedDriveResults()
@@ -38,6 +48,8 @@ namespace AsDriven.Core
             AutomaticBlip = "not-tested";
             AutomaticCutMethod = string.Empty;
             AutomaticBlipMethod = string.Empty;
+            FullThrottleUpshift = "not-tested";
+            CoastDownshift = "not-tested";
             EvidenceNote = string.Empty;
         }
 
@@ -739,6 +751,7 @@ namespace AsDriven.Core
                     if (_attemptAccepted)
                     {
                         _results.ClutchlessUpshift = "yes";
+                        _results.FullThrottleUpshift = "yes";
                         _results.AutomaticCut = _automaticActionObserved ? "yes" : "unknown";
                         _results.AutomaticCutMethod = _result;
                         MoveTo(Phase.CoastDownshift);
@@ -746,6 +759,7 @@ namespace AsDriven.Core
                     else
                     {
                         _fullThrottleTestFailed = true;
+                        _results.FullThrottleUpshift = "no";
                         MoveTo(Phase.LiftedUpshift);
                     }
                     break;
@@ -759,6 +773,7 @@ namespace AsDriven.Core
                     if (_attemptAccepted)
                     {
                         _results.ClutchlessDownshift = "yes";
+                        _results.CoastDownshift = "yes";
                         _results.AutomaticBlip = _automaticActionObserved ? "yes" : "no";
                         _results.AutomaticBlipMethod = _result;
                         MoveTo(Phase.Complete);
@@ -766,6 +781,7 @@ namespace AsDriven.Core
                     else
                     {
                         _coastDownshiftTestFailed = true;
+                        _results.CoastDownshift = "no";
                         MoveTo(Phase.ManualBlipDownshift);
                     }
                     break;

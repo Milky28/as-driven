@@ -75,6 +75,51 @@ _ACTUATION_DERIVATION = {
 }
 
 
+def _throttle_lift(tests: dict[str, Any], clean: bool) -> str:
+    """Whether the upshift needed the driver to lift.
+
+    The guided drive asks twice: once at sustained full throttle, and if that is
+    refused, again after a lift. Which stage succeeded is the answer, and only
+    the pair says it - an accepted lifted upshift on its own shows that lifting
+    works, not that it was required, which is the same distinction the dataset
+    draws between a blip that eases a synchromesh and one a dog box needs.
+    """
+    if not clean:
+        return "unknown"
+    first = tests.get("full_throttle_upshift")
+    if first == "yes":
+        return "not-required"
+    if first == "no" and tests.get("clutchless_upshift") == "yes":
+        return "required"
+    return "unknown"
+
+
+def _manual_blip(tests: dict[str, Any], automatic_blip: str, clean: bool) -> str:
+    """Whether the real car needed the driver to blip.
+
+    A car that blips for itself settles it: the driver does not have to. A car
+    that accepts a downshift on a closed throttle settles it too.
+
+    The refusing case deliberately does not become ``required``, and this is the
+    one place the two-stage test stops short of an answer. ``required`` is
+    reserved for a gearbox that needs the blip to engage, which is a fact about
+    construction, and a simulator refusing an unblipped downshift is not that
+    fact - it demands the blip on gearboxes established as synchromesh, both
+    Formula Vee records and the Diablo among them. Every time the construction
+    was later established for a car in this position the authentic value turned
+    out to be ``optional`` and the simulator's demand moved to an override. So
+    the demand is reported to the reviewer as a note instead of asserted here.
+    See docs/data-model.md.
+    """
+    if automatic_blip == "yes":
+        return "not-required"
+    if not clean:
+        return "unknown"
+    if tests.get("coast_downshift") == "yes":
+        return "not-required"
+    return "unknown"
+
+
 def _slug(name: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", name.strip().casefold()).strip("-")
     return slug or "unknown"
@@ -163,6 +208,17 @@ def import_observation(
 
     clean = _assists_clean(assists)
     review_notes: list[str] = []
+    if (clean
+            and tests.get("coast_downshift") == "no"
+            and tests.get("clutchless_downshift") == "yes"
+            and _state(tests.get("automatic_blip")) != "yes"):
+        review_notes.append(
+            "The simulator refused a clutchless downshift until the driver blipped. That "
+            "is a demand the simulator makes, not evidence that the gearbox needs the "
+            "blip to engage, so manual_blip stays unknown here. If the construction is "
+            "established as synchromesh, record the real car as optional and carry the "
+            "simulator's demand as an override."
+        )
     if not clean:
         review_notes.append(
             "Automatic clutch/shifting were not both confirmed disabled; move-off "
@@ -217,7 +273,7 @@ def import_observation(
 
     upshift = {
         "clutch": up_clutch,
-        "throttle_lift": "unknown",
+        "throttle_lift": _throttle_lift(tests, clean),
         "automatic_cut": cut_state,
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable",
@@ -226,7 +282,7 @@ def import_observation(
         "clutch": down_clutch,
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "not-required" if blip_state == "yes" else "unknown",
+        "manual_blip": _manual_blip(tests, blip_state, clean),
         "automatic_blip": blip_state,
     }
 

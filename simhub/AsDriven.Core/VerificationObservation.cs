@@ -31,6 +31,8 @@ namespace AsDriven.Core
         public string ClutchlessDownshift { get; set; }
         public string AutomaticBlip { get; set; }
         public string AutomaticBlipMethod { get; set; }
+        public string FullThrottleUpshift { get; set; }
+        public string CoastDownshift { get; set; }
         public string[] VisibleShiftActuators { get; set; }
         public string PrimaryShiftActuation { get; set; }
         public string ShiftPattern { get; set; }
@@ -172,6 +174,8 @@ namespace AsDriven.Core
                 { "clutchless_downshift", draft.ClutchlessDownshift },
                 { "automatic_blip", draft.AutomaticBlip }
             };
+            AddOptional(tests, "full_throttle_upshift", draft.FullThrottleUpshift);
+            AddOptional(tests, "coast_downshift", draft.CoastDownshift);
             AddOptional(tests, "automatic_cut_method", draft.AutomaticCutMethod);
             AddOptional(tests, "automatic_blip_method", draft.AutomaticBlipMethod);
 

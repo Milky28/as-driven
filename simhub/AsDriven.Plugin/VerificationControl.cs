@@ -26,6 +26,11 @@ namespace AsDriven.Plugin
         private string _guidedAutomaticCutMethod = string.Empty;
         private string _guidedAutomaticBlipMethod = string.Empty;
         private string _guidedEvidenceNotes = string.Empty;
+        // No form control: these are the first stage of a two-stage test, which
+        // the drive either ran or did not. A reviewer editing the second stage
+        // by hand must not silently restate the first.
+        private string _guidedFullThrottleUpshift = "not-tested";
+        private string _guidedCoastDownshift = "not-tested";
 
         public VerificationControl(AsDriven plugin)
         {
@@ -289,6 +294,8 @@ namespace AsDriven.Plugin
             _guidedAutomaticCutMethod = string.Empty;
             _guidedAutomaticBlipMethod = string.Empty;
             _guidedEvidenceNotes = string.Empty;
+            _guidedFullThrottleUpshift = "not-tested";
+            _guidedCoastDownshift = "not-tested";
             _evidenceNotes.BorderThickness = new Thickness(1);
             _evidenceNotes.BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
             foreach (Control control in new Control[]
@@ -367,6 +374,8 @@ namespace AsDriven.Plugin
                     ClutchlessDownshift = ChoiceValue(_clutchlessDownshift),
                     AutomaticBlip = ChoiceValue(_automaticBlip),
                     AutomaticBlipMethod = _automaticBlipMethod.Text,
+                    FullThrottleUpshift = _guidedFullThrottleUpshift,
+                    CoastDownshift = _guidedCoastDownshift,
                     VisibleShiftActuators = visible,
                     PrimaryShiftActuation = ChoiceValue(_primaryActuation),
                     ShiftPattern = ChoiceValue(_shiftPattern),
@@ -471,6 +480,8 @@ namespace AsDriven.Plugin
                 ApplyGuidedChoice(_automaticCut, results.AutomaticCut);
                 ApplyGuidedChoice(_clutchlessDownshift, results.ClutchlessDownshift);
                 ApplyGuidedChoice(_automaticBlip, results.AutomaticBlip);
+                _guidedFullThrottleUpshift = results.FullThrottleUpshift;
+                _guidedCoastDownshift = results.CoastDownshift;
                 if (results.ForwardGears.HasValue)
                 {
                     _forwardGears.Text = results.ForwardGears.Value.ToString(CultureInfo.InvariantCulture);
