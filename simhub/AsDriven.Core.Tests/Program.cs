@@ -26,7 +26,24 @@ namespace AsDriven.Core.Tests
                     Version.TryParse(database.DatasetVersion, out datasetVersion),
                     "loads a semantic dataset version");
                 True(database.RecordCount > 0, "loads curated records");
-                Equal(database.RecordCount, database.Cars.Length, "lists every curated car for preview");
+                // The catalog is one entry per simulator entry, not per record: a
+                // car covered by two simulators is previewable under each. That
+                // was the same number until the Huracan gained an Assetto Corsa
+                // EVO entry, and this assertion had quietly been checking that
+                // no record was covered twice.
+                var catalogRecords = new HashSet<string>(StringComparer.Ordinal);
+                var catalogPairs = new HashSet<string>(StringComparer.Ordinal);
+                foreach (CarCatalogEntry car in database.Cars)
+                {
+                    catalogRecords.Add(car.RecordId);
+                    catalogPairs.Add(car.RecordId + "\u001f" + car.Simulator);
+                }
+                Equal(database.RecordCount, catalogRecords.Count,
+                    "lists every curated car for preview");
+                True(database.Cars.Length >= database.RecordCount,
+                    "a car covered by several simulators is previewable under each");
+                Equal(database.Cars.Length, catalogPairs.Count,
+                    "never lists one car twice for the same simulator");
                 for (int catalogIndex = 1; catalogIndex < database.Cars.Length; catalogIndex++)
                 {
                     True(
@@ -62,8 +79,23 @@ namespace AsDriven.Core.Tests
                 // change. What changes is that its car identities are written to
                 // the local diagnostics log anyway, because otherwise there is no
                 // way to learn the identities the first record needs.
+                // Assetto Corsa EVO now carries a curated record, so the car it
+                // was driven in resolves. The name is its own: AMS2 calls the
+                // same car "Lamborghini Huracan Super Trofeo EVO2", and both
+                // reach one record because the entries are separate identities
+                // rather than one spelling guessed at.
+                GuidanceSnapshot acEvo = database.Match(
+                    "AssettoCorsaEvo", "Lamborghini Huracan ST EVO2");
+                True(acEvo.HasMatch, "matches the car Assetto Corsa EVO was driven in");
+                Equal("Lamborghini Huracan Super Trofeo EVO2", acEvo.DisplayName,
+                    "answers with the real car, not the simulator name for it");
+                Equal("unmatched",
+                    database.Match("AssettoCorsaEvo", "Some Car It Does Not Have").MatchStatus,
+                    "a covered game still fails closed on a car with no record");
+                // Recognized, and carrying no records at all: the driver is told
+                // the game is not covered rather than that every car is missing.
                 Equal("unsupported-game",
-                    database.Match("AssettoCorsaEvo", "Lamborghini Huracan ST EVO2").MatchStatus,
+                    database.Match("iRacing", "Any Car").MatchStatus,
                     "reports a recognized game with no records as not yet covered");
 
                 // A record declares the aero packages it covers and the database

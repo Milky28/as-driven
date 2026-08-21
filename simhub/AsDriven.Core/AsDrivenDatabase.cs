@@ -117,6 +117,7 @@ namespace AsDriven.Core
                 recordCount++;
             }
 
+            QualifyCollidingLabels(cars);
             cars.Sort(delegate(CarCatalogEntry left, CarCatalogEntry right)
             {
                 int nameOrder = string.Compare(
@@ -135,6 +136,39 @@ namespace AsDriven.Core
                 recordsBySimulator,
                 cars.ToArray(),
                 SummarizeSimulators(cars));
+        }
+
+        /// <summary>
+        /// Name the simulator on entries that would otherwise read identically.
+        ///
+        /// The catalog holds one entry per simulator entry, so a real car curated
+        /// from two games is listed twice - deliberately, because the guidance
+        /// can differ between them. Two identical rows in a picker are useless
+        /// though, so the ones that collide say which game they are for. Only
+        /// those: a car covered by one simulator keeps the plain name, which is
+        /// almost all of them.
+        /// </summary>
+        private static void QualifyCollidingLabels(List<CarCatalogEntry> cars)
+        {
+            var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            foreach (CarCatalogEntry car in cars)
+            {
+                int seen;
+                counts.TryGetValue(car.DisplayLabel, out seen);
+                counts[car.DisplayLabel] = seen + 1;
+            }
+            var collisions = new List<CarCatalogEntry>();
+            foreach (CarCatalogEntry car in cars)
+            {
+                if (counts[car.DisplayLabel] > 1)
+                {
+                    collisions.Add(car);
+                }
+            }
+            foreach (CarCatalogEntry car in collisions)
+            {
+                car.QualifyWith(SimulatorProductName(car.Simulator));
+            }
         }
 
         /// <summary>

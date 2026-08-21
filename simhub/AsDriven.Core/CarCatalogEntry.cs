@@ -30,13 +30,29 @@ namespace AsDriven.Core
             get { return DisplayName; }
         }
 
+        /// <summary>
+        /// Set only when another entry would carry the same label. One real car
+        /// covered by two simulators is listed once per simulator, because the
+        /// guidance can differ between them - and two identical rows in a picker
+        /// are worse than a longer name.
+        /// </summary>
+        private string _qualifier;
+
+        internal void QualifyWith(string qualifier)
+        {
+            _qualifier = qualifier;
+        }
+
         public string DisplayLabel
         {
             get
             {
-                return string.IsNullOrWhiteSpace(CarClass)
+                string label = string.IsNullOrWhiteSpace(CarClass)
                     ? BrowserName
                     : BrowserName + " — " + CarClass;
+                return string.IsNullOrWhiteSpace(_qualifier)
+                    ? label
+                    : label + " (" + _qualifier + ")";
             }
         }
 
