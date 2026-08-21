@@ -521,7 +521,13 @@ def _validate_car_approval(
                 f"{label}: approved telemetry name {name!r} is not an exact record identity"
             )
 
-    approved_classes = [approval.get("telemetry_class")]
+    # A simulator that does not group its cars has no class to approve, so an
+    # absent telemetry_class is checked against nothing rather than failing. The
+    # record carries no class-id identity in that case either, which is what
+    # keeps this from silently skipping a class the record does declare.
+    approved_classes = []
+    if approval.get("telemetry_class") is not None:
+        approved_classes.append(approval["telemetry_class"])
     approved_classes.extend(approval.get("additional_telemetry_classes", []))
     record_classes = _simulator_identity_values(simulator, "class-id")
     for class_id in approved_classes:

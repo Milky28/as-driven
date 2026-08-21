@@ -7,7 +7,11 @@ import tempfile
 import unittest
 
 from as_driven_db.importers.observation import import_observation
-from as_driven_db.promote_observation import promote_observations, resolve_class
+from as_driven_db.promote_observation import (
+    merge_simulator_entry,
+    promote_observations,
+    resolve_class,
+)
 from as_driven_db.validate import validate_repository
 
 
@@ -263,6 +267,109 @@ class PromoteObservationTests(unittest.TestCase):
             with self.assertRaises(ValueError) as caught:
                 resolve_class({}, bundle, Path(directory))
         self.assertIn("car-select screen", str(caught.exception))
+
+    def _merge(self, existing_controls: dict, incoming_controls: dict, **kwargs):
+        existing = {
+            "record_id": "car",
+            "authentic_controls": existing_controls,
+            "simulators": [{"simulator": "ams2"}],
+            "provenance": {"claims": []},
+            "updated_at": "2026-08-01",
+        }
+        incoming = {
+            "record_id": "car",
+            "authentic_controls": incoming_controls,
+            "simulators": [{"simulator": "ac-evo", "identities": []}],
+            "provenance": {"claims": []},
+            "updated_at": "2026-08-21",
+        }
+        return merge_simulator_entry(existing, incoming, label="test", **kwargs)
+
+    def test_a_less_informed_drive_does_not_block_or_overwrite(self) -> None:
+        """The second drive knowing less is not a disagreement.
+
+        The AC EVO Huracan drive could not establish the automatic cut that AMS2
+        had. Treating that as a contradiction blocked the merge over the drive
+        having learned nothing, rather than over it being wrong.
+        """
+        merged = self._merge(
+            {"transmission": {"upshift": {"automatic_cut": "yes"}}, "steering": {}},
+            {"transmission": {"upshift": {"automatic_cut": "unknown"}}, "steering": {}},
+        )
+        self.assertEqual(
+            merged["authentic_controls"]["transmission"]["upshift"]["automatic_cut"],
+            "yes",
+        )
+
+    def test_prose_never_blocks_a_merge(self) -> None:
+        """Two drives never word their notes the same.
+
+        `steering.wheel_rim` is one field holding a dict, so its nested notes and
+        source label were compared as part of it. That made the rim report a
+        disagreement on every cross-simulator merge, whatever the values were.
+        """
+        merged = self._merge(
+            {
+                "transmission": {},
+                "steering": {
+                    "wheel_rim": {
+                        "shape": "gt-formula",
+                        "source_label": "live-cockpit-gt-closed-no-display",
+                        "notes": "Seen in the AMS2 cockpit.",
+                    }
+                },
+            },
+            {
+                "transmission": {},
+                "steering": {
+                    "wheel_rim": {
+                        "shape": "gt-formula",
+                        "source_label": "live-cockpit-observation",
+                        "notes": "Seen in the AC EVO cockpit.",
+                    }
+                },
+            },
+        )
+        self.assertEqual(
+            merged["authentic_controls"]["steering"]["wheel_rim"]["notes"],
+            "Seen in the AMS2 cockpit.",
+        )
+
+    def test_a_contradiction_still_stops_the_merge(self) -> None:
+        """Both established and different: one of them is wrong, so a person decides."""
+        with self.assertRaises(ValueError) as caught:
+            self._merge(
+                {"transmission": {}, "steering": {"wheel_rim": {"open_top": "yes"}}},
+                {"transmission": {}, "steering": {"wheel_rim": {"open_top": "no"}}},
+            )
+        self.assertIn("contradicts the curated real car", str(caught.exception))
+
+    def test_a_gap_the_drive_fills_needs_the_reviewer_to_ask_for_it(self) -> None:
+        """`unknown` to a value is an improvement, but not an unattended one."""
+        existing = {"transmission": {}, "steering": {"wheel_rim": {"shift_lights": "unknown"}}}
+        incoming = {"transmission": {}, "steering": {"wheel_rim": {"shift_lights": "no"}}}
+        with self.assertRaises(ValueError) as caught:
+            self._merge(existing, incoming)
+        self.assertIn("accept_from_drive", str(caught.exception))
+
+        merged = self._merge(
+            existing,
+            incoming,
+            accept_from_drive=["/authentic_controls/steering/wheel_rim/shift_lights"],
+        )
+        self.assertEqual(
+            merged["authentic_controls"]["steering"]["wheel_rim"]["shift_lights"], "no"
+        )
+
+    def test_accepting_a_gap_that_does_not_exist_is_refused(self) -> None:
+        """A pointer that fills nothing is a mistake, not a no-op."""
+        with self.assertRaises(ValueError) as caught:
+            self._merge(
+                {"transmission": {"forward_gears": 6}, "steering": {}},
+                {"transmission": {"forward_gears": 6}, "steering": {}},
+                accept_from_drive=["/authentic_controls/transmission/forward_gears"],
+            )
+        self.assertIn("does not fill", str(caught.exception))
 
     def test_promoted_class_is_the_reviewers_not_the_drafts(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

@@ -111,7 +111,27 @@ def derive_approved_controls(record: dict[str, Any]) -> dict[str, Any]:
     upshift_clutch = transmission["upshift"]["clutch"]
     if upshift_clutch == transmission["downshift"]["clutch"]:
         controls["running_shift_clutch"] = upshift_clutch
-    return controls
+
+    # An approval states what was approved, so a field the drive did not settle
+    # is left out rather than approved as "unknown". It matters on a merge: the
+    # approval is cross-checked against the curated record, and a second
+    # simulator that established less than the first would otherwise assert
+    # "unknown" against a value the record already holds and fail validation for
+    # having learned nothing rather than for being wrong. The six fields the
+    # approval schema requires stay whatever they are.
+    required = {
+        "forward_gears",
+        "shift_actuation",
+        "standing_start_clutch",
+        "automatic_cut",
+        "automatic_blip",
+        "wheel_rim_shape",
+    }
+    return {
+        name: value
+        for name, value in controls.items()
+        if name in required or (value is not None and value != "unknown")
+    }
 
 
 def import_observation(
@@ -276,10 +296,18 @@ def import_observation(
         "simulators": [
             {
                 "simulator": simulator,
-                "identities": [
-                    {"kind": "telemetry-name", "value": telemetry_name},
-                    {"kind": "class-id", "value": telemetry_class},
-                ],
+                # Not every simulator groups its cars. Assetto Corsa EVO reports
+                # no class, which reaches here as the literal string "unknown" -
+                # minting a class-id identity from that would put the word into
+                # the match index as though a car were called it.
+                "identities": (
+                    [{"kind": "telemetry-name", "value": telemetry_name}]
+                    + (
+                        [{"kind": "class-id", "value": telemetry_class}]
+                        if telemetry_class and telemetry_class != "unknown"
+                        else []
+                    )
+                ),
                 "behavior": behavior,
                 "overrides": [],
                 "verified_game_version": game_version,
@@ -357,7 +385,6 @@ def import_observation(
         # carries it, and a car may be approved once per simulator.
         "simulator": simulator,
         "telemetry_name": telemetry_name,
-        "telemetry_class": telemetry_class,
         "observed_game_version": game_version,
         "observed_through": f"SimHub guided verification observation {observation_id}",
         "approved_controls": approved_controls,
@@ -367,6 +394,11 @@ def import_observation(
         ),
         "scope_notes": "Single exact identity staged from one guided-verification drive.",
     }
+    # Only when the simulator actually groups its cars. Assetto Corsa EVO does
+    # not, and approving the literal word "unknown" as a class would assert an
+    # identity no record carries.
+    if telemetry_class and telemetry_class != "unknown":
+        approval["telemetry_class"] = telemetry_class
 
     return {
         "importer": "guided-verification-observation",

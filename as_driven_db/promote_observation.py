@@ -252,20 +252,76 @@ def resolve_class(entry: dict[str, Any], bundle: dict[str, Any], curation_direct
     )
 
 
-def _control_differences(existing: dict[str, Any], incoming: dict[str, Any]) -> list[str]:
-    """Where two drives disagree about the real car, ignoring prose notes."""
-    differences = []
+# Prose, not evidence. Two drives of the same car never word these the same, so
+# comparing them made `steering.wheel_rim` report a disagreement on every merge
+# regardless of the values inside it.
+_PROSE_FIELDS = {"notes", "source_label"}
+
+
+def _established(value: Any) -> bool:
+    """Whether a value says anything. Absent, null and `unknown` do not."""
+    return value is not None and value != "unknown"
+
+
+def _classify_differences(
+    existing: dict[str, Any], incoming: dict[str, Any]
+) -> tuple[list[str], dict[str, Any]]:
+    """Sort a second drive's differences into the ones that matter and the rest.
+
+    Comparing whole sub-objects lumped three unrelated situations together and
+    blocked on all of them, which mattered more than it sounds: faced with a wall
+    of false alarms, the quickest way through is to "correct the record
+    deliberately", and that is exactly how a second simulator ends up rewriting
+    the real car. The rule survives by making the false alarms stop.
+
+    - **Conflict**: both drives established a value and they differ. Only this
+      blocks. One game is wrong, or the record is, and a person decides which.
+    - **Gap filled**: the record says `unknown` and the drive established a
+      value. Returned separately so the reviewer opts in per field rather than
+      having a second simulator quietly write into the real car.
+    - **Less informed**: the drive did not establish what the record already
+      knows. Ignored - the curated value stands.
+    """
+    conflicts: list[str] = []
+    fills: dict[str, Any] = {}
     for section in ("transmission", "steering"):
         left = existing.get(section) or {}
         right = incoming.get(section) or {}
         for field in sorted(set(left) | set(right)):
-            if field == "notes":
+            if field in _PROSE_FIELDS:
                 continue
-            if left.get(field) != right.get(field):
-                differences.append(
-                    f"{section}.{field} ({left.get(field)!r} vs {right.get(field)!r})"
-                )
-    return differences
+            here, there = left.get(field), right.get(field)
+            if isinstance(here, dict) or isinstance(there, dict):
+                for leaf in sorted(set(here or {}) | set(there or {})):
+                    if leaf in _PROSE_FIELDS:
+                        continue
+                    _sort_one(
+                        f"/authentic_controls/{section}/{field}/{leaf}",
+                        (here or {}).get(leaf),
+                        (there or {}).get(leaf),
+                        conflicts,
+                        fills,
+                    )
+                continue
+            _sort_one(
+                f"/authentic_controls/{section}/{field}", here, there, conflicts, fills
+            )
+    return conflicts, fills
+
+
+def _sort_one(
+    pointer: str,
+    here: Any,
+    there: Any,
+    conflicts: list[str],
+    fills: dict[str, Any],
+) -> None:
+    if here == there:
+        return
+    if _established(here) and _established(there):
+        conflicts.append(f"{pointer} ({here!r} vs {there!r})")
+    elif _established(there):
+        fills[pointer] = there
 
 
 def _redirect_to_existing_record(
@@ -307,7 +363,11 @@ def _redirect_to_existing_record(
 
 
 def merge_simulator_entry(
-    existing: dict[str, Any], incoming: dict[str, Any], *, label: str
+    existing: dict[str, Any],
+    incoming: dict[str, Any],
+    *,
+    label: str,
+    accept_from_drive: list[str] | None = None,
 ) -> dict[str, Any]:
     """Add a simulator's entry to the curated record for the same real car.
 
@@ -326,18 +386,45 @@ def merge_simulator_entry(
             "promoting would replace curated evidence"
         )
 
-    differences = _control_differences(
+    conflicts, fills = _classify_differences(
         existing["authentic_controls"], incoming["authentic_controls"]
     )
-    if differences:
+    if conflicts:
         raise ValueError(
-            f"{label}: the {simulator_id} drive disagrees with the curated real car at "
-            + "; ".join(differences)
-            + ". Record a simulator override for a genuine deviation, or correct the "
-            "record deliberately; a second simulator never rewrites the real car."
+            f"{label}: the {simulator_id} drive contradicts the curated real car at "
+            + "; ".join(conflicts)
+            + ". Both established a value and they differ, so one of them is wrong. "
+            "Record a simulator override for a genuine deviation, or correct the record "
+            "deliberately; a second simulator never rewrites the real car."
+        )
+
+    accepted = list(accept_from_drive or [])
+    unclaimed = sorted(pointer for pointer in fills if pointer not in accepted)
+    if unclaimed:
+        raise ValueError(
+            f"{label}: the {simulator_id} drive establishes "
+            + "; ".join(f"{pointer} ({fills[pointer]!r})" for pointer in unclaimed)
+            + ", which the record leaves unknown. This fills a gap rather than "
+            "contradicting anything, but a second simulator does not write to the real "
+            "car unasked: list the pointer(s) under 'accept_from_drive' on this review "
+            "entry to take the value, or leave the field unknown."
+        )
+    stale = [pointer for pointer in accepted if pointer not in fills]
+    if stale:
+        raise ValueError(
+            f"{label}: 'accept_from_drive' names {stale!r}, which this drive does not "
+            "fill. The record may already have a value there, or the drive may not have "
+            "established one; either way the acceptance would do nothing and is more "
+            "likely a mistake than an intention."
         )
 
     merged = json.loads(json.dumps(existing))
+    for pointer, value in fills.items():
+        target = merged
+        parts = pointer.strip("/").split("/")
+        for part in parts[:-1]:
+            target = target[part]
+        target[parts[-1]] = value
     position = len(merged["simulators"])
     merged["simulators"].append(entry)
 
@@ -405,7 +492,10 @@ def promote_observations(
             # drive adds an entry to it rather than forking a second record.
             existing = json.loads(record_path.read_text(encoding="utf-8"))
             record = merge_simulator_entry(
-                existing, record, label=f"review entry {record_id}"
+                existing,
+                record,
+                label=f"review entry {record_id}",
+                accept_from_drive=entry.get("accept_from_drive"),
             )
 
         approval["dataset_version"] = dataset_version
