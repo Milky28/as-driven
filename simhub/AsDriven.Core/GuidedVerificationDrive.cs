@@ -146,6 +146,9 @@ namespace AsDriven.Core
         private DateTime? _neutralWhileMovingSinceUtc;
         private string _result = string.Empty;
         private double _maximumClutch;
+        /// <summary>Clutch reading with the car stopped, before the driver acted.</summary>
+        private double _restingClutch;
+        private bool _restingClutchSeen;
         private double _minimumThrottle;
         private double _maximumThrottle;
         /// <summary>
@@ -375,6 +378,15 @@ namespace AsDriven.Core
                     if (!_armed && _engineWasRunning && sample.SpeedKmh < 1.0)
                     {
                         _armed = true;
+                        // The clutch reading with the car stopped and the driver
+                        // not yet doing anything. Some simulators publish the
+                        // car's own clutch actuation on this channel rather than
+                        // the pedal - Assetto Corsa EVO shows it fully depressed
+                        // at rest and feeding out under throttle - and knowing
+                        // that turns a later "clutch input was present" caveat
+                        // into evidence that the car works its own clutch.
+                        _restingClutch = sample.Clutch;
+                        _restingClutchSeen = true;
                     }
                     if (_armed && _engineWasRunning && !engineRunning)
                     {
@@ -578,7 +590,7 @@ namespace AsDriven.Core
                         ? (briefThrottleInterruption
                             ? "A brief throttle interruption recovered immediately around the gear change."
                             : "A shift-local torque interruption was detected while throttle demand stayed high.")
-                        : "Automatic cut could not be established confidently from this trace.")
+                        : CutEvidenceSummary())
                     + VehicleClutchSummary();
             SetResult(true, automaticCut, message);
         }
@@ -787,9 +799,47 @@ namespace AsDriven.Core
 
         private string VehicleClutchSummary()
         {
-            return _maximumClutch > 20.0
-                ? " Clutch input was present; confirm it was the car and not the pedal."
-                : string.Empty;
+            if (_maximumClutch <= 20.0)
+            {
+                return string.Empty;
+            }
+            // A clutch already depressed with the car stopped, before the driver
+            // has done anything, cannot be the pedal unless the driver was
+            // holding it - and the guided drive asks them not to. Saying so
+            // turns the caveat into a finding.
+            if (_restingClutchSeen && _restingClutch > 20.0)
+            {
+                return " The clutch already read "
+                    + Math.Round(_restingClutch) + "% with the car stopped, before any"
+                    + " driver input, so this simulator publishes the car's own clutch"
+                    + " actuation on this channel rather than the pedal.";
+            }
+            return " Clutch input was present; confirm it was the car and not the pedal.";
+        }
+
+        /// <summary>
+        /// Why the automatic-cut test could not answer.
+        ///
+        /// It read torque, not throttle: an automatic cut on a sequential
+        /// gearbox is ignition-side, so the throttle plate stays open and the
+        /// throttle channel never shows it. That makes an absent torque channel
+        /// indistinguishable from a car that does not cut, unless the draft says
+        /// which happened - and only one of the two is worth re-driving for.
+        /// </summary>
+        private string CutEvidenceSummary()
+        {
+            if (_upshiftMaximumTorque <= 0.0)
+            {
+                return "This simulator published no engine torque during the shift, and the"
+                    + " test reads torque rather than throttle because the cut is"
+                    + " ignition-side. Nothing was measured, so the car may or may not cut;"
+                    + " re-driving will not change that without a torque channel.";
+            }
+            return "Engine torque held at "
+                + Math.Round(_upshiftMinimumTorque) + " of "
+                + Math.Round(_upshiftMaximumTorque)
+                + " through the change while throttle demand stayed high, which is not the"
+                + " collapse an automatic cut produces.";
         }
 
         private void RememberVehicleClutchTelemetry()
@@ -912,6 +962,8 @@ namespace AsDriven.Core
             _resultReady = false;
             _result = string.Empty;
             _maximumClutch = 0.0;
+            _restingClutch = 0.0;
+            _restingClutchSeen = false;
             _minimumThrottle = 100.0;
             _maximumThrottle = 0.0;
             _downshiftArmedThrottle = 0.0;

@@ -1164,6 +1164,50 @@ namespace AsDriven.Core.Tests
                     // A shift taken at full throttle is not a lifted-throttle
                     // upshift, however long the driver coasted beforehand.
                     {
+                    // An automatic cut is ignition-side, so the test reads torque
+                    // rather than throttle. That makes a simulator publishing no
+                    // torque indistinguishable from a car that does not cut,
+                    // unless the draft says which happened - and only one of the
+                    // two is worth re-driving for. Assetto Corsa EVO's first
+                    // Huracan drive landed here.
+                    {
+                        GuidedVerificationDrive noTorque = new GuidedVerificationDrive();
+                        noTorque.Start(6);
+                        for (int guard = 0; guard < 40
+                            && noTorque.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            noTorque.AddSample(GuidedSample(now, 3, 0, 0, 3000, 60, 0, true));
+                            noTorque.Next();
+                        }
+                        Equal("Full-throttle upshift", noTorque.GetSnapshot().Title,
+                            "reaches the upshift test with no torque channel");
+                        noTorque.AddSample(GuidedSample(now, 3, 0, 95, 5400, 75, 0, true));
+                        noTorque.AddSample(
+                            GuidedSample(now.AddMilliseconds(200), 4, 0, 95, 4600, 77, 0, true));
+                        True(noTorque.GetSnapshot().Result.Contains("published no engine torque"),
+                            "names an absent torque channel instead of calling the trace inconclusive");
+                        False(noTorque.GetSnapshot().Result.Contains("could not be established"),
+                            "does not report an unmeasured cut as an inconclusive measurement");
+                    }
+
+                    // Torque present and holding through the change is a real
+                    // negative reading, and says so with the numbers.
+                    {
+                        GuidedVerificationDrive held = new GuidedVerificationDrive();
+                        held.Start(6);
+                        for (int guard = 0; guard < 40
+                            && held.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            held.AddSample(GuidedSample(now, 3, 0, 0, 3000, 60, 100, true));
+                            held.Next();
+                        }
+                        held.AddSample(GuidedSample(now, 3, 0, 95, 5400, 75, 240, true));
+                        held.AddSample(
+                            GuidedSample(now.AddMilliseconds(200), 4, 0, 95, 4600, 77, 235, true));
+                        True(held.GetSnapshot().Result.Contains("Engine torque held at"),
+                            "reports a measured torque trace that shows no cut");
+                    }
+
                         GuidedVerificationDrive noLift = new GuidedVerificationDrive();
                         noLift.Start(6);
                         for (int guard = 0; guard < 40
