@@ -184,6 +184,11 @@ namespace AsDriven.Core
                 _fullThrottleTestFailed = false;
                 _coastDownshiftTestFailed = false;
                 _phase = Phase.MoveOff;
+                // Session-scoped, unlike the per-attempt trace: the clutch at
+                // rest is read once during move-off and quoted by later phases,
+                // and ResetTrace runs on every phase advance.
+                _restingClutch = 0.0;
+                _restingClutchSeen = false;
                 ResetTrace();
             }
         }
@@ -803,18 +808,21 @@ namespace AsDriven.Core
             {
                 return string.Empty;
             }
-            // A clutch already depressed with the car stopped, before the driver
-            // has done anything, cannot be the pedal unless the driver was
-            // holding it - and the guided drive asks them not to. Saying so
-            // turns the caveat into a finding.
+            // The caution stands: a driver resting a foot on the pedal looks
+            // the same as a car working its own clutch, which is the mistake it
+            // exists to catch. What the resting reading adds is where to look -
+            // a channel already high with the car stopped is either the car's
+            // own actuation or a held pedal, and the driver knows which.
+            string caution =
+                " Clutch input was present; confirm it was the car and not the pedal.";
             if (_restingClutchSeen && _restingClutch > 20.0)
             {
-                return " The clutch already read "
-                    + Math.Round(_restingClutch) + "% with the car stopped, before any"
-                    + " driver input, so this simulator publishes the car's own clutch"
-                    + " actuation on this channel rather than the pedal.";
+                caution += " It already read " + Math.Round(_restingClutch)
+                    + "% with the car stopped before any test began, so if the pedal was"
+                    + " untouched then this simulator reports the car's own clutch on"
+                    + " this channel.";
             }
-            return " Clutch input was present; confirm it was the car and not the pedal.";
+            return caution;
         }
 
         /// <summary>
@@ -852,7 +860,13 @@ namespace AsDriven.Core
                 "Clutch input was detected during a test that was accepted as needing no clutch. "
                 + "The telemetry does not separate the pedal from a clutch the car works itself, so "
                 + "this result may be measuring the driver. Re-run the test, or confirm the reading "
-                + "before relying on it.";
+                + "before relying on it."
+                + (_restingClutchSeen && _restingClutch > 20.0
+                    ? " The channel already read " + Math.Round(_restingClutch)
+                        + "% with the car stopped before any test began; if the pedal was untouched "
+                        + "then this simulator reports the car's own clutch here, which would make "
+                        + "the clutch-free results correct."
+                    : string.Empty);
         }
 
         /// <summary>
@@ -962,8 +976,6 @@ namespace AsDriven.Core
             _resultReady = false;
             _result = string.Empty;
             _maximumClutch = 0.0;
-            _restingClutch = 0.0;
-            _restingClutchSeen = false;
             _minimumThrottle = 100.0;
             _maximumThrottle = 0.0;
             _downshiftArmedThrottle = 0.0;
