@@ -2,8 +2,8 @@
 
 The dataset is the product, and until now the only way to read it was to install
 a SimHub plugin or open the JSON. This builds a page anyone can open: every
-curated car, what to fit, what to do, and - just as plainly - what is not
-established yet.
+curated car, what to fit, what to do, how each reviewed simulator relates to the
+real car, and - just as plainly - what is not established yet.
 
 The wording mirrors AsDriven.Core.PreflightLabels so the page and the in-sim
 card say the same thing. The tone a value carries is the same question the card
@@ -48,6 +48,42 @@ RIM = {
     "yoke": "Yoke",
     "other": "Other rim",
 }
+
+SIMULATOR_LABELS = {
+    "ams2": "AMS2",
+    "ac-evo": "Assetto Corsa EVO",
+    "ac-rally": "Assetto Corsa Rally",
+    "iracing": "iRacing",
+}
+
+SIMULATOR_BEHAVIOR_FIELDS = {
+    "/shift_type": "shift type",
+    "/auto_blip": "automatic blip",
+    "/shift_cut": "automatic shift cut",
+    "/wheel_rim_type/normalized": "wheel-rim category",
+    "/wheel_rim_type/integrated_display": "integrated wheel display",
+    "/wheel_rim_type/shift_lights": "wheel shift lights",
+    "/wheel_rim_type/open_top": "open-top wheel construction",
+    "/wheel_rim_type/source_label": "wheel-rim source label",
+}
+
+
+def simulator_label(simulator: str) -> str:
+    return SIMULATOR_LABELS.get(simulator, simulator.upper())
+
+
+def wheel_equipment(integrated_display: str, shift_lights: str) -> str:
+    display = {
+        "yes": "Display",
+        "no": "No display",
+        "not-applicable": "Display not applicable",
+    }.get(integrated_display, "Display not established")
+    lights = {
+        "yes": "Shift lights",
+        "no": "No shift lights",
+        "not-applicable": "Shift lights not applicable",
+    }.get(shift_lights, "Lights not established")
+    return f"{display} · {lights}"
 
 
 def shifter(gears: Any, actuation: str) -> str:
@@ -166,6 +202,66 @@ DIFFERENCE_FIELDS = {
     ),
 }
 TRANSMISSION_PREFIX = "/authentic_controls/transmission"
+RUNNING_CLUTCH_PATHS = {
+    "/authentic_controls/transmission/upshift/clutch",
+    "/authentic_controls/transmission/downshift/clutch",
+}
+
+
+def _control_field_label(path: str) -> str:
+    relative = path
+    if relative.startswith(TRANSMISSION_PREFIX):
+        relative = relative[len(TRANSMISSION_PREFIX):]
+    parts = [part.replace("_", " ") for part in relative.split("/") if part]
+    if len(parts) > 1 and parts[0] in {"upshift", "downshift"}:
+        return f"{parts[0]} {parts[-1]}"
+    return parts[-1] if parts else path.strip("/").replace("_", " ")
+
+
+def _open_control_fields(transmission: dict[str, Any]) -> list[str]:
+    paths = {
+        path for path, value in _flatten(transmission).items()
+        if value == "unknown"
+    }
+    local_clutch_paths = {path[len(TRANSMISSION_PREFIX):] for path in RUNNING_CLUTCH_PATHS}
+    labels = {
+        _control_field_label(path)
+        for path in paths
+        if path not in local_clutch_paths
+    }
+    if local_clutch_paths.issubset(paths):
+        labels.add("running-shift clutch")
+    else:
+        labels.update(_control_field_label(path) for path in paths & local_clutch_paths)
+    return sorted(labels)
+
+
+def _archetype_deviations(items: list[dict[str, Any]]) -> list[dict[str, str]]:
+    by_path = {item.get("path", ""): item for item in items}
+    combine_running_clutch = RUNNING_CLUTCH_PATHS.issubset(by_path)
+    combined_basis = ""
+    if combine_running_clutch:
+        bases = {
+            by_path[path].get("basis", "")
+            .replace("running upshifts", "running shifts")
+            .replace("running downshifts", "running shifts")
+            for path in RUNNING_CLUTCH_PATHS
+        }
+        combine_running_clutch = len(bases) == 1
+        if combine_running_clutch:
+            combined_basis = bases.pop()
+
+    result = []
+    running_clutch_written = False
+    for item in items:
+        path = item.get("path", "")
+        if combine_running_clutch and path in RUNNING_CLUTCH_PATHS:
+            if not running_clutch_written:
+                result.append({"field": "running-shift clutch", "why": combined_basis})
+                running_clutch_written = True
+            continue
+        result.append({"field": _control_field_label(path), "why": item.get("basis", "")})
+    return result
 
 
 def _apply(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -> dict[str, Any]:
@@ -208,6 +304,34 @@ def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -
     return out
 
 
+def _simulator_view(
+    record_id: str,
+    entry: dict[str, Any],
+    transmission: dict[str, Any],
+) -> dict[str, Any]:
+    simulator = entry.get("simulator", "")
+    confidence = entry.get("confidence") or {}
+    behavior = entry.get("behavior") or {}
+    unknown_behavior = sorted(
+        SIMULATOR_BEHAVIOR_FIELDS.get(
+            path,
+            path.rsplit("/", 1)[-1].replace("_", " "),
+        )
+        for path, value in _flatten(behavior).items()
+        if value == "unknown"
+    )
+    return {
+        "id": simulator,
+        "label": simulator_label(simulator),
+        "anchor": f"{record_id}--{simulator}",
+        "differences": differences(transmission, entry.get("overrides") or []),
+        "unknown_behavior": unknown_behavior,
+        "game_version": entry.get("verified_game_version", ""),
+        "verified_at": entry.get("verified_at", ""),
+        "confidence": confidence.get("level", ""),
+    }
+
+
 def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
     identity = record["identity"]
     controls = record["authentic_controls"]
@@ -224,17 +348,17 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
         transmission["downshift"]["automatic_blip"],
         transmission["downshift"]["clutch"],
     )
-    simulators = record.get("simulators") or [{}]
-    entry = simulators[0]
+    simulator_views = [
+        _simulator_view(record["record_id"], entry, transmission)
+        for entry in record.get("simulators") or []
+    ]
     block = record.get("archetype") or {}
     classification = block.get("classification")
     mechanism = archetypes.get(block.get("archetype_id", ""), "")
 
-    open_fields = sorted(
-        path.rsplit("/", 1)[-1].replace("_", " ")
-        for path, value in _flatten(transmission).items()
-        if value == "unknown"
-    )
+    open_fields = _open_control_fields(transmission)
+    deviations = _archetype_deviations(block.get("deviations", []))
+    explained_open_fields = {item["field"] for item in deviations}
     return {
         "id": record["record_id"],
         "name": identity["display_name"],
@@ -250,19 +374,21 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
         "up": [up_text, up_tone],
         "down": [down_text, down_tone],
         "rim": RIM.get(rim.get("shape", ""), "Rim not recorded"),
+        "wheel_equipment": wheel_equipment(
+            rim.get("integrated_display", "unknown"),
+            rim.get("shift_lights", "unknown"),
+        ),
         "summary": record.get("driver_summary", ""),
         "classification": classification,
         "mechanism": mechanism,
-        "deviations": [
-            {"field": item["path"].rsplit("/", 1)[-1].replace("_", " "), "why": item["basis"]}
-            for item in block.get("deviations", [])
-        ],
+        "deviations": deviations,
         "archetype_basis": block.get("basis", ""),
         "open_fields": open_fields,
-        "differences": differences(transmission, entry.get("overrides") or []),
-        "simulator": entry.get("simulator", ""),
-        "game_version": entry.get("verified_game_version", ""),
-        "verified_at": entry.get("verified_at", ""),
+        "unexplained_open_fields": [
+            field for field in open_fields if field not in explained_open_fields
+        ],
+        "simulators": simulator_views,
+        "has_differences": any(view["differences"] for view in simulator_views),
         "actuation": transmission["shift_actuation"],
         "start": transmission["standing_start_clutch"],
         "blip": transmission["downshift"]["manual_blip"],
@@ -293,10 +419,21 @@ def collect(root: Path) -> dict[str, Any]:
         for relative in index["records"]
     ]
     cars.sort(key=lambda car: (car["name"].lower(), car["car_class"].lower()))
+    simulators = {
+        view["id"]: view["label"]
+        for car in cars
+        for view in car["simulators"]
+    }
     return {
         "version": index["dataset_version"],
         "released_at": index["released_at"],
         "cars": cars,
+        "simulators": [
+            {"id": simulator, "label": label}
+            for simulator, label in sorted(
+                simulators.items(), key=lambda item: item[1].lower()
+            )
+        ],
     }
 
 
@@ -309,6 +446,81 @@ def _cell(value: list[str]) -> str:
     return (
         f'<td class="state"><span class="tone tone-{tone}" '
         f'title="{_e(TONE_TITLE[tone])}">{_e(text)}</span></td>'
+    )
+
+
+def _simulator_panel(car: dict[str, Any], simulator: dict[str, Any], selected: bool) -> str:
+    content = [
+        '<h3 class="sim-panel-title">{car}<span>{simulator}</span></h3>'.format(
+            car=_e(car["name"]), simulator=_e(simulator["label"])
+        )
+    ]
+    if simulator["differences"]:
+        rows = "".join(
+            '<li><span class="field">{name}</span>'
+            '<span class="was">{real}</span>'
+            '<span class="arrow" aria-hidden="true">→</span>'
+            '<span class="now">{sim}</span>'
+            '<p class="why">{why}</p></li>'.format(
+                name=_e(item["name"]),
+                real=_e(item["real"]),
+                sim=_e(item["sim"]),
+                why=_e(item["why"]),
+            )
+            for item in simulator["differences"]
+        )
+        content.append(
+            '<div class="block"><h4>{sim} does it differently</h4>'
+            '<ul class="differs">{rows}</ul></div>'.format(
+                sim=_e(simulator["label"]), rows=rows
+            )
+        )
+    else:
+        content.append(
+            '<div class="block sim-relationship"><h4>Relationship to the real car</h4>'
+            '<p>No reviewed difference from the real car is recorded for this simulator.</p>'
+            '</div>'
+        )
+
+    if simulator["unknown_behavior"]:
+        chips = "".join(
+            f'<span class="chip">{_e(field)}</span>'
+            for field in simulator["unknown_behavior"]
+        )
+        content.append(
+            '<div class="block"><h4>Simulator behavior not established</h4>'
+            f'<div class="chips">{chips}</div></div>'
+        )
+
+    provenance = " · ".join(
+        part
+        for part in (
+            simulator["label"],
+            simulator["game_version"],
+            f'verified {simulator["verified_at"]}' if simulator["verified_at"] else "",
+            f'confidence {simulator["confidence"]}' if simulator["confidence"] else "",
+        )
+        if part
+    )
+    content.append(f'<p class="provenance">{_e(provenance)}</p>')
+    content.append(
+        '<a class="permalink" href="#{anchor}" '
+        'aria-label="Link to {car} in {sim}">Link to this simulator view</a>'.format(
+            anchor=_e(simulator["anchor"]),
+            car=_e(car["name"]),
+            sim=_e(simulator["label"]),
+        )
+    )
+    hidden = "" if selected else " hidden"
+    return (
+        '<div class="sim-panel" id="{anchor}-panel" role="tabpanel" '
+        'aria-labelledby="{anchor}-tab" data-simulator-panel="{simulator}"{hidden}>'
+        '{content}</div>'.format(
+            anchor=_e(simulator["anchor"]),
+            simulator=_e(simulator["id"]),
+            hidden=hidden,
+            content="".join(content),
+        )
     )
 
 
@@ -335,65 +547,87 @@ def _row(car: dict[str, Any]) -> str:
         detail.append(
             f'<div class="block"><h4>{heading}</h4><p>{_e(car["archetype_basis"])}</p></div>'
         )
-    if car["open_fields"]:
-        chips = "".join(f'<span class="chip">{_e(field)}</span>' for field in car["open_fields"])
+    if car["unexplained_open_fields"]:
+        chips = "".join(
+            f'<span class="chip">{_e(field)}</span>'
+            for field in car["unexplained_open_fields"]
+        )
         detail.append(
             '<div class="block"><h4>Not established</h4>'
             f'<div class="chips">{chips}</div></div>'
         )
-    if car["differences"]:
-        rows = "".join(
-            '<li><span class="field">{name}</span>'
-            '<span class="was">{real}</span>'
-            '<span class="arrow" aria-hidden="true">→</span>'
-            '<span class="now">{sim}</span>'
-            '<p class="why">{why}</p></li>'.format(
-                name=_e(item["name"]), real=_e(item["real"]),
-                sim=_e(item["sim"]), why=_e(item["why"]),
-            )
-            for item in car["differences"]
+    tabs = "".join(
+        '<a class="sim-tab" id="{anchor}-tab" href="#{anchor}" role="tab" '
+        'aria-controls="{anchor}-panel" aria-selected="{selected}" tabindex="{tabindex}" '
+        'data-simulator-tab="{simulator}">{label}</a>'.format(
+            anchor=_e(simulator["anchor"]),
+            simulator=_e(simulator["id"]),
+            label=_e(simulator["label"]),
+            selected="true" if index == 0 else "false",
+            tabindex="0" if index == 0 else "-1",
         )
-        detail.append(
-            '<div class="block"><h4>{sim} does it differently</h4>'
-            '<ul class="differs">{rows}</ul></div>'.format(
-                sim=_e(car["simulator"].upper() or "The simulator"), rows=rows
-            )
-        )
-
-    provenance = " · ".join(
-        part
-        for part in (
-            car["simulator"].upper() if car["simulator"] else "",
-            car["game_version"],
-            f'verified {car["verified_at"]}' if car["verified_at"] else "",
-        )
-        if part
+        for index, simulator in enumerate(car["simulators"])
     )
-    detail.append(f'<p class="provenance">{_e(provenance)}</p>')
+    panels = "".join(
+        _simulator_panel(car, simulator, index == 0)
+        for index, simulator in enumerate(car["simulators"])
+    )
+    detail.append(
+        '<section class="simulator-section" aria-label="Simulator views">'
+        '<div class="simulator-heading"><h4>Simulator view</h4>'
+        '<span>Choose a reviewed simulator; each view has a shareable link.</span></div>'
+        '<div class="sim-tabs" role="tablist" aria-label="Reviewed simulators for {car}">'
+        '{tabs}</div>{panels}</section>'.format(
+            car=_e(car["name"]), tabs=tabs, panels=panels
+        )
+    )
 
     search = " ".join(
-        [car["name"], car["car_class"], car["shifter"], car["gate"], car["year"]]
+        [
+            car["name"], car["car_class"], car["shifter"], car["gate"], car["year"],
+            car["wheel_equipment"],
+            *(simulator["label"] for simulator in car["simulators"]),
+        ]
     ).lower()
+    simulator_ids = " " + " ".join(view["id"] for view in car["simulators"]) + " "
+    simulator_count = (
+        '<span class="sim-count">{count} simulators</span>'.format(
+            count=len(car["simulators"])
+        )
+        if len(car["simulators"]) > 1
+        else ""
+    )
+    simulator_anchors = "".join(
+        '<span class="sim-anchor" id="{anchor}" '
+        'data-simulator-anchor-target="{simulator}" aria-hidden="true"></span>'.format(
+            anchor=_e(simulator["anchor"]), simulator=_e(simulator["id"])
+        )
+        for simulator in car["simulators"]
+    )
     return (
-        f'<tr class="car" data-search="{_e(search)}" data-actuation="{_e(car["actuation"])}" '
+        f'<tr class="car" id="car-{_e(car["id"])}" data-search="{_e(search)}" '
+        f'data-simulators="{_e(simulator_ids)}" data-actuation="{_e(car["actuation"])}" '
         f'data-start="{_e(car["start"])}" data-blip="{_e(car["blip"])}" tabindex="0" '
-        f'aria-expanded="false">'
-        f'<td class="car-name"><span class="name">{_e(car["name"])}</span>'
+        f'aria-expanded="false" aria-controls="details-{_e(car["id"])}">'
+        f'<td class="car-name">{simulator_anchors}'
+        f'<span class="name">{_e(car["name"])}</span>'
         f'<span class="meta">{_e(car["car_class"])}</span>'
+        + simulator_count
         + (
-            '<span class="differs-flag" title="This simulator does something '
+            '<span class="differs-flag" title="A reviewed simulator does something '
             'differently from the real car">sim differs</span>'
-            if car["differences"]
+            if car["has_differences"]
             else ""
         )
         + "</td>"
         f'<td class="spec"><span class="shifter">{_e(car["shifter"])}</span>'
         f'<span class="meta">{_e(car["gate"])}</span></td>'
         f"{_cell(car['launch'])}{_cell(car['up'])}{_cell(car['down'])}"
-        f'<td class="rim">{_e(car["rim"])}</td>'
+        f'<td class="rim">{_e(car["rim"])}'
+        f'<span class="meta">{_e(car["wheel_equipment"])}</span></td>'
         "</tr>"
         f'<tr class="detail" hidden><td colspan="6"><div class="detail-inner">'
-        f'{"".join(detail)}</div></td></tr>'
+        f'<div id="details-{_e(car["id"])}">{"".join(detail)}</div></div></td></tr>'
     )
 
 
@@ -402,7 +636,14 @@ def render(payload: dict[str, Any]) -> str:
     clutch_start = sum(1 for car in cars if car["start"] == "required")
     you_blip = sum(1 for car in cars if car["blip"] == "required")
     open_any = sum(1 for car in cars if car["open_fields"])
-    differing = sum(1 for car in cars if car["differences"])
+    differing = sum(1 for car in cars if car["has_differences"])
+    simulator_entries = sum(len(car["simulators"]) for car in cars)
+    simulator_options = "".join(
+        '<option value="{id}">{label}</option>'.format(
+            id=_e(simulator["id"]), label=_e(simulator["label"])
+        )
+        for simulator in payload["simulators"]
+    )
     rows = "\n".join(_row(car) for car in cars)
     page = TEMPLATE.format(
         version=_e(payload["version"]),
@@ -412,6 +653,9 @@ def render(payload: dict[str, Any]) -> str:
         you_blip=you_blip,
         open_any=open_any,
         differing=differing,
+        simulator_count=len(payload["simulators"]),
+        simulator_entries=simulator_entries,
+        simulator_options=simulator_options,
         rows=rows,
     )
     # The page owns no <head>, so it cannot declare a charset. Emitting numeric
@@ -631,12 +875,13 @@ tr.detail > td {{ padding: 0; border-bottom: 1px solid var(--line); background: 
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 12px; color: var(--accent);
 }}
-.differs-flag {{
+.differs-flag, .sim-count {{
   display: inline-block; margin-top: 5px; padding: 1px 6px;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 10.5px; letter-spacing: 0.04em;
   color: var(--accent); border: 1px solid currentColor; border-radius: 2px;
 }}
+.sim-count {{ color: var(--muted); margin-right: 5px; }}
 .differs {{ gap: 12px; }}
 .differs li {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }}
 .differs .was {{ color: var(--faint); text-decoration: line-through; }}
@@ -653,6 +898,45 @@ tr.detail > td {{ padding: 0; border-bottom: 1px solid var(--line); background: 
   margin: 0;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 11.5px; color: var(--faint);
+}}
+.simulator-section {{
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 2px; padding-top: 16px; border-top: 1px solid var(--line);
+}}
+.simulator-heading {{
+  display: flex; flex-wrap: wrap; gap: 5px 12px; align-items: baseline;
+}}
+.simulator-heading h4 {{
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint);
+}}
+.simulator-heading span {{ font-size: 12.5px; color: var(--faint); }}
+.sim-tabs {{ display: flex; flex-wrap: wrap; gap: 6px; }}
+.sim-tab {{
+  padding: 5px 10px; border: 1px solid var(--line); border-radius: 3px;
+  color: var(--muted); background: var(--bg); text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px;
+}}
+.sim-tab:hover {{ color: var(--ink); border-color: var(--faint); }}
+.sim-tab[aria-selected="true"] {{
+  color: var(--ink); background: var(--surface-2); border-color: var(--accent);
+}}
+.sim-panel {{ display: flex; flex-direction: column; gap: 14px; }}
+.sim-panel[hidden] {{ display: none; }}
+.sim-anchor {{ display: block; height: 0; overflow: hidden; scroll-margin-top: 76px; }}
+.sim-panel-title {{
+  display: flex; flex-wrap: wrap; gap: 5px 10px; align-items: baseline;
+  margin: 0; font-size: 16px; font-weight: 600;
+}}
+.sim-panel-title span {{
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 500; color: var(--accent);
+}}
+.permalink {{
+  width: fit-content; color: var(--accent); font-size: 12.5px;
+  text-underline-offset: 3px;
 }}
 .empty {{ padding: 40px 12px; color: var(--muted); }}
 .legend {{
@@ -679,11 +963,13 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     </div>
   </div>
   <p class="lede">Which physical controls to fit, and how to shift, for an authentic
-  drive. {total} cars, curated from manufacturer and homologation sources and
-  verified in-sim. Where the evidence does not settle something, this says so
-  rather than guessing.</p>
+  drive. {total} cars across {simulator_entries} reviewed simulator views,
+  curated from manufacturer and homologation sources and verified in-sim. Where
+  the evidence does not settle something, this says so rather than guessing.</p>
   <div class="stats">
     <div class="stat"><b>{total}</b><span>cars</span></div>
+    <div class="stat"><b>{simulator_count}</b><span>simulators represented</span></div>
+    <div class="stat"><b>{simulator_entries}</b><span>reviewed simulator views</span></div>
     <div class="stat"><b>{clutch_start}</b><span>need the clutch to pull away</span></div>
     <div class="stat"><b>{you_blip}</b><span>need you to blip</span></div>
     <div class="stat"><b>{open_any}</b><span>have something unestablished</span></div>
@@ -694,6 +980,10 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 
 <div class="controls">
   <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
+  <select id="f-simulator" aria-label="Filter by simulator coverage">
+    <option value="">Any simulator</option>
+    {simulator_options}
+  </select>
   <select id="f-actuation" aria-label="Filter by shifter">
     <option value="">Any shifter</option>
     <option value="h-pattern">H-pattern</option>
@@ -738,15 +1028,16 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 
 <footer>Select a car for the mechanism it shares with others, where it departs
 from that, and what a drive or a source would still have to settle. Every row
-describes the real car. Where a simulator does something else - a gear it does
-not model, a clutch it demands anyway - the car is marked and the difference is
-listed against it, because the two are separate facts and neither overwrites the
-other.</footer>
+describes the real car. Open it to choose a reviewed simulator; differences and
+simulator-specific evidence gaps stay inside that view, because they are
+separate facts and neither overwrites the real car. Each simulator view has a
+stable link that can be shared.</footer>
 </div>
 
 <script>
 (function () {{
   var q = document.getElementById('q');
+  var simulatorFilter = document.getElementById('f-simulator');
   var filters = ['actuation', 'start', 'blip'].map(function (name) {{
     return {{ name: name, node: document.getElementById('f-' + name) }};
   }});
@@ -759,6 +1050,11 @@ other.</footer>
     var shown = 0;
     rows.forEach(function (row) {{
       var ok = !text || row.dataset.search.indexOf(text) !== -1;
+      var wantedSimulator = simulatorFilter.value;
+      if (ok && wantedSimulator
+          && row.dataset.simulators.indexOf(' ' + wantedSimulator + ' ') === -1) {{
+        ok = false;
+      }}
       filters.forEach(function (filter) {{
         var want = filter.node.value;
         if (ok && want && row.dataset[filter.name] !== want) {{ ok = false; }}
@@ -766,8 +1062,9 @@ other.</footer>
       row.hidden = !ok;
       var detail = row.nextElementSibling;
       if (!ok && detail) {{
-        detail.hidden = true;
-        row.setAttribute('aria-expanded', 'false');
+        setOpen(row, false);
+      }} else if (ok && wantedSimulator && detail && !detail.hidden) {{
+        selectSimulator(row, wantedSimulator);
       }}
       if (ok) {{ shown++; }}
     }});
@@ -777,12 +1074,39 @@ other.</footer>
     empty.hidden = shown !== 0;
   }}
 
+  function setOpen(row, open) {{
+    var detail = row.nextElementSibling;
+    if (!detail) {{ return; }}
+    detail.hidden = !open;
+    row.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }}
+
+  function selectSimulator(row, simulator) {{
+    var detail = row.nextElementSibling;
+    if (!detail) {{ return false; }}
+    var tabs = Array.prototype.slice.call(detail.querySelectorAll('[data-simulator-tab]'));
+    var panels = Array.prototype.slice.call(detail.querySelectorAll('[data-simulator-panel]'));
+    var found = false;
+    tabs.forEach(function (tab) {{
+      var selected = tab.getAttribute('data-simulator-tab') === simulator;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.setAttribute('tabindex', selected ? '0' : '-1');
+      if (selected) {{ found = true; }}
+    }});
+    panels.forEach(function (panel) {{
+      panel.hidden = panel.getAttribute('data-simulator-panel') !== simulator;
+    }});
+    return found;
+  }}
+
   function toggle(row) {{
     var detail = row.nextElementSibling;
     if (!detail) {{ return; }}
     var open = detail.hidden;
-    detail.hidden = !open;
-    row.setAttribute('aria-expanded', open ? 'true' : 'false');
+    setOpen(row, open);
+    if (open && simulatorFilter.value) {{
+      selectSimulator(row, simulatorFilter.value);
+    }}
   }}
 
   rows.forEach(function (row) {{
@@ -794,6 +1118,51 @@ other.</footer>
       }}
     }});
   }});
+
+  var simulatorTabs = Array.prototype.slice.call(
+    document.querySelectorAll('[data-simulator-tab]'));
+  simulatorTabs.forEach(function (tab) {{
+    tab.addEventListener('click', function () {{
+      var detail = tab.closest('tr.detail');
+      var row = detail ? detail.previousElementSibling : null;
+      if (!row) {{ return; }}
+      setOpen(row, true);
+      selectSimulator(row, tab.getAttribute('data-simulator-tab'));
+    }});
+    tab.addEventListener('keydown', function (event) {{
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {{ return; }}
+      var tabs = Array.prototype.slice.call(
+        tab.parentElement.querySelectorAll('[data-simulator-tab]'));
+      var direction = event.key === 'ArrowRight' ? 1 : -1;
+      var next = tabs[(tabs.indexOf(tab) + direction + tabs.length) % tabs.length];
+      event.preventDefault();
+      next.focus();
+      next.click();
+    }});
+  }});
+
+  function restoreSimulatorLink(scroll) {{
+    if (!window.location.hash) {{ return; }}
+    var anchor;
+    try {{ anchor = decodeURIComponent(window.location.hash.slice(1)); }}
+    catch (error) {{ return; }}
+    var link = document.getElementById(anchor);
+    if (!link || !link.hasAttribute('data-simulator-anchor-target')) {{ return; }}
+    var row = link.closest('tr.car');
+    if (!row) {{ return; }}
+    var simulator = link.getAttribute('data-simulator-anchor-target');
+    if (scroll) {{
+      simulatorFilter.value = simulator;
+      apply();
+    }}
+    setOpen(row, true);
+    selectSimulator(row, simulator);
+    if (scroll) {{
+      window.setTimeout(function () {{ row.scrollIntoView({{ block: 'center' }}); }}, 0);
+    }}
+  }}
+
+  window.addEventListener('hashchange', function () {{ restoreSimulatorLink(false); }});
   // Three states, because that is what the stylesheet answers to: an explicit
   // choice stamps the root element, and following the system stamps nothing.
   // Without the third button a reader who picked one could never hand the
@@ -829,8 +1198,10 @@ other.</footer>
   setTheme(remembered || 'system', false);
 
   q.addEventListener('input', apply);
+  simulatorFilter.addEventListener('change', apply);
   filters.forEach(function (filter) {{ filter.node.addEventListener('change', apply); }});
   apply();
+  restoreSimulatorLink(true);
 }})();
 </script>
 """

@@ -15,6 +15,7 @@ from as_driven_db.site import (
     gate,
     launch,
     upshift,
+    wheel_equipment,
 )
 
 
@@ -55,6 +56,31 @@ class SiteTests(unittest.TestCase):
             downshift("required", "no", "not-required"), ("Blip to rev-match", TONE_DRIVER)
         )
 
+    def test_wheel_display_and_shift_lights_remain_independent(self) -> None:
+        self.assertEqual(wheel_equipment("yes", "yes"), "Display · Shift lights")
+        self.assertEqual(wheel_equipment("yes", "no"), "Display · No shift lights")
+        self.assertEqual(wheel_equipment("no", "yes"), "No display · Shift lights")
+        self.assertEqual(wheel_equipment("no", "no"), "No display · No shift lights")
+        self.assertEqual(
+            wheel_equipment("no", "unknown"),
+            "No display · Lights not established",
+        )
+        self.assertEqual(
+            wheel_equipment("unknown", "unknown"),
+            "Display not established · Lights not established",
+        )
+
+    def test_wheel_equipment_reaches_each_car_row(self) -> None:
+        cars = {car["id"]: car for car in collect(ROOT)["cars"]}
+        self.assertEqual(cars["roco-001"]["wheel_equipment"], "Display · No shift lights")
+        self.assertEqual(cars["bmw-m6-gt3"]["wheel_equipment"], "No display · Shift lights")
+        page = build_site(ROOT)
+        for car in cars.values():
+            rendered = car["wheel_equipment"].encode(
+                "ascii", "xmlcharrefreplace"
+            ).decode("ascii")
+            self.assertIn(rendered, page)
+
     def test_a_dogleg_states_which_side_first_sits_on_only_when_recorded(self) -> None:
         self.assertEqual(gate("h-pattern", "dogleg-h", "down-left"), "Dogleg gate, 1st down and left")
         self.assertEqual(gate("h-pattern", "dogleg-h", "down-right"), "Dogleg gate, 1st down and right")
@@ -69,6 +95,8 @@ class SiteTests(unittest.TestCase):
 
         page = build_site(ROOT)
         self.assertEqual(page.count('<tr class="car"'), len(index["records"]))
+        simulator_entries = sum(len(car["simulators"]) for car in payload["cars"])
+        self.assertEqual(page.count('data-simulator-panel="'), simulator_entries)
         # A car is listed under its own name. The aero package a simulator picks
         # from the circuit is not part of it and was dropped from the records.
         for car in payload["cars"]:
@@ -85,14 +113,25 @@ class SiteTests(unittest.TestCase):
         """
         payload = collect(ROOT)
         page = build_site(ROOT)
-        differing = [car for car in payload["cars"] if car["differences"]]
+        differing = [car for car in payload["cars"] if car["has_differences"]]
+        differing_views = [
+            simulator
+            for car in payload["cars"]
+            for simulator in car["simulators"]
+            if simulator["differences"]
+        ]
         self.assertEqual(page.count('class="differs-flag"'), len(differing))
-        self.assertEqual(page.count('<ul class="differs">'), len(differing))
+        self.assertEqual(page.count('<ul class="differs">'), len(differing_views))
 
         by_name = {car["name"]: car for car in differing}
         # Rendered in the page's own words rather than as raw enum values, and
         # in both directions, so the reader can see which is which.
-        cayman = by_name["Porsche Cayman GT4 Clubsport MR"]["differences"][0]
+        cayman_car = by_name["Porsche Cayman GT4 Clubsport MR"]
+        cayman_view = next(
+            simulator for simulator in cayman_car["simulators"]
+            if simulator["id"] == "ams2"
+        )
+        cayman = cayman_view["differences"][0]
         self.assertEqual(cayman["name"], "Pulling away")
         self.assertEqual(cayman["real"], "No clutch needed")
         self.assertEqual(cayman["sim"], "Clutch required")
@@ -101,7 +140,7 @@ class SiteTests(unittest.TestCase):
         # The table above still states the real car; the override belongs to the
         # detail panel and must not leak into the row.
         self.assertEqual(
-            by_name["Porsche Cayman GT4 Clubsport MR"]["launch"][0], "No clutch needed"
+            cayman_car["launch"][0], "No clutch needed"
         )
 
     def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
@@ -111,22 +150,79 @@ class SiteTests(unittest.TestCase):
         milano = next(
             car for car in collect(ROOT)["cars"] if car["name"] == "Milano 55 GT1"
         )
+        ams2 = next(simulator for simulator in milano["simulators"] if simulator["id"] == "ams2")
         self.assertEqual(
-            milano["differences"],
+            ams2["differences"],
             [
                 {
                     "name": "Clutch on a downshift",
                     "real": "Clutch required",
                     "sim": "No clutch needed",
-                    "why": milano["differences"][0]["why"],
+                    "why": ams2["differences"][0]["why"],
                 }
             ],
         )
 
+    def test_parallel_running_clutch_gaps_are_not_rendered_twice(self) -> None:
+        diablo = next(
+            car for car in collect(ROOT)["cars"]
+            if car["id"] == "lamborghini-diablo-sv-r"
+        )
+        self.assertEqual(diablo["open_fields"], ["running-shift clutch"])
+        self.assertEqual(diablo["unexplained_open_fields"], [])
+        self.assertEqual(len(diablo["deviations"]), 1)
+        self.assertEqual(diablo["deviations"][0]["field"], "running-shift clutch")
+        self.assertIn(
+            "The clutch's use on running shifts is not established",
+            diablo["deviations"][0]["why"],
+        )
+
     def test_a_car_the_simulator_models_faithfully_says_nothing(self) -> None:
         self.assertEqual(differences({"forward_gears": 6}, []), [])
-        quiet = [car for car in collect(ROOT)["cars"] if not car["differences"]]
+        quiet = [
+            simulator
+            for car in collect(ROOT)["cars"]
+            for simulator in car["simulators"]
+            if not simulator["differences"]
+        ]
         self.assertGreater(len(quiet), 200)
+
+    def test_every_reviewed_simulator_is_a_selectable_linked_view(self) -> None:
+        payload = collect(ROOT)
+        page = build_site(ROOT)
+        audi = next(car for car in payload["cars"] if car["id"] == "audi-r8-lms-gt3-evo-ii")
+        self.assertEqual(
+            [(simulator["id"], simulator["label"]) for simulator in audi["simulators"]],
+            [("ams2", "AMS2"), ("ac-evo", "Assetto Corsa EVO")],
+        )
+        self.assertIn('data-simulators=" ams2 ac-evo "', page)
+        for simulator in audi["simulators"]:
+            anchor = f'audi-r8-lms-gt3-evo-ii--{simulator["id"]}'
+            self.assertIn(
+                f'id="{anchor}" data-simulator-anchor-target="{simulator["id"]}"',
+                page,
+            )
+            self.assertIn(f'id="{anchor}-panel" role="tabpanel"', page)
+            self.assertIn(f'href="#{anchor}"', page)
+        ac_evo = next(
+            simulator for simulator in audi["simulators"] if simulator["id"] == "ac-evo"
+        )
+        self.assertEqual(ac_evo["unknown_behavior"], ["automatic shift cut"])
+        self.assertIn("Simulator behavior not established", page)
+        self.assertIn("window.addEventListener('hashchange'", page)
+
+    def test_the_simulator_filter_is_derived_from_released_records(self) -> None:
+        payload = collect(ROOT)
+        self.assertEqual(
+            payload["simulators"],
+            [
+                {"id": "ams2", "label": "AMS2"},
+                {"id": "ac-evo", "label": "Assetto Corsa EVO"},
+            ],
+        )
+        page = build_site(ROOT)
+        self.assertIn('<option value="ac-evo">Assetto Corsa EVO</option>', page)
+        self.assertIn('<option value="ams2">AMS2</option>', page)
 
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:
         page = build_site(ROOT)
@@ -147,6 +243,11 @@ class SiteTests(unittest.TestCase):
             for value, label in re.findall(r"<b>([\d]+)</b><span>([^<]+)</span>", page)
         )
         self.assertEqual(stats["cars"], len(cars))
+        self.assertEqual(stats["simulators represented"], len(payload["simulators"]))
+        self.assertEqual(
+            stats["reviewed simulator views"],
+            sum(len(car["simulators"]) for car in cars),
+        )
         self.assertEqual(
             stats["need the clutch to pull away"],
             sum(1 for car in cars if car["start"] == "required"),
@@ -158,6 +259,10 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(
             stats["have something unestablished"],
             sum(1 for car in cars if car["open_fields"]),
+        )
+        self.assertEqual(
+            stats["differ in the simulator"],
+            sum(1 for car in cars if car["has_differences"]),
         )
 
     def test_the_four_states_are_told_apart_by_more_than_hue(self) -> None:

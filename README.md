@@ -117,8 +117,9 @@ python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
 Read the whole database in a browser, with no install and no JSON. One
-self-contained page, filterable by shifter, clutch and blip, written to the
-ignored `dist/` directory:
+self-contained page, filterable by simulator, shifter, clutch and blip, written
+to the ignored `dist/` directory. A car stays one row while reviewed simulators
+appear as separate views inside it, each with a stable shareable link:
 
 ```shell
 python -m as_driven_db build-site

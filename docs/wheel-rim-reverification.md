@@ -118,15 +118,15 @@ grew to capture lights partway through curation - later source labels say so
 outright (`live-cockpit-round-shift-lights`,
 `live-cockpit-formula-display-shift-lights`), while these records carry the older
 forms (`live-cockpit-round-no-display`, `live-cockpit-gt`, or a plain
-`live-cockpit-observation`). So this is one vocabulary change rather than 32
+`live-cockpit-observation`). So this is one vocabulary change rather than 31
 separate mysteries, and only a look at the cockpit closes it.
 
-The field was absent from 31 of these rather than recorded as `unknown`. It is
+The field was absent from 30 of these rather than recorded as `unknown`. It is
 now `unknown` everywhere, which changes nothing a driver sees - the client
 already read an absent state as unknown - but makes the gap countable and puts
 the one record that already said `unknown` in with the rest.
 
-**20 records have a known display and unobserved lights.** These are the useful
+**19 records have a known display and unobserved lights.** These are the useful
 ones to re-check: half the answer is already there.
 
 | Record | Display | Shape |
@@ -140,7 +140,6 @@ ones to re-check: half the answer is already there.
 | `chevrolet-corvette-z06-gt3r` | no | gt-formula |
 | `gillet-vertigo-streiff` | no | d-shaped |
 | `lamborghini-diablo-sv-r` | no | round |
-| `lamborghini-huracan-super-trofeo-evo2` | no | gt-formula |
 | `lamborghini-murcielago-r-gt` | no | d-shaped |
 | `lister-storm-gtm` | no | d-shaped |
 | `maserati-mc12-gt1` | no | d-shaped |
@@ -174,12 +173,12 @@ assumed either way.
 `period-cockpit` rather than a drive, so it is a different problem from the rest
 of this list: there is no simulator cockpit to go back to for the real car's rim.
 
-Count: 32.
+Count: 31.
 
 ### What the card shows meanwhile
 
 The FIT band used to answer "Display not recorded" whenever lights were absent,
-which was wrong in both directions. For the 20 records with `display: no` it
+which was wrong in both directions. For the 19 records with `display: no` it
 denied a display that had been recorded. For the 11 with `display: yes` it read
 as a complete answer - ordinary text, no hedge - while dropping the lights
 silently, which is the worse of the two.
