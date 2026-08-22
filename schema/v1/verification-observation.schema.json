@@ -33,6 +33,7 @@
       "enum": [
         "ams2",
         "iracing",
+        "ac",
         "ac-evo",
         "ac-rally",
         "other"

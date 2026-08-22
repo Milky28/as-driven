@@ -69,8 +69,14 @@ namespace AsDriven.Core.Tests
                     "recognizes SimHub's Assetto Corsa EVO game name");
                 Equal("ac-evo", AsDrivenDatabase.CanonicalizeSimulator("Assetto Corsa EVO"),
                     "recognizes the product spelling of Assetto Corsa EVO");
-                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsa"),
-                    "does not resolve plain Assetto Corsa to the EVO dataset");
+                // Four Assetto Corsa titles share a name and share almost no
+                // cars. Each is compared whole, so none resolves into another:
+                // the original is curated, EVO is curated, Rally is in the enum
+                // and undriven, and Competizione is not covered at all.
+                Equal("ac", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsa"),
+                    "recognizes the original Assetto Corsa");
+                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaRally"),
+                    "does not resolve Rally, which nothing has been driven in");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),
                     "does not resolve Competizione to the EVO dataset");
 
@@ -846,8 +852,23 @@ namespace AsDriven.Core.Tests
                 Equal("ams2", database.Simulators[0].Id, "lists the best-covered simulator first");
                 Equal("Automobilista 2", database.Simulators[0].DisplayName,
                     "shows the product name rather than the SimHub game name");
-                Equal(database.RecordCount, database.Simulators[0].RecordCount,
-                    "the single curated simulator accounts for every record");
+                // AMS2 no longer accounts for every record: the 718 Clubsport is
+                // curated from Assetto Corsa EVO alone, because AMS2 models the
+                // previous generation of that car under a name one token apart.
+                // What must hold is that no simulator claims more records than
+                // exist, and that the covered counts add up to at least the
+                // catalog, since a car covered twice is counted under each.
+                int covered = 0;
+                foreach (SimulatorCoverage coverage in database.Simulators)
+                {
+                    True(coverage.RecordCount <= database.RecordCount,
+                        "no simulator covers more records than exist: " + coverage.Id);
+                    covered += coverage.RecordCount;
+                }
+                Equal(database.Cars.Length, covered,
+                    "every catalog entry belongs to exactly one simulator's coverage");
+                True(covered >= database.RecordCount,
+                    "every record is covered by at least one simulator");
                 True(database.Supports("Automobilista2"), "supports the curated simulator");
                 True(database.Supports("AMS2"), "supports the curated simulator by short name");
                 False(database.Supports("Other Simulator"), "does not support an unknown game");

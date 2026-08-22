@@ -51,6 +51,7 @@ RIM = {
 
 SIMULATOR_LABELS = {
     "ams2": "AMS2",
+    "ac": "Assetto Corsa",
     "ac-evo": "Assetto Corsa EVO",
     "ac-rally": "Assetto Corsa Rally",
     "iracing": "iRacing",

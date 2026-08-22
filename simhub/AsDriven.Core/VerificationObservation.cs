@@ -57,7 +57,7 @@ namespace AsDriven.Core
             new[] { "enabled", "disabled", "unavailable", "unknown" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> Simulators = new HashSet<string>(
-            new[] { "ams2", "iracing", "ac-evo", "ac-rally", "other" },
+            new[] { "ams2", "iracing", "ac", "ac-evo", "ac-rally", "other" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> ShiftActuations = new HashSet<string>(
             new[] { "h-pattern", "sequential-stick", "sequential-paddles", "automatic-lever", "direct-selection", "unknown" },
