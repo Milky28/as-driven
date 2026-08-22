@@ -268,27 +268,52 @@ class SiteTests(unittest.TestCase):
             for value, label in re.findall(r"<b>([\d]+)</b><span>([^<]+)</span>", page)
         )
         self.assertEqual(stats["cars"], len(cars))
-        self.assertEqual(stats["simulators represented"], len(payload["simulators"]))
+        self.assertEqual(stats["simulators"], len(payload["simulators"]))
         self.assertEqual(
-            stats["reviewed simulator views"],
+            stats["views"],
             sum(len(car["simulators"]) for car in cars),
         )
         self.assertEqual(
-            stats["need the clutch to pull away"],
+            stats["clutch starts"],
             sum(1 for car in cars if car["start"] == "required"),
         )
         self.assertEqual(
-            stats["need you to blip"],
+            stats["manual blip"],
             sum(1 for car in cars if car["blip"] == "required"),
         )
         self.assertEqual(
-            stats["have something unestablished"],
+            stats["open questions"],
             sum(1 for car in cars if car["open_fields"]),
         )
         self.assertEqual(
-            stats["differ in the simulator"],
+            stats["sim differences"],
             sum(1 for car in cars if car["has_differences"]),
         )
+
+    def test_the_header_and_open_row_keep_a_compact_visual_hierarchy(self) -> None:
+        page = build_site(ROOT)
+        stats_rule = re.search(r"\.stats \{(.*?)\}", page, re.S).group(1)
+        stat_rule = re.search(r"\.stat \{(.*?)\}", page, re.S).group(1)
+        detail_rule = re.search(r"\.detail-inner \{(.*?)\}", page, re.S).group(1)
+        selected_rule = re.search(
+            r'tr\.car\[aria-expanded="true"\] \{(.*?)\}', page, re.S
+        ).group(1)
+
+        self.assertIn("flex-wrap: wrap", stats_rule)
+        self.assertIn("align-items: baseline", stat_rule)
+        self.assertIn("white-space: nowrap", stat_rule)
+        self.assertIn("border-top: 2px solid var(--accent)", detail_rule)
+        self.assertIn("box-shadow", detail_rule)
+        self.assertIn("inset 3px 0 0 var(--accent)", selected_rule)
+
+    def test_the_light_palette_separates_ground_surface_and_rules(self) -> None:
+        page = build_site(ROOT)
+        root = re.search(r":root \{(.*?)\}", page, re.S).group(1)
+        tokens = dict(re.findall(r"(--[a-z0-9-]+):\s*([^;]+);", root))
+        self.assertNotEqual(tokens["--bg"], tokens["--surface"])
+        self.assertNotEqual(tokens["--surface"], tokens["--surface-2"])
+        self.assertEqual(tokens["--line"], "#cbd1da")
+        self.assertEqual(tokens["--faint"], "#535c6a")
 
     def test_the_four_states_are_told_apart_by_more_than_hue(self) -> None:
         """Two warm fills side by side read as the same answer.

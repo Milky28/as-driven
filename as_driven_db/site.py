@@ -676,13 +676,13 @@ TEMPLATE = """<title>As Driven Controls</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root {{
-  --bg: #f4f5f7;
+  --bg: #f0f2f5;
   --surface: #ffffff;
-  --surface-2: #eceef2;
+  --surface-2: #e3e7ed;
   --ink: #16181d;
-  --muted: #4a505c;
-  --faint: #5f6572;
-  --line: #dfe2e8;
+  --muted: #3f4652;
+  --faint: #535c6a;
+  --line: #cbd1da;
   --accent: #c2610a;
   --driver: #a8520a;
   --driver-bg: #fbeedd;
@@ -761,17 +761,17 @@ h1 {{
   text-wrap: balance;
 }}
 .lede {{ margin: 0; max-width: 62ch; color: var(--muted); }}
-.stats {{ display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 6px; }}
-.stat {{ display: flex; flex-direction: column; gap: 1px; }}
+.stats {{ display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding-top: 6px; }}
+.stat {{ display: flex; align-items: baseline; gap: 7px; white-space: nowrap; }}
 .stat b {{
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }}
 .stat span {{
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 10.5px;
+  font-size: 10px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--faint);
@@ -828,6 +828,10 @@ thead th {{
 }}
 tr.car {{ border-bottom: 1px solid var(--line); cursor: pointer; }}
 tr.car:hover {{ background: var(--surface); }}
+tr.car[aria-expanded="true"] {{
+  background: var(--surface);
+  box-shadow: inset 3px 0 0 var(--accent);
+}}
 tr.car td {{ padding: 11px 12px; vertical-align: top; }}
 .name {{ display: block; font-weight: 600; }}
 .shifter {{ display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; }}
@@ -856,10 +860,16 @@ tr.car td {{ padding: 11px 12px; vertical-align: top; }}
   background: none; color: var(--faint);
   border: 1px dotted currentColor; padding: 2px 8px;
 }}
-tr.detail > td {{ padding: 0; border-bottom: 1px solid var(--line); background: var(--surface); }}
+tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); background: var(--bg); }}
 .detail-inner {{
-  display: flex; flex-direction: column; gap: 16px;
-  padding: 18px 14px 22px; max-width: 78ch;
+  padding: 18px 18px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line); border-top: 2px solid var(--accent);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 8px 24px rgba(15, 18, 24, 0.08);
+}}
+.detail-inner > div {{
+  display: flex; flex-direction: column; gap: 16px; max-width: 78ch;
 }}
 .summary {{ margin: 0; font-size: 14.5px; }}
 .block {{ display: flex; flex-direction: column; gap: 5px; }}
@@ -951,6 +961,7 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 @media (prefers-reduced-motion: reduce) {{ * {{ transition: none !important; }} }}
 @media (max-width: 720px) {{
   .wrap {{ padding: 28px 14px 60px; }}
+  .stats {{ gap: 6px 16px; }}
 }}
 </style>
 
@@ -970,12 +981,12 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
   the evidence does not settle something, this says so rather than guessing.</p>
   <div class="stats">
     <div class="stat"><b>{total}</b><span>cars</span></div>
-    <div class="stat"><b>{simulator_count}</b><span>simulators represented</span></div>
-    <div class="stat"><b>{simulator_entries}</b><span>reviewed simulator views</span></div>
-    <div class="stat"><b>{clutch_start}</b><span>need the clutch to pull away</span></div>
-    <div class="stat"><b>{you_blip}</b><span>need you to blip</span></div>
-    <div class="stat"><b>{open_any}</b><span>have something unestablished</span></div>
-    <div class="stat"><b>{differing}</b><span>differ in the simulator</span></div>
+    <div class="stat"><b>{simulator_count}</b><span>simulators</span></div>
+    <div class="stat"><b>{simulator_entries}</b><span>views</span></div>
+    <div class="stat"><b>{clutch_start}</b><span>clutch starts</span></div>
+    <div class="stat"><b>{you_blip}</b><span>manual blip</span></div>
+    <div class="stat"><b>{open_any}</b><span>open questions</span></div>
+    <div class="stat"><b>{differing}</b><span>sim differences</span></div>
   </div>
   <p class="provenance">Dataset {version}, released {released}.</p>
 </header>
