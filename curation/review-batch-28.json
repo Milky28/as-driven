@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.8",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "porsche-911-carrera-rsr-2-8-1973",
+      "bundle": "build/staged-20260822/ac.acl-gtr-porsche-911-rsr-1973.20260822t043730445z-d5fe85b5.staged.json",
+      "create_new_record": {
+        "staged_record_id": "acl-gtr-porsche-911-rsr-1973",
+        "basis": "AC reports the mod author's ACL GTR package title. Porsche identifies the real base car as the 1973 911 Carrera RSR 2.8, while the AC Legends v3.0 release notes for this Mac Ten conversion explicitly say the mod depicts a 2.8 RSR later uprated with a 3.0-litre RSR engine. The record id therefore names the real base car rather than the package."
+      },
+      "display_name": "Porsche 911 Carrera RSR 2.8/3.0 (1973)",
+      "class": "Sports prototype",
+      "manufacturer": "Porsche",
+      "model": "911 Carrera RSR 2.8",
+      "variant": "3.0-litre engine conversion",
+      "year": {
+        "from": 1973,
+        "label": "1973 RSR 2.8 with 3.0-litre conversion"
+      },
+      "real_world_identity_notes": "A 1973 Porsche 911 Carrera RSR 2.8 subsequently fitted with a three-litre RSR engine. Porsche records that the 2.8 was created for the 1973 season and that a three-litre version then competed in the prototype class. The exact AC Legends package describes itself as such a 2.8-to-3.0 conversion. This is not the factory 1974 Carrera RSR 3.0 curated separately as porsche-911-rsr-1974.",
+      "real_world_source_refs": [
+        "porsche.newsroom.rsr-model-history-2020",
+        "fia.historicdb.porsche-carrera-rs-3053",
+        "twinsparkracing.porsche-915-replaced-the-dogleg",
+        "ac-legends.gt-classic-3-release-notes-2020",
+        "totsugeki.ac-legends-911-rsr-1973"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Porsche and FIA primary sources establish the 1973 RSR lineage, synchronized Type 915 five-speed and historical clutch/double-declutch technique. The AC Legends v3.0 release notes directly establish that Mac Ten's 1973 implementation depicts a 2.8 RSR with a later 3.0-litre engine, while package metadata and the matching catalogue tie that description to the fingerprinted content. Confidence remains medium because the mod depicts a generic later conversion rather than a chassis-numbered historical car, and its cockpit gate conflicts with the real 915 pattern.",
+      "identity_basis": "Porsche names the first RSR as the 1973 Carrera RSR 2.8 and distinguishes it from later RSR development. AC Legends' own v3.0 release notes, PDF/printed page 13, credit Mac Ten for the 1973 conversion and explicitly state that this mod depicts a 2.8 RSR later uprated with a 3.0-litre RSR engine. The package's exact content id, author and declared version match the catalogue entry for the fingerprinted implementation.",
+      "specification_basis": "Porsche's RSR history, printed/PDF page 3, calls the original RSR gearbox a Type 915 standard manual with five gears and describes clutch-and-double-declutch downshifts. FIA homologation 3053, printed/PDF page 11, independently records five synchronized forward gears, lever shifting and a mechanically operated clutch. TwinSpark documents that the 915 replaced the older 901/911 dogleg with first up-left in a conventional H. The AC package's observed dogleg and clutchless acceptance are carried only as simulator overrides.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its LastUpdated value and the AC executable timestamps predate the 2026-08-22 observation, and SteamDB independently identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03."
+      },
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h",
+        "upshift": {
+          "clutch": "required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "dogleg-h",
+          "condition": "The fingerprinted AC Legends 3.0 implementation shows a dogleg gate in its cockpit, while the real Type 915 uses a conventional H pattern.",
+          "confidence": {
+            "level": "high",
+            "basis": "The package's cockpit gate was directly read during the guided drive; the real 915 gate is independently sourced."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted implementation accepted the running upshift without physical clutch after the driver lifted; SimHub's clutch channel may include car-side clutch intervention.",
+          "confidence": {
+            "level": "medium",
+            "basis": "The maneuver was accepted without physical clutch, but SimHub cannot separate pedal input from car-side clutch intervention."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted implementation accepted the running downshift without physical clutch after the driver blipped; SimHub's clutch channel may include car-side clutch intervention.",
+          "confidence": {
+            "level": "medium",
+            "basis": "The maneuver was accepted without physical clutch after a manual blip, but SimHub cannot separate pedal input from car-side clutch intervention."
+          }
+        }
+      ],
+      "additional_claims": [
+        {
+          "paths": [
+            "/authentic_controls/transmission/upshift",
+            "/authentic_controls/transmission/downshift"
+          ],
+          "source_refs": [
+            "porsche.newsroom.rsr-model-history-2020",
+            "fia.historicdb.porsche-carrera-rs-3053"
+          ],
+          "confidence": "medium",
+          "basis": "Porsche identifies the Type 915 as the original RSR's standard manual and explicitly describes clutch, simultaneous brake/throttle and double-declutch downshifts. FIA records the mechanically operated clutch and five synchronized gears. Together these support the real-car clutch and rev-matching technique; the AC package's clutchless acceptance remains simulator-only and is carried as an override."
+        }
+      ],
+      "confidence_notes": "The exact AC Legends v3.0 package was fingerprinted. Five H-pattern gears, clutch-required move-off, required lift, no automatic cut/blip, required manual rev matching, and a round cockpit rim without wheel display or shift lights were observed. The real-car sources correct the package's dogleg to the Type 915 conventional H and establish clutch/double-declutch technique. The guided clutch channel cannot distinguish a driver's pedal from car-side intervention, so the clutchless simulator overrides remain medium confidence.",
+      "control_notes": [
+        "The real car used a five-speed synchromesh Type 915 standard manual gearbox with a conventional H pattern and mechanically operated clutch.",
+        "Porsche's historical account describes clutch use, simultaneous braking and throttle, and double-declutching on downshifts. Use the clutch for running shifts, lift for upshifts, and heel-toe/double-declutch on downshifts.",
+        "The fingerprinted AC Legends v3.0 package departs from the real car by displaying a dogleg gate and by accepting clutchless running shifts. It still refuses a full-throttle upshift and a coast downshift without a manual blip.",
+        "The round rim, lack of wheel display and lack of shift lights were directly observed in the mod cockpit. FIA's Carrera RS base form shows the same broad wheel configuration, but no reviewed source explicitly specifies wheel electronics for every converted RSR."
+      ],
+      "driver_summary": "Five-speed synchronized Type 915: fit a conventional H shifter, use the clutch and lift on upshifts, then heel-toe/double-declutch downshifts. This AC Legends package incorrectly shows a dogleg gate and accepts clutchless running shifts.",
+      "record_notes": [
+        "The implementation's three-litre engine is a later conversion of a 1973 RSR 2.8, not evidence that this is the separately curated factory 1974 Carrera RSR 3.0.",
+        "Engine displacement does not alter the authentic-control guidance, but it is retained as identity context because it is what distinguishes this package's represented configuration."
+      ],
+      "archetype": {
+        "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
+        "classification": "deviates",
+        "deviations": [
+          {
+            "path": "/authentic_controls/transmission/upshift/clutch",
+            "basis": "Porsche identifies the RSR's Type 915 as a standard manual and FIA records its mechanically operated clutch. The authentic technique therefore uses the clutch, although the fingerprinted package accepts a clutchless upshift after lifting."
+          },
+          {
+            "path": "/authentic_controls/transmission/downshift/clutch",
+            "basis": "Porsche explicitly describes the historical RSR downshift with the driver's left foot on the clutch; the package's clutchless acceptance is simulator-specific."
+          },
+          {
+            "path": "/authentic_controls/transmission/downshift/manual_blip",
+            "basis": "Porsche says nothing worked without double-declutching and describes the right foot operating brake and accelerator together, establishing required rather than merely optional rev matching."
+          }
+        ]
+      },
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.acl-gtr-porsche-911-rsr-1973.20260822t043730445z-d5fe85b5 by Jason Kinslow. The fingerprinted AC Legends v3.0 package exposed five H-pattern gears, a dogleg cockpit gate, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. The draft could not read an AC version; review tied the unchanged installation to Steam public build 14923034."
+    }
+  ]
+}

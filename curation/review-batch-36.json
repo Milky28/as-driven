@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.16",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "lamborghini-huracan-super-trofeo-evo2",
+      "bundle": "build/staged-20260822/acc.lamborghini-hurac-n-st-evo2-2021.20260822t220556604z-e7a9334c.staged.json",
+      "manufacturer": "Lamborghini",
+      "model": "Huracan Super Trofeo EVO2",
+      "year": {
+        "label": "Super Trofeo EVO2"
+      },
+      "class": "Super Trofeo",
+      "real_world_identity_notes": "The EVO2 is distinct from the earlier Huracan LP 620-2 Super Trofeo. No predecessor telemetry alias is attached to this record.",
+      "real_world_source_refs": [
+        "acc.challengers-pack.lamborghini-huracan-st-evo2",
+        "lamborghini.super-trofeo-evo2.brochure.2022"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "KUNOS's official ACC Challengers Pack page names the Lamborghini Huracan ST EVO2 and the 2021 specification. The live ACC display name, stable internal id and ST class agree with that official identity, while the guided drive directly established the simulator behavior.",
+      "identity_basis": "The official ACC DLC page names the 2021 Lamborghini Huracan ST EVO2. SimHub simultaneously reported telemetry name `Lamborghini Huracán ST Evo2 2021`, internal id `lamborghini_huracan_st_evo2`, and class `ST`, so this is the same Super Trofeo EVO2 already curated from Lamborghini, AMS2 and AC EVO evidence rather than the GT3 EVO2 or the earlier LP 620-2 Super Trofeo.",
+      "specification_basis": "The existing authentic six-speed paddle-sequential specification remains sourced to Lamborghini. ACC build 21257365 independently agreed on six paddle-selected gears, clutch-free move-off and running shifts, no-lift full-throttle upshifts, automatic-blipped coast downshifts, and the closed no-display/no-wheel-light rim. ACC exposes no engine-torque channel to SimHub, so its automatic cut remains unknown rather than inheriting the AMS2 result.",
+      "confidence_notes": "Exact ACC identity and class were captured under As Driven 0.18.0. With automatic clutch, shifting and throttle blip assists disabled, the car moved off without physical clutch input, accepted six paddle-selected gears, accepted clutchless full-throttle upshifts and coast downshifts, and automatically blipped. Cockpit inspection found a closed GT/Formula rim without a rim-mounted display or shift lights. Automatic cut is unestablished because ACC publishes no engine torque through SimHub.",
+      "control_notes": [
+        "ACC is the third independently driven simulator implementation of this exact Super Trofeo EVO2; every established control agrees across all three.",
+        "The clutch channel already read 100% with the pedal untouched before testing, so it reflects ACC's own clutch state rather than evidence of driver clutch input.",
+        "Automatic cut remains unknown for ACC; a repeated guided drive cannot settle it without an engine-torque channel."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.lamborghini-hurac-n-st-evo2-2021.20260822t220556604z-e7a9334c by Jason Kinslow in ACC Steam build 21257365. With automatic clutch, shifting and throttle-blip assists disabled, the drive established clutch-free move-off, six paddle-selected gears, clutchless full-throttle and coast-shift acceptance, automatic blip, and a closed GT/Formula rim without a rim-mounted display or shift lights. ACC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "record_id": "audi-r8-lms-gt3-evo-ii",
+      "bundle": "build/staged-20260822/ac.gt-m-aero-v10-evo2.20260822t220059800z-371a2cd0.staged.json",
+      "manufacturer": "Audi",
+      "model": "R8 LMS GT3 Evo II",
+      "year": {
+        "from": 2022,
+        "label": "Evo II"
+      },
+      "class": "GT3",
+      "real_world_identity_notes": "Audi identifies the Evo II as the second evolution of the R8 LMS GT3. The exact base AMS2 identity was guided-tested; the Low Downforce identity is an explicit aero-package alias inheriting the base controls and was not separately tested.",
+      "real_world_source_refs": [
+        "rss.gt-m-aero-v10-evo2.v2",
+        "audi.r8-lms-gt3-evo2.release",
+        "audi.r8-lms-gt3.technical"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The fingerprinted RSS v2 package is a German 501 hp V10 GT3 with the Audi R8 LMS wheelbase, track and weight envelope. Its bundled `#1 Scherer Sport PHX Farewell Audi` livery explicitly loads Audi badge assets. RSS's first-party product data and the installed package therefore converge on the Audi R8 LMS GT3 Evo II, while the AC behavior and cockpit were directly observed.",
+      "identity_basis": "RSS identifies the exact GT-M Aero V10 Evo2 v2 implementation. The matching installed package names Scherer Sport PHX's Farewell Audi livery, includes Audi badge configuration, reports Germany and GT3, and matches the Audi's V10 architecture and dimensions. These implementation-specific facts map the fictionalized name to the existing Audi R8 LMS GT3 Evo II record without treating the mod name itself as a real-car identity.",
+      "specification_basis": "The existing authentic six-speed paddle-sequential controls remain sourced to Audi. The fingerprinted RSS v2 implementation agreed on six paddles, clutchless full-throttle upshifts with automatic cut, automatic-blipped coast downshifts, and the closed no-display/no-wheel-light rim, but required physical clutch input to move from rest. That departure is scoped to AC rather than rewriting the three other simulator observations or the authentic baseline.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "standing_start_clutch": "not-required"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The fingerprinted RSS v2 implementation stalled or refused move-off without physical clutch input, unlike the curated authentic and three other simulator observations.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided move-off test directly observed that the car would not pull away with the physical clutch released while automatic clutch and shifting assists were disabled."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v2 data.acd was fingerprinted. Six paddle-selected gears, clutch-required move-off, clutchless full-throttle upshifts with automatic cut, clutchless coast downshifts with automatic blip, and a closed GT/Formula rim without integrated display or shift lights were directly observed.",
+      "control_notes": [
+        "The RSS fictionalized name is mapped to the Audi only after first-party specifications and the installed package's explicit Farewell Audi livery and badge configuration converge on the R8 LMS GT3 Evo II.",
+        "RSS requires physical clutch input to pull away; the authentic baseline and AMS2, AC EVO and ACC observations do not.",
+        "This is the fourth independently driven simulator implementation of the same exact Audi."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-m-aero-v10-evo2.20260822t220059800z-371a2cd0 by Jason Kinslow. The fingerprinted Race Sim Studio v2 implementation exposed six paddle-selected gears, required physical clutch input to move off, accepted clutchless full-throttle upshifts with automatic cut, accepted clutchless coast downshifts with automatic blip, and used a closed GT/Formula rim without integrated display or shift lights. The draft recorded game version `unknown`; review established AC Steam build 14923034 from appmanifest_244210.acf."
+    }
+  ]
+}

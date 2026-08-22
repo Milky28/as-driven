@@ -20,7 +20,7 @@ DOC_STATUS_RE = re.compile(
 DOC_RECORD_COUNT_RE = re.compile(r"currently contains (\d+) curated records")
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
-SIMULATORS = {"ams2", "iracing", "ac", "ac-evo", "ac-rally", "other"}
+SIMULATORS = {"ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "other"}
 # Every simulator that can publish a drive. `other` is a placeholder for a
 # simulator the enum does not name yet, so it owns no source prefix and its
 # observations are not held to the convention below.
@@ -32,7 +32,8 @@ OBSERVING_SIMULATORS = tuple(sorted(SIMULATORS - {"other"}))
 LIVE_OBSERVATION_ID_RE = re.compile(
     r"^(?:"
     + "|".join(re.escape(simulator) for simulator in OBSERVING_SIMULATORS)
-    + r")\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*$"
+    + r")\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*"
+    + r"(?:\.correction-[0-9a-f]+)?$"
 )
 CLUTCH_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
 THROTTLE_LIFT = {"required", "not-required", "partial", "unknown", "not-applicable"}

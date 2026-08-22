@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.8",
+  "approved_at": "2026-08-22",
+  "record_id": "porsche-911-carrera-rsr-2-8-1973",
+  "simulator": "ac",
+  "telemetry_name": "ACL GTR Porsche 911 RSR 1973",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.acl-gtr-porsche-911-rsr-1973.20260822t043730445z-d5fe85b5",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "required"
+  },
+  "confidence_notes": "The exact AC Legends v3.0 package was fingerprinted. Five H-pattern gears, clutch-required move-off, required lift, no automatic cut/blip, required manual rev matching, and a round cockpit rim without wheel display or shift lights were observed. The real-car sources correct the package's dogleg to the Type 915 conventional H and establish clutch/double-declutch technique. The guided clutch channel cannot distinguish a driver's pedal from car-side intervention, so the clutchless simulator overrides remain medium confidence.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '14923034': The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its LastUpdated value and the AC executable timestamps predate the 2026-08-22 observation, and SteamDB independently identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03.",
+  "staged_record_id": "acl-gtr-porsche-911-rsr-1973",
+  "game_version_correction": {
+    "observed": "unknown",
+    "verified": "14923034",
+    "basis": "The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its LastUpdated value and the AC executable timestamps predate the 2026-08-22 observation, and SteamDB independently identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03."
+  }
+}

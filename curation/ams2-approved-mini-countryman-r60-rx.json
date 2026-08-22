@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.6",
+  "approved_at": "2026-08-21",
+  "record_id": "mini-countryman-r60-rx",
+  "simulator": "ams2",
+  "telemetry_name": "MINI Countryman R60 RX",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.mini-countryman-r60-rx.20260822t040247960z-0ad241fd",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Six gears, sequential-stick actuation, a standing-start clutch, clutchless running shifts and the upshift cut were observed directly. The latest two-stage drive found no automatic blip and accepted the downshift without pedal input, confirming a prior corrected recheck. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "RX"
+}

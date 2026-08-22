@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.9",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "porsche-911-rsr-1974",
+      "bundle": "build/staged-20260822/ac.porsche-911-carrera-rsr-3-0.20260822t160750374z-1143b328.staged.json",
+      "manufacturer": "Porsche",
+      "model": "911 Carrera RSR 3.0",
+      "year": {
+        "from": 1974,
+        "label": "1974"
+      },
+      "class": "GT Classics",
+      "real_world_identity_notes": "Porsche 911 Carrera RSR 3.0 of 1974, running the Type 911/75 flat-six of 330 bhp with a reinforced clutch and the five-speed gearbox carried over from the RS.",
+      "real_world_source_refs": [
+        "porsche.newsroom.rsr-model-history-2020",
+        "stuttcars.porsche-911-carrera-rsr-3-0",
+        "paul-stephens.porsche-915-vs-g50",
+        "twinsparkracing.porsche-915-replaced-the-dogleg",
+        "assetto-corsa.porsche-pack-1.carrera-rsr-3-0"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Kunos's official Porsche Pack I listing and the installed ks_porsche_911_carrera_rsr content id establish the exact official AC implementation. Five gears, the cockpit gate, move-off, lift, manual blip, lack of automatic cut/blip, and round wheel equipment were directly observed. Confidence remains medium because SimHub's clutch channel cannot distinguish pedal input from car-side intervention during accepted clutchless shifts.",
+      "identity_basis": "Kunos officially lists Porsche 911 Carrera RSR 3.0 in Porsche Pack I; the guided drive reported the matching title and installed content id ks_porsche_911_carrera_rsr. Porsche and the existing curated record identify the represented car as the 1974 Carrera RSR 3.0.",
+      "specification_basis": "The existing record owns the real-car specification: a five-speed Type 915-family transmission with a conventional H gate, synchromesh construction at medium confidence, and a reinforced clutch. The AC drive does not rewrite those claims. It contributes only the behavior of fingerprint d21f532ed2377fb8092857ee976a47c91fb37f327c3f44c68ba27a4b8e2c7297, including its dogleg cockpit depiction and required manual blip.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its recorded LastUpdated value predates the 2026-08-22 observation, and SteamDB identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03."
+      },
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "standard-h"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "dogleg-h",
+          "condition": "The fingerprinted official Kunos implementation shows a dogleg gate in its cockpit, while the real Type 915 uses a conventional H pattern.",
+          "confidence": {
+            "level": "high",
+            "basis": "The package's cockpit gate was directly read during the guided drive; the real Type 915 gate is independently sourced."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AC build 14923034 refused the coast downshift until the driver supplied a manual throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive's two-stage downshift test directly observed rejection without a blip and acceptance after the driver's blip."
+          }
+        }
+      ],
+      "confidence_notes": "The exact official Kunos data.acd was fingerprinted. Five H-pattern gears, clutch-required move-off, required lift, required manual blip, no automatic cut/blip, and a round rim without integrated display or shift lights were observed. The cockpit depicts a dogleg gate even though the real Type 915 gate is conventional H. Accepted running shifts are medium confidence because the clutch telemetry channel may include car-side intervention.",
+      "control_notes": [
+        "This drive joins the existing 1974 Carrera RSR 3.0 record and does not replace its real-car controls.",
+        "The fingerprinted official Kunos implementation depicts a dogleg gate and requires a manual blip for the tested downshift. Both are carried as AC-specific behavior.",
+        "The implementation accepted running shifts without physical clutch input, but the clutch channel recorded activity and cannot separate the driver's pedal from car-side intervention."
+      ],
+      "driver_summary": "The five-speed carried over from the RS, behind a reinforced clutch. Whether it engages by dogs or synchros is not recorded, so blip on downshifts to be safe.",
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.porsche-911-carrera-rsr-3-0.20260822t160750374z-1143b328 by Jason Kinslow. The fingerprinted official Kunos implementation exposed five H-pattern gears, a dogleg cockpit gate, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. The draft could not read an AC version; review tied the unchanged installation to Steam public build 14923034. The clutch channel recorded activity during an accepted clutchless test, so running-shift clutch acceptance remains medium confidence."
+    }
+  ]
+}

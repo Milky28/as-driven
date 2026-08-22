@@ -109,6 +109,42 @@
         "level": "verified",
         "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mercedes-Benz C9 1989 LM"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.mercedes-benz-c9-1989-lm.20260822t164524343z-ee957d51 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "assetto-corsa.dream-pack-1.f1-gtr-c9",
+        "mercedes-benz.c9-le-mans-1989",
+        "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Kunos's official Dream Pack, exact ks_mercedes_c9 content id and installed Mercedes-Benz C9 1989 LM title establish the implementation. Mercedes-Benz independently identifies the real 1989 Sauber-Mercedes C9 Le Mans cars. The drive directly established five H-pattern gears, clutch-required move-off, required lift and manual blip, no automatic cut/blip, and cockpit wheel details."
+      }
     }
   ],
   "provenance": {
@@ -146,6 +182,28 @@
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "assetto-corsa.dream-pack-1.f1-gtr-c9",
+          "mercedes-benz.c9-le-mans-1989",
+          "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "The official Kunos package calls the implementation Mercedes-Benz C9 1989 LM, while Mercedes-Benz calls the real car Sauber-Mercedes C9 and documents its 1989 Le Mans campaign. This is a naming redirect onto the existing real-car record, not a second car."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -157,5 +215,5 @@
   "notes": [
     "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

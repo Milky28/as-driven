@@ -311,7 +311,7 @@ class PromoteObservationTests(unittest.TestCase):
             self._creation_bundle(temp)
             entry = dict(
                 _review_entry(),
-                record_id="porsche-911-carrera-rsr-2-8-1973",
+                record_id="test-porsche-rsr-real-car",
                 bundle="build/mod.json",
             )
             with self.assertRaises(ValueError) as caught:
@@ -324,7 +324,7 @@ class PromoteObservationTests(unittest.TestCase):
             self._creation_bundle(temp)
             entry = dict(
                 _review_entry(),
-                record_id="porsche-911-carrera-rsr-2-8-1973",
+                record_id="test-porsche-rsr-real-car",
                 bundle="build/mod.json",
                 create_new_record={
                     "staged_record_id": "something-else-entirely",
@@ -341,7 +341,7 @@ class PromoteObservationTests(unittest.TestCase):
             self._creation_bundle(temp)
             base = dict(
                 _review_entry(),
-                record_id="porsche-911-carrera-rsr-2-8-1973",
+                record_id="test-porsche-rsr-real-car",
                 bundle="build/mod.json",
             )
             with self.assertRaises(ValueError) as caught:
@@ -357,13 +357,77 @@ class PromoteObservationTests(unittest.TestCase):
                     "staged_record_id": "acl-gtr-some-mod-car",
                     "basis": "Identity research establishes the represented real car.",
                 },
+                display_name="Porsche 911 Carrera RSR 2.8 1973",
             )))
             approval = json.loads(
-                (temp / "curation" / "ac-approved-porsche-911-carrera-rsr-2-8-1973.json")
+                (temp / "curation" / "ac-approved-test-porsche-rsr-real-car.json")
                 .read_text(encoding="utf-8")
             )
             self.assertEqual(approval["staged_record_id"], "acl-gtr-some-mod-car")
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-porsche-rsr-real-car.json")
+                .read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                record["identity"]["display_name"],
+                "Porsche 911 Carrera RSR 2.8 1973",
+            )
             self.assertEqual(validate_repository(temp), [])
+
+    def test_an_unknown_game_version_can_be_corrected_with_a_recorded_basis(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            observation = _observation()
+            observation["game_version"] = "unknown"
+            (temp / "build" / "bundle.json").write_text(
+                json.dumps(import_observation(observation), indent=2), encoding="utf-8"
+            )
+            entry = dict(
+                _review_entry(),
+                game_version_correction={
+                    "observed": "unknown",
+                    "verified": "14923034",
+                    "basis": "The installed Steam appmanifest was unchanged since the drive.",
+                },
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json")
+                .read_text(encoding="utf-8")
+            )
+            simulator = record["simulators"][0]
+            self.assertEqual(simulator["verified_game_version"], "14923034")
+            self.assertIn(".14923034", simulator["source_refs"][-1])
+            approval = json.loads(
+                (temp / "curation" / "ams2-approved-test-prototype.json")
+                .read_text(encoding="utf-8")
+            )
+            self.assertEqual(approval["observed_game_version"], "14923034")
+            self.assertEqual(approval["game_version_correction"], entry["game_version_correction"])
+            sources = json.loads(
+                (temp / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+            )["sources"]
+            live = next(source for source in sources if source["source_id"].startswith(
+                "ams2.local-live-test-prototype-controls"
+            ))
+            self.assertIn("installed Steam appmanifest", live["notes"])
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_a_known_game_version_cannot_be_rewritten_as_a_correction(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = dict(
+                _review_entry(),
+                game_version_correction={
+                    "observed": "1.6.9.91",
+                    "verified": "something-else",
+                    "basis": "This must not rewrite a version the drive recorded.",
+                },
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("only for a bundle that recorded 'unknown'", str(caught.exception))
 
     def test_a_reviewers_own_source_note_does_not_erase_the_fingerprint(self) -> None:
         """The one record of which package was driven, lost to a better sentence.
@@ -402,7 +466,12 @@ class PromoteObservationTests(unittest.TestCase):
             sources = json.loads(
                 (temp / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
             )["sources"]
-            live = next(s for s in sources if s["source_id"].startswith("ac.local-live-"))
+            live = next(
+                s for s in sources
+                if s["source_id"].startswith(
+                    "ac.local-live-acl-gtr-some-mod-car-controls."
+                )
+            )
             self.assertIn("A carefully written note", live["notes"])
             self.assertEqual(live["implementation"]["fingerprint"]["digest"], "b" * 64)
             self.assertEqual(live["implementation"]["content_id"], "acl_gtr_some_mod_car")
@@ -645,6 +714,221 @@ class PromoteObservationTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 self._promote(temp, self._manifest(_review_entry()))
 
+    def test_an_explicit_correction_replaces_same_simulator_evidence(self) -> None:
+        """The old drive stays auditable while the current answer is replaced."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _observation()
+            observation["observation_id"] = (
+                "ams2.test-prototype.20260818t120000000z-feed5678"
+            )
+            observation["cockpit"]["wheel_rim"]["integrated_display"] = "no"
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(temp, observation, "bundle-correction.json"),
+                control_overrides={
+                    "wheel_rim": {"integrated_display": "unknown"}
+                },
+                confidence_notes="A repeat cockpit inspection corrected the display.",
+                correct_existing_simulator={
+                    "basis": (
+                        "The repeat guided drive inspected the cockpit directly and "
+                        "found no integrated display; the earlier yes was a review error."
+                    ),
+                    "supersedes_source_ref": (
+                        "ams2.local-live-test-prototype-controls.1.6.9.91"
+                    ),
+                    "supersedes_observed_through": (
+                        "SimHub guided verification observation "
+                        "ams2.test-prototype.20260813t120000000z-abcd1234"
+                    ),
+                    "corrected_behavior_paths": [
+                        "/behavior/wheel_rim_type/integrated_display"
+                    ],
+                    "authentic_control_corrections": [
+                        {
+                            "path": (
+                                "/authentic_controls/steering/wheel_rim/"
+                                "integrated_display"
+                            ),
+                            "from": "yes",
+                            "to": "unknown",
+                            "basis": (
+                                "The authentic value came only from the superseded "
+                                "simulator observation, so it is retracted to unknown."
+                            ),
+                        }
+                    ],
+                },
+            )
+            review = {
+                "dataset_version": "9.9.10",
+                "approved_at": "2026-08-18",
+                "records": [entry],
+            }
+            self._promote(temp, review)
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            simulator = record["simulators"][0]
+            self.assertEqual(
+                record["authentic_controls"]["steering"]["wheel_rim"][
+                    "integrated_display"
+                ],
+                "unknown",
+            )
+            self.assertEqual(
+                simulator["behavior"]["wheel_rim_type"]["integrated_display"], "no"
+            )
+            replacement_source = (
+                "ams2.local-live-test-prototype-controls.1.6.9.91."
+                "correction-feed5678"
+            )
+            self.assertIn(replacement_source, simulator["source_refs"])
+            self.assertNotIn(
+                "ams2.local-live-test-prototype-controls.1.6.9.91",
+                simulator["source_refs"],
+            )
+
+            approval = json.loads(
+                (temp / "curation" / "ams2-approved-test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(approval["observed_through"], (
+                "SimHub guided verification observation "
+                "ams2.test-prototype.20260818t120000000z-feed5678"
+            ))
+            self.assertEqual(len(approval["correction_history"]), 1)
+            history = approval["correction_history"][0]
+            self.assertEqual(history["replacement_source_ref"], replacement_source)
+            self.assertEqual(
+                history["behavior_changes"][0]["path"],
+                "/simulators/0/behavior/wheel_rim_type/integrated_display",
+            )
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_a_correction_must_enumerate_every_behavior_change(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+            observation = _observation()
+            observation["observation_id"] = (
+                "ams2.test-prototype.20260818t120000000z-acde5678"
+            )
+            observation["cockpit"]["wheel_rim"]["integrated_display"] = "no"
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(temp, observation, "bundle-bad-correction.json"),
+                control_overrides={
+                    "wheel_rim": {"integrated_display": "unknown"}
+                },
+                correct_existing_simulator={
+                    "basis": "Repeat cockpit inspection.",
+                    "supersedes_source_ref": (
+                        "ams2.local-live-test-prototype-controls.1.6.9.91"
+                    ),
+                    "supersedes_observed_through": (
+                        "SimHub guided verification observation "
+                        "ams2.test-prototype.20260813t120000000z-abcd1234"
+                    ),
+                    "corrected_behavior_paths": [],
+                    "authentic_control_corrections": [
+                        {
+                            "path": (
+                                "/authentic_controls/steering/wheel_rim/"
+                                "integrated_display"
+                            ),
+                            "from": "yes",
+                            "to": "unknown",
+                            "basis": "Retract the simulator-derived authentic claim.",
+                        }
+                    ],
+                },
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("does not exactly describe", str(caught.exception))
+
+    def test_a_compatible_same_simulator_implementation_adds_an_exact_identity(self) -> None:
+        """Two packages may share one entry only when their effective facts match."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _observation()
+            observation["observation_id"] = (
+                "ams2.test-prototype-mod.20260813t130000000z-feed1234"
+            )
+            observation["identity"]["telemetry_name"] = "Test Prototype Mod"
+            observation["identity"]["internal_id"] = "test_prototype_mod"
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(temp, observation, "bundle-compatible.json"),
+                confidence_notes="Compatible package controls were separately observed.",
+                compatible_implementation={
+                    "basis": "The package documentation identifies the same model and the drive matches every effective control."
+                },
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(len(record["simulators"]), 1)
+            names = {
+                identity["value"]
+                for identity in record["simulators"][0]["identities"]
+                if identity["kind"] == "telemetry-name"
+            }
+            self.assertEqual(names, {"Test Prototype", "Test Prototype Mod"})
+            self.assertEqual(len(record["simulators"][0]["source_refs"]), 3)
+
+            approval = json.loads(
+                (temp / "curation" / "ams2-approved-test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                [item["value"] for item in approval["additional_telemetry_names"]],
+                ["Test Prototype Mod"],
+            )
+            self.assertIn("package documentation", approval["historical_notes"])
+            self.assertIn("multiple separately fingerprinted", approval["scope_notes"])
+            self.assertIn("Compatible implementation", approval["confidence_notes"])
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_a_different_same_simulator_implementation_is_not_called_compatible(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _observation()
+            observation["observation_id"] = (
+                "ams2.test-prototype-mod.20260813t130000000z-feed1234"
+            )
+            observation["identity"]["telemetry_name"] = "Test Prototype Mod"
+            path = self._add_bundle(temp, observation, "bundle-different.json")
+            bundle_path = temp / path
+            bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+            bundle["record"]["simulators"][0]["behavior"]["shift_cut"] = "no"
+            bundle_path.write_text(json.dumps(bundle, indent=2), encoding="utf-8")
+            entry = dict(
+                _review_entry(),
+                bundle=path,
+                compatible_implementation={"basis": "Claimed compatible."},
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("does not have the same effective behavior", str(caught.exception))
+
     def test_a_second_simulator_may_not_quietly_rewrite_the_real_car(self) -> None:
         """A disagreement is a review decision, not a silent overwrite."""
         with tempfile.TemporaryDirectory() as directory:
@@ -659,6 +943,46 @@ class PromoteObservationTests(unittest.TestCase):
             with self.assertRaises(ValueError) as caught:
                 self._promote(temp, self._manifest(entry))
             self.assertIn("forward_gears", str(caught.exception))
+
+    def test_a_wheel_difference_can_be_kept_as_a_simulator_override(self) -> None:
+        """A mod cockpit may differ without redefining the real car's wheel."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _second_simulator_observation()
+            observation["cockpit"]["wheel_rim"]["shape"] = "d-shaped"
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(temp, observation, "bundle-wheel-difference.json"),
+                control_overrides={"wheel_rim": {"shape": "gt-formula"}},
+                simulator_overrides=[
+                    {
+                        "path": "/authentic_controls/steering/wheel_rim/shape",
+                        "value": "d-shaped",
+                        "condition": "The second simulator depicts a D-shaped rim.",
+                        "confidence": {
+                            "level": "verified",
+                            "basis": "The cockpit rim was directly inspected.",
+                        },
+                    }
+                ],
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                record["authentic_controls"]["steering"]["wheel_rim"]["shape"],
+                "gt-formula",
+            )
+            second = record["simulators"][1]
+            self.assertEqual(second["behavior"]["wheel_rim_type"]["normalized"], "d-shaped")
+            self.assertEqual(second["overrides"][0]["value"], "d-shaped")
+            self.assertEqual(validate_repository(temp), [])
 
     def test_aero_alias_becomes_an_exact_record_identity(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -718,6 +1042,29 @@ class PromoteObservationTests(unittest.TestCase):
             self.assertEqual("required", overrides[0]["value"])
             # The live source is attached automatically when none is given.
             self.assertTrue(overrides[0]["source_refs"])
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_reviewed_archetype_classification_is_written(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = _review_entry()
+            entry["control_overrides"] = {"gearbox_type": "sequential"}
+            entry["archetype"] = {
+                "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+                "classification": "deviates",
+                "deviations": [
+                    {
+                        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+                        "basis": "The fixture leaves the lift requirement unknown.",
+                    }
+                ],
+            }
+            self._promote(temp, self._manifest(entry))
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json")
+                .read_text(encoding="utf-8")
+            )
+            self.assertEqual(record["archetype"], entry["archetype"])
             self.assertEqual(validate_repository(temp), [])
 
     def test_override_must_target_the_authentic_layer(self) -> None:

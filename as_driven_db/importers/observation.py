@@ -237,6 +237,7 @@ def import_observation(
     identity = observation["identity"]
     telemetry_name = identity["telemetry_name"]
     telemetry_class = identity["telemetry_class"]
+    internal_id = identity.get("internal_id", "")
     assists = observation.get("assists", {})
     tests = observation["tests"]
     cockpit = observation["cockpit"]
@@ -427,6 +428,11 @@ def import_observation(
                 # the match index as though a car were called it.
                 "identities": (
                     [{"kind": "telemetry-name", "value": telemetry_name}]
+                    + (
+                        [{"kind": "internal-id", "value": internal_id}]
+                        if internal_id
+                        else []
+                    )
                     + (
                         [{"kind": "class-id", "value": telemetry_class}]
                         if telemetry_class and telemetry_class != "unknown"

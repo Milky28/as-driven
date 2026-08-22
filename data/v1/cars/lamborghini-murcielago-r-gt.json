@@ -39,10 +39,10 @@
       "wheel_rim": {
         "shape": "d-shaped",
         "diameter_mm": null,
-        "integrated_display": "no",
+        "integrated_display": "unknown",
         "shift_lights": "unknown",
-        "source_label": "live-cockpit-d-shaped-no-display",
-        "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown."
+        "source_label": "multi-simulator-cockpit-observation",
+        "notes": "Corrected AMS2 inspection and the independently fingerprinted RSS cockpit both show a D-shaped rim with an integrated display and shift lights. No reviewed real-car source establishes that equipment, so authentic display and shift lights remain unknown."
       }
     },
     "notes": [
@@ -75,28 +75,93 @@
         "shift_cut": "yes",
         "wheel_rim_type": {
           "normalized": "d-shaped",
-          "integrated_display": "no",
-          "source_label": "live-cockpit-d-shaped-no-display"
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Base car live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Six-speed sequential-stick actuation, standing-start clutch, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed.",
-          "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.lamborghini-murcielago-r-gt.20260822t204647241z-bb0e68f2 by Jason Kinslow.",
+          "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested.",
+          "Correction superseding ams2.local-live-lamborghini-murcielago-rgt-controls.1.6.9.91: A repeat guided drive with the expanded wheel-equipment prompts directly inspected an integrated display and shift lights in the AMS2 cockpit. The earlier no-display observation and its derived authentic no are incorrect. The repeat coast-downshift result also makes the simulator's lack of required driver blipping explicit."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the curated authentic technique retains driver rev matching.",
+          "confidence": {
+            "level": "high",
+            "basis": "The repeat guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ams2.local-live-lamborghini-murcielago-r-gt-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
-      "verified_at": "2026-08-10",
+      "verified_at": "2026-08-22",
       "source_refs": [
         "ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2",
         "ams2.reiza-release.1.6.8.5.historical-endurance",
         "reiter.murcielago-rgt.technical",
         "fia.murcielago.gt-015",
-        "ams2.local-live-lamborghini-murcielago-rgt-controls.1.6.9.91"
+        "ams2.local-live-lamborghini-murcielago-r-gt-controls.1.6.9.91"
       ],
       "confidence": {
         "level": "verified",
-        "basis": "Exact base identity and simulator technique were directly tested, while constructor and FIA material independently establish the car and six-speed sequential hardware. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip behavior; Low Downforce remains explicit inheritance."
+        "basis": "The exact AMS2 identity and technique were re-tested in 1.6.9.91. Constructor and FIA material independently establish the car and six-speed sequential hardware. The repeat cockpit inspection directly corrects the earlier display observation and newly establishes wheel-mounted shift lights."
+      }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT Lanzo V12"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.gt-lanzo-v12.20260822t202444437z-f54b08fd by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v3 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ac.local-live-gt-lanzo-v12-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.murcielago.gt-015",
+        "reiter.murcielago-rgt.technical",
+        "ac.local-live-gt-lanzo-v12-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The fingerprinted RSS Lanzo v3 package is an Italian V12 period GT and bundles a 2005 FIA GT REITER Engineering number 13 livery. FIA and REITER sources independently establish the Murcielago competition identity and its six-speed sequential transmission. The AC behavior and cockpit were directly observed."
       }
     }
   ],
@@ -104,8 +169,7 @@
     "claims": [
       {
         "paths": [
-          "/identity",
-          "/simulators/0/identities"
+          "/identity"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2",
@@ -118,7 +182,6 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
         ],
         "source_refs": [
@@ -147,7 +210,6 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/simulators/0/behavior",
           "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
@@ -155,6 +217,66 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "rss.gt-legends-championship.pack-v6",
+          "fia.murcielago.gt-015",
+          "reiter.murcielago-rgt.technical",
+          "ac.local-live-gt-lanzo-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "RSS v6 identifies the exact Lanzo implementation; its installed package's 2005 REITER Engineering livery, Italian V12 configuration, era, body, and specifications converge on the existing Lamborghini Murcielago R-GT record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-gt-lanzo-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2",
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "fia.murcielago.gt-015",
+          "reiter.murcielago-rgt.technical",
+          "ams2.local-live-lamborghini-murcielago-r-gt-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official Reiza releases, FIA homologation, and REITER technical data retain the already-reviewed Lamborghini Murcielago R-GT identity. This contribution corrects cockpit evidence only; it does not reopen the real-car mapping."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-murcielago-r-gt-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/source_label",
+          "/authentic_controls/steering/wheel_rim/notes"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-murcielago-rgt-controls.1.6.9.91",
+          "ams2.local-live-lamborghini-murcielago-r-gt-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "A repeat guided drive with the expanded wheel-equipment prompts directly inspected an integrated display and shift lights in the AMS2 cockpit. The earlier no-display observation and its derived authentic no are incorrect. The repeat coast-downshift result also makes the simulator's lack of required driver blipping explicit."
       }
     ]
   },
@@ -165,5 +287,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

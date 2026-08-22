@@ -293,14 +293,19 @@ namespace AsDriven.Core
             {
                 return "iracing";
             }
-            // SimHub names these games "AssettoCorsa" and "AssettoCorsaEvo".
+            // SimHub names these games "AssettoCorsa",
+            // "AssettoCorsaCompetizione" and "AssettoCorsaEvo".
             // Each is compared whole rather than by prefix, so the three Assetto
             // Corsa titles - and Competizione, which this dataset does not cover
             // - never resolve into one another. They are separate games with
             // separate cars and separate names for the same car.
-            if (compact == "assettocorsa")
+            if (compact == "assettocorsa" || compact == "ac")
             {
                 return "ac";
+            }
+            if (compact == "assettocorsacompetizione" || compact == "acc")
+            {
+                return "acc";
             }
             if (compact == "assettocorsaevo" || compact == "acevo")
             {
@@ -333,6 +338,8 @@ namespace AsDriven.Core
             {
                 string simulatorId = RequiredString(simulator, "simulator", recordPath);
                 JObject behavior = RequiredObject(simulator, "behavior", recordPath);
+                JObject simulatorWheelRim = RequiredObject(
+                    behavior, "wheel_rim_type", recordPath);
 
                 // Guidance is the effective layer: authentic controls with this
                 // simulator's explicit overrides applied. A car whose real gearbox
@@ -344,8 +351,6 @@ namespace AsDriven.Core
                     effectiveControls, "transmission", recordPath);
                 JObject effectiveSteering = RequiredObject(
                     effectiveControls, "steering", recordPath);
-                JObject effectiveWheelRim = RequiredObject(
-                    effectiveSteering, "wheel_rim", recordPath);
                 JObject confidence = RequiredObject(simulator, "confidence", recordPath);
                 JArray sourceRefs = simulator["source_refs"] as JArray;
                 JArray simulatorIdentities = simulator["identities"] as JArray;
@@ -365,9 +370,9 @@ namespace AsDriven.Core
                     FirstGearPosition = OptionalState(effectiveTransmission, "first_gear_position"),
                     GearCount = OptionalInteger(effectiveTransmission, "forward_gears"),
                     UpshiftGuidance = DescribeShiftAction(
-                        RequiredObject(effectiveTransmission, "upshift", recordPath), true),
+                        RequiredObject(effectiveTransmission, "upshift", recordPath), behavior, true),
                     DownshiftGuidance = DescribeShiftAction(
-                        RequiredObject(effectiveTransmission, "downshift", recordPath), false),
+                        RequiredObject(effectiveTransmission, "downshift", recordPath), behavior, false),
                     TechniqueSummary = DescribeTechniqueSummary(effectiveTransmission, behavior),
                     StandingStartClutch = RequiredString(
                         effectiveTransmission, "standing_start_clutch", recordPath),
@@ -389,13 +394,16 @@ namespace AsDriven.Core
                         RequiredObject(effectiveTransmission, "downshift", recordPath),
                         "clutch",
                         recordPath),
-                    WheelRimShape = RequiredString(effectiveWheelRim, "shape", recordPath),
-                    WheelRimSourceLabel = RequiredString(effectiveWheelRim, "source_label", recordPath),
+                    // The behavior block is the reviewed cockpit implementation
+                    // for this simulator. It can establish what the driver sees
+                    // even when no real-car source establishes the authentic rim.
+                    WheelRimShape = RequiredString(simulatorWheelRim, "normalized", recordPath),
+                    WheelRimSourceLabel = RequiredString(simulatorWheelRim, "source_label", recordPath),
                     DriverSummary = OptionalText(record, "driver_summary"),
                     OverriddenPaths = overriddenPaths,
                     SimulatorDifference = DescribeOverrides(simulator),
-                    WheelIntegratedDisplay = OptionalState(effectiveWheelRim, "integrated_display"),
-                    WheelShiftLights = OptionalState(effectiveWheelRim, "shift_lights"),
+                    WheelIntegratedDisplay = OptionalState(simulatorWheelRim, "integrated_display"),
+                    WheelShiftLights = OptionalState(simulatorWheelRim, "shift_lights"),
                     // The steering lock lives on the simulator entry: every
                     // curated value for it came from the AMS2 spreadsheet, which
                     // records what the game applies rather than how the real car
@@ -578,7 +586,8 @@ namespace AsDriven.Core
             return gears > 0 ? gears + "-speed " + label : label;
         }
 
-        private static string DescribeShiftAction(JObject action, bool upshift)
+        private static string DescribeShiftAction(
+            JObject action, JObject behavior, bool upshift)
         {
             var parts = new List<string>();
             AddRequirement(parts, RequiredString(action, "clutch", "shift action"), "clutch");
@@ -590,7 +599,7 @@ namespace AsDriven.Core
                     "throttle lift");
                 AddState(
                     parts,
-                    RequiredString(action, "automatic_cut", "shift action"),
+                    RequiredString(behavior, "shift_cut", "simulator behavior"),
                     "automatic cut",
                     "no automatic cut");
             }
@@ -598,7 +607,7 @@ namespace AsDriven.Core
             {
                 AddState(
                     parts,
-                    RequiredString(action, "automatic_blip", "shift action"),
+                    RequiredString(behavior, "auto_blip", "simulator behavior"),
                     "automatic blip",
                     "no automatic blip");
                 AddRequirement(
@@ -897,6 +906,7 @@ namespace AsDriven.Core
                 case "ams2": return "Automobilista2";
                 case "iracing": return "iRacing";
                 case "ac": return "AssettoCorsa";
+                case "acc": return "AssettoCorsaCompetizione";
                 case "ac-evo": return "AssettoCorsaEvo";
                 default: return simulator;
             }
@@ -912,6 +922,7 @@ namespace AsDriven.Core
                 case "ams2": return "Automobilista 2";
                 case "iracing": return "iRacing";
                 case "ac": return "Assetto Corsa";
+                case "acc": return "Assetto Corsa Competizione";
                 case "ac-evo": return "Assetto Corsa EVO";
                 default: return simulator;
             }

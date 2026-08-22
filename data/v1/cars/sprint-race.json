@@ -1,0 +1,148 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "sprint-race",
+  "identity": {
+    "display_name": "Sprint Race",
+    "manufacturer": "Sprint Race",
+    "model": "Sprint Race",
+    "year": {
+      "from": 2019,
+      "label": "2019 Sprint Race car"
+    },
+    "class": "Sprint Race",
+    "real_world_identity_notes": "The officially licensed Brazilian Sprint Race one-make car announced for AMS2 in 2019: a centrally seated, rear-wheel-drive 260 hp V6 car with a six-speed sequential transmission. The official announcement does not say whether that transmission is lever- or paddle-actuated; the current AMS2 cockpit observation establishes paddles for this simulator entry."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "The real-car source establishes only a six-speed sequential transmission; paddle actuation, cut, blip and wheel details come from the current AMS2 drive.",
+      "The wheel has molded side grips and a central control face, so it is classified gt-formula even though it has neither an integrated display nor shift lights."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Sprint Race"
+        },
+        {
+          "kind": "class-id",
+          "value": "SprintRace"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.sprint-race.20260822t040810093z-2415554e by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "reiza.dev-update.2019-07.sprint-race",
+        "nascar-brasil.sprint-race.history",
+        "ams2.local-live-sprint-race-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official Reiza announcement establishes the licensed 2019 car and six-speed sequential transmission, while the guided drive establishes its AMS2 paddle actuation and shift behavior."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "reiza.dev-update.2019-07.sprint-race",
+          "nascar-brasil.sprint-race.history",
+          "ams2.local-live-sprint-race-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Reiza's official 2019 development update names and describes the licensed Sprint Race car, corroborated by the series' own history."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "reiza.dev-update.2019-07.sprint-race",
+          "nascar-brasil.sprint-race.history",
+          "ams2.local-live-sprint-race-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Reiza specifies a six-speed sequential transmission. The current guided cockpit drive establishes sequential paddles, automatic cut, automatic blip and the wheel layout in AMS2; the official source is silent on those details."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-sprint-race-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
+  "updated_at": "2026-08-21",
+  "driver_summary": "Six-speed paddle car with a GT/formula-style rim. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically."
+}

@@ -342,7 +342,7 @@
       "properties": {
         "simulator": {
           "type": "string",
-          "enum": ["ams2", "iracing", "ac", "ac-evo", "ac-rally", "other"]
+          "enum": ["ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "other"]
         },
         "identities": {
           "type": "array",

@@ -108,6 +108,67 @@
         "level": "verified",
         "basis": "Exact simulator identity, cockpit controls, and shift behavior were directly tested. Ferrari sources are retained only as clearly qualified period context and do not establish the fictional car's identity."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT Ferruccio 55 V12"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.gt-ferruccio-55-v12.20260822t200835844z-3f8b6f4d by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without physical clutch input, where the real Prodrive car requires the clutch for every downshift.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without driver clutch input."
+          },
+          "source_refs": [
+            "ac.local-live-gt-ferruccio-55-v12-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the curated real-car technique requires the driver to rev-match.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ac.local-live-gt-ferruccio-55-v12-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "evo.ferrari-550-maranello-prodrive",
+        "ac.local-live-gt-ferruccio-55-v12-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The fingerprinted RSS Ferruccio 55 package is an Italian V12 early-2000s GT and bundles Prodrive, Care, BMS, JMB, Larbre, and Russian Age liveries corresponding to the 550 GTS Maranello. The registered technical account independently establishes the real Prodrive car's six-speed sequential transmission and shift technique. The AC behavior and cockpit were directly observed."
+      }
     }
   ],
   "provenance": {
@@ -164,6 +225,28 @@
         ],
         "confidence": "high",
         "basis": "The registered technical account gives a six-speed Xtrac sequential with a flat-shift facility, needing no clutch for an upshift and the clutch for every downshift, which the drive's six gears and automatic cut agree with. It says nothing about the rim or about what the simulator does, so those stay on the drive."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "rss.gt-legends-championship.pack-v6",
+          "evo.ferrari-550-maranello-prodrive",
+          "ac.local-live-gt-ferruccio-55-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "RSS v6 identifies the exact Ferruccio 55 implementation; its installed v4 metadata and bundled team, year, and livery labels converge on the Prodrive Ferrari 550 GTS Maranello already curated as Milano 55 GT1. This review maps the mod implementation to that real-car record without treating the fictional telemetry name as the car's identity."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-gt-ferruccio-55-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -177,5 +260,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

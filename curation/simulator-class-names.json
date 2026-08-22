@@ -610,6 +610,13 @@
     },
     {
       "simulator": "ams2",
+      "class_id": "StockCarV8_2020",
+      "name": "Stock Car Brasil 2020",
+      "records": 2,
+      "overridden_by": []
+    },
+    {
+      "simulator": "ams2",
       "class_id": "StockCarV8_2022",
       "name": "Stock Car Pro Series",
       "records": 1,

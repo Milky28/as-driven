@@ -112,6 +112,44 @@
         "level": "high",
         "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by registered sources."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lotus 98T"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.lotus-98t.20260822t162340414z-6141e36f by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "assetto-corsa.base-game.lotus-98t",
+        "wikipedia.lotus-98t",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement",
+        "ac.local-live-lotus-98t-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Kunos's official car list and the lotus_98t content id establish the official AC implementation. The guided drive directly established six forward gears, H-pattern actuation, clutch-required move-off, required lift and manual rev matching, no automatic cut or blip, and a round wheel without display or shift lights. Running clutch acceptance remains medium confidence because AC's clutch channel was already active while stopped and may report the car's own clutch."
+      }
     }
   ],
   "provenance": {
@@ -169,6 +207,30 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "assetto-corsa.base-game.lotus-98t",
+          "wikipedia.lotus-98t",
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement",
+          "ac.local-live-lotus-98t-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Kunos officially lists the Lotus Type 98T in Assetto Corsa's Historic Racing roster. The exact title and installed lotus_98t content id match the curated 1986 Lotus Renault 98T rather than creating another car."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-lotus-98t-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -183,5 +245,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

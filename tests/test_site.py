@@ -205,9 +205,14 @@ class SiteTests(unittest.TestCase):
         audi = next(car for car in payload["cars"] if car["id"] == "audi-r8-lms-gt3-evo-ii")
         self.assertEqual(
             [(simulator["id"], simulator["label"]) for simulator in audi["simulators"]],
-            [("ams2", "AMS2"), ("ac-evo", "Assetto Corsa EVO")],
+            [
+                ("ams2", "AMS2"),
+                ("ac-evo", "Assetto Corsa EVO"),
+                ("acc", "Assetto Corsa Competizione"),
+                ("ac", "Assetto Corsa"),
+            ],
         )
-        self.assertIn('data-simulators=" ams2 ac-evo "', page)
+        self.assertIn('data-simulators=" ams2 ac-evo acc ac "', page)
         for simulator in audi["simulators"]:
             anchor = f'audi-r8-lms-gt3-evo-ii--{simulator["id"]}'
             self.assertIn(
@@ -220,6 +225,10 @@ class SiteTests(unittest.TestCase):
             simulator for simulator in audi["simulators"] if simulator["id"] == "ac-evo"
         )
         self.assertEqual(ac_evo["unknown_behavior"], ["automatic shift cut"])
+        acc = next(
+            simulator for simulator in audi["simulators"] if simulator["id"] == "acc"
+        )
+        self.assertEqual(acc["unknown_behavior"], ["automatic shift cut"])
         self.assertIn("Simulator behavior not established", page)
         self.assertIn("window.addEventListener('hashchange'", page)
 
@@ -229,10 +238,14 @@ class SiteTests(unittest.TestCase):
             payload["simulators"],
             [
                 {"id": "ams2", "label": "AMS2"},
+                {"id": "ac", "label": "Assetto Corsa"},
+                {"id": "acc", "label": "Assetto Corsa Competizione"},
                 {"id": "ac-evo", "label": "Assetto Corsa EVO"},
             ],
         )
         page = build_site(ROOT)
+        self.assertIn('<option value="ac">Assetto Corsa</option>', page)
+        self.assertIn('<option value="acc">Assetto Corsa Competizione</option>', page)
         self.assertIn('<option value="ac-evo">Assetto Corsa EVO</option>', page)
         self.assertIn('<option value="ams2">AMS2</option>', page)
 

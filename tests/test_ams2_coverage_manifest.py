@@ -225,6 +225,7 @@ class AMS2CoverageManifestTests(unittest.TestCase):
                     for path in (ROOT / "data" / "v1" / "cars").glob("*.json")
                     for record in [json.loads(path.read_text(encoding="utf-8"))]
                     for simulator in record["simulators"]
+                    if simulator["simulator"] == "ams2"
                     for identity in simulator["identities"]
                     if identity["kind"] == "telemetry-name"
                     for name in [identity["value"]]

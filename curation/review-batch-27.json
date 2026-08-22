@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.7",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "chevrolet-cruze-stock-car-2020",
+      "bundle": "build/staged-20260822/ams2.chevrolet-cruze-stock-car-2020.20260822t042703601z-047255f6.staged.json",
+      "class": "Stock Car Brasil 2020",
+      "manufacturer": "Chevrolet",
+      "model": "Cruze Stock Car",
+      "year": {
+        "from": 2020,
+        "label": "2020 Stock Car Brasil Chevrolet Cruze"
+      },
+      "real_world_identity_notes": "The Chevrolet Cruze competing in the 2020 Stock Car Brasil season. AMS2's official catalogue and the CBA's marque-specific annex identify the exact car, while the CBA's technical regulations and common-platform annex establish the class-wide transmission hardware.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.stock-car-2020",
+        "cba.stock-car.2020.chevrolet-cruze-annex",
+        "cba.stock-car.2020.technical-regulations",
+        "cba.stock-car.2020.platform-annex"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Official simulator and governing-body sources align on the 2020 Chevrolet Cruze identity and common-platform transmission, while the guided drive establishes the exact AMS2 shift behavior and cockpit wheel.",
+      "identity_basis": "AMS2's official catalogue explicitly names Chevrolet Cruze Stock Car 2020, and the CBA's version 1.6 Chevrolet Cruze annex identifies the 2020 competition car.",
+      "specification_basis": "CBA Article 13 on printed page 12 (PDF page 12) permits only the RAM 8371 multi-disc clutch, X-TRAC 396B023 transmission and semi-automatic paddle-shift actuation, and lists six forward ratios. The common-platform annex further identifies the three-disc clutch and paddle-shift hardware. Neither source establishes launch technique, cut, blip, wheel-integrated display or shift lights, which therefore come only from the guided drive.",
+      "control_overrides": {
+        "gearbox_type": "semi-automatic"
+      },
+      "confidence_notes": "Six gears, paddle actuation, a standing-start clutch, clutchless running shifts, automatic cut and automatic blip were directly observed. The cockpit wheel has an integrated display and shift lights. The CBA rules support the real transmission but not those wheel features or the simulated launch, cut and blip behavior. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The 2020 regulations establish a six-speed semi-automatic paddle transmission and multi-disc clutch but do not specify the driver's launch technique, ignition cut or automatic blipping.",
+        "The integrated display and shift lights were observed in the AMS2 cockpit. The regulations merely permit a gear display and do not establish its location or require shift lights."
+      ],
+      "driver_summary": "Six-speed paddle Stock Car with a GT/formula rim, integrated display and shift lights. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    },
+    {
+      "record_id": "toyota-corolla-stock-car-2020",
+      "bundle": "build/staged-20260822/ams2.toyota-corolla-stock-car-2020.20260822t042856182z-1c363de0.staged.json",
+      "class": "Stock Car Brasil 2020",
+      "manufacturer": "Toyota",
+      "model": "Corolla Stock Car",
+      "year": {
+        "from": 2020,
+        "label": "2020 Stock Car Brasil Toyota Corolla"
+      },
+      "real_world_identity_notes": "The Toyota Corolla competing in the 2020 Stock Car Brasil season. AMS2's official catalogue and the CBA's marque-specific annex identify the exact car, while the CBA's technical regulations and common-platform annex establish the class-wide transmission hardware.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.stock-car-2020",
+        "cba.stock-car.2020.toyota-corolla-annex",
+        "cba.stock-car.2020.technical-regulations",
+        "cba.stock-car.2020.platform-annex"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Official simulator and governing-body sources align on the 2020 Toyota Corolla identity and common-platform transmission, while the guided drive establishes the exact AMS2 shift behavior and cockpit wheel.",
+      "identity_basis": "AMS2's official catalogue explicitly names Toyota Corolla Stock Car 2020, and the CBA's version 1.6 Toyota Corolla annex identifies the 2020 competition car.",
+      "specification_basis": "CBA Article 13 on printed page 12 (PDF page 12) permits only the RAM 8371 multi-disc clutch, X-TRAC 396B023 transmission and semi-automatic paddle-shift actuation, and lists six forward ratios. The common-platform annex further identifies the three-disc clutch and paddle-shift hardware. Neither source establishes launch technique, cut, blip, wheel-integrated display or shift lights, which therefore come only from the guided drive.",
+      "control_overrides": {
+        "gearbox_type": "semi-automatic"
+      },
+      "confidence_notes": "Six gears, paddle actuation, a standing-start clutch, clutchless running shifts, automatic cut and automatic blip were directly observed. The cockpit wheel has an integrated display and shift lights. The CBA rules support the real transmission but not those wheel features or the simulated launch, cut and blip behavior. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The 2020 regulations establish a six-speed semi-automatic paddle transmission and multi-disc clutch but do not specify the driver's launch technique, ignition cut or automatic blipping.",
+        "The integrated display and shift lights were observed in the AMS2 cockpit. The regulations merely permit a gear display and do not establish its location or require shift lights."
+      ],
+      "driver_summary": "Six-speed paddle Stock Car with a GT/formula rim, integrated display and shift lights. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    }
+  ]
+}

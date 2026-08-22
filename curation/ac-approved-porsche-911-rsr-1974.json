@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.11",
+  "approved_at": "2026-08-22",
+  "record_id": "porsche-911-rsr-1974",
+  "simulator": "ac",
+  "telemetry_name": "Porsche 911 Carrera RSR 3.0",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.porsche-911-carrera-rsr-3-0.20260822t160750374z-1143b328",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact official Kunos data.acd was fingerprinted. Five H-pattern gears, clutch-required move-off, required lift, required manual blip, no automatic cut/blip, and a round rim without integrated display or shift lights were observed. The cockpit depicts a dogleg gate even though the real Type 915 gate is conventional H. Accepted running shifts are medium confidence because the clutch telemetry channel may include car-side intervention. Compatible implementation: The exact AC Legends v3.0 data.acd was fingerprinted. Five H-pattern gears, a dogleg cockpit, clutch-required move-off, required lift, required manual blip, no automatic cut/blip, and a round rim without integrated display or shift lights match the official Kunos implementation. Accepted running shifts are medium confidence because clutch telemetry may include car-side intervention.",
+  "scope_notes": "One simulator entry covers multiple separately fingerprinted implementations whose effective controls and overrides were reviewed as identical.",
+  "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '14923034': The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its recorded LastUpdated value predates the 2026-08-22 observation, and SteamDB identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03. Compatible implementation observed through SimHub guided verification observation ac.acl-gtr-porsche-rsr-74.20260822t165038034z-bb340321: AC Legends GT Classic v3.0 release notes, PDF/printed page 14, identify this exact entry as the 1974 Porsche 911 RSR and state 'Model: Kunos'. The fingerprinted drive matches the already reviewed official Kunos AC implementation on every effective control and override: five H-pattern gears, dogleg cockpit, clutch-required launch, lift, manual blip, no automatic cut/blip, and the same round wheel equipment.",
+  "game_version_correction": {
+    "observed": "unknown",
+    "verified": "14923034",
+    "basis": "The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its recorded LastUpdated value predates the 2026-08-22 observation, and SteamDB identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03."
+  },
+  "additional_telemetry_names": [
+    {
+      "value": "ACL GTR Porsche RSR 74",
+      "basis": "AC Legends GT Classic v3.0 release notes, PDF/printed page 14, identify this exact entry as the 1974 Porsche 911 RSR and state 'Model: Kunos'. The fingerprinted drive matches the already reviewed official Kunos AC implementation on every effective control and override: five H-pattern gears, dogleg cockpit, clutch-required launch, lift, manual blip, no automatic cut/blip, and the same round wheel equipment."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.6",
+  "approved_at": "2026-08-21",
+  "record_id": "chevrolet-cruze-stock-car-2019",
+  "simulator": "ams2",
+  "telemetry_name": "Chevrolet Cruze Stock Car 2019",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.chevrolet-cruze-stock-car-2019.20260822t041355845z-c18a2470",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Six gears, paddle actuation, a standing-start clutch, clutchless running shifts, automatic cut and automatic blip were directly observed. The cockpit wheel has an integrated display and shift lights. The CBA rules support the real transmission but do not support those wheel features or the simulated cut/blip behavior. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "StockCarV8"
+}

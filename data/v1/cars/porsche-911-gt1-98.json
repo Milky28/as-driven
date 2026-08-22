@@ -95,6 +95,67 @@
         "level": "high",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the 1998 six-speed sequential gearbox is supported by a registered secondary source."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 GT1-98"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.porsche-911-gt1-98.20260822t162709160z-6a1d7df8 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "unknown",
+          "condition": "AC build 14923034 accepted the full-throttle upshift but published no engine torque, so the guided workflow cannot determine whether the implementation cuts ignition.",
+          "confidence": {
+            "level": "high",
+            "basis": "The absence of the required torque channel is directly recorded in the immutable guided observation; repeating the drive cannot establish the cut through current telemetry."
+          },
+          "source_refs": [
+            "ac.local-live-porsche-911-gt1-98-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AC build 14923034 accepted the tested clutchless coast downshift without throttle input and showed no automatic throttle spike.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without a driver blip."
+          },
+          "source_refs": [
+            "ac.local-live-porsche-911-gt1-98-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "assetto-corsa.porsche-pack-2.911-gt1-98",
+        "wikipedia.porsche-911-gt1",
+        "ac.local-live-porsche-911-gt1-98-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Kunos's official Porsche Pack II material, v1.10 announcement, exact in-game title and ks_porsche_911_gt1 content id establish the 1998 car. The guided drive directly established six sequential-stick gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and cockpit wheel details. Automatic cut is deliberately unknown because AC exposed no engine-torque channel."
+      }
     }
   ],
   "provenance": {
@@ -149,6 +210,28 @@
         ],
         "confidence": "medium",
         "basis": "The drive accepted a full-throttle clutchless upshift with automatic cut, so no lift is required, and detected no automatic blip on downshifts, so the driver supplies the rev-matching blip."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "assetto-corsa.porsche-pack-2.911-gt1-98",
+          "wikipedia.porsche-911-gt1",
+          "ac.local-live-porsche-911-gt1-98-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Kunos's official release announcement names Porsche 911 GT1-98 1998, matching the exact telemetry title and installed ks_porsche_911_gt1 package. It maps directly to the existing 1998 record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-porsche-911-gt1-98-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -156,5 +239,5 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

@@ -128,6 +128,50 @@
         "level": "verified",
         "basis": "Controls directly observed in a guided Assetto Corsa EVO drive with automatic clutch and shifting disabled, and they agree with the AMS2 drive already curated for this car on every field both established."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Huracán ST Evo2 2021"
+        },
+        {
+          "kind": "internal-id",
+          "value": "lamborghini_huracan_st_evo2"
+        },
+        {
+          "kind": "class-id",
+          "value": "ST"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.lamborghini-hurac-n-st-evo2-2021.20260822t220556604z-e7a9334c by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "acc.challengers-pack.lamborghini-huracan-st-evo2",
+        "lamborghini.super-trofeo-evo2.brochure.2022",
+        "acc.local-live-lamborghini-hurac-n-st-evo2-2021-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "KUNOS's official ACC Challengers Pack page names the Lamborghini Huracan ST EVO2 and the 2021 specification. The live ACC display name, stable internal id and ST class agree with that official identity, while the guided drive directly established the simulator behavior."
+      }
     }
   ],
   "provenance": {
@@ -202,6 +246,28 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "acc.challengers-pack.lamborghini-huracan-st-evo2",
+          "lamborghini.super-trofeo-evo2.brochure.2022",
+          "acc.local-live-lamborghini-hurac-n-st-evo2-2021-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "The official ACC DLC page names the 2021 Lamborghini Huracan ST EVO2. SimHub simultaneously reported telemetry name `Lamborghini Huracán ST Evo2 2021`, internal id `lamborghini_huracan_st_evo2`, and class `ST`, so this is the same Super Trofeo EVO2 already curated from Lamborghini, AMS2 and AC EVO evidence rather than the GT3 EVO2 or the earlier LP 620-2 Super Trofeo."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-lamborghini-hurac-n-st-evo2-2021-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -213,5 +279,5 @@
     "The old LamborghiniHuracanLP6202SuperTrofeo identity belongs to a different predecessor and is intentionally not included.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-21"
+  "updated_at": "2026-08-22"
 }

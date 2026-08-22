@@ -1,0 +1,156 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mitsubishi-lancer-evo10-rx",
+  "identity": {
+    "display_name": "Mitsubishi Lancer Evo10 RX",
+    "manufacturer": "Mitsubishi",
+    "model": "Lancer Evolution X RX",
+    "year": {
+      "label": "Lancer Evolution X-derived RX representation"
+    },
+    "class": "RX",
+    "real_world_identity_notes": "AMS2 names the car Mitsubishi Lancer Evo10 RX, which establishes a simulator representation derived from the Lancer Evolution X. Mitsubishi's road-car material establishes the Evolution X identity but describes road transmissions that do not match the observed sequential-stick RX car. No official works or homologated rallycross Evolution X matching the AMS2 car was found, so no exact real build or year is asserted and the simulator's controls are not projected onto a real car."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+      "An older pre-fix drive reported automatic blip yes; both the corrected isolated recheck and this newer full drive returned no.",
+      "No matching real rallycross Evolution X was identified. The dogbox construction comes from the reviewed SuperCar category rule; the six ratios, sequential-stick mechanism and shift behavior remain simulator observations rather than claims about one exact real build."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mitsubishi Lancer Evo10 RX"
+        },
+        {
+          "kind": "class-id",
+          "value": "RX"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mitsubishi-lancer-evo10-rx.20260822t040440382z-61781c99 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "ams2.official-car-list.rx",
+        "mitsubishi.lancer-evolution.2013.press-kit",
+        "fia.appendix-j.2016.article-279",
+        "ams2.local-live-mitsubishi-lancer-evo10-rx-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "The exact AMS2 identity and controls were observed live. Confidence is medium because research established the Evolution X basis but did not identify a corresponding works or homologated rallycross build."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.rx",
+          "mitsubishi.lancer-evolution.2013.press-kit",
+          "fia.appendix-j.2016.article-279",
+          "ams2.local-live-mitsubishi-lancer-evo10-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The official AMS2 RX catalogue names Mitsubishi Lancer Evo10 RX, while Mitsubishi's manufacturer material establishes the Evolution X road model. No exact real rallycross implementation matching AMS2 was identified."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.rx",
+          "mitsubishi.lancer-evolution.2013.press-kit",
+          "fia.appendix-j.2016.article-279",
+          "ams2.local-live-mitsubishi-lancer-evo10-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The guided drive selected six forward gears through a sequential stick. Mitsubishi's road-car transmissions do not support that RX configuration. The AMS2 entry is reviewed as an RX SuperCar-class representation: FIA Article 279 requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing the category's dogbox construction even though no exact real Evolution X build was identified. The six ratios and sequential-stick mechanism still come from the drive."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-mitsubishi-lancer-evo10-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The AMS2 car is reviewed as an RX SuperCar-class representation, for which FIA Article 279 requires dog engagement and prohibits synchronisers and secondary clutch mechanisms. That establishes dogbox construction at category level despite no exact real Evolution X build being identified; the closest archetype instead carries gearbox_type sequential."
+      }
+    ]
+  },
+  "updated_at": "2026-08-21",
+  "driver_summary": "AMS2's Evolution X-derived RX car uses a six-speed sequential stick. Use the clutch to launch; it cuts flat clutchless upshifts and accepts coast downshifts without pedal work. No matching exact real rallycross build was identified."
+}

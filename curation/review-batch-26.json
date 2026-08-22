@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.6",
+  "approved_at": "2026-08-21",
+  "records": [
+    {
+      "record_id": "citroen-ds3-rx",
+      "bundle": "build/staged-20260821/ams2.citroen-ds3-rx.20260822t035138649z-71ab98c9.staged.json",
+      "class": "RX",
+      "manufacturer": "Citroen",
+      "model": "DS3 RX Supercar",
+      "year": {
+        "from": 2014,
+        "to": 2016,
+        "label": "World RX Citroen DS3 Supercar era"
+      },
+      "real_world_identity_notes": "AMS2 names the car generically as Citroen DS3 RX. FIA classifications establish a Citroen DS3 entry in the 2016 World Rallycross Championship, while the applicable SuperCar regulations establish dog-engagement construction. The exact team car, season, livery and gearbox unit fitted to the AMS2 representation are not established, so the year is recorded as an era rather than an exact build.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.rx",
+        "fia.world-rx.2016.classifications",
+        "fia.appendix-j.2016.article-279"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The exact AMS2 identity and controls were observed live, and official FIA material establishes the real World RX DS3 context. The exact represented build is not identified, and the current automatic-blip result conflicts with one earlier corrected-detector recheck.",
+      "identity_basis": "The official AMS2 RX catalogue names Citroen DS3 RX, and the FIA's 2016 classifications identify a Citroen DS3 World RX entry. Neither source establishes which season or team car AMS2 models.",
+      "specification_basis": "The current guided drive selected six forward gears through a sequential stick. FIA Article 279 permits at most six forward gears and permits a sequential layout, so the drive rather than the rule establishes those two values. The rule separately requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing dogbox construction for the SuperCar. It does not establish clutch technique, the cut in this implementation, or downshift blipping.",
+      "control_overrides": {
+        "gearbox_type": "dogbox"
+      },
+      "confidence_notes": "Six gears, sequential-stick actuation, a standing-start clutch, clutchless running shifts and the upshift cut were observed directly. The latest two-stage drive found no automatic blip and accepted the downshift without pedal input. One earlier isolated recheck made after the original detector fix returned yes, so no is retained as the latest fuller observation at medium confidence rather than treated as settled real-car behavior. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+        "An earlier post-fix isolated recheck returned automatic blip yes. The newer full guided drive returned no, so the current result is recorded at medium confidence and remains explicitly falsifiable.",
+        "The FIA rules establish dogbox construction for the SuperCar but not the exact AMS2 shift behavior; no real-world automatic-blip conclusion is inferred from their silence."
+      ],
+      "driver_summary": "Six-speed sequential stick in AMS2. Use the clutch to launch; the car accepts flat clutchless upshifts and coast downshifts without pedal work. The current drive found no automatic blip, at medium confidence because one earlier recheck disagreed.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    },
+    {
+      "record_id": "mini-countryman-r60-rx",
+      "bundle": "build/staged-20260821/ams2.mini-countryman-r60-rx.20260822t040247960z-0ad241fd.staged.json",
+      "class": "RX",
+      "manufacturer": "Mini",
+      "model": "Countryman R60 RX Supercar",
+      "year": {
+        "from": 2015,
+        "to": 2016,
+        "label": "JRM World RX Mini Countryman era"
+      },
+      "real_world_identity_notes": "AMS2 names the car generically as MINI Countryman R60 RX. FIA classifications establish JRM's BMW MINI entry in the 2016 World Rallycross Championship, while the applicable SuperCar regulations establish dog-engagement construction. The exact season, chassis, livery and gearbox unit represented in AMS2 are not established.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.rx",
+        "fia.world-rx.2016.classifications",
+        "fia.appendix-j.2016.article-279"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The exact AMS2 identity and controls were observed live, and official FIA material establishes the World RX Mini context. The simulator's generic name does not identify one exact real build.",
+      "identity_basis": "The official AMS2 RX catalogue names MINI Countryman R60 RX, and the FIA's 2016 classifications identify JRM's BMW MINI World RX entry. The exact represented season and chassis remain unknown.",
+      "specification_basis": "The current guided drive selected six forward gears through a sequential stick. FIA Article 279 permits at most six forward gears and permits a sequential layout, so the drive rather than the rule establishes those two values. The rule separately requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing dogbox construction for the SuperCar. It does not establish clutch technique, the cut in this implementation, or downshift blipping.",
+      "control_overrides": {
+        "gearbox_type": "dogbox"
+      },
+      "confidence_notes": "Six gears, sequential-stick actuation, a standing-start clutch, clutchless running shifts and the upshift cut were observed directly. The latest two-stage drive found no automatic blip and accepted the downshift without pedal input, confirming a prior corrected recheck. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+        "An older pre-fix drive reported automatic blip yes; both the corrected isolated recheck and this newer full drive returned no.",
+        "The FIA rules establish dogbox construction for the SuperCar but not the exact AMS2 shift behavior; no real-world automatic-blip conclusion is inferred from their silence."
+      ],
+      "driver_summary": "Six-speed sequential stick in AMS2. Use the clutch to launch; it accepts flat clutchless upshifts and coast downshifts without pedal work, and the corrected drives found no automatic blip.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    },
+    {
+      "record_id": "mitsubishi-lancer-evo10-rx",
+      "bundle": "build/staged-20260821/ams2.mitsubishi-lancer-evo10-rx.20260822t040440382z-61781c99.staged.json",
+      "class": "RX",
+      "manufacturer": "Mitsubishi",
+      "model": "Lancer Evolution X RX",
+      "year": {
+        "label": "Lancer Evolution X-derived RX representation"
+      },
+      "real_world_identity_notes": "AMS2 names the car Mitsubishi Lancer Evo10 RX, which establishes a simulator representation derived from the Lancer Evolution X. Mitsubishi's road-car material establishes the Evolution X identity but describes road transmissions that do not match the observed sequential-stick RX car. No official works or homologated rallycross Evolution X matching the AMS2 car was found, so no exact real build or year is asserted and the simulator's controls are not projected onto a real car.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.rx",
+        "mitsubishi.lancer-evolution.2013.press-kit",
+        "fia.appendix-j.2016.article-279"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The exact AMS2 identity and controls were observed live. Confidence is medium because research established the Evolution X basis but did not identify a corresponding works or homologated rallycross build.",
+      "identity_basis": "The official AMS2 RX catalogue names Mitsubishi Lancer Evo10 RX, while Mitsubishi's manufacturer material establishes the Evolution X road model. No exact real rallycross implementation matching AMS2 was identified.",
+      "specification_basis": "The guided drive selected six forward gears through a sequential stick. Mitsubishi's road-car transmissions do not support that RX configuration. The AMS2 entry is reviewed as an RX SuperCar-class representation: FIA Article 279 requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing the category's dogbox construction even though no exact real Evolution X build was identified. The six ratios and sequential-stick mechanism still come from the drive.",
+      "control_overrides": {
+        "gearbox_type": "dogbox"
+      },
+      "confidence_notes": "Six gears, sequential-stick actuation, a standing-start clutch, clutchless running shifts and the upshift cut were observed directly. The latest two-stage drive found no automatic blip and accepted the downshift without pedal input, confirming a prior corrected recheck. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+        "An older pre-fix drive reported automatic blip yes; both the corrected isolated recheck and this newer full drive returned no.",
+        "No matching real rallycross Evolution X was identified. The dogbox construction comes from the reviewed SuperCar category rule; the six ratios, sequential-stick mechanism and shift behavior remain simulator observations rather than claims about one exact real build."
+      ],
+      "driver_summary": "AMS2's Evolution X-derived RX car uses a six-speed sequential stick. Use the clutch to launch; it cuts flat clutchless upshifts and accepts coast downshifts without pedal work. No matching exact real rallycross build was identified.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    },
+    {
+      "record_id": "volkswagen-polo-rx",
+      "bundle": "build/staged-20260821/ams2.volkswagen-polo-rx.20260822t040619117z-9428153b.staged.json",
+      "class": "RX",
+      "manufacturer": "Volkswagen",
+      "model": "Polo RX Supercar",
+      "year": {
+        "from": 2016,
+        "to": 2018,
+        "label": "World RX Volkswagen Polo Supercar era"
+      },
+      "real_world_identity_notes": "AMS2 names the car generically as Volkswagen Polo RX. FIA classifications establish a Volkswagen RX Sweden Polo in the 2016 World Rallycross Championship, and Volkswagen documents the later 2018 Polo R Supercar. The generic simulator name does not establish which revision it depicts, so the identity spans the supported World RX era rather than claiming the 2018 car specifically.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.rx",
+        "fia.world-rx.2016.classifications",
+        "fia.appendix-j.2016.article-279",
+        "volkswagen.polo-r-supercar-2018"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The exact AMS2 identity and controls were observed live, and official FIA and Volkswagen material establishes the real Polo World RX lineage. The exact revision represented by AMS2 is not identified.",
+      "identity_basis": "The official AMS2 RX catalogue names Volkswagen Polo RX; the FIA identifies a 2016 Polo entry and Volkswagen identifies its 2018 successor. AMS2's generic identity cannot distinguish them.",
+      "specification_basis": "The current guided drive selected six forward gears through a sequential stick. FIA Article 279 permits at most six forward gears and permits a sequential layout, so the drive rather than the rule establishes those two values. The rule separately requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing dogbox construction across the 2016-2018 SuperCar era. Neither it nor Volkswagen's release establishes clutch technique, the cut in this implementation, or downshift blipping.",
+      "control_overrides": {
+        "gearbox_type": "dogbox"
+      },
+      "confidence_notes": "Six gears, sequential-stick actuation, a standing-start clutch, clutchless running shifts and the upshift cut were observed directly. Both the earlier corrected drive and the current two-stage drive found no automatic blip; the current drive accepted the downshift without pedal input. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+        "No automatic blip was found in either the earlier corrected recheck or this newer full guided drive.",
+        "The year range avoids silently choosing between the 2016 World RX entry and Volkswagen's documented 2018 revision."
+      ],
+      "driver_summary": "Six-speed sequential stick in AMS2. Use the clutch to launch; it accepts flat clutchless upshifts and coast downshifts without pedal work, and both corrected drives found no automatic blip.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    },
+    {
+      "record_id": "sprint-race",
+      "bundle": "build/staged-20260821/ams2.sprint-race.20260822t040810093z-2415554e.staged.json",
+      "class": "Sprint Race",
+      "manufacturer": "Sprint Race",
+      "model": "Sprint Race",
+      "year": {
+        "from": 2019,
+        "label": "2019 Sprint Race car"
+      },
+      "real_world_identity_notes": "The officially licensed Brazilian Sprint Race one-make car announced for AMS2 in 2019: a centrally seated, rear-wheel-drive 260 hp V6 car with a six-speed sequential transmission. The official announcement does not say whether that transmission is lever- or paddle-actuated; the current AMS2 cockpit observation establishes paddles for this simulator entry.",
+      "real_world_source_refs": [
+        "reiza.dev-update.2019-07.sprint-race",
+        "nascar-brasil.sprint-race.history"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The official Reiza announcement establishes the licensed 2019 car and six-speed sequential transmission, while the guided drive establishes its AMS2 paddle actuation and shift behavior.",
+      "identity_basis": "Reiza's official 2019 development update names and describes the licensed Sprint Race car, corroborated by the series' own history.",
+      "specification_basis": "Reiza specifies a six-speed sequential transmission. The current guided cockpit drive establishes sequential paddles, automatic cut, automatic blip and the wheel layout in AMS2; the official source is silent on those details.",
+      "control_overrides": {
+        "gearbox_type": "sequential"
+      },
+      "confidence_notes": "Six gears, paddle actuation, a standing-start clutch, clutchless running shifts, automatic cut and automatic blip were directly observed. The cockpit has a closed GT/formula-style rim without an integrated display or shift lights. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The real-car source establishes only a six-speed sequential transmission; paddle actuation, cut, blip and wheel details come from the current AMS2 drive.",
+        "The wheel has molded side grips and a central control face, so it is classified gt-formula even though it has neither an integrated display nor shift lights."
+      ],
+      "driver_summary": "Six-speed paddle car with a GT/formula-style rim. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    },
+    {
+      "record_id": "chevrolet-cruze-stock-car-2019",
+      "bundle": "build/staged-20260821/ams2.chevrolet-cruze-stock-car-2019.20260822t041355845z-c18a2470.staged.json",
+      "class": "Stock Car Brasil 2019",
+      "manufacturer": "Chevrolet",
+      "model": "Cruze Stock Car",
+      "year": {
+        "from": 2019,
+        "label": "2019 Stock Car Brasil Chevrolet Cruze"
+      },
+      "real_world_identity_notes": "The Chevrolet Cruze competing in the 2019 Stock Car Brasil season. AMS2's official catalogue identifies the exact class and car, Chevrolet's retrospective establishes the Cruze's series lineage, and the CBA's 2019 technical rules establish the season's common transmission hardware.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.stock-car-2019",
+        "cba.stock-car.2019.technical-regulations",
+        "chevrolet.cruze-stock-car.lineage"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Official simulator, manufacturer and governing-body sources align on the 2019 Cruze identity and transmission, while the guided drive establishes the exact AMS2 shift behavior and cockpit wheel.",
+      "identity_basis": "AMS2's official catalogue explicitly names Chevrolet Cruze Stock Car 2019; Chevrolet confirms the Cruze's Stock Car lineage.",
+      "specification_basis": "CBA Article 13 on PDF pages 8-9 specifies the RAM 8371 multi-disc clutch, X-TRAC 396B023 transmission, six forward ratios and designated semi-automatic paddle-shift actuation. It permits but does not require a gear display and says nothing about wheel-integrated displays, shift lights, launch technique, cut or blip, which therefore come only from the guided drive.",
+      "control_overrides": {
+        "gearbox_type": "semi-automatic"
+      },
+      "confidence_notes": "Six gears, paddle actuation, a standing-start clutch, clutchless running shifts, automatic cut and automatic blip were directly observed. The cockpit wheel has an integrated display and shift lights. The CBA rules support the real transmission but do not support those wheel features or the simulated cut/blip behavior. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",
+      "control_notes": [
+        "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+        "The 2019 regulations establish a six-speed semi-automatic paddle transmission and multi-disc clutch but do not specify the driver's launch technique, ignition cut or automatic blipping.",
+        "The integrated display and shift lights were observed in the AMS2 cockpit. The regulations merely permit a gear display and do not establish its location or require shift lights."
+      ],
+      "driver_summary": "Six-speed paddle Stock Car with a GT/formula rim, integrated display and shift lights. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically.",
+      "live_source_url": "https://localhost/as-driven/guided-verification"
+    }
+  ]
+}

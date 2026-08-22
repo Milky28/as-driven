@@ -304,10 +304,10 @@ behavior remained operational after the restart.
 - Ship a pinned dataset with the plugin and optionally poll signed GitHub
   releases, never a moving branch.
 - Show dataset version and changelog before applying an update.
-- Continue the active AC EVO development track, then choose the next simulator
-  from available telemetry, test access, and source quality rather than a
-  promised product order. The existing iRacing importer and AC Rally identifier
-  are foundations, not coverage claims.
+- Continue the AC EVO and ACC development tracks. ACC was selected next from
+  available telemetry, test access, source quality, and shared-car coverage; its
+  first reviewed entry is the Audi R8 LMS GT3 Evo II. The existing iRacing
+  importer and AC Rally identifier are foundations, not coverage claims.
 - Provide an opt-in unmatched-identifier export; do not upload telemetry by
   default.
 

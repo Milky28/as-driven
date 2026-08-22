@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.15",
+  "approved_at": "2026-08-22",
+  "record_id": "audi-r8-lms-gt3-evo-ii",
+  "simulator": "acc",
+  "telemetry_name": "Audi R8 LMS Evo II 2022",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.audi-r8-lms-evo-ii-2022.20260822t214156833z-bc045011",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Exact ACC identity and class were captured under As Driven 0.18.0. With automatic clutch, shifting and throttle blip assists disabled, the car moved off without physical clutch input, accepted six paddle-selected gears, accepted clutchless full-throttle upshifts and coast downshifts, and automatically blipped. Cockpit inspection found a closed GT/Formula rim without a rim-mounted display or shift lights. Automatic cut is unestablished because ACC publishes no engine torque through SimHub.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT3"
+}

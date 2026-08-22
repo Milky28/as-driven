@@ -677,11 +677,14 @@ namespace AsDriven.Plugin
         {
             if (_database == null || car == null)
             {
+                _lastRuntimeError = "Preview catalog data is not available.";
                 return false;
             }
             GuidanceSnapshot preview = _database.Preview(car.Simulator, car.RecordId);
             if (!preview.HasMatch)
             {
+                _lastRuntimeError = "Preview data was not found for "
+                    + car.RecordId + " (" + car.Simulator + ").";
                 return false;
             }
             _current = preview;
@@ -1111,6 +1114,7 @@ namespace AsDriven.Plugin
         {
             if (string.Equals(simulator, "ams2", StringComparison.Ordinal)) return "AMS2";
             if (string.Equals(simulator, "iracing", StringComparison.Ordinal)) return "iRacing";
+            if (string.Equals(simulator, "acc", StringComparison.Ordinal)) return "Assetto Corsa Competizione";
             if (string.Equals(simulator, "ac-evo", StringComparison.Ordinal)) return "Assetto Corsa EVO";
             if (string.Equals(simulator, "ac-rally", StringComparison.Ordinal)) return "Assetto Corsa Rally";
             return string.IsNullOrWhiteSpace(rawGameName) ? "Simulator" : rawGameName;
@@ -1119,7 +1123,10 @@ namespace AsDriven.Plugin
         /// <summary>
         /// The processes whose file version states a simulator's build.
         ///
-        /// Not every simulator answers this way. Assetto Corsa EVO ships an
+        /// Not every simulator answers this way. Original AC and ACC have no
+        /// useful file version, but their Steam manifests supply exact content
+        /// build ids.
+        /// Assetto Corsa EVO ships an
         /// executable with no version resource at all - the file reports 0.0.0.0
         /// and its only versioned DLL belongs to middleware - so the version a
         /// driver reads on its settings screen exists nowhere on disk. It is
@@ -1134,6 +1141,8 @@ namespace AsDriven.Plugin
             switch (simulator)
             {
                 case "ams2": return new[] { "AMS2AVX", "AMS2" };
+                case "ac": return new[] { "acs" };
+                case "acc": return new[] { "AC2-Win64-Shipping", "acc" };
                 default: return new string[0];
             }
         }
@@ -1148,8 +1157,8 @@ namespace AsDriven.Plugin
 
             _detectedVersionGame = gameName;
             _detectedGameVersion = "unknown";
-            string[] processNames = VersionProcessNames(
-                AsDrivenDatabase.CanonicalizeSimulator(gameName));
+            string simulator = AsDrivenDatabase.CanonicalizeSimulator(gameName);
+            string[] processNames = VersionProcessNames(simulator);
             if (processNames.Length == 0)
             {
                 return _detectedGameVersion;
@@ -1163,7 +1172,20 @@ namespace AsDriven.Plugin
                     processes = Process.GetProcessesByName(processName);
                     foreach (Process process in processes)
                     {
-                        string version = DetectFileVersion(ResolveProcessPath(process));
+                        string processPath = ResolveProcessPath(process);
+                        string version;
+                        if (simulator == "ac")
+                        {
+                            version = DetectSteamBuildId(processPath, "244210");
+                        }
+                        else if (simulator == "acc")
+                        {
+                            version = DetectSteamBuildId(processPath, "805550");
+                        }
+                        else
+                        {
+                            version = DetectFileVersion(processPath);
+                        }
                         if (version != "unknown")
                         {
                             _detectedGameVersion = version;
@@ -1187,6 +1209,42 @@ namespace AsDriven.Plugin
                 }
             }
             return _detectedGameVersion;
+        }
+
+        private static string DetectSteamBuildId(string processPath, string appId)
+        {
+            try
+            {
+                DirectoryInfo directory = new FileInfo(processPath).Directory;
+                while (directory != null
+                    && !directory.Name.Equals("steamapps", StringComparison.OrdinalIgnoreCase))
+                {
+                    directory = directory.Parent;
+                }
+                if (directory == null)
+                {
+                    return "unknown";
+                }
+
+                string manifest = Path.Combine(
+                    directory.FullName, "appmanifest_" + appId + ".acf");
+                foreach (string line in File.ReadLines(manifest))
+                {
+                    string[] parts = line.Replace("\"", string.Empty)
+                        .Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length == 2
+                        && parts[0].Equals("buildid", StringComparison.OrdinalIgnoreCase)
+                        && parts[1].All(char.IsDigit))
+                    {
+                        return parts[1];
+                    }
+                }
+            }
+            catch
+            {
+                // A non-Steam install or inaccessible manifest leaves the gap open.
+            }
+            return "unknown";
         }
 
         private static string DetectFileVersion(string path)

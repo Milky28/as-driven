@@ -1,0 +1,161 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "volkswagen-polo-rx",
+  "identity": {
+    "display_name": "Volkswagen Polo RX",
+    "manufacturer": "Volkswagen",
+    "model": "Polo RX Supercar",
+    "year": {
+      "from": 2016,
+      "to": 2018,
+      "label": "World RX Volkswagen Polo Supercar era"
+    },
+    "class": "RX",
+    "real_world_identity_notes": "AMS2 names the car generically as Volkswagen Polo RX. FIA classifications establish a Volkswagen RX Sweden Polo in the 2016 World Rallycross Championship, and Volkswagen documents the later 2018 Polo R Supercar. The generic simulator name does not establish which revision it depicts, so the identity spans the supported World RX era rather than claiming the 2018 car specifically."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+      "No automatic blip was found in either the earlier corrected recheck or this newer full guided drive.",
+      "The year range avoids silently choosing between the 2016 World RX entry and Volkswagen's documented 2018 revision."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Volkswagen Polo RX"
+        },
+        {
+          "kind": "class-id",
+          "value": "RX"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.volkswagen-polo-rx.20260822t040619117z-9428153b by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "ams2.official-car-list.rx",
+        "fia.world-rx.2016.classifications",
+        "fia.appendix-j.2016.article-279",
+        "volkswagen.polo-r-supercar-2018",
+        "ams2.local-live-volkswagen-polo-rx-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "The exact AMS2 identity and controls were observed live, and official FIA and Volkswagen material establishes the real Polo World RX lineage. The exact revision represented by AMS2 is not identified."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.rx",
+          "fia.world-rx.2016.classifications",
+          "fia.appendix-j.2016.article-279",
+          "volkswagen.polo-r-supercar-2018",
+          "ams2.local-live-volkswagen-polo-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The official AMS2 RX catalogue names Volkswagen Polo RX; the FIA identifies a 2016 Polo entry and Volkswagen identifies its 2018 successor. AMS2's generic identity cannot distinguish them."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.rx",
+          "fia.world-rx.2016.classifications",
+          "fia.appendix-j.2016.article-279",
+          "volkswagen.polo-r-supercar-2018",
+          "ams2.local-live-volkswagen-polo-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The current guided drive selected six forward gears through a sequential stick. FIA Article 279 permits at most six forward gears and permits a sequential layout, so the drive rather than the rule establishes those two values. The rule separately requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing dogbox construction across the 2016-2018 SuperCar era. Neither it nor Volkswagen's release establishes clutch technique, the cut in this implementation, or downshift blipping."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-volkswagen-polo-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "FIA Article 279 requires dog engagement and prohibits synchronisers and secondary clutch mechanisms across the reviewed SuperCar era, establishing dogbox construction. The closest archetype instead carries gearbox_type sequential; the guided drive separately establishes the sequential-stick mechanism."
+      }
+    ]
+  },
+  "updated_at": "2026-08-21",
+  "driver_summary": "Six-speed sequential stick in AMS2. Use the clutch to launch; it accepts flat clutchless upshifts and coast downshifts without pedal work, and both corrected drives found no automatic blip."
+}

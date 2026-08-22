@@ -1,0 +1,158 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "citroen-ds3-rx",
+  "identity": {
+    "display_name": "Citroen DS3 RX",
+    "manufacturer": "Citroen",
+    "model": "DS3 RX Supercar",
+    "year": {
+      "from": 2014,
+      "to": 2016,
+      "label": "World RX Citroen DS3 Supercar era"
+    },
+    "class": "RX",
+    "real_world_identity_notes": "AMS2 names the car generically as Citroen DS3 RX. FIA classifications establish a Citroen DS3 entry in the 2016 World Rallycross Championship, while the applicable SuperCar regulations establish dog-engagement construction. The exact team car, season, livery and gearbox unit fitted to the AMS2 representation are not established, so the year is recorded as an era rather than an exact build."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled. The current two-stage downshift test found no automatic blip and the gear engaged without pedal input.",
+      "An earlier post-fix isolated recheck returned automatic blip yes. The newer full guided drive returned no, so the current result is recorded at medium confidence and remains explicitly falsifiable.",
+      "The FIA rules establish dogbox construction for the SuperCar but not the exact AMS2 shift behavior; no real-world automatic-blip conclusion is inferred from their silence."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Citroen DS3 RX"
+        },
+        {
+          "kind": "class-id",
+          "value": "RX"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.citroen-ds3-rx.20260822t035138649z-71ab98c9 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "ams2.official-car-list.rx",
+        "fia.world-rx.2016.classifications",
+        "fia.appendix-j.2016.article-279",
+        "ams2.local-live-citroen-ds3-rx-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "The exact AMS2 identity and controls were observed live, and official FIA material establishes the real World RX DS3 context. The exact represented build is not identified, and the current automatic-blip result conflicts with one earlier corrected-detector recheck."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.rx",
+          "fia.world-rx.2016.classifications",
+          "fia.appendix-j.2016.article-279",
+          "ams2.local-live-citroen-ds3-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The official AMS2 RX catalogue names Citroen DS3 RX, and the FIA's 2016 classifications identify a Citroen DS3 World RX entry. Neither source establishes which season or team car AMS2 models."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.rx",
+          "fia.world-rx.2016.classifications",
+          "fia.appendix-j.2016.article-279",
+          "ams2.local-live-citroen-ds3-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The current guided drive selected six forward gears through a sequential stick. FIA Article 279 permits at most six forward gears and permits a sequential layout, so the drive rather than the rule establishes those two values. The rule separately requires dog engagement and prohibits synchronisers and secondary clutch mechanisms, establishing dogbox construction for the SuperCar. It does not establish clutch technique, the cut in this implementation, or downshift blipping."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-citroen-ds3-rx-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "FIA Article 279 requires dog engagement and prohibits synchronisers and secondary clutch mechanisms for the SuperCar, establishing dogbox construction. The closest archetype instead carries gearbox_type sequential; the guided drive separately establishes the sequential-stick mechanism."
+      }
+    ]
+  },
+  "updated_at": "2026-08-21",
+  "driver_summary": "Six-speed sequential stick in AMS2. Use the clutch to launch; the car accepts flat clutchless upshifts and coast downshifts without pedal work. The current drive found no automatic blip, at medium confidence because one earlier recheck disagreed."
+}

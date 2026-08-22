@@ -98,6 +98,56 @@
         "level": "medium",
         "basis": "Exact identity and sequential/start behavior were observed directly; automatic cut and blip were perceptual rather than telemetry-measured."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT Vortex V10"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.gt-vortex-v10.20260822t201801796z-f8bbdbc4 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The fingerprinted RSS v4 implementation produced no automatic throttle spike during the accepted coast downshift, while the current curated/AMS2 representation records automatic blipping.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly detected no automatic throttle spike with the driver assist disabled."
+          },
+          "source_refs": [
+            "ac.local-live-gt-vortex-v10-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.historic-homologation.gt2-005",
+        "carsport-holland.viper-c38-sequential",
+        "ac.local-live-gt-vortex-v10-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The fingerprinted RSS Vortex v4 package is an American V10 period GT and bundles 2003 Larbre, Roos, and Force One entries associated with the Viper GTS-R. FIA evidence independently establishes the original six-speed Viper configuration, while Carsport Holland documents a privateer sequential conversion. The AC implementation behavior and cockpit were directly observed."
+      }
     }
   ],
   "provenance": {
@@ -154,6 +204,29 @@
         ],
         "confidence": "medium",
         "basis": "Visual classification from documented cockpit photographs; the exact late privateer reference chassis remains unknown."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "rss.gt-legends-championship.pack-v6",
+          "fia.historic-homologation.gt2-005",
+          "carsport-holland.viper-c38-sequential",
+          "ac.local-live-gt-vortex-v10-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "RSS v6 identifies the exact Vortex implementation; its American V10 configuration, body, specifications, era, and bundled 2003 Viper-team liveries converge on the existing Dodge Viper GTS-R record. This does not resolve the exact historical chassis represented by either simulator."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-gt-vortex-v10-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -165,5 +238,5 @@
     "This record deliberately preserves the distinction between original FIA homologation, documented privateer conversions, and the behavior of Reiza's simulated representation.",
     "'Dodge Viper GTS-R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

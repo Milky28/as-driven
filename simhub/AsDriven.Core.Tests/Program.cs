@@ -71,14 +71,18 @@ namespace AsDriven.Core.Tests
                     "recognizes the product spelling of Assetto Corsa EVO");
                 // Four Assetto Corsa titles share a name and share almost no
                 // cars. Each is compared whole, so none resolves into another:
-                // the original is curated, EVO is curated, Rally is in the enum
-                // and undriven, and Competizione is not covered at all.
+                // the original and EVO are curated, while Rally and Competizione
+                // are recognized for contribution capture but have no records yet.
                 Equal("ac", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsa"),
                     "recognizes the original Assetto Corsa");
+                Equal("ac", AsDrivenDatabase.CanonicalizeSimulator("ac"),
+                    "accepts the original Assetto Corsa canonical id for previews");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaRally"),
                     "does not resolve Rally, which nothing has been driven in");
-                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),
-                    "does not resolve Competizione to the EVO dataset");
+                Equal("acc", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),
+                    "recognizes SimHub's Competizione game name without resolving it to EVO");
+                Equal("acc", AsDrivenDatabase.CanonicalizeSimulator("Assetto Corsa Competizione"),
+                    "recognizes the product spelling of Competizione");
 
                 // Until one record names it, a recognized game is still reported
                 // as uncovered - that message is for the driver and does not
@@ -98,6 +102,15 @@ namespace AsDriven.Core.Tests
                 Equal("unmatched",
                     database.Match("AssettoCorsaEvo", "Some Car It Does Not Have").MatchStatus,
                     "a covered game still fails closed on a car with no record");
+                GuidanceSnapshot accAudi = database.Match(
+                    "AssettoCorsaCompetizione", "audi_r8_lms_evo_ii");
+                True(accAudi.HasMatch, "matches ACC by its stable internal car id");
+                Equal("audi-r8-lms-gt3-evo-ii", accAudi.RecordId,
+                    "joins ACC to the existing Audi record");
+                Equal("unknown", accAudi.ShiftCut,
+                    "does not inherit AMS2's automatic-cut result into ACC");
+                True(accAudi.UpshiftGuidance.Contains("Automatic cut unknown"),
+                    "shows the ACC automatic-cut gap in detailed guidance");
                 // Recognized, and carrying no records at all: the driver is told
                 // the game is not covered rather than that every car is missing.
                 Equal("unsupported-game",
@@ -208,8 +221,13 @@ namespace AsDriven.Core.Tests
 
                 foreach (CarCatalogEntry catalogEntry in database.Cars)
                 {
+                    GuidanceSnapshot catalogPreview =
+                        database.Preview(catalogEntry.Simulator, catalogEntry.RecordId);
+                    True(catalogPreview.HasMatch,
+                        "every catalog entry opens its simulator-specific preview: "
+                        + catalogEntry.RecordId + " (" + catalogEntry.Simulator + ")");
                     AssertOverlayTextFits(
-                        database.Preview(catalogEntry.Simulator, catalogEntry.RecordId),
+                        catalogPreview,
                         "overlay text fits " + catalogEntry.RecordId);
                 }
 
@@ -387,8 +405,19 @@ namespace AsDriven.Core.Tests
                     Equal("required", historical.StandingStartClutch, "requires the standing-start clutch for " + historicalSequentialCar);
                     Equal("yes", historical.ShiftCut, "exposes automatic cut for " + historicalSequentialCar);
                     Equal("no", historical.AutoBlip, "does not invent automatic blip for " + historicalSequentialCar);
-                    True(historical.DownshiftGuidance.Contains("Manual blip required"), "requires authentic driver blipping for " + historicalSequentialCar);
-                    True(historical.TechniqueSummary.Contains("blip the throttle"), "shows actionable manual-blip technique for " + historicalSequentialCar);
+                    if (historicalSequentialCar == "Lamborghini Murcielago R-GT")
+                    {
+                        Equal("not-required", historical.ManualBlip, "uses the corrected AMS2 blip result for the Murcielago");
+                        True(historical.DownshiftGuidance.Contains("Manual blip not required"), "does not ask for an unnecessary Murcielago blip");
+                        True(historical.TechniqueSummary.Contains("no throttle blip is needed"), "shows the corrected Murcielago downshift technique");
+                        Equal("yes", historical.WheelIntegratedDisplay, "shows the observed Murcielago wheel display");
+                        Equal("yes", historical.WheelShiftLights, "shows the observed Murcielago shift lights");
+                    }
+                    else
+                    {
+                        True(historical.DownshiftGuidance.Contains("Manual blip required"), "requires authentic driver blipping for " + historicalSequentialCar);
+                        True(historical.TechniqueSummary.Contains("blip the throttle"), "shows actionable manual-blip technique for " + historicalSequentialCar);
+                    }
                     string expectedRim = historicalSequentialCar == "Lister Storm GTM"
                         || historicalSequentialCar == "Lamborghini Murcielago R-GT"
                         || historicalSequentialCar == "Maserati MC12 GT1"
@@ -998,6 +1027,20 @@ namespace AsDriven.Core.Tests
                             "ams2.test-prototype.",
                             StringComparison.Ordinal),
                         "creates a stable safe observation-id prefix");
+
+                    verificationDraft.Simulator = "acc";
+                    verificationDraft.GameVersion = "21257365";
+                    JObject accVerification = VerificationObservationWriter.CreatePayload(
+                        verificationDraft);
+                    Equal("acc", (string)accVerification["simulator"],
+                        "writes an attributable ACC contribution draft");
+                    True(
+                        ((string)accVerification["observation_id"]).StartsWith(
+                            "acc.test-prototype.",
+                            StringComparison.Ordinal),
+                        "keeps ACC distinct in the observation id");
+                    verificationDraft.Simulator = "ams2";
+                    verificationDraft.GameVersion = "1.6.9.91";
 
                     bool rejectedMissingObserver = false;
                     verificationDraft.Observer = string.Empty;

@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.14",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "lamborghini-murcielago-r-gt",
+      "bundle": "build/staged-20260822/ams2.lamborghini-murcielago-r-gt.20260822t204647241z-bb0e68f2.staged.json",
+      "manufacturer": "Lamborghini",
+      "model": "Murcielago R-GT",
+      "year": {
+        "from": 2004,
+        "label": "2004-generation GT1"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "REITER technical data identifies the Murcielago R-GT with a Hollinger M6S six-speed sequential gearbox and racing clutch. AMS2 presents it in GT1_05 and visibly models a sequential lever without paddles.",
+      "real_world_source_refs": [
+        "ams2.reiza-release.1.6.8.lamborghini-dream-pack-pt2",
+        "ams2.reiza-release.1.6.8.5.historical-endurance",
+        "fia.murcielago.gt-015",
+        "reiter.murcielago-rgt.technical"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "The exact AMS2 identity and technique were re-tested in 1.6.9.91. Constructor and FIA material independently establish the car and six-speed sequential hardware. The repeat cockpit inspection directly corrects the earlier display observation and newly establishes wheel-mounted shift lights.",
+      "identity_basis": "Official Reiza releases, FIA homologation, and REITER technical data retain the already-reviewed Lamborghini Murcielago R-GT identity. This contribution corrects cockpit evidence only; it does not reopen the real-car mapping.",
+      "specification_basis": "REITER technical data and both guided drives agree on six sequential-stick gears and a racing clutch. The repeat drive again confirms clutch-required move-off, automatic cut, no automatic blip, and clutchless running shifts. It also demonstrates that AMS2 accepts the coast downshift without a driver blip, which is now represented explicitly as simulator behavior rather than rewriting the curated authentic technique.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shape": "d-shaped",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the curated authentic technique retains driver rev matching.",
+          "confidence": {
+            "level": "high",
+            "basis": "The repeat guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          }
+        }
+      ],
+      "correct_existing_simulator": {
+        "basis": "A repeat guided drive with the expanded wheel-equipment prompts directly inspected an integrated display and shift lights in the AMS2 cockpit. The earlier no-display observation and its derived authentic no are incorrect. The repeat coast-downshift result also makes the simulator's lack of required driver blipping explicit.",
+        "supersedes_source_ref": "ams2.local-live-lamborghini-murcielago-rgt-controls.1.6.9.91",
+        "supersedes_observed_through": "SimHub 9.11.22",
+        "corrected_behavior_paths": [
+          "/behavior/wheel_rim_type/integrated_display",
+          "/behavior/wheel_rim_type/open_top",
+          "/behavior/wheel_rim_type/shift_lights",
+          "/overrides/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "authentic_control_corrections": [
+          {
+            "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+            "from": "no",
+            "to": "unknown",
+            "basis": "The authentic no came only from the superseded AMS2 cockpit observation. Both current simulator implementations show a display, but simulator agreement is not real-car evidence, so the authentic field returns to unknown."
+          },
+          {
+            "path": "/authentic_controls/steering/wheel_rim/source_label",
+            "from": "live-cockpit-d-shaped-no-display",
+            "to": "multi-simulator-cockpit-observation",
+            "basis": "The old source label encoded the incorrect no-display observation and must not survive its retraction."
+          },
+          {
+            "path": "/authentic_controls/steering/wheel_rim/notes",
+            "from": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown.",
+            "to": "Corrected AMS2 inspection and the independently fingerprinted RSS cockpit both show a D-shaped rim with an integrated display and shift lights. No reviewed real-car source establishes that equipment, so authentic display and shift lights remain unknown.",
+            "basis": "The prior note stated the superseded observation as fact; the replacement distinguishes simulator evidence from the still-unknown real-car equipment."
+          }
+        ],
+        "remove_simulator_overrides": [
+          {
+            "simulator": "ac",
+            "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+            "value": "yes",
+            "basis": "The AC display remains directly observed, but it is no longer a departure after the incorrect authentic no is retracted to unknown."
+          }
+        ],
+        "retained_behavior_notes": [
+          "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."
+        ]
+      },
+      "confidence_notes": "The repeat AMS2 1.6.9.91 drive directly confirmed six sequential-stick gears, clutch-required move-off, automatic cut, no automatic blip, a D-shaped closed rim, an integrated display, and wheel-mounted shift lights. The earlier no-display cockpit observation is explicitly superseded. Coast-downshift acceptance without driver throttle is now an AMS2-specific manual-blip override rather than an authentic claim.",
+      "scope_notes": "The exact Low Downforce alias inherits the corrected base controls as an approved aero-only assumption and was not separately tested.",
+      "control_notes": [
+        "This repeat contribution corrects the earlier AMS2 no-display observation: the cockpit has both an integrated display and shift lights.",
+        "The authentic display value is retracted to unknown because neither simulator is real-car evidence.",
+        "AMS2 accepts the tested coast downshift without a driver blip; authentic guidance continues to call for driver rev matching.",
+        "The exact Low Downforce identity inherits the corrected base controls and was not separately live-tested."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Corrective guided-verification observation ams2.lamborghini-murcielago-r-gt.20260822t204647241z-bb0e68f2 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, automatic cut, no automatic blip, and a closed D-shaped rim with integrated display and shift lights. It supersedes the prior no-display cockpit observation."
+    }
+  ]
+}

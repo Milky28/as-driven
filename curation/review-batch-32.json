@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.12",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "nissan-r390-gt1",
+      "bundle": "build/staged-20260822/ac.lmgt-nisumo-r39-v8.20260822t172507073z-bf9e2791.staged.json",
+      "manufacturer": "Nissan",
+      "model": "R390 GT1",
+      "year": {
+        "from": 1998,
+        "label": "1998 Le Mans specification"
+      },
+      "class": "GT1",
+      "real_world_identity_notes": "The 1998 long-tail Nissan R390 GT1. NISMO records the long-tail aerodynamic revision and Nissan-built sequential transmission for 1998; RSS describes its fictionalized Nisumo R39 with the same 1997-98 lineage, primarily-1998 long-tail form, and 3,495 cc twin-turbo V8.",
+      "real_world_source_refs": [
+        "nismo.r390-gt1-history.vol05",
+        "rss.classic-endurance-pack-1.readme.2022"
+      ],
+      "confidence": "high",
+      "confidence_basis": "RSS's first-party pack documentation and installed metadata identify the exact fingerprinted implementation as the primarily-1998 long-tail, 3,495 cc twin-turbo V8 car. NISMO independently gives that same combination only to the 1998 R390 GT1 and records its sequential transmission. Six sequential-stick gears, clutch-required move-off, automatic cut/blip, and cockpit wheel equipment were directly observed.",
+      "identity_basis": "RSS Classic Endurance Pack 1 readme, PDF/printed page 3, says the Nisumo R39 was built for 1997 and 1998, depicts the long-tail used primarily in 1998, and uses a 3,495 cc twin-turbo V8. NISMO's own history says the 1998 Nissan R390 GT1 became a long-tail and changed to a Nissan-built sequential transmission. The year, body revision, displacement, engine layout, aspiration, category and fictionalized model token converge on the existing 1998 R390 GT1 record rather than a neighboring Nissan prototype.",
+      "specification_basis": "The existing record retains the real six-speed sequential-stick specification. NISMO independently strengthens sequential construction for the 1998 car, while the fingerprinted RSS v2 drive directly selected six gears through a sequential stick. The mod's automatic downshift blip and D-shaped unlit wheel are implementation behavior and do not rewrite the real-car controls.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shape": "round",
+          "shift_lights": "yes"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v2 implementation accepted the tested clutchless coast downshift without driver throttle input and supplied an automatic throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without a driver blip."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The fingerprinted RSS v2 implementation produced a throttle spike during the accepted clutchless downshift while automatic throttle blip was disabled in the assist settings.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly detected the automatic throttle spike with the driver-assist setting disabled."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The fingerprinted RSS v2 cockpit depicts a D-shaped rim instead of the round rim carried by the curated car and AMS2 implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The cockpit rim was directly inspected during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The fingerprinted RSS v2 cockpit depicts no wheel-mounted shift lights, while the curated car and AMS2 implementation carry them.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Wheel-mounted shift-light equipment was directly inspected during the guided drive."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v2 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, full-throttle and coast-shift acceptance, automatic cut and blip, and a closed D-shaped rim without display or shift lights were observed. Running clutch acceptance remains medium confidence because SimHub's clutch channel recorded activity during the accepted shift and may include car-side intervention.",
+      "control_notes": [
+        "This drive maps Race Sim Studio's fictionalized Nisumo R39 name onto the existing 1998 Nissan R390 GT1 only after first-party specification comparison.",
+        "RSS automatically blips the tested downshift. AMS2 and the curated real-car guidance leave that rev matching to the driver.",
+        "The RSS cockpit uses a D-shaped rim without wheel-mounted shift lights; those implementation details are kept as AC overrides rather than replacing the curated round, lit rim."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.lmgt-nisumo-r39-v8.20260822t172507073z-bf9e2791 by Jason Kinslow. The fingerprinted Race Sim Studio v2 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, automatic cut and automatic blip, and a closed D-shaped rim without integrated display or shift lights. The clutch channel recorded activity during an accepted clutchless test and may include car-side intervention."
+    }
+  ]
+}

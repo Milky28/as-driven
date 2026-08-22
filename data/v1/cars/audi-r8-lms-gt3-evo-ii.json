@@ -141,6 +141,105 @@
         "level": "verified",
         "basis": "Controls directly observed in a guided Assetto Corsa EVO drive with automatic clutch and shifting disabled, agreeing with the curated AMS2 drive on every field both established."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Audi R8 LMS Evo II 2022"
+        },
+        {
+          "kind": "internal-id",
+          "value": "audi_r8_lms_evo_ii"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.audi-r8-lms-evo-ii-2022.20260822t214156833z-bc045011 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "acc.challengers-pack.audi-r8-lms-evo2",
+        "audi.r8-lms-gt3-evo2.release",
+        "audi.r8-lms-gt3.technical",
+        "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "KUNOS's official ACC Challengers Pack page names the Audi R8 LMS GT3 Evo II and the 2022 specification. The live ACC display name, stable internal id and GT3 class agree exactly with that official identity, while the guided drive directly established the simulator behavior."
+      }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT-M Aero V10 Evo2"
+        },
+        {
+          "kind": "internal-id",
+          "value": "rss_gtm_aero_v10_evo2"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.gt-m-aero-v10-evo2.20260822t220059800z-371a2cd0 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The fingerprinted RSS v2 implementation stalled or refused move-off without physical clutch input, unlike the curated authentic and three other simulator observations.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided move-off test directly observed that the car would not pull away with the physical clutch released while automatic clutch and shifting assists were disabled."
+          },
+          "source_refs": [
+            "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "rss.gt-m-aero-v10-evo2.v2",
+        "audi.r8-lms-gt3-evo2.release",
+        "audi.r8-lms-gt3.technical",
+        "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The fingerprinted RSS v2 package is a German 501 hp V10 GT3 with the Audi R8 LMS wheelbase, track and weight envelope. Its bundled `#1 Scherer Sport PHX Farewell Audi` livery explicitly loads Audi badge assets. RSS's first-party product data and the installed package therefore converge on the Audi R8 LMS GT3 Evo II, while the AC behavior and cockpit were directly observed."
+      }
     }
   ],
   "provenance": {
@@ -232,6 +331,52 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "acc.challengers-pack.audi-r8-lms-evo2",
+          "audi.r8-lms-gt3-evo2.release",
+          "audi.r8-lms-gt3.technical",
+          "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "The official ACC DLC page names the 2022 Audi R8 LMS GT3 Evo II. SimHub simultaneously reported telemetry name `Audi R8 LMS Evo II 2022`, internal id `audi_r8_lms_evo_ii`, and class `GT3`, so this is the same 2022 Evo II already curated from Audi, AMS2 and AC EVO evidence rather than a nearby R8 generation."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/3/identities"
+        ],
+        "source_refs": [
+          "rss.gt-m-aero-v10-evo2.v2",
+          "audi.r8-lms-gt3-evo2.release",
+          "audi.r8-lms-gt3.technical",
+          "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "RSS identifies the exact GT-M Aero V10 Evo2 v2 implementation. The matching installed package names Scherer Sport PHX's Farewell Audi livery, includes Audi badge configuration, reports Germany and GT3, and matches the Audi's V10 architecture and dimensions. These implementation-specific facts map the fictionalized name to the existing Audi R8 LMS GT3 Evo II record without treating the mod name itself as a real-car identity."
+      },
+      {
+        "paths": [
+          "/simulators/3/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -243,5 +388,5 @@
     "Low Downforce is an explicit inherited alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-21"
+  "updated_at": "2026-08-22"
 }

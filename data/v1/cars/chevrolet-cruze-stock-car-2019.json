@@ -1,0 +1,151 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "chevrolet-cruze-stock-car-2019",
+  "identity": {
+    "display_name": "Chevrolet Cruze Stock Car 2019",
+    "manufacturer": "Chevrolet",
+    "model": "Cruze Stock Car",
+    "year": {
+      "from": 2019,
+      "label": "2019 Stock Car Brasil Chevrolet Cruze"
+    },
+    "class": "Stock Car Brasil 2019",
+    "real_world_identity_notes": "The Chevrolet Cruze competing in the 2019 Stock Car Brasil season. AMS2's official catalogue identifies the exact class and car, Chevrolet's retrospective establishes the Cruze's series lineage, and the CBA's 2019 technical rules establish the season's common transmission hardware."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "integrated_display": "yes",
+        "shift_lights": "yes",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was observed in AMS2 1.6.9.91 with automatic clutch and shifting disabled.",
+      "The 2019 regulations establish a six-speed semi-automatic paddle transmission and multi-disc clutch but do not specify the driver's launch technique, ignition cut or automatic blipping.",
+      "The integrated display and shift lights were observed in the AMS2 cockpit. The regulations merely permit a gear display and do not establish its location or require shift lights."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Cruze Stock Car 2019"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCarV8"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.chevrolet-cruze-stock-car-2019.20260822t041355845z-c18a2470 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "ams2.official-car-list.stock-car-2019",
+        "cba.stock-car.2019.technical-regulations",
+        "chevrolet.cruze-stock-car.lineage",
+        "ams2.local-live-chevrolet-cruze-stock-car-2019-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Official simulator, manufacturer and governing-body sources align on the 2019 Cruze identity and transmission, while the guided drive establishes the exact AMS2 shift behavior and cockpit wheel."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.stock-car-2019",
+          "cba.stock-car.2019.technical-regulations",
+          "chevrolet.cruze-stock-car.lineage",
+          "ams2.local-live-chevrolet-cruze-stock-car-2019-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "AMS2's official catalogue explicitly names Chevrolet Cruze Stock Car 2019; Chevrolet confirms the Cruze's Stock Car lineage."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.stock-car-2019",
+          "cba.stock-car.2019.technical-regulations",
+          "chevrolet.cruze-stock-car.lineage",
+          "ams2.local-live-chevrolet-cruze-stock-car-2019-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "CBA Article 13 on PDF pages 8-9 specifies the RAM 8371 multi-disc clutch, X-TRAC 396B023 transmission, six forward ratios and designated semi-automatic paddle-shift actuation. It permits but does not require a gear display and says nothing about wheel-integrated displays, shift lights, launch technique, cut or blip, which therefore come only from the guided drive."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-cruze-stock-car-2019-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "archetype": {
+    "archetype_id": "paddles-6-semiauto-clutch-start-flat-up-auto-blip",
+    "classification": "matches"
+  },
+  "updated_at": "2026-08-21",
+  "driver_summary": "Six-speed paddle Stock Car with a GT/formula rim, integrated display and shift lights. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically."
+}

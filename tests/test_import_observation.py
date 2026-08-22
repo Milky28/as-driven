@@ -22,7 +22,11 @@ def _clean_observation() -> dict:
         "client_version": "0.15.0",
         "observed_at": "2026-08-12T12:00:00Z",
         "observer": "tester",
-        "identity": {"telemetry_name": "Porsche 963", "telemetry_class": "LMDh"},
+        "identity": {
+            "telemetry_name": "Porsche 963",
+            "telemetry_class": "LMDh",
+            "internal_id": "porsche_963",
+        },
         "assists": {
             "automatic_clutch": "disabled",
             "automatic_shifting": "disabled",
@@ -116,6 +120,12 @@ class ImportObservationTests(unittest.TestCase):
         self.assertEqual(transmission["upshift"]["clutch"], "not-required")
         self.assertEqual(transmission["downshift"]["clutch"], "not-required")
         self.assertEqual(transmission["downshift"]["manual_blip"], "not-required")
+
+        identities = record["simulators"][0]["identities"]
+        self.assertIn(
+            {"kind": "internal-id", "value": "porsche_963"},
+            identities,
+        )
 
         behavior = record["simulators"][0]["behavior"]
         self.assertEqual(behavior["shift_cut"], "yes")

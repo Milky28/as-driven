@@ -1,0 +1,317 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.13",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "milano-gt55",
+      "bundle": "build/staged-20260822/ac.gt-ferruccio-55-v12.20260822t200835844z-3f8b6f4d.staged.json",
+      "manufacturer": "Ferrari",
+      "model": "550 GTS Maranello",
+      "year": {
+        "from": 2001,
+        "to": 2006,
+        "label": "Prodrive 550 GTS Maranello"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "Reiza's renamed Ferrari 550 Maranello: the GT1 car Prodrive built for Care Racing Development, which raced the FIA GT Championship from 2001 to 2005 and Le Mans through 2006. AMS2 carries it as Milano 55 GT1. The record previously treated the renaming as a fictional car and declined to name an analogue; the maintainer identified it. A six-speed Xtrac sequential and a 600 bhp V12 agree with the six sequential gears and the automatic cut found in the drive, the cut being the car's flat-shift facility worked by an optical sensor at the base of the gearlever.",
+      "real_world_source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "evo.ferrari-550-maranello-prodrive"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The fingerprinted RSS Ferruccio 55 package is an Italian V12 early-2000s GT and bundles Prodrive, Care, BMS, JMB, Larbre, and Russian Age liveries corresponding to the 550 GTS Maranello. The registered technical account independently establishes the real Prodrive car's six-speed sequential transmission and shift technique. The AC behavior and cockpit were directly observed.",
+      "identity_basis": "RSS v6 identifies the exact Ferruccio 55 implementation; its installed v4 metadata and bundled team, year, and livery labels converge on the Prodrive Ferrari 550 GTS Maranello already curated as Milano 55 GT1. This review maps the mod implementation to that real-car record without treating the fictional telemetry name as the car's identity.",
+      "specification_basis": "The existing authentic six-speed Xtrac sequential and flat-shift guidance remains sourced to the real Prodrive car. The fingerprinted RSS v4 drive found the same six-speed sequential-stick layout and clutch-required move-off, but AC accepted a coast downshift without the real car's required clutch or driver blip. AC did not expose engine torque, so automatic cut remains unestablished for this implementation.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without physical clutch input, where the real Prodrive car requires the clutch for every downshift.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without driver clutch input."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the curated real-car technique requires the driver to rev-match.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v4 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+      "control_notes": [
+        "The RSS fictionalized name is mapped to the existing Prodrive Ferrari 550 GTS Maranello record only after first-party package and livery comparison.",
+        "RSS accepts a clutchless, unblipped coast downshift; the authentic Prodrive guidance still requires both clutch and driver rev matching.",
+        "The drive found no wheel-mounted shift lights, but the real car's shift-light field remains unknown rather than being filled from simulator evidence."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-ferruccio-55-v12.20260822t200835844z-3f8b6f4d by Jason Kinslow. The fingerprinted Race Sim Studio v4 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "record_id": "lister-storm-gtm",
+      "bundle": "build/staged-20260822/ac.gt-tornado-v12.20260822t201047172z-0743b5fb.staged.json",
+      "manufacturer": "Lister",
+      "model": "Storm GTM",
+      "year": {
+        "from": 2000,
+        "label": "late-period Storm GTM"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "FIA material establishes six manual ratios for the Storm family, and a documented Storm GTM uses a Hewland TGTA six-speed sequential push-pull lever. AMS2 visibly models the sequential lever without paddles.",
+      "real_world_source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.lister-storm.gt-008",
+        "custodian.lister-storm-gtm.2000"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The exact RSS Tornado v4 package is a British V12 GT and includes liveries explicitly labeled Lister Storm plus period Creation Autosportif and FIA GT entries. Registered FIA and specialist evidence independently identifies the real Storm family and a six-speed sequential push-pull Storm GTM. The AC behavior and cockpit were directly observed.",
+      "identity_basis": "RSS v6 identifies the exact Tornado implementation; its installed package explicitly names Lister Storm in bundled skin labels and matches the era, country, V12 layout, teams, body, and specifications of the existing Storm GTM record.",
+      "specification_basis": "The existing authentic six-speed sequential-stick specification remains sourced to real Storm evidence. The RSS v4 drive agrees on layout and move-off clutch but accepts an unblipped coast downshift, which is kept as implementation behavior rather than rewriting the authentic manual-blip guidance. Automatic cut is unestablished because AC exposed no engine torque.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v4 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+      "control_notes": [
+        "The RSS Tornado identity is mapped to Lister Storm GTM from the package's explicit Lister skin labels and matching real-car specification.",
+        "RSS accepts the tested coast downshift without a driver blip; the curated authentic technique still calls for rev matching.",
+        "No wheel-mounted shift lights were seen in RSS, while the real-car field remains unknown."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-tornado-v12.20260822t201047172z-0743b5fb by Jason Kinslow. The fingerprinted Race Sim Studio v4 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "record_id": "aston-martin-dbr9",
+      "bundle": "build/staged-20260822/ac.gt-adonis-d9-v12.20260822t201255942z-3b704352.staged.json",
+      "manufacturer": "Aston Martin",
+      "model": "DBR9",
+      "year": {
+        "from": 2005,
+        "label": "2005-generation GT1"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "Historical evidence says most DBR9s used a six-speed sequential gearbox while some used an H-pattern manual. Exact AMS2 cockpit inspection resolves this representation to a sequential stick without paddles.",
+      "real_world_source_refs": [
+        "rss.gt-adonis-d9-v12.v2",
+        "goodwood.aston-martin-dbr9.gearbox"
+      ],
+      "confidence": "high",
+      "confidence_basis": "RSS describes Adonis D9 as a British mid-2000s V12 GT and the fingerprinted v2 package bundles explicit 2005 Aston Martin Prodrive entries 28 and 29 plus period DBR9 teams and numbers. Registered historical evidence independently supports the six-speed sequential family. The AC behavior and cockpit were directly observed.",
+      "identity_basis": "The first-party RSS product and installed v2 package identify the exact Adonis implementation. Its Aston Martin Prodrive livery labels, era, country, V12 layout, body, and specifications converge on the existing Aston Martin DBR9 record.",
+      "specification_basis": "The existing real-car record preserves the DBR9 variant caveat while identifying this representation as six-speed sequential-stick. The RSS v2 drive agrees on layout and move-off clutch but accepts the tested coast downshift without the curated driver blip. Automatic cut remains unestablished because AC exposed no engine torque.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v2 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v2 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+      "control_notes": [
+        "The fictionalized Adonis D9 is mapped to the DBR9 only after matching RSS's own package and livery evidence.",
+        "RSS accepts the tested coast downshift without a driver blip; authentic DBR9 guidance remains driver-blipped.",
+        "No wheel-mounted shift lights were seen in RSS, while the real-car field remains unknown."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-adonis-d9-v12.20260822t201255942z-3b704352 by Jason Kinslow. The fingerprinted Race Sim Studio v2 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "record_id": "dodge-viper-gts-r",
+      "bundle": "build/staged-20260822/ac.gt-vortex-v10.20260822t201801796z-f8bbdbc4.staged.json",
+      "manufacturer": "Dodge",
+      "model": "Viper GTS-R",
+      "year": {
+        "from": 2005,
+        "to": 2005,
+        "label": "2005 competition context"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "Reiza places the Viper GTS-R in its 2005 GT1 class. FIA form GT2-005 originally homologated the Chrysler Corporation Dodge Viper GTS in Group GT2; the differing labels reflect simulator competition context versus the car's original homologation. The exact historical chassis represented by AMS2 has not been established.",
+      "real_world_source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.historic-homologation.gt2-005",
+        "carsport-holland.viper-c38-sequential"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The fingerprinted RSS Vortex v4 package is an American V10 period GT and bundles 2003 Larbre, Roos, and Force One entries associated with the Viper GTS-R. FIA evidence independently establishes the original six-speed Viper configuration, while Carsport Holland documents a privateer sequential conversion. The AC implementation behavior and cockpit were directly observed.",
+      "identity_basis": "RSS v6 identifies the exact Vortex implementation; its American V10 configuration, body, specifications, era, and bundled 2003 Viper-team liveries converge on the existing Dodge Viper GTS-R record. This does not resolve the exact historical chassis represented by either simulator.",
+      "specification_basis": "The existing record deliberately retains the original H-pattern versus privateer sequential caveat. The fingerprinted RSS v4 implementation itself exposes six sequential-stick gears. Unlike AMS2's perceived automatic blip, RSS produced none, and that difference is scoped to AC rather than rewriting the uncertain historical baseline.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "wheel_rim": {
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The fingerprinted RSS v4 implementation produced no automatic throttle spike during the accepted coast downshift, while the current curated/AMS2 representation records automatic blipping.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly detected no automatic throttle spike with the driver assist disabled."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v4 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+      "control_notes": [
+        "The RSS Vortex maps to the Viper GTS-R from its V10/country/body specification and bundled period team labels, without resolving an exact historical chassis.",
+        "RSS supplies no automatic blip, unlike the current AMS2 representation; both still accept the tested coast downshift without driver rev matching.",
+        "RSS's absent display and shift lights remain simulator observations because those real-car fields are unknown."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-vortex-v10.20260822t201801796z-f8bbdbc4 by Jason Kinslow. The fingerprinted Race Sim Studio v4 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "record_id": "lamborghini-murcielago-r-gt",
+      "bundle": "build/staged-20260822/ac.gt-lanzo-v12.20260822t202444437z-f54b08fd.staged.json",
+      "manufacturer": "Lamborghini",
+      "model": "Murcielago R-GT",
+      "year": {
+        "from": 2004,
+        "label": "2004-generation GT1"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "REITER technical data identifies the Murcielago R-GT with a Hollinger M6S six-speed sequential gearbox and racing clutch. AMS2 presents it in GT1_05 and visibly models a sequential lever without paddles.",
+      "real_world_source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.murcielago.gt-015",
+        "reiter.murcielago-rgt.technical"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The fingerprinted RSS Lanzo v3 package is an Italian V12 period GT and bundles a 2005 FIA GT REITER Engineering number 13 livery. FIA and REITER sources independently establish the Murcielago competition identity and its six-speed sequential transmission. The AC behavior and cockpit were directly observed.",
+      "identity_basis": "RSS v6 identifies the exact Lanzo implementation; its installed package's 2005 REITER Engineering livery, Italian V12 configuration, era, body, and specifications converge on the existing Lamborghini Murcielago R-GT record.",
+      "specification_basis": "The authentic six-speed sequential-stick and clutch baseline remains sourced to REITER technical data. The RSS v3 drive agrees on layout and move-off clutch but accepts the tested coast downshift without the curated driver blip. Its integrated display and shift lights are implementation equipment and do not rewrite the real-car wheel record.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "integrated_display": "no",
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v3 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The fingerprinted RSS v3 cockpit carries a wheel-integrated display, while the curated car and AMS2 implementation record no integrated display.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The cockpit display was directly inspected during the guided drive."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v3 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim with integrated display and shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+      "control_notes": [
+        "The RSS Lanzo maps to the Murcielago R-GT from its REITER livery and matching first-party specification context.",
+        "RSS accepts the tested coast downshift without a driver blip; the curated authentic technique still calls for rev matching.",
+        "RSS adds a wheel-integrated display and shift lights; the display is recorded as a simulator departure, while the authentic shift-light field remains unknown."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-lanzo-v12.20260822t202444437z-f54b08fd by Jason Kinslow. The fingerprinted Race Sim Studio v3 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim with integrated display and shift lights. AC supplied no engine-torque channel, so automatic cut is not established."
+    }
+  ]
+}

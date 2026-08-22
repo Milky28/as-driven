@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.13",
+  "approved_at": "2026-08-22",
+  "record_id": "lister-storm-gtm",
+  "simulator": "ac",
+  "telemetry_name": "GT Tornado V12",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.gt-tornado-v12.20260822t201047172z-0743b5fb",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact Race Sim Studio v4 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+  "game_version_correction": {
+    "observed": "unknown",
+    "verified": "14923034",
+    "basis": "The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+  }
+}

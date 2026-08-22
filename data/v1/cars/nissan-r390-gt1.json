@@ -95,6 +95,91 @@
         "level": "high",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the Xtrac six-speed sequential with a lever is supported by a registered secondary source."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "LMGT Nisumo R39 V8"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.lmgt-nisumo-r39-v8.20260822t172507073z-bf9e2791 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v2 implementation accepted the tested clutchless coast downshift without driver throttle input and supplied an automatic throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without a driver blip."
+          },
+          "source_refs": [
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The fingerprinted RSS v2 implementation produced a throttle spike during the accepted clutchless downshift while automatic throttle blip was disabled in the assist settings.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly detected the automatic throttle spike with the driver-assist setting disabled."
+          },
+          "source_refs": [
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The fingerprinted RSS v2 cockpit depicts a D-shaped rim instead of the round rim carried by the curated car and AMS2 implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The cockpit rim was directly inspected during the guided drive."
+          },
+          "source_refs": [
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The fingerprinted RSS v2 cockpit depicts no wheel-mounted shift lights, while the curated car and AMS2 implementation carry them.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Wheel-mounted shift-light equipment was directly inspected during the guided drive."
+          },
+          "source_refs": [
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "nismo.r390-gt1-history.vol05",
+        "rss.classic-endurance-pack-1.readme.2022",
+        "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "RSS's first-party pack documentation and installed metadata identify the exact fingerprinted implementation as the primarily-1998 long-tail, 3,495 cc twin-turbo V8 car. NISMO independently gives that same combination only to the 1998 R390 GT1 and records its sequential transmission. Six sequential-stick gears, clutch-required move-off, automatic cut/blip, and cockpit wheel equipment were directly observed."
+      }
     }
   ],
   "provenance": {
@@ -149,6 +234,28 @@
         ],
         "confidence": "medium",
         "basis": "The drive accepted a full-throttle clutchless upshift with automatic cut, so no lift is required, and detected no automatic blip on downshifts, so the driver supplies the rev-matching blip."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "nismo.r390-gt1-history.vol05",
+          "rss.classic-endurance-pack-1.readme.2022",
+          "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "RSS Classic Endurance Pack 1 readme, PDF/printed page 3, says the Nisumo R39 was built for 1997 and 1998, depicts the long-tail used primarily in 1998, and uses a 3,495 cc twin-turbo V8. NISMO's own history says the 1998 Nissan R390 GT1 became a long-tail and changed to a Nissan-built sequential transmission. The year, body revision, displacement, engine layout, aspiration, category and fictionalized model token converge on the existing 1998 R390 GT1 record rather than a neighboring Nissan prototype."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -156,5 +263,5 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

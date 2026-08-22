@@ -166,15 +166,15 @@ approval are required before release. See `PRIVACY.md` and
 ## Current handoff state
 
 - Branch: `codex/stabilization`.
-- Early-access client: 0.17.0.
-- Dataset: 0.4.5 with 243 curated records.
+- Early-access client: 0.18.0.
+- Dataset: 0.4.16 with 253 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
   decision; the guided queue is empty. The inventory only holds cars that have
   been loaded here, so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Every record carries an `archetype` classification: 162 match one of the 23
-  registered mechanisms, 57 deviate, 13 are undetermined and 10 match none. An
+- Every record carries an `archetype` classification: 166 match one of the 23
+  registered mechanisms, 63 deviate, 13 are undetermined and 10 match none. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **The gearbox construction research is closed.** `gearbox_type` is open in 37
@@ -201,6 +201,10 @@ approval are required before release. See `PRIVACY.md` and
   this remains development coverage rather than part of the certified
   early-access target. Roster overlaps, drive order and name matches to avoid
   are in `docs/ac-evo-coverage-plan.md`.
+- **Assetto Corsa Competizione** is now recognized separately as `acc`. The Audi
+  R8 LMS GT3 Evo II is the first reviewed ACC entry and the first car driven in
+  three simulators. ACC drafts pin the Steam build id because its executables
+  carry no useful file version; ACC remains outside the certified target.
 - A shared name across simulators is not a shared car. Exact matching fails
   closed, but merging a second simulator's entry onto the wrong record fails
   open - the plugin answers confidently with another car's controls. Road against

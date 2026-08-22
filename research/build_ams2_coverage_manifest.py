@@ -44,7 +44,9 @@ def live_observations(log_path: Path) -> dict[str, dict[str, Any]]:
     when the game renames a car, so that inventory drifts: it can name
     identities the game no longer reports and miss the ones it does. The
     plugin's unmatched-identity log is written from live telemetry on every
-    uncurated load, so it carries the current model, id and class.
+    uncurated load across supported simulators, so this AMS2-specific generator
+    must filter the shared log by game name before considering model, id or
+    class.
 
     It covers only uncurated cars, because a curated one stops being logged.
     That is exactly the population this queue is about, so it is used to add and
@@ -60,6 +62,12 @@ def live_observations(log_path: Path) -> dict[str, dict[str, Any]]:
         try:
             payload = json.loads(line)
         except ValueError:
+            continue
+        game_name = payload.get("game_name") or ""
+        compact_game_name = "".join(
+            character for character in game_name if character.isalnum()
+        ).casefold()
+        if compact_game_name not in {"automobilista2", "ams2"}:
             continue
         name = payload.get("car_model")
         if not name:

@@ -40,9 +40,10 @@
         "shape": "d-shaped",
         "diameter_mm": null,
         "integrated_display": "no",
-        "shift_lights": "unknown",
+        "shift_lights": "no",
         "source_label": "live-cockpit-d-shaped-no-display",
-        "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown."
+        "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown.",
+        "open_top": "no"
       }
     },
     "notes": [
@@ -95,6 +96,67 @@
       "confidence": {
         "level": "verified",
         "basis": "Exact base identity and simulator technique were directly tested; manufacturer evidence independently establishes manual sequential actuation. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip behavior; Low Downforce remains explicit inheritance."
+      }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Maserati MC12 GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.maserati-mc12-gt1.20260822t163346408z-b2a0e052 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "unknown",
+          "condition": "AC build 14923034 accepted the full-throttle upshift but published no engine torque, so the implementation's cut is not established.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided observation directly records the missing torque channel and the resulting measurement limit."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-mc12-gt1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AC build 14923034 accepted the tested clutchless coast downshift without throttle input and showed no automatic throttle spike.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without a driver blip."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-mc12-gt1-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "assetto-corsa.ready-to-race.mc12-gt1",
+        "maserati.mc12-versione-corse.2006",
+        "ac.local-live-maserati-mc12-gt1-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Kunos's official Ready To Race listing and ks_maserati_mc12_gt1 content id establish the exact implementation; Maserati establishes manual sequential actuation. The drive directly established six gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and cockpit equipment. Automatic cut remains unknown because AC exposed no engine-torque channel."
       }
     }
   ],
@@ -151,6 +213,28 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "assetto-corsa.ready-to-race.mc12-gt1",
+          "maserati.mc12-versione-corse.2006",
+          "ac.local-live-maserati-mc12-gt1-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Kunos officially lists Maserati MC12 GT1 in Ready To Race, matching the exact telemetry title and installed ks_maserati_mc12_gt1 package. It maps directly to the existing GT1 record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-maserati-mc12-gt1-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -161,5 +245,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

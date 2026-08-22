@@ -1,14 +1,14 @@
 # Control archetypes
 
-**Status: complete. All 242 records are classified** - 162 exact matches, 57
-deviations, 13 undetermined and 10 with no archetype. `data/v1/archetypes.json` holds 23 archetypes,
+**Status: complete. All 253 records are classified** - 166 exact matches, 63
+deviations, 13 undetermined and 11 with no archetype. `data/v1/archetypes.json` holds 23 archetypes,
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
 the rules below, and every record carries a classification.
 
 ## The observation
 
-Across the 242 curated records there are **57 distinct transmission blocks**.
+Across the 253 curated records there are **63 distinct transmission blocks**.
 Nine records in ten restate a pattern that already exists elsewhere in the
 dataset. The four largest clusters alone cover 89 records:
 
@@ -19,7 +19,7 @@ dataset. The four largest clusters alone cover 89 records:
 | 15 | 6-speed paddles, clutch to pull away, automatic cut and blip |
 | 14 | 5-speed standard H-pattern, clutch to pull away, lift on upshift, optional blip |
 
-Only 22 records are one of a kind.
+Only 23 records are one of a kind.
 
 The four GT3 records `audi-r8-lms-gt3`, `mclaren-720s-gt3-evo`,
 `lamborghini-huracan-gt3-evo2` and `aston-martin-vantage-gt3-evo` carry
@@ -189,18 +189,18 @@ Three of the 22 are marked in `notes`: both their members are variants of one
 car, so the block has not actually been seen to recur across unrelated cars
 either. They are candidates for removal.
 
-### How the 242 records fall out
+### How the 251 records fall out
 
 Against that registry:
 
 | | Records |
 | --- | --- |
-| `matches` an archetype exactly | 162 |
-| `deviates` by one field | 8 |
-| `deviates` by two fields | 2 |
-| `deviates` by three fields | 1 |
+| `matches` an archetype exactly | 166 |
+| `deviates` by one field | 12 |
+| `deviates` by two fields | 1 |
+| `deviates` by three fields | 0 |
 | `undetermined` - a gap leaves two or more candidates | 13 |
-| a gap, but only one candidate survives it | 46 |
+| a gap, but only one candidate survives it | 49 |
 | a gap, and no candidate survives it | 10 |
 
 ### Where `no-archetype` actually landed

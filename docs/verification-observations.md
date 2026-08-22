@@ -73,6 +73,12 @@ That confirmed profile is stored per simulator and reused on later cars.
 When a recommended setting cannot be used, record its actual state and explain
 the limitation; affected car behavior should remain unknown or not tested.
 
+For ACC, SimHub reports the game as `AssettoCorsaCompetizione`; the client keeps
+it separate as `acc` and captures both the internal car id and telemetry display
+name. ACC's executables expose no useful file version, so the draft records the
+exact Steam content build from `appmanifest_805550.acf`. A missing or inaccessible
+manifest remains `unknown` and must be resolved during review rather than guessed.
+
 The overlay starts directly with the move-off maneuver. Each test uses the same
 cycle: perform the maneuver, wait for a captured result, then accept it or choose
 Retry/Skip. The overlay uses a short summary and green capture mark so completion is immediately
@@ -141,6 +147,15 @@ registered `real_world_source_refs` entry, the `confidence` level, and the
 Optional keys cover an aero or configuration alias
 (`additional_telemetry_names`), reviewer corrections to fields the drive could
 not classify (`control_overrides`), and extra provenance (`additional_claims`).
+The reviewed `archetype` classification may also be supplied so a promoted
+record enters the same checked classification system as the rest of the dataset.
+When a draft recorded `game_version: "unknown"`, a reviewer may supply a
+structured `game_version_correction` containing the observed value, an exact
+verified build, and the falsifiable basis tying that installed build to the
+drive. The draft remains unchanged; the correction is preserved in the approval
+and live-source note. It is refused when the draft already recorded a version.
+Creating a mod-first record under a real-car id also requires `display_name`, so
+the package author's prefix cannot leak into the simulator-independent name.
 
 The command writes the curated record, its curation approval, the live-session
 source, and the dataset index together, and sets `dataset_version` from the

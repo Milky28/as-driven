@@ -92,6 +92,56 @@
         "level": "verified",
         "basis": "Exact simulator identity and behavior were directly tested; FIA and specialist chassis evidence independently support the six-speed sequential-stick hardware family. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip downshift behavior."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT Tornado V12"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.gt-tornado-v12.20260822t201047172z-0743b5fb by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ac.local-live-gt-tornado-v12-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.lister-storm.gt-008",
+        "custodian.lister-storm-gtm.2000",
+        "ac.local-live-gt-tornado-v12-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The exact RSS Tornado v4 package is a British V12 GT and includes liveries explicitly labeled Lister Storm plus period Creation Autosportif and FIA GT entries. Registered FIA and specialist evidence independently identifies the real Storm family and a six-speed sequential push-pull Storm GTM. The AC behavior and cockpit were directly observed."
+      }
     }
   ],
   "provenance": {
@@ -136,6 +186,29 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "rss.gt-legends-championship.pack-v6",
+          "fia.lister-storm.gt-008",
+          "custodian.lister-storm-gtm.2000",
+          "ac.local-live-gt-tornado-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "RSS v6 identifies the exact Tornado implementation; its installed package explicitly names Lister Storm in bundled skin labels and matches the era, country, V12 layout, teams, body, and specifications of the existing Storm GTM record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-gt-tornado-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -143,5 +216,5 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

@@ -6,6 +6,14 @@ This module applies the reviewer's decisions from an explicit review manifest an
 writes the curated record, its curation approval, the evidence sources, and the
 dataset index together, so a promotion is reproducible instead of hand-made.
 
+A second implementation in the same simulator may join an existing entry only
+when a reviewer explicitly marks it compatible and its effective behavior is
+identical. That covers a mod which reuses a Kunos model without pretending a
+different package is a different real car; a behavioral difference still stops
+for a representation decision. A later drive may replace an incorrect entry only
+through an explicit correction that names the evidence it supersedes, enumerates
+every behavior change, and preserves the before/after history in the approval.
+
 It refuses to promote anything still marked ``REVIEW-REQUIRED``, refuses to
 overwrite a curated record, and requires every cited source to be registered.
 """
@@ -34,6 +42,104 @@ def _contains_review_marker(value: Any) -> bool:
     if isinstance(value, list):
         return any(_contains_review_marker(item) for item in value)
     return False
+
+
+def _source_id_token(value: str) -> str:
+    """Make an exact version label safe as the final source-id component."""
+    token = "".join(
+        character if character.isalnum() else "-"
+        for character in value.strip().casefold()
+    )
+    while "--" in token:
+        token = token.replace("--", "-")
+    return token.strip("-") or "unknown"
+
+
+def _apply_game_version_correction(
+    bundle: dict[str, Any], entry: dict[str, Any]
+) -> dict[str, Any]:
+    """Apply a reviewed exact-build correction without rewriting the draft.
+
+    Some simulators expose no useful executable version to SimHub. The original
+    observation remains immutable and says ``unknown``; the checked-in approval
+    records how the reviewer tied that drive to an exact installed build. Keeping
+    the correction structured makes the evidence boundary visible and prevents a
+    prose edit from silently changing the version used by the curated record.
+    """
+    correction = entry.get("game_version_correction")
+    if correction is None:
+        return bundle
+    label = f"review entry {entry.get('record_id') or bundle['record']['record_id']}"
+    if not isinstance(correction, dict) or not correction:
+        raise ValueError(f"{label}: game_version_correction must be a non-empty object")
+    observed = _required(correction, "observed", f"{label} game version correction")
+    verified = _required(correction, "verified", f"{label} game version correction")
+    basis = _required(correction, "basis", f"{label} game version correction")
+    simulator = bundle["record"]["simulators"][0]
+    current = simulator["verified_game_version"]
+    if observed != current:
+        raise ValueError(
+            f"{label}: game_version_correction.observed is {observed!r}, but the "
+            f"bundle recorded {current!r}"
+        )
+    if str(current).strip().casefold() != "unknown":
+        raise ValueError(
+            f"{label}: game_version_correction is only for a bundle that recorded "
+            f"'unknown'; this bundle already records {current!r}"
+        )
+    if str(verified).strip().casefold() in ("", "unknown", "latest"):
+        raise ValueError(
+            f"{label}: game_version_correction.verified must name an exact build, "
+            f"not {verified!r}"
+        )
+    if not all(part.isdigit() for part in str(verified).split(".")):
+        raise ValueError(
+            f"{label}: game_version_correction.verified must use the live-source "
+            f"version form (digits, optionally dot-separated), got {verified!r}. Put "
+            "labels such as 'Steam build' in the correction basis."
+        )
+
+    corrected = json.loads(json.dumps(bundle))
+    simulator = corrected["record"]["simulators"][0]
+    source = corrected["source"]
+    old_source_id = source["source_id"]
+    prefix = old_source_id.rsplit(".", 1)[0]
+    new_source_id = f"{prefix}.{_source_id_token(str(verified))}"
+
+    simulator["verified_game_version"] = verified
+    simulator["source_refs"] = [
+        new_source_id if ref == old_source_id else ref
+        for ref in simulator.get("source_refs", [])
+    ]
+    for note_index, note in enumerate(simulator.get("behavior", {}).get("notes", [])):
+        simulator["behavior"]["notes"][note_index] = note.replace(
+            f" {current} via", f" {verified} via"
+        )
+    for claim in corrected["record"].get("provenance", {}).get("claims", []):
+        claim["source_refs"] = [
+            new_source_id if ref == old_source_id else ref
+            for ref in claim.get("source_refs", [])
+        ]
+    corrected["approval"]["observed_game_version"] = verified
+    corrected["approval"]["historical_notes"] = (
+        f"The draft recorded game version {observed!r}. During review it was tied "
+        f"to {verified!r}: {basis}"
+    )
+    source["source_id"] = new_source_id
+    source["notes"] = source["notes"].replace(
+        f"; {corrected['simulator'].upper()} {current}.",
+        f"; {corrected['simulator'].upper()} {verified}.",
+    )
+    source["notes"] += (
+        f" The draft recorded game version {observed!r}; review established "
+        f"{verified!r}: {basis}"
+    )
+    corrected["version_review"] = {
+        "observed": observed,
+        "verified": verified,
+        "basis": basis,
+    }
+    return corrected
 
 
 def build_promoted_record(
@@ -67,6 +173,8 @@ def build_promoted_record(
     record["identity"]["manufacturer"] = _required(entry, "manufacturer", label)
     record["identity"]["model"] = _required(entry, "model", label)
     record["identity"]["year"] = _required(entry, "year", label)
+    if entry.get("display_name"):
+        record["identity"]["display_name"] = entry["display_name"].strip()
     record["identity"]["real_world_identity_notes"] = _required(
         entry, "real_world_identity_notes", label
     )
@@ -76,6 +184,15 @@ def build_promoted_record(
     # Optional reviewer corrections to controls the drive could not classify
     # (for example a gearbox construction supported by a real-world source).
     for name, value in (entry.get("control_overrides") or {}).items():
+        if name == "wheel_rim":
+            if not isinstance(value, dict) or not value:
+                raise ValueError(f"{label}: wheel_rim control override must be an object")
+            wheel = record["authentic_controls"]["steering"]["wheel_rim"]
+            unknown = sorted(set(value) - set(wheel))
+            if unknown:
+                raise ValueError(f"{label}: unknown wheel_rim field(s) {unknown!r}")
+            wheel.update(value)
+            continue
         if name not in record["authentic_controls"]["transmission"]:
             raise ValueError(f"{label}: unknown transmission field {name!r}")
         record["authentic_controls"]["transmission"][name] = value
@@ -173,6 +290,8 @@ def build_promoted_record(
     record["notes"] = list(entry.get("record_notes") or [])
     if not record["notes"]:
         record.pop("notes")
+    if entry.get("archetype"):
+        record["archetype"] = entry["archetype"]
     record["updated_at"] = approved_at
 
     # The approval must agree with the record under validate's own mapping.
@@ -185,6 +304,8 @@ def build_promoted_record(
         del approval["additional_telemetry_names"]
     if entry.get("scope_notes"):
         approval["scope_notes"] = entry["scope_notes"]
+    if entry.get("game_version_correction"):
+        approval["game_version_correction"] = entry["game_version_correction"]
 
     source["url"] = _required(entry, "live_source_url", label)
     if entry.get("live_source_notes"):
@@ -193,6 +314,12 @@ def build_promoted_record(
         # prose, which failed the moment a reviewer wrote the marker phrase
         # without the digest.
         source["notes"] = entry["live_source_notes"]
+    correction = entry.get("game_version_correction")
+    if correction:
+        source["notes"] += (
+            f" The draft recorded game version {correction['observed']!r}; review "
+            f"established {correction['verified']!r}: {correction['basis']}"
+        )
 
     for name, payload in (("record", record), ("approval", approval), ("source", source)):
         if _contains_review_marker(payload):
@@ -371,6 +498,12 @@ def _require_deliberate_creation(
             "record away from what the simulator called the car is an identity claim, and "
             "it needs a reason recorded beside it."
         )
+    if not str(entry.get("display_name") or "").strip():
+        raise ValueError(
+            f"review entry {target_id!r}: display_name is required when creating a "
+            "record under a different id. The simulator supplied a package name, and "
+            "that package name must not become the real car's driver-facing name."
+        )
 
 
 def _redirect_to_existing_record(
@@ -441,6 +574,7 @@ def merge_simulator_entry(
     *,
     label: str,
     accept_from_drive: list[str] | None = None,
+    compatible_implementation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Add a simulator's entry to the curated record for the same real car.
 
@@ -453,11 +587,27 @@ def merge_simulator_entry(
     entry = incoming["simulators"][0]
     simulator_id = entry["simulator"]
     covered = [item.get("simulator") for item in existing.get("simulators", [])]
-    if simulator_id in covered:
+    same_simulator = simulator_id in covered
+    if same_simulator and compatible_implementation is None:
         raise FileExistsError(
             f"{label}: {simulator_id} already has an entry on this record; "
             "promoting would replace curated evidence"
         )
+    if compatible_implementation is not None:
+        if not same_simulator:
+            raise ValueError(
+                f"{label}: compatible_implementation is set but {simulator_id} has "
+                "no existing entry. Remove it; an ordinary cross-simulator merge "
+                "does not share an implementation."
+            )
+        if not isinstance(compatible_implementation, dict) or not str(
+            compatible_implementation.get("basis") or ""
+        ).strip():
+            raise ValueError(
+                f"{label}: compatible_implementation.basis is required. Two packages "
+                "may share one simulator entry only after review establishes why their "
+                "effective controls are the same."
+            )
 
     conflicts, fills = _classify_differences(
         existing["authentic_controls"], incoming["authentic_controls"]
@@ -498,8 +648,47 @@ def merge_simulator_entry(
         for part in parts[:-1]:
             target = target[part]
         target[parts[-1]] = value
-    position = len(merged["simulators"])
-    merged["simulators"].append(entry)
+    if same_simulator:
+        position = covered.index(simulator_id)
+        current = merged["simulators"][position]
+        if _simulator_behavior_signature(current) != _simulator_behavior_signature(entry):
+            raise ValueError(
+                f"{label}: the second {simulator_id} implementation does not have the "
+                "same effective behavior and overrides as the curated entry. It cannot "
+                "be represented as a compatible identity; model the implementation "
+                "difference explicitly before promoting it."
+            )
+        known_identities = {
+            json.dumps(identity, sort_keys=True) for identity in current["identities"]
+        }
+        for identity in entry["identities"]:
+            key = json.dumps(identity, sort_keys=True)
+            if key not in known_identities:
+                current["identities"].append(identity)
+                known_identities.add(key)
+        current["source_refs"] = list(dict.fromkeys(
+            current.get("source_refs", []) + entry.get("source_refs", [])
+        ))
+        current_notes = current.get("behavior", {}).setdefault("notes", [])
+        for note in entry.get("behavior", {}).get("notes", []):
+            if note not in current_notes:
+                current_notes.append(note)
+        incoming_overrides = {
+            (item["path"], json.dumps(item["value"], sort_keys=True)): item
+            for item in entry.get("overrides", [])
+        }
+        for override in current.get("overrides", []):
+            incoming_override = incoming_overrides.get(
+                (override["path"], json.dumps(override["value"], sort_keys=True))
+            )
+            if incoming_override is not None:
+                override["source_refs"] = list(dict.fromkeys(
+                    override.get("source_refs", [])
+                    + incoming_override.get("source_refs", [])
+                ))
+    else:
+        position = len(merged["simulators"])
+        merged["simulators"].append(entry)
 
     # Claims arrive pointing at /simulators/0 because the bundle held one entry.
     # Only the simulator-scoped ones carry over: the real car's claims already
@@ -516,6 +705,427 @@ def merge_simulator_entry(
 
     merged["updated_at"] = incoming["updated_at"]
     return merged
+
+
+def _simulator_behavior_signature(entry: dict[str, Any]) -> dict[str, Any]:
+    """The user-facing facts that compatible same-simulator packages share.
+
+    Observation prose, confidence wording and source ids may differ because the
+    drives are independent. The behavior fields and the effective override
+    values may not: if either changes, one simulator entry cannot truthfully
+    answer for both implementations.
+    """
+    behavior = json.loads(json.dumps(entry.get("behavior") or {}))
+    behavior.pop("notes", None)
+    wheel = behavior.get("wheel_rim_type")
+    if isinstance(wheel, dict):
+        wheel.pop("source_label", None)
+    overrides = sorted(
+        (
+            item.get("path"),
+            json.dumps(item.get("value"), sort_keys=True),
+        )
+        for item in entry.get("overrides", [])
+    )
+    return {"behavior": behavior, "overrides": overrides}
+
+
+_ABSENT = object()
+
+
+def _pointer_get(document: Any, pointer: str) -> Any:
+    if not pointer.startswith("/"):
+        raise ValueError(f"JSON pointer must start with '/': {pointer!r}")
+    target = document
+    for token in pointer.strip("/").split("/"):
+        token = token.replace("~1", "/").replace("~0", "~")
+        if isinstance(target, list):
+            target = target[int(token)]
+        else:
+            target = target[token]
+    return target
+
+
+def _pointer_set(document: Any, pointer: str, value: Any) -> None:
+    parts = pointer.strip("/").split("/")
+    target = document
+    for raw in parts[:-1]:
+        token = raw.replace("~1", "/").replace("~0", "~")
+        target = target[int(token)] if isinstance(target, list) else target[token]
+    leaf = parts[-1].replace("~1", "/").replace("~0", "~")
+    if isinstance(target, list):
+        target[int(leaf)] = value
+    else:
+        target[leaf] = value
+
+
+def _signature_leaves(entry: dict[str, Any]) -> dict[str, Any]:
+    """Flatten user-facing simulator facts into stable review paths."""
+    behavior = json.loads(json.dumps(entry.get("behavior") or {}))
+    behavior.pop("notes", None)
+    wheel = behavior.get("wheel_rim_type")
+    if isinstance(wheel, dict):
+        wheel.pop("source_label", None)
+
+    leaves: dict[str, Any] = {}
+
+    def walk(value: Any, path: str) -> None:
+        if isinstance(value, dict):
+            for key in sorted(value):
+                walk(value[key], f"{path}/{key}")
+            return
+        leaves[path] = value
+
+    walk(behavior, "/behavior")
+    for override in entry.get("overrides", []):
+        leaves[f"/overrides{override['path']}"] = override.get("value")
+    return leaves
+
+
+def _history_value(value: Any) -> Any:
+    return {"absent": True} if value is _ABSENT else value
+
+
+def _behavior_changes(
+    current: dict[str, Any], replacement: dict[str, Any]
+) -> list[dict[str, Any]]:
+    before = _signature_leaves(current)
+    after = _signature_leaves(replacement)
+    changes = []
+    for path in sorted(set(before) | set(after)):
+        left = before.get(path, _ABSENT)
+        right = after.get(path, _ABSENT)
+        if left != right:
+            changes.append(
+                {
+                    "path": path,
+                    "from": _history_value(left),
+                    "to": _history_value(right),
+                }
+            )
+    return changes
+
+
+def _unique_correction_source(
+    bundle: dict[str, Any], entry: dict[str, Any], known_sources: set[str]
+) -> dict[str, Any]:
+    """Keep a second drive at the same game version from reusing a source id."""
+    if not entry.get("correct_existing_simulator"):
+        return bundle
+    source_id = bundle["source"]["source_id"]
+    if source_id not in known_sources:
+        return bundle
+    observation_id = str(bundle.get("observation_id") or "")
+    token = observation_id.rsplit("-", 1)[-1].lower()
+    if not token or not all(char in "0123456789abcdef" for char in token):
+        raise ValueError(
+            f"review entry {entry.get('record_id')!r}: correction source {source_id!r} "
+            "already exists and the observation id has no hexadecimal suffix with "
+            "which to distinguish the replacement drive"
+        )
+    replacement = f"{source_id}.correction-{token}"
+    if replacement in known_sources:
+        raise ValueError(
+            f"review entry {entry.get('record_id')!r}: correction source {replacement!r} "
+            "is already registered"
+        )
+    corrected = json.loads(json.dumps(bundle))
+
+    def replace(value: Any) -> Any:
+        if isinstance(value, dict):
+            return {key: replace(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [replace(item) for item in value]
+        return replacement if value == source_id else value
+
+    return replace(corrected)
+
+
+def correct_simulator_entry(
+    existing: dict[str, Any],
+    incoming: dict[str, Any],
+    correction: dict[str, Any],
+    *,
+    label: str,
+    replacement_source_ref: str,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Replace one incorrect simulator entry while retaining an audit trail."""
+    if not isinstance(correction, dict) or not correction:
+        raise ValueError(f"{label}: correct_existing_simulator must be a non-empty object")
+    for field in (
+        "basis",
+        "supersedes_source_ref",
+        "supersedes_observed_through",
+        "corrected_behavior_paths",
+    ):
+        if field not in correction or correction[field] in (None, ""):
+            raise ValueError(f"{label}: correction is missing {field!r}")
+    basis = str(correction["basis"]).strip()
+    if not basis:
+        raise ValueError(f"{label}: correction basis must not be blank")
+
+    replacement = incoming["simulators"][0]
+    simulator_id = replacement["simulator"]
+    positions = [
+        index
+        for index, candidate in enumerate(existing.get("simulators", []))
+        if candidate.get("simulator") == simulator_id
+    ]
+    if len(positions) != 1:
+        raise ValueError(
+            f"{label}: correction requires exactly one existing {simulator_id} entry, "
+            f"found {len(positions)}"
+        )
+    position = positions[0]
+    current = existing["simulators"][position]
+    superseded_source = correction["supersedes_source_ref"]
+    if superseded_source not in current.get("source_refs", []):
+        raise ValueError(
+            f"{label}: correction says it supersedes {superseded_source!r}, but that "
+            f"source does not support the current {simulator_id} entry"
+        )
+    if replacement_source_ref not in replacement.get("source_refs", []):
+        raise ValueError(
+            f"{label}: replacement source {replacement_source_ref!r} does not support "
+            "the incoming simulator entry"
+        )
+
+    merged = json.loads(json.dumps(existing))
+    authentic_changes = []
+    for change in correction.get("authentic_control_corrections", []):
+        for field in ("path", "from", "to", "basis"):
+            if field not in change:
+                raise ValueError(f"{label}: authentic correction is missing {field!r}")
+        path = change["path"]
+        if not str(path).startswith("/authentic_controls/"):
+            raise ValueError(
+                f"{label}: authentic correction path must start with "
+                f"'/authentic_controls/', got {path!r}"
+            )
+        try:
+            value = _pointer_get(merged, path)
+        except (KeyError, IndexError, ValueError, TypeError) as exc:
+            raise ValueError(f"{label}: authentic correction path does not exist: {path}") from exc
+        if value != change["from"]:
+            raise ValueError(
+                f"{label}: authentic correction {path} expected {change['from']!r}, "
+                f"but the curated record contains {value!r}"
+            )
+        _pointer_set(merged, path, change["to"])
+        authentic_changes.append(dict(change))
+
+    removed_overrides = []
+    for removal in correction.get("remove_simulator_overrides", []):
+        for field in ("simulator", "path", "value", "basis"):
+            if field not in removal:
+                raise ValueError(f"{label}: removed override is missing {field!r}")
+        candidates = [
+            item
+            for item in merged.get("simulators", [])
+            if item.get("simulator") == removal["simulator"]
+        ]
+        if len(candidates) != 1:
+            raise ValueError(
+                f"{label}: cannot remove override from {removal['simulator']!r}; "
+                f"found {len(candidates)} simulator entries"
+            )
+        overrides = candidates[0].get("overrides", [])
+        matches = [
+            item
+            for item in overrides
+            if item.get("path") == removal["path"]
+            and item.get("value") == removal["value"]
+        ]
+        if len(matches) != 1:
+            raise ValueError(
+                f"{label}: expected exactly one {removal['simulator']} override "
+                f"{removal['path']}={removal['value']!r}, found {len(matches)}"
+            )
+        overrides.remove(matches[0])
+        removed_overrides.append(dict(removal))
+
+    conflicts, fills = _classify_differences(
+        merged["authentic_controls"], incoming["authentic_controls"]
+    )
+    if conflicts or fills:
+        details = conflicts + [f"{path} (gap to {value!r})" for path, value in fills.items()]
+        raise ValueError(
+            f"{label}: correction leaves the incoming authentic layer out of agreement: "
+            + "; ".join(details)
+            + ". Correct or retract those values explicitly before replacing simulator evidence."
+        )
+
+    current_after_removals = merged["simulators"][position]
+    behavior_changes = _behavior_changes(current_after_removals, replacement)
+    actual_paths = {item["path"] for item in behavior_changes}
+    declared_paths = set(correction["corrected_behavior_paths"])
+    if actual_paths != declared_paths:
+        missing = sorted(actual_paths - declared_paths)
+        stale = sorted(declared_paths - actual_paths)
+        raise ValueError(
+            f"{label}: corrected_behavior_paths does not exactly describe the replacement; "
+            f"missing {missing!r}, unchanged/stale {stale!r}"
+        )
+
+    kept_notes = correction.get("retained_behavior_notes", [])
+    current_notes = current.get("behavior", {}).get("notes", [])
+    absent_notes = [note for note in kept_notes if note not in current_notes]
+    if absent_notes:
+        raise ValueError(
+            f"{label}: retained_behavior_notes includes text absent from the current entry: "
+            f"{absent_notes!r}"
+        )
+    replacement = json.loads(json.dumps(replacement))
+    replacement["identities"] = json.loads(json.dumps(current["identities"]))
+    replacement["source_refs"] = list(
+        dict.fromkeys(
+            [ref for ref in current.get("source_refs", []) if ref != superseded_source]
+            + replacement.get("source_refs", [])
+        )
+    )
+    notes = replacement.setdefault("behavior", {}).setdefault("notes", [])
+    for note in kept_notes:
+        if note not in notes:
+            notes.append(note)
+    notes.append(f"Correction superseding {superseded_source}: {basis}")
+    merged["simulators"][position] = replacement
+
+    claims = []
+    prefix = f"/simulators/{position}"
+    for claim in merged.get("provenance", {}).get("claims", []):
+        paths = [path for path in claim["paths"] if not path.startswith(prefix)]
+        if paths:
+            claims.append(dict(claim, paths=paths))
+    for claim in incoming.get("provenance", {}).get("claims", []):
+        paths = [
+            path.replace("/simulators/0", prefix)
+            for path in claim["paths"]
+            if path.startswith("/simulators/0")
+        ]
+        if paths:
+            claims.append(dict(claim, paths=paths))
+    if authentic_changes:
+        claims.append(
+            {
+                "paths": [item["path"] for item in authentic_changes],
+                "source_refs": [superseded_source, replacement_source_ref],
+                "confidence": "high",
+                "basis": basis,
+            }
+        )
+    merged["provenance"]["claims"] = claims
+    merged["updated_at"] = incoming["updated_at"]
+
+    history = {
+        "corrected_at": incoming["updated_at"],
+        "superseded_source_ref": superseded_source,
+        "replacement_source_ref": replacement_source_ref,
+        "basis": basis,
+        "behavior_changes": [
+            dict(item, path=f"/simulators/{position}{item['path']}")
+            for item in behavior_changes
+        ],
+        "authentic_control_changes": authentic_changes,
+        "removed_simulator_overrides": removed_overrides,
+    }
+    return merged, history
+
+
+def _replace_corrected_approval(
+    existing: dict[str, Any],
+    incoming: dict[str, Any],
+    correction: dict[str, Any],
+    history: dict[str, Any],
+    *,
+    label: str,
+    dataset_version: str,
+    approved_at: str,
+) -> dict[str, Any]:
+    for field in ("record_id", "simulator", "telemetry_name", "observed_game_version"):
+        if existing.get(field) != incoming.get(field):
+            raise ValueError(
+                f"{label}: corrected approval disagrees with the current approval on "
+                f"{field!r} ({existing.get(field)!r} vs {incoming.get(field)!r})"
+            )
+    expected = correction["supersedes_observed_through"]
+    if existing.get("observed_through") != expected:
+        raise ValueError(
+            f"{label}: correction expected approval observed_through {expected!r}, but "
+            f"the current approval contains {existing.get('observed_through')!r}"
+        )
+    approval = json.loads(json.dumps(incoming))
+    if "additional_telemetry_names" not in approval and existing.get(
+        "additional_telemetry_names"
+    ):
+        approval["additional_telemetry_names"] = existing["additional_telemetry_names"]
+    if "scope_notes" not in approval and existing.get("scope_notes"):
+        approval["scope_notes"] = existing["scope_notes"]
+    prior_history = list(existing.get("correction_history", []))
+    approval["correction_history"] = prior_history + [history]
+    old_notes = str(existing.get("historical_notes") or "").strip()
+    addition = (
+        f"Corrected from {expected} through {incoming['observed_through']}: "
+        f"{correction['basis']}"
+    )
+    approval["historical_notes"] = f"{old_notes} {addition}".strip()
+    approval["dataset_version"] = dataset_version
+    approval["approved_at"] = approved_at
+    return approval
+
+
+def _merge_compatible_approval(
+    existing: dict[str, Any],
+    incoming: dict[str, Any],
+    compatible: dict[str, Any],
+    *,
+    label: str,
+    dataset_version: str,
+    approved_at: str,
+) -> dict[str, Any]:
+    """Add a separately observed package name to one simulator approval."""
+    for field in ("record_id", "simulator", "observed_game_version", "approved_controls"):
+        if existing.get(field) != incoming.get(field):
+            raise ValueError(
+                f"{label}: compatible implementation approval disagrees on {field!r}; "
+                "one approval cannot describe both packages."
+            )
+    basis = str(compatible["basis"]).strip()
+    additions = [
+        {"value": incoming["telemetry_name"], "basis": basis},
+        *incoming.get("additional_telemetry_names", []),
+    ]
+    approved_names = {
+        existing.get("telemetry_name"),
+        *(item["value"] for item in existing.get("additional_telemetry_names", [])),
+    }
+    for addition in additions:
+        if addition["value"] in approved_names:
+            raise ValueError(
+                f"{label}: compatible implementation identity {addition['value']!r} "
+                "is already approved on this simulator entry."
+            )
+        existing.setdefault("additional_telemetry_names", []).append(addition)
+        approved_names.add(addition["value"])
+    existing["dataset_version"] = dataset_version
+    existing["approved_at"] = approved_at
+    existing["scope_notes"] = (
+        "One simulator entry covers multiple separately fingerprinted "
+        "implementations whose effective controls and overrides were reviewed "
+        "as identical."
+    )
+    prior_confidence = str(existing.get("confidence_notes") or "").strip()
+    incoming_confidence = str(incoming.get("confidence_notes") or "").strip()
+    if incoming_confidence and incoming_confidence not in prior_confidence:
+        existing["confidence_notes"] = (
+            f"{prior_confidence} Compatible implementation: {incoming_confidence}"
+        ).strip()
+    history = str(existing.get("historical_notes") or "").strip()
+    addition = (
+        f"Compatible implementation observed through {incoming['observed_through']}: "
+        f"{basis}"
+    )
+    existing["historical_notes"] = f"{history} {addition}".strip()
+    return existing
 
 
 def promote_observations(
@@ -540,6 +1150,8 @@ def promote_observations(
     for entry in review["records"]:
         bundle_path = root / entry["bundle"]
         bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        bundle = _apply_game_version_correction(bundle, entry)
+        bundle = _unique_correction_source(bundle, entry, known_sources)
         bundle = _redirect_to_existing_record(bundle, entry, data_directory)
         entry = dict(entry, **{"class": resolve_class(entry, bundle, curation_directory)})
         record, approval, source = build_promoted_record(
@@ -560,15 +1172,37 @@ def promote_observations(
 
         simulator_id = record["simulators"][0]["simulator"]
         record_path = data_directory / "cars" / f"{record_id}.json"
+        correction = entry.get("correct_existing_simulator")
+        correction_history = None
         if record_path.exists():
             # The same real car, already curated from another simulator: the
             # drive adds an entry to it rather than forking a second record.
             existing = json.loads(record_path.read_text(encoding="utf-8"))
-            record = merge_simulator_entry(
-                existing,
-                record,
-                label=f"review entry {record_id}",
-                accept_from_drive=entry.get("accept_from_drive"),
+            if correction is not None:
+                if entry.get("compatible_implementation") is not None:
+                    raise ValueError(
+                        f"review entry {record_id}: a drive cannot be both a compatible "
+                        "implementation and a correction"
+                    )
+                record, correction_history = correct_simulator_entry(
+                    existing,
+                    record,
+                    correction,
+                    label=f"review entry {record_id}",
+                    replacement_source_ref=source["source_id"],
+                )
+            else:
+                record = merge_simulator_entry(
+                    existing,
+                    record,
+                    label=f"review entry {record_id}",
+                    accept_from_drive=entry.get("accept_from_drive"),
+                    compatible_implementation=entry.get("compatible_implementation"),
+                )
+        elif correction is not None:
+            raise ValueError(
+                f"review entry {record_id}: correct_existing_simulator is set but no "
+                "curated record exists to correct"
             )
 
         approval["dataset_version"] = dataset_version
@@ -577,8 +1211,40 @@ def promote_observations(
             curation_directory / f"{simulator_id}-approved-{record_id}.json"
         )
         if approval_path.exists():
-            raise FileExistsError(
-                f"refusing to overwrite curation approval: {approval_path}"
+            compatible = entry.get("compatible_implementation")
+            if correction is not None:
+                existing_approval = json.loads(
+                    approval_path.read_text(encoding="utf-8")
+                )
+                approval = _replace_corrected_approval(
+                    existing_approval,
+                    approval,
+                    correction,
+                    correction_history,
+                    label=f"review entry {record_id}",
+                    dataset_version=dataset_version,
+                    approved_at=approved_at,
+                )
+            elif compatible is None:
+                raise FileExistsError(
+                    f"refusing to overwrite curation approval: {approval_path}"
+                )
+            else:
+                existing_approval = json.loads(
+                    approval_path.read_text(encoding="utf-8")
+                )
+                approval = _merge_compatible_approval(
+                    existing_approval,
+                    approval,
+                    compatible,
+                    label=f"review entry {record_id}",
+                    dataset_version=dataset_version,
+                    approved_at=approved_at,
+                )
+        elif correction is not None:
+            raise FileNotFoundError(
+                f"review entry {record_id}: correction has no existing approval at "
+                f"{approval_path}"
             )
         generated.append((record_path, record))
         generated.append((approval_path, approval))

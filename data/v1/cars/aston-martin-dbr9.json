@@ -98,6 +98,55 @@
         "level": "verified",
         "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested; historical evidence supports the six-speed sequential family while preserving the known DBR9 variant caveat."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT Adonis D9 V12"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.gt-adonis-d9-v12.20260822t201255942z-3b704352 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v2 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ac.local-live-gt-adonis-d9-v12-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "rss.gt-adonis-d9-v12.v2",
+        "goodwood.aston-martin-dbr9.gearbox",
+        "ac.local-live-gt-adonis-d9-v12-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "RSS describes Adonis D9 as a British mid-2000s V12 GT and the fingerprinted v2 package bundles explicit 2005 Aston Martin Prodrive entries 28 and 29 plus period DBR9 teams and numbers. Registered historical evidence independently supports the six-speed sequential family. The AC behavior and cockpit were directly observed."
+      }
     }
   ],
   "provenance": {
@@ -153,6 +202,28 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "rss.gt-adonis-d9-v12.v2",
+          "goodwood.aston-martin-dbr9.gearbox",
+          "ac.local-live-gt-adonis-d9-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "The first-party RSS product and installed v2 package identify the exact Adonis implementation. Its Aston Martin Prodrive livery labels, era, country, V12 layout, body, and specifications converge on the existing Aston Martin DBR9 record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-gt-adonis-d9-v12-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -163,5 +234,5 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

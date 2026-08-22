@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.15",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "audi-r8-lms-gt3-evo-ii",
+      "bundle": "build/staged-20260822/acc.audi-r8-lms-evo-ii-2022.20260822t214156833z-bc045011.staged.json",
+      "manufacturer": "Audi",
+      "model": "R8 LMS GT3 Evo II",
+      "year": {
+        "from": 2022,
+        "label": "Evo II"
+      },
+      "class": "GT3",
+      "real_world_identity_notes": "Audi identifies the Evo II as the second evolution of the R8 LMS GT3. The exact base AMS2 identity was guided-tested; the Low Downforce identity is an explicit aero-package alias inheriting the base controls and was not separately tested.",
+      "real_world_source_refs": [
+        "acc.challengers-pack.audi-r8-lms-evo2",
+        "audi.r8-lms-gt3-evo2.release",
+        "audi.r8-lms-gt3.technical"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "KUNOS's official ACC Challengers Pack page names the Audi R8 LMS GT3 Evo II and the 2022 specification. The live ACC display name, stable internal id and GT3 class agree exactly with that official identity, while the guided drive directly established the simulator behavior.",
+      "identity_basis": "The official ACC DLC page names the 2022 Audi R8 LMS GT3 Evo II. SimHub simultaneously reported telemetry name `Audi R8 LMS Evo II 2022`, internal id `audi_r8_lms_evo_ii`, and class `GT3`, so this is the same 2022 Evo II already curated from Audi, AMS2 and AC EVO evidence rather than a nearby R8 generation.",
+      "specification_basis": "The existing authentic six-speed paddle-sequential specification remains sourced to Audi. ACC build 21257365 independently agreed on six paddle-selected gears, clutch-free move-off and running shifts, no-lift full-throttle upshifts, automatic-blipped coast downshifts, and the closed no-display/no-wheel-light rim. ACC exposes no engine-torque channel to SimHub, so its automatic cut remains unknown rather than inheriting the AMS2 result.",
+      "confidence_notes": "Exact ACC identity and class were captured under As Driven 0.18.0. With automatic clutch, shifting and throttle blip assists disabled, the car moved off without physical clutch input, accepted six paddle-selected gears, accepted clutchless full-throttle upshifts and coast downshifts, and automatically blipped. Cockpit inspection found a closed GT/Formula rim without a rim-mounted display or shift lights. Automatic cut is unestablished because ACC publishes no engine torque through SimHub.",
+      "control_notes": [
+        "ACC is the third independently driven simulator implementation of this exact car; every established control agrees across all three.",
+        "The clutch channel already read 100% with the pedal untouched before testing, so it reflects ACC's own clutch state rather than evidence of driver clutch input.",
+        "Automatic cut remains unknown for ACC; a repeated guided drive cannot settle it without an engine-torque channel."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.audi-r8-lms-evo-ii-2022.20260822t214156833z-bc045011 by Jason Kinslow in ACC Steam build 21257365. With automatic clutch, shifting and throttle-blip assists disabled, the drive established clutch-free move-off, six paddle-selected gears, clutchless full-throttle and coast-shift acceptance, automatic blip, and a closed GT/Formula rim without a rim-mounted display or shift lights. ACC supplied no engine-torque channel, so automatic cut is not established."
+    }
+  ]
+}

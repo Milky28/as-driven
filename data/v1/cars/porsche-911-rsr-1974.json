@@ -92,6 +92,79 @@
         "level": "high",
         "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 Carrera RSR 3.0"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "ACL GTR Porsche RSR 74"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.porsche-911-carrera-rsr-3-0.20260822t160750374z-1143b328 by Jason Kinslow.",
+          "Observed live in AC 14923034 via guided verification observation ac.acl-gtr-porsche-rsr-74.20260822t165038034z-bb340321 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "dogleg-h",
+          "condition": "The fingerprinted official Kunos implementation shows a dogleg gate in its cockpit, while the real Type 915 uses a conventional H pattern.",
+          "confidence": {
+            "level": "high",
+            "basis": "The package's cockpit gate was directly read during the guided drive; the real Type 915 gate is independently sourced."
+          },
+          "source_refs": [
+            "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+            "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AC build 14923034 refused the coast downshift until the driver supplied a manual throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive's two-stage downshift test directly observed rejection without a blip and acceptance after the driver's blip."
+          },
+          "source_refs": [
+            "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+            "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "porsche.newsroom.rsr-model-history-2020",
+        "stuttcars.porsche-911-carrera-rsr-3-0",
+        "paul-stephens.porsche-915-vs-g50",
+        "twinsparkracing.porsche-915-replaced-the-dogleg",
+        "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+        "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+        "ac-legends.gt-classic-3-release-notes-2020",
+        "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Kunos's official Porsche Pack I listing and the installed ks_porsche_911_carrera_rsr content id establish the exact official AC implementation. Five gears, the cockpit gate, move-off, lift, manual blip, lack of automatic cut/blip, and round wheel equipment were directly observed. Confidence remains medium because SimHub's clutch channel cannot distinguish pedal input from car-side intervention during accepted clutchless shifts."
+      }
     }
   ],
   "provenance": {
@@ -146,6 +219,57 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "porsche.newsroom.rsr-model-history-2020",
+          "stuttcars.porsche-911-carrera-rsr-3-0",
+          "paul-stephens.porsche-915-vs-g50",
+          "twinsparkracing.porsche-915-replaced-the-dogleg",
+          "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+          "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "Kunos officially lists Porsche 911 Carrera RSR 3.0 in Porsche Pack I; the guided drive reported the matching title and installed content id ks_porsche_911_carrera_rsr. Porsche and the existing curated record identify the represented car as the 1974 Carrera RSR 3.0."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "porsche.newsroom.rsr-model-history-2020",
+          "stuttcars.porsche-911-carrera-rsr-3-0",
+          "paul-stephens.porsche-915-vs-g50",
+          "twinsparkracing.porsche-915-replaced-the-dogleg",
+          "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+          "ac-legends.gt-classic-3-release-notes-2020",
+          "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "AC Legends GT Classic v3.0 release notes, PDF/printed page 14, head the entry '1974 Porsche 911 RSR', call it the definitive three-litre form introduced for 1974, and state 'Model: Kunos'. The exact telemetry title and ac_legends_gt_911rsr_74 content id therefore become a second reviewed AC identity on the existing 1974 Carrera RSR 3.0 record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -160,5 +284,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-22"
 }

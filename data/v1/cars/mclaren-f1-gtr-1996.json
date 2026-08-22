@@ -1,0 +1,238 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mclaren-f1-gtr-1996",
+  "identity": {
+    "display_name": "McLaren F1 GTR 1996",
+    "manufacturer": "McLaren",
+    "model": "F1 GTR",
+    "year": {
+      "from": 1996,
+      "to": 1996,
+      "label": "1996 short-tail"
+    },
+    "class": "GT1",
+    "real_world_identity_notes": "The 1996 short-tail evolution of the McLaren F1 GTR. It retained and strengthened the earlier H-pattern manual gearbox; the six-speed sequential belongs to the separately curated 1997 Longtail.",
+    "variant": "1996 short-tail"
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The 1996 F1 GTR used a six-speed H-pattern manual. Its construction, exact gate, and real clutch/lift/blip technique are not established by the reviewed sources.",
+      "The fingerprinted AC implementation requires the clutch to move off, rejects a full-throttle upshift until the driver lifts, and rejects a coast downshift until the driver blips.",
+      "This is not the 1997 Longtail. McLaren states that the six-speed sequential gearbox arrived with that later car."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren F1 GTR"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.mclaren-f1-gtr.20260822t164053064z-b85b3abb by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The fingerprinted AC implementation stalled or refused move-off without physical clutch input.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided move-off test with automatic clutch disabled."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted AC implementation accepted the running upshift without physical clutch after the driver lifted.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage upshift test."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The fingerprinted AC implementation refused the full-throttle upshift and accepted it after the driver lifted.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage upshift test."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The fingerprinted AC implementation refused the full-throttle upshift rather than cutting for the driver.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided full-throttle upshift test."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted AC implementation accepted the running downshift without physical clutch after the driver blipped.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage downshift test."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The fingerprinted AC implementation refused the coast downshift and accepted it after the driver's throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage downshift test."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The fingerprinted AC implementation supplied no automatic throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided throttle observation during the downshift test."
+          },
+          "source_refs": [
+            "ac.local-live-mclaren-f1-gtr-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-22",
+      "source_refs": [
+        "assetto-corsa.dream-pack-1.f1-gtr-c9",
+        "mclaren.longtail-history",
+        "evo.f1-gtr-generations-2025",
+        "ac.local-live-mclaren-f1-gtr-controls.14923034"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "The official Dream Pack package, exact ks_mclaren_f1_gtr content id, and Kunos's installed 1996-specific description establish the intended implementation. McLaren distinguishes the 1996 evolution from the sequential 1997 Longtail, and evo explicitly identifies the 1995/96 cars as H-pattern manuals. Construction and real-car clutch/lift/blip technique remain unknown rather than being inferred from the simulator."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "assetto-corsa.dream-pack-1.f1-gtr-c9",
+          "mclaren.longtail-history",
+          "evo.f1-gtr-generations-2025",
+          "ac.local-live-mclaren-f1-gtr-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "Kunos's installed metadata describes the 1996 bodywork, magnesium gearbox housing, 1010 kg weight and straight-line comparison with the 1997 Longtail. McLaren says the 1997 car replaced the road-car gearbox with a six-speed sequential, while specialist generational testing identifies 1995/96 as H-pattern. These facts exclude the existing 1997 sequential record."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "assetto-corsa.dream-pack-1.f1-gtr-c9",
+          "mclaren.longtail-history",
+          "evo.f1-gtr-generations-2025",
+          "ac.local-live-mclaren-f1-gtr-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "McLaren establishes that the sequential gearbox arrived for 1997; evo specifies an H-pattern manual for 1995 and 1996. The guided drive selected six H-pattern gears. No reviewed source establishes synchromesh versus dog engagement, the exact H gate, or real driver technique, so those authentic fields stay unknown and the measured AC technique is carried only as simulator overrides."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-mclaren-f1-gtr-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "notes": [
+    "The generic AC title would collide with the existing 1997 record, but Kunos's own metadata describes the 1996 short-tail specification. Identity is resolved before behavior, so the H-pattern drive creates a separate real-car record rather than being recorded as a contradiction on the Longtail.",
+    "The official AC cockpit is the current evidence for the round continuous rim without integrated display or shift lights; no reviewed real-car source independently specifies those wheel-electronics fields."
+  ],
+  "updated_at": "2026-08-22",
+  "driver_summary": "1996 six-speed H-pattern car, not the 1997 sequential Longtail. AC requires the clutch to launch, a lift to upshift, and a manual blip to downshift; the real car's detailed technique is not yet sourced.",
+  "archetype": {
+    "classification": "no-archetype",
+    "basis": "The real car is established only as a six-speed H-pattern manual. Gearbox construction, exact gate, and real clutch/lift/blip technique remain unknown, so assigning a technique archetype would turn gaps into claims."
+  }
+}

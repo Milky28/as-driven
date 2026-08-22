@@ -39,6 +39,30 @@
       "notes": "Guided-verification observation ac-evo.lamborghini-huracan-st-evo2.20260821t040031522z-061b4845 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     },
     {
+      "source_id": "acc.challengers-pack.audi-r8-lms-evo2",
+      "title": "Assetto Corsa Competizione Challengers Pack",
+      "publisher": "KUNOS Simulazioni",
+      "url": "https://assettocorsa.gg/challengers-pack-dlc/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2022-03-23",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official ACC DLC page names the Audi R8 LMS GT3 Evo II and captions it as the 2022 car. It establishes the simulator identity and year only; the guided drive separately establishes ACC behavior, while Audi sources retain the real-car control claims."
+    },
+    {
+      "source_id": "acc.challengers-pack.lamborghini-huracan-st-evo2",
+      "title": "Assetto Corsa Competizione Challengers Pack",
+      "publisher": "KUNOS Simulazioni",
+      "url": "https://assettocorsa.gg/challengers-pack-dlc/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2022-03-23",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official ACC DLC page names the Lamborghini Huracan ST EVO2 and captions it as the 2021 car. It establishes the simulator identity only; the guided drive separately establishes ACC behavior, while Lamborghini sources retain the real-car control claims."
+    },
+    {
       "source_id": "acisport.safety-cage-homologations",
       "title": "Armature di sicurezza omologate (homologated safety cages)",
       "publisher": "ACI Sport",
@@ -5653,6 +5677,857 @@
       "retrieved_at": "2026-08-21",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ac-evo.porsche-718-cayman-gt4-clubsport.20260821t203010354z-df5300c8 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.official-car-list.rx",
+      "title": "Automobilista 2 RX car list",
+      "publisher": "Automobilista 2",
+      "url": "https://automobilista.gg/classes/rx",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Official simulator catalogue lists the exact four RX names Citroen DS3 RX, MINI Countryman R60 RX, Mitsubishi Lancer Evo10 RX, and Volkswagen Polo RX. It gives no season, team, gearbox, clutch, cut, blip, or cockpit specification."
+    },
+    {
+      "source_id": "ams2.official-car-list.stock-car-2019",
+      "title": "Automobilista 2 Stock Car Brasil 2019 car list",
+      "publisher": "Automobilista 2",
+      "url": "https://automobilista.gg/classes/stock-car-brasil-2019",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Official simulator catalogue identifies the class as Stock Car Brasil 2019 and its sole car as Chevrolet Cruze Stock Car 2019. It gives no controls specification."
+    },
+    {
+      "source_id": "cba.stock-car.2019.technical-regulations",
+      "title": "Campeonato Brasileiro de Stock Car - Regulamento Tecnico 2019",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/414/stock-car-regulamento-tecnico-2019-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Official 2019 technical regulations. Article 13, PDF pages 8-9, requires the RAM 8371 multi-disc clutch, X-TRAC 396B023 transmission, six listed forward ratios, and the designated semi-automatic paddle-shift actuation. It permits a gear display but does not require one and does not establish wheel-integrated display or shift lights, launch technique, ignition cut, or automatic blipping."
+    },
+    {
+      "source_id": "chevrolet.cruze-stock-car.lineage",
+      "title": "Cruze se despede com titulo da Stock Car",
+      "publisher": "Chevrolet Brasil",
+      "url": "https://news.chevrolet.com.br/newsroom.detail.html/Pages/news/br/pt/2024/dec/1217-cruze.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2024-12-17",
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Chevrolet's retrospective states that the Cruze contested eight Stock Car seasons and won seven championships. Together with the official simulator's explicit 2019 class and car name, this supports the marque and model identity; it does not describe the 2019 transmission or cockpit."
+    },
+    {
+      "source_id": "fia.appendix-j.2016.article-279",
+      "title": "Appendix J 2016 - Article 279: Technical Regulations for Rallycross Cars",
+      "publisher": "Federation Internationale de l'Automobile",
+      "url": "https://www.fia.com/sites/default/files/279_2016_1.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": "2015-12-14",
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Section 7.1.2 on PDF page 18 permits at most six forward gears and one reverse in SuperCars; the gearbox may be sequential and must be mechanically controlled. It states that only dog engagement is allowed and prohibits synchronising or secondary clutch mechanisms, establishing dogbox construction for a car governed by these SuperCar rules. The preceding text permits a gear-change cut sensor. The rules do not prove that a named car used all six ratios or a sequential layout, and they do not establish clutch technique or automatic downshift blipping."
+    },
+    {
+      "source_id": "fia.world-rx.2016.classifications",
+      "title": "2016 FIA World Rallycross Championship classifications",
+      "publisher": "Federation Internationale de l'Automobile",
+      "url": "https://www.fia.com/events/world-rallycross-championship/season-2016/classifications-8",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Official event classifications identify Petter Solberg World RX Team's Citroen DS3, JRM World Rallycross Team's BMW MINI, and Volkswagen RX Sweden's Volkswagen Polo in the 2016 championship. The page establishes entries and teams, not exact construction or controls, and it does not identify AMS2's specific liveries."
+    },
+    {
+      "source_id": "mitsubishi.lancer-evolution.2013.press-kit",
+      "title": "2013 Mitsubishi Lancer Evolution press kit",
+      "publisher": "Mitsubishi Motors North America",
+      "url": "https://media.mitsubishicars.com/presskits/2013-lancer-evolution-press-kit",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Manufacturer material establishes the 2013 Lancer Evolution X road-car identity, two-litre turbo engine and all-wheel-drive architecture. It describes five-speed manual and six-speed TC-SST road variants, neither of which supports AMS2's six-speed sequential-stick RX conversion; no matching works or homologated RX Evolution X was found."
+    },
+    {
+      "source_id": "nascar-brasil.sprint-race.history",
+      "title": "A Sprint Race",
+      "publisher": "NASCAR Brasil",
+      "url": "https://www.nascarbrasil.com.br/sprint-race/",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "The current official series history states that Sprint Race was founded in Brazil in 2012 as a centrally operated, cost-controlled one-make competition. It gives no transmission or cockpit specification."
+    },
+    {
+      "source_id": "reiza.dev-update.2019-07.sprint-race",
+      "title": "July 2019 Development Update",
+      "publisher": "Reiza Studios",
+      "url": "https://forum.reizastudios.com/threads/julho-2019-noticias-do-desenvolvimento.6394/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2019-08-01",
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Reiza announces the officially licensed Brazilian Sprint Race for AMS2 and describes its centrally seated, rear-wheel-drive 260 hp V6 car with a six-speed sequential transmission. The wording does not distinguish lever from paddles; the current guided cockpit observation establishes paddles in AMS2."
+    },
+    {
+      "source_id": "volkswagen.polo-r-supercar-2018",
+      "title": "New Polo for driving thrills: The Volkswagen Polo R Supercar",
+      "publisher": "Volkswagen",
+      "url": "https://www.volkswagen-newsroom.com/en/press-releases/new-polo-for-driving-thrills-the-volkswagen-polo-r-supercar-522",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2018-03-20",
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Volkswagen identifies the 2018 Polo R Supercar as a 570 hp four-wheel-drive FIA World Rallycross car for PSRX Volkswagen Sweden. It gives no gearbox, clutch, cut, blip, or cockpit specification, and the generic AMS2 name does not establish that the simulator depicts this exact 2018 revision rather than the 2016 predecessor."
+    },
+    {
+      "source_id": "ams2.local-live-citroen-ds3-rx-controls.1.6.9.91",
+      "title": "Live AMS2 Citroen DS3 RX guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.citroen-ds3-rx.20260822t035138649z-71ab98c9 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mini-countryman-r60-rx-controls.1.6.9.91",
+      "title": "Live AMS2 MINI Countryman R60 RX guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mini-countryman-r60-rx.20260822t040247960z-0ad241fd by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-mitsubishi-lancer-evo10-rx-controls.1.6.9.91",
+      "title": "Live AMS2 Mitsubishi Lancer Evo10 RX guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mitsubishi-lancer-evo10-rx.20260822t040440382z-61781c99 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-volkswagen-polo-rx-controls.1.6.9.91",
+      "title": "Live AMS2 Volkswagen Polo RX guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.volkswagen-polo-rx.20260822t040619117z-9428153b by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-sprint-race-controls.1.6.9.91",
+      "title": "Live AMS2 Sprint Race guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.sprint-race.20260822t040810093z-2415554e by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-cruze-stock-car-2019-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Cruze Stock Car 2019 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2019.20260822t041355845z-c18a2470 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.official-car-list.stock-car-2020",
+      "title": "Automobilista 2 Stock Car Brasil 2020 car list",
+      "publisher": "Automobilista 2",
+      "url": "https://automobilista.gg/classes/stock-car-brasil-2020",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official simulator catalogue identifies the class as Stock Car Brasil 2020 and names Chevrolet Cruze Stock Car 2020 and Toyota Corolla Stock Car 2020. It gives no controls specification."
+    },
+    {
+      "source_id": "cba.stock-car.2020.technical-regulations",
+      "title": "Campeonato Brasileiro de Stock Car - Regulamento Tecnico 2020",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/528/regulamento-tecnico-stock-car-2020-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official 2020 technical regulations. Article 13 on printed page 12 (PDF page 12) permits only the RAM 8371 multi-disc clutch, X-TRAC 396B023 transmission, and semi-automatic paddle-shift actuation; its ratio table lists first through sixth gears. It merely permits a gear display and does not establish launch technique, ignition cut, automatic blipping, a wheel-integrated display, or shift lights."
+    },
+    {
+      "source_id": "cba.stock-car.2020.platform-annex",
+      "title": "Campeonato Brasileiro de Stock Car - Anexo Tecnico Plataforma 2020",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/528/anexo-tecnico-plataforma-stock-car-2020-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official common-platform annex for the 2020 class. Printed page 16 (PDF page 17) identifies the steering-wheel and column assembly; printed page 35 (PDF page 36) identifies the RAM 8371 as a three-disc 184 mm clutch; printed page 37 (PDF page 38) lists the X-TRAC 396B023 and the paddle-shift valve, reservoir, accumulator, pump, actuator, wiring, control unit, and clutch sensor. It does not establish driver technique, a wheel-integrated display, or shift lights."
+    },
+    {
+      "source_id": "cba.stock-car.2020.toyota-corolla-annex",
+      "title": "Campeonato Brasileiro de Stock Car - Anexo Tecnico Toyota Corolla 2020",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/528/anexo-toyota-stock-car-2020-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": "2020-07-11",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Version 1.6, dated 11 July 2020. The cover and page 2 identify this as the Toyota Corolla technical annex complementing the 2020 Stock Car regulations and covering the components and construction of the Stock Car Toyota Corolla."
+    },
+    {
+      "source_id": "cba.stock-car.2020.chevrolet-cruze-annex",
+      "title": "Campeonato Brasileiro de Stock Car - Anexo Tecnico Chevrolet Cruze 2020",
+      "publisher": "Confederacao Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/528/anexo-gm-stock-car-2020-.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": "2020-07-11",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Version 1.6, dated 11 July 2020. The cover and page 2 identify this as the Chevrolet Cruze technical annex complementing the 2020 Stock Car regulations and covering the components and construction of the Stock Car Chevrolet Cruze."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-cruze-stock-car-2020-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Cruze Stock Car 2020 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2020.20260822t042703601z-047255f6 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-toyota-corolla-stock-car-2020-controls.1.6.9.91",
+      "title": "Live AMS2 Toyota Corolla Stock Car 2020 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.toyota-corolla-stock-car-2020.20260822t042856182z-1c363de0 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "porsche.newsroom.rsr-model-history-2020",
+      "title": "The story of Porsche's RSR models: The best boxer in the motorsport ring",
+      "publisher": "Dr. Ing. h.c. F. Porsche AG",
+      "url": "https://download.newsroom.porsche.com/dam/jcr%3Acc07f793-74ec-426f-8379-4998d58e48a9/PM_History_Porsche_911RSR_ENG.pdf",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2020-04-24",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Porsche's four-page history identifies the first RSR as the 911 Carrera RSR 2.8 created for the 1973 season from the Carrera RS 2.7 to comply with FIA Group 4 (printed/PDF page 1). It distinguishes the 1973 2.8 from the later three-litre version (pages 1-2). On printed/PDF page 3 it states verbatim that the 'Ur-RSR' had a 'type 915 standard manual gearbox with five gears' and quotes Romain Dumas describing historical downshifts: the left foot used the clutch, the right foot worked brake and accelerator together, and 'Nothing worked without double-declutching.' It does not state the upshift technique or steering-wheel electronics."
+    },
+    {
+      "source_id": "fia.historicdb.porsche-carrera-rs-3053",
+      "title": "Porsche Carrera RS homologation form 3053",
+      "publisher": "Federation Internationale de l'Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601075701/homologation_form_number_3053_group_3.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official FIA consultation copy for Porsche Carrera RS homologation 3053 and its Group 4 extensions. Printed/PDF page 11 records a mechanically operated single-plate dry clutch, lever shifting, Porsche transmission type 911.300/08, five forward gears and five synchronized forward gears. Printed/PDF page 2 visibly shows three pedals, a floor lever and a conventional round continuous steering rim without integrated display or shift lights on the homologated Carrera RS base. The Group 4 extension beginning on PDF page 13 lists competition equipment including a steel-spring clutch disc, but it does not state driver technique or an alternate shift gate; absence from the extension is not treated as proof that no other racing variation existed."
+    },
+    {
+      "source_id": "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+      "title": "Assetto Corsa - Porsche Pack I",
+      "publisher": "Kunos Simulazioni / 505 Games",
+      "url": "https://store.steampowered.com/app/526060/Assetto_Corsa__Porsche_Pack_I/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2016-10-25",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official DLC listing by developer Kunos Simulazioni names Porsche 911 Carrera RSR 3.0 among Porsche Pack I's cars. This establishes that the installed ks_porsche_911_carrera_rsr content id and exact in-game title are official AC content intended to represent that model. The page does not specify the implemented gear count, gate, clutch behavior, cut, blip, or steering wheel, so those remain grounded in the fingerprinted guided drive rather than inherited from the marketing description."
+    },
+    {
+      "source_id": "ac-legends.gt-classic-3-release-notes-2020",
+      "title": "Assetto Corsa 'AC Legends' GT Classic version 3.0 release notes",
+      "publisher": "AC Legends",
+      "author": "Bazza",
+      "url": "https://thracing.de/wp-content/uploads/2020/11/AC-Legends-GT-Classics-3.0-release-notes.2020-11.pdf",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": "2020-11-08",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "First-party documentation distributed with AC Legends GT Classic v3.0. PDF/printed page 3 credits Bazza for physics and AI and describes the release as a fully updated AC Legends pack. PDF/printed page 13 is headed '1973 Porsche 911 RSR', credits Mac Ten for the conversion, identifies the represented car as an RSR 2.8, and explicitly says that many 2.8 RSRs received later RSR 3.0-litre engines, 'which is also the case in this mod.' PDF/printed page 14 is headed '1974 Porsche 911 RSR', states 'Model: Kunos', and identifies the represented car as the definitive three-litre Carrera RSR introduced for the 1974 season. This establishes the package author's intended identities and the 1974 model's Kunos lineage, not real-car control construction or either implementation's shift behavior. The local copy supplied with the pack was visually checked against the public THRacing-hosted PDF."
+    },
+    {
+      "source_id": "totsugeki.ac-legends-911-rsr-1973",
+      "title": "ACL GTR Porsche 911 RSR 1973",
+      "publisher": "Assetto Corsa Mod Database (Totsugeki)",
+      "url": "https://ac.totsugeki.com/post-44443/",
+      "archive_url": null,
+      "source_type": "community-research",
+      "published_or_updated_at": "2022-12-03",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Third-party catalogue entry for the exact installed implementation: telemetry title ACL GTR Porsche 911 RSR 1973, directory ac_legends_gt_911rsr_73, author Mac Ten / AC Legends, five-speed transmission, AC Legends 3.0 mod pack. Its description identifies the represented base as an RSR 2.8 and explicitly says the mod is one of the cars later uprated with an RSR 3.0-litre engine. This maps the package to a represented car/configuration; it is not evidence for real-car control construction or technique."
+    },
+    {
+      "source_id": "ac.local-live-acl-gtr-porsche-911-rsr-1973-controls.14923034",
+      "title": "Live AC ACL GTR Porsche 911 RSR 1973 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.acl-gtr-porsche-911-rsr-1973.20260822t043730445z-d5fe85b5 by Jason Kinslow. The fingerprinted AC Legends v3.0 package exposed five H-pattern gears, a dogleg cockpit gate, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. The draft could not read an AC version; review tied the unchanged installation to Steam public build 14923034. The draft recorded game version 'unknown'; review established '14923034': The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its LastUpdated value and the AC executable timestamps predate the 2026-08-22 observation, and SteamDB independently identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03.",
+      "implementation": {
+        "content_id": "ac_legends_gt_911rsr_73",
+        "author": "Mac Ten, AC Legends",
+        "declared_version": "3.0",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "7a65a060459103fcb86f1509884fb83fff768f2ce5b9d1a97a148014b33e6ef3"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+      "title": "Live AC Porsche 911 Carrera RSR 3.0 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.porsche-911-carrera-rsr-3-0.20260822t160750374z-1143b328 by Jason Kinslow. The fingerprinted official Kunos implementation exposed five H-pattern gears, a dogleg cockpit gate, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. The draft could not read an AC version; review tied the unchanged installation to Steam public build 14923034. The clutch channel recorded activity during an accepted clutchless test, so running-shift clutch acceptance remains medium confidence. The draft recorded game version 'unknown'; review established '14923034': The same installed Steam library used for the drive has appmanifest_244210.acf buildid 14923034. Its recorded LastUpdated value predates the 2026-08-22 observation, and SteamDB identifies 14923034 as the public Assetto Corsa branch build published 2024-07-03.",
+      "implementation": {
+        "content_id": "ks_porsche_911_carrera_rsr",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "d21f532ed2377fb8092857ee976a47c91fb37f327c3f44c68ba27a4b8e2c7297"
+        }
+      }
+    },
+    {
+      "source_id": "assetto-corsa.base-game.lotus-98t",
+      "title": "Assetto Corsa - game contents and cars",
+      "publisher": "Kunos Simulazioni / 505 Games",
+      "url": "https://assettocorsa.gg/assetto-corsa/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Kunos's official Assetto Corsa page names the Lotus Type 98T among the title's Historic Racing cars and separately highlights its turbo-era power delivery. This establishes that the installed lotus_98t content id and exact in-game title are official AC content intended to represent the Type 98T. The page does not state the implemented gearbox construction, gate, clutch behavior, cut, blip, or steering-wheel details."
+    },
+    {
+      "source_id": "assetto-corsa.porsche-pack-2.911-gt1-98",
+      "title": "Assetto Corsa - Porsche Pack II",
+      "publisher": "Kunos Simulazioni / 505 Games",
+      "url": "https://store.steampowered.com/app/540710/Assetto_Corsa__Porsche_Pack_II/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2016-11-22",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official DLC listing by developer Kunos Simulazioni describes the revised 1998 Porsche 911 GT1 and its Le Mans double victory. Kunos's v1.10 release announcement explicitly names the new car as Porsche 911 GT1-98 1998. Together with the installed ks_porsche_911_gt1 content id, this establishes the exact official AC implementation. The listing does not establish the implementation's cut, blip, clutch behavior, or cockpit controls."
+    },
+    {
+      "source_id": "assetto-corsa.ready-to-race.mc12-gt1",
+      "title": "Assetto Corsa - Ready To Race Pack",
+      "publisher": "Kunos Simulazioni / 505 Games",
+      "url": "https://store.steampowered.com/app/619680/Assetto_Corsa__Ready_To_Race_Pack/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2017-05-18",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official DLC listing by developer Kunos Simulazioni explicitly includes the Maserati MC12 GT1. This establishes that the installed ks_maserati_mc12_gt1 content id and matching in-game title are official AC content intended to represent that model. The page does not establish the implementation's gearbox behavior or cockpit equipment."
+    },
+    {
+      "source_id": "assetto-corsa.dream-pack-1.f1-gtr-c9",
+      "title": "Assetto Corsa - Dream Pack 1",
+      "publisher": "Kunos Simulazioni / 505 Games",
+      "url": "https://store.steampowered.com/app/347990/Assetto_Corsa_Dream_Pack_1/",
+      "archive_url": null,
+      "source_type": "official-simulator",
+      "published_or_updated_at": "2015-03-11",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Official DLC listing by developer Kunos Simulazioni includes the McLaren F1 GTR and Mercedes-Benz C9. The installed Kunos metadata narrows ks_mclaren_f1_gtr to the 1996 short-tail evolution by describing its extended bodywork, magnesium gearbox housing, 1010 kg weight, and contrast with the 1997 Longtail; it names ks_mercedes_c9 as Mercedes-Benz C9 1989 LM. This source establishes intended implementation identity, not real-car technique or the driven package's exact behavior."
+    },
+    {
+      "source_id": "mclaren.longtail-history",
+      "title": "Looking back at the Longtail",
+      "publisher": "McLaren Automotive",
+      "url": "https://cars.mclaren.com/gl_en/lt-celebration/looking-back-at-the-longtail",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "McLaren distinguishes the evolved 1996 F1 GTR from the larger 1997 change. It states that for the 1997 Longtail the road-car gearbox was replaced with a six-speed sequential unit. This establishes that the sequential Longtail is a different generation from the earlier 1995/1996 cars; it does not by itself state the earlier gate pattern, gearbox construction, or driver technique."
+    },
+    {
+      "source_id": "evo.f1-gtr-generations-2025",
+      "title": "The ultimate McLaren test: F1 GTR v P1 GTR v Senna GTR on road and track",
+      "publisher": "evo",
+      "url": "https://www.evo.co.uk/mclaren/f1/207687/the-ultimate-mclaren-test-f1-gtr-v-p1-gtr-v-senna-gtr-on-road-and-track",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Contemporary specialist drive of the F1 GTR generations explicitly states that the 1995 and 1996 versions used H-pattern manuals, strengthened for 1996, before the 1997 switch to a sequential gearbox. It does not establish synchromesh versus dog engagement, the exact H gate, standing-start technique, running clutch use, lift, or blip requirements."
+    },
+    {
+      "source_id": "mercedes-benz.c9-le-mans-1989",
+      "title": "24-Stunden-Rennen von Le Mans 1989: Doppelsieg-Triumph vor 30 Jahren",
+      "publisher": "Mercedes-Benz Media",
+      "url": "https://media.mercedes-benz.com/article/7c42293b-3c71-428d-af25-b562111e9844",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2019-06-11",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Mercedes-Benz identifies the 1989 Le Mans cars as Sauber-Mercedes C9 prototypes, records their first, second and fifth places, and describes the 1989 M119 HL engine and works-team identity. It mentions a race gearbox problem that left one car with fifth gear only, but does not state the normal forward-gear count, construction, gate, or driver technique."
+    },
+    {
+      "source_id": "ac.local-live-lotus-98t-controls.14923034",
+      "title": "Live AC Lotus 98T guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lotus-98t.20260822t162340414z-6141e36f by Jason Kinslow. The fingerprinted official Kunos implementation exposed six H-pattern gears, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. The clutch channel was already active while stopped and may represent the car's own clutch, so running-shift clutch acceptance remains medium confidence. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "lotus_98t",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "e25cc3eaa2f550f582dbd72d7103973eb30fec0e60ab142514a93ea65f9e04f3"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-porsche-911-gt1-98-controls.14923034",
+      "title": "Live AC Porsche 911 GT1-98 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.porsche-911-gt1-98.20260822t162709160z-6a1d7df8 by Jason Kinslow. The fingerprinted official Kunos implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a D-shaped open-top rim without integrated display or shift lights. AC supplied no engine torque, so automatic cut is not established. The clutch channel may include car-side intervention. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "ks_porsche_911_gt1",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "aa0d2af85c858b65993f7d1646ff3cc7a57a7cc09dc7337f40e2c8a6f9e678c3"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-maserati-mc12-gt1-controls.14923034",
+      "title": "Live AC Maserati MC12 GT1 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.maserati-mc12-gt1.20260822t163346408z-b2a0e052 by Jason Kinslow. The fingerprinted official Kunos implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim without integrated display or shift lights. AC supplied no engine torque, so automatic cut is not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "ks_maserati_mc12_gt1",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "a4b019eab9925a756dee7e64a570945778460578368242a9874153d1eeefa3e0"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-mclaren-f1-gtr-controls.14923034",
+      "title": "Live AC McLaren F1 GTR guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.mclaren-f1-gtr.20260822t164053064z-b85b3abb by Jason Kinslow. The fingerprinted official Kunos 1996 short-tail implementation exposed six H-pattern gears, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round closed rim without integrated display or shift lights. These technique results describe the implementation, not the still-unsourced real-car technique. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "ks_mclaren_f1_gtr",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "ebe67ef2b04cdacc61cc8d77c50c3195aa49551e61761a7042d78ad0d4385cbd"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034",
+      "title": "Live AC Mercedes-Benz C9 1989 LM guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.mercedes-benz-c9-1989-lm.20260822t164524343z-ee957d51 by Jason Kinslow. The fingerprinted official Kunos implementation exposed five H-pattern gears, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round closed rim without integrated display or shift lights. The cockpit gate was not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "ks_mercedes_c9",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "77cb857a5a6db41acac2f930c57060db8b60ad19ed89b5ec72bf550b60745022"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034",
+      "title": "Live AC ACL GTR Porsche RSR 74 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.acl-gtr-porsche-rsr-74.20260822t165038034z-bb340321 by Jason Kinslow. The fingerprinted AC Legends v3.0 implementation exposed five H-pattern gears, a dogleg cockpit gate, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. Its effective controls match the separately fingerprinted official Kunos implementation. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "ac_legends_gt_911rsr_74",
+        "author": "KS / AC Legends",
+        "declared_version": "3.0",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "880b0be4a5266eec3ba106a60fc8f76ddabb2029c14daf75e0dc61c23332d049"
+        }
+      }
+    },
+    {
+      "source_id": "rss.classic-endurance-pack-1.readme.2022",
+      "title": "RSS Classic Endurance Pack 1 readme",
+      "publisher": "Race Sim Studio",
+      "author": "Race Sim Studio",
+      "url": "https://racesimstudio.com/lmgt-nisumo-r39-v8",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": "2022-11-28",
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "First-party PDF distributed inside the user's RSS Classic Endurance Pack 1 v2b archive. PDF/printed page 3 identifies the Nisumo R39 V8 as a car built for the 1997 and 1998 seasons, says the long-tail form was used primarily in 1998, and specifies a 3.5 L (3,495 cc) twin-turbocharged V8. The exact same wording appears in the installed v2 ui_car.json. Those combined traits identify RSS's intended analogue; the document does not name Nissan or establish real-car control technique, and it is not used as if it did."
+    },
+    {
+      "source_id": "nismo.r390-gt1-history.vol05",
+      "title": "NISMO history - overseas motorsports activities, vol. 05",
+      "publisher": "NISMO",
+      "url": "https://www.nismo.co.jp/nismo_history/overseas_motorsports/vol_05/index.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "NISMO's own history distinguishes the 1997 and 1998 R390 GT1 specifications. It states that the 1998 car was converted to a long-tail, received aerodynamic revisions, and changed to a Nissan-built sequential transmission before four R390 GT1s contested Le Mans. This independently identifies the RSS document's primarily-1998 long-tail analogue as the 1998 Nissan R390 GT1 and supports sequential construction; it does not describe clutch, cut, blip, cockpit wheel equipment, or the exact number of forward ratios."
+    },
+    {
+      "source_id": "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034",
+      "title": "Live AC LMGT Nisumo R39 V8 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lmgt-nisumo-r39-v8.20260822t172507073z-bf9e2791 by Jason Kinslow. The fingerprinted Race Sim Studio v2 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, automatic cut and automatic blip, and a closed D-shaped rim without integrated display or shift lights. The clutch channel recorded activity during an accepted clutchless test and may include car-side intervention. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_lmgt_nisumo_r39_v8",
+        "author": "Race Sim Studio",
+        "declared_version": "2",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "cf7b42ef2b9f6f7c54c14e60e67829e966f586fcbe64e11f3be2106e16c20f2d"
+        }
+      }
+    },
+    {
+      "source_id": "rss.gt-m-aero-v10-evo2.v2",
+      "title": "RSS GT-M Aero V10 Evo2 v2",
+      "publisher": "Race Sim Studio",
+      "author": "Race Sim Studio",
+      "url": "https://racesimstudio.com/gt-m-aero-v10-evo2",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "RSS's first-party page identifies the Aero V10 Evo2 implementation and gives its 501 hp output, 2631 mm wheelbase, track dimensions and 1411 kg weight. The matching installed v2 package labels it a German V10 GT3 and bundles `#1 Scherer Sport PHX Farewell Audi`; that skin also loads `rss_aero/audi_badges.ini`. Those explicit package labels plus the matching specification establish the intended analogue as the Audi R8 LMS GT3 Evo II. This is implementation-identity evidence only; the public RSS page does not name Audi or establish the real car's controls."
+    },
+    {
+      "source_id": "rss.gt-legends-championship.pack-v6",
+      "title": "RSS GT Legends Championship Pack v6",
+      "publisher": "Race Sim Studio",
+      "author": "Race Sim Studio",
+      "url": "https://store.racesimstudio.com/p/gt-pack/",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Race Sim Studio's first-party product page identifies GT Legends Championship Pack v6 and its Tornado V12, Vortex V10, Ferruccio 55 V12, and Lanzo V12 implementations. The user's matching v6 archive and installed v4/v4/v4/v3 packages add implementation metadata and bundled livery labels: Prodrive, BMS, Care, JMB, and Larbre on Ferruccio; Lister Storm on Tornado; period Larbre, Roos, and Force One entries on Vortex; and 2005 REITER Engineering on Lanzo. Combined with each model's country, engine layout, era, body, and specifications, those labels establish the intended analogues as the Prodrive Ferrari 550 GTS Maranello, Lister Storm GTM, Dodge Viper GTS-R, and Lamborghini Murcielago R-GT. The first-party ReadMe_GT_Legends_Championship - Pack.pdf, pages 1-3, describes the early-to-mid-2000s package but does not name the real cars or establish their controls. This is implementation-identity evidence only; the public RSS page likewise does not name the licensed marques."
+    },
+    {
+      "source_id": "rss.gt-adonis-d9-v12.v2",
+      "title": "RSS GT Adonis D9 V12 v2",
+      "publisher": "Race Sim Studio",
+      "author": "Race Sim Studio",
+      "url": "https://racesimstudio.com/gt-adonis-d9-v12",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Race Sim Studio's first-party product page identifies the GT Adonis D9 V12 implementation. The matching installed v2 package describes a British mid-2000s V12 GT with six-speed sequential actuation, and its bundled liveries explicitly label 2005 Aston Martin Prodrive entries 28 and 29 plus period DBR9 teams and numbers. Those converging traits establish the intended analogue as the Aston Martin DBR9. The first-party ReadMe_GT_Adonis_D9.pdf, pages 1-4, describes installation and supported features but does not name the real car or establish its controls. This is implementation-identity evidence only; the public RSS page likewise does not name Aston Martin."
+    },
+    {
+      "source_id": "ac.local-live-gt-ferruccio-55-v12-controls.14923034",
+      "title": "Live AC GT Ferruccio 55 V12 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-ferruccio-55-v12.20260822t200835844z-3f8b6f4d by Jason Kinslow. The fingerprinted Race Sim Studio v4 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_gt_ferruccio_55",
+        "author": "Race Sim Studio",
+        "declared_version": "4",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "e87ceb59ab1ac0925da091fab1af5a75e07f2c7e38e60efdb95163b34d9d6e55"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-gt-tornado-v12-controls.14923034",
+      "title": "Live AC GT Tornado V12 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-tornado-v12.20260822t201047172z-0743b5fb by Jason Kinslow. The fingerprinted Race Sim Studio v4 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_gt_tornado_v12",
+        "author": "Race Sim Studio",
+        "declared_version": "4",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "220ce795eaa7a2bec74958810170d376febd8e7e6fd14da49347922875d7ba52"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-gt-adonis-d9-v12-controls.14923034",
+      "title": "Live AC GT Adonis D9 V12 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-adonis-d9-v12.20260822t201255942z-3b704352 by Jason Kinslow. The fingerprinted Race Sim Studio v2 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_gt_adonis_d9_v12",
+        "author": "Race Sim Studio",
+        "declared_version": "2",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "d73a12b3e6822a077cc3738d9686c3020c8b49abf08c473b6b25b3db1c4e9b95"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-gt-vortex-v10-controls.14923034",
+      "title": "Live AC GT Vortex V10 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-vortex-v10.20260822t201801796z-f8bbdbc4 by Jason Kinslow. The fingerprinted Race Sim Studio v4 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_gt_vortex_v10",
+        "author": "Race Sim Studio",
+        "declared_version": "4",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "4319757bf0ce96ffb35cff7ee78d15cc7b94f19073c4d4a096cdf38c5571c70e"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-gt-lanzo-v12-controls.14923034",
+      "title": "Live AC GT Lanzo V12 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-lanzo-v12.20260822t202444437z-f54b08fd by Jason Kinslow. The fingerprinted Race Sim Studio v3 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim with integrated display and shift lights. AC supplied no engine-torque channel, so automatic cut is not established. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_gt_lanzo_v12",
+        "author": "Race Sim Studio",
+        "declared_version": "3",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "eaf0fb7d4312eedb7781029be59089244c9098ade1644b4be68d5478ba9557e5"
+        }
+      }
+    },
+    {
+      "source_id": "ams2.local-live-lamborghini-murcielago-r-gt-controls.1.6.9.91",
+      "title": "Live AMS2 Lamborghini Murcielago R-GT guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Corrective guided-verification observation ams2.lamborghini-murcielago-r-gt.20260822t204647241z-bb0e68f2 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, automatic cut, no automatic blip, and a closed D-shaped rim with integrated display and shift lights. It supersedes the prior no-display cockpit observation."
+    },
+    {
+      "source_id": "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365",
+      "title": "Live ACC Audi R8 LMS Evo II 2022 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.audi-r8-lms-evo-ii-2022.20260822t214156833z-bc045011 by Jason Kinslow in ACC Steam build 21257365. With automatic clutch, shifting and throttle-blip assists disabled, the drive established clutch-free move-off, six paddle-selected gears, clutchless full-throttle and coast-shift acceptance, automatic blip, and a closed GT/Formula rim without a rim-mounted display or shift lights. ACC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "source_id": "acc.local-live-lamborghini-hurac-n-st-evo2-2021-controls.21257365",
+      "title": "Live ACC Lamborghini Huracán ST Evo2 2021 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.lamborghini-hurac-n-st-evo2-2021.20260822t220556604z-e7a9334c by Jason Kinslow in ACC Steam build 21257365. With automatic clutch, shifting and throttle-blip assists disabled, the drive established clutch-free move-off, six paddle-selected gears, clutchless full-throttle and coast-shift acceptance, automatic blip, and a closed GT/Formula rim without a rim-mounted display or shift lights. ACC supplied no engine-torque channel, so automatic cut is not established."
+    },
+    {
+      "source_id": "ac.local-live-gt-m-aero-v10-evo2-controls.14923034",
+      "title": "Live AC GT-M Aero V10 Evo2 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-22",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-m-aero-v10-evo2.20260822t220059800z-371a2cd0 by Jason Kinslow. The fingerprinted Race Sim Studio v2 implementation exposed six paddle-selected gears, required physical clutch input to move off, accepted clutchless full-throttle upshifts with automatic cut, accepted clutchless coast downshifts with automatic blip, and used a closed GT/Formula rim without integrated display or shift lights. The draft recorded game version `unknown`; review established AC Steam build 14923034 from appmanifest_244210.acf. The draft recorded game version 'unknown'; review established '14923034': The unchanged Steam library used for the drive has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
+      "implementation": {
+        "content_id": "rss_gtm_aero_v10_evo2",
+        "author": "Race Sim Studio",
+        "declared_version": "2",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "e1e828e4e1718c5e7951788666158a5924580ec433e6a3df86a234a1f8a2657f"
+        }
+      }
     }
   ]
 }

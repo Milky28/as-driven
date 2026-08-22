@@ -10,8 +10,8 @@ data.
 
 - Windows with SimHub 9.11.22;
 - Automobilista 2 executable version 1.6.9.91;
-- As Driven SimHub client 0.17.0;
-- As Driven dataset 0.4.5 and schema v1.
+- As Driven SimHub client 0.18.0;
+- As Driven dataset 0.4.16 and schema v1.
 
 Newer SimHub or AMS2 versions may work, but have not been certified for this
 release. The overlay always displays the exact game version associated with a
@@ -29,8 +29,11 @@ that behavior was reverified after a game update.
 - independent, checksummed database updates with backup and rollback;
 - a SimHub installer that preserves customized overlay positions by default.
 
-The database currently contains 243 curated car records. All carry AMS2 entries;
-three also carry reviewed Assetto Corsa EVO development entries. This release is
+The database currently contains 253 curated car records. Of those, 250 carry
+AMS2 entries; one is currently AC EVO-only and two original-AC records are
+AC-only. Three AMS2 records also carry reviewed Assetto Corsa EVO development
+entries, and eleven AMS2 records also carry reviewed original Assetto Corsa
+entries. This release is
 certified only for the AMS2 target above. Unsupported cars and simulators are
 deliberately shown as unmatched instead of receiving guessed controls. The
 generated coverage plans remain development material and are not promises that
@@ -70,7 +73,7 @@ Dash Studio templates, overlay layouts, or settings. Restart SimHub or use
 The ZIP's adjacent `.sha256` file can be checked before installation:
 
 ```powershell
-Get-FileHash .\as-driven-simhub-0.17.0-early-access.zip -Algorithm SHA256
+Get-FileHash .\as-driven-simhub-0.18.0-early-access.zip -Algorithm SHA256
 ```
 
 Compare the displayed hash with the value in the downloaded `.sha256` file.

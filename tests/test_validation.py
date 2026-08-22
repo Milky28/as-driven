@@ -326,6 +326,12 @@ class ValidationTests(unittest.TestCase):
             self.assertEqual(
                 _with_source_id("ams2.local-live-test-car-controls.1.6.9.91"), []
             )
+            self.assertEqual(
+                _with_source_id(
+                    "ams2.local-live-test-car-controls.1.6.9.91.correction-acde1234"
+                ),
+                [],
+            )
 
             # Other publishers keep their own prefixes.
             self.assertEqual(
@@ -922,6 +928,11 @@ class ValidationTests(unittest.TestCase):
         """
         self.assertTrue(
             LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.local-live-porsche-911-gt3-controls.0.1.2")
+        )
+        self.assertTrue(
+            LIVE_OBSERVATION_ID_RE.fullmatch(
+                "ac-evo.local-live-porsche-911-gt3-controls.0.1.2.correction-acde1234"
+            )
         )
         self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
         self.assertNotIn("other", OBSERVING_SIMULATORS)

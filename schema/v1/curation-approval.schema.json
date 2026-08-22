@@ -40,6 +40,7 @@
         "ams2",
         "iracing",
         "ac",
+        "acc",
         "ac-evo",
         "ac-rally",
         "other"
@@ -220,6 +221,112 @@
     "historical_notes": {
       "type": "string"
     },
+    "game_version_correction": {
+      "description": "A reviewed correction when the immutable guided-drive draft could not detect an exact simulator build. The approval keeps both what the draft recorded and the separately verified exact build; prose alone never changes the version.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observed",
+        "verified",
+        "basis"
+      ],
+      "properties": {
+        "observed": {
+          "const": "unknown"
+        },
+        "verified": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "unknown",
+              "latest"
+            ]
+          }
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "correction_history": {
+      "description": "Reviewed replacement history for an incorrect simulator observation. The current approval describes the replacement drive; each history item preserves exactly which prior source and user-facing facts it superseded.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "corrected_at",
+          "superseded_source_ref",
+          "replacement_source_ref",
+          "basis",
+          "behavior_changes",
+          "authentic_control_changes",
+          "removed_simulator_overrides"
+        ],
+        "properties": {
+          "corrected_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "superseded_source_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "replacement_source_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "behavior_changes": {
+            "$ref": "#/$defs/correctionChanges"
+          },
+          "authentic_control_changes": {
+            "$ref": "#/$defs/correctionChanges"
+          },
+          "removed_simulator_overrides": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "simulator",
+                "path",
+                "value",
+                "basis"
+              ],
+              "properties": {
+                "simulator": {
+                  "enum": [
+                    "ams2",
+                    "iracing",
+                    "ac",
+                    "acc",
+                    "ac-evo",
+                    "ac-rally",
+                    "other"
+                  ]
+                },
+                "path": {
+                  "type": "string",
+                  "pattern": "^/authentic_controls/"
+                },
+                "value": {},
+                "basis": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "staged_record_id": {
       "type": "string",
       "minLength": 1,
@@ -227,6 +334,30 @@
     }
   },
   "$defs": {
+    "correctionChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "from",
+          "to"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "from": {},
+          "to": {},
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
     "state": {
       "type": "string",
       "enum": [

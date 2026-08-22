@@ -1,0 +1,362 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.10",
+  "approved_at": "2026-08-22",
+  "records": [
+    {
+      "record_id": "lotus-renault-98t",
+      "bundle": "build/staged-20260822/ac.lotus-98t.20260822t162340414z-6141e36f.staged.json",
+      "manufacturer": "Lotus",
+      "model": "98T",
+      "year": {
+        "from": 1986,
+        "label": "1986 Formula One season"
+      },
+      "class": "Formula One",
+      "real_world_identity_notes": "Lotus 98T, the Renault Gordini EF15B turbocharged car driven by Ayrton Senna and Johnny Dumfries in 1986. Its real gearbox is a Lotus/Hewland six-speed manual.",
+      "real_world_source_refs": [
+        "assetto-corsa.base-game.lotus-98t",
+        "wikipedia.lotus-98t",
+        "pegasus.hewland-dog-rings",
+        "calverst.syncro-vs-dog-engagement"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Kunos's official car list and the lotus_98t content id establish the official AC implementation. The guided drive directly established six forward gears, H-pattern actuation, clutch-required move-off, required lift and manual rev matching, no automatic cut or blip, and a round wheel without display or shift lights. Running clutch acceptance remains medium confidence because AC's clutch channel was already active while stopped and may report the car's own clutch.",
+      "identity_basis": "Kunos officially lists the Lotus Type 98T in Assetto Corsa's Historic Racing roster. The exact title and installed lotus_98t content id match the curated 1986 Lotus Renault 98T rather than creating another car.",
+      "specification_basis": "The existing record owns the real Lotus/Hewland six-speed H-pattern specification and medium-confidence dog-ring construction. The fingerprinted AC drive independently selected all six gears and observed the same actuation and technique. Unlike AMS2, AC therefore needs no gear-count override.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "standard-h"
+      },
+      "confidence_notes": "The fingerprinted official Kunos implementation exposed six H-pattern gears, clutch-required move-off, required lift, required manual rev matching, no automatic cut or blip, and a round rim without display or shift lights. AC's clutch channel may include car-side clutch activity, so clutchless running-shift acceptance remains medium confidence.",
+      "control_notes": [
+        "This drive joins the existing Lotus Renault 98T record and preserves its independently curated real-car controls.",
+        "AC models all six real forward gears. AMS2 remains the simulator-specific five-speed departure.",
+        "The fingerprinted AC implementation refused a full-throttle upshift and a coast downshift, then accepted the shifts after the driver lifted and manually blipped."
+      ],
+      "driver_summary": "Lotus/Hewland six-speed - rev-match every downshift. AC models all six gears; AMS2 gives this car five.",
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.lotus-98t.20260822t162340414z-6141e36f by Jason Kinslow. The fingerprinted official Kunos implementation exposed six H-pattern gears, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round rim without integrated display or shift lights. The clutch channel was already active while stopped and may represent the car's own clutch, so running-shift clutch acceptance remains medium confidence."
+    },
+    {
+      "record_id": "porsche-911-gt1-98",
+      "bundle": "build/staged-20260822/ac.porsche-911-gt1-98.20260822t162709160z-6a1d7df8.staged.json",
+      "manufacturer": "Porsche",
+      "model": "911 GT1-98",
+      "year": {
+        "from": 1998,
+        "label": "1998 Le Mans winner"
+      },
+      "class": "GT1",
+      "real_world_identity_notes": "Le Mans-winning 1998 GT1 car with a carbon monocoque and Porsche's new six-speed sequential gearbox.",
+      "real_world_source_refs": [
+        "assetto-corsa.porsche-pack-2.911-gt1-98",
+        "wikipedia.porsche-911-gt1"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Kunos's official Porsche Pack II material, v1.10 announcement, exact in-game title and ks_porsche_911_gt1 content id establish the 1998 car. The guided drive directly established six sequential-stick gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and cockpit wheel details. Automatic cut is deliberately unknown because AC exposed no engine-torque channel.",
+      "identity_basis": "Kunos's official release announcement names Porsche 911 GT1-98 1998, matching the exact telemetry title and installed ks_porsche_911_gt1 package. It maps directly to the existing 1998 record.",
+      "specification_basis": "The existing record's real six-speed sequential transmission remains authoritative. The AC drive agrees on gear count and sequential-stick actuation but accepts a coast downshift without a manual blip. Because the torque channel is absent, accepting a full-throttle upshift cannot establish whether AC performs an ignition cut.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "unknown",
+          "condition": "AC build 14923034 accepted the full-throttle upshift but published no engine torque, so the guided workflow cannot determine whether the implementation cuts ignition.",
+          "confidence": {
+            "level": "high",
+            "basis": "The absence of the required torque channel is directly recorded in the immutable guided observation; repeating the drive cannot establish the cut through current telemetry."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AC build 14923034 accepted the tested clutchless coast downshift without throttle input and showed no automatic throttle spike.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without a driver blip."
+          }
+        }
+      ],
+      "confidence_notes": "Six sequential-stick gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and the D-shaped open-top rim were directly observed. Automatic cut is unknown because AC provides no engine-torque channel. Clutchless acceptance is medium confidence because the clutch channel may include car-side activity.",
+      "control_notes": [
+        "This drive joins the existing 1998 Porsche 911 GT1-98 record and does not replace its real-car specification.",
+        "AC accepts a coast downshift without a manual blip, unlike the curated real-car guidance and AMS2 behavior.",
+        "AC accepts a full-throttle upshift, but its telemetry exposes no engine torque; whether the implementation cuts ignition is not established."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.porsche-911-gt1-98.20260822t162709160z-6a1d7df8 by Jason Kinslow. The fingerprinted official Kunos implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a D-shaped open-top rim without integrated display or shift lights. AC supplied no engine torque, so automatic cut is not established. The clutch channel may include car-side intervention."
+    },
+    {
+      "record_id": "maserati-mc12-gt1",
+      "bundle": "build/staged-20260822/ac.maserati-mc12-gt1.20260822t163346408z-b2a0e052.staged.json",
+      "manufacturer": "Maserati",
+      "model": "MC12 GT1",
+      "year": {
+        "from": 2004,
+        "label": "2004-generation GT1"
+      },
+      "class": "GT1",
+      "real_world_identity_notes": "Maserati MC12 GT1 with a manually operated six-speed sequential gearbox, distinct from the electro-actuated Versione Corse.",
+      "real_world_source_refs": [
+        "assetto-corsa.ready-to-race.mc12-gt1",
+        "maserati.mc12-versione-corse.2006"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Kunos's official Ready To Race listing and ks_maserati_mc12_gt1 content id establish the exact implementation; Maserati establishes manual sequential actuation. The drive directly established six gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and cockpit equipment. Automatic cut remains unknown because AC exposed no engine-torque channel.",
+      "identity_basis": "Kunos officially lists Maserati MC12 GT1 in Ready To Race, matching the exact telemetry title and installed ks_maserati_mc12_gt1 package. It maps directly to the existing GT1 record.",
+      "specification_basis": "The existing record keeps the real six-speed manually operated sequential gearbox. AC accepts a coast downshift without a driver blip, unlike the curated real-car guidance and AMS2 behavior. The accepted full-throttle upshift cannot establish an ignition cut because AC supplied no engine-torque channel.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "accept_from_drive": [
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/steering/wheel_rim/open_top"
+      ],
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "unknown",
+          "condition": "AC build 14923034 accepted the full-throttle upshift but published no engine torque, so the implementation's cut is not established.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided observation directly records the missing torque channel and the resulting measurement limit."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AC build 14923034 accepted the tested clutchless coast downshift without throttle input and showed no automatic throttle spike.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided coast-downshift test directly observed acceptance without a driver blip."
+          }
+        }
+      ],
+      "confidence_notes": "Six sequential-stick gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and the D-shaped closed rim without display or shift lights were directly observed. The drive deliberately fills the existing wheel-light and open-top gaps. Automatic cut remains unknown because AC exposes no engine torque.",
+      "control_notes": [
+        "This drive joins the existing Maserati MC12 GT1 record and preserves its manufacturer-sourced real sequential actuation.",
+        "AC accepts a coast downshift without a manual blip, unlike the curated real-car guidance and AMS2 behavior.",
+        "The official Kunos cockpit directly establishes a closed D-shaped rim without integrated display or shift lights for this fingerprinted implementation; review deliberately accepts the two previously unknown wheel fields."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.maserati-mc12-gt1.20260822t163346408z-b2a0e052 by Jason Kinslow. The fingerprinted official Kunos implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed D-shaped rim without integrated display or shift lights. AC supplied no engine torque, so automatic cut is not established."
+    },
+    {
+      "record_id": "mclaren-f1-gtr-1996",
+      "bundle": "build/staged-20260822/ac.mclaren-f1-gtr.20260822t164053064z-b85b3abb.staged.json",
+      "create_new_record": {
+        "staged_record_id": "mclaren-f1-gtr",
+        "basis": "AC reports the generic title McLaren F1 GTR, but Kunos's installed description and specifications identify the 1996 short-tail evolution. McLaren independently distinguishes the 1996 car from the 1997 Longtail whose new sequential gearbox defines the existing record. A separate year-specific record prevents the generic simulator title from merging two materially different real cars."
+      },
+      "display_name": "McLaren F1 GTR 1996",
+      "manufacturer": "McLaren",
+      "model": "F1 GTR",
+      "variant": "1996 short-tail",
+      "year": {
+        "from": 1996,
+        "to": 1996,
+        "label": "1996 short-tail"
+      },
+      "class": "GT1",
+      "real_world_identity_notes": "The 1996 short-tail evolution of the McLaren F1 GTR. It retained and strengthened the earlier H-pattern manual gearbox; the six-speed sequential belongs to the separately curated 1997 Longtail.",
+      "real_world_source_refs": [
+        "assetto-corsa.dream-pack-1.f1-gtr-c9",
+        "mclaren.longtail-history",
+        "evo.f1-gtr-generations-2025"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The official Dream Pack package, exact ks_mclaren_f1_gtr content id, and Kunos's installed 1996-specific description establish the intended implementation. McLaren distinguishes the 1996 evolution from the sequential 1997 Longtail, and evo explicitly identifies the 1995/96 cars as H-pattern manuals. Construction and real-car clutch/lift/blip technique remain unknown rather than being inferred from the simulator.",
+      "identity_basis": "Kunos's installed metadata describes the 1996 bodywork, magnesium gearbox housing, 1010 kg weight and straight-line comparison with the 1997 Longtail. McLaren says the 1997 car replaced the road-car gearbox with a six-speed sequential, while specialist generational testing identifies 1995/96 as H-pattern. These facts exclude the existing 1997 sequential record.",
+      "specification_basis": "McLaren establishes that the sequential gearbox arrived for 1997; evo specifies an H-pattern manual for 1995 and 1996. The guided drive selected six H-pattern gears. No reviewed source establishes synchromesh versus dog engagement, the exact H gate, or real driver technique, so those authentic fields stay unknown and the measured AC technique is carried only as simulator overrides.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "gearbox_type": "unknown",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The fingerprinted AC implementation stalled or refused move-off without physical clutch input.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided move-off test with automatic clutch disabled."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted AC implementation accepted the running upshift without physical clutch after the driver lifted.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage upshift test."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The fingerprinted AC implementation refused the full-throttle upshift and accepted it after the driver lifted.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage upshift test."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The fingerprinted AC implementation refused the full-throttle upshift rather than cutting for the driver.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided full-throttle upshift test."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The fingerprinted AC implementation accepted the running downshift without physical clutch after the driver blipped.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage downshift test."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The fingerprinted AC implementation refused the coast downshift and accepted it after the driver's throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided two-stage downshift test."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The fingerprinted AC implementation supplied no automatic throttle blip.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided throttle observation during the downshift test."
+          }
+        }
+      ],
+      "confidence_notes": "The official Kunos implementation was fingerprinted and is identified as the 1996 short-tail rather than the 1997 sequential Longtail. Six H-pattern gears and the round closed wheel without display or shift lights were directly observed. Real-car construction and technique are intentionally unknown; AC-specific start clutch, lift and blip requirements are explicit overrides.",
+      "control_notes": [
+        "The 1996 F1 GTR used a six-speed H-pattern manual. Its construction, exact gate, and real clutch/lift/blip technique are not established by the reviewed sources.",
+        "The fingerprinted AC implementation requires the clutch to move off, rejects a full-throttle upshift until the driver lifts, and rejects a coast downshift until the driver blips.",
+        "This is not the 1997 Longtail. McLaren states that the six-speed sequential gearbox arrived with that later car."
+      ],
+      "driver_summary": "1996 six-speed H-pattern car, not the 1997 sequential Longtail. AC requires the clutch to launch, a lift to upshift, and a manual blip to downshift; the real car's detailed technique is not yet sourced.",
+      "record_notes": [
+        "The generic AC title would collide with the existing 1997 record, but Kunos's own metadata describes the 1996 short-tail specification. Identity is resolved before behavior, so the H-pattern drive creates a separate real-car record rather than being recorded as a contradiction on the Longtail.",
+        "The official AC cockpit is the current evidence for the round continuous rim without integrated display or shift lights; no reviewed real-car source independently specifies those wheel-electronics fields."
+      ],
+      "archetype": {
+        "classification": "no-archetype",
+        "basis": "The real car is established only as a six-speed H-pattern manual. Gearbox construction, exact gate, and real clutch/lift/blip technique remain unknown, so assigning a technique archetype would turn gaps into claims."
+      },
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.mclaren-f1-gtr.20260822t164053064z-b85b3abb by Jason Kinslow. The fingerprinted official Kunos 1996 short-tail implementation exposed six H-pattern gears, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round closed rim without integrated display or shift lights. These technique results describe the implementation, not the still-unsourced real-car technique."
+    },
+    {
+      "record_id": "sauber-mercedes-c9",
+      "bundle": "build/staged-20260822/ac.mercedes-benz-c9-1989-lm.20260822t164524343z-ee957d51.staged.json",
+      "manufacturer": "Sauber",
+      "model": "Mercedes C9",
+      "year": {
+        "from": 1989,
+        "to": 1989,
+        "label": "1989 Le Mans"
+      },
+      "class": "Group C",
+      "real_world_identity_notes": "Sauber-Mercedes C9 in its 1989 Le Mans low-drag configuration. Mercedes-Benz records the works cars' Le Mans first, second and fifth places that year.",
+      "real_world_source_refs": [
+        "assetto-corsa.dream-pack-1.f1-gtr-c9",
+        "mercedes-benz.c9-le-mans-1989"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Kunos's official Dream Pack, exact ks_mercedes_c9 content id and installed Mercedes-Benz C9 1989 LM title establish the implementation. Mercedes-Benz independently identifies the real 1989 Sauber-Mercedes C9 Le Mans cars. The drive directly established five H-pattern gears, clutch-required move-off, required lift and manual blip, no automatic cut/blip, and cockpit wheel details.",
+      "identity_basis": "The official Kunos package calls the implementation Mercedes-Benz C9 1989 LM, while Mercedes-Benz calls the real car Sauber-Mercedes C9 and documents its 1989 Le Mans campaign. This is a naming redirect onto the existing real-car record, not a second car.",
+      "specification_basis": "The AC drive agrees with the existing record's five H-pattern gears and measured technique. Neither Mercedes-Benz nor Kunos's listing establishes the real gearbox construction or gate, so construction remains unknown and the existing cockpit-observed dogleg claim is not upgraded by this drive.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "14923034",
+        "basis": "The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation."
+      },
+      "control_overrides": {
+        "shift_pattern": "dogleg-h"
+      },
+      "confidence_notes": "Five H-pattern gears, clutch-required move-off, required lift, required manual blip, no automatic cut or blip, and a round closed rim without display or shift lights were directly observed. AC's drive did not establish the gate, and no reviewed source establishes gearbox construction, so those gaps remain explicit.",
+      "control_notes": [
+        "This drive maps Kunos's Mercedes-Benz naming onto the existing Sauber Mercedes C9 real-car record.",
+        "The fingerprinted AC implementation agrees with AMS2 on the five-speed H-pattern technique: clutch to launch, lift to upshift, and blip to downshift.",
+        "The AC drive did not establish the gate. The existing dogleg is retained from the curated record without claiming independent AC confirmation."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.mercedes-benz-c9-1989-lm.20260822t164524343z-ee957d51 by Jason Kinslow. The fingerprinted official Kunos implementation exposed five H-pattern gears, clutch-required move-off, clutchless running-shift acceptance, required lift, required manual blip, no automatic cut or blip, and a round closed rim without integrated display or shift lights. The cockpit gate was not established."
+    }
+  ]
+}
