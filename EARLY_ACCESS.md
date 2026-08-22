@@ -11,7 +11,7 @@ data.
 - Windows with SimHub 9.11.22;
 - Automobilista 2 executable version 1.6.9.91;
 - As Driven SimHub client 0.17.0;
-- As Driven dataset 0.4.4 and schema v1.
+- As Driven dataset 0.4.5 and schema v1.
 
 Newer SimHub or AMS2 versions may work, but have not been certified for this
 release. The overlay always displays the exact game version associated with a
@@ -29,7 +29,7 @@ that behavior was reverified after a game update.
 - independent, checksummed database updates with backup and rollback;
 - a SimHub installer that preserves customized overlay positions by default.
 
-The database currently contains 242 curated car records. All carry AMS2 entries;
+The database currently contains 243 curated car records. All carry AMS2 entries;
 three also carry reviewed Assetto Corsa EVO development entries. This release is
 certified only for the AMS2 target above. Unsupported cars and simulators are
 deliberately shown as unmatched instead of receiving guessed controls. The

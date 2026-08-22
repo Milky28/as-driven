@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.5",
+  "approved_at": "2026-08-21",
+  "record_id": "porsche-718-cayman-gt4-clubsport",
+  "simulator": "ac-evo",
+  "telemetry_name": "Porsche 718 Cayman GT4 Clubsport",
+  "observed_game_version": "0.8.1",
+  "observed_through": "SimHub guided verification observation ac-evo.porsche-718-cayman-gt4-clubsport.20260821t203010354z-df5300c8",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "First record curated from Assetto Corsa EVO rather than merged into an existing one. Clutch-free move-off, six paddle gears, clutchless upshifts at sustained full throttle, clutchless downshifts on a closed throttle with an automatic blip, and a GT rim with no display and no shift lights were directly observed. The upshift needing no lift and the downshift needing no blip come from the drive's two-stage tests rather than being assumed. The automatic cut is not established and cannot be by this method: Assetto Corsa EVO publishes no engine torque to SimHub and the cut is ignition-side.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive."
+}

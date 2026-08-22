@@ -6,7 +6,8 @@ sim-independence the schema claims rather than a test of mod identity at the sam
 time. Roster comparison is against AC EVO 0.8 and the AMS2-curated records.
 
 The client recognises SimHub's game name `AssettoCorsaEvo` and canonicalises it
-to `ac-evo`. Three existing real-car records now carry reviewed AC EVO entries,
+to `ac-evo`. Three existing real-car records now carry reviewed AC EVO entries and
+one car is curated from AC EVO alone,
 so the client recognizes those exact identities while every other AC EVO car
 still fails closed and is recorded in the local diagnostics log. AC EVO remains
 development coverage rather than part of the certified early-access target. See
@@ -15,15 +16,15 @@ drafts live.
 
 ## Overlaps worth driving
 
-Every one of these already has a curated AMS2 record with `gearbox_type`
-established, so a drive contributes a second `simulators[]` entry rather than a
-new car.
+Every one of these already has a curated AMS2 record, so a drive contributes a
+second `simulators[]` entry rather than a new car. The Porsche was listed here
+and does not belong: the two games model different generations, and it is in the
+traps table below.
 
 | AC EVO car | Record | Status |
 | --- | --- | --- |
 | Lamborghini Huracán Super Trofeo EVO2 | `lamborghini-huracan-super-trofeo-evo2` | Reviewed and promoted |
 | Audi R8 LMS GT3 Evo II | `audi-r8-lms-gt3-evo-ii` | Reviewed and promoted |
-| Porsche 718 Cayman GT4 Clubsport MR | `porsche-cayman-gt4-clubsport-mr` | Next exact overlap if the MR variant is selected |
 | Caterham Seven Academy Racer | `caterham-academy` | Reviewed and promoted for the 2014–2025 five-speed specification |
 
 Kunos's current official roster lists all four families. The 0.3 release
@@ -40,11 +41,19 @@ EVO entry belongs to the same 2014–2025 five-speed package, not to the six-spe
 formula introduced for 2026. The Audi became the first second-simulator drive to
 derive its own throttle-lift and manual-blip technique from the two-stage tests.
 
-**Next: Porsche 718 Cayman GT4 Clubsport MR.** Its AMS2 entry carries a
-standing-start clutch override, and an override belongs only to the simulator
-that established it. The AC EVO drive must start from the real PDK controls and
-record its own behavior rather than inheriting AMS2's difference. Confirm that
-the selected AC EVO car is specifically the MR variant before merging it.
+The Porsche was expected to be the fourth merge and became the first new record
+instead. Its AMS2 entry carried a standing-start clutch override, which is why it
+looked interesting; what it actually exposed was that AMS2 models the 2016
+Clubsport of the 981 generation while AC EVO models the 2019 718 of the 982.
+`porsche-718-cayman-gt4-clubsport` is that later car, curated from AC EVO alone.
+
+**Next: no exact overlap remains.** Further AC EVO drives are either new records
+or belong to the traps below, so the ranking that governed the first four -
+whichever tests the pipeline most cleanly - has done its work. Rank what comes
+next by which curated claim is weakest instead: a second entry on an
+already-curated car shows a driver nothing new, and its whole value is
+falsification. Medium-confidence automatic-cut observations and values resting on
+a single drive with no real-world source are the ones worth aiming at.
 
 ## Name matches to avoid
 
@@ -61,12 +70,27 @@ not a second entry on this one.
 | BMW M4 GT3 EVO | the M4 GT3 record | AC EVO has the EVO; the record is the original |
 | 911 GT3 Cup (992) | the Cup 4.0 record | Different generations: 992 against 991.2 |
 | Audi R8 LMS GT4 Evo | the earlier GT4 record | AC EVO has the Evo; the record is the earlier car |
+| 718 Cayman GT4 Clubsport | `porsche-cayman-gt4-clubsport-mr` | AC EVO has the 2019 718 of the 982 generation; that record is the 2016 Clubsport of the 981 |
 
 The first two carry a specific hazard. Both records had their gearbox
 construction established from **Group A homologation forms**, which describe the
 racing specification. That evidence does not transfer to the road cars AC EVO
 models, and a merge would silently attach it to them. The general rule is in
 `docs/data-model.md` under "A shared name is not a shared car".
+
+The Porsche is the one that got as far as a promotion attempt, and it is the most
+useful entry in this table because nobody predicted it. Both games call the car a
+Cayman GT4 Clubsport MR and both are right; the generations differ, and the
+telemetry said so in the one token nobody read - AMS2 omits the "718" that marks
+the 982. The merge refused on a steering-rim disagreement, which turned out to be
+a symptom rather than the fault: a 981 cockpit and a 982 cockpit, correctly
+modelled by each game. Chasing the rim found the wrong car underneath, and the
+spreadsheet author's own correction of his year confirmed it.
+
+Two things follow for anything driven from here. A near-match in a name is worth
+reading character by character, because the token that differs is often the
+generation. And a cockpit disagreement between two games is worth taking
+seriously as evidence about identity, not just about a rim.
 
 ## Open
 

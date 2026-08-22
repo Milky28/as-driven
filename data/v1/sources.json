@@ -5641,6 +5641,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Primary supplier specification for the common LMDh transmission: seven-speed sequential, pneumatic integrated-valve gear actuation, and an integrated Bosch motor-generator driving through the gearbox. Hardware architecture alone does not prove AMS2 cut or blip behavior."
+    },
+    {
+      "source_id": "ac-evo.local-live-porsche-718-cayman-gt4-clubsport-controls.0.8.1",
+      "title": "Live AC-EVO Porsche 718 Cayman GT4 Clubsport guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-4-out-now/",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-21",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.porsche-718-cayman-gt4-clubsport.20260821t203010354z-df5300c8 by Jason Kinslow; AC-EVO 0.8.1. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

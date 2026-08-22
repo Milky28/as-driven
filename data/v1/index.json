@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.4",
+  "dataset_version": "0.4.5",
   "released_at": "2026-08-21",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -199,6 +199,7 @@
     "cars/passat-classic-b.json",
     "cars/passat-classic-fl.json",
     "cars/passat-hot-cars.json",
+    "cars/porsche-718-cayman-gt4-clubsport.json",
     "cars/porsche-911-gt1-98.json",
     "cars/porsche-911-gt3-cup-3-8.json",
     "cars/porsche-911-gt3-cup-4-0.json",

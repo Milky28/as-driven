@@ -1,0 +1,163 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "porsche-718-cayman-gt4-clubsport",
+  "identity": {
+    "display_name": "Porsche 718 Cayman GT4 Clubsport",
+    "manufacturer": "Porsche",
+    "model": "718 Cayman GT4 Clubsport MR",
+    "year": {
+      "from": 2019,
+      "label": "2019 718 Clubsport with the Manthey MR kit"
+    },
+    "class": "GT4",
+    "real_world_identity_notes": "Customer racing 718 Cayman GT4 Clubsport of the 982 generation, with the Manthey Racing MR kit, which Assetto Corsa EVO selects as the \"GT4 Clubsport MR\" variant and dates 2019. Distinct from the 2016 Clubsport of the 981 generation that AMS2 models and that `porsche-cayman-gt4-clubsport-mr` describes: the two share a nameplate and a six-speed PDK, and differ in the cockpit, which is how the confusion between them was found.\n\nThe record id follows the name Assetto Corsa EVO reports, which omits the MR the variant line carries. Assetto Corsa EVO ships one Cayman GT4 Clubsport with two liveries rather than a base car and an MR, so the telemetry name is unambiguous today; a base 982 Clubsport appearing later would need its own record and a note here."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dual-clutch",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "gt-formula",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
+      "The gearbox construction comes from Porsche's material for this generation rather than from the drive. A guided drive establishes the gate and the technique; the construction behind paddles is not observable, and reading one from the other is a mistake this dataset makes explicitly once and then does not repeat."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac-evo",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 718 Cayman GT4 Clubsport"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC-EVO 0.8.1 via guided verification observation ac-evo.porsche-718-cayman-gt4-clubsport.20260821t203010354z-df5300c8 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "0.8.1",
+      "verified_at": "2026-08-21",
+      "source_refs": [
+        "porsche.718-cayman-gt4-clubsport.world-premiere",
+        "manthey.718-gt4-clubsport-mr.kit",
+        "ac-evo.local-live-porsche-718-cayman-gt4-clubsport-controls.0.8.1"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Controls directly observed in a guided Assetto Corsa EVO drive with automatic clutch and shifting disabled, and the real-world specification is established by Porsche's launch material for this generation."
+      }
+    }
+  ],
+  "archetype": {
+    "archetype_id": "paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "Six forward gears where the archetype has seven. Porsche specifies a six-speed dual-clutch PDK for this car, so the construction is the archetype's and only the count differs. No six-speed dual-clutch archetype is registered; the 2016 Clubsport this car descends from sits in the same position, and a second member may be reason enough to register one."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/automatic_cut",
+        "basis": "Whether the car cuts torque for an upshift is not established and cannot be by a drive in this simulator. The test reads engine torque, because the cut is ignition-side and leaves the throttle channel untouched, and Assetto Corsa EVO publishes no torque to SimHub. A drive in a simulator that does publish it would settle it, as would Porsche material describing the shift."
+      }
+    ]
+  },
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "porsche.718-cayman-gt4-clubsport.world-premiere",
+          "manthey.718-gt4-clubsport-mr.kit",
+          "ac-evo.local-live-porsche-718-cayman-gt4-clubsport-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Porsche's 718 Clubsport launch material and Manthey's 982 MR kit page, with the exact telemetry identity observed live and the variant and model year read from the simulator's own vehicle-selection panel."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "porsche.718-cayman-gt4-clubsport.world-premiere",
+          "manthey.718-gt4-clubsport-mr.kit",
+          "ac-evo.local-live-porsche-718-cayman-gt4-clubsport-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Porsche specifies a six-speed dual-clutch PDK for the 718 Clubsport, and the guided drive counted six paddle-selected gears."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac-evo.local-live-porsche-718-cayman-gt4-clubsport-controls.0.8.1"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "porsche.718-cayman-gt4-clubsport.world-premiere",
+          "manthey.718-gt4-clubsport-mr.kit"
+        ],
+        "confidence": "verified",
+        "basis": "Porsche's launch material for the 718 Cayman GT4 Clubsport specifies a six-speed dual-clutch PDK, and Manthey's MR kit page for the 982 describes an aerodynamic and suspension package. The guided drive cannot establish this: it sees how a driver asks for a gear, not how the gearbox is built. Falsified by 982 material specifying a different transmission, or by evidence that the MR kit replaces it."
+      }
+    ]
+  },
+  "updated_at": "2026-08-21"
+}

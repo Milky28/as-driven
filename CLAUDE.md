@@ -167,7 +167,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.17.0.
-- Dataset: 0.4.4 with 242 curated records.
+- Dataset: 0.4.5 with 243 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
   decision; the guided queue is empty. The inventory only holds cars that have
