@@ -365,6 +365,95 @@ class PromoteObservationTests(unittest.TestCase):
             self.assertEqual(approval["staged_record_id"], "acl-gtr-some-mod-car")
             self.assertEqual(validate_repository(temp), [])
 
+    def test_a_reviewers_own_source_note_does_not_erase_the_fingerprint(self) -> None:
+        """The one record of which package was driven, lost to a better sentence.
+
+        A reviewer replacing the staged source note replaced all of it, including
+        the implementation fingerprint - so the preservation guarantee failed
+        exactly when someone took the trouble to write good prose.
+        """
+        observation = _observation()
+        observation["simulator"] = "ac"
+        observation["observation_id"] = "ac.acl-gtr-thing.20260822t120000000z-abcd1234"
+        observation["identity"]["telemetry_name"] = "ACL GTR Some Mod Car"
+        observation["implementation"] = {
+            "content_id": "acl_gtr_some_mod_car",
+            "fingerprint": {
+                "scope": "data-acd", "algorithm": "sha256", "digest": "b" * 64,
+            },
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            bundle = import_observation(observation, imported_at="2026-08-22")
+            (temp / "build" / "mod.json").write_text(
+                json.dumps(bundle, indent=2), encoding="utf-8"
+            )
+            entry = dict(
+                _review_entry(),
+                record_id="acl-gtr-some-mod-car",
+                bundle="build/mod.json",
+                live_source_notes="A carefully written note about the drive.",
+            )
+            self._promote(temp, self._manifest(entry))
+            sources = json.loads(
+                (temp / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+            )["sources"]
+            live = next(s for s in sources if s["source_id"].startswith("ac.local-live-"))
+            self.assertIn("A carefully written note", live["notes"])
+            self.assertIn("b" * 64, live["notes"])
+
+    def test_a_destination_id_is_a_name_before_it_is_a_path(self) -> None:
+        """A typo must not address a path, and must fail before anything is written."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._creation_bundle(temp)
+            entry = dict(
+                _review_entry(),
+                record_id="../../escaped",
+                bundle="build/mod.json",
+                create_new_record={
+                    "staged_record_id": "acl-gtr-some-mod-car",
+                    "basis": "Identity research establishes the represented real car.",
+                },
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("not a valid id", str(caught.exception))
+            self.assertFalse((temp / "data" / "v1" / "escaped.json").exists())
+            self.assertFalse((temp / "data" / "escaped.json").exists())
+
+    def test_a_creation_block_is_refused_where_nothing_is_created(self) -> None:
+        """Unused, it was never checked - so a stale one could say anything.
+
+        Two paths reached the filesystem without validating it: naming the id the
+        bundle already derived, and naming a record that exists, which is a merge.
+        A merge also wrongly recorded a staged id, implying a rename that never
+        happened.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._creation_bundle(temp)
+            creation = {"staged_record_id": "nonsense", "basis": "unchecked"}
+
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(dict(
+                    _review_entry(),
+                    record_id="acl-gtr-some-mod-car",
+                    bundle="build/mod.json",
+                    create_new_record=creation,
+                )))
+            self.assertIn("already derived", str(caught.exception))
+
+            self._promote(temp, self._manifest(_review_entry()))
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(dict(
+                    _review_entry(),
+                    record_id="test-prototype",
+                    bundle="build/mod.json",
+                    create_new_record=creation,
+                )))
+            self.assertIn("already exists", str(caught.exception))
+
     def test_a_less_informed_drive_does_not_block_or_overwrite(self) -> None:
         """The second drive knowing less is not a disagreement.
 
