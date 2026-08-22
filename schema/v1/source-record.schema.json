@@ -4,10 +4,17 @@
   "title": "As Driven source registry",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "sources"],
+  "required": [
+    "schema_version",
+    "sources"
+  ],
   "properties": {
-    "$schema": { "type": "string" },
-    "schema_version": { "const": "1.0.0" },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
     "sources": {
       "type": "array",
       "items": {
@@ -24,12 +31,32 @@
           "notes"
         ],
         "properties": {
-          "source_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
-          "title": { "type": "string", "minLength": 1 },
-          "publisher": { "type": "string", "minLength": 1 },
-          "author": { "type": "string" },
-          "url": { "type": "string", "format": "uri" },
-          "archive_url": { "type": ["string", "null"], "format": "uri" },
+          "source_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1
+          },
+          "author": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "archive_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
           "source_type": {
             "type": "string",
             "enum": [
@@ -42,13 +69,84 @@
               "other"
             ]
           },
-          "published_or_updated_at": { "type": ["string", "null"], "format": "date" },
-          "retrieved_at": { "type": "string", "format": "date" },
+          "published_or_updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date"
+          },
           "reuse_status": {
             "type": "string",
-            "enum": ["permitted", "facts-only-review", "permission-required", "unknown"]
+            "enum": [
+              "permitted",
+              "facts-only-review",
+              "permission-required",
+              "unknown"
+            ]
           },
-          "notes": { "type": "string" }
+          "notes": {
+            "type": "string"
+          },
+          "implementation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "content_id",
+              "fingerprint"
+            ],
+            "description": "For a live-observation source, which installed copy of the car was driven. A simulator with a mod ecosystem reports the name an author chose, so the source records the package as well as the drive. It identifies the package only: which real car the package depicts is the record's identity claim, and a digest differing from another package's is not evidence that the two behave differently.",
+            "properties": {
+              "content_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "author": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "declared_version": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "fingerprint": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "scope",
+                  "algorithm",
+                  "digest"
+                ],
+                "properties": {
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "data-acd",
+                      "loose-data-directory"
+                    ]
+                  },
+                  "algorithm": {
+                    "type": "string",
+                    "enum": [
+                      "sha256"
+                    ]
+                  },
+                  "digest": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

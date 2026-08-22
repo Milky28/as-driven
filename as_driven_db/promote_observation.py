@@ -188,13 +188,11 @@ def build_promoted_record(
 
     source["url"] = _required(entry, "live_source_url", label)
     if entry.get("live_source_notes"):
-        # The reviewer writes the prose; the implementation fingerprint is not
-        # prose. It is the only record of which installed package this drive came
-        # from, and replacing the note wholesale silently dropped it - worst
-        # exactly when a reviewer took the trouble to write a good one.
-        source["notes"] = _keep_implementation_note(
-            entry["live_source_notes"], source.get("notes", "")
-        )
+        # Safe to replace outright: the implementation fingerprint is a field on
+        # the source, not a sentence in this note. It used to be rescued from the
+        # prose, which failed the moment a reviewer wrote the marker phrase
+        # without the digest.
+        source["notes"] = entry["live_source_notes"]
 
     for name, payload in (("record", record), ("approval", approval), ("source", source)):
         if _contains_review_marker(payload):
@@ -331,20 +329,6 @@ def _sort_one(
         fills[pointer] = there
 
 
-IMPLEMENTATION_MARKER = "Driven implementation:"
-
-
-def _keep_implementation_note(reviewed: str, staged: str) -> str:
-    """Let a reviewer rewrite the source note without losing the fingerprint."""
-    reviewed = reviewed.strip()
-    if IMPLEMENTATION_MARKER in reviewed:
-        return reviewed
-    at = staged.find(IMPLEMENTATION_MARKER)
-    if at < 0:
-        return reviewed
-    return (reviewed + " " + staged[at:].strip()).strip()
-
-
 def _require_deliberate_creation(
     entry: dict[str, Any], derived_id: str, target_id: str
 ) -> None:
@@ -363,8 +347,9 @@ def _require_deliberate_creation(
     difference between a considered rename and a typo, which is the only reason
     this path is guarded at all.
     """
+    has_creation = "create_new_record" in entry
     creation = entry.get("create_new_record")
-    if not isinstance(creation, dict):
+    if not isinstance(creation, dict) or not creation:
         raise ValueError(
             f"review entry {target_id!r}: the bundle is for {derived_id!r} and no curated "
             f"record {target_id!r} exists to merge into. To add this drive to a car "
@@ -411,9 +396,10 @@ def _redirect_to_existing_record(
     """
     derived_id = bundle["record"]["record_id"]
     target_id = entry.get("record_id")
+    has_creation = "create_new_record" in entry
     creation = entry.get("create_new_record")
     if not target_id or target_id == derived_id:
-        if creation:
+        if has_creation:
             raise ValueError(
                 f"review entry {derived_id!r}: create_new_record is set but the entry "
                 "names the id the bundle already derived, so nothing is being renamed. "
@@ -429,7 +415,7 @@ def _redirect_to_existing_record(
             "words joined by '-', '_' or '.', which is what every curated record uses."
         )
     if (data_directory / "cars" / f"{target_id}.json").exists():
-        if creation:
+        if has_creation:
             raise ValueError(
                 f"review entry {target_id!r}: create_new_record is set but a curated "
                 f"record {target_id!r} already exists, so this drive joins it rather than "
@@ -444,7 +430,7 @@ def _redirect_to_existing_record(
         # Keep what it was renamed from, in the approval that authorised it.
         # Only where this promotion creates the record: a merge onto an existing
         # car is not a rename, and that record's own id is already the audited one.
-        if creation:
+        if has_creation:
             bundle["approval"]["staged_record_id"] = derived_id
     return bundle
 

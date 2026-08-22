@@ -371,6 +371,10 @@ class PromoteObservationTests(unittest.TestCase):
         A reviewer replacing the staged source note replaced all of it, including
         the implementation fingerprint - so the preservation guarantee failed
         exactly when someone took the trouble to write good prose.
+
+        It was first fixed by rescuing the sentence out of the old note, which
+        was defeated by writing the same phrase without a digest. The fingerprint
+        is a field now: prose is prose, and rewriting it cannot reach evidence.
         """
         observation = _observation()
         observation["simulator"] = "ac"
@@ -400,7 +404,34 @@ class PromoteObservationTests(unittest.TestCase):
             )["sources"]
             live = next(s for s in sources if s["source_id"].startswith("ac.local-live-"))
             self.assertIn("A carefully written note", live["notes"])
-            self.assertIn("b" * 64, live["notes"])
+            self.assertEqual(live["implementation"]["fingerprint"]["digest"], "b" * 64)
+            self.assertEqual(live["implementation"]["content_id"], "acl_gtr_some_mod_car")
+            # And the prose the reviewer replaced is genuinely gone, so this is
+            # not passing because the old note happened to survive.
+            self.assertNotIn("b" * 64, live["notes"])
+
+    def test_an_empty_creation_block_is_not_silently_ignored(self) -> None:
+        """Writing it means something; ignoring it means the entry and the
+        reviewer disagree about what this promotion does, which is the whole
+        reason these refusals exist. The checks tested truthiness, and an empty
+        object is falsy."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._creation_bundle(temp)
+            for record_id, expected in (
+                ("acl-gtr-some-mod-car", "already derived"),
+                ("test-prototype", "already exists"),
+            ):
+                if record_id == "test-prototype":
+                    self._promote(temp, self._manifest(_review_entry()))
+                with self.assertRaises(ValueError) as caught:
+                    self._promote(temp, self._manifest(dict(
+                        _review_entry(),
+                        record_id=record_id,
+                        bundle="build/mod.json",
+                        create_new_record={},
+                    )))
+                self.assertIn(expected, str(caught.exception))
 
     def test_a_destination_id_is_a_name_before_it_is_a_path(self) -> None:
         """A typo must not address a path, and must fail before anything is written."""

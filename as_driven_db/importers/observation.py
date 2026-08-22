@@ -501,6 +501,16 @@ def import_observation(
             + _implementation_note(observation.get("implementation"))
         ),
     }
+    if observation.get("implementation"):
+        # Structured, not prose. A reviewer rewriting the note cannot lose it,
+        # and the implementation registry can read it without parsing English.
+        declared = observation["implementation"]
+        source["implementation"] = {
+            "content_id": declared["content_id"],
+            "author": declared.get("author"),
+            "declared_version": declared.get("declared_version"),
+            "fingerprint": dict(declared["fingerprint"]),
+        }
 
     approval = {
         "schema_version": "1.0.0",
