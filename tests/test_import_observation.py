@@ -3,8 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 import unittest
 
+import json
+
 from as_driven_db.importers.observation import import_observation
+from as_driven_db.schema_validation import validate_instance
 from as_driven_db.validate import _validate_car_approval
+
+ROOT = Path(__file__).parents[1]
 
 
 def _clean_observation() -> dict:
@@ -46,6 +51,47 @@ def _clean_observation() -> dict:
 
 
 class ImportObservationTests(unittest.TestCase):
+    def test_a_driven_implementation_survives_the_import(self) -> None:
+        """A fingerprint is unrecoverable once a drive is over.
+
+        Assetto Corsa reports the name a mod's author chose, and several packages
+        may depict the same real car while shifting differently. Nothing consumes
+        the fingerprint yet - the implementation registry does not exist - so the
+        risk is that it is quietly dropped and cannot be recovered from a promoted
+        record afterwards.
+
+        It also must not be mistaken for identity. The digest says which package
+        was driven; which real car that package depicts is the reviewer's
+        judgement, and it is the claim that goes wrong.
+        """
+        observation = _clean_observation()
+        observation["simulator"] = "ac"
+        observation["observation_id"] = "ac.test-prototype.20260822t120000000z-abcd1234"
+        observation["implementation"] = {
+            "content_id": "ac_legends_gt_911rsr_73",
+            "author": "AC Legends",
+            "declared_version": None,
+            "fingerprint": {
+                "scope": "data-acd",
+                "algorithm": "sha256",
+                "digest": "a" * 64,
+            },
+        }
+        schema = json.loads(
+            (ROOT / "schema" / "v1" / "verification-observation.schema.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual([], validate_instance(observation, schema, "observation"))
+        bundle = import_observation(observation, imported_at="2026-08-22")
+        note = next(
+            (n for n in bundle["review_notes"] if "Driven implementation" in n), None
+        )
+        self.assertIsNotNone(note, "the fingerprint reached no reviewer")
+        self.assertIn("ac_legends_gt_911rsr_73", note)
+        self.assertIn("data-acd", note)
+        self.assertIn("no declared version", note)
+        self.assertIn("not the real car", note)
+
     def test_maps_clean_drive_to_record_and_ids(self) -> None:
         bundle = import_observation(_clean_observation(), imported_at="2026-08-12")
         record = bundle["record"]

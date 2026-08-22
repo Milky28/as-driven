@@ -32,6 +32,8 @@ namespace AsDriven.Core
         public string AutomaticBlip { get; set; }
         public string AutomaticBlipMethod { get; set; }
         public string FullThrottleUpshift { get; set; }
+        /// <summary>Which installed copy was driven; null when it could not be found.</summary>
+        public CarImplementation Implementation { get; set; }
         public string CoastDownshift { get; set; }
         public string[] VisibleShiftActuators { get; set; }
         public string PrimaryShiftActuation { get; set; }
@@ -211,6 +213,24 @@ namespace AsDriven.Core
                 { "cockpit", cockpit },
                 { "review_status", "draft" }
             };
+            if (draft.Implementation != null)
+            {
+                var fingerprint = new JObject
+                {
+                    { "scope", draft.Implementation.Scope },
+                    { "algorithm", "sha256" },
+                    { "digest", draft.Implementation.Digest }
+                };
+                var implementation = new JObject
+                {
+                    { "content_id", draft.Implementation.ContentId },
+                    { "fingerprint", fingerprint }
+                };
+                AddOptional(implementation, "author", draft.Implementation.Author);
+                AddOptional(
+                    implementation, "declared_version", draft.Implementation.DeclaredVersion);
+                payload.Add("implementation", implementation);
+            }
             AddOptional(payload, "client_version", draft.ClientVersion);
             string[] notes = (draft.EvidenceNotes ?? new string[0])
                 .Where(value => !string.IsNullOrWhiteSpace(value))

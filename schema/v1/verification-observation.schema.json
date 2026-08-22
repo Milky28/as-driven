@@ -268,6 +268,9 @@
     },
     "reviewer": {
       "type": "string"
+    },
+    "implementation": {
+      "$ref": "#/$defs/implementation"
     }
   },
   "$defs": {
@@ -298,6 +301,65 @@
         "unavailable",
         "unknown"
       ]
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Which installed copy of a car was driven. A simulator with a mod ecosystem reports a name its author chose, so the name identifies the package no better than the package identifies the real car. This block records the package. It makes no claim about which real car the package depicts: that mapping is a reviewed judgement made elsewhere, and it is the risky one.",
+      "required": [
+        "content_id",
+        "fingerprint"
+      ],
+      "properties": {
+        "content_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The simulator's own folder or content identifier for the car, as it reports it. Stable across reinstalls of the same package."
+        },
+        "author": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "declared_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The version the package declares, when it declares one. Barely half of an installed Assetto Corsa library does, so this is context and never identity."
+        },
+        "fingerprint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope",
+            "algorithm",
+            "digest"
+          ],
+          "description": "Answers one question: is this the exact package that was driven? It cannot answer whether two packages behave the same, because the digest covers everything in its scope rather than the shifting behaviour alone. Two digests differing is not evidence that the controls differ, and two matching is not evidence that they do not - compatibility between revisions is a reviewed claim, never inferred from a hash.\n\nIt is also not portable between installations as reliably as it looks. A package whose data is unpacked locally digests differently from the same package left packed, so a digest that fails to match another driver's is not evidence of a different car.",
+          "properties": {
+            "scope": {
+              "type": "string",
+              "enum": [
+                "data-acd",
+                "loose-data-directory"
+              ],
+              "description": "What was digested. `data-acd` is the packed data file, which is how most Assetto Corsa cars ship and which excludes skins and models while including the gearbox. `loose-data-directory` is a deterministic digest of an unpacked data directory."
+            },
+            "algorithm": {
+              "type": "string",
+              "enum": [
+                "sha256"
+              ]
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      }
     }
   }
 }

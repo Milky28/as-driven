@@ -220,6 +220,28 @@ def import_observation(
 
     clean = _assists_clean(assists)
     review_notes: list[str] = []
+    # The fingerprint says which installed package was driven. Nothing consumes
+    # it yet - the implementation registry does not exist - but it must not be
+    # dropped on the floor, because it cannot be recovered from a promoted record
+    # afterwards. Surfaced to the reviewer until something reads it.
+    implementation = observation.get("implementation")
+    if implementation:
+        fingerprint = implementation.get("fingerprint") or {}
+        review_notes.append(
+            "Driven implementation: content id {id!r}, {scope} digest {digest}{version}. "
+            "It identifies the package, not the real car this record claims to be: that "
+            "mapping is this review's judgement. It is also not evidence that another "
+            "package with a different digest behaves differently.".format(
+                id=implementation.get("content_id"),
+                scope=fingerprint.get("scope"),
+                digest=str(fingerprint.get("digest"))[:12] + "...",
+                version=(
+                    ", declared version %r" % implementation["declared_version"]
+                    if implementation.get("declared_version")
+                    else ", no declared version"
+                ),
+            )
+        )
     if (clean
             and tests.get("coast_downshift") == "no"
             and tests.get("clutchless_downshift") == "yes"

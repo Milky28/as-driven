@@ -375,6 +375,15 @@ namespace AsDriven.Plugin
                     AutomaticBlip = ChoiceValue(_automaticBlip),
                     AutomaticBlipMethod = _automaticBlipMethod.Text,
                     FullThrottleUpshift = _guidedFullThrottleUpshift,
+                    // Only Assetto Corsa so far. Its car names are author-chosen
+                    // and several packages may depict the same real car while
+                    // shifting differently, so a drive that records only the name
+                    // cannot afterwards be attributed to what was driven. Null
+                    // when the installation is not where this looks, which is an
+                    // ordinary outcome rather than a failure.
+                    Implementation = _capture.Simulator == "ac"
+                        ? CarImplementation.ForAssettoCorsa(_capture.InternalId)
+                        : null,
                     CoastDownshift = _guidedCoastDownshift,
                     VisibleShiftActuators = visible,
                     PrimaryShiftActuation = ChoiceValue(_primaryActuation),
