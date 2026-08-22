@@ -285,6 +285,86 @@ class PromoteObservationTests(unittest.TestCase):
         }
         return merge_simulator_entry(existing, incoming, label="test", **kwargs)
 
+    def _creation_bundle(self, temp: Path) -> dict:
+        """A drive whose derived id names a package rather than a car."""
+        observation = _observation()
+        observation["simulator"] = "ac"
+        observation["observation_id"] = "ac.acl-gtr-thing.20260822t120000000z-abcd1234"
+        observation["identity"]["telemetry_name"] = "ACL GTR Some Mod Car"
+        bundle = import_observation(observation, imported_at="2026-08-22")
+        (temp / "build" / "mod.json").write_text(
+            json.dumps(bundle, indent=2), encoding="utf-8"
+        )
+        return bundle
+
+    def test_a_new_record_under_another_name_must_be_asked_for(self) -> None:
+        """A mod's name is not a car's name, and a typo is not a rename.
+
+        Assetto Corsa reports whatever an author typed, so a bundle derives
+        `acl-gtr-...` from a package by AC Legends. Promoting a real Porsche under
+        that id would put a mod pack's initials permanently into a
+        simulator-independent database - but silently accepting any unknown id
+        would let a typo mint a record naming nothing.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._creation_bundle(temp)
+            entry = dict(
+                _review_entry(),
+                record_id="porsche-911-carrera-rsr-2-8-1973",
+                bundle="build/mod.json",
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("create_new_record", str(caught.exception))
+
+    def test_the_staged_id_is_repeated_back_so_the_bundle_cannot_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._creation_bundle(temp)
+            entry = dict(
+                _review_entry(),
+                record_id="porsche-911-carrera-rsr-2-8-1973",
+                bundle="build/mod.json",
+                create_new_record={
+                    "staged_record_id": "something-else-entirely",
+                    "basis": "Identity research establishes the represented car.",
+                },
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(entry))
+            self.assertIn("derived", str(caught.exception))
+
+    def test_a_rename_needs_a_reason_and_keeps_what_it_was_renamed_from(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._creation_bundle(temp)
+            base = dict(
+                _review_entry(),
+                record_id="porsche-911-carrera-rsr-2-8-1973",
+                bundle="build/mod.json",
+            )
+            with self.assertRaises(ValueError) as caught:
+                self._promote(temp, self._manifest(dict(
+                    base,
+                    create_new_record={"staged_record_id": "acl-gtr-some-mod-car"},
+                )))
+            self.assertIn("basis", str(caught.exception))
+
+            self._promote(temp, self._manifest(dict(
+                base,
+                create_new_record={
+                    "staged_record_id": "acl-gtr-some-mod-car",
+                    "basis": "Identity research establishes the represented real car.",
+                },
+            )))
+            approval = json.loads(
+                (temp / "curation" / "ac-approved-porsche-911-carrera-rsr-2-8-1973.json")
+                .read_text(encoding="utf-8")
+            )
+            self.assertEqual(approval["staged_record_id"], "acl-gtr-some-mod-car")
+            self.assertEqual(validate_repository(temp), [])
+
     def test_a_less_informed_drive_does_not_block_or_overwrite(self) -> None:
         """The second drive knowing less is not a disagreement.
 

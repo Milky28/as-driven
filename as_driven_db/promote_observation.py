@@ -324,6 +324,49 @@ def _sort_one(
         fills[pointer] = there
 
 
+def _require_deliberate_creation(
+    entry: dict[str, Any], derived_id: str, target_id: str
+) -> None:
+    """Allow a new record under a name the bundle did not derive, deliberately.
+
+    A record id names the real car. A bundle derives one by slugging the name the
+    simulator reports, which approximates the car for official content and does
+    not for a mod: the first Assetto Corsa drive here derived
+    `acl-gtr-porsche-911-rsr-1973` from a package by AC Legends, and promoting a
+    real Porsche under that id would put a mod pack's initials permanently into a
+    simulator-independent database.
+
+    So a reviewer may name the real car instead - but must say that is what they
+    are doing, and repeat the staged id back. Repeating it proves they saw the
+    bundle this entry actually points at rather than a stale one, and it is the
+    difference between a considered rename and a typo, which is the only reason
+    this path is guarded at all.
+    """
+    creation = entry.get("create_new_record")
+    if not isinstance(creation, dict):
+        raise ValueError(
+            f"review entry {target_id!r}: the bundle is for {derived_id!r} and no curated "
+            f"record {target_id!r} exists to merge into. To add this drive to a car "
+            "already curated, name that record's id. To promote a new car under a name "
+            "the simulator did not supply - which is the ordinary case for a mod - say so "
+            "with a 'create_new_record' block naming 'staged_record_id' and a 'basis'."
+        )
+    staged = creation.get("staged_record_id")
+    if staged != derived_id:
+        raise ValueError(
+            f"review entry {target_id!r}: create_new_record.staged_record_id is "
+            f"{staged!r} but this bundle derived {derived_id!r}. The staged id is repeated "
+            "back to show which bundle is being renamed; a mismatch means the entry and "
+            "the bundle have drifted apart."
+        )
+    if not str(creation.get("basis") or "").strip():
+        raise ValueError(
+            f"review entry {target_id!r}: create_new_record.basis is required. Renaming a "
+            "record away from what the simulator called the car is an identity claim, and "
+            "it needs a reason recorded beside it."
+        )
+
+
 def _redirect_to_existing_record(
     bundle: dict[str, Any], entry: dict[str, Any], data_directory: Path
 ) -> dict[str, Any]:
@@ -340,25 +383,26 @@ def _redirect_to_existing_record(
     both records are individually valid. So a review entry may name a different
     record id from the bundle's, meaning "this drive belongs to that car".
 
-    It only ever redirects onto a record that already exists. A name that
-    matches nothing is still an error, so a typo cannot quietly mint a record
-    whose id has no relation to what any simulator calls the car.
+    It redirects onto a record that already exists without further ceremony. A
+    name matching nothing is an error unless the entry says, in as many words,
+    that a new record is meant - see `_require_deliberate_creation`. A typo must
+    not quietly mint a record whose id has no relation to any real car.
     """
     derived_id = bundle["record"]["record_id"]
     target_id = entry.get("record_id")
     if not target_id or target_id == derived_id:
         return bundle
     if not (data_directory / "cars" / f"{target_id}.json").exists():
-        raise ValueError(
-            f"review entry {target_id!r}: the bundle is for {derived_id!r} and no curated "
-            f"record {target_id!r} exists to merge into. A review entry may name a "
-            "different record only to add this drive to the car already curated under "
-            "that id; to promote a new car, name the id the bundle derived."
-        )
+        _require_deliberate_creation(entry, derived_id, target_id)
     bundle = json.loads(json.dumps(bundle))
     bundle["record"]["record_id"] = target_id
     if "record_id" in bundle.get("approval", {}):
         bundle["approval"]["record_id"] = target_id
+        # Keep what it was renamed from, in the approval that authorised it.
+        # Only for a new record: a merge onto an existing car is not a rename,
+        # and the existing record's own id is already the audited one.
+        if entry.get("create_new_record"):
+            bundle["approval"]["staged_record_id"] = derived_id
     return bundle
 
 

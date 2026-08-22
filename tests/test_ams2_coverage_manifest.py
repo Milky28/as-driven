@@ -4,13 +4,52 @@ import unittest
 from pathlib import Path
 
 from as_driven_db.validate import expand_identity
-from research.build_ams2_coverage_manifest import build
+from research.build_ams2_coverage_manifest import build, live_observations
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class AMS2CoverageManifestTests(unittest.TestCase):
+    def test_live_observations_exclude_other_simulators(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            log_path = Path(temporary_directory) / "unmatched-identities.jsonl"
+            observations = [
+                {
+                    "observed_at_utc": "2026-08-22T04:26:42Z",
+                    "game_name": "Automobilista2",
+                    "game_version": "1.6.9.91",
+                    "car_model": "Chevrolet Cruze Stock Car 2020",
+                    "car_id": "Chevrolet Cruze Stock Car 2020",
+                    "car_class": "StockCarV8_2020",
+                },
+                {
+                    "observed_at_utc": "2026-08-22T04:37:06Z",
+                    "game_name": "AssettoCorsa",
+                    "game_version": "unknown",
+                    "car_model": "ACL GTR Porsche 911 RSR 1973",
+                    "car_id": "ac_legends_gt_911rsr_73",
+                    "car_class": "",
+                },
+                {
+                    "observed_at_utc": "2026-08-22T04:38:06Z",
+                    "game_name": "AssettoCorsaEVO",
+                    "game_version": "0.4.0",
+                    "car_model": "Another simulator car",
+                    "car_id": "another-simulator-car",
+                    "car_class": "",
+                },
+            ]
+            log_path.write_text(
+                "\n".join(json.dumps(item) for item in observations),
+                encoding="utf-8",
+            )
+
+            live = live_observations(log_path)
+
+        self.assertEqual(set(live), {"Chevrolet Cruze Stock Car 2020"})
+        self.assertEqual(live["Chevrolet Cruze Stock Car 2020"]["telemetry_class"], "StockCarV8_2020")
+
     def test_checked_in_manifest_covers_every_observed_identity_once(self):
         manifest = json.loads(
             (ROOT / "research" / "ams2-coverage-manifest.json").read_text(encoding="utf-8")

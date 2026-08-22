@@ -219,6 +219,11 @@
     },
     "historical_notes": {
       "type": "string"
+    },
+    "staged_record_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The record id the bundle derived from the simulator's own name for the car, when the reviewer promoted it under a different one. A record id names the real car, and a simulator with a mod ecosystem reports whatever an author typed - so a rename is an identity decision, and this keeps what it was renamed from visible in the approval that authorised it."
     }
   },
   "$defs": {

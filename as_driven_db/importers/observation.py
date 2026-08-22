@@ -132,6 +132,41 @@ def _manual_blip(tests: dict[str, Any], automatic_blip: str, clean: bool) -> str
     return "unknown"
 
 
+def _implementation_note(implementation: dict[str, Any] | None) -> str:
+    """Name the installed package a drive was taken from, on the source itself.
+
+    A live-observation source is that drive of that package, so this is where the
+    fingerprint belongs once the bundle's review notes are gone. Without it a
+    promoted record keeps no trace of which copy of a car it was drawn from, which
+    is the whole reason the fingerprint is captured before the drive rather than
+    when mods are supported.
+
+    It identifies the package and nothing else. Which real car the package depicts
+    is the reviewer's judgement, recorded in the record's identity; and a digest
+    that differs from another package's is not evidence that the two behave
+    differently.
+    """
+    if not implementation:
+        return ""
+    fingerprint = implementation.get("fingerprint") or {}
+    author = implementation.get("author")
+    version = implementation.get("declared_version")
+    return (
+        " Driven implementation: content id {id!r}{author}{version}, "
+        "{scope} {algorithm} {digest}. This identifies the installed package, not "
+        "the real car the record describes.".format(
+            id=implementation.get("content_id"),
+            author=f", by {author}" if author else "",
+            version=(
+                f", declared version {version}" if version else ", no declared version"
+            ),
+            scope=fingerprint.get("scope"),
+            algorithm=fingerprint.get("algorithm"),
+            digest=fingerprint.get("digest"),
+        )
+    )
+
+
 def _slug(name: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", name.strip().casefold()).strip("-")
     return slug or "unknown"
@@ -463,6 +498,7 @@ def import_observation(
             f"Guided-verification observation {observation_id} by {observer}; "
             f"{simulator.upper()} {game_version}. Summarize the confirmed move-off, "
             "gear count, cut/blip, and cockpit rim before registering."
+            + _implementation_note(observation.get("implementation"))
         ),
     }
 
