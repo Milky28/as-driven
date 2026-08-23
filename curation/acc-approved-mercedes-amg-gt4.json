@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.19",
+  "approved_at": "2026-08-23",
+  "record_id": "mercedes-amg-gt4",
+  "simulator": "acc",
+  "telemetry_name": "Mercedes AMG GT4 2016",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.mercedes-amg-gt4-2016.20260823t042303819z-65014ec0",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "ACC directly established the exact AMG GT4 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and closed no-display/no-light rim. Automatic cut remains unknown.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT4"
+}

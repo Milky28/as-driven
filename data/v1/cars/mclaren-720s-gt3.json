@@ -90,6 +90,62 @@
         "level": "high",
         "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren 720S GT3 2019"
+        },
+        {
+          "kind": "internal-id",
+          "value": "mclaren_720s_gt3"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.mclaren-720s-gt3-2019.20260823t042748648z-b35369dc by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's 2019 720S GT3 would not pull away without physical clutch input with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "acc.local-live-mclaren-720s-gt3-2019-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "netcarshow.mclaren-720s-gt3",
+        "acc.local-live-mclaren-720s-gt3-2019-controls.21257365"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The registered 2019 source and ACC's exact non-Evo telemetry name, year, GT3 class and stable internal id converge on the same 720S GT3. The guided drive directly established ACC behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -133,6 +189,27 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "netcarshow.mclaren-720s-gt3",
+          "acc.local-live-mclaren-720s-gt3-2019-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "Telemetry name `McLaren 720S GT3 2019`, internal id `mclaren_720s_gt3`, and class `GT3` explicitly identify the original 2019 car and exclude ACC's separately reviewed 2023 Evo."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-mclaren-720s-gt3-2019-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -143,5 +220,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-23"
 }

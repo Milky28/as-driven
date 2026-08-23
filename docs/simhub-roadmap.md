@@ -306,8 +306,9 @@ behavior remained operational after the restart.
 - Show dataset version and changelog before applying an update.
 - Continue the AC EVO and ACC development tracks. ACC was selected next from
   available telemetry, test access, source quality, and shared-car coverage. Its
-  first ranked comparison batch is complete with 12 reviewed entries total;
-  `docs/acc-coverage-plan.md` records the results and next exact-overlap backlog.
+  ranked and exact-overlap comparison batches are complete with 18 reviewed
+  entries total; `docs/acc-coverage-plan.md` records the results and remaining
+  identity questions.
   The existing iRacing importer and AC Rally identifier are foundations, not
   coverage claims.
 - Provide an opt-in unmatched-identifier export; do not upload telemetry by

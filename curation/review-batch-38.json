@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.19",
+  "approved_at": "2026-08-23",
+  "records": [
+    {
+      "record_id": "audi-r8-lms-gt4",
+      "bundle": "build/staged-20260823-2/acc.audi-r8-lms-gt4-2016.20260823t041658395z-7a35f5d3.staged.json",
+      "manufacturer": "Audi",
+      "model": "R8 LMS GT4",
+      "year": { "from": 2018, "to": 2018, "label": "2018 technical specification" },
+      "class": "GT4",
+      "real_world_identity_notes": "Audi specifies the R8 LMS GT4 with a seven-speed dual-clutch S tronic transmission, steering-wheel paddles, and electrohydraulically operated wet multi-plate clutches.",
+      "real_world_source_refs": ["audi.r8-lms-gt4.technical"],
+      "confidence": "verified",
+      "confidence_basis": "Audi establishes the R8 LMS GT4 identity and dual-clutch transmission. ACC reported the exact model and GT4 class with stable internal id `audi_r8_gt4`; the guided drive directly established the simulator behavior and cockpit.",
+      "identity_basis": "ACC reported telemetry name `Audi R8 LMS GT4 2016`, internal id `audi_r8_gt4`, and class `GT4`. The simulator's 2016 label is retained only as an exact telemetry identity; it does not replace the curated 2018 technical-specification year established by Audi.",
+      "specification_basis": "The Audi-sourced seven-speed dual-clutch paddle baseline remains unchanged. ACC agreed on clutch-free move-off and running shifts, no-lift upshift acceptance, automatic blip, and no wheel display, but models a closed rim with no shift lights where AMS2 showed an open top and left the lights unestablished. ACC supplies no usable cut evidence.",
+      "control_overrides": {
+        "wheel_rim": { "shift_lights": "unknown", "open_top": "yes" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "ACC's R8 LMS GT4 cockpit has no shift lights integrated into the modeled rim; the authentic claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "ACC models a closed GT/Formula rim while the previously observed AMS2 cockpit has an open-top rim.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact R8 LMS GT4 identity, clutch-free launch, seven paddles, no-lift shift acceptance, automatic blip, and a closed no-display/no-light rim. Automatic cut remains unknown.",
+      "control_notes": ["The 2016 telemetry suffix is an ACC identity token, not a revision to the real-car year.", "ACC and AMS2 differ on the modeled rim opening; ACC also settles its own shift-light presentation without closing the authentic gap."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.audi-r8-lms-gt4-2016.20260823t041658395z-7a35f5d3 by Jason Kinslow in ACC Steam build 21257365 established the exact identity, seven paddle gears, clutch-free launch and shifts, no-lift acceptance, automatic blip, and a closed no-display/no-light rim."
+    },
+    {
+      "record_id": "bmw-m4-gt4",
+      "bundle": "build/staged-20260823-2/acc.bmw-m4-gt4-2018.20260823t043536735z-31e70273.staged.json",
+      "manufacturer": "BMW",
+      "model": "M4 GT4",
+      "year": { "from": 2018, "label": "2018 customer-racing debut (F82)" },
+      "class": "GT4",
+      "real_world_identity_notes": "Customer GT4 racing car based on the F82 M4 Coupe, sold from 2018. BMW's launch material lists a 2,979 cc six-cylinder in-line M TwinPower turbo engine and a seven-gear dual clutch transmission with motorsport software, carried over from the production car rather than a bespoke racing sequential. That matches the seven forward gears exercised in the drive.",
+      "real_world_source_refs": ["bmw.m4-gt4-f82.sales-launch"],
+      "confidence": "verified",
+      "confidence_basis": "BMW establishes the F82 M4 GT4 and seven-speed dual-clutch transmission. ACC reported the exact 2018 model, GT4 class and stable internal id `bmw_m4_gt4`; the guided drive directly established the simulator behavior and cockpit.",
+      "identity_basis": "Telemetry name `BMW M4 GT4 2018`, internal id `bmw_m4_gt4`, and class `GT4` identify the F82-generation car already curated from BMW evidence and exclude the later G82 M4 GT4 EVO.",
+      "specification_basis": "The BMW-sourced seven-speed dual-clutch paddle baseline remains unchanged. ACC established clutch-free move-off, no-lift clutchless upshift acceptance, automatic blip, and the same closed no-display/no-light rim. Automatic cut remains unknown.",
+      "control_overrides": {
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided maneuver with automatic clutch and shifting disabled." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact F82 identity, seven paddles, clutch-free launch and shifts, no-lift acceptance, automatic blip, and the expected closed GT rim. Automatic cut remains unknown.",
+      "control_notes": ["ACC no-lift acceptance is simulator behavior, not a fill of the authentic throttle-lift gap."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.bmw-m4-gt4-2018.20260823t043536735z-31e70273 by Jason Kinslow in ACC Steam build 21257365 established the exact F82 identity and ACC controls."
+    },
+    {
+      "record_id": "mclaren-570s-gt4",
+      "bundle": "build/staged-20260823-2/acc.mclaren-570s-gt4-2016.20260823t042014376z-29c4d807.staged.json",
+      "manufacturer": "McLaren",
+      "model": "570S GT4",
+      "year": { "from": 2017, "label": "2017 customer-racing debut" },
+      "class": "GT4",
+      "real_world_identity_notes": "Customer GT4 racing car on the McLaren MonoCell II carbon chassis with the 3.8 litre twin-turbo V8. It uses the road car's Oerlikon Graziano seven-speed dual clutch Sequential Shift Gearbox, whose electrically actuated wet clutches pre-select the next gear while one is engaged, matching the seven forward gears seen in the drive.",
+      "real_world_source_refs": ["mclaren.570s-gt4.customer-racing"],
+      "confidence": "verified",
+      "confidence_basis": "McLaren establishes the 570S GT4 and seven-speed dual-clutch transmission. ACC reported the exact model and GT4 class with stable internal id `mclaren_570s_gt4`; the guided drive directly established simulator behavior and cockpit.",
+      "identity_basis": "Telemetry name `McLaren 570s GT4 2016`, internal id `mclaren_570s_gt4`, and class `GT4` identify the sole 570S GT4 generation. The ACC year suffix is preserved in the simulator identity while the curated year records its 2017 customer-racing debut.",
+      "specification_basis": "The McLaren-sourced seven-speed dual-clutch paddle baseline remains unchanged. ACC established clutch-free move-off, no-lift clutchless upshift acceptance, automatic blip and the same closed D-shaped no-display/no-light rim. Automatic cut remains unknown.",
+      "control_overrides": {
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided maneuver with automatic clutch and shifting disabled." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact 570S GT4 identity, seven paddles, clutch-free launch and shifts, no-lift acceptance, automatic blip and the expected D-shaped rim. Automatic cut remains unknown.",
+      "control_notes": ["The 2016 telemetry suffix is retained as ACC's identity label; it does not replace the curated debut year.", "ACC no-lift acceptance remains simulator-scoped."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.mclaren-570s-gt4-2016.20260823t042014376z-29c4d807 by Jason Kinslow in ACC Steam build 21257365 established the exact identity and ACC controls."
+    },
+    {
+      "record_id": "mclaren-720s-gt3",
+      "bundle": "build/staged-20260823-2/acc.mclaren-720s-gt3-2019.20260823t042748648z-b35369dc.staged.json",
+      "manufacturer": "McLaren",
+      "model": "720S GT3",
+      "year": { "label": "2019", "from": 2019 },
+      "class": "GT3",
+      "real_world_identity_notes": "McLaren 720S GT3 of 2019, running a race-prepared version of the McLaren M840T 4.0-litre twin-turbo V8 through a six-speed sequential paddle gearbox with an electronic shift actuator. It is the model that preceded the 720S GT3 Evo, which AMS2 curates separately in its own class.",
+      "real_world_source_refs": ["netcarshow.mclaren-720s-gt3"],
+      "confidence": "high",
+      "confidence_basis": "The registered 2019 source and ACC's exact non-Evo telemetry name, year, GT3 class and stable internal id converge on the same 720S GT3. The guided drive directly established ACC behavior and cockpit.",
+      "identity_basis": "Telemetry name `McLaren 720S GT3 2019`, internal id `mclaren_720s_gt3`, and class `GT3` explicitly identify the original 2019 car and exclude ACC's separately reviewed 2023 Evo.",
+      "specification_basis": "The existing six-speed paddle-sequential baseline remains unchanged. ACC required physical clutch input to pull away, accepted a no-lift clutchless upshift, automatically blipped the coast downshift and matched the closed no-display/no-light rim. The launch difference is simulator-scoped; automatic cut remains unknown.",
+      "control_overrides": { "standing_start_clutch": "not-required" },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's 2019 720S GT3 would not pull away without physical clutch input with automatic clutch and shifting disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact non-Evo 2019 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and the expected closed rim. Automatic cut remains unknown.",
+      "control_notes": ["The non-Evo internal id is decisive and prevents collision with the already reviewed 2023 Evo.", "ACC requires the clutch to pull away; AMS2 and the curated baseline do not."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.mclaren-720s-gt3-2019.20260823t042748648z-b35369dc by Jason Kinslow in ACC Steam build 21257365 established the exact original 2019 identity and ACC controls."
+    },
+    {
+      "record_id": "mercedes-amg-gt3",
+      "bundle": "build/staged-20260823-2/acc.mercedes-amg-gt3-2015.20260823t042452064z-2045406c.staged.json",
+      "manufacturer": "Mercedes-AMG",
+      "model": "GT3",
+      "year": { "from": 2016, "label": "2016 customer-racing debut" },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car built on the AMG GT platform with the naturally aspirated 6.2 litre V8. The manufacturer specifies a sequential six-speed racing gearbox mounted at the rear axle in transaxle configuration.",
+      "real_world_source_refs": ["mercedes-amg.gt3.official"],
+      "confidence": "verified",
+      "confidence_basis": "Mercedes-AMG establishes the original GT3 and six-speed sequential transmission. ACC reported the original model, GT3 class and stable internal id `mercedes_amg_gt3`; the guided drive directly established simulator behavior and cockpit.",
+      "identity_basis": "Telemetry name `Mercedes AMG GT3 2015`, internal id `mercedes_amg_gt3`, and class `GT3` identify the original car first shown in 2015 and exclude ACC's separately reviewed `mercedes_amg_gt3_evo` 2020 update. The curated year records the 2016 customer-racing debut.",
+      "specification_basis": "The Mercedes-AMG-sourced six-speed paddle-sequential baseline remains unchanged. ACC required physical clutch input to pull away, accepted a no-lift clutchless upshift, automatically blipped and matched the closed no-display/no-light rim. Launch and no-lift acceptance are simulator-scoped; automatic cut remains unknown.",
+      "control_overrides": {
+        "standing_start_clutch": "not-required",
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's original AMG GT3 would not pull away without physical clutch input with automatic clutch and shifting disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided full-throttle maneuver." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact original AMG GT3 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and closed no-display/no-light rim. Automatic cut remains unknown.",
+      "control_notes": ["The original internal id excludes the 2020 Evo already reviewed in ACC.", "ACC launch and no-lift answers remain simulator-scoped."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.mercedes-amg-gt3-2015.20260823t042452064z-2045406c by Jason Kinslow in ACC Steam build 21257365 established the exact original AMG GT3 identity and ACC controls."
+    },
+    {
+      "record_id": "mercedes-amg-gt4",
+      "bundle": "build/staged-20260823-2/acc.mercedes-amg-gt4-2016.20260823t042303819z-65014ec0.staged.json",
+      "manufacturer": "Mercedes-AMG",
+      "model": "GT4",
+      "year": { "from": 2018, "label": "2018 customer-racing debut" },
+      "class": "GT4",
+      "real_world_identity_notes": "Customer GT4 racing car on the AMG GT platform with the 4.0 litre V8 biturbo. Unlike the dual-clutch GT4 cars it uses a purpose-built sequential six-speed racing gearbox in transaxle configuration on the rear axle, pneumatically operated through steering wheel paddles.",
+      "real_world_source_refs": ["mercedes-amg.gt4.official"],
+      "confidence": "verified",
+      "confidence_basis": "Mercedes-AMG establishes the GT4 identity and six-speed sequential transmission. ACC reported the exact model and GT4 class with stable internal id `mercedes_amg_gt4`; the guided drive directly established simulator behavior and cockpit.",
+      "identity_basis": "Telemetry name `Mercedes AMG GT4 2016`, internal id `mercedes_amg_gt4`, and class `GT4` identify the AMG GT4 already curated from manufacturer evidence. The ACC suffix is retained as a simulator identity label while the curated year records the 2018 customer-racing debut.",
+      "specification_basis": "The Mercedes-AMG-sourced six-speed paddle-sequential baseline remains unchanged. ACC required physical clutch input to pull away, accepted a no-lift clutchless upshift, automatically blipped and matched the closed no-display/no-light rim. Launch and no-lift acceptance are simulator-scoped; automatic cut remains unknown.",
+      "control_overrides": {
+        "standing_start_clutch": "not-required",
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's AMG GT4 would not pull away without physical clutch input with automatic clutch and shifting disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided full-throttle maneuver." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact AMG GT4 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and closed no-display/no-light rim. Automatic cut remains unknown.",
+      "control_notes": ["The 2016 telemetry suffix is retained as ACC's identity label; it does not replace the curated debut year.", "ACC launch and no-lift answers remain simulator-scoped."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.mercedes-amg-gt4-2016.20260823t042303819z-65014ec0 by Jason Kinslow in ACC Steam build 21257365 established the exact AMG GT4 identity and ACC controls."
+    }
+  ]
+}

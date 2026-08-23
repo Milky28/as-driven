@@ -90,6 +90,62 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren 570s GT4 2016"
+        },
+        {
+          "kind": "internal-id",
+          "value": "mclaren_570s_gt4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.mclaren-570s-gt4-2016.20260823t042014376z-29c4d807 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided maneuver with automatic clutch and shifting disabled."
+          },
+          "source_refs": [
+            "acc.local-live-mclaren-570s-gt4-2016-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "mclaren.570s-gt4.customer-racing",
+        "acc.local-live-mclaren-570s-gt4-2016-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "McLaren establishes the 570S GT4 and seven-speed dual-clutch transmission. ACC reported the exact model and GT4 class with stable internal id `mclaren_570s_gt4`; the guided drive directly established simulator behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -133,6 +189,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "mclaren.570s-gt4.customer-racing",
+          "acc.local-live-mclaren-570s-gt4-2016-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `McLaren 570s GT4 2016`, internal id `mclaren_570s_gt4`, and class `GT4` identify the sole 570S GT4 generation. The ACC year suffix is preserved in the simulator identity while the curated year records its 2017 customer-racing debut."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-mclaren-570s-gt4-2016-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -146,5 +223,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

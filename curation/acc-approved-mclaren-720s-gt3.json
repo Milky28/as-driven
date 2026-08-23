@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.19",
+  "approved_at": "2026-08-23",
+  "record_id": "mclaren-720s-gt3",
+  "simulator": "acc",
+  "telemetry_name": "McLaren 720S GT3 2019",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.mclaren-720s-gt3-2019.20260823t042748648z-b35369dc",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "ACC directly established the exact non-Evo 2019 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and the expected closed rim. Automatic cut remains unknown.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT3"
+}

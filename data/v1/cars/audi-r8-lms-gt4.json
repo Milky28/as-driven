@@ -93,6 +93,74 @@
         "level": "verified",
         "basis": "Exact identity and the complete user-facing control technique were directly checked in AMS2; Audi independently establishes the seven-speed dual-clutch paddle hardware."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Audi R8 LMS GT4 2016"
+        },
+        {
+          "kind": "internal-id",
+          "value": "audi_r8_gt4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.audi-r8-lms-gt4-2016.20260823t041658395z-7a35f5d3 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "ACC's R8 LMS GT4 cockpit has no shift lights integrated into the modeled rim; the authentic claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "ACC models a closed GT/Formula rim while the previously observed AMS2 cockpit has an open-top rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "audi.r8-lms-gt4.technical",
+        "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Audi establishes the R8 LMS GT4 identity and dual-clutch transmission. ACC reported the exact model and GT4 class with stable internal id `audi_r8_gt4`; the guided drive directly established the simulator behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -147,6 +215,27 @@
         ],
         "confidence": "verified",
         "basis": "Direct cockpit inspection showed an open-top GT/Formula rim without an integrated display."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "audi.r8-lms-gt4.technical",
+          "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "ACC reported telemetry name `Audi R8 LMS GT4 2016`, internal id `audi_r8_gt4`, and class `GT4`. The simulator's 2016 label is retained only as an exact telemetry identity; it does not replace the curated 2018 technical-specification year established by Audi."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -158,5 +247,5 @@
     "Simulator behavior and manufacturer hardware evidence agree that no physical clutch pedal action is required for normal use.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

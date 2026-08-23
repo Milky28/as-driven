@@ -89,6 +89,74 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mercedes AMG GT4 2016"
+        },
+        {
+          "kind": "internal-id",
+          "value": "mercedes_amg_gt4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.mercedes-amg-gt4-2016.20260823t042303819z-65014ec0 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's AMG GT4 would not pull away without physical clutch input with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "acc.local-live-mercedes-amg-gt4-2016-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided full-throttle maneuver."
+          },
+          "source_refs": [
+            "acc.local-live-mercedes-amg-gt4-2016-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "mercedes-amg.gt4.official",
+        "acc.local-live-mercedes-amg-gt4-2016-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Mercedes-AMG establishes the GT4 identity and six-speed sequential transmission. ACC reported the exact model and GT4 class with stable internal id `mercedes_amg_gt4`; the guided drive directly established simulator behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -132,6 +200,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "mercedes-amg.gt4.official",
+          "acc.local-live-mercedes-amg-gt4-2016-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `Mercedes AMG GT4 2016`, internal id `mercedes_amg_gt4`, and class `GT4` identify the AMG GT4 already curated from manufacturer evidence. The ACC suffix is retained as a simulator identity label while the curated year records the 2018 customer-racing debut."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-mercedes-amg-gt4-2016-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -148,5 +237,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

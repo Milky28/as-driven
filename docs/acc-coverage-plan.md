@@ -21,9 +21,10 @@ change the identity set described here. The relevant official package lists are 
 The [McLaren 720S GT3 EVO][mclaren-evo] and [Ford Mustang GT3][mustang] arrived
 as separate free updates.
 
-As reviewed through 2026-08-23, 12 exact ACC identities are curated. The ranked
-ten were captured with SimHub 9.12.1 and ACC Steam build 21257365; that is
-development evidence and does not change the certified SimHub 9.11.22 target.
+As reviewed through 2026-08-23, 18 exact ACC identities are curated. The ranked
+ten and six-car exact-overlap follow-up were captured with SimHub 9.12.1 and ACC
+Steam build 21257365; that is development evidence and does not change the
+certified SimHub 9.11.22 target.
 
 | ACC car | Record | Other reviewed simulators | Status |
 | --- | --- | --- | --- |
@@ -39,6 +40,12 @@ development evidence and does not change the certified SimHub 9.11.22 target.
 | Porsche 911 II GT3 R (2019) | `porsche-911-gt3-r` | AMS2 | Reviewed and promoted |
 | McLaren 720S GT3 Evo (2023) | `mclaren-720s-gt3-evo` | AMS2 | Reviewed and promoted |
 | Lamborghini Huracan GT3 Evo2 (2023) | `lamborghini-huracan-gt3-evo2` | AMS2 | Reviewed and promoted |
+| Audi R8 LMS GT4 (2016 telemetry label) | `audi-r8-lms-gt4` | AMS2 | Reviewed and promoted |
+| BMW M4 GT4 (2018) | `bmw-m4-gt4` | AMS2 | Reviewed and promoted |
+| McLaren 570S GT4 (2016 telemetry label) | `mclaren-570s-gt4` | AMS2 | Reviewed and promoted |
+| McLaren 720S GT3 (2019) | `mclaren-720s-gt3` | AMS2 | Reviewed and promoted |
+| Mercedes AMG GT3 (2015 telemetry label) | `mercedes-amg-gt3` | AMS2 | Reviewed and promoted |
+| Mercedes AMG GT4 (2016 telemetry label) | `mercedes-amg-gt4` | AMS2 | Reviewed and promoted |
 
 The Audi is the first record reviewed in four simulators. The Super Trofeo is
 the first ACC drive after it and agrees with the established controls wherever
@@ -89,19 +96,20 @@ by the claim they were chosen to challenge, not by convenience.
 | 9 | McLaren 720S GT3 EVO (2023) | `mclaren-720s-gt3-evo` | A free exact overlap whose established controls are already strong. It is a regression/control drive after the higher-risk entries, and must remain distinct from the 2019 non-Evo 720S. |
 | 10 | Lamborghini Huracan GT3 EVO2 (2023) | `lamborghini-huracan-gt3-evo2` | Compares the GT3 EVO2 with the already-driven Super Trofeo EVO2 on the same platform. The value is proving that the shared manufacturer and EVO2 suffix do not collapse two different race cars. Requires the 2023 GT World Challenge Pack. |
 
-## Exact-overlap backlog after the ranked ten
+## Completed exact-overlap follow-up
 
-These should join existing records, but their current controls are less likely
-to expose a new disagreement than the ranked queue:
+These six lower-risk exact overlaps were driven and promoted after the ranked
+queue. The telemetry suffix remains an exact simulator identity and does not
+silently replace a manufacturer-sourced debut or specification year.
 
-| ACC car | Record | Note |
+| ACC car | Record | Finding |
 | --- | --- | --- |
-| McLaren 720S GT3 (2019) | `mclaren-720s-gt3` | Select the non-Evo car explicitly. |
-| Mercedes-AMG GT3 (original) | `mercedes-amg-gt3` | Keep separate from ACC's year-qualified 2020 car; do not rely on “Evo” appearing in the simulator identity. |
-| Audi R8 LMS GT4 | `audi-r8-lms-gt4` | Exact 2018 GT4 overlap; wheel lights remain unestablished. |
-| BMW M4 GT4 | `bmw-m4-gt4` | The F82-generation 2018 GT4, not a later G82 car. |
-| McLaren 570S GT4 | `mclaren-570s-gt4` | Exact GT4 overlap with open throttle-lift use. |
-| Mercedes-AMG GT4 | `mercedes-amg-gt4` | Exact GT4 overlap with open throttle-lift use. |
+| McLaren 720S GT3 (2019) | `mclaren-720s-gt3` | The non-Evo internal id stayed separate from the 2023 Evo; ACC requires a launch clutch. |
+| Mercedes-AMG GT3 (original) | `mercedes-amg-gt3` | The original internal id stayed separate from the 2020 Evo; ACC requires a launch clutch and accepts a no-lift upshift. |
+| Audi R8 LMS GT4 | `audi-r8-lms-gt4` | ACC models a closed rim with no lights; AMS2 models an open top and leaves the lights unestablished. |
+| BMW M4 GT4 | `bmw-m4-gt4` | The 2018 internal identity maps to the F82 seven-speed dual-clutch car and accepts a no-lift upshift. |
+| McLaren 570S GT4 | `mclaren-570s-gt4` | ACC accepts a no-lift upshift; the authentic lift claim remains open. |
+| Mercedes-AMG GT4 | `mercedes-amg-gt4` | ACC requires a launch clutch and accepts a no-lift upshift; both answers remain simulator-scoped. |
 
 The ACC Audi R8 LMS (2015) is not in this table yet. The existing
 `audi-r8-lms-gt3` record deliberately says only "base model" and does not pin a

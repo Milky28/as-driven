@@ -6648,6 +6648,78 @@
       "retrieved_at": "2026-08-23",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation acc.lamborghini-hurac-n-gt3-evo2-2023.20260823t013248499z-d585ec4d by Jason Kinslow established the exact GT3 EVO2 identity, six paddles, clutch-free launch and shifts, no-lift acceptance, automatic blip and closed no-display/no-light rim."
+    },
+    {
+      "source_id": "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365",
+      "title": "Live ACC Audi R8 LMS GT4 2016 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.audi-r8-lms-gt4-2016.20260823t041658395z-7a35f5d3 by Jason Kinslow in ACC Steam build 21257365 established the exact identity, seven paddle gears, clutch-free launch and shifts, no-lift acceptance, automatic blip, and a closed no-display/no-light rim."
+    },
+    {
+      "source_id": "acc.local-live-bmw-m4-gt4-2018-controls.21257365",
+      "title": "Live ACC BMW M4 GT4 2018 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.bmw-m4-gt4-2018.20260823t043536735z-31e70273 by Jason Kinslow in ACC Steam build 21257365 established the exact F82 identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-mclaren-570s-gt4-2016-controls.21257365",
+      "title": "Live ACC McLaren 570s GT4 2016 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.mclaren-570s-gt4-2016.20260823t042014376z-29c4d807 by Jason Kinslow in ACC Steam build 21257365 established the exact identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-mclaren-720s-gt3-2019-controls.21257365",
+      "title": "Live ACC McLaren 720S GT3 2019 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.mclaren-720s-gt3-2019.20260823t042748648z-b35369dc by Jason Kinslow in ACC Steam build 21257365 established the exact original 2019 identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-mercedes-amg-gt3-2015-controls.21257365",
+      "title": "Live ACC Mercedes AMG GT3 2015 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.mercedes-amg-gt3-2015.20260823t042452064z-2045406c by Jason Kinslow in ACC Steam build 21257365 established the exact original AMG GT3 identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-mercedes-amg-gt4-2016-controls.21257365",
+      "title": "Live ACC Mercedes AMG GT4 2016 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.mercedes-amg-gt4-2016.20260823t042303819z-65014ec0 by Jason Kinslow in ACC Steam build 21257365 established the exact AMG GT4 identity and ACC controls."
     }
   ]
 }

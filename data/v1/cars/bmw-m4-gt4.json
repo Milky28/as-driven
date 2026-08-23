@@ -90,6 +90,62 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M4 GT4 2018"
+        },
+        {
+          "kind": "internal-id",
+          "value": "bmw_m4_gt4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.bmw-m4-gt4-2018.20260823t043536735z-31e70273 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided maneuver with automatic clutch and shifting disabled."
+          },
+          "source_refs": [
+            "acc.local-live-bmw-m4-gt4-2018-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "bmw.m4-gt4-f82.sales-launch",
+        "acc.local-live-bmw-m4-gt4-2018-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "BMW establishes the F82 M4 GT4 and seven-speed dual-clutch transmission. ACC reported the exact 2018 model, GT4 class and stable internal id `bmw_m4_gt4`; the guided drive directly established the simulator behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -133,6 +189,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "bmw.m4-gt4-f82.sales-launch",
+          "acc.local-live-bmw-m4-gt4-2018-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `BMW M4 GT4 2018`, internal id `bmw_m4_gt4`, and class `GT4` identify the F82-generation car already curated from BMW evidence and exclude the later G82 M4 GT4 EVO."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-bmw-m4-gt4-2018-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -149,5 +226,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

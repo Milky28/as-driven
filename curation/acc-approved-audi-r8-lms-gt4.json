@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.19",
+  "approved_at": "2026-08-23",
+  "record_id": "audi-r8-lms-gt4",
+  "simulator": "acc",
+  "telemetry_name": "Audi R8 LMS GT4 2016",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.audi-r8-lms-gt4-2016.20260823t041658395z-7a35f5d3",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "ACC directly established the exact R8 LMS GT4 identity, clutch-free launch, seven paddles, no-lift shift acceptance, automatic blip, and a closed no-display/no-light rim. Automatic cut remains unknown.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT4"
+}
