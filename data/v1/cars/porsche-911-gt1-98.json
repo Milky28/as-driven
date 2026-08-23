@@ -113,7 +113,7 @@
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
-        "wikipedia.porsche-911-gt1",
+        "porsche.museum.911-gt1-98.datasheet",
         "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
       ],
       "confidence": {
@@ -186,7 +186,7 @@
       "verified_at": "2026-08-22",
       "source_refs": [
         "assetto-corsa.porsche-pack-2.911-gt1-98",
-        "wikipedia.porsche-911-gt1",
+        "porsche.museum.911-gt1-98.datasheet",
         "ac.local-live-porsche-911-gt1-98-controls.14923034"
       ],
       "confidence": {
@@ -203,10 +203,10 @@
           "/authentic_controls/transmission/downshift/automatic_blip"
         ],
         "source_refs": [
-          "wikipedia.porsche-911-gt1"
+          "porsche.museum.911-gt1-98.datasheet"
         ],
         "confidence": "medium",
-        "basis": "Available exact-1998 material establishes a six-speed sequential gearbox but no driver rev-match or automatic-blip procedure. Simulator implementation behavior is not real-car evidence."
+        "basis": "Porsche Museum's exact GT1-98 data sheet establishes the sequential six-speed gearbox but gives no driver rev-match or automatic-blip procedure. Simulator implementation behavior is not real-car evidence."
       },
       {
         "paths": [
@@ -214,11 +214,11 @@
           "/simulators/0/identities"
         ],
         "source_refs": [
-          "wikipedia.porsche-911-gt1",
+          "porsche.museum.911-gt1-98.datasheet",
           "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "A registered secondary source establishes the 1998 GT1-98 identity and its new six-speed sequential gearbox, and the exact simulator identity was observed live."
+        "basis": "Porsche Museum establishes the 1998 GT1-98 identity and its new six-speed sequential gearbox, and the exact simulator identity was observed live."
       },
       {
         "paths": [
@@ -228,11 +228,11 @@
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "wikipedia.porsche-911-gt1",
+          "porsche.museum.911-gt1-98.datasheet",
           "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The source specifies a six-speed sequential gearbox introduced for 1998, and the live drive confirmed six gears through a sequential stick."
+        "basis": "Porsche Museum specifies a sequential six-speed gearbox as a novelty of the GT1-98, and the live drive confirmed six gears through a sequential stick."
       },
       {
         "paths": [
@@ -265,7 +265,7 @@
         ],
         "source_refs": [
           "assetto-corsa.porsche-pack-2.911-gt1-98",
-          "wikipedia.porsche-911-gt1",
+          "porsche.museum.911-gt1-98.datasheet",
           "ac.local-live-porsche-911-gt1-98-controls.14923034"
         ],
         "confidence": "high",

@@ -188,8 +188,8 @@ and scope-open findings, and links each finding back to the full car comparison.
 The next phase is the checked-in
 [`simulator-disagreement-audit`](simulator-disagreement-audit.md), not additional
 roster-order driving. It evaluates all 25 field-level conflicts against the
-source strength of the exact authentic baseline. Five findings have sufficient
-evidence for supported benchmark verdicts, three remain provisional, and 17 have
+source strength of the exact authentic baseline. Seven findings have sufficient
+evidence for supported benchmark verdicts, three remain provisional, and 15 have
 open authentic baselines after the complete provisional review removed unsupported
 real-car answers inherited from simulator observations.
 

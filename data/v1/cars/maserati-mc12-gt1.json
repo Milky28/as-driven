@@ -189,6 +189,7 @@
       "source_refs": [
         "assetto-corsa.ready-to-race.mc12-gt1",
         "maserati.mc12-versione-corse.2006",
+        "maserati.mc12-gt1.fia-gt-technical",
         "ac.local-live-maserati-mc12-gt1-controls.14923034"
       ],
       "confidence": {
@@ -205,10 +206,11 @@
           "/authentic_controls/transmission/downshift/automatic_blip"
         ],
         "source_refs": [
-          "maserati.mc12-versione-corse.2006"
+          "maserati.mc12-versione-corse.2006",
+          "maserati.mc12-gt1.fia-gt-technical"
         ],
         "confidence": "medium",
-        "basis": "Maserati distinguishes the GT1's manually operated sequential gearbox from the Versione Corse's electro-actuated Cambiocorsa, but gives no GT1 driver rev-match or automatic-blip procedure."
+        "basis": "Maserati's exact GT1 technical data specifies a manual sequential six-speed gearbox and push-type carbon clutch, while its comparison with the Versione Corse distinguishes that car's electro-actuated Cambiocorsa. Neither source gives a GT1 driver rev-match procedure or identifies an automatic-blip function."
       },
       {
         "paths": [
@@ -243,10 +245,11 @@
         ],
         "source_refs": [
           "maserati.mc12-versione-corse.2006",
+          "maserati.mc12-gt1.fia-gt-technical",
           "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Manufacturer evidence establishes manual sequential actuation and direct testing establishes six modeled ratios and the visible lever."
+        "basis": "Exact manufacturer technical data establishes a manual sequential six-speed gearbox and direct testing establishes six modeled ratios and the visible lever."
       },
       {
         "paths": [

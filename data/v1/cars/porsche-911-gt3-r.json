@@ -37,12 +37,12 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "unknown",
+        "shape": "gt-formula",
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "no",
-        "source_label": "live-cockpit-observation",
-        "notes": "Porsche's exact 2019 material establishes a multi-function CFRP racing wheel with paddles but does not establish its rim category."
+        "source_label": "porsche-991-2-cockpit-photo",
+        "notes": "Porsche's exact 991.2 cockpit photograph shows molded side grips around a closed central control face, which is GT/Formula in this dataset's geometry vocabulary."
       }
     },
     "notes": [
@@ -146,18 +146,6 @@
           "source_refs": [
             "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
           ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "gt-formula",
-          "condition": "ACC models a closed GT/Formula control-face rim for the 2019 991II while AMS2 models a D-shaped rim; Porsche's published material does not settle the normalized rim category.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct cockpit inspection during the ACC contribution drive."
-          },
-          "source_refs": [
-            "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
-          ]
         }
       ],
       "verified_game_version": "21257365",
@@ -179,10 +167,11 @@
           "/authentic_controls/steering/wheel_rim/shape"
         ],
         "source_refs": [
-          "porsche.911-gt3-r-991-2.newsroom-2019"
+          "porsche.911-gt3-r-991-2.newsroom-2019",
+          "porsche.911-gt3-r-991-2.cockpit-photo.2018"
         ],
-        "confidence": "medium",
-        "basis": "Porsche establishes a multi-function CFRP racing wheel with paddles for the exact 2019 car, but does not specify whether its graspable rim is D-shaped or GT/Formula."
+        "confidence": "high",
+        "basis": "Porsche establishes the multifunction CFRP wheel for the exact 2019 (991.2) car, and its official cockpit photograph shows molded side grips around a closed central control face. That geometry is GT/Formula and is independent of the separately listed Cosworth display."
       },
       {
         "paths": [

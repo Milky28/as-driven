@@ -191,10 +191,11 @@
           "/authentic_controls/steering/wheel_rim/shift_lights"
         ],
         "source_refs": [
-          "bmw.m6-gt3.official-media"
+          "bmw.m6-gt3.official-media",
+          "bmw.m6-gt3.customer-racing-brochure"
         ],
         "confidence": "medium",
-        "basis": "BMW's official M6 GT3 cockpit and steering-wheel media does not textually identify a wheel-mounted rev/shift-light array. Dashboard or display indicators cannot settle wheel integration."
+        "basis": "BMW's official cockpit media does not textually identify a wheel-mounted rev/shift-light array. Its customer-racing brochure specifies status LEDs on the wheel and identifies them with control/status functions, not rev/shift indication; dashboard or display indicators cannot settle wheel integration."
       },
       {
         "paths": [

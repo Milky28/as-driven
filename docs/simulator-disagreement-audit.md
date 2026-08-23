@@ -28,15 +28,17 @@ Dataset 0.4.20 contains 25 field-level findings across 19 cars:
 - 6 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Five are **supported departures**, three remain **provisional departures**, and
-17 have an **open authentic baseline**. Five launch-clutch findings have
+Seven are **supported departures**, three remain **provisional departures**, and
+15 have an **open authentic baseline**. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
-GT3. A complete review of the previous provisional queue found that sixteen more
-baselines had inherited simulator observations without independent real-car
-support. They are now explicit open findings rather than weak verdicts. Simulator
-agreement or a previously curated answer is not enough to call one implementation
-authentic.
+GT3. Exact manufacturer cockpit photographs now also settle wheel geometry for
+the 2018 Nissan GT-R NISMO GT3 and 2019 Porsche 911 GT3 R. A complete review of
+the previous provisional queue found that sixteen more baselines had inherited
+simulator observations without independent real-car support. They became explicit
+open findings rather than weak verdicts; the two exact cockpit sources have since
+closed two of those gaps. Simulator agreement or a previously curated answer is
+not enough to call one implementation authentic.
 
 The audit uses three statuses:
 
@@ -123,20 +125,46 @@ Sources: [BMW M4/M6 GT3 comparison][bmw-comparison],
 [BMWBLOG's exact-car first drive][bmw-first-drive], and
 [BMW's Zanardi adaptation notes][bmw-zanardi].
 
+**Nissan GT-R NISMO GT3 (2018) — wheel geometry.** NISMO identifies the exact
+2018-Spec cockpit as an entirely new design with a redesigned steering wheel.
+Its official cockpit photograph shows molded side grips around a closed central
+control face, which is `gt-formula` in the dataset vocabulary; the flattened
+lower edge is not used by itself to classify the wheel.
+
+ACC build 21257365 matches the real wheel category. AMS2 1.6.9.91 models a round
+rim, making that exact implementation a supported departure.
+
+Sources: [NISMO's exact 2018 specification][nismo-spec] and
+[official 2018-Spec cockpit photograph][nismo-cockpit].
+
+**Porsche 911 GT3 R (991.2, 2019) — wheel geometry.** Porsche's exact launch
+material specifies a multifunction CFRP motorsport steering wheel, and its
+official cockpit photograph shows molded side grips around a closed central
+control face. That establishes `gt-formula`; Porsche lists the Cosworth display
+separately, so display location is not being inferred from the wheel shape.
+
+ACC build 21257365 matches the real wheel category. AMS2 1.6.9.91 models a
+D-shaped rim, making that exact implementation a supported departure.
+
+Sources: [Porsche's exact 991.2 launch material][porsche-9912] and
+[official cockpit photograph][porsche-9912-cockpit].
+
 ## Open authentic baselines
 
 **Lotus Renault 98T — forward gears.** The 1986 program used both five- and
-six-speed Lotus/Hewland configurations. Senna is documented choosing the
-five-speed while the six-speed development configuration also ran. The generic
-record combines drivers, chassis and race specifications, so it cannot assign a
-single authentic count.
+six-speed Lotus/Hewland configurations. A period May 1986 report says gearbox
+breakages left six-speed units for Senna's two cars while Dumfries used an
+old-type five-speed; a retrospective exact-chassis account describes another
+allocation. The generic record combines drivers, chassis and race
+specifications, so it cannot assign a single authentic count.
 
 AMS2's five gears and AC's six are both compatible with real 98T configurations.
 Neither is a demonstrated departure without a narrower simulator identity. The
 audit retains the conflict as `authentic-baseline-open`, which makes this a
 useful benchmark boundary rather than an unresolved source hunt.
 
-Sources: [Classic Team Lotus-licensed 98T issue][lotus-licensed] and
+Sources: [period Motor Sport report][lotus-period],
+[Classic Team Lotus-licensed 98T issue][lotus-licensed], and
 [the surviving Senna 98T-3 account][lotus-98t-3].
 
 The remaining open findings are negative research results, not unfinished bulk
@@ -146,15 +174,18 @@ claims:
   wheel geometry, and its 2020 GT2-derived wheel cannot be inherited backward.
 - Lister Storm GTM, Maserati MC12 GT1, Nissan R390 GT1 and Porsche 911 GT1-98
   sources establish sequential hardware but not driver blipping or ECU
-  automatic-blip behavior.
+  automatic-blip behavior. Maserati's exact technical data specifies a manual
+  sequential six-speed and push-type carbon clutch without describing either
+  blip behavior; Porsche Museum likewise identifies the GT1-98's sequential
+  six-speed without a rev-match procedure.
 - McLaren's exact 2019 720S GT3 product sheet and Evo material do not provide a
   launch procedure; NISMO's exact 2018 GT-R GT3 specification identifies a
   clutch but likewise gives no move-off instruction.
-- Exact manufacturer material does not settle the disputed rim categories for
-  the 2018 Nissan GT-R GT3 or 2019 Porsche 911 GT3 R.
 - BMW M6 GT3 media and Nissan R390 history do not identify wheel-mounted shift
-  lights. Ginetta documents a driver display with RPM/shift lights separately
-  from wheel controls, so display existence cannot be converted into wheel
+  lights. BMW's brochure calls its wheel LEDs status LEDs and identifies them
+  with control/status functions, which is not evidence of a rev-light array.
+  Ginetta documents a driver display with RPM/shift lights separately from
+  wheel controls, so display existence cannot be converted into wheel
   integration.
 
 Each simulator observation remains intact as a scoped override. The open baseline
@@ -198,6 +229,11 @@ entire simulator from one car.
 [bmw-comparison]: https://www.press.bmwgroup.com/canada/article/attachment/T0334391EN/481490
 [bmw-first-drive]: https://www.bmwblog.com/2016/07/06/like-behind-wheel-bmw-m6-gtlm/
 [bmw-zanardi]: https://www.press.bmwgroup.com/italy/article/attachment/T0290729IT/423215
+[nismo-spec]: https://www.nismo.co.jp/en/products/customerracing/pdf/nissan_gtr_nismo_gt3_2018-spec_en.pdf
+[nismo-cockpit]: https://www.nismo.co.jp/en/products/customerracing/img/racingcar/img_comfort_01.jpg
+[porsche-9912]: https://newsroom.porsche.com/en/motorsports/porsche-911-gt3-r-customer-racer-gt3-series-2019-racing-911-gt3-rs-aerodynamics-safety-15335.html
+[porsche-9912-cockpit]: https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Motorsport/2018-Motorsport-Saison/911-GT3-R/Der-neue-911-GT3-R/b-M18_1436_fine.jpg/jcr%3Acontent/b-M18_1436_fine.jpg
 [saleen-first-drive]: https://www.motortrend.com/reviews/saleen-s7r
+[lotus-period]: https://www.motorsportmagazine.com/archive/article/may-1986/23/before-the-dust-had-settled/
 [lotus-licensed]: https://d24udp600h4lxn.cloudfront.net/dea/live/media/27-lotus-senna-uk-web/27-lotus-senna-uk-web.pdf
 [lotus-98t-3]: https://www.auto-motor-und-sport.de/formel-1/auktion-ayrton-senna-lotus-98t-rm-sothebys/

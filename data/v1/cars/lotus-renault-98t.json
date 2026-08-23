@@ -51,7 +51,7 @@
       "AMS2 selects the aero configuration from the circuit rather than from the driver, so the same car reports a different identity depending on the track. Both observed identities are carried here: the suffixed high-downforce name seen at Laguna Seca, and the unsuffixed base name seen at Daytona. The selection screen offers no low-downforce package for this class, so this car has two aero identities and both are recorded. Only the high-downforce configuration was driven; the controls are shared because downforce does not change the gearbox, and the low-downforce identity is recorded as an untested aero configuration.",
       "The gearbox is a racing Hewland, engaged by dog rings rather than synchronisers, so the driver must match revs on a downshift for the gear to engage cleanly. The downshift blip is therefore required, not optional.",
       "Dog-ring construction is inferred from Hewland's design approach rather than stated by a reviewed source. A source showing this gearbox was synchronised would change the gearbox type and make the downshift blip optional.",
-      "The 1986 program used both five- and six-speed gearboxes. Senna is documented choosing the five-speed while a six-speed development configuration also ran, so a generic 98T record cannot assign one authentic count. AMS2's five and AC's six remain exact simulator observations, not authenticity verdicts."
+      "The 1986 program used both five- and six-speed gearboxes. Period and retrospective accounts describe different allocations across chassis, drivers, and events, so a generic 98T record cannot assign one authentic count. AMS2's five and AC's six remain exact simulator observations, not authenticity verdicts."
     ]
   },
   "simulators": [
@@ -180,12 +180,13 @@
           "wikipedia.lotus-98t",
           "deagostini.classic-team-lotus.lotus-98t",
           "auto-motor-sport.lotus-98t-3-auction",
+          "motorsport-magazine.lotus-98t-gearboxes.1986-05",
           "pegasus.hewland-dog-rings",
           "calverst.syncro-vs-dog-engagement",
           "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "Registered sources establish the exact 1986 98T and its real five- and six-speed configuration variants; both exact simulator identities were observed live."
+        "basis": "Registered sources, including a period May 1986 report, establish the exact 98T and its real five- and six-speed configuration variants; both exact simulator identities were observed live."
       },
       {
         "paths": [
@@ -209,11 +210,12 @@
           "wikipedia.lotus-98t",
           "deagostini.classic-team-lotus.lotus-98t",
           "auto-motor-sport.lotus-98t-3-auction",
+          "motorsport-magazine.lotus-98t-gearboxes.1986-05",
           "ams2.local-live-lotus-renault-98t-controls.1.6.9.91",
           "ac.local-live-lotus-98t-controls.14923034"
         ],
         "confidence": "high",
-        "basis": "The 98T program used both five- and six-speed gearboxes, with Senna documented choosing the five-speed and a six-speed development configuration also used. The generic record lacks chassis, driver, and race scope, so its authentic gear count remains open while each simulator keeps its directly observed implementation count."
+        "basis": "The 98T program used both five- and six-speed gearboxes. A period May 1986 report says gearbox breakages left six-speed units for Senna's two cars while Dumfries used an old-type five-speed; a retrospective exact-chassis account describes another allocation. The generic record lacks chassis, driver, and race scope, so its authentic gear count remains open while each simulator keeps its directly observed implementation count."
       },
       {
         "paths": [

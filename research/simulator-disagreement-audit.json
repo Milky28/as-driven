@@ -13,9 +13,9 @@
     "cars_with_disagreements": 19,
     "findings": 25,
     "by_status": {
-      "authentic-baseline-open": 17,
+      "authentic-baseline-open": 15,
       "provisional-departure": 3,
-      "supported-departure": 5
+      "supported-departure": 7
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
@@ -331,11 +331,12 @@
           "wikipedia.lotus-98t",
           "deagostini.classic-team-lotus.lotus-98t",
           "auto-motor-sport.lotus-98t-3-auction",
+          "motorsport-magazine.lotus-98t-gearboxes.1986-05",
           "ams2.local-live-lotus-renault-98t-controls.1.6.9.91",
           "ac.local-live-lotus-98t-controls.14923034"
         ],
         "primary_source_refs": [],
-        "basis": "The 98T program used both five- and six-speed gearboxes, with Senna documented choosing the five-speed and a six-speed development configuration also used. The generic record lacks chassis, driver, and race scope, so its authentic gear count remains open while each simulator keeps its directly observed implementation count."
+        "basis": "The 98T program used both five- and six-speed gearboxes. A period May 1986 report says gearbox breakages left six-speed units for Senna's two cars while Dumfries used an old-type five-speed; a retrospective exact-chassis account describes another allocation. The generic record lacks chassis, driver, and race scope, so its authentic gear count remains open while each simulator keeps its directly observed implementation count."
       },
       "simulator_views": [
         {
@@ -398,12 +399,14 @@
         "display_value": "Not established",
         "confidence": "medium",
         "source_refs": [
-          "maserati.mc12-versione-corse.2006"
+          "maserati.mc12-versione-corse.2006",
+          "maserati.mc12-gt1.fia-gt-technical"
         ],
         "primary_source_refs": [
-          "maserati.mc12-versione-corse.2006"
+          "maserati.mc12-versione-corse.2006",
+          "maserati.mc12-gt1.fia-gt-technical"
         ],
-        "basis": "Maserati distinguishes the GT1's manually operated sequential gearbox from the Versione Corse's electro-actuated Cambiocorsa, but gives no GT1 driver rev-match or automatic-blip procedure."
+        "basis": "Maserati's exact GT1 technical data specifies a manual sequential six-speed gearbox and push-type carbon clutch, while its comparison with the Versione Corse distinguishes that car's electro-actuated Cambiocorsa. Neither source gives a GT1 driver rev-match procedure or identifies an automatic-blip function."
       },
       "simulator_views": [
         {
@@ -433,6 +436,7 @@
           "source_refs": [
             "assetto-corsa.ready-to-race.mc12-gt1",
             "maserati.mc12-versione-corse.2006",
+            "maserati.mc12-gt1.fia-gt-technical",
             "ac.local-live-maserati-mc12-gt1-controls.14923034"
           ]
         }
@@ -891,16 +895,18 @@
       "driver_impact": "hardware-choice",
       "priority": "high",
       "authentic_baseline": {
-        "value": "unknown",
-        "display_value": "Not established",
-        "confidence": "medium",
+        "value": "gt-formula",
+        "display_value": "GT / Formula rim",
+        "confidence": "high",
         "source_refs": [
-          "nismo.gt-r-nismo-gt3.2018-spec"
+          "nismo.gt-r-nismo-gt3.2018-spec",
+          "nismo.gt-r-nismo-gt3.2018-cockpit-photo"
         ],
         "primary_source_refs": [
-          "nismo.gt-r-nismo-gt3.2018-spec"
+          "nismo.gt-r-nismo-gt3.2018-spec",
+          "nismo.gt-r-nismo-gt3.2018-cockpit-photo"
         ],
-        "basis": "NISMO says the 2018 wheel was redesigned for improved operability but supplies no round, D-shaped, or GT/Formula geometry. Earlier wheel descriptions are not inherited."
+        "basis": "NISMO identifies the exact redesigned 2018-Spec cockpit, and its official cockpit photograph shows molded side grips around a closed central control face. That geometry is GT/Formula; the flat lower edge alone is not the classification basis."
       },
       "simulator_views": [
         {
@@ -908,7 +914,7 @@
           "label": "AMS2",
           "value": "round",
           "display_value": "Round rim",
-          "relationship_to_authentic": "baseline-open",
+          "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "1.6.9.91",
           "verified_at": "2026-08-13",
           "confidence": "verified",
@@ -922,7 +928,7 @@
           "label": "Assetto Corsa Competizione",
           "value": "gt-formula",
           "display_value": "GT / Formula rim",
-          "relationship_to_authentic": "baseline-open",
+          "relationship_to_authentic": "matches-baseline",
           "verified_game_version": "21257365",
           "verified_at": "2026-08-23",
           "confidence": "verified",
@@ -933,11 +939,15 @@
         }
       ],
       "adjudication": {
-        "status": "authentic-baseline-open",
-        "matching_simulators": [],
-        "departing_simulators": [],
-        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
-        "next_action": "Find real-car evidence for wheel-rim category."
+        "status": "supported-departure",
+        "matching_simulators": [
+          "acc"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
       }
     },
     {
@@ -1134,10 +1144,12 @@
         "display_value": "Not established",
         "confidence": "medium",
         "source_refs": [
-          "wikipedia.porsche-911-gt1"
+          "porsche.museum.911-gt1-98.datasheet"
         ],
-        "primary_source_refs": [],
-        "basis": "Available exact-1998 material establishes a six-speed sequential gearbox but no driver rev-match or automatic-blip procedure. Simulator implementation behavior is not real-car evidence."
+        "primary_source_refs": [
+          "porsche.museum.911-gt1-98.datasheet"
+        ],
+        "basis": "Porsche Museum's exact GT1-98 data sheet establishes the sequential six-speed gearbox but gives no driver rev-match or automatic-blip procedure. Simulator implementation behavior is not real-car evidence."
       },
       "simulator_views": [
         {
@@ -1150,7 +1162,7 @@
           "verified_at": "2026-08-13",
           "confidence": "high",
           "source_refs": [
-            "wikipedia.porsche-911-gt1",
+            "porsche.museum.911-gt1-98.datasheet",
             "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
           ]
         },
@@ -1165,7 +1177,7 @@
           "confidence": "high",
           "source_refs": [
             "assetto-corsa.porsche-pack-2.911-gt1-98",
-            "wikipedia.porsche-911-gt1",
+            "porsche.museum.911-gt1-98.datasheet",
             "ac.local-live-porsche-911-gt1-98-controls.14923034"
           ]
         }
@@ -1188,16 +1200,18 @@
       "driver_impact": "hardware-choice",
       "priority": "high",
       "authentic_baseline": {
-        "value": "unknown",
-        "display_value": "Not established",
-        "confidence": "medium",
+        "value": "gt-formula",
+        "display_value": "GT / Formula rim",
+        "confidence": "high",
         "source_refs": [
-          "porsche.911-gt3-r-991-2.newsroom-2019"
+          "porsche.911-gt3-r-991-2.newsroom-2019",
+          "porsche.911-gt3-r-991-2.cockpit-photo.2018"
         ],
         "primary_source_refs": [
-          "porsche.911-gt3-r-991-2.newsroom-2019"
+          "porsche.911-gt3-r-991-2.newsroom-2019",
+          "porsche.911-gt3-r-991-2.cockpit-photo.2018"
         ],
-        "basis": "Porsche establishes a multi-function CFRP racing wheel with paddles for the exact 2019 car, but does not specify whether its graspable rim is D-shaped or GT/Formula."
+        "basis": "Porsche establishes the multifunction CFRP wheel for the exact 2019 (991.2) car, and its official cockpit photograph shows molded side grips around a closed central control face. That geometry is GT/Formula and is independent of the separately listed Cosworth display."
       },
       "simulator_views": [
         {
@@ -1205,7 +1219,7 @@
           "label": "AMS2",
           "value": "d-shaped",
           "display_value": "D-shaped rim",
-          "relationship_to_authentic": "baseline-open",
+          "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "1.6.9.91",
           "verified_at": "2026-08-13",
           "confidence": "verified",
@@ -1219,7 +1233,7 @@
           "label": "Assetto Corsa Competizione",
           "value": "gt-formula",
           "display_value": "GT / Formula rim",
-          "relationship_to_authentic": "baseline-open",
+          "relationship_to_authentic": "matches-baseline",
           "verified_game_version": "21257365",
           "verified_at": "2026-08-23",
           "confidence": "verified",
@@ -1230,11 +1244,15 @@
         }
       ],
       "adjudication": {
-        "status": "authentic-baseline-open",
-        "matching_simulators": [],
-        "departing_simulators": [],
-        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
-        "next_action": "Find real-car evidence for wheel-rim category."
+        "status": "supported-departure",
+        "matching_simulators": [
+          "acc"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
       }
     },
     {
@@ -1392,12 +1410,14 @@
         "display_value": "Not established",
         "confidence": "medium",
         "source_refs": [
-          "bmw.m6-gt3.official-media"
+          "bmw.m6-gt3.official-media",
+          "bmw.m6-gt3.customer-racing-brochure"
         ],
         "primary_source_refs": [
-          "bmw.m6-gt3.official-media"
+          "bmw.m6-gt3.official-media",
+          "bmw.m6-gt3.customer-racing-brochure"
         ],
-        "basis": "BMW's official M6 GT3 cockpit and steering-wheel media does not textually identify a wheel-mounted rev/shift-light array. Dashboard or display indicators cannot settle wheel integration."
+        "basis": "BMW's official cockpit media does not textually identify a wheel-mounted rev/shift-light array. Its customer-racing brochure specifies status LEDs on the wheel and identifies them with control/status functions, not rev/shift indication; dashboard or display indicators cannot settle wheel integration."
       },
       "simulator_views": [
         {

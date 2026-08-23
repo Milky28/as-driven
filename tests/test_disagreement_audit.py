@@ -183,14 +183,59 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 17,
+                "authentic-baseline-open": 15,
                 "provisional-departure": 3,
-                "supported-departure": 5,
+                "supported-departure": 7,
             },
             self.checked_in["summary"]["by_status"],
         )
 
+    def test_exact_cockpit_photos_settle_two_wheel_departures(self) -> None:
+        expected = {
+            "nissan-gt-r-nismo-gt3--steering-wheel-rim-shape": ("acc", "ams2"),
+            "porsche-911-gt3-r--steering-wheel-rim-shape": ("acc", "ams2"),
+        }
+        for finding_id, (matching, departing) in expected.items():
+            with self.subTest(finding=finding_id):
+                finding = self.finding(finding_id)
+                self.assertEqual("gt-formula", finding["authentic_baseline"]["value"])
+                self.assertEqual("high", finding["authentic_baseline"]["confidence"])
+                self.assertTrue(finding["authentic_baseline"]["primary_source_refs"])
+                self.assertEqual(
+                    "supported-departure", finding["adjudication"]["status"]
+                )
+                self.assertEqual(
+                    [matching], finding["adjudication"]["matching_simulators"]
+                )
+                self.assertEqual(
+                    [departing], finding["adjudication"]["departing_simulators"]
+                )
+
     def test_open_findings_do_not_inherit_a_simulator_answer(self) -> None:
+        expected = {
+            "audi-r8-lms-gt4--steering-wheel-rim-open-top",
+            "bmw-m6-gt3--steering-wheel-rim-shift-lights",
+            "ginetta-g55-gt4--steering-wheel-rim-integrated-display",
+            "ginetta-g55-gt4--steering-wheel-rim-shift-lights",
+            "lister-storm-gtm--transmission-downshift-manual-blip",
+            "lotus-renault-98t--transmission-forward-gears",
+            "maserati-mc12-gt1--transmission-downshift-manual-blip",
+            "mclaren-720s-gt3--transmission-standing-start-clutch",
+            "mclaren-720s-gt3-evo--transmission-standing-start-clutch",
+            "nissan-gt-r-nismo-gt3--transmission-standing-start-clutch",
+            "nissan-r390-gt1--steering-wheel-rim-shape",
+            "nissan-r390-gt1--steering-wheel-rim-shift-lights",
+            "nissan-r390-gt1--transmission-downshift-automatic-blip",
+            "nissan-r390-gt1--transmission-downshift-manual-blip",
+            "porsche-911-gt1-98--transmission-downshift-manual-blip",
+        }
+        actual = {
+            finding["finding_id"]
+            for finding in self.checked_in["findings"]
+            if finding["adjudication"]["status"] == "authentic-baseline-open"
+        }
+        self.assertEqual(expected, actual)
+
         for finding in self.checked_in["findings"]:
             if finding["adjudication"]["status"] != "authentic-baseline-open":
                 continue

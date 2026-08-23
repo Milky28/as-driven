@@ -4359,6 +4359,18 @@
       "notes": "Manufacturer comparison states that the MC12 GT1 used a manually operated sequential gearbox; the road-derived Versione Corse instead used electro-actuated Cambiocorsa. Gear count and technique are verified separately."
     },
     {
+      "source_id": "maserati.mc12-gt1.fia-gt-technical",
+      "title": "Six Maserati MC12s in the FIA GT",
+      "publisher": "Maserati Corse / Stellantis Media",
+      "url": "https://www.media.stellantis.com/us-en/maserati-corse/press/six-maserati-mc12s-in-the-fia-gt",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact MC12 GT1 manufacturer technical data specifies a manual sequential gearbox with six forward gears plus reverse and a push-type carbon clutch. It does not state a driver rev-matching procedure or an automatic throttle-blip function, so neither blip field can be inferred."
+    },
+    {
       "source_id": "mclaren.570s-gt4.customer-racing",
       "title": "McLaren 570S GT4",
       "publisher": "McLaren Automotive",
@@ -4553,6 +4565,18 @@
       "notes": "NISMO customer-racing specification sheet: six-speed sequential transmission with semi-automatic paddle shift as standard equipment, VR38DETT twin-turbo V6."
     },
     {
+      "source_id": "nismo.gt-r-nismo-gt3.2018-cockpit-photo",
+      "title": "Nissan GT-R NISMO GT3 2018-Spec cockpit",
+      "publisher": "NISMO",
+      "url": "https://www.nismo.co.jp/en/products/customerracing/img/racingcar/img_comfort_01.jpg",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Official exact-2018-Spec cockpit photograph. The wheel has molded side grips around a closed central control face, establishing the GT/Formula category; flattening alone is not used for classification."
+    },
+    {
       "source_id": "nissan.heritage-collection.r89c",
       "title": "Nissan Heritage Collection - Nissan R89C",
       "publisher": "Nissan Motor Corporation",
@@ -4635,6 +4659,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Official launch material for the 2019 (991.2) 911 GT3 R: Porsche sequential six-speed constant-mesh gearbox with electronic shift actuator, changed by steering-wheel paddles."
+    },
+    {
+      "source_id": "porsche.911-gt3-r-991-2.cockpit-photo.2018",
+      "title": "Porsche 911 GT3 R (991.2) cockpit",
+      "publisher": "Dr. Ing. h.c. F. Porsche AG",
+      "url": "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Motorsport/2018-Motorsport-Saison/911-GT3-R/Der-neue-911-GT3-R/b-M18_1436_fine.jpg/jcr%3Acontent/b-M18_1436_fine.jpg",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Official exact-991.2 cockpit photograph accompanying Porsche's 2019-car launch material. It shows molded side grips around a closed central control face, establishing the GT/Formula category independently of the separate Cosworth display."
     },
     {
       "source_id": "porsche.911-gt3-r-992.newsroom-2022",
@@ -4899,6 +4935,18 @@
       "retrieved_at": "2026-08-23",
       "reuse_status": "facts-only-review",
       "notes": "Official BMW media package includes dedicated cockpit and steering-wheel close-ups. It does not textually identify a wheel-mounted rev/shift-light array, so it cannot settle that field."
+    },
+    {
+      "source_id": "bmw.m6-gt3.customer-racing-brochure",
+      "title": "BMW M6 GT3",
+      "publisher": "BMW Motorsport",
+      "url": "https://iberianmph.com/wp-content/uploads/2016/04/bmw-motorsport-_-cars-_-bmw-m6-gt3.pdf",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "BMW Motorsport customer-racing brochure mirrored by Iberian MPH. Printed page 2 describes a removable multifunction steering wheel with paddle shift and status LEDs, then identifies those LEDs with control/status functions. It does not establish a wheel-mounted rev/shift-light array."
     },
     {
       "source_id": "ginetta.g55-gt4.user-manual",
@@ -5633,6 +5681,18 @@
       "notes": "Exact surviving Senna chassis 98T-3 account. It states the 98T gearbox was available with five or six gears and that Senna chose the five-speed. This establishes real configuration variation and prevents a generic 98T record from treating either count as universal."
     },
     {
+      "source_id": "motorsport-magazine.lotus-98t-gearboxes.1986-05",
+      "title": "Before the dust had settled",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/archive/article/may-1986/23/before-the-dust-had-settled/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "1986-05-01",
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Period report, printed page 23, states that gearbox breakages left six-speed units for Senna's two cars while Dumfries used an old-type five-speed. This directly establishes that both configurations existed within the 1986 98T program and that driver/configuration allocation varied."
+    },
+    {
       "source_id": "wikipedia.mclaren-m23",
       "title": "McLaren M23",
       "publisher": "Wikipedia",
@@ -5787,6 +5847,18 @@
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
       "notes": "Secondary reference for the 911 GT1-98: carbon monocoque, water-cooled 3.2 litre flat six derived from the 962, and a new six-speed sequential gearbox fitted for 1998 to reduce shift time."
+    },
+    {
+      "source_id": "porsche.museum.911-gt1-98.datasheet",
+      "title": "Porsche 911 GT1 '98 data sheet",
+      "publisher": "Porsche Museum",
+      "url": "https://media.porsche.com/mediakit/porsche-museum/05-downloads/11-datenblatt-porsche-911-gt1-98-jever-2081.pdf",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Official Porsche Museum data sheet for the 1998 911 GT1. It identifies the exact car and states that its sequential six-speed gearbox was a novelty. It gives no driver rev-matching procedure or automatic throttle-blip function, so those fields remain unknown."
     },
     {
       "source_id": "wikipedia.porsche-962",

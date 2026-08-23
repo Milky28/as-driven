@@ -37,12 +37,12 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "unknown",
+        "shape": "gt-formula",
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "no",
-        "source_label": "live-cockpit-observation",
-        "notes": "NISMO's exact 2018 specification says the wheel was redesigned but does not establish its normalized rim geometry."
+        "source_label": "nismo-2018-cockpit-photo",
+        "notes": "NISMO's exact 2018-Spec cockpit photograph shows molded side grips around a closed central control face, which is GT/Formula in this dataset's geometry vocabulary."
       }
     },
     "notes": [
@@ -170,18 +170,6 @@
           "source_refs": [
             "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
           ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "gt-formula",
-          "condition": "ACC models a closed GT/Formula control-face rim for the 2018 Nissan while AMS2 models a round rim; the real car's normalized rim category remains unknown.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct cockpit inspection during the ACC contribution drive."
-          },
-          "source_refs": [
-            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
-          ]
         }
       ],
       "verified_game_version": "21257365",
@@ -213,10 +201,11 @@
           "/authentic_controls/steering/wheel_rim/shape"
         ],
         "source_refs": [
-          "nismo.gt-r-nismo-gt3.2018-spec"
+          "nismo.gt-r-nismo-gt3.2018-spec",
+          "nismo.gt-r-nismo-gt3.2018-cockpit-photo"
         ],
-        "confidence": "medium",
-        "basis": "NISMO says the 2018 wheel was redesigned for improved operability but supplies no round, D-shaped, or GT/Formula geometry. Earlier wheel descriptions are not inherited."
+        "confidence": "high",
+        "basis": "NISMO identifies the exact redesigned 2018-Spec cockpit, and its official cockpit photograph shows molded side grips around a closed central control face. That geometry is GT/Formula; the flat lower edge alone is not the classification basis."
       },
       {
         "paths": [
