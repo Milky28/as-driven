@@ -32,8 +32,8 @@ TONE_TITLE = {
 
 ACTUATION = {
     "h-pattern": "H-pattern",
-    "sequential-stick": "sequential",
-    "sequential-paddles": "paddles",
+    "sequential-stick": "sequential stick",
+    "sequential-paddles": "paddle shift",
     "automatic-lever": "automatic",
     "direct-selection": "direct select",
 }
@@ -150,6 +150,34 @@ def wheel_equipment(integrated_display: str, shift_lights: str) -> str:
     return f"{display} · {lights}"
 
 
+def simulator_cockpit(behavior: dict[str, Any]) -> list[str]:
+    """Established cockpit facts for one simulator implementation.
+
+    These do not rewrite the authentic row. They make simulator-only cockpit
+    observations visible in the simulator tab where their evidence belongs.
+    Unknown values are already listed by the separate evidence-gap block.
+    """
+    wheel = behavior.get("wheel_rim_type") or {}
+    facts: list[str] = []
+    shape = wheel.get("normalized")
+    if shape not in {None, "unknown"}:
+        facts.append(RIM.get(shape, str(shape).replace("-", " ").title()))
+    display = {"yes": "Display", "no": "No display"}.get(
+        wheel.get("integrated_display")
+    )
+    if display:
+        facts.append(display)
+    lights = {"yes": "Shift lights", "no": "No shift lights"}.get(
+        wheel.get("shift_lights")
+    )
+    if lights:
+        facts.append(lights)
+    top = {"yes": "Open top", "no": "Closed top"}.get(wheel.get("open_top"))
+    if top:
+        facts.append(top)
+    return facts
+
+
 def shifter(gears: Any, actuation: str) -> str:
     label = ACTUATION.get(actuation)
     if label is None:
@@ -170,10 +198,11 @@ def gate(actuation: str, pattern: str, first_gear: str | None) -> str:
         if first_gear == "down-left":
             return "Standard gate, 1st down and left"
         return "Standard gate, 1st up and left"
-    if actuation == "sequential-paddles":
-        return "Sequential, one gear at a time"
-    if actuation == "sequential-stick":
-        return "Fore and aft, one gear at a time"
+    if actuation in {"sequential-paddles", "sequential-stick"}:
+        # The primary label already names both the mechanism and its sequential
+        # operation. Repeating that in a second line adds height without adding
+        # a hardware choice or technique the driver can act on.
+        return ""
     if pattern == "sequential":
         return "Sequential, one gear at a time"
     if pattern == "automatic-gate":
@@ -479,6 +508,7 @@ def _simulator_view(
         "label": simulator_label(simulator),
         "anchor": f"{record_id}--{simulator}",
         "differences": differences(transmission, entry.get("overrides") or []),
+        "cockpit": simulator_cockpit(behavior),
         "unknown_behavior": unknown_behavior,
         "game_version": entry.get("verified_game_version", ""),
         "verified_at": entry.get("verified_at", ""),
@@ -666,6 +696,15 @@ def _simulator_panel(car: dict[str, Any], simulator: dict[str, Any], selected: b
             '<div class="block sim-relationship"><h4>Relationship to the real car</h4>'
             '<p>No reviewed difference from the real car is recorded for this simulator.</p>'
             '</div>'
+        )
+
+    if simulator["cockpit"]:
+        chips = "".join(
+            f'<span class="chip">{_e(fact)}</span>' for fact in simulator["cockpit"]
+        )
+        content.append(
+            '<div class="block simulator-cockpit"><h4>Cockpit in this simulator</h4>'
+            f'<div class="chips">{chips}</div></div>'
         )
 
     if simulator["unknown_behavior"]:
@@ -891,7 +930,8 @@ def _row(car: dict[str, Any]) -> str:
         f'<td class="rim">{_e(car["rim"])}'
         f'<span class="meta">{_e(car["wheel_equipment"])}</span></td>'
         f'<td class="spec"><span class="shifter">{_e(car["shifter"])}</span>'
-        f'<span class="meta">{_e(car["gate"])}</span></td>'
+        + (f'<span class="meta">{_e(car["gate"])}</span>' if car["gate"] else "")
+        + "</td>"
         f"{_cell(car['launch'])}{_cell(car['up'])}{_cell(car['down'])}"
         "</tr>"
         f'<tr class="detail" hidden><td colspan="6"><div class="detail-inner">'

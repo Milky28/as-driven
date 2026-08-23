@@ -14,6 +14,8 @@ from as_driven_db.site import (
     downshift,
     gate,
     launch,
+    shifter,
+    simulator_cockpit,
     upshift,
     wheel_equipment,
 )
@@ -81,11 +83,62 @@ class SiteTests(unittest.TestCase):
             ).decode("ascii")
             self.assertIn(rendered, page)
 
+    def test_simulator_only_wheel_facts_reach_the_simulator_tab(self) -> None:
+        behavior = {
+            "wheel_rim_type": {
+                "normalized": "round",
+                "integrated_display": "no",
+                "shift_lights": "no",
+                "open_top": "no",
+            }
+        }
+        self.assertEqual(
+            simulator_cockpit(behavior),
+            ["Round rim", "No display", "No shift lights", "Closed top"],
+        )
+
+        viper = next(
+            car for car in collect(ROOT)["cars"] if car["id"] == "dodge-viper-gts-r"
+        )
+        self.assertEqual(
+            [view["cockpit"] for view in viper["simulators"]],
+            [
+                ["Round rim", "No display", "No shift lights", "Closed top"],
+                ["Round rim", "No display", "No shift lights", "Closed top"],
+            ],
+        )
+        payload = collect(ROOT)
+        page = build_site(ROOT)
+        cockpit_views = sum(
+            bool(view["cockpit"])
+            for car in payload["cars"]
+            for view in car["simulators"]
+        )
+        self.assertEqual(page.count("Cockpit in this simulator"), cockpit_views)
+        self.assertIn(
+            '<h4>Cockpit in this simulator</h4><div class="chips">'
+            '<span class="chip">Round rim</span><span class="chip">No display</span>'
+            '<span class="chip">No shift lights</span><span class="chip">Closed top</span>',
+            page,
+        )
+
     def test_a_dogleg_states_which_side_first_sits_on_only_when_recorded(self) -> None:
         self.assertEqual(gate("h-pattern", "dogleg-h", "down-left"), "Dogleg gate, 1st down and left")
         self.assertEqual(gate("h-pattern", "dogleg-h", "down-right"), "Dogleg gate, 1st down and right")
         # A dogleg establishes only that first sits outside the racing plane.
         self.assertEqual(gate("h-pattern", "dogleg-h", None), "Dogleg gate, 1st outside the plane")
+
+    def test_sequential_hardware_is_named_once(self) -> None:
+        self.assertEqual(shifter(6, "sequential-stick"), "6-speed sequential stick")
+        self.assertEqual(shifter(6, "sequential-paddles"), "6-speed paddle shift")
+        self.assertEqual(gate("sequential-stick", "sequential", None), "")
+        self.assertEqual(gate("sequential-paddles", "sequential", None), "")
+
+        cars = {car["id"]: car for car in collect(ROOT)["cars"]}
+        self.assertEqual(cars["dodge-viper-gts-r"]["shifter"], "6-speed sequential stick")
+        self.assertEqual(cars["dodge-viper-gts-r"]["gate"], "")
+        self.assertEqual(cars["dallara-sp1"]["shifter"], "6-speed paddle shift")
+        self.assertEqual(cars["dallara-sp1"]["gate"], "")
 
     def test_every_curated_car_reaches_the_page(self) -> None:
         payload = collect(ROOT)
