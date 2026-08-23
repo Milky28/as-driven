@@ -89,6 +89,74 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mercedes AMG GT3 Evo 2020"
+        },
+        {
+          "kind": "internal-id",
+          "value": "mercedes_amg_gt3_evo"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.mercedes-amg-gt3-evo-2020.20260823t011325563z-afff3f23 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC build 21257365 would not move the AMG GT3 Evo from rest without physical clutch input while automatic clutch and shifting were disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided full-throttle maneuver."
+          },
+          "source_refs": [
+            "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "mercedes-amg.gt3.official",
+        "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Mercedes-AMG establishes the GT3 family transmission. ACC's visible 2020 selection and its telemetry name, Evo internal id and GT3 class identify the update already curated from AMS2; the guided drive directly established ACC behavior."
+      }
     }
   ],
   "provenance": {
@@ -132,6 +200,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "mercedes-amg.gt3.official",
+          "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "ACC visibly labels the selection `AMG GT3 (2020)` while SimHub reported telemetry name `Mercedes AMG GT3 Evo 2020`, internal id `mercedes_amg_gt3_evo`, and class `GT3`. The combined UI year and telemetry Evo token distinguish it from the original AMG GT3."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -148,5 +237,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

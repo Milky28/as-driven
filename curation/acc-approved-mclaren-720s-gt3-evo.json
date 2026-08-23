@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.17",
+  "approved_at": "2026-08-23",
+  "record_id": "mclaren-720s-gt3-evo",
+  "simulator": "acc",
+  "telemetry_name": "McLaren 720s GT3 Evo 2023",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.mclaren-720s-gt3-evo-2023.20260823t012944852z-84acc775",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "ACC directly established the exact 2023 Evo identity and all modeled controls; launch clutch use differs from AMS2.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT3"
+}

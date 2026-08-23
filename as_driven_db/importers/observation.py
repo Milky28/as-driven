@@ -326,6 +326,20 @@ def import_observation(
     down_clutch = _clutch_from_clutchless(tests.get("clutchless_downshift")) if clean else "unknown"
     cut_state = _state(tests.get("automatic_cut"))
     blip_state = _state(tests.get("automatic_blip"))
+    if simulator == "acc":
+        # ACC does not publish engine torque through SimHub. Older clients could
+        # call a brief throttle dip an automatic cut, but that dip may be TC,
+        # driver input, or telemetry filtering and cannot identify an
+        # ignition-side gearbox cut. Preserve the draft as evidence while
+        # degrading this unsupported derived claim during staging.
+        if cut_state != "unknown":
+            review_notes.append(
+                "ACC automatic-cut result was degraded to unknown: ACC publishes no "
+                "engine-torque channel through SimHub, and throttle interruption alone "
+                "cannot distinguish a gearbox cut from TC, driver input, or telemetry "
+                "filtering."
+            )
+        cut_state = "unknown"
 
     rim = cockpit["wheel_rim"]
     # Drafts saved before the rim vocabulary was merged still carry the retired

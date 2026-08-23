@@ -533,6 +533,10 @@ namespace AsDriven.Plugin
                 _clutchlessDownshift, _automaticBlip
             })
             {
+                if (combo == _automaticCut && !AutomaticCutReviewApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     return true;
@@ -862,6 +866,10 @@ namespace AsDriven.Plugin
                 {
                     continue;
                 }
+                if (combo == _automaticCut && !AutomaticCutReviewApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     _drivingResultsExpander.IsExpanded = true;
@@ -879,9 +887,14 @@ namespace AsDriven.Plugin
 
         private bool DirectGearSelectionApplies()
         {
-            string actuation = ChoiceValue(_primaryActuation);
-            return string.Equals(actuation, "h-pattern", StringComparison.Ordinal)
-                || string.Equals(actuation, "direct-selection", StringComparison.Ordinal);
+            return VerificationReviewRules.DirectGearSelectionApplies(
+                ChoiceValue(_primaryActuation));
+        }
+
+        private bool AutomaticCutReviewApplies()
+        {
+            return VerificationReviewRules.AutomaticCutIsMeasurable(
+                _capture == null ? null : _capture.Simulator);
         }
 
         private void HighlightReviewTarget(FrameworkElement control, string message)
@@ -1071,8 +1084,10 @@ namespace AsDriven.Plugin
                 && ChoiceValue(_directGearSelection) == "not-applicable")
             {
                 SelectChoice(_directGearSelection, "not-tested");
-                SetFieldBadge(_directGearSelection, "REVIEW NEEDED", Brushes.Orange);
             }
+            SetGuidedResultBadge(
+                _directGearSelection,
+                ChoiceValue(_directGearSelection));
 
             string derivedPattern = DerivedShiftPattern(actuation);
             if (derivedPattern != null)
@@ -1180,7 +1195,7 @@ namespace AsDriven.Plugin
             {
                 if (IsUnresolved(value))
                 {
-                    SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
+                    SetGuidedResultBadge(combo, value);
                 }
                 else
                 {
@@ -1196,7 +1211,7 @@ namespace AsDriven.Plugin
             else if (IsUnresolved(value))
             {
                 _manualOverrides.Remove(combo);
-                SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
+                SetGuidedResultBadge(combo, value);
             }
             else
             {
@@ -1240,8 +1255,25 @@ namespace AsDriven.Plugin
             SetGuidedResultBadge(combo, normalized);
         }
 
-        private static void SetGuidedResultBadge(ComboBox combo, string value)
+        private void SetGuidedResultBadge(ComboBox combo, string value)
         {
+            if (combo == _directGearSelection && !DirectGearSelectionApplies())
+            {
+                SetFieldBadge(
+                    combo,
+                    string.Equals(value, "not-applicable", StringComparison.Ordinal)
+                        ? "DERIVED"
+                        : "AFTER MECHANISM",
+                    Brushes.Gray);
+                return;
+            }
+            if (combo == _automaticCut
+                && !AutomaticCutReviewApplies()
+                && IsUnresolved(value))
+            {
+                SetFieldBadge(combo, "NOT EXPOSED", Brushes.Gray);
+                return;
+            }
             if (IsUnresolved(value))
             {
                 SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);

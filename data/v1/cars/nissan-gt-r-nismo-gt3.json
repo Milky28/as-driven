@@ -89,6 +89,86 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Nissan GT R Nismo GT3 2018"
+        },
+        {
+          "kind": "internal-id",
+          "value": "nissan_gt_r_gt3_2018"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.nissan-gt-r-nismo-gt3-2018.20260823t012032609z-ae45d8b6 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's 2018 Nissan would not pull away without physical clutch input with assists disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided full-throttle maneuver."
+          },
+          "source_refs": [
+            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "ACC models a closed GT/Formula control-face rim for the 2018 Nissan, while AMS2 models the curated round rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "nismo.gt-r-nismo-gt3.2018-spec",
+        "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "NISMO establishes the exact 2018 GT-R NISMO GT3 and its paddle transmission. ACC reported the 2018 name, generation-specific internal id and GT3 class; the guided drive directly established ACC behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -132,6 +212,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "nismo.gt-r-nismo-gt3.2018-spec",
+          "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `Nissan GT R Nismo GT3 2018`, internal id `nissan_gt_r_gt3_2018`, and class `GT3` map to the NISMO 2018 specification and explicitly exclude ACC's 2015 variant."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -145,5 +246,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

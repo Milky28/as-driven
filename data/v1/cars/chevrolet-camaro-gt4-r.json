@@ -104,6 +104,50 @@
         "level": "verified",
         "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Camaro GT4 R 2017"
+        },
+        {
+          "kind": "internal-id",
+          "value": "chevrolet_camaro_gt4r"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.chevrolet-camaro-gt4-r-2017.20260823t010113665z-992786ea by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "acc.local-live-chevrolet-camaro-gt4-r-2017-controls.21257365"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The curated identity sources and ACC's exact model, year, GT4 class and stable internal id converge on the same Camaro GT4.R. The guided drive directly established ACC behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -142,6 +186,28 @@
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash e8958a57."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-forum.extended-car-info",
+          "acc.local-live-chevrolet-camaro-gt4-r-2017-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "ACC reported telemetry name `Chevrolet Camaro GT4 R 2017`, internal id `chevrolet_camaro_gt4r`, and class `GT4`; those exact tokens distinguish the GT4.R from road and other Camaro race variants."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-chevrolet-camaro-gt4-r-2017-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -152,5 +218,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-23"
 }

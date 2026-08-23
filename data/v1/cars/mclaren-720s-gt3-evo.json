@@ -110,6 +110,63 @@
         "level": "verified",
         "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "McLaren 720s GT3 Evo 2023"
+        },
+        {
+          "kind": "internal-id",
+          "value": "mclaren_720s_gt3_evo"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.mclaren-720s-gt3-evo-2023.20260823t012944852z-84acc775 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's 2023 720S GT3 Evo would not pull away without physical clutch input with assists disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "acc.local-live-mclaren-720s-gt3-evo-2023-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "ams2.coanda-sheet.v1.0.34",
+        "ams2.reiza-forum.extended-car-info",
+        "acc.local-live-mclaren-720s-gt3-evo-2023-controls.21257365"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The curated identity sources and ACC's exact Evo model, 2023 year, stable internal id and GT3 class converge on the same 720S GT3 EVO. The guided drive directly established ACC behavior."
+      }
     }
   ],
   "provenance": {
@@ -148,6 +205,28 @@
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 9cb825e7."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-forum.extended-car-info",
+          "acc.local-live-mclaren-720s-gt3-evo-2023-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "Telemetry name `McLaren 720s GT3 Evo 2023`, internal id `mclaren_720s_gt3_evo`, and class `GT3` explicitly distinguish this car from ACC's 2019 non-Evo 720S."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-mclaren-720s-gt3-evo-2023-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -159,5 +238,5 @@
     "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

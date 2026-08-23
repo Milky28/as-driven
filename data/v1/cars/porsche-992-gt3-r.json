@@ -95,6 +95,62 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 992 GT3 R 2023"
+        },
+        {
+          "kind": "internal-id",
+          "value": "porsche_992_gt3_r"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.porsche-992-gt3-r-2023.20260823t010803276z-900e5bbe by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided maneuver with automatic clutch and shifting disabled."
+          },
+          "source_refs": [
+            "acc.local-live-porsche-992-gt3-r-2023-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "porsche.911-gt3-r-992.newsroom-2022",
+        "acc.local-live-porsche-992-gt3-r-2023-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Porsche establishes the 992 GT3 R identity and transmission. ACC reported the 992, GT3 R and 2023 tokens together with the exact internal id and GT3 class; the guided drive directly established ACC behavior."
+      }
     }
   ],
   "provenance": {
@@ -138,6 +194,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "porsche.911-gt3-r-992.newsroom-2022",
+          "acc.local-live-porsche-992-gt3-r-2023-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `Porsche 992 GT3 R 2023`, internal id `porsche_992_gt3_r`, and class `GT3` identify the 992-generation car and exclude the 991 and Cup cars."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-porsche-992-gt3-r-2023-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -155,5 +232,5 @@
     "'Porsche 992 GT3 R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

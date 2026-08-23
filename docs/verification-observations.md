@@ -3,7 +3,7 @@
 The SimHub guided verification workflow produces staging evidence; it does not
 edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.13.1
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.18.2
 prefills the exact live telemetry name, class, game/client versions, timestamp,
 and SimHub's reported maximum gear count. The tester confirms the gear count
 and supplies the observations that require judgment.
@@ -84,13 +84,24 @@ cycle: perform the maneuver, wait for a captured result, then accept it or choos
 Retry/Skip. The overlay uses a short summary and green capture mark so completion is immediately
 visible; the longer falsifiable description is retained for form review.
 Usable values populated from guided telemetry carry an `AUTO-DETECTED` badge.
-An `unknown` or `not-tested` result is instead labeled `REVIEW NEEDED`, because
-automation did not settle that claim. A legitimate `Not applicable` value based
-on the selected primary mechanism is labeled `DERIVED`. Detailed evidence text
-copied from the guided result retains an `AUTO-FILLED` badge. Direct H-pattern
+An `unknown` or `not-tested` result is instead labeled `REVIEW NEEDED` when the
+simulator can expose the needed telemetry. ACC does not expose engine torque
+through SimHub, so its unresolved automatic-cut value remains honestly
+`unknown` but is labeled `NOT EXPOSED` and is not contributor review work. A
+legitimate `Not applicable` value based on the selected primary mechanism is
+labeled `DERIVED`. Before that mechanism is chosen, direct H-pattern selection
+is labeled `AFTER MECHANISM` rather than presented as a separate unresolved
+claim. Detailed evidence text copied from the guided result retains an
+`AUTO-FILLED` badge. Direct H-pattern
 selection is never inferred merely from a non-adjacent gear telemetry
 transition; it remains a cockpit/mechanism review, and sequential or paddle
 actuation makes it explicitly not applicable.
+
+A throttle-channel dip is not automatic-cut evidence. It may be traction
+control, driver input, or a simulator's telemetry representation. Automatic cut
+is detected only from a shift-local engine-torque collapse while throttle demand
+stays high. Imports of older ACC drafts degrade any throttle-derived cut answer
+to `unknown` because ACC exposes no engine-torque channel through SimHub.
 
 Cockpit mechanism and wheel fields carry an orange `OPTIONAL · REVIEW` badge
 until the tester supplies them. These fields improve a draft but never block

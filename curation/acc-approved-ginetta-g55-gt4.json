@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.17",
+  "approved_at": "2026-08-23",
+  "record_id": "ginetta-g55-gt4",
+  "simulator": "acc",
+  "telemetry_name": "Ginetta G55 GT4 2012",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.ginetta-g55-gt4-2012.20260823t005615780z-670ca600",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "ACC directly established the exact G55 GT4, clutch-required move-off, six paddles, clutchless no-lift upshift acceptance, automatic blip, and a D-shaped rim without display or shift lights.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT4"
+}

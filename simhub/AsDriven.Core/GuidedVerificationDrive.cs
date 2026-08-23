@@ -584,12 +584,6 @@ namespace AsDriven.Core
             {
                 _upshiftGearChangedUtc = sample.TimestampUtc;
             }
-            bool briefThrottleInterruption = !requireLift
-                && _upshiftMaximumThrottle >= 70.0
-                && _upshiftMinimumThrottle <= 45.0
-                && sample.Throttle >= 70.0
-                && sample.TimestampUtc - _upshiftGearChangedUtc.Value
-                    <= TimeSpan.FromMilliseconds(350.0);
             if (!requireLift
                 && !torqueCut
                 && _upshiftMinimumThrottle <= 45.0
@@ -599,14 +593,17 @@ namespace AsDriven.Core
             {
                 return;
             }
-            bool automaticCut = torqueCut || briefThrottleInterruption;
+            // A throttle dip is not cut evidence. It can be driver input,
+            // traction-control intervention, or a simulator's telemetry
+            // representation. A sequential upshift cut is ignition-side, so
+            // only a torque collapse while throttle demand stays high uniquely
+            // supports it.
+            bool automaticCut = torqueCut;
             string message = requireLift
                 ? "Clutchless upshift accepted after a throttle lift."
                 : "Full-throttle clutchless upshift accepted. "
                     + (automaticCut
-                        ? (briefThrottleInterruption
-                            ? "A brief throttle interruption recovered immediately around the gear change."
-                            : "A shift-local torque interruption was detected while throttle demand stayed high.")
+                        ? "A shift-local torque interruption was detected while throttle demand stayed high."
                         : CutEvidenceSummary())
                     + VehicleClutchSummary();
             SetResult(true, automaticCut, message);

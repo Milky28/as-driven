@@ -105,6 +105,50 @@
         "level": "high",
         "basis": "Exact identity and most user-facing controls were directly verified; manufacturer sources support the GT3 EVO2 identity and six-speed sequential lineage. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Huracán GT3 Evo2 2023"
+        },
+        {
+          "kind": "internal-id",
+          "value": "lamborghini_huracan_gt3_evo2"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.lamborghini-hurac-n-gt3-evo2-2023.20260823t013248499z-d585ec4d by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "lamborghini.huracan-gt3-evo2.model",
+        "lamborghini.huracan-gt3-lineage.10-years",
+        "acc.local-live-lamborghini-hurac-n-gt3-evo2-2023-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Lamborghini establishes the GT3 EVO2 identity and transmission lineage. ACC reported the exact GT3 Evo2, 2023 year, stable internal id and GT3 class; the guided drive directly established ACC behavior."
+      }
     }
   ],
   "provenance": {
@@ -175,6 +219,28 @@
         ],
         "confidence": "medium",
         "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "lamborghini.huracan-gt3-evo2.model",
+          "lamborghini.huracan-gt3-lineage.10-years",
+          "acc.local-live-lamborghini-hurac-n-gt3-evo2-2023-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `Lamborghini Huracán GT3 Evo2 2023`, internal id `lamborghini_huracan_gt3_evo2`, and class `GT3` distinguish the car from the Super Trofeo EVO2 already covered in ACC."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-lamborghini-hurac-n-gt3-evo2-2023-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -186,5 +252,5 @@
     "Low Downforce is an explicit inherited alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

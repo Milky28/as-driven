@@ -221,10 +221,10 @@ files, so an installation that already has a customized layout keeps it.
 
 ## Certified boundary and development coverage
 
-Client version 0.18.0 is built against the SimHub 9.11.22 SDK and packages
-dataset 0.4.16. The certified early-access target is AMS2 1.6.9.91 on Windows.
+Client version 0.18.2 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.4.17. The certified early-access target is AMS2 1.6.9.91 on Windows.
 The client also recognizes Assetto Corsa EVO and Assetto Corsa for active
-development. Assetto Corsa Competizione has its first reviewed entry, captured
+development. Assetto Corsa Competizione has 12 reviewed entries, each captured
 with its exact Steam content build. None is part of the certified release target.
 
 The reference client packages the approved high-fidelity 128x128 raster
@@ -503,6 +503,17 @@ aligns plugin and core binary versions, adds separate checksummed plugin and
 database release artifacts, and adds a tested uninstaller that preserves local
 data and customized layouts by default. The client remains offline; automatic
 GitHub update checking waits for a stable public release endpoint.
+Version 0.18.1 makes guided-result review capability-aware. Direct H-pattern
+selection waits for the cockpit mechanism and becomes derived for paddle,
+sequential-stick, and automatic mechanisms. ACC's unresolved automatic-cut
+result remains `unknown` evidence but is labeled `NOT EXPOSED` and no longer
+counted as contributor review work because ACC does not publish engine torque
+through SimHub.
+Version 0.18.2 removes throttle interruption as automatic-cut evidence. A
+throttle dip can be traction control, driver input, or telemetry filtering; only
+a shift-local torque collapse under sustained throttle demand now establishes
+an ignition cut. The importer also degrades automatic-cut answers from older ACC
+drafts to `unknown`, preserving the drafts without promoting false certainty.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

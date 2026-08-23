@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.17",
+  "approved_at": "2026-08-23",
+  "record_id": "porsche-992-gt3-r",
+  "simulator": "acc",
+  "telemetry_name": "Porsche 992 GT3 R 2023",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.porsche-992-gt3-r-2023.20260823t010803276z-900e5bbe",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "Exact 992-generation ACC identity and its controls were directly observed in build 21257365.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT3"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.17",
+  "approved_at": "2026-08-23",
+  "record_id": "nissan-gt-r-nismo-gt3",
+  "simulator": "acc",
+  "telemetry_name": "Nissan GT R Nismo GT3 2018",
+  "observed_game_version": "21257365",
+  "observed_through": "SimHub guided verification observation acc.nissan-gt-r-nismo-gt3-2018.20260823t012032609z-ae45d8b6",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "ACC directly established the exact 2018 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip, and GT/Formula rim.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "telemetry_class": "GT3"
+}

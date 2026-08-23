@@ -179,6 +179,26 @@ class ImportObservationTests(unittest.TestCase):
         # Behavior cut/blip are independent of clutch assist and still map.
         self.assertEqual(bundle["record"]["simulators"][0]["behavior"]["shift_cut"], "yes")
 
+    def test_acc_throttle_dip_never_becomes_automatic_cut_evidence(self) -> None:
+        observation = _clean_observation()
+        observation["simulator"] = "acc"
+        observation["observation_id"] = "acc.test-prototype.20260823t120000000z-abcd1234"
+        observation["game_version"] = "21257365"
+        observation["tests"]["automatic_cut"] = "yes"
+
+        bundle = import_observation(observation)
+        transmission = bundle["record"]["authentic_controls"]["transmission"]
+        behavior = bundle["record"]["simulators"][0]["behavior"]
+
+        self.assertEqual(transmission["upshift"]["automatic_cut"], "unknown")
+        self.assertEqual(behavior["shift_cut"], "unknown")
+        self.assertEqual(
+            bundle["approval"]["approved_controls"]["automatic_cut"], "unknown"
+        )
+        self.assertTrue(
+            any("throttle interruption alone" in note for note in bundle["review_notes"])
+        )
+
     def test_unknown_actuation_does_not_infer_gearbox(self) -> None:
         observation = _clean_observation()
         observation["cockpit"]["primary_shift_actuation"] = "unknown"

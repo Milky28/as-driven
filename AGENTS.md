@@ -78,24 +78,27 @@ than silently queueing verification work.
 
 - Branch: `codex/stabilization`; private remote `origin` at
   `github.com/Milky28/as-driven`.
-- Early-access client: 0.18.0.
-- Dataset: 0.4.16 with 253 curated records.
+- Early-access client: 0.18.2.
+- Dataset: 0.4.17 with 253 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - Every AMS2 identity observed on this PC is curated or closed by a written
   decision; the guided queue is empty. New content can still be absent because
   the inventory only contains cars loaded here. See
   `docs/ams2-coverage-plan.md`.
-- Assetto Corsa EVO is the active second-simulator development track. Three
+- Assetto Corsa EVO is the active second-simulator development track. Four
   records now carry reviewed AC EVO entries; this is development coverage, not
   part of the certified early-access target. `docs/ac-evo-coverage-plan.md` owns
   its drive order and open questions.
-- Assetto Corsa Competizione is recognized as `acc`; the Audi R8 LMS GT3 Evo II
-  is its first reviewed entry. ACC drafts record the exact Steam content build
-  because its executables expose no useful file version. This is development
-  coverage, not part of the certified target.
-- Original Assetto Corsa development now has one AC-only record and one record
-  shared with AMS2. Both fingerprint the exact installed implementation; this
-  remains development coverage outside the certified early-access target.
+- Assetto Corsa Competizione is recognized as `acc`; 12 exact entries are
+  reviewed, including the completed ranked-ten comparison batch.
+  ACC drafts record the exact Steam content build because its executables expose
+  no useful file version. This remains development coverage outside the
+  certified target. `docs/acc-coverage-plan.md` owns its drive order and identity
+  traps.
+- Original Assetto Corsa development now covers 14 records: two AC-only and 12
+  shared with another simulator. Each source fingerprints the exact installed
+  implementation; this remains development coverage outside the certified
+  early-access target.
 - `validate` compares the dataset version and record count quoted in this file,
   `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
   `data/v1/index.json`. Update the line above with the dataset, or validation

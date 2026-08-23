@@ -1,0 +1,328 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.17",
+  "approved_at": "2026-08-23",
+  "records": [
+    {
+      "record_id": "bmw-m4-gt3",
+      "bundle": "build/staged-20260823/acc.bmw-m4-gt3-2021.20260823t005022440z-63773cdc.staged.json",
+      "manufacturer": "BMW",
+      "model": "M4 GT3",
+      "year": { "from": 2022, "label": "2022 customer-racing debut" },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car built on the G82 M4 and powered by the P58 twin-turbo straight-six. Power reaches the rear wheels through a six-speed sequential Xtrac transaxle derived from the M8 GTE programme. Its electro-hydraulic clutch is operated by steering-wheel paddles, so the car has no clutch pedal and includes stall prevention, which matches the clutch-free move-off observed in the drive.",
+      "real_world_source_refs": ["bmw.m4-gt3.usa-motorsport"],
+      "confidence": "verified",
+      "confidence_basis": "BMW establishes the real M4 GT3 identity and transmission. ACC reported the exact M4 GT3 model, GT3 class, year-qualified telemetry name and stable internal id; the guided drive directly established the ACC behavior and cockpit.",
+      "identity_basis": "ACC reported telemetry name `BMW M4 GT3 2021`, internal id `bmw_m4_gt3`, and class `GT3`. Those exact tokens identify the G82 M4 GT3 already curated from BMW and AMS2 evidence; the telemetry year is the car's ACC label while the curated year records its 2022 customer-racing debut.",
+      "specification_basis": "The existing authentic six-speed paddle-sequential specification remains sourced to BMW. ACC build 21257365 independently established clutch-free move-off, six paddle-selected gears, a clutchless full-throttle upshift, an automatically blipped coast downshift, and the same closed no-display/no-wheel-light rim. ACC supplies no usable cut evidence.",
+      "control_overrides": {
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC build 21257365 accepted the guided full-throttle clutchless upshift, while the authentic real-car throttle-lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "The guided full-throttle maneuver directly established ACC's accepted technique with automatic clutch and shifting assists disabled." }
+        }
+      ],
+      "confidence_notes": "Exact ACC identity and class were captured in Steam build 21257365. The drive established six paddles, clutch-free move-off and shifts, no-lift upshift acceptance, automatic blip, and a closed GT/Formula rim without display or lights. Automatic cut remains unknown.",
+      "control_notes": ["ACC accepts a no-lift upshift; that simulator behavior does not fill the authentic real-car throttle-lift gap.", "ACC publishes no engine-torque channel through SimHub, so automatic cut remains unknown."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.bmw-m4-gt3-2021.20260823t005022440z-63773cdc by Jason Kinslow in ACC Steam build 21257365 established the exact identity, six paddle gears, clutch-free move-off and running shifts, no-lift upshift acceptance, automatic blip, and a closed no-display/no-light rim."
+    },
+    {
+      "record_id": "ginetta-g55-gt4",
+      "bundle": "build/staged-20260823/acc.ginetta-g55-gt4-2012.20260823t005615780z-670ca600.staged.json",
+      "manufacturer": "Ginetta",
+      "model": "G55 GT4",
+      "year": { "from": 2012, "label": "G55 platform" },
+      "class": "GT4",
+      "real_world_identity_notes": "British customer racing car in the GT4 category, built on the same G55 platform as the GT3 and Supercup cars and using a Hewland six-speed rather than a dual clutch. Like the other G55 variants it requires the clutch to pull away, which separates it from every dual-clutch car in this batch.",
+      "real_world_source_refs": ["wikipedia.ginetta-g55"],
+      "confidence": "high",
+      "confidence_basis": "The registered G55 source establishes the model family and six-speed GT4. ACC reported the exact G55 GT4 model, 2012 label, GT4 class and stable internal id; the guided drive directly established ACC behavior and cockpit.",
+      "identity_basis": "ACC reported telemetry name `Ginetta G55 GT4 2012`, internal id `ginetta_g55_gt4`, and class `GT4`, aligning with the existing 2012 G55 GT4 record rather than the GT3 or Supercup variants.",
+      "specification_basis": "The existing authentic six-speed paddle-sequential and clutch-required launch specification remains unchanged. ACC agreed on the clutch-required launch and six paddles, accepted a full-throttle clutchless upshift and automatically blipped coast downshift, but modeled no display or shift lights on the D-shaped rim where AMS2 modeled both.",
+      "control_overrides": {
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+        "wheel_rim": { "integrated_display": "yes", "shift_lights": "yes" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift; the authentic real-car lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided maneuver with shifting assists disabled." }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "ACC's G55 GT4 cockpit has no display integrated into the modeled D-shaped rim.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "ACC's G55 GT4 cockpit has no shift lights integrated into the modeled D-shaped rim.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact G55 GT4, clutch-required move-off, six paddles, clutchless no-lift upshift acceptance, automatic blip, and a D-shaped rim without display or shift lights.",
+      "control_notes": ["ACC and AMS2 agree that the clutch is required to pull away.", "ACC omits the rim display and shift lights modeled by AMS2; the difference is simulator-scoped."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.ginetta-g55-gt4-2012.20260823t005615780z-670ca600 by Jason Kinslow in ACC Steam build 21257365 established the exact identity and ACC controls."
+    },
+    {
+      "record_id": "chevrolet-camaro-gt4-r",
+      "bundle": "build/staged-20260823/acc.chevrolet-camaro-gt4-r-2017.20260823t010113665z-992786ea.staged.json",
+      "manufacturer": "Chevrolet",
+      "model": "Camaro GT4.R",
+      "year": { "label": "2017", "from": 2017, "to": 2017 },
+      "class": "GT4",
+      "real_world_identity_notes": "AMS2 sheet identity for the 2017 Chevrolet Camaro GT4.R.",
+      "real_world_source_refs": ["ams2.coanda-sheet.v1.0.34", "ams2.reiza-forum.extended-car-info"],
+      "confidence": "high",
+      "confidence_basis": "The curated identity sources and ACC's exact model, year, GT4 class and stable internal id converge on the same Camaro GT4.R. The guided drive directly established ACC behavior and cockpit.",
+      "identity_basis": "ACC reported telemetry name `Chevrolet Camaro GT4 R 2017`, internal id `chevrolet_camaro_gt4r`, and class `GT4`; those exact tokens distinguish the GT4.R from road and other Camaro race variants.",
+      "specification_basis": "ACC independently agreed with the curated six-speed paddle sequence, clutch-required launch, no-lift clutchless upshift acceptance, automatic blip, and closed no-display/no-light rim. Its automatic-cut result is degraded to unknown because the apparent throttle dip may be TC and ACC supplies no torque channel.",
+      "confidence_notes": "ACC directly established the exact 2017 Camaro GT4.R and agreed with all comparable established controls; automatic cut remains unknown.",
+      "control_notes": ["The draft's throttle interruption is not automatic-cut evidence; it may be traction control and ACC exposes no engine torque."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.chevrolet-camaro-gt4-r-2017.20260823t010113665z-992786ea by Jason Kinslow in ACC Steam build 21257365 established the exact identity, clutch-required launch, six paddles, clutchless no-lift shifts, automatic blip, and closed no-display/no-light rim."
+    },
+    {
+      "record_id": "porsche-992-gt3-r",
+      "bundle": "build/staged-20260823/acc.porsche-992-gt3-r-2023.20260823t010803276z-900e5bbe.staged.json",
+      "manufacturer": "Porsche",
+      "model": "911 GT3 R (992)",
+      "year": { "from": 2023, "label": "2023 (992) customer racing car" },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car on the 992 generation 911, with a 4.2 litre flat six. Porsche specifies a sequential six-speed constant-mesh gearbox derived from the 911 GT3 Cup, with paddles driving an electronic shift drum actuator.",
+      "real_world_source_refs": ["porsche.911-gt3-r-992.newsroom-2022"],
+      "confidence": "verified",
+      "confidence_basis": "Porsche establishes the 992 GT3 R identity and transmission. ACC reported the 992, GT3 R and 2023 tokens together with the exact internal id and GT3 class; the guided drive directly established ACC behavior.",
+      "identity_basis": "Telemetry name `Porsche 992 GT3 R 2023`, internal id `porsche_992_gt3_r`, and class `GT3` identify the 992-generation car and exclude the 991 and Cup cars.",
+      "specification_basis": "The Porsche-sourced six-speed paddle-sequential baseline remains unchanged. ACC established clutch-free move-off, no-lift clutchless upshift acceptance, automatic-blipped coast downshift, and the same closed no-display/no-light rim; automatic cut remains unknown.",
+      "control_overrides": {
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided maneuver with automatic clutch and shifting disabled." }
+        }
+      ],
+      "confidence_notes": "Exact 992-generation ACC identity and its controls were directly observed in build 21257365.",
+      "control_notes": ["ACC no-lift acceptance is simulator behavior, not a fill of the authentic throttle-lift gap."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.porsche-992-gt3-r-2023.20260823t010803276z-900e5bbe by Jason Kinslow established the exact 2023 992 GT3 R identity and ACC controls."
+    },
+    {
+      "record_id": "mercedes-amg-gt3-evo",
+      "bundle": "build/staged-20260823/acc.mercedes-amg-gt3-evo-2020.20260823t011325563z-afff3f23.staged.json",
+      "manufacturer": "Mercedes-AMG",
+      "model": "GT3 Evo",
+      "year": { "from": 2020, "label": "2020 Evo update" },
+      "class": "GT3",
+      "real_world_identity_notes": "Updated version of the AMG GT3 introduced for 2020, retaining the naturally aspirated V8 and the sequential six-speed rear transaxle of the car it revises. The registered manufacturer page documents the GT3 family transmission rather than the Evo update specifically.",
+      "real_world_source_refs": ["mercedes-amg.gt3.official"],
+      "confidence": "verified",
+      "confidence_basis": "Mercedes-AMG establishes the GT3 family transmission. ACC's visible 2020 selection and its telemetry name, Evo internal id and GT3 class identify the update already curated from AMS2; the guided drive directly established ACC behavior.",
+      "identity_basis": "ACC visibly labels the selection `AMG GT3 (2020)` while SimHub reported telemetry name `Mercedes AMG GT3 Evo 2020`, internal id `mercedes_amg_gt3_evo`, and class `GT3`. The combined UI year and telemetry Evo token distinguish it from the original AMG GT3.",
+      "specification_basis": "The authentic six-speed paddle-sequential baseline remains sourced to Mercedes-AMG. ACC required physical clutch input to pull away, accepted a clutchless full-throttle upshift, automatically blipped the coast downshift, and matched the closed no-display/no-light rim. The launch and no-lift acceptance are simulator-scoped.",
+      "control_overrides": {
+        "standing_start_clutch": "not-required",
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC build 21257365 would not move the AMG GT3 Evo from rest without physical clutch input while automatic clutch and shifting were disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided full-throttle maneuver." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the year-qualified Evo identity, clutch-required launch, six paddles, no-lift upshift acceptance, automatic blip and closed no-display/no-light rim.",
+      "control_notes": ["ACC requires the clutch to pull away unlike AMS2 and the curated baseline.", "The visible ACC selection omits Evo, but SimHub's exact telemetry and internal id include it."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.mercedes-amg-gt3-evo-2020.20260823t011325563z-afff3f23 by Jason Kinslow established the exact 2020 Evo identity and ACC controls."
+    },
+    {
+      "record_id": "nissan-gt-r-nismo-gt3",
+      "bundle": "build/staged-20260823/acc.nissan-gt-r-nismo-gt3-2018.20260823t012032609z-ae45d8b6.staged.json",
+      "manufacturer": "Nissan",
+      "model": "GT-R NISMO GT3",
+      "year": { "from": 2018, "label": "2018 specification" },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car built on the R35 GT-R with the VR38DETT twin-turbo V6. The NISMO customer-racing specification lists a six-speed sequential transmission with semi-automatic paddle shift as standard equipment.",
+      "real_world_source_refs": ["nismo.gt-r-nismo-gt3.2018-spec"],
+      "confidence": "verified",
+      "confidence_basis": "NISMO establishes the exact 2018 GT-R NISMO GT3 and its paddle transmission. ACC reported the 2018 name, generation-specific internal id and GT3 class; the guided drive directly established ACC behavior and cockpit.",
+      "identity_basis": "Telemetry name `Nissan GT R Nismo GT3 2018`, internal id `nissan_gt_r_gt3_2018`, and class `GT3` map to the NISMO 2018 specification and explicitly exclude ACC's 2015 variant.",
+      "specification_basis": "The NISMO-sourced six-speed paddle-sequential baseline remains unchanged. ACC required physical clutch input to move off, accepted no-lift clutchless running shifts with automatic blip, and modeled a closed GT/Formula rim rather than AMS2's round rim. Automatic cut remains unknown.",
+      "control_overrides": {
+        "standing_start_clutch": "not-required",
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+        "wheel_rim": { "shape": "round" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's 2018 Nissan would not pull away without physical clutch input with assists disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided full-throttle maneuver." }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "ACC models a closed GT/Formula control-face rim for the 2018 Nissan, while AMS2 models the curated round rim.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact 2018 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip, and GT/Formula rim.",
+      "control_notes": ["The 2018 internal id prevents a merge with ACC's 2015 Nissan.", "ACC differs from AMS2 on launch clutch and rim shape."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.nissan-gt-r-nismo-gt3-2018.20260823t012032609z-ae45d8b6 by Jason Kinslow established the exact 2018 identity and ACC controls."
+    },
+    {
+      "record_id": "bmw-m6-gt3",
+      "bundle": "build/staged-20260823/acc.bmw-m6-gt3-2017.20260823t012449446z-3dfbf616.staged.json",
+      "manufacturer": "BMW",
+      "model": "M6 GT3",
+      "year": { "from": 2016, "label": "2016 customer-racing debut" },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car based on the F13 M6 with the 4.4 litre twin-turbo V8, campaigned by privateer teams from 2016. Ricardo, which engineered the unit, describes a semi-automatic transverse transaxle carrying a sequential six-speed plus reverse racing gearbox in a magnesium casing, shifted by paddles.",
+      "real_world_source_refs": ["ricardo.bmw-m6-gt3.transaxle"],
+      "confidence": "verified",
+      "confidence_basis": "Ricardo establishes the M6 GT3 transmission. ACC reported the exact M6 GT3, its stable internal id and GT3 class; the guided drive directly established ACC behavior and cockpit.",
+      "identity_basis": "Telemetry name `BMW M6 GT3 2017`, internal id `bmw_m6_gt3`, and class `GT3` identify the F13 customer racer already curated from Ricardo and AMS2 evidence.",
+      "specification_basis": "The Ricardo-sourced six-speed paddle baseline remains unchanged. ACC required a physical launch clutch, accepted a full-throttle clutchless upshift, automatically blipped, and omitted the rim shift lights modeled by AMS2. Those differences are scoped to ACC.",
+      "control_overrides": {
+        "standing_start_clutch": "not-required",
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+        "wheel_rim": { "shift_lights": "yes" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's M6 GT3 would not pull away without physical clutch input with assists disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided full-throttle maneuver." }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "ACC models no shift lights integrated into the M6 GT3 rim, unlike AMS2.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact M6 GT3 identity, clutch-required launch, no-lift acceptance, automatic blip, and closed rim without display or lights.",
+      "control_notes": ["ACC differs from AMS2 on launch clutch and rim shift lights."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.bmw-m6-gt3-2017.20260823t012449446z-3dfbf616 by Jason Kinslow established the exact identity and ACC controls."
+    },
+    {
+      "record_id": "porsche-911-gt3-r",
+      "bundle": "build/staged-20260823/acc.porsche-911-ii-gt3-r-2019.20260823t012717503z-8d8b3498.staged.json",
+      "manufacturer": "Porsche",
+      "model": "911 GT3 R",
+      "year": { "from": 2019, "label": "2019 (991.2) customer racing car" },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car on the 991.2 generation 911, with a four-litre water-cooled flat six. Porsche specifies a sequential six-speed constant-mesh gearbox with an electronic shift actuator, changed by steering-wheel paddles.",
+      "real_world_source_refs": ["porsche.911-gt3-r-991-2.newsroom-2019"],
+      "confidence": "verified",
+      "confidence_basis": "Porsche establishes the 991.2 GT3 R identity and transmission. ACC reported the 991II generation, 2019 year, stable internal id and GT3 class; the drive directly established ACC behavior.",
+      "identity_basis": "Telemetry name `Porsche 911 II GT3 R 2019`, internal id `porsche_991ii_gt3_r`, and class `GT3` identify the 991.2 car and exclude ACC's earlier 2018 and later 992 variants.",
+      "specification_basis": "The Porsche-sourced six-speed paddle-sequential baseline remains unchanged. ACC established clutch-free move-off, no-lift upshift acceptance, automatic blip, and a GT/Formula rim rather than AMS2's D-shaped rim; cut remains unknown.",
+      "control_overrides": {
+        "upshift": { "clutch": "not-required", "throttle_lift": "unknown", "automatic_cut": "yes", "manual_blip": "not-applicable", "automatic_blip": "not-applicable" },
+        "wheel_rim": { "shape": "d-shaped" }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": { "level": "verified", "basis": "Direct guided full-throttle maneuver." }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "ACC models a closed GT/Formula control-face rim for the 2019 991II, while AMS2 models the curated D-shaped rim.",
+          "confidence": { "level": "verified", "basis": "Direct cockpit inspection during the ACC contribution drive." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact 2019 991II identity, clutch-free launch, no-lift acceptance, automatic blip and GT/Formula rim.",
+      "control_notes": ["The `991II` internal id is the decisive generation token.", "ACC and AMS2 differ on modeled rim shape."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.porsche-911-ii-gt3-r-2019.20260823t012717503z-8d8b3498 by Jason Kinslow established the exact 2019 991II identity and ACC controls."
+    },
+    {
+      "record_id": "mclaren-720s-gt3-evo",
+      "bundle": "build/staged-20260823/acc.mclaren-720s-gt3-evo-2023.20260823t012944852z-84acc775.staged.json",
+      "manufacturer": "McLaren",
+      "model": "720S GT3 EVO",
+      "year": { "label": "2023", "from": 2023, "to": 2023 },
+      "class": "GT3",
+      "real_world_identity_notes": "AMS2 sheet identity for the 2023 GT3 Gen2 McLaren 720S GT3 EVO.",
+      "real_world_source_refs": ["ams2.coanda-sheet.v1.0.34", "ams2.reiza-forum.extended-car-info"],
+      "confidence": "high",
+      "confidence_basis": "The curated identity sources and ACC's exact Evo model, 2023 year, stable internal id and GT3 class converge on the same 720S GT3 EVO. The guided drive directly established ACC behavior.",
+      "identity_basis": "Telemetry name `McLaren 720s GT3 Evo 2023`, internal id `mclaren_720s_gt3_evo`, and class `GT3` explicitly distinguish this car from ACC's 2019 non-Evo 720S.",
+      "specification_basis": "ACC agreed on the six-speed paddles, no-lift clutchless shifts, automatic blip and closed no-display/no-light rim, but required physical clutch input to pull away where AMS2 did not. Automatic cut remains unknown.",
+      "control_overrides": { "standing_start_clutch": "not-required" },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's 2023 720S GT3 Evo would not pull away without physical clutch input with assists disabled.",
+          "confidence": { "level": "verified", "basis": "Direct guided move-off test." }
+        }
+      ],
+      "confidence_notes": "ACC directly established the exact 2023 Evo identity and all modeled controls; launch clutch use differs from AMS2.",
+      "control_notes": ["ACC requires the clutch to pull away; AMS2 and the curated baseline do not."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.mclaren-720s-gt3-evo-2023.20260823t012944852z-84acc775 by Jason Kinslow established the exact 2023 Evo identity and ACC controls."
+    },
+    {
+      "record_id": "lamborghini-huracan-gt3-evo2",
+      "bundle": "build/staged-20260823/acc.lamborghini-hurac-n-gt3-evo2-2023.20260823t013248499z-d585ec4d.staged.json",
+      "manufacturer": "Lamborghini",
+      "model": "Huracan GT3 EVO2",
+      "year": { "from": 2023, "label": "GT3 EVO2" },
+      "class": "GT3",
+      "real_world_identity_notes": "Lamborghini identifies the EVO2 as part of the six-speed sequential Huracan GT3 lineage. The exact base AMS2 identity was guided-tested; Low Downforce is an explicit aero-package alias inheriting the base controls and was not separately tested.",
+      "real_world_source_refs": ["lamborghini.huracan-gt3-evo2.model", "lamborghini.huracan-gt3-lineage.10-years"],
+      "confidence": "verified",
+      "confidence_basis": "Lamborghini establishes the GT3 EVO2 identity and transmission lineage. ACC reported the exact GT3 Evo2, 2023 year, stable internal id and GT3 class; the guided drive directly established ACC behavior.",
+      "identity_basis": "Telemetry name `Lamborghini Huracán GT3 Evo2 2023`, internal id `lamborghini_huracan_gt3_evo2`, and class `GT3` distinguish the car from the Super Trofeo EVO2 already covered in ACC.",
+      "specification_basis": "ACC independently agreed on six paddles, clutch-free move-off, no-lift clutchless shifts, automatic blip and the closed no-display/no-light rim. ACC cut remains unknown and does not inherit the AMS2 claim.",
+      "confidence_notes": "ACC directly established the exact 2023 GT3 EVO2 identity and every modeled control except automatic cut.",
+      "control_notes": ["The GT3 internal id prevents collision with the Super Trofeo EVO2.", "ACC publishes no usable automatic-cut evidence."],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation acc.lamborghini-hurac-n-gt3-evo2-2023.20260823t013248499z-d585ec4d by Jason Kinslow established the exact GT3 EVO2 identity, six paddles, clutch-free launch and shifts, no-lift acceptance, automatic blip and closed no-display/no-light rim."
+    }
+  ]
+}

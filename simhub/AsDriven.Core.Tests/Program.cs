@@ -1536,17 +1536,20 @@ namespace AsDriven.Core.Tests
                     True(unengagedDownshift.GetSnapshot().ResultReady, "gives up once the engine never takes drive");
                     True(unengagedDownshift.GetSnapshot().Result.Contains("never took drive"), "explains that the gearbox did not engage");
 
-                    var transientThrottleCut = new GuidedVerificationDrive();
-                    transientThrottleCut.Start(null);
-                    transientThrottleCut.Skip();
-                    transientThrottleCut.Skip();
-                    transientThrottleCut.AddSample(GuidedSample(now, 2, 0, 90, 5000, 70, 150, true));
-                    transientThrottleCut.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 20, 4300, 72, 100, true));
-                    False(transientThrottleCut.GetSnapshot().ResultReady, "waits briefly for interrupted throttle telemetry to recover");
-                    transientThrottleCut.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 90, 4200, 74, 95, true));
-                    True(transientThrottleCut.GetSnapshot().ResultReady, "detects a brief shift-local throttle interruption and recovery");
-                    transientThrottleCut.Next();
-                    Equal("yes", transientThrottleCut.GetResults().AutomaticCut, "records a controlled transient throttle interruption as automatic cut");
+                    var transientThrottleDip = new GuidedVerificationDrive();
+                    transientThrottleDip.Start(null);
+                    transientThrottleDip.Skip();
+                    transientThrottleDip.Skip();
+                    transientThrottleDip.AddSample(GuidedSample(now, 2, 0, 90, 5000, 70, 150, true));
+                    transientThrottleDip.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 20, 4300, 72, 100, true));
+                    False(transientThrottleDip.GetSnapshot().ResultReady, "waits briefly for interrupted throttle telemetry to recover");
+                    transientThrottleDip.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 90, 4200, 74, 95, true));
+                    True(transientThrottleDip.GetSnapshot().ResultReady, "settles the upshift after a brief throttle interruption recovers");
+                    True(transientThrottleDip.GetSnapshot().Result.Contains("Engine torque held at"),
+                        "does not mistake a possible TC throttle dip for an ignition cut");
+                    transientThrottleDip.Next();
+                    Equal("unknown", transientThrottleDip.GetResults().AutomaticCut,
+                        "requires a torque collapse rather than a throttle dip for positive automatic-cut evidence");
                 }
                 finally
                 {
@@ -1621,6 +1624,19 @@ namespace AsDriven.Core.Tests
                 True(ShiftPatternRules.IsDerivedGate("sequential"), "treats a sequential gate as mechanism-implied");
                 False(ShiftPatternRules.IsDerivedGate("dogleg-h"), "never discards an observed dogleg gate as mechanism-implied");
                 False(ShiftPatternRules.IsDerivedGate("standard-h"), "never discards an observed standard gate as mechanism-implied");
+
+                True(VerificationReviewRules.DirectGearSelectionApplies("h-pattern"),
+                    "reviews direct selection for an H-pattern mechanism");
+                True(VerificationReviewRules.DirectGearSelectionApplies("direct-selection"),
+                    "reviews direct selection for a direct-selection mechanism");
+                False(VerificationReviewRules.DirectGearSelectionApplies("sequential-paddles"),
+                    "does not ask a paddle car for an H-pattern result");
+                False(VerificationReviewRules.DirectGearSelectionApplies("unknown"),
+                    "waits for the mechanism before asking for an H-pattern result");
+                False(VerificationReviewRules.AutomaticCutIsMeasurable("acc"),
+                    "does not ask contributors to settle an ACC cut that telemetry cannot expose");
+                True(VerificationReviewRules.AutomaticCutIsMeasurable("ams2"),
+                    "keeps automatic-cut review for a simulator that publishes the needed telemetry");
 
                 string syntheticRoot = Path.Combine(
                     Path.GetTempPath(), "AsDrivenTests-" + Guid.NewGuid().ToString("N"));

@@ -23,14 +23,14 @@ to `no` only when that source documents that convention.
 
 ## What ships today
 
-- Dataset 0.4.16 contains 253 reviewed car records under the open v1 JSON
+- Dataset 0.4.17 contains 253 reviewed car records under the open v1 JSON
   contract.
-- The SimHub reference client is at 0.18.0, with exact matching, three pre-flight
+- The SimHub reference client is at 0.18.2, with exact matching, three pre-flight
   card sizes, offline preview, local diagnostics, and guided verification.
 - The certified early-access target is Windows, SimHub 9.11.22, and AMS2
   1.6.9.91. Assetto Corsa EVO and the original Assetto Corsa are development
-  tracks with reviewed observations. Assetto Corsa Competizione now has its
-  first reviewed entry and remains a development track. None is part of that
+  tracks with reviewed observations. Assetto Corsa Competizione now has 12
+  reviewed entries and remains a development track. None is part of that
   certified release target.
 
 Dataset coverage, client recognition, and certified release support are
@@ -78,6 +78,8 @@ docs/verification-observations.md  Guided in-game verification contract
 docs/importers.md            AMS2 and iRacing import/review design
 docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
 docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
+docs/ac-evo-coverage-plan.md  AC EVO overlap order and identity traps
+docs/acc-coverage-plan.md     ACC overlap order and identity traps
 docs/simhub-roadmap.md       Reference-client design and remaining roadmap
 docs/releasing.md            Early-access build, QA, and publishing process
 docs/plugin-distribution.md  Single-DLL drop-in question and what it would cost
@@ -127,13 +129,13 @@ appear as separate views inside it, each with a stable shareable link:
 python -m as_driven_db build-site
 ```
 
-Dataset 0.4.16 contains 253 reviewed records. Every one of the 359 exact AMS2
+Dataset 0.4.17 contains 253 reviewed records. Every one of the 359 exact AMS2
 identities observed on the development machine is either covered by one of the
-250 AMS2-backed curated records or closed by one of 15 written decisions. New content still
-fails closed until it is observed and reviewed. Three records now
-also carry independent Assetto Corsa EVO entries, exercising the same real-car
-record across two simulators without sharing unverified behavior between them.
-Original Assetto Corsa has two AC-only records and eleven records shared with AMS2.
+250 AMS2-backed curated records or closed by one of 15 written decisions. New
+content still fails closed until it is observed and reviewed. Four records carry
+Assetto Corsa EVO entries, three of them shared with AMS2. ACC has 12 reviewed
+cross-simulator entries. Original Assetto Corsa has two AC-only records and 12
+records shared with another simulator.
 
 The SimHub reference client has its own build and test command on Windows:
 
@@ -232,7 +234,7 @@ the full review policy.
 
 ## Dataset status
 
-Dataset 0.4.16 contains 253 curated car records promoted through the reviewed
+Dataset 0.4.17 contains 253 curated car records promoted through the reviewed
 identity workflow. Of those, 250 carry AMS2 entries; one is AC EVO-only and two
 are original-AC-only. Three AMS2 records also carry separately reviewed Assetto
 Corsa EVO entries, and eleven AMS2 records also carry original Assetto Corsa

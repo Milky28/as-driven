@@ -90,6 +90,86 @@
         "level": "high",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is established by a registered manufacturer source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ginetta G55 GT4 2012"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ginetta_g55_gt4"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.ginetta-g55-gt4-2012.20260823t005615780z-670ca600 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift; the authentic real-car lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided maneuver with shifting assists disabled."
+          },
+          "source_refs": [
+            "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "ACC's G55 GT4 cockpit has no display integrated into the modeled D-shaped rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "ACC's G55 GT4 cockpit has no shift lights integrated into the modeled D-shaped rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "wikipedia.ginetta-g55",
+        "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The registered G55 source establishes the model family and six-speed GT4. ACC reported the exact G55 GT4 model, 2012 label, GT4 class and stable internal id; the guided drive directly established ACC behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -133,6 +213,27 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "wikipedia.ginetta-g55",
+          "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "ACC reported telemetry name `Ginetta G55 GT4 2012`, internal id `ginetta_g55_gt4`, and class `GT4`, aligning with the existing 2012 G55 GT4 record rather than the GT3 or Supercup variants."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -146,5 +247,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

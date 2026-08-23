@@ -89,6 +89,86 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M6 GT3 2017"
+        },
+        {
+          "kind": "internal-id",
+          "value": "bmw_m6_gt3"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.bmw-m6-gt3-2017.20260823t012449446z-3dfbf616 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "ACC's M6 GT3 would not pull away without physical clutch input with assists disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided full-throttle maneuver."
+          },
+          "source_refs": [
+            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "ACC models no shift lights integrated into the M6 GT3 rim, unlike AMS2.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "ricardo.bmw-m6-gt3.transaxle",
+        "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Ricardo establishes the M6 GT3 transmission. ACC reported the exact M6 GT3, its stable internal id and GT3 class; the guided drive directly established ACC behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -132,6 +212,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "ricardo.bmw-m6-gt3.transaxle",
+          "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `BMW M6 GT3 2017`, internal id `bmw_m6_gt3`, and class `GT3` identify the F13 customer racer already curated from Ricardo and AMS2 evidence."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -148,5 +249,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

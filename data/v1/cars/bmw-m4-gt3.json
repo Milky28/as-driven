@@ -95,6 +95,62 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M4 GT3 2021"
+        },
+        {
+          "kind": "internal-id",
+          "value": "bmw_m4_gt3"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.bmw-m4-gt3-2021.20260823t005022440z-63773cdc by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC build 21257365 accepted the guided full-throttle clutchless upshift, while the authentic real-car throttle-lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided full-throttle maneuver directly established ACC's accepted technique with automatic clutch and shifting assists disabled."
+          },
+          "source_refs": [
+            "acc.local-live-bmw-m4-gt3-2021-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "bmw.m4-gt3.usa-motorsport",
+        "acc.local-live-bmw-m4-gt3-2021-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "BMW establishes the real M4 GT3 identity and transmission. ACC reported the exact M4 GT3 model, GT3 class, year-qualified telemetry name and stable internal id; the guided drive directly established the ACC behavior and cockpit."
+      }
     }
   ],
   "provenance": {
@@ -138,6 +194,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "bmw.m4-gt3.usa-motorsport",
+          "acc.local-live-bmw-m4-gt3-2021-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "ACC reported telemetry name `BMW M4 GT3 2021`, internal id `bmw_m4_gt3`, and class `GT3`. Those exact tokens identify the G82 M4 GT3 already curated from BMW and AMS2 evidence; the telemetry year is the car's ACC label while the curated year records its 2022 customer-racing debut."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-bmw-m4-gt3-2021-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -155,5 +232,5 @@
     "'BMW M4 GT3 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

@@ -89,6 +89,74 @@
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
       }
+    },
+    {
+      "simulator": "acc",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Porsche 911 II GT3 R 2019"
+        },
+        {
+          "kind": "internal-id",
+          "value": "porsche_991ii_gt3_r"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT3"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in ACC 21257365 via guided verification observation acc.porsche-911-ii-gt3-r-2019.20260823t012717503z-8d8b3498 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided full-throttle maneuver."
+          },
+          "source_refs": [
+            "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "ACC models a closed GT/Formula control-face rim for the 2019 991II, while AMS2 models the curated D-shaped rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the ACC contribution drive."
+          },
+          "source_refs": [
+            "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
+          ]
+        }
+      ],
+      "verified_game_version": "21257365",
+      "verified_at": "2026-08-23",
+      "source_refs": [
+        "porsche.911-gt3-r-991-2.newsroom-2019",
+        "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "Porsche establishes the 991.2 GT3 R identity and transmission. ACC reported the 991II generation, 2019 year, stable internal id and GT3 class; the drive directly established ACC behavior."
+      }
     }
   ],
   "provenance": {
@@ -132,6 +200,27 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "porsche.911-gt3-r-991-2.newsroom-2019",
+          "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Telemetry name `Porsche 911 II GT3 R 2019`, internal id `porsche_991ii_gt3_r`, and class `GT3` identify the 991.2 car and exclude ACC's earlier 2018 and later 992 variants."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -145,5 +234,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-23"
 }

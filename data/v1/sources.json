@@ -6528,6 +6528,126 @@
           "digest": "e1e828e4e1718c5e7951788666158a5924580ec433e6a3df86a234a1f8a2657f"
         }
       }
+    },
+    {
+      "source_id": "acc.local-live-bmw-m4-gt3-2021-controls.21257365",
+      "title": "Live ACC BMW M4 GT3 2021 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.bmw-m4-gt3-2021.20260823t005022440z-63773cdc by Jason Kinslow in ACC Steam build 21257365 established the exact identity, six paddle gears, clutch-free move-off and running shifts, no-lift upshift acceptance, automatic blip, and a closed no-display/no-light rim."
+    },
+    {
+      "source_id": "acc.local-live-ginetta-g55-gt4-2012-controls.21257365",
+      "title": "Live ACC Ginetta G55 GT4 2012 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.ginetta-g55-gt4-2012.20260823t005615780z-670ca600 by Jason Kinslow in ACC Steam build 21257365 established the exact identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-chevrolet-camaro-gt4-r-2017-controls.21257365",
+      "title": "Live ACC Chevrolet Camaro GT4 R 2017 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.chevrolet-camaro-gt4-r-2017.20260823t010113665z-992786ea by Jason Kinslow in ACC Steam build 21257365 established the exact identity, clutch-required launch, six paddles, clutchless no-lift shifts, automatic blip, and closed no-display/no-light rim."
+    },
+    {
+      "source_id": "acc.local-live-porsche-992-gt3-r-2023-controls.21257365",
+      "title": "Live ACC Porsche 992 GT3 R 2023 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.porsche-992-gt3-r-2023.20260823t010803276z-900e5bbe by Jason Kinslow established the exact 2023 992 GT3 R identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365",
+      "title": "Live ACC Mercedes AMG GT3 Evo 2020 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.mercedes-amg-gt3-evo-2020.20260823t011325563z-afff3f23 by Jason Kinslow established the exact 2020 Evo identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365",
+      "title": "Live ACC Nissan GT R Nismo GT3 2018 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.nissan-gt-r-nismo-gt3-2018.20260823t012032609z-ae45d8b6 by Jason Kinslow established the exact 2018 identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-bmw-m6-gt3-2017-controls.21257365",
+      "title": "Live ACC BMW M6 GT3 2017 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.bmw-m6-gt3-2017.20260823t012449446z-3dfbf616 by Jason Kinslow established the exact identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365",
+      "title": "Live ACC Porsche 911 II GT3 R 2019 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.porsche-911-ii-gt3-r-2019.20260823t012717503z-8d8b3498 by Jason Kinslow established the exact 2019 991II identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-mclaren-720s-gt3-evo-2023-controls.21257365",
+      "title": "Live ACC McLaren 720s GT3 Evo 2023 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.mclaren-720s-gt3-evo-2023.20260823t012944852z-84acc775 by Jason Kinslow established the exact 2023 Evo identity and ACC controls."
+    },
+    {
+      "source_id": "acc.local-live-lamborghini-hurac-n-gt3-evo2-2023-controls.21257365",
+      "title": "Live ACC Lamborghini Huracán GT3 Evo2 2023 guided-verification drive",
+      "publisher": "Local ACC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation acc.lamborghini-hurac-n-gt3-evo2-2023.20260823t013248499z-d585ec4d by Jason Kinslow established the exact GT3 EVO2 identity, six paddles, clutch-free launch and shifts, no-lift acceptance, automatic blip and closed no-display/no-light rim."
     }
   ]
 }

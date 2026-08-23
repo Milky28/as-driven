@@ -305,9 +305,11 @@ behavior remained operational after the restart.
   releases, never a moving branch.
 - Show dataset version and changelog before applying an update.
 - Continue the AC EVO and ACC development tracks. ACC was selected next from
-  available telemetry, test access, source quality, and shared-car coverage; its
-  first reviewed entry is the Audi R8 LMS GT3 Evo II. The existing iRacing
-  importer and AC Rally identifier are foundations, not coverage claims.
+  available telemetry, test access, source quality, and shared-car coverage. Its
+  first ranked comparison batch is complete with 12 reviewed entries total;
+  `docs/acc-coverage-plan.md` records the results and next exact-overlap backlog.
+  The existing iRacing importer and AC Rally identifier are foundations, not
+  coverage claims.
 - Provide an opt-in unmatched-identifier export; do not upload telemetry by
   default.
 
