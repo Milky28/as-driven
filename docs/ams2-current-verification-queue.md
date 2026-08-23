@@ -443,11 +443,12 @@ Which name means which variant cannot be guessed. Here the suffix marks high
 downforce and the plain name is low; among the curated sports and GT cars the
 plain name is the default and the suffix marks low downforce.
 
-**Lotus Renault 98T carries the first gear-count override.** Its real gearbox is
-a Lotus/Hewland six-speed; AMS2 models five. The drive reported five, which is
-only a minimum, so the count was confirmed deliberately in-game before recording
-the deviation. The record keeps the sourced six and states five as an explicit
-simulator override.
+**Lotus Renault 98T carries the first gear-count override.** The drive reported
+five, which is only a minimum, so the count was confirmed deliberately in-game.
+Later research established that the real program used both five- and six-speed
+Lotus/Hewland configurations, with Senna documented choosing the five-speed. The
+generic authentic count is therefore open; AMS2's five is retained as an exact
+implementation observation rather than called a deviation.
 
 `Lotus 98T` is retired rather than aliased. It is a pre-rename identity that the
 certified build no longer produces in either aero configuration.

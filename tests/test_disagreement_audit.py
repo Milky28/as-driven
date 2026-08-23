@@ -71,12 +71,16 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                     self.assertTrue(view["verified_at"])
                     self.assertTrue(view["source_refs"])
 
-    def test_audi_launch_is_the_first_supported_departure(self) -> None:
-        finding = next(
+    def finding(self, finding_id: str) -> dict:
+        return next(
             item
             for item in self.checked_in["findings"]
-            if item["finding_id"]
-            == "audi-r8-lms-gt3-evo-ii--transmission-standing-start-clutch"
+            if item["finding_id"] == finding_id
+        )
+
+    def test_audi_launch_is_a_supported_departure(self) -> None:
+        finding = self.finding(
+            "audi-r8-lms-gt3-evo-ii--transmission-standing-start-clutch"
         )
         self.assertEqual("required", finding["authentic_baseline"]["value"])
         self.assertEqual("high", finding["authentic_baseline"]["confidence"])
@@ -91,6 +95,53 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             ["ams2", "ac-evo", "acc"],
             adjudication["departing_simulators"],
         )
+
+    def test_mercedes_launch_is_a_supported_departure(self) -> None:
+        finding = self.finding(
+            "mercedes-amg-gt3--transmission-standing-start-clutch"
+        )
+        baseline = finding["authentic_baseline"]
+        self.assertEqual("required", baseline["value"])
+        self.assertEqual("high", baseline["confidence"])
+        self.assertEqual(
+            ["mercedes-amg.gt3.operation-manual-v03"],
+            baseline["primary_source_refs"],
+        )
+        adjudication = finding["adjudication"]
+        self.assertEqual("supported-departure", adjudication["status"])
+        self.assertEqual(["acc"], adjudication["matching_simulators"])
+        self.assertEqual(["ams2"], adjudication["departing_simulators"])
+
+    def test_lotus_variants_keep_the_authentic_baseline_open(self) -> None:
+        finding = self.finding(
+            "lotus-renault-98t--transmission-forward-gears"
+        )
+        self.assertIsNone(finding["authentic_baseline"]["value"])
+        self.assertEqual(
+            "authentic-baseline-open", finding["adjudication"]["status"]
+        )
+        self.assertEqual([], finding["adjudication"]["matching_simulators"])
+        self.assertEqual([], finding["adjudication"]["departing_simulators"])
+        self.assertEqual(
+            {"ams2": 5, "ac": 6},
+            {
+                view["simulator"]: view["value"]
+                for view in finding["simulator_views"]
+            },
+        )
+
+    def test_porsche_gate_stays_provisional_without_an_exact_rsr_diagram(self) -> None:
+        finding = self.finding(
+            "porsche-911-rsr-1974--transmission-shift-pattern"
+        )
+        baseline = finding["authentic_baseline"]
+        self.assertEqual("standard-h", baseline["value"])
+        self.assertEqual("medium", baseline["confidence"])
+        self.assertTrue(baseline["primary_source_refs"])
+        adjudication = finding["adjudication"]
+        self.assertEqual("provisional-departure", adjudication["status"])
+        self.assertEqual(["ams2"], adjudication["matching_simulators"])
+        self.assertEqual(["ac"], adjudication["departing_simulators"])
 
 
 if __name__ == "__main__":

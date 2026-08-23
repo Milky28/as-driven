@@ -33,7 +33,7 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -46,8 +46,8 @@
       }
     },
     "notes": [
-      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
-      "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip. This matches every other curated paddle-shift GT3 car."
+      "AMG's operation manual requires clutch operation from neutral to first and instructs the driver to ease the clutch in; an exact 2016 first drive identifies the otherwise-hidden clutch pedal as the control racers use to get the car moving.",
+      "The simulator drives accepted no-lift upshifts and no manual blip on downshifts because they detected automatic cut or blip. Real-car throttle-lift technique remains open rather than being inferred from simulator behavior."
     ]
   },
   "simulators": [
@@ -78,7 +78,20 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mercedes-amg-gt3.20260813t160013204z-821a21ab by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted clutch-free move-off, unlike the original real car's driver-operated clutch launch.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided move-off test directly observed clutch-free pull-away with automatic clutch and shifting assists disabled."
+          },
+          "source_refs": [
+            "ams2.local-live-mercedes-amg-gt3-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -122,18 +135,6 @@
         ]
       },
       "overrides": [
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
-          "condition": "ACC's original AMG GT3 would not pull away without physical clutch input with automatic clutch and shifting disabled.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided move-off test."
-          },
-          "source_refs": [
-            "acc.local-live-mercedes-amg-gt3-2015-controls.21257365"
-          ]
-        },
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "not-required",
@@ -191,7 +192,6 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
         ],
@@ -200,6 +200,17 @@
         ],
         "confidence": "verified",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "mercedes-amg.gt3.operation-manual-v03",
+          "caranddriver.mercedes-amg-gt3-2016-first-drive"
+        ],
+        "confidence": "high",
+        "basis": "AMG Customer Sports' operation manual requires clutch operation when selecting first from neutral and tells the driver to ease the clutch in. A first-person test of the exact original 2016 car independently identifies the clutch pedal as the control used to get the car moving. Neither source establishes anti-stall or an automated launch clutch."
       },
       {
         "paths": [
@@ -225,7 +236,7 @@
     ]
   },
   "archetype": {
-    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
     "classification": "deviates",
     "deviations": [
       {

@@ -4395,6 +4395,31 @@
       "notes": "Manufacturer page for the AMG GT3 family: sequential six-speed racing gearbox mounted at the rear axle in transaxle configuration. The GT3 Evo is the updated version of the same car."
     },
     {
+      "source_id": "mercedes-amg.gt3.operation-manual-v03",
+      "title": "Mercedes-AMG GT3 Manual B: Vehicle Operation, version 03",
+      "publisher": "AMG Customer Sports",
+      "url": "https://www.scribd.com/document/972539624/Manual-B-ENG-Vehicle-Operation-R03",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2019-01-02",
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Publicly hosted copy of the original AMG Customer Sports vehicle-operation manual for the pre-Evo Mercedes-AMG GT3. Printed page 12 says the clutch does not have to be depressed while shifting in driving operation and 'only has to be operated when shifting from neutral to first gear.' Printed page 6 instructs the driver to depress the clutch and ease it in after selecting first. The document does not establish anti-stall or an automated launch clutch."
+    },
+    {
+      "source_id": "caranddriver.mercedes-amg-gt3-2016-first-drive",
+      "title": "2016 Mercedes-AMG GT3 Race Car First Drive",
+      "publisher": "Car and Driver",
+      "author": "K. C. Colwell",
+      "url": "https://www.caranddriver.com/reviews/a15101465/mercedes-amg-gt3-race-car-first-drive-review/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2016-03-21",
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "First-person test of the exact original 2016 Mercedes-AMG GT3. The cockpit account states: 'There is a clutch pedal in this car, but it’s deliberately hidden because racers use it only to get the car moving.' It separately states that paddle shifts do not use the clutch."
+    },
+    {
       "source_id": "mercedes-amg.gt4.official",
       "title": "Mercedes-AMG GT4",
       "publisher": "Mercedes-AMG",
@@ -5020,6 +5045,42 @@
       "notes": "Records that the 915 replaced the 901/911 dog-leg first gear with a conventional H pattern, first up and left, citing a 1972 Porsche press release. Registered because secondary sources sometimes attribute the 901's dogleg to the 915, which would put first gear in the wrong place for any car running a 915."
     },
     {
+      "source_id": "porsche.911-workshop-manual.type-915",
+      "title": "Porsche 911 Workshop Manual: Type 915 transmission",
+      "publisher": "Dr. Ing. h.c. F. Porsche AG",
+      "url": "https://www.manualslib.com/manual/1076114/Porsche-1972-911.html",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Public scan of Porsche's period workshop manual. Printed page 283 introduces the Type 915 for 1972-onward 911s; printed page 284 says its five forward speeds and reverse are arranged in a double shift pattern. The reviewed text does not expose an exact 1974 Carrera RSR 3.0 selector diagram, so it supports the 915 family but does not alone close the RSR gate-layout question."
+    },
+    {
+      "source_id": "fia.porsche-911-carrera-rs.homologation-3053",
+      "title": "FIA homologation form 3053: Porsche 911 Carrera RS",
+      "publisher": "Fédération Internationale de l'Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601075701/homologation_form_number_3053_group_3.pdf",
+      "archive_url": null,
+      "source_type": "homologation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Homologation form 3053 establishes five forward synchronized gears and a lever on the transmission tunnel for the Carrera RS family. It is not a readable selector diagram for the Group 4 1974 Carrera RSR 3.0, so absence of a dogleg statement is not treated as a negative."
+    },
+    {
+      "source_id": "netzwerkeins.porsche-911-rsr-3.0-history",
+      "title": "Historie der Porsche 911 Carrera RS 3.0 / RSR 3.0 1974 und 1975",
+      "publisher": "Netzwerkeins / werk1",
+      "url": "https://www.netzwerkeins.com/2011/07/26/historie-der-porsche-911-carrera-rs-3-0-gruppe-3-rsr-3-0-rennpaket-gruppe-4-1974-und-1975/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2011-07-26",
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact 1974/75 Carrera RSR 3.0 account. Its power-transmission section says 'Das Getriebe war mit der RS-Ausführung identisch' and the technical table gives a mechanical five-speed Type 915. It does not provide a readable selector-layout diagram."
+    },
+    {
       "source_id": "ultimatecarpage.spyker-c8-spyder-gt2r",
       "title": "Spyker C8 Spyder GT2-R specifications",
       "publisher": "Ultimatecarpage",
@@ -5401,7 +5462,31 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-14",
       "reuse_status": "facts-only-review",
-      "notes": "Gives the 1986 Lotus 98T a Lotus / Hewland 6-speed manual behind the Renault Gordini EF15B turbocharged V6, driven by Ayrton Senna and Johnny Dumfries."
+      "notes": "Identifies both a conventional five-speed and a development six-speed for the 1986 Lotus 98T program. Senna generally chose the five-speed while Dumfries tested the six-speed. The generic record therefore cannot use this source to assign one count to every 98T configuration."
+    },
+    {
+      "source_id": "deagostini.classic-team-lotus.lotus-98t",
+      "title": "Lotus 98T — Ayrton Senna",
+      "publisher": "De Agostini Publishing / Classic Team Lotus",
+      "url": "https://d24udp600h4lxn.cloudfront.net/dea/live/media/27-lotus-senna-uk-web/27-lotus-senna-uk-web.pdf",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Classic Team Lotus-licensed issue for the 1986 98T. Printed pages 1–2 describe a six-speed gearbox replacing the prior five-speed, establishing the six-speed 98T configuration but not that every chassis, driver, or race used it."
+    },
+    {
+      "source_id": "auto-motor-sport.lotus-98t-3-auction",
+      "title": "Ayrton Sennas Lotus 98T wird versteigert",
+      "publisher": "auto motor und sport",
+      "url": "https://www.auto-motor-und-sport.de/formel-1/auktion-ayrton-senna-lotus-98t-rm-sothebys/",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact surviving Senna chassis 98T-3 account. It states the 98T gearbox was available with five or six gears and that Senna chose the five-speed. This establishes real configuration variation and prevents a generic 98T record from treating either count as universal."
     },
     {
       "source_id": "wikipedia.mclaren-m23",

@@ -9,7 +9,7 @@
   "observed_game_version": "1.6.9.91",
   "observed_through": "SimHub guided verification observation ams2.lotus-renault-98t-high-downforce.20260814t154354295z-af25e11d",
   "approved_controls": {
-    "forward_gears": 6,
+    "forward_gears": null,
     "shift_actuation": "h-pattern",
     "shift_pattern": "standard-h",
     "standing_start_clutch": "required",
@@ -23,7 +23,7 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Guided testing directly established five H-pattern gears in the simulator on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip. The real car's sixth gear comes from a registered source and is recorded as a simulator override.",
+  "confidence_notes": "Guided testing directly established five H-pattern gears in the simulator on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip. Research established that real 98Ts used both five- and six-speed configurations, so the generic authentic count is open and the simulator's five is retained as an override rather than called a departure.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",
   "additional_telemetry_names": [
     {

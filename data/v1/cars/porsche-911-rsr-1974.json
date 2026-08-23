@@ -49,7 +49,7 @@
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
       "The 915 family is established as a synchromesh design by an air-cooled Porsche specialist, and the RSR ran the magnesium-cased 915/08 within that family. No reviewed source says the race variant replaced the synchronisers, so the construction is recorded at medium confidence rather than high.",
       "The downshift blip stays unknown. A synchromesh leaves a blip optional where dog rings demand one, but reading the blip off the construction would answer one unestablished field with another, so it is left for evidence of its own.",
-      "The gate is a standard H with first up and left. Secondary sources sometimes describe the 915 as a dogleg, which belongs to the 901 it replaced: Porsche announced the change to a conventional pattern in 1972. Recorded here so the gate is not 'corrected' to a dogleg on the strength of that confusion.",
+      "A conventional H with first up and left is the best-supported Type 915 layout. The exact 1974 RSR used the RS-derived Type 915, while the dogleg belongs to the earlier 901 it replaced. No readable exact-RSR selector diagram was recovered, so the gate remains medium confidence rather than a fully closed primary-source verdict.",
       "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
     ]
   },
@@ -125,10 +125,10 @@
         {
           "path": "/authentic_controls/transmission/shift_pattern",
           "value": "dogleg-h",
-          "condition": "The fingerprinted official Kunos implementation shows a dogleg gate in its cockpit, while the real Type 915 uses a conventional H pattern.",
+          "condition": "The fingerprinted official Kunos implementation shows a dogleg gate in its cockpit, while the best-supported RS-derived Type 915 layout is a conventional H pattern.",
           "confidence": {
-            "level": "high",
-            "basis": "The package's cockpit gate was directly read during the guided drive; the real Type 915 gate is independently sourced."
+            "level": "medium",
+            "basis": "The package's cockpit gate was directly read during the guided drive. Period Type 915 and exact-RSR evidence supports a conventional layout, but no readable exact-1974-RSR selector diagram was recovered."
           },
           "source_refs": [
             "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
@@ -184,16 +184,30 @@
       {
         "paths": [
           "/authentic_controls/transmission/forward_gears",
-          "/authentic_controls/transmission/shift_actuation",
-          "/authentic_controls/transmission/shift_pattern"
+          "/authentic_controls/transmission/shift_actuation"
         ],
         "source_refs": [
           "stuttcars.porsche-911-carrera-rsr-3-0",
+          "fia.porsche-911-carrera-rs.homologation-3053",
+          "netzwerkeins.porsche-911-rsr-3.0-history",
           "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91",
           "twinsparkracing.porsche-915-replaced-the-dogleg"
         ],
         "confidence": "high",
-        "basis": "The source gives a five-speed gearbox carried over from the RS, and the live drive selected five H-pattern gears with no automatic cut or blip. The gate is the 915's conventional H with first up and left, which replaced the 901's dogleg in 1972."
+        "basis": "Exact 1974 RSR evidence says its mechanical five-speed Type 915 was identical to the RS version, FIA form 3053 records five forward synchronized gears and a tunnel lever, and the live drive selected five H-pattern gears."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "porsche.911-workshop-manual.type-915",
+          "fia.porsche-911-carrera-rs.homologation-3053",
+          "netzwerkeins.porsche-911-rsr-3.0-history",
+          "twinsparkracing.porsche-915-replaced-the-dogleg"
+        ],
+        "confidence": "medium",
+        "basis": "The exact RSR used the RS-derived Type 915; Porsche's period workshop manual describes the 915's double shift pattern and specialist evidence identifies its conventional first-up-left layout replacing the 901 dogleg. No readable exact-1974-RSR selector diagram was recovered, so standard H remains the best-supported answer at medium confidence."
       },
       {
         "paths": [
@@ -284,5 +298,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-22"
+  "updated_at": "2026-08-23"
 }

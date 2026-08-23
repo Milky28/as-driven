@@ -236,10 +236,11 @@ uncurated car is loaded, needs no guided drive, and captured all five current
 identities plus their aero counterparts in a few minutes. This queue should
 reconcile against that log rather than the stored car files alone.
 
-Lotus Renault 98T carries the dataset's first gear-count override. Its real
-gearbox is a Lotus/Hewland six-speed and AMS2 models five, confirmed deliberately
-in-game, because a guided drive establishes only the highest gear actually
-selected and cannot distinguish an unreached gear from an absent one.
+Lotus Renault 98T carries the dataset's first gear-count override. Later research
+established that the real program used both five- and six-speed Lotus/Hewland
+configurations, with Senna documented choosing the five-speed. The generic
+authentic count is therefore open: AMS2's deliberately confirmed five is an exact
+implementation observation, not a departure from a universal six-speed baseline.
 
 **The current next batch is the remaining Formula Classic cars:** Gen2 Model1 and
 Model2, Gen3 Model1, Gen4 Model1, and Gen4 Model2 - Low Downforce. Their queued

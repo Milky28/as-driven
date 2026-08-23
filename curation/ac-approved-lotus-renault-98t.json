@@ -8,7 +8,7 @@
   "observed_game_version": "14923034",
   "observed_through": "SimHub guided verification observation ac.lotus-98t.20260822t162340414z-6141e36f",
   "approved_controls": {
-    "forward_gears": 6,
+    "forward_gears": null,
     "shift_actuation": "h-pattern",
     "shift_pattern": "standard-h",
     "standing_start_clutch": "required",
@@ -21,7 +21,7 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "The fingerprinted official Kunos implementation exposed six H-pattern gears, clutch-required move-off, required lift, required manual rev matching, no automatic cut or blip, and a round rim without display or shift lights. AC's clutch channel may include car-side clutch activity, so clutchless running-shift acceptance remains medium confidence.",
+  "confidence_notes": "The fingerprinted official Kunos implementation exposed six H-pattern gears, clutch-required move-off, required lift, required manual rev matching, no automatic cut or blip, and a round rim without display or shift lights. Research established that real 98Ts used both five- and six-speed configurations, so the generic authentic count is open and AC's six is retained as an override rather than treated as universal. AC's clutch channel may include car-side clutch activity, so clutchless running-shift acceptance remains medium confidence.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",
   "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
   "game_version_correction": {
