@@ -249,6 +249,61 @@ class SiteTests(unittest.TestCase):
         self.assertIn('<option value="ac-evo">Assetto Corsa EVO</option>', page)
         self.assertIn('<option value="ams2">AMS2</option>', page)
 
+    def test_comparison_modes_separate_coverage_from_disagreement(self) -> None:
+        payload = collect(ROOT)
+        page = build_site(ROOT)
+        multi = [car for car in payload["cars"] if car["is_multi_sim"]]
+        disagreeing = [
+            car for car in payload["cars"] if car["has_simulator_disagreements"]
+        ]
+
+        self.assertGreater(len(multi), len(disagreeing))
+        self.assertEqual(
+            re.findall(r'data-mode="([a-z]+)" aria-pressed="(?:true|false)"', page),
+            ["all", "multi", "disagreements"],
+        )
+        self.assertEqual(page.count('data-multi-sim="true"'), len(multi))
+        self.assertEqual(
+            page.count('data-sim-disagreement="true"'), len(disagreeing)
+        )
+        self.assertEqual(page.count('class="disagrees-flag"'), len(disagreeing))
+        self.assertIn("row.dataset.multiSim", page)
+        self.assertIn("row.dataset.simDisagreement", page)
+
+    def test_only_conflicting_established_simulator_values_disagree(self) -> None:
+        cars = {car["id"]: car for car in collect(ROOT)["cars"]}
+
+        # The ACC Ginetta cockpit directly conflicts with AMS2 on two visible
+        # wheel properties, so it is a benchmark disagreement.
+        ginetta = cars["ginetta-g55-gt4"]
+        self.assertEqual(
+            [item["field"] for item in ginetta["simulator_disagreements"]],
+            ["Integrated wheel display", "Wheel shift lights"],
+        )
+
+        # Both Huracan views agree everywhere they establish a value. Their
+        # shared unknown automatic cut is a gap, not a disagreement.
+        huracan = cars["lamborghini-huracan-gt3-evo2"]
+        self.assertTrue(huracan["is_multi_sim"])
+        self.assertFalse(huracan["has_simulator_disagreements"])
+
+        # AC alone establishes a cut for the RSS Audi implementation. Three
+        # unknown views cannot vote against it; only the independently observed
+        # standing-start conflict qualifies.
+        audi = cars["audi-r8-lms-gt3-evo-ii"]
+        self.assertEqual(
+            [item["field"] for item in audi["simulator_disagreements"]],
+            ["Pulling away"],
+        )
+        self.assertNotIn(
+            "Automatic shift cut",
+            [item["field"] for item in audi["simulator_disagreements"]],
+        )
+
+        page = build_site(ROOT)
+        self.assertIn("Only conflicting established values count", page)
+        self.assertIn("Simulators disagree", page)
+
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:
         page = build_site(ROOT)
         # It owns no <head>, so it cannot declare a charset.
@@ -286,8 +341,8 @@ class SiteTests(unittest.TestCase):
             sum(1 for car in cars if car["open_fields"]),
         )
         self.assertEqual(
-            stats["sim differences"],
-            sum(1 for car in cars if car["has_differences"]),
+            stats["sims disagree"],
+            sum(1 for car in cars if car["has_simulator_disagreements"]),
         )
 
     def test_the_header_and_open_row_keep_a_compact_visual_hierarchy(self) -> None:

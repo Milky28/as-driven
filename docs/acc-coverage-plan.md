@@ -171,6 +171,12 @@ At that point, stop prioritising additional ACC cars by roster order. Build the
 comparison-first website mode, then use its visible evidence gaps to choose the
 next drives.
 
+**Completed 2026-08-23:** the site now provides `All`, `Multi-sim`, and
+`Disagreements` modes. Disagreements require two conflicting established values;
+an established value beside `unknown` remains an evidence gap. Expanded rows
+list each simulator's answer separately and keep real-car departures under the
+distinct `differs from car` label.
+
 [acc-roster]: https://assettocorsa.gg/assetto-corsa-competizione/
 [gt4-pack]: https://assettocorsa.gg/the-gt4-pack-dlc/
 [gtwc-2020]: https://assettocorsa.gg/2020-gt-world-challenge-pack/

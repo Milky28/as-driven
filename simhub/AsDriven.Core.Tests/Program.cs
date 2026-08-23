@@ -352,7 +352,7 @@ namespace AsDriven.Core.Tests
                     True(renault.HasMatch, "matches exact Renault formula identity " + renaultFormula);
                     Equal("sequential-paddles", renault.ShiftActuation, "uses Renault formula paddles for " + renaultFormula);
                     Equal("required", renault.StandingStartClutch, "requires Renault formula standing-start clutch for " + renaultFormula);
-                    Equal("yes", renault.ShiftCut, "exposes detected automatic cut for " + renaultFormula);
+                    Equal("unknown", renault.ShiftCut, "does not infer automatic cut from a throttle dip for " + renaultFormula);
                     Equal("yes", renault.AutoBlip, "exposes detected automatic blip for " + renaultFormula);
                     Equal("gt-formula", renault.WheelRimShape, "uses the merged GT/Formula rim for " + renaultFormula);
                 }

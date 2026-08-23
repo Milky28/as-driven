@@ -69,6 +69,59 @@ SIMULATOR_BEHAVIOR_FIELDS = {
     "/wheel_rim_type/source_label": "wheel-rim source label",
 }
 
+# Simulator behavior and authentic controls use deliberately separate schemas:
+# the former records what a game did, while the latter tells the driver what the
+# real car requires. For a cross-simulator comparison these paths are the same
+# user-facing question. An explicit simulator `unknown` replaces the authentic
+# baseline here, because a gap in one game is not evidence that it agrees.
+BEHAVIOR_COMPARISON_PATHS = {
+    "/shift_type": "/authentic_controls/transmission/shift_actuation",
+    "/auto_blip": "/authentic_controls/transmission/downshift/automatic_blip",
+    "/shift_cut": "/authentic_controls/transmission/upshift/automatic_cut",
+    "/wheel_rim_type/normalized": "/authentic_controls/steering/wheel_rim/shape",
+    "/wheel_rim_type/integrated_display": "/authentic_controls/steering/wheel_rim/integrated_display",
+    "/wheel_rim_type/shift_lights": "/authentic_controls/steering/wheel_rim/shift_lights",
+    "/wheel_rim_type/open_top": "/authentic_controls/steering/wheel_rim/open_top",
+}
+
+COMPARISON_PATHS = (
+    "/authentic_controls/transmission/forward_gears",
+    "/authentic_controls/transmission/gearbox_type",
+    "/authentic_controls/transmission/shift_actuation",
+    "/authentic_controls/transmission/shift_pattern",
+    "/authentic_controls/transmission/first_gear_position",
+    "/authentic_controls/transmission/standing_start_clutch",
+    "/authentic_controls/transmission/upshift/clutch",
+    "/authentic_controls/transmission/upshift/throttle_lift",
+    "/authentic_controls/transmission/upshift/automatic_cut",
+    "/authentic_controls/transmission/downshift/clutch",
+    "/authentic_controls/transmission/downshift/manual_blip",
+    "/authentic_controls/transmission/downshift/automatic_blip",
+    "/authentic_controls/steering/wheel_rim/shape",
+    "/authentic_controls/steering/wheel_rim/integrated_display",
+    "/authentic_controls/steering/wheel_rim/shift_lights",
+    "/authentic_controls/steering/wheel_rim/open_top",
+)
+
+COMPARISON_LABELS = {
+    "/authentic_controls/transmission/forward_gears": "Forward gears",
+    "/authentic_controls/transmission/gearbox_type": "Gearbox construction",
+    "/authentic_controls/transmission/shift_actuation": "Shifter",
+    "/authentic_controls/transmission/shift_pattern": "Gate pattern",
+    "/authentic_controls/transmission/first_gear_position": "First gear position",
+    "/authentic_controls/transmission/standing_start_clutch": "Pulling away",
+    "/authentic_controls/transmission/upshift/clutch": "Clutch on an upshift",
+    "/authentic_controls/transmission/upshift/throttle_lift": "Upshift throttle",
+    "/authentic_controls/transmission/upshift/automatic_cut": "Automatic shift cut",
+    "/authentic_controls/transmission/downshift/clutch": "Clutch on a downshift",
+    "/authentic_controls/transmission/downshift/manual_blip": "Manual blip",
+    "/authentic_controls/transmission/downshift/automatic_blip": "Automatic blip",
+    "/authentic_controls/steering/wheel_rim/shape": "Wheel-rim category",
+    "/authentic_controls/steering/wheel_rim/integrated_display": "Integrated wheel display",
+    "/authentic_controls/steering/wheel_rim/shift_lights": "Wheel shift lights",
+    "/authentic_controls/steering/wheel_rim/open_top": "Open-top wheel",
+}
+
 
 def simulator_label(simulator: str) -> str:
     return SIMULATOR_LABELS.get(simulator, simulator.upper())
@@ -281,6 +334,93 @@ def _apply(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -> dic
     return effective
 
 
+def _apply_controls(
+    controls: dict[str, Any], overrides: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Return one simulator's effective controls without changing the record."""
+    effective = json.loads(json.dumps(controls))
+    prefix = "/authentic_controls"
+    for override in overrides:
+        path = override.get("path", "")
+        if not path.startswith(prefix):
+            continue
+        parts = [part for part in path[len(prefix):].split("/") if part]
+        node = effective
+        for part in parts[:-1]:
+            node = node.get(part, {})
+        if parts:
+            node[parts[-1]] = override["value"]
+    return effective
+
+
+def _comparison_value(path: str, value: Any) -> str:
+    if value in {None, "unknown"}:
+        return "Not established"
+    if path.endswith("/standing_start_clutch"):
+        return launch(str(value))[0]
+    if path.endswith("/shift_actuation"):
+        return ACTUATION.get(str(value), str(value).replace("-", " ").title())
+    if path.endswith("/shape"):
+        return RIM.get(str(value), str(value).replace("-", " ").title())
+    yes_no = {
+        "yes": "Yes",
+        "no": "No",
+        "required": "Required",
+        "not-required": "Not required",
+        "optional": "Optional",
+        "not-applicable": "Not applicable",
+        "partial": "Partial lift",
+    }
+    return yes_no.get(value, str(value).replace("-", " ").title())
+
+
+def simulator_disagreements(
+    controls: dict[str, Any], entries: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """Established values on which two reviewed simulator views conflict.
+
+    `unknown` is retained for display but excluded from the decision. One game
+    knowing less than another is an evidence gap, not a disagreement.
+    """
+    views: list[tuple[str, dict[str, Any]]] = []
+    for entry in entries:
+        effective = _apply_controls(controls, entry.get("overrides") or [])
+        flat = {
+            f"/authentic_controls{path}": value
+            for path, value in _flatten(effective).items()
+        }
+        behavior = _flatten(entry.get("behavior") or {})
+        for behavior_path, control_path in BEHAVIOR_COMPARISON_PATHS.items():
+            if behavior_path in behavior:
+                flat[control_path] = behavior[behavior_path]
+        views.append((simulator_label(entry.get("simulator", "")), flat))
+
+    disagreements = []
+    for path in COMPARISON_PATHS:
+        values = [flat.get(path, "unknown") for _, flat in views]
+        established = {
+            json.dumps(value, sort_keys=True)
+            for value in values
+            if value not in {None, "unknown"}
+        }
+        if len(established) < 2:
+            continue
+        disagreements.append(
+            {
+                "path": path,
+                "field": COMPARISON_LABELS[path],
+                "values": [
+                    {
+                        "simulator": label,
+                        "value": _comparison_value(path, flat.get(path, "unknown")),
+                    }
+                    for label, flat in views
+                ],
+            }
+        )
+    return disagreements
+
+
 def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -> list[dict[str, str]]:
     """What the simulator does differently, in the same words as the card.
 
@@ -350,10 +490,14 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
         transmission["downshift"]["automatic_blip"],
         transmission["downshift"]["clutch"],
     )
+    simulator_entries = record.get("simulators") or []
     simulator_views = [
         _simulator_view(record["record_id"], entry, transmission)
-        for entry in record.get("simulators") or []
+        for entry in simulator_entries
     ]
+    cross_simulator_disagreements = simulator_disagreements(
+        controls, simulator_entries
+    )
     block = record.get("archetype") or {}
     classification = block.get("classification")
     mechanism = archetypes.get(block.get("archetype_id", ""), "")
@@ -391,6 +535,9 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
         ],
         "simulators": simulator_views,
         "has_differences": any(view["differences"] for view in simulator_views),
+        "is_multi_sim": len(simulator_views) > 1,
+        "simulator_disagreements": cross_simulator_disagreements,
+        "has_simulator_disagreements": bool(cross_simulator_disagreements),
         "actuation": transmission["shift_actuation"],
         "start": transmission["standing_start_clutch"],
         "blip": transmission["downshift"]["manual_blip"],
@@ -558,6 +705,26 @@ def _row(car: dict[str, Any]) -> str:
             '<div class="block"><h4>Not established</h4>'
             f'<div class="chips">{chips}</div></div>'
         )
+    if car["simulator_disagreements"]:
+        items = "".join(
+            '<li><span class="field">{field}</span><span class="comparison-values">'
+            '{values}</span></li>'.format(
+                field=_e(item["field"]),
+                values="".join(
+                    '<span><b>{simulator}</b> {value}</span>'.format(
+                        simulator=_e(value["simulator"]),
+                        value=_e(value["value"]),
+                    )
+                    for value in item["values"]
+                ),
+            )
+            for item in car["simulator_disagreements"]
+        )
+        detail.append(
+            '<div class="block simulator-comparison"><h4>Simulators disagree</h4>'
+            '<p>Only conflicting established values count; unknowns are shown as gaps.</p>'
+            f'<ul>{items}</ul></div>'
+        )
     tabs = "".join(
         '<a class="sim-tab" id="{anchor}-tab" href="#{anchor}" role="tab" '
         'aria-controls="{anchor}-panel" aria-selected="{selected}" tabindex="{tabindex}" '
@@ -609,7 +776,9 @@ def _row(car: dict[str, Any]) -> str:
     return (
         f'<tr class="car" id="car-{_e(car["id"])}" data-search="{_e(search)}" '
         f'data-simulators="{_e(simulator_ids)}" data-actuation="{_e(car["actuation"])}" '
-        f'data-start="{_e(car["start"])}" data-blip="{_e(car["blip"])}" tabindex="0" '
+        f'data-start="{_e(car["start"])}" data-blip="{_e(car["blip"])}" '
+        f'data-multi-sim="{str(car["is_multi_sim"]).lower()}" '
+        f'data-sim-disagreement="{str(car["has_simulator_disagreements"]).lower()}" tabindex="0" '
         f'aria-expanded="false" aria-controls="details-{_e(car["id"])}">'
         f'<td class="car-name">{simulator_anchors}'
         f'<span class="name">{_e(car["name"])}</span>'
@@ -617,8 +786,14 @@ def _row(car: dict[str, Any]) -> str:
         + simulator_count
         + (
             '<span class="differs-flag" title="A reviewed simulator does something '
-            'differently from the real car">sim differs</span>'
+            'differently from the real car">differs from car</span>'
             if car["has_differences"]
+            else ""
+        )
+        + (
+            '<span class="disagrees-flag" title="Two reviewed simulators establish '
+            'different values">sims disagree</span>'
+            if car["has_simulator_disagreements"]
             else ""
         )
         + "</td>"
@@ -638,7 +813,7 @@ def render(payload: dict[str, Any]) -> str:
     clutch_start = sum(1 for car in cars if car["start"] == "required")
     you_blip = sum(1 for car in cars if car["blip"] == "required")
     open_any = sum(1 for car in cars if car["open_fields"])
-    differing = sum(1 for car in cars if car["has_differences"])
+    disagreeing = sum(1 for car in cars if car["has_simulator_disagreements"])
     simulator_entries = sum(len(car["simulators"]) for car in cars)
     simulator_options = "".join(
         '<option value="{id}">{label}</option>'.format(
@@ -654,7 +829,7 @@ def render(payload: dict[str, Any]) -> str:
         clutch_start=clutch_start,
         you_blip=you_blip,
         open_any=open_any,
-        differing=differing,
+        disagreeing=disagreeing,
         simulator_count=len(payload["simulators"]),
         simulator_entries=simulator_entries,
         simulator_options=simulator_options,
@@ -782,6 +957,20 @@ h1 {{
   padding: 14px 0; margin-bottom: 6px;
   background: var(--bg); border-bottom: 1px solid var(--line);
 }}
+.mode {{
+  display: flex; flex: 0 0 auto;
+  border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+}}
+.mode button {{
+  padding: 9px 11px; margin: 0; border: 0;
+  color: var(--muted); background: var(--surface); cursor: pointer;
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px;
+}}
+.mode button + button {{ border-left: 1px solid var(--line); }}
+.mode button:hover {{ color: var(--ink); }}
+.mode button[aria-pressed="true"] {{
+  color: var(--ink); background: var(--surface-2); box-shadow: inset 0 -2px 0 var(--accent);
+}}
 input[type="search"] {{
   flex: 1 1 240px; min-width: 200px;
   padding: 9px 12px;
@@ -887,13 +1076,25 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 12px; color: var(--accent);
 }}
-.differs-flag, .sim-count {{
+.differs-flag, .disagrees-flag, .sim-count {{
   display: inline-block; margin-top: 5px; padding: 1px 6px;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 10.5px; letter-spacing: 0.04em;
   color: var(--accent); border: 1px solid currentColor; border-radius: 2px;
 }}
 .sim-count {{ color: var(--muted); margin-right: 5px; }}
+.disagrees-flag {{ color: var(--optional); margin-left: 5px; }}
+.simulator-comparison {{
+  padding: 12px; border: 1px solid var(--line); background: var(--surface-2);
+}}
+.simulator-comparison > p {{ font-size: 12.5px; }}
+.simulator-comparison li {{ display: flex; flex-wrap: wrap; gap: 5px 10px; }}
+.comparison-values {{ display: flex; flex-wrap: wrap; gap: 5px 14px; }}
+.comparison-values span {{ font-size: 13px; color: var(--muted); }}
+.comparison-values b {{
+  margin-right: 4px; color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 500;
+}}
 .differs {{ gap: 12px; }}
 .differs li {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }}
 .differs .was {{ color: var(--faint); text-decoration: line-through; }}
@@ -986,12 +1187,17 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     <div class="stat"><b>{clutch_start}</b><span>clutch starts</span></div>
     <div class="stat"><b>{you_blip}</b><span>manual blip</span></div>
     <div class="stat"><b>{open_any}</b><span>open questions</span></div>
-    <div class="stat"><b>{differing}</b><span>sim differences</span></div>
+    <div class="stat"><b>{disagreeing}</b><span>sims disagree</span></div>
   </div>
   <p class="provenance">Dataset {version}, released {released}.</p>
 </header>
 
 <div class="controls">
+  <div class="mode" role="group" aria-label="Comparison mode">
+    <button type="button" data-mode="all" aria-pressed="true">All</button>
+    <button type="button" data-mode="multi" aria-pressed="false">Multi-sim</button>
+    <button type="button" data-mode="disagreements" aria-pressed="false">Disagreements</button>
+  </div>
   <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
   <select id="f-simulator" aria-label="Filter by simulator coverage">
     <option value="">Any simulator</option>
@@ -1051,6 +1257,9 @@ stable link that can be shared.</footer>
 (function () {{
   var q = document.getElementById('q');
   var simulatorFilter = document.getElementById('f-simulator');
+  var mode = 'all';
+  var modeButtons = Array.prototype.slice.call(
+    document.querySelectorAll('[data-mode]'));
   var filters = ['actuation', 'start', 'blip'].map(function (name) {{
     return {{ name: name, node: document.getElementById('f-' + name) }};
   }});
@@ -1063,6 +1272,13 @@ stable link that can be shared.</footer>
     var shown = 0;
     rows.forEach(function (row) {{
       var ok = !text || row.dataset.search.indexOf(text) !== -1;
+      if (ok && mode === 'multi' && row.dataset.multiSim !== 'true') {{
+        ok = false;
+      }}
+      if (ok && mode === 'disagreements'
+          && row.dataset.simDisagreement !== 'true') {{
+        ok = false;
+      }}
       var wantedSimulator = simulatorFilter.value;
       if (ok && wantedSimulator
           && row.dataset.simulators.indexOf(' ' + wantedSimulator + ' ') === -1) {{
@@ -1209,6 +1425,17 @@ stable link that can be shared.</footer>
   var remembered = null;
   try {{ remembered = localStorage.getItem('as-driven-theme'); }} catch (error) {{}}
   setTheme(remembered || 'system', false);
+
+  modeButtons.forEach(function (button) {{
+    button.addEventListener('click', function () {{
+      mode = button.getAttribute('data-mode');
+      modeButtons.forEach(function (candidate) {{
+        candidate.setAttribute(
+          'aria-pressed', candidate === button ? 'true' : 'false');
+      }});
+      apply();
+    }});
+  }});
 
   q.addEventListener('input', apply);
   simulatorFilter.addEventListener('change', apply);
