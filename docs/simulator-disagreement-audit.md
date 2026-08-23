@@ -28,12 +28,15 @@ Dataset 0.4.20 contains 25 field-level findings across 19 cars:
 - 6 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Two are now **supported departures**, 22 remain **provisional departures**, and
-one has an **open authentic baseline**. The Audi and original Mercedes-AMG GT3
-launch-clutch findings have exact-car evidence strong enough for benchmark
-conclusions. The Lotus 98T research established real configuration variation
-rather than a winning simulator answer. Simulator agreement or a previously
-curated answer is not enough to call one implementation authentic.
+Five are **supported departures**, three remain **provisional departures**, and
+17 have an **open authentic baseline**. Five launch-clutch findings have
+exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
+Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
+GT3. A complete review of the previous provisional queue found that sixteen more
+baselines had inherited simulator observations without independent real-car
+support. They are now explicit open findings rather than weak verdicts. Simulator
+agreement or a previously curated answer is not enough to call one implementation
+authentic.
 
 The audit uses three statuses:
 
@@ -81,7 +84,46 @@ supported departure.
 Sources: [AMG Customer Sports operation manual][amg-manual] and
 [Car and Driver's exact 2016 first drive][amg-first-drive].
 
-## Resolved as a scope ambiguity
+**Mercedes-AMG GT3 Evo (2020) — pulling away.** The exact 2020 operation
+manual says on printed page 7 to press the clutch, engage first gear, and ease
+in the clutch. Printed page 13 confines clutch use to the neutral-to-first
+shift, while page 14 separately documents ECU-controlled double-clutching on
+downshifts. The manual does not establish anti-stall or an automated launch.
+
+ACC build 21257365 matches that clutch-required launch. AMS2 1.6.9.91 accepted
+clutch-free move-off with assists disabled, making that exact implementation a
+supported departure.
+
+Source: [Mercedes-AMG GT3 2020 Operations Manual R01][amg-evo-manual].
+
+**Mercedes-AMG GT4 — pulling away.** The exact drivetrain manual instructs the
+driver on printed page 73 of 112 to depress the clutch at idle, engage first,
+and ease in the clutch. A first-person exact-car test independently says the
+clutch is required in first gear in the pit lane. Neither source establishes
+anti-stall or an automated launch.
+
+ACC build 21257365 matches the clutch-required real car. AMS2 1.6.9.91 accepted
+clutch-free move-off with assists disabled, making that exact implementation a
+supported departure.
+
+Sources: [Mercedes-AMG GT4 Drivetrain Manual R1.0][amg-gt4-manual] and
+[Top Gear's exact-car first drive][amg-gt4-first-drive].
+
+**BMW M6 GT3 — pulling away.** BMW's M4/M6 GT3 comparison identifies the M6's
+hydraulic clutch on printed page 5, while an exact-car first-person drive says
+the M6 still requires the clutch to get moving and describes easing it in. BMW
+documents a fully automatic centrifugal clutch only for Alex Zanardi's special
+adaptation; that exception does not redefine the baseline customer car.
+
+ACC build 21257365 matches the clutch-required real car. AMS2 1.6.9.91 accepted
+clutch-free move-off with assists disabled, making that exact implementation a
+supported departure.
+
+Sources: [BMW M4/M6 GT3 comparison][bmw-comparison],
+[BMWBLOG's exact-car first drive][bmw-first-drive], and
+[BMW's Zanardi adaptation notes][bmw-zanardi].
+
+## Open authentic baselines
 
 **Lotus Renault 98T — forward gears.** The 1986 program used both five- and
 six-speed Lotus/Hewland configurations. Senna is documented choosing the
@@ -97,10 +139,31 @@ useful benchmark boundary rather than an unresolved source hunt.
 Sources: [Classic Team Lotus-licensed 98T issue][lotus-licensed] and
 [the surviving Senna 98T-3 account][lotus-98t-3].
 
-## Next research queue
+The remaining open findings are negative research results, not unfinished bulk
+claims:
 
-Research should begin with findings that materially change hardware or driving
-technique and have a realistic path to primary evidence:
+- Audi's exact 2018 R8 LMS GT4 data does not describe open- versus closed-top
+  wheel geometry, and its 2020 GT2-derived wheel cannot be inherited backward.
+- Lister Storm GTM, Maserati MC12 GT1, Nissan R390 GT1 and Porsche 911 GT1-98
+  sources establish sequential hardware but not driver blipping or ECU
+  automatic-blip behavior.
+- McLaren's exact 2019 720S GT3 product sheet and Evo material do not provide a
+  launch procedure; NISMO's exact 2018 GT-R GT3 specification identifies a
+  clutch but likewise gives no move-off instruction.
+- Exact manufacturer material does not settle the disputed rim categories for
+  the 2018 Nissan GT-R GT3 or 2019 Porsche 911 GT3 R.
+- BMW M6 GT3 media and Nissan R390 history do not identify wheel-mounted shift
+  lights. Ginetta documents a driver display with RPM/shift lights separately
+  from wheel controls, so display existence cannot be converted into wheel
+  integration.
+
+Each simulator observation remains intact as a scoped override. The open baseline
+therefore preserves the cross-sim conflict while refusing to declare a winner.
+
+## Remaining provisional findings
+
+Only three findings still have a real-car answer but fall short of the benchmark's
+primary-evidence threshold:
 
 1. **Porsche 911 RSR 1974 — gate pattern.** Research confirms that the exact RSR
    used the RS-derived five-speed Type 915 and that a conventional H is the
@@ -108,17 +171,14 @@ technique and have a realistic path to primary evidence:
    do not expose a readable exact-RSR selector diagram, however, so AMS2's
    conventional gate remains a provisional match and AC's dogleg a provisional
    departure. The January 1974 RSR operating manual is the best remaining lead.
-2. **BMW M6 GT3 — pulling away.** AMS2 accepts a clutch-free launch while ACC
-   requires clutch input. Seek an exact manufacturer operation manual or direct
-   cockpit test, keeping launch control and anti-stall separate from the physical
-   clutch hardware.
-3. **Mercedes-AMG GT3 Evo — pulling away.** Audit the 2020 Evo independently of
-   the original car just resolved; shared transmission lineage cannot establish
-   an unchanged launch procedure by itself.
-
-Cockpit display and shift-light conflicts remain recorded, but follow these
-driver-technique and hardware findings unless a primary cockpit source is
-already at hand.
+2. **Milano 55 GT1 / Prodrive Ferrari 550 GTS — manual blip.** The exact-car Evo
+   technical account says the clutch is used on every downshift and the driver
+   blips to match revs. It is strong secondary evidence, but no manufacturer or
+   homologation operating procedure has been recovered.
+3. **Saleen S7-R — manual blip.** A first-person test of the 2001 Park Place S7R
+   instructs clutch use on both shifts and recommends heel-and-toe on braking
+   downshifts. This supports the early S7R family at medium confidence, but does
+   not prove every 2005 Xtrac revision retained that procedure.
 
 ## What a published finding must say
 
@@ -132,5 +192,12 @@ entire simulator from one car.
 [autobild-track-test]: https://www.autobild.de/artikel/tracktest-audi-r8-lms-gt3-evo-ii-27575473.html
 [amg-manual]: https://www.scribd.com/document/972539624/Manual-B-ENG-Vehicle-Operation-R03
 [amg-first-drive]: https://www.caranddriver.com/reviews/a15101465/mercedes-amg-gt3-race-car-first-drive-review/
+[amg-evo-manual]: https://www.scribd.com/document/972539658/Manual-B-ENG-Vehicle-Operations-R01
+[amg-gt4-manual]: https://www.scribd.com/document/432746102/Mercedes-Amg-Gt4-drivetrain
+[amg-gt4-first-drive]: https://www.topgear.com/car-reviews/mercedes-benz/first-drive-24
+[bmw-comparison]: https://www.press.bmwgroup.com/canada/article/attachment/T0334391EN/481490
+[bmw-first-drive]: https://www.bmwblog.com/2016/07/06/like-behind-wheel-bmw-m6-gtlm/
+[bmw-zanardi]: https://www.press.bmwgroup.com/italy/article/attachment/T0290729IT/423215
+[saleen-first-drive]: https://www.motortrend.com/reviews/saleen-s7r
 [lotus-licensed]: https://d24udp600h4lxn.cloudfront.net/dea/live/media/27-lotus-senna-uk-web/27-lotus-senna-uk-web.pdf
 [lotus-98t-3]: https://www.auto-motor-und-sport.de/formel-1/auktion-ayrton-senna-lotus-98t-rm-sothebys/

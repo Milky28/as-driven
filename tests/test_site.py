@@ -75,7 +75,10 @@ class SiteTests(unittest.TestCase):
     def test_wheel_equipment_reaches_each_car_row(self) -> None:
         cars = {car["id"]: car for car in collect(ROOT)["cars"]}
         self.assertEqual(cars["roco-001"]["wheel_equipment"], "Display · No shift lights")
-        self.assertEqual(cars["bmw-m6-gt3"]["wheel_equipment"], "No display · Shift lights")
+        self.assertEqual(
+            cars["bmw-m6-gt3"]["wheel_equipment"],
+            "No display · Lights not established",
+        )
         page = build_site(ROOT)
         for car in cars.values():
             rendered = car["wheel_equipment"].encode(
@@ -313,7 +316,7 @@ class SiteTests(unittest.TestCase):
         self.assertGreater(len(multi), len(disagreeing))
         self.assertEqual(
             re.findall(r'data-mode="([a-z]+)" aria-pressed="(?:true|false)"', page),
-            ["all", "multi", "disagreements"],
+            ["all", "multi", "disagreements", "benchmark"],
         )
         self.assertEqual(page.count('data-multi-sim="true"'), len(multi))
         self.assertEqual(
@@ -322,6 +325,8 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(page.count('class="disagrees-flag"'), len(disagreeing))
         self.assertIn("row.dataset.multiSim", page)
         self.assertIn("row.dataset.simDisagreement", page)
+        self.assertIn("restoreFindingLink", page)
+        self.assertIn("data-open-car", page)
 
         header = page.split("</header>", 1)[0]
         controls = page.split('<div class="controls">', 1)[1].split(
@@ -382,14 +387,54 @@ class SiteTests(unittest.TestCase):
         self.assertIn("Authentic baseline open", page)
         self.assertIn("Research it before publishing a verdict", page)
 
+    def test_benchmark_mode_presents_every_audit_finding_as_evidence(self) -> None:
+        payload = collect(ROOT)
+        findings = payload["benchmark_findings"]
+        page = build_site(ROOT)
+
+        self.assertTrue(findings)
+        self.assertEqual(
+            page.count('class="benchmark-card benchmark-card-'), len(findings)
+        )
+        for finding in findings:
+            self.assertIn(f'id="finding-{finding["finding_id"]}"', page)
+
+        supported = page.index('data-benchmark-status="supported-departure"')
+        open_baseline = page.index(
+            'data-benchmark-status="authentic-baseline-open"'
+        )
+        provisional = page.index('data-benchmark-status="provisional-departure"')
+        self.assertLess(supported, open_baseline)
+        self.assertLess(open_baseline, provisional)
+        self.assertIn("Cross-simulator authenticity benchmark", page)
+        self.assertIn("Authentic baseline", page)
+        self.assertIn("Evidence verdict", page)
+        self.assertIn("Real-car sources", page)
+
+    def test_benchmark_content_obeys_its_hidden_state(self) -> None:
+        page = build_site(ROOT)
+        self.assertIn(
+            '<section class="benchmark-view" id="benchmark-view" '
+            'aria-label="Benchmark findings" hidden>',
+            page,
+        )
+        self.assertIn(".benchmark-view[hidden] { display: none; }", page)
+
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:
         page = build_site(ROOT)
         # It owns no <head>, so it cannot declare a charset.
         page.encode("ascii")
-        # Google Fonts is the one external host an artifact may reach; nothing
-        # else may be fetched, or the page breaks wherever it is opened.
-        hosts = set(re.findall(r'https?://([^/"\s]+)', page))
-        self.assertLessEqual(hosts, {"fonts.googleapis.com", "fonts.gstatic.com"}, hosts)
+        # Google Fonts is the one external host the artifact may fetch while
+        # rendering. Benchmark evidence links may point elsewhere, but remain
+        # ordinary navigation rather than runtime dependencies.
+        resource_hosts = set(
+            re.findall(r'(?:@import url\(|src=["\'])https?://([^/"\')\s]+)', page)
+        )
+        self.assertLessEqual(
+            resource_hosts,
+            {"fonts.googleapis.com", "fonts.gstatic.com"},
+            resource_hosts,
+        )
         self.assertNotIn("<script src", page)
 
     def test_the_headline_counts_match_the_records(self) -> None:

@@ -34,7 +34,7 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "unknown"
     },
     "steering": {
       "wheel_rim": {
@@ -97,7 +97,20 @@
         ],
         "steering_dor": 480
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted clutch-free move-off with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-720s-gt3-evo-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-12",
       "source_refs": [
@@ -173,6 +186,16 @@
     "claims": [
       {
         "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "mclaren.720s-gt3-evo.product-page"
+        ],
+        "confidence": "medium",
+        "basis": "No exact Evo customer operating manual or launch procedure was recovered from McLaren's manufacturer material. Original GT3 and GT3X behavior is not inherited."
+      },
+      {
+        "paths": [
           "/identity",
           "/simulators/0/behavior"
         ],
@@ -232,7 +255,13 @@
   },
   "archetype": {
     "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/standing_start_clutch",
+        "basis": "The exact Evo launch procedure is not established, so neither simulator's move-off behavior is inherited as the real-car answer."
+      }
+    ]
   },
   "notes": [
     "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",

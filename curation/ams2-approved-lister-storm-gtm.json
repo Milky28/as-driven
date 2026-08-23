@@ -16,7 +16,7 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "unknown",
     "wheel_rim_shape": "d-shaped"
   },
   "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, and D-shaped no-display rim were directly observed. Historical hardware evidence supports the transmission family; manual blipping is approved as the authentic driver-supplied rev-matching technique.",

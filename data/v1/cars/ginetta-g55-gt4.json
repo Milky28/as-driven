@@ -38,11 +38,11 @@
     "steering": {
       "wheel_rim": {
         "shape": "d-shaped",
-        "integrated_display": "yes",
-        "shift_lights": "yes",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
-        "notes": "Observed from the cockpit during the guided drive."
+        "notes": "Ginetta documents a driver display with RPM/shift lights separately from steering-wheel controls. Neither source establishes that the display or lights are integrated into the rim."
       }
     },
     "notes": [
@@ -79,7 +79,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.ginetta-g55-gt4.20260813t165508257z-2f4612a0 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 models a display integrated into the G55 GT4 rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 models shift lights integrated into the G55 GT4 rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -174,6 +199,18 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "ginetta.g55-gt4.user-manual",
+          "ginetta.gt4.brochure"
+        ],
+        "confidence": "medium",
+        "basis": "Ginetta documents steering-wheel controls separately from an on-board driver display with RPM/shift lights. The sources establish cockpit equipment but not integration into the wheel rim."
+      },
       {
         "paths": [
           "/identity",

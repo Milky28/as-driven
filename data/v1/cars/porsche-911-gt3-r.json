@@ -37,12 +37,12 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "d-shaped",
+        "shape": "unknown",
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
-        "notes": "Observed from the cockpit during the guided drive."
+        "notes": "Porsche's exact 2019 material establishes a multi-function CFRP racing wheel with paddles but does not establish its rim category."
       }
     },
     "notes": [
@@ -78,7 +78,20 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt3-r.20260813t161631591z-4b6f6c96 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "AMS2 1.6.9.91 models a D-shaped rim for the 2019 911 GT3 R.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-porsche-911-gt3-r-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -137,7 +150,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "gt-formula",
-          "condition": "ACC models a closed GT/Formula control-face rim for the 2019 991II, while AMS2 models the curated D-shaped rim.",
+          "condition": "ACC models a closed GT/Formula control-face rim for the 2019 991II while AMS2 models a D-shaped rim; Porsche's published material does not settle the normalized rim category.",
           "confidence": {
             "level": "verified",
             "basis": "Direct cockpit inspection during the ACC contribution drive."
@@ -161,6 +174,16 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape"
+        ],
+        "source_refs": [
+          "porsche.911-gt3-r-991-2.newsroom-2019"
+        ],
+        "confidence": "medium",
+        "basis": "Porsche establishes a multi-function CFRP racing wheel with paddles for the exact 2019 car, but does not specify whether its graspable rim is D-shaped or GT/Formula."
+      },
       {
         "paths": [
           "/identity",

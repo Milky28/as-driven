@@ -30,8 +30,8 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
-        "automatic_blip": "no"
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required"
     },
@@ -49,7 +49,7 @@
     "notes": [
       "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
       "All six sequential-stick gears accepted clutch-free full-throttle upshifts with perceptible automatic cut.",
-      "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+      "In AMS2, clutch-free downshifts were accepted and no automatic throttle blip was observed, so that implementation requires the driver to supply the rev matching. The real car's blip technique remains unknown.",
       "The exact Low Downforce identity inherits the verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
@@ -85,7 +85,32 @@
           "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 requires driver-supplied rev matching for the modeled downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-10",
       "source_refs": [
@@ -145,6 +170,18 @@
           "source_refs": [
             "ac.local-live-maserati-mc12-gt1-controls.14923034"
           ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "AC build 14923034 produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-mc12-gt1-controls.14923034"
+          ]
         }
       ],
       "verified_game_version": "14923034",
@@ -162,6 +199,17 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/automatic_blip"
+        ],
+        "source_refs": [
+          "maserati.mc12-versione-corse.2006"
+        ],
+        "confidence": "medium",
+        "basis": "Maserati distinguishes the GT1's manually operated sequential gearbox from the Versione Corse's electro-actuated Cambiocorsa, but gives no GT1 driver rev-match or automatic-blip procedure."
+      },
       {
         "paths": [
           "/identity",
@@ -212,7 +260,7 @@
           "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+        "basis": "Direct current-game tests and cockpit inspection establish AMS2's clutch-free sequential downshifts with no automatic blip; the resulting driver-supplied rev matching is scoped to that implementation."
       },
       {
         "paths": [
@@ -240,7 +288,17 @@
   },
   "archetype": {
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Manufacturer material does not establish whether the GT1 driver supplies a blip."
+      },
+      {
+        "path": "/authentic_controls/transmission/downshift/automatic_blip",
+        "basis": "Manufacturer material does not establish an automatic-blip function on the GT1."
+      }
+    ]
   },
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."

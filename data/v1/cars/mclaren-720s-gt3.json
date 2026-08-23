@@ -33,7 +33,7 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "unknown"
     },
     "steering": {
       "wheel_rim": {
@@ -79,7 +79,20 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mclaren-720s-gt3.20260816t000803309z-39c312fd by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted clutch-free move-off with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-16",
       "source_refs": [
@@ -152,6 +165,16 @@
     "claims": [
       {
         "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "mclaren.720s-gt3.product-sheet"
+        ],
+        "confidence": "medium",
+        "basis": "McLaren's exact 2019 product sheet specifies a six-speed sequential motorsport transmission but contains no launch procedure or driver clutch-control instruction. GT3X behavior is not inherited."
+      },
+      {
+        "paths": [
           "/identity",
           "/simulators/0/identities"
         ],
@@ -180,7 +203,6 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
         ],
@@ -215,7 +237,13 @@
   },
   "archetype": {
     "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/standing_start_clutch",
+        "basis": "The exact 2019 product sheet does not establish the launch procedure, so neither simulator's move-off behavior is inherited as the real-car answer."
+      }
+    ]
   },
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."

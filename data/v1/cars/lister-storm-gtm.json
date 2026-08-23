@@ -30,8 +30,8 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
-        "automatic_blip": "no"
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required"
     },
@@ -48,7 +48,7 @@
     "notes": [
       "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
       "All six sequential-stick gears accepted clutch-free full-throttle upshifts with perceptible automatic cut.",
-      "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+      "In AMS2, clutch-free downshifts were accepted and no automatic throttle blip was observed, so that implementation requires the driver to supply the rev matching. The real car's blip technique remains unknown.",
       "The opened historical hardware sources do not prove that every late Storm GTM used the same exact gearbox specification."
     ]
   },
@@ -79,7 +79,32 @@
           "Standing-start clutch, six-speed sequential stick, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 requires driver-supplied rev matching for the modeled downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-10",
       "source_refs": [
@@ -120,10 +145,22 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "condition": "The fingerprinted RSS v4 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip. The real car's blip technique remains unknown.",
           "confidence": {
             "level": "high",
             "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ac.local-live-gt-tornado-v12-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The fingerprinted RSS v4 implementation produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided coast-downshift test."
           },
           "source_refs": [
             "ac.local-live-gt-tornado-v12-controls.14923034"
@@ -146,6 +183,18 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/automatic_blip"
+        ],
+        "source_refs": [
+          "fia.lister-storm.gt-008",
+          "custodian.lister-storm-gtm.2000"
+        ],
+        "confidence": "medium",
+        "basis": "The homologation and exact 2000 GTM specification establish six manual ratios and a Hewland TGTA sequential push-pull lever, but neither describes driver rev matching or ECU automatic blipping."
+      },
       {
         "paths": [
           "/identity",
@@ -185,7 +234,7 @@
           "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+        "basis": "Direct current-game tests and cockpit inspection establish AMS2's clutch-free sequential downshifts with no automatic blip; the resulting driver-supplied rev matching is scoped to that implementation."
       },
       {
         "paths": [
@@ -214,7 +263,17 @@
   },
   "archetype": {
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "Exact-car sources do not establish whether the driver supplies a blip."
+      },
+      {
+        "path": "/authentic_controls/transmission/downshift/automatic_blip",
+        "basis": "Exact-car sources do not establish an ECU automatic-blip function."
+      }
+    ]
   },
   "updated_at": "2026-08-22"
 }

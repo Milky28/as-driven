@@ -152,6 +152,17 @@
     "claims": [
       {
         "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "fia.saleen-s7.gt-013",
+          "motortrend.saleen-s7r-first-drive-2001"
+        ],
+        "confidence": "medium",
+        "basis": "A first-person drive of the exact early S7R instructs clutch use on both shifts and recommends heel-and-toe on braking downshifts. This supports driver blipping for the family, but does not prove every 2005 Xtrac revision retained the same procedure."
+      },
+      {
+        "paths": [
           "/identity",
           "/simulators/0/identities"
         ],

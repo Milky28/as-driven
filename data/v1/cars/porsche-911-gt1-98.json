@@ -30,8 +30,8 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
-        "automatic_blip": "no"
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required"
     },
@@ -48,7 +48,7 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "The clutch is required to move off, and the gear lever is a sequential stick rather than paddles.",
-      "No throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with automatic cut detected. No automatic blip was detected, so the driver supplies the downshift blip, matching the curated convention for a sequential stick without automatic blip.",
+      "In AMS2, no throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with automatic cut detected. No automatic blip was detected, so that implementation requires the driver to supply the downshift blip; the real car's blip technique remains unknown.",
       "'Porsche 911 GT1-98 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
@@ -84,7 +84,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt1-98.20260813t195737728z-58cdca22 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 requires driver-supplied rev matching for the modeled downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -143,6 +168,18 @@
           "source_refs": [
             "ac.local-live-porsche-911-gt1-98-controls.14923034"
           ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "AC build 14923034 produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "high",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ac.local-live-porsche-911-gt1-98-controls.14923034"
+          ]
         }
       ],
       "verified_game_version": "14923034",
@@ -160,6 +197,17 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/automatic_blip"
+        ],
+        "source_refs": [
+          "wikipedia.porsche-911-gt1"
+        ],
+        "confidence": "medium",
+        "basis": "Available exact-1998 material establishes a six-speed sequential gearbox but no driver rev-match or automatic-blip procedure. Simulator implementation behavior is not real-car evidence."
+      },
       {
         "paths": [
           "/identity",
@@ -237,7 +285,17 @@
   },
   "archetype": {
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "No exact real-car source establishes whether the driver supplies a blip."
+      },
+      {
+        "path": "/authentic_controls/transmission/downshift/automatic_blip",
+        "basis": "No exact real-car source establishes an automatic-blip function."
+      }
+    ]
   },
   "updated_at": "2026-08-22"
 }

@@ -12,7 +12,7 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "not-required",
+    "standing_start_clutch": "unknown",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",

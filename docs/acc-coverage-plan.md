@@ -109,7 +109,7 @@ silently replace a manufacturer-sourced debut or specification year.
 | Audi R8 LMS GT4 | `audi-r8-lms-gt4` | ACC models a closed rim with no lights; AMS2 models an open top and leaves the lights unestablished. |
 | BMW M4 GT4 | `bmw-m4-gt4` | The 2018 internal identity maps to the F82 seven-speed dual-clutch car and accepts a no-lift upshift. |
 | McLaren 570S GT4 | `mclaren-570s-gt4` | ACC accepts a no-lift upshift; the authentic lift claim remains open. |
-| Mercedes-AMG GT4 | `mercedes-amg-gt4` | ACC requires a launch clutch and accepts a no-lift upshift; both answers remain simulator-scoped. |
+| Mercedes-AMG GT4 | `mercedes-amg-gt4` | ACC requires a launch clutch and accepts a no-lift upshift. Exact drivetrain-manual research now confirms the launch matches the real car; the no-lift answer remains simulator-scoped. |
 
 The ACC Audi R8 LMS (2015) is not in this table yet. The existing
 `audi-r8-lms-gt3` record deliberately says only "base model" and does not pin a
@@ -179,18 +179,19 @@ At that point, stop prioritising additional ACC cars by roster order. Build the
 comparison-first website mode, then use its visible evidence gaps to choose the
 next drives.
 
-**Completed 2026-08-23:** the site now provides `All`, `Multi-sim`, and
-`Disagreements` modes. Disagreements require two conflicting established values;
-an established value beside `unknown` remains an evidence gap. Expanded rows
-list each simulator's answer separately and keep real-car departures under the
-distinct `differs from car` label.
+**Completed 2026-08-23:** the site now provides `All`, `Multi-sim`,
+`Disagreements`, and `Benchmark` modes. Disagreements require two conflicting
+established values; an established value beside `unknown` remains an evidence
+gap. The benchmark view leads with supported evidence cards, preserves provisional
+and scope-open findings, and links each finding back to the full car comparison.
 
 The next phase is the checked-in
 [`simulator-disagreement-audit`](simulator-disagreement-audit.md), not additional
 roster-order driving. It evaluates all 25 field-level conflicts against the
-source strength of the exact authentic baseline. Two findings now have sufficient
-evidence for supported benchmark verdicts, 22 remain provisional, and one has an
-open authentic baseline because the real car used multiple configurations.
+source strength of the exact authentic baseline. Five findings have sufficient
+evidence for supported benchmark verdicts, three remain provisional, and 17 have
+open authentic baselines after the complete provisional review removed unsupported
+real-car answers inherited from simulator observations.
 
 [acc-roster]: https://assettocorsa.gg/assetto-corsa-competizione/
 [gt4-pack]: https://assettocorsa.gg/the-gt4-pack-dlc/

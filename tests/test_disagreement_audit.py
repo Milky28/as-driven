@@ -112,6 +112,30 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(["acc"], adjudication["matching_simulators"])
         self.assertEqual(["ams2"], adjudication["departing_simulators"])
 
+    def test_new_launch_batch_is_supported_by_exact_car_evidence(self) -> None:
+        expected_sources = {
+            "mercedes-amg-gt3-evo--transmission-standing-start-clutch": [
+                "mercedes-amg.gt3-evo-2020.operation-manual-r01"
+            ],
+            "mercedes-amg-gt4--transmission-standing-start-clutch": [
+                "mercedes-amg.gt4.drivetrain-manual-r10"
+            ],
+            "bmw-m6-gt3--transmission-standing-start-clutch": [
+                "bmw.m6-gt3-m4-gt3-comparison"
+            ],
+        }
+        for finding_id, primary_sources in expected_sources.items():
+            with self.subTest(finding=finding_id):
+                finding = self.finding(finding_id)
+                baseline = finding["authentic_baseline"]
+                self.assertEqual("required", baseline["value"])
+                self.assertEqual("high", baseline["confidence"])
+                self.assertEqual(primary_sources, baseline["primary_source_refs"])
+                adjudication = finding["adjudication"]
+                self.assertEqual("supported-departure", adjudication["status"])
+                self.assertEqual(["acc"], adjudication["matching_simulators"])
+                self.assertEqual(["ams2"], adjudication["departing_simulators"])
+
     def test_lotus_variants_keep_the_authentic_baseline_open(self) -> None:
         finding = self.finding(
             "lotus-renault-98t--transmission-forward-gears"
@@ -142,6 +166,38 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual("provisional-departure", adjudication["status"])
         self.assertEqual(["ams2"], adjudication["matching_simulators"])
         self.assertEqual(["ac"], adjudication["departing_simulators"])
+
+    def test_completed_provisional_review_keeps_only_three_provisional(self) -> None:
+        provisional = {
+            finding["finding_id"]
+            for finding in self.checked_in["findings"]
+            if finding["adjudication"]["status"] == "provisional-departure"
+        }
+        self.assertEqual(
+            {
+                "milano-gt55--transmission-downshift-manual-blip",
+                "porsche-911-rsr-1974--transmission-shift-pattern",
+                "saleen-s7-r-gt1--transmission-downshift-manual-blip",
+            },
+            provisional,
+        )
+        self.assertEqual(
+            {
+                "authentic-baseline-open": 17,
+                "provisional-departure": 3,
+                "supported-departure": 5,
+            },
+            self.checked_in["summary"]["by_status"],
+        )
+
+    def test_open_findings_do_not_inherit_a_simulator_answer(self) -> None:
+        for finding in self.checked_in["findings"]:
+            if finding["adjudication"]["status"] != "authentic-baseline-open":
+                continue
+            with self.subTest(finding=finding["finding_id"]):
+                self.assertIn(finding["authentic_baseline"]["value"], {None, "unknown"})
+                self.assertEqual([], finding["adjudication"]["matching_simulators"])
+                self.assertEqual([], finding["adjudication"]["departing_simulators"])
 
 
 if __name__ == "__main__":

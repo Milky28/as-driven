@@ -608,12 +608,17 @@ def _flatten(node: Any, prefix: str = "") -> dict[str, Any]:
 def collect(root: Path) -> dict[str, Any]:
     data = root / "data" / "v1"
     index = json.loads((data / "index.json").read_text(encoding="utf-8"))
+    source_entries = json.loads((data / "sources.json").read_text(encoding="utf-8"))[
+        "sources"
+    ]
+    source_index = {source["source_id"]: source for source in source_entries}
     archetypes: dict[str, str] = {}
     archetype_path = data / "archetypes.json"
     if archetype_path.exists():
         for entry in json.loads(archetype_path.read_text(encoding="utf-8"))["archetypes"]:
             archetypes[entry["archetype_id"]] = entry["label"]
     audit_by_record: dict[str, list[dict[str, Any]]] = {}
+    audit_findings: list[dict[str, Any]] = []
     audit_path = root / "research" / "simulator-disagreement-audit.json"
     if audit_path.exists():
         audit = json.loads(audit_path.read_text(encoding="utf-8"))
@@ -622,7 +627,8 @@ def collect(root: Path) -> dict[str, Any]:
                 "simulator disagreement audit is stale: "
                 f"{audit.get('dataset_version')} != {index['dataset_version']}"
             )
-        for finding in audit.get("findings", []):
+        audit_findings = audit.get("findings", [])
+        for finding in audit_findings:
             audit_by_record.setdefault(finding["record_id"], []).append(finding)
     cars = []
     for relative in index["records"]:
@@ -644,6 +650,8 @@ def collect(root: Path) -> dict[str, Any]:
         "version": index["dataset_version"],
         "released_at": index["released_at"],
         "cars": cars,
+        "benchmark_findings": audit_findings,
+        "source_index": source_index,
         "simulators": [
             {"id": simulator, "label": label}
             for simulator, label in sorted(
@@ -799,6 +807,145 @@ def _audit_result(item: dict[str, Any]) -> str:
         impact=_e(impact),
         next_action=_e(adjudication["next_action"]),
     )
+
+
+BENCHMARK_GROUPS = (
+    (
+        "supported-departure",
+        "Supported findings",
+        "The real-car baseline is strong enough to identify exact reviewed simulator departures.",
+    ),
+    (
+        "authentic-baseline-open",
+        "Authentic baseline open",
+        "The simulator difference is real, but the real car has no single answer at this scope.",
+    ),
+    (
+        "provisional-departure",
+        "Provisional findings",
+        "The simulators disagree, but the exact real-car field still needs stronger evidence.",
+    ),
+)
+
+
+def _benchmark_sources(
+    finding: dict[str, Any], sources: dict[str, dict[str, Any]]
+) -> str:
+    links = []
+    for source_ref in finding["authentic_baseline"].get("source_refs", []):
+        source = sources.get(source_ref)
+        if not source or source.get("source_type") == "in-game-observation":
+            continue
+        links.append(
+            '<a href="{url}">{title}</a>'.format(
+                url=_e(source["url"]), title=_e(source["title"])
+            )
+        )
+    if not links:
+        return '<span class="benchmark-no-source">No independent real-car source registered</span>'
+    return "".join(f"<li>{link}</li>" for link in links)
+
+
+def _benchmark_card(
+    finding: dict[str, Any], sources: dict[str, dict[str, Any]]
+) -> str:
+    status = finding["adjudication"]["status"]
+    status_labels = {
+        "supported-departure": "Supported",
+        "provisional-departure": "Provisional",
+        "authentic-baseline-open": "Baseline open",
+    }
+    relationship_labels = {
+        "matches-baseline": "Matches",
+        "departs-from-baseline": "Departs",
+        "baseline-open": "Observed",
+        "not-established": "Not established",
+    }
+    simulator_rows = "".join(
+        '<li class="benchmark-sim benchmark-{relationship}">'
+        '<div><b>{label}</b><span>{version}</span></div>'
+        '<strong>{value}</strong><small>{relationship_label}</small></li>'.format(
+            relationship=_e(view["relationship_to_authentic"]),
+            label=_e(view["label"]),
+            version=_e(
+                " · ".join(
+                    part
+                    for part in (
+                        view.get("verified_game_version", ""),
+                        view.get("verified_at", ""),
+                    )
+                    if part
+                )
+            ),
+            value=_e(view["display_value"]),
+            relationship_label=_e(
+                relationship_labels[view["relationship_to_authentic"]]
+            ),
+        )
+        for view in finding["simulator_views"]
+    )
+    baseline = finding["authentic_baseline"]
+    source_items = _benchmark_sources(finding, sources)
+    sources_block = (
+        f'<ul class="benchmark-sources">{source_items}</ul>'
+        if source_items.startswith("<li>")
+        else source_items
+    )
+    anchor = f'finding-{finding["finding_id"]}'
+    return (
+        '<article class="benchmark-card benchmark-card-{status}" id="{anchor}">'
+        '<div class="benchmark-card-heading"><div>'
+        '<span class="benchmark-status">{status_label}</span>'
+        '<h3>{car}</h3><p>{field} &middot; {impact}</p></div>'
+        '<a class="finding-link" href="#{anchor}" aria-label="Link to this finding">#</a>'
+        '</div>'
+        '<div class="benchmark-baseline"><span>Authentic baseline</span>'
+        '<strong>{baseline}</strong><small>confidence {confidence}</small></div>'
+        '<ul class="benchmark-simulators">{simulators}</ul>'
+        '<div class="benchmark-evidence"><h4>Evidence verdict</h4><p>{basis}</p>'
+        '<h4>Real-car sources</h4>{sources}</div>'
+        '<a class="open-comparison" href="#car-{record}" data-open-car="{record}">'
+        'Open full car comparison</a></article>'
+    ).format(
+        status=_e(status),
+        anchor=_e(anchor),
+        status_label=_e(status_labels[status]),
+        car=_e(finding["display_name"]),
+        field=_e(finding["field"]),
+        impact=_e(finding["driver_impact"].replace("-", " ")),
+        baseline=_e(baseline["display_value"]),
+        confidence=_e(baseline["confidence"]),
+        simulators=simulator_rows,
+        basis=_e(baseline.get("basis") or finding["adjudication"]["basis"]),
+        sources=sources_block,
+        record=_e(finding["record_id"]),
+    )
+
+
+def _benchmark_view(payload: dict[str, Any]) -> str:
+    findings = payload.get("benchmark_findings", [])
+    sources = payload.get("source_index", {})
+    groups = []
+    for status, heading, description in BENCHMARK_GROUPS:
+        items = [
+            finding
+            for finding in findings
+            if finding["adjudication"]["status"] == status
+        ]
+        cards = "".join(_benchmark_card(finding, sources) for finding in items)
+        groups.append(
+            '<section class="benchmark-group" data-benchmark-status="{status}">'
+            '<div class="benchmark-group-heading"><div><h2>{heading}</h2>'
+            '<p>{description}</p></div><b>{count}</b></div>'
+            '<div class="benchmark-grid">{cards}</div></section>'.format(
+                status=_e(status),
+                heading=_e(heading),
+                description=_e(description),
+                count=len(items),
+                cards=cards,
+            )
+        )
+    return "".join(groups)
 
 
 def _row(car: dict[str, Any]) -> str:
@@ -958,6 +1105,7 @@ def render(payload: dict[str, Any]) -> str:
         for simulator in payload["simulators"]
     )
     rows = "\n".join(_row(car) for car in cars)
+    benchmark = _benchmark_view(payload)
     page = TEMPLATE.format(
         version=_e(payload["version"]),
         released=_e(payload["released_at"]),
@@ -969,6 +1117,7 @@ def render(payload: dict[str, Any]) -> str:
         simulator_count=len(payload["simulators"]),
         simulator_entries=simulator_entries,
         simulator_options=simulator_options,
+        benchmark=benchmark,
         rows=rows,
     )
     # The page owns no <head>, so it cannot declare a charset. Emitting numeric
@@ -1119,6 +1268,91 @@ h1 {{
 .mode button:hover {{ color: var(--ink); }}
 .mode button[aria-pressed="true"] {{
   color: var(--ink); background: var(--surface-2); box-shadow: inset 0 -2px 0 var(--accent);
+}}
+.benchmark-view {{ display: flex; flex-direction: column; gap: 38px; }}
+.benchmark-view[hidden] {{ display: none; }}
+.benchmark-intro {{
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px;
+  align-items: end; padding: 20px 22px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-left: 4px solid var(--accent); border-radius: 4px;
+}}
+.benchmark-intro h2 {{ margin: 0 0 5px; font: 700 23px/1.2 Archivo, sans-serif; }}
+.benchmark-intro p {{ margin: 0; max-width: 68ch; color: var(--muted); }}
+.benchmark-intro a {{
+  color: var(--accent); font: 500 12px/1.3 "IBM Plex Mono", monospace;
+  white-space: nowrap;
+}}
+.benchmark-group {{ display: flex; flex-direction: column; gap: 14px; }}
+.benchmark-group-heading {{
+  display: flex; justify-content: space-between; gap: 20px; align-items: end;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+}}
+.benchmark-group-heading h2 {{ margin: 0; font: 700 21px/1.2 Archivo, sans-serif; }}
+.benchmark-group-heading p {{ margin: 4px 0 0; color: var(--muted); font-size: 13px; }}
+.benchmark-group-heading b {{
+  font: 500 22px/1 "IBM Plex Mono", monospace; color: var(--faint);
+}}
+.benchmark-grid {{
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
+}}
+.benchmark-card {{
+  display: flex; flex-direction: column; gap: 15px; min-width: 0;
+  padding: 18px; background: var(--surface); border: 1px solid var(--line);
+  border-top: 3px solid var(--optional); border-radius: 4px;
+  scroll-margin-top: 24px;
+}}
+.benchmark-card-supported-departure {{ border-top-color: var(--car); }}
+.benchmark-card-authentic-baseline-open {{ border-top-color: var(--faint); }}
+.benchmark-card-heading {{ display: flex; justify-content: space-between; gap: 14px; }}
+.benchmark-card-heading h3 {{ margin: 5px 0 1px; font: 700 18px/1.25 Archivo, sans-serif; }}
+.benchmark-card-heading p {{ margin: 0; color: var(--muted); font-size: 12.5px; }}
+.benchmark-status {{
+  color: var(--faint); font: 500 10.5px/1 "IBM Plex Mono", monospace;
+  letter-spacing: .08em; text-transform: uppercase;
+}}
+.benchmark-card-supported-departure .benchmark-status {{ color: var(--car); }}
+.benchmark-card-provisional-departure .benchmark-status {{ color: var(--optional); }}
+.finding-link {{
+  width: 28px; height: 28px; display: grid; place-items: center; flex: 0 0 auto;
+  color: var(--faint); text-decoration: none; border: 1px solid var(--line); border-radius: 3px;
+  font: 500 12px/1 "IBM Plex Mono", monospace;
+}}
+.finding-link:hover {{ color: var(--ink); border-color: var(--faint); }}
+.benchmark-baseline {{
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline;
+  padding: 10px 12px; background: var(--surface-2); border-radius: 3px;
+}}
+.benchmark-baseline span {{
+  color: var(--faint); font: 500 10px/1.2 "IBM Plex Mono", monospace;
+  letter-spacing: .07em; text-transform: uppercase;
+}}
+.benchmark-baseline strong {{ grid-column: 1; font-size: 14px; }}
+.benchmark-baseline small {{ grid-column: 2; grid-row: 1 / span 2; color: var(--faint); }}
+.benchmark-simulators {{ display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; }}
+.benchmark-sim {{
+  display: grid; grid-template-columns: minmax(0, 1fr) auto 72px; gap: 10px;
+  align-items: center; padding: 8px 10px; border-left: 3px solid var(--line);
+  background: var(--bg); list-style: none;
+}}
+.benchmark-sim div {{ min-width: 0; }}
+.benchmark-sim b, .benchmark-sim span {{ display: block; }}
+.benchmark-sim b {{ font-size: 12.5px; }}
+.benchmark-sim span {{ color: var(--faint); font: 400 10px/1.3 "IBM Plex Mono", monospace; }}
+.benchmark-sim strong {{ font-size: 12.5px; text-align: right; }}
+.benchmark-sim small {{ color: var(--faint); text-align: right; }}
+.benchmark-matches-baseline {{ border-left-color: var(--car); }}
+.benchmark-departs-from-baseline {{ border-left-color: var(--driver); }}
+.benchmark-baseline-open {{ border-left-color: var(--faint); }}
+.benchmark-evidence h4 {{ margin: 0 0 4px; }}
+.benchmark-evidence h4:not(:first-child) {{ margin-top: 12px; }}
+.benchmark-evidence p {{ margin: 0; color: var(--muted); font-size: 13px; }}
+.benchmark-sources {{ margin: 0; padding-left: 18px; }}
+.benchmark-sources li {{ margin: 3px 0; font-size: 12.5px; }}
+.benchmark-sources a, .open-comparison {{ color: var(--accent); }}
+.benchmark-no-source {{ color: var(--faint); font-size: 12.5px; }}
+.open-comparison {{
+  width: fit-content; margin-top: auto; font: 500 12px/1.3 "IBM Plex Mono", monospace;
 }}
 input[type="search"] {{
   flex: 1 1 240px; min-width: 200px;
@@ -1329,9 +1563,13 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 @media (max-width: 720px) {{
   .wrap {{ padding: 28px 14px 60px; }}
   .stats {{ gap: 6px 16px; }}
+  .benchmark-intro {{ grid-template-columns: 1fr; }}
+  .benchmark-sim {{ grid-template-columns: minmax(0, 1fr) auto; }}
+  .benchmark-sim small {{ grid-column: 2; }}
 }}
 @media (max-width: 980px) {{
   .controls {{ flex-wrap: wrap; }}
+  .benchmark-grid {{ grid-template-columns: 1fr; }}
 }}
 </style>
 
@@ -1365,9 +1603,22 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     <button type="button" data-mode="all" aria-pressed="true">All</button>
     <button type="button" data-mode="multi" aria-pressed="false">Multi-sim</button>
     <button type="button" data-mode="disagreements" aria-pressed="false">Disagreements</button>
+    <button type="button" data-mode="benchmark" aria-pressed="false">Benchmark</button>
   </div>
 </header>
 
+<section class="benchmark-view" id="benchmark-view" aria-label="Benchmark findings" hidden>
+  <div class="benchmark-intro">
+    <div><h2>Cross-simulator authenticity benchmark</h2>
+    <p>Every finding starts with the real car, then compares exact reviewed simulator
+    versions. Supported means the evidence can identify a departure; provisional and
+    open findings remain visible without pretending they are verdicts.</p></div>
+    <a href="#finding-audi-r8-lms-gt3-evo-ii--transmission-standing-start-clutch">Share a supported finding</a>
+  </div>
+  {benchmark}
+</section>
+
+<div id="car-browser">
 <div class="controls">
   <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
   <select id="f-simulator" aria-label="Filter by simulator coverage">
@@ -1423,11 +1674,14 @@ simulator-specific evidence gaps stay inside that view, because they are
 separate facts and neither overwrites the real car. Each simulator view has a
 stable link that can be shared.</footer>
 </div>
+</div>
 
 <script>
 (function () {{
   var q = document.getElementById('q');
   var simulatorFilter = document.getElementById('f-simulator');
+  var carBrowser = document.getElementById('car-browser');
+  var benchmarkView = document.getElementById('benchmark-view');
   var mode = 'all';
   var modeButtons = Array.prototype.slice.call(
     document.querySelectorAll('[data-mode]'));
@@ -1438,7 +1692,24 @@ stable link that can be shared.</footer>
   var count = document.getElementById('count');
   var empty = document.getElementById('empty');
 
+  function showMode() {{
+    var benchmark = mode === 'benchmark';
+    benchmarkView.hidden = !benchmark;
+    carBrowser.hidden = benchmark;
+  }}
+
+  function setMode(nextMode) {{
+    mode = nextMode;
+    modeButtons.forEach(function (button) {{
+      button.setAttribute(
+        'aria-pressed', button.getAttribute('data-mode') === mode ? 'true' : 'false');
+    }});
+    apply();
+  }}
+
   function apply() {{
+    showMode();
+    if (mode === 'benchmark') {{ return; }}
     var text = q.value.trim().toLowerCase();
     var shown = 0;
     rows.forEach(function (row) {{
@@ -1542,16 +1813,17 @@ stable link that can be shared.</footer>
   }});
 
   function restoreSimulatorLink(scroll) {{
-    if (!window.location.hash) {{ return; }}
+    if (!window.location.hash) {{ return false; }}
     var anchor;
     try {{ anchor = decodeURIComponent(window.location.hash.slice(1)); }}
-    catch (error) {{ return; }}
+    catch (error) {{ return false; }}
     var link = document.getElementById(anchor);
-    if (!link || !link.hasAttribute('data-simulator-anchor-target')) {{ return; }}
+    if (!link || !link.hasAttribute('data-simulator-anchor-target')) {{ return false; }}
     var row = link.closest('tr.car');
-    if (!row) {{ return; }}
+    if (!row) {{ return false; }}
     var simulator = link.getAttribute('data-simulator-anchor-target');
     if (scroll) {{
+      setMode('all');
       simulatorFilter.value = simulator;
       apply();
     }}
@@ -1560,9 +1832,26 @@ stable link that can be shared.</footer>
     if (scroll) {{
       window.setTimeout(function () {{ row.scrollIntoView({{ block: 'center' }}); }}, 0);
     }}
+    return true;
   }}
 
-  window.addEventListener('hashchange', function () {{ restoreSimulatorLink(false); }});
+  function restoreFindingLink(scroll) {{
+    if (!window.location.hash) {{ return false; }}
+    var anchor;
+    try {{ anchor = decodeURIComponent(window.location.hash.slice(1)); }}
+    catch (error) {{ return false; }}
+    var finding = document.getElementById(anchor);
+    if (!finding || !finding.classList.contains('benchmark-card')) {{ return false; }}
+    setMode('benchmark');
+    if (scroll) {{
+      window.setTimeout(function () {{ finding.scrollIntoView({{ block: 'start' }}); }}, 0);
+    }}
+    return true;
+  }}
+
+  window.addEventListener('hashchange', function () {{
+    if (!restoreFindingLink(false)) {{ restoreSimulatorLink(false); }}
+  }});
   // Three states, because that is what the stylesheet answers to: an explicit
   // choice stamps the root element, and following the system stamps nothing.
   // Without the third button a reader who picked one could never hand the
@@ -1599,20 +1888,35 @@ stable link that can be shared.</footer>
 
   modeButtons.forEach(function (button) {{
     button.addEventListener('click', function () {{
-      mode = button.getAttribute('data-mode');
-      modeButtons.forEach(function (candidate) {{
-        candidate.setAttribute(
-          'aria-pressed', candidate === button ? 'true' : 'false');
-      }});
-      apply();
+      setMode(button.getAttribute('data-mode'));
     }});
   }});
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-open-car]'))
+    .forEach(function (link) {{
+      link.addEventListener('click', function (event) {{
+        event.preventDefault();
+        q.value = '';
+        simulatorFilter.value = '';
+        filters.forEach(function (filter) {{ filter.node.value = ''; }});
+        setMode('disagreements');
+        var row = document.getElementById('car-' + link.getAttribute('data-open-car'));
+        if (!row) {{ return; }}
+        setOpen(row, true);
+        if (window.history && window.history.replaceState) {{
+          window.history.replaceState(null, '', '#car-' + link.getAttribute('data-open-car'));
+        }}
+        window.setTimeout(function () {{ row.scrollIntoView({{ block: 'center' }}); }}, 0);
+      }});
+    }});
 
   q.addEventListener('input', apply);
   simulatorFilter.addEventListener('change', apply);
   filters.forEach(function (filter) {{ filter.node.addEventListener('change', apply); }});
-  apply();
-  restoreSimulatorLink(true);
+  if (!restoreFindingLink(true)) {{
+    apply();
+    restoreSimulatorLink(true);
+  }}
 }})();
 </script>
 """

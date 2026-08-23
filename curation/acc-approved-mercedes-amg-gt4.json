@@ -11,7 +11,7 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "not-required",
+    "standing_start_clutch": "required",
     "automatic_cut": "unknown",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
@@ -21,7 +21,7 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "ACC directly established the exact AMG GT4 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and closed no-display/no-light rim. Automatic cut remains unknown.",
+  "confidence_notes": "ACC directly established the exact AMG GT4 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and closed no-display/no-light rim. The exact drivetrain manual independently confirms the authentic launch clutch; automatic cut remains unknown.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",
   "telemetry_class": "GT4"
 }

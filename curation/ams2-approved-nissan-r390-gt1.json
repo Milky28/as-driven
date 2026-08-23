@@ -16,7 +16,7 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "unknown",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "yes",

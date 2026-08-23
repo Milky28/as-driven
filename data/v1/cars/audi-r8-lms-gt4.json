@@ -42,9 +42,9 @@
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "unknown",
-        "open_top": "yes",
+        "open_top": "unknown",
         "source_label": "live-cockpit-gt",
-        "notes": "Direct AMS2 cockpit inspection showed an open-top GT/Formula rim without an integrated display; exact diameter remains unknown."
+        "notes": "Audi's exact 2018 technical data calls this a multi-functional steering wheel but does not establish whether the rim has an open top."
       }
     },
     "notes": [
@@ -81,7 +81,20 @@
           "Clutch-free move-off, seven paddle-selected gears, no-lift clutch-free upshifts with automatic cut, clutch-free downshifts with automatic blip, and an open-top no-display GT/Formula rim were directly observed."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 models an open-top GT/Formula rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-10",
       "source_refs": [
@@ -165,6 +178,16 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/open_top"
+        ],
+        "source_refs": [
+          "audi.r8-lms-gt4.technical"
+        ],
+        "confidence": "medium",
+        "basis": "Audi's exact 2018 technical data specifies a multi-functional steering wheel but does not describe its top-edge geometry. The 2020 GT2-derived wheel is a later revision and is not inherited backward."
+      },
       {
         "paths": [
           "/identity/display_name",

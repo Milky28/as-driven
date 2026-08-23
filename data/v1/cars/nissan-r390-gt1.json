@@ -30,25 +30,25 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
-        "automatic_blip": "no"
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
-        "shape": "round",
+        "shape": "unknown",
         "integrated_display": "no",
-        "shift_lights": "yes",
+        "shift_lights": "unknown",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
-        "notes": "Observed from the cockpit during the guided drive."
+        "notes": "No exact Nissan cockpit drawing or reliable source was found for rim geometry or wheel-mounted shift lights."
       }
     },
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "The clutch is required to move off, and the gear lever is a sequential stick rather than paddles.",
-      "No throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with automatic cut detected. No automatic blip was detected, so the driver supplies the downshift blip, matching the curated convention for a sequential stick without automatic blip.",
+      "In AMS2, no throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with automatic cut detected. No automatic blip was detected, so that implementation requires the driver to supply the downshift blip; the real car's blip technique remains unknown.",
       "'Nissan R390 GT1 - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
   },
@@ -84,7 +84,56 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-r390-gt1.20260813t195441014z-0cff25f1 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 models no automatic blip and requires driver-supplied rev matching.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 produced no automatic throttle spike on the tested downshift.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided coast-downshift test."
+          },
+          "source_refs": [
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "AMS2 1.6.9.91 models a round rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 models shift lights on the rim.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -147,7 +196,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "d-shaped",
-          "condition": "The fingerprinted RSS v2 cockpit depicts a D-shaped rim instead of the round rim carried by the curated car and AMS2 implementation.",
+          "condition": "The fingerprinted RSS v2 cockpit depicts a D-shaped rim while AMS2 depicts a round rim; reliable evidence for the real car's rim geometry was not found.",
           "confidence": {
             "level": "verified",
             "basis": "The cockpit rim was directly inspected during the guided drive."
@@ -159,7 +208,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
-          "condition": "The fingerprinted RSS v2 cockpit depicts no wheel-mounted shift lights, while the curated car and AMS2 implementation carry them.",
+          "condition": "The fingerprinted RSS v2 cockpit depicts no wheel-mounted shift lights while AMS2 depicts them; reliable evidence for the real car's wheel-mounted lights was not found.",
           "confidence": {
             "level": "verified",
             "basis": "Wheel-mounted shift-light equipment was directly inspected during the guided drive."
@@ -184,6 +233,28 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/automatic_blip"
+        ],
+        "source_refs": [
+          "nismo.r390-gt1-history.vol05"
+        ],
+        "confidence": "medium",
+        "basis": "NISMO establishes the 1998 long-tail's Nissan-built sequential transmission but gives no driver rev-match or ECU automatic-blip procedure. Sequential construction cannot settle either field."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "nismo.r390-gt1-history.vol05"
+        ],
+        "confidence": "medium",
+        "basis": "NISMO's exact history contains no cockpit drawing or specification that establishes rim geometry or wheel-mounted shift lights."
+      },
       {
         "paths": [
           "/identity",
@@ -261,7 +332,17 @@
   },
   "archetype": {
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/manual_blip",
+        "basis": "No exact real-car source establishes whether the driver or car supplies rev matching."
+      },
+      {
+        "path": "/authentic_controls/transmission/downshift/automatic_blip",
+        "basis": "No exact real-car source establishes an ECU automatic-blip function."
+      }
+    ]
   },
   "updated_at": "2026-08-22"
 }

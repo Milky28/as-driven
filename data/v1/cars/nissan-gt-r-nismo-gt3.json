@@ -33,16 +33,16 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "unknown"
     },
     "steering": {
       "wheel_rim": {
-        "shape": "round",
+        "shape": "unknown",
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
-        "notes": "Observed from the cockpit during the guided drive."
+        "notes": "NISMO's exact 2018 specification says the wheel was redesigned but does not establish its normalized rim geometry."
       }
     },
     "notes": [
@@ -78,7 +78,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-gt-r-nismo-gt3.20260813t160420958z-7924b51a by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted clutch-free move-off with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "AMS2 1.6.9.91 models a round rim for the 2018 Nissan.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -149,7 +174,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "gt-formula",
-          "condition": "ACC models a closed GT/Formula control-face rim for the 2018 Nissan, while AMS2 models the curated round rim.",
+          "condition": "ACC models a closed GT/Formula control-face rim for the 2018 Nissan while AMS2 models a round rim; the real car's normalized rim category remains unknown.",
           "confidence": {
             "level": "verified",
             "basis": "Direct cockpit inspection during the ACC contribution drive."
@@ -173,6 +198,26 @@
   ],
   "provenance": {
     "claims": [
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "nismo.gt-r-nismo-gt3.2018-spec"
+        ],
+        "confidence": "medium",
+        "basis": "NISMO's exact 2018 specification establishes a metal four-plate clutch but gives no move-off procedure. Clutch construction alone cannot establish required driver input."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape"
+        ],
+        "source_refs": [
+          "nismo.gt-r-nismo-gt3.2018-spec"
+        ],
+        "confidence": "medium",
+        "basis": "NISMO says the 2018 wheel was redesigned for improved operability but supplies no round, D-shaped, or GT/Formula geometry. Earlier wheel descriptions are not inherited."
+      },
       {
         "paths": [
           "/identity",
@@ -243,6 +288,10 @@
       {
         "path": "/authentic_controls/transmission/upshift/throttle_lift",
         "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
+      },
+      {
+        "path": "/authentic_controls/transmission/standing_start_clutch",
+        "basis": "The exact 2018 specification identifies a clutch but no move-off procedure, so authentic driver clutch use remains open rather than inheriting either simulator's answer."
       }
     ]
   },

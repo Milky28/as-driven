@@ -12,7 +12,7 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "not-required",
+    "standing_start_clutch": "required",
     "throttle_lift": "unknown",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
@@ -23,6 +23,6 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Controls were directly observed with assists disabled; the real-world transmission is supported by a registered source.",
+  "confidence_notes": "Controls were directly observed with assists disabled. The exact 2020 operation manual now establishes a clutch-required authentic launch; AMS2's accepted clutch-free move-off is retained as a simulator departure.",
   "scope_notes": "Single exact identity from one guided-verification drive."
 }

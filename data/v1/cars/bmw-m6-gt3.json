@@ -11,7 +11,7 @@
       "label": "2016 customer-racing debut"
     },
     "class": "GT3",
-    "real_world_identity_notes": "Customer GT3 racing car based on the F13 M6 with the 4.4 litre twin-turbo V8, campaigned by privateer teams from 2016. Ricardo, which engineered the unit, describes a semi-automatic transverse transaxle carrying a sequential six-speed plus reverse racing gearbox in a magnesium casing, shifted by paddles."
+    "real_world_identity_notes": "Customer GT3 racing car based on the F13 M6 with the 4.4 litre twin-turbo V8, campaigned by privateer teams from 2016. Ricardo, which engineered the unit, describes a semi-automatic transverse transaxle carrying a sequential six-speed plus reverse racing gearbox in a magnesium casing, shifted by paddles. BMW's later fully automatic centrifugal clutch was a Zanardi-specific adaptation, not the baseline customer car."
   },
   "authentic_controls": {
     "transmission": {
@@ -33,20 +33,20 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
         "shape": "gt-formula",
         "integrated_display": "no",
-        "shift_lights": "yes",
+        "shift_lights": "unknown",
         "open_top": "no",
         "source_label": "live-cockpit-observation",
-        "notes": "Observed from the cockpit during the guided drive."
+        "notes": "BMW's official cockpit media does not textually identify a wheel-mounted rev/shift-light array; dashboard or display indicators are not treated as wheel equipment."
       }
     },
     "notes": [
-      "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled: clutch-free move-off, six paddle-selected gears, and automatic cut and blip.",
+      "A first-person drive of the baseline M6 GT3 explicitly requires the clutch to get moving. BMW separately documents a hydraulic clutch; its later fully automatic centrifugal clutch was a Zanardi-specific adaptation and does not redefine the baseline car.",
       "No throttle lift is required on upshifts and no manual blip on downshifts, because the drive detected automatic cut and automatic blip. This matches every other curated paddle-shift GT3 car."
     ]
   },
@@ -78,7 +78,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.bmw-m6-gt3.20260813t155203395z-7c40ce55 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted clutch-free move-off with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          },
+          "source_refs": [
+            "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 models shift lights on the M6 GT3 wheel.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -123,18 +148,6 @@
       },
       "overrides": [
         {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
-          "condition": "ACC's M6 GT3 would not pull away without physical clutch input with assists disabled.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided move-off test."
-          },
-          "source_refs": [
-            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
-          ]
-        },
-        {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "not-required",
           "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
@@ -175,11 +188,22 @@
     "claims": [
       {
         "paths": [
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "bmw.m6-gt3.official-media"
+        ],
+        "confidence": "medium",
+        "basis": "BMW's official M6 GT3 cockpit and steering-wheel media does not textually identify a wheel-mounted rev/shift-light array. Dashboard or display indicators cannot settle wheel integration."
+      },
+      {
+        "paths": [
           "/identity",
           "/simulators/0/identities"
         ],
         "source_refs": [
           "ricardo.bmw-m6-gt3.transaxle",
+          "bmw.m6-gt3-zanardi-centrifugal-clutch",
           "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
         ],
         "confidence": "verified",
@@ -203,7 +227,6 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
         ],
@@ -211,7 +234,18 @@
           "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Directly observed during the guided drive: running-shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "bmw.m6-gt3-m4-gt3-comparison",
+          "bmwblog.m6-gt3-first-drive"
+        ],
+        "confidence": "high",
+        "basis": "BMW establishes the baseline car's hydraulic clutch and an exact-car first-person drive explicitly requires clutch use to get moving. BMW's fully automatic centrifugal clutch is documented only for the special Zanardi adaptation."
       },
       {
         "paths": [
@@ -237,7 +271,7 @@
     ]
   },
   "archetype": {
-    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
     "classification": "deviates",
     "deviations": [
       {
