@@ -3409,6 +3409,18 @@
       "notes": "Manufacturer release establishes the Evo II as the second evolution of the Audi R8 LMS GT3. It does not independently establish the driver's clutch, cut, or blip technique."
     },
     {
+      "source_id": "audi.r8-lms-gt3-evo2.technical",
+      "title": "Technical data: Audi R8 LMS (2022)",
+      "publisher": "Audi Sport GmbH",
+      "url": "https://www.audi-mediacenter.com/system/production/uploaded_files/19514/file/259808bc1b08337b8b1096c2f4008a6fcde1be67/Technische_Daten_Audi_R8_LMS_GT3_2021_GB.pdf",
+      "archive_url": null,
+      "source_type": "manufacturer",
+      "published_or_updated_at": "2021-07-21",
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact technical data for the Audi R8 LMS (2022). Printed page 8 of 16 specifies an 'Electrohydraulically operated sintered three-plate racing clutch (ECA)' and a 'Sequential, pneumatically operated 6-speed performance transmission with paddle shifters.' It does not state how the driver operates the clutch for a standing start and does not establish anti-stall or an automated launch procedure."
+    },
+    {
       "source_id": "audi.r8-lms-gt3.technical",
       "title": "Audi R8 LMS GT3 technical data",
       "publisher": "Audi MediaCenter",
@@ -3443,6 +3455,19 @@
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
       "notes": "Audi specifies a seven-speed S tronic dual-clutch transmission with driver-selectable shifting and launch control that manages clutch engagement. This later-generation source replaces an inapplicable 2010 six-speed R tronic research lead."
+    },
+    {
+      "source_id": "autobild.audi-r8-lms-gt3-evo2.track-test",
+      "title": "Tracktest: Audi R8 LMS GT3 Evo II",
+      "publisher": "AUTO BILD",
+      "author": "Guido Naumann",
+      "url": "https://www.autobild.de/artikel/tracktest-audi-r8-lms-gt3-evo-ii-27575473.html",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2024-12-02",
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "First-person track test of the exact Audi R8 LMS GT3 Evo II. The driving account states: 'Anfahren ist mit dem am Lenkrad montierten Kupplungshebel ein Kinderspiel.' This directly establishes use of the steering-wheel-mounted clutch lever to move off. It does not establish a clutch pedal, anti-stall, or automated launch control."
     },
     {
       "source_id": "aussieracingcars.faq",

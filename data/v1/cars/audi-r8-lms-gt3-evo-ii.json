@@ -33,7 +33,7 @@
         "manual_blip": "not-required",
         "automatic_blip": "yes"
       },
-      "standing_start_clutch": "not-required"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -47,7 +47,7 @@
       }
     },
     "notes": [
-      "The base car moved from rest without physical clutch input; the underlying simulator mechanism was not established.",
+      "Audi specifies an electrohydraulically operated three-plate racing clutch for the 2022 car, and a direct Evo II track test describes moving off with the steering-wheel-mounted clutch lever. A clutch pedal, anti-stall mode, or automated launch procedure is not established.",
       "Six paddle-selected gears, clutchless no-lift upshifts, and clutchless downshifts with automatic blip were directly established.",
       "A brief throttle-channel interruption was later found insufficient to establish automatic ignition cut; that field remains unknown.",
       "The Low Downforce identity inherits base controls as an explicit untested aero-package assumption."
@@ -92,7 +92,20 @@
           "Low Downforce inherits these controls as an untested aero-package assumption."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted move-off without physical clutch input, unlike the sourced real-car use of the steering-wheel clutch lever.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided move-off test directly observed clutch-free pull-away with automatic clutch and shifting assists disabled."
+          },
+          "source_refs": [
+            "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-11",
       "source_refs": [
@@ -129,7 +142,20 @@
           "Observed live in AC-EVO 0.8.1 via guided verification observation ac-evo.audi-r8-lms-gt3-evo-ii.20260821t044035209z-f4353d69 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "Assetto Corsa EVO 0.8.1 accepted move-off without physical clutch input, unlike the sourced real-car use of the steering-wheel clutch lever.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided move-off test directly observed clutch-free pull-away with automatic clutch and shifting assists disabled."
+          },
+          "source_refs": [
+            "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1"
+          ]
+        }
+      ],
       "verified_game_version": "0.8.1",
       "verified_at": "2026-08-21",
       "source_refs": [
@@ -173,7 +199,20 @@
           "Observed live in ACC 21257365 via guided verification observation acc.audi-r8-lms-evo-ii-2022.20260822t214156833z-bc045011 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "ACC build 21257365 accepted move-off without physical clutch input, unlike the sourced real-car use of the steering-wheel clutch lever.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided move-off test directly observed clutch-free pull-away with automatic clutch and shifting assists disabled."
+          },
+          "source_refs": [
+            "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365"
+          ]
+        }
+      ],
       "verified_game_version": "21257365",
       "verified_at": "2026-08-22",
       "source_refs": [
@@ -215,18 +254,6 @@
         ]
       },
       "overrides": [
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
-          "condition": "The fingerprinted RSS v2 implementation stalled or refused move-off without physical clutch input, unlike the curated authentic and three other simulator observations.",
-          "confidence": {
-            "level": "high",
-            "basis": "The guided move-off test directly observed that the car would not pull away with the physical clutch released while automatic clutch and shifting assists were disabled."
-          },
-          "source_refs": [
-            "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
-          ]
-        },
         {
           "path": "/authentic_controls/transmission/upshift/automatic_cut",
           "value": "yes",
@@ -302,7 +329,6 @@
           "/authentic_controls/transmission/upshift/clutch",
           "/authentic_controls/transmission/upshift/throttle_lift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
@@ -310,6 +336,17 @@
         ],
         "confidence": "verified",
         "basis": "Guided current-game testing and cockpit inspection directly established these values."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "audi.r8-lms-gt3-evo2.technical",
+          "autobild.audi-r8-lms-gt3-evo2.track-test"
+        ],
+        "confidence": "high",
+        "basis": "Audi's exact 2022-car technical data establishes the electrohydraulically operated racing clutch, and a first-person test of the exact Evo II directly describes using its steering-wheel-mounted clutch lever to move off. Together they establish a driver-operated hand clutch for the standing start; neither source establishes a pedal, anti-stall, or automated launch procedure."
       },
       {
         "paths": [
@@ -382,12 +419,12 @@
     ]
   },
   "archetype": {
-    "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
+    "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
   "notes": [
     "Low Downforce is an explicit inherited alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-22"
+  "updated_at": "2026-08-23"
 }

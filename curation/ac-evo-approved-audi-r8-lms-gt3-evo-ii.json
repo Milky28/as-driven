@@ -11,7 +11,7 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "not-required",
+    "standing_start_clutch": "required",
     "throttle_lift": "not-required",
     "automatic_cut": "unknown",
     "automatic_blip": "yes",
@@ -22,6 +22,6 @@
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Second simulator entry for a car curated from AMS2. Clutch-free move-off, six gears, clutchless upshifts at sustained full throttle, clutchless downshifts on a closed throttle with an automatic blip, and a GT rim with no display and no shift lights were directly observed. The upshift needing no lift and the downshift needing no blip were established by the drive's two-stage test rather than assumed, and both agree with the AMS2 values. The automatic cut is not established and cannot be by this method: Assetto Corsa EVO publishes no engine torque to SimHub and the cut is ignition-side. AMS2 established it independently and that value is unchanged.",
+  "confidence_notes": "Exact real-car research establishes a steering-wheel clutch lever for moving off. Assetto Corsa EVO instead accepted clutch-free move-off, which is recorded as a simulator override. Six gears, clutchless upshifts at sustained full throttle, clutchless downshifts on a closed throttle with an automatic blip, and a GT rim with no display and no shift lights were directly observed. Automatic cut remains unknown because Assetto Corsa EVO publishes no engine torque to SimHub and the cut is ignition-side.",
   "scope_notes": "Single exact identity staged from one guided-verification drive."
 }

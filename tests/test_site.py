@@ -378,6 +378,7 @@ class SiteTests(unittest.TestCase):
         page = build_site(ROOT)
         self.assertEqual(page.count('class="audit-result audit-'), len(findings))
         self.assertIn("Provisional finding", page)
+        self.assertIn("Supported departure", page)
         self.assertIn("Research it before publishing a verdict", page)
 
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:

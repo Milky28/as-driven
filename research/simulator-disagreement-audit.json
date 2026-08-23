@@ -13,7 +13,8 @@
     "cars_with_disagreements": 19,
     "findings": 25,
     "by_status": {
-      "provisional-departure": 25
+      "provisional-departure": 24,
+      "supported-departure": 1
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
@@ -33,14 +34,17 @@
       "driver_impact": "launch-technique",
       "priority": "high",
       "authentic_baseline": {
-        "value": "not-required",
-        "display_value": "No clutch needed",
-        "confidence": "verified",
+        "value": "required",
+        "display_value": "Clutch required",
+        "confidence": "high",
         "source_refs": [
-          "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
+          "audi.r8-lms-gt3-evo2.technical",
+          "autobild.audi-r8-lms-gt3-evo2.track-test"
         ],
-        "primary_source_refs": [],
-        "basis": "Guided current-game testing and cockpit inspection directly established these values."
+        "primary_source_refs": [
+          "audi.r8-lms-gt3-evo2.technical"
+        ],
+        "basis": "Audi's exact 2022-car technical data establishes the electrohydraulically operated racing clutch, and a first-person test of the exact Evo II directly describes using its steering-wheel-mounted clutch lever to move off. Together they establish a driver-operated hand clutch for the standing start; neither source establishes a pedal, anti-stall, or automated launch procedure."
       },
       "simulator_views": [
         {
@@ -48,7 +52,7 @@
           "label": "AMS2",
           "value": "not-required",
           "display_value": "No clutch needed",
-          "relationship_to_authentic": "matches-baseline",
+          "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "1.6.9.91",
           "verified_at": "2026-08-11",
           "confidence": "high",
@@ -64,7 +68,7 @@
           "label": "Assetto Corsa EVO",
           "value": "not-required",
           "display_value": "No clutch needed",
-          "relationship_to_authentic": "matches-baseline",
+          "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "0.8.1",
           "verified_at": "2026-08-21",
           "confidence": "verified",
@@ -79,7 +83,7 @@
           "label": "Assetto Corsa Competizione",
           "value": "not-required",
           "display_value": "No clutch needed",
-          "relationship_to_authentic": "matches-baseline",
+          "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "21257365",
           "verified_at": "2026-08-22",
           "confidence": "verified",
@@ -95,7 +99,7 @@
           "label": "Assetto Corsa",
           "value": "required",
           "display_value": "Clutch required",
-          "relationship_to_authentic": "departs-from-baseline",
+          "relationship_to_authentic": "matches-baseline",
           "verified_game_version": "14923034",
           "verified_at": "2026-08-22",
           "confidence": "high",
@@ -108,17 +112,17 @@
         }
       ],
       "adjudication": {
-        "status": "provisional-departure",
+        "status": "supported-departure",
         "matching_simulators": [
+          "ac"
+        ],
+        "departing_simulators": [
           "ams2",
           "ac-evo",
           "acc"
         ],
-        "departing_simulators": [
-          "ac"
-        ],
-        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
-        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
       }
     },
     {

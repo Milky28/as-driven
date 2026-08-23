@@ -28,11 +28,12 @@ Dataset 0.4.20 contains 25 field-level findings across 19 cars:
 - 6 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-All 25 are currently **provisional departures**. The simulator observations
-conflict, and the curated authentic baseline gives an answer, but none of the
-exact disputed fields has both high confidence and a registered manufacturer or
-homologation source. This is a useful negative result: simulator agreement or a
-previously curated answer is not enough to call one implementation authentic.
+One is now a **supported departure** and the other 24 remain **provisional
+departures**. The Audi launch-clutch finding has exact-car evidence strong enough
+for a benchmark conclusion; the remaining conflicts still lack both high
+confidence and a registered manufacturer or homologation source for the exact
+disputed field. Simulator agreement or a previously curated answer is not enough
+to call one implementation authentic.
 
 The audit uses three statuses:
 
@@ -47,23 +48,38 @@ Unknown simulator values do not enter the audit. One simulator knowing less than
 another is an evidence gap, not a disagreement. No majority vote can rewrite the
 authentic baseline.
 
-## First research queue
+## First supported finding
+
+**Audi R8 LMS GT3 Evo II — pulling away.** Audi's exact technical data for the
+2022 car specifies an electrohydraulically operated three-plate racing clutch on
+printed page 8 of 16. A first-person track test of the exact Evo II then states,
+"Anfahren ist mit dem am Lenkrad montierten Kupplungshebel ein Kinderspiel,"
+directly establishing use of the steering-wheel-mounted clutch lever to move
+off. Neither source establishes a clutch pedal, anti-stall mode, or automated
+launch procedure.
+
+The fingerprinted AC RSS v2 implementation matches that clutch-required launch.
+AMS2 1.6.9.91, Assetto Corsa EVO 0.8.1, and ACC build 21257365 each accepted
+clutch-free move-off with automatic clutch and shifting disabled, so those exact
+reviewed implementations are supported departures from the real-car baseline.
+This finding does not infer why the simulators differ.
+
+Sources: [Audi technical data for the 2022 R8 LMS][audi-technical] and
+[AUTO BILD's Evo II track test][autobild-track-test].
+
+## Next research queue
 
 Research should begin with findings that materially change hardware or driving
 technique and have a realistic path to primary evidence:
 
-1. **Audi R8 LMS GT3 Evo II — pulling away.** AMS2, AC EVO and ACC accept a
-   clutch-free launch; the fingerprinted AC implementation requires clutch
-   input. Find Audi documentation that establishes whether the real car has a
-   driver-operated clutch pedal or launch-clutch control.
-2. **Lotus Renault 98T — forward gears.** AC models six and AMS2 models five.
+1. **Lotus Renault 98T — forward gears.** AC models six and AMS2 models five.
    The curated six-speed baseline is currently secondary-source-backed, making
    a period Lotus, Renault or Hewland document the cleanest route to a verdict.
-3. **Porsche 911 RSR 1974 — gate pattern.** AMS2 models a conventional 915 gate;
+2. **Porsche 911 RSR 1974 — gate pattern.** AMS2 models a conventional 915 gate;
    the reviewed AC implementation models a dogleg. A Porsche parts diagram,
    workshop manual or homologation document should be able to settle the 915
    selector layout directly.
-4. **Mercedes-AMG GT3 — pulling away.** AMS2 accepts a clutch-free launch while
+3. **Mercedes-AMG GT3 — pulling away.** AMS2 accepts a clutch-free launch while
    ACC requires physical clutch input. The target is documentation of the
    original car's clutch pedal, hand-clutch or anti-stall/launch arrangement,
    kept separate from the 2020 Evo.
@@ -79,3 +95,6 @@ simulator version and implementation tested, the values that match and depart,
 and any telemetry boundary that prevents a stronger conclusion. It does not
 infer why a simulator differs, generalize from one mod to another, or score an
 entire simulator from one car.
+
+[audi-technical]: https://www.audi-mediacenter.com/system/production/uploaded_files/19514/file/259808bc1b08337b8b1096c2f4008a6fcde1be67/Technische_Daten_Audi_R8_LMS_GT3_2021_GB.pdf
+[autobild-track-test]: https://www.autobild.de/artikel/tracktest-audi-r8-lms-gt3-evo-ii-27575473.html

@@ -71,6 +71,27 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                     self.assertTrue(view["verified_at"])
                     self.assertTrue(view["source_refs"])
 
+    def test_audi_launch_is_the_first_supported_departure(self) -> None:
+        finding = next(
+            item
+            for item in self.checked_in["findings"]
+            if item["finding_id"]
+            == "audi-r8-lms-gt3-evo-ii--transmission-standing-start-clutch"
+        )
+        self.assertEqual("required", finding["authentic_baseline"]["value"])
+        self.assertEqual("high", finding["authentic_baseline"]["confidence"])
+        self.assertEqual(
+            ["audi.r8-lms-gt3-evo2.technical"],
+            finding["authentic_baseline"]["primary_source_refs"],
+        )
+        adjudication = finding["adjudication"]
+        self.assertEqual("supported-departure", adjudication["status"])
+        self.assertEqual(["ac"], adjudication["matching_simulators"])
+        self.assertEqual(
+            ["ams2", "ac-evo", "acc"],
+            adjudication["departing_simulators"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

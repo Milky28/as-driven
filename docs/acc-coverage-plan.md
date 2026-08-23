@@ -187,9 +187,9 @@ distinct `differs from car` label.
 
 The next phase is the checked-in
 [`simulator-disagreement-audit`](simulator-disagreement-audit.md), not additional
-roster-order driving. It evaluates all 26 field-level conflicts against the
-source strength of the exact authentic baseline before any is published as a
-benchmark verdict.
+roster-order driving. It evaluates all 25 field-level conflicts against the
+source strength of the exact authentic baseline. One finding now has sufficient
+evidence for a supported benchmark verdict; the remaining 24 are provisional.
 
 [acc-roster]: https://assettocorsa.gg/assetto-corsa-competizione/
 [gt4-pack]: https://assettocorsa.gg/the-gt4-pack-dlc/
