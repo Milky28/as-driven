@@ -196,6 +196,11 @@ def build_promoted_record(
         if name not in record["authentic_controls"]["transmission"]:
             raise ValueError(f"{label}: unknown transmission field {name!r}")
         record["authentic_controls"]["transmission"][name] = value
+        if name == "shift_actuation":
+            # Simulator behavior restates the reviewed primary mechanism. The
+            # game accepts arbitrary bindings, so this field comes from cockpit
+            # inspection and a reviewer may correct an accidental form choice.
+            simulator["behavior"]["shift_type"] = value
 
     # Explicit aero or configuration aliases become exact record identities.
     aliases = entry.get("additional_telemetry_names") or []
@@ -809,8 +814,12 @@ def _behavior_changes(
 def _unique_correction_source(
     bundle: dict[str, Any], entry: dict[str, Any], known_sources: set[str]
 ) -> dict[str, Any]:
-    """Keep a second drive at the same game version from reusing a source id."""
-    if not entry.get("correct_existing_simulator"):
+    """Keep a repeated drive at the same game version from reusing a source id."""
+    if entry.get("correct_existing_simulator"):
+        source_kind = "correction"
+    elif entry.get("compatible_implementation") is not None:
+        source_kind = "implementation"
+    else:
         return bundle
     source_id = bundle["source"]["source_id"]
     if source_id not in known_sources:
@@ -819,14 +828,14 @@ def _unique_correction_source(
     token = observation_id.rsplit("-", 1)[-1].lower()
     if not token or not all(char in "0123456789abcdef" for char in token):
         raise ValueError(
-            f"review entry {entry.get('record_id')!r}: correction source {source_id!r} "
+            f"review entry {entry.get('record_id')!r}: repeated source {source_id!r} "
             "already exists and the observation id has no hexadecimal suffix with "
             "which to distinguish the replacement drive"
         )
-    replacement = f"{source_id}.correction-{token}"
+    replacement = f"{source_id}.{source_kind}-{token}"
     if replacement in known_sources:
         raise ValueError(
-            f"review entry {entry.get('record_id')!r}: correction source {replacement!r} "
+            f"review entry {entry.get('record_id')!r}: repeated source {replacement!r} "
             "is already registered"
         )
     corrected = json.loads(json.dumps(bundle))
@@ -943,6 +952,65 @@ def correct_simulator_entry(
             )
         overrides.remove(matches[0])
         removed_overrides.append(dict(removal))
+
+    archetype_removal = correction.get("remove_archetype")
+    if archetype_removal is not None:
+        if not isinstance(archetype_removal, dict):
+            raise ValueError(f"{label}: remove_archetype must be an object")
+        for field in ("archetype_id", "basis"):
+            if not str(archetype_removal.get(field) or "").strip():
+                raise ValueError(f"{label}: remove_archetype is missing {field!r}")
+        current_archetype = merged.get("archetype")
+        if not isinstance(current_archetype, dict) or current_archetype.get(
+            "archetype_id"
+        ) != archetype_removal["archetype_id"]:
+            raise ValueError(
+                f"{label}: remove_archetype expected {archetype_removal['archetype_id']!r}, "
+                f"but the curated record contains {current_archetype!r}"
+            )
+        del merged["archetype"]
+
+    for addition in correction.get("add_simulator_overrides", []):
+        for field in ("simulator", "path", "value", "condition", "confidence", "source_refs"):
+            if field not in addition or addition[field] in (None, "", []):
+                raise ValueError(f"{label}: added override is missing {field!r}")
+        if not str(addition["path"]).startswith("/authentic_controls/"):
+            raise ValueError(
+                f"{label}: added override path must point into /authentic_controls/, "
+                f"got {addition['path']!r}"
+            )
+        targets = [
+            item
+            for item in merged.get("simulators", [])
+            if item.get("simulator") == addition["simulator"]
+        ]
+        if len(targets) != 1:
+            raise ValueError(
+                f"{label}: cannot add override to {addition['simulator']!r}; "
+                f"found {len(targets)} simulator entries"
+            )
+        target = targets[0]
+        absent_sources = [
+            ref for ref in addition["source_refs"] if ref not in target.get("source_refs", [])
+        ]
+        if absent_sources:
+            raise ValueError(
+                f"{label}: added override cites source(s) absent from the target "
+                f"simulator entry: {absent_sources!r}"
+            )
+        duplicates = [
+            item
+            for item in target.get("overrides", [])
+            if item.get("path") == addition["path"]
+            and item.get("value") == addition["value"]
+        ]
+        if duplicates:
+            raise ValueError(
+                f"{label}: added override already exists on {addition['simulator']}: "
+                f"{addition['path']}={addition['value']!r}"
+            )
+        payload = {key: value for key, value in addition.items() if key != "simulator"}
+        target.setdefault("overrides", []).append(json.loads(json.dumps(payload)))
 
     conflicts, fills = _classify_differences(
         merged["authentic_controls"], incoming["authentic_controls"]
@@ -1100,10 +1168,10 @@ def _merge_compatible_approval(
     }
     for addition in additions:
         if addition["value"] in approved_names:
-            raise ValueError(
-                f"{label}: compatible implementation identity {addition['value']!r} "
-                "is already approved on this simulator entry."
-            )
+            # A package may be republished without changing either its declared
+            # version or telemetry name. Its distinct fingerprint and source
+            # still belong in the audit trail when the effective controls match.
+            continue
         existing.setdefault("additional_telemetry_names", []).append(addition)
         approved_names.add(addition["value"])
     existing["dataset_version"] = dataset_version

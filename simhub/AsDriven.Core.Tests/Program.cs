@@ -177,14 +177,15 @@ namespace AsDriven.Core.Tests
                 Equal("sequential", viper.ShiftPattern, "exposes the Viper sequential pattern");
                 Equal("required", viper.StandingStartClutch, "requires the Viper clutch from a stop");
                 Equal("yes", viper.ShiftCut, "exposes the observed Viper automatic cut");
-                Equal("yes", viper.AutoBlip, "exposes the observed Viper automatic blip");
+                Equal("no", viper.AutoBlip, "exposes the corrected Viper automatic-blip result");
                 Equal("round", viper.WheelRimShape, "uses the period cockpit wheel shape");
                 True(viper.UpshiftGuidance.Contains("Clutch not required"), "describes the Viper running upshift clutch");
                 True(viper.UpshiftGuidance.Contains("Automatic cut"), "describes the Viper automatic upshift cut");
-                True(viper.DownshiftGuidance.Contains("Automatic blip"), "describes the Viper automatic downshift blip");
+                True(viper.DownshiftGuidance.Contains("No automatic blip"), "describes the corrected absence of a Viper automatic blip");
+                True(viper.DownshiftGuidance.Contains("Manual blip unknown"), "keeps the authentic Viper downshift technique open");
                 True(viper.TechniqueSummary.Contains("Use the clutch to pull away"), "gives actionable Viper start technique");
                 True(viper.TechniqueSummary.Contains("automatic cut"), "gives actionable Viper upshift technique");
-                True(viper.TechniqueSummary.Contains("automatic throttle blip"), "gives actionable Viper downshift technique");
+                True(viper.TechniqueSummary.Contains("manual downshift blip technique is not yet verified"), "does not invent Viper downshift technique");
                 True(viper.TechniqueSummaryLine1.Length > 0, "provides a detailed technique first line");
                 True(viper.TechniqueSummaryCompactLine1.Length > 0, "provides a compact technique first line");
                 AssertOverlayTextFits(viper, "Viper overlay text");
@@ -412,6 +413,12 @@ namespace AsDriven.Core.Tests
                         True(historical.TechniqueSummary.Contains("no throttle blip is needed"), "shows the corrected Murcielago downshift technique");
                         Equal("yes", historical.WheelIntegratedDisplay, "shows the observed Murcielago wheel display");
                         Equal("yes", historical.WheelShiftLights, "shows the observed Murcielago shift lights");
+                    }
+                    else if (historicalSequentialCar == "Aston Martin DBR9")
+                    {
+                        Equal("not-required", historical.ManualBlip, "uses the corrected AMS2 blip result for the DBR9");
+                        True(historical.DownshiftGuidance.Contains("Manual blip not required"), "does not ask for an unnecessary DBR9 blip");
+                        True(historical.TechniqueSummary.Contains("no throttle blip is needed"), "shows the corrected DBR9 downshift technique");
                     }
                     else
                     {
@@ -1635,6 +1642,8 @@ namespace AsDriven.Core.Tests
                     "waits for the mechanism before asking for an H-pattern result");
                 False(VerificationReviewRules.AutomaticCutIsMeasurable("acc"),
                     "does not ask contributors to settle an ACC cut that telemetry cannot expose");
+                False(VerificationReviewRules.AutomaticCutIsMeasurable("ac"),
+                    "does not ask contributors to settle an AC cut that telemetry cannot expose");
                 True(VerificationReviewRules.AutomaticCutIsMeasurable("ams2"),
                     "keeps automatic-cut review for a simulator that publishes the needed telemetry");
 

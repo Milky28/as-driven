@@ -391,7 +391,7 @@ def simulator_disagreements(
     `unknown` is retained for display but excluded from the decision. One game
     knowing less than another is an evidence gap, not a disagreement.
     """
-    views: list[tuple[str, dict[str, Any]]] = []
+    views: list[tuple[str, str, dict[str, Any]]] = []
     for entry in entries:
         effective = _apply_controls(controls, entry.get("overrides") or [])
         flat = {
@@ -402,11 +402,12 @@ def simulator_disagreements(
         for behavior_path, control_path in BEHAVIOR_COMPARISON_PATHS.items():
             if behavior_path in behavior:
                 flat[control_path] = behavior[behavior_path]
-        views.append((simulator_label(entry.get("simulator", "")), flat))
+        simulator_id = entry.get("simulator", "")
+        views.append((simulator_id, simulator_label(simulator_id), flat))
 
     disagreements = []
     for path in COMPARISON_PATHS:
-        values = [flat.get(path, "unknown") for _, flat in views]
+        values = [flat.get(path, "unknown") for _, _, flat in views]
         established = {
             json.dumps(value, sort_keys=True)
             for value in values
@@ -420,10 +421,12 @@ def simulator_disagreements(
                 "field": COMPARISON_LABELS[path],
                 "values": [
                     {
+                        "simulator_id": simulator_id,
                         "simulator": label,
+                        "raw_value": flat.get(path, "unknown"),
                         "value": _comparison_value(path, flat.get(path, "unknown")),
                     }
-                    for label, flat in views
+                    for simulator_id, label, flat in views
                 ],
             }
         )
@@ -483,7 +486,11 @@ def _simulator_view(
     }
 
 
-def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
+def _car(
+    record: dict[str, Any],
+    archetypes: dict[str, str],
+    audit_findings: list[dict[str, Any]],
+) -> dict[str, Any]:
     identity = record["identity"]
     controls = record["authentic_controls"]
     transmission = controls["transmission"]
@@ -507,6 +514,9 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
     cross_simulator_disagreements = simulator_disagreements(
         controls, simulator_entries
     )
+    audit_by_path = {finding["path"]: finding for finding in audit_findings}
+    for disagreement in cross_simulator_disagreements:
+        disagreement["audit"] = audit_by_path.get(disagreement["path"])
     block = record.get("archetype") or {}
     classification = block.get("classification")
     mechanism = archetypes.get(block.get("archetype_id", ""), "")
@@ -546,6 +556,7 @@ def _car(record: dict[str, Any], archetypes: dict[str, str]) -> dict[str, Any]:
         "has_differences": any(view["differences"] for view in simulator_views),
         "is_multi_sim": len(simulator_views) > 1,
         "simulator_disagreements": cross_simulator_disagreements,
+        "disagreement_audit": audit_findings,
         "has_simulator_disagreements": bool(cross_simulator_disagreements),
         "actuation": transmission["shift_actuation"],
         "start": transmission["standing_start_clutch"],
@@ -572,10 +583,27 @@ def collect(root: Path) -> dict[str, Any]:
     if archetype_path.exists():
         for entry in json.loads(archetype_path.read_text(encoding="utf-8"))["archetypes"]:
             archetypes[entry["archetype_id"]] = entry["label"]
-    cars = [
-        _car(json.loads((data / relative).read_text(encoding="utf-8")), archetypes)
-        for relative in index["records"]
-    ]
+    audit_by_record: dict[str, list[dict[str, Any]]] = {}
+    audit_path = root / "research" / "simulator-disagreement-audit.json"
+    if audit_path.exists():
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        if audit.get("dataset_version") != index["dataset_version"]:
+            raise ValueError(
+                "simulator disagreement audit is stale: "
+                f"{audit.get('dataset_version')} != {index['dataset_version']}"
+            )
+        for finding in audit.get("findings", []):
+            audit_by_record.setdefault(finding["record_id"], []).append(finding)
+    cars = []
+    for relative in index["records"]:
+        record = json.loads((data / relative).read_text(encoding="utf-8"))
+        cars.append(
+            _car(
+                record,
+                archetypes,
+                audit_by_record.get(record["record_id"], []),
+            )
+        )
     cars.sort(key=lambda car: (car["name"].lower(), car["car_class"].lower()))
     simulators = {
         view["id"]: view["label"]
@@ -682,6 +710,58 @@ def _simulator_panel(car: dict[str, Any], simulator: dict[str, Any], selected: b
     )
 
 
+def _audit_result(item: dict[str, Any]) -> str:
+    audit = item.get("audit")
+    if not audit:
+        return ""
+    adjudication = audit["adjudication"]
+    baseline = audit["authentic_baseline"]
+    status = adjudication["status"]
+    labels = {
+        "supported-departure": "Supported departure",
+        "provisional-departure": "Provisional finding",
+        "authentic-baseline-open": "Authentic baseline open",
+    }
+    departing = [
+        view["label"]
+        for view in audit["simulator_views"]
+        if view["relationship_to_authentic"] == "departs-from-baseline"
+    ]
+    matching = [
+        view["label"]
+        for view in audit["simulator_views"]
+        if view["relationship_to_authentic"] == "matches-baseline"
+    ]
+    if status == "authentic-baseline-open":
+        summary = (
+            "The real-car answer is not established; research it before treating "
+            "either simulator as authentic."
+        )
+    elif status == "supported-departure":
+        summary = (
+            f"Authentic baseline: {baseline['display_value']} "
+            f"({baseline['confidence']}). "
+            f"{', '.join(departing)} depart; {', '.join(matching)} match."
+        )
+    else:
+        summary = (
+            f"Authentic baseline currently says {baseline['display_value']}, but "
+            "this exact field lacks high-confidence manufacturer or homologation "
+            "support. Research it before publishing a verdict."
+        )
+    impact = audit["driver_impact"].replace("-", " ")
+    return (
+        '<div class="audit-result audit-{status}"><b>{label}</b>'
+        '<span>{summary}</span><small>{impact} &middot; {next_action}</small></div>'
+    ).format(
+        status=_e(status),
+        label=_e(labels[status]),
+        summary=_e(summary),
+        impact=_e(impact),
+        next_action=_e(adjudication["next_action"]),
+    )
+
+
 def _row(car: dict[str, Any]) -> str:
     detail = []
     if car["summary"]:
@@ -717,7 +797,7 @@ def _row(car: dict[str, Any]) -> str:
     if car["simulator_disagreements"]:
         items = "".join(
             '<li><span class="field">{field}</span><span class="comparison-values">'
-            '{values}</span></li>'.format(
+            '{values}</span>{audit}</li>'.format(
                 field=_e(item["field"]),
                 values="".join(
                     '<span><b>{simulator}</b> {value}</span>'.format(
@@ -726,12 +806,14 @@ def _row(car: dict[str, Any]) -> str:
                     )
                     for value in item["values"]
                 ),
+                audit=_audit_result(item),
             )
             for item in car["simulator_disagreements"]
         )
         detail.append(
-            '<div class="block simulator-comparison"><h4>Simulators disagree</h4>'
-            '<p>Only conflicting established values count; unknowns are shown as gaps.</p>'
+            '<div class="block simulator-comparison"><h4>Disagreement audit</h4>'
+            '<p>Only conflicting established values count. The audit then tests whether '
+            'the authentic baseline is strong enough to support a benchmark verdict.</p>'
             f'<ul>{items}</ul></div>'
         )
     tabs = "".join(
@@ -806,11 +888,11 @@ def _row(car: dict[str, Any]) -> str:
             else ""
         )
         + "</td>"
+        f'<td class="rim">{_e(car["rim"])}'
+        f'<span class="meta">{_e(car["wheel_equipment"])}</span></td>'
         f'<td class="spec"><span class="shifter">{_e(car["shifter"])}</span>'
         f'<span class="meta">{_e(car["gate"])}</span></td>'
         f"{_cell(car['launch'])}{_cell(car['up'])}{_cell(car['down'])}"
-        f'<td class="rim">{_e(car["rim"])}'
-        f'<span class="meta">{_e(car["wheel_equipment"])}</span></td>'
         "</tr>"
         f'<tr class="detail" hidden><td colspan="6"><div class="detail-inner">'
         f'<div id="details-{_e(car["id"])}">{"".join(detail)}</div></div></td></tr>'
@@ -926,11 +1008,24 @@ body {{
 }}
 .wrap {{ max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }}
 header {{ display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }}
-header .provenance {{ margin-top: -4px; }}
 .topline {{
   display: flex; flex-wrap: wrap; gap: 16px;
   align-items: baseline; justify-content: space-between;
 }}
+.title-block {{
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+}}
+.release-badge {{
+  display: inline-flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline;
+  width: fit-content; margin: 0; padding: 5px 9px;
+  color: var(--muted); background: var(--surface);
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; line-height: 1.3;
+}}
+.release-badge strong {{ color: var(--ink); font-weight: 600; }}
+.release-badge span {{ color: var(--faint); }}
 .theme {{ display: flex; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }}
 .theme button {{
   padding: 6px 11px; margin: 0;
@@ -1109,6 +1204,23 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   margin-right: 4px; color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 11px; font-weight: 500;
 }}
+.audit-result {{
+  display: grid; grid-template-columns: max-content 1fr; gap: 3px 10px;
+  width: 100%; margin: 5px 0 8px; padding: 9px 11px;
+  border-left: 3px solid var(--line); background: var(--surface);
+}}
+.audit-result b {{
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--muted);
+}}
+.audit-result span {{ font-size: 12.5px; color: var(--ink); }}
+.audit-result small {{
+  grid-column: 2; font-size: 11.5px; color: var(--faint);
+}}
+.audit-supported-departure {{ border-left-color: var(--car); }}
+.audit-provisional-departure {{ border-left-color: var(--optional); }}
+.audit-authentic-baseline-open {{ border-left-color: var(--faint); }}
 .differs {{ gap: 12px; }}
 .differs li {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }}
 .differs .was {{ color: var(--faint); text-decoration: line-through; }}
@@ -1186,7 +1298,10 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 <div class="wrap">
 <header>
   <div class="topline">
-    <h1>As Driven</h1>
+    <div class="title-block">
+      <h1>As Driven</h1>
+      <p class="release-badge"><strong>Dataset {version}</strong><span>Released {released}</span></p>
+    </div>
     <div class="theme" role="group" aria-label="Colour theme">
       <button type="button" data-theme-set="system" aria-pressed="true">System</button>
       <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
@@ -1206,7 +1321,6 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     <div class="stat"><b>{open_any}</b><span>open questions</span></div>
     <div class="stat"><b>{disagreeing}</b><span>sims disagree</span></div>
   </div>
-  <p class="provenance">Dataset {version}, released {released}.</p>
   <div class="mode" role="group" aria-label="Comparison mode">
     <button type="button" data-mode="all" aria-pressed="true">All</button>
     <button type="button" data-mode="multi" aria-pressed="false">Multi-sim</button>
@@ -1244,9 +1358,9 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
 <div class="table-scroll">
 <table>
   <thead><tr>
-    <th scope="col">Car</th><th scope="col">Shifter</th>
+    <th scope="col">Car</th><th scope="col">Wheel</th><th scope="col">Shifter</th>
     <th scope="col">Pulling away</th><th scope="col">Upshift</th>
-    <th scope="col">Downshift</th><th scope="col">Wheel</th>
+    <th scope="col">Downshift</th>
   </tr></thead>
   <tbody id="rows">
 {rows}

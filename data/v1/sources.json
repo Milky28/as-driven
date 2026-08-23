@@ -6346,7 +6346,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-22",
       "reuse_status": "facts-only-review",
-      "notes": "Race Sim Studio's first-party product page identifies GT Legends Championship Pack v6 and its Tornado V12, Vortex V10, Ferruccio 55 V12, and Lanzo V12 implementations. The user's matching v6 archive and installed v4/v4/v4/v3 packages add implementation metadata and bundled livery labels: Prodrive, BMS, Care, JMB, and Larbre on Ferruccio; Lister Storm on Tornado; period Larbre, Roos, and Force One entries on Vortex; and 2005 REITER Engineering on Lanzo. Combined with each model's country, engine layout, era, body, and specifications, those labels establish the intended analogues as the Prodrive Ferrari 550 GTS Maranello, Lister Storm GTM, Dodge Viper GTS-R, and Lamborghini Murcielago R-GT. The first-party ReadMe_GT_Legends_Championship - Pack.pdf, pages 1-3, describes the early-to-mid-2000s package but does not name the real cars or establish their controls. This is implementation-identity evidence only; the public RSS page likewise does not name the licensed marques."
+      "notes": "Race Sim Studio's first-party product and car pages identify GT Legends Championship Pack v6 and its Tornado V12, Vortex V10, Ferruccio 55 V12, Lanzo V12, and Shadow V8 implementations. The user's matching archive and installed packages add implementation metadata and bundled livery labels: Prodrive, BMS, Care, JMB, and Larbre on Ferruccio; Lister Storm on Tornado; period Larbre, Roos, and Force One entries on Vortex; 2005 REITER Engineering on Lanzo; and explicit Saleen plus 2003 and 2005 FIA GT entries on Shadow. Combined with each model's country, engine layout, era, body, and specifications, those labels establish the intended analogues as the Prodrive Ferrari 550 GTS Maranello, Lister Storm GTM, Dodge Viper GTS-R, Lamborghini Murcielago R-GT, and Saleen S7-R. AC displayed 2000 for Vortex and Shadow, but neither installed ui_car.json declares a year and their bundled liveries include later seasons, so that display value is implementation metadata rather than an exact real-car revision. The first-party ReadMe_GT_Legends_Championship - Pack.pdf, pages 1-3, describes the early-to-mid-2000s package but does not name the real cars or establish their controls. This is implementation-identity evidence only; the public RSS pages likewise do not name the licensed marques."
     },
     {
       "source_id": "rss.gt-adonis-d9-v12.v2",
@@ -6720,6 +6720,74 @@
       "retrieved_at": "2026-08-23",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation acc.mercedes-amg-gt4-2016.20260823t042303819z-65014ec0 by Jason Kinslow in ACC Steam build 21257365 established the exact AMG GT4 identity and ACC controls."
+    },
+    {
+      "source_id": "ac.local-live-gt-shadow-v8-controls.14923034",
+      "title": "Live AC GT Shadow V8 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gt-shadow-v8.20260823t155945144z-9ce21f6f by Jason Kinslow. The fingerprinted Race Sim Studio v3 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established. AC displayed year 2000, but that value is implementation context only; the installed readable metadata declares no year and bundled liveries include 2003 and 2005 entries.",
+      "implementation": {
+        "content_id": "rss_gt_shadow_v8",
+        "author": "Race Sim Studio",
+        "declared_version": "3",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "7bfce014665732483b9ae787bf3162afd80434a86d1950d681bd09983b817302"
+        }
+      }
+    },
+    {
+      "source_id": "ac.local-live-gt-vortex-v10-controls.14923034.implementation-49377ed1",
+      "title": "Live AC GT Vortex V10 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Repeat guided-verification observation ac.gt-vortex-v10.20260823t155438716z-49377ed1 by Jason Kinslow. The RSS v4 data.acd fingerprint differs from the prior curated v4 observation while the telemetry name and declared version are unchanged. After reviewer correction of an accidental paddle selection, it independently confirms six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established.",
+      "implementation": {
+        "content_id": "rss_gt_vortex_v10",
+        "author": "Race Sim Studio",
+        "declared_version": "4",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "ee939eeb1b663974a1bd91cd78a1b60fa093bdb26c4a2e7b958a04e802a7060a"
+        }
+      }
+    },
+    {
+      "source_id": "ams2.local-live-dodge-viper-gts-r-controls.1.6.9.91",
+      "title": "Live AMS2 Dodge Viper GTS-R guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Corrective guided-verification observation ams2.dodge-viper-gts-r.20260823t161936176z-7f8071ef by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, a shift-local torque interruption confirming automatic cut, no automatic throttle spike on downshift, and a closed round rim without integrated display or shift lights. It supersedes the earlier perceptual automatic-blip observation."
+    },
+    {
+      "source_id": "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91.correction-015c7bb9",
+      "title": "Live AMS2 Aston Martin DBR9 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-23",
+      "reuse_status": "facts-only-review",
+      "notes": "Corrective guided-verification observation ams2.aston-martin-dbr9.20260823t162741438z-015c7bb9 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, a shift-local torque interruption confirming automatic cut, no automatic throttle spike on downshift, and a closed round rim without integrated display or shift lights. It supersedes the earlier driver-blip interpretation."
     }
   ]
 }

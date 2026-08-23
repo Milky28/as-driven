@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.20",
+  "approved_at": "2026-08-23",
+  "records": [
+    {
+      "record_id": "saleen-s7-r-gt1",
+      "bundle": "build/staged-ac-shadow.json",
+      "manufacturer": "Saleen",
+      "model": "S7-R",
+      "year": {
+        "from": 2005,
+        "label": "2005 GT1 representation"
+      },
+      "class": "GT1 2005",
+      "real_world_identity_notes": "FIA evidence establishes the S7 competition identity, and specialist technical reporting supports a six-speed sequential transmission in the S7-R family. Exact AMS2 cockpit inspection confirms a sequential stick without paddles. The RSS Shadow implementation is mapped from its American V8 specification and bundled Saleen and period FIA GT liveries; its displayed year 2000 is retained only as implementation metadata because the package exposes no readable year field and includes 2003 and 2005 entries.",
+      "real_world_source_refs": [
+        "rss.gt-legends-championship.pack-v6",
+        "fia.saleen-s7.gt-013",
+        "racecar-engineering.saleen-s7r.2010"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The fingerprinted RSS Shadow v3 package is an American V8 period GT with an explicitly Saleen-labeled skin and 2003/2005 FIA GT team entries. FIA homologation independently establishes the Saleen S7 competition identity, while specialist evidence supports the sequential transmission family. The exact AC behavior and cockpit were directly observed.",
+      "identity_basis": "RSS identifies the exact Shadow implementation, and its installed metadata, American V8 layout, body, specifications, and bundled Saleen and period FIA GT liveries converge on the existing Saleen S7-R GT1 record. The in-game year 2000 is not promoted as a real-car revision because no readable package field declares it and the skins span later seasons.",
+      "specification_basis": "The existing authentic six-speed sequential-stick baseline remains qualified by family-level real-car evidence. The fingerprinted RSS v3 drive agrees on six sequential-stick gears and clutch-required move-off. AC accepted the tested coast downshift without a driver blip and exposes no engine-torque channel, so its no-blip acceptance is simulator-specific and its automatic cut remains unknown.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The fingerprinted RSS v3 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the curated authentic guidance retains driver rev matching.",
+          "confidence": {
+            "level": "high",
+            "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
+          }
+        }
+      ],
+      "confidence_notes": "The exact Race Sim Studio v3 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
+      "scope_notes": "The AC display labeled the car as year 2000. That value is retained as implementation context only and does not replace the record's reviewed 2005 competition context or establish an exact historical chassis.",
+      "control_notes": [
+        "The RSS fictionalized Shadow identity is mapped to the Saleen S7-R from the package's American V8 specification and explicit Saleen and period FIA GT livery labels.",
+        "The displayed year 2000 is simulator/package metadata, not evidence for an exact real-car revision.",
+        "RSS accepts the tested coast downshift without a driver blip; the curated authentic technique still calls for rev matching.",
+        "No wheel-mounted shift lights were seen in RSS, while the real-car field remains unknown."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Guided-verification observation ac.gt-shadow-v8.20260823t155945144z-9ce21f6f by Jason Kinslow. The fingerprinted Race Sim Studio v3 implementation exposed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights. AC supplied no engine-torque channel, so automatic cut is not established. AC displayed year 2000, but that value is implementation context only; the installed readable metadata declares no year and bundled liveries include 2003 and 2005 entries."
+    }
+  ]
+}

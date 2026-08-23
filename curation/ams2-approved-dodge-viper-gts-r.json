@@ -1,29 +1,98 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.20",
-  "approved_at": "2026-08-10",
+  "dataset_version": "0.4.20",
+  "approved_at": "2026-08-23",
   "record_id": "dodge-viper-gts-r",
   "simulator": "ams2",
   "telemetry_name": "Dodge Viper GTS-R",
-  "telemetry_class": "GT1_05",
   "observed_game_version": "1.6.9.91",
-  "observed_through": "SimHub 9.11.22",
+  "observed_through": "SimHub guided verification observation ams2.dodge-viper-gts-r.20260823t161936176z-7f8071ef",
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "not-required",
+    "throttle_lift": "not-required",
     "automatic_cut": "yes",
-    "automatic_blip": "yes",
-    "wheel_rim_shape": "round"
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Sequential actuation and standing-start clutch behavior were directly tested. Automatic cut and blip appeared present but were not telemetry-measured, so the promoted record marks the combined simulator behavior medium-confidence.",
-  "historical_notes": "FIA GT2-005 documents the original manual Borg-Warner T56. A first-person Carsport Holland account documents a privateer Holinger sequential conversion. Approval applies to the AMS2 representation and must not be generalized to every historical Viper GTS-R.",
+  "confidence_notes": "The repeat AMS2 1.6.9.91 guided drive directly confirmed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, a torque-measured automatic cut, no automatic blip, and a closed round rim without display or shift lights. The earlier automatic-blip observation is explicitly superseded; authentic downshift rev-matching returns to unknown.",
+  "scope_notes": "The exact Low Downforce alias inherits the corrected base implementation controls as an approved aero-only assumption and was not separately tested.",
+  "telemetry_class": "GT1_05",
   "additional_telemetry_names": [
     {
       "value": "Dodge Viper GTS-R - Low Downforce",
       "basis": "Approved aero-package alias inheriting the verified base controls; not separately live-tested."
     }
   ],
-  "scope_notes": "'Dodge Viper GTS-R - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested."
+  "correction_history": [
+    {
+      "corrected_at": "2026-08-23",
+      "superseded_source_ref": "ams2.local-live-viper-controls.1.6.9.91",
+      "replacement_source_ref": "ams2.local-live-dodge-viper-gts-r-controls.1.6.9.91",
+      "basis": "The repeat two-stage AMS2 drive directly detected no automatic throttle spike on the accepted coast downshift, correcting the earlier perceptual automatic-blip result. It also newly inspected a closed round rim without display or shift lights. Because the authentic auto-blip and manual-blip claims depended on the superseded simulator result and no real-car source settles the converted Viper's rev-matching system, both authentic fields return to unknown.",
+      "behavior_changes": [
+        {
+          "path": "/simulators/0/behavior/auto_blip",
+          "from": "yes",
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/integrated_display",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/open_top",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/shift_lights",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        }
+      ],
+      "authentic_control_changes": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "from": "yes",
+          "to": "unknown",
+          "basis": "The authentic yes came only from the superseded AMS2 observation; neither FIA nor privateer-conversion evidence establishes an automatic blipper."
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "from": "not-required",
+          "to": "unknown",
+          "basis": "The prior no-driver-blip guidance depended on the superseded automatic-blip interpretation. Simulator acceptance without a blip does not settle real-car technique."
+        },
+        {
+          "path": "/authentic_controls/notes/1",
+          "from": "The observed automatic cut and blip are medium-confidence perceptual tests; no input or engine-throttle telemetry trace was recorded.",
+          "to": "The repeat AMS2 drive telemetry-confirmed its automatic upshift cut and found no automatic downshift blip. Those are simulator facts; real-car downshift rev-matching remains unknown.",
+          "basis": "The old note describes the superseded perceptual blip result and must not remain as current evidence."
+        }
+      ],
+      "removed_simulator_overrides": [
+        {
+          "simulator": "ac",
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "basis": "The AC no remains directly observed, but it is no longer a departure after the unsupported authentic yes is retracted to unknown."
+        }
+      ]
+    }
+  ],
+  "historical_notes": "FIA GT2-005 documents the original manual Borg-Warner T56. A first-person Carsport Holland account documents a privateer Holinger sequential conversion. Approval applies to the AMS2 representation and must not be generalized to every historical Viper GTS-R. Corrected from SimHub 9.11.22 through SimHub guided verification observation ams2.dodge-viper-gts-r.20260823t161936176z-7f8071ef: The repeat two-stage AMS2 drive directly detected no automatic throttle spike on the accepted coast downshift, correcting the earlier perceptual automatic-blip result. It also newly inspected a closed round rim without display or shift lights. Because the authentic auto-blip and manual-blip claims depended on the superseded simulator result and no real-car source settles the converted Viper's rev-matching system, both authentic fields return to unknown."
 }

@@ -33,7 +33,7 @@ LIVE_OBSERVATION_ID_RE = re.compile(
     r"^(?:"
     + "|".join(re.escape(simulator) for simulator in OBSERVING_SIMULATORS)
     + r")\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*"
-    + r"(?:\.correction-[0-9a-f]+)?$"
+    + r"(?:\.(?:correction|implementation)-[0-9a-f]+)?$"
 )
 CLUTCH_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
 THROTTLE_LIFT = {"required", "not-required", "partial", "unknown", "not-applicable"}

@@ -30,8 +30,8 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
-        "automatic_blip": "no"
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required"
     },
@@ -48,7 +48,7 @@
     "notes": [
       "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
       "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
-      "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+      "The repeat AMS2 drive accepted a clutch-free coast downshift without driver throttle and detected no automatic blip. Those are simulator facts; real-car downshift rev matching remains unknown.",
       "AMS2's generic acceptance of direct gear inputs on sequential cars is not recorded as a car-specific characteristic.",
       "The exact Low Downforce identity inherits the verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
@@ -77,26 +77,41 @@
         "wheel_rim_type": {
           "normalized": "round",
           "integrated_display": "no",
-          "source_label": "live-cockpit-round-no-display"
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Base car live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed.",
-          "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.aston-martin-dbr9.20260823t162741438z-015c7bb9 by Jason Kinslow.",
+          "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested.",
+          "Correction superseding ams2.local-live-aston-martin-dbr9-controls.1.6.9.91: The repeat two-stage AMS2 drive directly found no automatic throttle spike on the accepted coast downshift, showing that the earlier driver-blip conclusion was not a simulator requirement. It also newly inspected a closed round rim without display or shift lights. Because the authentic automatic/manual blip claims depended on the superseded simulator interpretation and no real-car source settles the DBR9's rev-matching system, both authentic fields return to unknown."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the real DBR9's rev-matching requirement remains unknown.",
+          "confidence": {
+            "level": "high",
+            "basis": "The repeat guided drive directly observed coast-downshift acceptance without driver throttle input and detected no automatic throttle spike."
+          },
+          "source_refs": [
+            "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91.correction-015c7bb9"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
-      "verified_at": "2026-08-11",
+      "verified_at": "2026-08-23",
       "source_refs": [
         "ams2.reiza-release.1.6.8.5.historical-endurance",
         "goodwood.aston-martin-dbr9.gearbox",
         "simhub.local-ams2-identities.9.11.22",
-        "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91"
+        "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91.correction-015c7bb9"
       ],
       "confidence": {
-        "level": "verified",
-        "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested; historical evidence supports the six-speed sequential family while preserving the known DBR9 variant caveat."
+        "level": "high",
+        "basis": "The exact AMS2 identity was re-tested in 1.6.9.91. The two-stage drive measured the upshift torque interruption, found no automatic downshift blip, and directly re-inspected the cockpit. Goodwood independently supports the six-speed sequential family while preserving the known DBR9 H-pattern variant caveat. No reviewed real-car source settles downshift rev matching."
       }
     },
     {
@@ -126,7 +141,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The fingerprinted RSS v2 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, unlike the curated manual-blip guidance.",
+          "condition": "The fingerprinted RSS v2 implementation accepted the tested coast downshift without driver throttle input and produced no automatic blip, while the real DBR9's rev-matching requirement remains unknown.",
           "confidence": {
             "level": "high",
             "basis": "The guided drive directly observed coast-downshift acceptance with no driver blip and detected no automatic throttle spike."
@@ -153,8 +168,7 @@
     "claims": [
       {
         "paths": [
-          "/identity",
-          "/simulators/0/identities"
+          "/identity"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.8.5.historical-endurance",
@@ -179,7 +193,6 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/0",
           "/authentic_controls/notes/4"
         ],
         "source_refs": [
@@ -194,8 +207,7 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
-          "/simulators/0/behavior"
+          "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
           "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91"
@@ -224,15 +236,46 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "goodwood.aston-martin-dbr9.gearbox",
+          "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91.correction-015c7bb9"
+        ],
+        "confidence": "high",
+        "basis": "Official Reiza release context and the unchanged exact telemetry/class identity retain the reviewed Aston Martin DBR9 mapping. The correction changes simulator behavior evidence and retracts unsupported technique claims; it does not reopen the vehicle identity."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91.correction-015c7bb9"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/notes/2"
+        ],
+        "source_refs": [
+          "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91",
+          "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91.correction-015c7bb9"
+        ],
+        "confidence": "high",
+        "basis": "The repeat two-stage AMS2 drive directly found no automatic throttle spike on the accepted coast downshift, showing that the earlier driver-blip conclusion was not a simulator requirement. It also newly inspected a closed round rim without display or shift lights. Because the authentic automatic/manual blip claims depended on the superseded simulator interpretation and no real-car source settles the DBR9's rev-matching system, both authentic fields return to unknown."
       }
     ]
-  },
-  "archetype": {
-    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
-    "classification": "matches"
   },
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-22"
+  "updated_at": "2026-08-23"
 }

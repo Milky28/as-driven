@@ -185,6 +185,12 @@ an established value beside `unknown` remains an evidence gap. Expanded rows
 list each simulator's answer separately and keep real-car departures under the
 distinct `differs from car` label.
 
+The next phase is the checked-in
+[`simulator-disagreement-audit`](simulator-disagreement-audit.md), not additional
+roster-order driving. It evaluates all 26 field-level conflicts against the
+source strength of the exact authentic baseline before any is published as a
+benchmark verdict.
+
 [acc-roster]: https://assettocorsa.gg/assetto-corsa-competizione/
 [gt4-pack]: https://assettocorsa.gg/the-gt4-pack-dlc/
 [gtwc-2020]: https://assettocorsa.gg/2020-gt-world-challenge-pack/

@@ -18,10 +18,12 @@ namespace AsDriven.Core
 
         public static bool AutomaticCutIsMeasurable(string simulator)
         {
-            // ACC does not publish engine torque through SimHub. A successful
-            // full-throttle upshift can establish acceptance, but it cannot
-            // distinguish a modeled cut from another shift implementation.
-            return !string.Equals(simulator, "acc", StringComparison.Ordinal);
+            // AC and ACC do not publish engine torque through SimHub. A
+            // successful full-throttle upshift can establish acceptance, but
+            // it cannot distinguish a modeled cut from another shift
+            // implementation.
+            return !string.Equals(simulator, "ac", StringComparison.Ordinal)
+                && !string.Equals(simulator, "acc", StringComparison.Ordinal);
         }
     }
 }

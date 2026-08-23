@@ -983,6 +983,11 @@ class ValidationTests(unittest.TestCase):
                 "ac-evo.local-live-porsche-911-gt3-controls.0.1.2.correction-acde1234"
             )
         )
+        self.assertTrue(
+            LIVE_OBSERVATION_ID_RE.fullmatch(
+                "ac.local-live-gt-vortex-v10-controls.14923034.implementation-49377ed1"
+            )
+        )
         self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
         self.assertNotIn("other", OBSERVING_SIMULATORS)
 

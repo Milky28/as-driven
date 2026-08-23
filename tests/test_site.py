@@ -311,7 +311,21 @@ class SiteTests(unittest.TestCase):
 
         page = build_site(ROOT)
         self.assertIn("Only conflicting established values count", page)
-        self.assertIn("Simulators disagree", page)
+        self.assertIn("Disagreement audit", page)
+
+    def test_disagreement_audit_reaches_each_conflicting_field(self) -> None:
+        payload = collect(ROOT)
+        findings = [
+            disagreement["audit"]
+            for car in payload["cars"]
+            for disagreement in car["simulator_disagreements"]
+        ]
+        self.assertTrue(findings)
+        self.assertTrue(all(findings))
+        page = build_site(ROOT)
+        self.assertEqual(page.count('class="audit-result audit-'), len(findings))
+        self.assertIn("Provisional finding", page)
+        self.assertIn("Research it before publishing a verdict", page)
 
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:
         page = build_site(ROOT)
@@ -358,6 +372,7 @@ class SiteTests(unittest.TestCase):
         page = build_site(ROOT)
         stats_rule = re.search(r"\.stats \{(.*?)\}", page, re.S).group(1)
         stat_rule = re.search(r"\.stat \{(.*?)\}", page, re.S).group(1)
+        release_rule = re.search(r"\.release-badge \{(.*?)\}", page, re.S).group(1)
         detail_rule = re.search(r"\.detail-inner \{(.*?)\}", page, re.S).group(1)
         selected_rule = re.search(
             r'tr\.car\[aria-expanded="true"\] \{(.*?)\}', page, re.S
@@ -366,9 +381,32 @@ class SiteTests(unittest.TestCase):
         self.assertIn("flex-wrap: wrap", stats_rule)
         self.assertIn("align-items: baseline", stat_rule)
         self.assertIn("white-space: nowrap", stat_rule)
+        self.assertIn("background: var(--surface)", release_rule)
+        self.assertIn("border-left: 3px solid var(--accent)", release_rule)
+        header = page.split("</header>", 1)[0]
+        self.assertRegex(
+            header,
+            r'<div class="title-block">\s*<h1>As Driven</h1>\s*'
+            r'<p class="release-badge"><strong>Dataset [^<]+</strong>'
+            r'<span>Released [^<]+</span></p>',
+        )
+        self.assertNotIn('<p class="provenance">Dataset ', header)
         self.assertIn("border-top: 2px solid var(--accent)", detail_rule)
         self.assertIn("box-shadow", detail_rule)
         self.assertIn("inset 3px 0 0 var(--accent)", selected_rule)
+
+    def test_physical_controls_precede_driving_technique_in_the_table(self) -> None:
+        page = build_site(ROOT)
+        headings = re.findall(r'<th scope="col">([^<]+)</th>', page)
+        self.assertEqual(
+            headings,
+            ["Car", "Wheel", "Shifter", "Pulling away", "Upshift", "Downshift"],
+        )
+
+        first_row = page.split('<tr class="car"', 1)[1].split("</tr>", 1)[0]
+        self.assertLess(first_row.index('class="car-name"'), first_row.index('class="rim"'))
+        self.assertLess(first_row.index('class="rim"'), first_row.index('class="spec"'))
+        self.assertLess(first_row.index('class="spec"'), first_row.index('class="state"'))
 
     def test_the_light_palette_separates_ground_surface_and_rules(self) -> None:
         page = build_site(ROOT)

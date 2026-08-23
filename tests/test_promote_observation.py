@@ -8,6 +8,7 @@ import unittest
 
 from as_driven_db.importers.observation import import_observation
 from as_driven_db.promote_observation import (
+    correct_simulator_entry,
     merge_simulator_entry,
     promote_observations,
     resolve_class,
@@ -813,6 +814,91 @@ class PromoteObservationTests(unittest.TestCase):
             )
             self.assertEqual(validate_repository(temp), [])
 
+    def test_an_authentic_correction_can_remove_an_invalidated_archetype(self) -> None:
+        existing = {
+            "authentic_controls": {
+                "transmission": {"downshift": {"automatic_blip": "yes"}},
+                "steering": {},
+            },
+            "simulators": [
+                {
+                    "simulator": "ams2",
+                    "identities": [{"kind": "telemetry-name", "value": "Test"}],
+                    "behavior": {"auto_blip": "yes", "notes": []},
+                    "overrides": [],
+                    "source_refs": ["old.source"],
+                },
+                {
+                    "simulator": "ac",
+                    "identities": [{"kind": "telemetry-name", "value": "Test Mod"}],
+                    "behavior": {"auto_blip": "no", "notes": []},
+                    "overrides": [],
+                    "source_refs": ["ac.source"],
+                }
+            ],
+            "provenance": {"claims": []},
+            "archetype": {"archetype_id": "old-archetype", "classification": "matches"},
+            "updated_at": "2026-08-22",
+        }
+        incoming = {
+            "authentic_controls": {
+                "transmission": {"downshift": {"automatic_blip": "unknown"}},
+                "steering": {},
+            },
+            "simulators": [
+                {
+                    "simulator": "ams2",
+                    "identities": [{"kind": "telemetry-name", "value": "Test"}],
+                    "behavior": {"auto_blip": "no", "notes": []},
+                    "overrides": [],
+                    "source_refs": ["new.source"],
+                }
+            ],
+            "provenance": {"claims": []},
+            "updated_at": "2026-08-23",
+        }
+        correction = {
+            "basis": "The repeat drive invalidated the simulator-derived authentic claim.",
+            "supersedes_source_ref": "old.source",
+            "supersedes_observed_through": "Old drive",
+            "corrected_behavior_paths": ["/behavior/auto_blip"],
+            "authentic_control_corrections": [
+                {
+                    "path": "/authentic_controls/transmission/downshift/automatic_blip",
+                    "from": "yes",
+                    "to": "unknown",
+                    "basis": "No real-car evidence remains.",
+                }
+            ],
+            "remove_archetype": {
+                "archetype_id": "old-archetype",
+                "basis": "The corrected authentic transmission no longer matches it.",
+            },
+            "add_simulator_overrides": [
+                {
+                    "simulator": "ac",
+                    "path": "/authentic_controls/transmission/downshift/manual_blip",
+                    "value": "not-required",
+                    "condition": "The mod accepts the downshift without a driver blip.",
+                    "confidence": {"level": "high", "basis": "Observed directly."},
+                    "source_refs": ["ac.source"],
+                }
+            ],
+        }
+        record, _ = correct_simulator_entry(
+            existing,
+            incoming,
+            correction,
+            label="test correction",
+            replacement_source_ref="new.source",
+        )
+        self.assertNotIn("archetype", record)
+        self.assertEqual(
+            record["simulators"][1]["overrides"][0]["path"],
+            "/authentic_controls/transmission/downshift/manual_blip",
+        )
+        self.assertNotIn("simulator", record["simulators"][1]["overrides"][0])
+
     def test_a_correction_must_enumerate_every_behavior_change(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = self._prepare(Path(directory))
@@ -903,6 +989,77 @@ class PromoteObservationTests(unittest.TestCase):
             self.assertIn("package documentation", approval["historical_notes"])
             self.assertIn("multiple separately fingerprinted", approval["scope_notes"])
             self.assertIn("Compatible implementation", approval["confidence_notes"])
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_a_republished_compatible_implementation_may_keep_the_same_name(self) -> None:
+        """A new fingerprint is evidence even when the author reuses its name/version."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _observation()
+            observation["observation_id"] = (
+                "ams2.test-prototype.20260813t130000000z-feed1234"
+            )
+            observation["identity"]["internal_id"] = "test_prototype_republished"
+            observation["implementation"] = {
+                "content_id": "test_prototype",
+                "author": "Test Motors",
+                "declared_version": "1",
+                "fingerprint": {
+                    "scope": "data-acd",
+                    "algorithm": "sha256",
+                    "digest": "b" * 64,
+                },
+            }
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(temp, observation, "bundle-republished.json"),
+                confidence_notes="Republished package controls were separately observed.",
+                compatible_implementation={
+                    "basis": "The package kept its name and version while its distinct fingerprint produced identical effective controls."
+                },
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            simulator = record["simulators"][0]
+            self.assertEqual(
+                [
+                    identity["value"]
+                    for identity in simulator["identities"]
+                    if identity["kind"] == "telemetry-name"
+                ],
+                ["Test Prototype"],
+            )
+            self.assertIn(
+                "ams2.local-live-test-prototype-controls.1.6.9.91.implementation-feed1234",
+                simulator["source_refs"],
+            )
+
+            sources = json.loads(
+                (temp / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+            )["sources"]
+            repeated = next(
+                source
+                for source in sources
+                if source["source_id"].endswith(".implementation-feed1234")
+            )
+            self.assertEqual(
+                repeated["implementation"]["fingerprint"]["digest"], "b" * 64
+            )
+
+            approval = json.loads(
+                (temp / "curation" / "ams2-approved-test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertNotIn("additional_telemetry_names", approval)
+            self.assertIn("distinct fingerprint", approval["historical_notes"])
             self.assertEqual(validate_repository(temp), [])
 
     def test_a_different_same_simulator_implementation_is_not_called_compatible(self) -> None:
@@ -1123,6 +1280,32 @@ class PromoteObservationTests(unittest.TestCase):
             self.assertEqual(
                 record["authentic_controls"]["transmission"]["gearbox_type"],
                 "dual-clutch",
+            )
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_a_reviewed_primary_actuation_correction_updates_simulator_behavior(self) -> None:
+        """The behavior field restates the mechanism; it cannot keep the typo."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            entry = dict(
+                _review_entry(),
+                control_overrides={"shift_actuation": "sequential-stick"},
+                confidence_notes="Cockpit review corrected an accidental paddle selection.",
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                record["authentic_controls"]["transmission"]["shift_actuation"],
+                "sequential-stick",
+            )
+            self.assertEqual(
+                record["simulators"][0]["behavior"]["shift_type"],
+                "sequential-stick",
             )
             self.assertEqual(validate_repository(temp), [])
 

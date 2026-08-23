@@ -1,0 +1,1628 @@
+{
+  "audit": "simulator-disagreement-audit",
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.20",
+  "generated_at": "2026-08-23",
+  "policy": [
+    "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
+    "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
+    "Supported departure means the curated baseline has high-confidence manufacturer or homologation evidence; it does not infer why a simulator differs.",
+    "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
+  ],
+  "summary": {
+    "cars_with_disagreements": 19,
+    "findings": 25,
+    "by_status": {
+      "provisional-departure": 25
+    },
+    "by_driver_impact": {
+      "cockpit-equipment": 4,
+      "hardware-choice": 6,
+      "launch-technique": 8,
+      "running-shift-technique": 7
+    }
+  },
+  "findings": [
+    {
+      "finding_id": "audi-r8-lms-gt3-evo-ii--transmission-standing-start-clutch",
+      "record_id": "audi-r8-lms-gt3-evo-ii",
+      "display_name": "Audi R8 LMS GT3 Evo II",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Guided current-game testing and cockpit inspection directly established these values."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "high",
+          "source_refs": [
+            "ams2.reiza-release.1.6.3.new-cars",
+            "audi.r8-lms-gt3-evo2.release",
+            "audi.r8-lms-gt3.technical",
+            "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac-evo",
+          "label": "Assetto Corsa EVO",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "0.8.1",
+          "verified_at": "2026-08-21",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.3.new-cars",
+            "audi.r8-lms-gt3-evo2.release",
+            "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-22",
+          "confidence": "verified",
+          "source_refs": [
+            "acc.challengers-pack.audi-r8-lms-evo2",
+            "audi.r8-lms-gt3-evo2.release",
+            "audi.r8-lms-gt3.technical",
+            "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "rss.gt-m-aero-v10-evo2.v2",
+            "audi.r8-lms-gt3-evo2.release",
+            "audi.r8-lms-gt3.technical",
+            "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac-evo",
+          "acc"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "audi-r8-lms-gt4--steering-wheel-rim-open-top",
+      "record_id": "audi-r8-lms-gt4",
+      "display_name": "Audi R8 LMS GT4",
+      "class": "GT4",
+      "path": "/authentic_controls/steering/wheel_rim/open_top",
+      "field": "Open-top wheel",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "yes",
+        "display_value": "Yes",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct cockpit inspection showed an open-top GT/Formula rim without an integrated display."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-10",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.3.endurance-pt2",
+            "audi.r8-lms-gt4.technical",
+            "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "audi.r8-lms-gt4.technical",
+            "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for open-top wheel before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "bmw-m6-gt3--transmission-standing-start-clutch",
+      "record_id": "bmw-m6-gt3",
+      "display_name": "BMW M6 GT3",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "ricardo.bmw-m6-gt3.transaxle",
+            "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "ricardo.bmw-m6-gt3.transaxle",
+            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "lister-storm-gtm--transmission-downshift-manual-blip",
+      "record_id": "lister-storm-gtm",
+      "display_name": "Lister Storm GTM",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-10",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+            "fia.lister-storm.gt-008",
+            "custodian.lister-storm-gtm.2000",
+            "ams2.local-live-lister-storm-gtm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "rss.gt-legends-championship.pack-v6",
+            "fia.lister-storm.gt-008",
+            "custodian.lister-storm-gtm.2000",
+            "ac.local-live-gt-tornado-v12-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "lotus-renault-98t--transmission-forward-gears",
+      "record_id": "lotus-renault-98t",
+      "display_name": "Lotus Renault 98T",
+      "class": "Formula One",
+      "path": "/authentic_controls/transmission/forward_gears",
+      "field": "Forward gears",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": 6,
+        "display_value": "6",
+        "confidence": "high",
+        "source_refs": [
+          "wikipedia.lotus-98t",
+          "pegasus.hewland-dog-rings",
+          "calverst.syncro-vs-dog-engagement",
+          "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Wikipedia gives a Lotus / Hewland 6-speed manual. The live drive selected five gears, and the driver then confirmed in-game that no sixth gear exists, so the real six-speed is recorded with an explicit simulator override for the five modelled in AMS2."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": 5,
+          "display_value": "5",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-14",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.lotus-98t",
+            "pegasus.hewland-dog-rings",
+            "calverst.syncro-vs-dog-engagement",
+            "ams2.local-live-lotus-renault-98t-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": 6,
+          "display_value": "6",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.base-game.lotus-98t",
+            "wikipedia.lotus-98t",
+            "pegasus.hewland-dog-rings",
+            "calverst.syncro-vs-dog-engagement",
+            "ac.local-live-lotus-98t-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ac"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for forward gears before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "maserati-mc12-gt1--transmission-downshift-manual-blip",
+      "record_id": "maserati-mc12-gt1",
+      "display_name": "Maserati MC12 GT1",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-10",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "maserati.mc12-versione-corse.2006",
+            "ams2.local-live-maserati-mc12-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.ready-to-race.mc12-gt1",
+            "maserati.mc12-versione-corse.2006",
+            "ac.local-live-maserati-mc12-gt1-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "mclaren-720s-gt3--transmission-standing-start-clutch",
+      "record_id": "mclaren-720s-gt3",
+      "display_name": "McLaren 720S GT3",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-16",
+          "confidence": "high",
+          "source_refs": [
+            "netcarshow.mclaren-720s-gt3",
+            "ams2.local-live-mclaren-720s-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "netcarshow.mclaren-720s-gt3",
+            "acc.local-live-mclaren-720s-gt3-2019-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "mclaren-720s-gt3-evo--transmission-standing-start-clutch",
+      "record_id": "mclaren-720s-gt3-evo",
+      "display_name": "McLaren 720S GT3 EVO",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-mclaren-720s-gt3-evo-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 9cb825e7."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-12",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.coanda-sheet.v1.0.34",
+            "ams2.reiza-forum.extended-car-info",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-mclaren-720s-gt3-evo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "ams2.coanda-sheet.v1.0.34",
+            "ams2.reiza-forum.extended-car-info",
+            "acc.local-live-mclaren-720s-gt3-evo-2023-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "mercedes-amg-gt3--transmission-standing-start-clutch",
+      "record_id": "mercedes-amg-gt3",
+      "display_name": "Mercedes-AMG GT3",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-mercedes-amg-gt3-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "mercedes-amg.gt3.official",
+            "ams2.local-live-mercedes-amg-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "mercedes-amg.gt3.official",
+            "acc.local-live-mercedes-amg-gt3-2015-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "mercedes-amg-gt3-evo--transmission-standing-start-clutch",
+      "record_id": "mercedes-amg-gt3-evo",
+      "display_name": "Mercedes-AMG GT3 Evo",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-mercedes-amg-gt3-evo-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "mercedes-amg.gt3.official",
+            "ams2.local-live-mercedes-amg-gt3-evo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "mercedes-amg.gt3.official",
+            "acc.local-live-mercedes-amg-gt3-evo-2020-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "mercedes-amg-gt4--transmission-standing-start-clutch",
+      "record_id": "mercedes-amg-gt4",
+      "display_name": "Mercedes-AMG GT4",
+      "class": "GT4",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-mercedes-amg-gt4-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "mercedes-amg.gt4.official",
+            "ams2.local-live-mercedes-amg-gt4-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "mercedes-amg.gt4.official",
+            "acc.local-live-mercedes-amg-gt4-2016-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "milano-gt55--transmission-downshift-manual-blip",
+      "record_id": "milano-gt55",
+      "display_name": "Milano 55 GT1",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-milano-gt55-controls.1.6.9.91",
+          "evo.ferrari-550-maranello-prodrive"
+        ],
+        "primary_source_refs": [],
+        "basis": "The registered technical account gives a six-speed Xtrac sequential with a flat-shift facility, needing no clutch for an upshift and the clutch for every downshift, which the drive's six gears and automatic cut agree with. It says nothing about the rim or about what the simulator does, so those stay on the drive."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+            "ferrari.575-gtc",
+            "rm-sothebys.ferrari-575-gtc",
+            "ams2.local-live-milano-gt55-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "rss.gt-legends-championship.pack-v6",
+            "evo.ferrari-550-maranello-prodrive",
+            "ac.local-live-gt-ferruccio-55-v12-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "nissan-gt-r-nismo-gt3--transmission-standing-start-clutch",
+      "record_id": "nissan-gt-r-nismo-gt3",
+      "display_name": "Nissan GT-R Nismo GT3",
+      "class": "GT3",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "not-required",
+        "display_value": "No clutch needed",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "nismo.gt-r-nismo-gt3.2018-spec",
+            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "nismo.gt-r-nismo-gt3.2018-spec",
+            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "nissan-gt-r-nismo-gt3--steering-wheel-rim-shape",
+      "record_id": "nissan-gt-r-nismo-gt3",
+      "display_name": "Nissan GT-R Nismo GT3",
+      "class": "GT3",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "round",
+        "display_value": "Round rim",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "nismo.gt-r-nismo-gt3.2018-spec",
+            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "gt-formula",
+          "display_value": "GT / Formula rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "nismo.gt-r-nismo-gt3.2018-spec",
+            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "nissan-r390-gt1--transmission-downshift-automatic-blip",
+      "record_id": "nissan-r390-gt1",
+      "display_name": "Nissan R390 GT1",
+      "class": "GT1",
+      "path": "/authentic_controls/transmission/downshift/automatic_blip",
+      "field": "Automatic blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "no",
+        "display_value": "No",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.nissan-r390-gt1",
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "rss.classic-endurance-pack-1.readme.2022",
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for automatic blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "nissan-r390-gt1--transmission-downshift-manual-blip",
+      "record_id": "nissan-r390-gt1",
+      "display_name": "Nissan R390 GT1",
+      "class": "GT1",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "The drive accepted a full-throttle clutchless upshift with automatic cut, so no lift is required, and detected no automatic blip on downshifts, so the driver supplies the rev-matching blip."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.nissan-r390-gt1",
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "rss.classic-endurance-pack-1.readme.2022",
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "nissan-r390-gt1--steering-wheel-rim-shape",
+      "record_id": "nissan-r390-gt1",
+      "display_name": "Nissan R390 GT1",
+      "class": "GT1",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "round",
+        "display_value": "Round rim",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.nissan-r390-gt1",
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "rss.classic-endurance-pack-1.readme.2022",
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "porsche-911-gt1-98--transmission-downshift-manual-blip",
+      "record_id": "porsche-911-gt1-98",
+      "display_name": "Porsche 911 GT1-98",
+      "class": "GT1",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "The drive accepted a full-throttle clutchless upshift with automatic cut, so no lift is required, and detected no automatic blip on downshifts, so the driver supplies the rev-matching blip."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.porsche-911-gt1",
+            "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.porsche-pack-2.911-gt1-98",
+            "wikipedia.porsche-911-gt1",
+            "ac.local-live-porsche-911-gt1-98-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "porsche-911-gt3-r--steering-wheel-rim-shape",
+      "record_id": "porsche-911-gt3-r",
+      "display_name": "Porsche 911 GT3 R",
+      "class": "GT3",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "d-shaped",
+        "display_value": "D-shaped rim",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-porsche-911-gt3-r-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "porsche.911-gt3-r-991-2.newsroom-2019",
+            "ams2.local-live-porsche-911-gt3-r-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "gt-formula",
+          "display_value": "GT / Formula rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "porsche.911-gt3-r-991-2.newsroom-2019",
+            "acc.local-live-porsche-911-ii-gt3-r-2019-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "porsche-911-rsr-1974--transmission-shift-pattern",
+      "record_id": "porsche-911-rsr-1974",
+      "display_name": "Porsche 911 RSR 1974",
+      "class": "GT Classics",
+      "path": "/authentic_controls/transmission/shift_pattern",
+      "field": "Gate pattern",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "standard-h",
+        "display_value": "Standard H",
+        "confidence": "high",
+        "source_refs": [
+          "stuttcars.porsche-911-carrera-rsr-3-0",
+          "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91",
+          "twinsparkracing.porsche-915-replaced-the-dogleg"
+        ],
+        "primary_source_refs": [],
+        "basis": "The source gives a five-speed gearbox carried over from the RS, and the live drive selected five H-pattern gears with no automatic cut or blip. The gate is the 915's conventional H with first up and left, which replaced the 901's dogleg in 1972."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "standard-h",
+          "display_value": "Standard H",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-15",
+          "confidence": "high",
+          "source_refs": [
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "dogleg-h",
+          "display_value": "Dogleg H",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "medium",
+          "source_refs": [
+            "porsche.newsroom.rsr-model-history-2020",
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "paul-stephens.porsche-915-vs-g50",
+            "twinsparkracing.porsche-915-replaced-the-dogleg",
+            "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+            "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+            "ac-legends.gt-classic-3-release-notes-2020",
+            "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for gate pattern before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "saleen-s7-r-gt1--transmission-downshift-manual-blip",
+      "record_id": "saleen-s7-r-gt1",
+      "display_name": "Saleen S7-R GT1",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+            "fia.saleen-s7.gt-013",
+            "racecar-engineering.saleen-s7r.2010",
+            "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "rss.gt-legends-championship.pack-v6",
+            "fia.saleen-s7.gt-013",
+            "racecar-engineering.saleen-s7r.2010",
+            "ac.local-live-gt-shadow-v8-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "bmw-m6-gt3--steering-wheel-rim-shift-lights",
+      "record_id": "bmw-m6-gt3",
+      "display_name": "BMW M6 GT3",
+      "class": "GT3",
+      "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+      "field": "Wheel shift lights",
+      "driver_impact": "cockpit-equipment",
+      "priority": "medium",
+      "authentic_baseline": {
+        "value": "yes",
+        "display_value": "Yes",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "verified",
+          "source_refs": [
+            "ricardo.bmw-m6-gt3.transaxle",
+            "ams2.local-live-bmw-m6-gt3-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "verified",
+          "source_refs": [
+            "ricardo.bmw-m6-gt3.transaxle",
+            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel shift lights before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "ginetta-g55-gt4--steering-wheel-rim-integrated-display",
+      "record_id": "ginetta-g55-gt4",
+      "display_name": "Ginetta G55 GT4",
+      "class": "GT4",
+      "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+      "field": "Integrated wheel display",
+      "driver_impact": "cockpit-equipment",
+      "priority": "medium",
+      "authentic_baseline": {
+        "value": "yes",
+        "display_value": "Yes",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.ginetta-g55",
+            "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.ginetta-g55",
+            "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for integrated wheel display before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "ginetta-g55-gt4--steering-wheel-rim-shift-lights",
+      "record_id": "ginetta-g55-gt4",
+      "display_name": "Ginetta G55 GT4",
+      "class": "GT4",
+      "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+      "field": "Wheel shift lights",
+      "driver_impact": "cockpit-equipment",
+      "priority": "medium",
+      "authentic_baseline": {
+        "value": "yes",
+        "display_value": "Yes",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.ginetta-g55",
+            "ams2.local-live-ginetta-g55-gt4-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "acc",
+          "label": "Assetto Corsa Competizione",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "21257365",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.ginetta-g55",
+            "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "acc"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel shift lights before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "nissan-r390-gt1--steering-wheel-rim-shift-lights",
+      "record_id": "nissan-r390-gt1",
+      "display_name": "Nissan R390 GT1",
+      "class": "GT1",
+      "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+      "field": "Wheel shift lights",
+      "driver_impact": "cockpit-equipment",
+      "priority": "medium",
+      "authentic_baseline": {
+        "value": "yes",
+        "display_value": "Yes",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.nissan-r390-gt1",
+            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "rss.classic-endurance-pack-1.readme.2022",
+            "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel shift lights before publishing a benchmark verdict."
+      }
+    }
+  ]
+}
