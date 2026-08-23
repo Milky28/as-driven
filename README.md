@@ -23,7 +23,7 @@ to `no` only when that source documents that convention.
 
 ## What ships today
 
-- Dataset 0.4.17 contains 253 reviewed car records under the open v1 JSON
+- Dataset 0.4.18 contains 253 reviewed car records under the open v1 JSON
   contract.
 - The SimHub reference client is at 0.18.2, with exact matching, three pre-flight
   card sizes, offline preview, local diagnostics, and guided verification.
@@ -129,7 +129,7 @@ appear as separate views inside it, each with a stable shareable link:
 python -m as_driven_db build-site
 ```
 
-Dataset 0.4.17 contains 253 reviewed records. Every one of the 359 exact AMS2
+Dataset 0.4.18 contains 253 reviewed records. Every one of the 359 exact AMS2
 identities observed on the development machine is either covered by one of the
 250 AMS2-backed curated records or closed by one of 15 written decisions. New
 content still fails closed until it is observed and reviewed. Four records carry
@@ -234,7 +234,7 @@ the full review policy.
 
 ## Dataset status
 
-Dataset 0.4.17 contains 253 curated car records promoted through the reviewed
+Dataset 0.4.18 contains 253 curated car records promoted through the reviewed
 identity workflow. Of those, 250 carry AMS2 entries; one is AC EVO-only and two
 are original-AC-only. Three AMS2 records also carry separately reviewed Assetto
 Corsa EVO entries, and eleven AMS2 records also carry original Assetto Corsa

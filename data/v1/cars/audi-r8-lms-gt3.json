@@ -21,7 +21,7 @@
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -48,7 +48,7 @@
     "notes": [
       "The car moved from rest without physical clutch input.",
       "Six paddle gears and automatic downshift blip were directly observed.",
-      "Automatic cut is a medium-confidence manual observation from a brief throttle-graph interruption."
+      "A brief throttle-channel interruption was later found insufficient to establish automatic ignition cut; that field remains unknown."
     ]
   },
   "simulators": [
@@ -71,7 +71,7 @@
       "behavior": {
         "shift_type": "sequential-paddles",
         "auto_blip": "yes",
-        "shift_cut": "yes",
+        "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "no",
@@ -81,7 +81,7 @@
         },
         "notes": [
           "Guided exact-model test completed in AMS2 1.6.9.91.",
-          "Automatic cut was manually confirmed from the throttle graph and remains medium confidence."
+          "The throttle-channel dip could reflect driver input, traction control, or telemetry filtering, so automatic cut remains unknown."
         ]
       },
       "overrides": [],
@@ -94,7 +94,7 @@
       ],
       "confidence": {
         "level": "high",
-        "basis": "Manufacturer documentation and exact live testing agree on the six-speed paddle-sequential interface; automatic cut is separately medium confidence."
+        "basis": "Manufacturer documentation and exact live testing agree on the six-speed paddle-sequential interface and automatic blip; automatic cut is not established."
       }
     }
   ],
@@ -137,17 +137,6 @@
         ],
         "confidence": "verified",
         "basis": "Guided testing directly established these values."
-      },
-      {
-        "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
-          "/simulators/0/behavior/shift_cut"
-        ],
-        "source_refs": [
-          "ams2.local-live-audi-r8-lms-gt3-controls.1.6.9.91"
-        ],
-        "confidence": "medium",
-        "basis": "Observer saw a brief throttle-graph interruption coincident with a no-lift upshift."
       }
     ]
   },

@@ -24,7 +24,7 @@
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -51,7 +51,7 @@
     "notes": [
       "The physical clutch is required to move from rest.",
       "All seven paddle-selected gears accepted clutchless running shifts.",
-      "A shift-local throttle interruption and automatic downshift blip were detected around exact gear changes."
+      "Automatic downshift blip was detected around exact gear changes; an upshift throttle dip was not sufficient to establish an automatic ignition cut."
     ]
   },
   "simulators": [
@@ -79,7 +79,7 @@
       "behavior": {
         "shift_type": "sequential-paddles",
         "auto_blip": "yes",
-        "shift_cut": "yes",
+        "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "yes",
@@ -89,7 +89,7 @@
         },
         "notes": [
           "Guided exact-identity test completed in AMS2 1.6.9.91 with assists disabled/unavailable.",
-          "The guided detector observed a brief throttle interruption around the upshift and a throttle spike on downshift."
+          "The guided detector observed a throttle spike on downshift. Its brief upshift throttle dip could reflect driver input, traction control, or telemetry filtering, so automatic cut remains unknown."
         ]
       },
       "overrides": [],
@@ -103,7 +103,7 @@
       ],
       "confidence": {
         "level": "verified",
-        "basis": "Official period context and an exact guided test establish the modeled high-downforce controls, seven gears, start requirement, cut/blip behavior, and wheel category."
+        "basis": "Official period context and an exact guided test establish the modeled high-downforce controls, seven gears, start requirement, automatic blip, and wheel category; automatic cut is not established."
       }
     }
   ],
@@ -138,17 +138,20 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
-          "/simulators/0/behavior"
+          "/simulators/0/behavior/shift_type",
+          "/simulators/0/behavior/auto_blip",
+          "/simulators/0/behavior/wheel_rim_type"
         ],
         "source_refs": [
           "ams2.local-live-renault-r28-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Guided current-game tests and cockpit inspection directly established all user-facing behavior."
+        "basis": "Guided current-game tests and cockpit inspection directly established the listed behavior; the prior throttle-only automatic-cut inference has been retracted."
       }
     ]
   },

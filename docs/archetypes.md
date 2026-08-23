@@ -1,6 +1,6 @@
 # Control archetypes
 
-**Status: complete. All 253 records are classified** - 166 exact matches, 63
+**Status: complete. All 253 records are classified** - 166 compatible matches, 63
 deviations, 13 undetermined and 11 with no archetype. `data/v1/archetypes.json` holds 23 archetypes,
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
@@ -8,29 +8,30 @@ the rules below, and every record carries a classification.
 
 ## The observation
 
-Across the 253 curated records there are **63 distinct transmission blocks**.
+Across the 253 curated records there are **68 distinct transmission blocks**.
 Nine records in ten restate a pattern that already exists elsewhere in the
-dataset. The four largest clusters alone cover 89 records:
+dataset. The four largest compatible families alone cover 91 records:
 
 | Records | Mechanism |
 | --- | --- |
 | 37 | 6-speed sequential stick, clutch to pull away, lift-free upshift with cut, blip every downshift |
 | 23 | 6-speed paddles, no clutch to pull away, automatic cut and blip |
-| 15 | 6-speed paddles, clutch to pull away, automatic cut and blip |
-| 14 | 5-speed standard H-pattern, clutch to pull away, lift on upshift, optional blip |
+| 16 | 6-speed paddles, clutch to pull away, automatic cut and blip |
+| 15 | 5-speed standard H-pattern, clutch to pull away, lift on upshift, optional blip |
 
 Only 23 records are one of a kind.
 
-The four GT3 records `audi-r8-lms-gt3`, `mclaren-720s-gt3-evo`,
-`lamborghini-huracan-gt3-evo2` and `aston-martin-vantage-gt3-evo` carry
-byte-identical transmission blocks. Each was written out by hand, each carries
-its own claims, and each required its own approval.
+The GT3 records `audi-r8-lms-gt3`, `mclaren-720s-gt3-evo`,
+`lamborghini-huracan-gt3-evo2` and `aston-martin-vantage-gt3-evo` share the same
+control family, but the Audi and Lamborghini now retain an explicit
+`automatic_cut: unknown` evidence gap. Each record was written out by hand,
+each carries its own claims, and each required its own approval.
 
 Two costs follow. The first is authoring: the per-record cost caps coverage, and
 coverage is the only thing a driver experiences. The second is worse. The
 findings that took real research — the Ginetta that is not the G40 Cup, the
 Cayman's PDK override, the 98T's gear count — are structurally indistinguishable
-from the 89 records around them. They are prose in a `notes` array, sitting
+from the 91 records around them. They are prose in a `notes` array, sitting
 inside a shape that says nothing is unusual here.
 
 ## What an archetype is

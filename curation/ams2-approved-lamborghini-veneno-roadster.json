@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.14",
-  "approved_at": "2026-08-11",
+  "dataset_version": "0.4.18",
+  "approved_at": "2026-08-23",
   "record_id": "lamborghini-veneno-roadster",
   "simulator": "ams2",
   "telemetry_name": "Lamborghini Veneno Roadster",
@@ -15,7 +15,7 @@
     "standing_start_clutch": "not-required",
     "running_shift_clutch": "not-required",
     "throttle_lift": "not-required",
-    "automatic_cut": "yes",
+    "automatic_cut": "unknown",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
     "wheel_rim_shape": "round",
@@ -23,6 +23,6 @@
     "wheel_shift_lights": "no",
     "wheel_open_top": "no"
   },
-  "confidence_notes": "Guided testing directly established all listed behavior except automatic cut, manually confirmed from a brief throttle-graph interruption and retained at medium confidence.",
+  "confidence_notes": "Guided testing established the listed behavior except automatic cut. The prior throttle-only cut inference was retracted because throttle position cannot distinguish ignition cut from driver input, traction control, or telemetry filtering.",
   "scope_notes": "Exact Veneno Roadster identity only."
 }

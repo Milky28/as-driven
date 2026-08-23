@@ -559,6 +559,55 @@ class ValidationTests(unittest.TestCase):
                 f"expected a match error naming the downshift clutch, got {errors}",
             )
 
+    def test_a_declared_archetype_match_never_fills_an_unknown(self) -> None:
+        """A compatible family label is not evidence for a missing field."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = self._copy_repository_data(Path(directory))
+            path = temp_root / "data" / "v1" / "cars" / "audi-r8-lms-gt3.json"
+            record = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(
+                record["authentic_controls"]["transmission"]["upshift"][
+                    "automatic_cut"
+                ],
+                "unknown",
+            )
+            self.assertEqual(record["archetype"]["classification"], "matches")
+            self.assertEqual(validate_repository(temp_root), [])
+
+    def test_throttle_only_cut_audit_stays_retracted(self) -> None:
+        """Throttle position cannot uniquely identify an ignition cut."""
+        affected = {
+            "aston-martin-valkyrie",
+            "audi-r8-lms-gt3-evo-ii",
+            "audi-r8-lms-gt3",
+            "chevrolet-corvette-c8-z06-z07-upgrade",
+            "chevrolet-cruze-stock-car-2024",
+            "lamborghini-huracan-gt3-evo2",
+            "lamborghini-veneno-roadster",
+            "maserati-gt2-stradale",
+            "renault-r25",
+            "renault-r26",
+            "renault-r28",
+            "toyota-corolla-stock-car-2024",
+        }
+        for record_id in affected:
+            record = json.loads(
+                (ROOT / "data" / "v1" / "cars" / f"{record_id}.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                record["authentic_controls"]["transmission"]["upshift"][
+                    "automatic_cut"
+                ],
+                "unknown",
+                record_id,
+            )
+            ams2 = next(
+                view for view in record["simulators"] if view["simulator"] == "ams2"
+            )
+            self.assertEqual(ams2["behavior"]["shift_cut"], "unknown", record_id)
+
     def test_a_declared_deviation_records_the_departure_and_nothing_else(self) -> None:
         """Classifying a record adds no claim, so it needs no further approval.
 

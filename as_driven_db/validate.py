@@ -905,10 +905,13 @@ def _validate_record_archetype(
             for path in set(record_flat) | set(archetype_flat)
             if record_flat.get(path) != archetype_flat.get(path)
         }
-        if classification == "matches" and differing:
+        established_differing = {
+            path for path in differing if record_flat.get(path) != "unknown"
+        }
+        if classification == "matches" and established_differing:
             errors.append(
                 f"{label}: archetype {archetype_id} is declared as matched but the "
-                f"record differs at {', '.join(sorted(differing))}"
+                f"record differs at {', '.join(sorted(established_differing))}"
             )
         if classification == "deviates":
             undeclared = sorted(differing - declared)

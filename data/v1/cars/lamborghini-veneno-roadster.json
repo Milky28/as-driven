@@ -22,7 +22,7 @@
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -49,7 +49,7 @@
     "notes": [
       "The car moved from rest without physical clutch input.",
       "All seven paddle-selected gears accepted clutchless shifts and automatic downshift blip was directly observed.",
-      "Automatic cut is a medium-confidence manual observation based on a brief throttle-graph interruption while pedal input was maintained."
+      "A brief throttle-channel interruption was later found insufficient to establish automatic ignition cut; that field remains unknown."
     ]
   },
   "simulators": [
@@ -72,7 +72,7 @@
       "behavior": {
         "shift_type": "sequential-paddles",
         "auto_blip": "yes",
-        "shift_cut": "yes",
+        "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "round",
           "integrated_display": "no",
@@ -82,7 +82,7 @@
         },
         "notes": [
           "Guided test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled.",
-          "Automatic cut was manually confirmed from a brief throttle-graph interruption and is separately disclosed as medium confidence."
+          "The throttle-channel dip could reflect driver input, traction control, or telemetry filtering, so automatic cut remains unknown."
         ]
       },
       "overrides": [],
@@ -95,7 +95,7 @@
       ],
       "confidence": {
         "level": "high",
-        "basis": "Exact identity and all user-facing controls were directly observed; automatic cut is separately retained at medium confidence."
+        "basis": "Exact identity and the established user-facing controls were directly observed; automatic cut is not established."
       }
     }
   ],
@@ -130,17 +130,6 @@
         ],
         "confidence": "verified",
         "basis": "Manufacturer context and direct guided testing establish these values."
-      },
-      {
-        "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
-          "/simulators/0/behavior/shift_cut"
-        ],
-        "source_refs": [
-          "ams2.local-live-lamborghini-veneno-roadster-controls.1.6.9.91"
-        ],
-        "confidence": "medium",
-        "basis": "Observer saw a brief throttle-graph interruption coincident with a no-lift upshift."
       }
     ]
   },

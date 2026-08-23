@@ -23,7 +23,7 @@
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -50,7 +50,7 @@
     "notes": [
       "With the tested assists disabled, the engine stalled when moving from rest without physical clutch input.",
       "Six paddle-selected gears, clutchless no-lift upshifts, and clutchless downshifts with automatic blip were directly established.",
-      "Automatic cut is a medium-confidence manual observation based on a brief throttle-graph interruption during an upshift while pedal input was maintained."
+      "A brief throttle-channel interruption was later found insufficient to establish automatic ignition cut; that field remains unknown."
     ]
   },
   "simulators": [
@@ -73,7 +73,7 @@
       "behavior": {
         "shift_type": "sequential-paddles",
         "auto_blip": "yes",
-        "shift_cut": "yes",
+        "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "yes",
@@ -84,7 +84,7 @@
         "notes": [
           "Guided test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled.",
           "Standing-start clutch, six paddle gears, automatic blip, and the closed display rim with shift lights were directly observed.",
-          "Automatic cut was manually confirmed from a brief throttle-graph interruption; the guided detector did not establish it confidently."
+          "The throttle-channel dip could reflect driver input, traction control, or telemetry filtering, so automatic cut remains unknown."
         ]
       },
       "overrides": [],
@@ -98,7 +98,7 @@
       ],
       "confidence": {
         "level": "high",
-        "basis": "Exact identity and most user-facing controls were directly verified; official series regulations support the common paddle-shift hardware. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation."
+        "basis": "Exact identity and the established user-facing controls were directly verified; official series regulations support the common paddle-shift hardware. Automatic cut is not established."
       }
     }
   ],
@@ -144,17 +144,6 @@
         ],
         "confidence": "verified",
         "basis": "Guided current-game testing and cockpit inspection directly established these values."
-      },
-      {
-        "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
-          "/simulators/0/behavior/shift_cut"
-        ],
-        "source_refs": [
-          "ams2.local-live-chevrolet-cruze-stock-car-2024-controls.1.6.9.91"
-        ],
-        "confidence": "medium",
-        "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
       }
     ]
   },

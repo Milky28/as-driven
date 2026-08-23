@@ -21,7 +21,7 @@
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -48,7 +48,7 @@
     "notes": [
       "The modeled pull-away system moved the car from rest without physical clutch input.",
       "All seven paddle-selected gears accepted clutchless shifts and automatic downshift blip was directly observed.",
-      "Automatic cut was manually confirmed from the throttle graph and is retained at medium confidence."
+      "A throttle-channel dip during an upshift was later found insufficient to establish an automatic ignition cut; that field remains unknown."
     ]
   },
   "simulators": [
@@ -71,7 +71,7 @@
       "behavior": {
         "shift_type": "sequential-paddles",
         "auto_blip": "yes",
-        "shift_cut": "yes",
+        "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "yes",
@@ -81,7 +81,7 @@
         },
         "notes": [
           "Guided test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled and no separate throttle-blip assist available.",
-          "Automatic cut was manually confirmed by the observer after the guided detector returned an uncertain trace."
+          "The observed throttle-channel dip could reflect driver input, traction control, or telemetry filtering, so automatic cut remains unknown."
         ]
       },
       "overrides": [],
@@ -94,7 +94,7 @@
       ],
       "confidence": {
         "level": "high",
-        "basis": "Manufacturer specifications and exact guided testing agree on the seven-speed paddle interface and automated pull-away; automatic cut is separately retained at medium confidence."
+        "basis": "Manufacturer specifications and exact guided testing agree on the seven-speed paddle interface, automated pull-away, and automatic blip; automatic cut is not established."
       }
     }
   ],
@@ -137,17 +137,6 @@
         ],
         "confidence": "verified",
         "basis": "Guided current-game testing directly established automatic downshift blip and cockpit wheel details."
-      },
-      {
-        "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
-          "/simulators/0/behavior/shift_cut"
-        ],
-        "source_refs": [
-          "ams2.local-live-aston-martin-valkyrie-controls.1.6.9.91"
-        ],
-        "confidence": "medium",
-        "basis": "The observer manually confirmed a throttle cut after the automated trace was inconclusive."
       }
     ]
   },

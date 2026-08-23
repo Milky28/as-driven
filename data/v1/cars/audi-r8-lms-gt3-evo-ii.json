@@ -22,7 +22,7 @@
       "upshift": {
         "clutch": "not-required",
         "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -49,7 +49,7 @@
     "notes": [
       "The base car moved from rest without physical clutch input; the underlying simulator mechanism was not established.",
       "Six paddle-selected gears, clutchless no-lift upshifts, and clutchless downshifts with automatic blip were directly established.",
-      "Automatic cut is a medium-confidence manual observation based on a brief throttle-graph interruption during an upshift while pedal input was maintained.",
+      "A brief throttle-channel interruption was later found insufficient to establish automatic ignition cut; that field remains unknown.",
       "The Low Downforce identity inherits base controls as an explicit untested aero-package assumption."
     ]
   },
@@ -77,7 +77,7 @@
       "behavior": {
         "shift_type": "sequential-paddles",
         "auto_blip": "yes",
-        "shift_cut": "yes",
+        "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "no",
@@ -88,7 +88,7 @@
         "notes": [
           "Guided base-car test completed in AMS2 1.6.9.91 with Auto Clutch and Auto Shifting disabled.",
           "The exact base identity, clutch-free move-off, six paddle gears, automatic blip, and closed no-display rim were directly observed.",
-          "Automatic cut was manually confirmed from a brief throttle-graph interruption; the guided detector did not establish it confidently.",
+          "The throttle-channel dip could reflect driver input, traction control, or telemetry filtering, so automatic cut remains unknown.",
           "Low Downforce inherits these controls as an untested aero-package assumption."
         ]
       },
@@ -103,7 +103,7 @@
       ],
       "confidence": {
         "level": "high",
-        "basis": "Exact identity and most user-facing controls were directly verified; manufacturer lineage supports the six-speed paddle-sequential architecture. Automatic cut is a separately disclosed medium-confidence manual telemetry-graph observation."
+        "basis": "Exact identity and the established user-facing controls were directly verified; manufacturer lineage supports the six-speed paddle-sequential architecture. Automatic cut is not established."
       }
     },
     {
@@ -226,6 +226,18 @@
           "source_refs": [
             "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
           ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The fingerprinted RSS v2 implementation exhibited an automatic shift cut that is not established for the real car or the other reviewed simulators.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided AC drive directly detected the implementation's automatic cut from a torque collapse under sustained throttle."
+          },
+          "source_refs": [
+            "ac.local-live-gt-m-aero-v10-evo2-controls.14923034"
+          ]
         }
       ],
       "verified_game_version": "14923034",
@@ -301,17 +313,6 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
-          "/simulators/0/behavior/shift_cut"
-        ],
-        "source_refs": [
-          "ams2.local-live-audi-r8-lms-gt3-evo-ii-controls.1.6.9.91"
-        ],
-        "confidence": "medium",
-        "basis": "The observer saw a brief throttle-graph interruption coincident with a no-lift upshift; the guided detector did not independently establish the cut."
-      },
-      {
-        "paths": [
           "/simulators/1/identities"
         ],
         "source_refs": [
@@ -330,7 +331,7 @@
           "ac-evo.local-live-audi-r8-lms-gt3-evo-ii-controls.0.8.1"
         ],
         "confidence": "verified",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic blip, and the cockpit rim; automatic cut remained unknown."
       },
       {
         "paths": [
@@ -353,7 +354,7 @@
           "acc.local-live-audi-r8-lms-evo-ii-2022-controls.21257365"
         ],
         "confidence": "verified",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic blip, and the cockpit rim; automatic cut remained unknown."
       },
       {
         "paths": [
