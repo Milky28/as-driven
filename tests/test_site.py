@@ -244,9 +244,9 @@ class SiteTests(unittest.TestCase):
             ],
         )
         page = build_site(ROOT)
-        self.assertIn('<option value="ac">Assetto Corsa</option>', page)
-        self.assertIn('<option value="acc">Assetto Corsa Competizione</option>', page)
-        self.assertIn('<option value="ac-evo">Assetto Corsa EVO</option>', page)
+        self.assertIn('<option value="ac">AC</option>', page)
+        self.assertIn('<option value="acc">ACC</option>', page)
+        self.assertIn('<option value="ac-evo">AC EVO</option>', page)
         self.assertIn('<option value="ams2">AMS2</option>', page)
 
     def test_comparison_modes_separate_coverage_from_disagreement(self) -> None:
@@ -269,6 +269,15 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(page.count('class="disagrees-flag"'), len(disagreeing))
         self.assertIn("row.dataset.multiSim", page)
         self.assertIn("row.dataset.simDisagreement", page)
+
+        header = page.split("</header>", 1)[0]
+        controls = page.split('<div class="controls">', 1)[1].split(
+            '<div class="table-scroll">', 1
+        )[0]
+        self.assertIn('aria-label="Comparison mode"', header)
+        self.assertNotIn('aria-label="Comparison mode"', controls)
+        controls_rule = re.search(r"\.controls \{(.*?)\}", page, re.S).group(1)
+        self.assertIn("flex-wrap: nowrap", controls_rule)
 
     def test_only_conflicting_established_simulator_values_disagree(self) -> None:
         cars = {car["id"]: car for car in collect(ROOT)["cars"]}

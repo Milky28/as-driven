@@ -58,6 +58,15 @@ SIMULATOR_LABELS = {
     "iracing": "iRacing",
 }
 
+SIMULATOR_FILTER_LABELS = {
+    "ams2": "AMS2",
+    "ac": "AC",
+    "acc": "ACC",
+    "ac-evo": "AC EVO",
+    "ac-rally": "AC Rally",
+    "iracing": "iRacing",
+}
+
 SIMULATOR_BEHAVIOR_FIELDS = {
     "/shift_type": "shift type",
     "/auto_blip": "automatic blip",
@@ -817,7 +826,12 @@ def render(payload: dict[str, Any]) -> str:
     simulator_entries = sum(len(car["simulators"]) for car in cars)
     simulator_options = "".join(
         '<option value="{id}">{label}</option>'.format(
-            id=_e(simulator["id"]), label=_e(simulator["label"])
+            id=_e(simulator["id"]),
+            label=_e(
+                SIMULATOR_FILTER_LABELS.get(
+                    simulator["id"], simulator["label"]
+                )
+            ),
         )
         for simulator in payload["simulators"]
     )
@@ -953,12 +967,12 @@ h1 {{
 }}
 .controls {{
   position: sticky; top: 0; z-index: 5;
-  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  display: flex; flex-wrap: nowrap; gap: 10px; align-items: center;
   padding: 14px 0; margin-bottom: 6px;
   background: var(--bg); border-bottom: 1px solid var(--line);
 }}
 .mode {{
-  display: flex; flex: 0 0 auto;
+  display: flex; width: fit-content;
   border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
 }}
 .mode button {{
@@ -1164,6 +1178,9 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
   .wrap {{ padding: 28px 14px 60px; }}
   .stats {{ gap: 6px 16px; }}
 }}
+@media (max-width: 980px) {{
+  .controls {{ flex-wrap: wrap; }}
+}}
 </style>
 
 <div class="wrap">
@@ -1190,14 +1207,14 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
     <div class="stat"><b>{disagreeing}</b><span>sims disagree</span></div>
   </div>
   <p class="provenance">Dataset {version}, released {released}.</p>
-</header>
-
-<div class="controls">
   <div class="mode" role="group" aria-label="Comparison mode">
     <button type="button" data-mode="all" aria-pressed="true">All</button>
     <button type="button" data-mode="multi" aria-pressed="false">Multi-sim</button>
     <button type="button" data-mode="disagreements" aria-pressed="false">Disagreements</button>
   </div>
+</header>
+
+<div class="controls">
   <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
   <select id="f-simulator" aria-label="Filter by simulator coverage">
     <option value="">Any simulator</option>
