@@ -200,6 +200,21 @@ def _simulator_overrides(
     observation_id = staged["observation_id"]
     ignored = {"/authentic_controls/notes"}
     overrides: list[dict[str, Any]] = []
+    # Some guided tests establish simulator behavior without establishing the
+    # authentic real-car answer. The two-stage manual-blip test is the first:
+    # a simulator can refuse the coast downshift and accept the repeated blipped
+    # downshift, but that does not reveal whether the real gearbox required or
+    # merely benefited from rev matching. The importer records such facts as
+    # simulator overrides, and final review must carry them independently of the
+    # staged authentic layer.
+    for override in staged["record"]["simulators"][0].get("overrides", []):
+        path = override["path"]
+        if real_values.get(path) != override.get("value"):
+            overrides.append(copy.deepcopy(override))
+    existing = {
+        (override["path"], json.dumps(override.get("value"), sort_keys=True))
+        for override in overrides
+    }
     for path in sorted(staged_values.keys() & real_values.keys()):
         if path in ignored or staged_values[path] == real_values[path]:
             continue
@@ -208,6 +223,9 @@ def _simulator_overrides(
         if staged_values[path] in {None, "unknown"}:
             # An observation that did not establish a construction or behavior
             # cannot contradict a real-car source that did establish it.
+            continue
+        key = (path, json.dumps(staged_values[path], sort_keys=True))
+        if key in existing:
             continue
         overrides.append(
             {

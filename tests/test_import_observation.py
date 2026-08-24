@@ -235,6 +235,39 @@ class ImportObservationTests(unittest.TestCase):
         )
         self.assertEqual(errors, [])
 
+    def test_manual_blip_test_is_simulator_behavior_not_a_real_car_claim(self) -> None:
+        observation = _clean_observation()
+        observation["tests"].update(
+            {
+                "coast_downshift": "no",
+                "clutchless_downshift": "yes",
+                "automatic_blip": "no",
+            }
+        )
+        bundle = import_observation(observation)
+        record = bundle["record"]
+
+        self.assertEqual(
+            "unknown",
+            record["authentic_controls"]["transmission"]["downshift"]["manual_blip"],
+        )
+        self.assertEqual(
+            [
+                {
+                    "path": "/authentic_controls/transmission/downshift/manual_blip",
+                    "value": "required",
+                }
+            ],
+            [
+                {"path": override["path"], "value": override["value"]}
+                for override in record["simulators"][0]["overrides"]
+            ],
+        )
+        self.assertTrue(
+            any("two-stage" in note or "simulator demand" in note
+                for note in bundle["review_notes"])
+        )
+
     def test_observed_gate_pattern_beats_derivation(self) -> None:
         observation = _clean_observation()
         observation["cockpit"]["primary_shift_actuation"] = "h-pattern"

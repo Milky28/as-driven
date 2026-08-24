@@ -142,6 +142,18 @@
           ]
         },
         {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
           "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",

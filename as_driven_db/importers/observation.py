@@ -285,9 +285,8 @@ def import_observation(
         review_notes.append(
             "The simulator refused a clutchless downshift until the driver blipped. That "
             "is a demand the simulator makes, not evidence that the gearbox needs the "
-            "blip to engage, so manual_blip stays unknown here. If the construction is "
-            "established as synchromesh, record the real car as optional and carry the "
-            "simulator's demand as an override."
+            "blip to engage, so the real-car manual_blip value stays unknown while the "
+            "simulator demand is preserved as an override."
         )
     if not clean:
         review_notes.append(
@@ -387,6 +386,29 @@ def import_observation(
             f"verification observation {observation_id} by {observer}.",
         ],
     }
+    simulator_overrides: list[dict[str, Any]] = []
+    if (clean
+            and tests.get("coast_downshift") == "no"
+            and tests.get("clutchless_downshift") == "yes"
+            and blip_state != "yes"):
+        simulator_overrides.append(
+            {
+                "path": "/authentic_controls/transmission/downshift/manual_blip",
+                "value": "required",
+                "condition": (
+                    f"The guided observation {observation_id} refused the clutchless "
+                    "coast downshift and accepted the repeated downshift after the "
+                    f"driver manually blipped in simulator version {game_version}. "
+                    "This establishes simulator behavior, not the real car's gearbox "
+                    "construction or authentic blip requirement."
+                ),
+                "confidence": {
+                    "level": "verified",
+                    "basis": "The complete two-stage downshift test was observed live.",
+                },
+                "source_refs": [source_id],
+            }
+        )
 
     record = {
         "$schema": "../../../schema/v1/car-record.schema.json",
@@ -454,7 +476,7 @@ def import_observation(
                     )
                 ),
                 "behavior": behavior,
-                "overrides": [],
+                "overrides": simulator_overrides,
                 "verified_game_version": game_version,
                 "verified_at": verified_at,
                 "source_refs": [source_id],

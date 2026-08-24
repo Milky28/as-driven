@@ -19,7 +19,8 @@ from as_driven_db.research_handoff import (
     generate_research_briefs,
     import_research_result,
 )
-from as_driven_db.review_proposal import prepare_review_proposal
+from as_driven_db.importers.observation import import_observation
+from as_driven_db.review_proposal import _simulator_overrides, prepare_review_proposal
 from as_driven_db.review_promotion import promote_review_case
 
 
@@ -226,6 +227,30 @@ def completed_research_result(case_id: str) -> dict:
 
 
 class ReviewSubmissionTests(unittest.TestCase):
+    def test_review_preserves_simulator_only_manual_blip_result(self) -> None:
+        submitted = observation()
+        submitted["tests"].update(
+            {
+                "coast_downshift": "no",
+                "clutchless_downshift": "yes",
+                "automatic_blip": "no",
+            }
+        )
+        staged = import_observation(submitted)
+        staged_controls = staged["record"]["authentic_controls"]
+        real_controls = json.loads(json.dumps(staged_controls))
+
+        overrides = _simulator_overrides(staged_controls, real_controls, staged)
+
+        manual_blip = next(
+            override
+            for override in overrides
+            if override["path"]
+            == "/authentic_controls/transmission/downshift/manual_blip"
+        )
+        self.assertEqual("required", manual_blip["value"])
+        self.assertIn("simulator behavior", manual_blip["condition"])
+
     def sync_test_case_for_root(self, root: Path, cases: Path) -> Path:
         raw = (json.dumps(observation(), indent=2) + "\n").encode("utf-8")
         sync_submissions(

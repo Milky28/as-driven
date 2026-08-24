@@ -887,6 +887,20 @@ namespace AsDriven.Core.Tests
                     "the effective simulator guidance still uses the observed launch");
                 Equal("required", bmwCsl.ThrottleLift,
                     "the effective simulator guidance still uses the observed upshift");
+                Equal("required", bmwCsl.ManualBlip,
+                    "the two-stage drive preserves AC's manual-blip demand");
+                Equal("Blip - rev-match", bmwCsl.DownshiftLabel,
+                    "the BMW popup states the observed AC downshift technique");
+
+                GuidanceSnapshot fordGt40 = database.Match(
+                    "AssettoCorsa", "WSC60 Ford GT40 Mk1");
+                True(fordGt40.HasMatch, "matches the WSC60 Ford GT40 Mk I");
+                Equal("required", fordGt40.ManualBlip,
+                    "the GT40 two-stage drive preserves AC's manual-blip demand");
+                Equal("Blip - rev-match", fordGt40.DownshiftLabel,
+                    "the GT40 popup states the observed AC downshift technique");
+                True(fordGt40.DownshiftUnestablished,
+                    "the GT40 does not mistake AC's demand for a real-car claim");
 
                 GuidanceSnapshot noNote = database.Match("Automobilista2", "Porsche 911 GT3 R");
                 Equal(string.Empty, noNote.DriverSummary, "a record without a summary carries none");
