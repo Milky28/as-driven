@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.27",
+  "dataset_version": "0.4.31",
   "released_at": "2026-08-24",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -67,7 +67,9 @@
     "cars/dodge-viper-gts-r.json",
     "cars/f301.json",
     "cars/f309.json",
+    "cars/ferrari-250-gto-1962-1964.json",
     "cars/ford-gt40-mk1-1965.json",
+    "cars/ford-mustang-gt-2015.json",
     "cars/formula-classic-gen1-model1.json",
     "cars/formula-classic-gen1-model2.json",
     "cars/formula-classic-gen2-model1.json",
@@ -243,6 +245,7 @@
     "cars/roco-001.json",
     "cars/saleen-s7-r-gt1.json",
     "cars/sauber-mercedes-c9.json",
+    "cars/shelby-cobra-daytona-coupe-1964-1965.json",
     "cars/sigma-p1-g5.json",
     "cars/sigma-p1.json",
     "cars/sprint-race.json",

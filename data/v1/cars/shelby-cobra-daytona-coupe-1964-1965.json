@@ -1,0 +1,343 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "shelby-cobra-daytona-coupe-1964-1965",
+  "identity": {
+    "display_name": "Shelby Cobra Daytona Coupe (1964-1965)",
+    "manufacturer": "Shelby",
+    "model": "Cobra Daytona Coupe",
+    "year": {
+      "from": 1964,
+      "to": 1965,
+      "label": "1964-1965 Shelby Cobra Daytona Coupe"
+    },
+    "class": "Grand Touring race car",
+    "real_world_identity_notes": "The AC mod content 'wsc_legends_shelby_daytona' (WSC Legends 60's Pack, Team WSC Legends, formerly distributed as part of 'Bazza's & AC Legends GTR' mod pack) is a third-party physics/model recreation, not official Kunos content. It represents the Shelby Cobra Daytona Coupe: a special aerodynamic body designed by Peter Brock, fitted to the leaf-spring chassis and running gear of the AC/Shelby Cobra 289 Mark II under FIA Appendix J's post-homologation special-body freedom (the same freedom that shaped the Ferrari 250 GTO and Jaguar Low Drag E-Type). Six were built for the 1964-1965 World Championship for Makes: the first (CSX2287) by Shelby's own team in Venice, California; the remaining five (CSX2286, CSX2299, CSX2300, CSX2601, CSX2602) by Carrozzeria Gransport in Modena, Italy. The chassis itself was manufactured in England by AC Cars Ltd and exported to Shelby for engine/gearbox fitting and finishing, so 'AC' identifies the chassis manufacturer, not the racing marque under which the car is known and was campaigned."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 4; gearbox construction: synchromesh; shift actuation: h pattern.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "WSC60 Shelby Daytona Coupe"
+        },
+        {
+          "kind": "internal-id",
+          "value": "wsc_legends_shelby_daytona"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-24",
+      "source_refs": [
+        "wikipedia.shelby-daytona-overview",
+        "wikipedia.ac-cobra-chassis",
+        "historicmotorsportcentral.cobra-daytona-coupe-guide",
+        "macsmotorcitygarage.borg-warner-t10-history",
+        "conceptcarz.1965-shelby-cobra-daytona-specs",
+        "supercars-net.shelby-cobra-daytona-coupe-profile",
+        "overtake.shelby-daytona-wsc-legends-v1.0-listing",
+        "as-driven.repository.shelby-daytona-coupe-record-scan",
+        "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Wikipedia's Shelby Daytona article and a specialist FIA historic-racing eligibility guide (historicmotorsportcentral.com) independently agree on the six-chassis production run, the two build locations, and the Appendix J homologation-freedom origin of the special body. The AC Cobra Wikipedia article separately confirms AC Cars Ltd as the chassis manufacturer and the shared Cobra Mark II leaf-spring platform. A repository scan found no existing curated record for this car."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.shelby-daytona-overview",
+          "wikipedia.ac-cobra-chassis",
+          "historicmotorsportcentral.cobra-daytona-coupe-guide",
+          "macsmotorcitygarage.borg-warner-t10-history",
+          "conceptcarz.1965-shelby-cobra-daytona-specs",
+          "supercars-net.shelby-cobra-daytona-coupe-profile",
+          "overtake.shelby-daytona-wsc-legends-v1.0-listing",
+          "as-driven.repository.shelby-daytona-coupe-record-scan",
+          "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Wikipedia's Shelby Daytona article and a specialist FIA historic-racing eligibility guide (historicmotorsportcentral.com) independently agree on the six-chassis production run, the two build locations, and the Appendix J homologation-freedom origin of the special body. The AC Cobra Wikipedia article separately confirms AC Cars Ltd as the chassis manufacturer and the shared Cobra Mark II leaf-spring platform. A repository scan found no existing curated record for this car."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.shelby-daytona-overview",
+          "wikipedia.ac-cobra-chassis",
+          "historicmotorsportcentral.cobra-daytona-coupe-guide",
+          "macsmotorcitygarage.borg-warner-t10-history",
+          "conceptcarz.1965-shelby-cobra-daytona-specs",
+          "supercars-net.shelby-cobra-daytona-coupe-profile",
+          "overtake.shelby-daytona-wsc-legends-v1.0-listing",
+          "as-driven.repository.shelby-daytona-coupe-record-scan",
+          "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Two independent specification sources agree the Daytona Coupe used a four-speed Borg-Warner T10 manual transmission. A dedicated technical history of the Borg-Warner T-10 explicitly states all four forward speeds were synchronized, and the same T10 model is independently confirmed as this car's transmission. The Borg-Warner T10 is a conventional floor-shifted manual, and the specialist FIA eligibility guide confirms period cars used the standard (non-Hurst) shift linkage rather than any sequential or paddle system. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-24"
+}

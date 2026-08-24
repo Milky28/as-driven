@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.30",
+  "approved_at": "2026-08-24",
+  "records": [
+    {
+      "record_id": "lamborghini-miura-sv",
+      "bundle": "build/review-cases/issue-15/staged.json",
+      "display_name": "Lamborghini Miura SV",
+      "class": "Vintage Cars Tier 1",
+      "manufacturer": "Lamborghini",
+      "model": "Miura SV",
+      "year": {
+        "from": 1971,
+        "to": 1973,
+        "label": "Lamborghini Miura P400 SV (1971-1973)"
+      },
+      "real_world_identity_notes": "The AC Kunos base-game content 'ks_lamborghini_miura_sv' depicts the Lamborghini Miura P400 SV, the final and most powerful Miura variant (1971-1973, approximately 148-150 units). This is the same real car already curated under record_id 'lamborghini-miura-sv' from an AMS2 guided drive, whose shorter display name omits the 'P400' engine-type prefix but names the identical production car. 'P400' identifies the mid-transverse 4-litre V12 layout shared across the whole Miura line; 'SV' (SuperVeloce) is the final-series trim. No conflicting specification, chassis, or livery evidence was found that would separate the AC content from the already-curated real car.",
+      "real_world_source_refs": [
+        "lamborghini.miura.history",
+        "ams2.reiza-release.1.6.9.new-cars",
+        "as-driven.repository.lamborghini-miura-sv-record-scan",
+        "supercars-net.miura-p400-sv-profile",
+        "assetto-db.ks-lamborghini-miura-sv-listing"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Lamborghini's own history page and a specialist secondary profile both independently date the P400 SV to 1971-1973 with a five-speed manual transmission, matching the identity, forward-gear count, and shift architecture already established in the curated AMS2-sourced record. A third-party Assetto Corsa content database confirms 'ks_lamborghini_miura_sv' is official Kunos base-game content representing the P400 SV variant specifically, not a mod and not a different Miura specification (e.g. P400, P400 S, or SVJ).",
+      "identity_basis": "Lamborghini's own history page and a specialist secondary profile both independently date the P400 SV to 1971-1973 with a five-speed manual transmission, matching the identity, forward-gear count, and shift architecture already established in the curated AMS2-sourced record. A third-party Assetto Corsa content database confirms 'ks_lamborghini_miura_sv' is official Kunos base-game content representing the P400 SV variant specifically, not a mod and not a different Miura specification (e.g. P400, P400 S, or SVJ).",
+      "specification_basis": "The existing curated record already established a display-free wheel rim from a live AMS2 cockpit inspection; the AC guided drive's independent cockpit observation of the same real car agrees. No manufacturer or period documentation for a factory-fitted display was found, consistent with a 1971-1973 production car. Both the existing curated record's live-cockpit finding and the AC guided drive's independent cockpit observation agree on a closed (non-open-top) rim; no contrary period documentation was found. Two independent simulator recreations of the same real car agree on a round wheel rim, consistent with the existing curated record's live-cockpit finding. Neither cockpit observation shows rim-mounted shift lights, consistent with a 1971-1973 road car predating such systems; agrees with the existing curated record. No period Miura electronics package included automatic throttle blipping; the existing curated record already established this for the same real car, and the reviewed manufacturer history describes no such system. Carried forward from the existing curated record; a 1971-1973 road car has no automatic ignition or throttle-cut system, and the field is not applicable to downshifts under the database's own convention. The Miura's synchronised five-speed manual supports clutchless running downshifts as ordinary technique; this matches the existing curated record's already-established value. The real-car value is carried forward unchanged from the existing curated record: a synchronised gearbox eases with a downshift blip but does not require it to engage the gear. The AC guided drive's two-stage test found the exact AC 14923034 implementation requires a manual blip to accept a repeated downshift; that stricter behavior is recorded separately as a simulator override on the observation, not as a change to the authentic real-car value, matching the project's existing AC BMW 3.0 CSL / Ford GT40 Mk I precedent. Carried forward from the existing curated record; throttle-lift is an upshift concern under the database's convention and is not applicable to downshifts. Both the manufacturer's official history and an independent secondary technical profile state a five-speed manual transmission for the Miura P400 SV, matching the existing curated record. No reviewed source explicitly states synchromesh construction; this is carried forward at the same medium confidence as the existing curated record, which itself treats synchromesh as the ordinary reading of a period road-car manual gearbox rather than a stated specification. The manufacturer source and the existing curated record agree on a conventional H-pattern manual shifter; no sequential or paddle system exists on this period road car. Two independent simulators' direct gear-selection testing (AMS2 in the existing curated record and this AC guided drive) both report a standard, non-dogleg H pattern for the same real car. The manufacturer source documents a clutch-equipped five-speed manual across the Miura family; a manual clutch is required from rest, matching the existing curated record. Carried forward from the existing curated record; automatic blipping does not apply to upshifts. No period Miura electronics package included an automatic shift-cut system; matches the existing curated record. The synchronised five-speed manual supports clutchless running upshifts with a throttle lift as ordinary technique, matching the existing curated record. Carried forward from the existing curated record; manual blipping does not apply to upshifts. A clutchless running upshift on this synchronised gearbox requires a throttle lift to unload the drivetrain, matching the existing curated record.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "no"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.lamborghini-miura-p400-sv.20260824t190231429z-f57a4323 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-lamborghini-miura-p400-sv-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact Lamborghini Miura P400 SV (1971-1973) identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; open-top wheel geometry: no; wheel-rim shape: round; wheel shift lights: no; transmission downshift automatic_blip: no; transmission downshift automatic_cut: not applicable; transmission downshift clutch: not required; transmission downshift manual_blip: optional; transmission downshift throttle_lift: not applicable; forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required; transmission upshift automatic_blip: not applicable; transmission upshift automatic_cut: no; transmission upshift clutch: not required; transmission upshift manual_blip: not applicable; transmission upshift throttle_lift: required.",
+        "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+        "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/15",
+      "live_source_notes": "Guided-verification observation ac.lamborghini-miura-p400-sv.20260824t190231429z-f57a4323 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_lamborghini_miura_sv', no declared version, data-acd sha256 42a84bafcaaddf742b16abcc7ed81e66f9d5973df19fdc5a14c13dfb42be3a9b. This identifies the installed package, not the real car the record describes."
+    }
+  ]
+}

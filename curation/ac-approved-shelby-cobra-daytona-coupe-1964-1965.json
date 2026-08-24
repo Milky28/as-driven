@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.31",
+  "approved_at": "2026-08-24",
+  "record_id": "shelby-cobra-daytona-coupe-1964-1965",
+  "simulator": "ac",
+  "telemetry_name": "WSC60 Shelby Daytona Coupe",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1964-1965 Shelby Cobra Daytona Coupe identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "staged_record_id": "wsc60-shelby-daytona-coupe"
+}

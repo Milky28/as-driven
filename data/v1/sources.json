@@ -7636,6 +7636,309 @@
       "retrieved_at": "2026-08-24",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "kunos.assetto-corsa-1.5.mustang-gt-2015",
+      "title": "Assetto Corsa 1.5 is available on Steam!",
+      "publisher": "Kunos Simulazioni",
+      "url": "https://store.steampowered.com/news/posts/?appgroupname=Assetto+Corsa&appids=244210&enddate=1463590799",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Assetto Corsa 1.5 release note identifying the built-in 2015 Ford Mustang GT content. Steam announcement lines 53-57 and 197-201: “New Ford Mustang GT 2015” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/real_world_identity_notes. This establishes the exact official simulator identity and is not used as proof of the real car's driver technique.",
+      "published_or_updated_at": "2016-03-31"
+    },
+    {
+      "source_id": "ford.2015-mustang-specifications",
+      "title": "2015 Ford Mustang - USA technical specifications",
+      "publisher": "Ford Motor Company",
+      "url": "https://media.ford.com/content/dam/fordmedia/North%20America/US/2015_Specs/2015_Mustang_Specs.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ford's exact 2015 U.S. Mustang technical specification sheet, including engine and transmission choices and gear ratios. Transmission and gear-ratio table, PDF pp. 2-3: “Standard: Six-speed manual with Hill Start Assist; First through Sixth gear ratios are listed for the 5.0-liter Ti-VCT V8.” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/standing_start_clutch. The sheet also lists a separate six-speed automatic with paddle shifters. The manual and automatic configurations must not be conflated."
+    },
+    {
+      "source_id": "ford.2015-mustang-owners-manual",
+      "title": "2015 Mustang Owner's Manual",
+      "publisher": "Ford Motor Company",
+      "url": "https://www.fordservicecontent.com/Ford_Content/Catalog/owner_information/2015-Mustang-Owners-Manual-version-1_om_EN-US_07_2014.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ford's first-printing U.S. owner's manual for the 2015 Mustang, including manual-transmission operation and the six-speed MT82 identification. printed p. 134, manual-transmission operation: “Press the clutch pedal to the floor ... move the gearshift lever to first ... slowly release the clutch pedal while slowly pressing on the accelerator.” Reviewed for /authentic_controls/transmission/standing_start_clutch. printed p. 134, Using the Clutch: “During each shift, the clutch pedal must be fully pressed to the floor.” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. printed p. 134, manual gearshift pattern illustration: “Manual gearshift gate shows reverse and the 1-3-5 / 2-4-6 H arrangement.” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position. printed p. 270, capacities and specifications: “Six-speed manual transmission MT82” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. The manual documents the manual transmission and operating technique, but does not establish whether the internal gearbox is synchromesh or dog-engagement, nor does it specify rev matching, throttle lift, automatic cut, or blip behavior.",
+      "published_or_updated_at": "2014-07-01"
+    },
+    {
+      "source_id": "ford.2015-mustang-steering-wheel",
+      "title": "Ford shows the evolution of steering wheels through the Mustang",
+      "publisher": "Ford Motor Company",
+      "url": "https://media.ford.com/content/fordmedia/fsa/br/pt/news/2015/09/09/ford-mostra-a-evolucao-dos-volantes-de-direcao--nos-ultimos-50-a.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ford's 2015 Mustang steering-wheel description, including wheel diameter and the distinction between manual and automatic paddle-shift configurations. 2015 section of the Ford article: “The 2015 Mustang steering wheel is the brand's smallest, at 14 inches; paddle-shift controls were offered with automatic transmission.” Reviewed for /authentic_controls/steering/wheel_rim/diameter_mm, /authentic_controls/transmission/shift_actuation. Fourteen inches is converted to approximately 356 mm for the numeric database field. The source does not establish wheel-mounted display, shift lights, or open-top construction.",
+      "published_or_updated_at": "2015-09-09"
+    },
+    {
+      "source_id": "as-driven.repository.ford-mustang-2015-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated Ford Mustang GT 2015 or equivalent simulator-independent record. data/v1/cars filename and identity scan: “No Ford Mustang GT 2015 record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac.local-live-ford-mustang-2015-controls.14923034",
+      "title": "Live AC Ford Mustang 2015 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/12",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ford-mustang-2015.20260824t190918976z-2e561466 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ford_mustang_2015', no declared version, data-acd sha256 081a638f97d2015159068406288a219041e6ba1401219ff57a0eaa4864c15b81. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ford_mustang_2015",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "081a638f97d2015159068406288a219041e6ba1401219ff57a0eaa4864c15b81"
+        }
+      }
+    },
+    {
+      "source_id": "ac-legends.gtc60.ferrari-250-gto",
+      "title": "AC Legends GTC 60s by team AC Legends v1.3.2",
+      "publisher": "THRacing / AC Legends",
+      "url": "https://thracing.de/ac-legends-gtc-60s-by-bazza/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Current package documentation for the Assetto Corsa AC Legends GTC60 Ferrari 250 GTO content and its Kunos dependency. package requirements and installation notes: “requires the original Kunos Ferrari 70 Anniversary DLC; automatically loads the model from content\\cars\\ks_ferrari_250_gto” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. v1.3.2 changelog: “1962 Ferrari 250 GTO; 1964 Ferrari 250 GTO - S2” Reviewed for /identity/year, /identity/real_world_identity_notes, /identity/confusion_risks. Used for simulator-package provenance only, not as sole proof of the real-world Ferrari specification."
+    },
+    {
+      "source_id": "ferrari.250-gto.1962-history",
+      "title": "Unveiling of iconic 250 GTO",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/en-OM/history/moments/1962/masterpiece/more",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari's official history of the 250 GTO's presentation, competition period, production, and road/race purpose. 1962 history article: “presented on 24 February 1962; won the International Championship for GT Manufacturers in 1962, 1963 and 1964” Reviewed for /identity/year, /identity/model, /identity/class. model description: “a real racing car with a number plate” Reviewed for /identity/class, /identity/real_world_identity_notes. production statement: “36 examples were built, plus three more with a four-litre engine” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. Primary manufacturer source for the real-world identity and period."
+    },
+    {
+      "source_id": "ferrari.250-gto.technical-history",
+      "title": "The Ferrari 250 GTO is 55",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/ru-RU/magazine/articles/celebrating-the-ferrari-250-gto",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari's official technical-history article for the 250 GTO, including its gearbox specification. technical description, gearbox paragraph: “A five-speed, all-synchromesh gearbox was another new addition” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Primary manufacturer source for five forward gears and synchromesh construction. It does not establish driver technique or wheel-rim topology."
+    },
+    {
+      "source_id": "ferrari.250-gto.shift-pattern-secondary",
+      "title": "Ferrari GTO Engine and Transmission",
+      "publisher": "Web-Cars.com",
+      "url": "https://www.web-cars.com/gto/fengine.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical description of the Ferrari 250 GTO manual selector layout and clutch-equipped transmission. transmission and selector description: “2nd thru 5th were in the H; first was to the left and down” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position. clutch description: “the shifter and the clutch” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Secondary evidence is used for the selector layout and physical clutch presence only; it does not establish when the clutch was used or any throttle/blip procedure."
+    },
+    {
+      "source_id": "as-driven.repository.gtc60-ferrari-250-gto-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Ferrari 250 GTO curated record. data/v1/cars identity scan: “No curated Ferrari 250 GTO 1962-1964 record is present” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac.local-live-gtc60-ferrari-250-gto-controls.14923034",
+      "title": "Live AC GTC60 Ferrari 250 GTO guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/10",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ac_legends_gtc_ferrari_250_gto', by ks / Team WSC Legends, declared version 1.3, data-acd sha256 85a5b74efb7127dfc427f63f1e36d43f5396ea737e7a0b7f879eede28325780d. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ac_legends_gtc_ferrari_250_gto",
+        "author": "ks / Team WSC Legends",
+        "declared_version": "1.3",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "85a5b74efb7127dfc427f63f1e36d43f5396ea737e7a0b7f879eede28325780d"
+        }
+      }
+    },
+    {
+      "source_id": "as-driven.repository.lamborghini-miura-sv-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/blob/codex/stabilization/data/v1/cars/lamborghini-miura-sv.json",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of the existing curated Lamborghini Miura SV record, carrying forward its already-established real-world authentic_controls values and provenance basis. authentic_controls.transmission: “\"forward_gears\": 5, \"gearbox_type\": \"synchromesh\", \"shift_actuation\": \"h-pattern\", \"shift_pattern\": \"standard-h\", \"standing_start_clutch\": \"required\"” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch. authentic_controls.transmission.upshift / downshift: “upshift: clutch not-required, throttle_lift required, automatic_cut no, manual_blip not-applicable, automatic_blip not-applicable; downshift: clutch not-required, throttle_lift not-applicable, automatic_cut not-applicable, manual_blip optional, automatic_blip no” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip. authentic_controls.steering.wheel_rim: “\"shape\": \"round\", \"integrated_display\": \"no\", \"shift_lights\": \"no\", \"open_top\": \"no\", \"source_label\": \"live-cockpit-round-closed-no-display\"” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. record_id and class: “\"record_id\": \"lamborghini-miura-sv\", \"class\": \"Vintage Cars Tier 1\"” Reviewed for /identity/record_action, /identity/record_id, /identity/class. Internal project source used to confirm no identity conflict exists and to carry forward already-established real-world values for the same car rather than re-deriving them from scratch."
+    },
+    {
+      "source_id": "supercars-net.miura-p400-sv-profile",
+      "title": "1971-1973 Lamborghini Miura P400 SV",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1971%E2%86%921973-lamborghini-miura-p400-sv/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical profile of the Miura P400 SV covering production years, five-speed manual transmission, mid-transverse V12 layout, and the SV's split-sump lubrication change. production and transmission summary: “5-Speed Manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. drivetrain layout description: “directly behind the driver in a transverse position” Reviewed for /identity/real_world_identity_notes. lubrication note: “split systems for reliability” Reviewed for /identity/real_world_identity_notes. Corroborates the manufacturer source's production years and five-speed manual specification; does not state gearbox synchromesh construction, clutch technique, or steering-wheel details."
+    },
+    {
+      "source_id": "assetto-db.ks-lamborghini-miura-sv-listing",
+      "title": "Lamborghini Miura P400 SV - Assetto Corsa Database",
+      "publisher": "assetto-db.com",
+      "url": "http://assetto-db.com/car/ks_lamborghini_miura_sv",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Third-party Assetto Corsa content database confirming that 'ks_lamborghini_miura_sv' is official Kunos base-game content depicting the Miura P400 SV variant, not a mod. content source note: “Already in game” Reviewed for /identity/real_world_identity_notes. variant description: “the last 150 units manufactured” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. in-game transmission listing: “5 speed manual gearbox” Reviewed for /authentic_controls/transmission/forward_gears. Used only to confirm the AC content's provenance and represented variant; its in-game spec listing is simulator data, not independent real-world proof, and is used only as corroboration alongside the manufacturer and secondary sources."
+    },
+    {
+      "source_id": "ac.local-live-lamborghini-miura-p400-sv-controls.14923034",
+      "title": "Live AC Lamborghini Miura P400 SV guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/15",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lamborghini-miura-p400-sv.20260824t190231429z-f57a4323 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_lamborghini_miura_sv', no declared version, data-acd sha256 42a84bafcaaddf742b16abcc7ed81e66f9d5973df19fdc5a14c13dfb42be3a9b. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_lamborghini_miura_sv",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "42a84bafcaaddf742b16abcc7ed81e66f9d5973df19fdc5a14c13dfb42be3a9b"
+        }
+      }
+    },
+    {
+      "source_id": "wikipedia.shelby-daytona-overview",
+      "title": "Shelby Daytona",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Shelby_Daytona",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: General overview of the Shelby Daytona Coupe's construction, chassis-number roster, and build locations. lead section: “The Shelby Daytona Coupe (also referred to as the Shelby Cobra Daytona Coupe) is an American sports-coupe” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model. chassis roster: “CSX2286, CSX2287 (the prototype), CSX2299, CSX2300, CSX2601, and CSX2602” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. build locations: “The remaining five were built at Carrozzeria Gransport (Italian for 'Grand Sport Coachbuilders') in Modena, Italy” Reviewed for /identity/real_world_identity_notes. Does not state transmission, clutch, or wheel-rim details for this car."
+    },
+    {
+      "source_id": "wikipedia.ac-cobra-chassis",
+      "title": "AC Cobra",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/AC_Cobra",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Chassis-manufacture and export arrangement between AC Cars Ltd and Shelby, and the Daytona Coupe's chassis platform. chassis manufacture and export: “AC exported completed, painted, and trimmed cars (less engine and gearbox) to Shelby who then finished the cars in his workshop in Los Angeles.” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. Daytona Coupe platform: “the leafspring chassis and running gear of the AC/Shelby Cobra Mark II” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. Establishes AC Cars as chassis manufacturer only; does not state transmission gate layout or driver technique."
+    },
+    {
+      "source_id": "historicmotorsportcentral.cobra-daytona-coupe-guide",
+      "title": "A practical guide to the Cobra 260, 289 and Daytona Coupe",
+      "publisher": "Historic Motor Sport Central",
+      "url": "https://historicmotorsportcentral.com/2023/11/10/a-practical-guide-to-the-cobra-260-289-and-daytona-coupe/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specialist FIA historic-racing eligibility guide covering the Cobra 289 and Daytona Coupe's homologation basis, build history, dashboard, and period shifter regulation. car naming: “Shelby American Cobra 289 \"Daytona Coupe\"” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model. homologation basis: “The Daytona Coupe is the special bodied version of the Cobra 289 and traces its roots to an Appendix J freedom that stipulated that, once past the 100 cars manufactured for homologation, manufacturers could use a special bodied version of their cars provided that the mechanical components remained as homologated.” Reviewed for /identity/class, /identity/real_world_identity_notes. build locations: “The first car was built in Venice by Brock and the Shelby team themselves, while the other 5 cars were subsequently manufactured by Carrozzeria Gransport in Modena, Italy.” Reviewed for /identity/real_world_identity_notes. period shifter regulation: “Hurst quick shifters were neither homologated nor used in FIA-sanctioned events in period.” Reviewed for /authentic_controls/transmission/shift_actuation. dashboard: “different dashboard consisting of an alloy sheet with Stewart & Warner gauges” Reviewed for /identity/real_world_identity_notes. Confirms the standard (non-Hurst) period shift linkage but does not state the exact gate order, driver clutch/blip technique, or wheel-rim topology.",
+      "author": "Louis Quiniou",
+      "published_or_updated_at": "2023-11-10"
+    },
+    {
+      "source_id": "macsmotorcitygarage.borg-warner-t10-history",
+      "title": "Shifting Times: A History of the Borg-Warner T-10 4-Speed Transmission",
+      "publisher": "Mac's Motor City Garage",
+      "url": "https://macsmotorcitygarage.com/shifting-times-a-history-of-the-borg-warner-t-10-4-speed-transmission/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Technical history of the Borg-Warner T-10 four-speed transmission, including its synchromesh construction. synchronization description: “All four forward speeds were synchonized, and the package fit neatly in the same physical space as a standard three-speed.” Reviewed for /authentic_controls/transmission/gearbox_type. General T-10 history; does not discuss the Cobra Daytona Coupe application specifically, but the transmission model and synchromesh construction are corroborated by the Cobra-specific specification sources below."
+    },
+    {
+      "source_id": "conceptcarz.1965-shelby-cobra-daytona-specs",
+      "title": "1965 Shelby Cobra Daytona Specifications & Dimensions",
+      "publisher": "Conceptcarz",
+      "url": "https://www.conceptcarz.com/s9466/shelby-cobra-daytona.aspx",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specification sheet naming the transmission fitted to the 1965 Daytona Coupe and confirming the six-car production count. transmission specification: “4 Manual Borg-Warner T10” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. production count: “6” Reviewed for /identity/real_world_identity_notes. Does not state clutch technique, shift gate order, or wheel-rim details."
+    },
+    {
+      "source_id": "supercars-net.shelby-cobra-daytona-coupe-profile",
+      "title": "1964-1965 Shelby Cobra Daytona Coupe",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1694%E2%86%921965-shelby-cobra-daytona-coupe/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical and race-history profile confirming transmission specification and the 1965 championship result. transmission and ratios: “Borg Worner T-10M 4-Speed Manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. championship result: “clinched the 1965 World Manufacturers Championship for the United States and Shelby American” Reviewed for /identity/class, /identity/manufacturer. Confirms the manufacturer's transmission choice and racing category; does not state gate order or driver technique."
+    },
+    {
+      "source_id": "overtake.shelby-daytona-wsc-legends-v1.0-listing",
+      "title": "Shelby Daytona - WSC Legends (60s) v1.0",
+      "publisher": "OverTake.gg",
+      "url": "https://www.overtake.gg/downloads/shelby-daytona-wsc-legends-60s-v1-0.60049/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Mod-distribution page for the exact simulator content family observed in this case, establishing its third-party/mod provenance and lineage. mod lineage note: “This should also work for the older car version, the famous Bazza's & AC Legends GTR mod pack.” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. Used only for simulator-content provenance (mod vs official), not as real-world evidence."
+    },
+    {
+      "source_id": "as-driven.repository.shelby-daytona-coupe-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Shelby or Cobra Daytona Coupe curated record. data/v1/cars identity scan: “No curated Shelby, Cobra, or Daytona Coupe record is present” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034",
+      "title": "Live AC WSC60 Shelby Daytona Coupe guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/9",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'wsc_legends_shelby_daytona', by Team WSC Legends, declared version 1.3, data-acd sha256 68ad60f430c08f2c72f0161b9f2f76316e285ae6b891b16114cd5c3c68bcab3c. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "wsc_legends_shelby_daytona",
+        "author": "Team WSC Legends",
+        "declared_version": "1.3",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "68ad60f430c08f2c72f0161b9f2f76316e285ae6b891b16114cd5c3c68bcab3c"
+        }
+      }
     }
   ]
 }

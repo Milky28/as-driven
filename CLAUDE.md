@@ -167,7 +167,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.19.0.
-- Dataset: 0.4.27 with 260 curated records.
+- Dataset: 0.4.31 with 263 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has four active `identity-research`
   cases: issues 9 through 12, covering the AC Shelby Daytona Coupe, Ferrari 250

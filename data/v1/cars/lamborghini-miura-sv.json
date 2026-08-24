@@ -97,6 +97,62 @@
         "level": "verified",
         "basis": "Manufacturer family documentation and exact guided tests agree on the five-speed manual architecture and all user-facing behavior."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lamborghini Miura P400 SV"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_lamborghini_miura_sv"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.lamborghini-miura-p400-sv.20260824t190231429z-f57a4323 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.lamborghini-miura-p400-sv.20260824t190231429z-f57a4323 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-lamborghini-miura-p400-sv-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-24",
+      "source_refs": [
+        "lamborghini.miura.history",
+        "ams2.reiza-release.1.6.9.new-cars",
+        "as-driven.repository.lamborghini-miura-sv-record-scan",
+        "supercars-net.miura-p400-sv-profile",
+        "assetto-db.ks-lamborghini-miura-sv-listing",
+        "ac.local-live-lamborghini-miura-p400-sv-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Lamborghini's own history page and a specialist secondary profile both independently date the P400 SV to 1971-1973 with a five-speed manual transmission, matching the identity, forward-gear count, and shift architecture already established in the curated AMS2-sourced record. A third-party Assetto Corsa content database confirms 'ks_lamborghini_miura_sv' is official Kunos base-game content representing the P400 SV variant specifically, not a mod and not a different Miura specification (e.g. P400, P400 S, or SVJ)."
+      }
     }
   ],
   "provenance": {
@@ -151,6 +207,31 @@
         ],
         "confidence": "verified",
         "basis": "Guided A/B testing and cockpit inspection directly established technique and wheel details."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "lamborghini.miura.history",
+          "ams2.reiza-release.1.6.9.new-cars",
+          "as-driven.repository.lamborghini-miura-sv-record-scan",
+          "supercars-net.miura-p400-sv-profile",
+          "assetto-db.ks-lamborghini-miura-sv-listing",
+          "ac.local-live-lamborghini-miura-p400-sv-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Lamborghini's own history page and a specialist secondary profile both independently date the P400 SV to 1971-1973 with a five-speed manual transmission, matching the identity, forward-gear count, and shift architecture already established in the curated AMS2-sourced record. A third-party Assetto Corsa content database confirms 'ks_lamborghini_miura_sv' is official Kunos base-game content representing the P400 SV variant specifically, not a mod and not a different Miura specification (e.g. P400, P400 S, or SVJ)."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-lamborghini-miura-p400-sv-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -159,5 +240,5 @@
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-24"
 }

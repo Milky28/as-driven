@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.29",
+  "approved_at": "2026-08-24",
+  "records": [
+    {
+      "record_id": "ferrari-250-gto-1962-1964",
+      "bundle": "build/review-cases/issue-10/staged.json",
+      "display_name": "Ferrari 250 GTO (1962-1964)",
+      "class": "Grand Touring road/race car",
+      "manufacturer": "Ferrari",
+      "model": "250 GTO",
+      "year": {
+        "from": 1962,
+        "to": 1964,
+        "label": "1962-1964 Ferrari 250 GTO"
+      },
+      "real_world_identity_notes": "The Assetto Corsa GTC60 Ferrari 250 GTO entry is a third-party wrapper that loads the official Kunos Ferrari 250 GTO base model; its package documentation does not identify a chassis number or one exact production year. The real-world identity is therefore represented conservatively as the Ferrari 250 GTO 1962-1964 production/racing family, not as a separate GTC60 car and not as the 1964 Series II variant or another 250 GT derivative.",
+      "real_world_source_refs": [
+        "ac-legends.gtc60.ferrari-250-gto",
+        "ferrari.250-gto.1962-history",
+        "ferrari.250-gto.technical-history",
+        "ferrari.250-gto.shift-pattern-secondary",
+        "as-driven.repository.gtc60-ferrari-250-gto-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Ferrari's official history identifies the 250 GTO's 1962 presentation, 1962-1964 championship period, 36-car production, and dual road/race purpose. The GTC60 documentation identifies the simulator package as a wrapper around the Kunos Ferrari 250 GTO model, while its year labels are not consistent enough to justify a single chassis-year claim.",
+      "identity_basis": "Ferrari's official history identifies the 250 GTO's 1962 presentation, 1962-1964 championship period, 36-car production, and dual road/race purpose. The GTC60 documentation identifies the simulator package as a wrapper around the Kunos Ferrari 250 GTO model, while its year labels are not consistent enough to justify a single chassis-year claim.",
+      "specification_basis": "Ferrari's official technical history explicitly describes the 250 GTO's gearbox as five-speed. Ferrari's official technical history explicitly calls the gearbox all-synchromesh. The secondary transmission description places second through fifth gears in an H layout; it is the only reviewed source that directly states the selector arrangement. The secondary source states that first gear is left and down while second through fifth form the H, establishing a dog-leg H pattern. The secondary transmission description explicitly places first gear to the left and down. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "dogleg-h",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "first_gear_position": "down-left",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1962-1964 Ferrari 250 GTO identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h; transmission first_gear_position: down left.",
+        "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+        "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/10",
+      "live_source_notes": "Guided-verification observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ac_legends_gtc_ferrari_250_gto', by ks / Team WSC Legends, declared version 1.3, data-acd sha256 85a5b74efb7127dfc427f63f1e36d43f5396ea737e7a0b7f879eede28325780d. This identifies the installed package, not the real car the record describes.",
+      "create_new_record": {
+        "staged_record_id": "gtc60-ferrari-250-gto",
+        "basis": "Ferrari's official history identifies the 250 GTO's 1962 presentation, 1962-1964 championship period, 36-car production, and dual road/race purpose. The GTC60 documentation identifies the simulator package as a wrapper around the Kunos Ferrari 250 GTO model, while its year labels are not consistent enough to justify a single chassis-year claim."
+      }
+    }
+  ]
+}
