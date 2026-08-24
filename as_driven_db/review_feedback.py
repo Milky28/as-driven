@@ -43,16 +43,40 @@ def _run_git(root: Path, arguments: list[str]) -> subprocess.CompletedProcess[st
         raise ReviewFeedbackError("could not run git to verify publication readiness") from exception
 
 
+def _dataset_version_key(value: object) -> tuple[int, int, int] | None:
+    if not isinstance(value, str):
+        return None
+    parts = value.split(".")
+    if len(parts) != 3 or not all(part.isdecimal() for part in parts):
+        return None
+    return tuple(int(part) for part in parts)  # type: ignore[return-value]
+
+
 def publication_blockers(root: Path, case: dict[str, Any]) -> list[str]:
     blockers: list[str] = []
     index = _read_json(root / "data" / "v1" / "index.json", "dataset index")
     current_version = index.get("dataset_version")
     proposal = case.get("review_proposal") or {}
-    if case.get("state") == "promoted" and proposal.get("dataset_version") != current_version:
-        blockers.append(
-            "the promoted case targets dataset "
-            f"{proposal.get('dataset_version')!r}, but the current dataset is {current_version!r}"
-        )
+    if case.get("state") == "promoted":
+        promoted_version = proposal.get("dataset_version")
+        promoted_key = _dataset_version_key(promoted_version)
+        current_key = _dataset_version_key(current_version)
+        if promoted_key is None or current_key is None:
+            blockers.append(
+                "the promoted or current dataset version cannot be compared"
+            )
+        elif promoted_key > current_key:
+            blockers.append(
+                "the promoted case targets future dataset "
+                f"{promoted_version!r}, but the current dataset is {current_version!r}"
+            )
+        record_id = proposal.get("record_id")
+        if not isinstance(record_id, str) or f"cars/{record_id}.json" not in index.get(
+            "records", []
+        ):
+            blockers.append(
+                f"the promoted record {record_id!r} is absent from the current dataset"
+            )
 
     for relative, label in (
         (Path("research/ams2-coverage-manifest.json"), "AMS2 coverage manifest"),

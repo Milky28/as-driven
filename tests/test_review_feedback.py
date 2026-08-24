@@ -2,10 +2,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
-from as_driven_db.review_feedback import ReviewFeedbackError, publish_review_result
+from as_driven_db.review_feedback import (
+    ReviewFeedbackError,
+    publication_blockers,
+    publish_review_result,
+)
 
 
 def _case(state: str = "promoted") -> dict:
@@ -38,6 +44,64 @@ def _write_case(root: Path, state: str = "promoted") -> Path:
 
 
 class ReviewFeedbackTests(unittest.TestCase):
+    def test_later_dataset_can_publish_an_earlier_promoted_case(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data" / "v1").mkdir(parents=True)
+            (root / "data" / "v1" / "index.json").write_text(
+                json.dumps(
+                    {
+                        "dataset_version": "1.2.4",
+                        "records": ["cars/example-car.json"],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (root / "research").mkdir()
+            for name in (
+                "ams2-coverage-manifest.json",
+                "simulator-disagreement-audit.json",
+            ):
+                (root / "research" / name).write_text(
+                    json.dumps({"dataset_version": "1.2.4"}),
+                    encoding="utf-8",
+                )
+            (root / "dist" / "site").mkdir(parents=True)
+            (root / "dist" / "site" / "index.html").write_text(
+                "test",
+                encoding="utf-8",
+            )
+            git_results = [
+                subprocess.CompletedProcess([], 0, "", ""),
+                subprocess.CompletedProcess([], 0, "0\n", ""),
+            ]
+
+            with patch(
+                "as_driven_db.review_feedback._run_git",
+                side_effect=git_results,
+            ):
+                blockers = publication_blockers(root, _case())
+
+            self.assertEqual([], blockers)
+
+    def test_current_dataset_must_still_contain_the_promoted_record(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data" / "v1").mkdir(parents=True)
+            (root / "data" / "v1" / "index.json").write_text(
+                json.dumps({"dataset_version": "1.2.4", "records": []}),
+                encoding="utf-8",
+            )
+            with patch(
+                "as_driven_db.review_feedback._run_git",
+                return_value=subprocess.CompletedProcess([], 0, "0\n", ""),
+            ):
+                blockers = publication_blockers(root, _case())
+
+            self.assertTrue(
+                any("promoted record 'example-car' is absent" in item for item in blockers)
+            )
+
     def test_preview_never_calls_github_or_changes_case(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
