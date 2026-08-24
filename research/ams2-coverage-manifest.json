@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.4.25",
+  "dataset_version": "0.4.27",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
@@ -163,22 +163,22 @@
   ],
   "stats": {
     "observed_identities": 365,
-    "curated_records": 258,
-    "covered_exact_identities": 348,
-    "uncovered_identities": 17,
-    "full_guided_verifications": 2,
+    "curated_records": 260,
+    "covered_exact_identities": 349,
+    "uncovered_identities": 16,
+    "full_guided_verifications": 1,
     "dispositions": {
-      "covered-exact": 348,
-      "full-guided-verification": 2,
+      "covered-exact": 349,
+      "full-guided-verification": 1,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
     "full_verifications_by_family": {
-      "touring-stock": 2
+      "touring-stock": 1
     },
     "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 2
+      "independent-control-research-needed": 1
     }
   },
   "entries": [
@@ -5445,15 +5445,15 @@
       "telemetry_name": "Toyota Corolla Stock Car 2023",
       "car_id": "Toyota Corolla Stock Car 2023",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "toyota-corolla-stock-car-2023",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "StockCarV8_2023",
       "live_observed_at": "2026-08-24T13:40:36.9148302Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Toyota Corolla Stock Car 2024",

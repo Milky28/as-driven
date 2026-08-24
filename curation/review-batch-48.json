@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.26",
+  "approved_at": "2026-08-24",
+  "records": [
+    {
+      "record_id": "ford-gt40-mk1-1965",
+      "bundle": "build/review-cases/issue-8/staged.json",
+      "display_name": "1965 Ford GT40 Mk I",
+      "class": "World Sportscar Championship prototype",
+      "manufacturer": "Ford",
+      "model": "GT40 Mk I",
+      "year": {
+        "from": 1965,
+        "to": 1965,
+        "label": "1965"
+      },
+      "real_world_identity_notes": "The exact content documentation identifies a 1965 Ford GT40 Mk I. The real-car baseline is the small-block Ford GT40 Mk I used in 1965 endurance racing, including the 289/4.7-litre competition specification and ZF 5DS-25 five-speed transaxle. This is not the 1966 GT40 Mk II with its larger 427 engine and four-speed Kar Kraft/Ford transmission, and it is not a road-only GT40 configuration.",
+      "real_world_source_refs": [
+        "wsc60.gt40.release-notes",
+        "ford.gt40.american-challenge",
+        "ford.gt40.origins",
+        "ford.gt40.mark-ii-confusion",
+        "rsc.1965-le-mans.gt40",
+        "supercar-nostalgia.gt40-mk1-65",
+        "quaife.zf-ds25-gt40",
+        "as-driven.repository.ford-gt40-mk1-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The WSC Legends pack names the installed content 1965 Ford GT40 Mk I and describes its Ford GT40/Mk I race history. Ford's historical material establishes the GT40 program and distinguishes the later Mk II, while 1965 Le Mans entry data identifies Ford GT40 cars with ZF 5DS-25 five-speed gearboxes.",
+      "identity_basis": "The WSC Legends pack names the installed content 1965 Ford GT40 Mk I and describes its Ford GT40/Mk I race history. Ford's historical material establishes the GT40 program and distinguishes the later Mk II, while 1965 Le Mans entry data identifies Ford GT40 cars with ZF 5DS-25 five-speed gearboxes.",
+      "specification_basis": "Ford's historical document identifies the 1965 adoption of the five-speed ZF transaxle; exact 1965 Le Mans data lists ZF 5DS-25 five-speed GT40 entries; the Mk-I guide and ZF replacement documentation corroborate five forward speeds. The exact-Mk-I technical guide describes the ZF DS25 as all-synchromesh; Quaife identifies its replacement as replicating the original ZF DS-25/2 and describes synchromesh selection. This is medium confidence because the primary 1965 event table names the ZF gearbox but does not itself state the synchronizer construction. The manufacturer replacement documentation explicitly identifies the original ZF DS-25/2 layout as five-speed H-pattern, and the Mk-I guide documents the corresponding right-hand gear change. Quaife states that the original ZF DS-25/2 has a distinctive dog-leg first-gear location, but the reviewed evidence does not establish which side first gear occupies. The database therefore keeps the complete shift pattern unknown. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1965 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h.",
+        "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+        "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/8",
+      "live_source_notes": "Guided-verification observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'wsc_legends_ford_gt40_mk1', by HSS & Team WSC Legends, declared version 1.3, data-acd sha256 d55812fe749f20c19aa8a3064ca5ed25302e138f8e56d9eadba0fb1e0047a2f8. This identifies the installed package, not the real car the record describes.",
+      "create_new_record": {
+        "staged_record_id": "wsc60-ford-gt40-mk1",
+        "basis": "The WSC Legends pack names the installed content 1965 Ford GT40 Mk I and describes its Ford GT40/Mk I race history. Ford's historical material establishes the GT40 program and distinguishes the later Mk II, while 1965 Le Mans entry data identifies Ford GT40 cars with ZF 5DS-25 five-speed gearboxes."
+      }
+    }
+  ]
+}

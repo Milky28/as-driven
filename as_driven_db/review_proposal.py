@@ -151,6 +151,19 @@ def _require_complete_control_review(
         )
 
 
+def _require_representable_controls(real_controls: dict[str, Any]) -> None:
+    transmission = real_controls["transmission"]
+    if (
+        transmission.get("shift_pattern") == "dogleg-h"
+        and transmission.get("first_gear_position") not in {"down-left", "down-right"}
+    ):
+        raise ResearchHandoffError(
+            "a dogleg shift pattern cannot be proposed until research establishes "
+            "whether first gear is down-left or down-right; keep shift_pattern "
+            "unknown when the side is not established"
+        )
+
+
 def _control_overrides(
     staged_controls: dict[str, Any], real_controls: dict[str, Any]
 ) -> dict[str, Any]:
@@ -350,6 +363,7 @@ def prepare_review_proposal(
     staged_controls = staged["record"]["authentic_controls"]
     _require_complete_control_review(staged_controls, result)
     real_controls = _real_controls(staged_controls, result)
+    _require_representable_controls(real_controls)
     overrides = _control_overrides(staged_controls, real_controls)
     simulator_overrides = _simulator_overrides(staged_controls, real_controls, staged)
     research_sources = [

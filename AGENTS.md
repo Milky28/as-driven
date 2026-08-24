@@ -79,23 +79,24 @@ than silently queueing verification work.
 - Branch: `codex/stabilization`; private remote `origin` at
   `github.com/Milky28/as-driven`.
 - Early-access client: 0.19.0.
-- Dataset: 0.4.25 with 258 curated records.
+- Dataset: 0.4.27 with 260 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- Every AMS2 identity observed on this PC is curated or closed by a written
-  decision; the guided queue is empty. New content can still be absent because
-  the inventory only contains cars loaded here. See
+- Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
+  are closed by written decisions. Chevrolet Cruze Stock Car 2021 remains in
+  the guided queue. New content can still be absent because the inventory only
+  contains cars loaded here. See
   `docs/ams2-coverage-plan.md`.
 - Assetto Corsa EVO is the active second-simulator development track. Four
   records now carry reviewed AC EVO entries; this is development coverage, not
   part of the certified early-access target. `docs/ac-evo-coverage-plan.md` owns
   its drive order and open questions.
-- Assetto Corsa Competizione is recognized as `acc`; 12 exact entries are
+- Assetto Corsa Competizione is recognized as `acc`; 18 exact entries are
   reviewed, including the completed ranked-ten comparison batch.
   ACC drafts record the exact Steam content build because its executables expose
   no useful file version. This remains development coverage outside the
   certified target. `docs/acc-coverage-plan.md` owns its drive order and identity
   traps.
-- Original Assetto Corsa development now covers 14 records: two AC-only and 12
+- Original Assetto Corsa development now covers 17 records: four AC-only and 13
   shared with another simulator. Each source fingerprints the exact installed
   implementation; this remains development coverage outside the certified
   early-access target.

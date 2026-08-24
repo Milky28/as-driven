@@ -1,0 +1,353 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "toyota-corolla-stock-car-2023",
+  "identity": {
+    "display_name": "Toyota Corolla Stock Car 2023",
+    "manufacturer": "Toyota",
+    "model": "Corolla Stock Car",
+    "year": {
+      "from": 2023,
+      "to": 2023,
+      "label": "2023 Stock Car Pro Series Toyota Corolla"
+    },
+    "class": "Stock Car Pro Series",
+    "real_world_identity_notes": "This is the Toyota Corolla-bodied entry in the 2023 Brazilian Stock Car Pro Series, a category-only race car using the series common purpose-built chassis and platform components. It is not a road Toyota Corolla or Corolla GR-S. The CBA Toyota annex identifies the Stock Car Toyota Corolla construction for the 2023 championship; the common platform and technical regulations establish the shared transmission hardware."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: semi automatic; shift actuation: sequential paddles.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Toyota Corolla Stock Car 2023"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Toyota Corolla Stock Car 2023"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCarV8_2023"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-24",
+      "source_refs": [
+        "cba.stock-car-pro-series-2023.downloads",
+        "cba.stock-car-pro-series-2023.technical-regulations",
+        "cba.stock-car-pro-series-2023.toyota-corolla-annex",
+        "cba.stock-car-pro-series-2023.platform-annex",
+        "ams2.official-implementation.stock-car-2023",
+        "as-driven.repository.corolla-2023-record-scan",
+        "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official CBA 2023 download index names the exact technical-regulation and Toyota-annex document set. The 2023 technical regulation establishes the category-only standardized chassis/platform and the Toyota annex explicitly covers the Stock Car Toyota Corolla. The official AMS2 announcement independently identifies the 2023 Toyota Corolla implementation, but is not used as proof of real-car controls."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "cba.stock-car-pro-series-2023.downloads",
+          "cba.stock-car-pro-series-2023.technical-regulations",
+          "cba.stock-car-pro-series-2023.toyota-corolla-annex",
+          "cba.stock-car-pro-series-2023.platform-annex",
+          "ams2.official-implementation.stock-car-2023",
+          "as-driven.repository.corolla-2023-record-scan",
+          "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The official CBA 2023 download index names the exact technical-regulation and Toyota-annex document set. The 2023 technical regulation establishes the category-only standardized chassis/platform and the Toyota annex explicitly covers the Stock Car Toyota Corolla. The official AMS2 announcement independently identifies the 2023 Toyota Corolla implementation, but is not used as proof of real-car controls."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "cba.stock-car-pro-series-2023.downloads",
+          "cba.stock-car-pro-series-2023.technical-regulations",
+          "cba.stock-car-pro-series-2023.toyota-corolla-annex",
+          "cba.stock-car-pro-series-2023.platform-annex",
+          "ams2.official-implementation.stock-car-2023",
+          "as-driven.repository.corolla-2023-record-scan",
+          "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Article 13.2's X-TRAC 396B023 gear-pair table assigns six forward gears. Article 13.2 explicitly permits a semi-automatic paddle-shift actuation system. This supports the project's semi-automatic category, but does not establish internal dog-ring versus synchromesh construction. The regulation requires the semi-automatic paddle-shift actuation system. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-24"
+}

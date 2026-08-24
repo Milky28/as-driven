@@ -7500,6 +7500,142 @@
           "digest": "25a58e73ac25bb91ff1202848c3bdabe02023ef3f95a2693936e0cb6e120a00e"
         }
       }
+    },
+    {
+      "source_id": "wsc60.gt40.release-notes",
+      "title": "WSC Legends 60's Pack version 1.3",
+      "publisher": "HSS & Team WSC Legends",
+      "url": "https://thracing.de/wp-content/uploads/2026/01/2026-01-WSC-Legends-60s-Pack-v1.3.pdf",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: The exact Assetto Corsa content pack documentation and its 1965 Ford GT40 Mk I entry. PDF p. 2, index: “1965 Ford GT 40 Mk1” Reviewed for /identity/model, /identity/year. PDF pp. 28-29, Ford GT40 entry: “1965 Ford GT40; Henry Ford II had wanted a Ford at Le Mans” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class. PDF pp. 28-29, 1965 race-history paragraph: “Ken Miles and Bruce McLaren came in second overall ... and first in prototype class at the Sebring 12-hour race” Reviewed for /identity/class, /identity/real_world_identity_notes. PDF p. 29, production and competition paragraph: “production GT40s ... For the road ... in competition trim” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. This is exact content documentation for the mod. It establishes the simulator's intended car label and historical context, not every real-car control field."
+    },
+    {
+      "source_id": "ford.gt40.american-challenge",
+      "title": "The American Challenge: Ford GT-40 press history",
+      "publisher": "Ford Motor Company News Bureau",
+      "url": "https://media.ford.com/content/dam/fordmedia/history/products/fordgt-gt40/Ford-GT40-Press-release-The-American-Challenge.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ford's historical press document for the GT40 program, including the 1965 production and transmission transition. PDF p. 10, 1965 production paragraph: “These cars were completed in the 1965 period after detailed changes and the adoption of the 5-speed ZF transaxle.” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. The direct PDF endpoint was reviewed through Ford's indexed historical document. It is used for the manufacturer/year/transmission baseline, not for driver technique or cockpit topology."
+    },
+    {
+      "source_id": "ford.gt40.origins",
+      "title": "Ford vs. Ferrari: Entry and Failure - 1964",
+      "publisher": "Ford Motor Company",
+      "url": "https://corporate.ford.com/articles/history/ford-gt40-origins/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ford's history of the GT40's origin, Ford Advanced Vehicles, and early race program. article lines 38-45: “A racing GT car ... to compete successfully in major road races such as Sebring and Le Mans” Reviewed for /identity/manufacturer, /identity/model, /identity/class, /identity/real_world_identity_notes. article lines 41-44: “the GT40s were undoubtedly fast ... the Colotti gearboxes gave out” Reviewed for /identity/real_world_identity_notes, /authentic_controls/transmission/gearbox_type. Used as manufacturer context and to distinguish early Colotti-equipped development cars from the later 1965 ZF-equipped Mk I configuration.",
+      "published_or_updated_at": "2019-10-16"
+    },
+    {
+      "source_id": "ford.gt40.mark-ii-confusion",
+      "title": "Ford vs. Ferrari: The Le Mans Committee - Victory in 1966",
+      "publisher": "Ford Motor Company",
+      "url": "https://corporate.ford.com/articles/history/ford-gt40-origins-le-mans-committee-victory/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ford's historical account of the 1966 GT40 Mk II development and transmission distinction. article lines 38-42: “the new model, now designated the Mark II ... Mark IIs only used four-speed manual transmissions” Reviewed for /identity/confusion_risks. This source is included solely to document the adjacent Mk II identity trap; it is not used to assign controls to the 1965 Mk I.",
+      "published_or_updated_at": "2019-10-16"
+    },
+    {
+      "source_id": "rsc.1965-le-mans.gt40",
+      "title": "Le Mans 24 Hours 1965: car data",
+      "publisher": "Racing Sports Cars",
+      "url": "https://www.racingsportscars.com/entry/data/Le_Mans-1965-06-20.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Entry data for Ford GT40 cars at the 1965 24 Hours of Le Mans, including chassis, engine, and gearbox fields. event header and car-data table lines 10-26: “Event: 24 Heures du Mans ... 1965 ... Ford GT40 ... ZF 5DS-25 5-speed” Reviewed for /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Exact-event secondary corroboration. The page lists multiple 1965 GT40 entries, so it does not identify the simulator's particular chassis or livery."
+    },
+    {
+      "source_id": "supercar-nostalgia.gt40-mk1-65",
+      "title": "Ford GT40 Mk1 Guide",
+      "publisher": "Supercar Nostalgia",
+      "url": "https://supercarnostalgia.com/blog/ford-gt40-mk1-65",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical guide covering competition-specification Ford GT40 Mk I transmission and clutch equipment. article lines 68-78: “five-speed DS25 all-synchromesh unit from ZF ... triple-plate Borg & Beck clutch” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch. article lines 77-78: “All Mk1 GT40s were right-hand drive with a right-hand gear change” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Useful exact-Mk-I technical corroboration, but secondary rather than manufacturer or homologation evidence. It establishes hardware, not driver technique or wheel topology."
+    },
+    {
+      "source_id": "quaife.zf-ds25-gt40",
+      "title": "ZF Transaxle 5-Speed H-Pattern Gearbox",
+      "publisher": "Quaife Engineering",
+      "url": "https://shop.quaife.co.uk/shop/gearboxes/h-pattern/synchromesh/qbe62g/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Quaife's modern replacement for the ZF DS-25/2 used in Ford GT40s, including the original shift layout it replicates. product page lines 49-62: “replicate the ZF DS-25/2 gearbox ... five speed H-pattern layout and distinctive dog-leg first gear location” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position. product page lines 54 and 62: “synchromesh gear selection” Reviewed for /authentic_controls/transmission/gearbox_type. This is a current replacement product, not a period race document. It is used only where it explicitly states that its shift system and dog-leg layout replicate the original ZF DS-25/2."
+    },
+    {
+      "source_id": "as-driven.repository.ford-gt40-mk1-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated Ford GT40 Mk I or equivalent simulator-independent record. data/v1/cars filename and identity scan: “No Ford GT40 Mk I 1965 record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034",
+      "title": "Live AC WSC60 Ford GT40 Mk1 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/8",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.wsc60-ford-gt40-mk1.20260824t140332974z-ed360acb by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'wsc_legends_ford_gt40_mk1', by HSS & Team WSC Legends, declared version 1.3, data-acd sha256 d55812fe749f20c19aa8a3064ca5ed25302e138f8e56d9eadba0fb1e0047a2f8. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "wsc_legends_ford_gt40_mk1",
+        "author": "HSS & Team WSC Legends",
+        "declared_version": "1.3",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "d55812fe749f20c19aa8a3064ca5ed25302e138f8e56d9eadba0fb1e0047a2f8"
+        }
+      }
+    },
+    {
+      "source_id": "cba.stock-car-pro-series-2023.toyota-corolla-annex",
+      "title": "Anexo Técnico Toyota Corolla Stock Car Pro Series 2023",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/683/anexo-tecnico-toyota-stock-car-pro-series-2023-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official 2023 manufacturer-specific technical annex for the Toyota Corolla Stock Car body and construction. cover and introductory scope statement: “O presente Anexo é parte complementar do Regulamento Técnico do Campeonato Brasileiro de Stock Car Pro Series 2023. Conteúdo contempla as características técnicas dos componentes e da construção do Stock Car Toyota – Corolla.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/real_world_identity_notes. The PDF cover carries a legacy 2022 version marker, but its introductory text explicitly states that it complements the 2023 Stock Car Pro Series technical regulation and covers the Stock Car Toyota Corolla. It is used only for the exact 2023 Toyota identity, not to infer silent control fields."
+    },
+    {
+      "source_id": "as-driven.repository.corolla-2023-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated 2023 Toyota Corolla Stock Car record and adjacent season records. data/v1/cars filename scan: “No curated toyota-corolla-stock-car-2023 record is present; adjacent Toyota Corolla Stock Car season records are present.” Reviewed for /identity/record_action, /identity/record_id. Repository context is not real-world evidence; it supports only the create-new versus use-existing decision."
+    },
+    {
+      "source_id": "ams2.local-live-toyota-corolla-stock-car-2023-controls.1.6.9.91",
+      "title": "Live AMS2 Toyota Corolla Stock Car 2023 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/6",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

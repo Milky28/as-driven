@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.27",
+  "approved_at": "2026-08-24",
+  "record_id": "toyota-corolla-stock-car-2023",
+  "simulator": "ams2",
+  "telemetry_name": "Toyota Corolla Stock Car 2023",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.toyota-corolla-stock-car-2023.20260824t134047310z-202ef148",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2023 Stock Car Pro Series Toyota Corolla identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "StockCarV8_2023"
+}

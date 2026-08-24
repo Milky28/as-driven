@@ -183,6 +183,26 @@ def _research_questions(staged: dict[str, Any]) -> list[str]:
     ]
 
 
+def _material_control_paths(staged: dict[str, Any]) -> list[str]:
+    controls = staged.get("record", {}).get("authentic_controls", {})
+
+    def visit(value: Any, prefix: str) -> list[str]:
+        if isinstance(value, dict):
+            paths: list[str] = []
+            for key, child in value.items():
+                paths.extend(visit(child, f"{prefix}/{key}"))
+            return paths
+        return [prefix]
+
+    return sorted(
+        path
+        for path in visit(controls, "/authentic_controls")
+        if not path.endswith("/notes")
+        and not path.endswith("/source_label")
+        and path != "/authentic_controls/notes"
+    )
+
+
 def _brief_markdown(
     case: dict[str, Any],
     staged: dict[str, Any],
@@ -232,15 +252,23 @@ These are deterministic research leads only: exact curated identity matches or d
 
 {questions}
 
-## Permitted claim paths
+## Required control claim paths
 
-Use only the exact JSON pointers below for `claims[].path`. Do not infer a path from the staged observation's nesting or invent a shorthand.
+If `research_status` is `complete`, include an established or `not-established` claim for every path below. These are the material fields present in the staged observation.
 
-If `research_status` is `complete`, include a claim for every `/authentic_controls/` path in this list. Use `not-established` with the reviewed source references when the evidence does not settle a field.
+```json
+{json.dumps(_material_control_paths(staged), indent=2, ensure_ascii=False)}
+```
+
+## Other permitted claim paths
+
+Use only the exact JSON pointers below for `claims[].path`. Do not infer a path from the staged observation's nesting or invent a shorthand. Paths not listed in the required section are optional. Include an optional path only when the research establishes or conflicts with it. Omit an optional numeric field when it is not established.
 
 ```json
 {json.dumps(claim_paths, indent=2, ensure_ascii=False)}
 ```
+
+`proposed_value` must use the target field's JSON type. For a required numeric field that permits no established value, use JSON `null`, not the string `"unknown"`. Use `"unknown"` only for an enum that explicitly allows that value. In particular, do not add `degrees_of_rotation` or `diameter_mm` merely to report that they were not established when those paths are absent from the required list.
 
 ## Required output
 
@@ -441,13 +469,31 @@ def validate_research_result(
                     f"{label}.claims[{index}].path: unknown research field {path!r}"
                 )
             elif path.startswith("/authentic_controls/") and "proposed_value" in claim:
-                errors.extend(
-                    validate_instance(
-                        claim["proposed_value"],
-                        claim_schema,
-                        f"{label}.claims[{index}].proposed_value",
-                    )
+                proposed_value = claim["proposed_value"]
+                claim_types = claim_schema.get("type")
+                numeric_types = (
+                    {claim_types}
+                    if isinstance(claim_types, str)
+                    else set(claim_types or [])
                 )
+                if (
+                    claim.get("finding") == "not-established"
+                    and proposed_value == "unknown"
+                    and numeric_types.intersection({"integer", "number"})
+                ):
+                    errors.append(
+                        f"{label}.claims[{index}].proposed_value: numeric fields cannot use "
+                        "the string 'unknown'; use null when the field permits it, or omit "
+                        "an optional not-established claim"
+                    )
+                else:
+                    errors.extend(
+                        validate_instance(
+                            proposed_value,
+                            claim_schema,
+                            f"{label}.claims[{index}].proposed_value",
+                        )
+                    )
             refs = claim.get("source_refs")
             if isinstance(refs, list):
                 unknown = sorted(set(refs) - known_sources)

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.25",
+  "dataset_version": "0.4.27",
   "released_at": "2026-08-24",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -67,6 +67,7 @@
     "cars/dodge-viper-gts-r.json",
     "cars/f301.json",
     "cars/f309.json",
+    "cars/ford-gt40-mk1-1965.json",
     "cars/formula-classic-gen1-model1.json",
     "cars/formula-classic-gen1-model2.json",
     "cars/formula-classic-gen2-model1.json",
@@ -256,6 +257,7 @@
     "cars/toyota-corolla-stock-car-2020.json",
     "cars/toyota-corolla-stock-car-2021.json",
     "cars/toyota-corolla-stock-car-2022.json",
+    "cars/toyota-corolla-stock-car-2023.json",
     "cars/toyota-corolla-stock-car-2024.json",
     "cars/tvr-tuscan-t400r-gt2.json",
     "cars/uno-classic-b.json",

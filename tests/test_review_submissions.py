@@ -391,7 +391,17 @@ class ReviewSubmissionTests(unittest.TestCase):
                 brief,
             )
             self.assertIn(
-                "include a claim for every `/authentic_controls/` path",
+                "include an established or `not-established` claim for every path",
+                brief,
+            )
+            self.assertIn("## Required control claim paths", brief)
+            self.assertIn("## Other permitted claim paths", brief)
+            self.assertIn(
+                "do not add `degrees_of_rotation` or `diameter_mm`",
+                brief,
+            )
+            self.assertIn(
+                "use JSON `null`, not the string `\"unknown\"`",
                 brief,
             )
             self.assertIn(
@@ -504,6 +514,32 @@ class ReviewSubmissionTests(unittest.TestCase):
                 import_research_result(ROOT, temp / "cases", 17, result_path)
             self.assertFalse((case_dir / "research-result.json").exists())
 
+    def test_numeric_unknown_error_explains_the_valid_research_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            bad = research_result("github-example-project-17")
+            bad["claims"].append(
+                {
+                    "path": "/authentic_controls/steering/degrees_of_rotation",
+                    "finding": "not-established",
+                    "proposed_value": "unknown",
+                    "confidence": "low",
+                    "source_refs": ["example.public-test-car.2021"],
+                    "basis": "The reviewed source does not establish rotation.",
+                }
+            )
+            result_path = temp / "bad-numeric-unknown.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "numeric fields cannot use the string 'unknown'",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
     def test_review_proposal_dry_runs_without_changing_curated_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
@@ -602,6 +638,42 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "down-left",
                 preview["authentic_controls"]["transmission"]["first_gear_position"],
             )
+
+    def test_review_proposal_refuses_a_dogleg_without_its_first_gear_side(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            shutil.copytree(ROOT / "data", repository / "data")
+            shutil.copytree(ROOT / "curation", repository / "curation")
+            shutil.copytree(ROOT / "schema", repository / "schema")
+            cases = repository / "build" / "review-cases"
+            case_dir = self.sync_test_case_for_root(repository, cases)
+            generate_research_briefs(repository, cases, {17})
+            result = completed_research_result("github-example-project-17")
+            shift_pattern = next(
+                claim
+                for claim in result["claims"]
+                if claim["path"]
+                == "/authentic_controls/transmission/shift_pattern"
+            )
+            shift_pattern.update(
+                {
+                    "finding": "established",
+                    "proposed_value": "dogleg-h",
+                    "confidence": "medium",
+                    "basis": "The source establishes a dogleg but not its side.",
+                }
+            )
+            result_path = repository / "completed-research.json"
+            result_path.write_text(json.dumps(result), encoding="utf-8")
+            import_research_result(repository, cases, 17, result_path)
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "cannot be proposed until research establishes",
+            ):
+                prepare_review_proposal(repository, cases, 17)
+
+            self.assertFalse((case_dir / "review-manifest.proposed.json").exists())
 
     def test_explicit_approval_promotes_a_ready_case_and_allocates_a_batch(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

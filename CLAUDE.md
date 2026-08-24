@@ -167,14 +167,16 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.19.0.
-- Dataset: 0.4.25 with 258 curated records.
+- Dataset: 0.4.27 with 260 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- Every AMS2 identity observed on this PC is curated or closed by a written
-  decision; the guided queue is empty. The inventory only holds cars that have
-  been loaded here, so new content still needs `docs/ams2-coverage-plan.md` and
+- Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
+  are closed by written decisions. Chevrolet Cruze Stock Car 2021 remains in
+  the guided queue. The inventory only holds cars that have been loaded here,
+  so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Every record carries an `archetype` classification: 166 match one of the 23
-  registered mechanisms, 63 deviate, 13 are undetermined and 10 match none. An
+- Of 260 records, 252 carry an `archetype` classification: 158 match one of the
+  23 registered mechanisms, 68 deviate, 15 are undetermined and 11 match none.
+  Eight await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **The gearbox construction research is closed.** `gearbox_type` is open in 37
