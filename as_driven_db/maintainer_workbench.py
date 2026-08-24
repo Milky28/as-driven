@@ -8,6 +8,7 @@ import re
 import secrets
 import subprocess
 import tempfile
+import threading
 from typing import Any
 from urllib.parse import unquote, urlsplit
 import webbrowser
@@ -88,6 +89,7 @@ class WorkbenchApplication:
             else (self.root / cases_directory).resolve()
         )
         self.inbox = inbox.resolve() if inbox.is_absolute() else (self.root / inbox).resolve()
+        self._sync_lock = threading.Lock()
 
     def _case_path(self, issue: int) -> Path:
         if issue < 1:
@@ -198,13 +200,18 @@ class WorkbenchApplication:
         }
 
     def sync(self) -> dict[str, Any]:
-        return sync_submissions(
-            self.root,
-            repository=self.repository,
-            label=self.label,
-            cases_directory=self.cases_directory,
-            inbox=self.inbox,
-        )
+        # The loopback server is threaded, and the workbench may be open in
+        # several browser tabs. Serialize synchronization so two requests can
+        # never intake the same attachment while its case is still being
+        # written.
+        with self._sync_lock:
+            return sync_submissions(
+                self.root,
+                repository=self.repository,
+                label=self.label,
+                cases_directory=self.cases_directory,
+                inbox=self.inbox,
+            )
 
     def refresh_local_queue(self) -> dict[str, Any]:
         research_results = discover_research_results(
@@ -332,7 +339,7 @@ async function copyArtifact(){try{const content=artifactMode==='formatted'&&!$('
 async function runAction(action){let payload={};if(action==='promote'){if(!$('#promoteApproval')?.checked)return toast('Review and check the approval statement first.',true);payload.approved=true}if(action==='publish-result'){if(!$('#publishApproval')?.checked)return toast('Confirm the publication statement first.',true);payload.approved=true}document.body.classList.add('busy');try{const result=await api(`/api/cases/${selected}/actions/${action}`,{method:'POST',body:JSON.stringify(payload)});if(action==='preview-publication'){const content=result.result.comment+(result.result.blockers.length?'\n\nPublication blockers:\n- '+result.result.blockers.join('\n- '):'\n\nReady to publish.');currentArtifact={key:'publication_preview',content};$('#artifactToolbar').hidden=false;$('#artifactToggle').hidden=true;$('#artifactView').textContent=content;showArtifactMode('json');toast('GitHub response previewed below')}else toast(`${action.replaceAll('-',' ')} completed`);if(action!=='preview-publication'){await refresh();if(action==='generate-research-brief')await loadArtifact('research_brief')}}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
 async function importResearch(event){const file=event.target.files[0];if(!file)return;document.body.classList.add('busy');try{const parsed=JSON.parse(await file.text());await api(`/api/cases/${selected}/actions/import-research`,{method:'POST',body:JSON.stringify({research_result:parsed})});toast('Research result imported');await refresh()}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
 async function refreshLocalQueue(){document.body.classList.add('busy');try{const r=await api('/api/actions/refresh',{method:'POST',body:'{}'});renderSnapshot(r.snapshot);if(selected&&r.snapshot.cases.some(c=>c.issue===selected))await selectCase(selected,false);const imported=r.research_results.imported.length,errors=r.research_results.errors;if(errors.length)toast(`Found ${r.research_results.found} research result(s), but issue #${errors[0].issue} could not be imported: ${errors[0].error}`,true);else if(imported)toast(`Imported ${imported} completed research result${imported===1?'':'s'}`);else toast('Local queue is up to date')}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
-$('#refresh').onclick=refreshLocalQueue;$('#sync').onclick=async()=>{document.body.classList.add('busy');try{const r=await api('/api/actions/sync',{method:'POST',body:'{}'});toast(`Sync complete: ${r.processed} processed, ${r.skipped} unchanged`);await refresh(false)}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}};$('#finalize').onclick=async()=>{if(!confirm('Regenerate release outputs, validate, and run the full test suite?'))return;const button=$('#finalize');let outcome='';let failed=false;beginProgress(button,'Finalizing release…','Regenerating release outputs, validating the dataset, and running the full test suite. This can take a few minutes.');try{const r=await api('/api/actions/finalize',{method:'POST',body:JSON.stringify({run_tests:true})});outcome=`Complete: dataset ${r.dataset_version} finalized. Validation and the full test suite passed.`;toast(`Dataset ${r.dataset_version} finalized; tests passed`);await refresh()}catch(e){failed=true;outcome=`Finalization failed: ${e.message}`;toast(e.message,true)}finally{endProgress(button,outcome,failed)}};
+$('#refresh').onclick=refreshLocalQueue;$('#sync').onclick=async()=>{const button=$('#sync');let outcome='';let failed=false;beginProgress(button,'Syncing...','Downloading and classifying GitHub submissions.');try{const r=await api('/api/actions/sync',{method:'POST',body:'{}'});outcome=`Sync complete: ${r.processed} processed, ${r.skipped} unchanged.`;toast(outcome);await refresh(false)}catch(e){failed=true;outcome=`Sync failed: ${e.message}`;toast(e.message,true)}finally{endProgress(button,outcome,failed)}};$('#finalize').onclick=async()=>{if(!confirm('Regenerate release outputs, validate, and run the full test suite?'))return;const button=$('#finalize');let outcome='';let failed=false;beginProgress(button,'Finalizing release...','Regenerating release outputs, validating the dataset, and running the full test suite. This can take a few minutes.');try{const r=await api('/api/actions/finalize',{method:'POST',body:JSON.stringify({run_tests:true})});outcome=`Complete: dataset ${r.dataset_version} finalized. Validation and the full test suite passed.`;toast(`Dataset ${r.dataset_version} finalized; tests passed`);await refresh()}catch(e){failed=true;outcome=`Finalization failed: ${e.message}`;toast(e.message,true)}finally{endProgress(button,outcome,failed)}};
 refresh(false).catch(e=>toast(e.message,true));
 </script>
 </body></html>'''

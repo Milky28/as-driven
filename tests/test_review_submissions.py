@@ -373,6 +373,53 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertEqual("published", published["display_state"])
             self.assertEqual([], published["allowed_actions"])
 
+    def test_issue_edit_keeps_the_original_attachment_classification(self) -> None:
+        raw = (json.dumps(observation(), indent=2) + "\n").encode("utf-8")
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            cases_dir = temp / "cases"
+            inbox = temp / "inbox"
+            original_issue = issue()
+            sync_submissions(
+                ROOT,
+                repository="example/project",
+                cases_directory=cases_dir,
+                inbox=inbox,
+                issue_loader=lambda _repo, _label: [original_issue],
+                attachment_fetcher=lambda _: raw,
+            )
+
+            edited_issue = issue()
+            edited_issue["updatedAt"] = "2026-08-24T13:00:00Z"
+            edited_issue["body"] = edited_issue["body"].replace(
+                "Cockpit year is uncertain.",
+                "Cockpit year is now confirmed.",
+            )
+            result = sync_submissions(
+                ROOT,
+                repository="example/project",
+                cases_directory=cases_dir,
+                inbox=inbox,
+                issue_loader=lambda _repo, _label: [edited_issue],
+                attachment_fetcher=lambda _: raw,
+            )
+
+            self.assertEqual(1, result["processed"])
+            case = json.loads(
+                (cases_dir / "issue-17" / "case.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("new-identity", case["classification"])
+            self.assertEqual("identity-research", case["state"])
+            self.assertEqual(
+                "Cockpit year is now confirmed.",
+                case["issue"]["answers"]["uncertainty"],
+            )
+            receipt = json.loads(
+                (cases_dir / "issue-17" / "receipt.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("new-identity", receipt["status"])
+            self.assertEqual(1, len(list(inbox.glob("*.receipt.json"))))
+
     def test_invalid_submission_becomes_a_retryable_error_case(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

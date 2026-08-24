@@ -6,6 +6,7 @@ import re
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -67,6 +68,7 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn('id="progress"', page)
         self.assertIn("Regenerating release outputs, validating the dataset", page)
         self.assertIn("beginProgress(button,'Finalizing release", page)
+        self.assertIn("beginProgress(button,'Syncing...'", page)
         self.assertIn("Complete: dataset ${r.dataset_version} finalized", page)
         self.assertIn("Finalization failed: ${e.message}", page)
         self.assertIn("endProgress(button,outcome,failed)", page)
@@ -77,6 +79,46 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("state-final-review", page)
         self.assertIn("state-identity-research", page)
         self.assertIn('const token="test-token"', page)
+
+    def test_sync_requests_are_serialized(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            application = WorkbenchApplication(Path(directory))
+            first_entered = threading.Event()
+            release_first = threading.Event()
+            second_entered = threading.Event()
+            calls_lock = threading.Lock()
+            calls = 0
+
+            def fake_sync(*_args, **_kwargs) -> dict:
+                nonlocal calls
+                with calls_lock:
+                    calls += 1
+                    call_number = calls
+                if call_number == 1:
+                    first_entered.set()
+                    self.assertTrue(release_first.wait(timeout=5))
+                else:
+                    second_entered.set()
+                return {"processed": 0, "skipped": 0, "error": 0}
+
+            with patch(
+                "as_driven_db.maintainer_workbench.sync_submissions",
+                side_effect=fake_sync,
+            ):
+                first = threading.Thread(target=application.sync)
+                second = threading.Thread(target=application.sync)
+                first.start()
+                self.assertTrue(first_entered.wait(timeout=5))
+                second.start()
+                self.assertFalse(second_entered.wait(timeout=0.2))
+                release_first.set()
+                first.join(timeout=5)
+                second.join(timeout=5)
+
+            self.assertFalse(first.is_alive())
+            self.assertFalse(second.is_alive())
+            self.assertTrue(second_entered.is_set())
+            self.assertEqual(2, calls)
 
     def test_server_is_loopback_only_and_post_requests_require_its_token(self) -> None:
         with self.assertRaisesRegex(WorkbenchError, "loopback"):

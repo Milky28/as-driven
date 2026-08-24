@@ -209,6 +209,41 @@ def _case_is_current(case_dir: Path, issue: dict[str, Any], attachment_url: str)
     )
 
 
+def _same_attachment_case(
+    case_dir: Path,
+    attachment_url: str,
+    digest: str,
+) -> dict[str, Any] | None:
+    """Return a usable prior case for the same issue attachment.
+
+    Editing an issue changes its GitHub timestamp but does not make its attached
+    observation a new submission. Reuse the prior routing decision rather than
+    feeding the same bytes through the global duplicate detector again.
+    """
+
+    case_path = case_dir / "case.json"
+    if not case_path.is_file():
+        return None
+    try:
+        case = json.loads(case_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    attachment = case.get("attachment") or {}
+    if attachment.get("url") != attachment_url or attachment.get("sha256") != digest:
+        return None
+    if case.get("state") == "intake-error":
+        return None
+    artifacts = case.get("artifacts") or {}
+    required = ["issue", "submission", "receipt", "staged_bundle"]
+    if not all(
+        isinstance(artifacts.get(key), str)
+        and (case_dir / artifacts[key]).is_file()
+        for key in required
+    ):
+        return None
+    return case
+
+
 def _issue_summary(issue: dict[str, Any], repository: str) -> dict[str, Any]:
     labels = issue.get("labels", [])
     return {
@@ -284,6 +319,13 @@ def _sync_issue(
             raise SubmissionSyncError(
                 f"attachment exceeds the {MAX_OBSERVATION_BYTES:,}-byte observation limit"
             )
+        digest = hashlib.sha256(raw).hexdigest()
+        prior_case = _same_attachment_case(case_dir, attachment["url"], digest)
+        if prior_case is not None:
+            prior_case["issue"] = _issue_summary(issue, repository)
+            prior_case["updated_at"] = _now()
+            _write_json(case_dir / "case.json", prior_case)
+            return "processed", prior_case
         submission_path = case_dir / "submission.json"
         submission_path.write_bytes(raw)
         receipt = intake_observation(root, submission_path, inbox)
@@ -312,7 +354,7 @@ def _sync_issue(
             "issue": _issue_summary(issue, repository),
             "attachment": {
                 **attachment,
-                "sha256": hashlib.sha256(raw).hexdigest(),
+                "sha256": digest,
                 "redacted": attachment["filename"].lower().endswith(".redacted.json"),
             },
             "observation": {
