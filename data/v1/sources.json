@@ -7346,6 +7346,160 @@
       "retrieved_at": "2026-08-24",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "cba.stock-car-pro-series-2023.downloads",
+      "title": "Campeonato Nacional Stock Car Pro Series: 2023 downloads",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/campeonato/downloads/212/683/2023",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official 2023 Stock Car Pro Series download index. 2023 download list: “Stock Car Pro Series - Regulamento Técnico 2023; Anexo Técnico Plataforma Stock Pro Series Car 2023; Anexo Técnico GM Stock Car Pro Series 2023” Reviewed for /identity/year, /identity/class, /authentic_controls. Used to establish the exact-year official document set reviewed for this case."
+    },
+    {
+      "source_id": "cba.stock-car-pro-series-2023.technical-regulations",
+      "title": "Stock Car Pro Series: Technical Regulations 2023",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/683/stock-car-pro-series-regulamento-tecnico-2023-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official 2023 technical regulation for the Brazilian Stock Car Pro Series. printed pp. 3 and 5, Articles 3.1 and 6.1: “Vehicles are manufactured exclusively for this category; bodywork uses components of vehicle makes/models authorized in the make/model annexes.” Reviewed for /identity/model, /identity/class, /identity/real_world_identity_notes. printed pp. 12-13, Article 13.1: “Only multi-disc clutch RAM 8371 or RAM 8373 is permitted.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. printed pp. 12-13, Article 13.2 and gear-pair table: “Only X-TRAC 396B023 transmission is permitted; the gear-pair table assigns six forward gears; only a semi-automatic paddle-shift actuation system is permitted.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. printed p. 13, Articles 13.2-13.3: “A gear display is permitted; every vehicle must have an operational reverse gear.” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/transmission/forward_gears. printed pp. 19 and 25, Articles 16.6 and 21: “The pedal assembly and steering wheel/quick-release components must comply with the platform annex.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The regulation establishes permitted hardware and actuation, but does not establish driver clutch timing, throttle lift, cut/blip behavior, selector-pattern semantics, or wheel topology."
+    },
+    {
+      "source_id": "cba.stock-car-pro-series-2023.gm-cruze-annex",
+      "title": "Anexo Técnico GM Stock Car Pro Series 2023",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/683/anexo-tecnico-gm-stock-car-pro-series-2023-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official 2023 GM make/model annex for the Chevrolet Cruze Stock Car body and construction. cover and introductory scope statement: “The annex complements the 2023 technical regulation and covers the technical characteristics and construction of the Stock Car Chevrolet Cruze.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/real_world_identity_notes. The document title includes a legacy 2022 version marker, but its introductory text explicitly states that it complements the 2023 edition; it is used only for the exact 2023 GM Cruze identity."
+    },
+    {
+      "source_id": "cba.stock-car-pro-series-2023.platform-annex",
+      "title": "Anexo Técnico Plataforma Stock Car Pro Series Car 2023",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/683/anexo-tecnico-plataforma-stock-pro-series-car-2023-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official 2023 common-platform annex for components shared by all Stock Car makes. cover/introductory scope statement: “The Platform Technical Annex details components that are standard for the Stock Car for all makes entered in the championship.” Reviewed for /identity/real_world_identity_notes, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/shape. Reviewed as the exact-year common-platform source. It does not provide a sufficiently explicit driver-procedure or wheel-topology statement for the unresolved fields below."
+    },
+    {
+      "source_id": "ams2.official-implementation.stock-car-2023",
+      "title": "Automobilista 2: Stock Car Pro 2023 Series",
+      "publisher": "Reiza Studios",
+      "url": "https://store.steampowered.com/news/posts/?appids=1066890&enddate=1690305061&feed=steam_community_announcements",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official AMS2 release note for the 2023 Stock Car season implementation. Stock Car Pro 2023 Series release note: “The new 2023 season adds Chevrolet Cruze and Toyota Corolla models; the 2023 season switched to Hankook tires.” Reviewed for /identity/real_world_identity_notes. Simulator identity corroboration only. It is not used as proof of real-car controls or authentic driver technique."
+    },
+    {
+      "source_id": "as-driven.repository.cruze-2023-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated 2023 Chevrolet Cruze Stock Car record and adjacent season records. data/v1/cars filename scan: “No curated chevrolet-cruze-stock-car-2023 record is present; adjacent Cruze season records are present.” Reviewed for /identity/record_action, /identity/record_id. Repository context is not real-world evidence; it supports only the create-new versus use-existing decision."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-cruze-stock-car-2023-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Cruze Stock Car 2023 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/5",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2023.20260824t133854342z-3ab67fb3 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "acl.gt-classics.3-0.release-notes",
+      "title": "AC Legends GT Classic version 3.0 release notes",
+      "publisher": "AC Legends / Bazza",
+      "url": "https://thracing.de/wp-content/uploads/2020/11/AC-Legends-GT-Classics-3.0-release-notes.2020-11.pdf",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: The supplied mod's version 3.0 content notes and the BMW car entry used by the simulator observation. PDF p. 2, index: “1975 BMW CSL 3.5 IMSA” Reviewed for /identity/model, /identity/year, /identity/class. PDF p. 5, BMW car description: “1975 BMW CSL 3.5 IMSA” Reviewed for /identity/model, /identity/year, /identity/class. PDF p. 5, BMW car description: “the four speed gearbox replaced by a Getrag five speed box” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. This is exact content documentation for the mod, not independent proof of every real-car control detail."
+    },
+    {
+      "source_id": "bmw.1975-csl-imsa-group4",
+      "title": "1975 BMW 3.0 CSL IMSA Group 4 No. 25",
+      "publisher": "BMW Group / BMW of North America",
+      "url": "https://www.press.bmwgroup.com/usa/article/attachment/T0262831EN_US/365046",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW's historical description of a 1975 3.0 CSL IMSA Group 4 car and the model's racing development. PDF p. 2, heading and opening paragraph: “1975 BMW 3.0 CSL IMSA Group 4 No. 25” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class. PDF p. 2, engine-development paragraph: “the BMW inline 6-cylinder engine ... grew from 3.2 to 3.5 liters” Reviewed for /identity/real_world_identity_notes. PDF p. 2, chassis and series paragraph: “campaigned ... in the 1975 & '76 IMSA Camel GT Series in Group 4 specifications” Reviewed for /identity/class, /identity/year. This source describes a documented 1975 IMSA CSL entry and is used to corroborate the mod's model/year/class identity, not to assign its specific chassis number or cockpit layout."
+    },
+    {
+      "source_id": "bmw.3-0-csl-racing-coupe-tech-data",
+      "title": "BMW 3.0 CSL racing-coupe technical data",
+      "publisher": "BMW Classic",
+      "url": "https://www.press.bmwgroup.com/united-kingdom/article/attachment/T0261151EN_GB/362376",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW Classic technical data for a 1973 3.0 CSL racing-coupe replica and historical note on racing engine development. PDF p. 1, technical-data table: “Gearbox Getrag 5-speed” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. PDF p. 1, history paragraph: “First fitted with 3.0 and later with 3.5 litre four-valve engines” Reviewed for /identity/real_world_identity_notes. The technical table is for a 1973 replica, so it corroborates the 3.0 CSL racing family's Getrag five-speed and 3.5-litre development but is not treated as a complete 1975 IMSA specification sheet."
+    },
+    {
+      "source_id": "fia.bmw-3-0-csl.1648",
+      "title": "BMW 3.0 CSL FIA Historic Database entry",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/car/bmw-30-csl",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: FIA consultation entry for BMW 3.0 CSL homologation 1648, Group 2, with extensions through the 1975 period. entry lines 15-55: “BMW 3.0 CSL ... Group: 2 ... Date of homologation: January 2, 1973 ... End of homologation: January 1, 1980” Reviewed for /identity/manufacturer, /identity/model, /identity/confusion_risks. extension list lines 137-189: “02/01/1975 ... Rear spoiler ... Clutch ... Gearbox cooling; 02/04/1976 ... Gearbox ratios” Reviewed for /identity/year, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch. The FIA page makes the Group 2 scope explicit. It is used as homologation-family and hardware evidence, not as a silent substitution for the 1975 IMSA Group 4 specification."
+    },
+    {
+      "source_id": "fia.bmw-3-0-csl.1648.form",
+      "title": "BMW 3.0 CSL homologation form 1648, Group 2",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601081701/homologation_form_number_1648_group_2.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: The FIA homologation form and extensions for BMW 3.0 CSL homologation 1648, including clutch and gearbox entries. PDF p. 10, sections 260-273: “clutch; gearbox; number of forward gears; number of synchronized forward gears; gear-lever arrangement” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch. PDF p. 17, Group 2 equipment list: “Getrag 5-speed gearbox type 265” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. PDF p. 21, Getrag gear-ratio table: “1st, 2nd, 3rd, 4th, 5th and reverse gear ratios” Reviewed for /authentic_controls/transmission/forward_gears. The form records a manual lever gearbox and clutch hardware, but the Group 2 form does not establish the exact IMSA Group 4 driver's shift procedure, throttle technique, or wheel topology."
+    },
+    {
+      "source_id": "as-driven.repository.bmw-3-0-csl-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing BMW 3.0 CSL or equivalent simulator-independent curated identity. data/v1/cars filename and identity scan: “No BMW 3.0 CSL IMSA 1975 record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034",
+      "title": "Live AC ACL GTR BMW CSL 3.0 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/7",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ac_legends_gt_bmw_csl', by AC Legends, declared version 3.0, data-acd sha256 25a58e73ac25bb91ff1202848c3bdabe02023ef3f95a2693936e0cb6e120a00e. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ac_legends_gt_bmw_csl",
+        "author": "AC Legends",
+        "declared_version": "3.0",
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "25a58e73ac25bb91ff1202848c3bdabe02023ef3f95a2693936e0cb6e120a00e"
+        }
+      }
     }
   ]
 }

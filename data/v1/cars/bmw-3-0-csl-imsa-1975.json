@@ -1,0 +1,337 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "bmw-3-0-csl-imsa-1975",
+  "identity": {
+    "display_name": "1975 BMW 3.0 CSL IMSA Group 4",
+    "manufacturer": "BMW",
+    "model": "3.0 CSL IMSA Group 4",
+    "year": {
+      "from": 1975,
+      "to": 1975,
+      "label": "1975"
+    },
+    "class": "IMSA Camel GT Group 4",
+    "real_world_identity_notes": "The supplied AC Legends release notes identify the content as a 1975 BMW CSL 3.5 IMSA. The real-world baseline is the BMW 3.0 CSL race-car family in its 1975 IMSA Camel GT Group 4 specification, where 3.5 refers to the developed racing engine rather than a separate BMW road model. The sources do not establish a particular chassis number or livery for the simulator content."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "ACL GTR BMW CSL 3.0"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ac_legends_gt_bmw_csl"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.acl-gtr-bmw-csl-3-0.20260824t135306663z-96d955d1 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-08-24",
+      "source_refs": [
+        "acl.gt-classics.3-0.release-notes",
+        "bmw.1975-csl-imsa-group4",
+        "bmw.3-0-csl-racing-coupe-tech-data",
+        "fia.bmw-3-0-csl.1648",
+        "fia.bmw-3-0-csl.1648.form",
+        "as-driven.repository.bmw-3-0-csl-record-scan",
+        "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The exact content documentation names the 1975 BMW CSL 3.5 IMSA and describes its 3.5-litre development and five-speed Getrag box. BMW's own historical material independently identifies 1975 BMW 3.0 CSL cars in IMSA Camel GT Group 4 specifications and documents the racing engine's growth to 3.5 litres."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "acl.gt-classics.3-0.release-notes",
+          "bmw.1975-csl-imsa-group4",
+          "bmw.3-0-csl-racing-coupe-tech-data",
+          "fia.bmw-3-0-csl.1648",
+          "fia.bmw-3-0-csl.1648.form",
+          "as-driven.repository.bmw-3-0-csl-record-scan",
+          "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "The exact content documentation names the 1975 BMW CSL 3.5 IMSA and describes its 3.5-litre development and five-speed Getrag box. BMW's own historical material independently identifies 1975 BMW 3.0 CSL cars in IMSA Camel GT Group 4 specifications and documents the racing engine's growth to 3.5 litres."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "acl.gt-classics.3-0.release-notes",
+          "bmw.1975-csl-imsa-group4",
+          "bmw.3-0-csl-racing-coupe-tech-data",
+          "fia.bmw-3-0-csl.1648",
+          "fia.bmw-3-0-csl.1648.form",
+          "as-driven.repository.bmw-3-0-csl-record-scan",
+          "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "The exact content notes state that the four-speed gearbox was replaced by a Getrag five-speed box; BMW technical data and the FIA extension list corroborate the Getrag five-speed configuration. The FIA form records a manual stick-shift arrangement for the five-speed gearbox, and the exact content notes identify the corresponding Getrag five-speed race box. This establishes manual lever actuation, represented by the project's H-pattern actuation value, but not the exact gate layout. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-acl-gtr-bmw-csl-3-0-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-24"
+}

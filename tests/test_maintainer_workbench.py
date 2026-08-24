@@ -67,6 +67,13 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn('id="progress"', page)
         self.assertIn("Regenerating release outputs, validating the dataset", page)
         self.assertIn("beginProgress(button,'Finalizing release", page)
+        self.assertIn("Complete: dataset ${r.dataset_version} finalized", page)
+        self.assertIn("Finalization failed: ${e.message}", page)
+        self.assertIn("endProgress(button,outcome,failed)", page)
+        self.assertIn(
+            "if(action==='generate-research-brief')await loadArtifact('research_brief')",
+            page,
+        )
         self.assertIn("state-final-review", page)
         self.assertIn("state-identity-research", page)
         self.assertIn('const token="test-token"', page)

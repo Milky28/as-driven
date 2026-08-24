@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.23",
+  "dataset_version": "0.4.25",
   "released_at": "2026-08-24",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -20,6 +20,7 @@
     "cars/audi-r8-v10-gt.json",
     "cars/audi-v8-quattro-dtm.json",
     "cars/bmw-2002-turbo.json",
+    "cars/bmw-3-0-csl-imsa-1975.json",
     "cars/bmw-m-hybrid-v8.json",
     "cars/bmw-m1-procar.json",
     "cars/bmw-m3-e46-gtr.json",
@@ -50,6 +51,7 @@
     "cars/chevrolet-cruze-stock-car-2019.json",
     "cars/chevrolet-cruze-stock-car-2020.json",
     "cars/chevrolet-cruze-stock-car-2022.json",
+    "cars/chevrolet-cruze-stock-car-2023.json",
     "cars/chevrolet-cruze-stock-car-2024.json",
     "cars/chevrolet-omega-stock-car-1999.json",
     "cars/chevrolet-opala-old-stock-race.json",

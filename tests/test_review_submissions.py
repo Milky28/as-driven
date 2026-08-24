@@ -382,6 +382,22 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertIn("not-established", brief)
             self.assertIn("do not edit `data/v1`", brief.lower())
             self.assertIn("Public Test Car", brief)
+            self.assertIn(
+                "/authentic_controls/transmission/upshift/clutch",
+                brief,
+            )
+            self.assertIn(
+                "Every source object must include all schema-required fields",
+                brief,
+            )
+            self.assertIn(
+                "include a claim for every `/authentic_controls/` path",
+                brief,
+            )
+            self.assertIn(
+                "Those registered values are canonical",
+                brief,
+            )
             template = json.loads(
                 (case_dir / "research-result.template.json").read_text(encoding="utf-8")
             )

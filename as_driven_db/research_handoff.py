@@ -187,6 +187,7 @@ def _brief_markdown(
     case: dict[str, Any],
     staged: dict[str, Any],
     leads: dict[str, Any],
+    claim_paths: list[str],
 ) -> str:
     issue = case["issue"]
     observation = case["observation"]
@@ -231,11 +232,23 @@ These are deterministic research leads only: exact curated identity matches or d
 
 {questions}
 
+## Permitted claim paths
+
+Use only the exact JSON pointers below for `claims[].path`. Do not infer a path from the staged observation's nesting or invent a shorthand.
+
+If `research_status` is `complete`, include a claim for every `/authentic_controls/` path in this list. Use `not-established` with the reviewed source references when the evidence does not settle a field.
+
+```json
+{json.dumps(claim_paths, indent=2, ensure_ascii=False)}
+```
+
 ## Required output
 
 Return one JSON object conforming to `schema/v1/submission-research-result.schema.json`. Start from `research-result.template.json` in this case directory and save the completed object as `research-result.json` in the same directory. The maintainer workbench discovers that file when its local queue is refreshed.
 
-Every established, conflicting, or negative field-level finding belongs in `claims`. `source_refs` must name candidate sources declared in `sources`. For a negative result, list the exact sources reviewed and explain what they cover without claiming their silence proves a negative. Use `research_status: complete` only when the evidence is adequate for final maintainer review; use `partial` or `blocked` otherwise.
+Every established, conflicting, or negative field-level finding belongs in `claims`. `source_refs` must name candidate sources declared in `sources`. Every source object must include all schema-required fields, including `retrieved_at`. For a negative result, list the exact sources reviewed and explain what they cover without claiming their silence proves a negative. Use `research_status: complete` only when the evidence is adequate for final maintainer review; use `partial` or `blocked` otherwise.
+
+When reusing a `source_id` from the related curated-record leads, copy its `title`, `publisher`, `url`, and `source_type` exactly. Those registered values are canonical, including punctuation, accents, and capitalization.
 """
 
 
@@ -250,10 +263,18 @@ def generate_research_brief(
     staged = _read_json(staged_path, "staged bundle")
     receipt = _read_json(case_directory / case["artifacts"]["receipt"], "intake receipt")
     leads = related_record_leads(root, case, receipt)
+    research_schema = _read_json(
+        root / "schema" / "v1" / "submission-research-result.schema.json",
+        "research-result schema",
+    )
+    claim_paths = sorted(_research_claim_schemas(root, research_schema))
 
     brief_path = case_directory / "research-brief.md"
     template_path = case_directory / "research-result.template.json"
-    brief_path.write_text(_brief_markdown(case, staged, leads), encoding="utf-8")
+    brief_path.write_text(
+        _brief_markdown(case, staged, leads, claim_paths),
+        encoding="utf-8",
+    )
     _write_json(template_path, _result_template(case))
     case.setdefault("artifacts", {})["research_brief"] = brief_path.name
     case["artifacts"]["research_result_template"] = template_path.name

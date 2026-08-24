@@ -1,13 +1,13 @@
 # Control archetypes
 
-**Status: 252 of 256 records are classified** - 158 matches, 68 deviations, 15 undetermined, 11 with no archetype, and 4 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
+**Status: 252 of 258 records are classified** - 158 matches, 68 deviations, 15 undetermined, 11 with no archetype, and 6 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
 the rules below while identifying records that still await classification.
 
 ## The observation
 
-Across the 256 curated records there are **73 distinct transmission blocks**.
+Across the 258 curated records there are **74 distinct transmission blocks**.
 Nine records in ten restate a pattern that already exists elsewhere in the
 dataset. The four largest compatible families alone cover 91 records:
 
@@ -18,7 +18,7 @@ dataset. The four largest compatible families alone cover 91 records:
 | 16 | 6-speed paddles, clutch to pull away, automatic cut and blip |
 | 15 | 5-speed standard H-pattern, clutch to pull away, lift on upshift, optional blip |
 
-Only 31 records are one of a kind.
+Only 32 records are one of a kind.
 
 The GT3 records `audi-r8-lms-gt3`, `mclaren-720s-gt3-evo`,
 `lamborghini-huracan-gt3-evo2` and `aston-martin-vantage-gt3-evo` share the same
