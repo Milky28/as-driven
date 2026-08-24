@@ -233,7 +233,7 @@ These are deterministic research leads only: exact curated identity matches or d
 
 ## Required output
 
-Return one JSON object conforming to `schema/v1/submission-research-result.schema.json`. Start from `research-result.template.json` in this case directory and save the completed object as a separate file for import.
+Return one JSON object conforming to `schema/v1/submission-research-result.schema.json`. Start from `research-result.template.json` in this case directory and save the completed object as `research-result.json` in the same directory. The maintainer workbench discovers that file when its local queue is refreshed.
 
 Every established, conflicting, or negative field-level finding belongs in `claims`. `source_refs` must name candidate sources declared in `sources`. For a negative result, list the exact sources reviewed and explain what they cover without claiming their silence proves a negative. Use `research_status: complete` only when the evidence is adequate for final maintainer review; use `partial` or `blocked` otherwise.
 """
@@ -307,6 +307,79 @@ def generate_research_briefs(
     ]
 
 
+def _resolve_schema_node(schema: dict[str, Any], node: dict[str, Any]) -> dict[str, Any]:
+    while isinstance(node.get("$ref"), str) and node["$ref"].startswith("#/"):
+        current: Any = schema
+        for token in node["$ref"][2:].split("/"):
+            current = current[token.replace("~1", "/").replace("~0", "~")]
+        node = current
+    return node
+
+
+def _leaf_schema_paths(
+    schema: dict[str, Any],
+    node: dict[str, Any],
+    prefix: str,
+) -> dict[str, dict[str, Any]]:
+    node = _resolve_schema_node(schema, node)
+    properties = node.get("properties")
+    if not isinstance(properties, dict):
+        return {prefix: node}
+    paths: dict[str, dict[str, Any]] = {}
+    for key, child in properties.items():
+        if not isinstance(child, dict):
+            continue
+        paths.update(
+            _leaf_schema_paths(
+                schema,
+                child,
+                f"{prefix}/{key}",
+            )
+        )
+    return paths
+
+
+def _research_claim_schemas(
+    root: Path,
+    research_schema: dict[str, Any],
+) -> dict[str, dict[str, Any]]:
+    car_schema = _read_json(
+        root / "schema" / "v1" / "car-record.schema.json",
+        "car-record schema",
+    )
+    controls_node = car_schema["properties"]["authentic_controls"]
+    claims = _leaf_schema_paths(
+        car_schema,
+        controls_node,
+        "/authentic_controls",
+    )
+    claims = {
+        path: node
+        for path, node in claims.items()
+        if not path.endswith("/notes") and not path.endswith("/source_label")
+    }
+    identity_node = _resolve_schema_node(
+        research_schema,
+        research_schema["properties"]["identity"],
+    )
+    identity_fields = {
+        "record_action",
+        "record_id",
+        "display_name",
+        "manufacturer",
+        "model",
+        "year",
+        "class",
+        "real_world_identity_notes",
+    }
+    for key in identity_fields:
+        claims[f"/identity/{key}"] = _resolve_schema_node(
+            research_schema,
+            identity_node["properties"][key],
+        )
+    return claims
+
+
 def validate_research_result(
     root: Path,
     case: dict[str, Any],
@@ -318,6 +391,7 @@ def validate_research_result(
         "research-result schema",
     )
     errors = validate_instance(result, schema, label)
+    claim_schemas = _research_claim_schemas(root, schema)
     if result.get("case_id") != case.get("case_id"):
         errors.append(
             f"{label}.case_id: expected {case.get('case_id')!r} for this review case"
@@ -339,6 +413,20 @@ def validate_research_result(
         for index, claim in enumerate(claims):
             if not isinstance(claim, dict):
                 continue
+            path = str(claim.get("path") or "")
+            claim_schema = claim_schemas.get(path)
+            if claim_schema is None:
+                errors.append(
+                    f"{label}.claims[{index}].path: unknown research field {path!r}"
+                )
+            elif path.startswith("/authentic_controls/") and "proposed_value" in claim:
+                errors.extend(
+                    validate_instance(
+                        claim["proposed_value"],
+                        claim_schema,
+                        f"{label}.claims[{index}].proposed_value",
+                    )
+                )
             refs = claim.get("source_refs")
             if isinstance(refs, list):
                 unknown = sorted(set(refs) - known_sources)
@@ -350,8 +438,8 @@ def validate_research_result(
                     errors.append(
                         f"{label}.claims[{index}].source_refs: findings need at least one reviewed source"
                     )
-            if str(claim.get("path") or "").startswith("/identity/"):
-                identity_claim_paths.add(str(claim["path"]))
+            if path.startswith("/identity/"):
+                identity_claim_paths.add(path)
 
     identity = result.get("identity")
     status = result.get("research_status")
@@ -440,11 +528,18 @@ def import_research_result(
         raise ResearchHandoffError("research result validation failed:\n" + "\n".join(errors))
 
     destination = case_directory / "research-result.json"
-    if destination.exists() and not replace:
+    input_is_destination = input_path.resolve() == destination.resolve()
+    already_registered = isinstance(
+        case.get("artifacts", {}).get("research_result"), str
+    )
+    if destination.exists() and not replace and not (
+        input_is_destination and not already_registered
+    ):
         raise ResearchHandoffError(
             f"research result already exists for issue #{issue_number}; pass --replace to supersede local working state"
         )
-    destination.write_bytes(raw)
+    if not input_is_destination:
+        destination.write_bytes(raw)
     research_status = result["research_status"]
     state_by_status = {
         "complete": "final-review",
@@ -473,3 +568,40 @@ def import_research_result(
         "state": case["state"],
         "result": str(destination),
     }
+
+
+def discover_research_results(
+    root: Path,
+    cases_directory: Path,
+) -> dict[str, Any]:
+    """Validate and register completed result files written into case folders."""
+
+    imported: list[dict[str, Any]] = []
+    errors: list[dict[str, Any]] = []
+    if not cases_directory.exists():
+        return {"found": 0, "imported": imported, "errors": errors}
+    found = 0
+    for case_path in sorted(cases_directory.glob("issue-*/case.json")):
+        try:
+            issue_number = int(case_path.parent.name.removeprefix("issue-"))
+            case = _read_json(case_path, "review case")
+        except (ValueError, ResearchHandoffError):
+            continue
+        if isinstance(case.get("artifacts", {}).get("research_result"), str):
+            continue
+        candidate = case_path.parent / "research-result.json"
+        if not candidate.is_file():
+            continue
+        found += 1
+        try:
+            imported.append(
+                import_research_result(
+                    root,
+                    cases_directory,
+                    issue_number,
+                    candidate,
+                )
+            )
+        except ResearchHandoffError as exception:
+            errors.append({"issue": issue_number, "error": str(exception)})
+    return {"found": found, "imported": imported, "errors": errors}

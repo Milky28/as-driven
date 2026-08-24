@@ -27,6 +27,9 @@ from .importers.observation import REVIEW, derive_approved_controls
 from .validate import ID_RE
 
 
+OPTIONAL_TRANSMISSION_FIELDS = {"first_gear_position"}
+
+
 def _required(entry: dict[str, Any], name: str, label: str) -> Any:
     value = entry.get(name)
     if value is None or value == "" or value == REVIEW:
@@ -193,7 +196,10 @@ def build_promoted_record(
                 raise ValueError(f"{label}: unknown wheel_rim field(s) {unknown!r}")
             wheel.update(value)
             continue
-        if name not in record["authentic_controls"]["transmission"]:
+        if (
+            name not in record["authentic_controls"]["transmission"]
+            and name not in OPTIONAL_TRANSMISSION_FIELDS
+        ):
             raise ValueError(f"{label}: unknown transmission field {name!r}")
         record["authentic_controls"]["transmission"][name] = value
         if name == "shift_actuation":

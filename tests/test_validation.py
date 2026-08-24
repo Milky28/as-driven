@@ -2,6 +2,7 @@ import json
 import re
 from pathlib import Path
 import shutil
+import subprocess
 import tempfile
 import unittest
 
@@ -21,6 +22,27 @@ ROOT = Path(__file__).parents[1]
 
 
 class ValidationTests(unittest.TestCase):
+    def test_tracked_files_do_not_use_em_dashes(self) -> None:
+        """Keep project copy on ordinary punctuation that is easy to type."""
+        completed = subprocess.run(
+            ["git", "ls-files", "-z"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        )
+        offenders = []
+        for relative in completed.stdout.decode("utf-8").split("\0"):
+            if not relative:
+                continue
+            path = ROOT / relative
+            try:
+                text = path.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                continue
+            if "\u2014" in text:
+                offenders.append(relative)
+        self.assertEqual([], offenders)
+
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repository(ROOT), [])
 

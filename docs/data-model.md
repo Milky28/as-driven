@@ -170,11 +170,11 @@ piece of hardware you would fit:
 
 Take the first value that matches:
 
-1. `gt-formula` — a control-panel rim. Modern GT, formula and prototype cars all
+1. `gt-formula` - a control-panel rim. Modern GT, formula and prototype cars all
    share it, and it usually carries a display and rev lights.
-2. `yoke` — two grips with nothing joining them over the top.
-3. `d-shaped` — a conventional rim flattened at the bottom, the top, or both.
-4. `round` — a conventional rim that is a continuous circle.
+2. `yoke` - two grips with nothing joining them over the top.
+3. `d-shaped` - a conventional rim flattened at the bottom, the top, or both.
+4. `round` - a conventional rim that is a continuous circle.
 
 Use `other` for a rim that genuinely matches none of these, and `unknown` when
 the rim was not seen.
@@ -184,7 +184,7 @@ three ways along racing class, which is information the car's name already
 carries: a driver who knows they are about to drive a formula car does not need
 the database to tell them to fit a smaller rim. The three produced the same
 client icon, and the boundaries between them were not decidable from the
-cockpit — modern formula and GT rims are closed over the top alike, so no
+cockpit - modern formula and GT rims are closed over the top alike, so no
 geometric test separated them. They remain in the enum so existing records and
 drafts stay valid, but new records must not use them.
 
@@ -196,13 +196,13 @@ control face do.
 Shape is separate from the optional `integrated_display`, `shift_lights`, and
 `open_top` fields, so any shape may be recorded with or without each of them.
 
-- `integrated_display` — any readout carried **on the rim itself**: a graphical
+- `integrated_display` - any readout carried **on the rim itself**: a graphical
   LCD, an LED numeric gear indicator, or a segment display. A dash mounted on
   the car rather than the rim does not count, and shift lights alone do not
   count.
-- `shift_lights` — shift or rev lights on the rim, recorded independently of
+- `shift_lights` - shift or rev lights on the rim, recorded independently of
   `integrated_display`.
-- `open_top` — whether the rim is open across the top. It is a modifier that
+- `open_top` - whether the rim is open across the top. It is a modifier that
   applies to any shape, so a `formula` rim records `open_top: yes` and a
   `gt-style` rim records `no`. A `yoke` is always `open_top: yes`.
 

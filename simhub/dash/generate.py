@@ -368,7 +368,7 @@ def _preview_badge(
         ]
     else:
         text_items = [
-            factory.text("PreviewBadgeText", "PREVIEW — NOT LIVE", left, top, width, height, 10.5, "#FF07121C", horizontal_alignment=1, font_weight="Bold"),
+            factory.text("PreviewBadgeText", "PREVIEW - NOT LIVE", left, top, width, height, 10.5, "#FF07121C", horizontal_alignment=1, font_weight="Bold"),
         ]
     return factory.layer(
         "PreviewBadge",
@@ -764,7 +764,7 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
         factory.rectangle("FooterRule", left, 331, width, 1, SLATE),
         factory.text("Evidence", "", left, 337, width - 180, 19, 11.5, MUTED,
                      expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
-                                "[AsDriven.VerifiedGameVersion]) + '  -  Confidence: ' + "
+                                "[AsDriven.VerifiedGameVersion]) + ' - Confidence: ' + "
                                 + _confidence_value_expression()),
         factory.text("Dataset", "", left + width - 180, 337, 180, 19, 11.5, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
@@ -790,7 +790,7 @@ def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
         factory.rectangle("FooterRule", left, 266, width, 1, SLATE),
         factory.text("Evidence", "", left, 272, width - 150, 18, 10, MUTED,
                      expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
-                                "[AsDriven.VerifiedGameVersion]) + '  -  ' + "
+                                "[AsDriven.VerifiedGameVersion]) + ' - ' + "
                                 + _confidence_value_expression()),
         factory.text("Dataset", "", left + width - 150, 272, 150, 18, 10, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
@@ -824,7 +824,7 @@ def _matched_glance(factory: ItemFactory) -> dict[str, Any]:
                                left, 67, 26, 13, 8, expression="'USE'", alignment=1))
     children.extend(_tone_text(factory, "UseValue", "UseBandTone", "",
                                left + 33, 64, width - 33, 19, 12.5,
-                               expression="[AsDriven.LaunchLabel] + '  -  ' + "
+                               expression="[AsDriven.LaunchLabel] + ' - ' + "
                                           "[AsDriven.UpshiftLabel]"))
     children.append(
         factory.text("Downshift", "", left + 33, 88, width - 33, 18, 11.5, MUTED,

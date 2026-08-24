@@ -4830,7 +4830,7 @@
     },
     {
       "source_id": "reiter.murcielago-rgt.technical",
-      "title": "Technical Data — REITER Lamborghini Murcielago R-GT",
+      "title": "Technical Data - REITER Lamborghini Murcielago R-GT",
       "publisher": "REITER Engineering",
       "url": "https://storage.e.jimdo.com/file/b5741db8-8a3c-4632-9fd1-50994cd9585b/R-GT%20%231057.pdf",
       "archive_url": null,
@@ -5658,7 +5658,7 @@
     },
     {
       "source_id": "deagostini.classic-team-lotus.lotus-98t",
-      "title": "Lotus 98T — Ayrton Senna",
+      "title": "Lotus 98T - Ayrton Senna",
       "publisher": "De Agostini Publishing / Classic Team Lotus",
       "url": "https://d24udp600h4lxn.cloudfront.net/dea/live/media/27-lotus-senna-uk-web/27-lotus-senna-uk-web.pdf",
       "archive_url": null,
@@ -7225,6 +7225,127 @@
       "retrieved_at": "2026-08-24",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "mclaren.official-article.f1-lm",
+      "title": "Gotta collect 'em all: Scrutineering our LEGO sets offering",
+      "publisher": "McLaren Racing",
+      "url": "https://www.mclaren.com/racing/partners/lego/our-lego-offering/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: McLaren's official retrospective description of the McLaren F1 LM road-car specification and its relationship to the 1995 Le Mans-winning F1 GTR. Article lines 212-220, McLaren F1 LM section: “The LM specification was produced in honour of its Le Mans' winning counterpart, with only five made.” Reviewed for /identity, /identity/year, /identity/class, /identity/real_world_identity_notes. Strong manufacturer identity evidence, but this article does not document shift technique or rim electronics."
+    },
+    {
+      "source_id": "mclaren.official-heritage.f1-gtr-1995",
+      "title": "F1 GTR",
+      "publisher": "McLaren Racing Heritage",
+      "url": "https://www.mclaren.com/racing/heritage/formula-1/cars/1995-mclaren-f1-gtr/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: McLaren's official history of the 1995 F1 GTR race car and its distinction from the standard road-going F1. Heritage page lines 141-153: “The racing version of the F1 that went to Le Mans in June, the GTR, was only slightly modified from the standard road-going model.” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. Used to keep the simulator's F1 LM name separate from the exact 1995 F1 GTR race identity; it is not used as LM gearbox-technique evidence."
+    },
+    {
+      "source_id": "bmw.heritage.2016-mclaren-f1-gtr",
+      "title": "Efficient Dynamics: 1996 McLaren F1 GTR Powered by BMW",
+      "publisher": "BMW Group PressClub USA",
+      "url": "https://www.press.bmwgroup.com/usa/article/attachment/T0262831EN_US/365046",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW's heritage release distinguishing standard F1 road cars, five LMs, GTR race cars, prototypes, and the LM prototype. PDF printed p.4, 1996 McLaren F1 GTR Powered by BMW: “64 ... standard street version (F1), five were LMs ... 28 racecars (GTR) and one LM prototype (XP LM).” Reviewed for /identity, /identity/real_world_identity_notes, /identity/confusion_risks. Manufacturer production-count evidence. It does not specify the LM's control technique.",
+      "published_or_updated_at": "2016-08-01"
+    },
+    {
+      "source_id": "mclaren.technical-sheet.f1-lm-roadcar",
+      "title": "McLaren F1 LM Roadcar - Specification",
+      "publisher": "McLaren Automotive",
+      "url": "https://www.allcarcentral.com/McLaren_pdf/McLAREN_F1_LM_ROADCAR-SPECIFICATION.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: A McLaren Automotive F1 LM road-car specification sheet, accessed through a mirror; the sheet covers the exact LM powertrain and steering system. PDF printed p.1, Transmission rows: “All synchro constant mesh 6 Speed” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. PDF printed p.1, Clutch rows: “Triple plate Carbon/Carbon ... Remote actuation (hydraulic)” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/standing_start_clutch. PDF printed p.1, Steering row: “Steering Unassisted rack and pinion” Reviewed for /authentic_controls/steering/wheel_rim. This is the strongest exact-LM hardware source reviewed. The sheet also says straight-cut gears; that describes tooth form and does not by itself contradict its explicit all-synchromesh statement. The mirror-hosted copy should be provenance-checked before registration."
+    },
+    {
+      "source_id": "supercar-nostalgia.f1-lm-technical-appraisal",
+      "title": "Guide: the F1 Goes Homologation Special - a Historical & Technical Appraisal of the McLaren F1 LM",
+      "publisher": "Supercar Nostalgia",
+      "url": "https://supercarnostalgia.com/blog/mclaren-f1-lm",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specialist historical and technical account of the factory F1 LM, including prototype timing, GTR-derived transmission, cockpit instruments, steering wheel, and customer-car production. Article lines 48-54: “For 1996 ... they launched a revamped base car equipped with some special equipment: the F1 LM.” Reviewed for /identity/year, /identity/model. Article lines 77-94: “Transmission was via a GTR-sourced straight cut six-speed manual gearbox.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /identity/real_world_identity_notes. Article lines 117-125: “Green on black analogue instrumentation was unique to the LM ... A suede-rimmed GTR steering wheel was fitted” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display. Article lines 138-147: “The five F1 LM customer cars were produced over the spring and summer of 1996.” Reviewed for /identity/year, /identity/real_world_identity_notes. Useful secondary corroboration. It describes a manual gear lever and cockpit instrumentation but does not provide a shift procedure, first-gear location, or wheel light specification.",
+      "author": "Ben Tyer",
+      "published_or_updated_at": "2020-09-21"
+    },
+    {
+      "source_id": "motortrend.f1-lm-2000",
+      "title": "McLarenF1 LM: King Of The Super Cars",
+      "publisher": "MotorTrend",
+      "url": "https://www.motortrend.com/reviews/2000-mclaren-f1-supercar",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period road test of a factory McLaren F1 LM, including its identity, road-legal GTR-derived configuration, transmission, and driver comments. Article lines 43-57: “To celebrate that feat, five LMs were built ... The LM is instead a GTR without its racegoing restrictions” Reviewed for /identity, /identity/real_world_identity_notes. Article lines 86-95: “'96 MCLAREN F1 LM ... Transmission type | 6-speed manual” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Article lines 30-31 and 57: “warming up the gearbox to ease the two split-second upchanges” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift. The test confirms manual operation and GTR-derived straight-cut hardware but does not state whether the driver uses the clutch, lifts, cuts, or blips for each shift.",
+      "author": "Greg Fountain",
+      "published_or_updated_at": "2000-04-02"
+    },
+    {
+      "source_id": "road-and-track.f1-gearbox",
+      "title": "Even the McLaren F1's Gearbox Has an Amazing Story",
+      "publisher": "Road & Track",
+      "url": "https://www.roadandtrack.com/car-culture/classic-cars/a19862056/even-the-mclaren-f1s-gearbox-has-an-amazing-story/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Technical history of the standard McLaren F1/Weismann gearbox development; used only as corroborative family evidence, not as a substitute for the exact LM specification sheet. Article lines 108-117: “the solution came when they combined Weismann's gearbox design with the synchronizer sets straight out of the ... E34” Reviewed for /authentic_controls/transmission/gearbox_type. Article lines 128-135: “the McLaren F1 debuted with a transverse Weismann box filled with BMW E34 synchronizers” Reviewed for /authentic_controls/transmission/gearbox_type. The article is not exact-LM documentation and is intentionally secondary corroboration only.",
+      "published_or_updated_at": "2018-05-03"
+    },
+    {
+      "source_id": "wikimedia.f1-lm-interior",
+      "title": "File:1995 McLaren F1 LM 6.1 Interior.jpg",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File%3A1995_McLaren_F1_LM_6.1_Interior.jpg",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: CC BY-SA photograph of a McLaren F1 LM interior, used for visible steering-rim topology only. Image, original 2450 x 2000; file description lines 123-129: “1995 McLaren F1 LM 6.1 Interior” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top. The image visibly shows a continuous circular three-spoke suede-rimmed wheel with material over the top. It is not used to make a negative claim about powered-off shift lights or an integrated display. The file title's year is not used for identity dating because the customer cars were produced in 1996.",
+      "author": "Chelsea Jay",
+      "archive_url": "https://commons.wikimedia.org/w/index.php?title=File:1995_McLaren_F1_LM_6.1_Interior.jpg&oldid=986992873",
+      "published_or_updated_at": "2018-09-01"
+    },
+    {
+      "source_id": "community.f1-lm-standard-gated-pattern",
+      "title": "Beyond the Ultimate: The Definitive McLaren F1 LM Archive",
+      "publisher": "Automotive Forums",
+      "url": "https://www.automotiveforums.com/t1014902/beyond_the_ultimate_the_definitive_mclaren_f1_lm_archive.html",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Community discussion focused on the McLaren F1 LM and related F1 road cars; one post addresses the road-car gate rather than the later F1 GTR Longtail race gearbox. Discussion post describing road cars including the F1 LMs: “the road cars (including the F1 LMs) all had a standard transmission with the gated shift pattern” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Low-confidence community evidence only. It supports a standard gated H interpretation but does not supply a factory gate diagram or first-gear position."
+    },
+    {
+      "source_id": "as-driven.repository.mclaren-record-scan",
+      "title": "As Driven curated McLaren record scan",
+      "publisher": "Milky28/as-driven repository",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Checked-out data/v1/cars directory and exact existing McLaren record IDs reviewed for issue #4 record-action routing. Exact record-id scan in the checked-out curated data: “No curated mclaren-f1-lm or mclaren-f1-lm-1996 record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository-context evidence, not real-car evidence. It supports the proposed create-new action only."
+    },
+    {
+      "source_id": "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91",
+      "title": "Live AMS2 McLaren F1 LM guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/4",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

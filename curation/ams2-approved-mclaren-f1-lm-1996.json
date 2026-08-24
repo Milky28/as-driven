@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.23",
+  "approved_at": "2026-08-24",
+  "record_id": "mclaren-f1-lm-1996",
+  "simulator": "ams2",
+  "telemetry_name": "McLaren F1 LM",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1996 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Supercars",
+  "staged_record_id": "mclaren-f1-lm"
+}

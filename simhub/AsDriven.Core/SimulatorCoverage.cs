@@ -23,7 +23,7 @@ namespace AsDriven.Core
         {
             get
             {
-                return DisplayName + " — " + RecordCount
+                return DisplayName + " - " + RecordCount
                     + (RecordCount == 1 ? " car" : " cars");
             }
         }

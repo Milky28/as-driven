@@ -91,7 +91,10 @@ version control.
 python -m as_driven_db review-submissions queue
 ```
 
-Use `--json` on either command for later tooling or a local workbench UI.
+Use `--json` on either command for other tooling. Queue entries include the
+durable routing `state`, a contributor-facing `display_state`, separate
+`publication_status`, and `allowed_actions`. A client must use those actions
+rather than reconstructing the workflow state machine itself.
 Current automatic case states are:
 
 | State | Meaning |
@@ -102,10 +105,53 @@ Current automatic case states are:
 | `duplicate` | The exact attachment bytes already exist in the intake inbox. |
 | `released` | This exact observation already appears in curated provenance. |
 | `intake-error` | Download, attachment, schema, or staging failed; the next sync retries it. |
+| `final-review` | Complete research is imported and can be converted into a promotion proposal. |
+| `manifest-review` | A proposal passed its dry run and awaits explicit maintainer approval. |
+| `promoted` | Curated files were written; release finalization, commit, push, and contributor feedback remain. |
+
+`published` is a display state layered over a terminal routing state after the
+GitHub response has been sent. The underlying routing state is preserved for
+auditability.
 
 These are local routing decisions, not authenticity verdicts. In particular,
 `identity-research` does not assert that the contributor's proposed identity is
 correct.
+
+## Local maintainer workbench
+
+Start the dependency-free local interface from the repository root:
+
+```shell
+python -m as_driven_db review-submissions workbench
+```
+
+It binds only to `127.0.0.1`, opens the default browser, and remains available
+until its terminal is closed or interrupted. Use `--no-open` to print the URL
+without opening it, or `--port 0` to choose an available ephemeral port.
+
+The workbench is a thin adapter over this document's commands. It can:
+
+- synchronize the GitHub inbox and show the resulting queue;
+- display the submitted observation, intake receipt, research packet, source
+  proposal, preview record, and final-review packet;
+- present completed research as a formatted review with raw JSON available;
+- filter and prioritize the queue from the four summary cards, with distinct
+  colors for each workflow state;
+- generate and copy a provider-independent research brief;
+- import a completed structured research-result JSON file;
+- discover and validate `research-result.json` files written into case folders
+  when the local queue is refreshed;
+- prepare and dry-run the final review proposal;
+- promote only after the maintainer checks the explicit approval statement;
+- finalize the release only with the complete test gate; and
+- preview or publish GitHub feedback, with the same clean-tree and pushed-commit
+  checks as the CLI.
+
+The browser receives a per-process request token, mutating requests without it
+are refused, uploaded JSON is size-limited, artifact paths cannot escape their
+case directory, and the server refuses non-loopback binding. The ignored local
+case directory remains the workbench's state; it does not introduce a second
+database or state machine.
 
 ## Hand off identity research
 
@@ -127,6 +173,12 @@ Each selected case gains two ignored working files:
 research-brief.md
 research-result.template.json
 ```
+
+The researcher should save the completed object beside those files as
+`research-result.json`. **Refresh local queue** discovers it, validates it, and
+advances complete research to final review. The workbench also keeps a manual
+file picker available after a brief is generated when the result was saved
+somewhere else.
 
 The brief is provider-independent and can be handed to a human, Codex, Claude,
 or another research system. It contains contributor hints, the exact simulator
@@ -152,8 +204,9 @@ python -m as_driven_db review-submissions import-research 42 completed-research.
 ```
 
 Import checks the schema, exact case id, source-id uniqueness, claim/source
-cross-references, proposed record action, and whether a supposedly complete
-result actually resolves or explicitly conflicts on identity. It refuses to
+cross-references, canonical claim paths, proposed control value types, proposed
+record action, and whether a supposedly complete result actually resolves or
+explicitly conflicts on identity. It refuses to
 overwrite an existing local result unless the maintainer passes `--replace`.
 A complete result changes only the ignored local case state to `final-review`;
 partial and blocked results remain visibly routed for more work. No source is
@@ -188,6 +241,10 @@ drift, allocates the next numbered `curation/review-batch-N.json`, registers new
 sources, promotes the record and approval, and marks the ignored local case
 `promoted`. Omitting `--approve` changes nothing.
 
+The proposal does not invent an archetype classification. That optional
+classification is a separate reviewer decision and remains absent unless a
+maintainer deliberately adds a valid classification to the manifest.
+
 Promotion does not silently rewrite release-wide prose or machine-specific
 coverage inputs. After every approved case for a release is promoted, close the
 batch with:
@@ -200,7 +257,7 @@ The command regenerates the AMS2 exact-identity coverage manifest from the
 maintainer machine's current audit and SimHub identity files, rebuilds the
 cross-simulator disagreement audit, derives release and simulator counts from
 the curated records, refreshes maintained current-status references, rebuilds
-the offline site, validates the repository, and—with `--test`—runs the full
+the offline site, validates the repository, and - with `--test` - runs the full
 Python suite. Omitting `--test` leaves the suite visibly reported as not run.
 Historical version prose is not rewritten.
 

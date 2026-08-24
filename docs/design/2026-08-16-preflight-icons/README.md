@@ -3,8 +3,8 @@
 This review sheet evaluates the flat monochrome icon family intended for the
 row-based overlay proposal in the Claude artifact `As Driven Preflight Spec`.
 
-The family follows the proposal's four fixed rows—Wheel, Shifter, Clutch, and
-Throttle—while covering every value the current database can expose. The
+The family follows the proposal's four fixed rows - Wheel, Shifter, Clutch, and
+Throttle - while covering every value the current database can expose. The
 information symbol belongs to the optional driver-summary panel. `You`, `Car`,
 `n/a`, and `?` remain text tags rather than pictograms.
 

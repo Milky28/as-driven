@@ -49,7 +49,7 @@ namespace AsDriven.Core
             {
                 string label = string.IsNullOrWhiteSpace(CarClass)
                     ? BrowserName
-                    : BrowserName + " — " + CarClass;
+                    : BrowserName + " - " + CarClass;
                 return string.IsNullOrWhiteSpace(_qualifier)
                     ? label
                     : label + " (" + _qualifier + ")";

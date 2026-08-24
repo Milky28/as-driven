@@ -691,15 +691,15 @@ remain blocked behind an unverified base car.
 Guided-verification drives promoted through the `import-observation` staging
 tool, then reviewed with registered real-world sources:
 
-1. BMW M Hybrid V8 (LMDh) — clutch-free move-off, seven paddle gears, automatic
+1. BMW M Hybrid V8 (LMDh) - clutch-free move-off, seven paddle gears, automatic
    cut and blip; prototype display rim.
-2. Porsche 963 (LMDh) — as above; the live drive confirmed seven forward gears.
-3. Chevrolet Corvette GTP (1988 IMSA GTP) — H-pattern, five gears, standing-start
+2. Porsche 963 (LMDh) - as above; the live drive confirmed seven forward gears.
+3. Chevrolet Corvette GTP (1988 IMSA GTP) - H-pattern, five gears, standing-start
    clutch required, throttle lift to upshift, manual blip to downshift, no
    automatic cut or blip (Hewland VGC racing gearbox).
-4. MetalMoro AJR Chevrolet (P1) — clutch-free move-off, six paddle gears,
+4. MetalMoro AJR Chevrolet (P1) - clutch-free move-off, six paddle gears,
    automatic cut and blip.
-5. MetalMoro AJR Gen2 Chevrolet (P1Gen2) — reviewed independently from the base
+5. MetalMoro AJR Gen2 Chevrolet (P1Gen2) - reviewed independently from the base
    AJR; six paddle gears, automatic cut and blip.
 
 The BMW, Porsche, and Corvette base records each carry their exact `- Low

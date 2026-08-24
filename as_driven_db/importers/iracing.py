@@ -8,7 +8,7 @@ from typing import Any
 
 
 def _key(value: str) -> str:
-    value = value.replace("–", "-").replace("—", "-").replace("‑", "-")
+    value = value.replace("\u2013", "-").replace("\u2014", "-").replace("\u2011", "-")
     return re.sub(r"\s+", " ", value).strip().casefold()
 
 

@@ -337,7 +337,7 @@ selected. This prevents repeated previews from starting duplicate `Window1`
 overlay windows while still updating the card immediately.
 Version 0.10.3 starts only the selected surface in idle preview mode, so preview
 creates one overlay window instead of one each for Detailed, Compact, and
-Glance. Preview cards carry a prominent `PREVIEW — NOT LIVE` badge, and the
+Glance. Preview cards carry a prominent `PREVIEW - NOT LIVE` badge, and the
 native page provides a clearly labeled **Close preview** button. Compact grows
 to 520×300 and includes the two-line driving-technique summary at a smaller type
 size; Glance remains icon-only. Detailed remains 840×360, matching the popup

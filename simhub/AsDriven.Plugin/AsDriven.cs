@@ -713,7 +713,7 @@ namespace AsDriven.Plugin
             }
             string title = "[Observation]: "
                 + simulatorDisplayName.Trim()
-                + " — "
+                + " - "
                 + telemetryName.Trim();
             return baseUrl + "&title=" + Uri.EscapeDataString(title);
         }

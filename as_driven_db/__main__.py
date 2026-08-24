@@ -20,6 +20,11 @@ from .review_proposal import prepare_review_proposal
 from .review_promotion import promote_review_case
 from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
+from .maintainer_workbench import (
+    WorkbenchApplication,
+    WorkbenchError,
+    run_workbench,
+)
 from .review_submissions import (
     DEFAULT_LABEL,
     DEFAULT_REPOSITORY,
@@ -233,6 +238,26 @@ def _parser() -> argparse.ArgumentParser:
     release_finalize.add_argument(
         "--json", action="store_true", help="print finalization metadata as JSON"
     )
+    workbench = submission_actions.add_parser(
+        "workbench",
+        help="run the local contribution review interface",
+    )
+    workbench.add_argument("--root", type=Path, default=Path.cwd())
+    workbench.add_argument("--repo", default=DEFAULT_REPOSITORY)
+    workbench.add_argument("--label", default=DEFAULT_LABEL)
+    workbench.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    workbench.add_argument(
+        "--inbox", type=Path, default=Path("build") / "observation-intake"
+    )
+    workbench.add_argument("--host", default="127.0.0.1")
+    workbench.add_argument("--port", type=int, default=8765)
+    workbench.add_argument(
+        "--no-open",
+        action="store_true",
+        help="print the local URL without opening the default browser",
+    )
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
     ams2.add_argument("input", type=Path)
@@ -421,6 +446,25 @@ def main(argv: list[str] | None = None) -> int:
                 )
             return 0
 
+        if args.submission_action == "workbench":
+            try:
+                run_workbench(
+                    WorkbenchApplication(
+                        root,
+                        repository=args.repo,
+                        label=args.label,
+                        cases_directory=args.cases_dir,
+                        inbox=args.inbox,
+                    ),
+                    host=args.host,
+                    port=args.port,
+                    open_browser=not args.no_open,
+                )
+            except (WorkbenchError, OSError, ValueError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            return 0
+
         assert cases_dir is not None
         if args.submission_action == "sync":
             try:
@@ -595,7 +639,7 @@ def main(argv: list[str] | None = None) -> int:
         print("ISSUE  STATE                RESEARCH       CLASSIFICATION                SIM   CAR")
         for case in cases:
             issue = f"#{case['issue']}"
-            state = str(case["state"] or "unknown")[:20]
+            state = str(case["display_state"] or "unknown")[:20]
             research = str(case["research"] or "-")[:14]
             classification = str(case["classification"] or "-")[:29]
             simulator = str(case["simulator"] or "-").upper()[:5]

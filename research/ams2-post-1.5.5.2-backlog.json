@@ -47,7 +47,7 @@
     "identity_comparison": []
   },
   "non_standalone_source_events": [
-    "2025: Aston Martin Vantage GT3 Evo — second configuration not named by Reiza",
+    "2025: Aston Martin Vantage GT3 Evo - second configuration not named by Reiza",
     "2025: Ligier European Series",
     "2025: Vintage Cars Tier 1",
     "2025: Vintage Cars Tier 2",
@@ -1828,7 +1828,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Aston Martin Valkyrie Hypercar — low-downforce configuration",
+      "item_name": "Aston Martin Valkyrie Hypercar - low-downforce configuration",
       "event_type": "variant",
       "class": "GTP / LMDh",
       "release_version": "1.6.6.0",
@@ -1860,7 +1860,7 @@
         "rationale": "Configuration-level event. Do not create a standalone controls record unless exact telemetry and materially different controls justify it."
       },
       "control_source_research": {
-        "item_name": "Aston Martin Valkyrie Hypercar — low-downforce configuration",
+        "item_name": "Aston Martin Valkyrie Hypercar - low-downforce configuration",
         "sources": [
           {
             "title": "Valkyrie takes the ultimate hypercar from the road to the track as new quest for Le Mans glory begins",
@@ -1980,7 +1980,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Aston Martin Vantage GT3 Evo — second configuration not named by Reiza",
+      "item_name": "Aston Martin Vantage GT3 Evo - second configuration not named by Reiza",
       "event_type": "uncertain",
       "class": "GTD / GT3 Gen2",
       "release_version": "1.6.6.0",
@@ -2585,7 +2585,7 @@
         "item_name": "Lamborghini Murcielago R-GT",
         "sources": [
           {
-            "title": "Technical Data — REITER Lamborghini Murcielago R-GT",
+            "title": "Technical Data - REITER Lamborghini Murcielago R-GT",
             "publisher": "REITER Engineering",
             "url": "https://storage.e.jimdo.com/file/b5741db8-8a3c-4632-9fd1-50994cd9585b/R-GT%20%231057.pdf",
             "source_type": "constructor_technical_brochure",
@@ -3051,7 +3051,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Aston Martin DBR9 GT1 — low-downforce configuration",
+      "item_name": "Aston Martin DBR9 GT1 - low-downforce configuration",
       "event_type": "variant",
       "class": "2005 GT1",
       "release_version": "1.6.8.5",
@@ -3083,7 +3083,7 @@
         "rationale": "Configuration-level event. Do not create a standalone controls record unless exact telemetry and materially different controls justify it."
       },
       "control_source_research": {
-        "item_name": "Aston Martin DBR9 GT1 — low-downforce configuration",
+        "item_name": "Aston Martin DBR9 GT1 - low-downforce configuration",
         "sources": [
           {
             "title": "The five best Aston Martin racing cars",
@@ -3328,7 +3328,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Corvette C5.R — low-downforce configuration",
+      "item_name": "Corvette C5.R - low-downforce configuration",
       "event_type": "variant",
       "class": "2005 GT1",
       "release_version": "1.6.8.5",
@@ -3360,7 +3360,7 @@
         "rationale": "Configuration-level event. Do not create a standalone controls record unless exact telemetry and materially different controls justify it."
       },
       "control_source_research": {
-        "item_name": "Corvette C5.R — low-downforce configuration",
+        "item_name": "Corvette C5.R - low-downforce configuration",
         "sources": [
           {
             "title": "2003 Corvette C5-R specifications",
@@ -3623,7 +3623,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Lamborghini Murcielago R-GT — low-downforce configuration",
+      "item_name": "Lamborghini Murcielago R-GT - low-downforce configuration",
       "event_type": "variant",
       "class": "2005 GT1",
       "release_version": "1.6.8.5",
@@ -3655,10 +3655,10 @@
         "rationale": "Configuration-level event. Do not create a standalone controls record unless exact telemetry and materially different controls justify it."
       },
       "control_source_research": {
-        "item_name": "Lamborghini Murcielago R-GT — low-downforce configuration",
+        "item_name": "Lamborghini Murcielago R-GT - low-downforce configuration",
         "sources": [
           {
-            "title": "Technical Data — REITER Lamborghini Murcielago R-GT",
+            "title": "Technical Data - REITER Lamborghini Murcielago R-GT",
             "publisher": "REITER Engineering",
             "url": "https://storage.e.jimdo.com/file/b5741db8-8a3c-4632-9fd1-50994cd9585b/R-GT%20%231057.pdf",
             "source_type": "constructor_technical_brochure_base_model",
@@ -3690,7 +3690,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Lola B0540 LMP2 — low-downforce configuration",
+      "item_name": "Lola B0540 LMP2 - low-downforce configuration",
       "event_type": "variant",
       "class": "2005 LMP2",
       "release_version": "1.6.8.5",
@@ -3722,7 +3722,7 @@
         "rationale": "Configuration-level event. Do not create a standalone controls record unless exact telemetry and materially different controls justify it."
       },
       "control_source_research": {
-        "item_name": "Lola B0540 LMP2 — low-downforce configuration",
+        "item_name": "Lola B0540 LMP2 - low-downforce configuration",
         "sources": [
           {
             "title": "Lola B05/40, B05/42, MG EX264 specifications",
@@ -3970,7 +3970,7 @@
     },
     {
       "calendar_year": 2025,
-      "item_name": "Maserati MC12 GT1 — low-downforce configuration",
+      "item_name": "Maserati MC12 GT1 - low-downforce configuration",
       "event_type": "variant",
       "class": "2005 GT1",
       "release_version": "1.6.8.5",
@@ -4002,7 +4002,7 @@
         "rationale": "Configuration-level event. Do not create a standalone controls record unless exact telemetry and materially different controls justify it."
       },
       "control_source_research": {
-        "item_name": "Maserati MC12 GT1 — low-downforce configuration",
+        "item_name": "Maserati MC12 GT1 - low-downforce configuration",
         "sources": [
           {
             "title": "MC12 Versione Corse",
@@ -4533,7 +4533,7 @@
         "item_name": "Maserati GT2 Stradale",
         "sources": [
           {
-            "title": "Maserati GT2 Stradale — Racing is Life",
+            "title": "Maserati GT2 Stradale - Racing is Life",
             "publisher": "Maserati",
             "url": "https://www.maserati.com/gb/en/dealers/jct600/models/gt2-stradale",
             "source_type": "manufacturer_model_page",

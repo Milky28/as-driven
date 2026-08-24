@@ -407,14 +407,21 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
         issue = case.get("issue", {})
         observation = case.get("observation", {})
         identity = observation.get("identity") or {}
+        publication = case.get("github_feedback") or {}
+        publication_status = publication.get("status") or "not-published"
         cases.append(
             {
                 "issue": issue.get("number"),
                 "state": case.get("state"),
+                "display_state": (
+                    "published" if publication_status == "published" else case.get("state")
+                ),
                 "classification": case.get("classification"),
                 "simulator": observation.get("simulator"),
                 "telemetry_name": identity.get("telemetry_name"),
                 "research": case.get("research", {}).get("status"),
+                "publication_status": publication_status,
+                "allowed_actions": allowed_case_actions(case),
                 "title": issue.get("title"),
                 "url": issue.get("url"),
                 "case_directory": str(path.parent),
@@ -422,3 +429,26 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
             }
         )
     return sorted(cases, key=lambda case: int(case.get("issue") or 0))
+
+
+def allowed_case_actions(case: dict[str, Any]) -> list[str]:
+    """Return the actions a workbench may offer without inferring the state machine."""
+
+    if (case.get("github_feedback") or {}).get("status") == "published":
+        return []
+    state = case.get("state")
+    research_status = (case.get("research") or {}).get("status")
+    if state == "intake-error":
+        return ["sync"]
+    if state == "identity-research":
+        actions = ["generate-research-brief"]
+        if research_status in {"not-started", "brief-ready", "partial", "blocked"}:
+            actions.append("import-research")
+        return actions
+    if state == "final-review":
+        return ["prepare-review"]
+    if state == "manifest-review":
+        return ["promote"]
+    if state in {"promoted", "released", "duplicate"}:
+        return ["preview-publication", "publish-result"]
+    return []

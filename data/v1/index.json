@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.22",
+  "dataset_version": "0.4.23",
   "released_at": "2026-08-24",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -164,6 +164,7 @@
     "cars/mclaren-cosworth-mp4-8.json",
     "cars/mclaren-f1-gtr-1996.json",
     "cars/mclaren-f1-gtr.json",
+    "cars/mclaren-f1-lm-1996.json",
     "cars/mclaren-honda-mp4-4.json",
     "cars/mclaren-honda-mp4-5b.json",
     "cars/mclaren-honda-mp4-6.json",

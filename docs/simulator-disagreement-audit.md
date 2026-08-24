@@ -21,7 +21,7 @@ entering the audit.
 
 ## Current result
 
-Dataset 0.4.22 contains 25 field-level findings across 19 cars:
+Dataset 0.4.23 contains 25 field-level findings across 19 cars:
 
 - 8 affect pulling away;
 - 7 affect running-shift technique;
@@ -55,7 +55,7 @@ authentic baseline.
 
 ## Supported findings
 
-**Audi R8 LMS GT3 Evo II — pulling away.** Audi's exact technical data for the
+**Audi R8 LMS GT3 Evo II - pulling away.** Audi's exact technical data for the
 2022 car specifies an electrohydraulically operated three-plate racing clutch on
 printed page 8 of 16. A first-person track test of the exact Evo II then states,
 "Anfahren ist mit dem am Lenkrad montierten Kupplungshebel ein Kinderspiel,"
@@ -72,7 +72,7 @@ This finding does not infer why the simulators differ.
 Sources: [Audi technical data for the 2022 R8 LMS][audi-technical] and
 [AUTO BILD's Evo II track test][autobild-track-test].
 
-**Original Mercedes-AMG GT3 — pulling away.** AMG Customer Sports' operation
+**Original Mercedes-AMG GT3 - pulling away.** AMG Customer Sports' operation
 manual, version 03, says on printed page 12 that the clutch has to be operated
 when shifting from neutral to first; printed page 6 instructs the driver to ease
 the clutch in. A first-person March 2016 test of the exact original car
@@ -86,7 +86,7 @@ supported departure.
 Sources: [AMG Customer Sports operation manual][amg-manual] and
 [Car and Driver's exact 2016 first drive][amg-first-drive].
 
-**Mercedes-AMG GT3 Evo (2020) — pulling away.** The exact 2020 operation
+**Mercedes-AMG GT3 Evo (2020) - pulling away.** The exact 2020 operation
 manual says on printed page 7 to press the clutch, engage first gear, and ease
 in the clutch. Printed page 13 confines clutch use to the neutral-to-first
 shift, while page 14 separately documents ECU-controlled double-clutching on
@@ -98,7 +98,7 @@ supported departure.
 
 Source: [Mercedes-AMG GT3 2020 Operations Manual R01][amg-evo-manual].
 
-**Mercedes-AMG GT4 — pulling away.** The exact drivetrain manual instructs the
+**Mercedes-AMG GT4 - pulling away.** The exact drivetrain manual instructs the
 driver on printed page 73 of 112 to depress the clutch at idle, engage first,
 and ease in the clutch. A first-person exact-car test independently says the
 clutch is required in first gear in the pit lane. Neither source establishes
@@ -111,7 +111,7 @@ supported departure.
 Sources: [Mercedes-AMG GT4 Drivetrain Manual R1.0][amg-gt4-manual] and
 [Top Gear's exact-car first drive][amg-gt4-first-drive].
 
-**BMW M6 GT3 — pulling away.** BMW's M4/M6 GT3 comparison identifies the M6's
+**BMW M6 GT3 - pulling away.** BMW's M4/M6 GT3 comparison identifies the M6's
 hydraulic clutch on printed page 5, while an exact-car first-person drive says
 the M6 still requires the clutch to get moving and describes easing it in. BMW
 documents a fully automatic centrifugal clutch only for Alex Zanardi's special
@@ -125,7 +125,7 @@ Sources: [BMW M4/M6 GT3 comparison][bmw-comparison],
 [BMWBLOG's exact-car first drive][bmw-first-drive], and
 [BMW's Zanardi adaptation notes][bmw-zanardi].
 
-**Nissan GT-R NISMO GT3 (2018) — wheel geometry.** NISMO identifies the exact
+**Nissan GT-R NISMO GT3 (2018) - wheel geometry.** NISMO identifies the exact
 2018-Spec cockpit as an entirely new design with a redesigned steering wheel.
 Its official cockpit photograph shows molded side grips around a closed central
 control face, which is `gt-formula` in the dataset vocabulary; the flattened
@@ -137,7 +137,7 @@ rim, making that exact implementation a supported departure.
 Sources: [NISMO's exact 2018 specification][nismo-spec] and
 [official 2018-Spec cockpit photograph][nismo-cockpit].
 
-**Porsche 911 GT3 R (991.2, 2019) — wheel geometry.** Porsche's exact launch
+**Porsche 911 GT3 R (991.2, 2019) - wheel geometry.** Porsche's exact launch
 material specifies a multifunction CFRP motorsport steering wheel, and its
 official cockpit photograph shows molded side grips around a closed central
 control face. That establishes `gt-formula`; Porsche lists the Cosworth display
@@ -151,7 +151,7 @@ Sources: [Porsche's exact 991.2 launch material][porsche-9912] and
 
 ## Open authentic baselines
 
-**Lotus Renault 98T — forward gears.** The 1986 program used both five- and
+**Lotus Renault 98T - forward gears.** The 1986 program used both five- and
 six-speed Lotus/Hewland configurations. A period May 1986 report says gearbox
 breakages left six-speed units for Senna's two cars while Dumfries used an
 old-type five-speed; a retrospective exact-chassis account describes another
@@ -196,17 +196,17 @@ therefore preserves the cross-sim conflict while refusing to declare a winner.
 Only three findings still have a real-car answer but fall short of the benchmark's
 primary-evidence threshold:
 
-1. **Porsche 911 RSR 1974 — gate pattern.** Research confirms that the exact RSR
+1. **Porsche 911 RSR 1974 - gate pattern.** Research confirms that the exact RSR
    used the RS-derived five-speed Type 915 and that a conventional H is the
    best-supported layout. The period workshop manual and FIA homologation form
    do not expose a readable exact-RSR selector diagram, however, so AMS2's
    conventional gate remains a provisional match and AC's dogleg a provisional
    departure. The January 1974 RSR operating manual is the best remaining lead.
-2. **Milano 55 GT1 / Prodrive Ferrari 550 GTS — manual blip.** The exact-car Evo
+2. **Milano 55 GT1 / Prodrive Ferrari 550 GTS - manual blip.** The exact-car Evo
    technical account says the clutch is used on every downshift and the driver
    blips to match revs. It is strong secondary evidence, but no manufacturer or
    homologation operating procedure has been recovered.
-3. **Saleen S7-R — manual blip.** A first-person test of the 2001 Park Place S7R
+3. **Saleen S7-R - manual blip.** A first-person test of the 2001 Park Place S7R
    instructs clutch use on both shifts and recommends heel-and-toe on braking
    downshifts. This supports the early S7R family at medium confidence, but does
    not prove every 2005 Xtrac revision retained that procedure.

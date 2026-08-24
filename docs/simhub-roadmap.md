@@ -5,7 +5,7 @@ authentic-controls layer. The JSON database remains independently useful to
 websites, hardware selectors, voice assistants, Stream Deck tools, or other
 telemetry applications without SimHub installed.
 
-## Phase 0 — data contracts (this repository)
+## Phase 0 - data contracts (this repository)
 
 - Versioned JSON Schema, source registry, claim-level provenance, and tests.
 - AMS2 seed records and staging importers for AMS2/iRacing.
@@ -13,7 +13,7 @@ telemetry applications without SimHub installed.
 
 Exit criterion: a released dataset validates independently of plugin code.
 
-## Phase 1 — lookup library and diagnostics
+## Phase 1 - lookup library and diagnostics
 
 - Build a small .NET reader for `data/v1/index.json` and car records.
 - Validate supported `schema_version` at startup and retain the last known-good
@@ -37,7 +37,7 @@ class, timestamp, dataset, and SimHub version. The log path and last observed
 values are published as properties and the settings page opens its folder.
 iRacing awaits curated sample records.
 
-## Phase 2 — minimal SimHub plugin
+## Phase 2 - minimal SimHub plugin
 
 The plugin detects game/car changes, calls the lookup library, and publishes
 properties. It does not draw UI and does not own the database.
@@ -91,12 +91,12 @@ the record. `PopupRevision` was 1, remained 1 for the unmatched car, and became
 2 on the returning match. Repeated telemetry frames did not increment it. The
 `RefreshDatabase` action produced a fresh successful load of all ten records.
 
-## Phase 3 — Dash Studio “pre-flight card”
+## Phase 3 - Dash Studio “pre-flight card”
 
 Display hardware first, technique second, and evidence last:
 
 ```text
-McLaren F1 GTR — GT1
+McLaren F1 GTR - GT1
 Round rim (RM)
 6-speed sequential stick
 Upshift: automatic cut · Downshift: no auto-blip
@@ -239,7 +239,7 @@ fixes the accumulation of duplicate `Window1` overlay windows during a preview
 session.
 Version `0.10.3` clones only the currently selected popup surface into the
 forced idle-preview layout, reducing that preview session to one overlay
-window. It also labels previews `PREVIEW — NOT LIVE`, exposes a clear **Close
+window. It also labels previews `PREVIEW - NOT LIVE`, exposes a clear **Close
 preview** action on the native page, and adds the two-line driving-technique
 summary to the 520×300 Compact card. Glance remains icon-only, while the
 Detailed dropdown continues to match its reduced 840×360 surface.
@@ -299,7 +299,7 @@ and unique part identifiers. Live validation installed the layout, positioned
 its surfaces, restarted both SimHub and AMS2, and confirmed automatic popup
 behavior remained operational after the restart.
 
-## Phase 4 — updates and broader coverage
+## Phase 4 - updates and broader coverage
 
 - Ship a pinned dataset with the plugin and optionally poll signed GitHub
   releases, never a moving branch.

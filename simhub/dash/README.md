@@ -2,12 +2,12 @@
 
 `generate.py` creates five native SimHub Dash Studio DJSON artifacts:
 
-- **As Driven Preflight Overlay** — Detailed, 840×360.
-- **As Driven Preflight Compact** — Compact, 520×300.
-- **As Driven Preflight Glance** — Glance, 320×120.
-- **As Driven Preflight Display** — a persistent 900×360 auxiliary
+- **As Driven Preflight Overlay** - Detailed, 840×360.
+- **As Driven Preflight Compact** - Compact, 520×300.
+- **As Driven Preflight Glance** - Glance, 320×120.
+- **As Driven Preflight Display** - a persistent 900×360 auxiliary
   display that does not use popup visibility.
-- **As Driven Verification Drive** — a 700×220 in-simulator prompt
+- **As Driven Verification Drive** - a 700×220 in-simulator prompt
   surface for the guided verification drive.
 
 The three overlay templates are click-through. Each follows its own explicit
@@ -101,7 +101,7 @@ feature with a transparent white 24x24 wheel, lever, and gate menu glyph. The pa
 match and version status plus Show/Hide popup, database refresh, and diagnostics
 controls. Dash Studio continues to own layout loading and positioning.
 The native page also provides a curated-car preview selector. Previewed records
-use the same templates and properties but show a visible `PREVIEW — NOT LIVE`
+use the same templates and properties but show a visible `PREVIEW - NOT LIVE`
 badge; live
 game telemetry automatically takes priority when a session begins.
 Idle preview uses SimHub's forced-overlay mode and a temporary layout manager;

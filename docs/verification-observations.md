@@ -155,7 +155,7 @@ stub. It maps only what the drive supports: simulator behavior plus the
 authentic-control fields the observation establishes, leaving everything else
 `unknown`. Move-off and clutchless results degrade to `unknown` unless the
 observation confirms automatic clutch and shifting were both disabled, and it
-never infers real-world identity — manufacturer, model, year, and real-world
+never infers real-world identity - manufacturer, model, year, and real-world
 notes are left as explicit `REVIEW-REQUIRED` placeholders, and any residual
 review actions are printed as `REVIEW:` lines. The approval stub's
 `approved_controls` are derived with the same mapping `validate` cross-checks,

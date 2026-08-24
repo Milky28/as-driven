@@ -69,7 +69,7 @@ received -> schema-valid -> identity-research -> approved -> released
                          \-> declined
 ```
 
-Suggested labels mirror these states. A maintainer—not the contributor—creates
+Suggested labels mirror these states. A maintainer - not the contributor - creates
 the curation manifest and changes `data/v1`. The raw issue attachment remains
 staging evidence and never enters the curated database automatically.
 

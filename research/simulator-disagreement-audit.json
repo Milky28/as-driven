@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.22",
+  "dataset_version": "0.4.23",
   "generated_at": "2026-08-24",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",

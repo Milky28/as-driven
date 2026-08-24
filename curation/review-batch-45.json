@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.23",
+  "approved_at": "2026-08-24",
+  "records": [
+    {
+      "record_id": "mclaren-f1-lm-1996",
+      "bundle": "build/review-cases/issue-4/staged.json",
+      "display_name": "McLaren F1 LM",
+      "class": "Road-legal track-focused supercar",
+      "manufacturer": "McLaren",
+      "model": "F1 LM",
+      "year": {
+        "from": 1996,
+        "to": 1996,
+        "label": "1996"
+      },
+      "real_world_identity_notes": "The McLaren F1 LM is the 1996 road-legal, limited-production Le Mans commemorative variant of the McLaren F1. McLaren built five customer cars, plus the XP LM prototype retained by McLaren. It is derived from the 1995 F1 GTR concept and uses GTR-derived race hardware, but it is not itself a 1995, 1996, or 1997 F1 GTR race car and must not inherit those cars' sequential or race-only controls.",
+      "real_world_source_refs": [
+        "mclaren.official-article.f1-lm",
+        "mclaren.official-heritage.f1-gtr-1995",
+        "bmw.heritage.2016-mclaren-f1-gtr",
+        "mclaren.technical-sheet.f1-lm-roadcar",
+        "supercar-nostalgia.f1-lm-technical-appraisal",
+        "motortrend.f1-lm-2000",
+        "road-and-track.f1-gearbox",
+        "wikimedia.f1-lm-interior",
+        "community.f1-lm-standard-gated-pattern",
+        "as-driven.repository.mclaren-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "McLaren's own heritage material identifies the LM as a five-car specification made in honour of the 1995 F1 GTR victory; BMW's heritage release separates the five LMs from the 28 GTR race cars; the exact-year production timing and GTR-derived LM specification are corroborated by the specialist technical history and the period MotorTrend test, which labels the car a 1996 F1 LM.",
+      "identity_basis": "McLaren's own heritage material identifies the LM as a five-car specification made in honour of the 1995 F1 GTR victory; BMW's heritage release separates the five LMs from the 28 GTR race cars; the exact-year production timing and GTR-derived LM specification are corroborated by the specialist technical history and the period MotorTrend test, which labels the car a 1996 F1 LM.",
+      "specification_basis": "The exact LM specification says six-speed, the period test says 6-speed manual, and the specialist history says GTR-sourced six-speed manual. The exact LM specification explicitly says 'All synchro constant mesh'; Road & Track independently describes the F1/Weismann family as using BMW synchronizers. The LM sheet's separate 'straight cut gears' line describes gear-tooth form, not a dogbox claim, so it is not treated as a conflict. The period test and specialist history establish a manual gear lever, the interior photograph shows a gated central lever, and the community evidence explicitly identifies the road-car LM gate as standard gated. The confidence remains low because no factory gate drawing was found. The only source that names the pattern calls the F1 LM road-car gate standard gated; the photograph corroborates a gated manual selector but does not show a full diagram. The specialist description calls it a suede-rimmed GTR steering wheel, and the CC-licensed interior photograph visibly shows a continuous circular three-spoke rim. The high-resolution interior photograph visibly shows rim material joining the left and right grips across the top, so the rim is not open-top. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "integrated_display": "unknown",
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1996 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: standard h; wheel-rim shape: round; open-top wheel geometry: no.",
+        "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+        "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/4",
+      "live_source_notes": "Guided-verification observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "mclaren-f1-lm",
+        "basis": "McLaren's own heritage material identifies the LM as a five-car specification made in honour of the 1995 F1 GTR victory; BMW's heritage release separates the five LMs from the 28 GTR race cars; the exact-year production timing and GTR-derived LM specification are corroborated by the specialist technical history and the period MotorTrend test, which labels the car a 1996 F1 LM."
+      }
+    }
+  ]
+}

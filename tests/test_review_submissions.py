@@ -15,6 +15,7 @@ from as_driven_db.review_submissions import (
 )
 from as_driven_db.research_handoff import (
     ResearchHandoffError,
+    discover_research_results,
     generate_research_briefs,
     import_research_result,
 )
@@ -29,6 +30,7 @@ CONTROL_PATHS = (
     "/authentic_controls/transmission/gearbox_type",
     "/authentic_controls/transmission/shift_actuation",
     "/authentic_controls/transmission/shift_pattern",
+    "/authentic_controls/transmission/first_gear_position",
     "/authentic_controls/transmission/upshift/clutch",
     "/authentic_controls/transmission/upshift/throttle_lift",
     "/authentic_controls/transmission/upshift/automatic_cut",
@@ -118,7 +120,7 @@ Cockpit year is uncertain.
 def issue(number: int = 17) -> dict:
     return {
         "number": number,
-        "title": "[Observation]: AMS2 — Public Test Car",
+        "title": "[Observation]: AMS2 - Public Test Car",
         "body": issue_body(),
         "url": f"https://github.com/example/project/issues/{number}",
         "labels": [{"name": "observation-received"}],
@@ -331,6 +333,20 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertEqual(1, len(queue))
             self.assertEqual(17, queue[0]["issue"])
             self.assertEqual("not-started", queue[0]["research"])
+            self.assertEqual("not-published", queue[0]["publication_status"])
+            self.assertEqual("identity-research", queue[0]["display_state"])
+            self.assertEqual(
+                ["generate-research-brief", "import-research"],
+                queue[0]["allowed_actions"],
+            )
+
+            case["github_feedback"] = {"status": "published"}
+            (case_dir / "case.json").write_text(
+                json.dumps(case, indent=2) + "\n", encoding="utf-8"
+            )
+            published = list_review_cases(cases_dir)[0]
+            self.assertEqual("published", published["display_state"])
+            self.assertEqual([], published["allowed_actions"])
 
     def test_invalid_submission_becomes_a_retryable_error_case(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -385,6 +401,36 @@ class ReviewSubmissionTests(unittest.TestCase):
             case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
             self.assertEqual("brief-ready", case["research"]["status"])
             self.assertEqual("research-brief.md", case["artifacts"]["research_brief"])
+            self.assertIn(
+                "import-research",
+                list_review_cases(temp / "cases")[0]["allowed_actions"],
+            )
+
+    def test_refresh_discovers_a_completed_result_in_the_case_folder(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            (case_dir / "research-result.json").write_text(
+                json.dumps(research_result("github-example-project-17"), indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            discovered = discover_research_results(ROOT, temp / "cases")
+
+            self.assertEqual(1, discovered["found"])
+            self.assertEqual(1, len(discovered["imported"]))
+            self.assertEqual([], discovered["errors"])
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("complete", case["research"]["status"])
+            self.assertEqual("final-review", case["state"])
+            self.assertEqual(
+                "research-result.json",
+                case["artifacts"]["research_result"],
+            )
+
+            unchanged = discover_research_results(ROOT, temp / "cases")
+            self.assertEqual(0, unchanged["found"])
 
     def test_valid_research_result_moves_only_local_case_to_final_review(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -428,6 +474,20 @@ class ReviewSubmissionTests(unittest.TestCase):
                 import_research_result(ROOT, temp / "cases", 17, result_path)
             self.assertFalse((case_dir / "research-result.json").exists())
 
+    def test_research_result_rejects_an_unknown_claim_path_during_import(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            bad = research_result("github-example-project-17")
+            bad["claims"][0]["path"] = "/authentic_controls/transmission/not_a_field"
+            result_path = temp / "bad-path.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(ResearchHandoffError, "unknown research field"):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
     def test_review_proposal_dry_runs_without_changing_curated_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
@@ -456,6 +516,7 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "public-test-car-2021",
                 manifest["records"][0]["record_id"],
             )
+            self.assertNotIn("archetype", manifest["records"][0])
             notes = manifest["records"][0]["control_notes"]
             self.assertIn("no real-car control values", notes[0])
             self.assertNotIn("X-TRAC 396B023", notes[0])
@@ -474,10 +535,56 @@ class ReviewSubmissionTests(unittest.TestCase):
                     for override in manifest["records"][0]["simulator_overrides"]
                 )
             )
-            self.assertTrue((case_dir / "preview-record.json").is_file())
+            preview = json.loads(
+                (case_dir / "preview-record.json").read_text(encoding="utf-8")
+            )
+            self.assertNotIn("archetype", preview)
             self.assertTrue((case_dir / "final-review.md").is_file())
             self.assertFalse(
                 (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+
+    def test_review_proposal_accepts_an_established_optional_control_field(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            shutil.copytree(ROOT / "data", repository / "data")
+            shutil.copytree(ROOT / "curation", repository / "curation")
+            shutil.copytree(ROOT / "schema", repository / "schema")
+            cases = repository / "build" / "review-cases"
+            case_dir = self.sync_test_case_for_root(repository, cases)
+            generate_research_briefs(repository, cases, {17})
+            result = completed_research_result("github-example-project-17")
+            first_gear = next(
+                claim
+                for claim in result["claims"]
+                if claim["path"]
+                == "/authentic_controls/transmission/first_gear_position"
+            )
+            first_gear.update(
+                {
+                    "finding": "established",
+                    "proposed_value": "down-left",
+                    "confidence": "medium",
+                    "basis": "The reviewed gate diagram puts first down and left.",
+                }
+            )
+            result_path = repository / "completed-research.json"
+            result_path.write_text(json.dumps(result), encoding="utf-8")
+            import_research_result(repository, cases, 17, result_path)
+
+            proposal = prepare_review_proposal(repository, cases, 17)
+
+            manifest = json.loads(Path(proposal["manifest"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                "down-left",
+                manifest["records"][0]["control_overrides"]["first_gear_position"],
+            )
+            preview = json.loads(
+                (case_dir / "preview-record.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                "down-left",
+                preview["authentic_controls"]["transmission"]["first_gear_position"],
             )
 
     def test_explicit_approval_promotes_a_ready_case_and_allocates_a_batch(self) -> None:

@@ -14,7 +14,7 @@ body:
 
         The issue and attachment are public. Use the marked redacted copy if you do not want the observer name or Assetto Corsa package details included. Linked third-party sources remain their owners' property.
 
-        **Title:** Keep the `[Observation]:` prefix and add the simulator and telemetry car name, for example `[Observation]: AMS2 — Chevrolet Cruze Stock Car 2021`. When opened directly after saving a drive, As Driven fills this in for you.
+        **Title:** Keep the `[Observation]:` prefix and add the simulator and telemetry car name, for example `[Observation]: AMS2 - Chevrolet Cruze Stock Car 2021`. When opened directly after saving a drive, As Driven fills this in for you.
 
   - type: textarea
     id: observation

@@ -9,7 +9,12 @@ import tempfile
 from typing import Any
 
 from .promote_observation import promote_observations
-from .research_handoff import ResearchHandoffError, _read_json, _write_json
+from .research_handoff import (
+    ResearchHandoffError,
+    _read_json,
+    _write_json,
+    validate_research_result,
+)
 from .schema_validation import validate_instance
 
 
@@ -41,7 +46,7 @@ def _set_pointer(document: dict[str, Any], pointer: str, value: Any) -> None:
         if not isinstance(current, dict) or token not in current:
             raise ResearchHandoffError(f"research claim points to unknown field {pointer!r}")
         current = current[token]
-    if not tokens or not isinstance(current, dict) or tokens[-1] not in current:
+    if not tokens or not isinstance(current, dict):
         raise ResearchHandoffError(f"research claim points to unknown field {pointer!r}")
     current[tokens[-1]] = copy.deepcopy(value)
 
@@ -153,7 +158,10 @@ def _control_overrides(
     staged_transmission = staged_controls["transmission"]
     real_transmission = real_controls["transmission"]
     for key, value in real_transmission.items():
-        if key in staged_transmission and value != staged_transmission[key]:
+        if key not in staged_transmission:
+            if value is not None and value != "unknown":
+                overrides[key] = value
+        elif value != staged_transmission[key]:
             overrides[key] = value
     staged_wheel = staged_controls["steering"]["wheel_rim"]
     real_wheel = real_controls["steering"]["wheel_rim"]
@@ -299,7 +307,7 @@ No curated files have been changed. This proposal was dry-run through the real p
 
 ## Reviewed sources
 
-{chr(10).join(f"- `{source['source_id']}` — {source['title']} ({source['registration']})" for source in sources)}
+{chr(10).join(f"- `{source['source_id']}` - {source['title']} ({source['registration']})" for source in sources)}
 
 Review the proposed manifest, source wording, unknown fields, and simulator overrides before copying anything into `data/v1` or `curation`.
 """
@@ -323,6 +331,16 @@ def prepare_review_proposal(
         )
     staged = _read_json(case_directory / case["artifacts"]["staged_bundle"], "staged bundle")
     result = _read_json(case_directory / case["artifacts"]["research_result"], "research result")
+    result_errors = validate_research_result(
+        root,
+        case,
+        result,
+        "research result",
+    )
+    if result_errors:
+        raise ResearchHandoffError(
+            "research result validation failed:\n" + "\n".join(result_errors)
+        )
     identity = result["identity"]
     if identity["record_action"] not in {"create-new", "use-existing"}:
         raise ResearchHandoffError("research result has no reviewable record action")
@@ -415,13 +433,6 @@ def prepare_review_proposal(
         "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
         "live_source_url": case["issue"]["url"],
         "live_source_notes": staged["source"]["notes"],
-        "archetype": {
-            "classification": "undetermined",
-            "basis": (
-                "The reviewed real-car evidence leaves enough control fields unknown "
-                "that multiple registered archetypes remain compatible."
-            ),
-        },
     }
     staged_record_id = staged["record"]["record_id"]
     if (

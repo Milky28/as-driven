@@ -24,7 +24,7 @@ EVENT_MAP = ROOT / "curation" / "ams2-post-sheet-event-map.json"
 # members or predecessor records carry the actual control-source research.
 NON_STANDALONE_SOURCE_ITEMS = {
     (2024, "Stock Car Pro Series 2024 season"),
-    (2025, "Aston Martin Vantage GT3 Evo — second configuration not named by Reiza"),
+    (2025, "Aston Martin Vantage GT3 Evo - second configuration not named by Reiza"),
     (2025, "Ligier European Series"),
     (2025, "Vintage Cars Tier 1"),
     (2025, "Vintage Cars Tier 2"),
@@ -71,8 +71,12 @@ def index_by_name(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
 
 
 def canonical_item_name(name: str) -> str:
-    """Repair the one known PowerShell UTF-8 em-dash transcription artifact."""
-    return name.replace("ā€”", "—").replace("â€”", "—")
+    """Repair known PowerShell dash-transcription artifacts."""
+    return (
+        name.replace("ā€”", " - ")
+        .replace("â€”", " - ")
+        .replace("\u2014", " - ")
+    )
 
 
 def text_list(value: Any) -> str:
