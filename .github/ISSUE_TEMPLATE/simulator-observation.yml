@@ -12,6 +12,8 @@ body:
 
         Submit one draft per issue. A maintainer validates the file, checks identity and real-car evidence, and decides whether it corroborates, contradicts, corrects, or extends the curated data.
 
+        The issue and attachment are public. Use the marked redacted copy if you do not want the observer name or Assetto Corsa package details included. Linked third-party sources remain their owners' property.
+
         **Title:** Keep the `[Observation]:` prefix and add the simulator and telemetry car name, for example `[Observation]: AMS2 — Chevrolet Cruze Stock Car 2021`. When opened directly after saving a drive, As Driven fills this in for you.
 
   - type: textarea
@@ -56,15 +58,9 @@ body:
       description: Optional. Mention nearby generations, unusual cockpit hardware, questionable telemetry, failed tests, or anything that should be repeated.
 
   - type: checkboxes
-    id: understanding
+    id: permission
     attributes:
-      label: Submission understanding
+      label: Permission to share
       options:
-        - label: I understand that this is simulator evidence, not proof of the real car's identity or authentic controls.
-          required: true
-        - label: I understand that a public draft can expose my chosen observer name or handle, exact timestamp, simulator/car identifiers, versions, test notes, and—for Assetto Corsa—the driven package's content ID, author, declared version, and fingerprint.
-          required: true
-        - label: The observer field contains a name or handle I am willing to publish, or I attached the explicitly marked redacted copy.
-          required: true
-        - label: I license my original factual observations and contributor-written notes for incorporation into the database under CC BY 4.0. Linked third-party sources remain the property of their owners.
+        - label: I may share this draft publicly, and I license my own observations and notes under CC BY 4.0.
           required: true

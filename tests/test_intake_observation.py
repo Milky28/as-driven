@@ -150,10 +150,18 @@ class ObservationIntakeTests(unittest.TestCase):
         self.assertIn("Drop one .json draft here", form)
         self.assertIn("Keep the `[Observation]:` prefix", form)
         self.assertIn("simulator and telemetry car name", form)
-        self.assertIn("simulator evidence, not proof", form)
-        self.assertIn("package's content ID", form)
+        self.assertIn("does not establish the real car's identity", form)
+        self.assertIn("issue and attachment are public", form)
+        self.assertIn("Assetto Corsa package details", form)
         self.assertIn("redacted copy", form)
         self.assertNotIn("privacy-reduced", form)
+        self.assertIn("label: Permission to share", form)
+        permission = form.split("    id: permission", 1)[1]
+        self.assertEqual(
+            1,
+            permission.count("required: true"),
+            "the permission section needs one checkbox",
+        )
         self.assertIn("CC BY 4.0", form)
         self.assertIsNone(
             re.search(

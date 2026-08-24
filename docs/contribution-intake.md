@@ -77,3 +77,9 @@ The local intake command validates the strict schema, records a SHA-256 receipt,
 and compares the observation with previously received files and exact curated
 simulator identities. It must not execute content from a draft, unpack arbitrary
 archives, perform fuzzy identity matching, or promote a record.
+
+Maintainers normally use `python -m as_driven_db review-submissions sync`
+instead of downloading and running intake by hand. Synchronization is read-only
+with respect to GitHub: it fetches open issues and their JSON attachments, then
+runs the same intake and import functions into ignored local review cases. See
+`docs/maintainer-review-workflow.md`.

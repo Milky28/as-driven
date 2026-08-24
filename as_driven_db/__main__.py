@@ -11,6 +11,13 @@ from .importers.observation import import_observation
 from .intake_observation import IntakeError, intake_observation
 from .promote import promote_approved_ams2
 from .promote_observation import promote_observations
+from .review_submissions import (
+    DEFAULT_LABEL,
+    DEFAULT_REPOSITORY,
+    SubmissionSyncError,
+    list_review_cases,
+    sync_submissions,
+)
 from .simhub import (
     audit_ams2_identities,
     review_unmatched_ams2_observations,
@@ -78,6 +85,46 @@ def _parser() -> argparse.ArgumentParser:
     observation_intake.add_argument("--root", type=Path, default=Path.cwd())
     observation_intake.add_argument(
         "--inbox", type=Path, default=Path("build") / "observation-intake"
+    )
+
+    submissions = subparsers.add_parser(
+        "review-submissions",
+        help="synchronize and inspect public observation review cases",
+    )
+    submission_actions = submissions.add_subparsers(
+        dest="submission_action", required=True
+    )
+    submission_sync = submission_actions.add_parser(
+        "sync",
+        help="download GitHub observation issues, intake them, and stage review cases",
+    )
+    submission_sync.add_argument("--root", type=Path, default=Path.cwd())
+    submission_sync.add_argument("--repo", default=DEFAULT_REPOSITORY)
+    submission_sync.add_argument("--label", default=DEFAULT_LABEL)
+    submission_sync.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    submission_sync.add_argument(
+        "--inbox", type=Path, default=Path("build") / "observation-intake"
+    )
+    submission_sync.add_argument(
+        "--issue",
+        type=int,
+        action="append",
+        help="process only this issue number; may be repeated",
+    )
+    submission_sync.add_argument(
+        "--json", action="store_true", help="print the synchronization result as JSON"
+    )
+    submission_queue = submission_actions.add_parser(
+        "queue", help="list durable local review cases"
+    )
+    submission_queue.add_argument("--root", type=Path, default=Path.cwd())
+    submission_queue.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    submission_queue.add_argument(
+        "--json", action="store_true", help="print the queue as JSON"
     )
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
@@ -230,6 +277,63 @@ def main(argv: list[str] | None = None) -> int:
             print(f"ERROR: {exception}")
             return 1
         print(json.dumps(receipt, indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "review-submissions":
+        root = args.root.resolve()
+        if args.submission_action == "sync":
+            try:
+                result = sync_submissions(
+                    root,
+                    repository=args.repo,
+                    label=args.label,
+                    cases_directory=args.cases_dir,
+                    inbox=args.inbox,
+                    issue_numbers=set(args.issue) if args.issue else None,
+                )
+            except SubmissionSyncError as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Found {result['issues_found']} issue(s): "
+                    f"{result['processed']} processed, {result['skipped']} unchanged, "
+                    f"{result['error']} error(s)."
+                )
+                for item in result["results"]:
+                    detail = item["error"] or item["classification"] or "unclassified"
+                    print(
+                        f"  #{item['issue']} {item['outcome']}: {item['state']} "
+                        f"({detail})"
+                    )
+                print(f"Review cases: {result['cases_directory']}")
+            return 1 if result["error"] else 0
+
+        cases_dir = (
+            args.cases_dir.resolve()
+            if args.cases_dir.is_absolute()
+            else (root / args.cases_dir).resolve()
+        )
+        cases = list_review_cases(cases_dir)
+        if args.json:
+            print(json.dumps(cases, indent=2, ensure_ascii=False))
+            return 0
+        if not cases:
+            print(f"No review cases in {cases_dir}. Run `review-submissions sync` first.")
+            return 0
+        print("ISSUE  STATE                CLASSIFICATION                SIM   CAR")
+        for case in cases:
+            issue = f"#{case['issue']}"
+            state = str(case["state"] or "unknown")[:20]
+            classification = str(case["classification"] or "-")[:29]
+            simulator = str(case["simulator"] or "-").upper()[:5]
+            car = case["telemetry_name"] or case["title"] or "-"
+            print(f"{issue:<6} {state:<20} {classification:<29} {simulator:<5} {car}")
+            if case["error"]:
+                print(f"       ERROR: {case['error']}")
+        print(f"\n{len(cases)} review case(s) in {cases_dir}")
         return 0
 
     if args.command == "import-ams2":

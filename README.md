@@ -121,6 +121,20 @@ or a new exact identity:
 python -m as_driven_db intake-observation observation.json
 ```
 
+For maintainer batches, synchronize every open GitHub issue labeled
+`observation-received`. This downloads the one attached JSON through the
+authenticated GitHub CLI, runs intake and staging together, and creates an
+idempotent case under ignored `build/review-cases/`:
+
+```shell
+python -m as_driven_db review-submissions sync
+python -m as_driven_db review-submissions queue
+```
+
+Use `sync --issue 42` to process one issue. The commands require an authenticated
+GitHub CLI (`gh auth login`) but never change issue labels or comments. See
+`docs/maintainer-review-workflow.md` for the case contract and review states.
+
 Stage a curated-record candidate from that draft, then promote the reviewed
 bundle once its real-world identity and sources are resolved:
 
