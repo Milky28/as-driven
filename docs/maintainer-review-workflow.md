@@ -32,8 +32,11 @@ python -m as_driven_db review-submissions sync --issue 42 --issue 47
 ```
 
 Synchronization is idempotent. An unchanged successful issue is not downloaded
-or processed again. A failed case is retried on the next synchronization. The
-command validates that the issue's attachment section contains exactly one safe
+or processed again. Editing an issue without replacing its attachment preserves
+the existing classification, and the local workbench serializes synchronization
+requests from multiple browser tabs. A failed case is retried on the next
+synchronization. The command validates that the issue's attachment section
+contains exactly one safe
 `.json` basename and accepts downloads only from GitHub attachment hosts. It
 limits the payload before intake, then applies the observation schema and draft
 status checks. It does not execute attachments, perform fuzzy identity matching,

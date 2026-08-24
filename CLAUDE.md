@@ -169,6 +169,16 @@ approval are required before release. See `PRIVACY.md` and
 - Early-access client: 0.19.0.
 - Dataset: 0.4.27 with 260 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
+- The ignored local contribution queue has four active `identity-research`
+  cases: issues 9 through 12, covering the AC Shelby Daytona Coupe, Ferrari 250
+  GTO, Lamborghini Miura P400 SV and Kunos Ford Mustang 2015. Generate each
+  research brief from the workbench, import the completed result, then retain
+  the explicit final-review and promotion gates. No case is currently waiting
+  at final review.
+- The maintainer workbench is the preferred contribution interface. GitHub
+  synchronization is serialized across browser tabs, and editing an issue
+  without replacing its attachment preserves the original routing decision.
+  Issue 12 exposed that race and has been restored locally as `new-identity`.
 - Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
   are closed by written decisions. Chevrolet Cruze Stock Car 2021 remains in
   the guided queue. The inventory only holds cars that have been loaded here,
@@ -195,20 +205,28 @@ approval are required before release. See `PRIVACY.md` and
   demand moved to an override. Five real cars still carry it knowingly; four
   cars a simulator invented are outside the rule, because a car with no real
   referent has no real gearbox to be wrong about. See `docs/data-model.md`.
+- Guided drives may still establish simulator-only technique while the real-car
+  answer remains unknown. The AC BMW 3.0 CSL and Ford GT40 Mk I two-stage tests
+  now retain `downshift.manual_blip: required` as simulator overrides rather
+  than losing the result or asserting it as authentic real-car behavior.
 - Active second simulator: **Assetto Corsa EVO**, chosen for a relatively small
-  car count, no mod ecosystem yet and no DLC. Three existing real-car records
+  car count, no mod ecosystem yet and no DLC. Four existing real-car records
   now carry separately reviewed `ac-evo` entries, proving that a second
   simulator's drive can join a record without inheriting another simulator's
   behavior. The client canonicalises SimHub's `AssettoCorsaEvo` to `ac-evo`;
   this remains development coverage rather than part of the certified
   early-access target. Roster overlaps, drive order and name matches to avoid
   are in `docs/ac-evo-coverage-plan.md`.
-- **Assetto Corsa Competizione** is recognized separately as `acc`. Twelve exact
+- **Assetto Corsa Competizione** is recognized separately as `acc`. Eighteen exact
   entries are reviewed after the ranked-ten comparison batch; the Audi R8 LMS
   GT3 Evo II is the first car driven in four simulators. ACC drafts pin the Steam
   build id because its executables carry no useful file version. ACC remains
   outside the certified target. Exact overlaps, identity traps and the next
   backlog are in `docs/acc-coverage-plan.md`.
+- **Original Assetto Corsa** has 17 reviewed entries: four AC-only records and
+  13 shared with another simulator. Each source fingerprints the exact installed
+  implementation. This remains development coverage outside the certified
+  target.
 - A shared name across simulators is not a shared car. Exact matching fails
   closed, but merging a second simulator's entry onto the wrong record fails
   open - the plugin answers confidently with another car's controls. Road against

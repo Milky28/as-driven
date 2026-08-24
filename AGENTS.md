@@ -81,6 +81,14 @@ than silently queueing verification work.
 - Early-access client: 0.19.0.
 - Dataset: 0.4.27 with 260 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
+- The ignored local contribution queue has four active `identity-research`
+  cases: GitHub issues 9 through 12 for the AC Shelby Daytona Coupe, Ferrari
+  250 GTO, Lamborghini Miura P400 SV and Kunos Ford Mustang 2015. No case is
+  currently waiting at final review.
+- Use the maintainer workbench for contribution processing. Synchronization is
+  serialized across browser tabs, and a same-issue retry with an unchanged
+  attachment preserves the original classification. Issue 12 has been restored
+  locally as `new-identity` after exposing the former race.
 - Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
   are closed by written decisions. Chevrolet Cruze Stock Car 2021 remains in
   the guided queue. New content can still be absent because the inventory only
@@ -100,6 +108,9 @@ than silently queueing verification work.
   shared with another simulator. Each source fingerprints the exact installed
   implementation; this remains development coverage outside the certified
   early-access target.
+- The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
+  those implementations. That result is stored as a simulator override while
+  the authentic real-car manual-blip field remains unknown.
 - `validate` compares the dataset version and record count quoted in this file,
   `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
   `data/v1/index.json`. Update the line above with the dataset, or validation
