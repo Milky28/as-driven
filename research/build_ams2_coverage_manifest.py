@@ -85,12 +85,14 @@ def live_observations(log_path: Path) -> dict[str, dict[str, Any]]:
     return observations
 
 
-def curated_identities() -> tuple[dict[str, str], dict[str, dict[str, Any]]]:
-    index = read_json(ROOT / "data" / "v1" / "index.json")
+def curated_identities(
+    root: Path = ROOT,
+) -> tuple[dict[str, str], dict[str, dict[str, Any]]]:
+    index = read_json(root / "data" / "v1" / "index.json")
     identities: dict[str, str] = {}
     records: dict[str, dict[str, Any]] = {}
     for relative in index["records"]:
-        record = read_json(ROOT / "data" / "v1" / relative)
+        record = read_json(root / "data" / "v1" / relative)
         records[record["record_id"]] = record
         for simulator in record["simulators"]:
             if simulator["simulator"] != "ams2":
@@ -136,9 +138,9 @@ def family(name: str) -> str:
     return "other"
 
 
-def reviewer_decisions() -> dict[str, dict[str, Any]]:
+def reviewer_decisions(root: Path = ROOT) -> dict[str, dict[str, Any]]:
     """Explicit review outcomes for identities that are neither curated nor queued."""
-    payload = read_json(ROOT / "research" / "ams2-identity-decisions.json")
+    payload = read_json(root / "research" / "ams2-identity-decisions.json")
     return {item["telemetry_name"]: item for item in payload["decisions_list"]}
 
 
@@ -220,9 +222,14 @@ def classify(
     )
 
 
-def build(audit_path: Path, cars_dir: Path, live_log_path: Path | None = None) -> dict[str, Any]:
+def build(
+    audit_path: Path,
+    cars_dir: Path,
+    live_log_path: Path | None = None,
+    root: Path = ROOT,
+) -> dict[str, Any]:
     audit = read_json(audit_path)
-    curated, records = curated_identities()
+    curated, records = curated_identities(root)
     live = live_observations(live_log_path) if live_log_path else {}
 
     observed = list(audit["observed_identities"])
@@ -240,7 +247,7 @@ def build(audit_path: Path, cars_dir: Path, live_log_path: Path | None = None) -
     }
     entries: list[dict[str, Any]] = []
 
-    decisions = reviewer_decisions()
+    decisions = reviewer_decisions(root)
     for item in observed:
         name = item["car_model"]
         disposition, action, related = classify(name, curated, observed_names, decisions)
@@ -291,7 +298,7 @@ def build(audit_path: Path, cars_dir: Path, live_log_path: Path | None = None) -
         "manifest": "ams2-exact-identity-coverage",
         "manifest_version": "0.1.0",
         "generated_at": "2026-08-12",
-        "dataset_version": read_json(ROOT / "data" / "v1" / "index.json")["dataset_version"],
+        "dataset_version": read_json(root / "data" / "v1" / "index.json")["dataset_version"],
         "simhub_version": audit.get("simhub_version"),
         "identity_sources": {
             "stored_car_files": str(cars_dir),
@@ -327,7 +334,7 @@ def build(audit_path: Path, cars_dir: Path, live_log_path: Path | None = None) -
     }
 
 
-def write_csv(manifest: dict[str, Any]) -> None:
+def write_csv(manifest: dict[str, Any], output: Path = OUT_CSV) -> None:
     fields = [
         "telemetry_name",
         "car_id",
@@ -342,7 +349,7 @@ def write_csv(manifest: dict[str, Any]) -> None:
         "live_observed_at",
         "identity_file",
     ]
-    with OUT_CSV.open("w", encoding="utf-8", newline="") as handle:
+    with output.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         for entry in manifest["entries"]:
@@ -351,7 +358,8 @@ def write_csv(manifest: dict[str, Any]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--audit", type=Path, default=DEFAULT_AUDIT)
+    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--audit", type=Path)
     parser.add_argument("--cars-dir", type=Path, default=DEFAULT_CARS)
     parser.add_argument(
         "--live-log",
@@ -359,10 +367,19 @@ def main() -> None:
         default=DEFAULT_LIVE_LOG,
         help="Plugin unmatched-identity diagnostics log; corrects stale stored car files.",
     )
+    parser.add_argument("--output-json", type=Path)
+    parser.add_argument("--output-csv", type=Path)
     args = parser.parse_args()
-    manifest = build(args.audit, args.cars_dir, args.live_log)
-    OUT_JSON.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    write_csv(manifest)
+    root = args.root.resolve()
+    audit = args.audit or root / "build" / "ams2-simhub-identity-audit.json"
+    output_json = args.output_json or root / "research" / "ams2-coverage-manifest.json"
+    output_csv = args.output_csv or root / "research" / "ams2-coverage-manifest.csv"
+    manifest = build(audit, args.cars_dir, args.live_log, root)
+    output_json.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    write_csv(manifest, output_csv)
     print(json.dumps(manifest["stats"], indent=2))
 
 

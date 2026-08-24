@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.4.21",
+  "approved_at": "2026-08-24",
+  "records": [
+    {
+      "record_id": "toyota-corolla-stock-car-2021",
+      "bundle": "build/review-cases/issue-2/staged.json",
+      "display_name": "Toyota Corolla Stock Car 2021",
+      "class": "Stock Car Brasil 2021",
+      "manufacturer": "Toyota",
+      "model": "Corolla Stock Car",
+      "year": {
+        "from": 2021,
+        "to": 2021,
+        "label": "2021 Stock Car Brasil Toyota Corolla"
+      },
+      "real_world_identity_notes": "The observation matches the 2021 Toyota Corolla entry in AMS2 and the exact Toyota Corolla body covered by the CBA 2021 annex. The real car is a category-only Stock Car built on the common JL Racing platform, not a road Corolla or Corolla GR-S. The 2020 and 2022 Corolla records remain separate season-specific identities.",
+      "real_world_source_refs": [
+        "ams2.official-car-list.stock-car-2021",
+        "cba.stock-car.2021.technical-regulations",
+        "cba.stock-car.2021.toyota-corolla-annex",
+        "cba.stock-car.2021.platform-annex"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The official AMS2 listing, exact CBA 2021 Toyota Corolla annex, category regulation, and common platform annex agree on the season, body identity, and platform.",
+      "identity_basis": "The official AMS2 class listing names Toyota Corolla Stock Car 2021. The CBA Toyota annex explicitly complements the 2021 Stock Car technical regulation and covers the Stock Car Toyota Corolla, while the platform annex defines the common 2021 category hardware.",
+      "specification_basis": "CBA Article 13 establishes six forward ratios, the X-TRAC 396B023, and semiautomatic paddle actuation. The reviewed exact-year sources do not establish selector pattern, launch or running-shift technique, cut/blip behavior, or wheel topology, so those real-car baseline fields remain unknown.",
+      "control_overrides": {
+        "gearbox_type": "semi-automatic",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed 2021 CBA sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found an integrated display; the real-car sources do not establish one.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found a closed-top rim; the real-car sources do not establish the rim topology.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found molded grips and a control face; the real-car sources do not establish the rim shape.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found wheel-mounted shift lights; the real-car sources do not establish them.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 produced a throttle spike during the accepted clutchless downshift without driver throttle; real-car automatic blip behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided drive directly detected the shift-local throttle spike."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 downshift observation does not apply an upshift-style cut; real-car downshift cut behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive downshift result."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested downshift without physical clutch input; real-car running-shift clutch use is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct acceptance result from the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested downshift without driver throttle and produced an automatic blip; real-car manual blip technique is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct acceptance and throttle observations from the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 downshift observation does not use the upshift throttle-lift field; real-car downshift throttle behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive downshift result."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "AMS2 1.6.9.91 presents the six paddle gears sequentially; the reviewed real-car sources establish paddle actuation but do not explicitly state selector order.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact guided-drive gear-selection behavior."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 required physical clutch input to move from rest; the real-car launch procedure is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct move-off test from the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 upshift observation does not apply downshift rev matching; the real-car field remains unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive upshift result."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 accepted the full-throttle clutchless upshift with a shift-local torque interruption; real-car automatic cut behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided drive directly detected the shift-local torque interruption."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested upshift without physical clutch input; real-car running-shift clutch use is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct acceptance result from the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 upshift observation does not require a driver blip; real-car upshift blip behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive upshift result."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested full-throttle upshift; real-car throttle-lift technique is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct full-throttle acceptance result from the guided drive."
+          }
+        }
+      ],
+      "confidence_notes": "The exact 2021 identity and supported gearbox hardware come from official sources. Technique and wheel fields absent from those sources remain unknown in the real-car baseline; exact AMS2 values remain simulator-specific guided observations.",
+      "control_notes": [
+        "Official 2021 sources establish six forward gears, the X-TRAC 396B023, and semiautomatic paddle actuation.",
+        "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+        "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from public contribution issue 2 and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/2",
+      "live_source_notes": "Public guided-verification observation ams2.toyota-corolla-stock-car-2021.20260824t014210999z-4f8e1a98 by Anonymous in AMS2 1.6.9.91. It directly found six sequential-paddle gears, clutch-required move-off, clutchless full-throttle upshift acceptance with a shift-local torque interruption, clutchless downshift acceptance with an automatic throttle spike, and a closed GT/formula rim with integrated display and shift lights.",
+      "archetype": {
+        "classification": "undetermined",
+        "basis": "The exact real-car sources establish gearbox hardware but leave launch and running-shift technique unknown, so multiple registered control archetypes remain compatible."
+      }
+    }
+  ]
+}

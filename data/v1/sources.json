@@ -7114,6 +7114,61 @@
       "retrieved_at": "2026-08-23",
       "reuse_status": "facts-only-review",
       "notes": "Corrective guided-verification observation ams2.aston-martin-dbr9.20260823t162741438z-015c7bb9 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, a shift-local torque interruption confirming automatic cut, no automatic throttle spike on downshift, and a closed round rim without integrated display or shift lights. It supersedes the earlier driver-blip interpretation."
+    },
+    {
+      "source_id": "ams2.official-car-list.stock-car-2021",
+      "title": "Automobilista 2 Stock Car Brasil 2021 car list",
+      "publisher": "Automobilista 2 / Reiza Studios",
+      "url": "https://automobilista.gg/classes/stock-car-brasil-2021",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: official AMS2 class page for Stock Car Brasil 2021. The Browse Cars list names 'Toyota Corolla Stock Car 2021'. This establishes the exact simulator catalogue identity, not real-car control technique."
+    },
+    {
+      "source_id": "cba.stock-car.2021.technical-regulations",
+      "title": "Regulamento Técnico 2021",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/572/stock-car-regulamento-tecnico-2021-.pdf",
+      "source_type": "homologation",
+      "published_or_updated_at": "2021-03-25",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: CBA technical regulation for the 2021 Campeonato Brasileiro de Stock Car. Printed p.12 Article 13.1 permits only the RAM 8371 multi-disc clutch. Printed p.12 Article 13.2 requires the X-TRAC 396B023, lists first through sixth gear, and permits only the semiautomatic paddle-shift actuation system. It also permits a gear display but does not locate it on the wheel. The regulation does not establish launch procedure, running-shift clutch use, throttle lift, automatic cut, or manual/automatic blip behavior."
+    },
+    {
+      "source_id": "cba.stock-car.2021.toyota-corolla-annex",
+      "title": "Anexo Técnico Toyota Corolla Stock Car 2021, version 1.2",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/572/anexo-tecnico-toyota-stock-car-2021-.pdf",
+      "source_type": "homologation",
+      "published_or_updated_at": "2021-03-29",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: manufacturer-specific technical annex for the Toyota Corolla body and engine in the 2021 Stock Car championship. Printed p.1 says the annex complements the 2021 championship technical regulation and covers the construction and components of the Stock Car Toyota Corolla. It establishes the exact 2021 Toyota Corolla category identity, not wheel topology or driver shift technique."
+    },
+    {
+      "source_id": "cba.stock-car.2021.platform-annex",
+      "title": "Anexo Técnico Plataforma Stock Car 2021, version 1.6",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/572/anexo-tecnico-plataforma-stok-car-2021-.pdf",
+      "source_type": "homologation",
+      "published_or_updated_at": "2021-03-29",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: common 2021 Stock Car platform parts and assembly annex shared by Toyota and Chevrolet body variants. Printed p.37 lists the X-TRAC 396B023, paddle-shift electrovalve, and GCU. Printed p.15 lists the JL steering wheel and wheel paddle plate. The parts list confirms paddle hardware but does not establish rim shape, integrated display, shift lights, open-top construction, or driver technique."
+    },
+    {
+      "source_id": "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91",
+      "title": "Live AMS2 Toyota Corolla Stock Car 2021 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/2",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Public guided-verification observation ams2.toyota-corolla-stock-car-2021.20260824t014210999z-4f8e1a98 by Anonymous in AMS2 1.6.9.91. It directly found six sequential-paddle gears, clutch-required move-off, clutchless full-throttle upshift acceptance with a shift-local torque interruption, clutchless downshift acceptance with an automatic throttle spike, and a closed GT/formula rim with integrated display and shift lights."
     }
   ]
 }

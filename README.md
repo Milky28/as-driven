@@ -23,7 +23,7 @@ to `no` only when that source documents that convention.
 
 ## What ships today
 
-- Dataset 0.4.20 contains 253 reviewed car records under the open v1 JSON
+- Dataset 0.4.21 contains 254 reviewed car records under the open v1 JSON
   contract.
 - The SimHub reference client is at 0.19.0, with exact matching, three pre-flight
   card sizes, offline preview, local diagnostics, and guided verification.
@@ -135,6 +135,38 @@ Use `sync --issue 42` to process one issue. The commands require an authenticate
 GitHub CLI (`gh auth login`) but never change issue labels or comments. See
 `docs/maintainer-review-workflow.md` for the case contract and review states.
 
+Generate provider-independent research packets for every pending case, then
+validate and attach a completed structured result for final maintainer review:
+
+```shell
+python -m as_driven_db review-submissions research-brief
+python -m as_driven_db review-submissions import-research 42 completed-research.json
+```
+
+Research can propose identity, sources, and field-level findings, but these
+commands cannot register a source, edit curated data, or promote a record.
+
+Generate a schema-validated preview and dry-run, review its `final-review.md`,
+then cross the separate explicit maintainer gate:
+
+```shell
+python -m as_driven_db review-submissions prepare-review 42
+python -m as_driven_db review-submissions promote 42 --approve
+python -m as_driven_db review-submissions finalize-release --test
+```
+
+The approval command refuses release-version drift, source-id drift, duplicate
+promotion, and any case that has not reached `manifest-review`. It registers
+approved candidate sources, allocates the next numbered review batch, promotes
+the record and approval, and marks the local case promoted. Release-wide
+coverage, prose references, validation, tests, and site generation remain one
+finalization step after the chosen contribution batch.
+
+`finalize-release` regenerates the AMS2 coverage manifest and cross-simulator
+disagreement audit, refreshes maintained current release facts from the actual
+records, rebuilds the offline site, and validates the repository. Pass `--test`
+to include the full Python test suite.
+
 Stage a curated-record candidate from that draft, then promote the reviewed
 bundle once its real-world identity and sources are resolved:
 
@@ -158,13 +190,12 @@ python -m research.build_simulator_disagreement_audit
 python -m as_driven_db build-site
 ```
 
-Dataset 0.4.20 contains 253 reviewed records. Every one of the 359 exact AMS2
+Dataset 0.4.21 contains 254 reviewed records. Every one of the 359 exact AMS2
 identities observed on the development machine is either covered by one of the
-250 AMS2-backed curated records or closed by one of 15 written decisions. New
-content still fails closed until it is observed and reviewed. Four records carry
-Assetto Corsa EVO entries, three of them shared with AMS2. ACC has 18 reviewed
-cross-simulator entries. Original Assetto Corsa has two AC-only records and 12
-records shared with another simulator.
+251 AMS2-backed curated records or closed by one of 15 written decisions. New content still fails closed until it is observed and reviewed.
+4 records carry Assetto Corsa EVO entries, 3 of them shared with AMS2. ACC has 18
+reviewed cross-simulator entries. Original Assetto Corsa has 2 AC-only records and 13
+records shared with AMS2.
 
 The SimHub reference client has its own build and test command on Windows:
 
@@ -263,11 +294,11 @@ the full review policy.
 
 ## Dataset status
 
-Dataset 0.4.20 contains 253 curated car records promoted through the reviewed
-identity workflow. Of those, 250 carry AMS2 entries; one is AC EVO-only and two
-are original-AC-only. Three AMS2 records also carry separately reviewed Assetto
-Corsa EVO entries, twelve also carry original Assetto Corsa entries, and
-eighteen also carry Assetto Corsa Competizione entries. They demonstrate useful
+Dataset 0.4.21 contains 254 curated car records promoted through the reviewed
+identity workflow. Of those, 251 carry AMS2 entries; 1 is AC EVO-only and 2 are
+original-AC-only. 3 AMS2 records also carry separately reviewed Assetto Corsa
+EVO entries, 13 also carry original Assetto Corsa entries, and 18 also carry
+Assetto Corsa Competizione entries. They demonstrate useful
 coverage, not a claim of complete vehicle or simulator coverage. Older records retain selected values
 from Coanda's Extended Car Info sheet as published for AMS2 1.5.5.2, while
 post-sheet cars use independent primary-source research and exact AMS2

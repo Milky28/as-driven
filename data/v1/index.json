@@ -1,8 +1,8 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.20",
-  "released_at": "2026-08-23",
+  "dataset_version": "0.4.21",
+  "released_at": "2026-08-24",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
     "cars/alpine-a424.json",
@@ -250,6 +250,7 @@
     "cars/super-v8.json",
     "cars/swift-009c-ford-cosworth.json",
     "cars/toyota-corolla-stock-car-2020.json",
+    "cars/toyota-corolla-stock-car-2021.json",
     "cars/toyota-corolla-stock-car-2022.json",
     "cars/toyota-corolla-stock-car-2024.json",
     "cars/tvr-tuscan-t400r-gt2.json",

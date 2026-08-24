@@ -1,0 +1,351 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "toyota-corolla-stock-car-2021",
+  "identity": {
+    "display_name": "Toyota Corolla Stock Car 2021",
+    "manufacturer": "Toyota",
+    "model": "Corolla Stock Car",
+    "year": {
+      "from": 2021,
+      "to": 2021,
+      "label": "2021 Stock Car Brasil Toyota Corolla"
+    },
+    "class": "Stock Car Brasil 2021",
+    "real_world_identity_notes": "The observation matches the 2021 Toyota Corolla entry in AMS2 and the exact Toyota Corolla body covered by the CBA 2021 annex. The real car is a category-only Stock Car built on the common JL Racing platform, not a road Corolla or Corolla GR-S. The 2020 and 2022 Corolla records remain separate season-specific identities."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed 2021 CBA sources."
+      }
+    },
+    "notes": [
+      "Official 2021 sources establish six forward gears, the X-TRAC 396B023, and semiautomatic paddle actuation.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Toyota Corolla Stock Car 2021"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Toyota Corolla Stock Car 2021"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCarV8_2021"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.toyota-corolla-stock-car-2021.20260824t014210999z-4f8e1a98 by Anonymous."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found an integrated display; the real-car sources do not establish one.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found a closed-top rim; the real-car sources do not establish the rim topology.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found molded grips and a control face; the real-car sources do not establish the rim shape.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided AMS2 1.6.9.91 cockpit observation found wheel-mounted shift lights; the real-car sources do not establish them.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit observation in the exact reviewed simulator version."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 produced a throttle spike during the accepted clutchless downshift without driver throttle; real-car automatic blip behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided drive directly detected the shift-local throttle spike."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 downshift observation does not apply an upshift-style cut; real-car downshift cut behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive downshift result."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested downshift without physical clutch input; real-car running-shift clutch use is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct acceptance result from the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested downshift without driver throttle and produced an automatic blip; real-car manual blip technique is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct acceptance and throttle observations from the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 downshift observation does not use the upshift throttle-lift field; real-car downshift throttle behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive downshift result."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "AMS2 1.6.9.91 presents the six paddle gears sequentially; the reviewed real-car sources establish paddle actuation but do not explicitly state selector order.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact guided-drive gear-selection behavior."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 required physical clutch input to move from rest; the real-car launch procedure is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct move-off test from the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 upshift observation does not apply downshift rev matching; the real-car field remains unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive upshift result."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 accepted the full-throttle clutchless upshift with a shift-local torque interruption; real-car automatic cut behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The guided drive directly detected the shift-local torque interruption."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested upshift without physical clutch input; real-car running-shift clutch use is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct acceptance result from the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The exact AMS2 upshift observation does not require a driver blip; real-car upshift blip behavior is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Derived from the validated guided-drive upshift result."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted the tested full-throttle upshift; real-car throttle-lift technique is unknown.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct full-throttle acceptance result from the guided drive."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-24",
+      "source_refs": [
+        "ams2.official-car-list.stock-car-2021",
+        "cba.stock-car.2021.technical-regulations",
+        "cba.stock-car.2021.toyota-corolla-annex",
+        "cba.stock-car.2021.platform-annex",
+        "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official AMS2 listing, exact CBA 2021 Toyota Corolla annex, category regulation, and common platform annex agree on the season, body identity, and platform."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.stock-car-2021",
+          "cba.stock-car.2021.technical-regulations",
+          "cba.stock-car.2021.toyota-corolla-annex",
+          "cba.stock-car.2021.platform-annex",
+          "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The official AMS2 class listing names Toyota Corolla Stock Car 2021. The CBA Toyota annex explicitly complements the 2021 Stock Car technical regulation and covers the Stock Car Toyota Corolla, while the platform annex defines the common 2021 category hardware."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.stock-car-2021",
+          "cba.stock-car.2021.technical-regulations",
+          "cba.stock-car.2021.toyota-corolla-annex",
+          "cba.stock-car.2021.platform-annex",
+          "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "CBA Article 13 establishes six forward ratios, the X-TRAC 396B023, and semiautomatic paddle actuation. The reviewed exact-year sources do not establish selector pattern, launch or running-shift technique, cut/blip behavior, or wheel topology, so those real-car baseline fields remain unknown."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-24",
+  "archetype": {
+    "classification": "undetermined",
+    "basis": "The exact real-car sources establish gearbox hardware but leave launch and running-shift technique unknown, so multiple registered control archetypes remain compatible."
+  }
+}

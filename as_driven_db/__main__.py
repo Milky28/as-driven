@@ -11,6 +11,14 @@ from .importers.observation import import_observation
 from .intake_observation import IntakeError, intake_observation
 from .promote import promote_approved_ams2
 from .promote_observation import promote_observations
+from .research_handoff import (
+    ResearchHandoffError,
+    generate_research_briefs,
+    import_research_result,
+)
+from .review_proposal import prepare_review_proposal
+from .review_promotion import promote_review_case
+from .release_finalize import ReleaseFinalizeError, finalize_release
 from .review_submissions import (
     DEFAULT_LABEL,
     DEFAULT_REPOSITORY,
@@ -125,6 +133,87 @@ def _parser() -> argparse.ArgumentParser:
     )
     submission_queue.add_argument(
         "--json", action="store_true", help="print the queue as JSON"
+    )
+    research_brief = submission_actions.add_parser(
+        "research-brief",
+        help="generate case-specific AI/human research briefs and result templates",
+    )
+    research_brief.add_argument("--root", type=Path, default=Path.cwd())
+    research_brief.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    research_brief.add_argument(
+        "--issue",
+        type=int,
+        action="append",
+        help="generate a brief for this issue; may be repeated (default: all pending)",
+    )
+    research_brief.add_argument(
+        "--json", action="store_true", help="print generated brief metadata as JSON"
+    )
+    research_import = submission_actions.add_parser(
+        "import-research",
+        help="validate and attach one structured research result to a review case",
+    )
+    research_import.add_argument("issue", type=int)
+    research_import.add_argument("input", type=Path)
+    research_import.add_argument("--root", type=Path, default=Path.cwd())
+    research_import.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    research_import.add_argument(
+        "--replace",
+        action="store_true",
+        help="replace an existing local research result after explicit re-review",
+    )
+    research_import.add_argument(
+        "--json", action="store_true", help="print the import result as JSON"
+    )
+    review_prepare = submission_actions.add_parser(
+        "prepare-review",
+        help="generate and dry-run a curation manifest and source proposal",
+    )
+    review_prepare.add_argument("issue", type=int)
+    review_prepare.add_argument("--root", type=Path, default=Path.cwd())
+    review_prepare.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    review_prepare.add_argument(
+        "--dataset-version",
+        help="proposed release version (default: increment the current patch version)",
+    )
+    review_prepare.add_argument(
+        "--json", action="store_true", help="print proposal metadata as JSON"
+    )
+    review_promote = submission_actions.add_parser(
+        "promote",
+        help="promote one explicitly approved final-review proposal",
+    )
+    review_promote.add_argument("issue", type=int)
+    review_promote.add_argument("--root", type=Path, default=Path.cwd())
+    review_promote.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    review_promote.add_argument(
+        "--approve",
+        action="store_true",
+        help="confirm that the maintainer reviewed and approves the generated proposal",
+    )
+    review_promote.add_argument(
+        "--json", action="store_true", help="print promotion metadata as JSON"
+    )
+    release_finalize = submission_actions.add_parser(
+        "finalize-release",
+        help="regenerate release outputs, refresh status references, and validate",
+    )
+    release_finalize.add_argument("--root", type=Path, default=Path.cwd())
+    release_finalize.add_argument(
+        "--test",
+        action="store_true",
+        help="also run the complete Python unit test suite",
+    )
+    release_finalize.add_argument(
+        "--json", action="store_true", help="print finalization metadata as JSON"
     )
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
@@ -281,6 +370,40 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "review-submissions":
         root = args.root.resolve()
+        cases_dir = None
+        if hasattr(args, "cases_dir"):
+            cases_dir = (
+                args.cases_dir.resolve()
+                if args.cases_dir.is_absolute()
+                else (root / args.cases_dir).resolve()
+            )
+        if args.submission_action == "finalize-release":
+            try:
+                result = finalize_release(root, run_tests=args.test)
+            except (ReleaseFinalizeError, OSError, KeyError, ValueError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Finalized dataset {result['dataset_version']}: "
+                    f"{result['records']} records and "
+                    f"{result['simulator_views']} reviewed simulator views."
+                )
+                for path in result["generated"]:
+                    print(f"  Generated {path}")
+                for path in result["changed_documentation"]:
+                    print(f"  Updated {path}")
+                print("  Validation passed.")
+                print(
+                    "  Tests passed."
+                    if result["tests"] == "passed"
+                    else "  Tests not run; pass --test to run the full suite."
+                )
+            return 0
+
+        assert cases_dir is not None
         if args.submission_action == "sync":
             try:
                 result = sync_submissions(
@@ -311,11 +434,107 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"Review cases: {result['cases_directory']}")
             return 1 if result["error"] else 0
 
-        cases_dir = (
-            args.cases_dir.resolve()
-            if args.cases_dir.is_absolute()
-            else (root / args.cases_dir).resolve()
-        )
+        if args.submission_action == "research-brief":
+            try:
+                briefs = generate_research_briefs(
+                    root,
+                    cases_dir,
+                    set(args.issue) if args.issue else None,
+                )
+            except ResearchHandoffError as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(briefs, indent=2, ensure_ascii=False))
+            else:
+                for brief in briefs:
+                    print(
+                        f"#{brief['issue']}: wrote research brief with "
+                        f"{brief['related_records']} related record lead(s)"
+                    )
+                    print(f"  {brief['brief']}")
+                    print(f"  {brief['template']}")
+                if not briefs:
+                    print("No research-pending cases found.")
+            return 0
+
+        if args.submission_action == "import-research":
+            try:
+                result = import_research_result(
+                    root,
+                    cases_dir,
+                    args.issue,
+                    args.input,
+                    replace=args.replace,
+                )
+            except ResearchHandoffError as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Imported {result['research_status']} research for issue "
+                    f"#{result['issue']}; case state is {result['state']}."
+                )
+                print(f"  {result['result']}")
+                print("No curated data was changed; final maintainer review is still required.")
+            return 0
+
+        if args.submission_action == "prepare-review":
+            try:
+                result = prepare_review_proposal(
+                    root,
+                    cases_dir,
+                    args.issue,
+                    dataset_version=args.dataset_version,
+                )
+            except (ResearchHandoffError, ValueError, FileExistsError, KeyError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Prepared issue #{result['issue']} for final manifest review "
+                    f"as dataset {result['dataset_version']}; dry-run {result['dry_run']}."
+                )
+                print(f"  Summary: {result['summary']}")
+                print(f"  Manifest: {result['manifest']}")
+                print(f"  Sources: {result['sources']}")
+                print(f"  Preview record: {result['preview_record']}")
+                print("No curated data was changed.")
+            return 0
+
+        if args.submission_action == "promote":
+            try:
+                result = promote_review_case(
+                    root,
+                    cases_dir,
+                    args.issue,
+                    approved=args.approve,
+                )
+            except (ResearchHandoffError, ValueError, FileExistsError, KeyError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Promoted issue #{result['issue']} as "
+                    f"{result['record_id']} in dataset {result['dataset_version']}."
+                )
+                print(f"  Manifest: {result['manifest']}")
+                print(f"  Registered {len(result['sources_added'])} candidate source(s).")
+                for path in result["written"]:
+                    print(f"  {path}")
+                print(
+                    "Release finalization is still required. After the release batch, run:\n"
+                    "  python -m as_driven_db review-submissions "
+                    "finalize-release --test"
+                )
+            return 0
+
         cases = list_review_cases(cases_dir)
         if args.json:
             print(json.dumps(cases, indent=2, ensure_ascii=False))
@@ -323,14 +542,18 @@ def main(argv: list[str] | None = None) -> int:
         if not cases:
             print(f"No review cases in {cases_dir}. Run `review-submissions sync` first.")
             return 0
-        print("ISSUE  STATE                CLASSIFICATION                SIM   CAR")
+        print("ISSUE  STATE                RESEARCH       CLASSIFICATION                SIM   CAR")
         for case in cases:
             issue = f"#{case['issue']}"
             state = str(case["state"] or "unknown")[:20]
+            research = str(case["research"] or "-")[:14]
             classification = str(case["classification"] or "-")[:29]
             simulator = str(case["simulator"] or "-").upper()[:5]
             car = case["telemetry_name"] or case["title"] or "-"
-            print(f"{issue:<6} {state:<20} {classification:<29} {simulator:<5} {car}")
+            print(
+                f"{issue:<6} {state:<20} {research:<14} "
+                f"{classification:<29} {simulator:<5} {car}"
+            )
             if case["error"]:
                 print(f"       ERROR: {case['error']}")
         print(f"\n{len(cases)} review case(s) in {cases_dir}")

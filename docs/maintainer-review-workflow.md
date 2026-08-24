@@ -107,17 +107,111 @@ These are local routing decisions, not authenticity verdicts. In particular,
 `identity-research` does not assert that the contributor's proposed identity is
 correct.
 
-## Continue review
+## Hand off identity research
 
-Open `staged.json` for the mechanical simulator-observation candidate and use
-the Issue Form answers in `case.json` only as research leads. Resolve identity
-and real-car controls from registered sources, create the checked-in review
-manifest, and retain explicit human review before running:
+Generate research packets for every pending case:
+
+```shell
+python -m as_driven_db review-submissions research-brief
+```
+
+Generate or regenerate selected cases with one or more `--issue` arguments:
+
+```shell
+python -m as_driven_db review-submissions research-brief --issue 42 --issue 47
+```
+
+Each selected case gains two ignored working files:
+
+```text
+research-brief.md
+research-result.template.json
+```
+
+The brief is provider-independent and can be handed to a human, Codex, Claude,
+or another research system. It contains contributor hints, the exact simulator
+observation, mechanically staged values, explicit source standards, unresolved
+questions, and deterministic related-record leads. A related lead is either an
+exact curated simulator identity or a display name that matches after removing
+a four-digit year. It is labelled as a lead and never becomes an identity match.
+
+Research must return JSON conforming to
+`schema/v1/submission-research-result.schema.json`. The result separates:
+
+- the proposed exact identity and whether to create or reuse a record;
+- candidate source metadata and exact scope;
+- page, section, figure, timestamp, or other precise locators;
+- field-level established, conflicting, and `not-established` findings;
+- source references and confidence for each claim; and
+- remaining questions and researcher/model attribution.
+
+Import the completed result:
+
+```shell
+python -m as_driven_db review-submissions import-research 42 completed-research.json
+```
+
+Import checks the schema, exact case id, source-id uniqueness, claim/source
+cross-references, proposed record action, and whether a supposedly complete
+result actually resolves or explicitly conflicts on identity. It refuses to
+overwrite an existing local result unless the maintainer passes `--replace`.
+A complete result changes only the ignored local case state to `final-review`;
+partial and blocked results remain visibly routed for more work. No source is
+registered and no curated file is changed.
+
+## Final review and promotion
+
+Generate a final-review packet after complete research has been imported:
+
+```shell
+python -m as_driven_db review-submissions prepare-review 42
+```
+
+This writes ignored `final-review.md`, proposed source and promotion manifests,
+and schema-validated preview record, approval, and live-source files. It runs
+the real promoter against a temporary copy of the current dataset and refuses
+incomplete control research, invalid source records, stale identities, or a
+promotion conflict. It does not change curated files.
+
+Review those files, especially the real-car baseline, unknown fields, exact
+simulator overrides, source wording, and identity. Then cross the explicit
+maintainer gate:
+
+```shell
+python -m as_driven_db review-submissions promote 42 --approve
+```
+
+The command requires the case to remain in `manifest-review`, requires the
+proposal to target the next patch after the current dataset, re-runs promotion
+in a temporary copy, reuses identical registered sources, rejects source-id
+drift, allocates the next numbered `curation/review-batch-N.json`, registers new
+sources, promotes the record and approval, and marks the ignored local case
+`promoted`. Omitting `--approve` changes nothing.
+
+Promotion does not silently rewrite release-wide prose or machine-specific
+coverage inputs. After every approved case for a release is promoted, close the
+batch with:
+
+```shell
+python -m as_driven_db review-submissions finalize-release --test
+```
+
+The command regenerates the AMS2 exact-identity coverage manifest from the
+maintainer machine's current audit and SimHub identity files, rebuilds the
+cross-simulator disagreement audit, derives release and simulator counts from
+the curated records, refreshes maintained current-status references, rebuilds
+the offline site, validates the repository, and—with `--test`—runs the full
+Python suite. Omitting `--test` leaves the suite visibly reported as not run.
+Historical version prose is not rewritten.
+
+The lower-level path remains available for records not coming through the
+public-submission queue:
 
 ```shell
 python -m as_driven_db promote-observation curation/review-batch.json
 ```
 
 Promotion remains deliberately outside synchronization. A successful download,
-valid schema, contributor identity suggestion, or future AI research result can
-never promote a record by itself.
+valid schema, contributor identity suggestion, or AI research result can never
+promote a record by itself. Only the explicit final maintainer command can cross
+that boundary.

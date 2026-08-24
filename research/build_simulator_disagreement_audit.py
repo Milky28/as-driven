@@ -8,6 +8,7 @@ finding instead of a badge with no adjudication path.
 
 from __future__ import annotations
 
+import argparse
 import json
 from collections import Counter
 from pathlib import Path
@@ -246,10 +247,16 @@ def build_audit(root: Path = ROOT) -> dict[str, Any]:
 
 
 def main() -> int:
-    payload = build_audit()
-    OUT.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    root = args.root.resolve()
+    output = args.output or root / "research" / "simulator-disagreement-audit.json"
+    payload = build_audit(root)
+    output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(payload["summary"], indent=2))
-    print(f"Wrote {OUT}")
+    print(f"Wrote {output}")
     return 0
 
 

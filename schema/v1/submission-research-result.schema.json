@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:as-driven:schema:v1:submission-research-result",
+  "title": "As Driven submission research result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "research_status",
+    "researched_at",
+    "researcher",
+    "identity",
+    "sources",
+    "claims",
+    "open_questions",
+    "notes"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "research_status": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "partial",
+        "blocked"
+      ]
+    },
+    "researched_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "researcher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "kind"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "human",
+            "ai-assisted",
+            "ai"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "record_action",
+        "record_id",
+        "display_name",
+        "manufacturer",
+        "model",
+        "year",
+        "class",
+        "real_world_identity_notes",
+        "confidence",
+        "basis",
+        "confusion_risks"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "established",
+            "partial",
+            "unresolved",
+            "conflicting"
+          ]
+        },
+        "record_action": {
+          "type": "string",
+          "enum": [
+            "create-new",
+            "use-existing",
+            "undetermined"
+          ]
+        },
+        "record_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "display_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manufacturer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "year": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "integer",
+              "minimum": 1880,
+              "maximum": 2100
+            },
+            "to": {
+              "type": "integer",
+              "minimum": 1880,
+              "maximum": 2100
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "real_world_identity_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "basis": {
+          "type": "string"
+        },
+        "confusion_risks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "title",
+          "publisher",
+          "url",
+          "source_type",
+          "retrieved_at",
+          "reuse_status",
+          "exact_scope",
+          "locators",
+          "notes"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "archive_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "manufacturer",
+              "homologation",
+              "official-simulator",
+              "in-game-observation",
+              "community-research",
+              "secondary",
+              "other"
+            ]
+          },
+          "published_or_updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "reuse_status": {
+            "type": "string",
+            "enum": [
+              "permitted",
+              "facts-only-review",
+              "permission-required",
+              "unknown"
+            ]
+          },
+          "exact_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "locators": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "locator",
+                "quote",
+                "supports"
+              ],
+              "properties": {
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "quote": {
+                  "type": "string"
+                },
+                "supports": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "pattern": "^/"
+                  }
+                }
+              }
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "finding",
+          "proposed_value",
+          "confidence",
+          "source_refs",
+          "basis"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "finding": {
+            "type": "string",
+            "enum": [
+              "established",
+              "not-established",
+              "conflicting"
+            ]
+          },
+          "proposed_value": true,
+          "confidence": {
+            "$ref": "#/$defs/confidence"
+          },
+          "source_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+            }
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ]
+    }
+  }
+}

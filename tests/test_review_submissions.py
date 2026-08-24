@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 
@@ -12,9 +13,38 @@ from as_driven_db.review_submissions import (
     list_review_cases,
     sync_submissions,
 )
+from as_driven_db.research_handoff import (
+    ResearchHandoffError,
+    generate_research_briefs,
+    import_research_result,
+)
+from as_driven_db.review_proposal import prepare_review_proposal
+from as_driven_db.review_promotion import promote_review_case
 
 
 ROOT = Path(__file__).parents[1]
+
+CONTROL_PATHS = (
+    "/authentic_controls/transmission/forward_gears",
+    "/authentic_controls/transmission/gearbox_type",
+    "/authentic_controls/transmission/shift_actuation",
+    "/authentic_controls/transmission/shift_pattern",
+    "/authentic_controls/transmission/upshift/clutch",
+    "/authentic_controls/transmission/upshift/throttle_lift",
+    "/authentic_controls/transmission/upshift/automatic_cut",
+    "/authentic_controls/transmission/upshift/manual_blip",
+    "/authentic_controls/transmission/upshift/automatic_blip",
+    "/authentic_controls/transmission/downshift/clutch",
+    "/authentic_controls/transmission/downshift/throttle_lift",
+    "/authentic_controls/transmission/downshift/automatic_cut",
+    "/authentic_controls/transmission/downshift/manual_blip",
+    "/authentic_controls/transmission/downshift/automatic_blip",
+    "/authentic_controls/transmission/standing_start_clutch",
+    "/authentic_controls/steering/wheel_rim/shape",
+    "/authentic_controls/steering/wheel_rim/integrated_display",
+    "/authentic_controls/steering/wheel_rim/shift_lights",
+    "/authentic_controls/steering/wheel_rim/open_top",
+)
 
 
 def observation() -> dict:
@@ -97,7 +127,140 @@ def issue(number: int = 17) -> dict:
     }
 
 
+def research_result(case_id: str) -> dict:
+    return {
+        "$schema": "../../../schema/v1/submission-research-result.schema.json",
+        "schema_version": "1.0.0",
+        "case_id": case_id,
+        "research_status": "complete",
+        "researched_at": "2026-08-24T14:00:00Z",
+        "researcher": {
+            "name": "Test researcher",
+            "kind": "ai-assisted",
+            "model": "test-model",
+        },
+        "identity": {
+            "status": "established",
+            "record_action": "create-new",
+            "record_id": "public-test-car-2021",
+            "display_name": "Public Test Car 2021",
+            "manufacturer": "Example",
+            "model": "Public Test Car",
+            "year": {"from": 2021, "label": "2021 Public Test Car"},
+            "class": "Example GT",
+            "real_world_identity_notes": "Exact 2021 example specification.",
+            "confidence": "high",
+            "basis": "The manufacturer page identifies the exact model and year.",
+            "confusion_risks": ["Do not confuse it with the 2020 model."],
+        },
+        "sources": [
+            {
+                "source_id": "example.public-test-car.2021",
+                "title": "Public Test Car 2021 technical data",
+                "publisher": "Example",
+                "author": None,
+                "url": "https://example.invalid/public-test-car-2021",
+                "archive_url": None,
+                "source_type": "manufacturer",
+                "published_or_updated_at": "2021-01-01",
+                "retrieved_at": "2026-08-24",
+                "reuse_status": "facts-only-review",
+                "exact_scope": "Names the 2021 race car, not the adjacent model.",
+                "locators": [
+                    {
+                        "locator": "Technical data, identity heading",
+                        "quote": "Public Test Car 2021",
+                        "supports": ["/identity/manufacturer", "/identity/model", "/identity/year"],
+                    }
+                ],
+                "notes": "Candidate source for maintainer registration.",
+            }
+        ],
+        "claims": [
+            {
+                "path": "/identity/manufacturer",
+                "finding": "established",
+                "proposed_value": "Example",
+                "confidence": "high",
+                "source_refs": ["example.public-test-car.2021"],
+                "basis": "The exact-car manufacturer page names Example.",
+            },
+            {
+                "path": "/identity/model",
+                "finding": "established",
+                "proposed_value": "Public Test Car",
+                "confidence": "high",
+                "source_refs": ["example.public-test-car.2021"],
+                "basis": "The exact-car manufacturer page names the model.",
+            },
+            {
+                "path": "/identity/year",
+                "finding": "established",
+                "proposed_value": {"from": 2021, "label": "2021 Public Test Car"},
+                "confidence": "high",
+                "source_refs": ["example.public-test-car.2021"],
+                "basis": "The exact-car manufacturer page names the year.",
+            }
+        ],
+        "open_questions": [],
+        "notes": "Ready for human review, not promotion.",
+    }
+
+
+def completed_research_result(case_id: str) -> dict:
+    completed = research_result(case_id)
+    completed["claims"].extend(
+        {
+            "path": path,
+            "finding": "not-established",
+            "proposed_value": None if path.endswith("/forward_gears") else "unknown",
+            "confidence": "low",
+            "source_refs": ["example.public-test-car.2021"],
+            "basis": "The reviewed exact-car source does not establish this field.",
+        }
+        for path in CONTROL_PATHS
+    )
+    return completed
+
+
 class ReviewSubmissionTests(unittest.TestCase):
+    def sync_test_case_for_root(self, root: Path, cases: Path) -> Path:
+        raw = (json.dumps(observation(), indent=2) + "\n").encode("utf-8")
+        sync_submissions(
+            root,
+            repository="example/project",
+            cases_directory=cases,
+            inbox=cases.parent / "inbox",
+            issue_loader=lambda _repo, _label: [issue()],
+            attachment_fetcher=lambda _: raw,
+        )
+        return cases / "issue-17"
+
+    def sync_test_case(self, temp: Path) -> Path:
+        return self.sync_test_case_for_root(ROOT, temp / "cases")
+
+    def prepare_promotable_case(
+        self, repository: Path
+    ) -> tuple[Path, Path, dict]:
+        shutil.copytree(ROOT / "data", repository / "data")
+        shutil.copytree(ROOT / "curation", repository / "curation")
+        shutil.copytree(ROOT / "schema", repository / "schema")
+        cases = repository / "build" / "review-cases"
+        case_dir = self.sync_test_case_for_root(repository, cases)
+        generate_research_briefs(repository, cases, {17})
+        result_path = repository / "completed-research.json"
+        result_path.write_text(
+            json.dumps(
+                completed_research_result("github-example-project-17"),
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        import_research_result(repository, cases, 17, result_path)
+        proposal = prepare_review_proposal(repository, cases, 17)
+        return cases, case_dir, proposal
+
     def test_extracts_one_strict_github_json_attachment_and_answers(self) -> None:
         attachment = extract_observation_attachment(issue_body())
         self.assertEqual("test.json", attachment["filename"])
@@ -188,7 +351,225 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertIn("schema validation failed", case["error"])
             self.assertFalse((temp / "inbox").exists())
 
+    def test_research_brief_packages_boundaries_leads_and_a_result_template(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generated = generate_research_briefs(
+                ROOT,
+                temp / "cases",
+                {17},
+            )
+            self.assertEqual(1, len(generated))
+            brief = (case_dir / "research-brief.md").read_text(encoding="utf-8")
+            self.assertIn("Identity first, simulator behavior second", brief)
+            self.assertIn("not-established", brief)
+            self.assertIn("do not edit `data/v1`", brief.lower())
+            self.assertIn("Public Test Car", brief)
+            template = json.loads(
+                (case_dir / "research-result.template.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("github-example-project-17", template["case_id"])
+            schema = json.loads(
+                (
+                    ROOT
+                    / "schema"
+                    / "v1"
+                    / "submission-research-result.schema.json"
+                ).read_text(encoding="utf-8")
+            )
+            source_types = schema["properties"]["sources"]["items"]["properties"][
+                "source_type"
+            ]["enum"]
+            self.assertIn("in-game-observation", source_types)
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("brief-ready", case["research"]["status"])
+            self.assertEqual("research-brief.md", case["artifacts"]["research_brief"])
+
+    def test_valid_research_result_moves_only_local_case_to_final_review(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            result_path = temp / "completed-research.json"
+            result_path.write_text(
+                json.dumps(research_result("github-example-project-17"), indent=2) + "\n",
+                encoding="utf-8",
+            )
+            imported = import_research_result(
+                ROOT,
+                temp / "cases",
+                17,
+                result_path,
+            )
+            self.assertEqual("final-review", imported["state"])
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("complete", case["research"]["status"])
+            self.assertEqual("final-review", case["state"])
+            self.assertTrue((case_dir / "research-result.json").is_file())
+            self.assertFalse(
+                (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+            with self.assertRaises(ResearchHandoffError):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+
+    def test_research_result_rejects_wrong_case_and_unknown_source_refs(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            bad = research_result("github-example-project-999")
+            bad["claims"][0]["source_refs"] = ["missing.source"]
+            result_path = temp / "bad-research.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "expected 'github-example-project-17'",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
+    def test_review_proposal_dry_runs_without_changing_curated_data(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            result_path = temp / "completed-research.json"
+            completed = completed_research_result("github-example-project-17")
+            result_path.write_text(
+                json.dumps(completed, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            import_research_result(ROOT, temp / "cases", 17, result_path)
+            proposal = prepare_review_proposal(
+                ROOT,
+                temp / "cases",
+                17,
+                dataset_version="9.9.9",
+            )
+            self.assertEqual("passed", proposal["dry_run"])
+            self.assertEqual("manifest-review", proposal["state"])
+            manifest = json.loads(
+                (case_dir / "review-manifest.proposed.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("9.9.9", manifest["dataset_version"])
+            self.assertEqual(
+                "public-test-car-2021",
+                manifest["records"][0]["record_id"],
+            )
+            self.assertFalse(
+                any(
+                    override["value"] == "unknown"
+                    for override in manifest["records"][0]["simulator_overrides"]
+                )
+            )
+            self.assertTrue((case_dir / "preview-record.json").is_file())
+            self.assertTrue((case_dir / "final-review.md").is_file())
+            self.assertFalse(
+                (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+
+    def test_explicit_approval_promotes_a_ready_case_and_allocates_a_batch(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, case_dir, proposal = self.prepare_promotable_case(repository)
+
+            with self.assertRaisesRegex(ResearchHandoffError, "--approve"):
+                promote_review_case(repository, cases, 17, approved=False)
+            self.assertFalse(
+                (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+
+            promoted = promote_review_case(repository, cases, 17, approved=True)
+            self.assertEqual("promoted", promoted["state"])
+            self.assertEqual(proposal["dataset_version"], promoted["dataset_version"])
+            self.assertTrue(Path(promoted["manifest"]).is_file())
+            self.assertTrue(
+                (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").is_file()
+            )
+            self.assertTrue(
+                (
+                    repository
+                    / "curation"
+                    / "ams2-approved-public-test-car-2021.json"
+                ).is_file()
+            )
+            registry = json.loads(
+                (repository / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+            )
+            self.assertIn(
+                "example.public-test-car.2021",
+                {source["source_id"] for source in registry["sources"]},
+            )
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("promoted", case["state"])
+            with self.assertRaisesRegex(ResearchHandoffError, "not 'manifest-review'"):
+                promote_review_case(repository, cases, 17, approved=True)
+            self.assertFalse(
+                (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+
+    def test_promotion_refuses_release_and_source_drift_before_writing(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, _, proposal = self.prepare_promotable_case(repository)
+            index_path = repository / "data" / "v1" / "index.json"
+            original_index = json.loads(index_path.read_text(encoding="utf-8"))
+            advanced_index = dict(original_index, dataset_version=proposal["dataset_version"])
+            index_path.write_text(
+                json.dumps(advanced_index, indent=2) + "\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ResearchHandoffError, "regenerate the proposal"):
+                promote_review_case(repository, cases, 17, approved=True)
+            self.assertFalse(
+                (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+
+            index_path.write_text(
+                json.dumps(original_index, indent=2) + "\n", encoding="utf-8"
+            )
+            sources_path = repository / "data" / "v1" / "sources.json"
+            sources = json.loads(sources_path.read_text(encoding="utf-8"))
+            conflicting = json.loads(
+                (
+                    repository
+                    / "build"
+                    / "review-cases"
+                    / "issue-17"
+                    / "sources.proposed.json"
+                ).read_text(encoding="utf-8")
+            )["sources"][0]
+            conflicting = dict(conflicting, title="Conflicting registered title")
+            sources["sources"].append(conflicting)
+            sources_path.write_text(
+                json.dumps(sources, indent=2) + "\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ResearchHandoffError, "differs from the registered"):
+                promote_review_case(repository, cases, 17, approved=True)
+            self.assertFalse(
+                (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+            )
+
+    def test_review_proposal_reuses_matching_registered_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, case_dir, _ = self.prepare_promotable_case(repository)
+            source_proposal_path = case_dir / "sources.proposed.json"
+            candidate = json.loads(
+                source_proposal_path.read_text(encoding="utf-8")
+            )["sources"][0]
+            registry_path = repository / "data" / "v1" / "sources.json"
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            registry["sources"].append(candidate)
+            registry_path.write_text(
+                json.dumps(registry, indent=2) + "\n", encoding="utf-8"
+            )
+
+            prepare_review_proposal(repository, cases, 17)
+            refreshed = json.loads(source_proposal_path.read_text(encoding="utf-8"))
+            self.assertEqual([], refreshed["sources"])
+            summary = (case_dir / "final-review.md").read_text(encoding="utf-8")
+            self.assertIn("already registered", summary)
+
 
 if __name__ == "__main__":
     unittest.main()
-
