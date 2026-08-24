@@ -10,7 +10,7 @@ data.
 
 - Windows with SimHub 9.11.22;
 - Automobilista 2 executable version 1.6.9.91;
-- As Driven SimHub client 0.18.2;
+- As Driven SimHub client 0.19.0;
 - As Driven dataset 0.4.20 and schema v1.
 
 Newer SimHub or AMS2 versions may work, but have not been certified for this
@@ -48,8 +48,9 @@ every listed identity is a distinct vehicle.
   warning for downloaded files or scripts.
 - Updates are manual. There is no background network check or automatic
   download.
-- Contribution drafts remain on the tester's PC. The development build does
-  not submit them to GitHub.
+- Contribution drafts remain on the tester's PC until the tester explicitly
+  opens the public observation form and attaches one. The client never uploads
+  a draft itself.
 - A maintainer must validate and approve every contribution before it enters a
   released dataset.
 - Wheel artwork is category-based and may not reproduce a car's exact rim.
@@ -74,7 +75,7 @@ Dash Studio templates, overlay layouts, or settings. Restart SimHub or use
 The ZIP's adjacent `.sha256` file can be checked before installation:
 
 ```powershell
-Get-FileHash .\as-driven-simhub-0.18.2-early-access.zip -Algorithm SHA256
+Get-FileHash .\as-driven-simhub-0.19.0-early-access.zip -Algorithm SHA256
 ```
 
 Compare the displayed hash with the value in the downloaded `.sha256` file.
@@ -95,6 +96,8 @@ SimHub version, simulator version, and whether the issue occurs in live or
 preview mode. Do not include private local paths or telemetry logs unless they
 are needed and you have reviewed them.
 
-For vehicle data, use **Contribute data** in the plugin. Review the generated
-JSON draft before sharing it. See [CONTRIBUTING.md](CONTRIBUTING.md) for evidence
-and approval requirements.
+For vehicle data, use **Contribute a simulator observation** in the plugin.
+Review the generated JSON before sharing it. The saved-draft actions can select
+the exact file, create an explicitly weaker redacted research copy, or
+open the GitHub submission form. See [CONTRIBUTING.md](CONTRIBUTING.md) for
+evidence and approval requirements.

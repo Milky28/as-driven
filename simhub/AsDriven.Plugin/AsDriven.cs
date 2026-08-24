@@ -673,6 +673,27 @@ namespace AsDriven.Plugin
             return directory;
         }
 
+        internal void RevealVerificationDraft(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new InvalidOperationException("Save a draft before trying to show it.");
+            }
+            string fullPath = Path.GetFullPath(path);
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException("The saved draft no longer exists.", fullPath);
+            }
+            Process.Start("explorer.exe", "/select,\"" + fullPath + "\"");
+        }
+
+        internal void OpenObservationSubmissionForm()
+        {
+            const string url =
+                "https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml";
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+
         internal bool PreviewCar(CarCatalogEntry car)
         {
             if (_database == null || car == null)

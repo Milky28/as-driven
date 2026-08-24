@@ -283,10 +283,10 @@ namespace AsDriven.Plugin
         private UIElement CreateContributionTab()
         {
             var panel = CreateTabPanel();
-            AddSectionHeading(panel, "Contribute car data");
+            AddSectionHeading(panel, "Contribute a simulator observation");
             panel.Children.Add(new TextBlock
             {
-                Text = "Test a loaded car and create a versioned observation for maintainer review. Nothing is uploaded or added to the curated dataset automatically.",
+                Text = "Test a loaded car and create a versioned simulator observation for maintainer review. A drive does not establish the real car's identity, nothing is uploaded automatically, and no draft enters the curated dataset without research and approval.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.82,
                 Margin = new Thickness(0, 0, 0, 12),
@@ -302,7 +302,7 @@ namespace AsDriven.Plugin
             });
             draftSharing.Children.Add(new TextBlock
             {
-                Text = "Drafts remain on this PC until you explicitly share them. Public GitHub submission is not available in this development build; for now, open the folder and share the JSON draft with the project maintainer. Every contribution still requires validation and reviewer approval before release.",
+                Text = "Drafts remain on this PC until you explicitly share them. After saving, you can select the exact JSON, create a redacted research copy, or open the public GitHub observation form. You attach the file yourself; the plugin never uploads it. Every observation still requires validation, identity research, and reviewer approval before release.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.82,
                 Margin = new Thickness(0, 0, 0, 10),

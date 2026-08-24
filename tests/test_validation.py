@@ -234,6 +234,7 @@ class ValidationTests(unittest.TestCase):
             "simulator": "ams2",
             "game_version": "1.6.9.91",
             "client_version": "SimHub 9.11.22; As Driven 0.11.0",
+            "dataset_version": "0.4.20",
             "observed_at": "2026-08-11T12:00:00.0000000Z",
             "observer": "Test observer",
             "identity": {

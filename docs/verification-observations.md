@@ -3,10 +3,11 @@
 The SimHub guided verification workflow produces staging evidence; it does not
 edit a curated car record or approve a database release.
 
-The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.18.2
-prefills the exact live telemetry name, class, game/client versions, timestamp,
-and SimHub's reported maximum gear count. The tester confirms the gear count
-and supplies the observations that require judgment.
+The contract is `schema/v1/verification-observation.schema.json`. Plugin 0.19.0
+prefills the exact live telemetry name, class, game/client/dataset versions,
+timestamp, and SimHub's reported maximum gear count. The tester confirms the
+gear count and supplies the observations that require judgment. Older drafts
+without `dataset_version` remain schema-valid.
 
 Drafts are stored under:
 
@@ -19,7 +20,8 @@ the research backlog, or a curation approval.
 
 ## Intended test sequence
 
-1. Capture exact telemetry name, class, game version, client version, and time.
+1. Capture exact telemetry name, class, game version, client version, dataset
+   version, and time.
 2. Record relevant assist state. A result is not comparable when automatic
    clutch or shifting state is unknown.
 3. Ask whether the car pulls away from rest with the clutch released. The
@@ -45,7 +47,7 @@ the research backlog, or a curation approval.
 ## SimHub workflow
 
 1. Load the car and open the As Driven feature page.
-2. Expand the visually separate **Contribute car data** workflow and click
+2. Expand the visually separate **Contribute a simulator observation** workflow and click
    **Start verification from live car**.
 3. Confirm the captured identity and exact game version. The left workflow rail
    reuses the last confirmed assist profile for that simulator; changing any
@@ -59,6 +61,11 @@ the research backlog, or a curation approval.
    the completed form collapses. The observer name is remembered locally for
    the next draft.
 8. Use **Open drafts folder** to retrieve the JSON for review.
+9. After a successful save, **Show saved JSON** selects the exact file. **Open
+   submission form** opens the public GitHub issue form but does not attach or
+   upload anything. **Create redacted copy** writes a separate anonymous
+   research lead without the Assetto Corsa implementation block; the original
+   evidence remains unchanged.
 
 When an exact identity is unmatched, the plugin page shows **Contribute this
 car**. The unmatched popup directs the tester to that page; capture and guided
@@ -116,6 +123,18 @@ Validate any exported draft from the repository root with:
 ```shell
 python -m as_driven_db validate-observation path/to/observation.json
 ```
+
+For a public submission, receive the untrusted file into an ignored local inbox:
+
+```shell
+python -m as_driven_db intake-observation path/to/observation.json
+```
+
+This performs the same schema validation, hashes the exact bytes, and compares
+the observation with earlier inbox files and exact curated simulator identities.
+Only byte-identical input is an `exact-resubmission`. Independent compatible
+drives are `corroboration`; incompatible established facts are a
+`contradiction`. See `docs/contribution-intake.md` for the complete contract.
 
 ## Staging a record candidate from an observation
 

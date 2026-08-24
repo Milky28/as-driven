@@ -2,6 +2,13 @@
 
 Contributions should make a claim easier to verify, not merely add more fields.
 
+Most contributors should submit a guided-drive JSON through the GitHub
+**Submit a simulator observation** form rather than editing `data/v1`. A drive
+is evidence about one simulator implementation, not proof of real-world
+identity and not a promise that a record will be added. See
+[`docs/contribution-intake.md`](docs/contribution-intake.md) for the public
+submission, privacy, attribution, and review contract.
+
 The scope is hardware selection and authentic control technique. Do not add
 general performance specifications, electronics, or other available source
 fields without an approved user-facing control use case. Steering DOR may be

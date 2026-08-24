@@ -26,6 +26,7 @@ namespace AsDriven.Plugin
         private string _guidedAutomaticCutMethod = string.Empty;
         private string _guidedAutomaticBlipMethod = string.Empty;
         private string _guidedEvidenceNotes = string.Empty;
+        private string _savedDraftPath = string.Empty;
         // No form control: these are the first stage of a two-stage test, which
         // the drive either ran or did not. A reviewer editing the second stage
         // by hand must not silently restate the first.
@@ -193,6 +194,8 @@ namespace AsDriven.Plugin
         private void PrepareForNextCar(VerificationCaptureContext live)
         {
             _capture = null;
+            _savedDraftPath = string.Empty;
+            _savedDraftActions.Visibility = Visibility.Collapsed;
             _guidedDriveApplied = true;
             _guidedDriveStarted = false;
             _save.IsEnabled = false;
@@ -239,6 +242,8 @@ namespace AsDriven.Plugin
 
         private void ResetForm()
         {
+            _savedDraftPath = string.Empty;
+            _savedDraftActions.Visibility = Visibility.Collapsed;
             // Expansion is workflow state, not a user preference. Do not carry
             // the previous car's review state into a fresh verification.
             _drivingResultsExpander.IsExpanded = false;
@@ -357,6 +362,7 @@ namespace AsDriven.Plugin
                     Simulator = _capture.Simulator,
                     GameVersion = _capture.GameVersion,
                     ClientVersion = _capture.ClientVersion,
+                    DatasetVersion = _plugin.CurrentDatasetVersion,
                     ObservedAtUtc = _capture.ObservedAtUtc,
                     TelemetryName = _capture.TelemetryName,
                     TelemetryClass = _capture.TelemetryClass,
@@ -399,6 +405,8 @@ namespace AsDriven.Plugin
                         : new[] { _evidenceNotes.Text.Trim() }
                 };
                 string path = _plugin.SaveVerificationDraft(draft, _observer.Text);
+                _savedDraftPath = path;
+                _savedDraftActions.Visibility = Visibility.Visible;
                 _capturedIdentity.Text = "Completed: " + _capture.TelemetryName
                     + " - draft saved for review.";
                 SetStatus("\u2713 DRAFT SAVED SUCCESSFULLY\n" + path, Brushes.LightGreen, true);
@@ -1066,6 +1074,54 @@ namespace AsDriven.Plugin
             catch (Exception exception)
             {
                 _status.Text = "Could not open the drafts folder: " + exception.Message;
+            }
+        }
+
+        private void ShowSavedDraftClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                _plugin.RevealVerificationDraft(_savedDraftPath);
+                SetStatus("Selected the saved draft in File Explorer.", Brushes.LightGreen, false);
+            }
+            catch (Exception exception)
+            {
+                SetStatus("Could not show the saved draft: " + exception.Message, Brushes.IndianRed, false);
+            }
+        }
+
+        private void RedactedCopyClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                string path = VerificationObservationWriter.WriteRedactedCopy(
+                    _savedDraftPath);
+                _plugin.RevealVerificationDraft(path);
+                SetStatus(
+                    "Created and selected a redacted copy for public sharing. The original draft was not changed.\n" + path,
+                    Brushes.Goldenrod,
+                    true);
+            }
+            catch (Exception exception)
+            {
+                SetStatus("Could not create the redacted copy: " + exception.Message, Brushes.IndianRed, false);
+            }
+        }
+
+        private void SubmitSavedDraftClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                _plugin.RevealVerificationDraft(_savedDraftPath);
+                _plugin.OpenObservationSubmissionForm();
+                SetStatus(
+                    "Opened the public simulator-observation form and selected the JSON to attach. Nothing was uploaded automatically.",
+                    Brushes.LightGreen,
+                    true);
+            }
+            catch (Exception exception)
+            {
+                SetStatus("Could not open the contribution form: " + exception.Message, Brushes.IndianRed, false);
             }
         }
 

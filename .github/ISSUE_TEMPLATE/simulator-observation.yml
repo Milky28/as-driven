@@ -1,0 +1,68 @@
+name: Submit a simulator observation
+description: Share one guided-drive JSON draft for maintainer review.
+title: "[Observation]: "
+labels:
+  - contribution
+  - observation-received
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A guided drive records one simulator implementation. It does not establish the real car's identity, prove authenticity, or guarantee that a record will be added.
+
+        Submit one draft per issue. A maintainer validates the file, checks identity and real-car evidence, and decides whether it corroborates, contradicts, corrects, or extends the curated data.
+
+  - type: upload
+    id: observation
+    attributes:
+      label: Guided-drive draft JSON
+      description: Attach the exact JSON created by As Driven, or its explicitly marked redacted copy. Do not attach telemetry logs, game files, or source documents.
+    validations:
+      required: true
+      accept: ".json"
+
+  - type: dropdown
+    id: intent
+    attributes:
+      label: What prompted this observation?
+      options:
+        - A car or implementation not currently recognized
+        - A second drive that may corroborate an existing result
+        - A result that may correct an existing simulator view
+        - Another mod or package depicting an already-curated car
+        - A requested drive from the project coverage plan
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-identity
+    attributes:
+      label: What exact real car do you believe this depicts?
+      description: Optional. Include model year, generation, racing specification, or homologation class when known. "I don't know" is an acceptable answer.
+      placeholder: Example: 2018-Spec Nissan GT-R NISMO GT3, not the 2015 car.
+
+  - type: textarea
+    id: identity-evidence
+    attributes:
+      label: Identity or real-car evidence
+      description: Optional. Link manufacturer pages, manuals, regulations, homologation forms, or official mod documentation. Explain what each link establishes; do not paste protected documents or long extracts.
+
+  - type: textarea
+    id: uncertainty
+    attributes:
+      label: Uncertainty or reviewer notes
+      description: Optional. Mention nearby generations, unusual cockpit hardware, questionable telemetry, failed tests, or anything that should be repeated.
+
+  - type: checkboxes
+    id: understanding
+    attributes:
+      label: Submission understanding
+      options:
+        - label: I understand that this is simulator evidence, not proof of the real car's identity or authentic controls.
+          required: true
+        - label: I understand that a public draft can expose my chosen observer name or handle, exact timestamp, simulator/car identifiers, versions, test notes, and—for Assetto Corsa—the driven package's content ID, author, declared version, and fingerprint.
+          required: true
+        - label: The observer field contains a name or handle I am willing to publish, or I attached the explicitly marked redacted copy.
+          required: true
+        - label: I license my original factual observations and contributor-written notes for incorporation into the database under CC BY 4.0. Linked third-party sources remain the property of their owners.
+          required: true

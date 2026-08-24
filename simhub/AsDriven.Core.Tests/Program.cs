@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using AsDriven.Core;
 using Newtonsoft.Json.Linq;
 
@@ -987,6 +988,7 @@ namespace AsDriven.Core.Tests
                         Simulator = "ams2",
                         GameVersion = "1.6.9.91",
                         ClientVersion = "SimHub 9.11.22; As Driven 0.11.0",
+                        DatasetVersion = "0.4.20",
                         ObservedAtUtc = now,
                         Observer = "Test observer",
                         TelemetryName = "Test Prototype",
@@ -1026,6 +1028,7 @@ namespace AsDriven.Core.Tests
                         (string)verificationJson["$schema"],
                         "links the verification schema");
                     Equal("draft", (string)verificationJson["review_status"], "never auto-approves a draft");
+                    Equal("0.4.20", (string)verificationJson["dataset_version"], "records the exact loaded dataset version");
                     Equal(6, (int)verificationJson["tests"]["forward_gears"], "records confirmed forward gears");
                     Equal("not-tested", (string)verificationJson["tests"]["direct_gear_selection_behavior"], "records the direct-selection test state");
                     Equal(2, ((JArray)verificationJson["cockpit"]["visible_shift_actuators"]).Count, "records multiple visible actuators");
@@ -1034,6 +1037,31 @@ namespace AsDriven.Core.Tests
                             "ams2.test-prototype.",
                             StringComparison.Ordinal),
                         "creates a stable safe observation-id prefix");
+                    verificationJson["implementation"] = new JObject
+                    {
+                        { "content_id", "test_mod" },
+                        { "author", "Test author" },
+                        { "declared_version", "1.0" },
+                        { "fingerprint", new JObject
+                            {
+                                { "scope", "data-acd" },
+                                { "algorithm", "sha256" },
+                                { "digest", new string('a', 64) }
+                            }
+                        }
+                    };
+                    File.WriteAllText(verificationPath, verificationJson.ToString());
+                    string redactedPath = VerificationObservationWriter.WriteRedactedCopy(
+                        verificationPath);
+                    True(redactedPath.EndsWith(".redacted.json", StringComparison.Ordinal),
+                        "redacted copy uses an unambiguous public filename");
+                    JObject redactedJson = JObject.Parse(File.ReadAllText(redactedPath));
+                    Equal("Anonymous", (string)redactedJson["observer"], "redacted copy removes personal attribution");
+                    True(redactedJson["implementation"] == null, "redacted copy removes installed-package identity");
+                    True(
+                        ((JArray)redactedJson["evidence_notes"]).Any(
+                            item => ((string)item).StartsWith("Redacted public copy", StringComparison.Ordinal)),
+                        "redacted copy states that it is only a research lead");
 
                     verificationDraft.Simulator = "acc";
                     verificationDraft.GameVersion = "21257365";

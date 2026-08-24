@@ -18,6 +18,15 @@ simulator and vehicle identity, game and SimHub versions, test observations,
 notes, and timestamps. They are never added to the curated database or sent
 elsewhere automatically.
 
+The plugin can open a public contribution form only after the user explicitly
+asks it to. It does not attach or transmit the draft; the user chooses the file
+in their browser. A public attachment can expose the chosen observer name or
+handle, exact timestamp, simulator and vehicle identifiers, versions, tests,
+notes, and the Assetto Corsa implementation details described below. The plugin
+can also create an explicitly marked redacted copy with anonymous
+attribution and no implementation block. That copy may be useful as a research
+lead but normally cannot support a mod implementation claim.
+
 Capturing a verification draft in Assetto Corsa additionally reads files from
 that game's installation, and only then. It reads the driven car's `data.acd` -
 or its unpacked `data` directory - to record a digest of it, and `ui/ui_car.json`

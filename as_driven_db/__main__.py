@@ -8,6 +8,7 @@ from .audit_boundaries import audit_evidence_boundaries
 from .importers.ams2 import import_ams2_csv
 from .importers.iracing import import_iracing_html
 from .importers.observation import import_observation
+from .intake_observation import IntakeError, intake_observation
 from .promote import promote_approved_ams2
 from .promote_observation import promote_observations
 from .simhub import (
@@ -67,6 +68,16 @@ def _parser() -> argparse.ArgumentParser:
         "--skip-validate",
         action="store_true",
         help="do not validate the input against the observation schema first",
+    )
+
+    observation_intake = subparsers.add_parser(
+        "intake-observation",
+        help="validate and classify one untrusted public observation draft",
+    )
+    observation_intake.add_argument("input", type=Path)
+    observation_intake.add_argument("--root", type=Path, default=Path.cwd())
+    observation_intake.add_argument(
+        "--inbox", type=Path, default=Path("build") / "observation-intake"
     )
 
     ams2 = subparsers.add_parser("import-ams2", help="stage candidates from an AMS2 CSV export")
@@ -208,6 +219,17 @@ def main(argv: list[str] | None = None) -> int:
         )
         for note in bundle["review_notes"]:
             print(f"REVIEW: {note}")
+        return 0
+
+    if args.command == "intake-observation":
+        try:
+            receipt = intake_observation(
+                args.root.resolve(), args.input, args.inbox
+            )
+        except IntakeError as exception:
+            print(f"ERROR: {exception}")
+            return 1
+        print(json.dumps(receipt, indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "import-ams2":

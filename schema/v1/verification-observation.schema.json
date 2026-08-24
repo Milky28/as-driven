@@ -50,6 +50,11 @@
     "client_version": {
       "type": "string"
     },
+    "dataset_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The exact database release loaded when the observation was captured. Optional for compatibility with drafts written before client 0.19.0."
+    },
     "observed_at": {
       "type": "string",
       "format": "date-time"

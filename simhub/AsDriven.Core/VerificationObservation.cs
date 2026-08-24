@@ -13,6 +13,7 @@ namespace AsDriven.Core
         public string Simulator { get; set; }
         public string GameVersion { get; set; }
         public string ClientVersion { get; set; }
+        public string DatasetVersion { get; set; }
         public DateTime ObservedAtUtc { get; set; }
         public string Observer { get; set; }
         public string TelemetryName { get; set; }
@@ -93,6 +94,54 @@ namespace AsDriven.Core
                 writer.Write(Environment.NewLine);
             }
             return path;
+        }
+
+        /// <summary>
+        /// Write a clearly marked public lead without personal attribution or
+        /// installed-package identity. The original evidence file is untouched.
+        /// Removing the implementation block deliberately makes a mod-capable
+        /// simulator observation unsuitable for implementation-level promotion.
+        /// </summary>
+        public static string WriteRedactedCopy(string originalPath)
+        {
+            if (string.IsNullOrWhiteSpace(originalPath))
+            {
+                throw new ArgumentException("Observation path is required.", "originalPath");
+            }
+            string fullPath = Path.GetFullPath(originalPath);
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException("Observation draft was not found.", fullPath);
+            }
+            JObject payload = JObject.Parse(File.ReadAllText(fullPath));
+            payload["observer"] = "Anonymous";
+            payload.Remove("implementation");
+            const string disclosure =
+                "Redacted public copy: observer attribution and the implementation block were removed. This copy is a research lead and may not support implementation-level promotion.";
+            JArray notes = payload["evidence_notes"] as JArray;
+            if (notes == null)
+            {
+                notes = new JArray();
+                payload["evidence_notes"] = notes;
+            }
+            if (!notes.Any(item => string.Equals(
+                (string)item,
+                disclosure,
+                StringComparison.Ordinal)))
+            {
+                notes.Add(disclosure);
+            }
+            string redactedPath = Path.Combine(
+                Path.GetDirectoryName(fullPath),
+                Path.GetFileNameWithoutExtension(fullPath) + ".redacted.json");
+            using (var stream = new FileStream(
+                redactedPath, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.Write(payload.ToString(Formatting.Indented));
+                writer.Write(Environment.NewLine);
+            }
+            return redactedPath;
         }
 
         public static JObject CreatePayload(VerificationObservationDraft draft)
@@ -232,6 +281,7 @@ namespace AsDriven.Core
                 payload.Add("implementation", implementation);
             }
             AddOptional(payload, "client_version", draft.ClientVersion);
+            AddOptional(payload, "dataset_version", draft.DatasetVersion);
             string[] notes = (draft.EvidenceNotes ?? new string[0])
                 .Where(value => !string.IsNullOrWhiteSpace(value))
                 .Select(value => value.Trim())

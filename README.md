@@ -25,7 +25,7 @@ to `no` only when that source documents that convention.
 
 - Dataset 0.4.20 contains 253 reviewed car records under the open v1 JSON
   contract.
-- The SimHub reference client is at 0.18.2, with exact matching, three pre-flight
+- The SimHub reference client is at 0.19.0, with exact matching, three pre-flight
   card sizes, offline preview, local diagnostics, and guided verification.
 - The certified early-access target is Windows, SimHub 9.11.22, and AMS2
   1.6.9.91. Assetto Corsa EVO and the original Assetto Corsa are development
@@ -76,6 +76,7 @@ tests/                       Unit tests and small source-layout fixtures
 docs/data-model.md           Field semantics and confidence policy
 docs/evidence-boundaries.md  Real, simulated, and effective guidance layers
 docs/verification-observations.md  Guided in-game verification contract
+docs/contribution-intake.md  Public submission, privacy, and intake states
 docs/importers.md            AMS2 and iRacing import/review design
 docs/ams2-import-audit.md    Live import coverage and SimHub identity findings
 docs/ams2-post-sheet-research.md  Post-1.5.5.2 car/source backlog and test order
@@ -109,6 +110,15 @@ Validate a draft exported by SimHub's guided verification form:
 
 ```shell
 python -m as_driven_db validate-observation observation.json
+```
+
+Receive an untrusted public draft into the ignored local intake directory. The
+command validates the strict schema, records a SHA-256 receipt, and distinguishes
+an exact resubmission from corroboration, contradiction, another implementation,
+or a new exact identity:
+
+```shell
+python -m as_driven_db intake-observation observation.json
 ```
 
 Stage a curated-record candidate from that draft, then promote the reviewed

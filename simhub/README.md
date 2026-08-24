@@ -221,8 +221,8 @@ files, so an installation that already has a customized layout keeps it.
 
 ## Certified boundary and development coverage
 
-Client version 0.18.2 is built against the SimHub 9.11.22 SDK and packages
-dataset 0.4.19. The certified early-access target is AMS2 1.6.9.91 on Windows.
+Client version 0.19.0 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.4.20. The certified early-access target is AMS2 1.6.9.91 on Windows.
 The client also recognizes Assetto Corsa EVO and Assetto Corsa for active
 development. Assetto Corsa Competizione has 18 reviewed entries, each captured
 with its exact Steam content build. None is part of the certified release target.
@@ -405,7 +405,7 @@ form badges now distinguish usable `AUTO-DETECTED` values from orange
 `REVIEW NEEDED` unknown/not-tested results; a valid `Not applicable` value
 inferred from the selected primary mechanism is labeled `DERIVED`.
 Version 0.12.0 separates contribution from ordinary plugin settings in a
-collapsed, visually distinct **Contribute car data** workflow. An unmatched
+collapsed, visually distinct contribution workflow. An unmatched
 live car exposes a **Contribute this car** handoff on the plugin page and the
 unmatched popup identifies the mapped `BeginCarContribution` action. The form
 now highlights the current next-step button, explicitly explains why the
@@ -514,6 +514,14 @@ throttle dip can be traction control, driver input, or telemetry filtering; only
 a shift-local torque collapse under sustained throttle demand now establishes
 an ignition cut. The importer also degrades automatic-cut answers from older ACC
 drafts to `unknown`, preserving the drafts without promoting false certainty.
+Version 0.19.0 adds the explicit public observation handoff without adding an
+uploader. New drafts record the exact loaded dataset version. After saving, the
+client can select that JSON, create a separately marked anonymous copy without
+installed-package identity, or open the GitHub simulator-observation form. The
+contributor still attaches the file manually. The corresponding intake command
+strictly validates and hashes the untrusted draft, treats only identical bytes
+as a duplicate, and separates corroboration from contradictions and changed
+implementations.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged
