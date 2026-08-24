@@ -66,6 +66,9 @@ the research backlog, or a curation approval.
    upload anything. **Create redacted copy** writes a separate anonymous
    research lead without the Assetto Corsa implementation block; the original
    evidence remains unchanged.
+10. If the browser is closed before submission, return to **Contribute data**.
+    The persistent **Open submission form** and **Open saved drafts folder**
+    actions remain available without repeating the drive.
 
 When an exact identity is unmatched, the plugin page shows **Contribute this
 car**. The unmatched popup directs the tester to that page; capture and guided

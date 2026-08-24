@@ -144,8 +144,9 @@ class ObservationIntakeTests(unittest.TestCase):
         form = (
             ROOT / ".github" / "ISSUE_TEMPLATE" / "simulator-observation.yml"
         ).read_text(encoding="utf-8")
-        self.assertIn("type: upload", form)
-        self.assertIn('accept: ".json"', form)
+        self.assertIn("label: Guided-drive draft JSON", form)
+        self.assertIn("Drag the exact As Driven JSON", form)
+        self.assertIn("Drop one .json draft here", form)
         self.assertIn("simulator evidence, not proof", form)
         self.assertIn("package's content ID", form)
         self.assertIn("redacted copy", form)

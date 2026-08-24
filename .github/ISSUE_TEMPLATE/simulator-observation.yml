@@ -12,14 +12,14 @@ body:
 
         Submit one draft per issue. A maintainer validates the file, checks identity and real-car evidence, and decides whether it corroborates, contradicts, corrects, or extends the curated data.
 
-  - type: upload
+  - type: textarea
     id: observation
     attributes:
       label: Guided-drive draft JSON
-      description: Attach the exact JSON created by As Driven, or its explicitly marked redacted copy. Do not attach telemetry logs, game files, or source documents.
+      description: Drag the exact As Driven JSON into this box, or click to select it. GitHub will insert an attachment link. You may attach the marked redacted copy instead. Do not attach logs or game files.
+      placeholder: Drop one .json draft here. Wait for the upload to finish before submitting.
     validations:
       required: true
-      accept: ".json"
 
   - type: dropdown
     id: intent

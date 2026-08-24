@@ -192,6 +192,12 @@ $captureStartButton = @($ui | Where-Object {
 if ($captureStartButton.Count -ne 1 -or $captureStartButton[0].IsEnabled) {
     throw "The contributor capture button must remain disabled without live telemetry."
 }
+$persistentSubmissionButton = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Open submission form"
+    } | Select-Object -First 1)
+if ($persistentSubmissionButton.Count -ne 1 -or -not $persistentSubmissionButton[0].IsEnabled) {
+    throw "The contribution page must always provide a way to reopen the submission form."
+}
 $guidedStartButton = @($ui | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Start in-sim guided drive"
     } | Select-Object -First 1)

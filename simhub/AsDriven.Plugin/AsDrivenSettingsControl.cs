@@ -308,8 +308,15 @@ namespace AsDriven.Plugin
                 Margin = new Thickness(0, 0, 0, 10),
                 MaxWidth = 900,
             });
-            draftSharing.Children.Add(CreateSecondaryButton(
+            var draftActions = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+            };
+            draftActions.Children.Add(CreateSecondaryButton(
                 "Open saved drafts folder", 190, OpenDraftsClicked));
+            draftActions.Children.Add(CreateSecondaryButton(
+                "Open submission form", 180, OpenSubmissionFormClicked));
+            draftSharing.Children.Add(draftActions);
             _contributionFeedback = CreateFeedbackText(new Thickness(0, 7, 0, 0));
             draftSharing.Children.Add(_contributionFeedback);
             _verification = new VerificationControl(_plugin);
@@ -801,6 +808,25 @@ namespace AsDriven.Plugin
                 SetFeedback(
                     _contributionFeedback,
                     "Could not open saved drafts folder: " + exception.Message,
+                    Brushes.IndianRed);
+            }
+        }
+
+        private void OpenSubmissionFormClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                _plugin.OpenObservationSubmissionForm();
+                SetFeedback(
+                    _contributionFeedback,
+                    "Opened the public simulator-observation form. Choose a saved draft JSON to attach; nothing was uploaded automatically.",
+                    Brushes.LightGreen);
+            }
+            catch (Exception exception)
+            {
+                SetFeedback(
+                    _contributionFeedback,
+                    "Could not open the submission form: " + exception.Message,
                     Brushes.IndianRed);
             }
         }
