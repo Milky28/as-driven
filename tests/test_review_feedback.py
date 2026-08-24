@@ -10,6 +10,7 @@ from unittest.mock import patch
 from as_driven_db.review_feedback import (
     ReviewFeedbackError,
     publication_blockers,
+    publication_next_step,
     publish_review_result,
 )
 
@@ -200,3 +201,42 @@ class ReviewFeedbackTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PublicationNextStepTests(unittest.TestCase):
+    """The hint has to name the stage that is actually outstanding.
+
+    It used to say "use Finalize release + run tests, then commit and push"
+    whatever the blockers were, so a maintainer who had just finalized was told
+    to finalize again.
+    """
+
+    def test_finalize_comes_before_committing(self) -> None:
+        step = publication_next_step(
+            [
+                "AMS2 coverage manifest is not finalized for dataset 0.4.31",
+                "tracked release files are not committed",
+            ]
+        )
+        self.assertIn("Finalize release", step)
+
+    def test_committing_comes_before_pushing(self) -> None:
+        step = publication_next_step(
+            [
+                "tracked release files are not committed",
+                "the current branch is 2 commit(s) ahead of its upstream; push first",
+            ]
+        )
+        self.assertIn("commit", step.lower())
+        self.assertNotIn("Finalize release", step)
+
+    def test_a_pushed_release_is_asked_for_nothing_else(self) -> None:
+        step = publication_next_step(
+            ["the current branch is 1 commit(s) ahead of its upstream; push first"]
+        )
+        self.assertIn("push", step.lower())
+        self.assertNotIn("Finalize release", step)
+
+    def test_no_blockers_asks_for_nothing(self) -> None:
+        self.assertEqual("", publication_next_step([]))
+

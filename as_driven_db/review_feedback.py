@@ -114,6 +114,40 @@ def publication_blockers(root: Path, case: dict[str, Any]) -> list[str]:
     return blockers
 
 
+def publication_next_step(blockers: list[str]) -> str:
+    """The one action that actually moves publication forward.
+
+    The workbench used to print "use Finalize release + run tests, then commit
+    and push" whatever the blockers said, so a maintainer who had just run
+    finalize was told to run it again. The blockers are ordered work: nothing
+    can be committed until the release is finalized, and nothing pushed until it
+    is committed, so the next step is the first stage still outstanding.
+    """
+
+    if not blockers:
+        return ""
+    finalize = (
+        "is not finalized",
+        "is missing; run finalize-release",
+        "has not been built; run finalize-release",
+    )
+    if any(any(token in blocker for token in finalize) for blocker in blockers):
+        return "Next: use Finalize release + run tests above."
+    if any("not committed" in blocker for blocker in blockers):
+        return "Next: commit the release, then push it."
+    if any("push first" in blocker for blocker in blockers):
+        return "Next: push the branch."
+    if any(
+        "dataset" in blocker or "absent from the current dataset" in blocker
+        for blocker in blockers
+    ):
+        return (
+            "Next: this case cannot publish against the current dataset. Promote "
+            "it again, or advance the release it targets."
+        )
+    return "Next: resolve the blockers above; publication stays closed until they clear."
+
+
 def _feedback(case: dict[str, Any]) -> tuple[str, str]:
     state = case.get("state")
     if state == "promoted":
