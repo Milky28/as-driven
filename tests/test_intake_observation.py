@@ -1,6 +1,7 @@
 import copy
 import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 
@@ -152,6 +153,14 @@ class ObservationIntakeTests(unittest.TestCase):
         self.assertIn("redacted copy", form)
         self.assertNotIn("privacy-reduced", form)
         self.assertIn("CC BY 4.0", form)
+        self.assertIsNone(
+            re.search(
+                r'^\s+(?:label|description|placeholder):\s+[^"\'|>{\[].*:\s',
+                form,
+                re.MULTILINE,
+            ),
+            "Issue Form plain scalars containing a second colon must be quoted",
+        )
 
     def test_exact_curated_identity_routes_to_comparison_not_rejection(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

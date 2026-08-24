@@ -39,7 +39,7 @@ body:
     attributes:
       label: What exact real car do you believe this depicts?
       description: Optional. Include model year, generation, racing specification, or homologation class when known. "I don't know" is an acceptable answer.
-      placeholder: Example: 2018-Spec Nissan GT-R NISMO GT3, not the 2015 car.
+      placeholder: "Example: 2018-Spec Nissan GT-R NISMO GT3, not the 2015 car."
 
   - type: textarea
     id: identity-evidence
