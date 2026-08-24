@@ -153,6 +153,7 @@ then cross the separate explicit maintainer gate:
 python -m as_driven_db review-submissions prepare-review 42
 python -m as_driven_db review-submissions promote 42 --approve
 python -m as_driven_db review-submissions finalize-release --test
+python -m as_driven_db review-submissions publish-result 42
 ```
 
 The approval command refuses release-version drift, source-id drift, duplicate
@@ -166,6 +167,11 @@ finalization step after the chosen contribution batch.
 disagreement audit, refreshes maintained current release facts from the actual
 records, rebuilds the offline site, and validates the repository. Pass `--test`
 to include the full Python test suite.
+
+After the release commit is pushed, `publish-result` previews the exact
+contributor-facing comment and close reason. It makes no GitHub change unless
+rerun with `--approve`; approval is refused while tracked release files are
+dirty, the branch is ahead of its upstream, or finalization artifacts are stale.
 
 Stage a curated-record candidate from that draft, then promote the reviewed
 bundle once its real-world identity and sources are resolved:

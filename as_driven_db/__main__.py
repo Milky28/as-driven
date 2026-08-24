@@ -18,6 +18,7 @@ from .research_handoff import (
 )
 from .review_proposal import prepare_review_proposal
 from .review_promotion import promote_review_case
+from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
 from .review_submissions import (
     DEFAULT_LABEL,
@@ -201,6 +202,23 @@ def _parser() -> argparse.ArgumentParser:
     )
     review_promote.add_argument(
         "--json", action="store_true", help="print promotion metadata as JSON"
+    )
+    review_publish = submission_actions.add_parser(
+        "publish-result",
+        help="preview or explicitly publish final feedback and close a GitHub issue",
+    )
+    review_publish.add_argument("issue", type=int)
+    review_publish.add_argument("--root", type=Path, default=Path.cwd())
+    review_publish.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    review_publish.add_argument(
+        "--approve",
+        action="store_true",
+        help="publish the shown comment and close the issue after readiness checks",
+    )
+    review_publish.add_argument(
+        "--json", action="store_true", help="print feedback metadata as JSON"
     )
     release_finalize = submission_actions.add_parser(
         "finalize-release",
@@ -533,6 +551,38 @@ def main(argv: list[str] | None = None) -> int:
                     "  python -m as_driven_db review-submissions "
                     "finalize-release --test"
                 )
+            return 0
+
+        if args.submission_action == "publish-result":
+            try:
+                result = publish_review_result(
+                    root,
+                    cases_dir,
+                    args.issue,
+                    approved=args.approve,
+                )
+            except (ReviewFeedbackError, OSError, KeyError, ValueError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                action = "Published" if result["status"] == "published" else "Preview"
+                print(
+                    f"{action} for issue #{result['issue']} "
+                    f"({result['case_state']}; close as {result['close_reason']}):"
+                )
+                print()
+                print(result["comment"])
+                if result["blockers"]:
+                    print("\nPublication blockers:")
+                    for blocker in result["blockers"]:
+                        print(f"  - {blocker}")
+                if result["status"] == "preview":
+                    print(
+                        "\nNo GitHub changes were made. After committing, pushing, and "
+                        "reviewing this text, rerun with --approve."
+                    )
             return 0
 
         cases = list_review_cases(cases_dir)

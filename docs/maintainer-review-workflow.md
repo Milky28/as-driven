@@ -204,6 +204,31 @@ the offline site, validates the repository, and—with `--test`—runs the full
 Python suite. Omitting `--test` leaves the suite visibly reported as not run.
 Historical version prose is not rewritten.
 
+## Publish the result
+
+Commit and push the finalized release before telling a contributor that it is
+available. Then preview the exact GitHub response:
+
+```shell
+python -m as_driven_db review-submissions publish-result 42
+```
+
+The preview includes the proposed comment, close reason, and every publication
+blocker. It does not call GitHub. Once the text is reviewed, cross a separate
+external-write gate:
+
+```shell
+python -m as_driven_db review-submissions publish-result 42 --approve
+```
+
+Approval is limited to terminal `promoted`, `released`, and byte-identical
+`duplicate` cases. It refuses dirty tracked release files, an unpushed commit,
+stale coverage or disagreement artifacts, a missing site build, and a second
+publication attempt. A successful call comments and closes the GitHub issue,
+then records a local ignored publication receipt in `case.json`. Duplicate
+wording explicitly distinguishes a byte-identical resubmission from independent
+corroboration.
+
 The lower-level path remains available for records not coming through the
 public-submission queue:
 
