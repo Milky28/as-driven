@@ -185,6 +185,44 @@ class ObservationIntakeTests(unittest.TestCase):
             self.assertEqual("curated-identity-comparison", receipt["status"])
             self.assertEqual("bmw-m6-gt3", receipt["curated_matches"][0]["record_id"])
 
+    def test_a_curated_car_in_another_simulator_is_offered_as_a_candidate(self) -> None:
+        """A contributor cannot know the car is already curated elsewhere.
+
+        Assetto Corsa calls it "Lamborghini Miura P400 SV" where the curated
+        record's AMS2 name is "Lamborghini Miura SV". Exact matching finds
+        nothing and never will, so the case used to open as a new identity with
+        the existing record unmentioned.
+        """
+
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            payload = observation("Lamborghini Miura P400 SV")
+            payload["simulator"] = "ac"
+            payload["observation_id"] = "ac.lamborghini-miura-p400-sv.20260824t120000000z-abcd1234"
+            payload["identity"]["internal_id"] = "ks_lamborghini_miura_sv"
+            receipt = intake_observation(
+                ROOT, self.write(temp, payload, "miura.json"), temp / "inbox"
+            )
+            self.assertEqual("curated-identity-candidate", receipt["status"])
+            self.assertEqual([], receipt["curated_matches"], "it is not a match")
+            self.assertEqual(
+                "lamborghini-miura-sv",
+                receipt["curated_candidates"][0]["record_id"],
+            )
+
+    def test_a_candidate_is_not_offered_where_the_simulator_is_already_covered(self) -> None:
+        # An exact match would have found it, and its absence is an answer.
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            payload = observation("Lamborghini Miura SV Special Edition")
+            receipt = intake_observation(
+                ROOT, self.write(temp, payload, "ams2-miura.json"), temp / "inbox"
+            )
+            self.assertNotIn(
+                "lamborghini-miura-sv",
+                [item["record_id"] for item in receipt["curated_candidates"]],
+            )
+
     def test_invalid_or_oversized_input_is_not_stored(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

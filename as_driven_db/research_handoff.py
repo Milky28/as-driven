@@ -91,6 +91,13 @@ def related_record_leads(
         for match in receipt.get("curated_matches", [])
         if isinstance(match, dict) and match.get("record_id")
     }
+    # Records the submission may be a second simulator's view of. Suggested by
+    # intake, never matched, and listed so the research can settle them.
+    candidate_ids = {
+        str(match["record_id"])
+        for match in receipt.get("curated_candidates", [])
+        if isinstance(match, dict) and match.get("record_id")
+    } - exact_ids
 
     records: list[dict[str, Any]] = []
     refs: set[str] = set()
@@ -98,8 +105,9 @@ def related_record_leads(
         record = _read_json(data_dir / relative, "curated record")
         display_name = str(record.get("identity", {}).get("display_name") or "")
         is_exact = record.get("record_id") in exact_ids
+        is_candidate = record.get("record_id") in candidate_ids
         is_family = bool(family) and _family_key(display_name) == family
-        if not is_exact and not is_family:
+        if not is_exact and not is_candidate and not is_family:
             continue
         source_refs = _record_source_refs(record)
         refs.update(source_refs)
@@ -113,7 +121,11 @@ def related_record_leads(
                     "real_world_identity_notes"
                 ),
                 "source_refs": source_refs,
-                "relationship": "exact-curated-identity" if is_exact else "same-name-with-year-removed",
+                "relationship": (
+                    "exact-curated-identity" if is_exact
+                    else "candidate-same-car-another-simulator" if is_candidate
+                    else "same-name-with-year-removed"
+                ),
             }
         )
     sources = [

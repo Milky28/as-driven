@@ -161,6 +161,9 @@ def extract_issue_answers(body: str) -> dict[str, str | None]:
 def _research_required(classification: str) -> bool:
     return classification in {
         "new-identity",
+        # Carries a candidate curated record, which the research has to confirm
+        # or reject. It is not a match and must not skip the research gate.
+        "curated-identity-candidate",
         "changed-implementation",
         "additional-implementation",
         "related-identity",

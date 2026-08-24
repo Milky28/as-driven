@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 from typing import Any
 
@@ -206,6 +207,61 @@ def _curated_matches(root: Path, observation: dict[str, Any]) -> list[dict[str, 
     return matches
 
 
+def _normalise_tokens(value: str) -> set[str]:
+    return {token for token in re.split(r"[^a-z0-9]+", value.casefold()) if token}
+
+
+def _curated_candidates(root: Path, observation: dict[str, Any]) -> list[dict[str, str]]:
+    """Curated records this submission may be a second simulator's view of.
+
+    A contributor cannot be expected to know a car is already curated from
+    another simulator, and exact matching will never tell them: Assetto Corsa
+    calls the Miura "Lamborghini Miura P400 SV" where the curated record's AMS2
+    name is "Lamborghini Miura SV". Nothing matched, so the case was routed as a
+    new identity and the existing record went unmentioned.
+
+    This suggests, it does not decide. A candidate needs the record's
+    manufacturer and every token of its model to appear in the submitted name,
+    which is deliberately loose enough to propose a GT3 record for a GT3 Evo -
+    the reviewer is expected to reject that. Nothing here is a match, and the
+    client's exact matching is untouched: a shared name is not a shared car.
+    """
+
+    data_dir = root / "data" / "v1"
+    index = json.loads((data_dir / "index.json").read_text(encoding="utf-8"))
+    simulator = observation["simulator"]
+    submitted = _normalise_tokens(observation["identity"]["telemetry_name"])
+    if not submitted:
+        return []
+    candidates: list[dict[str, str]] = []
+    for relative in index["records"]:
+        record = json.loads((data_dir / relative).read_text(encoding="utf-8"))
+        covered = {entry["simulator"] for entry in record["simulators"]}
+        if simulator in covered:
+            # Already covered for this simulator: an exact match would have
+            # found it, and its absence is a real answer rather than a gap.
+            continue
+        identity = record["identity"]
+        manufacturer = _normalise_tokens(str(identity.get("manufacturer") or ""))
+        model = _normalise_tokens(str(identity.get("model") or ""))
+        if not manufacturer or not model:
+            continue
+        if manufacturer <= submitted and model <= submitted:
+            candidates.append(
+                {
+                    "record_id": record["record_id"],
+                    "display_name": identity.get("display_name"),
+                    "covered_simulators": ",".join(sorted(covered)),
+                    "basis": (
+                        "The record's manufacturer and model both appear in the "
+                        "submitted name. This is a suggestion for the reviewer, "
+                        "not a match."
+                    ),
+                }
+            )
+    return candidates
+
+
 def _already_reviewed(root: Path, observation_id: str) -> bool:
     sources = json.loads(
         (root / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
@@ -232,6 +288,7 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
 
     relationship, related = _relationship(observation, stored)
     curated_matches = _curated_matches(root, observation)
+    curated_candidates = _curated_candidates(root, observation)
     already_reviewed = _already_reviewed(root, observation["observation_id"])
     if already_reviewed:
         classification = "already-reviewed-observation"
@@ -239,6 +296,10 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
         classification = relationship
     elif curated_matches:
         classification = "curated-identity-comparison"
+    elif curated_candidates:
+        # Still research, and still the reviewer's decision - but the case now
+        # carries the record it may belong to instead of starting from nothing.
+        classification = "curated-identity-candidate"
     else:
         classification = "new-identity"
 
@@ -259,6 +320,7 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
         "implementation": observation.get("implementation"),
         "related_submissions": related,
         "curated_matches": curated_matches,
+        "curated_candidates": curated_candidates,
     }
     receipt_path.write_text(
         json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",
