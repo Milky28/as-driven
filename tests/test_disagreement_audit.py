@@ -167,7 +167,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(["ams2"], adjudication["matching_simulators"])
         self.assertEqual(["ac"], adjudication["departing_simulators"])
 
-    def test_completed_provisional_review_keeps_only_three_provisional(self) -> None:
+    def test_completed_provisional_review_keeps_only_reviewed_provisional(self) -> None:
         provisional = {
             finding["finding_id"]
             for finding in self.checked_in["findings"]
@@ -178,13 +178,20 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 "milano-gt55--transmission-downshift-manual-blip",
                 "porsche-911-rsr-1974--transmission-shift-pattern",
                 "saleen-s7-r-gt1--transmission-downshift-manual-blip",
+                # The Miura's Assetto Corsa entry arrived with the manual blip
+                # its drive demanded, over an authentic value of optional that
+                # rests on a guided drive rather than a primary source. That is
+                # the same shape as the two blip departures above and is handled
+                # the documented way: the authentic value stays optional and the
+                # simulator's demand is an override.
+                "lamborghini-miura-sv--transmission-downshift-manual-blip",
             },
             provisional,
         )
         self.assertEqual(
             {
                 "authentic-baseline-open": 15,
-                "provisional-departure": 3,
+                "provisional-departure": 4,
                 "supported-departure": 7,
             },
             self.checked_in["summary"]["by_status"],

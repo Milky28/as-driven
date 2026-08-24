@@ -1,6 +1,7 @@
 import copy
 import json
 from pathlib import Path
+import shutil
 import re
 import tempfile
 import unittest
@@ -185,6 +186,47 @@ class ObservationIntakeTests(unittest.TestCase):
             self.assertEqual("curated-identity-comparison", receipt["status"])
             self.assertEqual("bmw-m6-gt3", receipt["curated_matches"][0]["record_id"])
 
+    def _dataset(self, temp: Path, record: dict) -> Path:
+        """A root holding one curated record, so the case cannot drift.
+
+        These assertions turn on which simulators cover a car, which is exactly
+        what promoting a submission changes. Pointed at the real dataset they
+        pass until the workflow they describe succeeds, and then fail.
+        """
+
+        root = temp / "root"
+        (root / "data" / "v1" / "cars").mkdir(parents=True)
+        shutil.copytree(ROOT / "schema", root / "schema")
+        (root / "data" / "v1" / "cars" / f"{record['record_id']}.json").write_text(
+            json.dumps(record), encoding="utf-8"
+        )
+        (root / "data" / "v1" / "index.json").write_text(
+            json.dumps({"records": [f"cars/{record['record_id']}.json"]}), encoding="utf-8"
+        )
+        (root / "data" / "v1" / "sources.json").write_text(
+            json.dumps({"sources": []}), encoding="utf-8"
+        )
+        return root
+
+    @staticmethod
+    def _curated(simulator: str, telemetry_name: str) -> dict:
+        return {
+            "record_id": "test-miura",
+            "identity": {
+                "display_name": "Test Miura SV",
+                "manufacturer": "Lamborghini",
+                "model": "Miura SV",
+            },
+            "simulators": [
+                {
+                    "simulator": simulator,
+                    "identities": [
+                        {"kind": "telemetry-name", "value": telemetry_name},
+                    ],
+                }
+            ],
+        }
+
     def test_a_curated_car_in_another_simulator_is_offered_as_a_candidate(self) -> None:
         """A contributor cannot know the car is already curated elsewhere.
 
@@ -196,32 +238,33 @@ class ObservationIntakeTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
+            root = self._dataset(temp, self._curated("ams2", "Lamborghini Miura SV"))
             payload = observation("Lamborghini Miura P400 SV")
             payload["simulator"] = "ac"
             payload["observation_id"] = "ac.lamborghini-miura-p400-sv.20260824t120000000z-abcd1234"
             payload["identity"]["internal_id"] = "ks_lamborghini_miura_sv"
             receipt = intake_observation(
-                ROOT, self.write(temp, payload, "miura.json"), temp / "inbox"
+                root, self.write(temp, payload, "miura.json"), temp / "inbox"
             )
             self.assertEqual("curated-identity-candidate", receipt["status"])
             self.assertEqual([], receipt["curated_matches"], "it is not a match")
-            self.assertEqual(
-                "lamborghini-miura-sv",
-                receipt["curated_candidates"][0]["record_id"],
-            )
+            self.assertEqual("test-miura", receipt["curated_candidates"][0]["record_id"])
 
     def test_a_candidate_is_not_offered_where_the_simulator_is_already_covered(self) -> None:
-        # An exact match would have found it, and its absence is an answer.
+        # Once that simulator has an entry an exact match would have found it,
+        # and its absence is an answer rather than a gap. This is the state the
+        # record above reaches once its submission is promoted.
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
-            payload = observation("Lamborghini Miura SV Special Edition")
+            root = self._dataset(temp, self._curated("ac", "Lamborghini Miura P400 SV"))
+            payload = observation("Lamborghini Miura P400 SV")
+            payload["simulator"] = "ac"
+            payload["observation_id"] = "ac.lamborghini-miura-p400-sv.20260824t120000000z-abcd1234"
             receipt = intake_observation(
-                ROOT, self.write(temp, payload, "ams2-miura.json"), temp / "inbox"
+                root, self.write(temp, payload, "miura.json"), temp / "inbox"
             )
-            self.assertNotIn(
-                "lamborghini-miura-sv",
-                [item["record_id"] for item in receipt["curated_candidates"]],
-            )
+            self.assertEqual([], receipt["curated_candidates"])
+            self.assertEqual("test-miura", receipt["curated_matches"][0]["record_id"])
 
     def test_invalid_or_oversized_input_is_not_stored(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
