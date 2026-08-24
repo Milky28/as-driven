@@ -1,0 +1,351 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "chevrolet-cruze-stock-car-2022",
+  "identity": {
+    "display_name": "Chevrolet Cruze Stock Car 2022",
+    "manufacturer": "Chevrolet",
+    "model": "Cruze Stock Car",
+    "year": {
+      "from": 2022,
+      "to": 2022,
+      "label": "2022 Stock Car Pro Series Chevrolet Cruze"
+    },
+    "class": "Stock Car Pro Series",
+    "real_world_identity_notes": "This is the Chevrolet Cruze body entry in the 2022 Brazilian Stock Car Pro Series, a category-specific race car on the common JL platform, not a road Cruze. The 2022 CBA announcement explicitly identifies separate Chevrolet Cruze, Toyota Corolla, and common Platform annexes."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: semi automatic; shift actuation: sequential paddles.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Chevrolet Cruze Stock Car 2022"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Chevrolet Cruze Stock Car 2022"
+        },
+        {
+          "kind": "class-id",
+          "value": "StockCarV8_2022"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-24",
+      "source_refs": [
+        "ams2.official-car-list.stock-car-pro-series-2022",
+        "cba.stock-car.2022.regulations-announcement",
+        "cba.stock-car.2022.technical-regulations",
+        "cba.stock-car.2022.platform-annex",
+        "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official AMS2 class page names the exact 2022 Chevrolet Cruze entry and the governing-body announcement identifies the 2022 Stock Car rule set and Chevrolet Cruze annex. The 2022 CBA platform and technical regulations provide exact-year common hardware evidence."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.stock-car-pro-series-2022",
+          "cba.stock-car.2022.regulations-announcement",
+          "cba.stock-car.2022.technical-regulations",
+          "cba.stock-car.2022.platform-annex",
+          "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The official AMS2 class page names the exact 2022 Chevrolet Cruze entry and the governing-body announcement identifies the 2022 Stock Car rule set and Chevrolet Cruze annex. The 2022 CBA platform and technical regulations provide exact-year common hardware evidence."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ams2.official-car-list.stock-car-pro-series-2022",
+          "cba.stock-car.2022.regulations-announcement",
+          "cba.stock-car.2022.technical-regulations",
+          "cba.stock-car.2022.platform-annex",
+          "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The exact-year Article 13.2 table lists first through sixth forward gear ratios for the specified X-TRAC transmission. Article 13 calls the permitted paddle-shift system semiautomatic; the platform annex identifies the X-TRAC unit and electrohydraulic paddle/GCU hardware. The exact-year regulation requires the semiautomatic paddle-shift system and the common platform lists its paddle, electrovalve, accumulator, pump, wiring, and GCU parts. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-24",
+  "archetype": {
+    "classification": "undetermined",
+    "basis": "The reviewed real-car evidence leaves enough control fields unknown that multiple registered archetypes remain compatible."
+  }
+}

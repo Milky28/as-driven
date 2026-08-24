@@ -189,6 +189,11 @@ def update_release_references(
         if path.name == "EARLY_ACCESS.md":
             text = _replace(
                 text,
+                r"- As Driven dataset \d+\.\d+\.\d+ and schema v1\.",
+                f"- As Driven dataset {version} and schema v1.",
+            )
+            text = _replace(
+                text,
                 r"The database currently contains \d+ curated car records\.",
                 f"The database currently contains {records} curated car records.",
             )

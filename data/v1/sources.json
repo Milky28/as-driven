@@ -7169,6 +7169,62 @@
       "retrieved_at": "2026-08-24",
       "reuse_status": "facts-only-review",
       "notes": "Public guided-verification observation ams2.toyota-corolla-stock-car-2021.20260824t014210999z-4f8e1a98 by Anonymous in AMS2 1.6.9.91. It directly found six sequential-paddle gears, clutch-required move-off, clutchless full-throttle upshift acceptance with a shift-local torque interruption, clutchless downshift acceptance with an automatic throttle spike, and a closed GT/formula rim with integrated display and shift lights."
+    },
+    {
+      "source_id": "ams2.official-car-list.stock-car-pro-series-2022",
+      "title": "Automobilista 2 Stock Car Pro Series 2022 class page",
+      "publisher": "Automobilista 2 / Reiza Studios",
+      "url": "https://automobilista.gg/classes/stock-car-pro-series-2022",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official AMS2 catalogue class page for the 2022 Stock Car Pro Series implementation. Class page, Browse Cars: “Class Stock Car Pro Series 2022; Car Chevrolet Cruze Stock Car 2022” Reviewed for /identity/display_name, /identity/year, /identity/class. Establishes the exact simulator catalogue identity and class label, not real-car technique."
+    },
+    {
+      "source_id": "cba.stock-car.2022.regulations-announcement",
+      "title": "Conheça os regulamentos do Campeonato Brasileiro de Stock Car",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://cba.org.br/campeonato/noticiasinfo/212/2140/conheca-os-regulamentos-do-campeonato-brasileiro-de-stock-car",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: CBA announcement of the governing 2022 Brazilian Stock Car Pro Series rule package. Article page lines 161-172 / notice dated 10 February 2022: “Anexo Técnico Chevrolet Cruze, Anexo Técnico Toyota Corolla e Anexo Técnico Plataforma, que aborda itens comuns às duas marcas.” Reviewed for /identity, /identity/real_world_identity_notes. This is the strongest exact-year identity and scope source. It confirms that the Platform annex is common to both 2022 marques; it does not itself specify driver technique.",
+      "author": "Assessoria de Imprensa",
+      "published_or_updated_at": "2022-02-10"
+    },
+    {
+      "source_id": "cba.stock-car.2022.technical-regulations",
+      "title": "Regulamento Técnico Stock Car 2022",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://www.cba.org.br/upload/downloads/610/stock-car-regulamento-tecnico-2022-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: CBA technical regulation for the 2022 Campeonato Brasileiro de Stock Car, including Article 13 transmission requirements applicable to the class. Printed p.13, Article 13.1: “É permitido somente o uso de embreagem multi-disco, marca RAM 8371.” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/standing_start_clutch. Printed p.13, Article 13.2 transmission table: “Marchas: 1ª, 2ª, 3ª, 4ª, 5ª, 6ª; X-TRAC 396B023.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Printed p.13, Article 13.2: “Permitido somente o uso do sistema semiautomático de acionamento do câmbio ‘paddle shift’, fornecido pela empresa designada.” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. Printed p.13, Article 13.2: “É permitido o uso de ‘display’ de marchas.” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display. The regulation establishes permitted hardware and equipment. It does not say where the permitted display is mounted, whether the selector pattern is represented as sequential, or how the driver operates the clutch, throttle, cut, or blip functions.",
+      "published_or_updated_at": "2022-02-05"
+    },
+    {
+      "source_id": "cba.stock-car.2022.platform-annex",
+      "title": "Anexo Técnico Plataforma Stock Car 2022, version 1.0",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/610/anexo-te-cnico-plataforma-stock-car-2022-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Common 2022 Stock Car platform parts and assembly annex shared by the Chevrolet Cruze and Toyota Corolla body variants. Printed p.5, Pedais parts list: “CILINDRO DA EMBREAGEM 7/8 pol ... PEDALEIRA ... pedal da embreagem.” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/standing_start_clutch. Printed p.35, drivetrain parts list: “EMBREAGEM ... Marca RAM – modelo 8371, 3 discos, diâmetro do disco 184 mm.” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Printed p.37, Trem de força - transmissão e paddle shift: “CÂMBIO X-TRAC 396B023 ... ELETROVÁLVULA DO PADDLE SHIFT ... GCU.” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. Printed p.15, Volante e coluna de direção: “VOLANTE JL ... TAMPA DO VOLANTE JL ... CHAPA DA BORBOLETA DO VOLANTE PADDLE SHIFT.” Reviewed for /authentic_controls/transmission/shift_actuation. The parts list confirms clutch hardware, the X-TRAC/paddle system, and a JL wheel assembly. It does not establish rim topology, wheel-integrated display, wheel shift lights, or driving technique.",
+      "published_or_updated_at": "2022-02-05"
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-cruze-stock-car-2022-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Cruze Stock Car 2022 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/3",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2022.20260824t020716307z-82a41e3a by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

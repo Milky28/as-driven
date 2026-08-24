@@ -456,6 +456,18 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "public-test-car-2021",
                 manifest["records"][0]["record_id"],
             )
+            notes = manifest["records"][0]["control_notes"]
+            self.assertIn("no real-car control values", notes[0])
+            self.assertNotIn("X-TRAC 396B023", notes[0])
+            self.assertIn(
+                "2021 Public Test Car",
+                manifest["records"][0]["confidence_notes"],
+            )
+            sources = json.loads(
+                (case_dir / "sources.proposed.json").read_text(encoding="utf-8")
+            )
+            self.assertIn("Reviewed for", sources["sources"][0]["notes"])
+            self.assertNotIn(" Supports ", sources["sources"][0]["notes"])
             self.assertFalse(
                 any(
                     override["value"] == "unknown"

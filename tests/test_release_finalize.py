@@ -62,6 +62,7 @@ def _seed_release(root: Path) -> None:
             "- Dataset: 0.9.9 with 1 curated records.\n", encoding="utf-8"
         )
     (root / "EARLY_ACCESS.md").write_text(
+        "- As Driven dataset 0.9.9 and schema v1.\n"
         "The database currently contains 1 curated car records. Of those, 1 carry\n"
         "AMS2 entries; one is currently AC EVO-only and two original-AC records are AC-only.\n",
         encoding="utf-8",
@@ -112,6 +113,10 @@ class ReleaseFinalizeTests(unittest.TestCase):
 
             self.assertIn("README.md", changed)
             self.assertIn("Dataset 1.2.3 contains 2 reviewed", (root / "README.md").read_text())
+            self.assertIn(
+                "As Driven dataset 1.2.3 and schema v1",
+                (root / "EARLY_ACCESS.md").read_text(),
+            )
             archetypes = (root / "docs" / "archetypes.md").read_text()
             self.assertIn("1 of 2 records are classified", archetypes)
             self.assertIn("1 awaiting classification", archetypes)

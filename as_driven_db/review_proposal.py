@@ -63,7 +63,10 @@ def _candidate_source(source: dict[str, Any]) -> dict[str, Any]:
         detail = locator["locator"]
         if locator.get("quote"):
             detail += f": “{locator['quote']}”"
-        detail += " Supports " + ", ".join(locator.get("supports", [])) + "."
+        # A locator may establish a value or document that a reviewed source is
+        # silent about a narrower technique. The claim object carries that
+        # verdict; calling every locator "support" overstates the latter case.
+        detail += " Reviewed for " + ", ".join(locator.get("supports", [])) + "."
         locators.append(detail)
     notes = " ".join(
         part
@@ -228,6 +231,39 @@ def _specification_basis(result: dict[str, Any]) -> str:
     return basis.strip()
 
 
+def _identity_scope_label(identity: dict[str, Any]) -> str:
+    year = identity.get("year") or {}
+    return str(year.get("label") or year.get("from") or identity["display_name"])
+
+
+def _established_controls_note(result: dict[str, Any]) -> str:
+    labels = {
+        "/authentic_controls/transmission/forward_gears": "forward gears",
+        "/authentic_controls/transmission/gearbox_type": "gearbox construction",
+        "/authentic_controls/transmission/shift_actuation": "shift actuation",
+        "/authentic_controls/transmission/shift_pattern": "shift pattern",
+        "/authentic_controls/transmission/standing_start_clutch": "standing-start clutch use",
+        "/authentic_controls/steering/wheel_rim/shape": "wheel-rim shape",
+        "/authentic_controls/steering/wheel_rim/integrated_display": "integrated wheel display",
+        "/authentic_controls/steering/wheel_rim/shift_lights": "wheel shift lights",
+        "/authentic_controls/steering/wheel_rim/open_top": "open-top wheel geometry",
+    }
+    established: list[str] = []
+    for claim in result["claims"]:
+        path = str(claim["path"])
+        if claim["finding"] != "established" or not path.startswith(
+            "/authentic_controls/"
+        ):
+            continue
+        label = labels.get(path, path.removeprefix("/authentic_controls/").replace("/", " "))
+        value = claim.get("proposed_value")
+        rendered = str(value).replace("-", " ") if not isinstance(value, (dict, list)) else json.dumps(value, ensure_ascii=False)
+        established.append(f"{label}: {rendered}")
+    if not established:
+        return "The reviewed exact-scope sources establish no real-car control values."
+    return "The reviewed exact-scope sources establish " + "; ".join(established) + "."
+
+
 def _proposal_summary(
     case: dict[str, Any],
     manifest: dict[str, Any],
@@ -366,13 +402,13 @@ def prepare_review_proposal(
         "control_overrides": overrides,
         "simulator_overrides": simulator_overrides,
         "confidence_notes": (
-            "The exact 2021 identity and supported gearbox hardware come from the "
-            "candidate official sources. Technique and wheel fields absent from those "
-            "sources remain unknown in the real-car baseline; the exact AMS2 values "
-            "remain simulator-specific guided observations."
+            f"The exact {_identity_scope_label(identity)} identity and established "
+            "control fields come from the candidate authoritative sources. Fields "
+            "absent from those sources remain unknown in the real-car baseline; the "
+            "exact simulator values remain simulator-specific guided observations."
         ),
         "control_notes": [
-            "Official 2021 sources establish six forward gears, the X-TRAC 396B023, and semi-automatic paddle actuation.",
+            _established_controls_note(result),
             "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
             f"AMS2 {staged['record']['simulators'][0]['verified_game_version']} behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
         ],

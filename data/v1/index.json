@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.21",
+  "dataset_version": "0.4.22",
   "released_at": "2026-08-24",
   "records": [
     "cars/alpine-a110-gt4-evo.json",
@@ -49,6 +49,7 @@
     "cars/chevrolet-corvette-z06-gt3r.json",
     "cars/chevrolet-cruze-stock-car-2019.json",
     "cars/chevrolet-cruze-stock-car-2020.json",
+    "cars/chevrolet-cruze-stock-car-2022.json",
     "cars/chevrolet-cruze-stock-car-2024.json",
     "cars/chevrolet-omega-stock-car-1999.json",
     "cars/chevrolet-opala-old-stock-race.json",
