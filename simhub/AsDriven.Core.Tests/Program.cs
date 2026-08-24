@@ -45,6 +45,29 @@ namespace AsDriven.Core.Tests
                     "a car covered by several simulators is previewable under each");
                 Equal(database.Cars.Length, catalogPairs.Count,
                     "never lists one car twice for the same simulator");
+
+                // A record carries one class, and for a car with no real racing
+                // category that value is whichever simulator groups it: "Vintage
+                // Cars Tier 1" is what AMS2 calls the Miura. Assetto Corsa
+                // records no class for its cars, so showing the record's class
+                // there put an AMS2 grouping on an AC card, under an AC footer.
+                int classless = 0;
+                int classed = 0;
+                foreach (CarCatalogEntry car in database.Cars)
+                {
+                    if (car.Simulator == "ac" || car.Simulator == "ac-evo")
+                    {
+                        Equal(string.Empty, car.CarClass ?? string.Empty,
+                            "states no class for " + car.Simulator + " car " + car.RecordId);
+                        classless++;
+                    }
+                    else if (!string.IsNullOrEmpty(car.CarClass))
+                    {
+                        classed++;
+                    }
+                }
+                True(classless > 0, "the dataset covers a simulator that states no class");
+                True(classed > 0, "a simulator that states a class still reports one");
                 for (int catalogIndex = 1; catalogIndex < database.Cars.Length; catalogIndex++)
                 {
                     True(

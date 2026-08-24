@@ -372,7 +372,15 @@ namespace AsDriven.Core
                     SimulatorLabel = SimulatorShortName(simulatorId),
                     RecordId = recordId,
                     DisplayName = RequiredString(identity, "display_name", recordPath),
-                    CarClass = RequiredString(identity, "class", recordPath),
+                    // The record carries one class, and for a car with no real
+                    // racing category that value is whichever simulator groups
+                    // it - "Vintage Cars Tier 1" is what AMS2 calls the Miura.
+                    // Assetto Corsa records no class for its cars at all, so
+                    // showing the record's class there put an AMS2 grouping on
+                    // an AC card. A simulator that states no class is shown none.
+                    CarClass = HasClassIdentity(simulatorIdentities)
+                        ? RequiredString(identity, "class", recordPath)
+                        : string.Empty,
                     ShiftActuation = RequiredString(effectiveTransmission, "shift_actuation", recordPath),
                     ShiftPattern = RequiredString(effectiveTransmission, "shift_pattern", recordPath),
                     FirstGearPosition = OptionalState(effectiveTransmission, "first_gear_position"),
@@ -947,6 +955,20 @@ namespace AsDriven.Core
                 expanded.Add(value + suffix);
             }
             return expanded;
+        }
+
+        /// <summary>Whether this simulator states a class for the car.</summary>
+        private static bool HasClassIdentity(JArray identities)
+        {
+            foreach (JObject identity in identities.OfType<JObject>())
+            {
+                JToken kind = identity["kind"];
+                if (kind != null && kind.Value<string>() == "class-id")
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static string Key(string simulator, string kind, string value)
