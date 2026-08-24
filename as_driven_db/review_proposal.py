@@ -8,6 +8,7 @@ import shutil
 import tempfile
 from typing import Any
 
+from .site import simulator_label
 from .promote_observation import promote_observations
 from .research_handoff import (
     ResearchHandoffError,
@@ -460,7 +461,15 @@ def prepare_review_proposal(
         "control_notes": [
             _established_controls_note(result),
             "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
-            f"AMS2 {staged['record']['simulators'][0]['verified_game_version']} behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+            # Name the simulator the drive was actually made in. This said AMS2
+            # for every submission, so Assetto Corsa records carried an AMS2
+            # attribution beside an Assetto Corsa build id.
+            (
+                f"{simulator_label(staged['record']['simulators'][0]['simulator'])} "
+                f"{staged['record']['simulators'][0]['verified_game_version']} behavior and "
+                "cockpit values were directly observed and are preserved as simulator "
+                "overrides where the real baseline is unknown."
+            ),
         ],
         "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
         "live_source_url": case["issue"]["url"],

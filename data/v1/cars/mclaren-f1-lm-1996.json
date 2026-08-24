@@ -146,6 +146,18 @@
           ]
         },
         {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 1.6.9.91. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+          ]
+        },
+        {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
           "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",

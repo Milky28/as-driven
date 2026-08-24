@@ -49,7 +49,7 @@
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 4; gearbox construction: synchromesh; shift actuation: h pattern.",
       "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
-      "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
   "simulators": [
@@ -160,6 +160,18 @@
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
           },
           "source_refs": [
             "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"

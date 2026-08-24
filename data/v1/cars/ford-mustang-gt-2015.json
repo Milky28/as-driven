@@ -50,7 +50,7 @@
     "notes": [
       "The reviewed exact-scope sources establish steering wheel_rim diameter_mm: 356; transmission downshift clutch: required; forward gears: 6; shift actuation: h pattern; shift pattern: standard h; transmission first_gear_position: up left; standing-start clutch use: required; transmission upshift clutch: required.",
       "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
-      "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
   "simulators": [
@@ -161,6 +161,18 @@
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ford-mustang-2015-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.ford-mustang-2015.20260824t190918976z-2e561466 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
           },
           "source_refs": [
             "ac.local-live-ford-mustang-2015-controls.14923034"

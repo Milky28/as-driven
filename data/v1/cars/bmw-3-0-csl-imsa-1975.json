@@ -49,7 +49,7 @@
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern.",
       "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
-      "AC 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
   "simulators": [
