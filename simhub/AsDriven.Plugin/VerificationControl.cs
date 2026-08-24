@@ -1113,7 +1113,9 @@ namespace AsDriven.Plugin
             try
             {
                 _plugin.RevealVerificationDraft(_savedDraftPath);
-                _plugin.OpenObservationSubmissionForm();
+                _plugin.OpenObservationSubmissionForm(
+                    _capture.SimulatorDisplayName,
+                    _capture.TelemetryName);
                 SetStatus(
                     "Opened the public simulator-observation form and selected the JSON to attach. Nothing was uploaded automatically.",
                     Brushes.LightGreen,

@@ -12,6 +12,8 @@ body:
 
         Submit one draft per issue. A maintainer validates the file, checks identity and real-car evidence, and decides whether it corroborates, contradicts, corrects, or extends the curated data.
 
+        **Title:** Keep the `[Observation]:` prefix and add the simulator and telemetry car name, for example `[Observation]: AMS2 — Chevrolet Cruze Stock Car 2021`. When opened directly after saving a drive, As Driven fills this in for you.
+
   - type: textarea
     id: observation
     attributes:

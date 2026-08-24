@@ -198,6 +198,19 @@ $persistentSubmissionButton = @($ui | Where-Object {
 if ($persistentSubmissionButton.Count -ne 1 -or -not $persistentSubmissionButton[0].IsEnabled) {
     throw "The contribution page must always provide a way to reopen the submission form."
 }
+$submissionUrlMethod = $pluginType.GetMethod(
+    "ObservationSubmissionUrl",
+    [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
+$prefilledSubmissionUrl = if ($null -eq $submissionUrlMethod) {
+    ""
+}
+else {
+    [string]$submissionUrlMethod.Invoke($null, @("AMS2", "Test Car"))
+}
+if ($prefilledSubmissionUrl -notlike "*template=simulator-observation.yml*" `
+    -or $prefilledSubmissionUrl -notlike "*title=%5BObservation%5D%3A%20AMS2%20%E2%80%94%20Test%20Car*") {
+    throw "A saved drive must open the observation form with a descriptive prefilled title."
+}
 $guidedStartButton = @($ui | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Start in-sim guided drive"
     } | Select-Object -First 1)

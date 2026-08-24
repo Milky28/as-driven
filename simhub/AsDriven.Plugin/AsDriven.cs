@@ -689,9 +689,33 @@ namespace AsDriven.Plugin
 
         internal void OpenObservationSubmissionForm()
         {
-            const string url =
-                "https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml";
+            OpenObservationSubmissionForm(string.Empty, string.Empty);
+        }
+
+        internal void OpenObservationSubmissionForm(
+            string simulatorDisplayName,
+            string telemetryName)
+        {
+            string url = ObservationSubmissionUrl(simulatorDisplayName, telemetryName);
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+
+        internal static string ObservationSubmissionUrl(
+            string simulatorDisplayName,
+            string telemetryName)
+        {
+            const string baseUrl =
+                "https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml";
+            if (string.IsNullOrWhiteSpace(simulatorDisplayName)
+                || string.IsNullOrWhiteSpace(telemetryName))
+            {
+                return baseUrl;
+            }
+            string title = "[Observation]: "
+                + simulatorDisplayName.Trim()
+                + " — "
+                + telemetryName.Trim();
+            return baseUrl + "&title=" + Uri.EscapeDataString(title);
         }
 
         internal bool PreviewCar(CarCatalogEntry car)

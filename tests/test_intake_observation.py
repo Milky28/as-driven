@@ -148,6 +148,8 @@ class ObservationIntakeTests(unittest.TestCase):
         self.assertIn("label: Guided-drive draft JSON", form)
         self.assertIn("Drag the exact As Driven JSON", form)
         self.assertIn("Drop one .json draft here", form)
+        self.assertIn("Keep the `[Observation]:` prefix", form)
+        self.assertIn("simulator and telemetry car name", form)
         self.assertIn("simulator evidence, not proof", form)
         self.assertIn("package's content ID", form)
         self.assertIn("redacted copy", form)
