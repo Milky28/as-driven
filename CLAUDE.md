@@ -198,6 +198,17 @@ approval are required before release. See `PRIVACY.md` and
   constructor or gearbox-specialist documentation. Reopen a record only when such
   a source appears, not by re-running the searches already recorded in
   `docs/gearbox-construction-research.md`.
+- **Eighty-six records still carry an automatic blip measured before the
+  measurement was corrected.** Until 2026-08-17 the guided drive read the blip
+  from the highest throttle seen since the attempt began, so throttle the driver
+  was still carrying before the lift counted as the car blipping. The fault could
+  only invent a blip, never hide one, so every `no` is sound and only `yes` is
+  exposed, and a false `yes` also derives `manual_blip: not-required` - the card
+  then tells a driver no blip is needed on a car that needs one. The fourteen
+  stick and dog gearboxes were re-driven: seven were wrong. The eighty-six that
+  remain are paddle cars where a blip is expected, and each clears when that car
+  is next driven. Do not re-drive them as a batch. See
+  `research/auto-blip-premeasurement.json`.
 - A drive-derived `downshift.manual_blip: required` over an unknown construction
   is unsupported rather than established. Every time the construction was later
   established for a car in that position - both Formula Vee records and the
