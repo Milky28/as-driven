@@ -1489,11 +1489,17 @@ namespace AsDriven.Plugin
             this.AttachDelegate("DriverSummaryCompactLine3", delegate { return _current.DriverSummaryCompactLine3; });
             this.AttachDelegate("SimulatorDiffers", delegate { return _current.SimulatorDiffers; });
             this.AttachDelegate("SimulatorDifference", delegate { return _current.SimulatorDifference; });
+            this.AttachDelegate("SimulatorLabel", delegate { return _current.SimulatorLabel; });
             this.AttachDelegate("ShifterDiffers", delegate { return _current.ShifterDiffers; });
             this.AttachDelegate("LaunchDiffers", delegate { return _current.LaunchDiffers; });
             this.AttachDelegate("UpshiftDiffers", delegate { return _current.UpshiftDiffers; });
             this.AttachDelegate("DownshiftDiffers", delegate { return _current.DownshiftDiffers; });
             this.AttachDelegate("WheelDiffers", delegate { return _current.WheelDiffers; });
+            this.AttachDelegate("ShifterUnestablished", delegate { return _current.ShifterUnestablished; });
+            this.AttachDelegate("LaunchUnestablished", delegate { return _current.LaunchUnestablished; });
+            this.AttachDelegate("UpshiftUnestablished", delegate { return _current.UpshiftUnestablished; });
+            this.AttachDelegate("DownshiftUnestablished", delegate { return _current.DownshiftUnestablished; });
+            this.AttachDelegate("WheelUnestablished", delegate { return _current.WheelUnestablished; });
             this.AttachDelegate("UpshiftClutch", delegate { return _current.UpshiftClutch; });
             this.AttachDelegate("DownshiftClutch", delegate { return _current.DownshiftClutch; });
             this.AttachDelegate("UpshiftClutchLabel", delegate { return _current.UpshiftClutchLabel; });

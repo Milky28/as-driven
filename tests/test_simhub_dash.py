@@ -175,6 +175,7 @@ class SimHubDashTests(unittest.TestCase):
             "AsDriven.UpshiftTone",
             "AsDriven.DownshiftTone",
             "AsDriven.UseBandTone",
+            "AsDriven.SimulatorLabel",
             "AsDriven.VerifiedGameVersion",
             "AsDriven.Confidence",
             "AsDriven.PopupDetailedVisible",
@@ -510,8 +511,8 @@ class SimHubDashTests(unittest.TestCase):
             for value in walk(dashboard)
             if isinstance(value, dict) and "Name" in value
         }
-        # The card renders effective behaviour, so each row that an override can
-        # change carries its own marker, hidden unless that override exists.
+        # The card renders effective behaviour. Each row distinguishes a real
+        # departure from simulator evidence filling an unknown authentic value.
         for name, flag in (
             ("FitShiftDiffers", "ShifterDiffers"),
             ("FitWheelDiffers", "WheelDiffers"),
@@ -521,10 +522,31 @@ class SimHubDashTests(unittest.TestCase):
         ):
             self.assertEqual(
                 f"[AsDriven.{flag}]",
-                named[name]["Bindings"]["Visible"]["Formula"]["Expression"],
+                named[name + "Departure"]["Bindings"]["Visible"]["Formula"]["Expression"],
                 name,
             )
             self.assertEqual("* not as the real car", named[name + "Text"]["Text"])
+            unestablished_flag = flag.replace("Differs", "Unestablished")
+            self.assertEqual(
+                f"[AsDriven.{unestablished_flag}] && ![AsDriven.{flag}]",
+                named[name + "Unestablished"]["Bindings"]["Visible"]["Formula"]["Expression"],
+                name,
+            )
+            self.assertEqual(
+                "* real car not established",
+                named[name + "UnestablishedText"]["Text"],
+            )
+
+    def test_evidence_footer_uses_the_matched_simulator(self):
+        dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
+        named = {
+            value["Name"]: value
+            for value in walk(dashboard)
+            if isinstance(value, dict) and "Name" in value
+        }
+        expression = named["Evidence"]["Bindings"]["Text"]["Formula"]["Expression"]
+        self.assertIn("[AsDriven.SimulatorLabel]", expression)
+        self.assertNotIn("'AMS2 '", expression)
 
         # Glance has no room for one and must not claim otherwise.
         glance = self.generator.build_dashboard(overlay=True, variant="glance")

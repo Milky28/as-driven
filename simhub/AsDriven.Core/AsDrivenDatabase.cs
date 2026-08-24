@@ -345,7 +345,14 @@ namespace AsDriven.Core
                 // simulator's explicit overrides applied. A car whose real gearbox
                 // has no clutch pedal can still require clutch input in a given
                 // simulator, and the driver needs the value that works in the sim.
-                string[] overriddenPaths = OverriddenPaths(simulator);
+                string[] overriddenPaths;
+                string[] unestablishedPaths;
+                ClassifyOverrides(
+                    controls,
+                    simulator,
+                    recordPath,
+                    out overriddenPaths,
+                    out unestablishedPaths);
                 JObject effectiveControls = ApplyOverrides(controls, simulator, recordPath);
                 JObject effectiveTransmission = RequiredObject(
                     effectiveControls, "transmission", recordPath);
@@ -362,6 +369,7 @@ namespace AsDriven.Core
                 var entry = new CarRecordValues
                 {
                     DatasetVersion = datasetVersion,
+                    SimulatorLabel = SimulatorShortName(simulatorId),
                     RecordId = recordId,
                     DisplayName = RequiredString(identity, "display_name", recordPath),
                     CarClass = RequiredString(identity, "class", recordPath),
@@ -401,7 +409,8 @@ namespace AsDriven.Core
                     WheelRimSourceLabel = RequiredString(simulatorWheelRim, "source_label", recordPath),
                     DriverSummary = OptionalText(record, "driver_summary"),
                     OverriddenPaths = overriddenPaths,
-                    SimulatorDifference = DescribeOverrides(simulator),
+                    UnestablishedPaths = unestablishedPaths,
+                    SimulatorDifference = DescribeOverrides(simulator, overriddenPaths),
                     WheelIntegratedDisplay = OptionalState(simulatorWheelRim, "integrated_display"),
                     WheelShiftLights = OptionalState(simulatorWheelRim, "shift_lights"),
                     // The steering lock lives on the simulator entry: every
@@ -463,34 +472,84 @@ namespace AsDriven.Core
         }
 
         /// <summary>
-        /// Returns the authentic controls with this simulator's overrides applied.
-        /// An override states an explicit, sourced deviation: the real car's value
-        /// stays in the record, while guidance uses the value that is true in the
-        /// simulator. Records without overrides are returned unchanged, so the
-        /// common case costs nothing.
+        /// Separates confirmed simulator departures from observations that fill
+        /// an unresolved real-car field. Both use the override representation so
+        /// guidance can show the value that works in the simulator, but only the
+        /// former may be described as unlike the real car.
         /// </summary>
-        /// <summary>
-        /// The JSON Pointer paths this simulator overrides. An override is the
-        /// record's explicit statement that the simulator does something the
-        /// real car did not, so these are what the card marks.
-        /// </summary>
-        private static string[] OverriddenPaths(JObject simulator)
+        private static void ClassifyOverrides(
+            JObject controls,
+            JObject simulator,
+            string recordPath,
+            out string[] departures,
+            out string[] unestablished)
         {
             JArray overrides = simulator["overrides"] as JArray;
             if (overrides == null || overrides.Count == 0)
             {
-                return new string[0];
+                departures = new string[0];
+                unestablished = new string[0];
+                return;
             }
-            var paths = new List<string>();
+            var departurePaths = new List<string>();
+            var unestablishedPaths = new List<string>();
             foreach (JObject entry in overrides.OfType<JObject>())
             {
-                JToken path = entry["path"];
-                if (path != null && path.Type != JTokenType.Null)
+                string path = RequiredString(entry, "path", recordPath);
+                JToken simulatorValue = entry["value"];
+                if (simulatorValue == null)
                 {
-                    paths.Add(path.Value<string>());
+                    throw new InvalidDataException(
+                        "Override has no value: " + path + " in " + recordPath);
+                }
+
+                JToken authenticValue = AuthenticValueAtPath(controls, path, recordPath);
+                if (IsUnestablished(authenticValue))
+                {
+                    if (!IsUnestablished(simulatorValue))
+                    {
+                        unestablishedPaths.Add(path);
+                    }
+                }
+                else if (!JToken.DeepEquals(authenticValue, simulatorValue))
+                {
+                    departurePaths.Add(path);
                 }
             }
-            return paths.ToArray();
+            departures = departurePaths.ToArray();
+            unestablished = unestablishedPaths.ToArray();
+        }
+
+        private static bool IsUnestablished(JToken value)
+        {
+            return value == null
+                || value.Type == JTokenType.Null
+                || (value.Type == JTokenType.String
+                    && string.Equals(
+                        value.Value<string>(), "unknown", StringComparison.Ordinal));
+        }
+
+        private static JToken AuthenticValueAtPath(
+            JObject controls, string path, string recordPath)
+        {
+            const string prefix = "/authentic_controls/";
+            if (!path.StartsWith(prefix, StringComparison.Ordinal))
+            {
+                return null;
+            }
+
+            JToken current = controls;
+            foreach (string segment in path.Substring(prefix.Length).Split('/'))
+            {
+                JObject parent = current as JObject;
+                if (parent == null || parent[segment] == null)
+                {
+                    throw new InvalidDataException(
+                        "Override path does not exist: " + path + " in " + recordPath);
+                }
+                current = parent[segment];
+            }
+            return current;
         }
 
         /// <summary>
@@ -498,16 +557,22 @@ namespace AsDriven.Core
         /// each override's condition. Never generated: if a record states no
         /// condition there is nothing to show.
         /// </summary>
-        private static string DescribeOverrides(JObject simulator)
+        private static string DescribeOverrides(JObject simulator, string[] departurePaths)
         {
             JArray overrides = simulator["overrides"] as JArray;
             if (overrides == null || overrides.Count == 0)
             {
                 return string.Empty;
             }
+            var departures = new HashSet<string>(departurePaths, StringComparer.Ordinal);
             var conditions = new List<string>();
             foreach (JObject entry in overrides.OfType<JObject>())
             {
+                JToken path = entry["path"];
+                if (path == null || !departures.Contains(path.Value<string>()))
+                {
+                    continue;
+                }
                 JToken condition = entry["condition"];
                 if (condition != null && condition.Type != JTokenType.Null)
                 {
@@ -924,6 +989,19 @@ namespace AsDriven.Core
                 case "ac": return "Assetto Corsa";
                 case "acc": return "Assetto Corsa Competizione";
                 case "ac-evo": return "Assetto Corsa EVO";
+                default: return simulator;
+            }
+        }
+
+        private static string SimulatorShortName(string simulator)
+        {
+            switch (simulator)
+            {
+                case "ams2": return "AMS2";
+                case "iracing": return "iRacing";
+                case "ac": return "AC";
+                case "acc": return "ACC";
+                case "ac-evo": return "AC EVO";
                 default: return simulator;
             }
         }

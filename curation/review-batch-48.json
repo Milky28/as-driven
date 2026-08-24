@@ -6,7 +6,7 @@
     {
       "record_id": "ford-gt40-mk1-1965",
       "bundle": "build/review-cases/issue-8/staged.json",
-      "display_name": "1965 Ford GT40 Mk I",
+      "display_name": "Ford GT40 Mk I",
       "class": "World Sportscar Championship prototype",
       "manufacturer": "Ford",
       "model": "GT40 Mk I",
@@ -230,7 +230,7 @@
       "control_notes": [
         "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h.",
         "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
-        "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+        "AC 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
       ],
       "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
       "live_source_url": "https://github.com/Milky28/as-driven/issues/8",

@@ -854,6 +854,40 @@ namespace AsDriven.Core.Tests
                     "a record with no override never claims the simulator differs");
                 False(noOverride.ShifterDiffers, "and marks no row");
 
+                GuidanceSnapshot bmwCsl = database.Match(
+                    "AssettoCorsa", "ACL GTR BMW CSL 3.0");
+                True(bmwCsl.HasMatch, "matches the AC Legends BMW CSL");
+                Equal("AC", bmwCsl.SimulatorLabel,
+                    "the evidence footer names Assetto Corsa");
+                False(bmwCsl.SimulatorDiffers,
+                    "simulator evidence filling real-car gaps is not a departure");
+                False(bmwCsl.ShifterDiffers,
+                    "its observed gate does not contradict an established real gate");
+                False(bmwCsl.LaunchDiffers,
+                    "its observed launch does not contradict established technique");
+                False(bmwCsl.UpshiftDiffers,
+                    "its observed upshift does not contradict established technique");
+                False(bmwCsl.DownshiftDiffers,
+                    "its observed downshift does not contradict established technique");
+                False(bmwCsl.WheelDiffers,
+                    "its observed wheel does not contradict an established wheel");
+                True(bmwCsl.ShifterUnestablished,
+                    "the observed gate is labelled as filling a research gap");
+                True(bmwCsl.LaunchUnestablished,
+                    "the observed launch is labelled as filling a research gap");
+                True(bmwCsl.UpshiftUnestablished,
+                    "the observed upshift is labelled as filling a research gap");
+                True(bmwCsl.DownshiftUnestablished,
+                    "the observed downshift is labelled as filling a research gap");
+                True(bmwCsl.WheelUnestablished,
+                    "the observed wheel is labelled as filling a research gap");
+                Equal("round", bmwCsl.WheelRimShape,
+                    "the effective simulator guidance still uses the observed wheel");
+                Equal("required", bmwCsl.StandingStartClutch,
+                    "the effective simulator guidance still uses the observed launch");
+                Equal("required", bmwCsl.ThrottleLift,
+                    "the effective simulator guidance still uses the observed upshift");
+
                 GuidanceSnapshot noNote = database.Match("Automobilista2", "Porsche 911 GT3 R");
                 Equal(string.Empty, noNote.DriverSummary, "a record without a summary carries none");
                 Equal(string.Empty, noNote.DriverSummaryLine1, "and no wrapped lines either");

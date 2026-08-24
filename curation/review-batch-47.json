@@ -6,7 +6,7 @@
     {
       "record_id": "bmw-3-0-csl-imsa-1975",
       "bundle": "build/review-cases/issue-7/staged.json",
-      "display_name": "1975 BMW 3.0 CSL IMSA Group 4",
+      "display_name": "BMW 3.0 CSL IMSA Group 4",
       "class": "IMSA Camel GT Group 4",
       "manufacturer": "BMW",
       "model": "3.0 CSL IMSA Group 4",
@@ -240,7 +240,7 @@
       "control_notes": [
         "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern.",
         "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
-        "AMS2 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+        "AC 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
       ],
       "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
       "live_source_url": "https://github.com/Milky28/as-driven/issues/7",

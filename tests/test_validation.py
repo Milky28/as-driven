@@ -22,6 +22,20 @@ ROOT = Path(__file__).parents[1]
 
 
 class ValidationTests(unittest.TestCase):
+    def test_display_names_do_not_sort_the_catalog_by_year(self):
+        leading_year = re.compile(r"^(?:19|20)\d{2}\s")
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            display_name = record["identity"]["display_name"]
+            if leading_year.match(display_name):
+                offenders.append(record["record_id"])
+        self.assertEqual(
+            offenders,
+            [],
+            "display names begin with the car name; year belongs in identity metadata or a suffix",
+        )
+
     def test_tracked_files_do_not_use_em_dashes(self) -> None:
         """Keep project copy on ordinary punctuation that is easy to type."""
         completed = subprocess.run(

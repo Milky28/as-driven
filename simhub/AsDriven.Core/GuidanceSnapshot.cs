@@ -9,6 +9,7 @@ namespace AsDriven.Core
         public string RawGameName { get; private set; }
         public string RawCarIdentifier { get; private set; }
         public string DatasetVersion { get; private set; }
+        public string SimulatorLabel { get; private set; }
         public string RecordId { get; private set; }
         public string DisplayName { get; private set; }
         public string CarClass { get; private set; }
@@ -66,6 +67,12 @@ namespace AsDriven.Core
         /// </summary>
         public string[] OverriddenPaths { get; private set; }
 
+        /// <summary>
+        /// Paths whose simulator observation fills a real-car field that the
+        /// reviewed sources did not establish.
+        /// </summary>
+        public string[] UnestablishedPaths { get; private set; }
+
         /// <summary>The reviewer's stated reason for each override.</summary>
         public string SimulatorDifference { get; private set; }
 
@@ -79,6 +86,19 @@ namespace AsDriven.Core
         {
             if (OverriddenPaths == null) { return false; }
             foreach (string path in OverriddenPaths)
+            {
+                if (path != null && path.IndexOf(fragment, StringComparison.Ordinal) >= 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsUnestablished(string fragment)
+        {
+            if (UnestablishedPaths == null) { return false; }
+            foreach (string path in UnestablishedPaths)
             {
                 if (path != null && path.IndexOf(fragment, StringComparison.Ordinal) >= 0)
                 {
@@ -117,6 +137,36 @@ namespace AsDriven.Core
         public bool WheelDiffers
         {
             get { return Overrides("/wheel_rim"); }
+        }
+
+        public bool ShifterUnestablished
+        {
+            get
+            {
+                return IsUnestablished("/forward_gears")
+                    || IsUnestablished("/shift_actuation")
+                    || IsUnestablished("/shift_pattern");
+            }
+        }
+
+        public bool LaunchUnestablished
+        {
+            get { return IsUnestablished("/standing_start_clutch"); }
+        }
+
+        public bool UpshiftUnestablished
+        {
+            get { return IsUnestablished("/upshift"); }
+        }
+
+        public bool DownshiftUnestablished
+        {
+            get { return IsUnestablished("/downshift"); }
+        }
+
+        public bool WheelUnestablished
+        {
+            get { return IsUnestablished("/wheel_rim"); }
         }
 
         // Dashboard text items do not wrap, so the summary is pre-broken here.
@@ -249,6 +299,7 @@ namespace AsDriven.Core
                 RawGameName = rawGameName,
                 RawCarIdentifier = rawCarIdentifier,
                 DatasetVersion = values.DatasetVersion,
+                SimulatorLabel = values.SimulatorLabel,
                 MatchKind = matchKind,
                 RecordId = values.RecordId,
                 DisplayName = values.DisplayName,
@@ -283,6 +334,7 @@ namespace AsDriven.Core
                 WheelRimSourceLabel = values.WheelRimSourceLabel,
                 DriverSummary = values.DriverSummary,
                 OverriddenPaths = values.OverriddenPaths ?? new string[0],
+                UnestablishedPaths = values.UnestablishedPaths ?? new string[0],
                 SimulatorDifference = values.SimulatorDifference,
                 DriverSummaryLine1 = summaryLines[0],
                 DriverSummaryLine2 = summaryLines[1],
@@ -314,6 +366,7 @@ namespace AsDriven.Core
                 RawGameName = rawGameName ?? string.Empty,
                 RawCarIdentifier = rawCarIdentifier ?? string.Empty,
                 DatasetVersion = datasetVersion ?? string.Empty,
+                SimulatorLabel = string.Empty,
                 RecordId = string.Empty,
                 DisplayName = string.Empty,
                 CarClass = string.Empty,
@@ -345,6 +398,7 @@ namespace AsDriven.Core
                 WheelRimSourceLabel = string.Empty,
                 DriverSummary = string.Empty,
                 OverriddenPaths = new string[0],
+                UnestablishedPaths = new string[0],
                 SimulatorDifference = string.Empty,
                 DriverSummaryLine1 = string.Empty,
                 DriverSummaryLine2 = string.Empty,

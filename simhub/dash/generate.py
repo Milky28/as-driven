@@ -656,17 +656,32 @@ def _differs_marker(
     width: float,
     size: float,
 ) -> dict[str, Any]:
-    """Marks a row whose value the simulator overrides.
+    """Explains whether effective simulator guidance departs or fills a gap.
 
-    The card shows effective behaviour, so without this a deviation from the
-    real car reads as though it were authentic. The record's own override is
-    the only thing that can raise it.
+    The card shows effective behaviour. A known real-car value that changes in
+    the simulator is a departure; an observed simulator value over an unknown
+    real-car baseline is useful guidance, but cannot be called a disagreement.
     """
     return factory.layer(
         name,
-        [factory.text(name + "Text", "* not as the real car", left, top, width, size + 6,
-                      size, ACCENT, expression="'* not as the real car'")],
-        visible_expression="[AsDriven." + flag_property + "]",
+        [
+            factory.layer(
+                name + "Departure",
+                [factory.text(name + "Text", "* not as the real car", left, top,
+                              width, size + 6, size, ACCENT,
+                              expression="'* not as the real car'")],
+                visible_expression="[AsDriven." + flag_property + "]",
+            ),
+            factory.layer(
+                name + "Unestablished",
+                [factory.text(name + "UnestablishedText", "* real car not established",
+                              left, top, width, size + 6, size, MUTED,
+                              expression="'* real car not established'")],
+                visible_expression="[AsDriven."
+                                   + flag_property.replace("Differs", "Unestablished")
+                                   + "] && ![AsDriven." + flag_property + "]",
+            ),
+        ],
     )
 
 
@@ -763,7 +778,7 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
         _preview_badge(factory, factory.width - left - 150, 14, 150, 30),
         factory.rectangle("FooterRule", left, 331, width, 1, SLATE),
         factory.text("Evidence", "", left, 337, width - 180, 19, 11.5, MUTED,
-                     expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
+                     expression="[AsDriven.SimulatorLabel] + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + ' - Confidence: ' + "
                                 + _confidence_value_expression()),
         factory.text("Dataset", "", left + width - 180, 337, 180, 19, 11.5, MUTED,
@@ -789,7 +804,7 @@ def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
         _preview_badge(factory, factory.width - left - 118, 10, 118, 26, compact=True),
         factory.rectangle("FooterRule", left, 266, width, 1, SLATE),
         factory.text("Evidence", "", left, 272, width - 150, 18, 10, MUTED,
-                     expression="'AMS2 ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
+                     expression="[AsDriven.SimulatorLabel] + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + ' - ' + "
                                 + _confidence_value_expression()),
         factory.text("Dataset", "", left + width - 150, 272, 150, 18, 10, MUTED,

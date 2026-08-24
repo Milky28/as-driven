@@ -14,6 +14,7 @@ namespace AsDriven.Core
     internal sealed class CarRecordValues
     {
         public string DatasetVersion;
+        public string SimulatorLabel;
         public string RecordId;
         public string DisplayName;
         public string CarClass;
@@ -34,6 +35,7 @@ namespace AsDriven.Core
         public string DownshiftClutch;
         public string DriverSummary;
         public string[] OverriddenPaths;
+        public string[] UnestablishedPaths;
         public string SimulatorDifference;
         public string WheelRimShape;
         public string WheelRimSourceLabel;
