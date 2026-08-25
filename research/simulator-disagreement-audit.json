@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.4.32",
-  "generated_at": "2026-08-24",
+  "dataset_version": "0.5.0",
+  "generated_at": "2026-08-25",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
