@@ -343,9 +343,10 @@
       }
     ]
   },
-  "updated_at": "2026-08-24",
+  "updated_at": "2026-08-25",
   "archetype": {
     "classification": "undetermined",
     "basis": "The reviewed real-car evidence leaves enough control fields unknown that multiple registered archetypes remain compatible."
-  }
+  },
+  "driver_summary": "Stock car on a paddle semi-automatic: it cuts the upshift and blips the downshift for you. Whether it needs a clutch to pull away was not established by the drive, so treat the start as unrecorded rather than clutch-free."
 }

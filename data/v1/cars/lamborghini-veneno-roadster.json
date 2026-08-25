@@ -137,5 +137,6 @@
     "archetype_id": "paddles-7-semiauto-no-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-11"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Road hypercar on a paddle semi-automatic. It blips its own downshifts and pulls away without a clutch, so the shifting asks nothing of your feet."
 }

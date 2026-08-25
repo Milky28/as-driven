@@ -140,5 +140,6 @@
     "archetype_id": "paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-25",
+  "driver_summary": "McLaren's in-house seven-speed dual clutch. It upshifts by itself, which is the gearbox rather than an assist: automatic shifting was disabled for the drive and it still changed up. Paddles override it, no clutch is needed, and it blips its own downshifts."
 }
