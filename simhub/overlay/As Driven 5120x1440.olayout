@@ -5,7 +5,7 @@
       "Top": 60.0,
       "Left": 2200.0,
       "Width": 720.0,
-      "Height": 360.0,
+      "Height": 428.0,
       "Version": 1,
       "PartId": "689ec252-7ed8-5574-b119-3d94dc846b65",
       "Placed": false,
@@ -16,21 +16,10 @@
       "Top": 60.0,
       "Left": 2300.0,
       "Width": 520.0,
-      "Height": 300.0,
+      "Height": 360.0,
       "Version": 1,
       "PartId": "71b52f07-033a-52b2-bb80-dfc2d063feaf",
       "Placed": true,
-      "Transparent": true
-    },
-    {
-      "DashboardName": "DashTemplates\\As Driven Preflight Glance\\As Driven Preflight Glance.djson",
-      "Top": 60.0,
-      "Left": 2400.0,
-      "Width": 320.0,
-      "Height": 120.0,
-      "Version": 1,
-      "PartId": "3ed97793-39bf-5f26-81a9-906ad68a222a",
-      "Placed": false,
       "Transparent": true
     },
     {

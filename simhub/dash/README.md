@@ -2,9 +2,8 @@
 
 `generate.py` creates five native SimHub Dash Studio DJSON artifacts:
 
-- **As Driven Preflight Overlay** - Detailed, 840×360.
-- **As Driven Preflight Compact** - Compact, 520×300.
-- **As Driven Preflight Glance** - Glance, 320×120.
+- **As Driven Preflight Overlay** - Detailed, 720×428.
+- **As Driven Preflight Compact** - Compact, 520×360.
 - **As Driven Preflight Display** - a persistent 900×360 auxiliary
   display that does not use popup visibility.
 - **As Driven Verification Drive** - a 700×220 in-simulator prompt
@@ -12,7 +11,7 @@
 
 The three overlay templates are click-through. Each follows its own explicit
 boolean property (`PopupDetailedVisible`, `PopupCompactVisible`, or
-`PopupGlanceVisible`), so only the selected size becomes visible. A car identity
+so only the selected size becomes visible. A car identity
 change shows it for ten seconds
 by default. `AsDriven.ShowPopup` keeps it visible for button recall,
 `AsDriven.HidePopup` hides it, and `AsDriven.TogglePopup`
@@ -38,7 +37,7 @@ center dividers preserve that distinction at all three popup sizes, and the
 freed space lets the existing control artwork render substantially larger.
 
 The cards use project-owned 128x128 raster PNG icons packaged in each template's
-`.djson.ressources` archive. Detailed, Compact, and Glance therefore render the
+`.djson.ressources` archive. Detailed and Compact therefore render the
 same master artwork instead of independently scaling and rotating SimHub shape
 primitives. The approved high-fidelity assets live under `dash/assets`; the
 generator validates their PNG dimensions and packages their exact bytes. A
@@ -68,7 +67,7 @@ no hardware or technique values were assumed.
 
 The Detailed and Compact cards add a concise **DRIVING TECHNIQUE** sentence
 synthesized from the structured start, clutch, lift, cut, and blip fields.
-Compact uses smaller type while retaining both technique lines; Glance remains
+Compact uses smaller type while retaining both technique lines; it remains
 icon-only. The guidance describes how to operate the car without copying
 internal evidence notes or inventing values for unknown fields.
 Compact uses its own approximately 116-character wrap target at 9.5-point type,
@@ -83,7 +82,6 @@ The normal `simhub/build.ps1` command generates the artifacts under:
 simhub/dist/AsDriven/DashTemplates/
   As Driven Preflight Overlay/
   As Driven Preflight Compact/
-  As Driven Preflight Glance/
   As Driven Preflight Display/
   As Driven Verification Drive/
 ```

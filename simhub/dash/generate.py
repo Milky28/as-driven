@@ -34,9 +34,8 @@ class TemplateSpec(NamedTuple):
 
 
 TEMPLATES = (
-    TemplateSpec("detailed", "As Driven Preflight Overlay", 720, 360),
-    TemplateSpec("compact", "As Driven Preflight Compact", 520, 300),
-    TemplateSpec("glance", "As Driven Preflight Glance", 320, 120),
+    TemplateSpec("detailed", "As Driven Preflight Overlay", 720, 428),
+    TemplateSpec("compact", "As Driven Preflight Compact", 520, 360),
     TemplateSpec("verification", "As Driven Verification Drive", 700, 220),
     TemplateSpec("display", "As Driven Preflight Display", 780, 360, False),
 )
@@ -685,7 +684,7 @@ def _differs_marker(
     )
 
 
-NOTE_LINES = 3
+NOTE_LINES = 5
 NOTE_PADDING = 7
 
 
@@ -776,12 +775,12 @@ def _matched_detailed(factory: ItemFactory) -> dict[str, Any]:
                                  line_height=17, prefix="DriverSummary"))
     children.extend([
         _preview_badge(factory, factory.width - left - 150, 14, 150, 30),
-        factory.rectangle("FooterRule", left, 331, width, 1, SLATE),
-        factory.text("Evidence", "", left, 337, width - 180, 19, 11.5, MUTED,
+        factory.rectangle("FooterRule", left, 371, width, 1, SLATE),
+        factory.text("Evidence", "", left, 377, width - 180, 19, 11.5, MUTED,
                      expression="[AsDriven.SimulatorLabel] + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + ' - Confidence: ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 180, 337, 180, 19, 11.5, MUTED,
+        factory.text("Dataset", "", left + width - 180, 377, 180, 19, 11.5, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])
@@ -802,116 +801,73 @@ def _matched_compact(factory: ItemFactory) -> dict[str, Any]:
                                  line_height=15, prefix="DriverSummaryCompact"))
     children.extend([
         _preview_badge(factory, factory.width - left - 118, 10, 118, 26, compact=True),
-        factory.rectangle("FooterRule", left, 266, width, 1, SLATE),
-        factory.text("Evidence", "", left, 272, width - 150, 18, 10, MUTED,
+        factory.rectangle("FooterRule", left, 303, width, 1, SLATE),
+        factory.text("Evidence", "", left, 309, width - 150, 18, 10, MUTED,
                      expression="[AsDriven.SimulatorLabel] + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + ' - ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 150, 272, 150, 18, 10, MUTED,
+        factory.text("Dataset", "", left + width - 150, 309, 150, 18, 10, MUTED,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])
     return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
 
 
-def _matched_glance(factory: ItemFactory) -> dict[str, Any]:
-    """Glance carries only what changes the driver's hands.
-
-    There is no room for the gate subtitle or the evidence footer, so the card
-    states the shifter and the driver's share of the work and stops. It never
-    shows a partial sentence in place of a whole one.
-    """
-    left = 14
-    width = factory.width - 2 * left
-    children = [
-        factory.image("Mark", "brand-mark", left, 10, 20, 20),
-        factory.text("Title", "Current car", left + 28, 8, width - 28, 22, 14, WHITE,
-                     expression="[AsDriven.OverlayCarNameGlance]", font_weight="Bold"),
-        factory.rectangle("FitChip", left, 40, 26, 15, RAIL_FIT, radius=3),
-        factory.text("FitChipText", "FIT", left, 41, 26, 13, 8, ACCENT,
-                     horizontal_alignment=1, font_weight="Bold"),
-        factory.text("FitValue", "", left + 33, 38, width - 33, 19, 13, WHITE,
-                     expression="[AsDriven.ShifterLabel]", font_weight="Bold"),
-    ]
-    children.extend(_tone_layers(factory, "UseChip", "UseBandTone", left, 66, 26, 15,
-                                 you=RAIL_YOU, car=RAIL_CAR, unknown=RAIL_FIT, radius=3))
-    children.extend(_tone_text(factory, "UseChipText", "UseBandTone", "USE",
-                               left, 67, 26, 13, 8, expression="'USE'", alignment=1))
-    children.extend(_tone_text(factory, "UseValue", "UseBandTone", "",
-                               left + 33, 64, width - 33, 19, 12.5,
-                               expression="[AsDriven.LaunchLabel] + ' - ' + "
-                                          "[AsDriven.UpshiftLabel]"))
-    children.append(
-        factory.text("Downshift", "", left + 33, 88, width - 33, 18, 11.5, MUTED,
-                     expression="[AsDriven.DownshiftLabel]"))
-    children.append(_preview_badge(factory, factory.width - left - 72, 8, 72, 24, compact=True))
-    return factory.layer("MatchedState", children, visible_expression="[AsDriven.HasMatch]")
-
-
 def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[str, Any]:
-    is_glance = factory.height <= 120
     accent = ORANGE if unmatched else ACCENT
     title_expression = (
         "if([AsDriven.RawCarIdentifier] == '', 'Unknown car', [AsDriven.RawCarIdentifier])"
         if unmatched
         else "if([AsDriven.MatchStatus] == 'database-error', 'Database unavailable', if([AsDriven.MatchStatus] == 'runtime-error', 'Plugin runtime error', 'Waiting for a car'))"
     )
-    if is_glance:
-        children = [
-            factory.rectangle("StateMark", 12, 14, 28, 28, accent, radius=6),
-            factory.text("StateMarkText", "!" if unmatched else "…", 12, 14, 28, 28, 16, "#FF111820", horizontal_alignment=1, font_weight="Bold"),
-            factory.text("StateTitle", "Unmapped car" if unmatched else "Waiting for a car", 48, 12, 256, 28, 16, WHITE, expression=title_expression, font_weight="Bold"),
-            factory.text("StateBody", "Contribution available - no values assumed" if unmatched else "Start a supported session", 12, 54, 292, 34, 12, MUTED, font_weight="Bold"),
-        ]
-    else:
-        left = 16 if compact else 28
-        children = _header(factory, compact=compact)
+    left = 16 if compact else 28
+    children = _header(factory, compact=compact)
+    children.extend([
+        factory.text("StateEyebrow", "CONTRIBUTION NEEDED" if unmatched else "AUTHENTIC SETUP", 60 if compact else 92, 20 if compact else 24, factory.width - 100, 22, 11 if compact else 13, accent, font_weight="Bold"),
+        factory.text("StateTitle", "Unmapped car" if unmatched else "Waiting for a car", 60 if compact else 92, 42 if compact else 52, factory.width - 110, 38, 21 if compact else 30, WHITE, expression=title_expression, font_weight="Bold"),
+        factory.rectangle("StateRule", left, 82 if compact else 108, factory.width - 2 * left, 2, SLATE),
+        factory.text("StateBody", "No curated record exists for this exact identity." if unmatched else "Start a supported simulator session to see authentic controls guidance.", left, 105 if compact else 140, factory.width - 2 * left, 48, 16 if compact else 22, TEXT, font_weight="Bold"),
+        factory.text("StateSafety", "No hardware or technique values have been assumed." if unmatched else "Dataset ready • waiting for telemetry", left, factory.height - 50, factory.width - 2 * left, 28, 12 if compact else 15, MUTED),
+    ])
+    if unmatched:
+        cta_top = 158 if compact else 205
+        hint_top = 196 if compact else 247
         children.extend([
-            factory.text("StateEyebrow", "CONTRIBUTION NEEDED" if unmatched else "AUTHENTIC SETUP", 60 if compact else 92, 20 if compact else 24, factory.width - 100, 22, 11 if compact else 13, accent, font_weight="Bold"),
-            factory.text("StateTitle", "Unmapped car" if unmatched else "Waiting for a car", 60 if compact else 92, 42 if compact else 52, factory.width - 110, 38, 21 if compact else 30, WHITE, expression=title_expression, font_weight="Bold"),
-            factory.rectangle("StateRule", left, 82 if compact else 108, factory.width - 2 * left, 2, SLATE),
-            factory.text("StateBody", "No curated record exists for this exact identity." if unmatched else "Start a supported simulator session to see authentic controls guidance.", left, 105 if compact else 140, factory.width - 2 * left, 48, 16 if compact else 22, TEXT, font_weight="Bold"),
-            factory.text("StateSafety", "No hardware or technique values have been assumed." if unmatched else "Dataset ready • waiting for telemetry", left, factory.height - 50, factory.width - 2 * left, 28, 12 if compact else 15, MUTED),
+            factory.rectangle(
+                "ContributionCtaPanel",
+                left,
+                cta_top,
+                factory.width - 2 * left,
+                31,
+                "#FF10352C",
+                radius=7,
+                border_color=GREEN,
+                border=2,
+            ),
+            factory.text(
+                "ContributionCta",
+                "CONTRIBUTE IN AS DRIVEN",
+                left + 10,
+                cta_top + 2,
+                factory.width - 2 * left - 20,
+                27,
+                11 if compact else 13,
+                GREEN,
+                horizontal_alignment=1,
+                font_weight="Bold",
+            ),
+            factory.text(
+                "ContributionHint",
+                "Open the As Driven page in SimHub and choose Contribute this car.",
+                left,
+                hint_top,
+                factory.width - 2 * left,
+                40,
+                10 if compact else 12,
+                MUTED,
+                font_weight="Bold",
+            ),
         ])
-        if unmatched:
-            cta_top = 158 if compact else 205
-            hint_top = 196 if compact else 247
-            children.extend([
-                factory.rectangle(
-                    "ContributionCtaPanel",
-                    left,
-                    cta_top,
-                    factory.width - 2 * left,
-                    31,
-                    "#FF10352C",
-                    radius=7,
-                    border_color=GREEN,
-                    border=2,
-                ),
-                factory.text(
-                    "ContributionCta",
-                    "CONTRIBUTE IN AS DRIVEN",
-                    left + 10,
-                    cta_top + 2,
-                    factory.width - 2 * left - 20,
-                    27,
-                    11 if compact else 13,
-                    GREEN,
-                    horizontal_alignment=1,
-                    font_weight="Bold",
-                ),
-                factory.text(
-                    "ContributionHint",
-                    "Open the As Driven page in SimHub and choose Contribute this car.",
-                    left,
-                    hint_top,
-                    factory.width - 2 * left,
-                    40,
-                    10 if compact else 12,
-                    MUTED,
-                    font_weight="Bold",
-                ),
-            ])
     expression = "![AsDriven.HasMatch] && [AsDriven.MatchStatus] == 'unmatched'" if unmatched else "![AsDriven.HasMatch] && [AsDriven.MatchStatus] != 'unmatched'"
     return factory.layer("UnmatchedState" if unmatched else "WaitingState", children, visible_expression=expression)
 
@@ -999,12 +955,10 @@ def build_dashboard(*, overlay: bool, variant: str = "detailed") -> dict[str, An
         children = _verification_drive(factory)
     else:
         children = _frame(factory)
-        if spec.key in ("detailed", "display"):
-            children.append(_matched_detailed(factory))
-        elif spec.key == "compact":
+        if spec.key == "compact":
             children.append(_matched_compact(factory))
         else:
-            children.append(_matched_glance(factory))
+            children.append(_matched_detailed(factory))
         children.extend([
             _empty_state(factory, unmatched=True, compact=spec.key == "compact"),
             _empty_state(factory, unmatched=False, compact=spec.key == "compact"),
@@ -1014,7 +968,6 @@ def build_dashboard(*, overlay: bool, variant: str = "detailed") -> dict[str, An
         property_suffix = {
             "detailed": "Detailed",
             "compact": "Compact",
-            "glance": "Glance",
             "verification": "Verification",
         }[spec.key]
         visible_expression = (

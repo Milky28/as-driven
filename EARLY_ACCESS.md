@@ -21,7 +21,7 @@ that behavior was reverified after a game update.
 ## Included functionality
 
 - exact, case-sensitive vehicle matching with no silent fuzzy matches;
-- Detailed, Compact, and Glance pre-flight overlays;
+- Detailed and Compact pre-flight overlays;
 - separate physical-control and shifting-technique guidance;
 - car browsing and offline preview before starting the simulator;
 - guided, versioned local verification drafts for missing or corrected cars;

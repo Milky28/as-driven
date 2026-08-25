@@ -37,7 +37,10 @@ namespace AsDriven.Core
         public static string NormalizeSize(string popupSize)
         {
             string normalized = (popupSize ?? string.Empty).Trim().ToLowerInvariant();
-            if (normalized == "detailed" || normalized == "compact" || normalized == "glance")
+            // Glance was retired: two sizes that say the same thing beat a
+            // third that had to leave things out. A stored "glance" falls
+            // back to the default rather than selecting a missing dashboard.
+            if (normalized == "detailed" || normalized == "compact")
             {
                 return normalized;
             }

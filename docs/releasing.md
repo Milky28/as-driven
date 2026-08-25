@@ -46,7 +46,7 @@ release step. The database package is also built in public CI.
    and record total.
 5. Test idle preview and closing preview without a simulator running.
 6. In AMS2 1.6.9.91, test one matched and one unmatched car.
-7. Check Detailed, Compact, and Glance layouts at 100%, 125%, and 150% Windows
+7. Check the Detailed and Compact layouts at 100%, 125%, and 150% Windows
    scaling, including the longest car and technique strings.
 8. Save a guided verification draft and confirm it remains local.
 9. Install the database-only package and confirm plugin binaries, overlay

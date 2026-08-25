@@ -218,9 +218,8 @@ namespace AsDriven.Plugin
                 MaxWidth = 360,
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
-            _popupSize.Items.Add(CreateSizeItem("Detailed - 840 x 360", "detailed"));
-            _popupSize.Items.Add(CreateSizeItem("Compact - 520 x 300", "compact"));
-            _popupSize.Items.Add(CreateSizeItem("Glance - 320 x 120", "glance"));
+            _popupSize.Items.Add(CreateSizeItem("Detailed - 720 x 428", "detailed"));
+            _popupSize.Items.Add(CreateSizeItem("Compact - 520 x 360", "compact"));
             SelectPopupSize(_plugin.PopupSize);
             _popupSize.SelectionChanged += PopupSizeChanged;
             panel.Children.Add(_popupSize);

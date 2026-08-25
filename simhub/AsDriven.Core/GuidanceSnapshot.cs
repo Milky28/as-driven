@@ -32,7 +32,6 @@ namespace AsDriven.Core
         public string OverlayCarClassDetailed { get; private set; }
         public string OverlayCarNameCompact { get; private set; }
         public string OverlayCarClassCompact { get; private set; }
-        public string OverlayCarNameGlance { get; private set; }
 
         /// <summary>The aero package AMS2 selected, empty when the car has none.</summary>
         public string StandingStartClutch { get; private set; }
@@ -173,9 +172,13 @@ namespace AsDriven.Core
         public string DriverSummaryLine1 { get; private set; }
         public string DriverSummaryLine2 { get; private set; }
         public string DriverSummaryLine3 { get; private set; }
+        public string DriverSummaryLine4 { get; private set; }
+        public string DriverSummaryLine5 { get; private set; }
         public string DriverSummaryCompactLine1 { get; private set; }
         public string DriverSummaryCompactLine2 { get; private set; }
         public string DriverSummaryCompactLine3 { get; private set; }
+        public string DriverSummaryCompactLine4 { get; private set; }
+        public string DriverSummaryCompactLine5 { get; private set; }
 
         /// <summary>Whether the rim itself carries a readout. Optional in the
         /// schema, so an unobserved value reads "unknown", never "no".</summary>
@@ -289,8 +292,8 @@ namespace AsDriven.Core
             string baseName = values.DisplayName;
             string classLine = values.CarClass;
             string[] techniqueLines = SplitTechniqueSummary(values.TechniqueSummary);
-            string[] summaryLines = WrapLines(values.DriverSummary, 620, 1250, 3);
-            string[] compactSummaryLines = WrapLines(values.DriverSummary, 432, 1100, 3);
+            string[] summaryLines = WrapLines(values.DriverSummary, 620, 1250, 5);
+            string[] compactSummaryLines = WrapLines(values.DriverSummary, 432, 1100, 5);
             string[] compactTechniqueLines = SplitCompactTechniqueSummary(values.TechniqueSummary);
             return new GuidanceSnapshot
             {
@@ -322,7 +325,6 @@ namespace AsDriven.Core
                 OverlayCarClassDetailed = FitSingleLine(classLine, 530, 1200),
                 OverlayCarNameCompact = FitSingleLine(baseName, 300, 1750),
                 OverlayCarClassCompact = FitSingleLine(classLine, 300, 950),
-                OverlayCarNameGlance = FitSingleLine(baseName, 166, 1500),
                 StandingStartClutch = values.StandingStartClutch,
                 AutoBlip = values.AutoBlip,
                 ShiftCut = values.ShiftCut,
@@ -339,9 +341,13 @@ namespace AsDriven.Core
                 DriverSummaryLine1 = summaryLines[0],
                 DriverSummaryLine2 = summaryLines[1],
                 DriverSummaryLine3 = summaryLines[2],
+                DriverSummaryLine4 = summaryLines[3],
+                DriverSummaryLine5 = summaryLines[4],
                 DriverSummaryCompactLine1 = compactSummaryLines[0],
                 DriverSummaryCompactLine2 = compactSummaryLines[1],
                 DriverSummaryCompactLine3 = compactSummaryLines[2],
+                DriverSummaryCompactLine4 = compactSummaryLines[3],
+                DriverSummaryCompactLine5 = compactSummaryLines[4],
                 WheelIntegratedDisplay = values.WheelIntegratedDisplay,
                 WheelShiftLights = values.WheelShiftLights,
                 HasSteeringDOR = values.HasSteeringDOR,
@@ -386,7 +392,6 @@ namespace AsDriven.Core
                 OverlayCarClassDetailed = string.Empty,
                 OverlayCarNameCompact = string.Empty,
                 OverlayCarClassCompact = string.Empty,
-                OverlayCarNameGlance = string.Empty,
                 StandingStartClutch = string.Empty,
                 AutoBlip = string.Empty,
                 ShiftCut = string.Empty,
@@ -403,9 +408,13 @@ namespace AsDriven.Core
                 DriverSummaryLine1 = string.Empty,
                 DriverSummaryLine2 = string.Empty,
                 DriverSummaryLine3 = string.Empty,
+                DriverSummaryLine4 = string.Empty,
+                DriverSummaryLine5 = string.Empty,
                 DriverSummaryCompactLine1 = string.Empty,
                 DriverSummaryCompactLine2 = string.Empty,
                 DriverSummaryCompactLine3 = string.Empty,
+                DriverSummaryCompactLine4 = string.Empty,
+                DriverSummaryCompactLine5 = string.Empty,
                 WheelIntegratedDisplay = string.Empty,
                 WheelShiftLights = string.Empty,
                 HasSteeringDOR = false,

@@ -1682,7 +1682,11 @@ namespace AsDriven.Core.Tests
                 Equal("compact", PopupPreferences.NormalizeSize(null), "falls back to the default popup size when unset");
                 Equal("compact", PopupPreferences.NormalizeSize("   "), "falls back to the default popup size when blank");
                 Equal("compact", PopupPreferences.NormalizeSize("enormous"), "falls back to the default popup size for an unrenderable value");
-                Equal("glance", PopupPreferences.NormalizeSize("  GLANCE "), "accepts a supported popup size regardless of case or padding");
+                Equal("compact", PopupPreferences.NormalizeSize("  COMPACT "), "accepts a supported popup size regardless of case or padding");
+                // Glance was retired. A stored preference naming it falls back
+                // to the default rather than selecting a dashboard that is no
+                // longer generated.
+                Equal(PopupPreferences.DefaultSize, PopupPreferences.NormalizeSize("glance"), "a retired size falls back to the default");
                 Equal("detailed", PopupPreferences.NormalizeSize("detailed"), "keeps a supported popup size");
 
                 True(
@@ -1843,14 +1847,12 @@ namespace AsDriven.Core.Tests
             True(FitsSegoeUi(snapshot.OverlayCarClassDetailed, 534, 12f, true), label + " detailed car class fits");
             True(FitsSegoeUi(snapshot.OverlayCarNameCompact, 310, 17.5f, true), label + " compact car name fits");
             True(FitsSegoeUi(snapshot.OverlayCarClassCompact, 310, 9.5f, true), label + " compact car class fits");
-            True(FitsSegoeUi(snapshot.OverlayCarNameGlance, 174, 15f, true), label + " glance car name fits");
             AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryLine1, snapshot.TechniqueSummaryLine2, label + " detailed technique");
             AssertTechniqueDisplay(snapshot.TechniqueSummary, snapshot.TechniqueSummaryCompactLine1, snapshot.TechniqueSummaryCompactLine2, label + " compact technique");
             // Nothing is composed into either line any more: the name is the
             // car's name and the class line is the class the simulator reports.
             AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameDetailed, label + " detailed car name");
             AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameCompact, label + " compact car name");
-            AssertFittedPrefix(snapshot.DisplayName, snapshot.OverlayCarNameGlance, label + " glance car name");
             AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassDetailed, label + " detailed car class");
             AssertFittedPrefix(snapshot.CarClass, snapshot.OverlayCarClassCompact, label + " compact car class");
             // The names an aero package used to lengthen were the ones that got

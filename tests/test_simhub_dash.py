@@ -88,9 +88,8 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotIn("Bindings", display_card)
 
         expected_sizes = {
-            "detailed": (720, 360),
-            "compact": (520, 300),
-            "glance": (320, 120),
+            "detailed": (720, 428),
+            "compact": (520, 360),
             "verification": (700, 220),
         }
         for variant, expected_size in expected_sizes.items():
@@ -198,22 +197,19 @@ class SimHubDashTests(unittest.TestCase):
         self.assertNotIn("MANUAL BLIP", serialized)
 
     def test_unmatched_card_offers_a_contribution_handoff_without_assuming_values(self):
-        for variant in ("detailed", "compact", "glance"):
+        for variant in ("detailed", "compact"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
             serialized = json.dumps(dashboard)
-            if variant == "glance":
-                self.assertIn("Contribution available", serialized)
-            else:
-                self.assertIn("No hardware or technique values have been assumed.", serialized)
-                self.assertIn("CONTRIBUTE IN AS DRIVEN", serialized)
-                self.assertIn("choose Contribute this car", serialized)
-                self.assertNotIn("AsDriven.BeginCarContribution", serialized)
-                self.assertNotIn("AsDriven.ContributionRequestPending", serialized)
+            self.assertIn("No hardware or technique values have been assumed.", serialized)
+            self.assertIn("CONTRIBUTE IN AS DRIVEN", serialized)
+            self.assertIn("choose Contribute this car", serialized)
+            self.assertNotIn("AsDriven.BeginCarContribution", serialized)
+            self.assertNotIn("AsDriven.ContributionRequestPending", serialized)
 
     def test_bitmap_icons_cover_supported_control_categories_and_unknowns(self):
         dashboards = [
             self.generator.build_dashboard(overlay=True, variant=variant)
-            for variant in ("detailed", "compact", "glance")
+            for variant in ("detailed", "compact")
         ]
         serialized = json.dumps(dashboards)
         # Every rim and shifter value the schema allows still selects an icon,
@@ -367,7 +363,7 @@ class SimHubDashTests(unittest.TestCase):
             self.generator.CELL_YOU, named["UseCellUpshiftYouFill"]["BackgroundColor"]
         )
 
-    def test_compact_keeps_both_bands_and_glance_keeps_only_the_hands(self):
+    def test_compact_keeps_both_bands(self):
         compact = self.generator.build_dashboard(overlay=True, variant="compact")
         compact_named = {
             value["Name"]: value
@@ -382,25 +378,6 @@ class SimHubDashTests(unittest.TestCase):
             compact_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
         )
 
-        glance = self.generator.build_dashboard(overlay=True, variant="glance")
-        glance_named = {
-            value["Name"]: value
-            for value in walk(glance)
-            if isinstance(value, dict) and "Name" in value
-        }
-        # Glance has room for the shifter and the driver's share of the work
-        # and nothing else. It never shows half of a sentence.
-        self.assertIn("FitValue", glance_named)
-        self.assertIn("UseValueYouText", glance_named)
-        self.assertNotIn("FitBand", glance_named)
-        self.assertNotIn("UseBand", glance_named)
-        self.assertNotIn("FitWheelSub", glance_named)
-        self.assertNotIn("Evidence", glance_named)
-        self.assertIn(
-            "AsDriven.OverlayCarNameGlance",
-            glance_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
-        )
-
     def test_every_size_binds_its_own_fitted_name_and_class(self):
         """Each size measures the name for its own width.
 
@@ -411,7 +388,6 @@ class SimHubDashTests(unittest.TestCase):
         for variant, name_property in (
             ("detailed", "OverlayCarNameDetailed"),
             ("compact", "OverlayCarNameDetailed"),
-            ("glance", "OverlayCarNameGlance"),
         ):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
             named = {
@@ -424,12 +400,11 @@ class SimHubDashTests(unittest.TestCase):
                 named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
                 variant,
             )
-            if variant != "glance":
-                self.assertIn(
-                    "AsDriven.OverlayCarClassDetailed",
-                    named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
-                    variant,
-                )
+            self.assertIn(
+                "AsDriven.OverlayCarClassDetailed",
+                named["CarClass"]["Bindings"]["Text"]["Formula"]["Expression"],
+                variant,
+            )
 
     def test_card_content_stays_inside_the_box_that_holds_it(self):
         """Nothing overlaps its neighbour or escapes its container.
@@ -548,18 +523,9 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("[AsDriven.SimulatorLabel]", expression)
         self.assertNotIn("'AMS2 '", expression)
 
-        # Glance has no room for one and must not claim otherwise.
-        glance = self.generator.build_dashboard(overlay=True, variant="glance")
-        glance_named = {
-            value["Name"]
-            for value in walk(glance)
-            if isinstance(value, dict) and "Name" in value
-        }
-        self.assertNotIn("DriverNote", glance_named)
-        self.assertNotIn("NoteLine1", glance_named)
 
     def test_preview_badge_explicitly_says_preview_is_not_live(self):
-        for variant in ("detailed", "compact", "glance"):
+        for variant in ("detailed", "compact"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
             named = {
                 value["Name"]: value
@@ -580,7 +546,7 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn("NOT LIVE", badge_text)
 
     def test_every_size_titles_the_card_with_the_brand_mark(self):
-        for variant in ("detailed", "compact", "glance"):
+        for variant in ("detailed", "compact"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
             named = {
                 value["Name"]: value
@@ -626,7 +592,7 @@ class SimHubDashTests(unittest.TestCase):
     def test_generator_writes_parseable_native_artifacts(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             paths = self.generator.write_dashboards(Path(temporary_directory))
-            self.assertEqual(15, len(paths))
+            self.assertEqual(12, len(paths))
             for path in paths:
                 self.assertTrue(path.is_file())
                 self.assertEqual(path.parent.name, path.name.split(".djson", 1)[0])
@@ -649,11 +615,10 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("As Driven", layout["Name"])
         self.assertTrue(layout["ShowWhenPausedOrInMenu"])
         parts = layout["OverlayLayoutParts"]
-        self.assertEqual(4, len(parts))
+        self.assertEqual(3, len(parts))
         expected = {
-            "As Driven Preflight Overlay": ((720.0, 360.0), (600.0, 60.0)),
-            "As Driven Preflight Compact": ((520.0, 300.0), (700.0, 60.0)),
-            "As Driven Preflight Glance": ((320.0, 120.0), (800.0, 60.0)),
+            "As Driven Preflight Overlay": ((720.0, 428.0), (600.0, 60.0)),
+            "As Driven Preflight Compact": ((520.0, 360.0), (700.0, 60.0)),
             "As Driven Verification Drive": ((700.0, 220.0), (610.0, 430.0)),
         }
         part_ids = set()
@@ -671,9 +636,9 @@ class SimHubDashTests(unittest.TestCase):
             self.assertEqual(stem in PLACED_BY_DEFAULT, part["Placed"], stem)
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
-        self.assertEqual(4, len(part_ids))
+        self.assertEqual(3, len(part_ids))
         # The unplaced sizes still ship, so they remain one drag away.
-        self.assertEqual(4, len(expected))
+        self.assertEqual(3, len(expected))
 
     def test_5120_layout_centers_all_sizes_near_the_top(self):
         standard = json.loads(OVERLAY_LAYOUT_PATH.read_text(encoding="utf-8"))
@@ -694,7 +659,7 @@ class SimHubDashTests(unittest.TestCase):
             )
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
-        self.assertEqual(4, len(part_ids))
+        self.assertEqual(3, len(part_ids))
 
 
 if __name__ == "__main__":

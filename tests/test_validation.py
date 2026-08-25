@@ -168,14 +168,16 @@ class ValidationTests(unittest.TestCase):
         self.assertEqual([], offenders)
 
     def test_driver_summary_stays_within_the_length_the_card_can_draw(self) -> None:
-        # The overlay draws three pre-broken lines; beyond that the last one
-        # ellipsises, which loses the reason the summary exists to give.
+        # The overlay draws five pre-broken lines; beyond that the last one
+        # ellipsises, which loses the reason the summary exists to give. The
+        # cards were made taller to carry advisory wording rather than only a
+        # statement of the mechanism.
         for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
             record = json.loads(path.read_text(encoding="utf-8"))
             summary = record.get("driver_summary")
             if summary is None:
                 continue
-            self.assertLessEqual(len(summary), 300, record["record_id"])
+            self.assertLessEqual(len(summary), 520, record["record_id"])
             self.assertEqual(summary, summary.strip(), record["record_id"])
 
     def test_json_pointer_resolution(self) -> None:

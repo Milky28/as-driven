@@ -892,9 +892,6 @@ namespace AsDriven.Plugin
                 case "detailed":
                     dashboardStem = "As Driven Preflight Overlay";
                     break;
-                case "glance":
-                    dashboardStem = "As Driven Preflight Glance";
-                    break;
                 default:
                     dashboardStem = "As Driven Preflight Compact";
                     break;
@@ -1446,7 +1443,6 @@ namespace AsDriven.Plugin
             this.AttachDelegate("OverlayCarClassDetailed", delegate { return _current.OverlayCarClassDetailed; });
             this.AttachDelegate("OverlayCarNameCompact", delegate { return _current.OverlayCarNameCompact; });
             this.AttachDelegate("OverlayCarClassCompact", delegate { return _current.OverlayCarClassCompact; });
-            this.AttachDelegate("OverlayCarNameGlance", delegate { return _current.OverlayCarNameGlance; });
             this.AttachDelegate("ShiftType", delegate { return _current.ShiftType; });
             this.AttachDelegate("ShiftActuation", delegate { return _current.ShiftActuation; });
             this.AttachDelegate("ShiftPattern", delegate { return _current.ShiftPattern; });
@@ -1484,9 +1480,13 @@ namespace AsDriven.Plugin
             this.AttachDelegate("DriverSummaryLine1", delegate { return _current.DriverSummaryLine1; });
             this.AttachDelegate("DriverSummaryLine2", delegate { return _current.DriverSummaryLine2; });
             this.AttachDelegate("DriverSummaryLine3", delegate { return _current.DriverSummaryLine3; });
+            this.AttachDelegate("DriverSummaryLine4", delegate { return _current.DriverSummaryLine4; });
+            this.AttachDelegate("DriverSummaryLine5", delegate { return _current.DriverSummaryLine5; });
             this.AttachDelegate("DriverSummaryCompactLine1", delegate { return _current.DriverSummaryCompactLine1; });
             this.AttachDelegate("DriverSummaryCompactLine2", delegate { return _current.DriverSummaryCompactLine2; });
             this.AttachDelegate("DriverSummaryCompactLine3", delegate { return _current.DriverSummaryCompactLine3; });
+            this.AttachDelegate("DriverSummaryCompactLine4", delegate { return _current.DriverSummaryCompactLine4; });
+            this.AttachDelegate("DriverSummaryCompactLine5", delegate { return _current.DriverSummaryCompactLine5; });
             this.AttachDelegate("SimulatorDiffers", delegate { return _current.SimulatorDiffers; });
             this.AttachDelegate("SimulatorDifference", delegate { return _current.SimulatorDifference; });
             this.AttachDelegate("SimulatorLabel", delegate { return _current.SimulatorLabel; });
@@ -1535,13 +1535,6 @@ namespace AsDriven.Plugin
                 delegate
                 {
                     return PopupSize == "compact"
-                        && _popupState.IsVisible(DateTime.UtcNow);
-                });
-            this.AttachDelegate(
-                "PopupGlanceVisible",
-                delegate
-                {
-                    return PopupSize == "glance"
                         && _popupState.IsVisible(DateTime.UtcNow);
                 });
             this.AttachDelegate(
