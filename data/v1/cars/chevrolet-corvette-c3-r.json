@@ -157,5 +157,6 @@
     "classification": "no-archetype",
     "basis": "A variant Reiza assembled rather than a car it represents, so no manufacturer, homologation sheet or registry describes it. The FIA's Corvette forms describe other specifications - form 3039's Sting Ray LS6 is a 7,446 cc car where this one is specified as a 7.0-litre L88 - so the synchroniser finding on those forms is not inherited here. It also matches no archetype on its own terms: its downshift blip is required, a known value, where the four-speed archetype has it optional. Retired from the gearbox research queue: this is a settled answer, not an outstanding one, and the controls the guided drive observed stand as what the simulator does.\n\nThe downshift blip does not assert an unestablished construction here, and the reason is that this car has no real referent. For a car a simulator invented there is no real gearbox to be right or wrong about, so the simulator is the only authority that exists and its demand is the complete fact about the only version of this car there is. The dataset's rule - that `required` is reserved for gearboxes needing the blip to engage - governs claims about real cars and does not reach a record with no real car behind it. `required` stands as a known value."
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Reiza's GT Classics Corvette, with no identified real chassis behind it. Four gears through a standard gate and nothing automatic: lift for the upshift, and blip every downshift yourself."
 }

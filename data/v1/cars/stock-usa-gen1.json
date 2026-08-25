@@ -142,5 +142,6 @@
   "notes": [
     "'Stock USA Gen1 - Speedway' is also stored with trailing whitespace. That padded identity is approved as a formatting-only alias so exact matching still resolves it; no control claim changes."
   ],
-  "updated_at": "2026-08-12"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Reiza's fictionalised stock car generation, where NASCAR history is context rather than identity. Four gears through a standard gate and nothing automatic: lift to upshift, and blip every downshift yourself."
 }

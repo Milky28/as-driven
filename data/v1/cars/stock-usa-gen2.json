@@ -133,5 +133,6 @@
     "classification": "no-archetype",
     "basis": "A fictionalised Reiza generation, with NASCAR history as context only and no real-world generation inferred from the label. It matches no archetype: its downshift blip is required, a known value, where the four-speed archetype has it optional. Retired from the gearbox research queue. This is a car Reiza invented rather than one it represents, so there is no manufacturer, homologation sheet or registry to consult and no drive can separate a synchromesh from a dog box. Assigning a value would mean reasoning from the era or the category the car evokes, which is not evidence about this car. This is a settled answer, not an outstanding one.\n\nThe downshift blip does not assert an unestablished construction here, and the reason is that this car has no real referent. For a car a simulator invented there is no real gearbox to be right or wrong about, so the simulator is the only authority that exists and its demand is the complete fact about the only version of this car there is. The dataset's rule - that `required` is reserved for gearboxes needing the blip to engage - governs claims about real cars and does not reach a record with no real car behind it. `required` stands as a known value."
   },
-  "updated_at": "2026-08-11"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Reiza's fictionalised stock car generation, where NASCAR history is context rather than identity. Four gears through a standard gate and nothing automatic: lift to upshift, and blip every downshift yourself."
 }

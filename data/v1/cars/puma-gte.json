@@ -155,5 +155,6 @@
     "classification": "no-archetype",
     "basis": "No registered archetype is a four-speed H-pattern that needs the blip. The registered four-speed leaves it optional, and this car requires it. Whether that is a departure or a different mechanism turns on gearbox_type, which is unestablished: dog rings need the driver to match revs, which would make these cars an archetype of their own rather than a variation on the synchromesh one. Six curated cars sit in exactly this position. A reviewed source settles all of them together. This record also leaves the gate itself unrecorded."
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Brazilian road car on Volkswagen running gear, with an air-cooled flat four and a four-speed manual. Despite the GTE name it is road-derived rather than a GTE racer. Lift to upshift, and blip coming down: nothing establishes how the gearbox engages."
 }
