@@ -140,5 +140,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Hewland sequential six-speed. Upshift flat and the car cuts. Blip every downshift yourself: nothing rev-matches for you, and an unmatched downshift will lock the driven wheels just as you are asking them to turn."
 }

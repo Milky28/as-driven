@@ -123,7 +123,7 @@
           "ams2.local-live-mercedes-benz-clk-lm-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The source gives a 6-speed sequential, and the live drive selected six gears through a sequential stick with automatic cut and blip."
+        "basis": "The source gives a 6-speed sequential, and the live drive selected six gears through a sequential stick with an automatic cut and no automatic blip."
       },
       {
         "paths": [
@@ -145,5 +145,5 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-18"
+  "updated_at": "2026-08-25"
 }

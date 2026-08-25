@@ -122,7 +122,7 @@
           "ams2.local-live-formula-trainer-advanced-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The live drive selected four gears through a sequential stick with automatic cut and blip. A Reiza forum thread resolves the recurring question about this car: a member who tested it states it is definitely sequential, for both the Trainer and the Trainer Advanced."
+        "basis": "The live drive selected four gears through a sequential stick with an automatic cut and no automatic blip. A Reiza forum thread resolves the recurring question about this car: a member who tested it states it is definitely sequential, for both the Trainer and the Trainer Advanced."
       },
       {
         "paths": [
@@ -144,5 +144,5 @@
     "archetype_id": "stick-4-seq-clutch-start-flat-up-no-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-18"
+  "updated_at": "2026-08-25"
 }

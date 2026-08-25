@@ -120,7 +120,7 @@
           "ams2.local-live-mcr-s2000-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The source gives a Sadev or Hewland five-speed sequential gearbox, and the live drive selected five sequential gears with automatic cut and blip."
+        "basis": "The source gives a Sadev or Hewland five-speed sequential gearbox, and the live drive selected five sequential gears with an automatic cut and no automatic blip."
       },
       {
         "paths": [
@@ -148,5 +148,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-18"
+  "updated_at": "2026-08-25"
 }

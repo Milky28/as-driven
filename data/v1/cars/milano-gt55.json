@@ -260,5 +260,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-22"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Xtrac six-speed sequential with a flat-shift trigger in the lever, so an upshift needs no clutch. A downshift does: Prodrive's 550 wants the clutch every time, even though AMS2 will take one without. Blip as you come down the box."
 }

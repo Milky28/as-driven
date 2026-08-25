@@ -143,5 +143,6 @@
     "classification": "undetermined",
     "basis": "Two archetypes survive the gap: stick-6-seq-clutch-start-flat-up-blip-down and stick-6-seq-clutch-start-flat-up-no-blip. They differ only on downshift.manual_blip. A guided drive settles it, by downshifting with no throttle input and seeing whether the gear engages."
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Six-speed sequential with a lever. The car cuts the upshift, so stay flat. Nothing blips the downshift, and whether this gearbox needs one to engage is not established, so blip anyway: it settles the car into the corner whether or not the box demands it."
 }

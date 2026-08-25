@@ -120,7 +120,7 @@
           "ams2.local-live-mini-cooper-jcw-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The championship states a Quaife sequential gearbox, and the live drive selected six gears through a sequential stick with automatic cut and blip."
+        "basis": "The championship states a Quaife sequential gearbox, and the live drive selected six gears through a sequential stick with an automatic cut and no automatic blip."
       },
       {
         "paths": [
@@ -142,5 +142,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-18"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Quaife sequential six-speed. The car cuts the upshift so you can stay flat. It does not blip, and the gear will engage without one, but an unmatched downshift locks the front wheels on a car that steers with them."
 }
