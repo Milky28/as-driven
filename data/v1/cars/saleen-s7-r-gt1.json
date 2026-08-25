@@ -231,5 +231,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-23"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Six-speed sequential in the S7-R family, supported by specialist reporting and confirmed in the cockpit as a stick without paddles. The car cuts the upshift; blip every downshift yourself."
 }

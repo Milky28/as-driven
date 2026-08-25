@@ -147,5 +147,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-11"
+  "updated_at": "2026-08-25",
+  "driver_summary": "BMW built the race M3 GTR with a sequential shift where the road car has a six-speed manual, so nothing about the gearbox behaves like the street car. It cuts the upshift for you; blip every downshift yourself."
 }

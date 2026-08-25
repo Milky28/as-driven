@@ -144,5 +144,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Sources disagree about the C8's gearbox, between a five-speed manual and a six-speed sequential. The drive settles what AMS2 models: a six-speed sequential stick. It cuts the upshift; the downshift blip is yours."
 }

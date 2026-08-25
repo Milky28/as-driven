@@ -153,5 +153,6 @@
   "notes": [
     "'McLaren F1 GTR - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25",
+  "driver_summary": "The 1997 car, though which chassis specification AMS2 models is not verified. Six-speed sequential: it cuts the upshift, and nothing blips the downshift, so match the revs yourself."
 }

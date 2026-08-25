@@ -153,5 +153,6 @@
   "notes": [
     "'Courage C60 Hybrid - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-18"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift and blips the downshift itself, so once you are rolling the gearbox asks nothing of your feet."
 }
