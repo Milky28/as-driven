@@ -155,5 +155,6 @@
     "The Toyota Corolla is a separate exact simulator identity using the same regulated 2024 platform.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Paddle sequential needing the clutch to pull away. It blips the downshift for you, but whether it cuts the upshift was not established by the drive, so lift as though it does not."
 }

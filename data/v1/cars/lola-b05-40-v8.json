@@ -164,5 +164,6 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Paddle sequential that asks for no clutch at any point: it gets away from rest, cuts the upshift and blips the downshift itself. Once you are in the car the gearbox is not your problem."
 }

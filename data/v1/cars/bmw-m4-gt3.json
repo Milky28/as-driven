@@ -232,5 +232,6 @@
     "'BMW M4 GT3 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-23"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Six-speed sequential Xtrac transaxle, derived from the M8 GTE programme. Paddles, no clutch to pull away, and it cuts and blips for itself."
 }

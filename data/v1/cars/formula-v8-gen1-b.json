@@ -139,5 +139,6 @@
     "'Formula V8 Gen1 (B)' is the same car observed before the aero suffix existed. It inherits these verified controls as an approved configuration alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-08-25",
+  "driver_summary": "Paddle sequential with one job left for your left foot, which is the clutch to pull away. After that it cuts the upshift and blips the downshift on its own."
 }
