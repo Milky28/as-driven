@@ -4,11 +4,12 @@
   "record_id": "milano-gt36",
   "identity": {
     "display_name": "Milano GT36",
-    "manufacturer": "Milano",
-    "model": "GT36",
+    "manufacturer": "Ferrari",
+    "model": "360 GT",
     "year": {
-      "from": 2005,
-      "label": "fictional 2005 GT2 representation"
+      "from": 2002,
+      "to": 2005,
+      "label": "Ferrari 360 GT"
     },
     "class": "GT2 2005",
     "real_world_identity_notes": "Reiza's renamed Ferrari 360 GT, the GT2 car of the same period, carried in AMS2 as Milano GT36. The record previously said no real-world analogue had been established; the maintainer identified it, in the same renaming that makes Milano 55 GT1 the Prodrive 550 Maranello. No source for the 360 GT's transmission has been consulted, so unlike its GT1 stablemate nothing here is corroborated: the six sequential gears and the automatic cut are the drive's, and whether the real car needs the clutch to go down a gear is not established. The 550 requires it, but that is a different car and is not inherited."
@@ -125,5 +126,5 @@
     "classification": "matches"
   },
   "updated_at": "2026-08-25",
-  "driver_summary": "Reiza's renamed Ferrari 360 GT. Six-speed sequential: the car cuts the upshift, and the downshift blip is yours. No source for the 360's transmission has been consulted, so unlike the 550 that shares its class, nothing here is corroborated."
+  "driver_summary": "The Ferrari 360 GT, listed by AMS2 as Milano GT36. Six-speed sequential: the car cuts the upshift, and the downshift blip is yours. No source for the 360's transmission has been consulted, so unlike the 550 that shares its class, nothing here is corroborated."
 }
