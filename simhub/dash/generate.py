@@ -826,7 +826,23 @@ def _empty_state(factory: ItemFactory, unmatched: bool, compact: bool) -> dict[s
         factory.text("StateEyebrow", "CONTRIBUTION NEEDED" if unmatched else "AUTHENTIC SETUP", 60 if compact else 92, 20 if compact else 24, factory.width - 100, 22, 11 if compact else 13, accent, font_weight="Bold"),
         factory.text("StateTitle", "Unmapped car" if unmatched else "Waiting for a car", 60 if compact else 92, 42 if compact else 52, factory.width - 110, 38, 21 if compact else 30, WHITE, expression=title_expression, font_weight="Bold"),
         factory.rectangle("StateRule", left, 82 if compact else 108, factory.width - 2 * left, 2, SLATE),
-        factory.text("StateBody", "No curated record exists for this exact identity." if unmatched else "Start a supported simulator session to see authentic controls guidance.", left, 105 if compact else 140, factory.width - 2 * left, 48, 16 if compact else 22, TEXT, font_weight="Bold"),
+        # Pre-broken, because a dashboard text item does not wrap: the waiting
+        # line ran off the card and ended mid-word at "gui". One item per line,
+        # the same way the note panel draws a summary.
+        *[
+            factory.text(
+                "StateBody" + str(index + 1), line,
+                left, (105 if compact else 140) + (20 if compact else 28) * index,
+                factory.width - 2 * left, 26 if compact else 34,
+                16 if compact else 22, TEXT, font_weight="Bold",
+            )
+            for index, line in enumerate(
+                ["No curated record exists", "for this exact identity."]
+                if unmatched
+                else ["Start a supported simulator session",
+                      "to see authentic controls guidance."]
+            )
+        ],
         factory.text("StateSafety", "No hardware or technique values have been assumed." if unmatched else "Dataset ready • waiting for telemetry", left, factory.height - 50, factory.width - 2 * left, 28, 12 if compact else 15, MUTED),
     ])
     if unmatched:

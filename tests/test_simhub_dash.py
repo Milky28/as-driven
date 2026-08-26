@@ -452,6 +452,42 @@ class SimHubDashTests(unittest.TestCase):
             self.assertLessEqual(box("NoteLine3")[3], box("NotePanel")[3], variant)
             self.assertLessEqual(box("Dataset")[3], dashboard["BaseHeight"], variant)
 
+    def test_static_text_fits_the_box_that_draws_it(self):
+        """Geometry is not enough: the glyphs have to fit too.
+
+        The box-containment test above passes when an item is exactly as wide as
+        its container, which is what a full-width line always is. The waiting
+        card said "...to see authentic controls gui" for exactly that reason -
+        every rectangle was in the right place and the sentence was longer than
+        the space for it.
+
+        Dashboard text items do not wrap, so a string wider than its box is
+        clipped rather than reflowed. This measures at half the font size per
+        character, which is narrower than any bold sans actually renders, so a
+        string that fails here is certainly too long rather than arguably so.
+        """
+        # Both empty states are always built into the card and shown by
+        # expression, so every variant already carries all of this text.
+        for variant in ("detailed", "compact"):
+            dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
+            for item in walk(dashboard):
+                if not isinstance(item, dict) or "Name" not in item:
+                    continue
+                text = item.get("Text")
+                size = item.get("FontSize")
+                if not isinstance(text, str) or not text or not size:
+                    continue
+                if item.get("Expression"):
+                    # Driven by a formula at runtime; the literal is a
+                    # placeholder and says nothing about what is drawn.
+                    continue
+                estimated = len(text) * size * 0.5
+                self.assertLessEqual(
+                    estimated, item["Width"],
+                    "%s %s: %r needs about %dpx and has %d"
+                    % (variant, item["Name"], text, estimated, item["Width"]),
+                )
+
     def test_note_panel_only_appears_when_the_record_carries_a_summary(self):
         for variant in ("detailed", "compact"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
