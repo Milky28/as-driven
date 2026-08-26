@@ -673,6 +673,39 @@ namespace AsDriven.Plugin
             return directory;
         }
 
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern int SHParseDisplayName(
+            string name,
+            IntPtr bindingContext,
+            out IntPtr pidl,
+            uint attributes,
+            out uint attributesOut);
+
+        [DllImport("shell32.dll", SetLastError = true)]
+        private static extern int SHOpenFolderAndSelectItems(
+            IntPtr folderPidl,
+            uint count,
+            IntPtr[] items,
+            uint flags);
+
+        [DllImport("ole32.dll")]
+        private static extern void CoTaskMemFree(IntPtr memory);
+
+        /// <summary>
+        /// Show a saved draft in File Explorer, reusing a window already open on
+        /// the drafts folder.
+        ///
+        /// "explorer.exe /select," cannot do this. It spawns a window every
+        /// time, so contributing several drafts in one sitting left a separate
+        /// Explorer window per submission, all showing the same folder. The
+        /// shell API this replaces it with activates an existing window on that
+        /// folder and moves the selection to the new file, which is what a
+        /// person means by "show me the file I just saved".
+        ///
+        /// It falls back to the old command if the shell call fails, because
+        /// showing the file in a surplus window is much better than not showing
+        /// it at all.
+        /// </summary>
         internal void RevealVerificationDraft(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -684,7 +717,52 @@ namespace AsDriven.Plugin
             {
                 throw new FileNotFoundException("The saved draft no longer exists.", fullPath);
             }
+            if (SelectInExistingExplorerWindow(fullPath))
+            {
+                return;
+            }
             Process.Start("explorer.exe", "/select,\"" + fullPath + "\"");
+        }
+
+        private static bool SelectInExistingExplorerWindow(string fullPath)
+        {
+            string folder = Path.GetDirectoryName(fullPath);
+            if (string.IsNullOrEmpty(folder))
+            {
+                return false;
+            }
+            IntPtr folderPidl = IntPtr.Zero;
+            IntPtr filePidl = IntPtr.Zero;
+            try
+            {
+                uint ignored;
+                if (SHParseDisplayName(folder, IntPtr.Zero, out folderPidl, 0, out ignored) != 0
+                    || folderPidl == IntPtr.Zero)
+                {
+                    return false;
+                }
+                if (SHParseDisplayName(fullPath, IntPtr.Zero, out filePidl, 0, out ignored) != 0
+                    || filePidl == IntPtr.Zero)
+                {
+                    return false;
+                }
+                return SHOpenFolderAndSelectItems(folderPidl, 1, new[] { filePidl }, 0) == 0;
+            }
+            catch (DllNotFoundException)
+            {
+                return false;
+            }
+            catch (EntryPointNotFoundException)
+            {
+                return false;
+            }
+            finally
+            {
+                // The shell allocated both identifiers, so the caller frees them
+                // whichever way the call went.
+                if (filePidl != IntPtr.Zero) { CoTaskMemFree(filePidl); }
+                if (folderPidl != IntPtr.Zero) { CoTaskMemFree(folderPidl); }
+            }
         }
 
         internal void OpenObservationSubmissionForm()
