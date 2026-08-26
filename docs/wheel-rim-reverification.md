@@ -27,6 +27,41 @@ Merging also settled the largest contradiction this file used to list. All 15 `f
 
 Count: 6.
 
+## 1b. One car recorded under more than one shape across simulators
+
+A record is one real car, so its simulator entries describe one rim. These four
+disagree about it. That is worth separating from the family splits below: those
+compare different cars, while these compare the same car seen twice.
+
+| Record | Recorded as | Authentic |
+| --- | --- | --- |
+| `nissan-gt-r-nismo-gt3` | round (ams2), gt-formula (acc) | gt-formula |
+| `nissan-r390-gt1` | round (ams2), d-shaped (ac) | unknown |
+| `porsche-911-gt3-r` | d-shaped (ams2), gt-formula (acc) | gt-formula |
+| `saleen-s7-r-gt1` | round (ams2, ac), d-shaped (raceroom) | round |
+
+Count: 4.
+
+None of these is established as a modelling difference. Two split on
+round against gt-formula and two on round against d-shaped, which are precisely
+the boundaries the caveat above says were drawn before the definitions existed.
+A simulator genuinely modelling a different wheel would be a real finding; the
+same rim classified twice is not.
+
+The Saleen is the one with a photograph behind it. The maintainer looked for
+period images of the S7R cockpit and found the rim carries so slight a flat that
+it could reasonably be called either, which explains a split across three
+simulators without any of them modelling anything different. Reference supplied
+by the maintainer: `csms.cz` 2009 photo gallery, "Look into the cockpit of the
+car SALEEN S7R". It is not registered in `sources.json`, because nothing has been
+claimed from it yet - registering it is the first step if the real-car shape is
+to be re-decided rather than merely doubted.
+
+Settling one of these needs a look at the rim in each simulator against the
+decision order in `docs/data-model.md`, asking the control-panel question first.
+Until then the recorded values stand: they are what somebody saw, and the split
+is a question about the vocabulary rather than about the cars.
+
 ## 2. Families recorded under more than one shape
 
 A split is not automatically an error: cars in one class can genuinely carry different rims. These are listed because the split follows the old ambiguity rather than any noted difference, so each needs confirming against the outline rule before it is trusted.

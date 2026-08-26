@@ -196,7 +196,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "d-shaped",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value. This is not established as a modelling difference. Period photographs of the S7R cockpit show a rim with so slight a flat that it can reasonably be called round or d-shaped, which is enough to explain a split across three simulators without any of them modelling a different wheel. See docs/wheel-rim-reverification.md.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."

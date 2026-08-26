@@ -1032,6 +1032,39 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
         self.assertNotIn("other", OBSERVING_SIMULATORS)
 
+    def test_a_cross_simulator_rim_split_is_listed_for_re_verification(self) -> None:
+        """A record is one car, so its entries describe one rim.
+
+        Where they disagree it is either a real modelling difference or the
+        vocabulary boundary that predates the current definitions, and only a
+        look at the cockpit separates those. Neither is a validation error, so
+        this test does not forbid the split; it requires the record to be listed
+        in the worklist, because an unlisted one is a disagreement nobody is
+        going to look at again.
+        """
+        document = (ROOT / "docs" / "wheel-rim-reverification.md").read_text(
+            encoding="utf-8"
+        )
+        # Scoped to the section about this kind of split. Several of these
+        # records appear elsewhere in the file for unrelated reasons, and a
+        # mention there would satisfy a whole-file search while leaving the
+        # cross-simulator disagreement itself undocumented.
+        heading = "## 1b. One car recorded under more than one shape across simulators"
+        start = document.index(heading)
+        end = document.index("\n## ", start + len(heading))
+        worklist = document[start:end]
+        unlisted = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            shapes = {
+                (entry.get("behavior", {}).get("wheel_rim_type") or {}).get("normalized")
+                for entry in record["simulators"]
+            }
+            shapes.discard(None)
+            if len(shapes) > 1 and f"`{record['record_id']}`" not in worklist:
+                unlisted.append(record["record_id"])
+        self.assertEqual([], unlisted)
+
     def test_a_curated_dogleg_always_names_the_side_first_gear_is_on(self) -> None:
         """A dogleg is not proposed until the side is established.
 
