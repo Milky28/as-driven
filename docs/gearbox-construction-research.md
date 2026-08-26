@@ -1,9 +1,12 @@
 # Gearbox construction research
 
-**Status: research notes for review. Nothing here has been written into
-`data/v1`, and nothing should be until a reviewer accepts the basis.** Imported
-candidates stay outside the curated data until reviewed, and a value that turns
-on inference should not be promoted by whoever inferred it.
+**Status: partly settled, partly open.** The Copa Truck and Formula Vee findings
+below have been reviewed and written into `data/v1`, and both regulations are
+registered in `data/v1/sources.json`. The header used to say nothing here had
+reached the curated data, which stopped being true once those were promoted.
+Everything still marked open is research for review: imported candidates stay
+outside the curated data until reviewed, and a value that turns on inference
+should not be promoted by whoever inferred it.
 
 ## Why this field
 
@@ -12,10 +15,33 @@ in 19 deviations, deciding 11 of the 14 undetermined, and holding back the
 dogleg and four-speed archetypes behind 13 of the 14 that match no archetype.
 
 It travels with `downshift.manual_blip`, because dog rings need the driver to
-match revs where a synchromesh leaves the blip optional. That coupling is a
-reason to research the field, **not** a licence to derive one value from the
-other. Establishing the construction is evidence; reading the blip off it is
-inference. Each still needs its own basis.
+match revs where a synchromesh leaves the blip optional.
+
+This note used to read that coupling as a flat prohibition on deriving either
+value from the other. That was too strong in one direction and it contradicted
+both `docs/data-model.md` and the data. **The coupling runs one way.** An
+established construction settles the technique, because the technique is a
+consequence of how the gears engage: `synchromesh` takes `manual_blip: optional`
+and an H-pattern dog box takes `required`, and those are decided facts rather
+than hedges. The reverse never holds. A record carrying `required` while
+`gearbox_type` is `unknown` has established nothing about the engagement, and
+every time the construction was later found for a car in that position the
+technique turned out to be wrong.
+
+Two conditions bound the permitted direction:
+
+- **Derive only from a construction that is actually recorded.** Reading a blip
+  off an `unknown` gearbox answers one open field with another, which is the
+  thing this note was right to forbid. That is why 30 records still carry an
+  open blip and will keep carrying it until the construction is found.
+- **A derived value inherits the confidence it came from.** A construction at
+  `medium` yields a technique at `medium`. It does not yield a blank, and it
+  does not yield `verified`.
+
+The Formula Vee pair below is this rule working: the FASP regulations settled
+`synchromesh`, and both records took `manual_blip: optional` with it. The 911
+RSR 1974 is the one place the derivation was declined, and it is discussed under
+its own heading.
 
 ## Correcting the earlier framing
 
@@ -193,10 +219,26 @@ the construction could not ride at that confidence. It now has a claim of its ow
 whose basis says the last step is inferred from the family rather than stated by
 a source - which is what keeps it honest and what the confidence test keys on.
 
-**The blip was not taken with it.** `downshift.manual_blip` stays unknown and is
-now the record's declared deviation from the synchromesh archetype. A synchromesh
-usually leaves a blip optional, and following that through would derive one
-unestablished field from another that is itself only at medium.
+**The blip was not taken with it, and that is now the open question.**
+`downshift.manual_blip` stays unknown and is the record's declared deviation from
+the synchromesh archetype. The reason given was that following the construction
+through would derive one unestablished field from another that is itself only at
+medium.
+
+Half of that still stands and half does not. The construction is recorded, so the
+derivation is the permitted direction, and under the rule above it yields
+`optional` at `medium` rather than nothing at all. What the medium confidence
+argues for is a medium-confidence value, not a blank. Against that: the record
+reads `synchromesh` from an air-cooled Porsche family rather than from a source
+about the 915/08 itself, and a reviewer may reasonably want the family inference
+to carry only the construction and not a second value stacked on it.
+
+**Five records are in this position** - `porsche-911-rsr-1974`,
+`ferrari-250-gto-1962-1964`, `ford-gt40-mk1-1965`, `mclaren-f1-lm-1996` and
+`shelby-cobra-daytona-coupe-1964-1965` - against 35 synchromesh records that
+already carry `optional`. Deciding them one way or the other is a reviewer's
+call and has not been made. Whichever way it goes, all five should go the same
+way, because nothing distinguishes them from each other.
 
 **A trap was found and closed on the way.** The record's gate had no evidence of
 its own - the claim's basis established H-pattern actuation, not the gate - and
