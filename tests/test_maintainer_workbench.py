@@ -51,6 +51,62 @@ class _FakeApplication:
 
 
 class MaintainerWorkbenchTests(unittest.TestCase):
+    def test_every_case_state_has_a_colour_in_the_page(self) -> None:
+        """A state the page has no rule for renders as an unstyled chip.
+
+        Two states were added to the review pipeline without anything being
+        added here, and the queue showed a colourless pill next to coloured
+        ones. Nothing failed; it just looked broken, which is the kind of gap a
+        test has to catch because no exception ever will.
+
+        The states are taken from the pipeline rather than listed here, so
+        adding one to _case_state without giving it a colour fails immediately.
+        """
+        from as_driven_db import review_promotion, review_submissions
+
+        states: set[str] = set()
+        for module in (review_submissions, review_promotion):
+            source = Path(module.__file__).read_text(encoding="utf-8")
+            # _case_state returns them; the promotion and retirement paths
+            # assign them. Both forms have introduced a state before.
+            states |= set(re.findall(r'return "([a-z][a-z-]+)"', source))
+            states |= set(re.findall(r'\["state"\]\s*=\s*"([a-z][a-z-]+)"', source))
+        # Only the values _case_state and the promotion path actually assign.
+        states &= {
+            "duplicate",
+            "released",
+            "needs-clarification",
+            "identity-research",
+            "review-needed",
+            "blocked-on-simulator",
+            "withdrawn",
+            "promoted",
+            "final-review",
+            "manifest-review",
+            "intake-error",
+            "research-blocked",
+            "published",
+        }
+        self.assertIn("withdrawn", states, "the state list stopped matching the source")
+        page = workbench_page("test-token")
+        # Selectors are grouped, so ".state-promoted,.state-released{" carries a
+        # colour for both. Match the class wherever it appears in a rule head.
+        missing = sorted(
+            state
+            for state in states
+            if not re.search(r"\.state-" + re.escape(state) + r"[,{]", page)
+        )
+        self.assertEqual([], missing)
+
+    def test_a_retired_case_leaves_the_working_queue(self) -> None:
+        # A withdrawn case is history, not work. It must not pad the Cases count
+        # or sit among the live queue, and it must stay reachable, because
+        # retiring a contribution is not the same as hiding it.
+        page = workbench_page("test-token")
+        self.assertIn("queueFilter==='all'&&c.display_state!=='withdrawn'", page)
+        self.assertIn("queueFilter==='withdrawn'", page)
+        self.assertIn("['withdrawn','Withdrawn'", page)
+
     def test_page_names_the_review_boundary_and_approval_gates(self) -> None:
         page = workbench_page("test-token")
         self.assertIn("Maintainer Workbench", page)
