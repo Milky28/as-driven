@@ -15,22 +15,27 @@ if (-not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe"))) {
     throw "The SimHub installation could not be verified: $simHubRoot"
 }
 $targetExecutable = [System.IO.Path]::GetFullPath((Join-Path $simHubRoot "SimHubWPF.exe"))
+$defaultRoot = [System.IO.Path]::GetFullPath("C:\Program Files (x86)\SimHub")
+# The running process is asked where it was launched from so a SimHub installed
+# somewhere else is not mistaken for this one. That question can fail - an
+# elevated or 32-bit process does not always yield a readable MainModule - and
+# when it does, the answer for the default location is to assume the worst and
+# refuse. Nothing here may throw inside the try: a thrown string surfaces as the
+# same RuntimeException a failed lookup does, and catching both together is what
+# used to replace this message with a raw .NET path error.
 foreach ($process in @(Get-Process -Name "SimHubWPF" -ErrorAction SilentlyContinue)) {
-    try {
-        $runningExecutable = [System.IO.Path]::GetFullPath($process.MainModule.FileName)
-        if ($runningExecutable.Equals($targetExecutable, [StringComparison]::OrdinalIgnoreCase)) {
-            throw "Close SimHub before installing As Driven."
+    $runningExecutable = $null
+    $lookupFailed = $false
+    try { $runningExecutable = [System.IO.Path]::GetFullPath($process.MainModule.FileName) }
+    catch { $lookupFailed = $true }
+
+    if ($lookupFailed) {
+        if ($simHubRoot.Equals($defaultRoot, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Close SimHub before installing As Driven. (SimHubWPF is running; its location could not be read, so the installation at $simHubRoot is assumed to be the one in use.)"
         }
     }
-    catch [System.Management.Automation.RuntimeException] {
-        throw
-    }
-    catch {
-        if ($simHubRoot.Equals(
-            [System.IO.Path]::GetFullPath("C:\Program Files (x86)\SimHub"),
-            [StringComparison]::OrdinalIgnoreCase)) {
-            throw "Close SimHub before installing As Driven."
-        }
+    elseif ($runningExecutable.Equals($targetExecutable, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Close SimHub before installing As Driven."
     }
 }
 
