@@ -7,7 +7,7 @@ the rules below while identifying records that still await classification.
 
 ## The observation
 
-Across the 263 curated records there are **78 distinct transmission blocks**.
+Across the 263 curated records there are **68 distinct transmission blocks**.
 Nine records in ten restate a pattern that already exists elsewhere in the
 dataset. The four largest compatible families alone cover 91 records:
 
@@ -18,7 +18,7 @@ dataset. The four largest compatible families alone cover 91 records:
 | 16 | 6-speed paddles, clutch to pull away, automatic cut and blip |
 | 15 | 5-speed standard H-pattern, clutch to pull away, lift on upshift, optional blip |
 
-Only 36 records are one of a kind.
+Only 30 records are one of a kind.
 
 The GT3 records `audi-r8-lms-gt3`, `mclaren-720s-gt3-evo`,
 `lamborghini-huracan-gt3-evo2` and `aston-martin-vantage-gt3-evo` share the same
