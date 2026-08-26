@@ -163,6 +163,20 @@ infer the side from the pattern. Where the field is absent or `unknown` the
 guidance says first is outside the plane and stops there, and a dogleg may not
 record first as being up.
 
+**Curation does not produce that state.** The client renders it defensively,
+because an older dataset or another consumer's data may contain it, but a
+`dogleg-h` is not proposed here until the side is established. All eight curated
+doglegs name their side, and the reason to keep it that way is that "dogleg" is
+the most inferable value in the dataset: a car's reputation suggests it, period
+photographs are read at a glance, and a gate knob is easy to mis-see. Requiring
+the side requires a source or a clear look, which is the same work that would
+have caught a wrong dogleg. Where the side is not established, `shift_pattern`
+stays `unknown` rather than becoming a half-answered dogleg.
+
+This binds curation, not the schema: `first_gear_position` remains optional, and
+`unknown` remains a legal value, because a consumer may hold data this project
+did not curate.
+
 ### Wheel-rim shape
 
 Shape is decided **by the rim itself**, never by the car's racing class. The

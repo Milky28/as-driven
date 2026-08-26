@@ -1031,6 +1031,40 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
         self.assertNotIn("other", OBSERVING_SIMULATORS)
 
+    def test_a_curated_dogleg_always_names_the_side_first_gear_is_on(self) -> None:
+        """A dogleg is not proposed until the side is established.
+
+        `dogleg-h` is the most inferable value in the dataset. A car's
+        reputation suggests it, period photographs are read at a glance, and a
+        gate knob is easy to mis-see. Requiring the side requires a source or a
+        clear look, which is the same work that would have caught a wrong
+        dogleg, so the requirement is a check on the pattern rather than an
+        extra field to fill.
+
+        The client still renders a sideless dogleg, because another consumer's
+        data may contain one and the schema still permits it. This is a rule
+        about what curation produces. Where the side is not established the
+        pattern stays `unknown`.
+        """
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            transmission = record["authentic_controls"]["transmission"]
+            if transmission.get("shift_pattern") != "dogleg-h":
+                continue
+            side = transmission.get("first_gear_position")
+            if side in (None, "unknown"):
+                offenders.append(
+                    "%s: dogleg-h without an established side; keep the pattern "
+                    "unknown until research settles it" % record["record_id"]
+                )
+            elif side in ("up-left", "up-right"):
+                offenders.append(
+                    "%s: a dogleg puts first outside the racing plane, so it "
+                    "cannot be up" % record["record_id"]
+                )
+        self.assertEqual([], offenders)
+
     def test_a_registered_simulator_reaches_every_place_that_enumerates_one(self) -> None:
         """Registering a simulator is a list of places, so the list is a test.
 
