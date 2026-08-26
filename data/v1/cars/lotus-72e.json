@@ -30,7 +30,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "required",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -155,13 +155,7 @@
   "driver_summary": "Hewland FG400, most likely a dog box, so blip every downshift to be safe. Whether the gear needs it was never tested, and the dog-ring construction is inferred from Hewland's practice rather than named by a source.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/downshift/manual_blip",
-        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
-      }
-    ]
+    "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

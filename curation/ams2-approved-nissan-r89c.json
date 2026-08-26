@@ -13,10 +13,10 @@
     "shift_actuation": "h-pattern",
     "shift_pattern": "unknown",
     "standing_start_clutch": "required",
-    "throttle_lift": "unknown",
+    "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "unknown",
+    "manual_blip": "required",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
@@ -24,7 +24,7 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the real-world identity and five-speed VGC transmission are supported by Nissan's heritage record.",
-  "scope_notes": "Single exact identity from one guided-verification drive. 'Nissan R89C - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "scope_notes": "Single exact identity from one guided-verification drive. 'Nissan R89C - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested. Revised 2026-08-25 without a new drive: manual blip from unknown to required, on the dog-engagement gearbox this record already establishes. Dog rings do not match the shaft speeds, so the driver must, and the registered archetype for this mechanism carries the same value; throttle lift from unknown to required, on the H-pattern gate with no automatic cut that this record already establishes, matching the registered archetype for this mechanism. No new observation was taken and no other approved value changed.",
   "additional_telemetry_names": [
     {
       "value": "Nissan R89C - Low Downforce",

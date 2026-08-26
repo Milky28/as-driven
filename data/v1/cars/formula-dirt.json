@@ -45,7 +45,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "This class reports a single aero configuration. The selection screen offers no high or low downforce package, and only the plain identity has ever been observed, so there is no further identity to carry."
     ]
   },
@@ -149,5 +149,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

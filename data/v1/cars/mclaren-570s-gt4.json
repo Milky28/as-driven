@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -215,13 +215,7 @@
   },
   "archetype": {
     "archetype_id": "paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
-      }
-    ]
+    "classification": "matches"
   },
   "updated_at": "2026-08-25",
   "driver_summary": "GT4 racer using the road car's dual-clutch gearbox. It cuts the upshift and blips the downshift, and pulls away without a clutch, so the paddles and two pedals are the whole job."

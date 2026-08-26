@@ -184,11 +184,22 @@ approval are required before release. See `PRIVACY.md` and
   the guided queue. The inventory only holds cars that have been loaded here,
   so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Of 260 records, 252 carry an `archetype` classification: 158 match one of the
-  23 registered mechanisms, 68 deviate, 15 are undetermined and 11 match none.
-  Eight await classification. An
+- Of 263 records, 252 carry an `archetype` classification: 180 match one of the
+  23 registered mechanisms, 46 deviate, 15 are undetermined and 11 match none.
+  Eleven await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
+- **A mechanism the record already establishes settles the technique that follows
+  from it.** `upshift.throttle_lift` was blank on 25 records whose own gearbox
+  answered it - 21 with an established automatic cut, which is the thing that
+  removes the lift, and 4 H-pattern cars with no cut at all - and
+  `downshift.manual_blip` was blank on 4 established dog boxes, which cannot
+  match the shaft speeds for the driver. Every one of those records listed the
+  blank field as a *deviation* from its own registered archetype, so the reviewed
+  archetype already held the value the record was missing. 26 records moved from
+  deviating to matching. This runs one way only: a mechanism settles the
+  technique, and the technique never settles the mechanism. Nothing was derived
+  over an `unknown` construction, which is why 48 blips remain open.
 - **The gearbox construction research is closed.** `gearbox_type` is open in 37
   records: 22 are retired as cars a simulator invented, 5 are Copa Truck records
   a regulation frees, and the remaining 10 have each been searched and documented

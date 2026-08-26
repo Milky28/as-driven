@@ -45,7 +45,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "This car shares a class with the curated Brabham BT26A and Lotus 49C, which run racing Hewlands and therefore carry a required downshift blip. Nothing is inherited from them: no real-world chassis is assigned here, so the construction stays unknown.",
       "The class was thought complete after the Brabham and the Lotus were curated. Both of these models were absent from the coverage queue until the class was swept.",
       "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
@@ -141,5 +141,5 @@
     "classification": "undetermined",
     "basis": "Two archetypes survive the gaps: h-5-dogbox-clutch-start-lift-up-blip-down and h-5-synchro-clutch-start-lift-up-blip-optional. They differ on gearbox_type and downshift.manual_blip together, and those are one question rather than two: dog rings need the driver to match revs for the gear to engage, where a synchromesh leaves the blip optional. For a real car a reviewed source would settle both. This one is Reiza's own, standing in for an era rather than representing a chassis, so no such source exists and no drive can separate a synchromesh from a dog box either. The choice stays open permanently, and picking between the two archetypes would mean reasoning from the era the car evokes. Retired from the gearbox research queue."
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

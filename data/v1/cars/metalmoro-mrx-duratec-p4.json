@@ -20,7 +20,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -47,7 +47,7 @@
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
       "No throttle lift is required on upshifts because a full-throttle clutchless upshift was accepted with an automatic cut detected.",
-      "No automatic blip was detected, so the driver supplies the downshift blip, matching the curated convention for a sequential stick without automatic blip.",
+      "No automatic blip was detected, so the AMS2 car leaves the rev matching to the driver. Whether the real gearbox needs that blip to engage stays unknown, because its construction is not established.",
       "The constructor fixes no transmission for the MRX, so the sequential six-speed is recorded as the configuration modeled in AMS2 rather than a factory specification."
     ]
   },

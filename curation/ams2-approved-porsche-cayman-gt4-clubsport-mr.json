@@ -13,7 +13,7 @@
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
     "standing_start_clutch": "not-required",
-    "throttle_lift": "unknown",
+    "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
@@ -24,5 +24,5 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled. The record was approved as the 2019 718 Clubsport and is corrected to the 2016 Clubsport of the 981 generation, on the spreadsheet author's own correction of the year. The real-car fields are re-established on 981 material: Porsche's vehicle description and launch release for the six-speed PDK, the Sprint Challenge regulations for carrying that specification to the MR, the MR's homologation dossier for the gearbox-controlled clutch and the steering wheel, and a contemporary road test for the absent third pedal. The rim is d-shaped, a conventional rim flattened at the bottom. AMS2's demand for clutch input at a standing start is a genuine departure from a car with no clutch pedal and stays as a sourced override.",
-  "scope_notes": "Single exact identity from one guided-verification drive."
+  "scope_notes": "Single exact identity from one guided-verification drive. Revised 2026-08-25 without a new drive: throttle lift from unknown to not-required, on the automatic cut this record already establishes. A gearbox that cuts the throttle itself leaves the driver nothing to lift for, and the registered archetype for this mechanism carries the same value. No new observation was taken and no other approved value changed."
 }

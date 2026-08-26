@@ -21,7 +21,7 @@
       "shift_pattern": "standard-h",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -138,14 +138,8 @@
   },
   "archetype": {
     "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
-      }
-    ]
+    "classification": "matches"
   },
-  "updated_at": "2026-08-17",
+  "updated_at": "2026-08-25",
   "driver_summary": "Three-synchromesh gearbox: second, third and fourth have synchronisers and first does not, on every Mini until September 1968. Blip to ease the synchronised gears, and match revs yourself for any downshift into first."
 }

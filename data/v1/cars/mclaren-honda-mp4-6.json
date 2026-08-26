@@ -46,7 +46,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "The cockpit disagrees with itself. The visible lever and its animation are those of a sequential stick, while the gearbox accepts direct gear selection, which a sequential cannot do, and needs the driver to match revs. The mechanism is recorded as an H-pattern because that is what the gearbox does and what the real car had; the sequential-looking lever is treated as a modelling detail rather than evidence about the transmission.",
       "The gate is recorded unknown for the same reason. A lever animated as a sequential cannot be read for a gate, and no reviewed source describes the MP4/6's shift pattern, so neither the cockpit nor the sources establish it.",
       "Gearbox construction is not established either. The source names Weismann/McLaren but not its engagement, so the downshift blip stays unknown.",
@@ -164,5 +164,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

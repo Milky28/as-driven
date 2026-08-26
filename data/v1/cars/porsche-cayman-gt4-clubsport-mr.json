@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -216,10 +216,6 @@
       {
         "path": "/authentic_controls/transmission/forward_gears",
         "basis": "Six forward gears where the archetype has seven. The construction is the archetype's - Porsche's own vehicle description for the 981 Clubsport specifies a six-speed PDK dual clutch - and no six-speed dual-clutch archetype is registered, so this deviates on the gear count rather than crossing to a sequential archetype that would misdescribe the gearbox. That is the settled preference: a gear-count deviation over a technique or construction one."
-      },
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. The AMS2 drive predates the two-stage upshift test, so it recorded that a clutchless upshift worked without recording whether full throttle was refused first. A re-drive on the current client settles it, and the Assetto Corsa EVO drive of the 718 already answers it for that car."
       }
     ]
   },

@@ -21,7 +21,7 @@
       "shift_pattern": "unknown",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -30,7 +30,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "required",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -47,7 +47,7 @@
     },
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
-      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift after the driver's own blip.",
+      "The upshift lift follows from an H-pattern gate with no automatic cut, and the downshift blip from the dog-engagement box: dog rings do not match the shaft speeds, so the driver must. The guided drive agrees on both, having taken the upshift after a lift and the downshift after the driver's own blip.",
       "The gearbox is modeled as a dog-engagement racing box from the manufacturer's VGC specification together with the observed clutchless running shifts. The H-pattern layout is not established and stays unknown.",
       "'Nissan R89C - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
@@ -159,21 +159,13 @@
     "classification": "deviates",
     "deviations": [
       {
-        "path": "/authentic_controls/transmission/downshift/manual_blip",
-        "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
-      },
-      {
         "path": "/authentic_controls/transmission/shift_pattern",
         "basis": "The gate is not established. It is read from the cockpit by watching the lever and the driver's hand through a shift, the method that read three dogleg gates in dataset 0.3.28 and that registered sources then corroborated."
-      },
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
       }
     ]
   },
   "notes": [
     "'Nissan R89C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

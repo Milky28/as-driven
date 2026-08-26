@@ -45,7 +45,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, so the accepted results stand; the driver confirmed no pedal was used.",
       "This class mixes technologies, which is period-correct. Teams adopted semi-automatic gearboxes at different times around 1990, so a manual car and a paddle car raced in the same field. Nothing is inherited between models on the strength of a shared class.",
       "Only the high-downforce identity was observed. AMS2 selects the aero configuration from the circuit, so this car reports a different identity at a low-downforce track; that identity is not recorded here because it has not been observed and an exact match cannot be guessed."
@@ -156,5 +156,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

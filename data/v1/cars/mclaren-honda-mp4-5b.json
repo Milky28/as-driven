@@ -46,7 +46,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "Gearbox construction is not established. The source names Weismann/McLaren but not its engagement, so the downshift blip stays unknown rather than being inferred from racing practice.",
       "Clutch telemetry was present while the running shifts were accepted as clutchless. The channel cannot separate the pedal from the clutch the car works itself, so the accepted results stand; the driver confirmed no pedal was used.",
       "This class mixes technologies, which is period-correct. Teams adopted semi-automatic gearboxes at different times around 1990, so a manual car and a paddle car raced in the same field. Nothing is inherited between models on the strength of a shared class.",
@@ -158,5 +158,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

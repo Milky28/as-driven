@@ -21,7 +21,7 @@
       "shift_pattern": "unknown",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -47,7 +47,7 @@
     },
     "notes": [
       "Simulator behavior was directly observed in a guided drive with automatic clutch and shifting disabled.",
-      "Upshift throttle lift and downshift manual blip are set from the guided-drive method notes: the upshift was accepted after a lift and the downshift required the driver's own blip.",
+      "The upshift lift follows from an H-pattern gate with no automatic cut, and the guided drive took the upshift after a lift. The downshift blip stays unknown. The drive found that a blip made the shift work, which does not establish that the real gearbox needs one while its construction is unestablished.",
       "Gearbox construction and H-pattern layout remain unknown; the reviewed sources establish only a five-speed manual transmission.",
       "'Porsche 962C - Low Downforce' inherits these verified base controls as an approved aero-package assumption and was not separately live-tested."
     ]
@@ -161,5 +161,5 @@
   "notes": [
     "'Porsche 962C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-08-25"
 }

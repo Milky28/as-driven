@@ -13,7 +13,7 @@
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
     "standing_start_clutch": "not-required",
-    "throttle_lift": "unknown",
+    "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
@@ -24,7 +24,7 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the real-world transmission is supported by a registered source.",
-  "scope_notes": "Single exact identity from one guided-verification drive. 'BMW M4 GT3 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "scope_notes": "Single exact identity from one guided-verification drive. 'BMW M4 GT3 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested. Revised 2026-08-25 without a new drive: throttle lift from unknown to not-required, on the automatic cut this record already establishes. A gearbox that cuts the throttle itself leaves the driver nothing to lift for, and the registered archetype for this mechanism carries the same value. No new observation was taken and no other approved value changed.",
   "additional_telemetry_names": [
     {
       "value": "BMW M4 GT3 - Low Downforce",

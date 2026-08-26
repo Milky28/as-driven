@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -138,13 +138,7 @@
   },
   "archetype": {
     "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
-      }
-    ]
+    "classification": "matches"
   },
   "updated_at": "2026-08-25",
   "driver_summary": "One-make Supercup G55, sharing the platform and the six-speed Hewland with the GT4 car and asking the same of the driver: it cuts and blips for itself, and the clutch is yours only to pull away."

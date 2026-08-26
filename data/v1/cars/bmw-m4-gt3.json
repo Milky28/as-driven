@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -220,13 +220,7 @@
   },
   "archetype": {
     "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
-      }
-    ]
+    "classification": "matches"
   },
   "notes": [
     "'BMW M4 GT3 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",

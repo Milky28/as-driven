@@ -1030,6 +1030,56 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
         self.assertNotIn("other", OBSERVING_SIMULATORS)
 
+    def test_an_established_mechanism_leaves_no_technique_unknown(self) -> None:
+        """A mechanism the record establishes settles the technique that follows.
+
+        This runs one way only. An established gearbox decides what the driver
+        has to do; what the driver does never decides the gearbox, which is why
+        nothing here reads a construction off a technique. Each rule names a
+        mechanism already curated on the record and the field it cannot leave
+        open:
+
+        - an automatic cut is the thing that removes the upshift lift;
+        - an H-pattern with no cut leaves the lift to the driver;
+        - dog rings cannot match the shaft speeds, so the driver must.
+
+        Every record these rules covered was also listing the open field as a
+        deviation from its own registered archetype, so the reviewed archetype
+        already held the value the record was missing.
+        """
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            transmission = record["authentic_controls"]["transmission"]
+            upshift = transmission.get("upshift", {})
+            downshift = transmission.get("downshift", {})
+            lift = upshift.get("throttle_lift")
+            blip = downshift.get("manual_blip")
+            if upshift.get("automatic_cut") == "yes" and lift == "unknown":
+                offenders.append(
+                    "%s: an automatic cut is established, so the upshift lift "
+                    "cannot stay unknown" % record["record_id"]
+                )
+            if (
+                transmission.get("shift_actuation") == "h-pattern"
+                and upshift.get("automatic_cut") == "no"
+                and lift == "unknown"
+            ):
+                offenders.append(
+                    "%s: an H-pattern with no automatic cut leaves the lift to "
+                    "the driver, so it cannot stay unknown" % record["record_id"]
+                )
+            if (
+                transmission.get("gearbox_type") == "dogbox"
+                and transmission.get("shift_actuation") == "h-pattern"
+                and blip == "unknown"
+            ):
+                offenders.append(
+                    "%s: a dog box is established, so the downshift blip cannot "
+                    "stay unknown" % record["record_id"]
+                )
+        self.assertEqual([], offenders)
+
     def test_an_ac_evo_observation_source_must_be_named_by_the_convention(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             temp_root = self._copy_repository_data(Path(temp))

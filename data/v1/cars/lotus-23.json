@@ -21,7 +21,7 @@
       "shift_pattern": "standard-h",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -148,13 +148,9 @@
       {
         "path": "/authentic_controls/transmission/gearbox_type",
         "basis": "The gearbox type is not established. A guided drive cannot separate a synchromesh from a dog box, so unlike the other open fields this one is closed by a reviewed source rather than by driving the car."
-      },
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
       }
     ]
   },
-  "updated_at": "2026-08-17",
+  "updated_at": "2026-08-25",
   "driver_summary": "Lotus offered the 23 with a choice of Renault or Volkswagen gearboxes, and the drive found four gears. Which one this is, and whether it engages by dogs or synchros, is not established, so blip on downshifts to be safe."
 }

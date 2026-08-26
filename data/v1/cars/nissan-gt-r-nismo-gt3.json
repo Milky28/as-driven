@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "unknown",
+        "throttle_lift": "not-required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -274,10 +274,6 @@
     "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
     "classification": "deviates",
     "deviations": [
-      {
-        "path": "/authentic_controls/transmission/upshift/throttle_lift",
-        "basis": "Whether the car needs a throttle lift on upshifts is not established. A guided drive settles it, by holding the throttle through an upshift and seeing whether the gear engages."
-      },
       {
         "path": "/authentic_controls/transmission/standing_start_clutch",
         "basis": "The exact 2018 specification identifies a clutch but no move-off procedure, so authentic driver clutch use remains open rather than inheriting either simulator's answer."

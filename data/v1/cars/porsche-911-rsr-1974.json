@@ -46,7 +46,7 @@
       }
     },
     "notes": [
-      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift and blips to downshift.",
+      "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "The 915 family is established as a synchromesh design by an air-cooled Porsche specialist, and the RSR ran the magnesium-cased 915/08 within that family. No reviewed source says the race variant replaced the synchronisers, so the construction is recorded at medium confidence rather than high.",
       "The downshift blip stays unknown. A synchromesh leaves a blip optional where dog rings demand one, but reading the blip off the construction would answer one unestablished field with another, so it is left for evidence of its own.",
       "A conventional H with first up and left is the best-supported Type 915 layout. The exact 1974 RSR used the RS-derived Type 915, while the dogleg belongs to the earlier 901 it replaced. No readable exact-RSR selector diagram was recovered, so the gate remains medium confidence rather than a fully closed primary-source verdict.",
@@ -298,5 +298,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-23"
+  "updated_at": "2026-08-25"
 }

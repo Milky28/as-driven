@@ -13,7 +13,7 @@
     "shift_actuation": "sequential-stick",
     "shift_pattern": "sequential",
     "standing_start_clutch": "required",
-    "throttle_lift": "unknown",
+    "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
     "manual_blip": "unknown",
@@ -24,5 +24,5 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled. The constructor establishes the MRX identity but fixes no transmission, so the real-world gearbox for this configuration stays at medium confidence.",
-  "scope_notes": "Single exact identity from one guided-verification drive; no aero alias exists for this car."
+  "scope_notes": "Single exact identity from one guided-verification drive; no aero alias exists for this car. Revised 2026-08-25 without a new drive: throttle lift from unknown to not-required, on the automatic cut this record already establishes. A gearbox that cuts the throttle itself leaves the driver nothing to lift for, and the registered archetype for this mechanism carries the same value. No new observation was taken and no other approved value changed."
 }
