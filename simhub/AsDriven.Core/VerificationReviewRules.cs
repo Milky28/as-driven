@@ -55,6 +55,9 @@ namespace AsDriven.Core
             return !string.Equals(simulator, "ac", StringComparison.Ordinal)
                 && !string.Equals(simulator, "acc", StringComparison.Ordinal)
                 && !string.Equals(simulator, "raceroom", StringComparison.Ordinal)
+                // rFactor 2 publishes no engine torque either, which its first
+                // drive reported directly rather than being assumed.
+                && !string.Equals(simulator, "rf2", StringComparison.Ordinal)
                 && !string.Equals(simulator, "other", StringComparison.Ordinal);
         }
     }

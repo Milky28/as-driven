@@ -342,7 +342,7 @@
       "properties": {
         "simulator": {
           "type": "string",
-          "enum": ["ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "raceroom", "other"]
+          "enum": ["ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "raceroom", "rf2", "other"]
         },
         "display_name": {
           "description": "What this simulator calls the car, where that differs from the record's name. A renamed car is named differently by each game that renames it: the Prodrive Ferrari 550 is Milano GT55 in AMS2 and GT Ferruccio 55 V12 in Assetto Corsa. Absent means the record's own display_name is what this simulator shows.",

@@ -56,6 +56,7 @@ SIMULATOR_LABELS = {
     "ac-evo": "Assetto Corsa EVO",
     "ac-rally": "Assetto Corsa Rally",
     "raceroom": "RaceRoom Racing Experience",
+    "rf2": "rFactor 2",
     "iracing": "iRacing",
 }
 
@@ -66,6 +67,7 @@ SIMULATOR_FILTER_LABELS = {
     "ac-evo": "AC EVO",
     "ac-rally": "AC Rally",
     "raceroom": "RaceRoom",
+    "rf2": "rF2",
     "iracing": "iRacing",
 }
 

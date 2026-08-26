@@ -48,7 +48,7 @@ string the canonicaliser will have to accept.
 
 A simulator id is permanent and appears in source ids, so choose it once and
 choose it plainly. The set is a mix of abbreviation and product name: `ams2`,
-`ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`. Prefer a name a reader
+`ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`, `rf2`. Prefer a name a reader
 can decode without a glossary.
 
 Then add it in each of these places. The list is short by design, and a test
@@ -65,7 +65,8 @@ holds every one of them:
    three name maps.
 8. `simhub/AsDriven.Plugin/AsDriven.cs` - the display name.
 9. `simhub/AsDriven.Core/VerificationReviewRules.cs` - whether its telemetry can
-   settle an automatic cut. See below.
+   settle an automatic cut, and whether its gearbox refuses a downshift it should
+   refuse. See below.
 
 Accept every spelling a person might reasonably supply, as the Assetto Corsa and
 RaceRoom entries do, and compare each one whole. Prefix matching would let one
@@ -84,8 +85,24 @@ direction: a review that fails to ask for a measurable cut costs one value,
 where a review that demands an unmeasurable one sends a contributor back to the
 car forever.
 
-When registering a simulator, drive one car and read the draft's
-`automatic_cut_method`. It says in terms whether torque was published.
+When registering a simulator, drive one car and read the draft's method text.
+It reports what it found rather than what it assumed:
+
+- `automatic_cut_method` says in terms whether engine torque was published.
+- the blip result says what the throttle read with the car stopped, which
+  decides whether a spike on that channel can be attributed to anything.
+- a clutch caveat appears only when the clutch channel disagreed with the test,
+  and names the resting reading when it has one.
+
+rFactor 2 was registered this way on 2026-08-26 and one drive settled two of the
+three: its throttle reads 0% at rest and its clutch raised no caveat, so both
+channels follow the pedal, and it published no engine torque, so its cut joins
+AC, ACC and RaceRoom as unmeasurable.
+
+**Registration flips the default.** An unregistered simulator is assumed
+unmeasurable on every count, because nothing is known about it. A registered one
+is trusted until a drive shows otherwise, which is why the first drive is worth
+reading carefully rather than promoting.
 
 ## What registering does not do
 

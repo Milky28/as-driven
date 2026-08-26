@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.11",
+  "dataset_version": "0.5.12",
   "released_at": "2026-08-26",
   "records": [
     "cars/alfa-romeo-156-super-touring.json",
@@ -185,6 +185,7 @@
     "cars/mercedes-amg-gt3-evo.json",
     "cars/mercedes-amg-gt3.json",
     "cars/mercedes-amg-gt4.json",
+    "cars/mercedes-benz-190e-2-5-16-evo-ii-dtm-1992.json",
     "cars/mercedes-benz-190e-2-5-16-evo-ii-dtm.json",
     "cars/mercedes-benz-actros.json",
     "cars/mercedes-benz-clk-lm.json",

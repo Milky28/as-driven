@@ -1,0 +1,339 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mercedes-benz-190e-2-5-16-evo-ii-dtm-1992",
+  "identity": {
+    "display_name": "Mercedes-Benz 190E 2.5-16 Evo II DTM 1992",
+    "manufacturer": "Mercedes-Benz",
+    "model": "190E 2.5-16 Evolution II DTM",
+    "year": {
+      "from": 1992,
+      "to": 1992,
+      "label": "1992 AMG Mercedes-Benz DTM race specification"
+    },
+    "class": "Group A DTM touring car",
+    "real_world_identity_notes": "The observation identifies the AMG-prepared Mercedes-Benz 190 E 2.5-16 Evolution II DTM touring car used in the 1992 Deutsche Tourenwagen-Meisterschaft. Both this record and mercedes-benz-190e-2-5-16-evo-ii-dtm are Group A race cars, confirmed by the maintainer; the earlier note here described that record as a road-going homologation special, which it is not and does not claim to be. They are kept apart as two race specifications rather than road against race: the other record is the 1990 car with a five-speed dogleg Getrag, and this is the 1992 AMG car described by period sources as a six-speed straight-toothed race gearbox. Gear count is the specification difference that keeps them separate. Neither record inherits controls from the other, and if a source shows the two seasons ran the same gearbox they should be merged. Mercedes-Benz describes the Evo II road car as the homologation basis for the DTM touring car and records the 1992 championship success; period/technical secondary evidence describes the 1992 DTM car as a six-speed straight-toothed race car shifted at full throttle without clutch use for upshifts. The exact selector gate, gearbox construction category, launch procedure, downshift clutch/blip procedure, automatic cut/blip behavior, and real wheel-rim topology are not established by the reviewed sources."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "unknown",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; transmission upshift clutch: not required; transmission upshift throttle_lift: not required.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "RaceRoom Racing Experience 0.9.8.14 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "raceroom",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mercedes 190E Evo II DTM"
+        },
+        {
+          "kind": "internal-id",
+          "value": "3539,Mercedes 190E Evo II DTM"
+        },
+        {
+          "kind": "class-id",
+          "value": "DTM 1992"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in RACEROOM 0.9.8.14 via guided verification observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 by Jason Kinslow.",
+          "The downshift result is retracted: RaceRoom took the shift at any engine speed and its throttle channel does not follow the pedal, so neither acceptance nor the spike says anything about this car."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "unknown",
+          "condition": "RaceRoom 0.9.8.14 accepted the clutchless coast downshift at any engine speed, and its throttle channel read 24% with the car stopped before any test began, so a spike on it is engine or idle state rather than a blip. What RaceRoom does on a downshift is not established. See docs/raceroom-downshift-measurement.md.",
+          "confidence": {
+            "level": "unknown",
+            "basis": "Retracted 2026-08-26 without a new drive: the observation stands, its interpretation does not."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "unknown",
+          "condition": "RaceRoom 0.9.8.14 accepted the clutchless coast downshift at any engine speed, and its throttle channel read 24% with the car stopped before any test began, so a spike on it is engine or idle state rather than a blip. What RaceRoom does on a downshift is not established. See docs/raceroom-downshift-measurement.md.",
+          "confidence": {
+            "level": "unknown",
+            "basis": "Retracted 2026-08-26 without a new drive: the observation stands, its interpretation does not."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "h-pattern",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+          ]
+        }
+      ],
+      "verified_game_version": "0.9.8.14",
+      "verified_at": "2026-08-26",
+      "source_refs": [
+        "mercedes-benz.media.evo-ii-dtm-history-2020",
+        "autobild.1992-mercedes-190e-evo-ii-dtm",
+        "mb190e16v.dtm-1992-history",
+        "mercedes-190e-evo.dogleg-getrag",
+        "as-driven.repository.mercedes-190e-evo-ii-record-scan",
+        "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Mercedes-Benz's official history identifies the 190 E 2.5-16 Evolution II as the homologation basis for the DTM touring car, dates the race debut to 1990, and records the 1992 title season. Auto Bild's exact 1992 DTM article identifies the AMG-prepared car and reports its six-speed straight-toothed gearbox and full-throttle clutchless shifting. The existing repository record is separately identified as a 1990 homologation special with five-speed synchromesh dogleg controls, so merging the 1992 race specification into it would mix distinct real-world configurations."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "mercedes-benz.media.evo-ii-dtm-history-2020",
+          "autobild.1992-mercedes-190e-evo-ii-dtm",
+          "mb190e16v.dtm-1992-history",
+          "mercedes-190e-evo.dogleg-getrag",
+          "as-driven.repository.mercedes-190e-evo-ii-record-scan",
+          "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+        ],
+        "confidence": "high",
+        "basis": "Mercedes-Benz's official history identifies the 190 E 2.5-16 Evolution II as the homologation basis for the DTM touring car, dates the race debut to 1990, and records the 1992 title season. Auto Bild's exact 1992 DTM article identifies the AMG-prepared car and reports its six-speed straight-toothed gearbox and full-throttle clutchless shifting. The existing repository record is separately identified as a 1990 homologation special with five-speed synchromesh dogleg controls, so merging the 1992 race specification into it would mix distinct real-world configurations."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "mercedes-benz.media.evo-ii-dtm-history-2020",
+          "autobild.1992-mercedes-190e-evo-ii-dtm",
+          "mb190e16v.dtm-1992-history",
+          "mercedes-190e-evo.dogleg-getrag",
+          "as-driven.repository.mercedes-190e-evo-ii-record-scan",
+          "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+        ],
+        "confidence": "high",
+        "basis": "The exact-1992 technical account describes a straight-toothed six-speed gearbox, and the season-specific technical history independently describes a new six-speed transmission. The exact-1992 account states that shifting was performed at full throttle and without clutch use, and the season-specific history says the new six-speed transmission did not require clutch use for upshifts. The exact-1992 account explicitly says the car was shifted at full throttle, and the season-specific history describes clutchless upshifts with the six-speed transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-26"
+}

@@ -323,6 +323,13 @@ namespace AsDriven.Core
             {
                 return "raceroom";
             }
+            // SimHub reports this one as "RFactor2". The original rFactor is a
+            // different game and is deliberately not matched: "rfactor" alone
+            // resolves to nothing rather than being taken for its sequel.
+            if (compact == "rfactor2" || compact == "rf2")
+            {
+                return "rf2";
+            }
             return null;
         }
 
@@ -1017,6 +1024,7 @@ namespace AsDriven.Core
                 case "acc": return "AssettoCorsaCompetizione";
                 case "ac-evo": return "AssettoCorsaEvo";
                 case "raceroom": return "RRRE";
+                case "rf2": return "RFactor2";
                 default: return simulator;
             }
         }
@@ -1034,6 +1042,7 @@ namespace AsDriven.Core
                 case "acc": return "Assetto Corsa Competizione";
                 case "ac-evo": return "Assetto Corsa EVO";
                 case "raceroom": return "RaceRoom Racing Experience";
+                case "rf2": return "rFactor 2";
                 default: return simulator;
             }
         }
@@ -1048,6 +1057,7 @@ namespace AsDriven.Core
                 case "acc": return "ACC";
                 case "ac-evo": return "AC EVO";
                 case "raceroom": return "RaceRoom";
+                case "rf2": return "rF2";
                 default: return simulator;
             }
         }

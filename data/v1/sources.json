@@ -8272,6 +8272,61 @@
       "retrieved_at": "2026-08-26",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 by Jason Kinslow; RACEROOM unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "mercedes-benz.media.evo-ii-dtm-history-2020",
+      "title": "Evolutions-Lehre: Vor 30 Jahren hat der Mercedes-Benz 190 E 2.5-16 Evolution II Premiere",
+      "publisher": "Mercedes-Benz Media",
+      "url": "https://media.mercedes-benz.com/article/4e61dcd8-fd75-47ca-830c-056734a165c2",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Mercedes-Benz official history of the 190 E 2.5-16 Evolution II, its DTM homologation role, race debut, and 1992 championship season. English-language article document, identity and homologation sections: “The homologation vehicle ... is the basis for DTM touring cars; Mercedes-Benz presents the 190 E 2.5-16 Evolution II in 1990.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. Sporting achievements section, 1990-1992: “Klaus Ludwig wins the DTM drivers' championship in 1992; Mercedes-Benz drivers win 16 of 24 DTM races with the Evo II.” Reviewed for /identity/year, /identity/class, /identity/real_world_identity_notes. Primary manufacturer history. It establishes the generation, homologation relationship, DTM race scope, and 1992 season context, but does not specify the race car's gearbox gate or driver shift procedure.",
+      "published_or_updated_at": "2020-03-12"
+    },
+    {
+      "source_id": "autobild.1992-mercedes-190e-evo-ii-dtm",
+      "title": "Mercedes 190 E Evo II DTM: Klassiker des Tages",
+      "publisher": "AUTO BILD KLASSIK",
+      "url": "https://www.autobild.de/klassik/artikel/mercedes-190-e-evo-ii-dtm-klassiker-des-tages-15490055.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary historical and technical account of the AMG-prepared 1992 Mercedes 190 E 2.5-16 Evo II DTM car, including race performance and transmission operation. Article paragraphs on the 1992 DTM car and transmission: “Ein gerade verzahntes Sechsganggetriebe ... Geschaltet wurde jeweils bei Vollgas und ohne zu kuppeln.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /identity/real_world_identity_notes. Article paragraphs on the 1992 drivers and AMG preparation: “AMG ... prepared the works cars for the DTM; in 1992 Mercedes fielded the 190 E 2.5-16 Evo II.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. Strong period-specific secondary evidence for the 1992 race configuration. The source says straight-toothed six-speed and clutchless full-throttle shifting, but does not state whether the gearbox should be categorized as dogbox or establish the downshift procedure.",
+      "author": "Lars Hänsch-Petersen",
+      "published_or_updated_at": "2023-08-06"
+    },
+    {
+      "source_id": "mb190e16v.dtm-1992-history",
+      "title": "DTM",
+      "publisher": "MB190e16v",
+      "url": "https://mb190e16v.com/dtm/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast-maintained 190E motorsport history with a season-by-season 1992 DTM summary and technical notes. 1992 - Mercedes DTM champion section: “Mercedes got ... a new six speed transmission where you don't need to use the clutch to shift up.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift. Community research is corroboration, not the primary identity authority. It helps tie the six-speed clutchless-upshift description specifically to the 1992 season but does not establish the complete gate, construction, or launch technique."
+    },
+    {
+      "source_id": "as-driven.repository.mercedes-190e-evo-ii-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository inspection of the existing Mercedes 190E Evo II DTM record and its five-speed control baseline. data/v1/cars/mercedes-benz-190e-2-5-16-evo-ii-dtm.json: “The existing record stores year 1990, a five-speed synchromesh dogleg H-pattern, and first gear down-left for the homologation special.” Reviewed for /identity/record_action, /identity/record_id, /identity/real_world_identity_notes. Repository context demonstrates why the new 1992 DTM race-spec record should not overwrite or silently reuse the existing five-speed baseline. It is not independent real-world evidence."
+    },
+    {
+      "source_id": "raceroom.local-live-mercedes-190e-evo-ii-dtm-controls.0.9.8.14",
+      "title": "Live RACEROOM Mercedes 190E Evo II DTM guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/27",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 by Jason Kinslow; RACEROOM 0.9.8.14. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.12",
+  "approved_at": "2026-08-26",
+  "record_id": "mercedes-benz-190e-2-5-16-evo-ii-dtm-1992",
+  "simulator": "raceroom",
+  "telemetry_name": "Mercedes 190E Evo II DTM",
+  "observed_game_version": "0.9.8.14",
+  "observed_through": "SimHub guided verification observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "unknown",
+    "standing_start_clutch": "unknown",
+    "throttle_lift": "not-required",
+    "automatic_cut": "no",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1992 AMG Mercedes-Benz DTM race specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources. Retracted 2026-08-26: RaceRoom's throttle channel reads 24% at rest, so the spike behind this value is not attributable to the car.",
+  "telemetry_class": "DTM 1992",
+  "staged_record_id": "mercedes-190e-evo-ii-dtm"
+}

@@ -20,7 +20,7 @@ DOC_STATUS_RE = re.compile(
 DOC_RECORD_COUNT_RE = re.compile(r"currently contains (\d+) curated records")
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
-SIMULATORS = {"ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "raceroom", "other"}
+SIMULATORS = {"ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "raceroom", "rf2", "other"}
 # Every simulator that can publish a drive. `other` is a placeholder for a
 # simulator the enum does not name yet, so it owns no source prefix and its
 # observations are not held to the convention below.
