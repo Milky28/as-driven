@@ -11,6 +11,7 @@ from urllib.parse import urlsplit
 
 from .importers.observation import import_observation
 from .intake_observation import MAX_OBSERVATION_BYTES, IntakeError, intake_observation
+from .validate import canonical_simulator
 
 
 DEFAULT_REPOSITORY = "Milky28/as-driven"
@@ -193,6 +194,34 @@ def _case_id(repository: str, issue_number: int) -> str:
     return f"github-{repository_token}-{issue_number}"
 
 
+def _held_case_is_now_releasable(case_dir: Path, case: dict[str, Any]) -> bool:
+    """Whether a case held for an unregistered simulator can move again.
+
+    Registering a simulator changes nothing about the issue - same body, same
+    attachment, same timestamp, same bytes - so every shortcut on the sync path
+    reported such a case unchanged and returned before intake could look at it
+    again. There were three of them, and the drive stayed blocked behind a
+    decision that had already been taken. They now share this one question.
+
+    The reported game name is read from the case summary, or from the submitted
+    observation on disk for cases written before the summary carried it, so
+    registering a simulator releases the drives already waiting rather than only
+    the ones submitted afterwards.
+    """
+    if case.get("state") != "blocked-on-simulator":
+        return False
+    reported = (case.get("observation") or {}).get("source_game_name")
+    if not reported:
+        submission = case_dir / str((case.get("artifacts") or {}).get("submission") or "")
+        try:
+            reported = json.loads(submission.read_text(encoding="utf-8")).get(
+                "source_game_name"
+            )
+        except (OSError, json.JSONDecodeError, ValueError):
+            reported = None
+    return bool(reported) and canonical_simulator(str(reported)) is not None
+
+
 def _case_is_current(case_dir: Path, issue: dict[str, Any], attachment_url: str) -> bool:
     case_path = case_dir / "case.json"
     if not case_path.exists():
@@ -204,6 +233,8 @@ def _case_is_current(case_dir: Path, issue: dict[str, Any], attachment_url: str)
     if case.get("schema_version") != CASE_SCHEMA_VERSION:
         return False
     if case.get("state") == "intake-error":
+        return False
+    if _held_case_is_now_releasable(case_dir, case):
         return False
     if case.get("issue", {}).get("updated_at") != issue.get("updatedAt"):
         return False
@@ -241,6 +272,8 @@ def _same_attachment_case(
     if attachment.get("url") != attachment_url or attachment.get("sha256") != digest:
         return None
     if case.get("state") == "intake-error":
+        return None
+    if _held_case_is_now_releasable(case_dir, case):
         return None
     artifacts = case.get("artifacts") or {}
     required = ["issue", "submission", "receipt", "staged_bundle"]
@@ -368,7 +401,15 @@ def _sync_issue(
             },
             "observation": {
                 "observation_id": observation.get("observation_id"),
-                "simulator": observation.get("simulator"),
+                # The id the case is filed under, which is the released one where
+                # the drive came from a game registered after it was taken. The
+                # observation on disk keeps saying "other" - it is a record of
+                # what the client knew at the time and is never rewritten - but
+                # showing that here would label a released case with the state it
+                # was released from.
+                "simulator": receipt.get("released_simulator")
+                or observation.get("simulator"),
+                "source_game_name": observation.get("source_game_name"),
                 "game_version": observation.get("game_version"),
                 "dataset_version": observation.get("dataset_version"),
                 "identity": observation.get("identity"),

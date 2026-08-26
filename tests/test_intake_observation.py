@@ -278,19 +278,24 @@ class ObservationIntakeTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
             inbox = temp / "inbox"
-            payload = observation("Saleen S7R")
+            # Deliberately a game this project has not registered. RRRE stood
+            # here until RaceRoom was registered, at which point this drive
+            # started being released rather than held and the test was asserting
+            # something that had stopped being true.
+            payload = observation("Held Probe Car")
             payload["observation_id"] = (
-                "other.saleen-s7r.20260826t043236230z-67fbf819"
+                "other.held-probe-car.20260826t043236230z-67fbf819"
             )
             payload["simulator"] = "other"
-            payload["source_game_name"] = "RRRE"
+            payload["source_game_name"] = "LeMansUltimate"
             receipt = intake_observation(
                 ROOT, self.write(temp, payload, "held.json"), inbox
             )
             self.assertEqual("unregistered-simulator", receipt["status"])
             self.assertTrue(receipt["stored"], "the drive is kept, not discarded")
             self.assertEqual(
-                "RRRE", receipt["unregistered_simulator"]["source_game_name"]
+                "LeMansUltimate",
+                receipt["unregistered_simulator"]["source_game_name"],
             )
 
     def test_a_registered_simulator_is_never_held(self) -> None:
@@ -310,6 +315,43 @@ class ObservationIntakeTests(unittest.TestCase):
             )
             self.assertNotEqual("unregistered-simulator", receipt["status"])
             self.assertIsNone(receipt["unregistered_simulator"])
+
+    def test_registering_a_game_releases_the_drives_waiting_on_it(self) -> None:
+        """The rename that source_game_name was kept for.
+
+        A draft's `simulator` field is written by whichever client version took
+        the drive and never changes afterwards, so re-running intake on a held
+        observation used to hold it again however many simulators had been
+        registered since. The promise was that registering a game releases the
+        drives waiting on it; this is where that happens.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            payload = observation("BMW M2 CS Racing Probe")
+            payload["observation_id"] = (
+                "other.bmw-m2-cs-racing.20260826t194202971z-890e7e53"
+            )
+            payload["simulator"] = "other"
+            payload["source_game_name"] = "RFactor2"
+            receipt = intake_observation(
+                ROOT, self.write(temp, payload, "released.json"), temp / "inbox"
+            )
+            self.assertEqual("rfactor2", receipt["released_simulator"])
+            self.assertIsNone(receipt["unregistered_simulator"])
+            self.assertNotEqual("unregistered-simulator", receipt["status"])
+
+    def test_a_game_still_unregistered_stays_held(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            payload = observation("Some Other Sim Car")
+            payload["observation_id"] = "other.some-car.20260826t194202971z-890e7e54"
+            payload["simulator"] = "other"
+            payload["source_game_name"] = "LeMansUltimate"
+            receipt = intake_observation(
+                ROOT, self.write(temp, payload, "held.json"), temp / "inbox"
+            )
+            self.assertIsNone(receipt["released_simulator"])
+            self.assertEqual("unregistered-simulator", receipt["status"])
 
     def test_an_other_observation_without_its_game_name_is_rejected(self) -> None:
         # Without it the observation is anonymous, and nothing downstream could

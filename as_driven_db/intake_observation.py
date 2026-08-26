@@ -9,6 +9,7 @@ import shutil
 from typing import Any
 
 from .schema_validation import validate_instance
+from .validate import canonical_simulator
 
 
 MAX_OBSERVATION_BYTES = 256 * 1024
@@ -274,6 +275,24 @@ def _curated_candidates(root: Path, observation: dict[str, Any]) -> list[dict[st
     return candidates
 
 
+def _release_registered_simulator(observation: dict[str, Any]) -> str | None:
+    """Adopt the registered id for a drive the client filed as `other`.
+
+    This is the half of the promise that was missing. `source_game_name` was
+    kept so registering a game later would rename the drives waiting on it, and
+    nothing performed the rename: the draft's `simulator` field is written by
+    whichever client version took the drive and never changes afterwards, so
+    re-running intake on a held observation held it again.
+
+    The rename happens here instead, on the way in, from the name the client
+    reported. The observation on disk is untouched; what changes is the id the
+    case is filed under, which is what was blocking it.
+    """
+    if observation.get("simulator") != "other":
+        return None
+    return canonical_simulator(str(observation.get("source_game_name") or ""))
+
+
 def _unregistered_simulator(observation: dict[str, Any]) -> dict[str, str] | None:
     """The game this drive came from, when the client did not recognise it.
 
@@ -314,16 +333,32 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
     inbox = inbox.resolve()
     observation, raw = _read_observation(input_path, root)
     digest = hashlib.sha256(raw).hexdigest()
+    released = _release_registered_simulator(observation)
+
     stored = _stored_observations(inbox)
     for path, previous, previous_raw in stored:
-        if hashlib.sha256(previous_raw).hexdigest() == digest:
-            return {
-                "status": "exact-resubmission",
-                "sha256": digest,
-                "observation_id": observation["observation_id"],
-                "existing_file": path.name,
-                "stored": False,
-            }
+        if hashlib.sha256(previous_raw).hexdigest() != digest:
+            continue
+        if released is not None:
+            # The same bytes, and normally nothing to say about them. But this
+            # copy was taken in when its simulator was unregistered, so the
+            # receipt beside it holds a verdict the project has since overturned.
+            # Resubmitting is exactly how a maintainer asks for that verdict
+            # again, so it is answered rather than deflected as a duplicate.
+            break
+        return {
+            "status": "exact-resubmission",
+            "sha256": digest,
+            "observation_id": observation["observation_id"],
+            "existing_file": path.name,
+            "stored": False,
+        }
+
+    if released is not None:
+        # From here the observation is treated as the simulator it came from,
+        # so it classifies against that simulator's curated records rather than
+        # being held for a game the project now knows.
+        observation = dict(observation, simulator=released)
 
     relationship, related = _relationship(observation, stored)
     curated_matches = _curated_matches(root, observation)
@@ -367,6 +402,7 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
         "curated_matches": curated_matches,
         "curated_candidates": curated_candidates,
         "unregistered_simulator": unregistered,
+        "released_simulator": released,
     }
     receipt_path.write_text(
         json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",

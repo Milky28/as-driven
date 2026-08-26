@@ -1243,7 +1243,7 @@ namespace AsDriven.Plugin
             if (string.Equals(simulator, "ac-evo", StringComparison.Ordinal)) return "Assetto Corsa EVO";
             if (string.Equals(simulator, "ac-rally", StringComparison.Ordinal)) return "Assetto Corsa Rally";
             if (string.Equals(simulator, "raceroom", StringComparison.Ordinal)) return "RaceRoom Racing Experience";
-            if (string.Equals(simulator, "rf2", StringComparison.Ordinal)) return "rFactor 2";
+            if (string.Equals(simulator, "rfactor2", StringComparison.Ordinal)) return "rFactor 2";
             return string.IsNullOrWhiteSpace(rawGameName) ? "Simulator" : rawGameName;
         }
 
@@ -1279,7 +1279,7 @@ namespace AsDriven.Plugin
                 case "raceroom": return new[] { "RRRE64", "RRRE" };
                 // rFactor2.exe stamps 1.1.3.4; the dedicated server and mod
                 // mode carry the same version but are not the game.
-                case "rf2": return new[] { "rFactor2" };
+                case "rfactor2": return new[] { "rFactor2" };
                 default: return new string[0];
             }
         }

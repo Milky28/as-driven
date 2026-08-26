@@ -26,8 +26,25 @@ driver with *this car, in this game*, and `other` cannot say which game.
 
 `source_game_name` is provenance and never a lookup key. It is not normalised,
 nothing is matched against it, and it exists so that registering a simulator
-later **renames** the observations waiting on it rather than asking a contributor
+later releases the observations waiting on it rather than asking a contributor
 to drive forty cars again.
+
+## How a held drive is released
+
+Registering the game is the whole action. `Sync GitHub submissions` picks the
+held cases up by itself, and `intake-observation` releases a local draft the
+same way. The observation on disk is never rewritten: it records what the client
+knew when the drive was taken, and keeps saying `other`. What changes is the id
+the case is filed under, which is what was blocking it.
+
+That took more than it looks. Registering a simulator changes nothing about the
+issue - same body, same attachment, same timestamp, same bytes - so every
+shortcut on the sync path reported it unchanged and returned before intake could
+look again. There were four: the draft's own `simulator` field, `_case_is_current`,
+`_same_attachment_case`, and intake's duplicate detector. Each was right on its
+own and together they made the promise above false. They share one question now,
+`_held_case_is_now_releasable`, so the next shortcut added to that path has an
+obvious place to ask it.
 
 ## Seeing what is waiting
 
@@ -48,7 +65,7 @@ string the canonicaliser will have to accept.
 
 A simulator id is permanent and appears in source ids, so choose it once and
 choose it plainly. The set is a mix of abbreviation and product name: `ams2`,
-`ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`, `rf2`. Prefer a name a reader
+`ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`, `rfactor2`. Prefer a name a reader
 can decode without a glossary.
 
 Then add it in each of these places. The list is short by design, and a test

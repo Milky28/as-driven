@@ -7,6 +7,8 @@ import tempfile
 import unittest
 
 from as_driven_db.review_submissions import (
+    CASE_SCHEMA_VERSION,
+    _case_is_current,
     allowed_case_actions,
     SubmissionSyncError,
     extract_issue_answers,
@@ -779,6 +781,55 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertEqual([], result["withdrawn"])
             case = json.loads((cases / "issue-19" / "case.json").read_text(encoding="utf-8"))
             self.assertEqual("identity-research", case["state"])
+
+    def test_a_held_case_stops_being_current_once_its_game_is_registered(self) -> None:
+        """Registering a simulator has to reach the cases already waiting.
+
+        Nothing about the issue changes when a simulator is registered - same
+        body, same attachment, same timestamp - so the sync reported such a case
+        unchanged forever and the drive stayed blocked behind a decision that
+        had already been taken. Re-running intake is what releases it, and this
+        is what lets the sync reach intake at all.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            case_dir = Path(directory) / "issue-28"
+            case_dir.mkdir(parents=True)
+            issue = {"updatedAt": "2026-08-26T19:42:00Z"}
+            url = "https://github.com/user-attachments/files/1/drive.json"
+            case = {
+                "schema_version": CASE_SCHEMA_VERSION,
+                "state": "blocked-on-simulator",
+                "issue": {"number": 28, "updated_at": issue["updatedAt"]},
+                "attachment": {"url": url},
+                "artifacts": {
+                    "issue": "issue.json",
+                    "submission": "submission.json",
+                    "receipt": "receipt.json",
+                    "staged_bundle": "staged.json",
+                },
+                # Deliberately absent from the summary, as cases written before
+                # the field was carried there have it.
+                "observation": {"simulator": "other"},
+            }
+            (case_dir / "case.json").write_text(json.dumps(case), encoding="utf-8")
+            for name in ("issue.json", "receipt.json", "staged.json"):
+                (case_dir / name).write_text("{}", encoding="utf-8")
+
+            (case_dir / "submission.json").write_text(
+                json.dumps({"source_game_name": "RFactor2"}), encoding="utf-8"
+            )
+            self.assertFalse(
+                _case_is_current(case_dir, issue, url),
+                "a registered game must reopen the case waiting on it",
+            )
+
+            (case_dir / "submission.json").write_text(
+                json.dumps({"source_game_name": "LeMansUltimate"}), encoding="utf-8"
+            )
+            self.assertTrue(
+                _case_is_current(case_dir, issue, url),
+                "a game still unregistered leaves the case exactly where it was",
+            )
 
     def test_a_closed_issue_keeps_its_case(self) -> None:
         """Every completed case is a closed issue, and closed is not deleted.

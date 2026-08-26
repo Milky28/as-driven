@@ -9,6 +9,7 @@ import unittest
 from as_driven_db.validate import (
     AERO_SUFFIXES,
     SHIFT_ACTUATION,
+    SIMULATOR_GAME_NAMES,
     SIMULATORS,
     LIVE_OBSERVATION_ID_RE,
     OBSERVING_SIMULATORS,
@@ -1064,6 +1065,34 @@ class ValidationTests(unittest.TestCase):
                     "cannot be up" % record["record_id"]
                 )
         self.assertEqual([], offenders)
+
+    def test_python_and_the_client_accept_the_same_game_names(self) -> None:
+        """Two copies of the same table, pinned against each other.
+
+        The client canonicalises a game name when a drive is taken; Python does
+        it again when a held drive is released. A spelling one accepts and the
+        other does not is how a drive gets stranded: filed as `other` by the
+        client and never recognised afterwards, or the reverse.
+        """
+        source = (
+            ROOT / "simhub" / "AsDriven.Core" / "AsDrivenDatabase.cs"
+        ).read_text(encoding="utf-8")
+        start = source.index("public static string CanonicalizeSimulator")
+        end = source.index("private static void IndexRecord", start)
+        body = source[start:end]
+
+        client: dict[str, set[str]] = {}
+        pending: set[str] = set()
+        for match in re.finditer(r'compact == "([a-z0-9-]+)"|return "([a-z0-9-]+)";', body):
+            spelling, simulator = match.group(1), match.group(2)
+            if spelling:
+                pending.add(spelling)
+            elif simulator != "null":
+                client.setdefault(simulator, set()).update(pending)
+                pending = set()
+
+        python = {name: set(values) for name, values in SIMULATOR_GAME_NAMES.items()}
+        self.assertEqual(python, client)
 
     def test_a_registered_simulator_reaches_every_place_that_enumerates_one(self) -> None:
         """Registering a simulator is a list of places, so the list is a test.

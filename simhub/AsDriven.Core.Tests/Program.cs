@@ -133,20 +133,20 @@ namespace AsDriven.Core.Tests
                     "does not ask an unregistered simulator for a cut nothing is known to publish");
                 // SimHub reports rFactor 2 as "RFactor2". The original rFactor
                 // is a different game and must not resolve to its sequel.
-                Equal("rf2", AsDrivenDatabase.CanonicalizeSimulator("RFactor2"),
+                Equal("rfactor2", AsDrivenDatabase.CanonicalizeSimulator("RFactor2"),
                     "canonicalises SimHub's RFactor2 to rf2");
-                Equal("rf2", AsDrivenDatabase.CanonicalizeSimulator("rF2"),
+                Equal("rfactor2", AsDrivenDatabase.CanonicalizeSimulator("rF2"),
                     "canonicalises the common abbreviation to rf2");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("rFactor"),
                     "never takes the original rFactor for its sequel");
                 // Its first drive reported no engine torque, so the cut is
                 // unmeasurable there for the same reason as AC, ACC and RaceRoom.
-                False(VerificationReviewRules.AutomaticCutIsMeasurable("rf2"),
+                False(VerificationReviewRules.AutomaticCutIsMeasurable("rfactor2"),
                     "does not ask rFactor 2 to settle a cut its telemetry cannot expose");
                 // Nothing suggests its gearbox accepts every downshift, and the
                 // throttle channel was measured reading zero at rest, so its
                 // downshift result still counts until something shows otherwise.
-                True(VerificationReviewRules.DownshiftEngagementIsMeasurable("rf2"),
+                True(VerificationReviewRules.DownshiftEngagementIsMeasurable("rfactor2"),
                     "keeps the rFactor 2 downshift review, which nothing has disqualified");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaRally"),
                     "does not resolve Rally, which nothing has been driven in");
