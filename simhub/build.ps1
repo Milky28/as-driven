@@ -198,6 +198,35 @@ $persistentSubmissionButton = @($ui | Where-Object {
 if ($persistentSubmissionButton.Count -ne 1 -or -not $persistentSubmissionButton[0].IsEnabled) {
     throw "The contribution page must always provide a way to reopen the submission form."
 }
+# The saved-draft panel is the end of the drive and the start of the
+# contribution, and the submission button is the only action on it that reaches
+# anyone. It must lead its own panel rather than trail two optional side trips,
+# or it reads as one more thing you might do.
+$savedDraftActions = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Border] -and $_.Name -eq "_savedDraftActions"
+    } | Select-Object -First 1)
+if ($savedDraftActions.Count -ne 1) {
+    throw "The contribution page must carry the saved-draft actions panel."
+}
+$savedDraftButtons = @(Get-UiDescendants $savedDraftActions[0] | Where-Object {
+        $_ -is [System.Windows.Controls.Button]
+    })
+if ($savedDraftButtons.Count -lt 1 `
+    -or $savedDraftButtons[0].Content -ne "Open submission form") {
+    throw "Open submission form must lead the saved-draft actions, ahead of the optional buttons."
+}
+
+# Controls for a stage that cannot be acted on yet are absent rather than
+# disabled. The column is 320px wide and anything left standing pushes the next
+# real action further down it.
+$guidedDrivePanel = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.StackPanel] -and $_.Name -eq "_guidedDrivePanel"
+    } | Select-Object -First 1)
+if ($guidedDrivePanel.Count -ne 1 `
+    -or $guidedDrivePanel[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
+    throw "The guided-drive controls must stay hidden until the simulator setup is confirmed."
+}
+
 $submissionUrlMethod = $pluginType.GetMethod(
     "ObservationSubmissionUrl",
     [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)

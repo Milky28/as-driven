@@ -564,6 +564,14 @@ namespace AsDriven.Plugin
             SetNextStepButton(_guidedStart, false);
             SetNextStepButton(_save, false);
 
+            // Each stage shows the controls that stage can act on. A button that
+            // cannot be used yet, or whose work is finished, is not merely
+            // disabled but absent: this column is 320px wide and every row left
+            // standing pushes the next real action further down it.
+            SetNextStepButton(_submitSavedDraft, false);
+            _observerPanel.Visibility = Visibility.Visible;
+            _guidedDrivePanel.Visibility = Visibility.Collapsed;
+
             if (_capture == null)
             {
                 UpdateWorkflowSteps(0, 0);
@@ -580,15 +588,29 @@ namespace AsDriven.Plugin
             if (DraftWasSaved())
             {
                 UpdateWorkflowSteps(-1, 4);
-                _workflowStatus.Text = "COMPLETE: The local draft was saved for review.";
+                // Saving is not the end of the contribution, only of the drive,
+                // and this used to be the one stage that highlighted nothing.
+                // The draft is on this machine and reaches nobody until the
+                // submission form is opened, so that button is the next step and
+                // is lit like every other next step in this workflow.
+                _workflowStatus.Text = "SAVED. NEXT STEP: Open the submission form to share this drive.";
                 _assistConfirmationHint.Text = "Simulator assist settings were confirmed for this draft.";
                 _assistConfirmationHint.Foreground = Brushes.LightGreen;
                 _guidedStart.IsEnabled = false;
+                // The name is written into the saved draft and editing it now
+                // would change nothing, and the drive controls have nothing left
+                // to drive. Collapsing both is what brings the share panel up
+                // the column into view rather than below the fold.
+                _observerPanel.Visibility = Visibility.Collapsed;
+                SetNextStepButton(_submitSavedDraft, true);
                 return;
             }
 
             bool assistsConfirmed = _assistSettingsConfirmed.IsChecked == true;
             _guidedStart.IsEnabled = assistsConfirmed;
+            _guidedDrivePanel.Visibility = assistsConfirmed
+                ? Visibility.Visible
+                : Visibility.Collapsed;
             if (!assistsConfirmed)
             {
                 UpdateWorkflowSteps(1, 1);
