@@ -1341,6 +1341,11 @@ namespace AsDriven.Core.Tests
                         published.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
                         True(published.GetSnapshot().Result.Contains("not reporting the pedal alone"),
                             "a throttle already open at rest disqualifies the spike as evidence");
+                        // The pending result only reaches the results when the
+                        // driver accepts it, which is what Next does.
+                        published.Next();
+                        Equal("unknown", published.GetResults().AutomaticBlip,
+                            "and the recorded value says unknown rather than the yes it would have said");
                     }
 
                     // Rev-matching does not stop at the gear change. The driver

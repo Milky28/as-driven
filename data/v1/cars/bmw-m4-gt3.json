@@ -170,7 +170,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-paddles",
-        "auto_blip": "yes",
+        "auto_blip": "unknown",
         "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "gt-formula",
@@ -180,7 +180,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in RACEROOM unknown via guided verification observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 by Jason Kinslow."
+          "Observed live in RACEROOM unknown via guided verification observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 by Jason Kinslow.",
+          "The downshift result is retracted: RaceRoom took the shift at any engine speed and its throttle channel does not follow the pedal, so neither acceptance nor the spike says anything about this car."
         ]
       },
       "overrides": [
@@ -234,11 +235,11 @@
         },
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
-          "value": "yes",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "value": "unknown",
+          "condition": "RaceRoom 0.9.8.14 accepted the clutchless coast downshift at any engine speed, and its throttle channel read 24% with the car stopped before any test began, so a spike on it is engine or idle state rather than a blip. What RaceRoom does on a downshift is not established here. The real car's automatic blip is unaffected: it rests on the AMS2 and ACC entries on this record, not on this drive.",
           "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
+            "level": "unknown",
+            "basis": "Retracted 2026-08-26 without a new drive: the observation stands, its interpretation does not. See docs/raceroom-downshift-measurement.md."
           },
           "source_refs": [
             "raceroom.local-live-bmw-m4-gt3-dtm-controls.0.9.8.14"
@@ -270,11 +271,11 @@
         },
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "value": "unknown",
+          "condition": "RaceRoom 0.9.8.14 accepted the clutchless coast downshift at any engine speed, and its throttle channel read 24% with the car stopped before any test began, so a spike on it is engine or idle state rather than a blip. What RaceRoom does on a downshift is not established here. The real car's automatic blip is unaffected: it rests on the AMS2 and ACC entries on this record, not on this drive.",
           "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
+            "level": "unknown",
+            "basis": "Retracted 2026-08-26 without a new drive: the observation stands, its interpretation does not. See docs/raceroom-downshift-measurement.md."
           },
           "source_refs": [
             "raceroom.local-live-bmw-m4-gt3-dtm-controls.0.9.8.14"

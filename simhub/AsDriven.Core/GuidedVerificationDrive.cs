@@ -821,7 +821,17 @@ namespace AsDriven.Core
                     {
                         _results.ClutchlessDownshift = "yes";
                         _results.CoastDownshift = "yes";
-                        _results.AutomaticBlip = _automaticActionObserved ? "yes" : "no";
+                        // The message already says a spike on a channel that
+                        // does not follow the pedal is no evidence of a blip.
+                        // The recorded value has to say the same thing, or the
+                        // record asserts a blip its own explanation disowns.
+                        // "no" is not available either: on a channel like that
+                        // the absence of a spike would be equally meaningless.
+                        // This mirrors the automatic cut, which already answers
+                        // unknown rather than no when nothing could be measured.
+                        _results.AutomaticBlip = ThrottleChannelFollowsPedal()
+                            ? (_automaticActionObserved ? "yes" : "no")
+                            : "unknown";
                         _results.AutomaticBlipMethod = _result;
                         MoveTo(Phase.Complete);
                     }
@@ -886,6 +896,20 @@ namespace AsDriven.Core
                     + " this channel.";
             }
             return caution;
+        }
+
+        /// <summary>
+        /// Whether a throttle reading can be attributed to the driver's pedal.
+        ///
+        /// RaceRoom reads 24% with the car stopped and nobody touching anything,
+        /// so on that channel a spike is engine or idle state and says nothing
+        /// about a blip. Where the drive never saw the car at rest it cannot
+        /// disqualify anything, and the reading is taken at face value as it
+        /// always was.
+        /// </summary>
+        private bool ThrottleChannelFollowsPedal()
+        {
+            return !_restingThrottleSeen || _restingThrottle <= 5.0;
         }
 
         /// <summary>

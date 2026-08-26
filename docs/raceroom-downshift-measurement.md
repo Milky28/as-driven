@@ -35,11 +35,24 @@ drives were done on plain **Manual**. The assist being off does not by itself
 make a blip impossible - a modern GT3 rev-matches because the car does, not the
 assist - but it removes the obvious explanation for a 1990 saloon.
 
-What remains unestablished is whether RaceRoom's throttle channel reports the
-pedal. Its **clutch channel does not**: it reads 100% with the car stopped and no
-foot on the pedal. A channel that publishes vehicle state rather than driver
-input will show a spike on every car. The guided drive now records the resting
-throttle beside the peak so the next drive answers this directly.
+**Settled 2026-08-26: the throttle channel does not report the pedal either.**
+A re-drive of the Saleen with the resting reading in place returned:
+
+> A throttle spike was detected, peaking at 98% (the threshold is 15%). The
+> throttle already read 24% with the car stopped before any test began, so this
+> channel is not reporting the pedal alone and the spike is not evidence that the
+> car blipped.
+
+24% with the car stopped and nobody touching anything. RaceRoom publishes engine
+or idle state on this channel, as it already does on the clutch channel, which
+reads 100% at rest. A spike on such a channel appears on every car and attributes
+to none of them. That is why all four cars driven here reported the same
+`automatic_blip: yes` while their peaks ranged from 29% to 98%.
+
+The drive now records `unknown` rather than `yes` when the resting reading
+disqualifies the channel, matching what the automatic cut already does when
+nothing could be measured. Neither `yes` nor `no` is available on a channel like
+that: the absence of a spike would be as meaningless as its presence.
 
 ## The automatic cut cannot be measured
 
@@ -68,11 +81,16 @@ RaceRoom `automatic_blip: yes` and a `manual_blip: not-required` override taken
 from these drives. Both are now `unknown`, in the record and in the approval,
 with the observation kept and its interpretation withdrawn.
 
-`bmw-m4-gt3` keeps its `automatic_blip: yes`. The car genuinely rev-matches and
-the value agrees with the AMS2 and ACC entries on the same record, so it is not
-resting on the RaceRoom reading alone. It is listed here because its evidence is
-no better than the two that were retracted, and a future reviewer should know
-that rather than infer a distinction that was never drawn.
+`bmw-m4-gt3` was retracted too, once the channel was measured rather than
+suspected. It was held back at first on the grounds that the car genuinely
+rev-matches and the value agreed with the AMS2 and ACC entries on the same
+record. Both are still true, and neither is a reason for its RaceRoom entry to
+assert something that drive could not have observed. The record says the same
+thing without it: the real car's `automatic_blip: yes` rests on the other two
+simulators and is untouched.
+
+That is the distinction worth keeping in view. What was retracted is what
+RaceRoom was said to do, not what the car does.
 
 ## What would reopen this
 
