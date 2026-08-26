@@ -850,6 +850,29 @@ class ReviewSubmissionTests(unittest.TestCase):
         self.assertIn("molded grips at 9 and 3", questions)
         self.assertIn("not-established rather than choosing", questions)
 
+    def test_a_researched_case_can_still_ask_for_a_new_brief(self) -> None:
+        # The brief gains questions over time. A case that completed research
+        # before one was added must be able to go round again, without the
+        # existing result being discarded to do it.
+        for state, forward in (("final-review", "prepare-review"),
+                               ("manifest-review", "promote")):
+            actions = allowed_case_actions(
+                {"state": state, "research": {"status": "complete"}}
+            )
+            self.assertIn(forward, actions, state)
+            self.assertIn("generate-research-brief", actions, state)
+            self.assertIn("import-research", actions, state)
+            self.assertEqual(forward, actions[0], "the forward action stays first")
+
+        # Not offered where there is nothing to research or the work is done.
+        for state in ("promoted", "released", "duplicate", "withdrawn",
+                      "blocked-on-simulator"):
+            self.assertNotIn(
+                "generate-research-brief",
+                allowed_case_actions({"state": state}),
+                state,
+            )
+
     def test_a_closed_issue_keeps_its_case(self) -> None:
         """Every completed case is a closed issue, and closed is not deleted.
 

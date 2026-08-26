@@ -692,10 +692,16 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
         if research_status in {"not-started", "brief-ready", "partial", "blocked"}:
             actions.append("import-research")
         return actions
+    # Research can be revisited after it is complete. The brief is regenerated
+    # from the staged bundle and the current generator, so a case researched
+    # before the brief asked a question - cockpit photographs, say - can be sent
+    # back through with the question included, without discarding what is
+    # already there. Generating writes only the brief and template, and leaves a
+    # completed research status alone; importing is what replaces the result.
     if state == "final-review":
-        return ["prepare-review"]
+        return ["prepare-review", "generate-research-brief", "import-research"]
     if state == "manifest-review":
-        return ["promote"]
+        return ["promote", "generate-research-brief", "import-research"]
     if state in {"promoted", "released", "duplicate"}:
         return ["preview-publication", "publish-result"]
     return []

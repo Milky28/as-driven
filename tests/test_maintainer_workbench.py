@@ -98,6 +98,23 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         )
         self.assertEqual([], missing)
 
+    def test_research_can_be_revisited_after_it_is_complete(self) -> None:
+        """The brief improves, so a researched case has to be able to use it.
+
+        A case researched before the brief asked for cockpit photographs would
+        otherwise carry that gap forever: the only actions offered after
+        research completed were forward ones. Regenerating writes the brief from
+        the current generator and leaves the completed status alone; importing
+        is what replaces the result, and the wording says which is which.
+        """
+        page = workbench_page("test-token")
+        self.assertIn("Regenerate research brief", page)
+        self.assertIn("Import replacement research JSON", page)
+        self.assertIn("Regenerating the brief does not discard it", page)
+        # Offered quietly and below the state's own forward action, never as
+        # the primary thing to do on a case that is ready to review.
+        self.assertIn("actionButton('generate-research-brief','Regenerate research brief','ghost')", page)
+
     def test_a_retired_case_leaves_the_working_queue(self) -> None:
         # A withdrawn case is history, not work. It must not pad the Cases count
         # or sit among the live queue, and it must stay reachable, because
