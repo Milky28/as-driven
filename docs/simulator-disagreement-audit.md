@@ -21,7 +21,7 @@ entering the audit.
 
 ## Current result
 
-Dataset 0.5.9 contains 29 field-level findings across 20 cars:
+Dataset 0.5.10 contains 28 field-level findings across 20 cars:
 
 - 8 affect pulling away;
 - 7 affect running-shift technique;

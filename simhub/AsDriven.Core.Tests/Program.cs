@@ -116,6 +116,17 @@ namespace AsDriven.Core.Tests
                 // the cut would demand something no drive can produce. An
                 // unregistered simulator is treated the same way, because
                 // nothing at all is known about what it publishes.
+                // A simulator that accepts every downshift refuses nothing, so
+                // "accepted" says nothing about the car and the manual-blip test
+                // behind a refusal is never reached.
+                False(VerificationReviewRules.DownshiftEngagementIsMeasurable("raceroom"),
+                    "does not ask RaceRoom for a downshift result its gearbox model cannot give");
+                False(VerificationReviewRules.DownshiftEngagementIsMeasurable("other"),
+                    "does not ask an unregistered simulator either");
+                True(VerificationReviewRules.DownshiftEngagementIsMeasurable("ams2"),
+                    "keeps the downshift review where a refusal is meaningful");
+                True(VerificationReviewRules.DownshiftEngagementIsMeasurable("ac"),
+                    "AC refuses a downshift that needs a blip, so its result still counts");
                 False(VerificationReviewRules.AutomaticCutIsMeasurable("raceroom"),
                     "does not ask contributors to settle a RaceRoom cut that telemetry cannot expose");
                 False(VerificationReviewRules.AutomaticCutIsMeasurable("other"),

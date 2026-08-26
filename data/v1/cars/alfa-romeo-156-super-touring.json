@@ -69,7 +69,7 @@
       ],
       "behavior": {
         "shift_type": "sequential-stick",
-        "auto_blip": "yes",
+        "auto_blip": "unknown",
         "shift_cut": "unknown",
         "wheel_rim_type": {
           "normalized": "round",
@@ -79,7 +79,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in RACEROOM unknown via guided verification observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 by Jason Kinslow."
+          "Observed live in RACEROOM unknown via guided verification observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 by Jason Kinslow.",
+          "The downshift result is retracted: RaceRoom took the shift at any engine speed, so acceptance proves nothing about the car and the throttle spike behind the automatic blip cannot be attributed to it."
         ]
       },
       "overrides": [
@@ -133,11 +134,11 @@
         },
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
-          "value": "yes",
-          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "value": "unknown",
+          "condition": "RaceRoom 0.9.8.14 accepted the clutchless coast downshift at any engine speed, so acceptance is a fact about its transmission model rather than about this car, and the manual-blip test behind a refusal was never reached. The throttle spike that was read as an automatic blip cannot be attributed to the car on a channel this simulator has not been shown to reserve for the pedal. What RaceRoom does on a downshift is therefore not established. Reported from the seat on the 190E Evo II DTM, a synchromesh H-pattern car curated elsewhere as not blipping its own throttle.",
           "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
+            "level": "unknown",
+            "basis": "Retracted 2026-08-26 without a new drive: the observation stands, its interpretation does not. See docs/raceroom-downshift-measurement.md."
           },
           "source_refs": [
             "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
@@ -169,11 +170,11 @@
         },
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "value": "unknown",
+          "condition": "RaceRoom 0.9.8.14 accepted the clutchless coast downshift at any engine speed, so acceptance is a fact about its transmission model rather than about this car, and the manual-blip test behind a refusal was never reached. The throttle spike that was read as an automatic blip cannot be attributed to the car on a channel this simulator has not been shown to reserve for the pedal. What RaceRoom does on a downshift is therefore not established. Reported from the seat on the 190E Evo II DTM, a synchromesh H-pattern car curated elsewhere as not blipping its own throttle.",
           "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
+            "level": "unknown",
+            "basis": "Retracted 2026-08-26 without a new drive: the observation stands, its interpretation does not. See docs/raceroom-downshift-measurement.md."
           },
           "source_refs": [
             "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"

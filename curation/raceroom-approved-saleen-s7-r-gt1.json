@@ -12,13 +12,13 @@
     "shift_actuation": "sequential-stick",
     "standing_start_clutch": "required",
     "automatic_cut": "unknown",
-    "automatic_blip": "yes",
+    "automatic_blip": "unknown",
     "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no"
   },
   "confidence_notes": "The exact 2001-2010 Saleen S7-R GT racing family; exact RaceRoom revision not established identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
-  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources. Corrected 2026-08-26: this approval was generated from the staged proposal rather than the record the entry merged into, so it read unknown where the record carries a value. shift_actuation is sequential-stick; standing_start_clutch is required, each of which this drive observed directly.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources. Corrected 2026-08-26: this approval was generated from the staged proposal rather than the record the entry merged into, so it read unknown where the record carries a value. shift_actuation is sequential-stick; standing_start_clutch is required, each of which this drive observed directly. Retracted 2026-08-26: the automatic blip is no longer approved. RaceRoom accepts a clutchless downshift at any engine speed, so the drive's acceptance says nothing about the car, and the throttle spike it read as a blip is not attributable on a channel not shown to reserve itself for the pedal. No new drive was taken.",
   "telemetry_class": "GTR 1"
 }

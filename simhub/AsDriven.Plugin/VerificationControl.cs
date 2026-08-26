@@ -546,6 +546,11 @@ namespace AsDriven.Plugin
                 {
                     continue;
                 }
+                if ((combo == _automaticBlip || combo == _clutchlessDownshift)
+                    && !DownshiftReviewApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     return true;
@@ -901,6 +906,11 @@ namespace AsDriven.Plugin
                 {
                     continue;
                 }
+                if ((combo == _automaticBlip || combo == _clutchlessDownshift)
+                    && !DownshiftReviewApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     _drivingResultsExpander.IsExpanded = true;
@@ -925,6 +935,12 @@ namespace AsDriven.Plugin
         private bool AutomaticCutReviewApplies()
         {
             return VerificationReviewRules.AutomaticCutIsMeasurable(
+                _capture == null ? null : _capture.Simulator);
+        }
+
+        private bool DownshiftReviewApplies()
+        {
+            return VerificationReviewRules.DownshiftEngagementIsMeasurable(
                 _capture == null ? null : _capture.Simulator);
         }
 
@@ -1353,6 +1369,12 @@ namespace AsDriven.Plugin
                 && IsUnresolved(value))
             {
                 SetFieldBadge(combo, "NOT EXPOSED", Brushes.Gray);
+                return;
+            }
+            if ((combo == _automaticBlip || combo == _clutchlessDownshift)
+                && !DownshiftReviewApplies())
+            {
+                SetFieldBadge(combo, "NOT DECIDABLE", Brushes.Gray);
                 return;
             }
             if (IsUnresolved(value))

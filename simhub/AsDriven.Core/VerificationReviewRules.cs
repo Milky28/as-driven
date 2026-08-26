@@ -16,6 +16,29 @@ namespace AsDriven.Core
                 || string.Equals(primaryActuation, "direct-selection", StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// Whether a downshift result can say anything about the car.
+        ///
+        /// The coast test learns from a refusal: a gearbox that will not take
+        /// the gear without a blip is telling you the driver has to supply one.
+        /// A simulator that accepts every downshift at any engine speed refuses
+        /// nothing, so "accepted" is a fact about the simulator's transmission
+        /// model and not about the car, and the manual-blip test that follows a
+        /// refusal is never reached at all.
+        ///
+        /// RaceRoom is the first known case, reported from the seat on a 190E
+        /// Evo II DTM - a synchromesh H-pattern car already curated elsewhere as
+        /// not blipping its own throttle - which took clutchless downshifts at
+        /// any engine speed and still reported an automatic blip. An
+        /// unregistered simulator is treated the same way, because nothing is
+        /// known about it.
+        /// </summary>
+        public static bool DownshiftEngagementIsMeasurable(string simulator)
+        {
+            return !string.Equals(simulator, "raceroom", StringComparison.Ordinal)
+                && !string.Equals(simulator, "other", StringComparison.Ordinal);
+        }
+
         public static bool AutomaticCutIsMeasurable(string simulator)
         {
             // AC, ACC and RaceRoom do not publish engine torque through

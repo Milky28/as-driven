@@ -13,13 +13,13 @@
     "shift_pattern": "sequential",
     "standing_start_clutch": "unknown",
     "automatic_cut": "unknown",
-    "automatic_blip": "yes",
+    "automatic_blip": "unknown",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no"
   },
   "confidence_notes": "The exact 1998 Alfa Romeo 156 Superturismo identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
-  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources. Retracted 2026-08-26: the automatic blip is no longer approved. RaceRoom accepts a clutchless downshift at any engine speed, so the drive's acceptance says nothing about the car, and the throttle spike it read as a blip is not attributable on a channel not shown to reserve itself for the pedal. No new drive was taken.",
   "telemetry_class": "Super Touring"
 }

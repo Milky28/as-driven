@@ -192,15 +192,17 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # without a blip. Provisional is the honest status: a departure
                 # from a baseline that a period workshop manual could still move.
                 "porsche-911-rsr-1974--transmission-downshift-manual-blip",
-                # RaceRoom joined the Saleen as a third simulator and disagrees
-                # with the other two on both counts. It detected a throttle
-                # spike where AMS2 and AC detect none, and its cockpit shows a
-                # D-shaped rim where both others show a round one. Neither is
-                # settled: the blip reading carries the drive's own warning that
-                # the clutch channel may have been reporting the pedal, and a
-                # rim that differs between simulators is either a different model
-                # or a misread. Provisional is the honest status for both.
-                "saleen-s7-r-gt1--transmission-downshift-automatic-blip",
+                # RaceRoom joined the Saleen as a third simulator and its
+                # cockpit shows a D-shaped rim where AMS2 and AC both show a
+                # round one. Either it models a different wheel or one of the
+                # three was misread, and provisional is the honest status until
+                # somebody looks again.
+                #
+                # Its automatic-blip departure was here too and is deliberately
+                # gone: the value was retracted to unknown once RaceRoom turned
+                # out to accept a downshift at any engine speed. A simulator that
+                # claims nothing cannot depart from anything, which is what
+                # removing it from this set records.
                 "saleen-s7-r-gt1--steering-wheel-rim-shape",
             },
             provisional,
@@ -208,7 +210,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 "authentic-baseline-open": 15,
-                "provisional-departure": 7,
+                "provisional-departure": 6,
                 "supported-departure": 7,
             },
             self.checked_in["summary"]["by_status"],
