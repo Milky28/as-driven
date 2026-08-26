@@ -31,7 +31,7 @@
         "clutch": "unknown",
         "throttle_lift": "unknown",
         "automatic_cut": "unknown",
-        "manual_blip": "unknown",
+        "manual_blip": "optional",
         "automatic_blip": "unknown"
       },
       "standing_start_clutch": "unknown"
@@ -320,7 +320,7 @@
           "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
         ],
         "confidence": "high",
-        "basis": "Ford's historical document identifies the 1965 adoption of the five-speed ZF transaxle; exact 1965 Le Mans data lists ZF 5DS-25 five-speed GT40 entries; the Mk-I guide and ZF replacement documentation corroborate five forward speeds. The exact-Mk-I technical guide describes the ZF DS25 as all-synchromesh; Quaife identifies its replacement as replicating the original ZF DS-25/2 and describes synchromesh selection. This is medium confidence because the primary 1965 event table names the ZF gearbox but does not itself state the synchronizer construction. The manufacturer replacement documentation explicitly identifies the original ZF DS-25/2 layout as five-speed H-pattern, and the Mk-I guide documents the corresponding right-hand gear change. Quaife states that the original ZF DS-25/2 has a distinctive dog-leg first-gear location, but the reviewed evidence does not establish which side first gear occupies. The database therefore keeps the complete shift pattern unknown. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+        "basis": "Ford's historical document identifies the 1965 adoption of the five-speed ZF transaxle; exact 1965 Le Mans data lists ZF 5DS-25 five-speed GT40 entries; the Mk-I guide and ZF replacement documentation corroborate five forward speeds. The exact-Mk-I technical guide describes the ZF DS25 as all-synchromesh; Quaife identifies its replacement as replicating the original ZF DS-25/2 and describes synchromesh selection. This is medium confidence because the primary 1965 event table names the ZF gearbox but does not itself state the synchronizer construction. The manufacturer replacement documentation explicitly identifies the original ZF DS-25/2 layout as five-speed H-pattern, and the Mk-I guide documents the corresponding right-hand gear change. Quaife states that the original ZF DS-25/2 has a distinctive dog-leg first-gear location, but the reviewed evidence does not establish which side first gear occupies. The database therefore keeps the complete shift pattern unknown. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
       },
       {
         "paths": [
@@ -335,6 +335,24 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "wsc60.gt40.release-notes",
+          "ford.gt40.american-challenge",
+          "ford.gt40.origins",
+          "ford.gt40.mark-ii-confusion",
+          "rsc.1965-le-mans.gt40",
+          "supercar-nostalgia.gt40-mk1-65",
+          "quaife.zf-ds25-gt40",
+          "as-driven.repository.ford-gt40-mk1-record-scan",
+          "ac.local-live-wsc60-ford-gt40-mk1-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "The exact Mk-I technical guide describes the ZF DS25 as all-synchromesh and Quaife describes synchromesh selection in its replacement, so the blip eases the synchros rather than engaging the gear. This sits at medium for the same reason the construction does: the primary 1965 event table names the ZF gearbox without stating the synchroniser construction, and a derived value cannot be more confident than what it came from. AC refuses the shift without a blip, which is carried as a simulator override rather than as the real car."
       }
     ]
   },

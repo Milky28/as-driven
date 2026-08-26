@@ -233,12 +233,25 @@ reads `synchromesh` from an air-cooled Porsche family rather than from a source
 about the 915/08 itself, and a reviewer may reasonably want the family inference
 to carry only the construction and not a second value stacked on it.
 
-**Five records are in this position** - `porsche-911-rsr-1974`,
+**Decided 2026-08-25: all five take `optional`.** `porsche-911-rsr-1974`,
 `ferrari-250-gto-1962-1964`, `ford-gt40-mk1-1965`, `mclaren-f1-lm-1996` and
-`shelby-cobra-daytona-coupe-1964-1965` - against 35 synchromesh records that
-already carry `optional`. Deciding them one way or the other is a reviewer's
-call and has not been made. Whichever way it goes, all five should go the same
-way, because nothing distinguishes them from each other.
+`shelby-cobra-daytona-coupe-1964-1965` joined the 35 synchromesh records that
+already carried it, and every synchromesh record now has a decided blip.
+
+Each takes the confidence of the construction it came from rather than a flat
+value. Three are `high`, because a source states the construction outright:
+Ferrari's technical history calls the 250 GTO all-synchromesh, the LM
+specification says "All synchro constant mesh", and a Borg-Warner T-10 history
+says all four speeds were synchronised. Two are `medium`: the GT40's own claim
+already noted that the primary 1965 event table names the ZF gearbox without
+stating its construction, and the RSR's rests on the 915 family rather than on
+the 915/08.
+
+The simulator layer needed no change. All five drives found the shift *refused*
+without a blip, which is the strong form of the evidence, and all five already
+carried that as an override saying in terms that it establishes simulator
+behaviour and not the real car. Setting the authentic value to `optional` is
+what those overrides were written against.
 
 **A trap was found and closed on the way.** The record's gate had no evidence of
 its own - the claim's basis established H-pattern actuation, not the gate - and

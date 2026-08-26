@@ -1041,7 +1041,10 @@ class ValidationTests(unittest.TestCase):
 
         - an automatic cut is the thing that removes the upshift lift;
         - an H-pattern with no cut leaves the lift to the driver;
-        - dog rings cannot match the shaft speeds, so the driver must.
+        - dog rings cannot match the shaft speeds, so the driver must;
+        - synchronisers do it for the driver, so the blip is decided rather
+          than open. The rule is that the field is settled, not which way: one
+          record reads `required` over a synchromesh knowingly, and says so.
 
         Every record these rules covered was also listing the open field as a
         deviation from its own registered archetype, so the reviewed archetype
@@ -1077,6 +1080,11 @@ class ValidationTests(unittest.TestCase):
                 offenders.append(
                     "%s: a dog box is established, so the downshift blip cannot "
                     "stay unknown" % record["record_id"]
+                )
+            if transmission.get("gearbox_type") == "synchromesh" and blip == "unknown":
+                offenders.append(
+                    "%s: a synchromesh is established, so the downshift blip "
+                    "cannot stay unknown" % record["record_id"]
                 )
         self.assertEqual([], offenders)
 

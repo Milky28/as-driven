@@ -31,7 +31,7 @@
         "clutch": "unknown",
         "throttle_lift": "unknown",
         "automatic_cut": "unknown",
-        "manual_blip": "unknown",
+        "manual_blip": "optional",
         "automatic_blip": "unknown"
       },
       "standing_start_clutch": "unknown"
@@ -307,7 +307,7 @@
           "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "The exact LM specification says six-speed, the period test says 6-speed manual, and the specialist history says GTR-sourced six-speed manual. The exact LM specification explicitly says 'All synchro constant mesh'; Road & Track independently describes the F1/Weismann family as using BMW synchronizers. The LM sheet's separate 'straight cut gears' line describes gear-tooth form, not a dogbox claim, so it is not treated as a conflict. The period test and specialist history establish a manual gear lever, the interior photograph shows a gated central lever, and the community evidence explicitly identifies the road-car LM gate as standard gated. The confidence remains low because no factory gate drawing was found. The only source that names the pattern calls the F1 LM road-car gate standard gated; the photograph corroborates a gated manual selector but does not show a full diagram. The specialist description calls it a suede-rimmed GTR steering wheel, and the CC-licensed interior photograph visibly shows a continuous circular three-spoke rim. The high-resolution interior photograph visibly shows rim material joining the left and right grips across the top, so the rim is not open-top. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+        "basis": "The exact LM specification says six-speed, the period test says 6-speed manual, and the specialist history says GTR-sourced six-speed manual. The exact LM specification explicitly says 'All synchro constant mesh'; Road & Track independently describes the F1/Weismann family as using BMW synchronizers. The LM sheet's separate 'straight cut gears' line describes gear-tooth form, not a dogbox claim, so it is not treated as a conflict. The period test and specialist history establish a manual gear lever, the interior photograph shows a gated central lever, and the community evidence explicitly identifies the road-car LM gate as standard gated. The confidence remains low because no factory gate drawing was found. The only source that names the pattern calls the F1 LM road-car gate standard gated; the photograph corroborates a gated manual selector but does not show a full diagram. The specialist description calls it a suede-rimmed GTR steering wheel, and the CC-licensed interior photograph visibly shows a continuous circular three-spoke rim. The high-resolution interior photograph visibly shows rim material joining the left and right grips across the top, so the rim is not open-top. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
       },
       {
         "paths": [
@@ -322,6 +322,26 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "mclaren.official-article.f1-lm",
+          "mclaren.official-heritage.f1-gtr-1995",
+          "bmw.heritage.2016-mclaren-f1-gtr",
+          "mclaren.technical-sheet.f1-lm-roadcar",
+          "supercar-nostalgia.f1-lm-technical-appraisal",
+          "motortrend.f1-lm-2000",
+          "road-and-track.f1-gearbox",
+          "wikimedia.f1-lm-interior",
+          "community.f1-lm-standard-gated-pattern",
+          "as-driven.repository.mclaren-record-scan",
+          "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The exact LM specification says 'All synchro constant mesh', and Road & Track independently describes the F1/Weismann family as using BMW synchronizers. A synchromesh matches the shaft speeds itself, so the blip eases the synchros rather than engaging the gear. The value follows from the established construction. AMS2 refuses the shift without a blip, which is carried as a simulator override rather than as the real car."
       }
     ]
   },

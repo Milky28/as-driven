@@ -31,7 +31,7 @@
         "clutch": "unknown",
         "throttle_lift": "unknown",
         "automatic_cut": "unknown",
-        "manual_blip": "unknown",
+        "manual_blip": "optional",
         "automatic_blip": "unknown"
       },
       "standing_start_clutch": "unknown"
@@ -333,7 +333,7 @@
           "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
         ],
         "confidence": "high",
-        "basis": "Two independent specification sources agree the Daytona Coupe used a four-speed Borg-Warner T10 manual transmission. A dedicated technical history of the Borg-Warner T-10 explicitly states all four forward speeds were synchronized, and the same T10 model is independently confirmed as this car's transmission. The Borg-Warner T10 is a conventional floor-shifted manual, and the specialist FIA eligibility guide confirms period cars used the standard (non-Hurst) shift linkage rather than any sequential or paddle system. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+        "basis": "Two independent specification sources agree the Daytona Coupe used a four-speed Borg-Warner T10 manual transmission. A dedicated technical history of the Borg-Warner T-10 explicitly states all four forward speeds were synchronized, and the same T10 model is independently confirmed as this car's transmission. The Borg-Warner T10 is a conventional floor-shifted manual, and the specialist FIA eligibility guide confirms period cars used the standard (non-Hurst) shift linkage rather than any sequential or paddle system. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
       },
       {
         "paths": [
@@ -348,6 +348,24 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "wikipedia.shelby-daytona-overview",
+          "wikipedia.ac-cobra-chassis",
+          "historicmotorsportcentral.cobra-daytona-coupe-guide",
+          "macsmotorcitygarage.borg-warner-t10-history",
+          "conceptcarz.1965-shelby-cobra-daytona-specs",
+          "supercars-net.shelby-cobra-daytona-coupe-profile",
+          "overtake.shelby-daytona-wsc-legends-v1.0-listing",
+          "as-driven.repository.shelby-daytona-coupe-record-scan",
+          "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "A dedicated technical history of the Borg-Warner T-10 states all four forward speeds were synchronized, and the same T10 is independently confirmed as this car's transmission. A synchromesh matches the shaft speeds itself, so the blip eases the synchros rather than engaging the gear. The value follows from the established construction. AC refuses the shift without a blip, which is carried as a simulator override rather than as the real car."
       }
     ]
   },

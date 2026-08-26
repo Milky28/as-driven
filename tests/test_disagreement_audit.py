@@ -185,13 +185,20 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # the documented way: the authentic value stays optional and the
                 # simulator's demand is an override.
                 "lamborghini-miura-sv--transmission-downshift-manual-blip",
+                # The RSR's blip became a departure only once the authentic
+                # value stopped being unknown. It is optional at medium, derived
+                # from a synchromesh the record reads off the 915 family rather
+                # than off a source about the 915/08, while AC refuses the shift
+                # without a blip. Provisional is the honest status: a departure
+                # from a baseline that a period workshop manual could still move.
+                "porsche-911-rsr-1974--transmission-downshift-manual-blip",
             },
             provisional,
         )
         self.assertEqual(
             {
                 "authentic-baseline-open": 15,
-                "provisional-departure": 4,
+                "provisional-departure": 5,
                 "supported-departure": 7,
             },
             self.checked_in["summary"]["by_status"],

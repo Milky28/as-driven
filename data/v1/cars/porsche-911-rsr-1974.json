@@ -30,7 +30,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "unknown",
+        "manual_blip": "optional",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -48,7 +48,7 @@
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
       "The 915 family is established as a synchromesh design by an air-cooled Porsche specialist, and the RSR ran the magnesium-cased 915/08 within that family. No reviewed source says the race variant replaced the synchronisers, so the construction is recorded at medium confidence rather than high.",
-      "The downshift blip stays unknown. A synchromesh leaves a blip optional where dog rings demand one, but reading the blip off the construction would answer one unestablished field with another, so it is left for evidence of its own.",
+      "The downshift blip is optional, which follows from the synchromesh construction: the synchronisers match the shaft speeds, so a blip eases them rather than engaging the gear. It is recorded at medium because the construction is, being inferred from the 915 family rather than stated by a source about the 915/08, and a derived value cannot be more confident than what it came from. This note previously left the field unknown on the grounds that reading the blip off the construction would answer one open field with another. That reasoning was retired: the construction is recorded, and deriving the technique from a recorded construction is the one direction that holds. AC refuses the shift without a blip, which stays a simulator override.",
       "A conventional H with first up and left is the best-supported Type 915 layout. The exact 1974 RSR used the RS-derived Type 915, while the dogleg belongs to the earlier 901 it replaced. No readable exact-RSR selector diagram was recovered, so the gate remains medium confidence rather than a fully closed primary-source verdict.",
       "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
     ]
@@ -284,19 +284,24 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/manual_blip"
+        ],
+        "source_refs": [
+          "paul-stephens.porsche-915-vs-g50",
+          "stuttcars.porsche-911-carrera-rsr-3-0"
+        ],
+        "confidence": "medium",
+        "basis": "The 915 family uses Porsche's own synchromesh design and the RSR ran the 915/08 within it, so the blip eases the synchros rather than engaging the gear. This sits at medium because the construction does: it is inferred from the family rather than stated by a source about the 915/08, and a derived value cannot be more confident than what it came from. It is falsifiable by the same period workshop manual or homologation sheet that would settle the construction. AC refuses the shift without a blip, which is carried as a simulator override."
       }
     ]
   },
   "driver_summary": "The five-speed carried over from the RS, behind a reinforced clutch. Whether it engages by dogs or synchros is not recorded, so blip on downshifts to be safe.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
-    "classification": "deviates",
-    "deviations": [
-      {
-        "path": "/authentic_controls/transmission/downshift/manual_blip",
-        "basis": "Whether the driver must blip on downshifts is not established. The archetype leaves it optional, which is what a synchromesh usually allows, but taking that reading would derive one unestablished field from another that is itself only at medium confidence. It is left open for evidence of its own."
-      }
-    ]
+    "classification": "matches"
   },
   "updated_at": "2026-08-25"
 }

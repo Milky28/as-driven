@@ -16,7 +16,7 @@
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "unknown",
+    "manual_blip": "optional",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
@@ -24,5 +24,5 @@
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
-  "scope_notes": "Single exact identity staged from one guided-verification drive."
+  "scope_notes": "Single exact identity staged from one guided-verification drive. Revised 2026-08-25 without a new drive: manual blip from unknown to optional, derived from the synchromesh construction this record already carries. Recorded at medium, matching the confidence of the construction it came from. AMS2's own behaviour is unchanged and no other approved value changed."
 }

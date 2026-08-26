@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.2",
+  "dataset_version": "0.5.3",
   "generated_at": "2026-08-25",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
@@ -11,17 +11,17 @@
   ],
   "summary": {
     "cars_with_disagreements": 20,
-    "findings": 26,
+    "findings": 27,
     "by_status": {
       "authentic-baseline-open": 15,
-      "provisional-departure": 4,
+      "provisional-departure": 5,
       "supported-departure": 7
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
       "hardware-choice": 6,
       "launch-technique": 8,
-      "running-shift-technique": 8
+      "running-shift-technique": 9
     }
   },
   "findings": [
@@ -1392,6 +1392,74 @@
         ],
         "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
         "next_action": "Strengthen the real-car evidence for gate pattern before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "porsche-911-rsr-1974--transmission-downshift-manual-blip",
+      "record_id": "porsche-911-rsr-1974",
+      "display_name": "Porsche 911 RSR 1974",
+      "class": "GT Classics",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "optional",
+        "display_value": "Optional",
+        "confidence": "medium",
+        "source_refs": [
+          "paul-stephens.porsche-915-vs-g50",
+          "stuttcars.porsche-911-carrera-rsr-3-0"
+        ],
+        "primary_source_refs": [],
+        "basis": "The 915 family uses Porsche's own synchromesh design and the RSR ran the 915/08 within it, so the blip eases the synchros rather than engaging the gear. This sits at medium because the construction does: it is inferred from the family rather than stated by a source about the 915/08, and a derived value cannot be more confident than what it came from. It is falsifiable by the same period workshop manual or homologation sheet that would settle the construction. AC refuses the shift without a blip, which is carried as a simulator override."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "optional",
+          "display_value": "Optional",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-15",
+          "confidence": "high",
+          "source_refs": [
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "medium",
+          "source_refs": [
+            "porsche.newsroom.rsr-model-history-2020",
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "paul-stephens.porsche-915-vs-g50",
+            "twinsparkracing.porsche-915-replaced-the-dogleg",
+            "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+            "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+            "ac-legends.gt-classic-3-release-notes-2020",
+            "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
       }
     },
     {
