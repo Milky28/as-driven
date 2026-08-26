@@ -188,9 +188,11 @@ def _research_questions(staged: dict[str, Any]) -> list[str]:
         "Establish the exact real car: manufacturer, model, year/generation, racing specification, and class. Distinguish similarly named adjacent versions.",
         "Decide whether this belongs to an existing simulator-independent record or needs a new real-car record id. Treat the simulator name only as a research lead.",
         f"Find real-car evidence for forward gears, gearbox construction, actuation, and pattern. The simulator observation staged: {json.dumps({key: transmission.get(key) for key in ('forward_gears', 'gearbox_type', 'shift_actuation', 'shift_pattern')}, ensure_ascii=False)}.",
+        "Look for cockpit or interior photographs of the exact car. What the driver operates is a visual fact that written sources routinely omit: whether the shifter is a lever or paddles, and where first gear sits in the gate. A photograph showing the gate settles a dogleg, which prose describing the gearbox usually will not. Say what is visible in the image and no more, and never read a gate off a knob engraving alone unless the engraving is legible.",
         "Establish whether a physical clutch control exists and what the driver uses for standing starts, running upshifts, and running downshifts. Do not infer pedal presence or launch technique merely from gearbox construction.",
         "Establish throttle-lift, automatic cut, manual blip, and automatic blip behavior where authoritative evidence actually states it. Simulator behavior is comparison evidence, not the real-car baseline.",
         f"Establish the physical wheel-rim shape, integrated display, shift lights, and open-top construction. The observed simulator cockpit staged: {json.dumps(wheel, ensure_ascii=False)}.",
+        "The rim is decided from a photograph of it, not from the car's class, and in this order: does it have molded grips at 9 and 3 with a control face between them, so the hands stay put (gt-formula), or is it a continuous band gripped anywhere - and then is that band a circle (round) or flattened top or bottom (d-shaped)? A 1967 single-seater with a plain wooden rim is round. Where the flat is slight enough that either answer is defensible, say so and return not-established rather than choosing: that ambiguity is a known and recurring one, and a hedged answer recorded honestly is worth more than a confident one that four simulators will disagree with.",
         "For every field not present in the reviewed sources, return a not-established claim instead of converting absence into no.",
     ]
 
@@ -236,6 +238,7 @@ Research the real-world identity and authentic controls for this simulator obser
 - Quote verbatim only as much as needed, and include printed page/PDF page, section, figure, timestamp, or another precise locator when one exists.
 - Say `not-established` when a reviewed source is silent. Absence is not evidence of `no`.
 - Keep real-car claims separate from the exact simulator version and implementation observed.
+- A photograph is a source like any other. Register it with its origin and date, describe what is visible rather than what it suggests, and prefer a manufacturer or team image of the exact specification over a period shot of a sister car.
 - Do not edit `data/v1`, `curation`, source registries, or the staged bundle. Write only the structured research result requested below.
 
 ## Case

@@ -831,6 +831,25 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "a game still unregistered leaves the case exactly where it was",
             )
 
+    def test_the_brief_asks_for_cockpit_photographs(self) -> None:
+        """What the driver operates is a visual fact, so the brief asks to see it.
+
+        The gate and the rim are the two things written sources routinely omit
+        and a photograph routinely settles. Four records now disagree across
+        simulators about a rim, every one of them on the same vocabulary
+        boundary, so the brief carries the decision order and the instruction to
+        hedge where the flat is slight rather than pick and be contradicted.
+        """
+        from as_driven_db.research_handoff import _research_questions
+
+        questions = " ".join(
+            _research_questions({"record": {"authentic_controls": {}}})
+        ).lower()
+        self.assertIn("cockpit or interior photographs", questions)
+        self.assertIn("where first gear sits in the gate", questions)
+        self.assertIn("molded grips at 9 and 3", questions)
+        self.assertIn("not-established rather than choosing", questions)
+
     def test_a_closed_issue_keeps_its_case(self) -> None:
         """Every completed case is a closed issue, and closed is not deleted.
 
