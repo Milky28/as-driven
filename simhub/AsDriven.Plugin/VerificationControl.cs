@@ -360,6 +360,7 @@ namespace AsDriven.Plugin
                 var draft = new VerificationObservationDraft
                 {
                     Simulator = _capture.Simulator,
+                    SourceGameName = _capture.SourceGameName,
                     GameVersion = _capture.GameVersion,
                     ClientVersion = _capture.ClientVersion,
                     DatasetVersion = _plugin.CurrentDatasetVersion,

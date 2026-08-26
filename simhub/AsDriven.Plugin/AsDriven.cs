@@ -1105,6 +1105,11 @@ namespace AsDriven.Plugin
                 _liveVerificationContext = new VerificationCaptureContext
                 {
                     Simulator = string.IsNullOrWhiteSpace(simulator) ? "other" : simulator,
+                    // Keep what the game called itself. Where the id is "other"
+                    // this is the only surviving record of which game was
+                    // driven, and it is what lets an unregistered simulator be
+                    // registered later without repeating the drive.
+                    SourceGameName = string.IsNullOrWhiteSpace(gameName) ? null : gameName.Trim(),
                     SimulatorDisplayName = SimulatorDisplayName(simulator, gameName),
                     GameVersion = string.IsNullOrWhiteSpace(gameVersion) ? "unknown" : gameVersion,
                     ClientVersion = "SimHub "
@@ -1159,6 +1164,7 @@ namespace AsDriven.Plugin
             if (string.Equals(simulator, "acc", StringComparison.Ordinal)) return "Assetto Corsa Competizione";
             if (string.Equals(simulator, "ac-evo", StringComparison.Ordinal)) return "Assetto Corsa EVO";
             if (string.Equals(simulator, "ac-rally", StringComparison.Ordinal)) return "Assetto Corsa Rally";
+            if (string.Equals(simulator, "raceroom", StringComparison.Ordinal)) return "RaceRoom Racing Experience";
             return string.IsNullOrWhiteSpace(rawGameName) ? "Simulator" : rawGameName;
         }
 

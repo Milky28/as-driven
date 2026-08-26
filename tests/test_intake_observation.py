@@ -266,6 +266,67 @@ class ObservationIntakeTests(unittest.TestCase):
             self.assertEqual([], receipt["curated_candidates"])
             self.assertEqual("test-miura", receipt["curated_matches"][0]["record_id"])
 
+    def test_an_unregistered_simulator_is_held_and_says_which_game(self) -> None:
+        """A drive from a game the client does not know is kept, not promoted.
+
+        The evidence is real and the drive is fine. What is missing is the
+        project's decision about the game, so the observation waits for it. The
+        one thing that must survive is which game it came from: `other` on its
+        own is a bucket, and a contributor's forty drives from two different
+        simulators would be indistinguishable inside it.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            inbox = temp / "inbox"
+            payload = observation("Saleen S7R")
+            payload["observation_id"] = (
+                "other.saleen-s7r.20260826t043236230z-67fbf819"
+            )
+            payload["simulator"] = "other"
+            payload["source_game_name"] = "RRRE"
+            receipt = intake_observation(
+                ROOT, self.write(temp, payload, "held.json"), inbox
+            )
+            self.assertEqual("unregistered-simulator", receipt["status"])
+            self.assertTrue(receipt["stored"], "the drive is kept, not discarded")
+            self.assertEqual(
+                "RRRE", receipt["unregistered_simulator"]["source_game_name"]
+            )
+
+    def test_a_registered_simulator_is_never_held(self) -> None:
+        # The same payload under a registered id classifies on its identity as
+        # usual, which is what registering a simulator has to release.
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            inbox = temp / "inbox"
+            payload = observation("Saleen S7R Registered Probe")
+            payload["observation_id"] = (
+                "raceroom.saleen-s7r.20260826t043236230z-67fbf819"
+            )
+            payload["simulator"] = "raceroom"
+            payload["source_game_name"] = "RRRE"
+            receipt = intake_observation(
+                ROOT, self.write(temp, payload, "released.json"), inbox
+            )
+            self.assertNotEqual("unregistered-simulator", receipt["status"])
+            self.assertIsNone(receipt["unregistered_simulator"])
+
+    def test_an_other_observation_without_its_game_name_is_rejected(self) -> None:
+        # Without it the observation is anonymous, and nothing downstream could
+        # ever tell which game to register. The schema refuses it at the door.
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            inbox = temp / "inbox"
+            payload = observation("Nameless Car")
+            payload["observation_id"] = (
+                "other.nameless-car.20260826t043236230z-67fbf820"
+            )
+            payload["simulator"] = "other"
+            with self.assertRaises(IntakeError):
+                intake_observation(
+                    ROOT, self.write(temp, payload, "anonymous.json"), inbox
+                )
+
     def test_invalid_or_oversized_input_is_not_stored(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

@@ -43,6 +43,7 @@
         "acc",
         "ac-evo",
         "ac-rally",
+        "raceroom",
         "other"
       ]
     },
@@ -309,6 +310,7 @@
                     "acc",
                     "ac-evo",
                     "ac-rally",
+        "raceroom",
                     "other"
                   ]
                 },

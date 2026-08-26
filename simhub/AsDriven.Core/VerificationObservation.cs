@@ -11,6 +11,13 @@ namespace AsDriven.Core
     public sealed class VerificationObservationDraft
     {
         public string Simulator { get; set; }
+        /// <summary>
+        /// What the telemetry client called the game, exactly as it arrived.
+        /// Required when <see cref="Simulator"/> is "other": it is the only
+        /// record of which game was driven, and without it one unregistered
+        /// simulator cannot be told from another.
+        /// </summary>
+        public string SourceGameName { get; set; }
         public string GameVersion { get; set; }
         public string ClientVersion { get; set; }
         public string DatasetVersion { get; set; }
@@ -60,7 +67,7 @@ namespace AsDriven.Core
             new[] { "enabled", "disabled", "unavailable", "unknown" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> Simulators = new HashSet<string>(
-            new[] { "ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "other" },
+            new[] { "ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "raceroom", "other" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> ShiftActuations = new HashSet<string>(
             new[] { "h-pattern", "sequential-stick", "sequential-paddles", "automatic-lever", "direct-selection", "unknown" },
@@ -152,6 +159,10 @@ namespace AsDriven.Core
             }
             RequireText(draft.Simulator, "Simulator");
             RequireChoice(draft.Simulator, Simulators, "Simulator");
+            if (string.Equals(draft.Simulator, "other", StringComparison.Ordinal))
+            {
+                RequireText(draft.SourceGameName, "SourceGameName");
+            }
             RequireText(draft.GameVersion, "Game version");
             if (string.Equals(draft.GameVersion, "latest", StringComparison.OrdinalIgnoreCase))
             {
@@ -280,6 +291,7 @@ namespace AsDriven.Core
                     implementation, "declared_version", draft.Implementation.DeclaredVersion);
                 payload.Add("implementation", implementation);
             }
+            AddOptional(payload, "source_game_name", draft.SourceGameName);
             AddOptional(payload, "client_version", draft.ClientVersion);
             AddOptional(payload, "dataset_version", draft.DatasetVersion);
             string[] notes = (draft.EvidenceNotes ?? new string[0])

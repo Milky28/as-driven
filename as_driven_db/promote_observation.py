@@ -162,6 +162,19 @@ def build_promoted_record(
         )
 
     simulator = record["simulators"][0]
+    if simulator.get("simulator") == "other":
+        # The last gate, and the one that does not depend on any interface
+        # having offered the right buttons. `other` means the client did not
+        # recognise the game: promoting under it would put two unrelated
+        # simulators in one namespace inside records, and there is no prefix to
+        # name its sources with. The drive is kept and released when the game is
+        # registered; see docs/simulator-coverage.md.
+        raise ValueError(
+            f"{label}: this drive came from a simulator the project has not "
+            f"registered, reported by the client as "
+            f"{bundle.get('observation', {}).get('source_game_name', 'an unnamed game')!r}. "
+            "Register the simulator before promoting it."
+        )
     live_source_id = source["source_id"]
     real_world_refs = list(_required(entry, "real_world_source_refs", label))
     if not real_world_refs:

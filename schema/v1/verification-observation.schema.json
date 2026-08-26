@@ -37,8 +37,15 @@
         "acc",
         "ac-evo",
         "ac-rally",
+        "raceroom",
         "other"
       ]
+    },
+    "source_game_name": {
+      "description": "The name the telemetry client reported for the game, kept exactly as it arrived. Required when `simulator` is `other`, where it is the only record of which game was driven; optional elsewhere, where the canonical id already names it. It is provenance, never a lookup key: it is not normalised, not matched against, and adding a simulator later renames the observation rather than needing the drive repeated.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
     },
     "game_version": {
       "type": "string",
@@ -367,5 +374,25 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "simulator": {
+            "const": "other"
+          }
+        },
+        "required": [
+          "simulator"
+        ]
+      },
+      "then": {
+        "required": [
+          "source_game_name"
+        ],
+        "description": "An observation from an unregistered simulator must say which game it came from, or `other` is anonymous and two unrelated games become indistinguishable."
+      }
+    }
+  ]
 }

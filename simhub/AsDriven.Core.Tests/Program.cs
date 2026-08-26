@@ -101,6 +101,25 @@ namespace AsDriven.Core.Tests
                     "recognizes the original Assetto Corsa");
                 Equal("ac", AsDrivenDatabase.CanonicalizeSimulator("ac"),
                     "accepts the original Assetto Corsa canonical id for previews");
+                // SimHub names RaceRoom by its engine. A driver who types the
+                // product name, or the community abbreviation, reaches the same
+                // id, and none of the spellings collides with another game.
+                Equal("raceroom", AsDrivenDatabase.CanonicalizeSimulator("RRRE"),
+                    "canonicalises SimHub's RRRE to raceroom");
+                Equal("raceroom", AsDrivenDatabase.CanonicalizeSimulator("RRRE64"),
+                    "canonicalises the detected RRRE64 process name to raceroom");
+                Equal("raceroom", AsDrivenDatabase.CanonicalizeSimulator("RaceRoom Racing Experience"),
+                    "canonicalises the product name to raceroom");
+                Equal("raceroom", AsDrivenDatabase.CanonicalizeSimulator("r3e"),
+                    "canonicalises the community abbreviation to raceroom");
+                // RaceRoom publishes no engine torque, so a review that demanded
+                // the cut would demand something no drive can produce. An
+                // unregistered simulator is treated the same way, because
+                // nothing at all is known about what it publishes.
+                False(VerificationReviewRules.AutomaticCutIsMeasurable("raceroom"),
+                    "does not ask contributors to settle a RaceRoom cut that telemetry cannot expose");
+                False(VerificationReviewRules.AutomaticCutIsMeasurable("other"),
+                    "does not ask an unregistered simulator for a cut nothing is known to publish");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaRally"),
                     "does not resolve Rally, which nothing has been driven in");
                 Equal("acc", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),

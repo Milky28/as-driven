@@ -104,4 +104,7 @@ seriously as evidence about identity, not just about a rim.
   `promote_observation.resolve_class` expects.
 - `ac-rally` is in the simulator enum and SimHub's name for it appears to be
   `AssettoCorsaRally`, but the client does not canonicalise it and nothing has
-  been driven in it.
+  been driven in it. It is a *reserved* id: enums only, no client wiring. A
+  test names it as such, so the gap is a stated decision rather than an
+  oversight. See `docs/registering-a-simulator.md` for what promoting it to a
+  live id involves.

@@ -18,12 +18,21 @@ namespace AsDriven.Core
 
         public static bool AutomaticCutIsMeasurable(string simulator)
         {
-            // AC and ACC do not publish engine torque through SimHub. A
-            // successful full-throttle upshift can establish acceptance, but
-            // it cannot distinguish a modeled cut from another shift
-            // implementation.
+            // AC, ACC and RaceRoom do not publish engine torque through
+            // SimHub. A successful full-throttle upshift can establish
+            // acceptance, but it cannot distinguish a modeled cut from another
+            // shift implementation, so asking a contributor to settle the cut
+            // asks for something no amount of driving can produce.
+            //
+            // An unregistered simulator answers "other" and is treated the same
+            // way, because nothing is known about what it publishes. That is the
+            // safe direction: the worst case is a review that does not ask for a
+            // cut which could in fact have been measured, against a review that
+            // demands one the telemetry can never supply.
             return !string.Equals(simulator, "ac", StringComparison.Ordinal)
-                && !string.Equals(simulator, "acc", StringComparison.Ordinal);
+                && !string.Equals(simulator, "acc", StringComparison.Ordinal)
+                && !string.Equals(simulator, "raceroom", StringComparison.Ordinal)
+                && !string.Equals(simulator, "other", StringComparison.Ordinal);
         }
     }
 }

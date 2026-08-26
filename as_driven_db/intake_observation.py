@@ -41,6 +41,18 @@ def _read_observation(path: Path, root: Path) -> tuple[dict[str, Any], bytes]:
         raise IntakeError("schema validation failed:\n" + "\n".join(errors))
     if payload.get("review_status") != "draft":
         raise IntakeError("public intake accepts review_status 'draft' only")
+    # The schema states this as a conditional requirement, which the repository's
+    # dependency-free validator does not implement, so it is enforced here as
+    # well. Without the game's own name an `other` observation is anonymous: it
+    # can never be grouped, and registering the simulator it came from could
+    # never release it.
+    if payload.get("simulator") == "other" and not str(
+        payload.get("source_game_name") or ""
+    ).strip():
+        raise IntakeError(
+            "an observation from an unregistered simulator must carry "
+            "source_game_name, naming the game the telemetry client reported"
+        )
     return payload, raw
 
 
@@ -262,6 +274,33 @@ def _curated_candidates(root: Path, observation: dict[str, Any]) -> list[dict[st
     return candidates
 
 
+def _unregistered_simulator(observation: dict[str, Any]) -> dict[str, str] | None:
+    """The game this drive came from, when the client did not recognise it.
+
+    An observation whose simulator is `other` is real evidence about a real car,
+    and there is nothing wrong with the drive. What is missing is the project's
+    decision about the game: an id, whether its telemetry can settle a cut, what
+    its source refs are called. Until that decision is made the observation is
+    held rather than promoted, because `other` is a bucket and not an identity -
+    two unrelated games promoted under it would be indistinguishable inside a
+    record, and no source-naming prefix exists for either.
+
+    The drive is not wasted. `source_game_name` preserves what the game called
+    itself, so registering that simulator later renames these observations
+    instead of asking a contributor to drive every car again.
+    """
+    if observation.get("simulator") != "other":
+        return None
+    return {
+        "source_game_name": observation.get("source_game_name") or "unknown",
+        "reason": (
+            "This simulator is not registered, so the observation is held. "
+            "Register it in the simulator enums and re-run intake to release "
+            "the drives it is holding."
+        ),
+    }
+
+
 def _already_reviewed(root: Path, observation_id: str) -> bool:
     sources = json.loads(
         (root / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
@@ -290,8 +329,14 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
     curated_matches = _curated_matches(root, observation)
     curated_candidates = _curated_candidates(root, observation)
     already_reviewed = _already_reviewed(root, observation["observation_id"])
+    unregistered = _unregistered_simulator(observation)
     if already_reviewed:
         classification = "already-reviewed-observation"
+    elif unregistered:
+        # Ahead of every identity classification. Which car this is stays an
+        # open and interesting question, but it cannot be acted on until the
+        # game it was driven in has an id.
+        classification = "unregistered-simulator"
     elif relationship:
         classification = relationship
     elif curated_matches:
@@ -321,6 +366,7 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
         "related_submissions": related,
         "curated_matches": curated_matches,
         "curated_candidates": curated_candidates,
+        "unregistered_simulator": unregistered,
     }
     receipt_path.write_text(
         json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",

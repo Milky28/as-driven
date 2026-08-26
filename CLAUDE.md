@@ -258,5 +258,17 @@ approval are required before release. See `PRIVACY.md` and
 - Record IDs name the real car with no simulator prefix. A second simulator's
   drive joins the existing record as another `simulators[]` entry rather than
   forking a second record, and an approval names the simulator it approves.
+- **RaceRoom Racing Experience is registered as `raceroom`**, and an
+  unrecognised simulator is now held rather than lost. The client answers
+  `other` for a game it cannot canonicalise, and the draft records
+  `source_game_name` exactly as the telemetry client reported it. Intake stores
+  such a drive and classifies it `unregistered-simulator`; the case sits in
+  `blocked-on-simulator` offering no actions; promotion refuses it outright.
+  The evidence is kept, so registering the game later renames those
+  observations rather than costing a contributor every drive again. The queue
+  groups them by game, because forty held cases are one decision and not forty.
+  RaceRoom publishes no engine torque, so its automatic cut is unmeasurable in
+  the same way AC's and ACC's are, and an unregistered simulator is assumed
+  unmeasurable too. See `docs/registering-a-simulator.md`.
 - Icon and naming redesign concepts under `docs/design/` are review-only and are
   not wired into production assets.

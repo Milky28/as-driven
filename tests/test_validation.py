@@ -9,6 +9,7 @@ import unittest
 from as_driven_db.validate import (
     AERO_SUFFIXES,
     SHIFT_ACTUATION,
+    SIMULATORS,
     LIVE_OBSERVATION_ID_RE,
     OBSERVING_SIMULATORS,
     _resolve_pointer,
@@ -1029,6 +1030,119 @@ class ValidationTests(unittest.TestCase):
         )
         self.assertFalse(LIVE_OBSERVATION_ID_RE.fullmatch("ac-evo.some-drive"))
         self.assertNotIn("other", OBSERVING_SIMULATORS)
+
+    def test_a_registered_simulator_reaches_every_place_that_enumerates_one(self) -> None:
+        """Registering a simulator is a list of places, so the list is a test.
+
+        Half-registering one fails in the least useful way: drives are accepted
+        and then rejected further down, or the site renders a bare id. Each site
+        below is named in docs/registering-a-simulator.md, and this test is what
+        makes that document true rather than aspirational.
+
+        `other` is deliberately exempt. It is the absence of a registration, so
+        it has no product name, no filter label and no canonical spelling.
+
+        A *reserved* id is a third case, and this test is where it stops being
+        an inconsistency and becomes a stated one. `ac-rally` sits in the enums
+        so that a record naming it would validate, while the client does not
+        canonicalise it and nothing has been driven in it. Reserved ids are held
+        to the schema enums only; promoting one to live means wiring the client
+        sites and deleting it from this set.
+        """
+        reserved = {"ac-rally"}
+        simulators = SIMULATORS - {"other"} - reserved
+        missing: list[str] = []
+
+        def require(label: str, text: str, needles: dict[str, str]) -> None:
+            for simulator, needle in needles.items():
+                if needle not in text:
+                    missing.append(f"{label}: {simulator}")
+
+        schema_dir = ROOT / "schema" / "v1"
+        for name in (
+            "car-record.schema.json",
+            "curation-approval.schema.json",
+            "verification-observation.schema.json",
+        ):
+            text = (schema_dir / name).read_text(encoding="utf-8")
+            # Reserved ids are required here and nowhere else.
+            require(name, text, {s: f'"{s}"' for s in simulators | reserved})
+
+        site = (ROOT / "as_driven_db" / "site.py").read_text(encoding="utf-8")
+        for simulator in simulators:
+            # Both the product name and the short filter label, which are two
+            # separate maps and have been forgotten separately before.
+            if site.count(f'"{simulator}": "') < 2:
+                missing.append(f"site.py display and filter labels: {simulator}")
+
+        core = ROOT / "simhub" / "AsDriven.Core"
+        writer = (core / "VerificationObservation.cs").read_text(encoding="utf-8")
+        require("VerificationObservation.cs", writer, {s: f'"{s}"' for s in simulators})
+
+        database = (core / "AsDrivenDatabase.cs").read_text(encoding="utf-8")
+        for simulator in simulators:
+            # CanonicalizeSimulator plus the product, display and short names.
+            if database.count(f'"{simulator}"') < 4:
+                missing.append(f"AsDrivenDatabase.cs canonicalise and name maps: {simulator}")
+
+        self.assertEqual([], sorted(missing))
+
+    def test_the_schema_only_states_constraints_the_validator_enforces(self) -> None:
+        """A schema keyword nobody checks is worse than no keyword at all.
+
+        The repository's validator is deliberately dependency-free and covers a
+        subset of JSON Schema. Anything outside that subset reads as a rule while
+        enforcing nothing, so each such keyword must have a real check behind it
+        somewhere else. This test does not forbid them; it names them, so that
+        adding one is a deliberate act with a stated home rather than an
+        assumption that the schema is doing the work.
+        """
+        supported = {
+            "$schema", "$defs", "$ref", "$comment", "title", "description",
+            "type", "properties", "required", "enum", "const", "pattern",
+            "format", "items", "minItems", "uniqueItems", "minLength",
+            "minimum", "maximum", "additionalProperties", "not", "default",
+            "examples", "propertyNames",
+        }
+        # Each of these is enforced by code or by a test rather than by the
+        # validator, and is kept in the schema because the schema is the
+        # normative contract a standards-compliant consumer would read.
+        enforced_elsewhere = {
+            # tests/test_validation.py checks the driver-summary cap directly;
+            # as_driven_db.intake_observation checks source_game_name.
+            "maxLength",
+            "allOf",
+            "if",
+            "then",
+        }
+        seen: set[str] = set()
+
+        def walk(node: object) -> None:
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    seen.add(key)
+                    walk(value)
+            elif isinstance(node, list):
+                for item in node:
+                    walk(item)
+
+        for schema_path in sorted((ROOT / "schema" / "v1").glob("*.json")):
+            walk(json.loads(schema_path.read_text(encoding="utf-8")))
+
+        # Keywords are mixed with property names, so only the ones we know to be
+        # schema vocabulary are judged.
+        vocabulary = supported | enforced_elsewhere | {
+            "oneOf", "anyOf", "maxItems", "exclusiveMinimum", "exclusiveMaximum",
+            "multipleOf", "maxProperties", "minProperties", "contains",
+            "patternProperties", "dependentRequired", "dependentSchemas", "else",
+        }
+        unaccounted = (seen & vocabulary) - supported - enforced_elsewhere
+        self.assertEqual(
+            set(),
+            unaccounted,
+            "schema keywords the validator ignores and nothing else enforces: "
+            + ", ".join(sorted(unaccounted)),
+        )
 
     def test_an_established_mechanism_leaves_no_technique_unknown(self) -> None:
         """A mechanism the record establishes settles the technique that follows.

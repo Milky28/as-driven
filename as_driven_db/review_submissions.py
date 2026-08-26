@@ -173,6 +173,12 @@ def _research_required(classification: str) -> bool:
 def _case_state(classification: str) -> str:
     if classification == "exact-resubmission":
         return "duplicate"
+    if classification == "unregistered-simulator":
+        # Deliberately not identity research. No amount of research into the
+        # car unblocks this one; the maintainer has to register the game. It is
+        # held rather than rejected, and registering the simulator releases
+        # every case waiting behind it at once.
+        return "blocked-on-simulator"
     if classification == "already-reviewed-observation":
         return "released"
     if classification == "contradiction":
@@ -463,6 +469,10 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
                 ),
                 "classification": case.get("classification"),
                 "simulator": observation.get("simulator"),
+                # What the game called itself. Only an unregistered simulator
+                # carries one, and it is the whole reason such a case can be
+                # grouped and acted on rather than sitting in an "other" heap.
+                "source_game_name": observation.get("source_game_name"),
                 "telemetry_name": identity.get("telemetry_name"),
                 "research": case.get("research", {}).get("status"),
                 "publication_status": publication_status,
@@ -476,6 +486,40 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
     return sorted(cases, key=lambda case: int(case.get("issue") or 0))
 
 
+def unregistered_simulators(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Held cases grouped by the game they came from, commonest first.
+
+    A contributor who drives forty cars in a simulator this project has never
+    seen produces forty held cases, and read one at a time that is forty
+    identical disappointments. Grouped, it is one decision: register the game,
+    and every case behind it moves at once.
+
+    The name is reported exactly as the telemetry client supplied it, because
+    that is the string a maintainer has to recognise and the one the client will
+    have to canonicalise.
+    """
+    held: dict[str, dict[str, Any]] = {}
+    for case in cases:
+        if case.get("classification") != "unregistered-simulator":
+            continue
+        name = case.get("source_game_name") or "unknown"
+        entry = held.setdefault(name, {"source_game_name": name, "cases": 0, "cars": set()})
+        entry["cases"] += 1
+        if case.get("telemetry_name"):
+            entry["cars"].add(case["telemetry_name"])
+    return sorted(
+        (
+            {
+                "source_game_name": entry["source_game_name"],
+                "cases": entry["cases"],
+                "distinct_cars": len(entry["cars"]),
+            }
+            for entry in held.values()
+        ),
+        key=lambda entry: (-entry["cases"], entry["source_game_name"]),
+    )
+
+
 def allowed_case_actions(case: dict[str, Any]) -> list[str]:
     """Return the actions a workbench may offer without inferring the state machine."""
 
@@ -485,6 +529,11 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
     research_status = (case.get("research") or {}).get("status")
     if state == "intake-error":
         return ["sync"]
+    if state == "blocked-on-simulator":
+        # Nothing here is the reviewer's to do. The case waits on the project
+        # registering the game, not on research, a brief or a promotion, and
+        # offering any of those would invite a promotion that must not happen.
+        return []
     if state == "identity-research":
         actions = ["generate-research-brief"]
         if research_status in {"not-started", "brief-ready", "partial", "blocked"}:

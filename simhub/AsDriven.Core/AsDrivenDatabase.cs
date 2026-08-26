@@ -311,6 +311,18 @@ namespace AsDriven.Core
             {
                 return "ac-evo";
             }
+            // SimHub names RaceRoom by its engine, "RRRE", and detects the
+            // process as RRRE64. Neither is the product name a driver would
+            // recognise, so the spellings a person might reasonably supply are
+            // accepted alongside them. "r3e" is the community abbreviation.
+            if (compact == "rrre"
+                || compact == "rrre64"
+                || compact == "raceroom"
+                || compact == "raceroomracingexperience"
+                || compact == "r3e")
+            {
+                return "raceroom";
+            }
             return null;
         }
 
@@ -1004,6 +1016,7 @@ namespace AsDriven.Core
                 case "ac": return "AssettoCorsa";
                 case "acc": return "AssettoCorsaCompetizione";
                 case "ac-evo": return "AssettoCorsaEvo";
+                case "raceroom": return "RRRE";
                 default: return simulator;
             }
         }
@@ -1020,6 +1033,7 @@ namespace AsDriven.Core
                 case "ac": return "Assetto Corsa";
                 case "acc": return "Assetto Corsa Competizione";
                 case "ac-evo": return "Assetto Corsa EVO";
+                case "raceroom": return "RaceRoom Racing Experience";
                 default: return simulator;
             }
         }
@@ -1033,6 +1047,7 @@ namespace AsDriven.Core
                 case "ac": return "AC";
                 case "acc": return "ACC";
                 case "ac-evo": return "AC EVO";
+                case "raceroom": return "RaceRoom";
                 default: return simulator;
             }
         }
