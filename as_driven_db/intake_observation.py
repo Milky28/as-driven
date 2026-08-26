@@ -345,6 +345,13 @@ def intake_observation(root: Path, input_path: Path, inbox: Path) -> dict[str, A
             # receipt beside it holds a verdict the project has since overturned.
             # Resubmitting is exactly how a maintainer asks for that verdict
             # again, so it is answered rather than deflected as a duplicate.
+            #
+            # The stored copy is dropped rather than merely stepped over. It is
+            # this submission, byte for byte, and leaving it in place made the
+            # drive an "alternate representation" of itself: same observation id,
+            # so the relationship check reported a second version of a drive
+            # nobody had submitted twice.
+            stored = [item for item in stored if item[0] != path]
             break
         return {
             "status": "exact-resubmission",

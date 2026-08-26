@@ -338,7 +338,33 @@ class ObservationIntakeTests(unittest.TestCase):
             )
             self.assertEqual("rfactor2", receipt["released_simulator"])
             self.assertIsNone(receipt["unregistered_simulator"])
-            self.assertNotEqual("unregistered-simulator", receipt["status"])
+            self.assertEqual("new-identity", receipt["status"])
+
+    def test_releasing_a_drive_already_in_the_inbox_is_not_a_second_version(self) -> None:
+        # The held copy is this submission, byte for byte. Releasing has to step
+        # past the duplicate check to answer a verdict that has gone stale, and
+        # leaving the stored copy in view made the drive an alternate
+        # representation of itself: same observation id, so the relationship
+        # check reported a second version of a drive nobody submitted twice.
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            inbox = temp / "inbox"
+            payload = observation("Release Twice Probe")
+            payload["observation_id"] = (
+                "other.release-twice-probe.20260826t194202971z-890e7e55"
+            )
+            payload["simulator"] = "other"
+            payload["source_game_name"] = "RFactor2"
+            path = self.write(temp, payload, "twice.json")
+            first = intake_observation(ROOT, path, inbox)
+            second = intake_observation(ROOT, path, inbox)
+            self.assertEqual("new-identity", first["status"])
+            self.assertEqual(
+                "new-identity",
+                second["status"],
+                "the same bytes must not become a relationship with themselves",
+            )
+            self.assertEqual([], second["related_submissions"])
 
     def test_a_game_still_unregistered_stays_held(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
