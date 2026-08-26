@@ -298,6 +298,7 @@ class SiteTests(unittest.TestCase):
                 {"id": "acc", "label": "Assetto Corsa Competizione"},
                 {"id": "ac-evo", "label": "Assetto Corsa EVO"},
                 {"id": "raceroom", "label": "RaceRoom Racing Experience"},
+                {"id": "rfactor2", "label": "rFactor 2"},
             ],
         )
         page = build_site(ROOT)
@@ -305,6 +306,7 @@ class SiteTests(unittest.TestCase):
         self.assertIn('<option value="acc">ACC</option>', page)
         self.assertIn('<option value="ac-evo">AC EVO</option>', page)
         self.assertIn('<option value="raceroom">RaceRoom</option>', page)
+        self.assertIn('<option value="rfactor2">rF2</option>', page)
         self.assertIn('<option value="ams2">AMS2</option>', page)
 
     def test_comparison_modes_separate_coverage_from_disagreement(self) -> None:

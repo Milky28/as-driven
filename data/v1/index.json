@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.12",
+  "dataset_version": "0.5.14",
   "released_at": "2026-08-26",
   "records": [
     "cars/alfa-romeo-156-super-touring.json",
@@ -25,6 +25,7 @@
     "cars/bmw-3-0-csl-imsa-1975.json",
     "cars/bmw-m-hybrid-v8.json",
     "cars/bmw-m1-procar.json",
+    "cars/bmw-m2-cs-racing.json",
     "cars/bmw-m3-e46-gtr.json",
     "cars/bmw-m3-sport-evo-group-a.json",
     "cars/bmw-m4-gt3.json",
@@ -233,6 +234,7 @@
     "cars/puma-gtb.json",
     "cars/puma-gte.json",
     "cars/puma-p052.json",
+    "cars/radical-sr3-rsx.json",
     "cars/renault-r25.json",
     "cars/renault-r26.json",
     "cars/renault-r28.json",

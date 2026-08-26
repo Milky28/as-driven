@@ -8327,6 +8327,147 @@
       "retrieved_at": "2026-08-26",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 by Jason Kinslow; RACEROOM 0.9.8.14. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "radical.sr3-rsx-owners-manual-1.93",
+      "title": "Radical SR3 RSX Owners Manual 1.93",
+      "publisher": "Radical Sportscars",
+      "url": "https://radicalsportscarregistry.com/wp-content/uploads/2022/02/QD133-13_Radical_SR3_RSX-Owners_Manual-1.93-July-6-2021.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Radical SR3 RSX owner manual, manufacturer-origin document mirrored by the Radical Sportscar Registry; the relevant driver-controls section covers starting, paddle shifting, the six forward gears, auto blipper, automatic ignition cut, and gear order. Section 2.2, Driver Controls, PaddleShift Controls: “To pull away, depress the Clutch, hold the neutral button in and shift down to get to first ... all the way to 6th.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/shift_actuation. Section 2.2, Driver Controls, PaddleShift Controls: “The SR3 is fitted with an auto blipper and automatic ignition cut. This allows you to flatshift up the gearbox and means you do not have to blip the throttle on the way down.” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip. Section 2.2, Driver Controls, gear order: “1 → N → 2 → 3 → 4 → 5 → 6” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_pattern. The manual establishes the driver's required pull-away clutch use and the assisted running-shift technique. It does not establish a clutch requirement for ordinary downshifts, a downshift throttle-lift rule, or downshift ignition-cut behavior; those fields remain unknown.",
+      "published_or_updated_at": "2021-07-06"
+    },
+    {
+      "source_id": "radical.sr3-global-scrutineering-guide-v1.8",
+      "title": "Radical Motorsport SR3 Global Scrutineering Guide",
+      "publisher": "Radical Motorsport",
+      "url": "https://radicalcup.nl/wp-content/uploads/2026/01/SR3-Scrutineering-Guide-2.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: SR3 Version 1.8 steering-wheel and dash table; the RSX row distinguishes the closed-circle wheel from the later XX and XXR wheel arrangements and specifies a separate dash-mounted AIM display. Section 1.4, Steering Wheel and Dash, RSX row: “Radical or Sparco branded closed circle wheel, with separate Radical AIM MXL/MXL2 mounted to dash panel” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top. The guide says the display is separate from the wheel. It does not establish whether the wheel itself carries shift/rev lights, so shift_lights remains unknown.",
+      "published_or_updated_at": "2024-02-02"
+    },
+    {
+      "source_id": "radical.sr3-buyers-guide",
+      "title": "Radical SR3 Buyers Guide",
+      "publisher": "Radical Sportscar Registry",
+      "url": "https://radicalsportscarregistry.com/radical-sr3-buyers-guide/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Registry research page covering SR3 generations and the introduction of the Gen 3 SR3 RSX for the 2015 model year. Generation 3 SR3 RSX section: “In October of 2014 Radical introduced the 2015 Gen 3 SR3 RSX” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/real_world_identity_notes. Generation comparison text: “the third generation cars (SR3 RSX 2015 +)” Reviewed for /identity/year, /identity/real_world_identity_notes. This is secondary registry research. The year range is bounded at the end by the registry's SR3 chassis/model-year material, which identifies the final RSX production year as 2020; the manufacturer manual and guide supply the control facts."
+    },
+    {
+      "source_id": "radical.sr3-model-years-by-chassis",
+      "title": "Radical SR3 Model Years by Chassis Number",
+      "publisher": "Radical Sportscar Registry",
+      "url": "https://radicalsportscarregistry.com/sr3-registry/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: SR3 registry entries used to bound the RSX production/model-year span, including the first RSX test cars in 2014 and the last SR3 RSX chassis in 2020. SR3 registry year table: “SR3 chassis number 930 is the first SR3 RSX (Generation 3) ... built in October 2014” Reviewed for /identity/year, /identity/real_world_identity_notes. 2020 registry entry: “2020 ... Radical SR3 chassis number 1276 is the last SR3 RSX built.” Reviewed for /identity/year, /identity/real_world_identity_notes. Registry production/chassis context supports the 2015-2020 model-year span; it is not used to infer the individual observed car's chassis number."
+    },
+    {
+      "source_id": "studio397.rfactor2-radical-sr3-rsx-release",
+      "title": "Radical Release!",
+      "publisher": "Studio 397",
+      "url": "https://www.studio-397.com/2017/07/radical-release/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Studio 397 rFactor2 release announcement identifying the released content as Radical SR3 RSX and explicitly describing left- and right-hand-drive simulator variants. Release announcement opening and drive-side paragraph: “Introducing the Radical SR3 RSX ... we have also built in left and right hand drive” Reviewed for /identity/display_name, /identity/model, /identity/real_world_identity_notes. This source identifies the simulator content and the meaning of the left-drive variant. It is not treated as independent proof of real-car control technique.",
+      "published_or_updated_at": "2017-07-01"
+    },
+    {
+      "source_id": "as-driven.repository.radical-sr3-rsx-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of data/v1/index.json and data/v1/cars for an existing curated Radical SR3 RSX record. data/v1/index.json and data/v1/cars: “No curated Radical SR3 RSX record is present in the checked-out dataset.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports the create-new decision and proposed normalized record id; it is not independent real-world evidence."
+    },
+    {
+      "source_id": "rfactor2.local-live-radical-sr3-00-left-drive-controls.1.1.3.4",
+      "title": "Live RFACTOR2 Radical SR3 00 Left Drive guided-verification drive",
+      "publisher": "Local RFACTOR2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/30",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation rfactor2.radical-sr3-00-left-drive.20260826t222522805z-b1a05fd9 by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "bmw-motorsport.m2-cs-racing",
+      "title": "BMW M2 CS Racing",
+      "publisher": "BMW M Motorsport",
+      "url": "https://www.bmw-m.com/en/fastlane/motorsport/race-cars/bmw-m2-cs-racing.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW M Motorsport model page for the BMW M2 CS Racing, including customer-racing identity, seven-speed dual-clutch transmission, steering wheel, shift paddles, and AIM motorsport display. Power transmission and cockpit sections: “7-speed dual clutch transmission with specialist motorsport software; AIM MXG 1.2 Motorsport Display; removable BMW Motorsport steering wheel with control buttons and shift paddles.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. The display is described as an AIM motorsport display in the cockpit, separate from the removable steering wheel.",
+      "published_or_updated_at": "2023-03-02"
+    },
+    {
+      "source_id": "bmw-motorsport.m2-cs-racing-2019-release",
+      "title": "BMW M GmbH and BMW M Motorsport present new BMW M2 CS and BMW M2 CS Racing",
+      "publisher": "BMW M Motorsport",
+      "url": "https://www.press.bmwgroup.com/global/article/attachment/T0302459EN/475431",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW M Motorsport launch release for the M2 CS Racing, including close-to-production customer-racing identity, planned mid-2020 deliveries, seven-speed dual-clutch transmission, and cockpit equipment. Pages 1-2, launch description and powertrain: “BMW M2 CS Racing ... close-to-production customer racing vehicle ... first deliveries planned for mid-2020 ... 7-speed dual-clutch transmission applied with motorsport software.” Reviewed for /identity/year, /identity/class, /identity/real_world_identity_notes, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Pages 4-5, cockpit equipment: “AIM MXG 1.2 racing dash logger with colour display ... removable BMW Motorsport steering wheel with operating buttons and rocker switches.” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/shape. The release confirms launch timing and separates the dashboard/logger from the steering wheel. It does not prescribe driver clutch or throttle technique.",
+      "published_or_updated_at": "2019-11-06"
+    },
+    {
+      "source_id": "bmw-motorsport.m2-cs-racing-technical-manual-v02-9",
+      "title": "BMW M2 CS Racing 2020 Technical Customer Manual V02.9",
+      "publisher": "BMW M Motorsport",
+      "url": "https://www.coparacer.es/wp-content/uploads/2025/04/M2CSRacing_Technical_Customer_Manual_V02.9_CRC_aprobado-RFEDA.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW M Motorsport technical customer manual V02.9 for the 2020 M2 CS Racing, mirrored by Coparacer; relevant sections cover the double-clutch transmission, gear ratios, steering-wheel paddle shift, selector lever, and AIM dashboard. Pages 13-15 and 53-54, drivetrain specification and gear ratios: “7-Speed double-clutch gear box with Motorsport-Software ... Gear 1 2 3 4 5 6 7 R.” Reviewed for /identity/display_name, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Pages 136-138, driver control system: “PADDLE SHIFT: UP ... trigger an up shift. DOWN ... trigger a down shift ... D/S: change between Drive Mode and sequential shift Mode.” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Pages 144-147, AIM dashboard and logging channels: “The dashboard supports 10 Shift Lights ... NGearAscii ... 7. gear.” Reviewed for /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/forward_gears. The manual documents gearbox hardware and control interfaces, but no explicit clutch-pedal or standing-start procedure and no prescribed upshift/downshift throttle, cut, or blip technique were found. Dashboard shift lights are not treated as steering-rim features.",
+      "published_or_updated_at": "2024-11-01"
+    },
+    {
+      "source_id": "bmw-pressclub.photo.m2-cs-racing-2020-cockpit",
+      "title": "The BMW M2 CS Racing (09/2020)",
+      "publisher": "BMW Group PressClub",
+      "url": "https://www.press.bmwgroup.com/global/photo/detail/P90401271/the-bmw-m2-cs-racing-09/2020",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW Group PressClub photo page and downloadable photograph identified as the BMW M2 CS Racing (09/2020), used for direct cockpit observations. Photo page ID P90401271; full-resolution cockpit photograph: “Visible: a suede-covered steering wheel with molded left and right hand grips, a central control face, multiple controls and paddle shifters, a separate display behind the wheel, and a center-console selector; the grip/control-face layout establishes the gt-formula category.” Reviewed for /identity/display_name, /identity/year, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/shift_actuation. This is an exact-car manufacturer photo, not a photograph of a sister BMW model. It establishes the gt-formula grip/control-face category and visible cockpit components, but not the open-top modifier, rim-mounted display/shift-light status, or driver technique.",
+      "published_or_updated_at": "2020-09-25"
+    },
+    {
+      "source_id": "as-driven.repository.bmw-m2-cs-racing-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of data/v1/index.json and data/v1/cars for an existing BMW M2 CS Racing record. data/v1/index.json and data/v1/cars: “No curated BMW M2 CS Racing or BMW M2 record is present in the checked-out dataset.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports the create-new decision and proposed exact record id; it is not independent real-world evidence."
+    },
+    {
+      "source_id": "rfactor2.local-live-bmw-m2-cs-racing-controls.1.1.3.4",
+      "title": "Live RFACTOR2 BMW M2 CS Racing guided-verification drive",
+      "publisher": "Local RFACTOR2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/29",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation rfactor2.bmw-m2-cs-racing.20260826t221139358z-d3b8a174 by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

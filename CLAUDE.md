@@ -167,7 +167,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.20.0.
-- Dataset: 0.5.12 with 268 curated records.
+- Dataset: 0.5.14 with 270 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The local contribution queue is clear: eleven cases promoted and one closed as
   a duplicate. The Shelby Daytona Coupe, Ferrari 250 GTO, Kunos Ford Mustang and
