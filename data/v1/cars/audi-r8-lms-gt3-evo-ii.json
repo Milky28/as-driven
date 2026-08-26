@@ -278,7 +278,8 @@
       "confidence": {
         "level": "high",
         "basis": "The fingerprinted RSS v2 package is a German 501 hp V10 GT3 with the Audi R8 LMS wheelbase, track and weight envelope. Its bundled `#1 Scherer Sport PHX Farewell Audi` livery explicitly loads Audi badge assets. RSS's first-party product data and the installed package therefore converge on the Audi R8 LMS GT3 Evo II, while the AC behavior and cockpit were directly observed."
-      }
+      },
+      "display_name": "GT-M Aero V10 Evo2"
     }
   ],
   "provenance": {

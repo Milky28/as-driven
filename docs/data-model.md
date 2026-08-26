@@ -94,6 +94,16 @@ or a deviation recorded as an override.
 `source_id` keeps its simulator prefix, and so does an observation id. That
 evidence really does belong to one drive in one game.
 
+A simulator entry may carry its own `display_name` and `class`, for the case
+where a game renames the car or groups it its own way. The Prodrive Ferrari 550
+is Milano GT55 in AMS2 and GT Ferruccio 55 V12 in Assetto Corsa, and neither is
+the car; `identity` holds what it actually is, and each entry holds what its game
+calls it. A client shows the matched simulator's name where one is recorded and
+the record's own otherwise, so a car covered by two games never shows one game's
+invention during the other's session. Where the summary can, it names the real
+car and the alias together, because a driver who chose GT Adonis D9 V12 from a
+car list has nothing else to connect it to an Aston Martin DBR9.
+
 ## Authentic controls
 
 `authentic_controls` describes the represented car independently of any game:

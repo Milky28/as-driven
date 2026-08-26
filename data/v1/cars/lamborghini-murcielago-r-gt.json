@@ -162,7 +162,8 @@
       "confidence": {
         "level": "high",
         "basis": "The fingerprinted RSS Lanzo v3 package is an Italian V12 period GT and bundles a 2005 FIA GT REITER Engineering number 13 livery. FIA and REITER sources independently establish the Murcielago competition identity and its six-speed sequential transmission. The AC behavior and cockpit were directly observed."
-      }
+      },
+      "display_name": "GT Lanzo V12"
     }
   ],
   "provenance": {

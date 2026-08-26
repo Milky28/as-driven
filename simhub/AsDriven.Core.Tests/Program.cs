@@ -177,6 +177,21 @@ namespace AsDriven.Core.Tests
                 False(database.Match("Automobilista2", "BMW M4 GT3 - Speedway").HasMatch,
                     "an undeclared package does not match");
 
+                // A renamed car is named differently by each game that renames
+                // it, and the record used to show one game's invention during
+                // the other's session. The Prodrive Ferrari 550 is the case:
+                // Milano GT55 in AMS2, GT Ferruccio 55 V12 in Assetto Corsa.
+                GuidanceSnapshot milanoAms2 = database.Match("Automobilista2", "Milano GT55");
+                Equal("Milano GT55", milanoAms2.DisplayName, "shows the AMS2 name in AMS2");
+                GuidanceSnapshot milanoAc = database.Match("AssettoCorsa", "GT Ferruccio 55 V12");
+                Equal("GT Ferruccio 55 V12", milanoAc.DisplayName,
+                    "shows the Assetto Corsa name in Assetto Corsa, not the AMS2 one");
+                Equal(milanoAms2.RecordId, milanoAc.RecordId, "and both are the same car");
+
+                // A record that names no simulator-specific title keeps its own.
+                GuidanceSnapshot plain = database.Match("Automobilista2", "Porsche 963");
+                Equal("Porsche 963", plain.DisplayName, "falls back to the record's name");
+
                 GuidanceSnapshot f301 = database.Match("Automobilista2", "Dallara F301");
                 True(f301.HasMatch, "matches the exact AMS2 telemetry name");
                 Equal("f301", f301.RecordId, "returns the correct record");

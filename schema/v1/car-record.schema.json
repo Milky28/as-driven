@@ -30,7 +30,7 @@
       "description": "One short paragraph telling the driver what to do differently in this car, and why. It is the only free text the preflight overlay shows, so it must say something the Fit and Use rows do not already state: \"this is a dog box\" is already carried by the gearbox type, while \"rev-match every downshift or the dogs will not engage\" is the reason to read it. Optional. When absent the overlay shows no note panel at all rather than padding the card with restatement. Every claim in it must be supported by the record's own curated values or its cited sources.",
       "type": "string",
       "minLength": 1,
-      "maxLength": 300
+      "maxLength": 520
     },
     "archetype": { "$ref": "#/$defs/archetypeClassification" },
     "notes": { "type": "array", "items": { "type": "string" } },
@@ -343,6 +343,16 @@
         "simulator": {
           "type": "string",
           "enum": ["ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally", "other"]
+        },
+        "display_name": {
+          "description": "What this simulator calls the car, where that differs from the record's name. A renamed car is named differently by each game that renames it: the Prodrive Ferrari 550 is Milano GT55 in AMS2 and GT Ferruccio 55 V12 in Assetto Corsa. Absent means the record's own display_name is what this simulator shows.",
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "description": "What this simulator calls the class, where that differs from the record's category. A simulator that states no class of its own shows none.",
+          "type": "string",
+          "minLength": 1
         },
         "identities": {
           "type": "array",

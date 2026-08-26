@@ -107,7 +107,8 @@
       "confidence": {
         "level": "verified",
         "basis": "Exact simulator identity, cockpit controls, and shift behavior were directly tested. Ferrari sources are retained only as clearly qualified period context and do not establish the fictional car's identity."
-      }
+      },
+      "display_name": "Milano GT55"
     },
     {
       "simulator": "ac",
@@ -168,7 +169,8 @@
       "confidence": {
         "level": "high",
         "basis": "The fingerprinted RSS Ferruccio 55 package is an Italian V12 early-2000s GT and bundles Prodrive, Care, BMS, JMB, Larbre, and Russian Age liveries corresponding to the 550 GTS Maranello. The registered technical account independently establishes the real Prodrive car's six-speed sequential transmission and shift technique. The AC behavior and cockpit were directly observed."
-      }
+      },
+      "display_name": "GT Ferruccio 55 V12"
     }
   ],
   "provenance": {

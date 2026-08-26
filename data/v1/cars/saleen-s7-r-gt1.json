@@ -145,7 +145,8 @@
       "confidence": {
         "level": "high",
         "basis": "The fingerprinted RSS Shadow v3 package is an American V8 period GT with an explicitly Saleen-labeled skin and 2003/2005 FIA GT team entries. FIA homologation independently establishes the Saleen S7 competition identity, while specialist evidence supports the sequential transmission family. The exact AC behavior and cockpit were directly observed."
-      }
+      },
+      "display_name": "GT Shadow V8"
     }
   ],
   "provenance": {

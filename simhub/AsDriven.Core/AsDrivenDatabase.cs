@@ -371,16 +371,25 @@ namespace AsDriven.Core
                     DatasetVersion = datasetVersion,
                     SimulatorLabel = SimulatorShortName(simulatorId),
                     RecordId = recordId,
-                    DisplayName = RequiredString(identity, "display_name", recordPath),
+                    // What this simulator calls the car. A renamed car is named
+                    // differently by each game that renames it - the Prodrive
+                    // Ferrari 550 is Milano GT55 in AMS2 and GT Ferruccio 55 V12
+                    // in Assetto Corsa - and the record used to show one game's
+                    // invention during the other's session.
+                    DisplayName = OptionalText(simulator, "display_name").Length > 0
+                        ? OptionalText(simulator, "display_name")
+                        : RequiredString(identity, "display_name", recordPath),
                     // The record carries one class, and for a car with no real
                     // racing category that value is whichever simulator groups
                     // it - "Vintage Cars Tier 1" is what AMS2 calls the Miura.
                     // Assetto Corsa records no class for its cars at all, so
                     // showing the record's class there put an AMS2 grouping on
                     // an AC card. A simulator that states no class is shown none.
-                    CarClass = HasClassIdentity(simulatorIdentities)
-                        ? RequiredString(identity, "class", recordPath)
-                        : string.Empty,
+                    CarClass = OptionalText(simulator, "class").Length > 0
+                        ? OptionalText(simulator, "class")
+                        : HasClassIdentity(simulatorIdentities)
+                            ? RequiredString(identity, "class", recordPath)
+                            : string.Empty,
                     ShiftActuation = RequiredString(effectiveTransmission, "shift_actuation", recordPath),
                     ShiftPattern = RequiredString(effectiveTransmission, "shift_pattern", recordPath),
                     FirstGearPosition = OptionalState(effectiveTransmission, "first_gear_position"),
