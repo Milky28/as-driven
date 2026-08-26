@@ -162,6 +162,9 @@ namespace AsDriven.Core
         /// <summary>Clutch reading with the car stopped, before the driver acted.</summary>
         private double _restingClutch;
         private bool _restingClutchSeen;
+        /// <summary>Throttle reading at the same moment, for the same reason.</summary>
+        private double _restingThrottle;
+        private bool _restingThrottleSeen;
         private double _minimumThrottle;
         private double _maximumThrottle;
         /// <summary>
@@ -202,6 +205,8 @@ namespace AsDriven.Core
                 // and ResetTrace runs on every phase advance.
                 _restingClutch = 0.0;
                 _restingClutchSeen = false;
+                _restingThrottle = 0.0;
+                _restingThrottleSeen = false;
                 ResetTrace();
             }
         }
@@ -405,6 +410,13 @@ namespace AsDriven.Core
                         // into evidence that the car works its own clutch.
                         _restingClutch = sample.Clutch;
                         _restingClutchSeen = true;
+                        // And the throttle, which decides whether a later spike
+                        // can be read as the car blipping. A channel already
+                        // open with the car stopped and no foot on the pedal is
+                        // not reporting the pedal, so a spike on it is not
+                        // evidence of anything the driver can act on.
+                        _restingThrottle = sample.Throttle;
+                        _restingThrottleSeen = true;
                     }
                     if (_armed && _engineWasRunning && !engineRunning)
                     {
@@ -720,6 +732,7 @@ namespace AsDriven.Core
                                     ? "A throttle spike was detected, peaking at "
                                         + _downshiftArmedThrottle.ToString("0", CultureInfo.InvariantCulture)
                                         + "% (the threshold is 15%)."
+                                        + RestingThrottleSummary()
                                     : "No automatic throttle spike was detected.")
                                 + VehicleClutchSummary());
                     return;
@@ -873,6 +886,36 @@ namespace AsDriven.Core
                     + " this channel.";
             }
             return caution;
+        }
+
+        /// <summary>
+        /// What the throttle channel read before anyone touched anything.
+        ///
+        /// A detected spike means the car blipped only if this channel follows
+        /// the pedal. Some simulators publish engine or vehicle state here, the
+        /// way RaceRoom's clutch channel reads fully depressed at rest, and on
+        /// such a channel every car appears to blip. Reporting the resting value
+        /// beside the peak lets a reviewer tell those apart without driving the
+        /// car again, and without knowing in advance which simulators do it.
+        /// </summary>
+        private string RestingThrottleSummary()
+        {
+            if (!_restingThrottleSeen)
+            {
+                return string.Empty;
+            }
+            if (_restingThrottle > 5.0)
+            {
+                return " The throttle already read "
+                    + Math.Round(_restingThrottle)
+                    + "% with the car stopped before any test began, so this channel is not"
+                    + " reporting the pedal alone and the spike is not evidence that the car"
+                    + " blipped.";
+            }
+            return " The throttle read "
+                + Math.Round(_restingThrottle)
+                + "% with the car stopped, so this channel does follow the pedal: the spike"
+                + " was either the car's own blip or the driver's foot.";
         }
 
         /// <summary>

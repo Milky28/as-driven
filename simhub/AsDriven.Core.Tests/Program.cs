@@ -1291,6 +1291,7 @@ namespace AsDriven.Core.Tests
                         // threshold without driving them again.
                         GuidedVerificationDrive measured = new GuidedVerificationDrive();
                         measured.Start(6);
+                        measured.AddSample(GuidedSample(now, 0, 0, 0, 1200, 0, 40, true));
                         for (int guard = 0; guard < 40
                             && measured.GetSnapshot().Title != "Downshift without pedal input"; guard++)
                         {
@@ -1303,6 +1304,32 @@ namespace AsDriven.Core.Tests
                         measured.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
                         True(measured.GetSnapshot().Result.Contains("peaking at 62%"),
                             "reports the measured peak so a large blip is distinguishable from a small one");
+
+                        // Whether the peak means anything depends on the channel.
+                        // The drive arms with the car stopped, so it can say
+                        // whether the throttle was already open before anyone
+                        // touched anything - and a channel open at rest is not
+                        // reporting the pedal, which makes a spike on it no
+                        // evidence that the car blipped.
+                        True(measured.GetSnapshot().Result.Contains("does follow the pedal"),
+                            "a throttle reading zero at rest is reported as following the pedal");
+
+                        GuidedVerificationDrive published = new GuidedVerificationDrive();
+                        published.Start(6);
+                        // Stopped, engine running, and the channel already open.
+                        published.AddSample(GuidedSample(now, 0, 0, 40, 1200, 0, 40, true));
+                        for (int guard = 0; guard < 40
+                            && published.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            published.AddSample(GuidedSample(now, 4, 0, 40, 4000, 80, 100, true));
+                            published.Next();
+                        }
+                        published.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                        published.AddSample(GuidedSample(now.AddMilliseconds(100), 4, 0, 70, 5200, 80, 210, true));
+                        published.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 0, 5200, 79, 90, true));
+                        published.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
+                        True(published.GetSnapshot().Result.Contains("not reporting the pedal alone"),
+                            "a throttle already open at rest disqualifies the spike as evidence");
                     }
 
                     // Rev-matching does not stop at the gear change. The driver
