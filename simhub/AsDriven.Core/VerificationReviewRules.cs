@@ -55,10 +55,19 @@ namespace AsDriven.Core
             return !string.Equals(simulator, "ac", StringComparison.Ordinal)
                 && !string.Equals(simulator, "acc", StringComparison.Ordinal)
                 && !string.Equals(simulator, "raceroom", StringComparison.Ordinal)
-                // rFactor 2 publishes no engine torque either, which its first
-                // drive reported directly rather than being assumed.
-                && !string.Equals(simulator, "rfactor2", StringComparison.Ordinal)
                 && !string.Equals(simulator, "other", StringComparison.Ordinal);
+
+            // rFactor 2 was listed here on the strength of one drive that
+            // reported no engine torque, and taken off it again when a Radical
+            // SR3 in the same simulator produced a shift-local torque
+            // interruption. The channel exists; the first car simply did not
+            // publish through it. One drive is a fact about one car, and this
+            // list is a claim about a simulator - the same over-generalisation
+            // the registration note warns about, made while writing the note.
+            //
+            // The per-attempt message already separates "published no torque"
+            // from "torque held through the change", which is the honest answer and
+            // does not need a rule to say it.
         }
     }
 }

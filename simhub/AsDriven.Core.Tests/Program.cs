@@ -139,10 +139,13 @@ namespace AsDriven.Core.Tests
                     "canonicalises the common abbreviation to rf2");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("rFactor"),
                     "never takes the original rFactor for its sequel");
-                // Its first drive reported no engine torque, so the cut is
-                // unmeasurable there for the same reason as AC, ACC and RaceRoom.
-                False(VerificationReviewRules.AutomaticCutIsMeasurable("rfactor2"),
-                    "does not ask rFactor 2 to settle a cut its telemetry cannot expose");
+                // Its first drive reported no engine torque and this said the
+                // cut was unmeasurable there. A Radical SR3 in the same
+                // simulator then produced a shift-local torque interruption, so
+                // the channel exists and the first car simply did not publish
+                // through it. One drive is a fact about one car.
+                True(VerificationReviewRules.AutomaticCutIsMeasurable("rfactor2"),
+                    "keeps the rFactor 2 cut review, which one of its cars has answered");
                 // Nothing suggests its gearbox accepts every downshift, and the
                 // throttle channel was measured reading zero at rest, so its
                 // downshift result still counts until something shows otherwise.

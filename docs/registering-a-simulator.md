@@ -111,10 +111,20 @@ It reports what it found rather than what it assumed:
 - a clutch caveat appears only when the clutch channel disagreed with the test,
   and names the resting reading when it has one.
 
-rFactor 2 was registered this way on 2026-08-26 and one drive settled two of the
-three: its throttle reads 0% at rest and its clutch raised no caveat, so both
-channels follow the pedal, and it published no engine torque, so its cut joins
-AC, ACC and RaceRoom as unmeasurable.
+rFactor 2 was registered this way on 2026-08-26 and its first drive was read too
+confidently. The throttle reading of 0% at rest and the absent clutch caveat did
+settle that both channels follow the pedal. The same drive reported no engine
+torque, and its cut was added to the unmeasurable list on that alone - then
+removed again hours later when a Radical SR3 in the same simulator produced a
+shift-local torque interruption. The channel exists; the first car did not
+publish through it.
+
+**One drive is a fact about one car.** A channel that reads wrong at rest is a
+property of the simulator and generalises immediately. A channel that produced
+nothing on one shift does not: it may be the simulator, the car, or that shift.
+Wait for the second car before writing a rule, and prefer the per-attempt
+message, which already separates "published no torque" from "torque held through
+the change" without needing one.
 
 **Registration flips the default.** An unregistered simulator is assumed
 unmeasurable on every count, because nothing is known about it. A registered one
