@@ -7939,6 +7939,339 @@
           "digest": "68ad60f430c08f2c72f0161b9f2f76316e285ae6b891b16114cd5c3c68bcab3c"
         }
       }
+    },
+    {
+      "source_id": "kunos.assetto-corsa-evo.honda-s2000-2003",
+      "title": "assetto corsa evo",
+      "publisher": "KUNOS Simulazioni",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Assetto Corsa EVO roster page identifying the road-car entry as Honda S-2000 (2003). ROAD roster: “Honda S-2000 (2003)” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. This identifies the exact official simulator content and model year. It is not used as proof of real-car clutch or shifting technique."
+    },
+    {
+      "source_id": "honda.2003-s2000-specifications",
+      "title": "Honda｜S2000（2003年9月終了モデル）",
+      "publisher": "Honda Motor Co., Ltd.",
+      "url": "https://www.honda.co.jp/auto-archive/s2000/2003/shogen.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Honda's official 2003 S2000 model archive and specifications page for the 2001-2003 model period, including the LA-AP1 type and production transmission and clutch specification. 主要諸元, lines 14-17: “トランスミッション 6速マニュアル; 車名・型式 ホンダ・LA-AP1” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. 主要諸元, lines 33-40: “エンジン型式 F20C; 総排気量 1,997” Reviewed for /identity/real_world_identity_notes. 動力伝達・走行装置, lines 54-57: “クラッチ形式 乾式 単板 ダイヤフラム; 変速機形式 常時噛合式; 変速機操作方式 フロア･チェンジ式” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /identity/real_world_identity_notes. 主要諸元, lines 66-70: “ステアリング装置形式 ラック･ピニオン式; ハンドル最大回転数 2.4” Reviewed for /authentic_controls/steering/wheel_rim/shape. The Japanese technical terms are retained as printed; the relevant meanings are six-speed manual, Honda LA-AP1 type, dry single-plate diaphragm clutch, constant-mesh transmission, and floor-shift operation. The steering locator is included as reviewed context but does not establish the database rim-shape value."
+    },
+    {
+      "source_id": "honda.2003-s2000-owners-manual",
+      "title": "2003 S2000 Online Reference Owner's Manual",
+      "publisher": "American Honda Motor Co., Inc.",
+      "url": "https://techinfo.honda.com/rjanisis/pubs/OM/AH/AS20303OM/enu/S20303OM.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Honda's exact-year 2003 U.S. owner's manual, including starting procedure, gearshift gate, and manual-transmission operating instructions. printed p. 136, Starting the Engine: “Push the clutch pedal down all the way” Reviewed for /authentic_controls/transmission/standing_start_clutch. printed p. 137, 6-speed Manual Transmission and Gearshift Lever Positions: “The manual transmission is synchronized in all forward gears ... When shifting up or down, make sure you push the clutch pedal down all the way” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. printed p. 137, gearshift gate and reverse-lockout instructions: “The 6-speed manual transmission has a lockout so you cannot shift directly from Fifth to Reverse instead of Sixth” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. printed pp. 137-138, recommended shift points and engine-speed limiter: “Before downshifting, make sure the engine speed will not go into the tachometer's red zone in the lower gear” Reviewed for /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut. The manual directly establishes synchronized forward gears, the need to depress the clutch for both running upshifts and downshifts, and the starting interlock. It does not establish rev-matching, a required throttle lift, automatic cut, automatic blip, or manual blip."
+    },
+    {
+      "source_id": "as-driven.repository.honda-s2000-ap1-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated Honda S2000 AP1 2003 record. data/v1/cars filename and identity scan: “No Honda S2000 AP1 2003 record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0",
+      "title": "Live AC-EVO Honda S2000 AP1 guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://github.com/Milky28/as-driven/issues/17",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca by Jason Kinslow; AC-EVO unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "kunos.assetto-corsa-evo.release-0-4.ferrari-f40-lm",
+      "title": "Assetto Corsa EVO Release 0.4 Out Now on Steam",
+      "publisher": "KUNOS Simulazioni",
+      "url": "https://assettocorsa.gg/assetto-corsa-evo-release-0-4-out-now/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official AC EVO 0.4 release announcement naming the Ferrari F40 LM and describing its early-1990s competition development and racing specification. New Cars and Detailed Vehicle Specifications, Ferrari F40 LM: “Ferrari F40 LM: Developed in the early 90s for competition like IMSA” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. Release 0.4 roster description: “the GT roster expands with the Ferrari F40 LM” Reviewed for /identity/class. This establishes the exact official simulator content and its broad period/use. It is not used as proof of real-car clutch or shifting technique.",
+      "published_or_updated_at": "2025-12-04"
+    },
+    {
+      "source_id": "mitorosso.ferrari-f40-lm-michelotto",
+      "title": "F 40 LM Michelotto | Mitorosso.com - Ferrari Online Magazine",
+      "publisher": "Mitorosso",
+      "url": "https://mitorosso.com/f-40-lm-michelotto/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical reference for the Michelotto F40 LM family, including production-period range, race body, gearbox count, and its reported unsynchronized transmission description. General data and technical specifications: “Year/s of production 1990 - 1992; Body type Race Berlinetta; Gearbox 5 gears + rev., unsynchronised” Reviewed for /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. This is secondary evidence and its production range is used as period context, not as a claim that every F40 LM example had one identical setup. Its unsynchronized wording is not silently normalized to dogbox because dog engagement is not established.",
+      "published_or_updated_at": "2013-01-10"
+    },
+    {
+      "source_id": "supercars.ferrari-f40-lm-1989-guide",
+      "title": "1989 Ferrari F40 LM Guide: History, Specifications, & Performance",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1989-ferrari-f40-lm-guide-history-specifications-performance/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary guide for the 1989 F40 LM competition development, including Michelotto provenance, production count, race transmission description, and triple-plate hydraulic clutch. Introduction and historical overview: “the Ferrari F40 LM ... race-spec variant ... specced to satisfy IMSA regulations” Reviewed for /identity/class, /identity/real_world_identity_notes. Engine & Performance, transmission discussion: “5-speed manual gearbox ... triple-plate hydraulic clutch” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /identity/real_world_identity_notes. Production history: “only 19 Ferrari F40 LM examples ever made” Reviewed for /identity/real_world_identity_notes. This source supports the competition family and physical hydraulic clutch, but does not supply a complete exact-year driver procedure or a gear-gate diagram for the observed chassis."
+    },
+    {
+      "source_id": "as-driven.repository.ferrari-f40-lm-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated Ferrari F40 LM record. data/v1/cars filename and identity scan: “No Ferrari F40 LM record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac-evo.local-live-ferrari-f40-lm-controls.0.9.0",
+      "title": "Live AC-EVO Ferrari F40 LM guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://github.com/Milky28/as-driven/issues/18",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.ferrari-f40-lm.20260826t041724725z-76bbe5fe by Jason Kinslow; AC-EVO unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "alfa-romeo.museo.giulia-sprint-gta",
+      "title": "Giulia Sprint GTA",
+      "publisher": "Museo Storico Alfa Romeo",
+      "url": "https://www.museoalfaromeo.com/it-it/collezione/Pages/GiuliaSprintGTA.aspx",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Alfa Romeo museum entry for the Giulia Sprint GTA, including engine, transmission, clutch, body, and production details. vehicle details, transmission section: “Trazione posteriore, frizione monodisco a secco, 5 marce + RM” Reviewed for /identity/model, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. vehicle details, engine and body sections: “1570 cc (78x82 mm); Coupé (Bertone); Vetture Prodotte 500” Reviewed for /identity/model, /identity/class, /identity/real_world_identity_notes. Primary manufacturer source. The page gives physical clutch presence and five forward speeds, but does not state clutch timing, throttle technique, gate order, or wheel-rim topology."
+    },
+    {
+      "source_id": "fia.historicdb.giulia-sprint-gta-1395",
+      "title": "Alfa Romeo Giulia Sprint GTA, homologation number 1395",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/car/alfa-romeo-giulia-sprint-gta-0",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: FIA Historic Database record for the Alfa Romeo Giulia Sprint GTA homologation identity and date. vehicle record fields: “Alfa Romeo Giulia Sprint GTA; Group T; 1570; date of homologation August 2, 1965” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. Primary governing-body record. The database page is consultation-only and its displayed group label is retained as published; it establishes the exact homologated model and date, not driver technique."
+    },
+    {
+      "source_id": "stellantis.alfa-romeo.gta-1965-history",
+      "title": "Alfa Romeo wins Motor Klassik Award",
+      "publisher": "Alfa Romeo / Stellantis",
+      "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/alfa-romeo-wins-motor-klassik-award",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Manufacturer history of the 1965 Giulia Sprint 1600 GTA, its lightweight construction, touring-car purpose, and competition modifications. article paragraphs 23-29: “Presented in 1965; the production model was officially known as the Giulia Sprint 1600 GTA” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/real_world_identity_notes. article paragraphs 25-31: “basic model for one of the most successful touring cars of the 1960s; racing versions had a 90-liter tank, oil cooler, roll cage, ZF limited-slip differential” Reviewed for /identity/class, /identity/real_world_identity_notes, /identity/confusion_risks. article paragraph 29: “the sports steering wheel” Reviewed for /authentic_controls/steering/wheel_rim/shape. Primary manufacturer source. The sports-steering-wheel wording is not specific enough to assign a database rim shape, so the wheel-shape claim remains not-established.",
+      "published_or_updated_at": "2025-03-27"
+    },
+    {
+      "source_id": "automotivemasterpieces.1965-giulia-sprint-gta",
+      "title": "Technical Specifications: 1965 Alfa Romeo Giulia Sprint GTA",
+      "publisher": "Automotive Masterpieces",
+      "url": "https://automotivemasterpieces.com/cars/AU-27229/technical-specifications",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Technical specification entry for a chassis-identified 1965 Alfa Romeo Giulia Sprint GTA, including five-speed fully synchronized gearbox and hydraulic dry single-disc clutch. technical specifications, gearbox fields: “Gearbox Number of forward speed 5; Gearbox Synchronized Speed fully” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. technical specifications, transmission fields: “Transmission Clutch Dry single disc Hydraulic” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Secondary exact-model corroboration. It establishes hardware for one 1965 GTA example, but not period driver technique or wheel-rim topology."
+    },
+    {
+      "source_id": "rememberroad.alfa-gta-1986-driving-impression",
+      "title": "Alfa Romeo GTA: Less is more",
+      "publisher": "Remember Road, reproducing an AutoWeek driving impression",
+      "url": "https://rememberroad.com/alfa-romeo-gta-less-is-more/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period driving impression of a Giulia Sprint GTA, including the cabin and selector description. article line describing the interior: “the Alfa-typical dogleg shifter” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. article identity and competition context: “the 'Giulia sprint GTA'; a lightweight homologation special” Reviewed for /identity/model, /identity/class, /identity/real_world_identity_notes. Secondary period driving evidence. It directly identifies a dogleg shifter but does not provide a gate diagram or establish whether first gear was down-left or down-right.",
+      "published_or_updated_at": "1986-04-14"
+    },
+    {
+      "source_id": "as-driven.repository.giulia-sprint-gta-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-25",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated Alfa Romeo Giulia Sprint GTA record. data/v1/cars identity scan: “No curated Alfa Romeo Giulia Sprint GTA 1965 record is present” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "ac-evo.local-live-alfa-romeo-giulia-sprint-gta-controls.0.9.0",
+      "title": "Live AC-EVO Alfa Romeo Giulia Sprint GTA guided-verification drive",
+      "publisher": "Local AC-EVO observation",
+      "url": "https://github.com/Milky28/as-driven/issues/16",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 by Jason Kinslow; AC-EVO unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "raceroom.official.alfa-romeo-156-super-touring",
+      "title": "Alfa Romeo 156 Super Touring - Store - RaceRoom Racing Experience",
+      "publisher": "RaceRoom Racing Experience",
+      "url": "https://game.raceroom.com/de/store/cars/super-touring/alfa-romeo/alfa-romeo-156-super-touring",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official RaceRoom store page for the exact observed content identity, including its displayed name, 1998 date, Super Touring context, engine and drivetrain summary. Vehicle title and facts: “Alfa Romeo 156 Super Touring ... Jahr:1998 ... Motor:2-litre 4-cylinder ... Antrieb:FWD” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. This source identifies the exact simulator content and its displayed period. It is not used as proof of real-car shifting technique or wheel hardware."
+    },
+    {
+      "source_id": "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+      "title": "Alfa Romeo 156 Superturismo",
+      "publisher": "Stellantis Heritage",
+      "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-156-superturismo",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Manufacturer heritage account of the Alfa Romeo 156 Superturismo, explicitly labeled 1998, its Super Touring history, transmission construction, and distinction from the later 156 GTA Super 2000. Story body, transmission paragraph: “It had a six-speed sequential dog ring gearbox and self-locking differential.” Reviewed for /identity/model, /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Vehicle caption and competition-history paragraphs: “Alfa Romeo 156 Superturismo - 1998 ... The Super Touring class was revamped in 2000 within the European Touring Car Championship (ETCC) and Giovanardi led once again. The car evolved into the 156 GTA Super 2000” Reviewed for /identity/display_name, /identity/year, /identity/class, /identity/real_world_identity_notes. This is the primary real-world identity and gearbox source. It does not describe the clutch pedal, driver procedure, shift lever location, wheel rim, or electronic shift aids."
+    },
+    {
+      "source_id": "stellantis-media.alfa-156-superturismo-1999-04-29",
+      "title": "ALFA 156 SUPERTURISMO",
+      "publisher": "Alfa Romeo / Stellantis Media",
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-156-superturismo",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Contemporary Alfa Romeo technical description of the 156 Superturismo, including its X-Trac six-speed sequential transmission, front engagement, and carbon twin-plate clutch. Transmission description, paragraphs 20-21: “La trasmissione, studiata in collaborazione con X-TRAC, è a sei marce, con innesti frontali e cambio a comando sequenziale.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Technical characteristics, Transmission table: “frizione | in carbonio, bidisco ... cambio | X-TRAC, 6 marce + retromarcia” Reviewed for /authentic_controls/transmission/forward_gears, /identity/real_world_identity_notes. The Italian terms are retained as printed: the manufacturer describes front engagement and sequential command, and separately lists a carbon twin-plate clutch. It does not prescribe the driver's clutch or throttle technique.",
+      "published_or_updated_at": "1999-04-29"
+    },
+    {
+      "source_id": "as-driven.repository.alfa-romeo-156-super-touring-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing curated Alfa Romeo 156 Super Touring or Superturismo record. data/v1/cars and data/v1/index.json identity scan: “No Alfa Romeo 156 Super Touring or Superturismo record is present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision and is not real-world evidence."
+    },
+    {
+      "source_id": "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14",
+      "title": "Live RACEROOM Alfa Romeo 156 Super Touring guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/24",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 by Jason Kinslow; RACEROOM unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "raceroom.official.saleen-s7r-store",
+      "title": "Store - RaceRoom Racing Experience",
+      "publisher": "RaceRoom Racing Experience",
+      "url": "https://game.raceroom.com/store/cars/all/saleen",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official RaceRoom manufacturer listing showing Saleen S7R under the GTR 1 class. Saleen manufacturer filter and car list: “Saleen ... GTR 1 ... Saleen S7R” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/class. This establishes the exact simulator label and class only. It does not establish the real car's year-specific hardware or driving technique."
+    },
+    {
+      "source_id": "saleen.official.2001-inaugural-s7r-season",
+      "title": "2001: Inaugural Saleen S7R Season",
+      "publisher": "Saleen Automotive",
+      "url": "https://www.saleen.com/timeline/2001-inaugural-saleen-s7r-season/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Saleen's official history of the S7R's inaugural 2001 race season and the series in which the car competed. Article body: “2001 marked the inaugural race season for the newly debut Saleen S7 ... S7R takes victories in its' class across multiple series.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. The official source establishes the race-family identity and first competition season, but does not specify the exact gearbox revision or cockpit interface represented by the submitted observation.",
+      "author": "Dan Passe"
+    },
+    {
+      "source_id": "dailysportscar.saleen-s7r-history-2020",
+      "title": "The Saleen S7R, A ‘Beast’ That Needed Taming",
+      "publisher": "DailySportscar",
+      "url": "https://www.dailysportscar.com/2020/05/15/the-saleen-s7r-a-beast-that-needed-taming.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective interview with S7R driver Johnny Mowlem describing the early H-pattern and later sequential gearbox revisions and associated clutch technique. Johnny Mowlem interview, gearbox history: “In the early years it was significantly different, it had a H-pattern gearbox. In the latter years it ran with a sequential one.” Reviewed for /identity/real_world_identity_notes, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Johnny Mowlem interview, early-car technique: “using the clutch on the way up the gears as well as obviously in the way down ... you needed to be able to heel and toe perfectly on the downshifts” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip. This source is useful for the family-level revision split. It is not used to assign one revision to the unversioned RaceRoom observation.",
+      "author": "Stephen Kilbey",
+      "published_or_updated_at": "2020-05-15"
+    },
+    {
+      "source_id": "as-driven.repository.saleen-s7r-gt1-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan and exact inspection of the existing Saleen S7-R GT1 curated record. data/v1/cars/saleen-s7-r-gt1.json and data/v1/index.json: “The curated record saleen-s7-r-gt1 has manufacturer Saleen, model S7-R, class GT1 2005, and six forward gears; no separate Saleen S7R record is present.” Reviewed for /identity/record_action, /identity/record_id, /identity/display_name, /identity/manufacturer, /identity/model, /identity/class. Repository context supports the use-existing decision and exact record id. It is not independent real-world evidence."
+    },
+    {
+      "source_id": "raceroom.local-live-saleen-s7r-controls.0.9.8.14",
+      "title": "Live RACEROOM Saleen S7R guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/25",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 by Jason Kinslow; RACEROOM unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "bmw-motorsport.new-m4-gt3-2021",
+      "title": "BMW M Motorsports presents the new BMW M4 GT3.",
+      "publisher": "BMW M Motorsport",
+      "url": "https://www.press.bmwgroup.com/usa/article/detail/T0334417EN_US/bmw-m-motorsports-presents-the-new-bmw-m4-gt3",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW's official 2021 announcement of the M4 GT3 customer race car, including its 2021 M4 Competition basis, transmission, clutch, and shared real/simulator steering wheel. Press release, opening description, 03.06.2021; lines 52-59 in the reviewed page: “BMW Motorsport is proud to announce the new state-of-the-art BMW M4 GT3 customer race car based on the recently launched 2021 M4 Competition Coupe.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/real_world_identity_notes. Transmission, Wheels and Tires; lines 115-118 in the reviewed page: “The transaxle design in the new BMW M4 GT3 is a sequential, straight-tooth 6-speed gearbox ... The clutch is electro-hydraulic for lower wear and is operated by steering wheel-mounted paddles. It features stall prevention and partially-automated start-up.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch. The new M4 GT3 Steering Wheel; lines 126-131 in the reviewed page: “The steering wheel in the new BMW M4 GT3 was developed jointly by BMW Motorsport and sim hardware producer FANATEC. This revolutionary wheel is the first of its kind that works both in a real car and on a simulator.” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights. The announcement is manufacturer evidence for the generation and transmission architecture. Its wheel section confirms a real-car steering wheel but does not establish the database's shape, display, shift-light, or open-top values.",
+      "published_or_updated_at": "2021-06-03"
+    },
+    {
+      "source_id": "bmw-motorsport.2024-dtm-m4-gt3-lineup",
+      "title": "DTM: Schubert Motorsport to field three BMW M4 GT3s in 2024 – Three DTM champions to compete in the same team.",
+      "publisher": "BMW M Motorsport",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0439925EN/dtm%3A-schubert-motorsport-to-field-three-bmw-m4-gt3s-in-2024-%E2%80%93-three-dtm-champions-to-compete-in-the-same-team?language=en",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW's official 2024 DTM entry announcement identifying the cars fielded by Schubert Motorsport as BMW M4 GT3s. Press release headline and opening paragraph, 27.02.2024: “Schubert Motorsport will field three BMW M4 GT3s ... for the 2024 DTM season.” Reviewed for /identity/display_name, /identity/model, /identity/class, /identity/real_world_identity_notes. This source resolves the DTM suffix as series context and confirms that the 2024 DTM BMW entries were M4 GT3 cars. It does not add separate DTM-specific controls.",
+      "author": "Andrea Schwab",
+      "published_or_updated_at": "2024-02-27"
+    },
+    {
+      "source_id": "as-driven.repository.bmw-m4-gt3-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository inspection of the existing BMW M4 GT3 curated record and index. data/v1/cars/bmw-m4-gt3.json and data/v1/index.json: “The curated record bmw-m4-gt3 has display name BMW M4 GT3, manufacturer BMW, model M4 GT3, year from 2022, class GT3, and no separate BMW M4 GT3 DTM real-car record.” Reviewed for /identity/record_action, /identity/record_id, /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. Repository context supports the use-existing decision and exact record id. It is not independent real-world evidence."
+    },
+    {
+      "source_id": "raceroom.local-live-bmw-m4-gt3-dtm-controls.0.9.8.14",
+      "title": "Live RACEROOM BMW M4 GT3 DTM guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/26",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 by Jason Kinslow; RACEROOM unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

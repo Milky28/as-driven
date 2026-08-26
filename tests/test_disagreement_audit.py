@@ -192,13 +192,23 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # without a blip. Provisional is the honest status: a departure
                 # from a baseline that a period workshop manual could still move.
                 "porsche-911-rsr-1974--transmission-downshift-manual-blip",
+                # RaceRoom joined the Saleen as a third simulator and disagrees
+                # with the other two on both counts. It detected a throttle
+                # spike where AMS2 and AC detect none, and its cockpit shows a
+                # D-shaped rim where both others show a round one. Neither is
+                # settled: the blip reading carries the drive's own warning that
+                # the clutch channel may have been reporting the pedal, and a
+                # rim that differs between simulators is either a different model
+                # or a misread. Provisional is the honest status for both.
+                "saleen-s7-r-gt1--transmission-downshift-automatic-blip",
+                "saleen-s7-r-gt1--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
                 "authentic-baseline-open": 15,
-                "provisional-departure": 5,
+                "provisional-departure": 7,
                 "supported-departure": 7,
             },
             self.checked_in["summary"]["by_status"],

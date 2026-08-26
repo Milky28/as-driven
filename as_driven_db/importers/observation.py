@@ -172,15 +172,29 @@ def _slug(name: str) -> str:
     return slug or "unknown"
 
 
-def derive_approved_controls(record: dict[str, Any]) -> dict[str, Any]:
+def derive_approved_controls(
+    record: dict[str, Any], simulator: str | None = None
+) -> dict[str, Any]:
     """Summarize a curated record the way ``validate`` cross-checks approvals.
 
     Mirrors ``_validate_car_approval`` so a generated approval agrees with its
     record. ``running_shift_clutch`` is omitted when the upshift and downshift
     clutch requirements differ, because one value cannot summarize them.
+
+    ``simulator`` names the entry being approved. A staged bundle carries one
+    entry and does not need it, but a record a second simulator has merged into
+    carries several, and validate reads the behavior fields from the entry whose
+    approval this is. Taking entry zero there summarised whichever simulator
+    happened to be curated first.
     """
     transmission = record["authentic_controls"]["transmission"]
-    behavior = record["simulators"][0]["behavior"]
+    entries = record["simulators"]
+    entry = entries[0]
+    if simulator is not None:
+        entry = next(
+            (item for item in entries if item.get("simulator") == simulator), entries[0]
+        )
+    behavior = entry["behavior"]
     wheel = behavior["wheel_rim_type"]
     controls: dict[str, Any] = {
         "forward_gears": transmission["forward_gears"],

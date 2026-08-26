@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.3",
-  "generated_at": "2026-08-25",
+  "dataset_version": "0.5.9",
+  "generated_at": "2026-08-26",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -11,17 +11,17 @@
   ],
   "summary": {
     "cars_with_disagreements": 20,
-    "findings": 27,
+    "findings": 29,
     "by_status": {
       "authentic-baseline-open": 15,
-      "provisional-departure": 5,
+      "provisional-departure": 7,
       "supported-departure": 7
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 6,
+      "hardware-choice": 7,
       "launch-technique": 8,
-      "running-shift-technique": 9
+      "running-shift-technique": 10
     }
   },
   "findings": [
@@ -1463,6 +1463,91 @@
       }
     },
     {
+      "finding_id": "saleen-s7-r-gt1--transmission-downshift-automatic-blip",
+      "record_id": "saleen-s7-r-gt1",
+      "display_name": "Saleen S7-R GT1",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/downshift/automatic_blip",
+      "field": "Automatic blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "no",
+        "display_value": "No",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+            "fia.saleen-s7.gt-013",
+            "racecar-engineering.saleen-s7r.2010",
+            "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "rss.gt-legends-championship.pack-v6",
+            "fia.saleen-s7.gt-013",
+            "racecar-engineering.saleen-s7r.2010",
+            "ac.local-live-gt-shadow-v8-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "raceroom",
+          "label": "RaceRoom Racing Experience",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "0.9.8.14",
+          "verified_at": "2026-08-26",
+          "confidence": "medium",
+          "source_refs": [
+            "raceroom.official.saleen-s7r-store",
+            "saleen.official.2001-inaugural-s7r-season",
+            "racecar-engineering.saleen-s7r.2010",
+            "motortrend.saleen-s7r-first-drive-2001",
+            "dailysportscar.saleen-s7r-history-2020",
+            "as-driven.repository.saleen-s7r-gt1-record-scan",
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac"
+        ],
+        "departing_simulators": [
+          "raceroom"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for automatic blip before publishing a benchmark verdict."
+      }
+    },
+    {
       "finding_id": "saleen-s7-r-gt1--transmission-downshift-manual-blip",
       "record_id": "saleen-s7-r-gt1",
       "display_name": "Saleen S7-R GT1",
@@ -1516,6 +1601,25 @@
             "racecar-engineering.saleen-s7r.2010",
             "ac.local-live-gt-shadow-v8-controls.14923034"
           ]
+        },
+        {
+          "simulator": "raceroom",
+          "label": "RaceRoom Racing Experience",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "0.9.8.14",
+          "verified_at": "2026-08-26",
+          "confidence": "medium",
+          "source_refs": [
+            "raceroom.official.saleen-s7r-store",
+            "saleen.official.2001-inaugural-s7r-season",
+            "racecar-engineering.saleen-s7r.2010",
+            "motortrend.saleen-s7r-first-drive-2001",
+            "dailysportscar.saleen-s7r-history-2020",
+            "as-driven.repository.saleen-s7r-gt1-record-scan",
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
         }
       ],
       "adjudication": {
@@ -1524,10 +1628,96 @@
           "ams2"
         ],
         "departing_simulators": [
-          "ac"
+          "ac",
+          "raceroom"
         ],
         "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
         "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "saleen-s7-r-gt1--steering-wheel-rim-shape",
+      "record_id": "saleen-s7-r-gt1",
+      "display_name": "Saleen S7-R GT1",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "round",
+        "display_value": "Round rim",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+            "fia.saleen-s7.gt-013",
+            "racecar-engineering.saleen-s7r.2010",
+            "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-23",
+          "confidence": "high",
+          "source_refs": [
+            "rss.gt-legends-championship.pack-v6",
+            "fia.saleen-s7.gt-013",
+            "racecar-engineering.saleen-s7r.2010",
+            "ac.local-live-gt-shadow-v8-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "raceroom",
+          "label": "RaceRoom Racing Experience",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "0.9.8.14",
+          "verified_at": "2026-08-26",
+          "confidence": "medium",
+          "source_refs": [
+            "raceroom.official.saleen-s7r-store",
+            "saleen.official.2001-inaugural-s7r-season",
+            "racecar-engineering.saleen-s7r.2010",
+            "motortrend.saleen-s7r-first-drive-2001",
+            "dailysportscar.saleen-s7r-history-2020",
+            "as-driven.repository.saleen-s7r-gt1-record-scan",
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac"
+        ],
+        "departing_simulators": [
+          "raceroom"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
       }
     },
     {

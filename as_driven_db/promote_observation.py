@@ -1292,6 +1292,17 @@ def promote_observations(
                 "curated record exists to correct"
             )
 
+        # The approval is cross-checked against the record the entry landed in,
+        # not against the proposal it was derived from. On a merge those differ:
+        # the real-car baseline belongs to the record and may already hold values
+        # this drive did not settle, so an approval built before the merge says
+        # "unknown" where the record says "sequential-stick" and fails the gate
+        # for having learned less than the first simulator did. Six fields the
+        # approval schema requires cannot simply be dropped, so the summary is
+        # taken again from the merged record and the entry now in it.
+        approval["approved_controls"] = derive_approved_controls(
+            record, simulator=simulator_id
+        )
         approval["dataset_version"] = dataset_version
         approval["simulator"] = simulator_id
         approval_path = (

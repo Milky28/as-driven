@@ -1,0 +1,333 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "alfa-romeo-156-super-touring",
+  "identity": {
+    "display_name": "Alfa Romeo 156 Superturismo",
+    "manufacturer": "Alfa Romeo",
+    "model": "156 Superturismo",
+    "year": {
+      "label": "1998 Alfa Romeo 156 Superturismo"
+    },
+    "class": "Super Touring",
+    "real_world_identity_notes": "The RaceRoom identity maps to the 1998 Alfa Romeo 156 Superturismo: the factory 2.0-litre Twin Spark Super Touring competition car associated with Nordauto Engineering. Stellantis Heritage distinguishes this 1998 Superturismo from the later 156 GTA Super 2000 that evolved for the ETCC. The reviewed manufacturer sources establish a six-speed sequential dog-ring gearbox and a carbon twin-plate clutch, but do not establish the installed shift interface, starting procedure, running-shift clutch technique, rev matching, or steering-rim hardware."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "unknown",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: dogbox; shift pattern: sequential.",
+      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "RaceRoom Racing Experience unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "raceroom",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Alfa Romeo 156 Super Touring"
+        },
+        {
+          "kind": "internal-id",
+          "value": "13049,Alfa Romeo 156 Super Touring"
+        },
+        {
+          "kind": "class-id",
+          "value": "Super Touring"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in RACEROOM unknown via guided verification observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+          ]
+        }
+      ],
+      "verified_game_version": "0.9.8.14",
+      "verified_at": "2026-08-26",
+      "source_refs": [
+        "raceroom.official.alfa-romeo-156-super-touring",
+        "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+        "stellantis-media.alfa-156-superturismo-1999-04-29",
+        "as-driven.repository.alfa-romeo-156-super-touring-record-scan",
+        "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "RaceRoom's official vehicle page names the observed content Alfa Romeo 156 Super Touring and dates it to 1998. Stellantis Heritage identifies the corresponding Alfa Romeo 156 Superturismo as a 1998 Super Touring car and explicitly describes its six-speed sequential dog-ring gearbox; an Alfa Romeo/Stellantis technical release independently specifies the X-Trac six-speed sequential transmission and carbon twin-plate clutch. The repository contains no existing Alfa Romeo 156 Super Touring record, so the proposal is create-new."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "raceroom.official.alfa-romeo-156-super-touring",
+          "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+          "stellantis-media.alfa-156-superturismo-1999-04-29",
+          "as-driven.repository.alfa-romeo-156-super-touring-record-scan",
+          "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+        ],
+        "confidence": "high",
+        "basis": "RaceRoom's official vehicle page names the observed content Alfa Romeo 156 Super Touring and dates it to 1998. Stellantis Heritage identifies the corresponding Alfa Romeo 156 Superturismo as a 1998 Super Touring car and explicitly describes its six-speed sequential dog-ring gearbox; an Alfa Romeo/Stellantis technical release independently specifies the X-Trac six-speed sequential transmission and carbon twin-plate clutch. The repository contains no existing Alfa Romeo 156 Super Touring record, so the proposal is create-new."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "raceroom.official.alfa-romeo-156-super-touring",
+          "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+          "stellantis-media.alfa-156-superturismo-1999-04-29",
+          "as-driven.repository.alfa-romeo-156-super-touring-record-scan",
+          "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+        ],
+        "confidence": "high",
+        "basis": "Stellantis Heritage identifies a six-speed gearbox, and the contemporary Alfa Romeo technical table specifies X-Trac, six forward gears plus reverse. The manufacturer heritage record explicitly calls the transmission a sequential dog ring gearbox. The contemporary technical release independently describes front engagement and sequential command; this is explicit dog-ring evidence, not an inference from unsynchronized wording. Both manufacturer sources describe sequential gear selection; the heritage source identifies the six-speed unit as a sequential dog-ring gearbox. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-08-26"
+}

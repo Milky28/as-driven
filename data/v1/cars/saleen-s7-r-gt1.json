@@ -147,6 +147,247 @@
         "basis": "The fingerprinted RSS Shadow v3 package is an American V8 period GT with an explicitly Saleen-labeled skin and 2003/2005 FIA GT team entries. FIA homologation independently establishes the Saleen S7 competition identity, while specialist evidence supports the sequential transmission family. The exact AC behavior and cockpit were directly observed."
       },
       "display_name": "GT Shadow V8"
+    },
+    {
+      "simulator": "raceroom",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Saleen S7R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "1686,Saleen S7R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GTR 1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in RACEROOM unknown via guided verification observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+          ]
+        }
+      ],
+      "verified_game_version": "0.9.8.14",
+      "verified_at": "2026-08-26",
+      "source_refs": [
+        "raceroom.official.saleen-s7r-store",
+        "saleen.official.2001-inaugural-s7r-season",
+        "racecar-engineering.saleen-s7r.2010",
+        "motortrend.saleen-s7r-first-drive-2001",
+        "dailysportscar.saleen-s7r-history-2020",
+        "as-driven.repository.saleen-s7r-gt1-record-scan",
+        "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "RaceRoom officially lists Saleen S7R in its GTR 1 class. Saleen's own racing history identifies the S7R as its race version and dates its inaugural competition season to 2001; specialist technical reporting identifies a six-speed sequential S7-R revision introduced in 2002, while a period MotorTrend drive documents an early S7R with a six-speed straight-cut race transmission and short-throw shifter. DailySportscar records the family transition from early H-pattern to later sequential gearboxes. The checked-out repository already contains the compatible curated record saleen-s7-r-gt1, so this observation should join that record rather than create a duplicate."
+      }
     }
   ],
   "provenance": {
@@ -225,6 +466,32 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "raceroom.official.saleen-s7r-store",
+          "saleen.official.2001-inaugural-s7r-season",
+          "racecar-engineering.saleen-s7r.2010",
+          "motortrend.saleen-s7r-first-drive-2001",
+          "dailysportscar.saleen-s7r-history-2020",
+          "as-driven.repository.saleen-s7r-gt1-record-scan",
+          "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+        ],
+        "confidence": "medium",
+        "basis": "RaceRoom officially lists Saleen S7R in its GTR 1 class. Saleen's own racing history identifies the S7R as its race version and dates its inaugural competition season to 2001; specialist technical reporting identifies a six-speed sequential S7-R revision introduced in 2002, while a period MotorTrend drive documents an early S7R with a six-speed straight-cut race transmission and short-throw shifter. DailySportscar records the family transition from early H-pattern to later sequential gearboxes. The checked-out repository already contains the compatible curated record saleen-s7-r-gt1, so this observation should join that record rather than create a duplicate."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -232,6 +499,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-26",
   "driver_summary": "The Saleen S7-R, which Assetto Corsa lists as GT Shadow V8. Six-speed sequential, supported by specialist reporting and confirmed in the cockpit as a stick without paddles. The car cuts the upshift; blip every downshift yourself."
 }

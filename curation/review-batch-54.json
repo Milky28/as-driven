@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.4",
+  "approved_at": "2026-08-26",
+  "records": [
+    {
+      "record_id": "honda-s2000-ap1-2003",
+      "bundle": "build/review-cases/issue-17/staged.json",
+      "display_name": "Honda S2000 AP1 (2003)",
+      "class": "Road-going sports car",
+      "manufacturer": "Honda",
+      "model": "S2000 AP1",
+      "year": {
+        "from": 2003,
+        "to": 2003,
+        "label": "2003 Honda S2000 AP1"
+      },
+      "real_world_identity_notes": "The Assetto Corsa EVO roster identifies the content as Honda S-2000 (2003). Honda's exact 2003 archive identifies the production S2000 as type LA-AP1 and documents the F20C engine, six-speed manual, dry single-plate diaphragm clutch, constant-mesh transmission, and floor-shift operation. This is the road-going 2003 AP1 S2000, not the later AP2/F22C configuration, an AP1 facelift from another model year, a Type V with variable-ratio steering, or an aftermarket/race conversion.",
+      "real_world_source_refs": [
+        "kunos.assetto-corsa-evo.honda-s2000-2003",
+        "honda.2003-s2000-specifications",
+        "honda.2003-s2000-owners-manual",
+        "as-driven.repository.honda-s2000-ap1-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The official Assetto Corsa EVO roster supplies the exact model year, and Honda's 2003 model archive independently supplies the AP1 type code and production specifications. The 2003 Honda owner's manual supplies exact-year operating instructions for the manual transmission.",
+      "identity_basis": "The official Assetto Corsa EVO roster supplies the exact model year, and Honda's 2003 model archive independently supplies the AP1 type code and production specifications. The 2003 Honda owner's manual supplies exact-year operating instructions for the manual transmission.",
+      "specification_basis": "Honda explicitly instructs the driver to push the clutch pedal all the way down when shifting up or down. Honda's 2003 specification lists a six-speed manual transmission, and the owner's manual identifies the six-speed manual and its first-through-sixth shift sequence. Honda's 2003 specification calls the transmission constant-mesh, and the 2003 owner's manual explicitly says the manual transmission is synchronized in all forward gears. Honda specifies floor-shift operation, and the exact-year owner's manual documents the manual gearshift lever's multi-plane gate and reverse lockout. Together these establish a driver-operated H-pattern floor shifter rather than a sequential or paddle system. The 2003 owner's manual's gearshift-lever section identifies the six forward gears in the conventional 1-2 through 5-6 gate and separately describes reverse beside the neutral gate, establishing the standard H pattern. Honda's exact-year starting procedure requires the clutch pedal to be pushed all the way down before the engine can be started, and the car uses a conventional dry manual clutch. Honda explicitly states that the clutch pedal must be pushed all the way down when shifting up or down. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "upshift": {
+          "clutch": "required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version unknown. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2003 Honda S2000 AP1 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "control_notes": [
+        "The reviewed exact-scope sources establish transmission downshift clutch: required; forward gears: 6; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required; transmission upshift clutch: required.",
+        "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+        "Assetto Corsa EVO unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/17",
+      "live_source_notes": "Guided-verification observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca by Jason Kinslow; AC-EVO unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "honda-s2000-ap1",
+        "basis": "The official Assetto Corsa EVO roster supplies the exact model year, and Honda's 2003 model archive independently supplies the AP1 type code and production specifications. The 2003 Honda owner's manual supplies exact-year operating instructions for the manual transmission."
+      }
+    }
+  ]
+}

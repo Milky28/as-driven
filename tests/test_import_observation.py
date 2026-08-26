@@ -5,7 +5,10 @@ import unittest
 
 import json
 
-from as_driven_db.importers.observation import import_observation
+from as_driven_db.importers.observation import (
+    derive_approved_controls,
+    import_observation,
+)
 from as_driven_db.schema_validation import validate_instance
 from as_driven_db.validate import _validate_car_approval
 
@@ -336,3 +339,76 @@ class ImportObservationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ApprovalSummaryTests(unittest.TestCase):
+    """The approval is checked against the entry it approves, so it must read it."""
+
+    @staticmethod
+    def _record() -> dict:
+        def entry(simulator: str, rim: str, auto_blip: str) -> dict:
+            return {
+                "simulator": simulator,
+                "identities": [{"kind": "telemetry-name", "value": "Probe"}],
+                "behavior": {
+                    "shift_type": "sequential-stick",
+                    "auto_blip": auto_blip,
+                    "shift_cut": "yes",
+                    "wheel_rim_type": {"normalized": rim, "integrated_display": "no"},
+                },
+                "verified_game_version": "1.0",
+                "verified_at": "2026-08-26",
+                "source_refs": [],
+                "confidence": {"level": "high", "basis": "probe"},
+            }
+
+        return {
+            "record_id": "probe",
+            "authentic_controls": {
+                "transmission": {
+                    "forward_gears": 6,
+                    "shift_actuation": "sequential-stick",
+                    "shift_pattern": "sequential",
+                    "standing_start_clutch": "required",
+                    "upshift": {"clutch": "not-required", "throttle_lift": "not-required"},
+                    "downshift": {"clutch": "not-required", "manual_blip": "required"},
+                }
+            },
+            # The first-curated simulator, then the one this approval is for.
+            "simulators": [
+                entry("ams2", "round", "no"),
+                entry("raceroom", "gt-formula", "yes"),
+            ],
+        }
+
+    def test_the_summary_reads_the_entry_being_approved(self) -> None:
+        # Both behavior-derived fields must come from the raceroom entry. Taking
+        # entry zero summarised whichever simulator was curated first, which on
+        # a merged record is a different game entirely.
+        summary = derive_approved_controls(self._record(), simulator="raceroom")
+        self.assertEqual("gt-formula", summary["wheel_rim_shape"])
+        self.assertEqual("yes", summary["automatic_blip"])
+
+    def test_the_first_entry_would_have_given_different_answers(self) -> None:
+        # Guards the test above: if the fixture stopped distinguishing the two
+        # entries, that assertion would pass no matter which one was read.
+        summary = derive_approved_controls(self._record(), simulator="ams2")
+        self.assertEqual("round", summary["wheel_rim_shape"])
+        self.assertEqual("no", summary["automatic_blip"])
+
+    def test_without_a_simulator_it_reads_the_only_entry_a_bundle_has(self) -> None:
+        # A staged bundle carries one entry, which is why the old signature was
+        # sufficient until a second simulator merged into a record.
+        record = self._record()
+        record["simulators"] = record["simulators"][:1]
+        summary = derive_approved_controls(record)
+        self.assertEqual("round", summary["wheel_rim_shape"])
+
+    def test_a_merged_record_supplies_the_baseline_the_drive_did_not_settle(self) -> None:
+        # The real-car baseline belongs to the record. A second simulator that
+        # established less than the first must still approve the record's values,
+        # or the gate rejects it for having learned nothing.
+        record = self._record()
+        summary = derive_approved_controls(record, simulator="raceroom")
+        self.assertEqual("sequential-stick", summary["shift_actuation"])
+        self.assertEqual("required", summary["standing_start_clutch"])

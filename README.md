@@ -23,7 +23,7 @@ to `no` only when that source documents that convention.
 
 ## What ships today
 
-- Dataset 0.5.3 contains 263 reviewed car records under the open v1 JSON
+- Dataset 0.5.9 contains 267 reviewed car records under the open v1 JSON
   contract.
 - The SimHub reference client is at 0.20.0, with exact matching, two pre-flight
   card sizes, offline preview, local diagnostics, and guided verification.
@@ -207,11 +207,11 @@ python -m research.build_simulator_disagreement_audit
 python -m as_driven_db build-site
 ```
 
-Dataset 0.5.3 contains 263 reviewed records. Of the 365 exact AMS2 identities
+Dataset 0.5.9 contains 267 reviewed records. Of the 365 exact AMS2 identities
 observed on the development machine, 349 are covered by the 255 AMS2-backed
 curated records and 15 are closed by written decisions. One current Chevrolet
 Cruze Stock Car 2021 identity remains queued for guided verification. New content still fails closed until it is observed and reviewed.
-4 records carry Assetto Corsa EVO entries, 3 of them shared with AMS2. ACC has 18
+7 records carry Assetto Corsa EVO entries, 3 of them shared with AMS2. ACC has 18
 reviewed cross-simulator entries. Original Assetto Corsa has 7 AC-only records and 14
 records shared with AMS2.
 
@@ -312,8 +312,8 @@ the full review policy.
 
 ## Dataset status
 
-Dataset 0.5.3 contains 263 curated car records promoted through the reviewed
-identity workflow. Of those, 255 carry AMS2 entries; 1 is AC EVO-only and 7 are
+Dataset 0.5.9 contains 267 curated car records promoted through the reviewed
+identity workflow. Of those, 255 carry AMS2 entries; 4 are AC EVO-only and 7 are
 original-AC-only. 3 AMS2 records also carry separately reviewed Assetto Corsa
 EVO entries, 14 also carry original Assetto Corsa entries, and 18 also carry
 Assetto Corsa Competizione entries. They demonstrate useful
