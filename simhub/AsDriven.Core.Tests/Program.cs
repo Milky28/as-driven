@@ -1284,6 +1284,56 @@ namespace AsDriven.Core.Tests
                             "never reports throttle carried in before the lift as the car's blip");
                     }
 
+                    // Rev-matching does not stop at the gear change. The driver
+                    // blips and drives away on the throttle, and confirmation
+                    // used to wait for a closed one, so following the prompt
+                    // exactly - which never asks for a lift on this phase, only
+                    // the coast phase does - timed the attempt out.
+                    {
+                        GuidedVerificationDrive blip = new GuidedVerificationDrive();
+                        blip.Start(6);
+                        for (int guard = 0; guard < 40
+                            && blip.GetSnapshot().Title != "Manual-blip downshift"; guard++)
+                        {
+                            blip.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            blip.Next();
+                        }
+                        Equal("Manual-blip downshift", blip.GetSnapshot().Title,
+                            "reaches the manual-blip downshift test");
+                        // Coasting, then a blip, the downshift, and away on the
+                        // throttle without ever lifting again.
+                        blip.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                        blip.AddSample(GuidedSample(now.AddMilliseconds(100), 4, 0, 70, 5200, 80, 210, true));
+                        blip.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 60, 5400, 79, 200, true));
+                        blip.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 55, 6000, 78, 195, true));
+                        True(blip.GetSnapshot().ResultReady,
+                            "accepts a blipped downshift the driver drives away from");
+                        True(blip.GetSnapshot().Result.Contains("manual throttle blip"),
+                            "reports the driver's blip rather than an engagement failure");
+                    }
+
+                    // The coast phase keeps the closed-throttle rule, because
+                    // there the throttle is the driver spoiling an attempt that
+                    // asked for no pedal input at all.
+                    {
+                        GuidedVerificationDrive coast = new GuidedVerificationDrive();
+                        coast.Start(6);
+                        for (int guard = 0; guard < 40
+                            && coast.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            coast.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            coast.Next();
+                        }
+                        coast.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                        coast.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 0, 5200, 79, 90, true));
+                        // Back on the throttle before the result was confirmed.
+                        coast.AddSample(GuidedSample(now.AddMilliseconds(300), 3, 0, 60, 5400, 79, 200, true));
+                        coast.AddSample(GuidedSample(now.AddMilliseconds(3200), 3, 0, 60, 6000, 78, 200, true));
+                        True(coast.GetSnapshot().ResultReady, "the coast attempt still concludes");
+                        True(coast.GetSnapshot().Result.Contains("throttle came back"),
+                            "and still says the throttle spoiled it, which is true of that phase only");
+                    }
+
                     // Lifting and downshifting inside one telemetry sample is
                     // an ordinary way to drive the test. The baseline used to be
                     // captured at arming, so it landed on the gear already

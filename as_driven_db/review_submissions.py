@@ -395,6 +395,104 @@ def _sync_issue(
         return "error", case
 
 
+def github_issue_absent(repository: str, number: int) -> bool:
+    """Whether GitHub cannot resolve this issue at all.
+
+    Closed is not absent. A closed issue answers this query normally, which is
+    the whole point of asking: the issue list is filtered to open issues, so
+    absence from it says nothing about whether an issue still exists.
+
+    A failure to reach GitHub answers False. Retiring a case because the network
+    was down would be the same mistake in a different costume.
+    """
+    try:
+        completed = subprocess.run(
+            ["gh", "issue", "view", str(number), "--repo", repository, "--json", "number"],
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except OSError:
+        return False
+    if completed.returncode == 0:
+        return False
+    detail = (completed.stderr or "") + (completed.stdout or "")
+    return "could not resolve" in detail.lower() or "not found" in detail.lower()
+
+
+def _mark_withdrawn_cases(
+    cases_dir: Path,
+    issues: list[dict[str, Any]],
+    issue_numbers: set[int] | None,
+    issue_absent: Callable[[int], bool],
+) -> list[int]:
+    """Retire local cases whose issue is no longer on GitHub.
+
+    Sync only ever added and updated, so an issue deleted upstream left its case
+    on disk forever and the workbench kept offering it. Deleting the case would
+    be the tidier answer and is the wrong one: the load can come back short for
+    reasons that are nothing to do with the contributor withdrawing anything -
+    a label removed, a rate limit, a filtered sync - and a deleted case takes the
+    staged observation with it.
+
+    So the case is marked and kept. It leaves the active queue, offers no
+    actions, and says why. If the issue comes back the next sync overwrites the
+    state and the case resumes.
+
+    Only a full sync may do this. A sync narrowed to specific issues has no
+    opinion about the ones it did not ask for, and treating its silence as
+    absence would retire the entire queue.
+    """
+    if issue_numbers is not None:
+        return []
+    live = {int(issue["number"]) for issue in issues if issue.get("number") is not None}
+    withdrawn: list[int] = []
+    for case_path in sorted(cases_dir.glob("issue-*/case.json")):
+        try:
+            case = json.loads(case_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        number = (case.get("issue") or {}).get("number")
+        if number is None or int(number) in live:
+            continue
+        # Finished work is never retired. A case that has been promoted, or
+        # answered as a duplicate, has already produced whatever it was going to
+        # produce, and deleting the issue afterwards does not un-curate a record.
+        # Skipping these first is also what keeps the check cheap: it is the
+        # completed cases that dominate the queue, and each one costs a call.
+        if case.get("state") in {"promoted", "released", "duplicate", "withdrawn"} or (
+            (case.get("github_feedback") or {}).get("status") == "published"
+        ):
+            if case.get("state") == "withdrawn":
+                withdrawn.append(int(number))
+            continue
+        # Absence from the list is not deletion, and this is the trap. The query
+        # asks for open issues carrying the label, so every issue that was
+        # closed - which is what happens to every case that completes - is
+        # missing from it too. Inferring deletion from absence retired twelve
+        # finished contributions along with the two deleted drives.
+        #
+        # So each remaining candidate is asked about directly, and only an issue
+        # GitHub cannot resolve at all is treated as gone. Anything else,
+        # including a failure to reach GitHub, leaves the case alone.
+        if not issue_absent(int(number)):
+            continue
+        if case.get("state") == "withdrawn":
+            withdrawn.append(int(number))
+            continue
+        case["state"] = "withdrawn"
+        case["withdrawn_reason"] = (
+            "The GitHub issue for this case no longer exists. The local drive is "
+            "kept, but the case offers no actions until the issue returns."
+        )
+        case_path.write_text(
+            json.dumps(case, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        withdrawn.append(int(number))
+    return withdrawn
+
+
 def sync_submissions(
     root: Path,
     repository: str = DEFAULT_REPOSITORY,
@@ -404,6 +502,7 @@ def sync_submissions(
     issue_numbers: set[int] | None = None,
     issue_loader: IssueLoader = load_github_issues,
     attachment_fetcher: AttachmentFetcher = fetch_github_attachment,
+    absence_checker: Callable[[int], bool] | None = None,
 ) -> dict[str, Any]:
     root = root.resolve()
     cases_dir = _resolve_under(root, cases_directory)
@@ -416,6 +515,12 @@ def sync_submissions(
 
     results: list[dict[str, Any]] = []
     counts = {"processed": 0, "skipped": 0, "error": 0}
+    withdrawn = _mark_withdrawn_cases(
+        cases_dir,
+        issues,
+        issue_numbers,
+        absence_checker or (lambda number: github_issue_absent(repository, number)),
+    )
     for issue in issues:
         outcome, case = _sync_issue(
             root,
@@ -441,6 +546,7 @@ def sync_submissions(
         "label": label,
         "cases_directory": str(cases_dir),
         "issues_found": len(issues),
+        "withdrawn": withdrawn,
         **counts,
         "results": results,
     }
@@ -467,6 +573,7 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
                 "display_state": (
                     "published" if publication_status == "published" else case.get("state")
                 ),
+                "withdrawn_reason": case.get("withdrawn_reason"),
                 "classification": case.get("classification"),
                 "simulator": observation.get("simulator"),
                 # What the game called itself. Only an unregistered simulator
@@ -529,6 +636,11 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
     research_status = (case.get("research") or {}).get("status")
     if state == "intake-error":
         return ["sync"]
+    if state == "withdrawn":
+        # The issue it belonged to is gone. Nothing here can be published back
+        # to a thread that no longer exists, and promoting from it would curate
+        # a contribution nobody can now be credited or queried about.
+        return []
     if state == "blocked-on-simulator":
         # Nothing here is the reviewer's to do. The case waits on the project
         # registering the game, not on research, a brief or a promotion, and

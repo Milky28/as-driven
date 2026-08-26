@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from as_driven_db.review_submissions import (
+    allowed_case_actions,
     SubmissionSyncError,
     extract_issue_answers,
     extract_observation_attachment,
@@ -710,6 +711,120 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "down-left",
                 preview["authentic_controls"]["transmission"]["first_gear_position"],
             )
+
+    def test_a_deleted_issue_retires_its_case_instead_of_haunting_the_queue(self) -> None:
+        """Sync only ever added, so a deleted issue stayed in the workbench.
+
+        The case is marked rather than deleted. A short issue list is not proof
+        that a contributor withdrew anything - a removed label, a rate limit or
+        a filtered sync all look identical from here - and deleting the case
+        would take the staged observation with it.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            cases = temp / "cases"
+            (cases / "issue-19").mkdir(parents=True)
+            (cases / "issue-19" / "case.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0.0",
+                        "issue": {"number": 19},
+                        "state": "identity-research",
+                        "classification": "new-identity",
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = sync_submissions(
+                ROOT,
+                cases_directory=cases,
+                inbox=temp / "inbox",
+                issue_loader=lambda repository, label: [],
+                absence_checker=lambda number: number == 19,
+            )
+            self.assertEqual([19], result["withdrawn"])
+
+            case = json.loads((cases / "issue-19" / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("withdrawn", case["state"])
+            self.assertIn("no longer exists", case["withdrawn_reason"])
+            self.assertEqual([], allowed_case_actions(case))
+
+    def test_a_sync_narrowed_to_one_issue_retires_nothing(self) -> None:
+        # A filtered sync has no opinion about the issues it did not ask for.
+        # Reading its silence as absence would retire the whole queue.
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            cases = temp / "cases"
+            (cases / "issue-19").mkdir(parents=True)
+            (cases / "issue-19" / "case.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0.0",
+                        "issue": {"number": 19},
+                        "state": "identity-research",
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = sync_submissions(
+                ROOT,
+                cases_directory=cases,
+                inbox=temp / "inbox",
+                issue_numbers={26},
+                issue_loader=lambda repository, label: [],
+                absence_checker=lambda number: True,
+            )
+            self.assertEqual([], result["withdrawn"])
+            case = json.loads((cases / "issue-19" / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("identity-research", case["state"])
+
+    def test_a_closed_issue_keeps_its_case(self) -> None:
+        """Every completed case is a closed issue, and closed is not deleted.
+
+        The issue query asks for open issues carrying the label, so a case that
+        has been promoted and published is missing from it by design. Retiring
+        on absence retired twelve finished contributions alongside the two
+        deleted drives, which is why absence is verified against GitHub rather
+        than inferred from the listing.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            cases = temp / "cases"
+            (cases / "issue-1").mkdir(parents=True)
+            (cases / "issue-1" / "case.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0.0",
+                        "issue": {"number": 1},
+                        "state": "duplicate",
+                        "classification": "exact-resubmission",
+                        "github_feedback": {"status": "published"},
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            asked: list[int] = []
+
+            def absent(number: int) -> bool:
+                asked.append(number)
+                return True
+
+            result = sync_submissions(
+                ROOT,
+                cases_directory=cases,
+                inbox=temp / "inbox",
+                issue_loader=lambda repository, label: [],
+                absence_checker=absent,
+            )
+            # Finished work is exempt before GitHub is asked at all, so even a
+            # checker that calls everything absent leaves it alone.
+            self.assertEqual([], result["withdrawn"])
+            self.assertEqual([], asked)
+            case = json.loads((cases / "issue-1" / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("duplicate", case["state"])
 
     def test_review_proposal_refuses_a_dogleg_without_its_first_gear_side(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

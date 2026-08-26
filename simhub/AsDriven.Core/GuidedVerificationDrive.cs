@@ -677,11 +677,24 @@ namespace AsDriven.Core
 
             double elapsed = (sample.TimestampUtc - _downshiftCandidateAtUtc).TotalSeconds;
             bool blip = _downshiftArmedThrottle >= 15.0;
-            if (sample.Throttle > 10.0)
+            // Throttle after the shift means opposite things in the two phases.
+            // The coast test asks for no pedal input at all, so throttle there is
+            // the driver spoiling the attempt and confirmation waits for it to
+            // close. The manual-blip test asks for throttle, and rev-matching
+            // does not end at the gear change - the driver blips and drives away
+            // on it - so requiring a closed throttle asked for the shift and then
+            // for the technique to be abandoned mid-motion. It made the correct
+            // input fail the test.
+            //
+            // Engagement is proven either way by the drive ratio: the gear holds
+            // the engine to the wheels at a ratio the baseline cannot reach, and
+            // that is a property of the gearbox rather than of the pedal. So the
+            // blip phase confirms on ratio and gear stability alone.
+            if (!manualBlip && sample.Throttle > 10.0)
             {
                 _downshiftThrottleReturned = true;
             }
-            if (sample.Throttle <= 10.0 && elapsed >= EngagementConfirmSeconds)
+            if ((manualBlip || sample.Throttle <= 10.0) && elapsed >= EngagementConfirmSeconds)
             {
                 if (DriveRatio(sample) >= _baselineDriveRatio * EngagementRatioMargin)
                 {
@@ -702,16 +715,28 @@ namespace AsDriven.Core
             }
             if (elapsed >= EngagementTimeoutSeconds)
             {
-                SetResult(
-                    false,
-                    false,
-                    _downshiftThrottleReturned
-                        ? "The downshift was seen, but the throttle came back before the result was "
-                            + "confirmed. Confirming needs a closed throttle, so stay off it until "
-                            + "the result appears, then retry."
-                        : "The lower gear was selected but the engine never took drive from the "
-                            + "wheels, so the gearbox did not engage. Retry, or skip and answer it "
-                            + "in the form.");
+                string reason;
+                if (manualBlip && !blip)
+                {
+                    // The one thing this phase needs and did not get. Saying so
+                    // beats the generic engagement failure, which would send the
+                    // driver to look at the gearbox instead of the pedal.
+                    reason = "The downshift was seen, but no throttle blip was detected with it. "
+                        + "Blip the throttle as you select the lower gear, then retry.";
+                }
+                else if (_downshiftThrottleReturned)
+                {
+                    reason = "The downshift was seen, but the throttle came back before the result "
+                        + "was confirmed. Confirming needs a closed throttle, so stay off it until "
+                        + "the result appears, then retry.";
+                }
+                else
+                {
+                    reason = "The lower gear was selected but the engine never took drive from the "
+                        + "wheels, so the gearbox did not engage. Retry, or skip and answer it "
+                        + "in the form.";
+                }
+                SetResult(false, false, reason);
             }
         }
 
