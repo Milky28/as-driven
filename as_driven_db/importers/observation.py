@@ -596,6 +596,10 @@ def import_observation(
         "importer": "guided-verification-observation",
         "importer_version": "0.1.0",
         "simulator": simulator,
+        # Provenance for the refusal that reads it. A bundle whose simulator is
+        # "other" is not promotable, and the message that says so has to name
+        # the game rather than call it unnamed when the client reported one.
+        "source_game_name": observation.get("source_game_name"),
         "observation_id": observation_id,
         "imported_at": imported_at,
         "review_required": True,

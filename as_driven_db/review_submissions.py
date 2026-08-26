@@ -377,6 +377,14 @@ def _sync_issue(
             observation = json.loads(raw.decode("utf-8-sig"))
         except (UnicodeDecodeError, json.JSONDecodeError) as exception:
             raise SubmissionSyncError(f"could not parse validated observation: {exception}") from exception
+        if receipt.get("released_simulator"):
+            # Releasing a held drive changed which id the case is filed under.
+            # The staged bundle is built here, separately, from the observation
+            # as submitted - which still says "other", because the file on disk
+            # records what the client knew and is never rewritten. Without this
+            # the record, its source id and its approval are all staged under
+            # "other" and promotion refuses a drive whose game is registered.
+            observation = dict(observation, simulator=receipt["released_simulator"])
         staged = import_observation(observation)
         _write_json(case_dir / "staged.json", staged)
 

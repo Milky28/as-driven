@@ -172,7 +172,7 @@ def build_promoted_record(
         raise ValueError(
             f"{label}: this drive came from a simulator the project has not "
             f"registered, reported by the client as "
-            f"{bundle.get('observation', {}).get('source_game_name', 'an unnamed game')!r}. "
+            f"{bundle.get('source_game_name') or 'a game it did not name'!r}. "
             "Register the simulator before promoting it."
         )
     live_source_id = source["source_id"]

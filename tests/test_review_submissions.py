@@ -881,6 +881,61 @@ class ReviewSubmissionTests(unittest.TestCase):
                 state,
             )
 
+    def test_a_released_drive_is_staged_under_the_registered_simulator(self) -> None:
+        """Releasing has to reach the bundle promotion reads, not only the queue.
+
+        The case is filed by intake; the staged bundle is built separately from
+        the observation as submitted, which still says `other` because the file
+        on disk records what the client knew and is never rewritten. The case
+        showed as rfactor2 while its record, source id and approval were all
+        staged under `other`, and promotion refused a drive whose game had been
+        registered hours earlier.
+        """
+        from as_driven_db.importers.observation import import_observation
+        import tests.test_intake_observation as fixtures
+
+        payload = fixtures.observation("Staged Release Probe")
+        payload["observation_id"] = (
+            "other.staged-release-probe.20260826t194202971z-890e7e56"
+        )
+        payload["simulator"] = "other"
+        payload["source_game_name"] = "RFactor2"
+
+        held = import_observation(payload)
+        self.assertEqual("other", held["simulator"])
+        self.assertEqual("RFactor2", held["source_game_name"])
+        self.assertTrue(held["source"]["source_id"].startswith("other."))
+
+        # What sync now does with a receipt that released the drive.
+        released = import_observation(dict(payload, simulator="rfactor2"))
+        self.assertEqual("rfactor2", released["simulator"])
+        self.assertEqual("rfactor2", released["record"]["simulators"][0]["simulator"])
+        self.assertTrue(released["source"]["source_id"].startswith("rfactor2."))
+        self.assertEqual("rfactor2", released["approval"]["simulator"])
+
+    def test_refusing_an_unregistered_drive_names_the_game(self) -> None:
+        # The refusal offered to name the game and read a key the bundle has
+        # never had, so it called every one of them an unnamed game - including
+        # the ones whose draft named them plainly.
+        from as_driven_db.importers.observation import import_observation
+        from as_driven_db.promote_observation import build_promoted_record
+        import tests.test_intake_observation as fixtures
+
+        payload = fixtures.observation("Unregistered Probe")
+        payload["observation_id"] = "other.unregistered-probe.20260826t194202971z-890e7e57"
+        payload["simulator"] = "other"
+        payload["source_game_name"] = "LeMansUltimate"
+        bundle = import_observation(payload)
+
+        with self.assertRaises(ValueError) as raised:
+            build_promoted_record(
+                bundle,
+                {"record_id": bundle["record"]["record_id"]},
+                approved_at="2026-08-26",
+            )
+        self.assertIn("LeMansUltimate", str(raised.exception))
+        self.assertNotIn("unnamed game", str(raised.exception))
+
     def test_a_closed_issue_keeps_its_case(self) -> None:
         """Every completed case is a closed issue, and closed is not deleted.
 
