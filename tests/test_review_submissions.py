@@ -848,7 +848,15 @@ class ReviewSubmissionTests(unittest.TestCase):
         self.assertIn("cockpit or interior photographs", questions)
         self.assertIn("where first gear sits in the gate", questions)
         self.assertIn("molded grips at 9 and 3", questions)
-        self.assertIn("not-established rather than choosing", questions)
+        self.assertIn("fetch the full-resolution original", questions)
+        # The distinction the first field report turned up: an agent that
+        # cannot see a wheel reports the same not-established as one looking at
+        # a genuinely ambiguous wheel, and only the second is a finding.
+        self.assertIn("only one of them is a finding", questions)
+        self.assertIn(
+            "do not report a rim you could not see as a rim that cannot be decided",
+            questions,
+        )
 
     def test_a_researched_case_can_still_ask_for_a_new_brief(self) -> None:
         # The brief gains questions over time. A case that completed research
