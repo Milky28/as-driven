@@ -227,6 +227,28 @@ if ($guidedDrivePanel.Count -ne 1 `
     throw "The guided-drive controls must stay hidden until the simulator setup is confirmed."
 }
 
+# Registering a simulator is not finished until the plugin can read its build.
+# RaceRoom stamps its executable and was still answering "unknown", so every
+# record promoted from one of its drives failed validation on a version the
+# machine could have read all along.
+$versionProcessMethod = $pluginType.GetMethod(
+    "VersionProcessNames",
+    [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
+if ($null -eq $versionProcessMethod) {
+    throw "VersionProcessNames is missing; the plugin can no longer report a simulator build."
+}
+foreach ($stamped in @("ams2", "ac", "acc", "raceroom")) {
+    $names = [string[]]$versionProcessMethod.Invoke($null, @($stamped))
+    if ($names.Count -lt 1) {
+        throw "No version process is registered for '$stamped', so its drives would record an unknown build."
+    }
+}
+# AC EVO ships no version resource at all. The gap is deliberate and the
+# reviewer supplies the build, so an empty list here is the correct answer.
+if (([string[]]$versionProcessMethod.Invoke($null, @("ac-evo"))).Count -ne 0) {
+    throw "AC EVO must stay absent from the version table until it stamps a build."
+}
+
 $submissionUrlMethod = $pluginType.GetMethod(
     "ObservationSubmissionUrl",
     [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)

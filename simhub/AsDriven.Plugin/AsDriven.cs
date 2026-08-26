@@ -1269,6 +1269,13 @@ namespace AsDriven.Plugin
                 case "ams2": return new[] { "AMS2AVX", "AMS2" };
                 case "ac": return new[] { "acs" };
                 case "acc": return new[] { "AC2-Win64-Shipping", "acc" };
+                // RaceRoom does stamp its executable, unlike the two Assetto
+                // Corsa titles above. This was missed when the game was
+                // registered, so its drives recorded "unknown" and every record
+                // promoted from them failed validation on a version the machine
+                // could have read all along. The 64-bit process is preferred and
+                // the 32-bit one carries the same version.
+                case "raceroom": return new[] { "RRRE64", "RRRE" };
                 default: return new string[0];
             }
         }
