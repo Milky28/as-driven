@@ -46,7 +46,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: dogbox; shift pattern: sequential.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
       "RaceRoom Racing Experience unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },

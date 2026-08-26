@@ -184,7 +184,11 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # the same shape as the two blip departures above and is handled
                 # the documented way: the authentic value stays optional and the
                 # simulator's demand is an override.
-                "lamborghini-miura-sv--transmission-downshift-manual-blip",
+                # The Miura left this set when the provenance repair gave its
+                # authentic blip the sources that established it. A departure
+                # from a sourced baseline is supported, not provisional: the
+                # status was never about the departure, it was about how well
+                # the thing being departed from was held up.
                 # The RSR's blip became a departure only once the authentic
                 # value stopped being unknown. It is optional at medium, derived
                 # from a synchromesh the record reads off the 915 family rather
@@ -210,8 +214,8 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 "authentic-baseline-open": 15,
-                "provisional-departure": 6,
-                "supported-departure": 7,
+                "provisional-departure": 5,
+                "supported-departure": 8,
             },
             self.checked_in["summary"]["by_status"],
         )

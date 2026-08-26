@@ -48,7 +48,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, selector pattern or wheel topology; those baseline fields remain unknown.",
       "Assetto Corsa EVO unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },

@@ -304,6 +304,64 @@ def _established_controls_note(result: dict[str, Any]) -> str:
     return "The reviewed exact-scope sources establish " + "; ".join(established) + "."
 
 
+def sourced_control_paths(result: dict[str, Any]) -> list[str]:
+    """Real-car control paths the reviewed sources actually established.
+
+    The note beside this says the same thing in prose, and prose is not
+    something the promoter can attribute a claim with. Without the list it
+    credited every technique value to the guided drive, including the ones a
+    manufacturer manual had settled - so a record could state that its real car
+    blips on downshifts while citing a drive that observed the opposite.
+    """
+    return sorted(
+        str(claim["path"])
+        for claim in result["claims"]
+        if claim.get("finding") == "established"
+        and str(claim["path"]).startswith("/authentic_controls/")
+        and claim.get("proposed_value") not in (None, "unknown")
+    )
+
+
+def _unestablished_baseline_note(result: dict[str, Any]) -> str | None:
+    """Name what the sources left open, rather than asserting they left it all.
+
+    This sentence used to be a constant, printed under a line listing the very
+    fields it denied. Where the sources reached everything it is omitted; where
+    they reached nothing it reads as it always did.
+    """
+    families = {
+        "launch technique": ("/authentic_controls/transmission/standing_start_clutch",),
+        "running-shift technique": (
+            "/authentic_controls/transmission/upshift/clutch",
+            "/authentic_controls/transmission/downshift/clutch",
+            "/authentic_controls/transmission/upshift/throttle_lift",
+        ),
+        "cut and blip behavior": (
+            "/authentic_controls/transmission/upshift/automatic_cut",
+            "/authentic_controls/transmission/downshift/automatic_blip",
+            "/authentic_controls/transmission/downshift/manual_blip",
+        ),
+        "selector pattern": ("/authentic_controls/transmission/shift_pattern",),
+        "wheel topology": (
+            "/authentic_controls/steering/wheel_rim/shape",
+            "/authentic_controls/steering/wheel_rim/open_top",
+        ),
+    }
+    established = set(sourced_control_paths(result))
+    open_families = [
+        name for name, paths in families.items()
+        if not any(path in established for path in paths)
+    ]
+    if not open_families:
+        return None
+    listed = ", ".join(open_families[:-1])
+    listed = f"{listed} or {open_families[-1]}" if listed else open_families[-1]
+    return (
+        f"The reviewed real-car sources do not establish {listed}; those baseline "
+        "fields remain unknown."
+    )
+
+
 def _proposal_summary(
     case: dict[str, Any],
     manifest: dict[str, Any],
@@ -458,9 +516,10 @@ def prepare_review_proposal(
             "absent from those sources remain unknown in the real-car baseline; the "
             "exact simulator values remain simulator-specific guided observations."
         ),
+        "sourced_control_paths": sourced_control_paths(result),
         "control_notes": [
             _established_controls_note(result),
-            "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+            *([note] if (note := _unestablished_baseline_note(result)) else []),
             # Name the simulator the drive was actually made in. This said AMS2
             # for every submission, so Assetto Corsa records carried an AMS2
             # attribution beside an Assetto Corsa build id.

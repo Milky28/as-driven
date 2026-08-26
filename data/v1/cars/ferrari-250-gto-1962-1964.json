@@ -49,7 +49,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h; transmission first_gear_position: down left.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique or wheel topology; those baseline fields remain unknown.",
       "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
@@ -346,6 +346,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-26",
   "driver_summary": "Five-speed synchromesh on a dogleg gate: first is down and left, outside the racing plane, so second through fifth sit in one straight line. No source establishes how the real car was driven, so treat the technique here as Assetto Corsa's answer rather than the 250 GTO's."
 }

@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.14",
+  "dataset_version": "0.5.15",
   "generated_at": "2026-08-26",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
@@ -14,8 +14,8 @@
     "findings": 28,
     "by_status": {
       "authentic-baseline-open": 15,
-      "provisional-departure": 6,
-      "supported-departure": 7
+      "provisional-departure": 5,
+      "supported-departure": 8
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
@@ -262,12 +262,18 @@
       "authentic_baseline": {
         "value": "optional",
         "display_value": "Optional",
-        "confidence": "verified",
+        "confidence": "high",
         "source_refs": [
-          "ams2.local-live-lamborghini-miura-sv-controls.1.6.9.91"
+          "lamborghini.miura.history",
+          "ams2.reiza-release.1.6.9.new-cars",
+          "as-driven.repository.lamborghini-miura-sv-record-scan",
+          "supercars-net.miura-p400-sv-profile",
+          "assetto-db.ks-lamborghini-miura-sv-listing"
         ],
-        "primary_source_refs": [],
-        "basis": "Guided A/B testing and cockpit inspection directly established technique and wheel details."
+        "primary_source_refs": [
+          "lamborghini.miura.history"
+        ],
+        "basis": "The existing curated record already established a display-free wheel rim from a live AMS2 cockpit inspection; the AC guided drive's independent cockpit observation of the same real car agrees. No manufacturer or period documentation for a factory-fitted display was found, consistent with a 1971-1973 production car. Both the existing curated record's live-cockpit finding and the AC guided drive's independent cockpit observation agree on a closed (non-open-top) rim; no contrary period documentation was found. Two independent simulator recreations of the same real car agree on a round wheel rim, consistent with the existing curated record's live-cockpit finding. Neither cockpit observation shows rim-mounted shift lights, consistent with a 1971-1973 road car predating such systems; agrees with the existing curated record. No period Miura electronics package included automatic throttle blipping; the existing curated record already established this for the same real car, and the reviewed manufacturer history describes no such system. Carried forward from the existing curated record; a 1971-1973 road car has no automatic ignition or throttle-cut system, and the field is not applicable to downshifts under the database's own convention. The Miura's synchronised five-speed manual supports clutchless running downshifts as ordinary technique; this matches the existing curated record's already-established value. The real-car value is carried forward unchanged from the existing curated record: a synchronised gearbox eases with a downshift blip but does not require it to engage the gear. The AC guided drive's two-stage test found the exact AC 14923034 implementation requires a manual blip to accept a repeated downshift; that stricter behavior is recorded separately as a simulator override on the observation, not as a change to the authentic real-car value, matching the project's existing AC BMW 3.0 CSL / Ford GT40 Mk I precedent. Carried forward from the existing curated record; throttle-lift is an upshift concern under the database's convention and is not applicable to downshifts. Both the manufacturer's official history and an independent secondary technical profile state a five-speed manual transmission for the Miura P400 SV, matching the existing curated record. No reviewed source explicitly states synchromesh construction; this is carried forward at the same medium confidence as the existing curated record, which itself treats synchromesh as the ordinary reading of a period road-car manual gearbox rather than a stated specification. The manufacturer source and the existing curated record agree on a conventional H-pattern manual shifter; no sequential or paddle system exists on this period road car. Two independent simulators' direct gear-selection testing (AMS2 in the existing curated record and this AC guided drive) both report a standard, non-dogleg H pattern for the same real car. The manufacturer source documents a clutch-equipped five-speed manual across the Miura family; a manual clutch is required from rest, matching the existing curated record. Carried forward from the existing curated record; automatic blipping does not apply to upshifts. No period Miura electronics package included an automatic shift-cut system; matches the existing curated record. The synchronised five-speed manual supports clutchless running upshifts with a throttle lift as ordinary technique, matching the existing curated record. Carried forward from the existing curated record; manual blipping does not apply to upshifts. A clutchless running upshift on this synchronised gearbox requires a throttle lift to unload the drivetrain, matching the existing curated record."
       },
       "simulator_views": [
         {
@@ -305,15 +311,15 @@
         }
       ],
       "adjudication": {
-        "status": "provisional-departure",
+        "status": "supported-departure",
         "matching_simulators": [
           "ams2"
         ],
         "departing_simulators": [
           "ac"
         ],
-        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
-        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
       }
     },
     {

@@ -48,7 +48,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; transmission upshift clutch: not required; transmission upshift throttle_lift: not required.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish launch technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
       "RaceRoom Racing Experience 0.9.8.14 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
@@ -332,6 +332,21 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "mercedes-benz.media.evo-ii-dtm-history-2020",
+          "autobild.1992-mercedes-190e-evo-ii-dtm",
+          "mb190e16v.dtm-1992-history",
+          "mercedes-190e-evo.dogleg-getrag",
+          "as-driven.repository.mercedes-190e-evo-ii-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "The exact-1992 technical account describes a straight-toothed six-speed gearbox, and the season-specific technical history independently describes a new six-speed transmission. The exact-1992 account states that shifting was performed at full throttle and without clutch use, and the season-specific history says the new six-speed transmission did not require clutch use for upshifts. The exact-1992 account explicitly says the car was shifted at full throttle, and the season-specific history describes clutchless upshifts with the six-speed transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip."
       }
     ]
   },

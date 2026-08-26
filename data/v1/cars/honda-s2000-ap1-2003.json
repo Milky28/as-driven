@@ -48,7 +48,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish transmission downshift clutch: required; forward gears: 6; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required; transmission upshift clutch: required.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish wheel topology; those baseline fields remain unknown.",
       "Assetto Corsa EVO unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
@@ -326,6 +326,21 @@
         ],
         "confidence": "high",
         "basis": "The reviewed sources establish a synchronised six-speed gearbox. Synchronisers match the shaft speeds themselves, so the blip eases them rather than engaging the gear, and the value follows from the construction this record already establishes. AC EVO refuses the shift without a blip, which is carried as a simulator override rather than as the real car."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch"
+        ],
+        "source_refs": [
+          "kunos.assetto-corsa-evo.honda-s2000-2003",
+          "honda.2003-s2000-specifications",
+          "honda.2003-s2000-owners-manual",
+          "as-driven.repository.honda-s2000-ap1-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "Honda explicitly instructs the driver to push the clutch pedal all the way down when shifting up or down. Honda's 2003 specification lists a six-speed manual transmission, and the owner's manual identifies the six-speed manual and its first-through-sixth shift sequence. Honda's 2003 specification calls the transmission constant-mesh, and the 2003 owner's manual explicitly says the manual transmission is synchronized in all forward gears. Honda specifies floor-shift operation, and the exact-year owner's manual documents the manual gearshift lever's multi-plane gate and reverse lockout. Together these establish a driver-operated H-pattern floor shifter rather than a sequential or paddle system. The 2003 owner's manual's gearshift-lever section identifies the six forward gears in the conventional 1-2 through 5-6 gate and separately describes reverse beside the neutral gate, establishing the standard H pattern. Honda's exact-year starting procedure requires the clutch pedal to be pushed all the way down before the engine can be started, and the car uses a conventional dry manual clutch. Honda explicitly states that the clutch pedal must be pushed all the way down when shifting up or down. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
       }
     ]
   },

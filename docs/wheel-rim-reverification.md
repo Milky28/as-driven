@@ -42,11 +42,44 @@ compare different cars, while these compare the same car seen twice.
 
 Count: 4.
 
-None of these is established as a modelling difference. Two split on
-round against gt-formula and two on round against d-shaped, which are precisely
-the boundaries the caveat above says were drawn before the definitions existed.
-A simulator genuinely modelling a different wheel would be a real finding; the
-same rim classified twice is not.
+None of these is established as a modelling difference, and the dates say why.
+The vocabulary was defined on 2026-08-16. Every disagreeing value in the table
+above was recorded **before** that date, and every value it disagrees with was
+recorded after:
+
+| Record | Older reading | Newer reading |
+| --- | --- | --- |
+| `nissan-gt-r-nismo-gt3` | ams2 round, 2026-08-13 | acc gt-formula, 2026-08-23 |
+| `porsche-911-gt3-r` | ams2 d-shaped, 2026-08-13 | acc gt-formula, 2026-08-23 |
+| `nissan-r390-gt1` | ams2 round, 2026-08-13 | ac d-shaped, 2026-08-22 |
+| `saleen-s7-r-gt1` | ams2 round, 2026-08-11 | ac round 2026-08-23, raceroom d-shaped 2026-08-26 |
+
+Under the old vocabulary `round` and `d-shaped` described an outline while
+`gt-style`, `prototype` and `formula` described the kind of car, so a
+control-panel rim was routinely recorded by its outline. That is what the first
+three rows look like, and it is a drift rather than a disagreement.
+
+**Two of them are already settled about the real car.** The GT-R and the 911
+GT3 R each carry a manufacturer cockpit photograph - `nismo.gt-r-nismo-gt3.2018-cockpit-photo`
+and `porsche.911-gt3-r-991-2.cockpit-photo.2018` - establishing `gt-formula` at
+high confidence, and their post-definition ACC observations agree with it. What
+is left is one pre-definition AMS2 reading each, and the question is not which
+simulator is right but whether that reading survives being taken again.
+
+`nissan-r390-gt1` has the same shape without the anchor: the real rim is
+unknown, so both readings are simulator observations and neither is checkable
+against a photograph yet.
+
+`saleen-s7-r-gt1` is the one genuine boundary case. Two independent
+observations call it round, one calls it d-shaped, and the maintainer's
+photographs show a flat slight enough that either is defensible. No date
+explains that one.
+
+**207 rim observations across the dataset predate the vocabulary**, against 100
+after it, so this is a sample of a much larger drift rather than four odd
+records. These four surfaced because a second simulator happened to look at the
+same car later; the rest have never been contradicted because nobody looked
+twice.
 
 The Saleen is the one with a photograph behind it. The maintainer looked for
 period images of the S7R cockpit and found the rim carries so slight a flat that

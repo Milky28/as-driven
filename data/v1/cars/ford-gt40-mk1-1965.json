@@ -48,7 +48,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, selector pattern or wheel topology; those baseline fields remain unknown.",
       "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
@@ -356,6 +356,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-26",
   "driver_summary": "Five-speed synchromesh in the 1965 small-block Mk I. The gate is not recorded, and no source establishes how the real car was driven, so the technique here is Assetto Corsa's rather than the GT40's."
 }

@@ -1127,6 +1127,95 @@ class ValidationTests(unittest.TestCase):
         python = {name: set(values) for name, values in SIMULATOR_GAME_NAMES.items()}
         self.assertEqual(python, client)
 
+    def test_a_record_never_denies_a_source_it_cites(self) -> None:
+        """The note saying nothing was established used to be a constant.
+
+        It was printed under a line listing the very fields it denied, so the
+        Radical SR3 said its real-car sources establish no cut or blip behaviour
+        while citing the owner manual that says an auto blipper is fitted. Both
+        halves are generated now, and this holds them together: a family the
+        note calls unknown must have no value backed by anything other than the
+        guided drive.
+        """
+        families = {
+            "launch technique": ["/authentic_controls/transmission/standing_start_clutch"],
+            "cut and blip behavior": [
+                "/authentic_controls/transmission/upshift/automatic_cut",
+                "/authentic_controls/transmission/downshift/automatic_blip",
+                "/authentic_controls/transmission/downshift/manual_blip",
+            ],
+            "selector pattern": ["/authentic_controls/transmission/shift_pattern"],
+        }
+
+        def value_at(record, pointer):
+            node = record
+            for part in pointer.strip("/").split("/"):
+                if isinstance(node, dict) and part in node:
+                    node = node[part]
+                else:
+                    return None
+            return node
+
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            notes = " ".join(record["authentic_controls"].get("notes", []))
+            if "reviewed real-car sources do not establish" not in notes:
+                continue
+            for family, pointers in families.items():
+                if family not in notes:
+                    continue
+                for pointer in pointers:
+                    if value_at(record, pointer) in (None, "unknown"):
+                        continue
+                    backed = any(
+                        (pointer in claim["paths"]
+                         or any(pointer.startswith(p + "/") for p in claim["paths"]))
+                        and any(".local-live-" not in ref for ref in claim["source_refs"])
+                        for claim in record["provenance"]["claims"]
+                    )
+                    if backed:
+                        offenders.append(
+                            "%s: note denies %s, but %s is sourced"
+                            % (record["record_id"], family, pointer)
+                        )
+        self.assertEqual([], offenders)
+
+    def test_a_sourced_rim_is_not_contradicted_by_a_later_observation(self) -> None:
+        """A photograph of the real car outranks a look at a simulator.
+
+        Where the real rim rests on a manufacturer cockpit photograph, an entry
+        observed after the vocabulary was defined must agree with it. A
+        disagreement there would be a simulator modelling a different wheel,
+        which is a finding worth stopping for - unlike the pre-definition
+        readings, which are vocabulary drift and are listed for re-verification
+        instead.
+        """
+        vocabulary_defined = "2026-08-16"
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            wheel = record["authentic_controls"]["steering"]["wheel_rim"]
+            shape = wheel.get("shape")
+            if shape in (None, "unknown"):
+                continue
+            sourced = any(
+                any("wheel_rim" in path for path in claim["paths"])
+                and any("cockpit-photo" in ref for ref in claim["source_refs"])
+                for claim in record["provenance"]["claims"]
+            )
+            if not sourced:
+                continue
+            for entry in record["simulators"]:
+                observed = (entry["behavior"].get("wheel_rim_type") or {}).get("normalized")
+                when = entry.get("verified_at") or ""
+                if observed and when >= vocabulary_defined and observed != shape:
+                    offenders.append(
+                        "%s: %s saw %s on %s, against a photographed %s"
+                        % (record["record_id"], entry["simulator"], observed, when, shape)
+                    )
+        self.assertEqual([], offenders)
+
     def test_a_registered_simulator_reaches_every_place_that_enumerates_one(self) -> None:
         """Registering a simulator is a list of places, so the list is a test.
 

@@ -79,7 +79,7 @@ than silently queueing verification work.
 - Branch: `codex/stabilization`; private remote `origin` at
   `github.com/Milky28/as-driven`.
 - Early-access client: 0.20.0.
-- Dataset: 0.5.14 with 270 curated records.
+- Dataset: 0.5.15 with 270 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has four active `identity-research`
   cases: GitHub issues 9 through 12 for the AC Shelby Daytona Coupe, Ferrari

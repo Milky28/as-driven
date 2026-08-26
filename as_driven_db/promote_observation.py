@@ -293,6 +293,23 @@ def build_promoted_record(
             },
         ]
     }
+    # Where research established a real-car control from a source, that path
+    # gets its own claim naming the source. The bundled claim above is the
+    # drive's, and it covers whole objects, so without this a manufacturer
+    # manual's finding was filed under "directly observed during the guided
+    # drive" - which on the Radical SR3 meant the record cited a drive that had
+    # observed the opposite of the value it was supporting.
+    sourced_paths = [
+        path for path in (entry.get("sourced_control_paths") or [])
+        if str(path).startswith("/authentic_controls/")
+    ]
+    if sourced_paths and real_world_refs:
+        record["provenance"]["claims"].append({
+            "paths": sorted(sourced_paths),
+            "source_refs": real_world_refs,
+            "confidence": confidence,
+            "basis": _required(entry, "specification_basis", label),
+        })
     for claim in entry.get("additional_claims") or []:
         record["provenance"]["claims"].append(claim)
 

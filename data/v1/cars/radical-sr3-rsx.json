@@ -48,7 +48,6 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: not required; transmission upshift automatic_cut: yes; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift manual_blip: not required; transmission downshift automatic_blip: yes; wheel-rim shape: round; integrated wheel display: no; open-top wheel geometry: no.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
       "rFactor 2 1.1.3.4 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
@@ -226,6 +225,31 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "radical.sr3-rsx-owners-manual-1.93",
+          "radical.sr3-global-scrutineering-guide-v1.8",
+          "radical.sr3-buyers-guide",
+          "radical.sr3-model-years-by-chassis",
+          "studio397.rfactor2-radical-sr3-rsx-release",
+          "as-driven.repository.radical-sr3-rsx-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "The RSX owner manual gives the gear order through 6th and states that the driver can shift all the way to 6th after pulling away. The manual documents a paddle-shift system with an ordered 1-N-2-3-4-5-6 gear sequence, establishing sequential gearbox behavior. The relevant manual section is explicitly titled PaddleShift Controls and describes paddle requests for the ordered gears. The documented gear order is 1-N-2-3-4-5-6, which is a sequential pattern rather than an H gate. The manual explicitly instructs the driver to depress the clutch to pull away and select first from neutral. The manual says the automatic ignition cut allows the driver to flatshift up the gearbox; no driver clutch operation is prescribed for those running upshifts. Flatshifting is explicitly enabled by the automatic ignition cut, so the manual does not require a throttle lift for the running upshift. The owner manual explicitly states that the SR3 is fitted with automatic ignition cut and connects it to flatshift upshifts. The documented upshift technique is a flatshift assisted by automatic ignition cut; the manual does not call for a manual throttle blip on an upshift. The owner manual assigns the automatic blipper to the downshift procedure and describes the upshift assistance as automatic ignition cut, not an automatic upshift blip. The owner manual explicitly says the driver does not have to blip the throttle on the way down. The owner manual explicitly states that the SR3 is fitted with an auto blipper; its statement that the driver need not blip on downshifts identifies the automatic system as the source of the blip. The RSX row specifies a closed-circle wheel. Under the repository rim definition, a continuous closed circle is round. The RSX row specifies a separate AIM MXL/MXL2 mounted to the dash panel, so the display is not integrated into the wheel rim. The RSX wheel is specified as closed-circle, which establishes that rim material joins over the top under the repository's open-top definition. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/steering/wheel_rim/shift_lights."
       }
     ]
   },

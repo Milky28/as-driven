@@ -48,7 +48,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 4; gearbox construction: synchromesh; shift actuation: h pattern.",
-      "The reviewed real-car sources do not establish launch or running-shift technique, cut/blip behavior, selector pattern, or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, selector pattern or wheel topology; those baseline fields remain unknown.",
       "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
@@ -369,6 +369,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-26",
   "driver_summary": "Four-speed synchromesh. No reviewed source establishes how the real Daytona Coupe was driven, and Assetto Corsa refuses a clutchless downshift until you blip, so blip coming down: the demand is the simulator's, not the 1964 car's."
 }
