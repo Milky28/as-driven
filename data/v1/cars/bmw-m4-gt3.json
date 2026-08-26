@@ -84,7 +84,6 @@
           "'BMW M4 GT3 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
-      "overrides": [],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-13",
       "source_refs": [
@@ -94,7 +93,8 @@
       "confidence": {
         "level": "verified",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world six-speed sequential paddle transmission is established by a registered source."
-      }
+      },
+      "overrides": []
     },
     {
       "simulator": "acc",
@@ -187,7 +187,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/integrated_display",
           "value": "no",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -199,7 +199,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/open_top",
           "value": "no",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -211,7 +211,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "gt-formula",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -223,7 +223,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -235,7 +235,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
           "value": "yes",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -247,7 +247,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_cut",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -259,7 +259,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -271,7 +271,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -283,7 +283,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -295,7 +295,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "not-required",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -307,7 +307,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/automatic_blip",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -319,7 +319,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -331,7 +331,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/manual_blip",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -343,7 +343,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "not-required",
-          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.bmw-m4-gt3-dtm.20260826t153434694z-d2e6e884 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."

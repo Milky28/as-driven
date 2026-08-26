@@ -84,7 +84,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "required",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version unknown. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 0.9.0. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
           "confidence": {
             "level": "verified",
             "basis": "The complete two-stage downshift test was observed live."
@@ -96,7 +96,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/integrated_display",
           "value": "no",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -108,7 +108,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/open_top",
           "value": "no",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -120,7 +120,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "round",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -132,7 +132,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -144,7 +144,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
           "value": "no",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -156,7 +156,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_cut",
           "value": "not-applicable",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -168,7 +168,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -180,7 +180,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -192,7 +192,7 @@
         {
           "path": "/authentic_controls/transmission/shift_pattern",
           "value": "standard-h",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -204,7 +204,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "required",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -216,7 +216,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/automatic_blip",
           "value": "not-applicable",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -228,7 +228,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/automatic_cut",
           "value": "no",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -240,7 +240,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -252,7 +252,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/manual_blip",
           "value": "not-applicable",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -264,7 +264,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "required",
-          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.alfa-romeo-giulia-sprint-gta.20260826t040833232z-5563fe47 directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."

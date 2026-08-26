@@ -79,7 +79,6 @@
           "Standing-start clutch, six-speed sequential stick without paddles, automatic cut, no automatic blip, and round no-display rim were directly observed."
         ]
       },
-      "overrides": [],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-11",
       "source_refs": [
@@ -91,7 +90,8 @@
       "confidence": {
         "level": "verified",
         "basis": "Exact simulator identity, modeled hardware, and shift behavior were directly tested; FIA and specialist evidence support the historical car and sequential transmission family while the exact 2005 revision remains qualified."
-      }
+      },
+      "overrides": []
     },
     {
       "simulator": "ac",
@@ -183,19 +183,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/integrated_display",
           "value": "no",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-saleen-s7r-controls.0.9.8.14"
-          ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/open_top",
-          "value": "no",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -207,7 +195,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "d-shaped",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -219,7 +207,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -231,7 +219,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
           "value": "yes",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -243,7 +231,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_cut",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -255,7 +243,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -267,7 +255,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -279,7 +267,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -291,7 +279,7 @@
         {
           "path": "/authentic_controls/transmission/shift_actuation",
           "value": "sequential-stick",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -303,7 +291,7 @@
         {
           "path": "/authentic_controls/transmission/shift_pattern",
           "value": "sequential",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -315,7 +303,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "required",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -327,7 +315,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/automatic_blip",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -339,7 +327,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -351,7 +339,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/manual_blip",
           "value": "not-applicable",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -363,7 +351,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "not-required",
-          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.saleen-s7r.20260826t152731197z-8aff7c82 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
