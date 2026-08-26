@@ -925,9 +925,17 @@ namespace AsDriven.Core.Tests
                 True(fordGt40.DownshiftUnestablished,
                     "the GT40 does not mistake AC's demand for a real-car claim");
 
-                GuidanceSnapshot noNote = database.Match("Automobilista2", "Porsche 911 GT3 R");
+                // The note panel hides when a record carries no summary, and the
+                // dataset no longer has one to point at: every curated record has
+                // a summary now. The behaviour still has to hold for a record
+                // that arrives without one, so it is asserted against a snapshot
+                // that has none rather than against whichever car happened to be
+                // missing a summary that week.
+                GuidanceSnapshot noNote = GuidanceSnapshot.Empty(
+                    "unmatched", "Automobilista2", "Unlisted Car", database.DatasetVersion);
                 Equal(string.Empty, noNote.DriverSummary, "a record without a summary carries none");
                 Equal(string.Empty, noNote.DriverSummaryLine1, "and no wrapped lines either");
+                True(database.Cars.Length > 0, "the dataset still loaded");
 
                 GuidanceSnapshot chevette = database.Match("Automobilista2", "Chevrolet Chevette");
                 if (chevette.HasMatch)

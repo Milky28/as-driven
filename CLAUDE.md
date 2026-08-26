@@ -166,15 +166,15 @@ approval are required before release. See `PRIVACY.md` and
 ## Current handoff state
 
 - Branch: `codex/stabilization`.
-- Early-access client: 0.19.0.
+- Early-access client: 0.20.0.
 - Dataset: 0.5.1 with 263 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The ignored local contribution queue has four active `identity-research`
-  cases: issues 9 through 12, covering the AC Shelby Daytona Coupe, Ferrari 250
-  GTO, Lamborghini Miura P400 SV and Kunos Ford Mustang 2015. Generate each
-  research brief from the workbench, import the completed result, then retain
-  the explicit final-review and promotion gates. No case is currently waiting
-  at final review.
+- The local contribution queue is clear: eleven cases promoted and one closed as
+  a duplicate. The Shelby Daytona Coupe, Ferrari 250 GTO, Kunos Ford Mustang and
+  Lamborghini Miura all landed, the Miura joining the existing AMS2 record as a
+  second simulator entry rather than forking one. Generate each research brief
+  from the workbench, import the completed result, then retain the explicit
+  final-review and promotion gates.
 - The maintainer workbench is the preferred contribution interface. GitHub
   synchronization is serialized across browser tabs, and editing an issue
   without replacing its attachment preserves the original routing decision.

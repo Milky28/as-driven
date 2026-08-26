@@ -221,8 +221,8 @@ files, so an installation that already has a customized layout keeps it.
 
 ## Certified boundary and development coverage
 
-Client version 0.19.0 is built against the SimHub 9.11.22 SDK and packages
-dataset 0.4.20. The certified early-access target is AMS2 1.6.9.91 on Windows.
+Client version 0.20.0 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.5.1. The certified early-access target is AMS2 1.6.9.91 on Windows.
 The client also recognizes Assetto Corsa EVO and Assetto Corsa for active
 development. Assetto Corsa Competizione has 18 reviewed entries, each captured
 with its exact Steam content build. None is part of the certified release target.
@@ -514,7 +514,7 @@ throttle dip can be traction control, driver input, or telemetry filtering; only
 a shift-local torque collapse under sustained throttle demand now establishes
 an ignition cut. The importer also degrades automatic-cut answers from older ACC
 drafts to `unknown`, preserving the drafts without promoting false certainty.
-Version 0.19.0 adds the explicit public observation handoff without adding an
+Version 0.19.0 added the explicit public observation handoff without adding an
 uploader. New drafts record the exact loaded dataset version. After saving, the
 client can select that JSON, create a separately marked anonymous copy without
 installed-package identity, or open the GitHub simulator-observation form. The
