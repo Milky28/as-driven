@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace AsDriven.Core
 {
@@ -708,7 +709,18 @@ namespace AsDriven.Core
                         manualBlip
                             ? "Clutchless downshift accepted after the driver's manual throttle blip."
                             : "Clutchless downshift accepted with no pedal input. "
-                                + (blip ? "A throttle spike was detected." : "No automatic throttle spike was detected.")
+                                // Report how big it was, not just that it happened.
+                                // A rev-matching blip is a large, brief opening;
+                                // an idle-control or driveline artefact sits just
+                                // over the threshold. Both read as "detected"
+                                // and only the magnitude tells them apart, so a
+                                // reviewer should not have to re-drive the car to
+                                // learn which one this was.
+                                + (blip
+                                    ? "A throttle spike was detected, peaking at "
+                                        + _downshiftArmedThrottle.ToString("0", CultureInfo.InvariantCulture)
+                                        + "% (the threshold is 15%)."
+                                    : "No automatic throttle spike was detected.")
                                 + VehicleClutchSummary());
                     return;
                 }

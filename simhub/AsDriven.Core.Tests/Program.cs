@@ -1282,6 +1282,27 @@ namespace AsDriven.Core.Tests
                         True(carried.GetSnapshot().ResultReady, "accepts the clutchless downshift");
                         True(carried.GetSnapshot().Result.Contains("No automatic throttle spike"),
                             "never reports throttle carried in before the lift as the car's blip");
+
+                        // A detected spike must say how big it was. Three
+                        // RaceRoom cars as different as a Super Touring saloon,
+                        // a GT1 and a modern GT3 all reported "a throttle spike
+                        // was detected" and there was no way to tell a
+                        // rev-matching blip from something sitting just over the
+                        // threshold without driving them again.
+                        GuidedVerificationDrive measured = new GuidedVerificationDrive();
+                        measured.Start(6);
+                        for (int guard = 0; guard < 40
+                            && measured.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            measured.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            measured.Next();
+                        }
+                        measured.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                        measured.AddSample(GuidedSample(now.AddMilliseconds(100), 4, 0, 62, 5200, 80, 210, true));
+                        measured.AddSample(GuidedSample(now.AddMilliseconds(200), 3, 0, 0, 5200, 79, 90, true));
+                        measured.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
+                        True(measured.GetSnapshot().Result.Contains("peaking at 62%"),
+                            "reports the measured peak so a large blip is distinguishable from a small one");
                     }
 
                     // Rev-matching does not stop at the gear change. The driver
