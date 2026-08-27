@@ -154,16 +154,20 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             },
         )
 
-    def test_porsche_gate_stays_provisional_without_an_exact_rsr_diagram(self) -> None:
+    def test_porsche_gate_is_supported_by_the_exact_rsr_cockpit(self) -> None:
         finding = self.finding(
             "porsche-911-rsr-1974--transmission-shift-pattern"
         )
         baseline = finding["authentic_baseline"]
         self.assertEqual("standard-h", baseline["value"])
-        self.assertEqual("medium", baseline["confidence"])
+        self.assertEqual("high", baseline["confidence"])
         self.assertTrue(baseline["primary_source_refs"])
+        self.assertIn(
+            "petersen.1974-porsche-911-rsr-cockpit",
+            baseline["source_refs"],
+        )
         adjudication = finding["adjudication"]
-        self.assertEqual("provisional-departure", adjudication["status"])
+        self.assertEqual("supported-departure", adjudication["status"])
         self.assertEqual(["ams2"], adjudication["matching_simulators"])
         self.assertEqual(["ac"], adjudication["departing_simulators"])
 
@@ -176,7 +180,6 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 "milano-gt55--transmission-downshift-manual-blip",
-                "porsche-911-rsr-1974--transmission-shift-pattern",
                 "saleen-s7-r-gt1--transmission-downshift-manual-blip",
                 # The Miura's Assetto Corsa entry arrived with the manual blip
                 # its drive demanded, over an authentic value of optional that
@@ -214,8 +217,8 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 "authentic-baseline-open": 15,
-                "provisional-departure": 5,
-                "supported-departure": 8,
+                "provisional-departure": 4,
+                "supported-departure": 9,
             },
             self.checked_in["summary"]["by_status"],
         )

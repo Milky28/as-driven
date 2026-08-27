@@ -14,8 +14,8 @@
     "findings": 28,
     "by_status": {
       "authentic-baseline-open": 15,
-      "provisional-departure": 5,
-      "supported-departure": 8
+      "provisional-departure": 4,
+      "supported-departure": 9
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
@@ -1339,18 +1339,19 @@
       "authentic_baseline": {
         "value": "standard-h",
         "display_value": "Standard H",
-        "confidence": "medium",
+        "confidence": "high",
         "source_refs": [
           "porsche.911-workshop-manual.type-915",
           "fia.porsche-911-carrera-rs.homologation-3053",
           "netzwerkeins.porsche-911-rsr-3.0-history",
-          "twinsparkracing.porsche-915-replaced-the-dogleg"
+          "twinsparkracing.porsche-915-replaced-the-dogleg",
+          "petersen.1974-porsche-911-rsr-cockpit"
         ],
         "primary_source_refs": [
           "porsche.911-workshop-manual.type-915",
           "fia.porsche-911-carrera-rs.homologation-3053"
         ],
-        "basis": "The exact RSR used the RS-derived Type 915; Porsche's period workshop manual describes the 915's double shift pattern and specialist evidence identifies its conventional first-up-left layout replacing the 901 dogleg. No readable exact-1974-RSR selector diagram was recovered, so standard H remains the best-supported answer at medium confidence."
+        "basis": "The exact RSR used the RS-derived Type 915; Porsche's period workshop manual describes the 915's double shift pattern and specialist evidence identifies its conventional first-up-left layout replacing the 901 dogleg. The Petersen Automotive Museum's exact 1974 IROC RSR cockpit photograph closes the selector-diagram gap: its visible shift knob places 1st, 3rd and 5th across the upper row and 2nd, 4th and reverse across the lower row."
       },
       "simulator_views": [
         {
@@ -1389,15 +1390,15 @@
         }
       ],
       "adjudication": {
-        "status": "provisional-departure",
+        "status": "supported-departure",
         "matching_simulators": [
           "ams2"
         ],
         "departing_simulators": [
           "ac"
         ],
-        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
-        "next_action": "Strengthen the real-car evidence for gate pattern before publishing a benchmark verdict."
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
       }
     },
     {

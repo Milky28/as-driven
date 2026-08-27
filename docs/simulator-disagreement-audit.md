@@ -24,11 +24,11 @@ entering the audit.
 Dataset 0.5.16 contains 28 field-level findings across 20 cars:
 
 - 8 affect pulling away;
-- 7 affect running-shift technique;
-- 6 affect hardware choice or configuration; and
+- 9 affect running-shift technique;
+- 7 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Seven are **supported departures**, three remain **provisional departures**, and
+Nine are **supported departures**, four remain **provisional departures**, and
 15 have an **open authentic baseline**. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
@@ -149,6 +149,21 @@ D-shaped rim, making that exact implementation a supported departure.
 Sources: [Porsche's exact 991.2 launch material][porsche-9912] and
 [official cockpit photograph][porsche-9912-cockpit].
 
+**Porsche 911 RSR 1974 - gate pattern.** The exact car used the RS-derived
+five-speed Type 915. Porsche's period workshop manual describes the 915 double
+shift pattern, and the Petersen Automotive Museum's exact 1974 IROC RSR cockpit
+photograph shows the selector knob marked 1st, 3rd and 5th across the upper row,
+with 2nd, 4th and reverse across the lower row. That directly establishes the
+conventional H pattern with first gear up and left.
+
+AMS2 1.6.9.91 matches the real-car gate. The fingerprinted official Kunos and
+AC Legends implementations in AC build 14923034 both show a dogleg gate, making
+those exact implementations supported departures.
+
+Sources: [Porsche Type 915 workshop manual][porsche-915-manual],
+[FIA Carrera RS homologation form 3053][fia-3053], and
+[Petersen exact-car cockpit photograph][petersen-rsr-cockpit].
+
 ## Open authentic baselines
 
 **Lotus Renault 98T - forward gears.** The 1986 program used both five- and
@@ -193,23 +208,25 @@ therefore preserves the cross-sim conflict while refusing to declare a winner.
 
 ## Remaining provisional findings
 
-Only three findings still have a real-car answer but fall short of the benchmark's
+Four findings still have a real-car answer but fall short of the benchmark's
 primary-evidence threshold:
 
-1. **Porsche 911 RSR 1974 - gate pattern.** Research confirms that the exact RSR
-   used the RS-derived five-speed Type 915 and that a conventional H is the
-   best-supported layout. The period workshop manual and FIA homologation form
-   do not expose a readable exact-RSR selector diagram, however, so AMS2's
-   conventional gate remains a provisional match and AC's dogleg a provisional
-   departure. The January 1974 RSR operating manual is the best remaining lead.
-2. **Milano 55 GT1 / Prodrive Ferrari 550 GTS - manual blip.** The exact-car Evo
+1. **Milano 55 GT1 / Prodrive Ferrari 550 GTS - manual blip.** The exact-car Evo
    technical account says the clutch is used on every downshift and the driver
    blips to match revs. It is strong secondary evidence, but no manufacturer or
    homologation operating procedure has been recovered.
+2. **Porsche 911 RSR 1974 - manual blip.** The authentic optional blip is derived
+   from the Type 915 family's synchromesh construction. The reviewed sources do
+   not explicitly state that the RSR's 915/08 retained those synchronizers, so
+   AC's required blip remains a provisional departure.
 3. **Saleen S7-R - manual blip.** A first-person test of the 2001 Park Place S7R
    instructs clutch use on both shifts and recommends heel-and-toe on braking
    downshifts. This supports the early S7R family at medium confidence, but does
    not prove every 2005 Xtrac revision retained that procedure.
+4. **Saleen S7-R - wheel geometry.** AMS2 and AC show a round rim while RaceRoom
+   shows a D-shaped rim. The authentic round baseline currently rests on cockpit
+   inspection during the AMS2 drive rather than independent exact-car evidence,
+   so the RaceRoom difference is not yet a benchmark verdict.
 
 ## What a published finding must say
 
@@ -233,6 +250,9 @@ entire simulator from one car.
 [nismo-cockpit]: https://www.nismo.co.jp/en/products/customerracing/img/racingcar/img_comfort_01.jpg
 [porsche-9912]: https://newsroom.porsche.com/en/motorsports/porsche-911-gt3-r-customer-racer-gt3-series-2019-racing-911-gt3-rs-aerodynamics-safety-15335.html
 [porsche-9912-cockpit]: https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/porsche_newsroom/Motorsport/2018-Motorsport-Saison/911-GT3-R/Der-neue-911-GT3-R/b-M18_1436_fine.jpg/jcr%3Acontent/b-M18_1436_fine.jpg
+[porsche-915-manual]: https://www.manualslib.com/manual/1076114/Porsche-1972-911.html
+[fia-3053]: https://historicdb.fia.com/sites/default/files/car_attachment/1601075701/homologation_form_number_3053_group_3.pdf
+[petersen-rsr-cockpit]: https://images.squarespace-cdn.com/content/v1/6598c8e83ff0af0197ff19f9/1710551002730-ZN668CQN3JEDUKFXAUAB/1974-Porsche-911-RSR-2.jpg
 [saleen-first-drive]: https://www.motortrend.com/reviews/saleen-s7r
 [lotus-period]: https://www.motorsportmagazine.com/archive/article/may-1986/23/before-the-dust-had-settled/
 [lotus-licensed]: https://d24udp600h4lxn.cloudfront.net/dea/live/media/27-lotus-senna-uk-web/27-lotus-senna-uk-web.pdf

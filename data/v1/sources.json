@@ -5237,6 +5237,18 @@
       "notes": "Records that the 915 replaced the 901/911 dog-leg first gear with a conventional H pattern, first up and left, citing a 1972 Porsche press release. Registered because secondary sources sometimes attribute the 901's dogleg to the 915, which would put first gear in the wrong place for any car running a 915."
     },
     {
+      "source_id": "petersen.1974-porsche-911-rsr-cockpit",
+      "title": "1974 Porsche 911 RSR cockpit photograph",
+      "publisher": "Petersen Automotive Museum",
+      "url": "https://images.squarespace-cdn.com/content/v1/6598c8e83ff0af0197ff19f9/1710551002730-ZN668CQN3JEDUKFXAUAB/1974-Porsche-911-RSR-2.jpg",
+      "archive_url": null,
+      "source_type": "other",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-27",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact-car cockpit photograph of the Petersen Automotive Museum's 1974 IROC Porsche 911 RSR. The visible shift-knob diagram places 1st, 3rd and 5th across the upper row and 2nd, 4th and reverse across the lower row, establishing a conventional H pattern with first gear up and left. The photograph establishes the visible selector marking only; it does not by itself prove that every cockpit or transmission component is original to the car. The museum vehicle page returned 404 during review, so the registered URL is the directly accessible full-resolution museum image."
+    },
+    {
       "source_id": "porsche.911-workshop-manual.type-915",
       "title": "Porsche 911 Workshop Manual: Type 915 transmission",
       "publisher": "Dr. Ing. h.c. F. Porsche AG",
