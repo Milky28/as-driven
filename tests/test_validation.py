@@ -1181,17 +1181,25 @@ class ValidationTests(unittest.TestCase):
                         )
         self.assertEqual([], offenders)
 
-    def test_a_sourced_rim_is_not_contradicted_by_a_later_observation(self) -> None:
+    def test_a_sourced_rim_disagreement_is_an_explicit_audited_override(self) -> None:
         """A photograph of the real car outranks a look at a simulator.
 
         Where the real rim rests on a manufacturer cockpit photograph, an entry
-        observed after the vocabulary was defined must agree with it. A
-        disagreement there would be a simulator modelling a different wheel,
-        which is a finding worth stopping for - unlike the pre-definition
-        readings, which are vocabulary drift and are listed for re-verification
-        instead.
+        observed after the vocabulary was defined must agree with it or carry an
+        explicit simulator override and disagreement-audit finding. This keeps a
+        real modelling departure representable without letting a later cockpit
+        observation silently rewrite the sourced real-car baseline.
         """
         vocabulary_defined = "2026-08-16"
+        audit = json.loads(
+            (ROOT / "research" / "simulator-disagreement-audit.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        findings = {
+            (finding["record_id"], finding["path"]): finding
+            for finding in audit["findings"]
+        }
         offenders = []
         for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
             record = json.loads(record_path.read_text(encoding="utf-8"))
@@ -1210,10 +1218,34 @@ class ValidationTests(unittest.TestCase):
                 observed = (entry["behavior"].get("wheel_rim_type") or {}).get("normalized")
                 when = entry.get("verified_at") or ""
                 if observed and when >= vocabulary_defined and observed != shape:
-                    offenders.append(
-                        "%s: %s saw %s on %s, against a photographed %s"
-                        % (record["record_id"], entry["simulator"], observed, when, shape)
+                    pointer = "/authentic_controls/steering/wheel_rim/shape"
+                    explicit = any(
+                        override.get("path") == pointer
+                        and override.get("value") == observed
+                        for override in entry.get("overrides", [])
                     )
+                    finding = findings.get((record["record_id"], pointer))
+                    audited = bool(
+                        finding
+                        and any(
+                            view.get("simulator") == entry["simulator"]
+                            and view.get("value") == observed
+                            and view.get("relationship_to_authentic")
+                            == "departs-from-baseline"
+                            for view in finding.get("simulator_views", [])
+                        )
+                    )
+                    if not explicit or not audited:
+                        offenders.append(
+                            "%s: %s saw %s on %s, against a photographed %s"
+                            % (
+                                record["record_id"],
+                                entry["simulator"],
+                                observed,
+                                when,
+                                shape,
+                            )
+                        )
         self.assertEqual([], offenders)
 
     def test_a_registered_simulator_reaches_every_place_that_enumerates_one(self) -> None:

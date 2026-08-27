@@ -13,7 +13,7 @@
   },
   "counts": {
     "recheck": 0,
-    "low": 86
+    "low": 84
   },
   "records": [
     {
@@ -585,24 +585,8 @@
       "priority": "low"
     },
     {
-      "record_id": "nissan-gt-r-nismo-gt3",
-      "class": "GT3",
-      "shift_actuation": "sequential-paddles",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "low"
-    },
-    {
       "record_id": "oreca-07",
       "class": "LMP2",
-      "shift_actuation": "sequential-paddles",
-      "gearbox_type": "sequential",
-      "manual_blip": "not-required",
-      "priority": "low"
-    },
-    {
-      "record_id": "porsche-911-gt3-r",
-      "class": "GT3",
       "shift_actuation": "sequential-paddles",
       "gearbox_type": "sequential",
       "manual_blip": "not-required",
@@ -790,8 +774,20 @@
       "outcome": "confirmed",
       "observation_id": "ams2.super-trophy-trucks.20260818t042330792z-e8e64ebc",
       "rechecked_at": "2026-08-18"
+    },
+    {
+      "record_id": "nissan-gt-r-nismo-gt3",
+      "outcome": "confirmed",
+      "observation_id": "ams2.nissan-gt-r-nismo-gt3.20260827t034656732z-e7b8f600",
+      "rechecked_at": "2026-08-27"
+    },
+    {
+      "record_id": "porsche-911-gt3-r",
+      "outcome": "confirmed",
+      "observation_id": "ams2.porsche-911-gt3-r.20260827t035243201z-0ee40b89",
+      "rechecked_at": "2026-08-27"
     }
   ],
-  "cleared_note": "Re-driven on the corrected measurement and resolved. A confirmed entry keeps the value it had; a corrected one had the blip removed. Both Carrera Cup cars held their blip, which is worth recording because they are dog gearboxes, where a self-blipping downshift is the less expected answer.",
-  "outcome": "The whole recheck tier is done: 14 records re-driven, 7 corrected and 7 confirmed. The corrections all ran the same way - a blip the car does not have, read from throttle the driver was still carrying before the lift. The confirmations matter as much: the corrected measurement keeps a blip where there is one, so it discriminates rather than simply reporting no."
+  "cleared_note": "Re-driven on the corrected measurement and resolved. A confirmed entry keeps the value it had; a corrected one had the blip removed. Both Carrera Cup cars held their blip, which is worth recording because they are dog gearboxes, where a self-blipping downshift is the less expected answer. Later checks also confirmed the Nissan GT-R NISMO GT3 and Porsche 911 GT3 R automatic blips.",
+  "outcome": "The whole recheck tier is done: 14 records re-driven, 7 corrected and 7 confirmed. The corrections all ran the same way: a blip the car does not have, read from throttle the driver was still carrying before the lift. The confirmations matter as much: the corrected measurement keeps a blip where there is one, so it discriminates rather than simply reporting no. Two later low-priority GT3 checks also retained their automatic blips."
 }

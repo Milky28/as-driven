@@ -75,7 +75,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt3-r.20260813t161631591z-4b6f6c96 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.porsche-911-gt3-r.20260813t161631591z-4b6f6c96 by Jason Kinslow.",
+          "A repeat guided drive on 2026-08-27, observation ams2.porsche-911-gt3-r.20260827t035243201z-0ee40b89, confirmed the D-shaped closed rim without display or shift lights and re-measured the automatic cut and automatic blip with the corrected detector. The existing results held."
         ]
       },
       "overrides": [
@@ -240,6 +241,6 @@
     "archetype_id": "paddles-6-seq-no-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Paddle sequential that asks for no clutch at any point: it gets away from rest, cuts the upshift and blips the downshift itself. Once you are in the car the gearbox is not your problem."
 }

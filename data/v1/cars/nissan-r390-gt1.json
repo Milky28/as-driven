@@ -81,7 +81,8 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-r390-gt1.20260813t195441014z-0cff25f1 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.nissan-r390-gt1.20260813t195441014z-0cff25f1 by Jason Kinslow.",
+          "A repeat guided drive on 2026-08-27, observation ams2.nissan-r390-gt1.20260827t035713818z-97ab5ee0, confirmed the round closed rim with shift lights and no integrated display, the automatic cut, and the absence of an automatic blip. The existing results held."
         ]
       },
       "overrides": [
@@ -345,6 +346,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "The Nissan R390 GT1, which Assetto Corsa lists as LMGT Nisumo R39 V8. Xtrac six-speed sequential on a short-throw lever. Upshift flat, the car cuts. It does not blip, so rev-match the downshifts yourself: a blip settles the rear into a corner whether or not the box demands it."
 }

@@ -1,13 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.24",
-  "approved_at": "2026-08-13",
+  "dataset_version": "0.5.16",
+  "approved_at": "2026-08-27",
   "record_id": "nissan-gt-r-nismo-gt3",
   "simulator": "ams2",
   "telemetry_name": "Nissan GT-R Nismo GT3",
-  "telemetry_class": "GT3",
   "observed_game_version": "1.6.9.91",
-  "observed_through": "SimHub guided verification observation ams2.nissan-gt-r-nismo-gt3.20260813t160420958z-7924b51a",
+  "observed_through": "SimHub guided verification observation ams2.nissan-gt-r-nismo-gt3.20260827t034656732z-e7b8f600",
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
@@ -17,12 +16,36 @@
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "round",
+    "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Controls were directly observed with assists disabled; the real-world transmission is supported by a registered source.",
-  "scope_notes": "Single exact identity from one guided-verification drive. Revised 2026-08-25 without a new drive: throttle lift from unknown to not-required, on the automatic cut this record already establishes. A gearbox that cuts the throttle itself leaves the driver nothing to lift for, and the registered archetype for this mechanism carries the same value. No new observation was taken and no other approved value changed."
+  "confidence_notes": "The repeat AMS2 1.6.9.91 guided drive directly confirmed six paddle-selected gears, clutch-free move-off, automatic cut, automatic blip, and a closed D-shaped rim without integrated display or shift lights. The earlier round-rim observation is explicitly superseded.",
+  "scope_notes": "Single exact identity rechecked in a second guided-verification drive.",
+  "telemetry_class": "GT3",
+  "correction_history": [
+    {
+      "corrected_at": "2026-08-27",
+      "superseded_source_ref": "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91",
+      "replacement_source_ref": "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91.correction-e7b8f600",
+      "basis": "The repeat cockpit inspection found a closed D-shaped rim, correcting the earlier round-rim selection. The repeat drive also measured and confirmed the existing automatic cut and automatic blip results.",
+      "behavior_changes": [
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/normalized",
+          "from": "round",
+          "to": "d-shaped"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/steering/wheel_rim/shape",
+          "from": "round",
+          "to": "d-shaped"
+        }
+      ],
+      "authentic_control_changes": [],
+      "removed_simulator_overrides": []
+    }
+  ],
+  "historical_notes": "Corrected from SimHub guided verification observation ams2.nissan-gt-r-nismo-gt3.20260813t160420958z-7924b51a through SimHub guided verification observation ams2.nissan-gt-r-nismo-gt3.20260827t034656732z-e7b8f600: The repeat cockpit inspection found a closed D-shaped rim, correcting the earlier round-rim selection. The repeat drive also measured and confirmed the existing automatic cut and automatic blip results."
 }

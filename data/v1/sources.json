@@ -8501,6 +8501,18 @@
       "retrieved_at": "2026-08-24",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2021.20260824t012136535z-33e4cf0c by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91.correction-e7b8f600",
+      "title": "Live AMS2 Nissan GT-R Nismo GT3 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://localhost/as-driven/guided-verification",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-27",
+      "reuse_status": "facts-only-review",
+      "notes": "Corrective guided-verification observation ams2.nissan-gt-r-nismo-gt3.20260827t034656732z-e7b8f600 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six paddle-selected gears, clutch-free move-off, automatic cut, automatic blip, and a closed D-shaped rim without integrated display or shift lights. It supersedes the earlier round-rim observation."
     }
   ]
 }

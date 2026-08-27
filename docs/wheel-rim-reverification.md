@@ -35,40 +35,39 @@ compare different cars, while these compare the same car seen twice.
 
 | Record | Recorded as | Authentic |
 | --- | --- | --- |
-| `nissan-gt-r-nismo-gt3` | round (ams2), gt-formula (acc) | gt-formula |
+| `nissan-gt-r-nismo-gt3` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `nissan-r390-gt1` | round (ams2), d-shaped (ac) | unknown |
 | `porsche-911-gt3-r` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `saleen-s7-r-gt1` | round (ams2, ac), d-shaped (raceroom) | round |
 
 Count: 4.
 
-None of these is established as a modelling difference, and the dates say why.
-The vocabulary was defined on 2026-08-16. Every disagreeing value in the table
-above was recorded **before** that date, and every value it disagrees with was
-recorded after:
+The vocabulary was defined on 2026-08-16. These splits first surfaced as older
+readings against newer ones, but three were deliberately rechecked on
+2026-08-27:
 
 | Record | Older reading | Newer reading |
 | --- | --- | --- |
-| `nissan-gt-r-nismo-gt3` | ams2 round, 2026-08-13 | acc gt-formula, 2026-08-23 |
-| `porsche-911-gt3-r` | ams2 d-shaped, 2026-08-13 | acc gt-formula, 2026-08-23 |
-| `nissan-r390-gt1` | ams2 round, 2026-08-13 | ac d-shaped, 2026-08-22 |
+| `nissan-gt-r-nismo-gt3` | ams2 round, 2026-08-13 | ams2 d-shaped, 2026-08-27; acc gt-formula, 2026-08-23 |
+| `porsche-911-gt3-r` | ams2 d-shaped, 2026-08-13 | ams2 d-shaped confirmed, 2026-08-27; acc gt-formula, 2026-08-23 |
+| `nissan-r390-gt1` | ams2 round, 2026-08-13 | ams2 round confirmed, 2026-08-27; ac d-shaped, 2026-08-22 |
 | `saleen-s7-r-gt1` | ams2 round, 2026-08-11 | ac round 2026-08-23, raceroom d-shaped 2026-08-26 |
 
 Under the old vocabulary `round` and `d-shaped` described an outline while
 `gt-style`, `prototype` and `formula` described the kind of car, so a
-control-panel rim was routinely recorded by its outline. That is what the first
-three rows look like, and it is a drift rather than a disagreement.
+control-panel rim was routinely recorded by its outline. The repeat drives show
+that vocabulary drift was not the whole explanation.
 
-**Two of them are already settled about the real car.** The GT-R and the 911
+**Two of them are settled about the real car.** The GT-R and the 911
 GT3 R each carry a manufacturer cockpit photograph - `nismo.gt-r-nismo-gt3.2018-cockpit-photo`
 and `porsche.911-gt3-r-991-2.cockpit-photo.2018` - establishing `gt-formula` at
-high confidence, and their post-definition ACC observations agree with it. What
-is left is one pre-definition AMS2 reading each, and the question is not which
-simulator is right but whether that reading survives being taken again.
+high confidence, and their post-definition ACC observations agree with it. The
+repeat AMS2 drives retained conventional D-shaped classifications, so those are
+now explicit simulator departures rather than unresolved vocabulary drift.
 
-`nissan-r390-gt1` has the same shape without the anchor: the real rim is
-unknown, so both readings are simulator observations and neither is checkable
-against a photograph yet.
+`nissan-r390-gt1` still has the same split without the anchor. The repeat AMS2
+drive confirmed its round reading, but the real rim is unknown, so neither
+simulator can yet be judged against an authentic photograph.
 
 `saleen-s7-r-gt1` is the one genuine boundary case. Two independent
 observations call it round, one calls it d-shaped, and the maintainer's
@@ -90,10 +89,10 @@ car SALEEN S7R". It is not registered in `sources.json`, because nothing has bee
 claimed from it yet - registering it is the first step if the real-car shape is
 to be re-decided rather than merely doubted.
 
-Settling one of these needs a look at the rim in each simulator against the
-decision order in `docs/data-model.md`, asking the control-panel question first.
-Until then the recorded values stand: they are what somebody saw, and the split
-is a question about the vocabulary rather than about the cars.
+The GT-R and 911 GT3 R are resolved as documented simulator departures. The
+R390 and Saleen remain open real-car questions. Settling either needs exact
+cockpit evidence evaluated against the decision order in `docs/data-model.md`,
+asking the control-panel question first.
 
 ## 2. Families recorded under more than one shape
 
@@ -145,12 +144,13 @@ Recorded as: round x2, yoke x1.
 
 ### GT3 / GT4 / GTE (30 records)
 
-Recorded as: d-shaped x5, gt-formula x19, round x6.
+Recorded as: d-shaped x6, gt-formula x19, round x5.
 
 - `ginetta-g55-gt3` - d-shaped
 - `ginetta-g55-gt4` - d-shaped
 - `ginetta-g55-gt4-supercup` - d-shaped
 - `mclaren-570s-gt4` - d-shaped
+- `nissan-gt-r-nismo-gt3` - d-shaped
 - `porsche-911-gt3-r` - d-shaped
 - `aston-martin-vantage-gt3-evo` - gt-formula
 - `aston-martin-vantage-gt4-evo` - gt-formula
@@ -173,7 +173,6 @@ Recorded as: d-shaped x5, gt-formula x19, round x6.
 - `porsche-992-gt3-r` - gt-formula
 - `alpine-a110-gt4-evo` - round
 - `milano-gt36` - round
-- `nissan-gt-r-nismo-gt3` - round
 - `porsche-996-gt3-rsr` - round
 - `porsche-cayman-gt4-clubsport-mr` - round
 - `puma-gte` - round

@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.16",
+  "approved_at": "2026-08-27",
+  "records": [
+    {
+      "record_id": "nissan-gt-r-nismo-gt3",
+      "bundle": "build/staged-ams2-nissan-gt-r-nismo-gt3-20260827.json",
+      "manufacturer": "Nissan",
+      "model": "GT-R NISMO GT3",
+      "year": {
+        "from": 2018,
+        "label": "2018 specification"
+      },
+      "class": "GT3",
+      "real_world_identity_notes": "Customer GT3 racing car built on the R35 GT-R with the VR38DETT twin-turbo V6. The NISMO customer-racing specification lists a six-speed sequential transmission with semi-automatic paddle shift as standard equipment.",
+      "real_world_source_refs": [
+        "nismo.gt-r-nismo-gt3.2018-spec"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "The exact AMS2 identity and controls were re-tested in 1.6.9.91. The repeat cockpit inspection directly corrects the earlier round-rim observation, while the measured automatic cut and automatic blip corroborate the existing simulator behavior. The real-world six-speed sequential paddle transmission remains established by the registered NISMO source.",
+      "identity_basis": "The registered NISMO source and unchanged exact telemetry and class identity retain the reviewed 2018 Nissan GT-R NISMO GT3 mapping. This contribution corrects cockpit evidence and rechecks shift automation; it does not reopen the vehicle identity.",
+      "specification_basis": "The manufacturer customer-racing specification lists a six-speed sequential transmission with semi-automatic paddle shift. The repeat guided drive directly confirmed six paddle-selected gears, clutch-free move-off, automatic cut, automatic blip, and a closed D-shaped rim without integrated display or shift lights.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "nismo-2018-cockpit-photo",
+          "notes": "NISMO's exact 2018-Spec cockpit photograph shows molded side grips around a closed central control face, which is GT/Formula in this dataset's geometry vocabulary."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepted clutch-free move-off with automatic clutch and shifting disabled.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct guided move-off test."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "AMS2 1.6.9.91 models a closed D-shaped rim for the 2018 Nissan.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Direct cockpit inspection during the repeat guided drive."
+          }
+        }
+      ],
+      "correct_existing_simulator": {
+        "basis": "The repeat cockpit inspection found a closed D-shaped rim, correcting the earlier round-rim selection. The repeat drive also measured and confirmed the existing automatic cut and automatic blip results.",
+        "supersedes_source_ref": "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91",
+        "supersedes_observed_through": "SimHub guided verification observation ams2.nissan-gt-r-nismo-gt3.20260813t160420958z-7924b51a",
+        "corrected_behavior_paths": [
+          "/behavior/wheel_rim_type/normalized",
+          "/overrides/authentic_controls/steering/wheel_rim/shape"
+        ]
+      },
+      "confidence_notes": "The repeat AMS2 1.6.9.91 guided drive directly confirmed six paddle-selected gears, clutch-free move-off, automatic cut, automatic blip, and a closed D-shaped rim without integrated display or shift lights. The earlier round-rim observation is explicitly superseded.",
+      "scope_notes": "Single exact identity rechecked in a second guided-verification drive.",
+      "control_notes": [
+        "The repeat AMS2 drive corrects the earlier cockpit result: the simulator models a closed D-shaped rim, not a round rim.",
+        "The repeat drive measured and confirmed the existing automatic cut and automatic blip results.",
+        "The real car retains a GT/Formula rim based on NISMO's exact 2018-Spec cockpit photograph."
+      ],
+      "live_source_url": "https://localhost/as-driven/guided-verification",
+      "live_source_notes": "Corrective guided-verification observation ams2.nissan-gt-r-nismo-gt3.20260827t034656732z-e7b8f600 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six paddle-selected gears, clutch-free move-off, automatic cut, automatic blip, and a closed D-shaped rim without integrated display or shift lights. It supersedes the earlier round-rim observation."
+    }
+  ]
+}

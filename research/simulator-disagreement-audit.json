@@ -2,7 +2,7 @@
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
   "dataset_version": "0.5.16",
-  "generated_at": "2026-08-26",
+  "generated_at": "2026-08-27",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -927,11 +927,11 @@
           "display_value": "No clutch needed",
           "relationship_to_authentic": "baseline-open",
           "verified_game_version": "1.6.9.91",
-          "verified_at": "2026-08-13",
+          "verified_at": "2026-08-27",
           "confidence": "verified",
           "source_refs": [
             "nismo.gt-r-nismo-gt3.2018-spec",
-            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91.correction-e7b8f600"
           ]
         },
         {
@@ -984,15 +984,15 @@
         {
           "simulator": "ams2",
           "label": "AMS2",
-          "value": "round",
-          "display_value": "Round rim",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
           "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "1.6.9.91",
-          "verified_at": "2026-08-13",
+          "verified_at": "2026-08-27",
           "confidence": "verified",
           "source_refs": [
             "nismo.gt-r-nismo-gt3.2018-spec",
-            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91"
+            "ams2.local-live-nissan-gt-r-nismo-gt3-controls.1.6.9.91.correction-e7b8f600"
           ]
         },
         {
