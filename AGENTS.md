@@ -81,20 +81,25 @@ than silently queueing verification work.
 - Early-access client: 0.20.0.
 - Dataset: 0.5.15 with 270 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The ignored local contribution queue has four active `identity-research`
-  cases: GitHub issues 9 through 12 for the AC Shelby Daytona Coupe, Ferrari
-  250 GTO, Lamborghini Miura P400 SV and Kunos Ford Mustang 2015. No case is
-  currently waiting at final review.
+- The ignored local contribution queue is clear: 20 cases promoted, one closed
+  as a duplicate, six withdrawn, and nothing waiting on a decision.
 - Use the maintainer workbench for contribution processing. Synchronization is
   serialized across browser tabs, and a same-issue retry with an unchanged
   attachment preserves the original classification. Issue 12 has been restored
   locally as `new-identity` after exposing the former race.
 - Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
-  are closed by written decisions. Chevrolet Cruze Stock Car 2021 remains in
-  the guided queue. New content can still be absent because the inventory only
-  contains cars loaded here. See
+  are closed by written decisions, and the Chevrolet Cruze Stock Car 2021 that
+  used to sit in the guided queue is curated. New content can still be absent
+  because the inventory only contains cars loaded here. See
   `docs/ams2-coverage-plan.md`.
-- Assetto Corsa EVO is the active second-simulator development track. Four
+- Six simulators are registered: 255 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO, 4
+  RaceRoom and 2 rFactor 2, with `ac-rally` reserved in the enums and not
+  wired into the client. A drive from an unregistered game is held rather than
+  lost and released when that game is registered; see
+  `docs/registering-a-simulator.md`, and
+  `docs/raceroom-downshift-measurement.md` for what a simulator's telemetry can
+  and cannot establish.
+- Assetto Corsa EVO is the active second-simulator development track. Seven
   records now carry reviewed AC EVO entries; this is development coverage, not
   part of the certified early-access target. `docs/ac-evo-coverage-plan.md` owns
   its drive order and open questions.

@@ -169,24 +169,30 @@ approval are required before release. See `PRIVACY.md` and
 - Early-access client: 0.20.0.
 - Dataset: 0.5.15 with 270 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The local contribution queue is clear: eleven cases promoted and one closed as
-  a duplicate. The Shelby Daytona Coupe, Ferrari 250 GTO, Kunos Ford Mustang and
-  Lamborghini Miura all landed, the Miura joining the existing AMS2 record as a
-  second simulator entry rather than forking one. Generate each research brief
-  from the workbench, import the completed result, then retain the explicit
-  final-review and promotion gates.
+  Development has since moved to SimHub 9.12.2 and the drives recorded under
+  it carry that in `client_version`; the certified pair is what the early
+  access release claims, and has not been re-certified.
+- The local contribution queue is clear: 20 cases promoted, one closed as a
+  duplicate, six withdrawn. Nothing is waiting on a decision. Generate each
+  research brief from the workbench, import the completed result, then retain
+  the explicit final-review and promotion gates. Research can be revisited after
+  it completes: a case at final-review or manifest-review offers a regenerate
+  and a replacement import beneath its forward action, because the brief gains
+  questions over time and a case researched before one existed would otherwise
+  carry that gap for good.
 - The maintainer workbench is the preferred contribution interface. GitHub
   synchronization is serialized across browser tabs, and editing an issue
   without replacing its attachment preserves the original routing decision.
   Issue 12 exposed that race and has been restored locally as `new-identity`.
 - Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
-  are closed by written decisions. Chevrolet Cruze Stock Car 2021 remains in
-  the guided queue. The inventory only holds cars that have been loaded here,
+  are closed by written decisions, and the Chevrolet Cruze Stock Car 2021 that
+  used to sit in the guided queue is curated. The inventory only holds cars that
+  have been loaded here,
   so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Of 263 records, 252 carry an `archetype` classification: 180 match one of the
-  23 registered mechanisms, 46 deviate, 15 are undetermined and 11 match none.
-  Eleven await classification. An
+- Of 270 records, 252 carry an `archetype` classification: 181 match one of the
+  23 registered mechanisms, 45 deviate, 15 are undetermined and 11 match none.
+  Eighteen await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **A mechanism the record already establishes settles the technique that follows
@@ -199,7 +205,7 @@ approval are required before release. See `PRIVACY.md` and
   archetype already held the value the record was missing. 26 records moved from
   deviating to matching. This runs one way only: a mechanism settles the
   technique, and the technique never settles the mechanism. Nothing was derived
-  over an `unknown` construction, which is why 48 blips remain open.
+  over an `unknown` construction, which is why 47 blips remain open.
 - **The gearbox construction research is closed.** `gearbox_type` is open in 37
   records: 22 are retired as cars a simulator invented, 5 are Copa Truck records
   a regulation frees, and the remaining 10 have each been searched and documented
@@ -270,5 +276,45 @@ approval are required before release. See `PRIVACY.md` and
   RaceRoom publishes no engine torque, so its automatic cut is unmeasurable in
   the same way AC's and ACC's are, and an unregistered simulator is assumed
   unmeasurable too. See `docs/registering-a-simulator.md`.
+- **Six simulators are registered**, with 255 AMS2 entries, 21 AC, 18 ACC, 7 AC
+  EVO, 4 RaceRoom and 2 rFactor 2. `ac-rally` is reserved: it sits in the enums
+  so a record naming it validates, and the client does not canonicalise it. See
+  `docs/registering-a-simulator.md` for the nine places a registration touches
+  and for what a first drive should be read for.
+- **A drive from an unregistered simulator is held, not lost.** The client
+  answers `other` and records `source_game_name` exactly as the telemetry
+  reported it; intake stores the drive, the case sits in `blocked-on-simulator`
+  offering no actions, and promotion refuses it. Registering the game releases
+  every drive waiting on it through an ordinary sync. That took four separate
+  short circuits to make true - the draft's own simulator field, two sync
+  shortcuts and intake's duplicate detector - which now share one question,
+  `_held_case_is_now_releasable`.
+- **RaceRoom cannot answer four of the drive's questions**, and says so rather
+  than answering them wrongly: no engine torque for the cut, a clutch channel
+  reading 100% at rest, a throttle channel reading 24% at rest, and a gearbox
+  that accepts a downshift at any engine speed. Three records had a RaceRoom
+  automatic blip retracted to `unknown` once that was measured. It still
+  establishes gear count, actuation, gate and rim. See
+  `docs/raceroom-downshift-measurement.md`.
+- rFactor 2 discriminates where RaceRoom did not: a Radical SR3 produced a
+  shift-local torque interruption where a BMW M2 published no torque at all, and
+  both report no downshift blip. Its cut was briefly marked unmeasurable on the
+  strength of that one M2 drive and the rule was removed again. One drive is a
+  fact about one car; a channel that reads wrong *at rest* is a property of the
+  simulator and generalises immediately.
+- **Where research establishes a real-car control, the record cites the source
+  rather than the drive.** The promoter used to bundle upshift, downshift,
+  standing-start clutch and the wheel rim into one claim credited to the guided
+  drive, so a manufacturer manual's finding was filed as "directly observed
+  during the guided drive" - on the Radical, a drive that had observed the
+  opposite. The proposal now emits `sourced_control_paths` and the note naming
+  what the sources left open is computed rather than constant.
+- **207 rim observations predate the wheel-rim vocabulary** of 2026-08-16,
+  against 100 after it. Four records where simulators disagree about a rim are
+  listed in `docs/wheel-rim-reverification.md`; three are that drift and want one
+  AMS2 cockpit looked at again, and only the Saleen S7-R is a genuine boundary
+  case, its flat slight enough that round and d-shaped are both defensible.
+  Where a manufacturer cockpit photograph establishes the rim, a later
+  observation must agree with it, and a test says so.
 - Icon and naming redesign concepts under `docs/design/` are review-only and are
   not wired into production assets.
