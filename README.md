@@ -210,7 +210,8 @@ python -m as_driven_db build-site
 Dataset 0.5.15 contains 270 reviewed records. Of the 365 exact AMS2 identities
 observed on the development machine, 349 are covered by the 255 AMS2-backed
 curated records and 15 are closed by written decisions. One current Chevrolet
-Cruze Stock Car 2021 identity remains queued for guided verification. New content still fails closed until it is observed and reviewed.
+Cruze Stock Car 2021 identity has a completed guided drive and remains queued
+for identity research and promotion. New content still fails closed until it is observed and reviewed.
 7 records carry Assetto Corsa EVO entries, 3 of them shared with AMS2. ACC has 18
 reviewed cross-simulator entries. Original Assetto Corsa has 7 AC-only records and 14
 records shared with AMS2.

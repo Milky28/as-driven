@@ -81,16 +81,23 @@ than silently queueing verification work.
 - Early-access client: 0.20.0.
 - Dataset: 0.5.15 with 270 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The ignored local contribution queue is clear: 20 cases promoted, one closed
-  as a duplicate, six withdrawn, and nothing waiting on a decision.
+- The ignored local contribution queue has 20 cases promoted, six withdrawn,
+  and one active `identity-research` case: issue 1 for the Chevrolet Cruze Stock
+  Car 2021. Its guided-drive bytes were already in local intake, which caused
+  the GitHub submission to be classified as an exact resubmission; that meant
+  the draft was already stored, not that the car was curated. The case has been
+  restored locally from the original `new-identity` receipt for research and
+  promotion.
 - Use the maintainer workbench for contribution processing. Synchronization is
   serialized across browser tabs, and a same-issue retry with an unchanged
   attachment preserves the original classification. Issue 12 has been restored
   locally as `new-identity` after exposing the former race.
-- Of 365 AMS2 identities observed on this PC, 349 are covered exactly and 15
-  are closed by written decisions, and the Chevrolet Cruze Stock Car 2021 that
-  used to sit in the guided queue is curated. New content can still be absent
-  because the inventory only contains cars loaded here. See
+- Of 365 AMS2 identities observed on this PC, 349 are covered exactly, 15 are
+  closed by written decisions, and the Chevrolet Cruze Stock Car 2021 remains
+  the one active verification identity. Its completed guided drive is restored
+  in the workbench and now needs identity research and promotion, not another
+  drive. New content can still be absent because the inventory only contains
+  cars loaded here. See
   `docs/ams2-coverage-plan.md`.
 - Six simulators are registered: 255 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO, 4
   RaceRoom and 2 rFactor 2, with `ac-rally` reserved in the enums and not
@@ -109,8 +116,8 @@ than silently queueing verification work.
   no useful file version. This remains development coverage outside the
   certified target. `docs/acc-coverage-plan.md` owns its drive order and identity
   traps.
-- Original Assetto Corsa development now covers 17 records: four AC-only and 13
-  shared with another simulator. Each source fingerprints the exact installed
+- Original Assetto Corsa development now covers 21 records: seven AC-only and
+  14 shared with another simulator. Each source fingerprints the exact installed
   implementation; this remains development coverage outside the certified
   early-access target.
 - The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
