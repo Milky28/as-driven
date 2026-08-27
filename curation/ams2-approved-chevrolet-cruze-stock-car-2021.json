@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.16",
+  "approved_at": "2026-08-26",
+  "record_id": "chevrolet-cruze-stock-car-2021",
+  "simulator": "ams2",
+  "telemetry_name": "Chevrolet Cruze Stock Car 2021",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.chevrolet-cruze-stock-car-2021.20260824t012136535z-33e4cf0c",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2021 Stock Car Brasil Chevrolet Cruze identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "StockCarV8_2021"
+}

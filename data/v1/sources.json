@@ -8468,6 +8468,39 @@
       "retrieved_at": "2026-08-26",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation rfactor2.bmw-m2-cs-racing.20260826t221139358z-d3b8a174 by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "cba.stock-car.2021.chevrolet-cruze-annex",
+      "title": "Anexo Técnico Chevrolet Cruze Stock Car 2021, version 1.6",
+      "publisher": "Confederação Brasileira de Automobilismo",
+      "url": "https://cba.org.br/upload/downloads/572/anexo-tecnico-gm-stock-car-2021-.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: CBA manufacturer/body annex for the 2021 Chevrolet Cruze Stock Car body and components; the document is explicitly complementary to the 2021 Stock Car technical regulation. PDF p.2, cover and introduction: “ANEXO TÉCNICO CHEVROLET CRUZE ... O presente Anexo é parte complementar do Regulamento Técnico do Campeonato Brasileiro de Stock Car – Edição 2021.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. PDF p.2, introduction: “Conteúdo contempla as características técnicas dos componentes e da construção do Stock Car Chevrolet – Cruze.” Reviewed for /identity/model, /identity/real_world_identity_notes. This is the exact 2021 Chevrolet Cruze annex, not a generic road-car brochure. It establishes the body/model identity and category scope; its reviewed pages do not prescribe driver shift technique or wheel-rim topology.",
+      "published_or_updated_at": "2021-03-29"
+    },
+    {
+      "source_id": "as-driven.repository.cruze-stock-car-2021-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-26",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of data/v1/index.json and data/v1/cars for an existing curated 2021 Chevrolet Cruze Stock Car record and adjacent season records. data/v1/index.json and data/v1/cars: “No curated Chevrolet Cruze Stock Car 2021 record is present; adjacent Cruze season records are present.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports the create-new decision and proposed normalized id; it is not independent real-world evidence."
+    },
+    {
+      "source_id": "ams2.local-live-chevrolet-cruze-stock-car-2021-controls.1.6.9.91",
+      "title": "Live AMS2 Chevrolet Cruze Stock Car 2021 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/1",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-24",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.chevrolet-cruze-stock-car-2021.20260824t012136535z-33e4cf0c by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

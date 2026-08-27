@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.15",
+  "dataset_version": "0.5.16",
   "released_at": "2026-08-26",
   "records": [
     "cars/alfa-romeo-156-super-touring.json",
@@ -53,6 +53,7 @@
     "cars/chevrolet-corvette-z06-gt3r.json",
     "cars/chevrolet-cruze-stock-car-2019.json",
     "cars/chevrolet-cruze-stock-car-2020.json",
+    "cars/chevrolet-cruze-stock-car-2021.json",
     "cars/chevrolet-cruze-stock-car-2022.json",
     "cars/chevrolet-cruze-stock-car-2023.json",
     "cars/chevrolet-cruze-stock-car-2024.json",

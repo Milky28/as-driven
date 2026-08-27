@@ -2,7 +2,7 @@
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
   "generated_at": "2026-08-12",
-  "dataset_version": "0.5.15",
+  "dataset_version": "0.5.16",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
@@ -163,23 +163,18 @@
   ],
   "stats": {
     "observed_identities": 365,
-    "curated_records": 270,
-    "covered_exact_identities": 349,
-    "uncovered_identities": 16,
-    "full_guided_verifications": 1,
+    "curated_records": 271,
+    "covered_exact_identities": 350,
+    "uncovered_identities": 15,
+    "full_guided_verifications": 0,
     "dispositions": {
-      "covered-exact": 349,
-      "full-guided-verification": 1,
+      "covered-exact": 350,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
-    "full_verifications_by_family": {
-      "touring-stock": 1
-    },
-    "full_verifications_by_research_readiness": {
-      "independent-control-research-needed": 1
-    }
+    "full_verifications_by_family": {},
+    "full_verifications_by_research_readiness": {}
   },
   "entries": [
     {
@@ -1078,15 +1073,15 @@
       "telemetry_name": "Chevrolet Cruze Stock Car 2021",
       "car_id": "Chevrolet Cruze Stock Car 2021",
       "identity_file": null,
-      "coverage_disposition": "full-guided-verification",
+      "coverage_disposition": "covered-exact",
       "family": "touring-stock",
-      "related_record_id": null,
-      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "related_record_id": "chevrolet-cruze-stock-car-2021",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
       "identity_source": "live-diagnostics",
       "telemetry_class": "StockCarV8_2021",
       "live_observed_at": "2026-08-24T01:20:23.6192810Z",
       "live_game_version": "1.6.9.91",
-      "research_readiness": "independent-control-research-needed"
+      "research_readiness": "not-applicable"
     },
     {
       "telemetry_name": "Chevrolet Cruze Stock Car 2022",

@@ -167,18 +167,16 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.20.0.
-- Dataset: 0.5.15 with 270 curated records.
+- Dataset: 0.5.16 with 271 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the certified pair is what the early
   access release claims, and has not been re-certified.
-- The local contribution queue has 20 cases promoted, six withdrawn, and one
-  active `identity-research` case: issue 1 for the Chevrolet Cruze Stock Car
-  2021. Its guided-drive bytes were already in local intake, which caused the
-  GitHub submission to be classified as an exact resubmission; that meant the
-  draft was already stored, not that the car was curated. The case has been
-  restored locally from the original `new-identity` receipt for research and
-  promotion. Generate each research brief from the workbench, import the
+- The local contribution queue has 21 cases promoted and six withdrawn, with
+  nothing waiting on research or final review. Issue 1 for the Chevrolet Cruze
+  Stock Car 2021 was restored from its original `new-identity` receipt after an
+  exact-resubmission classification hid the already-stored draft, and is now
+  promoted. Generate each research brief from the workbench, import the
   completed result, then retain
   the explicit final-review and promotion gates. Research can be revisited after
   it completes: a case at final-review or manifest-review offers a regenerate
@@ -189,16 +187,14 @@ approval are required before release. See `PRIVACY.md` and
   synchronization is serialized across browser tabs, and editing an issue
   without replacing its attachment preserves the original routing decision.
   Issue 12 exposed that race and has been restored locally as `new-identity`.
-- Of 365 AMS2 identities observed on this PC, 349 are covered exactly, 15 are
-  closed by written decisions, and the Chevrolet Cruze Stock Car 2021 remains
-  the one active verification identity. Its completed guided drive is restored
-  in the workbench and now needs identity research and promotion, not another
-  drive. The inventory only holds cars that have been loaded here,
+- Of 365 AMS2 identities observed on this PC, 350 are covered exactly and 15
+  are closed by written decisions. No observed identity currently awaits guided
+  verification. The inventory only holds cars that have been loaded here,
   so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Of 270 records, 252 carry an `archetype` classification: 181 match one of the
+- Of 271 records, 252 carry an `archetype` classification: 181 match one of the
   23 registered mechanisms, 45 deviate, 15 are undetermined and 11 match none.
-  Eighteen await classification. An
+  Nineteen await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **A mechanism the record already establishes settles the technique that follows
@@ -282,7 +278,7 @@ approval are required before release. See `PRIVACY.md` and
   RaceRoom publishes no engine torque, so its automatic cut is unmeasurable in
   the same way AC's and ACC's are, and an unregistered simulator is assumed
   unmeasurable too. See `docs/registering-a-simulator.md`.
-- **Six simulators are registered**, with 255 AMS2 entries, 21 AC, 18 ACC, 7 AC
+- **Six simulators are registered**, with 256 AMS2 entries, 21 AC, 18 ACC, 7 AC
   EVO, 4 RaceRoom and 2 rFactor 2. `ac-rally` is reserved: it sits in the enums
   so a record naming it validates, and the client does not canonicalise it. See
   `docs/registering-a-simulator.md` for the nine places a registration touches
