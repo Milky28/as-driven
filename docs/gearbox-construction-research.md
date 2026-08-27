@@ -209,9 +209,10 @@ Sources: `https://fasp.faspnet.com.br/wp-content/uploads/2025/02/Formula-Vee-202
 ## Taken: Porsche 911 RSR 1974
 
 The Type 915 is described by a marque specialist as using "Porsche's own
-synchromesh design", distinguished from the later G50's Borg-Warner synchro. The
-RSR ran the 915/08, described elsewhere as a magnesium-cased race-type 915 with
-the dogleg first the family is known for.
+synchromesh design", distinguished from the later G50's Borg-Warner synchro.
+The exact RSR used the RS-derived Type 915, and FIA homologation form 3053
+records synchronized forward gears for that homologated family. The reviewed
+sources do not identify an exact 1974 RSR gearbox subtype.
 
 **Recorded: `synchromesh` at `medium`.** The bundled claim that held the gear
 count, actuation, pattern and construction together at `high` was split, because
@@ -219,19 +220,11 @@ the construction could not ride at that confidence. It now has a claim of its ow
 whose basis says the last step is inferred from the family rather than stated by
 a source - which is what keeps it honest and what the confidence test keys on.
 
-**The blip was not taken with it, and that is now the open question.**
-`downshift.manual_blip` stays unknown and is the record's declared deviation from
-the synchromesh archetype. The reason given was that following the construction
-through would derive one unestablished field from another that is itself only at
-medium.
-
-Half of that still stands and half does not. The construction is recorded, so the
-derivation is the permitted direction, and under the rule above it yields
-`optional` at `medium` rather than nothing at all. What the medium confidence
-argues for is a medium-confidence value, not a blank. Against that: the record
-reads `synchromesh` from an air-cooled Porsche family rather than from a source
-about the 915/08 itself, and a reviewer may reasonably want the family inference
-to carry only the construction and not a second value stacked on it.
+**The blip is `optional` at `medium`.** The construction is recorded, so deriving
+the technique from that mechanism is the permitted direction: synchronized
+forward gears can engage without a driver blip, while heel-and-toe remains
+appropriate racing technique for smoothness and chassis stability. No exact
+1974 RSR driver manual was recovered, so the value cannot rise above medium.
 
 **Decided 2026-08-25: all five take `optional`.** `porsche-911-rsr-1974`,
 `ferrari-250-gto-1962-1964`, `ford-gt40-mk1-1965`, `mclaren-f1-lm-1996` and
@@ -245,7 +238,7 @@ specification says "All synchro constant mesh", and a Borg-Warner T-10 history
 says all four speeds were synchronised. Two are `medium`: the GT40's own claim
 already noted that the primary 1965 event table names the ZF gearbox without
 stating its construction, and the RSR's rests on the 915 family rather than on
-the 915/08.
+an exact 1974 driver or gearbox manual.
 
 The simulator layer needed no change. All five drives found the shift *refused*
 without a blip, which is the strong form of the evidence, and all five already
@@ -934,9 +927,9 @@ reverse manual all-synchromesh". Explicit wording, not a blank or a dash.
 **Why medium.** It is one secondary source. Lamborghini's own heritage sheet gives
 the hardware - a five-speed manual, a dry single-plate clutch - and is silent on
 construction rather than negative, so it neither corroborates nor contradicts.
-That is the 1974 911 RSR's standard exactly: marque-specialist secondary sources,
-no homologation, taken at medium. The identity check the C3.R failed passes here,
-and it mattered: the heritage sheet's 5,707 cm3 and 540 CV separate this car from
+That is enough for a medium-confidence construction claim, not a high-confidence
+one. The identity check the C3.R failed passes here, and it mattered: the
+heritage sheet's 5,707 cm3 and 540 CV separate this car from
 the 5,992 cm3, 590 CV Diablo GTR listed beside it.
 
 **The homologation route is closed for good.** No FIA HistoricDB vehicle form
@@ -972,7 +965,7 @@ homologated, so no form exists for either and none ever will.
 
 Those two need a different source class entirely - constructor or team
 documentation, or a specialist on the specific gearbox, which is the route that
-worked for the 911 RSR's Type 915.
+helped establish the 911 RSR's Type 915 family.
 
 Of the dogleg six, `formula-inter-mg15` has not been searched for papers yet.
 `bmw-m1-procar` has: its Group 4 form exists but predates the article 603 layout

@@ -69,10 +69,11 @@ now explicit simulator departures rather than unresolved vocabulary drift.
 drive confirmed its round reading, but the real rim is unknown, so neither
 simulator can yet be judged against an authentic photograph.
 
-`saleen-s7-r-gt1` is the one genuine boundary case. Two independent
-observations call it round, one calls it d-shaped, and the maintainer's
-photographs show a flat slight enough that either is defensible. No date
-explains that one.
+`saleen-s7-r-gt1` is a genuine evidence boundary. Two simulator observations
+call it round and one calls it d-shaped, but none establishes the real car.
+Research found a restored early S7-R cockpit with a near-circular rim and a
+distinct 2005 second-series car, without an exact period cockpit source that
+connects the two. The exact 2005 wheel therefore remains unknown.
 
 **207 rim observations across the dataset predate the vocabulary**, against 100
 after it, so this is a sample of a much larger drift rather than four odd
@@ -80,18 +81,16 @@ records. These four surfaced because a second simulator happened to look at the
 same car later; the rest have never been contradicted because nobody looked
 twice.
 
-The Saleen is the one with a photograph behind it. The maintainer looked for
-period images of the S7R cockpit and found the rim carries so slight a flat that
-it could reasonably be called either, which explains a split across three
-simulators without any of them modelling anything different. Reference supplied
-by the maintainer: `csms.cz` 2009 photo gallery, "Look into the cockpit of the
-car SALEEN S7R". It is not registered in `sources.json`, because nothing has been
-claimed from it yet - registering it is the first step if the real-car shape is
-to be re-decided rather than merely doubted.
+The Saleen now has registered evidence for the restored early chassis 015-R and
+the distinct 2005 chassis 0060. The early cockpit cannot establish the later
+car's original equipment, and the 2005 listing does not show or describe the
+wheel closely enough to classify it. That is a negative result, not a reason to
+choose the majority simulator answer.
 
 The GT-R and 911 GT3 R are resolved as documented simulator departures. The
-R390 and Saleen remain open real-car questions. Settling either needs exact
-cockpit evidence evaluated against the decision order in `docs/data-model.md`,
+R390 and Saleen remain open real-car questions after targeted searches reached
+the current source limit. Reopen either only when a new exact cockpit source is
+available, then evaluate it against the decision order in `docs/data-model.md`,
 asking the control-panel question first.
 
 ## 2. Families recorded under more than one shape

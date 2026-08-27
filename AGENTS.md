@@ -81,15 +81,16 @@ than silently queueing verification work.
 - Early-access client: 0.20.0.
 - Dataset: 0.5.16 with 271 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The ignored local contribution queue has 21 cases promoted and six withdrawn,
+- The ignored local contribution queue has 24 cases published and six withdrawn,
   with nothing waiting on research or final review. Issue 1 for the Chevrolet
   Cruze Stock Car 2021 was restored from its original `new-identity` receipt
   after an exact-resubmission classification hid the already-stored draft, and
-  is now promoted.
+  is now published. Issues 31 through 33 are also published comparison cases;
+  none needs further reconciliation.
 - Use the maintainer workbench for contribution processing. Synchronization is
   serialized across browser tabs, and a same-issue retry with an unchanged
-  attachment preserves the original classification. Issue 12 has been restored
-  locally as `new-identity` after exposing the former race.
+  attachment preserves the original classification. Issue 12 was restored as
+  `new-identity` after exposing the former race and is now published.
 - Of 365 AMS2 identities observed on this PC, 350 are covered exactly and 15
   are closed by written decisions. No observed identity currently awaits guided
   verification. New content can still be absent because the inventory only contains
@@ -119,6 +120,13 @@ than silently queueing verification work.
 - The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
   those implementations. That result is stored as a simulator override while
   the authentic real-car manual-blip field remains unknown.
+- The disagreement audit contains 28 findings across 20 cars: nine supported
+  departures, two provisional departures and 17 open authentic baselines. The
+  Milano 55 GT1 and 1974 Porsche 911 RSR manual-blip findings are the two
+  provisional cases after targeted research. The exact 2005 Saleen S7-R wheel
+  and downshift procedure remain open; early-car evidence cannot be inherited.
+  Treat the remaining gaps as documented negative results, not an active batch
+  to search again without a new exact-source lead.
 - `validate` compares the dataset version and record count quoted in this file,
   `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
   `data/v1/index.json`. Update the line above with the dataset, or validation

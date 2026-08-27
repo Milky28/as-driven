@@ -1,6 +1,6 @@
 # Control archetypes
 
-**Status: 252 of 271 records are classified** - 181 matches, 45 deviations, 15 undetermined, 11 with no archetype, and 19 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
+**Status: 251 of 271 records are classified** - 180 matches, 45 deviations, 15 undetermined, 11 with no archetype, and 20 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
 the rules below while identifying records that still await classification.

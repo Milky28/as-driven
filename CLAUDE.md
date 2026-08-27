@@ -172,11 +172,12 @@ approval are required before release. See `PRIVACY.md` and
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the certified pair is what the early
   access release claims, and has not been re-certified.
-- The local contribution queue has 21 cases promoted and six withdrawn, with
+- The local contribution queue has 24 cases published and six withdrawn, with
   nothing waiting on research or final review. Issue 1 for the Chevrolet Cruze
   Stock Car 2021 was restored from its original `new-identity` receipt after an
   exact-resubmission classification hid the already-stored draft, and is now
-  promoted. Generate each research brief from the workbench, import the
+  published. Issues 31 through 33 are also published comparison cases; none
+  needs further reconciliation. Generate each research brief from the workbench, import the
   completed result, then retain
   the explicit final-review and promotion gates. Research can be revisited after
   it completes: a case at final-review or manifest-review offers a regenerate
@@ -186,15 +187,16 @@ approval are required before release. See `PRIVACY.md` and
 - The maintainer workbench is the preferred contribution interface. GitHub
   synchronization is serialized across browser tabs, and editing an issue
   without replacing its attachment preserves the original routing decision.
-  Issue 12 exposed that race and has been restored locally as `new-identity`.
+  Issue 12 exposed that race, was restored as `new-identity`, and is now
+  published.
 - Of 365 AMS2 identities observed on this PC, 350 are covered exactly and 15
   are closed by written decisions. No observed identity currently awaits guided
   verification. The inventory only holds cars that have been loaded here,
   so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Of 271 records, 252 carry an `archetype` classification: 181 match one of the
+- Of 271 records, 251 carry an `archetype` classification: 180 match one of the
   23 registered mechanisms, 45 deviate, 15 are undetermined and 11 match none.
-  Nineteen await classification. An
+  Twenty await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **A mechanism the record already establishes settles the technique that follows
@@ -313,10 +315,19 @@ approval are required before release. See `PRIVACY.md` and
   what the sources left open is computed rather than constant.
 - **207 rim observations predate the wheel-rim vocabulary** of 2026-08-16,
   against 100 after it. Four records where simulators disagree about a rim are
-  listed in `docs/wheel-rim-reverification.md`; three are that drift and want one
-  AMS2 cockpit looked at again, and only the Saleen S7-R is a genuine boundary
-  case, its flat slight enough that round and d-shaped are both defensible.
-  Where a manufacturer cockpit photograph establishes the rim, a later
-  observation must agree with it, and a test says so.
+  listed in `docs/wheel-rim-reverification.md`. Exact cockpit evidence resolved
+  the GT-R and 911 GT3 R as simulator departures. The R390 and exact 2005 Saleen
+  S7-R remain open authentic baselines; restored early-car Saleen photographs
+  cannot establish the later second-series wheel. Where an exact manufacturer
+  cockpit photograph establishes the rim, a later observation must agree with
+  it, and a test says so.
+- **The disagreement audit is current and has no immediate research batch.** It
+  contains 28 findings across 20 cars: nine supported departures, two
+  provisional departures and 17 open authentic baselines. The Milano 55 GT1 and
+  1974 Porsche 911 RSR manual-blip findings remain provisional after targeted
+  research. Saleen downshift technique and wheel geometry were returned to
+  `unknown` for the exact 2005 car while every simulator observation was kept as
+  an override. The remaining open findings are documented negative results;
+  reopen one only when a new exact-source lead appears.
 - Icon and naming redesign concepts under `docs/design/` are review-only and are
   not wired into production assets.
