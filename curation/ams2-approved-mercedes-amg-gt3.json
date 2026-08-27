@@ -20,7 +20,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Exact real-car research establishes driver clutch operation to move off. AMS2 instead accepted clutch-free move-off with assists disabled, which is recorded as a simulator override; the remaining simulator behavior was directly observed.",

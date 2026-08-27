@@ -234,16 +234,14 @@
             <TextBox x:Name="_actuationBasis" AutomationProperties.Name="How primary shift mechanism was identified" /></StackPanel>
 
           <TextBlock Text="Steering wheel" Style="{StaticResource Heading}" />
-          <TextBlock Text="Judge the rim itself, never the class the car races in: a 1967 single-seater with a plain circular wheel is Round, not GT / Formula. GT, formula and prototype cars all share one rim - molded grips at 9 and 3 with a control face between them, so your hands stay put - and that is GT / Formula whatever the car. A conventional rim is a continuous band you can grip anywhere and slide your hands around: that is Round, or D-shaped if it is flattened." Style="{StaticResource Hint}" Margin="0,0,0,8" />
+          <TextBlock Text="Judge the physical control, not the car class. GT / Formula means fixed molded grips around a central control face. A conventional rim can be gripped around its perimeter: choose Round for a generally circular outline or D-shaped when a section is flattened." Style="{StaticResource Hint}" Margin="0,0,0,8" />
           <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="18" /><ColumnDefinition /></Grid.ColumnDefinitions>
             <StackPanel><StackPanel Orientation="Horizontal"><TextBlock Text="Wheel shape" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelShapeBadge" /></StackPanel>
               <ComboBox x:Name="_wheelShape" AutomationProperties.Name="Wheel shape" SelectedIndex="0">
                 <ComboBoxItem Content="Unknown - rim not seen" Tag="unknown" />
                 <ComboBoxItem Content="GT / Formula - molded grips, control face" Tag="gt-formula" />
-                <ComboBoxItem Content="Yoke - two grips, nothing joining them over the top" Tag="yoke" />
                 <ComboBoxItem Content="D-shaped - conventional rim, flat bottom or top" Tag="d-shaped" />
                 <ComboBoxItem Content="Round - conventional rim, continuous circle" Tag="round" />
-                <ComboBoxItem Content="Other - matches none of these" Tag="other" />
               </ComboBox></StackPanel>
             <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Integrated display" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelDisplayBadge" /></StackPanel>
               <ComboBox x:Name="_wheelDisplay" AutomationProperties.Name="Integrated display" SelectedIndex="0">
@@ -258,10 +256,10 @@
               </ComboBox></StackPanel>
             <StackPanel Grid.Column="2"><StackPanel Orientation="Horizontal"><TextBlock Text="Rim open across the top" Style="{StaticResource FieldLabel}" /><TextBlock x:Name="_wheelOpenTopBadge" /></StackPanel>
               <ComboBox x:Name="_wheelOpenTop" AutomationProperties.Name="Rim open across the top" SelectedIndex="0">
-                <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" />
+                <ComboBoxItem Content="Not tested" Tag="not-tested" /><ComboBoxItem Content="Yes" Tag="yes" /><ComboBoxItem Content="No" Tag="no" /><ComboBoxItem Content="Unknown" Tag="unknown" /><ComboBoxItem Content="Not applicable" Tag="not-applicable" />
               </ComboBox></StackPanel>
           </Grid>
-          <TextBlock Text="Open across the top asks about material, not grip: is there anything joining the two grips over the top? It describes the rim and no longer decides its category, so a GT / Formula rim may be either. A Yoke is always Yes; a D-shaped or Round rim is No." Style="{StaticResource Hint}" />
+          <TextBlock Text="For a conventional Round or D-shaped rim, choose Yes when an upper section of the rim is removed. This does not apply to GT / Formula wheels, whose fixed grips and control face already determine the hardware choice." Style="{StaticResource Hint}" />
           <TextBlock Text="Wheel notes" Style="{StaticResource FieldLabel}" /><TextBox x:Name="_wheelNotes" AutomationProperties.Name="Wheel notes" Height="54" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
           <TextBlock Text="Review notes" Style="{StaticResource Heading}" />
           <TextBlock Text="Anything a reviewer should know" Style="{StaticResource FieldLabel}" />

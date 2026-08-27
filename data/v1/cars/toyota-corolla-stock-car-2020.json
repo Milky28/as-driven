@@ -40,7 +40,7 @@
         "shape": "gt-formula",
         "integrated_display": "yes",
         "shift_lights": "yes",
-        "open_top": "no",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Observed from the cockpit during the guided drive."
       }
@@ -72,7 +72,7 @@
           "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "yes",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -149,6 +149,6 @@
     "archetype_id": "paddles-6-semiauto-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-22",
+  "updated_at": "2026-08-27",
   "driver_summary": "Six-speed paddle Stock Car with a GT/formula rim, integrated display and shift lights. Use the clutch to launch, then stay flat for upshifts; AMS2 cuts and blips automatically."
 }

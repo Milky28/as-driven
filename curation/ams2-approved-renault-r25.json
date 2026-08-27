@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Exact guided testing established six paddle gears, standing-start clutch, automatic blip, and the GT/Formula display rim. The prior throttle-only automatic-cut inference was retracted as non-diagnostic.",
   "scope_notes": "Exact High Downforce identity only; no unobserved setup suffix is silently added.",

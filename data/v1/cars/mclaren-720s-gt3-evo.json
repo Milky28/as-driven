@@ -44,7 +44,7 @@
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "no",
-        "open_top": "no"
+        "open_top": "not-applicable"
       }
     },
     "notes": [
@@ -88,7 +88,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-gt-style"
         },
         "notes": [
@@ -148,7 +148,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -267,6 +267,6 @@
     "'McLaren 720S GT3 Evo - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Paddle sequential that cuts the upshift and blips the downshift for you. Whether it needs a clutch to pull away was not established, so treat the start as unrecorded rather than clutch-free."
 }

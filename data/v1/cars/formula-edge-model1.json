@@ -37,13 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "yoke",
+        "shape": "round",
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "yes",
-        "source_label": "live-cockpit-yoke-open-no-display",
-        "notes": "Direct inspection showed an open-top yoke-shaped rim; the display and lights are mounted on the dashboard, not the wheel."
+        "source_label": "live-cockpit-open-top-round-no-display",
+        "notes": "Direct inspection showed a conventional round-profile rim with an open upper section; the display and lights are mounted on the dashboard, not the wheel."
       }
     },
     "notes": [
@@ -79,11 +79,11 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "yoke",
+          "normalized": "round",
           "integrated_display": "no",
           "shift_lights": "no",
           "open_top": "yes",
-          "source_label": "live-cockpit-yoke-open-no-display"
+          "source_label": "live-cockpit-open-top-round-no-display"
         },
         "notes": [
           "Exact guided testing detected automatic cut and blip with assists disabled.",
@@ -138,6 +138,6 @@
   "notes": [
     "'Formula Edge Model1' is the same car observed before the aero suffix existed. It inherits these verified controls as an approved configuration alias and was not separately live-tested."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Paddle sequential with one job left for your left foot, which is the clutch to pull away. After that it cuts the upshift and blips the downshift on its own."
 }

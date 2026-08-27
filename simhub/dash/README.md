@@ -42,11 +42,9 @@ same master artwork instead of independently scaling and rotating SimHub shape
 primitives. The approved high-fidelity assets live under `dash/assets`; the
 generator validates their PNG dimensions and packages their exact bytes. A
 regression test prevents an approved asset from silently falling back to the
-older code-drawn artwork. Wheel variants cover round, D-shaped, GT-style,
-prototype, formula, and yoke rims. GT-style uses the reviewed open-top,
-no-display artwork. Prototype uses the reviewed closed display-rim artwork also
-used by Formula until a more visually distinct prototype asset is approved;
-the popup label still identifies it as `Prototype`.
+older code-drawn artwork. Active wheel variants cover round, D-shaped, and
+GT / Formula rims, plus an explicit unknown state. Older package assets for the
+retired wheel values remain only so a legacy dataset can still render.
 Shifter variants cover conventional and dogleg H-patterns, sequential stick,
 paddles, automatic lever, and direct selection. The reusable technique set maps
 automatic cut to its drivetrain icon and no automatic cut to the actionable

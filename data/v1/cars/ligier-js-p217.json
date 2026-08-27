@@ -40,7 +40,7 @@
         "diameter_mm": null,
         "integrated_display": "yes",
         "shift_lights": "unknown",
-        "open_top": "no",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Direct cockpit checks in both AMS2 class generations showed the same closed GT/Formula rim with an integrated display; exact diameter remains unknown."
       }
@@ -77,7 +77,7 @@
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "yes",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -163,6 +163,6 @@
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Hewland TLS-200 six-speed sequential with pneumatic paddle shift, to Ligier's own specification. No clutch to pull away, and the car cuts and blips for itself."
 }

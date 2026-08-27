@@ -42,7 +42,7 @@
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "unknown",
-        "open_top": "unknown",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-gt",
         "notes": "Audi's exact 2018 technical data calls this a multi-functional steering wheel but does not establish whether the rim has an open top."
       }
@@ -73,7 +73,7 @@
         "wheel_rim_type": {
           "normalized": "gt-formula",
           "integrated_display": "no",
-          "open_top": "yes",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-gt"
         },
         "notes": [
@@ -131,7 +131,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -270,6 +270,6 @@
     "Simulator behavior and manufacturer hardware evidence agree that no physical clutch pedal action is required for normal use.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "GT4 racer using the road car's dual-clutch gearbox. It cuts the upshift and blips the downshift, and pulls away without a clutch, so the paddles and two pedals are the whole job."
 }

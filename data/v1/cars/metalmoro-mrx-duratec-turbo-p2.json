@@ -40,7 +40,7 @@
         "shape": "gt-formula",
         "integrated_display": "yes",
         "shift_lights": "yes",
-        "open_top": "no",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Observed from the cockpit during the guided drive."
       }
@@ -73,7 +73,7 @@
           "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "yes",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -148,6 +148,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift and blips the downshift itself, so once you are rolling the gearbox asks nothing of your feet."
 }

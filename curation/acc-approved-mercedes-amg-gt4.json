@@ -18,7 +18,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "ACC directly established the exact AMG GT4 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and closed no-display/no-light rim. The exact drivetrain manual independently confirms the authentic launch clutch; automatic cut remains unknown.",

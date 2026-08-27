@@ -188,7 +188,7 @@
           ]
         },
         "wheel_rim_shape": {
-          "description": "Approved rim shape, matching the record's simulator behavior. gt-style, prototype and formula are retired into gt-formula and remain accepted only so existing approvals stay valid.",
+          "description": "Approved rim family, matching the record's simulator behavior. gt-style, prototype, formula, yoke, and other are deprecated and remain accepted only so legacy approvals can be read.",
           "type": "string",
           "enum": [
             "round",

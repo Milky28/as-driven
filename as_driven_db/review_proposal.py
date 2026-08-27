@@ -286,7 +286,7 @@ def _established_controls_note(result: dict[str, Any]) -> str:
         "/authentic_controls/steering/wheel_rim/shape": "wheel-rim shape",
         "/authentic_controls/steering/wheel_rim/integrated_display": "integrated wheel display",
         "/authentic_controls/steering/wheel_rim/shift_lights": "wheel shift lights",
-        "/authentic_controls/steering/wheel_rim/open_top": "open-top wheel geometry",
+        "/authentic_controls/steering/wheel_rim/open_top": "conventional rim open-top section",
     }
     established: list[str] = []
     for claim in result["claims"]:

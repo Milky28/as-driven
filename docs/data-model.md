@@ -189,36 +189,32 @@ piece of hardware you would fit:
 
 - A **control-panel rim** has molded grips at roughly 9 and 3 with a control
   face between them. Your hands stay where they are put.
-- A **conventional rim** is a continuous band you can grip anywhere and slide
-  your hands around, whatever its outline.
+- A **conventional rim** can be gripped around its perimeter, even when an upper
+  section has been removed.
 
 Take the first value that matches:
 
 1. `gt-formula` - a control-panel rim. Modern GT, formula and prototype cars all
    share it, and it usually carries a display and rev lights.
-2. `yoke` - two grips with nothing joining them over the top.
-3. `d-shaped` - a conventional rim flattened at the bottom, the top, or both.
-4. `round` - a conventional rim that is a continuous circle.
+2. `d-shaped` - a conventional rim with a flattened section.
+3. `round` - a conventional rim with a generally circular outline.
 
-Use `other` for a rim that genuinely matches none of these, and `unknown` when
-the rim was not seen.
+Use `unknown` when the rim was not seen.
 
-`gt-style`, `formula` and `prototype` are **deprecated**. They split one rim
-three ways along racing class, which is information the car's name already
-carries: a driver who knows they are about to drive a formula car does not need
-the database to tell them to fit a smaller rim. The three produced the same
-client icon, and the boundaries between them were not decidable from the
-cockpit - modern formula and GT rims are closed over the top alike, so no
-geometric test separated them. They remain in the enum so existing records and
-drafts stay valid, but new records must not use them.
+`gt-style`, `formula`, `prototype`, `yoke`, and `other` are **deprecated**.
+The first three split one control family by racing class. `yoke` duplicated the
+open-top modifier without a stable boundary from other open-top rims. `other`
+did not produce actionable hardware advice. They remain in schema enums only so
+old drafts and approvals can be read. Curated records and new drafts must use
+only the active values above.
 
 An older road or touring wheel with its top and bottom flattened is a
 conventional rim and is recorded `d-shaped`, because you still grip it all the
 way around. Flattening alone never makes a rim `gt-formula`; molded grips and a
 control face do.
 
-Shape is separate from the optional `integrated_display`, `shift_lights`, and
-`open_top` fields, so any shape may be recorded with or without each of them.
+Shape is separate from `integrated_display` and `shift_lights`. `open_top` is a
+modifier only for conventional `round` and `d-shaped` rims.
 
 - `integrated_display` - any readout carried **on the rim itself**: a graphical
   LCD, an LED numeric gear indicator, or a segment display. A dash mounted on
@@ -226,9 +222,10 @@ Shape is separate from the optional `integrated_display`, `shift_lights`, and
   count.
 - `shift_lights` - shift or rev lights on the rim, recorded independently of
   `integrated_display`.
-- `open_top` - whether the rim is open across the top. It is a modifier that
-  applies to any shape, so a `formula` rim records `open_top: yes` and a
-  `gt-style` rim records `no`. A `yoke` is always `open_top: yes`.
+- `open_top` - for a conventional rim, whether an upper section of the rim is
+  removed. Use `not-applicable` for `gt-formula`. A GT or Formula rim's fixed
+  grips and central control face already determine the hardware choice, so this
+  field does not split that family by outline.
 
 Because these definitions replaced an ambiguous earlier rule, values recorded
 before them may not follow the decision order. See

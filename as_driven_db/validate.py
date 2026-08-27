@@ -83,6 +83,8 @@ SHIFT_ACTUATION = {
     "direct-selection",
     "unknown",
 }
+ACTIVE_WHEEL_RIM_SHAPES = {"round", "d-shaped", "gt-formula", "unknown"}
+DEPRECATED_WHEEL_RIM_SHAPES = {"gt-style", "prototype", "formula", "yoke", "other"}
 
 
 # How each simulator spells an aero package, and the only kinds a match is ever
@@ -248,6 +250,38 @@ def _validate_sources(payload: Any, label: str, errors: list[str]) -> set[str]:
     return ids
 
 
+def _validate_wheel_rim(
+    rim: Any,
+    label: str,
+    errors: list[str],
+    *,
+    shape_key: str,
+) -> None:
+    if not isinstance(rim, dict):
+        errors.append(f"{label}: expected an object")
+        return
+    shape = rim.get(shape_key)
+    if shape in DEPRECATED_WHEEL_RIM_SHAPES:
+        errors.append(
+            f"{label}.{shape_key}: deprecated wheel-rim value {shape!r}; "
+            "use round, d-shaped, gt-formula, or unknown"
+        )
+    elif shape not in ACTIVE_WHEEL_RIM_SHAPES:
+        errors.append(f"{label}.{shape_key}: invalid wheel-rim value {shape!r}")
+
+    open_top = rim.get("open_top")
+    if open_top is not None and open_top not in STATES:
+        errors.append(f"{label}.open_top: invalid state {open_top!r}")
+    if shape == "gt-formula" and open_top != "not-applicable":
+        errors.append(
+            f"{label}.open_top: gt-formula rims must use 'not-applicable'"
+        )
+    elif shape in {"round", "d-shaped", "unknown"} and open_top == "not-applicable":
+        errors.append(
+            f"{label}.open_top: {shape} rims cannot use 'not-applicable'"
+        )
+
+
 def _validate_behavior(behavior: Any, label: str, errors: list[str]) -> None:
     required = {
         "shift_type",
@@ -279,6 +313,12 @@ def _validate_behavior(behavior: Any, label: str, errors: list[str]) -> None:
     rim = behavior["wheel_rim_type"]
     if not _required(rim, {"normalized", "source_label"}, f"{label}.wheel_rim_type", errors):
         return
+    _validate_wheel_rim(
+        rim,
+        f"{label}.wheel_rim_type",
+        errors,
+        shape_key="normalized",
+    )
 
 
 def _validate_transmission(transmission: Any, label: str, errors: list[str]) -> None:
@@ -429,6 +469,12 @@ def _validate_record(
         )
         steering = controls["steering"]
         if _required(steering, {"wheel_rim"}, f"{label}.authentic_controls.steering", errors):
+            _validate_wheel_rim(
+                steering["wheel_rim"],
+                f"{label}.authentic_controls.steering.wheel_rim",
+                errors,
+                shape_key="shape",
+            )
             dor = steering.get("degrees_of_rotation")
             if dor is not None and (not isinstance(dor, int) or not 90 <= dor <= 1800):
                 errors.append(

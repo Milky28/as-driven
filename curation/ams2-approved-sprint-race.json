@@ -19,7 +19,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Six gears, paddle actuation, a standing-start clutch, clutchless running shifts, automatic cut and automatic blip were directly observed. The cockpit has a closed GT/formula-style rim without an integrated display or shift lights. SimHub's clutch channel cannot distinguish the driver's pedal from a car-side clutch intervention.",

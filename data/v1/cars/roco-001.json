@@ -37,10 +37,10 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "yoke",
+        "shape": "gt-formula",
         "integrated_display": "yes",
         "shift_lights": "no",
-        "open_top": "yes",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Observed from the cockpit during the guided drive."
       }
@@ -70,10 +70,10 @@
         "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "yoke",
+          "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "no",
-          "open_top": "yes",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -141,6 +141,6 @@
     "classification": "undetermined",
     "basis": "Two archetypes survive the gap: stick-6-seq-clutch-start-flat-up-blip-down and stick-6-seq-clutch-start-flat-up-no-blip. They differ only on downshift.manual_blip. A guided drive settles it, by downshifting with no throttle input and seeing whether the gear engages."
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Six-speed sequential with a lever. The car cuts the upshift, so stay flat. Nothing blips the downshift, and whether this gearbox needs one to engage is not established, so blip anyway: it settles the car into the corner whether or not the box demands it."
 }

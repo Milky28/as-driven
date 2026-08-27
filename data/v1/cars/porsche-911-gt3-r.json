@@ -40,7 +40,7 @@
         "shape": "gt-formula",
         "integrated_display": "no",
         "shift_lights": "no",
-        "open_top": "no",
+        "open_top": "not-applicable",
         "source_label": "porsche-991-2-cockpit-photo",
         "notes": "Porsche's exact 991.2 cockpit photograph shows molded side grips around a closed central control face, which is GT/Formula in this dataset's geometry vocabulary."
       }
@@ -128,7 +128,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [

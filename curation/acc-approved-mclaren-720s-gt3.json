@@ -19,7 +19,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "ACC directly established the exact non-Evo 2019 identity, clutch-required launch, six paddles, no-lift acceptance, automatic blip and the expected closed rim. Automatic cut remains unknown.",

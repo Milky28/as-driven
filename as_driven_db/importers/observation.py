@@ -366,6 +366,8 @@ def import_observation(
     rim_display = _state(rim.get("integrated_display"))
     rim_lights = _state(rim.get("shift_lights"))
     rim_open_top = _state(rim.get("open_top"))
+    if rim_shape == "gt-formula":
+        rim_open_top = "not-applicable"
     rim_source_label = "live-cockpit-observation"
 
     upshift = {

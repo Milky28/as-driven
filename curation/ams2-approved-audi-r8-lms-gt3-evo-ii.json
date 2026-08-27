@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Exact real-car research now establishes a steering-wheel clutch lever for moving off. The guided AMS2 test instead accepted clutch-free move-off, which is recorded as a simulator override. Automatic cut remains unknown because throttle position cannot distinguish ignition cut from driver input, traction control, or telemetry filtering.",
   "scope_notes": "Low Downforce inherits the verified base controls as an explicit untested aero-package assumption."

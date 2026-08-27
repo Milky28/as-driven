@@ -60,6 +60,9 @@ namespace AsDriven.Core
         private static readonly HashSet<string> ObservedStates = new HashSet<string>(
             new[] { "yes", "no", "unknown", "not-tested" },
             StringComparer.Ordinal);
+        private static readonly HashSet<string> WheelOpenTopStates = new HashSet<string>(
+            new[] { "yes", "no", "unknown", "not-tested", "not-applicable" },
+            StringComparer.Ordinal);
         private static readonly HashSet<string> DirectSelectionStates = new HashSet<string>(
             new[] { "yes", "no", "unknown", "not-tested", "not-applicable" },
             StringComparer.Ordinal);
@@ -79,8 +82,8 @@ namespace AsDriven.Core
             new[] { "paddles", "sequential-stick", "h-pattern", "automatic-lever", "unknown" },
             StringComparer.Ordinal);
         private static readonly HashSet<string> WheelShapes = new HashSet<string>(
-            // gt-style, prototype and formula are retired into gt-formula. They
-            // stay accepted so a draft saved before the merge still loads.
+            // Deprecated values remain readable in old observation files. The
+            // current writer rejects them below so no new draft can use them.
             new[] { "round", "d-shaped", "gt-formula", "gt-style", "prototype", "formula", "yoke", "other", "unknown" },
             StringComparer.Ordinal);
 
@@ -188,7 +191,26 @@ namespace AsDriven.Core
             RequireChoice(draft.WheelShape, WheelShapes, "Wheel shape");
             RequireChoice(draft.WheelIntegratedDisplay, ObservedStates, "Integrated-display result");
             RequireChoice(draft.WheelShiftLights, ObservedStates, "Shift-light result");
-            RequireChoice(draft.WheelOpenTop, ObservedStates, "Open-top result");
+            RequireChoice(draft.WheelOpenTop, WheelOpenTopStates, "Open-top result");
+            if (new[] { "gt-style", "prototype", "formula", "yoke", "other" }
+                .Contains(draft.WheelShape, StringComparer.Ordinal))
+            {
+                throw new InvalidDataException(
+                    "Wheel shape uses a retired value. Choose Round, D-shaped, GT / Formula, or Unknown.");
+            }
+            if (string.Equals(draft.WheelShape, "gt-formula", StringComparison.Ordinal)
+                && !string.Equals(draft.WheelOpenTop, "not-applicable", StringComparison.Ordinal))
+            {
+                throw new InvalidDataException(
+                    "Open top must be not-applicable for a GT / Formula rim.");
+            }
+            if ((string.Equals(draft.WheelShape, "round", StringComparison.Ordinal)
+                    || string.Equals(draft.WheelShape, "d-shaped", StringComparison.Ordinal))
+                && string.Equals(draft.WheelOpenTop, "not-applicable", StringComparison.Ordinal))
+            {
+                throw new InvalidDataException(
+                    "Open top must be reviewed for a conventional Round or D-shaped rim.");
+            }
             if (draft.ForwardGears.HasValue
                 && (draft.ForwardGears.Value < 1 || draft.ForwardGears.Value > 20))
             {

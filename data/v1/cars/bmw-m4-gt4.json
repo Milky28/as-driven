@@ -40,7 +40,7 @@
         "shape": "gt-formula",
         "integrated_display": "no",
         "shift_lights": "no",
-        "open_top": "no",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Observed from the cockpit during the guided drive."
       }
@@ -72,7 +72,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -115,7 +115,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -220,6 +220,6 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "GT4 racer using the road car's dual-clutch gearbox. It cuts the upshift and blips the downshift, and pulls away without a clutch, so the paddles and two pedals are the whole job."
 }

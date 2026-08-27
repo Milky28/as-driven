@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
   "scope_notes": "Reviewed guided observation for Formula V8 Gen3 - High Downforce.",

@@ -558,7 +558,7 @@ namespace AsDriven.Core.Tests
                 Equal("required", audiR8Lmp1.StandingStartClutch, "requires the Audi R8 LMP1 clutch from rest");
                 Equal("yes", audiR8Lmp1.ShiftCut, "exposes the Audi R8 LMP1 automatic cut");
                 Equal("yes", audiR8Lmp1.AutoBlip, "exposes the Audi R8 LMP1 automatic blip");
-                Equal("yoke", audiR8Lmp1.WheelRimShape, "uses the observed Audi yoke-style rim");
+                Equal("d-shaped", audiR8Lmp1.WheelRimShape, "uses the observed Audi open-top D-shaped rim");
 
                 GuidanceSnapshot courageC60 = database.Match("Automobilista2", "Courage C60 Hybrid");
                 Equal("6-speed sequential stick", courageC60.ShiftType, "formats the Courage C60 transmission");
@@ -687,7 +687,7 @@ namespace AsDriven.Core.Tests
                 // surface is guaranteed to say the same thing.
                 Equal("Round rim", PreflightLabels.WheelRim("round"), "names a round rim");
                 Equal("D-shaped rim", PreflightLabels.WheelRim("d-shaped"), "names a D-shaped rim");
-                Equal("Yoke", PreflightLabels.WheelRim("yoke"), "names a yoke");
+                Equal("Open-top rim (legacy)", PreflightLabels.WheelRim("yoke"), "labels a retired yoke value");
                 Equal("Rim not recorded", PreflightLabels.WheelRim("unknown"),
                     "says the rim was not recorded rather than inventing one");
                 foreach (string merged in new[] { "gt-formula", "gt-style", "prototype", "formula" })
@@ -1154,11 +1154,11 @@ namespace AsDriven.Core.Tests
                         VisibleShiftActuators = new[] { "paddles", "sequential-stick" },
                         PrimaryShiftActuation = "sequential-paddles",
                         ActuationBasis = "Visible paddles and driver animation.",
-                        WheelShape = "prototype",
+                        WheelShape = "gt-formula",
                         WheelIntegratedDisplay = "yes",
                         WheelShiftLights = "yes",
-                        WheelOpenTop = "no",
-                        WheelNotes = "Closed prototype rim.",
+                        WheelOpenTop = "not-applicable",
+                        WheelNotes = "GT / Formula rim.",
                         EvidenceNotes = new[] { "Draft only; requires reviewer approval." }
                     };
                     string verificationPath = VerificationObservationWriter.WriteDraft(

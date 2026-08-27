@@ -19,7 +19,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "ACC directly established the exact 2023 Evo identity and all modeled controls; launch clutch use differs from AMS2.",

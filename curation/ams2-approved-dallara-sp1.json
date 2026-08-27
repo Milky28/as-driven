@@ -20,7 +20,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "unknown",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Exact identity, six gears, standing-start clutch, automatic cut and blip, and GT/Formula display rim were directly observed. Paddle actuation is supported by visible paddles and replay animation retaining both hands on the wheel through shifts.",
   "scope_notes": "A cockpit sequential lever is also visible. Paddle actuation is the reviewed modeled control, but the animation-based distinction remains explicitly falsifiable. 'Dallara SP1 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested. The rim shape was remapped from the retired \"prototype\" value to \"gt-style\" by definition, without observing the rim again.",

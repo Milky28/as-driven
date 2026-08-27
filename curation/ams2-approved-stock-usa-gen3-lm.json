@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
   "scope_notes": "Reviewed draft ams2.stock-usa-gen3-lm.20260812t171834877z-e7fc8bec."

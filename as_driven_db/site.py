@@ -45,8 +45,8 @@ RIM = {
     "gt-style": "GT / Formula rim",
     "prototype": "GT / Formula rim",
     "formula": "GT / Formula rim",
-    "yoke": "Yoke",
-    "other": "Other rim",
+    "yoke": "Open-top rim (legacy)",
+    "other": "Unclassified rim (legacy)",
 }
 
 SIMULATOR_LABELS = {
@@ -444,7 +444,7 @@ def simulator_disagreements(
         established = {
             json.dumps(value, sort_keys=True)
             for value in values
-            if value not in {None, "unknown"}
+            if value not in {None, "unknown", "not-applicable"}
         }
         if len(established) < 2:
             continue

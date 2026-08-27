@@ -1,8 +1,8 @@
 # Wheel-rim re-verification worklist
 
-The wheel-rim vocabulary was defined in dataset 0.3.56, after most records had already been curated. Until then the enum mixed two axes: `round`, `d-shaped` and `yoke` describe a rim's outline, while `gt-style`, `prototype` and `formula` described the kind of car. Most rims satisfy one of each, so both answers were always defensible and the recorded values drifted.
+The wheel-rim vocabulary was defined in dataset 0.3.56, after most records had already been curated. It was simplified again in dataset 0.5.17. The active categories are now `round`, `d-shaped`, `gt-formula`, and `unknown`. Open top is a separate modifier for conventional `round` and `d-shaped` rims. It is `not-applicable` for `gt-formula`.
 
-`docs/data-model.md` now defines shape by the rim itself. This file lists the records whose recorded values cannot be reconciled with those definitions. Nothing here has been corrected by inference: a rim that was not looked at again is not re-described.
+`yoke` and `other` are retired. The four former yoke records were migrated from their existing cockpit descriptions: Audi R8 LMP1 to open-top `d-shaped`, Formula Edge Model1 and Formula Vee Gen2 to open-top `round`, and Roco 001 to `gt-formula`. Legacy values remain readable in old artifacts but are rejected from curated data.
 
 One caveat applies to every record, not only those listed below. The definitions ask first whether a rim is a control-panel rim (molded grips at 9 and 3, hands fixed) or a conventional one (a continuous band gripped anywhere). That question was never put to a reviewer before these definitions existed, so the boundary between `gt-formula`, `d-shaped` and `round` was drawn without it throughout. The distinction is untested rather than confirmed.
 
@@ -12,9 +12,9 @@ One caveat applies to every record, not only those listed below. The definitions
 
 Merging also settled the largest contradiction this file used to list. All 15 `formula` records recorded `open_top: no`, which conflicted with a definition that made `formula` mean *open across the top*. The reviewer was right and the definition was wrong: modern formula rims close over the top much as GT rims do, and eight records said so in prose, describing "a closed Formula rim". `open_top` is now descriptive and decides nothing, so those records are consistent as they stand.
 
-## 1. Shape and open-top contradict each other
+## 1. Historical shape and open-top contradictions
 
-`yoke` means open across the top, and `d-shaped` and `round` are conventional rims closed over the top. In each record below the shape and `open_top` state the opposite of each other, so one of them is wrong and only a look at the cockpit can say which. `gt-formula` records cannot appear here: that value implies nothing about the top.
+This was the earlier audit under the retired vocabulary. It is retained as history, not as the current classification rule. A conventional `round` or `d-shaped` rim may now be open across the top, while `gt-formula` always records `open_top: not-applicable`.
 
 | Record | Shape | open_top |
 | --- | --- | --- |

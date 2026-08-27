@@ -45,7 +45,7 @@
         "diameter_mm": null,
         "integrated_display": "yes",
         "shift_lights": "yes",
-        "open_top": "no"
+        "open_top": "not-applicable"
       }
     },
     "notes": [
@@ -91,7 +91,7 @@
           "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "yes",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-formula"
         },
         "notes": [
@@ -171,5 +171,5 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"formula\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-25"
+  "updated_at": "2026-08-27"
 }

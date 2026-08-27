@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Manufacturer hardware evidence and exact guided testing agree; automatic cut was manually confirmed and remains medium confidence.",
   "scope_notes": "Exact Ligier JS2 R / LES_2025 identity."

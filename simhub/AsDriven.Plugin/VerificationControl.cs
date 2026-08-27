@@ -97,6 +97,7 @@ namespace AsDriven.Plugin
             _evidenceNotes.TextChanged += ManualEvidenceChanged;
             SizeChanged += VerificationControlSizeChanged;
             UpdateAssistConfirmationStyle();
+            UpdateWheelOpenTopApplicability();
             UpdateLiveAvailability();
         }
 
@@ -303,6 +304,7 @@ namespace AsDriven.Plugin
             _guidedCoastDownshift = "not-tested";
             _evidenceNotes.BorderThickness = new Thickness(1);
             _evidenceNotes.BorderBrush = new SolidColorBrush(Color.FromArgb(80, 120, 150, 180));
+            UpdateWheelOpenTopApplicability();
             foreach (Control control in new Control[]
             {
                 _moveOff, _forwardGears, _directGearSelection,
@@ -822,6 +824,11 @@ namespace AsDriven.Plugin
                 SetFieldBadge(_shiftPattern, "DERIVED", Brushes.Gray);
             }
 
+            if (OpenTopIsNotApplicable())
+            {
+                SetFieldBadge(_wheelOpenTop, "NOT APPLICABLE", Brushes.Gray);
+            }
+
             _visibleHardwareBadge.Text = string.Empty;
             _visibleHardwareBadge.Visibility = Visibility.Collapsed;
             HighlightNextReviewField();
@@ -882,6 +889,10 @@ namespace AsDriven.Plugin
                 _wheelShiftLights, _wheelOpenTop
             })
             {
+                if (combo == _wheelOpenTop && !OpenTopApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     SetFieldBadge(combo, "NEXT", Brushes.LightGreen);
@@ -984,6 +995,10 @@ namespace AsDriven.Plugin
                 _wheelShiftLights, _wheelOpenTop
             })
             {
+                if (combo == _wheelOpenTop && !OpenTopApplies())
+                {
+                    continue;
+                }
                 if (IsUnresolved(ChoiceValue(combo)))
                 {
                     count++;
@@ -1330,10 +1345,46 @@ namespace AsDriven.Plugin
 
         private void OptionalChoiceChanged(object sender, SelectionChangedEventArgs eventArgs)
         {
+            if (sender == _wheelShape)
+            {
+                UpdateWheelOpenTopApplicability();
+            }
             UpdateOptionalBadges();
             UpdateWorkflowGuidance(
                 _plugin.CaptureVerificationContext(),
                 _plugin.GetGuidedDriveSnapshot());
+        }
+
+        private bool OpenTopApplies()
+        {
+            string shape = ChoiceValue(_wheelShape);
+            return string.Equals(shape, "round", StringComparison.Ordinal)
+                || string.Equals(shape, "d-shaped", StringComparison.Ordinal);
+        }
+
+        private bool OpenTopIsNotApplicable()
+        {
+            string shape = ChoiceValue(_wheelShape);
+            return string.Equals(shape, "gt-formula", StringComparison.Ordinal)
+                || string.Equals(shape, "gt-style", StringComparison.Ordinal)
+                || string.Equals(shape, "prototype", StringComparison.Ordinal)
+                || string.Equals(shape, "formula", StringComparison.Ordinal);
+        }
+
+        private void UpdateWheelOpenTopApplicability()
+        {
+            bool applies = OpenTopApplies();
+            bool notApplicable = OpenTopIsNotApplicable();
+            _wheelOpenTop.IsEnabled = applies;
+            if (notApplicable)
+            {
+                SelectChoice(_wheelOpenTop, "not-applicable");
+            }
+            else if (!applies
+                || string.Equals(ChoiceValue(_wheelOpenTop), "not-applicable", StringComparison.Ordinal))
+            {
+                SelectChoice(_wheelOpenTop, "not-tested");
+            }
         }
 
         private void VisibleHardwareChanged(object sender, RoutedEventArgs eventArgs)

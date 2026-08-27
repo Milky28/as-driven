@@ -37,13 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "yoke",
+        "shape": "round",
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "yes",
-        "source_label": "live-cockpit-open-yoke-no-display",
-        "notes": "Direct cockpit inspection showed an open-top yoke-shaped rim without an integrated display or wheel-mounted shift lights."
+        "source_label": "live-cockpit-open-top-round-no-display",
+        "notes": "Direct cockpit inspection showed a conventional round-profile rim with an open upper section and no integrated display or wheel-mounted shift lights."
       }
     },
     "notes": [
@@ -77,15 +77,15 @@
         "auto_blip": "no",
         "shift_cut": "no",
         "wheel_rim_type": {
-          "normalized": "yoke",
+          "normalized": "round",
           "integrated_display": "no",
           "shift_lights": "no",
           "open_top": "yes",
-          "source_label": "live-cockpit-open-yoke-no-display"
+          "source_label": "live-cockpit-open-top-round-no-display"
         },
         "notes": [
           "Guided live test completed with Auto Clutch and Auto Shifting disabled.",
-          "Standing-start clutch, five direct H selections, required lift/manual blip, and the open yoke rim were directly observed."
+          "Standing-start clutch, five direct H selections, required lift/manual blip, and the open-top round rim were directly observed."
         ]
       },
       "overrides": [
@@ -193,6 +193,6 @@
   "notes": [
     "Gearbox construction remains unknown rather than being inferred from successful rev-matched clutchless shifts."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Formula Vee Gen2, which Reiza developed with the Brazilian series around the Naja01-D chassis and a Volkswagen five-speed. Synchronised, so a blip eases the synchros rather than being needed to engage the gear."
 }

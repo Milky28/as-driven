@@ -42,7 +42,8 @@
         "integrated_display": "yes",
         "shift_lights": "unknown",
         "source_label": "live-cockpit-observation",
-        "notes": "Direct cockpit inspection showed a GT/Formula rim with an integrated display; exact diameter remains unknown."
+        "notes": "Direct cockpit inspection showed a GT/Formula rim with an integrated display; exact diameter remains unknown.",
+        "open_top": "not-applicable"
       }
     },
     "notes": [
@@ -78,7 +79,7 @@
           "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "unknown",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -166,6 +167,6 @@
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Paddle sequential with one job left for your left foot, which is the clutch to pull away. After that it cuts the upshift and blips the downshift on its own."
 }

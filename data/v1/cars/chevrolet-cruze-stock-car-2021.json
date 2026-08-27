@@ -77,7 +77,7 @@
           "normalized": "gt-formula",
           "integrated_display": "yes",
           "shift_lights": "yes",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -366,5 +366,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-26"
+  "updated_at": "2026-08-27"
 }

@@ -19,7 +19,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "First record curated from Assetto Corsa EVO rather than merged into an existing one. Clutch-free move-off, six paddle gears, clutchless upshifts at sustained full throttle, clutchless downshifts on a closed throttle with an automatic blip, and a GT rim with no display and no shift lights were directly observed. The upshift needing no lift and the downshift needing no blip come from the drive's two-stage tests rather than being assumed. The automatic cut is not established and cannot be by this method: Assetto Corsa EVO publishes no engine torque to SimHub and the cut is ignition-side.",

@@ -221,8 +221,8 @@ files, so an installation that already has a customized layout keeps it.
 
 ## Certified boundary and development coverage
 
-Client version 0.20.0 is built against the SimHub 9.11.22 SDK and packages
-dataset 0.5.1. The certified early-access target is AMS2 1.6.9.91 on Windows.
+Client version 0.20.1 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.5.17. The certified early-access target is AMS2 1.6.9.91 on Windows.
 The client also recognizes Assetto Corsa EVO and Assetto Corsa for active
 development. Assetto Corsa Competizione has 18 reviewed entries, each captured
 with its exact Steam content build. None is part of the certified release target.

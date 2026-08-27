@@ -191,7 +191,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 17,
+                "authentic-baseline-open": 16,
                 "provisional-departure": 2,
                 "supported-departure": 9,
             },
@@ -249,7 +249,6 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
 
     def test_open_findings_do_not_inherit_a_simulator_answer(self) -> None:
         expected = {
-            "audi-r8-lms-gt4--steering-wheel-rim-open-top",
             "bmw-m6-gt3--steering-wheel-rim-shift-lights",
             "ginetta-g55-gt4--steering-wheel-rim-integrated-display",
             "ginetta-g55-gt4--steering-wheel-rim-shift-lights",

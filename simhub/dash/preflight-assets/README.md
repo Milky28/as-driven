@@ -30,7 +30,7 @@ python simhub/dash/icons.py
 
 | Group | Files |
 | --- | --- |
-| Wheel rims | `wheel-round`, `wheel-d-shaped`, `wheel-gt-formula`, `wheel-yoke`, `wheel-other`, `wheel-unknown` |
+| Wheel rims | `wheel-round`, `wheel-d-shaped`, `wheel-gt-formula`, `wheel-unknown` |
 | Shift controls | `shift-h-pattern`, `shift-dogleg-h`, `shift-sequential-stick`, `shift-sequential-paddles`, `shift-automatic-lever`, `shift-direct-selection`, `shift-unknown` |
 | Driver and note rows | `control-clutch`, `control-throttle`, `note-info` |
 

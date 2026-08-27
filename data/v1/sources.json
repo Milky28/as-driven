@@ -253,7 +253,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
-      "notes": "AMS2 1.6.9.91 through SimHub 9.11.22 emitted Audi R8 LMP1 / LMP1_05. Direct testing with Auto Clutch disabled confirmed clutch required from rest, six paddle-selected gears, clutchless upshifts with automatic cut, clutchless downshifts with automatic blip, and a flat-bottom yoke-style rim without a display."
+      "notes": "AMS2 1.6.9.91 through SimHub 9.11.22 emitted Audi R8 LMP1 / LMP1_05. Direct testing with Auto Clutch disabled confirmed clutch required from rest, six paddle-selected gears, clutchless upshifts with automatic cut, clutchless downshifts with automatic blip, and a flat-bottom open-top D-shaped rim without a display."
     },
     {
       "source_id": "ams2.local-live-audi-r8-lms-gt3-controls.1.6.9.91",
@@ -973,7 +973,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
-      "notes": "Draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80 records standing-start clutch, six paddle gears, detected automatic cut/blip, and an open yoke rim with dash-mounted display and lights."
+      "notes": "Draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80 records standing-start clutch, six paddle gears, detected automatic cut/blip, and an open-top round rim with dash-mounted display and lights."
     },
     {
       "source_id": "ams2.local-live-formula-edge-model2-hd-controls.1.6.9.91",
@@ -1321,7 +1321,7 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-11",
       "reuse_status": "facts-only-review",
-      "notes": "Guided draft ams2.formula-vee-gen2.20260811t193625909z-a27eebe1 records AMS2 1.6.9.91 / F-Vee_Gen2 with assists disabled: clutch required from rest, five direct-selection H-pattern gears, lift-required clutchless upshifts, manual-blip clutchless downshifts, no automatic cut or blip, and an open-top yoke rim without display or shift lights."
+      "notes": "Guided draft ams2.formula-vee-gen2.20260811t193625909z-a27eebe1 records AMS2 1.6.9.91 / F-Vee_Gen2 with assists disabled: clutch required from rest, five direct-selection H-pattern gears, lift-required clutchless upshifts, manual-blip clutchless downshifts, no automatic cut or blip, and an open-top round rim without display or shift lights."
     },
     {
       "source_id": "ams2.local-live-formula-vintage-gen1-model1-controls.1.6.9.91",

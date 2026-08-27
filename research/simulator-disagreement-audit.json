@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.16",
+  "dataset_version": "0.5.17",
   "generated_at": "2026-08-27",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
@@ -10,16 +10,16 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 20,
-    "findings": 28,
+    "cars_with_disagreements": 19,
+    "findings": 27,
     "by_status": {
-      "authentic-baseline-open": 17,
+      "authentic-baseline-open": 16,
       "provisional-departure": 2,
       "supported-departure": 9
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 7,
+      "hardware-choice": 6,
       "launch-technique": 8,
       "running-shift-technique": 9
     }
@@ -124,66 +124,6 @@
         ],
         "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
         "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
-      }
-    },
-    {
-      "finding_id": "audi-r8-lms-gt4--steering-wheel-rim-open-top",
-      "record_id": "audi-r8-lms-gt4",
-      "display_name": "Audi R8 LMS GT4",
-      "class": "GT4",
-      "path": "/authentic_controls/steering/wheel_rim/open_top",
-      "field": "Open-top wheel",
-      "driver_impact": "hardware-choice",
-      "priority": "high",
-      "authentic_baseline": {
-        "value": "unknown",
-        "display_value": "Not established",
-        "confidence": "medium",
-        "source_refs": [
-          "audi.r8-lms-gt4.technical"
-        ],
-        "primary_source_refs": [
-          "audi.r8-lms-gt4.technical"
-        ],
-        "basis": "Audi's exact 2018 technical data specifies a multi-functional steering wheel but does not describe its top-edge geometry. The 2020 GT2-derived wheel is a later revision and is not inherited backward."
-      },
-      "simulator_views": [
-        {
-          "simulator": "ams2",
-          "label": "AMS2",
-          "value": "yes",
-          "display_value": "Yes",
-          "relationship_to_authentic": "baseline-open",
-          "verified_game_version": "1.6.9.91",
-          "verified_at": "2026-08-10",
-          "confidence": "verified",
-          "source_refs": [
-            "ams2.reiza-release.1.6.3.endurance-pt2",
-            "audi.r8-lms-gt4.technical",
-            "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
-          ]
-        },
-        {
-          "simulator": "acc",
-          "label": "Assetto Corsa Competizione",
-          "value": "no",
-          "display_value": "No",
-          "relationship_to_authentic": "baseline-open",
-          "verified_game_version": "21257365",
-          "verified_at": "2026-08-23",
-          "confidence": "verified",
-          "source_refs": [
-            "audi.r8-lms-gt4.technical",
-            "acc.local-live-audi-r8-lms-gt4-2016-controls.21257365"
-          ]
-        }
-      ],
-      "adjudication": {
-        "status": "authentic-baseline-open",
-        "matching_simulators": [],
-        "departing_simulators": [],
-        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
-        "next_action": "Find real-car evidence for open-top wheel."
       }
     },
     {

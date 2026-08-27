@@ -37,12 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "yoke",
+        "shape": "d-shaped",
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "unknown",
-        "source_label": "live-cockpit-flat-bottom-yoke-no-display",
-        "notes": "Direct cockpit inspection showed a flat-bottom yoke-style rim without an integrated display; exact diameter remains unknown."
+        "source_label": "live-cockpit-open-top-d-shaped-no-display",
+        "notes": "Direct cockpit inspection showed a flat-bottom D-shaped conventional rim with an open upper section and no integrated display; exact diameter remains unknown.",
+        "open_top": "yes"
       }
     },
     "notes": [
@@ -74,15 +75,15 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "yoke",
+          "normalized": "d-shaped",
           "integrated_display": "no",
           "shift_lights": "unknown",
-          "open_top": "unknown",
-          "source_label": "live-cockpit-flat-bottom-yoke-no-display"
+          "open_top": "yes",
+          "source_label": "live-cockpit-open-top-d-shaped-no-display"
         },
         "notes": [
           "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Standing-start clutch, six paddle gears, automatic cut and blip, and flat-bottom yoke-style no-display rim were directly observed.",
+          "Standing-start clutch, six paddle gears, automatic cut and blip, and a flat-bottom open-top D-shaped rim without a display were directly observed.",
           "'Audi R8 LMP1 - Low Downforce' is an exact observed identity inheriting the verified base controls; that aero configuration was not separately live-tested."
         ]
       },
@@ -151,6 +152,6 @@
   "notes": [
     "'Audi R8 LMP1 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-27",
   "driver_summary": "Paddle sequential with one job left for your left foot, which is the clutch to pull away. After that it cuts the upshift and blips the downshift on its own."
 }

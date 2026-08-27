@@ -16,7 +16,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "The exact 2021 identity and supported gearbox hardware come from official sources. Technique and wheel fields absent from those sources remain unknown in the real-car baseline; exact AMS2 values remain simulator-specific guided observations.",
   "scope_notes": "New season-specific identity reviewed from public contribution issue 2 and independent exact-year sources.",

@@ -19,7 +19,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Exact real-car research establishes a steering-wheel clutch lever for moving off. Assetto Corsa EVO instead accepted clutch-free move-off, which is recorded as a simulator override. Six gears, clutchless upshifts at sustained full throttle, clutchless downshifts on a closed throttle with an automatic blip, and a GT rim with no display and no shift lights were directly observed. Automatic cut remains unknown because Assetto Corsa EVO publishes no engine torque to SimHub and the cut is ignition-side.",

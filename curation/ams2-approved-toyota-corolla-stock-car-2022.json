@@ -20,7 +20,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
-    "wheel_open_top": "no",
+    "wheel_open_top": "not-applicable",
     "running_shift_clutch": "not-required"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the series regulations establish the control platform's transmission.",

@@ -1112,12 +1112,26 @@ class PromoteObservationTests(unittest.TestCase):
             entry = dict(
                 _review_entry(),
                 bundle=self._add_bundle(temp, observation, "bundle-wheel-difference.json"),
-                control_overrides={"wheel_rim": {"shape": "gt-formula"}},
+                control_overrides={
+                    "wheel_rim": {
+                        "shape": "gt-formula",
+                        "open_top": "not-applicable",
+                    }
+                },
                 simulator_overrides=[
                     {
                         "path": "/authentic_controls/steering/wheel_rim/shape",
                         "value": "d-shaped",
                         "condition": "The second simulator depicts a D-shaped rim.",
+                        "confidence": {
+                            "level": "verified",
+                            "basis": "The cockpit rim was directly inspected.",
+                        },
+                    },
+                    {
+                        "path": "/authentic_controls/steering/wheel_rim/open_top",
+                        "value": "no",
+                        "condition": "The second simulator depicts a closed conventional rim.",
                         "confidence": {
                             "level": "verified",
                             "basis": "The cockpit rim was directly inspected.",
@@ -1138,7 +1152,13 @@ class PromoteObservationTests(unittest.TestCase):
             )
             second = record["simulators"][1]
             self.assertEqual(second["behavior"]["wheel_rim_type"]["normalized"], "d-shaped")
-            self.assertEqual(second["overrides"][0]["value"], "d-shaped")
+            self.assertEqual(
+                {override["path"]: override["value"] for override in second["overrides"]},
+                {
+                    "/authentic_controls/steering/wheel_rim/shape": "d-shaped",
+                    "/authentic_controls/steering/wheel_rim/open_top": "no",
+                },
+            )
             self.assertEqual(validate_repository(temp), [])
 
     def test_aero_alias_becomes_an_exact_record_identity(self) -> None:

@@ -211,7 +211,7 @@
           "required": ["shape", "source_label"],
           "properties": {
             "shape": {
-              "description": "Rim shape, decided by the rim itself; the car's racing class never enters into it. Take the first that matches: gt-formula (molded grips at about 9 and 3 with a control face between them, so the hands stay put - the rim modern GT, formula and prototype cars all share, usually carrying a display and rev lights), yoke (two grips with nothing joining them over the top), d-shaped (a conventional rim you can grip anywhere, flattened at the bottom, the top, or both), round (a conventional continuous circle). Use other when none match and unknown when the rim was not seen. gt-style, formula and prototype are deprecated: they split one rim three ways by racing class, produced the same client icon, and asked reviewers for a judgment that changed no advice. They stay in the enum so existing records remain valid, but must not be used for new records.",
+              "description": "Rim family, based on the physical control the driver holds. Use gt-formula for fixed molded grips around a central control face, round for a conventional generally circular rim, d-shaped for a conventional rim with a flattened section, and unknown when the rim was not seen. gt-style, formula, prototype, yoke, and other are deprecated legacy values. They remain in the enum for old artifacts but must not be used for curated records.",
               "type": "string",
               "enum": ["round", "d-shaped", "gt-formula", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
@@ -225,7 +225,7 @@
               "$ref": "#/$defs/state"
             },
             "open_top": {
-              "description": "Whether rim material joins the grips over the top of the rim. It asks about material, not about where the rim is held, and it describes the rim rather than deciding its shape: a gt-formula rim may be either, a yoke is always yes, and a d-shaped or round rim is no.",
+              "description": "For a conventional round or d-shaped rim, whether an upper section of the rim is removed. Use not-applicable for gt-formula because its fixed-grip control-face construction already determines the hardware choice. Do not use this field to distinguish varieties of GT or Formula wheels.",
               "$ref": "#/$defs/state"
             },
             "source_label": { "type": "string" },
@@ -287,7 +287,7 @@
           "required": ["normalized", "source_label"],
           "properties": {
             "normalized": {
-              "description": "Rim shape, decided by the rim itself; the car's racing class never enters into it. Take the first that matches: gt-formula (molded grips at about 9 and 3 with a control face between them, so the hands stay put - the rim modern GT, formula and prototype cars all share, usually carrying a display and rev lights), yoke (two grips with nothing joining them over the top), d-shaped (a conventional rim you can grip anywhere, flattened at the bottom, the top, or both), round (a conventional continuous circle). Use other when none match and unknown when the rim was not seen. gt-style, formula and prototype are deprecated: they split one rim three ways by racing class, produced the same client icon, and asked reviewers for a judgment that changed no advice. They stay in the enum so existing records remain valid, but must not be used for new records.",
+              "description": "Rim family, based on the physical control the driver holds. Use gt-formula for fixed molded grips around a central control face, round for a conventional generally circular rim, d-shaped for a conventional rim with a flattened section, and unknown when the rim was not seen. gt-style, formula, prototype, yoke, and other are deprecated legacy values. They remain in the enum for old artifacts but must not be used for curated records.",
               "type": "string",
               "enum": ["round", "d-shaped", "gt-formula", "gt-style", "prototype", "formula", "yoke", "other", "unknown"]
             },
@@ -300,7 +300,7 @@
               "$ref": "#/$defs/state"
             },
             "open_top": {
-              "description": "Whether rim material joins the grips over the top of the rim. It asks about material, not about where the rim is held, and it describes the rim rather than deciding its shape: a gt-formula rim may be either, a yoke is always yes, and a d-shaped or round rim is no.",
+              "description": "For a conventional round or d-shaped rim, whether an upper section of the rim is removed. Use not-applicable for gt-formula because its fixed-grip control-face construction already determines the hardware choice. Do not use this field to distinguish varieties of GT or Formula wheels.",
               "$ref": "#/$defs/state"
             },
             "source_label": { "type": "string" }

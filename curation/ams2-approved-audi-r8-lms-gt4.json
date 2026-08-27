@@ -16,7 +16,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "gt-formula"
+    "wheel_rim_shape": "gt-formula",
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "The exact identity, seven paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts, perceptible automatic cut, clutch-free downshifts, visible automatic-blip throttle spike, and open-top no-display GT/Formula rim were directly tested. Audi's primary technical data independently establishes the seven-speed electrohydraulic dual-clutch paddle transmission.",
   "scope_notes": "Only the exact Audi R8 LMS GT4 / GT4 telemetry identity is approved; no fuzzy aliases are introduced."

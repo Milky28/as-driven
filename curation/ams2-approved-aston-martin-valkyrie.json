@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Manufacturer specifications and guided testing establish the paddle interface, pull-away, automatic blip, and cockpit wheel. The prior throttle-only automatic-cut inference was retracted because throttle position cannot distinguish ignition cut from driver input, traction control, or telemetry filtering.",
   "scope_notes": "Road-going Hypercars identity, distinct from Aston Martin Valkyrie Hypercar in LMDh."

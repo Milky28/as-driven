@@ -21,7 +21,7 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "yes",
     "wheel_shift_lights": "yes",
-    "wheel_open_top": "no"
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
   "scope_notes": "Reviewed guided observation for Formula Ultimate Hybrid Gen3 - High Downforce. Formula Ultimate Gen2 was this car's pre-rename name and is now recorded as a retired identity rather than carried here, because the certified build no longer reports it and the string is one digit away from the separate Formula Ultimate Hybrid Gen2 car.",

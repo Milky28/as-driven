@@ -40,7 +40,7 @@
         "shape": "gt-formula",
         "integrated_display": "unknown",
         "shift_lights": "unknown",
-        "open_top": "unknown",
+        "open_top": "not-applicable",
         "source_label": "live-cockpit-observation",
         "notes": "Observed from the cockpit during the guided drive."
       }
@@ -76,7 +76,7 @@
           "normalized": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
@@ -323,5 +323,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-26"
+  "updated_at": "2026-08-27"
 }

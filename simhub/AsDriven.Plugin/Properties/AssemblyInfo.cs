@@ -7,5 +7,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("As Driven")]
 [assembly: ComVisible(false)]
 [assembly: Guid("c6743626-fca7-4e44-9f8b-81ebba973e60")]
-[assembly: AssemblyVersion("0.20.0.0")]
-[assembly: AssemblyFileVersion("0.20.0.0")]
+[assembly: AssemblyVersion("0.20.1.0")]
+[assembly: AssemblyFileVersion("0.20.1.0")]

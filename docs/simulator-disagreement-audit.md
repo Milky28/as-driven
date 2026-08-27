@@ -21,15 +21,15 @@ entering the audit.
 
 ## Current result
 
-Dataset 0.5.16 contains 28 field-level findings across 20 cars:
+Dataset 0.5.17 contains 27 field-level findings across 19 cars:
 
 - 8 affect pulling away;
 - 9 affect running-shift technique;
-- 7 affect hardware choice or configuration; and
+- 6 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
 Nine are **supported departures**, two remain **provisional departures**, and
-17 have an **open authentic baseline**. Five launch-clutch findings have
+16 have an **open authentic baseline**. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
 GT3. Exact manufacturer cockpit photographs now also settle wheel geometry for

@@ -46,8 +46,8 @@ namespace AsDriven.Core
                 case "gt-style":
                 case "prototype":
                 case "formula": return "GT / Formula rim";
-                case "yoke": return "Yoke";
-                case "other": return "Other rim";
+                case "yoke": return "Open-top rim (legacy)";
+                case "other": return "Unclassified rim (legacy)";
                 default: return "Rim not recorded";
             }
         }

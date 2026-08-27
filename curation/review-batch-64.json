@@ -28,7 +28,7 @@
           "shape": "gt-formula",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "no",
+          "open_top": "not-applicable",
           "source_label": "nismo-2018-cockpit-photo",
           "notes": "NISMO's exact 2018-Spec cockpit photograph shows molded side grips around a closed central control face, which is GT/Formula in this dataset's geometry vocabulary."
         }

@@ -16,7 +16,8 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
-    "wheel_rim_shape": "gt-formula"
+    "wheel_rim_shape": "gt-formula",
+    "wheel_open_top": "not-applicable"
   },
   "confidence_notes": "The exact identity, six paddle-selected gears, clutch-free move-off, no-lift full-throttle upshifts with perceptible automatic cut, clutch-free downshifts with a visible automatic-blip spike, and closed-top no-display rim were directly tested. The simulator mechanism responsible for clutch-free move-off was not established. The rim was approved as open over the top and is corrected to closed: the first Assetto Corsa EVO drive of the same car showed it closed, and re-checking AMS2 confirmed the original observation was wrong rather than the two games differing.",
   "scope_notes": "Approval applies only to the exact Lamborghini Huracan Super Trofeo EVO2 / Super Trofeo identity. The older LamborghiniHuracanLP6202SuperTrofeo identity is a different predecessor and is not an alias."
