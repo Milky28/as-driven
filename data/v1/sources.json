@@ -3986,6 +3986,18 @@
       "notes": "Primary homologation evidence for the Saleen S7 competition identity and longitudinal gearbox architecture. The visible form does not establish the exact AMS2 gear count, actuation, or driver technique."
     },
     {
+      "source_id": "forza.prodrive-ferrari-550-gts-108612",
+      "title": "Prodrive's Ponies",
+      "publisher": "Forza",
+      "url": "https://www.forza-mag.com/issues/156/articles/prodrive-s-ponies",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2017-04-01",
+      "retrieved_at": "2026-08-27",
+      "reuse_status": "facts-only-review",
+      "notes": "First-person drive of exact Prodrive Ferrari 550 GTS chassis 108612 with briefing support from period driver Steve Zacchia and the car's former Solution F crew. The article identifies its six-speed Xtrac sequential, flat clutchless upshift, clutch-controlled standing start and heel-and-toe downshift using the clutch and a driver throttle blip. It establishes that procedure for this sequential FIA-specification chassis, not for the separately documented ALMS H-pattern configuration."
+    },
+    {
       "source_id": "formula-vee-brasil.2026.h-pattern",
       "title": "Formula Vee: o que e e como funciona a categoria",
       "publisher": "Formula Vee Brasil",
@@ -4419,6 +4431,18 @@
       "notes": "Publicly hosted copy of the original AMG Customer Sports vehicle-operation manual for the pre-Evo Mercedes-AMG GT3. Printed page 12 says the clutch does not have to be depressed while shifting in driving operation and 'only has to be operated when shifting from neutral to first gear.' Printed page 6 instructs the driver to depress the clutch and ease it in after selecting first. The document does not establish anti-stall or an automated launch clutch."
     },
     {
+      "source_id": "car-and-racing.prodrive-550-gts-2002-specification",
+      "title": "Prodrive Ferrari 550 GTS technical specification",
+      "publisher": "Car & Racing",
+      "url": "https://www.careracing.com/articles/2002/articles_2002_ccc_12.pdf",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2002-12-01",
+      "retrieved_at": "2026-08-27",
+      "reuse_status": "facts-only-review",
+      "notes": "Period December 2002 technical specification. Printed page 71 identifies the Prodrive Ferrari 550 GTS transmission as a six-speed Xtrac and distinguishes H-pattern ALMS and sequential FIA configurations. It establishes that transmission actuation varied by championship, but it does not prescribe clutch or throttle technique for downshifts."
+    },
+    {
       "source_id": "caranddriver.mercedes-amg-gt3-2016-first-drive",
       "title": "2016 Mercedes-AMG GT3 Race Car First Drive",
       "publisher": "Car and Driver",
@@ -4779,6 +4803,18 @@
       "retrieved_at": "2026-08-10",
       "reuse_status": "facts-only-review",
       "notes": "Specialist technical article specifying an Xtrac six-speed sequential transmission for a 2010 S7-R and stating that the type was introduced in 2002. It supports the family but does not prove the exact 2005 revision or technique."
+    },
+    {
+      "source_id": "racecarsdirect.saleen-s7r-015r-cockpit",
+      "title": "2001 Saleen S7-R GT1, chassis 015-R",
+      "publisher": "Race Cars Direct / William I'Anson Ltd",
+      "url": "https://www.racecarsdirect.com/Advert/Details/160150/2001-saleen-s7-r-gt1",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2026-06-05",
+      "retrieved_at": "2026-08-27",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact-chassis listing and cockpit gallery for early Saleen S7-R 015-R. The current cockpit photograph shows a conventional near-circular rim, but the listing says the car was restored in 2018 to its 2003 FIA GT presentation. The photograph supports round-rim use in the early family but cannot establish the original wheel or the exact 2005 second-series car represented by the curated record."
     },
     {
       "source_id": "racecarsdirect.spyker-c8-gt2r.046",
@@ -6315,6 +6351,18 @@
       "retrieved_at": "2026-08-22",
       "reuse_status": "facts-only-review",
       "notes": "Official FIA consultation copy for Porsche Carrera RS homologation 3053 and its Group 4 extensions. Printed/PDF page 11 records a mechanically operated single-plate dry clutch, lever shifting, Porsche transmission type 911.300/08, five forward gears and five synchronized forward gears. Printed/PDF page 2 visibly shows three pedals, a floor lever and a conventional round continuous steering rim without integrated display or shift lights on the homologated Carrera RS base. The Group 4 extension beginning on PDF page 13 lists competition equipment including a steel-spring clutch disc, but it does not state driver technique or an alternate shift gate; absence from the extension is not treated as proof that no other racing variation existed."
+    },
+    {
+      "source_id": "artcurial.saleen-s7r-0060-2005",
+      "title": "2005 Saleen S7 R, chassis 0060",
+      "publisher": "Artcurial Motorcars",
+      "url": "https://www.artcurial.com/en/sales/M1030/lots/190-a",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-27",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact-scope auction history for Saleen S7-R chassis 0060. It identifies the car as a 2005 second-series example built after Oreca revised the chassis and records a recent restoration. The page establishes that the 2005 cars are a distinct evolution, but it does not describe the driver's downshift technique or establish the originality and geometry of the fitted steering wheel."
     },
     {
       "source_id": "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",

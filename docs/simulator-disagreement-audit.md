@@ -28,8 +28,8 @@ Dataset 0.5.16 contains 28 field-level findings across 20 cars:
 - 7 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Nine are **supported departures**, four remain **provisional departures**, and
-15 have an **open authentic baseline**. Five launch-clutch findings have
+Nine are **supported departures**, two remain **provisional departures**, and
+17 have an **open authentic baseline**. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
 GT3. Exact manufacturer cockpit photographs now also settle wheel geometry for
@@ -202,13 +202,17 @@ claims:
   Ginetta documents a driver display with RPM/shift lights separately from
   wheel controls, so display existence cannot be converted into wheel
   integration.
+- Saleen evidence for an early H-pattern S7-R and a restored early-car cockpit
+  cannot establish the shift procedure or original wheel fitted to the exact
+  2005 second-series car represented by this record. The conflicting simulator
+  observations therefore remain visible without promoting an early-car answer.
 
 Each simulator observation remains intact as a scoped override. The open baseline
 therefore preserves the cross-sim conflict while refusing to declare a winner.
 
 ## Remaining provisional findings
 
-Four findings still have a real-car answer but fall short of the benchmark's
+Two findings still have a real-car answer but fall short of the benchmark's
 primary-evidence threshold:
 
 1. **Milano 55 GT1 / Prodrive Ferrari 550 GTS - manual blip.** The exact-car Evo
@@ -216,17 +220,9 @@ primary-evidence threshold:
    blips to match revs. It is strong secondary evidence, but no manufacturer or
    homologation operating procedure has been recovered.
 2. **Porsche 911 RSR 1974 - manual blip.** The authentic optional blip is derived
-   from the Type 915 family's synchromesh construction. The reviewed sources do
-   not explicitly state that the RSR's 915/08 retained those synchronizers, so
-   AC's required blip remains a provisional departure.
-3. **Saleen S7-R - manual blip.** A first-person test of the 2001 Park Place S7R
-   instructs clutch use on both shifts and recommends heel-and-toe on braking
-   downshifts. This supports the early S7R family at medium confidence, but does
-   not prove every 2005 Xtrac revision retained that procedure.
-4. **Saleen S7-R - wheel geometry.** AMS2 and AC show a round rim while RaceRoom
-   shows a D-shaped rim. The authentic round baseline currently rests on cockpit
-   inspection during the AMS2 drive rather than independent exact-car evidence,
-   so the RaceRoom difference is not yet a benchmark verdict.
+   from the Type 915 family's synchronized construction. The exact 1974 RSR
+   subtype and its driver procedure remain unestablished, so AC's required blip
+   remains a provisional departure.
 
 ## What a published finding must say
 

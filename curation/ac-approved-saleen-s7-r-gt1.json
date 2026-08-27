@@ -15,13 +15,12 @@
     "throttle_lift": "not-required",
     "automatic_cut": "unknown",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "unknown",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
-  "confidence_notes": "The exact Race Sim Studio v3 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown.",
-  "scope_notes": "The AC display labeled the car as year 2000. That value is retained as implementation context only and does not replace the record's reviewed 2005 competition context or establish an exact historical chassis."
+  "confidence_notes": "The exact Race Sim Studio v3 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown. Detailed downshift and cockpit values remain simulator overrides because exact 2005 real-car evidence is absent.",
+  "scope_notes": "The AC display labeled the car as year 2000. That value is retained as implementation context only and does not replace the record's reviewed 2005 competition context, establish an exact historical chassis, or settle authentic downshift technique."
 }

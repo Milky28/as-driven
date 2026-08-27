@@ -47,8 +47,8 @@
     },
     "notes": [
       "Simulator behaviour was directly observed in a guided drive in AMS2 1.6.9.91 with automatic clutch and shifting disabled. There is no automatic cut or blip, so the driver lifts to upshift.",
-      "The 915 family is established as a synchromesh design by an air-cooled Porsche specialist, and the RSR ran the magnesium-cased 915/08 within that family. No reviewed source says the race variant replaced the synchronisers, so the construction is recorded at medium confidence rather than high.",
-      "The downshift blip is optional, which follows from the synchromesh construction: the synchronisers match the shaft speeds, so a blip eases them rather than engaging the gear. It is recorded at medium because the construction is, being inferred from the 915 family rather than stated by a source about the 915/08, and a derived value cannot be more confident than what it came from. This note previously left the field unknown on the grounds that reading the blip off the construction would answer one open field with another. That reasoning was retired: the construction is recorded, and deriving the technique from a recorded construction is the one direction that holds. AC refuses the shift without a blip, which stays a simulator override.",
+      "The exact RSR used the RS-derived Type 915 and FIA form 3053 records synchronized forward gears for that homologated family. The reviewed sources do not establish an exact 1974 RSR gearbox subtype, so the former 915/08 wording was removed and the construction remains medium confidence.",
+      "The downshift blip is optional in the authentic baseline because the synchronized transmission can engage without driver rev matching; a heel-and-toe blip remains appropriate racing technique for smoother shifts and chassis stability. No exact 1974 RSR driver manual was recovered, so the value remains medium. AC refuses the shift without a blip, which stays a simulator override.",
       "A conventional H with first up and left is established for the exact 1974 RSR. The car used the RS-derived Type 915, while the dogleg belongs to the earlier 901 it replaced, and an exact-car Petersen Automotive Museum cockpit photograph visibly shows 1st, 3rd and 5th across the upper row and 2nd, 4th and reverse across the lower row on the shift knob.",
       "This class reports a single configuration; the selection screen offers no aero package and only the plain identity has been observed."
     ]
@@ -217,10 +217,11 @@
         ],
         "source_refs": [
           "paul-stephens.porsche-915-vs-g50",
-          "stuttcars.porsche-911-carrera-rsr-3-0"
+          "stuttcars.porsche-911-carrera-rsr-3-0",
+          "fia.porsche-911-carrera-rs.homologation-3053"
         ],
         "confidence": "medium",
-        "basis": "The 915 family uses Porsche's own synchromesh design, and the RSR ran the magnesium-cased 915/08 within that family. That the race variant kept the synchronisers rather than adopting dog rings is inferred from the family rather than stated by a reviewed source, which is why this sits at medium. Falsifiable by a period Porsche workshop manual or homologation sheet for the 915/08."
+        "basis": "The exact RSR used the RS-derived Type 915, FIA form 3053 records synchronized forward gears for the homologated family, and specialist evidence describes the 915 family's Porsche synchromesh. The reviewed sources do not identify the exact 1974 RSR gearbox subtype, so construction remains medium and is falsifiable by an exact-car workshop or operating manual."
       },
       {
         "paths": [
@@ -293,10 +294,11 @@
         ],
         "source_refs": [
           "paul-stephens.porsche-915-vs-g50",
-          "stuttcars.porsche-911-carrera-rsr-3-0"
+          "stuttcars.porsche-911-carrera-rsr-3-0",
+          "fia.porsche-911-carrera-rs.homologation-3053"
         ],
         "confidence": "medium",
-        "basis": "The 915 family uses Porsche's own synchromesh design and the RSR ran the 915/08 within it, so the blip eases the synchros rather than engaging the gear. This sits at medium because the construction does: it is inferred from the family rather than stated by a source about the 915/08, and a derived value cannot be more confident than what it came from. It is falsifiable by the same period workshop manual or homologation sheet that would settle the construction. AC refuses the shift without a blip, which is carried as a simulator override."
+        "basis": "The exact RSR used the RS-derived Type 915 and FIA form 3053 records synchronized forward gears, so a throttle blip eases rev matching rather than mechanically enabling engagement. No exact 1974 RSR driver manual states the racing procedure, so optional remains medium. AC refuses the shift without a blip, which is carried as a simulator override."
       }
     ]
   },

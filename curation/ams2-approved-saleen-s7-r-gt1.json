@@ -12,13 +12,12 @@
     "forward_gears": 6,
     "shift_actuation": "sequential-stick",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "not-required",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "unknown",
     "wheel_rim_shape": "round"
   },
-  "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, manual rev matching, and round no-display rim were directly observed.",
-  "scope_notes": "Historical sources support the S7-R sequential family but not every 2005 gearbox revision; simulator behavior is approved only for the exact observed identity."
+  "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, manual rev matching, and round no-display rim were directly observed. The detailed AMS2 downshift and cockpit values are retained as simulator overrides because exact 2005 real-car evidence is absent.",
+  "scope_notes": "Historical sources support the S7-R sequential family but not the exact 2005 downshift procedure or original wheel. Simulator behavior is approved only for the exact observed identity."
 }

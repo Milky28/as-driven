@@ -13,8 +13,8 @@
     "cars_with_disagreements": 20,
     "findings": 28,
     "by_status": {
-      "authentic-baseline-open": 15,
-      "provisional-departure": 4,
+      "authentic-baseline-open": 17,
+      "provisional-departure": 2,
       "supported-departure": 9
     },
     "by_driver_impact": {
@@ -847,11 +847,12 @@
         "display_value": "Required",
         "confidence": "high",
         "source_refs": [
-          "ams2.local-live-milano-gt55-controls.1.6.9.91",
-          "evo.ferrari-550-maranello-prodrive"
+          "evo.ferrari-550-maranello-prodrive",
+          "forza.prodrive-ferrari-550-gts-108612",
+          "car-and-racing.prodrive-550-gts-2002-specification"
         ],
         "primary_source_refs": [],
-        "basis": "The registered technical account gives a six-speed Xtrac sequential with a flat-shift facility, needing no clutch for an upshift and the clutch for every downshift, which the drive's six gears and automatic cut agree with. It says nothing about the rim or about what the simulator does, so those stay on the drive."
+        "basis": "Two exact-car first-person accounts give the sequential six-speed Xtrac, flat clutchless upshift, and clutch-plus-throttle-blip downshift procedure. The period specification corroborates the Xtrac six-speed and distinguishes the FIA sequential from the ALMS H-pattern configuration. These sources establish real-car technique; simulator behavior stays on each reviewed entry."
       },
       "simulator_views": [
         {
@@ -1416,10 +1417,13 @@
         "confidence": "medium",
         "source_refs": [
           "paul-stephens.porsche-915-vs-g50",
-          "stuttcars.porsche-911-carrera-rsr-3-0"
+          "stuttcars.porsche-911-carrera-rsr-3-0",
+          "fia.porsche-911-carrera-rs.homologation-3053"
         ],
-        "primary_source_refs": [],
-        "basis": "The 915 family uses Porsche's own synchromesh design and the RSR ran the 915/08 within it, so the blip eases the synchros rather than engaging the gear. This sits at medium because the construction does: it is inferred from the family rather than stated by a source about the 915/08, and a derived value cannot be more confident than what it came from. It is falsifiable by the same period workshop manual or homologation sheet that would settle the construction. AC refuses the shift without a blip, which is carried as a simulator override."
+        "primary_source_refs": [
+          "fia.porsche-911-carrera-rs.homologation-3053"
+        ],
+        "basis": "The exact RSR used the RS-derived Type 915 and FIA form 3053 records synchronized forward gears, so a throttle blip eases rev matching rather than mechanically enabling engagement. No exact 1974 RSR driver manual states the racing procedure, so optional remains medium. AC refuses the shift without a blip, which is carried as a simulator override."
       },
       "simulator_views": [
         {
@@ -1479,17 +1483,19 @@
       "driver_impact": "running-shift-technique",
       "priority": "high",
       "authentic_baseline": {
-        "value": "required",
-        "display_value": "Required",
-        "confidence": "medium",
+        "value": "unknown",
+        "display_value": "Not established",
+        "confidence": "unknown",
         "source_refs": [
           "fia.saleen-s7.gt-013",
-          "motortrend.saleen-s7r-first-drive-2001"
+          "motortrend.saleen-s7r-first-drive-2001",
+          "dailysportscar.saleen-s7r-history-2020",
+          "artcurial.saleen-s7r-0060-2005"
         ],
         "primary_source_refs": [
           "fia.saleen-s7.gt-013"
         ],
-        "basis": "A first-person drive of the exact early S7R instructs clutch use on both shifts and recommends heel-and-toe on braking downshifts. This supports driver blipping for the family, but does not prove every 2005 Xtrac revision retained the same procedure."
+        "basis": "A first-person drive and Johnny Mowlem's retrospective establish clutch and heel-and-toe technique for early H-pattern S7-Rs. Artcurial identifies the represented 2005 car as a distinct second-series evolution, and no reviewed exact-2005 source establishes its downshift clutch, manual-blip or automatic-blip procedure."
       },
       "simulator_views": [
         {
@@ -1497,7 +1503,7 @@
           "label": "AMS2",
           "value": "required",
           "display_value": "Required",
-          "relationship_to_authentic": "matches-baseline",
+          "relationship_to_authentic": "baseline-open",
           "verified_game_version": "1.6.9.91",
           "verified_at": "2026-08-11",
           "confidence": "verified",
@@ -1513,7 +1519,7 @@
           "label": "Assetto Corsa",
           "value": "not-required",
           "display_value": "Not required",
-          "relationship_to_authentic": "departs-from-baseline",
+          "relationship_to_authentic": "baseline-open",
           "verified_game_version": "14923034",
           "verified_at": "2026-08-23",
           "confidence": "high",
@@ -1545,15 +1551,11 @@
         }
       ],
       "adjudication": {
-        "status": "provisional-departure",
-        "matching_simulators": [
-          "ams2"
-        ],
-        "departing_simulators": [
-          "ac"
-        ],
-        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
-        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+        "status": "authentic-baseline-open",
+        "matching_simulators": [],
+        "departing_simulators": [],
+        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
+        "next_action": "Find real-car evidence for manual blip."
       }
     },
     {
@@ -1566,14 +1568,15 @@
       "driver_impact": "hardware-choice",
       "priority": "high",
       "authentic_baseline": {
-        "value": "round",
-        "display_value": "Round rim",
-        "confidence": "verified",
+        "value": "unknown",
+        "display_value": "Not established",
+        "confidence": "unknown",
         "source_refs": [
-          "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+          "racecarsdirect.saleen-s7r-015r-cockpit",
+          "artcurial.saleen-s7r-0060-2005"
         ],
         "primary_source_refs": [],
-        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+        "basis": "A restored early S7-R cockpit shows a near-circular rim, but it does not establish the original equipment of the distinct 2005 second-series representation. No reviewed exact-2005 source establishes wheel shape, display, shift lights or open-top geometry."
       },
       "simulator_views": [
         {
@@ -1581,7 +1584,7 @@
           "label": "AMS2",
           "value": "round",
           "display_value": "Round rim",
-          "relationship_to_authentic": "matches-baseline",
+          "relationship_to_authentic": "baseline-open",
           "verified_game_version": "1.6.9.91",
           "verified_at": "2026-08-11",
           "confidence": "verified",
@@ -1597,7 +1600,7 @@
           "label": "Assetto Corsa",
           "value": "round",
           "display_value": "Round rim",
-          "relationship_to_authentic": "matches-baseline",
+          "relationship_to_authentic": "baseline-open",
           "verified_game_version": "14923034",
           "verified_at": "2026-08-23",
           "confidence": "high",
@@ -1613,7 +1616,7 @@
           "label": "RaceRoom Racing Experience",
           "value": "d-shaped",
           "display_value": "D-shaped rim",
-          "relationship_to_authentic": "departs-from-baseline",
+          "relationship_to_authentic": "baseline-open",
           "verified_game_version": "0.9.8.14",
           "verified_at": "2026-08-26",
           "confidence": "medium",
@@ -1629,16 +1632,11 @@
         }
       ],
       "adjudication": {
-        "status": "provisional-departure",
-        "matching_simulators": [
-          "ams2",
-          "ac"
-        ],
-        "departing_simulators": [
-          "raceroom"
-        ],
-        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
-        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
+        "status": "authentic-baseline-open",
+        "matching_simulators": [],
+        "departing_simulators": [],
+        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
+        "next_action": "Find real-car evidence for wheel-rim category."
       }
     },
     {

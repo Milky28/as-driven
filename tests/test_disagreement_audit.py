@@ -180,48 +180,51 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 "milano-gt55--transmission-downshift-manual-blip",
-                "saleen-s7-r-gt1--transmission-downshift-manual-blip",
-                # The Miura's Assetto Corsa entry arrived with the manual blip
-                # its drive demanded, over an authentic value of optional that
-                # rests on a guided drive rather than a primary source. That is
-                # the same shape as the two blip departures above and is handled
-                # the documented way: the authentic value stays optional and the
-                # simulator's demand is an override.
-                # The Miura left this set when the provenance repair gave its
-                # authentic blip the sources that established it. A departure
-                # from a sourced baseline is supported, not provisional: the
-                # status was never about the departure, it was about how well
-                # the thing being departed from was held up.
                 # The RSR's blip became a departure only once the authentic
                 # value stopped being unknown. It is optional at medium, derived
-                # from a synchromesh the record reads off the 915 family rather
-                # than off a source about the 915/08, while AC refuses the shift
-                # without a blip. Provisional is the honest status: a departure
-                # from a baseline that a period workshop manual could still move.
+                # from the synchronized Type 915 family while the exact 1974
+                # subtype remains unestablished. AC refuses the shift without a
+                # blip, so provisional remains the honest status.
                 "porsche-911-rsr-1974--transmission-downshift-manual-blip",
-                # RaceRoom joined the Saleen as a third simulator and its
-                # cockpit shows a D-shaped rim where AMS2 and AC both show a
-                # round one. Either it models a different wheel or one of the
-                # three was misread, and provisional is the honest status until
-                # somebody looks again.
-                #
-                # Its automatic-blip departure was here too and is deliberately
-                # gone: the value was retracted to unknown once RaceRoom turned
-                # out to accept a downshift at any engine speed. A simulator that
-                # claims nothing cannot depart from anything, which is what
-                # removing it from this set records.
-                "saleen-s7-r-gt1--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 15,
-                "provisional-departure": 4,
+                "authentic-baseline-open": 17,
+                "provisional-departure": 2,
                 "supported-departure": 9,
             },
             self.checked_in["summary"]["by_status"],
         )
+
+    def test_saleen_exact_2005_gaps_stay_open(self) -> None:
+        expected_views = {
+            "saleen-s7-r-gt1--transmission-downshift-manual-blip": {
+                "ams2": "required",
+                "ac": "not-required",
+                "raceroom": "unknown",
+            },
+            "saleen-s7-r-gt1--steering-wheel-rim-shape": {
+                "ams2": "round",
+                "ac": "round",
+                "raceroom": "d-shaped",
+            },
+        }
+        for finding_id, expected in expected_views.items():
+            with self.subTest(finding=finding_id):
+                finding = self.finding(finding_id)
+                self.assertEqual("unknown", finding["authentic_baseline"]["value"])
+                self.assertEqual(
+                    "authentic-baseline-open", finding["adjudication"]["status"]
+                )
+                self.assertEqual([], finding["adjudication"]["matching_simulators"])
+                self.assertEqual([], finding["adjudication"]["departing_simulators"])
+                actual = {
+                    view["simulator"]: view["value"]
+                    for view in finding["simulator_views"]
+                }
+                self.assertEqual(expected, actual)
 
     def test_exact_cockpit_photos_settle_two_wheel_departures(self) -> None:
         expected = {
@@ -261,6 +264,8 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             "nissan-r390-gt1--transmission-downshift-automatic-blip",
             "nissan-r390-gt1--transmission-downshift-manual-blip",
             "porsche-911-gt1-98--transmission-downshift-manual-blip",
+            "saleen-s7-r-gt1--steering-wheel-rim-shape",
+            "saleen-s7-r-gt1--transmission-downshift-manual-blip",
         }
         actual = {
             finding["finding_id"]
