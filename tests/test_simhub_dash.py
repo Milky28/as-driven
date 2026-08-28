@@ -1,10 +1,12 @@
 import importlib.util
 import json
+import struct
 import sys
 import tempfile
 import unittest
 import zipfile
-from pathlib import Path
+import zlib
+from pathlib import Path, PureWindowsPath
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +53,39 @@ def walk(value):
     elif isinstance(value, list):
         for child in value:
             yield from walk(child)
+
+
+def png_rendered_bytes(data):
+    """Return PNG geometry and uncompressed scanlines.
+
+    The icon renderer is deterministic, but zlib is free to choose a different
+    byte stream for the same pixels across library versions. Compare the image
+    content that SimHub renders instead of the container compression.
+    """
+    if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+        raise AssertionError("asset is not a PNG")
+    offset = 8
+    header = None
+    image_data = []
+    while offset < len(data):
+        length = struct.unpack(">I", data[offset : offset + 4])[0]
+        kind = data[offset + 4 : offset + 8]
+        payload = data[offset + 8 : offset + 8 + length]
+        offset += 12 + length
+        if kind == b"IHDR":
+            header = payload
+        elif kind == b"IDAT":
+            image_data.append(payload)
+        elif kind == b"IEND":
+            break
+    if header is None or not image_data:
+        raise AssertionError("PNG is missing IHDR or IDAT data")
+    return header, zlib.decompress(b"".join(image_data))
+
+
+def simhub_dashboard_stem(value):
+    """Read a SimHub dashboard reference using its native Windows syntax."""
+    return PureWindowsPath(value).stem
 
 
 def named_theme(dashboard, theme_key="modern"):
@@ -287,8 +322,10 @@ class SimHubDashTests(unittest.TestCase):
         for name, data in family.items():
             self.assertEqual(data, packaged[name])
             self.assertEqual(
-                (PREFLIGHT_ASSET_PATH / f"{name}.png").read_bytes(),
-                data,
+                png_rendered_bytes(
+                    (PREFLIGHT_ASSET_PATH / f"{name}.png").read_bytes()
+                ),
+                png_rendered_bytes(data),
                 f"{name} on disk differs from the generated master",
             )
 
@@ -327,7 +364,11 @@ class SimHubDashTests(unittest.TestCase):
             data = path.read_bytes()
             self.assertEqual(b"\x89PNG\r\n\x1a\n", data[:8])
             self.assertEqual((128, 128), tuple(int.from_bytes(data[offset:offset + 4], "big") for offset in (16, 20)))
-            self.assertEqual(data, generated[name])
+            self.assertEqual(
+                png_rendered_bytes(data),
+                png_rendered_bytes(generated[name]),
+                name,
+            )
 
     def test_detailed_separates_what_to_fit_from_what_to_do(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
@@ -721,7 +762,7 @@ class SimHubDashTests(unittest.TestCase):
         }
         part_ids = set()
         for part in parts:
-            stem = Path(part["DashboardName"]).stem
+            stem = simhub_dashboard_stem(part["DashboardName"])
             self.assertIn(stem, expected)
             expected_size, expected_position = expected[stem]
             self.assertEqual(expected_size, (part["Width"], part["Height"]))
@@ -747,13 +788,15 @@ class SimHubDashTests(unittest.TestCase):
         for part in layout["OverlayLayoutParts"]:
             expected_top = (
                 430.0
-                if Path(part["DashboardName"]).stem == "As Driven Verification Drive"
+                if simhub_dashboard_stem(part["DashboardName"])
+                == "As Driven Verification Drive"
                 else 60.0
             )
             self.assertEqual(expected_top, part["Top"])
             self.assertEqual(2560.0, part["Left"] + part["Width"] / 2)
             self.assertEqual(
-                Path(part["DashboardName"]).stem in PLACED_BY_DEFAULT, part["Placed"]
+                simhub_dashboard_stem(part["DashboardName"]) in PLACED_BY_DEFAULT,
+                part["Placed"],
             )
             self.assertTrue(part["Transparent"])
             part_ids.add(part["PartId"])
