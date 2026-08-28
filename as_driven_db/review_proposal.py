@@ -488,7 +488,10 @@ def prepare_review_proposal(
 
     bundle_path = case_directory / case["artifacts"]["staged_bundle"]
     try:
-        bundle_reference = bundle_path.relative_to(root).as_posix()
+        # Windows runners may expose the temporary directory through an 8.3
+        # alias while Path.resolve() expands the repository root. Resolve both
+        # sides before computing the portable repository-relative reference.
+        bundle_reference = bundle_path.resolve().relative_to(root).as_posix()
     except ValueError:
         # Tests and alternate workbenches may keep ignored cases outside the
         # repository. A checked-in final manifest should always use the normal

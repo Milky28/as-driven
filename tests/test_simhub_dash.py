@@ -115,8 +115,8 @@ class SimHubDashTests(unittest.TestCase):
     def test_brand_mark_has_a_deterministic_svg_master(self):
         brand_mark = load_brand_mark_generator()
         svg_path = RASTER_ASSET_PATH / "brand-mark.svg"
-        self.assertEqual(brand_mark.build_svg(), svg_path.read_bytes())
         svg = svg_path.read_text(encoding="utf-8")
+        self.assertEqual(brand_mark.build_svg().decode("utf-8"), svg)
         self.assertIn('viewBox="0 0 128 128"', svg)
         self.assertIn('stroke="#fff"', svg)
         self.assertNotIn("<rect", svg)
