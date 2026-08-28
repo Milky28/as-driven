@@ -29,6 +29,7 @@ namespace AsDriven.Plugin
         internal const double MaximumPopupDurationSeconds =
             PopupPreferences.MaximumDurationSeconds;
         internal const string DefaultPopupSize = PopupPreferences.DefaultSize;
+        internal const string DefaultPopupTheme = PopupPreferences.DefaultTheme;
         private const int ProcessQueryLimitedInformation = 0x1000;
         private static readonly System.Drawing.Bitmap MenuIcon =
             AsDrivenMenuIcon.Create();
@@ -106,6 +107,16 @@ namespace AsDriven.Plugin
         internal string PopupSize
         {
             get { return NormalizePopupSize(_settings.PopupSize); }
+        }
+
+        internal string PopupThemePreference
+        {
+            get { return PopupPreferences.NormalizeTheme(_settings.PopupTheme); }
+        }
+
+        internal string PopupTheme
+        {
+            get { return PopupPreferences.ResolveTheme(PopupThemePreference, _current.YearFrom); }
         }
 
         internal string UnmatchedLogPath
@@ -467,6 +478,7 @@ namespace AsDriven.Plugin
                     _settings.PopupDurationSeconds);
                 _settings.PopupDurationSeconds = seconds;
                 _settings.PopupSize = NormalizePopupSize(_settings.PopupSize);
+                _settings.PopupTheme = PopupPreferences.NormalizeTheme(_settings.PopupTheme);
                 if (_settings.VerificationAssistProfiles == null)
                 {
                     _settings.VerificationAssistProfiles =
@@ -484,10 +496,11 @@ namespace AsDriven.Plugin
             }
         }
 
-        internal void SetPopupSettings(double seconds, string popupSize)
+        internal void SetPopupSettings(double seconds, string popupSize, string popupTheme)
         {
             seconds = NormalizePopupDuration(seconds);
             string normalizedPopupSize = NormalizePopupSize(popupSize);
+            string normalizedPopupTheme = PopupPreferences.NormalizeTheme(popupTheme);
             bool previewSizeChanged = _previewActive
                 && !string.Equals(
                     PopupSize,
@@ -495,6 +508,7 @@ namespace AsDriven.Plugin
                     StringComparison.OrdinalIgnoreCase);
             _settings.PopupDurationSeconds = seconds;
             _settings.PopupSize = normalizedPopupSize;
+            _settings.PopupTheme = normalizedPopupTheme;
             _popupState.SetAutomaticDuration(TimeSpan.FromSeconds(seconds));
             this.SaveCommonSettings("Settings", _settings);
             if (previewSizeChanged)
@@ -1534,6 +1548,7 @@ namespace AsDriven.Plugin
             this.AttachDelegate("RecordId", delegate { return _current.RecordId; });
             this.AttachDelegate("DisplayName", delegate { return _current.DisplayName; });
             this.AttachDelegate("CarClass", delegate { return _current.CarClass; });
+            this.AttachDelegate("YearFrom", delegate { return _current.YearFrom; });
             this.AttachDelegate("OverlayCarNameDetailed", delegate { return _current.OverlayCarNameDetailed; });
             this.AttachDelegate("OverlayCarClassDetailed", delegate { return _current.OverlayCarClassDetailed; });
             this.AttachDelegate("OverlayCarNameCompact", delegate { return _current.OverlayCarNameCompact; });
@@ -1619,6 +1634,12 @@ namespace AsDriven.Plugin
             this.AttachDelegate(
                 "PopupSize",
                 delegate { return PopupSize; });
+            this.AttachDelegate(
+                "PopupThemePreference",
+                delegate { return PopupThemePreference; });
+            this.AttachDelegate(
+                "PopupTheme",
+                delegate { return PopupTheme; });
             this.AttachDelegate(
                 "PopupDetailedVisible",
                 delegate

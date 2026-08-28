@@ -116,6 +116,7 @@ AsDriven.DatasetVersion
 AsDriven.RecordId
 AsDriven.DisplayName
 AsDriven.CarClass
+AsDriven.YearFrom
 AsDriven.ShiftType
 AsDriven.ShiftActuation
 AsDriven.ShiftPattern
@@ -145,9 +146,10 @@ AsDriven.PopupRevision
 AsDriven.PopupVisible
 AsDriven.PopupDurationSeconds
 AsDriven.PopupSize
+AsDriven.PopupThemePreference
+AsDriven.PopupTheme
 AsDriven.PopupDetailedVisible
 AsDriven.PopupCompactVisible
-AsDriven.PopupGlanceVisible
 AsDriven.VerificationDriveVisible
 AsDriven.VerificationDriveCompleted
 AsDriven.VerificationDriveResultReady
@@ -167,6 +169,12 @@ AsDriven.VerificationDriveLiveValues
 `PopupRevision` increments once when a new matched car is observed. Repeated
 telemetry frames do not change it. Moving to an unknown car immediately clears
 the previous record and does not increment the revision.
+
+`PopupThemePreference` is the saved selector (`auto` or a packaged theme).
+`PopupTheme` is the rendered theme. In auto mode it is resolved from the
+curated `identity.year.from`; an absent year and cars from 2000 onward use the
+Modern Night Vision palette. Modern Light Studio White is available as a manual
+choice. The plugin never guesses a decade from the displayed car name.
 
 The plugin also registers `AsDriven.RefreshDatabase`,
 `AsDriven.ShowPopup`, `AsDriven.HidePopup`, and

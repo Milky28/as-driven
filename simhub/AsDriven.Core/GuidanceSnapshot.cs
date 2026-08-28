@@ -13,6 +13,7 @@ namespace AsDriven.Core
         public string RecordId { get; private set; }
         public string DisplayName { get; private set; }
         public string CarClass { get; private set; }
+        public int YearFrom { get; private set; }
         public string ShiftType { get; private set; }
         public string ShiftActuation { get; private set; }
         public string ShiftPattern { get; private set; }
@@ -308,6 +309,7 @@ namespace AsDriven.Core
                 RecordId = values.RecordId,
                 DisplayName = values.DisplayName,
                 CarClass = values.CarClass,
+                YearFrom = values.YearFrom,
                 ShiftType = values.ShiftType,
                 ShiftActuation = values.ShiftActuation,
                 ShiftPattern = values.ShiftPattern,
@@ -378,6 +380,7 @@ namespace AsDriven.Core
                 RecordId = string.Empty,
                 DisplayName = string.Empty,
                 CarClass = string.Empty,
+                YearFrom = 0,
                 ShiftType = string.Empty,
                 ShiftActuation = string.Empty,
                 ShiftPattern = string.Empty,

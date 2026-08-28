@@ -186,6 +186,12 @@ $showPopupButton = @($ui | Where-Object {
 if ($showPopupButton.Count -ne 1 -or $showPopupButton[0].IsEnabled) {
     throw "Show popup must remain disabled until live car data or a catalog preview is available."
 }
+$themeSelector = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.ComboBox] -and $_.Name -eq "PopupThemeSelector"
+    } | Select-Object -First 1)
+if ($themeSelector.Count -ne 1 -or $themeSelector[0].Items.Count -ne 7) {
+    throw "The popup settings page must expose auto plus all six packaged themes."
+}
 $captureStartButton = @($ui | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Capture current car"
     } | Select-Object -First 1)
@@ -393,6 +399,21 @@ foreach ($requiredProperty in @(
 )) {
     if (-not $verificationDashboardJson.Contains($requiredProperty)) {
         throw "The guided verification surface is missing property: $requiredProperty"
+    }
+}
+$preflightDashboard = Join-Path $dashboardTarget "As Driven Preflight Overlay\As Driven Preflight Overlay.djson"
+$preflightDashboardJson = Get-Content -LiteralPath $preflightDashboard -Raw
+foreach ($requiredTheme in @(
+    "AsDriven.PopupTheme",
+    "1960s-roadbook",
+    "1970s-works",
+    "1980s-black-gold",
+    "1990s-touring",
+    "modern",
+    "modern-light"
+)) {
+    if (-not $preflightDashboardJson.Contains($requiredTheme)) {
+        throw "The pre-flight dashboard is missing theme support: $requiredTheme"
     }
 }
 

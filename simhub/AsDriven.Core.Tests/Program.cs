@@ -81,6 +81,7 @@ namespace AsDriven.Core.Tests
                 True(preview.HasMatch, "loads a curated record directly for preview");
                 Equal("preview", preview.MatchKind, "labels direct record lookup as preview data");
                 Equal("Lister Storm GTM", preview.DisplayName, "previews the requested car");
+                Equal(2000, preview.YearFrom, "carries the curated start year into popup guidance");
                 Equal("preview-not-found", database.Preview("ams2", "missing.record").MatchStatus, "rejects an unknown preview record");
 
                 // The second simulator. SimHub calls this game "AssettoCorsaEvo",
@@ -1876,6 +1877,18 @@ namespace AsDriven.Core.Tests
                 // longer generated.
                 Equal(PopupPreferences.DefaultSize, PopupPreferences.NormalizeSize("glance"), "a retired size falls back to the default");
                 Equal("detailed", PopupPreferences.NormalizeSize("detailed"), "keeps a supported popup size");
+
+                Equal("auto", PopupPreferences.NormalizeTheme(null), "falls back to automatic theme selection when unset");
+                Equal("auto", PopupPreferences.NormalizeTheme("neon"), "rejects an unpackaged popup theme");
+                Equal("1970s-works", PopupPreferences.NormalizeTheme("  1970S-WORKS "), "normalizes a supported theme");
+                Equal("modern-light", PopupPreferences.NormalizeTheme("MODERN-LIGHT"), "keeps the optional modern light theme");
+                Equal("1960s-roadbook", PopupPreferences.ResolveTheme("auto", 1967), "auto selects the roadbook theme for a sixties car");
+                Equal("1970s-works", PopupPreferences.ResolveTheme("auto", 1975), "auto selects the works theme for a seventies car");
+                Equal("1980s-black-gold", PopupPreferences.ResolveTheme("auto", 1986), "auto selects the black-gold theme for an eighties car");
+                Equal("1990s-touring", PopupPreferences.ResolveTheme("auto", 1994), "auto selects the touring theme for a nineties car");
+                Equal("modern", PopupPreferences.ResolveTheme("auto", 2005), "auto selects modern for a post-1999 car");
+                Equal("modern", PopupPreferences.ResolveTheme("auto", 0), "an unestablished year uses the modern fallback");
+                Equal("1980s-black-gold", PopupPreferences.ResolveTheme("1980s-black-gold", 1975), "a manual theme overrides the car decade");
 
                 True(
                     PreviewRules.ShouldLeavePreview(true, true, "Porsche 963", "BMW M Hybrid V8"),

@@ -1,17 +1,16 @@
 # Dash Studio pre-flight cards
 
-`generate.py` creates five native SimHub Dash Studio DJSON artifacts:
+`generate.py` creates four native SimHub Dash Studio DJSON artifacts:
 
 - **As Driven Preflight Overlay** - Detailed, 720×428.
 - **As Driven Preflight Compact** - Compact, 520×360.
-- **As Driven Preflight Display** - a persistent 900×360 auxiliary
+- **As Driven Preflight Display** - a persistent 780×360 auxiliary
   display that does not use popup visibility.
 - **As Driven Verification Drive** - a 700×220 in-simulator prompt
   surface for the guided verification drive.
 
-The three overlay templates are click-through. Each follows its own explicit
-boolean property (`PopupDetailedVisible`, `PopupCompactVisible`, or
-so only the selected size becomes visible. A car identity
+The popup templates are click-through. Each follows its own explicit boolean
+property (`PopupDetailedVisible` or `PopupCompactVisible`), so only the selected size becomes visible. A car identity
 change shows it for ten seconds
 by default. `AsDriven.ShowPopup` keeps it visible for button recall,
 `AsDriven.HidePopup` hides it, and `AsDriven.TogglePopup`
@@ -29,12 +28,19 @@ the overlay while the complete evidence text remains available to the form.
 
 Version 0.7.0 introduced a blue, letter-free visual identity. The current brand
 mark combines a steering wheel, physical shift lever, and simplified H-gate,
-avoiding the `AC` abbreviation that
-sim racers commonly associate with Assetto Corsa. Matched views use an open
-four-column rail instead of four nested cards. `PHYSICAL CONTROLS` spans Wheel
-and Shift, while `SHIFTING TECHNIQUE` spans Upshift and Downshift. Stronger
-center dividers preserve that distinction at all three popup sizes, and the
-freed space lets the existing control artwork render substantially larger.
+avoiding the `AC` abbreviation that sim racers commonly associate with Assetto
+Corsa. Matched views use two compact bands: highlighted `FIT` hardware first,
+then highlighted `USE` guidance with separate Launch, Upshift, and Downshift
+sections. This keeps the pre-session decision order explicit without nested
+cards or decorative technique icons.
+
+Each pre-flight surface packages six palettes behind one shared information
+layout: Modern Night Vision, Modern Light Studio White, 1960s Roadbook, 1970s
+Works, 1980s Black Gold, and 1990s Touring Works. `AsDriven.PopupTheme` selects exactly one layer. The settings
+page can pin any palette or resolve it automatically from the curated start
+year; missing years deliberately fall back to Modern. The period treatments
+use original colour combinations and small stripe motifs rather than sponsor
+logos or copied livery graphics.
 
 The cards use project-owned 128x128 raster PNG icons packaged in each template's
 `.djson.ressources` archive. Detailed and Compact therefore render the
@@ -47,11 +53,9 @@ in closed and open-top forms, GT / Formula rims, plus an explicit unknown state.
 Older package assets for the
 retired wheel values remain only so a legacy dataset can still render.
 Shifter variants cover conventional and dogleg H-patterns, sequential stick,
-paddles, automatic lever, and direct selection. The reusable technique set maps
-automatic cut to its drivetrain icon and no automatic cut to the actionable
-throttle-lift icon, which has a full-height pedal, solid pressing foot, ghosted
-lifted foot, and one direction arrow. Automatic/manual blip variants remain
-separate. Every category has an explicit unknown icon; the UI does not infer
+paddles, automatic lever, and direct selection. Launch, Upshift, and Downshift
+remain separate text-led sections; technique icons are intentionally omitted.
+Every hardware category has an explicit unknown icon, and the UI does not infer
 missing values.
 
 Visible values use sentence-style display names consistently (`Round`,
@@ -64,16 +68,9 @@ All variants have separate matched, unmatched, and waiting/error states. The
 unmatched state never retains guidance from the previous car and states that
 no hardware or technique values were assumed.
 
-The Detailed and Compact cards add a concise **DRIVING TECHNIQUE** sentence
-synthesized from the structured start, clutch, lift, cut, and blip fields.
-Compact uses smaller type while retaining both technique lines; it remains
-icon-only. The guidance describes how to operate the car without copying
-internal evidence notes or inventing values for unknown fields.
-Compact uses its own approximately 116-character wrap target at 9.5-point type,
-filling the available line width without clipping on the narrower card.
-Technique segments use consistent sentence capitalization in every plugin
-property and consumer, for example `Clutch unknown · Throttle lift unknown ·
-No automatic cut`.
+Detailed and Compact retain the driver-summary note with the circled information
+mark. The note is pre-wrapped by the core model because Dash Studio text items do
+not reliably wrap at runtime.
 
 The normal `simhub/build.ps1` command generates the artifacts under:
 

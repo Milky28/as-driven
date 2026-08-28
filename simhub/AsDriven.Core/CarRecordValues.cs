@@ -18,6 +18,7 @@ namespace AsDriven.Core
         public string RecordId;
         public string DisplayName;
         public string CarClass;
+        public int YearFrom;
         public string ShiftType;
         public string ShiftActuation;
         public string ShiftPattern;

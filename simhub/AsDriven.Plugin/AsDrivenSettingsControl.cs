@@ -20,6 +20,7 @@ namespace AsDriven.Plugin
         private Slider _duration;
         private TextBlock _durationValue;
         private ComboBox _popupSize;
+        private ComboBox _popupTheme;
         private ComboBox _previewCar;
         private TextBlock _liveStatus;
         private TextBlock _recordStatus;
@@ -176,7 +177,7 @@ namespace AsDriven.Plugin
             AddSectionHeading(panel, "Popup behavior");
             panel.Children.Add(new TextBlock
             {
-                Text = "Choose the pre-flight popup size and how long it remains visible when SimHub detects a new car.",
+                Text = "Choose the pre-flight popup size, visual theme, and how long it remains visible when SimHub detects a new car.",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(0, 0, 0, 16),
             });
@@ -218,14 +219,34 @@ namespace AsDriven.Plugin
                 MaxWidth = 360,
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
-            _popupSize.Items.Add(CreateSizeItem("Detailed - 720 x 428", "detailed"));
-            _popupSize.Items.Add(CreateSizeItem("Compact - 520 x 360", "compact"));
-            SelectPopupSize(_plugin.PopupSize);
+            _popupSize.Items.Add(CreateChoiceItem("Detailed - 720 x 428", "detailed"));
+            _popupSize.Items.Add(CreateChoiceItem("Compact - 520 x 360", "compact"));
+            SelectChoice(_popupSize, _plugin.PopupSize, 1);
             _popupSize.SelectionChanged += PopupSizeChanged;
             panel.Children.Add(_popupSize);
+
+            panel.Children.Add(CreateFieldLabel("Popup theme", new Thickness(0, 16, 0, 8)));
+            _popupTheme = new ComboBox
+            {
+                Name = "PopupThemeSelector",
+                Height = 32,
+                MinWidth = 240,
+                MaxWidth = 360,
+                HorizontalAlignment = HorizontalAlignment.Left,
+            };
+            _popupTheme.Items.Add(CreateChoiceItem("Auto - match car era", PopupPreferences.DefaultTheme));
+            _popupTheme.Items.Add(CreateChoiceItem("1960s Roadbook", PopupPreferences.SixtiesTheme));
+            _popupTheme.Items.Add(CreateChoiceItem("1970s Works", PopupPreferences.SeventiesTheme));
+            _popupTheme.Items.Add(CreateChoiceItem("1980s Black Gold", PopupPreferences.EightiesTheme));
+            _popupTheme.Items.Add(CreateChoiceItem("1990s Touring Works", PopupPreferences.NinetiesTheme));
+            _popupTheme.Items.Add(CreateChoiceItem("Modern - Night Vision", PopupPreferences.ModernTheme));
+            _popupTheme.Items.Add(CreateChoiceItem("Modern Light - Studio White", PopupPreferences.ModernLightTheme));
+            SelectChoice(_popupTheme, _plugin.PopupThemePreference, 0);
+            _popupTheme.SelectionChanged += PopupSizeChanged;
+            panel.Children.Add(_popupTheme);
             panel.Children.Add(new TextBlock
             {
-                Text = "Load and position the matching packaged layout once in Dash Studio. The selected size is the only overlay surface made visible.",
+                Text = "Auto uses the curated car year; cars without an established year use Modern. Load and position the matching packaged layout once in Dash Studio.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.78,
                 Margin = new Thickness(0, 10, 0, 14),
@@ -708,7 +729,7 @@ namespace AsDriven.Plugin
             MarkPopupSettingsDirty();
         }
 
-        private static ComboBoxItem CreateSizeItem(string label, string value)
+        private static ComboBoxItem CreateChoiceItem(string label, string value)
         {
             return new ComboBoxItem
             {
@@ -717,18 +738,18 @@ namespace AsDriven.Plugin
             };
         }
 
-        private void SelectPopupSize(string value)
+        private static void SelectChoice(ComboBox comboBox, string value, int fallbackIndex)
         {
-            foreach (object item in _popupSize.Items)
+            foreach (object item in comboBox.Items)
             {
                 ComboBoxItem sizeItem = item as ComboBoxItem;
                 if (sizeItem != null && string.Equals(sizeItem.Tag as string, value, StringComparison.OrdinalIgnoreCase))
                 {
-                    _popupSize.SelectedItem = sizeItem;
+                    comboBox.SelectedItem = sizeItem;
                     return;
                 }
             }
-            _popupSize.SelectedIndex = 1;
+            comboBox.SelectedIndex = fallbackIndex;
         }
 
         private void PopupSizeChanged(object sender, SelectionChangedEventArgs eventArgs)
@@ -771,11 +792,16 @@ namespace AsDriven.Plugin
             string popupSize = selected == null
                 ? AsDriven.DefaultPopupSize
                 : selected.Tag as string;
-            _plugin.SetPopupSettings(seconds, popupSize);
+            ComboBoxItem selectedTheme = _popupTheme.SelectedItem as ComboBoxItem;
+            string popupTheme = selectedTheme == null
+                ? AsDriven.DefaultPopupTheme
+                : selectedTheme.Tag as string;
+            _plugin.SetPopupSettings(seconds, popupSize, popupTheme);
             _popupSettingsDirty = false;
             UpdatePopupSettingsState();
             SetOverlayFeedback(
-                "Saved. New car changes use the " + popupSize + " popup for " + seconds + " seconds.",
+                "Saved. New car changes use the " + popupSize + " popup with "
+                    + popupTheme + " theme selection for " + seconds + " seconds.",
                 Brushes.LightGreen);
         }
 

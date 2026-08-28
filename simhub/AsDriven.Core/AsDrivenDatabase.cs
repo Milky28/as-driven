@@ -398,6 +398,8 @@ namespace AsDriven.Core
                     DisplayName = OptionalText(simulator, "display_name").Length > 0
                         ? OptionalText(simulator, "display_name")
                         : RequiredString(identity, "display_name", recordPath),
+                    YearFrom = OptionalInteger(
+                        RequiredObject(identity, "year", recordPath), "from"),
                     // The record carries one class, and for a car with no real
                     // racing category that value is whichever simulator groups
                     // it - "Vintage Cars Tier 1" is what AMS2 calls the Miura.

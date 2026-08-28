@@ -53,6 +53,19 @@ def walk(value):
             yield from walk(child)
 
 
+def named_theme(dashboard, theme_key="modern"):
+    layer = next(
+        value
+        for value in walk(dashboard)
+        if isinstance(value, dict) and value.get("Name") == f"Theme {theme_key}"
+    )
+    return {
+        value["Name"]: value
+        for value in walk(layer)
+        if isinstance(value, dict) and "Name" in value
+    }
+
+
 # Exactly one preflight size ships placed, alongside the verification surface.
 PLACED_BY_DEFAULT = frozenset(
     {"As Driven Preflight Compact", "As Driven Verification Drive"}
@@ -318,11 +331,7 @@ class SimHubDashTests(unittest.TestCase):
 
     def test_detailed_separates_what_to_fit_from_what_to_do(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
-        named = {
-            value["Name"]: value
-            for value in walk(dashboard)
-            if isinstance(value, dict) and "Name" in value
-        }
+        named = named_theme(dashboard)
         # Two bands, each with its own spine, and the Use band below the Fit
         # band because hardware is settled before the car moves.
         self.assertEqual("FIT", named["FitRailLabel"]["Text"])
@@ -368,19 +377,81 @@ class SimHubDashTests(unittest.TestCase):
             self.generator.CELL_YOU, named["UseCellUpshiftYouFill"]["BackgroundColor"]
         )
 
+    def test_preflight_themes_are_distinct_and_keep_one_information_layout(self):
+        dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
+        theme_keys = [theme.key for theme in self.generator.THEMES]
+        self.assertEqual(
+            [
+                "modern",
+                "1960s-roadbook",
+                "1970s-works",
+                "1980s-black-gold",
+                "1990s-touring",
+                "modern-light",
+            ],
+            theme_keys,
+        )
+        cards = set()
+        panels = set()
+        accents = set()
+        for theme in self.generator.THEMES:
+            named = named_theme(dashboard, theme.key)
+            layer = named[f"Theme {theme.key}"]
+            self.assertEqual(
+                f"[AsDriven.PopupTheme] == '{theme.key}'",
+                layer["Bindings"]["Visible"]["Formula"]["Expression"],
+            )
+            self.assertEqual("brand-mark", named["Mark"]["Image"])
+            self.assertEqual("note-info", named["NoteIcon"]["Image"])
+            self.assertEqual("FIT", named["FitRailLabel"]["Text"])
+            self.assertEqual(theme.fit_rail_text, named["FitRailLabel"]["TextColor"])
+            self.assertEqual(theme.use_rail_text, named["UseRailLabel"]["TextColor"])
+            self.assertEqual(theme.band_muted, named["FitShiftSub"]["TextColor"])
+            self.assertNotEqual(theme.fit_rail, theme.fit_rail_text)
+            self.assertNotEqual(theme.driver_rail, theme.use_rail_text)
+            self.assertNotEqual(theme.car_rail, theme.use_rail_text)
+            for moment in ("Launch", "Upshift", "Downshift"):
+                self.assertIn(f"UseValue{moment}", named)
+            cards.add(named["Card"]["BackgroundColor"])
+            panels.add(named["FitBand"]["BackgroundColor"])
+            accents.add(named["Accent"]["BackgroundColor"])
+        self.assertEqual(len(theme_keys), len(cards))
+        self.assertEqual(len(theme_keys), len(panels))
+        self.assertEqual(len(theme_keys), len(accents))
+        self.assertIn("MarkWell", named_theme(dashboard, "1960s-roadbook"))
+        self.assertIn("MarkWell", named_theme(dashboard, "1990s-touring"))
+        modern_light = named_theme(dashboard, "modern-light")
+        self.assertIn("MarkWell", modern_light)
+        self.assertIn("FitWheelIconWell", modern_light)
+        self.assertIn("FitShiftIconWell", modern_light)
+        roadbook = named_theme(dashboard, "1960s-roadbook")
+        touring = named_theme(dashboard, "1990s-touring")
+        self.assertEqual("#22000000", roadbook["UseCellUpshiftYouFill"]["BackgroundColor"])
+        self.assertEqual("#22000000", touring["UseCellUpshiftYouFill"]["BackgroundColor"])
+        self.assertEqual("#FFE12F31", touring["UseRailYouFill"]["BackgroundColor"])
+        self.assertEqual("#FF2D75D5", touring["FitRailFill"]["BackgroundColor"])
+        self.assertNotIn("TouringBlue", touring)
+        for light_theme in ("1960s-roadbook", "1990s-touring", "modern-light"):
+            self.assertIn("NoteIconWell", named_theme(dashboard, light_theme))
+
     def test_compact_keeps_both_bands(self):
         compact = self.generator.build_dashboard(overlay=True, variant="compact")
-        compact_named = {
-            value["Name"]: value
-            for value in walk(compact)
-            if isinstance(value, dict) and "Name" in value
-        }
+        compact_named = named_theme(compact)
         self.assertEqual("FIT", compact_named["FitRailLabel"]["Text"])
         for moment in ("Launch", "Upshift", "Downshift"):
             self.assertIn(f"UseValue{moment}", compact_named)
         self.assertIn(
             "AsDriven.OverlayCarNameDetailed",
             compact_named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
+        self.assertLessEqual(
+            compact_named["FitShiftSub"]["Top"] + compact_named["FitShiftSub"]["Height"],
+            compact_named["FitShiftDiffersText"]["Top"],
+        )
+        self.assertLessEqual(
+            compact_named["FitWheelSubKnownText"]["Top"]
+            + compact_named["FitWheelSubKnownText"]["Height"],
+            compact_named["FitWheelDiffersText"]["Top"],
         )
 
     def test_every_size_binds_its_own_fitted_name_and_class(self):
@@ -395,11 +466,7 @@ class SimHubDashTests(unittest.TestCase):
             ("compact", "OverlayCarNameDetailed"),
         ):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
-            named = {
-                value["Name"]: value
-                for value in walk(dashboard)
-                if isinstance(value, dict) and "Name" in value
-            }
+            named = named_theme(dashboard)
             self.assertIn(
                 f"AsDriven.{name_property}",
                 named["Title"]["Bindings"]["Text"]["Formula"]["Expression"],
@@ -522,11 +589,7 @@ class SimHubDashTests(unittest.TestCase):
 
     def test_rows_mark_where_the_simulator_departs_from_the_real_car(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
-        named = {
-            value["Name"]: value
-            for value in walk(dashboard)
-            if isinstance(value, dict) and "Name" in value
-        }
+        named = named_theme(dashboard)
         # The card renders effective behaviour. Each row distinguishes a real
         # departure from simulator evidence filling an unknown authentic value.
         for name, flag in (
@@ -589,11 +652,7 @@ class SimHubDashTests(unittest.TestCase):
     def test_every_size_titles_the_card_with_the_brand_mark(self):
         for variant in ("detailed", "compact"):
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
-            named = {
-                value["Name"]: value
-                for value in walk(dashboard)
-                if isinstance(value, dict) and "Name" in value
-            }
+            named = named_theme(dashboard)
             self.assertEqual("brand-mark", named["Mark"]["Image"], variant)
             self.assertNotIn("MarkText", named)
             # The retired four-tile furniture is gone from every size.
@@ -614,11 +673,7 @@ class SimHubDashTests(unittest.TestCase):
 
     def test_compact_states_the_match_in_words_and_keeps_confidence_case(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="compact")
-        named = {
-            value["Name"]: value
-            for value in walk(dashboard)
-            if isinstance(value, dict) and "Name" in value
-        }
+        named = named_theme(dashboard)
         # A tick alone did not say what had matched. The header now states it,
         # with a dot carrying the colour so the words stay readable.
         self.assertEqual("Telemetry matched", named["Match"]["Text"])

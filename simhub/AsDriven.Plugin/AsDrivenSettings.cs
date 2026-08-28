@@ -21,6 +21,7 @@ namespace AsDriven.Plugin
     {
         public double PopupDurationSeconds { get; set; }
         public string PopupSize { get; set; }
+        public string PopupTheme { get; set; }
         public string VerificationObserver { get; set; }
         public Dictionary<string, VerificationAssistProfile> VerificationAssistProfiles { get; set; }
 
@@ -28,6 +29,7 @@ namespace AsDriven.Plugin
         {
             PopupDurationSeconds = 10.0;
             PopupSize = "compact";
+            PopupTheme = "auto";
             VerificationObserver = string.Empty;
             VerificationAssistProfiles = new Dictionary<string, VerificationAssistProfile>();
         }

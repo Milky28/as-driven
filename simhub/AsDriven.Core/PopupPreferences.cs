@@ -13,6 +13,13 @@ namespace AsDriven.Core
         public const double MinimumDurationSeconds = 1.0;
         public const double MaximumDurationSeconds = 60.0;
         public const string DefaultSize = "compact";
+        public const string DefaultTheme = "auto";
+        public const string ModernTheme = "modern";
+        public const string ModernLightTheme = "modern-light";
+        public const string SixtiesTheme = "1960s-roadbook";
+        public const string SeventiesTheme = "1970s-works";
+        public const string EightiesTheme = "1980s-black-gold";
+        public const string NinetiesTheme = "1990s-touring";
 
         /// <summary>
         /// Clamps a stored duration into the supported range. A missing or
@@ -45,6 +52,56 @@ namespace AsDriven.Core
                 return normalized;
             }
             return DefaultSize;
+        }
+
+        /// <summary>
+        /// Accepts only themes packaged in the generated dashboard. Auto is a
+        /// preference rather than a rendered theme and is resolved per car.
+        /// </summary>
+        public static string NormalizeTheme(string popupTheme)
+        {
+            string normalized = (popupTheme ?? string.Empty).Trim().ToLowerInvariant();
+            if (normalized == DefaultTheme
+                || normalized == ModernTheme
+                || normalized == ModernLightTheme
+                || normalized == SixtiesTheme
+                || normalized == SeventiesTheme
+                || normalized == EightiesTheme
+                || normalized == NinetiesTheme)
+            {
+                return normalized;
+            }
+            return DefaultTheme;
+        }
+
+        /// <summary>
+        /// Resolves auto from the curated start year. An absent year is not
+        /// inferred from a car name; it deliberately uses the modern fallback.
+        /// </summary>
+        public static string ResolveTheme(string popupTheme, int yearFrom)
+        {
+            string normalized = NormalizeTheme(popupTheme);
+            if (normalized != DefaultTheme)
+            {
+                return normalized;
+            }
+            if (yearFrom <= 0 || yearFrom >= 2000)
+            {
+                return ModernTheme;
+            }
+            if (yearFrom < 1970)
+            {
+                return SixtiesTheme;
+            }
+            if (yearFrom < 1980)
+            {
+                return SeventiesTheme;
+            }
+            if (yearFrom < 1990)
+            {
+                return EightiesTheme;
+            }
+            return NinetiesTheme;
         }
     }
 }
