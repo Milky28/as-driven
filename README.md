@@ -37,6 +37,20 @@ Dataset coverage, client recognition, and certified release support are
 deliberately different claims. See [EARLY_ACCESS.md](EARLY_ACCESS.md) for the
 supported release boundary.
 
+## Install the SimHub client
+
+1. Download the newest `As-Driven-for-SimHub-*.zip` from
+   [GitHub Releases](https://github.com/Milky28/as-driven/releases).
+2. Extract the ZIP and close SimHub.
+3. Double-click **Install As Driven.cmd** and approve the Windows prompt.
+4. Start SimHub and enable **As Driven** under Settings > Plugins.
+5. Load one of the included As Driven overlays in Dash Studio.
+
+The installer backs up an existing installation and preserves customized
+overlay positions. The plugin works offline and does not upload telemetry or
+contribution drafts automatically. Full compatibility, removal, privacy, and
+rollback details are in [EARLY_ACCESS.md](EARLY_ACCESS.md).
+
 ## Project scope
 
 The database answers a narrow pre-session question: **which physical controls

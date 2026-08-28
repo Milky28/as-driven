@@ -19,6 +19,10 @@ try {
     New-Item -ItemType File -Path (Join-Path $simHubRoot "SimHubWPF.exe") | Out-Null
     Set-Content -LiteralPath (Join-Path $simHubRoot "AsDriven.Plugin.dll") `
         -Value "old-plugin" -Encoding ASCII
+    Set-Content -LiteralPath (Join-Path $simHubRoot "AsDriven.Plugin.pdb") `
+        -Value "old-private-symbols" -Encoding ASCII
+    Set-Content -LiteralPath (Join-Path $simHubRoot "AsDriven.Core.pdb") `
+        -Value "old-private-symbols" -Encoding ASCII
 
     $layoutDirectory = Join-Path $simHubRoot "OverlayLayouts"
     New-Item -ItemType Directory -Path $layoutDirectory -Force | Out-Null
@@ -39,6 +43,11 @@ try {
     if ((Get-FileHash -LiteralPath $installedPlugin -Algorithm SHA256).Hash -ne
         (Get-FileHash -LiteralPath (Join-Path $packageRoot "AsDriven.Plugin.dll") -Algorithm SHA256).Hash) {
         throw "The installer did not copy the packaged plugin binary."
+    }
+    foreach ($symbolName in @("AsDriven.Plugin.pdb", "AsDriven.Core.pdb")) {
+        if (Test-Path -LiteralPath (Join-Path $simHubRoot $symbolName)) {
+            throw "The installer left development symbols in the SimHub directory: $symbolName"
+        }
     }
     if (-not (Test-Path -LiteralPath (
         Join-Path $simHubRoot "PluginsData\AsDriven\Database\data\v1\index.json"))) {

@@ -51,9 +51,10 @@ simhub/dist/AsDriven/
   PluginsData/AsDriven/Database/data/v1/...
 ```
 
-The package mirrors SimHub's folder layout. Installing it is a separate,
-explicit step: close SimHub, run `simhub/install.ps1`, restart SimHub, and enable
-**As Driven** under Settings > Plugins. The installer creates a
+The package mirrors SimHub's folder layout. A public release adds
+`Install As Driven.cmd` at the ZIP root. Close SimHub, double-click that file,
+restart SimHub, and enable **As Driven** under Settings > Plugins. Developers
+can run `simhub/install.ps1` directly. The installer creates a
 timestamped rollback backup and preserves existing `As Driven*.olayout`
 files by default, so upgrades do not reset personalized positions. Pass
 `-ReplaceOverlayLayouts` only when intentionally restoring the packaged

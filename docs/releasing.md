@@ -29,7 +29,9 @@ Dash Studio artifacts, exercises the plugin installer, database installer, and
 plugin uninstaller against temporary fake installations, and writes the release
 candidates under `dist/early-access`. It then extracts the final SimHub ZIP and
 verifies its checksum, manifests, packaged hashes, required contents, and
-installer from the same artifact a tester will receive.
+installer from the same artifact a tester will receive. Release packages omit
+debug symbols and fail verification if a local user path or internal handoff
+document is present.
 
 The SimHub SDK assemblies are part of the local SimHub installation and are not
 redistributed. For that reason, the plugin build is a maintainer-run Windows
@@ -40,8 +42,8 @@ release step. The database package is also built in public CI.
 1. Confirm `git diff --check`, database validation, Python tests, and the full
    SimHub build pass from the intended source revision.
 2. Check that plugin and core DLL versions match the release version.
-3. Extract the SimHub ZIP into a new directory and run its installer with
-   SimHub closed.
+3. Extract the SimHub ZIP into a new directory and double-click
+   `Install As Driven.cmd` with SimHub closed.
 4. Start SimHub 9.11.22 and confirm the plugin author, version, dataset version,
    and record total.
 5. Test idle preview and closing preview without a simulator running.
@@ -56,10 +58,22 @@ release step. The database package is also built in public CI.
 
 ## Publish
 
-Create a GitHub prerelease using the plugin version as the tag, attach the
-SimHub ZIP, database ZIP, both checksum files, and release metadata JSON, and
-paste the relevant changelog section into the release notes. State the tested
-SimHub and simulator versions and link to `EARLY_ACCESS.md` and `PRIVACY.md`.
+First preview the checked release without changing GitHub:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-prerelease.ps1
+```
+
+Then create a draft prerelease from a clean, synchronized `main` branch:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-prerelease.ps1 -Approve
+```
+
+The script rechecks the SimHub ZIP, database ZIP, adjacent checksums, metadata,
+generated release notes, and temporary installations. It creates a GitHub draft
+and prerelease tag targeting the current commit, uploads all release artifacts,
+and stops. Review the draft and manual checks before publishing it on GitHub.
 
 Automatic update checking remains out of scope until the public repository and
 release endpoint are stable. A future updater must use an explicit release

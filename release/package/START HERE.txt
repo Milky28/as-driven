@@ -1,0 +1,35 @@
+AS DRIVEN FOR SIMHUB
+====================
+
+INSTALL
+
+1. Close SimHub.
+2. Double-click "Install As Driven.cmd".
+3. Approve the Windows administrator prompt.
+4. Start SimHub.
+5. Open Settings > Plugins, enable As Driven, and optionally pin it to the
+   left menu.
+6. In Dash Studio, load an included As Driven overlay and place it where you
+   want it.
+
+The installer backs up an existing As Driven installation and preserves
+customized overlay positions by default.
+
+IF WINDOWS BLOCKS THE DOWNLOAD
+
+Right-click the downloaded ZIP, choose Properties, select Unblock if that
+option appears, and extract the ZIP again before installing.
+
+REMOVE OR REINSTALL
+
+Close SimHub and double-click "Uninstall As Driven.cmd". User settings,
+diagnostics, contribution drafts, the installed database, and customized
+layouts are preserved by default.
+
+REPORT A PROBLEM
+
+Visit https://github.com/Milky28/as-driven/issues/new/choose and include the
+As Driven, dataset, SimHub, and simulator versions shown in the plugin.
+
+The plugin works offline. It never uploads a contribution draft unless you
+explicitly attach that file to a GitHub submission.

@@ -58,13 +58,19 @@ every listed identity is a distinct vehicle.
 
 ## Install and update
 
-1. Close SimHub.
-2. Extract the SimHub release ZIP.
-3. Run `simhub/install.ps1` from PowerShell.
+1. Download and extract the newest `As-Driven-for-SimHub-*.zip` release.
+2. Close SimHub.
+3. Double-click **Install As Driven.cmd** and approve the Windows administrator
+   prompt.
 4. Start SimHub, enable **As Driven**, and pin it to the left menu if
    desired.
 5. Load one included As Driven overlay layout in Dash Studio and place
    it where desired.
+
+`START HERE.txt` inside the ZIP contains the same short instructions. Advanced
+users can run `simhub/install.ps1` directly from PowerShell. If Windows blocks
+the downloaded scripts, right-click the ZIP, open Properties, select Unblock,
+and extract it again.
 
 Plugin and database versions advance independently. A database-only release can
 be installed with `release/install-database.ps1`; it does not replace the plugin,
@@ -81,10 +87,11 @@ Compare the displayed hash with the value in the downloaded `.sha256` file.
 
 ## Remove or roll back
 
-Run `simhub/uninstall.ps1` with SimHub closed. The default removal keeps the
-installed database, customized layouts, settings, diagnostics, and contribution
-drafts so a later reinstall can reuse them. The script creates a timestamped
-backup before removing plugin binaries and packaged Dash Studio templates.
+Close SimHub and double-click **Uninstall As Driven.cmd**. Advanced users can
+run `simhub/uninstall.ps1` directly. The default removal keeps the installed
+database, customized layouts, settings, diagnostics, and contribution drafts
+so a later reinstall can reuse them. The script creates a timestamped backup
+before removing plugin binaries and packaged Dash Studio templates.
 
 Every plugin install also prints the path to a timestamped rollback backup.
 

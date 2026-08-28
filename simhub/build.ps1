@@ -355,9 +355,15 @@ if (Test-Path -LiteralPath $distRoot) {
 New-Item -ItemType Directory -Path $distRoot | Out-Null
 
 Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Plugin.dll") -Destination $distRoot
-Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Plugin.pdb") -Destination $distRoot
 Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Core.dll") -Destination $distRoot
-Copy-Item -LiteralPath (Join-Path $pluginOutput "AsDriven.Core.pdb") -Destination $distRoot
+if ($Configuration -eq "Debug") {
+    foreach ($symbolName in @("AsDriven.Plugin.pdb", "AsDriven.Core.pdb")) {
+        $symbolPath = Join-Path $pluginOutput $symbolName
+        if (Test-Path -LiteralPath $symbolPath) {
+            Copy-Item -LiteralPath $symbolPath -Destination $distRoot
+        }
+    }
+}
 
 $databaseTarget = Join-Path $distRoot "PluginsData\AsDriven\Database\data\v1"
 New-Item -ItemType Directory -Path $databaseTarget -Force | Out-Null

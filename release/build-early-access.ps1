@@ -66,7 +66,7 @@ $staging = Join-Path ([System.IO.Path]::GetTempPath()) (
     "ACea-" + [Guid]::NewGuid().ToString("N").Substring(0, 8))
 New-Item -ItemType Directory -Path $staging | Out-Null
 try {
-    $releaseName = "as-driven-simhub-$pluginVersion-early-access"
+    $releaseName = "As-Driven-for-SimHub-$pluginVersion"
     # Keep temporary paths short: Dash Studio filenames are descriptive and
     # older PowerShell/.NET Framework file APIs still enforce MAX_PATH.
     $packageRoot = Join-Path $staging "AsDriven"
@@ -86,6 +86,14 @@ try {
         "DATA_LICENSE.md"
     )) {
         Copy-Item -LiteralPath (Join-Path $repositoryRoot $document) -Destination $packageRoot
+    }
+    foreach ($packageDocument in @(
+        "START HERE.txt",
+        "Install As Driven.cmd",
+        "Uninstall As Driven.cmd"
+    )) {
+        Copy-Item -LiteralPath (Join-Path $PSScriptRoot "package\$packageDocument") `
+            -Destination $packageRoot
     }
 
     $manifest = [ordered]@{
@@ -132,6 +140,21 @@ try {
         throw "The final early-access package test failed."
     }
 
+    $releaseNotesName = "release-notes-$pluginVersion.md"
+    $releaseNotesPath = Join-Path $outputRoot $releaseNotesName
+    $releaseNotes = Get-Content -LiteralPath (
+        Join-Path $PSScriptRoot "RELEASE_NOTES_TEMPLATE.md") -Raw
+    $releaseNotes = $releaseNotes.Replace("{{PLUGIN_VERSION}}", $pluginVersion)
+    $releaseNotes = $releaseNotes.Replace("{{DATASET_VERSION}}", $datasetVersion)
+    $releaseNotes = $releaseNotes.Replace("{{RECORD_COUNT}}", [string]$recordCount)
+    $releaseNotes = $releaseNotes.Replace(
+        "{{PLUGIN_PACKAGE}}", [System.IO.Path]::GetFileName($zipPath))
+    $releaseNotes = $releaseNotes.Replace(
+        "{{DATABASE_PACKAGE}}", "as-driven-db-$datasetVersion.zip")
+    $releaseNotes = $releaseNotes.Replace("{{SIMHUB_VERSION}}", "9.11.22")
+    $releaseNotes = $releaseNotes.Replace("{{AMS2_VERSION}}", "1.6.9.91")
+    $releaseNotes | Set-Content -LiteralPath $releaseNotesPath -Encoding UTF8
+
     $releaseMetadata = [ordered]@{
         release_channel = "early-access"
         plugin_version = $pluginVersion
@@ -144,6 +167,7 @@ try {
             Join-Path $outputRoot "as-driven-db-$datasetVersion.zip") -Algorithm SHA256).Hash.ToLowerInvariant()
         tested_simhub_version = "9.11.22"
         tested_ams2_version = "1.6.9.91"
+        release_notes = $releaseNotesName
         generated_at = [DateTime]::UtcNow.ToString("o")
     }
     $releaseMetadata | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (

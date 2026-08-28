@@ -78,11 +78,15 @@ if (Test-Path -LiteralPath $installedLayoutDirectory) {
 
 foreach ($fileName in @(
     "AsDriven.Plugin.dll",
-    "AsDriven.Plugin.pdb",
-    "AsDriven.Core.dll",
-    "AsDriven.Core.pdb"
+    "AsDriven.Core.dll"
 )) {
     Copy-Item -LiteralPath (Join-Path $packageRoot $fileName) -Destination $simHubRoot -Force
+}
+foreach ($symbolName in @("AsDriven.Plugin.pdb", "AsDriven.Core.pdb")) {
+    $installedSymbol = Join-Path $simHubRoot $symbolName
+    if (Test-Path -LiteralPath $installedSymbol) {
+        Remove-Item -LiteralPath $installedSymbol -Force
+    }
 }
 Copy-Item -LiteralPath (Join-Path $packageRoot "PluginsData") -Destination $simHubRoot -Recurse -Force
 Copy-Item -LiteralPath (Join-Path $packageRoot "DashTemplates") -Destination $simHubRoot -Recurse -Force

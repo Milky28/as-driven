@@ -21,6 +21,29 @@ installation and plugin removal in temporary directories, and writes release
 metadata under `dist/early-access`. See `docs/releasing.md` for manual release
 candidate checks and publishing steps.
 
+The SimHub ZIP has three user-facing files at its root:
+
+- `START HERE.txt` with the complete short installation guide;
+- `Install As Driven.cmd`, which requests administrator approval and runs the
+  tested installer;
+- `Uninstall As Driven.cmd`, which preserves user data by default.
+
+Public packages omit debug symbols and are scanned for local user paths. The
+release-package test also verifies that every shipped file is checksummed and
+that internal handoff documents are absent.
+
+After manually checking the release candidate, preview a draft GitHub
+prerelease with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-prerelease.ps1
+```
+
+The preview verifies both ZIPs, their checksums, generated notes, metadata, and
+temporary installations. It does not contact GitHub. Rerun with `-Approve` to
+require a clean, synchronized `main` branch and create a draft prerelease. The
+script never publishes the draft.
+
 The archive contains `data/`, `schema/`, the data-model and evidence-boundary
 documentation, and license files. `release-manifest.json` identifies the
 dataset version and hashes every packaged file. It contains no SimHub binaries,

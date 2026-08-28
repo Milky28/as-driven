@@ -62,6 +62,45 @@ try {
         }
     }
 
+    $manifestPaths = @($fileEntries | ForEach-Object { [string]$_.path } | Sort-Object)
+    $actualPaths = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse |
+        ForEach-Object {
+            $_.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
+        } |
+        Where-Object { $_ -ne "file-manifest.json" } |
+        Sort-Object)
+    if (Compare-Object $manifestPaths $actualPaths -SyncWindow 0) {
+        throw "The early-access package contains a file missing from its manifest."
+    }
+
+    foreach ($requiredPath in @(
+        "START HERE.txt",
+        "Install As Driven.cmd",
+        "Uninstall As Driven.cmd"
+    )) {
+        if (-not (Test-Path -LiteralPath (Join-Path $packageRoot $requiredPath) -PathType Leaf)) {
+            throw "The early-access package is missing its user entry point: $requiredPath"
+        }
+    }
+    if (Get-ChildItem -LiteralPath $packageRoot -File -Recurse -Filter "*.pdb") {
+        throw "The early-access package contains private development symbols."
+    }
+    foreach ($privateDocument in @("AGENTS.md", "CLAUDE.md")) {
+        if (Test-Path -LiteralPath (Join-Path $packageRoot $privateDocument)) {
+            throw "The early-access package contains an internal handoff document: $privateDocument"
+        }
+    }
+    foreach ($file in Get-ChildItem -LiteralPath $packageRoot -File -Recurse) {
+        $bytes = [System.IO.File]::ReadAllBytes($file.FullName)
+        $ascii = [System.Text.Encoding]::ASCII.GetString($bytes)
+        $unicode = [System.Text.Encoding]::Unicode.GetString($bytes)
+        if ($ascii -match '(?i)[a-z]:\\users\\|/users/' `
+            -or $unicode -match '(?i)[a-z]:\\users\\|/users/') {
+            $relativePath = $file.FullName.Substring($packageRoot.Length + 1)
+            throw "The early-access package exposes a local user path: $relativePath"
+        }
+    }
+
     $pluginPackage = Join-Path $packageRoot "simhub\dist\AsDriven"
     foreach ($requiredPath in @(
         "AsDriven.Plugin.dll",
@@ -76,7 +115,7 @@ try {
     }
     & (Join-Path $repositoryRoot "simhub\test-install.ps1") -PackagePath $pluginPackage
 
-    Write-Host "PASS: early-access ZIP checksum, manifests, contents, and extracted install"
+    Write-Host "PASS: early-access ZIP privacy, checksum, manifests, contents, and extracted install"
 }
 finally {
     if (Test-Path -LiteralPath $testRoot) {
