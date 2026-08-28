@@ -318,6 +318,7 @@ namespace AsDriven.Core
                 if (IsTestPhase(_phase))
                 {
                     ResetTrace();
+                    SeedDownshiftAttemptFromLastSample();
                 }
             }
         }
@@ -633,7 +634,9 @@ namespace AsDriven.Core
                 // the gear they had already selected, so the attempt waited for
                 // something lower, found nothing, and timed out as "no
                 // clutchless downshift" on a shift that plainly happened.
-                if (!throttleClosed || _baselineGear == 0)
+                if (_baselineGear == 0
+                    || sample.Gear > _baselineGear
+                    || (!throttleClosed && sample.Gear == _baselineGear))
                 {
                     _baselineGear = sample.Gear;
                     _baselineDriveRatio = DriveRatio(sample);
@@ -647,10 +650,33 @@ namespace AsDriven.Core
             {
                 return;
             }
+            // A carried baseline is only the gear that was current when the
+            // phase opened. The driver may choose a higher, safer setup gear
+            // before attempting the downshift. Follow that upward change, but
+            // never let the lower gear being tested replace the baseline.
+            if (_downshiftCandidateGear == 0 && sample.Gear > _baselineGear)
+            {
+                _baselineGear = sample.Gear;
+                _baselineDriveRatio = DriveRatio(sample);
+                _downshiftArmedThrottle = 0.0;
+            }
             // Arming already required a closed throttle, so anything above it
             // from here is the car blipping or a pedal the driver was asked not
             // to touch. Either way it is not throttle carried in from before.
             _downshiftArmedThrottle = Math.Max(_downshiftArmedThrottle, sample.Throttle);
+            // The phase may open while the driver is already coasting. If they
+            // then accelerate in the same gear before setting up the actual
+            // test, that throttle is not an automatic blip. Keep a brief rise
+            // long enough to catch a blip that precedes the reported gear
+            // change, but discard it once the throttle closes again without a
+            // lower gear ever appearing.
+            if (!manualBlip
+                && _downshiftCandidateGear == 0
+                && sample.Gear >= _baselineGear
+                && sample.Throttle <= 10.0)
+            {
+                _downshiftArmedThrottle = 0.0;
+            }
 
             if (_downshiftCandidateGear == 0)
             {
@@ -1065,6 +1091,34 @@ namespace AsDriven.Core
                 _hasCompletedResults = true;
             }
             ResetTrace();
+            SeedDownshiftAttemptFromLastSample();
+        }
+
+        /// <summary>
+        /// Carries the current engaged gear into a newly opened downshift test.
+        ///
+        /// AddSample keeps the latest live sample even while a result is waiting
+        /// for the driver to press Next. Without this seed, moving to the
+        /// downshift phase discarded that known gear. A fast first attempt could
+        /// then arrive with the lower gear and its throttle blip in the same
+        /// sample, causing the lower gear to become the baseline and the whole
+        /// maneuver to be missed. A closed throttle can also arm the coast test
+        /// here, so the first subsequent spike is retained.
+        /// </summary>
+        private void SeedDownshiftAttemptFromLastSample()
+        {
+            if ((_phase != Phase.CoastDownshift
+                    && _phase != Phase.ManualBlipDownshift)
+                || _lastSample == null
+                || _lastSample.Gear <= 1
+                || _lastSample.SpeedKmh <= 5.0)
+            {
+                return;
+            }
+            _baselineGear = _lastSample.Gear;
+            _baselineDriveRatio = DriveRatio(_lastSample);
+            _armed = _phase == Phase.ManualBlipDownshift
+                || _lastSample.Throttle <= 10.0;
         }
 
         private static double DriveRatio(GuidedTelemetrySample sample)

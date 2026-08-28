@@ -1296,6 +1296,42 @@ namespace AsDriven.Core.Tests
                     Equal("yes", guidedResults.ClutchlessDownshift, "prefills accepted clutchless downshift");
                     Equal("yes", guidedResults.AutomaticBlip, "prefills telemetry-supported automatic blip");
 
+                    // A result-ready phase still receives live telemetry while
+                    // it waits for Next. Preserve that current gear when the
+                    // coast test opens, or a first-attempt downshift whose blip
+                    // arrives with the lower gear becomes its own baseline and
+                    // disappears. This is especially visible in rFactor 2, but
+                    // the guided detector is shared by every simulator.
+                    {
+                        GuidedVerificationDrive immediate = new GuidedVerificationDrive();
+                        immediate.Start(6);
+                        for (int guard = 0; guard < 40
+                            && immediate.GetSnapshot().Title != "Full-throttle upshift"; guard++)
+                        {
+                            immediate.AddSample(GuidedSample(now, 3, 0, 0, 4000, 80, 100, true));
+                            immediate.Next();
+                        }
+                        immediate.AddSample(GuidedSample(now, 3, 0, 90, 5000, 80, 220, true));
+                        immediate.AddSample(GuidedSample(now.AddMilliseconds(100), 4, 0, 90, 4300, 82, 30, true));
+                        True(immediate.GetSnapshot().ResultReady,
+                            "captures the upshift before the first-attempt downshift regression");
+                        // Result-ready telemetry is still current when Next is
+                        // pressed. The driver has released the throttle in 4th.
+                        immediate.AddSample(GuidedSample(now.AddMilliseconds(200), 4, 0, 0, 4100, 82, 100, true));
+                        immediate.Next();
+                        Equal("Downshift without pedal input", immediate.GetSnapshot().Title,
+                            "opens the coast-downshift test");
+                        // The first test sample already contains both the lower
+                        // gear and the car's brief throttle blip.
+                        immediate.AddSample(GuidedSample(now.AddMilliseconds(260), 3, 0, 55, 5200, 81, 180, true));
+                        immediate.AddSample(GuidedSample(now.AddMilliseconds(900), 3, 0, 0, 5900, 80, 100, true));
+                        True(immediate.GetSnapshot().ResultReady,
+                            "captures an automatic blip on the first downshift attempt");
+                        immediate.Next();
+                        Equal("yes", immediate.GetResults().AutomaticBlip,
+                            "records the first-attempt automatic blip");
+                    }
+
                     // A driver still carrying throttle when the attempt begins
                     // must not have their own pedal reported as the car's blip.
                     // The measurement banked throttle from the whole attempt, so
