@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.17",
-  "generated_at": "2026-08-27",
+  "dataset_version": "0.5.21",
+  "generated_at": "2026-08-28",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -10,17 +10,17 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 19,
-    "findings": 27,
+    "cars_with_disagreements": 20,
+    "findings": 28,
     "by_status": {
-      "authentic-baseline-open": 16,
+      "authentic-baseline-open": 17,
       "provisional-departure": 2,
       "supported-departure": 9
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
       "hardware-choice": 6,
-      "launch-technique": 8,
+      "launch-technique": 9,
       "running-shift-technique": 9
     }
   },
@@ -1577,6 +1577,74 @@
         "departing_simulators": [],
         "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
         "next_action": "Find real-car evidence for wheel-rim category."
+      }
+    },
+    {
+      "finding_id": "tatuus-f4-t014--transmission-standing-start-clutch",
+      "record_id": "tatuus-f4-t014",
+      "display_name": "Tatuus F4 T-014",
+      "class": "FIA Formula 4",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "unknown",
+        "display_value": "Not established",
+        "confidence": "high",
+        "source_refs": [
+          "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "raceroom",
+          "label": "RaceRoom Racing Experience",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "0.9.8.19",
+          "verified_at": "2026-08-28",
+          "confidence": "high",
+          "source_refs": [
+            "raceroom.official-store.tatuus-f4",
+            "tatuus.t-014-history",
+            "fia.f4-technical-list-53",
+            "gb4.tatuus-f4-t014-specification",
+            "tatuus.f4-technical-outline.brochure",
+            "racecarsdirect.tatuus-f4-chassis-026-cockpit",
+            "as-driven.repository.tatuus-f4-t014-record-scan",
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "simulator": "rfactor2",
+          "label": "rFactor 2",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "1.1.3.4",
+          "verified_at": "2026-08-28",
+          "confidence": "high",
+          "source_refs": [
+            "tatuus.t-014-history",
+            "fia.f4-technical-list-53",
+            "gb4.tatuus-f4-t014-specification",
+            "tatuus.f4-technical-outline.brochure",
+            "racecarsdirect.tatuus-f4-chassis-026-cockpit",
+            "as-driven.repository.tatuus-f4-t014-current-record-scan",
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "authentic-baseline-open",
+        "matching_simulators": [],
+        "departing_simulators": [],
+        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
+        "next_action": "Find real-car evidence for pulling away."
       }
     },
     {

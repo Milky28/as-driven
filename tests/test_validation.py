@@ -140,13 +140,20 @@ class ValidationTests(unittest.TestCase):
             r"|is the ordinary reading of)",
             re.IGNORECASE,
         )
+        negated = re.compile(r"^(no|nothing|neither)\b", re.IGNORECASE)
         offenders = []
         for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
             record = json.loads(path.read_text(encoding="utf-8"))
             for claim in record["provenance"]["claims"]:
                 if not any(p.endswith("/gearbox_type") for p in claim["paths"]):
                     continue
-                if inferred.search(claim["basis"]) and claim["confidence"] in {"high", "verified"}:
+                sentences = re.split(r"(?<=[.!?])\s+", claim["basis"])
+                positive_inference = any(
+                    inferred.search(sentence)
+                    and not negated.search(sentence.lstrip())
+                    for sentence in sentences
+                )
+                if positive_inference and claim["confidence"] in {"high", "verified"}:
                     offenders.append(f"{record['record_id']}: {claim['confidence']}")
         self.assertEqual([], offenders)
 

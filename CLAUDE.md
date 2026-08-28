@@ -167,7 +167,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Early-access client: 0.20.2.
-- Dataset: 0.5.17 with 271 curated records.
+- Dataset: 0.5.21 with 273 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the certified pair is what the early

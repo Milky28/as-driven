@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.20",
+  "approved_at": "2026-08-28",
+  "record_id": "porsche-963",
+  "simulator": "raceroom",
+  "telemetry_name": "Porsche 963",
+  "observed_game_version": "0.9.8.19",
+  "observed_through": "SimHub guided verification observation raceroom.porsche-963.20260828t144642040z-fa553a10",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "not-required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "not-applicable",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 2023 competition debut identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Hypercars"
+}

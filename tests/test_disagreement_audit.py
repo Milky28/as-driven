@@ -191,7 +191,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 16,
+                "authentic-baseline-open": 17,
                 "provisional-departure": 2,
                 "supported-departure": 9,
             },
@@ -265,6 +265,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             "porsche-911-gt1-98--transmission-downshift-manual-blip",
             "saleen-s7-r-gt1--steering-wheel-rim-shape",
             "saleen-s7-r-gt1--transmission-downshift-manual-blip",
+            "tatuus-f4-t014--transmission-standing-start-clutch",
         }
         actual = {
             finding["finding_id"]

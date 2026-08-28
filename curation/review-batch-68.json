@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.21",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "tatuus-f4-t014",
+      "bundle": "build/review-cases/issue-38/staged.json",
+      "display_name": "Tatuus F4 T-014",
+      "class": "FIA Formula 4",
+      "manufacturer": "Tatuus",
+      "model": "F4-T014",
+      "year": {
+        "from": 2014,
+        "to": 2014,
+        "label": "2014 Tatuus F4 T-014"
+      },
+      "real_world_identity_notes": "The rFactor 2 telemetry name identifies the first-generation Tatuus F4-T014 FIA Formula 4 chassis introduced in 2014. Tatuus distinguishes the later second-generation T-421 from the T-014. The observed rFactor 2 name is not a separate real-world model, and championship-specific engine, electronics, or wheel fitting should not be generalized beyond the reviewed T014 evidence. This is the same real-car identity already represented by the curated tatuus-f4-t014 record from the RaceRoom Tatuus F4 observation.",
+      "real_world_source_refs": [
+        "tatuus.t-014-history",
+        "fia.f4-technical-list-53",
+        "gb4.tatuus-f4-t014-specification",
+        "tatuus.f4-technical-outline.brochure",
+        "racecarsdirect.tatuus-f4-chassis-026-cockpit",
+        "as-driven.repository.tatuus-f4-t014-current-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Tatuus's historical page identifies the T-014 as its 2014 Formula 4 car and names the T-421 as the second-generation successor. FIA Technical List No. 53 identifies the homologated Tatuus FIA F4 T014 chassis and the Sadev gearbox homologated for it. The exact T014 technical outline and GB4 specification agree on a six-speed sequential Sadev gearbox with paddle shift and a wheel-integrated display. The current checked-out curated dataset already contains the matching tatuus-f4-t014 record, so this rFactor 2 observation should attach to that record rather than create a duplicate.",
+      "identity_basis": "Tatuus's historical page identifies the T-014 as its 2014 Formula 4 car and names the T-421 as the second-generation successor. FIA Technical List No. 53 identifies the homologated Tatuus FIA F4 T014 chassis and the Sadev gearbox homologated for it. The exact T014 technical outline and GB4 specification agree on a six-speed sequential Sadev gearbox with paddle shift and a wheel-integrated display. The current checked-out curated dataset already contains the matching tatuus-f4-t014 record, so this rFactor 2 observation should attach to that record rather than create a duplicate.",
+      "specification_basis": "Both exact T014 technical sources specify a six-speed transmission. The GB4 and T014 brochure explicitly call the gearbox sequential, while FIA homologation identifies the Sadev SL75LW-F4 gearbox for the T014 chassis. The exact T014 technical descriptions specify paddle shift, and the exact-model cockpit photograph visibly shows paddle shifters behind a fixed-grip wheel. Both exact T014 specifications describe a sequential transmission operated by paddles; no H-pattern gate is involved. The exact-model cockpit photograph shows fixed left and right molded grips with a control face between them, so the hands stay at the grips; under the project's wheel taxonomy this is gt-formula rather than a continuous round or D-shaped band. The T014 technical outline explicitly specifies an LCD display integrated into the steering wheel, and the exact-model cockpit photograph visibly shows the central digital display. The clear photograph establishes a gt-formula fixed-grip control-face wheel rather than a continuous rim for which open-top geometry would be a separate property; the project's representation is therefore not-applicable. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2014 Tatuus F4 T-014 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential paddles; shift pattern: sequential; wheel-rim shape: gt formula; integrated wheel display: yes; conventional rim open-top section: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "rFactor 2 1.1.3.4 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/38",
+      "live_source_notes": "Guided-verification observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    }
+  ]
+}

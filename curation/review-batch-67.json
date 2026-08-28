@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.20",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "porsche-963",
+      "bundle": "build/review-cases/issue-35/staged.json",
+      "display_name": "Porsche 963",
+      "class": "LMDh",
+      "manufacturer": "Porsche",
+      "model": "963",
+      "year": {
+        "from": 2023,
+        "label": "2023 competition debut"
+      },
+      "real_world_identity_notes": "The RaceRoom telemetry name matches the existing simulator-independent Porsche 963 record. The real car is Porsche's LMDh prototype, built by Porsche and Multimatic for the 2023 endurance-racing class, not the later road-oriented 963 RSP one-off. Porsche's specification identifies a seven-speed racing transmission and CFK racing clutch; Xtrac identifies the common LMDh P1359 as a seven-speed sequential gearbox. The reviewed sources establish wheel-mounted paddle and clutch controls, but do not establish the driver's complete launch, upshift, downshift, throttle-lift, cut, or blip technique for every competition configuration.",
+      "real_world_source_refs": [
+        "porsche.963.racing",
+        "xtrac.p1359.lmdh",
+        "imsa.hybrid-101.lmdh.2022",
+        "porsche-motorsport-na.963-steering-wheel-explanation",
+        "motorsport.porsche-963-driving-manual",
+        "flatsixes.porsche-963-cockpit",
+        "as-driven.repository.porsche-963-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Porsche's manufacturer specification identifies the 963 as an LMDh prototype and gives its seven-speed racing transmission. Xtrac independently identifies the LMDh P1359 as a seven-speed sequential gearbox, while Porsche Motorsport North America's exact 963 steering-wheel explanation identifies gear paddles and hand-operated clutch paddles. The repository scan found the same real-car identity already curated as porsche-963, so this observation should attach to that record rather than create a duplicate.",
+      "identity_basis": "Porsche's manufacturer specification identifies the 963 as an LMDh prototype and gives its seven-speed racing transmission. Xtrac independently identifies the LMDh P1359 as a seven-speed sequential gearbox, while Porsche Motorsport North America's exact 963 steering-wheel explanation identifies gear paddles and hand-operated clutch paddles. The repository scan found the same real-car identity already curated as porsche-963, so this observation should attach to that record rather than create a duplicate.",
+      "specification_basis": "Porsche specifies a 7-speed racing transmission and Xtrac specifies the LMDh P1359 as 7 speed. Xtrac explicitly calls the P1359 a 7 speed sequential gearbox; Porsche's exact 963 specification independently identifies the seven-speed pneumatically actuated racing transmission. The official Porsche Motorsport North America explanation says the rear paddles upshift and downshift the 963, and contemporaneous reporting corroborates regular gearshift paddles at the rear of the wheel. Xtrac explicitly identifies the gearbox as sequential, and Porsche's official explanation describes paddle-operated upshift/downshift commands rather than a gear gate. The exact Porsche 963 cockpit photograph shows a fixed molded control wheel with dedicated left and right grips and a control face between them, so the hands stay at the grips; this is gt-formula rather than a continuous round or D-shaped band. The exact 963 cockpit photograph visibly includes a central digital display, and contemporaneous reporting identifies a color display on the wheel. Contemporaneous reporting on the Porsche 963 wheel explicitly states that shift lights and warning lights run across the top of the wheel. The photograph establishes a gt-formula fixed-grip control wheel rather than a continuous rim for which open-top geometry would be a separate property; the project's representation is therefore not-applicable. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-963-controls.0.9.8.19"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2023 competition debut identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 7; gearbox construction: sequential; shift actuation: sequential paddles; shift pattern: sequential; wheel-rim shape: gt formula; integrated wheel display: yes; wheel shift lights: yes; conventional rim open-top section: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "RaceRoom Racing Experience 0.9.8.19 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/35",
+      "live_source_notes": "Guided-verification observation raceroom.porsche-963.20260828t144642040z-fa553a10 by Jason Kinslow; RACEROOM 0.9.8.19. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.19",
+  "approved_at": "2026-08-28",
+  "record_id": "bmw-320i-stw-1998",
+  "simulator": "rfactor2",
+  "telemetry_name": "BMW 320i STW",
+  "observed_game_version": "1.1.3.4",
+  "observed_through": "SimHub guided verification observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 1998 BMW E36 320i STW identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "BMW 320i STW",
+  "staged_record_id": "bmw-320i-stw"
+}

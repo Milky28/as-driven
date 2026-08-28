@@ -8573,6 +8573,231 @@
       "retrieved_at": "2026-08-27",
       "reuse_status": "facts-only-review",
       "notes": "Corrective guided-verification observation ams2.nissan-gt-r-nismo-gt3.20260827t034656732z-e7b8f600 by Jason Kinslow in AMS2 1.6.9.91. The repeat drive directly found six paddle-selected gears, clutch-free move-off, automatic cut, automatic blip, and a closed D-shaped rim without integrated display or shift lights. It supersedes the earlier round-rim observation."
+    },
+    {
+      "source_id": "raceroom.official-store.tatuus-f4",
+      "title": "Tatuus F4",
+      "publisher": "RaceRoom",
+      "url": "https://game.raceroom.com/store/cars/tatuus-f4-cup/tatuus/tatuus-f4",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: RaceRoom's official catalogue page for the observed Tatuus F4 content; used for simulator identity and the catalogue year, not as sole proof of real-car controls. car catalogue identity and year: “Tatuus F4; Year: 2014” Reviewed for /identity/display_name, /identity/year. car description: “officially homologated Tatuus monocoque carbon composite chassis” Reviewed for /identity/model, /identity/class, /identity/real_world_identity_notes. This is official simulator catalogue evidence. It anchors the observed content to RaceRoom's 2014 Tatuus F4 entry but does not establish real-car driving technique."
+    },
+    {
+      "source_id": "tatuus.t-014-history",
+      "title": "T-014",
+      "publisher": "Tatuus",
+      "url": "https://www.tatuus.it/en/historical-vehicles/t-014",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Tatuus's official historical vehicle page for the T-014, including its introduction year, Formula 4 role, and distinction from the T-421 successor. historical vehicle introduction: “2014 was a revolutionary year ... with the introduction of the T-014” Reviewed for /identity/model, /identity/year, /identity/class. production and successor context: “its successor, the second-generation Formula 4, the T-421” Reviewed for /identity/real_world_identity_notes, /identity/confusion_risks. Primary manufacturer identity evidence. The page does not provide a driver shift procedure or an exact wheel-rim taxonomy."
+    },
+    {
+      "source_id": "fia.f4-technical-list-53",
+      "title": "FIA Technical List No.53 - Formula 4 homologated components",
+      "publisher": "Fédération Internationale de l'Automobile",
+      "url": "https://www.fia.com/sites/default/files/tl_53-f4_0.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: FIA Formula 4 homologation list identifying the Tatuus T014 chassis and the Sadev SL75LW-F4 gearbox homologated for it. PDF p.1, Chassis table: “2014-01-F4-Tatuus; Tatuus; FIA F4 T014” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class. PDF p.1, Gearbox table: “2015-01-F4-Sadev; Sadev; SL75LW-F4; 2014-01-F4-Tatuus” Reviewed for /authentic_controls/transmission/gearbox_type, /identity/real_world_identity_notes. Primary homologation evidence. It identifies the gearbox model but does not state the number of forward gears or the driver's clutch/throttle technique.",
+      "published_or_updated_at": "2017-03-30"
+    },
+    {
+      "source_id": "gb4.tatuus-f4-t014-specification",
+      "title": "The Car",
+      "publisher": "GB4 / MotorSport Vision",
+      "url": "https://www.gb-4.net/info/the-car",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: GB4's technical description of its FIA-homologated Tatuus F4-T014 package, including the Sadev six-speed sequential paddle-shift transmission. technical description, transmission paragraph: “six-speed sequential gearbox with paddle shift provided by Sadev” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. technical specification list: “Gearbox - Sadev six-speed sequential transmission with paddleshift” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Exact T014 championship technical evidence for the transmission. It does not prescribe clutch use, throttle lift, cut, blip, or first-gear position."
+    },
+    {
+      "source_id": "tatuus.f4-technical-outline.brochure",
+      "title": "Technical outline Formula 4 Tatuus F.4 T 014",
+      "publisher": "Tatuus brochure mirrored by ItaliaRacing",
+      "url": "https://www.italiaracing.net/mag_tatuus/201302/eng/files/assets/common/downloads/publication.pdf",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: English technical-outline brochure for the Tatuus F.4 T 014, used as corroboration for six-speed Sadev paddle shift and a wheel-integrated LCD display. PDF p.4, technical outline table: “Sequential Sadev six-speed gearbox; Paddle shift Magneti Marelli EGA” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. PDF p.4, instrumentation row: “Display LCD integrato al volante Next Solution” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display. The document is a manufacturer technical outline hosted by a secondary motorsport archive. It supports an integrated wheel display but does not establish shift lights, rim shape, open-top construction, or driver technique."
+    },
+    {
+      "source_id": "racecarsdirect.tatuus-f4-chassis-026-cockpit",
+      "title": "Formula 4 - SOLD",
+      "publisher": "Racecarsdirect.com",
+      "url": "https://racecarsdirect.com/Advert/Details/111198/formula-4",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Used-car listing for a Tatuus F4 cockpit, chassis 026, with a linked cockpit photograph; used as exact-model visual evidence for the wheel control-face construction and display. listing description: “Chassis Tatuus n ° 026” Reviewed for /identity/model, /identity/real_world_identity_notes. linked cockpit photograph, image 599465.jpg: “Visible in the photograph: a steering wheel with a central digital display, paddle shifters, and fixed left/right hand grips around a central control face.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display. The photograph is a clear Tatuus F4 cockpit image, but it documents one chassis-specific fitted wheel. It is used for the visible wheel topology and display only; it does not establish shift lights or the exact wheel hardware of every T014 series package."
+    },
+    {
+      "source_id": "as-driven.repository.tatuus-f4-t014-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of data/v1/index.json and data/v1/cars for an existing Tatuus F4-T014 curated record. data/v1/index.json and data/v1/cars: “No curated Tatuus or F4-T014 record is present” Reviewed for /identity/record_action, /identity/record_id. Repository context supports the create-new decision and proposed normalized id; it is not independent real-world evidence."
+    },
+    {
+      "source_id": "raceroom.local-live-tatuus-f4-controls.0.9.8.19",
+      "title": "Live RACEROOM Tatuus F4 guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/34",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 by Jason Kinslow; RACEROOM 0.9.8.19. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "bmw.official.1998-stw-320i",
+      "title": "040107 BMW WilliamsF1 Team Presskit",
+      "publisher": "BMW Group",
+      "url": "https://www.press.bmwgroup.com/usa/article/attachment/T0022244EN_US/41693",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW historical press material identifying the 1998 German Super Touring championship result and the BMW 320i used by Johnny Cecotto. PDF p.129, 1998 motorsport results: “1998 Johnny Cecotto, BMW Motorsport Team Schnitzer, wins the German Super Touring Car Championship (STW) in a BMW 320i” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. Primary manufacturer evidence for the 1998 BMW 320i STW identity. It does not establish the detailed driver control technique."
+    },
+    {
+      "source_id": "schnitzer-classic.e36-stw-320i",
+      "title": "Classic Racing",
+      "publisher": "Schnitzer Classic",
+      "url": "https://schnitzer-classic.de/classic-racing/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Schnitzer Classic's historical description of the BMW E36 STW program, BMW 320i period, and sequential six-speed transmission. BMW E36 STW history: “ab 1995 mit dem Modell BMW 320i ... war BMW von 1993 bis 1998” Reviewed for /identity/model, /identity/year, /identity/real_world_identity_notes. BMW E36 STW technical summary: “Ein sequentielles 6-Gang Getriebe” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Team/manufacturer historical evidence. It identifies the E36 STW family and transmission construction but does not prescribe clutch or throttle technique."
+    },
+    {
+      "source_id": "autosportnl.1998.bmw-320i-stw-track-test",
+      "title": "Rijden met STW-kampioensauto BMW 320i - Als op rails",
+      "publisher": "Autosport.nl",
+      "url": "https://autosport.nl/klasse/nieuws/30506/rijden-met-stw-kampioensauto-bmw-320i-als-op-rails",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Contemporary track test of the 1998 German STW championship BMW 320i, including the stick selector, six-speed sequential gearbox, clutchless running shifts, and cockpit controls. article lead and date: “03-11-1998 ... het afgelopen seizoen won Johnny Cecotto met de BMW 320i de titel” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/class. cockpit explanation and selector description: “de versnellingspook ... werkt op de sequentieel geschakelde zesbak” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. running-shift description: “Het schakelen zonder ontkoppelen went heel snel” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. steering-wheel and dashboard explanation: “met de knopjes op het stuur ... die kleine lampjes bovenop” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Contemporary period reporting from a track test of the championship car. The text establishes clutchless running shifts, but does not establish the standing-start clutch procedure, throttle lift, cut, or blip strategy. The cockpit wording does not unambiguously locate the display or shift lights on the rim itself.",
+      "author": "René de Boer",
+      "published_or_updated_at": "1998-11-03"
+    },
+    {
+      "source_id": "autosportnl.1998.bmw-320i-stw-cockpit-images",
+      "title": "CECOTTO cockpit photographs from the 1998 BMW 320i STW track test",
+      "publisher": "Autosport.nl",
+      "url": "https://autosport.nl/klasse/nieuws/30506/rijden-met-stw-kampioensauto-bmw-320i-als-op-rails",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: The exact 1998 article's linked cockpit photographs, reviewed as visual evidence for the driver-operated wheel and shifter hardware. CECOTTO3 and CECOTTO6 linked photographs in the article: “The linked period photographs show the 1998 STW cockpit and floor-mounted sequential selector, but do not provide a sufficiently unambiguous rim-topology view for shape, open-top, or rim-mounted display classification.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Exact-period visual source. The full-resolution image endpoint was attempted; the image was not usable for a confident rim-topology decision, so the rim fields remain unknown rather than inheriting the simulator's round/no-light values.",
+      "author": "Willem J. Staat and Sabine Hofmann",
+      "published_or_updated_at": "1998-11-03"
+    },
+    {
+      "source_id": "as-driven.repository.bmw-320i-stw-1998-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of data/v1/index.json and data/v1/cars for an existing BMW 320i STW or BMW 320i E36 STW curated record. data/v1/index.json and data/v1/cars: “No curated BMW 320i STW or BMW 320i E36 STW record is present” Reviewed for /identity/record_action, /identity/record_id. Repository context supports the create-new decision and proposed normalized id; it is not independent real-world evidence."
+    },
+    {
+      "source_id": "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4",
+      "title": "Live RFACTOR2 BMW 320i STW guided-verification drive",
+      "publisher": "Local RFACTOR2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/37",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "porsche-motorsport-na.963-steering-wheel-explanation",
+      "title": "Porsche 963 steering wheel explanation",
+      "publisher": "Porsche Motorsport North America",
+      "url": "https://www.linkedin.com/posts/porsche-motorsport-north-america_porsche963-porsche-wec-activity-7240367437324439552-vDrd",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Porsche Motorsport North America post and transcript explaining the Porsche 963 steering wheel controls. post transcript, rear-of-wheel control explanation: “You've got paddles ... here you can upshift and downshift” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. post transcript, clutch control explanation: “there is No 3 pedals like on the road car. It's a clutch by hand” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Official team-channel evidence establishes paddle and hand-clutch controls. The transcript describes releasing the clutch when leaving the pits; it does not establish the requested standing-start or running-shift technique fields."
+    },
+    {
+      "source_id": "motorsport.porsche-963-driving-manual",
+      "title": "Why Porsche drivers need a 30-page manual to drive the 963",
+      "publisher": "Motorsport.com",
+      "url": "https://www.motorsport.com/imsa/news/porsche-963-driving-manual-daytona/10412256/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Contemporaneous report on the Porsche Penske Motorsport Porsche 963 steering wheel and driver manual. article paragraphs on the steering wheel, lines 251-253 in retrieved page: “regular gearshift and clutch paddles at the rear of the wheel” Reviewed for /authentic_controls/transmission/shift_actuation. article paragraph on wheel indications, lines 251-253 in retrieved page: “shift lights and warning lights across the top ... a really nice color display” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Secondary reporting corroborates the exact 963 wheel's rear paddles, top shift-light bank, and color display.",
+      "author": "Charles Bradley",
+      "published_or_updated_at": "2022-12-17"
+    },
+    {
+      "source_id": "flatsixes.porsche-963-cockpit",
+      "title": "Here's everything you need to know about Porsche's new 963 hybrid prototype race car",
+      "publisher": "FlatSixes",
+      "url": "https://flatsixes.com/porsche-motorsports/heres-everything-you-need-to-know-about-porsche-963-hybrid-lmdh-prototype-race-car/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary article's photograph of the Porsche 963 race-car cockpit and steering wheel, not the later 963 RSP road-going one-off. embedded cockpit photograph, full image URL https://flatsixes.com/wp-content/uploads/2022/06/FWOq6OZUIAAm8Dj-800x533.jpg: “Visible in the photograph: a molded carbon-fiber steering wheel with fixed left and right grips, a central digital display, and multiple mounted control switches.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top. The photograph is used only for visible wheel geometry and display presence. The separate shift-light claim is supported by the contemporaneous wheel description above, not by an unreadable thumbnail."
+    },
+    {
+      "source_id": "as-driven.repository.porsche-963-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing simulator-independent Porsche 963 record. data/v1/cars/porsche-963.json identity and record scan: “Existing curated record porsche-963 matches the Porsche 963 identity and already covers the same real car.” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the use-existing decision; it is not real-world evidence."
+    },
+    {
+      "source_id": "raceroom.local-live-porsche-963-controls.0.9.8.19",
+      "title": "Live RACEROOM Porsche 963 guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/35",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.porsche-963.20260828t144642040z-fa553a10 by Jason Kinslow; RACEROOM 0.9.8.19. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "as-driven.repository.tatuus-f4-t014-current-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/codex/stabilization/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing simulator-independent Tatuus F4-T014 record after the earlier RaceRoom observation was curated. data/v1/cars/tatuus-f4-t014.json and data/v1/index.json: “record_id tatuus-f4-t014; display_name Tatuus F4 T-014; simulator-independent curated identity” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the use-existing decision and does not independently establish real-world facts. The issue brief predates this checked-out record."
+    },
+    {
+      "source_id": "rfactor2.local-live-tatuus-f4-t014-controls.1.1.3.4",
+      "title": "Live RFACTOR2 Tatuus F4-T014 guided-verification drive",
+      "publisher": "Local RFACTOR2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/38",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-28",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation rfactor2.tatuus-f4-t014.20260828t150514403z-d9c7561a by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

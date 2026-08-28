@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.18",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "tatuus-f4-t014",
+      "bundle": "build/review-cases/issue-34/staged.json",
+      "display_name": "Tatuus F4 T-014",
+      "class": "FIA Formula 4",
+      "manufacturer": "Tatuus",
+      "model": "F4-T014",
+      "year": {
+        "from": 2014,
+        "to": 2014,
+        "label": "2014 Tatuus F4 T-014"
+      },
+      "real_world_identity_notes": "The RaceRoom Tatuus F4 observation is best identified as the first-generation Tatuus F4-T014 FIA Formula 4 chassis introduced in 2014. RaceRoom's F4 Cup label is simulator context, not a separate real-world model. Tatuus distinguishes the later second-generation T-421 from the T-014, and championship-specific engine or electronics packages should not be silently generalized beyond the evidence reviewed.",
+      "real_world_source_refs": [
+        "raceroom.official-store.tatuus-f4",
+        "tatuus.t-014-history",
+        "fia.f4-technical-list-53",
+        "gb4.tatuus-f4-t014-specification",
+        "tatuus.f4-technical-outline.brochure",
+        "racecarsdirect.tatuus-f4-chassis-026-cockpit",
+        "as-driven.repository.tatuus-f4-t014-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Tatuus identifies the T-014 as its 2014 Formula 4 car and names the later T-421 as its second-generation successor. FIA Technical List No.53 identifies the exact homologated chassis as Tatuus FIA F4 T014 and pairs it with the Sadev SL75LW-F4 gearbox. RaceRoom's official store independently names the simulator car Tatuus F4 and gives the year as 2014. No matching Tatuus record is present in the checked-out curated dataset, so this is a new record proposal.",
+      "identity_basis": "Tatuus identifies the T-014 as its 2014 Formula 4 car and names the later T-421 as its second-generation successor. FIA Technical List No.53 identifies the exact homologated chassis as Tatuus FIA F4 T014 and pairs it with the Sadev SL75LW-F4 gearbox. RaceRoom's official store independently names the simulator car Tatuus F4 and gives the year as 2014. No matching Tatuus record is present in the checked-out curated dataset, so this is a new record proposal.",
+      "specification_basis": "The T014 technical outline explicitly specifies an LCD display integrated into the steering wheel, and the exact-model cockpit photograph visibly shows a central digital display on the wheel. The reviewed exact-model photograph shows a fixed-grip control-face wheel rather than a conventional round or D-shaped rim. Under the record vocabulary, open-top is not applicable to the gt-formula construction. The clear Tatuus F4 cockpit photograph shows fixed molded left/right grips with a control face between them, matching the database definition of gt-formula. GB4 explicitly describes the Tatuus F4-T014 as having a six-speed gearbox, and the T014 technical outline independently says Sadev six-speed gearbox. The FIA list identifies the homologated Sadev SL75LW-F4 for the T014, while the T014 technical descriptions explicitly call the transmission sequential. The exact T014 specifications explicitly state paddle shift/paddleshift, and the cockpit photograph visibly shows paddle shifters. Both exact T014 technical descriptions call the gearbox sequential. No H-gate first-gear position is inferred from the paddle hardware. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-tatuus-f4-controls.0.9.8.19"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2014 Tatuus F4 T-014 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: yes; conventional rim open-top section: not applicable; wheel-rim shape: gt formula; forward gears: 6; gearbox construction: sequential; shift actuation: sequential paddles; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "RaceRoom Racing Experience 0.9.8.19 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/34",
+      "live_source_notes": "Guided-verification observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9 by Jason Kinslow; RACEROOM 0.9.8.19. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "tatuus-f4",
+        "basis": "Tatuus identifies the T-014 as its 2014 Formula 4 car and names the later T-421 as its second-generation successor. FIA Technical List No.53 identifies the exact homologated chassis as Tatuus FIA F4 T014 and pairs it with the Sadev SL75LW-F4 gearbox. RaceRoom's official store independently names the simulator car Tatuus F4 and gives the year as 2014. No matching Tatuus record is present in the checked-out curated dataset, so this is a new record proposal."
+      }
+    }
+  ]
+}

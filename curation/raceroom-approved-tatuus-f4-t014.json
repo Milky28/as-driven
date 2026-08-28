@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.18",
+  "approved_at": "2026-08-28",
+  "record_id": "tatuus-f4-t014",
+  "simulator": "raceroom",
+  "telemetry_name": "Tatuus F4",
+  "observed_game_version": "0.9.8.19",
+  "observed_through": "SimHub guided verification observation raceroom.tatuus-f4.20260828t143626403z-13f9e3c9",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "not-applicable"
+  },
+  "confidence_notes": "The exact 2014 Tatuus F4 T-014 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Tatuus F4 Cup",
+  "staged_record_id": "tatuus-f4"
+}

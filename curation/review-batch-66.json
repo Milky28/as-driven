@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.19",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "bmw-320i-stw-1998",
+      "bundle": "build/review-cases/issue-37/staged.json",
+      "display_name": "BMW 320i STW (1998)",
+      "class": "Super Touring / FIA Class 2 touring car",
+      "manufacturer": "BMW",
+      "model": "320i STW (E36)",
+      "year": {
+        "from": 1998,
+        "to": 1998,
+        "label": "1998 BMW E36 320i STW"
+      },
+      "real_world_identity_notes": "The rFactor 2 BMW 320i STW observation is best identified as the 1998 BMW E36 320i Super Touring specification, the BMW Motorsport/Schnitzer Class 2 touring car raced in the German STW championship. This is a purpose-built racing version based on the E36 3 Series, not the road BMW 320i. The unqualified simulator name does not identify one chassis number or one national-series fitment, so the record is kept at the exact 1998 STW model/specification level.",
+      "real_world_source_refs": [
+        "bmw.official.1998-stw-320i",
+        "schnitzer-classic.e36-stw-320i",
+        "autosportnl.1998.bmw-320i-stw-track-test",
+        "autosportnl.1998.bmw-320i-stw-cockpit-images",
+        "as-driven.repository.bmw-320i-stw-1998-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "BMW's press material records Johnny Cecotto winning the 1998 German Super Touring Car Championship in a BMW 320i. Schnitzer Classic identifies the BMW E36 STW program, its BMW 320i model from 1995 through 1998, and its six-speed sequential gearbox. A period November 1998 track test of the championship car independently describes the six-speed sequential stick-shift transmission and clutchless running shifts. No matching BMW 320i STW record is present in the checked-out curated dataset, so this is a new record proposal.",
+      "identity_basis": "BMW's press material records Johnny Cecotto winning the 1998 German Super Touring Car Championship in a BMW 320i. Schnitzer Classic identifies the BMW E36 STW program, its BMW 320i model from 1995 through 1998, and its six-speed sequential gearbox. A period November 1998 track test of the championship car independently describes the six-speed sequential stick-shift transmission and clutchless running shifts. No matching BMW 320i STW record is present in the checked-out curated dataset, so this is a new record proposal.",
+      "specification_basis": "The contemporary track test explicitly reports that shifting without disengaging the clutch became easy. In context this describes the running sequential shifts of the tested car, so clutch use is not required for running downshifts. Schnitzer Classic identifies a sequential six-speed gearbox for the E36 STW, and the period 1998 track test describes the sequential six-speed box in the championship BMW 320i. Both the Schnitzer historical specification and the contemporary track test explicitly describe a sequential gearbox. The period track test explicitly identifies a gear lever with a round knob and explains pull-for-upshift and push-for-downshift operation on the sequential six-speed gearbox. The reviewed exact-period sources call the gearbox sequential. No H-gate or first-gear location is inferred from the stick description. The contemporary track test explicitly reports that shifting without disengaging the clutch became easy. In context this describes the running sequential shifts of the tested car, so clutch use is not required for running upshifts. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "rfactor2.local-live-bmw-320i-stw-controls.1.1.3.4"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1998 BMW E36 320i STW identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/clutch"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish transmission downshift clutch: not required; forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; transmission upshift clutch: not required.",
+        "The reviewed real-car sources do not establish launch technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "rFactor 2 1.1.3.4 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/37",
+      "live_source_notes": "Guided-verification observation rfactor2.bmw-320i-stw.20260828t145838149z-53b55038 by Jason Kinslow; RFACTOR2 1.1.3.4. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "bmw-320i-stw",
+        "basis": "BMW's press material records Johnny Cecotto winning the 1998 German Super Touring Car Championship in a BMW 320i. Schnitzer Classic identifies the BMW E36 STW program, its BMW 320i model from 1995 through 1998, and its six-speed sequential gearbox. A period November 1998 track test of the championship car independently describes the six-speed sequential stick-shift transmission and clutchless running shifts. No matching BMW 320i STW record is present in the checked-out curated dataset, so this is a new record proposal."
+      }
+    }
+  ]
+}
