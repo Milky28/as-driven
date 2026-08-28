@@ -173,6 +173,31 @@ class ObservationIntakeTests(unittest.TestCase):
             "Issue Form plain scalars containing a second colon must be quoted",
         )
 
+    def test_bug_form_collects_reproducible_client_context(self) -> None:
+        form = (
+            ROOT / ".github" / "ISSUE_TEMPLATE" / "bug-report.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("name: Report a SimHub client problem", form)
+        self.assertIn('title: "[Bug]: "', form)
+        self.assertIn("label: Versions", form)
+        self.assertIn("As Driven client and dataset versions", form)
+        self.assertIn("label: How can it be reproduced?", form)
+        self.assertIn("live telemetry or an offline preview", form)
+        self.assertIn("private security-reporting link", form)
+        self.assertIn("Do not attach contribution drafts", form)
+
+    def test_issue_chooser_offers_private_security_reporting(self) -> None:
+        config = (
+            ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml"
+        ).read_text(encoding="utf-8")
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        private_report_url = (
+            "https://github.com/Milky28/as-driven/security/advisories/new"
+        )
+        self.assertIn(private_report_url, config)
+        self.assertIn(private_report_url, security)
+        self.assertIn("repository visibility\nchanges", security)
+
     def test_exact_curated_identity_routes_to_comparison_not_rejection(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

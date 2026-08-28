@@ -3,11 +3,18 @@
 As Driven is an early-access local SimHub plugin. It does not run a
 service, accept remote connections, or automatically download data.
 
-Please report a suspected security issue privately to the project maintainer
-before opening a public issue. Include the affected plugin or dataset version,
-the installation source, reproduction steps, and any relevant file hashes. Do
-not attach personal telemetry, contribution drafts, or machine paths unless
-they are necessary and have been reviewed.
+Do not open a public issue for a suspected security vulnerability. When this
+repository is public, use GitHub's
+[private vulnerability-reporting form](https://github.com/Milky28/as-driven/security/advisories/new).
+Private vulnerability reporting must be enabled when the repository visibility
+changes; GitHub makes that reporting setting available only to public
+repositories. While the repository remains private, a maintainer can create a
+draft advisory from the Security tab.
+
+Include the affected plugin or dataset version, the installation source,
+reproduction steps, and any relevant file hashes. Do not attach personal
+telemetry, contribution drafts, or machine paths unless they are necessary and
+have been reviewed.
 
 Only packages and checksums attached to an official project release should be
 treated as release artifacts. The early-access binaries and PowerShell scripts

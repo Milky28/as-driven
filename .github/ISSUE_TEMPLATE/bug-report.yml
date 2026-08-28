@@ -1,0 +1,70 @@
+name: Report a SimHub client problem
+description: Report an installation, matching, popup, guided-drive, or database-update problem.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing As Driven. Please describe one problem per issue.
+
+        Do not attach contribution drafts, telemetry logs, game files, or screenshots containing private paths unless they are necessary and you have reviewed them.
+
+        For a suspected security vulnerability, use the private security-reporting link on the issue chooser instead of this public form.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where did the problem occur?
+      options:
+        - Installation or removal
+        - SimHub plugin startup or settings
+        - Preflight popup or overlay
+        - Car matching or preview
+        - Guided drive or draft creation
+        - Database installation or refresh
+        - Another area
+    validations:
+      required: true
+
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Include the As Driven client and dataset versions, SimHub version, simulator, and exact simulator version when available.
+      placeholder: |
+        As Driven client: 0.20.2
+        Dataset: 0.5.17
+        SimHub: 9.11.22
+        Simulator and version: AMS2 1.6.9.91
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: State what you saw, including any exact error message.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can it be reproduced?
+      description: Give the shortest sequence that reproduces the problem. Say whether it happens with live telemetry or an offline preview.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: Optional. Explain what you expected As Driven to show or do instead.
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or additional context
+      description: Optional. Review screenshots for observer names, local paths, or other private information before attaching them.

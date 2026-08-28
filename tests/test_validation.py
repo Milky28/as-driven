@@ -24,6 +24,13 @@ ROOT = Path(__file__).parents[1]
 
 
 class ValidationTests(unittest.TestCase):
+    def test_ci_validates_the_current_and_future_default_branches(self):
+        workflow = (
+            ROOT / ".github" / "workflows" / "validate.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("branches: [main, codex/stabilization]", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+
     def test_display_names_do_not_sort_the_catalog_by_year(self):
         leading_year = re.compile(r"^(?:19|20)\d{2}\s")
         offenders = []
