@@ -559,12 +559,18 @@ namespace AsDriven.Core.Tests
                 Equal("yes", audiR8Lmp1.ShiftCut, "exposes the Audi R8 LMP1 automatic cut");
                 Equal("yes", audiR8Lmp1.AutoBlip, "exposes the Audi R8 LMP1 automatic blip");
                 Equal("d-shaped", audiR8Lmp1.WheelRimShape, "uses the observed Audi open-top D-shaped rim");
+                Equal("yes", audiR8Lmp1.WheelOpenTop, "exposes the Audi open-top wheel state");
+                Equal("Open-top D-shaped rim", audiR8Lmp1.WheelRimLabel,
+                    "names the Audi rim and its open top in the popup");
 
                 GuidanceSnapshot courageC60 = database.Match("Automobilista2", "Courage C60 Hybrid");
                 Equal("6-speed sequential stick", courageC60.ShiftType, "formats the Courage C60 transmission");
                 Equal("yes", courageC60.ShiftCut, "exposes the Courage automatic cut");
                 Equal("yes", courageC60.AutoBlip, "exposes the Courage automatic blip");
                 Equal("d-shaped", courageC60.WheelRimShape, "uses the observed Courage D-shaped rim");
+                Equal("no", courageC60.WheelOpenTop, "exposes the Courage closed-top wheel state");
+                Equal("D-shaped rim", courageC60.WheelRimLabel,
+                    "does not label the closed Courage rim as open top");
 
                 GuidanceSnapshot dallaraSp1 = database.Match("Automobilista2", "Dallara SP1");
                 Equal("6-speed paddle shifters", dallaraSp1.ShiftType, "uses the animated Dallara paddle actuation");
@@ -687,6 +693,12 @@ namespace AsDriven.Core.Tests
                 // surface is guaranteed to say the same thing.
                 Equal("Round rim", PreflightLabels.WheelRim("round"), "names a round rim");
                 Equal("D-shaped rim", PreflightLabels.WheelRim("d-shaped"), "names a D-shaped rim");
+                Equal("Open-top round rim", PreflightLabels.WheelRim("round", "yes"),
+                    "names an open-top round rim");
+                Equal("Open-top D-shaped rim", PreflightLabels.WheelRim("d-shaped", "yes"),
+                    "names an open-top D-shaped rim");
+                Equal("Round rim, top unknown", PreflightLabels.WheelRim("round", "unknown"),
+                    "does not hide an unrecorded open-top state");
                 Equal("Open-top rim (legacy)", PreflightLabels.WheelRim("yoke"), "labels a retired yoke value");
                 Equal("Rim not recorded", PreflightLabels.WheelRim("unknown"),
                     "says the rim was not recorded rather than inventing one");

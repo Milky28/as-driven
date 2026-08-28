@@ -33,6 +33,7 @@ namespace AsDriven.Diagnostics
                 Write("AutoBlip", result.AutoBlip);
                 Write("ShiftCut", result.ShiftCut);
                 Write("WheelRimShape", result.WheelRimShape);
+                Write("WheelOpenTop", result.WheelOpenTop);
                 Write("SteeringDOR", result.HasSteeringDOR ? result.SteeringDOR.ToString() : string.Empty);
                 Write("VerifiedGameVersion", result.VerifiedGameVersion);
                 Write("Confidence", result.Confidence);

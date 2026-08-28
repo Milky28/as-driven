@@ -1559,6 +1559,7 @@ namespace AsDriven.Plugin
             this.AttachDelegate("WheelRimSourceLabel", delegate { return _current.WheelRimSourceLabel; });
             this.AttachDelegate("WheelIntegratedDisplay", delegate { return _current.WheelIntegratedDisplay; });
             this.AttachDelegate("WheelShiftLights", delegate { return _current.WheelShiftLights; });
+            this.AttachDelegate("WheelOpenTop", delegate { return _current.WheelOpenTop; });
             this.AttachDelegate("WheelRimLabel", delegate { return _current.WheelRimLabel; });
             this.AttachDelegate("WheelFeatureLabel", delegate { return _current.WheelFeatureLabel; });
             this.AttachDelegate("WheelFeatureTone", delegate { return _current.WheelFeatureTone; });

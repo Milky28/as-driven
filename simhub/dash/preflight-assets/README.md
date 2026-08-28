@@ -21,8 +21,9 @@ python simhub/dash/icons.py
 - no embedded tile, shadow, lighting, texture, or class-based styling;
 - shapes remain distinguishable at the proposal's approximately 24-pixel row
   size;
-- the wheel icon describes rim construction only. Display and shift-light state
-  stays in text, matching the database contract;
+- the wheel icon describes rim construction only. Round and D-shaped rims have
+  separate open-top variants; display and shift-light state stays in text,
+  matching the database contract;
 - the current raster As Driven mark remains the title icon and is not duplicated
   in this family.
 
@@ -30,7 +31,7 @@ python simhub/dash/icons.py
 
 | Group | Files |
 | --- | --- |
-| Wheel rims | `wheel-round`, `wheel-d-shaped`, `wheel-gt-formula`, `wheel-unknown` |
+| Wheel rims | `wheel-round`, `wheel-round-open-top`, `wheel-d-shaped`, `wheel-d-shaped-open-top`, `wheel-gt-formula`, `wheel-unknown` |
 | Shift controls | `shift-h-pattern`, `shift-dogleg-h`, `shift-sequential-stick`, `shift-sequential-paddles`, `shift-automatic-lever`, `shift-direct-selection`, `shift-unknown` |
 | Driver and note rows | `control-clutch`, `control-throttle`, `note-info` |
 

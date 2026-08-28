@@ -254,6 +254,7 @@ class ItemFactory:
 def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: float) -> list[dict[str, Any]]:
     size = 46 * scale
     prop = "[AsDriven.WheelRimShape]"
+    open_top = "[AsDriven.WheelOpenTop]"
     # gt-style, prototype and formula are retired into gt-formula and share its
     # icon. They stay matched so an older installed dataset still renders.
     merged = (
@@ -261,8 +262,10 @@ def _wheel_icon(factory: ItemFactory, prefix: str, x: float, y: float, scale: fl
         + prop + " == 'prototype' || " + prop + " == 'formula'"
     )
     variants = (
-        ("Round", "wheel-round", prop + " == 'round'"),
-        ("DShape", "wheel-d-shaped", prop + " == 'd-shaped'"),
+        ("RoundOpenTop", "wheel-round-open-top", prop + " == 'round' && " + open_top + " == 'yes'"),
+        ("Round", "wheel-round", prop + " == 'round' && " + open_top + " != 'yes'"),
+        ("DShapeOpenTop", "wheel-d-shaped-open-top", prop + " == 'd-shaped' && " + open_top + " == 'yes'"),
+        ("DShape", "wheel-d-shaped", prop + " == 'd-shaped' && " + open_top + " != 'yes'"),
         ("GTFormula", "wheel-gt-formula", merged),
         ("Yoke", "wheel-yoke", prop + " == 'yoke'"),
         (

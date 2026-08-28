@@ -164,6 +164,7 @@ class SimHubDashTests(unittest.TestCase):
             "AsDriven.RawCarIdentifier",
             "AsDriven.OverlayCarNameDetailed",
             "AsDriven.WheelRimLabel",
+            "AsDriven.WheelOpenTop",
             "AsDriven.WheelFeatureLabel",
             "AsDriven.ShifterLabel",
             "AsDriven.ShifterGateLabel",
@@ -233,7 +234,9 @@ class SimHubDashTests(unittest.TestCase):
             self.assertIn(value, serialized)
         for asset in (
             "wheel-round",
+            "wheel-round-open-top",
             "wheel-d-shaped",
+            "wheel-d-shaped-open-top",
             "wheel-gt-formula",
             "wheel-yoke",
             "shift-dogleg-h",
@@ -247,7 +250,7 @@ class SimHubDashTests(unittest.TestCase):
         # The cut, blip and lift tiles were replaced by the Use band's text.
         for retired in ("cut-auto", "cut-manual", "blip-auto", "blip-manual", "lift-required"):
             self.assertNotIn(retired, serialized)
-        self.assertEqual(18, len(dashboards[0]["Images"]))
+        self.assertEqual(20, len(dashboards[0]["Images"]))
         self.assertTrue(all(image["Extension"] == ".png" for image in dashboards[0]["Images"]))
         self.assertTrue(all(image["Width"] == 128 for image in dashboards[0]["Images"]))
         for dashboard in dashboards:
@@ -290,9 +293,11 @@ class SimHubDashTests(unittest.TestCase):
             "shift-sequential-stick",
             "shift-unknown",
             "wheel-d-shaped",
+            "wheel-d-shaped-open-top",
             "wheel-gt-formula",
             "wheel-other",
             "wheel-round",
+            "wheel-round-open-top",
             "wheel-unknown",
             "wheel-yoke",
         }
@@ -635,8 +640,10 @@ class SimHubDashTests(unittest.TestCase):
                 if path.name.endswith(".ressources"):
                     with zipfile.ZipFile(path) as archive:
                         names = archive.namelist()
-                        self.assertEqual(18, len(names))
+                        self.assertEqual(20, len(names))
                         self.assertIn("brand-mark.png", names)
+                        self.assertIn("wheel-round-open-top.png", names)
+                        self.assertIn("wheel-d-shaped-open-top.png", names)
                         self.assertIn("wheel-gt-formula.png", names)
                         self.assertNotIn("cut-auto.png", names)
                         self.assertNotIn("lift-required.png", names)

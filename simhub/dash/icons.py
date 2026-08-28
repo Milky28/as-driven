@@ -254,7 +254,7 @@ def _question(canvas: Canvas, color: RGBA = MUTED) -> None:
     canvas.disk(64, 88, 4, color)
 
 
-def _flat_wheel(canvas: Canvas, kind: str) -> None:
+def _flat_wheel(canvas: Canvas, kind: str, *, open_top: bool = False) -> None:
     """Monochrome wheel-rim symbols for the row-based preflight overlay."""
     if kind == "unknown":
         _question(canvas, WHITE)
@@ -299,13 +299,34 @@ def _flat_wheel(canvas: Canvas, kind: str) -> None:
         return
 
     if kind == "d-shaped":
-        arc = [
-            (64 + math.cos(math.pi + index * math.pi / 32) * 45,
-             62 + math.sin(math.pi + index * math.pi / 32) * 45)
-            for index in range(33)
-        ]
-        rim = arc + [(101, 94), (27, 94)]
-        canvas.line(rim, 9, WHITE, closed=True)
+        if open_top:
+            left_arc = [
+                (64 + math.cos(math.pi + index * math.pi * 0.35 / 14) * 45,
+                 62 + math.sin(math.pi + index * math.pi * 0.35 / 14) * 45)
+                for index in range(15)
+            ]
+            right_arc = [
+                (64 + math.cos(math.pi * 1.65 + index * math.pi * 0.35 / 14) * 45,
+                 62 + math.sin(math.pi * 1.65 + index * math.pi * 0.35 / 14) * 45)
+                for index in range(15)
+            ]
+            canvas.line(left_arc, 9, WHITE)
+            canvas.line(right_arc, 9, WHITE)
+            canvas.line([(19, 62), (27, 94), (101, 94), (109, 62)], 9, WHITE)
+        else:
+            arc = [
+                (64 + math.cos(math.pi + index * math.pi / 32) * 45,
+                 62 + math.sin(math.pi + index * math.pi / 32) * 45)
+                for index in range(33)
+            ]
+            rim = arc + [(101, 94), (27, 94)]
+            canvas.line(rim, 9, WHITE, closed=True)
+    elif open_top:
+        canvas.ellipse(
+            64, 64, 46, 46, 9, WHITE,
+            start=-math.pi * 0.30,
+            end=math.pi * 1.30,
+        )
     else:
         canvas.ellipse(64, 64, 46, 46, 9, WHITE)
 
@@ -430,7 +451,9 @@ def generate_preflight_icons(size: int = 128) -> dict[str, bytes]:
         raise ValueError("Preflight icon masters are authored on a 128-pixel grid")
     builders: dict[str, Callable[[Canvas], None]] = {
         "wheel-round": lambda canvas: _flat_wheel(canvas, "round"),
+        "wheel-round-open-top": lambda canvas: _flat_wheel(canvas, "round", open_top=True),
         "wheel-d-shaped": lambda canvas: _flat_wheel(canvas, "d-shaped"),
+        "wheel-d-shaped-open-top": lambda canvas: _flat_wheel(canvas, "d-shaped", open_top=True),
         "wheel-gt-formula": lambda canvas: _flat_wheel(canvas, "gt-formula"),
         "wheel-yoke": lambda canvas: _flat_wheel(canvas, "yoke"),
         "wheel-other": lambda canvas: _flat_wheel(canvas, "other"),

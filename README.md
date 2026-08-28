@@ -25,7 +25,7 @@ to `no` only when that source documents that convention.
 
 - Dataset 0.5.17 contains 271 reviewed car records under the open v1 JSON
   contract.
-- The SimHub reference client is at 0.20.1, with exact matching, two pre-flight
+- The SimHub reference client is at 0.20.2, with exact matching, two pre-flight
   card sizes, offline preview, local diagnostics, and guided verification.
 - The certified early-access target is Windows, SimHub 9.11.22, and AMS2
   1.6.9.91. Assetto Corsa EVO and the original Assetto Corsa are development

@@ -41,6 +41,7 @@ namespace AsDriven.Core
         public string WheelRimSourceLabel;
         public string WheelIntegratedDisplay;
         public string WheelShiftLights;
+        public string WheelOpenTop;
         public bool HasSteeringDOR;
         public int SteeringDOR;
         public string VerifiedGameVersion;

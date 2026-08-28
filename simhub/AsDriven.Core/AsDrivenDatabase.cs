@@ -449,6 +449,7 @@ namespace AsDriven.Core
                     SimulatorDifference = DescribeOverrides(simulator, overriddenPaths),
                     WheelIntegratedDisplay = OptionalState(simulatorWheelRim, "integrated_display"),
                     WheelShiftLights = OptionalState(simulatorWheelRim, "shift_lights"),
+                    WheelOpenTop = OptionalState(simulatorWheelRim, "open_top"),
                     // The steering lock lives on the simulator entry: every
                     // curated value for it came from the AMS2 spreadsheet, which
                     // records what the game applies rather than how the real car

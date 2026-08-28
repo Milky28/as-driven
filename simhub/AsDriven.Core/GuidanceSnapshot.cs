@@ -52,6 +52,7 @@ namespace AsDriven.Core
         public string DownshiftClutch { get; private set; }
         public string WheelRimShape { get; private set; }
         public string WheelRimSourceLabel { get; private set; }
+        public string WheelOpenTop { get; private set; }
 
         /// <summary>
         /// The record's driver-facing note, empty when it carries none. The
@@ -192,7 +193,7 @@ namespace AsDriven.Core
         /// <summary>Rim construction, as the card names it.</summary>
         public string WheelRimLabel
         {
-            get { return PreflightLabels.WheelRim(WheelRimShape); }
+            get { return PreflightLabels.WheelRim(WheelRimShape, WheelOpenTop); }
         }
 
         /// <summary>What the rim carries, kept as text per the icon contract.</summary>
@@ -334,6 +335,7 @@ namespace AsDriven.Core
                 DownshiftClutch = values.DownshiftClutch,
                 WheelRimShape = values.WheelRimShape,
                 WheelRimSourceLabel = values.WheelRimSourceLabel,
+                WheelOpenTop = values.WheelOpenTop,
                 DriverSummary = values.DriverSummary,
                 OverriddenPaths = values.OverriddenPaths ?? new string[0],
                 UnestablishedPaths = values.UnestablishedPaths ?? new string[0],
@@ -401,6 +403,7 @@ namespace AsDriven.Core
                 DownshiftClutch = string.Empty,
                 WheelRimShape = string.Empty,
                 WheelRimSourceLabel = string.Empty,
+                WheelOpenTop = string.Empty,
                 DriverSummary = string.Empty,
                 OverriddenPaths = new string[0],
                 UnestablishedPaths = new string[0],

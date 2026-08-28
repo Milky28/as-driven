@@ -36,10 +36,21 @@ namespace AsDriven.Core
 
         public static string WheelRim(string shape)
         {
+            return WheelRim(shape, "no");
+        }
+
+        public static string WheelRim(string shape, string openTop)
+        {
             switch (shape)
             {
-                case "round": return "Round rim";
-                case "d-shaped": return "D-shaped rim";
+                case "round":
+                    if (openTop == "yes") { return "Open-top round rim"; }
+                    if (openTop == "unknown") { return "Round rim, top unknown"; }
+                    return "Round rim";
+                case "d-shaped":
+                    if (openTop == "yes") { return "Open-top D-shaped rim"; }
+                    if (openTop == "unknown") { return "D-shaped rim, top unknown"; }
+                    return "D-shaped rim";
                 // The three retired values still render, so an older installed
                 // dataset shows the right words rather than "Unknown rim".
                 case "gt-formula":
