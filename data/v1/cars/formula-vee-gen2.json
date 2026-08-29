@@ -100,30 +100,6 @@
             "level": "high",
             "basis": "Directly observed in the guided drive with automatic clutch and shifting disabled: the downshift was refused without a blip and accepted with one."
           }
-        },
-        {
-          "path": "/authentic_controls/transmission/upshift/clutch",
-          "value": "not-required",
-          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-formula-vee-gen2-controls.1.6.9.91"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/downshift/clutch",
-          "value": "not-required",
-          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-formula-vee-gen2-controls.1.6.9.91"
-          ]
         }
       ],
       "verified_game_version": "1.6.9.91",

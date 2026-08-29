@@ -129,17 +129,15 @@ class ImportObservationTests(unittest.TestCase):
         self.assertEqual(transmission["downshift"]["clutch"], "unknown")
         self.assertEqual(transmission["downshift"]["manual_blip"], "not-required")
 
-        clutch_overrides = {
-            override["path"]: override["value"]
-            for override in record["simulators"][0]["overrides"]
-            if override["path"].endswith("/clutch")
-        }
+        # The drive accepted both clutchless shifts, and so would the real
+        # gearbox, so there is no departure to record. Only a refusal is one.
         self.assertEqual(
-            clutch_overrides,
-            {
-                "/authentic_controls/transmission/upshift/clutch": "not-required",
-                "/authentic_controls/transmission/downshift/clutch": "not-required",
-            },
+            [
+                override["path"]
+                for override in record["simulators"][0]["overrides"]
+                if override["path"].endswith("/clutch")
+            ],
+            [],
         )
 
         identities = record["simulators"][0]["identities"]
@@ -245,16 +243,16 @@ class ImportObservationTests(unittest.TestCase):
         # simulator's behavior, and that divergence is kept in the overrides.
         self.assertEqual(transmission["upshift"]["clutch"], "unknown")
         self.assertEqual(transmission["downshift"]["clutch"], "unknown")
+        # Only the refusal is recorded. Accepting a clutchless upshift is what a
+        # real gearbox does too, so it is not a departure; refusing a clutchless
+        # downshift is a demand no real construction makes.
         self.assertEqual(
             {
                 override["path"]: override["value"]
                 for override in bundle["record"]["simulators"][0]["overrides"]
                 if override["path"].endswith("/clutch")
             },
-            {
-                "/authentic_controls/transmission/upshift/clutch": "not-required",
-                "/authentic_controls/transmission/downshift/clutch": "required",
-            },
+            {"/authentic_controls/transmission/downshift/clutch": "required"},
         )
         # validate cannot summarize an unestablished clutch, so the field is
         # omitted rather than guessed; the schema allows that.

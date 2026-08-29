@@ -74,13 +74,38 @@ car it sees, including mods. Check provenance when a name looks irregular or
 predates the official car's release, and record the outcome as a decision rather
 than silently queueing verification work.
 
+## Uncommitted-to-remote repository state
+
+On 2026-08-29 the history was rewritten twice with `git filter-repo` to remove
+`output/pdf/homologation-form-renders/` (~95 MB of FIA homologation page renders
+that nothing referenced) and `docs/design/2026-08-11-icon-brand-concepts/`
+(5 MB of review-only boards). The pack went from 198.6 MB to 4.96 MB with all
+305 commits intact.
+
+- `origin` is detached; filter-repo removes it so a rewritten history cannot be
+  pushed by reflex. Re-add
+  `https://github.com/Milky28/as-driven.git` when publishing.
+- The remote still holds the pre-rewrite history. Every commit from `232187a`
+  forward has a new hash, so publishing is a force push.
+- Backup: `../authentic-controls-db-prepurge-2026-08-29/` holds a verified
+  full-history bundle and the removed images. Keep it until the push settles.
+- `main` is the initial commit only. Fast-forward it to `codex/stabilization`
+  rather than branching fresh.
+
+See `CLAUDE.md` for why a stripped-history `main` was rejected and for the open
+decisions still outstanding.
+
 ## Current handoff state
 
-- Branch: `codex/stabilization`; private remote `origin` at
-  `github.com/Milky28/as-driven`.
+- **The local history was rewritten and has not been pushed. `origin` is
+  detached.** Read "Uncommitted-to-remote repository state" above before running
+  any git command that talks to a remote.
+- Branch: `codex/stabilization`. The private remote is
+  `github.com/Milky28/as-driven`, but no remote is currently configured.
 - Client: 0.20.2.
-- Dataset: 0.5.34 with 279 curated records.
-- Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
+- Dataset: 0.5.34 with 279 curated records. The installed SimHub copy is still
+  0.5.33; the plugin binaries are current.
+- Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has 38 accepted cases with published
   feedback and six withdrawn, with nothing waiting on research or final review.
   Issues 46 through 48 are published curated-identity comparisons whose reviewed
@@ -113,12 +138,11 @@ than silently queueing verification work.
   reviewed, including the completed ranked-ten comparison batch.
   ACC drafts record the exact Steam content build because its executables expose
   no useful file version. This remains development coverage outside the
-  certified target. `docs/acc-coverage-plan.md` owns its drive order and identity
+  tested target. `docs/acc-coverage-plan.md` owns its drive order and identity
   traps.
 - Original Assetto Corsa development now covers 21 records: seven AC-only and
   14 shared with another simulator. Each source fingerprints the exact installed
-  implementation; this remains development coverage outside the certified
-  tested target.
+  implementation; this remains development coverage outside the tested target.
 - The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
   those implementations. That result is stored as a simulator override while
   the authentic real-car manual-blip field remains unknown.

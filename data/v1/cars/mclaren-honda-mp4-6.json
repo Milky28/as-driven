@@ -88,32 +88,7 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mclaren-honda-mp4-6-high-downforce.20260815t040832936z-f73b08c6 by Jason Kinslow."
         ]
       },
-      "overrides": [
-        {
-          "path": "/authentic_controls/transmission/upshift/clutch",
-          "value": "not-required",
-          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-mclaren-honda-mp4-6-controls.1.6.9.91"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/downshift/clutch",
-          "value": "not-required",
-          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-mclaren-honda-mp4-6-controls.1.6.9.91"
-          ]
-        }
-      ],
+      "overrides": [],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-15",
       "source_refs": [

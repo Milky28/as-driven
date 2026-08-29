@@ -411,12 +411,19 @@ def import_observation(
         ],
     }
     simulator_overrides: list[dict[str, Any]] = []
+    # Only a refusal is a departure. Every real gearbox tolerates a clutchless
+    # shift - a synchromesh because the cones match the speeds, a dog box because
+    # that is how it is driven - so a simulator accepting one agrees with the real
+    # car and there is nothing to record. What differs on a synchromesh car is the
+    # technique, and technique lives in authentic_controls. Recording acceptance
+    # as an override put 142 non-departures in the dataset and made 71 entries
+    # read as "this simulator differs" when they do not.
     for action, test_name in (
         ("upshift", "clutchless_upshift"),
         ("downshift", "clutchless_downshift"),
     ):
         observed = _clutch_from_clutchless(tests.get(test_name)) if clean else "unknown"
-        if observed == "unknown":
+        if observed != "required":
             continue
         simulator_overrides.append(
             {
@@ -424,11 +431,9 @@ def import_observation(
                 "value": observed,
                 "condition": (
                     f"The guided observation {observation_id} recorded that simulator "
-                    f"version {game_version} "
-                    + ("accepted" if observed == "not-required" else "refused")
-                    + f" a clutchless {action}. This establishes simulator behavior, "
-                    "not the real car's gearbox construction or authentic clutch "
-                    "technique."
+                    f"version {game_version} refused a clutchless {action}, which a "
+                    "real gearbox of any construction tolerates. This is a simulator "
+                    "demand, not the real car's authentic clutch technique."
                 ),
                 "confidence": {
                     "level": "verified",

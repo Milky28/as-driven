@@ -177,15 +177,65 @@ the curated database or uploads itself. Maintainer validation and explicit
 approval are required before release. See `PRIVACY.md` and
 `docs/verification-observations.md`.
 
+## Uncommitted-to-remote repository state
+
+**Read this before any git command that talks to a remote.**
+
+On 2026-08-29 the history was rewritten twice with `git filter-repo`, removing
+`output/pdf/homologation-form-renders/` (305 JPEG page renders of FIA
+homologation forms, referenced by nothing, ~95 MB) and
+`docs/design/2026-08-11-icon-brand-concepts/` (5 MB of review-only boards). The
+pack went from 198.6 MB to 4.96 MB with all 305 commits intact.
+
+Consequences that are still live:
+
+- **`origin` is detached.** filter-repo removes it deliberately so a rewritten
+  history cannot be pushed by reflex. Re-add with
+  `git remote add origin https://github.com/Milky28/as-driven.git`.
+- **The remote still holds the pre-rewrite history**, including the 95 MB. Every
+  commit from `232187a` forward has a new hash, so publishing means a force
+  push. That is the point of no return for the backup being the only pre-rewrite
+  copy.
+- **The backup is at `../authentic-controls-db-prepurge-2026-08-29/`**:
+  `full-history.bundle` (verified complete, restorable with `git clone`) and
+  `output/` as plain files. Keep it until the push has settled.
+- **`main` is the initial commit only**, 300-odd behind. Making it the default
+  branch means fast-forwarding it to `codex/stabilization`, not creating a fresh
+  branch.
+- GitHub keeps unreachable objects for a while. If the homologation scans must
+  be gone from their servers rather than merely unreferenced, that needs a
+  support request after the push.
+
+Going public was the reason for all of this. A stripped-history `main` was
+considered and rejected: the project's claim is auditable evidence, and the
+history is where corrections like this one are visible.
+
 ## Current handoff state
 
 - Branch: `codex/stabilization`.
 - Client: 0.20.2.
-- Dataset: 0.5.34 with 279 curated records.
-- Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
+- Dataset: 0.5.34 with 279 curated records. **The installed SimHub copy is still
+  0.5.33**; the plugin binaries are current. Rebuild and install to close the
+  gap.
+- Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
-  it carry that in `client_version`; the certified pair is what the early
-  access release claims, and has not been re-certified.
+  it carry that in `client_version`; the tested pair is what the release
+  claims, and has not been re-tested.
+- **Open decisions nobody has made yet**, all deliberately left rather than
+  forgotten:
+  - `lamborghini-miura-sv` keeps `clutch: not-required` on a synchromesh
+    gearbox because its own reviewed research says clutchless running shifts are
+    ordinary technique there. Every other synchromesh record now says `required`.
+    Either the research is wrong in the same way the importer was, or the Miura
+    is a genuine exception. It is declared as an archetype deviation and named
+    in `test_a_drive_alone_never_establishes_a_synchromesh_running_clutch`.
+  - The manual update check is inert until a stable HTTPS URL serves
+    `as-driven-latest.json`. The repository is private, so no such URL exists.
+    Serve it from a stable path, never the per-tag release asset URL.
+  - The README illustrates the pre-flight card with icon artwork because no
+    screenshots of the running overlay exist. Wanted captures and widths are in
+    `docs/development.md`.
+  - `CHANGELOG.md` dataset history stops at 0.3.31.
 - The local contribution queue has 38 accepted cases with published feedback and
   six withdrawn, with nothing waiting on research or final review. Issues 46
   through 48 are published curated-identity comparisons whose reviewed
@@ -234,8 +284,13 @@ approval are required before release. See `PRIVACY.md` and
   a Chevette, a Copa Fusca and a 2002 turbo among them. Construction settles it:
   35 synchromesh records became `required`, 37 with an unestablished gearbox
   became `unknown`, and 10 dog boxes were already right because clutchless
-  shifting is their authentic technique. The observed behavior is kept as a
-  simulator override on each record. The 1973 Carrera RSR had reached the same
+  shifting is their authentic technique. **The observed acceptance is not
+  recorded at all**, because it is not a departure: a real gearbox tolerates a
+  clutchless shift too, so a simulator accepting one agrees with the real car
+  and only the technique differs. A first pass wrote 142 overrides saying
+  otherwise and made 71 entries read as "this simulator differs"; they were
+  removed. Only a *refusal* is a departure, and the importer emits an override
+  only for that. The 1973 Carrera RSR had reached the same
   conclusion through ordinary research and was deviating from its archetype
   because of it; all four synchromesh archetypes carried the same error, inherited
   from the records they were derived from. `lamborghini-miura-sv` is the one
@@ -280,18 +335,18 @@ approval are required before release. See `PRIVACY.md` and
   now carry separately reviewed `ac-evo` entries, proving that a second
   simulator's drive can join a record without inheriting another simulator's
   behavior. The client canonicalises SimHub's `AssettoCorsaEvo` to `ac-evo`;
-  this remains development coverage rather than part of the certified
+  this remains development coverage rather than part of the tested
   tested target. Roster overlaps, drive order and name matches to avoid
   are in `docs/ac-evo-coverage-plan.md`.
 - **Assetto Corsa Competizione** is recognized separately as `acc`. Eighteen exact
   entries are reviewed after the ranked-ten comparison batch; the Audi R8 LMS
   GT3 Evo II is the first car driven in four simulators. ACC drafts pin the Steam
   build id because its executables carry no useful file version. ACC remains
-  outside the certified target. Exact overlaps, identity traps and the next
+  outside the tested target. Exact overlaps, identity traps and the next
   backlog are in `docs/acc-coverage-plan.md`.
 - **Original Assetto Corsa** has 21 reviewed entries: seven AC-only records and
   14 shared with another simulator. Each source fingerprints the exact installed
-  implementation. This remains development coverage outside the certified
+  implementation. This remains development coverage outside the tested
   target.
 - A shared name across simulators is not a shared car. Exact matching fails
   closed, but merging a second simulator's entry onto the wrong record fails

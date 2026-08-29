@@ -133,9 +133,20 @@ simulator accepts a shift without the clutch, and every simulator accepts one on
 a synchromesh car because the real gearbox tolerates it too. Deriving the
 authentic value from that answer told 72 H-pattern records that no clutch was
 needed to change gear, a Chevette and a 2002 turbo among them, while their own
-`standing_start_clutch: required` said the clutch was needed to pull away. The
-drive's answer belongs in a simulator override; the authentic value waits for
-construction research.
+`standing_start_clutch: required` said the clutch was needed to pull away.
+
+**And accepting a clutchless shift is not a simulator departure.** An override
+means this simulator does something the real car does not. A real gearbox of any
+construction tolerates a clutchless change - a synchromesh because the cones
+match the speeds, a dog box because that is how it is driven - so a simulator
+that accepts one agrees with the real car. What differs on a synchromesh car is
+the technique, and technique is the authentic value, not an override. Recording
+acceptance as an override put 142 non-departures in the dataset and made 71
+entries read as "this simulator differs" when they do not.
+
+Only a refusal is a departure: a simulator that will not take the gear without
+the clutch is making a demand no real construction makes, and that belongs in an
+override.
 
 The 1973 Carrera RSR reached this independently through ordinary research, and
 its declared deviation states it plainly: Porsche identifies a standard manual
