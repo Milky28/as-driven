@@ -172,8 +172,10 @@ approval are required before release. See `PRIVACY.md` and
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the certified pair is what the early
   access release claims, and has not been re-certified.
-- The local contribution queue has 24 cases published and six withdrawn, with
-  nothing waiting on research or final review. Issue 1 for the Chevrolet Cruze
+- The local contribution queue has 38 accepted cases with published feedback and
+  six withdrawn, with nothing waiting on research or final review. Issues 46
+  through 48 are published curated-identity comparisons whose reviewed
+  corrections produced dataset 0.5.33. Issue 1 for the Chevrolet Cruze
   Stock Car 2021 was restored from its original `new-identity` receipt after an
   exact-resubmission classification hid the already-stored draft, and is now
   published. Issues 31 through 33 are also published comparison cases; none
@@ -189,14 +191,14 @@ approval are required before release. See `PRIVACY.md` and
   without replacing its attachment preserves the original routing decision.
   Issue 12 exposed that race, was restored as `new-identity`, and is now
   published.
-- Of 365 AMS2 identities observed on this PC, 350 are covered exactly and 15
+- Of 370 AMS2 identities observed on this PC, 355 are covered exactly and 15
   are closed by written decisions. No observed identity currently awaits guided
   verification. The inventory only holds cars that have been loaded here,
   so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Of 271 records, 251 carry an `archetype` classification: 180 match one of the
+- Of 279 records, 251 carry an `archetype` classification: 180 match one of the
   23 registered mechanisms, 45 deviate, 15 are undetermined and 11 match none.
-  Twenty await classification. An
+  Twenty-eight await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **A mechanism the record already establishes settles the technique that follows
@@ -280,8 +282,8 @@ approval are required before release. See `PRIVACY.md` and
   RaceRoom publishes no engine torque, so its automatic cut is unmeasurable in
   the same way AC's and ACC's are, and an unregistered simulator is assumed
   unmeasurable too. See `docs/registering-a-simulator.md`.
-- **Six simulators are registered**, with 256 AMS2 entries, 21 AC, 18 ACC, 7 AC
-  EVO, 4 RaceRoom and 2 rFactor 2. `ac-rally` is reserved: it sits in the enums
+- **Six simulators are registered**, with 261 AMS2 entries, 21 AC, 18 ACC, 7 AC
+  EVO, 6 RaceRoom and 5 rFactor 2. `ac-rally` is reserved: it sits in the enums
   so a record naming it validates, and the client does not canonicalise it. See
   `docs/registering-a-simulator.md` for the nine places a registration touches
   and for what a first drive should be read for.

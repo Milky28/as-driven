@@ -17,6 +17,17 @@ namespace AsDriven.Core
             "car-path"
         };
 
+        private static readonly HashSet<string> OptionalControlOverridePaths =
+            new HashSet<string>(StringComparer.Ordinal)
+            {
+                "/authentic_controls/transmission/first_gear_position",
+                "/authentic_controls/steering/degrees_of_rotation",
+                "/authentic_controls/steering/wheel_rim/diameter_mm",
+                "/authentic_controls/steering/wheel_rim/integrated_display",
+                "/authentic_controls/steering/wheel_rim/shift_lights",
+                "/authentic_controls/steering/wheel_rim/open_top"
+            };
+
         /// <summary>
         /// How a simulator spells an aero package on the end of a car's name.
         /// AMS2 picks the package from the circuit rather than from the driver,
@@ -577,16 +588,28 @@ namespace AsDriven.Core
                 return null;
             }
 
+            string[] segments = path.Substring(prefix.Length).Split('/');
             JToken current = controls;
-            foreach (string segment in path.Substring(prefix.Length).Split('/'))
+            for (int index = 0; index < segments.Length; index++)
             {
                 JObject parent = current as JObject;
-                if (parent == null || parent[segment] == null)
+                if (parent == null)
                 {
                     throw new InvalidDataException(
                         "Override path does not exist: " + path + " in " + recordPath);
                 }
-                current = parent[segment];
+                JToken child = parent[segments[index]];
+                if (child == null)
+                {
+                    if (index == segments.Length - 1
+                        && OptionalControlOverridePaths.Contains(path))
+                    {
+                        return null;
+                    }
+                    throw new InvalidDataException(
+                        "Override path does not exist: " + path + " in " + recordPath);
+                }
+                current = child;
             }
             return current;
         }
@@ -665,7 +688,7 @@ namespace AsDriven.Core
                     }
                 }
                 string leaf = segments[segments.Length - 1];
-                if (parent[leaf] == null)
+                if (parent[leaf] == null && !OptionalControlOverridePaths.Contains(path))
                 {
                     throw new InvalidDataException(
                         "Override path does not exist: " + path + " in " + recordPath);

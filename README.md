@@ -224,8 +224,8 @@ python -m research.build_simulator_disagreement_audit
 python -m as_driven_db build-site
 ```
 
-Dataset 0.5.33 contains 279 reviewed records. Of the 365 exact AMS2 identities
-observed on the development machine, 350 are covered by the 256 AMS2-backed
+Dataset 0.5.33 contains 279 reviewed records. Of the 370 exact AMS2 identities
+observed on the development machine, 355 are covered by the 261 AMS2-backed
 curated records and 15 are closed by written decisions. No observed identity
 currently awaits guided verification. New content still fails closed until it is observed and reviewed.
 7 records carry Assetto Corsa EVO entries, 3 of them shared with AMS2. ACC has 18

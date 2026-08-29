@@ -81,8 +81,10 @@ than silently queueing verification work.
 - Early-access client: 0.20.2.
 - Dataset: 0.5.33 with 279 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The ignored local contribution queue has 24 cases published and six withdrawn,
-  with nothing waiting on research or final review. Issue 1 for the Chevrolet
+- The ignored local contribution queue has 38 accepted cases with published
+  feedback and six withdrawn, with nothing waiting on research or final review.
+  Issues 46 through 48 are published curated-identity comparisons whose reviewed
+  corrections produced dataset 0.5.33. Issue 1 for the Chevrolet
   Cruze Stock Car 2021 was restored from its original `new-identity` receipt
   after an exact-resubmission classification hid the already-stored draft, and
   is now published. Issues 31 through 33 are also published comparison cases;
@@ -91,13 +93,13 @@ than silently queueing verification work.
   serialized across browser tabs, and a same-issue retry with an unchanged
   attachment preserves the original classification. Issue 12 was restored as
   `new-identity` after exposing the former race and is now published.
-- Of 365 AMS2 identities observed on this PC, 350 are covered exactly and 15
+- Of 370 AMS2 identities observed on this PC, 355 are covered exactly and 15
   are closed by written decisions. No observed identity currently awaits guided
   verification. New content can still be absent because the inventory only contains
   cars loaded here. See
   `docs/ams2-coverage-plan.md`.
-- Six simulators are registered: 256 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO, 4
-  RaceRoom and 2 rFactor 2, with `ac-rally` reserved in the enums and not
+- Six simulators are registered: 261 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO, 6
+  RaceRoom and 5 rFactor 2, with `ac-rally` reserved in the enums and not
   wired into the client. A drive from an unregistered game is held rather than
   lost and released when that game is registered; see
   `docs/registering-a-simulator.md`, and
@@ -120,11 +122,12 @@ than silently queueing verification work.
 - The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
   those implementations. That result is stored as a simulator override while
   the authentic real-car manual-blip field remains unknown.
-- The disagreement audit contains 27 findings across 19 cars: nine supported
-  departures, two provisional departures and 16 open authentic baselines. The
-  Milano 55 GT1 and 1974 Porsche 911 RSR manual-blip findings are the two
-  provisional cases after targeted research. The exact 2005 Saleen S7-R wheel
-  and downshift procedure remain open; early-car evidence cannot be inherited.
+- The disagreement audit contains 29 findings across 21 cars: nine supported
+  departures, three provisional departures and 17 open authentic baselines. The
+  Milano 55 GT1, 1974 Porsche 911 RSR manual-blip, and 2018 Volkswagen Virtus
+  wheel findings are the three provisional cases after targeted research. The
+  exact 2005 Saleen S7-R wheel and downshift procedure remain open; early-car
+  evidence cannot be inherited.
   Treat the remaining gaps as documented negative results, not an active batch
   to search again without a new exact-source lead.
 - `validate` compares the dataset version and record count quoted in this file,

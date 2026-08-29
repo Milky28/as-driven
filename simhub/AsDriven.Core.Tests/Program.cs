@@ -508,11 +508,13 @@ namespace AsDriven.Core.Tests
                         Equal("yes", historical.WheelIntegratedDisplay, "shows the observed Murcielago wheel display");
                         Equal("yes", historical.WheelShiftLights, "shows the observed Murcielago shift lights");
                     }
-                    else if (historicalSequentialCar == "Aston Martin DBR9")
+                    else if (historicalSequentialCar == "Aston Martin DBR9"
+                        || historicalSequentialCar == "Gillet Vertigo Streiff"
+                        || historicalSequentialCar == "TVR Tuscan T400R GT2")
                     {
-                        Equal("not-required", historical.ManualBlip, "uses the corrected AMS2 blip result for the DBR9");
-                        True(historical.DownshiftGuidance.Contains("Manual blip not required"), "does not ask for an unnecessary DBR9 blip");
-                        True(historical.TechniqueSummary.Contains("no throttle blip is needed"), "shows the corrected DBR9 downshift technique");
+                        Equal("not-required", historical.ManualBlip, "uses the corrected AMS2 blip result for " + historicalSequentialCar);
+                        True(historical.DownshiftGuidance.Contains("Manual blip not required"), "does not ask for an unnecessary blip for " + historicalSequentialCar);
+                        True(historical.TechniqueSummary.Contains("no throttle blip is needed"), "shows the corrected downshift technique for " + historicalSequentialCar);
                     }
                     else
                     {
@@ -523,7 +525,6 @@ namespace AsDriven.Core.Tests
                         || historicalSequentialCar == "Lamborghini Murcielago R-GT"
                         || historicalSequentialCar == "Maserati MC12 GT1"
                         || historicalSequentialCar == "Panoz Esperante GTLM"
-                        || historicalSequentialCar == "Gillet Vertigo Streiff"
                         ? "d-shaped"
                         : "round";
                     Equal(expectedRim, historical.WheelRimShape, "uses the observed rim for " + historicalSequentialCar);
@@ -2060,6 +2061,19 @@ namespace AsDriven.Core.Tests
                     True(
                         overridden.TechniqueSummary.Contains("Use the clutch to pull away"),
                         "derives technique guidance from the overridden value");
+
+                    string optionalWheelOverride =
+                        "[{\"path\":\"/authentic_controls/steering/wheel_rim/open_top\","
+                        + "\"value\":\"no\",\"condition\":\"The simulator uses a closed rim.\","
+                        + "\"source_refs\":[\"test.source\"],"
+                        + "\"confidence\":{\"level\":\"verified\",\"basis\":\"observed\"}}]";
+                    GuidanceSnapshot optionalWheel = LoadSyntheticGuidance(
+                        syntheticRoot, "Optional Wheel Override Car", "not-required", "yes",
+                        "sequential-paddles", optionalWheelOverride);
+                    True(
+                        optionalWheel.UnestablishedPaths.Contains(
+                            "/authentic_controls/steering/wheel_rim/open_top"),
+                        "classifies an override to an absent optional authentic field");
 
                     GuidanceSnapshot notOverridden = LoadSyntheticGuidance(
                         syntheticRoot, "Plain Car", "not-required", "yes", "sequential-paddles");
