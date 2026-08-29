@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsDrivenDatabase.cs" />
+    <Compile Include="UpdateAvailability.cs" />
     <Compile Include="CarCatalogEntry.cs" />
     <Compile Include="CarImplementation.cs" />
     <Compile Include="CarRecordValues.cs" />

@@ -69,6 +69,7 @@
     <Compile Include="AsDriven.cs" />
     <Compile Include="AsDrivenMenuIcon.cs" />
     <Compile Include="AsDrivenSettings.cs" />
+    <Compile Include="UpdateCheck.cs" />
     <Compile Include="AsDrivenSettingsControl.cs" />
     <Compile Include="VerificationCaptureContext.cs" />
     <Compile Include="VerificationControl.cs">

@@ -180,6 +180,18 @@ namespace AsDriven.Plugin
             get { return DatasetVersion(); }
         }
 
+        /// <summary>Where the manual update check looks; empty means it never runs.</summary>
+        internal string UpdateCheckUrl
+        {
+            get { return _settings == null ? string.Empty : (_settings.UpdateCheckUrl ?? string.Empty); }
+            set
+            {
+                if (_settings == null) { return; }
+                _settings.UpdateCheckUrl = value ?? string.Empty;
+                this.SaveCommonSettings("Settings", _settings);
+            }
+        }
+
         internal int DatabaseRecordCount
         {
             get { return _databaseRecordCount; }

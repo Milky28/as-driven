@@ -435,6 +435,48 @@ if (([string[]]$versionProcessMethod.Invoke($null, @("ac-evo"))).Count -ne 0) {
     throw "AC EVO must stay absent from the version table until it stamps a build."
 }
 
+# The plugin makes no network request unless somebody configures one and presses
+# a button. PRIVACY.md states that as a property of the product, so it is checked
+# here rather than trusted: a default install must have no endpoint, and the
+# check must refuse anything that is not https.
+$updateCheckType = $pluginAssembly.GetType("AsDriven.Plugin.UpdateCheck")
+if ($null -eq $updateCheckType) {
+    throw "UpdateCheck is missing; the manual update check can no longer be verified."
+}
+$isAllowed = $updateCheckType.GetMethod(
+    "IsAllowedEndpoint",
+    [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
+foreach ($rejected in @("", "   ", "http://example.invalid/latest.json", "ftp://example.invalid/x",
+                        "file:///C:/latest.json", "not a url")) {
+    if ([bool]$isAllowed.Invoke($null, @($rejected))) {
+        throw "The update check would contact '$rejected'; only https endpoints are allowed."
+    }
+}
+if (-not [bool]$isAllowed.Invoke($null, @("https://example.invalid/latest.json"))) {
+    throw "The update check rejects a plain https endpoint."
+}
+
+# A fresh settings object is the state of an installation nobody has configured.
+$settingsType = $pluginAssembly.GetType("AsDriven.Plugin.AsDrivenSettings")
+$freshSettings = [System.Activator]::CreateInstance($settingsType)
+if (-not [string]::IsNullOrEmpty($freshSettings.UpdateCheckUrl)) {
+    throw "A new installation ships with an update endpoint set; it must be empty so no request is possible."
+}
+
+# And with no endpoint the check reports that it contacted nothing, rather than
+# reporting that the installation is current.
+$fetch = $updateCheckType.GetMethod(
+    "Fetch",
+    [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
+$unconfigured = $fetch.Invoke($null, @("", "0.5.33", "0.20.0"))
+if ($unconfigured.AnythingIsNewer) {
+    throw "An unconfigured update check announced an update."
+}
+$unconfiguredText = [string]$unconfigured.Summary("0.5.33", "0.20.0")
+if ($unconfiguredText -notlike "*network request*") {
+    throw "An unconfigured update check must say that nothing was contacted, got: $unconfiguredText"
+}
+
 $submissionUrlMethod = $pluginType.GetMethod(
     "ObservationSubmissionUrl",
     [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)

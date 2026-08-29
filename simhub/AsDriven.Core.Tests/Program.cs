@@ -2012,6 +2012,48 @@ namespace AsDriven.Core.Tests
                 Equal("required", brabham.ManualBlip, "and its dog box does require a driver blip");
                 Equal("required", brabham.ThrottleLift, "the driver lifts to upshift the Brabham");
 
+                // Version comparison for the update check. Numeric part by part,
+                // because 0.5.33 is later than 0.5.9 and a string comparison
+                // says the opposite - which would tell a driver on the newest
+                // dataset that an older one is available.
+                True(UpdateAvailability.IsNewer("0.5.9", "0.5.33"),
+                    "0.5.33 is later than 0.5.9");
+                False(UpdateAvailability.IsNewer("0.5.33", "0.5.9"),
+                    "and not the other way round");
+                True(UpdateAvailability.IsNewer("0.20.0", "0.20.1"), "a patch bump is newer");
+                False(UpdateAvailability.IsNewer("0.5.33", "0.5.33"), "the same version is not newer");
+                True(UpdateAvailability.IsNewer("0.5", "0.5.1"), "a missing part counts as zero");
+                False(UpdateAvailability.IsNewer("0.5.1", "0.5"), "and the reverse is not newer");
+                // An unreadable version must never look like an update: a
+                // truncated download or an error page would otherwise announce
+                // one that does not exist.
+                False(UpdateAvailability.IsNewer("0.5.33", "not-a-version"),
+                    "an unreadable candidate is never newer");
+                False(UpdateAvailability.IsNewer("0.5.33", ""), "nor an absent one");
+                False(UpdateAvailability.IsNewer("", "0.5.33"), "nor one with nothing to compare against");
+
+                // A dataset-only release carries no plugin version, which says
+                // nothing about the plugin rather than saying it is current.
+                UpdateAvailability datasetOnly = UpdateAvailability.Compare(
+                    "0.5.33", "0.20.0", "0.5.34", "", "https://example.invalid/releases");
+                True(datasetOnly.DatasetIsNewer, "the dataset moved");
+                False(datasetOnly.PluginIsNewer, "and the omitted plugin version claims nothing");
+                True(datasetOnly.Summary("0.5.33", "0.20.0").Contains("Nothing has been downloaded"),
+                    "every available-update message says nothing was fetched");
+
+                UpdateAvailability current = UpdateAvailability.Compare(
+                    "0.5.33", "0.20.0", "0.5.33", "0.20.0", "https://example.invalid/releases");
+                False(current.AnythingIsNewer, "nothing newer when both match");
+                True(current.Summary("0.5.33", "0.20.0").Contains("Up to date"),
+                    "and it says so plainly");
+
+                UpdateAvailability notChecked = UpdateAvailability.NotChecked(
+                    "No update endpoint is configured.");
+                False(notChecked.AnythingIsNewer, "an unchecked result offers no update");
+                Equal("No update endpoint is configured.",
+                    notChecked.Summary("0.5.33", "0.20.0"),
+                    "and explains why rather than implying currency");
+
                 True(ShiftPatternRules.IsDerivedGate("sequential"), "treats a sequential gate as mechanism-implied");
                 False(ShiftPatternRules.IsDerivedGate("dogleg-h"), "never discards an observed dogleg gate as mechanism-implied");
                 False(ShiftPatternRules.IsDerivedGate("standard-h"), "never discards an observed standard gate as mechanism-implied");

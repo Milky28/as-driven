@@ -263,8 +263,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-early-access
 ```
 
 See [EARLY_ACCESS.md](EARLY_ACCESS.md) for supported versions, installation,
-known limitations, and rollback. The plugin is offline and stores optional
-diagnostics and verification drafts locally as described in
+known limitations, and rollback. The plugin stores optional diagnostics and
+verification drafts locally, and reaches the network only for a manual update
+check that is switched off until you set an endpoint, as described in
 [PRIVACY.md](PRIVACY.md).
 
 See [simhub/README.md](simhub/README.md) for its properties, diagnostic command,

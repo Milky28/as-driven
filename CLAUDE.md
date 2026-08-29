@@ -131,8 +131,10 @@ Plugin and database versions are independent:
 - a plugin package may bundle a known-good dataset for first installation.
 
 See `EARLY_ACCESS.md`, `docs/releasing.md`, and `release/README.md` before
-publishing. Automatic update checks remain out of scope until the public GitHub
-repository and release endpoint are stable.
+publishing. Automatic update checks remain out of scope: the check is manual and
+notify-only by design, not merely until an endpoint exists. A dataset that
+changed under a driver mid-session would rewrite the guidance they verified,
+which is why installing stays deliberate.
 
 ## Data and evidence rules
 
@@ -156,8 +158,12 @@ approval, relevant research/backlog documentation, and tests together. Follow
 
 ## Contribution and privacy boundary
 
-The plugin is offline. It has no analytics, account, background update check, or
-automatic telemetry upload. Unmatched diagnostics and guided-verification
+The plugin has no analytics, account, background update check, or automatic
+telemetry upload. Its one network feature is a manual update check: an endpoint
+that is blank by default and a button that must be pressed. Blank means no
+request is possible, the endpoint must be https, and the check reads two version
+strings without downloading anything. A build assertion holds all three, because
+`PRIVACY.md` states them as properties of the product. Unmatched diagnostics and guided-verification
 drafts stay under `%LOCALAPPDATA%\SimHub\AsDriven`. A draft never edits
 the curated database or uploads itself. Maintainer validation and explicit
 approval are required before release. See `PRIVACY.md` and

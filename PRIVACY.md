@@ -1,7 +1,23 @@
 # Privacy
 
-As Driven has no telemetry upload, analytics, advertising, account,
-background update check, or other network feature.
+As Driven has no telemetry upload, analytics, advertising, account, or
+background update check.
+
+There is exactly one way the plugin can reach the network, and it is off until
+you turn it on. The System tab has an update endpoint, blank by default, and a
+"Check for updates" button. With the field blank nothing is contacted at all. With
+an address set, a request is made **only** when you press that button: there is
+no timer, nothing at startup, and nothing after an install.
+
+What the request sends is what any HTTPS fetch sends - your IP address, the time,
+and a `AsDriven` user agent. It carries no identifier, no car, no drive, and no
+version of yours; the comparison happens on your machine after the reply
+arrives. The endpoint must be https, because a plaintext one could be rewritten
+in transit into an announcement of an update that does not exist.
+
+The check never downloads or installs anything. It reads two version strings and
+tells you whether something newer exists, and installing it stays a deliberate
+act you perform yourself.
 
 The SimHub client reads the current simulator identity and limited telemetry
 needed to match a car, display control guidance, and run an optional guided
