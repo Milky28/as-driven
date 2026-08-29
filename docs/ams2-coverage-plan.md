@@ -1,6 +1,6 @@
 # AMS2 exact-identity coverage plan
 
-Dataset 0.5.21 contains 273 curated records, 256 of which carry AMS2 entries. The identity inventory contains 365
+Dataset 0.5.28 contains 279 curated records, 261 of which carry AMS2 entries. The identity inventory contains 365
 exact AMS2 identities observed on this PC, reconciled from two sources: SimHub's
 stored car files, and the plugin's live unmatched-identity diagnostics log. The
 generated coverage manifest compares those against curated records without fuzzy

@@ -23,7 +23,12 @@ from as_driven_db.research_handoff import (
     import_research_result,
 )
 from as_driven_db.importers.observation import import_observation
-from as_driven_db.review_proposal import _simulator_overrides, prepare_review_proposal
+from as_driven_db.review_proposal import (
+    _candidate_source,
+    _same_simulator_disposition,
+    _simulator_overrides,
+    prepare_review_proposal,
+)
 from as_driven_db.review_promotion import promote_review_case
 
 
@@ -230,6 +235,16 @@ def completed_research_result(case_id: str) -> dict:
 
 
 class ReviewSubmissionTests(unittest.TestCase):
+    def test_candidate_source_normalizes_em_dashes_before_tracking(self) -> None:
+        source = research_result("example")["sources"][0]
+        source["title"] = "LOTUS 23\u2014FORM FOLLOWS FUNCTION"
+        source["notes"] = "Exact-car evidence\u2014review before promotion."
+
+        candidate = _candidate_source(source)
+
+        self.assertEqual("LOTUS 23 - FORM FOLLOWS FUNCTION", candidate["title"])
+        self.assertNotIn("\u2014", candidate["notes"])
+
     def test_review_preserves_simulator_only_manual_blip_result(self) -> None:
         submitted = observation()
         submitted["tests"].update(
@@ -253,6 +268,77 @@ class ReviewSubmissionTests(unittest.TestCase):
         )
         self.assertEqual("required", manual_blip["value"])
         self.assertIn("simulator behavior", manual_blip["condition"])
+
+    def test_repeat_drive_becomes_an_explicit_audited_correction(self) -> None:
+        submitted = observation()
+        submitted["tests"].update(
+            {
+                "coast_downshift": "no",
+                "clutchless_downshift": "yes",
+                "automatic_blip": "no",
+            }
+        )
+        staged = import_observation(submitted)
+        simulator = staged["record"]["simulators"][0]
+        live_source = staged["source"]["source_id"]
+        existing = json.loads(json.dumps(staged["record"]))
+        existing["simulators"][0]["overrides"] = []
+        existing["simulators"][0]["source_refs"] = ["example.real", live_source]
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data" / "v1" / "cars").mkdir(parents=True)
+            (root / "curation").mkdir()
+            (root / "data" / "v1" / "sources.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0.0",
+                        "sources": [
+                            {
+                                "source_id": "example.real",
+                                "source_type": "manufacturer",
+                            },
+                            {
+                                "source_id": live_source,
+                                "source_type": "in-game-observation",
+                            },
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            observed_through = "SimHub guided verification observation prior-drive"
+            (root / "curation" / "ams2-approved-public-test-car.json").write_text(
+                json.dumps({"observed_through": observed_through}),
+                encoding="utf-8",
+            )
+            entry = {
+                "record_id": "public-test-car",
+                "control_overrides": {},
+                "simulator_overrides": simulator["overrides"],
+            }
+
+            _same_simulator_disposition(
+                root,
+                {"classification": "curated-identity-comparison"},
+                staged,
+                entry,
+                existing,
+            )
+
+            correction = entry["correct_existing_simulator"]
+            self.assertEqual(live_source, correction["supersedes_source_ref"])
+            self.assertEqual(
+                observed_through, correction["supersedes_observed_through"]
+            )
+            self.assertEqual(
+                [
+                    "/overrides/authentic_controls/transmission/downshift/"
+                    "manual_blip"
+                ],
+                correction["corrected_behavior_paths"],
+            )
+            self.assertNotIn("compatible_implementation", entry)
 
     def sync_test_case_for_root(self, root: Path, cases: Path) -> Path:
         raw = (json.dumps(observation(), indent=2) + "\n").encode("utf-8")

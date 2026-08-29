@@ -1,13 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.71",
-  "approved_at": "2026-08-17",
+  "dataset_version": "0.5.28",
+  "approved_at": "2026-08-28",
   "record_id": "lotus-23",
   "simulator": "ams2",
   "telemetry_name": "Lotus 23",
-  "telemetry_class": "TC60S2",
   "observed_game_version": "1.6.9.91",
-  "observed_through": "SimHub guided verification observation ams2.lotus-23.20260817t192722843z-5965cd35",
+  "observed_through": "SimHub guided verification observation ams2.lotus-23.20260828t205725996z-e14bbb93",
   "approved_controls": {
     "forward_gears": 4,
     "shift_actuation": "h-pattern",
@@ -16,13 +15,33 @@
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
-    "manual_blip": "unknown",
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
     "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Four gears, an H-pattern standard gate, a clutch to pull away, and clutchless shifts in both directions were directly observed. The gearbox construction is deliberately unrecorded.",
-  "scope_notes": "Single exact identity staged from one guided-verification drive. Revised 2026-08-25 without a new drive: throttle lift from unknown to required, on the H-pattern gate with no automatic cut that this record already establishes, matching the registered archetype for this mechanism. No new observation was taken and no other approved value changed."
+  "confidence_notes": "The exact 1962 Group 4 sports racer identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "TC60S2",
+  "correction_history": [
+    {
+      "corrected_at": "2026-08-28",
+      "superseded_source_ref": "ams2.local-live-lotus-23-controls.1.6.9.91",
+      "replacement_source_ref": "ams2.local-live-lotus-23-controls.1.6.9.91.correction-e14bbb93",
+      "basis": "Repeat guided drive ams2.lotus-23.20260828t205725996z-e14bbb93 materially changed the reviewed AMS2 result: /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'required'. The simulator refused a clutchless downshift until the driver blipped. That is a demand the simulator makes, not evidence that the gearbox needs the blip to engage, so the real-car manual_blip value stays unknown while the simulator demand is preserved as an override.",
+      "behavior_changes": [
+        {
+          "path": "/simulators/0/overrides/authentic_controls/transmission/downshift/manual_blip",
+          "from": {
+            "absent": true
+          },
+          "to": "required"
+        }
+      ],
+      "authentic_control_changes": [],
+      "removed_simulator_overrides": []
+    }
+  ],
+  "historical_notes": "Corrected from SimHub guided verification observation ams2.lotus-23.20260817t192722843z-5965cd35 through SimHub guided verification observation ams2.lotus-23.20260828t205725996z-e14bbb93: Repeat guided drive ams2.lotus-23.20260828t205725996z-e14bbb93 materially changed the reviewed AMS2 result: /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'required'. The simulator refused a clutchless downshift until the driver blipped. That is a demand the simulator makes, not evidence that the gearbox needs the blip to engage, so the real-car manual_blip value stays unknown while the simulator demand is preserved as an override."
 }

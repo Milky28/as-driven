@@ -69,5 +69,16 @@ namespace AsDriven.Core
             // from "torque held through the change", which is the honest answer and
             // does not need a rule to say it.
         }
+
+        public static bool AutomaticBlipIsMeasurable(string simulator)
+        {
+            // SimHub's rFactor 2 reader maps its generic Throttle value from
+            // rF2's unfiltered driver-input field. The filtered engine-throttle
+            // field, which is where the car's own blip appears, is not carried
+            // into GameData. A pedal spike can therefore only show that the
+            // contributor touched the pedal; its presence or absence cannot
+            // establish whether the car blipped automatically.
+            return !string.Equals(simulator, "rfactor2", StringComparison.Ordinal);
+        }
     }
 }

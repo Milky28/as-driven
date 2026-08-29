@@ -115,6 +115,7 @@ namespace AsDriven.Core
         private GuidedDriveResults _results = new GuidedDriveResults();
         private GuidedTelemetrySample _lastSample;
         private int? _suggestedGears;
+        private string _simulator;
         private int _baselineGear;
 
         // A downshift is not accepted on the gear index alone. The simulator
@@ -190,11 +191,12 @@ namespace AsDriven.Core
         private double _upshiftMinimumThrottle;
         private DateTime? _upshiftGearChangedUtc;
 
-        public void Start(int? suggestedForwardGears)
+        public void Start(int? suggestedForwardGears, string simulator = null)
         {
             lock (_sync)
             {
                 _suggestedGears = suggestedForwardGears;
+                _simulator = simulator ?? string.Empty;
                 _results = new GuidedDriveResults();
                 _hasCompletedResults = false;
                 _fullThrottleTestFailed = false;
@@ -743,10 +745,13 @@ namespace AsDriven.Core
                     }
                     SetResult(
                         true,
-                        blip,
+                        !manualBlip && AutomaticBlipIsMeasurable() && blip,
                         manualBlip
                             ? "Clutchless downshift accepted after the driver's manual throttle blip."
                             : "Clutchless downshift accepted with no pedal input. "
+                                + (!AutomaticBlipIsMeasurable()
+                                    ? UnmeasurableAutomaticBlipSummary(blip)
+                                    :
                                 // Report how big it was, not just that it happened.
                                 // A rev-matching blip is a large, brief opening;
                                 // an idle-control or driveline artefact sits just
@@ -754,12 +759,13 @@ namespace AsDriven.Core
                                 // and only the magnitude tells them apart, so a
                                 // reviewer should not have to re-drive the car to
                                 // learn which one this was.
-                                + (blip
+                                (blip
                                     ? "A throttle spike was detected, peaking at "
                                         + _downshiftArmedThrottle.ToString("0", CultureInfo.InvariantCulture)
                                         + "% (the threshold is 15%)."
                                         + RestingThrottleSummary()
                                     : "No automatic throttle spike was detected.")
+                                )
                                 + VehicleClutchSummary());
                     return;
                 }
@@ -855,7 +861,9 @@ namespace AsDriven.Core
                         // the absence of a spike would be equally meaningless.
                         // This mirrors the automatic cut, which already answers
                         // unknown rather than no when nothing could be measured.
-                        _results.AutomaticBlip = ThrottleChannelFollowsPedal()
+                        _results.AutomaticBlip = !AutomaticBlipIsMeasurable()
+                            ? "unknown"
+                            : ThrottleChannelFollowsPedal()
                             ? (_automaticActionObserved ? "yes" : "no")
                             : "unknown";
                         _results.AutomaticBlipMethod = _result;
@@ -981,6 +989,16 @@ namespace AsDriven.Core
         {
             if (_upshiftMaximumTorque <= 0.0)
             {
+                if (string.Equals(_simulator, "rfactor2", StringComparison.Ordinal))
+                {
+                    return "This car published no engine torque during the shift. SimHub's"
+                        + " rFactor 2 throttle value is unfiltered driver input, while the"
+                        + " engine-side gauge uses filtered throttle that GameData does not"
+                        + " expose. The cut therefore stays unknown; re-driving this car will"
+                        + " not change that unless torque becomes available. A visual"
+                        + " confirmation can be recorded as a review override with an evidence"
+                        + " note.";
+                }
                 return "This simulator published no engine torque during the shift, and the"
                     + " test reads torque rather than throttle because the cut is"
                     + " ignition-side. Nothing was measured, so the car may or may not cut;"
@@ -1092,6 +1110,25 @@ namespace AsDriven.Core
             }
             ResetTrace();
             SeedDownshiftAttemptFromLastSample();
+        }
+
+        private bool AutomaticBlipIsMeasurable()
+        {
+            return VerificationReviewRules.AutomaticBlipIsMeasurable(_simulator);
+        }
+
+        private string UnmeasurableAutomaticBlipSummary(bool pedalSpike)
+        {
+            string summary = "SimHub's rFactor 2 throttle value is unfiltered driver input,"
+                + " not the filtered engine throttle where the car's own blip appears, so"
+                + " automatic blip stays unknown.";
+            if (pedalSpike)
+            {
+                summary += " Driver throttle input peaked at "
+                    + _downshiftArmedThrottle.ToString("0", CultureInfo.InvariantCulture)
+                    + "% during the attempt; that is not evidence of the car blipping.";
+            }
+            return summary;
         }
 
         /// <summary>
@@ -1284,6 +1321,10 @@ namespace AsDriven.Core
                         : "No lifted-throttle upshift detected";
                 case Phase.CoastDownshift:
                     if (!_attemptAccepted) return "No clutchless downshift detected";
+                    if (!AutomaticBlipIsMeasurable())
+                    {
+                        return "Downshift detected; automatic blip unavailable in telemetry";
+                    }
                     return _automaticActionObserved
                         ? "Downshift and automatic blip detected"
                         : "Downshift detected; no automatic blip";

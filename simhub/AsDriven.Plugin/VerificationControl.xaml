@@ -78,12 +78,16 @@
                        Style="{StaticResource Hint}" />
           </StackPanel>
 
-          <TextBlock Text="Workflow" Style="{StaticResource Heading}" />
+          <TextBlock Text="Test session" Style="{StaticResource Heading}" />
           <StackPanel Margin="0,0,0,10">
-            <TextBlock x:Name="_workflowStep1" Text="○ 1  Capture live car" Margin="0,0,0,5" />
-            <TextBlock x:Name="_workflowStep2" Text="○ 2  Confirm simulator setup" Margin="0,0,0,5" />
-            <TextBlock x:Name="_workflowStep3" Text="○ 3  Run guided drive" Margin="0,0,0,5" />
-            <TextBlock x:Name="_workflowStep4" Text="○ 4  Review and save" Margin="0,0,0,5" />
+            <Button x:Name="_workflowStep1" Content="● 1  Setup" Click="SetupStageClicked"
+                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+            <Button x:Name="_workflowStep2" Content="○ 2  Guided drive" Click="DriveStageClicked"
+                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+            <Button x:Name="_workflowStep3" Content="○ 3  Review findings" Click="ReviewStageClicked"
+                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+            <Button x:Name="_workflowStep4" Content="○ 4  Save and share" Click="ShareStageClicked"
+                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
           </StackPanel>
 
           <TextBlock Text="Simulator test setup" Style="{StaticResource Heading}" />
@@ -140,6 +144,7 @@
               <WrapPanel>
                 <Button x:Name="_submitSavedDraft" Content="Open submission form" Width="190"
                         Click="SubmitSavedDraftClicked" />
+                <Button Content="Review saved answers" Width="175" Click="ReviewStageClicked" />
               </WrapPanel>
               <TextBlock Text="Optional, before you submit:" Opacity="0.7" Margin="0,4,0,5" />
               <WrapPanel>

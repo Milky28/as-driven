@@ -77,19 +77,35 @@
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.lotus-23.20260817t192722843z-5965cd35 by Jason Kinslow."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.lotus-23.20260828t205725996z-e14bbb93 by Jason Kinslow.",
+          "Correction superseding ams2.local-live-lotus-23-controls.1.6.9.91: Repeat guided drive ams2.lotus-23.20260828t205725996z-e14bbb93 materially changed the reviewed AMS2 result: /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'required'. The simulator refused a clutchless downshift until the driver blipped. That is a demand the simulator makes, not evidence that the gearbox needs the blip to engage, so the real-car manual_blip value stays unknown while the simulator demand is preserved as an override."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ams2.lotus-23.20260828t205725996z-e14bbb93 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 1.6.9.91. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ams2.local-live-lotus-23-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
-      "verified_at": "2026-08-17",
+      "verified_at": "2026-08-28",
       "source_refs": [
         "lotuscars.type-23",
-        "ams2.local-live-lotus-23-controls.1.6.9.91"
+        "simanaitis.lotus-23-randt-summary.2022",
+        "jacobengineering.lotus-23-steering-wheel.2019",
+        "ams2.local-live-lotus-23-controls.1.6.9.91.correction-e14bbb93"
       ],
       "confidence": {
         "level": "high",
-        "basis": "Controls observed live with automatic clutch and shifting disabled; the real car's identity and gearbox options come from Lotus's own history of the type."
+        "basis": "Lotus's own heritage page identifies the Type 23 as a 1962 two-seat sports racer purpose-built for FIA Group 4 and describes its Renault or Volkswagen gearbox options. The exact AMS2 telemetry identity is Lotus 23, the related curated lead is an exact identity match, and the observed four-speed H-pattern implementation is consistent with the documented early Type 23 specification."
       }
     }
   ],
@@ -97,8 +113,7 @@
     "claims": [
       {
         "paths": [
-          "/identity",
-          "/simulators/0/identities"
+          "/identity"
         ],
         "source_refs": [
           "lotuscars.type-23",
@@ -126,11 +141,33 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
-          "/simulators/0/behavior"
+          "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
           "ams2.local-live-lotus-23-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "lotuscars.type-23",
+          "simanaitis.lotus-23-randt-summary.2022",
+          "jacobengineering.lotus-23-steering-wheel.2019",
+          "ams2.local-live-lotus-23-controls.1.6.9.91.correction-e14bbb93"
+        ],
+        "confidence": "high",
+        "basis": "Lotus's own heritage page identifies the Type 23 as a 1962 two-seat sports racer purpose-built for FIA Group 4 and describes its Renault or Volkswagen gearbox options. The exact AMS2 telemetry identity is Lotus 23, the related curated lead is an exact identity match, and the observed four-speed H-pattern implementation is consistent with the documented early Type 23 specification."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-lotus-23-controls.1.6.9.91.correction-e14bbb93"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
@@ -151,6 +188,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-28",
   "driver_summary": "Lotus offered the 23 with a choice of Renault or Volkswagen gearboxes, and the drive found four gears. Which one this is, and whether it engages by dogs or synchros, is not established, so blip on downshifts to be safe."
 }

@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.24",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "volkswagen-polo-gts-2020",
+      "bundle": "build/review-cases/issue-41/staged.json",
+      "display_name": "Volkswagen Polo GTS 1.4 250 TSI (2020)",
+      "class": "compact hatchback",
+      "manufacturer": "Volkswagen",
+      "model": "Polo GTS 1.4 250 TSI",
+      "year": {
+        "from": 2020,
+        "to": 2020,
+        "label": "2020"
+      },
+      "real_world_identity_notes": "The best-supported match is the Brazilian-market 2020 production Polo GTS with the 1.4 250 TSI powertrain, represented in AMS2's Volkswagen TSI Cup project. Reiza describes that project as including regular Brazilian-market road cars in both 1.0 TSI and 1.4 GTS specifications. This is therefore distinct from the 1.0 200 TSI Polo and from the separate Polo RX rallycross car.",
+      "real_world_source_refs": [
+        "reiza.tsi-cup-development-update.2021",
+        "reiza.tsi-cup-release.2021",
+        "volkswagen.polo-gts-owners-manual.2020",
+        "quatrorodas.polo-gts-test.2020",
+        "motorshow.polo-gts-evaluation.2020"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Reiza's official TSI Cup material identifies the AMS2 project as Brazilian-market Volkswagen Polo/Virtus road cars offered in 1.0 TSI and 1.4 GTS specifications. Volkswagen's Polo GTS owner manual identifies the 1.4 TSI version and its AQ 250 six-speed automatic, while period 2020 coverage identifies the production Polo GTS and its paddle-equipped automatic. The exact telemetry name matches the GTS branch of that official AMS2 project; no curated Polo GTS record exists in data/v1.",
+      "identity_basis": "Reiza's official TSI Cup material identifies the AMS2 project as Brazilian-market Volkswagen Polo/Virtus road cars offered in 1.0 TSI and 1.4 GTS specifications. Volkswagen's Polo GTS owner manual identifies the 1.4 TSI version and its AQ 250 six-speed automatic, while period 2020 coverage identifies the production Polo GTS and its paddle-equipped automatic. The exact telemetry name matches the GTS branch of that official AMS2 project; no curated Polo GTS record exists in data/v1.",
+      "specification_basis": "Volkswagen's technical data says automatic six-speed (AQ 250), corroborated by the period road test. The manufacturer technical data explicitly labels the transmission automatic; the road test identifies the Aisin automatic unit. The owner manual documents steering-wheel Tiptronic selectors, and both period tests document paddle-operated sequential changes. The sources describe manual up/down changes through Tiptronic paddles or the selector rather than an H-pattern manual gate. The exact GTS is specified with an automatic AQ 250 transmission; the automatic operating instructions use the brake, selector, and accelerator for move-off and do not require a driver-operated clutch control. The GTS's exact transmission is automatic and its Tiptronic upshift procedure is performed with the paddle or selector, without clutch operation. The GTS's exact transmission is automatic and its Tiptronic downshift procedure is performed with the paddle or selector, without clutch operation. The documented driver interface is an automatic Tiptronic/paddle system, not a manual gearbox requiring a driver blip on an upshift. The documented driver interface is an automatic Tiptronic/paddle system, not a manual gearbox requiring a driver blip on a downshift. The exact 2020 GTS cockpit description says the wheel has a flattened base, and the accompanying cockpit imagery shows a conventional continuous rim rather than fixed GT/formula grips. The cockpit source places the digital Active Info Display in the instrument cluster behind the conventional wheel; no readout is shown or described as embedded in the rim itself. The exact cockpit imagery shows the conventional rim's upper band intact; the described modification is a flattened lower base, not an open-top construction. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "automatic",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shape": "d-shaped",
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-gts-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2020 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: automatic; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: not required; transmission upshift clutch: not required; transmission downshift clutch: not required; transmission upshift manual_blip: not applicable; transmission downshift manual_blip: not applicable; wheel-rim shape: d shaped; integrated wheel display: no; conventional rim open-top section: no.",
+        "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/41",
+      "live_source_notes": "Guided-verification observation ams2.volkswagen-polo-gts.20260828t205007340z-7248dc35 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "volkswagen-polo-gts",
+        "basis": "Reiza's official TSI Cup material identifies the AMS2 project as Brazilian-market Volkswagen Polo/Virtus road cars offered in 1.0 TSI and 1.4 GTS specifications. Volkswagen's Polo GTS owner manual identifies the 1.4 TSI version and its AQ 250 six-speed automatic, while period 2020 coverage identifies the production Polo GTS and its paddle-equipped automatic. The exact telemetry name matches the GTS branch of that official AMS2 project; no curated Polo GTS record exists in data/v1."
+      }
+    }
+  ]
+}

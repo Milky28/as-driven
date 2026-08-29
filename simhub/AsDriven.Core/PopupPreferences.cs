@@ -20,6 +20,8 @@ namespace AsDriven.Core
         public const string SeventiesTheme = "1970s-works";
         public const string EightiesTheme = "1980s-black-gold";
         public const string NinetiesTheme = "1990s-touring";
+        public const string TwoThousandsTheme = "2000s-endurance-alloy";
+        public const string TwentyTensTheme = "2010s-hybrid-vector";
 
         /// <summary>
         /// Clamps a stored duration into the supported range. A missing or
@@ -67,7 +69,9 @@ namespace AsDriven.Core
                 || normalized == SixtiesTheme
                 || normalized == SeventiesTheme
                 || normalized == EightiesTheme
-                || normalized == NinetiesTheme)
+                || normalized == NinetiesTheme
+                || normalized == TwoThousandsTheme
+                || normalized == TwentyTensTheme)
             {
                 return normalized;
             }
@@ -85,7 +89,7 @@ namespace AsDriven.Core
             {
                 return normalized;
             }
-            if (yearFrom <= 0 || yearFrom >= 2000)
+            if (yearFrom <= 0 || yearFrom >= 2020)
             {
                 return ModernTheme;
             }
@@ -101,7 +105,15 @@ namespace AsDriven.Core
             {
                 return EightiesTheme;
             }
-            return NinetiesTheme;
+            if (yearFrom < 2000)
+            {
+                return NinetiesTheme;
+            }
+            if (yearFrom < 2010)
+            {
+                return TwoThousandsTheme;
+            }
+            return TwentyTensTheme;
         }
     }
 }

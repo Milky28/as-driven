@@ -9,7 +9,7 @@ import tempfile
 from typing import Any
 
 from .site import simulator_label
-from .promote_observation import promote_observations
+from .promote_observation import _behavior_changes, promote_observations
 from .research_handoff import (
     ResearchHandoffError,
     _read_json,
@@ -63,6 +63,11 @@ def _flatten(document: Any, prefix: str = "") -> dict[str, Any]:
     return values
 
 
+def _ordinary_punctuation(value: str) -> str:
+    """Keep generated tracked source copy within the repository text policy."""
+    return " ".join(value.replace("\u2014", " - ").split())
+
+
 def _candidate_source(source: dict[str, Any]) -> dict[str, Any]:
     locators = []
     for locator in source.get("locators", []):
@@ -85,17 +90,21 @@ def _candidate_source(source: dict[str, Any]) -> dict[str, Any]:
     )
     candidate = {
         "source_id": source["source_id"],
-        "title": source["title"],
-        "publisher": source["publisher"],
+        "title": _ordinary_punctuation(source["title"]),
+        "publisher": _ordinary_punctuation(source["publisher"]),
         "url": source["url"],
         "source_type": source["source_type"],
         "retrieved_at": source["retrieved_at"],
         "reuse_status": source["reuse_status"],
-        "notes": notes,
+        "notes": _ordinary_punctuation(notes),
     }
     for key in ("author", "archive_url", "published_or_updated_at"):
         if source.get(key) is not None:
-            candidate[key] = source[key]
+            candidate[key] = (
+                _ordinary_punctuation(source[key])
+                if key == "author"
+                else source[key]
+            )
     return candidate
 
 
@@ -371,6 +380,31 @@ def _proposal_summary(
     entry = manifest["records"][0]
     transmission = preview_record["authentic_controls"]["transmission"]
     wheel = preview_record["authentic_controls"]["steering"]["wheel_rim"]
+    same_simulator_review = entry.get("correct_existing_simulator") or entry.get(
+        "compatible_implementation"
+    )
+    same_simulator_section = ""
+    if same_simulator_review:
+        disposition = (
+            "Correction of the existing simulator entry"
+            if entry.get("correct_existing_simulator")
+            else "Compatible repeat implementation"
+        )
+        same_simulator_section = f"""
+## Existing simulator entry
+
+- Disposition: {disposition}
+- Basis: {same_simulator_review['basis']}
+"""
+        if entry.get("correct_existing_simulator"):
+            same_simulator_section += (
+                "- Enumerated behavior changes: "
+                + ", ".join(
+                    f"`{path}`"
+                    for path in same_simulator_review["corrected_behavior_paths"]
+                )
+                + "\n"
+            )
     return f"""# Final review proposal: issue #{case['issue']['number']}
 
 No curated files have been changed. This proposal was dry-run through the real promotion path with candidate sources registered only in a temporary data directory.
@@ -394,6 +428,7 @@ No curated files have been changed. This proposal was dry-run through the real p
 ```json
 {json.dumps(preview_record['simulators'][0]['overrides'], indent=2, ensure_ascii=False)}
 ```
+{same_simulator_section}
 
 ## Reviewed sources
 
@@ -401,6 +436,119 @@ No curated files have been changed. This proposal was dry-run through the real p
 
 Review the proposed manifest, source wording, unknown fields, and simulator overrides before copying anything into `data/v1` or `curation`.
 """
+
+
+def _existing_record(root: Path, record_id: str) -> dict[str, Any] | None:
+    path = root / "data" / "v1" / "cars" / f"{record_id}.json"
+    return _read_json(path, "curated record") if path.is_file() else None
+
+
+def _same_simulator_disposition(
+    root: Path,
+    case: dict[str, Any],
+    staged: dict[str, Any],
+    manifest_entry: dict[str, Any],
+    existing_record: dict[str, Any] | None,
+) -> None:
+    """Make a repeat drive an explicit compatible observation or correction."""
+    if existing_record is None:
+        return
+    simulator_id = staged["record"]["simulators"][0]["simulator"]
+    current_entries = [
+        entry
+        for entry in existing_record.get("simulators", [])
+        if entry.get("simulator") == simulator_id
+    ]
+    if not current_entries:
+        return
+    if len(current_entries) != 1:
+        raise ResearchHandoffError(
+            f"record {manifest_entry['record_id']!r} has {len(current_entries)} "
+            f"curated {simulator_id} entries; a repeat-drive proposal cannot choose "
+            "which one to review"
+        )
+    if case.get("classification") != "curated-identity-comparison":
+        raise ResearchHandoffError(
+            f"record {manifest_entry['record_id']!r} already has a {simulator_id} "
+            "entry, but this case is not routed as a curated identity comparison"
+        )
+
+    replacement = copy.deepcopy(staged["record"]["simulators"][0])
+    replacement["overrides"] = copy.deepcopy(
+        manifest_entry.get("simulator_overrides") or []
+    )
+    shift_actuation = (manifest_entry.get("control_overrides") or {}).get(
+        "shift_actuation"
+    )
+    if shift_actuation:
+        replacement["behavior"]["shift_type"] = shift_actuation
+    changes = _behavior_changes(current_entries[0], replacement)
+    observation_id = staged.get("observation_id", "the repeat guided drive")
+
+    if not changes:
+        manifest_entry["compatible_implementation"] = {
+            "basis": (
+                f"Repeat guided drive {observation_id} independently reproduced "
+                f"the curated {simulator_id.upper()} behavior and effective overrides "
+                "without a material difference."
+            )
+        }
+        return
+
+    approval_path = (
+        root
+        / "curation"
+        / f"{simulator_id}-approved-{manifest_entry['record_id']}.json"
+    )
+    if not approval_path.is_file():
+        raise ResearchHandoffError(
+            f"the repeat {simulator_id} drive needs a correction, but its curated "
+            f"approval is missing: {approval_path}"
+        )
+    approval = _read_json(approval_path, "curated simulator approval")
+    source_registry = _read_json(
+        root / "data" / "v1" / "sources.json", "registered source registry"
+    )
+    source_types = {
+        source["source_id"]: source["source_type"]
+        for source in source_registry["sources"]
+    }
+    live_refs = [
+        ref
+        for ref in current_entries[0].get("source_refs", [])
+        if source_types.get(ref) == "in-game-observation"
+    ]
+    prior_history = approval.get("correction_history") or []
+    latest_replacement = (
+        prior_history[-1].get("replacement_source_ref") if prior_history else None
+    )
+    if latest_replacement in live_refs:
+        superseded_source = latest_replacement
+    elif len(live_refs) == 1:
+        superseded_source = live_refs[0]
+    else:
+        raise ResearchHandoffError(
+            f"the curated {simulator_id} entry has {len(live_refs)} live observation "
+            "sources; final review must identify which one the correction supersedes"
+        )
+
+    change_summary = "; ".join(
+        f"{change['path']} from {change['from']!r} to {change['to']!r}"
+        for change in changes
+    )
+    review_notes = " ".join(str(note) for note in staged.get("review_notes", []))
+    basis = (
+        f"Repeat guided drive {observation_id} materially changed the reviewed "
+        f"{simulator_id.upper()} result: {change_summary}."
+    )
+    if review_notes:
+        basis += f" {review_notes}"
+    manifest_entry["correct_existing_simulator"] = {
+        "basis": basis,
+        "supersedes_source_ref": superseded_source,
+        "supersedes_observed_through": approval["observed_through"],
+        "corrected_behavior_paths": [change["path"] for change in changes],
+    }
 
 
 def prepare_review_proposal(
@@ -442,7 +590,18 @@ def prepare_review_proposal(
     real_controls = _real_controls(staged_controls, result)
     _require_representable_controls(real_controls)
     overrides = _control_overrides(staged_controls, real_controls)
-    simulator_overrides = _simulator_overrides(staged_controls, real_controls, staged)
+    existing_record = _existing_record(root, identity["record_id"])
+    # An existing record owns the real-car baseline. Compare the new simulator
+    # drive with that baseline, not with a less-informed research draft, or the
+    # proposal manufactures redundant overrides for values already curated.
+    simulator_baseline = (
+        existing_record["authentic_controls"]
+        if identity["record_action"] == "use-existing" and existing_record is not None
+        else real_controls
+    )
+    simulator_overrides = _simulator_overrides(
+        staged_controls, simulator_baseline, staged
+    )
     research_sources = [
         source
         for source in result["sources"]
@@ -546,6 +705,13 @@ def prepare_review_proposal(
             "staged_record_id": staged_record_id,
             "basis": identity["basis"],
         }
+    _same_simulator_disposition(
+        root,
+        case,
+        staged,
+        manifest_entry,
+        existing_record,
+    )
     manifest = {
         "schema_version": "1.0.0",
         "dataset_version": proposed_version,
@@ -578,6 +744,9 @@ def prepare_review_proposal(
             source for source in candidate_sources if source["source_id"] not in known
         )
         _write_json(registry_path, registry)
+        registered_before_promotion = {
+            source["source_id"] for source in registry["sources"]
+        }
         written = promote_observations(
             manifest,
             root=root,
@@ -593,13 +762,19 @@ def prepare_review_proposal(
         approval_name = f"{staged['simulator']}-approved-{identity['record_id']}.json"
         preview_record = previews[record_name]
         preview_approval = previews[approval_name]
-        live_source_id = staged["source"]["source_id"]
         promoted_sources = _read_json(temp_data / "sources.json", "dry-run source registry")
-        preview_live_source = next(
+        new_live_sources = [
             source
             for source in promoted_sources["sources"]
-            if source["source_id"] == live_source_id
-        )
+            if source["source_id"] not in registered_before_promotion
+            and source["source_type"] == "in-game-observation"
+        ]
+        if len(new_live_sources) != 1:
+            raise ResearchHandoffError(
+                "dry-run promotion did not register exactly one new live observation "
+                f"source; found {[source['source_id'] for source in new_live_sources]!r}"
+            )
+        preview_live_source = new_live_sources[0]
 
     _require_schema(root, preview_record, "car-record.schema.json", "preview record")
     _require_schema(

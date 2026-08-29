@@ -1,0 +1,333 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "volkswagen-polo-200-tsi-2018-2020",
+  "identity": {
+    "display_name": "2018-2020 Volkswagen Polo 1.0 200 TSI",
+    "manufacturer": "Volkswagen",
+    "model": "Polo 1.0 200 TSI",
+    "year": {
+      "from": 2018,
+      "to": 2020,
+      "label": "Brazilian Volkswagen Polo 1.0 200 TSI"
+    },
+    "class": "road-going compact hatchback",
+    "real_world_identity_notes": "The plain AMS2 Volkswagen Polo in the TSI Cup class is best matched to the Brazilian sixth-generation Polo 1.0 200 TSI production specification introduced for the 2018 model year and sold through the 2018-2020 range. The TSI Cup project also contains a separate 1.4 GTS specification, and Polo RX, Polo R Cup, and European Polo variants are separate identities. The reviewed Brazilian 200 TSI specification uses a six-speed torque-converter automatic with sequential paddle control; the simulator's cut/blip behavior is not used as real-car evidence."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-applicable",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "not-applicable",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "not-applicable"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "unknown",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish wheel-rim shape: round; integrated wheel display: no; conventional rim open-top section: no; forward gears: 6; gearbox construction: automatic; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: not applicable; transmission upshift clutch: not applicable; transmission downshift clutch: not applicable.",
+      "The reviewed real-car sources do not establish cut and blip behavior; those baseline fields remain unknown.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Volkswagen Polo"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Volkswagen Polo"
+        },
+        {
+          "kind": "class-id",
+          "value": "TSICup"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-28",
+      "source_refs": [
+        "reiza.tsi-cup-release.2021",
+        "reiza.tsi-cup-development-update.2021",
+        "volkswagen.polo-200-tsi-brazil-technical-sheet",
+        "volkswagen.polo-200-tsi-parts-catalogue",
+        "quatrorodas.polo-200-tsi-2017-launch",
+        "quatrorodas.polo-200-tsi-paddle-control",
+        "as-driven.repository.volkswagen-polo-record-scan",
+        "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Reiza's official TSI Cup announcement identifies the AMS2 car as the Volkswagen Polo 1.0 TSI production car developed with Volkswagen Brasil and Acelerados, and distinguishes the 1.0 TSI from the separate 1.4 GTS specification. Volkswagen's Brazilian technical sheet identifies the 1.0 TSI Polo as a six-speed automatic with a torque converter. The exact Brazilian launch coverage identifies the Polo 200 TSI Highline and its 2018 introduction, while Volkswagen's parts catalogue lists the 1.0 200 TSI Polo for 2018-2020. The checked-out curated dataset has a Polo RX record but no 1.0 200 TSI record, so this case proposes a new record."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "reiza.tsi-cup-release.2021",
+          "reiza.tsi-cup-development-update.2021",
+          "volkswagen.polo-200-tsi-brazil-technical-sheet",
+          "volkswagen.polo-200-tsi-parts-catalogue",
+          "quatrorodas.polo-200-tsi-2017-launch",
+          "quatrorodas.polo-200-tsi-paddle-control",
+          "as-driven.repository.volkswagen-polo-record-scan",
+          "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Reiza's official TSI Cup announcement identifies the AMS2 car as the Volkswagen Polo 1.0 TSI production car developed with Volkswagen Brasil and Acelerados, and distinguishes the 1.0 TSI from the separate 1.4 GTS specification. Volkswagen's Brazilian technical sheet identifies the 1.0 TSI Polo as a six-speed automatic with a torque converter. The exact Brazilian launch coverage identifies the Polo 200 TSI Highline and its 2018 introduction, while Volkswagen's parts catalogue lists the 1.0 200 TSI Polo for 2018-2020. The checked-out curated dataset has a Polo RX record but no 1.0 200 TSI record, so this case proposes a new record."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "reiza.tsi-cup-release.2021",
+          "reiza.tsi-cup-development-update.2021",
+          "volkswagen.polo-200-tsi-brazil-technical-sheet",
+          "volkswagen.polo-200-tsi-parts-catalogue",
+          "quatrorodas.polo-200-tsi-2017-launch",
+          "quatrorodas.polo-200-tsi-paddle-control",
+          "as-driven.repository.volkswagen-polo-record-scan",
+          "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The exact Brazilian Highline 200 TSI launch photograph shows a conventional continuous circular steering rim rather than fixed GT/Formula grips or an open-top rim. The exact Brazilian cockpit photograph shows the instrument display behind the steering wheel, not a readout carried by the wheel rim itself. The exact Brazilian cockpit photograph visibly shows the upper section of the conventional continuous rim. Volkswagen's technical sheet states six forward automatic gears, corroborated by the Brazilian transmission coverage. The manufacturer technical sheet identifies an automatic six-speed transmission with a torque converter; the secondary source identifies the same Tiptronic automatic. The Brazilian Polo 1.0 TSI source explicitly states that sequential changes can be made with the steering-wheel paddles; the automatic gearbox remains separately recorded as automatic. The source explicitly describes sequential changes through the paddle/manual mode. It does not establish a conventional H gate or a first-gear side. The real specification uses a torque-converter automatic, so the driver does not operate a clutch pedal for the standing start. The exact Brazilian specification is an automatic torque-converter transmission operated in manual mode by paddles, not a driver-operated manual clutch system. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-volkswagen-polo-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch"
+        ],
+        "source_refs": [
+          "reiza.tsi-cup-release.2021",
+          "reiza.tsi-cup-development-update.2021",
+          "volkswagen.polo-200-tsi-brazil-technical-sheet",
+          "volkswagen.polo-200-tsi-parts-catalogue",
+          "quatrorodas.polo-200-tsi-2017-launch",
+          "quatrorodas.polo-200-tsi-paddle-control",
+          "as-driven.repository.volkswagen-polo-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "The exact Brazilian Highline 200 TSI launch photograph shows a conventional continuous circular steering rim rather than fixed GT/Formula grips or an open-top rim. The exact Brazilian cockpit photograph shows the instrument display behind the steering wheel, not a readout carried by the wheel rim itself. The exact Brazilian cockpit photograph visibly shows the upper section of the conventional continuous rim. Volkswagen's technical sheet states six forward automatic gears, corroborated by the Brazilian transmission coverage. The manufacturer technical sheet identifies an automatic six-speed transmission with a torque converter; the secondary source identifies the same Tiptronic automatic. The Brazilian Polo 1.0 TSI source explicitly states that sequential changes can be made with the steering-wheel paddles; the automatic gearbox remains separately recorded as automatic. The source explicitly describes sequential changes through the paddle/manual mode. It does not establish a conventional H gate or a first-gear side. The real specification uses a torque-converter automatic, so the driver does not operate a clutch pedal for the standing start. The exact Brazilian specification is an automatic torque-converter transmission operated in manual mode by paddles, not a driver-operated manual clutch system. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-08-28"
+}

@@ -428,6 +428,8 @@ class SimHubDashTests(unittest.TestCase):
                 "1970s-works",
                 "1980s-black-gold",
                 "1990s-touring",
+                "2000s-endurance-alloy",
+                "2010s-hybrid-vector",
                 "modern-light",
             ],
             theme_keys,
@@ -465,6 +467,16 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("MarkWell", modern_light)
         self.assertIn("FitWheelIconWell", modern_light)
         self.assertIn("FitShiftIconWell", modern_light)
+        endurance = named_theme(dashboard, "2000s-endurance-alloy")
+        hybrid = named_theme(dashboard, "2010s-hybrid-vector")
+        self.assertIn("FitWheelIconWell", endurance)
+        self.assertIn("FitShiftIconWell", endurance)
+        self.assertIn("AlloySilver", endurance)
+        self.assertIn("AlloyRed", endurance)
+        self.assertIn("MarkWell", hybrid)
+        self.assertIn("HybridBlack", hybrid)
+        self.assertIn("HybridRed", hybrid)
+        self.assertIn("HybridEnergy", hybrid)
         roadbook = named_theme(dashboard, "1960s-roadbook")
         touring = named_theme(dashboard, "1990s-touring")
         self.assertEqual("#22000000", roadbook["UseCellUpshiftYouFill"]["BackgroundColor"])
@@ -472,7 +484,9 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("#FFE12F31", touring["UseRailYouFill"]["BackgroundColor"])
         self.assertEqual("#FF2D75D5", touring["FitRailFill"]["BackgroundColor"])
         self.assertNotIn("TouringBlue", touring)
-        for light_theme in ("1960s-roadbook", "1990s-touring", "modern-light"):
+        for light_theme in (
+            "1960s-roadbook", "1990s-touring", "2010s-hybrid-vector", "modern-light"
+        ):
             self.assertIn("NoteIconWell", named_theme(dashboard, light_theme))
 
     def test_compact_keeps_both_bands(self):

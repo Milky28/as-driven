@@ -13,7 +13,7 @@ namespace AsDriven.Plugin
     internal sealed partial class VerificationControl : Border
     {
         private readonly AsDriven _plugin;
-        private readonly TextBlock[] _workflowSteps;
+        private readonly Button[] _workflowSteps;
         private readonly Dictionary<ComboBox, string> _guidedOriginalChoices =
             new Dictionary<ComboBox, string>();
         private readonly HashSet<ComboBox> _manualOverrides =
@@ -230,7 +230,7 @@ namespace AsDriven.Plugin
             _guidedDriveApplied = true;
             _guidedDriveStarted = false;
             ResetForm();
-            SetReviewVisibility(true);
+            SetReviewVisibility(false);
             _capturedIdentity.Text = "Captured: " + DescribeLiveCar(live)
                 + " | " + live.ClientVersion;
             _save.IsEnabled = true;
@@ -548,8 +548,11 @@ namespace AsDriven.Plugin
                 {
                     continue;
                 }
-                if ((combo == _automaticBlip || combo == _clutchlessDownshift)
-                    && !DownshiftReviewApplies())
+                if (combo == _clutchlessDownshift && !DownshiftReviewApplies())
+                {
+                    continue;
+                }
+                if (combo == _automaticBlip && !AutomaticBlipReviewApplies())
                 {
                     continue;
                 }
@@ -594,7 +597,7 @@ namespace AsDriven.Plugin
 
             if (DraftWasSaved())
             {
-                UpdateWorkflowSteps(-1, 4);
+                UpdateWorkflowSteps(3, 3);
                 // Saving is not the end of the contribution, only of the drive,
                 // and this used to be the one stage that highlighted nothing.
                 // The draft is on this machine and reaches nobody until the
@@ -620,7 +623,7 @@ namespace AsDriven.Plugin
                 : Visibility.Collapsed;
             if (!assistsConfirmed)
             {
-                UpdateWorkflowSteps(1, 1);
+                UpdateWorkflowSteps(0, 0);
                 _workflowStatus.Text = "NEXT STEP: Verify the simulator setup, then select the green confirmation.";
                 _assistConfirmationHint.Text = "REQUIRED ONCE PER SIMULATOR SETUP: Confirm to enable the guided drive.";
                 _assistConfirmationHint.Foreground = Brushes.Orange;
@@ -633,7 +636,7 @@ namespace AsDriven.Plugin
             _assistConfirmationHint.Foreground = Brushes.LightGreen;
             if (!_guidedDriveStarted)
             {
-                UpdateWorkflowSteps(2, 2);
+                UpdateWorkflowSteps(1, 1);
                 _workflowStatus.Text = "NEXT STEP: Start the in-sim guided drive and follow its overlay prompts.";
                 SetNextStepButton(_guidedStart, true);
                 return;
@@ -641,13 +644,13 @@ namespace AsDriven.Plugin
 
             if (guided != null && !guided.Completed)
             {
-                UpdateWorkflowSteps(2, 2);
+                UpdateWorkflowSteps(1, 1);
                 _workflowStatus.Text = "GUIDED DRIVE ACTIVE: Follow the current prompt inside the simulator.";
                 return;
             }
 
             int unresolved = OptionalUnresolvedCount();
-            UpdateWorkflowSteps(3, 3);
+            UpdateWorkflowSteps(2, 2);
             _workflowStatus.Text = unresolved == 0
                 ? "NEXT STEP: Review the draft, then save it for review."
                 : "NEXT STEP: Review the draft. " + unresolved
@@ -689,24 +692,33 @@ namespace AsDriven.Plugin
             }
             for (int index = 0; index < _workflowSteps.Length; index++)
             {
-                TextBlock step = _workflowSteps[index];
+                Button step = _workflowSteps[index];
+                bool available = index <= activeIndex || index < completedCount;
+                // SimHub's disabled button chrome uses a light fill with pale
+                // text, which made future stages nearly disappear. Keep these
+                // navigation labels visually enabled but non-interactive until
+                // their stage is available.
+                step.IsEnabled = true;
+                step.IsHitTestVisible = available;
+                step.Focusable = available;
+                step.Opacity = available ? 1.0 : 0.78;
                 if (index < completedCount)
                 {
                     step.Foreground = Brushes.LightGreen;
                     step.FontWeight = FontWeights.SemiBold;
-                    step.Text = "✓ " + WorkflowStepLabel(index);
+                    step.Content = "✓ " + WorkflowStepLabel(index);
                 }
                 else if (index == activeIndex)
                 {
                     step.Foreground = Brushes.White;
                     step.FontWeight = FontWeights.Bold;
-                    step.Text = "● " + WorkflowStepLabel(index);
+                    step.Content = "● " + WorkflowStepLabel(index);
                 }
                 else
                 {
-                    step.Foreground = new SolidColorBrush(Color.FromArgb(190, 210, 220, 230));
+                    step.Foreground = new SolidColorBrush(Color.FromRgb(190, 205, 220));
                     step.FontWeight = FontWeights.Normal;
-                    step.Text = "○ " + WorkflowStepLabel(index);
+                    step.Content = "○ " + WorkflowStepLabel(index);
                 }
             }
         }
@@ -715,23 +727,52 @@ namespace AsDriven.Plugin
         {
             switch (index)
             {
-                case 0: return "1  Capture live car";
-                case 1: return "2  Confirm simulator setup";
-                case 2: return "3  Run guided drive";
-                default: return "4  Review and save";
+                case 0: return "1  Setup";
+                case 1: return "2  Guided drive";
+                case 2: return "3  Review findings";
+                default: return "4  Save and share";
             }
         }
 
-        private static TextBlock CreateWorkflowStep(string number, string label)
+        private void SetupStageClicked(object sender, RoutedEventArgs eventArgs)
         {
-            var step = new TextBlock
+            if (_capture != null)
             {
-                Text = "○ " + number + "  " + label,
-                FontSize = 13,
-                Margin = new Thickness(0, 0, 0, 5),
-            };
-            AutomationProperties.SetName(step, "Verification step " + number + ": " + label);
-            return step;
+                _assistEditorPanel.Visibility = Visibility.Visible;
+                _assistSummaryPanel.Visibility = Visibility.Collapsed;
+            }
+            _sidebarBorder.BringIntoView();
+        }
+
+        private void DriveStageClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            if (_capture != null && _assistSettingsConfirmed.IsChecked == true)
+            {
+                _guidedDrivePanel.Visibility = Visibility.Visible;
+                _guidedDrivePanel.BringIntoView();
+            }
+        }
+
+        private void ReviewStageClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            if (_capture == null)
+            {
+                return;
+            }
+            SetReviewVisibility(true);
+            _reviewBorder.BringIntoView();
+        }
+
+        private void ShareStageClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            if (DraftWasSaved())
+            {
+                SetReviewVisibility(false);
+                _savedDraftActions.BringIntoView();
+                return;
+            }
+            ReviewStageClicked(sender, eventArgs);
+            _save.BringIntoView();
         }
 
         private void SetReviewVisibility(bool visible)
@@ -953,6 +994,13 @@ namespace AsDriven.Plugin
         {
             return VerificationReviewRules.DownshiftEngagementIsMeasurable(
                 _capture == null ? null : _capture.Simulator);
+        }
+
+        private bool AutomaticBlipReviewApplies()
+        {
+            return DownshiftReviewApplies()
+                && VerificationReviewRules.AutomaticBlipIsMeasurable(
+                    _capture == null ? null : _capture.Simulator);
         }
 
         private void HighlightReviewTarget(FrameworkElement control, string message)

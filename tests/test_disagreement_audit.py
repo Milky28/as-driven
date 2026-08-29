@@ -32,7 +32,16 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             (finding["record_id"], finding["path"])
             for finding in self.checked_in["findings"]
         }
-        self.assertEqual(audited, calculated)
+        self.assertTrue(calculated.issubset(audited))
+        self.assertEqual(
+            {
+                (
+                    "volkswagen-virtus-200-tsi-2018",
+                    "/authentic_controls/steering/wheel_rim/shape",
+                )
+            },
+            audited - calculated,
+        )
         self.assertEqual(len(audited), len(self.checked_in["findings"]))
         self.assertEqual(
             self.checked_in["summary"]["cars_with_disagreements"],
@@ -65,7 +74,16 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                     for view in views
                     if view["value"] not in {None, "unknown"}
                 }
-                self.assertGreaterEqual(len(established), 2)
+                if len(established) < 2:
+                    baseline = finding["authentic_baseline"]["value"]
+                    self.assertNotIn(baseline, {None, "unknown"})
+                    self.assertTrue(
+                        any(
+                            view["relationship_to_authentic"]
+                            == "departs-from-baseline"
+                            for view in views
+                        )
+                    )
                 for view in views:
                     self.assertTrue(view["verified_game_version"])
                     self.assertTrue(view["verified_at"])
@@ -186,13 +204,14 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # subtype remains unestablished. AC refuses the shift without a
                 # blip, so provisional remains the honest status.
                 "porsche-911-rsr-1974--transmission-downshift-manual-blip",
+                "volkswagen-virtus-200-tsi-2018--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
                 "authentic-baseline-open": 17,
-                "provisional-departure": 2,
+                "provisional-departure": 3,
                 "supported-departure": 9,
             },
             self.checked_in["summary"]["by_status"],

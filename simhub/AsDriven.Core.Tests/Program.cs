@@ -152,6 +152,10 @@ namespace AsDriven.Core.Tests
                 // downshift result still counts until something shows otherwise.
                 True(VerificationReviewRules.DownshiftEngagementIsMeasurable("rfactor2"),
                     "keeps the rFactor 2 downshift review, which nothing has disqualified");
+                False(VerificationReviewRules.AutomaticBlipIsMeasurable("rfactor2"),
+                    "does not ask rFactor 2's unfiltered pedal channel to establish an engine-side blip");
+                True(VerificationReviewRules.AutomaticBlipIsMeasurable("ams2"),
+                    "keeps automatic-blip review where SimHub publishes a usable throttle trace");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaRally"),
                     "does not resolve Rally, which nothing has been driven in");
                 Equal("acc", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),
@@ -1417,6 +1421,37 @@ namespace AsDriven.Core.Tests
                             "and the recorded value says unknown rather than the yes it would have said");
                     }
 
+                    // SimHub maps rFactor 2's generic throttle from the game's
+                    // unfiltered driver-input field. The car's own blip is on
+                    // filtered engine throttle, which GameData does not expose.
+                    // A pedal spike therefore cannot be promoted into an
+                    // automatic blip, and no spike cannot prove the opposite.
+                    {
+                        GuidedVerificationDrive rfactor2 = new GuidedVerificationDrive();
+                        rfactor2.Start(6, "rfactor2");
+                        rfactor2.AddSample(GuidedSample(now, 0, 0, 0, 1200, 0, 40, true));
+                        for (int guard = 0; guard < 40
+                            && rfactor2.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            rfactor2.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            rfactor2.Next();
+                        }
+                        rfactor2.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                        rfactor2.AddSample(GuidedSample(
+                            now.AddMilliseconds(100), 4, 0, 62, 5200, 80, 210, true));
+                        rfactor2.AddSample(GuidedSample(
+                            now.AddMilliseconds(200), 3, 0, 0, 5200, 79, 90, true));
+                        rfactor2.AddSample(GuidedSample(
+                            now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
+                        True(rfactor2.GetSnapshot().Result.Contains("unfiltered driver input"),
+                            "explains why rFactor 2 cannot expose the car's automatic blip");
+                        True(rfactor2.GetSnapshot().ResultSummary.Contains("unavailable in telemetry"),
+                            "never presents pedal movement as a detected rFactor 2 blip");
+                        rfactor2.Next();
+                        Equal("unknown", rfactor2.GetResults().AutomaticBlip,
+                            "preserves unknown for rFactor 2 automatic blip");
+                    }
+
                     // Rev-matching does not stop at the gear change. The driver
                     // blips and drives away on the throttle, and confirmation
                     // used to wait for a closed one, so following the prompt
@@ -1599,7 +1634,7 @@ namespace AsDriven.Core.Tests
                     // Huracan drive landed here.
                     {
                         GuidedVerificationDrive noTorque = new GuidedVerificationDrive();
-                        noTorque.Start(6);
+                        noTorque.Start(6, "rfactor2");
                         for (int guard = 0; guard < 40
                             && noTorque.GetSnapshot().Title != "Full-throttle upshift"; guard++)
                         {
@@ -1613,6 +1648,8 @@ namespace AsDriven.Core.Tests
                             GuidedSample(now.AddMilliseconds(200), 4, 0, 95, 4600, 77, 0, true));
                         True(noTorque.GetSnapshot().Result.Contains("published no engine torque"),
                             "names an absent torque channel instead of calling the trace inconclusive");
+                        True(noTorque.GetSnapshot().Result.Contains("filtered throttle"),
+                            "explains why rFactor 2's visible engine-throttle cut is unavailable to GameData");
                         False(noTorque.GetSnapshot().Result.Contains("could not be established"),
                             "does not report an unmeasured cut as an inconclusive measurement");
                     }
@@ -1918,11 +1955,17 @@ namespace AsDriven.Core.Tests
                 Equal("auto", PopupPreferences.NormalizeTheme("neon"), "rejects an unpackaged popup theme");
                 Equal("1970s-works", PopupPreferences.NormalizeTheme("  1970S-WORKS "), "normalizes a supported theme");
                 Equal("modern-light", PopupPreferences.NormalizeTheme("MODERN-LIGHT"), "keeps the optional modern light theme");
+                Equal("2000s-endurance-alloy", PopupPreferences.NormalizeTheme("2000S-ENDURANCE-ALLOY"), "keeps the 2000s endurance theme");
+                Equal("2010s-hybrid-vector", PopupPreferences.NormalizeTheme("2010s-hybrid-vector"), "keeps the 2010s hybrid theme");
                 Equal("1960s-roadbook", PopupPreferences.ResolveTheme("auto", 1967), "auto selects the roadbook theme for a sixties car");
                 Equal("1970s-works", PopupPreferences.ResolveTheme("auto", 1975), "auto selects the works theme for a seventies car");
                 Equal("1980s-black-gold", PopupPreferences.ResolveTheme("auto", 1986), "auto selects the black-gold theme for an eighties car");
                 Equal("1990s-touring", PopupPreferences.ResolveTheme("auto", 1994), "auto selects the touring theme for a nineties car");
-                Equal("modern", PopupPreferences.ResolveTheme("auto", 2005), "auto selects modern for a post-1999 car");
+                Equal("2000s-endurance-alloy", PopupPreferences.ResolveTheme("auto", 2000), "auto selects endurance alloy at the 2000 boundary");
+                Equal("2000s-endurance-alloy", PopupPreferences.ResolveTheme("auto", 2009), "auto keeps endurance alloy through 2009");
+                Equal("2010s-hybrid-vector", PopupPreferences.ResolveTheme("auto", 2010), "auto selects hybrid vector at the 2010 boundary");
+                Equal("2010s-hybrid-vector", PopupPreferences.ResolveTheme("auto", 2019), "auto keeps hybrid vector through 2019");
+                Equal("modern", PopupPreferences.ResolveTheme("auto", 2020), "auto selects modern at the 2020 boundary");
                 Equal("modern", PopupPreferences.ResolveTheme("auto", 0), "an unestablished year uses the modern fallback");
                 Equal("1980s-black-gold", PopupPreferences.ResolveTheme("1980s-black-gold", 1975), "a manual theme overrides the car decade");
 
@@ -1986,6 +2029,8 @@ namespace AsDriven.Core.Tests
                     "does not ask contributors to settle an AC cut that telemetry cannot expose");
                 True(VerificationReviewRules.AutomaticCutIsMeasurable("ams2"),
                     "keeps automatic-cut review for a simulator that publishes the needed telemetry");
+                False(VerificationReviewRules.AutomaticBlipIsMeasurable("rfactor2"),
+                    "keeps rFactor 2 automatic blip unknown when only pedal throttle is exposed");
 
                 string syntheticRoot = Path.Combine(
                     Path.GetTempPath(), "AsDrivenTests-" + Guid.NewGuid().ToString("N"));

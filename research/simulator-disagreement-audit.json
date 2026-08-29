@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.21",
+  "dataset_version": "0.5.28",
   "generated_at": "2026-08-28",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
@@ -10,16 +10,16 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 20,
-    "findings": 28,
+    "cars_with_disagreements": 21,
+    "findings": 29,
     "by_status": {
       "authentic-baseline-open": 17,
-      "provisional-departure": 2,
+      "provisional-departure": 3,
       "supported-departure": 9
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 6,
+      "hardware-choice": 7,
       "launch-technique": 9,
       "running-shift-technique": 9
     }
@@ -1645,6 +1645,63 @@
         "departing_simulators": [],
         "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
         "next_action": "Find real-car evidence for pulling away."
+      }
+    },
+    {
+      "finding_id": "volkswagen-virtus-200-tsi-2018--steering-wheel-rim-shape",
+      "record_id": "volkswagen-virtus-200-tsi-2018",
+      "display_name": "Volkswagen Virtus 1.0 200 TSI (2018)",
+      "class": "subcompact sedan",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel rim",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "d-shaped",
+        "display_value": "D-shaped rim",
+        "confidence": "medium",
+        "source_refs": [
+          "volkswagen.virtus-200-tsi-technical-sheet.2018",
+          "autopapo.virtus-2018-launch.2018",
+          "motor1.virtus-200-tsi-2018-drive.2018",
+          "quatrorodas.virtus-200-tsi-paddle-controls.2018",
+          "coches.virtus-tsi-highline-cockpit-photo.2018",
+          "reiza.tsi-cup-development-update.2021"
+        ],
+        "primary_source_refs": [
+          "volkswagen.virtus-200-tsi-technical-sheet.2018"
+        ],
+        "basis": "The official technical sheet specifies six forward ratios and contemporary coverage confirms a six-speed automatic. The manufacturer sheet explicitly says automatic and specifies a torque converter; Quatro Rodas corroborates the automatic 200 TSI configuration. The launch equipment list and contemporary coverage document steering-wheel paddles for the automatic Virtus 200 TSI. The sources explicitly describe sequential changes using the automatic transmission's steering-wheel paddles. The exact 200 TSI Virtus uses an automatic torque-converter transmission; normal move-off is performed through the automatic selector, brake, and accelerator without driver clutch operation. Paddle upshifts operate the automatic transmission; the documented driver interface has no clutch operation. Paddle downshifts operate the automatic transmission; the documented driver interface has no clutch operation. The exact car has an automatic Tiptronic/paddle interface rather than a manual gearbox requiring a driver throttle blip on upshift. The exact car has an automatic Tiptronic/paddle interface rather than a manual gearbox requiring a driver throttle blip on downshift. The full-resolution 2018 Virtus Highline cockpit photograph shows a conventional continuous rim with a clearly flattened lower section, not fixed GT/formula grips. The photograph shows the digital instrument cluster behind the rim, and the written source places the display in the separate cluster rather than in the wheel. The full-resolution image shows the upper band of the conventional wheel intact; only the lower section is flattened. The clear cockpit photograph shows no dedicated shift/rev-light strip on the rim; the visible digital display is separate behind it. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-28",
+          "confidence": "medium",
+          "source_refs": [
+            "volkswagen.virtus-200-tsi-technical-sheet.2018",
+            "autopapo.virtus-2018-launch.2018",
+            "motor1.virtus-200-tsi-2018-drive.2018",
+            "quatrorodas.virtus-200-tsi-paddle-controls.2018",
+            "coches.virtus-tsi-highline-cockpit-photo.2018",
+            "reiza.tsi-cup-development-update.2021",
+            "ams2.local-live-volkswagen-virtus-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel rim before publishing a benchmark verdict."
       }
     },
     {

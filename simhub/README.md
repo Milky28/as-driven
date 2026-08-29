@@ -63,6 +63,26 @@ When upgrading from the former 900-pixel Detailed surface, the installer keeps
 its center position and changes only that part's width to 840 pixels. Any part
 already given a different custom width is left untouched.
 
+The native settings page opens on **Garage**, where the current live car or
+catalog preview is shown as the same FIT and USE decision the overlay presents.
+Popup size, duration, and nine visual theme choices sit beside an embedded
+preview that updates before changes are saved. A persistent health strip keeps
+simulator, exact-match, dataset, and popup readiness visible across Garage,
+Car browser, Contribute data, and System. Simulator coverage, dataset details,
+manual reload, and diagnostics are kept in **System** so routine driving setup
+is not interrupted by maintenance information.
+
+**Car browser** is a read-only catalog until the explicit **Show selected
+overlay** action is used. Search matches car name, class, and record id, while
+simulator, decade, wheel, and shifter filters narrow the installed curated
+records. Selection opens the same FIT, USE, and driver-summary guidance inline
+without replacing the live telemetry car.
+
+**Contribute data** presents verification as four stages: Setup, Guided drive,
+Review findings, and Save and share. Only the current stage's main action is
+emphasized, the long review form stays hidden until the drive reaches review,
+and completed setup or saved answers can be reopened without starting over.
+
 To remove the plugin, close SimHub and run `simhub/uninstall.ps1`. By default it
 backs up and removes only the As Driven binaries and packaged Dash
 Studio templates. It preserves the database, settings, diagnostics,
@@ -532,6 +552,11 @@ contributor still attaches the file manually. The corresponding intake command
 strictly validates and hashes the untrusted draft, treats only identical bytes
 as a duplicate, and separates corroboration from contradictions and changed
 implementations.
+Version 0.20.2 reorganizes the native SimHub page around the driver's tasks.
+Garage mirrors the production popup and its theme choices, Car browser is a
+searchable and filterable read-only catalog with inline FIT/USE guidance, and
+Contribute data uses a progressive four-stage test session whose completed
+work can be reopened. System retains dataset coverage and diagnostics.
 Compact uses an unambiguous checkmark-only match indicator,
 and confidence labels use consistent sentence capitalization. Detailed, Compact, and Glance
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged

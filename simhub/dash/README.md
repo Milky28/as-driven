@@ -34,11 +34,14 @@ then highlighted `USE` guidance with separate Launch, Upshift, and Downshift
 sections. This keeps the pre-session decision order explicit without nested
 cards or decorative technique icons.
 
-Each pre-flight surface packages six palettes behind one shared information
+Each pre-flight surface packages eight palettes behind one shared information
 layout: Modern Night Vision, Modern Light Studio White, 1960s Roadbook, 1970s
-Works, 1980s Black Gold, and 1990s Touring Works. `AsDriven.PopupTheme` selects exactly one layer. The settings
+Works, 1980s Black Gold, 1990s Touring Works, 2000s Endurance Alloy, and 2010s
+Hybrid Vector. `AsDriven.PopupTheme` selects exactly one layer. The settings
 page can pin any palette or resolve it automatically from the curated start
-year; missing years deliberately fall back to Modern. The period treatments
+year. Endurance Alloy covers 2000 through 2009, Hybrid Vector covers 2010
+through 2019, and 2020 or newer uses Modern. Missing years deliberately fall
+back to Modern. The period treatments
 use original colour combinations and small stripe motifs rather than sponsor
 logos or copied livery graphics.
 
@@ -90,10 +93,12 @@ Choose the size and 1–60 second automatic duration on the **As Driven**
 settings page. Map `TogglePopup` for one show/hide button, or map `ShowPopup`
 and `HidePopup` separately.
 
-Plugin version 0.10.5 exposes that settings page as a native pinnable SimHub
-feature with a transparent white 24x24 wheel, lever, and gate menu glyph. The page provides live
-match and version status plus Show/Hide popup, database refresh, and diagnostics
-controls. Dash Studio continues to own layout loading and positioning.
+The plugin exposes its settings page as a native pinnable SimHub feature with a
+transparent white 24x24 wheel, lever, and gate menu glyph. Garage mirrors the
+current FIT and USE guidance beside an embedded popup preview and visual theme
+choices. A persistent health strip shows simulator, match, dataset, and popup
+readiness; database coverage, reload, and diagnostics live under System. Dash
+Studio continues to own layout loading and positioning.
 The native page also provides a curated-car preview selector. Previewed records
 use the same templates and properties but show a visible `PREVIEW - NOT LIVE`
 badge; live

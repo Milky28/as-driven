@@ -1,0 +1,283 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "volkswagen-virtus-gts-2020",
+  "identity": {
+    "display_name": "Volkswagen Virtus GTS 1.4 250 TSI (2020)",
+    "manufacturer": "Volkswagen",
+    "model": "Virtus GTS 1.4 250 TSI",
+    "year": {
+      "from": 2020,
+      "to": 2020,
+      "label": "2020 Brazilian launch specification"
+    },
+    "class": "subcompact sedan",
+    "real_world_identity_notes": "The best-supported match is the Brazilian first-generation, pre-facelift Volkswagen Virtus GTS launched for the 2020 model year: a road-going compact/subcompact sedan with the 1.4-litre 250 TSI flex engine and AQ250 six-speed automatic. This is the GTS branch of the AMS2 TSI Cup, distinct from the plain Virtus 1.0 200 TSI and from the related Polo GTS hatchback; the simulator class name TSICup is not a real-world racing homologation."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: automatic; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: not required; transmission upshift clutch: not required; transmission downshift clutch: not required; transmission upshift manual_blip: not applicable; transmission downshift manual_blip: not applicable; wheel-rim shape: d shaped; integrated wheel display: no; conventional rim open-top section: no; wheel shift lights: no.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Volkswagen Virtus GTS"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Volkswagen Virtus GTS"
+        },
+        {
+          "kind": "class-id",
+          "value": "TSICup"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ams2.volkswagen-virtus-gts.20260828t205434920z-84c36044 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-08-28",
+      "source_refs": [
+        "volkswagen.virtus-gts-manual.2020",
+        "autoentusiastas.virtus-gts-road-test.2020",
+        "motor1.virtus-gts-test.2020",
+        "assobrav.virtus-gts-showroom.2020",
+        "autotest.virtus-gts-interior-photo.2021",
+        "reiza.tsi-cup-development-update.2021",
+        "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Volkswagen's GTS manual identifies the 1.4 TSI 110 kW/150 cv, 250 Nm configuration and AQ250 six-speed automatic, and its Tiptronic section documents the steering-wheel selectors. Contemporary Brazilian coverage identifies the 2020 Virtus GTS as the 1.4 250 TSI sedan and distinguishes it from the 1.0 200 TSI range. Reiza's official AMS2 announcement explicitly lists the Virtus 1.0 TSI and 1.4 GTS as separate TSI Cup specifications. The exact observation has no related curated-record lead and no existing curated Virtus GTS record was found, so a new real-car record is proposed."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "volkswagen.virtus-gts-manual.2020",
+          "autoentusiastas.virtus-gts-road-test.2020",
+          "motor1.virtus-gts-test.2020",
+          "assobrav.virtus-gts-showroom.2020",
+          "autotest.virtus-gts-interior-photo.2021",
+          "reiza.tsi-cup-development-update.2021",
+          "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Volkswagen's GTS manual identifies the 1.4 TSI 110 kW/150 cv, 250 Nm configuration and AQ250 six-speed automatic, and its Tiptronic section documents the steering-wheel selectors. Contemporary Brazilian coverage identifies the 2020 Virtus GTS as the 1.4 250 TSI sedan and distinguishes it from the 1.0 200 TSI range. Reiza's official AMS2 announcement explicitly lists the Virtus 1.0 TSI and 1.4 GTS as separate TSI Cup specifications. The exact observation has no related curated-record lead and no existing curated Virtus GTS record was found, so a new real-car record is proposed."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "volkswagen.virtus-gts-manual.2020",
+          "autoentusiastas.virtus-gts-road-test.2020",
+          "motor1.virtus-gts-test.2020",
+          "assobrav.virtus-gts-showroom.2020",
+          "autotest.virtus-gts-interior-photo.2021",
+          "reiza.tsi-cup-development-update.2021",
+          "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The manufacturer manual specifies an automatic six-speed AQ250, corroborated by the exact Brazilian GTS technical specification. The official manual calls the AQ250 an automatic transmission; independent tests identify it as a conventional Aisin torque-converter automatic rather than a manual or dual-clutch gearbox. The manual documents right/left steering-wheel Tiptronic selectors for upshift/downshift, and the road test independently describes the paddles behind the wheel. The Tiptronic interface changes one gear up or down through the paddle selectors; this is the sequential manual-selection pattern applicable to the staged paddle control. The exact car uses an automatic transmission with selector and accelerator operation; the driver does not operate a clutch pedal for normal standing starts. The documented running upshift is performed through the automatic Tiptronic/paddle interface, with no driver clutch operation. The documented running downshift is performed through the automatic Tiptronic/paddle interface, with no driver clutch operation. Manual throttle blipping is not an applicable driver control for the automatic production transmission's paddle upshift. Manual throttle blipping is not an applicable driver control for the automatic production transmission's paddle downshift. The clear exact-model cockpit photograph shows a conventional continuous rim with a flattened lower section, not fixed molded GT/formula grips; the written source corroborates that it is the GTS wheel family. The photograph shows the instrument display behind the steering rim, while the exact-model written source names it as the separate Active Info Display; no readout is embedded in the rim. The full-resolution cockpit image shows the upper band of the conventional wheel intact. The clear photograph shows no dedicated shift/rev-light strip on the wheel rim; the visible digital instrumentation is a separate cluster behind it. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-volkswagen-virtus-gts-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "volkswagen.virtus-gts-manual.2020",
+          "autoentusiastas.virtus-gts-road-test.2020",
+          "motor1.virtus-gts-test.2020",
+          "assobrav.virtus-gts-showroom.2020",
+          "autotest.virtus-gts-interior-photo.2021",
+          "reiza.tsi-cup-development-update.2021"
+        ],
+        "confidence": "high",
+        "basis": "The manufacturer manual specifies an automatic six-speed AQ250, corroborated by the exact Brazilian GTS technical specification. The official manual calls the AQ250 an automatic transmission; independent tests identify it as a conventional Aisin torque-converter automatic rather than a manual or dual-clutch gearbox. The manual documents right/left steering-wheel Tiptronic selectors for upshift/downshift, and the road test independently describes the paddles behind the wheel. The Tiptronic interface changes one gear up or down through the paddle selectors; this is the sequential manual-selection pattern applicable to the staged paddle control. The exact car uses an automatic transmission with selector and accelerator operation; the driver does not operate a clutch pedal for normal standing starts. The documented running upshift is performed through the automatic Tiptronic/paddle interface, with no driver clutch operation. The documented running downshift is performed through the automatic Tiptronic/paddle interface, with no driver clutch operation. Manual throttle blipping is not an applicable driver control for the automatic production transmission's paddle upshift. Manual throttle blipping is not an applicable driver control for the automatic production transmission's paddle downshift. The clear exact-model cockpit photograph shows a conventional continuous rim with a flattened lower section, not fixed molded GT/formula grips; the written source corroborates that it is the GTS wheel family. The photograph shows the instrument display behind the steering rim, while the exact-model written source names it as the separate Active Info Display; no readout is embedded in the rim. The full-resolution cockpit image shows the upper band of the conventional wheel intact. The clear photograph shows no dedicated shift/rev-light strip on the wheel rim; the visible digital instrumentation is a separate cluster behind it. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-08-28"
+}

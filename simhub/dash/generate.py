@@ -76,6 +76,18 @@ THEMES = (
         "#22000000", "#11000000", "#FFE12F31", "#FFFFFFFF",
         "#FFFFFFFF", "#FFFFFFFF", "#FF9EB4CE"),
     ThemeSpec(
+        "2000s-endurance-alloy", "#FF161A1E", "#FFC9CED1", "#FF20262B", "#FFF4F6F7",
+        "#FFD5DDE1", "#FF172027", "#FF8C9AA2", "#FF7B878D", "#FFD22E32",
+        "#FFE44B3B", "#FF167D72", "#FF5C6D78", "#FFD22E32", "#FF167D72",
+        "#35E44B3B", "#30167D72", "#FFD22E32", "#FFFFFFFF",
+        "#FFFFFFFF", "#FFFFFFFF", "#FF52636C"),
+    ThemeSpec(
+        "2010s-hybrid-vector", "#FFF1F2EF", "#FF171A1D", "#FFE3E6E4", "#FF181B1E",
+        "#FF30383D", "#FFF7F8F5", "#FF667178", "#FF899196", "#FFD61F2C",
+        "#FFFF5A42", "#FF00A69A", "#FF343A40", "#FFD61F2C", "#FF008D85",
+        "#38FF5A42", "#3300A69A", "#FFD61F2C", "#FFFFFFFF",
+        "#FFFFFFFF", "#FFFFFFFF", "#FF9DA8AD"),
+    ThemeSpec(
         "modern-light", "#FFF5F6F4", "#FFF9FAFA", "#FFEEF1F2", "#FF20262B",
         "#FF3C454C", "#FF20262B", "#FF69737B", "#FF8B9399", "#FF246FDB",
         "#FFFF4B13", "#FF3E8747", "#FF2D78DD", "#FFFF5A1F", "#FF3E8747",
@@ -430,6 +442,17 @@ def _theme_motif(factory: ItemFactory, theme: ThemeSpec) -> list[dict[str, Any]]
         ]
     if theme.key == "1980s-black-gold":
         return [factory.rectangle("BlackGoldRule", 34, bottom, factory.width - 68, 2, theme.accent)]
+    if theme.key == "2000s-endurance-alloy":
+        return [
+            factory.rectangle("AlloySilver", 34, bottom, 96, 3, theme.panel),
+            factory.rectangle("AlloyRed", 130, bottom, 54, 3, theme.accent),
+        ]
+    if theme.key == "2010s-hybrid-vector":
+        return [
+            factory.rectangle("HybridBlack", 34, bottom, 74, 3, theme.panel),
+            factory.rectangle("HybridRed", 108, bottom, 46, 3, theme.accent),
+            factory.rectangle("HybridEnergy", 154, bottom, 34, 3, theme.car),
+        ]
     return []
 
 
@@ -442,7 +465,9 @@ def _brand_mark(
     theme: ThemeSpec,
 ) -> list[dict[str, Any]]:
     children: list[dict[str, Any]] = []
-    if theme.key in ("1960s-roadbook", "1990s-touring", "modern-light"):
+    if theme.key in (
+        "1960s-roadbook", "1990s-touring", "2010s-hybrid-vector", "modern-light"
+    ):
         children.append(factory.ellipse(
             name + "Well", left - 2, top - 2, size + 4, size + 4,
             theme.panel, thickness=1, fill=theme.panel))
@@ -664,11 +689,12 @@ def _fit_band(
     sub_top = top + 26 if compact else top + height / 2 + 2
     marker_top = top + 44 if compact else top + height - 21
     marker_size = sub_size - 3 if compact else sub_size - 1
-    if theme.key == "modern-light":
+    if theme.key in ("2000s-endurance-alloy", "modern-light"):
+        icon_well = theme.note if theme.key == "2000s-endurance-alloy" else theme.title
         children.append(factory.ellipse(
             "FitWheelIconWell", cell_left + 10, icon_top - 4,
-            icon_size + 8, icon_size + 8, theme.title,
-            thickness=1, fill=theme.title))
+            icon_size + 8, icon_size + 8, icon_well,
+            thickness=1, fill=icon_well))
     children.extend(_wheel_icon(factory, "FitWheel", cell_left + 14, icon_top, icon_size / 46))
     children.extend([
         factory.text("FitWheelHead", "Rim", text_left, head_top,
@@ -689,10 +715,11 @@ def _fit_band(
     ])
     second_left = cell_left + cell_width
     second_text = second_left + icon_size + 22
-    if theme.key == "modern-light":
+    if theme.key in ("2000s-endurance-alloy", "modern-light"):
+        icon_well = theme.note if theme.key == "2000s-endurance-alloy" else theme.title
         children.append(factory.rectangle(
             "FitShiftIconWell", second_left + 10, icon_top - 4,
-            icon_size + 8, icon_size + 8, theme.title, radius=7))
+            icon_size + 8, icon_size + 8, icon_well, radius=7))
     children.extend(_shift_icon(factory, "FitShift", second_left + 14, icon_top, icon_size / 46))
     children.extend([
         factory.text("FitShiftHead", "Shifter", second_text, head_top,
@@ -843,7 +870,9 @@ def _driver_note(
         factory.rectangle("NotePanel", left, top, width, height, theme.note, radius=6),
         factory.rectangle("NoteRail", left, top, 2, height, theme.accent),
     ]
-    if theme.key in ("1960s-roadbook", "1990s-touring", "modern-light"):
+    if theme.key in (
+        "1960s-roadbook", "1990s-touring", "2010s-hybrid-vector", "modern-light"
+    ):
         children.append(factory.ellipse(
             "NoteIconWell", left + 10, top + NOTE_PADDING - 1, 22, 22,
             theme.title, thickness=1, fill=theme.title))

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.28",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "lotus-23",
+      "bundle": "build/review-cases/issue-44/staged.json",
+      "display_name": "Lotus 23",
+      "class": "Vintage Cars Tier 2",
+      "manufacturer": "Lotus",
+      "model": "Type 23",
+      "year": {
+        "from": 1962,
+        "to": 1962,
+        "label": "1962 Group 4 sports racer"
+      },
+      "real_world_identity_notes": "The observation matches the Lotus Type 23, Lotus's small-capacity two-seat sports racer purpose-built for FIA Group 4 in 1962-1963. The proposed identity is the existing lotus-23 record, not the related single-seat Type 22 Formula Junior, the later reinforced 23B, or the wider-tired 23C. The Type 23 could carry different period gearbox installations, including Renault or Volkswagen-based units, so the real-car construction and some running-shift technique remain deliberately unresolved.",
+      "real_world_source_refs": [
+        "lotuscars.type-23",
+        "simanaitis.lotus-23-randt-summary.2022",
+        "jacobengineering.lotus-23-steering-wheel.2019"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Lotus's own heritage page identifies the Type 23 as a 1962 two-seat sports racer purpose-built for FIA Group 4 and describes its Renault or Volkswagen gearbox options. The exact AMS2 telemetry identity is Lotus 23, the related curated lead is an exact identity match, and the observed four-speed H-pattern implementation is consistent with the documented early Type 23 specification.",
+      "identity_basis": "Lotus's own heritage page identifies the Type 23 as a 1962 two-seat sports racer purpose-built for FIA Group 4 and describes its Renault or Volkswagen gearbox options. The exact AMS2 telemetry identity is Lotus 23, the related curated lead is an exact identity match, and the observed four-speed H-pattern implementation is consistent with the documented early Type 23 specification.",
+      "specification_basis": "The period specification describes a Renault or Volkswagen-based four-speed unit, and the exact AMS2 implementation exposes four forward gears. Later Type 23-family installations could differ, so this is retained as the observed early/base configuration rather than generalized to every 23B or 23C. The period description places gear levers in the cockpit and describes a manual four-speed gearbox; the exact implementation is directly observed as H-pattern. No paddle or automatic interface is evidenced. The period specification explicitly identifies a mechanical Ford clutch in the power-transmission path of the early manual Type 23. That establishes a physical clutch control for moving off, while not proving the clutch technique used for every running shift. The reviewed specification describes a conventional manual clutch-and-gearbox upshift path and does not identify a driver blip as an upshift control; manual blipping is treated as not applicable to this path. The full-resolution exact Type 23 wheel image shows a continuous circular rim rather than fixed molded GT/formula grips or a flattened D-shaped band. The full-resolution wheel image shows a plain three-spoke wheel and no readout embedded in the rim. The full-resolution wheel image shows no shift/rev-light strip or light elements on the rim. The full-resolution wheel image shows the upper rim as a continuous intact band. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ams2.lotus-23.20260828t205725996z-e14bbb93 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 1.6.9.91. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ams2.local-live-lotus-23-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1962 Group 4 sports racer identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 4; shift actuation: h pattern; standing-start clutch use: required; transmission upshift manual_blip: not applicable; wheel-rim shape: round; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+        "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+        "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/44",
+      "live_source_notes": "Guided-verification observation ams2.lotus-23.20260828t205725996z-e14bbb93 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "correct_existing_simulator": {
+        "basis": "Repeat guided drive ams2.lotus-23.20260828t205725996z-e14bbb93 materially changed the reviewed AMS2 result: /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'required'. The simulator refused a clutchless downshift until the driver blipped. That is a demand the simulator makes, not evidence that the gearbox needs the blip to engage, so the real-car manual_blip value stays unknown while the simulator demand is preserved as an override.",
+        "supersedes_source_ref": "ams2.local-live-lotus-23-controls.1.6.9.91",
+        "supersedes_observed_through": "SimHub guided verification observation ams2.lotus-23.20260817t192722843z-5965cd35",
+        "corrected_behavior_paths": [
+          "/overrides/authentic_controls/transmission/downshift/manual_blip"
+        ]
+      }
+    }
+  ]
+}

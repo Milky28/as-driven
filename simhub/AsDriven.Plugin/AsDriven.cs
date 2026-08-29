@@ -164,6 +164,17 @@ namespace AsDriven.Plugin
             get { return _current == null ? string.Empty : _current.RecordId; }
         }
 
+        /// <summary>
+        /// The immutable guidance currently presented by the plugin, whether it
+        /// comes from live telemetry or an explicit catalog preview. The native
+        /// settings page reads this snapshot to mirror the pre-flight advice;
+        /// it never mutates database state.
+        /// </summary>
+        internal GuidanceSnapshot CurrentGuidance
+        {
+            get { return _current; }
+        }
+
         internal string CurrentDatasetVersion
         {
             get { return DatasetVersion(); }
@@ -254,6 +265,24 @@ namespace AsDriven.Plugin
         internal CarCatalogEntry[] PreviewCars
         {
             get { return _database == null ? new CarCatalogEntry[0] : _database.Cars; }
+        }
+
+        /// <summary>
+        /// Reads one catalog record without changing the live car, popup state,
+        /// or current overlay. The settings page uses this for catalog filters
+        /// and its inline detail card.
+        /// </summary>
+        internal GuidanceSnapshot ReadCatalogGuidance(CarCatalogEntry car)
+        {
+            if (_database == null || car == null)
+            {
+                return GuidanceSnapshot.Empty(
+                    "preview-not-found",
+                    string.Empty,
+                    string.Empty,
+                    DatasetVersion());
+            }
+            return _database.Preview(car.Simulator, car.RecordId);
         }
 
         internal bool IsPreviewActive
@@ -608,7 +637,9 @@ namespace AsDriven.Plugin
             }
             _guidedVerificationCapture = capture;
             _popupState.Hide();
-            _guidedVerificationDrive.Start(capture.SuggestedForwardGears);
+            _guidedVerificationDrive.Start(
+                capture.SuggestedForwardGears,
+                capture.Simulator);
             RefreshGuidedDriveSnapshot();
         }
 

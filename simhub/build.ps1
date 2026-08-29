@@ -173,12 +173,29 @@ if ($verificationControl.Count -ne 1) {
 }
 $verificationControl = $verificationControl[0]
 $tabs = @($ui | Where-Object { $_ -is [SimHub.Plugins.Styles.SHTabControl] } | Select-Object -First 1)
-$expectedTabs = @("Overlay", "Car browser", "Contribute data", "Advanced")
+$expectedTabs = @("Garage", "Car browser", "Contribute data", "System")
 $actualTabs = @($tabs[0].Items | ForEach-Object { [string]$_.Header })
 if ($tabs.Count -ne 1 `
     -or $actualTabs.Count -ne $expectedTabs.Count `
     -or (Compare-Object $expectedTabs $actualTabs -SyncWindow 0)) {
-    throw "The settings page must expose Overlay, Car browser, Contribute data, and Advanced tabs."
+    throw "The settings page must expose Garage, Car browser, Contribute data, and System tabs."
+}
+$healthStrip = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Border] -and $_.Name -eq "PluginHealthStrip"
+    } | Select-Object -First 1)
+if ($healthStrip.Count -ne 1) {
+    throw "The settings page must keep simulator, match, dataset, and popup health visible across workspaces."
+}
+$garageTab = @($tabs[0].Items | Where-Object { [string]$_.Header -eq "Garage" } | Select-Object -First 1)
+$garageUi = @(Get-UiDescendants $garageTab[0].Content)
+$garageGuidance = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.Border] -and $_.Name -eq "GarageGuidanceCard"
+    } | Select-Object -First 1)
+$popupPreview = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.Border] -and $_.Name -eq "PopupPreviewCard"
+    } | Select-Object -First 1)
+if ($garageGuidance.Count -ne 1 -or $popupPreview.Count -ne 1) {
+    throw "Garage must show current FIT/USE guidance beside an embedded popup preview."
 }
 $showPopupButton = @($ui | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Show popup"
@@ -187,10 +204,141 @@ if ($showPopupButton.Count -ne 1 -or $showPopupButton[0].IsEnabled) {
     throw "Show popup must remain disabled until live car data or a catalog preview is available."
 }
 $themeSelector = @($ui | Where-Object {
-        $_ -is [System.Windows.Controls.ComboBox] -and $_.Name -eq "PopupThemeSelector"
+        $_ -is [System.Windows.Controls.WrapPanel] -and $_.Name -eq "PopupThemeSelector"
     } | Select-Object -First 1)
-if ($themeSelector.Count -ne 1 -or $themeSelector[0].Items.Count -ne 7) {
-    throw "The popup settings page must expose auto plus all six packaged themes."
+if ($themeSelector.Count -ne 1 `
+    -or $themeSelector[0].Children.Count -ne 9 `
+    -or @($themeSelector[0].Children | Where-Object {
+            $_ -isnot [System.Windows.Controls.RadioButton]
+        }).Count -ne 0) {
+    throw "The popup settings page must expose auto plus all eight packaged themes as visual choices."
+}
+$savePopupSettings = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Changes saved"
+    } | Select-Object -First 1)
+if ($savePopupSettings.Count -ne 1 -or $savePopupSettings[0].IsEnabled) {
+    throw "Popup settings must begin in an explicit saved state."
+}
+$initialPreviewBackground = $popupPreview[0].Background.ToString()
+if ($initialPreviewBackground -ne "#F2050D14") {
+    throw "The embedded preview must use the production Modern card colour."
+}
+$sixtiesTheme = @($themeSelector[0].Children | Where-Object {
+        [string]$_.Tag -eq "1960s-roadbook"
+    } | Select-Object -First 1)
+if ($sixtiesTheme.Count -ne 1) {
+    throw "The visual theme rack is missing the 1960s Roadbook choice."
+}
+$twoThousandsTheme = @($themeSelector[0].Children | Where-Object {
+        [string]$_.Tag -eq "2000s-endurance-alloy"
+    } | Select-Object -First 1)
+$twentyTensTheme = @($themeSelector[0].Children | Where-Object {
+        [string]$_.Tag -eq "2010s-hybrid-vector"
+    } | Select-Object -First 1)
+if ($twoThousandsTheme.Count -ne 1 -or $twentyTensTheme.Count -ne 1) {
+    throw "The visual theme rack is missing the 2000s or 2010s era choice."
+}
+$sixtiesTheme[0].IsChecked = $true
+if (-not $savePopupSettings[0].IsEnabled `
+    -or $popupPreview[0].Background.ToString() -ne "#FFF3E7CF") {
+    throw "Theme selection must dirty settings and update the embedded preview immediately."
+}
+$twoThousandsTheme[0].IsChecked = $true
+if ($popupPreview[0].Background.ToString() -ne "#FF161A1E") {
+    throw "Endurance Alloy must use the production 2000s card colour."
+}
+$twentyTensTheme[0].IsChecked = $true
+if ($popupPreview[0].Background.ToString() -ne "#FFF1F2EF") {
+    throw "Hybrid Vector must use the production 2010s card colour."
+}
+$detailedPreview = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.Viewbox] -and $_.Name -eq "DetailedPopupPreview"
+    } | Select-Object -First 1)
+$compactPreview = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.Viewbox] -and $_.Name -eq "CompactPopupPreview"
+    } | Select-Object -First 1)
+if ($detailedPreview.Count -ne 1 -or $compactPreview.Count -ne 1 `
+    -or $detailedPreview[0].Child.Width -ne 720 `
+    -or $detailedPreview[0].Child.Height -ne 428 `
+    -or $compactPreview[0].Child.Width -ne 520 `
+    -or $compactPreview[0].Child.Height -ne 360) {
+    throw "Detailed and Compact previews must preserve their production native geometry."
+}
+$sizeSelector = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.ComboBox] -and $_.Name -eq "PopupSizeSelector"
+    } | Select-Object -First 1)
+if ($sizeSelector.Count -ne 1 -or $popupPreview[0].Width -ne 420 `
+    -or $compactPreview[0].Visibility -ne [System.Windows.Visibility]::Visible `
+    -or $detailedPreview[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
+    throw "The default compact choice must use the compact embedded preview shape."
+}
+$sizeSelector[0].SelectedIndex = 0
+if ($popupPreview[0].Width -ne 500 `
+    -or $detailedPreview[0].Visibility -ne [System.Windows.Visibility]::Visible `
+    -or $compactPreview[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
+    throw "Changing popup size must reshape the embedded preview immediately."
+}
+$browserTab = @($tabs[0].Items | Where-Object { [string]$_.Header -eq "Car browser" } | Select-Object -First 1)
+$browserUi = @(Get-UiDescendants $browserTab[0].Content)
+$catalogResults = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.ListBox] -and $_.Name -eq "CatalogResults"
+    } | Select-Object -First 1)
+$catalogFilters = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.ComboBox] `
+            -and [System.Windows.Automation.AutomationProperties]::GetName($_) -match "^(Simulator|Decade|Wheel|Shifter) filter$"
+    })
+$catalogSearch = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.TextBox] `
+            -and [System.Windows.Automation.AutomationProperties]::GetName($_) -eq "Search curated cars"
+    } | Select-Object -First 1)
+$catalogOverlay = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Show selected overlay"
+    } | Select-Object -First 1)
+$catalogGuidance = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.Border] -and $_.Name -eq "CatalogGuidanceCard"
+    } | Select-Object -First 1)
+$catalogWorkspace = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.Grid] -and $_.Name -eq "CatalogWorkspace"
+    } | Select-Object -First 1)
+$catalogRails = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.Border] `
+            -and $_.Name -match "^Catalog(Fit|Use)Rail$"
+    })
+$prefixedCatalogHeadings = @($browserUi | Where-Object {
+        $_ -is [System.Windows.Controls.TextBlock] `
+            -and ([string]$_.Text -match "^(FIT|USE)  ")
+    })
+if ($catalogResults.Count -ne 1 `
+    -or $catalogFilters.Count -ne 4 `
+    -or $catalogSearch.Count -ne 1 `
+    -or $catalogGuidance.Count -ne 1 `
+    -or $catalogWorkspace.Count -ne 1 `
+    -or $catalogWorkspace[0].Width -ne 1040 `
+    -or $catalogWorkspace[0].ColumnDefinitions[2].Width.Value -ne 702 `
+    -or $catalogRails.Count -ne 2 `
+    -or $prefixedCatalogHeadings.Count -ne 0 `
+    -or $catalogOverlay.Count -ne 1) {
+    throw "Car browser must provide search, four filters, catalog results, inline guidance, and an explicit overlay action."
+}
+$catalogBeforeSelection = $pluginType.GetProperty(
+    "IsPreviewActive",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic).GetValue($pluginInstance, $null)
+if ($catalogResults[0].Items.Count -gt 1) {
+    $catalogResults[0].SelectedIndex = 1
+}
+$catalogAfterSelection = $pluginType.GetProperty(
+    "IsPreviewActive",
+    [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic).GetValue($pluginInstance, $null)
+if ($catalogBeforeSelection -or $catalogAfterSelection) {
+    throw "Selecting catalog guidance must not replace the live car or activate a popup preview."
+}
+$systemTab = @($tabs[0].Items | Where-Object { [string]$_.Header -eq "System" } | Select-Object -First 1)
+$systemUi = @(Get-UiDescendants $systemTab[0].Content)
+$coverageStatus = @($systemUi | Where-Object {
+        $_ -is [System.Windows.Controls.TextBlock] -and $_.Name -eq "SupportedSimulatorsStatus"
+    } | Select-Object -First 1)
+if ($coverageStatus.Count -ne 1) {
+    throw "Low-frequency simulator coverage details must live in System rather than Garage."
 }
 $captureStartButton = @($ui | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Capture current car"
@@ -231,6 +379,29 @@ $guidedDrivePanel = @($ui | Where-Object {
 if ($guidedDrivePanel.Count -ne 1 `
     -or $guidedDrivePanel[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
     throw "The guided-drive controls must stay hidden until the simulator setup is confirmed."
+}
+$reviewPanel = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Border] -and $_.Name -eq "_reviewBorder"
+    } | Select-Object -First 1)
+$workflowButtons = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] `
+            -and $_.Name -match "^_workflowStep[1-4]$"
+    })
+$expectedWorkflow = @("1  Setup", "2  Guided drive", "3  Review findings", "4  Save and share")
+$actualWorkflow = @($workflowButtons | Sort-Object Name | ForEach-Object {
+        ([string]$_.Content).Substring(2)
+    })
+if ($reviewPanel.Count -ne 1 `
+    -or $reviewPanel[0].Visibility -ne [System.Windows.Visibility]::Collapsed `
+    -or $workflowButtons.Count -ne 4 `
+    -or (Compare-Object $expectedWorkflow $actualWorkflow -SyncWindow 0)) {
+    throw "Contribution must begin as Setup, Guided drive, Review findings, and Save and share with review progressively hidden."
+}
+$reviewSavedAnswers = @($savedDraftButtons | Where-Object {
+        $_.Content -eq "Review saved answers"
+    } | Select-Object -First 1)
+if ($reviewSavedAnswers.Count -ne 1) {
+    throw "Completed contribution sessions must let the driver reopen their saved answers."
 }
 
 # Registering a simulator is not finished until the plugin can read its build.

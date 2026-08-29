@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.21",
+  "dataset_version": "0.5.28",
   "released_at": "2026-08-28",
   "records": [
     "cars/alfa-romeo-156-super-touring.json",
@@ -225,6 +225,7 @@
     "cars/porsche-911-gt1-98.json",
     "cars/porsche-911-gt3-cup-3-8.json",
     "cars/porsche-911-gt3-cup-4-0.json",
+    "cars/porsche-911-gt3-cup-992.json",
     "cars/porsche-911-gt3-r.json",
     "cars/porsche-911-rsr-1974.json",
     "cars/porsche-911-rsr-gte.json",
@@ -273,9 +274,14 @@
     "cars/toyota-corolla-stock-car-2023.json",
     "cars/toyota-corolla-stock-car-2024.json",
     "cars/tvr-tuscan-t400r-gt2.json",
+    "cars/ultima-gtr-2000.json",
     "cars/uno-classic-b.json",
     "cars/volkswagen-constellation.json",
+    "cars/volkswagen-polo-200-tsi-2018-2020.json",
+    "cars/volkswagen-polo-gts-2020.json",
     "cars/volkswagen-polo-rx.json",
+    "cars/volkswagen-virtus-200-tsi-2018.json",
+    "cars/volkswagen-virtus-gts-2020.json",
     "cars/vulkan-truck.json"
   ]
 }

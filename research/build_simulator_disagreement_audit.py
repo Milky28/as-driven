@@ -14,7 +14,11 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from as_driven_db.site import _comparison_value, simulator_disagreements
+from as_driven_db.site import (
+    _comparison_value,
+    simulator_disagreements,
+    simulator_label,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,6 +89,57 @@ def finding_id(record_id: str, path: str) -> str:
     return f"{record_id}--{suffix.replace('_', '-')}"
 
 
+def sourced_rim_departures(record: dict[str, Any]) -> list[dict[str, Any]]:
+    """A photographed real rim versus an explicit simulator override.
+
+    Most findings compare two simulator implementations. Wheel shape has one
+    stricter rule: once a cockpit photograph establishes the authentic rim, a
+    later simulator observation may depart only as an explicit, audited
+    override. That remains a meaningful finding with a single simulator.
+    """
+    path = "/authentic_controls/steering/wheel_rim/shape"
+    baseline = resolve_pointer(record, path)
+    if baseline in {None, "unknown"}:
+        return []
+    claim = claim_for_path(record, path) or {}
+    if not any("cockpit-photo" in ref for ref in claim.get("source_refs") or []):
+        return []
+
+    values: list[dict[str, Any]] = []
+    departure_seen = False
+    for entry in record.get("simulators") or []:
+        observed = (
+            (entry.get("behavior", {}).get("wheel_rim_type") or {}).get(
+                "normalized"
+            )
+            or baseline
+        )
+        override = next(
+            (
+                item
+                for item in entry.get("overrides") or []
+                if item.get("path") == path
+            ),
+            None,
+        )
+        if override is not None:
+            observed = override.get("value")
+        if observed not in {None, "unknown"} and observed != baseline:
+            departure_seen = True
+        simulator_id = entry.get("simulator", "")
+        values.append(
+            {
+                "simulator_id": simulator_id,
+                "simulator": simulator_label(simulator_id),
+                "raw_value": observed,
+                "value": _comparison_value(path, observed),
+            }
+        )
+    if not departure_seen:
+        return []
+    return [{"path": path, "field": "Wheel rim", "values": values}]
+
+
 def build_audit(root: Path = ROOT) -> dict[str, Any]:
     data = root / "data" / "v1"
     index = read_json(data / "index.json")
@@ -95,12 +150,17 @@ def build_audit(root: Path = ROOT) -> dict[str, Any]:
     for relative in index["records"]:
         record = read_json(data / relative)
         entries = record.get("simulators") or []
-        if len(entries) < 2:
+        if not entries:
             continue
         entries_by_id = {entry["simulator"]: entry for entry in entries}
-        for disagreement in simulator_disagreements(
-            record["authentic_controls"], entries
-        ):
+        disagreements = simulator_disagreements(record["authentic_controls"], entries)
+        existing_paths = {item["path"] for item in disagreements}
+        disagreements.extend(
+            item
+            for item in sourced_rim_departures(record)
+            if item["path"] not in existing_paths
+        )
+        for disagreement in disagreements:
             path = disagreement["path"]
             baseline_value = resolve_pointer(record, path)
             claim = claim_for_path(record, path) or {}

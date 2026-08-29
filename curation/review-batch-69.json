@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.22",
+  "approved_at": "2026-08-28",
+  "records": [
+    {
+      "record_id": "ultima-gtr-2000",
+      "bundle": "build/review-cases/issue-39/staged.json",
+      "display_name": "Ultima GTR (2000)",
+      "class": "road-going supercar",
+      "manufacturer": "Ultima",
+      "model": "GTR",
+      "year": {
+        "from": 2000,
+        "to": 2000,
+        "label": "2000 Ultima GTR"
+      },
+      "real_world_identity_notes": "The observation is best matched to the base road-going 2000 Ultima GTR: a mid-engine, rear-wheel-drive two-seat coupe with a five-speed manual transmission. This is distinct from the separately named Ultima GTR Race, from the later GTR640 and GTR720 variants, from the open-top Can-Am derivative, and from the later Ultima Evolution.",
+      "real_world_source_refs": [
+        "c_and_d.2000-ultima-gtr",
+        "c_and_d.2000-ultima-gtr-cockpit-photo",
+        "autoexpress.ultima-gtr.1999-2015-guide",
+        "ultima.official-history",
+        "ams2.official-ultima-gtr-context",
+        "as-driven.repository.ultima-gtr-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The exact-year Car and Driver road test identifies a 2000 Ultima GTR and specifies a five-speed manual transmission, while its exact-year cockpit photograph shows the conventional road-car interior and floor-mounted manual lever. Auto Express independently lists the 2000 Ultima GTR specification and separates the later GTR640, GTR720, Can-Am, and Evolution variants. The checked-out curated dataset contains no existing Ultima record, so this case proposes a new record id.",
+      "identity_basis": "The exact-year Car and Driver road test identifies a 2000 Ultima GTR and specifies a five-speed manual transmission, while its exact-year cockpit photograph shows the conventional road-car interior and floor-mounted manual lever. Auto Express independently lists the 2000 Ultima GTR specification and separates the later GTR640, GTR720, Can-Am, and Evolution variants. The checked-out curated dataset contains no existing Ultima record, so this case proposes a new record id.",
+      "specification_basis": "The exact 2000 cockpit photograph visibly shows a continuous circular three-spoke rim, not fixed GT/Formula grips or a flattened conventional rim. The exact 2000 photograph shows a simple wheel without a readout on the rim, and the written cockpit description refers to separate plain analog gauges. The exact 2000 cockpit photograph clearly shows a continuous upper section of the conventional circular rim. Both exact-year road-car sources specify a five-speed manual transmission. The exact-year sources establish a manual transmission and the cockpit photograph visibly shows a floor-mounted manual lever. The observed road-car configuration is therefore proposed as H-pattern actuation, while the gate order itself remains unknown. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 1.6.9.91. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ams2.ultima-gtr.20260828t204157424z-a6d779db directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-ultima-gtr-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2000 Ultima GTR identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish wheel-rim shape: round; integrated wheel display: no; conventional rim open-top section: no; forward gears: 5; shift actuation: h pattern.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+        "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/39",
+      "live_source_notes": "Guided-verification observation ams2.ultima-gtr.20260828t204157424z-a6d779db by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "ultima-gtr",
+        "basis": "The exact-year Car and Driver road test identifies a 2000 Ultima GTR and specifies a five-speed manual transmission, while its exact-year cockpit photograph shows the conventional road-car interior and floor-mounted manual lever. Auto Express independently lists the 2000 Ultima GTR specification and separates the later GTR640, GTR720, Can-Am, and Evolution variants. The checked-out curated dataset contains no existing Ultima record, so this case proposes a new record id."
+      }
+    }
+  ]
+}

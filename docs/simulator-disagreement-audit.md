@@ -21,14 +21,14 @@ entering the audit.
 
 ## Current result
 
-Dataset 0.5.21 contains 28 field-level findings across 20 cars:
+Dataset 0.5.28 contains 29 field-level findings across 21 cars:
 
 - 8 affect pulling away;
 - 9 affect running-shift technique;
-- 6 affect hardware choice or configuration; and
+- 7 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Nine are **supported departures**, two remain **provisional departures**, and
+Nine are **supported departures**, three remain **provisional departures**, and
 16 have an **open authentic baseline**. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
@@ -212,7 +212,7 @@ therefore preserves the cross-sim conflict while refusing to declare a winner.
 
 ## Remaining provisional findings
 
-Two findings still have a real-car answer but fall short of the benchmark's
+Three findings still have a real-car answer but fall short of the benchmark's
 primary-evidence threshold:
 
 1. **Milano 55 GT1 / Prodrive Ferrari 550 GTS - manual blip.** The exact-car Evo
@@ -223,6 +223,12 @@ primary-evidence threshold:
    from the Type 915 family's synchronized construction. The exact 1974 RSR
    subtype and its driver procedure remain unestablished, so AC's required blip
    remains a provisional departure.
+3. **Volkswagen Virtus 1.0 200 TSI (2018) - wheel geometry.** A contemporary
+   full-resolution cockpit photograph shows the authentic Highline rim's
+   flattened lower section. AMS2 1.6.9.91 was observed with a round rim and is
+   retained as an explicit simulator override. The photograph is strong direct
+   visual evidence, but it is not manufacturer or homologation material, so the
+   departure remains provisional.
 
 ## What a published finding must say
 
