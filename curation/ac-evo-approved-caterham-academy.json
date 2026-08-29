@@ -18,7 +18,7 @@
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "running_shift_clutch": "required"
   },
   "confidence_notes": "Second simulator entry for a car curated from AMS2. Clutch required from rest, five H-pattern gears, clutchless running shifts after a lift and a blip, no automatic cut and no automatic blip, and a round rim with no display and no shift lights were directly observed, and every one agrees with the AMS2 drive. Assetto Corsa EVO models a 2023 car where the AMS2 observation was of a 2014 one; both are the sealed Ford Sigma five-speed Academy package.",
   "scope_notes": "Single exact identity staged from one guided-verification drive."

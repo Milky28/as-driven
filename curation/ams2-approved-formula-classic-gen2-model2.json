@@ -20,8 +20,7 @@
     "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Guided testing established six H-pattern gears, the standing-start clutch, and clutchless running shifts that engage immediately without a lift or blip and with no cut or blip from the car. The driver confirmed the behaviour after the drive, distinguishing it from the three classmates that require rev matching.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",

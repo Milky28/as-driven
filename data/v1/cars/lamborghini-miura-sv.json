@@ -266,7 +266,17 @@
   "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Synchromesh is the ordinary reading of a road-car manual of this period rather than a stated specification.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/downshift/clutch",
+        "basis": "Reviewed real-car research for this car concluded that its synchronised five-speed supports clutchless running shifts as ordinary technique. That reviewed conclusion is retained and departs from the archetype, which takes the clutch as authentic technique on a synchromesh gearbox."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/clutch",
+        "basis": "Reviewed real-car research for this car concluded that its synchronised five-speed supports clutchless running shifts as ordinary technique. That reviewed conclusion is retained and departs from the archetype, which takes the clutch as authentic technique on a synchromesh gearbox."
+      }
+    ]
   },
   "updated_at": "2026-08-26"
 }

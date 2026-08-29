@@ -13,7 +13,7 @@
     "shift_actuation": "h-pattern",
     "shift_pattern": "standard-h",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "not-required",
+    "running_shift_clutch": "required",
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",

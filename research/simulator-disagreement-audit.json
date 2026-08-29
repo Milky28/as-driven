@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.33",
+  "dataset_version": "0.5.34",
   "generated_at": "2026-08-29",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
@@ -10,18 +10,18 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 21,
-    "findings": 29,
+    "cars_with_disagreements": 22,
+    "findings": 33,
     "by_status": {
       "authentic-baseline-open": 17,
-      "provisional-departure": 3,
+      "provisional-departure": 7,
       "supported-departure": 9
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
       "hardware-choice": 7,
       "launch-technique": 9,
-      "running-shift-technique": 9
+      "running-shift-technique": 13
     }
   },
   "findings": [
@@ -188,6 +188,146 @@
         ],
         "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
         "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "caterham-academy--transmission-downshift-clutch",
+      "record_id": "caterham-academy",
+      "display_name": "Caterham Academy",
+      "class": "Caterham Academy",
+      "path": "/authentic_controls/transmission/downshift/clutch",
+      "field": "Clutch on a downshift",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "ams2.local-live-caterham-academy-controls.1.6.9.91",
+          "caterham.academy-championship",
+          "westermann.caterham-5-speed-gearbox-variants",
+          "wikipedia.caterham-academy"
+        ],
+        "primary_source_refs": [
+          "caterham.academy-championship"
+        ],
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-14",
+          "confidence": "medium",
+          "source_refs": [
+            "wikipedia.caterham-academy",
+            "caterham.academy-championship",
+            "westermann.caterham-5-speed-gearbox-variants",
+            "ams2.local-live-caterham-academy-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac-evo",
+          "label": "Assetto Corsa EVO",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "0.8.1",
+          "verified_at": "2026-08-21",
+          "confidence": "verified",
+          "source_refs": [
+            "caterham.academy-championship",
+            "westermann.caterham-5-speed-gearbox-variants",
+            "wikipedia.caterham-academy",
+            "ac-evo.local-live-caterham-academy-controls.0.8.1"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ac-evo"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for clutch on a downshift before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "caterham-academy--transmission-upshift-clutch",
+      "record_id": "caterham-academy",
+      "display_name": "Caterham Academy",
+      "class": "Caterham Academy",
+      "path": "/authentic_controls/transmission/upshift/clutch",
+      "field": "Clutch on an upshift",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "ams2.local-live-caterham-academy-controls.1.6.9.91",
+          "caterham.academy-championship",
+          "westermann.caterham-5-speed-gearbox-variants",
+          "wikipedia.caterham-academy"
+        ],
+        "primary_source_refs": [
+          "caterham.academy-championship"
+        ],
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-14",
+          "confidence": "medium",
+          "source_refs": [
+            "wikipedia.caterham-academy",
+            "caterham.academy-championship",
+            "westermann.caterham-5-speed-gearbox-variants",
+            "ams2.local-live-caterham-academy-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac-evo",
+          "label": "Assetto Corsa EVO",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "0.8.1",
+          "verified_at": "2026-08-21",
+          "confidence": "verified",
+          "source_refs": [
+            "caterham.academy-championship",
+            "westermann.caterham-5-speed-gearbox-variants",
+            "wikipedia.caterham-academy",
+            "ac-evo.local-live-caterham-academy-controls.0.8.1"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ac-evo"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for clutch on an upshift before publishing a benchmark verdict."
       }
     },
     {
@@ -1269,6 +1409,148 @@
       }
     },
     {
+      "finding_id": "porsche-911-rsr-1974--transmission-downshift-clutch",
+      "record_id": "porsche-911-rsr-1974",
+      "display_name": "Porsche 911 RSR 1974",
+      "class": "GT Classics",
+      "path": "/authentic_controls/transmission/downshift/clutch",
+      "field": "Clutch on a downshift",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "fia.porsche-911-carrera-rs.homologation-3053",
+          "paul-stephens.porsche-915-vs-g50",
+          "stuttcars.porsche-911-carrera-rsr-3-0"
+        ],
+        "primary_source_refs": [
+          "fia.porsche-911-carrera-rs.homologation-3053"
+        ],
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-15",
+          "confidence": "high",
+          "source_refs": [
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "medium",
+          "source_refs": [
+            "porsche.newsroom.rsr-model-history-2020",
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "paul-stephens.porsche-915-vs-g50",
+            "twinsparkracing.porsche-915-replaced-the-dogleg",
+            "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+            "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+            "ac-legends.gt-classic-3-release-notes-2020",
+            "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ac"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for clutch on a downshift before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "porsche-911-rsr-1974--transmission-upshift-clutch",
+      "record_id": "porsche-911-rsr-1974",
+      "display_name": "Porsche 911 RSR 1974",
+      "class": "GT Classics",
+      "path": "/authentic_controls/transmission/upshift/clutch",
+      "field": "Clutch on an upshift",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "fia.porsche-911-carrera-rs.homologation-3053",
+          "paul-stephens.porsche-915-vs-g50",
+          "stuttcars.porsche-911-carrera-rsr-3-0"
+        ],
+        "primary_source_refs": [
+          "fia.porsche-911-carrera-rs.homologation-3053"
+        ],
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-15",
+          "confidence": "high",
+          "source_refs": [
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "medium",
+          "source_refs": [
+            "porsche.newsroom.rsr-model-history-2020",
+            "stuttcars.porsche-911-carrera-rsr-3-0",
+            "paul-stephens.porsche-915-vs-g50",
+            "twinsparkracing.porsche-915-replaced-the-dogleg",
+            "assetto-corsa.porsche-pack-1.carrera-rsr-3-0",
+            "ac.local-live-porsche-911-carrera-rsr-3-0-controls.14923034",
+            "ac-legends.gt-classic-3-release-notes-2020",
+            "ac.local-live-acl-gtr-porsche-rsr-74-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ac"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for clutch on an upshift before publishing a benchmark verdict."
+      }
+    },
+    {
       "finding_id": "porsche-911-rsr-1974--transmission-shift-pattern",
       "record_id": "porsche-911-rsr-1974",
       "display_name": "Porsche 911 RSR 1974",
@@ -1354,16 +1636,12 @@
       "authentic_baseline": {
         "value": "optional",
         "display_value": "Optional",
-        "confidence": "medium",
+        "confidence": "high",
         "source_refs": [
-          "paul-stephens.porsche-915-vs-g50",
-          "stuttcars.porsche-911-carrera-rsr-3-0",
-          "fia.porsche-911-carrera-rs.homologation-3053"
+          "ams2.local-live-porsche-911-rsr-1974-controls.1.6.9.91"
         ],
-        "primary_source_refs": [
-          "fia.porsche-911-carrera-rs.homologation-3053"
-        ],
-        "basis": "The exact RSR used the RS-derived Type 915 and FIA form 3053 records synchronized forward gears, so a throttle blip eases rev matching rather than mechanically enabling engagement. No exact 1974 RSR driver manual states the racing procedure, so optional remains medium. AC refuses the shift without a blip, which is carried as a simulator override."
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
       },
       "simulator_views": [
         {

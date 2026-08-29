@@ -203,14 +203,6 @@
     "classification": "deviates",
     "deviations": [
       {
-        "path": "/authentic_controls/transmission/upshift/clutch",
-        "basis": "Porsche identifies the RSR's Type 915 as a standard manual and FIA records its mechanically operated clutch. The authentic technique therefore uses the clutch, although the fingerprinted package accepts a clutchless upshift after lifting."
-      },
-      {
-        "path": "/authentic_controls/transmission/downshift/clutch",
-        "basis": "Porsche explicitly describes the historical RSR downshift with the driver's left foot on the clutch; the package's clutchless acceptance is simulator-specific."
-      },
-      {
         "path": "/authentic_controls/transmission/downshift/manual_blip",
         "basis": "Porsche says nothing worked without double-declutching and describes the right foot operating brake and accelerator together, establishing required rather than merely optional rev matching."
       }

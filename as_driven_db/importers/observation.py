@@ -335,8 +335,16 @@ def import_observation(
         if clean
         else "unknown"
     )
-    up_clutch = _clutch_from_clutchless(tests.get("clutchless_upshift")) if clean else "unknown"
-    down_clutch = _clutch_from_clutchless(tests.get("clutchless_downshift")) if clean else "unknown"
+    # A drive sees whether this simulator accepts a shift without the clutch. It
+    # does not see how the real gearbox is built, and the two answers differ:
+    # clutchless shifting is authentic technique on a dog box and is not on a
+    # synchromesh road car. Deriving the authentic value from the drive told the
+    # driver of a Chevette and a 2002 turbo that no clutch was needed to change
+    # gear. The observation is kept below as a simulator override and the
+    # authentic value waits for construction research, which is the same one-way
+    # rule the blip and cut fields already follow.
+    up_clutch = "unknown"
+    down_clutch = "unknown"
     cut_state = _state(tests.get("automatic_cut"))
     blip_state = _state(tests.get("automatic_blip"))
     if simulator == "acc":
@@ -403,6 +411,32 @@ def import_observation(
         ],
     }
     simulator_overrides: list[dict[str, Any]] = []
+    for action, test_name in (
+        ("upshift", "clutchless_upshift"),
+        ("downshift", "clutchless_downshift"),
+    ):
+        observed = _clutch_from_clutchless(tests.get(test_name)) if clean else "unknown"
+        if observed == "unknown":
+            continue
+        simulator_overrides.append(
+            {
+                "path": f"/authentic_controls/transmission/{action}/clutch",
+                "value": observed,
+                "condition": (
+                    f"The guided observation {observation_id} recorded that simulator "
+                    f"version {game_version} "
+                    + ("accepted" if observed == "not-required" else "refused")
+                    + f" a clutchless {action}. This establishes simulator behavior, "
+                    "not the real car's gearbox construction or authentic clutch "
+                    "technique."
+                ),
+                "confidence": {
+                    "level": "verified",
+                    "basis": "The clutchless shift test was observed live.",
+                },
+                "source_refs": [source_id],
+            }
+        )
     if (clean
             and tests.get("coast_downshift") == "no"
             and tests.get("clutchless_downshift") == "yes"
@@ -537,10 +571,22 @@ def import_observation(
     # uses (see _validate_car_approval), so a filled-in promotion validates.
     approved_controls = derive_approved_controls(record)
     if "running_shift_clutch" not in approved_controls:
-        review_notes.append(
-            "Upshift and downshift clutch requirements differ, so the approval "
-            "omits running_shift_clutch. Confirm the clutch modeling before promotion."
-        )
+        if record["authentic_controls"]["transmission"]["upshift"]["clutch"] == (
+            record["authentic_controls"]["transmission"]["downshift"]["clutch"]
+        ):
+            # Equal but unsettled. A drive cannot establish the authentic clutch,
+            # so the approval omits it until construction research does.
+            review_notes.append(
+                "The drive does not establish the authentic running-shift clutch, so "
+                "the approval omits running_shift_clutch. Gearbox construction "
+                "research must settle it: clutchless shifting is authentic technique "
+                "on a dog box and is not on a synchromesh car."
+            )
+        else:
+            review_notes.append(
+                "Upshift and downshift clutch requirements differ, so the approval "
+                "omits running_shift_clutch. Confirm the clutch modeling before promotion."
+            )
 
     source = {
         "source_id": source_id,

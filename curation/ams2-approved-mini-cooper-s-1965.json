@@ -21,7 +21,7 @@
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "running_shift_clutch": "required"
   },
   "confidence_notes": "Four gears, an H-pattern standard gate, a clutch to pull away, and clutchless shifts in both directions were directly observed. The synchromesh construction and the optional downshift blip come from the registered specialist source, not from the drive.",
   "scope_notes": "Single exact identity staged from one guided-verification drive. Revised 2026-08-25 without a new drive: throttle lift from unknown to required, on the H-pattern gate with no automatic cut that this record already establishes, matching the registered archetype for this mechanism. No new observation was taken and no other approved value changed."

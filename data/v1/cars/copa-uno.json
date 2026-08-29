@@ -21,14 +21,14 @@
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "optional",
@@ -82,7 +82,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.copa-uno.20260814t192029139z-97984302 by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-copa-uno-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-copa-uno-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-14",
       "source_refs": [
@@ -125,10 +150,16 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift",
           "/simulators/0/behavior"
         ],
         "source_refs": [
@@ -137,6 +168,18 @@
         ],
         "confidence": "medium",
         "basis": "The registered history establishes the series and its Fiat Uno 1.6R base but says nothing about the gearbox. The five H-pattern gears come from the live drive, and synchromesh is the ordinary reading of a road-derived manual rather than a stated specification."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/downshift/clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-copa-uno-controls.1.6.9.91",
+          "blogdocarelli.copa-uno-1992"
+        ],
+        "confidence": "medium",
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
       }
     ]
   },

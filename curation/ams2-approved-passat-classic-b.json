@@ -21,7 +21,7 @@
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "running_shift_clutch": "required"
   },
   "confidence_notes": "Guided testing directly established the 5 H-pattern gears on a standard gate, the standing-start clutch, the clutchless running shift, and the absence of automatic cut and blip.",
   "scope_notes": "Single exact identity staged from one guided-verification drive."

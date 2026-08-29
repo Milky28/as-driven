@@ -87,7 +87,7 @@
         "downshift": {
           "automatic_blip": "no",
           "automatic_cut": "not-applicable",
-          "clutch": "not-required",
+          "clutch": "required",
           "manual_blip": "optional",
           "throttle_lift": "not-applicable"
         },
@@ -99,12 +99,12 @@
         "upshift": {
           "automatic_blip": "not-applicable",
           "automatic_cut": "no",
-          "clutch": "not-required",
+          "clutch": "required",
           "manual_blip": "not-applicable",
           "throttle_lift": "required"
         }
       },
-      "basis": "14 curated records share this exact block. It is separated from h-4-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-6-synchro-clutch-start-lift-up-blip-optional only by forward gears."
+      "basis": "14 curated records share this exact block. It is separated from h-4-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-6-synchro-clutch-start-lift-up-blip-optional only by forward gears. The running-shift clutch was corrected from not-required: a synchromesh gearbox is shifted with the clutch as authentic technique, and the earlier value came from guided drives recording what the simulator accepted."
     },
     {
       "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
@@ -113,7 +113,7 @@
         "downshift": {
           "automatic_blip": "no",
           "automatic_cut": "not-applicable",
-          "clutch": "not-required",
+          "clutch": "required",
           "manual_blip": "optional",
           "throttle_lift": "not-applicable"
         },
@@ -125,12 +125,12 @@
         "upshift": {
           "automatic_blip": "not-applicable",
           "automatic_cut": "no",
-          "clutch": "not-required",
+          "clutch": "required",
           "manual_blip": "not-applicable",
           "throttle_lift": "required"
         }
       },
-      "basis": "11 curated records share this exact block. It is separated from h-5-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-6-synchro-clutch-start-lift-up-blip-optional only by forward gears."
+      "basis": "11 curated records share this exact block. It is separated from h-5-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-6-synchro-clutch-start-lift-up-blip-optional only by forward gears. The running-shift clutch was corrected from not-required: a synchromesh gearbox is shifted with the clutch as authentic technique, and the earlier value came from guided drives recording what the simulator accepted."
     },
     {
       "archetype_id": "paddles-7-seq-clutch-start-flat-up-auto-blip",
@@ -373,7 +373,7 @@
         "downshift": {
           "automatic_blip": "no",
           "automatic_cut": "not-applicable",
-          "clutch": "not-required",
+          "clutch": "required",
           "manual_blip": "optional",
           "throttle_lift": "not-applicable"
         },
@@ -385,12 +385,12 @@
         "upshift": {
           "automatic_blip": "not-applicable",
           "automatic_cut": "no",
-          "clutch": "not-required",
+          "clutch": "required",
           "manual_blip": "not-applicable",
           "throttle_lift": "required"
         }
       },
-      "basis": "2 curated records share this exact block. It is separated from h-4-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-5-synchro-clutch-start-lift-up-blip-optional only by forward gears."
+      "basis": "2 curated records share this exact block. It is separated from h-4-synchro-clutch-start-lift-up-blip-optional only by forward gears; h-5-synchro-clutch-start-lift-up-blip-optional only by forward gears. The running-shift clutch was corrected from not-required: a synchromesh gearbox is shifted with the clutch as authentic technique, and the earlier value came from guided drives recording what the simulator accepted."
     },
     {
       "archetype_id": "paddles-6-dogbox-clutch-start-flat-up-auto-blip",
@@ -593,14 +593,14 @@
         "shift_pattern": "dogleg-h",
         "first_gear_position": "down-left",
         "upshift": {
-          "clutch": "not-required",
+          "clutch": "required",
           "throttle_lift": "required",
           "automatic_cut": "no",
           "manual_blip": "not-applicable",
           "automatic_blip": "not-applicable"
         },
         "downshift": {
-          "clutch": "not-required",
+          "clutch": "required",
           "throttle_lift": "not-applicable",
           "automatic_cut": "not-applicable",
           "manual_blip": "optional",
@@ -608,7 +608,7 @@
         },
         "standing_start_clutch": "required"
       },
-      "basis": "The first archetype with a dogleg gate, and the reason the id carries one where no other does: the gate is mechanism, and without it this would be indistinguishable from the standard-gate five-speed synchromesh archetype it otherwise resembles. Two curated records share this exact block, both Group A homologation specials built to race each other, both with their construction established from their own FIA form. The blip is optional because a synchromesh does not need one to engage, which is the same rule every other synchromesh record in the dataset follows."
+      "basis": "The first archetype with a dogleg gate, and the reason the id carries one where no other does: the gate is mechanism, and without it this would be indistinguishable from the standard-gate five-speed synchromesh archetype it otherwise resembles. Two curated records share this exact block, both Group A homologation specials built to race each other, both with their construction established from their own FIA form. The blip is optional because a synchromesh does not need one to engage, which is the same rule every other synchromesh record in the dataset follows. The running-shift clutch was corrected from not-required: a synchromesh gearbox is shifted with the clutch as authentic technique, and the earlier value came from guided drives recording what the simulator accepted."
     }
   ]
 }

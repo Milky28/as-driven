@@ -45,6 +45,44 @@ class ValidationTests(unittest.TestCase):
             "display names begin with the car name; year belongs in identity metadata or a suffix",
         )
 
+    def test_a_drive_alone_never_establishes_a_synchromesh_running_clutch(self) -> None:
+        """A clutchless shift the simulator accepts is not authentic technique.
+
+        The guided drive asks whether the simulator lets you change gear without
+        the clutch, and that answer was written into `authentic_controls` as a
+        real-car claim. On a dog box clutchless shifting is how the car is
+        driven; on a synchromesh car it is a trick that wears the synchros. 72
+        H-pattern records told the driver of a Chevette, a Fusca and a 2002
+        turbo that no clutch was needed to change gear.
+
+        A synchromesh record may still say `not-required`, but only if something
+        other than the drive supports it.
+        """
+        # The one record whose own reviewed research reached the opposite
+        # conclusion, in as many words: "supports clutchless running upshifts
+        # with a throttle lift as ordinary technique". That claim is retained
+        # rather than overruled, and named here so it stays a decision somebody
+        # made rather than a silent survivor of the correction.
+        reviewed_exceptions = {"lamborghini-miura-sv"}
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            if record["record_id"] in reviewed_exceptions:
+                continue
+            transmission = record["authentic_controls"]["transmission"]
+            if transmission.get("gearbox_type") != "synchromesh":
+                continue
+            for action in ("upshift", "downshift"):
+                if transmission[action]["clutch"] == "not-required":
+                    offenders.append(f"{record['record_id']} {action}")
+        self.assertEqual(
+            offenders,
+            [],
+            "a synchromesh gearbox is shifted with the clutch as authentic "
+            "technique; a drive showing the simulator accepts a clutchless shift "
+            "belongs in a simulator override, not in authentic_controls",
+        )
+
     def test_tracked_files_do_not_use_em_dashes(self) -> None:
         """Keep project copy on ordinary punctuation that is easy to type."""
         completed = subprocess.run(

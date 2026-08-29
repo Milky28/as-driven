@@ -19,7 +19,7 @@
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
     "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "running_shift_clutch": "required"
   },
   "confidence_notes": "The exact official Kunos data.acd was fingerprinted. Five H-pattern gears, clutch-required move-off, required lift, required manual blip, no automatic cut/blip, and a round rim without integrated display or shift lights were observed. The cockpit depicts a dogleg gate even though the real Type 915 gate is conventional H. Accepted running shifts are medium confidence because the clutch telemetry channel may include car-side intervention. Compatible implementation: The exact AC Legends v3.0 data.acd was fingerprinted. Five H-pattern gears, a dogleg cockpit, clutch-required move-off, required lift, required manual blip, no automatic cut/blip, and a round rim without integrated display or shift lights match the official Kunos implementation. Accepted running shifts are medium confidence because clutch telemetry may include car-side intervention.",
   "scope_notes": "One simulator entry covers multiple separately fingerprinted implementations whose effective controls and overrides were reviewed as identical.",

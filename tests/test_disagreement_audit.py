@@ -197,6 +197,14 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         }
         self.assertEqual(
             {
+                # The running-shift clutch correction made the authentic value
+                # `required` on synchromesh cars. These two carry a second
+                # simulator, so the departure is now visible as a disagreement
+                # rather than hidden inside a single drive-derived value.
+                "caterham-academy--transmission-downshift-clutch",
+                "caterham-academy--transmission-upshift-clutch",
+                "porsche-911-rsr-1974--transmission-downshift-clutch",
+                "porsche-911-rsr-1974--transmission-upshift-clutch",
                 "milano-gt55--transmission-downshift-manual-blip",
                 # The RSR's blip became a departure only once the authentic
                 # value stopped being unknown. It is optional at medium, derived
@@ -211,7 +219,9 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 "authentic-baseline-open": 17,
-                "provisional-departure": 3,
+                # 3 before the running-shift clutch correction added the four
+                # clutch findings named above.
+                "provisional-departure": 7,
                 "supported-departure": 9,
             },
             self.checked_in["summary"]["by_status"],

@@ -22,14 +22,14 @@
       "shift_pattern": "dogleg-h",
       "first_gear_position": "down-left",
       "upshift": {
-        "clutch": "not-required",
+        "clutch": "unknown",
         "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "not-required",
+        "clutch": "unknown",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "required",
@@ -96,7 +96,32 @@
         ],
         "steering_dor": 540
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-12",
       "source_refs": [
@@ -172,10 +197,22 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission",
           "/authentic_controls/steering/wheel_rim",
-          "/simulators/0/identities",
-          "/simulators/0/behavior"
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/simulators/0/behavior",
+          "/simulators/0/identities"
         ],
         "source_refs": [
           "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
@@ -203,7 +240,7 @@
           "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
         ],
         "confidence": "high",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
       }
     ]
   },

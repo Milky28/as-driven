@@ -335,8 +335,10 @@ class ReviewSubmissionTests(unittest.TestCase):
             )
             self.assertEqual(
                 [
+                    "/overrides/authentic_controls/transmission/downshift/clutch",
                     "/overrides/authentic_controls/transmission/downshift/"
-                    "manual_blip"
+                    "manual_blip",
+                    "/overrides/authentic_controls/transmission/upshift/clutch",
                 ],
                 correction["corrected_behavior_paths"],
             )

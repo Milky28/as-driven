@@ -120,9 +120,27 @@ class ImportObservationTests(unittest.TestCase):
         self.assertEqual(transmission["gearbox_type"], "unknown")
         self.assertEqual(transmission["shift_pattern"], "sequential")
         self.assertEqual(transmission["standing_start_clutch"], "not-required")
-        self.assertEqual(transmission["upshift"]["clutch"], "not-required")
-        self.assertEqual(transmission["downshift"]["clutch"], "not-required")
+        # The drive sees whether this simulator accepts a clutchless shift. It
+        # cannot see how the real gearbox is built, and the two answers differ:
+        # clutchless shifting is authentic on a dog box and is not on a
+        # synchromesh road car. Deriving the authentic value from the drive told
+        # 72 H-pattern records that no clutch was needed to change gear.
+        self.assertEqual(transmission["upshift"]["clutch"], "unknown")
+        self.assertEqual(transmission["downshift"]["clutch"], "unknown")
         self.assertEqual(transmission["downshift"]["manual_blip"], "not-required")
+
+        clutch_overrides = {
+            override["path"]: override["value"]
+            for override in record["simulators"][0]["overrides"]
+            if override["path"].endswith("/clutch")
+        }
+        self.assertEqual(
+            clutch_overrides,
+            {
+                "/authentic_controls/transmission/upshift/clutch": "not-required",
+                "/authentic_controls/transmission/downshift/clutch": "not-required",
+            },
+        )
 
         identities = record["simulators"][0]["identities"]
         self.assertIn(
@@ -165,7 +183,10 @@ class ImportObservationTests(unittest.TestCase):
         )
         self.assertEqual(errors, [])
         self.assertEqual(approval["approved_controls"]["automatic_cut"], "yes")
-        self.assertEqual(approval["approved_controls"]["running_shift_clutch"], "not-required")
+        # An approval states what was approved. The drive does not establish the
+        # authentic running-shift clutch, so the field is omitted rather than
+        # approved as a value nobody reviewed.
+        self.assertNotIn("running_shift_clutch", approval["approved_controls"])
 
     def test_unknown_assists_degrade_clutch_fields(self) -> None:
         observation = _clean_observation()
@@ -220,10 +241,23 @@ class ImportObservationTests(unittest.TestCase):
         transmission = bundle["record"]["authentic_controls"]["transmission"]
         approval = bundle["approval"]
 
-        self.assertEqual(transmission["upshift"]["clutch"], "not-required")
-        self.assertEqual(transmission["downshift"]["clutch"], "required")
-        # validate cannot summarize differing clutch use, so the field is omitted
-        # rather than guessed; the schema allows that.
+        # Neither authentic value comes from the drive. What diverged is the
+        # simulator's behavior, and that divergence is kept in the overrides.
+        self.assertEqual(transmission["upshift"]["clutch"], "unknown")
+        self.assertEqual(transmission["downshift"]["clutch"], "unknown")
+        self.assertEqual(
+            {
+                override["path"]: override["value"]
+                for override in bundle["record"]["simulators"][0]["overrides"]
+                if override["path"].endswith("/clutch")
+            },
+            {
+                "/authentic_controls/transmission/upshift/clutch": "not-required",
+                "/authentic_controls/transmission/downshift/clutch": "required",
+            },
+        )
+        # validate cannot summarize an unestablished clutch, so the field is
+        # omitted rather than guessed; the schema allows that.
         self.assertNotIn("running_shift_clutch", approval["approved_controls"])
         self.assertTrue(
             any("running_shift_clutch" in note for note in bundle["review_notes"])
@@ -254,13 +288,11 @@ class ImportObservationTests(unittest.TestCase):
             "unknown",
             record["authentic_controls"]["transmission"]["downshift"]["manual_blip"],
         )
-        self.assertEqual(
-            [
-                {
-                    "path": "/authentic_controls/transmission/downshift/manual_blip",
-                    "value": "required",
-                }
-            ],
+        self.assertIn(
+            {
+                "path": "/authentic_controls/transmission/downshift/manual_blip",
+                "value": "required",
+            },
             [
                 {"path": override["path"], "value": override["value"]}
                 for override in record["simulators"][0]["overrides"]

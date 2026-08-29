@@ -20,14 +20,14 @@
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "optional",
@@ -82,7 +82,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.mitsubishi-lancer-r.20260816t041854279z-f97ce43e by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-16",
       "source_refs": [
@@ -127,10 +152,16 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift",
           "/simulators/0/behavior"
         ],
         "source_refs": [
@@ -140,6 +171,19 @@
         ],
         "confidence": "medium",
         "basis": "The registered sources establish the Lancer Cup and its R car, prepared from the Evolution X, but neither states the R's gearbox. The five H-pattern gears come from the live drive, and synchromesh is the ordinary reading of a road-derived manual rather than a stated specification."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/downshift/clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-mitsubishi-lancer-r-controls.1.6.9.91",
+          "linkezine.mitsubishi-lancer-cup",
+          "motorshow.lancer-cup"
+        ],
+        "confidence": "medium",
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
       }
     ]
   },

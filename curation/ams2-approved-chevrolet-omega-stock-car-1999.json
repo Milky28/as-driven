@@ -20,8 +20,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Controls were directly observed with assists disabled. The identity and engine are sourced, but no reviewed source documents the gearbox, so the transmission is recorded at medium confidence.",
   "scope_notes": "Single exact identity from one guided-verification drive."

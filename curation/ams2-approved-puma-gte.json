@@ -20,8 +20,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the four-speed manual gearbox is supported by a registered source, while its internal construction stays unknown.",
   "scope_notes": "Single exact identity from one guided-verification drive. AMS2 classes this car under Copa Classic B rather than any GTE category."

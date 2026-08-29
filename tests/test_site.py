@@ -253,7 +253,11 @@ class SiteTests(unittest.TestCase):
             for simulator in car["simulators"]
             if not simulator["differences"]
         ]
-        self.assertGreater(len(quiet), 200)
+        # Was 200 until the running-shift clutch correction. 71 AMS2 entries
+        # gained a recorded departure at once: their real car is shifted with the
+        # clutch and the simulator accepts the shift without it. The guard is
+        # that a large body of entries still says nothing, not the exact count.
+        self.assertGreater(len(quiet), 150)
 
     def test_every_reviewed_simulator_is_a_selectable_linked_view(self) -> None:
         payload = collect(ROOT)

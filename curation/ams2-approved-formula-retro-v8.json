@@ -20,8 +20,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Guided testing directly established the gear count, the standing-start clutch, the clutchless running shifts, and the automatic cut and blip state.",
   "scope_notes": "Single exact identity staged from one guided-verification drive."

@@ -181,7 +181,7 @@ approval are required before release. See `PRIVACY.md` and
 
 - Branch: `codex/stabilization`.
 - Client: 0.20.2.
-- Dataset: 0.5.33 with 279 curated records.
+- Dataset: 0.5.34 with 279 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the certified pair is what the early
@@ -226,6 +226,22 @@ approval are required before release. See `PRIVACY.md` and
   deviating to matching. This runs one way only: a mechanism settles the
   technique, and the technique never settles the mechanism. Nothing was derived
   over an `unknown` construction, which is why 53 blips remain open.
+- **The running-shift clutch was never a real-car fact until 0.5.34.** The guided
+  drive asks whether the simulator accepts a shift without the clutch, and the
+  importer wrote that answer straight into `authentic_controls`. 72 H-pattern
+  records therefore told the driver no clutch was needed to change gear while
+  their own `standing_start_clutch: required` said it was needed to pull away -
+  a Chevette, a Copa Fusca and a 2002 turbo among them. Construction settles it:
+  35 synchromesh records became `required`, 37 with an unestablished gearbox
+  became `unknown`, and 10 dog boxes were already right because clutchless
+  shifting is their authentic technique. The observed behavior is kept as a
+  simulator override on each record. The 1973 Carrera RSR had reached the same
+  conclusion through ordinary research and was deviating from its archetype
+  because of it; all four synchromesh archetypes carried the same error, inherited
+  from the records they were derived from. `lamborghini-miura-sv` is the one
+  record whose own reviewed research says the opposite, so it keeps
+  `not-required` as a declared deviation and is named in the test. See
+  `docs/data-model.md`.
 - **The gearbox construction research is closed.** `gearbox_type` is open in 37
   records: 22 are retired as cars a simulator invented, 5 are Copa Truck records
   a regulation frees, and the remaining 10 have each been searched and documented

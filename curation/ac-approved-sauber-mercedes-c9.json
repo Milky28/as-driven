@@ -18,8 +18,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Five H-pattern gears, clutch-required move-off, required lift, required manual blip, no automatic cut or blip, and a round closed rim without display or shift lights were directly observed. AC's drive did not establish the gate, and no reviewed source establishes gearbox construction, so those gaps remain explicit.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",

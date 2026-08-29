@@ -20,14 +20,14 @@
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
-        "clutch": "not-required",
+        "clutch": "unknown",
         "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "not-required",
+        "clutch": "unknown",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "unknown",
@@ -80,7 +80,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.vulkan-truck.20260814t195408740z-abe0c4aa by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-vulkan-truck-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-vulkan-truck-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-14",
       "source_refs": [
@@ -127,17 +152,23 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift",
           "/simulators/0/behavior"
         ],
         "source_refs": [
           "ams2.local-live-vulkan-truck-controls.1.6.9.91"
         ],
         "confidence": "medium",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
       }
     ]
   },
@@ -147,12 +178,20 @@
     "classification": "deviates",
     "deviations": [
       {
+        "path": "/authentic_controls/transmission/downshift/clutch",
+        "basis": "Gearbox construction is not established for this car, so the running-shift clutch stays unknown rather than inheriting the archetype's synchromesh technique."
+      },
+      {
         "path": "/authentic_controls/transmission/downshift/manual_blip",
         "basis": "Whether the driver must blip on downshifts is not established. A guided drive settles what the simulator requires; where the real car differs, that difference is recorded as an override rather than changing this value."
       },
       {
         "path": "/authentic_controls/transmission/gearbox_type",
         "basis": "The gearbox type is not established, and the series is the reason. Article 15 of the Copa Truck technical regulations leaves the gearbox free for all makes, so trucks in the same field may carry different construction and there is no single value to curate. This is a settled answer rather than an outstanding one: no further reading of the regulations will close it."
+      },
+      {
+        "path": "/authentic_controls/transmission/upshift/clutch",
+        "basis": "Gearbox construction is not established for this car, so the running-shift clutch stays unknown rather than inheriting the archetype's synchromesh technique."
       }
     ]
   },

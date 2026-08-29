@@ -13,7 +13,6 @@
     "shift_actuation": "h-pattern",
     "shift_pattern": "dogleg-h",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "unknown",
     "throttle_lift": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",

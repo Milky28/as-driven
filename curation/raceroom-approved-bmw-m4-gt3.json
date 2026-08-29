@@ -17,7 +17,8 @@
     "wheel_rim_shape": "gt-formula",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "not-applicable"
+    "wheel_open_top": "not-applicable",
+    "running_shift_clutch": "not-required"
   },
   "confidence_notes": "The exact 2022 customer-racing debut identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
   "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources. Corrected 2026-08-26: this approval was generated from the staged proposal rather than the record the entry merged into, so it read unknown where the record carries a value. standing_start_clutch is not-required, each of which this drive observed directly. Retracted 2026-08-26: the automatic blip is no longer approved from this drive. RaceRoom's throttle channel reads 24% at rest, so the spike behind it is not attributable to the car. The record's real-car value is unchanged and rests on the AMS2 and ACC entries.",

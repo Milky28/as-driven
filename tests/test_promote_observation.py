@@ -1231,9 +1231,17 @@ class PromoteObservationTests(unittest.TestCase):
                 "classification": "deviates",
                 "deviations": [
                     {
+                        "path": "/authentic_controls/transmission/downshift/clutch",
+                        "basis": "The drive does not establish the authentic clutch.",
+                    },
+                    {
+                        "path": "/authentic_controls/transmission/upshift/clutch",
+                        "basis": "The drive does not establish the authentic clutch.",
+                    },
+                    {
                         "path": "/authentic_controls/transmission/upshift/throttle_lift",
                         "basis": "The fixture leaves the lift requirement unknown.",
-                    }
+                    },
                 ],
             }
             self._promote(temp, self._manifest(entry))

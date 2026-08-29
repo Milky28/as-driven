@@ -68,7 +68,7 @@ default, so no request is possible until you configure it. See
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.33 contains 279 reviewed car records.
+Dataset 0.5.34 contains 279 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |

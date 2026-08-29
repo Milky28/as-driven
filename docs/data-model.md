@@ -117,6 +117,36 @@ The model separates `manual_blip` from `automatic_blip`. “No blip required” 
 not automatically evidence of an electronic auto-blip; a gearbox may instead
 wait for an acceptable engine speed.
 
+### Construction and the running-shift clutch
+
+`upshift.clutch` and `downshift.clutch` describe the technique the driver should
+use for a shift already under way, not what the gearbox will physically tolerate.
+Construction settles it, the same one way as the blip below:
+
+- `synchromesh` takes `required` - the clutch is how the car is shifted, and a
+  clutchless change is a trick that wears the synchros;
+- `dogbox` takes `not-required` - clutchless shifting is the authentic technique;
+- an unestablished `gearbox_type` leaves the clutch `unknown`.
+
+**A guided drive can never establish this field.** The drive asks whether the
+simulator accepts a shift without the clutch, and every simulator accepts one on
+a synchromesh car because the real gearbox tolerates it too. Deriving the
+authentic value from that answer told 72 H-pattern records that no clutch was
+needed to change gear, a Chevette and a 2002 turbo among them, while their own
+`standing_start_clutch: required` said the clutch was needed to pull away. The
+drive's answer belongs in a simulator override; the authentic value waits for
+construction research.
+
+The 1973 Carrera RSR reached this independently through ordinary research, and
+its declared deviation states it plainly: Porsche identifies a standard manual
+with a mechanically operated clutch, so the authentic technique uses the clutch
+"although the fingerprinted package accepts a clutchless upshift after lifting".
+
+One record departs. `lamborghini-miura-sv` carries a reviewed research claim that
+its synchronised five-speed supports clutchless running shifts as ordinary
+technique. That conclusion is retained rather than overruled, declared as an
+archetype deviation, and named in the test that enforces the rule.
+
 ### Construction and the downshift blip
 
 A synchromesh matches the shaft speeds itself, so a blip on the way down eases

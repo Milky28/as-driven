@@ -20,8 +20,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "Controls were directly observed with assists disabled; the real-world five-speed manual transmission is supported by a registered source, while gearbox construction stays unknown.",
   "scope_notes": "Single exact identity from one guided-verification drive. 'Porsche 962C - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested. Revised 2026-08-25 without a new drive: throttle lift from unknown to required, on the H-pattern gate with no automatic cut that this record already establishes, matching the registered archetype for this mechanism. No new observation was taken and no other approved value changed.",

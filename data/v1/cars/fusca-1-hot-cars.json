@@ -20,14 +20,14 @@
       "shift_actuation": "h-pattern",
       "shift_pattern": "standard-h",
       "upshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "not-required",
+        "clutch": "required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "optional",
@@ -80,7 +80,32 @@
           "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.fusca-1-hot-cars.20260816t033132824z-0234e5cd by Jason Kinslow."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless upshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-fusca-1-hot-cars-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "not-required",
+          "condition": "The guided drive recorded that AMS2 accepted a clutchless downshift. That is simulator behavior; it does not establish the real car's authentic clutch technique.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-fusca-1-hot-cars-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-16",
       "source_refs": [
@@ -126,17 +151,36 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift",
           "/simulators/0/behavior"
         ],
         "source_refs": [
           "ams2.local-live-fusca-1-hot-cars-controls.1.6.9.91"
         ],
         "confidence": "high",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+        "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/downshift/clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-fusca-1-hot-cars-controls.1.6.9.91",
+          "ams2wiki.hot-cars",
+          "ratwell.vw-transaxle"
+        ],
+        "confidence": "medium",
+        "basis": "Derived from the established synchromesh construction: a synchromesh gearbox is shifted with the clutch as authentic technique, and a clutchless shift is a trick the simulator allows rather than how the car was driven."
       }
     ]
   },
