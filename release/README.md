@@ -71,3 +71,32 @@ major, and dataset version before making changes. It refuses downgrades unless
 the previous directory if post-install validation fails, and writes a rollback
 backup under the user's temporary directory. If SimHub is running, use the
 plugin's **Refresh database** action after installation.
+
+## The update manifest
+
+`publish-github-prerelease.ps1` writes `as-driven-latest.json` beside the release
+artifacts and attaches it, containing exactly three fields:
+
+```json
+{
+  "dataset_version": "0.5.33",
+  "plugin_version": "0.20.0",
+  "release_url": "https://github.com/<owner>/<repo>/releases/tag/v0.20.0"
+}
+```
+
+This is what the plugin's manual update check reads, and it is generated from the
+versions the release is publishing rather than written by hand, because the check
+finds its fields by name and a hand-written file gets one of them wrong exactly
+once. The publisher reads it back with the same patterns
+`AsDriven.Plugin.UpdateCheck.ReadField` uses and refuses to publish if any field
+is missing or disagrees with the release.
+
+**Serve it from a stable https URL.** The per-tag asset URL changes every release,
+so a check pointed at one would read the same old versions forever. The plugin
+refuses anything that is not https, and the endpoint is blank in a fresh install,
+so nothing is contacted until somebody sets it.
+
+The manifest carries three fields and nothing else on purpose. The check compares
+two versions and shows a link; anything more would be a payload nobody reads and
+a promise somebody has to keep.
