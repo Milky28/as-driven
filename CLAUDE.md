@@ -211,7 +211,7 @@ approval are required before release. See `PRIVACY.md` and
   archetype already held the value the record was missing. 26 records moved from
   deviating to matching. This runs one way only: a mechanism settles the
   technique, and the technique never settles the mechanism. Nothing was derived
-  over an `unknown` construction, which is why 47 blips remain open.
+  over an `unknown` construction, which is why 53 blips remain open.
 - **The gearbox construction research is closed.** `gearbox_type` is open in 37
   records: 22 are retired as cars a simulator invented, 5 are Copa Truck records
   a regulation frees, and the remaining 10 have each been searched and documented
@@ -221,17 +221,19 @@ approval are required before release. See `PRIVACY.md` and
   constructor or gearbox-specialist documentation. Reopen a record only when such
   a source appears, not by re-running the searches already recorded in
   `docs/gearbox-construction-research.md`.
-- **Eighty-six records still carry an automatic blip measured before the
-  measurement was corrected.** Until 2026-08-17 the guided drive read the blip
-  from the highest throttle seen since the attempt began, so throttle the driver
-  was still carrying before the lift counted as the car blipping. The fault could
-  only invent a blip, never hide one, so every `no` is sound and only `yes` is
-  exposed, and a false `yes` also derives `manual_blip: not-required` - the card
-  then tells a driver no blip is needed on a car that needs one. The fourteen
-  stick and dog gearboxes were re-driven: seven were wrong. The eighty-six that
-  remain are paddle cars where a blip is expected, and each clears when that car
-  is next driven. Do not re-drive them as a batch. See
-  `research/auto-blip-premeasurement.json`.
+- **Some records still carry an automatic blip measured before the measurement
+  was corrected**, and `research/auto-blip-premeasurement.json` holds the list:
+  its `records` array is what remains and its `cleared` array is what has been
+  re-driven. Read the counts there rather than here, because this bullet has
+  twice been left behind by cars being cleared. Until 2026-08-17 the guided drive
+  read the blip from the highest throttle seen since the attempt began, so
+  throttle the driver was still carrying before the lift counted as the car
+  blipping. The fault could only invent a blip, never hide one, so every `no` is
+  sound and only `yes` is exposed, and a false `yes` also derives
+  `manual_blip: not-required` - the card then tells a driver no blip is needed on
+  a car that needs one. The fourteen stick and dog gearboxes were re-driven and
+  seven were wrong; what remains is paddle cars where a blip is expected, and
+  each clears when that car is next driven. Do not re-drive them as a batch.
 - A drive-derived `downshift.manual_blip: required` over an unknown construction
   is unsupported rather than established. Every time the construction was later
   established for a car in that position - both Formula Vee records and the
