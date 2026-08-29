@@ -69,26 +69,77 @@
         "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "d-shaped",
+          "normalized": "round",
           "integrated_display": "no",
-          "source_label": "live-cockpit-d-shaped-no-display"
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Live-tested in AMS2 1.6.9.91 with Auto Clutch disabled.",
-          "Standing-start clutch, six-speed sequential stick, automatic cut, no automatic blip, and the D-shaped no-display rim were directly observed."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 by Jason Kinslow.",
+          "Correction superseding ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91: Repeat guided drive ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/normalized from 'd-shaped' to 'round'; /behavior/wheel_rim_type/open_top from {'absent': True} to 'no'; /behavior/wheel_rim_type/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/open_top from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/shape from {'absent': True} to 'round'; /overrides/authentic_controls/steering/wheel_rim/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'not-required'."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
-      "verified_at": "2026-08-10",
+      "verified_at": "2026-08-29",
       "source_refs": [
         "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
         "raceart.gillet-vertigo",
-        "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91"
+        "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91.correction-5812ce06"
       ],
       "confidence": {
         "level": "verified",
-        "basis": "Exact simulator identity and behavior were directly tested; the specialist chassis dossier independently supports six-speed sequential hardware. Manual blipping is the driver-supplied rev-matching technique for the verified non-auto-blip behavior; exact historical chassis mapping remains qualified."
+        "basis": "The exact AMS2 identity already belongs to curated record gillet-vertigo-streiff; ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 is reviewed only as new simulator implementation evidence."
       }
     }
   ],
@@ -96,8 +147,7 @@
     "claims": [
       {
         "paths": [
-          "/identity",
-          "/simulators/0/identities"
+          "/identity"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
@@ -125,7 +175,6 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/simulators/0/behavior",
           "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
@@ -133,6 +182,27 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish clutch-free sequential downshifts with no automatic blip; manual throttle blipping is therefore the required authentic driver-supplied rev-matching technique."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "raceart.gillet-vertigo",
+          "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91.correction-5812ce06"
+        ],
+        "confidence": "verified",
+        "basis": "Official release plus exact live CarModel and GTR_04 class observation."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91.correction-5812ce06"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -140,6 +210,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-08-28",
   "driver_summary": "Tractive six-speed sequential, from a specialist dossier on the surviving FIA GT chassis. The car cuts the upshift; blip every downshift yourself. Which year's specification AMS2 models is qualified rather than settled."
 }

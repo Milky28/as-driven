@@ -135,7 +135,13 @@ def promote_review_case(
         raise ResearchHandoffError(
             f"issue #{issue_number} is {case.get('state')!r}, not 'manifest-review'"
         )
-    if case.get("research", {}).get("status") != "complete":
+    research = case.get("research") or {}
+    direct_comparison = (
+        case.get("classification") == "curated-identity-comparison"
+        and research.get("required") is False
+        and research.get("status") == "not-required"
+    )
+    if research.get("status") != "complete" and not direct_comparison:
         raise ResearchHandoffError(f"issue #{issue_number} has no complete research result")
     proposal_state = case.get("review_proposal", {})
     if proposal_state.get("status") != "ready" or proposal_state.get("dry_run") != "passed":

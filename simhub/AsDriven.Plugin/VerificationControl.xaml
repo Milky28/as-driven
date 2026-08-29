@@ -46,6 +46,42 @@
       <Setter Property="Opacity" Value="0.76" />
       <Setter Property="Margin" Value="0,-6,0,10" />
     </Style>
+    <Style x:Key="WorkflowStep" TargetType="Button">
+      <!-- SimHub replaces the normal disabled-button chrome with a pale fill.
+           These steps manage availability through hit testing, so own the
+           complete template and keep future labels readable on the dark card. -->
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Padding" Value="0,3" />
+      <Setter Property="Margin" Value="0,0,0,6" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="StepSurface" Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3" Padding="{TemplateBinding Padding}">
+              <TextBlock Text="{TemplateBinding Content}"
+                         Foreground="{TemplateBinding Foreground}"
+                         FontWeight="{TemplateBinding FontWeight}"
+                         VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="StepSurface" Property="Background" Value="#1832BEEB" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="StepSurface" Property="BorderBrush" Value="#B032BEEB" />
+                <Setter TargetName="StepSurface" Property="BorderThickness" Value="1" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
   </Border.Resources>
   <StackPanel>
     <TextBlock Text="Capture the live car, confirm simulator assists, follow the in-sim prompts, then review and save."
@@ -81,13 +117,13 @@
           <TextBlock Text="Test session" Style="{StaticResource Heading}" />
           <StackPanel Margin="0,0,0,10">
             <Button x:Name="_workflowStep1" Content="● 1  Setup" Click="SetupStageClicked"
-                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+                    Style="{StaticResource WorkflowStep}" />
             <Button x:Name="_workflowStep2" Content="○ 2  Guided drive" Click="DriveStageClicked"
-                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+                    Style="{StaticResource WorkflowStep}" />
             <Button x:Name="_workflowStep3" Content="○ 3  Review findings" Click="ReviewStageClicked"
-                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+                    Style="{StaticResource WorkflowStep}" />
             <Button x:Name="_workflowStep4" Content="○ 4  Save and share" Click="ShareStageClicked"
-                    HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0" Padding="0,3" />
+                    Style="{StaticResource WorkflowStep}" />
           </StackPanel>
 
           <TextBlock Text="Simulator test setup" Style="{StaticResource Heading}" />

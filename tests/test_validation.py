@@ -32,7 +32,7 @@ class ValidationTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", workflow)
 
     def test_display_names_do_not_sort_the_catalog_by_year(self):
-        leading_year = re.compile(r"^(?:19|20)\d{2}\s")
+        leading_year = re.compile(r"^(?:19|20)\d{2}(?:-(?:19|20)\d{2})?\s")
         offenders = []
         for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
             record = json.loads(record_path.read_text(encoding="utf-8"))

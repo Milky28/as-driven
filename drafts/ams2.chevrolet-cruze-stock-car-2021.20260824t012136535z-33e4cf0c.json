@@ -1,0 +1,48 @@
+{
+  "$schema": "urn:as-driven:schema:v1:verification-observation",
+  "schema_version": "1.0.0",
+  "observation_id": "ams2.chevrolet-cruze-stock-car-2021.20260824t012136535z-33e4cf0c",
+  "simulator": "ams2",
+  "game_version": "1.6.9.91",
+  "observed_at": "2026-08-24T01:21:36.5352637Z",
+  "observer": "Jason Kinslow",
+  "identity": {
+    "telemetry_name": "Chevrolet Cruze Stock Car 2021",
+    "telemetry_class": "StockCarV8_2021",
+    "internal_id": "Chevrolet Cruze Stock Car 2021"
+  },
+  "assists": {
+    "automatic_clutch": "disabled",
+    "automatic_shifting": "disabled",
+    "automatic_throttle_blip": "unavailable"
+  },
+  "tests": {
+    "move_off_without_physical_clutch": "no",
+    "forward_gears": 6,
+    "direct_gear_selection_behavior": "not-applicable",
+    "clutchless_upshift": "yes",
+    "automatic_cut": "yes",
+    "clutchless_downshift": "yes",
+    "automatic_blip": "yes",
+    "full_throttle_upshift": "yes",
+    "coast_downshift": "yes",
+    "automatic_cut_method": "Full-throttle clutchless upshift accepted. A shift-local torque interruption was detected while throttle demand stayed high.",
+    "automatic_blip_method": "Clutchless downshift accepted with no pedal input. A throttle spike was detected."
+  },
+  "cockpit": {
+    "visible_shift_actuators": [
+      "paddles"
+    ],
+    "primary_shift_actuation": "sequential-paddles",
+    "wheel_rim": {
+      "shape": "gt-formula",
+      "integrated_display": "yes",
+      "shift_lights": "yes",
+      "open_top": "no"
+    },
+    "shift_pattern": "sequential"
+  },
+  "review_status": "draft",
+  "client_version": "SimHub 9.12.1; As Driven 0.19.0",
+  "dataset_version": "0.4.20"
+}

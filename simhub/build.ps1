@@ -397,6 +397,15 @@ if ($reviewPanel.Count -ne 1 `
     -or (Compare-Object $expectedWorkflow $actualWorkflow -SyncWindow 0)) {
     throw "Contribution must begin as Setup, Guided drive, Review findings, and Save and share with review progressively hidden."
 }
+$futureWorkflowButtons = @($workflowButtons | Where-Object { $_.Name -in @("_workflowStep3", "_workflowStep4") })
+if ($futureWorkflowButtons.Count -ne 2 `
+    -or @($futureWorkflowButtons | Where-Object { -not $_.IsEnabled }).Count -ne 0 `
+    -or @($futureWorkflowButtons | Where-Object { $_.IsHitTestVisible }).Count -ne 0 `
+    -or @($futureWorkflowButtons | Where-Object { $_.Background.ToString() -ne "#00FFFFFF" }).Count -ne 0 `
+    -or @($futureWorkflowButtons | Where-Object { $_.Foreground.ToString() -ne "#FFBECDDC" }).Count -ne 0 `
+    -or @($futureWorkflowButtons | Where-Object { $null -eq $_.Template }).Count -ne 0) {
+    throw "Future contribution stages must remain non-interactive but readable on a transparent custom surface."
+}
 $reviewSavedAnswers = @($savedDraftButtons | Where-Object {
         $_.Content -eq "Review saved answers"
     } | Select-Object -First 1)

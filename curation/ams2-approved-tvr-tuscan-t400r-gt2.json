@@ -1,24 +1,76 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.8",
-  "approved_at": "2026-08-11",
+  "dataset_version": "0.5.32",
+  "approved_at": "2026-08-29",
   "record_id": "tvr-tuscan-t400r-gt2",
   "simulator": "ams2",
   "telemetry_name": "TVR Tuscan T400R GT2",
-  "telemetry_class": "GT2_05",
   "observed_game_version": "1.6.9.91",
-  "observed_through": "SimHub 9.11.22",
+  "observed_through": "SimHub guided verification observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5",
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "not-required",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
     "manual_blip": "required",
-    "wheel_rim_shape": "round"
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, manual rev matching, and round no-display rim were directly observed.",
-  "scope_notes": "Period manufacturer evidence is family-level; the approved behavior applies to the exact observed AMS2 identity."
+  "confidence_notes": "Identity and authentic controls are retained from curated record tvr-tuscan-t400r-gt2. Only the exact AMS2 behavior observed in ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 is under comparison review.",
+  "scope_notes": "Exact simulator identity matched an existing curated entry; this review classifies the new guided drive as compatible evidence or an audited simulator correction without reopening real-car identity research.",
+  "telemetry_class": "GT2_05",
+  "correction_history": [
+    {
+      "corrected_at": "2026-08-29",
+      "superseded_source_ref": "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91",
+      "replacement_source_ref": "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91.correction-d05773d5",
+      "basis": "Repeat guided drive ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/open_top from {'absent': True} to 'no'; /behavior/wheel_rim_type/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/open_top from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'not-required'.",
+      "behavior_changes": [
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/open_top",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/shift_lights",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/steering/wheel_rim/open_top",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/steering/wheel_rim/shift_lights",
+          "from": {
+            "absent": true
+          },
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/transmission/downshift/manual_blip",
+          "from": {
+            "absent": true
+          },
+          "to": "not-required"
+        }
+      ],
+      "authentic_control_changes": [],
+      "removed_simulator_overrides": []
+    }
+  ],
+  "historical_notes": "Corrected from SimHub 9.11.22 through SimHub guided verification observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5: Repeat guided drive ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/open_top from {'absent': True} to 'no'; /behavior/wheel_rim_type/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/open_top from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'not-required'."
 }

@@ -1,30 +1,30 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.3.43",
-  "approved_at": "2026-08-15",
+  "dataset_version": "0.5.33",
+  "approved_at": "2026-08-29",
   "record_id": "formula-edge-model1",
   "simulator": "ams2",
   "telemetry_name": "Formula Edge Model1 - High Downforce",
-  "telemetry_class": "FE-G1_HD",
   "observed_game_version": "1.6.9.91",
-  "observed_through": "SimHub 9.11.22 guided verification",
+  "observed_through": "SimHub guided verification observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e",
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "sequential-paddles",
     "shift_pattern": "sequential",
     "standing_start_clutch": "required",
-    "running_shift_clutch": "not-required",
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "yes",
     "manual_blip": "not-required",
-    "wheel_rim_shape": "round",
+    "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "yes"
+    "wheel_open_top": "yes",
+    "running_shift_clutch": "not-required"
   },
-  "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed draft ams2.formula-edge-model1-high-downforce.20260812t172345735z-b1d63d80.",
+  "confidence_notes": "Identity and authentic controls are retained from curated record formula-edge-model1. Only the exact AMS2 behavior observed in ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e is under comparison review. The existing record has no independent real-world source; its registered legacy provenance is retained without treating this drive as new authentic-control evidence.",
+  "scope_notes": "Exact simulator identity matched an existing curated entry; this review classifies the new guided drive as compatible evidence or an audited simulator correction without reopening real-car identity research.",
+  "telemetry_class": "FE-G1_HD",
   "additional_telemetry_names": [
     {
       "value": "Formula Edge Model1",
@@ -34,5 +34,30 @@
       "value": "Formula Edge Model1 - Low Downforce",
       "basis": "Low-downforce configuration of the same car, observed exactly in live telemetry. AMS2 selects the aero configuration from the circuit, so a driver reaches this identity without choosing it. Controls are inherited from the driven high-downforce configuration and were not separately tested."
     }
-  ]
+  ],
+  "correction_history": [
+    {
+      "corrected_at": "2026-08-29",
+      "superseded_source_ref": "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
+      "replacement_source_ref": "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91",
+      "basis": "Repeat guided drive ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/normalized from 'round' to 'd-shaped'; /overrides/authentic_controls/steering/wheel_rim/shape from {'absent': True} to 'd-shaped'.",
+      "behavior_changes": [
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/normalized",
+          "from": "round",
+          "to": "d-shaped"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/steering/wheel_rim/shape",
+          "from": {
+            "absent": true
+          },
+          "to": "d-shaped"
+        }
+      ],
+      "authentic_control_changes": [],
+      "removed_simulator_overrides": []
+    }
+  ],
+  "historical_notes": "Corrected from SimHub 9.11.22 guided verification through SimHub guided verification observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e: Repeat guided drive ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/normalized from 'round' to 'd-shaped'; /overrides/authentic_controls/steering/wheel_rim/shape from {'absent': True} to 'd-shaped'."
 }

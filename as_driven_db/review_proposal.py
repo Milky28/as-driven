@@ -193,6 +193,15 @@ def _control_overrides(
         for key, value in real_wheel.items()
         if key in staged_wheel and value != staged_wheel[key]
     }
+    for key, staged_value in staged_wheel.items():
+        if key in {"notes", "source_label"} or key in real_wheel:
+            continue
+        if staged_value is not None and staged_value != "unknown":
+            # A cockpit observation establishes the simulator, not the real
+            # car. When the curated baseline deliberately leaves a wheel field
+            # absent, retract the staged authentic value while preserving it as
+            # a simulator override below.
+            wheel_changes[key] = "unknown"
     if wheel_changes:
         overrides["wheel_rim"] = wheel_changes
     return overrides
@@ -225,8 +234,8 @@ def _simulator_overrides(
         (override["path"], json.dumps(override.get("value"), sort_keys=True))
         for override in overrides
     }
-    for path in sorted(staged_values.keys() & real_values.keys()):
-        if path in ignored or staged_values[path] == real_values[path]:
+    for path in sorted(staged_values):
+        if path in ignored or staged_values[path] == real_values.get(path):
             continue
         if path.endswith("/source_label") or path.endswith("/notes"):
             continue
@@ -376,6 +385,7 @@ def _proposal_summary(
     manifest: dict[str, Any],
     sources: list[dict[str, Any]],
     preview_record: dict[str, Any],
+    simulator_id: str | None = None,
 ) -> str:
     entry = manifest["records"][0]
     transmission = preview_record["authentic_controls"]["transmission"]
@@ -384,6 +394,17 @@ def _proposal_summary(
         "compatible_implementation"
     )
     same_simulator_section = ""
+    driver_summary = entry.get("driver_summary")
+    driver_summary_section = ""
+    if driver_summary:
+        driver_summary_section = f"""
+## Driver summary
+
+> {driver_summary}
+
+This is record-wide prose shown for every simulator. Confirm that it remains
+accurate beside each simulator's effective USE rows.
+"""
     if same_simulator_review:
         disposition = (
             "Correction of the existing simulator entry"
@@ -405,6 +426,14 @@ def _proposal_summary(
                 )
                 + "\n"
             )
+    simulator_entry = next(
+        (
+            candidate
+            for candidate in preview_record["simulators"]
+            if candidate.get("simulator") == simulator_id
+        ),
+        preview_record["simulators"][0],
+    )
     return f"""# Final review proposal: issue #{case['issue']['number']}
 
 No curated files have been changed. This proposal was dry-run through the real promotion path with candidate sources registered only in a temporary data directory.
@@ -426,9 +455,10 @@ No curated files have been changed. This proposal was dry-run through the real p
 ## Exact simulator departures from that baseline
 
 ```json
-{json.dumps(preview_record['simulators'][0]['overrides'], indent=2, ensure_ascii=False)}
+{json.dumps(simulator_entry['overrides'], indent=2, ensure_ascii=False)}
 ```
 {same_simulator_section}
+{driver_summary_section}
 
 ## Reviewed sources
 
@@ -436,6 +466,361 @@ No curated files have been changed. This proposal was dry-run through the real p
 
 Review the proposed manifest, source wording, unknown fields, and simulator overrides before copying anything into `data/v1` or `curation`.
 """
+
+
+_OPTIONAL_CONTROL_OVERRIDE_PATHS = {
+    "/authentic_controls/transmission/first_gear_position",
+    "/authentic_controls/steering/degrees_of_rotation",
+    "/authentic_controls/steering/wheel_rim/diameter_mm",
+    "/authentic_controls/steering/wheel_rim/integrated_display",
+    "/authentic_controls/steering/wheel_rim/shift_lights",
+    "/authentic_controls/steering/wheel_rim/open_top",
+}
+
+
+def _apply_control_overrides(
+    controls: dict[str, Any], overrides: list[dict[str, Any]]
+) -> dict[str, Any]:
+    effective = copy.deepcopy(controls)
+    prefix = "/authentic_controls/"
+    for override in overrides:
+        path = override.get("path", "")
+        if not path.startswith(prefix):
+            continue
+        tokens = [token for token in path[len(prefix):].split("/") if token]
+        node: Any = effective
+        for token in tokens[:-1]:
+            if not isinstance(node, dict) or token not in node:
+                raise ResearchHandoffError(
+                    f"simulator override points to unknown control field {path!r}"
+                )
+            node = node[token]
+        if not tokens or not isinstance(node, dict):
+            raise ResearchHandoffError(
+                f"simulator override points to unknown control field {path!r}"
+            )
+        if tokens[-1] not in node and path not in _OPTIONAL_CONTROL_OVERRIDE_PATHS:
+            raise ResearchHandoffError(
+                f"simulator override points to unknown control field {path!r}"
+            )
+        node[tokens[-1]] = copy.deepcopy(override["value"])
+    return effective
+
+
+_SUMMARY_TECHNIQUE_PATHS = {
+    "/transmission/standing_start_clutch": "launch clutch",
+    "/transmission/upshift/clutch": "upshift clutch",
+    "/transmission/upshift/throttle_lift": "upshift lift",
+    "/transmission/upshift/automatic_cut": "upshift cut",
+    "/transmission/downshift/clutch": "downshift clutch",
+    "/transmission/downshift/manual_blip": "manual downshift blip",
+    "/transmission/downshift/automatic_blip": "automatic downshift blip",
+}
+
+
+def _control_value(controls: dict[str, Any], path: str) -> Any:
+    value: Any = controls
+    for token in (part for part in path.split("/") if part):
+        if not isinstance(value, dict) or token not in value:
+            return None
+        value = value[token]
+    return value
+
+
+def _simulator_technique_disagreements(record: dict[str, Any]) -> list[str]:
+    controls = record["authentic_controls"]
+    effective = [
+        _apply_control_overrides(controls, entry.get("overrides") or [])
+        for entry in record.get("simulators", [])
+    ]
+    if len(effective) < 2:
+        return []
+    return [
+        label
+        for path, label in _SUMMARY_TECHNIQUE_PATHS.items()
+        if len({_control_value(view, path) for view in effective}) > 1
+    ]
+
+
+def generate_driver_summary(record: dict[str, Any]) -> tuple[str, list[str]]:
+    """Draft conservative record-wide driver prose from reviewed controls.
+
+    The summary deliberately does not infer gearbox construction or repeat
+    identity prose. It turns only curated control values into practical advice,
+    and sends simulator disagreements back to the per-game USE row.
+    """
+    transmission = record["authentic_controls"]["transmission"]
+    gears = transmission.get("forward_gears")
+    actuation = transmission.get("shift_actuation")
+    mechanism = {
+        "h-pattern": "H-pattern",
+        "sequential-stick": "lever sequential",
+        "sequential-paddles": "paddle sequential",
+        "automatic-lever": "automatic",
+        "direct-selection": "direct-selection transmission",
+    }.get(actuation, "transmission")
+    if gears:
+        mechanism = f"{gears}-speed {mechanism}"
+
+    launch = transmission["standing_start_clutch"]
+    if launch == "required":
+        launch_sentence = "Use the clutch to pull away."
+    elif launch == "not-required":
+        launch_sentence = "It pulls away without a clutch."
+    elif launch == "anti-stall-available":
+        launch_sentence = "Anti-stall can handle the launch."
+    elif launch == "not-applicable":
+        launch_sentence = "No launch clutch is needed."
+    else:
+        launch_sentence = "Launch clutch use is not established, so use it to be safe."
+
+    upshift = transmission["upshift"]
+    lift = upshift["throttle_lift"]
+    up_clutch = upshift["clutch"]
+    cut = upshift["automatic_cut"]
+    if lift == "required":
+        up_sentence = "Lift for every upshift"
+    elif lift == "partial":
+        up_sentence = "Use a partial lift for every upshift"
+    elif lift == "not-required" and cut == "yes":
+        up_sentence = "Stay flat on the upshift because the car cuts for you"
+    elif lift == "not-required":
+        up_sentence = "Stay flat on the upshift"
+    elif lift == "not-applicable":
+        up_sentence = "No throttle lift is needed on the upshift"
+    else:
+        up_sentence = "Upshift lift is not established, so lift to be safe"
+    if up_clutch == "required":
+        up_sentence += " and use the clutch"
+    elif up_clutch == "optional":
+        up_sentence += "; the clutch is optional once moving"
+    elif up_clutch == "unknown":
+        up_sentence += "; running clutch use is not established"
+    up_sentence += "."
+
+    downshift = transmission["downshift"]
+    manual_blip = downshift["manual_blip"]
+    auto_blip = downshift["automatic_blip"]
+    down_clutch = downshift["clutch"]
+    if auto_blip == "yes":
+        down_sentence = "The car blips its own downshifts"
+    elif manual_blip == "required":
+        down_sentence = "Blip every downshift yourself"
+    elif manual_blip == "optional":
+        down_sentence = "A downshift blip is optional, but can help settle the car"
+    elif manual_blip in {"not-required", "not-applicable"}:
+        down_sentence = "No downshift blip is needed"
+    else:
+        down_sentence = (
+            "Whether the gearbox needs a downshift blip is not established, "
+            "so blip to be safe"
+        )
+    if down_clutch == "required":
+        down_sentence += " and use the clutch"
+    elif down_clutch == "optional":
+        down_sentence += "; the clutch is optional"
+    elif down_clutch == "unknown":
+        down_sentence += "; downshift clutch use is not established"
+    down_sentence += "."
+
+    disagreements = _simulator_technique_disagreements(record)
+    mechanism_sentence = mechanism if gears else mechanism[0].upper() + mechanism[1:]
+    summary = f"{mechanism_sentence}. {launch_sentence} {up_sentence} {down_sentence}"
+    if disagreements:
+        listed = ", ".join(disagreements)
+        summary += (
+            f" Simulator implementations differ on {listed}; follow the selected "
+            "game's USE row for those items."
+        )
+    return summary, disagreements
+
+
+def _dry_run_review_proposal(
+    root: Path,
+    staged: dict[str, Any],
+    manifest: dict[str, Any],
+    candidate_sources: list[dict[str, Any]],
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    entry = manifest["records"][0]
+    with tempfile.TemporaryDirectory(prefix="as-driven-review-") as temporary:
+        temp = Path(temporary)
+        temp_data = temp / "data" / "v1"
+        temp_curation = temp / "curation"
+        shutil.copytree(root / "data" / "v1", temp_data)
+        shutil.copytree(root / "curation", temp_curation)
+        registry_path = temp_data / "sources.json"
+        registry = _read_json(registry_path, "temporary source registry")
+        known = {source["source_id"] for source in registry["sources"]}
+        registry["sources"].extend(
+            source for source in candidate_sources if source["source_id"] not in known
+        )
+        _write_json(registry_path, registry)
+        registered_before_promotion = {
+            source["source_id"] for source in registry["sources"]
+        }
+        written = promote_observations(
+            manifest,
+            root=root,
+            data_directory=temp_data,
+            curation_directory=temp_curation,
+        )
+        previews = {
+            path.name: _read_json(path, "dry-run promotion output")
+            for path in written
+            if path.suffix == ".json"
+        }
+        record_name = f"{entry['record_id']}.json"
+        approval_name = f"{staged['simulator']}-approved-{entry['record_id']}.json"
+        preview_record = previews[record_name]
+        preview_approval = previews[approval_name]
+        promoted_sources = _read_json(
+            temp_data / "sources.json", "dry-run source registry"
+        )
+        new_live_sources = [
+            source
+            for source in promoted_sources["sources"]
+            if source["source_id"] not in registered_before_promotion
+            and source["source_type"] == "in-game-observation"
+        ]
+        if len(new_live_sources) != 1:
+            raise ResearchHandoffError(
+                "dry-run promotion did not register exactly one new live observation "
+                f"source; found {[source['source_id'] for source in new_live_sources]!r}"
+            )
+        preview_live_source = new_live_sources[0]
+
+    _require_schema(root, preview_record, "car-record.schema.json", "preview record")
+    _require_schema(
+        root,
+        preview_approval,
+        "curation-approval.schema.json",
+        "preview approval",
+    )
+    _require_schema(
+        root,
+        {"schema_version": "1.0.0", "sources": [preview_live_source]},
+        "source-record.schema.json",
+        "preview live source",
+    )
+    return preview_record, preview_approval, preview_live_source
+
+
+def _reviewed_sources(
+    root: Path,
+    manifest: dict[str, Any],
+    candidate_sources: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    registry = _read_json(
+        root / "data" / "v1" / "sources.json", "registered source registry"
+    )
+    registered = {source["source_id"]: source for source in registry["sources"]}
+    candidates = {source["source_id"]: source for source in candidate_sources}
+    reviewed = []
+    for source_id in manifest["records"][0]["real_world_source_refs"]:
+        source = candidates.get(source_id) or registered.get(source_id)
+        if source is None:
+            raise ResearchHandoffError(
+                f"review manifest references unknown real-world source {source_id!r}"
+            )
+        reviewed.append(
+            {
+                "source_id": source_id,
+                "title": source["title"],
+                "registration": (
+                    "new candidate" if source_id in candidates else "already registered"
+                ),
+            }
+        )
+    return reviewed
+
+
+def _bundle_reference(root: Path, bundle_path: Path) -> str:
+    try:
+        # Windows runners may expose the temporary directory through an 8.3
+        # alias while Path.resolve() expands the repository root. Resolve both
+        # sides before computing the portable repository-relative reference.
+        return bundle_path.resolve().relative_to(root).as_posix()
+    except ValueError:
+        # Tests and alternate workbenches may keep ignored cases outside the
+        # repository. A checked-in final manifest should always use the normal
+        # relative build path.
+        return bundle_path.as_posix()
+
+
+def _write_review_proposal(
+    root: Path,
+    case_directory: Path,
+    case: dict[str, Any],
+    staged: dict[str, Any],
+    manifest: dict[str, Any],
+    sources_proposal: dict[str, Any],
+    reviewed_sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    _require_schema(
+        root,
+        sources_proposal,
+        "source-record.schema.json",
+        "candidate source proposal",
+    )
+    manifest_path = case_directory / "review-manifest.proposed.json"
+    sources_path = case_directory / "sources.proposed.json"
+    _write_json(manifest_path, manifest)
+    _write_json(sources_path, sources_proposal)
+
+    preview_record, preview_approval, preview_live_source = _dry_run_review_proposal(
+        root,
+        staged,
+        manifest,
+        sources_proposal["sources"],
+    )
+    preview_record_path = case_directory / "preview-record.json"
+    preview_approval_path = case_directory / "preview-approval.json"
+    preview_live_source_path = case_directory / "preview-live-source.json"
+    summary_path = case_directory / "final-review.md"
+    _write_json(preview_record_path, preview_record)
+    _write_json(preview_approval_path, preview_approval)
+    _write_json(preview_live_source_path, preview_live_source)
+    simulator_id = staged["record"]["simulators"][0]["simulator"]
+    summary_path.write_text(
+        _proposal_summary(
+            case,
+            manifest,
+            reviewed_sources,
+            preview_record,
+            simulator_id,
+        ),
+        encoding="utf-8",
+    )
+
+    case["state"] = "manifest-review"
+    case["artifacts"].update(
+        {
+            "review_manifest_proposal": manifest_path.name,
+            "source_proposal": sources_path.name,
+            "preview_record": preview_record_path.name,
+            "preview_approval": preview_approval_path.name,
+            "preview_live_source": preview_live_source_path.name,
+            "final_review": summary_path.name,
+        }
+    )
+    case["review_proposal"] = {
+        "status": "ready",
+        "dataset_version": manifest["dataset_version"],
+        "prepared_at": _now(),
+        "dry_run": "passed",
+    }
+    case["updated_at"] = _now()
+    _write_json(case_directory / "case.json", case)
+    return {
+        "issue": case["issue"]["number"],
+        "state": case["state"],
+        "dataset_version": manifest["dataset_version"],
+        "manifest": str(manifest_path),
+        "sources": str(sources_path),
+        "summary": str(summary_path),
+        "preview_record": str(preview_record_path),
+        "dry_run": "passed",
+    }
 
 
 def _existing_record(root: Path, record_id: str) -> dict[str, Any] | None:
@@ -551,6 +936,212 @@ def _same_simulator_disposition(
     }
 
 
+def _prepare_curated_comparison(
+    root: Path,
+    cases_directory: Path,
+    issue_number: int,
+    dataset_version: str | None,
+) -> dict[str, Any]:
+    """Prepare an exact-match comparison without re-researching its identity."""
+    case_directory = cases_directory / f"issue-{issue_number}"
+    case = _read_json(case_directory / "case.json", "review case")
+    if (
+        case.get("state") not in {"review-needed", "manifest-review"}
+        or case.get("classification") != "curated-identity-comparison"
+        or (case.get("research") or {}).get("status") != "not-required"
+    ):
+        raise ResearchHandoffError(
+            f"issue #{issue_number} is not an exact curated-identity comparison"
+        )
+    receipt = _read_json(
+        case_directory / case["artifacts"]["receipt"], "intake receipt"
+    )
+    matched_ids = sorted(
+        {
+            str(match["record_id"])
+            for match in receipt.get("curated_matches", [])
+            if isinstance(match, dict) and match.get("record_id")
+        }
+    )
+    if len(matched_ids) != 1:
+        raise ResearchHandoffError(
+            f"issue #{issue_number} matched {len(matched_ids)} curated records; "
+            "a maintainer must resolve the identity before comparison review"
+        )
+    record_id = matched_ids[0]
+    existing_record = _existing_record(root, record_id)
+    if existing_record is None:
+        raise ResearchHandoffError(
+            f"issue #{issue_number} matched missing curated record {record_id!r}"
+        )
+    staged = _read_json(
+        case_directory / case["artifacts"]["staged_bundle"], "staged bundle"
+    )
+    simulator_id = staged["record"]["simulators"][0]["simulator"]
+    if not any(
+        entry.get("simulator") == simulator_id
+        for entry in existing_record.get("simulators", [])
+    ):
+        raise ResearchHandoffError(
+            f"issue #{issue_number} exactly matched {record_id!r}, but that record "
+            f"has no existing {simulator_id} entry to compare or correct"
+        )
+
+    registry = _read_json(
+        root / "data" / "v1" / "sources.json", "registered source registry"
+    )
+    sources_by_id = {source["source_id"]: source for source in registry["sources"]}
+    registered_refs: list[str] = []
+    independent_refs: list[str] = []
+    for claim in existing_record.get("provenance", {}).get("claims", []):
+        for source_id in claim.get("source_refs", []):
+            source = sources_by_id.get(source_id)
+            if source is None:
+                continue
+            if source_id not in registered_refs:
+                registered_refs.append(source_id)
+            if (
+                source.get("source_type")
+                not in {"in-game-observation", "official-simulator"}
+                and source_id not in independent_refs
+            ):
+                independent_refs.append(source_id)
+    if not registered_refs:
+        raise ResearchHandoffError(
+            f"curated record {record_id!r} has no registered provenance source "
+            "to anchor a correction review"
+        )
+    # Some deliberately simulator-native or legacy records have no independent
+    # real-car source because no exact real-world chassis is assigned. A repeat
+    # drive may still correct that simulator entry: retain the record's audited
+    # source set without presenting it as new real-car evidence. The correction
+    # gate below prevents the incoming authentic layer from filling or changing
+    # any baseline value.
+    baseline_refs = independent_refs or registered_refs
+    legacy_baseline = not independent_refs
+    reviewed_sources = [
+        {
+            "source_id": source_id,
+            "title": sources_by_id[source_id]["title"],
+            "registration": "already registered",
+        }
+        for source_id in baseline_refs
+    ]
+
+    claims = existing_record["provenance"]["claims"]
+    identity_claim = next(
+        (claim for claim in claims if "/identity" in claim.get("paths", [])),
+        claims[0],
+    )
+    specification_claim = next(
+        (
+            claim
+            for claim in claims
+            if any(
+                path.endswith("/forward_gears")
+                or path.endswith("/gearbox_type")
+                for path in claim.get("paths", [])
+            )
+        ),
+        identity_claim,
+    )
+    sourced_paths = sorted(
+        {
+            path
+            for claim in claims
+            if any(ref in baseline_refs for ref in claim.get("source_refs", []))
+            for path in claim.get("paths", [])
+            if str(path).startswith("/authentic_controls/")
+        }
+    )
+    index = _read_json(root / "data" / "v1" / "index.json", "dataset index")
+    proposed_version = dataset_version or _next_patch(index["dataset_version"])
+    identity = existing_record["identity"]
+    staged_controls = staged["record"]["authentic_controls"]
+    real_controls = existing_record["authentic_controls"]
+    confidence = str(identity_claim.get("confidence") or "high")
+    observation_id = staged.get("observation_id", "the guided drive")
+    simulator_name = simulator_label(simulator_id)
+    manifest_entry: dict[str, Any] = {
+        "record_id": record_id,
+        "bundle": _bundle_reference(
+            root,
+            case_directory / case["artifacts"]["staged_bundle"],
+        ),
+        "display_name": identity["display_name"],
+        "class": identity["class"],
+        "manufacturer": identity["manufacturer"],
+        "model": identity["model"],
+        "year": copy.deepcopy(identity["year"]),
+        "real_world_identity_notes": identity["real_world_identity_notes"],
+        "real_world_source_refs": baseline_refs,
+        "confidence": confidence,
+        "confidence_basis": (
+            f"The exact {simulator_name} identity already belongs to curated record "
+            f"{record_id}; {observation_id} is reviewed only as new simulator "
+            "implementation evidence."
+        ),
+        "identity_basis": str(identity_claim.get("basis") or "Curated identity retained."),
+        "specification_basis": str(
+            specification_claim.get("basis") or "Curated control baseline retained."
+        ),
+        "control_overrides": _control_overrides(staged_controls, real_controls),
+        "simulator_overrides": _simulator_overrides(
+            staged_controls,
+            real_controls,
+            staged,
+        ),
+        "confidence_notes": (
+            f"Identity and authentic controls are retained from curated record "
+            f"{record_id}. Only the exact {simulator_name} behavior observed in "
+            f"{observation_id} is under comparison review."
+            + (
+                " The existing record has no independent real-world source; its "
+                "registered legacy provenance is retained without treating this "
+                "drive as new authentic-control evidence."
+                if legacy_baseline
+                else ""
+            )
+        ),
+        "sourced_control_paths": sourced_paths,
+        "control_notes": copy.deepcopy(real_controls.get("notes") or []),
+        "scope_notes": (
+            "Exact simulator identity matched an existing curated entry; this review "
+            "classifies the new guided drive as compatible evidence or an audited "
+            "simulator correction without reopening real-car identity research."
+        ),
+        "live_source_url": case["issue"]["url"],
+        "live_source_notes": staged["source"]["notes"],
+    }
+    if identity.get("variant"):
+        manifest_entry["variant"] = identity["variant"]
+    if existing_record.get("driver_summary"):
+        manifest_entry["driver_summary"] = existing_record["driver_summary"]
+    _same_simulator_disposition(
+        root,
+        case,
+        staged,
+        manifest_entry,
+        existing_record,
+    )
+    manifest = {
+        "schema_version": "1.0.0",
+        "dataset_version": proposed_version,
+        "approved_at": date.today().isoformat(),
+        "records": [manifest_entry],
+    }
+    sources_proposal = {"schema_version": "1.0.0", "sources": []}
+    return _write_review_proposal(
+        root,
+        case_directory,
+        case,
+        staged,
+        manifest,
+        sources_proposal,
+        reviewed_sources,
+    )
+
+
 def prepare_review_proposal(
     root: Path,
     cases_directory: Path,
@@ -560,6 +1151,16 @@ def prepare_review_proposal(
     root = root.resolve()
     case_directory = cases_directory / f"issue-{issue_number}"
     case = _read_json(case_directory / "case.json", "review case")
+    if (
+        case.get("state") in {"review-needed", "manifest-review"}
+        and case.get("classification") == "curated-identity-comparison"
+    ):
+        return _prepare_curated_comparison(
+            root,
+            cases_directory,
+            issue_number,
+            dataset_version,
+        )
     if (
         case.get("state") not in {"final-review", "manifest-review"}
         or case.get("research", {}).get("status") != "complete"
@@ -646,16 +1247,7 @@ def prepare_review_proposal(
         )
 
     bundle_path = case_directory / case["artifacts"]["staged_bundle"]
-    try:
-        # Windows runners may expose the temporary directory through an 8.3
-        # alias while Path.resolve() expands the repository root. Resolve both
-        # sides before computing the portable repository-relative reference.
-        bundle_reference = bundle_path.resolve().relative_to(root).as_posix()
-    except ValueError:
-        # Tests and alternate workbenches may keep ignored cases outside the
-        # repository. A checked-in final manifest should always use the normal
-        # relative build path.
-        bundle_reference = bundle_path.as_posix()
+    bundle_reference = _bundle_reference(root, bundle_path)
     manifest_entry = {
         "record_id": identity["record_id"],
         "bundle": bundle_reference,
@@ -712,6 +1304,10 @@ def prepare_review_proposal(
         manifest_entry,
         existing_record,
     )
+    if existing_record and existing_record.get("driver_summary"):
+        # Adding or correcting a simulator must not erase reviewed record-wide
+        # prose merely because the maintainer did not ask to regenerate it.
+        manifest_entry["driver_summary"] = existing_record["driver_summary"]
     manifest = {
         "schema_version": "1.0.0",
         "dataset_version": proposed_version,
@@ -719,115 +1315,118 @@ def prepare_review_proposal(
         "records": [manifest_entry],
     }
     sources_proposal = {"schema_version": "1.0.0", "sources": candidate_sources}
-    _require_schema(
+    return _write_review_proposal(
         root,
+        case_directory,
+        case,
+        staged,
+        manifest,
         sources_proposal,
-        "source-record.schema.json",
-        "candidate source proposal",
+        reviewed_sources,
     )
 
-    manifest_path = case_directory / "review-manifest.proposed.json"
-    sources_path = case_directory / "sources.proposed.json"
+
+def generate_driver_summary_proposal(
+    root: Path,
+    cases_directory: Path,
+    issue_number: int,
+) -> dict[str, Any]:
+    """Generate and dry-run a record-wide summary inside a review proposal."""
+    root = root.resolve()
+    case_directory = cases_directory / f"issue-{issue_number}"
+    case = _read_json(case_directory / "case.json", "review case")
+    if case.get("state") != "manifest-review":
+        raise ResearchHandoffError(
+            f"issue #{issue_number} must be in manifest review before drafting a driver summary"
+        )
+    if (case.get("review_proposal") or {}).get("dry_run") != "passed":
+        raise ResearchHandoffError(
+            f"issue #{issue_number} has no passed promotion dry run to summarize"
+        )
+
+    artifacts = case.get("artifacts") or {}
+    required = (
+        "staged_bundle",
+        "review_manifest_proposal",
+        "source_proposal",
+        "preview_record",
+    )
+    missing = [name for name in required if not artifacts.get(name)]
+    if missing:
+        raise ResearchHandoffError(
+            f"issue #{issue_number} is missing review artifacts: {', '.join(missing)}"
+        )
+    staged = _read_json(
+        case_directory / artifacts["staged_bundle"], "staged bundle"
+    )
+    manifest_path = case_directory / artifacts["review_manifest_proposal"]
+    manifest = _read_json(manifest_path, "review manifest proposal")
+    sources_proposal = _read_json(
+        case_directory / artifacts["source_proposal"], "source proposal"
+    )
+    current_preview = _read_json(
+        case_directory / artifacts["preview_record"], "preview record"
+    )
+
+    summary, disagreements = generate_driver_summary(current_preview)
+    manifest["records"][0]["driver_summary"] = summary
+    candidate_sources = sources_proposal.get("sources") or []
+    preview_record, preview_approval, preview_live_source = _dry_run_review_proposal(
+        root,
+        staged,
+        manifest,
+        candidate_sources,
+    )
+
     _write_json(manifest_path, manifest)
-    _write_json(sources_path, sources_proposal)
-
-    with tempfile.TemporaryDirectory(prefix="as-driven-review-") as temporary:
-        temp = Path(temporary)
-        temp_data = temp / "data" / "v1"
-        temp_curation = temp / "curation"
-        shutil.copytree(root / "data" / "v1", temp_data)
-        shutil.copytree(root / "curation", temp_curation)
-        registry_path = temp_data / "sources.json"
-        registry = _read_json(registry_path, "temporary source registry")
-        known = {source["source_id"] for source in registry["sources"]}
-        registry["sources"].extend(
-            source for source in candidate_sources if source["source_id"] not in known
-        )
-        _write_json(registry_path, registry)
-        registered_before_promotion = {
-            source["source_id"] for source in registry["sources"]
-        }
-        written = promote_observations(
-            manifest,
-            root=root,
-            data_directory=temp_data,
-            curation_directory=temp_curation,
-        )
-        previews = {
-            path.name: _read_json(path, "dry-run promotion output")
-            for path in written
-            if path.suffix == ".json"
-        }
-        record_name = f"{identity['record_id']}.json"
-        approval_name = f"{staged['simulator']}-approved-{identity['record_id']}.json"
-        preview_record = previews[record_name]
-        preview_approval = previews[approval_name]
-        promoted_sources = _read_json(temp_data / "sources.json", "dry-run source registry")
-        new_live_sources = [
-            source
-            for source in promoted_sources["sources"]
-            if source["source_id"] not in registered_before_promotion
-            and source["source_type"] == "in-game-observation"
-        ]
-        if len(new_live_sources) != 1:
-            raise ResearchHandoffError(
-                "dry-run promotion did not register exactly one new live observation "
-                f"source; found {[source['source_id'] for source in new_live_sources]!r}"
-            )
-        preview_live_source = new_live_sources[0]
-
-    _require_schema(root, preview_record, "car-record.schema.json", "preview record")
-    _require_schema(
-        root,
-        preview_approval,
-        "curation-approval.schema.json",
-        "preview approval",
-    )
-    _require_schema(
-        root,
-        {"schema_version": "1.0.0", "sources": [preview_live_source]},
-        "source-record.schema.json",
-        "preview live source",
-    )
-
-    preview_record_path = case_directory / "preview-record.json"
-    preview_approval_path = case_directory / "preview-approval.json"
-    preview_live_source_path = case_directory / "preview-live-source.json"
-    summary_path = case_directory / "final-review.md"
-    _write_json(preview_record_path, preview_record)
-    _write_json(preview_approval_path, preview_approval)
-    _write_json(preview_live_source_path, preview_live_source)
-    summary_path.write_text(
+    _write_json(case_directory / artifacts["preview_record"], preview_record)
+    _write_json(case_directory / artifacts["preview_approval"], preview_approval)
+    _write_json(case_directory / artifacts["preview_live_source"], preview_live_source)
+    reviewed_sources = _reviewed_sources(root, manifest, candidate_sources)
+    (case_directory / artifacts["final_review"]).write_text(
         _proposal_summary(case, manifest, reviewed_sources, preview_record),
         encoding="utf-8",
     )
 
-    case["state"] = "manifest-review"
-    case["artifacts"].update(
-        {
-            "review_manifest_proposal": manifest_path.name,
-            "source_proposal": sources_path.name,
-            "preview_record": preview_record_path.name,
-            "preview_approval": preview_approval_path.name,
-            "preview_live_source": preview_live_source_path.name,
-            "final_review": summary_path.name,
-        }
+    disagreement_note = (
+        "- Simulator disagreements handled: " + ", ".join(disagreements)
+        if disagreements
+        else "- Simulator disagreements handled: none in the driver-technique fields"
     )
-    case["review_proposal"] = {
-        "status": "ready",
-        "dataset_version": proposed_version,
-        "prepared_at": _now(),
-        "dry_run": "passed",
+    summary_artifact_path = case_directory / "driver-summary.md"
+    summary_artifact_path.write_text(
+        f"""# Generated driver summary: issue #{issue_number}
+
+## Draft
+
+> {summary}
+
+## Accuracy boundary
+
+- Derived from the reviewed authentic control baseline in the passed promotion preview
+{disagreement_note}
+- Unknown values stay explicit and produce conservative driver advice
+- No gearbox construction, identity detail, or historical fact is inferred
+
+This text is now in the proposed manifest and the regenerated preview record. Review it in context before approving promotion.
+""",
+        encoding="utf-8",
+    )
+    case["artifacts"]["driver_summary"] = summary_artifact_path.name
+    proposal = case.setdefault("review_proposal", {})
+    proposal["driver_summary"] = {
+        "status": "generated",
+        "generated_at": _now(),
+        "simulator_disagreements": disagreements,
     }
+    proposal["dry_run"] = "passed"
     case["updated_at"] = _now()
     _write_json(case_directory / "case.json", case)
     return {
         "issue": issue_number,
         "state": case["state"],
-        "dataset_version": proposed_version,
-        "manifest": str(manifest_path),
-        "sources": str(sources_path),
-        "summary": str(summary_path),
-        "preview_record": str(preview_record_path),
+        "summary": summary,
+        "artifact": str(summary_artifact_path),
+        "preview_record": str(case_directory / artifacts["preview_record"]),
         "dry_run": "passed",
     }

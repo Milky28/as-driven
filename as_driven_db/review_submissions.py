@@ -700,6 +700,14 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
         if research_status in {"not-started", "brief-ready", "partial", "blocked"}:
             actions.append("import-research")
         return actions
+    if (
+        state == "review-needed"
+        and case.get("classification") == "curated-identity-comparison"
+    ):
+        # The curated identity and authentic baseline already have reviewed
+        # evidence. Prepare a proposal that compares this repeat drive with the
+        # existing simulator entry and makes any correction explicit.
+        return ["prepare-review"]
     # Research can be revisited after it is complete. The brief is regenerated
     # from the staged bundle and the current generator, so a case researched
     # before the brief asked a question - cockpit photographs, say - can be sent
@@ -709,7 +717,13 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
     if state == "final-review":
         return ["prepare-review", "generate-research-brief", "import-research"]
     if state == "manifest-review":
-        return ["promote", "generate-research-brief", "import-research"]
+        return [
+            "promote",
+            "prepare-review",
+            "generate-driver-summary",
+            "generate-research-brief",
+            "import-research",
+        ]
     if state in {"promoted", "released", "duplicate"}:
         return ["preview-publication", "publish-result"]
     return []

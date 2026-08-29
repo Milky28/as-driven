@@ -103,7 +103,7 @@ Current automatic case states are:
 | State | Meaning |
 | --- | --- |
 | `identity-research` | A new, related, changed, or additional implementation needs real-car identity research. |
-| `review-needed` | Intake found comparable evidence that needs a maintainer decision but not automatic identity research. |
+| `review-needed` | Intake matched an existing curated identity and offers a direct comparison review without repeating identity research. |
 | `needs-clarification` | Established facts contradict another observation of the same implementation and version. |
 | `duplicate` | The exact attachment bytes already exist in the intake inbox. |
 | `released` | This exact observation already appears in curated provenance. |
@@ -145,6 +145,8 @@ The workbench is a thin adapter over this document's commands. It can:
 - discover and validate `research-result.json` files written into case folders
   when the local queue is refreshed;
 - prepare and dry-run the final review proposal;
+- generate or regenerate conservative driver-summary prose from the reviewed
+  record-wide controls, then dry-run the updated proposal again;
 - promote only after the maintainer checks the explicit approval statement;
 - finalize the release only with the complete test gate; and
 - preview or publish GitHub feedback, with the same clean-tree and pushed-commit
@@ -229,9 +231,29 @@ the real promoter against a temporary copy of the current dataset and refuses
 incomplete control research, invalid source records, stale identities, or a
 promotion conflict. It does not change curated files.
 
+An exact `curated-identity-comparison` in `review-needed` offers the same
+**Prepare final review** action immediately. That path retains the curated
+real-car identity, authentic-control baseline, sources, and driver summary,
+then compares the new guided drive with the existing entry for that simulator.
+The proposal must classify the drive as compatible repeat evidence or as an
+audited correction that names the superseded observation and every changed
+behavior path. It still runs the full temporary promotion dry run, and it never
+treats the drive as proof of real-car identity.
+
 Review those files, especially the real-car baseline, unknown fields, exact
 simulator overrides, source wording, and identity. Then cross the explicit
 maintainer gate:
+
+At `manifest-review`, the workbench also offers **Generate driver summary**.
+It writes the draft into the proposed manifest, creates `driver-summary.md`,
+updates `final-review.md` and `preview-record.json`, and reruns the same temporary
+promotion validation. The draft uses only reviewed control values, keeps
+unknowns explicit, and points any cross-simulator technique disagreement back
+to the selected game's USE row. It never promotes automatically. Existing
+record-wide summary prose is preserved unless the maintainer explicitly asks to
+regenerate it.
+
+Then cross the explicit maintainer gate:
 
 ```shell
 python -m as_driven_db review-submissions promote 42 --approve

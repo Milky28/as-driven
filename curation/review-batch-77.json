@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.32",
+  "approved_at": "2026-08-29",
+  "records": [
+    {
+      "record_id": "tvr-tuscan-t400r-gt2",
+      "bundle": "build/review-cases/issue-47/staged.json",
+      "display_name": "TVR Tuscan T400R GT2",
+      "class": "GT2 2005",
+      "manufacturer": "TVR",
+      "model": "Tuscan T400R",
+      "year": {
+        "from": 2004,
+        "label": "T400R GT2-era representation"
+      },
+      "real_world_identity_notes": "TVR's period press kit connects the T400R family to Le Mans and describes a six-speed sequential gearbox. Exact AMS2 cockpit inspection confirms a sequential stick without paddles for the modeled GT2 car.",
+      "real_world_source_refs": [
+        "tvr.press-kit.2004-t400r"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "The exact AMS2 identity already belongs to curated record tvr-tuscan-t400r-gt2; ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 is reviewed only as new simulator implementation evidence.",
+      "identity_basis": "Official release context and exact live CarModel/class observation establish the simulated identity.",
+      "specification_basis": "Period manufacturer family evidence and direct exercise of the modeled six-speed sequential stick agree.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        },
+        "wheel_rim": {
+          "shift_lights": "unknown",
+          "source_label": "live-cockpit-round-no-display",
+          "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown.",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "confidence_notes": "Identity and authentic controls are retained from curated record tvr-tuscan-t400r-gt2. Only the exact AMS2 behavior observed in ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 is under comparison review.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "With Auto Clutch disabled, the car stalled when moving from rest without physical clutch input.",
+        "All six sequential-stick gears accepted clutch-free full-throttle upshifts with automatic throttle cut.",
+        "Clutch-free downshifts were accepted and no automatic throttle blip was observed; authentic rev matching therefore requires the driver to blip the throttle manually.",
+        "The manufacturer source establishes family-level transmission context, not every exact race-chassis technique detail."
+      ],
+      "scope_notes": "Exact simulator identity matched an existing curated entry; this review classifies the new guided drive as compatible evidence or an audited simulator correction without reopening real-car identity research.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/47",
+      "live_source_notes": "Guided-verification observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "6-speed lever sequential. Use the clutch to pull away. Stay flat on the upshift because the car cuts for you. Blip every downshift yourself.",
+      "correct_existing_simulator": {
+        "basis": "Repeat guided drive ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/open_top from {'absent': True} to 'no'; /behavior/wheel_rim_type/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/open_top from {'absent': True} to 'no'; /overrides/authentic_controls/steering/wheel_rim/shift_lights from {'absent': True} to 'no'; /overrides/authentic_controls/transmission/downshift/manual_blip from {'absent': True} to 'not-required'.",
+        "supersedes_source_ref": "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91",
+        "supersedes_observed_through": "SimHub 9.11.22",
+        "corrected_behavior_paths": [
+          "/behavior/wheel_rim_type/open_top",
+          "/behavior/wheel_rim_type/shift_lights",
+          "/overrides/authentic_controls/steering/wheel_rim/open_top",
+          "/overrides/authentic_controls/steering/wheel_rim/shift_lights",
+          "/overrides/authentic_controls/transmission/downshift/manual_blip"
+        ]
+      }
+    }
+  ]
+}

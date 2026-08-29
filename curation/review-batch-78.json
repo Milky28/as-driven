@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.33",
+  "approved_at": "2026-08-29",
+  "records": [
+    {
+      "record_id": "formula-edge-model1",
+      "bundle": "build/review-cases/issue-48/staged.json",
+      "display_name": "Formula Edge Model1",
+      "class": "Formula Edge",
+      "manufacturer": "Reiza",
+      "model": "Formula Edge Model1",
+      "year": {
+        "label": "Formula Edge Model1"
+      },
+      "real_world_identity_notes": "Officially identified as the Formula Edge successor to the former F-V12; the dataset does not assign an unverified real-world chassis identity.",
+      "real_world_source_refs": [
+        "ams2.reiza-release.1.6.9.5.formula-edge",
+        "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91"
+      ],
+      "confidence": "verified",
+      "confidence_basis": "The exact AMS2 identity already belongs to curated record formula-edge-model1; ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e is reviewed only as new simulator implementation evidence.",
+      "identity_basis": "Official Formula Edge context and exact telemetry establish the identity.",
+      "specification_basis": "Official Formula Edge context and exact telemetry establish the identity.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "wheel_rim": {
+          "shape": "round",
+          "source_label": "live-cockpit-open-top-round-no-display",
+          "notes": "Direct inspection showed a conventional round-profile rim with an open upper section; the display and lights are mounted on the dashboard, not the wheel."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "confidence_notes": "Identity and authentic controls are retained from curated record formula-edge-model1. Only the exact AMS2 behavior observed in ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e is under comparison review. The existing record has no independent real-world source; its registered legacy provenance is retained without treating this drive as new authentic-control evidence.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim",
+        "/authentic_controls/transmission"
+      ],
+      "control_notes": [
+        "A physical clutch is required to pull away.",
+        "Six paddle gears accept clutchless running shifts with automatic cut and blip.",
+        "'Formula Edge Model1' is the same car observed before the aero suffix existed. It inherits these verified controls as an approved configuration alias and was not separately live-tested."
+      ],
+      "scope_notes": "Exact simulator identity matched an existing curated entry; this review classifies the new guided drive as compatible evidence or an audited simulator correction without reopening real-car identity research.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/48",
+      "live_source_notes": "Guided-verification observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "variant": "High Downforce",
+      "driver_summary": "Paddle sequential with one job left for your left foot, which is the clutch to pull away. After that it cuts the upshift and blips the downshift on its own.",
+      "correct_existing_simulator": {
+        "basis": "Repeat guided drive ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/normalized from 'round' to 'd-shaped'; /overrides/authentic_controls/steering/wheel_rim/shape from {'absent': True} to 'd-shaped'.",
+        "supersedes_source_ref": "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
+        "supersedes_observed_through": "SimHub 9.11.22 guided verification",
+        "corrected_behavior_paths": [
+          "/behavior/wheel_rim_type/normalized",
+          "/overrides/authentic_controls/steering/wheel_rim/shape"
+        ]
+      }
+    }
+  ]
+}

@@ -361,5 +361,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-26"
+  "driver_summary": "Fully synchronised five-speed H-pattern. The sources do not establish the exact gate or clutch technique, but a downshift blip is optional: it can ease the synchros and settle the car without being required for the gear to engage.",
+  "updated_at": "2026-08-28"
 }

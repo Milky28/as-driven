@@ -509,5 +509,6 @@
       }
     ]
   },
+  "driver_summary": "Six-speed paddle sequential, but the reviewed real-car sources do not establish its launch, clutch, cut or blip technique. RaceRoom and rFactor 2 disagree on launch clutch and automatic-blip behavior, so follow the selected game's USE row.",
   "updated_at": "2026-08-28"
 }

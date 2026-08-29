@@ -1,8 +1,8 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.28",
-  "released_at": "2026-08-28",
+  "dataset_version": "0.5.33",
+  "released_at": "2026-08-29",
   "records": [
     "cars/alfa-romeo-156-super-touring.json",
     "cars/alfa-romeo-giulia-sprint-gta-1965.json",

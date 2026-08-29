@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "record_id": "volkswagen-polo-200-tsi-2018-2020",
   "identity": {
-    "display_name": "2018-2020 Volkswagen Polo 1.0 200 TSI",
+    "display_name": "Volkswagen Polo 1.0 200 TSI (2018-2020)",
     "manufacturer": "Volkswagen",
     "model": "Polo 1.0 200 TSI",
     "year": {
@@ -329,5 +329,6 @@
       }
     ]
   },
+  "driver_summary": "Brazilian 1.0 200 TSI road car with a six-speed torque-converter automatic and paddle control. There is no clutch operation to manage; real-car cut and blip behavior remain unestablished, so follow the selected simulator's USE rows for those details.",
   "updated_at": "2026-08-28"
 }

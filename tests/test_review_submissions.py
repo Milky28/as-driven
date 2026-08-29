@@ -27,6 +27,8 @@ from as_driven_db.review_proposal import (
     _candidate_source,
     _same_simulator_disposition,
     _simulator_overrides,
+    generate_driver_summary,
+    generate_driver_summary_proposal,
     prepare_review_proposal,
 )
 from as_driven_db.review_promotion import promote_review_case
@@ -756,6 +758,200 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertFalse(
                 (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
             )
+
+    def test_exact_curated_comparison_can_prepare_an_audited_correction(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, _, _ = self.prepare_promotable_case(repository)
+            promote_review_case(repository, cases, 17, approved=True)
+            record_path = (
+                repository
+                / "data"
+                / "v1"
+                / "cars"
+                / "public-test-car-2021.json"
+            )
+            curated = json.loads(record_path.read_text(encoding="utf-8"))
+            del curated["authentic_controls"]["steering"]["wheel_rim"]["open_top"]
+            record_path.write_text(
+                json.dumps(curated, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            source_path = repository / "data" / "v1" / "sources.json"
+            sources = json.loads(source_path.read_text(encoding="utf-8"))
+            real_source = next(
+                source
+                for source in sources["sources"]
+                if source["source_id"] == "example.public-test-car.2021"
+            )
+            real_source["source_type"] = "official-simulator"
+            source_path.write_text(
+                json.dumps(sources, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            repeated = observation()
+            repeated["observation_id"] = (
+                "ams2.public-test-car.20260825t120000000z-efab5678"
+            )
+            repeated["observed_at"] = "2026-08-25T12:00:00.0000000Z"
+            repeated["tests"]["automatic_blip"] = "no"
+            raw = (json.dumps(repeated, indent=2) + "\n").encode("utf-8")
+            comparison_cases = repository / "build" / "comparison-cases"
+            sync_submissions(
+                repository,
+                repository="example/project",
+                cases_directory=comparison_cases,
+                inbox=repository / "build" / "comparison-inbox",
+                issue_loader=lambda _repo, _label: [issue(18)],
+                attachment_fetcher=lambda _: raw,
+            )
+
+            comparison_dir = comparison_cases / "issue-18"
+            case = json.loads(
+                (comparison_dir / "case.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("review-needed", case["state"])
+            self.assertEqual("curated-identity-comparison", case["classification"])
+            self.assertEqual(["prepare-review"], allowed_case_actions(case))
+
+            proposal = prepare_review_proposal(repository, comparison_cases, 18)
+
+            self.assertEqual("passed", proposal["dry_run"])
+            self.assertEqual("manifest-review", proposal["state"])
+            manifest = json.loads(
+                (comparison_dir / "review-manifest.proposed.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            entry = manifest["records"][0]
+            self.assertEqual("public-test-car-2021", entry["record_id"])
+            self.assertIn(
+                "has no independent real-world source",
+                entry["confidence_notes"],
+            )
+            self.assertIn("correct_existing_simulator", entry)
+            self.assertNotIn("compatible_implementation", entry)
+            self.assertEqual(
+                "unknown",
+                entry["control_overrides"]["wheel_rim"]["open_top"],
+            )
+            self.assertTrue(
+                any(
+                    override["path"]
+                    == "/authentic_controls/steering/wheel_rim/open_top"
+                    and override["value"] == "not-applicable"
+                    for override in entry["simulator_overrides"]
+                ),
+                entry["simulator_overrides"],
+            )
+            self.assertIn(
+                "/overrides/authentic_controls/transmission/downshift/automatic_blip",
+                entry["correct_existing_simulator"]["corrected_behavior_paths"],
+            )
+            self.assertFalse((comparison_dir / "research-result.json").exists())
+            self.assertIn(
+                "Correction of the existing simulator entry",
+                (comparison_dir / "final-review.md").read_text(encoding="utf-8"),
+            )
+            index_path = repository / "data" / "v1" / "index.json"
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            index["dataset_version"] = proposal["dataset_version"]
+            index_path.write_text(
+                json.dumps(index, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "regenerate the proposal",
+            ):
+                promote_review_case(
+                    repository,
+                    comparison_cases,
+                    18,
+                    approved=True,
+                )
+            case = json.loads(
+                (comparison_dir / "case.json").read_text(encoding="utf-8")
+            )
+            self.assertIn("prepare-review", allowed_case_actions(case))
+            refreshed = prepare_review_proposal(repository, comparison_cases, 18)
+            self.assertNotEqual(
+                proposal["dataset_version"],
+                refreshed["dataset_version"],
+            )
+            generated = generate_driver_summary_proposal(
+                repository,
+                comparison_cases,
+                18,
+            )
+            self.assertEqual("passed", generated["dry_run"])
+            promoted = promote_review_case(
+                repository,
+                comparison_cases,
+                18,
+                approved=True,
+            )
+            self.assertEqual("promoted", promoted["state"])
+            promoted_record = json.loads(record_path.read_text(encoding="utf-8"))
+            self.assertEqual(
+                "not-applicable",
+                next(
+                    override["value"]
+                    for override in promoted_record["simulators"][0]["overrides"]
+                    if override["path"]
+                    == "/authentic_controls/steering/wheel_rim/open_top"
+                ),
+            )
+
+    def test_driver_summary_is_generated_after_review_and_dry_run_again(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, case_dir, _proposal = self.prepare_promotable_case(repository)
+
+            generated = generate_driver_summary_proposal(repository, cases, 17)
+
+            self.assertEqual("passed", generated["dry_run"])
+            manifest = json.loads(
+                (case_dir / "review-manifest.proposed.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            preview = json.loads(
+                (case_dir / "preview-record.json").read_text(encoding="utf-8")
+            )
+            summary = manifest["records"][0]["driver_summary"]
+            self.assertEqual(summary, preview["driver_summary"])
+            self.assertIn("not established", summary)
+            self.assertTrue((case_dir / "driver-summary.md").is_file())
+            self.assertIn(
+                summary,
+                (case_dir / "final-review.md").read_text(encoding="utf-8"),
+            )
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("manifest-review", case["state"])
+            self.assertEqual(
+                "generated",
+                case["review_proposal"]["driver_summary"]["status"],
+            )
+
+    def test_driver_summary_calls_out_cross_simulator_technique_disagreement(self) -> None:
+        record = import_observation(observation())["record"]
+        second = json.loads(json.dumps(record["simulators"][0]))
+        second["simulator"] = "ac"
+        second["overrides"] = [
+            {
+                "path": "/authentic_controls/transmission/upshift/automatic_cut",
+                "value": "no",
+                "condition": "Exact AC implementation observed without a cut.",
+            }
+        ]
+        record["simulators"].append(second)
+
+        summary, disagreements = generate_driver_summary(record)
+
+        self.assertIn("upshift cut", disagreements)
+        self.assertIn("follow the selected game's USE row", summary)
 
     def test_review_proposal_accepts_an_established_optional_control_field(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

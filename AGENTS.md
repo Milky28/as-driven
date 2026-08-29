@@ -79,7 +79,7 @@ than silently queueing verification work.
 - Branch: `codex/stabilization`; private remote `origin` at
   `github.com/Milky28/as-driven`.
 - Early-access client: 0.20.2.
-- Dataset: 0.5.28 with 279 curated records.
+- Dataset: 0.5.33 with 279 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has 24 cases published and six withdrawn,
   with nothing waiting on research or final review. Issue 1 for the Chevrolet

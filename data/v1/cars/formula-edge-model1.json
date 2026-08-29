@@ -79,27 +79,41 @@
         "auto_blip": "yes",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "round",
+          "normalized": "d-shaped",
           "integrated_display": "no",
           "shift_lights": "no",
           "open_top": "yes",
-          "source_label": "live-cockpit-open-top-round-no-display"
+          "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Exact guided testing detected automatic cut and blip with assists disabled.",
-          "'Formula Edge Model1' is an exact observed identity from before the aero split; it inherits the verified controls and was not separately live-tested."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e by Jason Kinslow.",
+          "Correction superseding ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91: Repeat guided drive ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e materially changed the reviewed AMS2 result: /behavior/wheel_rim_type/normalized from 'round' to 'd-shaped'; /overrides/authentic_controls/steering/wheel_rim/shape from {'absent': True} to 'd-shaped'."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
-      "verified_at": "2026-08-12",
+      "verified_at": "2026-08-29",
       "source_refs": [
         "ams2.reiza-release.1.6.9.5.formula-edge",
-        "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91"
+        "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
+        "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91"
       ],
       "confidence": {
         "level": "verified",
-        "basis": "Exact identity, technique, and cockpit controls were directly verified."
+        "basis": "The exact AMS2 identity already belongs to curated record formula-edge-model1; ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e is reviewed only as new simulator implementation evidence."
       }
     }
   ],
@@ -107,8 +121,7 @@
     "claims": [
       {
         "paths": [
-          "/identity",
-          "/simulators/0/identities"
+          "/identity"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.9.5.formula-edge",
@@ -120,14 +133,35 @@
       {
         "paths": [
           "/authentic_controls/transmission",
-          "/authentic_controls/steering/wheel_rim",
-          "/simulators/0/behavior"
+          "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
           "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91"
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation; draft hash b1d63d80."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.9.5.formula-edge",
+          "ams2.local-live-formula-edge-model1-hd-controls.1.6.9.91",
+          "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Official Formula Edge context and exact telemetry establish the identity."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -138,6 +172,6 @@
   "notes": [
     "'Formula Edge Model1' is the same car observed before the aero suffix existed. It inherits these verified controls as an approved configuration alias and was not separately live-tested."
   ],
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-08-29",
   "driver_summary": "Paddle sequential with one job left for your left foot, which is the clutch to pull away. After that it cuts the upshift and blips the downshift on its own."
 }

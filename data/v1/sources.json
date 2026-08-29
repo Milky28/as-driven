@@ -9226,6 +9226,42 @@
       "retrieved_at": "2026-08-28",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.lotus-23.20260828t205725996z-e14bbb93 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91.correction-5812ce06",
+      "title": "Live AMS2 Gillet Vertigo Streiff guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/46",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-29",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91.correction-d05773d5",
+      "title": "Live AMS2 TVR Tuscan T400R GT2 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/47",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-29",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "ams2.local-live-formula-edge-model1-high-downforce-controls.1.6.9.91",
+      "title": "Live AMS2 Formula Edge Model1 - High Downforce guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/48",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-08-29",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.formula-edge-model1-high-downforce.20260829t044719166z-8339341e by Jason Kinslow; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }
