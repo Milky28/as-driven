@@ -8,17 +8,17 @@ Build a database-only ZIP and SHA-256 checksum with:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-database.ps1
 ```
 
-Build the complete early-access release candidates (plugin and database as
+Build the complete release candidates (plugin and database as
 separate checksummed ZIPs) with:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-early-access.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-release.ps1
 ```
 
 That command requires the supported SimHub SDK to be installed locally. It
 runs the database and .NET checks, builds the SimHub package, tests database
 installation and plugin removal in temporary directories, and writes release
-metadata under `dist/early-access`. See `docs/releasing.md` for manual release
+metadata under `dist/release`. See `docs/releasing.md` for manual release
 candidate checks and publishing steps.
 
 The SimHub ZIP has three user-facing files at its root:
@@ -33,15 +33,15 @@ release-package test also verifies that every shipped file is checksummed and
 that internal handoff documents are absent.
 
 After manually checking the release candidate, preview a draft GitHub
-prerelease with:
+release with:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-prerelease.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-release.ps1
 ```
 
 The preview verifies both ZIPs, their checksums, generated notes, metadata, and
 temporary installations. It does not contact GitHub. Rerun with `-Approve` to
-require a clean, synchronized `main` branch and create a draft prerelease. The
+require a clean, synchronized `main` branch and create a draft release. The
 script never publishes the draft.
 
 The archive contains `data/`, `schema/`, the data-model and evidence-boundary
@@ -74,7 +74,7 @@ plugin's **Refresh database** action after installation.
 
 ## The update manifest
 
-`publish-github-prerelease.ps1` writes `as-driven-latest.json` beside the release
+`publish-github-release.ps1` writes `as-driven-latest.json` beside the release
 artifacts and attaches it, containing exactly three fields:
 
 ```json

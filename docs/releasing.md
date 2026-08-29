@@ -1,4 +1,4 @@
-# Early-access release process
+# Release process
 
 Plugin and database releases are separate artifacts. The plugin ZIP contains a
 known-good database snapshot for first installation; the database ZIP updates
@@ -12,7 +12,7 @@ only curated data.
 - `data/v1/index.json` owns the independent dataset version.
 - Schema v1 clients accept compatible schema-v1 dataset updates.
 
-The first early-access release is plugin 0.15.0 with dataset 0.3.18. Do not
+The first release is plugin 0.15.0 with dataset 0.3.18. Do not
 change the plugin version merely for a database-only release.
 
 ## Build release candidates
@@ -21,13 +21,13 @@ Run from the repository root on the Windows release machine with the supported
 SimHub version installed:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-early-access.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-release.ps1
 ```
 
 The command validates the database, runs Python and .NET tests, generates all
 Dash Studio artifacts, exercises the plugin installer, database installer, and
 plugin uninstaller against temporary fake installations, and writes the release
-candidates under `dist/early-access`. It then extracts the final SimHub ZIP and
+candidates under `dist/release`. It then extracts the final SimHub ZIP and
 verifies its checksum, manifests, packaged hashes, required contents, and
 installer from the same artifact a tester will receive. Release packages omit
 debug symbols and fail verification if a local user path or internal handoff
@@ -61,18 +61,18 @@ release step. The database package is also built in public CI.
 First preview the checked release without changing GitHub:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-prerelease.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-release.ps1
 ```
 
-Then create a draft prerelease from a clean, synchronized `main` branch:
+Then create a draft release from a clean, synchronized `main` branch:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-prerelease.ps1 -Approve
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\publish-github-release.ps1 -Approve
 ```
 
 The script rechecks the SimHub ZIP, database ZIP, adjacent checksums, metadata,
 generated release notes, and temporary installations. It creates a GitHub draft
-and prerelease tag targeting the current commit, uploads all release artifacts,
+and release tag targeting the current commit, uploads all release artifacts,
 and stops. Review the draft and manual checks before publishing it on GitHub.
 
 Automatic update checking remains out of scope until the public repository and

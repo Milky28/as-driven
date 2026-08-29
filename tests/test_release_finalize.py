@@ -6,6 +6,7 @@ import tempfile
 import unittest
 
 from as_driven_db.release_finalize import (
+    ReleaseFinalizeError,
     finalize_release,
     release_stats,
     update_release_references,
@@ -52,21 +53,17 @@ def _seed_release(root: Path) -> None:
     )
     (root / "docs").mkdir(parents=True, exist_ok=True)
     (root / "README.md").write_text(
-        "Dataset 0.9.9 contains 1 reviewed car record.\n"
-        "The database currently contains 1 curated car records.\n"
-        "Of those, 1 carry AMS2 entries; one is AC EVO-only and two are original-AC-only.\n",
+        "# As Driven\n\n"
+        "<!-- release-facts:start -->\n"
+        "Dataset 0.9.9 contains 1 reviewed car records.\n"
+        "<!-- release-facts:end -->\n\n"
+        "Matching is exact.\n",
         encoding="utf-8",
     )
     for name in ("AGENTS.md", "CLAUDE.md"):
         (root / name).write_text(
             "- Dataset: 0.9.9 with 1 curated records.\n", encoding="utf-8"
         )
-    (root / "EARLY_ACCESS.md").write_text(
-        "- As Driven dataset 0.9.9 and schema v1.\n"
-        "The database currently contains 1 curated car records. Of those, 1 carry\n"
-        "AMS2 entries; one is currently AC EVO-only and two original-AC records are AC-only.\n",
-        encoding="utf-8",
-    )
     (root / "docs" / "ams2-coverage-plan.md").write_text(
         "Dataset 0.9.9 contains 1 curated records, 1 of which carry AMS2 entries.\n",
         encoding="utf-8",
@@ -112,11 +109,13 @@ class ReleaseFinalizeTests(unittest.TestCase):
             )
 
             self.assertIn("README.md", changed)
-            self.assertIn("Dataset 1.2.3 contains 2 reviewed", (root / "README.md").read_text())
-            self.assertIn(
-                "As Driven dataset 1.2.3 and schema v1",
-                (root / "EARLY_ACCESS.md").read_text(),
-            )
+            readme = (root / "README.md").read_text()
+            self.assertIn("Dataset 1.2.3 contains 2 reviewed", readme)
+            # The block is regenerated whole, so the table arrives with it and
+            # the prose on either side is left alone.
+            self.assertIn("| Automobilista 2 | 1 | not applicable |", readme)
+            self.assertIn("| Assetto Corsa Competizione | 1 | 0 |", readme)
+            self.assertIn("Matching is exact.", readme)
             archetypes = (root / "docs" / "archetypes.md").read_text()
             self.assertIn("1 of 2 records are classified", archetypes)
             self.assertIn("1 awaiting classification", archetypes)
@@ -130,6 +129,26 @@ class ReleaseFinalizeTests(unittest.TestCase):
                     {"summary": {"findings": 4, "cars_with_disagreements": 3}},
                 ),
             )
+
+    def test_a_missing_readme_block_is_refused_rather_than_ignored(self) -> None:
+        # The release facts used to be patched into prose by eight regexes, and
+        # re.sub leaves the text alone when a pattern stops matching. Rewording
+        # the README therefore published stale counts silently. The generated
+        # block has to fail loudly instead.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _seed_release(root)
+            (root / "README.md").write_text(
+                "# As Driven\n\nDataset 0.9.9 contains 1 reviewed car records.\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(ReleaseFinalizeError) as raised:
+                update_release_references(
+                    root,
+                    release_stats(root),
+                    {"summary": {"findings": 4, "cars_with_disagreements": 3}},
+                )
+            self.assertIn("release-facts", str(raised.exception))
 
     def test_finalize_writes_outputs_and_runs_validation(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

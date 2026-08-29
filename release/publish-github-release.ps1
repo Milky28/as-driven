@@ -7,12 +7,12 @@ param(
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 if ([string]::IsNullOrWhiteSpace($ArtifactsDirectory)) {
-    $ArtifactsDirectory = Join-Path $repositoryRoot "dist\early-access"
+    $ArtifactsDirectory = Join-Path $repositoryRoot "dist\release"
 }
 $artifactRoot = [System.IO.Path]::GetFullPath($ArtifactsDirectory)
-$metadataPath = Join-Path $artifactRoot "early-access-release.json"
+$metadataPath = Join-Path $artifactRoot "release.json"
 if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
-    throw "Build the early-access release before publishing: $metadataPath"
+    throw "Build the release before publishing: $metadataPath"
 }
 
 $metadata = Get-Content -LiteralPath $metadataPath -Raw | ConvertFrom-Json
@@ -69,7 +69,7 @@ if ((Get-Content -LiteralPath $releaseNotes -Raw) -match '\{\{[A-Z_]+\}\}') {
 }
 
 & powershell -NoProfile -ExecutionPolicy Bypass -File `
-    (Join-Path $PSScriptRoot "test-early-access-package.ps1") `
+    (Join-Path $PSScriptRoot "test-release-package.ps1") `
     -PackagePath $pluginPackage
 if ($LASTEXITCODE -ne 0) {
     throw "The SimHub release package failed its final verification."
@@ -94,7 +94,7 @@ if ([string]::IsNullOrWhiteSpace($Repository)) {
 }
 
 $tag = "v$pluginVersion"
-$title = "As Driven $pluginVersion early access"
+$title = "As Driven $pluginVersion"
 
 # The manifest the plugin's manual update check reads. It is generated here, from
 # the versions this release is actually publishing, because the check finds its
@@ -138,7 +138,7 @@ $assetPaths = @(
     $releaseNotes
 )
 
-Write-Host "Verified draft prerelease:"
+Write-Host "Verified draft release:"
 Write-Host "  Repository: $Repository"
 Write-Host "  Tag: $tag"
 Write-Host "  Title: $title"
@@ -149,23 +149,23 @@ Write-Host "    dataset $datasetVersion, plugin $pluginVersion"
 Write-Host "    Serve this from a stable https URL and set it as the plugin's update endpoint."
 
 if (-not $Approve) {
-    Write-Host "No GitHub changes were made. Rerun with -Approve to create the draft prerelease."
+    Write-Host "No GitHub changes were made. Rerun with -Approve to create the draft release."
     exit 0
 }
 
 $branch = (& git -C $repositoryRoot branch --show-current).Trim()
 if ($branch -ne "main") {
-    throw "Public prereleases must be created from main, not $branch."
+    throw "Public releases must be created from main, not $branch."
 }
 $trackedChanges = @(& git -C $repositoryRoot status --porcelain --untracked-files=no)
 if ($LASTEXITCODE -ne 0 -or $trackedChanges.Count -ne 0) {
-    throw "Tracked repository changes must be committed before creating a prerelease."
+    throw "Tracked repository changes must be committed before creating a release."
 }
 $counts = ((& git -C $repositoryRoot rev-list --left-right --count '@{upstream}...HEAD').Trim() `
     -split '\s+')
 if ($LASTEXITCODE -ne 0 -or $counts.Count -ne 2 `
     -or [int]$counts[0] -ne 0 -or [int]$counts[1] -ne 0) {
-    throw "The main branch must be synchronized with its upstream before creating a prerelease."
+    throw "The main branch must be synchronized with its upstream before creating a release."
 }
 if ($null -eq (Get-Command gh -ErrorAction SilentlyContinue)) {
     throw "GitHub CLI is required. Install gh and run gh auth login."
@@ -185,11 +185,10 @@ $arguments = @("release", "create", $tag) + $assetPaths + @(
     "--target", $commit,
     "--title", $title,
     "--notes-file", $releaseNotes,
-    "--draft",
-    "--prerelease"
+    "--draft"
 )
 & gh @arguments
 if ($LASTEXITCODE -ne 0) {
-    throw "GitHub did not create the draft prerelease."
+    throw "GitHub did not create the draft release."
 }
-Write-Host "Created draft prerelease $tag. Review it on GitHub before publishing."
+Write-Host "Created draft release $tag. Review it on GitHub before publishing."

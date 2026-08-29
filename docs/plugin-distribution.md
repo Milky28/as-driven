@@ -111,6 +111,6 @@ what users already expect is most of the value of doing this.
   layout. The drop-in path.
 - **`simhub/install.ps1` stays** for the timestamped rollback backup, layout
   preservation, and controlled dataset updates. It is the supported path for
-  anyone who wants those, and it is what `EARLY_ACCESS.md` documents.
+  anyone who wants those, and it is what `docs/install.md` documents.
 - **`release/build-database.ps1` is unaffected**, which is the point of the seed
   fallback rather than a plain embed.

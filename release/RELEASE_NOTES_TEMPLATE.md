@@ -1,4 +1,4 @@
-# As Driven {{PLUGIN_VERSION}} early access
+# As Driven {{PLUGIN_VERSION}}
 
 As Driven tells a sim racer which physical controls to fit and how to shift
 authentically. This release includes SimHub client {{PLUGIN_VERSION}} and a
@@ -34,7 +34,7 @@ binaries, settings, overlays, and contribution drafts are not replaced.
 Checksums are attached for both ZIP files. The plugin is not code-signed, so
 Windows may display a warning for the downloaded scripts.
 
-Read the [early-access notes](https://github.com/Milky28/as-driven/blob/main/EARLY_ACCESS.md),
+Read the [install guide](https://github.com/Milky28/as-driven/blob/main/docs/install.md),
 [privacy policy](https://github.com/Milky28/as-driven/blob/main/PRIVACY.md), and
 [problem-report form](https://github.com/Milky28/as-driven/issues/new/choose)
 before testing.

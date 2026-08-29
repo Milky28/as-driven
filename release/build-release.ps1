@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path $repositoryRoot "dist\early-access"
+    $OutputDirectory = Join-Path $repositoryRoot "dist\release"
 }
 $outputRoot = [System.IO.Path]::GetFullPath($OutputDirectory)
 New-Item -ItemType Directory -Path $outputRoot -Force | Out-Null
@@ -78,7 +78,7 @@ try {
             -Destination (Join-Path $packageRoot "simhub")
     }
     foreach ($document in @(
-        "EARLY_ACCESS.md",
+        "README.md",
         "PRIVACY.md",
         "SECURITY.md",
         "CHANGELOG.md",
@@ -87,6 +87,10 @@ try {
     )) {
         Copy-Item -LiteralPath (Join-Path $repositoryRoot $document) -Destination $packageRoot
     }
+    # The README links to this for the full procedure, so ship it alongside
+    # rather than leaving a dead reference inside an extracted ZIP.
+    Copy-Item -LiteralPath (Join-Path $repositoryRoot "docs\install.md") `
+        -Destination (Join-Path $packageRoot "INSTALL.md")
     foreach ($packageDocument in @(
         "START HERE.txt",
         "Install As Driven.cmd",
@@ -99,7 +103,6 @@ try {
     $manifest = [ordered]@{
         package_format = "as-driven-simhub"
         package_format_version = "1.0.0"
-        release_channel = "early-access"
         plugin_version = $pluginVersion
         core_version = $coreVersion
         bundled_dataset_version = $datasetVersion
@@ -134,10 +137,10 @@ try {
         Set-Content -LiteralPath "$zipPath.sha256" -Encoding ASCII
 
     & powershell -NoProfile -ExecutionPolicy Bypass -File `
-        (Join-Path $PSScriptRoot "test-early-access-package.ps1") `
+        (Join-Path $PSScriptRoot "test-release-package.ps1") `
         -PackagePath $zipPath
     if ($LASTEXITCODE -ne 0) {
-        throw "The final early-access package test failed."
+        throw "The final release package test failed."
     }
 
     $releaseNotesName = "release-notes-$pluginVersion.md"
@@ -156,7 +159,6 @@ try {
     $releaseNotes | Set-Content -LiteralPath $releaseNotesPath -Encoding UTF8
 
     $releaseMetadata = [ordered]@{
-        release_channel = "early-access"
         plugin_version = $pluginVersion
         dataset_version = $datasetVersion
         record_count = $recordCount
@@ -171,9 +173,9 @@ try {
         generated_at = [DateTime]::UtcNow.ToString("o")
     }
     $releaseMetadata | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (
-        Join-Path $outputRoot "early-access-release.json") -Encoding UTF8
+        Join-Path $outputRoot "release.json") -Encoding UTF8
 
-    Write-Host "Built early-access release candidates: $outputRoot"
+    Write-Host "Built release candidates: $outputRoot"
 }
 finally {
     if (Test-Path -LiteralPath $staging) {

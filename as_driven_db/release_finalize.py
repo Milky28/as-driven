@@ -75,6 +75,64 @@ def release_stats(root: Path) -> dict[str, Any]:
     }
 
 
+# Display names for the simulators a release can cover. The README table below
+# is generated, so a simulator missing here would appear under its bare id.
+SIMULATOR_NAMES = {
+    "ams2": "Automobilista 2",
+    "ac": "Assetto Corsa",
+    "acc": "Assetto Corsa Competizione",
+    "ac-evo": "Assetto Corsa EVO",
+    "ac-rally": "Assetto Corsa Rally",
+    "iracing": "iRacing",
+    "raceroom": "RaceRoom Racing Experience",
+    "rfactor2": "rFactor 2",
+}
+
+
+def _release_facts(stats: dict[str, Any]) -> str:
+    """The generated README block stating what the current dataset covers.
+
+    Written whole rather than patched sentence by sentence. The prose version
+    needed eight overlapping regexes over one paragraph, and `re.sub` leaves the
+    text alone when a pattern stops matching, so an edit to the wording failed
+    silently and left a stale number in the file most readers see first.
+    """
+    version = stats["dataset_version"]
+    records = stats["records"]
+    simulators = stats["simulator_records"]
+    overlaps = stats["ams2_overlaps"]
+    lines = [
+        f"Dataset {version} contains {records} reviewed car records.",
+        "",
+        "| Simulator | Records | Also curated for AMS2 |",
+        "| --- | --- | --- |",
+    ]
+    for simulator, count in sorted(
+        simulators.items(), key=lambda item: (-item[1], item[0])
+    ):
+        shared = (
+            "not applicable"
+            if simulator == "ams2"
+            else str(overlaps.get(simulator, 0))
+        )
+        lines.append(
+            f"| {SIMULATOR_NAMES.get(simulator, simulator)} | {count} | {shared} |"
+        )
+    return "\n".join(lines)
+
+
+def _replace_block(text: str, name: str, body: str) -> str:
+    """Replace one delimited generated block, refusing to no-op silently."""
+    start = f"<!-- {name}:start -->"
+    end = f"<!-- {name}:end -->"
+    pattern = re.compile(re.escape(start) + r"[\s\S]*?" + re.escape(end))
+    if not pattern.search(text):
+        raise ReleaseFinalizeError(
+            f"the generated {name!r} block is missing; release facts cannot be refreshed"
+        )
+    return pattern.sub(lambda _match: f"{start}\n{body}\n{end}", text)
+
+
 def _replace(text: str, pattern: str, replacement: str) -> str:
     return re.sub(pattern, lambda _match: replacement, text, flags=re.MULTILINE)
 
@@ -99,7 +157,6 @@ def update_release_references(
         root / "README.md",
         root / "AGENTS.md",
         root / "CLAUDE.md",
-        root / "EARLY_ACCESS.md",
         root / "docs" / "ams2-coverage-plan.md",
         root / "docs" / "archetypes.md",
         root / "docs" / "simulator-disagreement-audit.md",
@@ -118,115 +175,7 @@ def update_release_references(
                 f"- Dataset: {version} with {records} curated records.",
             )
         if path.name == "README.md":
-            text = re.sub(
-                r"Dataset \d+\.\d+\.\d+ contains \d+ (reviewed|curated)",
-                lambda match: f"Dataset {version} contains {records} {match.group(1)}",
-                text,
-            )
-            text = _replace(
-                text,
-                r"The database currently contains \d+ curated car records\.",
-                f"The database currently contains {records} curated car records.",
-            )
-            text = _replace(
-                text,
-                r"\w+ records carry\s+Assetto Corsa EVO entries, \w+ of them shared with AMS2\.",
-                f"\n{simulators.get('ac-evo', 0)} records carry Assetto Corsa EVO "
-                f"entries, {overlaps.get('ac-evo', 0)} of them\nshared with AMS2.",
-            )
-            text = _replace(
-                text,
-                r"ACC has \d+ reviewed cross-simulator entries\.",
-                f"\nACC has {simulators.get('acc', 0)} reviewed cross-simulator entries.",
-            )
-            text = _replace(
-                text,
-                r"Original Assetto Corsa has \w+ AC-only records and \d+\s+records shared with (?:another simulator|AMS2)\.",
-                f"Original Assetto Corsa has {exclusive.get('ac', 0)} AC-only records and "
-                f"{overlaps.get('ac', 0)}\nrecords shared with AMS2.",
-            )
-            text = _replace(
-                text,
-                r"Of those, \d+ carry AMS2 entries; [^.]+\.[ \t]*",
-                f"Of those, {simulators.get('ams2', 0)} carry AMS2 entries;\n"
-                f"{exclusive.get('ac-evo', 0)} "
-                f"{_verb(exclusive.get('ac-evo', 0), 'is', 'are')} AC EVO-only and "
-                f"{exclusive.get('ac', 0)} "
-                f"{_verb(exclusive.get('ac', 0), 'is', 'are')} original-AC-only.\n",
-            )
-            text = _replace(
-                text,
-                r"\w+ AMS2 records also carry separately reviewed[\s\S]*?Assetto Corsa Competizione entries\.",
-                f"{overlaps.get('ac-evo', 0)} AMS2 records also carry separately reviewed "
-                f"Assetto\nCorsa EVO entries, {overlaps.get('ac', 0)} also carry original "
-                f"Assetto Corsa entries, and\n{overlaps.get('acc', 0)} also carry Assetto "
-                "Corsa Competizione entries.",
-            )
-            text = _replace(
-                text,
-                r"New\s+content still fails closed until it is observed and reviewed\.[\s\S]*?Original Assetto Corsa has \w+ AC-only records and \d+\s+records shared\s+with (?:another simulator|AMS2)\.",
-                "New content still fails closed until it is observed and reviewed.\n"
-                f"{simulators.get('ac-evo', 0)} records carry Assetto Corsa EVO entries, "
-                f"{overlaps.get('ac-evo', 0)} of them shared with AMS2. ACC has "
-                f"{simulators.get('acc', 0)}\nreviewed cross-simulator entries. Original "
-                f"Assetto Corsa has {exclusive.get('ac', 0)} AC-only records and "
-                f"{overlaps.get('ac', 0)}\nrecords shared with AMS2.",
-            )
-            text = _replace(
-                text,
-                r"Of those, \d+ carry AMS2 entries;[\s\S]*?Assetto Corsa Competizione entries\.",
-                f"Of those, {simulators.get('ams2', 0)} carry AMS2 entries; "
-                f"{exclusive.get('ac-evo', 0)} "
-                f"{_verb(exclusive.get('ac-evo', 0), 'is', 'are')} AC EVO-only and "
-                f"{exclusive.get('ac', 0)} "
-                f"{_verb(exclusive.get('ac', 0), 'is', 'are')}\noriginal-AC-only. "
-                f"{overlaps.get('ac-evo', 0)} AMS2 records also carry separately reviewed "
-                f"Assetto Corsa\nEVO entries, {overlaps.get('ac', 0)} also carry original "
-                f"Assetto Corsa entries, and {overlaps.get('acc', 0)} also carry\nAssetto "
-                "Corsa Competizione entries.",
-            )
-
-        if path.name == "EARLY_ACCESS.md":
-            text = _replace(
-                text,
-                r"- As Driven dataset \d+\.\d+\.\d+ and schema v1\.",
-                f"- As Driven dataset {version} and schema v1.",
-            )
-            text = _replace(
-                text,
-                r"The database currently contains \d+ curated car records\.",
-                f"The database currently contains {records} curated car records.",
-            )
-            text = _replace(
-                text,
-                r"Of those, \d+ carry\s+AMS2 entries; [^.]+\.[ \t]*",
-                f"Of those, {simulators.get('ams2', 0)} carry\nAMS2 entries; "
-                f"{exclusive.get('ac-evo', 0)} "
-                f"{_verb(exclusive.get('ac-evo', 0), 'is', 'are')} AC EVO-only and "
-                f"{exclusive.get('ac', 0)} original-AC "
-                f"{_verb(exclusive.get('ac', 0), 'record is', 'records are')} AC-only.",
-            )
-            text = _replace(
-                text,
-                r"\w+ AMS2 records also carry reviewed Assetto Corsa EVO development[\s\S]*?AMS2 records also carry reviewed Assetto Corsa Competizione entries\.",
-                f"{overlaps.get('ac-evo', 0)} AMS2 records also carry reviewed Assetto "
-                f"Corsa EVO development\nentries, {overlaps.get('ac', 0)} AMS2 records also "
-                f"carry reviewed original Assetto Corsa entries,\nand {overlaps.get('acc', 0)} "
-                "AMS2 records also carry reviewed Assetto Corsa Competizione entries.",
-            )
-            text = _replace(
-                text,
-                r"Of those, \d+ carry\s+AMS2 entries;[\s\S]*?AMS2 records also carry reviewed Assetto Corsa Competizione entries\.",
-                f"Of those, {simulators.get('ams2', 0)} carry AMS2 entries; "
-                f"{exclusive.get('ac-evo', 0)} "
-                f"{_verb(exclusive.get('ac-evo', 0), 'is', 'are')} currently AC EVO-only "
-                f"and {exclusive.get('ac', 0)} original-AC\n"
-                f"{_verb(exclusive.get('ac', 0), 'record is', 'records are')} AC-only. "
-                f"{overlaps.get('ac-evo', 0)} AMS2 records also carry reviewed Assetto Corsa "
-                f"EVO\ndevelopment entries, {overlaps.get('ac', 0)} AMS2 records also carry "
-                f"reviewed original Assetto Corsa\nentries, and {overlaps.get('acc', 0)} AMS2 "
-                "records also carry reviewed Assetto Corsa Competizione entries.",
-            )
+            text = _replace_block(text, "release-facts", _release_facts(stats))
 
         if path.name == "ams2-coverage-plan.md":
             text = re.sub(

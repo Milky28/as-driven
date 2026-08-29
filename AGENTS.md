@@ -78,7 +78,7 @@ than silently queueing verification work.
 
 - Branch: `codex/stabilization`; private remote `origin` at
   `github.com/Milky28/as-driven`.
-- Early-access client: 0.20.2.
+- Client: 0.20.2.
 - Dataset: 0.5.33 with 279 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has 38 accepted cases with published
@@ -107,7 +107,7 @@ than silently queueing verification work.
   and cannot establish.
 - Assetto Corsa EVO is the active second-simulator development track. Seven
   records now carry reviewed AC EVO entries; this is development coverage, not
-  part of the certified early-access target. `docs/ac-evo-coverage-plan.md` owns
+  part of the tested target. `docs/ac-evo-coverage-plan.md` owns
   its drive order and open questions.
 - Assetto Corsa Competizione is recognized as `acc`; 18 exact entries are
   reviewed, including the completed ranked-ten comparison batch.
@@ -118,7 +118,7 @@ than silently queueing verification work.
 - Original Assetto Corsa development now covers 21 records: seven AC-only and
   14 shared with another simulator. Each source fingerprints the exact installed
   implementation; this remains development coverage outside the certified
-  early-access target.
+  tested target.
 - The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
   those implementations. That result is stored as a simulator override while
   the authentic real-car manual-blip field remains unknown.
@@ -131,7 +131,7 @@ than silently queueing verification work.
   Treat the remaining gaps as documented negative results, not an active batch
   to search again without a new exact-source lead.
 - `validate` compares the dataset version and record count quoted in this file,
-  `README.md`, `CLAUDE.md`, `EARLY_ACCESS.md`, and `docs/*.md` against
+  `README.md`, `CLAUDE.md`, `AGENTS.md`, and `docs/*.md` against
   `data/v1/index.json`. Update the line above with the dataset, or validation
   fails.
 - Icon and brand-mark concepts under `docs/design/` are review-only and are not

@@ -439,16 +439,16 @@ class ValidationTests(unittest.TestCase):
 
     def test_an_emptied_status_document_is_reported(self) -> None:
         # Dataset 0.3.65 shipped README.md, CLAUDE.md, AGENTS.md and
-        # EARLY_ACCESS.md truncated to nothing by a bad version bump, and
+        # status documents truncated to nothing by a bad version bump, and
         # validation passed: an empty file states no version to disagree with.
-        for name in ("README.md", "CLAUDE.md", "AGENTS.md", "EARLY_ACCESS.md"):
+        for name in ("README.md", "CLAUDE.md", "AGENTS.md"):
             with self.subTest(name), tempfile.TemporaryDirectory() as directory:
                 temp_root = self._copy_repository_data(Path(directory))
                 index = json.loads(
                     (temp_root / "data" / "v1" / "index.json").read_text(encoding="utf-8")
                 )
                 version = index["dataset_version"]
-                for other in ("README.md", "CLAUDE.md", "AGENTS.md", "EARLY_ACCESS.md"):
+                for other in ("README.md", "CLAUDE.md", "AGENTS.md"):
                     (temp_root / other).write_text(f"Dataset {version}\n", encoding="utf-8")
 
                 self.assertEqual(validate_repository(temp_root), [])

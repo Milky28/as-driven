@@ -1,9 +1,10 @@
 # Changelog
 
-Plugin and dataset versions are independent. Dataset history is also recorded
-in `data/v1/index.json` and the project documentation.
+Plugin and dataset versions count different things, but ship together in one
+release. Dataset history is also recorded in `data/v1/index.json` and the
+project documentation.
 
-## 0.20.2 early access - 2026-08-27
+## 0.20.2 - 2026-08-27
 
 - Add the native As Driven settings page with live preflight, offline car
   browsing, contribution capture, and advanced diagnostics.
@@ -13,7 +14,7 @@ in `data/v1/index.json` and the project documentation.
   configurations alongside the established shifter and technique guidance.
 - Expand exact reviewed development coverage across AMS2, Assetto Corsa,
   Assetto Corsa Competizione, Assetto Corsa EVO, RaceRoom, and rFactor 2 while
-  retaining AMS2 as the certified early-access client target.
+  retaining AMS2 as the tested client target.
 - Preserve customized overlay positions during upgrades and keep settings,
   drafts, diagnostics, and the database during default removal.
 - Ship a privacy-scanned, checksummed SimHub ZIP with root-level guided install

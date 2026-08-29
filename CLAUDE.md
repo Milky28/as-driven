@@ -45,7 +45,7 @@ SimHub SDK binaries into the repository or release package.
 - `simhub/AsDriven.Plugin/`: direct SimHub adapter and settings UI.
 - `simhub/dash/`: generated Dash Studio source and approved raster assets.
 - `tests/`: Python regression tests and legally safe fixtures.
-- `release/`: separate database and early-access release tooling.
+- `release/`: separate database and client release tooling.
 - `docs/`: data model, evidence, coverage, integration, and release guidance.
 
 Generated `build/`, `dist/`, `bin/`, `obj/`, Python caches, and local telemetry
@@ -111,26 +111,34 @@ Build and test a database-only package:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-database.ps1
 ```
 
-Build the complete early-access candidates on Windows with the supported SimHub
+Build the complete release candidates on Windows with the supported SimHub
 SDK installed:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-early-access.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\release\build-release.ps1
 ```
 
-The early-access command runs database validation, Python tests, the complete
+The release command runs database validation, Python tests, the complete
 SimHub build, temporary install and uninstall tests, database rollback tests,
 final-ZIP checksum and per-file hash verification, and an install from the
-extracted artifact. Outputs go under ignored `dist/early-access`.
+extracted artifact. Outputs go under ignored `dist/release`.
 
-Plugin and database versions are independent:
+Plugin and database versions describe different things, but ship together:
 
 - plugin and core DLL versions are aligned for an easily audited client build;
 - `data/v1/index.json` owns the dataset version;
-- a database-only release must not change the plugin version;
-- a plugin package may bundle a known-good dataset for first installation.
+- every published release ships the full client package carrying the current
+  dataset, including a release that exists only because the data changed, so a
+  data-only release still bumps the plugin version;
+- `release/build-database.ps1` still produces a portable dataset package for
+  clients that are not SimHub, and `release/install-database.ps1` remains a
+  maintainer tool rather than a user update route.
 
-See `EARLY_ACCESS.md`, `docs/releasing.md`, and `release/README.md` before
+Users have exactly one update procedure: install the newest release over the
+old one. A second route existed on paper but required a repository checkout,
+which meant it was never actually available to the people it was written for.
+
+See `docs/install.md`, `docs/releasing.md`, and `release/README.md` before
 publishing. Automatic update checks remain out of scope: the check is manual and
 notify-only by design, not merely until an endpoint exists. A dataset that
 changed under a driver mid-session would rewrite the guidance they verified,
@@ -172,7 +180,7 @@ approval are required before release. See `PRIVACY.md` and
 ## Current handoff state
 
 - Branch: `codex/stabilization`.
-- Early-access client: 0.20.2.
+- Client: 0.20.2.
 - Dataset: 0.5.33 with 279 curated records.
 - Certified development target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
@@ -257,7 +265,7 @@ approval are required before release. See `PRIVACY.md` and
   simulator's drive can join a record without inheriting another simulator's
   behavior. The client canonicalises SimHub's `AssettoCorsaEvo` to `ac-evo`;
   this remains development coverage rather than part of the certified
-  early-access target. Roster overlaps, drive order and name matches to avoid
+  tested target. Roster overlaps, drive order and name matches to avoid
   are in `docs/ac-evo-coverage-plan.md`.
 - **Assetto Corsa Competizione** is recognized separately as `acc`. Eighteen exact
   entries are reviewed after the ranked-ten comparison batch; the Audi R8 LMS

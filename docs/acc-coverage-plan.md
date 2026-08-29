@@ -8,7 +8,7 @@ for indiscriminate roster completion: another modern paddle-shift GT record is
 useful only when it audits an existing claim, establishes a distinct mechanism,
 or prevents an identity mistake.
 
-ACC remains development coverage outside the certified early-access target.
+ACC remains development coverage outside the tested target.
 The certified target is still SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 
 ## Roster baseline

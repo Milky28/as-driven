@@ -10,7 +10,7 @@ to `ac-evo`. Three existing real-car records now carry reviewed AC EVO entries a
 one car is curated from AC EVO alone,
 so the client recognizes those exact identities while every other AC EVO car
 still fails closed and is recorded in the local diagnostics log. AC EVO remains
-development coverage rather than part of the certified early-access target. See
+development coverage rather than part of the tested target. See
 `docs/verification-observations.md` for the pipeline and `PRIVACY.md` for where
 drafts live.
 
