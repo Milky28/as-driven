@@ -213,6 +213,33 @@ if ($themeSelector.Count -ne 1 `
         }).Count -ne 0) {
     throw "The popup settings page must expose auto plus all eight packaged themes as visual choices."
 }
+# The rack has to be wide enough to actually wrap. It used to sit in the
+# 520-pixel preview column, six pixels short of fitting two choices, so all nine
+# stacked vertically and pushed the save button below the fold.
+$popupBehavior = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.StackPanel] -and $_.Name -eq "GaragePopupBehavior"
+    } | Select-Object -First 1)
+# Structural, not measured. DesiredSize outside a rendered visual tree omits the
+# radio glyph, which is exactly the width that made the old rack too narrow, so
+# measuring here would pass the very layout this guards against.
+$popupColumn = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.StackPanel] -and $_.Name -eq "GaragePopupColumn"
+    } | Select-Object -First 1)
+$themeAncestors = @()
+$node = $themeSelector[0].Parent
+while ($null -ne $node) {
+    $themeAncestors += $node
+    $node = if ($node -is [System.Windows.FrameworkElement]) { $node.Parent } else { $null }
+}
+if ($popupBehavior.Count -ne 1 -or $popupColumn.Count -ne 1) {
+    throw "Garage must keep the popup preview column and a separate popup behavior section."
+}
+if (@($themeAncestors | Where-Object { $_.Name -eq "GaragePopupColumn" }).Count -ne 0) {
+    throw "Popup behavior must span the page, not sit inside the preview column where theme choices cannot wrap."
+}
+if ($themeSelector[0].MaxWidth -le $popupColumn[0].Width) {
+    throw "The theme rack must be wider than the preview column so choices wrap more than one per row."
+}
 $savePopupSettings = @($garageUi | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Changes saved"
     } | Select-Object -First 1)

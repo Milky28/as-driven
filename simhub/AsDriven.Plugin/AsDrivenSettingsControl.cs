@@ -996,13 +996,32 @@ namespace AsDriven.Plugin
                 Margin = new Thickness(0, 8, 0, 18),
             });
 
-            AddSectionHeading(popup, "Popup behavior");
-            popup.Children.Add(CreateFieldLabel("Automatic popup duration", new Thickness(0, 0, 0, 8)));
+            workspace.Children.Add(popup);
+            panel.Children.Add(workspace);
+
+            // Popup behavior spans the page instead of sharing the preview's
+            // 520-pixel column. A theme choice measures about 258 pixels, so
+            // two could never fit that column and all nine stacked one per row,
+            // putting the save button far below the fold.
+            var behavior = new StackPanel
+            {
+                Name = "GaragePopupBehavior",
+                Margin = new Thickness(0, 4, 0, 18),
+            };
+            AddSectionHeading(behavior, "Popup behavior");
+
+            var behaviorRow = new WrapPanel { Orientation = Orientation.Horizontal };
+            var durationBlock = new StackPanel
+            {
+                Width = 500,
+                Margin = new Thickness(0, 0, 44, 16),
+            };
+            durationBlock.Children.Add(
+                CreateFieldLabel("Automatic popup duration", new Thickness(0, 0, 0, 8)));
             var durationRow = new Grid
             {
                 MaxWidth = 500,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(0, 0, 0, 18),
             };
             durationRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             durationRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -1025,9 +1044,15 @@ namespace AsDriven.Plugin
             durationRow.Children.Add(_duration);
             Grid.SetColumn(_durationValue, 1);
             durationRow.Children.Add(_durationValue);
-            popup.Children.Add(durationRow);
+            durationBlock.Children.Add(durationRow);
+            behaviorRow.Children.Add(durationBlock);
 
-            popup.Children.Add(CreateFieldLabel("Popup size", new Thickness(0, 0, 0, 8)));
+            var sizeBlock = new StackPanel
+            {
+                Width = 380,
+                Margin = new Thickness(0, 0, 0, 16),
+            };
+            sizeBlock.Children.Add(CreateFieldLabel("Popup size", new Thickness(0, 0, 0, 8)));
             _popupSize = new ComboBox
             {
                 Name = "PopupSizeSelector",
@@ -1040,14 +1065,16 @@ namespace AsDriven.Plugin
             _popupSize.Items.Add(CreateChoiceItem("Compact - 520 x 360", "compact"));
             SelectChoice(_popupSize, _plugin.PopupSize, 1);
             _popupSize.SelectionChanged += PopupSizeChanged;
-            popup.Children.Add(_popupSize);
+            sizeBlock.Children.Add(_popupSize);
+            behaviorRow.Children.Add(sizeBlock);
+            behavior.Children.Add(behaviorRow);
 
-            popup.Children.Add(CreateFieldLabel("Popup theme", new Thickness(0, 16, 0, 8)));
+            behavior.Children.Add(CreateFieldLabel("Popup theme", new Thickness(0, 6, 0, 8)));
             _popupTheme = new WrapPanel
             {
                 Name = "PopupThemeSelector",
                 Orientation = Orientation.Horizontal,
-                MaxWidth = 510,
+                MaxWidth = 1084,
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
             AddThemeChoice("Auto by car era", PopupPreferences.DefaultTheme);
@@ -1062,19 +1089,18 @@ namespace AsDriven.Plugin
             SelectThemeChoice(_plugin.PopupThemePreference);
             _popupSettingsDirty = false;
             _overlayFeedback.Text = string.Empty;
-            popup.Children.Add(_popupTheme);
-            popup.Children.Add(new TextBlock
+            behavior.Children.Add(_popupTheme);
+            behavior.Children.Add(new TextBlock
             {
                 Text = "Cars without an established year use Modern. Load and position the matching packaged layout once in Dash Studio.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.78,
                 Margin = new Thickness(0, 10, 0, 14),
-                MaxWidth = 500,
+                MaxWidth = 700,
             });
             _savePopupSettingsButton = CreatePrimaryButton("Save changes", 150, SaveClicked);
-            popup.Children.Add(_savePopupSettingsButton);
-            workspace.Children.Add(popup);
-            panel.Children.Add(workspace);
+            behavior.Children.Add(_savePopupSettingsButton);
+            panel.Children.Add(behavior);
             return panel;
         }
 
