@@ -196,7 +196,12 @@ class ObservationIntakeTests(unittest.TestCase):
         )
         self.assertIn(private_report_url, config)
         self.assertIn(private_report_url, security)
-        self.assertIn("repository visibility\nchanges", security)
+        # The chooser must steer a vulnerability away from a public issue, and
+        # SECURITY.md must say so too. It used to also explain what to do while
+        # the repository was private; private reporting is enabled now, so that
+        # paragraph went rather than becoming a stale instruction.
+        self.assertIn("Do not open a public issue", security)
+        self.assertNotIn("While the repository remains private", security)
 
     def test_exact_curated_identity_routes_to_comparison_not_rejection(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
