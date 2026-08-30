@@ -98,7 +98,7 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
   at the private remote `github.com/Milky28/as-driven`. `codex/stabilization` is
   a historical name awaiting deletion; do not start new work there. See the history-rewrite note
   above before assuming an older clone can pull.
-- Client: 0.20.2.
+- Client: 0.21.0.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
   installed plugin binaries predate the GPLaps theme commit `c41bb36`.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.

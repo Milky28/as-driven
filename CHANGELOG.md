@@ -4,6 +4,22 @@ Plugin and dataset versions count different things, but ship together in one
 release. Dataset history is also recorded in `data/v1/index.json` and the
 project documentation.
 
+## 0.21.0 - 2026-08-29
+
+- Add a manual update check, off until an endpoint is set. The endpoint is blank
+  by default so no request is possible, must be https, and the check compares two
+  version strings without downloading anything.
+- Add packaged popup themes selectable by car era, including GPLaps Classic, and
+  give popup behavior the full page width so the theme rack wraps instead of
+  stacking one choice per row.
+- Correct the running-shift clutch on 72 H-pattern records. A guided drive
+  records what the simulator accepts, which is not the real car's authentic
+  technique: a synchromesh gearbox is shifted with the clutch, a dog box is not,
+  and an unestablished gearbox settles nothing.
+- Ship dataset 0.5.34 with 279 curated records.
+- Drop the early-access framing. What survives is a plain statement of the
+  versions actually tested.
+
 ## 0.20.2 - 2026-08-27
 
 - Add the native As Driven settings page with live preflight, offline car
