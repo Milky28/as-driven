@@ -17,7 +17,7 @@ change between releases.
 4. Double-click **Install As Driven.cmd** and approve the Windows administrator
    prompt.
 5. Start SimHub and enable **As Driven** under Settings > Plugins.
-6. Open Dash Studio and load one of the included As Driven overlay layouts.
+6. Open Dash Studio and load the included As Driven overlay layout.
 
 `START HERE.txt` inside the ZIP repeats these steps. If you prefer PowerShell,
 `simhub/install.ps1` is the same installer and takes an optional
@@ -71,19 +71,21 @@ gives you both.
 
 ### Checking for updates
 
-The plugin can tell you when a newer dataset or plugin exists. It is off until
-you configure it, and it never downloads anything.
+The plugin can tell you when a newer dataset or plugin exists. It never
+downloads anything, and it contacts nothing until you press the button.
 
 1. Open the plugin's **System** tab in SimHub.
-2. Set the update endpoint to the project's manifest URL (an `https` address).
-3. Press **Check for updates**.
+2. Press **Check for updates**.
+
+The endpoint is filled in with the project's own address. You can point it
+somewhere else, or clear it entirely, in which case no request is possible.
 
 The check reads two version strings and compares them with what you have
 installed. If something newer exists, it says so and points you at the release
 page - installing is still your decision, taken with SimHub closed.
 
-An empty endpoint means no request is possible at all. A check that fails for
-any reason reports the failure rather than claiming you are up to date. See
+A check that fails for any reason reports the failure rather than claiming you
+are up to date. See
 [PRIVACY.md](../PRIVACY.md) for exactly what the request does and does not send.
 
 This is deliberate rather than unfinished. A dataset that changed under a driver

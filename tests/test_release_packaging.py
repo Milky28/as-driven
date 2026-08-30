@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import re
 import unittest
@@ -75,6 +76,35 @@ class ReleasePackagingTests(unittest.TestCase):
         guard = publisher[publisher.index("gh release view") - 400:]
         self.assertIn('$ErrorActionPreference = "Continue"', guard)
         self.assertIn("$releaseExists = ($LASTEXITCODE -eq 0)", guard)
+
+
+    def test_the_shipped_update_manifest_matches_the_dataset(self) -> None:
+        """The file the plugin's default endpoint actually reads.
+
+        The endpoint is a raw URL on the default branch, so this file is what
+        every installation is told when it checks. A stale dataset version here
+        announces an update nobody released, or hides one that shipped.
+        """
+        manifest = json.loads(
+            (ROOT / "as-driven-latest.json").read_text(encoding="utf-8")
+        )
+        index = json.loads(
+            (ROOT / "data" / "v1" / "index.json").read_text(encoding="utf-8-sig")
+        )
+        self.assertEqual(index["dataset_version"], manifest["dataset_version"])
+        self.assertRegex(manifest["plugin_version"], r"^\d+\.\d+\.\d+$")
+        self.assertEqual(
+            f"https://github.com/Milky28/as-driven/releases/tag/v{manifest['plugin_version']}",
+            manifest["release_url"],
+        )
+        # The endpoint the client ships must be the file this test just checked.
+        settings = (
+            ROOT / "simhub" / "AsDriven.Plugin" / "AsDrivenSettings.cs"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json",
+            settings,
+        )
 
 
 if __name__ == "__main__":

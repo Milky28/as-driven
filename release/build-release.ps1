@@ -175,6 +175,18 @@ try {
     $releaseMetadata | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (
         Join-Path $outputRoot "release.json") -Encoding UTF8
 
+    # The file the shipped update endpoint reads, written into the repository
+    # rather than only attached to the release. The endpoint is a raw URL on the
+    # default branch, so the check reports whatever this commit says; leaving it
+    # behind would announce the previous release forever.
+    $rootManifestPath = Join-Path $repositoryRoot "as-driven-latest.json"
+    [ordered]@{
+        dataset_version = $datasetVersion
+        plugin_version = $pluginVersion
+        release_url = "https://github.com/Milky28/as-driven/releases/tag/v$pluginVersion"
+    } | ConvertTo-Json | Set-Content -LiteralPath $rootManifestPath -Encoding UTF8
+    Write-Host "Updated $rootManifestPath - commit it, or the update check will report the previous release."
+
     Write-Host "Built release candidates: $outputRoot"
 }
 finally {

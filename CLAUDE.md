@@ -168,10 +168,14 @@ approval, relevant research/backlog documentation, and tests together. Follow
 
 The plugin has no analytics, account, background update check, or automatic
 telemetry upload. Its one network feature is a manual update check: an endpoint
-that is blank by default and a button that must be pressed. Blank means no
-request is possible, the endpoint must be https, and the check reads two version
-strings without downloading anything. A build assertion holds all three, because
-`PRIVACY.md` states them as properties of the product. Unmatched diagnostics and guided-verification
+and a button that must be pressed. The endpoint ships pre-filled with the
+project's raw manifest URL on `main` so the feature is findable, nothing contacts
+it without the button, it must be https, and the check reads two version strings
+without downloading anything. Build assertions hold the shipped endpoint, the
+https rule, and the failure wording, because `PRIVACY.md` states them as
+properties of the product. `as-driven-latest.json` at the repository root is what
+that endpoint serves; `release/build-release.ps1` rewrites it and a test refuses
+to let it drift from `data/v1/index.json`. Unmatched diagnostics and guided-verification
 drafts stay under `%LOCALAPPDATA%\SimHub\AsDriven`. A draft never edits
 the curated database or uploads itself. Maintainer validation and explicit
 approval are required before release. See `PRIVACY.md` and

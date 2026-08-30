@@ -32,6 +32,16 @@ namespace AsDriven.Plugin
         /// startup - so an installation nobody configures behaves exactly as
         /// the privacy note describes: no network feature.
         /// </summary>
+        /// <summary>
+        /// Where the manual update check looks. Shipped pre-filled so the
+        /// feature is discoverable, and still inert until the driver presses the
+        /// button: nothing contacts it on a timer, at startup, or after an
+        /// install. Clearing the box restores the state where no request is
+        /// possible at all.
+        /// </summary>
+        public const string DefaultUpdateCheckUrl =
+            "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json";
+
         public string UpdateCheckUrl { get; set; }
         public Dictionary<string, VerificationAssistProfile> VerificationAssistProfiles { get; set; }
 
@@ -41,7 +51,7 @@ namespace AsDriven.Plugin
             PopupSize = "detailed";
             PopupTheme = "auto";
             VerificationObserver = string.Empty;
-            UpdateCheckUrl = string.Empty;
+            UpdateCheckUrl = DefaultUpdateCheckUrl;
             VerificationAssistProfiles = new Dictionary<string, VerificationAssistProfile>();
         }
     }

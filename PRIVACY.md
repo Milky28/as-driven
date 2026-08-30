@@ -3,11 +3,12 @@
 As Driven has no telemetry upload, analytics, advertising, account, or
 background update check.
 
-There is exactly one way the plugin can reach the network, and it is off until
-you turn it on. The System tab has an update endpoint, blank by default, and a
-"Check for updates" button. With the field blank nothing is contacted at all. With
-an address set, a request is made **only** when you press that button: there is
-no timer, nothing at startup, and nothing after an install.
+There is exactly one way the plugin can reach the network, and nothing uses it
+unless you press a button. The System tab has an update endpoint and a "Check for
+updates" button. The endpoint ships pre-filled with the project's own address, so
+the feature is findable rather than hidden, and a request is made **only** when
+you press that button: there is no timer, nothing at startup, and nothing after
+an install. Clearing the field makes a request impossible at all.
 
 What the request sends is what any HTTPS fetch sends - your IP address, the time,
 and a `AsDriven` user agent. It carries no identifier, no car, no drive, and no

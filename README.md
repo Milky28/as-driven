@@ -51,7 +51,7 @@ and simulator-independent; the plugin is one client that reads it.
 2. Close SimHub and extract the ZIP.
 3. Double-click **Install As Driven.cmd** and approve the Windows prompt.
 4. Start SimHub, enable **As Driven** under Settings > Plugins.
-5. Load an As Driven overlay in Dash Studio.
+5. Load the As Driven overlay in Dash Studio.
 
 Updating is the same procedure: download the newest release and install it over
 the old one. Your settings, layouts, and contribution drafts are preserved, and

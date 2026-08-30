@@ -472,8 +472,9 @@ if (([string[]]$versionProcessMethod.Invoke($null, @("ac-evo"))).Count -ne 0) {
 
 # The plugin makes no network request unless somebody configures one and presses
 # a button. PRIVACY.md states that as a property of the product, so it is checked
-# here rather than trusted: a default install must have no endpoint, and the
-# check must refuse anything that is not https.
+# here rather than trusted: the shipped endpoint must be https and must be the
+# project's own, the check must refuse anything that is not https, and clearing
+# the box must restore the state where no request is possible.
 $updateCheckType = $pluginAssembly.GetType("AsDriven.Plugin.UpdateCheck")
 if ($null -eq $updateCheckType) {
     throw "UpdateCheck is missing; the manual update check can no longer be verified."
@@ -494,8 +495,12 @@ if (-not [bool]$isAllowed.Invoke($null, @("https://example.invalid/latest.json")
 # A fresh settings object is the state of an installation nobody has configured.
 $settingsType = $pluginAssembly.GetType("AsDriven.Plugin.AsDrivenSettings")
 $freshSettings = [System.Activator]::CreateInstance($settingsType)
-if (-not [string]::IsNullOrEmpty($freshSettings.UpdateCheckUrl)) {
-    throw "A new installation ships with an update endpoint set; it must be empty so no request is possible."
+$shippedEndpoint = [string]$freshSettings.UpdateCheckUrl
+if ($shippedEndpoint -ne "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json") {
+    throw "A new installation must ship the project's own update endpoint, got: $shippedEndpoint"
+}
+if (-not $isAllowed.Invoke($null, @($shippedEndpoint))) {
+    throw "The shipped update endpoint is not one the check will call."
 }
 
 # And with no endpoint the check reports that it contacted nothing, rather than
