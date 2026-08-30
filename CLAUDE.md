@@ -177,46 +177,44 @@ the curated database or uploads itself. Maintainer validation and explicit
 approval are required before release. See `PRIVACY.md` and
 `docs/verification-observations.md`.
 
-## Uncommitted-to-remote repository state
+## Repository history rewrite, 2026-08-29
 
-**Read this before any git command that talks to a remote.**
-
-On 2026-08-29 the history was rewritten twice with `git filter-repo`, removing
-`output/pdf/homologation-form-renders/` (305 JPEG page renders of FIA
+The history was rewritten twice with `git filter-repo` and force-pushed the same
+day. `output/pdf/homologation-form-renders/` (305 JPEG page renders of FIA
 homologation forms, referenced by nothing, ~95 MB) and
-`docs/design/2026-08-11-icon-brand-concepts/` (5 MB of review-only boards). The
-pack went from 198.6 MB to 4.96 MB with all 305 commits intact.
+`docs/design/2026-08-11-icon-brand-concepts/` (5 MB of review-only boards) were
+removed from every commit. The pack went from 198.6 MB to 4.96 MB with all
+commits intact.
 
-Consequences that are still live:
+State now: `origin/codex/stabilization` and `origin/main` both point at the
+rewritten history, and `main` was fast-forwarded off the initial commit it had
+been stranded on. Every commit from `232187a` forward has a new hash, so any
+other clone of this repository is on an orphaned history and must re-clone
+rather than pull.
 
-- **`origin` is detached.** filter-repo removes it deliberately so a rewritten
-  history cannot be pushed by reflex. Re-add with
-  `git remote add origin https://github.com/Milky28/as-driven.git`.
-- **The remote still holds the pre-rewrite history**, including the 95 MB. Every
-  commit from `232187a` forward has a new hash, so publishing means a force
-  push. That is the point of no return for the backup being the only pre-rewrite
-  copy.
-- **The backup is at `../authentic-controls-db-prepurge-2026-08-29/`**:
-  `full-history.bundle` (verified complete, restorable with `git clone`) and
-  `output/` as plain files. Keep it until the push has settled.
-- **`main` is the initial commit only**, 300-odd behind. Making it the default
-  branch means fast-forwarding it to `codex/stabilization`, not creating a fresh
-  branch.
-- GitHub keeps unreachable objects for a while. If the homologation scans must
-  be gone from their servers rather than merely unreferenced, that needs a
-  support request after the push.
+- **The backup is still the only complete pre-rewrite copy.**
+  `../authentic-controls-db-prepurge-2026-08-29/` holds `full-history.bundle`
+  (verified complete, restorable with `git clone`) and the removed images as
+  plain files. Do not delete it casually.
+- GitHub still reports ~96 MB of disk usage because the unreachable objects have
+  not been collected. They are unreachable, not gone. If the homologation scans
+  must actually leave GitHub's servers, that needs a support request.
+- The repository is still **private**, and the default branch is still
+  `codex/stabilization` rather than `main`. Both are deliberate holds, not
+  oversights.
 
-Going public was the reason for all of this. A stripped-history `main` was
+Going public was the reason for the rewrite. A stripped-history `main` was
 considered and rejected: the project's claim is auditable evidence, and the
-history is where corrections like this one are visible.
+history is where corrections are visible.
 
 ## Current handoff state
 
-- Branch: `codex/stabilization`.
+- Branch: `codex/stabilization`, synchronized with `origin`. `main` points at
+  the same commit.
 - Client: 0.20.2.
-- Dataset: 0.5.34 with 279 curated records. **The installed SimHub copy is still
-  0.5.33**; the plugin binaries are current. Rebuild and install to close the
-  gap.
+- Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
+  installed plugin binaries predate the GPLaps theme commit `c41bb36`; reinstall
+  to pick it up.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the tested pair is what the release

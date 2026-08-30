@@ -74,37 +74,31 @@ car it sees, including mods. Check provenance when a name looks irregular or
 predates the official car's release, and record the outcome as a decision rather
 than silently queueing verification work.
 
-## Uncommitted-to-remote repository state
+## Repository history rewrite, 2026-08-29
 
-On 2026-08-29 the history was rewritten twice with `git filter-repo` to remove
-`output/pdf/homologation-form-renders/` (~95 MB of FIA homologation page renders
-that nothing referenced) and `docs/design/2026-08-11-icon-brand-concepts/`
-(5 MB of review-only boards). The pack went from 198.6 MB to 4.96 MB with all
-305 commits intact.
+The history was rewritten twice with `git filter-repo` and force-pushed the same
+day, removing `output/pdf/homologation-form-renders/` (~95 MB of FIA
+homologation page renders that nothing referenced) and
+`docs/design/2026-08-11-icon-brand-concepts/` (5 MB of review-only boards). The
+pack went from 198.6 MB to 4.96 MB with all commits intact.
 
-- `origin` is detached; filter-repo removes it so a rewritten history cannot be
-  pushed by reflex. Re-add
-  `https://github.com/Milky28/as-driven.git` when publishing.
-- The remote still holds the pre-rewrite history. Every commit from `232187a`
-  forward has a new hash, so publishing is a force push.
-- Backup: `../authentic-controls-db-prepurge-2026-08-29/` holds a verified
-  full-history bundle and the removed images. Keep it until the push settles.
-- `main` is the initial commit only. Fast-forward it to `codex/stabilization`
-  rather than branching fresh.
-
-See `CLAUDE.md` for why a stripped-history `main` was rejected and for the open
-decisions still outstanding.
+- `origin/codex/stabilization` and `origin/main` both hold the rewritten
+  history; `main` was fast-forwarded off its stranded initial commit.
+- Every commit from `232187a` forward has a new hash. Another clone of this
+  repository must re-clone rather than pull.
+- `../authentic-controls-db-prepurge-2026-08-29/` is the only complete
+  pre-rewrite copy. Keep it.
+- The repository is still private and the default branch is still
+  `codex/stabilization`. Both are deliberate holds.
 
 ## Current handoff state
 
-- **The local history was rewritten and has not been pushed. `origin` is
-  detached.** Read "Uncommitted-to-remote repository state" above before running
-  any git command that talks to a remote.
-- Branch: `codex/stabilization`. The private remote is
-  `github.com/Milky28/as-driven`, but no remote is currently configured.
+- Branch: `codex/stabilization`; private remote `origin` at
+  `github.com/Milky28/as-driven`, synchronized. See the history-rewrite note
+  above before assuming an older clone can pull.
 - Client: 0.20.2.
-- Dataset: 0.5.34 with 279 curated records. The installed SimHub copy is still
-  0.5.33; the plugin binaries are current.
+- Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
+  installed plugin binaries predate the GPLaps theme commit `c41bb36`.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has 38 accepted cases with published
   feedback and six withdrawn, with nothing waiting on research or final review.
