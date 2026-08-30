@@ -209,9 +209,9 @@ history is where corrections are visible.
 
 ## Current handoff state
 
-- Branch: `codex/stabilization`, synchronized with `origin`. `main` is the
-  default branch and points at the same commit; new work can land on either
-  while they are in step, but `main` is what a visitor sees.
+- **Work on `main`.** It is the default branch, the working branch, and what a
+  visitor sees. `codex/stabilization` is a historical name still pointing at the
+  same commit and is due for deletion; do not start new work there.
 - Client: 0.20.2.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
   installed plugin binaries predate the GPLaps theme commit `c41bb36`; reinstall

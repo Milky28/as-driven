@@ -94,9 +94,9 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
 
 ## Current handoff state
 
-- Branch: `codex/stabilization`; private remote `origin` at
-  `github.com/Milky28/as-driven`, synchronized. `main` is the default branch
-  and points at the same commit. See the history-rewrite note
+- **Work on `main`**, the default and working branch, tracking `origin/main`
+  at the private remote `github.com/Milky28/as-driven`. `codex/stabilization` is
+  a historical name awaiting deletion; do not start new work there. See the history-rewrite note
   above before assuming an older clone can pull.
 - Client: 0.20.2.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
