@@ -12,6 +12,19 @@ and simulator-independent; the plugin is one client that reads it.
 
 ## What it tells you
 
+<img src="docs/images/preflight-card.png" width="720" alt="As Driven pre-flight card for the Audi V8 quattro DTM">
+
+A round rim with no display, a six-speed H-pattern on a standard gate, and the
+technique that goes with it: clutch to pull away, lift on the upshift, blip
+optional on the way down. The note says why the blip is optional rather than
+required, and the footer records which game version the observation came from.
+
+The same card comes in a compact size:
+
+<img src="docs/images/preflight-card-compact.png" width="520" alt="The compact pre-flight card for the same car">
+
+Each field is drawn from a fixed vocabulary:
+
 <table>
 <tr>
 <td align="center"><img src="docs/images/wheel-round.png" width="72" alt=""></td>
@@ -39,10 +52,17 @@ and simulator-independent; the plugin is one client that reads it.
 </tr>
 </table>
 
-> **Screenshots wanted.** The icons above are the plugin's own artwork, but the
-> README does not yet show the overlay in a live session. If you run As Driven,
-> a capture would be welcome - see
-> [docs/development.md](docs/development.md#wanted-readme-screenshots).
+## In the plugin
+
+The Garage tab mirrors the live car and previews the popup, with the size, theme
+and duration it will use:
+
+<img src="docs/images/settings-garage.png" width="900" alt="The plugin's Garage tab">
+
+The car browser reads the whole curated database offline, without starting a
+simulator, and filters by simulator, era, wheel, or shifter:
+
+<img src="docs/images/settings-browser.png" width="900" alt="The plugin's car browser">
 
 ## Install
 
@@ -61,8 +81,8 @@ Full details, checksum verification, rollback, and removal are in
 [docs/install.md](docs/install.md).
 
 The plugin works offline. It has no analytics, no account, and no background
-update check. Its one network feature is a manual update check that is blank by
-default, so no request is possible until you configure it. See
+update check. Its one network feature is a "Check for updates" button that
+contacts nothing until you press it, and downloads nothing when you do. See
 [PRIVACY.md](PRIVACY.md).
 
 ## What it covers
@@ -128,8 +148,13 @@ construction are deliberately out of scope. It is not a car encyclopedia.
 
 If a car is missing or looks wrong, the plugin can walk you through a guided
 drive that produces a structured draft - **Contribute a simulator observation**
-in the plugin's settings. Nothing is uploaded automatically; the draft stays on
-your PC until you choose to attach it to a submission.
+in the plugin's settings. It prompts one test at a time in the car and records
+what the simulator actually did:
+
+<img src="docs/images/guided-drive.png" width="900" alt="The guided verification overlay prompting a lifted-throttle upshift">
+
+Nothing is uploaded automatically; the draft stays on your PC until you choose to
+attach it to a submission.
 
 A maintainer reviews and approves every contribution before it enters a release.
 See [CONTRIBUTING.md](CONTRIBUTING.md).
