@@ -179,12 +179,22 @@ try {
     # rather than only attached to the release. The endpoint is a raw URL on the
     # default branch, so the check reports whatever this commit says; leaving it
     # behind would announce the previous release forever.
+    # Written byte-for-byte rather than through ConvertTo-Json and Set-Content:
+    # those add a UTF-8 BOM and their own spacing, so every release produced a
+    # diff that was pure formatting, and a BOM breaks a plain json.loads of the
+    # committed file.
     $rootManifestPath = Join-Path $repositoryRoot "as-driven-latest.json"
-    [ordered]@{
-        dataset_version = $datasetVersion
-        plugin_version = $pluginVersion
-        release_url = "https://github.com/Milky28/as-driven/releases/tag/v$pluginVersion"
-    } | ConvertTo-Json | Set-Content -LiteralPath $rootManifestPath -Encoding UTF8
+    $rootManifest = @(
+        "{",
+        "  ""dataset_version"": ""$datasetVersion"",",
+        "  ""plugin_version"": ""$pluginVersion"",",
+        "  ""release_url"": ""https://github.com/Milky28/as-driven/releases/tag/v$pluginVersion""",
+        "}"
+    ) -join "`n"
+    [System.IO.File]::WriteAllText(
+        $rootManifestPath,
+        $rootManifest + "`n",
+        (New-Object System.Text.UTF8Encoding $false))
     Write-Host "Updated $rootManifestPath - commit it, or the update check will report the previous release."
 
     Write-Host "Built release candidates: $outputRoot"
