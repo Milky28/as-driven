@@ -78,8 +78,9 @@ downloads anything, and it contacts nothing until you press the button.
 2. Press **Check for updates**.
 
 There is nothing to configure. The address ships with the client; advanced users
-can change or blank it by editing `UpdateCheckUrl` in the plugin's settings
-file.
+can point it elsewhere by editing `UpdateCheckUrl` in the plugin's settings file.
+Leaving that value empty means unconfigured, not disabled, and the shipped
+address is used.
 
 The check reads two version strings and compares them with what you have
 installed. If something newer exists, it says so and points you at the release

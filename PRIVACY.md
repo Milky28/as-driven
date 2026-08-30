@@ -9,9 +9,10 @@ the address it contacts ships with the client so there is nothing to configure. 
 request is made **only** when you press that button: there is no timer, nothing
 at startup, and nothing after an install.
 
-The address is stored in the plugin's settings file as `UpdateCheckUrl`. Blanking
-it there stops the check from contacting anything, though nothing in the
-interface asks you to.
+The address is stored in the plugin's settings file as `UpdateCheckUrl` and can
+be pointed elsewhere there. Leaving it empty means unconfigured rather than
+disabled, and the client falls back to its own address; the check still contacts
+nothing until you press the button, which is the guarantee that matters.
 
 What the request sends is what any HTTPS fetch sends - your IP address, the time,
 and a `AsDriven` user agent. It carries no identifier, no car, no drive, and no

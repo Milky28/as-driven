@@ -180,10 +180,26 @@ namespace AsDriven.Plugin
             get { return DatasetVersion(); }
         }
 
-        /// <summary>Where the manual update check looks; empty means it never runs.</summary>
+        /// <summary>
+        /// Where the manual update check looks.
+        ///
+        /// An empty stored value means unconfigured, not disabled, and falls back
+        /// to the address the client ships with. Settings saved before the
+        /// endpoint shipped hold an empty string, and a stored value beats a
+        /// changed default, so without this every existing installation would
+        /// keep contacting nothing while new ones checked normally. Nothing is
+        /// contacted either way until the driver presses the button.
+        /// </summary>
         internal string UpdateCheckUrl
         {
-            get { return _settings == null ? string.Empty : (_settings.UpdateCheckUrl ?? string.Empty); }
+            get
+            {
+                if (_settings == null) { return AsDrivenSettings.DefaultUpdateCheckUrl; }
+                string stored = _settings.UpdateCheckUrl;
+                return string.IsNullOrWhiteSpace(stored)
+                    ? AsDrivenSettings.DefaultUpdateCheckUrl
+                    : stored;
+            }
             set
             {
                 if (_settings == null) { return; }

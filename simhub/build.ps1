@@ -519,6 +519,20 @@ if ($checkButton.Count -ne 1) {
     throw "The manual update check has no button, so nothing can trigger it."
 }
 
+# Settings saved before the endpoint shipped hold an empty string, and a stored
+# value beats a changed default. Without the fallback every existing
+# installation would keep contacting nothing while new ones checked normally.
+$upgradedSettings = [System.Activator]::CreateInstance($settingsType)
+$upgradedSettings.UpdateCheckUrl = ""
+$urlProperty = $pluginType.GetProperty("UpdateCheckUrl", $instanceFlags)
+$settingsField = $pluginType.GetField("_settings", $instanceFlags)
+$upgradedPlugin = [System.Activator]::CreateInstance($pluginType)
+$settingsField.SetValue($upgradedPlugin, $upgradedSettings)
+$resolved = [string]$urlProperty.GetValue($upgradedPlugin, $null)
+if ($resolved -ne "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json") {
+    throw "An upgraded installation with a blank stored endpoint resolved to: '$resolved'"
+}
+
 # And with no endpoint the check reports that it contacted nothing, rather than
 # reporting that the installation is current.
 $fetch = $updateCheckType.GetMethod(
