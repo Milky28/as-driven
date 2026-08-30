@@ -17,24 +17,32 @@ The installer backs up an existing installation and preserves customized
 overlay positions by default. See `START HERE.txt` inside the ZIP for the full
 short guide.
 
-## Certified target
+## Tested against
 
 - SimHub {{SIMHUB_VERSION}}
 - Automobilista 2 {{AMS2_VERSION}}
 - Windows
 
-Other reviewed simulators are development coverage and are not yet certified
-client targets.
+Newer versions generally work but have not been verified. The other simulators
+in the dataset carry reviewed entries rather than complete rosters.
 
-## Advanced database update
+## What Windows will warn you about
 
-`{{DATABASE_PACKAGE}}` updates only the curated database. Existing plugin
-binaries, settings, overlays, and contribution drafts are not replaced.
+Expect two warnings, and neither means something is wrong. The administrator
+prompt names an unknown publisher, because a signing certificate is a paid
+annual subscription for a free project. Windows may also block the downloaded
+ZIP: right-click it, open Properties, tick Unblock, and extract it again.
 
-Checksums are attached for both ZIP files. The plugin is not code-signed, so
-Windows may display a warning for the downloaded scripts.
+A `.sha256` file is attached beside each ZIP. Comparing it is worth more than a
+signature would be, because it tells you the bytes are the published ones.
 
-Read the [install guide](https://github.com/Milky28/as-driven/blob/main/docs/install.md),
-[privacy policy](https://github.com/Milky28/as-driven/blob/main/PRIVACY.md), and
-[problem-report form](https://github.com/Milky28/as-driven/issues/new/choose)
-before testing.
+## The database package
+
+`{{DATABASE_PACKAGE}}` is the curated dataset on its own, for clients that are
+not SimHub. You do not need it to install or update the plugin: the ZIP above
+already carries this dataset.
+
+Read the [install guide](https://github.com/Milky28/as-driven/blob/main/docs/install.md)
+and the [privacy policy](https://github.com/Milky28/as-driven/blob/main/PRIVACY.md),
+and use the [problem-report form](https://github.com/Milky28/as-driven/issues/new/choose)
+if something is wrong.
