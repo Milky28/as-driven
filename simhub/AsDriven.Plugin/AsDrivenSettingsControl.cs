@@ -143,7 +143,6 @@ namespace AsDriven.Plugin
         private TextBlock _contributionFeedback;
         private TextBlock _advancedFeedback;
         private TextBlock _installedDatasetStatus;
-        private TextBox _updateEndpoint;
         private Button _checkUpdatesButton;
         private TextBlock _updateStatus;
         private TextBlock _supportedSimulators;
@@ -1477,28 +1476,11 @@ namespace AsDriven.Plugin
             panel.Children.Add(_installedDatasetStatus);
             panel.Children.Add(new TextBlock
             {
-                Text = "As Driven never downloads or installs anything by itself. It can tell you that a newer dataset or plugin exists, and only when you press the button below: there is no timer, nothing at startup, and no request at all until an endpoint is set here. Installing an update stays a deliberate act, because a curated value changing under you mid-session is worse than a stale one you know about.",
+                Text = "As Driven never downloads or installs anything by itself. It can tell you that a newer dataset or plugin exists, and only when you press the button below: there is no timer, nothing at startup, and no request unless you ask. Installing an update stays a deliberate act, because a curated value changing under you mid-session is worse than a stale one you know about.",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(0, 0, 0, 12),
                 MaxWidth = 860,
             });
-            panel.Children.Add(new TextBlock
-            {
-                Text = "Update endpoint (https, blank for none)",
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 0, 0, 5),
-            });
-            _updateEndpoint = new TextBox
-            {
-                MinHeight = 30,
-                MaxWidth = 640,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(0, 0, 0, 8),
-                Text = _plugin.UpdateCheckUrl,
-            };
-            _updateEndpoint.LostFocus += UpdateEndpointChanged;
-            panel.Children.Add(_updateEndpoint);
             _checkUpdatesButton = CreateSecondaryButton("Check for updates", 190, CheckUpdatesClicked);
             panel.Children.Add(_checkUpdatesButton);
             _updateStatus = new TextBlock
@@ -2650,14 +2632,9 @@ namespace AsDriven.Plugin
             SetFeedback(_browserFeedback, message, foreground);
         }
 
-        private void UpdateEndpointChanged(object sender, RoutedEventArgs eventArgs)
-        {
-            _plugin.UpdateCheckUrl = _updateEndpoint.Text;
-        }
-
         private void CheckUpdatesClicked(object sender, RoutedEventArgs eventArgs)
         {
-            string endpoint = _updateEndpoint == null ? string.Empty : _updateEndpoint.Text;
+            string endpoint = _plugin.UpdateCheckUrl;
             string dataset = _plugin.CurrentDatasetVersion;
             string plugin = _plugin.PluginVersion;
             _checkUpdatesButton.IsEnabled = false;

@@ -77,8 +77,9 @@ downloads anything, and it contacts nothing until you press the button.
 1. Open the plugin's **System** tab in SimHub.
 2. Press **Check for updates**.
 
-The endpoint is filled in with the project's own address. You can point it
-somewhere else, or clear it entirely, in which case no request is possible.
+There is nothing to configure. The address ships with the client; advanced users
+can change or blank it by editing `UpdateCheckUrl` in the plugin's settings
+file.
 
 The check reads two version strings and compares them with what you have
 installed. If something newer exists, it says so and points you at the release

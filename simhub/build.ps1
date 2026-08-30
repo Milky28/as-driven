@@ -503,6 +503,22 @@ if (-not $isAllowed.Invoke($null, @($shippedEndpoint))) {
     throw "The shipped update endpoint is not one the check will call."
 }
 
+# Nobody has to type a URL to use the feature, so the settings page must not ask
+# for one. A text box holding the endpoint would put the only thing that can
+# break the check in front of every driver.
+$endpointBoxes = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.TextBox] -and [string]$_.Text -eq $shippedEndpoint
+    })
+if ($endpointBoxes.Count -ne 0) {
+    throw "The settings page offers an editable update endpoint; the address ships with the client."
+}
+$checkButton = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Check for updates"
+    } | Select-Object -First 1)
+if ($checkButton.Count -ne 1) {
+    throw "The manual update check has no button, so nothing can trigger it."
+}
+
 # And with no endpoint the check reports that it contacted nothing, rather than
 # reporting that the installation is current.
 $fetch = $updateCheckType.GetMethod(
