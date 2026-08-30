@@ -82,21 +82,19 @@ homologation page renders that nothing referenced) and
 `docs/design/2026-08-11-icon-brand-concepts/` (5 MB of review-only boards). The
 pack went from 198.6 MB to 4.96 MB with all commits intact.
 
-- `origin/codex/stabilization` and `origin/main` both hold the rewritten
-  history; `main` was fast-forwarded off its stranded initial commit.
+- `main` holds the rewritten history and is the only branch; it was
+  fast-forwarded off its stranded initial commit.
 - Every commit from `232187a` forward has a new hash. Another clone of this
   repository must re-clone rather than pull.
 - `../authentic-controls-db-prepurge-2026-08-29/` is the only complete
   pre-rewrite copy. Keep it.
-- `main` is the default branch and points at the same commit as
-  `codex/stabilization`. The repository is still private, which is a deliberate
-  hold.
+- `main` is the default and only branch. The repository is public as of
+  2026-08-29.
 
 ## Current handoff state
 
-- **Work on `main`**, the default and working branch, tracking `origin/main`
-  at the private remote `github.com/Milky28/as-driven`. `codex/stabilization` is
-  a historical name awaiting deletion; do not start new work there. See the history-rewrite note
+- **Work on `main`**, the only branch, tracking `origin/main` at
+  `github.com/Milky28/as-driven`. See the history-rewrite note
   above before assuming an older clone can pull.
 - Client: 0.21.0.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The

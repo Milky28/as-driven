@@ -190,32 +190,27 @@ homologation forms, referenced by nothing, ~95 MB) and
 removed from every commit. The pack went from 198.6 MB to 4.96 MB with all
 commits intact.
 
-State now: `origin/codex/stabilization` and `origin/main` both point at the
-rewritten history, and `main` was fast-forwarded off the initial commit it had
-been stranded on. Every commit from `232187a` forward has a new hash, so any
-other clone of this repository is on an orphaned history and must re-clone
-rather than pull.
+`main` was fast-forwarded off the initial commit it had been stranded on and is
+now the only branch. Every commit from `232187a` forward has a new hash, so any
+clone taken before 2026-08-29 is on an orphaned history and must re-clone rather
+than pull.
 
 - **The backup is still the only complete pre-rewrite copy.**
   `../authentic-controls-db-prepurge-2026-08-29/` holds `full-history.bundle`
   (verified complete, restorable with `git clone`) and the removed images as
   plain files. Do not delete it casually.
-- GitHub still reports ~96 MB of disk usage because the unreachable objects have
-  not been collected. They are unreachable, not gone. If the homologation scans
-  must actually leave GitHub's servers, that needs a support request.
-- `main` is the default branch, and `codex/stabilization` currently points at
-  the same commit. The repository is still **private**; that is a deliberate
-  hold, not an oversight.
+- GitHub may still report disk usage from the unreachable objects. They are
+  unreachable, not deleted; removing them from its servers needs a support
+  request, which was judged unnecessary.
 
-Going public was the reason for the rewrite. A stripped-history `main` was
-considered and rejected: the project's claim is auditable evidence, and the
-history is where corrections are visible.
+Going public was the reason for the rewrite, and it happened on 2026-08-29. A
+stripped-history `main` was considered and rejected: the project's claim is
+auditable evidence, and the history is where corrections are visible.
 
 ## Current handoff state
 
-- **Work on `main`.** It is the default branch, the working branch, and what a
-  visitor sees. `codex/stabilization` is a historical name still pointing at the
-  same commit and is due for deletion; do not start new work there.
+- **Work on `main`**, the only branch, the default, and what a visitor sees.
+- The repository is **public**, and 0.21.0 is published as the latest release.
 - Client: 0.21.0.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
   installed plugin binaries predate the GPLaps theme commit `c41bb36`; reinstall

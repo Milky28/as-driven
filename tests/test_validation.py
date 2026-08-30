@@ -24,11 +24,18 @@ ROOT = Path(__file__).parents[1]
 
 
 class ValidationTests(unittest.TestCase):
-    def test_ci_validates_the_current_and_future_default_branches(self):
+    def test_ci_validates_the_default_branch(self):
+        """Pushes to main run the suite, and a person can start a run by hand.
+
+        The list also named codex/stabilization while that branch was the
+        default. It was deleted once main took over, and a workflow naming a
+        branch that does not exist is a rule nothing enforces.
+        """
         workflow = (
             ROOT / ".github" / "workflows" / "validate.yml"
         ).read_text(encoding="utf-8")
-        self.assertIn("branches: [main, codex/stabilization]", workflow)
+        self.assertIn("branches: [main]", workflow)
+        self.assertNotIn("codex/stabilization", workflow)
         self.assertIn("workflow_dispatch:", workflow)
 
     def test_display_names_do_not_sort_the_catalog_by_year(self):
