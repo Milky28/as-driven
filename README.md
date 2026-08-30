@@ -29,24 +29,24 @@ Each field is drawn from a fixed vocabulary:
 <tr>
 <td align="center"><img src="docs/images/wheel-round.png" width="72" alt=""></td>
 <td align="center"><img src="docs/images/wheel-gt-formula.png" width="72" alt=""></td>
-<td align="center"><img src="docs/images/wheel-yoke.png" width="72" alt=""></td>
+<td align="center"><img src="docs/images/wheel-d-shaped-open-top.png" width="72" alt=""></td>
 <td align="center"><img src="docs/images/shift-h-pattern.png" width="72" alt=""></td>
 </tr>
 <tr>
-<td align="center"><b>Rim shape</b><br>round, D-shaped, GT, formula, yoke</td>
-<td align="center"><b>Rim shape</b><br>and whether it is open-top</td>
-<td align="center"><b>Rim shape</b><br>so you fit the right one first</td>
+<td align="center"><b>Round rim</b><br>so you fit the right one first</td>
+<td align="center"><b>GT or formula rim</b><br>and whether it has a display</td>
+<td align="center"><b>D-shaped, open top</b><br>open-top is recorded separately</td>
 <td align="center"><b>Shift pattern</b><br>H-pattern, and how many gears</td>
 </tr>
 <tr>
 <td align="center"><img src="docs/images/shift-dogleg-h.png" width="72" alt=""></td>
-<td align="center"><img src="docs/images/shift-sequential-paddles.png" width="72" alt=""></td>
+<td align="center"><img src="docs/images/shift-sequential-stick.png" width="72" alt=""></td>
 <td align="center"><img src="docs/images/control-clutch.png" width="72" alt=""></td>
 <td align="center"><img src="docs/images/control-throttle.png" width="72" alt=""></td>
 </tr>
 <tr>
 <td align="center"><b>Dogleg</b><br>first is down, not up</td>
-<td align="center"><b>Sequential</b><br>paddles or a stick</td>
+<td align="center"><b>Sequential</b><br>a stick, or paddles</td>
 <td align="center"><b>Clutch</b><br>for starts, upshifts, downshifts</td>
 <td align="center"><b>Throttle</b><br>lift on upshift, blip on downshift</td>
 </tr>
@@ -151,7 +151,7 @@ drive that produces a structured draft - **Contribute a simulator observation**
 in the plugin's settings. It prompts one test at a time in the car and records
 what the simulator actually did:
 
-<img src="docs/images/guided-drive.png" width="900" alt="The guided verification overlay prompting a lifted-throttle upshift">
+<img src="docs/images/guided-drive.jpg" width="900" alt="The guided verification overlay prompting a lifted-throttle upshift">
 
 Nothing is uploaded automatically; the draft stays on your PC until you choose to
 attach it to a submission.

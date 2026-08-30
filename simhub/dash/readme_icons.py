@@ -21,14 +21,16 @@ from icons import INK, Canvas, generate_preflight_icons
 OUTPUT_DIRECTORY = Path(__file__).resolve().parents[2] / "docs" / "images"
 
 # One representative icon per thing the card answers, rather than the whole
-# family: the README is an introduction, not the asset inventory.
+# family: the README is an introduction, not the asset inventory. Only current
+# vocabulary belongs here - `yoke` is retired, labelled "Open-top rim (legacy)"
+# by PreflightLabels, and held by no curated record.
 README_ICONS = (
     "wheel-round",
     "wheel-gt-formula",
-    "wheel-yoke",
+    "wheel-d-shaped-open-top",
     "shift-h-pattern",
     "shift-dogleg-h",
-    "shift-sequential-paddles",
+    "shift-sequential-stick",
     "control-clutch",
     "control-throttle",
 )
@@ -65,11 +67,13 @@ def build() -> dict[str, bytes]:
     builders = {
         "wheel-round": lambda canvas: _flat_wheel(canvas, "round"),
         "wheel-gt-formula": lambda canvas: _flat_wheel(canvas, "gt-formula"),
-        "wheel-yoke": lambda canvas: _flat_wheel(canvas, "yoke"),
+        "wheel-d-shaped-open-top": lambda canvas: _flat_wheel(
+            canvas, "d-shaped", open_top=True
+        ),
         "shift-h-pattern": lambda canvas: _flat_shifter(canvas, "h-pattern"),
         "shift-dogleg-h": lambda canvas: _flat_shifter(canvas, "dogleg-h"),
-        "shift-sequential-paddles": lambda canvas: _flat_shifter(
-            canvas, "sequential-paddles"
+        "shift-sequential-stick": lambda canvas: _flat_shifter(
+            canvas, "sequential-stick"
         ),
         "control-clutch": _flat_clutch,
         "control-throttle": _flat_throttle,
