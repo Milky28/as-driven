@@ -1024,7 +1024,8 @@ namespace AsDriven.Core.Tests
                 if (chevette.HasMatch)
                 {
                     Equal("Blip optional", chevette.DownshiftLabel, "Chevette downshift wording");
-                    Equal("optional", chevette.DownshiftTone, "Chevette downshift tone");
+                    Equal("you", chevette.DownshiftTone,
+                        "Chevette clutch requirement keeps the downshift driver-coloured");
                 }
 
 
@@ -1958,6 +1959,8 @@ namespace AsDriven.Core.Tests
                 Equal("modern-light", PopupPreferences.NormalizeTheme("MODERN-LIGHT"), "keeps the optional modern light theme");
                 Equal("2000s-endurance-alloy", PopupPreferences.NormalizeTheme("2000S-ENDURANCE-ALLOY"), "keeps the 2000s endurance theme");
                 Equal("2010s-hybrid-vector", PopupPreferences.NormalizeTheme("2010s-hybrid-vector"), "keeps the 2010s hybrid theme");
+                Equal("gpl-classic", PopupPreferences.NormalizeTheme(" GPL-CLASSIC "), "keeps the GPL Classic manual theme");
+                Equal("gpl-classic", PopupPreferences.NormalizeTheme(" GPLAPS-CLASSIC "), "migrates the original preview theme identifier");
                 Equal("1960s-roadbook", PopupPreferences.ResolveTheme("auto", 1967), "auto selects the roadbook theme for a sixties car");
                 Equal("1970s-works", PopupPreferences.ResolveTheme("auto", 1975), "auto selects the works theme for a seventies car");
                 Equal("1980s-black-gold", PopupPreferences.ResolveTheme("auto", 1986), "auto selects the black-gold theme for an eighties car");

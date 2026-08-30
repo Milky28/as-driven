@@ -88,6 +88,24 @@ def simhub_dashboard_stem(value):
     return PureWindowsPath(value).stem
 
 
+def contrast_ratio(foreground, background):
+    """WCAG contrast for opaque SimHub #AARRGGBB theme colours."""
+    def luminance(value):
+        channels = [int(value[index : index + 2], 16) / 255 for index in (3, 5, 7)]
+        linear = [
+            channel / 12.92
+            if channel <= 0.04045
+            else ((channel + 0.055) / 1.055) ** 2.4
+            for channel in channels
+        ]
+        return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+    light, dark = sorted(
+        (luminance(foreground), luminance(background)), reverse=True
+    )
+    return (light + 0.05) / (dark + 0.05)
+
+
 def named_theme(dashboard, theme_key="modern"):
     layer = next(
         value
@@ -376,7 +394,11 @@ class SimHubDashTests(unittest.TestCase):
         # Two bands, each with its own spine, and the Use band below the Fit
         # band because hardware is settled before the car moves.
         self.assertEqual("FIT", named["FitRailLabel"]["Text"])
-        self.assertEqual(270, named["FitRailLabel"]["Rotation"])
+        self.assertNotIn("Rotation", named["FitRailLabel"])
+        self.assertEqual(16, named["FitRailLabel"]["FontSize"])
+        self.assertEqual(16, named["UseRailLabel"]["FontSize"])
+        self.assertEqual(56, named["FitRailFill"]["Width"])
+        self.assertEqual(56, named["NoteRail"]["Width"])
         self.assertLess(named["FitBand"]["Top"], named["UseBand"]["Top"])
         self.assertEqual(
             "AsDriven.WheelRimLabel",
@@ -431,6 +453,7 @@ class SimHubDashTests(unittest.TestCase):
                 "2000s-endurance-alloy",
                 "2010s-hybrid-vector",
                 "modern-light",
+                "gpl-classic",
             ],
             theme_keys,
         )
@@ -445,7 +468,8 @@ class SimHubDashTests(unittest.TestCase):
                 layer["Bindings"]["Visible"]["Formula"]["Expression"],
             )
             self.assertEqual("brand-mark", named["Mark"]["Image"])
-            self.assertEqual("note-info", named["NoteIcon"]["Image"])
+            self.assertEqual("i", named["NoteIcon"]["Text"])
+            self.assertEqual("Italic", named["NoteIcon"]["FontStyle"])
             self.assertEqual("FIT", named["FitRailLabel"]["Text"])
             self.assertEqual(theme.fit_rail_text, named["FitRailLabel"]["TextColor"])
             self.assertEqual(theme.use_rail_text, named["UseRailLabel"]["TextColor"])
@@ -455,6 +479,38 @@ class SimHubDashTests(unittest.TestCase):
             self.assertNotEqual(theme.car_rail, theme.use_rail_text)
             for moment in ("Launch", "Upshift", "Downshift"):
                 self.assertIn(f"UseValue{moment}", named)
+            stripe_names = (
+                "HeaderStripeDriver", "HeaderStripeAccent", "HeaderStripeCar"
+            )
+            stripe_colors = (theme.driver, theme.accent, theme.car)
+            for stripe, color in zip(stripe_names, stripe_colors):
+                self.assertEqual(color, named[stripe]["BackgroundColor"])
+                self.assertNotIn("Rotation", named[stripe])
+                self.assertEqual(-24, named[stripe]["SkewAngleX"])
+                self.assertEqual(59, named[stripe]["Height"])
+                self.assertEqual(9, named[stripe]["Top"])
+            self.assertEqual(
+                named[stripe_names[0]]["Left"] + named[stripe_names[0]]["Width"],
+                named[stripe_names[1]]["Left"],
+            )
+            self.assertEqual(
+                named[stripe_names[1]]["Left"] + named[stripe_names[1]]["Width"],
+                named[stripe_names[2]]["Left"],
+            )
+            self.assertEqual(
+                dashboard["BaseWidth"] - 95,
+                named[stripe_names[0]]["Left"],
+            )
+            self.assertEqual(56, named["FitRailFill"]["Width"])
+            self.assertEqual(56, named["UseRailCarFill"]["Width"])
+            self.assertEqual(56, named["NoteRail"]["Width"])
+            self.assertEqual(56, named["NoteIcon"]["Width"])
+            self.assertEqual("#FFFFFFFF", named["NoteIcon"]["TextColor"])
+            self.assertEqual(named["NotePanel"]["Top"], named["NoteIcon"]["Top"])
+            self.assertEqual(named["NotePanel"]["Height"], named["NoteIcon"]["Height"])
+            self.assertEqual(0, named["FitBand"]["BorderStyle"]["RadiusTopLeft"])
+            self.assertEqual(0, named["UseBand"]["BorderStyle"]["RadiusTopLeft"])
+            self.assertEqual(0, named["NotePanel"]["BorderStyle"]["RadiusTopLeft"])
             cards.add(named["Card"]["BackgroundColor"])
             panels.add(named["FitBand"]["BackgroundColor"])
             accents.add(named["Accent"]["BackgroundColor"])
@@ -477,6 +533,30 @@ class SimHubDashTests(unittest.TestCase):
         self.assertIn("HybridBlack", hybrid)
         self.assertIn("HybridRed", hybrid)
         self.assertIn("HybridEnergy", hybrid)
+        gpl_classic = named_theme(dashboard, "gpl-classic")
+        self.assertEqual("brand-mark", gpl_classic["Mark"]["Image"])
+        self.assertEqual("#FFA43D29", gpl_classic["FitRailFill"]["BackgroundColor"])
+        self.assertEqual("#FFF3E7CE", gpl_classic["FitRailLabel"]["TextColor"])
+        self.assertEqual("#FFF3E7CE", gpl_classic["UseRailLabel"]["TextColor"])
+        self.assertNotIn("Rotation", gpl_classic["FitRailLabel"])
+        self.assertNotIn("Rotation", gpl_classic["UseRailLabel"])
+        self.assertEqual(
+            "#FF315675", gpl_classic["UseRailRestFill"]["BackgroundColor"])
+        self.assertGreaterEqual(
+            contrast_ratio(
+                gpl_classic["FitRailLabel"]["TextColor"],
+                gpl_classic["FitRailFill"]["BackgroundColor"],
+            ),
+            4.5,
+        )
+        for rail_fill in ("UseRailYouFill", "UseRailCarFill"):
+            self.assertGreaterEqual(
+                contrast_ratio(
+                    gpl_classic["UseRailLabel"]["TextColor"],
+                    gpl_classic[rail_fill]["BackgroundColor"],
+                ),
+                4.5,
+            )
         roadbook = named_theme(dashboard, "1960s-roadbook")
         touring = named_theme(dashboard, "1990s-touring")
         self.assertEqual("#22000000", roadbook["UseCellUpshiftYouFill"]["BackgroundColor"])
@@ -484,10 +564,6 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("#FFE12F31", touring["UseRailYouFill"]["BackgroundColor"])
         self.assertEqual("#FF2D75D5", touring["FitRailFill"]["BackgroundColor"])
         self.assertNotIn("TouringBlue", touring)
-        for light_theme in (
-            "1960s-roadbook", "1990s-touring", "2010s-hybrid-vector", "modern-light"
-        ):
-            self.assertIn("NoteIconWell", named_theme(dashboard, light_theme))
 
     def test_compact_keeps_both_bands(self):
         compact = self.generator.build_dashboard(overlay=True, variant="compact")
@@ -507,6 +583,21 @@ class SimHubDashTests(unittest.TestCase):
             compact_named["FitWheelSubKnownText"]["Top"]
             + compact_named["FitWheelSubKnownText"]["Height"],
             compact_named["FitWheelDiffersText"]["Top"],
+        )
+        gpl_classic = named_theme(compact, "gpl-classic")
+        self.assertEqual(44, gpl_classic["FitRailFill"]["Width"])
+        self.assertEqual(44, gpl_classic["UseRailCarFill"]["Width"])
+        self.assertEqual(44, gpl_classic["NoteRail"]["Width"])
+        self.assertEqual(44, gpl_classic["NoteIcon"]["Width"])
+        self.assertEqual("Italic", gpl_classic["NoteIcon"]["FontStyle"])
+        self.assertEqual(14, gpl_classic["FitRailLabel"]["FontSize"])
+        self.assertEqual(14, gpl_classic["UseRailLabel"]["FontSize"])
+        self.assertEqual(46, gpl_classic["HeaderStripeDriver"]["Height"])
+        self.assertEqual(9, gpl_classic["HeaderStripeDriver"]["Top"])
+        self.assertEqual(-24, gpl_classic["HeaderStripeDriver"]["SkewAngleX"])
+        self.assertEqual(
+            compact["BaseWidth"] - 81,
+            gpl_classic["HeaderStripeDriver"]["Left"],
         )
 
     def test_every_size_binds_its_own_fitted_name_and_class(self):
@@ -555,10 +646,11 @@ class SimHubDashTests(unittest.TestCase):
                         item["Left"] + item["Width"], item["Top"] + item["Height"])
 
             band = named["UseBand"]
-            cell_width = (band["Width"] - 30) / 3
+            rail_width = named["UseRailRestFill"]["Width"]
+            cell_width = (band["Width"] - rail_width - 2) / 3
             # Every text item in a moment stays within that moment's column.
             for index, moment in enumerate(("Launch", "Upshift", "Downshift")):
-                left_edge = band["Left"] + 30 + cell_width * index
+                left_edge = band["Left"] + rail_width + 1 + cell_width * index
                 for part in ("UseValue", "UseClutch", "UseDiffers"):
                     key = part + moment + ("Text" if part == "UseDiffers" else "")
                     x1, _, x2, _ = box(key)
@@ -640,7 +732,8 @@ class SimHubDashTests(unittest.TestCase):
                 named["DriverNote"]["Bindings"]["Visible"]["Formula"]["Expression"],
                 variant,
             )
-            self.assertEqual("note-info", named["NoteIcon"]["Image"], variant)
+            self.assertEqual("i", named["NoteIcon"]["Text"], variant)
+            self.assertEqual("Italic", named["NoteIcon"]["FontStyle"], variant)
 
     def test_rows_mark_where_the_simulator_departs_from_the_real_car(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
@@ -703,6 +796,13 @@ class SimHubDashTests(unittest.TestCase):
             )
             self.assertIn("PREVIEW", badge_text)
             self.assertIn("NOT LIVE", badge_text)
+            badge_background = named["PreviewBadgeBackground"]
+            self.assertEqual(
+                dashboard["BaseWidth"] / 2,
+                badge_background["Left"] + badge_background["Width"] / 2,
+            )
+            self.assertGreaterEqual(
+                badge_background["Top"], named["FooterRule"]["Top"])
 
     def test_every_size_titles_the_card_with_the_brand_mark(self):
         for variant in ("detailed", "compact"):
@@ -733,9 +833,11 @@ class SimHubDashTests(unittest.TestCase):
         # with a dot carrying the colour so the words stay readable.
         self.assertEqual("Telemetry matched", named["Match"]["Text"])
         self.assertEqual(self.generator.GREEN, named["MatchDot"]["FillColor"])
-        self.assertIn("MatchKind", named["Match"]["Bindings"]["Text"]["Formula"]["Expression"])
-        self.assertEqual("PREVIEW", named["PreviewBadgeTitle"]["Text"])
-        self.assertEqual("NOT LIVE", named["PreviewBadgeLive"]["Text"])
+        self.assertEqual(
+            "[AsDriven.MatchKind] != 'preview'",
+            named["LiveMatch"]["Bindings"]["Visible"]["Formula"]["Expression"],
+        )
+        self.assertEqual("PREVIEW - NOT LIVE", named["PreviewBadgeText"]["Text"])
         evidence = named["Evidence"]["Bindings"]["Text"]["Formula"]["Expression"]
         self.assertIn("'Verified'", evidence)
         self.assertIn("'Medium'", evidence)

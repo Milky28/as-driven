@@ -207,14 +207,14 @@ $themeSelector = @($ui | Where-Object {
         $_ -is [System.Windows.Controls.WrapPanel] -and $_.Name -eq "PopupThemeSelector"
     } | Select-Object -First 1)
 if ($themeSelector.Count -ne 1 `
-    -or $themeSelector[0].Children.Count -ne 9 `
+    -or $themeSelector[0].Children.Count -ne 10 `
     -or @($themeSelector[0].Children | Where-Object {
             $_ -isnot [System.Windows.Controls.RadioButton]
         }).Count -ne 0) {
-    throw "The popup settings page must expose auto plus all eight packaged themes as visual choices."
+    throw "The popup settings page must expose auto plus all nine packaged themes as visual choices."
 }
 # The rack has to be wide enough to actually wrap. It used to sit in the
-# 520-pixel preview column, six pixels short of fitting two choices, so all nine
+# 520-pixel preview column, six pixels short of fitting two choices, so every choice
 # stacked vertically and pushed the save button below the fold.
 $popupBehavior = @($garageUi | Where-Object {
         $_ -is [System.Windows.Controls.StackPanel] -and $_.Name -eq "GaragePopupBehavior"
@@ -262,8 +262,12 @@ $twoThousandsTheme = @($themeSelector[0].Children | Where-Object {
 $twentyTensTheme = @($themeSelector[0].Children | Where-Object {
         [string]$_.Tag -eq "2010s-hybrid-vector"
     } | Select-Object -First 1)
-if ($twoThousandsTheme.Count -ne 1 -or $twentyTensTheme.Count -ne 1) {
-    throw "The visual theme rack is missing the 2000s or 2010s era choice."
+$gplClassicTheme = @($themeSelector[0].Children | Where-Object {
+        [string]$_.Tag -eq "gpl-classic"
+    } | Select-Object -First 1)
+if ($twoThousandsTheme.Count -ne 1 -or $twentyTensTheme.Count -ne 1 `
+    -or $gplClassicTheme.Count -ne 1) {
+    throw "The visual theme rack is missing a packaged theme choice."
 }
 $sixtiesTheme[0].IsChecked = $true
 if (-not $savePopupSettings[0].IsEnabled `
@@ -277,6 +281,10 @@ if ($popupPreview[0].Background.ToString() -ne "#FF161A1E") {
 $twentyTensTheme[0].IsChecked = $true
 if ($popupPreview[0].Background.ToString() -ne "#FFF1F2EF") {
     throw "Hybrid Vector must use the production 2010s card colour."
+}
+$gplClassicTheme[0].IsChecked = $true
+if ($popupPreview[0].Background.ToString() -ne "#F5121211") {
+    throw "GPL Classic must use its production charcoal card colour."
 }
 $detailedPreview = @($garageUi | Where-Object {
         $_ -is [System.Windows.Controls.Viewbox] -and $_.Name -eq "DetailedPopupPreview"
@@ -658,6 +666,7 @@ foreach ($requiredTheme in @(
     "1970s-works",
     "1980s-black-gold",
     "1990s-touring",
+    "gpl-classic",
     "modern",
     "modern-light"
 )) {

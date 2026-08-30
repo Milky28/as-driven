@@ -65,7 +65,7 @@ already given a different custom width is left untouched.
 
 The native settings page opens on **Garage**, where the current live car or
 catalog preview is shown as the same FIT and USE decision the overlay presents.
-Popup size, duration, and nine visual theme choices sit beside an embedded
+Popup size, duration, and ten visual theme choices sit beside an embedded
 preview that updates before changes are saved. A persistent health strip keeps
 simulator, exact-match, dataset, and popup readiness visible across Garage,
 Car browser, Contribute data, and System. Simulator coverage, dataset details,
@@ -192,9 +192,12 @@ the previous record and does not increment the revision.
 
 `PopupThemePreference` is the saved selector (`auto` or a packaged theme).
 `PopupTheme` is the rendered theme. In auto mode it is resolved from the
-curated `identity.year.from`; an absent year and cars from 2000 onward use the
-Modern Night Vision palette. Modern Light Studio White is available as a manual
-choice. The plugin never guesses a decade from the displayed car name.
+curated `identity.year.from`; an absent year and cars from 2020 onward use the
+Modern Night Vision palette. Modern Light Studio White and GPL Classic are
+available as manual choices. GPL Classic keeps the As Driven mark and uses an
+original historic-broadcast treatment built from burnt orange, ochre, denim
+blue, cream and charcoal. The plugin never guesses a decade from the displayed
+car name.
 
 The plugin also registers `AsDriven.RefreshDatabase`,
 `AsDriven.ShowPopup`, `AsDriven.HidePopup`, and

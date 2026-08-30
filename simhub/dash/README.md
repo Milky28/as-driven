@@ -34,16 +34,19 @@ then highlighted `USE` guidance with separate Launch, Upshift, and Downshift
 sections. This keeps the pre-session decision order explicit without nested
 cards or decorative technique icons.
 
-Each pre-flight surface packages eight palettes behind one shared information
+Each pre-flight surface packages nine palettes behind one shared information
 layout: Modern Night Vision, Modern Light Studio White, 1960s Roadbook, 1970s
 Works, 1980s Black Gold, 1990s Touring Works, 2000s Endurance Alloy, and 2010s
-Hybrid Vector. `AsDriven.PopupTheme` selects exactly one layer. The settings
+Hybrid Vector, plus the manual GPL Classic historic-broadcast palette.
+`AsDriven.PopupTheme` selects exactly one layer. The settings
 page can pin any palette or resolve it automatically from the curated start
 year. Endurance Alloy covers 2000 through 2009, Hybrid Vector covers 2010
 through 2019, and 2020 or newer uses Modern. Missing years deliberately fall
 back to Modern. The period treatments
 use original colour combinations and small stripe motifs rather than sponsor
-logos or copied livery graphics.
+logos or copied livery graphics. GPL Classic likewise uses the channel's
+burnt-orange, ochre, denim-blue and cream relationships without copying its
+wordmark; the As Driven mark remains at the top left.
 
 The cards use project-owned 128x128 raster PNG icons packaged in each template's
 `.djson.ressources` archive. Detailed and Compact therefore render the

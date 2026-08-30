@@ -93,6 +93,12 @@ THEMES = (
         "#FFFF4B13", "#FF3E8747", "#FF2D78DD", "#FFFF5A1F", "#FF3E8747",
         "#1FFF5A1F", "#1F3E8747", "#FFFF4714", "#FFFFFFFF",
         "#FFFFFFFF", "#FFFFFFFF", "#FF66717A"),
+    ThemeSpec(
+        "gpl-classic", "#F5121211", "#FF181716", "#FF1D1B17", "#FFF3E7CE",
+        "#FFF3E7CE", "#FFF5EBDD", "#FFB7A98E", "#FF8B7654", "#FFD4A44D",
+        "#FFD66A43", "#FF6F98C0", "#FFA43D29", "#FF315675", "#FF315675",
+        "#28D66A43", "#286F98C0", "#FFA43D29", "#FFF3E7CE",
+        "#FFF3E7CE", "#FFF3E7CE", "#FFB7A98E"),
 )
 MODERN = THEMES[0]
 ACCENT = MODERN.accent
@@ -188,6 +194,7 @@ class ItemFactory:
         border_color: str = TRANSPARENT,
         border: int = 0,
         rotation: float = 0,
+        skew_x: float = 0,
     ) -> dict[str, Any]:
         item = {
             "$type": "SimHub.Plugins.OutputPlugins.GraphicalDash.Models.RectangleItem, SimHub.Plugins",
@@ -214,6 +221,8 @@ class ItemFactory:
         }
         if rotation:
             item["Rotation"] = rotation
+        if skew_x:
+            item["SkewAngleX"] = skew_x
         return item
 
     def ellipse(
@@ -283,6 +292,7 @@ class ItemFactory:
         expression: str | None = None,
         horizontal_alignment: int = 0,
         font_weight: str = "Normal",
+        font_style: str = "Normal",
         rotation: float = 0,
     ) -> dict[str, Any]:
         item: dict[str, Any] = {
@@ -290,7 +300,7 @@ class ItemFactory:
             "IsTextItem": True,
             "Font": "Segoe UI",
             "FontWeight": font_weight,
-            "FontStyle": "Normal",
+            "FontStyle": font_style,
             "FontSize": font_size,
             "Text": text,
             "TextColor": color,
@@ -429,31 +439,53 @@ def _frame(factory: ItemFactory, theme: ThemeSpec) -> list[dict[str, Any]]:
 def _theme_motif(factory: ItemFactory, theme: ThemeSpec) -> list[dict[str, Any]]:
     """Small period cues outside the information hierarchy."""
     bottom = factory.height - 9
+    compact = factory.width < 600
+    # These touching parallelograms echo a period racing stripe without using
+    # raster art. Horizontal skew leaves their top and bottom edges perfectly
+    # level while the shared side edges lean forward as one continuous motif.
+    stripe_width = 16 if compact else 20
+    stripe_top = 9
+    stripe_bottom = 55 if compact else 68
+    stripe_height = stripe_bottom - stripe_top
+    stripe_left = factory.width - (81 if compact else 95)
+    stripe_skew = -24
+    items = [
+        factory.rectangle(
+            "HeaderStripeDriver", stripe_left, stripe_top,
+            stripe_width, stripe_height, theme.driver, skew_x=stripe_skew),
+        factory.rectangle(
+            "HeaderStripeAccent", stripe_left + stripe_width, stripe_top,
+            stripe_width, stripe_height, theme.accent, skew_x=stripe_skew),
+        factory.rectangle(
+            "HeaderStripeCar", stripe_left + stripe_width * 2, stripe_top,
+            stripe_width, stripe_height, theme.car, skew_x=stripe_skew),
+    ]
     if theme.key == "1960s-roadbook":
-        return [
+        items.extend([
             factory.rectangle("RoadbookBlue", 34, bottom, 88, 3, theme.car),
             factory.rectangle("RoadbookOrange", 122, bottom, 44, 3, theme.driver),
-        ]
-    if theme.key == "1970s-works":
-        return [
+        ])
+    elif theme.key == "1970s-works":
+        items.extend([
             factory.rectangle("WorksCream", 34, bottom, 82, 3, theme.title),
             factory.rectangle("WorksGold", 116, bottom, 52, 3, theme.accent),
             factory.rectangle("WorksRed", 168, bottom, 32, 3, theme.driver),
-        ]
-    if theme.key == "1980s-black-gold":
-        return [factory.rectangle("BlackGoldRule", 34, bottom, factory.width - 68, 2, theme.accent)]
-    if theme.key == "2000s-endurance-alloy":
-        return [
+        ])
+    elif theme.key == "1980s-black-gold":
+        items.append(factory.rectangle(
+            "BlackGoldRule", 34, bottom, factory.width - 68, 2, theme.accent))
+    elif theme.key == "2000s-endurance-alloy":
+        items.extend([
             factory.rectangle("AlloySilver", 34, bottom, 96, 3, theme.panel),
             factory.rectangle("AlloyRed", 130, bottom, 54, 3, theme.accent),
-        ]
-    if theme.key == "2010s-hybrid-vector":
-        return [
+        ])
+    elif theme.key == "2010s-hybrid-vector":
+        items.extend([
             factory.rectangle("HybridBlack", 34, bottom, 74, 3, theme.panel),
             factory.rectangle("HybridRed", 108, bottom, 46, 3, theme.accent),
             factory.rectangle("HybridEnergy", 154, bottom, 34, 3, theme.car),
-        ]
-    return []
+        ])
+    return items
 
 
 def _brand_mark(
@@ -646,16 +678,25 @@ def _rail(
     color: str,
     fill: str,
     size: float,
+    horizontal: bool = False,
 ) -> list[dict[str, Any]]:
-    """A band's vertical spine. The label reads bottom to top beside the cells."""
-    return [
-        factory.rectangle(name + "Fill", left, top, width, height, fill),
-        factory.text(
+    """A band's spine, with a vertical or compact horizontal label."""
+    if horizontal:
+        label = factory.text(
+            name + "Label", label,
+            left, top, width, height, size, color,
+            horizontal_alignment=1, font_weight="Bold",
+        )
+    else:
+        label = factory.text(
             name + "Label", label,
             left + width / 2 - height / 2, top + height / 2 - width / 2,
             height, width, size, color,
             horizontal_alignment=1, font_weight="Bold", rotation=270,
-        ),
+        )
+    return [
+        factory.rectangle(name + "Fill", left, top, width, height, fill),
+        label,
     ]
 
 
@@ -674,11 +715,14 @@ def _fit_band(
     theme: ThemeSpec,
 ) -> list[dict[str, Any]]:
     children: list[dict[str, Any]] = [
-        factory.rectangle("FitBand", left, top, width, height, theme.panel, radius=7,
+        factory.rectangle("FitBand", left, top, width, height, theme.panel,
+                          radius=0,
                           border_color=theme.rule, border=1),
     ]
-    children.extend(_rail(factory, "FitRail", "FIT", left + 1, top + 1, height - 2,
-                          width=rail_width, color=theme.fit_rail_text, fill=theme.fit_rail, size=rail_size))
+    children.extend(_rail(
+        factory, "FitRail", "FIT", left + 1, top + 1, height - 2,
+        width=rail_width, color=theme.fit_rail_text, fill=theme.fit_rail,
+        size=rail_size, horizontal=True))
     cell_left = left + rail_width + 1
     cell_width = (width - rail_width - 2) / 2
     icon_top = top + (height - icon_size) / 2
@@ -750,21 +794,20 @@ def _use_band(
     theme: ThemeSpec,
 ) -> list[dict[str, Any]]:
     children: list[dict[str, Any]] = [
-        factory.rectangle("UseBand", left, top, width, height, theme.panel, radius=7,
+        factory.rectangle("UseBand", left, top, width, height, theme.panel,
+                          radius=0,
                           border_color=theme.rule, border=1),
     ]
     # The rail states the band's answer; each cell then states its own, so a
     # cell that disagrees is never overpainted by the band.
+    use_rail_rest = theme.car_rail if theme.key == "gpl-classic" else theme.fit_rail
     children.extend(_tone_layers(
         factory, "UseRail", "UseBandTone", left + 1, top + 1, rail_width, height - 2,
-        you=theme.driver_rail, car=theme.car_rail, unknown=theme.fit_rail))
+        you=theme.driver_rail, car=theme.car_rail, unknown=use_rail_rest))
     children.append(factory.text(
-        "UseRailLabel", "USE",
-        left + 1 + rail_width / 2 - (height - 2) / 2,
-        top + 1 + (height - 2) / 2 - rail_width / 2,
-        height - 2, rail_width, rail_size, theme.use_rail_text,
-        expression="'USE'", horizontal_alignment=1,
-        font_weight="Bold", rotation=270))
+        "UseRailLabel", "USE", left + 1, top + 1,
+        rail_width, height - 2, rail_size, theme.use_rail_text,
+        expression="'USE'", horizontal_alignment=1, font_weight="Bold"))
     cell_left = left + rail_width + 1
     cell_width = (width - rail_width - 2) / 3
     moments = (
@@ -854,6 +897,8 @@ def _driver_note(
     line_height: float,
     prefix: str,
     theme: ThemeSpec,
+    rail_width: float = 2,
+    icon_size: float = 16,
 ) -> list[dict[str, Any]]:
     """The one place the card can say why a car behaves as it does.
 
@@ -866,23 +911,22 @@ def _driver_note(
     # line can never end up drawn past the edge of the box holding it.
     height = NOTE_PADDING * 2 + line_height * NOTE_LINES
     present = "[AsDriven.DriverSummary] != ''"
+    note_rail_width = rail_width
+    text_left = left + note_rail_width + 12
     children = [
-        factory.rectangle("NotePanel", left, top, width, height, theme.note, radius=6),
-        factory.rectangle("NoteRail", left, top, 2, height, theme.accent),
+        factory.rectangle("NotePanel", left, top, width, height, theme.note,
+                          radius=0),
+        factory.rectangle("NoteRail", left, top, note_rail_width, height, theme.accent),
     ]
-    if theme.key in (
-        "1960s-roadbook", "1990s-touring", "2010s-hybrid-vector", "modern-light"
-    ):
-        children.append(factory.ellipse(
-            "NoteIconWell", left + 10, top + NOTE_PADDING - 1, 22, 22,
-            theme.title, thickness=1, fill=theme.title))
-    children.append(factory.image(
-        "NoteIcon", "note-info", left + 13, top + NOTE_PADDING + 2, 16, 16))
+    children.append(factory.text(
+        "NoteIcon", "i", left, top,
+        note_rail_width, height, icon_size + 4, "#FFFFFFFF",
+        horizontal_alignment=1, font_weight="Bold", font_style="Italic"))
     for index in range(NOTE_LINES):
         children.append(factory.text(
             "NoteLine" + str(index + 1), "",
-            left + 38, top + NOTE_PADDING + line_height * index,
-            width - 50, line_height, size, theme.text,
+            text_left, top + NOTE_PADDING + line_height * index,
+            width - (text_left - left) - 12, line_height, size, theme.text,
             expression="[AsDriven." + prefix + "Line" + str(index + 1) + "]"))
     return [factory.layer("DriverNote", children, visible_expression=present)]
 
@@ -901,51 +945,61 @@ def _card_header(
     theme: ThemeSpec = MODERN,
 ) -> list[dict[str, Any]]:
     text_left = left + mark + 14
-    match_width = 150 if match_size >= 12 else 118
-    match_left = left + width - match_width
+    compact = factory.width < 600
+    stripe_left = factory.width - (101 if compact else 131)
+    title_right = stripe_left - 10
+    footer_match_width = 110 if compact else 140
+    footer_match_left = (factory.width - footer_match_width) / 2
+    footer_match_top = 309 if compact else 377
     children = [
         *_brand_mark(factory, "Mark", left, top + 1, mark, theme),
         factory.text("Title", "Current car", text_left, top - 1,
-                     match_left - text_left - 10, name_size + 9, name_size, theme.title,
+                     title_right - text_left, name_size + 9, name_size, theme.title,
                      expression="[AsDriven.OverlayCarNameDetailed]", font_weight="Bold"),
     ]
     if show_class:
         children.append(
             factory.text("CarClass", "", text_left, top + name_size + 6,
-                         match_left - text_left - 10, class_size + 6, class_size, theme.muted,
+                         title_right - text_left, class_size + 6, class_size, theme.muted,
                          expression="[AsDriven.OverlayCarClassDetailed]"))
-    children.extend([
-        factory.ellipse("MatchDot", match_left, top + mark / 2 - 4, 8, 8, theme.car,
-                        thickness=4, fill=theme.car),
-        factory.text("Match", "Telemetry matched", match_left + 13, top + mark / 2 - match_size,
-                     match_width - 13, match_size + 8, match_size, theme.car,
-                     expression="if([AsDriven.MatchKind] == 'preview', 'Preview - not live', "
-                                "'Telemetry matched')",
-                     font_weight="Bold"),
-    ])
+    children.append(factory.layer(
+        "LiveMatch",
+        [
+            factory.ellipse("MatchDot", footer_match_left, footer_match_top + 5,
+                            8, 8, theme.car,
+                            thickness=4, fill=theme.car),
+            factory.text("Match", "Telemetry matched", footer_match_left + 13,
+                         footer_match_top,
+                         footer_match_width - 13, 19, match_size, theme.car,
+                         expression="'Telemetry matched'", font_weight="Bold"),
+        ],
+        visible_expression="[AsDriven.MatchKind] != 'preview'",
+    ))
     return children
 
 
 def _matched_detailed(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
     left = 22
     width = factory.width - 2 * left
+    rail_width = 56
     children = _card_header(factory, left=left, top=16, mark=36, name_size=22,
                             class_size=12, match_size=13, width=width, theme=theme)
     children.append(factory.rectangle("HeaderRule", left, 68, width, 1, theme.rule))
-    children.extend(_fit_band(factory, left, 80, width, 82, rail_width=30, rail_size=13,
+    children.extend(_fit_band(factory, left, 80, width, 82, rail_width=rail_width, rail_size=16,
                               head_size=16, sub_size=12.5, icon_size=42, theme=theme))
-    children.extend(_use_band(factory, left, 166, width, 92, rail_width=30, rail_size=13,
+    children.extend(_use_band(factory, left, 166, width, 92, rail_width=rail_width, rail_size=16,
                               head_size=15, value_size=13, theme=theme))
     children.extend(_driver_note(factory, left, 264, width, size=12.5,
-                                 line_height=17, prefix="DriverSummary", theme=theme))
+                                 line_height=17, prefix="DriverSummary", theme=theme,
+                                 rail_width=rail_width, icon_size=26))
     children.extend([
-        _preview_badge(factory, factory.width - left - 150, 14, 150, 30, theme=theme),
+        _preview_badge(factory, (factory.width - 140) / 2, 376, 140, 22, theme=theme),
         factory.rectangle("FooterRule", left, 371, width, 1, theme.rule),
-        factory.text("Evidence", "", left, 377, width - 180, 19, 11.5, theme.muted,
+        factory.text("Evidence", "", left, 377, 250, 19, 11.5, theme.muted,
                      expression="[AsDriven.SimulatorLabel] + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + ' - Confidence: ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 180, 377, 180, 19, 11.5, theme.muted,
+        factory.text("Dataset", "", factory.width - left - 180, 377, 180, 19, 11.5, theme.muted,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])
@@ -955,23 +1009,25 @@ def _matched_detailed(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
 def _matched_compact(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
     left = 16
     width = factory.width - 2 * left
+    rail_width = 44
     children = _card_header(factory, left=left, top=12, mark=28, name_size=17,
                             class_size=10.5, match_size=11, width=width, theme=theme)
     children.append(factory.rectangle("HeaderRule", left, 55, width, 1, theme.rule))
-    children.extend(_fit_band(factory, left, 60, width, 58, rail_width=24, rail_size=11,
+    children.extend(_fit_band(factory, left, 60, width, 58, rail_width=rail_width, rail_size=14,
                               head_size=13, sub_size=10.5, icon_size=30, theme=theme))
-    children.extend(_use_band(factory, left, 124, width, 78, rail_width=24, rail_size=11,
+    children.extend(_use_band(factory, left, 124, width, 78, rail_width=rail_width, rail_size=14,
                               head_size=12, value_size=11, theme=theme))
     children.extend(_driver_note(factory, left, 206, width, size=11,
-                                 line_height=15, prefix="DriverSummaryCompact", theme=theme))
+                                 line_height=15, prefix="DriverSummaryCompact", theme=theme,
+                                 rail_width=rail_width, icon_size=22))
     children.extend([
-        _preview_badge(factory, factory.width - left - 118, 10, 118, 26, compact=True, theme=theme),
+        _preview_badge(factory, (factory.width - 110) / 2, 308, 110, 22, theme=theme),
         factory.rectangle("FooterRule", left, 303, width, 1, theme.rule),
-        factory.text("Evidence", "", left, 309, width - 150, 18, 10, theme.muted,
+        factory.text("Evidence", "", left, 309, 176, 18, 10, theme.muted,
                      expression="[AsDriven.SimulatorLabel] + ' ' + if([AsDriven.VerifiedGameVersion] == '', 'unknown', "
                                 "[AsDriven.VerifiedGameVersion]) + ' - ' + "
                                 + _confidence_value_expression()),
-        factory.text("Dataset", "", left + width - 150, 309, 150, 18, 10, theme.muted,
+        factory.text("Dataset", "", factory.width - left - 140, 309, 140, 18, 10, theme.muted,
                      expression="'Dataset ' + [AsDriven.DatasetVersion]",
                      horizontal_alignment=2),
     ])

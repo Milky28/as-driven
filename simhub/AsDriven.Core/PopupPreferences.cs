@@ -22,6 +22,7 @@ namespace AsDriven.Core
         public const string NinetiesTheme = "1990s-touring";
         public const string TwoThousandsTheme = "2000s-endurance-alloy";
         public const string TwentyTensTheme = "2010s-hybrid-vector";
+        public const string GPLClassicTheme = "gpl-classic";
 
         /// <summary>
         /// Clamps a stored duration into the supported range. A missing or
@@ -71,9 +72,16 @@ namespace AsDriven.Core
                 || normalized == EightiesTheme
                 || normalized == NinetiesTheme
                 || normalized == TwoThousandsTheme
-                || normalized == TwentyTensTheme)
+                || normalized == TwentyTensTheme
+                || normalized == GPLClassicTheme)
             {
                 return normalized;
+            }
+            // The first preview build used this longer identifier. Preserve a
+            // saved selection while presenting the shorter GPL Classic name.
+            if (normalized == "gplaps-classic")
+            {
+                return GPLClassicTheme;
             }
             return DefaultTheme;
         }

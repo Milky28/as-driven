@@ -80,6 +80,8 @@ namespace AsDriven.Plugin
             public bool Compact { get; set; }
             public Viewbox View { get; set; }
             public Border Card { get; set; }
+            public FrameworkElement WheelGlyph { get; set; }
+            public FrameworkElement ShiftGlyph { get; set; }
             public Dictionary<string, TextBlock> Text { get; private set; }
             public Dictionary<string, Border> Box { get; private set; }
             public List<Shape> Glyphs { get; private set; }
@@ -415,6 +417,25 @@ namespace AsDriven.Plugin
                 Visibility = compact ? Visibility.Collapsed : Visibility.Visible,
             };
 
+            double stripeWidth = compact ? 16 : 20;
+            double stripeTop = 9;
+            double stripeBottom = compact ? 55 : 68;
+            double stripeHeight = stripeBottom - stripeTop;
+            double stripeLeft = cardWidth - (compact ? 81 : 95);
+            string[] stripeNames = {
+                "HeaderStripeDriver", "HeaderStripeAccent", "HeaderStripeCar"
+            };
+            for (int index = 0; index < stripeNames.Length; index++)
+            {
+                Border stripe = AddPreviewBox(
+                    variant, canvas, stripeNames[index],
+                    stripeLeft + index * stripeWidth, stripeTop,
+                    stripeWidth, stripeHeight, 0);
+                stripe.RenderTransform = new SkewTransform(-24, 0);
+                stripe.RenderTransformOrigin = new Point(0, 0);
+                stripe.Visibility = Visibility.Visible;
+            }
+
             var mark = new Image
             {
                 Source = _plugin.HeaderPictureIcon,
@@ -427,13 +448,14 @@ namespace AsDriven.Plugin
             AddPreviewText(variant, canvas, "Class", left + markSize + 14,
                 headerTop + (compact ? 23 : 28), contentWidth - markSize - 170,
                 compact ? 16 : 20, compact ? 10.5 : 12, false);
+            double badgeWidth = compact ? 110 : 140;
             Border badge = AddPreviewBox(variant, canvas, "Badge",
-                cardWidth - left - (compact ? 118 : 150), compact ? 10 : 14,
-                compact ? 118 : 150, compact ? 26 : 30, compact ? 5 : 7);
+                (cardWidth - badgeWidth) / 2, compact ? 308 : 376,
+                badgeWidth, 22, compact ? 5 : 7);
             var badgeText = new TextBlock
             {
                 Text = "PREVIEW - NOT LIVE",
-                FontSize = compact ? 9 : 11,
+                FontSize = compact ? 9 : 10.5,
                 FontWeight = FontWeights.Bold,
                 TextAlignment = TextAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -448,14 +470,16 @@ namespace AsDriven.Plugin
             fitPanel.BorderThickness = new Thickness(1);
             Border fitRail = AddPreviewBox(variant, canvas, "FitRail", left + 1,
                 fitTop + 1, railWidth, fitHeight - 2, 0);
-            fitRail.Child = RotatedRailLabel("FIT", compact ? 11 : 13);
+            fitRail.Child = RotatedRailLabel("FIT", compact ? 14 : 16);
             variant.Text["FitRail"] = (TextBlock)fitRail.Child;
             double fitCellLeft = left + railWidth + 1;
             double fitCellWidth = (contentWidth - railWidth - 2) / 2;
             double iconTop = fitTop + (fitHeight - fitIcon) / 2;
             Canvas wheelGlyph = CreateWheelGlyph(variant, fitIcon);
+            variant.WheelGlyph = wheelGlyph;
             Place(canvas, wheelGlyph, fitCellLeft + 14, iconTop, fitIcon, fitIcon);
             Canvas shiftGlyph = CreateShifterGlyph(variant, fitIcon);
+            variant.ShiftGlyph = shiftGlyph;
             Place(canvas, shiftGlyph, fitCellLeft + fitCellWidth + 14,
                 iconTop, fitIcon, fitIcon);
             double fitTextLeft = fitCellLeft + fitIcon + 22;
@@ -484,7 +508,7 @@ namespace AsDriven.Plugin
             usePanel.BorderThickness = new Thickness(1);
             Border useRail = AddPreviewBox(variant, canvas, "UseRail", left + 1,
                 useTop + 1, railWidth, useHeight - 2, 0);
-            useRail.Child = RotatedRailLabel("USE", compact ? 11 : 13);
+            useRail.Child = RotatedRailLabel("USE", compact ? 14 : 16);
             variant.Text["UseRail"] = (TextBlock)useRail.Child;
             double useCellLeft = left + railWidth + 1;
             double useCellWidth = (contentWidth - railWidth - 2) / 3;
@@ -522,8 +546,9 @@ namespace AsDriven.Plugin
             var noteIconText = new TextBlock
             {
                 Text = "i",
-                FontSize = compact ? 12 : 14,
+                FontSize = compact ? 26 : 30,
                 FontWeight = FontWeights.Bold,
+                FontStyle = FontStyles.Italic,
                 TextAlignment = TextAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
             };
@@ -534,11 +559,11 @@ namespace AsDriven.Plugin
             AddPreviewBox(variant, canvas, "FooterRule", left, footerRule,
                 contentWidth, 1, 0);
             AddPreviewText(variant, canvas, "Evidence", left, footerRule + 6,
-                contentWidth - (compact ? 150 : 180), compact ? 18 : 19,
+                compact ? 176 : 250, compact ? 18 : 19,
                 compact ? 10 : 11.5, false);
             TextBlock dataset = AddPreviewText(variant, canvas, "Dataset",
-                left + contentWidth - (compact ? 150 : 180), footerRule + 6,
-                compact ? 150 : 180, compact ? 18 : 19,
+                cardWidth - left - (compact ? 140 : 180), footerRule + 6,
+                compact ? 140 : 180, compact ? 18 : 19,
                 compact ? 10 : 11.5, false);
             dataset.TextAlignment = TextAlignment.Right;
             return variant;
@@ -669,6 +694,16 @@ namespace AsDriven.Plugin
             Canvas.SetLeft(element, left);
             Canvas.SetTop(element, top);
             canvas.Children.Add(element);
+        }
+
+        private static void Move(
+            FrameworkElement element,
+            double left, double top, double width, double height)
+        {
+            element.Width = width;
+            element.Height = height;
+            Canvas.SetLeft(element, left);
+            Canvas.SetTop(element, top);
         }
 
         private void AddThemeChoice(string label, string value)
@@ -844,6 +879,16 @@ namespace AsDriven.Plugin
                     "#FFFF5A1F", "#FF3E8747", "#1FFF5A1F", "#1F3E8747",
                     "#FFFF4714", "#FFFFFFFF", "#FFFFFFFF", "#FFFFFFFF",
                     "#FF66717A");
+            }
+            if (theme == PopupPreferences.GPLClassicTheme)
+            {
+                return new ThemePreviewPalette(
+                    "#F5121211", "#FF181716", "#FF1D1B17", "#FFF3E7CE",
+                    "#FFF3E7CE", "#FFF5EBDD", "#FFB7A98E", "#FF8B7654",
+                    "#FFD4A44D", "#FFD66A43", "#FF6F98C0", "#FFA43D29",
+                    "#FF315675", "#FF315675", "#28D66A43", "#286F98C0",
+                    "#FFA43D29", "#FFF3E7CE", "#FFF3E7CE", "#FFF3E7CE",
+                    "#FFB7A98E");
             }
             return new ThemePreviewPalette(
                 "#F2050D14", "#D9081722", "#B5091720", "#FFF4F7F9",
@@ -1086,6 +1131,7 @@ namespace AsDriven.Plugin
             AddThemeChoice("2010s Hybrid Vector", PopupPreferences.TwentyTensTheme);
             AddThemeChoice("Modern Night", PopupPreferences.ModernTheme);
             AddThemeChoice("Modern Light", PopupPreferences.ModernLightTheme);
+            AddThemeChoice("GPL Classic", PopupPreferences.GPLClassicTheme);
             SelectThemeChoice(_plugin.PopupThemePreference);
             _popupSettingsDirty = false;
             _overlayFeedback.Text = string.Empty;
@@ -1835,18 +1881,32 @@ namespace AsDriven.Plugin
             _compactPopupPreview.View.Visibility = compact
                 ? Visibility.Visible
                 : Visibility.Collapsed;
-            UpdatePopupPreviewVariant(_detailedPopupPreview, guidance, palette);
-            UpdatePopupPreviewVariant(_compactPopupPreview, guidance, palette);
+            UpdatePopupPreviewVariant(_detailedPopupPreview, guidance, palette, resolved);
+            UpdatePopupPreviewVariant(_compactPopupPreview, guidance, palette, resolved);
         }
 
         private void UpdatePopupPreviewVariant(
             PopupPreviewVariant variant,
             GuidanceSnapshot guidance,
-            ThemePreviewPalette palette)
+            ThemePreviewPalette palette,
+            string resolvedTheme)
         {
             bool matched = guidance != null && guidance.HasMatch;
+            bool gplClassic = string.Equals(
+                resolvedTheme, PopupPreferences.GPLClassicTheme,
+                StringComparison.OrdinalIgnoreCase);
+            UpdatePopupPreviewGeometry(variant);
             variant.Card.Background = palette.Card;
             variant.Card.BorderBrush = palette.Accent;
+            string[] stripeNames = {
+                "HeaderStripeDriver", "HeaderStripeAccent", "HeaderStripeCar"
+            };
+            Brush[] stripeBrushes = { palette.Driver, palette.Accent, palette.Car };
+            for (int index = 0; index < stripeNames.Length; index++)
+            {
+                variant.Box[stripeNames[index]].Background = stripeBrushes[index];
+                variant.Box[stripeNames[index]].Visibility = Visibility.Visible;
+            }
             variant.Box["Badge"].Background = palette.PreviewFill;
             variant.Text["BadgeText"].Foreground = palette.PreviewText;
             variant.Text["Car"].Foreground = palette.Title;
@@ -1863,6 +1923,7 @@ namespace AsDriven.Plugin
             variant.Box["FitPanel"].BorderBrush = palette.Rule;
             variant.Box["FitRail"].Background = palette.FitRail;
             variant.Text["FitRail"].Foreground = palette.FitRailText;
+            variant.Text["FitRail"].LayoutTransform = new RotateTransform(0);
             variant.Box["FitDivider"].Background = palette.Rule;
             foreach (Shape glyph in variant.Glyphs)
             {
@@ -1889,8 +1950,11 @@ namespace AsDriven.Plugin
             variant.Box["UsePanel"].Background = palette.Panel;
             variant.Box["UsePanel"].BorderBrush = palette.Rule;
             string useTone = matched ? guidance.UseBandTone : "unknown";
-            variant.Box["UseRail"].Background = ToneBrush(useTone, palette, true);
+            variant.Box["UseRail"].Background = gplClassic
+                ? palette.CarRail
+                : ToneBrush(useTone, palette, true);
             variant.Text["UseRail"].Foreground = palette.UseRailText;
+            variant.Text["UseRail"].LayoutTransform = new RotateTransform(0);
             string[] moments = { "Launch", "Upshift", "Downshift" };
             string[] tones =
             {
@@ -1945,9 +2009,9 @@ namespace AsDriven.Plugin
             variant.Box["NotePanel"].Visibility = hasSummary ? Visibility.Visible : Visibility.Collapsed;
             variant.Box["NoteRail"].Background = palette.Accent;
             variant.Box["NoteRail"].Visibility = hasSummary ? Visibility.Visible : Visibility.Collapsed;
-            variant.Box["NoteIconWell"].Background = palette.Title;
+            variant.Box["NoteIconWell"].Background = Brushes.Transparent;
             variant.Box["NoteIconWell"].Visibility = hasSummary ? Visibility.Visible : Visibility.Collapsed;
-            variant.Text["NoteIcon"].Foreground = palette.Card;
+            variant.Text["NoteIcon"].Foreground = Brushes.White;
             variant.Text["NoteIcon"].Visibility = hasSummary ? Visibility.Visible : Visibility.Collapsed;
             variant.Text["Summary"].Text = summary;
             variant.Text["Summary"].Foreground = palette.Text;
@@ -1967,6 +2031,107 @@ namespace AsDriven.Plugin
             variant.Text["Dataset"].Text = "Dataset " + EmptyAsUnknown(_plugin.CurrentDatasetVersion);
             variant.Text["Evidence"].Foreground = palette.Muted;
             variant.Text["Dataset"].Foreground = palette.Muted;
+        }
+
+        private static void UpdatePopupPreviewGeometry(PopupPreviewVariant variant)
+        {
+            bool compact = variant.Compact;
+            double cardWidth = compact ? 520 : 720;
+            double left = compact ? 16 : 22;
+            double contentWidth = cardWidth - left * 2;
+            double railWidth = compact ? 44 : 56;
+            double fitTop = compact ? 60 : 80;
+            double fitHeight = compact ? 58 : 82;
+            double fitIcon = compact ? 30 : 42;
+            double fitHeadSize = compact ? 13 : 16;
+            double fitSubSize = compact ? 10.5 : 12.5;
+            double fitCellLeft = left + railWidth + 1;
+            double fitCellWidth = (contentWidth - railWidth - 2) / 2;
+            double iconTop = fitTop + (fitHeight - fitIcon) / 2;
+            double fitTextLeft = fitCellLeft + fitIcon + 22;
+            double secondTextLeft = fitCellLeft + fitCellWidth + fitIcon + 22;
+            double fitTextWidth = fitCellWidth - fitIcon - 30;
+            double fitHeadTop = compact
+                ? fitTop + 7
+                : fitTop + fitHeight / 2 - fitHeadSize - 3;
+            double fitSubTop = compact ? fitTop + 26 : fitTop + fitHeight / 2 + 2;
+            double fitMarkerTop = compact ? fitTop + 44 : fitTop + fitHeight - 21;
+
+            variant.Box["FitPanel"].CornerRadius = new CornerRadius(0);
+            Move(variant.Box["FitRail"], left + 1, fitTop + 1,
+                railWidth, fitHeight - 2);
+            Move(variant.WheelGlyph, fitCellLeft + 14, iconTop, fitIcon, fitIcon);
+            Move(variant.ShiftGlyph, fitCellLeft + fitCellWidth + 14,
+                iconTop, fitIcon, fitIcon);
+            foreach (string name in new[] { "Wheel", "WheelDetail", "WheelMarker" })
+            {
+                double top = name == "Wheel"
+                    ? fitHeadTop
+                    : (name == "WheelDetail" ? fitSubTop : fitMarkerTop);
+                double height = name == "Wheel"
+                    ? fitHeadSize + 6
+                    : (name == "WheelDetail" ? fitSubSize + 6 : fitSubSize + 4);
+                Move(variant.Text[name], fitTextLeft, top, fitTextWidth, height);
+            }
+            foreach (string name in new[] { "Shifter", "ShifterDetail", "ShifterMarker" })
+            {
+                double top = name == "Shifter"
+                    ? fitHeadTop
+                    : (name == "ShifterDetail" ? fitSubTop : fitMarkerTop);
+                double height = name == "Shifter"
+                    ? fitHeadSize + 6
+                    : (name == "ShifterDetail" ? fitSubSize + 6 : fitSubSize + 4);
+                Move(variant.Text[name], secondTextLeft, top, fitTextWidth, height);
+            }
+            Move(variant.Box["FitDivider"], fitCellLeft + fitCellWidth,
+                fitTop + 8, 1, fitHeight - 16);
+
+            double useTop = compact ? 124 : 166;
+            double useHeight = compact ? 78 : 92;
+            double useHeadSize = compact ? 12 : 15;
+            double useValueSize = compact ? 11 : 13;
+            double useCellLeft = left + railWidth + 1;
+            double useCellWidth = (contentWidth - railWidth - 2) / 3;
+            variant.Box["UsePanel"].CornerRadius = new CornerRadius(0);
+            Move(variant.Box["UseRail"], left + 1, useTop + 1,
+                railWidth, useHeight - 2);
+            string[] moments = { "Launch", "Upshift", "Downshift" };
+            for (int index = 0; index < moments.Length; index++)
+            {
+                string moment = moments[index];
+                double x = useCellLeft + useCellWidth * index;
+                Move(variant.Box[moment + "Cell"], x + 1, useTop + 2,
+                    useCellWidth - 2, useHeight - 4);
+                if (index > 0)
+                {
+                    Move(variant.Box["UseDivider" + moment], x,
+                        useTop + 8, 1, useHeight - 16);
+                }
+                Move(variant.Text[moment + "Head"], x + 14, useTop + 10,
+                    useCellWidth - 24, useHeadSize + 6);
+                Move(variant.Text[moment + "Value"], x + 14,
+                    useTop + useHeadSize + 16, useCellWidth - 24,
+                    useValueSize + 6);
+                Move(variant.Text[moment + "Detail"], x + 14,
+                    useTop + useHeadSize + useValueSize + 21,
+                    useCellWidth - 24, useValueSize + 5);
+                Move(variant.Text[moment + "Marker"], x + 14,
+                    useTop + useHeadSize + useValueSize * 2 + 25,
+                    useCellWidth - 24, useValueSize + 2);
+            }
+
+            double noteTop = compact ? 206 : 264;
+            double noteHeight = compact ? 89 : 99;
+            double noteRailWidth = railWidth;
+            variant.Box["NotePanel"].CornerRadius = new CornerRadius(0);
+            Move(variant.Box["NoteRail"], left, noteTop,
+                noteRailWidth, noteHeight);
+            Move(variant.Box["NoteIconWell"], left,
+                noteTop, noteRailWidth, noteHeight);
+            double summaryLeft = left + noteRailWidth + 12;
+            Move(variant.Text["Summary"], summaryLeft, noteTop + 7,
+                contentWidth - (summaryLeft - left) - 12,
+                noteHeight - 14);
         }
 
         private static string MarkerText(bool differs, bool unestablished)
