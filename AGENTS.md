@@ -88,13 +88,15 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
   repository must re-clone rather than pull.
 - `../authentic-controls-db-prepurge-2026-08-29/` is the only complete
   pre-rewrite copy. Keep it.
-- The repository is still private and the default branch is still
-  `codex/stabilization`. Both are deliberate holds.
+- `main` is the default branch and points at the same commit as
+  `codex/stabilization`. The repository is still private, which is a deliberate
+  hold.
 
 ## Current handoff state
 
 - Branch: `codex/stabilization`; private remote `origin` at
-  `github.com/Milky28/as-driven`, synchronized. See the history-rewrite note
+  `github.com/Milky28/as-driven`, synchronized. `main` is the default branch
+  and points at the same commit. See the history-rewrite note
   above before assuming an older clone can pull.
 - Client: 0.20.2.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The

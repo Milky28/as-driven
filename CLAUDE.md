@@ -199,9 +199,9 @@ rather than pull.
 - GitHub still reports ~96 MB of disk usage because the unreachable objects have
   not been collected. They are unreachable, not gone. If the homologation scans
   must actually leave GitHub's servers, that needs a support request.
-- The repository is still **private**, and the default branch is still
-  `codex/stabilization` rather than `main`. Both are deliberate holds, not
-  oversights.
+- `main` is the default branch, and `codex/stabilization` currently points at
+  the same commit. The repository is still **private**; that is a deliberate
+  hold, not an oversight.
 
 Going public was the reason for the rewrite. A stripped-history `main` was
 considered and rejected: the project's claim is auditable evidence, and the
@@ -209,8 +209,9 @@ history is where corrections are visible.
 
 ## Current handoff state
 
-- Branch: `codex/stabilization`, synchronized with `origin`. `main` points at
-  the same commit.
+- Branch: `codex/stabilization`, synchronized with `origin`. `main` is the
+  default branch and points at the same commit; new work can land on either
+  while they are in step, but `main` is what a visitor sees.
 - Client: 0.20.2.
 - Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
   installed plugin binaries predate the GPLaps theme commit `c41bb36`; reinstall
