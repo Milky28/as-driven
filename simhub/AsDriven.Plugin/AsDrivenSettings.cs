@@ -38,7 +38,7 @@ namespace AsDriven.Plugin
         public AsDrivenSettings()
         {
             PopupDurationSeconds = 10.0;
-            PopupSize = "compact";
+            PopupSize = "detailed";
             PopupTheme = "auto";
             VerificationObserver = string.Empty;
             UpdateCheckUrl = string.Empty;

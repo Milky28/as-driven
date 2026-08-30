@@ -11,13 +11,7 @@ namespace AsDriven.Core
     public static class PreviewRules
     {
         public const string LayoutNamePrefix = "As Driven";
-        public const string WideLayoutName = "As Driven 5120x1440";
         public const string StandardLayoutName = "As Driven";
-
-        /// <summary>
-        /// Minimum virtual screen width that prefers the wide layout.
-        /// </summary>
-        public const double WideLayoutMinimumWidth = 3840;
 
         /// <summary>
         /// Preview is abandoned once the game reports a real car that differs
@@ -50,13 +44,14 @@ namespace AsDriven.Core
         }
 
         /// <summary>
-        /// Chooses the layout name to prefer for the available desktop width.
+        /// The layout to prefer. One preset ships, positioned for an ordinary
+        /// desktop; a super-ultrawide preset was packaged alongside it until
+        /// 0.21.0 and was dropped because a driver repositions the overlay once
+        /// and the second preset only added a choice to get wrong.
         /// </summary>
         public static string PreferredLayoutName(double virtualScreenWidth)
         {
-            return virtualScreenWidth >= WideLayoutMinimumWidth
-                ? WideLayoutName
-                : StandardLayoutName;
+            return StandardLayoutName;
         }
     }
 }

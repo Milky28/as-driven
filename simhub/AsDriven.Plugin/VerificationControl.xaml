@@ -128,6 +128,8 @@
 
           <TextBlock Text="Simulator test setup" Style="{StaticResource Heading}" />
           <StackPanel x:Name="_assistEditorPanel">
+            <TextBlock Text="Turn every driving assist off in the simulator before you drive. An assist that is left on answers the test for the car: automatic clutch hides whether the clutch is needed, automatic shifting hides the gearbox, and a throttle-blip assist makes the car look like it blips for you."
+                       TextWrapping="Wrap" FontWeight="SemiBold" Margin="0,0,0,8" />
             <TextBlock Text="These are simulator assists, not systems built into the car. A confirmed profile is reused for this simulator."
                        TextWrapping="Wrap" Opacity="0.78" Margin="0,0,0,10" />
             <TextBlock Text="Automatic clutch" Style="{StaticResource FieldLabel}" />

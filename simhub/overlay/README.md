@@ -10,18 +10,20 @@ the smaller driving-technique summary; Glance intentionally remains icon-only.
 
 - `As Driven.olayout` centers all sizes near the top of a 1920-wide
   display.
-- `As Driven 5120x1440.olayout` centers all sizes near the top of a
-  5120x1440 super-ultrawide display.
+
+A second preset positioned for a 5120x1440 super-ultrawide display shipped until
+0.21.0. It was dropped because a driver repositions the overlay once anyway, and
+a second preset only added a choice to get wrong. Drag the overlay where you
+want it; the installer preserves that position across upgrades.
 
 The package installs it under:
 
 ```text
 <SimHub>/OverlayLayouts/As Driven.olayout
-<SimHub>/OverlayLayouts/As Driven 5120x1440.olayout
 ```
 
 In SimHub, open **Dash Studio > Overlays** and click **Load** beside
-the preset matching the display. The layout is configured to remain available in menus
+the preset. The layout is configured to remain available in menus
 and while paused because the plugin owns the card's timed visibility. Enable
 layout auto-start after positioning it if desired.
 

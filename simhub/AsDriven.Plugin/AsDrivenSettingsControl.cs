@@ -1108,7 +1108,7 @@ namespace AsDriven.Plugin
             };
             _popupSize.Items.Add(CreateChoiceItem("Detailed - 720 x 428", "detailed"));
             _popupSize.Items.Add(CreateChoiceItem("Compact - 520 x 360", "compact"));
-            SelectChoice(_popupSize, _plugin.PopupSize, 1);
+            SelectChoice(_popupSize, _plugin.PopupSize, 0);
             _popupSize.SelectionChanged += PopupSizeChanged;
             sizeBlock.Children.Add(_popupSize);
             behaviorRow.Children.Add(sizeBlock);

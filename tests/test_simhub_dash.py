@@ -14,12 +14,6 @@ GENERATOR_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "generate.py"
 OVERLAY_LAYOUT_PATH = (
     REPOSITORY_ROOT / "simhub" / "overlay" / "As Driven.olayout"
 )
-ULTRAWIDE_LAYOUT_PATH = (
-    REPOSITORY_ROOT
-    / "simhub"
-    / "overlay"
-    / "As Driven 5120x1440.olayout"
-)
 RASTER_ASSET_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "assets"
 PREFLIGHT_ASSET_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "preflight-assets"
 BRAND_MARK_GENERATOR_PATH = REPOSITORY_ROOT / "simhub" / "dash" / "brand_mark.py"
@@ -895,28 +889,7 @@ class SimHubDashTests(unittest.TestCase):
         # The unplaced sizes still ship, so they remain one drag away.
         self.assertEqual(3, len(expected))
 
-    def test_5120_layout_centers_all_sizes_near_the_top(self):
-        standard = json.loads(OVERLAY_LAYOUT_PATH.read_text(encoding="utf-8"))
-        layout = json.loads(ULTRAWIDE_LAYOUT_PATH.read_text(encoding="utf-8"))
-        self.assertEqual("As Driven 5120x1440", layout["Name"])
-        self.assertNotEqual(standard["UniqueId"], layout["UniqueId"])
-        part_ids = set()
-        for part in layout["OverlayLayoutParts"]:
-            expected_top = (
-                430.0
-                if simhub_dashboard_stem(part["DashboardName"])
-                == "As Driven Verification Drive"
-                else 60.0
-            )
-            self.assertEqual(expected_top, part["Top"])
-            self.assertEqual(2560.0, part["Left"] + part["Width"] / 2)
-            self.assertEqual(
-                simhub_dashboard_stem(part["DashboardName"]) in PLACED_BY_DEFAULT,
-                part["Placed"],
-            )
-            self.assertTrue(part["Transparent"])
-            part_ids.add(part["PartId"])
-        self.assertEqual(3, len(part_ids))
+
 
 
 if __name__ == "__main__":

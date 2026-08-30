@@ -12,7 +12,7 @@ namespace AsDriven.Core
         public const double DefaultDurationSeconds = 10.0;
         public const double MinimumDurationSeconds = 1.0;
         public const double MaximumDurationSeconds = 60.0;
-        public const string DefaultSize = "compact";
+        public const string DefaultSize = "detailed";
         public const string DefaultTheme = "auto";
         public const string ModernTheme = "modern";
         public const string ModernLightTheme = "modern-light";

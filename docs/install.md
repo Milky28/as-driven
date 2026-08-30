@@ -23,8 +23,19 @@ change between releases.
 `simhub/install.ps1` is the same installer and takes an optional
 `-SimHubInstallPath`.
 
-If Windows blocks the downloaded scripts, right-click the ZIP, open Properties,
-tick **Unblock**, and extract it again.
+### The two warnings Windows shows
+
+Neither means something is wrong, and both are expected.
+
+**The administrator prompt names an unknown publisher.** As Driven is not
+code-signed; a signing certificate is a paid annual subscription, and this is a
+free project. Windows says the same about every unsigned installer.
+
+**Windows may block the downloaded ZIP.** Right-click it, open Properties, tick
+**Unblock**, and extract it again.
+
+Verifying the checksum below is a better guarantee than a signature would be: it
+tells you the bytes are the ones the project published.
 
 The installer creates a timestamped rollback backup and prints its path. It
 preserves customized `As Driven*.olayout` files by default, so overlay

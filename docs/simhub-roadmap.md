@@ -274,7 +274,7 @@ Version `0.10.10` packages dataset `0.3.10` with the Lola B05/40 V8 and Turbo.
 Both directly verify paddle actuation and clutch-free move-off; the unknown
 move-off mechanism is preserved, and the V8 Low Downforce controls remain
 explicit untested aero inheritance.
-Standard 1920-wide and 5120x1440 top-center layout presets are packaged separately. The installer
+One 1920-wide top-center layout preset is packaged. The installer
 preserves existing layout files during upgrades unless replacement is explicitly
 requested.
 The dogleg H icon is driven by the curated `shift_pattern` value and uses the

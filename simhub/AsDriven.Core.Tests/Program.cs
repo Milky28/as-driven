@@ -1943,9 +1943,9 @@ namespace AsDriven.Core.Tests
                 Equal(12.0, PopupPreferences.NormalizeDuration(11.6), "rounds a fractional popup duration");
                 Equal(7.0, PopupPreferences.NormalizeDuration(7), "keeps a supported popup duration");
 
-                Equal("compact", PopupPreferences.NormalizeSize(null), "falls back to the default popup size when unset");
-                Equal("compact", PopupPreferences.NormalizeSize("   "), "falls back to the default popup size when blank");
-                Equal("compact", PopupPreferences.NormalizeSize("enormous"), "falls back to the default popup size for an unrenderable value");
+                Equal("detailed", PopupPreferences.NormalizeSize(null), "falls back to the default popup size when unset");
+                Equal("detailed", PopupPreferences.NormalizeSize("   "), "falls back to the default popup size when blank");
+                Equal("detailed", PopupPreferences.NormalizeSize("enormous"), "falls back to the default popup size for an unrenderable value");
                 Equal("compact", PopupPreferences.NormalizeSize("  COMPACT "), "accepts a supported popup size regardless of case or padding");
                 // Glance was retired. A stored preference naming it falls back
                 // to the default rather than selecting a dashboard that is no
@@ -1990,11 +1990,11 @@ namespace AsDriven.Core.Tests
                     "does nothing when preview is not active");
 
                 True(PreviewRules.IsAsDrivenLayoutName("As Driven"), "recognizes the plugin's own overlay layout");
-                True(PreviewRules.IsAsDrivenLayoutName("as driven 5120x1440"), "recognizes its layout regardless of case");
+                True(PreviewRules.IsAsDrivenLayoutName("as driven"), "recognizes its layout regardless of case");
                 False(PreviewRules.IsAsDrivenLayoutName("My Custom Dash"), "never claims an unrelated user overlay");
                 False(PreviewRules.IsAsDrivenLayoutName(null), "treats a missing layout name as unrelated");
-                Equal("As Driven", PreviewRules.PreferredLayoutName(1920), "prefers the standard layout on an ordinary desktop");
-                Equal("As Driven 5120x1440", PreviewRules.PreferredLayoutName(5120), "prefers the wide layout on a triple-width desktop");
+                Equal("As Driven", PreviewRules.PreferredLayoutName(1920), "prefers the packaged layout on an ordinary desktop");
+                Equal("As Driven", PreviewRules.PreferredLayoutName(5120), "prefers the same layout on a triple-width desktop, since only one ships");
 
                 Equal("sequential", ShiftPatternRules.DerivedGate("sequential-paddles"), "derives a sequential gate from paddles");
                 Equal("sequential", ShiftPatternRules.DerivedGate("sequential-stick"), "derives a sequential gate from a sequential stick");

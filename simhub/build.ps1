@@ -302,15 +302,15 @@ if ($detailedPreview.Count -ne 1 -or $compactPreview.Count -ne 1 `
 $sizeSelector = @($garageUi | Where-Object {
         $_ -is [System.Windows.Controls.ComboBox] -and $_.Name -eq "PopupSizeSelector"
     } | Select-Object -First 1)
-if ($sizeSelector.Count -ne 1 -or $popupPreview[0].Width -ne 420 `
-    -or $compactPreview[0].Visibility -ne [System.Windows.Visibility]::Visible `
-    -or $detailedPreview[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
-    throw "The default compact choice must use the compact embedded preview shape."
-}
-$sizeSelector[0].SelectedIndex = 0
-if ($popupPreview[0].Width -ne 500 `
+if ($sizeSelector.Count -ne 1 -or $popupPreview[0].Width -ne 500 `
     -or $detailedPreview[0].Visibility -ne [System.Windows.Visibility]::Visible `
     -or $compactPreview[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
+    throw "The default detailed choice must use the detailed embedded preview shape."
+}
+$sizeSelector[0].SelectedIndex = 1
+if ($popupPreview[0].Width -ne 420 `
+    -or $compactPreview[0].Visibility -ne [System.Windows.Visibility]::Visible `
+    -or $detailedPreview[0].Visibility -ne [System.Windows.Visibility]::Collapsed) {
     throw "Changing popup size must reshape the embedded preview immediately."
 }
 $browserTab = @($tabs[0].Items | Where-Object { [string]$_.Header -eq "Car browser" } | Select-Object -First 1)
