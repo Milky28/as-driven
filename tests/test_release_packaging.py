@@ -67,6 +67,14 @@ class ReleasePackagingTests(unittest.TestCase):
         self.assertIn("test-release-package.ps1", publisher)
         self.assertIn("test-install-database.ps1", publisher)
         self.assertNotIn("gh release edit", publisher)
+        # The existence check must decide on the exit code alone. gh writes
+        # "release not found" to stderr for a tag nobody has published, and
+        # Windows PowerShell turns a native command's stderr into a terminating
+        # error while ErrorActionPreference is Stop - so the first release, the
+        # one case with no existing tag, threw instead of proceeding.
+        guard = publisher[publisher.index("gh release view") - 400:]
+        self.assertIn('$ErrorActionPreference = "Continue"', guard)
+        self.assertIn("$releaseExists = ($LASTEXITCODE -eq 0)", guard)
 
 
 if __name__ == "__main__":

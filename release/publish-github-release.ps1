@@ -174,8 +174,16 @@ if ($null -eq (Get-Command gh -ErrorAction SilentlyContinue)) {
 if ($LASTEXITCODE -ne 0) {
     throw "GitHub CLI is not authenticated. Run gh auth login -h github.com."
 }
+# "release not found" is the expected answer for a tag nobody has published, and
+# gh writes it to stderr. Windows PowerShell turns a native command's stderr into
+# a terminating error while ErrorActionPreference is Stop, so the success path -
+# no release yet - threw instead of continuing. Only the exit code decides here.
+$previousPreference = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
 & gh release view $tag --repo $Repository *> $null
-if ($LASTEXITCODE -eq 0) {
+$releaseExists = ($LASTEXITCODE -eq 0)
+$ErrorActionPreference = $previousPreference
+if ($releaseExists) {
     throw "A GitHub release already exists for $tag."
 }
 
