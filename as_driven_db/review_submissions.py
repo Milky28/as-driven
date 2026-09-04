@@ -845,7 +845,7 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
         # registering the game, not on research, a brief or a promotion, and
         # offering any of those would invite a promotion that must not happen.
         return []
-    if state == "identity-research":
+    if state in {"identity-research", "research-blocked"}:
         actions = ["generate-research-brief"]
         if research_status in {"not-started", "brief-ready", "partial", "blocked"}:
             actions.append("import-research")

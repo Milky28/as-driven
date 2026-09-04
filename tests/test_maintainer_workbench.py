@@ -16,6 +16,7 @@ from as_driven_db.maintainer_workbench import (
     create_workbench_server,
     workbench_page,
 )
+from as_driven_db.review_submissions import allowed_case_actions
 
 
 class _FakeApplication:
@@ -51,6 +52,65 @@ class _FakeApplication:
 
 
 class MaintainerWorkbenchTests(unittest.TestCase):
+    def test_research_editor_uses_the_template_then_the_saved_result(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data" / "v1").mkdir(parents=True)
+            (root / "data" / "v1" / "index.json").write_text(
+                json.dumps({"dataset_version": "1.2.3", "records": []}),
+                encoding="utf-8",
+            )
+            case_dir = root / "build" / "review-cases" / "issue-62"
+            case_dir.mkdir(parents=True)
+            template = {"case_id": "template", "claims": []}
+            result = {"case_id": "saved", "claims": [{"path": "/identity/model"}]}
+            (case_dir / "research-result.template.json").write_text(
+                json.dumps(template), encoding="utf-8"
+            )
+            case = {
+                "schema_version": "1.0.0",
+                "case_id": "github-example-project-62",
+                "submission_type": "existing-car-research",
+                "state": "identity-research",
+                "classification": "existing-car-research",
+                "issue": {
+                    "number": 62,
+                    "title": "Research test",
+                    "url": "https://github.com/example/project/issues/62",
+                },
+                "observation": {},
+                "target_record": {"display_name": "Research test"},
+                "artifacts": {
+                    "research_result_template": "research-result.template.json"
+                },
+                "research": {"required": True, "status": "brief-ready"},
+                "updated_at": "2026-09-04T00:00:00+00:00",
+            }
+            case_path = case_dir / "case.json"
+            case_path.write_text(json.dumps(case), encoding="utf-8")
+            application = WorkbenchApplication(root)
+
+            editor = application.case_detail(62)["research_result_editor"]
+            self.assertEqual(template, editor["document"])
+            self.assertEqual("research_result_template", editor["source"])
+            self.assertFalse(editor["replace"])
+
+            (case_dir / "research-result.json").write_text(
+                json.dumps(result), encoding="utf-8"
+            )
+            case["state"] = "manifest-review"
+            case["research"]["status"] = "complete"
+            case["artifacts"]["research_result"] = "research-result.json"
+            case_path.write_text(json.dumps(case), encoding="utf-8")
+            editor = application.case_detail(62)["research_result_editor"]
+            self.assertEqual(result, editor["document"])
+            self.assertEqual("research_result", editor["source"])
+            self.assertTrue(editor["replace"])
+
+            case["state"] = "research-blocked"
+            case["research"]["status"] = "blocked"
+            self.assertIn("import-research", allowed_case_actions(case))
+
     def test_every_case_state_has_a_colour_in_the_page(self) -> None:
         """A state the page has no rule for renders as an unstyled chip.
 
@@ -141,6 +201,12 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("Research-only amendment", page)
         self.assertIn("Existing curated record", page)
         self.assertIn("Submitted source leads", page)
+        self.assertIn("Edit research result in workbench", page)
+        self.assertIn("Save and validate research", page)
+        self.assertIn("Discard unsaved edits", page)
+        self.assertIn("saveResearchResult", page)
+        self.assertIn("research_result_editor", page)
+        self.assertIn("Save or discard the research-result edit before another action", page)
         self.assertIn("retained simulator behavior, driver summary, and source locator", page)
         self.assertIn("Publish response and close issue", page)
         self.assertIn("Promotion complete, publication pending", page)

@@ -247,7 +247,11 @@ auditable evidence, and the history is where corrections are visible.
   it completes: a case at final-review or manifest-review offers a regenerate
   and a replacement import beneath its forward action, because the brief gains
   questions over time and a case researched before one existed would otherwise
-  carry that gap for good.
+  carry that gap for good. Once a brief creates its result template, the
+  workbench also provides an inline JSON editor through partial, blocked,
+  final-review, and manifest-review states. Saving uses the normal import
+  validation, and changing a manifest-review result requires preparing the
+  proposal again. Promoted records remain immutable.
 - The maintainer workbench is the preferred contribution interface. GitHub
   synchronization is serialized across browser tabs, and editing an issue
   without replacing its attachment preserves the original routing decision.

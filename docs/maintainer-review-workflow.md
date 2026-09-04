@@ -196,6 +196,16 @@ advances complete research to final review. The workbench also keeps a manual
 file picker available after a brief is generated when the result was saved
 somewhere else.
 
+Once the template exists, the workbench also offers **Edit research result in
+workbench**. Its JSON editor starts from the generated template or the latest
+saved result, and **Save and validate research** runs the same schema and
+evidence checks as file import. The editor remains available for partial or
+blocked research, final review, and manifest review. Revising a result after a
+proposal exists returns the case to the appropriate research/final-review state;
+prepare the proposal again so every preview is derived from the saved result.
+After promotion the released record is immutable in that case, so a later
+correction starts a new existing-car research issue.
+
 The brief is provider-independent and can be handed to a human, Codex, Claude,
 or another research system. It contains contributor hints, the exact simulator
 observation, mechanically staged values, explicit source standards, unresolved
