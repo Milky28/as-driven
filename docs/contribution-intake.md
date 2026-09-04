@@ -15,10 +15,10 @@ Research that improves an already-curated real car without a new guided drive
 uses the separate **Improve an existing car** issue form. It asks for the exact
 record, affected fields, source links, precise locators, applicability, and known
 limitations. These issues are public research trails; they do not carry the
-`observation-received` label and are not imported into the observation
-workbench. Until a dedicated research-only workbench path exists, a maintainer
-reviews them as deliberate source and record changes through the lower-level
-curation path.
+`observation-received` label and never enter the guided-drive intake parser.
+The maintainer workbench synchronizes them through the shared `contribution`
+label, resolves the named record exactly, and routes them through a dedicated
+research-amendment proposal and approval path.
 
 Nothing is uploaded automatically. After saving, the plugin can reveal the
 exact file and open the contribution form only after an explicit click. The

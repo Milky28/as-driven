@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import subprocess
 from typing import Any, Callable
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 from .importers.observation import import_observation
 from .intake_observation import MAX_OBSERVATION_BYTES, IntakeError, intake_observation
@@ -15,7 +15,7 @@ from .validate import canonical_simulator
 
 
 DEFAULT_REPOSITORY = "Milky28/as-driven"
-DEFAULT_LABEL = "observation-received"
+DEFAULT_LABEL = "contribution"
 CASE_SCHEMA_VERSION = "1.0.0"
 
 IssueLoader = Callable[[str, str], list[dict[str, Any]]]
@@ -156,7 +156,76 @@ def extract_issue_answers(body: str) -> dict[str, str | None]:
         "proposed_identity": answer("What exact real car do you believe this depicts?"),
         "identity_evidence": answer("Identity or real-car evidence"),
         "uncertainty": answer("Uncertainty or reviewer notes"),
+        "record": answer("Existing car record"),
+        "research_intent": answer("What should this research improve?"),
+        "applicability": answer("Exact car and source applicability"),
+        "fields": answer("Fields or claims affected"),
+        "evidence": answer("Sources and precise locators"),
+        "conflicts": answer("Conflicts, limitations, or uncertainty"),
     }
+
+
+def _issue_kind(body: str) -> str:
+    headings = _sections(body)
+    if "Guided-drive draft JSON" in headings:
+        return "simulator-observation"
+    if "Existing car record" in headings:
+        return "existing-car-research"
+    raise SubmissionSyncError(
+        "contribution issue is neither a simulator observation nor existing-car research"
+    )
+
+
+def _record_reference_candidates(value: str) -> set[str]:
+    candidates = {value.strip().strip("`\"")}
+    for label, url in re.findall(r"\[([^\]\r\n]+)\]\((https://[^)\s]+)\)", value):
+        candidates.add(label.strip().strip("`\""))
+        parsed = urlsplit(url)
+        if parsed.fragment:
+            candidates.add(unquote(parsed.fragment).removeprefix("car-").removeprefix("record-"))
+        if parsed.path:
+            candidates.add(unquote(parsed.path.rstrip("/").rsplit("/", 1)[-1]))
+    parsed = urlsplit(value.strip())
+    if parsed.scheme == "https":
+        if parsed.fragment:
+            candidates.add(unquote(parsed.fragment).removeprefix("car-").removeprefix("record-"))
+        if parsed.path:
+            candidates.add(unquote(parsed.path.rstrip("/").rsplit("/", 1)[-1]))
+    return {candidate for candidate in candidates if candidate}
+
+
+def _resolve_existing_record(root: Path, reference: str | None) -> dict[str, Any]:
+    if not reference:
+        raise SubmissionSyncError("existing-car research is missing its car record")
+    index_path = root / "data" / "v1" / "index.json"
+    try:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exception:
+        raise SubmissionSyncError(f"could not read the curated index: {exception}") from exception
+    candidates = {value.casefold() for value in _record_reference_candidates(reference)}
+    matches: list[dict[str, Any]] = []
+    for relative in index.get("records", []):
+        path = root / "data" / "v1" / str(relative)
+        try:
+            record = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exception:
+            raise SubmissionSyncError(f"could not read curated record {path}: {exception}") from exception
+        names = {
+            str(record.get("record_id") or "").casefold(),
+            str((record.get("identity") or {}).get("display_name") or "").casefold(),
+        }
+        if candidates.intersection(names):
+            matches.append(record)
+    if not matches:
+        raise SubmissionSyncError(
+            f"existing-car research does not name an exact curated record: {reference!r}"
+        )
+    unique = {str(record["record_id"]): record for record in matches}
+    if len(unique) != 1:
+        raise SubmissionSyncError(
+            f"existing-car research record reference is ambiguous: {reference!r}"
+        )
+    return next(iter(unique.values()))
 
 
 def _research_required(classification: str) -> bool:
@@ -302,6 +371,66 @@ def _issue_summary(issue: dict[str, Any], repository: str) -> dict[str, Any]:
     }
 
 
+def _sync_existing_car_research_issue(
+    root: Path,
+    repository: str,
+    issue: dict[str, Any],
+    case_dir: Path,
+) -> tuple[str, dict[str, Any]]:
+    number = int(issue["number"])
+    summary = _issue_summary(issue, repository)
+    existing: dict[str, Any] | None = None
+    try:
+        existing = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        pass
+    if (
+        existing
+        and existing.get("schema_version") == CASE_SCHEMA_VERSION
+        and existing.get("submission_type") == "existing-car-research"
+        and existing.get("state") != "intake-error"
+        and (existing.get("issue") or {}).get("updated_at") == issue.get("updatedAt")
+        and (case_dir / "issue.json").is_file()
+    ):
+        return "skipped", existing
+
+    target = _resolve_existing_record(root, summary["answers"].get("record"))
+    target_id = str(target["record_id"])
+    if (
+        existing
+        and existing.get("submission_type") == "existing-car-research"
+        and existing.get("state") != "intake-error"
+        and (existing.get("target_record") or {}).get("record_id") == target_id
+    ):
+        existing["issue"] = summary
+        existing["updated_at"] = _now()
+        _write_json(case_dir / "case.json", existing)
+        return "processed", existing
+
+    case = {
+        "schema_version": CASE_SCHEMA_VERSION,
+        "case_id": _case_id(repository, number),
+        "submission_type": "existing-car-research",
+        "state": "identity-research",
+        "classification": "existing-car-research",
+        "issue": summary,
+        "attachment": None,
+        "observation": {},
+        "target_record": {
+            "record_id": target_id,
+            "display_name": (target.get("identity") or {}).get("display_name"),
+            "identity": target.get("identity"),
+        },
+        "artifacts": {"issue": "issue.json"},
+        "research": {"required": True, "status": "not-started"},
+        "error": None,
+        "created_at": (existing or {}).get("created_at") or _now(),
+        "updated_at": _now(),
+    }
+    _write_json(case_dir / "case.json", case)
+    return "processed", case
+
+
 def _error_case(
     case_dir: Path,
     repository: str,
@@ -351,6 +480,13 @@ def _sync_issue(
     _write_json(case_dir / "issue.json", issue)
     attachment: dict[str, str] | None = None
     try:
+        if _issue_kind(str(issue.get("body") or "")) == "existing-car-research":
+            return _sync_existing_car_research_issue(
+                root,
+                repository,
+                issue,
+                case_dir,
+            )
         attachment = extract_observation_attachment(str(issue.get("body") or ""))
         if _case_is_current(case_dir, issue, attachment["url"]):
             case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
@@ -399,6 +535,7 @@ def _sync_issue(
         case = {
             "schema_version": CASE_SCHEMA_VERSION,
             "case_id": _case_id(repository, number),
+            "submission_type": "simulator-observation",
             "state": _case_state(classification),
             "classification": classification,
             "issue": _issue_summary(issue, repository),
@@ -611,8 +748,9 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
         except (OSError, json.JSONDecodeError):
             continue
         issue = case.get("issue", {})
-        observation = case.get("observation", {})
+        observation = case.get("observation") or {}
         identity = observation.get("identity") or {}
+        target = case.get("target_record") or {}
         publication = case.get("github_feedback") or {}
         publication_status = publication.get("status") or "not-published"
         cases.append(
@@ -624,12 +762,13 @@ def list_review_cases(cases_directory: Path) -> list[dict[str, Any]]:
                 ),
                 "withdrawn_reason": case.get("withdrawn_reason"),
                 "classification": case.get("classification"),
+                "submission_type": case.get("submission_type") or "simulator-observation",
                 "simulator": observation.get("simulator"),
                 # What the game called itself. Only an unregistered simulator
                 # carries one, and it is the whole reason such a case can be
                 # grouped and acted on rather than sitting in an "other" heap.
                 "source_game_name": observation.get("source_game_name"),
-                "telemetry_name": identity.get("telemetry_name"),
+                "telemetry_name": identity.get("telemetry_name") or target.get("display_name"),
                 "research": case.get("research", {}).get("status"),
                 "publication_status": publication_status,
                 "allowed_actions": allowed_case_actions(case),

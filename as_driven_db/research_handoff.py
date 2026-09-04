@@ -144,6 +144,38 @@ def related_record_leads(
 
 
 def _result_template(case: dict[str, Any]) -> dict[str, Any]:
+    if case.get("submission_type") == "existing-car-research":
+        identity = (case.get("target_record") or {}).get("identity") or {}
+        return {
+            "$schema": "../../../schema/v1/submission-research-result.schema.json",
+            "schema_version": RESEARCH_SCHEMA_VERSION,
+            "case_id": case["case_id"],
+            "research_status": "partial",
+            "researched_at": _now(),
+            "researcher": {
+                "name": "REPLACE-WITH-RESEARCHER",
+                "kind": "ai-assisted",
+                "model": None,
+            },
+            "identity": {
+                "status": "established",
+                "record_action": "use-existing",
+                "record_id": (case.get("target_record") or {}).get("record_id"),
+                "display_name": identity.get("display_name"),
+                "manufacturer": identity.get("manufacturer"),
+                "model": identity.get("model"),
+                "year": identity.get("year"),
+                "class": identity.get("class"),
+                "real_world_identity_notes": identity.get("real_world_identity_notes"),
+                "confidence": "high",
+                "basis": "Existing curated identity retained; change it only with exact-car evidence.",
+                "confusion_risks": [],
+            },
+            "sources": [],
+            "claims": [],
+            "open_questions": ["Complete the scoped existing-record research."],
+            "notes": "Replace this template with the structured research result.",
+        }
     return {
         "$schema": "../../../schema/v1/submission-research-result.schema.json",
         "schema_version": RESEARCH_SCHEMA_VERSION,
@@ -296,6 +328,96 @@ When reusing a `source_id` from the related curated-record leads, copy its `titl
 """
 
 
+def _existing_record_research_brief(
+    root: Path,
+    case: dict[str, Any],
+    record: dict[str, Any],
+    claim_paths: list[str],
+) -> str:
+    issue = case["issue"]
+    answers = issue.get("answers") or {}
+    registry = _read_json(root / "data" / "v1" / "sources.json", "source registry")
+    source_by_id = {
+        source["source_id"]: source
+        for source in registry.get("sources", [])
+        if isinstance(source, dict) and source.get("source_id")
+    }
+    refs = _record_source_refs(record)
+    current_sources = [
+        source_by_id[source_id]
+        for source_id in refs
+        if source_id in source_by_id
+        and source_by_id[source_id].get("source_type") != "in-game-observation"
+    ]
+    material = _material_control_paths({"record": record})
+
+    def value_at(pointer: str) -> Any:
+        value: Any = record
+        for token in (part for part in pointer.split("/") if part):
+            if not isinstance(value, dict) or token not in value:
+                return None
+            value = value[token]
+        return value
+
+    open_paths = [
+        path for path in material if value_at(path) in {None, "unknown"}
+    ]
+    return f"""# Existing-car research brief: issue #{issue['number']}
+
+Improve the cited evidence for one already-curated real car. This is a proposal for maintainer review, never permission to rewrite the record automatically.
+
+## Non-negotiable boundaries
+
+- The target record is exact. Do not redirect the issue to a related year, chassis, specification, or successor without explicit evidence and maintainer review.
+- Simulator behavior cannot establish the real-car baseline. A new guided drive belongs in a separate simulator-observation issue.
+- Prefer manufacturer, homologation, governing-body, team technical, exact-period visual, or direct participant evidence. Label secondary and restoration evidence honestly.
+- Give a printed page, PDF page, section, figure, photograph, or video timestamp for every material finding.
+- Use `not-established` when a reviewed source is silent. Absence is not evidence of `no`.
+- An established claim may fill an unknown, correct a supported value, or add stronger provenance for an unchanged value. Every one remains an explicit review decision.
+- Do not edit `data/v1`, `curation`, or source registries. Write only the structured research result requested below.
+
+## Submitted research scope
+
+```json
+{json.dumps({"case_id": case['case_id'], "record": answers.get('record'), "intent": answers.get('research_intent'), "applicability": answers.get('applicability'), "fields": answers.get('fields'), "submitted_evidence": answers.get('evidence'), "conflicts": answers.get('conflicts')}, indent=2, ensure_ascii=False)}
+```
+
+## Current curated record
+
+```json
+{json.dumps(record, indent=2, ensure_ascii=False)}
+```
+
+## Current registered real-world sources
+
+```json
+{json.dumps(current_sources, indent=2, ensure_ascii=False)}
+```
+
+## Current unresolved control fields
+
+These are useful leads, not an instruction to broaden the issue. Research the submitted scope and leave unrelated gaps alone.
+
+```json
+{json.dumps(open_paths, indent=2, ensure_ascii=False)}
+```
+
+## Permitted claim paths
+
+```json
+{json.dumps(claim_paths, indent=2, ensure_ascii=False)}
+```
+
+## Required output
+
+Return one JSON object conforming to `schema/v1/submission-research-result.schema.json`. Start from `research-result.template.json` and save the completed object as `research-result.json` beside it.
+
+Keep `identity.record_action` as `use-existing` and `identity.record_id` as `{record['record_id']}`. The curated identity is retained without fresh identity claims unless the research deliberately proposes a sourced identity-field correction. For every field actually investigated, return an established, conflicting, or `not-established` claim. A `complete` result needs at least one established real-car claim backed by a non-simulator source; unreviewed fields may be omitted.
+
+Every `source_ref` must name a source declared in `sources`, including reused registered sources copied with their canonical title, publisher, URL, and source type. Include exact locators and keep third-party text quotations short.
+"""
+
+
 def generate_research_brief(
     root: Path,
     cases_directory: Path,
@@ -303,15 +425,43 @@ def generate_research_brief(
 ) -> dict[str, Any]:
     root = root.resolve()
     case_directory, case = _load_case(cases_directory, issue_number)
-    staged_path = case_directory / case["artifacts"]["staged_bundle"]
-    staged = _read_json(staged_path, "staged bundle")
-    receipt = _read_json(case_directory / case["artifacts"]["receipt"], "intake receipt")
-    leads = related_record_leads(root, case, receipt)
     research_schema = _read_json(
         root / "schema" / "v1" / "submission-research-result.schema.json",
         "research-result schema",
     )
     claim_paths = sorted(_research_claim_schemas(root, research_schema))
+    if case.get("submission_type") == "existing-car-research":
+        target_id = str((case.get("target_record") or {}).get("record_id") or "")
+        record = _read_json(
+            root / "data" / "v1" / "cars" / f"{target_id}.json",
+            "target curated record",
+        )
+        brief_path = case_directory / "research-brief.md"
+        template_path = case_directory / "research-result.template.json"
+        brief_path.write_text(
+            _existing_record_research_brief(root, case, record, claim_paths),
+            encoding="utf-8",
+        )
+        _write_json(template_path, _result_template(case))
+        case.setdefault("artifacts", {})["research_brief"] = brief_path.name
+        case["artifacts"]["research_result_template"] = template_path.name
+        case.setdefault("research", {})["required"] = True
+        if case["research"].get("status") not in {"complete", "partial", "blocked"}:
+            case["research"]["status"] = "brief-ready"
+        case["research"]["brief_generated_at"] = _now()
+        case["updated_at"] = _now()
+        _write_json(case_directory / "case.json", case)
+        return {
+            "issue": issue_number,
+            "case_id": case["case_id"],
+            "brief": str(brief_path),
+            "template": str(template_path),
+            "related_records": 1,
+        }
+    staged_path = case_directory / case["artifacts"]["staged_bundle"]
+    staged = _read_json(staged_path, "staged bundle")
+    receipt = _read_json(case_directory / case["artifacts"]["receipt"], "intake receipt")
+    leads = related_record_leads(root, case, receipt)
 
     brief_path = case_directory / "research-brief.md"
     template_path = case_directory / "research-result.template.json"
@@ -526,6 +676,7 @@ def validate_research_result(
 
     identity = result.get("identity")
     status = result.get("research_status")
+    existing_car_research = case.get("submission_type") == "existing-car-research"
     if isinstance(identity, dict):
         identity_status = identity.get("status")
         action = identity.get("record_action")
@@ -563,23 +714,93 @@ def validate_research_result(
                 errors.append(
                     f"{label}.identity.record_action: established identity needs a record action"
                 )
-            required_identity_claims = {
-                "/identity/manufacturer",
-                "/identity/model",
-                "/identity/year",
-            }
-            missing_identity_claims = sorted(
-                required_identity_claims - identity_claim_paths
-            )
-            if missing_identity_claims:
-                errors.append(
-                    f"{label}.claims: established identity needs sourced claims for "
-                    f"{missing_identity_claims!r}"
+            if not existing_car_research:
+                required_identity_claims = {
+                    "/identity/manufacturer",
+                    "/identity/model",
+                    "/identity/year",
+                }
+                missing_identity_claims = sorted(
+                    required_identity_claims - identity_claim_paths
                 )
+                if missing_identity_claims:
+                    errors.append(
+                        f"{label}.claims: established identity needs sourced claims for "
+                        f"{missing_identity_claims!r}"
+                    )
         if status == "complete" and identity_status not in {"established", "conflicting"}:
             errors.append(
                 f"{label}.research_status: complete research needs established or explicitly conflicting identity"
             )
+        if existing_car_research:
+            target_id = (case.get("target_record") or {}).get("record_id")
+            if action != "use-existing" or record_id != target_id:
+                errors.append(
+                    f"{label}.identity: existing-car research must use curated record {target_id!r}"
+                )
+            target_path = root / "data" / "v1" / "cars" / f"{target_id}.json"
+            try:
+                target = _read_json(target_path, "target curated record")
+            except ResearchHandoffError as exception:
+                errors.append(str(exception))
+                target = {}
+            current_identity = target.get("identity") or {}
+            claims_by_path = {
+                str(claim.get("path")): claim
+                for claim in claims or []
+                if isinstance(claim, dict)
+            }
+            for field in (
+                "display_name",
+                "manufacturer",
+                "model",
+                "year",
+                "class",
+                "real_world_identity_notes",
+            ):
+                if identity.get(field) == current_identity.get(field):
+                    continue
+                claim = claims_by_path.get(f"/identity/{field}")
+                if (
+                    not isinstance(claim, dict)
+                    or claim.get("finding") != "established"
+                    or claim.get("proposed_value") != identity.get(field)
+                ):
+                    errors.append(
+                        f"{label}.identity.{field}: changing the curated identity needs "
+                        "a matching established claim"
+                    )
+            if status == "complete":
+                established = [
+                    claim
+                    for claim in claims or []
+                    if isinstance(claim, dict)
+                    and claim.get("finding") == "established"
+                    and str(claim.get("path") or "").startswith(
+                        ("/authentic_controls/", "/identity/")
+                    )
+                    and claim.get("path")
+                    not in {"/identity/record_action", "/identity/record_id"}
+                ]
+                if not established:
+                    errors.append(
+                        f"{label}.claims: complete existing-car research needs at least "
+                        "one established real-car claim"
+                    )
+                source_types = {
+                    source.get("source_id"): source.get("source_type")
+                    for source in sources or []
+                    if isinstance(source, dict)
+                }
+                for claim in established:
+                    if not any(
+                        source_types.get(source_id) != "in-game-observation"
+                        for source_id in claim.get("source_refs", [])
+                    ):
+                        errors.append(
+                            f"{label}.claims: established real-car claim {claim.get('path')!r} "
+                            "needs a non-simulator source"
+                        )
     return errors
 
 

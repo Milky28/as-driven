@@ -10,9 +10,14 @@ from typing import Any
 
 from .promote_observation import promote_observations
 from .research_handoff import ResearchHandoffError, _read_json, _write_json
+from .research_amendment import (
+    merge_source_registry,
+    validate_research_amendment,
+)
 
 
 _BATCH_RE = re.compile(r"^review-batch-(\d+)\.json$")
+_AMENDMENT_RE = re.compile(r"^research-amendment-(\d+)\.json$")
 
 
 def _now() -> str:
@@ -36,6 +41,15 @@ def _next_batch_path(curation_directory: Path) -> Path:
         if match:
             numbers.append(int(match.group(1)))
     return curation_directory / f"review-batch-{max(numbers, default=0) + 1}.json"
+
+
+def _next_amendment_path(curation_directory: Path) -> Path:
+    numbers = []
+    for path in curation_directory.glob("research-amendment-*.json"):
+        match = _AMENDMENT_RE.fullmatch(path.name)
+        if match:
+            numbers.append(int(match.group(1)))
+    return curation_directory / f"research-amendment-{max(numbers, default=0) + 1}.json"
 
 
 def _merge_candidate_sources(
@@ -148,6 +162,14 @@ def promote_review_case(
         raise ResearchHandoffError(
             f"issue #{issue_number} has no ready proposal with a passed dry-run"
         )
+    if case.get("classification") == "existing-car-research":
+        return _promote_existing_car_research(
+            root,
+            case_directory,
+            case_path,
+            case,
+            issue_number,
+        )
 
     artifacts = case.get("artifacts", {})
     manifest = _read_json(
@@ -230,5 +252,95 @@ def promote_review_case(
         "manifest": str(batch_path),
         "sources_added": added_sources,
         "written": [str(path) for path in written],
+        "case": str(case_path),
+    }
+
+
+def _promote_existing_car_research(
+    root: Path,
+    case_directory: Path,
+    case_path: Path,
+    case: dict[str, Any],
+    issue_number: int,
+) -> dict[str, Any]:
+    artifacts = case.get("artifacts") or {}
+    manifest = _read_json(
+        case_directory / artifacts["review_manifest_proposal"],
+        "research amendment proposal",
+    )
+    source_proposal = _read_json(
+        case_directory / artifacts["source_proposal"],
+        "source proposal",
+    )
+    index_path = root / "data" / "v1" / "index.json"
+    index = _read_json(index_path, "dataset index")
+    expected_version = _next_patch(index["dataset_version"])
+    if manifest.get("dataset_version") != expected_version:
+        raise ResearchHandoffError(
+            f"proposal targets dataset {manifest.get('dataset_version')!r}, but the "
+            f"current dataset {index['dataset_version']!r} requires {expected_version!r}; "
+            "regenerate the proposal before approval"
+        )
+    if (case.get("review_proposal") or {}).get("dataset_version") != expected_version:
+        raise ResearchHandoffError(
+            "case metadata and research amendment dataset versions differ"
+        )
+    candidate_sources = source_proposal.get("sources") or []
+    preview_record, merged_sources = validate_research_amendment(
+        root,
+        manifest,
+        candidate_sources,
+    )
+    registry_path = root / "data" / "v1" / "sources.json"
+    registry = _read_json(registry_path, "source registry")
+    _, added_sources = merge_source_registry(registry, candidate_sources)
+    entry = manifest["records"][0]
+    record_path = root / "data" / "v1" / "cars" / f"{entry['record_id']}.json"
+    amendment_path = _next_amendment_path(root / "curation")
+    if amendment_path.exists():
+        raise ResearchHandoffError(
+            f"refusing to overwrite research amendment {amendment_path.name}"
+        )
+    snapshots = {
+        path: path.read_bytes() if path.exists() else None
+        for path in (registry_path, index_path, record_path, amendment_path)
+    }
+    try:
+        _write_json(registry_path, merged_sources)
+        _write_json(record_path, preview_record)
+        index["dataset_version"] = manifest["dataset_version"]
+        index["released_at"] = manifest["approved_at"]
+        _write_json(index_path, index)
+        _write_json(amendment_path, manifest)
+    except Exception:
+        for path, content in snapshots.items():
+            _restore(path, content)
+        raise
+
+    promoted_at = _now()
+    case["state"] = "promoted"
+    case["updated_at"] = promoted_at
+    case["review_proposal"].update(
+        {
+            "status": "promoted",
+            "promoted_at": promoted_at,
+            "record_id": entry["record_id"],
+            "manifest": amendment_path.relative_to(root).as_posix(),
+        }
+    )
+    _write_json(case_path, case)
+    return {
+        "issue": issue_number,
+        "state": "promoted",
+        "record_id": entry["record_id"],
+        "dataset_version": manifest["dataset_version"],
+        "manifest": str(amendment_path),
+        "sources_added": added_sources,
+        "written": [
+            str(registry_path),
+            str(record_path),
+            str(index_path),
+            str(amendment_path),
+        ],
         "case": str(case_path),
     }

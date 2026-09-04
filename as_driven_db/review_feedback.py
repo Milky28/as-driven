@@ -156,6 +156,14 @@ def _feedback(case: dict[str, Any]) -> tuple[str, str]:
         version = proposal.get("dataset_version")
         if not isinstance(record_id, str) or not isinstance(version, str):
             raise ReviewFeedbackError("promoted case is missing its record id or dataset version")
+        if case.get("classification") == "existing-car-research":
+            return (
+                "completed",
+                "Thanks for the contribution. This research was reviewed and incorporated "
+                f"into `{record_id}` in As Driven dataset {version}.\n\n"
+                "The cited sources and field-level decisions are retained in the record's "
+                "provenance and checked-in research amendment.",
+            )
         return (
             "completed",
             "Thanks for the contribution. This observation was reviewed and included "

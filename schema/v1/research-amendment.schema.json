@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:as-driven:schema:v1:research-amendment",
+  "title": "As Driven reviewed existing-car research amendment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "kind",
+    "dataset_version",
+    "approved_at",
+    "records"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "kind": { "const": "existing-car-research" },
+    "dataset_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "approved_at": { "type": "string", "format": "date" },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "record_id",
+          "previous_record_sha256",
+          "issue_url",
+          "source_refs",
+          "claims"
+        ],
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          },
+          "previous_record_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "issue_url": { "type": "string", "format": "uri" },
+          "source_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+            }
+          },
+          "claims": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "finding",
+                "previously_present",
+                "from",
+                "to",
+                "changed",
+                "confidence",
+                "source_refs",
+                "basis"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/(?:authentic_controls|identity)/"
+                },
+                "finding": { "const": "established" },
+                "previously_present": { "type": "boolean" },
+                "from": true,
+                "to": true,
+                "changed": { "type": "boolean" },
+                "confidence": {
+                  "type": "string",
+                  "enum": ["high", "medium", "low"]
+                },
+                "source_refs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+                  }
+                },
+                "basis": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "driver_summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 520
+          },
+          "removed_archetype": {
+            "type": ["object", "null"]
+          }
+        }
+      }
+    }
+  }
+}

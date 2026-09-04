@@ -89,9 +89,11 @@ separate explicit approval controls.
 
 ### The same workflow from the CLI
 
-Synchronize every open GitHub issue labeled `observation-received`. This
-downloads the one attached JSON through the authenticated GitHub CLI, runs
-intake and staging together, and creates an idempotent case under ignored
+Synchronize every open GitHub issue labeled `contribution`. Simulator-
+observation issues download their one attached JSON through the authenticated
+GitHub CLI and run intake and staging together. Existing-car research issues
+resolve the named curated record exactly and enter the amendment workflow
+without inventing an observation. Both create an idempotent case under ignored
 `build/review-cases/`:
 
 ```shell

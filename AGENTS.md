@@ -113,6 +113,10 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
   serialized across browser tabs, and a same-issue retry with an unchanged
   attachment preserves the original classification. Issue 12 was restored as
   `new-identity` after exposing the former race and is now published.
+- The **Improve an existing car** issue form also enters the workbench through
+  the shared `contribution` label. It resolves one curated record exactly and
+  produces a source-backed, field-level research amendment; it never fabricates
+  a guided-drive observation.
 - Of 370 AMS2 identities observed on this PC, 355 are covered exactly and 15
   are closed by written decisions. No observed identity currently awaits guided
   verification. New content can still be absent because the inventory only contains

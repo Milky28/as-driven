@@ -2,8 +2,9 @@
 
 The maintainer queue removes manual downloading and command chaining without
 weakening the review boundary. GitHub issues remain the public submission
-inbox; versioned JSON remains the evidence format; the existing intake and
-observation importer remain the only code that classifies and stages a draft.
+inbox; versioned JSON remains the evidence format; guided drives still pass
+through the existing intake and observation importer, while research-only
+issues target an exact curated record without fabricating a drive.
 
 ## Prerequisites
 
@@ -18,8 +19,10 @@ Run maintainer commands from the repository root.
 
 ## Synchronize submissions
 
-Fetch every open issue carrying `observation-received`, download its single
-JSON attachment, validate and intake it, and stage its candidate bundle:
+Fetch every open issue carrying the shared `contribution` label. Simulator
+observations have their single JSON attachment validated, intaken, and staged.
+**Improve an existing car** issues are parsed without an attachment and must
+resolve exactly to one curated record:
 
 ```shell
 python -m as_driven_db review-submissions sync
@@ -33,10 +36,11 @@ python -m as_driven_db review-submissions sync --issue 42 --issue 47
 
 Synchronization is idempotent. An unchanged successful issue is not downloaded
 or processed again. Editing an issue without replacing its attachment preserves
-the existing classification, and the local workbench serializes synchronization
+the existing classification; editing research notes preserves the exact target
+and existing local research state. The local workbench serializes synchronization
 requests from multiple browser tabs. A failed case is retried on the next
-synchronization. The command validates that the issue's attachment section
-contains exactly one safe
+synchronization. For observation issues, the command validates that the issue's
+attachment section contains exactly one safe
 `.json` basename and accepts downloads only from GitHub attachment hosts. It
 limits the payload before intake, then applies the observation schema and draft
 status checks. It does not execute attachments, perform fuzzy identity matching,
@@ -47,7 +51,7 @@ The defaults can be overridden for a fork or alternate local workspace:
 ```shell
 python -m as_driven_db review-submissions sync \
   --repo owner/repository \
-  --label observation-received \
+  --label contribution \
   --cases-dir build/review-cases \
   --inbox build/observation-intake
 ```
@@ -65,6 +69,11 @@ build/review-cases/issue-42/
   staged.json
 ```
 
+Research-only cases contain `case.json` and `issue.json`, then gain the same
+research brief, result, proposal, preview, and final-review artifacts as they
+advance. They deliberately have no `submission.json`, intake receipt, staged
+bundle, simulator approval, or live-observation source.
+
 - `issue.json` preserves the exact GitHub issue response used for the sync.
 - `submission.json` preserves the exact downloaded bytes.
 - `receipt.json` is the result of the normal intake classifier.
@@ -76,9 +85,11 @@ build/review-cases/issue-42/
 `case.json` schema version `1.0.0` has these stable top-level concepts:
 
 - `case_id`, `state`, and `classification` identify the workflow decision;
+- `submission_type` distinguishes a guided drive from existing-car research;
 - `issue` contains repository metadata and parsed Issue Form answers;
 - `attachment` records filename, URL, exact SHA-256, and redaction status;
 - `observation` summarizes the simulator identity and implementation;
+- `target_record` names the exact curated record for research-only cases;
 - `artifacts` names files relative to the case directory;
 - `research` records whether identity research is needed and its local status;
 - `error` contains a retryable intake failure and is otherwise null; and
@@ -102,7 +113,7 @@ Current automatic case states are:
 
 | State | Meaning |
 | --- | --- |
-| `identity-research` | A new, related, changed, or additional implementation needs real-car identity research. |
+| `identity-research` | A new, related, changed, or additional implementation needs identity research, or an existing-car issue needs scoped source research. |
 | `review-needed` | Intake matched an existing curated identity and offers a direct comparison review without repeating identity research. |
 | `needs-clarification` | Established facts contradict another observation of the same implementation and version. |
 | `duplicate` | The exact attachment bytes already exist in the intake inbox. |
@@ -217,6 +228,13 @@ A complete result changes only the ignored local case state to `final-review`;
 partial and blocked results remain visibly routed for more work. No source is
 registered and no curated file is changed.
 
+For existing-car research, the result keeps `record_action: use-existing` and
+the exact target record id. It may address only the submitted scope; unlike a
+new-car observation, it need not repeat a finding for every control field.
+Complete research must contain at least one established real-car claim backed
+by a non-simulator source. That claim may fill an unknown, deliberately correct
+an established value, or strengthen provenance without changing the value.
+
 ## Final review and promotion
 
 Generate a final-review packet after complete research has been imported:
@@ -239,6 +257,14 @@ The proposal must classify the drive as compatible repeat evidence or as an
 audited correction that names the superseded observation and every changed
 behavior path. It still runs the full temporary promotion dry run, and it never
 treats the drive as proof of real-car identity.
+
+An `existing-car-research` case instead produces a versioned research-amendment
+manifest. It locks the current record by SHA-256, lists every `from` and `to`
+value, distinguishes value changes from source-only strengthening, previews the
+complete resulting record, and validates it against all existing simulator
+approvals in a temporary repository. Matching simulator overrides become
+redundant and are removed; differing ones remain explicit simulator departures.
+No fake observation, live source, or simulator approval is created.
 
 Review those files, especially the real-car baseline, unknown fields, exact
 simulator overrides, source wording, and identity. Then cross the explicit

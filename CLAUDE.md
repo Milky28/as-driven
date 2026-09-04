@@ -253,6 +253,10 @@ auditable evidence, and the history is where corrections are visible.
   without replacing its attachment preserves the original routing decision.
   Issue 12 exposed that race, was restored as `new-identity`, and is now
   published.
+- The **Improve an existing car** issue form also enters the workbench through
+  the shared `contribution` label. It resolves one curated record exactly and
+  produces a source-backed, field-level research amendment; it never fabricates
+  a guided-drive observation.
 - Of 370 AMS2 identities observed on this PC, 355 are covered exactly and 15
   are closed by written decisions. No observed identity currently awaits guided
   verification. The inventory only holds cars that have been loaded here,

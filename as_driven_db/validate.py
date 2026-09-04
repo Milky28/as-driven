@@ -1093,6 +1093,7 @@ def validate_repository(root: Path) -> list[str]:
             "source-record.schema.json",
             "dataset-index.schema.json",
             "curation-approval.schema.json",
+            "research-amendment.schema.json",
             "post-sheet-event-map.schema.json",
             "verification-observation.schema.json",
             "control-archetype.schema.json",
@@ -1200,7 +1201,25 @@ def validate_repository(root: Path) -> list[str]:
                 errors.extend(validate_instance(approval, approval_schema, str(path)))
             _validate_car_approval(approval, path, records, errors)
         else:
-            if path.name == "ams2-post-sheet-event-map.json":
+            if approval.get("kind") == "existing-car-research":
+                amendment_schema = schemas["research-amendment.schema.json"]
+                if amendment_schema is not None:
+                    errors.extend(validate_instance(approval, amendment_schema, str(path)))
+                if len(approval.get("records", [])) != 1:
+                    errors.append(f"{path}.records: must contain exactly one curated record")
+                for record_index, entry in enumerate(approval.get("records", [])):
+                    if not isinstance(entry, dict):
+                        continue
+                    for claim_index, claim in enumerate(entry.get("claims", [])):
+                        if not isinstance(claim, dict):
+                            continue
+                        unknown = sorted(set(claim.get("source_refs", [])) - source_ids)
+                        if unknown:
+                            errors.append(
+                                f"{path}.records[{record_index}].claims[{claim_index}]."
+                                f"source_refs: unknown source(s) {unknown!r}"
+                            )
+            elif path.name == "ams2-post-sheet-event-map.json":
                 event_map_schema = schemas["post-sheet-event-map.schema.json"]
                 if event_map_schema is not None:
                     errors.extend(validate_instance(approval, event_map_schema, str(path)))

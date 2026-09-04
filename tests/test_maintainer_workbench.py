@@ -138,6 +138,10 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("Generated automatically", page)
         self.assertIn("Save or discard the driver summary edit before promotion", page)
         self.assertIn("simulator overrides, driver summary, and source wording", page)
+        self.assertIn("Research-only amendment", page)
+        self.assertIn("Existing curated record", page)
+        self.assertIn("Submitted source leads", page)
+        self.assertIn("retained simulator behavior, driver summary, and source locator", page)
         self.assertIn("Publish response and close issue", page)
         self.assertIn("Promotion complete, publication pending", page)
         self.assertIn("actions.has('publish-result')&&!publicationBlocked", page)
@@ -194,6 +198,13 @@ class MaintainerWorkbenchTests(unittest.TestCase):
                 "Edited driver advice.",
                 summarize.call_args.kwargs["driver_summary"],
             )
+
+            prepare.return_value = {
+                "dry_run": "passed",
+                "kind": "existing-car-research",
+            }
+            application.perform(7, "prepare-review", {})
+            self.assertFalse(summarize.call_args.kwargs["preserve_existing"])
 
     def test_sync_requests_are_serialized(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

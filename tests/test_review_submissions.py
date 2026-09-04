@@ -34,6 +34,7 @@ from as_driven_db.review_proposal import (
     prepare_review_proposal,
 )
 from as_driven_db.review_promotion import promote_review_case
+from as_driven_db.validate import validate_repository
 
 
 ROOT = Path(__file__).parents[1]
@@ -139,6 +140,113 @@ def issue(number: int = 17) -> dict:
         "labels": [{"name": "observation-received"}],
         "createdAt": "2026-08-24T12:01:00Z",
         "updatedAt": "2026-08-24T12:01:00Z",
+    }
+
+
+def existing_research_issue(number: int = 58) -> dict:
+    return {
+        "number": number,
+        "title": "[Research]: Alfa Romeo 156 Superturismo",
+        "body": """### Existing car record
+
+alfa-romeo-156-super-touring
+
+### What should this research improve?
+
+Fill one or more unknown real-car control fields
+
+### Exact car and source applicability
+
+The photograph shows the 1998 works Superturismo, not the later GTA Super 2000.
+
+### Fields or claims affected
+
+Wheel rim shape.
+
+### Sources and precise locators
+
+Exact-car cockpit photograph, figure 4.
+
+### Conflicts, limitations, or uncertainty
+
+The photograph does not establish shift technique.
+""",
+        "url": f"https://github.com/example/project/issues/{number}",
+        "labels": [{"name": "contribution"}],
+        "createdAt": "2026-09-04T12:00:00Z",
+        "updatedAt": "2026-09-04T12:00:00Z",
+    }
+
+
+def existing_research_result(case_id: str) -> dict:
+    record = json.loads(
+        (ROOT / "data" / "v1" / "cars" / "alfa-romeo-156-super-touring.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    identity = record["identity"]
+    return {
+        "$schema": "../../../schema/v1/submission-research-result.schema.json",
+        "schema_version": "1.0.0",
+        "case_id": case_id,
+        "research_status": "complete",
+        "researched_at": "2026-09-04T14:00:00Z",
+        "researcher": {
+            "name": "Test researcher",
+            "kind": "ai-assisted",
+            "model": "test-model",
+        },
+        "identity": {
+            "status": "established",
+            "record_action": "use-existing",
+            "record_id": record["record_id"],
+            "display_name": identity["display_name"],
+            "manufacturer": identity["manufacturer"],
+            "model": identity["model"],
+            "year": identity["year"],
+            "class": identity["class"],
+            "real_world_identity_notes": identity["real_world_identity_notes"],
+            "confidence": "high",
+            "basis": "The existing exact identity is retained.",
+            "confusion_risks": ["Do not confuse it with the later GTA Super 2000."],
+        },
+        "sources": [
+            {
+                "source_id": "example.alfa-156-exact-cockpit-photo",
+                "title": "1998 Alfa Romeo 156 Superturismo cockpit",
+                "publisher": "Example Archive",
+                "author": None,
+                "url": "https://example.invalid/alfa-156-cockpit",
+                "archive_url": None,
+                "source_type": "secondary",
+                "published_or_updated_at": "1998-06-01",
+                "retrieved_at": "2026-09-04",
+                "reuse_status": "facts-only-review",
+                "exact_scope": "A clear period cockpit photograph of the exact 1998 works car.",
+                "locators": [
+                    {
+                        "locator": "Figure 4",
+                        "quote": "",
+                        "supports": [
+                            "/authentic_controls/steering/wheel_rim/shape"
+                        ],
+                    }
+                ],
+                "notes": "The continuous circular rim is fully visible.",
+            }
+        ],
+        "claims": [
+            {
+                "path": "/authentic_controls/steering/wheel_rim/shape",
+                "finding": "established",
+                "proposed_value": "round",
+                "confidence": "high",
+                "source_refs": ["example.alfa-156-exact-cockpit-photo"],
+                "basis": "The exact-car photograph shows a continuous circular rim.",
+            }
+        ],
+        "open_questions": ["Shift actuation remains unresolved."],
+        "notes": "Scoped existing-record research, ready for review.",
     }
 
 
@@ -510,7 +618,7 @@ class ReviewSubmissionTests(unittest.TestCase):
 
             def load_issues(repository: str, label: str) -> list[dict]:
                 self.assertEqual("example/project", repository)
-                self.assertEqual("observation-received", label)
+                self.assertEqual("contribution", label)
                 return [issue()]
 
             first = sync_submissions(
@@ -609,6 +717,130 @@ class ReviewSubmissionTests(unittest.TestCase):
             )
             self.assertEqual("new-identity", receipt["status"])
             self.assertEqual(1, len(list(inbox.glob("*.receipt.json"))))
+
+    def test_existing_car_research_runs_through_the_workbench_pipeline(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repository"
+            shutil.copytree(ROOT / "data", root / "data")
+            shutil.copytree(ROOT / "curation", root / "curation")
+            shutil.copytree(ROOT / "schema", root / "schema")
+            cases = root / "build" / "review-cases"
+            synced = sync_submissions(
+                root,
+                repository="example/project",
+                cases_directory=cases,
+                inbox=root / "build" / "observation-intake",
+                issue_loader=lambda _repo, label: (
+                    [existing_research_issue()]
+                    if label == "contribution"
+                    else self.fail(f"unexpected label {label}")
+                ),
+                attachment_fetcher=lambda _: self.fail(
+                    "research-only issues must not download an observation"
+                ),
+            )
+            self.assertEqual(1, synced["processed"])
+            case_dir = cases / "issue-58"
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual("existing-car-research", case["submission_type"])
+            self.assertEqual("existing-car-research", case["classification"])
+            self.assertEqual(
+                "alfa-romeo-156-super-touring",
+                case["target_record"]["record_id"],
+            )
+            self.assertNotIn("submission", case["artifacts"])
+
+            generate_research_briefs(root, cases, {58})
+            brief = (case_dir / "research-brief.md").read_text(encoding="utf-8")
+            self.assertIn("Current curated record", brief)
+            self.assertIn("Wheel rim shape", brief)
+            self.assertIn("unreviewed fields may be omitted", brief)
+            template = json.loads(
+                (case_dir / "research-result.template.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("use-existing", template["identity"]["record_action"])
+
+            result_path = root / "completed-existing-research.json"
+            result_path.write_text(
+                json.dumps(
+                    existing_research_result("github-example-project-58"),
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            imported = import_research_result(root, cases, 58, result_path)
+            self.assertEqual("final-review", imported["state"])
+            prepared = prepare_review_proposal(root, cases, 58)
+            self.assertEqual("passed", prepared["dry_run"])
+            manifest = json.loads(
+                (case_dir / "review-manifest.proposed.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("existing-car-research", manifest["kind"])
+            preview = json.loads(
+                (case_dir / "preview-record.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                "round",
+                preview["authentic_controls"]["steering"]["wheel_rim"]["shape"],
+            )
+            rim_override_paths = {
+                override["path"]
+                for simulator in preview["simulators"]
+                for override in simulator.get("overrides", [])
+            }
+            self.assertNotIn(
+                "/authentic_controls/steering/wheel_rim/shape",
+                rim_override_paths,
+            )
+
+            summary = generate_driver_summary_proposal(
+                root,
+                cases,
+                58,
+                preserve_existing=False,
+            )
+            self.assertEqual("generated", summary["summary_status"])
+            self.assertEqual("passed", summary["dry_run"])
+
+            promoted = promote_review_case(root, cases, 58, approved=True)
+            self.assertEqual("promoted", promoted["state"])
+            self.assertTrue(Path(promoted["manifest"]).name.startswith("research-amendment-"))
+            registry = json.loads(
+                (root / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+            )
+            self.assertIn(
+                "example.alfa-156-exact-cockpit-photo",
+                {source["source_id"] for source in registry["sources"]},
+            )
+            self.assertEqual([], validate_repository(root))
+
+    def test_existing_car_research_requires_an_exact_curated_record(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            submitted = existing_research_issue()
+            submitted["body"] = submitted["body"].replace(
+                "alfa-romeo-156-super-touring",
+                "Alfa 156",
+            )
+            result = sync_submissions(
+                ROOT,
+                repository="example/project",
+                cases_directory=temp / "cases",
+                inbox=temp / "inbox",
+                issue_loader=lambda _repo, _label: [submitted],
+                attachment_fetcher=lambda _: self.fail(
+                    "research-only issues must not download an observation"
+                ),
+            )
+            self.assertEqual(1, result["error"])
+            case = json.loads(
+                (temp / "cases" / "issue-58" / "case.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual("intake-error", case["state"])
+            self.assertIn("does not name an exact curated record", case["error"])
 
     def test_invalid_submission_becomes_a_retryable_error_case(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

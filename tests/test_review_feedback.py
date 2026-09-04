@@ -154,6 +154,25 @@ class ReviewFeedbackTests(unittest.TestCase):
                     readiness_checker=lambda *_args: [],
                 )
 
+    def test_existing_car_research_feedback_names_the_amendment(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            cases = _write_case(root)
+            case_path = cases / "issue-7" / "case.json"
+            case = json.loads(case_path.read_text(encoding="utf-8"))
+            case["classification"] = "existing-car-research"
+            case_path.write_text(json.dumps(case), encoding="utf-8")
+
+            result = publish_review_result(
+                root,
+                cases,
+                7,
+                readiness_checker=lambda *_args: [],
+            )
+
+            self.assertIn("research was reviewed and incorporated", result["comment"])
+            self.assertIn("checked-in research amendment", result["comment"])
+
     def test_approval_refuses_unpublished_release_state(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -239,4 +258,3 @@ class PublicationNextStepTests(unittest.TestCase):
 
     def test_no_blockers_asks_for_nothing(self) -> None:
         self.assertEqual("", publication_next_step([]))
-

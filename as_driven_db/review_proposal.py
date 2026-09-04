@@ -21,6 +21,11 @@ from .research_handoff import (
     _write_json,
     validate_research_result,
 )
+from .research_amendment import (
+    pointer_value,
+    record_sha256,
+    validate_research_amendment,
+)
 from .schema_validation import validate_instance
 
 
@@ -1288,6 +1293,13 @@ def prepare_review_proposal(
     root = root.resolve()
     case_directory = cases_directory / f"issue-{issue_number}"
     case = _read_json(case_directory / "case.json", "review case")
+    if case.get("classification") == "existing-car-research":
+        return _prepare_existing_car_research(
+            root,
+            cases_directory,
+            issue_number,
+            dataset_version,
+        )
     if (
         case.get("state") in {"review-needed", "manifest-review"}
         and case.get("classification") == "curated-identity-comparison"
@@ -1478,6 +1490,267 @@ def prepare_review_proposal(
     )
 
 
+def _amendment_reviewed_sources(
+    root: Path,
+    manifest: dict[str, Any],
+    candidate_sources: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    registered = _read_json(
+        root / "data" / "v1" / "sources.json", "registered source registry"
+    )
+    registered_by_id = {source["source_id"]: source for source in registered["sources"]}
+    candidate_by_id = {source["source_id"]: source for source in candidate_sources}
+    reviewed: list[dict[str, str]] = []
+    for source_id in manifest["records"][0]["source_refs"]:
+        source = candidate_by_id.get(source_id) or registered_by_id.get(source_id)
+        if source is None:
+            raise ResearchHandoffError(
+                f"research amendment references unknown source {source_id!r}"
+            )
+        reviewed.append(
+            {
+                "source_id": source_id,
+                "title": source["title"],
+                "registration": (
+                    "new candidate" if source_id in candidate_by_id else "already registered"
+                ),
+            }
+        )
+    return reviewed
+
+
+def _research_amendment_summary(
+    case: dict[str, Any],
+    manifest: dict[str, Any],
+    preview_record: dict[str, Any],
+    reviewed_sources: list[dict[str, str]],
+) -> str:
+    entry = manifest["records"][0]
+    changed = [claim for claim in entry["claims"] if claim["changed"]]
+    strengthened = [claim for claim in entry["claims"] if not claim["changed"]]
+    driver_summary = entry.get("driver_summary")
+    driver_section = (
+        f"\n## Driver summary\n\n> {driver_summary}\n"
+        if driver_summary
+        else ""
+    )
+    return f"""# Existing-car research review: issue #{case['issue']['number']}
+
+No curated files have been changed. This amendment was applied to a temporary copy of the current record and the complete repository validation passed.
+
+## Target
+
+- Record: `{entry['record_id']}`
+- Display name: {preview_record['identity']['display_name']}
+- Proposed dataset: {manifest['dataset_version']}
+
+## Value changes
+
+```json
+{json.dumps(changed, indent=2, ensure_ascii=False)}
+```
+
+## Strengthened provenance without a value change
+
+```json
+{json.dumps(strengthened, indent=2, ensure_ascii=False)}
+```
+{driver_section}
+## Reviewed sources
+
+{chr(10).join(f"- `{source['source_id']}` - {source['title']} ({source['registration']})" for source in reviewed_sources)}
+
+Review every `from` and `to` value, exact source locator, retained simulator override, removed archetype, and the driver summary before approving promotion.
+"""
+
+
+def _prepare_existing_car_research(
+    root: Path,
+    cases_directory: Path,
+    issue_number: int,
+    dataset_version: str | None,
+) -> dict[str, Any]:
+    case_directory = cases_directory / f"issue-{issue_number}"
+    case = _read_json(case_directory / "case.json", "review case")
+    if (
+        case.get("state") not in {"final-review", "manifest-review"}
+        or (case.get("research") or {}).get("status") != "complete"
+    ):
+        raise ResearchHandoffError(
+            f"issue #{issue_number} needs complete existing-car research before review preparation"
+        )
+    result = _read_json(
+        case_directory / case["artifacts"]["research_result"], "research result"
+    )
+    result_errors = validate_research_result(root, case, result, "research result")
+    if result_errors:
+        raise ResearchHandoffError(
+            "research result validation failed:\n" + "\n".join(result_errors)
+        )
+    target_id = str((case.get("target_record") or {}).get("record_id") or "")
+    identity = result["identity"]
+    if (
+        identity.get("status") != "established"
+        or identity.get("record_action") != "use-existing"
+        or identity.get("record_id") != target_id
+    ):
+        raise ResearchHandoffError(
+            "existing-car research must retain an established use-existing target"
+        )
+    record_path = root / "data" / "v1" / "cars" / f"{target_id}.json"
+    existing_record = _read_json(record_path, "target curated record")
+    registered_sources = _read_json(
+        root / "data" / "v1" / "sources.json", "registered source registry"
+    )
+    registered_by_id = {
+        source["source_id"]: source for source in registered_sources["sources"]
+    }
+    research_sources = [
+        source
+        for source in result["sources"]
+        if source["source_type"] != "in-game-observation"
+    ]
+    candidate_sources: list[dict[str, Any]] = []
+    reviewed_sources: list[dict[str, Any]] = []
+    canonical_fields = ("title", "publisher", "url", "source_type")
+    for research_source in research_sources:
+        candidate = _candidate_source(research_source)
+        registered = registered_by_id.get(candidate["source_id"])
+        if registered is not None:
+            differences = [
+                field
+                for field in canonical_fields
+                if registered.get(field) != candidate.get(field)
+            ]
+            if differences:
+                raise ResearchHandoffError(
+                    f"research source {candidate['source_id']!r} conflicts with its "
+                    f"registered {', '.join(differences)} metadata"
+                )
+            registration = "already registered"
+        else:
+            candidate_sources.append(candidate)
+            registration = "new candidate"
+        reviewed_sources.append(
+            {
+                "source_id": candidate["source_id"],
+                "title": candidate["title"],
+                "registration": registration,
+            }
+        )
+
+    claims: list[dict[str, Any]] = []
+    for claim in result["claims"]:
+        path = str(claim.get("path") or "")
+        if claim.get("finding") != "established":
+            continue
+        if not path.startswith(("/authentic_controls/", "/identity/")):
+            continue
+        if path in {"/identity/record_action", "/identity/record_id"}:
+            raise ResearchHandoffError(
+                f"existing-car research cannot change routing field {path!r}"
+            )
+        if claim.get("confidence") == "unknown":
+            raise ResearchHandoffError(
+                f"established research claim {path!r} cannot have unknown confidence"
+            )
+        present, current = pointer_value(existing_record, path)
+        claims.append(
+            {
+                "path": path,
+                "finding": "established",
+                "previously_present": present,
+                "from": current,
+                "to": copy.deepcopy(claim["proposed_value"]),
+                "changed": not present or current != claim["proposed_value"],
+                "confidence": claim["confidence"],
+                "source_refs": list(claim["source_refs"]),
+                "basis": claim["basis"],
+            }
+        )
+    if not claims:
+        raise ResearchHandoffError(
+            "existing-car research has no established claim to review"
+        )
+    index = _read_json(root / "data" / "v1" / "index.json", "dataset index")
+    proposed_version = dataset_version or _next_patch(index["dataset_version"])
+    entry: dict[str, Any] = {
+        "record_id": target_id,
+        "previous_record_sha256": record_sha256(record_path),
+        "issue_url": case["issue"]["url"],
+        "source_refs": sorted(
+            {source_id for claim in claims for source_id in claim["source_refs"]}
+        ),
+        "claims": claims,
+    }
+    if existing_record.get("driver_summary"):
+        entry["driver_summary"] = existing_record["driver_summary"]
+    if existing_record.get("archetype") and any(
+        claim["changed"]
+        and claim["path"].startswith("/authentic_controls/transmission/")
+        for claim in claims
+    ):
+        entry["removed_archetype"] = copy.deepcopy(existing_record["archetype"])
+    manifest = {
+        "$schema": "../schema/v1/research-amendment.schema.json",
+        "schema_version": "1.0.0",
+        "kind": "existing-car-research",
+        "dataset_version": proposed_version,
+        "approved_at": _proposal_date(result),
+        "records": [entry],
+    }
+    sources_proposal = {"schema_version": "1.0.0", "sources": candidate_sources}
+    _require_schema(
+        root,
+        sources_proposal,
+        "source-record.schema.json",
+        "candidate source proposal",
+    )
+    preview_record, _ = validate_research_amendment(
+        root, manifest, candidate_sources
+    )
+    manifest_path = case_directory / "review-manifest.proposed.json"
+    sources_path = case_directory / "sources.proposed.json"
+    preview_path = case_directory / "preview-record.json"
+    summary_path = case_directory / "final-review.md"
+    _write_json(manifest_path, manifest)
+    _write_json(sources_path, sources_proposal)
+    _write_json(preview_path, preview_record)
+    summary_path.write_text(
+        _research_amendment_summary(case, manifest, preview_record, reviewed_sources),
+        encoding="utf-8",
+    )
+    case["state"] = "manifest-review"
+    case.setdefault("artifacts", {}).update(
+        {
+            "review_manifest_proposal": manifest_path.name,
+            "source_proposal": sources_path.name,
+            "preview_record": preview_path.name,
+            "final_review": summary_path.name,
+        }
+    )
+    case["review_proposal"] = {
+        "status": "ready",
+        "kind": "existing-car-research",
+        "dataset_version": proposed_version,
+        "prepared_at": _now(),
+        "dry_run": "passed",
+    }
+    case["updated_at"] = _now()
+    _write_json(case_directory / "case.json", case)
+    return {
+        "issue": issue_number,
+        "kind": "existing-car-research",
+        "state": "manifest-review",
+        "dataset_version": proposed_version,
+        "manifest": str(manifest_path),
+        "sources": str(sources_path),
+        "summary": str(summary_path),
+        "preview_record": str(preview_path),
+        "dry_run": "passed",
+    }
+
+
 def generate_driver_summary_proposal(
     root: Path,
     cases_directory: Path,
@@ -1507,20 +1780,22 @@ def generate_driver_summary_proposal(
         )
 
     artifacts = case.get("artifacts") or {}
+    research_amendment = case.get("classification") == "existing-car-research"
     required = (
-        "staged_bundle",
-        "review_manifest_proposal",
-        "source_proposal",
-        "preview_record",
+        ("review_manifest_proposal", "source_proposal", "preview_record")
+        if research_amendment
+        else (
+            "staged_bundle",
+            "review_manifest_proposal",
+            "source_proposal",
+            "preview_record",
+        )
     )
     missing = [name for name in required if not artifacts.get(name)]
     if missing:
         raise ResearchHandoffError(
             f"issue #{issue_number} is missing review artifacts: {', '.join(missing)}"
         )
-    staged = _read_json(
-        case_directory / artifacts["staged_bundle"], "staged bundle"
-    )
     manifest_path = case_directory / artifacts["review_manifest_proposal"]
     manifest = _read_json(manifest_path, "review manifest proposal")
     sources_proposal = _read_json(
@@ -1545,20 +1820,43 @@ def generate_driver_summary_proposal(
         summary_status = "generated"
     manifest["records"][0]["driver_summary"] = summary
     candidate_sources = sources_proposal.get("sources") or []
-    preview_record, preview_approval, preview_live_source = _dry_run_review_proposal(
-        root,
-        staged,
-        manifest,
-        candidate_sources,
-    )
+    if research_amendment:
+        preview_record, _ = validate_research_amendment(
+            root,
+            manifest,
+            candidate_sources,
+        )
+        preview_approval = None
+        preview_live_source = None
+    else:
+        staged = _read_json(
+            case_directory / artifacts["staged_bundle"], "staged bundle"
+        )
+        preview_record, preview_approval, preview_live_source = _dry_run_review_proposal(
+            root,
+            staged,
+            manifest,
+            candidate_sources,
+        )
 
     _write_json(manifest_path, manifest)
     _write_json(case_directory / artifacts["preview_record"], preview_record)
-    _write_json(case_directory / artifacts["preview_approval"], preview_approval)
-    _write_json(case_directory / artifacts["preview_live_source"], preview_live_source)
-    reviewed_sources = _reviewed_sources(root, manifest, candidate_sources)
+    if not research_amendment:
+        _write_json(case_directory / artifacts["preview_approval"], preview_approval)
+        _write_json(case_directory / artifacts["preview_live_source"], preview_live_source)
+    reviewed_sources = (
+        _amendment_reviewed_sources(root, manifest, candidate_sources)
+        if research_amendment
+        else _reviewed_sources(root, manifest, candidate_sources)
+    )
     (case_directory / artifacts["final_review"]).write_text(
-        _proposal_summary(case, manifest, reviewed_sources, preview_record),
+        (
+            _research_amendment_summary(
+                case, manifest, preview_record, reviewed_sources
+            )
+            if research_amendment
+            else _proposal_summary(case, manifest, reviewed_sources, preview_record)
+        ),
         encoding="utf-8",
     )
 
