@@ -210,6 +210,39 @@ class SiteTests(unittest.TestCase):
         )
         self.assertIn('class="confidence confidence-verified"', page)
 
+    def test_local_observations_link_only_to_public_contribution_issues(self) -> None:
+        payload = collect(ROOT)
+        page = build_site(ROOT)
+        sources = {
+            source["id"]: source
+            for car in payload["cars"]
+            for claim in car["verification"]["claims"]
+            for source in claim["sources"]
+        }
+
+        legacy = sources[
+            "ams2.local-live-panoz-esperante-gtlm-controls.1.6.9.91"
+        ]
+        self.assertEqual("", legacy["url"])
+        self.assertIn(f'<strong>{legacy["title"]}</strong>', page)
+        self.assertNotIn(
+            f'rel="noreferrer">{legacy["title"]}</a>',
+            page,
+        )
+
+        public = sources[
+            "ams2.local-live-toyota-corolla-stock-car-2021-controls.1.6.9.91"
+        ]
+        self.assertEqual(
+            "https://github.com/Milky28/as-driven/issues/2",
+            public["url"],
+        )
+        self.assertIn(
+            f'href="{public["url"]}" target="_blank" '
+            f'rel="noreferrer">{public["title"]}</a>',
+            page,
+        )
+
     def test_a_simulator_difference_is_shown_without_altering_the_car(self) -> None:
         """Both layers, and neither one overwriting the other.
 

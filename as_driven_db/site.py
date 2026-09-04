@@ -17,6 +17,7 @@ import html
 import json
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 TONE_DRIVER = "you"
 TONE_CAR = "car"
@@ -601,15 +602,41 @@ def _provenance_label(path: str, record: dict[str, Any]) -> str:
     return _control_field_label(path).capitalize()
 
 
+def _public_observation_url(url: str) -> bool:
+    """Return whether a live drive URL identifies its public evidence trail.
+
+    Historical local observations predate contribution issues and were assigned
+    unrelated simulator or research URLs to satisfy the source contract. Those
+    locators must not be presented as links to the drive. Current workbench
+    observations point to their public GitHub issue, which is the actual source
+    artifact readers can inspect.
+    """
+    parsed = urlsplit(url)
+    parts = [part for part in parsed.path.split("/") if part]
+    return (
+        parsed.scheme == "https"
+        and parsed.netloc.casefold() == "github.com"
+        and len(parts) == 4
+        and parts[2] == "issues"
+        and parts[3].isdigit()
+    )
+
+
 def _source_view(source_id: str, source_index: dict[str, dict[str, Any]]) -> dict[str, str]:
     source = source_index.get(source_id) or {}
+    source_type = source.get("source_type") or "source"
+    url = source.get("url") or ""
+    archive_url = source.get("archive_url") or ""
+    if source_type == "in-game-observation" and not _public_observation_url(url):
+        url = ""
+        archive_url = ""
     return {
         "id": source_id,
         "title": source.get("title") or source_id,
         "publisher": source.get("publisher") or "Source publisher not recorded",
-        "type": str(source.get("source_type") or "source").replace("-", " "),
-        "url": source.get("url") or "",
-        "archive_url": source.get("archive_url") or "",
+        "type": str(source_type).replace("-", " "),
+        "url": url,
+        "archive_url": archive_url,
     }
 
 
