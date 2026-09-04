@@ -145,6 +145,35 @@ def _apply_game_version_correction(
     return corrected
 
 
+def _apply_entry_game_version_correction(
+    entry: dict[str, Any], old_source_id: str, new_source_id: str
+) -> dict[str, Any]:
+    """Keep manifest-authored overrides aligned with a corrected live source."""
+    correction = entry.get("game_version_correction")
+    if correction is None:
+        return entry
+    corrected = json.loads(json.dumps(entry))
+    observed = str(correction["observed"])
+    verified = str(correction["verified"])
+    for override in corrected.get("simulator_overrides") or []:
+        override["source_refs"] = [
+            new_source_id if ref == old_source_id else ref
+            for ref in override.get("source_refs", [])
+        ]
+        condition = str(override.get("condition") or "")
+        override["condition"] = condition.replace(
+            f"simulator version {observed}", f"simulator version {verified}"
+        )
+    corrected["control_notes"] = [
+        str(note).replace(f" {observed} behavior", f" {verified} behavior")
+        for note in corrected.get("control_notes") or []
+    ]
+    corrected["live_source_notes"] = str(
+        corrected.get("live_source_notes") or ""
+    ).replace(f" {observed}.", f" {verified}.")
+    return corrected
+
+
 def build_promoted_record(
     bundle: dict[str, Any], entry: dict[str, Any], *, approved_at: str
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -249,6 +278,12 @@ def build_promoted_record(
             )
         override.setdefault("source_refs", [live_source_id])
     simulator["overrides"] = list(entry.get("simulator_overrides") or [])
+    if any(
+        override.get("path")
+        == "/authentic_controls/transmission/shift_actuation"
+        for override in simulator["overrides"]
+    ):
+        _synchronize_behavior_shift_type(record, simulator)
 
     confidence = _required(entry, "confidence", label)
     simulator["source_refs"] = all_refs
@@ -615,6 +650,7 @@ def merge_simulator_entry(
     *,
     label: str,
     accept_from_drive: list[str] | None = None,
+    authentic_control_corrections: list[dict[str, Any]] | None = None,
     compatible_implementation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Add a simulator's entry to the curated record for the same real car.
@@ -625,7 +661,7 @@ def merge_simulator_entry(
     about the real car, that is either a correction to make deliberately or a
     deviation to record as an override, so it stops here instead.
     """
-    entry = incoming["simulators"][0]
+    entry = json.loads(json.dumps(incoming["simulators"][0]))
     simulator_id = entry["simulator"]
     covered = [item.get("simulator") for item in existing.get("simulators", [])]
     same_simulator = simulator_id in covered
@@ -650,8 +686,85 @@ def merge_simulator_entry(
                 "effective controls are the same."
             )
 
+    corrections = list(authentic_control_corrections or [])
+    if corrections and same_simulator:
+        raise ValueError(
+            f"{label}: top-level authentic_control_corrections are only for a "
+            "different simulator whose independent real-car research corrects the "
+            "shared baseline. Put a same-simulator correction under "
+            "correct_existing_simulator instead."
+        )
+    merged = json.loads(json.dumps(existing))
+    seen_corrections: set[str] = set()
+    for change in corrections:
+        if not isinstance(change, dict):
+            raise ValueError(f"{label}: authentic control correction must be an object")
+        for field in ("path", "from", "to", "basis", "source_refs", "confidence"):
+            if field not in change:
+                raise ValueError(
+                    f"{label}: authentic control correction is missing {field!r}"
+                )
+        path = change["path"]
+        if not str(path).startswith("/authentic_controls/"):
+            raise ValueError(
+                f"{label}: authentic control correction path must start with "
+                f"'/authentic_controls/', got {path!r}"
+            )
+        if path in seen_corrections:
+            raise ValueError(f"{label}: duplicate authentic control correction for {path}")
+        seen_corrections.add(path)
+        if change["from"] == change["to"]:
+            raise ValueError(f"{label}: authentic control correction {path} changes nothing")
+        if not str(change["basis"] or "").strip():
+            raise ValueError(f"{label}: authentic control correction {path} has no basis")
+        refs = change["source_refs"]
+        if not isinstance(refs, list) or not refs or not all(
+            isinstance(ref, str) and ref.strip() for ref in refs
+        ):
+            raise ValueError(
+                f"{label}: authentic control correction {path} needs source_refs"
+            )
+        try:
+            current = _pointer_get(merged, path)
+            reviewed = _pointer_get(incoming, path)
+        except (KeyError, IndexError, ValueError, TypeError) as exc:
+            raise ValueError(
+                f"{label}: authentic control correction path does not exist: {path}"
+            ) from exc
+        if current != change["from"]:
+            raise ValueError(
+                f"{label}: authentic control correction {path} expected the curated "
+                f"value {change['from']!r}, but found {current!r}"
+            )
+        if reviewed != change["to"]:
+            raise ValueError(
+                f"{label}: authentic control correction {path} says the reviewed value "
+                f"is {change['to']!r}, but the incoming researched record says {reviewed!r}"
+            )
+        supported_refs = {
+            ref
+            for claim in incoming.get("provenance", {}).get("claims", [])
+            if path in claim.get("paths", [])
+            for ref in claim.get("source_refs", [])
+        }
+        unsupported = sorted(set(refs) - supported_refs)
+        if unsupported:
+            raise ValueError(
+                f"{label}: authentic control correction {path} cites source(s) that do "
+                f"not support that reviewed path: {unsupported!r}"
+            )
+        _pointer_set(merged, path, change["to"])
+        merged["provenance"]["claims"].append(
+            {
+                "paths": [path],
+                "source_refs": list(dict.fromkeys(refs)),
+                "confidence": change["confidence"],
+                "basis": change["basis"].strip(),
+            }
+        )
+
     conflicts, fills = _classify_differences(
-        existing["authentic_controls"], incoming["authentic_controls"]
+        merged["authentic_controls"], incoming["authentic_controls"]
     )
     if conflicts:
         raise ValueError(
@@ -682,13 +795,18 @@ def merge_simulator_entry(
             "likely a mistake than an intention."
         )
 
-    merged = json.loads(json.dumps(existing))
     for pointer, value in fills.items():
         target = merged
         parts = pointer.strip("/").split("/")
         for part in parts[:-1]:
             target = target[part]
         target[parts[-1]] = value
+    accepted_set = set(accepted)
+    for claim in incoming.get("provenance", {}).get("claims", []):
+        paths = [path for path in claim.get("paths", []) if path in accepted_set]
+        if paths:
+            merged["provenance"]["claims"].append(dict(claim, paths=paths))
+    _synchronize_behavior_shift_type(merged, entry)
     if same_simulator:
         position = covered.index(simulator_id)
         current = merged["simulators"][position]
@@ -746,6 +864,27 @@ def merge_simulator_entry(
 
     merged["updated_at"] = incoming["updated_at"]
     return merged
+
+
+def _synchronize_behavior_shift_type(
+    record: dict[str, Any], simulator: dict[str, Any]
+) -> None:
+    """Restate the final effective actuation in simulator behavior.
+
+    A review can correct the incoming real-car claim, merge it into a more
+    informed existing baseline, or add a simulator-specific override. Resolve
+    all three before writing the deliberately redundant ``shift_type`` field.
+    """
+    behavior = simulator.get("behavior")
+    transmission = (record.get("authentic_controls") or {}).get("transmission") or {}
+    if not isinstance(behavior, dict) or "shift_actuation" not in transmission:
+        return
+
+    effective_actuation = transmission["shift_actuation"]
+    for override in simulator.get("overrides") or []:
+        if override.get("path") == "/authentic_controls/transmission/shift_actuation":
+            effective_actuation = override.get("value")
+    behavior["shift_type"] = effective_actuation
 
 
 def _simulator_behavior_signature(entry: dict[str, Any]) -> dict[str, Any]:
@@ -1254,7 +1393,11 @@ def promote_observations(
     for entry in review["records"]:
         bundle_path = root / entry["bundle"]
         bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        old_live_source_id = bundle["source"]["source_id"]
         bundle = _apply_game_version_correction(bundle, entry)
+        entry = _apply_entry_game_version_correction(
+            entry, old_live_source_id, bundle["source"]["source_id"]
+        )
         bundle = _unique_correction_source(bundle, entry, known_sources)
         bundle = _redirect_to_existing_record(bundle, entry, data_directory)
         entry = dict(entry, **{"class": resolve_class(entry, bundle, curation_directory)})
@@ -1301,6 +1444,9 @@ def promote_observations(
                     record,
                     label=f"review entry {record_id}",
                     accept_from_drive=entry.get("accept_from_drive"),
+                    authentic_control_corrections=entry.get(
+                        "authentic_control_corrections"
+                    ),
                     compatible_implementation=entry.get("compatible_implementation"),
                 )
         elif correction is not None:

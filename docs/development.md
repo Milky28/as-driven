@@ -67,7 +67,7 @@ git diff --check
 | [verification-observations.md](verification-observations.md) | The guided in-game verification contract |
 | [contribution-intake.md](contribution-intake.md) | Public submission, privacy, and intake states |
 | [maintainer-review-workflow.md](maintainer-review-workflow.md) | Case contract and review states |
-| [registering-a-simulator.md](registering-a-simulator.md) | The nine places a new simulator touches |
+| [registering-a-simulator.md](registering-a-simulator.md) | The ten places a new simulator touches |
 | [archetypes.md](archetypes.md) | Named control mechanisms and classification |
 | [importers.md](importers.md) | AMS2 and iRacing import/review design |
 | [releasing.md](releasing.md) | Build, QA, and publishing process |

@@ -253,11 +253,16 @@ files, so an installation that already has a customized layout keeps it.
 
 ## Certified boundary and development coverage
 
-Client version 0.21.0 is built against the SimHub 9.11.22 SDK and packages
-dataset 0.5.34. The tested target is AMS2 1.6.9.91 on Windows.
-The client also recognizes Assetto Corsa EVO and Assetto Corsa for active
-development. Assetto Corsa Competizione has 18 reviewed entries, each captured
-with its exact Steam content build. None is part of the tested release target.
+Client version 0.21.2 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.5.37. The tested target is AMS2 1.6.9.91 on Windows.
+The client also recognizes Assetto Corsa EVO, Assetto Corsa, Project Motor
+Racing, and GTR2 for active development. Assetto Corsa Competizione has 18
+reviewed entries, each captured with its exact Steam content build. PMR uses
+its Steam build id because its executable exposes the engine version. GTR2 uses
+its executable file version, resolves the current `.CAR` from the fresh
+`vehicledata.spt` session header, and fingerprints its `.CAR`, `.HDC`, and
+gearbox files. It treats throttle-dependent cut and blip findings as
+unmeasurable. None is part of the tested release target.
 
 The reference client packages the approved high-fidelity 128x128 raster
 artwork in every Dash Studio template. The blue open-rail layout groups Wheel

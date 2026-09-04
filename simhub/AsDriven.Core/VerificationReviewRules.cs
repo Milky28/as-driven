@@ -55,6 +55,7 @@ namespace AsDriven.Core
             return !string.Equals(simulator, "ac", StringComparison.Ordinal)
                 && !string.Equals(simulator, "acc", StringComparison.Ordinal)
                 && !string.Equals(simulator, "raceroom", StringComparison.Ordinal)
+                && !string.Equals(simulator, "gtr2", StringComparison.Ordinal)
                 && !string.Equals(simulator, "other", StringComparison.Ordinal);
 
             // rFactor 2 was listed here on the strength of one drive that
@@ -78,7 +79,19 @@ namespace AsDriven.Core
             // into GameData. A pedal spike can therefore only show that the
             // contributor touched the pedal; its presence or absence cannot
             // establish whether the car blipped automatically.
-            return !string.Equals(simulator, "rfactor2", StringComparison.Ordinal);
+            return !string.Equals(simulator, "rfactor2", StringComparison.Ordinal)
+                && !string.Equals(simulator, "gtr2", StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Whether SimHub publishes driver throttle input well enough to tell a
+        /// full-throttle upshift from a lifted one. GTR 2 reports no usable
+        /// throttle input through its SimHub reader, so only clutchless-shift
+        /// acceptance can be captured there and lift technique stays unknown.
+        /// </summary>
+        public static bool UpshiftThrottleIsMeasurable(string simulator)
+        {
+            return !string.Equals(simulator, "gtr2", StringComparison.Ordinal);
         }
     }
 }

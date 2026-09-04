@@ -82,6 +82,16 @@ namespace AsDriven.Plugin
         private int _databaseRecordCount;
         private VerificationCaptureContext _liveVerificationContext;
         private VerificationCaptureContext _guidedVerificationCapture;
+        private DateTime _nextGtr2IdentityCheckUtc = DateTime.MinValue;
+        private Gtr2VehicleIdentity _gtr2Identity;
+
+        private sealed class LiveIdentity
+        {
+            public string CarModel { get; set; }
+            public string CarId { get; set; }
+            public string CarClass { get; set; }
+            public CarImplementation Implementation { get; set; }
+        }
 
         public AsDriven()
         {
@@ -403,16 +413,15 @@ namespace AsDriven.Plugin
         {
             try
             {
-                UpdateLiveVerificationTelemetry(data);
+                LiveIdentity identity = ResolveLiveIdentity(data);
+                UpdateLiveVerificationTelemetry(data, identity);
                 SessionState session = _session;
                 if (session == null)
                 {
                     return;
                 }
 
-                string carIdentifier = data.NewData == null
-                    ? string.Empty
-                    : data.NewData.CarModel ?? string.Empty;
+                string carIdentifier = identity.CarModel;
                 bool leavingPreview = ShouldLeavePreview(
                     _previewActive,
                     data.GameRunning,
@@ -449,7 +458,7 @@ namespace AsDriven.Plugin
                     _current = session.Current;
                     if (ShouldRecordIdentity(_current.MatchStatus, data.GameName))
                     {
-                        RecordUnmatchedIdentity(data);
+                        RecordUnmatchedIdentity(data, identity);
                     }
                     _popupState.OnIdentityChanged(
                         data.GameRunning,
@@ -460,6 +469,8 @@ namespace AsDriven.Plugin
                 {
                     _detectedVersionGame = string.Empty;
                     _detectedGameVersion = string.Empty;
+                    _gtr2Identity = null;
+                    _nextGtr2IdentityCheckUtc = DateTime.MinValue;
                 }
             }
             catch (Exception exception)
@@ -1155,17 +1166,11 @@ namespace AsDriven.Plugin
         /// <summary>
         /// Whether an identity is worth writing to the local diagnostics log.
         ///
-        /// "unmatched" is the obvious case: a covered game whose car this dataset
-        /// does not carry. The second case is how a new simulator starts. Until
-        /// one record names it, a game reports "unsupported-game" however well
-        /// the matcher knows it, and recording nothing would leave no way to
-        /// learn the car identities needed to write that first record. So a game
-        /// the matcher recognizes is logged even while the dataset is empty for
-        /// it, and a game it does not recognize still writes nothing at all.
-        ///
-        /// This changes no user-facing message: the popup still says the game is
-        /// not covered yet. The log stays local under %LOCALAPPDATA% and is never
-        /// uploaded.
+        /// "unmatched" covers both a missing car in a covered game and the first
+        /// car contributed for a registered simulator with no records yet. Keep
+        /// the older unsupported-game fallback for diagnostics produced by an
+        /// earlier matcher, but never log a game the client does not recognize.
+        /// The log stays local under %LOCALAPPDATA% and is never uploaded.
         /// </summary>
         internal static bool ShouldRecordIdentity(string matchStatus, string gameName)
         {
@@ -1177,16 +1182,16 @@ namespace AsDriven.Plugin
                 && AsDrivenDatabase.CanonicalizeSimulator(gameName ?? string.Empty) != null;
         }
 
-        private void RecordUnmatchedIdentity(GameData data)
+        private void RecordUnmatchedIdentity(GameData data, LiveIdentity identity)
         {
             if (_unmatchedLog == null || data.NewData == null)
             {
                 return;
             }
 
-            string carModel = data.NewData.CarModel ?? string.Empty;
-            string carId = data.NewData.CarId ?? string.Empty;
-            string carClass = data.NewData.CarClass ?? string.Empty;
+            string carModel = identity.CarModel;
+            string carId = identity.CarId;
+            string carClass = identity.CarClass;
             string gameVersion = DetectGameVersion(data.GameName ?? string.Empty);
             _lastUnmatchedCarModel = carModel;
             _lastUnmatchedCarId = carId;
@@ -1226,7 +1231,7 @@ namespace AsDriven.Plugin
             }
         }
 
-        private void UpdateLiveVerificationTelemetry(GameData data)
+        private void UpdateLiveVerificationTelemetry(GameData data, LiveIdentity identity)
         {
             bool running = data.GameRunning && data.NewData != null;
             if (!running)
@@ -1240,9 +1245,9 @@ namespace AsDriven.Plugin
 
             string gameName = data.GameName ?? string.Empty;
             string gameVersion = DetectGameVersion(gameName);
-            string carModel = data.NewData.CarModel ?? string.Empty;
-            string carId = data.NewData.CarId ?? string.Empty;
-            string carClass = data.NewData.CarClass ?? string.Empty;
+            string carModel = identity.CarModel;
+            string carId = identity.CarId;
+            string carClass = identity.CarClass;
             int forwardGears = data.NewData.CarSettings_MaxGears;
             int currentGear;
             if (int.TryParse(data.NewData.Gear, out currentGear)
@@ -1270,6 +1275,7 @@ namespace AsDriven.Plugin
                     TelemetryName = carModel,
                     TelemetryClass = string.IsNullOrWhiteSpace(carClass) ? "unknown" : carClass,
                     InternalId = carId,
+                    Implementation = identity.Implementation,
                     SuggestedForwardGears = forwardGears > 0 ? (int?)forwardGears : null
                 };
             }
@@ -1303,6 +1309,77 @@ namespace AsDriven.Plugin
             }
         }
 
+        private LiveIdentity ResolveLiveIdentity(GameData data)
+        {
+            var identity = new LiveIdentity
+            {
+                CarModel = data.NewData == null ? string.Empty : data.NewData.CarModel ?? string.Empty,
+                CarId = data.NewData == null ? string.Empty : data.NewData.CarId ?? string.Empty,
+                CarClass = data.NewData == null ? string.Empty : data.NewData.CarClass ?? string.Empty
+            };
+            if (!data.GameRunning || data.NewData == null
+                || !string.Equals(
+                    AsDrivenDatabase.CanonicalizeSimulator(data.GameName ?? string.Empty),
+                    "gtr2",
+                    StringComparison.Ordinal))
+            {
+                return identity;
+            }
+
+            DateTime now = DateTime.UtcNow;
+            if (now >= _nextGtr2IdentityCheckUtc)
+            {
+                _nextGtr2IdentityCheckUtc = now.AddSeconds(1);
+                DateTime startedUtc;
+                string root = ResolveRunningGameRoot("GTR2", out startedUtc);
+                _gtr2Identity = string.IsNullOrWhiteSpace(root)
+                    ? null
+                    : Gtr2VehicleIdentity.Resolve(root, startedUtc);
+            }
+            if (_gtr2Identity != null)
+            {
+                identity.CarModel = _gtr2Identity.TelemetryName;
+                identity.CarId = _gtr2Identity.InternalId;
+                identity.Implementation = _gtr2Identity.Implementation;
+            }
+            return identity;
+        }
+
+        private static string ResolveRunningGameRoot(
+            string processName, out DateTime startedUtc)
+        {
+            startedUtc = DateTime.MaxValue;
+            Process[] processes = null;
+            try
+            {
+                processes = Process.GetProcessesByName(processName);
+                foreach (Process process in processes)
+                {
+                    string path = ResolveProcessPath(process);
+                    if (!string.IsNullOrWhiteSpace(path))
+                    {
+                        startedUtc = process.StartTime.ToUniversalTime();
+                        return Path.GetDirectoryName(path);
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (processes != null)
+                {
+                    foreach (Process process in processes)
+                    {
+                        process.Dispose();
+                    }
+                }
+            }
+            return null;
+        }
+
         private void RefreshGuidedDriveSnapshot()
         {
             _guidedDriveSnapshot = _guidedVerificationDrive.GetSnapshot();
@@ -1317,6 +1394,8 @@ namespace AsDriven.Plugin
             if (string.Equals(simulator, "ac-rally", StringComparison.Ordinal)) return "Assetto Corsa Rally";
             if (string.Equals(simulator, "raceroom", StringComparison.Ordinal)) return "RaceRoom Racing Experience";
             if (string.Equals(simulator, "rfactor2", StringComparison.Ordinal)) return "rFactor 2";
+            if (string.Equals(simulator, "pmr", StringComparison.Ordinal)) return "Project Motor Racing";
+            if (string.Equals(simulator, "gtr2", StringComparison.Ordinal)) return "GTR 2";
             return string.IsNullOrWhiteSpace(rawGameName) ? "Simulator" : rawGameName;
         }
 
@@ -1353,6 +1432,11 @@ namespace AsDriven.Plugin
                 // rFactor2.exe stamps 1.1.3.4; the dedicated server and mod
                 // mode carry the same version but are not the game.
                 case "rfactor2": return new[] { "rFactor2" };
+                // PMR's launcher executable reports the GIANTS runtime version
+                // rather than the game build, so its Steam content build is the
+                // reproducible value. GTR2.exe carries the game's 1.1 version.
+                case "pmr": return new[] { "ProjectMotorRacing" };
+                case "gtr2": return new[] { "GTR2" };
                 default: return new string[0];
             }
         }
@@ -1391,6 +1475,10 @@ namespace AsDriven.Plugin
                         else if (simulator == "acc")
                         {
                             version = DetectSteamBuildId(processPath, "805550");
+                        }
+                        else if (simulator == "pmr")
+                        {
+                            version = DetectSteamBuildId(processPath, "299970");
                         }
                         else
                         {

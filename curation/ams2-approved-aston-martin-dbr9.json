@@ -18,8 +18,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "The repeat AMS2 1.6.9.91 guided drive directly confirmed six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, a torque-measured automatic cut, no automatic blip, and a closed round rim without display or shift lights. The earlier required-driver-blip interpretation is explicitly superseded; authentic downshift rev matching returns to unknown.",
   "scope_notes": "The exact Low Downforce alias inherits the corrected base implementation controls as an approved aero-only assumption and was not separately tested.",

@@ -190,6 +190,24 @@ and live-source note. It is refused when the draft already recorded a version.
 Creating a mod-first record under a real-car id also requires `display_name`, so
 the package author's prefix cannot leak into the simulator-independent name.
 
+When a different simulator is merged into an existing car, independent
+real-car research may expose a wrong or incomplete shared baseline. An
+established value that fills an unknown is listed under `accept_from_drive`;
+an established value that contradicts the curated value requires a top-level
+`authentic_control_corrections` entry naming the JSON pointer, exact `from` and
+`to` values, confidence, source references, and basis. The promotion gate checks
+that the curated value has not drifted, the incoming researched record really
+contains the proposed replacement, and those sources support that exact path.
+The final-review summary labels these as deliberate real-car corrections so the
+new simulator drive is never mistaken for their evidence.
+
+In the local maintainer workbench, preparing a final review also creates the
+driver summary automatically. A new record receives a conservative draft from
+the dry-run controls; an existing record carries its reviewed summary forward.
+The manifest-review screen shows that paragraph in an editor. Saving an edit
+normalizes it to one paragraph, writes it to the proposed manifest, and reruns
+the same promotion dry-run before the approval control remains available.
+
 The command writes the curated record, its curation approval, the live-session
 source, and the dataset index together, and sets `dataset_version` from the
 manifest. It refuses to run when a required field is missing, when anything

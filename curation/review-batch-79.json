@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.37",
+  "approved_at": "2026-09-03",
+  "records": [
+    {
+      "record_id": "nissan-r390-gt1",
+      "bundle": "build/review-cases/issue-49/staged.json",
+      "display_name": "Nissan R390 GT1",
+      "class": "GT1",
+      "manufacturer": "Nissan",
+      "model": "R390 GT1",
+      "year": {
+        "from": 1998,
+        "to": 1998,
+        "label": "1998 Le Mans specification"
+      },
+      "real_world_identity_notes": "The PMR lead is best resolved to the 1998 Nissan R390 GT1 Le Mans race car, specifically the long-tail generation, which is already curated as record_id 'nissan-r390-gt1'. NISMO distinguishes the 1998 long-tail revision from the 1997 car and records the change to a Nissan-built sequential transmission. The similarly named 1998 R390 GT1 road homologation car is a separate road-car configuration. The PMR observation is simulator evidence only; its exact installed Steam build is preserved through a reviewed correction and does not establish real-world behavior.",
+      "real_world_source_refs": [
+        "nismo.r390-gt1-history.vol05",
+        "nissan.heritage.r390-gt1.1997",
+        "nissan.r390-gt1.inside04",
+        "wikipedia.nissan-r390-gt1",
+        "classicdriver.r390-gt1-r8-cockpit.2020",
+        "nissan.heritage.r390-gt1-road.1998",
+        "as-driven.repository.nissan-r390-gt1-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "NISMO's official motorsport history identifies Nissan's 1998 R390 GT1 as the long-tail revision and says its transmission changed to a Nissan-built sequential type. Nissan's Heritage material identifies the R390 GT1 family and a six-speed sequential gearbox, while the 1998 Le Mans chassis R8 report identifies the race car and its cockpit. The exact PMR telemetry name and GT1 class are consistent with that existing curated identity; no separate real-world R390 variant is needed.",
+      "identity_basis": "NISMO's official motorsport history identifies Nissan's 1998 R390 GT1 as the long-tail revision and says its transmission changed to a Nissan-built sequential type. Nissan's Heritage material identifies the R390 GT1 family and a six-speed sequential gearbox, while the 1998 Le Mans chassis R8 report identifies the race car and its cockpit. The exact PMR telemetry name and GT1 class are consistent with that existing curated identity; no separate real-world R390 variant is needed.",
+      "specification_basis": "The identified R8 cockpit photograph shows the digital instrument display mounted in the dashboard behind the wheel, not integrated into the rim. The identified R8 cockpit photograph shows a conventional closed circular rim rather than an open-top rim. The identified 1998 R8 race-car cockpit photograph clearly shows a round racing rim. Nissan's contemporary technical page specifies a transverse six-speed sequential gearbox, corroborated by Nissan Heritage and the secondary technical summary. NISMO explicitly describes the 1998 transmission as Nissan-built sequential, and Nissan's technical page specifies a six-speed sequential gearbox. The secondary technical summary describes a short-throw gear lever, the identified race-car material shows the lever-style cockpit, and the PMR observation reports sequential-stick. The PMR observation from exact Steam build 24725083 is simulator corroboration only. The official sources explicitly use the term sequential for the R390 GT1 transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1998 Le Mans specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: no; wheel-rim shape: round; forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "Project Motor Racing Steam build 24725083 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/49",
+      "live_source_notes": "Guided-verification observation other.r390-gt1.20260903t042247443z-bfd53e8c by Jason Kinslow; registered from source game ProjectMotorRacing and corrected to exact Steam build 24725083. Six ratios, clutch-required move-off, clutchless running shifts, full-throttle upshift acceptance with a shift-local torque interruption, coast-downshift acceptance without a detected automatic blip, and a round closed cockpit rim with shift lights were directly observed.",
+      "driver_summary": "6-speed lever sequential. Use the clutch to pull away. Stay flat on the upshift because the car cuts for you. Whether the gearbox needs a downshift blip is not established, so blip to be safe. Simulator implementations differ on manual downshift blip, automatic downshift blip; follow the selected game's USE row for those items.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "24725083",
+        "basis": "The R390 observation was captured in the same Project Motor Racing session as the M3 GTR observation six minutes later. The installed Steam app manifest for app 299970 recorded buildid 24725083; the executable's GIANTS engine file version is not a useful content build identifier."
+      },
+      "accept_from_drive": [
+        "/authentic_controls/steering/wheel_rim/shape"
+      ]
+    }
+  ]
+}

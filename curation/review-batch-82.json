@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.40",
+  "approved_at": "2026-09-03",
+  "records": [
+    {
+      "record_id": "lotus-elise-gt1",
+      "bundle": "build/review-cases/issue-56/staged.json",
+      "display_name": "Lotus Elise GT1",
+      "class": "GT1",
+      "manufacturer": "Lotus",
+      "model": "Elise GT1",
+      "year": {
+        "from": 1997,
+        "to": 1997,
+        "label": "FIA GT Type 115 race specification"
+      },
+      "real_world_identity_notes": "The PMR telemetry name resolves to the Lotus Elise GT1, also called the Lotus GT1 Turbo and identified in secondary technical histories as Type 115. This is the 1997 FIA GT race car, built around a heavily modified Elise-derived aluminium structure with a carbon-fibre body and a six-speed Hewland sequential transmission. Keep it separate from the earlier Lotus Esprit GT1/Type 114, the single road homologation Elise GT1 with a Lotus 918 V8 and Renault five-speed manual, and later Bitter GT1 conversions that used revised bodies, different engines, or different transmissions.",
+      "real_world_source_refs": [
+        "fia.lotus-gt1-turbo.homologation-006.1997",
+        "lotuscars.esprit-type-115-reference",
+        "ultimatecarpage.lotus-elise-gt1.1997",
+        "24h-en-piste.lotus-elise-gt1.1997-115-04",
+        "autoclassmagazine.lotus-elise-gt1.cockpit.2016",
+        "as-driven.repository.lotus-elise-gt1-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The FIA Historic Database identifies Lotus GT1 (Turbo), homologation GT1-006, valid from 1 April 1997, in the GT1 group. The exact-model technical history identifies the Elise GT1 as Type 115, produced in 1997, and specifies a six-speed Hewland sequential gearbox. The PMR telemetry name and GT1 class match that canonical race-car identity; no existing curated record covers it, so a new record id is proposed.",
+      "identity_basis": "The FIA Historic Database identifies Lotus GT1 (Turbo), homologation GT1-006, valid from 1 April 1997, in the GT1 group. The exact-model technical history identifies the Elise GT1 as Type 115, produced in 1997, and specifies a six-speed Hewland sequential gearbox. The PMR telemetry name and GT1 class match that canonical race-car identity; no existing curated record covers it, so a new record id is proposed.",
+      "specification_basis": "The full-resolution Elise GT1 cockpit photograph shows the instruments in a separate dashboard binnacle rather than in the steering rim. The full-resolution cockpit photograph shows a continuous circular rim without an open top. The full-resolution Elise GT1 cockpit photograph visibly shows a continuous circular racing rim rather than a GT-formula control-face rim or a D-shaped band. The FIA form shows six ratio rows, while the technical history and specific 1997 race entry explicitly identify a six-speed gearbox. Both race-car sources explicitly identify the Hewland transmission as sequential. The full-resolution Elise GT1 cockpit photograph visibly shows a tall sequential gear lever, and the technical source identifies the gearbox as sequential. The reviewed race-car sources explicitly use sequential terminology for the six-speed Hewland transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.elise-gt1.20260903t223923087z-393bd34f directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-elise-gt1-controls.24725083"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact FIA GT Type 115 race specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: no; wheel-rim shape: round; forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "Project Motor Racing 24725083 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/56",
+      "live_source_notes": "Guided-verification observation pmr.elise-gt1.20260903t223923087z-393bd34f by Jason Kinslow; PMR 24725083. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "6-speed lever sequential. Launch clutch use is not established, so use it to be safe. Upshift lift is not established, so lift to be safe; running clutch use is not established. Whether the gearbox needs a downshift blip is not established, so blip to be safe; downshift clutch use is not established.",
+      "create_new_record": {
+        "staged_record_id": "elise-gt1",
+        "basis": "The FIA Historic Database identifies Lotus GT1 (Turbo), homologation GT1-006, valid from 1 April 1997, in the GT1 group. The exact-model technical history identifies the Elise GT1 as Type 115, produced in 1997, and specifies a six-speed Hewland sequential gearbox. The PMR telemetry name and GT1 class match that canonical race-car identity; no existing curated record covers it, so a new record id is proposed."
+      },
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "24725083",
+        "basis": "The installed Project Motor Racing Steam app manifest for app 299970 records build 24725083 and LastUpdated 2026-08-31T17:26:06Z, before the Lotus Elise GT1 observation at 2026-09-03T22:39:23.087Z. Its LastPlayed timestamp is 2026-09-04T05:37:17Z, after the drive, so the manifest spans the observation without an intervening installed-build change."
+      }
+    }
+  ]
+}

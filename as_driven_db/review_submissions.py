@@ -721,6 +721,7 @@ def allowed_case_actions(case: dict[str, Any]) -> list[str]:
             "promote",
             "prepare-review",
             "generate-driver-summary",
+            "save-driver-summary",
             "generate-research-brief",
             "import-research",
         ]

@@ -19,8 +19,7 @@
     "wheel_rim_shape": "round",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "no",
-    "running_shift_clutch": "not-required"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "The exact Race Sim Studio v2 data.acd was fingerprinted. Six sequential-stick gears, clutch-required move-off, clutchless full-throttle and coast-shift acceptance, no detected automatic blip, and a closed round rim without integrated display or shift lights were observed. AC supplied no engine-torque channel, so automatic cut is unknown. The real DBR9's driver rev-matching requirement is not established; the AC implementation's accepted unblipped coast downshift remains recorded as a simulator override.",
   "scope_notes": "Single exact identity staged from one guided-verification drive.",

@@ -57,6 +57,8 @@ SIMULATOR_LABELS = {
     "ac-rally": "Assetto Corsa Rally",
     "raceroom": "RaceRoom Racing Experience",
     "rfactor2": "rFactor 2",
+    "pmr": "Project Motor Racing",
+    "gtr2": "GTR 2",
     "iracing": "iRacing",
 }
 
@@ -68,6 +70,8 @@ SIMULATOR_FILTER_LABELS = {
     "ac-rally": "AC Rally",
     "raceroom": "RaceRoom",
     "rfactor2": "rF2",
+    "pmr": "PMR",
+    "gtr2": "GTR2",
     "iracing": "iRacing",
 }
 
@@ -133,6 +137,17 @@ COMPARISON_LABELS = {
     "/authentic_controls/steering/wheel_rim/integrated_display": "Integrated wheel display",
     "/authentic_controls/steering/wheel_rim/shift_lights": "Wheel shift lights",
     "/authentic_controls/steering/wheel_rim/open_top": "Open-top wheel",
+}
+
+PROVENANCE_LABELS = {
+    "/identity": "Real-car identity",
+    "/identity/real_world_identity_notes": "Identity interpretation",
+    "/authentic_controls": "Authentic controls",
+    "/authentic_controls/transmission": "Transmission and shift technique",
+    "/authentic_controls/transmission/upshift": "Upshift technique",
+    "/authentic_controls/transmission/downshift": "Downshift technique",
+    "/authentic_controls/steering": "Steering controls",
+    "/authentic_controls/steering/wheel_rim": "Wheel rim",
 }
 
 
@@ -274,6 +289,20 @@ DIFFERENCE_FIELDS = {
         "Gears",
         lambda t: shifter(t["forward_gears"], t["shift_actuation"]),
     ),
+    "/shift_actuation": (
+        "Shifter",
+        lambda t: shifter(t["forward_gears"], t["shift_actuation"]),
+    ),
+    "/shift_pattern": (
+        "Selection pattern",
+        lambda t: {
+            "standard-h": "Standard H-pattern",
+            "dogleg-h": "Dogleg H-pattern",
+            "sequential": "Sequential, one gear at a time",
+            "automatic-gate": "Automatic gate",
+            "direct": "Direct selection",
+        }.get(t["shift_pattern"], "Pattern not established"),
+    ),
     "/standing_start_clutch": (
         "Pulling away",
         lambda t: launch(t["standing_start_clutch"])[0],
@@ -286,6 +315,14 @@ DIFFERENCE_FIELDS = {
         )[0],
     ),
     "/upshift/clutch": ("Clutch on an upshift", lambda t: running_clutch(t["upshift"]["clutch"])),
+    "/upshift/automatic_cut": (
+        "Automatic shift cut",
+        lambda t: {
+            "yes": "Automatic cut",
+            "no": "No automatic cut",
+            "not-applicable": "Not applicable",
+        }.get(t["upshift"]["automatic_cut"], "Not established"),
+    ),
     "/downshift/manual_blip": (
         "Downshift",
         lambda t: downshift(
@@ -466,7 +503,11 @@ def simulator_disagreements(
     return disagreements
 
 
-def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -> list[dict[str, str]]:
+def differences(
+    transmission: dict[str, Any],
+    overrides: list[dict[str, Any]],
+    controls: dict[str, Any] | None = None,
+) -> list[dict[str, str]]:
     """What the simulator does differently, in the same words as the card.
 
     An override is the record saying the two layers genuinely disagree, so the
@@ -476,6 +517,9 @@ def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -
     if not overrides:
         return []
     effective = _apply(transmission, overrides)
+    effective_controls = _apply_controls(controls, overrides) if controls else None
+    flat_controls = _flatten(controls) if controls else {}
+    flat_effective_controls = _flatten(effective_controls) if effective_controls else {}
     out = []
     for override in overrides:
         path = override.get("path", "")
@@ -483,7 +527,12 @@ def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -
         name, render = DIFFERENCE_FIELDS.get(
             field, (field.strip("/").replace("/", " ").replace("_", " "), None)
         )
-        if render is None:
+        controls_path = path[len("/authentic_controls"):] if path.startswith("/authentic_controls/") else ""
+        if render is None and controls_path in flat_controls:
+            name = COMPARISON_LABELS.get(path, _control_field_label(path))
+            real = _comparison_value(path, flat_controls[controls_path])
+            sim = _comparison_value(path, flat_effective_controls[controls_path])
+        elif render is None:
             real, sim = "", str(override["value"])
         else:
             real, sim = render(transmission), render(effective)
@@ -494,8 +543,9 @@ def differences(transmission: dict[str, Any], overrides: list[dict[str, Any]]) -
 def _simulator_view(
     record_id: str,
     entry: dict[str, Any],
-    transmission: dict[str, Any],
+    controls: dict[str, Any],
 ) -> dict[str, Any]:
+    transmission = controls["transmission"]
     simulator = entry.get("simulator", "")
     confidence = entry.get("confidence") or {}
     behavior = entry.get("behavior") or {}
@@ -511,7 +561,9 @@ def _simulator_view(
         "id": simulator,
         "label": simulator_label(simulator),
         "anchor": f"{record_id}--{simulator}",
-        "differences": differences(transmission, entry.get("overrides") or []),
+        "differences": differences(
+            transmission, entry.get("overrides") or [], controls
+        ),
         "cockpit": simulator_cockpit(behavior),
         "unknown_behavior": unknown_behavior,
         "game_version": entry.get("verified_game_version", ""),
@@ -520,10 +572,83 @@ def _simulator_view(
     }
 
 
+def _provenance_label(path: str, record: dict[str, Any]) -> str:
+    """Turn a claim's JSON Pointer into the thing a reader recognises.
+
+    Provenance remains path-based in the database. The site translates that
+    exact path at render time, so a friendly label can never become a second
+    source of truth about what the claim covers.
+    """
+    if path in PROVENANCE_LABELS:
+        return PROVENANCE_LABELS[path]
+    if path in COMPARISON_LABELS:
+        return COMPARISON_LABELS[path]
+    parts = [part for part in path.split("/") if part]
+    if len(parts) >= 2 and parts[0] == "simulators" and parts[1].isdigit():
+        index = int(parts[1])
+        entries = record.get("simulators") or []
+        simulator = (
+            simulator_label(entries[index].get("simulator", ""))
+            if index < len(entries)
+            else f"Simulator {index + 1}"
+        )
+        subject = {
+            "identities": "identity match",
+            "behavior": "observed behavior",
+            "overrides": "departure from the real car",
+        }.get(parts[2] if len(parts) > 2 else "", "verification")
+        return f"{simulator} {subject}"
+    return _control_field_label(path).capitalize()
+
+
+def _source_view(source_id: str, source_index: dict[str, dict[str, Any]]) -> dict[str, str]:
+    source = source_index.get(source_id) or {}
+    return {
+        "id": source_id,
+        "title": source.get("title") or source_id,
+        "publisher": source.get("publisher") or "Source publisher not recorded",
+        "type": str(source.get("source_type") or "source").replace("-", " "),
+        "url": source.get("url") or "",
+        "archive_url": source.get("archive_url") or "",
+    }
+
+
+def _verification(
+    record: dict[str, Any], source_index: dict[str, dict[str, Any]]
+) -> dict[str, Any]:
+    claims = []
+    distinct_sources: set[str] = set()
+    for claim in record.get("provenance", {}).get("claims", []):
+        source_refs = claim.get("source_refs") or []
+        distinct_sources.update(source_refs)
+        labels = []
+        for path in claim.get("paths") or []:
+            label = _provenance_label(path, record)
+            if label not in labels:
+                labels.append(label)
+        claims.append(
+            {
+                "fields": labels,
+                "confidence": claim.get("confidence", "unknown"),
+                "basis": claim.get("basis", ""),
+                "sources": [
+                    _source_view(source_id, source_index)
+                    for source_id in source_refs
+                ],
+            }
+        )
+    return {
+        "claim_count": len(claims),
+        "source_count": len(distinct_sources),
+        "claims": claims,
+    }
+
+
 def _car(
     record: dict[str, Any],
     archetypes: dict[str, str],
     audit_findings: list[dict[str, Any]],
+    source_index: dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
     identity = record["identity"]
     controls = record["authentic_controls"]
@@ -542,7 +667,7 @@ def _car(
     )
     simulator_entries = record.get("simulators") or []
     simulator_views = [
-        _simulator_view(record["record_id"], entry, transmission)
+        _simulator_view(record["record_id"], entry, controls)
         for entry in simulator_entries
     ]
     cross_simulator_disagreements = simulator_disagreements(
@@ -578,6 +703,7 @@ def _car(
             rim.get("shift_lights", "unknown"),
         ),
         "summary": record.get("driver_summary", ""),
+        "verification": _verification(record, source_index),
         "classification": classification,
         "mechanism": mechanism,
         "deviations": deviations,
@@ -642,6 +768,7 @@ def collect(root: Path) -> dict[str, Any]:
                 record,
                 archetypes,
                 audit_by_record.get(record["record_id"], []),
+                source_index,
             )
         )
     cars.sort(key=lambda car: (car["name"].lower(), car["car_class"].lower()))
@@ -952,6 +1079,69 @@ def _benchmark_view(payload: dict[str, Any]) -> str:
     return "".join(groups)
 
 
+def _verification_section(verification: dict[str, Any]) -> str:
+    claims = verification.get("claims") or []
+    if not claims:
+        return ""
+    rendered_claims = []
+    for claim in claims:
+        fields = "".join(
+            f'<span class="verification-field">{_e(field)}</span>'
+            for field in claim["fields"]
+        )
+        sources = []
+        for source in claim["sources"]:
+            primary_url = source["url"] or source["archive_url"]
+            if primary_url:
+                title = (
+                    '<a href="{url}" target="_blank" rel="noreferrer">{title}</a>'
+                    .format(url=_e(primary_url), title=_e(source["title"]))
+                )
+            else:
+                title = f'<strong>{_e(source["title"])}</strong>'
+            archive = ""
+            if source["archive_url"] and source["archive_url"] != primary_url:
+                archive = (
+                    '<a class="archive-link" href="{url}" target="_blank" '
+                    'rel="noreferrer">Archived copy</a>'
+                ).format(url=_e(source["archive_url"]))
+            sources.append(
+                '<li><div>{title}<span>{publisher} · {source_type}</span></div>'
+                '{archive}</li>'.format(
+                    title=title,
+                    publisher=_e(source["publisher"]),
+                    source_type=_e(source["type"]),
+                    archive=archive,
+                )
+            )
+        confidence = str(claim["confidence"])
+        rendered_claims.append(
+            '<article class="verification-claim">'
+            '<div class="verification-claim-heading"><div class="verification-fields">'
+            '{fields}</div><span class="confidence confidence-{confidence}">'
+            '{confidence}</span></div><p>{basis}</p>'
+            '<ul class="verification-sources">{sources}</ul></article>'.format(
+                fields=fields,
+                confidence=_e(confidence),
+                basis=_e(claim["basis"]),
+                sources="".join(sources),
+            )
+        )
+    claim_count = verification["claim_count"]
+    source_count = verification["source_count"]
+    return (
+        '<details class="verification"><summary><span>How this was verified</span>'
+        '<small>{claims} claim{claim_plural} · {sources} source{source_plural}</small>'
+        '</summary><div class="verification-body">{content}</div></details>'
+    ).format(
+        claims=claim_count,
+        claim_plural="" if claim_count == 1 else "s",
+        sources=source_count,
+        source_plural="" if source_count == 1 else "s",
+        content="".join(rendered_claims),
+    )
+
+
 def _row(car: dict[str, Any]) -> str:
     detail = []
     if car["summary"]:
@@ -1022,6 +1212,7 @@ def _row(car: dict[str, Any]) -> str:
         _simulator_panel(car, simulator, index == 0)
         for index, simulator in enumerate(car["simulators"])
     )
+    detail.append(_verification_section(car["verification"]))
     detail.append(
         '<section class="simulator-section" aria-label="Simulator views">'
         '<div class="simulator-heading"><h4>Simulator view</h4>'
@@ -1372,7 +1563,8 @@ select {{
   color: var(--ink); background: var(--surface);
   border: 1px solid var(--line); border-radius: 3px;
 }}
-input:focus-visible, select:focus-visible, tr:focus-visible, button:focus-visible {{
+input:focus-visible, select:focus-visible, tr:focus-visible, button:focus-visible,
+summary:focus-visible, a:focus-visible {{
   outline: 2px solid var(--focus); outline-offset: 1px;
 }}
 .count {{
@@ -1516,6 +1708,60 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 11.5px; color: var(--faint);
 }}
+.verification {{
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
+  background: var(--bg);
+}}
+.verification > summary {{
+  padding: 11px 13px; cursor: pointer; color: var(--ink);
+}}
+.verification > summary::marker {{ color: var(--accent); }}
+.verification > summary span {{ font-weight: 600; }}
+.verification > summary small {{
+  margin-left: 10px; color: var(--faint);
+  font: 400 11px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.verification[open] > summary {{
+  border-bottom: 1px solid var(--line); background: var(--surface-2);
+}}
+.verification-body {{ display: flex; flex-direction: column; }}
+.verification-claim {{ padding: 13px; background: var(--surface); }}
+.verification-claim + .verification-claim {{ border-top: 1px solid var(--line); }}
+.verification-claim-heading {{
+  display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+}}
+.verification-fields {{ display: flex; flex-wrap: wrap; gap: 5px; }}
+.verification-field {{
+  padding: 2px 7px; color: var(--ink); background: var(--surface-2);
+  border-radius: 2px; font: 500 11px/1.45 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.confidence {{
+  flex: 0 0 auto; color: var(--faint); font: 500 10px/1.4 "IBM Plex Mono", monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+}}
+.confidence-verified, .confidence-high {{ color: var(--car); }}
+.confidence-medium, .confidence-low {{ color: var(--optional); }}
+.verification-claim > p {{
+  margin: 8px 0 10px; color: var(--muted); font-size: 13.5px;
+}}
+.verification-sources {{
+  display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none;
+}}
+.verification-sources li {{
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  padding-left: 10px; border-left: 2px solid var(--line);
+}}
+.verification-sources li div {{ min-width: 0; }}
+.verification-sources a, .verification-sources strong {{
+  color: var(--accent); font-size: 13px; font-weight: 500;
+}}
+.verification-sources strong {{ color: var(--ink); }}
+.verification-sources li span {{
+  display: block; color: var(--faint); font: 400 10.5px/1.35 "IBM Plex Mono", monospace;
+}}
+.verification-sources .archive-link {{
+  flex: 0 0 auto; color: var(--faint); font-size: 11px; white-space: nowrap;
+}}
 .simulator-section {{
   display: flex; flex-direction: column; gap: 12px;
   margin-top: 2px; padding-top: 16px; border-top: 1px solid var(--line);
@@ -1570,6 +1816,9 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
   .benchmark-intro {{ grid-template-columns: 1fr; }}
   .benchmark-sim {{ grid-template-columns: minmax(0, 1fr) auto; }}
   .benchmark-sim small {{ grid-column: 2; }}
+  .verification-claim-heading, .verification-sources li {{ display: block; }}
+  .confidence {{ display: inline-block; margin-top: 7px; }}
+  .verification-sources .archive-link {{ display: inline-block; margin-top: 3px; }}
 }}
 @media (max-width: 980px) {{
   .controls {{ flex-wrap: wrap; }}
@@ -1676,7 +1925,9 @@ from that, and what a drive or a source would still have to settle. Every row
 describes the real car. Open it to choose a reviewed simulator; differences and
 simulator-specific evidence gaps stay inside that view, because they are
 separate facts and neither overwrites the real car. Each simulator view has a
-stable link that can be shared.</footer>
+stable link that can be shared. Open <strong>How this was verified</strong> to
+see each curated claim, its confidence and rationale, and the sources that
+support it.</footer>
 </div>
 </div>
 

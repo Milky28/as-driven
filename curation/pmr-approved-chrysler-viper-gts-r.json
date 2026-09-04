@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.43",
+  "approved_at": "2026-09-04",
+  "record_id": "chrysler-viper-gts-r",
+  "simulator": "pmr",
+  "telemetry_name": "Viper GTS-R",
+  "observed_game_version": "24725083",
+  "observed_through": "SimHub guided verification observation pmr.viper-gts-r.20260903t230703638z-26359fed",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "unknown",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2004 final ORECA-supported Viper GTS-R specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GT",
+  "staged_record_id": "viper-gts-r"
+}

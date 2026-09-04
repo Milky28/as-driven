@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.42",
+  "approved_at": "2026-09-04",
+  "records": [
+    {
+      "record_id": "chevrolet-corvette-c6-r",
+      "bundle": "build/review-cases/issue-59/staged.json",
+      "display_name": "Chevrolet Corvette C6.R",
+      "class": "GT1 2005",
+      "manufacturer": "Chevrolet",
+      "model": "Corvette C6.R",
+      "year": {
+        "from": 2005,
+        "to": 2005,
+        "label": "2005 factory GT1 C6.R introduction specification"
+      },
+      "real_world_identity_notes": "The PMR Corvette C6.R maps to Chevrolet's first-generation factory GT1 C6.R, which made its competition debut at Sebring in March 2005. The car used a six-speed sequential racing gearbox operated through a cockpit-mounted sequential lever in the period GT configuration; period descriptions say the driver could make flat, clutchless upshifts using an electronic ignition cut. Keep the later 2009-2013 GT2/GTE C6.R and non-factory Corvette C6-based race cars distinct. The PMR observation is pinned to Steam content build 24725083; its observed values remain simulator comparison evidence rather than real-car proof.",
+      "real_world_source_refs": [
+        "pmr.official.gt-class.c6r.2004-2005",
+        "gm.history.corvette-racing.c6r.2005-2013",
+        "gmauthority.corvette-c6r.gt1.controls",
+        "lsxmag.corvette-c6r.2005.controls"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The official PMR GT class page names Chevrolet Corvette C6.R and frames the content as the 2004-05 GT season. General Motors' Corvette Racing history identifies the C6.R's 2005 competition debut and GT1 career. Independent C6.R technical and period racing references identify the six-speed sequential gearbox, lever operation, clutchless flat upshifts, and ignition cut. No matching curated C6.R record exists in data/v1, so this case proposes a new canonical record.",
+      "identity_basis": "The official PMR GT class page names Chevrolet Corvette C6.R and frames the content as the 2004-05 GT season. General Motors' Corvette Racing history identifies the C6.R's 2005 competition debut and GT1 career. Independent C6.R technical and period racing references identify the six-speed sequential gearbox, lever operation, clutchless flat upshifts, and ignition cut. No matching curated C6.R record exists in data/v1, so this case proposes a new canonical record.",
+      "specification_basis": "Independent C6.R technical references identify a six-speed gearbox, and the PMR observation independently reports six forward gears. Both C6.R technical references explicitly identify the Xtrac transmission as sequential. The period GT selector restriction excludes paddle operation for the target era, and the C6.R operation description says shifts were made by pulling back on a lever. The reviewed technical references explicitly describe the C6.R gearbox as sequential; no H-pattern gate is documented for the target GT1 specification. The C6.R technical description explicitly attributes the shift event to an electronic ignition interrupter, which is an automatic upshift cut. The C6.R GT1 technical reference explicitly says the driver did not need the clutch pedal on upshifts. The C6.R operation description explicitly says the driver did not need to lift off the throttle for upshifts, consistent with the electronic ignition cut. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/manual_blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c6-r-controls.24725083"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2005 factory GT1 C6.R introduction specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_cut",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; transmission upshift automatic_cut: yes; transmission upshift clutch: not required; transmission upshift throttle_lift: not required.",
+        "The reviewed real-car sources do not establish launch technique or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 24725083 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/59",
+      "live_source_notes": "Guided-verification observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7 by Jason Kinslow; PMR 24725083. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "6-speed lever sequential. Launch clutch use is not established, so use it to be safe. Stay flat on the upshift because the car cuts for you. Whether the gearbox needs a downshift blip is not established, so blip to be safe; downshift clutch use is not established.",
+      "create_new_record": {
+        "staged_record_id": "corvette-c6-r",
+        "basis": "The official PMR GT class page names Chevrolet Corvette C6.R and frames the content as the 2004-05 GT season. General Motors' Corvette Racing history identifies the C6.R's 2005 competition debut and GT1 career. Independent C6.R technical and period racing references identify the six-speed sequential gearbox, lever operation, clutchless flat upshifts, and ignition cut. No matching curated C6.R record exists in data/v1, so this case proposes a new canonical record."
+      },
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "24725083",
+        "basis": "The installed Project Motor Racing Steam app manifest for app 299970 records build 24725083 and LastUpdated 2026-08-31T17:26:06Z, before the Chevrolet Corvette C6.R observation at 2026-09-03T22:59:20.678Z. Its LastPlayed timestamp is 2026-09-04T05:37:17Z, after the drive, so the manifest spans the observation without an intervening installed-build change."
+      }
+    }
+  ]
+}

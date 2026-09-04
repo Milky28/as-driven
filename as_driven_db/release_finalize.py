@@ -86,6 +86,8 @@ SIMULATOR_NAMES = {
     "iracing": "iRacing",
     "raceroom": "RaceRoom Racing Experience",
     "rfactor2": "rFactor 2",
+    "pmr": "Project Motor Racing",
+    "gtr2": "GTR 2",
 }
 
 

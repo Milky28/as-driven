@@ -96,6 +96,199 @@
         "level": "verified",
         "basis": "Exact simulator identity, cockpit controls, and technique were directly tested; archived manufacturer specifications independently support the six-speed sequential hardware family."
       }
+    },
+    {
+      "simulator": "gtr2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "HQ Chevrolet Corvette C5-R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "GAMEDATA/TEAMS/24H/CHEVROLET CORVETTE TEAMS/EXCELSIOR/04108HQ_G2_C5R.CAR"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in GTR2 1.1.0.0 via guided verification observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "verified_game_version": "1.1.0.0",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "gm-archive.corvette-c5r.2003",
+        "gm.corvette-racing.2004-program",
+        "gm.history.corvette-racing.c5r.1999-2004",
+        "national-corvette-museum.c5r-004.cockpit.2025",
+        "raceart.c5r-006.cockpit.2020",
+        "gmauthority.corvette-c5r.history-spec",
+        "gtr2.catalog.corvette-c5r.2004",
+        "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+        "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The GTR2-era car list identifies the Corvette C5-R as a 2004 car, the supplied internal ID is the original G2/Excelsior C5-R namespace, and General Motors' contemporary 2004 program identifies the factory C5-R and its new six-speed Xtrac gearbox. The exact real-world chassis is not identified by the HQ .CAR token, so the simulator lead is mapped to the existing model/specification record rather than to a new chassis record."
+      }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Corvette C5.R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Corvette C5.R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 24725083 via guided verification observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "h-pattern",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        }
+      ],
+      "verified_game_version": "24725083",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "pmr.official.corvette-c5r.2004",
+        "gm.corvette-racing.2004-program",
+        "gm.history.corvette-racing.c5r.1999-2004",
+        "gm-archive.corvette-c5r.2003",
+        "national-corvette-museum.c5r-004.cockpit.2025",
+        "raceart.c5r-006.cockpit.2020",
+        "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+        "pmr.local-live-corvette-c5-r-controls.24725083"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official PMR article is explicitly titled for the 2004 Chevrolet Corvette C5.R and states that the 2004 car adopted an Xtrac six-speed sequential gearbox. A contemporary General Motors 2004 program release independently identifies the factory C5-R's new six-speed Xtrac gearbox, and the repository already contains the matching curated Chevrolet Corvette C5-R record. The exact PMR H-pattern result is therefore treated as an implementation discrepancy, not as evidence for a separate early C5-R identity."
+      }
     }
   ],
   "provenance": {
@@ -151,6 +344,61 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "gm-archive.corvette-c5r.2003",
+          "gm.corvette-racing.2004-program",
+          "gm.history.corvette-racing.c5r.1999-2004",
+          "national-corvette-museum.c5r-004.cockpit.2025",
+          "raceart.c5r-006.cockpit.2020",
+          "gmauthority.corvette-c5r.history-spec",
+          "gtr2.catalog.corvette-c5r.2004",
+          "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+          "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+        ],
+        "confidence": "high",
+        "basis": "The GTR2-era car list identifies the Corvette C5-R as a 2004 car, the supplied internal ID is the original G2/Excelsior C5-R namespace, and General Motors' contemporary 2004 program identifies the factory C5-R and its new six-speed Xtrac gearbox. The exact real-world chassis is not identified by the HQ .CAR token, so the simulator lead is mapped to the existing model/specification record rather than to a new chassis record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "pmr.official.corvette-c5r.2004",
+          "gm.corvette-racing.2004-program",
+          "gm.history.corvette-racing.c5r.1999-2004",
+          "gm-archive.corvette-c5r.2003",
+          "national-corvette-museum.c5r-004.cockpit.2025",
+          "raceart.c5r-006.cockpit.2020",
+          "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+          "pmr.local-live-corvette-c5-r-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "The official PMR article is explicitly titled for the 2004 Chevrolet Corvette C5.R and states that the 2004 car adopted an Xtrac six-speed sequential gearbox. A contemporary General Motors 2004 program release independently identifies the factory C5-R's new six-speed Xtrac gearbox, and the repository already contains the matching curated Chevrolet Corvette C5-R record. The exact PMR H-pattern result is therefore treated as an implementation discrepancy, not as evidence for a separate early C5-R identity."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-corvette-c5-r-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -161,6 +409,6 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-04",
   "driver_summary": "Six-speed sequential-manual transaxle, from General Motors' own specification for the 2003 car. It cuts the upshift, so stay flat, and blip every downshift yourself. Which chassis year AMS2 models is not established."
 }

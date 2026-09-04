@@ -1,4 +1,5 @@
 using System;
+using AsDriven.Core;
 
 namespace AsDriven.Plugin
 {
@@ -14,6 +15,7 @@ namespace AsDriven.Plugin
         public string TelemetryName { get; set; }
         public string TelemetryClass { get; set; }
         public string InternalId { get; set; }
+        public CarImplementation Implementation { get; set; }
         public int? SuggestedForwardGears { get; set; }
 
         public VerificationCaptureContext WithObservedAt(DateTime observedAtUtc)
@@ -29,6 +31,7 @@ namespace AsDriven.Plugin
                 TelemetryName = TelemetryName,
                 TelemetryClass = TelemetryClass,
                 InternalId = InternalId,
+                Implementation = Implementation,
                 SuggestedForwardGears = SuggestedForwardGears
             };
         }

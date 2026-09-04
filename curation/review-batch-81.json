@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.39",
+  "approved_at": "2026-09-03",
+  "records": [
+    {
+      "record_id": "chevrolet-corvette-c5-r",
+      "bundle": "build/review-cases/issue-55/staged.json",
+      "display_name": "Chevrolet Corvette C5-R",
+      "class": "GT1 2005",
+      "manufacturer": "Chevrolet",
+      "model": "Corvette C5-R",
+      "year": {
+        "from": 2004,
+        "to": 2004,
+        "label": "2004 factory endurance specification"
+      },
+      "real_world_identity_notes": "The GTR2 HQ Chevrolet Corvette C5-R lead is best mapped to the existing chevrolet-corvette-c5-r record, using the 2004 factory Corvette Racing endurance specification as the closest exact-season identity. General Motors' 2004 program describes the C5-R's new six-speed Xtrac gearbox, and the GTR2 content is an Excelsior 04108 G2 C5-R implementation. The real car raced in GTS-class competition in 2004; GT1 2005 is retained as the existing database class label for this record's AMS2-era representation. HQ/GTR233 metadata is simulator provenance, not a separate real-world vehicle. Earlier C5-R seasons and privateer conversions can differ in gearbox and cockpit equipment.",
+      "real_world_source_refs": [
+        "gm-archive.corvette-c5r.2003",
+        "gm.corvette-racing.2004-program",
+        "gm.history.corvette-racing.c5r.1999-2004",
+        "national-corvette-museum.c5r-004.cockpit.2025",
+        "raceart.c5r-006.cockpit.2020",
+        "gmauthority.corvette-c5r.history-spec",
+        "gtr2.catalog.corvette-c5r.2004",
+        "as-driven.repository.chevrolet-corvette-c5-r-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The GTR2-era car list identifies the Corvette C5-R as a 2004 car, the supplied internal ID is the original G2/Excelsior C5-R namespace, and General Motors' contemporary 2004 program identifies the factory C5-R and its new six-speed Xtrac gearbox. The exact real-world chassis is not identified by the HQ .CAR token, so the simulator lead is mapped to the existing model/specification record rather than to a new chassis record.",
+      "identity_basis": "The GTR2-era car list identifies the Corvette C5-R as a 2004 car, the supplied internal ID is the original G2/Excelsior C5-R namespace, and General Motors' contemporary 2004 program identifies the factory C5-R and its new six-speed Xtrac gearbox. The exact real-world chassis is not identified by the HQ .CAR token, so the simulator lead is mapped to the existing model/specification record rather than to a new chassis record.",
+      "specification_basis": "The 2004 GM program specifies a new six-speed gearbox, and the archived specification and season summary corroborate six forward ratios. The archived C5-R specification explicitly says sequential-manual transaxle, the season summary identifies the 2004 unit as Xtrac six-speed sequential, and GM confirms the 2004 Xtrac upgrade. The reviewed technical sources explicitly describe the C5-R transmission as sequential-manual/sequential. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_actuation": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2004 factory endurance specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "GTR 2 1.1.0.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/55",
+      "live_source_notes": "Guided-verification observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a by Jason Kinslow; GTR2 1.1.0.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'GAMEDATA/TEAMS/24H/CHEVROLET CORVETTE TEAMS/EXCELSIOR/04108HQ_G2_C5R.CAR', by GTR233 and friends, declared version 16.0.0, gtr2-car-hdc-gear-files sha256 7293efb7ac4e007f9b489262eaa8776d0d9d35b192299db0040c809ca9b267e8. This identifies the installed package, not the real car the record describes.",
+      "driver_summary": "6-speed lever sequential. Use the clutch to pull away. Stay flat on the upshift because the car cuts for you. Blip every downshift yourself. Simulator implementations differ on manual downshift blip; follow the selected game's USE row for those items."
+    }
+  ]
+}

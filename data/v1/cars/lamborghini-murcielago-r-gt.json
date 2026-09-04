@@ -164,6 +164,103 @@
         "basis": "The fingerprinted RSS Lanzo v3 package is an Italian V12 period GT and bundles a 2005 FIA GT REITER Engineering number 13 livery. FIA and REITER sources independently establish the Murcielago competition identity and its six-speed sequential transmission. The AC behavior and cockpit were directly observed."
       },
       "display_name": "GT Lanzo V12"
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Murcielago R-GT"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Murcielago R-GT"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 24725083 via guided verification observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-murcielago-r-gt-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-murcielago-r-gt-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-murcielago-r-gt-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-murcielago-r-gt-controls.24725083"
+          ]
+        }
+      ],
+      "verified_game_version": "24725083",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "pmr.official.gt.murcielago-r-gt.2004",
+        "rmsothebys.murcielago-rgt.2004.chassis-1057",
+        "supercarsnet.lamborghini-attributed.murcielago-rgt.2004",
+        "autoevolution.murcielago-rgt.1057.cockpit-gallery",
+        "carscom.murcielago.2004.road-car-eg-confusion",
+        "as-driven.repository.murcielago-r-gt-record-scan",
+        "pmr.local-live-murcielago-r-gt-controls.24725083"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR's first-party GT listing names Lamborghini Murciélago R-GT in the 2004-05 content grouping. An exact 2004 R-GT chassis record identifies the model, its Reiter/Audi Sport development context, and a Holinger six-speed sequential gearbox. Independent Lamborghini-attributed specifications corroborate the six-speed sequential configuration. The checked-out repository already contains the matching curated record lamborghini-murcielago-r-gt, so this case reuses that identity."
+      }
     }
   ],
   "provenance": {
@@ -278,6 +375,32 @@
         ],
         "confidence": "high",
         "basis": "A repeat guided drive with the expanded wheel-equipment prompts directly inspected an integrated display and shift lights in the AMS2 cockpit. The earlier no-display observation and its derived authentic no are incorrect. The repeat coast-downshift result also makes the simulator's lack of required driver blipping explicit."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "pmr.official.gt.murcielago-r-gt.2004",
+          "rmsothebys.murcielago-rgt.2004.chassis-1057",
+          "supercarsnet.lamborghini-attributed.murcielago-rgt.2004",
+          "autoevolution.murcielago-rgt.1057.cockpit-gallery",
+          "carscom.murcielago.2004.road-car-eg-confusion",
+          "as-driven.repository.murcielago-r-gt-record-scan",
+          "pmr.local-live-murcielago-r-gt-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "PMR's first-party GT listing names Lamborghini Murciélago R-GT in the 2004-05 content grouping. An exact 2004 R-GT chassis record identifies the model, its Reiter/Audi Sport development context, and a Holinger six-speed sequential gearbox. Independent Lamborghini-attributed specifications corroborate the six-speed sequential configuration. The checked-out repository already contains the matching curated record lamborghini-murcielago-r-gt, so this case reuses that identity."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-murcielago-r-gt-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -288,6 +411,6 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-04",
   "driver_summary": "The Lamborghini Murcielago R-GT, which Assetto Corsa lists as GT Lanzo V12. Hollinger M6S six-speed sequential behind a racing clutch, per REITER's technical data. The car cuts the upshift, so stay flat, and blip every downshift yourself."
 }

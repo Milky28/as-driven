@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.44",
+  "approved_at": "2026-09-04",
+  "record_id": "lamborghini-murcielago-r-gt",
+  "simulator": "pmr",
+  "telemetry_name": "Murcielago R-GT",
+  "observed_game_version": "24725083",
+  "observed_through": "SimHub guided verification observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 2004-generation GT1 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GT"
+}

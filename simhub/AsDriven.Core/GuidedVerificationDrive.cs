@@ -824,7 +824,14 @@ namespace AsDriven.Core
                 case Phase.GearCount:
                     _results.ForwardGears = _maximumGear > 0 ? (int?)_maximumGear : null;
                     _results.DirectGearSelection = "not-tested";
-                    MoveTo(Phase.FullThrottleUpshift);
+                    // GTR 2 exposes no usable throttle-input channel through
+                    // SimHub. Skip the comparison it cannot measure and retain
+                    // the lifted attempt only as clutchless-shift evidence;
+                    // FullThrottleUpshift remains not-tested, so import keeps
+                    // throttle-lift technique unknown.
+                    MoveTo(VerificationReviewRules.UpshiftThrottleIsMeasurable(_simulator)
+                        ? Phase.FullThrottleUpshift
+                        : Phase.LiftedUpshift);
                     break;
                 case Phase.FullThrottleUpshift:
                     if (_attemptAccepted)
@@ -1119,6 +1126,11 @@ namespace AsDriven.Core
 
         private string UnmeasurableAutomaticBlipSummary(bool pedalSpike)
         {
+            if (string.Equals(_simulator, "gtr2", StringComparison.Ordinal))
+            {
+                return "GTR 2 publishes no usable throttle input through SimHub, so"
+                    + " automatic blip stays unknown.";
+            }
             string summary = "SimHub's rFactor 2 throttle value is unfiltered driver input,"
                 + " not the filtered engine throttle where the car's own blip appears, so"
                 + " automatic blip stays unknown.";

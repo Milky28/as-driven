@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using AsDriven.Core;
 using Newtonsoft.Json.Linq;
 
@@ -140,6 +141,23 @@ namespace AsDriven.Core.Tests
                     "canonicalises the common abbreviation to rf2");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("rFactor"),
                     "never takes the original rFactor for its sequel");
+                Equal("pmr", AsDrivenDatabase.CanonicalizeSimulator("ProjectMotorRacing"),
+                    "canonicalises SimHub's Project Motor Racing name");
+                Equal("pmr", AsDrivenDatabase.CanonicalizeSimulator("PMR"),
+                    "accepts the Project Motor Racing abbreviation");
+                Equal("gtr2", AsDrivenDatabase.CanonicalizeSimulator("SIMBINGTR2"),
+                    "canonicalises SimHub's legacy GTR 2 plugin name");
+                Equal("gtr2", AsDrivenDatabase.CanonicalizeSimulator("GTR 2 - FIA GT Racing Game"),
+                    "accepts the full GTR 2 product name");
+                False(VerificationReviewRules.UpshiftThrottleIsMeasurable("gtr2"),
+                    "does not ask GTR 2 to distinguish throttle positions it does not publish");
+                False(VerificationReviewRules.AutomaticCutIsMeasurable("gtr2"),
+                    "keeps GTR 2 automatic cut unknown without driver-throttle input");
+                False(VerificationReviewRules.AutomaticBlipIsMeasurable("gtr2"),
+                    "keeps GTR 2 automatic blip unknown without a usable throttle trace");
+                TestGtr2VehicleIdentity();
+                True(VerificationReviewRules.UpshiftThrottleIsMeasurable("pmr"),
+                    "keeps the PMR throttle comparison its telemetry answered");
                 // Its first drive reported no engine torque and this said the
                 // cut was unmeasurable there. A Radical SR3 in the same
                 // simulator then produced a shift-local torque interruption, so
@@ -163,11 +181,10 @@ namespace AsDriven.Core.Tests
                 Equal("acc", AsDrivenDatabase.CanonicalizeSimulator("Assetto Corsa Competizione"),
                     "recognizes the product spelling of Competizione");
 
-                // Until one record names it, a recognized game is still reported
-                // as uncovered - that message is for the driver and does not
-                // change. What changes is that its car identities are written to
-                // the local diagnostics log anyway, because otherwise there is no
-                // way to learn the identities the first record needs.
+                // Until one record names it, a recognized game presents its live
+                // car as an unmatched contribution candidate. That is distinct
+                // from coverage: the supported list below still contains only
+                // simulators with curated guidance.
                 // Assetto Corsa EVO now carries a curated record, so the car it
                 // was driven in resolves. The name is its own: AMS2 calls the
                 // same car "Lamborghini Huracan Super Trofeo EVO2", and both
@@ -190,11 +207,17 @@ namespace AsDriven.Core.Tests
                     "does not inherit AMS2's automatic-cut result into ACC");
                 True(accAudi.UpshiftGuidance.Contains("Automatic cut unknown"),
                     "shows the ACC automatic-cut gap in detailed guidance");
-                // Recognized, and carrying no records at all: the driver is told
-                // the game is not covered rather than that every car is missing.
-                Equal("unsupported-game",
+                // Recognized, and carrying no records at all: its first live car
+                // must reach the same contribution workflow as any missing car.
+                Equal("unmatched",
                     database.Match("iRacing", "Any Car").MatchStatus,
-                    "reports a recognized game with no records as not yet covered");
+                    "offers a recognized zero-coverage game as a contribution");
+                Equal("matched",
+                    database.Match("SIMBINGTR2", "HQ BMW M3 GTR").MatchStatus,
+                    "matches GTR2's first curated exact car");
+                Equal("unmatched",
+                    database.Match("SIMBINGTR2", "HQ Unknown Car").MatchStatus,
+                    "still offers an unknown GTR2 car through the contribution popup");
 
                 // A record declares the aero packages it covers and the database
                 // expands them into one exact key each. Every configuration of a
@@ -1039,8 +1062,7 @@ namespace AsDriven.Core.Tests
                 // The supported list is what the settings page shows before a
                 // game is started, so it must come from the loaded records. A
                 // simulator the matcher knows by name but has no data for is
-                // not supported, and must say so instead of reporting every car
-                // as unmatched.
+                // recognized for contribution but is not advertised as covered.
                 True(database.Simulators.Length > 0, "reports at least one supported simulator");
                 foreach (SimulatorCoverage coverage in database.Simulators)
                 {
@@ -1074,9 +1096,11 @@ namespace AsDriven.Core.Tests
                 False(database.Supports("Other Simulator"), "does not support an unknown game");
                 False(database.Supports("iRacing"),
                     "a recognized name without records is not supported");
-                Equal("unsupported-game",
+                True(database.Supports("SIMBINGTR2"),
+                    "supports GTR2 once its first records are curated");
+                Equal("unmatched",
                     database.Match("iRacing", "Dallara F301").MatchStatus,
-                    "a recognized game with no records reports unsupported, never unmatched");
+                    "a recognized game with no records offers its car for contribution");
 
                 var session = new SessionState(database);
                 True(session.Update(true, "Automobilista2", "Dallara F301"), "detects first identity");
@@ -1452,6 +1476,24 @@ namespace AsDriven.Core.Tests
                         rfactor2.Next();
                         Equal("unknown", rfactor2.GetResults().AutomaticBlip,
                             "preserves unknown for rFactor 2 automatic blip");
+                    }
+
+                    // GTR 2 publishes no usable driver-throttle input. Starting
+                    // its running-shift check at the full-throttle phase would
+                    // turn a missing channel into a failed attempt and then a
+                    // false required-lift conclusion. It goes directly to the
+                    // clutchless lifted attempt, leaving the comparison unset.
+                    {
+                        GuidedVerificationDrive gtr2 = new GuidedVerificationDrive();
+                        gtr2.Start(6, "gtr2");
+                        gtr2.Skip();
+                        gtr2.AddSample(GuidedSample(now, 6, 0, 0, 5000, 100, 0, true));
+                        gtr2.Next();
+                        gtr2.Next();
+                        Equal("Lifted-throttle upshift", gtr2.GetSnapshot().Title,
+                            "skips the impossible GTR 2 full-throttle comparison");
+                        Equal("not-tested", gtr2.GetResults().FullThrottleUpshift,
+                            "preserves the unmeasured GTR 2 throttle result");
                     }
 
                     // Rev-matching does not stop at the gear change. The driver
@@ -2148,6 +2190,91 @@ namespace AsDriven.Core.Tests
             {
                 Console.Error.WriteLine("FAIL: " + exception.Message);
                 return 1;
+            }
+        }
+
+        private static void TestGtr2VehicleIdentity()
+        {
+            string root = Path.Combine(
+                Path.GetTempPath(), "AsDrivenGtr2Identity-" + Guid.NewGuid().ToString("N"));
+            string team = Path.Combine(
+                root, "GameData", "Teams", "24H", "BMW M3GTR Teams", "BMW Motorsport");
+            string physics = Path.GetDirectoryName(team);
+            string profile = Path.Combine(root, "UserData", "Driver", "Driver.PLR");
+            string relativeCar = @"GAMEDATA\TEAMS\24H\BMW M3GTR Teams\BMW Motorsport\04142HQ_G2_BMW_M3GTR.car";
+            try
+            {
+                Directory.CreateDirectory(team);
+                Directory.CreateDirectory(Path.GetDirectoryName(profile));
+                File.WriteAllText(
+                    Path.Combine(team, "04142HQ_G2_BMW_M3GTR.car"),
+                    "HDVehicle=HQM3GTR.hdc\nDescription=\"HQ BMW M3 GTR\"\n");
+                File.WriteAllText(
+                    Path.Combine(physics, "HQM3GTR.hdc"),
+                    "SemiAutomatic=1\nGearFile=HQM3GTR.grb\nForwardGears=6\n");
+                File.WriteAllText(Path.Combine(physics, "HQM3GTR.grb"), "[GEAR_RATIOS]\nratio=(1.0,1)\n");
+                File.WriteAllText(
+                    profile,
+                    "Profile Vehicle File=\"ignored.car\"\nVehicle File=\"" + relativeCar + "\"\n");
+                File.WriteAllText(
+                    Path.Combine(root, "_GTR2_HQ_Anniversary_PATCH_README.txt"),
+                    "Last Changelog\nv16.0.0 (MAJOR UPDATE)\n");
+
+                Gtr2VehicleIdentity identity = Gtr2VehicleIdentity.Resolve(root);
+                True(identity != null, "resolves GTR2's active Vehicle File rather than SimHub's DC token");
+                Equal("HQ BMW M3 GTR", identity.TelemetryName,
+                    "uses the selected .CAR description as the stable GTR2 name");
+                Equal(relativeCar.Replace('\\', '/'), identity.InternalId,
+                    "keeps the install-independent .CAR path as the exact internal id");
+                True(identity.Implementation != null,
+                    "fingerprints the selected GTR2 car and physics");
+                Equal("16.0.0", identity.Implementation.DeclaredVersion,
+                    "records the installed HQ Anniversary Patch version");
+                Equal("gtr2-car-hdc-gear-files", identity.Implementation.Scope,
+                    "states which GTR2 files the fingerprint covers");
+                Equal(64, identity.Implementation.Digest.Length,
+                    "writes a complete SHA-256 implementation digest");
+
+                string liveRelativeCar = @"GAMEDATA\TEAMS\24H\BMW M3GTR Teams\BMW Motorsport\04108HQ_G2_C5R.car";
+                File.WriteAllText(
+                    Path.Combine(team, "04108HQ_G2_C5R.car"),
+                    "HDVehicle=HQM3GTR.hdc\nDescription=\"HQ Chevrolet Corvette C5-R\"\n");
+                var header = new List<byte>(new byte[12]);
+                foreach (string value in new[]
+                {
+                    "Driver", "HQ Chevrolet Corvette C5-R", liveRelativeCar, "HQ4Spa"
+                })
+                {
+                    header.AddRange(Encoding.ASCII.GetBytes(value));
+                    header.Add(0);
+                }
+                string sessionPath = Path.Combine(root, "UserData", "vehicledata.spt");
+                File.WriteAllBytes(sessionPath, header.ToArray());
+                DateTime sessionStartedUtc = DateTime.UtcNow.AddMinutes(-1);
+                File.SetLastWriteTimeUtc(sessionPath, DateTime.UtcNow);
+
+                Gtr2VehicleIdentity live = Gtr2VehicleIdentity.Resolve(root, sessionStartedUtc);
+                Equal("HQ Chevrolet Corvette C5-R", live.TelemetryName,
+                    "prefers the exact car in GTR2's current telemetry-session header");
+                Equal(liveRelativeCar.Replace('\\', '/'), live.InternalId,
+                    "uses the live .CAR path rather than a previous profile selection");
+
+                File.SetLastWriteTimeUtc(sessionPath, sessionStartedUtc.AddMinutes(-1));
+                Equal(null, Gtr2VehicleIdentity.Resolve(root, sessionStartedUtc),
+                    "does not mislabel a live drive from a stale session or profile");
+
+                string firstDigest = identity.Implementation.Digest;
+                File.AppendAllText(Path.Combine(physics, "HQM3GTR.hdc"), "DownshiftBlipThrottle=0.63\n");
+                Gtr2VehicleIdentity changed = Gtr2VehicleIdentity.Resolve(root);
+                True(changed != null && changed.Implementation.Digest != firstDigest,
+                    "changes the fingerprint when the selected car's physics changes");
+            }
+            finally
+            {
+                if (Directory.Exists(root))
+                {
+                    Directory.Delete(root, true);
+                }
             }
         }
 

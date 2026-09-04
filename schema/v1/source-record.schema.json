@@ -130,7 +130,8 @@
                     "type": "string",
                     "enum": [
                       "data-acd",
-                      "loose-data-directory"
+                      "loose-data-directory",
+                      "gtr2-car-hdc-gear-files"
                     ]
                   },
                   "algorithm": {

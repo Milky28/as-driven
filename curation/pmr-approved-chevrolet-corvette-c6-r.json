@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.42",
+  "approved_at": "2026-09-04",
+  "record_id": "chevrolet-corvette-c6-r",
+  "simulator": "pmr",
+  "telemetry_name": "Corvette C6.R",
+  "observed_game_version": "24725083",
+  "observed_through": "SimHub guided verification observation pmr.corvette-c6-r.20260903t225920678z-9bdc04e7",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "unknown",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2005 factory GT1 C6.R introduction specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GT",
+  "staged_record_id": "corvette-c6-r"
+}

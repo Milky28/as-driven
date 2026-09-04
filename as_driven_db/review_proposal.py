@@ -9,7 +9,12 @@ import tempfile
 from typing import Any
 
 from .site import simulator_label
-from .promote_observation import _behavior_changes, promote_observations
+from .promote_observation import (
+    _apply_entry_game_version_correction,
+    _behavior_changes,
+    _source_id_token,
+    promote_observations,
+)
 from .research_handoff import (
     ResearchHandoffError,
     _read_json,
@@ -61,6 +66,53 @@ def _flatten(document: Any, prefix: str = "") -> dict[str, Any]:
     else:
         values[prefix] = document
     return values
+
+
+def _existing_authentic_control_decisions(
+    existing_record: dict[str, Any],
+    real_controls: dict[str, Any],
+    result: dict[str, Any],
+) -> tuple[list[str], list[dict[str, Any]], dict[str, Any]]:
+    """Make sourced changes to an existing real-car baseline explicit."""
+    existing_controls = existing_record["authentic_controls"]
+    existing_values = _flatten(existing_controls, "/authentic_controls")
+    reviewed_values = _flatten(real_controls, "/authentic_controls")
+    accepted: list[str] = []
+    corrections: list[dict[str, Any]] = []
+    effective = copy.deepcopy(existing_controls)
+    for claim in result.get("claims", []):
+        path = str(claim.get("path") or "")
+        if (
+            claim.get("finding") != "established"
+            or not path.startswith("/authentic_controls/")
+            or path not in reviewed_values
+        ):
+            continue
+        reviewed = reviewed_values[path]
+        current = existing_values.get(path)
+        current_established = current is not None and current != "unknown"
+        reviewed_established = reviewed is not None and reviewed != "unknown"
+        if not reviewed_established or current == reviewed:
+            continue
+        if current_established:
+            corrections.append(
+                {
+                    "path": path,
+                    "from": copy.deepcopy(current),
+                    "to": copy.deepcopy(reviewed),
+                    "basis": claim["basis"],
+                    "source_refs": list(claim["source_refs"]),
+                    "confidence": claim["confidence"],
+                }
+            )
+        else:
+            accepted.append(path)
+        _set_pointer(
+            effective,
+            path.removeprefix("/authentic_controls"),
+            reviewed,
+        )
+    return sorted(accepted), corrections, effective
 
 
 def _ordinary_punctuation(value: str) -> str:
@@ -396,6 +448,20 @@ def _proposal_summary(
     same_simulator_section = ""
     driver_summary = entry.get("driver_summary")
     driver_summary_section = ""
+    authentic_corrections_section = ""
+    if entry.get("authentic_control_corrections"):
+        authentic_corrections_section = """
+## Deliberate real-car baseline corrections
+
+```json
+%s
+```
+
+These changes come from the cited independent real-car sources, not from the
+new simulator drive. Confirm each before promotion.
+""" % json.dumps(
+            entry["authentic_control_corrections"], indent=2, ensure_ascii=False
+        )
     if driver_summary:
         driver_summary_section = f"""
 ## Driver summary
@@ -458,6 +524,7 @@ No curated files have been changed. This proposal was dry-run through the real p
 {json.dumps(simulator_entry['overrides'], indent=2, ensure_ascii=False)}
 ```
 {same_simulator_section}
+{authentic_corrections_section}
 {driver_summary_section}
 
 ## Reviewed sources
@@ -762,6 +829,15 @@ def _write_review_proposal(
         "source-record.schema.json",
         "candidate source proposal",
     )
+    _preserve_accept_from_drive(case_directory, manifest)
+    manifest_entry = manifest["records"][0]
+    if correction := manifest_entry.get("game_version_correction"):
+        old_source_id = staged["source"]["source_id"]
+        prefix = old_source_id.rsplit(".", 1)[0]
+        new_source_id = f"{prefix}.{_source_id_token(str(correction['verified']))}"
+        manifest["records"][0] = _apply_entry_game_version_correction(
+            manifest_entry, old_source_id, new_source_id
+        )
     manifest_path = case_directory / "review-manifest.proposed.json"
     sources_path = case_directory / "sources.proposed.json"
     _write_json(manifest_path, manifest)
@@ -823,6 +899,61 @@ def _write_review_proposal(
     }
 
 
+def _preserve_accept_from_drive(
+    case_directory: Path, manifest: dict[str, Any]
+) -> None:
+    """Retain explicit reviewer decisions when regenerating a proposal.
+
+    ``prepare-review`` rebuilds the proposal from the research result, but
+    ``accept_from_drive`` is a deliberate maintainer choice made after that
+    generation step. Dropping it on regeneration causes the promotion dry run
+    to rediscover the same unknown-to-established gap and ask the same
+    question again. Stale pointers are intentionally retained so the normal
+    promotion gate can reject them rather than silently accepting a changed
+    proposal.
+    """
+    previous_path = case_directory / "review-manifest.proposed.json"
+    if not previous_path.is_file():
+        return
+    previous = _read_json(previous_path, "previous review manifest")
+    previous_records = previous.get("records")
+    current_records = manifest.get("records")
+    if not isinstance(previous_records, list) or not isinstance(current_records, list):
+        return
+    if not current_records or not isinstance(current_records[0], dict):
+        return
+    record_id = current_records[0].get("record_id")
+    previous_entry = next(
+        (
+            entry
+            for entry in previous_records
+            if isinstance(entry, dict) and entry.get("record_id") == record_id
+        ),
+        None,
+    )
+    if previous_entry is None:
+        return
+    if "accept_from_drive" in previous_entry:
+        accepted = previous_entry["accept_from_drive"]
+        if not isinstance(accepted, list) or not all(
+            isinstance(pointer, str) for pointer in accepted
+        ):
+            raise ResearchHandoffError(
+                "previous review manifest has an invalid accept_from_drive list"
+            )
+        generated = current_records[0].get("accept_from_drive") or []
+        current_records[0]["accept_from_drive"] = list(
+            dict.fromkeys([*generated, *copy.deepcopy(accepted)])
+        )
+    if "game_version_correction" in previous_entry:
+        correction = previous_entry["game_version_correction"]
+        if not isinstance(correction, dict) or not correction:
+            raise ResearchHandoffError(
+                "previous review manifest has an invalid game_version_correction"
+            )
+        current_records[0]["game_version_correction"] = copy.deepcopy(correction)
+
+
 def _existing_record(root: Path, record_id: str) -> dict[str, Any] | None:
     path = root / "data" / "v1" / "cars" / f"{record_id}.json"
     return _read_json(path, "curated record") if path.is_file() else None
@@ -867,6 +998,12 @@ def _same_simulator_disposition(
     )
     if shift_actuation:
         replacement["behavior"]["shift_type"] = shift_actuation
+    for override in replacement["overrides"]:
+        if (
+            override.get("path")
+            == "/authentic_controls/transmission/shift_actuation"
+        ):
+            replacement["behavior"]["shift_type"] = override.get("value")
     changes = _behavior_changes(current_entries[0], replacement)
     observation_id = staged.get("observation_id", "the repeat guided drive")
 
@@ -1195,11 +1332,20 @@ def prepare_review_proposal(
     # An existing record owns the real-car baseline. Compare the new simulator
     # drive with that baseline, not with a less-informed research draft, or the
     # proposal manufactures redundant overrides for values already curated.
-    simulator_baseline = (
-        existing_record["authentic_controls"]
-        if identity["record_action"] == "use-existing" and existing_record is not None
-        else real_controls
-    )
+    accepted_real_control_paths: list[str] = []
+    authentic_control_corrections: list[dict[str, Any]] = []
+    if identity["record_action"] == "use-existing" and existing_record is not None:
+        (
+            accepted_real_control_paths,
+            authentic_control_corrections,
+            simulator_baseline,
+        ) = _existing_authentic_control_decisions(
+            existing_record,
+            real_controls,
+            result,
+        )
+    else:
+        simulator_baseline = real_controls
     simulator_overrides = _simulator_overrides(
         staged_controls, simulator_baseline, staged
     )
@@ -1288,6 +1434,12 @@ def prepare_review_proposal(
         "live_source_url": case["issue"]["url"],
         "live_source_notes": staged["source"]["notes"],
     }
+    if accepted_real_control_paths:
+        manifest_entry["accept_from_drive"] = accepted_real_control_paths
+    if authentic_control_corrections:
+        manifest_entry["authentic_control_corrections"] = (
+            authentic_control_corrections
+        )
     staged_record_id = staged["record"]["record_id"]
     if (
         identity["record_action"] == "create-new"
@@ -1330,8 +1482,18 @@ def generate_driver_summary_proposal(
     root: Path,
     cases_directory: Path,
     issue_number: int,
+    *,
+    driver_summary: str | None = None,
+    preserve_existing: bool = False,
 ) -> dict[str, Any]:
-    """Generate and dry-run a record-wide summary inside a review proposal."""
+    """Set and dry-run a record-wide summary inside a review proposal.
+
+    With no supplied text this generates a fresh conservative draft. The
+    workbench uses ``preserve_existing`` immediately after proposal preparation
+    so an established record keeps its already-reviewed prose, while a new car
+    receives a generated draft. Supplying text is the editing path; it is
+    normalized to the single paragraph required by the overlay.
+    """
     root = root.resolve()
     case_directory = cases_directory / f"issue-{issue_number}"
     case = _read_json(case_directory / "case.json", "review case")
@@ -1368,7 +1530,19 @@ def generate_driver_summary_proposal(
         case_directory / artifacts["preview_record"], "preview record"
     )
 
-    summary, disagreements = generate_driver_summary(current_preview)
+    generated_summary, disagreements = generate_driver_summary(current_preview)
+    existing_summary = manifest["records"][0].get("driver_summary")
+    if driver_summary is not None:
+        summary = " ".join(str(driver_summary).split())
+        if not summary:
+            raise ResearchHandoffError("driver summary must not be blank")
+        summary_status = "edited"
+    elif preserve_existing and str(existing_summary or "").strip():
+        summary = " ".join(str(existing_summary).split())
+        summary_status = "preserved"
+    else:
+        summary = generated_summary
+        summary_status = "generated"
     manifest["records"][0]["driver_summary"] = summary
     candidate_sources = sources_proposal.get("sources") or []
     preview_record, preview_approval, preview_live_source = _dry_run_review_proposal(
@@ -1395,9 +1569,9 @@ def generate_driver_summary_proposal(
     )
     summary_artifact_path = case_directory / "driver-summary.md"
     summary_artifact_path.write_text(
-        f"""# Generated driver summary: issue #{issue_number}
+        f"""# Driver summary review: issue #{issue_number}
 
-## Draft
+## {summary_status.capitalize()} text
 
 > {summary}
 
@@ -1415,8 +1589,8 @@ This text is now in the proposed manifest and the regenerated preview record. Re
     case["artifacts"]["driver_summary"] = summary_artifact_path.name
     proposal = case.setdefault("review_proposal", {})
     proposal["driver_summary"] = {
-        "status": "generated",
-        "generated_at": _now(),
+        "status": summary_status,
+        "updated_at": _now(),
         "simulator_disagreements": disagreements,
     }
     proposal["dry_run"] = "passed"
@@ -1426,6 +1600,7 @@ This text is now in the proposed manifest and the regenerated preview record. Re
         "issue": issue_number,
         "state": case["state"],
         "summary": summary,
+        "summary_status": summary_status,
         "artifact": str(summary_artifact_path),
         "preview_record": str(case_directory / artifacts["preview_record"]),
         "dry_run": "passed",

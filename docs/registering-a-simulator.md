@@ -65,8 +65,8 @@ string the canonicaliser will have to accept.
 
 A simulator id is permanent and appears in source ids, so choose it once and
 choose it plainly. The set is a mix of abbreviation and product name: `ams2`,
-`ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`, `rfactor2`. Prefer a name a reader
-can decode without a glossary.
+`ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`, `rfactor2`, `pmr`,
+`gtr2`. Prefer a name a reader can decode without a glossary.
 
 Then add it in each of these places. The list is short by design, and a test
 holds every one of them:
@@ -80,10 +80,12 @@ holds every one of them:
 6. `simhub/AsDriven.Core/VerificationObservation.cs` - the writer's whitelist.
 7. `simhub/AsDriven.Core/AsDrivenDatabase.cs` - `CanonicalizeSimulator`, and the
    three name maps.
-8. `simhub/AsDriven.Plugin/AsDriven.cs` - the display name.
+8. `simhub/AsDriven.Plugin/AsDriven.cs` - the display name, executable lookup,
+   and exact-version strategy.
 9. `simhub/AsDriven.Core/VerificationReviewRules.cs` - whether its telemetry can
-   settle an automatic cut, and whether its gearbox refuses a downshift it should
-   refuse. See below.
+   settle throttle-dependent questions, and whether its gearbox refuses a
+   downshift it should refuse. See below.
+10. `as_driven_db/release_finalize.py` - the generated release-table name.
 
 Accept every spelling a person might reasonably supply, as the Assetto Corsa and
 RaceRoom entries do, and compare each one whole. Prefix matching would let one
@@ -96,11 +98,15 @@ settle `automatic_cut`. The test reads engine torque, because the cut is
 ignition-side, so a simulator that does not publish torque through SimHub can
 never answer it however many times the car is driven.
 
-AC, ACC and RaceRoom do not publish it. An unregistered simulator is treated the
-same way, because nothing is known about what it publishes. That is the safe
-direction: a review that fails to ask for a measurable cut costs one value,
-where a review that demands an unmeasurable one sends a contributor back to the
-car forever.
+AC, ACC and RaceRoom do not publish it. GTR2's SimHub feed also publishes no
+usable throttle input, so it cannot establish either sustained driver demand
+for an automatic-cut test or an automatic downshift blip. Its guided flow skips
+the full-throttle comparison, and the importer degrades those dependent fields
+to `unknown` even for an older draft. An unregistered simulator is treated as
+unmeasurable too, because nothing is known about what it publishes. That is the
+safe direction: a review that fails to ask for a measurable value costs one
+value, where a review that demands an unmeasurable one sends a contributor back
+to the car forever.
 
 When registering a simulator, drive one car and read the draft's method text.
 It reports what it found rather than what it assumed:
@@ -130,6 +136,24 @@ the change" without needing one.
 unmeasurable on every count, because nothing is known about it. A registered one
 is trusted until a drive shows otherwise, which is why the first drive is worth
 reading carefully rather than promoting.
+
+## Exact versions and the first PMR/GTR2 drives
+
+Project Motor Racing is registered as `pmr` from SimHub's
+`ProjectMotorRacing` name. Its executable reports the GIANTS engine version,
+not a useful game-content version, so the client reads Steam app 299970's build
+id instead. The first reviewed drive is pinned to build 24725083.
+
+GTR2 is registered as `gtr2` from SimHub's `SIMBINGTR2` name. Its executable
+file version is useful and the first draft was pinned to 1.1.0.0. SimHub's
+`DC__<timestamp>` car token is not a stable identity, so the client instead
+reads the exact `.CAR` path from the current process's fresh
+`UserData/vehicledata.spt` header and resolves the name from that file's
+`Description`. The relative `.CAR` path is the internal id. The implementation
+fingerprint covers that `.CAR`, its selected `.HDC`, and its selected gearbox
+file; the HQ Anniversary Patch version is recorded when its readme is present.
+If the session file is stale or unavailable, the generated token remains and
+must not be mapped or promoted by inference.
 
 ## What registering does not do
 

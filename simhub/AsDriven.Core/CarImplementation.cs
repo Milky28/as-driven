@@ -81,6 +81,153 @@ namespace AsDriven.Core
         }
 
         /// <summary>
+        /// Fingerprint the exact GTR2 .CAR definition and the physics files it
+        /// selects. This separates stock content from installations such as the
+        /// HQ Anniversary Patch even though every executable still reports
+        /// version 1.1.0.0.
+        /// </summary>
+        public static CarImplementation ForGtr2(string gameRoot, string vehicleFile)
+        {
+            string carPath;
+            if (string.IsNullOrWhiteSpace(gameRoot)
+                || string.IsNullOrWhiteSpace(vehicleFile)
+                || !Gtr2VehicleIdentity.TryResolveInside(gameRoot, vehicleFile, out carPath)
+                || !File.Exists(carPath))
+            {
+                return null;
+            }
+
+            var files = new List<string> { carPath };
+            string hdcName = Gtr2VehicleIdentity.ReadAssignment(carPath, "HDVehicle");
+            string hdcPath = FindDependency(gameRoot, Path.GetDirectoryName(carPath), hdcName);
+            if (hdcPath != null)
+            {
+                files.Add(hdcPath);
+                string gearName = Gtr2VehicleIdentity.ReadAssignment(hdcPath, "GearFile");
+                string gearPath = FindDependency(gameRoot, Path.GetDirectoryName(hdcPath), gearName);
+                if (gearPath != null)
+                {
+                    files.Add(gearPath);
+                }
+            }
+
+            string digest = DigestFiles(gameRoot, files);
+            if (digest == null)
+            {
+                return null;
+            }
+            string version = ReadGtr2PatchVersion(gameRoot);
+            string author = version == null ? null : "GTR233 and friends";
+            return new CarImplementation(
+                vehicleFile.Replace('\\', '/'),
+                author,
+                version,
+                "gtr2-car-hdc-gear-files",
+                digest);
+        }
+
+        private static string FindDependency(
+            string gameRoot, string startingDirectory, string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return null;
+            }
+            string root;
+            try
+            {
+                root = Path.GetFullPath(gameRoot).TrimEnd(Path.DirectorySeparatorChar);
+            }
+            catch
+            {
+                return null;
+            }
+            string directory = startingDirectory;
+            while (!string.IsNullOrEmpty(directory)
+                && (string.Equals(directory, root, StringComparison.OrdinalIgnoreCase)
+                    || directory.StartsWith(
+                        root + Path.DirectorySeparatorChar,
+                        StringComparison.OrdinalIgnoreCase)))
+            {
+                string candidate = Path.Combine(directory, fileName);
+                if (File.Exists(candidate))
+                {
+                    return candidate;
+                }
+                if (string.Equals(directory, root, StringComparison.OrdinalIgnoreCase))
+                {
+                    break;
+                }
+                directory = Path.GetDirectoryName(directory);
+            }
+            return null;
+        }
+
+        private static string DigestFiles(string root, List<string> files)
+        {
+            try
+            {
+                files.Sort(StringComparer.OrdinalIgnoreCase);
+                string fullRoot = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar);
+                using (var sha = SHA256.Create())
+                {
+                    foreach (string file in files)
+                    {
+                        string relative = file.Substring(fullRoot.Length)
+                            .TrimStart('\\', '/')
+                            .Replace('\\', '/')
+                            .ToLowerInvariant();
+                        byte[] name = Encoding.UTF8.GetBytes(relative + "\n");
+                        sha.TransformBlock(name, 0, name.Length, name, 0);
+                        byte[] contents = File.ReadAllBytes(file);
+                        sha.TransformBlock(contents, 0, contents.Length, contents, 0);
+                    }
+                    sha.TransformFinalBlock(new byte[0], 0, 0);
+                    return ToHex(sha.Hash);
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static string ReadGtr2PatchVersion(string gameRoot)
+        {
+            string readme = Path.Combine(gameRoot, "_GTR2_HQ_Anniversary_PATCH_README.txt");
+            string[] lines;
+            try
+            {
+                lines = File.Exists(readme) ? File.ReadAllLines(readme) : new string[0];
+            }
+            catch
+            {
+                return null;
+            }
+            foreach (string sourceLine in lines)
+            {
+                string line = (sourceLine ?? string.Empty).Trim();
+                if (line.Length < 2 || (line[0] != 'v' && line[0] != 'V')
+                    || !char.IsDigit(line[1]))
+                {
+                    continue;
+                }
+                int end = 1;
+                while (end < line.Length
+                    && (char.IsDigit(line[end]) || line[end] == '.'))
+                {
+                    end++;
+                }
+                string version = line.Substring(1, end - 1).TrimEnd('.');
+                if (version.Length > 0)
+                {
+                    return version;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
         /// The content\cars directory, without asking SimHub for it: its SDK
         /// exposes no game install path, and guessing at an internal one would
         /// break silently on an update. An explicit environment variable wins, as

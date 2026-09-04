@@ -29,18 +29,19 @@ Count: 6.
 
 ## 1b. One car recorded under more than one shape across simulators
 
-A record is one real car, so its simulator entries describe one rim. These four
+A record is one real car, so its simulator entries describe one rim. These five
 disagree about it. That is worth separating from the family splits below: those
 compare different cars, while these compare the same car seen twice.
 
 | Record | Recorded as | Authentic |
 | --- | --- | --- |
+| `bmw-m3-e46-gtr` | round (ams2), d-shaped (pmr) | round, provisional |
 | `nissan-gt-r-nismo-gt3` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `nissan-r390-gt1` | round (ams2), d-shaped (ac) | unknown |
 | `porsche-911-gt3-r` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `saleen-s7-r-gt1` | round (ams2, ac), d-shaped (raceroom) | round |
 
-Count: 4.
+Count: 5.
 
 The vocabulary was defined on 2026-08-16. These splits first surfaced as older
 readings against newer ones, but three were deliberately rechecked on
@@ -48,6 +49,7 @@ readings against newer ones, but three were deliberately rechecked on
 
 | Record | Older reading | Newer reading |
 | --- | --- | --- |
+| `bmw-m3-e46-gtr` | ams2 round, 2026-08-11 | pmr d-shaped, 2026-09-03 |
 | `nissan-gt-r-nismo-gt3` | ams2 round, 2026-08-13 | ams2 d-shaped, 2026-08-27; acc gt-formula, 2026-08-23 |
 | `porsche-911-gt3-r` | ams2 d-shaped, 2026-08-13 | ams2 d-shaped confirmed, 2026-08-27; acc gt-formula, 2026-08-23 |
 | `nissan-r390-gt1` | ams2 round, 2026-08-13 | ams2 round confirmed, 2026-08-27; ac d-shaped, 2026-08-22 |
@@ -65,6 +67,12 @@ high confidence, and their post-definition ACC observations agree with it. The
 repeat AMS2 drives retained conventional D-shaped classifications, so those are
 now explicit simulator departures rather than unresolved vocabulary drift.
 
+`bmw-m3-e46-gtr` has a verified PMR D-shaped reading against the existing AMS2
+round reading. The authentic round answer currently comes from simulator
+cockpit inspection rather than manufacturer or homologation material, so the
+PMR departure is provisional and remains on this worklist until an exact real
+P60 cockpit source settles it.
+
 `nissan-r390-gt1` still has the same split without the anchor. The repeat AMS2
 drive confirmed its round reading, but the real rim is unknown, so neither
 simulator can yet be judged against an authentic photograph.
@@ -75,9 +83,9 @@ Research found a restored early S7-R cockpit with a near-circular rim and a
 distinct 2005 second-series car, without an exact period cockpit source that
 connects the two. The exact 2005 wheel therefore remains unknown.
 
-**207 rim observations across the dataset predate the vocabulary**, against 100
-after it, so this is a sample of a much larger drift rather than four odd
-records. These four surfaced because a second simulator happened to look at the
+**203 rim observations across the dataset predate the vocabulary**, against 116
+after it, so this is a sample of a much larger drift rather than five odd
+records. These five surfaced because a second simulator happened to look at the
 same car later; the rest have never been contradicted because nobody looked
 twice.
 

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.45",
+  "approved_at": "2026-09-04",
+  "record_id": "aston-martin-dbr9",
+  "simulator": "pmr",
+  "telemetry_name": "DBR9",
+  "observed_game_version": "24725083",
+  "observed_through": "SimHub guided verification observation pmr.dbr9.20260903t224453893z-63012abd",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2005-generation GT1 race specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GT",
+  "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '24725083': The installed Project Motor Racing Steam app manifest for app 299970 records build 24725083 and LastUpdated 2026-08-31T17:26:06Z, before the DBR9 observation at 2026-09-03T22:44:53.893Z. Its LastPlayed timestamp is 2026-09-04T05:37:17Z, after the drive, so the manifest spans the observation without an intervening installed-build change.",
+  "game_version_correction": {
+    "observed": "unknown",
+    "verified": "24725083",
+    "basis": "The installed Project Motor Racing Steam app manifest for app 299970 records build 24725083 and LastUpdated 2026-08-31T17:26:06Z, before the DBR9 observation at 2026-09-03T22:44:53.893Z. Its LastPlayed timestamp is 2026-09-04T05:37:17Z, after the drive, so the manifest spans the observation without an intervening installed-build change."
+  }
+}

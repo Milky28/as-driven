@@ -1,24 +1,24 @@
 # Control archetypes
 
-**Status: 251 of 279 records are classified** - 179 matches, 46 deviations, 15 undetermined, 11 with no archetype, and 28 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
+**Status: 251 of 282 records are classified** - 178 matches, 47 deviations, 15 undetermined, 11 with no archetype, and 31 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
 the rules below while identifying records that still await classification.
 
 ## The observation
 
-Across the 279 curated records there are **80 distinct transmission blocks**.
+Across the 282 curated records there are **85 distinct transmission blocks**.
 Nine records in ten restate a pattern that already exists elsewhere in the
 dataset. The four largest compatible families alone cover 91 records:
 
 | Records | Mechanism |
 | --- | --- |
-| 37 | 6-speed sequential stick, clutch to pull away, lift-free upshift with cut, blip every downshift |
+| 36 | 6-speed sequential stick, clutch to pull away, lift-free upshift with cut, blip every downshift |
 | 23 | 6-speed paddles, no clutch to pull away, automatic cut and blip |
 | 16 | 6-speed paddles, clutch to pull away, automatic cut and blip |
 | 15 | 5-speed standard H-pattern, clutch to pull away, lift on upshift, optional blip |
 
-Only 39 records are one of a kind.
+Only 44 records are one of a kind.
 
 The GT3 records `audi-r8-lms-gt3`, `mclaren-720s-gt3-evo`,
 `lamborghini-huracan-gt3-evo2` and `aston-martin-vantage-gt3-evo` share the same
@@ -66,7 +66,7 @@ gears from a road-car dual-clutch (`audi-r8-lms-gt4`, `bmw-m4-gt4`,
 not. A `gt4` archetype would be wrong for two thirds of the class depending on
 which field you asked about.
 
-The relationship runs the other way too. The 37-record cluster above spans CART,
+The relationship runs the other way too. The 36-record cluster above spans CART,
 GT1 2005, IndyCar, GT2 2005, GT1 and GTR 2004. Every cluster crosses classes and
 every class crosses clusters. **Class predicts the archetype badly enough that
 naming one after the other would import an error the dataset can already
@@ -227,7 +227,7 @@ field blocks all of them.
 **A one-field difference is a deviation, not a failure to classify.** This was
 got wrong once already: the nine unregistered blocks were first treated as
 `no-archetype`, when eight of them sit one field from a registered archetype and
-the ninth sits two. `milano-gt55` is the clearest case - it is the 37-record
+the ninth sits two. `milano-gt55` is the clearest case - it is the 36-record
 stick archetype plus the clutch on downshifts, which is the only such record in
 the dataset and is exactly the research finding the classification should make
 prominent. `no-archetype` is for a mechanism genuinely unlike anything

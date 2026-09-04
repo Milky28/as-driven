@@ -205,14 +205,22 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # blip, so provisional remains the honest status.
                 "porsche-911-rsr-1974--transmission-downshift-manual-blip",
                 "volkswagen-virtus-200-tsi-2018--steering-wheel-rim-shape",
+                "bmw-m3-e46-gtr--steering-wheel-rim-shape",
+                "chevrolet-corvette-c5-r--transmission-downshift-manual-blip",
+                "chevrolet-corvette-c5-r--transmission-shift-actuation",
+                "chevrolet-corvette-c5-r--transmission-shift-pattern",
+                # Chassis R8's exact cockpit photograph establishes round at
+                # high confidence, but the photograph is published by a
+                # secondary source, so AC's D-shaped rim remains provisional.
+                "nissan-r390-gt1--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 17,
-                "provisional-departure": 3,
-                "supported-departure": 9,
+                "authentic-baseline-open": 16,
+                "provisional-departure": 8,
+                "supported-departure": 13,
             },
             self.checked_in["summary"]["by_status"],
         )
@@ -277,7 +285,6 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             "mclaren-720s-gt3--transmission-standing-start-clutch",
             "mclaren-720s-gt3-evo--transmission-standing-start-clutch",
             "nissan-gt-r-nismo-gt3--transmission-standing-start-clutch",
-            "nissan-r390-gt1--steering-wheel-rim-shape",
             "nissan-r390-gt1--steering-wheel-rim-shift-lights",
             "nissan-r390-gt1--transmission-downshift-automatic-blip",
             "nissan-r390-gt1--transmission-downshift-manual-blip",

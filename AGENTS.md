@@ -96,9 +96,10 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
 - **Work on `main`**, the only branch, tracking `origin/main` at
   `github.com/Milky28/as-driven`. See the history-rewrite note
   above before assuming an older clone can pull.
-- Client: 0.21.0.
-- Dataset: 0.5.34 with 279 curated records, and 0.5.34 is installed. The
-  installed plugin binaries predate the GPLaps theme commit `c41bb36`.
+- Client: 0.21.2 locally; 0.21.0 is the published release.
+- Dataset: 0.5.45 with 282 curated records, and 0.5.37 is installed. The
+  installed local plugin build includes the GPLaps theme and GTR2 identity
+  resolver.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The ignored local contribution queue has 38 accepted cases with published
   feedback and six withdrawn, with nothing waiting on research or final review.
@@ -117,10 +118,13 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
   verification. New content can still be absent because the inventory only contains
   cars loaded here. See
   `docs/ams2-coverage-plan.md`.
-- Six simulators are registered: 261 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO, 6
-  RaceRoom and 5 rFactor 2, with `ac-rally` reserved in the enums and not
-  wired into the client. A drive from an unregistered game is held rather than
-  lost and released when that game is registered; see
+- Eight simulators are registered: 261 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO,
+  6 RaceRoom, 5 rFactor 2, 2 PMR and 2 GTR2 entries. `ac-rally` is reserved in
+  the enums and not wired into the client. PMR's E46 and Nissan R390 GT1 drafts
+  are curated. GTR2's HQ BMW M3 GTR and Chevrolet Corvette C5-R drives are also
+  curated, using the exact `.CAR` identity resolved from the current
+  telemetry-session header. A drive from an unregistered game is held
+  rather than lost and released when that game is registered; see
   `docs/registering-a-simulator.md`, and
   `docs/raceroom-downshift-measurement.md` for what a simulator's telemetry can
   and cannot establish.
@@ -140,10 +144,11 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
 - The AC BMW 3.0 CSL and Ford GT40 Mk I guided drives require a manual blip in
   those implementations. That result is stored as a simulator override while
   the authentic real-car manual-blip field remains unknown.
-- The disagreement audit contains 29 findings across 21 cars: nine supported
-  departures, three provisional departures and 17 open authentic baselines. The
-  Milano 55 GT1, 1974 Porsche 911 RSR manual-blip, and 2018 Volkswagen Virtus
-  wheel findings are the three provisional cases after targeted research. The
+- The disagreement audit contains 37 findings across 23 cars: 13 supported
+  departures, eight provisional departures and 16 open authentic baselines. The
+  provisional set now also includes BMW M3 E46 GTR and Nissan R390 GT1 wheel
+  geometry plus Chevrolet Corvette C5-R manual-blip, shift actuation, and shift
+  pattern after their additional simulator drives. The
   exact 2005 Saleen S7-R wheel and downshift procedure remain open; early-car
   evidence cannot be inherited.
   Treat the remaining gaps as documented negative results, not an active batch

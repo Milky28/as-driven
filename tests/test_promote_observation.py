@@ -614,6 +614,93 @@ class PromoteObservationTests(unittest.TestCase):
             )
         self.assertIn("contradicts the curated real car", str(caught.exception))
 
+    def test_sourced_cross_simulator_correction_is_explicit_and_audited(self) -> None:
+        existing_controls = {
+            "transmission": {"downshift": {"clutch": "not-required"}},
+            "steering": {},
+        }
+        incoming_controls = {
+            "transmission": {"downshift": {"clutch": "optional"}},
+            "steering": {},
+        }
+        path = "/authentic_controls/transmission/downshift/clutch"
+        existing = {
+            "record_id": "car",
+            "authentic_controls": existing_controls,
+            "simulators": [{"simulator": "ams2"}],
+            "provenance": {"claims": []},
+            "updated_at": "2026-08-01",
+        }
+        incoming = {
+            "record_id": "car",
+            "authentic_controls": incoming_controls,
+            "simulators": [{"simulator": "pmr", "identities": []}],
+            "provenance": {
+                "claims": [
+                    {
+                        "paths": [path],
+                        "source_refs": ["exact.car.report"],
+                        "confidence": "medium",
+                        "basis": "Exact-car reports describe clutch use as optional.",
+                    }
+                ]
+            },
+            "updated_at": "2026-09-03",
+        }
+        correction = {
+            "path": path,
+            "from": "not-required",
+            "to": "optional",
+            "basis": "Exact-car reports describe clutch use as optional.",
+            "source_refs": ["exact.car.report"],
+            "confidence": "medium",
+        }
+
+        merged = merge_simulator_entry(
+            existing,
+            incoming,
+            label="test",
+            authentic_control_corrections=[correction],
+        )
+
+        self.assertEqual(
+            "optional",
+            merged["authentic_controls"]["transmission"]["downshift"]["clutch"],
+        )
+        self.assertIn(
+            {
+                "paths": [path],
+                "source_refs": ["exact.car.report"],
+                "confidence": "medium",
+                "basis": "Exact-car reports describe clutch use as optional.",
+            },
+            merged["provenance"]["claims"],
+        )
+
+    def test_cross_simulator_correction_must_match_incoming_research(self) -> None:
+        path = "/authentic_controls/transmission/downshift/clutch"
+        with self.assertRaisesRegex(ValueError, "incoming researched record"):
+            self._merge(
+                {
+                    "transmission": {"downshift": {"clutch": "not-required"}},
+                    "steering": {},
+                },
+                {
+                    "transmission": {"downshift": {"clutch": "required"}},
+                    "steering": {},
+                },
+                authentic_control_corrections=[
+                    {
+                        "path": path,
+                        "from": "not-required",
+                        "to": "optional",
+                        "basis": "Reviewed exact-car evidence.",
+                        "source_refs": ["exact.car.report"],
+                        "confidence": "medium",
+                    }
+                ],
+            )
+
     def test_a_gap_the_drive_fills_needs_the_reviewer_to_ask_for_it(self) -> None:
         """`unknown` to a value is an improvement, but not an unattended one."""
         existing = {"transmission": {}, "steering": {"wheel_rim": {"shift_lights": "unknown"}}}
@@ -705,6 +792,76 @@ class PromoteObservationTests(unittest.TestCase):
             self.assertEqual(
                 approvals,
                 ["ac-evo-approved-test-prototype.json", "ams2-approved-test-prototype.json"],
+            )
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_cross_simulator_override_sets_behavior_to_effective_actuation(self) -> None:
+        """A simulator deviation wins over the reviewed real-car mechanism."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            observation = _second_simulator_observation()
+            observation["cockpit"]["visible_shift_actuators"] = ["sequential-stick"]
+            observation["cockpit"]["primary_shift_actuation"] = "sequential-stick"
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(temp, observation, "bundle-stick.json"),
+                control_overrides={"shift_actuation": "sequential-paddles"},
+                simulator_overrides=[
+                    {
+                        "path": (
+                            "/authentic_controls/transmission/shift_actuation"
+                        ),
+                        "value": "sequential-stick",
+                        "condition": "The simulator depicts a sequential lever.",
+                        "confidence": {
+                            "level": "verified",
+                            "basis": "The cockpit control was directly inspected.",
+                        },
+                    }
+                ],
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                record["authentic_controls"]["transmission"]["shift_actuation"],
+                "sequential-paddles",
+            )
+            self.assertEqual(
+                record["simulators"][1]["behavior"]["shift_type"],
+                "sequential-stick",
+            )
+            self.assertEqual(validate_repository(temp), [])
+
+    def test_cross_simulator_merge_uses_the_more_informed_existing_actuation(self) -> None:
+        """An incoming unknown cannot leak into behavior beside a known baseline."""
+        with tempfile.TemporaryDirectory() as directory:
+            temp = self._prepare(Path(directory))
+            self._promote(temp, self._manifest(_review_entry()))
+
+            entry = dict(
+                _review_entry(),
+                bundle=self._add_bundle(
+                    temp, _second_simulator_observation(), "bundle-unknown.json"
+                ),
+                control_overrides={"shift_actuation": "unknown"},
+            )
+            self._promote(temp, self._manifest(entry))
+
+            record = json.loads(
+                (temp / "data" / "v1" / "cars" / "test-prototype.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                record["simulators"][1]["behavior"]["shift_type"],
+                "sequential-paddles",
             )
             self.assertEqual(validate_repository(temp), [])
 

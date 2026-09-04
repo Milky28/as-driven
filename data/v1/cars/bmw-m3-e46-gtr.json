@@ -11,18 +11,18 @@
       "label": "M3 GTR race car"
     },
     "class": "GTR 2004",
-    "real_world_identity_notes": "BMW identifies the race M3 GTR as sequential-shift, contrasting it with the road car's six-speed manual. Exact six-gear stick operation and technique were established in AMS2."
+    "real_world_identity_notes": "The AMS2 identity represents the BMW Motorsport/Schnitzer P60 V8 works M3 GTR associated with the 2004 endurance campaign, not later inline-six PTG or Hitotsuyama conversions. BMW's period specification, a contemporary works-car test, a direct drive of restored P60 chassis M3-GTR-006 and period Spa footage support a six-speed H-pattern dog box. Later E46 race conversions did use sequential gearboxes, but that hardware is not inherited by this works-car baseline."
   },
   "authentic_controls": {
     "transmission": {
       "forward_gears": 6,
-      "gearbox_type": "sequential",
-      "shift_actuation": "sequential-stick",
-      "shift_pattern": "sequential",
+      "gearbox_type": "dogbox",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
@@ -47,9 +47,9 @@
       }
     },
     "notes": [
-      "The clutch is required from rest.",
-      "Six sequential-stick gears accepted clutchless upshifts with a detected automatic cut.",
-      "Downshifts are accepted without clutch but no automatic blip is modeled; driver blipping is required."
+      "The works P60 V8 specification used a six-speed H-pattern dog box and carbon racing clutch.",
+      "Once moving, the authentic technique is to shift without the clutch, briefly lift for each upshift and rev-match every downshift.",
+      "AMS2 1.6.9.91 instead presents a sequential stick and supplies the upshift cut; that implementation difference is preserved as a simulator override."
     ]
   },
   "simulators": [
@@ -84,17 +84,247 @@
           "The guided detector observed a shift-local automatic cut and no downshift throttle spike."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "AMS2 1.6.9.91 presents and accepts one-at-a-time shifts through a sequential stick, while the reviewed works P60 V8 evidence establishes an H-pattern lever.",
+          "source_refs": [
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive directly observed the sequential-stick interface, and the Reiza staff reply confirms that this is the intended AMS2 representation."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "AMS2 1.6.9.91 selects the next or previous ratio in sequence instead of exposing the real works car's standard H gate.",
+          "source_refs": [
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive directly selected all six ratios through the sequential stick, consistent with Reiza's staff description."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "AMS2 1.6.9.91 accepts the tested full-throttle upshift and supplies a shift-local torque interruption, while the period works-car test instructs the driver to lift briefly.",
+          "source_refs": [
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive directly observed full-throttle upshift acceptance with a detected automatic cut."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "AMS2 1.6.9.91 produces a shift-local automatic cut on an upshift, while the period works-car test describes the driver's brief throttle lift as the required torque interruption.",
+          "source_refs": [
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive detected the automatic torque cut during the accepted full-throttle upshift."
+          }
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-11",
       "source_refs": [
         "ams2.reiza-release.1.6.8.5.historical-endurance",
-        "bmw.m3-gtr.strassenversion",
+        "bmw.m3-gtr.spa-race-report.2004",
+        "reiza-forum.m3-gtr-gearbox.2025",
         "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
       ],
       "confidence": {
         "level": "verified",
-        "basis": "BMW heritage context and exact guided tests establish sequential-stick hardware and every user-facing simulator control."
+        "basis": "The exact AMS2 identity and controls were directly observed in 1.6.9.91. Reiza's staff clarification documents the intended sequential-stick representation; the contrary real-car evidence is preserved separately in the authentic baseline and explicit overrides."
+      }
+    },
+    {
+      "simulator": "pmr",
+      "display_name": "M3 GTR (E46)",
+      "class": "N-GT",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "M3 GTR (E46)"
+        },
+        {
+          "kind": "internal-id",
+          "value": "M3 GTR (E46)"
+        },
+        {
+          "kind": "class-id",
+          "value": "N-GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "PMR's official car page labels the transmission 6-speed sequential, but the cockpit lever visibly follows an H gate and direct gear selection works, so H-pattern is the recommended physical interface.",
+          "Next-gear and previous-gear bindings also work. That permissive alternative is recorded here rather than treated as evidence of the modeled physical mechanism.",
+          "A full-throttle upshift was accepted. Engine torque remained substantial through the shift, so the observation does not establish an automatic cut.",
+          "A coast downshift was accepted without pedal input and no automatic blip was detected."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "PMR Steam build 24725083 accepts the tested full-throttle upshift, while the period works-car test instructs the driver to lift briefly.",
+          "source_refs": [
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive directly observed a successful upshift while the throttle remained fully applied."
+          }
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "PMR Steam build 24725083 accepts the tested coast downshift without driver pedal input, while the real works car requires the driver to rev-match.",
+          "source_refs": [
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive directly observed the downshift engaging without pedal input and without a detected automatic blip."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "PMR Steam build 24725083 depicts a closed D-shaped cockpit rim instead of the round rim established for the real works car.",
+          "source_refs": [
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim shape was directly inspected in the cockpit during the guided drive."
+          }
+        }
+      ],
+      "verified_game_version": "24725083",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "pmr.m3-gtr-e46.official-car-page",
+        "pmr.local-live-m3-gtr-e46-controls.24725083"
+      ],
+      "confidence": {
+        "level": "verified",
+        "basis": "The official PMR page and exact telemetry establish the PMR identity. The guided drive directly establishes the H-pattern cockpit interface, direct selection, accepted alternate sequential bindings, shift acceptance and wheel details in Steam build 24725083; the unresolved automatic cut remains unknown."
+      }
+    },
+    {
+      "simulator": "gtr2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "HQ BMW M3 GTR"
+        },
+        {
+          "kind": "internal-id",
+          "value": "GAMEDATA/TEAMS/24H/BMW M3GTR TEAMS/BMW MOTORSPORT/04142HQ_G2_BMW_M3GTR.CAR"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in GTR2 1.1.0.0 via guided verification observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "verified_game_version": "1.1.0.0",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "bmw.m3-gtr.alms-launch.2001",
+        "autobild.m3-gtr.track-test.2003",
+        "road-and-track.m3-gtr.drive.2018",
+        "bmw.m3-gtr.spa-race-report.2004",
+        "bmw.m3-gtr.strassenversion",
+        "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+        "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "BMW's contemporary ALMS release identifies the BMW M3 GTR race car and its 4.0-litre V8, while the 2004 Spa report identifies BMW Motorsport M3 GTR entries in the G2 endurance context. Contemporary and first-person exact-car evidence establishes the six-speed H-pattern dog-box baseline. The GTR2 attachment is an identity lead only; its exact .CAR token and HQ patch metadata do not prove a particular physical chassis, so the exact existing curated record is reused."
       }
     }
   ],
@@ -107,11 +337,11 @@
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.8.5.historical-endurance",
-          "bmw.m3-gtr.strassenversion",
+          "bmw.m3-gtr.spa-race-report.2004",
           "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Official release, manufacturer history, and exact telemetry establish identity."
+        "basis": "The official AMS2 release context, BMW's contemporary Spa race report and exact telemetry establish the modeled BMW Motorsport M3 GTR identity."
       },
       {
         "paths": [
@@ -121,17 +351,30 @@
           "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "bmw.m3-gtr.strassenversion",
-          "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018",
+          "youtube.m3-gtr.spa-test.2004"
         ],
-        "confidence": "verified",
-        "basis": "BMW establishes sequential race-car architecture and direct testing establishes six stick-selected gears."
+        "confidence": "high",
+        "basis": "BMW's period P60 V8 specification establishes a straight-cut six-speed manual. AUTO BILD's contemporary works-car test explicitly identifies a conventional H pattern and brief driver lift; the restored original chassis drive independently identifies the H-pattern dog box, and period Spa footage corroborates the gate."
       },
       {
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018"
+        ],
+        "confidence": "high",
+        "basis": "The period test directly establishes clutchless H-pattern upshifts after a brief throttle lift. BMW specifies the carbon clutch, and the restored-car drive describes its start and clutchless, manually rev-matched running shifts. Dog engagement fixes the remaining clutch and blip technique under the dataset's reviewed construction rules."
+      },
+      {
+        "paths": [
           "/authentic_controls/steering/wheel_rim",
           "/simulators/0/behavior"
         ],
@@ -139,14 +382,80 @@
           "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Guided tests and cockpit inspection directly establish technique and wheel details."
+        "basis": "Guided tests and cockpit inspection directly establish the simulator behavior and wheel details."
+      },
+      {
+        "paths": [
+          "/simulators/0/overrides"
+        ],
+        "source_refs": [
+          "reiza-forum.m3-gtr-gearbox.2025",
+          "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "The exact guided drive establishes AMS2's sequential selection, full-throttle upshift acceptance and automatic cut. Reiza's staff reply confirms the sequential-stick representation; the registered period sources independently establish why those values depart from the real works-car baseline."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "pmr.m3-gtr-e46.official-car-page",
+          "pmr.local-live-m3-gtr-e46-controls.24725083"
+        ],
+        "confidence": "verified",
+        "basis": "PMR's official page identifies its BMW M3 GTR (E46) as an N-GT car, and the exact telemetry name and class were directly captured in the guided drive."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior",
+          "/simulators/1/overrides"
+        ],
+        "source_refs": [
+          "pmr.m3-gtr-e46.official-car-page",
+          "pmr.local-live-m3-gtr-e46-controls.24725083"
+        ],
+        "confidence": "verified",
+        "basis": "The exact guided drive establishes PMR's cockpit H gate, working direct selection, permissive sequential bindings, shift acceptance and wheel details. The official page's conflicting sequential label is retained as simulator documentation, while automatic cut remains unknown because the observed torque trace did not establish one."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018",
+          "bmw.m3-gtr.spa-race-report.2004",
+          "bmw.m3-gtr.strassenversion",
+          "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+          "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+        ],
+        "confidence": "high",
+        "basis": "BMW's contemporary ALMS release identifies the BMW M3 GTR race car and its 4.0-litre V8, while the 2004 Spa report identifies BMW Motorsport M3 GTR entries in the G2 endurance context. Contemporary and first-person exact-car evidence establishes the six-speed H-pattern dog-box baseline. The GTR2 attachment is an identity lead only; its exact .CAR token and HQ patch metadata do not prove a particular physical chassis, so the exact existing curated record is reused."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
   "archetype": {
-    "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
-    "classification": "matches"
+    "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/forward_gears",
+        "basis": "The BMW uses six forward gears where the otherwise matching registered H-pattern dog-box archetype uses five. Gear count is the only difference."
+      }
+    ]
   },
-  "updated_at": "2026-08-25",
-  "driver_summary": "BMW built the race M3 GTR with a sequential shift where the road car has a six-speed manual, so nothing about the gearbox behaves like the street car. It cuts the upshift for you; blip every downshift yourself."
+  "updated_at": "2026-09-03",
+  "driver_summary": "The works P60 V8 used a six-speed H-pattern dog box: lift and rev-match. AMS2 substitutes a sequential stick and cut; PMR's H-pattern accepts flat shifts and coast downshifts despite its sequential label."
 }

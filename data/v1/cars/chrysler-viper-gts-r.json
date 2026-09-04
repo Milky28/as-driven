@@ -1,0 +1,339 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "chrysler-viper-gts-r",
+  "identity": {
+    "display_name": "Chrysler Viper GTS-R",
+    "manufacturer": "Chrysler",
+    "model": "Viper GTS-R",
+    "year": {
+      "from": 2004,
+      "to": 2004,
+      "label": "2004 final ORECA-supported Viper GTS-R specification"
+    },
+    "class": "GT1 2005",
+    "real_world_identity_notes": "The PMR Viper GTS-R maps to the final ORECA-supported Chrysler Viper GTS-R specification represented in PMR's 2004-era GT content. PMR describes this car as a Chrysler Viper GTS-R developed with ORECA and lists a six-speed sequential transmission. Period ORECA technical commentary confirms that GTS-R customer cars existed with both the classic six-speed Tremec and later sequential dog-type options, so the exact chassis and gearbox installation matter. The PMR staged H-pattern is therefore retained as simulator evidence and is not promoted as the authentic baseline without an exact-chassis match. Keep the road-going Dodge Viper GTS-R/GT2 Championship Edition, earlier H-pattern race configurations, and the later 2012 SRT Viper GTS-R distinct."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "unknown",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing 24725083 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Viper GTS-R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Viper GTS-R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 24725083 via guided verification observation pmr.viper-gts-r.20260903t230703638z-26359fed by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "h-pattern",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-viper-gts-r-controls.24725083"
+          ]
+        }
+      ],
+      "verified_game_version": "24725083",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "pmr.official.chrysler-viper-gts-r.2004",
+        "oreca.interview.viper-gts-r.transmissions.2005",
+        "ultimatecarpage.dodge-viper-gts-r.1996-2005",
+        "rsc.dodge-viper-gts-r.2004.c32",
+        "pmr.local-live-viper-gts-r-controls.24725083"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official PMR car page names Chrysler Viper GTS-R, says it was developed with ORECA, places it in the 2004-era GT content, and lists six-speed sequential transmission. A period interview with ORECA's technical representative independently confirms the Viper GTS-R family and documents the coexistence of classic and sequential racing gearbox options. No matching curated record exists in data/v1, so this case proposes a new canonical identity while preserving the configuration uncertainty."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.official.chrysler-viper-gts-r.2004",
+          "oreca.interview.viper-gts-r.transmissions.2005",
+          "ultimatecarpage.dodge-viper-gts-r.1996-2005",
+          "rsc.dodge-viper-gts-r.2004.c32",
+          "pmr.local-live-viper-gts-r-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "The official PMR car page names Chrysler Viper GTS-R, says it was developed with ORECA, places it in the 2004-era GT content, and lists six-speed sequential transmission. A period interview with ORECA's technical representative independently confirms the Viper GTS-R family and documents the coexistence of classic and sequential racing gearbox options. No matching curated record exists in data/v1, so this case proposes a new canonical identity while preserving the configuration uncertainty."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.chrysler-viper-gts-r.2004",
+          "oreca.interview.viper-gts-r.transmissions.2005",
+          "ultimatecarpage.dodge-viper-gts-r.1996-2005",
+          "rsc.dodge-viper-gts-r.2004.c32",
+          "pmr.local-live-viper-gts-r-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "PMR lists a six-speed transmission, the family specification lists a six-speed gearbox, and the PMR observation independently reports six forward gears. PMR's target page explicitly lists six-speed sequential transmission, and the ORECA interview confirms sequential gearbox options as the common later customer installation. The generic family T56 entry is retained as a configuration warning rather than applied to the PMR target. The PMR target page explicitly identifies a sequential transmission, and ORECA describes sequential control for the later options. The observed PMR standard-H gate is kept as implementation evidence only. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-viper-gts-r-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.chrysler-viper-gts-r.2004",
+          "oreca.interview.viper-gts-r.transmissions.2005",
+          "ultimatecarpage.dodge-viper-gts-r.1996-2005",
+          "rsc.dodge-viper-gts-r.2004.c32"
+        ],
+        "confidence": "high",
+        "basis": "PMR lists a six-speed transmission, the family specification lists a six-speed gearbox, and the PMR observation independently reports six forward gears. PMR's target page explicitly lists six-speed sequential transmission, and the ORECA interview confirms sequential gearbox options as the common later customer installation. The generic family T56 entry is retained as a configuration warning rather than applied to the PMR target. The PMR target page explicitly identifies a sequential transmission, and ORECA describes sequential control for the later options. The observed PMR standard-H gate is kept as implementation evidence only. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      }
+    ]
+  },
+  "updated_at": "2026-09-04",
+  "driver_summary": "6-speed transmission. Launch clutch use is not established, so use it to be safe. Upshift lift is not established, so lift to be safe; running clutch use is not established. Whether the gearbox needs a downshift blip is not established, so blip to be safe; downshift clutch use is not established."
+}

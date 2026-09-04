@@ -25,6 +25,8 @@ from as_driven_db.research_handoff import (
 from as_driven_db.importers.observation import import_observation
 from as_driven_db.review_proposal import (
     _candidate_source,
+    _existing_authentic_control_decisions,
+    _preserve_accept_from_drive,
     _same_simulator_disposition,
     _simulator_overrides,
     generate_driver_summary,
@@ -237,6 +239,103 @@ def completed_research_result(case_id: str) -> dict:
 
 
 class ReviewSubmissionTests(unittest.TestCase):
+    def test_existing_baseline_changes_are_generated_as_review_decisions(self) -> None:
+        path = "/authentic_controls/transmission/downshift/clutch"
+        existing = {
+            "authentic_controls": {
+                "transmission": {"downshift": {"clutch": "not-required"}},
+                "steering": {"wheel_rim": {"open_top": "unknown"}},
+            }
+        }
+        real_controls = {
+            "transmission": {"downshift": {"clutch": "optional"}},
+            "steering": {"wheel_rim": {"open_top": "no"}},
+        }
+        result = {
+            "claims": [
+                {
+                    "path": path,
+                    "finding": "established",
+                    "proposed_value": "optional",
+                    "confidence": "medium",
+                    "source_refs": ["exact.car.report"],
+                    "basis": "Exact-car reporting calls clutch use optional.",
+                },
+                {
+                    "path": "/authentic_controls/steering/wheel_rim/open_top",
+                    "finding": "established",
+                    "proposed_value": "no",
+                    "confidence": "high",
+                    "source_refs": ["exact.cockpit.photo"],
+                    "basis": "The exact-car cockpit image shows a closed rim.",
+                },
+            ]
+        }
+
+        accepted, corrections, effective = _existing_authentic_control_decisions(
+            existing, real_controls, result
+        )
+
+        self.assertEqual(
+            ["/authentic_controls/steering/wheel_rim/open_top"], accepted
+        )
+        self.assertEqual(path, corrections[0]["path"])
+        self.assertEqual("not-required", corrections[0]["from"])
+        self.assertEqual("optional", corrections[0]["to"])
+        self.assertEqual(
+            "optional", effective["transmission"]["downshift"]["clutch"]
+        )
+        self.assertEqual("no", effective["steering"]["wheel_rim"]["open_top"])
+
+    def test_prepare_review_preserves_explicit_drive_acceptance(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            case_dir = Path(directory) / "issue-49"
+            case_dir.mkdir()
+            (case_dir / "review-manifest.proposed.json").write_text(
+                json.dumps(
+                    {
+                        "records": [
+                            {
+                                "record_id": "nissan-r390-gt1",
+                                "accept_from_drive": [
+                                    "/authentic_controls/steering/wheel_rim/shape"
+                                ],
+                                "game_version_correction": {
+                                    "observed": "unknown",
+                                    "verified": "24725083",
+                                    "basis": "The installed manifest spans the drive.",
+                                },
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            manifest = {
+                "records": [
+                    {
+                        "record_id": "nissan-r390-gt1",
+                        "accept_from_drive": [
+                            "/authentic_controls/steering/wheel_rim/open_top"
+                        ],
+                    }
+                ]
+            }
+
+            _preserve_accept_from_drive(case_dir, manifest)
+
+            self.assertEqual(
+                [
+                    "/authentic_controls/steering/wheel_rim/open_top",
+                    "/authentic_controls/steering/wheel_rim/shape",
+                ],
+                manifest["records"][0]["accept_from_drive"],
+            )
+            self.assertEqual(
+                "24725083",
+                manifest["records"][0]["game_version_correction"]["verified"],
+            )
+
     def test_candidate_source_normalizes_em_dashes_before_tracking(self) -> None:
         source = research_result("example")["sources"][0]
         source["title"] = "LOTUS 23\u2014FORM FOLLOWS FUNCTION"
@@ -934,6 +1033,47 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "generated",
                 case["review_proposal"]["driver_summary"]["status"],
             )
+
+    def test_driver_summary_edit_is_normalized_saved_and_dry_run_again(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, case_dir, _proposal = self.prepare_promotable_case(repository)
+
+            edited = generate_driver_summary_proposal(
+                repository,
+                cases,
+                17,
+                driver_summary="  Use the clutch.\nThen lift for the shift.  ",
+            )
+
+            self.assertEqual("passed", edited["dry_run"])
+            self.assertEqual("edited", edited["summary_status"])
+            self.assertEqual(
+                "Use the clutch. Then lift for the shift.", edited["summary"]
+            )
+            manifest = json.loads(
+                (case_dir / "review-manifest.proposed.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            preview = json.loads(
+                (case_dir / "preview-record.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(edited["summary"], manifest["records"][0]["driver_summary"])
+            self.assertEqual(edited["summary"], preview["driver_summary"])
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                "edited", case["review_proposal"]["driver_summary"]["status"]
+            )
+
+            preserved = generate_driver_summary_proposal(
+                repository,
+                cases,
+                17,
+                preserve_existing=True,
+            )
+            self.assertEqual("preserved", preserved["summary_status"])
+            self.assertEqual(edited["summary"], preserved["summary"])
 
     def test_driver_summary_calls_out_cross_simulator_technique_disagreement(self) -> None:
         record = import_observation(observation())["record"]

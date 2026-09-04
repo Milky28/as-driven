@@ -40,6 +40,7 @@
     <Compile Include="UpdateAvailability.cs" />
     <Compile Include="CarCatalogEntry.cs" />
     <Compile Include="CarImplementation.cs" />
+    <Compile Include="Gtr2VehicleIdentity.cs" />
     <Compile Include="CarRecordValues.cs" />
     <Compile Include="GuidanceSnapshot.cs" />
     <Compile Include="PreflightLabels.cs" />

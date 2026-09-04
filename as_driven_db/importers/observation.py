@@ -361,6 +361,20 @@ def import_observation(
                 "filtering."
             )
         cut_state = "unknown"
+    if simulator == "gtr2":
+        # GTR 2's SimHub reader publishes no usable driver-throttle input.
+        # A stored zero cannot establish sustained throttle, a lift, or the
+        # presence or absence of an engine-side blip. Older held drafts were
+        # captured as `other`, before the client knew this limitation, so
+        # degrade both throttle-dependent automation answers on release.
+        if cut_state != "unknown" or blip_state != "unknown":
+            review_notes.append(
+                "GTR 2 throttle-dependent results were degraded to unknown: its "
+                "SimHub reader publishes no usable driver-throttle input, so the "
+                "guided drive cannot establish automatic cut or automatic blip."
+            )
+        cut_state = "unknown"
+        blip_state = "unknown"
 
     rim = cockpit["wheel_rim"]
     # Drafts saved before the rim vocabulary was merged still carry the retired
@@ -380,7 +394,9 @@ def import_observation(
 
     upshift = {
         "clutch": up_clutch,
-        "throttle_lift": _throttle_lift(tests, clean),
+        "throttle_lift": (
+            "unknown" if simulator == "gtr2" else _throttle_lift(tests, clean)
+        ),
         "automatic_cut": cut_state,
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable",

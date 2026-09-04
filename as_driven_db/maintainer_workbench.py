@@ -175,12 +175,43 @@ class WorkbenchApplication:
             case.get("github_feedback") or {}
         ).get("status") != "published":
             blockers = publication_blockers(self.root, case)
+        driver_summary_review = None
+        manifest_name = (case.get("artifacts") or {}).get(
+            "review_manifest_proposal"
+        )
+        if case.get("state") == "manifest-review" and isinstance(
+            manifest_name, str
+        ):
+            manifest_path = (case_dir / manifest_name).resolve()
+            try:
+                manifest_path.relative_to(case_dir.resolve())
+            except ValueError:
+                manifest_path = Path()
+            if manifest_path.is_file():
+                manifest = _read_json(manifest_path)
+                records = manifest.get("records") or []
+                if records and isinstance(records[0], dict):
+                    text = records[0].get("driver_summary")
+                    if isinstance(text, str):
+                        summary_state = (
+                            (case.get("review_proposal") or {}).get(
+                                "driver_summary"
+                            )
+                            or {}
+                        )
+                        driver_summary_review = {
+                            "text": text,
+                            "status": summary_state.get("status") or "present",
+                            "updated_at": summary_state.get("updated_at"),
+                            "max_length": 520,
+                        }
         return {
             "summary": summary,
             "case": case,
             "artifacts": artifacts,
             "publication_blockers": blockers,
             "publication_next_step": publication_next_step(blockers),
+            "driver_summary_review": driver_summary_review,
         }
 
     def artifact(self, issue: int, key: str) -> dict[str, Any]:
@@ -270,7 +301,17 @@ class WorkbenchApplication:
                 issue,
                 dataset_version=payload.get("dataset_version"),
             )
-            return {"action": action, "result": prepared}
+            summary = generate_driver_summary_proposal(
+                self.root,
+                self.cases_directory,
+                issue,
+                preserve_existing=True,
+            )
+            return {
+                "action": action,
+                "result": prepared,
+                "driver_summary": summary,
+            }
         if action == "generate-driver-summary":
             generated = generate_driver_summary_proposal(
                 self.root,
@@ -278,6 +319,17 @@ class WorkbenchApplication:
                 issue,
             )
             return {"action": action, "result": generated}
+        if action == "save-driver-summary":
+            summary = payload.get("driver_summary")
+            if not isinstance(summary, str):
+                raise WorkbenchError("driver_summary must be a string")
+            saved = generate_driver_summary_proposal(
+                self.root,
+                self.cases_directory,
+                issue,
+                driver_summary=summary,
+            )
+            return {"action": action, "result": saved}
         if action == "promote":
             if payload.get("approved") is not True:
                 raise WorkbenchError("promotion requires explicit approval")
@@ -328,6 +380,7 @@ WORKBENCH_HTML = r'''<!doctype html>
 .state-review-needed{--state-color:#7fb8e8}
 /* Something in the submission disagrees with itself. */
 .state-needs-clarification,.state-research-blocked,.state-intake-error{--state-color:var(--red)}.pill{display:inline-block;border:1px solid var(--state-color,var(--line));color:var(--state-color,var(--muted));padding:2px 6px;border-radius:10px;font:700 .68rem Consolas,monospace;text-transform:uppercase}.detail-body{padding:20px}.empty{display:grid;place-items:center;min-height:500px;color:var(--muted);text-align:center}.identity{display:flex;justify-content:space-between;gap:15px;align-items:start}.identity h2{margin:.25rem 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}.field{background:var(--panel2);padding:11px;border:1px solid var(--line)}.field span{display:block;color:var(--muted);font-size:.82rem}.actions{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.action-row{display:flex;gap:8px;flex-wrap:wrap}.approval{display:flex;gap:8px;align-items:start;color:var(--muted);margin:12px 0}.approval input{margin-top:4px}.blockers{border-left:3px solid var(--red);background:#281719;padding:10px 14px;margin:14px 0}.artifacts{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0}.artifact-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}.view-toggle{display:flex}.view-toggle button{border-radius:0}.view-toggle button:first-child{border-radius:5px 0 0 5px}.view-toggle button:last-child{border-radius:0 5px 5px 0}.view-toggle button.active{border-color:var(--blue);background:#073f54}.artifact-view{white-space:pre-wrap;background:#090c10;border:1px solid var(--line);padding:15px;max-height:620px;overflow:auto;font:12px/1.55 Consolas,monospace;color:#d7e5f8}.research-review{background:#10151c;border:1px solid var(--line);padding:18px;max-height:760px;overflow:auto}.research-review h3{margin:0 0 10px}.research-review h4{margin:20px 0 8px}.review-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.review-card,.claim,.source{background:var(--panel2);border:1px solid var(--line);padding:12px}.review-card strong{display:block;margin-top:3px}.review-prose{color:#d4dfed;max-width:95ch}.review-list{margin:.4rem 0;padding-left:1.25rem}.claims{display:grid;gap:8px}.claim-head{display:grid;grid-template-columns:minmax(180px,1fr) auto auto;gap:10px;align-items:start}.claim-path{font-weight:700;overflow-wrap:anywhere}.claim-value{font:700 .82rem Consolas,monospace;color:#dceaff}.finding{font:700 .68rem Consolas,monospace;text-transform:uppercase;color:var(--state-color,var(--muted))}.finding.established{--state-color:var(--green)}.finding.not-established{--state-color:var(--amber)}.finding.conflicting{--state-color:var(--red)}.claim details,.source details{margin-top:8px}.claim summary,.source summary{cursor:pointer;color:var(--blue)}.source{margin-bottom:8px}.source a{color:#ffc15a}.quote{border-left:3px solid var(--blue);margin:8px 0;padding:4px 10px;color:#d4dfed}.source-ref{font:12px Consolas,monospace;color:var(--muted)}.toast{position:fixed;right:25px;bottom:25px;max-width:520px;padding:14px 18px;background:var(--panel2);border:1px solid var(--blue);box-shadow:var(--shadow);display:none}.toast.error{border-color:var(--red)}input[type=file]{max-width:100%}@media(max-width:900px){.layout{grid-template-columns:1fr}.case-list{max-height:300px}.stats{grid-template-columns:repeat(2,1fr)}.top{display:block}.dataset{margin-top:16px}.grid,.review-summary{grid-template-columns:1fr}.claim-head{grid-template-columns:1fr}.artifact-toolbar{align-items:stretch;flex-direction:column}.view-toggle button{flex:1}}
+textarea{font:inherit}.summary-editor{margin:18px 0;padding:16px;border:1px solid #7858a6;background:#171321}.summary-editor textarea{display:block;width:100%;min-height:128px;margin:10px 0;padding:12px;resize:vertical;color:var(--text);background:#090c10;border:1px solid var(--line);border-radius:5px;line-height:1.5}.summary-editor textarea:focus{outline:2px solid var(--blue);outline-offset:1px}.summary-editor-footer{display:flex;justify-content:space-between;gap:12px;align-items:center}.summary-editor-actions{display:flex;gap:8px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -356,6 +409,10 @@ function actionButton(id,label,klass=''){return `<button class="${klass}" data-a
 function renderDetail(d){const s=d.summary,c=d.case,obs=c.observation||{},id=obs.identity||{},answers=(c.issue||{}).answers||{},actions=new Set(s.allowed_actions||[]),publicationBlocked=Boolean(d.publication_blockers?.length);currentArtifact=null;let buttons='';const researchDone=c.research?.status==='complete';if(actions.has('generate-research-brief')&&!researchDone)buttons+=actionButton('generate-research-brief','Generate research brief','primary');if(actions.has('import-research')&&!researchDone)buttons+=`<label class="field" style="cursor:pointer">Import completed research JSON<input id="researchFile" type="file" accept=".json,application/json"></label>`;if(actions.has('prepare-review'))buttons+=actionButton('prepare-review',c.state==='manifest-review'?'Regenerate proposal':'Prepare final review','primary');if(actions.has('promote'))buttons+=`<label class="approval"><input id="promoteApproval" type="checkbox">I reviewed the identity, real-car baseline, simulator overrides, and source wording.</label>${actionButton('promote','Approve and promote','danger')}`;if(researchDone&&actions.has('generate-research-brief'))buttons+=`<div class="revisit"><span>Research is complete. Regenerating the brief does not discard it; importing a new result replaces it.</span>${actionButton('generate-research-brief','Regenerate research brief','ghost')}<label class="field" style="cursor:pointer">Import replacement research JSON<input id="researchFile" type="file" accept=".json,application/json"></label></div>`;if(actions.has('preview-publication'))buttons+=actionButton('preview-publication','Preview GitHub response');if(actions.has('publish-result')&&!publicationBlocked)buttons+=`<label class="approval"><input id="publishApproval" type="checkbox">The release is finalized, committed, pushed, and this response is ready to publish.</label>${actionButton('publish-result','Publish response and close issue','danger')}`;const blockers=publicationBlocked?`<div class="blockers"><strong>Promotion complete, publication pending</strong><ul>${d.publication_blockers.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p>${esc(d.publication_next_step||'')}</p></div>`:'';const artifacts=d.artifacts.filter(a=>a.exists).map(a=>`<button class="ghost artifact" data-key="${esc(a.key)}">${esc(a.key.replaceAll('_',' '))}</button>`).join('');const idle=s.publication_status==='published'?'No action required for this case.':'This routing state needs a manual maintainer decision.';$('#detail').innerHTML=`<div class="detail-head"><div class="identity"><div><span class="pill ${stateClass(s.display_state)}">${esc(s.display_state)}</span><h2>#${s.issue} ${esc(id.telemetry_name||c.issue?.title)}</h2><div class="case-meta">${esc(obs.simulator?.toUpperCase())} ${esc(obs.game_version||'')} · observed against dataset ${esc(obs.dataset_version||'unknown')}</div></div><a href="${esc(c.issue?.url)}" target="_blank" rel="noreferrer">Open GitHub issue</a></div></div><div class="detail-body"><div class="grid"><div class="field"><span>Contributor’s proposed identity</span>${esc(answers.proposed_identity||'Not supplied')}</div><div class="field"><span>Routing decision</span>${esc(c.classification||'Unclassified')}</div><div class="field"><span>Research</span>${esc(c.research?.status||'Not required')}</div><div class="field"><span>Publication</span>${esc(s.publication_status)}</div></div>${answers.uncertainty?`<div class="field"><span>Contributor notes</span>${esc(answers.uncertainty)}</div>`:''}${blockers}<div class="actions"><div class="label">Permitted next actions</div><div class="action-row" style="margin-top:10px">${buttons||`<span class="case-meta">${idle}</span>`}</div></div><div class="artifacts">${artifacts}</div><div id="artifactToolbar" class="artifact-toolbar" hidden><button id="copyArtifact" class="ghost">Copy displayed artifact</button><div id="artifactToggle" class="view-toggle" hidden><button data-artifact-mode="formatted">Formatted review</button><button data-artifact-mode="json">JSON</button></div></div><div id="artifactFormatted" class="research-review" hidden></div><pre id="artifactView" class="artifact-view" hidden></pre></div>`;document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>runAction(b.dataset.action));document.querySelectorAll('.artifact').forEach(b=>b.onclick=()=>loadArtifact(b.dataset.key));const file=$('#researchFile');if(file)file.onchange=importResearch;$('#copyArtifact').onclick=copyArtifact;document.querySelectorAll('[data-artifact-mode]').forEach(b=>b.onclick=()=>showArtifactMode(b.dataset.artifactMode))}
 const renderDetailBase=renderDetail;
 renderDetail=function(d){renderDetailBase(d);const actions=new Set(d.summary.allowed_actions||[]);if(!actions.has('generate-driver-summary'))return;const generated=d.case.review_proposal?.driver_summary?.status==='generated';const button=document.createElement('button');button.className=generated?'ghost':'primary';button.textContent=generated?'Regenerate driver summary':'Generate driver summary';button.dataset.action='generate-driver-summary';button.onclick=async()=>{await runAction('generate-driver-summary');await loadArtifact('driver_summary')};const row=document.querySelector('.action-row');const approval=document.querySelector('.approval');row.insertBefore(button,approval);if(approval&&approval.firstChild?.nextSibling)approval.firstChild.nextSibling.textContent='I reviewed the identity, real-car baseline, simulator overrides, driver summary, and source wording.'}
+const renderDetailWithSummaryAction=renderDetail;
+renderDetail=function(d){renderDetailWithSummaryAction(d);const summary=d.driver_summary_review;if(!summary)return;const actions=document.querySelector('.actions');if(!actions)return;const statusLabel={generated:'Generated automatically',preserved:'Existing reviewed summary',edited:'Edited and revalidated',present:'Summary ready for review'}[summary.status]||'Summary ready for review';const panel=document.createElement('section');panel.className='summary-editor';panel.innerHTML=`<div class="label">Driver summary · ${esc(statusLabel)}</div><textarea id="driverSummaryInput" maxlength="${Number(summary.max_length)||520}" aria-label="Driver summary">${esc(summary.text)}</textarea><div class="summary-editor-footer"><span id="driverSummaryCount" class="case-meta"></span><div class="summary-editor-actions"><button id="saveDriverSummary" class="primary">Save summary and revalidate</button></div></div><div class="case-meta" style="margin-top:8px">Shown in the overlay for every simulator entry on this car. Saving reruns the proposal dry-run before promotion.</div>`;actions.parentNode.insertBefore(panel,actions);const editor=$('#driverSummaryInput'),count=$('#driverSummaryCount'),save=$('#saveDriverSummary');const updateCount=()=>count.textContent=`${editor.value.length} / ${summary.max_length||520} characters`;editor.oninput=updateCount;updateCount();save.onclick=saveDriverSummary;const regenerate=document.querySelector('[data-action="generate-driver-summary"]');if(regenerate){regenerate.textContent='Regenerate suggested summary';regenerate.className='ghost'}}
+const renderDetailWithSummaryDirtyGuard=renderDetail;
+renderDetail=function(d){renderDetailWithSummaryDirtyGuard(d);const editor=$('#driverSummaryInput');if(editor&&d.driver_summary_review)editor.dataset.savedValue=d.driver_summary_review.text}
 async function selectCase(issue,rerender=true){selected=issue;if(rerender)renderSnapshot(snapshot);const detail=await api(`/api/cases/${issue}`);renderDetail(detail)}
 function displayValue(value){if(value===null||value===undefined||value==='')return 'Not supplied';if(typeof value==='object')return JSON.stringify(value);return String(value)}
 function humanPath(path){return String(path||'').replace(/^\//,'').split('/').map(part=>part.replaceAll('_',' ')).join(' › ')}
@@ -365,6 +422,9 @@ function showArtifactMode(mode){const formatted=$('#artifactFormatted'),raw=$('#
 async function loadArtifact(key){const a=await api(`/api/cases/${selected}/artifacts/${encodeURIComponent(key)}`);currentArtifact=a;const toolbar=$('#artifactToolbar'),toggle=$('#artifactToggle'),view=$('#artifactView'),formatted=$('#artifactFormatted');toolbar.hidden=false;view.textContent=a.content;formatted.textContent='';toggle.hidden=true;artifactMode='json';if(key==='research_result'){try{formatted.innerHTML=formatResearchResult(JSON.parse(a.content));toggle.hidden=false;artifactMode='formatted'}catch(e){toast('The result could not be formatted; showing its JSON instead.',true)}}showArtifactMode(artifactMode);toolbar.scrollIntoView({behavior:'smooth',block:'nearest'})}
 async function copyArtifact(){try{const content=artifactMode==='formatted'&&!$('#artifactFormatted').hidden?$('#artifactFormatted').innerText:currentArtifact?.content||'';await navigator.clipboard.writeText(content);toast('Displayed artifact copied to clipboard')}catch(e){toast('Could not access the clipboard; select the text and copy it manually.',true)}}
 async function runAction(action){let payload={};if(action==='promote'){if(!$('#promoteApproval')?.checked)return toast('Review and check the approval statement first.',true);payload.approved=true}if(action==='publish-result'){if(!$('#publishApproval')?.checked)return toast('Confirm the publication statement first.',true);payload.approved=true}document.body.classList.add('busy');try{const result=await api(`/api/cases/${selected}/actions/${action}`,{method:'POST',body:JSON.stringify(payload)});if(action==='preview-publication'){const content=result.result.comment+(result.result.blockers.length?'\n\nPublication blockers:\n- '+result.result.blockers.join('\n- '):'\n\nReady to publish.');currentArtifact={key:'publication_preview',content};$('#artifactToolbar').hidden=false;$('#artifactToggle').hidden=true;$('#artifactView').textContent=content;showArtifactMode('json');toast('GitHub response previewed below')}else toast(`${action.replaceAll('-',' ')} completed`);if(action!=='preview-publication'){await refresh();if(action==='generate-research-brief')await loadArtifact('research_brief')}}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
+const runActionWithSummaryGuard=runAction;
+runAction=async function(action){const editor=$('#driverSummaryInput');if(action==='promote'&&editor&&editor.value!==editor.dataset.savedValue)return toast('Save or discard the driver summary edit before promotion.',true);return runActionWithSummaryGuard(action)}
+async function saveDriverSummary(){const editor=$('#driverSummaryInput');if(!editor||!editor.value.trim())return toast('Driver summary cannot be blank.',true);document.body.classList.add('busy');try{await api(`/api/cases/${selected}/actions/save-driver-summary`,{method:'POST',body:JSON.stringify({driver_summary:editor.value})});toast('Driver summary saved and revalidated');await refresh()}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
 async function importResearch(event){const file=event.target.files[0];if(!file)return;document.body.classList.add('busy');try{const parsed=JSON.parse(await file.text());await api(`/api/cases/${selected}/actions/import-research`,{method:'POST',body:JSON.stringify({research_result:parsed})});toast('Research result imported');await refresh()}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
 async function refreshLocalQueue(){document.body.classList.add('busy');try{const r=await api('/api/actions/refresh',{method:'POST',body:'{}'});renderSnapshot(r.snapshot);if(selected&&r.snapshot.cases.some(c=>c.issue===selected))await selectCase(selected,false);const imported=r.research_results.imported.length,errors=r.research_results.errors;if(errors.length)toast(`Found ${r.research_results.found} research result(s), but issue #${errors[0].issue} could not be imported: ${errors[0].error}`,true);else if(imported)toast(`Imported ${imported} completed research result${imported===1?'':'s'}`);else toast('Local queue is up to date')}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
 $('#refresh').onclick=refreshLocalQueue;$('#sync').onclick=async()=>{const button=$('#sync');let outcome='';let failed=false;beginProgress(button,'Syncing...','Downloading and classifying GitHub submissions.');try{const r=await api('/api/actions/sync',{method:'POST',body:'{}'});outcome=`Sync complete: ${r.processed} processed, ${r.skipped} unchanged.`;toast(outcome);await refresh(false)}catch(e){failed=true;outcome=`Sync failed: ${e.message}`;toast(e.message,true)}finally{endProgress(button,outcome,failed)}};$('#finalize').onclick=async()=>{if(!confirm('Regenerate release outputs, validate, and run the full test suite?'))return;const button=$('#finalize');let outcome='';let failed=false;beginProgress(button,'Finalizing release...','Regenerating release outputs, validating the dataset, and running the full test suite. This can take a few minutes.');try{const r=await api('/api/actions/finalize',{method:'POST',body:JSON.stringify({run_tests:true})});outcome=`Complete: dataset ${r.dataset_version} finalized. Validation and the full test suite passed.`;toast(`Dataset ${r.dataset_version} finalized; tests passed`);await refresh()}catch(e){failed=true;outcome=`Finalization failed: ${e.message}`;toast(e.message,true)}finally{endProgress(button,outcome,failed)}};

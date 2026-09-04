@@ -21,14 +21,14 @@ entering the audit.
 
 ## Current result
 
-Dataset 0.5.34 contains 33 field-level findings across 22 cars:
+Dataset 0.5.45 contains 37 field-level findings across 23 cars:
 
-- 8 affect pulling away;
-- 9 affect running-shift technique;
-- 7 affect hardware choice or configuration; and
+- 9 affect pulling away;
+- 12 affect running-shift technique;
+- 10 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Nine are **supported departures**, three remain **provisional departures**, and
+Thirteen are **supported departures**, six remain **provisional departures**, and
 16 have an **open authentic baseline**. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
@@ -54,6 +54,20 @@ another is an evidence gap, not a disagreement. No majority vote can rewrite the
 authentic baseline.
 
 ## Supported findings
+
+**BMW M3 E46 GTR - shifter, gate and downshift technique.** Period and direct
+works-car evidence establishes the P60 V8 car's six-speed H-pattern dog box and
+manual rev-matching. PMR build 24725083 matches the H-pattern hardware through
+its cockpit animation and working direct gear selection, despite PMR's own
+sequential label and accepted next/previous bindings. AMS2 1.6.9.91 remains the
+supported sequential-stick and sequential-gate departure. PMR accepts a coast
+downshift without a manual or detected automatic blip, making its no-blip
+behavior a separate supported departure from the works-car technique.
+
+Sources: [BMW's period P60 specification][bmw-e46-spec],
+[the contemporary works-car test][bmw-e46-test],
+[the restored original chassis drive][bmw-e46-drive], and
+[PMR's official car page][pmr-e46].
 
 **Audi R8 LMS GT3 Evo II - pulling away.** Audi's exact technical data for the
 2022 car specifies an electrohydraulically operated three-plate racing clutch on
@@ -212,7 +226,7 @@ therefore preserves the cross-sim conflict while refusing to declare a winner.
 
 ## Remaining provisional findings
 
-Three findings still have a real-car answer but fall short of the benchmark's
+Six findings still have a real-car answer but fall short of the benchmark's
 primary-evidence threshold:
 
 1. **Milano 55 GT1 / Prodrive Ferrari 550 GTS - manual blip.** The exact-car Evo
@@ -229,6 +243,21 @@ primary-evidence threshold:
    retained as an explicit simulator override. The photograph is strong direct
    visual evidence, but it is not manufacturer or homologation material, so the
    departure remains provisional.
+4. **BMW M3 E46 GTR - wheel geometry.** The reviewed real-car baseline and AMS2
+   cockpit show a round rim, while PMR build 24725083 shows a D-shaped rim. The
+   exact PMR observation is verified, but the authentic rim finding currently
+   rests on simulator cockpit inspection rather than manufacturer or
+   homologation evidence, so PMR's apparent departure stays provisional.
+5. **Nissan R390 GT1 - wheel geometry.** An identified photograph of Le Mans
+   chassis R8 shows a round rim, matching AMS2 and PMR, while the fingerprinted
+   AC implementation shows a D-shaped rim. The photograph is strong secondary
+   evidence rather than manufacturer or homologation material, so AC's
+   departure remains provisional.
+6. **Chevrolet Corvette C5-R - manual blip.** The current authentic baseline
+   requires a manual blip and AMS2 matches it, while the exact GTR2 HQ drive
+   accepted the downshift with neither a driver nor automatic blip. The baseline
+   still rests on simulator observation rather than an exact primary operating
+   source, so GTR2's no-blip result remains provisional.
 
 ## What a published finding must say
 
@@ -248,6 +277,10 @@ entire simulator from one car.
 [bmw-comparison]: https://www.press.bmwgroup.com/canada/article/attachment/T0334391EN/481490
 [bmw-first-drive]: https://www.bmwblog.com/2016/07/06/like-behind-wheel-bmw-m6-gtlm/
 [bmw-zanardi]: https://www.press.bmwgroup.com/italy/article/attachment/T0290729IT/423215
+[bmw-e46-spec]: https://www.press.bmwgroup.com/global/article/detail/T0003841EN/new-bmw-m3-gtr-unveiled-for-alms
+[bmw-e46-test]: https://www.autobild.de/artikel/track-test-bmw-m3-gtr-41389.html
+[bmw-e46-drive]: https://www.roadandtrack.com/motorsports/a22767418/2001-bmw-m3-gtr-test/
+[pmr-e46]: https://projectmotorracing.com/car.php?carIndex=60
 [nismo-spec]: https://www.nismo.co.jp/en/products/customerracing/pdf/nissan_gtr_nismo_gt3_2018-spec_en.pdf
 [nismo-cockpit]: https://www.nismo.co.jp/en/products/customerracing/img/racingcar/img_comfort_01.jpg
 [porsche-9912]: https://newsroom.porsche.com/en/motorsports/porsche-911-gt3-r-customer-racer-gt3-series-2019-racing-911-gt3-rs-aerodynamics-safety-15335.html

@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.45",
+  "approved_at": "2026-09-04",
+  "records": [
+    {
+      "record_id": "aston-martin-dbr9",
+      "bundle": "build/review-cases/issue-57/staged.json",
+      "display_name": "Aston Martin DBR9",
+      "class": "GT1 2005",
+      "manufacturer": "Aston Martin",
+      "model": "DBR9",
+      "year": {
+        "from": 2005,
+        "to": 2005,
+        "label": "2005-generation GT1 race specification"
+      },
+      "real_world_identity_notes": "The PMR DBR9 lead maps to the existing Aston Martin DBR9 record, using the 2005-generation GT1 race specification. The DBR9 was Aston Martin Racing's Prodrive-developed GT1 racer based on the DB9, with a six-speed Xtrac sequential gearbox. Do not conflate it with the road-going DB9, the customer-oriented DBRS9 GT3, or later Vantage race cars. Individual DBR9 chassis and later historic restorations could differ in cockpit equipment and shift-control calibration.",
+      "real_world_source_refs": [
+        "ultimatecarpage.aston-martin-dbr9.2005-2008",
+        "aston-martin-racing.dbr9.gt1-technical-specification",
+        "motorsportmagazine.aston-martin-dbr9.chassis-10.cockpit-2019",
+        "motorsportmagazine.aston-martin-dbr9.dbrs9-test-2007",
+        "goodwood.aston-martin-dbr9.chassis-10.technique-2019",
+        "as-driven.repository.aston-martin-dbr9-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Independent model history identifies the DBR9 as Aston Martin Racing's GT1 car, produced from 2005 to 2008 and debuting in 2005. The technical specification identifies its six-speed sequential transmission, and the checked-out repository already contains the matching curated Aston Martin DBR9 record. The PMR telemetry name is therefore an exact model lead for record reuse, not evidence for a new real-world vehicle.",
+      "identity_basis": "Independent model history identifies the DBR9 as Aston Martin Racing's GT1 car, produced from 2005 to 2008 and debuting in 2005. The technical specification identifies its six-speed sequential transmission, and the checked-out repository already contains the matching curated Aston Martin DBR9 record. The PMR telemetry name is therefore an exact model lead for record reuse, not evidence for a new real-world vehicle.",
+      "specification_basis": "The full-resolution exact-chassis cockpit photograph shows the display in a separate dashboard binnacle rather than integrated into the continuous steering-rim assembly. The full-resolution exact-chassis photograph clearly shows a continuous rim with material across the top; it is not an open-top wheel. The full-resolution exact-chassis photograph shows a continuous circular rim without a flattened top or bottom; the contemporary report independently describes the suede-rimmed DBR9 wheel. Exact-chassis reporting says de-clutching on downshift is optional, and the contemporary test says the driver did not need the left foot. Goodwood describes using the clutch on the way down for the same chassis, which supports optional/smoother use rather than a universal requirement. The manufacturer-origin technical specification and independent model reference both identify six forward ratios. Both technical sources explicitly identify the DBR9 transmission as sequential. They do not establish the stronger dogbox subtype, so the proposal uses the documented sequential value. The exact-chassis cockpit photograph visibly shows a tall gear lever, and the contemporary DBR9 report describes its massive sequential gearshift. The reviewed technical sources explicitly describe the gearbox as sequential; no H-pattern gate is established for the target specification. Goodwood explicitly reports clutch use to pull away, and the exact-chassis driving report describes the progressive clutch being used to select first gear and drive away. The exact-chassis report attributes flat, clutchless upshifts to a momentary electronic cut, while the contemporary test reports flat-throttle upshifts in the DBR9. The exact-chassis report says there is no need for the clutch on upshift, and the contemporary DBR9 test says the clutch was not used once underway. The exact-chassis report says the driver can keep the throttle open for the electronic-cut upshift, and contemporary testing reports the right foot staying on the throttle. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/manual_blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "yes",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "optional",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.dbr9.20260903t224453893z-63012abd directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-dbr9-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.dbr9.20260903t224453893z-63012abd directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-dbr9-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.dbr9.20260903t224453893z-63012abd directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-dbr9-controls.24725083"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2005-generation GT1 race specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_cut",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: no; wheel-rim shape: round; transmission downshift clutch: optional; forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; standing-start clutch use: required; transmission upshift automatic_cut: yes; transmission upshift clutch: not required; transmission upshift throttle_lift: not required.",
+        "Project Motor Racing 24725083 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/57",
+      "live_source_notes": "Guided-verification observation pmr.dbr9.20260903t224453893z-63012abd by Jason Kinslow; PMR 24725083. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "accept_from_drive": [
+        "/authentic_controls/steering/wheel_rim/open_top"
+      ],
+      "authentic_control_corrections": [
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "from": "not-required",
+          "to": "optional",
+          "basis": "Exact-chassis reporting says de-clutching on downshift is optional, and the contemporary test says the driver did not need the left foot. Goodwood describes using the clutch on the way down for the same chassis, which supports optional/smoother use rather than a universal requirement.",
+          "source_refs": [
+            "motorsportmagazine.aston-martin-dbr9.chassis-10.cockpit-2019",
+            "motorsportmagazine.aston-martin-dbr9.dbrs9-test-2007",
+            "goodwood.aston-martin-dbr9.chassis-10.technique-2019"
+          ],
+          "confidence": "medium"
+        }
+      ],
+      "driver_summary": "The Aston Martin DBR9, which Assetto Corsa lists as GT Adonis D9 V12. Six-speed sequential with a lever: the car cuts the upshift, so stay flat. Nothing blips the downshift and whether the gearbox needs one is not established, so blip anyway to settle the car into the corner.",
+      "game_version_correction": {
+        "observed": "unknown",
+        "verified": "24725083",
+        "basis": "The installed Project Motor Racing Steam app manifest for app 299970 records build 24725083 and LastUpdated 2026-08-31T17:26:06Z, before the DBR9 observation at 2026-09-03T22:44:53.893Z. Its LastPlayed timestamp is 2026-09-04T05:37:17Z, after the drive, so the manifest spans the observation without an intervening installed-build change."
+      }
+    }
+  ]
+}

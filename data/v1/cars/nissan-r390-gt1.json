@@ -37,7 +37,7 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "unknown",
+        "shape": "round",
         "integrated_display": "no",
         "shift_lights": "unknown",
         "open_top": "no",
@@ -231,6 +231,104 @@
         "basis": "RSS's first-party pack documentation and installed metadata identify the exact fingerprinted implementation as the primarily-1998 long-tail, 3,495 cc twin-turbo V8 car. NISMO independently gives that same combination only to the 1998 R390 GT1 and records its sequential transmission. Six sequential-stick gears, clutch-required move-off, automatic cut/blip, and cockpit wheel equipment were directly observed."
       },
       "display_name": "LMGT Nisumo R39 V8"
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "R390 GT1"
+        },
+        {
+          "kind": "internal-id",
+          "value": "R390 GT1"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR Steam build 24725083 via guided verification observation other.r390-gt1.20260903t042247443z-bfd53e8c by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
+        }
+      ],
+      "verified_game_version": "24725083",
+      "verified_at": "2026-09-03",
+      "source_refs": [
+        "nismo.r390-gt1-history.vol05",
+        "nissan.heritage.r390-gt1.1997",
+        "nissan.r390-gt1.inside04",
+        "wikipedia.nissan-r390-gt1",
+        "classicdriver.r390-gt1-r8-cockpit.2020",
+        "nissan.heritage.r390-gt1-road.1998",
+        "as-driven.repository.nissan-r390-gt1-record-scan",
+        "pmr.local-live-r390-gt1-controls.24725083"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "NISMO's official motorsport history identifies Nissan's 1998 R390 GT1 as the long-tail revision and says its transmission changed to a Nissan-built sequential type. Nissan's Heritage material identifies the R390 GT1 family and a six-speed sequential gearbox, while the 1998 Le Mans chassis R8 report identifies the race car and its cockpit. The exact PMR telemetry name and GT1 class are consistent with that existing curated identity; no separate real-world R390 variant is needed."
+      }
     }
   ],
   "provenance": {
@@ -248,14 +346,23 @@
       },
       {
         "paths": [
-          "/authentic_controls/steering/wheel_rim/shape",
           "/authentic_controls/steering/wheel_rim/shift_lights"
         ],
         "source_refs": [
           "nismo.r390-gt1-history.vol05"
         ],
         "confidence": "medium",
-        "basis": "NISMO's exact history contains no cockpit drawing or specification that establishes rim geometry or wheel-mounted shift lights."
+        "basis": "NISMO's exact history contains no cockpit drawing or specification that establishes wheel-mounted shift lights."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape"
+        ],
+        "source_refs": [
+          "classicdriver.r390-gt1-r8-cockpit.2020"
+        ],
+        "confidence": "high",
+        "basis": "The identified cockpit photograph of chassis R8, which finished fifth at the 1998 Le Mans 24 Hours, clearly shows a conventional round racing rim."
       },
       {
         "paths": [
@@ -329,6 +436,33 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "nismo.r390-gt1-history.vol05",
+          "nissan.heritage.r390-gt1.1997",
+          "nissan.r390-gt1.inside04",
+          "wikipedia.nissan-r390-gt1",
+          "classicdriver.r390-gt1-r8-cockpit.2020",
+          "nissan.heritage.r390-gt1-road.1998",
+          "as-driven.repository.nissan-r390-gt1-record-scan",
+          "pmr.local-live-r390-gt1-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "NISMO's official motorsport history identifies Nissan's 1998 R390 GT1 as the long-tail revision and says its transmission changed to a Nissan-built sequential type. Nissan's Heritage material identifies the R390 GT1 family and a six-speed sequential gearbox, while the 1998 Le Mans chassis R8 report identifies the race car and its cockpit. The exact PMR telemetry name and GT1 class are consistent with that existing curated identity; no separate real-world R390 variant is needed."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-r390-gt1-controls.24725083"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -346,6 +480,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-03",
   "driver_summary": "The Nissan R390 GT1, which Assetto Corsa lists as LMGT Nisumo R39 V8. Xtrac six-speed sequential on a short-throw lever. Upshift flat, the car cuts. It does not blip, so rev-match the downshifts yourself: a blip settles the rear into a corner whether or not the box demands it."
 }

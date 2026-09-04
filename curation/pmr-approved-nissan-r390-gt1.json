@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.37",
+  "approved_at": "2026-09-03",
+  "record_id": "nissan-r390-gt1",
+  "simulator": "pmr",
+  "telemetry_name": "R390 GT1",
+  "observed_game_version": "24725083",
+  "observed_through": "SimHub guided verification observation other.r390-gt1.20260903t042247443z-bfd53e8c",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 1998 Le Mans specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations from Steam build 24725083.",
+  "scope_notes": "The exact PMR identity is merged into the existing 1998 Nissan R390 GT1 record. Simulator behavior remains separate from the authentic real-car baseline.",
+  "historical_notes": "The immutable draft was captured under simulator other with game version unknown. Registration maps ProjectMotorRacing to pmr, and the exact installed Steam manifest supplies build ID 24725083. The R390 drive occurred in the same PMR session as the corrected M3 GTR drive six minutes later.",
+  "game_version_correction": {
+    "observed": "unknown",
+    "verified": "24725083",
+    "basis": "The R390 observation was captured in the same Project Motor Racing session as the M3 GTR observation six minutes later. The installed Steam app manifest for app 299970 recorded buildid 24725083; the executable's GIANTS engine file version is not a useful content build identifier."
+  },
+  "telemetry_class": "GT1"
+}

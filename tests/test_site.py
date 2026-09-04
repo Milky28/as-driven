@@ -159,6 +159,57 @@ class SiteTests(unittest.TestCase):
             for package in (" Downforce", " - Speedway", " - Superspeedway"):
                 self.assertFalse(car["name"].endswith(package), car["id"])
 
+    def test_each_car_maps_verified_fields_to_linked_sources(self) -> None:
+        payload = collect(ROOT)
+        page = build_site(ROOT)
+        self.assertEqual(
+            page.count('<details class="verification">'),
+            len(payload["cars"]),
+        )
+
+        corvette = next(
+            car for car in payload["cars"]
+            if car["id"] == "chevrolet-corvette-c5-r"
+        )
+        verification = corvette["verification"]
+        record = json.loads(
+            (ROOT / "data" / "v1" / "cars" / "chevrolet-corvette-c5-r.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            verification["claim_count"],
+            len(record["provenance"]["claims"]),
+        )
+        self.assertGreaterEqual(verification["source_count"], 2)
+        self.assertTrue(
+            any(
+                "Transmission and shift technique" in claim["fields"]
+                or "Gearbox construction" in claim["fields"]
+                for claim in verification["claims"]
+            )
+        )
+        manufacturer_claim = next(
+            claim for claim in verification["claims"]
+            if any(source["id"] == "gm-archive.corvette-c5r.2003"
+                   for source in claim["sources"])
+        )
+        manufacturer_source = next(
+            source for source in manufacturer_claim["sources"]
+            if source["id"] == "gm-archive.corvette-c5r.2003"
+        )
+        self.assertEqual(manufacturer_source["title"], "2003 Corvette C5-R specifications")
+        self.assertEqual(
+            manufacturer_source["url"],
+            "https://www.corvetteactioncenter.com/specs/c5/c5r/2003c5r.html",
+        )
+        self.assertIn("How this was verified", page)
+        self.assertIn(
+            '<a href="https://www.corvetteactioncenter.com/specs/c5/c5r/2003c5r.html" '
+            'target="_blank" rel="noreferrer">2003 Corvette C5-R specifications</a>',
+            page,
+        )
+        self.assertIn('class="confidence confidence-verified"', page)
+
     def test_a_simulator_difference_is_shown_without_altering_the_car(self) -> None:
         """Both layers, and neither one overwriting the other.
 
@@ -210,6 +261,49 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(cayman["real"], "No clutch needed")
         self.assertEqual(cayman["sim"], "Clutch required")
         self.assertEqual(cayman_car["launch"][0], "No clutch needed")
+
+        # The BMW correction is the full boundary in one record: the row keeps
+        # the works P60 V8's H-pattern technique while the AMS2 panel states
+        # every observed sequential-stick departure in driver-facing language.
+        bmw_car = by_name["BMW M3 E46 GTR"]
+        bmw = next(
+            simulator for simulator in bmw_car["simulators"]
+            if simulator["id"] == "ams2"
+        )
+        self.assertEqual(bmw_car["shifter"], "6-speed H-pattern")
+        self.assertEqual(bmw_car["gate"], "Standard gate, 1st up and left")
+        self.assertEqual(
+            [
+                (item["name"], item["real"], item["sim"])
+                for item in bmw["differences"]
+            ],
+            [
+                ("Shifter", "6-speed H-pattern", "6-speed sequential stick"),
+                (
+                    "Selection pattern",
+                    "Standard H-pattern",
+                    "Sequential, one gear at a time",
+                ),
+                ("Upshift", "Lift the throttle", "Stay flat, car cuts"),
+                ("Automatic shift cut", "No automatic cut", "Automatic cut"),
+            ],
+        )
+        pmr = next(
+            simulator for simulator in bmw_car["simulators"]
+            if simulator["id"] == "pmr"
+        )
+        self.assertEqual(
+            [
+                (item["name"], item["real"], item["sim"])
+                for item in pmr["differences"]
+            ],
+            [
+                ("Upshift", "Lift the throttle", "Stay flat"),
+                ("Downshift", "Blip to rev-match", "No blip needed"),
+                ("Wheel-rim category", "Round rim", "D-shaped rim"),
+            ],
+        )
+        self.assertEqual(pmr["unknown_behavior"], ["automatic shift cut"])
 
     def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
         # The Milano's override is the clutch on a downshift, which the table
@@ -297,6 +391,8 @@ class SiteTests(unittest.TestCase):
                 {"id": "ac", "label": "Assetto Corsa"},
                 {"id": "acc", "label": "Assetto Corsa Competizione"},
                 {"id": "ac-evo", "label": "Assetto Corsa EVO"},
+                {"id": "gtr2", "label": "GTR 2"},
+                {"id": "pmr", "label": "Project Motor Racing"},
                 {"id": "raceroom", "label": "RaceRoom Racing Experience"},
                 {"id": "rfactor2", "label": "rFactor 2"},
             ],
@@ -305,8 +401,10 @@ class SiteTests(unittest.TestCase):
         self.assertIn('<option value="ac">AC</option>', page)
         self.assertIn('<option value="acc">ACC</option>', page)
         self.assertIn('<option value="ac-evo">AC EVO</option>', page)
+        self.assertIn('<option value="gtr2">GTR2</option>', page)
         self.assertIn('<option value="raceroom">RaceRoom</option>', page)
         self.assertIn('<option value="rfactor2">rF2</option>', page)
+        self.assertIn('<option value="pmr">PMR</option>', page)
         self.assertIn('<option value="ams2">AMS2</option>', page)
 
     def test_comparison_modes_separate_coverage_from_disagreement(self) -> None:

@@ -39,6 +39,8 @@
         "ac-rally",
         "raceroom",
         "rfactor2",
+        "pmr",
+        "gtr2",
         "other"
       ]
     },
@@ -367,9 +369,10 @@
               "type": "string",
               "enum": [
                 "data-acd",
-                "loose-data-directory"
+                "loose-data-directory",
+                "gtr2-car-hdc-gear-files"
               ],
-              "description": "What was digested. `data-acd` is the packed data file, which is how most Assetto Corsa cars ship and which excludes skins and models while including the gearbox. `loose-data-directory` is a deterministic digest of an unpacked data directory."
+              "description": "What was digested. `data-acd` is the packed data file, which is how most Assetto Corsa cars ship and which excludes skins and models while including the gearbox. `loose-data-directory` is a deterministic digest of an unpacked data directory. `gtr2-car-hdc-gear-files` combines the selected GTR2 `.CAR`, its referenced `.HDC`, and its referenced gearbox file."
             },
             "algorithm": {
               "type": "string",

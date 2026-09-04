@@ -132,6 +132,11 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("Regenerate proposal", page)
         self.assertIn("Generate driver summary", page)
         self.assertIn("Regenerate driver summary", page)
+        self.assertIn("Save summary and revalidate", page)
+        self.assertIn("Regenerate suggested summary", page)
+        self.assertIn("save-driver-summary", page)
+        self.assertIn("Generated automatically", page)
+        self.assertIn("Save or discard the driver summary edit before promotion", page)
         self.assertIn("simulator overrides, driver summary, and source wording", page)
         self.assertIn("Publish response and close issue", page)
         self.assertIn("Promotion complete, publication pending", page)
@@ -156,6 +161,39 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("state-final-review", page)
         self.assertIn("state-identity-research", page)
         self.assertIn('const token="test-token"', page)
+
+    def test_prepare_review_generates_a_summary_and_editing_redry_runs(self) -> None:
+        application = WorkbenchApplication(Path("."))
+        allowed = {
+            "summary": {
+                "allowed_actions": ["prepare-review", "save-driver-summary"]
+            }
+        }
+        with (
+            patch.object(application, "case_detail", return_value=allowed),
+            patch(
+                "as_driven_db.maintainer_workbench.prepare_review_proposal",
+                return_value={"dry_run": "passed"},
+            ) as prepare,
+            patch(
+                "as_driven_db.maintainer_workbench.generate_driver_summary_proposal",
+                return_value={"dry_run": "passed", "summary": "Draft"},
+            ) as summarize,
+        ):
+            result = application.perform(7, "prepare-review", {})
+            self.assertEqual("passed", result["driver_summary"]["dry_run"])
+            prepare.assert_called_once()
+            self.assertTrue(summarize.call_args.kwargs["preserve_existing"])
+
+            application.perform(
+                7,
+                "save-driver-summary",
+                {"driver_summary": "Edited driver advice."},
+            )
+            self.assertEqual(
+                "Edited driver advice.",
+                summarize.call_args.kwargs["driver_summary"],
+            )
 
     def test_sync_requests_are_serialized(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

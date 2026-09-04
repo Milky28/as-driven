@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.36",
+  "approved_at": "2026-09-02",
+  "record_id": "bmw-m3-e46-gtr",
+  "simulator": "pmr",
+  "telemetry_name": "M3 GTR (E46)",
+  "telemetry_class": "N-GT",
+  "observed_game_version": "24725083",
+  "observed_through": "SimHub guided verification observation other.m3-gtr-e46.20260903t042848051z-1ddd885d",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "running_shift_clutch": "not-required",
+    "throttle_lift": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The approval retains the independently established works-car baseline: six-speed H-pattern dog box, brief lift, manual rev-match and round rim. The exact PMR identity was captured in Steam build 24725083. PMR's H-pattern cockpit and direct selection agree with the real mechanism even though its page says sequential and next/previous bindings also work. PMR's accepted full-throttle and coast shifts plus D-shaped rim are explicit simulator overrides; its automatic cut remains unknown because the torque trace did not establish one.",
+  "scope_notes": "The official PMR V8 N-GT identity and exact telemetry are merged into the existing BMW Motorsport P60 record. Simulator permissiveness is stored as behavior and overrides, not inherited by the authentic real-car baseline.",
+  "historical_notes": "The immutable draft was captured under simulator other with game version unknown. Registration maps ProjectMotorRacing to pmr, and the exact installed Steam manifest supplies build ID 24725083. The staged record id m3-gtr-e46 was reviewed and merged into bmw-m3-e46-gtr.",
+  "game_version_correction": {
+    "observed": "unknown",
+    "verified": "24725083",
+    "basis": "The installed Project Motor Racing Steam app manifest for app 299970 recorded buildid 24725083; the executable's GIANTS engine file version is not a useful content build identifier."
+  },
+  "staged_record_id": "m3-gtr-e46"
+}

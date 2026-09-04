@@ -99,6 +99,32 @@ class ImportObservationTests(unittest.TestCase):
         self.assertIn("no declared version", note)
         self.assertIn("not the real car", note)
 
+    def test_gtr2_physics_fingerprint_scope_is_registered(self) -> None:
+        observation = _clean_observation()
+        observation["simulator"] = "gtr2"
+        observation["observation_id"] = "gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d"
+        observation["implementation"] = {
+            "content_id": "GAMEDATA/TEAMS/24H/BMW M3GTR TEAMS/BMW MOTORSPORT/04142HQ_G2_BMW_M3GTR.CAR",
+            "author": "GTR233 and friends",
+            "declared_version": "16.0.0",
+            "fingerprint": {
+                "scope": "gtr2-car-hdc-gear-files",
+                "algorithm": "sha256",
+                "digest": "a" * 64,
+            },
+        }
+        schema = json.loads(
+            (ROOT / "schema" / "v1" / "verification-observation.schema.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual([], validate_instance(observation, schema, "observation"))
+        bundle = import_observation(observation, imported_at="2026-09-03")
+        note = next(
+            (n for n in bundle["review_notes"] if "Driven implementation" in n), None
+        )
+        self.assertIn("gtr2-car-hdc-gear-files", note)
+        self.assertIn("16.0.0", note)
+
     def test_maps_clean_drive_to_record_and_ids(self) -> None:
         bundle = import_observation(_clean_observation(), imported_at="2026-08-12")
         record = bundle["record"]
@@ -219,6 +245,32 @@ class ImportObservationTests(unittest.TestCase):
         )
         self.assertTrue(
             any("throttle interruption alone" in note for note in bundle["review_notes"])
+        )
+
+    def test_gtr2_missing_throttle_preserves_every_dependent_unknown(self) -> None:
+        observation = _clean_observation()
+        observation["simulator"] = "gtr2"
+        observation["observation_id"] = "gtr2.test-prototype.20260902t120000000z-abcd1234"
+        observation["game_version"] = "1.1.0.0"
+        # This is the unsafe shape produced by a held pre-registration drive:
+        # no usable throttle was published, but the old generic rules could
+        # still leave apparently definitive automation results behind.
+        observation["tests"]["full_throttle_upshift"] = "yes"
+        observation["tests"]["automatic_cut"] = "yes"
+        observation["tests"]["automatic_blip"] = "no"
+
+        bundle = import_observation(observation)
+        transmission = bundle["record"]["authentic_controls"]["transmission"]
+        behavior = bundle["record"]["simulators"][0]["behavior"]
+
+        self.assertEqual(transmission["upshift"]["throttle_lift"], "unknown")
+        self.assertEqual(transmission["upshift"]["automatic_cut"], "unknown")
+        self.assertEqual(transmission["downshift"]["automatic_blip"], "unknown")
+        self.assertEqual(behavior["shift_cut"], "unknown")
+        self.assertEqual(behavior["auto_blip"], "unknown")
+        self.assertTrue(
+            any("no usable driver-throttle input" in note
+                for note in bundle["review_notes"])
         )
 
     def test_unknown_actuation_does_not_infer_gearbox(self) -> None:

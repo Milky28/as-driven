@@ -45,6 +45,8 @@
         "ac-rally",
         "raceroom",
         "rfactor2",
+        "pmr",
+        "gtr2",
         "other"
       ]
     },
@@ -311,8 +313,10 @@
                     "acc",
                     "ac-evo",
                     "ac-rally",
-        "raceroom",
-        "rfactor2",
+                    "raceroom",
+                    "rfactor2",
+                    "pmr",
+                    "gtr2",
                     "other"
                   ]
                 },

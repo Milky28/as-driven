@@ -384,15 +384,15 @@ namespace AsDriven.Plugin
                     AutomaticBlip = ChoiceValue(_automaticBlip),
                     AutomaticBlipMethod = _automaticBlipMethod.Text,
                     FullThrottleUpshift = _guidedFullThrottleUpshift,
-                    // Only Assetto Corsa so far. Its car names are author-chosen
-                    // and several packages may depict the same real car while
-                    // shifting differently, so a drive that records only the name
-                    // cannot afterwards be attributed to what was driven. Null
-                    // when the installation is not where this looks, which is an
-                    // ordinary outcome rather than a failure.
-                    Implementation = _capture.Simulator == "ac"
-                        ? CarImplementation.ForAssettoCorsa(_capture.InternalId)
-                        : null,
+                    // GTR2 resolves and fingerprints its selected .CAR and
+                    // physics files while the game is running. Assetto Corsa's
+                    // package can be resolved from its content id at save time.
+                    // Null remains an ordinary outcome when an installation is
+                    // unavailable rather than making the drive itself fail.
+                    Implementation = _capture.Implementation
+                        ?? (_capture.Simulator == "ac"
+                            ? CarImplementation.ForAssettoCorsa(_capture.InternalId)
+                            : null),
                     CoastDownshift = _guidedCoastDownshift,
                     VisibleShiftActuators = visible,
                     PrimaryShiftActuation = ChoiceValue(_primaryActuation),

@@ -217,11 +217,7 @@ namespace AsDriven.Core
         public GuidanceSnapshot Match(string rawGameName, string rawCarIdentifier)
         {
             string simulator = CanonicalizeSimulator(rawGameName);
-            // A name the matcher recognizes is not the same as a game this
-            // dataset can answer for. Without the record check, a simulator with
-            // no curated cars reports every car as unmatched instead of saying
-            // plainly that the game is not covered yet.
-            if (simulator == null || !IsCovered(simulator))
+            if (simulator == null)
             {
                 return GuidanceSnapshot.Empty(
                     "unsupported-game", rawGameName, rawCarIdentifier, DatasetVersion);
@@ -230,6 +226,17 @@ namespace AsDriven.Core
             {
                 return GuidanceSnapshot.Empty(
                     "no-car", rawGameName, rawCarIdentifier, DatasetVersion);
+            }
+
+            // A registered simulator with no curated entries is exactly where
+            // its first contribution comes from. Treat its live identity as an
+            // unmatched car so the popup and plugin page offer the contribution
+            // workflow. Supports() and Simulators remain coverage questions and
+            // still list only games that already carry curated records.
+            if (!IsCovered(simulator))
+            {
+                return GuidanceSnapshot.Empty(
+                    "unmatched", rawGameName, rawCarIdentifier, DatasetVersion);
             }
 
             foreach (string kind in MatchPriority)
@@ -340,6 +347,18 @@ namespace AsDriven.Core
             if (compact == "rfactor2" || compact == "rf2")
             {
                 return "rfactor2";
+            }
+            if (compact == "projectmotorracing" || compact == "pmr")
+            {
+                return "pmr";
+            }
+            // SimHub reports the original game through its legacy engine
+            // plugin name, SIMBINGTR2. Keep GTR 2 distinct from later titles.
+            if (compact == "simbingtr2"
+                || compact == "gtr2"
+                || compact == "gtr2fiagtracinggame")
+            {
+                return "gtr2";
             }
             return null;
         }
@@ -1051,6 +1070,8 @@ namespace AsDriven.Core
                 case "ac-evo": return "AssettoCorsaEvo";
                 case "raceroom": return "RRRE";
                 case "rfactor2": return "RFactor2";
+                case "pmr": return "ProjectMotorRacing";
+                case "gtr2": return "SIMBINGTR2";
                 default: return simulator;
             }
         }
@@ -1069,6 +1090,8 @@ namespace AsDriven.Core
                 case "ac-evo": return "Assetto Corsa EVO";
                 case "raceroom": return "RaceRoom Racing Experience";
                 case "rfactor2": return "rFactor 2";
+                case "pmr": return "Project Motor Racing";
+                case "gtr2": return "GTR 2 - FIA GT Racing Game";
                 default: return simulator;
             }
         }
@@ -1084,6 +1107,8 @@ namespace AsDriven.Core
                 case "ac-evo": return "AC EVO";
                 case "raceroom": return "RaceRoom";
                 case "rfactor2": return "rF2";
+                case "pmr": return "PMR";
+                case "gtr2": return "GTR2";
                 default: return simulator;
             }
         }

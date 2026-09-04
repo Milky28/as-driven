@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.34",
-  "generated_at": "2026-08-29",
+  "dataset_version": "0.5.45",
+  "generated_at": "2026-09-04",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -10,18 +10,18 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 21,
-    "findings": 29,
+    "cars_with_disagreements": 23,
+    "findings": 37,
     "by_status": {
-      "authentic-baseline-open": 17,
-      "provisional-departure": 3,
-      "supported-departure": 9
+      "authentic-baseline-open": 16,
+      "provisional-departure": 8,
+      "supported-departure": 13
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 7,
+      "hardware-choice": 12,
       "launch-technique": 9,
-      "running-shift-technique": 9
+      "running-shift-technique": 12
     }
   },
   "findings": [
@@ -127,6 +127,439 @@
       }
     },
     {
+      "finding_id": "bmw-m3-e46-gtr--transmission-shift-pattern",
+      "record_id": "bmw-m3-e46-gtr",
+      "display_name": "BMW M3 E46 GTR",
+      "class": "GTR 2004",
+      "path": "/authentic_controls/transmission/shift_pattern",
+      "field": "Gate pattern",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "standard-h",
+        "display_value": "Standard H",
+        "confidence": "high",
+        "source_refs": [
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018",
+          "youtube.m3-gtr.spa-test.2004"
+        ],
+        "primary_source_refs": [
+          "bmw.m3-gtr.alms-launch.2001"
+        ],
+        "basis": "BMW's period P60 V8 specification establishes a straight-cut six-speed manual. AUTO BILD's contemporary works-car test explicitly identifies a conventional H pattern and brief driver lift; the restored original chassis drive independently identifies the H-pattern dog box, and period Spa footage corroborates the gate."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "sequential",
+          "display_value": "Sequential",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "standard-h",
+          "display_value": "Standard H",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "verified",
+          "source_refs": [
+            "pmr.m3-gtr-e46.official-car-page",
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "sequential",
+          "display_value": "Sequential",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "bmw.m3-gtr.alms-launch.2001",
+            "autobild.m3-gtr.track-test.2003",
+            "road-and-track.m3-gtr.drive.2018",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "bmw.m3-gtr.strassenversion",
+            "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "supported-departure",
+        "matching_simulators": [
+          "pmr"
+        ],
+        "departing_simulators": [
+          "ams2",
+          "gtr2"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "bmw-m3-e46-gtr--transmission-downshift-manual-blip",
+      "record_id": "bmw-m3-e46-gtr",
+      "display_name": "BMW M3 E46 GTR",
+      "class": "GTR 2004",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "high",
+        "source_refs": [
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018"
+        ],
+        "primary_source_refs": [
+          "bmw.m3-gtr.alms-launch.2001"
+        ],
+        "basis": "The period test directly establishes clutchless H-pattern upshifts after a brief throttle lift. BMW specifies the carbon clutch, and the restored-car drive describes its start and clutchless, manually rev-matched running shifts. Dog engagement fixes the remaining clutch and blip technique under the dataset's reviewed construction rules."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "verified",
+          "source_refs": [
+            "pmr.m3-gtr-e46.official-car-page",
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "bmw.m3-gtr.alms-launch.2001",
+            "autobild.m3-gtr.track-test.2003",
+            "road-and-track.m3-gtr.drive.2018",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "bmw.m3-gtr.strassenversion",
+            "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "supported-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "pmr",
+          "gtr2"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "bmw-m3-e46-gtr--transmission-shift-actuation",
+      "record_id": "bmw-m3-e46-gtr",
+      "display_name": "BMW M3 E46 GTR",
+      "class": "GTR 2004",
+      "path": "/authentic_controls/transmission/shift_actuation",
+      "field": "Shifter",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "h-pattern",
+        "display_value": "H-pattern",
+        "confidence": "high",
+        "source_refs": [
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018",
+          "youtube.m3-gtr.spa-test.2004"
+        ],
+        "primary_source_refs": [
+          "bmw.m3-gtr.alms-launch.2001"
+        ],
+        "basis": "BMW's period P60 V8 specification establishes a straight-cut six-speed manual. AUTO BILD's contemporary works-car test explicitly identifies a conventional H pattern and brief driver lift; the restored original chassis drive independently identifies the H-pattern dog box, and period Spa footage corroborates the gate."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "sequential-stick",
+          "display_value": "sequential stick",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "h-pattern",
+          "display_value": "H-pattern",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "verified",
+          "source_refs": [
+            "pmr.m3-gtr-e46.official-car-page",
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "sequential-stick",
+          "display_value": "sequential stick",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "bmw.m3-gtr.alms-launch.2001",
+            "autobild.m3-gtr.track-test.2003",
+            "road-and-track.m3-gtr.drive.2018",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "bmw.m3-gtr.strassenversion",
+            "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "supported-departure",
+        "matching_simulators": [
+          "pmr"
+        ],
+        "departing_simulators": [
+          "ams2",
+          "gtr2"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "bmw-m3-e46-gtr--transmission-upshift-throttle-lift",
+      "record_id": "bmw-m3-e46-gtr",
+      "display_name": "BMW M3 E46 GTR",
+      "class": "GTR 2004",
+      "path": "/authentic_controls/transmission/upshift/throttle_lift",
+      "field": "Upshift throttle",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "high",
+        "source_refs": [
+          "bmw.m3-gtr.alms-launch.2001",
+          "autobild.m3-gtr.track-test.2003",
+          "road-and-track.m3-gtr.drive.2018"
+        ],
+        "primary_source_refs": [
+          "bmw.m3-gtr.alms-launch.2001"
+        ],
+        "basis": "The period test directly establishes clutchless H-pattern upshifts after a brief throttle lift. BMW specifies the carbon clutch, and the restored-car drive describes its start and clutchless, manually rev-matched running shifts. Dog engagement fixes the remaining clutch and blip technique under the dataset's reviewed construction rules."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "verified",
+          "source_refs": [
+            "pmr.m3-gtr-e46.official-car-page",
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "bmw.m3-gtr.alms-launch.2001",
+            "autobild.m3-gtr.track-test.2003",
+            "road-and-track.m3-gtr.drive.2018",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "bmw.m3-gtr.strassenversion",
+            "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "supported-departure",
+        "matching_simulators": [
+          "gtr2"
+        ],
+        "departing_simulators": [
+          "ams2",
+          "pmr"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "bmw-m3-e46-gtr--steering-wheel-rim-shape",
+      "record_id": "bmw-m3-e46-gtr",
+      "display_name": "BMW M3 E46 GTR",
+      "class": "GTR 2004",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "round",
+        "display_value": "Round rim",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Guided tests and cockpit inspection directly establish the simulator behavior and wheel details."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "reiza-forum.m3-gtr-gearbox.2025",
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "verified",
+          "source_refs": [
+            "pmr.m3-gtr-e46.official-car-page",
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "bmw.m3-gtr.alms-launch.2001",
+            "autobild.m3-gtr.track-test.2003",
+            "road-and-track.m3-gtr.drive.2018",
+            "bmw.m3-gtr.spa-race-report.2004",
+            "bmw.m3-gtr.strassenversion",
+            "as-driven.repository.bmw-m3-e46-gtr-record-scan",
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "pmr",
+          "gtr2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
+      }
+    },
+    {
       "finding_id": "bmw-m6-gt3--transmission-standing-start-clutch",
       "record_id": "bmw-m6-gt3",
       "display_name": "BMW M6 GT3",
@@ -188,6 +621,281 @@
         ],
         "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
         "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "chevrolet-corvette-c5-r--transmission-shift-pattern",
+      "record_id": "chevrolet-corvette-c5-r",
+      "display_name": "Chevrolet Corvette C5-R",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/shift_pattern",
+      "field": "Gate pattern",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "sequential",
+        "display_value": "Sequential",
+        "confidence": "verified",
+        "source_refs": [
+          "gm-archive.corvette-c5r.2003",
+          "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Archived manufacturer specification and direct exercise of the modeled six-speed sequential stick agree."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "sequential",
+          "display_value": "Sequential",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "gm-archive.corvette-c5r.2003",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "sequential",
+          "display_value": "Sequential",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "gm-archive.corvette-c5r.2003",
+            "gm.corvette-racing.2004-program",
+            "gm.history.corvette-racing.c5r.1999-2004",
+            "national-corvette-museum.c5r-004.cockpit.2025",
+            "raceart.c5r-006.cockpit.2020",
+            "gmauthority.corvette-c5r.history-spec",
+            "gtr2.catalog.corvette-c5r.2004",
+            "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "standard-h",
+          "display_value": "Standard H",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.corvette-c5r.2004",
+            "gm.corvette-racing.2004-program",
+            "gm.history.corvette-racing.c5r.1999-2004",
+            "gm-archive.corvette-c5r.2003",
+            "national-corvette-museum.c5r-004.cockpit.2025",
+            "raceart.c5r-006.cockpit.2020",
+            "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "gtr2"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for gate pattern before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "chevrolet-corvette-c5-r--transmission-downshift-manual-blip",
+      "record_id": "chevrolet-corvette-c5-r",
+      "display_name": "Chevrolet Corvette C5-R",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game testing and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "gm-archive.corvette-c5r.2003",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "gm-archive.corvette-c5r.2003",
+            "gm.corvette-racing.2004-program",
+            "gm.history.corvette-racing.c5r.1999-2004",
+            "national-corvette-museum.c5r-004.cockpit.2025",
+            "raceart.c5r-006.cockpit.2020",
+            "gmauthority.corvette-c5r.history-spec",
+            "gtr2.catalog.corvette-c5r.2004",
+            "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.corvette-c5r.2004",
+            "gm.corvette-racing.2004-program",
+            "gm.history.corvette-racing.c5r.1999-2004",
+            "gm-archive.corvette-c5r.2003",
+            "national-corvette-museum.c5r-004.cockpit.2025",
+            "raceart.c5r-006.cockpit.2020",
+            "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "gtr2",
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "chevrolet-corvette-c5-r--transmission-shift-actuation",
+      "record_id": "chevrolet-corvette-c5-r",
+      "display_name": "Chevrolet Corvette C5-R",
+      "class": "GT1 2005",
+      "path": "/authentic_controls/transmission/shift_actuation",
+      "field": "Shifter",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "sequential-stick",
+        "display_value": "sequential stick",
+        "confidence": "verified",
+        "source_refs": [
+          "gm-archive.corvette-c5r.2003",
+          "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Archived manufacturer specification and direct exercise of the modeled six-speed sequential stick agree."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "sequential-stick",
+          "display_value": "sequential stick",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-11",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.8.5.historical-endurance",
+            "gm-archive.corvette-c5r.2003",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "gtr2",
+          "label": "GTR 2",
+          "value": "sequential-stick",
+          "display_value": "sequential stick",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.1.0.0",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "gm-archive.corvette-c5r.2003",
+            "gm.corvette-racing.2004-program",
+            "gm.history.corvette-racing.c5r.1999-2004",
+            "national-corvette-museum.c5r-004.cockpit.2025",
+            "raceart.c5r-006.cockpit.2020",
+            "gmauthority.corvette-c5r.history-spec",
+            "gtr2.catalog.corvette-c5r.2004",
+            "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+            "gtr2.local-live-hq-chevrolet-corvette-c5-r-controls.1.1.0.0"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "h-pattern",
+          "display_value": "H-pattern",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.corvette-c5r.2004",
+            "gm.corvette-racing.2004-program",
+            "gm.history.corvette-racing.c5r.1999-2004",
+            "gm-archive.corvette-c5r.2003",
+            "national-corvette-museum.c5r-004.cockpit.2025",
+            "raceart.c5r-006.cockpit.2020",
+            "as-driven.repository.chevrolet-corvette-c5-r-record-scan",
+            "pmr.local-live-corvette-c5-r-controls.24725083"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "gtr2"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for shifter before publishing a benchmark verdict."
       }
     },
     {
@@ -1013,6 +1721,26 @@
             "rss.classic-endurance-pack-1.readme.2022",
             "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
           ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "nissan.heritage.r390-gt1.1997",
+            "nissan.r390-gt1.inside04",
+            "wikipedia.nissan-r390-gt1",
+            "classicdriver.r390-gt1-r8-cockpit.2020",
+            "nissan.heritage.r390-gt1-road.1998",
+            "as-driven.repository.nissan-r390-gt1-record-scan",
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
         }
       ],
       "adjudication": {
@@ -1073,6 +1801,26 @@
             "rss.classic-endurance-pack-1.readme.2022",
             "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
           ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "nissan.heritage.r390-gt1.1997",
+            "nissan.r390-gt1.inside04",
+            "wikipedia.nissan-r390-gt1",
+            "classicdriver.r390-gt1-r8-cockpit.2020",
+            "nissan.heritage.r390-gt1-road.1998",
+            "as-driven.repository.nissan-r390-gt1-record-scan",
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
         }
       ],
       "adjudication": {
@@ -1093,16 +1841,14 @@
       "driver_impact": "hardware-choice",
       "priority": "high",
       "authentic_baseline": {
-        "value": "unknown",
-        "display_value": "Not established",
-        "confidence": "medium",
+        "value": "round",
+        "display_value": "Round rim",
+        "confidence": "high",
         "source_refs": [
-          "nismo.r390-gt1-history.vol05"
+          "classicdriver.r390-gt1-r8-cockpit.2020"
         ],
-        "primary_source_refs": [
-          "nismo.r390-gt1-history.vol05"
-        ],
-        "basis": "NISMO's exact history contains no cockpit drawing or specification that establishes rim geometry or wheel-mounted shift lights."
+        "primary_source_refs": [],
+        "basis": "The identified cockpit photograph of chassis R8, which finished fifth at the 1998 Le Mans 24 Hours, clearly shows a conventional round racing rim."
       },
       "simulator_views": [
         {
@@ -1110,7 +1856,7 @@
           "label": "AMS2",
           "value": "round",
           "display_value": "Round rim",
-          "relationship_to_authentic": "baseline-open",
+          "relationship_to_authentic": "matches-baseline",
           "verified_game_version": "1.6.9.91",
           "verified_at": "2026-08-13",
           "confidence": "high",
@@ -1124,7 +1870,7 @@
           "label": "Assetto Corsa",
           "value": "d-shaped",
           "display_value": "D-shaped rim",
-          "relationship_to_authentic": "baseline-open",
+          "relationship_to_authentic": "departs-from-baseline",
           "verified_game_version": "14923034",
           "verified_at": "2026-08-22",
           "confidence": "high",
@@ -1133,14 +1879,39 @@
             "rss.classic-endurance-pack-1.readme.2022",
             "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
           ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "nissan.heritage.r390-gt1.1997",
+            "nissan.r390-gt1.inside04",
+            "wikipedia.nissan-r390-gt1",
+            "classicdriver.r390-gt1-r8-cockpit.2020",
+            "nissan.heritage.r390-gt1-road.1998",
+            "as-driven.repository.nissan-r390-gt1-record-scan",
+            "pmr.local-live-r390-gt1-controls.24725083"
+          ]
         }
       ],
       "adjudication": {
-        "status": "authentic-baseline-open",
-        "matching_simulators": [],
-        "departing_simulators": [],
-        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
-        "next_action": "Find real-car evidence for wheel-rim category."
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "pmr"
+        ],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
       }
     },
     {
@@ -1902,7 +2673,7 @@
         "primary_source_refs": [
           "nismo.r390-gt1-history.vol05"
         ],
-        "basis": "NISMO's exact history contains no cockpit drawing or specification that establishes rim geometry or wheel-mounted shift lights."
+        "basis": "NISMO's exact history contains no cockpit drawing or specification that establishes wheel-mounted shift lights."
       },
       "simulator_views": [
         {
@@ -1932,6 +2703,26 @@
             "nismo.r390-gt1-history.vol05",
             "rss.classic-endurance-pack-1.readme.2022",
             "ac.local-live-lmgt-nisumo-r39-v8-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "24725083",
+          "verified_at": "2026-09-03",
+          "confidence": "high",
+          "source_refs": [
+            "nismo.r390-gt1-history.vol05",
+            "nissan.heritage.r390-gt1.1997",
+            "nissan.r390-gt1.inside04",
+            "wikipedia.nissan-r390-gt1",
+            "classicdriver.r390-gt1-r8-cockpit.2020",
+            "nissan.heritage.r390-gt1-road.1998",
+            "as-driven.repository.nissan-r390-gt1-record-scan",
+            "pmr.local-live-r390-gt1-controls.24725083"
           ]
         }
       ],
