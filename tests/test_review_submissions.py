@@ -149,7 +149,7 @@ def existing_research_issue(number: int = 58) -> dict:
         "title": "[Research]: Alfa Romeo 156 Superturismo",
         "body": """### Existing car record
 
-alfa-romeo-156-super-touring
+https://milky28.github.io/as-driven/#alfa-romeo-156-super-touring--raceroom
 
 ### What should this research improve?
 

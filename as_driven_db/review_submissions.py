@@ -178,19 +178,30 @@ def _issue_kind(body: str) -> str:
 
 def _record_reference_candidates(value: str) -> set[str]:
     candidates = {value.strip().strip("`\"")}
-    for label, url in re.findall(r"\[([^\]\r\n]+)\]\((https://[^)\s]+)\)", value):
-        candidates.add(label.strip().strip("`\""))
+
+    def add_url_candidates(url: str) -> None:
         parsed = urlsplit(url)
         if parsed.fragment:
-            candidates.add(unquote(parsed.fragment).removeprefix("car-").removeprefix("record-"))
+            fragment = (
+                unquote(parsed.fragment)
+                .removeprefix("car-")
+                .removeprefix("record-")
+            )
+            candidates.add(fragment)
+            # Simulator tabs are shareable as #<record-id>--<simulator>. A
+            # double hyphen cannot occur in a valid record id, so this remains
+            # exact identity resolution rather than fuzzy matching.
+            if "--" in fragment:
+                candidates.add(fragment.split("--", 1)[0])
         if parsed.path:
             candidates.add(unquote(parsed.path.rstrip("/").rsplit("/", 1)[-1]))
+
+    for label, url in re.findall(r"\[([^\]\r\n]+)\]\((https://[^)\s]+)\)", value):
+        candidates.add(label.strip().strip("`\""))
+        add_url_candidates(url)
     parsed = urlsplit(value.strip())
     if parsed.scheme == "https":
-        if parsed.fragment:
-            candidates.add(unquote(parsed.fragment).removeprefix("car-").removeprefix("record-"))
-        if parsed.path:
-            candidates.add(unquote(parsed.path.rstrip("/").rsplit("/", 1)[-1]))
+        add_url_candidates(value.strip())
     return {candidate for candidate in candidates if candidate}
 
 
