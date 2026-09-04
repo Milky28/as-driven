@@ -1315,9 +1315,9 @@ def render(payload: dict[str, Any]) -> str:
         benchmark=benchmark,
         rows=rows,
     )
-    # The page owns no <head>, so it cannot declare a charset. Emitting numeric
-    # references keeps a name like "Fórmula Inter MG15" or a separator correct
-    # whatever encoding the host assumes.
+    # Keep the generated artifact ASCII-only even though the public document
+    # declares UTF-8. That preserves the original offline portability while
+    # names such as "Fórmula Inter MG15" remain correct on every host.
     return page.encode("ascii", "xmlcharrefreplace").decode("ascii")
 
 
@@ -1325,7 +1325,14 @@ def build_site(root: Path) -> str:
     return render(collect(root))
 
 
-TEMPLATE = """<title>As Driven Controls</title>
+TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Find the authentic wheel, shifter, clutch and shift technique for cars across reviewed racing simulators.">
+<link rel="canonical" href="https://milky28.github.io/as-driven/">
+<title>As Driven | Authentic sim-racing controls</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -1809,6 +1816,9 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
 }}
 .legend .tone {{ margin-right: 7px; }}
 footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68ch; }}
+footer p {{ margin: 0; }}
+.project-links {{ display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; }}
+.project-links a {{ color: var(--accent); text-underline-offset: 3px; }}
 @media (prefers-reduced-motion: reduce) {{ * {{ transition: none !important; }} }}
 @media (max-width: 720px) {{
   .wrap {{ padding: 28px 14px 60px; }}
@@ -1825,6 +1835,8 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
   .benchmark-grid {{ grid-template-columns: 1fr; }}
 }}
 </style>
+</head>
+<body>
 
 <div class="wrap">
 <header>
@@ -1920,14 +1932,14 @@ footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68c
   <span><span class="tone tone-unknown">Not established</span></span>
 </div>
 
-<footer>Select a car for the mechanism it shares with others, where it departs
+<footer><p>Select a car for the mechanism it shares with others, where it departs
 from that, and what a drive or a source would still have to settle. Every row
 describes the real car. Open it to choose a reviewed simulator; differences and
 simulator-specific evidence gaps stay inside that view, because they are
 separate facts and neither overwrites the real car. Each simulator view has a
 stable link that can be shared. Open <strong>How this was verified</strong> to
 see each curated claim, its confidence and rationale, and the sources that
-support it.</footer>
+support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-driven">Project source and downloads</a><a href="https://github.com/Milky28/as-driven/issues/new/choose">Contribute a car</a></p></footer>
 </div>
 </div>
 
@@ -2174,4 +2186,6 @@ support it.</footer>
   }}
 }})();
 </script>
+</body>
+</html>
 """

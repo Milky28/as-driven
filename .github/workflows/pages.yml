@@ -1,0 +1,46 @@
+name: Deploy website
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Validate curated data
+        run: python -m as_driven_db validate
+      - name: Build public catalog
+        run: python -m as_driven_db build-site --output dist/site/index.html
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+      - name: Upload public catalog
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

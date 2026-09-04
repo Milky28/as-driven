@@ -524,7 +524,14 @@ class SiteTests(unittest.TestCase):
 
     def test_the_page_is_self_contained_and_encoding_independent(self) -> None:
         page = build_site(ROOT)
-        # It owns no <head>, so it cannot declare a charset.
+        self.assertTrue(page.startswith("<!doctype html>"))
+        self.assertIn('<html lang="en">', page)
+        self.assertIn('<meta charset="utf-8">', page)
+        self.assertIn('<meta name="viewport"', page)
+        self.assertIn(
+            '<link rel="canonical" href="https://milky28.github.io/as-driven/">',
+            page,
+        )
         page.encode("ascii")
         # Google Fonts is the one external host the artifact may fetch while
         # rendering. Benchmark evidence links may point elsewhere, but remain
@@ -538,6 +545,24 @@ class SiteTests(unittest.TestCase):
             resource_hosts,
         )
         self.assertNotIn("<script src", page)
+
+    def test_github_pages_builds_only_the_curated_public_catalog(self) -> None:
+        workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("python -m as_driven_db validate", workflow)
+        self.assertIn(
+            "python -m as_driven_db build-site --output dist/site/index.html",
+            workflow,
+        )
+        self.assertIn("uses: actions/configure-pages@v6", workflow)
+        self.assertIn("uses: actions/upload-pages-artifact@v5", workflow)
+        self.assertIn("path: dist/site", workflow)
+        self.assertIn("uses: actions/deploy-pages@v5", workflow)
+        self.assertNotIn("build/review-cases", workflow)
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("https://milky28.github.io/as-driven/", readme)
 
     def test_the_headline_counts_match_the_records(self) -> None:
         payload = collect(ROOT)
@@ -654,17 +679,15 @@ class SiteTests(unittest.TestCase):
         # Nothing is stamped until someone chooses, so the default follows the
         # viewer and the un-stamped palette stays the one that renders.
         self.assertIn('data-theme-set="system" aria-pressed="true"', page)
-        self.assertNotIn("<html", page)
+        self.assertIn('<html lang="en">', page)
+        self.assertNotIn('<html lang="en" data-theme=', page)
 
     def test_the_table_does_not_rely_on_inheriting_colour_or_font(self) -> None:
-        """The page has no doctype, so it can be rendered in quirks mode.
+        """The table remains explicit when embedded outside the public shell.
 
-        It ships without one because the artifact host supplies it, but the
-        documented workflow also writes the file to disk, and a local file with
-        no doctype renders in quirks mode - where a table inherits neither colour
-        nor font. That put the light palette's ink on the dark ground for every
-        row while the surrounding page was correct, and nothing above the table
-        looked wrong. The rule states both explicitly.
+        The generated public page now owns its standards-mode document shell,
+        while the catalog markup may still be embedded by another client. The
+        table therefore continues to state both colour and font explicitly.
         """
         page = build_site(ROOT)
         rule = re.search(r"\ntable \{(.*?)\}", page, re.S).group(1)

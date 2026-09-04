@@ -10,6 +10,9 @@ lift off the throttle when you upshift, whether to blip on the way down.
 It is a database first and a SimHub plugin second. The data is open, versioned,
 and simulator-independent; the plugin is one client that reads it.
 
+[Browse the public controls database](https://milky28.github.io/as-driven/)
+or [contribute a car](https://github.com/Milky28/as-driven/issues/new/choose).
+
 ## What it tells you
 
 <img src="docs/images/preflight-card.png" width="720" alt="As Driven pre-flight card for the Audi V8 quattro DTM">
