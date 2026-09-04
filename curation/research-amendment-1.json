@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/v1/research-amendment.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "existing-car-research",
+  "dataset_version": "0.5.46",
+  "approved_at": "2026-09-04",
+  "records": [
+    {
+      "record_id": "alfa-romeo-156-super-touring",
+      "previous_record_sha256": "9796d44617b6679bd98df5e6d860ec327de0ebb95269e39037e0c55faa144a4a",
+      "issue_url": "https://github.com/Milky28/as-driven/issues/62",
+      "source_refs": [
+        "fia.appendix-j.super-touring.1998",
+        "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+        "stellantis-media.alfa-156-superturismo-1999-04-29"
+      ],
+      "claims": [
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "finding": "established",
+          "previously_present": true,
+          "from": "unknown",
+          "to": "sequential-stick",
+          "changed": true,
+          "confidence": "high",
+          "source_refs": [
+            "fia.appendix-j.super-touring.1998",
+            "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+            "stellantis-media.alfa-156-superturismo-1999-04-29"
+          ],
+          "basis": "The 1998 FIA Super Touring rules require the driver to select gears through a direct mechanical linkage between a gear lever and the gearbox and forbid semi-automatic and automatic gearboxes. The exact Alfa manufacturer sources independently identify this car's transmission as sequential. This establishes a driver-operated sequential lever interface and rules out period electronic paddles or buttons; it does not establish whether the lever was fore/aft, its exact cockpit position, or its shape."
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "finding": "established",
+          "previously_present": true,
+          "from": "unknown",
+          "to": "required",
+          "changed": true,
+          "confidence": "high",
+          "source_refs": [
+            "fia.appendix-j.super-touring.1998",
+            "stellantis-media.alfa-156-superturismo-1999-04-29"
+          ],
+          "basis": "The period rules state that the clutch must be activated by the driver's feet and prohibit automatic clutch operation. For a standing start, the driver therefore had to operate the foot clutch to control engagement; no separate source was found describing the driver's exact launch timing or technique. This does not imply a hand clutch or an automated launch system."
+        }
+      ],
+      "driver_summary": "Fit a sequential stick and clutch pedal. Use the clutch for a standing launch. Do not assume paddles, a wheel display, shift lights, a particular rim shape, throttle lift, clutchless racing shifts, ignition cut, or blipping technique. Those fields should remain unknown until an exact-period Nordauto cockpit image, onboard recording, driver statement, or engineering document resolves them."
+    }
+  ]
+}

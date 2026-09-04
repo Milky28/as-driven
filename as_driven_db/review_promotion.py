@@ -11,6 +11,7 @@ from typing import Any
 from .promote_observation import promote_observations
 from .research_handoff import ResearchHandoffError, _read_json, _write_json
 from .research_amendment import (
+    amended_curation_approvals,
     merge_source_registry,
     validate_research_amendment,
 )
@@ -296,6 +297,7 @@ def _promote_existing_car_research(
     _, added_sources = merge_source_registry(registry, candidate_sources)
     entry = manifest["records"][0]
     record_path = root / "data" / "v1" / "cars" / f"{entry['record_id']}.json"
+    approval_amendments = amended_curation_approvals(root, entry, preview_record)
     amendment_path = _next_amendment_path(root / "curation")
     if amendment_path.exists():
         raise ResearchHandoffError(
@@ -303,7 +305,13 @@ def _promote_existing_car_research(
         )
     snapshots = {
         path: path.read_bytes() if path.exists() else None
-        for path in (registry_path, index_path, record_path, amendment_path)
+        for path in (
+            registry_path,
+            index_path,
+            record_path,
+            amendment_path,
+            *approval_amendments,
+        )
     }
     try:
         _write_json(registry_path, merged_sources)
@@ -312,6 +320,8 @@ def _promote_existing_car_research(
         index["released_at"] = manifest["approved_at"]
         _write_json(index_path, index)
         _write_json(amendment_path, manifest)
+        for path, approval in approval_amendments.items():
+            _write_json(path, approval)
     except Exception:
         for path, content in snapshots.items():
             _restore(path, content)
@@ -341,6 +351,7 @@ def _promote_existing_car_research(
             str(record_path),
             str(index_path),
             str(amendment_path),
+            *(str(path) for path in approval_amendments),
         ],
         "case": str(case_path),
     }

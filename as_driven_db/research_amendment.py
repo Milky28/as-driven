@@ -63,6 +63,73 @@ def merge_source_registry(
     return merged, added
 
 
+_APPROVAL_CONTROL_DEPENDENCIES = {
+    "forward_gears": {"/authentic_controls/transmission/forward_gears"},
+    "shift_actuation": {"/authentic_controls/transmission/shift_actuation"},
+    "shift_pattern": {"/authentic_controls/transmission/shift_pattern"},
+    "standing_start_clutch": {
+        "/authentic_controls/transmission/standing_start_clutch"
+    },
+    "throttle_lift": {"/authentic_controls/transmission/upshift/throttle_lift"},
+    "manual_blip": {"/authentic_controls/transmission/downshift/manual_blip"},
+    "running_shift_clutch": {
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/downshift/clutch",
+    },
+}
+
+
+def amended_curation_approvals(
+    root: Path, entry: dict[str, Any], preview_record: dict[str, Any]
+) -> dict[Path, dict[str, Any]]:
+    """Return approval manifests that a real-car amendment makes stale.
+
+    Per-car approvals summarize the curated real-car baseline for these fields.
+    When an approved research amendment establishes one, leave the historical
+    observation and every simulator-specific value alone, but carry that
+    approved baseline forward with the amended record.
+    """
+    changed_paths = {
+        claim["path"] for claim in entry["claims"] if claim.get("changed")
+    }
+    if not changed_paths:
+        return {}
+
+    transmission = preview_record["authentic_controls"]["transmission"]
+    expected = {
+        "forward_gears": transmission["forward_gears"],
+        "shift_actuation": transmission["shift_actuation"],
+        "shift_pattern": transmission["shift_pattern"],
+        "standing_start_clutch": transmission["standing_start_clutch"],
+        "throttle_lift": transmission["upshift"]["throttle_lift"],
+        "manual_blip": transmission["downshift"]["manual_blip"],
+    }
+    if transmission["upshift"]["clutch"] == transmission["downshift"]["clutch"]:
+        expected["running_shift_clutch"] = transmission["upshift"]["clutch"]
+
+    amendments: dict[Path, dict[str, Any]] = {}
+    for path in sorted((root / "curation").glob("*.json")):
+        approval = _read_json(path, "curation approval")
+        if (
+            not isinstance(approval, dict)
+            or approval.get("record_id") != entry["record_id"]
+            or not isinstance(approval.get("approved_controls"), dict)
+        ):
+            continue
+        updated = copy.deepcopy(approval)
+        controls = updated["approved_controls"]
+        for name, dependencies in _APPROVAL_CONTROL_DEPENDENCIES.items():
+            if (
+                name in controls
+                and name in expected
+                and changed_paths.intersection(dependencies)
+            ):
+                controls[name] = copy.deepcopy(expected[name])
+        if updated != approval:
+            amendments[path] = updated
+    return amendments
+
+
 def _friendly_path(path: str) -> str:
     return path.removeprefix("/authentic_controls/").replace("/", " ").replace("_", " ")
 
@@ -230,6 +297,7 @@ def validate_research_amendment(
     preview = apply_research_amendment(
         _read_json(record_path, "curated record"), entry, manifest["approved_at"]
     )
+    approval_amendments = amended_curation_approvals(root, entry, preview)
     car_schema = _read_json(
         root / "schema" / "v1" / "car-record.schema.json", "car record schema"
     )
@@ -252,6 +320,8 @@ def validate_research_amendment(
         index["released_at"] = manifest["approved_at"]
         _write_json(temporary / "data" / "v1" / "index.json", index)
         _write_json(temporary / "curation" / "research-amendment-preview.json", manifest)
+        for path, approval in approval_amendments.items():
+            _write_json(temporary / "curation" / path.name, approval)
         errors = validate_repository(temporary)
         if errors:
             raise ResearchHandoffError(

@@ -9910,6 +9910,47 @@
       "retrieved_at": "2026-09-03",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation pmr.dbr9.20260903t224453893z-63012abd by Jason Kinslow; PMR 24725083. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. The draft recorded game version 'unknown'; review established '24725083': The installed Project Motor Racing Steam app manifest for app 299970 records build 24725083 and LastUpdated 2026-08-31T17:26:06Z, before the DBR9 observation at 2026-09-03T22:44:53.893Z. Its LastPlayed timestamp is 2026-09-04T05:37:17Z, after the drive, so the manifest spans the observation without an intervening installed-build change."
+    },
+    {
+      "source_id": "fia.appendix-j.super-touring.1998",
+      "title": "Appendix J to the International Sporting Code: Super Touring Cars",
+      "publisher": "Fédération Internationale de l'Automobile",
+      "url": "https://historicdb.fia.com/sites/default/files/regulations/1440582787/appendix_j_1998_low.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-09-04",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 1998 FIA Appendix J rules governing Super Touring cars, including clutch actuation, gear-selection mechanism, permitted forward-gear count, and temporary propulsion-system intervention during ratio changes. This is category-level period evidence, not proof of every Nordauto installation or driver procedure. PDF section 4.3.1, Clutch: “The clutch must be activated by the driver’s feet.” Reviewed for /authentic_controls/transmission/standing_start_clutch. PDF section 4.3.2, Gearbox: “Gears must be selected by the driver via a direct, mechanical linkage system between the gear lever and the gearbox.” Reviewed for /authentic_controls/transmission/shift_actuation. PDF section 4.3.2, Gearbox: “Semi-automatic and automatic gearboxes are forbidden.” Reviewed for /authentic_controls/transmission/shift_actuation. PDF section 4.2.1, Engine: “For the purpose of changing a gear ratio only it is momentarily permitted to take control of the propulsion system away from the driver.” Reviewed for /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut. Contemporary period regulation. It establishes what the class permitted or required, not whether this exact car used an ECU cut, what lever geometry was installed, or what drivers were instructed to do during running shifts."
+    },
+    {
+      "source_id": "super-touring-register.alfa-156.se071-004",
+      "title": "Alfa Romeo 156 SE071-004",
+      "publisher": "Super Touring Register",
+      "url": "https://www.supertouringregister.com/register/vehicle/431/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-04",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective exact-chassis register entry identifying SE071-004 as an Alfa Romeo 156 built by Nordauto in 1998 and raced by Nicola Larini in the 1998 Campionato Italiano Superturismo. It does not document controls or cockpit technique. Vehicle details table: “Chassis No SE071-004; Built By Nordauto; Date Built 1998” Reviewed for /identity/real_world_identity_notes. Retrospective exact-car provenance lead. Its value here is identity and period context; the available record and linked images do not establish the unresolved control fields."
+    },
+    {
+      "source_id": "super-touring-register.photo.5969",
+      "title": "Nicola Larini, Alfa Romeo 156 SE071-004, 1998 Campionato Italiano Superturismo",
+      "publisher": "Super Touring Register",
+      "url": "https://www.supertouringregister.com/picture/5969/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-04",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period race photograph associated with the exact SE071-004 chassis. The available image is an exterior view and does not show the cockpit, steering wheel, shift lever, pedals, or driver technique. Photograph caption and image: “Vehicle: Alfa Romeo 156 SE071-004; Series: 1998 Campionato Italiano Superturismo” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Period exact-chassis image, but its exterior-only framing is a limitation rather than evidence that any cockpit feature was absent."
+    },
+    {
+      "source_id": "stellantis-media.motor-show-bologna.1999",
+      "title": "Motor Show di Bologna 1999: Alfa 156",
+      "publisher": "Stellantis Media",
+      "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/motor-show-di-bologna-1999-alfa-156",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-04",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Road-going Alfa 156 Selespeed reference used only to identify and exclude a nearby source of paddle or robotic-shift confusion. It is not evidence for the 1998 Superturismo. Selespeed description, road-car controls: “la leva sistemata tra i sedili, oppure i comandi al volante” Reviewed for /identity/real_world_identity_notes. Contemporary manufacturer road-car source. Its steering-wheel controls and automatic-clutch description must not be inherited by the race car.",
+      "published_or_updated_at": "1999-11-26"
     }
   ]
 }

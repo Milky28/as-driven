@@ -92,7 +92,7 @@ contacts nothing until you press it, and downloads nothing when you do. See
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.45 contains 282 reviewed car records.
+Dataset 0.5.46 contains 282 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |

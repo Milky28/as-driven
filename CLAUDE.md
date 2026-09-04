@@ -212,7 +212,7 @@ auditable evidence, and the history is where corrections are visible.
 - **Work on `main`**, the only branch, the default, and what a visitor sees.
 - The repository is **public**, and 0.21.0 is published as the latest release.
 - Client: 0.21.2 locally; 0.21.0 is the published release.
-- Dataset: 0.5.45 with 282 curated records, and 0.5.37 is installed. The
+- Dataset: 0.5.46 with 282 curated records, and 0.5.37 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.

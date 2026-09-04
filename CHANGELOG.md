@@ -4,6 +4,19 @@ Plugin and dataset versions count different things, but ship together in one
 release. Dataset history is also recorded in `data/v1/index.json` and the
 project documentation.
 
+## 0.21.2 - 2026-09-04
+
+- Add Project Motor Racing and GTR 2 guided-verification support, including
+  exact GTR 2 `.CAR` identity resolution from the telemetry-session header.
+- Add the existing-car research workflow, which records source-backed,
+  field-level amendments without fabricating a simulator observation.
+- Publish the controls catalog as a GitHub Pages site and retain the offline
+  generated copy for release review.
+- Ship dataset 0.5.46 with 282 curated records. The Alfa Romeo 156 Super
+  Touring baseline now establishes a sequential stick and a foot-clutch
+  standing start; unresolved running-shift technique and cockpit fields remain
+  explicitly unknown.
+
 ## 0.21.0 - 2026-08-29
 
 - Add a manual update check, off until an endpoint is set. The endpoint is blank

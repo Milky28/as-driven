@@ -34,6 +34,7 @@ from as_driven_db.review_proposal import (
     prepare_review_proposal,
 )
 from as_driven_db.review_promotion import promote_review_case
+from as_driven_db.research_amendment import amended_curation_approvals
 from as_driven_db.validate import validate_repository
 
 
@@ -347,6 +348,53 @@ def completed_research_result(case_id: str) -> dict:
 
 
 class ReviewSubmissionTests(unittest.TestCase):
+    def test_existing_research_updates_stale_approval_control_baselines(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shutil.copytree(ROOT / "curation", root / "curation")
+            approval_path = (
+                root / "curation" / "raceroom-approved-alfa-romeo-156-super-touring.json"
+            )
+            approval = json.loads(approval_path.read_text(encoding="utf-8"))
+            approval["approved_controls"]["shift_actuation"] = "unknown"
+            approval["approved_controls"]["standing_start_clutch"] = "unknown"
+            approval_path.write_text(json.dumps(approval, indent=2) + "\n", encoding="utf-8")
+            preview = json.loads(
+                (
+                    ROOT
+                    / "data"
+                    / "v1"
+                    / "cars"
+                    / "alfa-romeo-156-super-touring.json"
+                ).read_text(encoding="utf-8")
+            )
+            transmission = preview["authentic_controls"]["transmission"]
+            transmission["shift_actuation"] = "sequential-stick"
+            transmission["standing_start_clutch"] = "required"
+            entry = {
+                "record_id": "alfa-romeo-156-super-touring",
+                "claims": [
+                    {
+                        "path": "/authentic_controls/transmission/shift_actuation",
+                        "changed": True,
+                    },
+                    {
+                        "path": "/authentic_controls/transmission/standing_start_clutch",
+                        "changed": True,
+                    },
+                ],
+            }
+
+            amendments = amended_curation_approvals(root, entry, preview)
+
+            approval = next(iter(amendments.values()))
+            self.assertEqual(
+                "sequential-stick", approval["approved_controls"]["shift_actuation"]
+            )
+            self.assertEqual(
+                "required", approval["approved_controls"]["standing_start_clutch"]
+            )
+
     def test_existing_baseline_changes_are_generated_as_review_decisions(self) -> None:
         path = "/authentic_controls/transmission/downshift/clutch"
         existing = {

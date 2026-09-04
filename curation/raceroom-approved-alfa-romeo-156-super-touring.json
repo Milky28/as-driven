@@ -9,9 +9,9 @@
   "observed_through": "SimHub guided verification observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29",
   "approved_controls": {
     "forward_gears": 6,
-    "shift_actuation": "unknown",
+    "shift_actuation": "sequential-stick",
     "shift_pattern": "sequential",
-    "standing_start_clutch": "unknown",
+    "standing_start_clutch": "required",
     "automatic_cut": "unknown",
     "automatic_blip": "unknown",
     "wheel_rim_shape": "round",

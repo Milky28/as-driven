@@ -98,7 +98,7 @@ class MaintainerWorkbenchTests(unittest.TestCase):
             (case_dir / "research-result.json").write_text(
                 json.dumps(result), encoding="utf-8"
             )
-            case["state"] = "manifest-review"
+            case["state"] = "final-review"
             case["research"]["status"] = "complete"
             case["artifacts"]["research_result"] = "research-result.json"
             case_path.write_text(json.dumps(case), encoding="utf-8")
@@ -206,6 +206,7 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("Discard unsaved edits", page)
         self.assertIn("saveResearchResult", page)
         self.assertIn("research_result_editor", page)
+        self.assertIn("const revisit=file?.closest('.revisit');", page)
         self.assertIn("Save or discard the research-result edit before another action", page)
         self.assertIn("retained simulator behavior, driver summary, and source locator", page)
         self.assertIn("Publish response and close issue", page)

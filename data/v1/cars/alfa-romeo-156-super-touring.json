@@ -16,7 +16,7 @@
     "transmission": {
       "forward_gears": 6,
       "gearbox_type": "dogbox",
-      "shift_actuation": "unknown",
+      "shift_actuation": "sequential-stick",
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "unknown",
@@ -32,7 +32,7 @@
         "manual_blip": "unknown",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -46,8 +46,9 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: dogbox; shift pattern: sequential.",
-      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
-      "RaceRoom Racing Experience unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "RaceRoom Racing Experience unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+      "Reviewed existing-car research at https://github.com/Milky28/as-driven/issues/62 updated: transmission shift actuation, transmission standing start clutch.",
+      "The reviewed real-car evidence still does not establish: steering wheel rim integrated display, steering wheel rim open top, steering wheel rim shape, steering wheel rim shift lights, transmission downshift automatic blip, transmission downshift automatic cut, transmission downshift clutch, transmission downshift manual blip, transmission downshift throttle lift, transmission upshift automatic blip, transmission upshift automatic cut, transmission upshift clutch, transmission upshift manual blip, transmission upshift throttle lift."
     ]
   },
   "simulators": [
@@ -193,30 +194,6 @@
           ]
         },
         {
-          "path": "/authentic_controls/transmission/shift_actuation",
-          "value": "sequential-stick",
-          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
-          "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-alfa-romeo-156-super-touring-controls.0.9.8.14"
-          ]
-        },
-        {
           "path": "/authentic_controls/transmission/upshift/automatic_blip",
           "value": "not-applicable",
           "condition": "The guided observation raceroom.alfa-romeo-156-super-touring.20260826t152310270z-da208c29 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
@@ -327,9 +304,32 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/shift_actuation"
+        ],
+        "source_refs": [
+          "fia.appendix-j.super-touring.1998",
+          "stellantis-heritage.alfa-romeo-156-superturismo-1998",
+          "stellantis-media.alfa-156-superturismo-1999-04-29"
+        ],
+        "confidence": "high",
+        "basis": "The 1998 FIA Super Touring rules require the driver to select gears through a direct mechanical linkage between a gear lever and the gearbox and forbid semi-automatic and automatic gearboxes. The exact Alfa manufacturer sources independently identify this car's transmission as sequential. This establishes a driver-operated sequential lever interface and rules out period electronic paddles or buttons; it does not establish whether the lever was fore/aft, its exact cockpit position, or its shape."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "fia.appendix-j.super-touring.1998",
+          "stellantis-media.alfa-156-superturismo-1999-04-29"
+        ],
+        "confidence": "high",
+        "basis": "The period rules state that the clutch must be activated by the driver's feet and prohibit automatic clutch operation. For a standing start, the driver therefore had to operate the foot clutch to control engagement; no separate source was found describing the driver's exact launch timing or technique. This does not imply a hand clutch or an automated launch system."
       }
     ]
   },
-  "driver_summary": "Six-speed sequential dog-ring gearbox, but the sources do not establish whether the real car used a lever or paddles. Launch, lift, clutch and blip technique also remain open, so use the clutch, lift and rev-match conservatively until better evidence settles them.",
-  "updated_at": "2026-08-28"
+  "driver_summary": "Fit a sequential stick and clutch pedal. Use the clutch for a standing launch. Do not assume paddles, a wheel display, shift lights, a particular rim shape, throttle lift, clutchless racing shifts, ignition cut, or blipping technique. Those fields should remain unknown until an exact-period Nordauto cockpit image, onboard recording, driver statement, or engineering document resolves them.",
+  "updated_at": "2026-09-04"
 }
