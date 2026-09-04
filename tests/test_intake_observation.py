@@ -186,6 +186,28 @@ class ObservationIntakeTests(unittest.TestCase):
         self.assertIn("private security-reporting link", form)
         self.assertIn("Do not attach contribution drafts", form)
 
+    def test_existing_car_research_form_preserves_the_evidence_boundary(self) -> None:
+        form = (
+            ROOT / ".github" / "ISSUE_TEMPLATE" / "existing-car-research.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("name: Improve an existing car", form)
+        self.assertIn('title: "[Research]: "', form)
+        self.assertIn("label: Existing car record", form)
+        self.assertIn("label: Exact car and source applicability", form)
+        self.assertIn("label: Fields or claims affected", form)
+        self.assertIn("label: Sources and precise locators", form)
+        self.assertIn("exact page, section, figure, or video timestamp", form)
+        self.assertIn("real-car research, not evidence of how a simulator behaves", form)
+        self.assertNotIn("observation-received", form)
+        self.assertIsNone(
+            re.search(
+                r'^\s+(?:label|description|placeholder):\s+[^"\'|>{\[].*:\s',
+                form,
+                re.MULTILINE,
+            ),
+            "Issue Form plain scalars containing a second colon must be quoted",
+        )
+
     def test_issue_chooser_offers_private_security_reporting(self) -> None:
         config = (
             ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml"

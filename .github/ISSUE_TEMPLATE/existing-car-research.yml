@@ -1,0 +1,92 @@
+name: Improve an existing car
+description: Add stronger real-world evidence, fill unknowns, or propose a correction to a curated car.
+title: "[Research]: "
+labels:
+  - contribution
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for real-world research about a car already in the As Driven database. For a new simulator drive or a correction to simulator behavior, use **Submit a simulator observation** instead.
+
+        A source does not change the database automatically. A maintainer checks that it applies to the exact car and specification, reviews every affected field, and preserves conflicting or superseded evidence in the curated history.
+
+        Link to sources and quote only the short passage needed to identify the claim. Do not upload copyrighted manuals, books, game files, or telemetry logs.
+
+        **Title:** Keep the `[Research]:` prefix and add the curated car name, for example `[Research]: Alfa Romeo 156 Superturismo`.
+
+  - type: input
+    id: record
+    attributes:
+      label: Existing car record
+      description: Provide the exact record ID, public catalog URL, or curated car name.
+      placeholder: alfa-romeo-156-super-touring
+    validations:
+      required: true
+
+  - type: dropdown
+    id: intent
+    attributes:
+      label: What should this research improve?
+      options:
+        - Fill one or more unknown real-car control fields
+        - Correct an established real-car control value
+        - Add stronger or more precise provenance
+        - Correct the real-world identity or specification
+        - Improve the driver summary using supported facts
+        - Another research-backed change to an existing record
+    validations:
+      required: true
+
+  - type: textarea
+    id: applicability
+    attributes:
+      label: Exact car and source applicability
+      description: Explain why the evidence applies to this exact year, chassis, racing specification, or homologation rather than a related car.
+      placeholder: "Example: The source describes the 1998 works Superturismo, not the later 156 GTA Super 2000."
+    validations:
+      required: true
+
+  - type: textarea
+    id: fields
+    attributes:
+      label: Fields or claims affected
+      description: List the current unknown or disputed controls. JSON paths are welcome but not required.
+      placeholder: |
+        - Shift actuation: unknown -> sequential stick
+        - Downshift manual blip: remains unknown
+        - Wheel rim shape: unknown -> round
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources and precise locators
+      description: For each source, give its title, publisher, URL, exact page, section, figure, or video timestamp, and what that location establishes.
+      placeholder: |
+        Source 1
+        Title and publisher:
+        URL:
+        Page, section, figure, or timestamp:
+        What it establishes:
+    validations:
+      required: true
+
+  - type: textarea
+    id: conflicts
+    attributes:
+      label: Conflicts, limitations, or uncertainty
+      description: Note contradictory sources, ambiguous terminology, uncertain applicability, translations, or fields the evidence does not establish. "None known" is acceptable.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission confirmation
+      options:
+        - label: I understand this is real-car research, not evidence of how a simulator behaves.
+          required: true
+        - label: I may share my own factual notes publicly under CC BY 4.0, and I have linked rather than uploaded third-party source material.
+          required: true

@@ -11,6 +11,15 @@ observation** form. The form accepts the JSON written by the SimHub plugin and
 asks separately for optional real-car identity knowledge and sources. `I don't
 know` is acceptable. Identity remains a maintainer review decision.
 
+Research that improves an already-curated real car without a new guided drive
+uses the separate **Improve an existing car** issue form. It asks for the exact
+record, affected fields, source links, precise locators, applicability, and known
+limitations. These issues are public research trails; they do not carry the
+`observation-received` label and are not imported into the observation
+workbench. Until a dedicated research-only workbench path exists, a maintainer
+reviews them as deliberate source and record changes through the lower-level
+curation path.
+
 Nothing is uploaded automatically. After saving, the plugin can reveal the
 exact file and open the contribution form only after an explicit click. The
 contributor attaches the file in their browser.

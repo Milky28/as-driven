@@ -10,8 +10,9 @@ lift off the throttle when you upshift, whether to blip on the way down.
 It is a database first and a SimHub plugin second. The data is open, versioned,
 and simulator-independent; the plugin is one client that reads it.
 
-[Browse the public controls database](https://milky28.github.io/as-driven/)
-or [contribute a car](https://github.com/Milky28/as-driven/issues/new/choose).
+[Browse the public controls database](https://milky28.github.io/as-driven/),
+[contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
+or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
 ## What it tells you
 
