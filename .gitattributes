@@ -1,0 +1,24 @@
+# Line endings are decided here rather than by each contributor's core.autocrlf.
+#
+# The index is already uniformly LF - 911 text files, not one CRLF - so this
+# records the state the repository is in rather than changing it. Adding it costs
+# no renormalisation and buys the guarantee that a second machine, a CI runner or
+# an agent with different Git settings cannot start writing the other kind.
+#
+# It exists because files kept coming back as CRLF on disk and Git then listed
+# them as modified with an empty diff. Telling that apart from a real edit is
+# cheap when one person is working and expensive when two are, which is exactly
+# when it happened: `as_driven_db/site.py` and `tests/test_site.py` both showed
+# up as changed while being byte-identical to HEAD.
+* text=auto
+
+# Windows-only scripts. PowerShell tolerates LF, but CRLF is the convention for
+# both, and cmd.exe is the one interpreter here that can genuinely misread a
+# multi-line construct without it.
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+
+# The only binaries in the tree: the README and docs captures. Declared so no
+# filter can touch them and no diff tries to render them as text.
+*.png binary
+*.jpg binary
