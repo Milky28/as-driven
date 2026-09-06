@@ -60,26 +60,59 @@ def _source_catalog(data: Path) -> dict[str, dict[str, Any]]:
     }
 
 
-def _evidence(record: dict[str, Any], sources: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
-    # Provenance is path-specific in curated records. Listing all registered
-    # sources for a changed record is deliberately conservative: it never
-    # fabricates a narrower claim-to-source connection in a release summary.
-    refs = {
-        source_id
-        for claim in record.get("provenance", {}).get("claims", [])
-        for source_id in claim.get("source_refs", [])
-    }
-    for simulator in record.get("simulators", []):
-        refs.update(simulator.get("source_refs", []))
-    evidence = []
+def _covers(claim_path: str, changed_path: str) -> bool:
+    """Whether a claim's path covers the field that changed.
+
+    A claim on `/authentic_controls/transmission/upshift` covers every field
+    beneath it; one on a sibling covers none of them.
+    """
+    claim_path = claim_path.rstrip("/")
+    return changed_path == claim_path or changed_path.startswith(claim_path + "/")
+
+
+def _evidence(
+    record: dict[str, Any],
+    sources: dict[str, dict[str, Any]],
+    changed_path: str,
+) -> dict[str, list[dict[str, str]]]:
+    """Sources cited for the field that changed, split by what they can settle.
+
+    This used to list every source registered anywhere on the record, and called
+    that conservative because it never invented a narrower claim-to-source
+    connection. Under a heading reading "Evidence" it did the opposite: the
+    0.21.4 note printed seven links beneath nine derived standing-start values,
+    and not one of those sources mentions the standing start. Over-attribution is
+    not the safe direction.
+
+    Provenance is path-specific, so the honest answer is available: take the
+    claims that actually cover this field. A guided-drive source is reported
+    separately, because a drive establishes what the simulator does rather than
+    what the real car required - the same line the override layer draws.
+    """
+    refs: set[str] = set()
+    for claim in record.get("provenance", {}).get("claims", []):
+        paths = claim.get("paths")
+        if paths is None:
+            # A claim with no paths cannot be placed; treat it as covering the
+            # record so a malformed provenance block under-reports nothing.
+            refs.update(claim.get("source_refs", []))
+            continue
+        if any(_covers(str(claim_path), changed_path) for claim_path in paths):
+            refs.update(claim.get("source_refs", []))
+
+    sourced: list[dict[str, str]] = []
+    observed: list[dict[str, str]] = []
     for source_id in sorted(refs):
         source = sources.get(source_id)
         if not source:
             continue
         url = source.get("url") or source.get("archive_url")
-        if url:
-            evidence.append({"source_id": source_id, "title": source["title"], "url": url})
-    return evidence
+        if not url:
+            continue
+        item = {"source_id": source_id, "title": source["title"], "url": url}
+        # The project's naming convention for a live guided-drive observation.
+        (observed if ".local-live-" in source_id else sourced).append(item)
+    return {"evidence": sourced, "observed_in": observed}
 
 
 def release_control_changes(
@@ -117,7 +150,7 @@ def release_control_changes(
                     "before": old_value,
                     "after": new_value,
                     "priority_recent": record_id in priority_record_ids,
-                    "evidence": _evidence(after, sources),
+                    **_evidence(after, sources, "/authentic_controls/" + "/".join(path)),
                 }
             )
 
@@ -163,5 +196,23 @@ def render_release_control_changes(report: dict[str, Any]) -> str:
             lines.append("Evidence: " + "; ".join(
                 f"[{item['source_id']}]({item['url']})" for item in change["evidence"]
             ))
+            lines.append("")
+        elif change.get("observed_in"):
+            lines.append(
+                "No real-car source is cited for this field. Observed in: "
+                + "; ".join(
+                    f"[{item['source_id']}]({item['url']})"
+                    for item in change["observed_in"]
+                )
+                + " - a guided drive establishes what the simulator does, not what"
+                " the real car required. The value follows from what the record"
+                " itself establishes, and its notes carry the basis."
+            )
+            lines.append("")
+        else:
+            lines.append(
+                "No claim on the record cites a source for this field. Its notes"
+                " carry the basis for the value."
+            )
             lines.append("")
     return "\n".join(lines).rstrip() + "\n"
