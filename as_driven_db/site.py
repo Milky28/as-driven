@@ -134,6 +134,10 @@ COMPARISON_LABELS = {
     "/authentic_controls/transmission/downshift/clutch": "Clutch on a downshift",
     "/authentic_controls/transmission/downshift/manual_blip": "Manual blip",
     "/authentic_controls/transmission/downshift/automatic_blip": "Automatic blip",
+    "/authentic_controls/transmission/downshift/throttle_lift": "Downshift throttle",
+    "/authentic_controls/transmission/downshift/automatic_cut": "Automatic cut on a downshift",
+    "/authentic_controls/transmission/upshift/manual_blip": "Blip on an upshift",
+    "/authentic_controls/transmission/upshift/automatic_blip": "Automatic blip on an upshift",
     "/authentic_controls/steering/wheel_rim/shape": "Wheel-rim category",
     "/authentic_controls/steering/wheel_rim/integrated_display": "Integrated wheel display",
     "/authentic_controls/steering/wheel_rim/shift_lights": "Wheel shift lights",
@@ -564,14 +568,35 @@ def differences(
             field, (field.strip("/").replace("/", " ").replace("_", " "), None)
         )
         controls_path = path[len("/authentic_controls"):] if path.startswith("/authentic_controls/") else ""
-        if render is None and controls_path in flat_controls:
+        if render is None and controls_path and flat_controls:
+            # An absent key is "not established", the same as an explicit
+            # unknown - `wheel_rim` only requires shape and source_label, so five
+            # records carry no `open_top` at all. Keying off presence printed a
+            # blank real column under a raw path label for those; the value
+            # renderer already says "Not established" for a missing value.
             name = COMPARISON_LABELS.get(path, _control_field_label(path))
-            real = _comparison_value(path, flat_controls[controls_path])
-            sim = _comparison_value(path, flat_effective_controls[controls_path])
+            real = _comparison_value(path, flat_controls.get(controls_path, "unknown"))
+            sim = _comparison_value(
+                path, flat_effective_controls.get(controls_path, override["value"])
+            )
         elif render is None:
             real, sim = "", str(override["value"])
         else:
             real, sim = render(transmission), render(effective)
+        if real == sim:
+            # Not a difference, whatever the override says. An override that
+            # restates the baseline was written while that baseline was still
+            # open, and the record has since established the same value - so the
+            # comparison view was printing "No" against "No" and "Car blips for
+            # you" against "Car blips for you", each under an explanation saying
+            # the real-car sources established nothing. Four cars carried the
+            # "differs from car" badge with no real difference anywhere.
+            #
+            # This is the display guard, not the cleanup: the overrides behind
+            # these rows should still be removed from the records they sit in,
+            # for the reason 0.5.34 removed 142 of them. Filtering here means a
+            # stale one can never again be shown to a driver as a departure.
+            continue
         out.append({"name": name, "real": real, "sim": sim, "why": override.get("condition", "")})
     return out
 
