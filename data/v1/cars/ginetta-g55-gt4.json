@@ -149,18 +149,6 @@
       },
       "overrides": [
         {
-          "path": "/authentic_controls/transmission/upshift/throttle_lift",
-          "value": "not-required",
-          "condition": "ACC accepted the guided full-throttle clutchless upshift; the authentic real-car lift claim remains open.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided maneuver with shifting assists disabled."
-          },
-          "source_refs": [
-            "acc.local-live-ginetta-g55-gt4-2012-controls.21257365"
-          ]
-        },
-        {
           "path": "/authentic_controls/steering/wheel_rim/integrated_display",
           "value": "no",
           "condition": "ACC's G55 GT4 cockpit has no display integrated into the modeled D-shaped rim.",
@@ -278,6 +266,6 @@
     "archetype_id": "paddles-6-seq-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-06",
   "driver_summary": "Hewland six-speed rather than the dual clutch its GT4 rivals use, so this car is a sequential where the class mostly is not. It cuts and blips for you, but the clutch is yours to pull away."
 }

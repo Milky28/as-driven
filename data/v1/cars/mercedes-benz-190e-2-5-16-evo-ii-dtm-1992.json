@@ -257,7 +257,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "required",
-          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation raceroom.mercedes-190e-evo-ii-dtm.20260826t183739811z-dd67c8e5 directly recorded this behavior or cockpit value in the simulator version 0.9.8.14; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -351,5 +351,5 @@
     ]
   },
   "driver_summary": "The 1992 DTM car used a six-speed straight-toothed race gearbox. Period evidence says its upshifts were made at full throttle without the clutch; launch and downshift technique remain unestablished, so use the clutch and rev-match conservatively on the way down.",
-  "updated_at": "2026-08-28"
+  "updated_at": "2026-09-06"
 }

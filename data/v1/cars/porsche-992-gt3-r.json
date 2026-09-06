@@ -127,20 +127,7 @@
           "Observed live in ACC 21257365 via guided verification observation acc.porsche-992-gt3-r-2023.20260823t010803276z-900e5bbe by Jason Kinslow."
         ]
       },
-      "overrides": [
-        {
-          "path": "/authentic_controls/transmission/upshift/throttle_lift",
-          "value": "not-required",
-          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car lift claim remains open.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided maneuver with automatic clutch and shifting disabled."
-          },
-          "source_refs": [
-            "acc.local-live-porsche-992-gt3-r-2023-controls.21257365"
-          ]
-        }
-      ],
+      "overrides": [],
       "verified_game_version": "21257365",
       "verified_at": "2026-08-23",
       "source_refs": [
@@ -226,6 +213,6 @@
     "'Porsche 992 GT3 R - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-06",
   "driver_summary": "Paddle sequential that asks for no clutch at any point: it gets away from rest, cuts the upshift and blips the downshift itself. Once you are in the car the gearbox is not your problem."
 }

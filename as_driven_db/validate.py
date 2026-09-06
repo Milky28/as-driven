@@ -268,6 +268,57 @@ def _collect_source_refs(node: Any, used: set[str]) -> None:
             _collect_source_refs(item, used)
 
 
+def _validate_override_conditions(
+    record: dict[str, Any],
+    label: str,
+    errors: list[str],
+) -> None:
+    """An override must describe the situation it is actually in.
+
+    The promoter wrote one sentence for two different things. "The reviewed
+    real-car sources did not establish the same value" is true where the
+    authentic baseline is open, and false where the baseline says something else
+    - which is a departure from the real car, not a gap in the evidence. 35
+    overrides carried the first sentence over the second situation, and it is
+    printed on the public comparison view as the reason for the row.
+
+    A third case is not a difference at all. Where the baseline caught up with
+    the observation the two now agree, and the entry announces a departure that
+    is not there; 30 of those were removed for the reason 0.5.34 removed 142.
+    An override restating an `unknown` baseline is left alone, because that is
+    how a retracted measurement is recorded - RaceRoom's unmeasurable blip among
+    them.
+    """
+    controls = record.get("authentic_controls")
+    if not isinstance(controls, dict):
+        return
+    for index, simulator in enumerate(record.get("simulators") or []):
+        if not isinstance(simulator, dict):
+            continue
+        for position, override in enumerate(simulator.get("overrides") or []):
+            if not isinstance(override, dict):
+                continue
+            path = str(override.get("path", ""))
+            if not path.startswith("/authentic_controls/"):
+                continue
+            node: Any = record
+            for part in path.strip("/").split("/"):
+                node = node.get(part) if isinstance(node, dict) else None
+            if node in (None, "unknown"):
+                continue
+            item = f"{label}.simulators[{index}].overrides[{position}]"
+            if node == override.get("value"):
+                errors.append(
+                    f"{item}: {path} restates the authentic value {node!r} rather "
+                    f"than departing from it; only a refusal is a departure"
+                )
+            if "did not establish the same value" in str(override.get("condition", "")):
+                errors.append(
+                    f"{item}: the condition says the real-car sources established "
+                    f"nothing, but {path} is {node!r}"
+                )
+
+
 def _validate_source_usage(
     sources: Any,
     used: set[str],
@@ -1244,6 +1295,7 @@ def validate_repository(root: Path) -> list[str]:
                 )
             )
         _collect_source_refs(record, used_source_refs)
+        _validate_override_conditions(record, str(path), errors)
         _validate_record_archetype(record, str(path), archetypes, errors)
         _collect_identities(record, str(path), claimed_identities, errors)
         record_id = _validate_record(record, path, source_ids, errors)

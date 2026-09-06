@@ -109,7 +109,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -199,6 +199,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-29",
+  "updated_at": "2026-09-06",
   "driver_summary": "Six-speed sequential, from TVR's own period press kit for the T400R, and a stick without paddles in the cockpit. It cuts the upshift, so stay flat, and blip the downshifts yourself."
 }

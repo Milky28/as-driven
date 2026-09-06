@@ -124,7 +124,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -160,7 +160,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "not-required",
-          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -196,7 +196,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ams2.volkswagen-polo.20260828t204633696z-24373bc8 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -330,5 +330,5 @@
     ]
   },
   "driver_summary": "Brazilian 1.0 200 TSI road car with a six-speed torque-converter automatic and paddle control. There is no clutch operation to manage; real-car cut and blip behavior remain unestablished, so follow the selected simulator's USE rows for those details.",
-  "updated_at": "2026-08-28"
+  "updated_at": "2026-09-06"
 }

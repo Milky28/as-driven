@@ -152,7 +152,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -239,7 +239,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -251,7 +251,7 @@
         {
           "path": "/authentic_controls/transmission/shift_actuation",
           "value": "h-pattern",
-          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -263,7 +263,7 @@
         {
           "path": "/authentic_controls/transmission/shift_pattern",
           "value": "standard-h",
-          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -409,6 +409,6 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-09-04",
+  "updated_at": "2026-09-06",
   "driver_summary": "Six-speed sequential-manual transaxle, from General Motors' own specification for the 2003 car. It cuts the upshift, so stay flat, and blip every downshift yourself. Which chassis year AMS2 models is not established."
 }

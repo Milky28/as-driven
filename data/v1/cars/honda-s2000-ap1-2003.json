@@ -168,7 +168,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -216,7 +216,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac-evo.honda-s2000-ap1.20260826t041417292z-0d38d6ca directly recorded this behavior or cockpit value in the simulator version 0.9.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -345,5 +345,5 @@
     ]
   },
   "driver_summary": "Six-speed conventional H-pattern with a dry single-plate clutch. Use the clutch to pull away and for every shift; a downshift blip is optional, but it can ease the synchronisers and settle the car.",
-  "updated_at": "2026-08-28"
+  "updated_at": "2026-09-06"
 }

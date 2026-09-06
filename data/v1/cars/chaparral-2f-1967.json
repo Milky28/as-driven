@@ -182,7 +182,7 @@
         {
           "path": "/authentic_controls/transmission/gearbox_type",
           "value": "direct-drive",
-          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -218,7 +218,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "required",
-          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -254,7 +254,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "not-required",
-          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."

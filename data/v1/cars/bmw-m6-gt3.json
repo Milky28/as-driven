@@ -148,18 +148,6 @@
       },
       "overrides": [
         {
-          "path": "/authentic_controls/transmission/upshift/throttle_lift",
-          "value": "not-required",
-          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided full-throttle maneuver."
-          },
-          "source_refs": [
-            "acc.local-live-bmw-m6-gt3-2017-controls.21257365"
-          ]
-        },
-        {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
           "condition": "ACC models no shift lights integrated into the M6 GT3 rim, unlike AMS2.",
@@ -278,6 +266,6 @@
   "notes": [
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-06",
   "driver_summary": "Six-speed sequential engineered by Ricardo. It cuts the upshift and blips the downshift, but you still need the clutch to pull away, unlike its M4 GT3 successor."
 }

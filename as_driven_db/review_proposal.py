@@ -303,15 +303,31 @@ def _simulator_overrides(
         key = (path, json.dumps(staged_values[path], sort_keys=True))
         if key in existing:
             continue
+        # Two different situations, described until now as if they were one. A
+        # gap in the evidence is not a departure from the real car, and 35
+        # overrides sitting on established baselines told a reader the sources
+        # had settled nothing when they had settled something else. That
+        # sentence is printed on the public comparison view as the reason for
+        # the row, so it is the explanation a driver reads.
+        real_value = real_values.get(path)
+        if real_value in (None, "unknown"):
+            condition = (
+                f"The guided observation {observation_id} directly recorded this "
+                f"behavior or cockpit value in the simulator version {version}; "
+                "the reviewed real-car sources did not establish the same value."
+            )
+        else:
+            condition = (
+                f"The guided observation {observation_id} directly recorded this "
+                f"behavior or cockpit value in the simulator version {version}; "
+                "the reviewed real-car sources establish a different value, so this "
+                "is a departure from the real car rather than a gap in the evidence."
+            )
         overrides.append(
             {
                 "path": path,
                 "value": staged_values[path],
-                "condition": (
-                    f"The guided observation {observation_id} directly recorded this "
-                    f"behavior or cockpit value in the simulator version {version}; "
-                    "the reviewed real-car sources did not establish the same value."
-                ),
+                "condition": condition,
                 "confidence": {
                     "level": "verified",
                     "basis": "Exact value preserved from the validated guided-drive observation.",

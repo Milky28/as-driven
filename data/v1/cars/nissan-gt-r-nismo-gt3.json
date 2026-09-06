@@ -159,18 +159,6 @@
           "source_refs": [
             "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
           ]
-        },
-        {
-          "path": "/authentic_controls/transmission/upshift/throttle_lift",
-          "value": "not-required",
-          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic lift claim remains open.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided full-throttle maneuver."
-          },
-          "source_refs": [
-            "acc.local-live-nissan-gt-r-nismo-gt3-2018-controls.21257365"
-          ]
         }
       ],
       "verified_game_version": "21257365",
@@ -300,6 +288,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-06",
   "driver_summary": "Paddle sequential that cuts the upshift and blips the downshift for you. Whether it needs a clutch to pull away was not established, so treat the start as unrecorded rather than clutch-free."
 }

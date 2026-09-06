@@ -157,7 +157,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ac.ford-mustang-2015.20260824t190918976z-2e561466 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac.ford-mustang-2015.20260824t190918976z-2e561466 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -217,7 +217,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
-          "condition": "The guided observation ac.ford-mustang-2015.20260824t190918976z-2e561466 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ac.ford-mustang-2015.20260824t190918976z-2e561466 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."

@@ -96,7 +96,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "round",
-          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -120,7 +120,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -210,6 +210,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-28",
+  "updated_at": "2026-09-06",
   "driver_summary": "Tractive six-speed sequential, from a specialist dossier on the surviving FIA GT chassis. The car cuts the upshift; blip every downshift yourself. Which year's specification AMS2 models is qualified rather than settled."
 }

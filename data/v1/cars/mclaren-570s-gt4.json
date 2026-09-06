@@ -122,20 +122,7 @@
           "Observed live in ACC 21257365 via guided verification observation acc.mclaren-570s-gt4-2016.20260823t042014376z-29c4d807 by Jason Kinslow."
         ]
       },
-      "overrides": [
-        {
-          "path": "/authentic_controls/transmission/upshift/throttle_lift",
-          "value": "not-required",
-          "condition": "ACC accepted the guided full-throttle clutchless upshift while the authentic real-car throttle-lift claim remains open.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct guided maneuver with automatic clutch and shifting disabled."
-          },
-          "source_refs": [
-            "acc.local-live-mclaren-570s-gt4-2016-controls.21257365"
-          ]
-        }
-      ],
+      "overrides": [],
       "verified_game_version": "21257365",
       "verified_at": "2026-08-23",
       "source_refs": [
@@ -217,6 +204,6 @@
     "archetype_id": "paddles-7-dualclutch-no-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-06",
   "driver_summary": "GT4 racer using the road car's dual-clutch gearbox. It cuts the upshift and blips the downshift, and pulls away without a clutch, so the paddles and two pedals are the whole job."
 }

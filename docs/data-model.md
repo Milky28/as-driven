@@ -230,6 +230,33 @@ simulator agrees with them, so the override would make the card announce a
 departure that is not there. All nine were removed, for the same reason the 142
 running-shift overrides were removed in 0.5.34: only a refusal is a departure.
 
+### What an override may say
+
+An override records that a simulator does something the real car does not. Two
+situations produce one, and they need different words:
+
+- the baseline is **open**, and the drive saw a value the sources never settled;
+- the baseline is **established**, and the simulator departs from it.
+
+The promoter used to write the first sentence for both - "the reviewed real-car
+sources did not establish the same value" - and that text is printed on the
+public comparison view as the reason for the row. 35 overrides carried it over an
+established baseline, telling a reader the evidence was missing when it existed
+and said something else. The condition is now chosen from the baseline, and
+validation rejects the claim over a field that is established.
+
+**An override that agrees with the baseline is not a departure at all.** 42 said
+they were: 30 where the standing-start derivation established the value the
+observation had already seen, and 12 more from the throttle-lift derivation
+before it, ten of whose conditions still read "the authentic lift claim remains
+open" after it had been settled. They were removed for the reason 0.5.34 removed
+142 - only a refusal is a departure - and validation now refuses a new one.
+
+Both rules run only over an established baseline. An override restating an
+`unknown` is left alone, because that is how a retracted measurement is recorded:
+RaceRoom's automatic blip was pulled back to `unknown` on three records once it
+was measured, and that entry is the record of the retraction.
+
 ### Where first gear sits
 
 `shift_pattern` names the layout; optional `first_gear_position` says where

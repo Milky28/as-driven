@@ -99,7 +99,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/open_top",
           "value": "no",
-          "condition": "The guided observation rfactor2.bmw-m2-cs-racing.20260826t221139358z-d3b8a174 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation rfactor2.bmw-m2-cs-racing.20260826t221139358z-d3b8a174 directly recorded this behavior or cockpit value in the simulator version 1.1.3.4; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -324,5 +324,5 @@
     ]
   },
   "driver_summary": "Seven-speed BMW dual-clutch transmission with steering-wheel paddles and motorsport software. The reviewed sources establish the hardware, not its launch, cut or blip strategy, so follow the selected simulator's USE rows rather than assuming road-car logic.",
-  "updated_at": "2026-08-28"
+  "updated_at": "2026-09-06"
 }

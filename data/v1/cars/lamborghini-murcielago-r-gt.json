@@ -236,7 +236,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.murcielago-r-gt.20260903t231624574z-36ae8756 directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -411,6 +411,6 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-09-04",
+  "updated_at": "2026-09-06",
   "driver_summary": "The Lamborghini Murcielago R-GT, which Assetto Corsa lists as GT Lanzo V12. Hollinger M6S six-speed sequential behind a racing clutch, per REITER's technical data. The car cuts the upshift, so stay flat, and blip every downshift yourself."
 }

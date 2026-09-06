@@ -128,116 +128,7 @@
           "Observed live in RACEROOM 0.9.8.19 via guided verification observation raceroom.porsche-963.20260828t144642040z-fa553a10 by Jason Kinslow."
         ]
       },
-      "overrides": [
-        {
-          "path": "/authentic_controls/transmission/downshift/automatic_cut",
-          "value": "not-applicable",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/downshift/clutch",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/downshift/manual_blip",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/downshift/throttle_lift",
-          "value": "not-applicable",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/upshift/automatic_blip",
-          "value": "not-applicable",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/upshift/clutch",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/upshift/manual_blip",
-          "value": "not-applicable",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/upshift/throttle_lift",
-          "value": "not-required",
-          "condition": "The guided observation raceroom.porsche-963.20260828t144642040z-fa553a10 directly recorded this behavior or cockpit value in the simulator version 0.9.8.19; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "raceroom.local-live-porsche-963-controls.0.9.8.19"
-          ]
-        }
-      ],
+      "overrides": [],
       "verified_game_version": "0.9.8.19",
       "verified_at": "2026-08-28",
       "source_refs": [
@@ -342,6 +233,6 @@
     "The wheel-rim shape was originally recorded as \"prototype\", a value that named a racing category rather than a rim outline. That value is retired: the rims it covered are the same closed form, flattened at both the top and the bottom, that the project now records as \"gt-style\". The shape was remapped by definition and the rim was not observed again.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-28",
+  "updated_at": "2026-09-06",
   "driver_summary": "Spec Xtrac P1359 seven-speed sequential hybrid transmission, the same unit every LMDh car must run. Paddles, no clutch to pull away, and the car cuts and blips for itself: the gearbox is one thing you are not asked to manage."
 }

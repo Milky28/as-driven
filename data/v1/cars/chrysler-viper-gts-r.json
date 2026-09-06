@@ -196,7 +196,7 @@
         {
           "path": "/authentic_controls/transmission/shift_pattern",
           "value": "standard-h",
-          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.viper-gts-r.20260903t230703638z-26359fed directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."

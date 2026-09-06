@@ -111,18 +111,6 @@
           ]
         },
         {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "round",
-          "condition": "AMS2 1.6.9.91 models a round rim.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Direct cockpit inspection during the guided drive."
-          },
-          "source_refs": [
-            "ams2.local-live-nissan-r390-gt1-controls.1.6.9.91"
-          ]
-        },
-        {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "yes",
           "condition": "AMS2 1.6.9.91 models shift lights on the rim.",
@@ -264,18 +252,6 @@
         ]
       },
       "overrides": [
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "round",
-          "condition": "The guided observation other.r390-gt1.20260903t042247443z-bfd53e8c directly recorded this behavior or cockpit value in PMR Steam build 24725083; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "pmr.local-live-r390-gt1-controls.24725083"
-          ]
-        },
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "yes",
@@ -480,6 +456,6 @@
       }
     ]
   },
-  "updated_at": "2026-09-03",
+  "updated_at": "2026-09-06",
   "driver_summary": "The Nissan R390 GT1, which Assetto Corsa lists as LMGT Nisumo R39 V8. Xtrac six-speed sequential on a short-throw lever. Upshift flat, the car cuts. It does not blip, so rev-match the downshifts yourself: a blip settles the rear into a corner whether or not the box demands it."
 }

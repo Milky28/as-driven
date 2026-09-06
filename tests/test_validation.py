@@ -1351,6 +1351,56 @@ class ValidationTests(unittest.TestCase):
                 )
         self.assertEqual([], offenders)
 
+    def test_an_override_describes_the_situation_it_is_actually_in(self) -> None:
+        """A gap in the evidence and a departure from the car are not one thing.
+
+        The promoter wrote one sentence for both. "The reviewed real-car sources
+        did not establish the same value" is true where the baseline is open and
+        false where the baseline says something else, and 35 overrides carried it
+        over the second case. It is printed on the public comparison view as the
+        reason for the row, so it is the explanation a driver reads.
+
+        A third case is not a difference at all. 42 overrides agreed with a
+        baseline that had caught up with them - 30 from the standing-start
+        derivation, 10 more from the throttle-lift derivation before it, whose
+        conditions still said the lift claim "remains open" after it had been
+        settled. Both rules run only over an established baseline: an override
+        restating an `unknown` is how a retracted measurement is recorded, and
+        RaceRoom's unmeasurable blip depends on it.
+        """
+        from as_driven_db.validate import _validate_override_conditions
+
+        def check(authentic, override):
+            record = {
+                "authentic_controls": {"transmission": {"upshift": authentic}},
+                "simulators": [{"simulator": "ams2", "overrides": [override]}],
+            }
+            errors: list[str] = []
+            _validate_override_conditions(record, "fixture", errors)
+            return errors
+
+        path = "/authentic_controls/transmission/upshift/throttle_lift"
+        gap = "...; the reviewed real-car sources did not establish the same value."
+        departure = "...; the sources establish a different value."
+
+        # Open baseline: the gap wording is right and the values may agree.
+        self.assertEqual([], check({"throttle_lift": "unknown"},
+                                   {"path": path, "value": "not-required", "condition": gap}))
+        # Established and genuinely different: allowed, with honest wording.
+        self.assertEqual([], check({"throttle_lift": "required"},
+                                   {"path": path, "value": "not-required", "condition": departure}))
+        # Established and different, but the wording denies the evidence exists.
+        self.assertEqual(
+            1,
+            len(check({"throttle_lift": "required"},
+                      {"path": path, "value": "not-required", "condition": gap})),
+        )
+        # Established and identical: not a departure at all.
+        restating = check({"throttle_lift": "required"},
+                          {"path": path, "value": "required", "condition": departure})
+        self.assertEqual(1, len(restating))
+        self.assertIn("restates the authentic value", restating[0])
+
     def test_a_sourced_rim_disagreement_is_an_explicit_audited_override(self) -> None:
         """A photograph of the real car outranks a look at a simulator.
 
