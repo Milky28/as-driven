@@ -209,7 +209,10 @@ auditable evidence, and the history is where corrections are visible.
 
 ## Current handoff state
 
-- **Work on `main`**, the only branch, the default, and what a visitor sees.
+- Claude uses the main checkout. `main` is the default integration and release
+  branch. Future Codex implementation work uses a separate Git worktree on a
+  task-specific `codex/` branch, preserving Claude's uncommitted changes until
+  deliberate integration.
 - The repository is **public**, and 0.21.3 is published as the latest release.
 - Client: 0.21.4 prepared locally; 0.21.3 is installed and published.
 - Dataset: 0.5.50 with 285 curated records, and 0.5.49 is installed. The

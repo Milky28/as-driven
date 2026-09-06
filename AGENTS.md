@@ -91,8 +91,12 @@ than silently queueing verification work.
 
 ## Maintainer state
 
-- Work on `main`, the only branch, tracking `origin/main` at
-  `github.com/Milky28/as-driven`.
+- `main` tracks `origin/main` at `github.com/Milky28/as-driven` and is the
+  integration and release branch.
+- Start future Codex implementation work in a separate Git worktree on a
+  task-specific `codex/` branch. Leave the shared main checkout for Claude;
+  do not edit, stage, stash, or commit Claude's uncommitted changes. Integrate
+  the reviewed worktree changes into main deliberately before release.
 - Client: 0.21.4 prepared locally; 0.21.3 is installed and published.
 - Dataset: 0.5.50 with 285 curated records, and 0.5.49 is installed.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
