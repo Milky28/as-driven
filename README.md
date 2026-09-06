@@ -14,21 +14,23 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## What's new in 0.21.3
+## Prepared for 0.21.4
 
-- **Clearer guided drives.** A narrower overlay gives prompts and longer status
-  messages more room, shows your progress, and keeps the continue, retry, skip,
-  and cancel button labels visible.
-- **Open a car's public controls page from SimHub.** Select a car in the car
-  browser and choose **Open public car page**.
-- **Easier online browsing.** The public catalog has clearer simulator filters,
-  keyboard navigation, and improved layouts on smaller screens.
-- **More Project Motor Racing coverage.** New reviewed entries cover the
-  Chaparral 2F, Zakspeed Capri, and Porsche 911 Carrera 2 Cup (964).
+- **A clearer public catalog.** The Pit wall design adds a navy masthead,
+  alternating car rows, larger instructions, and grouped hardware and driving
+  headings in both light and dark themes.
+- **Clearer pulling-away guidance.** Nine H-pattern cars now explicitly say to
+  use the clutch when pulling away, where the real-car baseline was previously
+  unknown. See the [affected cars and evidence](docs/releases/0.21.4-control-changes.md).
+- **Less clutter in car details.** Repeated summaries and comparisons that show
+  identical real-car and simulator values no longer obscure useful guidance.
+- **Accurate browser counts in SimHub.** The car browser distinguishes reviewed
+  cars from simulator views of those cars.
 
-This release includes dataset 0.5.49 with 285 reviewed car records across eight
-simulators, plus reliability improvements. See the
-[release notes](https://github.com/Milky28/as-driven/releases/tag/v0.21.3).
+The prepared build includes dataset 0.5.50 with 285 reviewed car records across
+eight simulators, plus reliability improvements. The
+[latest published release](https://github.com/Milky28/as-driven/releases/latest)
+remains available while this build is being checked.
 
 ## What it tells you
 
@@ -113,7 +115,7 @@ until you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.49 contains 285 reviewed car records.
+Dataset 0.5.50 contains 285 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |

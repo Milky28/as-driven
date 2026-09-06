@@ -78,12 +78,12 @@ class ReleasePackagingTests(unittest.TestCase):
         self.assertIn("$releaseExists = ($LASTEXITCODE -eq 0)", guard)
 
 
-    def test_the_shipped_update_manifest_matches_the_dataset(self) -> None:
+    def test_the_public_update_manifest_matches_its_release(self) -> None:
         """The file the plugin's default endpoint actually reads.
 
         The endpoint is a raw URL on the default branch, so this file is what
-        every installation is told when it checks. A stale dataset version here
-        announces an update nobody released, or hides one that shipped.
+        every installation is told when it checks. A prepared draft may be ahead
+        of it; pushing a draft must not announce an unavailable public download.
         """
         manifest = json.loads(
             (ROOT / "as-driven-latest.json").read_text(encoding="utf-8")
@@ -91,8 +91,15 @@ class ReleasePackagingTests(unittest.TestCase):
         index = json.loads(
             (ROOT / "data" / "v1" / "index.json").read_text(encoding="utf-8-sig")
         )
-        self.assertEqual(index["dataset_version"], manifest["dataset_version"])
+        self.assertRegex(manifest["dataset_version"], r"^\d+\.\d+\.\d+$")
+        self.assertLessEqual(tuple(map(int, manifest["dataset_version"].split('.'))),
+                             tuple(map(int, index["dataset_version"].split('.'))))
         self.assertRegex(manifest["plugin_version"], r"^\d+\.\d+\.\d+$")
+        changelog = (ROOT / 'CHANGELOG.md').read_text(encoding='utf-8')
+        section = re.search(r'^## ' + re.escape(manifest['plugin_version'])
+                            + r' - [^\n]+\n(.*?)(?=^## |\Z)', changelog, re.M | re.S)
+        self.assertIsNotNone(section, 'The announced release must have a changelog entry')
+        self.assertIn('dataset ' + manifest['dataset_version'], section.group(1))
         self.assertEqual(
             f"https://github.com/Milky28/as-driven/releases/tag/v{manifest['plugin_version']}",
             manifest["release_url"],

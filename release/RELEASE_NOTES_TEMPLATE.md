@@ -5,6 +5,26 @@ authentically. This release includes SimHub client {{PLUGIN_VERSION}} and a
 known-good copy of dataset {{DATASET_VERSION}} with {{RECORD_COUNT}} reviewed
 car records.
 
+## What you'll notice
+
+- **A more readable public catalog.** The new Pit wall design uses a navy
+  masthead, clearly alternating rows, larger driving instructions, and separate
+  hardware and technique headings. Light and dark themes both have stronger
+  row separation, including after filtering.
+- **Clearer starts in nine H-pattern cars.** The real-car guidance now says
+  **Clutch required** when pulling away instead of **Not established**. This
+  affects the Giulia Sprint GTA, BMW 3.0 CSL IMSA Group 4, Ferrari 250 GTO,
+  Ford GT40 Mk I, McLaren F1 GTR 1996, McLaren F1 LM, Porsche 964 Carrera 2 Cup,
+  Shelby Cobra Daytona Coupe, and Ultima GTR.
+- **Less clutter in car details.** Repeated summaries are reduced, and the
+  website no longer labels identical simulator and real-car values as differences.
+- **Clearer counts in SimHub.** The car browser shows reviewed cars separately
+  from simulator views, so a car supported in two games is no longer counted as
+  two distinct cars.
+
+Also includes reliability improvements. There are no new car records in this
+update. See the [exact affected cars and evidence](https://github.com/Milky28/as-driven/blob/v{{PLUGIN_VERSION}}/docs/releases/{{PLUGIN_VERSION}}-control-changes.md).
+
 ## Install
 
 1. Download `{{PLUGIN_PACKAGE}}` below.

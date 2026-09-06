@@ -9,6 +9,17 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.21.4 - 2026-09-06
+
+- Give the public catalog a Pit wall design with stronger light/dark row
+  separation, larger guidance, and grouped hardware and technique headings.
+- State that the clutch is required to pull away in nine H-pattern cars whose
+  real-car standing-start guidance was previously unknown. See
+  [the affected cars and evidence](docs/releases/0.21.4-control-changes.md).
+- Keep car details concise and hide comparisons that repeat identical values.
+- Distinguish reviewed cars from simulator views in the SimHub car browser.
+- Improve release and website checks. Ship dataset 0.5.50 with 285 reviewed cars.
+
 ## 0.21.3 - 2026-09-06
 
 - Redesign the guided-drive overlay for clearer in-car prompts, persistent button labels, readable progress, and scalable saved layouts.

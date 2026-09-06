@@ -95,6 +95,13 @@ generated release notes, and temporary installations. It creates a GitHub draft
 and release tag targeting the current commit, uploads all release artifacts,
 and stops. Review the draft and manual checks before publishing it on GitHub.
 
+Keep the root `as-driven-latest.json` on the last published release while a new
+candidate is a draft. After publishing, copy the verified manifest from that
+release into the root and commit it so the manual update check announces the
+available download. A local candidate's dataset version can be ahead of the
+public update manifest; the regression check validates the manifest against its
+own release's changelog entry.
+
 Automatic update checking is out of scope by design, not for want of an
 endpoint. The endpoint exists and is stable: `main` is public, and
 `https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json`

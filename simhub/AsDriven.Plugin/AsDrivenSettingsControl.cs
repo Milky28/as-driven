@@ -2527,9 +2527,14 @@ namespace AsDriven.Plugin
                     selected = car;
                 }
             }
-            string count = _previewCar.Items.Count == 1
-                ? "1 curated car"
-                : _previewCar.Items.Count + " curated cars";
+            var recordIds = new HashSet<string>(StringComparer.Ordinal);
+            foreach (CarCatalogEntry car in _previewCar.Items)
+            {
+                recordIds.Add(car.RecordId);
+            }
+            string count = recordIds.Count + (recordIds.Count == 1 ? " reviewed car" : " reviewed cars")
+                + " / " + _previewCar.Items.Count
+                + (_previewCar.Items.Count == 1 ? " simulator view" : " simulator views");
             _catalogCount.Text = _catalogShortcutFilter == "unresolved"
                 ? count + " with an unresolved control"
                 : count;

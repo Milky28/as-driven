@@ -1682,53 +1682,61 @@ TEMPLATE = """<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root {{
-  --bg: #f0f2f5;
+  --bg: #e8edf2;
+  --row-alt: #e8eef4;
+  --row-selected: #dae7f3;
+  --masthead: #152b40;
+  --livery: #ca4c35;
   --surface: #ffffff;
   --surface-2: #e3e7ed;
-  --ink: #16181d;
-  --muted: #3f4652;
-  --faint: #535c6a;
-  --line: #cbd1da;
+  --ink: #172636;
+  --muted: #4a5c6d;
+  --faint: #4a5c6d;
+  --line: #bbc8d4;
   --accent: #c2610a;
-  --driver: #a8520a;
-  --driver-bg: #fbeedd;
-  --car: #2e6b5e;
-  --car-bg: #e4efec;
-  --optional: #6b5aa6;
+  --driver: #814500;
+  --driver-bg: #fff0da;
+  --car: #1f614d;
+  --car-bg: #def0e8;
+  --optional: #645092;
   --focus: #1f5fa8;
 }}
 @media (prefers-color-scheme: dark) {{
   :root:not([data-theme="light"]) {{
-    --bg: #0f1115;
-    --surface: #171a20;
-    --surface-2: #1e222a;
-    --ink: #e8eaee;
-    --muted: #a2a9b6;
-    --faint: #8d95a3;
-    --line: #272b33;
+    --bg: #101923;
+    --surface: #192633;
+    --surface-2: #273b4e;
+    --row-alt: #273b4e;
+    --row-selected: #324b62;
+    --ink: #f0f4f7;
+    --muted: #bac9d6;
+    --faint: #bac9d6;
+    --line: #516579;
     --accent: #f0a03c;
-    --driver: #f0a03c;
-    --driver-bg: #33240f;
-    --car: #5bb39b;
-    --car-bg: #122b26;
-    --optional: #a893e0;
+    --driver: #ffcf87;
+    --driver-bg: #49351b;
+    --car: #9cdfc4;
+    --car-bg: #1b3c31;
+    --optional: #d3c0f3;
     --focus: #6fa8e8;
   }}
 }}
 :root[data-theme="dark"] {{
-  --bg: #0f1115;
-  --surface: #171a20;
-  --surface-2: #1e222a;
-  --ink: #e8eaee;
-  --muted: #a2a9b6;
-  --faint: #8d95a3;
-  --line: #272b33;
+  --bg: #101923;
+  --surface: #192633;
+  --surface-2: #273b4e;
+  --row-alt: #273b4e;
+  --row-selected: #324b62;
+  --ink: #f0f4f7;
+  --muted: #bac9d6;
+  --faint: #bac9d6;
+  --line: #516579;
   --accent: #f0a03c;
-  --driver: #f0a03c;
-  --driver-bg: #33240f;
-  --car: #5bb39b;
-  --car-bg: #122b26;
-  --optional: #a893e0;
+  --driver: #ffcf87;
+  --driver-bg: #49351b;
+  --car: #9cdfc4;
+  --car-bg: #1b3c31;
+  --optional: #d3c0f3;
   --focus: #6fa8e8;
 }}
 * {{ box-sizing: border-box; }}
@@ -1743,6 +1751,18 @@ body {{
 }}
 .wrap {{ max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }}
 header {{ display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }}
+.masthead {{ position: relative; display: flex; flex-direction: column; gap: 14px;
+  padding: 24px 26px 28px; background: var(--masthead); color: #fff; }}
+.masthead::after {{ content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 5px;
+  background: linear-gradient(115deg, var(--livery) 0 68%, #d6b378 68% 72%, #7397b1 72% 76%, transparent 76%); }}
+.masthead .lede {{ color: #e0e8ee; }}
+.masthead .theme {{ border-color: #738597; }}
+.masthead .theme button {{ background: transparent; color: #fff; min-height: 44px; }}
+.masthead .theme button[aria-pressed="true"] {{ background: #fff; color: #172636; }}
+.masthead .simhub-link {{ color: #172636; background: #fff; border-color: #fff; }}
+.masthead .simhub-link:hover {{ background: #dae7f3; }}
+.masthead .release-badge {{ border-left-color: var(--livery); }}
 .topline {{
   display: flex; flex-wrap: wrap; gap: 16px;
   align-items: baseline; justify-content: space-between;
@@ -1807,7 +1827,7 @@ h1 {{
 }}
 .controls {{
   position: sticky; top: 0; z-index: 5;
-  display: flex; flex-wrap: nowrap; gap: 10px; align-items: center;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
   padding: 14px 0; margin-bottom: 6px;
   background: var(--bg); border-bottom: 1px solid var(--line);
 }}
@@ -1952,33 +1972,35 @@ table {{
 /* This is a driving checklist, not a spreadsheet.  Let the three technique
    columns use the available width and wrap their guidance; one long simulator
    qualification must not make the whole catalogue scroll sideways. */
-th:nth-child(1) {{ width: 20%; }}
-th:nth-child(2) {{ width: 15%; }}
-th:nth-child(3) {{ width: 14%; }}
-th:nth-child(4) {{ width: 12%; }}
-th:nth-child(5), th:nth-child(6) {{ width: 19.5%; }}
+col:nth-child(1) {{ width: 24%; }}
+col:nth-child(2), col:nth-child(3) {{ width: 15%; }}
+col:nth-child(4) {{ width: 12%; }}
+col:nth-child(5), col:nth-child(6) {{ width: 17%; }}
 /* Not sticky. The wide-content wrapper needs overflow-x, which makes it a
    scroll container, and a sticky header inside one anchors to the container
    rather than to the viewport - so it parks itself over the first row and
    stays there. The filter bar sits outside the wrapper and sticks properly. */
 thead th {{
   padding: 9px 12px; text-align: left;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 10.5px; font-weight: 500;
-  letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint);
-  background: var(--bg); border-bottom: 1px solid var(--line);
-  white-space: nowrap;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: #fff; background: var(--masthead); border-bottom: 1px solid #607387;
 }}
-tr.car {{ border-bottom: 1px solid var(--line); cursor: pointer; }}
-tr.car:hover {{ background: var(--surface); }}
+.column-groups th {{ font: 500 11px/1.4 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .1em; color: #d3dfeb; padding-bottom: 3px; border-bottom: 0; }}
+.column-groups th:last-child {{ border-left: 1px solid #607387; }}
+tr.car {{ background: var(--surface); border-bottom: 1px solid var(--line); cursor: pointer; }}
+tr.car.row-alternate {{ background: var(--row-alt); }}
+tr.car:hover {{ background: var(--row-selected); }}
 tr.car[aria-expanded="true"] {{
-  background: var(--surface);
+  background: var(--row-selected);
   box-shadow: inset 3px 0 0 var(--accent);
 }}
-tr.car td {{ padding: 11px 12px; vertical-align: top; }}
+tr.car td {{ padding: 16px 12px; vertical-align: top; overflow-wrap: anywhere; }}
+tr.car td:nth-child(4) {{ border-left: 1px solid var(--line); }}
 .name {{ display: block; font-weight: 600; }}
 .shifter {{ display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; }}
-.meta {{ display: block; font-size: 12.5px; color: var(--faint); margin-top: 2px; }}
+.meta {{ display: block; font-size: 13px; color: var(--faint); margin-top: 4px; }}
 /* Not nowrap. This line sits in a fixed-layout 15% column, and the longest
    equipment text overflowed into the shifter column rather than wrapping inside
    its own cell. Wrapping is the fallback; the text below is short enough that it
@@ -1987,8 +2009,8 @@ tr.car td {{ padding: 11px 12px; vertical-align: top; }}
 .state {{ white-space: normal; }}
 .tone {{
   display: inline-block; max-width: 100%; padding: 3px 9px; border-radius: 2px;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 12px; line-height: 1.45; overflow-wrap: anywhere;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px; line-height: 1.45; overflow-wrap: anywhere;
 }}
 /* The fill carries the meaning: something is being asked of somebody. Amber is
    asked of the driver, teal is handled by the car, and the two hollow states are
@@ -2294,8 +2316,8 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   padding: 4px 7px; border: 0; border-radius: 3px; color: var(--accent);
   background: transparent; cursor: pointer; font: 500 11px/1.2 inherit;
 }}
-.table-context {{ margin: 14px 0 8px; color: var(--muted); font-size: 13px; }}
-.table-context strong {{ color: var(--ink); }}
+.table-context {{ margin: 18px 0 12px; color: var(--muted); font-size: 14px; }}
+.table-context strong {{ color: var(--ink); font-size: 17px; }}
 .visually-hidden {{
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
@@ -2313,6 +2335,9 @@ footer p {{ margin: 0; }}
 @media (prefers-reduced-motion: reduce) {{ * {{ transition: none !important; }} }}
 @media (max-width: 720px) {{
   .wrap {{ padding: 28px 14px 60px; }}
+  .masthead {{ padding: 20px 16px 24px; }}
+  .mode {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }}
+  .mode button {{ min-height: 44px; }}
   .stats {{ gap: 6px 16px; }}
   .benchmark-intro {{ grid-template-columns: 1fr; }}
   .benchmark-sim {{ grid-template-columns: minmax(0, 1fr) auto; }}
@@ -2326,9 +2351,10 @@ footer p {{ margin: 0; }}
   tbody, tr.car, tr.detail, tr.detail > td {{ display: block; width: 100%; }}
   tr.car {{
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 4px 0;
+    padding: 4px 0; margin-bottom: 12px; border: 1px solid var(--line);
   }}
   tr.car td {{ padding: 8px 10px; }}
+  tr.car td:nth-child(4) {{ border-left: 0; }}
   tr.car .car-name {{ grid-column: 1 / -1; }}
   tr.detail > td {{ padding: 0 0 12px; }}
   .detail-inner {{ padding: 14px; }}
@@ -2349,6 +2375,7 @@ footer p {{ margin: 0; }}
 
 <div class="wrap">
 <header>
+ <div class="masthead">
   <div class="topline">
     <div class="title-block">
       <h1>As Driven</h1>
@@ -2365,6 +2392,7 @@ footer p {{ margin: 0; }}
   curated from manufacturer and homologation sources and verified in-sim. Where
   the evidence does not settle something, this says so rather than guessing.</p>
   <a class="simhub-link" href="https://github.com/Milky28/as-driven/releases/latest">Get the SimHub plugin</a>
+ </div>
   <div class="controls driver-start" id="lookup-controls">
     <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
     <label class="simulator-choice" for="f-simulator">I’m driving
@@ -2427,7 +2455,8 @@ footer p {{ margin: 0; }}
 
 <div class="table-scroll">
 <table>
-  <thead><tr>
+  <colgroup><col><col><col><col><col><col></colgroup>
+  <thead><tr class="column-groups"><th></th><th scope="colgroup" colspan="2">FIT / HARDWARE</th><th scope="colgroup" colspan="3">DRIVE / TECHNIQUE</th></tr><tr>
     <th scope="col">Car</th><th scope="col">Wheel</th><th scope="col">Shifter</th>
     <th scope="col">Pulling away</th><th scope="col">Upshift</th>
     <th scope="col">Downshift</th>
@@ -2575,6 +2604,7 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
     var text = q.value.trim().toLowerCase();
     var wantedSimulator = simulatorFilter.value;
     var shown = 0;
+    var visibleRows = 0;
     var selectedOutsideFilters = false;
     rows.forEach(function (row) {{
       var ok = !text || row.dataset.search.indexOf(text) !== -1;
@@ -2601,6 +2631,8 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
       var keepSelected = row === selectedDetailRow;
       if (keepSelected && !ok) {{ selectedOutsideFilters = true; }}
       row.hidden = !ok && !keepSelected;
+      row.classList.toggle('row-alternate', !row.hidden && visibleRows % 2 === 1);
+      if (!row.hidden) {{ visibleRows++; }}
       var detail = row.nextElementSibling;
       if (!ok && !keepSelected && detail) {{
         setOpen(row, false);

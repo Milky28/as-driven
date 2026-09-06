@@ -572,7 +572,7 @@ class SiteTests(unittest.TestCase):
         self.assertIn('aria-label="Comparison mode"', header)
         self.assertNotIn('aria-label="Comparison mode"', controls)
         controls_rule = re.search(r"\.controls \{(.*?)\}", page, re.S).group(1)
-        self.assertIn("flex-wrap: nowrap", controls_rule)
+        self.assertIn("flex-wrap: wrap", controls_rule)
 
     def test_only_conflicting_established_simulator_values_disagree(self) -> None:
         cars = {car["id"]: car for car in collect(ROOT)["cars"]}
@@ -736,7 +736,7 @@ class SiteTests(unittest.TestCase):
         page = build_site(ROOT)
         stats_rule = re.search(r"(?m)^\.stats \{(.*?)\}", page, re.S).group(1)
         stat_rule = re.search(r"\.stat \{(.*?)\}", page, re.S).group(1)
-        release_rule = re.search(r"\.release-badge \{(.*?)\}", page, re.S).group(1)
+        release_rule = re.search(r"(?m)^\.release-badge \{(.*?)\}", page, re.S).group(1)
         detail_rule = re.search(r"\.detail-inner \{(.*?)\}", page, re.S).group(1)
         selected_rule = re.search(
             r'tr\.car\[aria-expanded="true"\] \{(.*?)\}', page, re.S
@@ -811,8 +811,18 @@ class SiteTests(unittest.TestCase):
         tokens = dict(re.findall(r"(--[a-z0-9-]+):\s*([^;]+);", root))
         self.assertNotEqual(tokens["--bg"], tokens["--surface"])
         self.assertNotEqual(tokens["--surface"], tokens["--surface-2"])
-        self.assertEqual(tokens["--line"], "#cbd1da")
-        self.assertEqual(tokens["--faint"], "#535c6a")
+        self.assertNotEqual(tokens["--row-alt"], tokens["--surface"])
+        self.assertNotEqual(tokens["--line"], tokens["--row-alt"])
+        def luminance(color):
+            channels = [int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+            linear = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4
+                      for v in channels]
+            return sum(v * weight for v, weight in zip(linear, [.2126, .7152, .0722]))
+        for foreground, background in [('--faint', '--row-alt'), ('--ink', '--row-alt'),
+                                       ('--optional', '--row-alt'), ('--driver', '--driver-bg'),
+                                       ('--car', '--car-bg')]:
+            values = sorted([luminance(tokens[foreground]), luminance(tokens[background])])
+            self.assertGreaterEqual((values[1] + .05) / (values[0] + .05), 4.5)
 
     def test_the_four_states_are_told_apart_by_more_than_hue(self) -> None:
         """Two warm fills side by side read as the same answer.

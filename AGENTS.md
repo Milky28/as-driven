@@ -93,8 +93,8 @@ than silently queueing verification work.
 
 - Work on `main`, the only branch, tracking `origin/main` at
   `github.com/Milky28/as-driven`.
-- Client: 0.21.3 locally, installed, and published; the three agree.
-- Dataset: 0.5.49 with 285 curated records, and 0.5.49 is installed.
+- Client: 0.21.4 prepared locally; 0.21.3 is installed and published.
+- Dataset: 0.5.50 with 285 curated records, and 0.5.49 is installed.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The history was rewritten on 2026-08-29. An older clone must re-clone rather
   than pull; see `docs/maintainer-handoff.md` for the full history note and

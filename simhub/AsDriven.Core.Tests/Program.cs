@@ -1002,8 +1002,8 @@ namespace AsDriven.Core.Tests
                     "its observed wheel does not contradict an established wheel");
                 True(bmwCsl.ShifterUnestablished,
                     "the observed gate is labelled as filling a research gap");
-                True(bmwCsl.LaunchUnestablished,
-                    "the observed launch is labelled as filling a research gap");
+                False(bmwCsl.LaunchUnestablished,
+                    "the established H-pattern baseline settles the standing-start clutch");
                 True(bmwCsl.UpshiftUnestablished,
                     "the observed upshift is labelled as filling a research gap");
                 True(bmwCsl.DownshiftUnestablished,
@@ -1013,7 +1013,7 @@ namespace AsDriven.Core.Tests
                 Equal("round", bmwCsl.WheelRimShape,
                     "the effective simulator guidance still uses the observed wheel");
                 Equal("required", bmwCsl.StandingStartClutch,
-                    "the effective simulator guidance still uses the observed launch");
+                    "the effective simulator launch agrees with the established real-car baseline");
                 Equal("required", bmwCsl.ThrottleLift,
                     "the effective simulator guidance still uses the observed upshift");
                 Equal("required", bmwCsl.ManualBlip,
