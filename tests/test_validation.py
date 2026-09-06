@@ -1307,6 +1307,50 @@ class ValidationTests(unittest.TestCase):
         ]
         self.assertEqual([], silent)
 
+    def test_a_summary_never_denies_technique_the_record_establishes(self) -> None:
+        """A summary must not tell the driver the opposite of its own card.
+
+        Five summaries said no source established how the real car was driven
+        while the card beside them read "Clutch required" as the real-car
+        baseline. Four were made stale by the H-pattern launch derivation and one
+        had always overstated: the Mustang required the clutch for every shift
+        and still said its technique was established by nothing.
+
+        The wording was defensible read literally - a mechanism established the
+        launch clutch, not a source - and that is exactly why it needs a test.
+        The driver reads the sentence, not the provenance.
+        """
+        denial = re.compile(
+            r"no (reviewed )?source establishes how the real"
+            r"|technique is established by no source"
+            r"|real car's technique is (not )?established",
+            re.IGNORECASE,
+        )
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            summary = record.get("driver_summary") or ""
+            if not denial.search(summary):
+                continue
+            transmission = record["authentic_controls"]["transmission"]
+            established = [
+                name
+                for name, value in (
+                    ("standing start clutch", transmission.get("standing_start_clutch")),
+                    ("upshift clutch", transmission.get("upshift", {}).get("clutch")),
+                    ("downshift clutch", transmission.get("downshift", {}).get("clutch")),
+                    ("upshift lift", transmission.get("upshift", {}).get("throttle_lift")),
+                    ("downshift blip", transmission.get("downshift", {}).get("manual_blip")),
+                )
+                if value not in (None, "unknown")
+            ]
+            if established:
+                offenders.append(
+                    "%s: the summary denies established technique, but %s"
+                    % (record["record_id"], ", ".join(established))
+                )
+        self.assertEqual([], offenders)
+
     def test_a_sourced_rim_disagreement_is_an_explicit_audited_override(self) -> None:
         """A photograph of the real car outranks a look at a simulator.
 
