@@ -92,14 +92,14 @@ contacts nothing until you press it, and downloads nothing when you do. See
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.46 contains 282 reviewed car records.
+Dataset 0.5.49 contains 285 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |
 | Automobilista 2 | 261 | not applicable |
 | Assetto Corsa | 21 | 14 |
 | Assetto Corsa Competizione | 18 | 18 |
-| Project Motor Racing | 8 | 5 |
+| Project Motor Racing | 11 | 5 |
 | Assetto Corsa EVO | 7 | 3 |
 | RaceRoom Racing Experience | 6 | 3 |
 | rFactor 2 | 5 | 0 |

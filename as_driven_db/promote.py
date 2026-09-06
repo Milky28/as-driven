@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .transaction import write_promotion_transaction
+
 
 SHEET_SOURCE = "ams2.coanda-sheet.v1.0.34"
 FORUM_SOURCE = "ams2.reiza-forum.extended-car-info"
@@ -221,11 +223,7 @@ def promote_approved_ams2(
             raise FileExistsError(f"refusing to overwrite curated record: {output}")
         generated.append((output, record))
 
-    for output, record in generated:
-        output.write_text(
-            json.dumps(record, indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-        )
+    for output, _record in generated:
         new_paths.append(output)
         relative = output.relative_to(data_directory).as_posix()
         index["records"].append(relative)
@@ -233,7 +231,12 @@ def promote_approved_ams2(
     index["records"] = sorted(set(index["records"]))
     index["dataset_version"] = approval_payload["dataset_version"]
     index["released_at"] = approved_at
-    index_path.write_text(
-        json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    outputs = [
+        (output, json.dumps(record, indent=2, ensure_ascii=False) + "\n")
+        for output, record in generated
+    ]
+    outputs.append(
+        (index_path, json.dumps(index, indent=2, ensure_ascii=False) + "\n")
     )
+    write_promotion_transaction(data_directory.parents[1], outputs)
     return new_paths

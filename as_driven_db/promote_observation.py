@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from .importers.observation import REVIEW, derive_approved_controls
+from .transaction import write_promotion_transaction
 from .validate import ID_RE
 
 
@@ -1514,22 +1515,24 @@ def promote_observations(
             known_sources.add(source["source_id"])
 
     written: list[Path] = []
-    for path, payload in generated:
-        path.write_text(
-            json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-        )
+    for path, _payload in generated:
         written.append(path)
         if path.parent.name == "cars":
             index["records"].append(path.relative_to(data_directory).as_posix())
 
     sources["sources"].extend(new_sources)
-    sources_path.write_text(
-        json.dumps(sources, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
     index["records"] = sorted(set(index["records"]))
     index["dataset_version"] = dataset_version
     index["released_at"] = approved_at
-    index_path.write_text(
-        json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    outputs = [
+        (path, json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
+        for path, payload in generated
+    ]
+    outputs.extend(
+        (
+            (sources_path, json.dumps(sources, indent=2, ensure_ascii=False) + "\n"),
+            (index_path, json.dumps(index, indent=2, ensure_ascii=False) + "\n"),
+        )
     )
+    write_promotion_transaction(root, outputs)
     return written

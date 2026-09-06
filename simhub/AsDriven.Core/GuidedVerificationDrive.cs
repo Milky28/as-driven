@@ -69,10 +69,13 @@ namespace AsDriven.Core
         public int StepNumber { get; set; }
         public int StepCount { get; set; }
         public string Title { get; set; }
+        public string Headline { get; set; }
         public string Prompt { get; set; }
         public string PromptLine1 { get; set; }
         public string PromptLine2 { get; set; }
         public string Status { get; set; }
+        public string StatusLine1 { get; set; }
+        public string StatusLine2 { get; set; }
         public string Result { get; set; }
         public string ResultSummary { get; set; }
         public string LiveValues { get; set; }
@@ -359,10 +362,13 @@ namespace AsDriven.Core
                     StepNumber = step,
                     StepCount = 6,
                     Title = Title(_phase),
+                    Headline = Headline(_phase),
                     Prompt = Prompt(_phase),
                     PromptLine1 = PromptLine1(_phase),
                     PromptLine2 = PromptLine2(_phase),
                     Status = Status(_phase),
+                    StatusLine1 = StatusLine1(_phase),
+                    StatusLine2 = StatusLine2(_phase),
                     Result = _result,
                     ResultSummary = ResultSummary(_phase),
                     LiveValues = LiveValues(_lastSample)
@@ -1240,6 +1246,36 @@ namespace AsDriven.Core
             return "Perform the maneuver. Press Next when finished if no result is detected automatically.";
         }
 
+        private string StatusLine1(Phase phase)
+        {
+            if (phase == Phase.Complete)
+            {
+                return "Drive complete.";
+            }
+            if (phase == Phase.Intro)
+            {
+                return "Press Next to begin the first maneuver.";
+            }
+            if (_resultReady)
+            {
+                return "Result captured. Next accepts it; Retry repeats this test.";
+            }
+            return "Perform the maneuver. Press Next when finished.";
+        }
+
+        private string StatusLine2(Phase phase)
+        {
+            if (phase == Phase.Complete)
+            {
+                return "Return to SimHub to review cockpit details and save the draft.";
+            }
+            if (phase == Phase.Intro || _resultReady)
+            {
+                return string.Empty;
+            }
+            return "If no result is detected automatically, use Next.";
+        }
+
         private static string Title(Phase phase)
         {
             switch (phase)
@@ -1252,6 +1288,22 @@ namespace AsDriven.Core
                 case Phase.CoastDownshift: return "Downshift without pedal input";
                 case Phase.ManualBlipDownshift: return "Manual-blip downshift";
                 case Phase.Complete: return "Guided drive complete";
+                default: return "Guided verification";
+            }
+        }
+
+        private static string Headline(Phase phase)
+        {
+            switch (phase)
+            {
+                case Phase.Intro: return "Prepare to drive";
+                case Phase.MoveOff: return "Release the clutch";
+                case Phase.GearCount: return "Find the top gear";
+                case Phase.FullThrottleUpshift: return "Shift up at full throttle";
+                case Phase.LiftedUpshift: return "Lift, then shift up";
+                case Phase.CoastDownshift: return "Lift, then downshift";
+                case Phase.ManualBlipDownshift: return "Blip, then downshift";
+                case Phase.Complete: return "Review your results";
                 default: return "Guided verification";
             }
         }

@@ -280,6 +280,12 @@ def running_clutch(value: str) -> str:
     }.get(value, "Clutch not established")
 
 
+def _shift_instruction(action: tuple[str, str], clutch: str) -> tuple[str, str]:
+    """Keep the running-shift clutch instruction beside the technique it changes."""
+    text, tone = action
+    return f"{text} · {running_clutch(clutch)}", tone
+
+
 # How to describe each field a simulator is known to override. The renderer is
 # given a whole transmission block so it can answer in the page's own words
 # rather than echoing a raw enum, and so a field that reads differently
@@ -550,6 +556,49 @@ def _simulator_view(
     simulator = entry.get("simulator", "")
     confidence = entry.get("confidence") or {}
     behavior = entry.get("behavior") or {}
+    # A simulator view starts from the authentic technique, then applies
+    # reviewed departures and directly observed simulator behavior. Explicit
+    # simulator unknowns must replace a real-car automation assumption: a gap
+    # in this game is not evidence that the car will cut or blip for the driver.
+    effective = _apply(transmission, entry.get("overrides") or [])
+    shift_type = behavior.get("shift_type")
+    if shift_type in {"h-pattern", "sequential-stick", "sequential-paddles"}:
+        effective["shift_actuation"] = shift_type
+    for behavior_field, transmission_field in (
+        ("shift_cut", "automatic_cut"),
+        ("auto_blip", "automatic_blip"),
+    ):
+        value = behavior.get(behavior_field)
+        if value in {"yes", "no", "unknown"}:
+            direction = "upshift" if behavior_field == "shift_cut" else "downshift"
+            effective[direction][transmission_field] = value
+    drive_launch = launch(effective["standing_start_clutch"])
+    drive_upshift = _shift_instruction(upshift(
+        effective["upshift"]["throttle_lift"],
+        effective["upshift"]["automatic_cut"],
+        effective["upshift"]["clutch"],
+    ), effective["upshift"]["clutch"])
+    drive_downshift = _shift_instruction(downshift(
+        effective["downshift"]["manual_blip"],
+        effective["downshift"]["automatic_blip"],
+        effective["downshift"]["clutch"],
+    ), effective["downshift"]["clutch"])
+    if (
+        effective["upshift"]["throttle_lift"] == "not-required"
+        and effective["upshift"]["automatic_cut"] == "unknown"
+    ):
+        drive_upshift = (
+            f"Stay flat · cut not established · {running_clutch(effective['upshift']['clutch'])}",
+            TONE_UNKNOWN,
+        )
+    if (
+        effective["downshift"]["manual_blip"] == "not-required"
+        and effective["downshift"]["automatic_blip"] == "unknown"
+    ):
+        drive_downshift = (
+            f"No blip needed · auto blip not established · {running_clutch(effective['downshift']['clutch'])}",
+            TONE_UNKNOWN,
+        )
     unknown_behavior = sorted(
         SIMULATOR_BEHAVIOR_FIELDS.get(
             path,
@@ -565,6 +614,19 @@ def _simulator_view(
         "differences": differences(
             transmission, entry.get("overrides") or [], controls
         ),
+        "drive": {
+            "shifter": shifter(
+                effective["forward_gears"], effective["shift_actuation"]
+            ),
+            "launch": drive_launch,
+            "upshift": drive_upshift,
+            "downshift": drive_downshift,
+        },
+        "filters": {
+            "actuation": effective["shift_actuation"],
+            "start": effective["standing_start_clutch"],
+            "blip": effective["downshift"]["manual_blip"],
+        },
         "cockpit": simulator_cockpit(behavior),
         "unknown_behavior": unknown_behavior,
         "game_version": entry.get("verified_game_version", ""),
@@ -709,7 +771,6 @@ def _car(
 
     open_fields = _open_control_fields(transmission)
     deviations = _archetype_deviations(block.get("deviations", []))
-    explained_open_fields = {item["field"] for item in deviations}
     return {
         "id": record["record_id"],
         "name": identity["display_name"],
@@ -736,10 +797,26 @@ def _car(
         "deviations": deviations,
         "archetype_basis": block.get("basis", ""),
         "open_fields": open_fields,
-        "unexplained_open_fields": [
-            field for field in open_fields if field not in explained_open_fields
-        ],
+        # A classified deviation can explain why a field is unsettled, but it
+        # must not make that real-car gap disappear from a driver's view.
+        "unexplained_open_fields": open_fields,
         "simulators": simulator_views,
+        "real_drive": {
+            "shifter": shifter(
+                transmission["forward_gears"], transmission["shift_actuation"]
+            ),
+            "launch": [launch_text, launch_tone],
+            "upshift": list(
+                _shift_instruction(
+                    (up_text, up_tone), transmission["upshift"]["clutch"]
+                )
+            ),
+            "downshift": list(
+                _shift_instruction(
+                    (down_text, down_tone), transmission["downshift"]["clutch"]
+                )
+            ),
+        },
         "has_differences": any(view["differences"] for view in simulator_views),
         "is_multi_sim": len(simulator_views) > 1,
         "simulator_disagreements": cross_simulator_disagreements,
@@ -831,11 +908,82 @@ def _cell(value: list[str]) -> str:
     )
 
 
+def _driver_cell(name: str, value: list[str]) -> str:
+    """A table cell the simulator selector can safely update in place."""
+    text, tone = value
+    return (
+        f'<td class="state" data-driving-cell="{_e(name)}"><span class="tone tone-{tone}" '
+        f'title="{_e(TONE_TITLE[tone])}">{_e(text)}</span></td>'
+    )
+
+
+def _drive_card(label: str, value: list[str]) -> str:
+    """Render one immediately actionable simulator-view instruction."""
+    text, tone = value
+    return (
+        '<div class="drive-card"><span>{label}</span>'
+        '<strong class="tone tone-{tone}" title="{title}">{text}</strong></div>'
+    ).format(
+        label=_e(label), tone=_e(tone), title=_e(TONE_TITLE[tone]), text=_e(text)
+    )
+
+
+def _drive_it(car: dict[str, Any], simulator: dict[str, Any]) -> str:
+    """Put the selected simulator's actionable answer ahead of its evidence."""
+    drive = simulator["drive"]
+    checklist = "\n".join(
+        (
+            f"{car['name']} - {simulator['label']}",
+            f"Authentic wheel: {car['rim']}",
+            f"Simulator cockpit: {' · '.join(simulator['cockpit']) or 'Not established'}",
+            f"Fit: {drive['shifter']}",
+            f"Pull away: {drive['launch'][0]}",
+            f"Upshift: {drive['upshift'][0]}",
+            f"Downshift: {drive['downshift'][0]}",
+        )
+    )
+    cards = "".join(
+        (
+            '<div class="drive-card"><span>Shifter</span><strong>{shifter}</strong></div>'.format(
+                shifter=_e(drive["shifter"])
+            ),
+            '<div class="drive-card"><span>Authentic wheel</span><strong>{wheel}</strong></div>'.format(
+                wheel=_e(car["rim"])
+            ),
+            '<div class="drive-card"><span>Simulator cockpit</span><strong>{cockpit}</strong></div>'.format(
+                cockpit=_e(" · ".join(simulator["cockpit"]) or "Not established")
+            ),
+            _drive_card("Pull away", drive["launch"]),
+            _drive_card("Upshift", drive["upshift"]),
+            _drive_card("Downshift", drive["downshift"]),
+        )
+    )
+    qualifier = (
+        "Reviewed simulator departures are applied below; unobserved simulator "
+        "behaviour stays explicitly open."
+    )
+    return (
+        '<section class="drive-it" aria-label="How to drive {car} in {simulator}">'
+        '<div class="drive-it-heading"><div><span>Drive it in</span>'
+        '<h4>{simulator}</h4></div><div class="drive-it-actions">'
+        '<button type="button" class="copy-setup" data-copy-setup="{checklist}" '
+        'data-copy-anchor="{anchor}">Copy setup</button>'
+        '<span class="copy-status" data-copy-status aria-live="polite"></span>'
+        '</div><p>{qualifier}</p></div>'
+        '<div class="drive-grid">{cards}</div></section>'
+    ).format(
+        car=_e(car["name"]), simulator=_e(simulator["label"]),
+        qualifier=_e(qualifier), cards=cards, checklist=_e(checklist),
+        anchor=_e(simulator["anchor"]),
+    )
+
+
 def _simulator_panel(car: dict[str, Any], simulator: dict[str, Any], selected: bool) -> str:
     content = [
         '<h3 class="sim-panel-title">{car}<span>{simulator}</span></h3>'.format(
             car=_e(car["name"]), simulator=_e(simulator["label"])
-        )
+        ),
+        _drive_it(car, simulator),
     ]
     if simulator["differences"]:
         rows = "".join(
@@ -1169,29 +1317,109 @@ def _verification_section(verification: dict[str, Any]) -> str:
     )
 
 
+def _simulator_comparison_row(item: dict[str, Any]) -> str:
+    """One field across the real car and all reviewed simulator views.
+
+    The audit remains the authority for its verdict.  This renderer merely
+    makes the values comparable at a glance, including any explicit unknowns.
+    """
+    audit = item.get("audit") or {}
+    baseline = (audit.get("authentic_baseline") or {}).get("display_value")
+    values = []
+    if baseline:
+        values.append(
+            '<span class="comparison-value comparison-real"><b>Real car</b>{value}</span>'.format(
+                value=_e(baseline)
+            )
+        )
+    values.extend(
+        '<span class="comparison-value"><b>{simulator}</b>{value}</span>'.format(
+            simulator=_e(value["simulator"]), value=_e(value["value"])
+        )
+        for value in item["values"]
+    )
+    return (
+        '<div class="comparison-row"><div class="comparison-field">{field}</div>'
+        '<div class="comparison-values">{values}</div>{audit}</div>'
+    ).format(
+        field=_e(item["field"]), values="".join(values), audit=_audit_result(item)
+    )
+
+
+DRIVE_COMPARISON_FIELDS = (
+    ("shifter", "Shifter"),
+    ("launch", "Pull away"),
+    ("upshift", "Upshift"),
+    ("downshift", "Downshift"),
+)
+
+
+def _drive_comparison_value(value: Any) -> tuple[str, str | None]:
+    """Normalize hardware and technique values for the compact comparison."""
+    if isinstance(value, (list, tuple)):
+        return str(value[0]), str(value[1])
+    return str(value), None
+
+
+def _drive_comparison_card(
+    label: str,
+    drive: dict[str, Any],
+    baseline: dict[str, Any] | None = None,
+) -> str:
+    """A simulator card that foregrounds only departures from the real car."""
+    fields = []
+    for key, field_label in DRIVE_COMPARISON_FIELDS:
+        text, tone = _drive_comparison_value(drive[key])
+        baseline_text = None
+        if baseline is not None:
+            baseline_text, _ = _drive_comparison_value(baseline[key])
+        if baseline_text == text:
+            value = '<span class="drive-compare-match">Matches real car</span>'
+            state = "matches"
+        elif tone:
+            value = '<span class="tone tone-{tone}" title="{title}">{text}</span>'.format(
+                tone=_e(tone), title=_e(TONE_TITLE[tone]), text=_e(text)
+            )
+            state = "changes"
+        else:
+            value = f'<span class="drive-compare-value">{_e(text)}</span>'
+            state = "changes"
+        fields.append(
+            '<div class="drive-compare-field drive-compare-{state}"><dt>{label}</dt>'
+            '<dd>{value}</dd></div>'.format(
+                state=state, label=_e(field_label), value=value
+            )
+        )
+    baseline_class = " drive-compare-baseline" if baseline is None else ""
+    return (
+        '<article class="drive-compare-card{baseline_class}"><h5>{label}</h5>'
+        '<dl>{fields}</dl></article>'
+    ).format(baseline_class=baseline_class, label=_e(label), fields="".join(fields))
+
+
+def _drive_comparison(car: dict[str, Any]) -> str:
+    """Show every reviewed game against the authentic setup without a data dump."""
+    if not car["is_multi_sim"]:
+        return ""
+    cards = [_drive_comparison_card("Real car", car["real_drive"])]
+    cards.extend(
+        _drive_comparison_card(view["label"], view["drive"], car["real_drive"])
+        for view in car["simulators"]
+    )
+    return (
+        '<section class="drive-comparison"><div class="drive-comparison-heading">'
+        '<div><h4>Compare driving setup</h4><p>Real car first. A quiet match uses '
+        'the same controls and technique; only a difference or evidence gap is '
+        'spelled out.</p></div><span>{count} simulator views</span></div>'
+        '<div class="drive-compare-grid">{cards}</div></section>'
+    ).format(count=len(car["simulators"]), cards="".join(cards))
+
+
 def _row(car: dict[str, Any]) -> str:
     detail = []
     if car["summary"]:
         detail.append(f'<p class="summary">{_e(car["summary"])}</p>')
 
-    if car["mechanism"]:
-        heading = "Mechanism" if car["classification"] == "matches" else "Based on"
-        detail.append(
-            f'<div class="block"><h4>{heading}</h4><p>{_e(car["mechanism"])}</p></div>'
-        )
-    if car["deviations"]:
-        items = "".join(
-            f'<li><span class="field">{_e(item["field"])}</span>{_e(item["why"])}</li>'
-            for item in car["deviations"]
-        )
-        detail.append(f'<div class="block"><h4>Departs from it</h4><ul>{items}</ul></div>')
-    if car["classification"] in {"undetermined", "no-archetype"} and car["archetype_basis"]:
-        heading = (
-            "Not yet classified" if car["classification"] == "undetermined" else "Its own mechanism"
-        )
-        detail.append(
-            f'<div class="block"><h4>{heading}</h4><p>{_e(car["archetype_basis"])}</p></div>'
-        )
     if car["unexplained_open_fields"]:
         chips = "".join(
             f'<span class="chip">{_e(field)}</span>'
@@ -1202,27 +1430,18 @@ def _row(car: dict[str, Any]) -> str:
             f'<div class="chips">{chips}</div></div>'
         )
     if car["simulator_disagreements"]:
-        items = "".join(
-            '<li><span class="field">{field}</span><span class="comparison-values">'
-            '{values}</span>{audit}</li>'.format(
-                field=_e(item["field"]),
-                values="".join(
-                    '<span><b>{simulator}</b> {value}</span>'.format(
-                        simulator=_e(value["simulator"]),
-                        value=_e(value["value"]),
-                    )
-                    for value in item["values"]
-                ),
-                audit=_audit_result(item),
-            )
-            for item in car["simulator_disagreements"]
-        )
+        items = "".join(_simulator_comparison_row(item) for item in car["simulator_disagreements"])
         detail.append(
-            '<div class="block simulator-comparison"><h4>Disagreement audit</h4>'
-            '<p>Only conflicting established values count. The audit then tests whether '
-            'the authentic baseline is strong enough to support a benchmark verdict.</p>'
-            f'<ul>{items}</ul></div>'
+            '<section class="simulator-comparison"><h4>Compare reviewed simulators</h4>'
+            '<p>Only conflicting established values appear here. Each verdict tests '
+            'whether the real-car baseline is strong enough to call a departure.</p>'
+            f'{items}</section>'
         )
+    # The authentic baseline and its audit are context for a driver choosing a
+    # simulator, not the first obstacle before they can see what to do.  Keep
+    # them intact, but place them after the selected simulator view.
+    context = detail
+    detail = []
     tabs = "".join(
         '<a class="sim-tab" id="{anchor}-tab" href="#{anchor}" role="tab" '
         'aria-controls="{anchor}-panel" aria-selected="{selected}" tabindex="{tabindex}" '
@@ -1239,14 +1458,22 @@ def _row(car: dict[str, Any]) -> str:
         _simulator_panel(car, simulator, index == 0)
         for index, simulator in enumerate(car["simulators"])
     )
-    detail.append(_verification_section(car["verification"]))
     detail.append(
         '<section class="simulator-section" aria-label="Simulator views">'
-        '<div class="simulator-heading"><h4>Simulator view</h4>'
-        '<span>Choose a reviewed simulator; each view has a shareable link.</span></div>'
+        '<div class="simulator-heading"><h4>Choose simulator</h4>'
+        '<span>Each reviewed view has a shareable link.</span></div>'
         '<div class="sim-tabs" role="tablist" aria-label="Reviewed simulators for {car}">'
         '{tabs}</div>{panels}</section>'.format(
             car=_e(car["name"]), tabs=tabs, panels=panels
+        )
+    )
+    detail.append(_drive_comparison(car))
+    detail.append(
+        '<details class="understand"><summary><span>Understand this record</span>'
+        '<small>Real-car baseline, comparisons and evidence</small></summary>'
+        '<div class="understand-body">{context}{verification}</div></details>'.format(
+            context="".join(context),
+            verification=_verification_section(car["verification"]),
         )
     )
 
@@ -1258,6 +1485,34 @@ def _row(car: dict[str, Any]) -> str:
         ]
     ).lower()
     simulator_ids = " " + " ".join(view["id"] for view in car["simulators"]) + " "
+    drive_views = json.dumps(
+        [
+            {
+                "id": view["id"],
+                "filters": view["filters"],
+                "shifter": view["drive"]["shifter"],
+                "launch": view["drive"]["launch"],
+                "upshift": view["drive"]["upshift"],
+                "downshift": view["drive"]["downshift"],
+            }
+            for view in car["simulators"]
+        ],
+        separators=(",", ":"),
+    )
+    real_drive = json.dumps(
+        {
+            "filters": {
+                "actuation": car["actuation"],
+                "start": car["start"],
+                "blip": car["blip"],
+            },
+            "shifter": car["shifter"],
+            "launch": car["launch"],
+            "upshift": car["up"],
+            "downshift": car["down"],
+        },
+        separators=(",", ":"),
+    )
     simulator_count = (
         '<span class="sim-count">{count} simulators</span>'.format(
             count=len(car["simulators"])
@@ -1276,6 +1531,8 @@ def _row(car: dict[str, Any]) -> str:
         f'<tr class="car" id="car-{_e(car["id"])}" data-search="{_e(search)}" '
         f'data-simulators="{_e(simulator_ids)}" data-actuation="{_e(car["actuation"])}" '
         f'data-start="{_e(car["start"])}" data-blip="{_e(car["blip"])}" '
+        f'data-drive-views="{_e(drive_views)}" '
+        f'data-real-drive="{_e(real_drive)}" '
         f'data-multi-sim="{str(car["is_multi_sim"]).lower()}" '
         f'data-sim-disagreement="{str(car["has_simulator_disagreements"]).lower()}" tabindex="0" '
         f'aria-expanded="false" aria-controls="details-{_e(car["id"])}">'
@@ -1298,10 +1555,10 @@ def _row(car: dict[str, Any]) -> str:
         + "</td>"
         f'<td class="rim">{_e(car["rim"])}'
         f'<span class="meta">{_e(car["wheel_equipment"])}</span></td>'
-        f'<td class="spec"><span class="shifter">{_e(car["shifter"])}</span>'
+        f'<td class="spec" data-driving-cell="shifter"><span class="shifter">{_e(car["shifter"])}</span>'
         + (f'<span class="meta">{_e(car["gate"])}</span>' if car["gate"] else "")
         + "</td>"
-        f"{_cell(car['launch'])}{_cell(car['up'])}{_cell(car['down'])}"
+        f"{_driver_cell('launch', car['launch'])}{_driver_cell('upshift', car['up'])}{_driver_cell('downshift', car['down'])}"
         "</tr>"
         f'<tr class="detail" hidden><td colspan="6"><div class="detail-inner">'
         f'<div id="details-{_e(car["id"])}">{"".join(detail)}</div></div></td></tr>'
@@ -1454,6 +1711,16 @@ header {{ display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;
 .theme button + button {{ border-left: 1px solid var(--line); }}
 .theme button:hover {{ color: var(--ink); }}
 .theme button[aria-pressed="true"] {{ background: var(--surface-2); color: var(--ink); }}
+.simhub-link {{
+  width: fit-content; padding: 8px 11px; border: 1px solid var(--accent); border-radius: 3px;
+  color: var(--accent); background: var(--surface); text-decoration: none;
+  font: 600 12px/1.2 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.simhub-link:hover {{ color: var(--ink); background: var(--surface-2); }}
+.coverage {{ color: var(--faint); font-size: 12px; }}
+.coverage summary {{ cursor: pointer; width: fit-content; }}
+.coverage .stats {{ margin-top: 10px; }}
+.driver-start {{ margin-top: 4px; }}
 h1 {{
   font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
@@ -1484,6 +1751,7 @@ h1 {{
   padding: 14px 0; margin-bottom: 6px;
   background: var(--bg); border-bottom: 1px solid var(--line);
 }}
+.controls[hidden] {{ display: none; }}
 .mode {{
   display: flex; width: fit-content;
   border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
@@ -1591,6 +1859,11 @@ input[type="search"] {{
   border: 1px solid var(--line); border-radius: 3px;
 }}
 input[type="search"]::placeholder {{ color: var(--faint); }}
+.simulator-choice {{
+  display: flex; align-items: center; gap: 7px; white-space: nowrap;
+  color: var(--faint); font: 500 10.5px/1.2 "IBM Plex Mono", ui-sans-serif, monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+}}
 select {{
   padding: 9px 10px;
   font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px;
@@ -1613,9 +1886,17 @@ summary:focus-visible, a:focus-visible {{
    ground. Stating both here is what standards mode would have done anyway, and it
    makes the page readable wherever the file is opened. */
 table {{
-  width: 100%; border-collapse: collapse; min-width: 880px;
+  width: 100%; border-collapse: collapse; table-layout: fixed;
   color: var(--ink); font: inherit;
 }}
+/* This is a driving checklist, not a spreadsheet.  Let the three technique
+   columns use the available width and wrap their guidance; one long simulator
+   qualification must not make the whole catalogue scroll sideways. */
+th:nth-child(1) {{ width: 20%; }}
+th:nth-child(2) {{ width: 15%; }}
+th:nth-child(3) {{ width: 14%; }}
+th:nth-child(4) {{ width: 12%; }}
+th:nth-child(5), th:nth-child(6) {{ width: 19.5%; }}
 /* Not sticky. The wide-content wrapper needs overflow-x, which makes it a
    scroll container, and a sticky header inside one anchors to the container
    rather than to the viewport - so it parks itself over the first row and
@@ -1639,11 +1920,11 @@ tr.car td {{ padding: 11px 12px; vertical-align: top; }}
 .shifter {{ display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; }}
 .meta {{ display: block; font-size: 12.5px; color: var(--faint); margin-top: 2px; }}
 .rim {{ font-size: 13px; color: var(--muted); white-space: nowrap; }}
-.state {{ white-space: nowrap; }}
+.state {{ white-space: normal; }}
 .tone {{
-  display: inline-block; padding: 3px 9px; border-radius: 2px;
+  display: inline-block; max-width: 100%; padding: 3px 9px; border-radius: 2px;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 12px; line-height: 1.45;
+  font-size: 12px; line-height: 1.45; overflow-wrap: anywhere;
 }}
 /* The fill carries the meaning: something is being asked of somebody. Amber is
    asked of the driver, teal is handled by the car, and the two hollow states are
@@ -1698,15 +1979,35 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
 .sim-count {{ color: var(--muted); margin-right: 5px; }}
 .disagrees-flag {{ color: var(--optional); margin-left: 5px; }}
 .simulator-comparison {{
-  padding: 12px; border: 1px solid var(--line); background: var(--surface-2);
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px; border: 1px solid var(--line); background: var(--surface-2);
 }}
-.simulator-comparison > p {{ font-size: 12.5px; }}
-.simulator-comparison li {{ display: flex; flex-wrap: wrap; gap: 5px 10px; }}
-.comparison-values {{ display: flex; flex-wrap: wrap; gap: 5px 14px; }}
-.comparison-values span {{ font-size: 13px; color: var(--muted); }}
-.comparison-values b {{
-  margin-right: 4px; color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 11px; font-weight: 500;
+.simulator-comparison > h4 {{
+  margin: 0; font: 500 10.5px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--faint);
+}}
+.simulator-comparison > p {{ margin: -4px 0 2px; font-size: 12.5px; color: var(--muted); }}
+.comparison-row {{
+  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 14px;
+  padding-top: 11px; border-top: 1px solid var(--line);
+}}
+.comparison-field {{
+  color: var(--accent); font: 500 11px/1.35 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.comparison-values {{ display: flex; flex-wrap: wrap; gap: 6px; }}
+.comparison-value {{
+  display: inline-flex; gap: 5px; align-items: baseline; padding: 4px 7px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 12.5px;
+}}
+.comparison-value b {{
+  color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 500;
+}}
+.comparison-real {{ border-left: 3px solid var(--accent); color: var(--ink); }}
+.comparison-row .audit-result {{ grid-column: 2; margin-bottom: 0; }}
+@media (max-width: 720px) {{
+  .comparison-row {{ grid-template-columns: 1fr; }}
+  .comparison-row .audit-result {{ grid-column: 1; }}
 }}
 .audit-result {{
   display: grid; grid-template-columns: max-content 1fr; gap: 3px 10px;
@@ -1822,6 +2123,87 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
 }}
 .sim-panel {{ display: flex; flex-direction: column; gap: 14px; }}
 .sim-panel[hidden] {{ display: none; }}
+.drive-it {{
+  padding: 14px; border: 1px solid var(--accent); border-left-width: 3px;
+  background: var(--surface-2);
+}}
+.drive-it-heading {{
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 6px 18px; margin-bottom: 12px;
+}}
+.drive-it-heading > div {{ display: flex; gap: 7px; align-items: baseline; }}
+.drive-it-heading span {{
+  color: var(--faint); font: 500 10.5px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .08em; text-transform: uppercase;
+}}
+.drive-it-heading h4 {{ margin: 0; font: 600 16px/1.2 "Archivo", sans-serif; }}
+.drive-it-heading p {{ margin: 0; max-width: 56ch; color: var(--muted); font-size: 12px; }}
+.drive-it-actions {{ display: flex; align-items: center; gap: 8px; }}
+.copy-setup {{
+  padding: 5px 8px; color: var(--ink); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 3px; cursor: pointer; font: 500 11px/1 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.copy-setup:hover {{ border-color: var(--accent); color: var(--accent); }}
+.copy-status {{ min-height: 1em; color: var(--faint); font-size: 11px; }}
+.drive-grid {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }}
+.drive-card {{
+  display: flex; flex-direction: column; gap: 5px; min-width: 0;
+  padding: 9px 10px; border: 1px solid var(--line); background: var(--surface);
+}}
+.drive-card > span {{
+  color: var(--faint); font: 500 10px/1.2 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+}}
+.drive-card strong {{ font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }}
+.drive-card .tone {{ width: fit-content; }}
+.drive-comparison {{
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px; border: 1px solid var(--line); background: var(--surface-2);
+}}
+.drive-comparison-heading {{
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px 16px;
+  align-items: baseline;
+}}
+.drive-comparison-heading h4 {{
+  margin: 0; font: 500 10.5px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--faint);
+}}
+.drive-comparison-heading p {{ margin: 4px 0 0; max-width: 66ch; font-size: 12.5px; color: var(--muted); }}
+.drive-comparison-heading > span {{
+  color: var(--faint); font: 500 10.5px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+}}
+.drive-compare-grid {{
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px;
+}}
+.drive-compare-card {{
+  min-width: 0; padding: 10px; border: 1px solid var(--line); background: var(--bg);
+}}
+.drive-compare-baseline {{ border-top: 3px solid var(--accent); background: var(--surface); }}
+.drive-compare-card h5 {{ margin: 0 0 8px; font: 600 13px/1.25 Archivo, sans-serif; }}
+.drive-compare-card dl {{ display: flex; flex-direction: column; gap: 6px; margin: 0; }}
+.drive-compare-field {{
+  display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 7px; align-items: start;
+}}
+.drive-compare-field dt {{
+  color: var(--faint); font: 500 10px/1.4 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .05em; text-transform: uppercase;
+}}
+.drive-compare-field dd {{ min-width: 0; margin: 0; font-size: 12px; line-height: 1.4; }}
+.drive-compare-value {{ color: var(--ink); }}
+.drive-compare-match {{ color: var(--faint); font-size: 11.5px; }}
+.drive-compare-card .tone {{ font-size: 11px; }}
+.understand {{
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--bg);
+}}
+.understand > summary {{ padding: 11px 13px; cursor: pointer; }}
+.understand > summary::marker {{ color: var(--accent); }}
+.understand > summary span {{ font-weight: 600; }}
+.understand > summary small {{
+  margin-left: 10px; color: var(--faint); font: 400 11px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.understand[open] > summary {{ border-bottom: 1px solid var(--line); background: var(--surface-2); }}
+.understand-body {{ display: flex; flex-direction: column; gap: 16px; padding: 14px; }}
 .sim-anchor {{ display: block; height: 0; overflow: hidden; scroll-margin-top: 76px; }}
 .sim-panel-title {{
   display: flex; flex-wrap: wrap; gap: 5px 10px; align-items: baseline;
@@ -1836,6 +2218,24 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   text-underline-offset: 3px;
 }}
 .empty {{ padding: 40px 12px; color: var(--muted); }}
+.filter-note {{ margin: 8px 0 0; color: var(--muted); font-size: 12px; }}
+.active-filters {{ display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }}
+.active-filters[hidden] {{ display: none; }}
+.filter-chip {{
+  padding: 4px 7px; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--muted); background: var(--surface-2);
+  font: 500 10.5px/1.2 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.clear-filters {{
+  padding: 4px 7px; border: 0; border-radius: 3px; color: var(--accent);
+  background: transparent; cursor: pointer; font: 500 11px/1.2 inherit;
+}}
+.table-context {{ margin: 14px 0 8px; color: var(--muted); font-size: 13px; }}
+.table-context strong {{ color: var(--ink); }}
+.visually-hidden {{
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}}
 .legend {{
   display: flex; flex-wrap: wrap; gap: 8px 18px;
   margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--line);
@@ -1856,6 +2256,24 @@ footer p {{ margin: 0; }}
   .verification-claim-heading, .verification-sources li {{ display: block; }}
   .confidence {{ display: inline-block; margin-top: 7px; }}
   .verification-sources .archive-link {{ display: inline-block; margin-top: 3px; }}
+  .table-scroll {{ overflow: visible; }}
+  table {{ display: block; width: 100%; }}
+  thead {{ display: none; }}
+  tbody, tr.car, tr.detail, tr.detail > td {{ display: block; width: 100%; }}
+  tr.car {{
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 4px 0;
+  }}
+  tr.car td {{ padding: 8px 10px; }}
+  tr.car .car-name {{ grid-column: 1 / -1; }}
+  tr.detail > td {{ padding: 0 0 12px; }}
+  .detail-inner {{ padding: 14px; }}
+  .detail-inner > div {{ max-width: none; }}
+  .drive-it {{ padding: 12px; }}
+  .drive-it-heading {{ align-items: flex-start; }}
+  .drive-it-heading p {{ flex-basis: 100%; }}
+  .drive-grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+  .drive-compare-grid {{ grid-template-columns: 1fr; }}
 }}
 @media (max-width: 980px) {{
   .controls {{ flex-wrap: wrap; }}
@@ -1882,7 +2300,31 @@ footer p {{ margin: 0; }}
   drive. {total} cars across {simulator_entries} reviewed simulator views,
   curated from manufacturer and homologation sources and verified in-sim. Where
   the evidence does not settle something, this says so rather than guessing.</p>
-  <div class="stats">
+  <a class="simhub-link" href="https://github.com/Milky28/as-driven/releases/latest">Get the SimHub plugin</a>
+  <div class="controls driver-start" id="lookup-controls">
+    <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
+    <label class="simulator-choice" for="f-simulator">I’m driving
+    <select id="f-simulator" aria-label="Choose simulator to drive">
+      <option value="">Choose simulator</option>
+      {simulator_options}
+    </select>
+    </label>
+    <select id="f-actuation" aria-label="Filter by shifter">
+      <option value="">Any shifter</option><option value="h-pattern">H-pattern</option>
+      <option value="sequential-stick">Sequential stick</option><option value="sequential-paddles">Paddles</option>
+    </select>
+    <select id="f-start" aria-label="Filter by pulling away">
+      <option value="">Pulling away: any</option><option value="required">Clutch required</option>
+      <option value="not-required">No clutch needed</option>
+    </select>
+    <select id="f-blip" aria-label="Filter by downshift blip">
+      <option value="">Downshift: any</option><option value="required">You blip</option>
+      <option value="optional">Blip optional</option><option value="not-required">No blip needed</option>
+      <option value="unknown">Not established</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+  <details class="coverage"><summary>Dataset coverage and comparison views</summary><div class="stats">
     <div class="stat"><b>{total}</b><span>cars</span></div>
     <div class="stat"><b>{simulator_count}</b><span>simulators</span></div>
     <div class="stat"><b>{simulator_entries}</b><span>views</span></div>
@@ -1890,12 +2332,12 @@ footer p {{ margin: 0; }}
     <div class="stat"><b>{you_blip}</b><span>manual blip</span></div>
     <div class="stat"><b>{open_any}</b><span>open questions</span></div>
     <div class="stat"><b>{disagreeing}</b><span>sims disagree</span></div>
-  </div>
+  </div></details>
   <div class="mode" role="group" aria-label="Comparison mode">
-    <button type="button" data-mode="all" aria-pressed="true">All</button>
-    <button type="button" data-mode="multi" aria-pressed="false">Multi-sim</button>
-    <button type="button" data-mode="disagreements" aria-pressed="false">Disagreements</button>
-    <button type="button" data-mode="benchmark" aria-pressed="false">Benchmark</button>
+    <button type="button" data-mode="all" aria-pressed="true">Browse cars</button>
+    <button type="button" data-mode="multi" aria-pressed="false">Compare simulators</button>
+    <button type="button" data-mode="disagreements" aria-pressed="false">Simulator disagreements</button>
+    <button type="button" data-mode="benchmark" aria-pressed="false">Research findings</button>
   </div>
 </header>
 
@@ -1911,32 +2353,13 @@ footer p {{ margin: 0; }}
 </section>
 
 <div id="car-browser">
-<div class="controls">
-  <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
-  <select id="f-simulator" aria-label="Filter by simulator coverage">
-    <option value="">Any simulator</option>
-    {simulator_options}
-  </select>
-  <select id="f-actuation" aria-label="Filter by shifter">
-    <option value="">Any shifter</option>
-    <option value="h-pattern">H-pattern</option>
-    <option value="sequential-stick">Sequential stick</option>
-    <option value="sequential-paddles">Paddles</option>
-  </select>
-  <select id="f-start" aria-label="Filter by pulling away">
-    <option value="">Pulling away: any</option>
-    <option value="required">Clutch required</option>
-    <option value="not-required">No clutch needed</option>
-  </select>
-  <select id="f-blip" aria-label="Filter by downshift blip">
-    <option value="">Downshift: any</option>
-    <option value="required">You blip</option>
-    <option value="optional">Blip optional</option>
-    <option value="not-required">No blip needed</option>
-    <option value="unknown">Not established</option>
-  </select>
-  <span class="count" id="count"></span>
+<div class="active-filters" id="active-filters" hidden aria-label="Active filters">
+  <span id="filter-chips"></span>
+  <button type="button" class="clear-filters" id="clear-filters">Clear filters</button>
 </div>
+<p class="filter-note" id="filter-note" hidden></p>
+<p class="visually-hidden" id="results-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<p class="table-context" id="table-context"><strong>Real-car baseline</strong>: choose a simulator to see its reviewed driving guidance.</p>
 
 <div class="table-scroll">
 <table>
@@ -1959,12 +2382,10 @@ footer p {{ margin: 0; }}
   <span><span class="tone tone-unknown">Not established</span></span>
 </div>
 
-<footer><p>Select a car for the mechanism it shares with others, where it departs
-from that, and what a drive or a source would still have to settle. Every row
-describes the real car. Open it to choose a reviewed simulator; differences and
-simulator-specific evidence gaps stay inside that view, because they are
-separate facts and neither overwrites the real car. Each simulator view has a
-stable link that can be shared. Open <strong>How this was verified</strong> to
+<footer><p>Start with the real car, then choose a reviewed simulator to see the
+controls and technique to use. Simulator differences and evidence gaps stay in
+that view, because they are separate facts and neither overwrites the real car.
+Each simulator view has a stable link that can be shared. Open <strong>How this was verified</strong> to
 see each curated claim, its confidence and rationale, and the sources that
 support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-driven">Project source and downloads</a><a href="https://github.com/Milky28/as-driven/issues/new/choose">Contribute a car</a></p></footer>
 </div>
@@ -1974,6 +2395,7 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
 (function () {{
   var q = document.getElementById('q');
   var simulatorFilter = document.getElementById('f-simulator');
+  var lookupControls = document.getElementById('lookup-controls');
   var carBrowser = document.getElementById('car-browser');
   var benchmarkView = document.getElementById('benchmark-view');
   var mode = 'all';
@@ -1985,11 +2407,93 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
   var rows = Array.prototype.slice.call(document.querySelectorAll('tr.car'));
   var count = document.getElementById('count');
   var empty = document.getElementById('empty');
+  var activeFilters = document.getElementById('active-filters');
+  var filterChips = document.getElementById('filter-chips');
+  var clearFilters = document.getElementById('clear-filters');
+  var filterNote = document.getElementById('filter-note');
+  var resultsStatus = document.getElementById('results-status');
+  var tableContext = document.getElementById('table-context');
+  var selectedDetailRow = null;
+  var statusTimer = null;
+
+  function announceResults(text) {{
+    window.clearTimeout(statusTimer);
+    statusTimer = window.setTimeout(function () {{
+      resultsStatus.textContent = text;
+    }}, 300);
+  }}
+
+  function updateActiveFilters() {{
+    var active = [];
+    if (q.value.trim()) {{ active.push('Search: ' + q.value.trim()); }}
+    [
+      {{ node: simulatorFilter, label: 'Simulator' }},
+      {{ node: document.getElementById('f-actuation'), label: 'Shifter' }},
+      {{ node: document.getElementById('f-start'), label: 'Pulling away' }},
+      {{ node: document.getElementById('f-blip'), label: 'Downshift' }}
+    ].forEach(function (filter) {{
+      if (filter.node.value) {{
+        active.push(filter.label + ': ' + filter.node.options[filter.node.selectedIndex].text);
+      }}
+    }});
+    filterChips.replaceChildren();
+    active.forEach(function (text) {{
+      var chip = document.createElement('span');
+      chip.className = 'filter-chip';
+      chip.textContent = text;
+      filterChips.appendChild(chip);
+    }});
+    activeFilters.hidden = active.length === 0;
+  }}
+
+  function updateTableContext() {{
+    if (!simulatorFilter.value) {{
+      tableContext.innerHTML = '<strong>Real-car baseline</strong>: choose a simulator to see its reviewed driving guidance.';
+      return;
+    }}
+    var label = simulatorFilter.options[simulatorFilter.selectedIndex].text;
+    tableContext.replaceChildren();
+    var heading = document.createElement('strong');
+    heading.textContent = 'Driving in ' + label;
+    tableContext.appendChild(heading);
+    tableContext.appendChild(document.createTextNode(': reviewed simulator behavior is shown separately from the real-car baseline.'));
+  }}
+
+  function drivingView(row, simulator) {{
+    var real = JSON.parse(row.dataset.realDrive);
+    if (!simulator) {{ return real; }}
+    var views = JSON.parse(row.dataset.driveViews);
+    return views.find(function (view) {{ return view.id === simulator; }}) || real;
+  }}
+
+  function renderDrivingValues(row, simulator) {{
+    var view = drivingView(row, simulator);
+    var shifter = row.querySelector('[data-driving-cell="shifter"]');
+    if (shifter) {{
+      shifter.replaceChildren();
+      var shifterText = document.createElement('span');
+      shifterText.className = 'shifter';
+      shifterText.textContent = view.shifter;
+      shifter.appendChild(shifterText);
+    }}
+    ['launch', 'upshift', 'downshift'].forEach(function (name) {{
+      var cell = row.querySelector('[data-driving-cell="' + name + '"]');
+      if (!cell) {{ return; }}
+      var value = view[name];
+      cell.replaceChildren();
+      var tone = document.createElement('span');
+      tone.className = 'tone tone-' + value[1];
+      tone.title = 'Instruction for the selected view';
+      tone.textContent = value[0];
+      cell.appendChild(tone);
+    }});
+  }}
 
   function showMode() {{
     var benchmark = mode === 'benchmark';
     benchmarkView.hidden = !benchmark;
     carBrowser.hidden = benchmark;
+    lookupControls.hidden = benchmark;
   }}
 
   function setMode(nextMode) {{
@@ -2005,7 +2509,9 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
     showMode();
     if (mode === 'benchmark') {{ return; }}
     var text = q.value.trim().toLowerCase();
+    var wantedSimulator = simulatorFilter.value;
     var shown = 0;
+    var selectedOutsideFilters = false;
     rows.forEach(function (row) {{
       var ok = !text || row.dataset.search.indexOf(text) !== -1;
       if (ok && mode === 'multi' && row.dataset.multiSim !== 'true') {{
@@ -2015,29 +2521,54 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
           && row.dataset.simDisagreement !== 'true') {{
         ok = false;
       }}
-      var wantedSimulator = simulatorFilter.value;
       if (ok && wantedSimulator
           && row.dataset.simulators.indexOf(' ' + wantedSimulator + ' ') === -1) {{
         ok = false;
       }}
+      var driving = drivingView(row, wantedSimulator);
       filters.forEach(function (filter) {{
         var want = filter.node.value;
-        if (ok && want && row.dataset[filter.name] !== want) {{ ok = false; }}
+        if (ok && want && driving.filters[filter.name] !== want) {{ ok = false; }}
       }});
-      row.hidden = !ok;
+      renderDrivingValues(row, wantedSimulator);
+      // A simulator tab is a direct request to inspect this car. Retain that
+      // open detail even if its selected simulator no longer matches a control
+      // filter; the active filters still govern every other result.
+      var keepSelected = row === selectedDetailRow;
+      if (keepSelected && !ok) {{ selectedOutsideFilters = true; }}
+      row.hidden = !ok && !keepSelected;
       var detail = row.nextElementSibling;
-      if (!ok && detail) {{
+      if (!ok && !keepSelected && detail) {{
         setOpen(row, false);
-      }} else if (ok && wantedSimulator && detail && !detail.hidden) {{
+      }} else if ((ok || keepSelected) && wantedSimulator && detail && !detail.hidden) {{
         selectSimulator(row, wantedSimulator);
       }}
       if (ok) {{ shown++; }}
     }});
-    count.textContent = shown === rows.length
+    var resultText = shown === rows.length
       ? rows.length + ' cars'
       : shown + ' of ' + rows.length + ' cars';
+    count.textContent = resultText;
     empty.hidden = shown !== 0;
+    filterNote.hidden = !selectedOutsideFilters;
+    filterNote.textContent = selectedOutsideFilters
+      ? 'Selected car remains open even though its current simulator guidance does not match every active filter.'
+      : '';
+    if (selectedOutsideFilters) {{ empty.hidden = true; }}
+    updateActiveFilters();
+    updateTableContext();
+    announceResults(resultText + (selectedOutsideFilters
+      ? '. Selected car remains open outside the active filters.'
+      : ''));
   }}
+
+  clearFilters.addEventListener('click', function () {{
+    q.value = '';
+    simulatorFilter.value = '';
+    filters.forEach(function (filter) {{ filter.node.value = ''; }});
+    apply();
+    q.focus();
+  }});
 
   function setOpen(row, open) {{
     var detail = row.nextElementSibling;
@@ -2091,8 +2622,16 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
       var detail = tab.closest('tr.detail');
       var row = detail ? detail.previousElementSibling : null;
       if (!row) {{ return; }}
+      var simulator = tab.getAttribute('data-simulator-tab');
+      selectedDetailRow = row;
       setOpen(row, true);
-      selectSimulator(row, tab.getAttribute('data-simulator-tab'));
+      selectSimulator(row, simulator);
+      // The per-car tab is another way to make the same driving choice as the
+      // global selector. Keep the catalogue and its filters in that view too.
+      if (simulatorFilter.value !== simulator) {{
+        simulatorFilter.value = simulator;
+        apply();
+      }}
     }});
     tab.addEventListener('keydown', function (event) {{
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {{ return; }}
@@ -2105,6 +2644,41 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
       next.click();
     }});
   }});
+
+  function copyText(text) {{
+    if (navigator.clipboard && navigator.clipboard.writeText) {{
+      return navigator.clipboard.writeText(text);
+    }}
+    return new Promise(function (resolve, reject) {{
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      var copied = document.execCommand('copy');
+      document.body.removeChild(area);
+      copied ? resolve() : reject(new Error('Copy was unavailable'));
+    }});
+  }}
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-copy-setup]')).forEach(
+    function (button) {{
+      button.addEventListener('click', function (event) {{
+        event.preventDefault();
+        event.stopPropagation();
+        var status = button.parentElement.querySelector('[data-copy-status]');
+        var link = window.location.origin + window.location.pathname + '#'
+          + encodeURIComponent(button.getAttribute('data-copy-anchor'));
+        var text = button.getAttribute('data-copy-setup') + '\\nView: ' + link;
+        copyText(text).then(function () {{
+          status.textContent = 'Copied';
+        }}, function () {{
+          status.textContent = 'Copy unavailable';
+        }});
+      }});
+    }});
 
   function restoreSimulatorLink(scroll) {{
     if (!window.location.hash) {{ return false; }}
@@ -2119,6 +2693,9 @@ support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-d
     if (scroll) {{
       setMode('all');
       simulatorFilter.value = simulator;
+      // Apply before opening the deep-linked detail, but retain that detail if
+      // the selected simulator conflicts with a separately active filter.
+      selectedDetailRow = row;
       apply();
     }}
     setOpen(row, true);

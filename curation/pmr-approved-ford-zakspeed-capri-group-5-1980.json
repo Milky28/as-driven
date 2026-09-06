@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.48",
+  "approved_at": "2026-09-05",
+  "record_id": "ford-zakspeed-capri-group-5-1980",
+  "simulator": "pmr",
+  "telemetry_name": "Capri Group 5",
+  "observed_game_version": "2.2.0",
+  "observed_through": "SimHub guided verification observation pmr.capri-group-5.20260905t195353170z-c9a96a0f",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "unknown",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1980 Ford Zakspeed Capri Group 5 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Group 5",
+  "staged_record_id": "capri-group-5"
+}

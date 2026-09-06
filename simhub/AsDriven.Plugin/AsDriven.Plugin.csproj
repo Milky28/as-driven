@@ -72,6 +72,7 @@
     <Compile Include="UpdateCheck.cs" />
     <Compile Include="AsDrivenSettingsControl.cs" />
     <Compile Include="VerificationCaptureContext.cs" />
+    <Compile Include="GuidedDriveBindingReadiness.cs" />
     <Compile Include="VerificationControl.cs">
       <DependentUpon>VerificationControl.xaml</DependentUpon>
       <SubType>Code</SubType>

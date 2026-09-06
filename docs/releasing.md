@@ -35,7 +35,10 @@ document is present.
 
 The SimHub SDK assemblies are part of the local SimHub installation and are not
 redistributed. For that reason, the plugin build is a maintainer-run Windows
-release step. The database package is also built in public CI.
+release step. Public CI restores Newtonsoft.Json only to build and run the
+SDK-independent core tests; the full adapter build and native-settings smoke
+test remain a maintainer-run release gate. The database package is also built
+in public CI.
 
 ## Manual release-candidate checks
 
@@ -55,6 +58,23 @@ release step. The database package is also built in public CI.
    positions, settings, and drafts remain unchanged.
 10. Run the uninstaller and confirm user data and customized layouts remain.
 11. Compare every artifact with its adjacent `.sha256` file.
+
+## Control-guidance release summary
+
+Before publishing a dataset change, compare the prepared tree with an extracted
+copy of the previous database release. The command only reports controls that
+matter to a driver's hardware or technique, and carries forward links to the
+current record's registered evidence:
+
+```powershell
+python -m as_driven_db release-control-changes C:\releases\as-driven-0.5.45 --output build\control-changes.json
+python -m as_driven_db release-control-changes C:\releases\as-driven-0.5.45 --markdown --output build\control-changes.md
+```
+
+Review the Markdown report with the release notes. New and retired records are
+listed in its JSON summary; they are not mislabeled as a changed control. Pass
+`--priority-record` once per locally recent record id when preparing a
+driver-specific report; those changes are listed first and visibly labeled.
 
 ## Publish
 

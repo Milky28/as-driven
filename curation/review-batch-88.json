@@ -1,0 +1,263 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.47",
+  "approved_at": "2026-09-05",
+  "records": [
+    {
+      "record_id": "chaparral-2f-1967",
+      "bundle": "build/review-cases/issue-64/staged.json",
+      "display_name": "Chaparral 2F",
+      "class": "Group 6",
+      "manufacturer": "Chaparral Cars",
+      "model": "2F",
+      "year": {
+        "label": "1967 Chaparral 2F"
+      },
+      "real_world_identity_notes": "The PMR telemetry name 2F and Sports Car 67 class are best identified as the 1967 Chaparral 2F, Chaparral Cars' closed-cockpit Group 6 sports prototype. The official PMR page names the Chaparral 2F and lists a 3-speed automatic. The Automobile Club de l'Ouest identifies the exact 1967 Le Mans 2F as a closed-cockpit prototype with an automatic gearbox and no clutch pedal; the Petroleum Museum and independent technical references corroborate the 1967 programme and three-speed Chaparral/GM automatic. This is the 2F, not the related 2D, 2E, 2G, or 2J, and not a modern simulator/mod control model.",
+      "real_world_source_refs": [
+        "pmr.official.chaparral-2f",
+        "aco.2015.chaparral-2f",
+        "petroleummuseum.1967.chaparral-2f",
+        "ultimatecarpage.2008.chaparral-2f-2f002",
+        "motorsportmagazine.2020.chaparral-2f",
+        "primotipo.2014.chaparral-2f"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The PMR first-party vehicle page directly maps the simulator entry to the Chaparral 2F and its Sports Car 67 pack. Independent exact-model sources identify the 1967 2F, its Group 6 sports-prototype programme, three-speed automatic transmission, and deleted clutch pedal. The evidence establishes the model-year identity, but not a unique historical chassis number for the simulator asset.",
+      "identity_basis": "The PMR first-party vehicle page directly maps the simulator entry to the Chaparral 2F and its Sports Car 67 pack. Independent exact-model sources identify the 1967 2F, its Group 6 sports-prototype programme, three-speed automatic transmission, and deleted clutch pedal. The evidence establishes the model-year identity, but not a unique historical chassis number for the simulator asset.",
+      "specification_basis": "The exact 2F sources independently describe a three-speed automatic or three-speed Chaparral/GM gearbox. The ACO, museum, exact-model specification, and technical article all describe an automatic or torque-converter transmission. Primotipo adds the important qualification that the 2F's unit was a fluid-coupling/manual-selection racing transmission rather than a normal road-car automatic. The ACO explicitly says the automatic gearbox meant no clutch pedal. Motor Sport describes the automatic car's original two-pedal cockpit, and the technical account says the engine was started with a gear engaged while the driver restrained the lunge with the left foot. These establish that a driver-operated clutch pedal was not required for launch. The ACO identifies no clutch pedal, and the 2F transmission description explicitly calls the changes clutchless. The evidence supports no clutch-pedal action during racing upshifts, while not claiming that the torque converter or dog clutches were frictionless. The exact-2F technical account says the driver eased the throttle to unload the straight-cut dog engagement before snatching the next gear. Because it says easing rather than a full closed-throttle lift, the conservative database value is partial. The exact 2F had no driver-operated clutch pedal and used a torque converter/fluid coupling instead of a clutch. The sources therefore establish that a clutch pedal was not required for downshifts, without asserting a specific throttle-match method. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "automatic",
+        "shift_actuation": "unknown",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "partial",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "not-required",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/gearbox_type",
+          "value": "direct-drive",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "direct-selection",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.2f.20260905t210242087z-a3a81cb5 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-2f-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1967 Chaparral 2F identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 3; gearbox construction: automatic; standing-start clutch use: not required; transmission upshift clutch: not required; transmission upshift throttle_lift: partial; transmission downshift clutch: not required.",
+        "The reviewed real-car sources do not establish cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/64",
+      "live_source_notes": "Guided-verification observation pmr.2f.20260905t210242087z-a3a81cb5 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "2f",
+        "basis": "The PMR first-party vehicle page directly maps the simulator entry to the Chaparral 2F and its Sports Car 67 pack. Independent exact-model sources identify the 1967 2F, its Group 6 sports-prototype programme, three-speed automatic transmission, and deleted clutch pedal. The evidence establishes the model-year identity, but not a unique historical chassis number for the simulator asset."
+      },
+      "driver_summary": "3-speed transmission. It pulls away without a clutch. Use a partial lift for every upshift. Whether the gearbox needs a downshift blip is not established, so blip to be safe."
+    }
+  ]
+}

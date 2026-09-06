@@ -24,7 +24,7 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
 ## Current operational state
 
 - Client: 0.21.2 locally; 0.21.0 is the published release.
-- Dataset: 0.5.46 with 282 curated records, and 0.5.37 is installed. The
+- Dataset: 0.5.49 with 285 curated records, and 0.5.37 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.

@@ -108,8 +108,10 @@ foreach ($sourceLayout in Get-ChildItem -LiteralPath (Join-Path $packageRoot "Ov
 # guidance to Compact and raises its height from 260 to 300. Preserve customized
 # positions by keeping each migrated part centered, and leave any already-custom-
 # sized part untouched. Version 0.11.0 adds the in-sim verification surface to
-# existing layouts without replacing their customized preflight positions. The
-# pre-install backup makes these migrations reversible.
+# existing layouts without replacing their customized preflight positions.
+# This update expands that surface from its constrained 700 x 220 placement
+# so the large generated card is not scaled down by an old layout. The pre-
+# install backup makes these migrations reversible.
 if (-not $ReplaceOverlayLayouts) {
     foreach ($layout in Get-ChildItem -LiteralPath $installedLayoutDirectory -Filter "As Driven*.olayout") {
         $payload = Get-Content -LiteralPath $layout.FullName -Raw | ConvertFrom-Json
@@ -129,6 +131,18 @@ if (-not $ReplaceOverlayLayouts) {
                 $part.Top = $center - 150.0
                 $changed = $true
             }
+            if ($part.DashboardName -like "*As Driven Verification Drive.djson" -and
+                (([double]$part.Width -eq 700.0 -and [double]$part.Height -eq 220.0) -or
+                 ([double]$part.Width -eq 900.0 -and [double]$part.Height -eq 390.0) -or
+                 ([double]$part.Width -eq 1000.0 -and [double]$part.Height -eq 433.0))) {
+                $centerX = [double]$part.Left + ([double]$part.Width / 2.0)
+                $centerY = [double]$part.Top + ([double]$part.Height / 2.0)
+                $part.Width = 820.0
+                $part.Height = 355.0
+                $part.Left = $centerX - 410.0
+                $part.Top = $centerY - 177.5
+                $changed = $true
+            }
         }
         $verificationPart = $payload.OverlayLayoutParts | Where-Object {
             $_.DashboardName -like "*As Driven Verification Drive.djson"
@@ -138,7 +152,7 @@ if (-not $ReplaceOverlayLayouts) {
                 $_.DashboardName -like "*As Driven Preflight Overlay.djson"
             } | Select-Object -First 1
             if ($null -ne $detailedPart) {
-                $verificationLeft = [double]$detailedPart.Left + ([double]$detailedPart.Width / 2.0) - 350.0
+                $verificationLeft = [double]$detailedPart.Left + ([double]$detailedPart.Width / 2.0) - 410.0
                 $verificationTop = [double]$detailedPart.Top + [double]$detailedPart.Height + 10.0
             }
             else {
@@ -149,8 +163,8 @@ if (-not $ReplaceOverlayLayouts) {
                 DashboardName = "DashTemplates\As Driven Verification Drive\As Driven Verification Drive.djson"
                 Top = $verificationTop
                 Left = $verificationLeft
-                Width = 700.0
-                Height = 220.0
+                Width = 820.0
+                Height = 355.0
                 Version = 1
                 PartId = [Guid]::NewGuid().ToString()
                 Placed = $true

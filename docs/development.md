@@ -47,6 +47,19 @@ changes:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\build.ps1
 ```
 
+The public catalog's browser behavior is covered with Playwright. Install its
+test dependency once, then run the suite after changing site interaction:
+
+```powershell
+npm ci
+npx playwright install chromium
+npm run test:site-browser
+```
+
+It exercises simulator deep links, conflicting filters, keyboard tabs, live
+result announcements, empty states, and a mobile-width layout. CI installs its
+own browser and runs the same suite.
+
 The SimHub build expects SimHub at `C:\Program Files (x86)\SimHub` unless
 `-SimHubInstallPath` is supplied. It compiles, runs the .NET assertions,
 generates dashboards, and packages only under `simhub/dist`. It never installs

@@ -4,6 +4,12 @@ Plugin and dataset versions count different things, but ship together in one
 release. Dataset history is also recorded in `data/v1/index.json` and the
 project documentation.
 
+## 0.21.3 - 2026-09-05
+
+- Redesign the guided-drive overlay for clearer in-car prompts, persistent button labels, readable progress, and scalable saved layouts.
+- Open selected catalog cars in the public controls database from SimHub.
+- Ship dataset 0.5.49 with 285 curated records, including three reviewed PMR cars.
+
 ## 0.21.2 - 2026-09-04
 
 - Add Project Motor Racing and GTR 2 guided-verification support, including

@@ -1,4 +1,4 @@
-name: Validate data
+name: Validate data and core client
 
 on:
   workflow_dispatch:
@@ -32,3 +32,30 @@ jobs:
           path: |
             dist/database/*.zip
             dist/database/*.sha256
+
+  core-client:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Restore core JSON dependency
+        shell: powershell
+        run: nuget install Newtonsoft.Json -Version 13.0.3 -ExcludeVersion -OutputDirectory .ci-packages
+      - name: Build and test SDK-independent core
+        shell: powershell
+        run: >-
+          .\simhub\build-core.ps1
+          -NewtonsoftJsonPath .ci-packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll
+
+  site-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:site-browser

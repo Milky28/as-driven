@@ -150,7 +150,7 @@ class SimHubDashTests(unittest.TestCase):
         expected_sizes = {
             "detailed": (720, 428),
             "compact": (520, 360),
-            "verification": (700, 220),
+            "verification": (900, 390),
         }
         for variant, expected_size in expected_sizes.items():
             dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
@@ -171,17 +171,19 @@ class SimHubDashTests(unittest.TestCase):
             for value in walk(dashboard)
             if isinstance(value, dict) and "Name" in value
         }
-        self.assertEqual("GUIDED VERIFICATION", named["Eyebrow"]["Text"])
+        self.assertEqual("GUIDED DRIVE", named["Eyebrow"]["Text"])
         self.assertIn("AsDriven.VerificationDriveStepNumber", serialized)
         self.assertIn("AsDriven.VerificationDriveStepCount", serialized)
+        self.assertIn("ProgressDots", named)
         self.assertIn("AsDriven.VerificationDriveTitle", serialized)
+        self.assertIn("AsDriven.VerificationDriveHeadline", serialized)
         self.assertIn("AsDriven.VerificationDrivePrompt", serialized)
         self.assertIn("AsDriven.VerificationDrivePromptLine1", serialized)
-        self.assertIn("AsDriven.VerificationDrivePromptLine2", serialized)
         self.assertIn("AsDriven.VerificationDriveResultReady", serialized)
         self.assertIn("AsDriven.VerificationDriveResultSuccessful", serialized)
         self.assertIn("AsDriven.VerificationDriveResult", serialized)
         self.assertIn("AsDriven.VerificationDriveStatus", serialized)
+        self.assertIn("AsDriven.VerificationDriveStatusLine1", serialized)
         self.assertIn("AsDriven.VerificationDriveLiveValues", serialized)
         self.assertEqual("✓ CAPTURED", named["SuccessBadge"]["Text"])
         self.assertEqual(self.generator.GREEN, named["SuccessBadge"]["TextColor"])
@@ -191,26 +193,34 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual("✓ CAPTURED", named["ReviewBadge"]["Text"])
         self.assertEqual(self.generator.ORANGE, named["ReviewBadge"]["TextColor"])
 
-        # The action row tells the driver what to do only once a result exists.
-        # Before that the verbs are reference, so they stay muted beside telemetry.
-        self.assertIn("NEXT / ACCEPT", named["ControlsIdleText"]["Text"])
-        self.assertEqual(self.generator.MUTED, named["ControlsIdleText"]["TextColor"])
+        # Physical-input hints remain visible inside large action areas. The
+        # plugin trims provider prefixes before exposing each hint, while an
+        # unobserved input is still explicitly UNBOUND.
+        self.assertIn("NEXT: [UNBOUND]", named["NextBinding"]["Text"])
+        self.assertIn(
+            "AsDriven.VerificationDriveNextHint",
+            named["NextBinding"]["Bindings"]["Text"]["Formula"]["Expression"],
+        )
+        self.assertEqual(self.generator.GREEN, named["NextBinding"]["TextColor"])
 
-        # Once captured the row is one full-width sentence: each verb states what
-        # it does, rather than an abbreviation squeezed into the corner.
-        ready = named["ControlsReadyText"]["Text"]
-        self.assertIn("NEXT to accept this result", ready)
-        self.assertIn("RETRY to drive this test again", ready)
-        self.assertIn("SKIP to answer it in the form", ready)
-        self.assertEqual(self.generator.ACCENT, named["ControlsReadyText"]["TextColor"])
-        self.assertEqual(648, named["ControlsReadyText"]["Width"])
+        # The three decisions are large enough to use at driving distance,
+        # while Cancel stays secondary below them.
+        self.assertEqual("ACCEPT", named["NextCapturedAction"]["Text"])
+        self.assertEqual("REPEAT", named["RetryCapturedAction"]["Text"])
+        self.assertEqual("LEAVE UNANSWERED", named["SkipCapturedAction"]["Text"])
+        self.assertEqual(276, named["NextButton"]["Width"])
+        self.assertEqual(68, named["NextButton"]["Height"])
+        self.assertIn("VerificationDriveCancelHint", named["Cancel"]["Bindings"]["Text"]["Formula"]["Expression"])
         self.assertLessEqual(named["SuccessSummary"]["Height"], 28)
-        self.assertEqual(14, named["PromptLine1"]["FontSize"])
-        self.assertEqual(22, named["PromptLine1"]["Height"])
-        self.assertEqual(91, named["PromptLine1"]["Top"])
-        self.assertEqual(14, named["PromptLine2"]["FontSize"])
-        self.assertEqual(22, named["PromptLine2"]["Height"])
-        self.assertEqual(115, named["PromptLine2"]["Top"])
+        self.assertEqual(34, named["Headline"]["FontSize"])
+        self.assertEqual(46, named["Headline"]["Height"])
+        self.assertEqual(92, named["Headline"]["Top"])
+        self.assertEqual(21, named["PromptLine1"]["FontSize"])
+        self.assertEqual(31, named["PromptLine1"]["Height"])
+        self.assertEqual(141, named["PromptLine1"]["Top"])
+        self.assertLess(named["Title"]["FontSize"], named["Headline"]["FontSize"])
+        self.assertGreaterEqual(named["NextPendingAction"]["FontSize"], 15)
+        self.assertGreaterEqual(named["NextCapturedAction"]["FontSize"], 15)
 
     def test_cards_reference_only_explicit_plugin_values(self):
         dashboard = self.generator.build_dashboard(overlay=True)
@@ -868,7 +878,7 @@ class SimHubDashTests(unittest.TestCase):
         expected = {
             "As Driven Preflight Overlay": ((720.0, 428.0), (600.0, 60.0)),
             "As Driven Preflight Compact": ((520.0, 360.0), (700.0, 60.0)),
-            "As Driven Verification Drive": ((700.0, 220.0), (610.0, 430.0)),
+            "As Driven Verification Drive": ((820.0, 355.0), (550.0, 362.5)),
         }
         part_ids = set()
         for part in parts:

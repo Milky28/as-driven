@@ -130,7 +130,11 @@ class TemplateSpec(NamedTuple):
 TEMPLATES = (
     TemplateSpec("detailed", "As Driven Preflight Overlay", 720, 428),
     TemplateSpec("compact", "As Driven Preflight Compact", 520, 360),
-    TemplateSpec("verification", "As Driven Verification Drive", 700, 220),
+    # The layout is intentionally larger than the native content bounds. Dash
+    # Studio uses these dimensions to scale every item as a single readable
+    # overlay, rather than leaving the guided-drive card at its old 700 x 220
+    # footprint on a high-resolution game display.
+    TemplateSpec("verification", "As Driven Verification Drive", 900, 390),
     TemplateSpec("display", "As Driven Preflight Display", 780, 360, False),
 )
 
@@ -840,7 +844,8 @@ def _use_band(
                          expression=detail))
         children.append(_differs_marker(
             factory, "UseDiffers" + title, title + "Differs",
-            x + 14, top + head_size + value_size * 2 + 25, cell_width - 24, value_size - 2, theme))
+            x + 14, top + head_size + value_size * 2 + 25, cell_width - 24,
+            max(9, value_size - 3), theme))
     return children
 
 
@@ -988,7 +993,7 @@ def _matched_detailed(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
     children.extend(_fit_band(factory, left, 80, width, 82, rail_width=rail_width, rail_size=16,
                               head_size=16, sub_size=12.5, icon_size=42, theme=theme))
     children.extend(_use_band(factory, left, 166, width, 92, rail_width=rail_width, rail_size=16,
-                              head_size=15, value_size=13, theme=theme))
+                              head_size=13, value_size=14, theme=theme))
     children.extend(_driver_note(factory, left, 264, width, size=12.5,
                                  line_height=17, prefix="DriverSummary", theme=theme,
                                  rail_width=rail_width, icon_size=26))
@@ -1016,7 +1021,7 @@ def _matched_compact(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
     children.extend(_fit_band(factory, left, 60, width, 58, rail_width=rail_width, rail_size=14,
                               head_size=13, sub_size=10.5, icon_size=30, theme=theme))
     children.extend(_use_band(factory, left, 124, width, 78, rail_width=rail_width, rail_size=14,
-                              head_size=12, value_size=11, theme=theme))
+                              head_size=10, value_size=12, theme=theme))
     children.extend(_driver_note(factory, left, 206, width, size=11,
                                  line_height=15, prefix="DriverSummaryCompact", theme=theme,
                                  rail_width=rail_width, icon_size=22))
@@ -1113,18 +1118,26 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
     progress_expression = (
         "if([AsDriven.VerificationDriveStepNumber] == 0, 'READY', "
         "'STEP ' + [AsDriven.VerificationDriveStepNumber] + "
-        "' / ' + [AsDriven.VerificationDriveStepCount])"
+        "' OF ' + [AsDriven.VerificationDriveStepCount])"
+    )
+    progress_dots_expression = " + ' ' + ".join(
+        "if([AsDriven.VerificationDriveStepNumber] >= " + str(step) + ", '◉', '○')"
+        for step in range(1, 7)
     )
     pending_status = factory.layer(
         "PendingStatus",
-        [factory.text("PendingStatusText", "Waiting for telemetry", 34, 146, 628, 28, 12, WHITE, expression="[AsDriven.VerificationDriveStatus]")],
+        [
+            factory.text("PendingStatusText", "Waiting for telemetry", 38, 188, 560, 20, 15, WHITE, expression="[AsDriven.VerificationDriveStatusLine1]"),
+            factory.text("PendingStatusDetail", "Awaiting result", 38, 208, 560, 18, 13, TEXT, expression="[AsDriven.VerificationDriveStatusLine2]"),
+            factory.text("LiveValues", "Waiting for live telemetry", 610, 195, 250, 22, 13, MUTED, expression="[AsDriven.VerificationDriveLiveValues]", horizontal_alignment=2),
+        ],
         visible_expression="![AsDriven.VerificationDriveResultReady]",
     )
     successful_status = factory.layer(
         "SuccessfulStatus",
         [
-            factory.text("SuccessBadge", "✓ CAPTURED", 34, 146, 126, 28, 12, GREEN, font_weight="Bold"),
-            factory.text("SuccessSummary", "Result captured", 164, 146, 498, 28, 13, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("SuccessBadge", "✓ CAPTURED", 38, 192, 160, 28, 16, GREEN, font_weight="Bold"),
+            factory.text("SuccessSummary", "Result captured", 204, 192, 656, 28, 17, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && [AsDriven.VerificationDriveResultSuccessful]",
     )
@@ -1135,45 +1148,59 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
     review_status = factory.layer(
         "ReviewStatus",
         [
-            factory.text("ReviewBadge", "✓ CAPTURED", 34, 146, 126, 28, 12, ORANGE, font_weight="Bold"),
-            factory.text("ReviewSummary", "Result captured", 164, 146, 498, 28, 13, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("ReviewBadge", "✓ CAPTURED", 38, 192, 160, 28, 16, ORANGE, font_weight="Bold"),
+            factory.text("ReviewSummary", "Result captured", 204, 192, 656, 28, 17, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && ![AsDriven.VerificationDriveResultSuccessful]",
     )
-    # Before a result exists the driver is still performing the manoeuvre, so the
-    # bottom row shows live telemetry with the verbs muted for reference. Once a
-    # result is captured the telemetry stops mattering and a decision starts, so
-    # the whole row becomes one full-width sentence. Abbreviations like "RETRY
-    # redo" did not fit in the 302-pixel corner and were not readable; at 648
-    # pixels each verb can say what it actually does.
+    # The deliberate action buttons remain visible while the driver performs a
+    # maneuver and after a result is captured. Observed bindings identify only
+    # the physical control (for example, ``Button 3``), never SimHub's plugin
+    # namespace. An unobserved input remains explicitly UNBOUND.
+    controls = [
+        ("Next", 24, GREEN, "CONTINUE", "ACCEPT"),
+        ("Retry", 312, ORANGE, "REPEAT", "REPEAT"),
+        ("Skip", 600, ACCENT, "LEAVE UNANSWERED", "LEAVE UNANSWERED"),
+    ]
+    control_items = []
+    for action, left, color, pending_label, captured_label in controls:
+        control_items.extend([
+            factory.rectangle(action + "Button", left, 242, 276, 68, "#FF102333", radius=8, border_color=color, border=2),
+            factory.text(
+                action + "Binding", action.upper() + ": [UNBOUND]", left + 10, 249, 256, 20, 14, color,
+                expression="'" + action.upper() + ": [' + [AsDriven.VerificationDrive" + action + "Hint] + ']'",
+                horizontal_alignment=1, font_weight="Bold"),
+            factory.text(action + "PendingAction", pending_label, left + 10, 272, 256, 30, 20, WHITE, horizontal_alignment=1, font_weight="Bold"),
+            factory.text(action + "CapturedAction", captured_label, left + 10, 272, 256, 30, 20, WHITE, horizontal_alignment=1, font_weight="Bold"),
+        ])
     controls_idle = factory.layer(
-        "ControlsIdle",
-        [
-            factory.text("LiveValues", "Waiting for live telemetry", 24, 181, 350, 23, 11, MUTED, expression="[AsDriven.VerificationDriveLiveValues]"),
-            factory.text("ControlsIdleText", "NEXT / ACCEPT   •   RETRY   •   SKIP   •   CANCEL", 370, 181, 302, 23, 10, MUTED, horizontal_alignment=2, font_weight="Bold"),
-        ],
+        "ControlsIdle", [item for item in control_items if not item["Name"].endswith("CapturedAction")],
         visible_expression="![AsDriven.VerificationDriveResultReady]",
     )
     controls_ready = factory.layer(
-        "ControlsReady",
-        [factory.text("ControlsReadyText", "NEXT to accept this result   •   RETRY to drive this test again   •   SKIP to answer it in the form", 24, 181, 648, 23, 11, ACCENT, font_weight="Bold")],
+        "ControlsReady", [item for item in control_items if not item["Name"].endswith("PendingAction")],
         visible_expression="[AsDriven.VerificationDriveResultReady]",
     )
     return [
-        factory.rectangle("Card", 4, 4, 692, 212, CARD, radius=18, border_color=SLATE, border=2),
-        factory.rectangle("Accent", 20, 4, 660, 5, ACCENT, radius=3),
-        factory.text("Eyebrow", "GUIDED VERIFICATION", 24, 18, 250, 24, 13, ACCENT, font_weight="Bold"),
-        factory.text("Progress", "STEP 1 / 6", 520, 18, 152, 24, 13, MUTED, expression=progress_expression, horizontal_alignment=2, font_weight="Bold"),
-        factory.rectangle("HeaderRule", 24, 48, 648, 1, SLATE),
-        factory.text("Title", "Verification step", 24, 56, 648, 34, 24, WHITE, expression="[AsDriven.VerificationDriveTitle]", font_weight="Bold"),
-        factory.text("PromptLine1", "Follow the current test prompt.", 24, 91, 648, 22, 14, TEXT, expression="[AsDriven.VerificationDrivePromptLine1]", font_weight="Bold"),
-        factory.text("PromptLine2", "Then continue to the next step.", 24, 115, 648, 22, 14, TEXT, expression="[AsDriven.VerificationDrivePromptLine2]", font_weight="Bold"),
-        factory.rectangle("StatusPanel", 24, 143, 648, 34, "#FF102333", radius=7, border_color=SLATE, border=1),
+        factory.rectangle("Card", 4, 4, 892, 382, CARD, radius=20, border_color=SLATE, border=2),
+        factory.rectangle("Accent", 20, 4, 860, 6, ACCENT, radius=3),
+        factory.text("Eyebrow", "GUIDED DRIVE", 24, 18, 320, 26, 16, ACCENT, font_weight="Bold"),
+        factory.text("Progress", "STEP 1 OF 6", 640, 16, 220, 24, 16, MUTED, expression=progress_expression, horizontal_alignment=2, font_weight="Bold"),
+        factory.text("ProgressDots", "● ● ● ○ ○ ○", 640, 39, 220, 20, 15, GREEN, expression=progress_dots_expression, horizontal_alignment=2, font_weight="Bold"),
+        factory.rectangle("HeaderRule", 24, 60, 852, 1, SLATE),
+        # The manoeuvre is the glanceable headline. Its smaller title remains
+        # available as context without competing with the driving instruction.
+        factory.text("Title", "Verification step", 24, 69, 852, 22, 17, MUTED, expression="[AsDriven.VerificationDriveTitle]", font_weight="Bold"),
+        factory.text("Headline", "Follow the current test prompt.", 24, 92, 852, 46, 34, WHITE, expression="[AsDriven.VerificationDriveHeadline]", font_weight="Bold"),
+        factory.text("PromptLine1", "Then continue to the next step.", 24, 141, 852, 31, 21, TEXT, expression="[AsDriven.VerificationDrivePromptLine1]"),
+        factory.rectangle("StatusRule", 24, 179, 852, 1, SLATE),
+        factory.rectangle("StatusPanel", 24, 184, 852, 49, "#FF102333", radius=8, border_color=SLATE, border=1),
         pending_status,
         successful_status,
         review_status,
         controls_idle,
         controls_ready,
+        factory.text("Cancel", "CANCEL: End drive", 24, 323, 852, 24, 14, MUTED, expression="'CANCEL: [' + [AsDriven.VerificationDriveCancelHint] + '] End drive'", horizontal_alignment=1, font_weight="Bold"),
     ]
 
 

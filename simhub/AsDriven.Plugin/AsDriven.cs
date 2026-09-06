@@ -59,6 +59,8 @@ namespace AsDriven.Plugin
         private readonly object _verificationTelemetryLock = new object();
         private readonly GuidedVerificationDrive _guidedVerificationDrive =
             new GuidedVerificationDrive();
+        private readonly GuidedDriveBindingReadiness _guidedDriveBindingReadiness =
+            new GuidedDriveBindingReadiness();
         private volatile GuidedDriveSnapshot _guidedDriveSnapshot;
         private AsDrivenSettings _settings = new AsDrivenSettings();
         private AsDrivenDatabase _database;
@@ -188,6 +190,16 @@ namespace AsDriven.Plugin
         internal string CurrentDatasetVersion
         {
             get { return DatasetVersion(); }
+        }
+
+        internal string LastUpdateCheckSummary
+        {
+            get { return _settings.LastUpdateCheckSummary ?? string.Empty; }
+        }
+
+        internal string LastUpdateCheckUtc
+        {
+            get { return _settings.LastUpdateCheckUtc ?? string.Empty; }
         }
 
         /// <summary>
@@ -338,9 +350,84 @@ namespace AsDriven.Plugin
             get { return ResolveVerificationDraftDirectory(); }
         }
 
+        internal string EvidenceFreshness
+        {
+            get
+            {
+                string recorded = _current == null ? string.Empty : _current.VerifiedGameVersion;
+                string detected = _detectedGameVersion;
+                if (string.IsNullOrWhiteSpace(recorded) || recorded == "unknown")
+                {
+                    return "Recorded simulator build unknown";
+                }
+                if (string.IsNullOrWhiteSpace(detected) || detected == "unknown")
+                {
+                    return "Checked on " + recorded + " · current build not detected";
+                }
+                return string.Equals(recorded, detected, StringComparison.OrdinalIgnoreCase)
+                    ? "Verified on detected build " + detected
+                    : "Checked on " + recorded + " · not reverified on detected build " + detected;
+            }
+        }
+
+        internal bool IsCatalogFavorite(CarCatalogEntry car)
+        {
+            return car != null && _settings.FavoriteCatalogCars.Contains(CatalogShortcutKey(car));
+        }
+
+        internal bool IsCatalogRecent(CarCatalogEntry car)
+        {
+            return car != null && _settings.RecentCatalogCars.Contains(CatalogShortcutKey(car));
+        }
+
+        internal void ToggleCatalogFavorite(CarCatalogEntry car)
+        {
+            if (car == null)
+            {
+                return;
+            }
+            string key = CatalogShortcutKey(car);
+            if (_settings.FavoriteCatalogCars.Contains(key))
+            {
+                _settings.FavoriteCatalogCars.Remove(key);
+            }
+            else
+            {
+                _settings.FavoriteCatalogCars.Insert(0, key);
+            }
+            _settings.FavoriteCatalogCars = NormalizeCatalogShortcuts(_settings.FavoriteCatalogCars);
+            this.SaveCommonSettings("Settings", _settings);
+        }
+
+        internal void RememberCatalogCar(CarCatalogEntry car)
+        {
+            if (car == null)
+            {
+                return;
+            }
+            string key = CatalogShortcutKey(car);
+            _settings.RecentCatalogCars.Remove(key);
+            _settings.RecentCatalogCars.Insert(0, key);
+            _settings.RecentCatalogCars = NormalizeCatalogShortcuts(_settings.RecentCatalogCars);
+            this.SaveCommonSettings("Settings", _settings);
+        }
+
+        internal HardwareProfile GetHardwareProfile()
+        {
+            return _settings.MyHardware ?? new HardwareProfile();
+        }
+
+        internal void SaveHardwareProfile(HardwareProfile profile)
+        {
+            _settings.MyHardware = profile ?? new HardwareProfile();
+            _settings.MyHardware.Configured = true;
+            this.SaveCommonSettings("Settings", _settings);
+        }
+
         public void Init(PluginManager pluginManager)
         {
             PluginManager = pluginManager;
+            PluginManager.InputToActionTriggered += GuidedDriveInputToActionTriggered;
             LoadSettings();
             InitializeUnmatchedLog();
             AttachProperties();
@@ -490,6 +577,10 @@ namespace AsDriven.Plugin
 
         public void End(PluginManager pluginManager)
         {
+            if (PluginManager != null)
+            {
+                PluginManager.InputToActionTriggered -= GuidedDriveInputToActionTriggered;
+            }
             _previewActive = false;
             _previewLiveCarIdentifier = string.Empty;
             StopPreviewOverlay();
@@ -547,11 +638,32 @@ namespace AsDriven.Plugin
                 _settings.PopupDurationSeconds = seconds;
                 _settings.PopupSize = NormalizePopupSize(_settings.PopupSize);
                 _settings.PopupTheme = PopupPreferences.NormalizeTheme(_settings.PopupTheme);
+                _settings.LastUpdateCheckSummary = _settings.LastUpdateCheckSummary ?? string.Empty;
+                _settings.LastUpdateCheckUtc = _settings.LastUpdateCheckUtc ?? string.Empty;
+                _settings.FavoriteCatalogCars = NormalizeCatalogShortcuts(_settings.FavoriteCatalogCars);
+                _settings.RecentCatalogCars = NormalizeCatalogShortcuts(_settings.RecentCatalogCars);
+                _settings.MyHardware = _settings.MyHardware ?? new HardwareProfile();
+                if (_settings.MyHardware.Sequential
+                    && !_settings.MyHardware.SequentialStick
+                    && !_settings.MyHardware.PaddleShifters)
+                {
+                    // The old option meant the driver owned an unspecified
+                    // sequential control. Preserve that declared capability
+                    // until they next save the more precise profile.
+                    _settings.MyHardware.SequentialStick = true;
+                    _settings.MyHardware.PaddleShifters = true;
+                }
                 if (_settings.VerificationAssistProfiles == null)
                 {
                     _settings.VerificationAssistProfiles =
                         new Dictionary<string, VerificationAssistProfile>();
                 }
+                if (_settings.GuidedDriveBindings == null)
+                {
+                    _settings.GuidedDriveBindings =
+                        new Dictionary<string, string>();
+                }
+                _guidedDriveBindingReadiness.Restore(_settings.GuidedDriveBindings);
                 _popupState.SetAutomaticDuration(TimeSpan.FromSeconds(seconds));
             }
             catch (Exception exception)
@@ -682,6 +794,45 @@ namespace AsDriven.Plugin
             RefreshGuidedDriveSnapshot();
         }
 
+        internal void SaveUpdateCheckResult(string summary)
+        {
+            _settings.LastUpdateCheckSummary = summary ?? string.Empty;
+            _settings.LastUpdateCheckUtc = DateTime.UtcNow.ToString("u");
+            this.SaveCommonSettings("Settings", _settings);
+        }
+
+        internal void StartGuidedDriveBindingCheck()
+        {
+            _guidedDriveBindingReadiness.Start();
+        }
+
+        internal GuidedDriveBindingReadinessSnapshot GetGuidedDriveBindingReadiness()
+        {
+            return _guidedDriveBindingReadiness.GetSnapshot();
+        }
+
+        private void GuidedDriveInputToActionTriggered(string input, string action)
+        {
+            string requiredAction = _guidedDriveBindingReadiness.Observe(input, action);
+            if (requiredAction == null)
+            {
+                return;
+            }
+            if (_settings.GuidedDriveBindings == null)
+            {
+                _settings.GuidedDriveBindings = new Dictionary<string, string>();
+            }
+            if (!string.Equals(_settings.GuidedDriveBindings.ContainsKey(requiredAction)
+                    ? _settings.GuidedDriveBindings[requiredAction]
+                    : null,
+                input,
+                StringComparison.Ordinal))
+            {
+                _settings.GuidedDriveBindings[requiredAction] = input;
+                this.SaveCommonSettings("Settings", _settings);
+            }
+        }
+
         internal GuidedDriveSnapshot GetGuidedDriveSnapshot()
         {
             return _guidedDriveSnapshot;
@@ -755,6 +906,18 @@ namespace AsDriven.Plugin
             Directory.CreateDirectory(directory);
             Process.Start("explorer.exe", "\"" + directory + "\"");
             return directory;
+        }
+
+        internal void OpenCatalogRecord(CarCatalogEntry car)
+        {
+            if (car == null || string.IsNullOrWhiteSpace(car.RecordId))
+            {
+                throw new InvalidOperationException("Choose a curated car first.");
+            }
+            string anchor = car.RecordId + "--" + (car.Simulator ?? string.Empty);
+            string url = "https://milky28.github.io/as-driven/#"
+                + Uri.EscapeDataString(anchor);
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         }
 
         [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -1623,6 +1786,35 @@ namespace AsDriven.Plugin
             }
         }
 
+        private const int MaximumCatalogShortcuts = 8;
+
+        private static string CatalogShortcutKey(CarCatalogEntry car)
+        {
+            return car.Simulator + "|" + car.RecordId;
+        }
+
+        private static List<string> NormalizeCatalogShortcuts(IEnumerable<string> shortcuts)
+        {
+            var result = new List<string>();
+            if (shortcuts == null)
+            {
+                return result;
+            }
+            foreach (string shortcut in shortcuts)
+            {
+                if (string.IsNullOrWhiteSpace(shortcut) || result.Contains(shortcut))
+                {
+                    continue;
+                }
+                result.Add(shortcut);
+                if (result.Count == MaximumCatalogShortcuts)
+                {
+                    break;
+                }
+            }
+            return result;
+        }
+
         private static double NormalizePopupDuration(double seconds)
         {
             return PopupPreferences.NormalizeDuration(seconds);
@@ -1766,6 +1958,7 @@ namespace AsDriven.Plugin
             this.AttachDelegate("HasSteeringDOR", delegate { return _current.HasSteeringDOR; });
             this.AttachDelegate("SteeringDOR", delegate { return _current.SteeringDOR; });
             this.AttachDelegate("VerifiedGameVersion", delegate { return _current.VerifiedGameVersion; });
+            this.AttachDelegate("EvidenceFreshness", delegate { return EvidenceFreshness; });
             this.AttachDelegate("Confidence", delegate { return _current.Confidence; });
             this.AttachDelegate("SourceSummary", delegate { return _current.SourceSummary; });
             this.AttachDelegate("MatchKind", delegate { return _current.MatchKind; });
@@ -1823,6 +2016,9 @@ namespace AsDriven.Plugin
                 "VerificationDriveTitle",
                 delegate { return _guidedDriveSnapshot.Title; });
             this.AttachDelegate(
+                "VerificationDriveHeadline",
+                delegate { return _guidedDriveSnapshot.Headline; });
+            this.AttachDelegate(
                 "VerificationDrivePrompt",
                 delegate { return _guidedDriveSnapshot.Prompt; });
             this.AttachDelegate(
@@ -1835,6 +2031,12 @@ namespace AsDriven.Plugin
                 "VerificationDriveStatus",
                 delegate { return _guidedDriveSnapshot.Status; });
             this.AttachDelegate(
+                "VerificationDriveStatusLine1",
+                delegate { return _guidedDriveSnapshot.StatusLine1; });
+            this.AttachDelegate(
+                "VerificationDriveStatusLine2",
+                delegate { return _guidedDriveSnapshot.StatusLine2; });
+            this.AttachDelegate(
                 "VerificationDriveResult",
                 delegate { return _guidedDriveSnapshot.ResultSummary; });
             this.AttachDelegate(
@@ -1843,6 +2045,18 @@ namespace AsDriven.Plugin
             this.AttachDelegate(
                 "VerificationDriveLiveValues",
                 delegate { return _guidedDriveSnapshot.LiveValues; });
+            this.AttachDelegate(
+                "VerificationDriveNextHint",
+                delegate { return _guidedDriveBindingReadiness.GetSnapshot().HintFor("VerificationDriveNext"); });
+            this.AttachDelegate(
+                "VerificationDriveRetryHint",
+                delegate { return _guidedDriveBindingReadiness.GetSnapshot().HintFor("VerificationDriveRetry"); });
+            this.AttachDelegate(
+                "VerificationDriveSkipHint",
+                delegate { return _guidedDriveBindingReadiness.GetSnapshot().HintFor("VerificationDriveSkip"); });
+            this.AttachDelegate(
+                "VerificationDriveCancelHint",
+                delegate { return _guidedDriveBindingReadiness.GetSnapshot().HintFor("VerificationDriveCancel"); });
         }
     }
 }

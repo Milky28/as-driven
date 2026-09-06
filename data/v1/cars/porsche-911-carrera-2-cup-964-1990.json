@@ -1,0 +1,340 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "porsche-911-carrera-2-cup-964-1990",
+  "identity": {
+    "display_name": "Porsche 911 Carrera 2 Cup (964)",
+    "manufacturer": "Porsche",
+    "model": "911 Carrera 2 Cup (964)",
+    "year": {
+      "label": "1990 Porsche 911 Carrera 2 Cup (964)"
+    },
+    "class": "Carrera Cup",
+    "real_world_identity_notes": "The PMR entry 911 Carrera Cup (964), with 265 hp and five forward gears, is best identified as the inaugural 1990 Porsche 911 Carrera 2 Cup of the 964 generation. Porsche identifies the first Cup car as a 1990 964-based 911 Carrera 2 Cup; Porsche's model-year table distinguishes the 1990–1991 M30/01, G50/03 five-speed car from the later 1992–1993 M64/03, G50/10 cars. The simulator does not expose a chassis number, so this is a model-year/specification identity rather than a unique historical chassis mapping."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "911 Carrera Cup (964)"
+        },
+        {
+          "kind": "internal-id",
+          "value": "911 Carrera Cup (964)"
+        },
+        {
+          "kind": "class-id",
+          "value": "964 Trophy"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.911-carrera-cup-964",
+        "porsche.official.5000-cup-cars",
+        "porsche.newsroom.1990-cup-zolder",
+        "porsche.newsroom.1990-911-carrera-2-cup",
+        "porsche.clubsport.1990-91-964-cup",
+        "964rs.2009.1990-carrera-2-cup",
+        "collectingcars.2022.1990-964-carrera-cup",
+        "commons.2014.964cup-dashboard-photo",
+        "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official PMR page lists the 964 Carrera Cup identity, 265 hp, and five-speed manual transmission. Porsche's official history identifies the 1990 debut and 964 generation, while Porsche Club Europe technical data identifies the 1990–1991 Carrera 2 Cup as M30/01 with a Sport clutch and G50/03 five-speed transmission. The 265 hp value separates the early car from the 275 hp 1992–1993 version."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.official.911-carrera-cup-964",
+          "porsche.official.5000-cup-cars",
+          "porsche.newsroom.1990-cup-zolder",
+          "porsche.newsroom.1990-911-carrera-2-cup",
+          "porsche.clubsport.1990-91-964-cup",
+          "964rs.2009.1990-carrera-2-cup",
+          "collectingcars.2022.1990-964-carrera-cup",
+          "commons.2014.964cup-dashboard-photo",
+          "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The official PMR page lists the 964 Carrera Cup identity, 265 hp, and five-speed manual transmission. Porsche's official history identifies the 1990 debut and 964 generation, while Porsche Club Europe technical data identifies the 1990–1991 Carrera 2 Cup as M30/01 with a Sport clutch and G50/03 five-speed transmission. The 265 hp value separates the early car from the 275 hp 1992–1993 version."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.911-carrera-cup-964",
+          "porsche.official.5000-cup-cars",
+          "porsche.newsroom.1990-cup-zolder",
+          "porsche.newsroom.1990-911-carrera-2-cup",
+          "porsche.clubsport.1990-91-964-cup",
+          "964rs.2009.1990-carrera-2-cup",
+          "collectingcars.2022.1990-964-carrera-cup",
+          "commons.2014.964cup-dashboard-photo",
+          "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR reports a five-speed manual; Porsche Club Europe's exact 1990–1991 Cup row lists G50/03 and five gears; the 1990 specialist history corroborates a five-speed gearbox. The exact 1990 race car is listed as manual, the full-resolution 964 Cup cockpit photograph shows a conventional central manual gear-control area rather than paddles, and the model-year table identifies a five-speed G50/03. The photograph does not make the gate legible, so this establishes a manual H-pattern interface category but not the exact pattern. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation"
+        ],
+        "source_refs": [
+          "pmr.official.911-carrera-cup-964",
+          "porsche.official.5000-cup-cars",
+          "porsche.newsroom.1990-cup-zolder",
+          "porsche.newsroom.1990-911-carrera-2-cup",
+          "porsche.clubsport.1990-91-964-cup",
+          "964rs.2009.1990-carrera-2-cup",
+          "collectingcars.2022.1990-964-carrera-cup",
+          "commons.2014.964cup-dashboard-photo"
+        ],
+        "confidence": "high",
+        "basis": "PMR reports a five-speed manual; Porsche Club Europe's exact 1990–1991 Cup row lists G50/03 and five gears; the 1990 specialist history corroborates a five-speed gearbox. The exact 1990 race car is listed as manual, the full-resolution 964 Cup cockpit photograph shows a conventional central manual gear-control area rather than paddles, and the model-year table identifies a five-speed G50/03. The photograph does not make the gate legible, so this establishes a manual H-pattern interface category but not the exact pattern. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      }
+    ]
+  },
+  "updated_at": "2026-09-06",
+  "driver_summary": "5-speed H-pattern. Launch clutch use is not established, so use it to be safe. Upshift lift is not established, so lift to be safe; running clutch use is not established. Whether the gearbox needs a downshift blip is not established, so blip to be safe; downshift clutch use is not established."
+}

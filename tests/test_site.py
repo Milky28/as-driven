@@ -338,6 +338,90 @@ class SiteTests(unittest.TestCase):
         )
         self.assertEqual(pmr["unknown_behavior"], ["automatic shift cut"])
 
+    def test_simulator_view_leads_with_actionable_drive_card(self) -> None:
+        """A selected game answers "what do I do?" before its evidence trail.
+
+        The card applies both an explicit simulator override and a directly
+        observed game behavior. An explicit game gap cannot turn a real-car
+        automation assumption into a simulator instruction.
+        """
+        cars = {car["id"]: car for car in collect(ROOT)["cars"]}
+        cayman = cars["porsche-cayman-gt4-clubsport-mr"]
+        ams2 = next(view for view in cayman["simulators"] if view["id"] == "ams2")
+        self.assertEqual(ams2["drive"]["launch"], ("Clutch required", TONE_DRIVER))
+        self.assertEqual(ams2["drive"]["shifter"], "6-speed paddle shift")
+
+        audi = cars["audi-r8-lms-gt3-evo-ii"]
+        ams2_audi = next(view for view in audi["simulators"] if view["id"] == "ams2")
+        # AMS2 did not establish its shift-cut behavior. The drive card keeps
+        # the baseline action but names the simulator gap at the field itself.
+        self.assertEqual(
+            ams2_audi["drive"]["upshift"],
+            ("Stay flat · cut not established · No clutch needed", TONE_UNKNOWN),
+        )
+        self.assertIn("automatic shift cut", ams2_audi["unknown_behavior"])
+
+        db9 = cars["aston-martin-dbr9"]
+        ac_db9 = next(view for view in db9["simulators"] if view["id"] == "ac")
+        self.assertEqual(
+            ac_db9["drive"]["upshift"],
+            ("Stay flat · cut not established · No clutch needed", TONE_UNKNOWN),
+        )
+
+        bmw = cars["bmw-2002-turbo"]
+        ams2_bmw = next(view for view in bmw["simulators"] if view["id"] == "ams2")
+        self.assertEqual(
+            ams2_bmw["drive"]["upshift"],
+            ("Lift the throttle · Clutch required", TONE_DRIVER),
+        )
+        self.assertEqual(
+            ams2_bmw["drive"]["downshift"],
+            ("Blip optional · Clutch required", TONE_OPTIONAL),
+        )
+
+        page = build_site(ROOT)
+        self.assertEqual(page.count('class="drive-it"'), sum(
+            len(car["simulators"]) for car in cars.values()
+        ))
+        self.assertIn('aria-label="How to drive Porsche Cayman GT4 Clubsport MR in AMS2"', page)
+        self.assertEqual(page.count('class="copy-setup"'), sum(
+            len(car["simulators"]) for car in cars.values()
+        ))
+        self.assertIn('data-copy-setup="Porsche Cayman GT4 Clubsport MR ', page)
+        self.assertIn('data-copy-anchor="porsche-cayman-gt4-clubsport-mr--ams2"', page)
+        self.assertIn("function copyText(text)", page)
+        self.assertIn("navigator.clipboard.writeText(text)", page)
+        self.assertIn("Copy unavailable", page)
+        self.assertIn('class="understand"><summary><span>Understand this record</span>', page)
+        self.assertIn('<label class="simulator-choice" for="f-simulator">', page)
+        self.assertIn('data-drive-views=', page)
+        self.assertNotIn('<h4>Based on</h4>', page)
+        self.assertNotIn('<h4>Mechanism</h4>', page)
+        self.assertNotIn('<h4>Departs from it</h4>', page)
+
+    def test_simulator_tabs_keep_the_catalogue_and_setup_layers_in_sync(self) -> None:
+        page = build_site(ROOT)
+        self.assertIn('<span>Shifter</span>', page)
+        self.assertIn('<span>Authentic wheel</span>', page)
+        self.assertIn('<span>Simulator cockpit</span>', page)
+        self.assertIn("simulatorFilter.value = simulator", page)
+        self.assertIn("simulatorFilter.value !== simulator", page)
+        self.assertIn("var selectedDetailRow = null", page)
+        self.assertIn("var keepSelected = row === selectedDetailRow", page)
+        self.assertIn("Selected car remains open even though its current simulator guidance", page)
+        self.assertIn('id="results-status" role="status" aria-live="polite" aria-atomic="true"', page)
+        self.assertIn(
+            'href="https://github.com/Milky28/as-driven/releases/latest">Get the SimHub plugin</a>',
+            page,
+        )
+        self.assertIn("function announceResults(text)", page)
+        self.assertIn("window.setTimeout(function ()", page)
+        mobile = re.search(r"@media \(max-width: 720px\) \{(.*?)\n\}\n@media", page, re.S).group(1)
+        self.assertIn("thead { display: none", mobile)
+        self.assertIn("tr.car {", mobile)
+        self.assertIn("tr.detail > td {", mobile)
+        self.assertIn(".detail-inner > div { max-width: none", mobile)
+
     def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
         # The Milano's override is the clutch on a downshift, which the table
         # does not show at all. Diffing the rendered rows would have missed it,
@@ -364,13 +448,19 @@ class SiteTests(unittest.TestCase):
             if car["id"] == "lamborghini-diablo-sv-r"
         )
         self.assertEqual(diablo["open_fields"], ["running-shift clutch"])
-        self.assertEqual(diablo["unexplained_open_fields"], [])
+        self.assertEqual(diablo["unexplained_open_fields"], ["running-shift clutch"])
         self.assertEqual(len(diablo["deviations"]), 1)
         self.assertEqual(diablo["deviations"][0]["field"], "running-shift clutch")
         self.assertIn(
             "The clutch's use on running shifts is not established",
             diablo["deviations"][0]["why"],
         )
+        page = build_site(ROOT)
+        diablo_detail = page.split('id="details-lamborghini-diablo-sv-r"', 1)[1].split(
+            '</div></div></td></tr>', 1
+        )[0]
+        self.assertIn('<h4>Not established</h4>', diablo_detail)
+        self.assertIn('>running-shift clutch</span>', diablo_detail)
 
     def test_a_car_the_simulator_models_faithfully_says_nothing(self) -> None:
         self.assertEqual(differences({"forward_gears": 6}, []), [])
@@ -464,8 +554,8 @@ class SiteTests(unittest.TestCase):
         self.assertIn("data-open-car", page)
 
         header = page.split("</header>", 1)[0]
-        controls = page.split('<div class="controls">', 1)[1].split(
-            '<div class="table-scroll">', 1
+        controls = page.split('<div class="controls driver-start" id="lookup-controls">', 1)[1].split(
+            '</div>\n  <details class="coverage">', 1
         )[0]
         self.assertIn('aria-label="Comparison mode"', header)
         self.assertNotIn('aria-label="Comparison mode"', controls)
@@ -503,8 +593,9 @@ class SiteTests(unittest.TestCase):
         )
 
         page = build_site(ROOT)
-        self.assertIn("Only conflicting established values count", page)
-        self.assertIn("Disagreement audit", page)
+        self.assertIn("Only conflicting established values appear here", page)
+        self.assertIn("Compare reviewed simulators", page)
+        self.assertIn('class="comparison-value comparison-real"><b>Real car</b>', page)
 
     def test_disagreement_audit_reaches_each_conflicting_field(self) -> None:
         payload = collect(ROOT)
@@ -584,6 +675,7 @@ class SiteTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("python -m as_driven_db validate", workflow)
+        self.assertIn("python -m unittest discover -s tests -v", workflow)
         self.assertIn(
             "python -m as_driven_db build-site --output dist/site/index.html",
             workflow,
@@ -630,7 +722,7 @@ class SiteTests(unittest.TestCase):
 
     def test_the_header_and_open_row_keep_a_compact_visual_hierarchy(self) -> None:
         page = build_site(ROOT)
-        stats_rule = re.search(r"\.stats \{(.*?)\}", page, re.S).group(1)
+        stats_rule = re.search(r"(?m)^\.stats \{(.*?)\}", page, re.S).group(1)
         stat_rule = re.search(r"\.stat \{(.*?)\}", page, re.S).group(1)
         release_rule = re.search(r"\.release-badge \{(.*?)\}", page, re.S).group(1)
         detail_rule = re.search(r"\.detail-inner \{(.*?)\}", page, re.S).group(1)
@@ -644,6 +736,9 @@ class SiteTests(unittest.TestCase):
         self.assertIn("background: var(--surface)", release_rule)
         self.assertIn("border-left: 3px solid var(--accent)", release_rule)
         header = page.split("</header>", 1)[0]
+        self.assertLess(
+            header.index('id="lookup-controls"'), header.index('<details class="coverage">')
+        )
         self.assertRegex(
             header,
             r'<div class="title-block">\s*<h1>As Driven</h1>\s*'
@@ -667,6 +762,36 @@ class SiteTests(unittest.TestCase):
         self.assertLess(first_row.index('class="car-name"'), first_row.index('class="rim"'))
         self.assertLess(first_row.index('class="rim"'), first_row.index('class="spec"'))
         self.assertLess(first_row.index('class="spec"'), first_row.index('class="state"'))
+
+    def test_driving_guidance_wraps_inside_the_catalogue_table(self) -> None:
+        """A long simulator qualification must not force desktop sideways."""
+        page = build_site(ROOT)
+        table_rule = re.search(r"table \{(.*?)\}", page, re.S).group(1)
+        state_rule = re.search(r"\.state \{(.*?)\}", page, re.S).group(1)
+        tone_rule = re.search(r"\.tone \{(.*?)\}", page, re.S).group(1)
+
+        self.assertIn("table-layout: fixed", table_rule)
+        self.assertNotIn("min-width", table_rule)
+        self.assertIn("white-space: normal", state_rule)
+        self.assertIn("max-width: 100%", tone_rule)
+        self.assertIn("overflow-wrap: anywhere", tone_rule)
+
+    def test_multi_sim_cars_get_a_compact_driving_setup_comparison(self) -> None:
+        page = build_site(ROOT)
+        bmw = page.split('id="details-bmw-m3-e46-gtr"', 1)[1].split(
+            '</div></div></td></tr>', 1
+        )[0]
+        single_sim = page.split('id="details-alpine-a424"', 1)[1].split(
+            '</div></div></td></tr>', 1
+        )[0]
+
+        self.assertIn("Compare driving setup", bmw)
+        self.assertIn("Real car", bmw)
+        self.assertIn("Project Motor Racing", bmw)
+        self.assertIn("Matches real car", bmw)
+        self.assertIn("cut not established", bmw)
+        self.assertNotIn("Compare driving setup", single_sim)
+        self.assertIn("drive-compare-grid", page)
 
     def test_the_light_palette_separates_ground_surface_and_rules(self) -> None:
         page = build_site(ROOT)

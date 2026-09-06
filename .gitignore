@@ -7,5 +7,9 @@ build/
 dist/
 bin/
 obj/
+node_modules/
+playwright-report/
+test-results/
+debug.log
 *.user
 .claude/settings.local.json

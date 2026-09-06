@@ -1,0 +1,351 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ford-zakspeed-capri-group-5-1980",
+  "identity": {
+    "display_name": "Ford Zakspeed Capri Group 5",
+    "manufacturer": "Ford",
+    "model": "Zakspeed Capri Group 5",
+    "year": {
+      "label": "1980 Ford Zakspeed Capri Group 5"
+    },
+    "class": "Group 5",
+    "real_world_identity_notes": "The PMR identity is best matched to the 1980 Ford Zakspeed Capri Group 5, the 1.7-litre turbocharged Division 1 Super Capri developed by Zakspeed for Ford and the German Racing Championship. Mücke Motorsport Classic identifies its surviving Ludwig car as ZAK-G5C 001/80 in Division 1, later renumbered ZAK-G5C 002/80 for one Division 2 race in late 1980; that chassis-number change was a passport change for the same vehicle. The PMR page's 1.7-litre, five-speed and 580-hp description fits the 1980 Division 1 specification more closely than the earlier 1.4-litre Division 2 cars, although the simulator does not expose a chassis number or livery that proves one individual historical chassis."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "unknown",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Capri Group 5"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Capri Group 5"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group 5"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.capri-group-5.20260905t195353170z-c9a96a0f by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "h-pattern",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.capri-group-5.20260905t195353170z-c9a96a0f directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-capri-group-5-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-05",
+      "source_refs": [
+        "pmr.official.ford-zakspeed-capri-group-5",
+        "muecke.1980-zakspeed-capri-zak-g5c-001-80",
+        "racingsportscars.1980-capri-zakspeed-002-80",
+        "sgrallying.2013.zakspeed-capri-turbo",
+        "ecurie.1979-zakspeed-capri-cockpit",
+        "pmr.local-live-capri-group-5-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official PMR vehicle page names the Ford Zakspeed Capri Group 5 and gives the 1.7-litre, 5-speed and 580-hp configuration. Independent exact-period and owner/restorer records identify the 1980 Zakspeed Capri Division 1 specification, including the 1.74-litre engine, five-speed Getrag gearbox, chassis history and Group 5 DRM use."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.official.ford-zakspeed-capri-group-5",
+          "muecke.1980-zakspeed-capri-zak-g5c-001-80",
+          "racingsportscars.1980-capri-zakspeed-002-80",
+          "sgrallying.2013.zakspeed-capri-turbo",
+          "ecurie.1979-zakspeed-capri-cockpit",
+          "pmr.local-live-capri-group-5-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The official PMR vehicle page names the Ford Zakspeed Capri Group 5 and gives the 1.7-litre, 5-speed and 580-hp configuration. Independent exact-period and owner/restorer records identify the 1980 Zakspeed Capri Division 1 specification, including the 1.74-litre engine, five-speed Getrag gearbox, chassis history and Group 5 DRM use."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.ford-zakspeed-capri-group-5",
+          "muecke.1980-zakspeed-capri-zak-g5c-001-80",
+          "racingsportscars.1980-capri-zakspeed-002-80",
+          "sgrallying.2013.zakspeed-capri-turbo",
+          "ecurie.1979-zakspeed-capri-cockpit",
+          "pmr.local-live-capri-group-5-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The exact 1980 technical sheet names a Getrag-five-speed gearbox; the period-event record independently lists Getrag-5 for the 1980 Zakspeed chassis; PMR independently reports a 5-speed transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-capri-group-5-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears"
+        ],
+        "source_refs": [
+          "pmr.official.ford-zakspeed-capri-group-5",
+          "muecke.1980-zakspeed-capri-zak-g5c-001-80",
+          "racingsportscars.1980-capri-zakspeed-002-80",
+          "sgrallying.2013.zakspeed-capri-turbo",
+          "ecurie.1979-zakspeed-capri-cockpit"
+        ],
+        "confidence": "high",
+        "basis": "The exact 1980 technical sheet names a Getrag-five-speed gearbox; the period-event record independently lists Getrag-5 for the 1980 Zakspeed chassis; PMR independently reports a 5-speed transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      }
+    ]
+  },
+  "updated_at": "2026-09-05",
+  "driver_summary": "5-speed transmission. Launch clutch use is not established, so use it to be safe. Upshift lift is not established, so lift to be safe; running clutch use is not established. Whether the gearbox needs a downshift blip is not established, so blip to be safe; downshift clutch use is not established."
+}

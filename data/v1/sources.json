@@ -9951,6 +9951,246 @@
       "reuse_status": "facts-only-review",
       "notes": "Exact scope: Road-going Alfa 156 Selespeed reference used only to identify and exclude a nearby source of paddle or robotic-shift confusion. It is not evidence for the 1998 Superturismo. Selespeed description, road-car controls: “la leva sistemata tra i sedili, oppure i comandi al volante” Reviewed for /identity/real_world_identity_notes. Contemporary manufacturer road-car source. Its steering-wheel controls and automatic-clutch description must not be inherited by the race car.",
       "published_or_updated_at": "1999-11-26"
+    },
+    {
+      "source_id": "pmr.official.chaparral-2f",
+      "title": "Chapparal 2F",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/car.php?carIndex=90",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: First-party PMR vehicle page for the observed 2F content. It identifies the vehicle as Chaparral 2F, assigns it to Sports Car 67, and lists a 7L naturally aspirated V8 and 3-speed automatic. It is used as simulator-content and identity evidence; its implementation values are not treated as proof of the real car's controls. Vehicle page heading, class label, and Statistics panel: “Sports Car 67 ... Chapparal 2F ... Gearbox: 3-speed automatic” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. The page spells the make as 'Chapparal' in its rendered title, while the historical constructor and standard name are Chaparral. The spelling difference does not change the identity conclusion."
+    },
+    {
+      "source_id": "aco.2015.chaparral-2f",
+      "title": "Le Mans 1967: Chaparral 2F, driving innovation!",
+      "publisher": "Automobile Club de l'Ouest / 24 Heures du Mans",
+      "url": "https://www.24h-lemans.com/en/news/le-mans-1967-chaparral-2f-driving-innovation-22029",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: ACO retrospective about the exact 1967 Le Mans Chaparral 2F entry and its cockpit-related pedal arrangement. It identifies the 2F as a closed-cockpit prototype, names the 7-litre Chevrolet engine, and explicitly says the automatic gearbox meant no clutch pedal; the third pedal operated the wing. Article lines 43-47, identity and race context: “The Chaparral 2F was a closed cockpit prototype version of the 1966 2E ... The fibreglass bodywork housed a Chevrolet 7-litre engine.” Reviewed for /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. Article line 46, pedal and transmission description: “the car had an automatic gearbox so no clutch pedal” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. This is retrospective institutional race-history evidence, not a period driver manual. It directly describes the 1967 2F and is strong evidence for the absence of a clutch pedal, but it does not document the selector gate or every running-shift action.",
+      "author": "Jean-Philippe Doret",
+      "published_or_updated_at": "2015-09-19"
+    },
+    {
+      "source_id": "petroleummuseum.1967.chaparral-2f",
+      "title": "Chaparral 2F",
+      "publisher": "Permian Basin Petroleum Museum",
+      "url": "https://petroleummuseum.org/chaparral-2f/",
+      "source_type": "other",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Museum history page for the 1967 Chaparral 2F. It places the car in the 1967 World Manufacturer's Championship and identifies the Chaparral automatic transmission as a three-speed unit. Chaparral 2F page, paragraph beginning 'Chaparral Cars built the 2F': “Chaparral Cars built the 2F to compete in the 1967 World Manufacturer's Championship Series ... 3-speed Chaparral automatic” Reviewed for /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Retrospective museum evidence. It corroborates the exact model-year programme and transmission type, but it does not establish the shift interface or driver technique."
+    },
+    {
+      "source_id": "ultimatecarpage.2008.chaparral-2f-2f002",
+      "title": "1967 Chaparral 2F Chevrolet Specifications",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/spec/88/Chaparral-2F-Chevrolet.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective technical specification for a surviving 1967 Chaparral 2F, identified in the associated gallery as chassis 2F002. It lists two cars built, 1967 production, and a GM/Chaparral three-speed automatic gearbox. Specification page lines 326-356; gallery page chassis line 339: “Produced in: 1967 ... Numbers built: 2 ... Gearbox GM / Chaparral 3 speed Automatic ... Chassis: 2F002” Reviewed for /identity/year, /identity/real_world_identity_notes, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Exact-model retrospective evidence with a surviving chassis reference. The gallery is useful for provenance awareness, but no reviewed image was used to assert a race-period wheel shape, display, shift lights, or gate.",
+      "author": "Wouter Melissen",
+      "published_or_updated_at": "2008-08-29"
+    },
+    {
+      "source_id": "motorsportmagazine.2020.chaparral-2f",
+      "title": "Chaparral 2F: Jim Hall's winged wonder",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/archive/article/december-2020/133/chaparral-2f-jim-halls-winged-wonder/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective technical history of the 1967 2F programme, including the three-speed automatic transmission and the two-pedal cockpit before the additional wing pedal. It also documents the 2F's race-period gearbox failures and later second-chassis conversion. Article paragraphs around lines 224-228: “a new Chaparral-Chevrolet 2F coupé ... with ... three-speed auto transmission” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article paragraph immediately following the 2F description: “A flap in the intake was connected to a third pedal in the automatic-transmission car's previously two-pedal cockpit.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Article technical specification, Engine section, lines 278-280: “mated to Chevrolet 3-speed auto gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Retrospective technical journalism. It is useful for cockpit pedal architecture and exact 2F race context, but it does not state the selector's physical location or a complete shift procedure."
+    },
+    {
+      "source_id": "primotipo.2014.chaparral-2f",
+      "title": "1967 Spa 1000Km: Chaparral 2F Chev…",
+      "publisher": "primotipo...",
+      "url": "https://primotipo.com/2014/06/26/67-spa-1000km-chaparral-2f/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective technical article specifically about the 1967 Spa 1000 km Chaparral 2F. It quotes Pete Lyons's description of the 2F transmission as a hydraulic coupling/torque converter instead of a clutch and describes straight-cut gears, sliding dog clutches, clutchless manual changes, and easing the throttle to unload the dogs. Article lines 57-60, transmission description and shift procedure: “The gears were simple straight-cut spurs engaged by sliding dog clutches; every second dog was cut back a little to assist the clutchless changes. The changes were all done manually, the driver easing his throttle foot to unload the dogs and snatching the gear as quickly as he could.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift. Article lines 58-60, coupling and start description: “a torque convertor instead of a clutch ... The engine was always started with a gear engaged, the driver preventing a lunge forward by firm pressure with his left foot.” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Article line 61, downshift effect: “on down changes the fluid coupling lessened any tendency of the rear wheels to lock” Reviewed for /authentic_controls/transmission/downshift/clutch. Community research quoting a named historical source. It is the best located evidence found for the driver's running upshift action, but it does not identify a specific selector geometry or establish whether the driver manually blipped the throttle on 2F downshifts.",
+      "published_or_updated_at": "2014-06-26"
+    },
+    {
+      "source_id": "pmr.local-live-2f-controls.2.2.0",
+      "title": "Live PMR 2F guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/64",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.2f.20260905t210242087z-a3a81cb5 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "pmr.official.ford-zakspeed-capri-group-5",
+      "title": "Ford Zakspeed Capri Group 5",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/car.php?carIndex=77",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official PMR vehicle page. It identifies the simulator content as Ford Zakspeed Capri Group 5 and reports 1.7L turbocharged inline-four, 580 hp, 880 kg and a 5-speed manual transmission. It is simulator metadata and identity evidence, not proof of unreported real-car technique or wheel hardware. Vehicle page heading and Statistics panel: “Ford Zakspeed Capri Group 5 ... Engine 1.7L Turbo-charged Inline-4 ... Transmission 5-speed manual” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/class, /authentic_controls/transmission/forward_gears. Vehicle page Statistics panel: “Power 580 HP @9,000 RPM ... Weight 880 Kg” Reviewed for /identity/real_world_identity_notes. Official simulator metadata is used to identify the PMR content and its stated configuration. The observed PMR controls remain simulator-only."
+    },
+    {
+      "source_id": "muecke.1980-zakspeed-capri-zak-g5c-001-80",
+      "title": "Ford Zakspeed Turbo Capri - technical data sheet and race history",
+      "publisher": "Mücke Motorsport Classic",
+      "url": "https://www.muecke-motorsport-classic.de/Media/public/Muecke_Classic/Download/Schild_A4quer_Showfahrzeug_FZT-Capri_english.pdf",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Owner/restorer technical sheet for the surviving 1980-1982 Ford Zakspeed Turbo Capri associated with Klaus Ludwig. It identifies the 1980 Division 1 chassis as ZAK-G5C 001/80, records the later 002/80 renumbering as the same vehicle, and lists the 1.74-litre engine and five-speed Getrag gearbox. It does not specify the gate, clutch pedal arrangement, shift technique, or race-period wheel electronics. PDF page 1, Technical Data Sheet and Power transmission: “Power transmission: Getrag-five-speed gearbox with an oil pump and cooling system of its own” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. PDF page 1, History of the vehicle: “The first entry for this Zakspeed Capri was in the 1980 season in division 1 with the chassis number ZAK-G5C 001/80.” Reviewed for /identity/year, /identity/real_world_identity_notes. PDF page 1, chassis-number history: “the change of the chassis number from ZAK-G5C 001/80 to ZAK-G5C 002/80” Reviewed for /identity/real_world_identity_notes. PDF page 1, Chassis number and race-history table: “Chassis number: ZAK-G5C 001/80 (up to 27. Sep 1980) & ZAK-G5C 002/80 (since 27. Sep 1980)” Reviewed for /identity/real_world_identity_notes. PDF page 1, technical data: “cubic capacity / displacement 1740 ccm” Reviewed for /identity/real_world_identity_notes. Retrospective owner/restorer evidence with exact chassis history. It is the strongest source for the 1980 specification and five-speed count, but it does not turn a component description into a driver-procedure claim."
+    },
+    {
+      "source_id": "racingsportscars.1980-capri-zakspeed-002-80",
+      "title": "Donington Group 5 International 1980 - Car Data & Information",
+      "publisher": "Racing Sports Cars",
+      "url": "https://www.racingsportscars.com/entry/data/Donington-1980-07-06.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period-event record for the 6 July 1980 Donington Group 5 International race. It lists Ford Capri Turbo chassis 002/80, Zakspeed, built 1980, 1745 cc and Getrag-5. It is a period race-entry database, not a cockpit or technique source. Car Information table, row 1: “Ford Capri Turbo | 002/80 | Zakspeed | 1980 | ... 1745 cc ... Getrag -5” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Event header: “Donington Group 5 International ... Date: 6.7.1980” Reviewed for /identity/class, /identity/year. Contemporary-event data corroborating the 1980 Zakspeed chassis and five-speed Getrag listing. It does not establish the shift pattern or driver technique."
+    },
+    {
+      "source_id": "sgrallying.2013.zakspeed-capri-turbo",
+      "title": "ZAKSPEED FORD CAPRI TURBO GROUP 5",
+      "publisher": "Café Racer 76 / Jonathan Moore",
+      "url": "https://sgrallying.blogspot.com/2013/02/zakspeed-ford-capri-turbo-group-5.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective feature on the restored 1981 Klaus Ludwig Zakspeed Capri and the broader Capri programme. It explicitly distinguishes the 1981 car from the 1980 Division 1 version. Its five-speed manual and twin-plate references are useful family context, not a substitute for exact 1980 cockpit evidence. Article paragraphs describing the restored car: “This 1981 Group 5 Zakspeed Ford Capri Turbo is sitting in the Zakspeed team’s factory” Reviewed for /identity/real_world_identity_notes. DRIVELINE specification: “Getrag 5 speed manual ... Sachs twin-plate clutch” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch. Article, 1980/1981 development narrative: “The result was the 1980 Division 1 ... version” Reviewed for /identity/real_world_identity_notes. Retrospective secondary evidence. The page's cockpit and control details belong to a 1981 sister car/restoration and are deliberately not promoted to the exact 1980 baseline.",
+      "author": "Jonathan Moore",
+      "published_or_updated_at": "2013-02-03"
+    },
+    {
+      "source_id": "ecurie.1979-zakspeed-capri-cockpit",
+      "title": "Zakspeed's 'Super Capri'",
+      "publisher": "Ecurie",
+      "url": "https://www.ecurie.co.uk/blog/2018/6/15/1979-ford-zakspeed-capri-turbo-group-5",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Photographs and description of a 1979 Zakspeed Capri Turbo Group 5, not the PMR 1980 1.7-litre Division 1 car. The cockpit image visibly shows a conventional three-spoke wheel and a manual lever, but no gate is legible and the sister-car boundary prevents direct promotion. Image 3359_10635466_14.jpg, cockpit photograph: “[photograph: three-spoke steering wheel and manual gear lever visible in a 1979 Zakspeed Capri cockpit]” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Article title and car-history description: “1979 Ford Zakspeed Capri Turbo Group 5” Reviewed for /identity/real_world_identity_notes. Useful visual negative/control-boundary evidence only. It proves what is visible in a 1979 sister car, not what was installed in the 1980 1.7-litre Division 1 car.",
+      "author": "Kit Boothby",
+      "published_or_updated_at": "2018-07-02"
+    },
+    {
+      "source_id": "pmr.local-live-capri-group-5-controls.2.2.0",
+      "title": "Live PMR Capri Group 5 guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/63",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-05",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.capri-group-5.20260905t195353170z-c9a96a0f by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "pmr.official.911-carrera-cup-964",
+      "title": "Porsche 911 Carrera Cup (964)",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/car.php?carIndex=40",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: First-party PMR vehicle page for the observed content. It identifies the PMR car as Porsche 911 Carrera Cup (964), assigns it to 964 Trophy, and reports a 3.6L flat-six, 265 hp, 1,400 kg, and five-speed manual transmission. It is simulator-content and identity evidence, not sole proof of unreported real-car technique or wheel hardware. Vehicle page heading, class label, and Statistics panel: “Porsche 911 Carrera Cup (964) ... 964 Trophy ... Power 265 HP ... Transmission 5-speed manual” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. The 265 hp and five-speed values are useful configuration clues. PMR cockpit behavior remains simulator evidence only."
+    },
+    {
+      "source_id": "porsche.official.5000-cup-cars",
+      "title": "5,000 Porsche Cup vehicles – a unique success story",
+      "publisher": "Porsche Motorsport",
+      "url": "https://racing.porsche.com/articles/cars-5000-cup-cars",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Porsche's official history of its Cup-car programme. It states that the Carrera Cup was launched with the 964 in 1990 and describes the one-make, technically identical Cup philosophy. Article lines 260-264: “Upon the development of the Porsche 964 in 1990, the 'Porsche Carrera Cup' was launched ... On a technical level, Cup vehicles are entirely identical” Reviewed for /identity/year, /identity/model, /identity/class, /identity/real_world_identity_notes. Retrospective manufacturer history. It establishes the launch generation and series identity but does not describe the detailed driver technique of the 1990 car.",
+      "published_or_updated_at": "2022-12-16"
+    },
+    {
+      "source_id": "porsche.newsroom.1990-cup-zolder",
+      "title": "Lap Time: The first qualifying of the 1990 Porsche Carrera Cup in Zolder",
+      "publisher": "Porsche Newsroom / Christophorus",
+      "url": "https://newsroom.porsche.com/christophorus/en/2020/394/laptime-porsche-911-carrera-cup-zolder-olaf-manthey.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Porsche's retrospective account of the first 1990 Carrera Cup qualifying at Zolder. It names the Porsche 911 Carrera 2 Cup of the 964 generation and identifies the date and race context. Article lines 7, 13, and 19-25: “The first qualifying of the 1990 Porsche Carrera Cup ... Porsche 911 Carrera 2 Cup (964 generation)” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/class. Contemporary-event identity is reported retrospectively by Porsche. The article includes a driver statement about clean-line technique but not gearshift procedure, so no technique field is derived from it.",
+      "published_or_updated_at": "2020-01-01"
+    },
+    {
+      "source_id": "porsche.newsroom.1990-911-carrera-2-cup",
+      "title": "Porsche 911 Carrera 2 Cup",
+      "publisher": "Porsche Newsroom / Porsche Museum",
+      "url": "https://pnr-prd2-pub2.newsroom.porsche.com/en/press-kits/Porsche-Museum/Porsche-911-Carrera-2-Cup.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Porsche's official historical vehicle page for the 911 Carrera 2 Cup. The page is used as manufacturer identity evidence for the 964 Cup and its 1990 debut, not as proof of current restoration cockpit parts. Porsche Museum vehicle page title and historical specification: “Porsche 911 Carrera 2 Cup ... 1990” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/manufacturer. Official manufacturer history. Exact page text was not fully exposed by the web reader during retrieval, so the more detailed 1990–1991 transmission table is sourced separately from Porsche Club Europe's PDF."
+    },
+    {
+      "source_id": "porsche.clubsport.1990-91-964-cup",
+      "title": "Porsche Club Europe Regulations: Engine-, Clutch- and Transmission data for Vehicles 911 of Class 1, model years 1988 to 1994",
+      "publisher": "Porsche Club Europe / Porsche AG hosted document",
+      "url": "https://files.porsche.com/filestore/download/uk/none/clubs-clubsport-downloadrules-antrieb-88-94/default/b6941439-9d89-4397-8030-8f33af09b1cd/Class-1-Porsche-911-Model-years-1988-1994.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Porsche Club Europe technical table covering 911 model years 1988–1994. The exact row for 911 Carrera 2 Cup 1990–1991 lists engine M30/01, 195 kW, SPORT 240 clutch, G50/03 transmission, and five gears; separate rows show the later 1992 and 1993 Cup changes. PDF, technical-data table, row '911 Carrera 2 Cup', model years 1990–1991: “911 Carrera 2 Cup | 1990 … 1991 | M 30/01 | 3600 | 195 | DME S | SPORT 240 | 240 Sport | G 50/03 | 5” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch. PDF, adjacent 1992 and 1993 Carrera 2 Cup rows: “911 Carrera 2 Cup | 1992 ... G 50/10 | 5 ... 911 Carrera 2 Cup | 1993 ... G 50/10 | 5 | Steel synchronizing rings” Reviewed for /identity/real_world_identity_notes, /authentic_controls/transmission/gearbox_type. Strong manufacturer-hosted model-year evidence. It establishes the early five-speed and sport-clutch hardware, but the table does not prove the driver’s start or running-shift procedure and does not identify the selector gate."
+    },
+    {
+      "source_id": "964rs.2009.1990-carrera-2-cup",
+      "title": "911Carrera 2 Cup – 1990",
+      "publisher": "The 964 RS Pages",
+      "url": "https://carrerars.wordpress.com/2009/08/20/911carrera-2-cup-%E2%80%93-1990/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Retrospective 1990-specific technical summary. It identifies the 265 bhp early Cup car, five-speed gearbox with shortened third–fifth ratios, and the existence of two exceptional Tiptronic cars. It does not establish the exact gate or racing shift procedure. Article lines 25-31: “For the 1990 racing season ... 265 bhp ... coupled to a five-speed gearbox with reduced third, fourth and fifth gear ... Two cars were built with Tiptronic transmissions” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /identity/real_world_identity_notes. Retrospective specialist reference. It is useful for the 1990 versus Tiptronic distinction, but it is not a Porsche service or driver manual.",
+      "published_or_updated_at": "2009-08-20"
+    },
+    {
+      "source_id": "collectingcars.2022.1990-964-carrera-cup",
+      "title": "1990 PORSCHE 911 (964) CARRERA CUP",
+      "publisher": "Collecting Cars",
+      "url": "https://collectingcars.com/for-sale/1990-porsche-911-964-carrera-cup",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction record for a provenance-documented 1990 964 Carrera Cup, one of the first 50 built for the inaugural season, retaining its original shell and dated Matter cage. The page identifies the car as manual and states that its current steering wheel is an Alcantara GT3 Cup replacement; it is used to distinguish original race provenance from later cockpit hardware. Listing lines 57-59 and 63-75: “one of the first 50 examples produced for the inaugural 1990 Carrera Cup race season ... lightened flywheel and racing clutch ... replacement ... Alcantara-trimmed GT3 Cup steering wheel” Reviewed for /identity/year, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Listing lines 103-109: “1990 PORSCHE 911 (964) CARRERA CUP ... LHD manual” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/forward_gears. Retrospective auction evidence with strong exact-1990 provenance, but the current steering wheel is explicitly a replacement and therefore cannot settle race-period wheel fields.",
+      "published_or_updated_at": "2022-01-25"
+    },
+    {
+      "source_id": "commons.2014.964cup-dashboard-photo",
+      "title": "File:W1395-Porsche 911 964Cup TableauBord 81508.JPG",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:W1395-Porsche_911_964Cup_TableauBord_81508.JPG",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Full-resolution 4,752 × 3,168 photograph labelled as a Porsche 964 Carrera Cup dashboard. It is photographic evidence of a 964 Cup cockpit, but the page does not establish a 1990 chassis number or prove that every visible restoration component is race-period original. Original photograph, full-resolution dashboard/cockpit view: “[photograph: 964 Cup cockpit and dashboard; the steering wheel and gear-control area are visible, but the image provenance does not identify a 1990 race chassis or make the gate sufficiently legible]” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Photograph reviewed as a control-boundary source. It supports the presence of a conventional cockpit control area but is not promoted to definitive 1990 race-period wheel or gate values.",
+      "published_or_updated_at": "2014-03-15"
+    },
+    {
+      "source_id": "pmr.local-live-911-carrera-cup-964-controls.2.2.0",
+      "title": "Live PMR 911 Carrera Cup (964) guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/65",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-06",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

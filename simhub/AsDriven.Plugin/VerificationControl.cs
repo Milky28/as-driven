@@ -169,6 +169,7 @@ namespace AsDriven.Plugin
                 SetReviewVisibility(true);
                 SetStatus("Guided drive complete. Suggested driving results were filled in; review the cockpit and wheel fields before saving.", Brushes.LightGreen, true);
             }
+            UpdateBindingReadiness();
             UpdateWorkflowGuidance(live, guided);
         }
 
@@ -454,10 +455,53 @@ namespace AsDriven.Plugin
             _guidedDriveApplied = false;
             _guidedDriveStarted = true;
             _plugin.StartGuidedVerificationDrive(_capture);
-            SetStatus("In-sim guided drive started. Follow the verification overlay prompts.", Brushes.LightGreen, true);
+            GuidedDriveBindingReadinessSnapshot readiness =
+                _plugin.GetGuidedDriveBindingReadiness();
+            SetStatus(readiness.IsReady
+                ? "In-sim guided drive started. All four in-car controls were detected; follow the verification overlay prompts."
+                : "In-sim guided drive started. Follow the verification overlay prompts. The in-car binding check still needs: "
+                    + MissingBindings(readiness) + ".", Brushes.LightGreen, true);
             UpdateWorkflowGuidance(
                 _plugin.CaptureVerificationContext(),
                 _plugin.GetGuidedDriveSnapshot());
+        }
+
+        private void BindingCheckClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _plugin.StartGuidedDriveBindingCheck();
+            UpdateBindingReadiness();
+            SetStatus("Binding check started. Press the physical controls mapped to Next, Retry, Skip, and Cancel; this page will name any action still not detected.", Brushes.Goldenrod, false);
+        }
+
+        private void UpdateBindingReadiness()
+        {
+            GuidedDriveBindingReadinessSnapshot readiness =
+                _plugin.GetGuidedDriveBindingReadiness();
+            if (!readiness.Checking)
+            {
+                _bindingReadiness.Text = "Not checked this session. Start the check, then press each physical control once before driving.";
+                _bindingReadiness.Foreground = Brushes.Goldenrod;
+                _bindingCheck.Content = "Check in-car bindings";
+                return;
+            }
+            if (readiness.IsReady)
+            {
+                _bindingReadiness.Text = "Ready: physical inputs were detected for Next, Retry, Skip, and Cancel.";
+                _bindingReadiness.Foreground = Brushes.LightGreen;
+                _bindingCheck.Content = "Recheck bindings";
+                return;
+            }
+            _bindingReadiness.Text = "Still not detected: " + MissingBindings(readiness)
+                + ". Press the mapped physical control for each action.";
+            _bindingReadiness.Foreground = Brushes.Goldenrod;
+            _bindingCheck.Content = "Restart binding check";
+        }
+
+        private static string MissingBindings(GuidedDriveBindingReadinessSnapshot readiness)
+        {
+            return readiness == null || readiness.MissingActions.Length == 0
+                ? "none"
+                : string.Join(", ", readiness.MissingActions);
         }
 
         private void GuidedNextClicked(object sender, RoutedEventArgs eventArgs)

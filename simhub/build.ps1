@@ -213,32 +213,20 @@ if ($themeSelector.Count -ne 1 `
         }).Count -ne 0) {
     throw "The popup settings page must expose auto plus all nine packaged themes as visual choices."
 }
-# The rack has to be wide enough to actually wrap. It used to sit in the
-# 520-pixel preview column, six pixels short of fitting two choices, so every choice
-# stacked vertically and pushed the save button below the fold.
-$popupBehavior = @($garageUi | Where-Object {
-        $_ -is [System.Windows.Controls.StackPanel] -and $_.Name -eq "GaragePopupBehavior"
-    } | Select-Object -First 1)
-# Structural, not measured. DesiredSize outside a rendered visual tree omits the
-# radio glyph, which is exactly the width that made the old rack too narrow, so
-# measuring here would pass the very layout this guards against.
 $popupColumn = @($garageUi | Where-Object {
         $_ -is [System.Windows.Controls.StackPanel] -and $_.Name -eq "GaragePopupColumn"
     } | Select-Object -First 1)
-$themeAncestors = @()
-$node = $themeSelector[0].Parent
-while ($null -ne $node) {
-    $themeAncestors += $node
-    $node = if ($node -is [System.Windows.FrameworkElement]) { $node.Parent } else { $null }
+$popupAppearance = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.WrapPanel] -and $_.Name -eq "PopupAppearanceControls"
+    } | Select-Object -First 1)
+$browseThemes = @($garageUi | Where-Object {
+        $_ -is [System.Windows.Controls.Expander] -and $_.Name -eq "BrowsePopupThemes"
+    } | Select-Object -First 1)
+if ($popupAppearance.Count -ne 1 -or $popupColumn.Count -ne 1 -or $browseThemes.Count -ne 1) {
+    throw "Garage must keep the preview, everyday appearance controls, and a secondary theme gallery."
 }
-if ($popupBehavior.Count -ne 1 -or $popupColumn.Count -ne 1) {
-    throw "Garage must keep the popup preview column and a separate popup behavior section."
-}
-if (@($themeAncestors | Where-Object { $_.Name -eq "GaragePopupColumn" }).Count -ne 0) {
-    throw "Popup behavior must span the page, not sit inside the preview column where theme choices cannot wrap."
-}
-if ($themeSelector[0].MaxWidth -le $popupColumn[0].Width) {
-    throw "The theme rack must be wider than the preview column so choices wrap more than one per row."
+if ($browseThemes[0].IsExpanded) {
+    throw "The full theme gallery must begin collapsed so saving remains visible without scrolling through it."
 }
 $savePopupSettings = @($garageUi | Where-Object {
         $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Changes saved"
@@ -566,6 +554,45 @@ $guidedStartButton = @($ui | Where-Object {
 if ($guidedStartButton.Count -ne 1 -or $guidedStartButton[0].IsEnabled) {
     throw "The guided-start button must remain disabled until assist settings are confirmed."
 }
+$bindingCheckButton = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Check in-car bindings"
+    } | Select-Object -First 1)
+if ($bindingCheckButton.Count -ne 1) {
+    throw "The contribution page must offer the in-car binding readiness check."
+}
+$choosePreviewButton = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Choose a preview car"
+    } | Select-Object -First 1)
+if ($choosePreviewButton.Count -ne 1) {
+    throw "An empty Garage must offer a clearly-labelled catalog preview action."
+}
+$catalogFavorites = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Favorites"
+    } | Select-Object -First 1)
+$catalogRecent = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Recent"
+    } | Select-Object -First 1)
+if ($catalogFavorites.Count -ne 1 -or $catalogRecent.Count -ne 1) {
+    throw "The catalog must retain local Favorites and Recent shortcuts."
+}
+$bindingReadinessType = $pluginAssembly.GetType(
+    "AsDriven.Plugin.GuidedDriveBindingReadiness", $true)
+$bindingReadiness = [System.Activator]::CreateInstance($bindingReadinessType, $true)
+$readinessFlags = [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic
+$bindingReadinessType.GetMethod("Start", $readinessFlags).Invoke($bindingReadiness, @())
+$bindingReadinessType.GetMethod("Observe", $readinessFlags).Invoke(
+    $bindingReadiness, @("Wheel Button 4", "VerificationDriveNext"))
+$bindingSnapshot = $bindingReadinessType.GetMethod("GetSnapshot", $readinessFlags).Invoke(
+    $bindingReadiness, @())
+$bindingSnapshotType = $bindingSnapshot.GetType()
+$bindingChecking = [bool]$bindingSnapshotType.GetProperty(
+    "Checking", $readinessFlags).GetValue($bindingSnapshot, $null)
+$missingActions = @($bindingSnapshotType.GetProperty(
+    "MissingActions", $readinessFlags).GetValue($bindingSnapshot, $null))
+if (-not $bindingChecking -or $missingActions.Count -ne 3 `
+    -or $missingActions -contains "VerificationDriveNext") {
+    throw "The binding readiness check must record a detected physical input and name the remaining actions."
+}
 $previewMethod = $pluginType.GetMethod(
     "ShouldLeavePreview",
     [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
@@ -685,9 +712,14 @@ if (-not (Test-Path -LiteralPath $verificationDashboard)) {
 $verificationDashboardJson = Get-Content -LiteralPath $verificationDashboard -Raw
 foreach ($requiredProperty in @(
     "AsDriven.VerificationDriveVisible",
+    "AsDriven.VerificationDriveHeadline",
     "AsDriven.VerificationDrivePromptLine1",
-    "AsDriven.VerificationDrivePromptLine2",
-    "AsDriven.VerificationDriveResult"
+    "AsDriven.VerificationDriveStatusLine1",
+    "AsDriven.VerificationDriveResult",
+    "AsDriven.VerificationDriveNextHint",
+    "AsDriven.VerificationDriveRetryHint",
+    "AsDriven.VerificationDriveSkipHint",
+    "AsDriven.VerificationDriveCancelHint"
 )) {
     if (-not $verificationDashboardJson.Contains($requiredProperty)) {
         throw "The guided verification surface is missing property: $requiredProperty"

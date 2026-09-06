@@ -1079,7 +1079,7 @@ namespace AsDriven.Core
         /// <summary>
         /// The simulator's real product name, for display only.
         /// </summary>
-        private static string SimulatorProductName(string simulator)
+        internal static string SimulatorProductName(string simulator)
         {
             switch (simulator)
             {

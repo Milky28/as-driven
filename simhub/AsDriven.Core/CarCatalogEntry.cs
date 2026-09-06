@@ -31,6 +31,23 @@ namespace AsDriven.Core
         }
 
         /// <summary>
+        /// The picker gives the car's own name its first line, then keeps the
+        /// simulator and class in a quieter second line. A catalog entry is a
+        /// simulator-specific guidance view, so neither context may disappear
+        /// into a long combined label.
+        /// </summary>
+        public string BrowserSubtitle
+        {
+            get
+            {
+                string simulator = AsDrivenDatabase.SimulatorProductName(Simulator);
+                return string.IsNullOrWhiteSpace(CarClass)
+                    ? simulator
+                    : simulator + " · " + CarClass;
+            }
+        }
+
+        /// <summary>
         /// Set only when another entry would carry the same label. One real car
         /// covered by two simulators is listed once per simulator, because the
         /// guidance can differ between them - and two identical rows in a picker

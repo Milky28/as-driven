@@ -20,6 +20,7 @@ from .review_proposal import prepare_review_proposal
 from .review_promotion import promote_review_case
 from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
+from .release_changes import release_control_changes, render_release_control_changes
 from .maintainer_workbench import (
     WorkbenchApplication,
     WorkbenchError,
@@ -70,6 +71,25 @@ def _parser() -> argparse.ArgumentParser:
     )
     boundaries.add_argument("--root", type=Path, default=Path.cwd())
     boundaries.add_argument("--output", type=Path)
+
+    control_changes = subparsers.add_parser(
+        "release-control-changes",
+        help="compare wheel, shifter, clutch, and blip guidance between releases",
+    )
+    control_changes.add_argument(
+        "previous",
+        type=Path,
+        help="previous release root or its data/v1 directory",
+    )
+    control_changes.add_argument("--root", type=Path, default=Path.cwd())
+    control_changes.add_argument("--output", type=Path)
+    control_changes.add_argument("--markdown", action="store_true")
+    control_changes.add_argument(
+        "--priority-record",
+        action="append",
+        default=[],
+        help="record id to place first (repeat for locally recent cars)",
+    )
 
     observation = subparsers.add_parser(
         "validate-observation",
@@ -341,6 +361,30 @@ def main(argv: list[str] | None = None) -> int:
             f"Audited {stats['records']} records: "
             f"{stats['simulator_only_authentic_claims']} simulator-only authentic "
             f"claim(s) across {stats['affected_records']} record(s)."
+        )
+        return 0
+
+    if args.command == "release-control-changes":
+        try:
+            report = release_control_changes(
+                args.previous,
+                args.root,
+                priority_record_ids=set(args.priority_record),
+            )
+        except (OSError, KeyError, ValueError, json.JSONDecodeError) as exception:
+            print(f"ERROR: {exception}")
+            return 1
+        if args.output:
+            if args.markdown:
+                args.output.parent.mkdir(parents=True, exist_ok=True)
+                args.output.write_text(render_release_control_changes(report), encoding="utf-8")
+            else:
+                _write_json(args.output, report)
+            print(f"Wrote control-change summary to {args.output}")
+        summary = report["summary"]
+        print(
+            f"Compared {report['previous']['dataset_version']} to {report['current']['dataset_version']}: "
+            f"{summary['changed_controls']} control field(s) across {summary['changed_cars']} car(s)."
         )
         return 0
 

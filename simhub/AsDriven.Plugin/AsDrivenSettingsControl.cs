@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -133,12 +134,28 @@ namespace AsDriven.Plugin
         private Border _catalogLaunchCell;
         private Border _catalogUpshiftCell;
         private Border _catalogDownshiftCell;
+        private Button _openCatalogRecordButton;
+        private Button _toggleCatalogFavoriteButton;
+        private Button _catalogFavoritesButton;
+        private Button _catalogRecentButton;
+        private Button _catalogUnresolvedButton;
+        private CheckBox _hardwareRoundRim;
+        private CheckBox _hardwareGtFormulaRim;
+        private CheckBox _hardwareHPattern;
+        private CheckBox _hardwareSequentialStick;
+        private CheckBox _hardwarePaddleShifters;
+        private CheckBox _hardwareClutchPedal;
+        private TextBlock _hardwareFitStatus;
         private bool _loadingCatalogFilters;
+        private bool _loadingCatalogResults;
+        private string _catalogShortcutFilter;
         private TextBlock _liveStatus;
         private TextBlock _recordStatus;
         private TextBlock _previewStatus;
         private TextBlock _errorStatus;
         private TextBlock _overlayFeedback;
+        private TextBlock _popupSettingsStatus;
+        private TextBlock _popupThemeSummary;
         private TextBlock _browserFeedback;
         private TextBlock _contributionFeedback;
         private TextBlock _advancedFeedback;
@@ -166,6 +183,9 @@ namespace AsDriven.Plugin
         private TextBlock _garageUpshift;
         private TextBlock _garageDownshift;
         private TextBlock _garageSummary;
+        private Border _garageFitBand;
+        private Border _garageUseBand;
+        private Button _choosePreviewCarButton;
         private Border _popupPreview;
         private PopupPreviewVariant _detailedPopupPreview;
         private PopupPreviewVariant _compactPopupPreview;
@@ -792,7 +812,35 @@ namespace AsDriven.Plugin
         private void PopupThemeChecked(object sender, RoutedEventArgs eventArgs)
         {
             UpdateThemeChoiceVisuals();
+            UpdatePopupThemeSummary();
             MarkPopupSettingsDirty();
+        }
+
+        private void UpdatePopupThemeSummary()
+        {
+            if (_popupThemeSummary == null)
+            {
+                return;
+            }
+            _popupThemeSummary.Text = "Theme: " + PopupThemeLabel(SelectedPopupTheme())
+                + ". Browse all popup themes to change it.";
+        }
+
+        private static string PopupThemeLabel(string value)
+        {
+            switch (value)
+            {
+                case PopupPreferences.SixtiesTheme: return "1960s Roadbook";
+                case PopupPreferences.SeventiesTheme: return "1970s Works";
+                case PopupPreferences.EightiesTheme: return "1980s Black Gold";
+                case PopupPreferences.NinetiesTheme: return "1990s Touring";
+                case PopupPreferences.TwoThousandsTheme: return "2000s Endurance Alloy";
+                case PopupPreferences.TwentyTensTheme: return "2010s Hybrid Vector";
+                case PopupPreferences.ModernTheme: return "Modern Night";
+                case PopupPreferences.ModernLightTheme: return "Modern Light";
+                case PopupPreferences.GPLClassicTheme: return "GPL Classic";
+                default: return "Auto by car era";
+            }
         }
 
         private void UpdateThemeChoiceVisuals()
@@ -961,7 +1009,7 @@ namespace AsDriven.Plugin
             statusPanel.Children.Add(_garageCarClass);
             statusPanel.Children.Add(_liveStatus);
 
-            var fitBand = CreateGarageBand("FIT");
+            _garageFitBand = CreateGarageBand("FIT");
             var fitGrid = new Grid();
             fitGrid.ColumnDefinitions.Add(new ColumnDefinition());
             fitGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1) });
@@ -976,10 +1024,10 @@ namespace AsDriven.Plugin
             UIElement shifter = CreateGarageValue("SHIFTER", out _garageShifter, out _garageShifterDetail);
             Grid.SetColumn(shifter, 2);
             fitGrid.Children.Add(shifter);
-            fitBand.Child = fitGrid;
-            statusPanel.Children.Add(fitBand);
+            _garageFitBand.Child = fitGrid;
+            statusPanel.Children.Add(_garageFitBand);
 
-            var useBand = CreateGarageBand("USE");
+            _garageUseBand = CreateGarageBand("USE");
             var useGrid = new Grid();
             useGrid.ColumnDefinitions.Add(new ColumnDefinition());
             useGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -991,8 +1039,8 @@ namespace AsDriven.Plugin
             UIElement downshift = CreateGarageTechnique("DOWNSHIFT", out _garageDownshift);
             Grid.SetColumn(downshift, 2);
             useGrid.Children.Add(downshift);
-            useBand.Child = useGrid;
-            statusPanel.Children.Add(useBand);
+            _garageUseBand.Child = useGrid;
+            statusPanel.Children.Add(_garageUseBand);
 
             _garageSummary = new TextBlock
             {
@@ -1014,6 +1062,12 @@ namespace AsDriven.Plugin
             ToolTipService.SetShowOnDisabled(_showPopupButton, true);
             actionRow.Children.Add(_showPopupButton);
             actionRow.Children.Add(CreateSecondaryButton("Hide popup", 122, HidePopupClicked));
+            _choosePreviewCarButton = CreateSecondaryButton(
+                "Choose a preview car", 165, ChoosePreviewCarClicked);
+            _choosePreviewCarButton.Visibility = Visibility.Collapsed;
+            _choosePreviewCarButton.ToolTip =
+                "Opens the catalog. A preview is clearly marked as not live telemetry.";
+            actionRow.Children.Add(_choosePreviewCarButton);
             _contributeLiveButton = CreatePrimaryButton("Contribute this car", 165, ContributeLiveCarClicked);
             _contributeLiveButton.Visibility = Visibility.Collapsed;
             _contributeLiveButton.BorderBrush = new SolidColorBrush(Color.FromRgb(50, 190, 235));
@@ -1043,18 +1097,21 @@ namespace AsDriven.Plugin
             workspace.Children.Add(popup);
             panel.Children.Add(workspace);
 
-            // Popup behavior spans the page instead of sharing the preview's
-            // 520-pixel column. A theme choice measures about 258 pixels, so
-            // two could never fit that column and all nine stacked one per row,
-            // putting the save button far below the fold.
-            var behavior = new StackPanel
+            // Everyday appearance controls stay with the persistent preview.
+            // The full gallery is deliberately secondary: it remains available
+            // without putting Save changes below a long grid of theme cards.
+            var themeGallery = new StackPanel
             {
-                Name = "GaragePopupBehavior",
+                Name = "GarageThemeGallery",
                 Margin = new Thickness(0, 4, 0, 18),
             };
-            AddSectionHeading(behavior, "Popup behavior");
+            AddSectionHeading(themeGallery, "Popup theme");
 
-            var behaviorRow = new WrapPanel { Orientation = Orientation.Horizontal };
+            var behaviorRow = new WrapPanel
+            {
+                Name = "PopupAppearanceControls",
+                Orientation = Orientation.Horizontal,
+            };
             var durationBlock = new StackPanel
             {
                 Width = 500,
@@ -1111,9 +1168,17 @@ namespace AsDriven.Plugin
             _popupSize.SelectionChanged += PopupSizeChanged;
             sizeBlock.Children.Add(_popupSize);
             behaviorRow.Children.Add(sizeBlock);
-            behavior.Children.Add(behaviorRow);
+            popup.Children.Add(CreateFieldLabel("Popup appearance", new Thickness(0, 0, 0, 8)));
+            popup.Children.Add(behaviorRow);
+            _popupThemeSummary = new TextBlock
+            {
+                Opacity = 0.78,
+                Margin = new Thickness(0, 2, 0, 10),
+                TextWrapping = TextWrapping.Wrap,
+            };
+            popup.Children.Add(_popupThemeSummary);
 
-            behavior.Children.Add(CreateFieldLabel("Popup theme", new Thickness(0, 6, 0, 8)));
+            themeGallery.Children.Add(CreateFieldLabel("Choose a theme", new Thickness(0, 6, 0, 8)));
             _popupTheme = new WrapPanel
             {
                 Name = "PopupThemeSelector",
@@ -1132,10 +1197,11 @@ namespace AsDriven.Plugin
             AddThemeChoice("Modern Light", PopupPreferences.ModernLightTheme);
             AddThemeChoice("GPL Classic", PopupPreferences.GPLClassicTheme);
             SelectThemeChoice(_plugin.PopupThemePreference);
+            UpdatePopupThemeSummary();
             _popupSettingsDirty = false;
             _overlayFeedback.Text = string.Empty;
-            behavior.Children.Add(_popupTheme);
-            behavior.Children.Add(new TextBlock
+            themeGallery.Children.Add(_popupTheme);
+            themeGallery.Children.Add(new TextBlock
             {
                 Text = "Cars without an established year use Modern. Load and position the matching packaged layout once in Dash Studio.",
                 TextWrapping = TextWrapping.Wrap,
@@ -1144,8 +1210,18 @@ namespace AsDriven.Plugin
                 MaxWidth = 700,
             });
             _savePopupSettingsButton = CreatePrimaryButton("Save changes", 150, SaveClicked);
-            behavior.Children.Add(_savePopupSettingsButton);
-            panel.Children.Add(behavior);
+            _popupSettingsStatus = CreateFeedbackText(new Thickness(0, 8, 0, 10));
+            popup.Children.Add(_savePopupSettingsButton);
+            popup.Children.Add(_popupSettingsStatus);
+            var browseThemes = new Expander
+            {
+                Name = "BrowsePopupThemes",
+                Header = "Browse all popup themes",
+                IsExpanded = false,
+                Content = themeGallery,
+                Margin = new Thickness(0, 4, 0, 18),
+            };
+            panel.Children.Add(browseThemes);
             return panel;
         }
 
@@ -1169,6 +1245,8 @@ namespace AsDriven.Plugin
             };
             panel.Children.Add(_previewStatus);
 
+            panel.Children.Add(CreateHardwareProfilePanel());
+
             var filters = new WrapPanel { Margin = new Thickness(0, 0, 0, 10) };
             _catalogSearch = new TextBox
             {
@@ -1189,6 +1267,12 @@ namespace AsDriven.Plugin
             filters.Children.Add(_catalogDecade);
             filters.Children.Add(_catalogWheel);
             filters.Children.Add(_catalogShifter);
+            _catalogFavoritesButton = CreateSecondaryButton("Favorites", 94, CatalogFavoritesClicked);
+            _catalogRecentButton = CreateSecondaryButton("Recent", 82, CatalogRecentClicked);
+            _catalogUnresolvedButton = CreateSecondaryButton("Needs review", 112, CatalogUnresolvedClicked);
+            filters.Children.Add(_catalogFavoritesButton);
+            filters.Children.Add(_catalogRecentButton);
+            filters.Children.Add(_catalogUnresolvedButton);
             panel.Children.Add(filters);
 
             var workspace = new Grid
@@ -1212,7 +1296,7 @@ namespace AsDriven.Plugin
                 Name = "CatalogResults",
                 MinHeight = 330,
                 MaxHeight = 510,
-                DisplayMemberPath = "DisplayLabel",
+                ItemTemplate = CreateCatalogResultTemplate(),
             };
             _previewCar.SelectionChanged += CatalogSelectionChanged;
             browserList.Children.Add(_previewCar);
@@ -1242,6 +1326,13 @@ namespace AsDriven.Plugin
             };
             detail.Children.Add(_catalogDetailName);
             detail.Children.Add(_catalogDetailClass);
+            _hardwareFitStatus = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.82,
+                Margin = new Thickness(0, 0, 0, 12),
+            };
+            detail.Children.Add(_hardwareFitStatus);
 
             var fit = new Grid { Margin = new Thickness(0, 0, 0, 10) };
             fit.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(34) });
@@ -1297,6 +1388,12 @@ namespace AsDriven.Plugin
             detail.Children.Add(_catalogSummary);
             var actions = CreateActionRow(new Thickness(0, 2, 0, 0));
             actions.Children.Add(CreatePrimaryButton("Show selected overlay", 185, PreviewCarClicked));
+            _openCatalogRecordButton = CreateSecondaryButton(
+                "Open public car page", 155, OpenCatalogRecordClicked);
+            actions.Children.Add(_openCatalogRecordButton);
+            _toggleCatalogFavoriteButton = CreateSecondaryButton(
+                "Add favorite", 120, ToggleCatalogFavoriteClicked);
+            actions.Children.Add(_toggleCatalogFavoriteButton);
             _closePreviewButton = CreateSecondaryButton("Return to live car", 150, ReturnToLiveCarClicked);
             actions.Children.Add(_closePreviewButton);
             detail.Children.Add(actions);
@@ -1308,6 +1405,72 @@ namespace AsDriven.Plugin
             _browserFeedback = CreateFeedbackText(new Thickness(0, 0, 0, 8));
             panel.Children.Add(_browserFeedback);
             return panel;
+        }
+
+        private UIElement CreateHardwareProfilePanel()
+        {
+            HardwareProfile profile = _plugin.GetHardwareProfile();
+            var expander = new Expander
+            {
+                Header = "My hardware (stored on this PC)",
+                IsExpanded = false,
+                Margin = new Thickness(0, 0, 0, 12),
+            };
+            var content = new StackPanel { Margin = new Thickness(8, 8, 8, 4) };
+            content.Children.Add(new TextBlock
+            {
+                Text = "Declare what you own to compare it with selected guidance. This never changes the authentic car record.",
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.76,
+                Margin = new Thickness(0, 0, 0, 8),
+            });
+            var choices = new WrapPanel();
+            _hardwareRoundRim = CreateHardwareChoice("Round / D-shaped rim", profile.RoundRim);
+            _hardwareGtFormulaRim = CreateHardwareChoice("GT / Formula rim", profile.GtFormulaRim);
+            _hardwareHPattern = CreateHardwareChoice("H-pattern shifter", profile.HPattern);
+            _hardwareSequentialStick = CreateHardwareChoice("Sequential-stick shifter", profile.SequentialStick);
+            _hardwarePaddleShifters = CreateHardwareChoice("Paddle shifters", profile.PaddleShifters);
+            _hardwareClutchPedal = CreateHardwareChoice("Clutch pedal", profile.ClutchPedal);
+            choices.Children.Add(_hardwareRoundRim);
+            choices.Children.Add(_hardwareGtFormulaRim);
+            choices.Children.Add(_hardwareHPattern);
+            choices.Children.Add(_hardwareSequentialStick);
+            choices.Children.Add(_hardwarePaddleShifters);
+            choices.Children.Add(_hardwareClutchPedal);
+            content.Children.Add(choices);
+            content.Children.Add(CreateSecondaryButton("Save my hardware", 145, SaveHardwareProfileClicked));
+            expander.Content = content;
+            return expander;
+        }
+
+        private static CheckBox CreateHardwareChoice(string label, bool selected)
+        {
+            return new CheckBox
+            {
+                Content = label,
+                IsChecked = selected,
+                Margin = new Thickness(0, 0, 18, 8),
+                Padding = new Thickness(4),
+            };
+        }
+
+        private static DataTemplate CreateCatalogResultTemplate()
+        {
+            var stack = new FrameworkElementFactory(typeof(StackPanel));
+            stack.SetValue(StackPanel.MarginProperty, new Thickness(8, 5, 8, 5));
+            var name = new FrameworkElementFactory(typeof(TextBlock));
+            name.SetBinding(TextBlock.TextProperty, new Binding("BrowserName"));
+            name.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);
+            name.SetValue(TextBlock.MaxHeightProperty, 38.0);
+            name.SetValue(TextBlock.FontWeightProperty, FontWeights.SemiBold);
+            stack.AppendChild(name);
+            var subtitle = new FrameworkElementFactory(typeof(TextBlock));
+            subtitle.SetBinding(TextBlock.TextProperty, new Binding("BrowserSubtitle"));
+            subtitle.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);
+            subtitle.SetValue(TextBlock.OpacityProperty, 0.7);
+            subtitle.SetValue(TextBlock.FontSizeProperty, 11.0);
+            stack.AppendChild(subtitle);
+            return new DataTemplate { VisualTree = stack };
         }
 
         private ComboBox CreateCatalogFilter(string name, double width)
@@ -1465,7 +1628,7 @@ namespace AsDriven.Plugin
         private UIElement CreateAdvancedTab()
         {
             var panel = CreateTabPanel();
-            AddSectionHeading(panel, "Installed dataset");
+            AddSectionHeading(panel, "Installed versions");
             _installedDatasetStatus = new TextBlock
             {
                 FontSize = 16,
@@ -1489,7 +1652,7 @@ namespace AsDriven.Plugin
                 Opacity = 0.82,
                 MaxWidth = 860,
                 Margin = new Thickness(0, 0, 0, 18),
-                Text = "Not checked. As Driven has contacted nothing.",
+                Text = DescribeLastUpdateCheck(),
             };
             panel.Children.Add(_updateStatus);
 
@@ -1710,8 +1873,8 @@ namespace AsDriven.Plugin
             _showPopupButton.IsEnabled = _plugin.CanShowPopup;
             if (_installedDatasetStatus != null)
             {
-                _installedDatasetStatus.Text = "Dataset "
-                    + EmptyAsUnknown(_plugin.CurrentDatasetVersion)
+                _installedDatasetStatus.Text = "Plugin " + EmptyAsUnknown(_plugin.PluginVersion)
+                    + "  /  Dataset " + EmptyAsUnknown(_plugin.CurrentDatasetVersion)
                     + "  /  " + _plugin.DatabaseRecordCount + " car records";
             }
             if (_supportedSimulators != null)
@@ -1838,6 +2001,32 @@ namespace AsDriven.Plugin
                 _garageSummary.Text = string.Empty;
                 _garageSummary.Visibility = Visibility.Collapsed;
             }
+
+            // An empty Garage is an invitation to explore, not six copies of
+            // "Not available". Keep unavailable guidance visible for a live
+            // unmatched car, where that diagnosis is useful, but collapse it
+            // before any telemetry is present and give the user one honest
+            // path to a clearly-labelled catalog preview.
+            bool emptyGarage = !matched
+                && !_plugin.IsPreviewActive
+                && string.IsNullOrWhiteSpace(currentName);
+            _garageFitBand.Visibility = emptyGarage ? Visibility.Collapsed : Visibility.Visible;
+            _garageUseBand.Visibility = emptyGarage ? Visibility.Collapsed : Visibility.Visible;
+            _choosePreviewCarButton.Visibility = emptyGarage
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+            if (emptyGarage)
+            {
+                _garageSummary.Text =
+                    "Choose a catalog car to inspect its recorded controls. The preview is a sample, not live simulator telemetry.";
+                _garageSummary.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ChoosePreviewCarClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _tabs.SelectedIndex = 1;
+            _previewCar.Focus();
         }
 
         private void UpdatePopupPreview()
@@ -2009,6 +2198,7 @@ namespace AsDriven.Plugin
                 ? guidance.SimulatorLabel + " " + version + (variant.Compact
                     ? " - " + confidence
                     : " - Confidence: " + confidence)
+                    + "\n" + _plugin.EvidenceFreshness
                 : "Waiting for guidance";
             variant.Text["Dataset"].Text = "Dataset " + EmptyAsUnknown(_plugin.CurrentDatasetVersion);
             variant.Text["Evidence"].Foreground = palette.Muted;
@@ -2285,6 +2475,24 @@ namespace AsDriven.Plugin
             }
         }
 
+        private void CatalogFavoritesClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _catalogShortcutFilter = _catalogShortcutFilter == "favorites" ? string.Empty : "favorites";
+            ApplyCatalogFilters(string.Empty, string.Empty);
+        }
+
+        private void CatalogRecentClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _catalogShortcutFilter = _catalogShortcutFilter == "recent" ? string.Empty : "recent";
+            ApplyCatalogFilters(string.Empty, string.Empty);
+        }
+
+        private void CatalogUnresolvedClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _catalogShortcutFilter = _catalogShortcutFilter == "unresolved" ? string.Empty : "unresolved";
+            ApplyCatalogFilters(string.Empty, string.Empty);
+        }
+
         private void ApplyCatalogFilters(string selectedSimulator, string selectedRecord)
         {
             string search = (_catalogSearch == null ? string.Empty : _catalogSearch.Text).Trim();
@@ -2292,12 +2500,16 @@ namespace AsDriven.Plugin
             string decade = CatalogFilterValue(_catalogDecade);
             string wheel = CatalogFilterValue(_catalogWheel);
             string shifter = CatalogFilterValue(_catalogShifter);
+            _loadingCatalogResults = true;
             _previewCar.Items.Clear();
             CarCatalogEntry selected = null;
             foreach (CarCatalogEntry car in _plugin.PreviewCars)
             {
                 GuidanceSnapshot guidance = _plugin.ReadCatalogGuidance(car);
                 if (!guidance.HasMatch
+                    || (_catalogShortcutFilter == "favorites" && !_plugin.IsCatalogFavorite(car))
+                    || (_catalogShortcutFilter == "recent" && !_plugin.IsCatalogRecent(car))
+                    || (_catalogShortcutFilter == "unresolved" && !HasUnresolvedControl(guidance))
                     || (simulator.Length > 0 && car.Simulator != simulator)
                     || (decade.Length > 0 && CatalogDecade(guidance.YearFrom) != decade)
                     || (wheel.Length > 0 && guidance.WheelRimShape != wheel)
@@ -2315,9 +2527,12 @@ namespace AsDriven.Plugin
                     selected = car;
                 }
             }
-            _catalogCount.Text = _previewCar.Items.Count == 1
+            string count = _previewCar.Items.Count == 1
                 ? "1 curated car"
                 : _previewCar.Items.Count + " curated cars";
+            _catalogCount.Text = _catalogShortcutFilter == "unresolved"
+                ? count + " with an unresolved control"
+                : count;
             _previewCar.SelectedItem = selected;
             if (_previewCar.SelectedItem == null && _previewCar.Items.Count > 0)
             {
@@ -2327,11 +2542,18 @@ namespace AsDriven.Plugin
             {
                 UpdateCatalogDetail(null);
             }
+            _loadingCatalogResults = false;
+            UpdateCatalogShortcutButtons();
         }
 
         private void CatalogSelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
         {
-            UpdateCatalogDetail(_previewCar.SelectedItem as CarCatalogEntry);
+            CarCatalogEntry selected = _previewCar.SelectedItem as CarCatalogEntry;
+            if (!_loadingCatalogResults && selected != null)
+            {
+                _plugin.RememberCatalogCar(selected);
+            }
+            UpdateCatalogDetail(selected);
         }
 
         private void UpdateCatalogDetail(CarCatalogEntry car)
@@ -2346,6 +2568,7 @@ namespace AsDriven.Plugin
             _catalogDetailClass.Text = available
                 ? guidance.SimulatorLabel + (string.IsNullOrWhiteSpace(guidance.CarClass) ? string.Empty : " | " + guidance.CarClass)
                 : "Change or clear a filter to continue.";
+            UpdateHardwareFit(car);
             _catalogWheelValue.Text = available ? guidance.WheelRimLabel : "-";
             _catalogWheelDetail.Text = available ? guidance.WheelFeatureLabel : string.Empty;
             _catalogShifterValue.Text = available ? guidance.ShifterLabel : "-";
@@ -2361,6 +2584,11 @@ namespace AsDriven.Plugin
                     ? "No driver summary note is recorded for this car."
                     : "ⓘ  " + guidance.DriverSummary)
                 : string.Empty;
+            _openCatalogRecordButton.IsEnabled = available;
+            _toggleCatalogFavoriteButton.IsEnabled = available;
+            _toggleCatalogFavoriteButton.Content = available && _plugin.IsCatalogFavorite(car)
+                ? "Remove favorite"
+                : "Add favorite";
 
             _catalogFitPanel.Background = palette.Panel;
             _catalogFitPanel.BorderBrush = palette.Rule;
@@ -2464,6 +2692,120 @@ namespace AsDriven.Plugin
             SelectChoice(filter, selectedValue, 0);
         }
 
+        private static bool HasUnresolvedControl(GuidanceSnapshot guidance)
+        {
+            return guidance.WheelRimShape == "unknown"
+                || guidance.ShiftActuation == "unknown"
+                || guidance.GearCount <= 0
+                || guidance.StandingStartClutch == "unknown"
+                || guidance.UpshiftClutch == "unknown"
+                || guidance.DownshiftClutch == "unknown"
+                || guidance.ThrottleLift == "unknown"
+                || guidance.ManualBlip == "unknown"
+                || guidance.AutoBlip == "unknown";
+        }
+
+        private void ToggleCatalogFavoriteClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            CarCatalogEntry selected = _previewCar.SelectedItem as CarCatalogEntry;
+            if (selected == null)
+            {
+                return;
+            }
+            bool wasFavorite = _plugin.IsCatalogFavorite(selected);
+            _plugin.ToggleCatalogFavorite(selected);
+            UpdateCatalogDetail(selected);
+            UpdateCatalogShortcutButtons();
+            SetBrowserFeedback(
+                wasFavorite ? "Removed from favorites." : "Saved to favorites on this PC.",
+                Brushes.LightGreen);
+        }
+
+        private void SaveHardwareProfileClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            _plugin.SaveHardwareProfile(new HardwareProfile
+            {
+                RoundRim = _hardwareRoundRim.IsChecked == true,
+                GtFormulaRim = _hardwareGtFormulaRim.IsChecked == true,
+                HPattern = _hardwareHPattern.IsChecked == true,
+                SequentialStick = _hardwareSequentialStick.IsChecked == true,
+                PaddleShifters = _hardwarePaddleShifters.IsChecked == true,
+                ClutchPedal = _hardwareClutchPedal.IsChecked == true,
+            });
+            UpdateHardwareFit(_previewCar.SelectedItem as CarCatalogEntry);
+            SetBrowserFeedback("Saved your local hardware profile.", Brushes.LightGreen);
+        }
+
+        private void UpdateHardwareFit(CarCatalogEntry car)
+        {
+            if (_hardwareFitStatus == null)
+            {
+                return;
+            }
+            HardwareProfile profile = _plugin.GetHardwareProfile();
+            GuidanceSnapshot guidance = _plugin.ReadCatalogGuidance(car);
+            if (!profile.Configured)
+            {
+                _hardwareFitStatus.Text = "My hardware: not configured.";
+                return;
+            }
+            if (car == null || !guidance.HasMatch)
+            {
+                _hardwareFitStatus.Text = "My hardware: choose a car to compare.";
+                return;
+            }
+            var missing = new List<string>();
+            if ((guidance.WheelRimShape == "round" || guidance.WheelRimShape == "d-shaped")
+                && !profile.RoundRim)
+            {
+                missing.Add("round / D-shaped rim");
+            }
+            if ((guidance.WheelRimShape == "gt-formula" || guidance.WheelRimShape == "yoke")
+                && !profile.GtFormulaRim)
+            {
+                missing.Add("GT / Formula rim");
+            }
+            if (guidance.ShiftActuation == "h-pattern" && !profile.HPattern)
+            {
+                missing.Add("H-pattern shifter");
+            }
+            if (guidance.ShiftActuation == "sequential-stick" && !profile.SequentialStick)
+            {
+                missing.Add("sequential-stick shifter");
+            }
+            if (guidance.ShiftActuation == "sequential-paddles" && !profile.PaddleShifters)
+            {
+                missing.Add("paddle shifters");
+            }
+            if ((guidance.StandingStartClutch == "required"
+                    || guidance.UpshiftClutch == "required"
+                    || guidance.DownshiftClutch == "required")
+                && !profile.ClutchPedal)
+            {
+                missing.Add("clutch pedal");
+            }
+            _hardwareFitStatus.Text = missing.Count == 0
+                ? "My hardware: covers the established controls for this guidance."
+                : "My hardware: you may need " + string.Join(", ", missing.ToArray()) + ".";
+        }
+
+        private void UpdateCatalogShortcutButtons()
+        {
+            if (_catalogFavoritesButton == null || _catalogRecentButton == null || _catalogUnresolvedButton == null)
+            {
+                return;
+            }
+            _catalogFavoritesButton.Content = _catalogShortcutFilter == "favorites"
+                ? "All cars"
+                : "Favorites";
+            _catalogRecentButton.Content = _catalogShortcutFilter == "recent"
+                ? "All cars"
+                : "Recent";
+            _catalogUnresolvedButton.Content = _catalogShortcutFilter == "unresolved"
+                ? "All cars"
+                : "Needs review";
+        }
+
         private void PreviewCarClicked(object sender, RoutedEventArgs eventArgs)
         {
             CarCatalogEntry selected = _previewCar.SelectedItem as CarCatalogEntry;
@@ -2541,6 +2883,7 @@ namespace AsDriven.Plugin
             {
                 SetOverlayFeedback("Unsaved popup changes.", Brushes.Goldenrod);
             }
+            SetFeedback(_popupSettingsStatus, "Unsaved popup changes.", Brushes.Goldenrod);
             UpdatePopupSettingsState();
         }
 
@@ -2568,6 +2911,11 @@ namespace AsDriven.Plugin
             SetOverlayFeedback(
                 "Saved. New car changes use the " + popupSize + " popup with "
                     + popupTheme + " theme selection for " + seconds + " seconds.",
+                Brushes.LightGreen);
+            SetFeedback(
+                _popupSettingsStatus,
+                "Changes saved. New car changes use the " + popupSize + " popup for "
+                    + seconds + " seconds.",
                 Brushes.LightGreen);
         }
 
@@ -2646,12 +2994,40 @@ namespace AsDriven.Plugin
                 UpdateAvailability result = UpdateCheck.Fetch(endpoint, dataset, plugin);
                 Dispatcher.BeginInvoke(new Action(delegate()
                 {
-                    _updateStatus.Text = result.Summary(dataset, plugin);
+                    string summary = result.Summary(dataset, plugin);
+                    _plugin.SaveUpdateCheckResult(summary);
+                    _updateStatus.Text = DescribeLastUpdateCheck();
                     _checkUpdatesButton.IsEnabled = true;
                 }));
             });
             worker.IsBackground = true;
             worker.Start();
+        }
+
+        private void OpenCatalogRecordClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            try
+            {
+                _plugin.OpenCatalogRecord(_previewCar.SelectedItem as CarCatalogEntry);
+                SetBrowserFeedback("Opened the selected car on the public controls database.", Brushes.LightGreen);
+            }
+            catch (Exception exception)
+            {
+                SetBrowserFeedback("Could not open record details: " + exception.Message, Brushes.IndianRed);
+            }
+        }
+
+        private string DescribeLastUpdateCheck()
+        {
+            string summary = _plugin.LastUpdateCheckSummary;
+            if (string.IsNullOrWhiteSpace(summary))
+            {
+                return "Not checked. As Driven has contacted nothing.";
+            }
+            string checkedAt = _plugin.LastUpdateCheckUtc;
+            return string.IsNullOrWhiteSpace(checkedAt)
+                ? "Last manual check: " + summary
+                : "Last manual check (" + checkedAt + "): " + summary;
         }
 
         private void SetAdvancedFeedback(string message, Brush foreground)

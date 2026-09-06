@@ -17,6 +17,20 @@ namespace AsDriven.Plugin
         }
     }
 
+    /// <summary>Driver-declared equipment, kept local and separate from car evidence.</summary>
+    public sealed class HardwareProfile
+    {
+        public bool Configured { get; set; }
+        public bool RoundRim { get; set; }
+        public bool GtFormulaRim { get; set; }
+        public bool HPattern { get; set; }
+        /// <summary>Legacy combined selection, retained only to migrate saved settings.</summary>
+        public bool Sequential { get; set; }
+        public bool SequentialStick { get; set; }
+        public bool PaddleShifters { get; set; }
+        public bool ClutchPedal { get; set; }
+    }
+
     public sealed class AsDrivenSettings
     {
         public double PopupDurationSeconds { get; set; }
@@ -43,7 +57,14 @@ namespace AsDriven.Plugin
             "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json";
 
         public string UpdateCheckUrl { get; set; }
+        public string LastUpdateCheckSummary { get; set; }
+        public string LastUpdateCheckUtc { get; set; }
+        public List<string> FavoriteCatalogCars { get; set; }
+        public List<string> RecentCatalogCars { get; set; }
+        public HardwareProfile MyHardware { get; set; }
         public Dictionary<string, VerificationAssistProfile> VerificationAssistProfiles { get; set; }
+        /// <summary>Observed physical inputs for the four guided-drive actions.</summary>
+        public Dictionary<string, string> GuidedDriveBindings { get; set; }
 
         public AsDrivenSettings()
         {
@@ -52,7 +73,13 @@ namespace AsDriven.Plugin
             PopupTheme = "auto";
             VerificationObserver = string.Empty;
             UpdateCheckUrl = DefaultUpdateCheckUrl;
+            LastUpdateCheckSummary = string.Empty;
+            LastUpdateCheckUtc = string.Empty;
+            FavoriteCatalogCars = new List<string>();
+            RecentCatalogCars = new List<string>();
+            MyHardware = new HardwareProfile();
             VerificationAssistProfiles = new Dictionary<string, VerificationAssistProfile>();
+            GuidedDriveBindings = new Dictionary<string, string>();
         }
     }
 }
