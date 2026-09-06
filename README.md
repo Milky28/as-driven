@@ -14,6 +14,22 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
+## What's new in 0.21.3
+
+- **Clearer guided drives.** A narrower overlay gives prompts and longer status
+  messages more room, shows your progress, and keeps the continue, retry, skip,
+  and cancel button labels visible.
+- **Open a car's public controls page from SimHub.** Select a car in the car
+  browser and choose **Open public car page**.
+- **Easier online browsing.** The public catalog has clearer simulator filters,
+  keyboard navigation, and improved layouts on smaller screens.
+- **More Project Motor Racing coverage.** New reviewed entries cover the
+  Chaparral 2F, Zakspeed Capri, and Porsche 911 Carrera 2 Cup (964).
+
+This release includes dataset 0.5.49 with 285 reviewed car records across eight
+simulators, plus reliability improvements. See the
+[release notes](https://github.com/Milky28/as-driven/releases/tag/v0.21.3).
+
 ## What it tells you
 
 <img src="docs/images/preflight-card.png" width="720" alt="As Driven pre-flight card for the Audi V8 quattro DTM">
@@ -58,13 +74,17 @@ Each field is drawn from a fixed vocabulary:
 
 ## In the plugin
 
-The Garage tab mirrors the live car and previews the popup, with the size, theme
-and duration it will use:
+The Garage tab mirrors the live car and previews the popup. Choose its size,
+theme, and duration, then save your changes. Themes can follow the car's era or
+use your chosen style:
 
 <img src="docs/images/settings-garage.png" width="900" alt="The plugin's Garage tab">
 
 The car browser reads the whole curated database offline, without starting a
-simulator, and filters by simulator, era, wheel, or shifter:
+simulator, and filters by simulator, era, wheel, or shifter. Save your hardware
+to compare it with a car's guidance, revisit Favorites and Recent cars, or open
+the selected car's public controls page. Browsing leaves the live car and popup
+alone until you choose **Show selected overlay**:
 
 <img src="docs/images/settings-browser.png" width="900" alt="The plugin's car browser">
 
@@ -85,9 +105,10 @@ Full details, checksum verification, rollback, and removal are in
 [docs/install.md](docs/install.md).
 
 The plugin works offline. It has no analytics, no account, and no background
-update check. Its one network feature is a "Check for updates" button that
-contacts nothing until you press it, and downloads nothing when you do. See
-[PRIVACY.md](PRIVACY.md).
+update check. **Check for updates** contacts the update service only when you
+press it and does not download or install packages. Opening a public car page
+or contribution form launches your browser; contribution drafts stay local
+until you choose to share them. See [PRIVACY.md](PRIVACY.md).
 
 ## What it covers
 
@@ -107,7 +128,8 @@ Dataset 0.5.49 contains 285 reviewed car records.
 <!-- release-facts:end -->
 
 Coverage is deepest in Automobilista 2, which is where the work started. The
-other simulators carry reviewed entries rather than complete rosters.
+other simulators carry reviewed entries rather than complete rosters. A car can
+be reviewed in more than one simulator, so the simulator counts overlap.
 
 Matching is exact and case-sensitive. A car the database has not reviewed is
 reported as unmatched rather than given a guess, because a confident wrong
@@ -157,7 +179,13 @@ drive that produces a structured draft - **Contribute a simulator observation**
 in the plugin's settings. It prompts one test at a time in the car and records
 what the simulator actually did:
 
-<img src="docs/images/guided-drive.jpg" width="900" alt="The guided verification overlay prompting a lifted-throttle upshift">
+<img src="docs/images/guided-drive.jpg" width="900" alt="The guided-drive overlay prompting a full-throttle upshift, with progress markers and persistent control labels">
+
+The overlay shows your current step and mapped buttons for continuing, retrying,
+skipping, or ending the drive. The workflow supports Project Motor Racing and
+GTR2 alongside the other registered simulators. You can also
+[propose a correction to an existing car](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml)
+without recording another drive.
 
 Nothing is uploaded automatically; the draft stays on your PC until you choose to
 attach it to a submission.
