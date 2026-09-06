@@ -1698,7 +1698,8 @@ TEMPLATE = """<!doctype html>
   --driver-bg: #fff0da;
   --car: #1f614d;
   --car-bg: #def0e8;
-  --optional: #645092;
+  --optional: #51377d;
+  --optional-bg: #f1eafd;
   --focus: #1f5fa8;
 }}
 @media (prefers-color-scheme: dark) {{
@@ -1717,7 +1718,8 @@ TEMPLATE = """<!doctype html>
     --driver-bg: #49351b;
     --car: #9cdfc4;
     --car-bg: #1b3c31;
-    --optional: #d3c0f3;
+    --optional: #e3d6ff;
+    --optional-bg: #3d2864;
     --focus: #6fa8e8;
   }}
 }}
@@ -1736,7 +1738,8 @@ TEMPLATE = """<!doctype html>
   --driver-bg: #49351b;
   --car: #9cdfc4;
   --car-bg: #1b3c31;
-  --optional: #d3c0f3;
+  --optional: #e3d6ff;
+  --optional-bg: #3d2864;
   --focus: #6fa8e8;
 }}
 * {{ box-sizing: border-box; }}
@@ -2012,19 +2015,19 @@ tr.car td:nth-child(4) {{ border-left: 1px solid var(--line); }}
   font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   font-size: 14px; line-height: 1.45; overflow-wrap: anywhere;
 }}
-/* The fill carries the meaning: something is being asked of somebody. Amber is
-   asked of the driver, teal is handled by the car, and the two hollow states are
-   asked of nobody - which is why neither of them is filled. */
+/* The fill carries the meaning: something is settled. Amber is asked of the
+   driver, teal is handled by the car, and violet is an explicit choice. Only an
+   evidence gap stays hollow. */
 .tone-you {{ background: var(--driver-bg); color: var(--driver); font-weight: 500; }}
 .tone-car {{ background: var(--car-bg); color: var(--car); }}
-/* Optional is a decided fact, not a demand and not a gap. Its own hue keeps it
-   off the amber it used to sit beside, where two warm fills read alike. */
+/* Optional is a decided fact, not a demand and not a gap. Its saturated violet
+   fill makes it immediately distinct from the surrounding neutral surfaces. */
 .tone-optional {{
-  background: none; color: var(--optional);
-  border: 1px solid currentColor; padding: 2px 8px;
+  background: var(--optional-bg); color: var(--optional);
+  border: 1px solid var(--optional); padding: 2px 8px; font-weight: 500;
 }}
-/* A gap in the evidence must never read as a state the car handles. Dotted,
-   and in the neutral, so it separates from the optional outline too. */
+/* A gap in the evidence must never read as a settled state. Dotted and neutral,
+   it stays distinct from the optional fill. */
 .tone-unknown {{
   background: none; color: var(--faint);
   border: 1px dotted currentColor; padding: 2px 8px;
