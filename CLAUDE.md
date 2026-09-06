@@ -211,7 +211,7 @@ auditable evidence, and the history is where corrections are visible.
 
 - **Work on `main`**, the only branch, the default, and what a visitor sees.
 - The repository is **public**, and 0.21.0 is published as the latest release.
-- Client: 0.21.2 locally; 0.21.0 is the published release.
+- Client: 0.21.3 locally; 0.21.2 is the published release.
 - Dataset: 0.5.49 with 285 curated records, and 0.5.37 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.

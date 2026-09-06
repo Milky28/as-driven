@@ -5,6 +5,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
+$windowsPowerShell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+function Get-ReleaseSha256([string]$Path) {
+    $stream = [System.IO.File]::OpenRead($Path)
+    $hash = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return ([System.BitConverter]::ToString($hash.ComputeHash($stream))).Replace("-", "").ToLowerInvariant()
+    }
+    finally {
+        $hash.Dispose()
+        $stream.Dispose()
+    }
+}
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path $repositoryRoot "dist\database"
 }
@@ -53,7 +65,7 @@ try {
         ForEach-Object {
             [ordered]@{
                 path = $_.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
-                sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+                sha256 = Get-ReleaseSha256 $_.FullName
                 bytes = $_.Length
             }
         }
@@ -73,10 +85,10 @@ try {
         Remove-Item -LiteralPath $zipPath -Force
     }
     Compress-Archive -LiteralPath $packageRoot -DestinationPath $zipPath -CompressionLevel Optimal
-    $zipHash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    $zipHash = Get-ReleaseSha256 $zipPath
     "$zipHash  $([System.IO.Path]::GetFileName($zipPath))" |
         Set-Content -LiteralPath "$zipPath.sha256" -Encoding ASCII
-    & powershell -NoProfile -ExecutionPolicy Bypass -File `
+    & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
         (Join-Path $PSScriptRoot "test-install-database.ps1") -PackagePath $zipPath
     if ($LASTEXITCODE -ne 0) {
         throw "Database-only installer test failed."

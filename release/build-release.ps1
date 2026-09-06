@@ -5,6 +5,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
+$windowsPowerShell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+function Get-ReleaseSha256([string]$Path) {
+    $stream = [System.IO.File]::OpenRead($Path)
+    $hash = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return ([System.BitConverter]::ToString($hash.ComputeHash($stream))).Replace("-", "").ToLowerInvariant()
+    }
+    finally {
+        $hash.Dispose()
+        $stream.Dispose()
+    }
+}
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path $repositoryRoot "dist\release"
 }
@@ -26,7 +38,7 @@ finally {
     Pop-Location
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File `
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
     (Join-Path $repositoryRoot "simhub\build.ps1") `
     -Configuration Release `
     -SimHubInstallPath $SimHubInstallPath
@@ -34,13 +46,13 @@ if ($LASTEXITCODE -ne 0) {
     throw "The SimHub release build failed."
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File `
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
     (Join-Path $repositoryRoot "simhub\test-uninstall.ps1")
 if ($LASTEXITCODE -ne 0) {
     throw "The SimHub uninstaller test failed."
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File `
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
     (Join-Path $PSScriptRoot "build-database.ps1") `
     -OutputDirectory $outputRoot `
     -SkipChecks
@@ -120,7 +132,7 @@ try {
         ForEach-Object {
             [ordered]@{
                 path = $_.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
-                sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+                sha256 = Get-ReleaseSha256 $_.FullName
                 bytes = $_.Length
             }
         }
@@ -132,11 +144,11 @@ try {
         Remove-Item -LiteralPath $zipPath -Force
     }
     Compress-Archive -LiteralPath $packageRoot -DestinationPath $zipPath -CompressionLevel Optimal
-    $zipHash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    $zipHash = Get-ReleaseSha256 $zipPath
     "$zipHash  $([System.IO.Path]::GetFileName($zipPath))" |
         Set-Content -LiteralPath "$zipPath.sha256" -Encoding ASCII
 
-    & powershell -NoProfile -ExecutionPolicy Bypass -File `
+    & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
         (Join-Path $PSScriptRoot "test-release-package.ps1") `
         -PackagePath $zipPath
     if ($LASTEXITCODE -ne 0) {
@@ -165,8 +177,7 @@ try {
         plugin_package = [System.IO.Path]::GetFileName($zipPath)
         plugin_sha256 = $zipHash
         database_package = "as-driven-db-$datasetVersion.zip"
-        database_sha256 = (Get-FileHash -LiteralPath (
-            Join-Path $outputRoot "as-driven-db-$datasetVersion.zip") -Algorithm SHA256).Hash.ToLowerInvariant()
+        database_sha256 = Get-ReleaseSha256 (Join-Path $outputRoot "as-driven-db-$datasetVersion.zip")
         tested_simhub_version = "9.11.22"
         tested_ams2_version = "1.6.9.91"
         release_notes = $releaseNotesName

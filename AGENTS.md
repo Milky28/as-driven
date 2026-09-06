@@ -78,7 +78,7 @@ than silently queueing verification work.
 
 - Work on `main`, the only branch, tracking `origin/main` at
   `github.com/Milky28/as-driven`.
-- Client: 0.21.2 locally; 0.21.0 is the published release.
+- Client: 0.21.3 locally; 0.21.2 is the published release.
 - Dataset: 0.5.49 with 285 curated records, and 0.5.37 is installed.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The history was rewritten on 2026-08-29. An older clone must re-clone rather

@@ -6,6 +6,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
+$windowsPowerShell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
 if ([string]::IsNullOrWhiteSpace($ArtifactsDirectory)) {
     $ArtifactsDirectory = Join-Path $repositoryRoot "dist\release"
 }
@@ -68,13 +69,13 @@ if ((Get-Content -LiteralPath $releaseNotes -Raw) -match '\{\{[A-Z_]+\}\}') {
     throw "The generated release notes still contain an unresolved template value."
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File `
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
     (Join-Path $PSScriptRoot "test-release-package.ps1") `
     -PackagePath $pluginPackage
 if ($LASTEXITCODE -ne 0) {
     throw "The SimHub release package failed its final verification."
 }
-& powershell -NoProfile -ExecutionPolicy Bypass -File `
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File `
     (Join-Path $PSScriptRoot "test-install-database.ps1") `
     -PackagePath $databasePackage
 if ($LASTEXITCODE -ne 0) {

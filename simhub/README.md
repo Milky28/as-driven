@@ -256,8 +256,8 @@ files, so an installation that already has a customized layout keeps it.
 
 ## Certified boundary and development coverage
 
-Client version 0.21.2 is built against the SimHub 9.11.22 SDK and packages
-dataset 0.5.37. The tested target is AMS2 1.6.9.91 on Windows.
+Client version 0.21.3 is built against the SimHub 9.11.22 SDK and packages
+dataset 0.5.49. The tested target is AMS2 1.6.9.91 on Windows.
 The client also recognizes Assetto Corsa EVO, Assetto Corsa, Project Motor
 Racing, and GTR2 for active development. Assetto Corsa Competizione has 18
 reviewed entries, each captured with its exact Steam content build. PMR uses
