@@ -72,7 +72,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Register of homologated safety cages, not of vehicles. Page 2 (\"Pagina 2 di 6\") carries the row \"27-CS | 10-06-1996 | Lamborghini | / | LAMBORGHINI DIABLO SV-R\", where the \"/\" in the \"FIA-CSAI Hom. Form N°\" column is an explicit absent vehicle-form number rather than an unfilled field. The register has no gearbox, synchroniser or technique columns at all. Together with the absence of any FIA HistoricDB vehicle form for the SV-R, it establishes that the car was not homologated as a vehicle, which is the expected position for a one-make series car."
+      "notes": "Register of homologated safety cages, not of vehicles. Page 2 (\"Pagina 2 di 6\") carries the row \"27-CS | 10-06-1996 | Lamborghini | / | LAMBORGHINI DIABLO SV-R\", where the \"/\" in the \"FIA-CSAI Hom. Form N°\" column is an explicit absent vehicle-form number rather than an unfilled field. The register has no gearbox, synchroniser or technique columns at all. Together with the absence of any FIA HistoricDB vehicle form for the SV-R, it establishes that the car was not homologated as a vehicle, which is the expected position for a one-make series car.",
+      "establishes": "nothing"
     },
     {
       "source_id": "albins.st6-sequential-transaxle",
@@ -3515,7 +3516,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Second launch account of the same car, also naming the F-Inter MG-15 and Minelli Racing. It conflicts with the first on ratio count, describing a \"caixa de câmbio nacional com 4 marchas em 'h'\" where the other says five. No source found explains the difference, which may be a prototype or a specification change. It carries no construction wording either. The conflict must not be used to infer synchronisers or dogs in either direction."
+      "notes": "Second launch account of the same car, also naming the F-Inter MG-15 and Minelli Racing. It conflicts with the first on ratio count, describing a \"caixa de câmbio nacional com 4 marchas em 'h'\" where the other says five. No source found explains the difference, which may be a prototype or a specification change. It carries no construction wording either. The conflict must not be used to infer synchronisers or dogs in either direction.",
+      "establishes": "nothing"
     },
     {
       "source_id": "autosport.1962-12-21.lotus-23-road-test",
@@ -3527,7 +3529,8 @@
       "published_or_updated_at": "1962-12-21",
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Period test of an as-raced Type 23, page 844. Identifies that car's gearbox as a four-speed Renault and contrasts it with the five-speed Hewland it describes as now fitted as standard. Establishes that the Type 23 was offered with gearboxes of different construction rather than one family, and that both a four-speed and a five-speed were in use in period."
+      "notes": "Period test of an as-raced Type 23, page 844. Identifies that car's gearbox as a four-speed Renault and contrasts it with the five-speed Hewland it describes as now fitted as standard. Establishes that the Type 23 was offered with gearboxes of different construction rather than one family, and that both a four-speed and a five-speed were in use in period.",
+      "establishes": "nothing"
     },
     {
       "source_id": "blogdocarelli.copa-uno-1992",
@@ -3878,7 +3881,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Confirms Fórmula Inter ran under FASP's Paulista championship: page 38 carries \"ANEXO 5 - FÓRMULA INTER\". The complete annex is a \"Tabela de Pontuação\" and nothing else. It has no gearbox article, no prescribed, sealed or free rule, no ratio count, no donor unit and no synchroniser or dog field; those items are absent rather than negatively marked. This is a sporting regulation, not a technical one, and no published CBA, FASP or promoter technical regulation governing the 2015-2023 MG-15's gearbox was located."
+      "notes": "Confirms Fórmula Inter ran under FASP's Paulista championship: page 38 carries \"ANEXO 5 - FÓRMULA INTER\". The complete annex is a \"Tabela de Pontuação\" and nothing else. It has no gearbox article, no prescribed, sealed or free rule, no ratio count, no donor unit and no synchroniser or dog field; those items are absent rather than negatively marked. This is a sporting regulation, not a technical one, and no published CBA, FASP or promoter technical regulation governing the 2015-2023 MG-15's gearbox was located.",
+      "establishes": "nothing"
     },
     {
       "source_id": "ferrari.575-gtc",
@@ -3902,7 +3906,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Official series regulations, consulted through a third-party host. Article 8.1 requires a casing from the car or engine maker but allows it to be freely reworked and states the gears themselves are free - \"Carcaca da marca do veiculo ou do fabricante do motor com livre retrabalho. Engrenagens: livres\" - and 8.2 frees the differential. Category B also permits a more modern gearbox matched to the engine used. The category therefore does not preserve a car's original internals, so a car raced in it is no evidence of the road car's construction."
+      "notes": "Official series regulations, consulted through a third-party host. Article 8.1 requires a casing from the car or engine maker but allows it to be freely reworked and states the gears themselves are free - \"Carcaca da marca do veiculo ou do fabricante do motor com livre retrabalho. Engrenagens: livres\" - and 8.2 frees the differential. Category B also permits a more modern gearbox matched to the engine used. The category therefore does not preserve a car's original internals, so a car raced in it is no evidence of the road car's construction.",
+      "establishes": "nothing"
     },
     {
       "source_id": "fia.audi-v8-quattro.homologation",
@@ -3926,7 +3931,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-19",
       "reuse_status": "facts-only-review",
-      "notes": "Homologated 2 December 1980, the M1's own Group 4 form and the one contemporary with the Procar series. Page 5 lists a ZF manual five-speed and two further five-speed ratio sets. It predates the article 603 layout and uses articles 92, 93 and 96 instead, which carry no synchroniser field at all, so the form is silent on construction rather than negative. It draws no gear-change gate. Neither of its two extensions carries a gearbox ratio table."
+      "notes": "Homologated 2 December 1980, the M1's own Group 4 form and the one contemporary with the Procar series. Page 5 lists a ZF manual five-speed and two further five-speed ratio sets. It predates the article 603 layout and uses articles 92, 93 and 96 instead, which carry no synchroniser field at all, so the form is silent on construction rather than negative. It draws no gear-change gate. Neither of its two extensions carries a gearbox ratio table.",
+      "establishes": "nothing"
     },
     {
       "source_id": "fia.bmw-m1.b-240",
@@ -3962,7 +3968,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Homologated 2 June 1971, contemporary with the 1971 Corvette AMS2 models. Page 9 records four forward ratios and states verbatim \"Synchronised forward ratios: all four\". Across the FIA's Corvette forms no four-speed is marked non-synchronised: 1966 form 523 and 1968 form 583 also state four synchronised ratios, while the 1962 and 1965 forms carry four-speed tables with no synchroniser field at all and are silent rather than negative."
+      "notes": "Homologated 2 June 1971, contemporary with the 1971 Corvette AMS2 models. Page 9 records four forward ratios and states verbatim \"Synchronised forward ratios: all four\". Across the FIA's Corvette forms no four-speed is marked non-synchronised: 1966 form 523 and 1968 form 583 also state four synchronised ratios, while the 1962 and 1965 forms carry four-speed tables with no synchroniser field at all and are silent rather than negative.",
+      "establishes": "nothing"
     },
     {
       "source_id": "fia.corvette.b-260.homologation",
@@ -4167,7 +4174,8 @@
       "published_or_updated_at": "2026-06-22",
       "retrieved_at": "2026-08-09",
       "reuse_status": "facts-only-review",
-      "notes": "Official article used as the design target for the iRacing staging importer. No iRacing records are promoted in dataset 0.1.0."
+      "notes": "Official article used as the design target for the iRacing staging importer. No iRacing records are promoted in dataset 0.1.0.",
+      "establishes": "nothing"
     },
     {
       "source_id": "lambocars.diablo-sv-r-specs",
@@ -4395,7 +4403,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-21",
       "reuse_status": "facts-only-review",
-      "notes": "Manthey's own brochure for the 981-based MR, consulted through a third-party host. Printed pages 6-9 itemise the MR vehicle and the retrofit kit: two-way racing suspension, adjustable front anti-roll bar, larger rear wing with reinforced adjustable supports, driveshaft spacer, brake-balance adjustment, carbon bonnet and doors, polycarbonate glazing, a 100-litre fuel system with rapid filling, a steering-wheel hub extension with additional wheel controls, a CAN gateway and data-logger interface, safety equipment, and an optional lightweight battery. The list contains no engine or gearbox modification, and Manthey's technical manual for the same car has no engine or gearbox conversion section - but neither states in words that the powertrain is unchanged. The kit does add controls to the wheel, which is why the rim's fittings are read from the homologation photograph of this exact car rather than from the base Clubsport."
+      "notes": "Manthey's own brochure for the 981-based MR, consulted through a third-party host. Printed pages 6-9 itemise the MR vehicle and the retrofit kit: two-way racing suspension, adjustable front anti-roll bar, larger rear wing with reinforced adjustable supports, driveshaft spacer, brake-balance adjustment, carbon bonnet and doors, polycarbonate glazing, a 100-litre fuel system with rapid filling, a steering-wheel hub extension with additional wheel controls, a CAN gateway and data-logger interface, safety equipment, and an optional lightweight battery. The list contains no engine or gearbox modification, and Manthey's technical manual for the same car has no engine or gearbox conversion section - but neither states in words that the powertrain is unchanged. The kit does add controls to the wheel, which is why the rim's fittings are read from the homologation photograph of this exact car rather than from the base Clubsport.",
+      "establishes": "nothing"
     },
     {
       "source_id": "maserati.gransport.brochure",
@@ -5429,7 +5438,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-20",
       "reuse_status": "facts-only-review",
-      "notes": "Describes the contemporary road Diablo SV as a \"gated manual dog-leg five-speed\". Establishes that the dogleg gate was the road car's own and not a racing modification, which removes the contrast the SV-R's gate was thought to draw. Says nothing about synchronisers or dog engagement."
+      "notes": "Describes the contemporary road Diablo SV as a \"gated manual dog-leg five-speed\". Establishes that the dogleg gate was the road car's own and not a racing modification, which removes the contrast the SV-R's gate was thought to draw. Says nothing about synchronisers or dog engagement.",
+      "establishes": "nothing"
     },
     {
       "source_id": "wikipedia-pt.copa-chevrolet-montana",
@@ -5969,7 +5979,8 @@
       "published_or_updated_at": null,
       "retrieved_at": "2026-08-13",
       "reuse_status": "facts-only-review",
-      "notes": "Secondary reference for the 911 GT1-98: carbon monocoque, water-cooled 3.2 litre flat six derived from the 962, and a new six-speed sequential gearbox fitted for 1998 to reduce shift time."
+      "notes": "Secondary reference for the 911 GT1-98: carbon monocoque, water-cooled 3.2 litre flat six derived from the 962, and a new six-speed sequential gearbox fitted for 1998 to reduce shift time.",
+      "establishes": "nothing"
     },
     {
       "source_id": "porsche.museum.911-gt1-98.datasheet",
@@ -9929,7 +9940,8 @@
       "source_type": "secondary",
       "retrieved_at": "2026-09-04",
       "reuse_status": "facts-only-review",
-      "notes": "Exact scope: Retrospective exact-chassis register entry identifying SE071-004 as an Alfa Romeo 156 built by Nordauto in 1998 and raced by Nicola Larini in the 1998 Campionato Italiano Superturismo. It does not document controls or cockpit technique. Vehicle details table: “Chassis No SE071-004; Built By Nordauto; Date Built 1998” Reviewed for /identity/real_world_identity_notes. Retrospective exact-car provenance lead. Its value here is identity and period context; the available record and linked images do not establish the unresolved control fields."
+      "notes": "Exact scope: Retrospective exact-chassis register entry identifying SE071-004 as an Alfa Romeo 156 built by Nordauto in 1998 and raced by Nicola Larini in the 1998 Campionato Italiano Superturismo. It does not document controls or cockpit technique. Vehicle details table: “Chassis No SE071-004; Built By Nordauto; Date Built 1998” Reviewed for /identity/real_world_identity_notes. Retrospective exact-car provenance lead. Its value here is identity and period context; the available record and linked images do not establish the unresolved control fields.",
+      "establishes": "nothing"
     },
     {
       "source_id": "super-touring-register.photo.5969",
@@ -9939,7 +9951,8 @@
       "source_type": "secondary",
       "retrieved_at": "2026-09-04",
       "reuse_status": "facts-only-review",
-      "notes": "Exact scope: Period race photograph associated with the exact SE071-004 chassis. The available image is an exterior view and does not show the cockpit, steering wheel, shift lever, pedals, or driver technique. Photograph caption and image: “Vehicle: Alfa Romeo 156 SE071-004; Series: 1998 Campionato Italiano Superturismo” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Period exact-chassis image, but its exterior-only framing is a limitation rather than evidence that any cockpit feature was absent."
+      "notes": "Exact scope: Period race photograph associated with the exact SE071-004 chassis. The available image is an exterior view and does not show the cockpit, steering wheel, shift lever, pedals, or driver technique. Photograph caption and image: “Vehicle: Alfa Romeo 156 SE071-004; Series: 1998 Campionato Italiano Superturismo” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Period exact-chassis image, but its exterior-only framing is a limitation rather than evidence that any cockpit feature was absent.",
+      "establishes": "nothing"
     },
     {
       "source_id": "stellantis-media.motor-show-bologna.1999",
@@ -9950,6 +9963,7 @@
       "retrieved_at": "2026-09-04",
       "reuse_status": "facts-only-review",
       "notes": "Exact scope: Road-going Alfa 156 Selespeed reference used only to identify and exclude a nearby source of paddle or robotic-shift confusion. It is not evidence for the 1998 Superturismo. Selespeed description, road-car controls: “la leva sistemata tra i sedili, oppure i comandi al volante” Reviewed for /identity/real_world_identity_notes. Contemporary manufacturer road-car source. Its steering-wheel controls and automatic-clutch description must not be inherited by the race car.",
+      "establishes": "nothing",
       "published_or_updated_at": "1999-11-26"
     },
     {

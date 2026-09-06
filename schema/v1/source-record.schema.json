@@ -147,6 +147,13 @@
                 }
               }
             }
+          },
+          "establishes": {
+            "type": "string",
+            "enum": [
+              "nothing"
+            ],
+            "description": "Declares that this source was reviewed and established no curated value, so no claim cites it. A registered source that nothing references is otherwise indistinguishable from a citation that was dropped by accident. Its notes carry what was examined and why the result was negative; a negative result is research worth keeping, not a leftover to delete."
           }
         }
       }

@@ -231,6 +231,53 @@ def update_release_references(
     return changed
 
 
+def _refuse_shrunken_coverage(previous_path: Path, coverage: dict[str, Any]) -> None:
+    """Refuse a coverage manifest that lost identities the committed one held.
+
+    The manifest is checked in but generated from two machine-local inputs that
+    are not: the developer audit under the ignored `build/`, and the plugin's
+    live diagnostics log under `%LOCALAPPDATA%`. Either can be absent on the
+    machine running a release, and the builder has no way to tell an identity
+    that was never seen from one it simply could not read today. A release that
+    touched nothing about coverage has already rewritten this file with 145
+    fewer identities and left the prose in `docs/ams2-coverage-plan.md` claiming
+    the larger number, so the loss is not hypothetical.
+
+    The inventory only grows: it is a record of identities observed on this PC,
+    and an identity once seen is not unseen. A smaller manifest therefore means
+    an input was missing, not that the world changed, and the release stops
+    rather than committing the smaller file.
+    """
+    if not previous_path.exists():
+        return
+
+    previous = _read_json(previous_path)
+    before = len(previous.get("entries", []))
+    after = len(coverage.get("entries", []))
+    if after >= before:
+        return
+
+    live_before = previous.get("identity_sources", {}).get("live_identities_seen", 0)
+    live_after = coverage.get("identity_sources", {}).get("live_identities_seen", 0)
+    detail = (
+        f"the AMS2 coverage manifest would lose {before - after} of {before} "
+        f"identities ({before} -> {after})"
+    )
+    if live_after < live_before:
+        detail += (
+            f"; the live diagnostics log supplied {live_before} identities before "
+            f"and {live_after} now, so check that "
+            f"{DEFAULT_LIVE_LOG} is readable from this machine"
+        )
+    raise ReleaseFinalizeError(
+        detail
+        + ". The identity inventory only grows, so a smaller manifest means an "
+        "input was missing rather than that an identity disappeared. Restore the "
+        "input and finalize again, or regenerate the manifest deliberately with "
+        "`python -m research.build_ams2_coverage_manifest`."
+    )
+
+
 def _run_tests(root: Path) -> None:
     result = subprocess.run(
         [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-q"],
@@ -264,6 +311,7 @@ def finalize_release(
     )
     coverage_json = root / "research" / "ams2-coverage-manifest.json"
     coverage_csv = root / "research" / "ams2-coverage-manifest.csv"
+    _refuse_shrunken_coverage(coverage_json, coverage)
     coverage_json.parent.mkdir(parents=True, exist_ok=True)
     coverage_json.write_text(
         json.dumps(coverage, indent=2, ensure_ascii=False) + "\n",

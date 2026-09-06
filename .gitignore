@@ -13,3 +13,10 @@ test-results/
 debug.log
 *.user
 .claude/settings.local.json
+
+# Guided-verification drafts and local scratch space. PRIVACY.md states that a
+# draft stays under %LOCALAPPDATA%\SimHub\AsDriven until a maintainer promotes
+# it, and one Cruze draft had been committed here while the other 284 records
+# cite their observation by id alone.
+drafts/
+tmp/

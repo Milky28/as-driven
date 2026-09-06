@@ -255,6 +255,63 @@ def _validate_sources(payload: Any, label: str, errors: list[str]) -> set[str]:
     return ids
 
 
+def _collect_source_refs(node: Any, used: set[str]) -> None:
+    """Every source_ref anywhere in a document, at any depth."""
+    if isinstance(node, dict):
+        for key, value in node.items():
+            if key == "source_refs" and isinstance(value, list):
+                used.update(ref for ref in value if isinstance(ref, str))
+            else:
+                _collect_source_refs(value, used)
+    elif isinstance(node, list):
+        for item in node:
+            _collect_source_refs(item, used)
+
+
+def _validate_source_usage(
+    sources: Any,
+    used: set[str],
+    label: str,
+    errors: list[str],
+) -> None:
+    """Account for every registered source, in both directions.
+
+    A source that no claim cites is not automatically wrong. Research that
+    established nothing is worth keeping: the M1's Group 4 homologation form is
+    silent on gearbox construction rather than negative about it, and an
+    exterior-only period photograph of the exact Alfa chassis rules out nothing
+    about the cockpit. Recording those keeps the negative result auditable and
+    stops the same search being run twice.
+
+    What must not happen is a citation quietly disappearing into that set. So an
+    unreferenced source has to say so with `establishes: nothing`, and a source
+    that declares it must genuinely be uncited. Then a dropped reference shows
+    up as an error instead of hiding among the deliberate negatives.
+    """
+    if not isinstance(sources, dict) or not isinstance(sources.get("sources"), list):
+        return
+
+    for index, source in enumerate(sources["sources"]):
+        if not isinstance(source, dict):
+            continue
+        source_id = source.get("source_id")
+        if not isinstance(source_id, str):
+            continue
+        item = f"{label}.sources[{index}]"
+        declared = source.get("establishes") == "nothing"
+        if source_id in used and declared:
+            errors.append(
+                f"{item}: {source_id} declares establishes: nothing but is cited by a "
+                f"claim. Remove the declaration or remove the citation."
+            )
+        elif source_id not in used and not declared:
+            errors.append(
+                f"{item}: {source_id} is registered but no claim cites it. Cite it, or "
+                f'declare "establishes": "nothing" and record in notes what was '
+                f"examined and why it settled nothing."
+            )
+
+
 def _validate_wheel_rim(
     rim: Any,
     label: str,
@@ -1166,6 +1223,10 @@ def validate_repository(root: Path) -> list[str]:
         errors.append("index.json: records must exactly match data/v1/cars/*.json")
 
     records: dict[str, dict[str, Any]] = {}
+    # Sources cited anywhere, so an uncited one can be told apart from research
+    # that deliberately established nothing. Curation counts as a citation: an
+    # approval or amendment naming a source is using it.
+    used_source_refs: set[str] = set()
     # Every exact key a match can resolve to, expansions included. The client
     # throws on a duplicate while loading the database, so a collision that only
     # surfaced there would be a validated dataset that will not open.
@@ -1182,6 +1243,7 @@ def validate_repository(root: Path) -> list[str]:
                     str(path),
                 )
             )
+        _collect_source_refs(record, used_source_refs)
         _validate_record_archetype(record, str(path), archetypes, errors)
         _collect_identities(record, str(path), claimed_identities, errors)
         record_id = _validate_record(record, path, source_ids, errors)
@@ -1195,6 +1257,7 @@ def validate_repository(root: Path) -> list[str]:
         approval = _load(path, errors)
         if not isinstance(approval, dict):
             continue
+        _collect_source_refs(approval, used_source_refs)
         if "approved_controls" in approval:
             approval_schema = schemas["curation-approval.schema.json"]
             if approval_schema is not None:
@@ -1225,5 +1288,6 @@ def validate_repository(root: Path) -> list[str]:
                     errors.extend(validate_instance(approval, event_map_schema, str(path)))
             _validate_approval_record_references(approval, path, set(records), errors)
 
+    _validate_source_usage(sources, used_source_refs, str(data_dir / "sources.json"), errors)
     _validate_documentation_claims(root, index, errors)
     return errors

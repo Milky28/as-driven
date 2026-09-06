@@ -4,7 +4,12 @@ Plugin and dataset versions count different things, but ship together in one
 release. Dataset history is also recorded in `data/v1/index.json` and the
 project documentation.
 
-## 0.21.3 - 2026-09-05
+A heading date is the dataset's `released_at`, which `promote` copies from the
+last approval it closed. Approvals are stamped in UTC, so a release finished
+late in a Pacific evening carries the following day. Take the date from
+`data/v1/index.json` rather than from the clock, or the two disagree by a day.
+
+## 0.21.3 - 2026-09-06
 
 - Redesign the guided-drive overlay for clearer in-car prompts, persistent button labels, readable progress, and scalable saved layouts.
 - Open selected catalog cars in the public controls database from SimHub.

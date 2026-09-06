@@ -95,7 +95,14 @@ generated release notes, and temporary installations. It creates a GitHub draft
 and release tag targeting the current commit, uploads all release artifacts,
 and stops. Review the draft and manual checks before publishing it on GitHub.
 
-Automatic update checking remains out of scope until the public repository and
-release endpoint are stable. A future updater must use an explicit release
-channel, verify downloaded content, remain opt-in, and never consume a moving
-branch or silently replace curated data.
+Automatic update checking is out of scope by design, not for want of an
+endpoint. The endpoint exists and is stable: `main` is public, and
+`https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json`
+serves the manifest from a stable path. The check stays manual anyway, because a
+dataset that changed under a driver mid-session would rewrite the guidance they
+had already verified. That is why installing is deliberate.
+
+The check reads two version strings and downloads nothing. Any future updater
+would still have to use an explicit release channel, verify downloaded content,
+remain opt-in, and never consume a moving branch or silently replace curated
+data.

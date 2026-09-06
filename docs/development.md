@@ -274,8 +274,12 @@ before publishing.
 
 The README shows five captures under `docs/images/`: `preflight-card.png`,
 `preflight-card-compact.png`, `settings-garage.png`, `settings-browser.png`, and
-`guided-drive.jpg`. They are from AMS2 1.6.9.91 with dataset 0.5.34 and plugin
-0.21.0.
+`guided-drive.jpg`. All are from AMS2 1.6.9.91. `settings-garage.png`,
+`settings-browser.png`, and `guided-drive.jpg` were retaken for plugin 0.21.3 on
+dataset 0.5.49; the two pre-flight cards are still the plugin 0.21.0 captures on
+dataset 0.5.34, which is fine because the card's layout has not changed. Say
+which build a capture came from when you replace one, because the set drifts
+apart otherwise.
 
 If you replace one, keep it PNG, keep it under a few hundred kilobytes, and
 prefer a car whose technique is worth showing: the current pair use the Audi V8
@@ -283,7 +287,8 @@ quattro DTM because a synchromesh H-pattern exercises every field at once, and
 the browser capture uses the BMW 2002 Turbo for the same reason.
 
 A photographic capture - anything showing the cockpit rather than the plugin's
-own flat UI - compresses badly as PNG. `guided-drive.jpg` is 235 KB as JPEG and
-was 1.4 MB as PNG, for the same picture, with no visible loss on the overlay text
-that carries the meaning. Save cockpit captures as JPEG. The flat UI captures
-stay PNG, where it is the better format and each one costs under 130 KB.
+own flat UI - compresses badly as PNG. The first `guided-drive.jpg` was 235 KB as
+JPEG and 1.4 MB as PNG, for the same picture, with no visible loss on the overlay
+text that carries the meaning. Save cockpit captures as JPEG. The flat UI
+captures stay PNG, where it is the better format. The current set costs 315 KB
+for the cockpit JPEG and under 145 KB for each PNG.

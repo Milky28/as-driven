@@ -406,6 +406,10 @@ class ValidationTests(unittest.TestCase):
                         "retrieved_at": "2026-08-13",
                         "reuse_status": "facts-only-review",
                         "notes": "Fixture.",
+                        # This fixture exists to exercise the source_id
+                        # convention, so no record cites it. Declaring that keeps
+                        # the uncited-source rule out of the way of this test.
+                        "establishes": "nothing",
                     }
                 )
                 sources_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -1239,6 +1243,69 @@ class ValidationTests(unittest.TestCase):
                             % (record["record_id"], family, pointer)
                         )
         self.assertEqual([], offenders)
+
+    def test_every_registered_source_is_cited_or_declares_it_settled_nothing(
+        self,
+    ) -> None:
+        """A dropped citation must not hide among the deliberate negatives.
+
+        Research that established nothing is worth registering. The M1's Group 4
+        homologation form predates the synchroniser field, so it is silent on
+        construction rather than negative about it, and an exterior-only period
+        photograph of the exact Alfa chassis rules out no cockpit fitting. Both
+        are kept so the negative result is auditable and the same search is not
+        run twice.
+
+        That makes an uncited source ordinary, which is the problem: a citation
+        deleted by accident lands in the same set and looks like one more
+        documented negative. So the negatives declare themselves, and anything
+        uncited without the declaration is an error.
+        """
+        sources = json.loads(
+            (ROOT / "data" / "v1" / "sources.json").read_text(encoding="utf-8")
+        )["sources"]
+
+        used: set[str] = set()
+
+        def collect(node) -> None:
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    if key == "source_refs" and isinstance(value, list):
+                        used.update(value)
+                    else:
+                        collect(value)
+            elif isinstance(node, list):
+                for item in node:
+                    collect(item)
+
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            collect(json.loads(path.read_text(encoding="utf-8")))
+        for path in sorted((ROOT / "curation").glob("*.json")):
+            collect(json.loads(path.read_text(encoding="utf-8")))
+
+        undeclared = [
+            source["source_id"]
+            for source in sources
+            if source["source_id"] not in used
+            and source.get("establishes") != "nothing"
+        ]
+        self.assertEqual([], undeclared)
+
+        # The declaration is not a way to keep a citation quiet either.
+        contradictory = [
+            source["source_id"]
+            for source in sources
+            if source.get("establishes") == "nothing" and source["source_id"] in used
+        ]
+        self.assertEqual([], contradictory)
+
+        # A source that settled nothing still has to say what was examined.
+        silent = [
+            source["source_id"]
+            for source in sources
+            if source.get("establishes") == "nothing" and not source.get("notes")
+        ]
+        self.assertEqual([], silent)
 
     def test_a_sourced_rim_disagreement_is_an_explicit_audited_override(self) -> None:
         """A photograph of the real car outranks a look at a simulator.

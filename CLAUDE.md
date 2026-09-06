@@ -210,15 +210,24 @@ auditable evidence, and the history is where corrections are visible.
 ## Current handoff state
 
 - **Work on `main`**, the only branch, the default, and what a visitor sees.
-- The repository is **public**, and 0.21.0 is published as the latest release.
-- Client: 0.21.3 locally; 0.21.2 is the published release.
-- Dataset: 0.5.49 with 285 curated records, and 0.5.37 is installed. The
+- The repository is **public**, and 0.21.3 is published as the latest release.
+- Client: 0.21.3 locally, installed, and published; the three agree.
+- Dataset: 0.5.49 with 285 curated records, and 0.5.49 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
   Development has since moved to SimHub 9.12.2 and the drives recorded under
   it carry that in `client_version`; the tested pair is what the release
   claims, and has not been re-tested.
+- The manual update check is **live**. `main` is public, so
+  `https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json`
+  serves the manifest from a stable path rather than a per-tag release asset
+  URL, and it currently answers with the published 0.21.3 and 0.5.49. Nothing
+  contacts it without the button.
+- The README illustrates the plugin with **real captures**, not icon artwork:
+  `preflight-card.png`, `preflight-card-compact.png`, `settings-garage.png`,
+  `settings-browser.png`, and `guided-drive.jpg` under `docs/images/`. Widths
+  and the capture rules are in `docs/development.md`.
 - **Open decisions nobody has made yet**, all deliberately left rather than
   forgotten:
   - `lamborghini-miura-sv` keeps `clutch: not-required` on a synchromesh
@@ -227,12 +236,6 @@ auditable evidence, and the history is where corrections are visible.
     Either the research is wrong in the same way the importer was, or the Miura
     is a genuine exception. It is declared as an archetype deviation and named
     in `test_a_drive_alone_never_establishes_a_synchromesh_running_clutch`.
-  - The manual update check is inert until a stable HTTPS URL serves
-    `as-driven-latest.json`. The repository is private, so no such URL exists.
-    Serve it from a stable path, never the per-tag release asset URL.
-  - The README illustrates the pre-flight card with icon artwork because no
-    screenshots of the running overlay exist. Wanted captures and widths are in
-    `docs/development.md`.
   - `CHANGELOG.md` dataset history stops at 0.3.31.
 - The local contribution queue has 38 accepted cases with published feedback and
   six withdrawn, with nothing waiting on research or final review. Issues 46
@@ -266,9 +269,9 @@ auditable evidence, and the history is where corrections are visible.
   verification. The inventory only holds cars that have been loaded here,
   so new content still needs `docs/ams2-coverage-plan.md` and
   `research/ams2-coverage-manifest.json`.
-- Of 279 records, 251 carry an `archetype` classification: 178 match one of the
+- Of 285 records, 251 carry an `archetype` classification: 178 match one of the
   23 registered mechanisms, 47 deviate, 15 are undetermined and 11 match none.
-  Twenty-eight await classification. An
+  Thirty-four await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
 - **A mechanism the record already establishes settles the technique that follows
@@ -376,8 +379,8 @@ auditable evidence, and the history is where corrections are visible.
   the same way AC's and ACC's are, and an unregistered simulator is assumed
   unmeasurable too. See `docs/registering-a-simulator.md`.
 - **Eight simulators are registered**, with 261 AMS2 entries, 21 AC, 18 ACC, 7
-  AC EVO, 6 RaceRoom, 5 rFactor 2, 2 PMR and 2 GTR2 entries. PMR's E46 and
-  Nissan R390 GT1 drafts are curated. GTR2's HQ BMW M3 GTR and Chevrolet
+  AC EVO, 6 RaceRoom, 5 rFactor 2, 11 PMR and 2 GTR2 entries. PMR covers eleven
+  GT and Group 5 cars, six of which it is the only simulator for. GTR2's HQ BMW M3 GTR and Chevrolet
   Corvette C5-R drives are also curated, using the exact `.CAR` identity
   resolved from the current telemetry-session header. `ac-rally` is reserved: it
   sits in the enums so a record naming it validates, and the client does not
