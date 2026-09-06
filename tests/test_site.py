@@ -820,17 +820,16 @@ class SiteTests(unittest.TestCase):
             return sum(v * weight for v, weight in zip(linear, [.2126, .7152, .0722]))
         for foreground, background in [('--faint', '--row-alt'), ('--ink', '--row-alt'),
                                        ('--optional', '--row-alt'), ('--driver', '--driver-bg'),
-                                       ('--car', '--car-bg')]:
+                                       ('--car', '--car-bg'), ('--optional', '--optional-bg')]:
             values = sorted([luminance(tokens[foreground]), luminance(tokens[background])])
             self.assertGreaterEqual((values[1] + .05) / (values[0] + .05), 4.5)
 
     def test_the_four_states_are_told_apart_by_more_than_hue(self) -> None:
         """Two warm fills side by side read as the same answer.
 
-        Optional used to be a second amber fill next to the driver's, and at a
-        glance the pair was indistinguishable. Each state now differs from the
-        others in form as well as colour: the fill says something is being asked
-        of somebody, and the border style separates a decided option from a gap.
+        Optional uses a saturated violet fill so it reads independently of the
+        surrounding neutral surfaces. The dotted border reserves a separate
+        shape for an evidence gap.
         """
         page = build_site(ROOT)
         rules = {
@@ -841,9 +840,9 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(len(set(colors.values())), 4, colors)
 
         filled = {tone for tone, body in rules.items() if "background: var(" in body}
-        self.assertEqual(filled, {"you", "car"}, filled)
-        # The two hollow states are separated by their border, not their hue alone.
-        self.assertIn("1px solid", rules["optional"])
+        self.assertEqual(filled, {"you", "car", "optional"}, filled)
+        self.assertIn("var(--optional-bg)", rules["optional"])
+        # An evidence gap is hollow and dotted, unlike every settled state.
         self.assertIn("1px dotted", rules["unknown"])
 
     def test_the_theme_control_offers_the_three_states_the_page_has(self) -> None:
