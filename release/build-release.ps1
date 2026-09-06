@@ -186,15 +186,13 @@ try {
     $releaseMetadata | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (
         Join-Path $outputRoot "release.json") -Encoding UTF8
 
-    # The file the shipped update endpoint reads, written into the repository
-    # rather than only attached to the release. The endpoint is a raw URL on the
-    # default branch, so the check reports whatever this commit says; leaving it
-    # behind would announce the previous release forever.
+    # Prepare the candidate's update manifest beside its ZIPs. The root file is
+    # the live public endpoint and must only advance after the draft is published.
     # Written byte-for-byte rather than through ConvertTo-Json and Set-Content:
     # those add a UTF-8 BOM and their own spacing, so every release produced a
     # diff that was pure formatting, and a BOM breaks a plain json.loads of the
     # committed file.
-    $rootManifestPath = Join-Path $repositoryRoot "as-driven-latest.json"
+    $rootManifestPath = Join-Path $outputRoot "as-driven-latest.json"
     $rootManifest = @(
         "{",
         "  ""dataset_version"": ""$datasetVersion"",",
@@ -206,7 +204,7 @@ try {
         $rootManifestPath,
         $rootManifest + "`n",
         (New-Object System.Text.UTF8Encoding $false))
-    Write-Host "Updated $rootManifestPath - commit it, or the update check will report the previous release."
+    Write-Host "Prepared $rootManifestPath - copy to the repository root only after publishing."
 
     Write-Host "Built release candidates: $outputRoot"
 }
