@@ -34,7 +34,7 @@
         "manual_blip": "optional",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -48,8 +48,9 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 4; gearbox construction: synchromesh; shift actuation: h pattern.",
-      "The reviewed real-car sources do not establish launch technique, running-shift technique, selector pattern or wheel topology; those baseline fields remain unknown.",
-      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "The reviewed real-car sources do not establish running-shift technique, selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+      "The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction. All five registered H-pattern archetypes carry `standing_start_clutch: required`, and of the 96 curated H-pattern records the 87 that establish the field all say required with no dissenting value. Unlike the blip derivations this one does not rest on gearbox construction, so an unknown `gearbox_type` does not block it. The guided drive is not cited for it: a drive establishes what the simulator demands, not what the real car needed."
     ]
   },
   "simulators": [
@@ -192,18 +193,6 @@
         {
           "path": "/authentic_controls/transmission/shift_pattern",
           "value": "standard-h",
-          "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ac.local-live-wsc60-shelby-daytona-coupe-controls.14923034"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
           "condition": "The guided observation ac.wsc60-shelby-daytona-coupe.20260824t184459330z-4f1e8cbf directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
@@ -369,6 +358,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-26",
+  "updated_at": "2026-09-06",
   "driver_summary": "Four-speed synchromesh. No reviewed source establishes how the real Daytona Coupe was driven, and Assetto Corsa refuses a clutchless downshift until you blip, so blip coming down: the demand is the simulator's, not the 1964 car's."
 }

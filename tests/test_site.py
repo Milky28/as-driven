@@ -59,22 +59,34 @@ class SiteTests(unittest.TestCase):
         )
 
     def test_wheel_display_and_shift_lights_remain_independent(self) -> None:
-        self.assertEqual(wheel_equipment("yes", "yes"), "Display · Shift lights")
-        self.assertEqual(wheel_equipment("yes", "no"), "Display · No shift lights")
-        self.assertEqual(wheel_equipment("no", "yes"), "No display · Shift lights")
-        self.assertEqual(wheel_equipment("no", "no"), "No display · No shift lights")
+        self.assertEqual(wheel_equipment("yes", "yes"), "Display · Lights")
+        self.assertEqual(wheel_equipment("yes", "no"), "Display · No lights")
+        self.assertEqual(wheel_equipment("no", "yes"), "No display · Lights")
+        self.assertEqual(wheel_equipment("no", "no"), "No display · No lights")
         self.assertEqual(
             wheel_equipment("no", "unknown"),
             "No display · Lights not established",
         )
+        # Both halves open collapse into one clause. Said twice this was the
+        # longest string the column ever held, and it overflowed into the
+        # shifter column beside it.
         self.assertEqual(
             wheel_equipment("unknown", "unknown"),
-            "Display not established · Lights not established",
+            "Display and lights not established",
+        )
+        # An unrecorded rim already says the wheel was not seen, on the line
+        # directly above. Repeating it under that is one cell saying "unknown"
+        # three times, so the equipment line is dropped.
+        self.assertEqual(wheel_equipment("unknown", "unknown", "unknown"), "")
+        self.assertEqual(wheel_equipment("no", "unknown", "unknown"), "")
+        # A known rim keeps its equipment line whatever the fittings say.
+        self.assertEqual(
+            wheel_equipment("no", "no", "round"), "No display · No lights"
         )
 
     def test_wheel_equipment_reaches_each_car_row(self) -> None:
         cars = {car["id"]: car for car in collect(ROOT)["cars"]}
-        self.assertEqual(cars["roco-001"]["wheel_equipment"], "Display · No shift lights")
+        self.assertEqual(cars["roco-001"]["wheel_equipment"], "Display · No lights")
         self.assertEqual(
             cars["bmw-m6-gt3"]["wheel_equipment"],
             "No display · Lights not established",

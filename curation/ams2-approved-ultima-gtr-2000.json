@@ -10,7 +10,7 @@
   "approved_controls": {
     "forward_gears": 5,
     "shift_actuation": "h-pattern",
-    "standing_start_clutch": "unknown",
+    "standing_start_clutch": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
     "wheel_rim_shape": "round",
@@ -19,7 +19,7 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "The exact 2000 Ultima GTR identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
-  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources. Revised 2026-09-06 without a new drive: standing-start clutch from unknown to required, derived from the H-pattern actuation this record already establishes and matching every registered H-pattern archetype. No new observation was taken and no other approved value changed.",
   "telemetry_class": "Supercars",
   "staged_record_id": "ultima-gtr"
 }

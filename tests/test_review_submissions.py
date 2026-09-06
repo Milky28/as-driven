@@ -848,7 +848,8 @@ class ReviewSubmissionTests(unittest.TestCase):
                 58,
                 preserve_existing=False,
             )
-            self.assertEqual("generated", summary["summary_status"])
+            # One simulator, so no disagreement to explain and nothing to draft.
+            self.assertEqual("none", summary["summary_status"])
             self.assertEqual("passed", summary["dry_run"])
 
             promoted = promote_review_case(root, cases, 58, approved=True)
@@ -1283,7 +1284,180 @@ class ReviewSubmissionTests(unittest.TestCase):
                 ),
             )
 
-    def test_driver_summary_is_generated_after_review_and_dry_run_again(self) -> None:
+    def _summary_for(self, transmission_overrides: dict) -> str:
+        """Generate a summary from a minimal record with the given transmission."""
+        transmission = {
+            "forward_gears": 5,
+            "gearbox_type": "unknown",
+            "shift_actuation": "h-pattern",
+            "shift_pattern": "h-pattern",
+            "standing_start_clutch": "required",
+            "upshift": {
+                "clutch": "not-required",
+                "throttle_lift": "required",
+                "automatic_cut": "no",
+                "manual_blip": "not-applicable",
+                "automatic_blip": "not-applicable",
+            },
+            "downshift": {
+                "clutch": "not-required",
+                "throttle_lift": "not-applicable",
+                "automatic_cut": "not-applicable",
+                "manual_blip": "required",
+                "automatic_blip": "no",
+            },
+        }
+        for key, value in transmission_overrides.items():
+            if isinstance(value, dict):
+                transmission[key].update(value)
+            else:
+                transmission[key] = value
+        record = {
+            "record_id": "fixture",
+            "authentic_controls": {"transmission": transmission},
+            # Two simulators that disagree on one technique field. The generator
+            # drafts nothing without a disagreement to explain, so a fixture
+            # exercising its prose has to give it one. The disagreement is forced
+            # onto the launch clutch and away from whatever the case under test
+            # sets, so no case can accidentally erase it and assert against "".
+            "simulators": [
+                {"simulator": "ams2", "overrides": []},
+                {
+                    "simulator": "ac",
+                    "overrides": [
+                        {
+                            "path": "/authentic_controls/transmission/standing_start_clutch",
+                            "value": (
+                                "not-required"
+                                if transmission["standing_start_clutch"] != "not-required"
+                                else "required"
+                            ),
+                        }
+                    ],
+                },
+            ],
+        }
+        return generate_driver_summary(record)[0]
+
+    def test_a_clutch_clause_only_joins_a_sentence_it_can_finish(self) -> None:
+        """The clutch clause used to be appended with "and" whatever preceded it.
+
+        That reads as one instruction after a bare imperative - "Blip every
+        downshift yourself and use the clutch" - and falls apart after anything
+        else: "A downshift blip is optional, but can help settle the car and use
+        the clutch" is not a sentence. Thirty-five curated records would have
+        been proposed with that shape. None shipped with it, because a maintainer
+        rewrote each one by hand, which is not a fix.
+        """
+        optional_blip = self._summary_for(
+            {"downshift": {"manual_blip": "optional", "clutch": "required"}}
+        )
+        self.assertIn(
+            "A downshift blip is optional, but can help settle the car; use the clutch.",
+            optional_blip,
+        )
+
+        imperative_blip = self._summary_for(
+            {"downshift": {"manual_blip": "required", "clutch": "required"}}
+        )
+        self.assertIn("Blip every downshift yourself and use the clutch.", imperative_blip)
+
+        # The upshift's "because" clause already finishes its sentence.
+        cut_upshift = self._summary_for(
+            {
+                "upshift": {
+                    "throttle_lift": "not-required",
+                    "automatic_cut": "yes",
+                    "clutch": "required",
+                }
+            }
+        )
+        self.assertIn(
+            "Stay flat on the upshift because the car cuts for you; use the clutch.",
+            cut_upshift,
+        )
+
+    def test_open_fields_are_named_once_rather_than_hedged_in_every_clause(
+        self,
+    ) -> None:
+        """A summary of hedges buries the one thing the driver needs.
+
+        Five records shipped reading "not established, so use it to be safe"
+        three times over, which says what to do only in the subordinate half of
+        each clause. The advice is stated plainly now, and one closing sentence
+        carries what is open so the advice is not read as the car's established
+        technique.
+        """
+        everything_open = self._summary_for(
+            {
+                "standing_start_clutch": "unknown",
+                "upshift": {"throttle_lift": "unknown", "clutch": "unknown"},
+                "downshift": {"manual_blip": "unknown", "clutch": "unknown"},
+            }
+        )
+
+        self.assertNotIn("to be safe", everything_open)
+        # The caveat appears once, not once per open field.
+        self.assertEqual(1, everything_open.count("not established"))
+        self.assertIn("Use the clutch to pull away.", everything_open)
+        self.assertIn("Lift for each upshift.", everything_open)
+        self.assertIn("Blip each downshift.", everything_open)
+        self.assertIn(
+            "The launch clutch, the upshift lift, the running clutch, the downshift "
+            "blip and the downshift clutch are not established",
+            everything_open,
+        )
+
+        # A single open field reads as a singular, and keeps "and" out of the list.
+        one_open = self._summary_for({"downshift": {"manual_blip": "unknown"}})
+        self.assertIn("The downshift blip is not established", one_open)
+
+        # A fully established car gains no caveat at all.
+        settled = self._summary_for({})
+        self.assertNotIn("not established", settled)
+
+    def test_nothing_is_drafted_where_the_card_already_says_it_all(self) -> None:
+        """A summary assembled from curated values is the card read back.
+
+        The gear count, the actuation and all three techniques are Fit and Use
+        rows. `driver_summary` is optional so that a car with nothing to add
+        carries none and the overlay shows no note panel, and all 285 records
+        had one anyway.
+        """
+        record = {
+            "record_id": "fixture",
+            "authentic_controls": {
+                "transmission": {
+                    "forward_gears": 5,
+                    "shift_actuation": "h-pattern",
+                    "standing_start_clutch": "required",
+                    "upshift": {
+                        "clutch": "not-required",
+                        "throttle_lift": "required",
+                        "automatic_cut": "no",
+                    },
+                    "downshift": {
+                        "clutch": "not-required",
+                        "manual_blip": "required",
+                        "automatic_blip": "no",
+                    },
+                }
+            },
+            "simulators": [{"simulator": "ams2", "overrides": []}],
+        }
+        summary, disagreements = generate_driver_summary(record)
+        self.assertEqual("", summary)
+        self.assertEqual([], disagreements)
+
+    def test_a_single_simulator_case_is_proposed_with_no_summary_at_all(self) -> None:
+        """One simulator cannot disagree with itself, so there is nothing to draft.
+
+        This case used to be proposed with a paragraph assembled from its own
+        curated values, which the pre-flight card already shows as rows. The key
+        is left off the record entirely rather than written empty: the schema
+        sets `minLength: 1`, and absent is the state the overlay reads as "show
+        no note panel".
+        """
         with tempfile.TemporaryDirectory() as directory:
             repository = Path(directory) / "repository"
             cases, case_dir, _proposal = self.prepare_promotable_case(repository)
@@ -1299,19 +1473,49 @@ class ReviewSubmissionTests(unittest.TestCase):
             preview = json.loads(
                 (case_dir / "preview-record.json").read_text(encoding="utf-8")
             )
-            summary = manifest["records"][0]["driver_summary"]
-            self.assertEqual(summary, preview["driver_summary"])
-            self.assertIn("not established", summary)
-            self.assertTrue((case_dir / "driver-summary.md").is_file())
-            self.assertIn(
-                summary,
-                (case_dir / "final-review.md").read_text(encoding="utf-8"),
-            )
+            self.assertNotIn("driver_summary", manifest["records"][0])
+            self.assertNotIn("driver_summary", preview)
+
+            # The reviewer is told there is nothing rather than shown a blank.
+            artifact = (case_dir / "driver-summary.md").read_text(encoding="utf-8")
+            self.assertIn("No summary.", artifact)
+            self.assertIn("Write one by hand if this car has a story", artifact)
+
             case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
             self.assertEqual("manifest-review", case["state"])
             self.assertEqual(
-                "generated",
+                "none",
                 case["review_proposal"]["driver_summary"]["status"],
+            )
+
+    def test_a_hand_written_summary_still_reaches_the_record(self) -> None:
+        """Nothing generated does not mean nothing accepted.
+
+        The maintainer writing one by hand is the documented path, so the edit
+        must still land even though the generator proposes nothing for this car.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, case_dir, _proposal = self.prepare_promotable_case(repository)
+
+            edited = generate_driver_summary_proposal(
+                repository,
+                cases,
+                17,
+                driver_summary=(
+                    "Second and third are synchronised and first is not, so match "
+                    "the revs yourself for any downshift into first."
+                ),
+            )
+
+            self.assertEqual("passed", edited["dry_run"])
+            manifest = json.loads(
+                (case_dir / "review-manifest.proposed.json").read_text(encoding="utf-8")
+            )
+            self.assertIn("match the revs yourself", manifest["records"][0]["driver_summary"])
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                "edited", case["review_proposal"]["driver_summary"]["status"]
             )
 
     def test_driver_summary_edit_is_normalized_saved_and_dry_run_again(self) -> None:

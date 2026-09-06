@@ -122,6 +122,30 @@ it at the start. The launch procedure is usually the whole story.
 Road-derived boxes that may creep, may shift themselves, and may accept a manual
 override that is never required. Say which.
 
+## What the generator will and will not draft
+
+`generate_driver_summary` drafts a summary only where the record's simulators
+disagree about driver technique. That single case is the only thing it knows
+which the card cannot say in a row. Everywhere else it returns nothing, and the
+review artifact says so rather than offering text to accept.
+
+It used to always return a paragraph, assembled from the curated values: the gear
+count and actuation, then the launch, upshift and downshift technique. Every one
+of those is a Fit or Use row, so the paragraph was the card read back to the
+driver. Where the values were open it padded further, and five records shipped
+reading "not established, so use it to be safe" three times over - a summary whose
+every sentence buried its instruction inside a hedge.
+
+The cautious default for an open field is not the exception either. It is true of
+every car with an open field, so by the rule above it is recorded once rather
+than copied into a hundred records free to drift apart. The card already marks an
+open field "not established" on its own.
+
+All 285 records carried a summary when the field is optional by design, which is
+how the padding accumulated. Six were cleared on 2026-09-06 as pure generator
+output. A car with nothing to say says nothing, and the overlay shows no note
+panel at all.
+
 ## Writing them
 
 Summaries are written per record with the maintainer, never generated in bulk.

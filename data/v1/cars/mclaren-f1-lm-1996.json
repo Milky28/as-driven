@@ -34,7 +34,7 @@
         "manual_blip": "optional",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -48,8 +48,9 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: standard h; wheel-rim shape: round; open-top wheel geometry: no.",
-      "The reviewed real-car sources do not establish launch technique or running-shift technique; those baseline fields remain unknown.",
-      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "The reviewed real-car sources do not establish running-shift technique; those baseline fields remain unknown.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+      "The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction. All five registered H-pattern archetypes carry `standing_start_clutch: required`, and of the 96 curated H-pattern records the 87 that establish the field all say required with no dissenting value. Unlike the blip derivations this one does not rest on gearbox construction, so an unknown `gearbox_type` does not block it. The guided drive is not cited for it: a drive establishes what the simulator demands, not what the real car needed."
     ]
   },
   "simulators": [
@@ -160,18 +161,6 @@
         {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
-          "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-mclaren-f1-lm-controls.1.6.9.91"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
           "condition": "The guided observation ams2.mclaren-f1-lm.20260824t134343904z-2392d682 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
@@ -365,6 +354,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-26",
+  "updated_at": "2026-09-06",
   "driver_summary": "Six-speed synchromesh in the road-legal LM, of which McLaren built five customer cars. No source establishes its technique, and Assetto Corsa wants a blip on the way down: that is the simulator's demand rather than a requirement of the gearbox."
 }

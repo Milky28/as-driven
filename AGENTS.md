@@ -34,6 +34,21 @@ scope unless a future proposal establishes a direct authentic-controls use case.
 - Match simulator identities exactly. Never introduce silent fuzzy matching.
 - Treat chassis manufacturer as identity context, not automatically the vehicle
   marque.
+- A mechanism the record establishes settles the technique that follows from it,
+  and never the reverse. An established automatic cut settles the upshift lift;
+  a dog box settles the downshift blip; an H-pattern gate settles
+  `standing_start_clutch: required`, which is the only one of the three that does
+  not also need `gearbox_type`. Tests enforce all three. See
+  `docs/data-model.md`.
+- Every registered source must be cited by a claim, or declare
+  `"establishes": "nothing"` and say in its notes what was examined and why it
+  settled nothing. Research that established nothing is worth keeping; a citation
+  dropped by accident is not, and without the declaration the two are
+  indistinguishable. Validation refuses either half being wrong.
+- An override must not restate the authentic value. Only a refusal is a
+  departure; an override that agrees makes the card announce a difference that is
+  not there. 48 pre-existing overrides still do this and are a known cleanup, not
+  a licence to add more.
 
 ## Repository map
 
@@ -127,3 +142,15 @@ directory. Installation is a separate explicit user action.
 - Do not commit generated `build/`, `dist/`, `bin/`, `obj/`, Python cache, or
   local telemetry artifacts.
 - Preserve user changes and avoid destructive Git operations.
+- `driver_summary` is optional and usually absent. The generator drafts one only
+  where a record's simulators disagree on driver technique; everything else it
+  could assemble is already a Fit or Use row on the card. A promotion proposing
+  no summary is working correctly, not failing. Write one by hand only with the
+  maintainer. See `docs/driver-summaries.md`.
+- `research/ams2-coverage-manifest.json` is checked in but generated from two
+  machine-local inputs that are not: the audit under ignored `build/`, and the
+  plugin's live diagnostics log under `%LOCALAPPDATA%`. `finalize_release` now
+  refuses to write a manifest smaller than the committed one. If it does refuse,
+  an input was unreadable on this machine - restore it. Do not force past it and
+  do not commit the smaller file; a release that touched nothing about coverage
+  once dropped 145 of 370 identities that way.

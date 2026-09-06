@@ -614,6 +614,45 @@ def _simulator_technique_disagreements(record: dict[str, Any]) -> list[str]:
     ]
 
 
+def _summary_block(summary: str) -> str:
+    """Render the review artifact's summary section, including the empty case."""
+    if summary:
+        return f"> {summary}"
+    return (
+        "No summary. The curated values carry nothing the Fit and Use rows do not "
+        "already state, and the record's simulators agree on driver technique, so "
+        "the overlay shows no note panel rather than restating the card. Write one "
+        "by hand if this car has a story: a named gearbox and what follows from it, "
+        "something the car permits that a driver would not choose, or the thing that "
+        "bites."
+    )
+
+
+def _unsettled_sentence(unsettled: list[str]) -> str:
+    """Name what the reviewed sources leave open, in one closing sentence.
+
+    The shape is deliberately fixed rather than varied per record. A summary is
+    one line on the pre-flight card and the house order in
+    `docs/driver-summaries.md` exists so that a hundred of them do not each
+    invent a shape; a caveat that reads differently every time is harder to scan,
+    not easier. The variety that was missing is inside the advice, which now says
+    what to do plainly instead of repeating a hedge three times.
+    """
+    if len(unsettled) == 1:
+        listed = unsettled[0]
+    else:
+        # "and", not "or": the list is the subject of "are not established", so
+        # every item in it is unestablished rather than one of them being.
+        listed = ", ".join(unsettled[:-1]) + f" and {unsettled[-1]}"
+    verb = "is" if len(unsettled) == 1 else "are"
+    # "not established" is the house term: the pre-flight card and the site both
+    # mark an open field that way, so the summary says it the same way.
+    return (
+        f"{listed[0].upper()}{listed[1:]} {verb} not established, so that much is "
+        f"the cautious default rather than this car's known technique."
+    )
+
+
 def generate_driver_summary(record: dict[str, Any]) -> tuple[str, list[str]]:
     """Draft conservative record-wide driver prose from reviewed controls.
 
@@ -634,6 +673,15 @@ def generate_driver_summary(record: dict[str, Any]) -> tuple[str, list[str]]:
     if gears:
         mechanism = f"{gears}-speed {mechanism}"
 
+    # What the reviewed sources leave open, named once at the end instead of
+    # hedged inside every clause. A summary built from three "not established,
+    # so do it to be safe" clauses reads as a form letter, and the repetition
+    # buries the one thing the driver needs, which is what to actually do. The
+    # advice below is the cautious default in each open case; the closing
+    # sentence is what stops that default being read as the car's established
+    # technique.
+    unsettled: list[str] = []
+
     launch = transmission["standing_start_clutch"]
     if launch == "required":
         launch_sentence = "Use the clutch to pull away."
@@ -644,30 +692,39 @@ def generate_driver_summary(record: dict[str, Any]) -> tuple[str, list[str]]:
     elif launch == "not-applicable":
         launch_sentence = "No launch clutch is needed."
     else:
-        launch_sentence = "Launch clutch use is not established, so use it to be safe."
+        launch_sentence = "Use the clutch to pull away."
+        unsettled.append("the launch clutch")
 
     upshift = transmission["upshift"]
     lift = upshift["throttle_lift"]
     up_clutch = upshift["clutch"]
     cut = upshift["automatic_cut"]
+    # Whether the clutch clause can be joined with "and". It reads as one
+    # instruction only after a bare imperative: "Blip every downshift yourself
+    # and use the clutch" is an instruction, while "A downshift blip is optional,
+    # but can help settle the car and use the clutch" is not a sentence at all.
+    # Thirty-five records would have been proposed with that second shape.
     if lift == "required":
-        up_sentence = "Lift for every upshift"
+        up_sentence, up_imperative = "Lift for every upshift", True
     elif lift == "partial":
-        up_sentence = "Use a partial lift for every upshift"
+        up_sentence, up_imperative = "Use a partial lift for every upshift", True
     elif lift == "not-required" and cut == "yes":
-        up_sentence = "Stay flat on the upshift because the car cuts for you"
+        # The trailing "because" clause already takes the sentence, so a clutch
+        # clause has to start its own.
+        up_sentence, up_imperative = "Stay flat on the upshift because the car cuts for you", False
     elif lift == "not-required":
-        up_sentence = "Stay flat on the upshift"
+        up_sentence, up_imperative = "Stay flat on the upshift", True
     elif lift == "not-applicable":
-        up_sentence = "No throttle lift is needed on the upshift"
+        up_sentence, up_imperative = "No throttle lift is needed on the upshift", False
     else:
-        up_sentence = "Upshift lift is not established, so lift to be safe"
+        up_sentence, up_imperative = "Lift for each upshift", True
+        unsettled.append("the upshift lift")
     if up_clutch == "required":
-        up_sentence += " and use the clutch"
+        up_sentence += " and use the clutch" if up_imperative else "; use the clutch"
     elif up_clutch == "optional":
         up_sentence += "; the clutch is optional once moving"
     elif up_clutch == "unknown":
-        up_sentence += "; running clutch use is not established"
+        unsettled.append("the running clutch")
     up_sentence += "."
 
     downshift = transmission["downshift"]
@@ -675,29 +732,56 @@ def generate_driver_summary(record: dict[str, Any]) -> tuple[str, list[str]]:
     auto_blip = downshift["automatic_blip"]
     down_clutch = downshift["clutch"]
     if auto_blip == "yes":
-        down_sentence = "The car blips its own downshifts"
+        down_sentence, down_imperative = "The car blips its own downshifts", False
     elif manual_blip == "required":
-        down_sentence = "Blip every downshift yourself"
+        down_sentence, down_imperative = "Blip every downshift yourself", True
     elif manual_blip == "optional":
-        down_sentence = "A downshift blip is optional, but can help settle the car"
-    elif manual_blip in {"not-required", "not-applicable"}:
-        down_sentence = "No downshift blip is needed"
-    else:
-        down_sentence = (
-            "Whether the gearbox needs a downshift blip is not established, "
-            "so blip to be safe"
+        down_sentence, down_imperative = (
+            "A downshift blip is optional, but can help settle the car",
+            False,
         )
+    elif manual_blip in {"not-required", "not-applicable"}:
+        down_sentence, down_imperative = "No downshift blip is needed", False
+    else:
+        down_sentence, down_imperative = "Blip each downshift", True
+        unsettled.append("the downshift blip")
     if down_clutch == "required":
-        down_sentence += " and use the clutch"
+        down_sentence += " and use the clutch" if down_imperative else "; use the clutch"
     elif down_clutch == "optional":
         down_sentence += "; the clutch is optional"
     elif down_clutch == "unknown":
-        down_sentence += "; downshift clutch use is not established"
+        unsettled.append("the downshift clutch")
     down_sentence += "."
 
     disagreements = _simulator_technique_disagreements(record)
+    if not disagreements:
+        # Nothing here that the card does not already carry, so say nothing.
+        #
+        # The Fit and Use rows state the gear count, the actuation, the launch
+        # clutch and both shift techniques, and they mark an open field "not
+        # established" themselves. A summary assembled from those is the card
+        # read back to the driver. `driver_summary` is optional precisely for
+        # this: the schema says the overlay "shows no note panel at all rather
+        # than padding the card with restatement", and
+        # `docs/driver-summaries.md` says a car that needs nothing said should
+        # say nothing. All 285 records had one anyway, which is how five of them
+        # came to read "not established, so use it to be safe" three times over.
+        #
+        # The cautious default for an open field is not the exception. It is
+        # true of every car with an open field, and simulator-general advice is
+        # recorded once rather than copied into a hundred records free to drift.
+        #
+        # A disagreement between simulators is the one thing this function knows
+        # that the card cannot say in a row, so that alone earns the paragraph.
+        # Everything else worth writing - a named gearbox, permitted against
+        # advisable, the thing that bites - is beyond what curated values can be
+        # assembled into, and is written per record with the maintainer.
+        return "", []
+
     mechanism_sentence = mechanism if gears else mechanism[0].upper() + mechanism[1:]
     summary = f"{mechanism_sentence}. {launch_sentence} {up_sentence} {down_sentence}"
+    if unsettled:
+        summary += f" {_unsettled_sentence(unsettled)}"
     if disagreements:
         listed = ", ".join(disagreements)
         summary += (
@@ -1817,8 +1901,11 @@ def generate_driver_summary_proposal(
         summary_status = "preserved"
     else:
         summary = generated_summary
-        summary_status = "generated"
-    manifest["records"][0]["driver_summary"] = summary
+        summary_status = "generated" if summary else "none"
+    if summary:
+        manifest["records"][0]["driver_summary"] = summary
+    else:
+        manifest["records"][0].pop("driver_summary", None)
     candidate_sources = sources_proposal.get("sources") or []
     if research_amendment:
         preview_record, _ = validate_research_amendment(
@@ -1871,7 +1958,7 @@ def generate_driver_summary_proposal(
 
 ## {summary_status.capitalize()} text
 
-> {summary}
+{_summary_block(summary)}
 
 ## Accuracy boundary
 

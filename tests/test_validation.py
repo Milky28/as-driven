@@ -1498,6 +1498,8 @@ class ValidationTests(unittest.TestCase):
 
         - an automatic cut is the thing that removes the upshift lift;
         - an H-pattern with no cut leaves the lift to the driver;
+        - an H-pattern gate is a driver-shifted gearbox, and a driver-shifted
+          gearbox has to be declutched to pull away from rest;
         - dog rings cannot match the shaft speeds, so the driver must;
         - synchronisers do it for the driver, so the blip is decided rather
           than open. The rule is that the field is settled, not which way: one
@@ -1530,6 +1532,20 @@ class ValidationTests(unittest.TestCase):
                     "the driver, so it cannot stay unknown" % record["record_id"]
                 )
             if (
+                transmission.get("shift_actuation") == "h-pattern"
+                and transmission.get("standing_start_clutch") == "unknown"
+            ):
+                # Alone among these rules this one does not rest on gearbox
+                # construction: synchromesh or dog, a car with an H gate is
+                # declutched to move off. All 96 curated H-pattern records say
+                # required, all five registered H-pattern archetypes say
+                # required, and no H-pattern record has ever established
+                # anything else.
+                offenders.append(
+                    "%s: an H-pattern gate is established, so the standing-start "
+                    "clutch cannot stay unknown" % record["record_id"]
+                )
+            if (
                 transmission.get("gearbox_type") == "dogbox"
                 and transmission.get("shift_actuation") == "h-pattern"
                 and blip == "unknown"
@@ -1543,6 +1559,38 @@ class ValidationTests(unittest.TestCase):
                     "%s: a synchromesh is established, so the downshift blip "
                     "cannot stay unknown" % record["record_id"]
                 )
+        self.assertEqual([], offenders)
+
+    def test_a_derived_launch_clutch_is_not_announced_as_a_simulator_departure(
+        self,
+    ) -> None:
+        """An override must not restate a baseline the record now establishes.
+
+        Each of the nine records whose launch clutch was derived carried a
+        simulator override setting the same value, written while the baseline was
+        unknown and reading "the reviewed real-car sources did not establish the
+        same value". Once the baseline says required, the override makes the card
+        announce a departure where the simulator and the car agree. That is the
+        same fault as the 142 overrides removed in 0.5.34: only a refusal is a
+        departure.
+        """
+        offenders = []
+        for record_path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            transmission = record["authentic_controls"]["transmission"]
+            if transmission.get("shift_actuation") != "h-pattern":
+                continue
+            baseline = transmission.get("standing_start_clutch")
+            for simulator in record["simulators"]:
+                for override in simulator.get("overrides") or []:
+                    if not override["path"].endswith("/standing_start_clutch"):
+                        continue
+                    if override["value"] == baseline:
+                        offenders.append(
+                            "%s [%s]: the launch-clutch override restates the "
+                            "authentic %s"
+                            % (record["record_id"], simulator["simulator"], baseline)
+                        )
         self.assertEqual([], offenders)
 
     def test_an_ac_evo_observation_source_must_be_named_by_the_convention(self) -> None:

@@ -34,7 +34,7 @@
         "manual_blip": "optional",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown",
+      "standing_start_clutch": "required",
       "first_gear_position": "down-left"
     },
     "steering": {
@@ -49,8 +49,9 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h; transmission first_gear_position: down left.",
-      "The reviewed real-car sources do not establish launch technique, running-shift technique or wheel topology; those baseline fields remain unknown.",
-      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "The reviewed real-car sources do not establish running-shift technique or wheel topology; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+      "The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction. All five registered H-pattern archetypes carry `standing_start_clutch: required`, and of the 96 curated H-pattern records the 87 that establish the field all say required with no dissenting value. Unlike the blip derivations this one does not rest on gearbox construction, so an unknown `gearbox_type` does not block it. The guided drive is not cited for it: a drive establishes what the simulator demands, not what the real car needed."
     ]
   },
   "simulators": [
@@ -181,18 +182,6 @@
         {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
-          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
-          ]
-        },
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
           "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
@@ -346,6 +335,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-26",
+  "updated_at": "2026-09-06",
   "driver_summary": "Five-speed synchromesh on a dogleg gate: first is down and left, outside the racing plane, so second through fifth sit in one straight line. No source establishes how the real car was driven, so treat the technique here as Assetto Corsa's answer rather than the 250 GTO's."
 }

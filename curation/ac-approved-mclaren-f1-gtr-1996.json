@@ -10,7 +10,7 @@
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "h-pattern",
-    "standing_start_clutch": "unknown",
+    "standing_start_clutch": "required",
     "automatic_cut": "no",
     "automatic_blip": "no",
     "wheel_rim_shape": "round",
@@ -19,7 +19,7 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "The official Kunos implementation was fingerprinted and is identified as the 1996 short-tail rather than the 1997 sequential Longtail. Six H-pattern gears and the round closed wheel without display or shift lights were directly observed. Real-car construction and technique are intentionally unknown; AC-specific start clutch, lift and blip requirements are explicit overrides.",
-  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive. Revised 2026-09-06 without a new drive: standing-start clutch from unknown to required, derived from the H-pattern actuation this record already establishes and matching every registered H-pattern archetype. No new observation was taken and no other approved value changed.",
   "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
   "staged_record_id": "mclaren-f1-gtr",
   "game_version_correction": {

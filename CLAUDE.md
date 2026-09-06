@@ -274,6 +274,16 @@ auditable evidence, and the history is where corrections are visible.
   Thirty-four await classification. An
   archetype is descriptive and supplies no values, so a classification can never
   change a record. See `docs/archetypes.md`.
+- **An H-pattern gate settles the standing-start clutch.** A car with an H gate is
+  driver-shifted, and a driver-shifted gearbox has to be declutched to pull away,
+  whatever its construction. Nine records held `unknown` beneath an established
+  H-pattern; all 96 curated H-pattern records now say `required`, which is what
+  all five registered H-pattern archetypes and the other 87 records already said,
+  with no dissenting value anywhere in the dataset. Unlike the blip derivations
+  this one does not rest on `gearbox_type`, so four records with an unknown
+  construction were settled too. The nine simulator overrides that had stood in
+  for the missing baseline were removed: the simulator agrees, and only a refusal
+  is a departure. See `docs/data-model.md`.
 - **A mechanism the record already establishes settles the technique that follows
   from it.** `upshift.throttle_lift` was blank on 25 records whose own gearbox
   answered it - 21 with an established automatic cut, which is the thing that
@@ -433,5 +443,23 @@ auditable evidence, and the history is where corrections are visible.
   `unknown` for the exact 2005 car while every simulator observation was kept as
   an override. The remaining open findings are documented negative results;
   reopen one only when a new exact-source lead appears.
+- **The driver summary is drafted only where it has something the card lacks.**
+  `generate_driver_summary` returns text only when the record's simulators
+  disagree on driver technique; otherwise it returns nothing and the record
+  carries no `driver_summary`. It used to assemble one from the curated values,
+  which is the Fit and Use rows read back to the driver, and five records shipped
+  saying "not established, so use it to be safe" three times over. Six pure
+  generator summaries were cleared. The field is optional by design and the
+  overlay shows no note panel when it is absent. See `docs/driver-summaries.md`.
+- **Steering DOR is kept but not pursued, decided 2026-09-06.**
+  `steering.degrees_of_rotation` is in the schema on both the authentic and
+  simulator sides, `GuidanceSnapshot` already exposes
+  `HasSteeringDOR`/`SteeringDOR`, the plugin never publishes it, and all 285
+  records are empty. Leave it that way. A real car's lock is rarely cited
+  authentically anywhere, so what the field would end up holding is a subjective
+  or by-era generalisation, which is the one thing this dataset does not do. Do
+  not open research for it, do not add it to the guided drive, and do not fill it
+  from a simulator's own setting. Expect it to be dropped rather than populated;
+  it stays for now only because removing a schema field is a v2 concern.
 - Icon and naming redesign concepts under `docs/design/` are review-only and are
   not wired into production assets.

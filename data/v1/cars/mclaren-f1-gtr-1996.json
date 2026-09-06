@@ -35,7 +35,7 @@
         "manual_blip": "unknown",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -50,7 +50,8 @@
     "notes": [
       "The 1996 F1 GTR used a six-speed H-pattern manual. Its construction, exact gate, and real clutch/lift/blip technique are not established by the reviewed sources.",
       "The fingerprinted AC implementation requires the clutch to move off, rejects a full-throttle upshift until the driver lifts, and rejects a coast downshift until the driver blips.",
-      "This is not the 1997 Longtail. McLaren states that the six-speed sequential gearbox arrived with that later car."
+      "This is not the 1997 Longtail. McLaren states that the six-speed sequential gearbox arrived with that later car.",
+      "The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction. All five registered H-pattern archetypes carry `standing_start_clutch: required`, and of the 96 curated H-pattern records the 87 that establish the field all say required with no dissenting value. Unlike the blip derivations this one does not rest on gearbox construction, so an unknown `gearbox_type` does not block it. The guided drive is not cited for it: a drive establishes what the simulator demands, not what the real car needed."
     ]
   },
   "simulators": [
@@ -78,18 +79,6 @@
         ]
       },
       "overrides": [
-        {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
-          "condition": "The fingerprinted AC implementation stalled or refused move-off without physical clutch input.",
-          "confidence": {
-            "level": "high",
-            "basis": "Direct guided move-off test with automatic clutch disabled."
-          },
-          "source_refs": [
-            "ac.local-live-mclaren-f1-gtr-controls.14923034"
-          ]
-        },
         {
           "path": "/authentic_controls/transmission/upshift/clutch",
           "value": "not-required",
@@ -229,7 +218,7 @@
     "The generic AC title would collide with the existing 1997 record, but Kunos's own metadata describes the 1996 short-tail specification. Identity is resolved before behavior, so the H-pattern drive creates a separate real-car record rather than being recorded as a contradiction on the Longtail.",
     "The official AC cockpit is the current evidence for the round continuous rim without integrated display or shift lights; no reviewed real-car source independently specifies those wheel-electronics fields."
   ],
-  "updated_at": "2026-08-22",
+  "updated_at": "2026-09-06",
   "driver_summary": "1996 six-speed H-pattern car, not the 1997 sequential Longtail. AC requires the clutch to launch, a lift to upshift, and a manual blip to downshift; the real car's detailed technique is not yet sourced.",
   "archetype": {
     "classification": "no-archetype",

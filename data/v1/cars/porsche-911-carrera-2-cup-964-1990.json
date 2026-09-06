@@ -32,7 +32,7 @@
         "manual_blip": "unknown",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
@@ -46,8 +46,9 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern.",
-      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
-      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+      "The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction. All five registered H-pattern archetypes carry `standing_start_clutch: required`, and of the 96 curated H-pattern records the 87 that establish the field all say required with no dissenting value. Unlike the blip derivations this one does not rest on gearbox construction, so an unknown `gearbox_type` does not block it. The guided drive is not cited for it: a drive establishes what the simulator demands, not what the real car needed."
     ]
   },
   "simulators": [
@@ -192,18 +193,6 @@
           ]
         },
         {
-          "path": "/authentic_controls/transmission/standing_start_clutch",
-          "value": "required",
-          "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "pmr.local-live-911-carrera-cup-964-controls.2.2.0"
-          ]
-        },
-        {
           "path": "/authentic_controls/transmission/upshift/automatic_blip",
           "value": "not-applicable",
           "condition": "The guided observation pmr.911-carrera-cup-964.20260906t014308445z-0e69ad2b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
@@ -335,6 +324,5 @@
       }
     ]
   },
-  "updated_at": "2026-09-06",
-  "driver_summary": "5-speed H-pattern. Launch clutch use is not established, so use it to be safe. Upshift lift is not established, so lift to be safe; running clutch use is not established. Whether the gearbox needs a downshift blip is not established, so blip to be safe; downshift clutch use is not established."
+  "updated_at": "2026-09-06"
 }

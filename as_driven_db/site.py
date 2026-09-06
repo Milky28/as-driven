@@ -156,16 +156,45 @@ def simulator_label(simulator: str) -> str:
     return SIMULATOR_LABELS.get(simulator, simulator.upper())
 
 
-def wheel_equipment(integrated_display: str, shift_lights: str) -> str:
+def wheel_equipment(
+    integrated_display: str,
+    shift_lights: str,
+    rim_shape: str | None = None,
+) -> str:
+    """The equipment line under the rim name, or nothing when it adds nothing.
+
+    An unrecorded rim was printing "Rim not recorded" and then "Display not
+    established · Lights not established" beneath it: one cell saying it does not
+    know, three times, in the longest string the column ever holds. Twenty-two of
+    the twenty-seven worst cells were that case. The rim line above already
+    carries it, so this returns empty and the cell keeps one line.
+
+    Where the rim is known but both fittings are open, the two clauses collapse
+    into one, which takes the remaining five from 48 characters to 34.
+    """
+    known = {"yes", "no", "not-applicable"}
+    display_open = integrated_display not in known
+    lights_open = shift_lights not in known
+
+    if rim_shape == "unknown":
+        return ""
+    if display_open and lights_open:
+        return "Display and lights not established"
+
+    # "Lights", not "Shift lights". This line lives under a rim name in a column
+    # headed WHEEL, so the word carries on its own, and the open case has always
+    # said "Lights not established" rather than repeating "shift" there. Saying
+    # it the same way throughout is what lets the commonest label - 180 of 285
+    # records - hold one line in a 15% fixed column instead of wrapping.
     display = {
         "yes": "Display",
         "no": "No display",
         "not-applicable": "Display not applicable",
     }.get(integrated_display, "Display not established")
     lights = {
-        "yes": "Shift lights",
-        "no": "No shift lights",
-        "not-applicable": "Shift lights not applicable",
+        "yes": "Lights",
+        "no": "No lights",
+        "not-applicable": "Lights not applicable",
     }.get(shift_lights, "Lights not established")
     return f"{display} · {lights}"
 
@@ -789,6 +818,7 @@ def _car(
         "wheel_equipment": wheel_equipment(
             rim.get("integrated_display", "unknown"),
             rim.get("shift_lights", "unknown"),
+            rim.get("shape"),
         ),
         "summary": record.get("driver_summary", ""),
         "verification": _verification(record, source_index),
@@ -1554,7 +1584,12 @@ def _row(car: dict[str, Any]) -> str:
         )
         + "</td>"
         f'<td class="rim">{_e(car["rim"])}'
-        f'<span class="meta">{_e(car["wheel_equipment"])}</span></td>'
+        + (
+            f'<span class="meta">{_e(car["wheel_equipment"])}</span>'
+            if car["wheel_equipment"]
+            else ""
+        )
+        + "</td>"
         f'<td class="spec" data-driving-cell="shifter"><span class="shifter">{_e(car["shifter"])}</span>'
         + (f'<span class="meta">{_e(car["gate"])}</span>' if car["gate"] else "")
         + "</td>"
@@ -1919,7 +1954,11 @@ tr.car td {{ padding: 11px 12px; vertical-align: top; }}
 .name {{ display: block; font-weight: 600; }}
 .shifter {{ display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; }}
 .meta {{ display: block; font-size: 12.5px; color: var(--faint); margin-top: 2px; }}
-.rim {{ font-size: 13px; color: var(--muted); white-space: nowrap; }}
+/* Not nowrap. This line sits in a fixed-layout 15% column, and the longest
+   equipment text overflowed into the shifter column rather than wrapping inside
+   its own cell. Wrapping is the fallback; the text below is short enough that it
+   rarely comes to that. */
+.rim {{ font-size: 13px; color: var(--muted); }}
 .state {{ white-space: normal; }}
 .tone {{
   display: inline-block; max-width: 100%; padding: 3px 9px; border-radius: 2px;

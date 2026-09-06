@@ -194,6 +194,42 @@ construction's answer and the simulator's demand is recorded as an override - an
 an override needs a drive that found the shift *refused* without a blip, not one
 that merely found it accepted with one.
 
+### The gate and the standing start
+
+An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has
+to be declutched to pull away from rest. So `shift_actuation: h-pattern` settles
+`standing_start_clutch: required`, and the field cannot stay `unknown` beneath
+it. A test enforces it.
+
+This derivation is unusual in one way worth stating, because it is the reason it
+does not need the construction research the blip derivations wait on: **it does
+not rest on `gearbox_type` at all.** Synchromesh or dog, the driver still has to
+break the drive to move off. Nine records were settled on that basis on
+2026-09-06 with four of them carrying an unknown construction, which would have
+blocked a blip derivation and does not block this one.
+
+The evidence behind it is as strong as this dataset gets. All five registered
+H-pattern archetypes carry `required`. Of the 96 curated H-pattern records the 87
+that had established the field all said `required`, and none had ever established
+anything else - no `not-required`, no `anti-stall-available`, no
+`not-applicable`. Every one of the nine had also been driven in a simulator that
+demanded the clutch to move off.
+
+That last point is corroboration, not the warrant, and the difference matters.
+The drive is not cited for the value: a drive establishes what the simulator
+demands, not what the real car needed. The warrant is the mechanism the record
+already establishes, and the direction is the same one the rest of this section
+runs in - the gate settles the technique, and the technique never settles the
+gate.
+
+**A derived value retires the override that stood in for it.** Each of those nine
+carried a simulator override setting the launch clutch to `required`, written
+while the baseline was unknown, whose stated condition was that "the reviewed
+real-car sources did not establish the same value". They do now, and the
+simulator agrees with them, so the override would make the card announce a
+departure that is not there. All nine were removed, for the same reason the 142
+running-shift overrides were removed in 0.5.34: only a refusal is a departure.
+
 ### Where first gear sits
 
 `shift_pattern` names the layout; optional `first_gear_position` says where
