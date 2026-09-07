@@ -166,16 +166,15 @@ approval, relevant research/backlog documentation, and tests together. Follow
 
 ## Contribution and privacy boundary
 
-The plugin has no analytics, account, background update check, or automatic
-telemetry upload. Its one network feature is a manual update check: an endpoint
-and a button that must be pressed. The endpoint ships pre-filled with the
-project's raw manifest URL on `main` so the feature is findable, nothing contacts
-it without the button, it must be https, and the check reads two version strings
-without downloading anything. Build assertions hold the shipped endpoint, the
-https rule, and the failure wording, because `PRIVACY.md` states them as
-properties of the product. `as-driven-latest.json` at the repository root is what
-that endpoint serves; `release/build-release.ps1` rewrites it and a test refuses
-to let it drift from `data/v1/index.json`. Unmatched diagnostics and guided-verification
+The plugin has no analytics, account, background update check or download, or
+automatic telemetry upload. Its update flow starts with a manual check. If the
+manifest announces a newer version and supplies an HTTPS package URL and
+SHA-256, a separate confirmed action may download it, verify it locally, and
+schedule the existing rollback-capable installer after SimHub closes. Build
+assertions hold the shipped endpoint, HTTPS rule, opt-in UI, and failure wording,
+because `PRIVACY.md` states them as product properties. `as-driven-latest.json`
+at the repository root is what that endpoint serves; release tooling adds the
+package URL and hash when preparing the next release. Unmatched diagnostics and guided-verification
 drafts stay under `%LOCALAPPDATA%\SimHub\AsDriven`. A draft never edits
 the curated database or uploads itself. Maintainer validation and explicit
 approval are required before release. See `PRIVACY.md` and

@@ -54,8 +54,8 @@ the PowerShell scripts are not code-signed, so this check is the meaningful one.
 
 ## Update
 
-Updating is always something you start. The plugin never downloads or installs
-anything on its own - see [Checking for updates](#checking-for-updates) below.
+Updating is always something you start. The plugin has no background update
+check or download; see [Checking for updates](#checking-for-updates) below.
 
 There is one procedure, and it is the same one you used to install: download the
 newest release, close SimHub, and run **Install As Driven.cmd** over the existing
@@ -71,8 +71,8 @@ gives you both.
 
 ### Checking for updates
 
-The plugin can tell you when a newer dataset or plugin exists. It never
-downloads anything, and it contacts nothing until you press the button.
+The plugin can tell you when a newer dataset or plugin exists. It contacts
+nothing until you press the button, and checking does not download the package.
 
 1. Open the plugin's **System** tab in SimHub.
 2. Press **Check for updates**.
@@ -82,17 +82,23 @@ can point it elsewhere by editing `UpdateCheckUrl` in the plugin's settings file
 Leaving that value empty means unconfigured, not disabled, and the shipped
 address is used.
 
-The check reads two version strings and compares them with what you have
-installed. If something newer exists, it says so and points you at the release
-page - installing is still your decision, taken with SimHub closed.
+The check reads version and verified-package metadata and compares the versions
+with what you have installed. If something newer exists, **Download and
+install** appears. Pressing it shows a separate confirmation; only after you
+confirm does the plugin download the full release ZIP and verify its SHA-256.
+
+Once the verified package is ready, close SimHub. A local helper validates the
+archive, asks for the normal Windows administrator approval, runs the same
+rollback-capable installer used for a manual installation, and restarts SimHub
+when the install succeeds. Declining either confirmation installs nothing. You
+can still ignore the button and use the release page and manual procedure above.
 
 A check that fails for any reason reports the failure rather than claiming you
 are up to date. See
 [PRIVACY.md](../PRIVACY.md) for exactly what the request does and does not send.
 
-This is deliberate rather than unfinished. A dataset that changed under a driver
-mid-session would silently rewrite guidance they had already verified, so
-installing stays a separate, deliberate act.
+The check, download, and install remain separate deliberate acts. The dataset is
+never replaced mid-session: installation waits until you close SimHub.
 
 ## Remove or roll back
 

@@ -193,8 +193,11 @@ try {
     # diff that was pure formatting, and a BOM breaks a plain json.loads of the
     # committed file.
     $rootManifestPath = Join-Path $outputRoot "as-driven-latest.json"
+    $packageName = [System.IO.Path]::GetFileName($zipPath)
     $rootManifest = @(
         "{",
+        "  ""package_url"": ""https://github.com/Milky28/as-driven/releases/download/v$pluginVersion/$packageName"",",
+        "  ""package_sha256"": ""$zipHash"",",
         "  ""dataset_version"": ""$datasetVersion"",",
         "  ""plugin_version"": ""$pluginVersion"",",
         "  ""release_url"": ""https://github.com/Milky28/as-driven/releases/tag/v$pluginVersion""",

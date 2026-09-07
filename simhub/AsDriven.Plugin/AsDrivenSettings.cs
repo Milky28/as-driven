@@ -38,20 +38,10 @@ namespace AsDriven.Plugin
         public string PopupTheme { get; set; }
         public string VerificationObserver { get; set; }
         /// <summary>
-        /// Where "Check for updates" looks, and the switch that decides whether
-        /// the plugin may reach the network at all.
-        ///
-        /// Empty by default, and empty means no request is ever made. The check
-        /// is manual in every case - there is no timer and nothing runs at
-        /// startup - so an installation nobody configures behaves exactly as
-        /// the privacy note describes: no network feature.
-        /// </summary>
-        /// <summary>
         /// Where the manual update check looks. Shipped pre-filled so the
         /// feature is discoverable, and still inert until the driver presses the
         /// button: nothing contacts it on a timer, at startup, or after an
-        /// install. Clearing the box restores the state where no request is
-        /// possible at all.
+        /// install. An empty legacy setting falls back to this shipped address.
         /// </summary>
         public const string DefaultUpdateCheckUrl =
             "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json";

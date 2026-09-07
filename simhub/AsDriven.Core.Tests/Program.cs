@@ -2086,6 +2086,35 @@ namespace AsDriven.Core.Tests
                 True(datasetOnly.Summary("0.5.33", "0.20.0").Contains("Nothing has been downloaded"),
                     "every available-update message says nothing was fetched");
 
+                string packageHash = new string('a', 64);
+                UpdateAvailability installable = UpdateAvailability.Compare(
+                    "0.5.33", "0.20.0", "0.5.34", "0.20.1",
+                    "https://example.invalid/releases",
+                    "https://github.com/Milky28/as-driven/releases/download/v0.20.1/As-Driven.zip",
+                    packageHash);
+                True(installable.HasInstallPackage,
+                    "a newer release with an https package and SHA-256 can be installed");
+                True(installable.Summary("0.5.33", "0.20.0").Contains("Download and install"),
+                    "an installable update explains the explicit next choice");
+                UpdateAvailability unsafePackage = UpdateAvailability.Compare(
+                    "0.5.33", "0.20.0", "0.5.34", "0.20.1",
+                    "https://example.invalid/releases",
+                    "http://github.com/Milky28/as-driven/releases/download/v0.20.1/As-Driven.zip",
+                    packageHash);
+                False(unsafePackage.HasInstallPackage, "a plaintext package is never offered");
+                UpdateAvailability unofficialPackage = UpdateAvailability.Compare(
+                    "0.5.33", "0.20.0", "0.5.34", "0.20.1",
+                    "https://example.invalid/releases",
+                    "https://example.invalid/As-Driven.zip", packageHash);
+                False(unofficialPackage.HasInstallPackage,
+                    "a custom endpoint cannot make the plugin execute an unofficial package");
+                UpdateAvailability badHash = UpdateAvailability.Compare(
+                    "0.5.33", "0.20.0", "0.5.34", "0.20.1",
+                    "https://example.invalid/releases",
+                    "https://github.com/Milky28/as-driven/releases/download/v0.20.1/As-Driven.zip",
+                    "not-a-sha256");
+                False(badHash.HasInstallPackage, "a package without a SHA-256 is never offered");
+
                 UpdateAvailability current = UpdateAvailability.Compare(
                     "0.5.33", "0.20.0", "0.5.33", "0.20.0", "https://example.invalid/releases");
                 False(current.AnythingIsNewer, "nothing newer when both match");

@@ -97,27 +97,23 @@ if ([string]::IsNullOrWhiteSpace($Repository)) {
 $tag = "v$pluginVersion"
 $title = "As Driven $pluginVersion"
 
-# The manifest the plugin's manual update check reads. It is generated here, from
-# the versions this release is actually publishing, because the check finds its
-# three fields by name and a hand-written file gets one of them wrong exactly
-# once. Serve it from a stable https URL - the tag-specific asset URL changes
-# every release and would leave the check reading an old one forever.
-#
-# Deliberately three fields and nothing else. The plugin compares two versions
-# and shows a link; anything more here would be a payload nobody reads and a
-# promise somebody has to keep.
+# The stable manifest carries versions plus the exact HTTPS asset and SHA-256
+# needed for the separate, user-confirmed download-and-install action.
 $updateManifestPath = Join-Path $artifactRoot "as-driven-latest.json"
 [ordered]@{
     dataset_version = $datasetVersion
     plugin_version = $pluginVersion
     release_url = "https://github.com/$Repository/releases/tag/$tag"
+    package_url = "https://github.com/$Repository/releases/download/$tag/$([System.IO.Path]::GetFileName($pluginPackage))"
+    package_sha256 = $pluginHash
 } | ConvertTo-Json | Set-Content -LiteralPath $updateManifestPath -Encoding UTF8
 
 # Read it back the way the plugin does, so a formatting change cannot ship a
 # manifest the check silently fails to parse. These patterns are the ones in
 # AsDriven.Plugin.UpdateCheck.ReadField.
 $updateManifestText = Get-Content -LiteralPath $updateManifestPath -Raw
-foreach ($field in @("dataset_version", "plugin_version", "release_url")) {
+foreach ($field in @(
+    "dataset_version", "plugin_version", "release_url", "package_url", "package_sha256")) {
     if ($updateManifestText -notmatch "`"$field`"\s*:\s*`"([^`"]{1,120})`"") {
         throw "The update manifest is missing '$field' in the form the plugin reads."
     }
@@ -127,6 +123,9 @@ if ($updateManifestText -notmatch "`"dataset_version`"\s*:\s*`"$([regex]::Escape
 }
 if ($updateManifestText -notmatch "`"plugin_version`"\s*:\s*`"$([regex]::Escape($pluginVersion))`"") {
     throw "The update manifest does not state the plugin version being published."
+}
+if ($updateManifestText -notmatch "`"package_sha256`"\s*:\s*`"$pluginHash`"") {
+    throw "The update manifest does not state the verified SimHub package hash."
 }
 
 $assetPaths = @(
