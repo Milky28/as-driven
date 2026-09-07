@@ -48,7 +48,7 @@
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
-      "The synchronized transmission makes a downshift blip optional; the reviewed real-car sources do not establish the remaining running-shift technique or cut and blip behavior.",
+      "The synchronized transmission makes a downshift blip optional; the reviewed real-car sources do not establish the remaining running-shift controls: upshift clutch, throttle lift, and automatic cut; plus downshift clutch and automatic blip.",
       "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
