@@ -1,0 +1,294 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "saleen-s7-r-gt1-2004",
+  "identity": {
+    "display_name": "Saleen S7-R 2004",
+    "manufacturer": "Saleen",
+    "model": "S7-R",
+    "year": {
+      "from": 2004,
+      "to": 2004,
+      "label": "2004 Saleen S7-R specification"
+    },
+    "class": "GT1 / GT",
+    "real_world_identity_notes": "The PMR telemetry name S7R resolves to the Saleen S7-R, specifically the 2004 car named by PMR. The exact 2004 evidence describes the later sequential S7-R/EVO configuration. This is kept separate from the existing saleen-s7-r-gt1 record, whose identity is explicitly the distinct 2005 second-series GT1 representation. Early 2001 H-pattern/clutch instructions and later 2010 Xtrac data are retained as family or adjacent-variant evidence, not silently promoted to every 2004 car."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "unknown",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "S7R"
+        },
+        {
+          "kind": "internal-id",
+          "value": "S7R"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.s7r.20260906t234106797z-475d57a8 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.s7r.20260906t234106797z-475d57a8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.saleen-s7-r",
+        "saleen.official.2001-inaugural-s7r-season",
+        "motorionline.saleen-s7r-evo-2004",
+        "fia.saleen-s7.gt-013",
+        "racecar-engineering.saleen-s7r.2010",
+        "dailysportscar.saleen-s7r-history-2020",
+        "motortrend.saleen-s7r-first-drive-2001",
+        "racecarsdirect.saleen-s7r-015r-cockpit",
+        "artcurial.saleen-s7r-0060-2005",
+        "as-driven.repository.saleen-s7r-gt1-record-scan",
+            "pmr.local-live-s7r-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Project Motor Racing's official vehicle page explicitly calls the car the 2004 Saleen S7-R and places it in GT. A separate exact-scope account identifies a 2004 S7-R EVO, chassis 029R, and states that its gearbox is sequential with six speeds. The existing curated record is explicitly labelled a 2005 GT1 representation, so a new year-bounded proposal avoids silently collapsing the 2004 and 2005 specifications."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.official.saleen-s7-r",
+          "saleen.official.2001-inaugural-s7r-season",
+          "motorionline.saleen-s7r-evo-2004",
+          "fia.saleen-s7.gt-013",
+          "racecar-engineering.saleen-s7r.2010",
+          "dailysportscar.saleen-s7r-history-2020",
+          "motortrend.saleen-s7r-first-drive-2001",
+          "racecarsdirect.saleen-s7r-015r-cockpit",
+          "artcurial.saleen-s7r-0060-2005",
+          "as-driven.repository.saleen-s7r-gt1-record-scan",
+            "pmr.local-live-s7r-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Project Motor Racing's official vehicle page explicitly calls the car the 2004 Saleen S7-R and places it in GT. A separate exact-scope account identifies a 2004 S7-R EVO, chassis 029R, and states that its gearbox is sequential with six speeds. The existing curated record is explicitly labelled a 2005 GT1 representation, so a new year-bounded proposal avoids silently collapsing the 2004 and 2005 specifications."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.saleen-s7-r",
+          "saleen.official.2001-inaugural-s7r-season",
+          "motorionline.saleen-s7r-evo-2004",
+          "fia.saleen-s7.gt-013",
+          "racecar-engineering.saleen-s7r.2010",
+          "dailysportscar.saleen-s7r-history-2020",
+          "motortrend.saleen-s7r-first-drive-2001",
+          "racecarsdirect.saleen-s7r-015r-cockpit",
+          "artcurial.saleen-s7r-0060-2005",
+          "as-driven.repository.saleen-s7r-gt1-record-scan",
+            "pmr.local-live-s7r-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The exact 2004 S7-R EVO account states six speeds; the later technical listing independently describes the S7-R family as six-speed. The exact 2004 source calls the gearbox sequential with six speeds. The later technical source and Johnny Mowlem's revision history corroborate that the later S7-R family used sequential gearboxes. The exact 2004 source explicitly calls the gearbox sequential, and the driver interview separates the later sequential version from the early H-pattern version. Manual blip is a downshift action in this controls model; no upshift blip claim is being asserted. Automatic blip is a downshift action in this controls model; no upshift blip claim is being asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-s7r-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "pmr.official.saleen-s7-r",
+          "saleen.official.2001-inaugural-s7r-season",
+          "motorionline.saleen-s7r-evo-2004",
+          "fia.saleen-s7.gt-013",
+          "racecar-engineering.saleen-s7r.2010",
+          "dailysportscar.saleen-s7r-history-2020",
+          "motortrend.saleen-s7r-first-drive-2001",
+          "racecarsdirect.saleen-s7r-015r-cockpit",
+          "artcurial.saleen-s7r-0060-2005",
+          "as-driven.repository.saleen-s7r-gt1-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "The exact 2004 S7-R EVO account states six speeds; the later technical listing independently describes the S7-R family as six-speed. The exact 2004 source calls the gearbox sequential with six speeds. The later technical source and Johnny Mowlem's revision history corroborate that the later S7-R family used sequential gearboxes. The exact 2004 source explicitly calls the gearbox sequential, and the driver interview separates the later sequential version from the early H-pattern version. Manual blip is a downshift action in this controls model; no upshift blip claim is being asserted. Automatic blip is a downshift action in this controls model; no upshift blip claim is being asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      }
+    ]
+  },
+  "updated_at": "2026-09-06"
+}

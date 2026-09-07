@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.55",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "sauber-mercedes-c9",
+      "bundle": "build/review-cases/issue-71/staged.json",
+      "display_name": "Sauber Mercedes C9",
+      "class": "Group C",
+      "manufacturer": "Sauber",
+      "model": "Mercedes C9",
+      "year": {
+        "from": 1989,
+        "to": 1989,
+        "label": "1989"
+      },
+      "real_world_identity_notes": "The PMR label Sauber C9 is best mapped to the existing 1989 Sauber Mercedes C9 record. Sauber was the chassis constructor and Mercedes-Benz supplied the works engine and factory programme. This is the 1989 silver M119-powered Group C specification, not the earlier 1987/88 blue C9 versions and not the successor C11.",
+      "real_world_source_refs": [
+        "pmr.official.mercedes-benz-sauber-c9",
+        "petersen.1989-sauber-mercedes-c9",
+        "mercedes-benz.museum.25-years-victory-le-mans-c9",
+        "tradeuniquecars.1989-sauber-mercedes-c9-review",
+        "motorsportmagazine.2020-sauber-c9-steering-wheel",
+        "motorsportmagazine.2020-kenny-acheson-c9",
+        "wikipedia.de.sauber-c9"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The existing curated record matches the PMR Group C C9 lead. Petersen identifies an exact 1989 Sauber-Mercedes C 9; Mercedes-Benz Museum material identifies the 1989 C9, its Sauber development, Mercedes powertrain, and race use; PMR uses the corresponding Mercedes-Benz Sauber C9 name. The independent sources converge on the existing real-car identity.",
+      "identity_basis": "The existing curated record matches the PMR Group C C9 lead. Petersen identifies an exact 1989 Sauber-Mercedes C 9; Mercedes-Benz Museum material identifies the 1989 C9, its Sauber development, Mercedes powertrain, and race use; PMR uses the corresponding Mercedes-Benz Sauber C9 name. The independent sources converge on the existing real-car identity.",
+      "specification_basis": "The exact C9 review calls it a five-speed dog box; the year-split technical table independently lists a five-speed racing gearbox. The direct review explicitly says ‘five-speed dog box’. The secondary year-split table corroborates the Hewland VGC racing gearbox, but does not itself use the dog-box term. The exact-car review describes a small gearlever on the right sill and a Hewland-derived shifter, establishing a driver-operated lever rather than steering-wheel paddles. The result uses the database's h-pattern lever category, while the exact gate layout is separately left unestablished. The C9 had a physical triple-plate clutch, and 1989 C9 driver Kenny Acheson explicitly describes repeatedly dropping the clutch to get a disabled car moving from the pit lane. This establishes a manually operated clutch for moving off; the quoted incident was abnormal, so the exact normal launch routine remains less certain. The direct C9 review states that clutchless upchanges were routine. This is procedure evidence, not an inference from the dog-box construction alone. The same direct review says the C9 could not be flatshifted while clutchless upchanges were routine. That establishes that a full-throttle flatshift was not the described procedure; a lift is the conservative fitting for clutchless racing upchanges. Manual blipping is a downshift operation in this control model; no upshift blip claim is being made. Automatic blipping is a downshift operation in this control model; no upshift blip claim is being made. The direct C9 review explicitly states that the clutch must be used for downshifting. The control model records throttle-lift as an upshift action; no separate downshift lift claim is being asserted. Automatic cut is an upshift action in this control model; no downshift cut claim is being asserted. The full-resolution Daimler-credited C9 steering-wheel photograph shows a continuous circular rim with no flattened or open section. The Mercedes-Benz Museum also captions a period 1989 C9 cockpit photograph, but the retrospective wheel photograph is the clearer visual locator. The photographed conventional round rim is continuous across the top; it is not an open-top GT/formula wheel. The photograph shows the readouts and instruments mounted on the dashboard behind the wheel, not on the wheel rim itself. No shift/rev-light array is visible on the photographed wheel rim; the visible warning/instrument hardware is dashboard-mounted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.sauber-c9.20260906t212157268z-fa341800 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-sauber-c9-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.sauber-c9.20260906t212157268z-fa341800 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-sauber-c9-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.sauber-c9.20260906t212157268z-fa341800 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-sauber-c9-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1989 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: dogbox; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
+        "The reviewed real-car sources do not establish cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/71",
+      "live_source_notes": "Guided-verification observation pmr.sauber-c9.20260906t212157268z-fa341800 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "accept_from_drive": [
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/upshift/clutch"
+      ],
+      "driver_summary": "5-speed H-pattern. Use the clutch to pull away. Lift for every upshift. Blip every downshift yourself and use the clutch. Simulator implementations differ on upshift lift, manual downshift blip; follow the selected game's USE row for those items."
+    }
+  ]
+}

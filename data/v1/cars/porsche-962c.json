@@ -96,6 +96,92 @@
         "level": "high",
         "basis": "Simulator behavior was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled; the real-world five-speed manual transmission and 962C designation are supported by a registered secondary source."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "962C"
+        },
+        {
+          "kind": "internal-id",
+          "value": "962C"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group C"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.962c.20260906t211539116z-2c9fcbe2 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.962c.20260906t211539116z-2c9fcbe2 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-962c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation pmr.962c.20260906t211539116z-2c9fcbe2 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-962c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.962c.20260906t211539116z-2c9fcbe2 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-962c-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.porsche-962c",
+        "pmr.official.porsche-962c-article",
+        "porsche.official.962-history",
+        "porsche.official.962c-restoration-2021",
+        "topgear.1987-le-mans-porsche-962c",
+        "ultimatecarpage.porsche-962c-cockpit-62524",
+        "as-driven.repository.porsche-962c-record-scan",
+            "pmr.local-live-962c-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR identifies the observed content as Porsche 962C in Group C with a five-speed manual. Porsche's history distinguishes the 962C from the IMSA 962 and documents separate PDK-equipped variants. Top Gear identifies the exact manual control reference as a totally original 1987 Le Mans-winning 962C, matching the existing 1987 World Sportscar Championship record."
+      }
     }
   ],
   "provenance": {
@@ -156,6 +242,33 @@
         ],
         "confidence": "high",
         "basis": "The guided drive recorded that a clutchless upshift was accepted after a throttle lift and a clutchless downshift with a manual blip, with no automatic throttle spike detected."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "pmr.official.porsche-962c",
+          "pmr.official.porsche-962c-article",
+          "porsche.official.962-history",
+          "porsche.official.962c-restoration-2021",
+          "topgear.1987-le-mans-porsche-962c",
+          "ultimatecarpage.porsche-962c-cockpit-62524",
+          "as-driven.repository.porsche-962c-record-scan",
+            "pmr.local-live-962c-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR identifies the observed content as Porsche 962C in Group C with a five-speed manual. Porsche's history distinguishes the 962C from the IMSA 962 and documents separate PDK-equipped variants. Top Gear identifies the exact manual control reference as a totally original 1987 Le Mans-winning 962C, matching the existing 1987 World Sportscar Championship record."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-962c-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -167,5 +280,5 @@
   "notes": [
     "'Porsche 962C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-25"
+  "updated_at": "2026-09-06"
 }

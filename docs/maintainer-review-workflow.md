@@ -314,8 +314,9 @@ batch with:
 python -m as_driven_db review-submissions finalize-release --test
 ```
 
-The command regenerates the AMS2 exact-identity coverage manifest from the
-maintainer machine's current audit and SimHub identity files, rebuilds the
+The command refreshes the AMS2 exact-identity coverage manifest from the
+maintainer machine's current audit and SimHub identity files when available;
+otherwise it retains the checked-in inventory snapshot. It rebuilds the
 cross-simulator disagreement audit, derives release and simulator counts from
 the curated records, refreshes maintained current-status references, rebuilds
 the offline site, validates the repository, and - with `--test` - runs the full

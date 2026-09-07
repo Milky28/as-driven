@@ -56,10 +56,10 @@ class AMS2CoverageManifestTests(unittest.TestCase):
         )
         names = [entry["telemetry_name"] for entry in manifest["entries"]]
         # The release manifest is the checked-in snapshot of local SimHub car
-        # files and live diagnostics. CI cannot read the ignored developer
-        # audit under build/, so verify the snapshot's internal guarantees here.
-        # Finalize-release regenerates this file from the local audit before it
-        # runs validation and the test suite.
+        # files and optional live diagnostics. CI cannot read the ignored
+        # developer audit under build/, so verify the snapshot's internal
+        # guarantees here. Finalize-release retains the snapshot when local
+        # coverage inputs are unavailable.
         self.assertEqual(len(names), len(set(names)))
         self.assertEqual(manifest["stats"]["observed_identities"], len(names))
         live_only = sorted(

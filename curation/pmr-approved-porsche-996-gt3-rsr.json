@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.57",
+  "approved_at": "2026-09-06",
+  "record_id": "porsche-996-gt3-rsr",
+  "simulator": "pmr",
+  "telemetry_name": "911 GT3-RSR (996)",
+  "observed_game_version": "2.2.0",
+  "observed_through": "SimHub guided verification observation pmr.911-gt3-rsr-996.20260906t213636666z-63aa59d8",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 996 GT3 RSR identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "N-GT"
+}

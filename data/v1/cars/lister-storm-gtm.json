@@ -37,12 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "d-shaped",
+        "shape": "round",
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "unknown",
         "source_label": "live-cockpit-d-shaped-no-display",
-        "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown."
+        "notes": "Direct cockpit inspection showed a D-shaped rim without an integrated display; exact diameter remains unknown.",
+        "open_top": "no"
       }
     },
     "notes": [
@@ -180,6 +181,90 @@
         "basis": "The exact RSS Tornado v4 package is a British V12 GT and includes liveries explicitly labeled Lister Storm plus period Creation Autosportif and FIA GT entries. Registered FIA and specialist evidence independently identifies the real Storm family and a six-speed sequential push-pull Storm GTM. The AC behavior and cockpit were directly observed."
       },
       "display_name": "GT Tornado V12"
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Storm GT"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Storm GT"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.storm-gt.20260906t233256801z-1e31ff61 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.storm-gt.20260906t233256801z-1e31ff61 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-storm-gt-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.storm-gt.20260906t233256801z-1e31ff61 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-storm-gt-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.storm-gt.20260906t233256801z-1e31ff61 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-storm-gt-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.lister-storm-gt",
+        "pmr.official.lister-storm-history",
+        "custodian.lister-storm-gtm.2000",
+        "fia.lister-storm.gt-008",
+        "goodwood.2021.lister-storm-gt-cockpit",
+            "pmr.local-live-storm-gt-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official PMR page names Lister Storm GT. A documented 2000 Lister championship car explicitly says the Storm GT used from 2000 onward had a six-speed sequential gearbox and identifies its chassis as GTM 002; it also calls the car a 2000 Lister Storm GTM. This provides the independent bridge from PMR's abbreviated display name to the existing GTM record. FIA Form GT-008 is retained as an adjacent-variant warning because its 1999 base homologation lists a Getrag six-speed manual with synchronisers."
+      }
     }
   ],
   "provenance": {
@@ -259,6 +344,55 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape"
+        ],
+        "source_refs": [
+          "goodwood.2021.lister-storm-gt-cockpit"
+        ],
+        "confidence": "medium",
+        "basis": "The clear cockpit photograph of a Storm GT returned to its 2003 appearance shows a continuous circular rim with a central button hub, not a flattened D rim or fixed-grip gt-formula face."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/open_top"
+        ],
+        "source_refs": [
+          "pmr.official.lister-storm-gt",
+          "pmr.official.lister-storm-history",
+          "custodian.lister-storm-gtm.2000",
+          "fia.lister-storm.gt-008",
+          "goodwood.2021.lister-storm-gt-cockpit"
+        ],
+        "confidence": "high",
+        "basis": "Both the 2000-onward sequential specification and the earlier FIA homologation list six forward ratios. For the late-period record resolved here, the documented 2000 Storm GT/GTM uses a Hewland TGTA six-speed sequential. The 1999 Getrag manual is explicitly treated as an earlier adjacent variant. The exact 2000 specification states a push-pull lever, and the documented 2003-spec cockpit photograph visibly shows a tall lever beside the driver. No reviewed exact-car source supports paddles for this late-period car. The 2000-onward specification explicitly calls the gearbox sequential and describes the push-pull lever. Manual blip is a downshift action in this data model; no upshift-blip procedure is asserted. Automatic blip is a downshift action in this data model; the reviewed real-car sources do not describe an upshift blip. Throttle lift is recorded as an upshift action in this data model; no separate downshift-lift claim is made. No downshift cut is established; the source is silent on such a function. The clear cockpit photograph of a Storm GT returned to its 2003 appearance shows a continuous circular rim with a central button hub, not a flattened D rim or fixed-grip gt-formula face. The photographed rim is continuous across the upper section; no upper opening is visible. This is evidence for the photographed 2003-spec restoration, not every earlier Storm variant. The wheel has a button hub but no integrated readout; the visible display is mounted in the dashboard behind the rim. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "pmr.official.lister-storm-gt",
+          "pmr.official.lister-storm-history",
+          "custodian.lister-storm-gtm.2000",
+          "fia.lister-storm.gt-008",
+          "goodwood.2021.lister-storm-gt-cockpit",
+            "pmr.local-live-storm-gt-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The official PMR page names Lister Storm GT. A documented 2000 Lister championship car explicitly says the Storm GT used from 2000 onward had a six-speed sequential gearbox and identifies its chassis as GTM 002; it also calls the car a 2000 Lister Storm GTM. This provides the independent bridge from PMR's abbreviated display name to the existing GTM record. FIA Form GT-008 is retained as an adjacent-variant warning because its 1999 base homologation lists a Getrag six-speed manual with synchronisers."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-storm-gt-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -276,6 +410,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-06",
   "driver_summary": "The Lister Storm GTM, which Assetto Corsa lists as GT Tornado V12. Hewland TGTA six-speed sequential on a push-pull lever rather than paddles. Upshift flat and the car cuts for you. Nothing blips the downshift, so match the revs yourself: whether this gearbox needs it is not established, and a blip costs nothing."
 }

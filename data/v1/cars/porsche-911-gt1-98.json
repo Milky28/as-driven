@@ -21,7 +21,7 @@
       "shift_pattern": "sequential",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "not-required",
+        "throttle_lift": "required",
         "automatic_cut": "yes",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
@@ -193,6 +193,80 @@
         "level": "high",
         "basis": "Kunos's official Porsche Pack II material, v1.10 announcement, exact in-game title and ks_porsche_911_gt1 content id establish the 1998 car. The guided drive directly established six sequential-stick gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and cockpit wheel details. Automatic cut is deliberately unknown because AC exposed no engine-torque channel."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "911 GT1-98"
+        },
+        {
+          "kind": "internal-id",
+          "value": "911 GT1-98"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.911-gt1-98.20260906t212904617z-b39fbd9e by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.911-gt1-98.20260906t212904617z-b39fbd9e directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.911-gt1-98.20260906t212904617z-b39fbd9e directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "porsche.museum.911-gt1-98.datasheet",
+        "porsche.newsroom.911-gt1-98-1998",
+        "911andporscheworld.2023.gt1-98",
+        "ultimatecarpage.2016.gt1-98-004-cockpit",
+        "automobilist.1998-porsche-911-gt1-driver-testimony",
+        "stuttcars.2021.porsche-911-gt1-98-specifications",
+        "pmr.official.911-gt1-98",
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Porsche Museum's exact 911 GT1 '98 data sheet identifies the 1998 FIA GT customer car as technically identical to the Le Mans-winning factory car and states the six-speed sequential gearbox. Porsche Newsroom independently identifies the 1998 overhauled race car and its Zakspeed FIA GT use. The PMR telemetry name and GT1 class match the existing curated identity."
+      }
     }
   ],
   "provenance": {
@@ -280,6 +354,43 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "automobilist.1998-porsche-911-gt1-driver-testimony"
+        ],
+        "confidence": "medium",
+        "basis": "Ortelli's direct recollection says the 1998 car could not be flat-shifted. The conservative control interpretation is that a full-throttle upshift was not the authentic procedure and the driver had to lift or otherwise unload the drivetrain."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "porsche.museum.911-gt1-98.datasheet",
+          "porsche.newsroom.911-gt1-98-1998",
+          "911andporscheworld.2023.gt1-98",
+          "ultimatecarpage.2016.gt1-98-004-cockpit",
+          "automobilist.1998-porsche-911-gt1-driver-testimony",
+          "stuttcars.2021.porsche-911-gt1-98-specifications",
+          "pmr.official.911-gt1-98",
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Porsche Museum's exact 911 GT1 '98 data sheet identifies the 1998 FIA GT customer car as technically identical to the Le Mans-winning factory car and states the six-speed sequential gearbox. Porsche Newsroom independently identifies the 1998 overhauled race car and its Zakspeed FIA GT use. The PMR telemetry name and GT1 class match the existing curated identity."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -287,6 +398,10 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-blip-down",
     "classification": "deviates",
     "deviations": [
+      {
+        "path": "/authentic_controls/transmission/upshift/throttle_lift",
+        "basis": "Ortelli's exact-car testimony establishes that the 1998 GT1-98 could not be flat-shifted, so the authentic procedure requires unloading the drivetrain."
+      },
       {
         "path": "/authentic_controls/transmission/downshift/manual_blip",
         "basis": "No exact real-car source establishes whether the driver supplies a blip."
@@ -297,6 +412,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-06",
   "driver_summary": "Six-speed sequential with a lever. The car cuts the upshift, so stay flat. Nothing blips the downshift, and whether this gearbox needs one to engage is not established, so blip anyway: it settles the car into the corner whether or not the box demands it."
 }

@@ -1,0 +1,275 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "mazda-mx-5-global-cup-nd1",
+  "identity": {
+    "display_name": "2017 Mazda MX-5 Global Cup (ND1)",
+    "manufacturer": "Mazda",
+    "model": "MX-5 Global Cup (ND1) 2.0",
+    "year": {
+      "from": 2017,
+      "to": 2017,
+      "label": "2017 Global MX-5 Cup ND1"
+    },
+    "class": "Global MX-5 Cup",
+    "real_world_identity_notes": "The PMR identity MX-5 Spec is the 2017 Global MX-5 Cup ND1 race car: a fourth-generation Mazda MX-5 built in Hiroshima and converted by Long Road Racing into the sealed, single-spec Global MX-5 Cup racer. This is the 2016-2018 ND1 specification represented by the PMR article, not a road-going ND MX-5, the unrelated NC-based Spec MX-5 club-racing class, the NA/NC Miata Trophy cars, or the later 2019+ ND2 Global MX-5 Cup car that adopted a SADEV sequential transmission."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: no; wheel-rim shape: round; wheel shift lights: no; forward gears: 6; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required.",
+      "The reviewed real-car sources do not establish running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "MX-5 Spec"
+        },
+        {
+          "kind": "internal-id",
+          "value": "MX-5 Spec"
+        },
+        {
+          "kind": "class-id",
+          "value": "MX5 Trophy"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.mx-5-spec.20260906t210940835z-d80a519d by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mx-5-spec.20260906t210940835z-d80a519d directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.mx-5-spec",
+        "pmr.official.2017-mx-5-spec-article",
+        "mazda.nd1.mx-5-cup-documentation",
+        "long-road-racing.global-mx-5-cup-user-guide.2017",
+        "mazda.global-mx-5-cup-homologation.2017",
+        "dsport.global-mx-5-cup.2017",
+        "mazda.media.global-mx5cup-interior.2019",
+        "mpi.global-mx5cup-steering-wheel",
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR's first-party vehicle page identifies Mazda MX-5 Spec, a 2.0-litre Skyactiv-G engine and six-speed manual transmission. PMR's launch article explicitly identifies the content as the 2017 Global MX-5 (ND1), and Mazda's own ND.1 documentation applies to the 2016-2018 race car while separating it from 2019+ ND.2 documentation."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.official.mx-5-spec",
+          "pmr.official.2017-mx-5-spec-article",
+          "mazda.nd1.mx-5-cup-documentation",
+          "long-road-racing.global-mx-5-cup-user-guide.2017",
+          "mazda.global-mx-5-cup-homologation.2017",
+          "dsport.global-mx-5-cup.2017",
+          "mazda.media.global-mx5cup-interior.2019",
+          "mpi.global-mx5cup-steering-wheel",
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR's first-party vehicle page identifies Mazda MX-5 Spec, a 2.0-litre Skyactiv-G engine and six-speed manual transmission. PMR's launch article explicitly identifies the content as the 2017 Global MX-5 (ND1), and Mazda's own ND.1 documentation applies to the 2016-2018 race car while separating it from 2019+ ND.2 documentation."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.mx-5-spec",
+          "pmr.official.2017-mx-5-spec-article",
+          "mazda.nd1.mx-5-cup-documentation",
+          "long-road-racing.global-mx-5-cup-user-guide.2017",
+          "mazda.global-mx-5-cup-homologation.2017",
+          "dsport.global-mx-5-cup.2017",
+          "mazda.media.global-mx5cup-interior.2019",
+          "mpi.global-mx5cup-steering-wheel",
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The exact race-car guide and contemporary cockpit coverage place the AiM MXL2 display on the dashboard, and the manufacturer cockpit photograph shows it separate from the steering rim. The manufacturer cockpit photograph shows a continuous upper section on the circular rim; the documented Global MX-5 Cup wheel is a conventional continuous-rim wheel rather than an open-top formula wheel. The full-resolution manufacturer cockpit photograph shows a continuous circular suede rim with a three-spoke center, not fixed molded grips surrounding a central control face. MPI's Global MX-5 Cup wheel documentation corroborates the conventional circular wheel family and 12.75-inch diameter. The wheel photograph shows no wheel-mounted shift-light strip or lamps; the AiM display is mounted separately on the dash, and the documented MPI wheel is a passive rim with no integrated display or lighting hardware. PMR lists a six-speed manual, and contemporary exact-car coverage describes the ND Global MX-5 Cup gearbox as six-speed H-pattern. Contemporary exact-car coverage explicitly calls the gearbox H-pattern; the homologation document separately refers to the standard transmission and the optional Sadev sequential installation. The exact ND Global MX-5 Cup source describes a six-speed H-pattern gearbox. No source reviewed indicates a dogleg gate, so the conservative standard-H category is used; first-gear side is not asserted. The exact race-car guide instructs the driver to depress the clutch pedal before starting, and the car is established as a driver-operated H-pattern manual. Under the project's H-pattern standing-start rule, pulling away from rest requires the clutch; this is not derived from the PMR simulator behavior. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-mx-5-spec-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "pmr.official.mx-5-spec",
+          "pmr.official.2017-mx-5-spec-article",
+          "mazda.nd1.mx-5-cup-documentation",
+          "long-road-racing.global-mx-5-cup-user-guide.2017",
+          "mazda.global-mx-5-cup-homologation.2017",
+          "dsport.global-mx-5-cup.2017",
+          "mazda.media.global-mx5cup-interior.2019",
+          "mpi.global-mx5cup-steering-wheel"
+        ],
+        "confidence": "high",
+        "basis": "The exact race-car guide and contemporary cockpit coverage place the AiM MXL2 display on the dashboard, and the manufacturer cockpit photograph shows it separate from the steering rim. The manufacturer cockpit photograph shows a continuous upper section on the circular rim; the documented Global MX-5 Cup wheel is a conventional continuous-rim wheel rather than an open-top formula wheel. The full-resolution manufacturer cockpit photograph shows a continuous circular suede rim with a three-spoke center, not fixed molded grips surrounding a central control face. MPI's Global MX-5 Cup wheel documentation corroborates the conventional circular wheel family and 12.75-inch diameter. The wheel photograph shows no wheel-mounted shift-light strip or lamps; the AiM display is mounted separately on the dash, and the documented MPI wheel is a passive rim with no integrated display or lighting hardware. PMR lists a six-speed manual, and contemporary exact-car coverage describes the ND Global MX-5 Cup gearbox as six-speed H-pattern. Contemporary exact-car coverage explicitly calls the gearbox H-pattern; the homologation document separately refers to the standard transmission and the optional Sadev sequential installation. The exact ND Global MX-5 Cup source describes a six-speed H-pattern gearbox. No source reviewed indicates a dogleg gate, so the conservative standard-H category is used; first-gear side is not asserted. The exact race-car guide instructs the driver to depress the clutch pedal before starting, and the car is established as a driver-operated H-pattern manual. Under the project's H-pattern standing-start rule, pulling away from rest requires the clutch; this is not derived from the PMR simulator behavior. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
+      }
+    ]
+  },
+  "updated_at": "2026-09-06"
+}

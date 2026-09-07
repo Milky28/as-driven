@@ -213,13 +213,20 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # high confidence, but the photograph is published by a
                 # secondary source, so AC's D-shaped rim remains provisional.
                 "nissan-r390-gt1--steering-wheel-rim-shape",
+                "porsche-911-gt1-98--transmission-upshift-throttle-lift",
+                "porsche-911-gt3-cup-992--transmission-standing-start-clutch",
+                "porsche-962c--transmission-upshift-throttle-lift",
+                "sauber-mercedes-c9--transmission-downshift-manual-blip",
+                "sauber-mercedes-c9--transmission-shift-pattern",
+                "sauber-mercedes-c9--transmission-upshift-throttle-lift",
+                "tvr-tuscan-t400r-gt2--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
                 "authentic-baseline-open": 16,
-                "provisional-departure": 8,
+                "provisional-departure": 15,
                 "supported-departure": 13,
             },
             self.checked_in["summary"]["by_status"],

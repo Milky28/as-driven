@@ -17,7 +17,7 @@
   "authentic_controls": {
     "transmission": {
       "forward_gears": 6,
-      "gearbox_type": "sequential",
+      "gearbox_type": "dogbox",
       "shift_actuation": "sequential-stick",
       "shift_pattern": "sequential",
       "upshift": {
@@ -38,12 +38,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "round",
+        "shape": "gt-formula",
         "diameter_mm": null,
         "integrated_display": "no",
-        "shift_lights": "unknown",
+        "shift_lights": "no",
         "source_label": "live-cockpit-round-no-display",
-        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown.",
+        "open_top": "not-applicable"
       }
     },
     "notes": [
@@ -93,6 +94,78 @@
         "level": "verified",
         "basis": "Exact simulator identity, modeled cockpit hardware, and shift behavior were directly tested; specialist historical evidence independently supports the six-speed sequential gearbox and ignition cut."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "911 GT3-RSR (996)"
+        },
+        {
+          "kind": "internal-id",
+          "value": "911 GT3-RSR (996)"
+        },
+        {
+          "kind": "class-id",
+          "value": "N-GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.911-gt3-rsr-996.20260906t213636666z-63aa59d8 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.911-gt3-rsr-996.20260906t213636666z-63aa59d8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.911-gt3-rsr-996.20260906t213636666z-63aa59d8 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "motorsport.2004.alex-job-911-gt3-rsr",
+        "porsche.2010.911-gt3-rsr-996-press",
+        "stuttcars.porsche-996-gt3-rsr",
+        "classicdriver.2004.porsche-996-gt3-rsr-cockpit",
+        "stuttcars.2023.996-rsr-onboard",
+            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Contemporary 2004 Alex Job Racing material names the 2004 Porsche 911 GT3 RSR and supplies its race specification. Stuttcars independently scopes the 996 RSR to the 2004-2005 seasons and identifies the internal generation as 996. The PMR attachment supplies the matching telemetry name and N-GT class; it is used only to connect the observation to the real-car identity, not to establish real-car technique."
+      }
     }
   ],
   "provenance": {
@@ -136,13 +209,80 @@
         ],
         "confidence": "verified",
         "basis": "Direct current-game tests and cockpit inspection establish the start clutch, automatic blip, and round no-display rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "motorsport.2004.alex-job-911-gt3-rsr",
+          "porsche.2010.911-gt3-rsr-996-press"
+        ],
+        "confidence": "high",
+        "basis": "The 2004 team specification says dog type, straight-cut transmission; Porsche independently calls it a sequential jaw-type gearbox."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape"
+        ],
+        "source_refs": [
+          "classicdriver.2004.porsche-996-gt3-rsr-cockpit"
+        ],
+        "confidence": "medium",
+        "basis": "The clear cockpit photograph shows fixed hand grips around a central button/control face rather than a continuous circular band. Under the data-model definition this is gt-formula."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "motorsport.2004.alex-job-911-gt3-rsr",
+          "porsche.2010.911-gt3-rsr-996-press",
+          "stuttcars.porsche-996-gt3-rsr",
+          "classicdriver.2004.porsche-996-gt3-rsr-cockpit",
+          "stuttcars.2023.996-rsr-onboard"
+        ],
+        "confidence": "high",
+        "basis": "Contemporary team data and Porsche's technical summary both specify six forward gears. The 2004 team specification says dog type, straight-cut transmission; Porsche independently calls it a sequential jaw-type gearbox. The period Alex Job Racing photograph is captioned as showing the sequential gear shift, the specification names an in-line shift mechanism, and the later onboard description identifies a push-pull cockpit lever. No source supports steering-wheel paddles for this target. Both sources explicitly describe a sequential gearbox; the team source also identifies the in-line shift mechanism. The period specification documents sensor-controlled traction interruption, and the model history explicitly says the ignition cut enables shifts at full throttle. The documented sensor-controlled traction interruption is an automatic power cut associated with the shift mechanism; the independent description calls it ignition cut. Manual blip is a downshift action in this data model; no upshift-blip procedure is being asserted. Automatic blip is a downshift action in this data model; the documented upshift system is interruption/cut, not a blip. Throttle lift is recorded as an upshift action in this data model; no separate downshift-lift claim is made. The documented interruption is an upshift function; no downshift cut is established. The clear cockpit photograph shows fixed hand grips around a central button/control face rather than a continuous circular band. Under the data-model definition this is gt-formula. The wheel is a fixed-grip gt-formula control-face design; open_top is therefore not-applicable under the schema rather than a round/d-shaped rim yes/no property. The photograph nevertheless visibly shows the upper rim opening. The wheel face in the clear photograph contains controls but no display; the contemporary team specification places the MoTeC display in the electrical/dashboard system behind the wheel. The full-width photograph shows no light array on the wheel; the visible light strip is on the dashboard behind it. This is limited to the photographed restored configuration and does not claim that no 996 RSR ever used a different wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "motorsport.2004.alex-job-911-gt3-rsr",
+          "porsche.2010.911-gt3-rsr-996-press",
+          "stuttcars.porsche-996-gt3-rsr",
+          "classicdriver.2004.porsche-996-gt3-rsr-cockpit",
+          "stuttcars.2023.996-rsr-onboard",
+            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Contemporary 2004 Alex Job Racing material names the 2004 Porsche 911 GT3 RSR and supplies its race specification. Stuttcars independently scopes the 996 RSR to the 2004-2005 seasons and identifies the internal generation as 996. The PMR attachment supplies the matching telemetry name and N-GT class; it is used only to connect the observation to the real-car identity, not to establish real-car technique."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
   "archetype": {
     "archetype_id": "stick-6-seq-clutch-start-flat-up-auto-blip",
-    "classification": "matches"
+    "classification": "deviates",
+    "deviations": [
+      {
+        "path": "/authentic_controls/transmission/gearbox_type",
+        "basis": "The exact 2004-2005 996 GT3 RSR evidence establishes a dogbox, whereas the archetype describes a sequential gearbox."
+      }
+    ]
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-06",
   "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift and blips the downshift itself, so once you are rolling the gearbox asks nothing of your feet."
 }

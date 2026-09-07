@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.59",
+  "approved_at": "2026-09-06",
+  "record_id": "saleen-s7-r-gt1-2004",
+  "simulator": "pmr",
+  "telemetry_name": "S7R",
+  "observed_game_version": "2.2.0",
+  "observed_through": "SimHub guided verification observation pmr.s7r.20260906t234106797z-475d57a8",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "unknown",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2004 Saleen S7-R specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GT",
+  "staged_record_id": "s7r"
+}

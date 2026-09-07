@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.54",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "porsche-962c",
+      "bundle": "build/review-cases/issue-70/staged.json",
+      "display_name": "Porsche 962C",
+      "class": "Group C",
+      "manufacturer": "Porsche",
+      "model": "962C",
+      "year": {
+        "from": 1987,
+        "to": 1987,
+        "label": "1987 World Sportscar Championship Porsche 962C"
+      },
+      "real_world_identity_notes": "The PMR 962C maps to the existing porsche-962c record: Porsche's 962 C Group C endurance prototype, represented conservatively by the 1987 World Sportscar Championship specification. The exact evidence used for the manual controls is a totally original 1987 Le Mans-winning 962C. Do not silently substitute the IMSA 962 GTP car, a 1987 962C fitted with Porsche's PDK, later 962C customer evolutions, Dauer 962 Le Mans GT road cars, or restored cars with undocumented replacement cockpit hardware. PMR does not identify a unique chassis number.",
+      "real_world_source_refs": [
+        "pmr.official.porsche-962c",
+        "pmr.official.porsche-962c-article",
+        "porsche.official.962-history",
+        "porsche.official.962c-restoration-2021",
+        "topgear.1987-le-mans-porsche-962c",
+        "ultimatecarpage.porsche-962c-cockpit-62524",
+        "as-driven.repository.porsche-962c-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "PMR identifies the observed content as Porsche 962C in Group C with a five-speed manual. Porsche's history distinguishes the 962C from the IMSA 962 and documents separate PDK-equipped variants. Top Gear identifies the exact manual control reference as a totally original 1987 Le Mans-winning 962C, matching the existing 1987 World Sportscar Championship record.",
+      "identity_basis": "PMR identifies the observed content as Porsche 962C in Group C with a five-speed manual. Porsche's history distinguishes the 962C from the IMSA 962 and documents separate PDK-equipped variants. Top Gear identifies the exact manual control reference as a totally original 1987 Le Mans-winning 962C, matching the existing 1987 World Sportscar Championship record.",
+      "specification_basis": "The 962C cockpit photograph shows instrumentation on the dashboard behind the wheel and no display integrated into the continuous rim. The exact 1987 article describes the car's wheel and dash but does not identify any wheel display. The full cockpit image shows a continuous upper arc on the wheel; it is not an open-top formula/GT wheel. Because the gallery does not identify the photograph's chassis/year, confidence is not high. The cockpit photograph visibly shows a continuous circular suede rim, and the exact 1987 report refers to the original car's steering wheel. It is not a D-shaped or GT/formula fixed-grip wheel. The visible warning/indicator lamps are on the dashboard, not on the rim; the photographed wheel has no visible wheel-mounted shift-light strip. The image is not a uniquely identified 1987 chassis, so this remains medium confidence. PMR lists a five-speed manual, and the exact 1987 Le Mans-winning 962C report independently says 'Five speed manual.' The exact car is described as a five-speed manual with dogleg first, and the cockpit evidence shows a conventional manual race-car wheel/dash arrangement rather than paddles or buttons. A dogleg first is an H-gate form; it is not a sequential paddle interface. The exact 1987 car's driver report describes the clutch as physically tough, uses the clutch to leave the line, and says it was not fully released until well after the start. Porsche's 962C history confirms this is the manually configured car, not the separate PDK variant. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift.",
+      "control_overrides": {
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.962c.20260906t211539116z-2c9fcbe2 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-962c-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation pmr.962c.20260906t211539116z-2c9fcbe2 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-962c-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.962c.20260906t211539116z-2c9fcbe2 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-962c-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1987 World Sportscar Championship Porsche 962C identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: no; wheel-rim shape: round; wheel shift lights: no; forward gears: 5; shift actuation: h pattern; standing-start clutch use: required.",
+        "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/70",
+      "live_source_notes": "Guided-verification observation pmr.962c.20260906t211539116z-2c9fcbe2 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Five-speed manual. Neither the gate nor how the gearbox engages is established by a source, so the H-pattern is what the cockpit showed, and blipping on downshifts is the safe assumption."
+    }
+  ]
+}

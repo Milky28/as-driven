@@ -1,0 +1,301 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "morgan-aero-8-gtn",
+  "identity": {
+    "display_name": "Morgan Aero 8 GTN",
+    "manufacturer": "Morgan",
+    "model": "Aero 8 GTN",
+    "year": {
+      "from": 2004,
+      "label": "2004 Morgan Aero 8 N-GT / GTN race specification"
+    },
+    "class": "N-GT / GT",
+    "real_world_identity_notes": "The PMR telemetry name Aero 8 GT(N) resolves to the 2004 Morgan Aero 8 N-GT/GTN race specification, not the limited-production road-going Aero 8 GTN special edition and not the later Aero 8 GT3. PMR explicitly labels its implementation a 2004 Aero 8 N-GT. Period RSC records identify the Morgan Works Race Team chassis SA9AERO89000490272 in 2004 competition. The race car used a six-speed sequential gearbox, while the 2002 race documentation separately records a physical AP four-disc carbon clutch. No reviewed source establishes the exact driver interface, clutch procedure, shift electronics, or real race-period wheel geometry."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "unknown",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Aero 8 GT(N)"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Aero 8 GT(N)"
+        },
+        {
+          "kind": "class-id",
+          "value": "N-GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "h-pattern",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.aero-8-gt-n.20260907t001128286z-75a0fa92 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-07",
+      "source_refs": [
+        "pmr.official.morgan-aero-8",
+        "pmr.official.morgan-aero-8-2004-history",
+        "morgan.mogsport.2002-gtn-race-announcement",
+        "autosport.morgan-aero-8-customer-gt-2002",
+        "24h-en-piste.morgan-aero-8-2002-73",
+        "rsc.morgan-aero-8-gtn-chassis-2004",
+        "rsc.morgan-aero-8-gtn-photo-gallery",
+        "okanelavers.2004-road-gtn-interior",
+        "as-driven.repository.morgan-aero-8-gtn-record-scan",
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR's official page and dated article identify the 2004 Morgan Aero 8 N-GT/Aero 8 GTN. Racing Sports Cars independently records the exact 2004 Morgan Works Race Team Aero 8 GTN chassis SA9AERO89000490272. Contemporary Morgan material identifies the GT(N) as a race car entering the 2002 Le Mans and British GT program, and Autosport reports the race version's Getrag six-speed sequential-shift transaxle. The repository contains no existing curated record for this identity, so a new record is proposed."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.official.morgan-aero-8",
+          "pmr.official.morgan-aero-8-2004-history",
+          "morgan.mogsport.2002-gtn-race-announcement",
+          "autosport.morgan-aero-8-customer-gt-2002",
+          "24h-en-piste.morgan-aero-8-2002-73",
+          "rsc.morgan-aero-8-gtn-chassis-2004",
+          "rsc.morgan-aero-8-gtn-photo-gallery",
+          "okanelavers.2004-road-gtn-interior",
+          "as-driven.repository.morgan-aero-8-gtn-record-scan",
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR's official page and dated article identify the 2004 Morgan Aero 8 N-GT/Aero 8 GTN. Racing Sports Cars independently records the exact 2004 Morgan Works Race Team Aero 8 GTN chassis SA9AERO89000490272. Contemporary Morgan material identifies the GT(N) as a race car entering the 2002 Le Mans and British GT program, and Autosport reports the race version's Getrag six-speed sequential-shift transaxle. The repository contains no existing curated record for this identity, so a new record is proposed."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.official.morgan-aero-8",
+          "pmr.official.morgan-aero-8-2004-history",
+          "morgan.mogsport.2002-gtn-race-announcement",
+          "autosport.morgan-aero-8-customer-gt-2002",
+          "24h-en-piste.morgan-aero-8-2002-73",
+          "rsc.morgan-aero-8-gtn-chassis-2004",
+          "rsc.morgan-aero-8-gtn-photo-gallery",
+          "okanelavers.2004-road-gtn-interior",
+          "as-driven.repository.morgan-aero-8-gtn-record-scan",
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR and its 2004 article state six-speed sequential, Autosport reports the race Getrag six-speed sequential transaxle, and the exact 2002 race-car technical table lists six ratios. The official PMR 2004 description and contemporary Autosport race-technical report both explicitly identify a sequential race gearbox. The race gearbox is explicitly described as sequential-shift. This establishes the sequential pattern, but not the driver's physical actuation interface. Manual blip is a downshift action in this controls model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this controls model; no upshift-blip claim is asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift-cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim",
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "pmr.official.morgan-aero-8",
+          "pmr.official.morgan-aero-8-2004-history",
+          "morgan.mogsport.2002-gtn-race-announcement",
+          "autosport.morgan-aero-8-customer-gt-2002",
+          "24h-en-piste.morgan-aero-8-2002-73",
+          "rsc.morgan-aero-8-gtn-chassis-2004",
+          "rsc.morgan-aero-8-gtn-photo-gallery",
+          "okanelavers.2004-road-gtn-interior",
+          "as-driven.repository.morgan-aero-8-gtn-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "PMR and its 2004 article state six-speed sequential, Autosport reports the race Getrag six-speed sequential transaxle, and the exact 2002 race-car technical table lists six ratios. The official PMR 2004 description and contemporary Autosport race-technical report both explicitly identify a sequential race gearbox. The race gearbox is explicitly described as sequential-shift. This establishes the sequential pattern, but not the driver's physical actuation interface. Manual blip is a downshift action in this controls model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this controls model; no upshift-blip claim is asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift-cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
+      }
+    ]
+  },
+  "updated_at": "2026-09-06"
+}

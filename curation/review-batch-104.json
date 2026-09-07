@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.64",
+  "approved_at": "2026-09-07",
+  "records": [
+    {
+      "record_id": "tvr-tuscan-t400r-gt2",
+      "bundle": "build/review-cases/issue-80/staged.json",
+      "display_name": "TVR Tuscan T400R GT2",
+      "class": "N-GT / GT2-era",
+      "manufacturer": "TVR",
+      "model": "Tuscan T400R",
+      "year": {
+        "from": 2004,
+        "label": "2004 TVR Tuscan T400R N-GT / GT2-era race specification"
+      },
+      "real_world_identity_notes": "The PMR observation resolves to the TVR Tuscan T400R race-car family represented by the existing curated record tvr-tuscan-t400r-gt2. PMR identifies its implementation as the 2004 TVR Tuscan T400R in N-GT, while the existing record uses a GT2-era label for the same T400R race family. TVR's 2004 press material and the PMR page both describe a six-speed sequential gearbox. Period race archives document multiple T400R chassis and event classifications, so N-GT and later GT2 are treated as regulatory/context labels rather than silently turning the submission into a different road-going Tuscan, T440R, Typhon, or Tuscan Challenge car. The exact PMR chassis and exact race-period driver interface are not identified.",
+      "real_world_source_refs": [
+        "pmr.official.tuscan-t400r",
+        "pmr.official.tuscan-t400r-2004-history",
+        "pmr.image.tuscan-t400r-cockpit",
+        "tvr.press-kit.2004-t400r",
+        "tvr.carclub.2003-t400r-brochure",
+        "rsc.tvr-tuscan-t400r-archive",
+        "ultimatecarpage.tvr-t400r-chassis-2003-104",
+        "24h-en-piste.tvr-tuscan-2004-96",
+        "as-driven.repository.tvr-tuscan-t400r-gt2-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "PMR's official car page and dated article identify the 2004 TVR Tuscan T400R and N-GT class. TVR's 2004 manufacturer press kit describes the T400R family and its six-speed sequential gearbox. Racing Sports Cars and Ultimatecarpage independently document the T400R race program and period chassis history. The checked-out repository already contains the matching curated T400R record, so use-existing is proposed.",
+      "identity_basis": "PMR's official car page and dated article identify the 2004 TVR Tuscan T400R and N-GT class. TVR's 2004 manufacturer press kit describes the T400R family and its six-speed sequential gearbox. Racing Sports Cars and Ultimatecarpage independently document the T400R race program and period chassis history. The checked-out repository already contains the matching curated T400R record, so use-existing is proposed.",
+      "specification_basis": "PMR, TVR's 2004 press kit, and the period brochure all describe a six-speed sequential gearbox. The official PMR page and contemporary TVR manufacturer material explicitly identify the T400R gearbox as sequential. The gearbox is explicitly described as six-speed sequential by PMR and TVR manufacturer material. This does not settle the physical actuation interface. Manual blip is modeled as a downshift action; no upshift-blip claim is asserted about the car. Automatic blip is modeled as a downshift action; no upshift-blip claim is asserted about the car. Throttle lift is modeled as an upshift action; no separate downshift-lift claim is asserted about the car. Automatic cut is modeled as an upshift action; no downshift-cut claim is asserted about the car. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_actuation": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-tuscan-t400r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-tuscan-t400r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-tuscan-t400r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-tuscan-t400r-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2004 TVR Tuscan T400R N-GT / GT2-era race specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/80",
+      "live_source_notes": "Guided-verification observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Six-speed sequential, from TVR's own period press kit for the T400R, and a stick without paddles in the cockpit. It cuts the upshift, so stay flat, and blip the downshifts yourself."
+    }
+  ]
+}

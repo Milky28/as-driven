@@ -143,10 +143,11 @@ and any case that has not reached `manifest-review`. It registers approved
 candidate sources, allocates the next numbered review batch, promotes the record
 and approval, and marks the local case promoted.
 
-`finalize-release` regenerates the AMS2 coverage manifest and cross-simulator
-disagreement audit, refreshes maintained release facts from the actual records,
-rebuilds the offline site, and validates the repository. Pass `--test` to
-include the full Python test suite.
+`finalize-release` refreshes the AMS2 coverage manifest when local coverage
+inputs are available, otherwise retains its checked-in inventory snapshot. It
+also regenerates the cross-simulator disagreement audit, refreshes maintained
+release facts from the actual records, rebuilds the offline site, and validates
+the repository. Pass `--test` to include the full Python test suite.
 
 After the release commit is pushed, `publish-result` previews the exact
 contributor-facing comment and close reason. It makes no GitHub change unless

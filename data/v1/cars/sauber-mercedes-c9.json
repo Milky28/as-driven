@@ -17,19 +17,19 @@
   "authentic_controls": {
     "transmission": {
       "forward_gears": 5,
-      "gearbox_type": "unknown",
+      "gearbox_type": "dogbox",
       "shift_actuation": "h-pattern",
       "shift_pattern": "dogleg-h",
       "first_gear_position": "down-left",
       "upshift": {
-        "clutch": "unknown",
+        "clutch": "not-required",
         "throttle_lift": "required",
         "automatic_cut": "no",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
-        "clutch": "unknown",
+        "clutch": "required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
         "manual_blip": "required",
@@ -145,6 +145,92 @@
         "level": "high",
         "basis": "Kunos's official Dream Pack, exact ks_mercedes_c9 content id and installed Mercedes-Benz C9 1989 LM title establish the implementation. Mercedes-Benz independently identifies the real 1989 Sauber-Mercedes C9 Le Mans cars. The drive directly established five H-pattern gears, clutch-required move-off, required lift and manual blip, no automatic cut/blip, and cockpit wheel details."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Sauber C9"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Sauber C9"
+        },
+        {
+          "kind": "class-id",
+          "value": "Group C"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.sauber-c9.20260906t212157268z-fa341800 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.sauber-c9.20260906t212157268z-fa341800 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.sauber-c9.20260906t212157268z-fa341800 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.sauber-c9.20260906t212157268z-fa341800 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.mercedes-benz-sauber-c9",
+        "petersen.1989-sauber-mercedes-c9",
+        "mercedes-benz.museum.25-years-victory-le-mans-c9",
+        "tradeuniquecars.1989-sauber-mercedes-c9-review",
+        "motorsportmagazine.2020-sauber-c9-steering-wheel",
+        "motorsportmagazine.2020-kenny-acheson-c9",
+        "wikipedia.de.sauber-c9",
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The existing curated record matches the PMR Group C C9 lead. Petersen identifies an exact 1989 Sauber-Mercedes C 9; Mercedes-Benz Museum material identifies the 1989 C9, its Sauber development, Mercedes powertrain, and race use; PMR uses the corresponding Mercedes-Benz Sauber C9 name. The independent sources converge on the existing real-car identity."
+      }
     }
   ],
   "provenance": {
@@ -216,6 +302,68 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/gearbox_type"
+        ],
+        "source_refs": [
+          "pmr.official.mercedes-benz-sauber-c9",
+          "petersen.1989-sauber-mercedes-c9",
+          "mercedes-benz.museum.25-years-victory-le-mans-c9",
+          "tradeuniquecars.1989-sauber-mercedes-c9-review",
+          "motorsportmagazine.2020-sauber-c9-steering-wheel",
+          "motorsportmagazine.2020-kenny-acheson-c9",
+          "wikipedia.de.sauber-c9",
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The exact C9 review calls it a five-speed dog box; the year-split technical table independently lists a five-speed racing gearbox. The direct review explicitly says ‘five-speed dog box’. The secondary year-split table corroborates the Hewland VGC racing gearbox, but does not itself use the dog-box term. The exact-car review describes a small gearlever on the right sill and a Hewland-derived shifter, establishing a driver-operated lever rather than steering-wheel paddles. The result uses the database's h-pattern lever category, while the exact gate layout is separately left unestablished. The C9 had a physical triple-plate clutch, and 1989 C9 driver Kenny Acheson explicitly describes repeatedly dropping the clutch to get a disabled car moving from the pit lane. This establishes a manually operated clutch for moving off; the quoted incident was abnormal, so the exact normal launch routine remains less certain. The direct C9 review states that clutchless upchanges were routine. This is procedure evidence, not an inference from the dog-box construction alone. The same direct review says the C9 could not be flatshifted while clutchless upchanges were routine. That establishes that a full-throttle flatshift was not the described procedure; a lift is the conservative fitting for clutchless racing upchanges. Manual blipping is a downshift operation in this control model; no upshift blip claim is being made. Automatic blipping is a downshift operation in this control model; no upshift blip claim is being made. The direct C9 review explicitly states that the clutch must be used for downshifting. The control model records throttle-lift as an upshift action; no separate downshift lift claim is being asserted. Automatic cut is an upshift action in this control model; no downshift cut claim is being asserted. The full-resolution Daimler-credited C9 steering-wheel photograph shows a continuous circular rim with no flattened or open section. The Mercedes-Benz Museum also captions a period 1989 C9 cockpit photograph, but the retrospective wheel photograph is the clearer visual locator. The photographed conventional round rim is continuous across the top; it is not an open-top GT/formula wheel. The photograph shows the readouts and instruments mounted on the dashboard behind the wheel, not on the wheel rim itself. No shift/rev-light array is visible on the photographed wheel rim; the visible warning/instrument hardware is dashboard-mounted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/upshift/clutch"
+        ],
+        "source_refs": [
+          "pmr.official.mercedes-benz-sauber-c9",
+          "petersen.1989-sauber-mercedes-c9",
+          "mercedes-benz.museum.25-years-victory-le-mans-c9",
+          "tradeuniquecars.1989-sauber-mercedes-c9-review",
+          "motorsportmagazine.2020-sauber-c9-steering-wheel",
+          "motorsportmagazine.2020-kenny-acheson-c9",
+          "wikipedia.de.sauber-c9"
+        ],
+        "confidence": "high",
+        "basis": "The exact C9 review calls it a five-speed dog box; the year-split technical table independently lists a five-speed racing gearbox. The direct review explicitly says ‘five-speed dog box’. The secondary year-split table corroborates the Hewland VGC racing gearbox, but does not itself use the dog-box term. The exact-car review describes a small gearlever on the right sill and a Hewland-derived shifter, establishing a driver-operated lever rather than steering-wheel paddles. The result uses the database's h-pattern lever category, while the exact gate layout is separately left unestablished. The C9 had a physical triple-plate clutch, and 1989 C9 driver Kenny Acheson explicitly describes repeatedly dropping the clutch to get a disabled car moving from the pit lane. This establishes a manually operated clutch for moving off; the quoted incident was abnormal, so the exact normal launch routine remains less certain. The direct C9 review states that clutchless upchanges were routine. This is procedure evidence, not an inference from the dog-box construction alone. The same direct review says the C9 could not be flatshifted while clutchless upchanges were routine. That establishes that a full-throttle flatshift was not the described procedure; a lift is the conservative fitting for clutchless racing upchanges. Manual blipping is a downshift operation in this control model; no upshift blip claim is being made. Automatic blipping is a downshift operation in this control model; no upshift blip claim is being made. The direct C9 review explicitly states that the clutch must be used for downshifting. The control model records throttle-lift as an upshift action; no separate downshift lift claim is being asserted. Automatic cut is an upshift action in this control model; no downshift cut claim is being asserted. The full-resolution Daimler-credited C9 steering-wheel photograph shows a continuous circular rim with no flattened or open section. The Mercedes-Benz Museum also captions a period 1989 C9 cockpit photograph, but the retrospective wheel photograph is the clearer visual locator. The photographed conventional round rim is continuous across the top; it is not an open-top GT/formula wheel. The photograph shows the readouts and instruments mounted on the dashboard behind the wheel, not on the wheel rim itself. No shift/rev-light array is visible on the photographed wheel rim; the visible warning/instrument hardware is dashboard-mounted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "pmr.official.mercedes-benz-sauber-c9",
+          "petersen.1989-sauber-mercedes-c9",
+          "mercedes-benz.museum.25-years-victory-le-mans-c9",
+          "tradeuniquecars.1989-sauber-mercedes-c9-review",
+          "motorsportmagazine.2020-sauber-c9-steering-wheel",
+          "motorsportmagazine.2020-kenny-acheson-c9",
+          "wikipedia.de.sauber-c9",
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The existing curated record matches the PMR Group C C9 lead. Petersen identifies an exact 1989 Sauber-Mercedes C 9; Mercedes-Benz Museum material identifies the 1989 C9, its Sauber development, Mercedes powertrain, and race use; PMR uses the corresponding Mercedes-Benz Sauber C9 name. The independent sources converge on the existing real-car identity."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -227,5 +375,5 @@
   "notes": [
     "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-22"
+  "updated_at": "2026-09-06"
 }

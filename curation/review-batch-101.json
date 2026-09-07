@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.61",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "marcos-mantara-lm600",
+      "bundle": "build/review-cases/issue-77/staged.json",
+      "display_name": "Marcos Mantara LM600",
+      "class": "British GT1 / N-GT",
+      "manufacturer": "Marcos",
+      "model": "Mantara LM600",
+      "year": {
+        "label": "early-2000s LM600 race specification; PMR does not identify a chassis or exact event year"
+      },
+      "real_world_identity_notes": "The PMR observation resolves to the Marcos Mantara LM600 race-car family. PMR's N-GT label is simulator taxonomy; PMR's own history places the modeled context in the early 2000s and mentions a 2000 British GT1 win. Period records also show LM600s in LM GT2 and a 1999 FIA homologation, so the exact PMR chassis and year remain unpinned. The evidence supports six forward gears and includes a sequential six-speed race configuration, but it also documents a different homologated LM600 configuration with a ZF synchronized manual gearbox. No reviewed source establishes the exact shift interface, clutch technique, shift electronics, or original steering-wheel geometry for the PMR target.",
+      "real_world_source_refs": [
+        "pmr.official.mantara-lm600",
+        "pmr.official.mantara-lm600-history",
+        "24h-en-piste.mantara-lm600-1997-71",
+        "fia.homologation.mantara-lm600.gt010",
+        "rsc.mantara-lm600-photo-gallery",
+        "raceart.mantara-lm600-gt2",
+        "raceart.mantara-lm600-evo",
+        "overtake.pmr.mantara-lm600",
+        "as-driven.repository.mantara-lm600-record-scan"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "PMR's official car page names Marcos Mantara LM600 and lists a six-speed sequential transmission. Its dated history article places the modeled historical context in the early 2000s and specifically mentions a 2000 British GT1 result. The 1997 Le Mans record identifies an exact Mantara LM600 chassis with a Hewland sequential six-speed, while the FIA GT010 homologation form identifies the same model and documents a separate ZF six-speed manual/synchronized configuration. The repository contains no existing curated record for this identity, so a new record is proposed with the variant boundary made explicit.",
+      "identity_basis": "PMR's official car page names Marcos Mantara LM600 and lists a six-speed sequential transmission. Its dated history article places the modeled historical context in the early 2000s and specifically mentions a 2000 British GT1 result. The 1997 Le Mans record identifies an exact Mantara LM600 chassis with a Hewland sequential six-speed, while the FIA GT010 homologation form identifies the same model and documents a separate ZF six-speed manual/synchronized configuration. The repository contains no existing curated record for this identity, so a new record is proposed with the variant boundary made explicit.",
+      "specification_basis": "PMR lists six speeds; the exact 1997 race record lists a Hewland six-speed; and the FIA homologation form provides six forward ratios. The sources agree on the count even though they document different gearbox configurations. Manual blip is a downshift action in this controls model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this controls model; no upshift-blip claim is asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift-cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_actuation": "unknown",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mantara-lm600.20260907t000531900z-e64ee76b directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mantara-lm600-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact early-2000s LM600 race specification; PMR does not identify a chassis or exact event year identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/77",
+      "live_source_notes": "Guided-verification observation pmr.mantara-lm600.20260907t000531900z-e64ee76b by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "mantara-lm600",
+        "basis": "PMR's official car page names Marcos Mantara LM600 and lists a six-speed sequential transmission. Its dated history article places the modeled historical context in the early 2000s and specifically mentions a 2000 British GT1 result. The 1997 Le Mans record identifies an exact Mantara LM600 chassis with a Hewland sequential six-speed, while the FIA GT010 homologation form identifies the same model and documents a separate ZF six-speed manual/synchronized configuration. The repository contains no existing curated record for this identity, so a new record is proposed with the variant boundary made explicit."
+      }
+    }
+  ]
+}

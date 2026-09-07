@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.51",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "maserati-mc12-gt1",
+      "bundle": "build/review-cases/issue-67/staged.json",
+      "display_name": "Maserati MC12 GT1",
+      "class": "GT1 2005",
+      "manufacturer": "Maserati",
+      "model": "MC12 GT1",
+      "year": {
+        "from": 2004,
+        "label": "2004-generation GT1"
+      },
+      "real_world_identity_notes": "The PMR telemetry name MC12 GT1 maps to the existing Maserati MC12 GT1 record. PMR places it in the GT class and lists a 6-speed sequential transmission, while Maserati's own FIA GT material identifies the MC12 GT1 as the race car and specifies six forward gears plus reverse. Maserati distinguishes this race specification from the later road-derived MC12 Versione Corse: the GT1 used a manually operated sequential gearbox, whereas the Versione Corse used an electro-actuated Cambiocorsa unit. The identity is the 2004-generation MC12 GT1 race car, not the MC12 Stradale road car and not the 2006 Versione Corse track-day derivative.",
+      "real_world_source_refs": [
+        "pmr.official.mc12-gt1",
+        "maserati.mc12-gt1.fia-gt-technical",
+        "maserati.mc12-versione-corse.2006",
+        "classicdriver.2020.mc12-gt1-chassis-003",
+        "octanefiles.mc12-gt1"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The first-party PMR page names the exact observed model, and contemporary Maserati material independently identifies the MC12 GT1's FIA GT race specification, 2004 debut context, GT1 championship role, six-speed manual sequential gearbox, and push carbon clutch. An exact ex-Works MC12 GT1 chassis 003 is also documented as a 2004 race car, providing a provenance-labelled cockpit reference. The simulator observation is used only to identify the PMR lead and is not used to establish real-car technique.",
+      "identity_basis": "The first-party PMR page names the exact observed model, and contemporary Maserati material independently identifies the MC12 GT1's FIA GT race specification, 2004 debut context, GT1 championship role, six-speed manual sequential gearbox, and push carbon clutch. An exact ex-Works MC12 GT1 chassis 003 is also documented as a 2004 race car, providing a provenance-labelled cockpit reference. The simulator observation is used only to identify the PMR lead and is not used to establish real-car technique.",
+      "specification_basis": "The full-resolution cockpit photograph of ex-Works chassis 003 shows the digital readout in the dashboard binnacle behind the steering wheel; the rim's carbon control face carries buttons but no display. This is a photographed exact GT1 chassis, but the PMR asset is not proven to be chassis 003. The full-resolution chassis 003 cockpit image visibly shows a continuous closed upper rim. It is retrospective preserved-car evidence, not a period race photograph of the PMR asset. The full-resolution photograph shows a continuous conventional rim with a noticeably flattened lower section, not fixed GT/formula grips; it is therefore classified as D-shaped. The photographed chassis is identified as ex-Works MC12 GT1 chassis 003, but the photo is retrospective. The photograph shows a row of indicator lights in the dashboard binnacle behind the wheel, not lights mounted in the rim. The field concerns wheel-mounted shift lights, so the photographed wheel is recorded as having none visible. PMR lists a 6-speed sequential transmission, and Maserati's exact GT1 technical table states 'Manual sequential 6 gears + reverse.' The manufacturer source is the real-car baseline. Maserati explicitly describes the GT1 gearbox as a manual sequential unit and contrasts it with the Versione Corse's electro-actuated Cambiocorsa. 'Sequential' here records the selection/gearbox architecture; it does not by itself establish clutchless technique, automatic cut, or blipping. Both manufacturer sources describe the GT1 gearbox as sequential. They do not provide a conventional H-gate diagram, so the value records sequential selection rather than a specific lever geometry. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.mc12-gt1.20260906t202434648z-ad1e283c directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mc12-gt1-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mc12-gt1.20260906t202434648z-ad1e283c directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mc12-gt1-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2004-generation GT1 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: no; wheel-rim shape: d shaped; wheel shift lights: no; forward gears: 6; gearbox construction: sequential; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/67",
+      "live_source_notes": "Guided-verification observation pmr.mc12-gt1.20260906t202434648z-ad1e283c by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Six-speed sequential with a lever. The car cuts the upshift, so stay flat. Nothing blips the downshift, and whether this gearbox needs one to engage is not established, so blip anyway: it settles the car into the corner whether or not the box demands it."
+    }
+  ]
+}

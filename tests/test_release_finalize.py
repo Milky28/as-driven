@@ -174,8 +174,8 @@ class ReleaseFinalizeTests(unittest.TestCase):
             self.assertTrue((root / "research" / "simulator-disagreement-audit.json").exists())
             self.assertTrue((root / "dist" / "site" / "index.html").exists())
 
-    def test_a_release_refuses_to_shrink_the_coverage_manifest(self) -> None:
-        """A release that cannot read its inputs must not commit the loss.
+    def test_a_release_retains_coverage_when_local_inputs_are_incomplete(self) -> None:
+        """A release does not require local diagnostics to retain coverage.
 
         The manifest is checked in, but it is generated from a developer audit
         under the ignored `build/` and from the plugin's live diagnostics log
@@ -202,31 +202,26 @@ class ReleaseFinalizeTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            with self.assertRaises(ReleaseFinalizeError) as raised:
-                finalize_release(
-                    root,
-                    coverage_builder=lambda *_args: {
-                        "stats": {},
-                        "identity_sources": {"live_identities_seen": 0},
-                        "entries": [
-                            {"telemetry_name": f"car {index}"} for index in range(225)
-                        ],
-                    },
-                    disagreement_builder=lambda _root: {
-                        "dataset_version": "1.2.3",
-                        "summary": {"findings": 0, "cars_with_disagreements": 0},
-                    },
-                    site_builder=lambda _root: "<!doctype html><title>test</title>",
-                    validator=lambda _root: [],
-                )
-
-            message = str(raised.exception)
-            self.assertIn("would lose 145 of 370 identities", message)
-            self.assertIn("live diagnostics log", message)
-            # The refusal must leave the committed manifest untouched.
-            self.assertEqual(
-                370, len(json.loads(manifest.read_text(encoding="utf-8"))["entries"])
+            finalize_release(
+                root,
+                coverage_builder=lambda *_args: {
+                    "stats": {},
+                    "identity_sources": {"live_identities_seen": 0},
+                    "entries": [
+                        {"telemetry_name": f"car {index}"} for index in range(225)
+                    ],
+                },
+                disagreement_builder=lambda _root: {
+                    "dataset_version": "1.2.3",
+                    "summary": {"findings": 0, "cars_with_disagreements": 0},
+                },
+                site_builder=lambda _root: "<!doctype html><title>test</title>",
+                validator=lambda _root: [],
             )
+
+            retained = json.loads(manifest.read_text(encoding="utf-8"))
+            self.assertEqual(370, len(retained["entries"]))
+            self.assertEqual("1.2.3", retained["dataset_version"])
 
     def test_a_growing_coverage_manifest_is_written(self) -> None:
         """The guard stops a loss, not an ordinary refresh."""

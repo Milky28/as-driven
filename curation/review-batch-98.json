@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.58",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "lister-storm-gtm",
+      "bundle": "build/review-cases/issue-74/staged.json",
+      "display_name": "Lister Storm GTM",
+      "class": "GT1 / GT",
+      "manufacturer": "Lister",
+      "model": "Storm GTM",
+      "year": {
+        "from": 2000,
+        "to": 2005,
+        "label": "late-period Storm GT"
+      },
+      "real_world_identity_notes": "PMR's Storm GT name resolves to the late-period Lister Storm GT/GTM competition family represented by the existing record. The 2000-onward Storm GT is the six-speed sequential version: the 2000 championship car is described both as Storm GT and as chassis GTM 002. The earlier 1999 homologation documents a different six-speed Getrag manual/synchromesh configuration and must not be silently inherited by the late-period record.",
+      "real_world_source_refs": [
+        "pmr.official.lister-storm-gt",
+        "pmr.official.lister-storm-history",
+        "custodian.lister-storm-gtm.2000",
+        "fia.lister-storm.gt-008",
+        "goodwood.2021.lister-storm-gt-cockpit"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The official PMR page names Lister Storm GT. A documented 2000 Lister championship car explicitly says the Storm GT used from 2000 onward had a six-speed sequential gearbox and identifies its chassis as GTM 002; it also calls the car a 2000 Lister Storm GTM. This provides the independent bridge from PMR's abbreviated display name to the existing GTM record. FIA Form GT-008 is retained as an adjacent-variant warning because its 1999 base homologation lists a Getrag six-speed manual with synchronisers.",
+      "identity_basis": "The official PMR page names Lister Storm GT. A documented 2000 Lister championship car explicitly says the Storm GT used from 2000 onward had a six-speed sequential gearbox and identifies its chassis as GTM 002; it also calls the car a 2000 Lister Storm GTM. This provides the independent bridge from PMR's abbreviated display name to the existing GTM record. FIA Form GT-008 is retained as an adjacent-variant warning because its 1999 base homologation lists a Getrag six-speed manual with synchronisers.",
+      "specification_basis": "Both the 2000-onward sequential specification and the earlier FIA homologation list six forward ratios. For the late-period record resolved here, the documented 2000 Storm GT/GTM uses a Hewland TGTA six-speed sequential. The 1999 Getrag manual is explicitly treated as an earlier adjacent variant. The exact 2000 specification states a push-pull lever, and the documented 2003-spec cockpit photograph visibly shows a tall lever beside the driver. No reviewed exact-car source supports paddles for this late-period car. The 2000-onward specification explicitly calls the gearbox sequential and describes the push-pull lever. Manual blip is a downshift action in this data model; no upshift-blip procedure is asserted. Automatic blip is a downshift action in this data model; the reviewed real-car sources do not describe an upshift blip. Throttle lift is recorded as an upshift action in this data model; no separate downshift-lift claim is made. No downshift cut is established; the source is silent on such a function. The clear cockpit photograph of a Storm GT returned to its 2003 appearance shows a continuous circular rim with a central button hub, not a flattened D rim or fixed-grip gt-formula face. The photographed rim is continuous across the upper section; no upper opening is visible. This is evidence for the photographed 2003-spec restoration, not every earlier Storm variant. The wheel has a button hub but no integrated readout; the visible display is mounted in the dashboard behind the rim. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "round",
+          "shift_lights": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.storm-gt.20260906t233256801z-1e31ff61 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-storm-gt-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.storm-gt.20260906t233256801z-1e31ff61 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-storm-gt-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.storm-gt.20260906t233256801z-1e31ff61 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-storm-gt-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact late-period Storm GT identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/74",
+      "live_source_notes": "Guided-verification observation pmr.storm-gt.20260906t233256801z-1e31ff61 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "accept_from_drive": [
+        "/authentic_controls/steering/wheel_rim/open_top"
+      ],
+      "authentic_control_corrections": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "from": "d-shaped",
+          "to": "round",
+          "basis": "The clear cockpit photograph of a Storm GT returned to its 2003 appearance shows a continuous circular rim with a central button hub, not a flattened D rim or fixed-grip gt-formula face.",
+          "source_refs": [
+            "goodwood.2021.lister-storm-gt-cockpit"
+          ],
+          "confidence": "medium"
+        }
+      ],
+      "driver_summary": "6-speed lever sequential. Use the clutch to pull away. Stay flat on the upshift because the car cuts for you. Blip each downshift. The downshift blip is not established, so that much is the cautious default rather than this car's known technique. Simulator implementations differ on manual downshift blip, automatic downshift blip; follow the selected game's USE row for those items."
+    }
+  ]
+}

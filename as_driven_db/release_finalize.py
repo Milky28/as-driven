@@ -231,51 +231,31 @@ def update_release_references(
     return changed
 
 
-def _refuse_shrunken_coverage(previous_path: Path, coverage: dict[str, Any]) -> None:
-    """Refuse a coverage manifest that lost identities the committed one held.
+def _retain_coverage_snapshot(
+    previous_path: Path,
+    coverage: dict[str, Any],
+    stats: dict[str, Any],
+) -> dict[str, Any]:
+    """Keep the checked-in inventory when local coverage inputs are incomplete.
 
-    The manifest is checked in but generated from two machine-local inputs that
-    are not: the developer audit under the ignored `build/`, and the plugin's
-    live diagnostics log under `%LOCALAPPDATA%`. Either can be absent on the
-    machine running a release, and the builder has no way to tell an identity
-    that was never seen from one it simply could not read today. A release that
-    touched nothing about coverage has already rewritten this file with 145
-    fewer identities and left the prose in `docs/ams2-coverage-plan.md` claiming
-    the larger number, so the loss is not hypothetical.
-
-    The inventory only grows: it is a record of identities observed on this PC,
-    and an identity once seen is not unseen. A smaller manifest therefore means
-    an input was missing, not that the world changed, and the release stops
-    rather than committing the smaller file.
+    The optional local audit and diagnostics log enrich coverage research, but
+    a release must not depend on them. The inventory only grows, so a candidate
+    with fewer identities is an incomplete local view, not a reason to discard
+    previously checked-in observations. Retain that snapshot and re-stamp it
+    for the current dataset instead.
     """
     if not previous_path.exists():
-        return
+        return coverage
 
     previous = _read_json(previous_path)
     before = len(previous.get("entries", []))
     after = len(coverage.get("entries", []))
     if after >= before:
-        return
+        return coverage
 
-    live_before = previous.get("identity_sources", {}).get("live_identities_seen", 0)
-    live_after = coverage.get("identity_sources", {}).get("live_identities_seen", 0)
-    detail = (
-        f"the AMS2 coverage manifest would lose {before - after} of {before} "
-        f"identities ({before} -> {after})"
-    )
-    if live_after < live_before:
-        detail += (
-            f"; the live diagnostics log supplied {live_before} identities before "
-            f"and {live_after} now, so check that "
-            f"{DEFAULT_LIVE_LOG} is readable from this machine"
-        )
-    raise ReleaseFinalizeError(
-        detail
-        + ". The identity inventory only grows, so a smaller manifest means an "
-        "input was missing rather than that an identity disappeared. Restore the "
-        "input and finalize again, or regenerate the manifest deliberately with "
-        "`python -m research.build_ams2_coverage_manifest`."
-    )
+    previous["dataset_version"] = stats["dataset_version"]
+    previous["generated_at"] = stats["released_at"]
+    return previous
 
 
 def _run_tests(root: Path) -> None:
@@ -311,7 +291,7 @@ def finalize_release(
     )
     coverage_json = root / "research" / "ams2-coverage-manifest.json"
     coverage_csv = root / "research" / "ams2-coverage-manifest.csv"
-    _refuse_shrunken_coverage(coverage_json, coverage)
+    coverage = _retain_coverage_snapshot(coverage_json, coverage, stats)
     coverage_json.parent.mkdir(parents=True, exist_ok=True)
     coverage_json.write_text(
         json.dumps(coverage, indent=2, ensure_ascii=False) + "\n",

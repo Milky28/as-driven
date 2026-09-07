@@ -13,7 +13,7 @@
     "shift_actuation": "sequential-stick",
     "shift_pattern": "sequential",
     "standing_start_clutch": "required",
-    "throttle_lift": "not-required",
+    "throttle_lift": "required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
     "manual_blip": "unknown",

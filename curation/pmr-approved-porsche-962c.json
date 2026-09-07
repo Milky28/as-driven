@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.54",
+  "approved_at": "2026-09-06",
+  "record_id": "porsche-962c",
+  "simulator": "pmr",
+  "telemetry_name": "962C",
+  "observed_game_version": "2.2.0",
+  "observed_through": "SimHub guided verification observation pmr.962c.20260906t211539116z-2c9fcbe2",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1987 World Sportscar Championship Porsche 962C identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Group C"
+}

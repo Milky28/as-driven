@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.50",
-  "generated_at": "2026-09-06",
+  "dataset_version": "0.5.65",
+  "generated_at": "2026-09-07",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -10,18 +10,18 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 23,
-    "findings": 37,
+    "cars_with_disagreements": 27,
+    "findings": 44,
     "by_status": {
       "authentic-baseline-open": 16,
-      "provisional-departure": 8,
+      "provisional-departure": 15,
       "supported-departure": 13
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 12,
-      "launch-technique": 9,
-      "running-shift-technique": 12
+      "hardware-choice": 14,
+      "launch-technique": 10,
+      "running-shift-technique": 16
     }
   },
   "findings": [
@@ -1024,6 +1024,24 @@
             "custodian.lister-storm-gtm.2000",
             "ac.local-live-gt-tornado-v12-controls.14923034"
           ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.lister-storm-gt",
+            "pmr.official.lister-storm-history",
+            "custodian.lister-storm-gtm.2000",
+            "fia.lister-storm.gt-008",
+            "goodwood.2021.lister-storm-gt-cockpit",
+            "pmr.local-live-storm-gt-controls.2.2.0"
+          ]
         }
       ],
       "adjudication": {
@@ -1158,6 +1176,24 @@
             "maserati.mc12-versione-corse.2006",
             "maserati.mc12-gt1.fia-gt-technical",
             "ac.local-live-maserati-mc12-gt1-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.mc12-gt1",
+            "maserati.mc12-gt1.fia-gt-technical",
+            "maserati.mc12-versione-corse.2006",
+            "classicdriver.2020.mc12-gt1-chassis-003",
+            "octanefiles.mc12-gt1",
+            "pmr.local-live-mc12-gt1-controls.2.2.0"
           ]
         }
       ],
@@ -1964,6 +2000,26 @@
             "porsche.museum.911-gt1-98.datasheet",
             "ac.local-live-porsche-911-gt1-98-controls.14923034"
           ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "porsche.museum.911-gt1-98.datasheet",
+            "porsche.newsroom.911-gt1-98-1998",
+            "911andporscheworld.2023.gt1-98",
+            "ultimatecarpage.2016.gt1-98-004-cockpit",
+            "automobilist.1998-porsche-911-gt1-driver-testimony",
+            "stuttcars.2021.porsche-911-gt1-98-specifications",
+            "pmr.official.911-gt1-98",
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+          ]
         }
       ],
       "adjudication": {
@@ -1972,6 +2028,158 @@
         "departing_simulators": [],
         "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
         "next_action": "Find real-car evidence for manual blip."
+      }
+    },
+    {
+      "finding_id": "porsche-911-gt1-98--transmission-upshift-throttle-lift",
+      "record_id": "porsche-911-gt1-98",
+      "display_name": "Porsche 911 GT1-98",
+      "class": "GT1",
+      "path": "/authentic_controls/transmission/upshift/throttle_lift",
+      "field": "Upshift throttle",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "medium",
+        "source_refs": [
+          "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "The drive accepted a full-throttle clutchless upshift with automatic cut, so no lift is required, and detected no automatic blip on downshifts, so the driver supplies the rev-matching blip."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "porsche.museum.911-gt1-98.datasheet",
+            "ams2.local-live-porsche-911-gt1-98-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.porsche-pack-2.911-gt1-98",
+            "porsche.museum.911-gt1-98.datasheet",
+            "ac.local-live-porsche-911-gt1-98-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "porsche.museum.911-gt1-98.datasheet",
+            "porsche.newsroom.911-gt1-98-1998",
+            "911andporscheworld.2023.gt1-98",
+            "ultimatecarpage.2016.gt1-98-004-cockpit",
+            "automobilist.1998-porsche-911-gt1-driver-testimony",
+            "stuttcars.2021.porsche-911-gt1-98-specifications",
+            "pmr.official.911-gt1-98",
+            "pmr.local-live-911-gt1-98-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for upshift throttle before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "porsche-911-gt3-cup-992--transmission-standing-start-clutch",
+      "record_id": "porsche-911-gt3-cup-992",
+      "display_name": "Porsche 911 GT3 Cup (992) 4.0",
+      "class": "Carrera Cup",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Clutch required",
+        "confidence": "high",
+        "source_refs": [
+          "rfactor2.local-live-porsche-992-cup-controls.1.1.3.4"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "rfactor2",
+          "label": "rFactor 2",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.1.3.4",
+          "verified_at": "2026-08-28",
+          "confidence": "high",
+          "source_refs": [
+            "porsche.911-gt3-cup-992-press.2020",
+            "porsche.911-gt3-cup-992-technical-specs.2021",
+            "porsche.911-gt3-cup-992-technical-manual.2022",
+            "autoweek.911-gt3-cup-992-cockpit.2020",
+            "rfactor2.local-live-porsche-992-cup-controls.1.1.3.4"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.911-gt3-cup-992",
+            "porsche.911-gt3-cup-992-press.2020",
+            "porsche.racing.911-gt3-cup-2021",
+            "porsche.911-gt3-cup-992-technical-specs.2021",
+            "porsche.911-gt3-cup-992-technical-manual.2022",
+            "autoweek.911-gt3-cup-992-cockpit.2020",
+            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "rfactor2"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for pulling away before publishing a benchmark verdict."
       }
     },
     {
@@ -2181,6 +2389,73 @@
       }
     },
     {
+      "finding_id": "porsche-962c--transmission-upshift-throttle-lift",
+      "record_id": "porsche-962c",
+      "display_name": "Porsche 962C",
+      "class": "Group C",
+      "path": "/authentic_controls/transmission/upshift/throttle_lift",
+      "field": "Upshift throttle",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-porsche-962c-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-13",
+          "confidence": "high",
+          "source_refs": [
+            "wikipedia.porsche-962",
+            "ams2.local-live-porsche-962c-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.porsche-962c",
+            "pmr.official.porsche-962c-article",
+            "porsche.official.962-history",
+            "porsche.official.962c-restoration-2021",
+            "topgear.1987-le-mans-porsche-962c",
+            "ultimatecarpage.porsche-962c-cockpit-62524",
+            "as-driven.repository.porsche-962c-record-scan",
+            "pmr.local-live-962c-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for upshift throttle before publishing a benchmark verdict."
+      }
+    },
+    {
       "finding_id": "saleen-s7-r-gt1--transmission-downshift-manual-blip",
       "record_id": "saleen-s7-r-gt1",
       "display_name": "Saleen S7-R GT1",
@@ -2347,6 +2622,261 @@
       }
     },
     {
+      "finding_id": "sauber-mercedes-c9--transmission-shift-pattern",
+      "record_id": "sauber-mercedes-c9",
+      "display_name": "Sauber Mercedes C9",
+      "class": "Group C",
+      "path": "/authentic_controls/transmission/shift_pattern",
+      "field": "Gate pattern",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "dogleg-h",
+        "display_value": "Dogleg H",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "dogleg-h",
+          "display_value": "Dogleg H",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-12",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.coanda-sheet.v1.0.34",
+            "ams2.reiza-forum.extended-car-info",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "dogleg-h",
+          "display_value": "Dogleg H",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.dream-pack-1.f1-gtr-c9",
+            "mercedes-benz.c9-le-mans-1989",
+            "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "standard-h",
+          "display_value": "Standard H",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.mercedes-benz-sauber-c9",
+            "petersen.1989-sauber-mercedes-c9",
+            "mercedes-benz.museum.25-years-victory-le-mans-c9",
+            "tradeuniquecars.1989-sauber-mercedes-c9-review",
+            "motorsportmagazine.2020-sauber-c9-steering-wheel",
+            "motorsportmagazine.2020-kenny-acheson-c9",
+            "wikipedia.de.sauber-c9",
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for gate pattern before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "sauber-mercedes-c9--transmission-downshift-manual-blip",
+      "record_id": "sauber-mercedes-c9",
+      "display_name": "Sauber Mercedes C9",
+      "class": "Group C",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-12",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.coanda-sheet.v1.0.34",
+            "ams2.reiza-forum.extended-car-info",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.dream-pack-1.f1-gtr-c9",
+            "mercedes-benz.c9-le-mans-1989",
+            "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.mercedes-benz-sauber-c9",
+            "petersen.1989-sauber-mercedes-c9",
+            "mercedes-benz.museum.25-years-victory-le-mans-c9",
+            "tradeuniquecars.1989-sauber-mercedes-c9-review",
+            "motorsportmagazine.2020-sauber-c9-steering-wheel",
+            "motorsportmagazine.2020-kenny-acheson-c9",
+            "wikipedia.de.sauber-c9",
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for manual blip before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "sauber-mercedes-c9--transmission-upshift-throttle-lift",
+      "record_id": "sauber-mercedes-c9",
+      "display_name": "Sauber Mercedes C9",
+      "class": "Group C",
+      "path": "/authentic_controls/transmission/upshift/throttle_lift",
+      "field": "Upshift throttle",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "required",
+        "display_value": "Required",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-12",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.coanda-sheet.v1.0.34",
+            "ams2.reiza-forum.extended-car-info",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-08-22",
+          "confidence": "high",
+          "source_refs": [
+            "assetto-corsa.dream-pack-1.f1-gtr-c9",
+            "mercedes-benz.c9-le-mans-1989",
+            "ac.local-live-mercedes-benz-c9-1989-lm-controls.14923034"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-06",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.mercedes-benz-sauber-c9",
+            "petersen.1989-sauber-mercedes-c9",
+            "mercedes-benz.museum.25-years-victory-le-mans-c9",
+            "tradeuniquecars.1989-sauber-mercedes-c9-review",
+            "motorsportmagazine.2020-sauber-c9-steering-wheel",
+            "motorsportmagazine.2020-kenny-acheson-c9",
+            "wikipedia.de.sauber-c9",
+            "pmr.local-live-sauber-c9-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2",
+          "ac"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for upshift throttle before publishing a benchmark verdict."
+      }
+    },
+    {
       "finding_id": "tatuus-f4-t014--transmission-standing-start-clutch",
       "record_id": "tatuus-f4-t014",
       "display_name": "Tatuus F4 T-014",
@@ -2412,6 +2942,76 @@
         "departing_simulators": [],
         "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
         "next_action": "Find real-car evidence for pulling away."
+      }
+    },
+    {
+      "finding_id": "tvr-tuscan-t400r-gt2--steering-wheel-rim-shape",
+      "record_id": "tvr-tuscan-t400r-gt2",
+      "display_name": "TVR Tuscan T400R GT2",
+      "class": "GT2 2005",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "round",
+        "display_value": "Round rim",
+        "confidence": "verified",
+        "source_refs": [
+          "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Direct current-game tests and cockpit inspection establish the start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-29",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+            "tvr.press-kit.2004-t400r",
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91.correction-d05773d5"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-07",
+          "confidence": "high",
+          "source_refs": [
+            "pmr.official.tuscan-t400r",
+            "pmr.official.tuscan-t400r-2004-history",
+            "pmr.image.tuscan-t400r-cockpit",
+            "tvr.press-kit.2004-t400r",
+            "tvr.carclub.2003-t400r-brochure",
+            "rsc.tvr-tuscan-t400r-archive",
+            "ultimatecarpage.tvr-t400r-chassis-2003-104",
+            "24h-en-piste.tvr-tuscan-2004-96",
+            "as-driven.repository.tvr-tuscan-t400r-gt2-record-scan",
+            "pmr.local-live-tuscan-t400r-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "ams2"
+        ],
+        "departing_simulators": [
+          "pmr"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
       }
     },
     {

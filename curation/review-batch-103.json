@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.63",
+  "approved_at": "2026-09-07",
+  "records": [
+    {
+      "record_id": "mosler-mt900r",
+      "bundle": "build/review-cases/issue-79/staged.json",
+      "display_name": "Mosler MT900R",
+      "class": "N-GT",
+      "manufacturer": "Mosler",
+      "model": "MT900R",
+      "year": {
+        "from": 2004,
+        "label": "2004 Mosler MT900R N-GT race specification"
+      },
+      "real_world_identity_notes": "The PMR observation resolves to the 2004 Mosler MT900R N-GT race specification, not the road-going MT900/MT900S and not a later GT3 or 2008-evolved restoration. The official PMR page identifies a 2004 Mosler MT900R, Mosler, N-GT, with a 5.7L V8 and six-speed transmission. Racing Sports Cars independently records the Rollcentre Racing Mosler MT900R #37 in 2004 British GT N-GT competition with the 5.7L Chevrolet V8. The reviewed evidence does not identify a single chassis number for the PMR implementation, and contemporary evidence indicates that MT900R race cars could use different six-speed transmission configurations. Real-car actuation, clutch procedure, shift electronics, and race-period wheel details therefore remain unresolved.",
+      "real_world_source_refs": [
+        "pmr.official.mosler-mt900r",
+        "pmr.official.mosler-mt900r-2004-history",
+        "rsc.mosler-mt900r-2004-ngt",
+        "dailysportscar.2004-mosler-hewland-nlt",
+        "racecarsdirect.mosler-mt900r-2004-listing",
+        "ascott.mosler-mt900r-2008-config",
+        "blueberry.mosler-racing.later-interior",
+        "as-driven.repository.mosler-mt900r-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "PMR's official vehicle page explicitly names the 2004 Mosler MT900R and N-GT class. Its historical article identifies the same 2004 race-season car. Racing Sports Cars independently records 2004 British GT N-GT MT900R entries, including Rollcentre #37. The repository contains no existing Mosler or MT900R curated record, so a new record is proposed.",
+      "identity_basis": "PMR's official vehicle page explicitly names the 2004 Mosler MT900R and N-GT class. Its historical article identifies the same 2004 race-season car. Racing Sports Cars independently records 2004 British GT N-GT MT900R entries, including Rollcentre #37. The repository contains no existing Mosler or MT900R curated record, so a new record is proposed.",
+      "specification_basis": "The official PMR page and article state six-speed, and the 2004-built MT900R listing identifies a six-speed Hewland installation. Manual blip is modeled as a downshift action; no upshift-blip claim is asserted about the car. Automatic blip is modeled as a downshift action; no upshift-blip claim is asserted about the car. Throttle lift is modeled as an upshift action; no separate downshift-lift claim is asserted about the car. Automatic cut is modeled as an upshift action; no downshift-cut claim is asserted about the car. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "shift_actuation": "unknown",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mt900r.20260907t002055325z-5aecc3d1 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mt900r-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2004 Mosler MT900R N-GT race specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/79",
+      "live_source_notes": "Guided-verification observation pmr.mt900r.20260907t002055325z-5aecc3d1 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "mt900r",
+        "basis": "PMR's official vehicle page explicitly names the 2004 Mosler MT900R and N-GT class. Its historical article identifies the same 2004 race-season car. Racing Sports Cars independently records 2004 British GT N-GT MT900R entries, including Rollcentre #37. The repository contains no existing Mosler or MT900R curated record, so a new record is proposed."
+      }
+    }
+  ]
+}

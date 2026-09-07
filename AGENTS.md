@@ -98,7 +98,7 @@ than silently queueing verification work.
   do not edit, stage, stash, or commit Claude's uncommitted changes. Integrate
   the reviewed worktree changes into main deliberately before release.
 - Client: 0.21.4 prepared locally; 0.21.3 is installed and published.
-- Dataset: 0.5.50 with 285 curated records, and 0.5.49 is installed.
+- Dataset: 0.5.65 with 291 curated records, and 0.5.49 is installed.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The history was rewritten on 2026-08-29. An older clone must re-clone rather
   than pull; see `docs/maintainer-handoff.md` for the full history note and
@@ -151,10 +151,8 @@ directory. Installation is a separate explicit user action.
   could assemble is already a Fit or Use row on the card. A promotion proposing
   no summary is working correctly, not failing. Write one by hand only with the
   maintainer. See `docs/driver-summaries.md`.
-- `research/ams2-coverage-manifest.json` is checked in but generated from two
-  machine-local inputs that are not: the audit under ignored `build/`, and the
-  plugin's live diagnostics log under `%LOCALAPPDATA%`. `finalize_release` now
-  refuses to write a manifest smaller than the committed one. If it does refuse,
-  an input was unreadable on this machine - restore it. Do not force past it and
-  do not commit the smaller file; a release that touched nothing about coverage
-  once dropped 145 of 370 identities that way.
+- `research/ams2-coverage-manifest.json` is an inventory snapshot. Local audit
+  and diagnostics inputs can enrich it but are optional: when they are absent,
+  `finalize_release` retains the checked-in snapshot instead of shrinking it.
+  Do not commit a smaller generated manifest; coverage can only grow through a
+  deliberate reviewed refresh.

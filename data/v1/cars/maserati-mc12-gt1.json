@@ -196,6 +196,78 @@
         "level": "high",
         "basis": "Kunos's official Ready To Race listing and ks_maserati_mc12_gt1 content id establish the exact implementation; Maserati establishes manual sequential actuation. The drive directly established six gears, clutch-required move-off, full-throttle and coast-shift acceptance, no automatic blip, and cockpit equipment. Automatic cut remains unknown because AC exposed no engine-torque channel."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "MC12 GT1"
+        },
+        {
+          "kind": "internal-id",
+          "value": "MC12 GT1"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.mc12-gt1.20260906t202434648z-ad1e283c by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.mc12-gt1.20260906t202434648z-ad1e283c directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mc12-gt1-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mc12-gt1.20260906t202434648z-ad1e283c directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mc12-gt1-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.mc12-gt1",
+        "maserati.mc12-gt1.fia-gt-technical",
+        "maserati.mc12-versione-corse.2006",
+        "classicdriver.2020.mc12-gt1-chassis-003",
+        "octanefiles.mc12-gt1",
+            "pmr.local-live-mc12-gt1-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The first-party PMR page names the exact observed model, and contemporary Maserati material independently identifies the MC12 GT1's FIA GT race specification, 2004 debut context, GT1 championship role, six-speed manual sequential gearbox, and push carbon clutch. An exact ex-Works MC12 GT1 chassis 003 is also documented as a 2004 race car, providing a provenance-labelled cockpit reference. The simulator observation is used only to identify the PMR lead and is not used to establish real-car technique."
+      }
     }
   ],
   "provenance": {
@@ -286,6 +358,31 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/2/identities"
+        ],
+        "source_refs": [
+          "pmr.official.mc12-gt1",
+          "maserati.mc12-gt1.fia-gt-technical",
+          "maserati.mc12-versione-corse.2006",
+          "classicdriver.2020.mc12-gt1-chassis-003",
+          "octanefiles.mc12-gt1",
+            "pmr.local-live-mc12-gt1-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The first-party PMR page names the exact observed model, and contemporary Maserati material independently identifies the MC12 GT1's FIA GT race specification, 2004 debut context, GT1 championship role, six-speed manual sequential gearbox, and push carbon clutch. An exact ex-Works MC12 GT1 chassis 003 is also documented as a 2004 race car, providing a provenance-labelled cockpit reference. The simulator observation is used only to identify the PMR lead and is not used to establish real-car technique."
+      },
+      {
+        "paths": [
+          "/simulators/2/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-mc12-gt1-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -306,6 +403,6 @@
   "notes": [
     "Low Downforce is an exact approved alias whose controls are inherited from the verified base car and were not separately live-tested."
   ],
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-06",
   "driver_summary": "Six-speed sequential with a lever. The car cuts the upshift, so stay flat. Nothing blips the downshift, and whether this gearbox needs one to engage is not established, so blip anyway: it settles the car into the corner whether or not the box demands it."
 }

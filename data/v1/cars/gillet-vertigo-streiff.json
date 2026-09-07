@@ -141,6 +141,104 @@
         "level": "verified",
         "basis": "The exact AMS2 identity already belongs to curated record gillet-vertigo-streiff; ams2.gillet-vertigo-streiff.20260829t043313148z-5812ce06 is reviewed only as new simulator implementation evidence."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Vertigo"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Vertigo"
+        },
+        {
+          "kind": "class-id",
+          "value": "N-GT"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.vertigo.20260906t235832109z-126c93ed by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.gillet-vertigo",
+        "pmr.official.gillet-vertigo-2004-history",
+        "overtake.pmr-gillet-vertigo-2004",
+        "rsc.gillet-vertigo-streiff-spa-2004-100",
+        "raceart.gillet-vertigo",
+        "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+        "as-driven.repository.gillet-vertigo-streiff-record-scan",
+            "pmr.local-live-vertigo-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR's official car page and its 2004-spec article identify the Gillet Vertigo and its 2004 specification. OverTake's contemporary report identifies the game car as the 2004 Gillet Vertigo Streiff, and Racing Sports Cars records the exact chassis YA9VA2900Y0169021 at the 2004 Spa 24 Hours as a Gillet Vertigo Streiff. The same chassis is the surviving FIA-GT car described by RaceArt, whose current dossier specifies a Tractive six-speed sequential gearbox. These sources bridge the abbreviated PMR telemetry name to the existing curated record without treating the simulator controls as real-car evidence."
+      }
     }
   ],
   "provenance": {
@@ -202,6 +300,33 @@
           "ams2.local-live-gillet-vertigo-streiff-controls.1.6.9.91.correction-5812ce06"
         ],
         "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "pmr.official.gillet-vertigo",
+          "pmr.official.gillet-vertigo-2004-history",
+          "overtake.pmr-gillet-vertigo-2004",
+          "rsc.gillet-vertigo-streiff-spa-2004-100",
+          "raceart.gillet-vertigo",
+          "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+          "as-driven.repository.gillet-vertigo-streiff-record-scan",
+            "pmr.local-live-vertigo-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR's official car page and its 2004-spec article identify the Gillet Vertigo and its 2004 specification. OverTake's contemporary report identifies the game car as the 2004 Gillet Vertigo Streiff, and Racing Sports Cars records the exact chassis YA9VA2900Y0169021 at the 2004 Spa 24 Hours as a Gillet Vertigo Streiff. The same chassis is the surviving FIA-GT car described by RaceArt, whose current dossier specifies a Tractive six-speed sequential gearbox. These sources bridge the abbreviated PMR telemetry name to the existing curated record without treating the simulator controls as real-car evidence."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-vertigo-controls.2.2.0"
+        ],
+        "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]

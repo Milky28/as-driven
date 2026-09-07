@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.52",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "porsche-911-gt3-cup-992",
+      "bundle": "build/review-cases/issue-68/staged.json",
+      "display_name": "Porsche 911 GT3 Cup (992) 4.0",
+      "class": "Carrera Cup",
+      "manufacturer": "Porsche",
+      "model": "911 GT3 Cup (992) 4.0",
+      "year": {
+        "from": 2021,
+        "to": 2022,
+        "label": "992-generation launch specification, 2021-2022"
+      },
+      "real_world_identity_notes": "The PMR telemetry name 911 GT3 Cup (992) maps to the existing Porsche 911 GT3 Cup (992) record. Porsche identifies this as the 992-generation Cup race car introduced for the 2021 season, with a naturally aspirated 4.0-litre flat-six and six-speed sequential dog-type gearbox. This is the 992-generation Cup race car, not the road-going 992 GT3, not the earlier 991.2-generation 911 GT3 Cup 4.0, and not the 992 GT3 R.",
+      "real_world_source_refs": [
+        "pmr.official.911-gt3-cup-992",
+        "porsche.911-gt3-cup-992-press.2020",
+        "porsche.racing.911-gt3-cup-2021",
+        "porsche.911-gt3-cup-992-technical-specs.2021",
+        "porsche.911-gt3-cup-992-technical-manual.2022",
+        "autoweek.911-gt3-cup-992-cockpit.2020"
+      ],
+      "confidence": "high",
+      "confidence_basis": "PMR's first-party page names the exact 911 GT3 Cup (992), identifies Porsche and the 992 Trophy class, and lists a six-speed sequential transmission. Porsche's launch and technical material identify the 992-generation competition car, its 2021 debut, six-speed dog-type transmission, electronic paddle actuator, racing clutch, and cockpit configuration. The existing generation-specific curated record is therefore the correct destination.",
+      "identity_basis": "PMR's first-party page names the exact 911 GT3 Cup (992), identifies Porsche and the 992 Trophy class, and lists a six-speed sequential transmission. Porsche's launch and technical material identify the 992-generation competition car, its 2021 debut, six-speed dog-type transmission, electronic paddle actuator, racing clutch, and cockpit configuration. The existing generation-specific curated record is therefore the correct destination.",
+      "specification_basis": "Porsche places the 10.3-inch color display in the center of the dashboard, and the full-resolution cockpit photograph shows the display behind the wheel rather than in the wheel's control face. Porsche's launch material explicitly describes the upper-open rim. Because the rim is a fixed-grip gt-formula/motorsport wheel rather than a continuous round or D-shaped band, the schema records open-top construction as not-applicable, matching the existing record. The full-resolution image shows fixed molded grips at left and right around a central control face, not a continuous band. Porsche identifies the wheel as a CFRP motorsport wheel with paddles and controls; this is the project's gt-formula category. The full-resolution cockpit photograph shows no distinct shift-light strip mounted on the wheel. Porsche's specification mentions illuminated push buttons, which are not the same as wheel-mounted shift lights; the display and its indicators are separate dashboard equipment. PMR and Porsche Motorsport identify a six-speed sequential transmission; the Porsche technical manual specifies six forward gears and ratios 1 through 6. Porsche calls the transmission sequential dog-type, the technical specification repeats dog-type construction, and the manual describes the 992 unit as a sequential claw/dog gearbox. Porsche's launch material states that gear changes are made by steering-wheel paddles; the technical specification identifies paddle shift with an electronic shift-barrel actuator, and the manual lists the right paddle for upshift and left paddle for downshift. The manufacturer calls the gearbox sequential and the manual gives a 1-to-6 / 6-to-1 sequential paddle path; no H-pattern gate is involved. The manual documents a dry racing clutch and clutch pedal, and its neutral-to-first engagement condition requires clutch pressure. That establishes a driver-operated clutch input for selecting first gear and moving away; the PMR staged no-clutch start is not promoted. The manual's 1-to-6 upshift table specifies the right paddle and shows no clutch-pressure requirement. The upshift table gives a throttle condition above 30 percent and does not require a lift; the documented running upshift is therefore no-lift. The documented upshift path is a paddle/no-clutch/no-lift action; the manual does not describe a manual throttle blip for upshift. Manual blip is not the applicable control for this upshift path. The manual documents automatic blip on the downshift path, not on upshift. No automatic upshift blip is part of the documented upshift procedure. The 6-to-1 downshift table lists the left paddle, automatic blip, and no clutch-pressure requirement. The downshift table defines the accelerator condition below 3 percent together with automatic blip rather than a separate driver lift instruction. Under the project's sequential/automatic-blip convention this field is not-applicable, not a claim that throttle position never changes during braking. The manual's downshift condition specifies paddle selection, accelerator below 3 percent, and automatic blip; it does not describe an automatic cut on downshift. Under the project's documented downshift model, cut is not-applicable. The manual explicitly assigns the throttle event to 'Auto. Blip' on the 6-to-1 downshift path, so the driver does not supply a manual rev-matching blip. The exact 992 Cup technical manual explicitly labels the 6-to-1 downshift throttle event 'Auto. Blip', establishing automatic rev matching. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/automatic_cut.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-required",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "not-required",
+          "automatic_blip": "yes"
+        },
+        "standing_start_clutch": "required"
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.911-gt3-cup-992.20260906t205633709z-d7ed7276 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-gt3-cup-992-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 992-generation launch specification, 2021-2022 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_blip",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish integrated wheel display: no; conventional rim open-top section: not applicable; wheel-rim shape: gt formula; wheel shift lights: no; forward gears: 6; gearbox construction: dogbox; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: not required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: not required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: not required; transmission downshift automatic_blip: yes.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/68",
+      "live_source_notes": "Guided-verification observation pmr.911-gt3-cup-992.20260906t205633709z-d7ed7276 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "driver_summary": "Six-speed dog-type paddle sequential with a racing clutch. Use the clutch to pull away; once moving, stay flat and leave the clutch alone. The car blips its own downshifts."
+    }
+  ]
+}

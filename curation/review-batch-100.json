@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.60",
+  "approved_at": "2026-09-06",
+  "records": [
+    {
+      "record_id": "gillet-vertigo-streiff",
+      "bundle": "build/review-cases/issue-76/staged.json",
+      "display_name": "Gillet Vertigo Streiff",
+      "class": "G2 / N-GT",
+      "manufacturer": "Gillet",
+      "model": "Vertigo Streiff",
+      "year": {
+        "from": 2004,
+        "label": "2004/2005 FIA GT configuration"
+      },
+      "real_world_identity_notes": "PMR's Vertigo resolves to the Gillet Vertigo Streiff 2004 race specification represented by the existing gillet-vertigo-streiff record. PMR uses N-GT as its game taxonomy; the documented 2004 Spa entry ran in the historical G2 class, while PMR's own history article describes the car as part of the N-GT FIA-GT context. The exact 2004/surviving-chassis evidence supports six-speed sequential hardware. It does not establish the driver's clutch, cut, blip, shift-interface, or original wheel procedure.",
+      "real_world_source_refs": [
+        "pmr.official.gillet-vertigo",
+        "pmr.official.gillet-vertigo-2004-history",
+        "overtake.pmr-gillet-vertigo-2004",
+        "rsc.gillet-vertigo-streiff-spa-2004-100",
+        "raceart.gillet-vertigo",
+        "ams2.reiza-release.1.6.9.9.historical-endurance-pt2",
+        "as-driven.repository.gillet-vertigo-streiff-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "PMR's official car page and its 2004-spec article identify the Gillet Vertigo and its 2004 specification. OverTake's contemporary report identifies the game car as the 2004 Gillet Vertigo Streiff, and Racing Sports Cars records the exact chassis YA9VA2900Y0169021 at the 2004 Spa 24 Hours as a Gillet Vertigo Streiff. The same chassis is the surviving FIA-GT car described by RaceArt, whose current dossier specifies a Tractive six-speed sequential gearbox. These sources bridge the abbreviated PMR telemetry name to the existing curated record without treating the simulator controls as real-car evidence.",
+      "identity_basis": "PMR's official car page and its 2004-spec article identify the Gillet Vertigo and its 2004 specification. OverTake's contemporary report identifies the game car as the 2004 Gillet Vertigo Streiff, and Racing Sports Cars records the exact chassis YA9VA2900Y0169021 at the 2004 Spa 24 Hours as a Gillet Vertigo Streiff. The same chassis is the surviving FIA-GT car described by RaceArt, whose current dossier specifies a Tractive six-speed sequential gearbox. These sources bridge the abbreviated PMR telemetry name to the existing curated record without treating the simulator controls as real-car evidence.",
+      "specification_basis": "The exact surviving FIA-GT chassis dossier states a Tractive six-speed sequential gearbox, corroborated by PMR's six-speed sequential listing. RaceArt identifies the exact chassis's Tractive gearbox as sequential. PMR's page independently lists six-speed sequential, while its separate generic history wording 'manual' is not treated as an H-pattern claim. Both exact-chassis and PMR sources identify the transmission as sequential. Manual blip is a downshift action in this controls model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this controls model; no upshift-blip claim is asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift-cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights.",
+      "control_overrides": {
+        "gearbox_type": "sequential",
+        "shift_actuation": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.unknown"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.vertigo.20260906t235832109z-126c93ed directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-vertigo-controls.unknown"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2004/2005 FIA GT configuration identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing unknown behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/76",
+      "live_source_notes": "Guided-verification observation pmr.vertigo.20260906t235832109z-126c93ed by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    }
+  ]
+}

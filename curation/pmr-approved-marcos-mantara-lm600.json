@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.61",
+  "approved_at": "2026-09-06",
+  "record_id": "marcos-mantara-lm600",
+  "simulator": "pmr",
+  "telemetry_name": "Mantara LM600",
+  "observed_game_version": "2.2.0",
+  "observed_through": "SimHub guided verification observation pmr.mantara-lm600.20260907t000531900z-e64ee76b",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "unknown",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact early-2000s LM600 race specification; PMR does not identify a chassis or exact event year identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "N-GT",
+  "staged_record_id": "mantara-lm600"
+}

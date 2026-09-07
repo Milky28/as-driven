@@ -110,6 +110,67 @@
         "level": "high",
         "basis": "Porsche's launch material identifies the new Cup car as the first competition version based on the 992 generation and says it began racing in the 2021 season. Porsche's technical specification and technical manual establish the six-speed sequential dog-type gearbox, electronic shift actuator, racing clutch, and paddle controls. The exact cockpit photograph shows the corresponding open-top motorsport wheel with fixed grips and a separate dashboard display. The case has no related curated-record lead; the existing 911 GT3 Cup 3.8 and 4.0 records are earlier-generation cars, so a new generation-specific record is proposed."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "911 GT3 Cup (992)"
+        },
+        {
+          "kind": "internal-id",
+          "value": "911 GT3 Cup (992)"
+        },
+        {
+          "kind": "class-id",
+          "value": "992 Trophy"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR unknown via guided verification observation pmr.911-gt3-cup-992.20260906t205633709z-d7ed7276 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.911-gt3-cup-992.20260906t205633709z-d7ed7276 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-06",
+      "source_refs": [
+        "pmr.official.911-gt3-cup-992",
+        "porsche.911-gt3-cup-992-press.2020",
+        "porsche.racing.911-gt3-cup-2021",
+        "porsche.911-gt3-cup-992-technical-specs.2021",
+        "porsche.911-gt3-cup-992-technical-manual.2022",
+        "autoweek.911-gt3-cup-992-cockpit.2020",
+            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR's first-party page names the exact 911 GT3 Cup (992), identifies Porsche and the 992 Trophy class, and lists a six-speed sequential transmission. Porsche's launch and technical material identify the 992-generation competition car, its 2021 debut, six-speed dog-type transmission, electronic paddle actuator, racing clutch, and cockpit configuration. The existing generation-specific curated record is therefore the correct destination."
+      }
     }
   ],
   "provenance": {
@@ -189,9 +250,35 @@
         ],
         "confidence": "high",
         "basis": "Porsche specifies a six-speed sequential gearbox, and the technical manual lists six forward gears and ratios 1 through 6. Porsche's summary calls it a sequential dog-type gearbox, and the exact technical manual repeats the construction as a sequential claw/dog gearbox. The sources identify right/left steering-wheel paddles and an electronic shift-barrel actuator for sequential gear selection. The exact technical manual calls the gearbox sequential and presents one right-paddle upshift path and one left-paddle downshift path. The car has a dedicated dry racing clutch and clutch pedal; the technical manual's neutral-to-first shift condition requires clutch pressure, establishing clutch use to engage first gear from rest. For the 1-to-6 upshift path, the technical manual lists the right paddle and no clutch pressure requirement. For the 6-to-1 downshift path, the technical manual lists the left paddle and no clutch pressure requirement. The driver-facing upshift is electronic paddle-actuated and the manual does not require a manual throttle blip for it; manual blipping is not the applicable control in this upshift path. The technical manual explicitly specifies an automatic blip in the 6-to-1 downshift condition, so the driver does not supply a manual throttle blip. The 1-to-6 upshift condition permits more than 30% throttle, so lifting off the throttle is not required for the documented running upshift. The manual frames the downshift condition as accelerator below 3% with an automatic blip; it does not define a separate driver lift technique beyond the normal downshift condition, so this field remains not-applicable under the project's sequential/auto-blip convention. The exact manual's downshift condition specifies the separate automatic-blip path and does not describe an automatic cut on downshift; this field is not applicable to the documented downshift behavior. The source specifies a driver-throttle/no-clutch upshift condition and does not describe an automatic blip on upshift; the blip function is documented for downshift instead. The exact technical manual labels the 6-to-1 downshift throttle condition 'Auto. Blip', directly establishing automatic rev matching on downshift. The full-resolution exact-992-Cup cockpit photo shows fixed molded grips at left and right around a central control face, and Porsche's launch material identifies the carbon-fiber motorsport wheel; this is the project's gt-formula category, not a continuous round or D-shaped band. The photograph shows the race display mounted behind the wheel, and Porsche places the 10.3-inch color display in the center of the dashboard rather than in the wheel itself. The photograph and Porsche description show an upper-open fixed-grip motorsport wheel. Under the schema's wheel taxonomy, open-top construction is not applicable to the gt-formula rim category. The full-resolution cockpit image shows no distinct shift-light strip on the wheel; Porsche's specification distinguishes illuminated push buttons from the separate dashboard display and does not identify wheel-mounted shift lights. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/automatic_cut."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "pmr.official.911-gt3-cup-992",
+          "porsche.911-gt3-cup-992-press.2020",
+          "porsche.racing.911-gt3-cup-2021",
+          "porsche.911-gt3-cup-992-technical-specs.2021",
+          "porsche.911-gt3-cup-992-technical-manual.2022",
+          "autoweek.911-gt3-cup-992-cockpit.2020",
+            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR's first-party page names the exact 911 GT3 Cup (992), identifies Porsche and the 992 Trophy class, and lists a six-speed sequential transmission. Porsche's launch and technical material identify the 992-generation competition car, its 2021 debut, six-speed dog-type transmission, electronic paddle actuator, racing clutch, and cockpit configuration. The existing generation-specific curated record is therefore the correct destination."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
   "driver_summary": "Six-speed dog-type paddle sequential with a racing clutch. Use the clutch to pull away; once moving, stay flat and leave the clutch alone. The car blips its own downshifts.",
-  "updated_at": "2026-08-28"
+  "updated_at": "2026-09-06"
 }

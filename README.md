@@ -27,7 +27,7 @@ or [improve an existing car's research](https://github.com/Milky28/as-driven/iss
 - **Accurate browser counts in SimHub.** The car browser distinguishes reviewed
   cars from simulator views of those cars.
 
-The prepared build includes dataset 0.5.50 with 285 reviewed car records across
+The prepared build includes dataset 0.5.65 with 291 reviewed car records across
 eight simulators, plus reliability improvements. The
 [latest published release](https://github.com/Milky28/as-driven/releases/latest)
 remains available while this build is being checked.
@@ -119,14 +119,14 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.50 contains 285 reviewed car records.
+Dataset 0.5.65 contains 291 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |
 | Automobilista 2 | 261 | not applicable |
+| Project Motor Racing | 26 | 13 |
 | Assetto Corsa | 21 | 14 |
 | Assetto Corsa Competizione | 18 | 18 |
-| Project Motor Racing | 11 | 5 |
 | Assetto Corsa EVO | 7 | 3 |
 | RaceRoom Racing Experience | 6 | 3 |
 | rFactor 2 | 5 | 0 |
