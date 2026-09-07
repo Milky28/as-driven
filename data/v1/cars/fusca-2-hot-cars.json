@@ -135,7 +135,16 @@
           "/authentic_controls/transmission/upshift/automatic_blip",
           "/authentic_controls/transmission/upshift/automatic_cut",
           "/authentic_controls/transmission/upshift/manual_blip",
-          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "ams2.local-live-fusca-2-hot-cars-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, automatic cut and blip, and the cockpit rim. The clutch for a shift already under way follows from gearbox construction, not from the drive."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

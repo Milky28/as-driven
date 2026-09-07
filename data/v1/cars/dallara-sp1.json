@@ -133,7 +133,17 @@
       {
         "paths": [
           "/authentic_controls/transmission/shift_actuation",
-          "/authentic_controls/notes/2",
+          "/authentic_controls/notes/2"
+        ],
+        "source_refs": [
+          "wikipedia.dallara-sp1",
+          "ams2.local-live-dallara-sp1-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Visible paddles, a period paddle-conversion context, and replay animation retaining both hands on the wheel support paddle actuation despite the additional cockpit lever."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior/shift_type"
         ],
         "source_refs": [

@@ -219,7 +219,17 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "audi.r8-lms-gt4.technical",
+          "ams2.local-live-audi-r8-lms-gt4-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established clutch-free move-off, no-lift clutch-free upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip spike; the manufacturer documents automatic electrohydraulic clutch operation."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

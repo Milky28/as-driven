@@ -119,8 +119,18 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.3.endurance-pt2",
+          "ams2.local-live-chevrolet-corvette-z06-gt3r-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The Low Downforce name is an exact observed SimHub identity. Its controls are explicitly inherited from the live-tested base car as an aero-package assumption; the variant itself has not been live-tested."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.3.endurance-pt2",
@@ -148,7 +158,16 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-chevrolet-corvette-z06-gt3r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct base-car testing established clutch-free move-off, no-lift clutch-free upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip spike."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

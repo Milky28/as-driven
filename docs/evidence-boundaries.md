@@ -51,15 +51,43 @@ Each finding must be resolved by adding real-world evidence, moving a claim to
 the simulator layer, or restoring the authentic value to `unknown`. This is a
 review task, not an automatic conversion.
 
+### One claim, one layer
+
+A claim carries a single confidence, so it may describe only one layer. A
+reviewed guided drive is strong evidence about the simulator and no evidence at
+all about the real car. While one claim covered both
+`/authentic_controls/...` and `/simulators/N/behavior`, the real-car half
+inherited a confidence that only the simulator half had earned: 285 claims
+across 276 records were shaped that way, 84 of them saying `verified` on a
+real-car field whose only source was one drive.
+
+Those claims are now split, each half keeping the sources, confidence and basis
+it already had. Splitting changed no control value and moved no evidence; it
+only stopped one confidence speaking for two kinds of claim. A test rejects a
+claim that spans both layers, and the promoter emits the drive's findings as two
+claims, which is what a second simulator's promotion already did.
+
+To split any that reappear:
+
+```shell
+python -m as_driven_db split-layer-claims          # report only
+python -m as_driven_db split-layer-claims --apply
+```
+
+The tool is deliberately mechanical and makes no judgment about any car. What
+the isolated authentic half deserves is the review described above, and the
+report's `authentic_half_is_drive_only` flag is that queue.
+
 ### Current state of the queue
 
 The audit count is a burn-down metric, not a pass/fail gate. Guided verification
 establishes the simulator layer quickly, so promoting a drive normally adds
 findings here; that is expected and is not a reason to weaken the layers.
 
-At dataset 0.3.19 the largest group is `/authentic_controls/steering/wheel_rim`,
-where the rim category was read from the in-game cockpit model rather than from
-real-world evidence. Those claims are treated as debt to be re-sourced over
+At dataset 0.5.65 the audit reports 322 simulator-only authentic claims across
+286 of 291 records. The largest group remains
+`/authentic_controls/steering/wheel_rim`, where the rim category was read from
+the in-game cockpit model rather than from real-world evidence. Those claims are treated as debt to be re-sourced over
 time, not as an accepted shortcut. When a record's rim is later supported by
 manufacturer or period photographic evidence, cite it and the finding clears.
 

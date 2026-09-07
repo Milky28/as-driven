@@ -219,7 +219,16 @@
       {
         "paths": [
           "/authentic_controls/transmission",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-mclaren-720s-gt3-evo-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 9cb825e7."
+      },
+      {
+        "paths": [
           "/simulators/0/identities",
           "/simulators/0/behavior"
         ],

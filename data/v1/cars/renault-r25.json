@@ -142,7 +142,16 @@
           "/authentic_controls/transmission/upshift/throttle_lift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-renault-r25-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Guided current-game tests and cockpit inspection directly established the listed behavior; the prior throttle-only automatic-cut inference has been retracted."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior/shift_type",
           "/simulators/0/behavior/auto_blip",
           "/simulators/0/behavior/wheel_rim_type"

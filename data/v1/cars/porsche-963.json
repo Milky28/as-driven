@@ -186,7 +186,16 @@
           "/authentic_controls/transmission/downshift/automatic_blip",
           "/authentic_controls/transmission/upshift/automatic_cut",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-963-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the live guided drive (move-off, clutchless shifts, automatic cut/blip, and cockpit rim)."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

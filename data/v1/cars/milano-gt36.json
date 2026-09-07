@@ -110,7 +110,16 @@
       {
         "paths": [
           "/authentic_controls/transmission",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-milano-gt36-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish six-speed sequential-stick hardware, start clutch, automatic cut, absence of automatic blip, required manual rev matching, and wheel shape."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

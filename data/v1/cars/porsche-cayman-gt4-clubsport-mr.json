@@ -138,7 +138,16 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-porsche-cayman-gt4-clubsport-mr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

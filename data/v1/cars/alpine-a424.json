@@ -124,8 +124,19 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/0",
           "/authentic_controls/notes/4"
+        ],
+        "source_refs": [
+          "simhub.local-ams2-identities.9.11.22",
+          "xtrac.p1359.lmdh",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The Low Downforce name is an exact observed SimHub identity. Its controls are explicitly inherited from the live-tested base car because the variant is understood to be an aero package; the variant itself has not been live-tested."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
         ],
         "source_refs": [
           "simhub.local-ams2-identities.9.11.22",
@@ -164,7 +175,17 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/upshift"
+        ],
+        "source_refs": [
+          "xtrac.p1359.lmdh",
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Seven clutch-free full-throttle upshifts establish that no lift is required. Automatic cut is inferred from the common LMDh gearbox and the three shift-cut-positive LMDh peers in the older source because no interruption was perceptible in this test."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior/shift_cut"
         ],
         "source_refs": [
@@ -176,7 +197,16 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/downshift"
+        ],
+        "source_refs": [
+          "ams2.local-live-alpine-a424-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Clutch-free downshifts were accepted with no driver throttle input, and the automatic blip was directly visible as a throttle-display spike."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior/auto_blip"
         ],
         "source_refs": [

@@ -134,7 +134,17 @@
           "/authentic_controls/transmission/upshift/automatic_blip",
           "/authentic_controls/transmission/upshift/automatic_cut",
           "/authentic_controls/transmission/upshift/manual_blip",
-          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "ams2.local-live-copa-uno-controls.1.6.9.91",
+          "blogdocarelli.copa-uno-1992"
+        ],
+        "confidence": "medium",
+        "basis": "The registered history establishes the series and its Fiat Uno 1.6R base but says nothing about the gearbox. The five H-pattern gears come from the live drive, and synchromesh is the ordinary reading of a road-derived manual rather than a stated specification."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

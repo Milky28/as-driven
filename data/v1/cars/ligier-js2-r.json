@@ -140,7 +140,16 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/automatic_cut"
+        ],
+        "source_refs": [
+          "ams2.local-live-ligier-js2-r-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The observer manually confirmed the cut after an inconclusive automated trace."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior/shift_cut"
         ],
         "source_refs": [

@@ -451,7 +451,16 @@
       {
         "paths": [
           "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-saleen-s7r-gt1-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game testing establishes the modeled start clutch and upshift behavior. Downshift and cockpit observations are preserved separately as simulator overrides and do not define the real 2005 car."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

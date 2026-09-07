@@ -312,14 +312,29 @@ def build_promoted_record(
                 "confidence": confidence,
                 "basis": _required(entry, "specification_basis", label),
             },
+            # The drive's own findings, one claim per layer. A claim carries a
+            # single confidence, and a guided drive is strong evidence about the
+            # simulator and none at all about the real car; bundling the two
+            # made the real-car half inherit a confidence its sources never
+            # supported. A second simulator's promotion already keeps its claims
+            # off /authentic_controls, so this makes the first behave like the
+            # rest.
             {
                 "paths": [
                     "/authentic_controls/transmission/upshift",
                     "/authentic_controls/transmission/downshift",
                     "/authentic_controls/transmission/standing_start_clutch",
                     "/authentic_controls/steering/wheel_rim",
-                    "/simulators/0/behavior",
                 ],
+                "source_refs": [live_source_id],
+                "confidence": confidence,
+                "basis": (
+                    "Directly observed during the guided drive: move-off, shift "
+                    "clutch use, automatic cut and blip, and the cockpit rim."
+                ),
+            },
+            {
+                "paths": ["/simulators/0/behavior"],
                 "source_refs": [live_source_id],
                 "confidence": confidence,
                 "basis": (

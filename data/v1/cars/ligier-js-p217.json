@@ -133,7 +133,16 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-ligier-js-p217-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Both class generations directly demonstrated clutch-free move-off, no-lift clutch-free upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip throttle spike. The unknown mechanism behind move-off is explicitly not inferred."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

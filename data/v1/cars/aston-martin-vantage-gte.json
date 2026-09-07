@@ -127,7 +127,16 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "ams2.local-live-aston-martin-vantage-gte-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established clutch-free move-off, clutch-free no-lift upshifts with perceptible cut, and clutch-free downshifts with a visible automatic-blip spike. The move-off mechanism remains explicitly unknown."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

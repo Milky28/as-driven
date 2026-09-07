@@ -304,7 +304,16 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac-evo.local-live-honda-s2000-ap1-controls.0.9.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

@@ -163,7 +163,16 @@
           "/authentic_controls/transmission/upshift/automatic_blip",
           "/authentic_controls/transmission/upshift/automatic_cut",
           "/authentic_controls/transmission/upshift/manual_blip",
-          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-inter-mg15-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 6352bdce. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior",
           "/simulators/0/identities"
         ],

@@ -132,7 +132,16 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established hybrid move-off, automatic cut/blip, and the cockpit rim; wheel shift lights remain unknown."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

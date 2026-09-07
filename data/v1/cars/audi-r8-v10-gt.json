@@ -141,7 +141,16 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/automatic_cut"
+        ],
+        "source_refs": [
+          "ams2.local-live-audi-r8-v10-gt-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "The observer manually confirmed cut after an inconclusive trace."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior/shift_cut"
         ],
         "source_refs": [

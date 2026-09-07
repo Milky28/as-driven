@@ -126,7 +126,17 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-mitsubishi-lancer-rs-controls.1.6.9.91",
+          "linkezine.mitsubishi-lancer-cup"
+        ],
+        "confidence": "high",
+        "basis": "The registered feature gives the RS a six-speed sequential gearbox with powershift, meaning clutchless gear changes, and the live drive selected six gears through a sequential stick with automatic cut and clutchless running shifts."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

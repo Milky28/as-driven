@@ -134,7 +134,16 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-lola-b05-40-v8-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game testing and cockpit inspection establish move-off behavior, automatic cut/blip, and wheel category."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [
@@ -145,8 +154,18 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/0",
           "/authentic_controls/notes/2"
+        ],
+        "source_refs": [
+          "ams2.reiza-release.1.6.8.5.historical-endurance",
+          "simhub.local-ams2-identities.9.11.22"
+        ],
+        "confidence": "medium",
+        "basis": "The exact Low Downforce identity is observed and approved as an aero-only inheritance, but its controls were not separately tested."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
         ],
         "source_refs": [
           "ams2.reiza-release.1.6.8.5.historical-endurance",

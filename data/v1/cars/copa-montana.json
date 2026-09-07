@@ -126,7 +126,17 @@
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-copa-montana-controls.1.6.9.91",
+          "wikipedia-pt.copa-chevrolet-montana"
+        ],
+        "confidence": "medium",
+        "basis": "Portuguese Wikipedia gives the series car a sequential gearbox on a tubular JL Racing chassis, and the live drive selected five gears through a sequential stick with automatic cut and blip. The source does not state the gear count, so the five gears are the drive's result."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

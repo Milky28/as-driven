@@ -21,6 +21,7 @@ from .review_promotion import promote_review_case
 from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
 from .release_changes import release_control_changes, render_release_control_changes
+from .split_claims import apply as apply_claim_split, plan as plan_claim_split
 from .update_manifest import (
     DEFAULT_REPOSITORY as DEFAULT_RELEASE_REPOSITORY,
     UpdateManifestError,
@@ -96,6 +97,24 @@ def _parser() -> argparse.ArgumentParser:
         action="append",
         default=[],
         help="record id to place first (repeat for locally recent cars)",
+    )
+
+    split_claims = subparsers.add_parser(
+        "split-layer-claims",
+        help="separate provenance claims that span the authentic and simulator layers",
+    )
+    split_claims.add_argument("--root", type=Path, default=Path.cwd())
+    split_claims.add_argument(
+        "--record",
+        action="append",
+        default=[],
+        help="record id to split (repeat; default every affected record)",
+    )
+    split_claims.add_argument("--report", type=Path)
+    split_claims.add_argument(
+        "--apply",
+        action="store_true",
+        help="write the split records instead of only reporting",
     )
 
     update_manifest = subparsers.add_parser(
@@ -408,6 +427,23 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"Compared {report['previous']['dataset_version']} to {report['current']['dataset_version']}: "
             f"{summary['changed_controls']} control field(s) across {summary['changed_cars']} car(s)."
+        )
+        return 0
+
+    if args.command == "split-layer-claims":
+        root = args.root.resolve()
+        report = plan_claim_split(root, args.record or None)
+        if args.report:
+            _write_json(args.report, report)
+            print(f"Wrote the split plan to {args.report}")
+        if args.apply:
+            changed = apply_claim_split(root, args.record or None)
+            print(f"Split claims in {len(changed)} record(s).")
+        print(
+            f"{report['claims_split']} claim(s) across {report['records_affected']} "
+            f"record(s) span both layers; {report['drive_only_authentic_halves']} "
+            "authentic half/halves would stand on a guided drive alone "
+            f"({report['by_confidence']})."
         )
         return 0
 

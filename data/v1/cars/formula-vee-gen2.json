@@ -158,7 +158,16 @@
           "/authentic_controls/transmission/upshift/automatic_blip",
           "/authentic_controls/transmission/upshift/automatic_cut",
           "/authentic_controls/transmission/upshift/manual_blip",
-          "/authentic_controls/transmission/upshift/throttle_lift",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "ams2.local-live-formula-vee-gen2-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Guided current-game A/B tests directly established standing-start clutch, lift/manual-blip requirements, absence of automatic cut/blip, and wheel details."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [

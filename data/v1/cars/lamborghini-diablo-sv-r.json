@@ -151,8 +151,17 @@
           "/authentic_controls/transmission/downshift/automatic_cut",
           "/authentic_controls/transmission/downshift/automatic_blip",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/simulators/0/behavior",
           "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct current-game tests and cockpit inspection establish the asserted start, lift, manual-blip, automation, pattern, and rim behavior; unsupported historical running-clutch claims remain unknown."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
         ],
         "source_refs": [
           "ams2.local-live-lamborghini-diablo-svr-controls.1.6.9.91"

@@ -118,8 +118,17 @@
       },
       {
         "paths": [
-          "/simulators/0/identities/0",
           "/authentic_controls/notes/3"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-sc63-controls.1.6.9.91"
+        ],
+        "confidence": "medium",
+        "basis": "Low Downforce is an exact observed identity whose controls are explicitly inherited from the tested base as an aero-package assumption; the variant itself was not live-tested."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities/0"
         ],
         "source_refs": [
           "ams2.local-live-lamborghini-sc63-controls.1.6.9.91"
@@ -157,7 +166,16 @@
       {
         "paths": [
           "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/downshift"
+        ],
+        "source_refs": [
+          "ams2.local-live-lamborghini-sc63-controls.1.6.9.91"
+        ],
+        "confidence": "verified",
+        "basis": "Direct testing established no-lift clutch-free upshifts with perceptible automatic cut and clutch-free downshifts with a visible automatic-blip throttle spike."
+      },
+      {
+        "paths": [
           "/simulators/0/behavior"
         ],
         "source_refs": [
