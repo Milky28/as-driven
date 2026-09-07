@@ -3,10 +3,17 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import re
+import sys
 import unittest
 
 
 ROOT = Path(__file__).parents[1]
+sys.path.insert(0, str(ROOT))
+
+from as_driven_db.update_manifest import (  # noqa: E402
+    check_update_manifest,
+    read_update_manifest,
+)
 
 
 class ReleasePackagingTests(unittest.TestCase):
@@ -128,6 +135,68 @@ class ReleasePackagingTests(unittest.TestCase):
         )
         self.assertIn("releases/download/$tag/", publisher)
         self.assertIn("package_sha256 = $pluginHash", publisher)
+
+
+class UpdateManifestPromotionTests(unittest.TestCase):
+    """The root manifest must not lag the newest release a driver can download.
+
+    Publishing writes the manifest as a release asset and stops; copying it
+    into the root is manual, and 0.21.5 was published with the root still
+    announcing 0.21.4. Every installation that checked was told it was current.
+    """
+
+    @staticmethod
+    def _release(tag: str, *, draft: bool = False, prerelease: bool = False):
+        return {"tag_name": tag, "draft": draft, "prerelease": prerelease}
+
+    def test_a_manifest_behind_the_published_latest_is_an_error(self) -> None:
+        errors = check_update_manifest(
+            {"plugin_version": "0.21.4"},
+            [self._release("v0.21.5"), self._release("v0.21.4")],
+        )
+        self.assertEqual(1, len(errors), errors)
+        self.assertIn("v0.21.5", errors[0])
+
+    def test_a_manifest_matching_the_published_latest_passes(self) -> None:
+        self.assertEqual(
+            [],
+            check_update_manifest(
+                {"plugin_version": "0.21.5"},
+                [self._release("v0.21.5"), self._release("v0.21.4")],
+            ),
+        )
+
+    def test_a_draft_is_not_something_a_driver_can_download(self) -> None:
+        """The root stays on the last published release while a candidate drafts."""
+        self.assertEqual(
+            [],
+            check_update_manifest(
+                {"plugin_version": "0.21.5"},
+                [self._release("v0.21.6", draft=True), self._release("v0.21.5")],
+            ),
+        )
+
+    def test_announcing_an_unpublished_version_is_an_error(self) -> None:
+        errors = check_update_manifest(
+            {"plugin_version": "0.21.6"}, [self._release("v0.21.5")]
+        )
+        self.assertEqual(1, len(errors), errors)
+        self.assertIn("does not exist", errors[0])
+
+    def test_a_prerelease_is_downloadable_but_is_not_the_latest(self) -> None:
+        releases = [self._release("v0.22.0", prerelease=True), self._release("v0.21.5")]
+        self.assertEqual([], check_update_manifest({"plugin_version": "0.21.5"}, releases))
+        self.assertEqual([], check_update_manifest({"plugin_version": "0.22.0"}, releases))
+
+    def test_the_checked_in_manifest_is_current_for_its_own_release(self) -> None:
+        """Offline: the manifest against a listing containing what it announces."""
+        manifest = read_update_manifest(ROOT)
+        self.assertEqual(
+            [],
+            check_update_manifest(
+                manifest, [self._release("v" + manifest["plugin_version"])]
+            ),
+        )
 
 
 if __name__ == "__main__":

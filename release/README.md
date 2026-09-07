@@ -101,3 +101,16 @@ so nothing is contacted until somebody sets it.
 The manual check compares the two versions. Only a newer release with an HTTPS
 package URL and well-formed SHA-256 is offered for automatic installation, and
 the downloaded bytes must match that hash before the package is used.
+
+**The attached asset is not the endpoint.** What every installation reads is the
+copy at the repository root on `main`, and putting the released manifest there is
+a manual step after the draft is published, so that the root keeps offering a
+download that exists while a candidate is still a draft. It was missed for
+0.21.5. After publishing, run:
+
+```powershell
+python -m as_driven_db check-update-manifest
+```
+
+which fails when the root manifest is behind the published latest, or announces
+a version no release provides. Drafts are ignored.

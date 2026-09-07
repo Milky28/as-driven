@@ -21,6 +21,13 @@ from .review_promotion import promote_review_case
 from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
 from .release_changes import release_control_changes, render_release_control_changes
+from .update_manifest import (
+    DEFAULT_REPOSITORY as DEFAULT_RELEASE_REPOSITORY,
+    UpdateManifestError,
+    check_update_manifest,
+    fetch_releases,
+    read_update_manifest,
+)
 from .maintainer_workbench import (
     WorkbenchApplication,
     WorkbenchError,
@@ -89,6 +96,22 @@ def _parser() -> argparse.ArgumentParser:
         action="append",
         default=[],
         help="record id to place first (repeat for locally recent cars)",
+    )
+
+    update_manifest = subparsers.add_parser(
+        "check-update-manifest",
+        help="fail when the update endpoint is behind the published latest release",
+    )
+    update_manifest.add_argument("--root", type=Path, default=Path.cwd())
+    update_manifest.add_argument(
+        "--repository",
+        default=DEFAULT_RELEASE_REPOSITORY,
+        help="owner/name to list releases from",
+    )
+    update_manifest.add_argument(
+        "--releases",
+        type=Path,
+        help="read a saved release listing instead of calling GitHub",
     )
 
     observation = subparsers.add_parser(
@@ -385,6 +408,28 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"Compared {report['previous']['dataset_version']} to {report['current']['dataset_version']}: "
             f"{summary['changed_controls']} control field(s) across {summary['changed_cars']} car(s)."
+        )
+        return 0
+
+    if args.command == "check-update-manifest":
+        try:
+            manifest = read_update_manifest(args.root.resolve())
+            releases = (
+                json.loads(args.releases.read_text(encoding="utf-8-sig"))
+                if args.releases
+                else fetch_releases(args.repository)
+            )
+            errors = check_update_manifest(manifest, releases)
+        except (UpdateManifestError, OSError, json.JSONDecodeError) as exception:
+            print(f"ERROR: {exception}")
+            return 1
+        if errors:
+            for error in errors:
+                print(f"ERROR: {error}")
+            return 1
+        print(
+            f"The update endpoint announces {manifest['plugin_version']} "
+            f"with dataset {manifest.get('dataset_version')}, the published latest."
         )
         return 0
 

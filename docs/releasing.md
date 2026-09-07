@@ -102,6 +102,19 @@ available download. A local candidate's dataset version can be ahead of the
 public update manifest; the regression check validates the manifest against its
 own release's changelog entry.
 
+Nothing prompts you to do that copy, and 0.21.5 was published with the root
+still announcing 0.21.4, so every installation that checked was told it was
+current. Confirm the promotion once the release is no longer a draft:
+
+```powershell
+python -m as_driven_db check-update-manifest
+```
+
+It lists the repository's releases and fails when the root manifest is behind
+the published latest, or when it announces a version that is not published at
+all. A draft is not published, so the check stays quiet while a candidate is
+still being prepared. Pass `--releases` a saved listing to run it offline.
+
 Automatic update checking is out of scope by design, not for want of an
 endpoint. The endpoint exists and is stable: `main` is public, and
 `https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json`

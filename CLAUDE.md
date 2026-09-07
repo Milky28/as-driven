@@ -138,6 +138,13 @@ Users have exactly one update procedure: install the newest release over the
 old one. A second route existed on paper but required a repository checkout,
 which meant it was never actually available to the people it was written for.
 
+After publishing a draft, promote the release's `as-driven-latest.json` into the
+repository root and confirm it:
+
+```powershell
+python -m as_driven_db check-update-manifest
+```
+
 See `docs/install.md`, `docs/releasing.md`, and `release/README.md` before
 publishing. Automatic update checks remain out of scope: the check is manual and
 notify-only by design, not merely until an endpoint exists. A dataset that
@@ -228,8 +235,10 @@ auditable evidence, and the history is where corrections are visible.
   that release's package URL and SHA-256 so a confirmed install has something
   to verify. The release script writes that manifest as a release asset only;
   copying it into the repository root is a separate manual step after
-  publishing, and it was missed for 0.21.5. Nothing contacts it without the
-  button.
+  publishing, and it was missed for 0.21.5. `python -m as_driven_db
+  check-update-manifest` now fails when the root is behind the published latest,
+  ignoring drafts so the root can keep offering a real download while a
+  candidate is prepared. Nothing contacts it without the button.
 - The README illustrates the plugin with **real captures**, not icon artwork:
   `preflight-card.png`, `preflight-card-compact.png`, `settings-garage.png`,
   `settings-browser.png`, and `guided-drive.jpg` under `docs/images/`. Widths
