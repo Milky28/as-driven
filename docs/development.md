@@ -145,8 +145,8 @@ and approval, and marks the local case promoted.
 
 `finalize-release` refreshes the AMS2 coverage manifest when local coverage
 inputs are available, otherwise retains its checked-in inventory snapshot. It
-also regenerates the cross-simulator disagreement audit, refreshes maintained
-release facts from the actual records, rebuilds the offline site, and validates
+also regenerates the cross-simulator disagreement audit, refreshes the generated
+README coverage block from the actual records, rebuilds the offline site, and validates
 the repository. Pass `--test` to include the full Python test suite.
 
 After the release commit is pushed, `publish-result` previews the exact

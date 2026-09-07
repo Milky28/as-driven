@@ -68,5 +68,7 @@ Confidence measures evidence, not contributor certainty.
   match a game limitation.
 - Include `verified_game_version`, `verified_at`, and source references.
 - Update `data/v1/index.json` for added or removed records.
+- After manual car JSON edits, run `python -m as_driven_db format-records`.
+  Formatting is automatic housekeeping, not an authenticity requirement.
 - Run `python -m as_driven_db validate` and the unit tests.
 - Explain licensing or reuse terms for any proposed bulk import.

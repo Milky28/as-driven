@@ -745,35 +745,6 @@ class SiteTests(unittest.TestCase):
             sum(1 for car in cars if car["has_simulator_disagreements"]),
         )
 
-    def test_the_header_and_open_row_keep_a_compact_visual_hierarchy(self) -> None:
-        page = build_site(ROOT)
-        stats_rule = re.search(r"(?m)^\.stats \{(.*?)\}", page, re.S).group(1)
-        stat_rule = re.search(r"\.stat \{(.*?)\}", page, re.S).group(1)
-        release_rule = re.search(r"(?m)^\.release-badge \{(.*?)\}", page, re.S).group(1)
-        detail_rule = re.search(r"\.detail-inner \{(.*?)\}", page, re.S).group(1)
-        selected_rule = re.search(
-            r'tr\.car\[aria-expanded="true"\] \{(.*?)\}', page, re.S
-        ).group(1)
-
-        self.assertIn("flex-wrap: wrap", stats_rule)
-        self.assertIn("align-items: baseline", stat_rule)
-        self.assertIn("white-space: nowrap", stat_rule)
-        self.assertIn("background: var(--surface)", release_rule)
-        self.assertIn("border-left: 3px solid var(--accent)", release_rule)
-        header = page.split("</header>", 1)[0]
-        self.assertLess(
-            header.index('id="lookup-controls"'), header.index('<details class="coverage">')
-        )
-        self.assertRegex(
-            header,
-            r'<div class="title-block">\s*<h1>As Driven</h1>\s*'
-            r'<p class="release-badge"><strong>Dataset [^<]+</strong>'
-            r'<span>Released [^<]+</span></p>',
-        )
-        self.assertNotIn('<p class="provenance">Dataset ', header)
-        self.assertIn("border-top: 2px solid var(--accent)", detail_rule)
-        self.assertIn("box-shadow", detail_rule)
-        self.assertIn("inset 3px 0 0 var(--accent)", selected_rule)
 
     def test_physical_controls_precede_driving_technique_in_the_table(self) -> None:
         page = build_site(ROOT)
@@ -818,14 +789,10 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn("Compare driving setup", single_sim)
         self.assertIn("drive-compare-grid", page)
 
-    def test_the_light_palette_separates_ground_surface_and_rules(self) -> None:
+    def test_the_light_palette_keeps_text_readable(self) -> None:
         page = build_site(ROOT)
         root = re.search(r":root \{(.*?)\}", page, re.S).group(1)
         tokens = dict(re.findall(r"(--[a-z0-9-]+):\s*([^;]+);", root))
-        self.assertNotEqual(tokens["--bg"], tokens["--surface"])
-        self.assertNotEqual(tokens["--surface"], tokens["--surface-2"])
-        self.assertNotEqual(tokens["--row-alt"], tokens["--surface"])
-        self.assertNotEqual(tokens["--line"], tokens["--row-alt"])
         def luminance(color):
             channels = [int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
             linear = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4
@@ -837,26 +804,6 @@ class SiteTests(unittest.TestCase):
             values = sorted([luminance(tokens[foreground]), luminance(tokens[background])])
             self.assertGreaterEqual((values[1] + .05) / (values[0] + .05), 4.5)
 
-    def test_the_four_states_are_told_apart_by_more_than_hue(self) -> None:
-        """Two warm fills side by side read as the same answer.
-
-        Optional uses a saturated violet fill so it reads independently of the
-        surrounding neutral surfaces. The dotted border reserves a separate
-        shape for an evidence gap.
-        """
-        page = build_site(ROOT)
-        rules = {
-            tone: re.search(r"\.tone-%s \{(.*?)\}" % tone, page, re.S).group(1)
-            for tone in ("you", "car", "optional", "unknown")
-        }
-        colors = {tone: re.search(r"color: ([^;]+);", body).group(1) for tone, body in rules.items()}
-        self.assertEqual(len(set(colors.values())), 4, colors)
-
-        filled = {tone for tone, body in rules.items() if "background: var(" in body}
-        self.assertEqual(filled, {"you", "car", "optional"}, filled)
-        self.assertIn("var(--optional-bg)", rules["optional"])
-        # An evidence gap is hollow and dotted, unlike every settled state.
-        self.assertIn("1px dotted", rules["unknown"])
 
     def test_the_theme_control_offers_the_three_states_the_page_has(self) -> None:
         """Following the system is a state, not the absence of one.

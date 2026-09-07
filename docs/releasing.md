@@ -1,19 +1,23 @@
 # Release process
 
-Plugin and database releases are separate artifacts. The plugin ZIP contains a
-known-good database snapshot for first installation; the database ZIP updates
-only curated data.
+Every published user release ships the full SimHub package with the current
+database. A separate portable database ZIP remains available for other clients.
 
 ## Compatibility and versioning
 
-- `AsDriven.Plugin` is the client version shown in SimHub.
-- `AsDriven.Core` ships with the plugin and uses the same release
-  version to keep installed binaries easy to audit.
-- `data/v1/index.json` owns the independent dataset version.
+- `data/v1/index.json` owns the independent dataset version and record list.
+- Plugin and core assembly metadata own the client version and stay aligned.
+  Bump the client version for each published full package, including data updates.
 - Schema v1 clients accept compatible schema-v1 dataset updates.
+- `as-driven-latest.json` at the repository root describes the published update.
+  After publishing, copy the release's manifest there and run
+  `python -m as_driven_db check-update-manifest`.
 
-The first release is plugin 0.15.0 with dataset 0.3.18. Do not
-change the plugin version merely for a database-only release.
+`python -m as_driven_db review-submissions finalize-release --test` refreshes
+the generated README coverage block from the data, rebuilds research artifacts
+and the site, validates the dataset, and runs Python tests. It does not rewrite
+agent instructions or research prose. Current counts belong in generated
+outputs; historical documentation snapshots need no version bump.
 
 ## Build release candidates
 

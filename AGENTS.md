@@ -1,158 +1,89 @@
 # As Driven project guidance
 
-## Purpose
+## Purpose and scope
 
-Build and maintain an open, simulator-independent authentic-controls layer that
-tells a sim racer which physical controls and shifting technique to use for an
-authentic experience. The versioned JSON database is the source of truth;
-SimHub is the reference client, not the data format owner.
+Answer: which physical controls should I use, and how should I shift this car?
+The versioned JSON database is the source of truth; SimHub is one read-only
+client. Cover rim category, shifter actuation/pattern/gears, clutch technique,
+lift/cut/blipping, and optional steering DOR. General car specifications,
+driver aids, and unrelated electronics are out of scope.
+Steering DOR remains for compatibility; do not start new research for it or
+populate the real-car field from simulator settings.
 
-## Scope
+## Evidence and review
 
-Keep the core dataset focused on controls that materially affect the user's
-pre-session hardware choice or driving technique:
+- Preserve `unknown`; absence of evidence is not `no`.
+- Every material claim needs sources, confidence, and a falsifiable basis.
+- Keep real-car facts separate from simulator observations. Observations need
+  an exact verified game version and check date.
+- Match simulator identities exactly. Never silently fuzzy-match or treat
+  chassis manufacturer as the vehicle marque.
+- Keep candidates outside `data/v1` until explicit review approval. Use the
+  existing promotion tools to write records, approvals, sources, and index.
+- Established mechanisms may settle technique; technique cannot establish a
+  mechanism. Follow `docs/data-model.md` for the actual derivation rules.
+- Registered sources must be cited or declare `establishes: nothing` with notes
+  explaining what was examined and why it settled nothing.
+- Overrides describe simulator differences or observations over an unknown
+  baseline. Do not add overrides agreeing with the authentic value.
+- `driver_summary` is optional. Do not invent one to complete a record; follow
+  `docs/driver-summaries.md` and write manual summaries with the maintainer.
+- Preserve the checked-in coverage inventory when local inputs are absent.
+  Refreshing it must not silently discard previously observed identities.
 
-- wheel-rim category;
-- shifter actuation, pattern, and forward gear count;
-- clutch use for starts, upshifts, and downshifts;
-- throttle lift, shift cut, and manual/automatic blipping;
-- optional steering DOR as reference metadata.
+The schemas own field types, required fields, ranges, and vocabularies.
+`as_driven_db/validate.py` owns cross-record and evidence relationships. Tests
+exercise those rules and client behavior; avoid duplicating schema constraints
+or turning punctuation, JSON whitespace, colors, or fixed layout dimensions
+into correctness gates. Use `python -m as_driven_db format-records` after manual
+car JSON edits; import and promotion tools already format their output.
 
-Do not expand the core model into a general car database. TC, ABS, other driver
-aids/electronics, general specifications, and handbrake construction are out of
-scope unless a future proposal establishes a direct authentic-controls use case.
+## Working discipline
 
-## Data rules
+- Start Codex implementation work in a separate Git worktree on a task-specific
+  `codex/` branch. Leave the shared main checkout for Claude. Never edit, stage,
+  stash, or commit another worker's uncommitted changes; integrate deliberately.
+- Complete the requested behavior and necessary consequences. Report unrelated
+  cleanup separately. A small correction should not become a repository audit.
+- Prefer small, direct modifications. Retain standard SimHub `IPlugin`,
+  `IDataPlugin`, `IWPFSettings`, and `PluginManager` integration and the existing
+  .NET Framework target. Do not add layers or dependencies speculatively, or
+  redistribute installed SimHub SDK assemblies.
+- Keep the database independently usable. Update schema, documentation,
+  validation, and meaningful tests together when changing a data contract.
+- Never commit generated build/dist/bin/obj directories, caches, or local drafts.
+- Builds must not install into SimHub. Installation, publishing, and contributor
+  messages require the user's authorization for those actions. Drafts stay local.
 
-- Preserve `unknown` when evidence does not establish a value. Never convert it
-  to `no` by assumption.
-- Every material claim needs source references, confidence, and a falsifiable
-  basis.
-- Simulator behavior needs an exact verified game version and check date.
-- Keep imported candidates separate from curated `data/v1` records.
-- Require explicit review approvals before promotion.
-- Match simulator identities exactly. Never introduce silent fuzzy matching.
-- Treat chassis manufacturer as identity context, not automatically the vehicle
-  marque.
-- A mechanism the record establishes settles the technique that follows from it,
-  and never the reverse. An established automatic cut settles the upshift lift;
-  a dog box settles the downshift blip; an H-pattern gate settles
-  `standing_start_clutch: required`, which is the only one of the three that does
-  not also need `gearbox_type`. Tests enforce all three. See
-  `docs/data-model.md`.
-- Every registered source must be cited by a claim, or declare
-  `"establishes": "nothing"` and say in its notes what was examined and why it
-  settled nothing. Research that established nothing is worth keeping; a citation
-  dropped by accident is not, and without the declaration the two are
-  indistinguishable. Validation refuses either half being wrong.
-- An override must not restate the authentic value. Only a refusal is a
-  departure; an override that agrees makes the card announce a difference that is
-  not there. 48 pre-existing overrides still do this and are a known cleanup, not
-  a licence to add more.
+## Verification
 
-## Repository map
-
-- `schema/v1/`: versioned JSON Schema contracts.
-- `data/v1/`: curated release index, sources, and car records.
-- `curation/`: checked-in reviewer approvals and promotion review manifests.
-- `as_driven_db/`: dependency-free Python import, audit, promotion,
-  and validation tools.
-- `research/`: checked-in research manifests, deterministic generators, and
-  `ams2-identity-decisions.json`, the written reviewer outcomes for observed
-  identities that are retired, third-party, or out of scope.
-- `simhub/`: read-only .NET lookup library, SimHub adapter, diagnostics, and
-  packaging.
-- `tests/`: Python regression tests and legally safe parser fixtures.
-- `docs/`: data-model, importer, provenance, audit, and integration guidance.
-
-## Verification pipeline
-
-A car reaches the database through this sequence. The user drives; that step
-cannot be automated.
-
-1. The user records a guided drive in the SimHub plugin's contribution
-   workflow. Drafts land in
-   `%LOCALAPPDATA%\SimHub\AsDriven\Verification\Drafts`.
-2. `python -m as_driven_db import-observation <draft> --output
-   build/staged.json` stages a bundle. Real-world identity is deliberately left
-   as `REVIEW-REQUIRED`, because a drive cannot establish it.
-3. A reviewer supplies identity and registered sources in a manifest under
-   `curation/`.
-4. `python -m as_driven_db promote-observation <manifest>` writes the
-   record, approval, source, and index together. It refuses missing fields, any
-   remaining `REVIEW-REQUIRED`, unregistered sources, and overwriting a curated
-   record, and writes nothing unless every entry passes.
-5. Regenerate `python -m research.build_ams2_coverage_manifest`, then validate.
-
-An observed SimHub identity is not proof of official content. SimHub records any
-car it sees, including mods. Check provenance when a name looks irregular or
-predates the official car's release, and record the outcome as a decision rather
-than silently queueing verification work.
-
-## Maintainer state
-
-- `main` tracks `origin/main` at `github.com/Milky28/as-driven` and is the
-  integration and release branch.
-- Start future Codex implementation work in a separate Git worktree on a
-  task-specific `codex/` branch. Leave the shared main checkout for Claude;
-  do not edit, stage, stash, or commit Claude's uncommitted changes. Integrate
-  the reviewed worktree changes into main deliberately before release.
-- Client: 0.21.5 is published as the latest release; 0.21.4 is installed.
-- Dataset: 0.5.66 with 291 curated records, and 0.5.49 is installed.
-- Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
-- The history was rewritten on 2026-08-29. An older clone must re-clone rather
-  than pull; see `docs/maintainer-handoff.md` for the full history note and
-  current operational state.
-- Read `docs/maintainer-handoff.md` only when the task concerns contribution
-  processing, simulator coverage, known disagreements, or release history.
-- `validate` compares the dataset version and record count quoted in this file,
-  `README.md`, `CLAUDE.md`, `AGENTS.md`, and `docs/*.md` against
-  `data/v1/index.json`. Update the dataset line above with the index, or
-  validation fails.
-
-## SimHub plugin development
-
-Act as an expert C# game telemetry developer. We are building a
-[**SimHub**](https://www.simhubdash.com/) custom plugin using the standard
-SimHub SDK. Adhere strictly to the required boilerplate classes (`IPlugin`,
-`PluginManager`). Do not add multi-layered architectures, hypothetical
-edge-case wrappers, or heavy abstractions. Use small, direct modifications.
-
-## Required checks
-
-Run these after data, schema, importer, or Python tooling changes:
+After data, schema, importer, research-manifest, or Python tooling changes:
 
 ```powershell
 python -m as_driven_db validate
 python -m unittest discover -s tests -v
 ```
 
-Run this after .NET lookup or SimHub adapter changes:
+After C#, SimHub adapter, XAML, dashboard, asset, or build-script changes:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\build.ps1
 ```
 
-The SimHub build must remain non-installing: it may compile, test, and package
-inside `simhub/dist`, but routine builds must not write to the installed SimHub
-directory. Installation is a separate explicit user action.
+Run `git diff --check` before committing. Re-run checks after relevant changes
+or failures; a passing unchanged result does not need to be repeated.
 
-## Change discipline
+## Where to look
 
-- Keep the JSON database independently usable without SimHub.
-- Prefer small, reviewable record additions over bulk unverified coverage.
-- Update schemas, documentation, validation, and tests together when changing
-  a data contract.
-- Do not commit generated `build/`, `dist/`, `bin/`, `obj/`, Python cache, or
-  local telemetry artifacts.
-- Preserve user changes and avoid destructive Git operations.
-- `driver_summary` is optional and usually absent. The generator drafts one only
-  where a record's simulators disagree on driver technique; everything else it
-  could assemble is already a Fit or Use row on the card. A promotion proposing
-  no summary is working correctly, not failing. Write one by hand only with the
-  maintainer. See `docs/driver-summaries.md`.
-- `research/ams2-coverage-manifest.json` is an inventory snapshot. Local audit
-  and diagnostics inputs can enrich it but are optional: when they are absent,
-  `finalize_release` retains the checked-in snapshot instead of shrinking it.
-  Do not commit a smaller generated manifest; coverage can only grow through a
-  deliberate reviewed refresh.
+- Current dataset: `data/v1/index.json`; public counts: generated README block.
+- Published update: `as-driven-latest.json`; client version: assembly metadata.
+- Data changes: `CONTRIBUTING.md`, `docs/data-model.md`, `docs/evidence-boundaries.md`.
+- Contributions: `docs/maintainer-review-workflow.md`. Prefer the assistant-led
+  path using the existing CLI; the workbench remains available for the same cases.
+- Build and releases: `docs/development.md`, `docs/releasing.md`, `release/README.md`.
+- Installation and privacy: `docs/install.md`, `PRIVACY.md`.
+- Contribution state, coverage, disagreements, or release history:
+  `docs/maintainer-handoff.md`. Read it for those tasks, not routine changes.
+- Closed research: `docs/gearbox-construction-research.md`. Reopen only with new
+  evidence. `research/auto-blip-premeasurement.json` tracks remaining drive checks;
+  clear those when naturally driven, not by scheduling a new batch.

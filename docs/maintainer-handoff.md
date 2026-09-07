@@ -21,10 +21,14 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
 - `main` is the default and only branch. The repository is public as of
   2026-08-29.
 
-## Current operational state
+## Operational snapshot
+
+These handoff notes are historical context. Read `data/v1/index.json` for the
+current dataset, the generated README coverage block for counts, and
+`as-driven-latest.json` for the published update.
 
 - Client: 0.21.5 is published as the latest release; 0.21.4 is installed.
-- Dataset: 0.5.66 with 291 curated records, and 0.5.49 is installed. The
+- Installed dataset at this handoff: 0.5.49. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
@@ -36,7 +40,8 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
   exact-resubmission classification hid the already-stored draft, and is now
   published. Issues 31 through 33 are also published comparison cases; none
   needs further reconciliation.
-- Use the maintainer workbench for contribution processing. Synchronization is
+- Contributions can be prepared by an assistant using the existing CLI or
+  reviewed in the workbench; see `docs/maintainer-review-workflow.md`. Synchronization is
   serialized across browser tabs, and a same-issue retry with an unchanged
   attachment preserves the original classification. Issue 12 was restored as
   `new-identity` after exposing the former race and is now published.

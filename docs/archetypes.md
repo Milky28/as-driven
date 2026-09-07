@@ -1,13 +1,13 @@
 # Control archetypes
 
-**Status: 251 of 291 records are classified** - 177 matches, 48 deviations, 15 undetermined, 11 with no archetype, and 40 awaiting classification. `data/v1/archetypes.json` holds 23 archetypes,
+`data/v1/archetypes.json` holds the registered archetypes;
 `schema/v1/control-archetype.schema.json` and the optional `archetype` block on
 a car record define the contract, and `python -m as_driven_db validate` enforces
 the rules below while identifying records that still await classification.
 
-## The observation
+## The observation (dataset 0.5.66 snapshot)
 
-Across the 291 curated records there are **94 distinct transmission blocks**.
+Across the 291 curated records there were **94 distinct transmission blocks**.
 Nine records in ten restate a pattern that already exists elsewhere in the
 dataset. The four largest compatible families alone cover 91 records:
 

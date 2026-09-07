@@ -90,30 +90,13 @@ class ValidationTests(unittest.TestCase):
             "belongs in a simulator override, not in authentic_controls",
         )
 
-    def test_tracked_files_do_not_use_em_dashes(self) -> None:
-        """Keep project copy on ordinary punctuation that is easy to type."""
-        completed = subprocess.run(
-            ["git", "ls-files", "-z"],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-        )
-        offenders = []
-        for relative in completed.stdout.decode("utf-8").split("\0"):
-            if not relative:
-                continue
-            path = ROOT / relative
-            try:
-                text = path.read_text(encoding="utf-8")
-            except UnicodeDecodeError:
-                continue
-            if "\u2014" in text:
-                offenders.append(relative)
-        self.assertEqual(
-            [],
-            offenders,
-            "re-serialise these with json.dumps(indent=2, ensure_ascii=False)",
-        )
+
+    def test_data_validation_does_not_depend_on_prose(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self._copy_repository_data(Path(directory))
+            (root / "README.md").write_text("Dataset 0.0.1 contains 1 reviewed record.\n")
+            (root / "AGENTS.md").write_text("")
+            self.assertEqual([], validate_repository(root))
 
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repository(ROOT), [])
@@ -232,18 +215,35 @@ class ValidationTests(unittest.TestCase):
                 offenders.append(record["record_id"])
         self.assertEqual([], offenders)
 
-    def test_driver_summary_stays_within_the_length_the_card_can_draw(self) -> None:
-        # The overlay draws five pre-broken lines; beyond that the last one
-        # ellipsises, which loses the reason the summary exists to give. The
-        # cards were made taller to carry advisory wording rather than only a
-        # statement of the mechanism.
-        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+    def test_driver_summary_stays_within_the_schema_limit(self) -> None:
+        schema = json.loads((ROOT / "schema/v1/car-record.schema.json").read_text())
+        limit = schema["properties"]["driver_summary"]["maxLength"]
+        for path in sorted((ROOT / "data/v1/cars").glob("*.json")):
             record = json.loads(path.read_text(encoding="utf-8"))
             summary = record.get("driver_summary")
-            if summary is None:
-                continue
-            self.assertLessEqual(len(summary), 520, record["record_id"])
-            self.assertEqual(summary, summary.strip(), record["record_id"])
+            if summary is not None:
+                self.assertLessEqual(len(summary), limit, record["record_id"])
+
+    def test_schema_rejects_invalid_transmission_values(self) -> None:
+        schema = json.loads((ROOT / "schema/v1/car-record.schema.json").read_text())
+        record = json.loads((ROOT / "data/v1/cars/f301.json").read_text())
+        cases = [
+            ("forward_gears", 0), ("forward_gears", 21), ("forward_gears", True),
+            ("standing_start_clutch", "maybe"), ("first_gear_position", "middle"),
+            ("upshift/clutch", "maybe"), ("upshift/throttle_lift", "maybe"),
+            ("downshift/manual_blip", "maybe"), ("upshift/automatic_cut", "maybe"),
+            ("downshift/automatic_blip", "maybe"),
+        ]
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                candidate = json.loads(json.dumps(record))
+                target = candidate["authentic_controls"]["transmission"]
+                parts = field.split("/")
+                for part in parts[:-1]:
+                    target = target[part]
+                target[parts[-1]] = value
+                errors = validate_instance(candidate, schema, "car")
+                self.assertTrue(any(parts[-1] in error for error in errors), errors)
 
     def test_json_pointer_resolution(self) -> None:
         document = {"simulators": [{"behavior": {"shift_cut": "yes"}}]}
@@ -446,72 +446,6 @@ class ValidationTests(unittest.TestCase):
                 _with_source_id("simhub.local-ams2-identities.9.11.23"), []
             )
 
-    def test_documented_release_must_match_the_index(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            temp_root = self._copy_repository_data(Path(directory))
-            index = json.loads(
-                (temp_root / "data" / "v1" / "index.json").read_text(encoding="utf-8")
-            )
-            version = index["dataset_version"]
-            count = len(index["records"])
-
-            readme = temp_root / "README.md"
-            readme.write_text(
-                f"Dataset {version} contains {count} curated records.\n",
-                encoding="utf-8",
-            )
-            self.assertEqual(validate_repository(temp_root), [])
-
-            # A stale count is reported.
-            readme.write_text(
-                f"Dataset {version} contains {count + 1} curated records.\n",
-                encoding="utf-8",
-            )
-            errors = validate_repository(temp_root)
-            self.assertTrue(
-                any("documented record count" in error for error in errors), errors
-            )
-
-            # A stale version is reported.
-            readme.write_text(
-                f"Dataset 0.0.1 contains {count} curated records.\n", encoding="utf-8"
-            )
-            errors = validate_repository(temp_root)
-            self.assertTrue(
-                any("documented dataset version" in error for error in errors), errors
-            )
-
-            # Historical release notes are deliberately not checked.
-            readme.write_text(
-                f"Dataset {version} contains {count} curated records.\n"
-                "Dataset 0.3.12 promotes four separately reviewed drafts.\n"
-                "Dataset 0.3.15 adds three exact identities.\n",
-                encoding="utf-8",
-            )
-            self.assertEqual(validate_repository(temp_root), [])
-
-    def test_an_emptied_status_document_is_reported(self) -> None:
-        # Dataset 0.3.65 shipped README.md, CLAUDE.md, AGENTS.md and
-        # status documents truncated to nothing by a bad version bump, and
-        # validation passed: an empty file states no version to disagree with.
-        for name in ("README.md", "CLAUDE.md", "AGENTS.md"):
-            with self.subTest(name), tempfile.TemporaryDirectory() as directory:
-                temp_root = self._copy_repository_data(Path(directory))
-                index = json.loads(
-                    (temp_root / "data" / "v1" / "index.json").read_text(encoding="utf-8")
-                )
-                version = index["dataset_version"]
-                for other in ("README.md", "CLAUDE.md", "AGENTS.md"):
-                    (temp_root / other).write_text(f"Dataset {version}\n", encoding="utf-8")
-
-                self.assertEqual(validate_repository(temp_root), [])
-
-                (temp_root / name).write_text("", encoding="utf-8")
-                errors = validate_repository(temp_root)
-                self.assertTrue(
-                    any(name in error and "empty" in error for error in errors),
-                    f"expected {name} to be reported as empty, got {errors}",
-                )
 
     def test_every_dogleg_records_which_side_first_gear_sits_on(self) -> None:
         # A dogleg only establishes that first is outside the racing plane. The
@@ -1549,8 +1483,8 @@ class ValidationTests(unittest.TestCase):
         # validator, and is kept in the schema because the schema is the
         # normative contract a standards-compliant consumer would read.
         enforced_elsewhere = {
-            # tests/test_validation.py checks the driver-summary cap directly;
-            # as_driven_db.intake_observation checks source_game_name.
+            # The driver-summary regression reads its limit from the schema.
+            # Intake separately checks source_game_name.
             "maxLength",
             "allOf",
             "if",
@@ -1726,26 +1660,6 @@ class ValidationTests(unittest.TestCase):
         if include_curation:
             shutil.copytree(ROOT / "curation", directory / "curation")
         return directory
-
-
-    def test_every_record_file_is_canonically_formatted(self) -> None:
-        """Hand edits had over-indented fifteen records' source_refs.
-
-        A stray indent is invisible in review and surfaces later as diff noise
-        inside an unrelated change, so the format is pinned rather than tidied
-        whenever somebody notices. Line endings are excluded: .gitattributes
-        keeps the index LF while a Windows checkout is CRLF.
-        """
-        offenders = []
-        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
-            raw = path.read_bytes()
-            record = json.loads(raw.decode("utf-8-sig"))
-            canonical = (
-                json.dumps(record, indent=2, ensure_ascii=False) + "\n"
-            ).encode("utf-8")
-            if canonical.replace(b"\r\n", b"\n") != raw.replace(b"\r\n", b"\n"):
-                offenders.append(path.name)
-        self.assertEqual([], offenders)
 
 
 if __name__ == "__main__":

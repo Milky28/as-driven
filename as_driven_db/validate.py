@@ -10,14 +10,6 @@ from .schema_validation import validate_instance
 
 ID_RE = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
-# Documentation repeats the current release in prose. These patterns match only
-# present-tense status claims; historical release notes use verbs such as
-# "adds", "promotes", and "revalidates", so they are never checked.
-DOC_STATUS_FILES = ("README.md", "CLAUDE.md", "AGENTS.md")
-DOC_STATUS_RE = re.compile(
-    r"[Dd]ataset:? (\d+\.\d+\.\d+) (?:contains|with) (\d+) (?:curated|reviewed)"
-)
-DOC_RECORD_COUNT_RE = re.compile(r"currently contains (\d+) curated records")
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
 SIMULATORS = {
@@ -72,11 +64,6 @@ LIVE_OBSERVATION_ID_RE = re.compile(
     + r")\.local-live-[a-z0-9]+(?:-[a-z0-9]+)*-controls\.\d+(?:\.\d+)*"
     + r"(?:\.(?:correction|implementation)-[0-9a-f]+)?$"
 )
-CLUTCH_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
-THROTTLE_LIFT = {"required", "not-required", "partial", "unknown", "not-applicable"}
-BLIP_USE = {"required", "not-required", "optional", "unknown", "not-applicable"}
-START_CLUTCH = {"required", "not-required", "anti-stall-available", "unknown", "not-applicable"}
-FIRST_GEAR_POSITION = {"up-left", "up-right", "down-left", "down-right", "unknown"}
 # The one vocabulary for how a driver changes gear. The schema pins it on
 # authentic_controls; `behavior.shift_type` restates it and must not invent a
 # second spelling of the same mechanism.
@@ -435,50 +422,13 @@ def _validate_behavior(behavior: Any, label: str, errors: list[str]) -> None:
 
 
 def _validate_transmission(transmission: Any, label: str, errors: list[str]) -> None:
-    required = {
-        "forward_gears",
-        "gearbox_type",
-        "shift_actuation",
-        "shift_pattern",
-        "upshift",
-        "downshift",
-        "standing_start_clutch",
-    }
-    if not _required(transmission, required, label, errors):
+    # Types, required fields, ranges and vocabularies are checked by the car
+    # schema. Only the relationship between gate and position belongs here.
+    if not isinstance(transmission, dict):
         return
-    gears = transmission["forward_gears"]
-    if gears is not None and (not isinstance(gears, int) or not 1 <= gears <= 20):
-        errors.append(f"{label}.forward_gears: expected null or 1..20")
-    if transmission["standing_start_clutch"] not in START_CLUTCH:
-        errors.append(f"{label}.standing_start_clutch: invalid value")
     position = transmission.get("first_gear_position")
-    if position is not None and position not in FIRST_GEAR_POSITION:
-        errors.append(f"{label}.first_gear_position: invalid value")
-    # A dogleg only says first is outside the racing plane. Which side is a
-    # separate fact, and the McLaren MP4/4 mirrors it, so it is never assumed.
-    if position in {"up-left", "up-right"} and transmission["shift_pattern"] == "dogleg-h":
+    if position in ("up-left", "up-right") and transmission.get("shift_pattern") == "dogleg-h":
         errors.append(f"{label}.first_gear_position: a dogleg puts first down, not up")
-    action_required = {
-        "clutch",
-        "throttle_lift",
-        "automatic_cut",
-        "manual_blip",
-        "automatic_blip",
-    }
-    for direction in ("upshift", "downshift"):
-        action = transmission[direction]
-        action_label = f"{label}.{direction}"
-        if not _required(action, action_required, action_label, errors):
-            continue
-        if action["clutch"] not in CLUTCH_USE:
-            errors.append(f"{action_label}.clutch: invalid value")
-        if action["throttle_lift"] not in THROTTLE_LIFT:
-            errors.append(f"{action_label}.throttle_lift: invalid value")
-        if action["manual_blip"] not in BLIP_USE:
-            errors.append(f"{action_label}.manual_blip: invalid value")
-        for name in ("automatic_cut", "automatic_blip"):
-            if action[name] not in STATES:
-                errors.append(f"{action_label}.{name}: invalid state")
 
 
 def _validate_identities(
@@ -841,72 +791,6 @@ def _validate_approval_record_references(
             if record_id not in record_ids:
                 errors.append(
                     f"{path}.event_mappings[{index}].record_id: no curated record {record_id!r}"
-                )
-
-
-def _validate_documentation_claims(
-    root: Path, index: Any, errors: list[str]
-) -> None:
-    """Keep prose statements of the current release in step with index.json.
-
-    Only present-tense status claims are compared. Historical release notes are
-    left alone so the dataset narrative in README.md stays readable.
-    """
-    if not isinstance(index, dict):
-        return
-    version = index.get("dataset_version")
-    records = index.get("records")
-    if not isinstance(version, str) or not isinstance(records, list):
-        return
-    count = len(records)
-
-    # A truncated status file has nothing to disagree with, so the checks below
-    # would pass it silently. Dataset 0.3.65 shipped four of these emptied by a
-    # bad version bump and validation stayed green, so require the content.
-    for name in DOC_STATUS_FILES:
-        path = root / name
-        if not path.exists():
-            # Test fixtures build a repository from schema and data alone.
-            continue
-        try:
-            text = path.read_text(encoding="utf-8")
-        except OSError as exception:
-            errors.append(f"{name}: could not read documentation ({exception})")
-            continue
-        if not text.strip():
-            errors.append(f"{name}: status document is empty")
-        elif version not in text:
-            errors.append(f"{name}: does not state the current dataset version {version}")
-
-    paths = [root / name for name in DOC_STATUS_FILES]
-    paths.extend(sorted((root / "docs").glob("*.md")))
-    for path in paths:
-        if not path.exists():
-            continue
-        try:
-            text = path.read_text(encoding="utf-8")
-        except OSError as exception:
-            errors.append(f"{path}: could not read documentation ({exception})")
-            continue
-        label = path.relative_to(root).as_posix()
-        for number, line in enumerate(text.splitlines(), start=1):
-            status = DOC_STATUS_RE.search(line)
-            if status:
-                if status.group(1) != version:
-                    errors.append(
-                        f"{label}:{number}: documented dataset version "
-                        f"{status.group(1)!r} does not match index.json {version!r}"
-                    )
-                if int(status.group(2)) != count:
-                    errors.append(
-                        f"{label}:{number}: documented record count "
-                        f"{status.group(2)} does not match index.json {count}"
-                    )
-            only_count = DOC_RECORD_COUNT_RE.search(line)
-            if only_count and int(only_count.group(1)) != count:
-                errors.append(
-                    f"{label}:{number}: documented record count "
-                    f"{only_count.group(1)} does not match index.json {count}"
                 )
 
 
@@ -1341,5 +1225,4 @@ def validate_repository(root: Path) -> list[str]:
             _validate_approval_record_references(approval, path, set(records), errors)
 
     _validate_source_usage(sources, used_source_refs, str(data_dir / "sources.json"), errors)
-    _validate_documentation_claims(root, index, errors)
     return errors

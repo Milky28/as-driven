@@ -19,9 +19,10 @@ index. Tests also compare its complete finding set with the site's independently
 calculated conflicts, so a new disagreement cannot appear on the page without
 entering the audit.
 
-## Current result
+## Dataset 0.5.66 review snapshot
 
-Dataset 0.5.66 contains 44 field-level findings across 27 cars:
+Current counts live in the [generated audit](../research/simulator-disagreement-audit.json).
+This review snapshot recorded 44 field-level findings across 27 cars:
 
 - 10 affect pulling away;
 - 16 affect running-shift technique;

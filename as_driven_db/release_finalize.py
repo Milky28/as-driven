@@ -135,100 +135,18 @@ def _replace_block(text: str, name: str, body: str) -> str:
     return pattern.sub(lambda _match: f"{start}\n{body}\n{end}", text)
 
 
-def _replace(text: str, pattern: str, replacement: str) -> str:
-    return re.sub(pattern, lambda _match: replacement, text, flags=re.MULTILINE)
-
-
-def _verb(count: int, singular: str, plural: str) -> str:
-    return singular if count == 1 else plural
-
-
 def update_release_references(
     root: Path,
     stats: dict[str, Any],
-    disagreement: dict[str, Any],
 ) -> list[str]:
-    version = stats["dataset_version"]
-    records = stats["records"]
-    simulators = stats["simulator_records"]
-    overlaps = stats["ams2_overlaps"]
-    exclusive = stats["exclusive_records"]
-    classes = stats["archetype_classifications"]
-
-    paths = [
-        root / "README.md",
-        root / "AGENTS.md",
-        root / "CLAUDE.md",
-        root / "docs" / "ams2-coverage-plan.md",
-        root / "docs" / "archetypes.md",
-        root / "docs" / "simulator-disagreement-audit.md",
-    ]
-    changed: list[str] = []
-    for path in paths:
-        if not path.exists():
-            raise ReleaseFinalizeError(f"required release reference is missing: {path}")
-        original = path.read_text(encoding="utf-8")
-        text = original
-
-        if path.name in {"AGENTS.md", "CLAUDE.md"}:
-            text = _replace(
-                text,
-                r"- Dataset: \d+\.\d+\.\d+ with \d+ curated records\.",
-                f"- Dataset: {version} with {records} curated records.",
-            )
-        if path.name == "README.md":
-            text = _replace_block(text, "release-facts", _release_facts(stats))
-
-        if path.name == "ams2-coverage-plan.md":
-            text = re.sub(
-                r"Dataset \d+\.\d+\.\d+ contains \d+ curated records, \d+ of which carry AMS2 entries\.",
-                f"Dataset {version} contains {records} curated records, "
-                f"{simulators.get('ams2', 0)} of which carry AMS2 entries.",
-                text,
-            )
-
-        if path.name == "archetypes.md":
-            awaiting = classes.get("awaiting", 0)
-            status = (
-                f"All {records} records are classified"
-                if awaiting == 0
-                else f"{stats['classified_records']} of {records} records are classified"
-            )
-            text = re.sub(
-                r"\*\*Status: [^*]+\*\* - [^.]+\.",
-                f"**Status: {status}** - {classes.get('matches', 0)} matches, "
-                f"{classes.get('deviates', 0)} deviations, "
-                f"{classes.get('undetermined', 0)} undetermined, "
-                f"{classes.get('no-archetype', 0)} with no archetype, and "
-                f"{awaiting} awaiting classification.",
-                text,
-            )
-            text = _replace(
-                text,
-                r"Across the \d+ curated records there are \*\*\d+ distinct transmission blocks\*\*\.",
-                f"Across the {records} curated records there are "
-                f"**{stats['transmission_signatures']} distinct transmission blocks**.",
-            )
-            text = _replace(
-                text,
-                r"Only \d+ records are one of a kind\.",
-                f"Only {stats['unique_transmission_signatures']} records are one of a kind.",
-            )
-
-        if path.name == "simulator-disagreement-audit.md":
-            summary = disagreement["summary"]
-            text = re.sub(
-                r"Dataset \d+\.\d+\.\d+ contains \d+ field-level findings across \d+ cars:",
-                f"Dataset {version} contains {summary['findings']} field-level findings "
-                f"across {summary['cars_with_disagreements']} cars:",
-                text,
-            )
-
-        if text != original:
-            path.write_text(text, encoding="utf-8")
-            changed.append(str(path.relative_to(root)))
-
-    return changed
+    """Refresh the public summary; release facts do not live in agent guidance."""
+    path = root / "README.md"
+    original = path.read_text(encoding="utf-8")
+    updated = _replace_block(original, "release-facts", _release_facts(stats))
+    if updated == original:
+        return []
+    path.write_text(updated, encoding="utf-8")
+    return ["README.md"]
 
 
 def _retain_coverage_snapshot(
@@ -306,7 +224,7 @@ def finalize_release(
         encoding="utf-8",
     )
 
-    changed_docs = update_release_references(root, stats, disagreement)
+    changed_docs = update_release_references(root, stats)
     site_path = root / "dist" / "site" / "index.html"
     site_path.parent.mkdir(parents=True, exist_ok=True)
     site_path.write_text(site_builder(root), encoding="utf-8")

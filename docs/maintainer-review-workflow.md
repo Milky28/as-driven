@@ -6,6 +6,40 @@ inbox; versioned JSON remains the evidence format; guided drives still pass
 through the existing intake and observation importer, while research-only
 issues target an exact curated record without fabricating a drive.
 
+## Working with an assistant
+
+You can ask: "Prepare contribution #42 for my review." The assistant should
+carry the existing CLI workflow through to a concrete proposal. You do not
+need to operate each intermediate workbench action or copy research between
+interfaces. The workbench remains available as another view of the same case.
+
+The assistant should:
+
+1. Read the existing local case first, or synchronize the named issue with
+   `sync --issue 42`. Use `queue --json` to inspect its state
+   and `allowed_actions`; resume completed work rather than restarting it.
+2. If research is needed, run `research-brief --issue 42`, fill the generated
+   `research-result.template.json` into `research-result.json` using traceable
+   sources, then run `import-research 42 <result-path>`. An exact comparison may
+   go straight to proposal preparation. Research only the submitted scope.
+3. Run `prepare-review 42` to create the proposal and validate its dry run.
+   Present `final-review.md` and the preview record with a short explanation of
+   changed advice, supporting sources, remaining unknowns, and disagreements.
+4. Obtain the maintainer's approval of that concrete proposal before running
+   `promote 42 --approve`. An instruction to research or prepare is not approval
+   of facts the maintainer has not seen. Reuse approval already given for that
+   proposal; do not ask again for each generated file.
+5. Finalize once after the approved batch using `finalize-release --test`.
+   Report release-wide failures separately from the contribution review.
+   Commit/integrate and publish only within the user's authorized scope.
+   `publish-result 42` previews feedback; sending it requires explicit approval.
+
+All commands above are prefixed with `python -m as_driven_db review-submissions`.
+They call the same functions as the workbench; there is no second promotion
+implementation. Stop for missing evidence or a review decision, not for routine
+local file preparation. Do not generate an optional driver summary merely to
+make a proposal look complete.
+
 ## Prerequisites
 
 Install and authenticate the GitHub CLI for an account that can read the
@@ -318,10 +352,12 @@ The command refreshes the AMS2 exact-identity coverage manifest from the
 maintainer machine's current audit and SimHub identity files when available;
 otherwise it retains the checked-in inventory snapshot. It rebuilds the
 cross-simulator disagreement audit, derives release and simulator counts from
-the curated records, refreshes maintained current-status references, rebuilds
+the curated records, refreshes the generated README coverage block, rebuilds
 the offline site, validates the repository, and - with `--test` - runs the full
 Python suite. Omitting `--test` leaves the suite visibly reported as not run.
-Historical version prose is not rewritten.
+Agent instructions and research prose are not rewritten or checked for release
+counts. `data/v1/index.json` owns the dataset version and record list; research
+artifacts own their current findings. Dated documentation snapshots remain historical.
 
 ## Publish the result
 

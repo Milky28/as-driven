@@ -64,21 +64,6 @@ def _seed_release(root: Path) -> None:
         (root / name).write_text(
             "- Dataset: 0.9.9 with 1 curated records.\n", encoding="utf-8"
         )
-    (root / "docs" / "ams2-coverage-plan.md").write_text(
-        "Dataset 0.9.9 contains 1 curated records, 1 of which carry AMS2 entries.\n",
-        encoding="utf-8",
-    )
-    (root / "docs" / "archetypes.md").write_text(
-        "**Status: complete. All 1 records are classified** - 1 compatible matches, 0\n"
-        "deviations, 0 undetermined and 0 with no archetype.\n"
-        "Across the 1 curated records there are **1 distinct transmission blocks**.\n"
-        "Only 1 records are one of a kind.\n",
-        encoding="utf-8",
-    )
-    (root / "docs" / "simulator-disagreement-audit.md").write_text(
-        "Dataset 0.9.9 contains 1 field-level findings across 1 cars:\n",
-        encoding="utf-8",
-    )
 
 
 class ReleaseFinalizeTests(unittest.TestCase):
@@ -105,7 +90,6 @@ class ReleaseFinalizeTests(unittest.TestCase):
             changed = update_release_references(
                 root,
                 stats,
-                {"summary": {"findings": 4, "cars_with_disagreements": 3}},
             )
 
             self.assertIn("README.md", changed)
@@ -116,17 +100,17 @@ class ReleaseFinalizeTests(unittest.TestCase):
             self.assertIn("| Automobilista 2 | 1 | not applicable |", readme)
             self.assertIn("| Assetto Corsa Competizione | 1 | 0 |", readme)
             self.assertIn("Matching is exact.", readme)
-            archetypes = (root / "docs" / "archetypes.md").read_text()
-            self.assertIn("1 of 2 records are classified", archetypes)
-            self.assertIn("1 awaiting classification", archetypes)
-            disagreement = (root / "docs" / "simulator-disagreement-audit.md").read_text()
-            self.assertIn("Dataset 1.2.3 contains 4 field-level findings across 3 cars", disagreement)
+            self.assertEqual(["README.md"], changed)
+            # Release preparation must not rewrite policy or research prose.
+            self.assertEqual(
+                "- Dataset: 0.9.9 with 1 curated records.\n",
+                (root / "AGENTS.md").read_text(),
+            )
             self.assertEqual(
                 [],
                 update_release_references(
                     root,
                     stats,
-                    {"summary": {"findings": 4, "cars_with_disagreements": 3}},
                 ),
             )
 
@@ -146,7 +130,6 @@ class ReleaseFinalizeTests(unittest.TestCase):
                 update_release_references(
                     root,
                     release_stats(root),
-                    {"summary": {"findings": 4, "cars_with_disagreements": 3}},
                 )
             self.assertIn("release-facts", str(raised.exception))
 

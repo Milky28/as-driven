@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from .audit_boundaries import audit_evidence_boundaries
+from .format_records import format_records
 from .importers.ams2 import import_ams2_csv
 from .importers.iracing import import_iracing_html
 from .importers.observation import import_observation
@@ -63,6 +64,11 @@ def _parser() -> argparse.ArgumentParser:
 
     validate = subparsers.add_parser("validate", help="validate the curated repository")
     validate.add_argument("--root", type=Path, default=Path.cwd())
+
+    formatting = subparsers.add_parser(
+        "format-records", help="format curated car JSON without changing its values"
+    )
+    formatting.add_argument("--root", type=Path, default=Path.cwd())
 
     site = subparsers.add_parser(
         "build-site",
@@ -289,7 +295,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     release_finalize = submission_actions.add_parser(
         "finalize-release",
-        help="regenerate release outputs, refresh status references, and validate",
+        help="regenerate release outputs and the README summary, then validate",
     )
     release_finalize.add_argument("--root", type=Path, default=Path.cwd())
     release_finalize.add_argument(
@@ -375,6 +381,15 @@ def _parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+
+    if args.command == "format-records":
+        try:
+            changed = format_records(args.root.resolve())
+        except (OSError, ValueError) as error:
+            print(f"ERROR: {error}")
+            return 1
+        print(f"Formatted {len(changed)} car record(s).")
+        return 0
 
     if args.command == "validate":
         errors = validate_repository(args.root.resolve())
