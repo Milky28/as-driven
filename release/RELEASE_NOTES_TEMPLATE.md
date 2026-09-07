@@ -7,23 +7,15 @@ car records.
 
 ## What you'll notice
 
-- **A more readable public catalog.** The new Pit wall design uses a navy
-  masthead, clearly alternating rows, larger driving instructions, and separate
-  hardware and technique headings. Light and dark themes both have stronger
-  row separation, including after filtering.
-- **Clearer starts in nine H-pattern cars.** The real-car guidance now says
-  **Clutch required** when pulling away instead of **Not established**. This
-  affects the Giulia Sprint GTA, BMW 3.0 CSL IMSA Group 4, Ferrari 250 GTO,
-  Ford GT40 Mk I, McLaren F1 GTR 1996, McLaren F1 LM, Porsche 964 Carrera 2 Cup,
-  Shelby Cobra Daytona Coupe, and Ultima GTR.
-- **Less clutter in car details.** Repeated summaries are reduced, and the
-  website no longer labels identical simulator and real-car values as differences.
-- **Clearer counts in SimHub.** The car browser shows reviewed cars separately
-  from simulator views, so a car supported in two games is no longer counted as
-  two distinct cars.
-
-Also includes reliability improvements. There are no new car records in this
-update. See the [exact affected cars and evidence](https://github.com/Milky28/as-driven/blob/v{{PLUGIN_VERSION}}/docs/releases/{{PLUGIN_VERSION}}-control-changes.md).
+- **More reviewed cars and PMR coverage.** Six newly curated cars and fifteen
+  Project Motor Racing observations expand the independently usable controls
+  database to 291 reviewed records.
+- **Versioned guided observations.** Contributions now require the exact game
+  build when telemetry cannot provide one, keeping simulator behavior
+  reproducible.
+- **Safer release finalization.** A release can retain the checked-in AMS2
+  coverage snapshot when optional local diagnostics are unavailable; coverage
+  never silently shrinks.
 
 ## Install
 

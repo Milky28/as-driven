@@ -14,7 +14,7 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## Prepared for 0.21.4
+## Prepared for 0.21.5
 
 - **A clearer public catalog.** The Pit wall design adds a navy masthead,
   alternating car rows, larger instructions, and grouped hardware and driving

@@ -97,7 +97,7 @@ than silently queueing verification work.
   task-specific `codex/` branch. Leave the shared main checkout for Claude;
   do not edit, stage, stash, or commit Claude's uncommitted changes. Integrate
   the reviewed worktree changes into main deliberately before release.
-- Client: 0.21.4 prepared locally; 0.21.3 is installed and published.
+- Client: 0.21.5 prepared locally; 0.21.4 is installed and published.
 - Dataset: 0.5.65 with 291 curated records, and 0.5.49 is installed.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.
 - The history was rewritten on 2026-08-29. An older clone must re-clone rather
