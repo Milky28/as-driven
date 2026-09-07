@@ -41,7 +41,7 @@ compare different cars, while these compare the same car seen twice.
 | `porsche-911-gt3-r` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `saleen-s7-r-gt1` | round (ams2, ac), d-shaped (raceroom) | round |
 
-Count: 5.
+Count: 6.
 
 The vocabulary was defined on 2026-08-16. These splits first surfaced as older
 readings against newer ones, but three were deliberately rechecked on
@@ -54,6 +54,7 @@ readings against newer ones, but three were deliberately rechecked on
 | `porsche-911-gt3-r` | ams2 d-shaped, 2026-08-13 | ams2 d-shaped confirmed, 2026-08-27; acc gt-formula, 2026-08-23 |
 | `nissan-r390-gt1` | ams2 round, 2026-08-13 | ams2 round confirmed, 2026-08-27; ac d-shaped, 2026-08-22 |
 | `saleen-s7-r-gt1` | ams2 round, 2026-08-11 | ac round 2026-08-23, raceroom d-shaped 2026-08-26 |
+| `tvr-tuscan-t400r-gt2` | ams2 round, 2026-08-29 | pmr d-shaped, 2026-09-07 |
 
 Under the old vocabulary `round` and `d-shaped` described an outline while
 `gt-style`, `prototype` and `formula` described the kind of car, so a
@@ -84,8 +85,8 @@ distinct 2005 second-series car, without an exact period cockpit source that
 connects the two. The exact 2005 wheel therefore remains unknown.
 
 **203 rim observations across the dataset predate the vocabulary**, against 116
-after it, so this is a sample of a much larger drift rather than five odd
-records. These five surfaced because a second simulator happened to look at the
+after it, so this is a sample of a much larger drift rather than six odd
+records. These six surfaced because a second simulator happened to look at the
 same car later; the rest have never been contradicted because nobody looked
 twice.
 
