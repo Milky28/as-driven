@@ -1276,6 +1276,21 @@ namespace AsDriven.Core.Tests
                     }
                     True(rejectedMissingObserver, "rejects a draft without an observer");
 
+                    verificationDraft.Observer = "Test observer";
+                    verificationDraft.GameVersion = "unknown";
+                    bool rejectedUnknownGameVersion = false;
+                    try
+                    {
+                        VerificationObservationWriter.CreatePayload(verificationDraft);
+                    }
+                    catch (InvalidDataException)
+                    {
+                        rejectedUnknownGameVersion = true;
+                    }
+                    True(rejectedUnknownGameVersion,
+                        "requires an exact game version for a contribution draft");
+                    verificationDraft.GameVersion = "1.6.9.91";
+
                     var guidedDrive = new GuidedVerificationDrive();
                     guidedDrive.Start(6);
                     Equal("Move-off clutch test", guidedDrive.GetSnapshot().Title, "starts immediately with the first maneuver");

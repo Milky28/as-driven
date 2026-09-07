@@ -96,6 +96,7 @@ namespace AsDriven.Plugin
                 optionalChoice.SelectionChanged += OptionalChoiceChanged;
             }
             _evidenceNotes.TextChanged += ManualEvidenceChanged;
+            _manualGameVersion.TextChanged += ManualGameVersionChanged;
             SizeChanged += VerificationControlSizeChanged;
             UpdateAssistConfirmationStyle();
             UpdateWheelOpenTopApplicability();
@@ -130,6 +131,13 @@ namespace AsDriven.Plugin
                     ? "version not reported"
                     : live.GameVersion;
             return car + " (" + live.SimulatorDisplayName + ", " + version + ")";
+        }
+
+        private static bool RequiresManualGameVersion(VerificationCaptureContext capture)
+        {
+            return capture != null
+                && (string.IsNullOrWhiteSpace(capture.GameVersion)
+                    || string.Equals(capture.GameVersion.Trim(), "unknown", StringComparison.OrdinalIgnoreCase));
         }
 
         internal void UpdateLiveAvailability()
@@ -297,6 +305,10 @@ namespace AsDriven.Plugin
             _actuationBasis.Text = string.Empty;
             _wheelNotes.Text = string.Empty;
             _evidenceNotes.Text = string.Empty;
+            _manualGameVersion.Text = string.Empty;
+            _manualGameVersionPanel.Visibility = RequiresManualGameVersion(_capture)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
             _visiblePaddles.IsChecked = false;
             _visibleSequentialStick.IsChecked = false;
             _visibleHPattern.IsChecked = false;
@@ -335,6 +347,24 @@ namespace AsDriven.Plugin
                 SetStatus("Verify the simulator assist settings and check the confirmation box before saving.", Brushes.Goldenrod, false);
                 return;
             }
+            string gameVersion = _capture.GameVersion;
+            if (RequiresManualGameVersion(_capture))
+            {
+                gameVersion = _manualGameVersion.Text.Trim();
+                if (string.IsNullOrWhiteSpace(gameVersion)
+                    || string.Equals(gameVersion, "unknown", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(gameVersion, "latest", StringComparison.OrdinalIgnoreCase))
+                {
+                    _manualGameVersion.BorderBrush = Brushes.Orange;
+                    _manualGameVersion.BorderThickness = new Thickness(2);
+                    SetStatus(
+                        "Enter the exact game version or build shown by the game before saving this contribution.",
+                        Brushes.Orange,
+                        true);
+                    _manualGameVersion.Focus();
+                    return;
+                }
+            }
             string[] missingEvidence = MissingManualOverrideEvidence();
             if (missingEvidence.Length > 0)
             {
@@ -369,7 +399,7 @@ namespace AsDriven.Plugin
                 {
                     Simulator = _capture.Simulator,
                     SourceGameName = _capture.SourceGameName,
-                    GameVersion = _capture.GameVersion,
+                    GameVersion = gameVersion,
                     ClientVersion = _capture.ClientVersion,
                     DatasetVersion = _plugin.CurrentDatasetVersion,
                     ObservedAtUtc = _capture.ObservedAtUtc,
@@ -1445,6 +1475,13 @@ namespace AsDriven.Plugin
         private void ManualEvidenceChanged(object sender, TextChangedEventArgs eventArgs)
         {
             RefreshManualOverrideBadges();
+        }
+
+        private void ManualGameVersionChanged(object sender, TextChangedEventArgs eventArgs)
+        {
+            _manualGameVersion.BorderBrush = new SolidColorBrush(
+                Color.FromArgb(80, 120, 150, 180));
+            _manualGameVersion.BorderThickness = new Thickness(1);
         }
 
         private void OptionalChoiceChanged(object sender, SelectionChangedEventArgs eventArgs)

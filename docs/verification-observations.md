@@ -182,6 +182,10 @@ Optional keys cover an aero or configuration alias
 not classify (`control_overrides`), and extra provenance (`additional_claims`).
 The reviewed `archetype` classification may also be supplied so a promoted
 record enters the same checked classification system as the rest of the dataset.
+Current plugin contributions cannot be saved with an undetermined game version:
+when automatic detection is unavailable, the contributor must enter the exact
+version or build shown by the game. The `unknown` path below applies only to
+older drafts that were captured before that requirement.
 When a draft recorded `game_version: "unknown"`, a reviewer may supply a
 structured `game_version_correction` containing the observed value, an exact
 verified build, and the falsifiable basis tying that installed build to the

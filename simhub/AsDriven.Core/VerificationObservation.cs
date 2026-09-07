@@ -167,9 +167,11 @@ namespace AsDriven.Core
                 RequireText(draft.SourceGameName, "SourceGameName");
             }
             RequireText(draft.GameVersion, "Game version");
-            if (string.Equals(draft.GameVersion, "latest", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(draft.GameVersion, "latest", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(draft.GameVersion, "unknown", StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidDataException("Game version must be exact, not 'latest'.");
+                throw new InvalidDataException(
+                    "Game version must be exact, not 'latest' or 'unknown'.");
             }
             RequireText(draft.Observer, "Observer");
             RequireText(draft.TelemetryName, "Telemetry name");
