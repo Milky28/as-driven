@@ -1,7 +1,8 @@
 param(
     [ValidateSet("Debug", "Release")]
     [string]$Configuration = "Release",
-    [string]$SimHubInstallPath = "C:\Program Files (x86)\SimHub"
+    [string]$SimHubInstallPath = "C:\Program Files (x86)\SimHub",
+    [switch]$RenderSettingsPreviews
 )
 
 $ErrorActionPreference = "Stop"
@@ -660,6 +661,7 @@ $assistConfirmation = @($ui | Where-Object {
 if ($assistConfirmation.Count -ne 1 -or $assistConfirmation[0].BorderThickness.Left -lt 2) {
     throw "The required assist confirmation must be visibly highlighted before selection."
 }
+& (Join-Path $PSScriptRoot "test-guided-settings.ps1") -Control $verificationControl -PluginAssembly $pluginAssembly -PreviewDirectory $(if ($RenderSettingsPreviews) { Join-Path $PSScriptRoot "dist/settings-previews" } else { "" })
 Write-Host "PASS: As Driven menu icon, settings page, and optional contributor workflow"
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent

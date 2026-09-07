@@ -572,3 +572,18 @@ and confidence labels use consistent sentence capitalization. Detailed, Compact,
 were all live-verified with AMS2 telemetry on 2026-08-10. The packaged
 **As Driven** layout was then loaded, positioned, and confirmed to
 survive full SimHub and AMS2 restarts with automatic popup behavior intact.
+
+
+### Guided-drive settings
+
+The contribution page uses a compact four-stage navigation row. Capture a live
+car to reveal the assist setup; confirming it reveals the binding check and
+start action. During the drive, desk controls replace the start action. Review
+keeps driving results, optional cockpit/wheel details, and additional notes in
+expandable sections. Enter the public contributor handle before saving.
+Returning to Setup or Review preserves the entered answers.
+
+Run `powershell -NoProfile -ExecutionPolicy Bypass -File .\simhub\build.ps1
+-RenderSettingsPreviews` on one line to export synthetic WPF state previews to
+`simhub/dist/settings-previews`. The build checks stage visibility and preserved
+review notes without driving a simulator, saving a draft, or installing files.

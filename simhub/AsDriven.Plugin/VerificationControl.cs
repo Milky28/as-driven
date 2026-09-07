@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -21,6 +21,7 @@ namespace AsDriven.Plugin
         private VerificationCaptureContext _capture;
         private bool _guidedDriveApplied;
         private bool _guidedDriveStarted;
+        private bool _editingSetup;
         private bool _applyingGuidedResults;
         private bool _loadingAssistProfile;
         private string _guidedAutomaticCutMethod = string.Empty;
@@ -244,6 +245,10 @@ namespace AsDriven.Plugin
 
         private void ResetForm()
         {
+            _editingSetup = false;
+            _cockpitReview.IsExpanded = false;
+            _wheelReview.IsExpanded = false;
+            _notesReview.IsExpanded = false;
             _savedDraftPath = string.Empty;
             _savedDraftActions.Visibility = Visibility.Collapsed;
             // Expansion is workflow state, not a user preference. Do not carry
@@ -452,6 +457,7 @@ namespace AsDriven.Plugin
                 SetStatus("The guided drive cannot safely attribute results while one of these assists is enabled. Disable it if possible; otherwise keep the affected results Not tested and complete the form manually.", Brushes.Goldenrod, false);
                 return;
             }
+            _editingSetup = false;
             _guidedDriveApplied = false;
             _guidedDriveStarted = true;
             _plugin.StartGuidedVerificationDrive(_capture);
@@ -479,7 +485,7 @@ namespace AsDriven.Plugin
                 _plugin.GetGuidedDriveBindingReadiness();
             if (!readiness.Checking)
             {
-                _bindingReadiness.Text = "Not checked this session. Start the check, then press each physical control once before driving.";
+                _bindingReadiness.Text = "Press each mapped button once during the check.";
                 _bindingReadiness.Foreground = Brushes.Goldenrod;
                 _bindingCheck.Content = "Check in-car bindings";
                 return;
@@ -613,6 +619,8 @@ namespace AsDriven.Plugin
             VerificationCaptureContext live,
             GuidedDriveSnapshot guided)
         {
+            _liveAvailability.Visibility = _capture == null ? Visibility.Visible : Visibility.Collapsed;
+            _capturedIdentity.Visibility = _capture != null ? Visibility.Visible : Visibility.Collapsed;
             _captureStart.IsEnabled = live != null;
             SetNextStepButton(_captureStart, false);
             SetNextStepButton(_guidedStart, false);
@@ -623,7 +631,18 @@ namespace AsDriven.Plugin
             // disabled but absent: this column is 320px wide and every row left
             // standing pushes the next real action further down it.
             SetNextStepButton(_submitSavedDraft, false);
+            bool reviewing = _reviewBorder.Visibility == Visibility.Visible;
+            bool saved = DraftWasSaved();
+            _setupPanel.Visibility = _capture != null && !saved
+                && ((_assistSettingsConfirmed.IsChecked != true && !reviewing) || _editingSetup)
+                ? Visibility.Visible : Visibility.Collapsed;
+            _captureStart.Visibility = _capture == null || saved
+                ? Visibility.Visible : Visibility.Collapsed;
             _observerPanel.Visibility = Visibility.Visible;
+            _driveActions.Visibility = _guidedDriveStarted && guided != null && !guided.Completed
+                ? Visibility.Visible : Visibility.Collapsed;
+            _guidedStart.Visibility = !_guidedDriveStarted
+                ? Visibility.Visible : Visibility.Collapsed;
             _guidedDrivePanel.Visibility = Visibility.Collapsed;
 
             if (_capture == null)
@@ -631,7 +650,7 @@ namespace AsDriven.Plugin
                 UpdateWorkflowSteps(0, 0);
                 _workflowStatus.Text = live == null
                     ? "STEP 1: Load a car in the simulator."
-                    : "NEXT STEP: Start verification from the live car.";
+                    : "Capture this car to begin.";
                 _assistConfirmationHint.Text = "Capture a live car before confirming the test setup.";
                 _assistConfirmationHint.Foreground = Brushes.Goldenrod;
                 SetNextStepButton(_captureStart, live != null);
@@ -647,7 +666,7 @@ namespace AsDriven.Plugin
                 // The draft is on this machine and reaches nobody until the
                 // submission form is opened, so that button is the next step and
                 // is lit like every other next step in this workflow.
-                _workflowStatus.Text = "SAVED. NEXT STEP: Open the submission form to share this drive.";
+                _workflowStatus.Text = "Draft saved locally. Ready to share.";
                 _assistConfirmationHint.Text = "Simulator assist settings were confirmed for this draft.";
                 _assistConfirmationHint.Foreground = Brushes.LightGreen;
                 _guidedStart.IsEnabled = false;
@@ -662,14 +681,15 @@ namespace AsDriven.Plugin
 
             bool assistsConfirmed = _assistSettingsConfirmed.IsChecked == true;
             _guidedStart.IsEnabled = assistsConfirmed;
-            _guidedDrivePanel.Visibility = assistsConfirmed
+            _guidedDrivePanel.Visibility = assistsConfirmed && !reviewing && !_editingSetup
+                && (!_guidedDriveStarted || (guided != null && !guided.Completed))
                 ? Visibility.Visible
                 : Visibility.Collapsed;
             if (!assistsConfirmed)
             {
                 UpdateWorkflowSteps(0, 0);
-                _workflowStatus.Text = "NEXT STEP: Verify the simulator setup, then select the green confirmation.";
-                _assistConfirmationHint.Text = "REQUIRED ONCE PER SIMULATOR SETUP: Confirm to enable the guided drive.";
+                _workflowStatus.Text = "Confirm the simulator assist settings.";
+                _assistConfirmationHint.Text = "Confirm after checking the simulator.";
                 _assistConfirmationHint.Foreground = Brushes.Orange;
                 return;
             }
@@ -681,7 +701,7 @@ namespace AsDriven.Plugin
             if (!_guidedDriveStarted)
             {
                 UpdateWorkflowSteps(1, 1);
-                _workflowStatus.Text = "NEXT STEP: Start the in-sim guided drive and follow its overlay prompts.";
+                _workflowStatus.Text = "Ready. Check your buttons, then start the drive.";
                 SetNextStepButton(_guidedStart, true);
                 return;
             }
@@ -689,17 +709,17 @@ namespace AsDriven.Plugin
             if (guided != null && !guided.Completed)
             {
                 UpdateWorkflowSteps(1, 1);
-                _workflowStatus.Text = "GUIDED DRIVE ACTIVE: Follow the current prompt inside the simulator.";
+                _workflowStatus.Text = "Drive in progress. Follow the overlay.";
                 return;
             }
 
             int unresolved = OptionalUnresolvedCount();
             UpdateWorkflowSteps(2, 2);
             _workflowStatus.Text = unresolved == 0
-                ? "NEXT STEP: Review the draft, then save it for review."
-                : "NEXT STEP: Review the draft. " + unresolved
-                    + " optional cockpit/wheel field(s) still need review; incomplete drafts are allowed.";
-            if (_save.IsEnabled)
+                ? "Review your results, then save the draft."
+                : "Review your results. " + unresolved
+                    + " optional fields remain unanswered. You can save an incomplete draft.";
+            if (_save.IsEnabled && unresolved == 0)
             {
                 SetNextStepButton(_save, true);
             }
@@ -780,6 +800,11 @@ namespace AsDriven.Plugin
 
         private void SetupStageClicked(object sender, RoutedEventArgs eventArgs)
         {
+            _editingSetup = true;
+            SetReviewVisibility(false);
+            _setupPanel.Visibility = _capture != null && !DraftWasSaved()
+                ? Visibility.Visible : Visibility.Collapsed;
+            _guidedDrivePanel.Visibility = Visibility.Collapsed;
             if (_capture != null)
             {
                 _assistEditorPanel.Visibility = Visibility.Visible;
@@ -792,6 +817,8 @@ namespace AsDriven.Plugin
         {
             if (_capture != null && _assistSettingsConfirmed.IsChecked == true)
             {
+                _editingSetup = false;
+                SetReviewVisibility(false);
                 _guidedDrivePanel.Visibility = Visibility.Visible;
                 _guidedDrivePanel.BringIntoView();
             }
@@ -821,6 +848,7 @@ namespace AsDriven.Plugin
 
         private void SetReviewVisibility(bool visible)
         {
+            if (visible) _editingSetup = false;
             _formPanel.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
             _reviewBorder.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
             UpdateResponsiveLayout(ActualWidth);
@@ -988,38 +1016,7 @@ namespace AsDriven.Plugin
                 }
             }
 
-            foreach (ComboBox combo in new[]
-            {
-                _moveOff, _directGearSelection, _clutchlessUpshift,
-                _automaticCut, _clutchlessDownshift, _automaticBlip
-            })
-            {
-                if (combo == _directGearSelection && !DirectGearSelectionApplies())
-                {
-                    continue;
-                }
-                if (combo == _automaticCut && !AutomaticCutReviewApplies())
-                {
-                    continue;
-                }
-                if ((combo == _automaticBlip || combo == _clutchlessDownshift)
-                    && !DownshiftReviewApplies())
-                {
-                    continue;
-                }
-                if (IsUnresolved(ChoiceValue(combo)))
-                {
-                    _drivingResultsExpander.IsExpanded = true;
-                    HighlightReviewTarget(
-                        combo,
-                        "NEXT: Review the unresolved guided result for "
-                            + ManualOverrideLabel(combo) + ".");
-                    return;
-                }
-            }
-
-            _reviewHint.Text = "\u2713 REVIEW COMPLETE: Save the draft, or add optional notes first.";
-            _reviewHint.Foreground = Brushes.LightGreen;
+            HighlightReviewTarget(_save, "NEXT: Finish and save your draft.");
         }
 
         private bool DirectGearSelectionApplies()
@@ -1049,6 +1046,20 @@ namespace AsDriven.Plugin
 
         private void HighlightReviewTarget(FrameworkElement control, string message)
         {
+            string hint = message + " Incomplete drafts are still allowed.";
+            if (!string.Equals(_reviewHint.Text, hint, StringComparison.Ordinal))
+            {
+                // Reveal the next action; preserve manual expansion on refresh.
+                bool cockpit = control == _visibleHardwareBorder
+                    || control == _primaryActuation || control == _shiftPattern;
+                bool wheel = control == _wheelShape || control == _wheelDisplay
+                    || control == _wheelShiftLights || control == _wheelOpenTop;
+                _cockpitReview.IsExpanded = cockpit;
+                _wheelReview.IsExpanded = wheel;
+                _drivingResultsExpander.IsExpanded = !cockpit && !wheel && control != _save;
+                _notesReview.IsExpanded = !string.IsNullOrWhiteSpace(_wheelNotes.Text)
+                    || !string.IsNullOrWhiteSpace(_evidenceNotes.Text);
+            }
             Control field = control as Control;
             Border panel = control as Border;
             if (field != null)
@@ -1061,7 +1072,7 @@ namespace AsDriven.Plugin
                 panel.BorderBrush = Brushes.LightGreen;
                 panel.BorderThickness = new Thickness(2);
             }
-            _reviewHint.Text = message + " Incomplete drafts are still allowed.";
+            _reviewHint.Text = hint;
             _reviewHint.Foreground = Brushes.LightGreen;
             control.Dispatcher.BeginInvoke(
                 System.Windows.Threading.DispatcherPriority.Background,
@@ -1346,6 +1357,7 @@ namespace AsDriven.Plugin
         private void UpdateAssistConfirmationStyle()
         {
             bool confirmed = _assistSettingsConfirmed.IsChecked == true;
+            if (confirmed) _editingSetup = false;
             _assistSettingsConfirmed.BorderBrush = Brushes.LightGreen;
             _assistSettingsConfirmed.BorderThickness = new Thickness(confirmed ? 1 : 2);
             _assistSettingsConfirmed.Background = new SolidColorBrush(
