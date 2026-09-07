@@ -67,6 +67,8 @@ class ReleasePackagingTests(unittest.TestCase):
         self.assertIn("status --porcelain --untracked-files=no", publisher)
         self.assertIn("test-release-package.ps1", publisher)
         self.assertIn("test-install-database.ps1", publisher)
+        self.assertIn("package_url", publisher)
+        self.assertIn("package_sha256 = $pluginHash", publisher)
         self.assertNotIn("gh release edit", publisher)
         # The existence check must decide on the exit code alone. gh writes
         # "release not found" to stderr for a tag nobody has published, and
@@ -112,6 +114,20 @@ class ReleasePackagingTests(unittest.TestCase):
             "https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json",
             settings,
         )
+
+    def test_next_release_manifest_enables_verified_install(self) -> None:
+        builder = (ROOT / "release" / "build-release.ps1").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('""package_url""', builder)
+        self.assertIn('""package_sha256""', builder)
+        self.assertIn("$zipHash", builder)
+
+        publisher = (ROOT / "release" / "publish-github-release.ps1").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("releases/download/$tag/", publisher)
+        self.assertIn("package_sha256 = $pluginHash", publisher)
 
 
 if __name__ == "__main__":

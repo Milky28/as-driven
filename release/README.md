@@ -75,20 +75,21 @@ plugin's **Refresh database** action after installation.
 ## The update manifest
 
 `publish-github-release.ps1` writes `as-driven-latest.json` beside the release
-artifacts and attaches it, containing exactly three fields:
+artifacts and attaches it, containing version and verified-package metadata:
 
 ```json
 {
   "dataset_version": "0.5.33",
   "plugin_version": "0.20.0",
-  "release_url": "https://github.com/<owner>/<repo>/releases/tag/v0.20.0"
+  "release_url": "https://github.com/<owner>/<repo>/releases/tag/v0.20.0",
+  "package_url": "https://github.com/<owner>/<repo>/releases/download/v0.20.0/As-Driven-for-SimHub-0.20.0.zip",
+  "package_sha256": "<64 lowercase hexadecimal characters>"
 }
 ```
 
 This is what the plugin's manual update check reads, and it is generated from the
-versions the release is publishing rather than written by hand, because the check
-finds its fields by name and a hand-written file gets one of them wrong exactly
-once. The publisher reads it back with the same patterns
+versions and package the release is publishing rather than written by hand. The
+publisher reads it back with the same patterns
 `AsDriven.Plugin.UpdateCheck.ReadField` uses and refuses to publish if any field
 is missing or disagrees with the release.
 
@@ -97,6 +98,6 @@ so a check pointed at one would read the same old versions forever. The plugin
 refuses anything that is not https, and the endpoint is blank in a fresh install,
 so nothing is contacted until somebody sets it.
 
-The manifest carries three fields and nothing else on purpose. The check compares
-two versions and shows a link; anything more would be a payload nobody reads and
-a promise somebody has to keep.
+The manual check compares the two versions. Only a newer release with an HTTPS
+package URL and well-formed SHA-256 is offered for automatic installation, and
+the downloaded bytes must match that hash before the package is used.

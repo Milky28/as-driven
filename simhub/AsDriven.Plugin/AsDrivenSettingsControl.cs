@@ -161,7 +161,9 @@ namespace AsDriven.Plugin
         private TextBlock _advancedFeedback;
         private TextBlock _installedDatasetStatus;
         private Button _checkUpdatesButton;
+        private Button _installUpdateButton;
         private TextBlock _updateStatus;
+        private UpdateAvailability _availableUpdate;
         private TextBlock _supportedSimulators;
         private VerificationControl _verification;
         private Button _contributeLiveButton;
@@ -1639,13 +1641,19 @@ namespace AsDriven.Plugin
             panel.Children.Add(_installedDatasetStatus);
             panel.Children.Add(new TextBlock
             {
-                Text = "As Driven never downloads or installs anything by itself. It can tell you that a newer dataset or plugin exists, and only when you press the button below: there is no timer, nothing at startup, and no request unless you ask. Installing an update stays a deliberate act, because a curated value changing under you mid-session is worse than a stale one you know about.",
+                Text = "As Driven contacts nothing until you press Check for updates. If it finds one, you can choose Download and install; the package is downloaded only after that second choice and its SHA-256 is verified before anything runs. SimHub must close for installation, and Windows will ask for administrator approval.",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(0, 0, 0, 12),
                 MaxWidth = 860,
             });
+            var updateActions = new StackPanel { Orientation = Orientation.Horizontal };
             _checkUpdatesButton = CreateSecondaryButton("Check for updates", 190, CheckUpdatesClicked);
-            panel.Children.Add(_checkUpdatesButton);
+            updateActions.Children.Add(_checkUpdatesButton);
+            _installUpdateButton = CreateSecondaryButton(
+                "Download and install", 190, InstallUpdateClicked);
+            _installUpdateButton.Visibility = Visibility.Collapsed;
+            updateActions.Children.Add(_installUpdateButton);
+            panel.Children.Add(updateActions);
             _updateStatus = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap,
@@ -2991,6 +2999,8 @@ namespace AsDriven.Plugin
             string dataset = _plugin.CurrentDatasetVersion;
             string plugin = _plugin.PluginVersion;
             _checkUpdatesButton.IsEnabled = false;
+            _installUpdateButton.Visibility = Visibility.Collapsed;
+            _availableUpdate = null;
             _updateStatus.Text = "Checking...";
             // Off the UI thread: a slow or unreachable endpoint would otherwise
             // freeze SimHub's settings window for the whole timeout.
@@ -3002,8 +3012,67 @@ namespace AsDriven.Plugin
                     string summary = result.Summary(dataset, plugin);
                     _plugin.SaveUpdateCheckResult(summary);
                     _updateStatus.Text = DescribeLastUpdateCheck();
+                    _availableUpdate = result.HasInstallPackage ? result : null;
+                    _installUpdateButton.IsEnabled = true;
+                    _installUpdateButton.Visibility = result.HasInstallPackage
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
                     _checkUpdatesButton.IsEnabled = true;
                 }));
+            });
+            worker.IsBackground = true;
+            worker.Start();
+        }
+
+        private void InstallUpdateClicked(object sender, RoutedEventArgs eventArgs)
+        {
+            UpdateAvailability update = _availableUpdate;
+            if (update == null || !update.HasInstallPackage)
+            {
+                _installUpdateButton.Visibility = Visibility.Collapsed;
+                return;
+            }
+            MessageBoxResult choice = MessageBox.Show(
+                "Download the verified As Driven release package now? After the download, "
+                + "you will close SimHub; Windows will request administrator approval, the "
+                + "existing installer will make a rollback backup, and SimHub will restart.",
+                "Download and install As Driven update",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (choice != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            _checkUpdatesButton.IsEnabled = false;
+            _installUpdateButton.IsEnabled = false;
+            _updateStatus.Text = "Downloading update package...";
+            var worker = new System.Threading.Thread(delegate()
+            {
+                try
+                {
+                    string message = UpdateInstall.DownloadAndSchedule(update);
+                    Dispatcher.BeginInvoke(new Action(delegate()
+                    {
+                        _updateStatus.Text = message;
+                        _installUpdateButton.Visibility = Visibility.Collapsed;
+                        _checkUpdatesButton.IsEnabled = true;
+                        MessageBox.Show(
+                            message,
+                            "As Driven update is ready",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                    }));
+                }
+                catch (Exception exception)
+                {
+                    Dispatcher.BeginInvoke(new Action(delegate()
+                    {
+                        _updateStatus.Text = "The update was not installed: " + exception.Message;
+                        _installUpdateButton.IsEnabled = true;
+                        _checkUpdatesButton.IsEnabled = true;
+                    }));
+                }
             });
             worker.IsBackground = true;
             worker.Start();

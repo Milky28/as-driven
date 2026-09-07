@@ -7,17 +7,16 @@ using AsDriven.Core;
 namespace AsDriven.Plugin
 {
     /// <summary>
-    /// The only code in As Driven that touches the network, and it runs when a
-    /// person presses a button.
+    /// The update-check half of As Driven's network code, and it runs only when
+    /// a person presses the check button.
     ///
     /// There is no timer, nothing at startup, and nothing after an install. The
-    /// endpoint is empty until somebody sets it, and an empty endpoint makes no
-    /// request at all - so an installation nobody configures keeps the property
-    /// PRIVACY.md describes.
+    /// shipped endpoint is inert until that explicit action, preserving the
+    /// property PRIVACY.md describes.
     ///
-    /// It fetches a small manifest and compares two version strings. It never
-    /// downloads a dataset or a plugin, because a curated value changing under a
-    /// driver mid-session is worse than a stale one they know about.
+    /// It fetches a small manifest and compares two version strings. A separate
+    /// explicit action may use the returned package URL and checksum; the check
+    /// itself never downloads a package.
     /// </summary>
     internal static class UpdateCheck
     {
@@ -108,13 +107,16 @@ namespace AsDriven.Plugin
                     string dataset = ReadField(manifest, "dataset_version");
                     string plugin = ReadField(manifest, "plugin_version");
                     string releaseUrl = ReadField(manifest, "release_url");
+                    string packageUrl = ReadField(manifest, "package_url");
+                    string packageSha256 = ReadField(manifest, "package_sha256");
                     if (dataset.Length == 0 && plugin.Length == 0)
                     {
                         return UpdateAvailability.NotChecked(
                             "The update endpoint did not return a dataset or plugin version.");
                     }
                     return UpdateAvailability.Compare(
-                        installedDataset, installedPlugin, dataset, plugin, releaseUrl);
+                        installedDataset, installedPlugin, dataset, plugin, releaseUrl,
+                        packageUrl, packageSha256);
                 }
             }
             catch (WebException exception)

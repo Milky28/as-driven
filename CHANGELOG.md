@@ -11,6 +11,9 @@ late in a Pacific evening carries the following day. Take the date from
 
 ## 0.21.4 - 2026-09-06
 
+- Let a driver explicitly download and install a SHA-256-verified release after
+  the manual update check finds one; installation waits for SimHub to close,
+  retains the existing rollback backup, and restarts SimHub when complete.
 - Give the public catalog a Pit wall design with stronger light/dark row
   separation, larger guidance, and grouped hardware and technique headings.
 - State that the clutch is required to pull away in nine H-pattern cars whose

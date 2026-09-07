@@ -33,6 +33,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="GameReaderCommon">
@@ -70,6 +71,7 @@
     <Compile Include="AsDrivenMenuIcon.cs" />
     <Compile Include="AsDrivenSettings.cs" />
     <Compile Include="UpdateCheck.cs" />
+    <Compile Include="UpdateInstall.cs" />
     <Compile Include="AsDrivenSettingsControl.cs" />
     <Compile Include="VerificationCaptureContext.cs" />
     <Compile Include="GuidedDriveBindingReadiness.cs" />

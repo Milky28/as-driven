@@ -1,13 +1,12 @@
 # Privacy
 
 As Driven has no telemetry upload, analytics, advertising, account, or
-background update check.
+background update check or download.
 
-There is exactly one way the plugin can reach the network, and nothing uses it
-unless you press a button. The System tab has a "Check for updates" button, and
-the address it contacts ships with the client so there is nothing to configure. A
-request is made **only** when you press that button: there is no timer, nothing
-at startup, and nothing after an install.
+The System tab has a **Check for updates** button, and the address it contacts
+ships with the client so there is nothing to configure. A request is made
+**only** when you press that button: there is no timer, nothing at startup, and
+nothing after an install.
 
 The address is stored in the plugin's settings file as `UpdateCheckUrl` and can
 be pointed elsewhere there. Leaving it empty means unconfigured rather than
@@ -20,9 +19,27 @@ version of yours; the comparison happens on your machine after the reply
 arrives. The endpoint must be https, because a plaintext one could be rewritten
 in transit into an announcement of an update that does not exist.
 
-The check never downloads or installs anything. It reads two version strings and
-tells you whether something newer exists, and installing it stays a deliberate
-act you perform yourself.
+The check reads two version strings plus the release page, package address, and
+SHA-256 checksum. It never downloads or installs the package. If a newer release
+exists and the manifest provides a valid HTTPS package address and checksum, a
+separate **Download and install** button appears.
+
+Pressing **Download and install** first shows a confirmation. If you confirm, the
+plugin makes a second HTTPS request to download the full SimHub release ZIP. That
+request exposes the same ordinary connection information (your IP address, time,
+and the `AsDriven` user agent) to GitHub and its HTTPS download hosts. It carries
+no identifier, telemetry, car, drive, or installed version. The ZIP is written
+under the Windows temporary directory, limited to 512 MiB, and is not run unless
+its locally calculated SHA-256 exactly matches the manifest.
+
+After verification, a local helper waits for you to close SimHub. It validates
+the archive paths and package format, asks Windows for administrator approval,
+runs the same rollback-capable installer shipped in the public ZIP, and restarts
+SimHub after a successful install. Declining the confirmation or the Windows
+approval installs nothing. The helper attempts to remove its downloaded and
+extracted temporary files after success or failure; an interrupted Windows
+session may leave its uniquely named `AsDrivenUpdate-*` temporary directory for
+manual removal.
 
 The SimHub client reads the current simulator identity and limited telemetry
 needed to match a car, display control guidance, and run an optional guided

@@ -99,18 +99,22 @@ alone until you choose **Show selected overlay**:
 4. Start SimHub, enable **As Driven** under Settings > Plugins.
 5. Load the As Driven overlay in Dash Studio.
 
-Updating is the same procedure: download the newest release and install it over
-the old one. Your settings, layouts, and contribution drafts are preserved, and
-every release carries the current car data with it.
+Updating can use the System tab's manual check and its opt-in **Download and
+install** action, or the same manual procedure as installation. Your settings,
+layouts, and contribution drafts are preserved, and every release carries the
+current car data with it.
 
 Full details, checksum verification, rollback, and removal are in
 [docs/install.md](docs/install.md).
 
 The plugin works offline. It has no analytics, no account, and no background
 update check. **Check for updates** contacts the update service only when you
-press it and does not download or install packages. Opening a public car page
-or contribution form launches your browser; contribution drafts stay local
-until you choose to share them. See [PRIVACY.md](PRIVACY.md).
+press it and does not download a package. If it finds one, **Download and
+install** appears and requires a separate confirmation before downloading; the
+package is SHA-256 verified, installation waits for you to close SimHub, and
+Windows still asks for administrator approval. Opening a public car page or
+contribution form launches your browser; contribution drafts stay local until
+you choose to share them. See [PRIVACY.md](PRIVACY.md).
 
 ## What it covers
 

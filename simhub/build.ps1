@@ -458,11 +458,9 @@ if (([string[]]$versionProcessMethod.Invoke($null, @("ac-evo"))).Count -ne 0) {
     throw "AC EVO must stay absent from the version table until it stamps a build."
 }
 
-# The plugin makes no network request unless somebody configures one and presses
-# a button. PRIVACY.md states that as a property of the product, so it is checked
-# here rather than trusted: the shipped endpoint must be https and must be the
-# project's own, the check must refuse anything that is not https, and clearing
-# the box must restore the state where no request is possible.
+# The plugin makes no network request until somebody presses a button.
+# PRIVACY.md states that as a product property, so the shipped endpoint and
+# manual trigger are checked here rather than trusted.
 $updateCheckType = $pluginAssembly.GetType("AsDriven.Plugin.UpdateCheck")
 if ($null -eq $updateCheckType) {
     throw "UpdateCheck is missing; the manual update check can no longer be verified."
@@ -505,6 +503,32 @@ $checkButton = @($ui | Where-Object {
     } | Select-Object -First 1)
 if ($checkButton.Count -ne 1) {
     throw "The manual update check has no button, so nothing can trigger it."
+}
+$installButton = @($ui | Where-Object {
+        $_ -is [System.Windows.Controls.Button] -and $_.Content -eq "Download and install"
+    } | Select-Object -First 1)
+if ($installButton.Count -ne 1 -or $installButton[0].Visibility -ne "Collapsed") {
+    throw "The optional installer must exist and stay hidden until a verified update is found."
+}
+$updateInstallType = $pluginAssembly.GetType("AsDriven.Plugin.UpdateInstall")
+$helperField = if ($null -eq $updateInstallType) { $null } else {
+    $updateInstallType.GetField(
+        "HelperScript",
+        [System.Reflection.BindingFlags]::Static -bor [System.Reflection.BindingFlags]::NonPublic)
+}
+if ($null -eq $helperField) {
+    throw "The post-SimHub update helper is missing."
+}
+$helperScript = [string]$helperField.GetValue($null)
+$helperTokens = $null
+$helperErrors = $null
+[System.Management.Automation.Language.Parser]::ParseInput(
+    $helperScript, [ref]$helperTokens, [ref]$helperErrors) | Out-Null
+if ($helperErrors.Count -ne 0) {
+    throw "The post-SimHub update helper is not valid PowerShell: $($helperErrors[0].Message)"
+}
+if ($helperScript -notlike "*Wait-Process*" -or $helperScript -notlike "*-Verb RunAs*") {
+    throw "The update helper must wait for SimHub and retain the administrator approval."
 }
 
 # Settings saved before the endpoint shipped hold an empty string, and a stored
