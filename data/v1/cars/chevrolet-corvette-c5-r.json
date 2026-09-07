@@ -29,7 +29,7 @@
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
         "automatic_cut": "not-applicable",
-        "manual_blip": "required",
+        "manual_blip": "unknown",
         "automatic_blip": "no"
       },
       "standing_start_clutch": "required"
@@ -83,7 +83,20 @@
           "Low Downforce inherits the base controls as an approved aero-package assumption and was not separately live-tested."
         ]
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "AMS2 1.6.9.91 required a manual blip to engage the downshift during the guided drive; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The exact guided drive directly observed the downshift behaviour."
+          }
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-11",
       "source_refs": [
@@ -152,7 +165,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "condition": "The guided observation gtr2.hq-chevrolet-corvette-c5-r.20260903t212251958z-ee52741a directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -239,7 +252,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "condition": "The guided observation pmr.corvette-c5-r.20260903t225129624z-eeacbbce directly recorded this behavior or cockpit value in the simulator version 24725083; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -343,10 +356,13 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/steering/wheel_rim",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/throttle_lift",
           "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/transmission/upshift"
         ],
         "source_refs": [
           "ams2.local-live-chevrolet-corvette-c5r-controls.1.6.9.91"

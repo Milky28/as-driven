@@ -10,7 +10,7 @@
   "approved_controls": {
     "forward_gears": 5,
     "shift_actuation": "h-pattern",
-    "shift_pattern": "dogleg-h",
+    "shift_pattern": "unknown",
     "standing_start_clutch": "required",
     "throttle_lift": "required",
     "automatic_cut": "no",
@@ -21,7 +21,7 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Five H-pattern gears, clutch-required move-off, required lift, required manual blip, no automatic cut or blip, and a round closed rim without display or shift lights were directly observed. AC's drive did not establish the gate, and no reviewed source establishes gearbox construction, so those gaps remain explicit.",
-  "scope_notes": "Single exact identity staged from one guided-verification drive.",
+  "scope_notes": "Single exact identity staged from one guided-verification drive. Dataset 0.5.66 returned the gate and downshift blip to unknown: the reviewed research named both as unestablished, and a guided drive had supplied them. Each simulator's reading is kept as an override.",
   "historical_notes": "The draft recorded game version 'unknown'. During review it was tied to '14923034': The unchanged Steam library used for the drives has appmanifest_244210.acf buildid 14923034 and LastUpdated 1720039976, both predating the 2026-08-22 observation.",
   "game_version_correction": {
     "observed": "unknown",

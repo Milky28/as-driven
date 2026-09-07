@@ -84,8 +84,8 @@ The audit count is a burn-down metric, not a pass/fail gate. Guided verification
 establishes the simulator layer quickly, so promoting a drive normally adds
 findings here; that is expected and is not a reason to weaken the layers.
 
-At dataset 0.5.65 the audit reports 322 simulator-only authentic claims across
-286 of 291 records. The largest group remains
+At dataset 0.5.66 the audit reports 321 simulator-only authentic claims across
+285 of 291 records. The largest group remains
 `/authentic_controls/steering/wheel_rim`, where the rim category was read from
 the in-game cockpit model rather than from real-world evidence. Those claims are treated as debt to be re-sourced over
 time, not as an accepted shortcut. When a record's rim is later supported by

@@ -35,7 +35,7 @@ compare different cars, while these compare the same car seen twice.
 
 | Record | Recorded as | Authentic |
 | --- | --- | --- |
-| `bmw-m3-e46-gtr` | round (ams2), d-shaped (pmr) | round, provisional |
+| `bmw-m3-e46-gtr` | round (ams2), d-shaped (pmr, gtr2) | unknown |
 | `nissan-gt-r-nismo-gt3` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `nissan-r390-gt1` | round (ams2), d-shaped (ac) | unknown |
 | `porsche-911-gt3-r` | d-shaped (ams2), gt-formula (acc) | gt-formula |
@@ -49,7 +49,7 @@ readings against newer ones, but three were deliberately rechecked on
 
 | Record | Older reading | Newer reading |
 | --- | --- | --- |
-| `bmw-m3-e46-gtr` | ams2 round, 2026-08-11 | pmr d-shaped, 2026-09-03 |
+| `bmw-m3-e46-gtr` | ams2 round, 2026-08-11 | pmr d-shaped, 2026-09-03; gtr2 d-shaped, 2026-09-03 |
 | `nissan-gt-r-nismo-gt3` | ams2 round, 2026-08-13 | ams2 d-shaped, 2026-08-27; acc gt-formula, 2026-08-23 |
 | `porsche-911-gt3-r` | ams2 d-shaped, 2026-08-13 | ams2 d-shaped confirmed, 2026-08-27; acc gt-formula, 2026-08-23 |
 | `nissan-r390-gt1` | ams2 round, 2026-08-13 | ams2 round confirmed, 2026-08-27; ac d-shaped, 2026-08-22 |
@@ -68,11 +68,17 @@ high confidence, and their post-definition ACC observations agree with it. The
 repeat AMS2 drives retained conventional D-shaped classifications, so those are
 now explicit simulator departures rather than unresolved vocabulary drift.
 
-`bmw-m3-e46-gtr` has a verified PMR D-shaped reading against the existing AMS2
-round reading. The authentic round answer currently comes from simulator
-cockpit inspection rather than manufacturer or homologation material, so the
-PMR departure is provisional and remains on this worklist until an exact real
-P60 cockpit source settles it.
+`bmw-m3-e46-gtr` had a round authentic answer that came from an AMS2 cockpit
+inspection rather than manufacturer or homologation material, and both PMR and
+GTR2 later read it as D-shaped. Two simulators against one, and none of them
+evidence about the real car: in dataset 0.5.66 the whole rim was returned to
+`unknown` and each simulator's reading kept as an override, as the Saleen
+already was. It stays on this worklist until an exact real P60 cockpit source
+settles it, but the record no longer answers for the real car in the meantime.
+
+`tvr-tuscan-t400r-gt2` was returned the same way and for the same reason: a
+single AMS2 round reading, contradicted by PMR, with no real-car source behind
+either.
 
 `nissan-r390-gt1` still has the same split without the anchor. The repeat AMS2
 drive confirmed its round reading, but the real rim is unknown, so neither
@@ -224,7 +230,6 @@ ones to re-check: half the answer is already there.
 | `porsche-996-gt3-rsr` | no | round |
 | `saleen-s7-r-gt1` | no | round |
 | `spyker-c8-spyder-gt2-r` | no | round |
-| `tvr-tuscan-t400r-gt2` | no | round |
 
 **11 records have a display and unobserved lights.** Worth noting that a rim with
 a readout is the likelier one to also carry lights, so these are not safely

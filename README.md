@@ -27,8 +27,8 @@ or [improve an existing car's research](https://github.com/Milky28/as-driven/iss
 - **Accurate browser counts in SimHub.** The car browser distinguishes reviewed
   cars from simulator views of those cars.
 
-This release includes dataset 0.5.65 with 291 reviewed car records across eight
-simulators, plus reliability improvements. Download it from the
+This release includes 291 reviewed car records across eight simulators, from
+dataset 0.5.65, plus reliability improvements. Download it from the
 [latest published release](https://github.com/Milky28/as-driven/releases/latest).
 
 ## What it tells you
@@ -118,7 +118,7 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.65 contains 291 reviewed car records.
+Dataset 0.5.66 contains 291 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |

@@ -221,7 +221,7 @@ auditable evidence, and the history is where corrections are visible.
   deliberate integration.
 - The repository is **public**.
 - Client: 0.21.5 is published as the latest release; 0.21.4 is installed.
-- Dataset: 0.5.65 with 291 curated records, and 0.5.49 is installed. The
+- Dataset: 0.5.66 with 291 curated records, and 0.5.49 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.
 - Tested target: SimHub 9.11.22 and AMS2 1.6.9.91 on Windows.

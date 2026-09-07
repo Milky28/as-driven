@@ -331,6 +331,14 @@ class SiteTests(unittest.TestCase):
                 ),
                 ("Upshift", "Lift the throttle", "Stay flat, car cuts"),
                 ("Automatic shift cut", "No automatic cut", "Automatic cut"),
+                # The rim rows arrived when dataset 0.5.66 returned the real
+                # car's rim to unknown. AMS2 read it round, PMR and GTR2 read it
+                # D-shaped, and none of the three is evidence about the works
+                # car, so the page now says so instead of picking one.
+                ("Wheel-rim category", "Not established", "Round rim"),
+                ("Integrated wheel display", "Not established", "No"),
+                ("Wheel shift lights", "Not established", "No"),
+                ("Open-top wheel", "Not established", "No"),
             ],
         )
         pmr = next(
@@ -345,7 +353,12 @@ class SiteTests(unittest.TestCase):
             [
                 ("Upshift", "Lift the throttle", "Stay flat"),
                 ("Downshift", "Blip to rev-match", "No blip needed"),
-                ("Wheel-rim category", "Round rim", "D-shaped rim"),
+                # PMR's rim reading is now stated against an unestablished real
+                # car rather than against AMS2's, which was never evidence.
+                ("Wheel-rim category", "Not established", "D-shaped rim"),
+                ("Integrated wheel display", "Not established", "No"),
+                ("Wheel shift lights", "Not established", "No"),
+                ("Open-top wheel", "Not established", "No"),
             ],
         )
         self.assertEqual(pmr["unknown_behavior"], ["automatic shift cut"])

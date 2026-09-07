@@ -21,15 +21,27 @@ entering the audit.
 
 ## Current result
 
-Dataset 0.5.65 contains 44 field-level findings across 27 cars:
+Dataset 0.5.66 contains 44 field-level findings across 27 cars:
 
 - 10 affect pulling away;
 - 16 affect running-shift technique;
 - 14 affect hardware choice or configuration; and
 - 4 affect cockpit display or shift-light equipment.
 
-Thirteen are **supported departures**, fifteen remain **provisional departures**, and
-16 have an **open authentic baseline**. Five launch-clutch findings have
+Fourteen are **supported departures**, ten remain **provisional departures**, and
+20 have an **open authentic baseline**. Dataset 0.5.66 moved four findings from
+provisional to open by returning their baselines to `unknown`: the BMW M3 E46 GTR
+and TVR Tuscan T400R GT2 rims, the Corvette C5-R downshift blip, and the Sauber
+C9's gate. None of the four had a real-car source; each rested on a single guided
+drive that a later simulator contradicted.
+
+The C9's downshift blip was reviewed in the same pass and deliberately kept at
+`required`. Its own research names the blip as unestablished, but that sentence
+predates the derivation rule: the record establishes a five-speed dog box from
+seven reviewed sources, and a dog box cannot match the shaft speeds for the
+driver. The mechanism settles the technique, so the blip is now credited to those
+sources rather than to the AMS2 drive, and PMR's contrary reading stays a
+supported departure. Five launch-clutch findings have
 exact-car evidence strong enough for benchmark conclusions: the Audi R8 LMS GT3
 Evo II, both Mercedes-AMG GT3 generations, the Mercedes-AMG GT4, and the BMW M6
 GT3. Exact manufacturer cockpit photographs now also settle wheel geometry for

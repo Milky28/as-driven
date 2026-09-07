@@ -11,7 +11,7 @@
   "approved_controls": {
     "forward_gears": 5,
     "shift_actuation": "h-pattern",
-    "shift_pattern": "dogleg-h",
+    "shift_pattern": "unknown",
     "standing_start_clutch": "required",
     "throttle_lift": "required",
     "automatic_cut": "no",
@@ -23,7 +23,7 @@
     "wheel_open_top": "no"
   },
   "confidence_notes": "Exact current-game identity and all user-facing controls were directly verified.",
-  "scope_notes": "Reviewed guided observation for Sauber Mercedes C9. 'Sauber Mercedes C9 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested.",
+  "scope_notes": "Reviewed guided observation for Sauber Mercedes C9. 'Sauber Mercedes C9 - Low Downforce' is approved as an inherited aero-package alias and was not separately live-tested. Dataset 0.5.66 returned the gate to unknown: the reviewed research named it unestablished, and a guided drive had supplied it. The downshift blip stays required, now credited to the established dog box rather than to the drive. Each simulator's reading is kept as an override.",
   "additional_telemetry_names": [
     {
       "value": "Sauber Mercedes C9 - Low Downforce",

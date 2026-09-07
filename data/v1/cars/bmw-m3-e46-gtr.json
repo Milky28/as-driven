@@ -37,13 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "round",
+        "shape": "unknown",
         "diameter_mm": null,
-        "integrated_display": "no",
-        "shift_lights": "no",
-        "open_top": "no",
-        "source_label": "live-cockpit-round-closed-no-display",
-        "notes": "Direct cockpit inspection showed a closed round rim without display or shift lights."
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "The reviewed sources did not establish the exact works P60 car's rim. The round reading came from an AMS2 cockpit inspection, which PMR and GTR2 contradict, so every rim detail is held as a simulator observation."
       }
     },
     "notes": [
@@ -134,6 +134,54 @@
             "level": "verified",
             "basis": "The exact guided drive detected the automatic torque cut during the accepted full-throttle upshift."
           }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "AMS2 1.6.9.91 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "AMS2 1.6.9.91 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
         }
       ],
       "verified_game_version": "1.6.9.91",
@@ -213,13 +261,49 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "d-shaped",
-          "condition": "PMR Steam build 24725083 depicts a closed D-shaped cockpit rim instead of the round rim established for the real works car.",
+          "condition": "PMR Steam build 24725083 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
           "source_refs": [
             "pmr.local-live-m3-gtr-e46-controls.24725083"
           ],
           "confidence": {
             "level": "verified",
-            "basis": "The rim shape was directly inspected in the cockpit during the guided drive."
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "PMR Steam build 24725083 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "PMR Steam build 24725083 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "PMR Steam build 24725083 depicts this rim detail in the cockpit; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "pmr.local-live-m3-gtr-e46-controls.24725083"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
           }
         }
       ],
@@ -263,18 +347,6 @@
       },
       "overrides": [
         {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "d-shaped",
-          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
-          ]
-        },
-        {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
           "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d directly recorded this behavior or cockpit value in the simulator version 1.1.0.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
@@ -309,6 +381,54 @@
           "source_refs": [
             "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
           ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d recorded this rim detail in GTR2 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d recorded this rim detail in GTR2 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d recorded this rim detail in GTR2 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation gtr2.hq-bmw-m3-gtr.20260903t212017617z-d4f5fc5d recorded this rim detail in GTR2 1.1.0.0; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "gtr2.local-live-hq-bmw-m3-gtr-controls.1.1.0.0"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
         }
       ],
       "verified_game_version": "1.1.0.0",
@@ -372,16 +492,6 @@
         ],
         "confidence": "high",
         "basis": "The period test directly establishes clutchless H-pattern upshifts after a brief throttle lift. BMW specifies the carbon clutch, and the restored-car drive describes its start and clutchless, manually rev-matched running shifts. Dog engagement fixes the remaining clutch and blip technique under the dataset's reviewed construction rules."
-      },
-      {
-        "paths": [
-          "/authentic_controls/steering/wheel_rim"
-        ],
-        "source_refs": [
-          "ams2.local-live-bmw-m3-e46-gtr-controls.1.6.9.91"
-        ],
-        "confidence": "verified",
-        "basis": "Guided tests and cockpit inspection directly establish the simulator behavior and wheel details."
       },
       {
         "paths": [

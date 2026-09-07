@@ -37,12 +37,13 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "round",
+        "shape": "unknown",
         "diameter_mm": null,
-        "integrated_display": "no",
+        "integrated_display": "unknown",
         "shift_lights": "unknown",
-        "source_label": "live-cockpit-round-no-display",
-        "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown."
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "The reviewed sources did not establish the exact 2004 T400R's rim. The round reading came from an AMS2 cockpit inspection, which PMR contradicts, so every rim detail is held as a simulator observation."
       }
     },
     "notes": [
@@ -83,30 +84,6 @@
       },
       "overrides": [
         {
-          "path": "/authentic_controls/steering/wheel_rim/open_top",
-          "value": "no",
-          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
-          ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
-          "value": "no",
-          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
-          ]
-        },
-        {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
           "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
@@ -117,6 +94,54 @@
           "source_refs": [
             "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
           ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 recorded this rim detail in AMS2 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 recorded this rim detail in AMS2 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 recorded this rim detail in AMS2 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ams2.tvr-tuscan-t400r-gt2.20260829t044137897z-d05773d5 recorded this rim detail in AMS2 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
         }
       ],
       "verified_game_version": "1.6.9.91",
@@ -164,9 +189,9 @@
       },
       "overrides": [
         {
-          "path": "/authentic_controls/steering/wheel_rim/open_top",
-          "value": "no",
-          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -178,38 +203,50 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
           "value": "d-shaped",
-          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 recorded this rim detail in PMR 2.2.0; the reviewed real-car sources did not establish the same value.",
           "source_refs": [
             "pmr.local-live-tuscan-t400r-controls.2.2.0"
-          ]
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 recorded this rim detail in PMR 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "source_refs": [
+            "pmr.local-live-tuscan-t400r-controls.2.2.0"
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
         },
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
-          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 recorded this rim detail in PMR 2.2.0; the reviewed real-car sources did not establish the same value.",
           "source_refs": [
             "pmr.local-live-tuscan-t400r-controls.2.2.0"
-          ]
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
         },
         {
-          "path": "/authentic_controls/transmission/downshift/manual_blip",
-          "value": "not-required",
-          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 directly recorded this behavior or cockpit value in the simulator version unknown; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.tuscan-t400r.20260907t003309148z-72e68f62 recorded this rim detail in PMR 2.2.0; the reviewed real-car sources did not establish the same value.",
           "source_refs": [
             "pmr.local-live-tuscan-t400r-controls.2.2.0"
-          ]
+          ],
+          "confidence": {
+            "level": "verified",
+            "basis": "The rim was directly inspected in the cockpit during the guided drive."
+          }
         }
       ],
       "verified_game_version": "2.2.0",
@@ -263,8 +300,7 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/transmission/standing_start_clutch"
         ],
         "source_refs": [
           "ams2.local-live-tvr-tuscan-t400r-gt2-controls.1.6.9.91"

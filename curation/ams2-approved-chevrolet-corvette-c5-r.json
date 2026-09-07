@@ -16,9 +16,9 @@
     "throttle_lift": "not-required",
     "automatic_cut": "yes",
     "automatic_blip": "no",
-    "manual_blip": "required",
+    "manual_blip": "unknown",
     "wheel_rim_shape": "round"
   },
   "confidence_notes": "Exact identity, six sequential-stick gears, no paddles, standing-start clutch, automatic cut, no automatic blip, manual rev matching, and round no-display rim were directly observed.",
-  "scope_notes": "The exact historical chassis year remains qualified; the approval applies to the exact AMS2 telemetry identity. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested."
+  "scope_notes": "The exact historical chassis year remains qualified; the approval applies to the exact AMS2 telemetry identity. The exact Low Downforce identity inherits the base controls as an approved aero-only assumption and was not separately tested. Dataset 0.5.66 returned the real car's downshift blip to unknown: the required reading came from one AMS2 drive, and later GTR2 and PMR drives recorded no blip. Each simulator's reading is kept as an override."
 }

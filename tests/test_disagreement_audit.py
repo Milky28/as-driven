@@ -205,8 +205,6 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 # blip, so provisional remains the honest status.
                 "porsche-911-rsr-1974--transmission-downshift-manual-blip",
                 "volkswagen-virtus-200-tsi-2018--steering-wheel-rim-shape",
-                "bmw-m3-e46-gtr--steering-wheel-rim-shape",
-                "chevrolet-corvette-c5-r--transmission-downshift-manual-blip",
                 "chevrolet-corvette-c5-r--transmission-shift-actuation",
                 "chevrolet-corvette-c5-r--transmission-shift-pattern",
                 # Chassis R8's exact cockpit photograph establishes round at
@@ -216,18 +214,15 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 "porsche-911-gt1-98--transmission-upshift-throttle-lift",
                 "porsche-911-gt3-cup-992--transmission-standing-start-clutch",
                 "porsche-962c--transmission-upshift-throttle-lift",
-                "sauber-mercedes-c9--transmission-downshift-manual-blip",
-                "sauber-mercedes-c9--transmission-shift-pattern",
                 "sauber-mercedes-c9--transmission-upshift-throttle-lift",
-                "tvr-tuscan-t400r-gt2--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 16,
-                "provisional-departure": 15,
-                "supported-departure": 13,
+                "authentic-baseline-open": 20,
+                "provisional-departure": 10,
+                "supported-departure": 14,
             },
             self.checked_in["summary"]["by_status"],
         )
@@ -283,7 +278,9 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
 
     def test_open_findings_do_not_inherit_a_simulator_answer(self) -> None:
         expected = {
+            "bmw-m3-e46-gtr--steering-wheel-rim-shape",
             "bmw-m6-gt3--steering-wheel-rim-shift-lights",
+            "chevrolet-corvette-c5-r--transmission-downshift-manual-blip",
             "ginetta-g55-gt4--steering-wheel-rim-integrated-display",
             "ginetta-g55-gt4--steering-wheel-rim-shift-lights",
             "lister-storm-gtm--transmission-downshift-manual-blip",
@@ -296,9 +293,11 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             "nissan-r390-gt1--transmission-downshift-automatic-blip",
             "nissan-r390-gt1--transmission-downshift-manual-blip",
             "porsche-911-gt1-98--transmission-downshift-manual-blip",
+            "sauber-mercedes-c9--transmission-shift-pattern",
             "saleen-s7-r-gt1--steering-wheel-rim-shape",
             "saleen-s7-r-gt1--transmission-downshift-manual-blip",
             "tatuus-f4-t014--transmission-standing-start-clutch",
+            "tvr-tuscan-t400r-gt2--steering-wheel-rim-shape",
         }
         actual = {
             finding["finding_id"]
