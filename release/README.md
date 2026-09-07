@@ -114,3 +114,7 @@ python -m as_driven_db check-update-manifest
 
 which fails when the root manifest is behind the published latest, or announces
 a version no release provides. Drafts are ignored.
+
+`.github/workflows/update-endpoint.yml` runs it on the release event, daily, and
+on a push that touches the manifest. Publishing makes it fail until you promote
+the manifest, which is the point of it.

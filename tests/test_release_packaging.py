@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 from as_driven_db.update_manifest import (  # noqa: E402
     check_update_manifest,
     read_update_manifest,
+    release_request,
 )
 
 
@@ -187,6 +188,25 @@ class UpdateManifestPromotionTests(unittest.TestCase):
         releases = [self._release("v0.22.0", prerelease=True), self._release("v0.21.5")]
         self.assertEqual([], check_update_manifest({"plugin_version": "0.21.5"}, releases))
         self.assertEqual([], check_update_manifest({"plugin_version": "0.22.0"}, releases))
+
+    def test_the_listing_call_uses_a_token_when_the_run_has_one(self) -> None:
+        """Anonymous api.github.com calls share an hourly budget a runner burns."""
+        anonymous = release_request("owner/repo", environment={})
+        self.assertNotIn("Authorization", anonymous.headers)
+        authenticated = release_request("owner/repo", environment={"GITHUB_TOKEN": "t"})
+        self.assertEqual("Bearer t", authenticated.headers["Authorization"])
+        self.assertIn("owner/repo", authenticated.full_url)
+
+    def test_a_workflow_checks_the_endpoint_after_a_release_is_published(self) -> None:
+        """A release does not push a commit, so no ordinary trigger sees the gap."""
+        workflow = (
+            ROOT / ".github" / "workflows" / "update-endpoint.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("check-update-manifest", workflow)
+        self.assertIn("types: [published, released, unpublished, deleted]", workflow)
+        self.assertIn("cron:", workflow)
+        # A release event checks out its own tag; the file under test is main's.
+        self.assertIn("ref: main", workflow)
 
     def test_the_checked_in_manifest_is_current_for_its_own_release(self) -> None:
         """Offline: the manifest against a listing containing what it announces."""

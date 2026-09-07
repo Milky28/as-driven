@@ -1,0 +1,47 @@
+name: Check the update endpoint
+
+# The manifest every installation reads is the copy at the repository root on
+# main. Publishing writes it as a release asset and stops, and copying it into
+# the root is a deliberate manual step, so that the root keeps offering a
+# download that exists while a candidate is still a draft. Nothing prompted the
+# maintainer once the draft was published: 0.21.5 shipped with the root still
+# announcing 0.21.4, and every installation that checked was told it was
+# current. This is the prompt.
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published, released, unpublished, deleted]
+  schedule:
+    # Daily, because a release event can be missed and a forgotten promotion
+    # would otherwise stay quiet until the next release.
+    - cron: "17 7 * * *"
+  push:
+    branches: [main]
+    paths:
+      - as-driven-latest.json
+      - as_driven_db/update_manifest.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-endpoint
+  cancel-in-progress: false
+
+jobs:
+  check-update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # A release event checks out its tag by default. The file under test
+          # is the one main serves, not the one the release carried.
+          ref: main
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Compare the update endpoint with the published latest release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m as_driven_db check-update-manifest --repository "$GITHUB_REPOSITORY"

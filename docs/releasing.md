@@ -115,6 +115,12 @@ the published latest, or when it announces a version that is not published at
 all. A draft is not published, so the check stays quiet while a candidate is
 still being prepared. Pass `--releases` a saved listing to run it offline.
 
+The `Check the update endpoint` workflow runs the same command, so forgetting
+the promotion shows as a failing check rather than as silence. Publishing a
+release triggers it, which means it fails from the moment the release goes out
+until the manifest is promoted; that failure is the reminder, and it is expected.
+It also runs daily, on a push that touches the manifest, and on request.
+
 Automatic update checking is out of scope by design, not for want of an
 endpoint. The endpoint exists and is stable: `main` is public, and
 `https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json`

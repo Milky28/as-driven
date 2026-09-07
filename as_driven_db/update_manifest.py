@@ -14,9 +14,10 @@ without a network.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 import urllib.request
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 DEFAULT_REPOSITORY = "Milky28/as-driven"
 MANIFEST_NAME = "as-driven-latest.json"
@@ -86,15 +87,32 @@ def check_update_manifest(
     return errors
 
 
+def release_request(
+    repository: str = DEFAULT_REPOSITORY, environment: Mapping[str, str] | None = None
+) -> urllib.request.Request:
+    """The releases listing call, authenticated when a token is in the run.
+
+    Anonymous api.github.com calls share a per-address hourly budget, which a
+    shared CI runner exhausts. Actions always has GITHUB_TOKEN, so use it when
+    it is there and stay anonymous when it is not.
+    """
+    environment = os.environ if environment is None else environment
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "as-driven-db",
+    }
+    token = environment.get("GITHUB_TOKEN") or environment.get("GH_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    return urllib.request.Request(
+        f"https://api.github.com/repos/{repository}/releases?per_page=100",
+        headers=headers,
+    )
+
+
 def fetch_releases(repository: str = DEFAULT_REPOSITORY) -> list[dict[str, Any]]:
     """Releases from the GitHub API, newest first. Drafts need a token to see."""
-    request = urllib.request.Request(
-        f"https://api.github.com/repos/{repository}/releases?per_page=100",
-        headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "as-driven-db",
-        },
-    )
+    request = release_request(repository)
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             payload = json.loads(response.read().decode("utf-8"))
