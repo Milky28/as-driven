@@ -225,7 +225,7 @@
         "motorsportmagazine.2020-sauber-c9-steering-wheel",
         "motorsportmagazine.2020-kenny-acheson-c9",
         "wikipedia.de.sauber-c9",
-            "pmr.local-live-sauber-c9-controls.2.2.0"
+        "pmr.local-live-sauber-c9-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -315,7 +315,7 @@
           "motorsportmagazine.2020-sauber-c9-steering-wheel",
           "motorsportmagazine.2020-kenny-acheson-c9",
           "wikipedia.de.sauber-c9",
-            "pmr.local-live-sauber-c9-controls.2.2.0"
+          "pmr.local-live-sauber-c9-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The exact C9 review calls it a five-speed dog box; the year-split technical table independently lists a five-speed racing gearbox. The direct review explicitly says ‘five-speed dog box’. The secondary year-split table corroborates the Hewland VGC racing gearbox, but does not itself use the dog-box term. The exact-car review describes a small gearlever on the right sill and a Hewland-derived shifter, establishing a driver-operated lever rather than steering-wheel paddles. The result uses the database's h-pattern lever category, while the exact gate layout is separately left unestablished. The C9 had a physical triple-plate clutch, and 1989 C9 driver Kenny Acheson explicitly describes repeatedly dropping the clutch to get a disabled car moving from the pit lane. This establishes a manually operated clutch for moving off; the quoted incident was abnormal, so the exact normal launch routine remains less certain. The direct C9 review states that clutchless upchanges were routine. This is procedure evidence, not an inference from the dog-box construction alone. The same direct review says the C9 could not be flatshifted while clutchless upchanges were routine. That establishes that a full-throttle flatshift was not the described procedure; a lift is the conservative fitting for clutchless racing upchanges. Manual blipping is a downshift operation in this control model; no upshift blip claim is being made. Automatic blipping is a downshift operation in this control model; no upshift blip claim is being made. The direct C9 review explicitly states that the clutch must be used for downshifting. The control model records throttle-lift as an upshift action; no separate downshift lift claim is being asserted. Automatic cut is an upshift action in this control model; no downshift cut claim is being asserted. The full-resolution Daimler-credited C9 steering-wheel photograph shows a continuous circular rim with no flattened or open section. The Mercedes-Benz Museum also captions a period 1989 C9 cockpit photograph, but the retrospective wheel photograph is the clearer visual locator. The photographed conventional round rim is continuous across the top; it is not an open-top GT/formula wheel. The photograph shows the readouts and instruments mounted on the dashboard behind the wheel, not on the wheel rim itself. No shift/rev-light array is visible on the photographed wheel rim; the visible warning/instrument hardware is dashboard-mounted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
@@ -350,7 +350,7 @@
           "motorsportmagazine.2020-sauber-c9-steering-wheel",
           "motorsportmagazine.2020-kenny-acheson-c9",
           "wikipedia.de.sauber-c9",
-            "pmr.local-live-sauber-c9-controls.2.2.0"
+          "pmr.local-live-sauber-c9-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The existing curated record matches the PMR Group C C9 lead. Petersen identifies an exact 1989 Sauber-Mercedes C 9; Mercedes-Benz Museum material identifies the 1989 C9, its Sauber development, Mercedes powertrain, and race use; PMR uses the corresponding Mercedes-Benz Sauber C9 name. The independent sources converge on the existing real-car identity."
@@ -360,7 +360,7 @@
           "/simulators/2/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-sauber-c9-controls.2.2.0"
+          "pmr.local-live-sauber-c9-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

@@ -134,7 +134,7 @@
         "tremec.t56-service-manual.0711",
         "bringatrailer.viper-competition-coupe-c59.2004",
         "as-driven.repository.viper-competition-coupe-record-scan",
-            "pmr.local-live-viper-competition-coupe-controls.2.2.0"
+        "pmr.local-live-viper-competition-coupe-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -159,7 +159,7 @@
           "tremec.t56-service-manual.0711",
           "bringatrailer.viper-competition-coupe-c59.2004",
           "as-driven.repository.viper-competition-coupe-record-scan",
-            "pmr.local-live-viper-competition-coupe-controls.2.2.0"
+          "pmr.local-live-viper-competition-coupe-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR's official page and the attached observation identify the submitted simulator name and N-GT class. Dodge's contemporary overview establishes the Competition Coupe as a late-2002/2003 production race car based on the 2003 SRT-10. Period technical material identifies a six-speed Tremec T-56 manual/synchronized transmission, while the exact 2004 Competition Coupe C59 auction record supplies a matching cockpit photograph with floor shifter, clutch pedal, and wheel. The repository scan found Viper GTS-R and ACR records but no Competition Coupe record."
@@ -181,7 +181,7 @@
           "tremec.t56-service-manual.0711",
           "bringatrailer.viper-competition-coupe-c59.2004",
           "as-driven.repository.viper-competition-coupe-record-scan",
-            "pmr.local-live-viper-competition-coupe-controls.2.2.0"
+          "pmr.local-live-viper-competition-coupe-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The exact Competition Coupe specifications and period reports consistently identify a six-speed transmission. The exact-car cockpit photograph shows a conventional floor-mounted lever, the period owner report identifies the Hurst shifter as the one used in the Competition Coupe, and the exact period specification names a synchronized T-56 manual. This establishes a lever-operated manual interface rather than paddles or buttons; the H-pattern normalization is medium confidence because the photo's gaiter hides the actual gate. The exact model is specified with the synchronized six-speed T-56 and a floor Hurst shifter; the contemporaneous owner discussion refers to ordinary 2-3 and 3-4 shifts. No reviewed photograph exposes the gate clearly enough to establish a nonstandard dogleg, so standard-H is the conservative proposal with medium confidence and no first-gear-position claim. The exact-car cockpit photograph visibly shows a clutch pedal alongside the brake and accelerator, and the car's synchronized manual T-56 uses a clutch interface. A conventional H-pattern manual car cannot pull away from neutral into first without manually controlling clutch engagement; this is a hardware/interface conclusion, not an inference from simulator behavior. Manual blip is a downshift action in this data model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this data model; no upshift-blip claim is asserted. Throttle lift is modeled as an upshift action; no separate downshift-lift claim is asserted. Automatic cut is modeled as an upshift action; no downshift-cut claim is asserted. The full-resolution cockpit photograph of exact Competition Coupe chassis C59 shows a continuous circular three-spoke rim, not fixed molded grips around a central GT/formula control face and not a flattened D rim. The period specification also calls for a GTS-R steering wheel, but the current exact-car wheel is restoration-era evidence and may not prove every chassis' delivered wheel. The clear exact-car cockpit photograph shows a continuous upper rim with no removed top section. This is a current/restored C59 cockpit observation, so it should be revisited if period delivery photographs for the PMR reference chassis are found. The exact-car photograph shows the Motec readout behind the steering wheel on the dash/instrument panel; the three-spoke rim itself has no display. Dodge's period overview separately describes an electronic dash and data-acquisition system, which supports a dash-mounted rather than wheel-integrated display. No shift-light elements are visible on the rim in the full-resolution exact-car photograph; any dash instrumentation or warning lights are separate from the wheel. The period Dodge source specifies electronic dash/data acquisition, not wheel-mounted shift lights. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
@@ -195,7 +195,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-viper-competition-coupe-controls.2.2.0"
+          "pmr.local-live-viper-competition-coupe-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

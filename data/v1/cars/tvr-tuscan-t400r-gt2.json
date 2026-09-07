@@ -224,7 +224,7 @@
         "ultimatecarpage.tvr-t400r-chassis-2003-104",
         "24h-en-piste.tvr-tuscan-2004-96",
         "as-driven.repository.tvr-tuscan-t400r-gt2-record-scan",
-            "pmr.local-live-tuscan-t400r-controls.2.2.0"
+        "pmr.local-live-tuscan-t400r-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -307,7 +307,7 @@
           "ultimatecarpage.tvr-t400r-chassis-2003-104",
           "24h-en-piste.tvr-tuscan-2004-96",
           "as-driven.repository.tvr-tuscan-t400r-gt2-record-scan",
-            "pmr.local-live-tuscan-t400r-controls.2.2.0"
+          "pmr.local-live-tuscan-t400r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR's official car page and dated article identify the 2004 TVR Tuscan T400R and N-GT class. TVR's 2004 manufacturer press kit describes the T400R family and its six-speed sequential gearbox. Racing Sports Cars and Ultimatecarpage independently document the T400R race program and period chassis history. The checked-out repository already contains the matching curated T400R record, so use-existing is proposed."
@@ -317,7 +317,7 @@
           "/simulators/1/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-tuscan-t400r-controls.2.2.0"
+          "pmr.local-live-tuscan-t400r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

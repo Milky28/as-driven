@@ -216,7 +216,7 @@
         "ascott.mosler-mt900r-2008-config",
         "blueberry.mosler-racing.later-interior",
         "as-driven.repository.mosler-mt900r-record-scan",
-            "pmr.local-live-mt900r-controls.2.2.0"
+        "pmr.local-live-mt900r-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -240,7 +240,7 @@
           "ascott.mosler-mt900r-2008-config",
           "blueberry.mosler-racing.later-interior",
           "as-driven.repository.mosler-mt900r-record-scan",
-            "pmr.local-live-mt900r-controls.2.2.0"
+          "pmr.local-live-mt900r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR's official vehicle page explicitly names the 2004 Mosler MT900R and N-GT class. Its historical article identifies the same 2004 race-season car. Racing Sports Cars independently records 2004 British GT N-GT MT900R entries, including Rollcentre #37. The repository contains no existing Mosler or MT900R curated record, so a new record is proposed."
@@ -261,7 +261,7 @@
           "ascott.mosler-mt900r-2008-config",
           "blueberry.mosler-racing.later-interior",
           "as-driven.repository.mosler-mt900r-record-scan",
-            "pmr.local-live-mt900r-controls.2.2.0"
+          "pmr.local-live-mt900r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The official PMR page and article state six-speed, and the 2004-built MT900R listing identifies a six-speed Hewland installation. Manual blip is modeled as a downshift action; no upshift-blip claim is asserted about the car. Automatic blip is modeled as a downshift action; no upshift-blip claim is asserted about the car. Throttle lift is modeled as an upshift action; no separate downshift-lift claim is asserted about the car. Automatic cut is modeled as an upshift action; no downshift-cut claim is asserted about the car. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
@@ -275,7 +275,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-mt900r-controls.2.2.0"
+          "pmr.local-live-mt900r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

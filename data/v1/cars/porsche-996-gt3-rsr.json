@@ -160,7 +160,7 @@
         "stuttcars.porsche-996-gt3-rsr",
         "classicdriver.2004.porsche-996-gt3-rsr-cockpit",
         "stuttcars.2023.996-rsr-onboard",
-            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+        "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -256,7 +256,7 @@
           "stuttcars.porsche-996-gt3-rsr",
           "classicdriver.2004.porsche-996-gt3-rsr-cockpit",
           "stuttcars.2023.996-rsr-onboard",
-            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+          "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Contemporary 2004 Alex Job Racing material names the 2004 Porsche 911 GT3 RSR and supplies its race specification. Stuttcars independently scopes the 996 RSR to the 2004-2005 seasons and identifies the internal generation as 996. The PMR attachment supplies the matching telemetry name and N-GT class; it is used only to connect the observation to the real-car identity, not to establish real-car technique."
@@ -266,7 +266,7 @@
           "/simulators/1/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
+          "pmr.local-live-911-gt3-rsr-996-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

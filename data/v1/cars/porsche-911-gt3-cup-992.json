@@ -165,7 +165,7 @@
         "porsche.911-gt3-cup-992-technical-specs.2021",
         "porsche.911-gt3-cup-992-technical-manual.2022",
         "autoweek.911-gt3-cup-992-cockpit.2020",
-            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+        "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -262,7 +262,7 @@
           "porsche.911-gt3-cup-992-technical-specs.2021",
           "porsche.911-gt3-cup-992-technical-manual.2022",
           "autoweek.911-gt3-cup-992-cockpit.2020",
-            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+          "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR's first-party page names the exact 911 GT3 Cup (992), identifies Porsche and the 992 Trophy class, and lists a six-speed sequential transmission. Porsche's launch and technical material identify the 992-generation competition car, its 2021 debut, six-speed dog-type transmission, electronic paddle actuator, racing clutch, and cockpit configuration. The existing generation-specific curated record is therefore the correct destination."
@@ -272,7 +272,7 @@
           "/simulators/1/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
+          "pmr.local-live-911-gt3-cup-992-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

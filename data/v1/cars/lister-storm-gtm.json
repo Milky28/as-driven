@@ -259,7 +259,7 @@
         "custodian.lister-storm-gtm.2000",
         "fia.lister-storm.gt-008",
         "goodwood.2021.lister-storm-gt-cockpit",
-            "pmr.local-live-storm-gt-controls.2.2.0"
+        "pmr.local-live-storm-gt-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -379,7 +379,7 @@
           "custodian.lister-storm-gtm.2000",
           "fia.lister-storm.gt-008",
           "goodwood.2021.lister-storm-gt-cockpit",
-            "pmr.local-live-storm-gt-controls.2.2.0"
+          "pmr.local-live-storm-gt-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The official PMR page names Lister Storm GT. A documented 2000 Lister championship car explicitly says the Storm GT used from 2000 onward had a six-speed sequential gearbox and identifies its chassis as GTM 002; it also calls the car a 2000 Lister Storm GTM. This provides the independent bridge from PMR's abbreviated display name to the existing GTM record. FIA Form GT-008 is retained as an adjacent-variant warning because its 1999 base homologation lists a Getrag six-speed manual with synchronisers."
@@ -389,7 +389,7 @@
           "/simulators/2/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-storm-gt-controls.2.2.0"
+          "pmr.local-live-storm-gt-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

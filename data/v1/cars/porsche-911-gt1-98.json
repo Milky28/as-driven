@@ -261,7 +261,7 @@
         "automobilist.1998-porsche-911-gt1-driver-testimony",
         "stuttcars.2021.porsche-911-gt1-98-specifications",
         "pmr.official.911-gt1-98",
-            "pmr.local-live-911-gt1-98-controls.2.2.0"
+        "pmr.local-live-911-gt1-98-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -377,7 +377,7 @@
           "automobilist.1998-porsche-911-gt1-driver-testimony",
           "stuttcars.2021.porsche-911-gt1-98-specifications",
           "pmr.official.911-gt1-98",
-            "pmr.local-live-911-gt1-98-controls.2.2.0"
+          "pmr.local-live-911-gt1-98-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Porsche Museum's exact 911 GT1 '98 data sheet identifies the 1998 FIA GT customer car as technically identical to the Le Mans-winning factory car and states the six-speed sequential gearbox. Porsche Newsroom independently identifies the 1998 overhauled race car and its Zakspeed FIA GT use. The PMR telemetry name and GT1 class match the existing curated identity."
@@ -387,7 +387,7 @@
           "/simulators/2/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-911-gt1-98-controls.2.2.0"
+          "pmr.local-live-911-gt1-98-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

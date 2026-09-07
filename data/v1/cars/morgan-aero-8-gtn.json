@@ -205,7 +205,7 @@
         "rsc.morgan-aero-8-gtn-photo-gallery",
         "okanelavers.2004-road-gtn-interior",
         "as-driven.repository.morgan-aero-8-gtn-record-scan",
-            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+        "pmr.local-live-aero-8-gt-n-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -230,7 +230,7 @@
           "rsc.morgan-aero-8-gtn-photo-gallery",
           "okanelavers.2004-road-gtn-interior",
           "as-driven.repository.morgan-aero-8-gtn-record-scan",
-            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          "pmr.local-live-aero-8-gt-n-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR's official page and dated article identify the 2004 Morgan Aero 8 N-GT/Aero 8 GTN. Racing Sports Cars independently records the exact 2004 Morgan Works Race Team Aero 8 GTN chassis SA9AERO89000490272. Contemporary Morgan material identifies the GT(N) as a race car entering the 2002 Le Mans and British GT program, and Autosport reports the race version's Getrag six-speed sequential-shift transaxle. The repository contains no existing curated record for this identity, so a new record is proposed."
@@ -252,7 +252,7 @@
           "rsc.morgan-aero-8-gtn-photo-gallery",
           "okanelavers.2004-road-gtn-interior",
           "as-driven.repository.morgan-aero-8-gtn-record-scan",
-            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          "pmr.local-live-aero-8-gt-n-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR and its 2004 article state six-speed sequential, Autosport reports the race Getrag six-speed sequential transaxle, and the exact 2002 race-car technical table lists six ratios. The official PMR 2004 description and contemporary Autosport race-technical report both explicitly identify a sequential race gearbox. The race gearbox is explicitly described as sequential-shift. This establishes the sequential pattern, but not the driver's physical actuation interface. Manual blip is a downshift action in this controls model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this controls model; no upshift-blip claim is asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift-cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
@@ -266,7 +266,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-aero-8-gt-n-controls.2.2.0"
+          "pmr.local-live-aero-8-gt-n-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

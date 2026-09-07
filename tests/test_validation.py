@@ -109,7 +109,11 @@ class ValidationTests(unittest.TestCase):
                 continue
             if "\u2014" in text:
                 offenders.append(relative)
-        self.assertEqual([], offenders)
+        self.assertEqual(
+            [],
+            offenders,
+            "re-serialise these with json.dumps(indent=2, ensure_ascii=False)",
+        )
 
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repository(ROOT), [])
@@ -1722,6 +1726,26 @@ class ValidationTests(unittest.TestCase):
         if include_curation:
             shutil.copytree(ROOT / "curation", directory / "curation")
         return directory
+
+
+    def test_every_record_file_is_canonically_formatted(self) -> None:
+        """Hand edits had over-indented fifteen records' source_refs.
+
+        A stray indent is invisible in review and surfaces later as diff noise
+        inside an unrelated change, so the format is pinned rather than tidied
+        whenever somebody notices. Line endings are excluded: .gitattributes
+        keeps the index LF while a Windows checkout is CRLF.
+        """
+        offenders = []
+        for path in sorted((ROOT / "data" / "v1" / "cars").glob("*.json")):
+            raw = path.read_bytes()
+            record = json.loads(raw.decode("utf-8-sig"))
+            canonical = (
+                json.dumps(record, indent=2, ensure_ascii=False) + "\n"
+            ).encode("utf-8")
+            if canonical.replace(b"\r\n", b"\n") != raw.replace(b"\r\n", b"\n"):
+                offenders.append(path.name)
+        self.assertEqual([], offenders)
 
 
 if __name__ == "__main__":

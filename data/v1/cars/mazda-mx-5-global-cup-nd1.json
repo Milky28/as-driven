@@ -181,7 +181,7 @@
         "dsport.global-mx-5-cup.2017",
         "mazda.media.global-mx5cup-interior.2019",
         "mpi.global-mx5cup-steering-wheel",
-            "pmr.local-live-mx-5-spec-controls.2.2.0"
+        "pmr.local-live-mx-5-spec-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -205,7 +205,7 @@
           "dsport.global-mx-5-cup.2017",
           "mazda.media.global-mx5cup-interior.2019",
           "mpi.global-mx5cup-steering-wheel",
-            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          "pmr.local-live-mx-5-spec-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR's first-party vehicle page identifies Mazda MX-5 Spec, a 2.0-litre Skyactiv-G engine and six-speed manual transmission. PMR's launch article explicitly identifies the content as the 2017 Global MX-5 (ND1), and Mazda's own ND.1 documentation applies to the 2016-2018 race car while separating it from 2019+ ND.2 documentation."
@@ -226,7 +226,7 @@
           "dsport.global-mx-5-cup.2017",
           "mazda.media.global-mx5cup-interior.2019",
           "mpi.global-mx5cup-steering-wheel",
-            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          "pmr.local-live-mx-5-spec-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The exact race-car guide and contemporary cockpit coverage place the AiM MXL2 display on the dashboard, and the manufacturer cockpit photograph shows it separate from the steering rim. The manufacturer cockpit photograph shows a continuous upper section on the circular rim; the documented Global MX-5 Cup wheel is a conventional continuous-rim wheel rather than an open-top formula wheel. The full-resolution manufacturer cockpit photograph shows a continuous circular suede rim with a three-spoke center, not fixed molded grips surrounding a central control face. MPI's Global MX-5 Cup wheel documentation corroborates the conventional circular wheel family and 12.75-inch diameter. The wheel photograph shows no wheel-mounted shift-light strip or lamps; the AiM display is mounted separately on the dash, and the documented MPI wheel is a passive rim with no integrated display or lighting hardware. PMR lists a six-speed manual, and contemporary exact-car coverage describes the ND Global MX-5 Cup gearbox as six-speed H-pattern. Contemporary exact-car coverage explicitly calls the gearbox H-pattern; the homologation document separately refers to the standard transmission and the optional Sadev sequential installation. The exact ND Global MX-5 Cup source describes a six-speed H-pattern gearbox. No source reviewed indicates a dogleg gate, so the conservative standard-H category is used; first-gear side is not asserted. The exact race-car guide instructs the driver to depress the clutch pedal before starting, and the car is established as a driver-operated H-pattern manual. Under the project's H-pattern standing-start rule, pulling away from rest requires the clutch; this is not derived from the PMR simulator behavior. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift."
@@ -240,7 +240,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-mx-5-spec-controls.2.2.0"
+          "pmr.local-live-mx-5-spec-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

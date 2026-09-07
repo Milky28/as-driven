@@ -204,7 +204,7 @@
         "raceart.mantara-lm600-evo",
         "overtake.pmr.mantara-lm600",
         "as-driven.repository.mantara-lm600-record-scan",
-            "pmr.local-live-mantara-lm600-controls.2.2.0"
+        "pmr.local-live-mantara-lm600-controls.2.2.0"
       ],
       "confidence": {
         "level": "medium",
@@ -229,7 +229,7 @@
           "raceart.mantara-lm600-evo",
           "overtake.pmr.mantara-lm600",
           "as-driven.repository.mantara-lm600-record-scan",
-            "pmr.local-live-mantara-lm600-controls.2.2.0"
+          "pmr.local-live-mantara-lm600-controls.2.2.0"
         ],
         "confidence": "medium",
         "basis": "PMR's official car page names Marcos Mantara LM600 and lists a six-speed sequential transmission. Its dated history article places the modeled historical context in the early 2000s and specifically mentions a 2000 British GT1 result. The 1997 Le Mans record identifies an exact Mantara LM600 chassis with a Hewland sequential six-speed, while the FIA GT010 homologation form identifies the same model and documents a separate ZF six-speed manual/synchronized configuration. The repository contains no existing curated record for this identity, so a new record is proposed with the variant boundary made explicit."
@@ -251,7 +251,7 @@
           "raceart.mantara-lm600-evo",
           "overtake.pmr.mantara-lm600",
           "as-driven.repository.mantara-lm600-record-scan",
-            "pmr.local-live-mantara-lm600-controls.2.2.0"
+          "pmr.local-live-mantara-lm600-controls.2.2.0"
         ],
         "confidence": "medium",
         "basis": "PMR lists six speeds; the exact 1997 race record lists a Hewland six-speed; and the FIA homologation form provides six forward ratios. The sources agree on the count even though they document different gearbox configurations. Manual blip is a downshift action in this controls model; no upshift-blip claim is asserted. Automatic blip is a downshift action in this controls model; no upshift-blip claim is asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift-cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
@@ -265,7 +265,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-mantara-lm600-controls.2.2.0"
+          "pmr.local-live-mantara-lm600-controls.2.2.0"
         ],
         "confidence": "medium",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

@@ -195,7 +195,7 @@
         "racecarsdirect.saleen-s7r-015r-cockpit",
         "artcurial.saleen-s7r-0060-2005",
         "as-driven.repository.saleen-s7r-gt1-record-scan",
-            "pmr.local-live-s7r-controls.2.2.0"
+        "pmr.local-live-s7r-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -221,7 +221,7 @@
           "racecarsdirect.saleen-s7r-015r-cockpit",
           "artcurial.saleen-s7r-0060-2005",
           "as-driven.repository.saleen-s7r-gt1-record-scan",
-            "pmr.local-live-s7r-controls.2.2.0"
+          "pmr.local-live-s7r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Project Motor Racing's official vehicle page explicitly calls the car the 2004 Saleen S7-R and places it in GT. A separate exact-scope account identifies a 2004 S7-R EVO, chassis 029R, and states that its gearbox is sequential with six speeds. The existing curated record is explicitly labelled a 2005 GT1 representation, so a new year-bounded proposal avoids silently collapsing the 2004 and 2005 specifications."
@@ -244,7 +244,7 @@
           "racecarsdirect.saleen-s7r-015r-cockpit",
           "artcurial.saleen-s7r-0060-2005",
           "as-driven.repository.saleen-s7r-gt1-record-scan",
-            "pmr.local-live-s7r-controls.2.2.0"
+          "pmr.local-live-s7r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The exact 2004 S7-R EVO account states six speeds; the later technical listing independently describes the S7-R family as six-speed. The exact 2004 source calls the gearbox sequential with six speeds. The later technical source and Johnny Mowlem's revision history corroborate that the later S7-R family used sequential gearboxes. The exact 2004 source explicitly calls the gearbox sequential, and the driver interview separates the later sequential version from the early H-pattern version. Manual blip is a downshift action in this controls model; no upshift blip claim is being asserted. Automatic blip is a downshift action in this controls model; no upshift blip claim is being asserted. Throttle lift is represented as an upshift action in this controls model; no separate downshift-lift claim is asserted. Automatic cut is represented as an upshift action in this controls model; no downshift cut claim is asserted. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights."
@@ -258,7 +258,7 @@
           "/simulators/0/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-s7r-controls.2.2.0"
+          "pmr.local-live-s7r-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

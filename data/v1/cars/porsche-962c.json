@@ -176,7 +176,7 @@
         "topgear.1987-le-mans-porsche-962c",
         "ultimatecarpage.porsche-962c-cockpit-62524",
         "as-driven.repository.porsche-962c-record-scan",
-            "pmr.local-live-962c-controls.2.2.0"
+        "pmr.local-live-962c-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -255,7 +255,7 @@
           "topgear.1987-le-mans-porsche-962c",
           "ultimatecarpage.porsche-962c-cockpit-62524",
           "as-driven.repository.porsche-962c-record-scan",
-            "pmr.local-live-962c-controls.2.2.0"
+          "pmr.local-live-962c-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "PMR identifies the observed content as Porsche 962C in Group C with a five-speed manual. Porsche's history distinguishes the 962C from the IMSA 962 and documents separate PDK-equipped variants. Top Gear identifies the exact manual control reference as a totally original 1987 Le Mans-winning 962C, matching the existing 1987 World Sportscar Championship record."
@@ -265,7 +265,7 @@
           "/simulators/1/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-962c-controls.2.2.0"
+          "pmr.local-live-962c-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."

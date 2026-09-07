@@ -262,7 +262,7 @@
         "maserati.mc12-versione-corse.2006",
         "classicdriver.2020.mc12-gt1-chassis-003",
         "octanefiles.mc12-gt1",
-            "pmr.local-live-mc12-gt1-controls.2.2.0"
+        "pmr.local-live-mc12-gt1-controls.2.2.0"
       ],
       "confidence": {
         "level": "high",
@@ -369,7 +369,7 @@
           "maserati.mc12-versione-corse.2006",
           "classicdriver.2020.mc12-gt1-chassis-003",
           "octanefiles.mc12-gt1",
-            "pmr.local-live-mc12-gt1-controls.2.2.0"
+          "pmr.local-live-mc12-gt1-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "The first-party PMR page names the exact observed model, and contemporary Maserati material independently identifies the MC12 GT1's FIA GT race specification, 2004 debut context, GT1 championship role, six-speed manual sequential gearbox, and push carbon clutch. An exact ex-Works MC12 GT1 chassis 003 is also documented as a 2004 race car, providing a provenance-labelled cockpit reference. The simulator observation is used only to identify the PMR lead and is not used to establish real-car technique."
@@ -379,7 +379,7 @@
           "/simulators/2/behavior"
         ],
         "source_refs": [
-            "pmr.local-live-mc12-gt1-controls.2.2.0"
+          "pmr.local-live-mc12-gt1-controls.2.2.0"
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
