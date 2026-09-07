@@ -1586,7 +1586,7 @@ namespace AsDriven.Plugin
             AddSectionHeading(panel, "Contribute a simulator observation");
             panel.Children.Add(new TextBlock
             {
-                Text = "Test a loaded car and create a versioned simulator observation for maintainer review. A drive does not establish the real car's identity, nothing is uploaded automatically, and no draft enters the curated dataset without research and approval.",
+                Text = "Record what this simulator does. Save a local draft, then choose whether to share it for review.",
                 TextWrapping = TextWrapping.Wrap,
                 Opacity = 0.82,
                 Margin = new Thickness(0, 0, 0, 12),
