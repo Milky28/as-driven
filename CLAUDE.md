@@ -212,8 +212,8 @@ auditable evidence, and the history is where corrections are visible.
   branch. Future Codex implementation work uses a separate Git worktree on a
   task-specific `codex/` branch, preserving Claude's uncommitted changes until
   deliberate integration.
-- The repository is **public**, and 0.21.4 is published as the latest release.
-- Client: 0.21.5 prepared locally; 0.21.4 is installed and published.
+- The repository is **public**.
+- Client: 0.21.5 is published as the latest release; 0.21.4 is installed.
 - Dataset: 0.5.65 with 291 curated records, and 0.5.49 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.
@@ -224,8 +224,12 @@ auditable evidence, and the history is where corrections are visible.
 - The manual update check is **live**. `main` is public, so
   `https://raw.githubusercontent.com/Milky28/as-driven/main/as-driven-latest.json`
   serves the manifest from a stable path rather than a per-tag release asset
-  URL, and it currently answers with the published 0.21.3 and 0.5.49. Nothing
-  contacts it without the button.
+  URL, and it currently answers with the published 0.21.5 and 0.5.65, carrying
+  that release's package URL and SHA-256 so a confirmed install has something
+  to verify. The release script writes that manifest as a release asset only;
+  copying it into the repository root is a separate manual step after
+  publishing, and it was missed for 0.21.5. Nothing contacts it without the
+  button.
 - The README illustrates the plugin with **real captures**, not icon artwork:
   `preflight-card.png`, `preflight-card-compact.png`, `settings-garage.png`,
   `settings-browser.png`, and `guided-drive.jpg` under `docs/images/`. Widths

@@ -23,7 +23,7 @@ pack went from 198.6 MB to 4.96 MB with all commits intact.
 
 ## Current operational state
 
-- Client: 0.21.5 prepared locally; 0.21.4 is installed and published.
+- Client: 0.21.5 is published as the latest release; 0.21.4 is installed.
 - Dataset: 0.5.65 with 291 curated records, and 0.5.49 is installed. The
   installed local plugin build includes the GPLaps theme and GTR2 identity
   resolver.

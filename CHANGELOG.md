@@ -9,6 +9,15 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.21.5 - 2026-09-07
+
+- Require the exact game build for a guided contribution when telemetry cannot
+  report one, so a simulator observation stays reproducible.
+- Retain the checked-in AMS2 coverage snapshot when optional local diagnostics
+  are unavailable, so recorded coverage never silently shrinks.
+- Ship dataset 0.5.65 with 291 reviewed cars, adding six newly curated records
+  and fifteen Project Motor Racing observations.
+
 ## 0.21.4 - 2026-09-06
 
 - Let a driver explicitly download and install a SHA-256-verified release after

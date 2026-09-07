@@ -14,7 +14,7 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## Prepared for 0.21.5
+## New in 0.21.5
 
 - **A clearer public catalog.** The Pit wall design adds a navy masthead,
   alternating car rows, larger instructions, and grouped hardware and driving
@@ -27,10 +27,9 @@ or [improve an existing car's research](https://github.com/Milky28/as-driven/iss
 - **Accurate browser counts in SimHub.** The car browser distinguishes reviewed
   cars from simulator views of those cars.
 
-The prepared build includes dataset 0.5.65 with 291 reviewed car records across
-eight simulators, plus reliability improvements. The
-[latest published release](https://github.com/Milky28/as-driven/releases/latest)
-remains available while this build is being checked.
+This release includes dataset 0.5.65 with 291 reviewed car records across eight
+simulators, plus reliability improvements. Download it from the
+[latest published release](https://github.com/Milky28/as-driven/releases/latest).
 
 ## What it tells you
 
