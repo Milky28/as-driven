@@ -95,6 +95,50 @@
         "level": "high",
         "basis": "Simulator behaviour was live-tested in AMS2 1.6.9.91 with automatic clutch and shifting disabled, and the real-world transmission is supported by a registered source."
       }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "CLK-LM"
+        },
+        {
+          "kind": "internal-id",
+          "value": "CLK-LM"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.0 via guided verification observation pmr.clk-lm.20260908t151116269z-838718a2 by Jason Kinslow."
+        ]
+      },
+      "overrides": [],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-08",
+      "source_refs": [
+        "fia.mercedes-clk-lm.homologation-1998",
+        "as-driven.repository.mercedes-benz-clk-lm-record-scan",
+        "pmr.local-live-clk-lm-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The FIA 1998 GT1 homologation form names Mercedes-Benz CLK-LM and records an X-Trac sequential gearbox with six forward ratios. The checked-out database already contains the exact curated record and established control baseline."
+      }
     }
   ],
   "provenance": {
@@ -147,6 +191,28 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "fia.mercedes-clk-lm.homologation-1998",
+          "as-driven.repository.mercedes-benz-clk-lm-record-scan",
+          "pmr.local-live-clk-lm-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The FIA 1998 GT1 homologation form names Mercedes-Benz CLK-LM and records an X-Trac sequential gearbox with six forward ratios. The checked-out database already contains the exact curated record and established control baseline."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-clk-lm-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
@@ -154,6 +220,6 @@
     "archetype_id": "stick-6-seq-clutch-start-flat-up-no-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
+  "updated_at": "2026-09-08",
   "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift, and nothing blips the downshift, though the gear will engage unmatched. Blip anyway: it is the difference between the car settling into the corner and the driven wheels locking as you turn in."
 }

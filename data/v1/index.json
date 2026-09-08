@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.73",
+  "dataset_version": "0.5.77",
   "released_at": "2026-09-08",
   "records": [
     "cars/alfa-romeo-156-super-touring.json",
@@ -232,6 +232,7 @@
     "cars/opel-calibra-v6-4x4-dtm-1995.json",
     "cars/oreca-07.json",
     "cars/panoz-esperante-gtlm.json",
+    "cars/panoz-esperante-gtr-1.json",
     "cars/passat-classic-b.json",
     "cars/passat-classic-fl.json",
     "cars/passat-hot-cars.json",
@@ -292,6 +293,7 @@
     "cars/toyota-corolla-stock-car-2022.json",
     "cars/toyota-corolla-stock-car-2023.json",
     "cars/toyota-corolla-stock-car-2024.json",
+    "cars/toyota-gt-one-1998.json",
     "cars/tvr-tuscan-t400r-gt2.json",
     "cars/ultima-gtr-2000.json",
     "cars/uno-classic-b.json",

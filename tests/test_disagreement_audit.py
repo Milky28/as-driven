@@ -215,13 +215,14 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 "porsche-911-gt3-cup-992--transmission-standing-start-clutch",
                 "porsche-962c--transmission-upshift-throttle-lift",
                 "sauber-mercedes-c9--transmission-upshift-throttle-lift",
+                "toyota-gt-one-1998--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 20,
-                "provisional-departure": 10,
+                "authentic-baseline-open": 21,
+                "provisional-departure": 11,
                 "supported-departure": 14,
             },
             self.checked_in["summary"]["by_status"],
@@ -298,6 +299,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             "saleen-s7-r-gt1--transmission-downshift-manual-blip",
             "tatuus-f4-t014--transmission-standing-start-clutch",
             "tvr-tuscan-t400r-gt2--steering-wheel-rim-shape",
+            "toyota-gt-one-1998--transmission-standing-start-clutch",
         }
         actual = {
             finding["finding_id"]

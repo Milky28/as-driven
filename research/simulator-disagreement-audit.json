@@ -1,7 +1,7 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.5.73",
+  "dataset_version": "0.5.77",
   "generated_at": "2026-09-08",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
@@ -10,17 +10,17 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 27,
-    "findings": 44,
+    "cars_with_disagreements": 28,
+    "findings": 46,
     "by_status": {
-      "authentic-baseline-open": 20,
-      "provisional-departure": 10,
+      "authentic-baseline-open": 21,
+      "provisional-departure": 11,
       "supported-departure": 14
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 14,
-      "launch-technique": 10,
+      "hardware-choice": 15,
+      "launch-technique": 11,
       "running-shift-technique": 16
     }
   },
@@ -2929,6 +2929,142 @@
         "departing_simulators": [],
         "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
         "next_action": "Find real-car evidence for pulling away."
+      }
+    },
+    {
+      "finding_id": "toyota-gt-one-1998--transmission-standing-start-clutch",
+      "record_id": "toyota-gt-one-1998",
+      "display_name": "Toyota GT-One (1998)",
+      "class": "GT1",
+      "path": "/authentic_controls/transmission/standing_start_clutch",
+      "field": "Pulling away",
+      "driver_impact": "launch-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "unknown",
+        "display_value": "Not established",
+        "confidence": "high",
+        "source_refs": [
+          "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "not-required",
+          "display_value": "No clutch needed",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-09-08",
+          "confidence": "high",
+          "source_refs": [
+            "official-24h-lemans-toyota-gt-one-history",
+            "racers-toyota-gt-one-technical-review-2024",
+            "supercar-nostalgia-toyota-gt-one-ts020",
+            "thedrive-toyota-gt-one-homologated-1998",
+            "wikimedia-goodwood-2007-toyota-ts020-interior",
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "required",
+          "display_value": "Clutch required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-08",
+          "confidence": "high",
+          "source_refs": [
+            "official-24h-lemans-toyota-gt-one-history-95",
+            "wikimedia.goodwood-2007-toyota-ts020-interior-95",
+            "as-driven.repository.toyota-gt-one-1998-record-scan",
+            "pmr.car-list.gt-one-1998",
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "authentic-baseline-open",
+        "matching_simulators": [],
+        "departing_simulators": [],
+        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
+        "next_action": "Find real-car evidence for pulling away."
+      }
+    },
+    {
+      "finding_id": "toyota-gt-one-1998--steering-wheel-rim-shape",
+      "record_id": "toyota-gt-one-1998",
+      "display_name": "Toyota GT-One (1998)",
+      "class": "GT1",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel-rim category",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "d-shaped",
+        "display_value": "D-shaped rim",
+        "confidence": "high",
+        "source_refs": [
+          "official-24h-lemans-toyota-gt-one-history",
+          "racers-toyota-gt-one-technical-review-2024",
+          "supercar-nostalgia-toyota-gt-one-ts020",
+          "thedrive-toyota-gt-one-homologated-1998",
+          "wikimedia-goodwood-2007-toyota-ts020-interior"
+        ],
+        "primary_source_refs": [],
+        "basis": "Both sources identify a six-speed sequential gearbox for the GT-One. The sources call it an Xtrac six-speed sequential gearbox with hydraulic shift assistance. They do not establish a dog-ring or synchromesh construction, so the broader sequential category is used. The 1998 specification is explicitly described as having a manual shift lever only in the cockpit; the paddle system belongs to the 1999 revision/test conversion. A sequential gearbox operated by the 1998 manual lever establishes one-gear-at-a-time sequential selection. No source reviewed establishes a first-gear gate position. The full-resolution photograph shows a conventional rim with a flattened lower section, so the project's rim taxonomy classifies it as d-shaped rather than gt-formula. The full-resolution photograph shows no display on the rim. The technical review separately identifies a wheel display as an addition for LM802's later paddle-shift test conversion, not the original 1998 race wheel. The full-resolution photograph visibly shows the upper section of the conventional D-shaped rim removed/open. The full-resolution photograph shows no shift-light elements on the rim. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "gt-formula",
+          "display_value": "GT / Formula rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-09-08",
+          "confidence": "high",
+          "source_refs": [
+            "official-24h-lemans-toyota-gt-one-history",
+            "racers-toyota-gt-one-technical-review-2024",
+            "supercar-nostalgia-toyota-gt-one-ts020",
+            "thedrive-toyota-gt-one-homologated-1998",
+            "wikimedia-goodwood-2007-toyota-ts020-interior",
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "d-shaped",
+          "display_value": "D-shaped rim",
+          "relationship_to_authentic": "matches-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-08",
+          "confidence": "high",
+          "source_refs": [
+            "official-24h-lemans-toyota-gt-one-history-95",
+            "wikimedia.goodwood-2007-toyota-ts020-interior-95",
+            "as-driven.repository.toyota-gt-one-1998-record-scan",
+            "pmr.car-list.gt-one-1998",
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "provisional-departure",
+        "matching_simulators": [
+          "pmr"
+        ],
+        "departing_simulators": [
+          "ams2"
+        ],
+        "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
+        "next_action": "Strengthen the real-car evidence for wheel-rim category before publishing a benchmark verdict."
       }
     },
     {

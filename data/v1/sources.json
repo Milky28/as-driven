@@ -11803,6 +11803,214 @@
       "retrieved_at": "2026-09-07",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation pmr.r89c.20260907t232820534z-ccaa9bc4 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "official-24h-lemans-toyota-gt-one-history",
+      "title": "Toyota GT-One: the legacy of a would-be Le Mans winner",
+      "publisher": "24 Hours of Le Mans",
+      "url": "https://www.24h-lemans.com/en/news/toyota-gt-one-the-legacy-of-a-would-be-le-mans-winner-59595",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official 24 Hours of Le Mans historical article covering the Toyota GT-One TS020 program and its 1998 and 1999 Le Mans entries. article paragraphs 1-3: “The GT-One (TS020) was entered in 1998 and 1999; the 1998 race had three GT-Ones, and the car was matched with a six-speed sequential gearbox.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Primary event-organization history. It establishes the exact TS020/1998 race context and six-speed sequential description, but does not establish clutch or shift timing, wheel topology, or wheel electronics.",
+      "published_or_updated_at": "2024-06-06"
+    },
+    {
+      "source_id": "racers-toyota-gt-one-technical-review-2024",
+      "title": "Racers Toyota GT One 2024",
+      "publisher": "Racers",
+      "url": "https://www.scribd.com/document/1061236385/Racers-Toyota-Gt-One-2024",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Technical review pages 44-48 of the Toyota GT-One publication, including the 1998 and 1999 transmission-actuation distinction, the LM802 1998 chassis history, cockpit controls, and clutch specification. printed pp. 44-45: “It had an Xtrac 6-speed sequential gearbox with hydraulic gear shift assistance. While this 1998 model had a manual shift lever only in its cockpit, it was revised to a paddle shift system in the 1999 specifications car.” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. printed p. 47: “Clutch Sachs carbon 4-plate.” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/standing_start_clutch. printed pp. 47-48: “LM802, pictured here, raced in Le Mans 24 Hours in 1998 as the no.29 car ... the vehicle was modified to accept a paddle shift system, and the gear lever that the original LM802 had was removed.” Reviewed for /identity/year, /authentic_controls/transmission/shift_actuation, /authentic_controls/steering/wheel_rim/integrated_display. Exact-period technical evidence for the 1998-versus-1999 control distinction. It confirms that a clutch pack existed, but it does not say that the driver operated a clutch pedal for launch or running shifts; the technique fields therefore remain not-established. The publication is a secondary source and should be checked by the maintainer before registration.",
+      "author": "Kiyokazu Imai",
+      "published_or_updated_at": "2024-01-01"
+    },
+    {
+      "source_id": "supercar-nostalgia-toyota-gt-one-ts020",
+      "title": "Toyota GT One (TS020) Guide",
+      "publisher": "Supercar Nostalgia",
+      "url": "https://supercarnostalgia.com/blog/toyota-gt-one-ts020",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Technical and photographic guide to the Toyota GT-One, with a race-cockpit description and separate road-version section. INTERIOR section: “Directly ahead of the driver was a U-shaped steering wheel, behind which was a digital tachometer. Two additional data logging screens were installed ... on the central control panel.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top. ROAD VERSION section: “Custom helical gears were fitted instead of the racing version's straight-cut arrangement ... Toyota fitted a new dash and a conventional leather-rimmed three-spoke steering wheel.” Reviewed for /identity/real_world_identity_notes. Used to distinguish the race cockpit from the road car and to describe the visible race wheel and dash placement. It does not establish shift lights or driver clutch/blip procedure.",
+      "published_or_updated_at": "2026-08-24"
+    },
+    {
+      "source_id": "thedrive-toyota-gt-one-homologated-1998",
+      "title": "The Homologated 1998 Toyota GT-One Is the Wildest 'Road-Legal' Toyota Ever",
+      "publisher": "The Drive",
+      "url": "https://www.thedrive.com/accelerator/29995/the-homologated-1998-toyota-gt-one-is-the-wildest-road-legal-toyota-ever",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Article and Toyota-attributed images comparing the 1998 road/homologation car with the racing GT-One, including a captioned 1998 race-car interior/wheel image. image caption at article line 100: “The racing GT-One also has a Momo wheel, but there's a few more buttons and far less leather.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights. article paragraphs 91-93: “The three racing versions ... at the 1998 24 Hours of Le Mans; Toyota dutifully adapted the car ... in 1999.” Reviewed for /identity/year, /identity/real_world_identity_notes. Photographic secondary evidence used only for the race-versus-road cockpit distinction. The wheel image does not provide a reliable basis for asserting shift lights, so that field remains not-established.",
+      "author": "Stef Schrader",
+      "published_or_updated_at": "2019-09-06"
+    },
+    {
+      "source_id": "wikimedia-goodwood-2007-toyota-ts020-interior",
+      "title": "File:Goodwood2007-024 Toyota TS020 GT-One (1998).jpg",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Goodwood2007-024_Toyota_TS020_GT-One_%281998%29.jpg",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Full-resolution 2,592 x 1,944 public-domain photograph of the Toyota TS020 GT-One (1998) interior at the 2007 Goodwood Festival of Speed; the file is categorized with the 1998 Le Mans no.29 car. original image, 2,592 x 1,944 pixels: “Visible wheel: conventional D-shaped rim with the upper section open; no readout or shift-light elements are visible on the rim.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Exact-specification cockpit photograph supplied for the wheel-rim finding. The visual finding is limited to what the full-resolution image shows; it is not used to infer clutch or shift technique.",
+      "author": "Troxx",
+      "published_or_updated_at": "2007-06-22"
+    },
+    {
+      "source_id": "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91",
+      "title": "Live AMS2 Toyota GT-One (1998) guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/92",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab by Guy Moulton; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "official-24h-lemans-toyota-gt-one-history-95",
+      "title": "Toyota GT-One: the legacy of a would-be Le Mans winner",
+      "publisher": "24 Hours of Le Mans",
+      "url": "https://www.24h-lemans.com/en/news/toyota-gt-one-the-legacy-of-a-would-be-le-mans-winner-59595",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Le Mans history covering the Toyota GT-One TS020's 1998 and 1999 entries and six-speed sequential gearbox. article paragraphs 1-3: “The GT-One (TS020) was entered in 1998 and 1999; the 1998 race had three GT-Ones and the car was matched with a six-speed sequential gearbox.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Identity and stable transmission source; driver technique and wheel topology are handled by the exact photographic/technical sources below."
+    },
+    {
+      "source_id": "wikimedia.goodwood-2007-toyota-ts020-interior-95",
+      "title": "File:Goodwood2007-024 Toyota TS020 GT-One (1998).jpg",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Goodwood2007-024_Toyota_TS020_GT-One_%281998%29.jpg",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Full-resolution 2,592 x 1,944 public-domain photograph of the Toyota TS020 GT-One (1998) interior, categorized with the 1998 Le Mans no.29 car. original image, 2,592 x 1,944 pixels: “Visible wheel: conventional D-shaped rim with the upper section open; no readout or shift-light elements are visible on the rim.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Exact 1998 race-cockpit visual evidence; limited to visible wheel facts and not used to infer clutch or shift technique.",
+      "author": "Troxx",
+      "published_or_updated_at": "2007-06-22"
+    },
+    {
+      "source_id": "as-driven.repository.toyota-gt-one-1998-record-scan",
+      "title": "As Driven curated Toyota GT-One (1998) record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/blob/main/data/v1/cars/toyota-gt-one-1998.json",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan confirming the existing curated Toyota GT-One (1998) record and its conservative authentic-controls baseline. identity and authentic_controls: “record_id toyota-gt-one-1998; Toyota GT-One (1998); GT-One (TS020); six-speed sequential-stick with technique fields left unknown.” Reviewed for /identity/record_action, /identity/record_id, /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip. Used to attach the abbreviated PMR identity to the exact existing record without creating a duplicate."
+    },
+    {
+      "source_id": "pmr.car-list.gt-one-1998",
+      "title": "Project Motor Racing car list",
+      "publisher": "GTPlanet",
+      "url": "https://www.gtplanet.net/forum/threads/project-motor-racing-car-list.434942/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Project Motor Racing car-list discussion that identifies the GT1 Toyota GT-One entry as the 1998 TS020. GT1 car-list section: “GT1 ... Toyota GT-One TS020 '98.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/year, /identity/class. Secondary simulator-content corroboration; real-car controls are not derived from this list."
+    },
+    {
+      "source_id": "pmr.local-live-gt-one-controls.2.2.0",
+      "title": "Live PMR GT-One guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/95",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.gt-one.20260908t152657564z-c6785053 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "fia.panoz-gtr-gt1-homologation-1997",
+      "title": "Homologation form number 4, Group GT1: Panoz GTR",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1601073601/homologation_form_number_4_group_g.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: FIA GT1 homologation form for Panoz GTR, valid from 1 April 1997, including its six-speed sequential transmission. PDF pp.1-2, sections 101-102: “Manufacturer PANOZ MOTORSPORT LTD; model GTR; homologation valid from 01 AVR. 1997.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class. PDF p.5, section 603: “Make XTRAC; ratios 1 through 6; gear change gate SEQUENTIAL.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Primary homologation evidence for the race car's identity and gearbox. It does not establish clutch pedal use, shift timing, or wheel-rim equipment."
+    },
+    {
+      "source_id": "panoz.official-esperante-gtr1-history-2015",
+      "title": "Panoz Unveils Restored, One-Of-A-Kind Esperante GTR-1",
+      "publisher": "Panoz",
+      "url": "https://panoz.com/panoz/11-09-15/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Panoz manufacturer history identifying the Esperante GTR-1 program and its racing period from 1997 onward. history paragraph: “The Panoz Esperante GTR-1 ... competed in international endurance racing in various forms from 1997 to 2003.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/real_world_identity_notes. Manufacturer context only. The page's listed ZF transmission is for the restored road/homologation special and is not substituted for the FIA race-car gearbox."
+    },
+    {
+      "source_id": "pmr.official-esperante-gtr1-page",
+      "title": "Panoz Esperante GTR-1 | Project Motor Racing",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/car.php?carIndex=22",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official PMR car page for the exact in-game Esperante GTR-1 identity and its displayed GT1 class and six-speed sequential description. Statistics and About sections: “Panoz Esperante GTR-1; GT1; Transmission 6-speed sequential; unleashed in 1997.” Reviewed for /identity/display_name, /identity/class, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Exact simulator identity source and comparison evidence; it cannot independently establish every real-car control field."
+    },
+    {
+      "source_id": "wikipedia.elan-motorsport-panoz-gtr1",
+      "title": "Élan Motorsport Technologies",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/%C3%89lan_Motorsport_Technologies",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Secondary technical summary of the first Panoz racing car, including its manual sequential gearbox operated by a cockpit gear lever. Panoz GTR-1 technical description: “Xtrac #295 ... manual sequential 6-speed gearbox operated via gear lever in the right hand of cockpit.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Secondary corroboration for the physical lever; the FIA form remains the primary hardware source."
+    },
+    {
+      "source_id": "pmr.local-live-esperante-gtr-1-controls.2.2.0",
+      "title": "Live PMR Esperante GTR-1 guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/94",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.esperante-gtr-1.20260908t151922923z-8c3578ad by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "fia.mercedes-clk-lm.homologation-1998",
+      "title": "Homologation form number 11, Group GT1: Mercedes-Benz CLK-LM",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1589848201/homologation_form_number_11_group_gt1.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: FIA GT1 homologation form valid from 1 July 1998 for the Mercedes-Benz CLK-LM. PDF p.1, sections 101-102: “Manufacturer DAIMLER-BENZ AG; Model CLK-LM; homologation valid from 01 JUIL. 1998.” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class. PDF p.5, section 603: “Make X-TRAC; six forward ratios; gear change gate SEQUENTIAL.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Exact homologation evidence for identity and stable transmission architecture; it does not establish driver clutch, lift, cut, or blip technique, nor wheel-rim topology."
+    },
+    {
+      "source_id": "as-driven.repository.mercedes-benz-clk-lm-record-scan",
+      "title": "As Driven curated Mercedes-Benz CLK LM record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/blob/main/data/v1/cars/mercedes-benz-clk-lm.json",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan confirming the existing curated record_id mercedes-benz-clk-lm and its already-established authentic-controls baseline. identity and authentic_controls: “Mercedes-Benz CLK LM, 1998, GT1; six-speed sequential-stick baseline with the established cockpit rim values.” Reviewed for /identity/record_action, /identity/record_id, /identity/display_name, /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shift_lights. Used to attach the exact PMR identity to the existing record without silently creating a duplicate or re-deriving its established controls from a new simulator drive."
+    },
+    {
+      "source_id": "pmr.local-live-clk-lm-controls.2.2.0",
+      "title": "Live PMR CLK-LM guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/93",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.clk-lm.20260908t151116269z-838718a2 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.74",
+  "approved_at": "2026-09-08",
+  "record_id": "toyota-gt-one-1998",
+  "simulator": "ams2",
+  "telemetry_name": "Toyota GT-One (1998)",
+  "observed_game_version": "1.6.9.91",
+  "observed_through": "SimHub guided verification observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "unknown",
+    "automatic_cut": "yes",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "not-applicable"
+  },
+  "confidence_notes": "The exact 1998 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "GT1"
+}

@@ -1,0 +1,463 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "toyota-gt-one-1998",
+  "identity": {
+    "display_name": "Toyota GT-One (1998)",
+    "manufacturer": "Toyota",
+    "model": "GT-One (TS020)",
+    "year": {
+      "label": "1998",
+      "from": 1998,
+      "to": 1998
+    },
+    "class": "GT1",
+    "real_world_identity_notes": "The 1998 Toyota GT-One, chassis code TS020, was Toyota Team Europe's GT1 entrant at the 1998 24 Hours of Le Mans. Do not merge it with the revised 1999 LMGTP specification or with the single homologation road car; those versions changed the cockpit and/or hardware. The simulator identity is an exact match to this 1998 race-car family, but a particular chassis or livery is not established."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "unknown"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "yes",
+        "source_label": "live-cockpit-observation",
+        "notes": "U shaped. open on top with buttons. LCD display on dash"
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; wheel-rim shape: d shaped; integrated wheel display: no; conventional rim open-top section: yes; wheel shift lights: no.",
+      "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Toyota GT-One (1998)"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Toyota GT-One (1998)"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab by Guy Moulton."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.91",
+      "verified_at": "2026-09-08",
+      "source_refs": [
+        "official-24h-lemans-toyota-gt-one-history",
+        "racers-toyota-gt-one-technical-review-2024",
+        "supercar-nostalgia-toyota-gt-one-ts020",
+        "thedrive-toyota-gt-one-homologated-1998",
+        "wikimedia-goodwood-2007-toyota-ts020-interior",
+        "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The official 24 Hours of Le Mans history identifies the TS020 as a 1998 and 1999 Le Mans car and describes the 1998 entries as GT-One race cars. The period-specific technical review distinguishes the 1998 manual-lever cockpit from the 1999 paddle-shift revision and lists the 1998 car's six-speed Xtrac sequential gearbox."
+      }
+    },
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "GT-One"
+        },
+        {
+          "kind": "internal-id",
+          "value": "GT-One"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "yes",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.0 via guided verification observation pmr.gt-one.20260908t152657564z-c6785053 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.gt-one.20260908t152657564z-c6785053 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-gt-one-controls.2.2.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.0",
+      "verified_at": "2026-09-08",
+      "source_refs": [
+        "official-24h-lemans-toyota-gt-one-history-95",
+        "wikimedia.goodwood-2007-toyota-ts020-interior-95",
+        "as-driven.repository.toyota-gt-one-1998-record-scan",
+        "pmr.car-list.gt-one-1998",
+        "pmr.local-live-gt-one-controls.2.2.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The PMR car list identifies Toyota GT-One as a 1998 GT1 entry. The exact 1998 Toyota technical and photographic sources already used for the curated record establish the manual-lever sequential car and D-shaped open-top wheel with no rim display or shift lights."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "official-24h-lemans-toyota-gt-one-history",
+          "racers-toyota-gt-one-technical-review-2024",
+          "supercar-nostalgia-toyota-gt-one-ts020",
+          "thedrive-toyota-gt-one-homologated-1998",
+          "wikimedia-goodwood-2007-toyota-ts020-interior",
+          "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "The official 24 Hours of Le Mans history identifies the TS020 as a 1998 and 1999 Le Mans car and describes the 1998 entries as GT-One race cars. The period-specific technical review distinguishes the 1998 manual-lever cockpit from the 1999 paddle-shift revision and lists the 1998 car's six-speed Xtrac sequential gearbox."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "official-24h-lemans-toyota-gt-one-history",
+          "racers-toyota-gt-one-technical-review-2024",
+          "supercar-nostalgia-toyota-gt-one-ts020",
+          "thedrive-toyota-gt-one-homologated-1998",
+          "wikimedia-goodwood-2007-toyota-ts020-interior",
+          "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Both sources identify a six-speed sequential gearbox for the GT-One. The sources call it an Xtrac six-speed sequential gearbox with hydraulic shift assistance. They do not establish a dog-ring or synchromesh construction, so the broader sequential category is used. The 1998 specification is explicitly described as having a manual shift lever only in the cockpit; the paddle system belongs to the 1999 revision/test conversion. A sequential gearbox operated by the 1998 manual lever establishes one-gear-at-a-time sequential selection. No source reviewed establishes a first-gear gate position. The full-resolution photograph shows a conventional rim with a flattened lower section, so the project's rim taxonomy classifies it as d-shaped rather than gt-formula. The full-resolution photograph shows no display on the rim. The technical review separately identifies a wheel display as an addition for LM802's later paddle-shift test conversion, not the original 1998 race wheel. The full-resolution photograph visibly shows the upper section of the conventional D-shaped rim removed/open. The full-resolution photograph shows no shift-light elements on the rim. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "official-24h-lemans-toyota-gt-one-history",
+          "racers-toyota-gt-one-technical-review-2024",
+          "supercar-nostalgia-toyota-gt-one-ts020",
+          "thedrive-toyota-gt-one-homologated-1998",
+          "wikimedia-goodwood-2007-toyota-ts020-interior"
+        ],
+        "confidence": "high",
+        "basis": "Both sources identify a six-speed sequential gearbox for the GT-One. The sources call it an Xtrac six-speed sequential gearbox with hydraulic shift assistance. They do not establish a dog-ring or synchromesh construction, so the broader sequential category is used. The 1998 specification is explicitly described as having a manual shift lever only in the cockpit; the paddle system belongs to the 1999 revision/test conversion. A sequential gearbox operated by the 1998 manual lever establishes one-gear-at-a-time sequential selection. No source reviewed establishes a first-gear gate position. The full-resolution photograph shows a conventional rim with a flattened lower section, so the project's rim taxonomy classifies it as d-shaped rather than gt-formula. The full-resolution photograph shows no display on the rim. The technical review separately identifies a wheel display as an addition for LM802's later paddle-shift test conversion, not the original 1998 race wheel. The full-resolution photograph visibly shows the upper section of the conventional D-shaped rim removed/open. The full-resolution photograph shows no shift-light elements on the rim. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "official-24h-lemans-toyota-gt-one-history-95",
+          "wikimedia.goodwood-2007-toyota-ts020-interior-95",
+          "as-driven.repository.toyota-gt-one-1998-record-scan",
+          "pmr.car-list.gt-one-1998",
+          "pmr.local-live-gt-one-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "The PMR car list identifies Toyota GT-One as a 1998 GT1 entry. The exact 1998 Toyota technical and photographic sources already used for the curated record establish the manual-lever sequential car and D-shaped open-top wheel with no rim display or shift lights."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-gt-one-controls.2.2.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      }
+    ]
+  },
+  "updated_at": "2026-09-08"
+}

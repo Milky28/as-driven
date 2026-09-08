@@ -29,7 +29,7 @@ Count: 6.
 
 ## 1b. One car recorded under more than one shape across simulators
 
-A record is one real car, so its simulator entries describe one rim. These five
+A record is one real car, so its simulator entries describe one rim. These seven
 disagree about it. That is worth separating from the family splits below: those
 compare different cars, while these compare the same car seen twice.
 
@@ -40,8 +40,10 @@ compare different cars, while these compare the same car seen twice.
 | `nissan-r390-gt1` | round (ams2), d-shaped (ac) | unknown |
 | `porsche-911-gt3-r` | d-shaped (ams2), gt-formula (acc) | gt-formula |
 | `saleen-s7-r-gt1` | round (ams2, ac), d-shaped (raceroom) | round |
+| `tvr-tuscan-t400r-gt2` | round (ams2), d-shaped (pmr) | unknown |
+| `toyota-gt-one-1998` | gt-formula (ams2), d-shaped (pmr) | d-shaped |
 
-Count: 6.
+Count: 7.
 
 The vocabulary was defined on 2026-08-16. These splits first surfaced as older
 readings against newer ones, but three were deliberately rechecked on
@@ -55,6 +57,7 @@ readings against newer ones, but three were deliberately rechecked on
 | `nissan-r390-gt1` | ams2 round, 2026-08-13 | ams2 round confirmed, 2026-08-27; ac d-shaped, 2026-08-22 |
 | `saleen-s7-r-gt1` | ams2 round, 2026-08-11 | ac round 2026-08-23, raceroom d-shaped 2026-08-26 |
 | `tvr-tuscan-t400r-gt2` | ams2 round, 2026-08-29 | pmr d-shaped, 2026-09-07 |
+| `toyota-gt-one-1998` | ams2 gt-formula, 2026-09-08 | pmr d-shaped, 2026-09-08 |
 
 Under the old vocabulary `round` and `d-shaped` described an outline while
 `gt-style`, `prototype` and `formula` described the kind of car, so a
@@ -91,8 +94,8 @@ distinct 2005 second-series car, without an exact period cockpit source that
 connects the two. The exact 2005 wheel therefore remains unknown.
 
 **203 rim observations across the dataset predate the vocabulary**, against 116
-after it, so this is a sample of a much larger drift rather than six odd
-records. These six surfaced because a second simulator happened to look at the
+after it, so this is a sample of a much larger drift rather than seven odd
+records. These seven surfaced because a second simulator happened to look at the
 same car later; the rest have never been contradicted because nobody looked
 twice.
 
