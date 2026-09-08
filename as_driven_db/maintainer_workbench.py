@@ -321,16 +321,10 @@ class WorkbenchApplication:
                 issue,
                 dataset_version=payload.get("dataset_version"),
             )
-            summary = generate_driver_summary_proposal(
-                self.root,
-                self.cases_directory,
-                issue,
-                preserve_existing=prepared.get("kind") != "existing-car-research",
-            )
             return {
                 "action": action,
                 "result": prepared,
-                "driver_summary": summary,
+                "driver_summary": prepared["driver_summary"],
             }
         if action == "generate-driver-summary":
             generated = generate_driver_summary_proposal(

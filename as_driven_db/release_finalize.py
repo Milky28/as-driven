@@ -17,6 +17,7 @@ from research.build_ams2_coverage_manifest import (
 from research.build_simulator_disagreement_audit import build_audit
 
 from .site import build_site
+from .simulators import SIMULATOR_NAMES
 from .validate import validate_repository
 
 
@@ -73,22 +74,6 @@ def release_stats(root: Path) -> dict[str, Any]:
             1 for count in transmission_signatures.values() if count == 1
         ),
     }
-
-
-# Display names for the simulators a release can cover. The README table below
-# is generated, so a simulator missing here would appear under its bare id.
-SIMULATOR_NAMES = {
-    "ams2": "Automobilista 2",
-    "ac": "Assetto Corsa",
-    "acc": "Assetto Corsa Competizione",
-    "ac-evo": "Assetto Corsa EVO",
-    "ac-rally": "Assetto Corsa Rally",
-    "iracing": "iRacing",
-    "raceroom": "RaceRoom Racing Experience",
-    "rfactor2": "rFactor 2",
-    "pmr": "Project Motor Racing",
-    "gtr2": "GTR 2",
-}
 
 
 def _release_facts(stats: dict[str, Any]) -> str:

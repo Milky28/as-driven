@@ -7,53 +7,14 @@ from pathlib import Path
 from typing import Any
 
 from .schema_validation import validate_instance
+from .simulators import (
+    SIMULATORS, OBSERVING_SIMULATORS, SIMULATOR_GAME_NAMES, canonical_simulator,
+)
 
 ID_RE = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 STATES = {"yes", "no", "unknown", "not-applicable"}
 CONFIDENCE = {"verified", "high", "medium", "low", "unknown"}
-SIMULATORS = {
-    "ams2", "iracing", "ac", "acc", "ac-evo", "ac-rally",
-    "raceroom", "rfactor2", "pmr", "gtr2", "other",
-}
-# Every simulator that can publish a drive. `other` is a placeholder for a
-# simulator the enum does not name yet, so it owns no source prefix and its
-# observations are not held to the convention below.
-OBSERVING_SIMULATORS = tuple(sorted(SIMULATORS - {"other"}))
-
-
-# The spellings a telemetry client may report for each registered simulator,
-# held here so a held observation can be released when its game is registered.
-# The client owns the same table in AsDrivenDatabase.CanonicalizeSimulator and a
-# test pins the two against each other, because a name that resolves in one and
-# not the other is how a drive gets stranded.
-SIMULATOR_GAME_NAMES = {
-    "ams2": ("automobilista2", "ams2"),
-    "iracing": ("iracing",),
-    "ac": ("assettocorsa", "ac"),
-    "acc": ("assettocorsacompetizione", "acc"),
-    "ac-evo": ("assettocorsaevo", "acevo"),
-    "raceroom": ("rrre", "rrre64", "raceroom", "raceroomracingexperience", "r3e"),
-    "rfactor2": ("rfactor2", "rf2"),
-    "pmr": ("projectmotorracing", "pmr"),
-    "gtr2": ("simbingtr2", "gtr2", "gtr2fiagtracinggame"),
-}
-
-
-def canonical_simulator(game_name: str) -> str | None:
-    """The registered id for a telemetry client's game name, or None.
-
-    Compared whole and stripped to letters and digits, never by prefix: the
-    original rFactor must not fall through to rFactor 2, and the three Assetto
-    Corsa titles must not resolve into one another.
-    """
-    compact = "".join(c for c in (game_name or "") if c.isalnum()).lower()
-    if not compact:
-        return None
-    for simulator, spellings in SIMULATOR_GAME_NAMES.items():
-        if compact in spellings:
-            return simulator
-    return None
 # One naming convention for live-observation evidence, so a car's drive source is
 # predictable from its name whichever simulator recorded it. Tooling for other
 # publishers (SimHub's own identity inventories, for example) uses its own prefix

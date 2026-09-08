@@ -236,7 +236,7 @@ class MaintainerWorkbenchTests(unittest.TestCase):
         self.assertIn("state-identity-research", page)
         self.assertIn('const token="test-token"', page)
 
-    def test_prepare_review_generates_a_summary_and_editing_redry_runs(self) -> None:
+    def test_prepare_review_uses_shared_result_and_edits_still_validate(self) -> None:
         application = WorkbenchApplication(Path("."))
         allowed = {
             "summary": {
@@ -247,7 +247,7 @@ class MaintainerWorkbenchTests(unittest.TestCase):
             patch.object(application, "case_detail", return_value=allowed),
             patch(
                 "as_driven_db.maintainer_workbench.prepare_review_proposal",
-                return_value={"dry_run": "passed"},
+                return_value={"dry_run": "passed", "driver_summary": {"dry_run": "passed", "summary_status": "none"}},
             ) as prepare,
             patch(
                 "as_driven_db.maintainer_workbench.generate_driver_summary_proposal",
@@ -257,7 +257,7 @@ class MaintainerWorkbenchTests(unittest.TestCase):
             result = application.perform(7, "prepare-review", {})
             self.assertEqual("passed", result["driver_summary"]["dry_run"])
             prepare.assert_called_once()
-            self.assertTrue(summarize.call_args.kwargs["preserve_existing"])
+            summarize.assert_not_called()
 
             application.perform(
                 7,
@@ -268,13 +268,6 @@ class MaintainerWorkbenchTests(unittest.TestCase):
                 "Edited driver advice.",
                 summarize.call_args.kwargs["driver_summary"],
             )
-
-            prepare.return_value = {
-                "dry_run": "passed",
-                "kind": "existing-car-research",
-            }
-            application.perform(7, "prepare-review", {})
-            self.assertFalse(summarize.call_args.kwargs["preserve_existing"])
 
     def test_sync_requests_are_serialized(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

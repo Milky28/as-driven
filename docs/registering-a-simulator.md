@@ -68,24 +68,23 @@ choose it plainly. The set is a mix of abbreviation and product name: `ams2`,
 `ac`, `acc`, `ac-evo`, `ac-rally`, `iracing`, `raceroom`, `rfactor2`, `pmr`,
 `gtr2`. Prefer a name a reader can decode without a glossary.
 
-Then add it in each of these places. The list is short by design, and a test
-holds every one of them:
+Python tooling shares one built-in registry. The independently usable schemas
+and C# client retain their own contracts, checked by regression tests:
 
 1. `schema/v1/car-record.schema.json` - the `simulatorEntry` enum.
 2. `schema/v1/curation-approval.schema.json` - two enum sites.
 3. `schema/v1/verification-observation.schema.json` - the observation enum.
-4. `as_driven_db/validate.py` - `SIMULATORS`. `OBSERVING_SIMULATORS` derives
-   from it and drives the source-naming convention.
-5. `as_driven_db/site.py` - the display name and the filter label.
-6. `simhub/AsDriven.Core/VerificationObservation.cs` - the writer's whitelist.
-7. `simhub/AsDriven.Core/AsDrivenDatabase.cs` - `CanonicalizeSimulator`, and the
+4. `as_driven_db/simulators.py` - the product name, filter label, and accepted
+   game names. Validation, held-drive intake, catalog labels, research proposals,
+   and the release table all use this registry.
+5. `simhub/AsDriven.Core/VerificationObservation.cs` - the writer's whitelist.
+6. `simhub/AsDriven.Core/AsDrivenDatabase.cs` - `CanonicalizeSimulator`, and the
    three name maps.
-8. `simhub/AsDriven.Plugin/AsDriven.cs` - the display name, executable lookup,
+7. `simhub/AsDriven.Plugin/AsDriven.cs` - the display name, executable lookup,
    and exact-version strategy.
-9. `simhub/AsDriven.Core/VerificationReviewRules.cs` - whether its telemetry can
+8. `simhub/AsDriven.Core/VerificationReviewRules.cs` - whether its telemetry can
    settle throttle-dependent questions, and whether its gearbox refuses a
    downshift it should refuse. See below.
-10. `as_driven_db/release_finalize.py` - the generated release-table name.
 
 Accept every spelling a person might reasonably supply, as the Assetto Corsa and
 RaceRoom entries do, and compare each one whole. Prefix matching would let one

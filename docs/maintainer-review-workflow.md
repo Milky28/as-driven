@@ -293,6 +293,13 @@ the real promoter against a temporary copy of the current dataset and refuses
 incomplete control research, invalid source records, stale identities, or a
 promotion conflict. It does not change curated files.
 
+CLI and workbench preparation now produce the same packet. Both consider the
+optional driver summary after the record preview passes its promotion dry run.
+An absent or unchanged summary needs no extra artifact or second dry run. If
+new text changes the proposed record, that change receives another dry run and
+appears in the final review before approval. The explicit summary generation
+and editing actions remain available for deliberate revisions.
+
 An exact `curated-identity-comparison` in `review-needed` offers the same
 **Prepare final review** action immediately. That path retains the curated
 real-car identity, authentic-control baseline, sources, and driver summary,

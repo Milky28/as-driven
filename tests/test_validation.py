@@ -1443,12 +1443,12 @@ class ValidationTests(unittest.TestCase):
             # Reserved ids are required here and nowhere else.
             require(name, text, {s: f'"{s}"' for s in simulators | reserved})
 
-        site = (ROOT / "as_driven_db" / "site.py").read_text(encoding="utf-8")
-        for simulator in simulators:
-            # Both the product name and the short filter label, which are two
-            # separate maps and have been forgotten separately before.
-            if site.count(f'"{simulator}": "') < 2:
-                missing.append(f"site.py display and filter labels: {simulator}")
+        from as_driven_db.simulators import (
+            SIMULATOR_NAMES, SIMULATOR_LABELS, SIMULATOR_FILTER_LABELS,
+        )
+        for labels in (SIMULATOR_NAMES, SIMULATOR_LABELS, SIMULATOR_FILTER_LABELS):
+            self.assertEqual(SIMULATORS - {"other"}, set(labels))
+            self.assertTrue(all(labels.values()))
 
         core = ROOT / "simhub" / "AsDriven.Core"
         writer = (core / "VerificationObservation.cs").read_text(encoding="utf-8")

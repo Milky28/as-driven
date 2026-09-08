@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from as_driven_db.review_submissions import (
     CASE_SCHEMA_VERSION,
@@ -24,6 +25,7 @@ from as_driven_db.research_handoff import (
 )
 from as_driven_db.importers.observation import import_observation
 from as_driven_db.review_proposal import (
+    _dry_run_review_proposal,
     _candidate_source,
     _existing_authentic_control_decisions,
     _preserve_accept_from_drive,
@@ -1460,7 +1462,24 @@ class ReviewSubmissionTests(unittest.TestCase):
         """
         with tempfile.TemporaryDirectory() as directory:
             repository = Path(directory) / "repository"
-            cases, case_dir, _proposal = self.prepare_promotable_case(repository)
+            with patch(
+                "as_driven_db.review_proposal._dry_run_review_proposal",
+                wraps=_dry_run_review_proposal,
+            ) as dry_run:
+                cases, case_dir, proposal = self.prepare_promotable_case(repository)
+            self.assertEqual(1, dry_run.call_count)
+            self.assertEqual("none", proposal["driver_summary"]["summary_status"])
+            self.assertFalse((case_dir / "driver-summary.md").exists())
+
+            # A prior draft may still exist when the packet is regenerated.
+            case_path = case_dir / "case.json"
+            stale_case = json.loads(case_path.read_text(encoding="utf-8"))
+            stale_case["artifacts"]["driver_summary"] = "driver-summary.md"
+            case_path.write_text(json.dumps(stale_case), encoding="utf-8")
+            (case_dir / "driver-summary.md").write_text("Obsolete advice.", encoding="utf-8")
+            prepare_review_proposal(repository, cases, 17)
+            refreshed = json.loads(case_path.read_text(encoding="utf-8"))
+            self.assertNotIn("driver_summary", refreshed["artifacts"])
 
             generated = generate_driver_summary_proposal(repository, cases, 17)
 
@@ -1487,6 +1506,24 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "none",
                 case["review_proposal"]["driver_summary"]["status"],
             )
+
+    def test_a_changed_generated_summary_gets_a_second_promotion_dry_run(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repository"
+            with (
+                patch("as_driven_db.review_proposal.generate_driver_summary",
+                      return_value=("Fixture guidance for a simulator disagreement.", ["upshift"])),
+                patch("as_driven_db.review_proposal._dry_run_review_proposal",
+                      wraps=_dry_run_review_proposal) as dry_run,
+            ):
+                cases, case_dir, proposal = self.prepare_promotable_case(root)
+            self.assertEqual(2, dry_run.call_count)
+            self.assertEqual("generated", proposal["driver_summary"]["summary_status"])
+            manifest = json.loads((case_dir / "review-manifest.proposed.json").read_text(encoding="utf-8"))
+            preview = json.loads((case_dir / "preview-record.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["records"][0]["driver_summary"], preview["driver_summary"])
+            with self.assertRaises(ResearchHandoffError):
+                promote_review_case(root, cases, 17, approved=False)
 
     def test_a_hand_written_summary_still_reaches_the_record(self) -> None:
         """Nothing generated does not mean nothing accepted.

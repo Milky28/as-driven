@@ -19,6 +19,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
+from .simulators import SIMULATOR_FILTER_LABELS, SIMULATOR_LABELS, simulator_label
+
 TONE_DRIVER = "you"
 TONE_CAR = "car"
 TONE_OPTIONAL = "optional"
@@ -48,32 +50,6 @@ RIM = {
     "formula": "GT / Formula rim",
     "yoke": "Open-top rim (legacy)",
     "other": "Unclassified rim (legacy)",
-}
-
-SIMULATOR_LABELS = {
-    "ams2": "AMS2",
-    "ac": "Assetto Corsa",
-    "acc": "Assetto Corsa Competizione",
-    "ac-evo": "Assetto Corsa EVO",
-    "ac-rally": "Assetto Corsa Rally",
-    "raceroom": "RaceRoom Racing Experience",
-    "rfactor2": "rFactor 2",
-    "pmr": "Project Motor Racing",
-    "gtr2": "GTR 2",
-    "iracing": "iRacing",
-}
-
-SIMULATOR_FILTER_LABELS = {
-    "ams2": "AMS2",
-    "ac": "AC",
-    "acc": "ACC",
-    "ac-evo": "AC EVO",
-    "ac-rally": "AC Rally",
-    "raceroom": "RaceRoom",
-    "rfactor2": "rF2",
-    "pmr": "PMR",
-    "gtr2": "GTR2",
-    "iracing": "iRacing",
 }
 
 SIMULATOR_BEHAVIOR_FIELDS = {
@@ -156,8 +132,6 @@ PROVENANCE_LABELS = {
 }
 
 
-def simulator_label(simulator: str) -> str:
-    return SIMULATOR_LABELS.get(simulator, simulator.upper())
 
 
 def wheel_equipment(

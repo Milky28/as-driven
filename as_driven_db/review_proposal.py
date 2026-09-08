@@ -8,7 +8,7 @@ import shutil
 import tempfile
 from typing import Any
 
-from .site import simulator_label
+from .simulators import simulator_label
 from .promote_observation import (
     _apply_entry_game_version_correction,
     _behavior_changes,
@@ -1390,6 +1390,43 @@ def prepare_review_proposal(
     issue_number: int,
     dataset_version: str | None = None,
 ) -> dict[str, Any]:
+    """Prepare the same review packet for the CLI and workbench.
+
+    The record's promotion dry run supplies the preview used for its optional
+    summary. Only a changed summary needs another dry run and review artifact.
+    Explicit summary edits still use generate_driver_summary_proposal directly.
+    """
+    prepared = _prepare_record_proposal(root, cases_directory, issue_number, dataset_version)
+    preview = _read_json(Path(prepared["preview_record"]), "preview record")
+    existing = preview.get("driver_summary") or ""
+    preserve = prepared.get("kind") != "existing-car-research"
+    proposed, _ = generate_driver_summary(preview)
+    desired = existing if preserve and existing else proposed
+    if desired != existing:
+        summary = generate_driver_summary_proposal(
+            root, cases_directory, issue_number, preserve_existing=preserve,
+        )
+    else:
+        # A regenerated packet must not link an older summary draft when the
+        # current preview needs none (or already preserves the reviewed text).
+        case_path = Path(prepared["manifest"]).parent / "case.json"
+        case = _read_json(case_path, "review case")
+        if case.get("artifacts", {}).pop("driver_summary", None) is not None:
+            _write_json(case_path, case)
+        summary = {
+            "summary": existing,
+            "summary_status": "preserved" if existing else "none",
+            "dry_run": "passed",
+        }
+    return {**prepared, "driver_summary": summary}
+
+
+def _prepare_record_proposal(
+    root: Path,
+    cases_directory: Path,
+    issue_number: int,
+    dataset_version: str | None = None,
+) -> dict[str, Any]:
     root = root.resolve()
     case_directory = cases_directory / f"issue-{issue_number}"
     case = _read_json(case_directory / "case.json", "review case")
@@ -1862,7 +1899,7 @@ def generate_driver_summary_proposal(
     """Set and dry-run a record-wide summary inside a review proposal.
 
     With no supplied text this generates a fresh conservative draft. The
-    workbench uses ``preserve_existing`` immediately after proposal preparation
+    preparation workflow uses ``preserve_existing`` when adding a summary
     so an established record keeps its already-reviewed prose, while a new car
     receives a generated draft. Supplying text is the editing path; it is
     normalized to the single paragraph required by the overlay.
