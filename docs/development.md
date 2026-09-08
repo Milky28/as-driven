@@ -60,6 +60,15 @@ It exercises simulator deep links, conflicting filters, keyboard tabs, live
 result announcements, empty states, and a mobile-width layout. CI installs its
 own browser and runs the same suite.
 
+The [validation workflow](../.github/workflows/validate.yml) also deploys the
+public catalog. Pull requests run all checks without deployment permissions.
+Pushes to `main` and manual runs on `main` deploy only after data validation,
+database packaging, core-client tests, and browser tests pass. Pages receives
+the `build/site` files exercised by Playwright, without rebuilding the site or
+repeating its tests in a separate workflow. Python tests run once on Linux and
+once through Windows database packaging, preserving platform-specific coverage.
+Standalone packaging commands still run their own checks by default.
+
 The SimHub build expects SimHub at `C:\Program Files (x86)\SimHub` unless
 `-SimHubInstallPath` is supplied. It compiles, runs the .NET assertions,
 generates dashboards, and packages only under `simhub/dist`. It never installs

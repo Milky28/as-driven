@@ -695,25 +695,6 @@ class SiteTests(unittest.TestCase):
         )
         self.assertNotIn("<script src", page)
 
-    def test_github_pages_builds_only_the_curated_public_catalog(self) -> None:
-        workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(
-            encoding="utf-8"
-        )
-        self.assertIn("python -m as_driven_db validate", workflow)
-        self.assertIn("python -m unittest discover -s tests -v", workflow)
-        self.assertIn(
-            "python -m as_driven_db build-site --output dist/site/index.html",
-            workflow,
-        )
-        self.assertIn("uses: actions/configure-pages@v6", workflow)
-        self.assertIn("uses: actions/upload-pages-artifact@v5", workflow)
-        self.assertIn("path: dist/site", workflow)
-        self.assertIn("uses: actions/deploy-pages@v5", workflow)
-        self.assertNotIn("build/review-cases", workflow)
-
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("https://milky28.github.io/as-driven/", readme)
-
     def test_the_headline_counts_match_the_records(self) -> None:
         payload = collect(ROOT)
         cars = payload["cars"]
