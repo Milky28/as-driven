@@ -13,6 +13,27 @@ carry the existing CLI workflow through to a concrete proposal. You do not
 need to operate each intermediate workbench action or copy research between
 interfaces. The workbench remains available as another view of the same case.
 
+Use the main checkout and its ignored `build/review-cases` directory for routine
+research and proposal preparation. Start the workbench from that same checkout.
+These commands write local case artifacts; proposal dry runs use a temporary
+copy of the database. They do not need an implementation worktree. Code and
+other tracked implementation changes still belong in a separate worktree.
+
+When running from another directory, point the command at main explicitly, for
+example (replace the path with your main checkout):
+
+```shell
+python -m as_driven_db review-submissions prepare-review 42 --root "C:/path/to/main-checkout" --cases-dir "C:/path/to/main-checkout/build/review-cases"
+```
+
+`--root` selects the dataset used for preparation; `--cases-dir` selects the
+queue. Prefer running from main so the Python code also comes from main.
+Queue refresh reads that queue only; it does not merge case state from other
+worktrees. If research was prepared elsewhere, import its completed
+`research-result.json` into the existing main case and prepare the proposal
+again there. Preserve the original packet; do not copy its status over the main
+case or promote it merely to make the workbench catch up.
+
 The assistant should:
 
 1. Read the existing local case first, or synchronize the named issue with

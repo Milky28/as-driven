@@ -40,9 +40,14 @@ car JSON edits; import and promotion tools already format their output.
 
 ## Working discipline
 
-- Start Codex implementation work in a separate Git worktree on a task-specific
-  `codex/` branch. Leave the shared main checkout for Claude. Never edit, stage,
-  stash, or commit another worker's uncommitted changes; integrate deliberately.
+- Use a separate Git worktree on a task-specific `codex/` branch for code,
+  documentation, and other tracked implementation changes; integrate deliberately.
+  Never edit, stage, stash, or commit another worker's uncommitted changes.
+- Routine contribution research and proposal preparation use the main checkout
+  and its ignored `build/review-cases` queue, shared with the workbench. Do not
+  create a worktree just to research a case. Preparation leaves curated files
+  unchanged; promotion still requires explicit approval. See the maintainer
+  workflow for commands targeting this queue from another directory.
 - Complete the requested behavior and necessary consequences. Report unrelated
   cleanup separately. A small correction should not become a repository audit.
 - Prefer small, direct modifications. Retain standard SimHub `IPlugin`,

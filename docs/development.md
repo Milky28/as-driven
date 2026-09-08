@@ -98,8 +98,13 @@ git diff --check
 
 ## Contribution review workflow
 
-The maintainer workbench is the preferred interface and calls the same tested
-functions as the CLI:
+An assistant can prepare contributions using the CLI; the workbench offers
+another view of the same cases. Run both from the main checkout so they share
+its ignored `build/review-cases` queue. Routine research and proposal preparation
+do not require a separate worktree. See the
+[maintainer workflow](maintainer-review-workflow.md#working-with-an-assistant).
+
+To open the workbench:
 
 ```shell
 python -m as_driven_db review-submissions workbench
