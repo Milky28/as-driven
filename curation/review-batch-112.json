@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.73",
+  "approved_at": "2026-09-08",
+  "records": [
+    {
+      "record_id": "nissan-r89c-1989",
+      "bundle": "build/review-cases/issue-91/staged.json",
+      "display_name": "Nissan R89C",
+      "class": "Group C sports prototype",
+      "manufacturer": "Nissan",
+      "model": "R89C",
+      "year": {
+        "from": 1989,
+        "to": 1989,
+        "label": "1989 Nissan R89C"
+      },
+      "real_world_identity_notes": "The submitted R89C maps to Nissan's 1989 Lola/Nissan Group C sports prototype. Nissan Heritage identifies the R89C and specifies a five-speed VGC transmission; Motorsport Magazine independently identifies the Hewland VGC five-speed and reverse transaxle. An exact-model community specification describes the selector as a dogleg H-shifter, but the reviewed authoritative sources do not establish the VGC's internal synchronizer/dog construction or the driver's running clutch/blip technique. Real wheel topology remains unknown.",
+      "real_world_source_refs": [
+        "nissan.heritage.r89c",
+        "motorsportmagazine.r89c-vgc",
+        "automobilista2.wiki.r89c-selector",
+        "autosportnl.r89c-cockpit-driving",
+        "as-driven.repository.nissan-r89c-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Nissan's official Heritage Collection identifies the 1989 R89C and its VGC five-speed transmission. Motorsport Magazine corroborates the exact Lola/Nissan Group C identity and VGC gearbox. A separate exact-model technical reference supplies the dogleg H-shifter description as lower-confidence selector evidence. No existing curated record matches.",
+      "identity_basis": "Nissan's official Heritage Collection identifies the 1989 R89C and its VGC five-speed transmission. Motorsport Magazine corroborates the exact Lola/Nissan Group C identity and VGC gearbox. A separate exact-model technical reference supplies the dogleg H-shifter description as lower-confidence selector evidence. No existing curated record matches.",
+      "specification_basis": "Nissan specifies VGC five-speed and Motor Sport Magazine specifies five-speed plus reverse. The exact-model technical reference describes a dogleg H-shifter, and the period cockpit account describes the driver selecting numbered gears. Confidence is medium because the selector wording comes from a community reference. The R89C is documented with a manual five-speed VGC and an H-pattern selector; a driver-operated H-pattern manual requires clutch control to pull away from rest. The claim is mechanism-based, not simulator-derived. No upshift blip action is described; the unresolved mechanism does not justify inventing one. No upshift automatic blip action is described. The reviewed sources do not prescribe a separate downshift throttle-lift step. No downshift automatic cut procedure is described for the manually selected VGC transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.r89c.20260907t232820534z-ccaa9bc4 directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-r89c-controls.2.2.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1989 Nissan R89C identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern; standing-start clutch use: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/91",
+      "live_source_notes": "Guided-verification observation pmr.r89c.20260907t232820534z-ccaa9bc4 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "r89c",
+        "basis": "Nissan's official Heritage Collection identifies the 1989 R89C and its VGC five-speed transmission. Motorsport Magazine corroborates the exact Lola/Nissan Group C identity and VGC gearbox. A separate exact-model technical reference supplies the dogleg H-shifter description as lower-confidence selector evidence. No existing curated record matches."
+      }
+    }
+  ]
+}

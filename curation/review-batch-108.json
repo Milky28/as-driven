@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.69",
+  "approved_at": "2026-09-08",
+  "records": [
+    {
+      "record_id": "porsche-944-turbo-cup",
+      "bundle": "build/review-cases/issue-87/staged.json",
+      "display_name": "Porsche 944 Turbo Cup",
+      "class": "One-make cup race car",
+      "manufacturer": "Porsche",
+      "model": "944 Turbo Cup",
+      "year": {
+        "from": 1986,
+        "to": 1989,
+        "label": "1986–1989 Porsche 944 Turbo Cup"
+      },
+      "real_world_identity_notes": "The submitted RaceRoom identity maps to Porsche's factory 944 Turbo Cup one-make race-car series, launched in 1986 and replaced by the Carrera Cup in 1990. The series identity spans multiple seasons and year-specific specifications; the simulator name does not identify a single chassis or season. The reviewed sources support a five-speed manual H-pattern race-car transmission with a physical clutch and a synchromesh 944 Turbo transmission basis, but they do not establish exact year-specific selector details, running driver technique, or the real steering-rim topology for every Turbo Cup car.",
+      "real_world_source_refs": [
+        "porsche.christophorus.944-turbo-cup-1986-launch",
+        "classicbid.1986-porsche-944-turbo-cup-catalog",
+        "manualzz.porsche-944-turbo-1988-workshop-manual",
+        "911motorsport.porsche-944-turbo-cup-factory-modifications",
+        "manualsplus.911-porsche-world-944-turbo-cup-driving",
+        "bigporsche.944-turbo-cup-specifications",
+        "hagerty.1988-porsche-944-turbo-cup-canadian-rothmans",
+        "as-driven.repository.porsche-944-turbo-cup-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Porsche's own history places the Turbo Cup at the start of its one-make series in 1986 and records the 1990 transition to Carrera Cup. An exact 1986 Turbo Cup auction catalogue records five forward gears and a manual transmission, while period Turbo Cup specifications and the 944 Turbo workshop manual corroborate the five-speed manual platform, clutch pedal, and synchromesh construction. The repository contains no existing curated Porsche 944 Turbo Cup record, so this is a create-new proposal.",
+      "identity_basis": "Porsche's own history places the Turbo Cup at the start of its one-make series in 1986 and records the 1990 transition to Carrera Cup. An exact 1986 Turbo Cup auction catalogue records five forward gears and a manual transmission, while period Turbo Cup specifications and the 944 Turbo workshop manual corroborate the five-speed manual platform, clutch pedal, and synchromesh construction. The repository contains no existing curated Porsche 944 Turbo Cup record, so this is a create-new proposal.",
+      "specification_basis": "The exact 1986 Turbo Cup catalogue explicitly records five forward gears, and the 944 Turbo workshop manual and 1988 Turbo Cup specification corroborate the five-speed manual platform. The 944 Turbo workshop manual documents the 016 R/S five-speed manual transmission and synchromesh rings, while Turbo Cup-specific sources describe strengthened gears rather than a dog-ring conversion. This supports a medium-confidence synchromesh classification for the Cup's 944 Turbo transmission basis, with the exact year-specific race preparation still a review caveat. The exact Turbo Cup is documented with a manual transmission, and the period material describes a gear lever and shifting through the gate. The reviewed evidence supports a driver-operated H-pattern lever, although no chassis-specific full gate photograph was decisive. The period driving material describes the five-speed gear lever moving through a conventional gate, and the workshop material documents the manual 944 Turbo selector. No source reviewed shows a dogleg or sequential selector; the exact gate layout should remain a review point rather than being read from the simulator cockpit. The 944 Turbo platform has a physical clutch pedal and the Turbo Cup received a heavy-duty racing clutch. With a driver-operated H-pattern manual transmission, the clutch is required to pull away from rest; this is a mechanism-based derivation, not a simulator observation. The documented synchromesh construction maps to a required clutch technique for the authentic running upshift under the data model, and the platform has a physical clutch pedal. The claim is derived from mechanism, not from the RaceRoom drive. The documented synchromesh construction maps to a required clutch technique for the authentic running downshift under the data model. No simulator behavior is used to establish this real-car value. The synchromesh construction matches the documented derivation: a manual rev-match blip can ease the synchronizers but is not required for the gear to engage. This is an authentic technique classification, not evidence that every driver used it on every downshift. A rev-match blip is a downshift technique for this synchromesh manual gearbox; the reviewed sources establish no separate upshift blip action. The reviewed manual gearbox sources establish no automatic rev-match action for an upshift; automatic blip is a downshift concept here. The reviewed sources establish downshift rev matching as the relevant optional technique but do not prescribe a separate downshift throttle-lift step. The reviewed manual and Turbo Cup modification sources establish a mechanically operated manual gearbox, not a downshift torque-cut procedure; no separate automatic cut is established for downshift. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "upshift": {
+          "clutch": "required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1986–1989 Porsche 944 Turbo Cup identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required; transmission upshift clutch: required; transmission downshift clutch: required; transmission downshift manual_blip: optional; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish wheel topology; those baseline fields remain unknown.",
+        "RaceRoom Racing Experience 0.9.8.20 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/87",
+      "live_source_notes": "Guided-verification observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 by Jason Kinslow; RACEROOM 0.9.8.20. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    }
+  ]
+}

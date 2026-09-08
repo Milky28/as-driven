@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.69",
+  "approved_at": "2026-09-08",
+  "record_id": "porsche-944-turbo-cup",
+  "simulator": "raceroom",
+  "telemetry_name": "Porsche 944 Turbo Cup",
+  "observed_game_version": "0.9.8.20",
+  "observed_through": "SimHub guided verification observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "unknown",
+    "manual_blip": "optional",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "required"
+  },
+  "confidence_notes": "The exact 1986–1989 Porsche 944 Turbo Cup identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Porsche 944 Turbo Cup"
+}

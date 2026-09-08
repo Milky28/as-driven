@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.73",
+  "approved_at": "2026-09-08",
+  "record_id": "nissan-r89c-1989",
+  "simulator": "pmr",
+  "telemetry_name": "R89C",
+  "observed_game_version": "2.2.0",
+  "observed_through": "SimHub guided verification observation pmr.r89c.20260907t232820534z-ccaa9bc4",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1989 Nissan R89C identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Group C",
+  "staged_record_id": "r89c"
+}

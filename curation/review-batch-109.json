@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.70",
+  "approved_at": "2026-09-08",
+  "records": [
+    {
+      "record_id": "alpine-a110-cup",
+      "bundle": "build/review-cases/issue-88/staged.json",
+      "display_name": "Alpine A110 Cup",
+      "class": "One-make cup race car",
+      "manufacturer": "Alpine",
+      "model": "A110 Cup",
+      "year": {
+        "from": 2018,
+        "to": 2018,
+        "label": "2018 Alpine A110 Cup"
+      },
+      "real_world_identity_notes": "The exact simulator identity maps to the Alpine A110 Cup introduced for the Alpine Europa Cup in 2018. Alpine's own material identifies a 3MO six-speed sequential transmission operated by steering-wheel controls and an integrated steering-wheel display. The reviewed sources do not establish the internal engagement construction, physical clutch operation, exact shift-cut/blip strategy, or rim topology beyond the display/control functions.",
+      "real_world_source_refs": [
+        "alpine.official.a110-cup-competition",
+        "alpine.official.a110-cup-launch-2018",
+        "alpine.official.a110-cup-brochure",
+        "as-driven.repository.alpine-a110-cup-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Alpine's official competition page and technical material identify the A110 Cup, the 3MO six-speed sequential gearbox, and the steering-wheel controls/display. The 2018 launch material identifies the Europa Cup introduction. No existing curated record matches the exact identity.",
+      "identity_basis": "Alpine's official competition page and technical material identify the A110 Cup, the 3MO six-speed sequential gearbox, and the steering-wheel controls/display. The 2018 launch material identifies the Europa Cup introduction. No existing curated record matches the exact identity.",
+      "specification_basis": "All official technical sources specify six sequential ratios. The official material explicitly places paddle-shift controls on the steering wheel. The gearbox is explicitly described as sequential. The reviewed sources describe paddle sequential operation and no upshift rev-match action; blip is not an upshift field for this evidence. The reviewed sources do not describe an upshift automatic blip action. No separate downshift throttle-lift procedure is stated; the relevant unresolved field is rev matching or automatic control. The sources do not describe a downshift torque-cut action. Alpine explicitly specifies an integrated display in the steering wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2018 Alpine A110 Cup identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential paddles; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; integrated wheel display: yes.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "RaceRoom Racing Experience 0.9.8.20 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/88",
+      "live_source_notes": "Guided-verification observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 by Jason Kinslow; RACEROOM 0.9.8.20. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    }
+  ]
+}

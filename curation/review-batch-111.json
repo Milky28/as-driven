@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.5.72",
+  "approved_at": "2026-09-08",
+  "records": [
+    {
+      "record_id": "mazda-787b-1991",
+      "bundle": "build/review-cases/issue-90/staged.json",
+      "display_name": "Mazda 787B",
+      "class": "Group C sports prototype",
+      "manufacturer": "Mazda",
+      "model": "787B",
+      "year": {
+        "from": 1991,
+        "to": 1991,
+        "label": "1991 Mazda 787B"
+      },
+      "real_world_identity_notes": "The submitted 787B maps to Mazda's 1991 Le Mans-winning Group C sports prototype. Mazda's official specification lists a Mazda–Porsche five-speed plus reverse and a triple-plate clutch; direct driver accounts describe the gearbox as H-pattern and use of the clutch on every upshift and downshift. Independent driving coverage describes the transaxle as fully synchronized. Exact gate layout and steering-rim topology were not established by the reviewed sources.",
+      "real_world_source_refs": [
+        "mazda.official.787b-specification",
+        "tomlong.mazda-787b-driving",
+        "caranddriver.mazda-787b-transaxle",
+        "commons.mazda.787b-cockpit-detail",
+        "as-driven.repository.mazda-787b-record-scan"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Mazda's official heritage page identifies the 787B, its 1991 Le Mans chassis context, five-speed Mazda–Porsche transmission, and triple-plate clutch. Tom Long directly describes the car's H-pattern operation and clutch use on running shifts; Car and Driver corroborates the fully synchronized transaxle. No existing exact curated record matches.",
+      "identity_basis": "Mazda's official heritage page identifies the 787B, its 1991 Le Mans chassis context, five-speed Mazda–Porsche transmission, and triple-plate clutch. Tom Long directly describes the car's H-pattern operation and clutch use on running shifts; Car and Driver corroborates the fully synchronized transaxle. No existing exact curated record matches.",
+      "specification_basis": "Mazda specifies five speeds plus reverse, corroborated by the five-speed transaxle report. The exact 787B driving report describes its transaxle as fully synchronized. Direct driver testimony explicitly calls the gearbox H-pattern. Mazda specifies a triple-plate clutch and the car is an H-pattern manual; clutch control is required for the standing start. Direct driver testimony states that the clutch was used on every upshift. Direct driver testimony states that the clutch was used on every downshift. The fully synchronized construction makes a downshift blip useful but not required under the project's mechanical derivation. The direct account describes clutch-assisted upshifts, not an upshift blip procedure. No upshift automatic blip action is described. The reviewed sources establish clutch-assisted downshifts and a synchronized transaxle but no distinct downshift throttle-lift requirement. No downshift automatic cut procedure is described. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.787b.20260907t231911220z-8e19886f directly recorded this behavior or cockpit value in the simulator version 2.2.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1991 Mazda 787B identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: required; transmission downshift clutch: required; transmission downshift manual_blip: optional; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+        "The reviewed real-car sources do not establish selector pattern or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/90",
+      "live_source_notes": "Guided-verification observation pmr.787b.20260907t231911220z-8e19886f by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "787b",
+        "basis": "Mazda's official heritage page identifies the 787B, its 1991 Le Mans chassis context, five-speed Mazda–Porsche transmission, and triple-plate clutch. Tom Long directly describes the car's H-pattern operation and clutch use on running shifts; Car and Driver corroborates the fully synchronized transaxle. No existing exact curated record matches."
+      },
+      "driver_summary": "Fully synchronized Mazda–Porsche five-speed H-pattern: use the clutch on every running upshift and downshift as the period driving account describes; a downshift blip is optional for rev matching. The exact gate layout remains unconfirmed."
+    }
+  ]
+}

@@ -11339,6 +11339,470 @@
       "retrieved_at": "2026-09-07",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation pmr.viper-competition-coupe.20260907t003851134z-e247bf28 by Jason Kinslow; PMR unknown. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "raceroom.official.opel-calibra-v6-dtm-1995",
+      "title": "Opel Calibra V6 DTM - Store - RaceRoom Racing Experience",
+      "publisher": "RaceRoom Racing Experience",
+      "url": "https://game.raceroom.com/store/cars/dtm-1995/opel/opel-calibra-v6-dtm",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official RaceRoom catalogue page for the exact submitted simulator identity. It names the content Opel Calibra V6 DTM, describes it as the Opel Calibra V6 4x4 DTM 1995 used in the 1995 DTM season, and lists the year as 1995. Page title and description: “Opel Calibra V6 4x4 DTM 1995 ... Opel's weapon of choice in the 1995 DTM season” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. Vehicle facts list: “Year:1995 ... Engine:V6 ... Drive:Four wheel” Reviewed for /identity/year, /identity/model, /identity/real_world_identity_notes. This source identifies the exact simulator content and its catalogue period. It is not used as sole proof of real-car driver technique or wheel hardware."
+    },
+    {
+      "source_id": "stellantis-media.opel-calibra-v6-1996-technology",
+      "title": "25 Years Ago: Opel Wins World Touring Car Championship with Calibra",
+      "publisher": "Opel / Stellantis Media",
+      "url": "https://www.media.stellantis.com/em-en/opel/press/25-years-ago-opel-wins-world-touring-car-championship-with-calibra",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Manufacturer retrospective on the Opel Calibra V6 4x4 Class 1 touring-car family and its 1996 technology. It is used as corroborating family-level evidence for the hydraulic semi-automatic sequential mechanism, while the 1995-specific identity and gearbox classification come from the exact RaceRoom and Phase 4 sources. Paragraphs 85-88: “The 1996 touring car champions were the Opel Calibra V6 4x4 ... Class 1 touring cars” Reviewed for /identity/model, /identity/class, /identity/real_world_identity_notes. Technology of the Opel Calibra V6, paragraphs 92-96: “hydraulically operated, six-speed, semi-automatic transmission ... paddles behind the steering wheel” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. The detailed technology passage is explicitly about the 1996 season. It is used only as corroborating family-level evidence that the Williams-developed hydraulic system operated the sequential gearbox and included clutch engagement; the exact 1995 no-pedal launch correction is recorded separately. It does not establish throttle blip behavior or wheel-rim details."
+    },
+    {
+      "source_id": "lightningmodels.opel-calibra-phase-4-1995",
+      "title": "DTM / ITC 1989 - 1996",
+      "publisher": "Lightning Models",
+      "url": "https://www.lightningmodels.de/modelle/dtm-itc-1989---1996",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period-specific secondary account of the 1995 DTM Calibra Phase 4. It distinguishes the 1995 Phase 4 car from the previous Phase 3 car and describes the six-speed sequential gearbox, semi-automatic addition, and first use of steering-wheel shift paddles in touring cars. Section 'Technik des DTM Calibra Phase 4', lines 762-764: “Calibra Phase 4 für die Saison 1995 ... sequentielle Sechs-Gang-Getriebe ... Halbautomatik ... Wippe am Lenkrad” Reviewed for /identity/model, /identity/year, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. This is the main exact-year source for the 1995 Phase 4 identity and selector hardware. It does not prescribe launch, running-shift clutch, throttle-lift, cut/blip, or steering-wheel-rim technique."
+    },
+    {
+      "source_id": "racecarsdirect.opel-calibra-v6-4x4-cockpit-1995",
+      "title": "Opel Calibra V6 4x4 ITC/DTM EX Rosberg & Wurz - SOLD",
+      "publisher": "RacecarsDirect",
+      "url": "https://www.racecarsdirect.com/Advert/Details/116649/opel-calibra-v6-4x4-itcdtm-ex-rosberg-wurz",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Seller listing for an original Opel Calibra V6 4x4 ITC/DTM car built in 1995 and raced by Keke Rosberg in 1995. The listing includes a full-resolution cockpit photograph and describes the original racing interior. Description, paragraph beginning 'Opel Calibra V6 4X4 ITC/DTM': “The car was build in 1995” Reviewed for /identity/year, /identity/real_world_identity_notes. Cockpit photograph, image 635491.jpg: “Original interior ... suede-wrapped Opel steering wheel” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The exact-car photograph confirms a period racing cockpit and a suede-wrapped steering wheel, but the reviewed material does not make the dataset's rim-shape, display, shift-light, or open-top classifications decisive. Those fields remain not-established rather than being converted to no."
+    },
+    {
+      "source_id": "as-driven.repository.opel-calibra-v6-4x4-dtm-1995-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Opel Calibra V6 DTM or Opel Calibra V6 4x4 DTM record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches this exact 1995 Opel Calibra V6 DTM identity” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision; it is not evidence for real-world identity or controls."
+    },
+    {
+      "source_id": "as-driven.maintainer-correction.issue-85.no-clutch-pedal",
+      "title": "Maintainer correction supplied during review of issue #85",
+      "publisher": "As Driven maintainer review",
+      "url": "https://github.com/Milky28/as-driven/issues/85",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Maintainer-supplied correction for the exact 1995 Opel Calibra V6 DTM identity: the race car had no driver-operated clutch pedal; its F1-derived hydraulic system automatically slipped the clutch during launch, and the driver did not operate a clutch. Review request, 2026-09-07: “this car didn't have a clutch pedal, the system was f1 derived and automatically slipped the clutch during launch. The driver did not operate a clutch at all.” Reviewed for /identity/real_world_identity_notes, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/standing_start_clutch. This is direct maintainer evidence for the exact submitted identity, not an independent period publication. It corrects the earlier evidence gap; the manufacturer source independently corroborates the hydraulic gearbox and clutch-engagement mechanism, while this correction supplies the no-pedal and launch-slip detail."
+    },
+    {
+      "source_id": "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20",
+      "title": "Live RACEROOM Opel Calibra V6 DTM guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/85",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 by Jason Kinslow; RACEROOM 0.9.8.20. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "raceroom.official.renault-laguna-super-touring-1998",
+      "title": "Renault Laguna Super Touring - Store - RaceRoom Racing Experience",
+      "publisher": "RaceRoom Racing Experience",
+      "url": "https://game.raceroom.com/store/cars/super-touring/renault/renault-laguna-super-touring",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official RaceRoom catalogue page for the exact submitted simulator identity. It names Renault Laguna Super Touring, lists the year as 1998, and identifies the Super Touring category, 2.0L four-cylinder engine, and front-wheel drive. Page title and description: “Renault Laguna Super Touring ... developed according to the Super Touring regulations of the late 1990s” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/class, /identity/real_world_identity_notes. Vehicle facts list: “Year:1998 ... Engine:2.0L 4-cylinder ... Drive:FWD” Reviewed for /identity/year, /identity/class, /identity/real_world_identity_notes. This source identifies the exact simulator content and its catalogue year. It is not used as sole proof of authentic driver technique or real steering hardware."
+    },
+    {
+      "source_id": "rmsothebys.1997-renault-laguna-btcc-super-touring-1998",
+      "title": "1997 Renault Laguna BTCC Super Touring",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/auctions/lf16/lots/r114-1997-renault-laguna-btcc-super-touring/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction description of a Williams-prepared Renault Laguna Super Touring chassis that competed in the 1998 British Touring Car Championship. It gives the Super Touring context and states that the car used a six-speed sequential transmission. Lot title and competition history: “1997 Renault Laguna BTCC Super Touring ... Competed in the 1998 British Touring Car Championship ... Highly desirable Williams-prepared Super Touring Car” Reviewed for /identity/model, /identity/year, /identity/class, /identity/real_world_identity_notes. Auction details: “310 bhp, 1,998 cc inline four-cylinder engine ... six-speed sequential transmission” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /identity/real_world_identity_notes. This is exact-year competition context and gearbox corroboration, but it does not establish the driver's clutch or throttle technique and does not identify the exact RaceRoom chassis."
+    },
+    {
+      "source_id": "williamsdb.david-coulthard-renault-laguna-gearshift",
+      "title": "David Coulthard Tests a Renault Laguna",
+      "publisher": "The Williams Grand Prix Database",
+      "url": "https://www.williamsdb.com/david-coulthard-tests-a-renault-laguna/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: A preserved driver account adapted from Autosport (14 April 1994) and BBC Grand Prix 95 Magazine. Coulthard describes a Williams BTCC Renault Laguna's six-speed Hewland sequential gearbox and the running upshift technique: no clutch, but a throttle lift; the car cannot be power-shifted. Gear lever and transmission description, paragraphs beginning 'Down on the left side': “a tall gear lever that connects with the sequential change, six-speed Hewland gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Gearchange technique, paragraph beginning 'And what a gearchange!': “the upchanges needing no clutch - although you do have to lift off: you can't power change this car” Reviewed for /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut. This is direct driver testimony about the Laguna family and its running upshift technique, but the article describes the earlier 1994/1995 test cars rather than assigning a chassis number to the RaceRoom 1998 content. It is therefore used with medium confidence for technique and not used to fill downshift or standing-start behavior."
+    },
+    {
+      "source_id": "autoaddicts.williams-renault-laguna-supertourer-1999",
+      "title": "Williams Renault Laguna SuperTourer",
+      "publisher": "Auto Addicts",
+      "url": "https://www.autoaddicts.co.uk/williams-renault-laguna-supertourer/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Listing for a 1999 Williams Touring Car Engineering Renault Laguna, describing the continuing Williams Renault program and a six-speed Hewland sequential gearbox. It is family-level corroboration only, not exact-year evidence for the 1998 simulator content. Specification and program description: “1999 Renault Laguna Super Touring Car ... Six Speed Hewland Sequential Gearbox ... Williams Touring Car Engineering ... managed Renault's BTCC program” Reviewed for /identity/model, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. This source corroborates the Williams Laguna family's six-speed Hewland sequential architecture, but its 1999 chassis is not silently treated as the exact 1998 car."
+    },
+    {
+      "source_id": "iconic.1999-williams-renault-laguna-cockpit",
+      "title": "1999 Williams-Renault Laguna Super Tourer",
+      "publisher": "Iconic Auctioneers",
+      "url": "https://www.iconicauctioneers.com/1999-williams-renault-laguna-super-tourer-rec02482-1-0715",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction record for a 1999 Williams-Renault Laguna Super Tourer, including a gallery of the later Williams chassis. The material was examined for cockpit and steering-rim evidence but does not decisively classify the exact 1998 simulator identity's rim topology. Gallery and specification section: “1999 Williams-Renault Laguna Super Tourer ... final chassis built by Williams Grand Prix Engineering” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The later-car gallery is useful as a visual lead but does not settle exact 1998 wheel-rim fields; the proposal preserves unknown rather than transferring a later cockpit configuration backward."
+    },
+    {
+      "source_id": "as-driven.repository.renault-laguna-super-touring-1998-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Renault Laguna Super Touring or Renault Laguna Super Touring 1998 record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches this exact 1998 Renault Laguna Super Touring identity” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision; it is not evidence for real-world identity or controls."
+    },
+    {
+      "source_id": "raceroom.local-live-renault-laguna-super-touring-controls.0.9.8.20",
+      "title": "Live RACEROOM Renault Laguna Super Touring guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/86",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.renault-laguna-super-touring.20260907t224616025z-01e5f770 by Jason Kinslow; RACEROOM 0.9.8.20. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "porsche.christophorus.944-turbo-cup-1986-launch",
+      "title": "Christophorus Moments: The Beginning of One-Make Series Racing",
+      "publisher": "Porsche Newsroom / Christophorus",
+      "url": "https://newsroom.porsche.com/christophorus/en/2026/419/christophorus-moments.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Porsche's historical account of the start of its one-make series, including the 944 Turbo Cup launch and the later Carrera Cup replacement. Article paragraphs headed '1986: The first one-make series' and '1990: The Carrera Cup takes over', web lines 9–18: “the first one-make Porsche series was launched in 1986” Reviewed for /identity/year, /identity/class, /identity/real_world_identity_notes. Same article, 1990 transition paragraph: “In 1990, the Carrera Cup replaced the 944 Turbo Cup” Reviewed for /identity/year, /identity/real_world_identity_notes. Primary manufacturer history. It establishes the series period and class context, not the exact controls of every season-specific car."
+    },
+    {
+      "source_id": "classicbid.1986-porsche-944-turbo-cup-catalog",
+      "title": "Classicbid Auction Catalogue: Porsche 944 Turbo Cup Rennwagen, Lot 29",
+      "publisher": "Classicbid / Auktion & Markt AG",
+      "url": "https://www.classicbid.de/wp-content/uploads/2024/04/cb_Auktionskatalog_Auktion-20240427_web_klein-1.pdf",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction catalogue entry for an exact 1986 Porsche 944 Turbo Cup race car, including its delivery date, gear count, limited-slip differential, and original equipment. Printed PDF page 61, Lot 29, English text, catalogue lines 3044–3058: “Power transmission via 5 forward gears, 1 reverse gear and limited slip differential” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. Printed PDF page 61, Lot 29, English text: “manual transmission” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Printed PDF page 61, original 1986 equipment list: “Momo sports steering wheel” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Exact-year Turbo Cup evidence, but an auction catalogue is secondary. The steering-wheel wording identifies make/type only; it does not settle the required rim-topology fields."
+    },
+    {
+      "source_id": "manualzz.porsche-944-turbo-1988-workshop-manual",
+      "title": "Porsche 944 Turbo 1988 Workshop Manual",
+      "publisher": "Porsche, hosted by Manualzz",
+      "url": "https://manualzz.com/doc/56095850/porsche-944-turbo-1988-workshop-manual",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Workshop-manual copy for the 944 Turbo platform, covering the 016 R/S five-speed manual transmission, synchromesh components, and the hydraulic clutch pedal mechanism. Transmission general data, web lines 7185–7235 and 7323–7365: “5-speed manual transmission 016 R / S for 944 turbo” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Clutch Operation section, web lines 7979–7996: “clutch pedal” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Gear synchronizer sections, web lines 10996–11020 and 11101: “synchromesh ring” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip. The hosted manual is direct technical material for the 944 Turbo platform, not a Turbo Cup-specific build sheet. It supports a medium-confidence platform derivation and does not by itself settle every Cup-specific modification."
+    },
+    {
+      "source_id": "911motorsport.porsche-944-turbo-cup-factory-modifications",
+      "title": "Porsche 944 Turbo Cup",
+      "publisher": "911 Motorsport",
+      "url": "https://911motorsport.be/cars-for-sale/porsche-944-turbo-cup",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specialist description of factory Turbo Cup modifications, including the racing clutch, strengthened transmission gears, and close-ratio fifth gear. Factory modifications list, web lines 52–112: “heavy duty racing clutch” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Factory modifications list, web lines 57–112: “strengthened transmission gears” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/forward_gears. Specialist secondary evidence for Turbo Cup-specific race preparation. It supports the heavy-duty clutch and gear modifications but does not describe driver technique or an exact gate photograph."
+    },
+    {
+      "source_id": "manualsplus.911-porsche-world-944-turbo-cup-driving",
+      "title": "911 & Porsche World - June 2015",
+      "publisher": "911 & Porsche World, hosted by Manuals.plus",
+      "url": "https://manuals.plus/m/3624aba562cbafd20cc0ab5193e14ff1c39df0eea5cfde9189ad394922a115bf",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period magazine material about the 944 Turbo Cup and related 944 Turbo driving, including a five-speed gear lever, clutch pedal relationship, and shifts through the gate. Article text, web lines 967–968 and 1034: “gear lever” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Turbo Cup history and 944 Turbo specifications, web lines 990–995 and 1069–1070: “5-speed manual” Reviewed for /identity/model, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Useful period-driving corroboration. It does not provide a sufficiently exact, chassis-specific statement for running clutch, throttle-lift, automatic-cut, or blip fields, so those remain unknown unless derived from construction."
+    },
+    {
+      "source_id": "bigporsche.944-turbo-cup-specifications",
+      "title": "Porsche 944 Turbo Cup Specifications",
+      "publisher": "bigporsche.com",
+      "url": "https://www.bigporsche.com/944tcupspec.htm",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Published specification page for the 1988 Porsche 944 Turbo Cup, listing its year, production quantity, and five-speed manual transmission. 1988 Turbo Cup specification table, web lines 42–55: “1988 Porsche 944 Turbo Cup ... Transmission: 5 Speed Manual” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Secondary specification corroboration for a later Turbo Cup season. It is not used to collapse the submitted year range to 1988."
+    },
+    {
+      "source_id": "hagerty.1988-porsche-944-turbo-cup-canadian-rothmans",
+      "title": "1988 Porsche 944 Turbo Cup Canadian Rothmans Series",
+      "publisher": "Hagerty Marketplace",
+      "url": "https://www.hagerty.com/marketplace/auction/1988-porsche-944/6lUZnoN64walVnJMIgawP2",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Exact 1988 Canadian Rothmans-series Turbo Cup listing, including a manual transmission, a MOMO suede wheel, a close-ratio fifth gear, and a cockpit photo/video gallery reviewed for wheel evidence. Vehicle description and features, web lines 251–258 and 286–312: “close-ratio fifth” Reviewed for /identity/model, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Features list and gallery: “MOMO suede steering wheel” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The listing is a single 1988 regional example, not the complete series identity. Its gallery was examined for cockpit evidence, but it did not provide a decisive full-resolution basis for the required rim classifications; the real-car fields remain unknown."
+    },
+    {
+      "source_id": "as-driven.repository.porsche-944-turbo-cup-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Porsche 944 Turbo Cup or equivalent exact curated record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches Porsche 944 Turbo Cup” Reviewed for /identity/record_action, /identity/record_id. Repository context supports only the create-new decision; it is not evidence for real-world identity or controls."
+    },
+    {
+      "source_id": "raceroom.local-live-porsche-944-turbo-cup-controls.0.9.8.20",
+      "title": "Live RACEROOM Porsche 944 Turbo Cup guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/87",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.porsche-944-turbo-cup.20260907t225444681z-1cb384c2 by Jason Kinslow; RACEROOM 0.9.8.20. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "alpine.official.a110-cup-competition",
+      "title": "A110 Cup - Customer racing",
+      "publisher": "Alpine Cars",
+      "url": "https://www.alpine-cars.co.uk/competition/a110-cup.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Alpine competition page for the A110 Cup, listing the 3MO six-speed sequential transmission and integrated steering controls/display. Technical specifications, web lines 253–262: “6-speed sequential transmission / 3MO” Reviewed for /identity/model, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Technical specifications, web lines 253–262: “Steering wheel | Integrated controls and display” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display. Primary manufacturer evidence; it does not state clutch, cut, blip, or rim shape."
+    },
+    {
+      "source_id": "alpine.official.a110-cup-launch-2018",
+      "title": "Alpine A110 Cup: a genuine race car made for Europe's greatest racetracks",
+      "publisher": "Alpine Media",
+      "url": "https://media.alpinecars.com/alpine-a110-cup-a-genuine-race-car-made-for-europes-greatest-racetracks/?lang=eng",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Alpine launch material for the 2018 A110 Cup, including the 3MO six-speed sequential gearbox and steering-wheel-mounted controls. Technical specifications, transmission section: “3MO six-speed sequential” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Technical specifications, controls section: “Steering-wheel mounted” Reviewed for /authentic_controls/transmission/shift_actuation. Primary launch material. The page was used for exact model/year context and hardware, not for unreported driver technique."
+    },
+    {
+      "source_id": "alpine.official.a110-cup-brochure",
+      "title": "Alpine A110 Cup MY24 technical specifications",
+      "publisher": "Alpine Cars",
+      "url": "https://cdn.group.renault.com/alp/uk/pdf/competitions/Alpine-A110-Cup_MY24_EN.pdf.asset.pdf/e7f4834659.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official technical brochure for the continuing A110 Cup specification, corroborating six sequential ratios, paddle shift, and integrated controls/display. Technical specifications table: “Gearbox sequential 6 ratios from 3MO ... paddle-shift from XAP” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Technical specifications table: “integrated controls and display” Reviewed for /authentic_controls/steering/wheel_rim/integrated_display. Later official specification is used only to corroborate hardware continuity, not to turn the 2018 identity into a MY24 record."
+    },
+    {
+      "source_id": "as-driven.repository.alpine-a110-cup-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Alpine A110 Cup record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches Alpine A110 Cup” Reviewed for /identity/record_action, /identity/record_id. Repository context only; not evidence for real-car controls."
+    },
+    {
+      "source_id": "raceroom.local-live-alpine-a110-cup-controls.0.9.8.20",
+      "title": "Live RACEROOM Alpine A110 Cup guided-verification drive",
+      "publisher": "Local RACEROOM observation",
+      "url": "https://github.com/Milky28/as-driven/issues/88",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation raceroom.alpine-a110-cup.20260907t230234640z-54f14146 by Jason Kinslow; RACEROOM 0.9.8.20. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "jaguarheritage.xjr-9-cockpit-driving",
+      "title": "Car magazine: 1988 Jaguar XJR-9",
+      "publisher": "Jaguar Daimler Heritage Trust",
+      "url": "https://www.jaguarheritage.com/car-magazine-february-2023-jaguar-f-pace-svr-1988-and-xjr-9/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Jaguar Heritage account of driving the original XJR-9, including its cockpit, three pedals, round buttonless wheel, H-pattern gearshift, no synchronizers, and downshift blip. Original XJR-9 identification and history, web lines 76–88: “one won Le Mans” Reviewed for /identity/model, /identity/year, /identity/class. Cockpit description, web lines 88–94: “the instruments are analogue, there are three pedals and the steering wheel is big, round and buttonless” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/transmission/standing_start_clutch. Gearshift technique, web lines 93–94: “there's no synchro on the H-pattern gearshift ... give it a good blip on the way down” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/downshift/manual_blip. Gear count, web lines 93–94: “five forward gears” Reviewed for /authentic_controls/transmission/forward_gears. Primary heritage source with direct cockpit/driver observation. It does not state rim shift lights or open-top construction."
+    },
+    {
+      "source_id": "rmsothebys.xjr-9-dogleg-gate",
+      "title": "Jaguar XJR-9",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/media/33041/xjr-9_oct_140.pdf",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period XJR-9 article describing the clutch, gear lever, and dogleg five-speed H-pattern gate. Article cockpit description, PDF/page text: “the surprisingly progressive clutch” Reviewed for /authentic_controls/transmission/standing_start_clutch. Gear lever description, PDF/page text: “dogleg five-speed H-pattern gate” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Exact-model secondary source; direct support for the gate and physical clutch, not a source for electronics."
+    },
+    {
+      "source_id": "jaguarheritage.xjr-9-history",
+      "title": "1988 Jaguar XJR-9 Le Mans Winner",
+      "publisher": "Jaguar Daimler Heritage Trust",
+      "url": "https://www.jaguarheritage.com/car/1988-jaguar-xjr9-le-mans-winner/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Jaguar Heritage identity page for the 1988 Le Mans-winning XJR-9. Vehicle title and identity: “1988 Jaguar XJR-9 Le Mans Winner” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/class. Manufacturer identity corroboration."
+    },
+    {
+      "source_id": "as-driven.repository.jaguar-xjr-9-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Jaguar XJR-9 record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches Jaguar XJR-9” Reviewed for /identity/record_action, /identity/record_id. Repository context only."
+    },
+    {
+      "source_id": "pmr.local-live-xjr-9-controls.2.2.0",
+      "title": "Live PMR XJR-9 guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/89",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.xjr-9.20260907t231143075z-8b04db45 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "mazda.official.787b-specification",
+      "title": "MAZDA 787B - winning driver and team",
+      "publisher": "Mazda",
+      "url": "https://www.mazda.com/ja/experience/mspr/motorsports/lemans/mazda787b/",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Mazda official heritage page for the 1991 Le Mans-winning Mazda 787B, including its five-speed Mazda–Porsche transmission and triple-plate clutch. 787B introduction, web lines 49–51: “1991年の第59回ルマン24時間レース ... マツダ787B” Reviewed for /identity/model, /identity/year, /identity/class. Specifications, web lines 62–76: “マツダ－ポルシェ 5速+リバース” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Specifications, web lines 62–76: “ボーグ&ベック トリプルプレート” Reviewed for /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Primary manufacturer specification; Japanese wording is used for the exact transmission/clutch entries."
+    },
+    {
+      "source_id": "tomlong.mazda-787b-driving",
+      "title": "Driving the Iconic Mazda 787 Prototype",
+      "publisher": "Tom Long Racing",
+      "url": "https://www.tomlongracing.com/2018/08/28/driving-the-iconic-mazda-787-prototype/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Professional driver account of driving the Mazda 787 prototype, describing H-pattern operation and clutch use on every upshift and downshift. Gearbox and technique paragraphs: “It’s an H-pattern gear box, and you have to use the clutch on every upshift and downshift.” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Direct driver testimony, but from an historic 787 prototype account rather than a chassis-numbered museum inspection; used with medium confidence and alongside Mazda's exact 787B specification."
+    },
+    {
+      "source_id": "caranddriver.mazda-787b-transaxle",
+      "title": "Brake, Turn in, Blast off, Hold on",
+      "publisher": "Car and Driver",
+      "url": "https://www.caranddriver.com/features/a15137572/brake-turn-in-blast-off-hold-on/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Driving report on the Le Mans-winning Mazda 787B, including the five-speed fully synchronized transaxle. 787B driving report, transmission paragraph: “a five-speed, fully synchronized transaxle” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Exact 787B driving report; construction evidence is secondary but specific."
+    },
+    {
+      "source_id": "commons.mazda.787b-cockpit-detail",
+      "title": "Mazda 787B No. 55 cockpit detail at Mazda Museum",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Mazda_787B_No._55_(cockpit_detail)_at_Mazda_Museum.jpg",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: High-resolution photograph of the No. 55 1991 787B cockpit detail at the Mazda Museum, registered as a visual lead for wheel and shifter review. Original 3,840×2,159 image and caption: “Cockpit detail of a Mazda 787B (No. 55, 1991 24 Hours of Le Mans overall winner specification)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Exact-cockpit visual source registered, but the reviewed text/metadata does not itself settle the required rim classifications; unknowns are preserved rather than guessed."
+    },
+    {
+      "source_id": "as-driven.repository.mazda-787b-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Mazda 787B record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches Mazda 787B” Reviewed for /identity/record_action, /identity/record_id. Repository context only."
+    },
+    {
+      "source_id": "pmr.local-live-787b-controls.2.2.0",
+      "title": "Live PMR 787B guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/90",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.787b.20260907t231911220z-8e19886f by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "nissan.heritage.r89c",
+      "title": "Nissan Heritage Collection: Nissan R89C",
+      "publisher": "Nissan",
+      "url": "https://www.nissan-global.com/EN/HERITAGE_COLLECTION/Nissan_R89C.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Nissan official Heritage Collection page for the 1989 R89C, including its identity, Lola chassis change, VRH35 engine, and VGC five-speed transmission. Vehicle description, web lines 71–74: “Nissan R89C (1989 : R89C)” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. Official specification block in search result/page: “Transmission VGC (5-speed)” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Primary identity and transmission-count evidence. It does not state selector pattern, internal engagement, or driver technique."
+    },
+    {
+      "source_id": "motorsportmagazine.r89c-vgc",
+      "title": "The beast from the east: Nissan R89C",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/special-article/24hr-legends-2025/92/the-beast-from-the-east-nissan-r89c/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Exact-model technical feature on the 1989 R89C, identifying its Lola/Nissan Group C context and Hewland VGC five-speed/reverse transaxle. R89C program description, web lines 220 and 275: “its 1989 Nissan R89C was a spectacular new Group C challenger” Reviewed for /identity/model, /identity/year, /identity/class. Transmission technical panel, web lines 284–285: “Hewland VGC five-speed and reverse transaxle gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Exact-model technical corroboration. It does not state H-gate, clutch, or blip technique."
+    },
+    {
+      "source_id": "automobilista2.wiki.r89c-selector",
+      "title": "Nissan R89C",
+      "publisher": "Automobilista 2 Wiki",
+      "url": "https://automobilista2.wiki.gg/wiki/Nissan_R89C",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Exact-model technical-reference entry listing the R89C's shift type as dogleg H-shifter. Used only as lower-confidence selector evidence, not for simulator behavior or gearbox construction. Specifications table: “Shift Type | Dogleg H-shifter” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Community reference; the proposal keeps gearbox_type and running technique unknown because this source is not an authoritative R89C technical document."
+    },
+    {
+      "source_id": "autosportnl.r89c-cockpit-driving",
+      "title": "Retro: Nissan R89C in 1989 at Zandvoort",
+      "publisher": "Autosport.nl",
+      "url": "https://autosport.nl/retro/klasse/nieuws/23592/retro-nissan-r89c-in-1989-al-op-zandvoort-te-gast",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period-retro material showing the R89C cockpit context and describing the car being driven through multiple numbered gears; it does not settle the gate or clutch technique. Driver/cockpit section and gear sequence: “in the cockpit of the Nissan R89C” Reviewed for /identity/model, /authentic_controls/transmission/shift_actuation. Useful exact-car contextual source; no unsupported cockpit hardware conclusions are taken from it."
+    },
+    {
+      "source_id": "as-driven.repository.nissan-r89c-record-scan",
+      "title": "As Driven curated car-record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/tree/main/data/v1/cars",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan for an existing Nissan R89C record. data/v1/cars and data/v1/index.json identity scan: “No existing curated record matches Nissan R89C” Reviewed for /identity/record_action, /identity/record_id. Repository context only."
+    },
+    {
+      "source_id": "pmr.local-live-r89c-controls.2.2.0",
+      "title": "Live PMR R89C guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/91",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-07",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.r89c.20260907t232820534z-ccaa9bc4 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

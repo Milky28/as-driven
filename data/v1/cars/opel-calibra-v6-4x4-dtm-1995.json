@@ -1,0 +1,323 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "opel-calibra-v6-4x4-dtm-1995",
+  "identity": {
+    "display_name": "Opel Calibra V6 4x4 DTM 1995",
+    "manufacturer": "Opel",
+    "model": "Calibra V6 4x4 DTM",
+    "year": {
+      "from": 1995,
+      "to": 1995,
+      "label": "1995 Opel Calibra V6 4x4 DTM Phase 4"
+    },
+    "class": "Class 1 DTM touring car",
+    "real_world_identity_notes": "The exact RaceRoom content is the 1995 Opel Calibra V6 4x4 DTM entry. Independent period-specific material identifies the 1995 Phase 4 Calibra as a new Class 1 DTM car with a 2.5-litre V6, a six-speed sequential gearbox, and a Williams-developed semi-automatic paddle-shift system. The driver had no clutch pedal to operate: the F1-derived hydraulic system automatically controlled and slipped the clutch for launch, while the driver selected gears through the paddle interface. The 1995 identity is kept separate from the later 1996 ITC championship car even though the same Calibra V6 4x4 family continued into 1996. This correction establishes that driver clutch operation was not required; throttle-lift, rev-matching, cut/blip technique, and exact wheel-rim topology remain separate evidence questions."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "not-required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: semi automatic; shift actuation: sequential paddles; shift pattern: sequential; transmission upshift clutch: not required; transmission downshift clutch: not required; standing-start clutch use: not required.",
+      "The reviewed real-car sources do not establish cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "RaceRoom Racing Experience 0.9.8.20 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "raceroom",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Opel Calibra V6 DTM"
+        },
+        {
+          "kind": "internal-id",
+          "value": "12839,Opel Calibra V6 DTM"
+        },
+        {
+          "kind": "class-id",
+          "value": "DTM 1995"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in RACEROOM 0.9.8.20 via guided verification observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation raceroom.opel-calibra-v6-dtm.20260907t223643462z-9a132dc1 directly recorded this behavior or cockpit value in the simulator version 0.9.8.20; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+          ]
+        }
+      ],
+      "verified_game_version": "0.9.8.20",
+      "verified_at": "2026-09-07",
+      "source_refs": [
+        "raceroom.official.opel-calibra-v6-dtm-1995",
+        "stellantis-media.opel-calibra-v6-1996-technology",
+        "lightningmodels.opel-calibra-phase-4-1995",
+        "racecarsdirect.opel-calibra-v6-4x4-cockpit-1995",
+        "as-driven.repository.opel-calibra-v6-4x4-dtm-1995-record-scan",
+        "as-driven.maintainer-correction.issue-85.no-clutch-pedal",
+        "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "RaceRoom's official catalogue names the exact content Opel Calibra V6 DTM and dates it to 1995. A period-specific Phase 4 account identifies the 1995 car and its six-speed sequential semi-automatic paddle-shift system; Opel's manufacturer account describes the Williams-developed hydraulic system and clutch engagement in the same Calibra V6 race-car family; the maintainer correction for this exact car supplies the no-pedal and automatic-launch-slip detail. An exact-car listing independently describes a 1995-built Calibra V6 4x4 ITC/DTM car. The checked-out repository has no existing record for this identity, so the proposal creates a new record."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "raceroom.official.opel-calibra-v6-dtm-1995",
+          "stellantis-media.opel-calibra-v6-1996-technology",
+          "lightningmodels.opel-calibra-phase-4-1995",
+          "racecarsdirect.opel-calibra-v6-4x4-cockpit-1995",
+          "as-driven.repository.opel-calibra-v6-4x4-dtm-1995-record-scan",
+          "as-driven.maintainer-correction.issue-85.no-clutch-pedal",
+          "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+        ],
+        "confidence": "high",
+        "basis": "RaceRoom's official catalogue names the exact content Opel Calibra V6 DTM and dates it to 1995. A period-specific Phase 4 account identifies the 1995 car and its six-speed sequential semi-automatic paddle-shift system; Opel's manufacturer account describes the Williams-developed hydraulic system and clutch engagement in the same Calibra V6 race-car family; the maintainer correction for this exact car supplies the no-pedal and automatic-launch-slip detail. An exact-car listing independently describes a 1995-built Calibra V6 4x4 ITC/DTM car. The checked-out repository has no existing record for this identity, so the proposal creates a new record."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "raceroom.official.opel-calibra-v6-dtm-1995",
+          "stellantis-media.opel-calibra-v6-1996-technology",
+          "lightningmodels.opel-calibra-phase-4-1995",
+          "racecarsdirect.opel-calibra-v6-4x4-cockpit-1995",
+          "as-driven.repository.opel-calibra-v6-4x4-dtm-1995-record-scan",
+          "as-driven.maintainer-correction.issue-85.no-clutch-pedal",
+          "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+        ],
+        "confidence": "high",
+        "basis": "The exact-year Phase 4 account states that the 1995 car used a six-speed sequential gearbox; the manufacturer retrospective independently describes the Calibra V6 system as six-speed. The 1995 Phase 4 source explicitly describes the sequential six-speed gearbox as supplemented by a semi-automatic system; the manufacturer source corroborates the hydraulic semi-automatic mechanism in the continuing Calibra V6 race-car family. The exact-year source says touring-car drivers first shifted the 1995 Phase 4 car with a steering-wheel paddle; the manufacturer source independently describes paddles behind the steering wheel or a button. The record uses the paddle interface as the physical control answer. Both sources describe the six forward gears as sequentially arranged or a sequential gearbox. The driver did not operate a clutch pedal. The maintainer's exact-car correction states that the F1-derived system automatically controlled the clutch, and Opel's manufacturer account corroborates hydraulic clutch engagement in the Calibra V6 semi-automatic system. Therefore no driver clutch input is required for an upshift. The driver did not operate a clutch pedal. The hydraulic semi-automatic system controlled clutch engagement during gear changes, so a driver clutch action is not required for a downshift either. This does not by itself establish manual or automatic throttle blipping. The exact-car correction states that the system automatically slipped the clutch during launch and that the driver did not operate a clutch at all. The driver therefore needs no clutch-pedal action at a standing start; launch clutch slip is system-controlled. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "raceroom.local-live-opel-calibra-v6-dtm-controls.0.9.8.20"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch"
+        ],
+        "source_refs": [
+          "raceroom.official.opel-calibra-v6-dtm-1995",
+          "stellantis-media.opel-calibra-v6-1996-technology",
+          "lightningmodels.opel-calibra-phase-4-1995",
+          "racecarsdirect.opel-calibra-v6-4x4-cockpit-1995",
+          "as-driven.repository.opel-calibra-v6-4x4-dtm-1995-record-scan",
+          "as-driven.maintainer-correction.issue-85.no-clutch-pedal"
+        ],
+        "confidence": "high",
+        "basis": "The exact-year Phase 4 account states that the 1995 car used a six-speed sequential gearbox; the manufacturer retrospective independently describes the Calibra V6 system as six-speed. The 1995 Phase 4 source explicitly describes the sequential six-speed gearbox as supplemented by a semi-automatic system; the manufacturer source corroborates the hydraulic semi-automatic mechanism in the continuing Calibra V6 race-car family. The exact-year source says touring-car drivers first shifted the 1995 Phase 4 car with a steering-wheel paddle; the manufacturer source independently describes paddles behind the steering wheel or a button. The record uses the paddle interface as the physical control answer. Both sources describe the six forward gears as sequentially arranged or a sequential gearbox. The driver did not operate a clutch pedal. The maintainer's exact-car correction states that the F1-derived system automatically controlled the clutch, and Opel's manufacturer account corroborates hydraulic clutch engagement in the Calibra V6 semi-automatic system. Therefore no driver clutch input is required for an upshift. The driver did not operate a clutch pedal. The hydraulic semi-automatic system controlled clutch engagement during gear changes, so a driver clutch action is not required for a downshift either. This does not by itself establish manual or automatic throttle blipping. The exact-car correction states that the system automatically slipped the clutch during launch and that the driver did not operate a clutch at all. The driver therefore needs no clutch-pedal action at a standing start; launch clutch slip is system-controlled. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-08"
+}

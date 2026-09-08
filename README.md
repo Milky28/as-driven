@@ -118,16 +118,16 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.66 contains 291 reviewed car records.
+Dataset 0.5.73 contains 298 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |
 | Automobilista 2 | 261 | not applicable |
-| Project Motor Racing | 26 | 13 |
+| Project Motor Racing | 29 | 13 |
 | Assetto Corsa | 21 | 14 |
 | Assetto Corsa Competizione | 18 | 18 |
+| RaceRoom Racing Experience | 10 | 3 |
 | Assetto Corsa EVO | 7 | 3 |
-| RaceRoom Racing Experience | 6 | 3 |
 | rFactor 2 | 5 | 0 |
 | GTR 2 | 2 | 2 |
 <!-- release-facts:end -->
