@@ -42,14 +42,15 @@
         "integrated_display": "no",
         "shift_lights": "no",
         "open_top": "yes",
-        "source_label": "live-cockpit-observation",
-        "notes": "U shaped. open on top with buttons. LCD display on dash"
+        "source_label": "goodwood-2007-cockpit-photo",
+        "notes": "The full-resolution Goodwood 2007 photograph of the 1998 Le Mans no.29 car shows a conventional D-shaped rim open across the top, with no readout or shift-light elements on the rim itself. The dash-mounted LCD is not rim equipment."
       }
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; wheel-rim shape: d shaped; integrated wheel display: no; conventional rim open-top section: yes; wheel shift lights: no.",
       "The reviewed real-car sources do not establish launch technique, running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
-      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      "AMS2 1.6.9.91 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
+      "Shift actuation is disputed and deliberately left as reviewed. The cited Racers technical review has the 1998 car with a manual shift lever only, revised to paddles later; two secondary retrospectives instead describe 1999 as the year a manual lever was added to back up the sequential change, which implies the opposite for 1998. No manufacturer or homologation source settles it, and no period 1998 in-car source has been found. See dailysportscar.ts020-gt-one.2022."
     ]
   },
   "simulators": [
@@ -74,41 +75,18 @@
         "auto_blip": "no",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "gt-formula",
+          "normalized": "d-shaped",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "not-applicable",
-          "source_label": "live-cockpit-observation"
+          "open_top": "yes",
+          "source_label": "live-cockpit-observation-corrected"
         },
         "notes": [
-          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab by Guy Moulton."
+          "Observed live in AMS2 1.6.9.91 via guided verification observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab by Guy Moulton.",
+          "Cockpit rim corrected on maintainer review of issue #92: the submitted drive selected the gt-formula control-panel category, and the installed AMS2 content shows the same open-top D-shape the real car does. Everything else the drive recorded stands."
         ]
       },
       "overrides": [
-        {
-          "path": "/authentic_controls/steering/wheel_rim/open_top",
-          "value": "not-applicable",
-          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
-          ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "gt-formula",
-          "condition": "The guided observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab directly recorded this behavior or cockpit value in the simulator version 1.6.9.91; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
-          ]
-        },
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
           "value": "no",
@@ -202,7 +180,8 @@
         "supercar-nostalgia-toyota-gt-one-ts020",
         "thedrive-toyota-gt-one-homologated-1998",
         "wikimedia-goodwood-2007-toyota-ts020-interior",
-        "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"
+        "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91",
+        "as-driven.maintainer-correction.issue-92.ams2-cockpit-rim"
       ],
       "confidence": {
         "level": "high",
@@ -393,8 +372,7 @@
         "paths": [
           "/authentic_controls/transmission/upshift",
           "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/transmission/standing_start_clutch"
         ],
         "source_refs": [
           "ams2.local-live-toyota-gt-one-1998-controls.1.6.9.91"

@@ -118,7 +118,7 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.5.77 contains 300 reviewed car records.
+Dataset 0.5.78 contains 300 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |

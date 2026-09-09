@@ -11851,6 +11851,19 @@
       "published_or_updated_at": "2019-09-06"
     },
     {
+      "source_id": "dailysportscar.ts020-gt-one.2022",
+      "title": "The Toyota TS020 “GT-One”",
+      "publisher": "DailySportsCar",
+      "url": "https://www.dailysportscar.com/2022/06/06/the-toyota-ts020-gt-one.html",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": "2022-06-06",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "establishes": "nothing",
+      "notes": "Exact scope: retrospective covering both GT-One seasons. It gives the 1998 car “an XTRAC/Toyota 6 speed, sequential transmission” without naming a cockpit control, and says that for 1999 “the sequential gearchange was backed up with a manual gear lever system”. Supercar Nostalgia describes the same 1999 change as the gearbox being “equipped with a manual override in case of failure”. Both read as a manual lever being added in 1999, which is the opposite order to the Racers technical review already cited here, where the 1998 car “had a manual shift lever only in its cockpit” before being revised to a paddle shift system. Registered to record that conflict. It establishes nothing on its own: neither account is a manufacturer or homologation source, and neither states the 1998 cockpit control directly, so /authentic_controls/transmission/shift_actuation is left as the Racers review has it. Note for future research that search engines return a “sequential 6-speed semi-automatic transmission also features a mechanical shift lever as requested by regulations” line attributed to 1998; it is a Gran Turismo in-game description of the 1999 car, and the wiki carrying it annotates that passage ‘Miswritten as 1998 in-game’. It is game text and is not evidence about either real car."
+    },
+    {
       "source_id": "wikimedia-goodwood-2007-toyota-ts020-interior",
       "title": "File:Goodwood2007-024 Toyota TS020 GT-One (1998).jpg",
       "publisher": "Wikimedia Commons",
@@ -11873,6 +11886,16 @@
       "retrieved_at": "2026-09-08",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation ams2.toyota-gt-one-1998.20260908t085807747z-2f0677ab by Guy Moulton; AMS2 1.6.9.91. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "as-driven.maintainer-correction.issue-92.ams2-cockpit-rim",
+      "title": "Maintainer correction supplied during review of issue #92",
+      "publisher": "As Driven maintainer review",
+      "url": "https://github.com/Milky28/as-driven/issues/92",
+      "source_type": "other",
+      "retrieved_at": "2026-09-08",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: maintainer correction to the AMS2 cockpit reading for the exact 1998 Toyota GT-One identity. Review request, 2026-09-08: “There are several photos showing a d-shape open top wheel. I believe the submitted AMS2 drive mistakenly selected gt/formula rim when the actual ams2 mod shows a d-shape open top.” Reviewed for /simulators/0/behavior/wheel_rim_type. This corrects what the submitted guided drive recorded about the simulator; it is maintainer inspection of the installed AMS2 content, not an independent publication and not a repeat guided drive. The real-car baseline is unchanged and rests on the exact Goodwood cockpit photograph."
     },
     {
       "source_id": "official-24h-lemans-toyota-gt-one-history-95",

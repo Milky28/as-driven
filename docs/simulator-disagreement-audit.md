@@ -53,6 +53,26 @@ open findings rather than weak verdicts; the two exact cockpit sources have sinc
 closed two of those gaps. Simulator agreement or a previously curated answer is
 not enough to call one implementation authentic.
 
+## Dataset 0.5.78 review snapshot
+
+Not every disagreement is the real car's to answer. The Toyota GT-One's rim
+entered the audit as an AMS2 departure from a D-shaped open-top baseline that an
+exact Goodwood cockpit photograph of the 1998 Le Mans no.29 car already
+establishes, and that PMR reads the same way. On review the simulator was not
+departing from anything: the submitted drive had selected the `gt-formula`
+control-panel category, and the installed AMS2 content shows the same open-top
+D-shape. The observation was corrected against a registered maintainer
+correction, the two overrides it had produced were removed, and the finding is
+gone rather than adjudicated.
+
+Two things made it worth checking before retracting a baseline. The rim
+vocabulary asks whether a rim is a control-panel rim or a conventional one, a
+question this file already warns was never put to reviewers when most records
+were curated, so an open-top wheel with buttons is exactly the shape a drive can
+mis-file. And the record's own real-car claim cited the photograph while a second
+drive-only claim covered the same rim; that duplicate is now removed, so the rim
+cites the photograph alone.
+
 The audit uses three statuses:
 
 - `supported-departure`: the exact authentic field has high-confidence

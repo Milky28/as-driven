@@ -215,14 +215,13 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
                 "porsche-911-gt3-cup-992--transmission-standing-start-clutch",
                 "porsche-962c--transmission-upshift-throttle-lift",
                 "sauber-mercedes-c9--transmission-upshift-throttle-lift",
-                "toyota-gt-one-1998--steering-wheel-rim-shape",
             },
             provisional,
         )
         self.assertEqual(
             {
                 "authentic-baseline-open": 21,
-                "provisional-departure": 11,
+                "provisional-departure": 10,
                 "supported-departure": 14,
             },
             self.checked_in["summary"]["by_status"],
