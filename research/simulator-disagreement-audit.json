@@ -2790,12 +2790,12 @@
       "authentic_baseline": {
         "value": "required",
         "display_value": "Required",
-        "confidence": "verified",
+        "confidence": "high",
         "source_refs": [
-          "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
+          "tradeuniquecars.1989-sauber-mercedes-c9-review"
         ],
         "primary_source_refs": [],
-        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 22d20667. The guided drive observed the gate in the cockpit and reported an ordinary dogleg, with first down and to the left of the racing plane."
+        "basis": "The direct review of an exact 1989 C9 states that \u201cThe C9 can\u2019t be flatshifted, but clutchless upchanges are routine, although the clutch must be used for downshifting.\u201d A car that cannot be flatshifted is one whose upchange needs the throttle released, so the lift is the driver\u2019s. This is the procedure the review describes rather than an inference from construction, and it is a retrospective track review rather than a period team instruction, so it is not manufacturer or homologation material."
       },
       "simulator_views": [
         {

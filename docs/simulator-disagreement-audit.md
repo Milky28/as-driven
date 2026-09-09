@@ -73,6 +73,22 @@ mis-file. And the record's own real-car claim cited the photograph while a secon
 drive-only claim covered the same rim; that duplicate is now removed, so the rim
 cites the photograph alone.
 
+A finding can also be wrong about its evidence while being right about its
+status. The Sauber C9's upshift lift was recorded from the AMS2 drive, though
+the direct review of an exact 1989 car already says the C9 "can't be
+flatshifted, but clutchless upchanges are routine" and the source registry
+already declared that review reviewed for the lift. Only a claim connecting the
+two was missing. It now cites the review instead of the drive, and stays a
+provisional departure, because a retrospective track review is not manufacturer
+or homologation material.
+
+The claim cites that review alone rather than the seven sources beside it. Some
+of those are manufacturer material, and including them would have moved the
+finding to a supported departure on evidence that never mentioned the lift. The
+C9's downshift blip is cited more widely for the opposite reason: it is derived
+from the established five-speed dog box, so the sources establishing the
+construction do carry it.
+
 The audit uses three statuses:
 
 - `supported-departure`: the exact authentic field has high-confidence

@@ -292,8 +292,7 @@
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/transmission/upshift/automatic_blip",
-          "/authentic_controls/transmission/upshift/manual_blip",
-          "/authentic_controls/transmission/upshift/throttle_lift"
+          "/authentic_controls/transmission/upshift/manual_blip"
         ],
         "source_refs": [
           "ams2.local-live-sauber-mercedes-c9-controls.1.6.9.91"
@@ -411,6 +410,16 @@
         ],
         "confidence": "high",
         "basis": "Derived from the mechanism this record establishes, not from a drive: the exact-car review calls it a five-speed dog box, and a dog box cannot match the shaft speeds for the driver, so the downshift blip is the driver's. The same sources support the construction this rests on."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "tradeuniquecars.1989-sauber-mercedes-c9-review"
+        ],
+        "confidence": "high",
+        "basis": "The direct review of an exact 1989 C9 states that “The C9 can’t be flatshifted, but clutchless upchanges are routine, although the clutch must be used for downshifting.” A car that cannot be flatshifted is one whose upchange needs the throttle released, so the lift is the driver’s. This is the procedure the review describes rather than an inference from construction, and it is a retrospective track review rather than a period team instruction, so it is not manufacturer or homologation material."
       }
     ]
   },
