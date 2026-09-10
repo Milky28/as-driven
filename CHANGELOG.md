@@ -9,6 +9,27 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.22.0 - 2026-09-10
+
+- Say how a car of its kind was usually driven where the real car's own
+  technique was never established. It is offered as convention, never as an
+  answer about that car: the wording says the real value is not established
+  before it says what such cars usually did, and it can neither change nor
+  replace a value the record establishes. One reviewed rule covers H-pattern
+  cars whose gearbox construction is unknown, reaching 84 open fields across 42
+  reviewed cars.
+- Show that guidance on the pre-flight card and in the public catalog. The card
+  shares its note panel with it, in the accent colour, so an overlay already
+  positioned does not move; the catalog carries the full reasoning behind each
+  line.
+- Establish the gearbox architecture of the McLaren F1 GTR Longtail, Cadillac
+  DPi-V.R and Chevrolet Camaro GT4.R from the real car rather than a drive.
+- Cite the period road test, exact-chassis interview and manufacturer
+  specification that establish the Aston Martin DBR9's clutch and cockpit rim,
+  and the Daimler-credited photographs that establish the Sauber C9's rim. No
+  value changes; the evidence beneath them does.
+- Ship dataset 0.6.0 with 300 reviewed cars and the convention rule registry.
+
 ## 0.21.6 - 2026-09-08
 
 - Add nine reviewed cars: the Jaguar XJR-9, Mazda 787B, Toyota GT-One, Nissan

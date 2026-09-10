@@ -292,7 +292,11 @@ The README shows five captures under `docs/images/`: `preflight-card.png`,
 `guided-drive.jpg`. All are from AMS2 1.6.9.91. `settings-garage.png`,
 `settings-browser.png`, and `guided-drive.jpg` were retaken for plugin 0.21.3 on
 dataset 0.5.49; the two pre-flight cards are still the plugin 0.21.0 captures on
-dataset 0.5.34, which is fine because the card's layout has not changed. Say
+dataset 0.5.34. That is still fine, though for a narrower reason since 0.22.0:
+the card grew a state that draws convention guidance in the note panel, and the
+Audi V8 quattro DTM in both captures has an established synchromesh gearbox, so
+no rule reaches it and the card draws exactly as it did. Retake them against a
+car that carries guidance if you want that state on show. Say
 which build a capture came from when you replace one, because the set drifts
 apart otherwise.
 

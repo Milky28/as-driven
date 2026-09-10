@@ -1,4 +1,4 @@
-# As Driven {{PLUGIN_VERSION}}
+﻿# As Driven {{PLUGIN_VERSION}}
 
 As Driven tells a sim racer which physical controls to fit and how to shift
 authentically. This release includes SimHub client {{PLUGIN_VERSION}} and a
@@ -7,22 +7,26 @@ car records.
 
 ## What you'll notice
 
-- **Nine more reviewed cars.** The Jaguar XJR-9, Mazda 787B, Toyota GT-One,
-  Nissan R89C, Opel Calibra V6 DTM, Renault Laguna Super Touring, Porsche 944
-  Turbo Cup, Alpine A110 Cup and Panoz Esperante GTR-1 bring the independently
-  usable controls database to {{RECORD_COUNT}} reviewed records.
-- **Four cars now say a control is not established.** The BMW M3 E46 GTR and
-  TVR Tuscan T400R GT2 wheel rims, the Corvette C5-R downshift blip and the
-  Sauber C9 gate each rested on a single guided drive that a later simulator
-  read differently. A drive tells you what a simulator does, not what the real
-  car did, so those answers are withdrawn until real-car evidence settles them.
-  Each simulator's own reading is still shown.
-- **A corrected Toyota GT-One cockpit rim.** A submitted drive had recorded the
-  Automobilista 2 wheel as a control-panel rim; it is the open-top D-shape that
-  the real car and Project Motor Racing both show.
-- **Clearer evidence behind every answer.** Real-car facts and simulator
-  observations no longer share a claim, so a confidence earned by watching a
-  simulator cannot stand behind a statement about the real car.
+- **Guidance where the real car was never researched.** Gearbox architecture is
+  published everywhere; launch and shift technique almost nowhere. Rather than
+  answer "not established" and stop, As Driven can now say how cars of that
+  mechanism were usually driven - marked as convention, never as a finding
+  about your car. The first reviewed rule covers H-pattern cars whose gearbox
+  construction is unknown, and reaches 84 open fields across 42 cars.
+- **It stays apart from evidence.** The line says the real value is not
+  established before it says what such cars usually did, it is drawn in its own
+  colour on the pre-flight card and under its own heading in the catalog, and
+  it can neither change nor replace a value a record establishes. A car that
+  answers for itself is never spoken for. Your overlay does not move: the card
+  shares the note panel it already had.
+- **Three more cars sourced from the real car.** The gearbox architecture of
+  the McLaren F1 GTR Longtail, Cadillac DPi-V.R and Chevrolet Camaro GT4.R now
+  rests on published accounts of those cars rather than on one guided drive.
+- **Better evidence behind the DBR9 and the C9.** A period road test, an
+  exact-chassis interview and Aston Martin's own specification stand behind the
+  DBR9's clutch and cockpit rim; Daimler-credited photographs stand behind the
+  C9's rim. The answers do not change - what holds them up does. The database
+  now carries {{RECORD_COUNT}} reviewed car records.
 
 ## Install
 

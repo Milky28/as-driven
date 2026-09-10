@@ -2,8 +2,9 @@
 
 ## The problem this solves
 
-279 technique fields across the curated records are `unknown`, and most will
-stay that way. A three-car research pilot found the reason: gearbox
+529 technique fields across the curated records are `unknown` - counting the
+eleven per record that describe launch and shift technique - and most will stay
+that way. A three-car research pilot found the reason: gearbox
 architecture is published everywhere, while launch technique, running-shift
 technique and cockpit detail are published almost nowhere. Every source named
 the gearbox, its gear count and its actuation; not one named whether the driver
@@ -37,8 +38,8 @@ scope, its basis and its strength, and is applied wherever its antecedent is
 established and the target field is unknown. Nothing is written into a car
 record; the client and the public catalog apply matching rules when they render.
 
-That is deliberate. 240 of the 279 open fields sit on an established mechanism,
-so per-car text would be 240 things to review, each able to go stale on its own
+That is deliberate. most open fields sit on an established mechanism,
+so per-car text would be hundreds of things to review, each able to go stale on its own
 and each looking exactly like an authentic value once written into a record. A
 rule is reviewed once, corrected everywhere at once, and cannot be quietly wrong
 for a single car without being wrong for the class.

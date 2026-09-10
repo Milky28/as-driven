@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$OutputDirectory = "",
     [switch]$SkipChecks
 )
@@ -52,7 +52,7 @@ try {
     Copy-Item -LiteralPath (Join-Path $repositoryRoot "data") -Destination $packageRoot -Recurse
     Copy-Item -LiteralPath (Join-Path $repositoryRoot "schema") -Destination $packageRoot -Recurse
     New-Item -ItemType Directory -Path (Join-Path $packageRoot "docs") | Out-Null
-    foreach ($document in @("data-model.md", "evidence-boundaries.md")) {
+    foreach ($document in @("data-model.md", "evidence-boundaries.md", "convention-guidance.md")) {
         Copy-Item -LiteralPath (Join-Path $repositoryRoot "docs\$document") `
             -Destination (Join-Path $packageRoot "docs")
     }
