@@ -140,7 +140,7 @@ Matching is exact and case-sensitive. A car the database has not reviewed is
 reported as unmatched rather than given a guess, because a confident wrong
 answer about a clutch is worse than no answer.
 
-Tested against SimHub 9.11.22 and Automobilista 2 1.6.9.91 on Windows. Newer
+Tested against SimHub 9.12.6 and Automobilista 2 1.6.9.91 on Windows. Newer
 versions generally work; they have not been verified.
 
 ## Why the data is trustworthy

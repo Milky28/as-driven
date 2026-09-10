@@ -119,7 +119,7 @@ try {
         core_version = $coreVersion
         bundled_dataset_version = $datasetVersion
         bundled_record_count = $recordCount
-        tested_simhub_version = "9.11.22"
+        tested_simhub_version = "9.12.6"
         tested_simulator = "Automobilista 2"
         tested_simulator_version = "1.6.9.91"
         generated_at = [DateTime]::UtcNow.ToString("o")
@@ -166,7 +166,7 @@ try {
         "{{PLUGIN_PACKAGE}}", [System.IO.Path]::GetFileName($zipPath))
     $releaseNotes = $releaseNotes.Replace(
         "{{DATABASE_PACKAGE}}", "as-driven-db-$datasetVersion.zip")
-    $releaseNotes = $releaseNotes.Replace("{{SIMHUB_VERSION}}", "9.11.22")
+    $releaseNotes = $releaseNotes.Replace("{{SIMHUB_VERSION}}", "9.12.6")
     $releaseNotes = $releaseNotes.Replace("{{AMS2_VERSION}}", "1.6.9.91")
     $releaseNotes | Set-Content -LiteralPath $releaseNotesPath -Encoding UTF8
 
@@ -178,7 +178,7 @@ try {
         plugin_sha256 = $zipHash
         database_package = "as-driven-db-$datasetVersion.zip"
         database_sha256 = Get-ReleaseSha256 (Join-Path $outputRoot "as-driven-db-$datasetVersion.zip")
-        tested_simhub_version = "9.11.22"
+        tested_simhub_version = "9.12.6"
         tested_ams2_version = "1.6.9.91"
         release_notes = $releaseNotesName
         generated_at = [DateTime]::UtcNow.ToString("o")

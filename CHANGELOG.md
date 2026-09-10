@@ -9,6 +9,24 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.21.6 - 2026-09-08
+
+- Add nine reviewed cars: the Jaguar XJR-9, Mazda 787B, Toyota GT-One, Nissan
+  R89C, Opel Calibra V6 DTM, Renault Laguna Super Touring, Porsche 944 Turbo
+  Cup, Alpine A110 Cup, and Panoz Esperante GTR-1.
+- Stop four cars answering for a real car nobody researched. The BMW M3 E46 GTR
+  and TVR Tuscan T400R GT2 wheel rims, the Chevrolet Corvette C5-R downshift
+  blip, and the Sauber Mercedes C9 gate now read as not established, because
+  each rested on a single guided drive that a later simulator contradicted.
+  Every simulator's own reading is kept and shown against it.
+- Correct the Toyota GT-One cockpit rim in Automobilista 2, which a submitted
+  drive had filed as a control-panel rim rather than the open-top D-shape the
+  car and Project Motor Racing both show.
+- Separate real-car evidence from simulator observation throughout the
+  provenance, so a confidence earned by watching a simulator no longer stands
+  behind a claim about the real car.
+- Ship dataset 0.5.78 with 300 reviewed cars.
+
 ## 0.21.5 - 2026-09-07
 
 - Require the exact game build for a guided contribution when telemetry cannot

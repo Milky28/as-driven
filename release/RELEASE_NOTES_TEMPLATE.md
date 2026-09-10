@@ -7,15 +7,22 @@ car records.
 
 ## What you'll notice
 
-- **More reviewed cars and PMR coverage.** Six newly curated cars and fifteen
-  Project Motor Racing observations expand the independently usable controls
-  database to 291 reviewed records.
-- **Versioned guided observations.** Contributions now require the exact game
-  build when telemetry cannot provide one, keeping simulator behavior
-  reproducible.
-- **Safer release finalization.** A release can retain the checked-in AMS2
-  coverage snapshot when optional local diagnostics are unavailable; coverage
-  never silently shrinks.
+- **Nine more reviewed cars.** The Jaguar XJR-9, Mazda 787B, Toyota GT-One,
+  Nissan R89C, Opel Calibra V6 DTM, Renault Laguna Super Touring, Porsche 944
+  Turbo Cup, Alpine A110 Cup and Panoz Esperante GTR-1 bring the independently
+  usable controls database to {{RECORD_COUNT}} reviewed records.
+- **Four cars now say a control is not established.** The BMW M3 E46 GTR and
+  TVR Tuscan T400R GT2 wheel rims, the Corvette C5-R downshift blip and the
+  Sauber C9 gate each rested on a single guided drive that a later simulator
+  read differently. A drive tells you what a simulator does, not what the real
+  car did, so those answers are withdrawn until real-car evidence settles them.
+  Each simulator's own reading is still shown.
+- **A corrected Toyota GT-One cockpit rim.** A submitted drive had recorded the
+  Automobilista 2 wheel as a control-panel rim; it is the open-top D-shape that
+  the real car and Project Motor Racing both show.
+- **Clearer evidence behind every answer.** Real-car facts and simulator
+  observations no longer share a claim, so a confidence earned by watching a
+  simulator cannot stand behind a statement about the real car.
 
 ## Install
 

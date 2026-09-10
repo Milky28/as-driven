@@ -19,6 +19,15 @@ and the site, validates the dataset, and runs Python tests. It does not rewrite
 agent instructions or research prose. Current counts belong in generated
 outputs; historical documentation snapshots need no version bump.
 
+## Write the release notes
+
+`release/RELEASE_NOTES_TEMPLATE.md` carries the "What you'll notice" bullets by
+hand. The builder substitutes versions, the record count and the tested pair, but
+never the body, so bullets left from the previous release ship describing it.
+Rewrite them for the release being prepared, from the new `CHANGELOG.md` entry
+and in user-facing terms, and use `{{RECORD_COUNT}}` rather than typing a count.
+Check the generated `dist/release/release-notes-*.md` before publishing.
+
 ## Build release candidates
 
 Run from the repository root on the Windows release machine with the supported
@@ -51,7 +60,7 @@ in public CI.
 2. Check that plugin and core DLL versions match the release version.
 3. Extract the SimHub ZIP into a new directory and double-click
    `Install As Driven.cmd` with SimHub closed.
-4. Start SimHub 9.11.22 and confirm the plugin author, version, dataset version,
+4. Start SimHub 9.12.6 and confirm the plugin author, version, dataset version,
    and record total.
 5. Test idle preview and closing preview without a simulator running.
 6. In AMS2 1.6.9.91, test one matched and one unmatched car.
