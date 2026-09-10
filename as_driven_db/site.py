@@ -12,6 +12,7 @@ asks: is this the driver's job. It has four answers, and `unknown` is not a quie
 as a car that handles it.
 """
 from __future__ import annotations
+from .conventions import guidance_for, load_conventions
 
 import html
 import json
@@ -766,6 +767,7 @@ def _car(
     archetypes: dict[str, str],
     audit_findings: list[dict[str, Any]],
     source_index: dict[str, dict[str, Any]],
+    conventions: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     identity = record["identity"]
     controls = record["authentic_controls"]
@@ -820,6 +822,13 @@ def _car(
             rim.get("shape"),
         ),
         "summary": record.get("driver_summary", ""),
+        # What cars of this mechanism usually did, offered only where this car's
+        # own answer is unknown. Never an authentic value; see
+        # docs/convention-guidance.md.
+        "conventions": [
+            {"guidance": item["guidance"], "strength": item["strength"]}
+            for item in guidance_for(record, conventions or [])["applies"]
+        ],
         "verification": _verification(record, source_index),
         "classification": classification,
         "mechanism": mechanism,
@@ -893,6 +902,7 @@ def collect(root: Path) -> dict[str, Any]:
         audit_findings = audit.get("findings", [])
         for finding in audit_findings:
             audit_by_record.setdefault(finding["record_id"], []).append(finding)
+    conventions = load_conventions(root)
     cars = []
     for relative in index["records"]:
         record = json.loads((data / relative).read_text(encoding="utf-8"))
@@ -902,6 +912,7 @@ def collect(root: Path) -> dict[str, Any]:
                 archetypes,
                 audit_by_record.get(record["record_id"], []),
                 source_index,
+                conventions,
             )
         )
     cars.sort(key=lambda car: (car["name"].lower(), car["car_class"].lower()))
@@ -1457,6 +1468,20 @@ def _row(car: dict[str, Any]) -> str:
         detail.append(
             '<div class="block"><h4>Not established</h4>'
             f'<div class="chips">{chips}</div></div>'
+        )
+
+    if car["conventions"]:
+        # Convention, not evidence: its own heading and colour, and every line
+        # says the real value is unknown before saying what such cars usually
+        # did. The rule's strength stays in the registry as review material
+        # rather than being shown; the wording carries the hedge.
+        lines = "".join(
+            f'<p class="convention-line">{_e(item["guidance"])}</p>'
+            for item in car["conventions"]
+        )
+        detail.append(
+            '<div class="block convention"><h4>Usually driven like this</h4>'
+            f'{lines}</div>'
         )
     if car["simulator_disagreements"]:
         items = "".join(_simulator_comparison_row(item) for item in car["simulator_disagreements"])
@@ -2018,6 +2043,12 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   display: flex; flex-direction: column; gap: 16px; max-width: 78ch;
 }}
 .summary {{ margin: 0; font-size: 14.5px; }}
+.convention {{
+  border-left: 3px solid var(--tone-optional, #d6a340);
+  padding-left: 11px;
+}}
+.convention h4 {{ color: var(--tone-optional, #d6a340); }}
+.convention-line {{ margin: 0; font-size: 14px; line-height: 1.5; opacity: .92; }}
 .block {{ display: flex; flex-direction: column; gap: 5px; }}
 .block h4 {{
   margin: 0;
