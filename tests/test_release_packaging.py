@@ -88,6 +88,31 @@ class ReleasePackagingTests(unittest.TestCase):
         self.assertIn("$releaseExists = ($LASTEXITCODE -eq 0)", guard)
 
 
+    def test_the_readme_release_section_names_the_current_client_version(self) -> None:
+        """The README's "New in" blurb is written by hand and drifts silently.
+
+        At 0.21.5 the heading was updated while 0.21.4's bullets stayed beneath
+        it, and the section described the wrong release for two versions without
+        anything failing. This does not read the bullets, which no test can
+        check, but a heading that still names the previous release is the signal
+        that nobody rewrote them.
+        """
+        assembly = (
+            ROOT / "simhub" / "AsDriven.Plugin" / "Properties" / "AssemblyInfo.cs"
+        ).read_text(encoding="utf-8-sig")
+        match = re.search(r'AssemblyVersion\("(\d+)\.(\d+)\.(\d+)\.\d+"\)', assembly)
+        self.assertIsNotNone(match, "no AssemblyVersion in the plugin assembly info")
+        version = ".".join(match.groups())
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        headings = re.findall(r"^## New in (\S+)\s*$", readme, re.M)
+        self.assertEqual(
+            [version],
+            headings,
+            "README needs exactly one '## New in <client version>' section, "
+            "rewritten for the release being prepared",
+        )
+
     def test_the_public_update_manifest_matches_its_release(self) -> None:
         """The file the plugin's default endpoint actually reads.
 
@@ -217,7 +242,6 @@ class UpdateManifestPromotionTests(unittest.TestCase):
                 manifest, [self._release("v" + manifest["plugin_version"])]
             ),
         )
-
 
 if __name__ == "__main__":
     unittest.main()
