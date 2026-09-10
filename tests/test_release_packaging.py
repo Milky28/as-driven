@@ -88,6 +88,37 @@ class ReleasePackagingTests(unittest.TestCase):
         self.assertIn("$releaseExists = ($LASTEXITCODE -eq 0)", guard)
 
 
+    def test_the_release_notes_template_does_not_hard_code_release_facts(self) -> None:
+        """These bullets ship to users, and they are written by hand.
+
+        The first 0.21.6 candidate announced "291 reviewed records" because the
+        previous release's bullets were still sitting in the template. No test
+        can read prose and tell which release it describes, but a typed count is
+        the part that can be checked, and it was the part that was provably
+        wrong. Every placeholder the builder substitutes must survive too, or a
+        deleted one ships to users as literal braces.
+        """
+        template = (ROOT / "release" / "RELEASE_NOTES_TEMPLATE.md").read_text(
+            encoding="utf-8"
+        )
+        builder = (ROOT / "release" / "build-release.ps1").read_text(encoding="utf-8")
+
+        substituted = set(re.findall(r'Replace\(\s*"(\{\{[A-Z0-9_]+\}\})"', builder))
+        self.assertTrue(substituted, "no placeholders found in the builder")
+        self.assertEqual(
+            [],
+            sorted(name for name in substituted if name not in template),
+            "the builder substitutes placeholders the template does not contain",
+        )
+
+        typed = re.findall(r"\b\d[\d,]*\s+(?:reviewed|curated)\b", template)
+        typed += re.findall(r"\b\d[\d,]*\s+(?:car\s+)?records\b", template)
+        self.assertEqual(
+            [],
+            typed,
+            "write {{RECORD_COUNT}} rather than typing a count into the release notes",
+        )
+
     def test_the_readme_release_section_names_the_current_client_version(self) -> None:
         """The README's "New in" blurb is written by hand and drifts silently.
 
