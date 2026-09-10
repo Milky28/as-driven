@@ -14,22 +14,27 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## New in 0.21.5
+## New in 0.21.6
 
-- **A clearer public catalog.** The Pit wall design adds a navy masthead,
-  alternating car rows, larger instructions, and grouped hardware and driving
-  headings in both light and dark themes.
-- **Clearer pulling-away guidance.** Nine H-pattern cars now explicitly say to
-  use the clutch when pulling away, where the real-car baseline was previously
-  unknown. See the [affected cars and evidence](docs/releases/0.21.4-control-changes.md).
-- **Less clutter in car details.** Repeated summaries and comparisons that show
-  identical real-car and simulator values no longer obscure useful guidance.
-- **Accurate browser counts in SimHub.** The car browser distinguishes reviewed
-  cars from simulator views of those cars.
+- **Nine more reviewed cars.** The Jaguar XJR-9, Mazda 787B, Toyota GT-One,
+  Nissan R89C, Opel Calibra V6 DTM, Renault Laguna Super Touring, Porsche 944
+  Turbo Cup, Alpine A110 Cup and Panoz Esperante GTR-1.
+- **Four cars now say a control is not established.** The BMW M3 E46 GTR and
+  TVR Tuscan T400R GT2 wheel rims, the Corvette C5-R downshift blip and the
+  Sauber C9 gate each rested on a single guided drive that a later simulator
+  read differently. A drive tells you what a simulator does, not what the real
+  car did, so those answers are withdrawn until real-car evidence settles them.
+  Each simulator's own reading is still shown against the gap.
+- **A corrected Toyota GT-One cockpit rim.** A submitted drive had recorded the
+  Automobilista 2 wheel as a control-panel rim; it is the open-top D-shape the
+  real car and Project Motor Racing both show.
+- **Clearer evidence behind every answer.** Real-car facts and simulator
+  observations no longer share a claim, so a confidence earned by watching a
+  simulator cannot stand behind a statement about the real car.
 
-This release includes 291 reviewed car records across eight simulators, from
-dataset 0.5.65, plus reliability improvements. Download it from the
+Download it from the
 [latest published release](https://github.com/Milky28/as-driven/releases/latest).
+The car and simulator totals are in the table below.
 
 ## What it tells you
 

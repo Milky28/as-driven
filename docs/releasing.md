@@ -28,6 +28,13 @@ Rewrite them for the release being prepared, from the new `CHANGELOG.md` entry
 and in user-facing terms, and use `{{RECORD_COUNT}}` rather than typing a count.
 Check the generated `dist/release/release-notes-*.md` before publishing.
 
+`README.md` carries the same bullets under its own "New in" heading, and drifts
+the same way: at 0.21.5 the heading was updated while 0.21.4's bullets stayed
+beneath it, and nothing failed. Rewrite that section in the same pass. Keep
+record and simulator counts out of it, because the generated release-facts block
+below it already states them; validation no longer compares prose to the index,
+so a number typed here is a number nobody checks.
+
 ## Build release candidates
 
 Run from the repository root on the Windows release machine with the supported
