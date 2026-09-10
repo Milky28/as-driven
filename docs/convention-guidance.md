@@ -77,3 +77,39 @@ reversing it. DOR had no mechanism to key on, so a value would have been an era
 guess with nothing beneath it. These rules key on hardware the record already
 establishes, and their output is never stored as the real car's answer. DOR
 remains out of scope.
+
+## The standard a rule has to meet
+
+The first two rules written against this design settled what admission requires,
+because only one survived.
+
+`h-pattern-unestablished-construction-running-clutch` was admitted. Of the
+H-pattern records whose construction is established, 46 of 59 are synchromesh,
+and where it is synchromesh the running-shift clutch is required in 38 of 39
+cases. So the antecedent is right about 78% of the time, which on its own would
+not be enough. What admits it is the asymmetry: a dog box accepts the clutch, it
+simply does not need it, so a driver following this guidance is never wrong even
+on the fifth of cars where it is unnecessary. It reaches 84 open fields.
+
+A second rule, that a lever-shifted sequential gearbox is blipped on the way
+down, was written and then dropped. The dataset says 33 such records require the
+blip and 13 do not, and narrowing the antecedent to cars with no automatic blip
+only moved it to 33 against 7 while reaching four open fields. The determining
+fact is whether the box is dog-ring, which those records do not establish -
+so the rule was generalising over exactly the gap that makes the value unknown.
+That is the guess this dataset refuses, and a majority is not a licence for it.
+
+So: a rule needs a near-unanimous base, or an asymmetry that makes following it
+harmless when it is wrong. A simple majority over an unestablished determining
+factor is not a rule, and reach does not compensate for it.
+
+## Checking
+
+```shell
+python -m as_driven_db conventions
+```
+
+Reports how many open fields the rules reach, and fails if any rule contradicts
+a value a record establishes. A contradiction is a defect in the rule, not an
+exception to it: the record knows about one real car and the rule only knows
+about a class.

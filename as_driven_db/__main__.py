@@ -22,6 +22,7 @@ from .review_promotion import promote_review_case
 from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
 from .release_changes import release_control_changes, render_release_control_changes
+from .conventions import report as convention_report
 from .split_claims import apply as apply_claim_split, plan as plan_claim_split
 from .update_manifest import (
     DEFAULT_REPOSITORY as DEFAULT_RELEASE_REPOSITORY,
@@ -104,6 +105,13 @@ def _parser() -> argparse.ArgumentParser:
         default=[],
         help="record id to place first (repeat for locally recent cars)",
     )
+
+    conventions = subparsers.add_parser(
+        "conventions",
+        help="report where convention guidance applies, and where a rule contradicts a record",
+    )
+    conventions.add_argument("--root", type=Path, default=Path.cwd())
+    conventions.add_argument("--output", type=Path)
 
     split_claims = subparsers.add_parser(
         "split-layer-claims",
@@ -444,6 +452,25 @@ def main(argv: list[str] | None = None) -> int:
             f"{summary['changed_controls']} control field(s) across {summary['changed_cars']} car(s)."
         )
         return 0
+
+    if args.command == "conventions":
+        payload = convention_report(args.root.resolve())
+        if args.output:
+            _write_json(args.output, payload)
+            print(f"Wrote the convention report to {args.output}")
+        conflicts = payload["conflicts"]
+        for conflict in conflicts:
+            for field in conflict["fields"]:
+                print(
+                    f"ERROR: {conflict['record_id']} establishes {field['record']!r} at "
+                    f"{field['path']}, where {conflict['convention_id']} says "
+                    f"{field['rule']!r}"
+                )
+        print(
+            f"Convention guidance reaches {payload['fields_covered']} open field(s) "
+            f"across {payload['records_with_guidance']} record(s)."
+        )
+        return 1 if conflicts else 0
 
     if args.command == "split-layer-claims":
         root = args.root.resolve()

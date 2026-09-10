@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schema/v1/convention-rule.schema.json",
+  "schema_version": "1.0.0",
+  "conventions": [
+    {
+      "convention_id": "h-pattern-unestablished-construction-running-clutch",
+      "label": "H-pattern gearbox of unestablished construction: change gear with the clutch",
+      "when": {
+        "transmission": {
+          "shift_actuation": "h-pattern",
+          "gearbox_type": "unknown"
+        }
+      },
+      "then": [
+        {
+          "path": "/authentic_controls/transmission/upshift/clutch",
+          "value": "required"
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/clutch",
+          "value": "required"
+        }
+      ],
+      "strength": "usual",
+      "guidance": "The real car's running-shift technique is not established. An H-pattern gearbox is usually synchromesh, which is changed with the clutch, and a dog box would also accept the clutch even though it does not need it. Using it works on either.",
+      "basis": "Of the H-pattern records whose construction is established, 46 of 59 are synchromesh, and where it is synchromesh the running-shift clutch is required in 38 of 39 established cases. The remaining 13 are dog boxes, shifted clutchlessly as authentic technique. So an H gate with construction unestablished is synchromesh about 78% of the time. The guidance is safe on the rest as well: a dog box accepts the clutch, it simply does not need it, so following this is never wrong even on the fifth of cars where it is unnecessary. That asymmetry, not the majority alone, is why the rule is admitted. It reaches 84 open fields, the largest block of open technique in the dataset. lamborghini-miura-sv is the documented exception in the other direction and keeps its own established not-required value, which this rule cannot touch."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://as-driven.example/schema/v1/convention-rule.schema.json",
+  "title": "As Driven convention rule registry",
+  "description": "Rules describing how cars of a given mechanism and era were usually driven, for display where the real car's value is unknown. A rule never supplies a value to a record and is never an authentic claim: it is evidence about a class, shown as convention rather than as a finding about the car. See docs/convention-guidance.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "conventions"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "1.0.0" },
+    "conventions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["convention_id", "label", "when", "then", "strength", "guidance", "basis"],
+        "properties": {
+          "convention_id": {
+            "description": "Stable slug naming the rule.",
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "label": { "type": "string", "minLength": 1 },
+          "when": {
+            "description": "The antecedent. Every stated condition must match the record's own established values for the rule to apply. A condition naming 'unknown' matches a record that has not established that field.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "transmission": {
+                "type": "object",
+                "additionalProperties": { "type": ["string", "integer"] }
+              },
+              "year_from_at_least": { "type": "integer" },
+              "year_to_at_most": { "type": "integer" }
+            }
+          },
+          "then": {
+            "description": "The fields this rule speaks to. A rule only ever describes a field the record leaves unknown; it never overrides, contradicts or outranks an established value.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "value"],
+              "properties": {
+                "path": { "type": "string", "pattern": "^/authentic_controls/" },
+                "value": { "type": ["string", "integer"] }
+              }
+            }
+          },
+          "strength": {
+            "description": "How reliably the class behaved this way. Inversely related to how much the era varied: near-certain where practice was effectively universal, usual where exceptions are known and documented.",
+            "enum": ["near-certain", "usual"]
+          },
+          "guidance": {
+            "description": "The sentence a driver reads. It must say that the real car's value is not established before saying what such cars usually did.",
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": { "type": "string", "minLength": 1 },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
