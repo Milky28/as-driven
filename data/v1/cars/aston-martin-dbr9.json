@@ -41,7 +41,7 @@
         "diameter_mm": null,
         "integrated_display": "no",
         "shift_lights": "unknown",
-        "source_label": "live-cockpit-round-no-display",
+        "source_label": "exact-chassis-cockpit-report",
         "notes": "Direct cockpit inspection showed a round rim without an integrated display; exact diameter remains unknown.",
         "open_top": "no"
       }
@@ -291,10 +291,15 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission/upshift",
-          "/authentic_controls/transmission/downshift",
-          "/authentic_controls/transmission/standing_start_clutch",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip"
         ],
         "source_refs": [
           "ams2.local-live-aston-martin-dbr9-controls.1.6.9.91"
@@ -411,6 +416,41 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "motorsportmagazine.aston-martin-dbr9.dbrs9-test-2007",
+          "motorsportmagazine.aston-martin-dbr9.chassis-10.cockpit-2019"
+        ],
+        "confidence": "high",
+        "basis": "The contemporary 2007 road test reports of the upshift that “Your right foot stays nailed to the throttle; you don’t need your left foot”, which is a clutchless upshift taken without lifting. The later exact-chassis report agrees on clutch use in running shifts. The 2007 test is period evidence, so neither value depends on the historic modifications the chassis received later."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "goodwood.aston-martin-dbr9.chassis-10.technique-2019",
+          "aston-martin-racing.dbr9.gt1-technical-specification"
+        ],
+        "confidence": "high",
+        "basis": "The exact-chassis technical interview says the driver must “use the clutch on the way down through the gears and to pull away”. Aston Martin’s own GT1 technical specification independently establishes the triple-plate carbon clutch that is being operated. The interview distinguishes original equipment from later historic changes, and pulling away is not among the electronics it says were added."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/shape"
+        ],
+        "source_refs": [
+          "motorsportmagazine.aston-martin-dbr9.chassis-10.cockpit-2019",
+          "motorsportmagazine.aston-martin-dbr9.dbrs9-test-2007"
+        ],
+        "confidence": "high",
+        "basis": "The exact-chassis cockpit report describes “The suede Momo steering wheel” and its photograph shows a continuous circular rim carrying no readout, with a separate dashboard display. The contemporary 2007 test independently calls it a “suede-rimmed helm”. Shift lights are deliberately not taken from these sources, because the same article reports the car’s electronics were changed."
       }
     ]
   },
