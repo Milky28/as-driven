@@ -41,7 +41,7 @@
       "wheel_rim": {
         "shape": "round",
         "diameter_mm": null,
-        "source_label": "live-cockpit-round",
+        "source_label": "daimler-credited-cockpit-photo",
         "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
         "integrated_display": "no",
         "shift_lights": "no",
@@ -284,7 +284,6 @@
       },
       {
         "paths": [
-          "/authentic_controls/steering/wheel_rim",
           "/authentic_controls/transmission/downshift/automatic_cut",
           "/authentic_controls/transmission/downshift/throttle_lift",
           "/authentic_controls/transmission/forward_gears",
@@ -420,6 +419,20 @@
         ],
         "confidence": "high",
         "basis": "The direct review of an exact 1989 C9 states that “The C9 can’t be flatshifted, but clutchless upchanges are routine, although the clutch must be used for downshifting.” A car that cannot be flatshifted is one whose upchange needs the throttle released, so the lift is the driver’s. This is the procedure the review describes rather than an inference from construction, and it is a retrospective track review rather than a period team instruction, so it is not manufacturer or homologation material."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/steering/wheel_rim/open_top"
+        ],
+        "source_refs": [
+          "motorsportmagazine.2020-sauber-c9-steering-wheel",
+          "mercedes-benz.museum.25-years-victory-le-mans-c9"
+        ],
+        "confidence": "high",
+        "basis": "The Daimler-credited full-resolution C9 steering-wheel photograph shows a continuous circular rim with no wheel-mounted display or shift lights, and no open section. The Mercedes-Benz Museum press PDF carries a period cockpit photograph of the same car, captioned as the C9 cockpit. Both were reviewed for these four fields; the drive that previously carried them observed a simulator's cockpit, which is not evidence about the real car. The Motor Sport image depicts a preserved car, so it is not asserted that every chassis kept identical hardware."
       }
     ]
   },
