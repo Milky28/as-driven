@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -22,6 +22,40 @@ namespace AsDriven.Core.Tests
                     : Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", ".."));
                 string dataDirectory = Path.Combine(repositoryRoot, "data", "v1");
                 AsDrivenDatabase database = AsDrivenDatabase.Load(dataDirectory);
+
+                // Convention guidance: what cars of a mechanism were usually
+                // driven like, offered only where the real car's own value is
+                // unknown. It is never an authentic claim, so the two rules
+                // that matter are that it appears where a gap exists and stays
+                // away from a car that answers for itself.
+                GuidanceSnapshot openMechanism = database.Preview("ams2", "bmw-m1-procar");
+                True(
+                    openMechanism.HasMatch,
+                    "previews a car whose gearbox construction is unestablished");
+                True(
+                    openMechanism.ConventionGuidance.Length > 0,
+                    "offers convention guidance where the running-shift clutch is unknown");
+                True(
+                    openMechanism.ConventionGuidance.IndexOf(
+                        "not established", StringComparison.OrdinalIgnoreCase) >= 0,
+                    "convention guidance says the real value is unknown before saying what is usual");
+                True(
+                    openMechanism.ConventionGuidanceLine1.Length > 0,
+                    "wraps convention guidance for the overlay");
+
+                // The Miura has an established synchromesh gearbox, so the
+                // rule keyed on unestablished construction does not reach it.
+                // It is the record that must never be spoken for: its own
+                // reviewed research puts its running-shift clutch against the
+                // pattern of every other synchromesh car.
+                GuidanceSnapshot answersForItself = database.Preview("ams2", "lamborghini-miura-sv");
+                if (answersForItself.HasMatch)
+                {
+                    Equal(
+                        string.Empty,
+                        answersForItself.ConventionGuidance,
+                        "offers no convention guidance to a car that establishes its own technique");
+                }
 
                 Version datasetVersion;
                 True(

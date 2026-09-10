@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -108,6 +108,7 @@ namespace AsDriven.Core
                 throw new InvalidDataException("Dataset index has no records array: " + indexPath);
             }
 
+            JArray conventions = ConventionRules.Load(root);
             var identities = new Dictionary<string, CarRecordValues>(StringComparer.Ordinal);
             var recordsBySimulator = new Dictionary<string, CarRecordValues>(StringComparer.Ordinal);
             var cars = new List<CarCatalogEntry>();
@@ -124,7 +125,8 @@ namespace AsDriven.Core
                     datasetVersion,
                     identities,
                     recordsBySimulator,
-                    cars);
+                    cars,
+                    conventions);
                 recordCount++;
             }
 
@@ -369,7 +371,8 @@ namespace AsDriven.Core
             string datasetVersion,
             Dictionary<string, CarRecordValues> identities,
             Dictionary<string, CarRecordValues> records,
-            List<CarCatalogEntry> cars)
+            List<CarCatalogEntry> cars,
+            JArray conventions)
         {
             string recordId = RequiredString(record, "record_id", recordPath);
             JObject identity = RequiredObject(record, "identity", recordPath);
@@ -377,6 +380,11 @@ namespace AsDriven.Core
             JObject transmission = RequiredObject(controls, "transmission", recordPath);
             JObject steering = RequiredObject(controls, "steering", recordPath);
             JObject wheelRim = RequiredObject(steering, "wheel_rim", recordPath);
+            // Convention guidance describes the real car, so it is resolved
+            // against the authentic controls and not against the values a
+            // simulator overrides. It is the same note for every simulator view
+            // of this record.
+            string conventionGuidance = ConventionRules.Resolve(conventions, controls);
             JArray simulators = record["simulators"] as JArray;
             if (simulators == null || simulators.Count == 0)
             {
@@ -476,6 +484,7 @@ namespace AsDriven.Core
                     WheelRimShape = RequiredString(simulatorWheelRim, "normalized", recordPath),
                     WheelRimSourceLabel = RequiredString(simulatorWheelRim, "source_label", recordPath),
                     DriverSummary = OptionalText(record, "driver_summary"),
+                    ConventionGuidance = conventionGuidance,
                     OverriddenPaths = overriddenPaths,
                     UnestablishedPaths = unestablishedPaths,
                     SimulatorDifference = DescribeOverrides(simulator, overriddenPaths),

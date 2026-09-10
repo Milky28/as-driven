@@ -1,4 +1,4 @@
-namespace AsDriven.Core
+﻿namespace AsDriven.Core
 {
     /// <summary>
     /// The curated values read from one record for one simulator, held together
@@ -35,6 +35,13 @@ namespace AsDriven.Core
         public string UpshiftClutch;
         public string DownshiftClutch;
         public string DriverSummary;
+
+        /// <summary>
+        /// What cars of this mechanism were usually driven like, shown only
+        /// where the real car's own value is unknown. Empty for most records,
+        /// which is a supported state rather than a defect.
+        /// </summary>
+        public string ConventionGuidance;
         public string[] OverriddenPaths;
         public string[] UnestablishedPaths;
         public string SimulatorDifference;

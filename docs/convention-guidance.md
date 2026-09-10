@@ -113,3 +113,27 @@ Reports how many open fields the rules reach, and fails if any rule contradicts
 a value a record establishes. A contradiction is a defect in the rule, not an
 exception to it: the record knows about one real car and the rule only knows
 about a class.
+
+## The SimHub client
+
+`AsDriven.Core.ConventionRules` reads `conventions.json` from beside the dataset
+and resolves rules against a record's authentic controls, not against the values
+a simulator overrides, because the gap being filled is the real car's. The same
+note therefore applies to every simulator view of a record. A database published
+before conventions existed simply has no file, which yields no guidance rather
+than an error, so an older dataset still loads.
+
+The plugin publishes `AsDriven.ConventionGuidance` and its wrapped
+`ConventionGuidanceLine1-4` and `ConventionGuidanceCompactLine1-4`, so any
+dashboard can bind them. They are empty for most cars, and a panel bound to them
+should hide itself rather than reserve blank space, exactly as the driver note
+does.
+
+**The packaged overlay does not draw them yet.** Its card is a fixed layout: the
+note panel occupies 264 to 363 and the footer rule sits at 371, so there is no
+room for a second panel without re-flowing the card. Reusing the note panel is
+not an option either, because 39 of the 42 cars carrying guidance also carry a
+driver summary, and one of the two would have to be hidden. Drawing it needs
+either a taller card or the short form of each rule - a card-length line with the
+reasoning available elsewhere - which is the change worth making first, since the
+overlay has far less room than the catalog.

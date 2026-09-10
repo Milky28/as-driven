@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -1926,6 +1926,19 @@ namespace AsDriven.Plugin
             this.AttachDelegate("UpshiftTone", delegate { return _current.UpshiftTone; });
             this.AttachDelegate("DownshiftTone", delegate { return _current.DownshiftTone; });
             this.AttachDelegate("UseBandTone", delegate { return _current.UseBandTone; });
+            // What cars of this mechanism were usually driven like, published
+            // only where the real car's own value is unknown. Empty for most
+            // cars, so a dashboard binding it should hide its panel rather than
+            // reserve a blank one, exactly as DriverSummary does.
+            this.AttachDelegate("ConventionGuidance", delegate { return _current.ConventionGuidance; });
+            this.AttachDelegate("ConventionGuidanceLine1", delegate { return _current.ConventionGuidanceLine1; });
+            this.AttachDelegate("ConventionGuidanceLine2", delegate { return _current.ConventionGuidanceLine2; });
+            this.AttachDelegate("ConventionGuidanceLine3", delegate { return _current.ConventionGuidanceLine3; });
+            this.AttachDelegate("ConventionGuidanceLine4", delegate { return _current.ConventionGuidanceLine4; });
+            this.AttachDelegate("ConventionGuidanceCompactLine1", delegate { return _current.ConventionGuidanceCompactLine1; });
+            this.AttachDelegate("ConventionGuidanceCompactLine2", delegate { return _current.ConventionGuidanceCompactLine2; });
+            this.AttachDelegate("ConventionGuidanceCompactLine3", delegate { return _current.ConventionGuidanceCompactLine3; });
+            this.AttachDelegate("ConventionGuidanceCompactLine4", delegate { return _current.ConventionGuidanceCompactLine4; });
             this.AttachDelegate("DriverSummary", delegate { return _current.DriverSummary; });
             this.AttachDelegate("DriverSummaryLine1", delegate { return _current.DriverSummaryLine1; });
             this.AttachDelegate("DriverSummaryLine2", delegate { return _current.DriverSummaryLine2; });

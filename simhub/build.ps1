@@ -1,4 +1,4 @@
-param(
+﻿param(
     [ValidateSet("Debug", "Release")]
     [string]$Configuration = "Release",
     [string]$SimHubInstallPath = "C:\Program Files (x86)\SimHub",
@@ -650,6 +650,10 @@ $databaseTarget = Join-Path $distRoot "PluginsData\AsDriven\Database\data\v1"
 New-Item -ItemType Directory -Path $databaseTarget -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\index.json") -Destination $databaseTarget
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\sources.json") -Destination $databaseTarget
+$conventionsSource = Join-Path $repositoryRoot "data\v1\conventions.json"
+if (Test-Path -LiteralPath $conventionsSource) {
+    Copy-Item -LiteralPath $conventionsSource -Destination $databaseTarget
+}
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "data\v1\cars") -Destination $databaseTarget -Recurse
 
 $python = Get-Command python -ErrorAction SilentlyContinue

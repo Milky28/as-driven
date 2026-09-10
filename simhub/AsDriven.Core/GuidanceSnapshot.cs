@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 namespace AsDriven.Core
 {
@@ -61,6 +61,15 @@ namespace AsDriven.Core
         /// one, so an empty value is a supported state and not a defect.
         /// </summary>
         public string DriverSummary { get; private set; }
+
+        /// <summary>
+        /// What cars of this mechanism were usually driven like, offered only
+        /// where the real car's own value is not established. It is never an
+        /// authentic claim and never replaces one: the wording says the real
+        /// value is unknown before it says what such cars usually did. Empty
+        /// for most cars, and the overlay shows no panel when it is.
+        /// </summary>
+        public string ConventionGuidance { get; private set; }
 
         /// <summary>
         /// JSON Pointer paths the simulator entry overrides, empty when the
@@ -171,6 +180,14 @@ namespace AsDriven.Core
         }
 
         // Dashboard text items do not wrap, so the summary is pre-broken here.
+        public string ConventionGuidanceLine1 { get; private set; }
+        public string ConventionGuidanceLine2 { get; private set; }
+        public string ConventionGuidanceLine3 { get; private set; }
+        public string ConventionGuidanceLine4 { get; private set; }
+        public string ConventionGuidanceCompactLine1 { get; private set; }
+        public string ConventionGuidanceCompactLine2 { get; private set; }
+        public string ConventionGuidanceCompactLine3 { get; private set; }
+        public string ConventionGuidanceCompactLine4 { get; private set; }
         public string DriverSummaryLine1 { get; private set; }
         public string DriverSummaryLine2 { get; private set; }
         public string DriverSummaryLine3 { get; private set; }
@@ -297,6 +314,8 @@ namespace AsDriven.Core
             string[] summaryLines = WrapLines(values.DriverSummary, 620, 1250, 5);
             string[] compactSummaryLines = WrapLines(values.DriverSummary, 432, 1100, 5);
             string[] compactTechniqueLines = SplitCompactTechniqueSummary(values.TechniqueSummary);
+            string[] conventionLines = WrapLines(values.ConventionGuidance, 620, 1250, 4);
+            string[] compactConventionLines = WrapLines(values.ConventionGuidance, 432, 1100, 4);
             return new GuidanceSnapshot
             {
                 HasMatch = true,
@@ -342,6 +361,15 @@ namespace AsDriven.Core
                 OverriddenPaths = values.OverriddenPaths ?? new string[0],
                 UnestablishedPaths = values.UnestablishedPaths ?? new string[0],
                 SimulatorDifference = values.SimulatorDifference,
+                ConventionGuidance = values.ConventionGuidance ?? string.Empty,
+                ConventionGuidanceLine1 = conventionLines[0],
+                ConventionGuidanceLine2 = conventionLines[1],
+                ConventionGuidanceLine3 = conventionLines[2],
+                ConventionGuidanceLine4 = conventionLines[3],
+                ConventionGuidanceCompactLine1 = compactConventionLines[0],
+                ConventionGuidanceCompactLine2 = compactConventionLines[1],
+                ConventionGuidanceCompactLine3 = compactConventionLines[2],
+                ConventionGuidanceCompactLine4 = compactConventionLines[3],
                 DriverSummaryLine1 = summaryLines[0],
                 DriverSummaryLine2 = summaryLines[1],
                 DriverSummaryLine3 = summaryLines[2],
@@ -411,6 +439,15 @@ namespace AsDriven.Core
                 OverriddenPaths = new string[0],
                 UnestablishedPaths = new string[0],
                 SimulatorDifference = string.Empty,
+                ConventionGuidance = string.Empty,
+                ConventionGuidanceLine1 = string.Empty,
+                ConventionGuidanceLine2 = string.Empty,
+                ConventionGuidanceLine3 = string.Empty,
+                ConventionGuidanceLine4 = string.Empty,
+                ConventionGuidanceCompactLine1 = string.Empty,
+                ConventionGuidanceCompactLine2 = string.Empty,
+                ConventionGuidanceCompactLine3 = string.Empty,
+                ConventionGuidanceCompactLine4 = string.Empty,
                 DriverSummaryLine1 = string.Empty,
                 DriverSummaryLine2 = string.Empty,
                 DriverSummaryLine3 = string.Empty,
