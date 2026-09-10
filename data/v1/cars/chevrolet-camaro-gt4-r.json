@@ -176,8 +176,21 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift"
         ],
         "source_refs": [
           "ams2.local-live-chevrolet-camaro-gt4-r-controls.1.6.9.91"
@@ -217,6 +230,19 @@
         ],
         "confidence": "high",
         "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "performanceracing.camaro-gt4r-unveiling.2017"
+        ],
+        "confidence": "high",
+        "basis": "The car carries a “six-speed Xtrac sequential transmission with pneumatic paddle shift”. That establishes six gears, sequential one-at-a-time selection, and paddle actuation rather than a lever. Pneumatic actuation describes how the shift is made, not the gearbox construction, so the broader sequential category is kept."
       }
     ]
   },

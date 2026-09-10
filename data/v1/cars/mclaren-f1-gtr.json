@@ -133,8 +133,21 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift"
         ],
         "source_refs": [
           "ams2.local-live-mclaren-f1-gtr-controls.1.6.9.91"
@@ -152,6 +165,19 @@
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 384887d1."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "supercarnostalgia.mclaren-f1-gtr-97"
+        ],
+        "confidence": "high",
+        "basis": "The 1997 Longtail replaced the earlier car's six-speed manual with “a six-speed sequential ‘box supplied by X-trac”, and its cockpit carried “the new sequential gearshift mechanism ... now with a much taller lever, a dimpled gear knob and exposed shift linkage”. A tall lever with exposed linkage is a driver-operated stick rather than steering-wheel paddles, and a sequential mechanism selects one gear at a time. The source does not distinguish dog-ring construction, so the broader sequential category is used."
       }
     ]
   },

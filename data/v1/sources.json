@@ -473,6 +473,18 @@
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
     },
     {
+      "title": "Cadillac DPi-V.R",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Cadillac_DPi-V.R",
+      "source_type": "secondary",
+      "notes": "Exact scope: encyclopedia article on the Cadillac DPi-V.R, which raced from the 2017 24 Hours of Daytona to the 2022 Petit Le Mans. Technical infobox, transmission: “Xtrac P1159F 6-speed sequential semi-automatic paddle-shift”. Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. A named gearbox part number and paddle actuation, but the article states no launch or running-shift technique and does not describe the steering rim, so those fields are not taken from it. “Semi-automatic” is not read as settling whether a clutch is operated to pull away, which prototypes of this era commonly do by hand.",
+      "source_id": "wikipedia.cadillac-dpi-vr",
+      "archive_url": null,
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review"
+    },
+    {
       "source_id": "ams2.local-live-cadillac-v-series-r-controls.1.6.9.91",
       "title": "Live AMS2 Cadillac V-Series.R control test",
       "publisher": "Local AMS2 observation",
@@ -543,6 +555,18 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
+    },
+    {
+      "title": "Chevrolet Unveils New Race-Ready Camaro GT4.R",
+      "publisher": "Performance Racing Industry",
+      "url": "https://performanceracing.com/magazine/industry-news/02-09-2017/chevrolet-unveils-new-race-ready-camaro-gt4r",
+      "source_type": "secondary",
+      "notes": "Exact scope: trade-press report of Chevrolet's February 2017 unveiling of the Camaro GT4.R, built with Pratt & Miller to GT4 regulations. Specification paragraph: “six-speed Xtrac sequential transmission with pneumatic paddle shift and adjustable traction control”. Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. The report covers the announcement rather than reproducing a manufacturer press release, and it names no clutch, launch or running-shift technique and does not describe the steering rim.",
+      "source_id": "performanceracing.camaro-gt4r-unveiling.2017",
+      "archive_url": null,
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review"
     },
     {
       "source_id": "ams2.local-live-chevrolet-chevette-controls.1.6.9.91",
@@ -1983,6 +2007,18 @@
       "retrieved_at": "2026-08-12",
       "reuse_status": "facts-only-review",
       "notes": "Reviewed guided observation of exact AMS2 1.6.9.91 identity."
+    },
+    {
+      "source_id": "supercarnostalgia.mclaren-f1-gtr-97",
+      "title": "McLaren F1 GTR 97 Guide",
+      "publisher": "Supercar Nostalgia",
+      "url": "https://supercarnostalgia.com/blog/mclaren-f1-gtr-97",
+      "archive_url": null,
+      "source_type": "secondary",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: model guide to the 1997 F1 GTR Longtail covering the change from the 1995-96 car, its transmission and its cockpit. Gearbox section: “instead of a six-speed manual unit, the new car came with a six-speed sequential ‘box supplied by X-trac”, and “an AP Racing triple-plate carbon clutch with an aluminium flywheel and a Torsen limited-slip differential”. Cockpit section: “the new sequential gearshift mechanism mounted in the same position as before but now with a much taller lever, a dimpled gear knob and exposed shift linkage”. Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. It also records that “the analogue instrumentation from the original F1 road car was replaced with a digital Stack read out”, which describes the dash rather than the rim. It establishes the gearbox architecture, the driver-operated lever and a physical clutch, but names no running-shift or standing-start technique and does not describe the steering rim, so those fields are not taken from it. It does not distinguish dog-ring from other sequential construction, so the broader sequential category is kept."
     },
     {
       "source_id": "ams2.local-live-mclaren-honda-mp4-4-controls.1.6.9.91",

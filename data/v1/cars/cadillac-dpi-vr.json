@@ -132,8 +132,21 @@
       },
       {
         "paths": [
-          "/authentic_controls/transmission",
-          "/authentic_controls/steering/wheel_rim"
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift"
         ],
         "source_refs": [
           "ams2.local-live-cadillac-dpi-vr-controls.1.6.9.91"
@@ -151,6 +164,19 @@
         ],
         "confidence": "verified",
         "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash 54b7bd58."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.cadillac-dpi-vr"
+        ],
+        "confidence": "high",
+        "basis": "The car's transmission is an “Xtrac P1159F 6-speed sequential semi-automatic paddle-shift” unit. That names six gears, sequential selection one at a time, and shifting from steering-wheel paddles rather than a lever. The construction beneath the sequential category is not stated, so the broader category is kept."
       }
     ]
   },
