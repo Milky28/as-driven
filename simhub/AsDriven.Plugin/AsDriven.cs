@@ -1939,6 +1939,8 @@ namespace AsDriven.Plugin
             this.AttachDelegate("ConventionGuidanceCompactLine2", delegate { return _current.ConventionGuidanceCompactLine2; });
             this.AttachDelegate("ConventionGuidanceCompactLine3", delegate { return _current.ConventionGuidanceCompactLine3; });
             this.AttachDelegate("ConventionGuidanceCompactLine4", delegate { return _current.ConventionGuidanceCompactLine4; });
+            this.AttachDelegate("DriverSummaryLine4Of4", delegate { return _current.DriverSummaryLine4Of4; });
+            this.AttachDelegate("DriverSummaryCompactLine4Of4", delegate { return _current.DriverSummaryCompactLine4Of4; });
             this.AttachDelegate("ConventionGuidanceShort", delegate { return _current.ConventionGuidanceShort; });
             this.AttachDelegate("ConventionGuidanceShortLine", delegate { return _current.ConventionGuidanceShortLine; });
             this.AttachDelegate("ConventionGuidanceShortCompactLine", delegate { return _current.ConventionGuidanceShortCompactLine; });

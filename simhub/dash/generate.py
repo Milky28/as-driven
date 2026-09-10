@@ -901,23 +901,61 @@ def _driver_note(
     size: float,
     line_height: float,
     prefix: str,
+    convention_property: str,
     theme: ThemeSpec,
     rail_width: float = 2,
     icon_size: float = 16,
 ) -> list[dict[str, Any]]:
     """The one place the card can say why a car behaves as it does.
 
-    Dashboard text items do not wrap, so the summary arrives pre-broken as five
-    line properties and is drawn one item per line. The whole group hides when
-    the record carries no summary, so a card without one ends after the Use band
-    rather than reserving an empty panel.
+    Dashboard text items do not wrap, so the summary arrives pre-broken as line
+    properties and is drawn one item per line. The whole group hides when the
+    record has neither a summary nor convention guidance, so a card carrying
+    neither ends after the Use band rather than reserving an empty panel.
+
+    Convention guidance shares this panel instead of getting one of its own,
+    because the card is a fixed layout with no room for a second: the footer
+    rule sits eight pixels below the panel. So the panel is drawn in three
+    states - a summary alone across five lines, a summary across four with the
+    guidance line beneath it, or the guidance line alone where a record carries
+    no summary. Sharing spends the fifth summary line on the cars carrying
+    both, which measured cheap: of the 39 such records none uses five lines on
+    the detailed card and one does on the compact card.
+
+    The guidance line is drawn in the accent rather than the text tone. It is
+    the only line in the panel that is not about this car - it says what cars
+    of the class usually did - and the colour marks that before the sentence
+    does. The sentence still carries the hedge itself; see
+    docs/convention-guidance.md.
     """
     # The panel is sized from its own line metrics rather than by hand, so a
     # line can never end up drawn past the edge of the box holding it.
     height = NOTE_PADDING * 2 + line_height * NOTE_LINES
-    present = "[AsDriven.DriverSummary] != ''"
+    has_summary = "[AsDriven.DriverSummary] != ''"
+    no_summary = "[AsDriven.DriverSummary] == ''"
+    guidance_binding = "[AsDriven." + convention_property + "]"
+    has_guidance = guidance_binding + " != ''"
+    no_guidance = guidance_binding + " == ''"
+    present = has_summary + " || " + has_guidance
     note_rail_width = rail_width
     text_left = left + note_rail_width + 12
+    text_width = width - (text_left - left) - 12
+
+    def note_line(name: str, slot: int, expression: str, color: str) -> dict[str, Any]:
+        return factory.text(
+            name, "",
+            text_left, top + NOTE_PADDING + line_height * slot,
+            text_width, line_height, size, color,
+            expression=expression)
+
+    def summary_line(name: str, slot: int, of_four: bool = False) -> dict[str, Any]:
+        # A greedy wrap breaks the earlier lines the same way whatever the
+        # limit, so the four-row state reuses lines 1 to 3 and takes its last
+        # row from the client's four-line wrap. Binding the five-line last row
+        # there would drop whatever ran onto the row this state does not draw.
+        suffix = "Line4Of4" if of_four else "Line" + str(slot + 1)
+        return note_line(name, slot, "[AsDriven." + prefix + suffix + "]", theme.text)
+
     children = [
         factory.rectangle("NotePanel", left, top, width, height, theme.note,
                           radius=0),
@@ -927,12 +965,24 @@ def _driver_note(
         "NoteIcon", "i", left, top,
         note_rail_width, height, icon_size + 4, "#FFFFFFFF",
         horizontal_alignment=1, font_weight="Bold", font_style="Italic"))
-    for index in range(NOTE_LINES):
-        children.append(factory.text(
-            "NoteLine" + str(index + 1), "",
-            text_left, top + NOTE_PADDING + line_height * index,
-            width - (text_left - left) - 12, line_height, size, theme.text,
-            expression="[AsDriven." + prefix + "Line" + str(index + 1) + "]"))
+    children.append(factory.layer(
+        "NoteSummaryOnly",
+        [summary_line("NoteLine" + str(index + 1), index) for index in range(NOTE_LINES)],
+        visible_expression=has_summary + " && " + no_guidance,
+    ))
+    children.append(factory.layer(
+        "NoteSummaryWithConvention",
+        [summary_line("NoteSharedLine" + str(index + 1), index,
+                      of_four=index == NOTE_LINES - 2)
+         for index in range(NOTE_LINES - 1)]
+        + [note_line("NoteConventionLine", NOTE_LINES - 1, guidance_binding, theme.accent)],
+        visible_expression=has_summary + " && " + has_guidance,
+    ))
+    children.append(factory.layer(
+        "NoteConventionOnly",
+        [note_line("NoteConventionLead", 0, guidance_binding, theme.accent)],
+        visible_expression=no_summary + " && " + has_guidance,
+    ))
     return [factory.layer("DriverNote", children, visible_expression=present)]
 
 
@@ -995,7 +1045,9 @@ def _matched_detailed(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
     children.extend(_use_band(factory, left, 166, width, 92, rail_width=rail_width, rail_size=16,
                               head_size=13, value_size=14, theme=theme))
     children.extend(_driver_note(factory, left, 264, width, size=12.5,
-                                 line_height=17, prefix="DriverSummary", theme=theme,
+                                 line_height=17, prefix="DriverSummary",
+                                 convention_property="ConventionGuidanceShortLine",
+                                 theme=theme,
                                  rail_width=rail_width, icon_size=26))
     children.extend([
         _preview_badge(factory, (factory.width - 140) / 2, 376, 140, 22, theme=theme),
@@ -1023,7 +1075,9 @@ def _matched_compact(factory: ItemFactory, theme: ThemeSpec) -> dict[str, Any]:
     children.extend(_use_band(factory, left, 124, width, 78, rail_width=rail_width, rail_size=14,
                               head_size=10, value_size=12, theme=theme))
     children.extend(_driver_note(factory, left, 206, width, size=11,
-                                 line_height=15, prefix="DriverSummaryCompact", theme=theme,
+                                 line_height=15, prefix="DriverSummaryCompact",
+                                 convention_property="ConventionGuidanceShortCompactLine",
+                                 theme=theme,
                                  rail_width=rail_width, icon_size=22))
     children.extend([
         _preview_badge(factory, (factory.width - 110) / 2, 308, 110, 22, theme=theme),

@@ -68,6 +68,28 @@ namespace AsDriven.Core.Tests
                     openMechanism.ConventionGuidanceShortLine,
                     "the short form fits one line of the detailed card without ellipsis");
 
+                // A card that draws guidance has one fewer row for the summary,
+                // so the client publishes the summary's last row wrapped for
+                // four as well as for five. The earlier rows are identical
+                // either way - a greedy wrap does not know what its limit is
+                // until it reaches it - and the four-row form ellipsises the
+                // tail rather than letting it fall off a row nobody draws.
+                GuidanceSnapshot longSummary = database.Preview("ac", "bmw-3-0-csl-imsa-1975");
+                True(longSummary.HasMatch, "previews the car with the longest shared-panel summary");
+                True(
+                    longSummary.DriverSummaryCompactLine5.Length > 0,
+                    "this summary really does need a fifth row on the compact card");
+                True(
+                    longSummary.DriverSummaryCompactLine4Of4.EndsWith("..."),
+                    "a summary that outgrows four rows is ellipsised rather than cut off unseen");
+                True(
+                    longSummary.DriverSummaryLine5.Length == 0,
+                    "the same summary fits four rows on the wider card");
+                Equal(
+                    longSummary.DriverSummaryLine4,
+                    longSummary.DriverSummaryLine4Of4,
+                    "a summary that fits four rows is unchanged by the four-row wrap");
+
                 // The Miura has an established synchromesh gearbox, so the
                 // rule keyed on unestablished construction does not reach it.
                 // It is the record that must never be spoken for: its own

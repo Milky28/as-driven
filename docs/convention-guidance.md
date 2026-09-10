@@ -158,15 +158,31 @@ form and the room to hold it. All of them are empty for most cars, and a panel
 bound to them should hide itself rather than reserve blank space, exactly as the
 driver note does.
 
-**The packaged overlay does not draw them yet.** Its card is a fixed layout: the
-note panel occupies 264 to 363 and the footer rule sits at 371, so there is no
-room for a second panel without re-flowing the card. Reusing the note panel is
-not free either, because 39 of the 42 cars carrying guidance also carry a driver
-summary. With the short form in place the option that costs least is a second
-variant of the note panel - the same box at the same position, drawn as four
-summary lines plus one convention line, shown only when a car carries guidance,
-with the five-line variant shown when it does not. That trades the fifth summary
-line on those cars for the guidance line, which measures out cheap: of the 39
-cars carrying both, none uses the fifth line on the detailed card and one -
-`bmw-3-0-csl-imsa-1975` - uses it on the compact card. So the trade costs one
-car one line of summary on the narrower card, against guidance reaching all 42.
+## The packaged card
+
+The card is a fixed layout with no room for a panel of its own: the note panel
+occupies 264 to 363 and the footer rule sits at 371. So guidance shares the note
+panel, which is drawn in three states, chosen by expression and mutually
+exclusive:
+
+- a summary alone, across five lines - the card as it was;
+- a summary across four lines with the guidance line beneath it;
+- the guidance line alone, at the top of the panel, for a car with no summary.
+
+Sharing spends the fifth summary line on the cars carrying both, which is the
+cheapest thing available: of the 39 such records, none uses the fifth line on
+the detailed card and one - `bmw-3-0-csl-imsa-1975` - uses it on the compact
+card. Nothing else on the card moves, so an overlay a driver has already
+positioned stays where they put it.
+
+The guidance line is drawn in the accent tone rather than the text tone. It is
+the only line in that panel not about the car in front of the driver, and the
+colour says so before the sentence does.
+
+One consequence is worth naming, because it would otherwise lose text in
+silence. The summary is pre-wrapped by the client, and a wrap for five rows
+drawn into four would simply not draw whatever landed on the fifth. A greedy
+wrap breaks the earlier rows the same way whatever its limit, so only the last
+row differs: the client publishes `DriverSummaryLine4Of4` and its compact twin,
+the last row of a four-row wrap, which ellipsises the tail. The shared state
+binds rows 1 to 3 from the five-row wrap and its last row from that one.

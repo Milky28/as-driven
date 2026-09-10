@@ -206,11 +206,20 @@ namespace AsDriven.Core
         public string DriverSummaryLine3 { get; private set; }
         public string DriverSummaryLine4 { get; private set; }
         public string DriverSummaryLine5 { get; private set; }
+
+        // The fourth line of a summary that has only four rows to live in,
+        // which is the note panel when it is also carrying a convention line.
+        // A greedy wrap breaks the earlier lines the same way whatever the
+        // limit, so only the last one differs: this one ellipsises the tail
+        // the five-line wrap would have carried onto a row that is no longer
+        // drawn. Without it a shared panel would drop that text in silence.
+        public string DriverSummaryLine4Of4 { get; private set; }
         public string DriverSummaryCompactLine1 { get; private set; }
         public string DriverSummaryCompactLine2 { get; private set; }
         public string DriverSummaryCompactLine3 { get; private set; }
         public string DriverSummaryCompactLine4 { get; private set; }
         public string DriverSummaryCompactLine5 { get; private set; }
+        public string DriverSummaryCompactLine4Of4 { get; private set; }
 
         /// <summary>Whether the rim itself carries a readout. Optional in the
         /// schema, so an unobserved value reads "unknown", never "no".</summary>
@@ -326,6 +335,8 @@ namespace AsDriven.Core
             string[] techniqueLines = SplitTechniqueSummary(values.TechniqueSummary);
             string[] summaryLines = WrapLines(values.DriverSummary, 620, 1250, 5);
             string[] compactSummaryLines = WrapLines(values.DriverSummary, 432, 1100, 5);
+            string[] summaryLinesOfFour = WrapLines(values.DriverSummary, 620, 1250, 4);
+            string[] compactSummaryLinesOfFour = WrapLines(values.DriverSummary, 432, 1100, 4);
             string[] compactTechniqueLines = SplitCompactTechniqueSummary(values.TechniqueSummary);
             string[] conventionLines = WrapLines(values.ConventionGuidance, 620, 1250, 4);
             string[] compactConventionLines = WrapLines(values.ConventionGuidance, 432, 1100, 4);
@@ -397,11 +408,13 @@ namespace AsDriven.Core
                 DriverSummaryLine3 = summaryLines[2],
                 DriverSummaryLine4 = summaryLines[3],
                 DriverSummaryLine5 = summaryLines[4],
+                DriverSummaryLine4Of4 = summaryLinesOfFour[3],
                 DriverSummaryCompactLine1 = compactSummaryLines[0],
                 DriverSummaryCompactLine2 = compactSummaryLines[1],
                 DriverSummaryCompactLine3 = compactSummaryLines[2],
                 DriverSummaryCompactLine4 = compactSummaryLines[3],
                 DriverSummaryCompactLine5 = compactSummaryLines[4],
+                DriverSummaryCompactLine4Of4 = compactSummaryLinesOfFour[3],
                 WheelIntegratedDisplay = values.WheelIntegratedDisplay,
                 WheelShiftLights = values.WheelShiftLights,
                 HasSteeringDOR = values.HasSteeringDOR,
@@ -478,11 +491,13 @@ namespace AsDriven.Core
                 DriverSummaryLine3 = string.Empty,
                 DriverSummaryLine4 = string.Empty,
                 DriverSummaryLine5 = string.Empty,
+                DriverSummaryLine4Of4 = string.Empty,
                 DriverSummaryCompactLine1 = string.Empty,
                 DriverSummaryCompactLine2 = string.Empty,
                 DriverSummaryCompactLine3 = string.Empty,
                 DriverSummaryCompactLine4 = string.Empty,
                 DriverSummaryCompactLine5 = string.Empty,
+                DriverSummaryCompactLine4Of4 = string.Empty,
                 WheelIntegratedDisplay = string.Empty,
                 WheelShiftLights = string.Empty,
                 HasSteeringDOR = false,

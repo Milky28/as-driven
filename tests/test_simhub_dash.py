@@ -625,15 +625,105 @@ class SimHubDashTests(unittest.TestCase):
                     variant,
                 )
             # The whole group hides when there is nothing to say, so a record
-            # without a summary ends after the Use band instead of reserving an
-            # empty panel.
+            # with neither a summary nor convention guidance ends after the Use
+            # band instead of reserving an empty panel.
+            guidance = (
+                "ConventionGuidanceShortLine"
+                if variant == "detailed"
+                else "ConventionGuidanceShortCompactLine"
+            )
             self.assertEqual(
-                "[AsDriven.DriverSummary] != ''",
+                "[AsDriven.DriverSummary] != '' || [AsDriven.%s] != ''" % guidance,
                 named["DriverNote"]["Bindings"]["Visible"]["Formula"]["Expression"],
                 variant,
             )
             self.assertEqual("i", named["NoteIcon"]["Text"], variant)
             self.assertEqual("Italic", named["NoteIcon"]["FontStyle"], variant)
+
+    def test_convention_guidance_shares_the_note_panel_rather_than_taking_room(self):
+        """The card is a fixed layout, so guidance shares the one panel it has.
+
+        Three states, drawn in the same box at the same position and chosen by
+        expression: a summary alone across five lines, a summary across four
+        with the guidance line beneath it, or the guidance line alone where the
+        record carries no summary. Exactly one can be visible at a time, which
+        is what keeps the panel from drawing two sentences over each other.
+        """
+        for variant in ("detailed", "compact"):
+            dashboard = self.generator.build_dashboard(overlay=True, variant=variant)
+            named = {
+                value["Name"]: value
+                for value in walk(dashboard)
+                if isinstance(value, dict) and "Name" in value
+            }
+            guidance = (
+                "ConventionGuidanceShortLine"
+                if variant == "detailed"
+                else "ConventionGuidanceShortCompactLine"
+            )
+            summary = "[AsDriven.DriverSummary]"
+            self.assertEqual(
+                "%s != '' && [AsDriven.%s] == ''" % (summary, guidance),
+                named["NoteSummaryOnly"]["Bindings"]["Visible"]["Formula"]["Expression"],
+                variant,
+            )
+            self.assertEqual(
+                "%s != '' && [AsDriven.%s] != ''" % (summary, guidance),
+                named["NoteSummaryWithConvention"]["Bindings"]["Visible"]["Formula"]["Expression"],
+                variant,
+            )
+            self.assertEqual(
+                "%s == '' && [AsDriven.%s] != ''" % (summary, guidance),
+                named["NoteConventionOnly"]["Bindings"]["Visible"]["Formula"]["Expression"],
+                variant,
+            )
+            # The client publishes the guidance already fitted to this card's
+            # note width, so the card binds that line rather than the paragraph.
+            for name in ("NoteConventionLine", "NoteConventionLead"):
+                self.assertEqual(
+                    "[AsDriven.%s]" % guidance,
+                    named[name]["Bindings"]["Text"]["Formula"]["Expression"],
+                    "%s %s" % (variant, name),
+                )
+            # A greedy wrap breaks the earlier lines the same way whatever the
+            # limit, so the shared state reuses lines 1 to 3 and takes its last
+            # row from the client's four-line wrap, which ellipsises anything
+            # that would have run onto the row this state no longer draws.
+            summary_prefix = (
+                "DriverSummary" if variant == "detailed" else "DriverSummaryCompact"
+            )
+            for index in (1, 2, 3):
+                self.assertEqual(
+                    "[AsDriven.%sLine%d]" % (summary_prefix, index),
+                    named["NoteSharedLine%d" % index]["Bindings"]["Text"]["Formula"]["Expression"],
+                    variant,
+                )
+            self.assertEqual(
+                "[AsDriven.%sLine4Of4]" % summary_prefix,
+                named["NoteSharedLine4"]["Bindings"]["Text"]["Formula"]["Expression"],
+                variant,
+            )
+            # Sharing the panel costs the fifth summary line, so the shared
+            # state draws four and hands the last row to the guidance.
+            self.assertEqual(
+                named["NoteLine5"]["Top"], named["NoteConventionLine"]["Top"], variant)
+            self.assertEqual(
+                named["NoteLine1"]["Top"], named["NoteConventionLead"]["Top"], variant)
+            for name in ("NoteConventionLine", "NoteConventionLead"):
+                item = named[name]
+                panel = named["NotePanel"]
+                self.assertLessEqual(
+                    item["Top"] + item["Height"],
+                    panel["Top"] + panel["Height"],
+                    "%s %s is drawn past the panel" % (variant, name),
+                )
+            # It is the only line in the panel that is not about this car, and
+            # the colour says so before the sentence does.
+            self.assertNotEqual(
+                named["NoteLine1"]["TextColor"],
+                named["NoteConventionLine"]["TextColor"],
+                variant,
+            )
 
     def test_rows_mark_where_the_simulator_departs_from_the_real_car(self):
         dashboard = self.generator.build_dashboard(overlay=True, variant="detailed")
