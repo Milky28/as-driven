@@ -385,6 +385,7 @@ namespace AsDriven.Core
             // simulator overrides. It is the same note for every simulator view
             // of this record.
             string conventionGuidance = ConventionRules.Resolve(conventions, controls);
+            string conventionGuidanceShort = ConventionRules.ResolveShort(conventions, controls);
             JArray simulators = record["simulators"] as JArray;
             if (simulators == null || simulators.Count == 0)
             {
@@ -485,6 +486,7 @@ namespace AsDriven.Core
                     WheelRimSourceLabel = RequiredString(simulatorWheelRim, "source_label", recordPath),
                     DriverSummary = OptionalText(record, "driver_summary"),
                     ConventionGuidance = conventionGuidance,
+                    ConventionGuidanceShort = conventionGuidanceShort,
                     OverriddenPaths = overriddenPaths,
                     UnestablishedPaths = unestablishedPaths,
                     SimulatorDifference = DescribeOverrides(simulator, overriddenPaths),

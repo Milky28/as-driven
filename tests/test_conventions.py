@@ -41,6 +41,21 @@ class ConventionRegistryTests(unittest.TestCase):
                     rule["guidance"], r"not established", rule["convention_id"]
                 )
 
+    def test_every_rule_carries_a_card_length_form_of_the_same_sentence(self) -> None:
+        """A client with one line to spend must not have to truncate the long one.
+
+        Truncation would cut the sentence wherever the width ran out, which is
+        just as likely to drop the instruction as the reasoning. The short form
+        decides in advance what survives, so it has to keep the hedge and be
+        shorter than the sentence it stands in for.
+        """
+        for rule in load_conventions(ROOT):
+            with self.subTest(rule=rule["convention_id"]):
+                self.assertRegex(rule["short_guidance"], r"[Nn]ot established")
+                self.assertLess(
+                    len(rule["short_guidance"]), len(rule["guidance"])
+                )
+
     def test_no_rule_contradicts_a_curated_record(self) -> None:
         """A rule describes a class; a record can still know better.
 
@@ -79,6 +94,12 @@ class ConventionResolverTests(unittest.TestCase):
             "/authentic_controls/transmission/upshift/clutch",
             result["applies"][0]["paths"],
         )
+
+    def test_both_forms_reach_a_client_so_it_can_pick_by_the_room_it_has(self) -> None:
+        rules = load_conventions(ROOT)
+        applies = guidance_for(self._record("unknown", "unknown"), rules)["applies"]
+        self.assertTrue(applies[0]["guidance"])
+        self.assertTrue(applies[0]["short_guidance"])
 
     def test_an_established_value_is_never_described_by_a_rule(self) -> None:
         rules = load_conventions(ROOT)

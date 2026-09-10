@@ -62,6 +62,21 @@ namespace AsDriven.Core
         /// </summary>
         public static string Resolve(JArray conventions, JObject authenticControls)
         {
+            return Resolve(conventions, authenticControls, "guidance");
+        }
+
+        /// <summary>
+        /// The same guidance at card length, for a client with a single line to
+        /// spend on it. It keeps the hedge and the instruction and drops the
+        /// reasoning, which stays in the long form and in the public catalog.
+        /// </summary>
+        public static string ResolveShort(JArray conventions, JObject authenticControls)
+        {
+            return Resolve(conventions, authenticControls, "short_guidance");
+        }
+
+        private static string Resolve(JArray conventions, JObject authenticControls, string field)
+        {
             if (conventions == null || conventions.Count == 0 || authenticControls == null)
             {
                 return string.Empty;
@@ -86,7 +101,7 @@ namespace AsDriven.Core
                     continue;
                 }
 
-                string guidance = (string)rule["guidance"];
+                string guidance = (string)rule[field];
                 if (!string.IsNullOrWhiteSpace(guidance) && !lines.Contains(guidance))
                 {
                     lines.Add(guidance);

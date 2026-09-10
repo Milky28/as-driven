@@ -826,7 +826,11 @@ def _car(
         # own answer is unknown. Never an authentic value; see
         # docs/convention-guidance.md.
         "conventions": [
-            {"guidance": item["guidance"], "strength": item["strength"]}
+            {
+                "guidance": item["guidance"],
+                "short_guidance": item["short_guidance"],
+                "strength": item["strength"],
+            }
             for item in guidance_for(record, conventions or [])["applies"]
         ],
         "verification": _verification(record, source_index),
@@ -1475,8 +1479,13 @@ def _row(car: dict[str, Any]) -> str:
         # says the real value is unknown before saying what such cars usually
         # did. The rule's strength stays in the registry as review material
         # rather than being shown; the wording carries the hedge.
+        #
+        # The short form leads and the long form follows, because the short
+        # form is what a driver sees on the overlay card: this page is the
+        # "elsewhere" where the reasoning it leaves out can be read.
         lines = "".join(
-            f'<p class="convention-line">{_e(item["guidance"])}</p>'
+            f'<p class="convention-line"><strong>{_e(item["short_guidance"])}</strong> '
+            f'{_e(item["guidance"])}</p>'
             for item in car["conventions"]
         )
         detail.append(
@@ -2049,6 +2058,9 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
 }}
 .convention h4 {{ color: var(--tone-optional, #d6a340); }}
 .convention-line {{ margin: 0; font-size: 14px; line-height: 1.5; opacity: .92; }}
+/* The short form leads: it is the line the overlay card shows, and the
+   sentences after it are the reasoning the card has no room for. */
+.convention-line strong {{ color: var(--tone-optional, #d6a340); font-weight: 600; }}
 .block {{ display: flex; flex-direction: column; gap: 5px; }}
 .block h4 {{
   margin: 0;

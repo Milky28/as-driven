@@ -85,6 +85,10 @@ def guidance_for(record: dict[str, Any], conventions: list[dict[str, Any]]) -> d
                 "paths": open_paths,
                 "strength": rule["strength"],
                 "guidance": rule["guidance"],
+                # The same sentence at card length, for a client with one line
+                # to spend. Both are carried so the client picks by the room it
+                # has rather than truncating the long one mid-thought.
+                "short_guidance": rule["short_guidance"],
             })
         if disagreeing:
             conflicts.append({

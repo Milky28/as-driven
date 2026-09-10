@@ -15,7 +15,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["convention_id", "label", "when", "then", "strength", "guidance", "basis"],
+        "required": ["convention_id", "label", "when", "then", "strength", "guidance", "short_guidance", "basis"],
         "properties": {
           "convention_id": {
             "description": "Stable slug naming the rule.",
@@ -55,9 +55,15 @@
             "enum": ["near-certain", "usual"]
           },
           "guidance": {
-            "description": "The sentence a driver reads. It must say that the real car's value is not established before saying what such cars usually did.",
+            "description": "The sentence a driver reads where there is room for it. It must say that the real car's value is not established before saying what such cars usually did.",
             "type": "string",
             "minLength": 1
+          },
+          "short_guidance": {
+            "description": "The same sentence for a client with one line to spend, such as the overlay card. It carries the same hedge and the same instruction; the reasoning it drops lives in `guidance` and in the catalog. This bound is a coarse guard - the binding one is width, which the client tests measure against the narrowest card the plugin draws.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 72
           },
           "basis": { "type": "string", "minLength": 1 },
           "source_refs": {

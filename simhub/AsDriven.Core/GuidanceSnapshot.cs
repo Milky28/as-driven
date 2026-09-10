@@ -72,6 +72,13 @@ namespace AsDriven.Core
         public string ConventionGuidance { get; private set; }
 
         /// <summary>
+        /// The card-length form of the same guidance, for a dashboard with one
+        /// line to spend on it. The reasoning it leaves out stays in
+        /// <see cref="ConventionGuidance"/> and in the public catalog.
+        /// </summary>
+        public string ConventionGuidanceShort { get; private set; }
+
+        /// <summary>
         /// JSON Pointer paths the simulator entry overrides, empty when the
         /// simulator matches the real car on every curated value.
         /// </summary>
@@ -188,6 +195,12 @@ namespace AsDriven.Core
         public string ConventionGuidanceCompactLine2 { get; private set; }
         public string ConventionGuidanceCompactLine3 { get; private set; }
         public string ConventionGuidanceCompactLine4 { get; private set; }
+
+        // The short form is drawn as one line by design, so it is published as
+        // one property rather than a numbered set: a card that needed a second
+        // line would want the long form and the room to hold it.
+        public string ConventionGuidanceShortLine { get; private set; }
+        public string ConventionGuidanceShortCompactLine { get; private set; }
         public string DriverSummaryLine1 { get; private set; }
         public string DriverSummaryLine2 { get; private set; }
         public string DriverSummaryLine3 { get; private set; }
@@ -316,6 +329,12 @@ namespace AsDriven.Core
             string[] compactTechniqueLines = SplitCompactTechniqueSummary(values.TechniqueSummary);
             string[] conventionLines = WrapLines(values.ConventionGuidance, 620, 1250, 4);
             string[] compactConventionLines = WrapLines(values.ConventionGuidance, 432, 1100, 4);
+            // One line each, at the two note widths the packaged cards draw.
+            // A rule whose short form does not fit here is ellipsised, which
+            // the client tests treat as a defect in the rule rather than a
+            // display accident.
+            string[] shortConventionLines = WrapLines(values.ConventionGuidanceShort, 620, 1250, 1);
+            string[] compactShortConventionLines = WrapLines(values.ConventionGuidanceShort, 432, 1100, 1);
             return new GuidanceSnapshot
             {
                 HasMatch = true,
@@ -362,6 +381,7 @@ namespace AsDriven.Core
                 UnestablishedPaths = values.UnestablishedPaths ?? new string[0],
                 SimulatorDifference = values.SimulatorDifference,
                 ConventionGuidance = values.ConventionGuidance ?? string.Empty,
+                ConventionGuidanceShort = values.ConventionGuidanceShort ?? string.Empty,
                 ConventionGuidanceLine1 = conventionLines[0],
                 ConventionGuidanceLine2 = conventionLines[1],
                 ConventionGuidanceLine3 = conventionLines[2],
@@ -370,6 +390,8 @@ namespace AsDriven.Core
                 ConventionGuidanceCompactLine2 = compactConventionLines[1],
                 ConventionGuidanceCompactLine3 = compactConventionLines[2],
                 ConventionGuidanceCompactLine4 = compactConventionLines[3],
+                ConventionGuidanceShortLine = shortConventionLines[0],
+                ConventionGuidanceShortCompactLine = compactShortConventionLines[0],
                 DriverSummaryLine1 = summaryLines[0],
                 DriverSummaryLine2 = summaryLines[1],
                 DriverSummaryLine3 = summaryLines[2],
@@ -440,6 +462,7 @@ namespace AsDriven.Core
                 UnestablishedPaths = new string[0],
                 SimulatorDifference = string.Empty,
                 ConventionGuidance = string.Empty,
+                ConventionGuidanceShort = string.Empty,
                 ConventionGuidanceLine1 = string.Empty,
                 ConventionGuidanceLine2 = string.Empty,
                 ConventionGuidanceLine3 = string.Empty,
@@ -448,6 +471,8 @@ namespace AsDriven.Core
                 ConventionGuidanceCompactLine2 = string.Empty,
                 ConventionGuidanceCompactLine3 = string.Empty,
                 ConventionGuidanceCompactLine4 = string.Empty,
+                ConventionGuidanceShortLine = string.Empty,
+                ConventionGuidanceShortCompactLine = string.Empty,
                 DriverSummaryLine1 = string.Empty,
                 DriverSummaryLine2 = string.Empty,
                 DriverSummaryLine3 = string.Empty,

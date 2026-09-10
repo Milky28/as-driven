@@ -51,6 +51,30 @@ write into `authentic_controls` because the evidence is unanimous. Convention
 guidance is the same machinery where the evidence is weaker, and the output is
 labelled rather than curated.
 
+## Two forms of the same sentence
+
+Every rule carries its guidance twice: the full sentence, and a card-length
+`short_guidance` that keeps the hedge and the instruction and drops the
+reasoning.
+
+That is not a convenience. The catalog can spend a paragraph on a rule and the
+overlay card can spend one line, and the difference is large enough that a
+client which only had the long form would have to truncate it. Truncation cuts
+wherever the width runs out, which is as likely to drop what the driver should
+do as the reasoning behind it. Writing the short form decides in advance what
+survives.
+
+Both forms must say the real value is not established before saying what such
+cars usually did, because the wording is the only thing separating convention
+from a finding about the car in front of the driver. The schema caps the short
+form at 72 characters as a coarse guard; the binding limit is width, and the
+client tests measure the resolved line against the narrower of the two packaged
+cards and fail if it ellipsises.
+
+The public catalog shows both, short form first. That makes this page the
+"elsewhere" the card's reasoning lives: a driver who reads one line on the
+overlay can find out here why it says what it says.
+
 ## Rules that must hold
 
 - A rule fills an `unknown`. It never overrides, contradicts or outranks an
@@ -125,15 +149,24 @@ than an error, so an older dataset still loads.
 
 The plugin publishes `AsDriven.ConventionGuidance` and its wrapped
 `ConventionGuidanceLine1-4` and `ConventionGuidanceCompactLine1-4`, so any
-dashboard can bind them. They are empty for most cars, and a panel bound to them
-should hide itself rather than reserve blank space, exactly as the driver note
-does.
+dashboard can bind them. It also publishes `AsDriven.ConventionGuidanceShort`
+and the two single-line forms `ConventionGuidanceShortLine` and
+`ConventionGuidanceShortCompactLine`, already fitted to the note width of the
+detailed and compact cards. The short form is published as one property rather
+than a numbered set on purpose: a card needing a second line wants the long
+form and the room to hold it. All of them are empty for most cars, and a panel
+bound to them should hide itself rather than reserve blank space, exactly as the
+driver note does.
 
 **The packaged overlay does not draw them yet.** Its card is a fixed layout: the
 note panel occupies 264 to 363 and the footer rule sits at 371, so there is no
 room for a second panel without re-flowing the card. Reusing the note panel is
-not an option either, because 39 of the 42 cars carrying guidance also carry a
-driver summary, and one of the two would have to be hidden. Drawing it needs
-either a taller card or the short form of each rule - a card-length line with the
-reasoning available elsewhere - which is the change worth making first, since the
-overlay has far less room than the catalog.
+not free either, because 39 of the 42 cars carrying guidance also carry a driver
+summary. With the short form in place the option that costs least is a second
+variant of the note panel - the same box at the same position, drawn as four
+summary lines plus one convention line, shown only when a car carries guidance,
+with the five-line variant shown when it does not. That trades the fifth summary
+line on those cars for the guidance line, which measures out cheap: of the 39
+cars carrying both, none uses the fifth line on the detailed card and one -
+`bmw-3-0-csl-imsa-1975` - uses it on the compact card. So the trade costs one
+car one line of summary on the narrower card, against guidance reaching all 42.

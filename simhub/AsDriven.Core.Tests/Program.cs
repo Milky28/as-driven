@@ -43,6 +43,31 @@ namespace AsDriven.Core.Tests
                     openMechanism.ConventionGuidanceLine1.Length > 0,
                     "wraps convention guidance for the overlay");
 
+                // The short form is what a card with one line to spend shows,
+                // so it has to survive that line intact. Wrapping ellipsises
+                // anything too long, which would drop the half of the sentence
+                // that says what to do - so the assertion is equality with the
+                // rule's own text, at the narrower of the two packaged cards.
+                True(
+                    openMechanism.ConventionGuidanceShort.Length > 0,
+                    "offers a card-length form of the same guidance");
+                True(
+                    openMechanism.ConventionGuidanceShort.IndexOf(
+                        "not established", StringComparison.OrdinalIgnoreCase) >= 0,
+                    "the short form keeps the hedge the long form carries");
+                True(
+                    openMechanism.ConventionGuidanceShort.Length
+                        < openMechanism.ConventionGuidance.Length,
+                    "the short form is the compressed one");
+                Equal(
+                    openMechanism.ConventionGuidanceShort,
+                    openMechanism.ConventionGuidanceShortCompactLine,
+                    "the short form fits one line of the compact card without ellipsis");
+                Equal(
+                    openMechanism.ConventionGuidanceShort,
+                    openMechanism.ConventionGuidanceShortLine,
+                    "the short form fits one line of the detailed card without ellipsis");
+
                 // The Miura has an established synchromesh gearbox, so the
                 // rule keyed on unestablished construction does not reach it.
                 // It is the record that must never be spoken for: its own
@@ -55,6 +80,10 @@ namespace AsDriven.Core.Tests
                         string.Empty,
                         answersForItself.ConventionGuidance,
                         "offers no convention guidance to a car that establishes its own technique");
+                    Equal(
+                        string.Empty,
+                        answersForItself.ConventionGuidanceShort,
+                        "offers no short form either where there is no gap to speak to");
                 }
 
                 Version datasetVersion;

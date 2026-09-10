@@ -42,6 +42,12 @@
         /// which is a supported state rather than a defect.
         /// </summary>
         public string ConventionGuidance;
+
+        /// <summary>
+        /// The same guidance at card length, for a client with one line to
+        /// spend. Empty exactly when <see cref="ConventionGuidance"/> is.
+        /// </summary>
+        public string ConventionGuidanceShort;
         public string[] OverriddenPaths;
         public string[] UnestablishedPaths;
         public string SimulatorDifference;
