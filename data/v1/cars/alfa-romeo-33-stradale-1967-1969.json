@@ -1,0 +1,266 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "alfa-romeo-33-stradale-1967-1969",
+  "identity": {
+    "display_name": "Alfa Romeo 33 Stradale",
+    "manufacturer": "Alfa Romeo",
+    "model": "33 Stradale",
+    "year": {
+      "from": 1967,
+      "to": 1969,
+      "label": "1967-1969 Alfa Romeo 33 Stradale (Franco Scaglione-bodied, 18 built, road-going derivative of the Tipo 33 racing programme)"
+    },
+    "class": "Road-going sports car (Tipo 33 racing-derived limited production)",
+    "real_world_identity_notes": "The observed Assetto Corsa content (telemetry name \"Alfa Romeo 33 Stradale\", internal id ks_alfa_33_stradale) maps to Alfa Romeo's 1967-1969 road-going 33 Stradale: a hand-built, Franco Scaglione-bodied, mid-engined coupe developed from the Tipo 33 sports-racing chassis and first shown at the September 1967 Monza Sport Car Show, officially introduced at the 1967 Turin Motor Show, with sources agreeing on 18 examples built through March 1969 (one enthusiast source separately speculates that up to three further undocumented examples may have left the works, without disputing the core figure). It shares its two-tube 'H'-shaped chassis, dry-sump 90-degree 2.0-litre Alfa Romeo V8 (detuned from the racer's output to roughly 230 bhp), and Colotti gearbox lineage with the contemporary Tipo 33 Group 6 sports-racing prototypes (33/2, 33/3, etc.), but is a distinct, road-legal, glazed and trimmed production car, not the open/stripped pure racer, and the two must not be treated as the same vehicle for authentic-controls purposes. It is also unrelated to the several one-off Bertone/Pininfarina/Italdesign design studies built on the same rolling chassis (Carabo, Iguana, Navajo, Cuneo, P33 Roadster), and, despite sharing a name, is a completely different, unrelated 21st-century vehicle from the 2023 Alfa Romeo \"33 Stradale\" revival (a carbon-tubbed, twin-turbo hybrid V6 hypercar with paddle-shift transmission and a digital \"telescope\" instrument display, which dominates current web search results for this name). Reviewed sources agree closely on identity, chassis lineage, body designer, and general Colotti-gearbox drivetrain, but disagree specifically on forward gear count: Wikipedia and the author-credited Ultimatecarpage profile (the latter citing Peter Collins & Ed McDonough's dedicated book \"Alfa Romeo Tipo 33\") both independently describe a six-speed, all-synchromesh Colotti gearbox, while Supercars.net explicitly contrasts a six-speed Colotti gearbox it attributes only to the Group 6 racing version against a five-speed transmission it attributes to the road Stradale. No reviewed source reconciles this, so forward_gears is reported as conflicting rather than silently resolved."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "unknown"
+      },
+      "downshift": {
+        "clutch": "required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish gearbox construction: synchromesh; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: required; transmission downshift clutch: required; transmission downshift manual_blip: optional; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
+      "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Alfa Romeo 33 Stradale"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_alfa_33_stradale"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-10",
+      "source_refs": [
+        "wikipedia.alfa-romeo-33-stradale",
+        "ultimatecarpage.alfa-romeo-33-stradale",
+        "supercars-net.alfa-romeo-tipo-33-stradale",
+        "wikimedia-commons.malinov-2018.alfa-33-stradale-interior",
+        "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Wikipedia, the author-credited Ultimatecarpage reference (citing dedicated Alfa Romeo Tipo 33 literature), and Supercars.net all independently converge on the same identity: the 1967-1969 Alfa Romeo 33 Stradale, an 18-off, Franco Scaglione-bodied road car derived from the Tipo 33 racing chassis. No existing curated record in data/v1 covers it (checked against data/v1/index.json; the case's related-record leads list was empty), so record_action is create-new."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "wikipedia.alfa-romeo-33-stradale",
+          "ultimatecarpage.alfa-romeo-33-stradale",
+          "supercars-net.alfa-romeo-tipo-33-stradale",
+          "wikimedia-commons.malinov-2018.alfa-33-stradale-interior",
+          "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Wikipedia, the author-credited Ultimatecarpage reference (citing dedicated Alfa Romeo Tipo 33 literature), and Supercars.net all independently converge on the same identity: the 1967-1969 Alfa Romeo 33 Stradale, an 18-off, Franco Scaglione-bodied road car derived from the Tipo 33 racing chassis. No existing curated record in data/v1 covers it (checked against data/v1/index.json; the case's related-record leads list was empty), so record_action is create-new."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "wikipedia.alfa-romeo-33-stradale",
+          "ultimatecarpage.alfa-romeo-33-stradale",
+          "supercars-net.alfa-romeo-tipo-33-stradale",
+          "wikimedia-commons.malinov-2018.alfa-33-stradale-interior",
+          "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Ultimatecarpage explicitly states \"all syncromesh forward gears\"; Wikipedia independently corroborates a conventional Colotti manual gearbox. No reviewed source disputes the synchromesh construction itself (the five-speed/six-speed disagreement is only about ratio count, not about synchromesh versus a dog-engagement gearbox). All reviewed written sources describe a conventional manual Colotti gearbox, and the directly-viewed cockpit photograph shows a single floor-mounted lever with a round knob rising from a gate/access plate, consistent with a driver-shifted H-pattern gearbox rather than any sequential or automated actuation. Derived from the established mechanism per docs/data-model.md (\"The gate and the standing start\"): an H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest regardless of internal construction. shift_actuation is cleanly established here (not conflicting), so the derivation applies. Derived from the established synchromesh construction per docs/data-model.md (\"Construction and the running-shift clutch\"): a synchromesh gearbox takes clutch required, since the clutch is how the car is shifted and a clutchless change is a trick that wears the synchros. Capped at medium confidence because it inherits the medium confidence of the underlying gearbox_type finding. Derived from the established synchromesh construction per docs/data-model.md (\"Construction and the running-shift clutch\"), the same rule and confidence basis as the upshift clutch claim. Derived from the established synchromesh construction per docs/data-model.md (\"Construction and the downshift blip\"): a synchromesh gearbox matches shaft speeds itself, so a downshift blip eases the synchros and is authentic technique rather than a requirement. Capped at medium confidence because it inherits the medium confidence of the underlying gearbox_type finding. The directly-viewed cockpit photograph shows a slim, dark, multi-spoke rim with a generally circular perimeter, no molded control-panel grips, and no flattened section. Supercars.net independently corroborates a \"three-spoke steering wheel\" for this car, matching the photograph's spoke count, though it does not itself describe rim topology. The photograph shows the rim continuing unbroken around its full circumference, with no cutaway section at the top. The photograph shows the only instrumentation (an analog tachometer and several smaller gauges) mounted on the engine-turned dashboard behind the wheel, not on the wheel itself; Supercars.net's description of a \"simple vinyl-upholstered dash\" with gauges \"behind the ... steering wheel\" corroborates that the instruments are dash-mounted. No rim-mounted LCD, LED, or segment display is visible. The photograph shows no LED or lamp array mounted on the wheel rim itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-alfa-romeo-33-stradale-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch"
+        ],
+        "source_refs": [
+          "wikipedia.alfa-romeo-33-stradale",
+          "ultimatecarpage.alfa-romeo-33-stradale",
+          "supercars-net.alfa-romeo-tipo-33-stradale",
+          "wikimedia-commons.malinov-2018.alfa-33-stradale-interior"
+        ],
+        "confidence": "high",
+        "basis": "Ultimatecarpage explicitly states \"all syncromesh forward gears\"; Wikipedia independently corroborates a conventional Colotti manual gearbox. No reviewed source disputes the synchromesh construction itself (the five-speed/six-speed disagreement is only about ratio count, not about synchromesh versus a dog-engagement gearbox). All reviewed written sources describe a conventional manual Colotti gearbox, and the directly-viewed cockpit photograph shows a single floor-mounted lever with a round knob rising from a gate/access plate, consistent with a driver-shifted H-pattern gearbox rather than any sequential or automated actuation. Derived from the established mechanism per docs/data-model.md (\"The gate and the standing start\"): an H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest regardless of internal construction. shift_actuation is cleanly established here (not conflicting), so the derivation applies. Derived from the established synchromesh construction per docs/data-model.md (\"Construction and the running-shift clutch\"): a synchromesh gearbox takes clutch required, since the clutch is how the car is shifted and a clutchless change is a trick that wears the synchros. Capped at medium confidence because it inherits the medium confidence of the underlying gearbox_type finding. Derived from the established synchromesh construction per docs/data-model.md (\"Construction and the running-shift clutch\"), the same rule and confidence basis as the upshift clutch claim. Derived from the established synchromesh construction per docs/data-model.md (\"Construction and the downshift blip\"): a synchromesh gearbox matches shaft speeds itself, so a downshift blip eases the synchros and is authentic technique rather than a requirement. Capped at medium confidence because it inherits the medium confidence of the underlying gearbox_type finding. The directly-viewed cockpit photograph shows a slim, dark, multi-spoke rim with a generally circular perimeter, no molded control-panel grips, and no flattened section. Supercars.net independently corroborates a \"three-spoke steering wheel\" for this car, matching the photograph's spoke count, though it does not itself describe rim topology. The photograph shows the rim continuing unbroken around its full circumference, with no cutaway section at the top. The photograph shows the only instrumentation (an analog tachometer and several smaller gauges) mounted on the engine-turned dashboard behind the wheel, not on the wheel itself; Supercars.net's description of a \"simple vinyl-upholstered dash\" with gauges \"behind the ... steering wheel\" corroborates that the instruments are dash-mounted. No rim-mounted LCD, LED, or segment display is visible. The photograph shows no LED or lamp array mounted on the wheel rim itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

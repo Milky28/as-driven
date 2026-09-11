@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.6",
+  "approved_at": "2026-09-11",
+  "record_id": "bmw-m3-e30-group-a",
+  "simulator": "ac",
+  "telemetry_name": "BMW M3 E30 Group A",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.bmw-m3-e30-group-a.20260910t233112691z-6a5253ba",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "dogleg-h",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "optional",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "required"
+  },
+  "confidence_notes": "The exact 1987-1989 BMW M3 (E30) FIA Group A touring car racing specification identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources."
+}

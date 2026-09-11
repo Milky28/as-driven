@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.2",
+  "approved_at": "2026-09-11",
+  "record_id": "alfa-romeo-33-stradale-1967-1969",
+  "simulator": "ac",
+  "telemetry_name": "Alfa Romeo 33 Stradale",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "optional",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "required"
+  },
+  "confidence_notes": "The exact 1967-1969 Alfa Romeo 33 Stradale (Franco Scaglione-bodied, 18 built, road-going derivative of the Tipo 33 racing programme) identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "staged_record_id": "alfa-romeo-33-stradale"
+}

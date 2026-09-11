@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.4",
+  "approved_at": "2026-09-11",
+  "record_id": "audi-sport-quattro-s1-e2",
+  "simulator": "ac",
+  "telemetry_name": "Audi Sport quattro S1 E2",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1985-1986 Audi Sport quattro S1 E2 (Audi Sport works Group B rally car, 20 built) identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources."
+}

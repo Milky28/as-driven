@@ -1,0 +1,230 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "bmw-m3-e30",
+  "identity": {
+    "display_name": "BMW M3 E30",
+    "manufacturer": "BMW",
+    "model": "M3 (E30)",
+    "year": {
+      "from": 1986,
+      "to": 1991,
+      "label": "1986-1991 BMW M3 (E30), the first-generation road-going M3 built to homologate the S14-engined Group A touring car"
+    },
+    "class": "Road-going touring coupe",
+    "real_world_identity_notes": "The observation's telemetry name \"BMW M3 E30\" and internal id bmw_m3_e30 map to the road-going, first-generation BMW M3 (E30 chassis), the production coupe BMW Motorsport GmbH built from 1986 to 1991 to homologate the M3 for FIA Group A touring car racing (a minimum of 5,000 road-legal examples within twelve months, per BMW M GmbH's own heritage account). This is a distinct real car from the two racing-specification siblings researched in this same batch: bmw_m3_e30_gra (issue-102, the ~1987-1989 Group A racer, proposed record_id bmw-m3-e30-group-a) and bmw_m3_e30_dtm (issue-103, the six-speed 1992 Gr.A DTM car, proposed record_id bmw-m3-e30-dtm-1992), and from the already-curated data/v1/cars/bmw-m3-sport-evo-group-a.json record, which is a different simulator's (AMS2) representation of the 1990 Group A Sport Evolution homologation special's racing spec rather than any road car. The community Assetto Corsa database independently confirms this exact internal id ships as bundled base-game \"street\"-class content, distinct from those racing siblings and from the unrelated bmw_m3_e30_drift tuned variants. BMW's own S14 four-cylinder engine powered the model across a five-year run at outputs BMW itself gives as \"200-238 hp\": 200 hp (195 hp with the catalyst fitted) for the base 1986 car, 220 hp for the 1988 Evolution, and 238 hp for the rare (600-unit) 1990 M3 Sport Evolution, all sharing the same core Getrag five-speed manual gearbox architecture and three-spoke M-Technic steering wheel family. The reviewed AC community database lists this exact content's power as 238 bhp, which numerically matches the top-of-range 1990 Sport Evolution road car rather than the base 200 hp car BMW's own heritage page treats as \"the first BMW M3\"; no source reviewed here states which exact production stage Kunos modeled, so this record targets the shared road-going M3 (E30) family as a whole across 1986-1991 rather than asserting one narrow single-year specification, and the power-figure ambiguity is left as an open question rather than resolved. A further, sourced market split applies to the gearbox: European-market M3s used a close-ratio Getrag five-speed with a dogleg shift pattern (first gear down and to the left, independently confirmed by BMW M GmbH's own heritage text), while North American- and Japanese-market M3s used a different, standard H-pattern Getrag five-speed sharing its architecture with the contemporary E30 325i, with different ratios and final drive. The observation's own staged simulator behavior showed a dogleg-H gate, consistent with a European-spec car, which this record proposes as the represented market, while flagging the North American/Japanese H-pattern variant as a distinct, real, sourced alternative that must not be silently merged into this record's claims if a US/Japan-spec observation is reviewed later."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "dogleg-h",
+      "upshift": {
+        "clutch": "required",
+        "throttle_lift": "required",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required",
+      "first_gear_position": "down-left"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h; transmission first_gear_position: down left; standing-start clutch use: required; transmission upshift clutch: required; transmission upshift throttle_lift: required; transmission downshift clutch: required; transmission downshift manual_blip: optional; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M3 E30"
+        },
+        {
+          "kind": "internal-id",
+          "value": "bmw_m3_e30"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.bmw-m3-e30.20260910t232743785z-3e4d0974 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.bmw-m3-e30.20260910t232743785z-3e4d0974 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.bmw-m3-e30.20260910t232743785z-3e4d0974 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.bmw-m3-e30.20260910t232743785z-3e4d0974 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-10",
+      "source_refs": [
+        "bmw-m.com.2020.bmw-m3-e30-portrait",
+        "press-bmwgroup.p0036752.m3-e30-cockpit-1987",
+        "e30zone.net.e30wiki.m3",
+        "teamspeed.forum.e30-m3-german-us-spec",
+        "bimmertips.dogleg-gearbox-advantages",
+        "assetto-db.bmw-m3-e30",
+        "ac.local-live-bmw-m3-e30-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "BMW M GmbH's own official heritage page for this exact model, the community Assetto Corsa database's catalog entry for this exact internal id, and multiple independent enthusiast/technical sources all converge on the same identity: the road-going, S14-engined, first-generation BMW M3 (E30), produced 1986-1991 to homologate Group A racing. No existing curated record in this repository targets this road-going specification (the only existing E30 M3 record, bmw-m3-sport-evo-group-a.json, is a different simulator's racing-spec Group A homologation special, and the two sibling AC racing contents are being proposed as separate new records in this same batch), so record_action is create-new."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "bmw-m.com.2020.bmw-m3-e30-portrait",
+          "press-bmwgroup.p0036752.m3-e30-cockpit-1987",
+          "e30zone.net.e30wiki.m3",
+          "teamspeed.forum.e30-m3-german-us-spec",
+          "bimmertips.dogleg-gearbox-advantages",
+          "assetto-db.bmw-m3-e30",
+          "ac.local-live-bmw-m3-e30-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "BMW M GmbH's own official heritage page for this exact model, the community Assetto Corsa database's catalog entry for this exact internal id, and multiple independent enthusiast/technical sources all converge on the same identity: the road-going, S14-engined, first-generation BMW M3 (E30), produced 1986-1991 to homologate Group A racing. No existing curated record in this repository targets this road-going specification (the only existing E30 M3 record, bmw-m3-sport-evo-group-a.json, is a different simulator's racing-spec Group A homologation special, and the two sibling AC racing contents are being proposed as separate new records in this same batch), so record_action is create-new."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "bmw-m.com.2020.bmw-m3-e30-portrait",
+          "press-bmwgroup.p0036752.m3-e30-cockpit-1987",
+          "e30zone.net.e30wiki.m3",
+          "teamspeed.forum.e30-m3-german-us-spec",
+          "bimmertips.dogleg-gearbox-advantages",
+          "assetto-db.bmw-m3-e30",
+          "ac.local-live-bmw-m3-e30-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "BMW's own heritage page describes a single manual gearbox for the road car, and independent enthusiast sources consistently and specifically describe a five-speed Getrag unit (in either the European or North American configuration), with no reviewed source proposing a different forward gear count for the road car. No reviewed source states the word \"synchromesh\" directly for this exact gearbox. This is inferred from two consistent, independent descriptions that the North American/Japanese-market gearbox is an overdrive unit shared with the ordinary E30 325i road car (an unmodified synchronised road-going gearbox family), with the European dogleg unit described as a close-ratio version of the same Getrag architecture rather than a different internal-engagement construction. This is a road car built for everyday and touring use, not a stripped racing dogbox; the inference is reasonable but not a directly quoted statement, which keeps this at medium rather than high confidence. Every reviewed source describes a conventional, driver-operated, gated floor lever (dogleg-H for European-spec cars, standard H for North American/Japanese-spec cars); no source describes a sequential, paddle, or automated mechanism for either market variant of the road car. BMW M GmbH's own heritage text states the road car's manual gearbox had \"first gear on the bottom left, as is typical in racing\", and three independent enthusiast/technical sources consistently describe a dogleg gate for the European-market car, matching the staged simulator observation's own dogleg-H gate. This proposes the European-spec reading; the same sources independently and consistently document that North American- and Japanese-market cars instead used a standard H-pattern gearbox, recorded as a confusion risk rather than folded into this claim. BMW's own heritage text places first gear \"on the bottom left\", independently corroborated by a secondary source's identical description (\"first gear is in the lower left from the neutral position\") for the European-spec dogleg gate. Every reviewed source describes a conventional, driver-shifted, gated manual gearbox with no mention anywhere of an automated or clutchless launch system on any road-going example; a gated manual of this type requires the driver to operate a foot clutch to move off from rest. Derived from the established gated H-pattern manual construction: a road-going gated manual of this era and type is shifted with the clutch as authentic technique. This follows from the established mechanism rather than a source stating upshift technique specifically, which keeps this at medium rather than high confidence. Derived from the established clutched H-pattern construction: a clutched manual upshift on a gearbox of this type requires lifting the throttle to unload the drivetrain for the shift, standard technique for the established mechanism rather than something a source states for this car specifically. Derived from the established gated H-pattern manual construction: a downshift on a road-going gearbox of this type is made with the clutch as authentic technique. Follows from the established mechanism rather than a direct downshift-specific statement, hence medium rather than high confidence. A synchromesh gearbox matches shaft speeds itself, so a downshift throttle blip eases the synchros and is authentic technique but is not required to engage the gear. This follows from the established (medium-confidence) synchromesh construction finding rather than being separately stated by a source, so it cannot exceed that finding's confidence. BMW's own 1987 press photograph of this exact car's cockpit shows a continuous, round, three-spoke wheel with no fixed grip humps, control face, or flattened section, consistent with the 'M-Technic I' wheel an independent enthusiast source describes for cars of this model year. BMW's own press photograph shows the rim's upper section continuing unbroken around the top of the wheel rather than being cut away. BMW's own press photograph shows all instrumentation (an analog gauge cluster) mounted on the dashboard behind the wheel rather than on the wheel itself; the wheel carries no LCD, LED numeric readout, or other rim-integrated display. BMW's own press photograph shows no LED or lamp array mounted on the wheel rim or hub; the wheel carries a plain BMW roundel badge and no shift-light hardware of any kind. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-bmw-m3-e30-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-bmw-m3-e30-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/first_gear_position",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "bmw-m.com.2020.bmw-m3-e30-portrait",
+          "press-bmwgroup.p0036752.m3-e30-cockpit-1987",
+          "e30zone.net.e30wiki.m3",
+          "teamspeed.forum.e30-m3-german-us-spec",
+          "bimmertips.dogleg-gearbox-advantages",
+          "assetto-db.bmw-m3-e30"
+        ],
+        "confidence": "medium",
+        "basis": "BMW's own heritage page describes a single manual gearbox for the road car, and independent enthusiast sources consistently and specifically describe a five-speed Getrag unit (in either the European or North American configuration), with no reviewed source proposing a different forward gear count for the road car. No reviewed source states the word \"synchromesh\" directly for this exact gearbox. This is inferred from two consistent, independent descriptions that the North American/Japanese-market gearbox is an overdrive unit shared with the ordinary E30 325i road car (an unmodified synchronised road-going gearbox family), with the European dogleg unit described as a close-ratio version of the same Getrag architecture rather than a different internal-engagement construction. This is a road car built for everyday and touring use, not a stripped racing dogbox; the inference is reasonable but not a directly quoted statement, which keeps this at medium rather than high confidence. Every reviewed source describes a conventional, driver-operated, gated floor lever (dogleg-H for European-spec cars, standard H for North American/Japanese-spec cars); no source describes a sequential, paddle, or automated mechanism for either market variant of the road car. BMW M GmbH's own heritage text states the road car's manual gearbox had \"first gear on the bottom left, as is typical in racing\", and three independent enthusiast/technical sources consistently describe a dogleg gate for the European-market car, matching the staged simulator observation's own dogleg-H gate. This proposes the European-spec reading; the same sources independently and consistently document that North American- and Japanese-market cars instead used a standard H-pattern gearbox, recorded as a confusion risk rather than folded into this claim. BMW's own heritage text places first gear \"on the bottom left\", independently corroborated by a secondary source's identical description (\"first gear is in the lower left from the neutral position\") for the European-spec dogleg gate. Every reviewed source describes a conventional, driver-shifted, gated manual gearbox with no mention anywhere of an automated or clutchless launch system on any road-going example; a gated manual of this type requires the driver to operate a foot clutch to move off from rest. Derived from the established gated H-pattern manual construction: a road-going gated manual of this era and type is shifted with the clutch as authentic technique. This follows from the established mechanism rather than a source stating upshift technique specifically, which keeps this at medium rather than high confidence. Derived from the established clutched H-pattern construction: a clutched manual upshift on a gearbox of this type requires lifting the throttle to unload the drivetrain for the shift, standard technique for the established mechanism rather than something a source states for this car specifically. Derived from the established gated H-pattern manual construction: a downshift on a road-going gearbox of this type is made with the clutch as authentic technique. Follows from the established mechanism rather than a direct downshift-specific statement, hence medium rather than high confidence. A synchromesh gearbox matches shaft speeds itself, so a downshift throttle blip eases the synchros and is authentic technique but is not required to engage the gear. This follows from the established (medium-confidence) synchromesh construction finding rather than being separately stated by a source, so it cannot exceed that finding's confidence. BMW's own 1987 press photograph of this exact car's cockpit shows a continuous, round, three-spoke wheel with no fixed grip humps, control face, or flattened section, consistent with the 'M-Technic I' wheel an independent enthusiast source describes for cars of this model year. BMW's own press photograph shows the rim's upper section continuing unbroken around the top of the wheel rather than being cut away. BMW's own press photograph shows all instrumentation (an analog gauge cluster) mounted on the dashboard behind the wheel rather than on the wheel itself; the wheel carries no LCD, LED numeric readout, or other rim-integrated display. BMW's own press photograph shows no LED or lamp array mounted on the wheel rim or hub; the wheel carries a plain BMW roundel badge and no shift-light hardware of any kind. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

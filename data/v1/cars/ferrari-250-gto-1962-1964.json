@@ -39,17 +39,17 @@
     },
     "steering": {
       "wheel_rim": {
-        "shape": "unknown",
-        "integrated_display": "unknown",
-        "shift_lights": "unknown",
-        "open_top": "unknown",
-        "source_label": "real-car-research-not-established",
-        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "real-car-photograph",
+        "notes": "A full-resolution RM Sotheby's auction photograph of chassis 3413GT shows a continuous, wood-rimmed, three-spoke wheel with no fixed grip humps and no flattened section anywhere around its circumference, no rim-mounted display, and no rim-mounted shift lights. This is one specific, well-documented chassis rather than the exact chassis Kunos modeled, so the finding is treated as representative of the shared production cockpit rather than a chassis-exact match."
       }
     },
     "notes": [
       "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; shift pattern: dogleg h; transmission first_gear_position: down left.",
-      "The reviewed real-car sources do not establish running-shift technique or wheel topology; those baseline fields remain unknown.",
+      "The reviewed real-car sources do not establish running-shift technique; those baseline fields remain unknown.",
       "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown.",
       "The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction. All five registered H-pattern archetypes carry `standing_start_clutch: required`, and of the 96 curated H-pattern records the 87 that establish the field all say required with no dissenting value. Unlike the blip derivations this one does not rest on gearbox construction, so an unknown `gearbox_type` does not block it. The guided drive is not cited for it: a drive establishes what the simulator demands, not what the real car needed."
     ]
@@ -65,6 +65,14 @@
         {
           "kind": "internal-id",
           "value": "ac_legends_gtc_ferrari_250_gto"
+        },
+        {
+          "kind": "telemetry-name",
+          "value": "Ferrari 250 GTO"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_ferrari_250_gto"
         }
       ],
       "behavior": {
@@ -83,54 +91,6 @@
         ]
       },
       "overrides": [
-        {
-          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
-          "value": "no",
-          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
-          ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/open_top",
-          "value": "no",
-          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
-          ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "round",
-          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
-          ]
-        },
-        {
-          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
-          "value": "no",
-          "condition": "The guided observation ac.gtc60-ferrari-250-gto.20260824t185146400z-ef1b0da5 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
-          "confidence": {
-            "level": "verified",
-            "basis": "Exact value preserved from the validated guided-drive observation."
-          },
-          "source_refs": [
-            "ac.local-live-gtc60-ferrari-250-gto-controls.14923034"
-          ]
-        },
         {
           "path": "/authentic_controls/transmission/downshift/automatic_blip",
           "value": "no",
@@ -341,9 +301,33 @@
         ],
         "confidence": "high",
         "basis": "Ferrari's official technical history calls the 250 GTO gearbox all-synchromesh. A synchromesh matches the shaft speeds itself, so the driver's blip eases the synchros and is authentic technique rather than a condition of engagement. The value follows from the established construction, in the one direction that holds: a recorded construction settles the technique, and the technique never settles the construction. AC refuses the shift without a blip, which is carried as a simulator override rather than as the real car."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/shift_lights"
+        ],
+        "source_refs": [
+          "rmsothebys.2018.1962-ferrari-250-gto-chassis-3413-lot"
+        ],
+        "confidence": "medium",
+        "basis": "A full-resolution photograph of chassis 3413GT (RM Sotheby's Monterey 2018 auction catalog) shows a continuous, wood-rimmed, three-spoke wheel with no fixed grip humps and no flattened section anywhere around its circumference, unbroken across the top; only a Ferrari prancing-horse badge sits at its centre, with all instrumentation dash-mounted rather than on the wheel; and no LED or lamp array appears on the rim or spokes. Confidence is medium because this is one specific, well-documented chassis rather than the exact chassis Kunos modeled."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "steam.assetto-corsa-ferrari-70th-anniversary-pack.store-page",
+          "as-driven.repository.gtc60-ferrari-250-gto-record-scan"
+        ],
+        "confidence": "high",
+        "basis": "Kunos's own Steam store page for the Ferrari 70th Anniversary Pack confirms ks_ferrari_250_gto is Kunos's official Ferrari 250 GTO asset, and the already-registered GTC60 package-scan source shows the GTC60 wrapper requires that exact content_id as its own dependency: the two telemetry identities load the identical underlying model and are not independently behaving packages. Added as an alias on the existing entry so future intake recognizes ks_ferrari_250_gto as already curated, without merging or replacing this entry's reviewed behavior or overrides."
       }
     ]
   },
-  "updated_at": "2026-09-06",
+  "updated_at": "2026-09-11",
   "driver_summary": "Five-speed synchromesh on a dogleg gate: first is down and left, outside the racing plane, so second through fifth sit in one straight line. Clutch to pull away, and the synchronisers match the shaft speeds, so a downshift blip eases them rather than engaging the gear. What no source settles is the running-shift technique, so treat Assetto Corsa's answer there as the simulator's rather than the 250 GTO's."
 }

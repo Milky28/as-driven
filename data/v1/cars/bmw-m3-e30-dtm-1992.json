@@ -1,0 +1,239 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "bmw-m3-e30-dtm-1992",
+  "identity": {
+    "display_name": "BMW M3 E30 DTM",
+    "manufacturer": "BMW",
+    "model": "M3 (E30) DTM / Group A",
+    "year": {
+      "from": 1992,
+      "to": 1992,
+      "label": "1992 BMW M3 (E30) Group A DTM, the final and most-developed six-speed \"Gr.A 92\" specification"
+    },
+    "class": "DTM Group A",
+    "real_world_identity_notes": "The observation's telemetry name \"BMW M3 E30 Gr.A 92\" and internal id bmw_m3_e30_dtm map to the final, most developed evolution of the BMW M3 (E30) Group A touring car as raced in the German Deutsche Tourenwagen Meisterschaft (DTM) through the 1990-1992 seasons, immediately before Group A was retired from DTM. The community Assetto Corsa database lists this exact internal id as original in-game content (not a third-party mod) whose registered \"parent\" car is bmw_m3_e30_gra, the base/earlier Group A car covered separately by this project's issue-102; assetto-db's own technical summary for bmw_m3_e30_dtm states that \"the 1990-1992 cars of the Deutsche Tourenwagen Meisterschaft (DTM) were the most extreme versions... In the latest versions of the car ABS was also permitted... and the teams could setup their cars with gearboxes featuring 6 ratios\", i.e. this record targets that latest, six-speed-capable development rather than the earlier five-speed homologation-era car. Two individually documented, works-team examples of that same late-development specification corroborate the mechanical picture from independent angles: (1) auto motor und sport's 2014 track test of the actual ex-Johnny Cecotto, Fina-liveried works car from the 1992 season (chassis \"12.91 M3/249\", last raced 24 May 1992 at Hockenheim), conducted with input from former BMW Motorsport development engineer Claus Weber, which names a \"Hollinger\" six-speed gearbox; and (2) the ex-Steve Soper, works Scuderia Bigazzi 1992 DTM car (chassis WBA121307, two 1992 race wins, sold at Bonhams' 2026 Monaco sale with its original FIA homologation document), photographed in full cockpit detail with Soper's own original, autographed steering wheel still fitted. A third source (Goodwood Road & Racing's 2024 test of a genuine period E30 M3 DTM car wearing a 1992-season livery) independently states the car uses a \"six-speed, dog-leg gearbox\", corroborating both the gear count and the dogleg gate. Weighed against this is a single lower-rigor source: a 2016 BMWBlog piece quoting Johnny Cecotto at a car-show appearance describing his car's transmission generically as a \"standard five-speed manual gearbox\" rather than an automated sequential unit. That quote is treated as a comparison-to-modern-DTM remark rather than a precise technical statement (it is not corroborated by any other reviewed source, including the detailed technical account of Cecotto's own actual 1992 chassis), and it is recorded here as a documented minority position rather than silently discarded. This record deliberately targets the top/works-team \"Gr.A 92\" six-speed specification the in-game name and the assetto-db parent/child structure point to, and is a different real car from the earlier, five-speed synchromesh Getrag 265 \"M3 Sport Evolution\" Group A homologation special already curated in this database (record_id bmw-m3-sport-evo-group-a) and from the plain E30 M3 road car."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: dogbox; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: not required; transmission downshift clutch: not required; transmission downshift manual_blip: required; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
+      "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "BMW M3 E30 Gr.A 92"
+        },
+        {
+          "kind": "internal-id",
+          "value": "bmw_m3_e30_dtm"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.bmw-m3-e30-gr-a-92.20260910t233747468z-1f1a75dc by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.bmw-m3-e30-gr-a-92.20260910t233747468z-1f1a75dc directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.bmw-m3-e30-gr-a-92.20260910t233747468z-1f1a75dc directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.bmw-m3-e30-gr-a-92.20260910t233747468z-1f1a75dc directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.bmw-m3-e30-gr-a-92.20260910t233747468z-1f1a75dc directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-10",
+      "source_refs": [
+        "assetto-db.bmw-m3-e30-dtm",
+        "auto-motor-und-sport.2014.bmw-m3-f80-e30-dtm-test",
+        "goodwood.2024.bmw-e30-m3-halcyon-days",
+        "bonhams.2026.bmw-m3-e30-dtm-wba121307",
+        "racecarsdirect.84119.1991-bmw-e30-m3-ex-tim-harvey",
+        "bmwblog.2016.1992-bmw-m3-e30-dtm",
+        "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Multiple independent sources -- a community Assetto Corsa car database explicitly naming this internal id as base-game content with a parent/child relationship to the earlier Group A car, a period-detail automotive-magazine track test of an actual 1992 works chassis with a named BMW Motorsport engineer present, a Bonhams auction house catalog and photography for a second, independently documented 1992 works chassis, and a third independent test-drive account of a genuine 1992-liveried car -- converge on the same identity: the final, six-speed-capable, 1992-season development of the BMW M3 (E30) Group A DTM car. No existing curated record in this repository covers this specific late-development specification, so record_action is create-new."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "assetto-db.bmw-m3-e30-dtm",
+          "auto-motor-und-sport.2014.bmw-m3-f80-e30-dtm-test",
+          "goodwood.2024.bmw-e30-m3-halcyon-days",
+          "bonhams.2026.bmw-m3-e30-dtm-wba121307",
+          "racecarsdirect.84119.1991-bmw-e30-m3-ex-tim-harvey",
+          "bmwblog.2016.1992-bmw-m3-e30-dtm",
+          "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Multiple independent sources -- a community Assetto Corsa car database explicitly naming this internal id as base-game content with a parent/child relationship to the earlier Group A car, a period-detail automotive-magazine track test of an actual 1992 works chassis with a named BMW Motorsport engineer present, a Bonhams auction house catalog and photography for a second, independently documented 1992 works chassis, and a third independent test-drive account of a genuine 1992-liveried car -- converge on the same identity: the final, six-speed-capable, 1992-season development of the BMW M3 (E30) Group A DTM car. No existing curated record in this repository covers this specific late-development specification, so record_action is create-new."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "assetto-db.bmw-m3-e30-dtm",
+          "auto-motor-und-sport.2014.bmw-m3-f80-e30-dtm-test",
+          "goodwood.2024.bmw-e30-m3-halcyon-days",
+          "bonhams.2026.bmw-m3-e30-dtm-wba121307",
+          "racecarsdirect.84119.1991-bmw-e30-m3-ex-tim-harvey",
+          "bmwblog.2016.1992-bmw-m3-e30-dtm",
+          "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "A community technical database, a detailed magazine test of the actual ex-Cecotto 1992 works chassis (naming a Hollinger six-speed), and an independent test-drive of a genuine 1992-liveried car (naming a six-speed dog-leg gearbox) all agree on six forward gears. One lower-rigor interview-based source states five gears for the same driver's car; weighed against three more specific/technical sources this is treated as the weaker account, so the claim is established rather than left conflicting, but confidence is capped at medium rather than high because of the documented disagreement. The magazine test of the actual 1992 works chassis describes the Hollinger six-speed as needing forceful, precise, very short (0.07 second) shifts via a thin lever, which is the classic description of dog-ring engagement rather than synchromesh. This is corroborated by an independent listing confirming Hollinger's contemporary E30 M3 racing gearboxes (fitted to Vic Lee Motorsport's 1991 cars) were explicitly dog-engagement units. No reviewed source uses the word 'dog' or 'synchromesh' for the exact DTM-spec unit itself, so this is an inference from the make and described shift character rather than a directly stated construction, capping confidence at medium. Two independent textual sources describe a driver-operated lever ('thin shift stick', 'dog-leg gearbox') rather than paddles or an automated system, and a full-resolution cockpit photograph of a documented 1992 works chassis directly shows a conventional floor-mounted H-pattern-style lever, not a sequential stick or paddles. The established h-pattern, driver-shifted gate requires the clutch to move off from rest regardless of gearbox internal construction. This is directly corroborated by the magazine source, which describes the actual car's heavy AP carbon clutch being used to pull away. Derived from the established dog-engagement (dogbox) construction: clutchless shifting is the authentic technique for a dog-ring gearbox already under way, unlike a synchromesh unit. This inherits the medium confidence of the underlying construction finding rather than being independently and more strongly sourced. Derived from the established dog-engagement (dogbox) construction: clutchless downshifting is the authentic technique for a dog-ring gearbox already under way. This inherits the medium confidence of the underlying construction finding. Derived from the established dog-engagement construction: dog rings do not match shaft speeds themselves, so the driver must blip the throttle to match revs for the downshift to engage cleanly, unlike a synchromesh unit where a blip is merely optional. This inherits the medium confidence of the underlying construction finding rather than being independently and more strongly sourced. A full-resolution cockpit photograph of the documented ex-Steve Soper 1992 works chassis shows a continuous, round, black suede-wrapped three-spoke wheel with a plain conventional grip, not a molded gt-formula control panel; the auto-motor-und-sport source independently describes a three-spoke wheel for the ex-Cecotto 1992 works car, consistent with the same family. Confidence is medium rather than high because the photograph documents one specific team's/driver's car rather than a car Kunos is known to have referenced directly. The full-resolution photograph shows the rim's upper section continuing unbroken in a full circular curve, with no cut-away section, at every point visible in the image. The photograph shows only a plain red centre pad bearing a small maker's badge and the driver's signature; there is no LCD, LED numeric readout, or other rim-mounted display. The car's only instrumentation visible in the same photograph set is on the dashboard (an analog tachometer and a small rectangular gauge). The photograph shows no LED or lamp array mounted on the wheel rim or hub; no shift-light hardware of any kind is visible on the wheel itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch"
+        ],
+        "source_refs": [
+          "assetto-db.bmw-m3-e30-dtm",
+          "auto-motor-und-sport.2014.bmw-m3-f80-e30-dtm-test",
+          "goodwood.2024.bmw-e30-m3-halcyon-days",
+          "bonhams.2026.bmw-m3-e30-dtm-wba121307",
+          "racecarsdirect.84119.1991-bmw-e30-m3-ex-tim-harvey",
+          "bmwblog.2016.1992-bmw-m3-e30-dtm"
+        ],
+        "confidence": "high",
+        "basis": "A community technical database, a detailed magazine test of the actual ex-Cecotto 1992 works chassis (naming a Hollinger six-speed), and an independent test-drive of a genuine 1992-liveried car (naming a six-speed dog-leg gearbox) all agree on six forward gears. One lower-rigor interview-based source states five gears for the same driver's car; weighed against three more specific/technical sources this is treated as the weaker account, so the claim is established rather than left conflicting, but confidence is capped at medium rather than high because of the documented disagreement. The magazine test of the actual 1992 works chassis describes the Hollinger six-speed as needing forceful, precise, very short (0.07 second) shifts via a thin lever, which is the classic description of dog-ring engagement rather than synchromesh. This is corroborated by an independent listing confirming Hollinger's contemporary E30 M3 racing gearboxes (fitted to Vic Lee Motorsport's 1991 cars) were explicitly dog-engagement units. No reviewed source uses the word 'dog' or 'synchromesh' for the exact DTM-spec unit itself, so this is an inference from the make and described shift character rather than a directly stated construction, capping confidence at medium. Two independent textual sources describe a driver-operated lever ('thin shift stick', 'dog-leg gearbox') rather than paddles or an automated system, and a full-resolution cockpit photograph of a documented 1992 works chassis directly shows a conventional floor-mounted H-pattern-style lever, not a sequential stick or paddles. The established h-pattern, driver-shifted gate requires the clutch to move off from rest regardless of gearbox internal construction. This is directly corroborated by the magazine source, which describes the actual car's heavy AP carbon clutch being used to pull away. Derived from the established dog-engagement (dogbox) construction: clutchless shifting is the authentic technique for a dog-ring gearbox already under way, unlike a synchromesh unit. This inherits the medium confidence of the underlying construction finding rather than being independently and more strongly sourced. Derived from the established dog-engagement (dogbox) construction: clutchless downshifting is the authentic technique for a dog-ring gearbox already under way. This inherits the medium confidence of the underlying construction finding. Derived from the established dog-engagement construction: dog rings do not match shaft speeds themselves, so the driver must blip the throttle to match revs for the downshift to engage cleanly, unlike a synchromesh unit where a blip is merely optional. This inherits the medium confidence of the underlying construction finding rather than being independently and more strongly sourced. A full-resolution cockpit photograph of the documented ex-Steve Soper 1992 works chassis shows a continuous, round, black suede-wrapped three-spoke wheel with a plain conventional grip, not a molded gt-formula control panel; the auto-motor-und-sport source independently describes a three-spoke wheel for the ex-Cecotto 1992 works car, consistent with the same family. Confidence is medium rather than high because the photograph documents one specific team's/driver's car rather than a car Kunos is known to have referenced directly. The full-resolution photograph shows the rim's upper section continuing unbroken in a full circular curve, with no cut-away section, at every point visible in the image. The photograph shows only a plain red centre pad bearing a small maker's badge and the driver's signature; there is no LCD, LED numeric readout, or other rim-mounted display. The car's only instrumentation visible in the same photograph set is on the dashboard (an analog tachometer and a small rectangular gauge). The photograph shows no LED or lamp array mounted on the wheel rim or hub; no shift-light hardware of any kind is visible on the wheel itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

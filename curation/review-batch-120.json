@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.4",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "audi-sport-quattro-s1-e2",
+      "bundle": "build/review-cases/issue-100/staged.json",
+      "display_name": "Audi Sport quattro S1 E2",
+      "class": "Group B",
+      "manufacturer": "Audi",
+      "model": "Sport quattro S1 E2",
+      "year": {
+        "from": 1985,
+        "to": 1986,
+        "label": "1985-1986 Audi Sport quattro S1 E2 (Audi Sport works Group B rally car, 20 built)"
+      },
+      "real_world_identity_notes": "The telemetry name \"Audi Sport quattro S1 E2\" and internal id ks_audi_sport_quattro_rally map to Audi Sport's works Group B rally car introduced in August 1985: the second, more extreme aerodynamic evolution (\"E2\") of the short-wheelbase Sport quattro S1, distinguished from the original 1984-1985 S1 (smaller wing and bumpers, around 450bhp) by its enlarged rear wing (moved radiators cooled through it), reduced 1,100kg weight, and roughly 500-550bhp 2.1-litre turbocharged inline-five. Just 20 were built for the works team in 1985-86. This is a pure works rally car and has no cockpit/gearbox relationship to the earlier road-homologation \"Audi Sport Quattro\" (a separate, contemporaneous research case, ks_audi_sport_quattro) beyond shared exterior styling, nor to the later \"S1 Pikes Peak\" hillclimb evolution, which carries different aerodynamics. Two individually documented works-liveried survivors were reviewed: a Girardo & Co-brokered car (works codename \"RE 09\", chassis WAUZZZ85ZGA905009, raced by Hannu Mikkola to victory in the 1985 Mantta 200 Rally) and a car (plated \"IN-NY 18\") driven and photographed first-hand by evo magazine. Reviewed sources agree closely on identity, production run, and history, but disagree on the gearbox: enthusiast specification tables (Ultimatecarpage.com, Supercars.net) list \"6 speed Sequential\", while a first-hand test-drive account (evo) describes a conventional foot-clutch and H-pattern gear lever, and two HotCars articles state the baseline was a 5-speed manual with only \"some of the E2 models\" additionally fitted with an experimental power-shift (dual-clutch) gearbox - the well-documented prototype Walter Rohrl raced at the 1985 Semperit Rally (winning by 18 minutes) and which failed at the 1985 RAC Rally, contributing to his crash. No reviewed source states which exact configuration Kunos Simulazioni modeled, so forward_gears, gearbox_type, and shift_actuation are reported as conflicting rather than guessed, proposing the 5-speed H-pattern reading supported by the only first-hand driven account and by the majority-fitment described in secondary sources.",
+      "real_world_source_refs": [
+        "girardo.1985-audi-sport-quattro-s1-e2-re09",
+        "ultimatecarpage.audi-sport-quattro-s1-spec",
+        "supercars-net.1985-audi-sport-quattro-s1",
+        "hotcars.audi-sport-quattro-s1-what-you-need-to-know",
+        "hotcars.a-detailed-look-back-audi-sport-quattro-s1",
+        "evo.audi-sport-quattro-s1-group-b-rally-car-driven",
+        "gtplanet.highlands-track-audi-sport-quattro-s1-e2-update-1-12"
+      ],
+      "confidence": "high",
+      "confidence_basis": "A specialist dealer's chassis-level history (Girardo & Co), an enthusiast specification database (Ultimatecarpage.com), a sim-racing news report on Kunos's own AC content release, and multiple independent motoring/enthusiast sources all converge on the same identity: the August-1985-introduced Audi Sport quattro S1 E2 works Group B rally car. No existing curated record in this repository covers any Audi Sport Quattro variant, so record_action is create-new.",
+      "identity_basis": "A specialist dealer's chassis-level history (Girardo & Co), an enthusiast specification database (Ultimatecarpage.com), a sim-racing news report on Kunos's own AC content release, and multiple independent motoring/enthusiast sources all converge on the same identity: the August-1985-introduced Audi Sport quattro S1 E2 works Group B rally car. No existing curated record in this repository covers any Audi Sport Quattro variant, so record_action is create-new.",
+      "specification_basis": "The evo journalist's first-hand drive account explicitly describes operating a heavy foot-operated clutch pedal ('The clutch is heavy, the quadriceps in my left leg getting a workout as I push the pedal') in a manually-shifted car, directly establishing a required foot clutch for standing starts. Only a single first-hand account supports this, so confidence is medium rather than high. A full-resolution cockpit photograph taken during evo's first-hand drive shows a MOMO-branded wheel with a plain, continuous, dark-wrapped rim forming an unbroken circular band, with no fixed molded grip humps and no visible flattened section anywhere in frame. Confidence is medium because this rests on a single photograph of one specific works chassis rather than a manufacturer cross-section of the fleet. The same cockpit photograph, viewed at full resolution, shows the upper section of the rim continuing unbroken in a closed circular arc rather than being cut away. The photograph shows only a central MOMO hub badge (Audi rings logo) on the wheel; the car's only visible instrumentation (analog gauges) is dash-mounted, not rim-mounted, and no LCD, LED numeric readout, or other rim-integrated display is visible. The photograph shows no LED or lamp array mounted on the wheel rim itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "shift_pattern": "unknown",
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1985-1986 Audi Sport quattro S1 E2 (Audi Sport works Group B rally car, 20 built) identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/standing_start_clutch"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish standing-start clutch use: required; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
+        "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+        "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/100",
+      "live_source_notes": "Guided-verification observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_audi_sport_quattro_rally', no declared version, data-acd sha256 8019dc374289848649541ffcd462595cdb5540ebf2c5465d71017c507736093c. This identifies the installed package, not the real car the record describes."
+    }
+  ]
+}

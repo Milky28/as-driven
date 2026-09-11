@@ -278,6 +278,204 @@
         "level": "high",
         "basis": "The official Alfa Romeo museum identifies the Giulia Sprint GTA and its 1570 cc, five-speed, dry single-disc clutch specification. Stellantis identifies the production model as the Giulia Sprint 1600 GTA, presented in 1965 and used as a touring-car basis. FIA records independently establish the exact Giulia Sprint GTA homologation identity and date."
       }
+    },
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Alfa Romeo GTA"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_alfa_romeo_gta"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-alfa-romeo-gta-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-10",
+      "source_refs": [
+        "as-driven.repository.giulia-sprint-gta-1965-existing-record-scan",
+        "assetto-db.ks-alfa-romeo-gta",
+        "steampowered.assetto-corsa-dream-pack-1",
+        "ac.local-live-alfa-romeo-gta-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Kunos's own Dream Pack 1 content description for ks_alfa_romeo_gta (Autodelta build, \"Alleggerita\" lightweight construction, aluminium panels, magnesium wheels, Plexiglas windows, ~750 kg dry weight, 170 bhp race trim, 1966 and 1970 championship titles) matches the already-curated 1965 Giulia Sprint 1600 GTA record's homologation identity and real-world notes field for field. The Steam Dream Pack 1 storefront confirms this is genuine first-party Kunos content bundled with two other exact-identity cars, ruling out a third-party or ambiguously-named mod as the source of this observation."
+      }
     }
   ],
   "provenance": {
@@ -356,9 +554,32 @@
         ],
         "confidence": "high",
         "basis": "The reviewed sources establish a fully synchronised five-speed gearbox. Synchronisers match the shaft speeds themselves, so the blip eases them rather than engaging the gear, and the value follows from the construction this record already establishes. AC EVO refuses the shift without a blip, which is carried as a simulator override rather than as the real car."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "as-driven.repository.giulia-sprint-gta-1965-existing-record-scan",
+          "assetto-db.ks-alfa-romeo-gta",
+          "steampowered.assetto-corsa-dream-pack-1",
+          "ac.local-live-alfa-romeo-gta-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Kunos's own Dream Pack 1 content description for ks_alfa_romeo_gta (Autodelta build, \"Alleggerita\" lightweight construction, aluminium panels, magnesium wheels, Plexiglas windows, ~750 kg dry weight, 170 bhp race trim, 1966 and 1970 championship titles) matches the already-curated 1965 Giulia Sprint 1600 GTA record's homologation identity and real-world notes field for field. The Steam Dream Pack 1 storefront confirms this is genuine first-party Kunos content bundled with two other exact-identity cars, ruling out a third-party or ambiguously-named mod as the source of this observation."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-alfa-romeo-gta-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
   "driver_summary": "Fully synchronised five-speed H-pattern. The sources do not establish the exact gate or clutch technique, but a downshift blip is optional: it can ease the synchros and settle the car without being required for the gear to engage.",
-  "updated_at": "2026-09-06"
+  "updated_at": "2026-09-11"
 }

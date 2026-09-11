@@ -1,0 +1,241 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "audi-sport-quattro",
+  "identity": {
+    "display_name": "Audi Sport quattro",
+    "manufacturer": "Audi",
+    "model": "Sport quattro",
+    "year": {
+      "from": 1983,
+      "to": 1985,
+      "label": "1983-1985 Audi Sport quattro (Typ 85, Group B homologation road car)"
+    },
+    "class": "Group B homologation road car",
+    "real_world_identity_notes": "The Assetto Corsa internal id ks_audi_sport_quattro and telemetry name \"Audi Sport quattro\" map to Audi's short-wheelbase Group B homologation road car (Typ 85), unveiled at the September 1983 Frankfurt show with customer deliveries from 1984. This is the STREET/homologation version, not the works Group B rally car and not the later, more heavily evolved \"Sport quattro S1 E2\" (a different, later car covered separately as ks_audi_sport_quattro_rally / issue-100). It is also distinct from Kunos's own uprated \"Sport quattro Step1\" content (ks_audi_sport_quattro_s1), which the community database describes as a lowered/stiffer, rally-turbo-equipped variant with a different (~350 bhp) power figure. The AC content under review here (ks_audi_sport_quattro) is listed by the community Assetto Corsa database with class \"Street\", 306 bhp, 350 Nm and 1298 kg -- figures that match the independently documented road-going Sport quattro almost exactly (302-306 bhp at 6,700 rpm, 258 lb-ft/350 Nm at 3,700 rpm, 1,298 kg dry weight across multiple specialist sources), confirming the simulator content depicts the homologation-street specification rather than the works rally car or the later S1 E2 evolution. The car is a shortened (12.6 in shorter wheelbase than the standard long-wheelbase Ur-Quattro), Kevlar/GRP-bodied five-cylinder turbo coupe built only in the numbers required for FIA Group B homologation (a minimum of 200); reviewed sources disagree on the exact total built (161, 164, 214, and 224 all appear across otherwise-reputable secondary sources) and on the exact end date of production (1984 vs 1985/86), so no specific unit count or exact end-year is asserted as a claim here. The one cockpit photograph reviewed in detail (RM Sotheby's Arizona 2025 lot, chassis WAUZZZ85ZEA905035, the ex-Beddor family \"F40 Killer\") is of a car that was extensively modified for competition after delivery -- engine (ported head, cams, Motronic-based ECU, custom manifolds), gearbox internals (stronger synchromesh, shorter ring-and-pinion), clutch (lightened flywheel, 6-pad disc), suspension, a bespoke roll cage, and a respray from the original Tornado Red to Alpine White -- per the auction house's own history of the car. None of the auction house's documented modifications mention replacing the steering wheel, and the wheel photographed is the standard Audi four-ring-badged part shared across Audi's B2-platform quattro/Coupe/90 family of the era, so it is used here as representative of the factory control layout, but this single-example, modified-chassis caveat is carried into the wheel-rim claims at medium rather than high confidence."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "required",
+        "throttle_lift": "required",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: required; transmission upshift throttle_lift: required; transmission downshift clutch: required; transmission downshift manual_blip: optional; transmission downshift automatic_blip: no; wheel-rim shape: round; conventional rim open-top section: no; integrated wheel display: no; wheel shift lights: no.",
+      "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Audi Sport quattro"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_audi_sport_quattro"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.audi-sport-quattro.20260910t231916968z-476a7df3 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.audi-sport-quattro.20260910t231916968z-476a7df3 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.audi-sport-quattro.20260910t231916968z-476a7df3 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation ac.audi-sport-quattro.20260910t231916968z-476a7df3 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.audi-sport-quattro.20260910t231916968z-476a7df3 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-audi-sport-quattro-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-10",
+      "source_refs": [
+        "assetto-db.ks-audi-sport-quattro",
+        "ultimatecarpage.1983-1984-audi-sport-quattro",
+        "supercars-net.1984-audi-sport-quattro",
+        "clublexus.autoblog-repost.1984-audi-sport-quattro-quick-spin",
+        "conceptcarz.1984-audi-sport-quattro",
+        "rmsothebys.2025.1984-audi-sport-quattro-beddor-f40-killer",
+        "ac.local-live-audi-sport-quattro-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The community Assetto Corsa database's own listed specification for ks_audi_sport_quattro (class \"Street\", 306 bhp, 350 Nm, 1298 kg) matches, almost to the decimal, the independently documented specification of the real 1983-1985 Audi Sport quattro road/homologation car across multiple specialist secondary sources (Ultimatecarpage, Conceptcarz, Supercars.net), and the low power figure and \"Street\" class rule out both the higher-powered Kunos \"Sport quattro Step1\" (ks_audi_sport_quattro_s1) and the works rally \"Sport quattro S1 E2\" (ks_audi_sport_quattro_rally, issue-100). No existing curated record in data/v1/cars matches this car; the existing Audi records (audi-r8-lmp1, audi-r8-lms-*, audi-r8-v10-gt, audi-v8-quattro-dtm) are unrelated modern/DTM Audi content, so record_action is create-new."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "assetto-db.ks-audi-sport-quattro",
+          "ultimatecarpage.1983-1984-audi-sport-quattro",
+          "supercars-net.1984-audi-sport-quattro",
+          "clublexus.autoblog-repost.1984-audi-sport-quattro-quick-spin",
+          "conceptcarz.1984-audi-sport-quattro",
+          "rmsothebys.2025.1984-audi-sport-quattro-beddor-f40-killer",
+          "ac.local-live-audi-sport-quattro-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "The community Assetto Corsa database's own listed specification for ks_audi_sport_quattro (class \"Street\", 306 bhp, 350 Nm, 1298 kg) matches, almost to the decimal, the independently documented specification of the real 1983-1985 Audi Sport quattro road/homologation car across multiple specialist secondary sources (Ultimatecarpage, Conceptcarz, Supercars.net), and the low power figure and \"Street\" class rule out both the higher-powered Kunos \"Sport quattro Step1\" (ks_audi_sport_quattro_s1) and the works rally \"Sport quattro S1 E2\" (ks_audi_sport_quattro_rally, issue-100). No existing curated record in data/v1/cars matches this car; the existing Audi records (audi-r8-lmp1, audi-r8-lms-*, audi-r8-v10-gt, audi-v8-quattro-dtm) are unrelated modern/DTM Audi content, so record_action is create-new."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "assetto-db.ks-audi-sport-quattro",
+          "ultimatecarpage.1983-1984-audi-sport-quattro",
+          "supercars-net.1984-audi-sport-quattro",
+          "clublexus.autoblog-repost.1984-audi-sport-quattro-quick-spin",
+          "conceptcarz.1984-audi-sport-quattro",
+          "rmsothebys.2025.1984-audi-sport-quattro-beddor-f40-killer",
+          "ac.local-live-audi-sport-quattro-controls.14923034"
+        ],
+        "confidence": "medium",
+        "basis": "Every reviewed source, including a first-hand driving account of the exact road car, independently and consistently states a 5-speed manual gearbox, with no conflicting figure found. RM Sotheby's marque-specialist-sourced history states this chassis's 5-speed gearbox was upgraded with 'stronger motorsport synchromesh', which only makes sense if the stock gearbox was itself a synchromesh unit; Supercars.net independently corroborates by distinguishing this road car's 5-speed manual from the sequential six-speed dogbox fitted to 'competition variants'. No source describes a dog-ring/straight-cut or sequential unit for the road-going car itself, so confidence is medium rather than high given the absence of a manufacturer workshop-manual citation. A first-hand driving account describes 'a bare naked five-speed manual shifter'; the reviewed cockpit photograph independently shows a single floor-mounted lever with a round, gated knob; no source suggests a sequential stick, paddles, or any other actuation for the road-going car. The car is universally documented as a conventional foot-clutch, dry single-plate manual (with the auction house's history describing an upgraded clutch disc/flywheel, implying a stock foot-operated clutch assembly to begin with), and the reviewed cockpit photograph shows a conventional three-pedal layout; no automated launch or clutchless-start system is described anywhere. The established mechanism (a conventional synchromesh, foot-clutch H-pattern manual with no clutchless-shift capability) settles this: every upshift requires the driver to operate the clutch. The established mechanism (a conventional cable-throttle, foot-clutch synchromesh manual) requires the driver to lift off the throttle to complete a clutched upshift; no source contradicts this, but it is inferred from the settled gearbox mechanism rather than stated outright by a reviewed source, so confidence is medium. The established mechanism (a conventional synchromesh, foot-clutch H-pattern manual) settles this: every downshift requires the driver to operate the clutch. A first-hand driving account of this exact road car explicitly describes attempting heel-and-toe downshifts, finding the pedal placement made it 'challenging', and choosing to substitute a sequential brake-then-blip motion instead ('opted not to do so in favor of just moving my right leg more'). This directly establishes that manual throttle-blipping on downshift is a real, driver-optional technique on this car rather than a mandatory or absent one; a single first-hand account keeps confidence at medium. The first-hand driving account describes the driver manually working around a difficult heel-toe downshift by using their own right foot, which would be unnecessary if the car performed automated rev-matching on downshifts; more generally, automated throttle-blip rev-matching requires an electronically actuated (drive-by-wire) throttle body, a technology that did not exist on any 1983-1985 production car regardless of fuel-injection type, making automatic downshift blipping mechanically impossible on this cable-throttle car. Confidence is medium because this is a mechanism-based inference corroborated by, rather than directly stated in, the reviewed driving account. The reviewed cockpit photograph, fetched at native resolution and magnified, shows a continuous, unbroken, circular rim (fully round at the 12 o'clock position, no flattened top or bottom, and no fixed molded hand-grips separated by a control face) on a two-spoke pad bearing the Audi four-ring badge. Confidence is medium rather than high because this is the only interior photograph reviewed in depth, and it documents a chassis extensively modified for competition elsewhere, even though nothing indicates the wheel itself was changed. The photograph shows the rim continuing unbroken across the top (12 o'clock) of the wheel rather than being cut away. The photograph shows only analog speedometer, tachometer, and water/oil gauges plus one small digital clock/trip readout, all mounted on the dashboard binnacle rather than on the wheel; the rim itself carries no LCD, LED numeric readout, or other display. The photograph shows no LEDs or lamp array mounted on the wheel rim itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-audi-sport-quattro-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-audi-sport-quattro-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "assetto-db.ks-audi-sport-quattro",
+          "ultimatecarpage.1983-1984-audi-sport-quattro",
+          "supercars-net.1984-audi-sport-quattro",
+          "clublexus.autoblog-repost.1984-audi-sport-quattro-quick-spin",
+          "conceptcarz.1984-audi-sport-quattro",
+          "rmsothebys.2025.1984-audi-sport-quattro-beddor-f40-killer"
+        ],
+        "confidence": "medium",
+        "basis": "Every reviewed source, including a first-hand driving account of the exact road car, independently and consistently states a 5-speed manual gearbox, with no conflicting figure found. RM Sotheby's marque-specialist-sourced history states this chassis's 5-speed gearbox was upgraded with 'stronger motorsport synchromesh', which only makes sense if the stock gearbox was itself a synchromesh unit; Supercars.net independently corroborates by distinguishing this road car's 5-speed manual from the sequential six-speed dogbox fitted to 'competition variants'. No source describes a dog-ring/straight-cut or sequential unit for the road-going car itself, so confidence is medium rather than high given the absence of a manufacturer workshop-manual citation. A first-hand driving account describes 'a bare naked five-speed manual shifter'; the reviewed cockpit photograph independently shows a single floor-mounted lever with a round, gated knob; no source suggests a sequential stick, paddles, or any other actuation for the road-going car. The car is universally documented as a conventional foot-clutch, dry single-plate manual (with the auction house's history describing an upgraded clutch disc/flywheel, implying a stock foot-operated clutch assembly to begin with), and the reviewed cockpit photograph shows a conventional three-pedal layout; no automated launch or clutchless-start system is described anywhere. The established mechanism (a conventional synchromesh, foot-clutch H-pattern manual with no clutchless-shift capability) settles this: every upshift requires the driver to operate the clutch. The established mechanism (a conventional cable-throttle, foot-clutch synchromesh manual) requires the driver to lift off the throttle to complete a clutched upshift; no source contradicts this, but it is inferred from the settled gearbox mechanism rather than stated outright by a reviewed source, so confidence is medium. The established mechanism (a conventional synchromesh, foot-clutch H-pattern manual) settles this: every downshift requires the driver to operate the clutch. A first-hand driving account of this exact road car explicitly describes attempting heel-and-toe downshifts, finding the pedal placement made it 'challenging', and choosing to substitute a sequential brake-then-blip motion instead ('opted not to do so in favor of just moving my right leg more'). This directly establishes that manual throttle-blipping on downshift is a real, driver-optional technique on this car rather than a mandatory or absent one; a single first-hand account keeps confidence at medium. The first-hand driving account describes the driver manually working around a difficult heel-toe downshift by using their own right foot, which would be unnecessary if the car performed automated rev-matching on downshifts; more generally, automated throttle-blip rev-matching requires an electronically actuated (drive-by-wire) throttle body, a technology that did not exist on any 1983-1985 production car regardless of fuel-injection type, making automatic downshift blipping mechanically impossible on this cable-throttle car. Confidence is medium because this is a mechanism-based inference corroborated by, rather than directly stated in, the reviewed driving account. The reviewed cockpit photograph, fetched at native resolution and magnified, shows a continuous, unbroken, circular rim (fully round at the 12 o'clock position, no flattened top or bottom, and no fixed molded hand-grips separated by a control face) on a two-spoke pad bearing the Audi four-ring badge. Confidence is medium rather than high because this is the only interior photograph reviewed in depth, and it documents a chassis extensively modified for competition elsewhere, even though nothing indicates the wheel itself was changed. The photograph shows the rim continuing unbroken across the top (12 o'clock) of the wheel rather than being cut away. The photograph shows only analog speedometer, tachometer, and water/oil gauges plus one small digital clock/trip readout, all mounted on the dashboard binnacle rather than on the wheel; the rim itself carries no LCD, LED numeric readout, or other display. The photograph shows no LEDs or lamp array mounted on the wheel rim itself. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

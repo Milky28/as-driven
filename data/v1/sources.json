@@ -12070,6 +12070,694 @@
       "retrieved_at": "2026-09-08",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation pmr.clk-lm.20260908t151116269z-838718a2 by Jason Kinslow; PMR 2.2.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "steam.assetto-corsa-dream-pack-1.store-page",
+      "title": "Assetto Corsa - Dream Pack 1 (Steam store page)",
+      "publisher": "Kunos Simulazioni / Valve",
+      "url": "https://store.steampowered.com/app/347990/Assetto_Corsa__Dream_Pack_1/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Kunos Simulazioni's own Steam store description of the Dream Pack 1 DLC, which lists the included Alfa Romeo 155 content as the '93 specification. Steam store page, included-cars list: “Alfa Romeo 155 Ti V6 '93” Reviewed for /identity/year, /identity/display_name. Establishes what real-car year the simulator's own publisher claims for this content; it is not itself real-car authentic-controls evidence."
+    },
+    {
+      "source_id": "assetto-db.ks-alfa-romeo-155-v6",
+      "title": "Alfa Romeo 155 TI V6 - Car Detail - Assetto Corsa Database",
+      "publisher": "assetto-db.com",
+      "url": "http://assetto-db.com/car/ks_alfa_romeo_155_v6",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "unknown",
+      "notes": "Exact scope: Community-maintained catalog entry for the ks_alfa_romeo_155_v6 Assetto Corsa content, listing its represented year, class, and headline specification figures. Car detail page, specification summary: “Year: 1993 / Class: DTM (Deutsche Tourenwagen Meisterschaft) / Gearbox: 6-speed” Reviewed for /identity/year, /identity/class, /authentic_controls/transmission/forward_gears. Community/secondary source; used only to corroborate details independently supported by other sources, not as a standalone authority."
+    },
+    {
+      "source_id": "automedia.revsinstitute.alfa-romeo-155-v6-ti-dtm",
+      "title": "Alfa Romeo 155 V6 TI DTM",
+      "publisher": "Revs Institute (automedia.revsinstitute.org)",
+      "url": "https://automedia.revsinstitute.org/alfa-romeo-155-v6-ti-dtm/amp",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: General technical and historical profile of the Alfa Romeo 155 V6 TI covering its 1993-1996 competition life; describes the drivetrain in undated, general terms rather than year-by-year. Article body, drivetrain section: “transverse six-speed, semi-automatic gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article body, engine section: “around 420 hp\" at 1993 debut, growing \"to 490 hp by 1996” Reviewed for /identity/real_world_identity_notes. Does not distinguish which season the described gearbox configuration applies to; treated as general/undated rather than exact-scope for 1993 specifically."
+    },
+    {
+      "source_id": "historicmotorsportcentral.2016.alfa-155-v6-ti-fase-iniziale",
+      "title": "#TouringCarMadness, The Alfa Romeo 155 V6 Ti, Fase Iniziale.",
+      "publisher": "Historic Motor Sport Central",
+      "url": "https://historicmotorsportcentral.com/2016/11/29/touringcarmadness-the-alfa-romeo-155-v6-ti-fase-iniziale/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast motorsport-history account of the 155 V6 TI's early (1993, \"fase iniziale\"/initial phase) development, including an explicit description of in-season gearbox evolution. Article body, transmission-development passage: “The first version used a traditional H-gate for selection and would later evolve in a sequential unit.” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/gearbox_type. Article body, transmission-development passage: “The first version used a traditional H-gate for selection and would later evolve in a sequential unit.” Reviewed for /authentic_controls/transmission/shift_pattern. The only reviewed source that ties a specific transmission-actuation change to the 1993 season itself rather than describing the car generically; the exact round/date of the change within 1993 is not stated. It also mentions an electrically assisted TRW steering unit, which is out of scope for authentic_controls and not cited as a claim.",
+      "published_or_updated_at": "2016-11-29"
+    },
+    {
+      "source_id": "notenoughcylinders.alfa-romeo-155-v6-ti-dtm-history",
+      "title": "Alfa Romeo 155 V6 TI: How Italy Humiliated Germany's DTM",
+      "publisher": "Not Enough Cylinders",
+      "url": "https://notenoughcylinders.com/en/alfa-romeo-155-v6-ti-dtm-history-technical/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: General history and technical summary of the Alfa Romeo 155 V6 TI's DTM career, including the 1993 season, driver line-up, and season result. Article body, technical summary: “a transverse six-speed sequential semi-automatic gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article body, season summary: “Nicola Larini won the DTM title ... driving for Mercedes ... joined by another two wins obtained by Nannini” Reviewed for /identity/real_world_identity_notes. Describes the gearbox generically without acknowledging the mid-1993 actuation change documented by historicmotorsportcentral; treated as general/undated rather than exact-scope for 1993 specifically."
+    },
+    {
+      "source_id": "radical-mag.2025.alfa-romeo-155-2-5-v6-ti",
+      "title": "Alfa Romeo 155 2.5 V6 TI",
+      "publisher": "Radical Mag",
+      "url": "https://radical-mag.com/en/2025/01/21/alfa-romeo-155-2-5-v6-ti-2/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: General profile of the Alfa Romeo 155 2.5 V6 TI covering engine, weight, and drivetrain across its competition life. Article body, drivetrain section: “power was then sent to the wheels via a 6-speed transmission” Reviewed for /authentic_controls/transmission/forward_gears. Corroborates forward gear count only; no actuation or construction detail given.",
+      "published_or_updated_at": "2025-01-21"
+    },
+    {
+      "source_id": "rmsothebys.2025.1994-alfa-romeo-155-v6-ti-dtm-lot",
+      "title": "1994 Alfa Romeo 155 V6 TI DTM | Paris 2025",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/auctions/pa25/lots/r0023-1994-alfa-romeo-155-v6-ti-dtm/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction catalog entry for a specific 1994-season Alfa Romeo 155 V6 TI DTM chassis (ZAR16700000088171), used here only to corroborate the 1993 works season result and to document a distinct later-year example for confusion-risk purposes. Catalog body, programme history: “Alfa Romeo's new charge took 14 wins in its debut year and defeated rival Works-backed AMG-Mercedes and Joest-Opel teams to secure the 1993 title in the hands of Nicola Larini.” Reviewed for /identity/real_world_identity_notes. This lot is a 1994-season car, not the 1993 car this record targets; used only for corroborating season/programme facts and as a documented later-year comparison."
+    },
+    {
+      "source_id": "silodrome.2021.alfa-romeo-155-ti-touring-car-for-sale",
+      "title": "For Sale: An Alfa Romeo 155 V6 TI - A 490 BHP 1990s Touring Car Icon",
+      "publisher": "Silodrome",
+      "url": "https://silodrome.com/alfa-romeo-155-ti-touring-car/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permission-required",
+      "notes": "Exact scope: Sale listing and cockpit photographs (credited to Stephan Bauer / RM Sotheby's) for chassis #005, a 1996-season Alfa Romeo 155 V6 TI ITC car raced by Nicola Larini; used only as an off-year corroborating reference for wheel-rim construction and the later transaxle description, not as exact-scope evidence for the 1993 car. Article body, drivetrain sentence: “it sends power to all four wheel via a 6-speed semi-sequential transaxle” Reviewed for /authentic_controls/transmission/gearbox_type. Cockpit photograph (Alfa-Romeo-155-TI-Touring-Car-8-1600x1067.jpg): “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. This chassis is a documented 1996-season car (490 bhp, Martini livery, chassis #005), later than the 1993 specification this record targets; its sequential transaxle description supports the general point that the fully sequential unit is attested for a later year, and its wheel photograph is used only as corroboration of the wheel family shared across the model's life, not as primary evidence for the 1993 car."
+    },
+    {
+      "source_id": "flickr.egger.2010.alfa-155-v6-ti-cockpit-larini",
+      "title": "1993 Alfa Romeo 155 V6 TI DTM cockpit Larini Galli (c) 2010 Bernard Egger :: rumoto images 3596",
+      "publisher": "Bernard Egger (rumoto images), via Flickr",
+      "url": "https://www.flickr.com/photos/-eu/4807806321/in/photostream/",
+      "source_type": "other",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permission-required",
+      "notes": "Exact scope: A dated photograph, captioned by the photographer as the 1993 Alfa Romeo 155 V6 TI DTM associated with Larini, taken 17 July 2010 at the Ennstal-Classic historic event in Styria, Austria. Shows the cockpit: dashboard, steering wheel and hub, and the driver's-side shift lever. Full-resolution photograph (1024x683 px), wheel and hub: “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Full-resolution photograph (1024x683 px), console and shift lever: “(photograph; no text)” Reviewed for /authentic_controls/transmission/shift_actuation. All rights reserved by the photographer; this record describes only what is visible (a continuous, round, suede-wrapped rim on a quick-release MOMO hub with no wheel-mounted display or shift lights, and a single floor-mounted lever with a round knob near the passenger-side console consistent with a gated H-pattern shifter rather than a compact sequential stick) and must not reproduce the image itself. The photograph documents a car in its 2010 exhibition/historic-rally life, so it cannot rule out post-retirement parts changes; it is treated as corroborating rather than dispositive for the transmission-actuation conflict.",
+      "author": "Bernard Egger",
+      "published_or_updated_at": "2010-07-19"
+    },
+    {
+      "source_id": "ac.local-live-alfa-romeo-155-ti-v6-controls.14923034",
+      "title": "Live AC Alfa Romeo 155 TI V6 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/96",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.alfa-romeo-155-ti-v6.20260910t230638524z-2470f1d8 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_alfa_romeo_155_v6', no declared version, data-acd sha256 d56524ee59b760b8e809da79e294451df48d651b928e38ef8f411ff83748616f. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_alfa_romeo_155_v6",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "d56524ee59b760b8e809da79e294451df48d651b928e38ef8f411ff83748616f"
+        }
+      }
+    },
+    {
+      "source_id": "wikipedia.alfa-romeo-33-stradale",
+      "title": "Alfa Romeo 33 Stradale",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Alfa_Romeo_33_Stradale",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: General-purpose encyclopedia article on the 1967-1969 road-going Alfa Romeo 33 Stradale, covering production dates, number built, designer, and drivetrain specification, and maintaining a separate article for the unrelated 2023 revival. Infobox, production block: “November 1967 – March 1969 / 18 produced” Reviewed for /identity/year, /identity/real_world_identity_notes. Article body, drivetrain sentence: “6-speed Colotti manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article body, drivetrain sentence: “a 6-speed unit similar to the Tipo 33 race car, designed by Colotti Trasmissioni” Reviewed for /authentic_controls/transmission/shift_actuation. General encyclopedia secondary source; its six-speed reading is independently corroborated by the specialist Ultimatecarpage profile, which cites dedicated Alfa Romeo Tipo 33 literature."
+    },
+    {
+      "source_id": "ultimatecarpage.alfa-romeo-33-stradale",
+      "title": "1967 - 1969 Alfa Romeo 33 Stradale",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/car/968/Alfa-Romeo-33-Stradale.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Author-credited specialist classic-car reference article and specification sheet for the 1967-1969 Alfa Romeo 33 Stradale (18 built, all chassis), citing Luigi Fusi's \"Alfa Romeo Tutte le Vetture Dal 1910\" and Peter Collins & Ed McDonough's \"Alfa Romeo Tipo 33\" as suggested reading. Article body, drivetrain paragraph: “It was mated to a Colotti gearbox with six, all syncromesh forward gears.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Specifications tab, Drivetrain table: “Gearbox: Colotti 6 speed Manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. Specifications tab, header block: “Produced from: 1967 - 1969 / Numbers built: 18 (All chassis)” Reviewed for /identity/year, /identity/real_world_identity_notes. Author-credited specialist reference citing dedicated Alfa Romeo Tipo 33 literature; independently corroborates Wikipedia's six-speed, all-synchromesh reading against the conflicting five-speed claim reported elsewhere.",
+      "author": "Wouter Melissen",
+      "published_or_updated_at": "2011-07-25"
+    },
+    {
+      "source_id": "supercars-net.alfa-romeo-tipo-33-stradale",
+      "title": "Alfa Romeo Tipo 33 Stradale",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1967-alfa-romeo-tipo-33-stradale/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast automotive blog profile of the Alfa Romeo Tipo 33 Stradale road car, explicitly comparing its road-specification gearbox against the Group 6 racing version's, and describing the dash and steering wheel. Article body, drivetrain comparison sentence: “While the Group 6 version used a six-speed Colotti gearbox with ZF limited-slip differential and single-plate hydraulic clutch, the Stradale came with a five-speed transmission.” Reviewed for /authentic_controls/transmission/forward_gears. Article body, interior/dash sentence: “A simple vinyl-upholstered dash featured a 10,000 rpm tachometer behind the three-spoke steering wheel, with additional gauges for oil pressure, water temperature, and fuel positioned to the right.” Reviewed for /authentic_controls/steering/wheel_rim/shape. Article body, production paragraph: “nine more Stradales were manufactured over the next 18 months” Reviewed for /identity/real_world_identity_notes. The only reviewed source stating a five-speed transmission for the road Stradale, explicitly contrasted against a six-speed Group 6 racing gearbox; this conflicts with Wikipedia's and Ultimatecarpage's six-speed reading for the same road car, so forward_gears is reported as conflicting rather than silently resolved to either figure."
+    },
+    {
+      "source_id": "wikimedia-commons.malinov-2018.alfa-33-stradale-interior",
+      "title": "Interior of an Alfa Romeo 33/2 Stradale.jpg",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Interior_of_an_Alfa_Romeo_33.2_Stradale.jpg",
+      "source_type": "other",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: A dated (27 May 2018), CC BY-SA 4.0-licensed \"own work\" photograph captioned by the photographer as the interior of an Alfa Romeo 33/2 Stradale, used as the interior illustration on the Wikipedia \"Alfa Romeo 33 Stradale\" articles in at least English, Italian, Japanese, Korean, and Portuguese. Shows the steering wheel and hub, the engine-turned dashboard with gauges, and the driver's floor-mounted gear lever. Full-resolution photograph (6000x4000 px), wheel and hub: “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Full-resolution photograph (6000x4000 px), console and floor-mounted lever: “(photograph; no text)” Reviewed for /authentic_controls/transmission/shift_actuation. The file's own caption reads \"33/2 Stradale\", a designation more usually attached to the Tipo 33/2 racing prototype; however its consistent, exclusive use as the interior illustration across five language editions of the road-going \"33 Stradale\" Wikipedia article, and its visual match to other sources' description of a dash with a three-spoke wheel and an analog tachometer plus secondary gauges, is the basis for treating it as depicting this road car's interior rather than the racing prototype's. Describes only what is visible: a slim, dark, generally circular (round) multi-spoke rim with no molded control-panel grips and no cutaway section at the top, no rim-mounted display or shift-light array, and a floor-mounted lever emerging from a visible metal gate/access plate.",
+      "author": "Yanko Malinov",
+      "published_or_updated_at": "2018-05-27"
+    },
+    {
+      "source_id": "ac.local-live-alfa-romeo-33-stradale-controls.14923034",
+      "title": "Live AC Alfa Romeo 33 Stradale guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/97",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.alfa-romeo-33-stradale.20260910t231236877z-ec546330 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_alfa_33_stradale', no declared version, data-acd sha256 3582f77f54e770ffccc9134e4117c53e13ea1aad49cdb801c7608eff72d72b35. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_alfa_33_stradale",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "3582f77f54e770ffccc9134e4117c53e13ea1aad49cdb801c7608eff72d72b35"
+        }
+      }
+    },
+    {
+      "source_id": "assetto-db.ks-audi-sport-quattro",
+      "title": "Audi Sport quattro - Audi - Car Detail - Assetto Corsa Database",
+      "publisher": "assetto-db.com",
+      "url": "https://assetto-db.com/car/ks_audi_sport_quattro",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "unknown",
+      "notes": "Exact scope: Community-maintained catalog entry for the ks_audi_sport_quattro Assetto Corsa content, listing its represented class and headline specification figures. Car detail page, specification summary: “Class: Street / Power: 306 bhp / Torque: 350 Nm / Weight: 1298 kg” Reviewed for /identity/display_name, /identity/class, /identity/real_world_identity_notes. Community/secondary source describing the simulator content itself; used to confirm which real-world specification (road/homologation car vs Kunos's own higher-power 'Step1' content vs the works rally car) the exact internal id ks_audi_sport_quattro represents, by matching its listed figures against independently documented real-car specifications."
+    },
+    {
+      "source_id": "ultimatecarpage.1983-1984-audi-sport-quattro",
+      "title": "1983 - 1984 Audi Sport quattro Specifications",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/spec/26/Audi-Sport-quattro.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specialist enthusiast reference specification sheet for the 1983-1984 Audi Sport quattro road car, covering engine, drivetrain, dimensions, and performance. Specification table, Drivetrain section: “Gearbox: 5 speed Manual / Clutch: Dry, single plate / Drive: Quattro All wheel drive” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Specification table, header and Engine section: “Country of origin: Germany / Produced from: 1983 - 1984 / Numbers built: 224 / Power: 302 bhp / 225 kW @ 6,700 rpm” Reviewed for /identity/year, /identity/real_world_identity_notes. Gives one of several conflicting production-count/date figures found across reviewed sources (224 units, 1983-1984); used here for engine/drivetrain specification and cross-checked against other sources rather than treated as sole authority on production numbers.",
+      "author": "Wouter Melissen",
+      "published_or_updated_at": "2013-09-04"
+    },
+    {
+      "source_id": "supercars-net.1984-audi-sport-quattro",
+      "title": "1984 Audi Sport Quattro",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1984-audi-sport-quattro-2/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast-publication profile of the 1984 Audi Sport Quattro road car covering production, specification, and cabin description. Article body, production and transmission summary: “Built between early 1984 and late 1985... exactly 214 examples completed, though the original plan targeted 224 units... A five-speed manual gearbox was standard, paired with quattro AWD with locking center differential... Competition variants received sequential six-speed units.” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article body, interior description: “Recaro sport seats trimmed in cloth... a thick-rimmed steering wheel with a small diameter suited for rally precision.” Reviewed for /identity/real_world_identity_notes. Gives a third, different production count/date range (214 built, early 1984-late 1985) than Ultimatecarpage (224, 1983-1984) and RM Sotheby's (161); the wheel description ('thick-rimmed... small diameter') is corroborating context only and is not itself used to establish rim shape, which is decided from the photograph cited separately. Explicitly distinguishes the road car's 5-speed manual from the sequential six-speed dogbox used in 'competition variants', supporting gearbox_type as a conventional (non-sequential) unit for the road car."
+    },
+    {
+      "source_id": "clublexus.autoblog-repost.1984-audi-sport-quattro-quick-spin",
+      "title": "Quick Spin: 1984 Audi Sport Quattro",
+      "publisher": "ClubLexus (reposting an Autoblog road test)",
+      "url": "https://www.clublexus.com/forums/car-chat/716287-quick-spin-1984-audi-sport-quattro.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: First-hand driving-impressions road test of a 1984 Audi Sport Quattro (Malachite Green example) driven over mountain passes in northern Italy, covering shifter feel, pedal layout, and steering wheel description; forum repost of an Autoblog article that could not be retrieved directly (403 response). Article body, gearbox/shifter passage: “extremely sweet... a bare naked five-speed manual shifter tapping against your right knee every now and again” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Article body, downshift/heel-toe passage: “the pedal placement made heel-and-toe downshifting challenging... I frequently opted not to do so in favor of just moving my right leg more” Reviewed for /authentic_controls/transmission/downshift/manual_blip. Article body, steering wheel passage: “You have to love a four-spoke steering wheel in this rectangular style; great grab-on spots are everywhere.” Reviewed for /identity/real_world_identity_notes. A genuine first-hand driving account of this exact model (not the S1 or S1 E2), useful for technique-level detail that written specification sheets omit. The heel-toe passage establishes that manual throttle-blip on downshift is a real, driver-optional technique on this car (the driver could choose to perform it or substitute a sequential brake-then-blip motion), not that it is either mandatory or absent. The steering-wheel description ('four-spoke... rectangular') is retained as corroborating narrative context only; rim shape itself is decided from the photograph cited separately, per project rules, not from this text."
+    },
+    {
+      "source_id": "conceptcarz.1984-audi-sport-quattro",
+      "title": "1984 Audi Sport Quattro Specifications & Dimensions",
+      "publisher": "Conceptcarz.com",
+      "url": "https://www.conceptcarz.com/s18856/audi-sport-quattro.aspx",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specification-sheet profile of the 1984-1986 Audi Sport Quattro road car covering engine, transmission, and drivetrain. Specification table, Transmission & Drivetrain section: “5 Manual... Manually lockable center and rear differential” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/standing_start_clutch. Gives a fourth production window (1984-1986, 214 units) partially overlapping but not identical to Supercars.net (early 1984-late 1985, 214) and Ultimatecarpage (1983-1984, 224); used only for corroborating drivetrain figures, not as sole authority on the exact production years."
+    },
+    {
+      "source_id": "rmsothebys.2025.1984-audi-sport-quattro-beddor-f40-killer",
+      "title": "1984 Audi Sport Quattro | Arizona 2025 | RM Sotheby's",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/auctions/az25/lots/r0077-1984-audi-sport-quattro/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permission-required",
+      "notes": "Exact scope: Auction-house catalog entry and photograph set for a specific 1984 Audi Sport quattro road car (chassis WAUZZZZ85ZEA905035, ex-Frank/Steve Beddor, nicknamed 'The F40 Killer'), including a detailed, marque-specialist-sourced modification history and a cockpit photograph. This specific chassis was extensively modified for competition after delivery (engine, gearbox internals, clutch, suspension, roll cage, respray), which is accounted for in how its photograph is used. Auction description, drivetrain modification passage: “Audi transmission specialist Heinz Kluge upgraded the five-speed gearbox with stronger motorsport synchromesh along with a set of motorsport ring and pinions that reduced gear ratios for better acceleration. To supplement Kluge's modifications, Lehmann also provided a motorsport-spec lightened flywheel, pressure plate, and six-pad clutch disc.” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. Auction description, production-count passage: “One of only 164 road variants produced” Reviewed for /identity/real_world_identity_notes. Full-resolution cockpit photograph (cdn.rmsothebys.com/8/1/f/8/0/3/81f803dd1f250d9a35d417b63b56c44c6db380cf.webp), steering wheel and instrument binnacle: “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Full-resolution cockpit photograph (cdn.rmsothebys.com/8/1/f/8/0/3/81f803dd1f250d9a35d417b63b56c44c6db380cf.webp), floor shift lever and console: “(photograph; no text)” Reviewed for /authentic_controls/transmission/shift_actuation. The photograph was retrieved at native resolution (1920x1440) and inspected closely, including a magnified crop of the shift-knob engraving; the engraving itself is out of focus/glare-affected at the point of interest and does not resolve enough to read the gate layout (dogleg vs standard-H) or first-gear position, so those details are left not-established rather than guessed. The steering wheel, dashboard gauges (analog speedometer/tachometer/water/oil, one small separate dash-mounted digital clock), and floor-mounted lever with a round gated knob are otherwise clearly visible: the rim is a continuous, unbroken, round band (visible unbroken at the 12 o'clock position) bearing the Audi four-ring badge on a lower two-spoke pad with finger cutouts, with no display or lamps mounted on the rim itself. Because this specific chassis was documented as extensively modified for competition (engine, gearbox internals, clutch, suspension, roll cage, respray) and no source states the steering wheel itself was replaced, the wheel and shifter are treated as representative of the factory part at medium rather than high confidence, pending a second, unmodified example for corroboration."
+    },
+    {
+      "source_id": "ac.local-live-audi-sport-quattro-controls.14923034",
+      "title": "Live AC Audi Sport quattro guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/99",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.audi-sport-quattro.20260910t231916968z-476a7df3 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_audi_sport_quattro', no declared version, data-acd sha256 e6a21bf07d20e35bac162b41aa1b19bf84f1f1eebe7dfcb7d0d5304b3c8d6000. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_audi_sport_quattro",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "e6a21bf07d20e35bac162b41aa1b19bf84f1f1eebe7dfcb7d0d5304b3c8d6000"
+        }
+      }
+    },
+    {
+      "source_id": "girardo.1985-audi-sport-quattro-s1-e2-re09",
+      "title": "1985 Audi Sport Quattro S1 E2 Group B",
+      "publisher": "Girardo & Co.",
+      "url": "https://girardo.com/car/1985-audi-sport-quattro-s1-e2-group-b-0-0/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Specialist classic/competition car dealer's sale listing and history write-up for a specific, chassis-identified 1985 Audi Sport Quattro S1 E2 (works codename \"RE 09\", VIN WAUZZZ85ZGA905009), covering the model's development history (S1 to E2) and this car's competition and ownership history. Article body, model-history section: “another even more extreme variant of the Sport Quattro was introduced in August of 1985: the E2” Reviewed for /identity/year, /identity/real_world_identity_notes. Article body, model-history section, weight/power passage: “the E2 tipped the scales at just 1,100kg) and, you guessed it, power was upped once again. With a dizzying 550HP now on tap” Reviewed for /identity/real_world_identity_notes. Article body, \"This Audi Sport Quattro S1 E2\" section: “This Sport Quattro S1 E2, which was internally codenamed RE 09, was the ninth of just 20 cars produced by Audi in 1985 and '86.” Reviewed for /identity/year, /identity/manufacturer, /identity/model. Detailed chassis-level provenance from a specialist dealer; does not describe gearbox internal construction, shift gate layout, clutch technique, or wheel-rim construction, so it is used only for identity and production-history claims."
+    },
+    {
+      "source_id": "ultimatecarpage.audi-sport-quattro-s1-spec",
+      "title": "1985 - 1986 Audi Sport Quattro S1 Specifications",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/spec/610/Audi-Sport-Quattro-S1.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast reference-database specification table for the site's \"Audi Sport Quattro S1\" entry (produced 1985-1986, 20 built, predecessor listed as \"Audi Sport Quattro Group B\"), giving engine, gearbox, clutch, drivetrain and dimension figures. The site does not use \"E2\" in its own model name, but the listed production years, unit count, and 540bhp power figure match the August-1985 E2 evolution rather than the earlier, less powerful 1984 S1. Specification table, Drivetrain section: “Gearbox 6 speed Sequential / Clutch Dry, single plate” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. Specification table, header fields: “Produced from 1985 - 1986 / Numbers built 20 / Predecessor Audi Sport Quattro Group B” Reviewed for /identity/year. The source of the \"6-speed Sequential\" figure that conflicts with the 5-speed H-pattern manual described in other reviewed sources; the conflict is reported to the maintainer rather than silently resolved in either direction.",
+      "author": "Wouter Melissen",
+      "published_or_updated_at": "2009-07-16"
+    },
+    {
+      "source_id": "supercars-net.1985-audi-sport-quattro-s1",
+      "title": "1985 Audi Sport Quattro S1: History, Specifications, & Performance",
+      "publisher": "Supercars.net",
+      "url": "https://www.supercars.net/blog/1985-audi-sport-quattro-s1/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: General enthusiast history and specification article on the 1985 Audi Sport Quattro S1/E2, including a performance table's gearbox/clutch entries and a narrative account of the works dual-clutch prototype gearbox's brief competition history. Performance/specification table: “6-speed Sequential ... Dry, single plate” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article body, transmission-history passage: “some of the cars were equipped with a power-shift gearbox - a forerunner of today's DSG technology” Reviewed for /authentic_controls/transmission/shift_actuation, /identity/real_world_identity_notes. Article body, RAC Rally passage: “when used at the RAC rally in November that year, the small gear-change lever broke and it was very difficult to know which gear you were in” Reviewed for /identity/real_world_identity_notes. Repeats the same '6-speed Sequential' spec-table figure found on Ultimatecarpage.com, but its own narrative text distinguishes an experimental power-shift/dual-clutch gearbox fitted to only 'some of the cars' from the rest of the fleet, supporting the reading that the two descriptions may refer to different, non-interchangeable gearboxes rather than one unambiguous specification."
+    },
+    {
+      "source_id": "hotcars.audi-sport-quattro-s1-what-you-need-to-know",
+      "title": "10 Things Every Gearhead Should Know About The Audi Sport Quattro S1",
+      "publisher": "HotCars",
+      "url": "https://www.hotcars.com/audi-sport-quattro-s1-what-you-need-to-know/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast listicle covering the road-going Ur-Quattro and the works Sport Quattro S1/E2 rally cars, including a passage on the E2's optional power-shift gearbox. Article body, transmission passage: “some of the E2 models had a revolutionary power shifted gearbox which paved the road for modern auto boxes found in high-end sports cars” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/gearbox_type. States the power-shift gearbox was fitted to only 'some of the E2 models', implying a different baseline gearbox for the rest of the fleet; see the companion HotCars article for the explicit 5-speed-manual baseline statement."
+    },
+    {
+      "source_id": "hotcars.a-detailed-look-back-audi-sport-quattro-s1",
+      "title": "A Detailed Look Back At The Audi Sport Quattro S1",
+      "publisher": "HotCars",
+      "url": "https://www.hotcars.com/audi-sport-quattro-s1/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast history article distinguishing the S1 \"E1\" and \"E2\" evolutions and describing their transmission options. Article body, transmission passage: “Both evolutions of the car featured a 5-speed manual transmission.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Article body, transmission passage: “the E2, released in 1985, had the option of a 6-speed power shifted gearbox” Reviewed for /authentic_controls/transmission/gearbox_type. The most explicit reviewed source distinguishing a 5-speed manual baseline from an optional/experimental 6-speed power-shift unit; still a secondary enthusiast-media source without a cited primary document, and given no more weight than that."
+    },
+    {
+      "source_id": "evo.audi-sport-quattro-s1-group-b-rally-car-driven",
+      "title": "Audi Sport Quattro S1: Group B rally car driven",
+      "publisher": "evo",
+      "url": "https://www.evo.co.uk/audi/quattro-coupe/205398/audi-sport-quattro-s1-group-b-rally-car-driven",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: First-hand test-drive article by an evo magazine journalist driving a genuine works-liveried 1985 Audi Sport Quattro S1 E2 (plated 'IN-NY 18'), describing the gearshift, clutch, and cockpit, and including a cockpit photograph of the steering wheel and dashboard taken during the drive. Article body, gearshift passage: “the gearshift feels quite light... the throw isn't that long... there isn't the sense of a tightly defined gate” Reviewed for /authentic_controls/transmission/shift_actuation. Article body, clutch passage: “The clutch is heavy, the quadriceps in my left leg getting a workout as I push the pedal” Reviewed for /authentic_controls/transmission/standing_start_clutch. Article body, dual-clutch prototype passage: “Audi UK actually owns the dual-clutch 'box but as it's a different size and shape to the H-pattern, it's not the work of a moment to fit” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/gearbox_type. Cockpit photograph (\"Audi Sport Quattro S1 drive-8.jpg\", full-resolution 1260x710 desktop rendition), steering-wheel and dashboard view: “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. The only reviewed source combining a first-hand driving account of the actual gearshift feel with a clear, full-resolution cockpit photograph of the wheel. Its own phrase 'a different size and shape to the H-pattern' for the dual-clutch prototype is direct evidence that this car's standard-fit gearbox is H-pattern actuated, distinct from the experimental unit. The cited photograph shows a MOMO-branded wheel with a plain, continuous, dark (leather/suede-wrapped) round rim, closed/unbroken across its full circumference including the top, carrying only a central Audi-rings badge and 'momo' hub lettering and no LCD/LED display or lamp array; the visible portion of the dashboard behind it carries the only instrumentation (analog gauges), consistent with no rim-mounted display or shift lights.",
+      "author": "Henry Catchpole"
+    },
+    {
+      "source_id": "gtplanet.highlands-track-audi-sport-quattro-s1-e2-update-1-12",
+      "title": "Highlands Track and Audi Quattro S1 E2 Arrive in Update 1.12 for Assetto Corsa on PC",
+      "publisher": "GTPlanet",
+      "url": "https://www.gtplanet.net/highlands-track-and-audi-sport-quattro-s1-e2-arrive-in-update-1-12-for-assetto-corsa-on-pc/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Sim-racing news report on Kunos Simulazioni's free-content release of the Audi Sport Quattro S1 E2 for Assetto Corsa, confirming the AC content targets this real car under the same name. Article body: “the Audi Sport Quattro S1 E2 Group B rally monster ... a howling Inline-5 sending in excess of 500 horses to all four wheels” Reviewed for /identity/display_name, /identity/class. Confirms the simulator content's real-car target name, engine layout, and class; this is reporting about the simulator's release, not itself real-car authentic-controls evidence, and is not used for any authentic_controls claim."
+    },
+    {
+      "source_id": "ac.local-live-audi-sport-quattro-s1-e2-controls.14923034",
+      "title": "Live AC Audi Sport quattro S1 E2 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/100",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.audi-sport-quattro-s1-e2.20260910t232350281z-7a423776 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_audi_sport_quattro_rally', no declared version, data-acd sha256 8019dc374289848649541ffcd462595cdb5540ebf2c5465d71017c507736093c. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_audi_sport_quattro_rally",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "8019dc374289848649541ffcd462595cdb5540ebf2c5465d71017c507736093c"
+        }
+      }
+    },
+    {
+      "source_id": "bmw-m.com.2020.bmw-m3-e30-portrait",
+      "title": "The BMW M3 E30",
+      "publisher": "BMW M GmbH (bmw-m.com)",
+      "url": "https://www.bmw-m.com/en/topics/magazine-article-pool/bmw-m3-e30-portraet.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW M GmbH's own official heritage-magazine portrait of the first-generation (E30) BMW M3, covering its 1986-1991 production run, S14 engine outputs across the base/Evolution/Sport Evolution stages, its Group A homologation background, and its manual transmission's gate layout. Article body, '5 POWERFUL FACTS' summary box: “Production period: 1986 to 1991 ... In-line 4-cylinder engine with high-speed concept ... Max. output: 200-238 hp ... Street version of the most successful DTM racing car of all time” Reviewed for /identity/year, /identity/real_world_identity_notes, /identity/class. Article body, 'FOR ROAD AND TRACK' section: “The manual transmission also radiated classic racing flair, so drivers found the first gear on the bottom left, as is typical in racing.” Reviewed for /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/first_gear_position, /authentic_controls/transmission/shift_actuation. Article body, 'BMW M POWER' and 'LIGHT AND FAST' sections: “the engine climbs exactly to the 200 hp mark ... maximum speed is 6,750 rpm ... the vehicle's slim weight of around 1,200 kilograms ... With the regulated catalytic converter ... the engine only lost a little power down to 195 hp” Reviewed for /identity/real_world_identity_notes. Article body, 'THE EVOLUTION OF THE BMW M3' section: “In 1988 ... the Evolution version was launched on the market with 220 hp ... The final stage of the first M3 was ignited by BMW Motorsport GmbH in 1990: the displacement was increased to 2.5 litres, resulting in 238 hp in what is now the M3 Sport Evolution” Reviewed for /identity/real_world_identity_notes. Article body, 'A MOTORSPORT STORY' section: “As a touring car racing homologation model, the BMW M3 finally rolled to the starting line in 1986. The Group A regulations required that at least 5,000 road-legal copies of a racing car had to be sold within twelve months in order for a vehicle to be homologated for racing.” Reviewed for /identity/real_world_identity_notes. BMW M GmbH's own official heritage page for the road-going first-generation M3; directly states the manual gearbox's dogleg (first-gear-bottom-left) gate for what the page repeatedly calls \"the first BMW M3\" road car, and gives the production run and power evolution across the base/Evolution/Sport Evolution stages without stating which exact stage the reviewed simulator content models.",
+      "published_or_updated_at": "2020-08-20"
+    },
+    {
+      "source_id": "press-bmwgroup.p0036752.m3-e30-cockpit-1987",
+      "title": "BMW M3 E30 Cockpit 1987 (05/2007)",
+      "publisher": "BMW Group PressClub (BMW AG)",
+      "url": "https://www.press.bmwgroup.com/global/photo/detail/P0036752/bmw-m3-e30-cockpit-1987-05/2007",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: BMW Group's own press-archive photograph of the BMW M3 (E30) cockpit, captioned by BMW as \"BMW M3 E30 Cockpit 1987\" and tagged BMW Brand Heritage, showing the factory steering wheel, instrument cluster and dashboard of the launch-year road car. Photograph, full cockpit/wheel view (400x400 px direct JPG served by mediapool.bmwgroup.com; inspected at 3x CSS zoom in the browser, per the technique described in this case's brief): “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. BMW's own press-archive photo, explicitly captioned and dated to the 1987 launch-year M3, shows a continuous round three-spoke wheel with a BMW-roundel centre pad, no LCD/LED readout, and no shift-light array, consistent with the 'M-Technic I' wheel independent sources describe for pre-September-1989 cars; the instrument cluster and all warning/indicator lights are on the dashboard, not the wheel. This is the strongest available wheel-rim source for this record because it is a manufacturer photograph of the exact represented model and launch year, rather than a modern recreation or a later-production/exhibition example. Only the directly viewable 400x400 JPG was inspected; the higher-resolution ZIP download offered on the same page was not fetched.",
+      "published_or_updated_at": "2007-07-06"
+    },
+    {
+      "source_id": "e30zone.net.e30wiki.m3",
+      "title": "M3 - E30 Zone Wiki",
+      "publisher": "E30 Zone",
+      "url": "https://www.e30zone.net/e30wiki/index.php/M3",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Community-maintained enthusiast wiki technical overview of the BMW E30 M3, covering production dates, S14 engine output stages, the Getrag manual gearbox's European dogleg vs North American/Japanese H-pattern configurations, and the M-Technic I/II steering wheel generations. Overview section, production dates: “BMW Motorsport GmbH produced the E30 M3 coupe from March 1986 through December 1990, with North American models arriving in 1987 (marketed as 1988 model year).” Reviewed for /identity/year. Engine section, S14 output: “200 hp (DIN) at 6,750rpm and 176 lb/ft of torque at 4,750 rpm” Reviewed for /identity/real_world_identity_notes. Gearbox section: “European models featured a close-ratio version with a direct top gear and a 'dogleg' shift pattern, while North American cars used an overdrive unit (shared with the E30 325i) with a standard 'H' layout.” Reviewed for /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/gearbox_type. Interior/steering wheel section: “Pre-September 1989 cars had the M-Technic I with a slimmer hub and the M tri-color stripe on the center spoke, while later models used the M-Technic II steering wheel with a thicker rim and the M logo.” Reviewed for /authentic_controls/steering/wheel_rim/shape. Community/enthusiast technical wiki; used to corroborate the manufacturer source's production dates and to establish the Euro-vs-North-America gearbox market split and the steering-wheel generations, not as a standalone authority for real-car facts on its own."
+    },
+    {
+      "source_id": "teamspeed.forum.e30-m3-german-us-spec",
+      "title": "E30 M3... German or U.S. spec? Need help!",
+      "publisher": "Teamspeed.com (BMW enthusiast forum)",
+      "url": "https://teamspeed.com/forums/m/64645-e30-m3-german-u-s-spec-need-help.html",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "unknown",
+      "notes": "Exact scope: BMW enthusiast forum thread in which a member details the two distinct Getrag 265 five-speed gearboxes fitted to the E30 M3 by market (European dogleg vs North American/Japanese H-pattern), including gear ratios and final-drive differences. Forum reply detailing the two gearbox variants: “Two different Getrag 265 five-speed manual gearboxes were used in the E30 M3; a close-ratio version with a direct top gear and a 'dogleg' shift pattern for European-spec cars, and an overdrive unit (shared with the E30 325i) with a standard 'H' pattern for North America and Japan.” Reviewed for /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/gearbox_type. Anonymous-handle enthusiast forum source; used only to corroborate the same Euro-dogleg/North-America-H-pattern market split independently documented by e30zone.net and bimmertips.com, not as a standalone authority."
+    },
+    {
+      "source_id": "bimmertips.dogleg-gearbox-advantages",
+      "title": "Dogleg Gearbox, Advantages",
+      "publisher": "BIMMERtips.com",
+      "url": "https://bimmertips.com/dogleg-gearbox-advantages/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Enthusiast technical article explaining dogleg gearboxes generally, using the Eurospec vs US-spec E30 M3 as its worked example and describing the dogleg gate's first-gear position. Article body, market comparison: “The Eurospec BMW E30 M3 uses a dog leg transmission compared to the US Spec model which features an H pattern transmission.” Reviewed for /authentic_controls/transmission/shift_pattern. Article body, gate description: “first gear is in the lower left from the neutral position” Reviewed for /authentic_controls/transmission/first_gear_position. General secondary explainer of dogleg gearboxes; corroborates the Euro/US market split and the first-gear position independently of the manufacturer and forum sources."
+    },
+    {
+      "source_id": "assetto-db.bmw-m3-e30",
+      "title": "BMW M3 E30 - BMW - Car Detail - Assetto Corsa Database",
+      "publisher": "assetto-db.com",
+      "url": "http://assetto-db.com/car/bmw_m3_e30",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "unknown",
+      "notes": "Exact scope: Community catalog page for the exact bmw_m3_e30 Assetto Corsa content (this observation's internal_id), confirming it is bundled base-game 'street'-class content distinct from the sibling bmw_m3_e30_gra/bmw_m3_e30_dtm racing content and the bmw_m3_e30_drift variants, and giving headline specification figures. Car info table: “Class: street / Power: 238 bhp / Torque: 240Nm / Weight: 1200kg / Year: 1986” Reviewed for /identity/class, /identity/year, /identity/real_world_identity_notes. Description text: “The vehicle was produced to homologate the M3 for Group A Touring Car racing, with various evolution models developed to maintain competitive racing status.” Reviewed for /identity/real_world_identity_notes. Related Cars section: “BMW M3 E30 Drift / BMW M3 E30 Drift Step3 / BMW M3 E30 Step1 / BMW M3 E30 Drift s3” Reviewed for /identity/real_world_identity_notes. Confirms this exact internal id is the base/'street' road-car content (distinct from the separately-researched bmw_m3_e30_gra and bmw_m3_e30_dtm racing siblings and from the unrelated drift-tuned variants), but its listed 238 bhp power figure matches the real car's 1990 Sport Evolution output rather than the base 1986 200 hp figure BMW's own heritage page gives; this is flagged as an open identity question rather than silently resolved, since it does not change the gearbox/wheel facts this record relies on, which are shared across the road-going family."
+    },
+    {
+      "source_id": "ac.local-live-bmw-m3-e30-controls.14923034",
+      "title": "Live AC BMW M3 E30 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/101",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.bmw-m3-e30.20260910t232743785z-3e4d0974 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'bmw_m3_e30', no declared version, data-acd sha256 78c9f4acf732bee7f076a9f5c01a7e1d57acec69a27547baac70853d5d3bf3d0. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "bmw_m3_e30",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "78c9f4acf732bee7f076a9f5c01a7e1d57acec69a27547baac70853d5d3bf3d0"
+        }
+      }
+    },
+    {
+      "source_id": "assetto-corsa-mods-fandom.bmw-m3-e30-group-a-1990",
+      "title": "BMW M3 E30 Group A 1990",
+      "publisher": "Assetto Corsa Mods Wiki (Fandom)",
+      "url": "https://assetto-corsa-mods.fandom.com/wiki/BMW_M3_E30_Group_A_1990",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Community-maintained wiki page documenting Assetto Corsa's own bundled data for the base-game content that includes both this car (bmw_m3_e30_gra, called \"STD\" on this page) and its sibling \"DTM\" content, distinguishing their transmissions, power, weight and represented eras. Infobox, Transmission row: “Transmission STD: Dogleg-H DTM: H-Pattern” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Infobox, Power/Weight/Year rows: “Year 1990 / Power 290 / 350 bhp / Weight 945 kg / Versions STD / DTM” Reviewed for /identity/real_world_identity_notes. Description, paragraphs 3-4: “The late 80s cars were starting to showcase the extreme potential of the car, with engines screaming at over 8000RPM and outputs of over 290 bhp... The 1990-1992 cars of the Deutsche Tourenwagen Meisterschaft (DTM) were the most extreme versions and reached their maximum potential, with engines screaming over 9000RPM and outputs of over 350 bhp... the teams could setup their cars with gearboxes featuring 6 ratios.” Reviewed for /identity/year, /identity/real_world_identity_notes. Community-maintained fan wiki, not an official Kunos publication, but it directly documents the simulator's own bundled per-car data and is the clearest available source distinguishing this \"STD\"/Group A variant (dogleg-H, ~290 bhp, matching internal id bmw_m3_e30_gra) from the separate \"DTM\" variant (H-pattern, 6-speed, ~350 bhp, matching bmw_m3_e30_dtm researched under issue-103). Used only to identify which real-world spec-era Kunos targeted for this content, not as real-car authentic-controls evidence on its own."
+    },
+    {
+      "source_id": "assetto-db.bmw-m3-e30-group-a",
+      "title": "BMW M3 E30 Group A - Car Detail - Assetto Corsa Database",
+      "publisher": "assetto-db.com",
+      "url": "https://assetto-db.com/car/bmw_m3_e30_gra",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "unknown",
+      "notes": "Exact scope: Community catalog page for the exact bmw_m3_e30_gra content, confirming it ships as part of the original base game and listing headline specification figures and its related sibling content. Car info table: “Class race / Power 290+ bhp / Torque 310Nm / Weight 945kg” Reviewed for /identity/real_world_identity_notes. Related Cars section: “BMW M3 E30 DTM” Reviewed for /identity/real_world_identity_notes. Corroborates the fandom wiki's power/weight figures for this exact internal id independently, and confirms the \"DTM\" car is a distinct sibling content rather than an alternate name for the same car."
+    },
+    {
+      "source_id": "racecarsdirect.getrag-e30-m3-265-5-dogleg-listing-80877",
+      "title": "Getrag E30 M3 265/5 dog leg gearbox",
+      "publisher": "Racecarsdirect.com",
+      "url": "https://racecarsdirect.com/Advert/Details/80877/getrag-e30-m3-2655-dog-leg-gearbox",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Classified listing for an original Getrag 265/5 five-speed dogleg gearbox, explicitly described as built for Group A racing use, with its full five-speed ratio set. Listing description: “Getrag M3 ... Gear ratios: 1st - 1:3.717, 2nd 1:2.403, 3rd - 1:1.766, 4th - 1:1.263, 5th - 1:1 ... Intended to run in Group A race car but never used.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. Related adverts sidebar: “BMW E30 M3 DTM 6 Speed Gearbox. BMW E30 M3 Motorsport DTM race 6 speed gearbox.” Reviewed for /identity/real_world_identity_notes. A parts-trade classified listing rather than a technical or editorial publication, but it independently corroborates a genuine five-forward-gear Getrag 265/5 dogleg unit built specifically for Group A racing use (matching this car), and its sidebar independently corroborates that the six-speed \"DTM\" gearbox is a distinct, separately traded part (matching the separate issue-103 content) rather than another name for the same unit."
+    },
+    {
+      "source_id": "touringcartimes.2009.road-cars-of-touring-car-racing-bmw-m3-e30",
+      "title": "The Road Cars of Touring Car Racing: BMW M3 E30",
+      "publisher": "TouringCarTimes",
+      "url": "https://www.touringcartimes.com/2009/05/07/the-road-cars-of-touring-car-racing-bmw-m3-e30/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Motorsport-history feature on the BMW M3 (E30)'s touring car racing career, covering its 1987 World Touring Car Championship debut through its 1990 DTM regulation change to 2.5-litre engines and the Sport Evolution model. Article body, 1987 season section: “With a World Touring Car Championship being held for the first time in 1987, the BMW M3 was simply perfect for this new challenge, the 2.3-litre power unit being boosted to a maximum of 300 hp at 8,200 rpm compared with the 200 hp of the 2.3-litre road-going version” Reviewed for /identity/year, /identity/real_world_identity_notes. Article body, closing section: “In the end, the DTM regulations was increased to 2.5 litres in both Germany and France, giving the four-cylinder maximum output of up to 360 hp resulting in the Sports Evolution model” Reviewed for /identity/real_world_identity_notes. Confirms the chronology used to separate this car's earlier, ~300 hp/2.3-litre 1987-1989 Group A specification from the later, up-to-360 hp/2.5-litre Sport-Evolution-based specification that the separate bmw_m3_e30_dtm content (issue-103) more closely matches. Does not describe gearbox construction or cockpit details, so not cited for transmission or steering claims.",
+      "author": "Bo Skovfoged"
+    },
+    {
+      "source_id": "iconicauctioneers.2020.1989-bmw-m3-e30-group-a-fia-race-car",
+      "title": "1989 BMW M3 (E30) Group A FIA Race Car",
+      "publisher": "Iconic Auctioneers",
+      "url": "https://www.iconicauctioneers.com/1989-bmw-m3-rec10017-1-1120",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction-house catalog description for a specific, documented original 1989 factory Group A M3 race car (chassis M3-1165, one of 55 period Motorsport factory Group A race cars), describing the general Works Group A racing program and regulations. Article body, background paragraph: “In the late 1980s and early 1990s, BMW Motorsport supplied various Works teams, such as Schnitzer in Germany and Prodrive in the UK with race-ready Group A body shells that were prepared for racing by Matter in Germany. They were built to FIA Group A Touring Car regulations and all cars had to be homologated with a minimum production run of 500 road units” Reviewed for /identity/manufacturer, /identity/real_world_identity_notes. Article body, provenance paragraph: “One of only 55 period Motorsport factory Group A race cars, chassis number M3 1165 was sold new to BMW dealer, Godfrey Hall, who campaigned the car in the 1989 British Touring Car Championship (Class B)” Reviewed for /identity/year. Describes a specific original period-built works Group A M3 and the general Works-supplied Group A racing program; does not include cockpit or wheel photographs in the material reviewed here, so used only for identity/manufacturer/homologation-program context, not for steering or transmission claims."
+    },
+    {
+      "source_id": "sothebysmotorsport.2025.1991-bmw-m3-group-a-recreation",
+      "title": "1991 BMW M3 (listed as \"1991 BMW M3 Group A Recreation\")",
+      "publisher": "Sotheby's Motorsport (SOMO)",
+      "url": "https://sothebysmotorsport.com/auction/1991-bmw-m3-4222",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permission-required",
+      "notes": "Exact scope: Auction listing and photographs for a modern, ground-up recreation of a Group A-specification E30 M3, built from a 1991 production shell by a named BMW GB/Australia master mechanic; used only for its interior photograph and its description of the fitted gearbox, not as a period-original car. Listing description, drivetrain paragraph: “Paired with a rebuilt Getrag 265 five-speed manual gearbox with a Group A selector, a C3 competition clutch, and a 4.27 final drive differential with 25% lock-up” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/standing_start_clutch. Interior photograph (dashboard/steering wheel, full-resolution 975x650 image at cloudfront asset 2DFB9476-153C-41B9-B2A3-632576BF812E.webp, inspected at 2x CSS zoom): “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. This is an explicitly modern recreation (built from a 1991 production shell, not an original 1987-1989 works or privateer race car), described by the seller as using a \"period-correct BMW steering wheel\" without naming the exact part. The full-resolution photograph shows a continuous, round, black-rimmed three-spoke wheel with no wheel-mounted display and no LED/lamp shift-light array; all instrumentation (a bank of analog dials in a red-faced panel) sits on the dashboard rather than the wheel. Treated as corroborating rather than dispositive for the wheel-rim claims because of the recreation caveat; its gearbox description independently corroborates the Getrag 265 five-speed already established from the FIA homologation form and other sources."
+    },
+    {
+      "source_id": "ac.local-live-bmw-m3-e30-group-a-controls.14923034",
+      "title": "Live AC BMW M3 E30 Group A guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/102",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.bmw-m3-e30-group-a.20260910t233112691z-6a5253ba by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'bmw_m3_e30_gra', no declared version, data-acd sha256 f98f9144a1f3842f2dd66657af482a72824f9c274df807e40430dfa5e0c55751. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "bmw_m3_e30_gra",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "f98f9144a1f3842f2dd66657af482a72824f9c274df807e40430dfa5e0c55751"
+        }
+      }
+    },
+    {
+      "source_id": "as-driven.repository.giulia-sprint-gta-1965-existing-record-scan",
+      "title": "As Driven curated Alfa Romeo Giulia Sprint GTA (1965) record scan",
+      "publisher": "Milky28/as-driven",
+      "url": "https://github.com/Milky28/as-driven/blob/main/data/v1/cars/alfa-romeo-giulia-sprint-gta-1965.json",
+      "source_type": "other",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "permitted",
+      "notes": "Exact scope: Checked-out repository scan of the existing curated Alfa Romeo Giulia Sprint GTA (1965) record: its identity block, its established authentic_controls transmission fields, its not-established running-shift-technique and wheel-rim fields, and the sourced basis for the downshift manual-blip derivation. identity and authentic_controls blocks: “record_id alfa-romeo-giulia-sprint-gta-1965; display_name \"Alfa Romeo Giulia Sprint 1600 GTA\"; manufacturer Alfa Romeo; model Giulia Sprint GTA; year 1965; class \"Group 2 touring car homologation special\"; forward_gears 5; gearbox_type synchromesh; shift_actuation h-pattern; shift_pattern unknown; standing_start_clutch required; upshift and downshift clutch/throttle_lift/automatic_cut/automatic_blip all unknown; downshift manual_blip optional; wheel_rim shape/integrated_display/open_top/shift_lights all unknown with source_label real-car-research-not-established.” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class, /identity/record_action, /identity/record_id, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shift_lights. authentic_controls.notes[3]: “The standing-start clutch is derived from the mechanism this record already establishes, not observed. An H-pattern gate is a driver-shifted gearbox, and a driver-shifted gearbox has to be declutched to pull away from rest, whatever its construction.” Reviewed for /authentic_controls/transmission/standing_start_clutch. provenance.claims (downshift/manual_blip basis): “The reviewed sources establish a fully synchronised five-speed gearbox. Synchronisers match the shaft speeds themselves, so the blip eases them rather than engaging the gear, and the value follows from the construction this record already establishes.” Reviewed for /authentic_controls/transmission/downshift/manual_blip. Used to attach this AC (original) observation to the exact existing record without re-deriving already-settled real-car fields, per the case brief's instruction to check whether ks_alfa_romeo_gta matches the already-curated specification rather than restarting research from scratch. This record's own sourced basis is not re-verified first-hand in this pass; only its content is scanned.",
+      "published_or_updated_at": "2026-09-06"
+    },
+    {
+      "source_id": "assetto-db.ks-alfa-romeo-gta",
+      "title": "Alfa Romeo GTA - Car Detail",
+      "publisher": "assetto-db.com (community Assetto Corsa car database)",
+      "url": "http://assetto-db.com/car/ks_alfa_romeo_gta",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Community-run database mirroring Kunos's in-game car description and specification fields for the internal id ks_alfa_romeo_gta, part of Assetto Corsa's Dream Pack 1 DLC. car detail page, description and specification fields: “Developed by Autodelta... the 'A' designation standing for 'Alleggerita' (lightweight)... aluminium outer body panels instead of steel, magnesium alloy wheels, clear plastic side windows... dry weight to about 750kg... up to 170bhp in race trim... championship titles in 1966 (with driver Andrea de Adamich) and 1970. DLC Pack: Dream Pack 1. Powertrain: RWD with 5-speed manual transmission.” Reviewed for /identity/real_world_identity_notes, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Secondary community mirror of Kunos's own showroom text, not fetched directly from the game client. It corroborates the exact real-car identity (Autodelta 'Alleggerita' Giulia GTA, 1966/1970 titles) and a five-speed manual gearbox, but its generic 'ABS, traction control, electronic differential lock' template line is not applicable to a 1960s homologation racer and is disregarded as boilerplate rather than treated as an authentic-controls claim."
+    },
+    {
+      "source_id": "steampowered.assetto-corsa-dream-pack-1",
+      "title": "Assetto Corsa - Dream Pack 1",
+      "publisher": "Kunos Simulazioni / Steam",
+      "url": "https://store.steampowered.com/app/347990/Assetto_Corsa__Dream_Pack_1/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Kunos/Steam storefront listing for the Assetto Corsa Dream Pack 1 DLC, naming its included cars. store page feature list: “Features Alfa Romeo 4C, GTA and 155 Ti V6 '93” Reviewed for /identity/record_action. Confirms the observed content is genuine first-party Kunos DLC (bundled with the already-curated Alfa Romeo 155 Ti V6 '93), not a third-party or ambiguous mod, supporting the identity match rather than any specific control field."
+    },
+    {
+      "source_id": "ac.local-live-alfa-romeo-gta-controls.14923034",
+      "title": "Live AC Alfa Romeo GTA guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/98",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.alfa-romeo-gta.20260910t231600156z-4d31712f by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_alfa_romeo_gta', no declared version, data-acd sha256 b623e03ffffc4a7a24ac1ed4b497b3ae40f354ee49af84c91a4b94c1721098f7. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_alfa_romeo_gta",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "b623e03ffffc4a7a24ac1ed4b497b3ae40f354ee49af84c91a4b94c1721098f7"
+        }
+      }
+    },
+    {
+      "source_id": "assetto-db.bmw-m3-e30-dtm",
+      "title": "BMW M3 E30 DTM - BMW - Car Detail - Assetto Corsa Database",
+      "publisher": "assetto-db.com",
+      "url": "https://assetto-db.com/car/bmw_m3_e30_dtm",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "unknown",
+      "notes": "Exact scope: Community-maintained catalog entry for the bmw_m3_e30_dtm Assetto Corsa content, confirming it is original in-game content (not a third-party mod) whose registered parent car is bmw_m3_e30_gra, and giving its represented class, power, torque, weight and a note on gearbox ratio count. Car detail page, header/related-cars area: “Already in game / Original source / You need parent car to use this one. ... Related Cars: BMW M3 E30 Group A [PARENT]” Reviewed for /identity/real_world_identity_notes, /identity/record_action. Car detail page, specification summary and body text: “Class: race / Power: 350+ bhp / Torque: 310Nm / Weight: 945kg ... The 1990-1992 cars of the Deutsche Tourenwagen Meisterschaft (DTM) were the most extreme versions... In the latest versions of the car ABS was also permitted in the DTM championship and the teams could setup their cars with gearboxes featuring 6 ratios.” Reviewed for /identity/year, /identity/class, /authentic_controls/transmission/forward_gears. Community/secondary source describing official Kunos base-game content; used to establish that this internal id is a distinct, later-development sibling of the base Group A car and to corroborate the six-ratio gearbox, not as a standalone technical authority."
+    },
+    {
+      "source_id": "auto-motor-und-sport.2014.bmw-m3-f80-e30-dtm-test",
+      "title": "BMW M3 (F80) und M3 (E30) DTM im Test",
+      "publisher": "auto motor und sport",
+      "url": "https://www.auto-motor-und-sport.de/test/bmw-m3-f80-e30-dtm-test/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: A period-detail track test of the actual, identified ex-Johnny Cecotto works Fina-BMW M3 (E30) DTM chassis '12.91 M3/249' from the 1992 DTM season (last raced 24 May 1992 at Hockenheim), conducted with former BMW Motorsport development engineer Claus Weber present, comparing it to a modern BMW M3 F80. Only the E30 DTM portions are cited. Article body, transmission/handling section: “Das Sechsganggetriebe von Hollinger will zwar mit Nachdruck geschaltet werden, glaenzt aber mit praeziser Gassenfuehrung und sehr kurzen Schaltwegen. Ein Gedicht, wie schnell mit dem duennen Schaltstock die Fahrstufen durchgerissen werden koennen.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Article body, steering section: “Stoesse dieser Erschuetterungsstufe im Dreispeichenlenkrad schon bei der kleinsten Fahrbahnunebenheit zum Programm.” Reviewed for /identity/real_world_identity_notes. Article body, clutch/move-off section: “musste zunaechst jedoch die AP-Carbonkupplung ueberwunden werden, die mit ihrem Pedaldruck schwer an die Beinpresse im Fitnessstudio erinnert” Reviewed for /authentic_controls/transmission/standing_start_clutch. Names a Hollinger six-speed gearbox for this exact, chassis-identified 1992 works car and describes it as needing forceful, precise, very short shifts via a thin lever, consistent with dog-ring engagement rather than a synchromesh unit, though the article does not use the words 'dog' or 'synchromesh' itself. Confirms a heavy-pedal (AP carbon) clutch used for move-off. Describes a three-spoke wheel but not its rim shape, display, or lights in enough detail to use for the wheel-rim claims.",
+      "author": "Christian Gebhardt",
+      "published_or_updated_at": "2014-08-22"
+    },
+    {
+      "source_id": "goodwood.2024.bmw-e30-m3-halcyon-days",
+      "title": "This M3 Recalls Halcyon Days",
+      "publisher": "Goodwood Road & Racing (GRR)",
+      "url": "https://www.goodwood.com/grr/race/historic/bmw-e30-m3/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: A test-drive account, by BTCC driver Colin Turkington, of a genuine period E30 M3 DTM car campaigned in 1990 and currently presented in a 1992-season (Steve Soper) livery. Article body, driving-impression quote: “You had to take your time with the six-speed, dog-leg gearbox - I'm used to a sequential shift - but it was sweet once I'd got used to it.” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/shift_actuation. Independently corroborates a six-speed gate with a dogleg layout for a genuine period E30 M3 DTM car presented in 1992 livery; this is a shift-pattern (gate layout) statement rather than a statement about internal dog-ring vs synchromesh engagement.",
+      "published_or_updated_at": "2024-05-03"
+    },
+    {
+      "source_id": "bonhams.2026.bmw-m3-e30-dtm-wba121307",
+      "title": "1992 BMW M3 (E30) DTM Competition Saloon, Chassis no. WBA121307 (Lot 128, The Monaco Sale)",
+      "publisher": "Bonhams",
+      "url": "https://cars.bonhams.com/auction/31711/lot/128/1992-bmw-m3-e30-dtm-competition-saloon-chassis-no-wba121307/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permission-required",
+      "notes": "Exact scope: Auction-house catalog description and full-resolution catalog photography for a specific, chassis-identified 1992 works Scuderia Bigazzi BMW M3 (E30) DTM car driven by Steve Soper, restored 'as original as possible' including Soper's own original steering wheel, sold with its original FIA Group A homologation document. Lot description, provenance paragraphs: “This actual car chassis 'WBA121307' was delivered to Team Bigazzi, which together with Schnitzer was one of the two factory backed teams for the 1992 Deutsche Tourenwagen Meisterschaft (DTM) season... including Steve Soper's own steering wheel.” Reviewed for /identity/real_world_identity_notes, /identity/year, /identity/class. Catalog photograph, full-resolution cockpit view (image 7 of 34, image family 25823833-3): “(photograph; no text)” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights. Full-resolution catalog photography (fetched at native 4318x2880 resolution and inspected via cropped zoom) shows a continuous, round, black suede-wrapped three-spoke wheel with a plain red centre horn pad bearing a small maker's badge and the driver's handwritten signature; the rim is unbroken and circular through its entire visible arc with no cut-away section, and carries no LCD/LED readout or shift-lights of any kind. The same photograph shows a floor-mounted lever with a red round knob and a rubber gaiter that fully conceals the gate plate, so it cannot be used to read the shift pattern (dogleg vs standard) despite being viewed at full native resolution; that claim relies on the textual sources instead. Bonhams photography is copyrighted auction-house material; this record describes only what is visible and does not reproduce the images.",
+      "published_or_updated_at": "2026-04-24"
+    },
+    {
+      "source_id": "racecarsdirect.84119.1991-bmw-e30-m3-ex-tim-harvey",
+      "title": "1991 BMW E30 M3, Ex-Tim Harvey (Silverstone Auctions listing)",
+      "publisher": "Racecarsdirect.com / Silverstone Auctions",
+      "url": "https://racecarsdirect.com/Advert/Details/84119/1991-bmw-e30-m3-ex-tim-harvey",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Auction listing for a 1991 Vic Lee Motorsport-built BMW E30 M3 built for the British Touring Car Championship's 2-litre formula (not DTM/Group A), used only to corroborate that Hollinger produced dog-engagement six-speed gearboxes for contemporary E30 M3 racing applications. Listing body, technical-description paragraph: “the VLM cars also benefited from a host of geometric alterations... and also utilised a Hollinger 6-speed dog engagement gearbox” Reviewed for /authentic_controls/transmission/gearbox_type. This car is a 1991 BTCC 2-litre-formula car, not a DTM Group A car, so it is off-scope for this record's exact specification and is cited only as corroboration that Hollinger's contemporary E30 M3 gearboxes were dog-engagement construction, supporting (not proving) the same for the DTM-spec Hollinger unit named in the auto-motor-und-sport source."
+    },
+    {
+      "source_id": "bmwblog.2016.1992-bmw-m3-e30-dtm",
+      "title": "1992 BMW E30 M3 DTM - The Most Beautiful Touring Car in the World?",
+      "publisher": "BMWBLOG",
+      "url": "https://www.bmwblog.com/2016/08/09/1992-bmw-e30-m3-dtm-beautiful-touring-car-world/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: A blog piece built around an interview quote from Johnny Cecotto at a car-show appearance (Essen Motor Show 2011) describing his 1992 DTM M3 in general terms. Article body, driver-quote paragraph: “It also uses a standard five-speed manual gearbox and not an automated sequential manual, like modern Touring cars.” Reviewed for /authentic_controls/transmission/forward_gears. The only reviewed source giving a five-speed reading for this driver's 1992 car, conflicting with the detailed, chassis-identified technical account of the same driver's same-season car in the auto-motor-und-sport source. Treated as a low-rigor, comparison-to-modern-cars remark rather than a precise technical statement, and recorded as a documented minority position rather than silently discarded; it is the basis for proposing forward_gears/gearbox_type/shift_pattern at medium rather than high confidence.",
+      "published_or_updated_at": "2016-08-09"
+    },
+    {
+      "source_id": "ac.local-live-bmw-m3-e30-gr-a-92-controls.14923034",
+      "title": "Live AC BMW M3 E30 Gr.A 92 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/103",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.bmw-m3-e30-gr-a-92.20260910t233747468z-1f1a75dc by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'bmw_m3_e30_dtm', no declared version, data-acd sha256 ba5c0c6f3399e44ce4ec9a73a2cec19f41f0cbae935c222d9e7308aca413967c. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "bmw_m3_e30_dtm",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "ba5c0c6f3399e44ce4ec9a73a2cec19f41f0cbae935c222d9e7308aca413967c"
+        }
+      }
+    },
+    {
+      "source_id": "steam.assetto-corsa-ferrari-70th-anniversary-pack.store-page",
+      "title": "Assetto Corsa - Ferrari 70th Anniversary Pack (Steam store page)",
+      "publisher": "Kunos Simulazioni / Valve",
+      "url": "https://store.steampowered.com/app/675590/Assetto_Corsa__Ferrari_70th_Anniversary_Pack/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "facts-only-review",
+      "notes": "This confirms what real-car content Kunos itself ships under the ks_ferrari_250_gto content_id; it is not itself real-car authentic-controls evidence."
+    },
+    {
+      "source_id": "rmsothebys.2018.1962-ferrari-250-gto-chassis-3413-lot",
+      "title": "1962 Ferrari 250 GTO by Scaglietti | Monterey 2018",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/auctions/mo18/lots/r0117-1962-ferrari-250-gto-by-scaglietti/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-10",
+      "reuse_status": "permission-required",
+      "notes": "All photo rights reserved by the photographer/auction house; this record describes only what is visible (a continuous, wood-rimmed, three-spoke wheel with a Ferrari badge at its centre, no rim-mounted display, and no rim-mounted shift lights) and does not reproduce the image itself. This is one specific, well-documented chassis rather than the exact chassis Kunos modeled, so the wheel-rim finding is treated as representative of the shared production cockpit rather than a chassis-exact match."
     }
   ]
 }
