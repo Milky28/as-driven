@@ -430,9 +430,12 @@ class ReviewSubmissionTests(unittest.TestCase):
             ]
         }
 
-        accepted, corrections, effective = _existing_authentic_control_decisions(
-            existing, real_controls, result
-        )
+        (
+            accepted,
+            corrections,
+            effective,
+            same_simulator_corrections,
+        ) = _existing_authentic_control_decisions(existing, real_controls, result)
 
         self.assertEqual(
             ["/authentic_controls/steering/wheel_rim/open_top"], accepted
@@ -444,6 +447,18 @@ class ReviewSubmissionTests(unittest.TestCase):
             "optional", effective["transmission"]["downshift"]["clutch"]
         )
         self.assertEqual("no", effective["steering"]["wheel_rim"]["open_top"])
+
+        by_path = {change["path"]: change for change in same_simulator_corrections}
+        self.assertEqual("not-required", by_path[path]["from"])
+        self.assertEqual("optional", by_path[path]["to"])
+        self.assertEqual(
+            "unknown",
+            by_path["/authentic_controls/steering/wheel_rim/open_top"]["from"],
+        )
+        self.assertEqual(
+            "no",
+            by_path["/authentic_controls/steering/wheel_rim/open_top"]["to"],
+        )
 
     def test_prepare_review_preserves_explicit_drive_acceptance(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -598,6 +613,85 @@ class ReviewSubmissionTests(unittest.TestCase):
                 correction["corrected_behavior_paths"],
             )
             self.assertNotIn("compatible_implementation", entry)
+
+    def test_same_simulator_correction_carries_its_own_authentic_fills(self) -> None:
+        """A same-simulator correction must not silently drop a newly filled
+        real-car fact: it has no top-level `accept_from_drive` to fall back on,
+        so the fill has to travel inside `correct_existing_simulator` itself.
+        """
+        submitted = observation()
+        submitted["tests"].update(
+            {
+                "coast_downshift": "no",
+                "clutchless_downshift": "yes",
+                "automatic_blip": "no",
+            }
+        )
+        staged = import_observation(submitted)
+        simulator = staged["record"]["simulators"][0]
+        live_source = staged["source"]["source_id"]
+        existing = json.loads(json.dumps(staged["record"]))
+        existing["simulators"][0]["overrides"] = []
+        existing["simulators"][0]["source_refs"] = ["example.real", live_source]
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data" / "v1" / "cars").mkdir(parents=True)
+            (root / "curation").mkdir()
+            (root / "data" / "v1" / "sources.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0.0",
+                        "sources": [
+                            {
+                                "source_id": "example.real",
+                                "source_type": "manufacturer",
+                            },
+                            {
+                                "source_id": live_source,
+                                "source_type": "in-game-observation",
+                            },
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            observed_through = "SimHub guided verification observation prior-drive"
+            (root / "curation" / "ams2-approved-public-test-car.json").write_text(
+                json.dumps({"observed_through": observed_through}),
+                encoding="utf-8",
+            )
+            fill = {
+                "path": "/authentic_controls/steering/wheel_rim/open_top",
+                "from": "unknown",
+                "to": "no",
+                "basis": "Exact-car cockpit photograph shows a closed rim.",
+                "source_refs": ["exact.cockpit.photo"],
+                "confidence": "high",
+            }
+            entry = {
+                "record_id": "public-test-car",
+                "control_overrides": {},
+                "simulator_overrides": simulator["overrides"],
+                "accept_from_drive": [fill["path"]],
+                "authentic_control_corrections": [],
+            }
+
+            _same_simulator_disposition(
+                root,
+                {"classification": "curated-identity-comparison"},
+                staged,
+                entry,
+                existing,
+                [fill],
+            )
+
+            correction = entry["correct_existing_simulator"]
+            self.assertEqual(
+                [fill], correction["authentic_control_corrections"]
+            )
+            self.assertNotIn("accept_from_drive", entry)
+            self.assertNotIn("authentic_control_corrections", entry)
 
     def sync_test_case_for_root(self, root: Path, cases: Path) -> Path:
         raw = (json.dumps(observation(), indent=2) + "\n").encode("utf-8")

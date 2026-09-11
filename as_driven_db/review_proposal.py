@@ -77,13 +77,23 @@ def _existing_authentic_control_decisions(
     existing_record: dict[str, Any],
     real_controls: dict[str, Any],
     result: dict[str, Any],
-) -> tuple[list[str], list[dict[str, Any]], dict[str, Any]]:
-    """Make sourced changes to an existing real-car baseline explicit."""
+) -> tuple[list[str], list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
+    """Make sourced changes to an existing real-car baseline explicit.
+
+    `corrections` and `accepted` (bare fills) are shaped for a cross-simulator
+    merge, which is the only place a top-level correction is allowed to change
+    an already-curated value. `same_simulator_corrections` restates every
+    changed path - fills included, each carrying its own `from`/`to` - because
+    a same-simulator promotion instead routes every authentic-control change
+    through `correct_existing_simulator`, which has no separate "fill" concept
+    of its own.
+    """
     existing_controls = existing_record["authentic_controls"]
     existing_values = _flatten(existing_controls, "/authentic_controls")
     reviewed_values = _flatten(real_controls, "/authentic_controls")
     accepted: list[str] = []
     corrections: list[dict[str, Any]] = []
+    same_simulator_corrections: list[dict[str, Any]] = []
     effective = copy.deepcopy(existing_controls)
     for claim in result.get("claims", []):
         path = str(claim.get("path") or "")
@@ -99,6 +109,16 @@ def _existing_authentic_control_decisions(
         reviewed_established = reviewed is not None and reviewed != "unknown"
         if not reviewed_established or current == reviewed:
             continue
+        same_simulator_corrections.append(
+            {
+                "path": path,
+                "from": copy.deepcopy(current) if current_established else "unknown",
+                "to": copy.deepcopy(reviewed),
+                "basis": claim["basis"],
+                "source_refs": list(claim["source_refs"]),
+                "confidence": claim["confidence"],
+            }
+        )
         if current_established:
             corrections.append(
                 {
@@ -117,7 +137,7 @@ def _existing_authentic_control_decisions(
             path.removeprefix("/authentic_controls"),
             reviewed,
         )
-    return sorted(accepted), corrections, effective
+    return sorted(accepted), corrections, effective, same_simulator_corrections
 
 
 def _ordinary_punctuation(value: str) -> str:
@@ -470,7 +490,13 @@ def _proposal_summary(
     driver_summary = entry.get("driver_summary")
     driver_summary_section = ""
     authentic_corrections_section = ""
-    if entry.get("authentic_control_corrections"):
+    same_simulator_authentic_corrections = (entry.get("correct_existing_simulator") or {}).get(
+        "authentic_control_corrections"
+    )
+    authentic_corrections = (
+        entry.get("authentic_control_corrections") or same_simulator_authentic_corrections
+    )
+    if authentic_corrections:
         authentic_corrections_section = """
 ## Deliberate real-car baseline corrections
 
@@ -481,7 +507,7 @@ def _proposal_summary(
 These changes come from the cited independent real-car sources, not from the
 new simulator drive. Confirm each before promotion.
 """ % json.dumps(
-            entry["authentic_control_corrections"], indent=2, ensure_ascii=False
+            authentic_corrections, indent=2, ensure_ascii=False
         )
     if driver_summary:
         driver_summary_section = f"""
@@ -1070,6 +1096,7 @@ def _same_simulator_disposition(
     staged: dict[str, Any],
     manifest_entry: dict[str, Any],
     existing_record: dict[str, Any] | None,
+    same_simulator_corrections: list[dict[str, Any]] | None = None,
 ) -> None:
     """Make a repeat drive an explicit compatible observation or correction."""
     if existing_record is None:
@@ -1176,6 +1203,18 @@ def _same_simulator_disposition(
         "supersedes_observed_through": approval["observed_through"],
         "corrected_behavior_paths": [change["path"] for change in changes],
     }
+    if same_simulator_corrections:
+        # A same-simulator correction has no separate "fill" concept of its
+        # own: every authentic-control change, established or previously
+        # unknown, travels through this nested list instead of the top-level
+        # `accept_from_drive` / `authentic_control_corrections` fields, which
+        # `promote_observations` never reads once `correct_existing_simulator`
+        # is present.
+        manifest_entry["correct_existing_simulator"]["authentic_control_corrections"] = (
+            copy.deepcopy(same_simulator_corrections)
+        )
+    manifest_entry.pop("accept_from_drive", None)
+    manifest_entry.pop("authentic_control_corrections", None)
 
 
 def _prepare_curated_comparison(
@@ -1483,11 +1522,13 @@ def _prepare_record_proposal(
     # proposal manufactures redundant overrides for values already curated.
     accepted_real_control_paths: list[str] = []
     authentic_control_corrections: list[dict[str, Any]] = []
+    same_simulator_corrections: list[dict[str, Any]] = []
     if identity["record_action"] == "use-existing" and existing_record is not None:
         (
             accepted_real_control_paths,
             authentic_control_corrections,
             simulator_baseline,
+            same_simulator_corrections,
         ) = _existing_authentic_control_decisions(
             existing_record,
             real_controls,
@@ -1604,6 +1645,7 @@ def _prepare_record_proposal(
         staged,
         manifest_entry,
         existing_record,
+        same_simulator_corrections,
     )
     if existing_record and existing_record.get("driver_summary"):
         # Adding or correcting a simulator must not erase reviewed record-wide
