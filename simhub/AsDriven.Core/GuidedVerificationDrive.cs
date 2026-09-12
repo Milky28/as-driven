@@ -1299,10 +1299,10 @@ namespace AsDriven.Core
                 case Phase.Intro: return "Prepare to drive";
                 case Phase.MoveOff: return "Release the clutch";
                 case Phase.GearCount: return "Find the top gear";
-                case Phase.FullThrottleUpshift: return "Shift up at full throttle";
-                case Phase.LiftedUpshift: return "Lift, then shift up";
-                case Phase.CoastDownshift: return "Lift, then downshift";
-                case Phase.ManualBlipDownshift: return "Blip, then downshift";
+                case Phase.FullThrottleUpshift: return "Upshift without clutch input";
+                case Phase.LiftedUpshift: return "Upshift without clutch input";
+                case Phase.CoastDownshift: return "Downshift without clutch input";
+                case Phase.ManualBlipDownshift: return "Downshift without clutch input";
                 case Phase.Complete: return "Review your results";
                 default: return "Guided verification";
             }
@@ -1334,10 +1334,10 @@ namespace AsDriven.Core
                 // that creep to go, so the engine either stalls or it does not.
                 case Phase.MoveOff: return "Stopped in 1st, brake on. Release the clutch fully.";
                 case Phase.GearCount: return "Shift up until the gearbox will not go higher.";
-                case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
-                case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
-                case Phase.CoastDownshift: return "At safe RPM, release the throttle, then downshift. Stay off the throttle until the result appears, and leave the clutch untouched.";
-                case Phase.ManualBlipDownshift: return "Leave clutch untouched and manually blip the throttle.";
+                case Phase.FullThrottleUpshift: return "Keep throttle above 70% while moving, then shift up.";
+                case Phase.LiftedUpshift: return "While moving, lift off the throttle, then shift up.";
+                case Phase.CoastDownshift: return "At safe RPM, lift and downshift. Stay off the throttle.";
+                case Phase.ManualBlipDownshift: return "At safe RPM, blip the throttle and downshift.";
                 case Phase.Complete: return "Driving results are ready for review.";
                 default: return string.Empty;
             }
@@ -1350,10 +1350,10 @@ namespace AsDriven.Core
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
                 case Phase.MoveOff: return "Stall = clutch required. If not, brake off, throttle.";
                 case Phase.GearCount: return "Then press NEXT. Only you can see the top gear.";
-                case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
-                case Phase.LiftedUpshift: return "Then request one upshift.";
-                case Phase.CoastDownshift: return "Then request one downshift.";
-                case Phase.ManualBlipDownshift: return "Then request one downshift.";
+                case Phase.FullThrottleUpshift: return "Keep the clutch fully released throughout the test.";
+                case Phase.LiftedUpshift: return "Keep the clutch fully released throughout the test.";
+                case Phase.CoastDownshift: return "Keep the clutch fully released until the result appears.";
+                case Phase.ManualBlipDownshift: return "Keep the clutch fully released throughout the test.";
                 case Phase.Complete: return "Press Next to close this overlay.";
                 default: return string.Empty;
             }
