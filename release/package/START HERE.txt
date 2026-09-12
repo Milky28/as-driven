@@ -6,6 +6,8 @@ INSTALL
 1. Close SimHub.
 2. Double-click "Install As Driven.cmd".
 3. Approve the Windows administrator prompt.
+   If the default SimHub folder is not found, choose your existing SimHub folder
+   containing SimHubWPF.exe. Cancel stops installation without copying files.
 4. Start SimHub.
 5. Open Settings > Plugins, enable As Driven, and optionally pin it to the
    left menu.

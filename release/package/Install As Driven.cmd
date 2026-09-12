@@ -14,7 +14,7 @@ echo Reminder: close SimHub if it is open. This is not an error message.
 echo Windows will ask for administrator approval to install into SimHub.
 echo.
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference = 'Stop'; try { $script = $env:AS_DRIVEN_SCRIPT; $arguments = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', ([char]34 + $script + [char]34), '-Interactive'); $process = Start-Process -FilePath 'powershell.exe' -Verb RunAs -Wait -PassThru -ArgumentList $arguments; exit $process.ExitCode } catch { Write-Host ('Could not start the installer with administrator approval: ' + $_.Exception.Message); exit 1 }"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference = 'Stop'; try { $script = $env:AS_DRIVEN_SCRIPT; $arguments = @('-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-File', ([char]34 + $script + [char]34), '-Interactive'); $process = Start-Process -FilePath 'powershell.exe' -Verb RunAs -Wait -PassThru -ArgumentList $arguments; exit $process.ExitCode } catch { Write-Host ('Could not start the installer with administrator approval: ' + $_.Exception.Message); exit 1 }"
 set "AS_DRIVEN_RESULT=%ERRORLEVEL%"
 
 if not "%AS_DRIVEN_RESULT%"=="0" (

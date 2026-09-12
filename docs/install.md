@@ -15,7 +15,9 @@ change between releases.
 2. Close SimHub.
 3. Extract the ZIP.
 4. Double-click **Install As Driven.cmd** and approve the Windows administrator
-   prompt.
+   prompt. If SimHub is not found in its default location, select your existing
+   SimHub folder when prompted. It must contain `SimHubWPF.exe`; Cancel stops
+   installation without copying files.
 5. Start SimHub and enable **As Driven** under Settings > Plugins.
 6. Open Dash Studio and load the included As Driven overlay layout.
 
