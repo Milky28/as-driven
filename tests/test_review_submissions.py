@@ -36,7 +36,11 @@ from as_driven_db.review_proposal import (
     generate_driver_summary_proposal,
     prepare_review_proposal,
 )
-from as_driven_db.review_promotion import promote_review_case
+from as_driven_db.review_promotion import (
+    prepare_review_batch,
+    promote_review_batch,
+    promote_review_case,
+)
 from as_driven_db.research_amendment import amended_curation_approvals
 from as_driven_db.validate import validate_repository
 
@@ -718,6 +722,24 @@ class ReviewSubmissionTests(unittest.TestCase):
         )
         return cases / "issue-17"
 
+    def sync_test_case_for_issue(
+        self,
+        root: Path,
+        cases: Path,
+        issue_number: int,
+        observed: dict,
+    ) -> Path:
+        raw = (json.dumps(observed, indent=2) + "\n").encode("utf-8")
+        sync_submissions(
+            root,
+            repository="example/project",
+            cases_directory=cases,
+            inbox=cases.parent / "inbox",
+            issue_loader=lambda _repo, _label: [issue(issue_number)],
+            attachment_fetcher=lambda _: raw,
+        )
+        return cases / f"issue-{issue_number}"
+
     def sync_test_case(self, temp: Path) -> Path:
         return self.sync_test_case_for_root(ROOT, temp / "cases")
 
@@ -1046,6 +1068,8 @@ class ReviewSubmissionTests(unittest.TestCase):
                 "include an established or `not-established` claim for every path",
                 brief,
             )
+            self.assertIn("MANDATORY cockpit-photo pass", brief)
+            self.assertIn('evidence_kind: "cockpit-photo"', brief)
             self.assertIn("## Required control claim paths", brief)
             self.assertIn("## Other permitted claim paths", brief)
             self.assertIn(
@@ -1148,6 +1172,47 @@ class ReviewSubmissionTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 ResearchHandoffError,
                 "expected 'github-example-project-17'",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
+    def test_complete_research_requires_a_cockpit_photo_review_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            bad = research_result("github-example-project-17")
+            bad["sources"][0].pop("evidence_kind")
+            result_path = temp / "missing-cockpit-review.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "requires a cockpit-photo or cockpit-photo-unavailable source",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
+    def test_complete_research_requires_wheel_claim_to_reference_photo_review(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            generate_research_briefs(ROOT, temp / "cases", {17})
+            bad = completed_research_result("github-example-project-17")
+            bad["sources"][0]["evidence_kind"] = "cockpit-photo"
+            bad["claims"] = [
+                claim
+                for claim in bad["claims"]
+                if not claim["path"].startswith(
+                    "/authentic_controls/steering/wheel_rim/"
+                )
+            ]
+            result_path = temp / "unreferenced-cockpit-review.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "at least one wheel-rim claim must reference",
             ):
                 import_research_result(ROOT, temp / "cases", 17, result_path)
             self.assertFalse((case_dir / "research-result.json").exists())
@@ -2180,6 +2245,95 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertFalse(
                 (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
             )
+
+    def test_batch_preparation_and_promotion_share_one_dataset_version(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            cases, first_case_dir, _ = self.prepare_promotable_case(repository)
+
+            second_observation = observation()
+            second_observation["observation_id"] = (
+                "ams2.public-test-car-two.20260824t120000000z-efgh5678"
+            )
+            second_observation["identity"]["telemetry_name"] = "Public Test Car Two"
+            second_observation["identity"]["internal_id"] = "Public Test Car Two"
+            second_issue = issue(18)
+            second_issue["body"] = second_issue["body"].replace(
+                "https://github.com/user-attachments/files/123/test.json",
+                "https://github.com/user-attachments/files/124/test-two.json",
+            )
+            first_raw = (json.dumps(observation(), indent=2) + "\n").encode("utf-8")
+            second_raw = (json.dumps(second_observation, indent=2) + "\n").encode(
+                "utf-8"
+            )
+            sync_submissions(
+                repository,
+                repository="example/project",
+                cases_directory=cases,
+                inbox=cases.parent / "inbox",
+                issue_loader=lambda _repo, _label: [issue(), second_issue],
+                attachment_fetcher=lambda url: second_raw if "test-two" in url else first_raw,
+            )
+            generate_research_briefs(repository, cases, {18})
+            second_result = completed_research_result("github-example-project-18")
+            second_result["identity"].update(
+                {
+                    "record_id": "public-test-car-two-2021",
+                    "display_name": "Public Test Car Two 2021",
+                    "model": "Public Test Car Two",
+                }
+            )
+            for source in second_result["sources"]:
+                source["source_id"] = source["source_id"].replace(
+                    "public-test-car.2021", "public-test-car-two.2021"
+                )
+                source["title"] = source["title"].replace(
+                    "Public Test Car", "Public Test Car Two"
+                )
+            for claim in second_result["claims"]:
+                claim["source_refs"] = [
+                    ref.replace("public-test-car.2021", "public-test-car-two.2021")
+                    for ref in claim["source_refs"]
+                ]
+            result_path = repository / "completed-research-18.json"
+            result_path.write_text(
+                json.dumps(second_result, indent=2) + "\n", encoding="utf-8"
+            )
+            import_research_result(repository, cases, 18, result_path)
+
+            prepared = prepare_review_batch(repository, cases, [17, 18])
+            self.assertEqual("0.6.9", prepared["dataset_version"])
+            for issue_number in (17, 18):
+                manifest = json.loads(
+                    (cases / f"issue-{issue_number}" / "review-manifest.proposed.json")
+                    .read_text(encoding="utf-8")
+                )
+                self.assertEqual("0.6.9", manifest["dataset_version"])
+
+            promoted = promote_review_batch(repository, cases, [17, 18], approved=True)
+            self.assertEqual("0.6.9", promoted["dataset_version"])
+            self.assertEqual(2, len(promoted["records"]))
+            self.assertTrue(Path(promoted["manifest"]).is_file())
+            batch = json.loads(Path(promoted["manifest"]).read_text(encoding="utf-8"))
+            self.assertEqual("0.6.9", batch["dataset_version"])
+            self.assertEqual(2, len(batch["records"]))
+            index = json.loads(
+                (repository / "data" / "v1" / "index.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual("0.6.9", index["dataset_version"])
+            self.assertTrue(
+                (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").is_file()
+            )
+            self.assertTrue(
+                (repository / "data" / "v1" / "cars" / "public-test-car-two-2021.json").is_file()
+            )
+            for issue_number, case_dir in ((17, first_case_dir), (18, cases / "issue-18")):
+                case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+                self.assertEqual("promoted", case["state"], issue_number)
+                self.assertEqual(
+                    Path(promoted["manifest"]).relative_to(repository).as_posix(),
+                    case["review_proposal"]["manifest"],
+                )
 
     def test_promotion_refuses_release_and_source_drift_before_writing(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

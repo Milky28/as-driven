@@ -54,19 +54,51 @@ The assistant should:
    `in-game-observation` sources do not satisfy this gate. Import validation
    enforces the requirement before a complete result can enter final review.
 
-3. Run `prepare-review 42` to create the proposal and validate its dry run.
-   Present `final-review.md` and the preview record with a short explanation of
-   changed advice, supporting sources, remaining unknowns, and disagreements.
-4. Obtain the maintainer's approval of that concrete proposal before running
-   `promote 42 --approve`. An instruction to research or prepare is not approval
-   of facts the maintainer has not seen. Reuse approval already given for that
-   proposal; do not ask again for each generated file.
+3. Run `prepare-review 42`, or `prepare-batch --issue 42 --issue 43`, to create
+   proposal(s) and validate their dry run. Present each `final-review.md` and
+   preview record with a short explanation of changed advice, supporting
+   sources, remaining unknowns, and disagreements.
+4. Obtain the maintainer's approval of the concrete proposal(s) before running
+   `promote 42 --approve` or `promote-batch --issue 42 --issue 43 --approve`.
+   An instruction to research or prepare is not approval of facts the
+   maintainer has not seen. Reuse approval already given for those proposals;
+   do not ask again for each generated file.
 5. Finalize once after the approved batch using `finalize-release --test`.
    Report release-wide failures separately from the contribution review.
    Commit/integrate and publish only within the user's authorized scope.
    `publish-result 42` previews feedback; sending it requires explicit approval.
 
 All commands above are prefixed with `python -m as_driven_db review-submissions`.
+
+## Batch preparation and promotion
+
+Several simulator contribution cases can share one dataset patch. Prepare the
+selected cases together after all of their research is ready:
+
+```shell
+python -m as_driven_db review-submissions prepare-batch \
+  --issue 113 --issue 114 --issue 115
+```
+
+The command assigns the next patch version to every selected proposal and
+dry-runs each one. Review every generated `final-review.md`, then promote the
+same set atomically:
+
+```shell
+python -m as_driven_db review-submissions promote-batch \
+  --issue 113 --issue 114 --issue 115 --approve
+```
+
+This writes one `curation/review-batch-N.json`, one dataset version, and the
+individual records, approvals, sources, and case-state updates together. The
+selected cases must all be simulator contribution cases in `manifest-review`;
+existing-car research amendments continue to use the individual promotion
+path. A batch cannot be partially promoted: all selected proposals must target
+the current dataset's next patch and pass the combined dry run.
+
+The single-case `prepare-review` and `promote` commands remain available for
+focused work or amendments. Refreshing the local queue still discovers local
+artifacts; it does not regenerate an existing proposal.
 They call the same functions as the workbench; there is no second promotion
 implementation. Stop for missing evidence or a review decision, not for routine
 local file preparation. Do not generate an optional driver summary merely to
@@ -288,6 +320,15 @@ Research must return JSON conforming to
 - field-level established, conflicting, and `not-established` findings;
 - source references and confidence for each claim; and
 - remaining questions and researcher/model attribution.
+
+Before a result can be marked `complete`, the researcher must perform a
+cockpit-photo pass. Mark each source used for that pass with
+`evidence_kind: "cockpit-photo"` and reference it from at least one wheel-rim
+claim. Use `evidence_kind: "cockpit-photo-unavailable"` only after documenting
+the attempted retrievals and the reason no useful exact-car image could be
+inspected; unsupported wheel fields must then remain `not-established`. This
+import-time gate prevents written gearbox descriptions or simulator cockpit
+observations from silently replacing direct hardware inspection.
 
 Import the completed result:
 
