@@ -43,6 +43,11 @@ layouts are preserved by default.
 
 REPORT A PROBLEM
 
+If installation fails, the administrator window stays open with the actual
+error until you press Enter. It prints the path to an AsDriven-install-error-*.txt
+file in its temporary folder; include that file when reporting the problem.
+The opening reminder to close SimHub appears on every run and is not an error.
+
 Visit https://github.com/Milky28/as-driven/issues/new/choose and include the
 As Driven, dataset, SimHub, and simulator versions shown in the plugin.
 

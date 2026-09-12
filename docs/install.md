@@ -23,6 +23,13 @@ change between releases.
 `simhub/install.ps1` is the same installer and takes an optional
 `-SimHubInstallPath`.
 
+If installation fails, the administrator window stays open with the actual
+error until you press Enter. It also prints the location of an
+`AsDriven-install-error-*.txt` file in its temporary folder. Include that file
+when reporting a problem. The opening reminder to close SimHub appears on every
+run; it does not mean SimHub was detected. If administrator approval is declined,
+the launcher reports that it could not start the installer.
+
 ### The two warnings Windows shows
 
 Neither means something is wrong, and both are expected.

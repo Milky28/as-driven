@@ -1,10 +1,33 @@
 param(
     [string]$SimHubInstallPath = "C:\Program Files (x86)\SimHub",
     [string]$PackagePath = (Join-Path $PSScriptRoot "dist\AsDriven"),
-    [switch]$ReplaceOverlayLayouts
+    [switch]$ReplaceOverlayLayouts,
+    [switch]$Interactive
 )
 
 $ErrorActionPreference = "Stop"
+trap {
+    # Automated callers still receive the original terminating error.
+    if (-not $Interactive) { throw $_ }
+    $failure = $_
+    Write-Host "Installation failed: $($failure.Exception.Message)" -ForegroundColor Red
+    $logPath = Join-Path ([System.IO.Path]::GetTempPath()) (
+        "AsDriven-install-error-" + [Guid]::NewGuid().ToString("N") + ".txt")
+    try {
+        @(
+            "SimHub folder: $SimHubInstallPath"
+            "Package folder: $PackagePath"
+            ($failure | Format-List * -Force | Out-String)
+            $failure.ScriptStackTrace
+        ) | Set-Content -LiteralPath $logPath -Encoding UTF8
+        Write-Host "Error details saved to: $logPath"
+        Write-Host "Include this file when reporting the installation problem."
+    }
+    catch { Write-Host "Could not save the error log: $($_.Exception.Message)" }
+    Write-Host "Press Enter to close this error window."
+    Read-Host | Out-Null
+    exit 1
+}
 $packageRoot = [System.IO.Path]::GetFullPath($PackagePath)
 $simHubRoot = [System.IO.Path]::GetFullPath($SimHubInstallPath)
 
