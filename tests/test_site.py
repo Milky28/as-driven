@@ -338,6 +338,39 @@ class SiteTests(unittest.TestCase):
         )
         self.assertEqual(pmr["unknown_behavior"], ["automatic shift cut"])
 
+    def test_simulator_view_leads_with_actionable_drive_card(self) -> None:
+        """A selected game answers "what do I do?" before its evidence trail.
+
+        The card applies an explicit simulator override, but an unobserved game
+        value cannot replace the authentic baseline.  This keeps the new
+        simulator-first presentation within the project's unknown-is-not-no
+        boundary.
+        """
+        cars = {car["id"]: car for car in collect(ROOT)["cars"]}
+        cayman = cars["porsche-cayman-gt4-clubsport-mr"]
+        ams2 = next(view for view in cayman["simulators"] if view["id"] == "ams2")
+        self.assertEqual(ams2["drive"]["launch"], ("Clutch required", TONE_DRIVER))
+        self.assertEqual(ams2["drive"]["shifter"], "6-speed paddle shift")
+
+        audi = cars["audi-r8-lms-gt3-evo-ii"]
+        ams2_audi = next(view for view in audi["simulators"] if view["id"] == "ams2")
+        # AMS2 did not establish its shift-cut behavior. The drive card retains
+        # the reviewed baseline instruction and exposes the simulator gap
+        # separately; it never fabricates a simulator-specific conclusion.
+        self.assertEqual(ams2_audi["drive"]["upshift"], ("Stay flat", TONE_CAR))
+        self.assertIn("automatic shift cut", ams2_audi["unknown_behavior"])
+
+        page = build_site(ROOT)
+        self.assertEqual(page.count('class="drive-it"'), sum(
+            len(car["simulators"]) for car in cars.values()
+        ))
+        self.assertIn('aria-label="How to drive Porsche Cayman GT4 Clubsport MR in AMS2"', page)
+        self.assertIn('class="understand"><summary><span>Understand this record</span>', page)
+        self.assertIn('<label class="simulator-choice" for="f-simulator">', page)
+        self.assertNotIn('<h4>Based on</h4>', page)
+        self.assertNotIn('<h4>Mechanism</h4>', page)
+        self.assertNotIn('<h4>Departs from it</h4>', page)
+
     def test_a_difference_is_described_even_where_the_table_has_no_column(self) -> None:
         # The Milano's override is the clutch on a downshift, which the table
         # does not show at all. Diffing the rendered rows would have missed it,
@@ -503,8 +536,9 @@ class SiteTests(unittest.TestCase):
         )
 
         page = build_site(ROOT)
-        self.assertIn("Only conflicting established values count", page)
-        self.assertIn("Disagreement audit", page)
+        self.assertIn("Only conflicting established values appear here", page)
+        self.assertIn("Compare reviewed simulators", page)
+        self.assertIn('class="comparison-value comparison-real"><b>Real car</b>', page)
 
     def test_disagreement_audit_reaches_each_conflicting_field(self) -> None:
         payload = collect(ROOT)

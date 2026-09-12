@@ -550,6 +550,22 @@ def _simulator_view(
     simulator = entry.get("simulator", "")
     confidence = entry.get("confidence") or {}
     behavior = entry.get("behavior") or {}
+    # A simulator view starts from the authentic technique, then applies only
+    # reviewed departures.  An unobserved simulator behavior is deliberately
+    # *not* applied here: lack of an observation must remain a visible gap,
+    # not quietly become a new instruction for the driver.
+    effective = _apply(transmission, entry.get("overrides") or [])
+    drive_launch = launch(effective["standing_start_clutch"])
+    drive_upshift = upshift(
+        effective["upshift"]["throttle_lift"],
+        effective["upshift"]["automatic_cut"],
+        effective["upshift"]["clutch"],
+    )
+    drive_downshift = downshift(
+        effective["downshift"]["manual_blip"],
+        effective["downshift"]["automatic_blip"],
+        effective["downshift"]["clutch"],
+    )
     unknown_behavior = sorted(
         SIMULATOR_BEHAVIOR_FIELDS.get(
             path,
@@ -565,6 +581,14 @@ def _simulator_view(
         "differences": differences(
             transmission, entry.get("overrides") or [], controls
         ),
+        "drive": {
+            "shifter": shifter(
+                effective["forward_gears"], effective["shift_actuation"]
+            ),
+            "launch": drive_launch,
+            "upshift": drive_upshift,
+            "downshift": drive_downshift,
+        },
         "cockpit": simulator_cockpit(behavior),
         "unknown_behavior": unknown_behavior,
         "game_version": entry.get("verified_game_version", ""),
@@ -831,11 +855,51 @@ def _cell(value: list[str]) -> str:
     )
 
 
+def _drive_card(label: str, value: list[str]) -> str:
+    """Render one immediately actionable simulator-view instruction."""
+    text, tone = value
+    return (
+        '<div class="drive-card"><span>{label}</span>'
+        '<strong class="tone tone-{tone}" title="{title}">{text}</strong></div>'
+    ).format(
+        label=_e(label), tone=_e(tone), title=_e(TONE_TITLE[tone]), text=_e(text)
+    )
+
+
+def _drive_it(car: dict[str, Any], simulator: dict[str, Any]) -> str:
+    """Put the selected simulator's actionable answer ahead of its evidence."""
+    drive = simulator["drive"]
+    cards = "".join(
+        (
+            '<div class="drive-card"><span>Fit</span><strong>{shifter}</strong></div>'.format(
+                shifter=_e(drive["shifter"])
+            ),
+            _drive_card("Pull away", drive["launch"]),
+            _drive_card("Upshift", drive["upshift"]),
+            _drive_card("Downshift", drive["downshift"]),
+        )
+    )
+    qualifier = (
+        "Reviewed simulator departures are applied below; unobserved simulator "
+        "behaviour stays explicitly open."
+    )
+    return (
+        '<section class="drive-it" aria-label="How to drive {car} in {simulator}">'
+        '<div class="drive-it-heading"><div><span>Drive it in</span>'
+        '<h4>{simulator}</h4></div><p>{qualifier}</p></div>'
+        '<div class="drive-grid">{cards}</div></section>'
+    ).format(
+        car=_e(car["name"]), simulator=_e(simulator["label"]),
+        qualifier=_e(qualifier), cards=cards,
+    )
+
+
 def _simulator_panel(car: dict[str, Any], simulator: dict[str, Any], selected: bool) -> str:
     content = [
         '<h3 class="sim-panel-title">{car}<span>{simulator}</span></h3>'.format(
             car=_e(car["name"]), simulator=_e(simulator["label"])
-        )
+        ),
+        _drive_it(car, simulator),
     ]
     if simulator["differences"]:
         rows = "".join(
@@ -1169,29 +1233,40 @@ def _verification_section(verification: dict[str, Any]) -> str:
     )
 
 
+def _simulator_comparison_row(item: dict[str, Any]) -> str:
+    """One field across the real car and all reviewed simulator views.
+
+    The audit remains the authority for its verdict.  This renderer merely
+    makes the values comparable at a glance, including any explicit unknowns.
+    """
+    audit = item.get("audit") or {}
+    baseline = (audit.get("authentic_baseline") or {}).get("display_value")
+    values = []
+    if baseline:
+        values.append(
+            '<span class="comparison-value comparison-real"><b>Real car</b>{value}</span>'.format(
+                value=_e(baseline)
+            )
+        )
+    values.extend(
+        '<span class="comparison-value"><b>{simulator}</b>{value}</span>'.format(
+            simulator=_e(value["simulator"]), value=_e(value["value"])
+        )
+        for value in item["values"]
+    )
+    return (
+        '<div class="comparison-row"><div class="comparison-field">{field}</div>'
+        '<div class="comparison-values">{values}</div>{audit}</div>'
+    ).format(
+        field=_e(item["field"]), values="".join(values), audit=_audit_result(item)
+    )
+
+
 def _row(car: dict[str, Any]) -> str:
     detail = []
     if car["summary"]:
         detail.append(f'<p class="summary">{_e(car["summary"])}</p>')
 
-    if car["mechanism"]:
-        heading = "Mechanism" if car["classification"] == "matches" else "Based on"
-        detail.append(
-            f'<div class="block"><h4>{heading}</h4><p>{_e(car["mechanism"])}</p></div>'
-        )
-    if car["deviations"]:
-        items = "".join(
-            f'<li><span class="field">{_e(item["field"])}</span>{_e(item["why"])}</li>'
-            for item in car["deviations"]
-        )
-        detail.append(f'<div class="block"><h4>Departs from it</h4><ul>{items}</ul></div>')
-    if car["classification"] in {"undetermined", "no-archetype"} and car["archetype_basis"]:
-        heading = (
-            "Not yet classified" if car["classification"] == "undetermined" else "Its own mechanism"
-        )
-        detail.append(
-            f'<div class="block"><h4>{heading}</h4><p>{_e(car["archetype_basis"])}</p></div>'
-        )
     if car["unexplained_open_fields"]:
         chips = "".join(
             f'<span class="chip">{_e(field)}</span>'
@@ -1202,27 +1277,18 @@ def _row(car: dict[str, Any]) -> str:
             f'<div class="chips">{chips}</div></div>'
         )
     if car["simulator_disagreements"]:
-        items = "".join(
-            '<li><span class="field">{field}</span><span class="comparison-values">'
-            '{values}</span>{audit}</li>'.format(
-                field=_e(item["field"]),
-                values="".join(
-                    '<span><b>{simulator}</b> {value}</span>'.format(
-                        simulator=_e(value["simulator"]),
-                        value=_e(value["value"]),
-                    )
-                    for value in item["values"]
-                ),
-                audit=_audit_result(item),
-            )
-            for item in car["simulator_disagreements"]
-        )
+        items = "".join(_simulator_comparison_row(item) for item in car["simulator_disagreements"])
         detail.append(
-            '<div class="block simulator-comparison"><h4>Disagreement audit</h4>'
-            '<p>Only conflicting established values count. The audit then tests whether '
-            'the authentic baseline is strong enough to support a benchmark verdict.</p>'
-            f'<ul>{items}</ul></div>'
+            '<section class="simulator-comparison"><h4>Compare reviewed simulators</h4>'
+            '<p>Only conflicting established values appear here. Each verdict tests '
+            'whether the real-car baseline is strong enough to call a departure.</p>'
+            f'{items}</section>'
         )
+    # The authentic baseline and its audit are context for a driver choosing a
+    # simulator, not the first obstacle before they can see what to do.  Keep
+    # them intact, but place them after the selected simulator view.
+    context = detail
+    detail = []
     tabs = "".join(
         '<a class="sim-tab" id="{anchor}-tab" href="#{anchor}" role="tab" '
         'aria-controls="{anchor}-panel" aria-selected="{selected}" tabindex="{tabindex}" '
@@ -1239,14 +1305,21 @@ def _row(car: dict[str, Any]) -> str:
         _simulator_panel(car, simulator, index == 0)
         for index, simulator in enumerate(car["simulators"])
     )
-    detail.append(_verification_section(car["verification"]))
     detail.append(
         '<section class="simulator-section" aria-label="Simulator views">'
-        '<div class="simulator-heading"><h4>Simulator view</h4>'
-        '<span>Choose a reviewed simulator; each view has a shareable link.</span></div>'
+        '<div class="simulator-heading"><h4>Choose simulator</h4>'
+        '<span>Each reviewed view has a shareable link.</span></div>'
         '<div class="sim-tabs" role="tablist" aria-label="Reviewed simulators for {car}">'
         '{tabs}</div>{panels}</section>'.format(
             car=_e(car["name"]), tabs=tabs, panels=panels
+        )
+    )
+    detail.append(
+        '<details class="understand"><summary><span>Understand this record</span>'
+        '<small>Real-car baseline, comparisons and evidence</small></summary>'
+        '<div class="understand-body">{context}{verification}</div></details>'.format(
+            context="".join(context),
+            verification=_verification_section(car["verification"]),
         )
     )
 
@@ -1591,6 +1664,11 @@ input[type="search"] {{
   border: 1px solid var(--line); border-radius: 3px;
 }}
 input[type="search"]::placeholder {{ color: var(--faint); }}
+.simulator-choice {{
+  display: flex; align-items: center; gap: 7px; white-space: nowrap;
+  color: var(--faint); font: 500 10.5px/1.2 "IBM Plex Mono", ui-sans-serif, monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+}}
 select {{
   padding: 9px 10px;
   font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px;
@@ -1698,15 +1776,35 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
 .sim-count {{ color: var(--muted); margin-right: 5px; }}
 .disagrees-flag {{ color: var(--optional); margin-left: 5px; }}
 .simulator-comparison {{
-  padding: 12px; border: 1px solid var(--line); background: var(--surface-2);
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px; border: 1px solid var(--line); background: var(--surface-2);
 }}
-.simulator-comparison > p {{ font-size: 12.5px; }}
-.simulator-comparison li {{ display: flex; flex-wrap: wrap; gap: 5px 10px; }}
-.comparison-values {{ display: flex; flex-wrap: wrap; gap: 5px 14px; }}
-.comparison-values span {{ font-size: 13px; color: var(--muted); }}
-.comparison-values b {{
-  margin-right: 4px; color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 11px; font-weight: 500;
+.simulator-comparison > h4 {{
+  margin: 0; font: 500 10.5px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--faint);
+}}
+.simulator-comparison > p {{ margin: -4px 0 2px; font-size: 12.5px; color: var(--muted); }}
+.comparison-row {{
+  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 14px;
+  padding-top: 11px; border-top: 1px solid var(--line);
+}}
+.comparison-field {{
+  color: var(--accent); font: 500 11px/1.35 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.comparison-values {{ display: flex; flex-wrap: wrap; gap: 6px; }}
+.comparison-value {{
+  display: inline-flex; gap: 5px; align-items: baseline; padding: 4px 7px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 12.5px;
+}}
+.comparison-value b {{
+  color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 500;
+}}
+.comparison-real {{ border-left: 3px solid var(--accent); color: var(--ink); }}
+.comparison-row .audit-result {{ grid-column: 2; margin-bottom: 0; }}
+@media (max-width: 720px) {{
+  .comparison-row {{ grid-template-columns: 1fr; }}
+  .comparison-row .audit-result {{ grid-column: 1; }}
 }}
 .audit-result {{
   display: grid; grid-template-columns: max-content 1fr; gap: 3px 10px;
@@ -1822,6 +1920,43 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
 }}
 .sim-panel {{ display: flex; flex-direction: column; gap: 14px; }}
 .sim-panel[hidden] {{ display: none; }}
+.drive-it {{
+  padding: 14px; border: 1px solid var(--accent); border-left-width: 3px;
+  background: var(--surface-2);
+}}
+.drive-it-heading {{
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 6px 18px; margin-bottom: 12px;
+}}
+.drive-it-heading > div {{ display: flex; gap: 7px; align-items: baseline; }}
+.drive-it-heading span {{
+  color: var(--faint); font: 500 10.5px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .08em; text-transform: uppercase;
+}}
+.drive-it-heading h4 {{ margin: 0; font: 600 16px/1.2 "Archivo", sans-serif; }}
+.drive-it-heading p {{ margin: 0; max-width: 56ch; color: var(--muted); font-size: 12px; }}
+.drive-grid {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }}
+.drive-card {{
+  display: flex; flex-direction: column; gap: 5px; min-width: 0;
+  padding: 9px 10px; border: 1px solid var(--line); background: var(--surface);
+}}
+.drive-card > span {{
+  color: var(--faint); font: 500 10px/1.2 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+}}
+.drive-card strong {{ font-size: 13px; line-height: 1.35; }}
+.drive-card .tone {{ width: fit-content; }}
+.understand {{
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--bg);
+}}
+.understand > summary {{ padding: 11px 13px; cursor: pointer; }}
+.understand > summary::marker {{ color: var(--accent); }}
+.understand > summary span {{ font-weight: 600; }}
+.understand > summary small {{
+  margin-left: 10px; color: var(--faint); font: 400 11px/1.3 "IBM Plex Mono", ui-monospace, monospace;
+}}
+.understand[open] > summary {{ border-bottom: 1px solid var(--line); background: var(--surface-2); }}
+.understand-body {{ display: flex; flex-direction: column; gap: 16px; padding: 14px; }}
 .sim-anchor {{ display: block; height: 0; overflow: hidden; scroll-margin-top: 76px; }}
 .sim-panel-title {{
   display: flex; flex-wrap: wrap; gap: 5px 10px; align-items: baseline;
@@ -1856,6 +1991,7 @@ footer p {{ margin: 0; }}
   .verification-claim-heading, .verification-sources li {{ display: block; }}
   .confidence {{ display: inline-block; margin-top: 7px; }}
   .verification-sources .archive-link {{ display: inline-block; margin-top: 3px; }}
+  .drive-grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
 }}
 @media (max-width: 980px) {{
   .controls {{ flex-wrap: wrap; }}
@@ -1913,10 +2049,12 @@ footer p {{ margin: 0; }}
 <div id="car-browser">
 <div class="controls">
   <input type="search" id="q" placeholder="Search a car, class or gearbox" aria-label="Search cars">
-  <select id="f-simulator" aria-label="Filter by simulator coverage">
-    <option value="">Any simulator</option>
+  <label class="simulator-choice" for="f-simulator">I’m driving
+  <select id="f-simulator" aria-label="Choose simulator to drive">
+    <option value="">Choose simulator</option>
     {simulator_options}
   </select>
+  </label>
   <select id="f-actuation" aria-label="Filter by shifter">
     <option value="">Any shifter</option>
     <option value="h-pattern">H-pattern</option>
@@ -1959,12 +2097,10 @@ footer p {{ margin: 0; }}
   <span><span class="tone tone-unknown">Not established</span></span>
 </div>
 
-<footer><p>Select a car for the mechanism it shares with others, where it departs
-from that, and what a drive or a source would still have to settle. Every row
-describes the real car. Open it to choose a reviewed simulator; differences and
-simulator-specific evidence gaps stay inside that view, because they are
-separate facts and neither overwrites the real car. Each simulator view has a
-stable link that can be shared. Open <strong>How this was verified</strong> to
+<footer><p>Start with the real car, then choose a reviewed simulator to see the
+controls and technique to use. Simulator differences and evidence gaps stay in
+that view, because they are separate facts and neither overwrites the real car.
+Each simulator view has a stable link that can be shared. Open <strong>How this was verified</strong> to
 see each curated claim, its confidence and rationale, and the sources that
 support it.</p><p class="project-links"><a href="https://github.com/Milky28/as-driven">Project source and downloads</a><a href="https://github.com/Milky28/as-driven/issues/new/choose">Contribute a car</a></p></footer>
 </div>
