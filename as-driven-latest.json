@@ -1,7 +1,7 @@
 {
-    "dataset_version":  "0.6.0",
-    "plugin_version":  "0.22.0",
-    "release_url":  "https://github.com/Milky28/as-driven/releases/tag/v0.22.0",
-    "package_url":  "https://github.com/Milky28/as-driven/releases/download/v0.22.0/As-Driven-for-SimHub-0.22.0.zip",
-    "package_sha256":  "4366c36768a856fbb5fd469d85f8ab49df43f7e1f9138c0b66afd8d7200a5848"
+    "dataset_version":  "0.6.29",
+    "plugin_version":  "0.22.1",
+    "release_url":  "https://github.com/Milky28/as-driven/releases/tag/v0.22.1",
+    "package_url":  "https://github.com/Milky28/as-driven/releases/download/v0.22.1/As-Driven-for-SimHub-0.22.1.zip",
+    "package_sha256":  "d6ad37a099e5272cffbbb0e5b5fe911b883f58bd088c00ebe5c7541b6c1b48b9"
 }
