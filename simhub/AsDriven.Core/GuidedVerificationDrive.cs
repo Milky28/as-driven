@@ -466,7 +466,7 @@ namespace AsDriven.Core
                         // count from a genuinely light application. Holding the
                         // brake is part of the test, not a refusal to move, so
                         // it never counts towards this.
-                        if (engineRunning && sample.Throttle >= 8.0 && sample.Brake < 10.0)
+                        if (engineRunning && EffectiveThrottle(sample.Throttle) >= 8.0 && sample.Brake < 10.0)
                         {
                             if (!_moveOffRefusalStartedUtc.HasValue)
                             {
@@ -544,14 +544,14 @@ namespace AsDriven.Core
         private void DetectUpshift(GuidedTelemetrySample sample, bool requireLift)
         {
             if (!_armed && sample.Gear > 0 && sample.SpeedKmh > 5.0
-                && (requireLift || sample.Throttle >= 70.0))
+                && (requireLift || EffectiveThrottle(sample.Throttle) >= 70.0))
             {
                 _armed = true;
                 _baselineGear = sample.Gear;
                 _upshiftMaximumTorque = sample.EngineTorque;
                 _upshiftMinimumTorque = sample.EngineTorque;
-                _upshiftMaximumThrottle = sample.Throttle;
-                _upshiftMinimumThrottle = sample.Throttle;
+                _upshiftMaximumThrottle = EffectiveThrottle(sample.Throttle);
+                _upshiftMinimumThrottle = EffectiveThrottle(sample.Throttle);
             }
             if (!_armed)
             {
@@ -569,10 +569,10 @@ namespace AsDriven.Core
             }
             _upshiftMaximumThrottle = Math.Max(
                 _upshiftMaximumThrottle,
-                sample.Throttle);
+                EffectiveThrottle(sample.Throttle));
             _upshiftMinimumThrottle = Math.Min(
                 _upshiftMinimumThrottle,
-                sample.Throttle);
+                EffectiveThrottle(sample.Throttle));
             if (RefusedIntoNeutral(sample))
             {
                 SetResult(
@@ -591,7 +591,7 @@ namespace AsDriven.Core
             }
             if (double.IsNaN(_upshiftThrottleAtChange))
             {
-                _upshiftThrottleAtChange = sample.Throttle;
+                _upshiftThrottleAtChange = EffectiveThrottle(sample.Throttle);
             }
             bool liftObserved = _upshiftThrottleAtChange <= 45.0;
             if (requireLift && !liftObserved)
@@ -609,7 +609,7 @@ namespace AsDriven.Core
             if (!requireLift
                 && !torqueCut
                 && _upshiftMinimumThrottle <= 45.0
-                && sample.Throttle < 70.0
+                && EffectiveThrottle(sample.Throttle) < 70.0
                 && sample.TimestampUtc - _upshiftGearChangedUtc.Value
                     < TimeSpan.FromMilliseconds(350.0))
             {
@@ -635,7 +635,7 @@ namespace AsDriven.Core
         {
             if (!_armed && sample.Gear > 1 && sample.SpeedKmh > 5.0)
             {
-                bool throttleClosed = !manualBlip ? sample.Throttle <= 10.0 : true;
+                bool throttleClosed = !manualBlip ? EffectiveThrottle(sample.Throttle) <= 10.0 : true;
                 // The gear to compare against is the one the driver was in
                 // *before* lifting. Capturing it at arming meant a driver who
                 // lifted and downshifted inside one telemetry sample armed on
@@ -671,7 +671,9 @@ namespace AsDriven.Core
             // Arming already required a closed throttle, so anything above it
             // from here is the car blipping or a pedal the driver was asked not
             // to touch. Either way it is not throttle carried in from before.
-            _downshiftArmedThrottle = Math.Max(_downshiftArmedThrottle, sample.Throttle);
+            _downshiftArmedThrottle = Math.Max(
+                _downshiftArmedThrottle,
+                EffectiveThrottle(sample.Throttle));
             // The phase may open while the driver is already coasting. If they
             // then accelerate in the same gear before setting up the actual
             // test, that throttle is not an automatic blip. Keep a brief rise
@@ -681,7 +683,7 @@ namespace AsDriven.Core
             if (!manualBlip
                 && _downshiftCandidateGear == 0
                 && sample.Gear >= _baselineGear
-                && sample.Throttle <= 10.0)
+                && EffectiveThrottle(sample.Throttle) <= 10.0)
             {
                 _downshiftArmedThrottle = 0.0;
             }
@@ -737,11 +739,12 @@ namespace AsDriven.Core
             // the engine to the wheels at a ratio the baseline cannot reach, and
             // that is a property of the gearbox rather than of the pedal. So the
             // blip phase confirms on ratio and gear stability alone.
-            if (!manualBlip && sample.Throttle > 10.0)
+            if (!manualBlip && EffectiveThrottle(sample.Throttle) > 10.0)
             {
                 _downshiftThrottleReturned = true;
             }
-            if ((manualBlip || sample.Throttle <= 10.0) && elapsed >= EngagementConfirmSeconds)
+            if ((manualBlip || EffectiveThrottle(sample.Throttle) <= 10.0)
+                && elapsed >= EngagementConfirmSeconds)
             {
                 if (DriveRatio(sample) >= _baselineDriveRatio * EngagementRatioMargin)
                 {
@@ -956,7 +959,32 @@ namespace AsDriven.Core
         /// </summary>
         private bool ThrottleChannelFollowsPedal()
         {
-            return !_restingThrottleSeen || _restingThrottle <= 5.0;
+            return ThrottleOffset() <= 5.0;
+        }
+
+        /// <summary>
+        /// The guided tests are about the driver's pedal. Some readers retain
+        /// a small idle offset even with the pedal fully released. PMR has
+        /// consistently reported 15%, including when a drive begins after the
+        /// stationary move-off sample was missed. Preserve a captured offset
+        /// when available, otherwise apply PMR's established value. A
+        /// non-pedal channel remains ineligible to establish an automatic blip
+        /// through <see cref="ThrottleChannelFollowsPedal"/>.
+        /// </summary>
+        private double EffectiveThrottle(double publishedThrottle)
+        {
+            return Math.Max(0.0, publishedThrottle - ThrottleOffset());
+        }
+
+        private double ThrottleOffset()
+        {
+            if (_restingThrottleSeen && _restingThrottle > 5.0)
+            {
+                return _restingThrottle;
+            }
+            return string.Equals(_simulator, "pmr", StringComparison.Ordinal)
+                ? 15.0
+                : 0.0;
         }
 
         /// <summary>
@@ -1056,7 +1084,8 @@ namespace AsDriven.Core
                     // Being in gear is where a driver waits, not something they
                     // did. Only asking the car to move counts, by throttle or by
                     // a car that creeps away without any.
-                    return _maximumThrottle >= 5.0 || _moveOffMovementStartedUtc.HasValue;
+                    return EffectiveThrottle(_maximumThrottle) >= 5.0
+                        || _moveOffMovementStartedUtc.HasValue;
                 case Phase.GearCount:
                     // With no gear ever seen there is nothing to report, and the
                     // phase used to sit there refusing to conclude or advance.
@@ -1173,7 +1202,7 @@ namespace AsDriven.Core
             _baselineGear = _lastSample.Gear;
             _baselineDriveRatio = DriveRatio(_lastSample);
             _armed = _phase == Phase.ManualBlipDownshift
-                || _lastSample.Throttle <= 10.0;
+                || EffectiveThrottle(_lastSample.Throttle) <= 10.0;
         }
 
         private static double DriveRatio(GuidedTelemetrySample sample)
@@ -1336,7 +1365,7 @@ namespace AsDriven.Core
                 case Phase.GearCount: return "Shift up until the gearbox will not go higher.";
                 case Phase.FullThrottleUpshift: return "While moving, keep throttle above 70%.";
                 case Phase.LiftedUpshift: return "Leave the clutch untouched and lift the throttle.";
-                case Phase.CoastDownshift: return "At safe RPM, release the throttle, then downshift. Stay off the throttle until the result appears, and leave the clutch untouched.";
+                case Phase.CoastDownshift: return "At safe RPM, release the throttle, then downshift.";
                 case Phase.ManualBlipDownshift: return "Leave clutch untouched and manually blip the throttle.";
                 case Phase.Complete: return "Driving results are ready for review.";
                 default: return string.Empty;
@@ -1348,11 +1377,11 @@ namespace AsDriven.Core
             switch (phase)
             {
                 case Phase.Intro: return "Next accepts; use Retry or Skip when needed.";
-                case Phase.MoveOff: return "Stall = clutch required. If not, brake off, throttle.";
+                case Phase.MoveOff: return "If it does not stall, release the brake and add light throttle.";
                 case Phase.GearCount: return "Then press NEXT. Only you can see the top gear.";
                 case Phase.FullThrottleUpshift: return "Leave clutch untouched and request one upshift.";
                 case Phase.LiftedUpshift: return "Then request one upshift.";
-                case Phase.CoastDownshift: return "Then request one downshift.";
+                case Phase.CoastDownshift: return "Stay off the throttle until CAPTURED; leave the clutch untouched.";
                 case Phase.ManualBlipDownshift: return "Then request one downshift.";
                 case Phase.Complete: return "Press Next to close this overlay.";
                 default: return string.Empty;
@@ -1401,15 +1430,15 @@ namespace AsDriven.Core
             }
         }
 
-        private static string LiveValues(GuidedTelemetrySample sample)
+        private string LiveValues(GuidedTelemetrySample sample)
         {
             if (sample == null)
             {
                 return "Waiting for live telemetry";
             }
-            return "Gear " + (sample.Gear == 0 ? "N" : sample.Gear.ToString())
-                + "  |  Vehicle clutch " + Math.Round(sample.Clutch) + "%"
-                + "  |  Throttle " + Math.Round(sample.Throttle) + "%"
+            return "G " + (sample.Gear == 0 ? "N" : sample.Gear.ToString())
+                + "  |  C " + Math.Round(sample.Clutch) + "%"
+                + "  |  T " + Math.Round(EffectiveThrottle(sample.Throttle)) + "%"
                 + "  |  " + Math.Round(sample.SpeedKmh) + " km/h";
         }
     }

@@ -1282,6 +1282,8 @@ namespace AsDriven.Core.Tests
                     Equal(1, guidedDrive.GetSnapshot().StepNumber, "starts on driving test one without an extra introduction");
                     True(guidedDrive.GetSnapshot().PromptLine1.Length < 70, "keeps the move-off first prompt line short");
                     True(guidedDrive.GetSnapshot().PromptLine2.Length < 70, "keeps the move-off second prompt line short");
+                    True(guidedDrive.GetSnapshot().PromptLine2.Contains("light throttle"),
+                        "tells the driver to add throttle after a non-stalling move-off");
                     True(guidedDrive.GetSnapshot().Prompt.Contains(guidedDrive.GetSnapshot().PromptLine1), "retains a combined prompt for non-overlay consumers");
                     guidedDrive.AddSample(GuidedSample(now.AddMilliseconds(-100), 0, 100, 0, 0, 0, 0, false));
                     False(guidedDrive.GetSnapshot().ResultReady, "ignores an engine that was already stopped before the move-off test");
@@ -1445,6 +1447,48 @@ namespace AsDriven.Core.Tests
                         published.Next();
                         Equal("unknown", published.GetResults().AutomaticBlip,
                             "and the recorded value says unknown rather than the yes it would have said");
+                    }
+
+                    // PMR reports a roughly 15% idle throttle even with the
+                    // driver's foot off the pedal. That offset must not keep
+                    // the coast-downshift attempt perpetually open or turn the
+                    // steady resting value into a throttle return.
+                    {
+                        GuidedVerificationDrive pmrOffset = new GuidedVerificationDrive();
+                        pmrOffset.Start(6, "pmr");
+                        pmrOffset.AddSample(GuidedSample(now, 0, 0, 15, 1200, 0, 40, true));
+                        for (int guard = 0; guard < 40
+                            && pmrOffset.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            pmrOffset.AddSample(GuidedSample(now, 4, 0, 15, 4000, 80, 100, true));
+                            pmrOffset.Next();
+                        }
+                        Equal("Downshift without pedal input", pmrOffset.GetSnapshot().Title,
+                            "reaches PMR's coast-downshift test after recording its resting throttle");
+                        pmrOffset.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 15, 5200, 79, 90, true));
+                        pmrOffset.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 15, 6000, 78, 90, true));
+                        True(pmrOffset.GetSnapshot().ResultReady,
+                            "accepts a PMR coast downshift with its established idle offset");
+                        True(pmrOffset.GetSnapshot().Result.Contains("No automatic throttle spike"),
+                            "does not read PMR's steady idle offset as an automatic blip");
+
+                        // The stationary sample is normally collected during
+                        // move-off, but a driver can start the test already
+                        // rolling. PMR's known offset still has to read as no
+                        // pedal input to them and to the coast detector.
+                        GuidedVerificationDrive pmrRolling = new GuidedVerificationDrive();
+                        pmrRolling.Start(6, "pmr");
+                        pmrRolling.Skip();
+                        pmrRolling.Skip();
+                        pmrRolling.Skip();
+                        pmrRolling.Skip();
+                        pmrRolling.AddSample(GuidedSample(now, 4, 0, 15, 4000, 80, 100, true));
+                        True(pmrRolling.GetSnapshot().LiveValues.Contains("T 0%"),
+                            "shows PMR's effective pedal value instead of its 15 percent idle offset");
+                        pmrRolling.AddSample(GuidedSample(now.AddMilliseconds(100), 3, 0, 15, 5200, 79, 90, true));
+                        pmrRolling.AddSample(GuidedSample(now.AddMilliseconds(800), 3, 0, 15, 6000, 78, 90, true));
+                        True(pmrRolling.GetSnapshot().ResultReady,
+                            "arms and completes PMR's coast downshift even without a stationary sample");
                     }
 
                     // SimHub maps rFactor 2's generic throttle from the game's
