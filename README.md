@@ -14,27 +14,16 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## New in 0.22.0
+## New in 0.22.1
 
-- **Guidance where the real car was never researched.** A large part of any
-  controls database is simply not published: gearbox architecture is easy to
-  source, launch and shift technique almost never is. Rather than answer "not
-  established" and stop, As Driven can now say how cars of that mechanism were
-  usually driven - marked as convention, never as a finding about your car. The
-  first reviewed rule covers H-pattern cars whose gearbox construction is
-  unknown, and reaches 84 open fields across 42 cars.
-- **It is kept apart from evidence, deliberately.** The line says the real
-  value is not established before it says what such cars usually did, it is
-  drawn in its own colour on the card and under its own heading in the catalog,
-  and it can neither change nor replace a value a record establishes. A car
-  that answers for itself is never spoken for.
-- **Three more cars sourced from the real car.** The gearbox architecture of
-  the McLaren F1 GTR Longtail, Cadillac DPi-V.R and Chevrolet Camaro GT4.R now
-  rests on published accounts of those cars rather than on one guided drive.
-- **Better evidence behind the DBR9 and the C9.** A period road test, an
-  exact-chassis interview and Aston Martin's own specification stand behind the
-  DBR9's clutch and cockpit rim; Daimler-credited photographs stand behind the
-  C9's rim. The answers do not change - what holds them up does.
+- **More reviewed cars.** New Assetto Corsa classics and Project Motor Racing
+  entries include the Ferrari F40, Ford GT40, Lotus 49 and BMW V12 LMR.
+- Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
+  reviewed real-car evidence.
+- **Clearer guided shifts.** Each clutch-free shift test now puts the clutch
+  instruction in its heading and tells you to keep it fully released.
+- **Stronger contribution review.** Completed research records a real-car
+  cockpit-photo review, and same-simulator corrections reach the review path.
 
 Download it from the
 [latest published release](https://github.com/Milky28/as-driven/releases/latest).
@@ -127,13 +116,13 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.6.8 contains 307 reviewed car records.
+Dataset 0.6.29 contains 326 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |
-| Automobilista 2 | 262 | not applicable |
-| Project Motor Racing | 32 | 15 |
-| Assetto Corsa | 29 | 14 |
+| Automobilista 2 | 263 | not applicable |
+| Assetto Corsa | 46 | 14 |
+| Project Motor Racing | 35 | 16 |
 | Assetto Corsa Competizione | 18 | 18 |
 | RaceRoom Racing Experience | 10 | 3 |
 | Assetto Corsa EVO | 7 | 3 |

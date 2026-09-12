@@ -7,26 +7,14 @@ car records.
 
 ## What you'll notice
 
-- **Guidance where the real car was never researched.** Gearbox architecture is
-  published everywhere; launch and shift technique almost nowhere. Rather than
-  answer "not established" and stop, As Driven can now say how cars of that
-  mechanism were usually driven - marked as convention, never as a finding
-  about your car. The first reviewed rule covers H-pattern cars whose gearbox
-  construction is unknown, and reaches 84 open fields across 42 cars.
-- **It stays apart from evidence.** The line says the real value is not
-  established before it says what such cars usually did, it is drawn in its own
-  colour on the pre-flight card and under its own heading in the catalog, and
-  it can neither change nor replace a value a record establishes. A car that
-  answers for itself is never spoken for. Your overlay does not move: the card
-  shares the note panel it already had.
-- **Three more cars sourced from the real car.** The gearbox architecture of
-  the McLaren F1 GTR Longtail, Cadillac DPi-V.R and Chevrolet Camaro GT4.R now
-  rests on published accounts of those cars rather than on one guided drive.
-- **Better evidence behind the DBR9 and the C9.** A period road test, an
-  exact-chassis interview and Aston Martin's own specification stand behind the
-  DBR9's clutch and cockpit rim; Daimler-credited photographs stand behind the
-  C9's rim. The answers do not change - what holds them up does. The database
-  now carries {{RECORD_COUNT}} reviewed car records.
+- **More reviewed cars.** New Assetto Corsa classics and Project Motor Racing
+  entries include the Ferrari F40, Ford GT40, Lotus 49 and BMW V12 LMR.
+- Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
+  reviewed real-car evidence.
+- **Clearer guided shifts.** Each clutch-free shift test now puts the clutch
+  instruction in its heading and tells you to keep it fully released.
+- **Stronger contribution review.** Completed research records a real-car
+  cockpit-photo review, and same-simulator corrections reach the review path.
 
 ## Install
 

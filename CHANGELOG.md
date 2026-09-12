@@ -9,6 +9,20 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.22.1 - 2026-09-12
+
+- Add reviewed Assetto Corsa and Project Motor Racing records, including the
+  Ferrari F40, Ford GT40, Lotus 49 and BMW V12 LMR, and update the Mazda 787B
+  and Panoz Esperante GTR-1 with reviewed simulator evidence.
+- Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
+  reviewed real-car evidence.
+- Make the no-clutch instruction explicit throughout guided shift tests.
+- Require a documented cockpit-photo pass for completed contribution research,
+  keep review bundle paths portable, and route same-simulator authentic-control
+  corrections into review.
+- Preserve the previously observed AMS2 coverage inventory.
+- Ship dataset 0.6.29 with 326 reviewed cars.
+
 ## 0.22.0 - 2026-09-10
 
 - Say how a car of its kind was usually driven where the real car's own
