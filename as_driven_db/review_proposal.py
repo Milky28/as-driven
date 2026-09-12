@@ -933,16 +933,35 @@ def _reviewed_sources(
 
 
 def _bundle_reference(root: Path, bundle_path: Path) -> str:
+    """Return the bundle path in the repository-relative form required by promotion.
+
+    The workbench can validate a queue against a temporary repository copy while
+    leaving the ignored review cases in the checkout. In that arrangement the
+    bundle is not below ``root``, but its ``build`` ancestor still identifies the
+    repository that owns the queue. Never fall back to an absolute path: promotion
+    deliberately rejects those because they are not portable between checkouts.
+    """
+    resolved_bundle = bundle_path.resolve()
     try:
         # Windows runners may expose the temporary directory through an 8.3
         # alias while Path.resolve() expands the repository root. Resolve both
         # sides before computing the portable repository-relative reference.
-        return bundle_path.resolve().relative_to(root).as_posix()
+        return resolved_bundle.relative_to(root.resolve()).as_posix()
     except ValueError:
-        # Tests and alternate workbenches may keep ignored cases outside the
-        # repository. A checked-in final manifest should always use the normal
-        # relative build path.
-        return bundle_path.as_posix()
+        # Alternate workbenches may validate against a temporary repository while
+        # the ignored queue remains in the checkout. Infer that queue's repository
+        # root from its build directory, then emit the same portable reference.
+        for ancestor in (resolved_bundle.parent, *resolved_bundle.parents):
+            if ancestor.name != "build":
+                continue
+            try:
+                return resolved_bundle.relative_to(ancestor.parent).as_posix()
+            except ValueError:
+                continue
+        raise ResearchHandoffError(
+            "review manifest bundle must be under the repository build directory, "
+            f"not {str(bundle_path)!r}"
+        )
 
 
 def _write_review_proposal(
