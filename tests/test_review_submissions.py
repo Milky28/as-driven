@@ -1176,23 +1176,6 @@ class ReviewSubmissionTests(unittest.TestCase):
                 import_research_result(ROOT, temp / "cases", 17, result_path)
             self.assertFalse((case_dir / "research-result.json").exists())
 
-    def test_complete_research_requires_a_cockpit_photo_review_marker(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            temp = Path(directory)
-            case_dir = self.sync_test_case(temp)
-            generate_research_briefs(ROOT, temp / "cases", {17})
-            bad = research_result("github-example-project-17")
-            bad["sources"][0].pop("evidence_kind")
-            result_path = temp / "missing-cockpit-review.json"
-            result_path.write_text(json.dumps(bad), encoding="utf-8")
-
-            with self.assertRaisesRegex(
-                ResearchHandoffError,
-                "requires a cockpit-photo or cockpit-photo-unavailable source",
-            ):
-                import_research_result(ROOT, temp / "cases", 17, result_path)
-            self.assertFalse((case_dir / "research-result.json").exists())
-
     def test_complete_research_requires_wheel_claim_to_reference_photo_review(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

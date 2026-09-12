@@ -12,9 +12,12 @@ car records.
 - Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
   reviewed real-car evidence.
 - **Clearer guided shifts.** Each clutch-free shift test now puts the clutch
-  instruction in its heading and tells you to keep it fully released.
+  instruction in its heading and shows both instruction lines on the overlay.
+  Shift detection accounts for a resting throttle offset, and unmeasured
+  automatic cut or blip results are clearly labeled.
 - **Stronger contribution review.** Completed research records a real-car
   cockpit-photo review, and same-simulator corrections reach the review path.
+  Maintainers can prepare and promote an approved batch as one dataset patch.
 
 ## Install
 

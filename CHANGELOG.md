@@ -16,7 +16,11 @@ late in a Pacific evening carries the following day. Take the date from
   and Panoz Esperante GTR-1 with reviewed simulator evidence.
 - Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
   reviewed real-car evidence.
-- Make the no-clutch instruction explicit throughout guided shift tests.
+- Make the no-clutch instruction explicit throughout guided shift tests, show
+  both instruction lines on the overlay, account for resting throttle offsets,
+  and label unmeasured automatic results without demanding driver action.
+- Support preparing and atomically promoting approved simulator contribution
+  batches as one dataset patch through the CLI and workbench.
 - Require a documented cockpit-photo pass for completed contribution research,
   keep review bundle paths portable, and route same-simulator authentic-control
   corrections into review.
