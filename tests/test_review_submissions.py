@@ -2315,7 +2315,7 @@ class ReviewSubmissionTests(unittest.TestCase):
                 case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
                 self.assertEqual("promoted", case["state"], issue_number)
                 self.assertEqual(
-                    Path(promoted["manifest"]).relative_to(repository).as_posix(),
+                    Path(promoted["manifest"]).resolve().relative_to(repository.resolve()).as_posix(),
                     case["review_proposal"]["manifest"],
                 )
 
