@@ -265,7 +265,8 @@
                   </ComboBox></StackPanel>
               </Grid>
               <TextBlock Text="How automatic cut was identified" Style="{StaticResource FieldLabel}" />
-              <TextBox x:Name="_automaticCutMethod" AutomationProperties.Name="How automatic cut was identified" />
+              <TextBox x:Name="_automaticCutMethod" AutomationProperties.Name="How automatic cut was identified"
+                       AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top" MinHeight="42" />
               <TextBlock Text="For example: full-throttle shift accepted with a visible power interruption." Style="{StaticResource Hint}" />
               <Grid>
                 <Grid.ColumnDefinitions><ColumnDefinition  />
@@ -281,7 +282,8 @@
                   </ComboBox></StackPanel>
               </Grid>
               <TextBlock Text="How automatic blip was identified" Style="{StaticResource FieldLabel}" />
-              <TextBox x:Name="_automaticBlipMethod" AutomationProperties.Name="How automatic blip was identified" />
+              <TextBox x:Name="_automaticBlipMethod" AutomationProperties.Name="How automatic blip was identified"
+                       AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top" MinHeight="42" />
               <TextBlock Text="For example: throttle telemetry spiked during a downshift without pedal input." Style="{StaticResource Hint}" />
             </StackPanel>
           </Expander>

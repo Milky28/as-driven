@@ -1181,17 +1181,17 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
     pending_status = factory.layer(
         "PendingStatus",
         [
-            factory.text("PendingStatusText", "Waiting for telemetry", 38, 188, 560, 20, 15, WHITE, expression="[AsDriven.VerificationDriveStatusLine1]"),
-            factory.text("PendingStatusDetail", "Awaiting result", 38, 208, 560, 18, 13, TEXT, expression="[AsDriven.VerificationDriveStatusLine2]"),
-            factory.text("LiveValues", "Waiting for live telemetry", 610, 195, 250, 22, 13, MUTED, expression="[AsDriven.VerificationDriveLiveValues]", horizontal_alignment=2),
+            factory.text("PendingStatusText", "Waiting for telemetry", 38, 193, 540, 20, 15, WHITE, expression="[AsDriven.VerificationDriveStatusLine1]"),
+            factory.text("PendingStatusDetail", "Awaiting result", 38, 213, 540, 18, 13, TEXT, expression="[AsDriven.VerificationDriveStatusLine2]"),
+            factory.text("LiveValues", "Waiting for live telemetry", 592, 200, 268, 22, 13, MUTED, expression="[AsDriven.VerificationDriveLiveValues]", horizontal_alignment=2),
         ],
         visible_expression="![AsDriven.VerificationDriveResultReady]",
     )
     successful_status = factory.layer(
         "SuccessfulStatus",
         [
-            factory.text("SuccessBadge", "✓ CAPTURED", 38, 192, 160, 28, 16, GREEN, font_weight="Bold"),
-            factory.text("SuccessSummary", "Result captured", 204, 192, 656, 28, 17, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("SuccessBadge", "✓ CAPTURED", 38, 197, 160, 28, 16, GREEN, font_weight="Bold"),
+            factory.text("SuccessSummary", "Result captured", 204, 197, 656, 28, 17, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && [AsDriven.VerificationDriveResultSuccessful]",
     )
@@ -1202,8 +1202,8 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
     review_status = factory.layer(
         "ReviewStatus",
         [
-            factory.text("ReviewBadge", "✓ CAPTURED", 38, 192, 160, 28, 16, ORANGE, font_weight="Bold"),
-            factory.text("ReviewSummary", "Result captured", 204, 192, 656, 28, 17, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
+            factory.text("ReviewBadge", "✓ CAPTURED", 38, 197, 160, 28, 16, ORANGE, font_weight="Bold"),
+            factory.text("ReviewSummary", "Result captured", 204, 197, 656, 28, 17, WHITE, expression="[AsDriven.VerificationDriveResult]", font_weight="Bold"),
         ],
         visible_expression="[AsDriven.VerificationDriveResultReady] && ![AsDriven.VerificationDriveResultSuccessful]",
     )
@@ -1219,13 +1219,13 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
     control_items = []
     for action, left, color, pending_label, captured_label in controls:
         control_items.extend([
-            factory.rectangle(action + "Button", left, 242, 276, 68, "#FF102333", radius=8, border_color=color, border=2),
+            factory.rectangle(action + "Button", left, 247, 276, 68, "#FF102333", radius=8, border_color=color, border=2),
             factory.text(
-                action + "Binding", action.upper() + ": [UNBOUND]", left + 10, 249, 256, 20, 14, color,
+                action + "Binding", action.upper() + ": [UNBOUND]", left + 10, 254, 256, 20, 14, color,
                 expression="'" + action.upper() + ": [' + [AsDriven.VerificationDrive" + action + "Hint] + ']'",
                 horizontal_alignment=1, font_weight="Bold"),
-            factory.text(action + "PendingAction", pending_label, left + 10, 272, 256, 30, 20, WHITE, horizontal_alignment=1, font_weight="Bold"),
-            factory.text(action + "CapturedAction", captured_label, left + 10, 272, 256, 30, 20, WHITE, horizontal_alignment=1, font_weight="Bold"),
+            factory.text(action + "PendingAction", pending_label, left + 10, 277, 256, 30, 20, WHITE, horizontal_alignment=1, font_weight="Bold"),
+            factory.text(action + "CapturedAction", captured_label, left + 10, 277, 256, 30, 20, WHITE, horizontal_alignment=1, font_weight="Bold"),
         ])
     controls_idle = factory.layer(
         "ControlsIdle", [item for item in control_items if not item["Name"].endswith("CapturedAction")],
@@ -1246,15 +1246,16 @@ def _verification_drive(factory: ItemFactory) -> list[dict[str, Any]]:
         # available as context without competing with the driving instruction.
         factory.text("Title", "Verification step", 24, 69, 852, 22, 17, MUTED, expression="[AsDriven.VerificationDriveTitle]", font_weight="Bold"),
         factory.text("Headline", "Follow the current test prompt.", 24, 92, 852, 46, 34, WHITE, expression="[AsDriven.VerificationDriveHeadline]", font_weight="Bold"),
-        factory.text("PromptLine1", "Then continue to the next step.", 24, 141, 852, 31, 21, TEXT, expression="[AsDriven.VerificationDrivePromptLine1]"),
-        factory.rectangle("StatusRule", 24, 179, 852, 1, SLATE),
-        factory.rectangle("StatusPanel", 24, 184, 852, 49, "#FF102333", radius=8, border_color=SLATE, border=1),
+        factory.text("PromptLine1", "Then continue to the next step.", 24, 139, 852, 24, 18, TEXT, expression="[AsDriven.VerificationDrivePromptLine1]"),
+        factory.text("PromptLine2", "Follow the remaining instruction.", 24, 161, 852, 20, 16, TEXT, expression="[AsDriven.VerificationDrivePromptLine2]"),
+        factory.rectangle("StatusRule", 24, 184, 852, 1, SLATE),
+        factory.rectangle("StatusPanel", 24, 189, 852, 48, "#FF102333", radius=8, border_color=SLATE, border=1),
         pending_status,
         successful_status,
         review_status,
         controls_idle,
         controls_ready,
-        factory.text("Cancel", "CANCEL: End drive", 24, 323, 852, 24, 14, MUTED, expression="'CANCEL: [' + [AsDriven.VerificationDriveCancelHint] + '] End drive'", horizontal_alignment=1, font_weight="Bold"),
+        factory.text("Cancel", "CANCEL: End drive", 24, 328, 852, 24, 14, MUTED, expression="'CANCEL: [' + [AsDriven.VerificationDriveCancelHint] + '] End drive'", horizontal_alignment=1, font_weight="Bold"),
     ]
 
 

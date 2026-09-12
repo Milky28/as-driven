@@ -211,9 +211,11 @@ class SimHubDashTests(unittest.TestCase):
         self.assertEqual(34, named["Headline"]["FontSize"])
         self.assertEqual(46, named["Headline"]["Height"])
         self.assertEqual(92, named["Headline"]["Top"])
-        self.assertEqual(21, named["PromptLine1"]["FontSize"])
-        self.assertEqual(31, named["PromptLine1"]["Height"])
-        self.assertEqual(141, named["PromptLine1"]["Top"])
+        self.assertEqual(18, named["PromptLine1"]["FontSize"])
+        self.assertEqual(24, named["PromptLine1"]["Height"])
+        self.assertEqual(139, named["PromptLine1"]["Top"])
+        self.assertEqual(16, named["PromptLine2"]["FontSize"])
+        self.assertEqual(161, named["PromptLine2"]["Top"])
         self.assertLess(named["Title"]["FontSize"], named["Headline"]["FontSize"])
         self.assertGreaterEqual(named["NextPendingAction"]["FontSize"], 15)
         self.assertGreaterEqual(named["NextCapturedAction"]["FontSize"], 15)
@@ -606,6 +608,36 @@ class SimHubDashTests(unittest.TestCase):
                     "%s %s: %r needs about %dpx and has %d"
                     % (variant, item["Name"], text, estimated, item["Width"]),
                 )
+
+    def test_guided_drive_renders_each_prebroken_prompt_line(self):
+        """Guided-drive prompts are dynamic, so both short lines need a box.
+
+        Dashboard text never wraps. Omitting the second property made the
+        critical throttle instruction exist in the core snapshot but disappear
+        from the in-sim overlay, while a long downshift prompt ran off-screen.
+        """
+        dashboard = self.generator.build_dashboard(overlay=True, variant="verification")
+        named = {
+            value["Name"]: value
+            for value in walk(dashboard)
+            if isinstance(value, dict) and "Name" in value
+        }
+        for line in ("PromptLine1", "PromptLine2"):
+            self.assertEqual(
+                f"[AsDriven.VerificationDrive{line}]",
+                named[line]["Bindings"]["Text"]["Formula"]["Expression"],
+            )
+            self.assertLessEqual(
+                named[line]["Left"] + named[line]["Width"], dashboard["BaseWidth"]
+            )
+        self.assertLessEqual(
+            named["PromptLine1"]["Top"] + named["PromptLine1"]["Height"],
+            named["StatusRule"]["Top"],
+        )
+        self.assertLessEqual(
+            named["PromptLine2"]["Top"] + named["PromptLine2"]["Height"],
+            named["StatusRule"]["Top"],
+        )
 
     def test_note_panel_only_appears_when_the_record_carries_a_summary(self):
         for variant in ("detailed", "compact"):

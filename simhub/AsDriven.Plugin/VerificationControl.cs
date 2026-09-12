@@ -1571,7 +1571,11 @@ namespace AsDriven.Plugin
             }
             if (IsUnresolved(value))
             {
-                SetFieldBadge(combo, "REVIEW NEEDED", Brushes.Orange);
+                // An automatic result marked unknown is an honest limit of
+                // telemetry, not unfinished driver work. The form remains
+                // editable if the driver has independent evidence, but the
+                // guided result should not demand action it cannot prescribe.
+                SetFieldBadge(combo, "NOT MEASURED", Brushes.Gray);
             }
             else
             {
