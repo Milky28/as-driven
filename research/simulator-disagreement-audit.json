@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.6.8",
-  "generated_at": "2026-09-11",
+  "dataset_version": "0.6.29",
+  "generated_at": "2026-09-12",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -10,18 +10,18 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 28,
-    "findings": 45,
+    "cars_with_disagreements": 30,
+    "findings": 48,
     "by_status": {
-      "authentic-baseline-open": 21,
+      "authentic-baseline-open": 22,
       "provisional-departure": 10,
-      "supported-departure": 14
+      "supported-departure": 16
     },
     "by_driver_impact": {
       "cockpit-equipment": 4,
-      "hardware-choice": 14,
+      "hardware-choice": 15,
       "launch-technique": 11,
-      "running-shift-technique": 16
+      "running-shift-technique": 18
     }
   },
   "findings": [
@@ -1039,6 +1039,55 @@
       }
     },
     {
+      "finding_id": "lotus-2-eleven-gt4--steering-wheel-rim-shape",
+      "record_id": "lotus-2-eleven-gt4",
+      "display_name": "Lotus 2-Eleven GT4",
+      "class": "GT4 sports car",
+      "path": "/authentic_controls/steering/wheel_rim/shape",
+      "field": "Wheel rim",
+      "driver_impact": "hardware-choice",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "d-shaped",
+        "display_value": "D-shaped rim",
+        "confidence": "high",
+        "source_refs": [
+          "lotus.gt4.official-spec",
+          "lotus.gt4.cockpit-photo"
+        ],
+        "primary_source_refs": [
+          "lotus.gt4.official-spec"
+        ],
+        "basis": "Lotus specifies a six-speed close-ratio gearbox. Lotus specifies a sequential six-speed gearbox. The specification describes push-pull sequential operation and the cockpit photo shows a competition wheel/shift control; it does not justify changing the real-car actuation to a simulator paddle assumption. A sequential gearbox has sequential selection rather than an H gate. The competition specification identifies a physical twin-plate clutch; launch use is the supported standing-start conclusion. Lotus explicitly specifies flat shift operation. Flat-shift operation is the documented automatic torque-interruption behavior. Manual blip is a downshift action, not an upshift action. Automatic blip is specified for downshifts, not upshifts. Throttle-lift is modeled for upshift technique in this record. The specification documents flat shift for upshifts, not a downshift cut. The documented system provides automatic blip, so manual blip is not the authentic driver action. Lotus explicitly specifies an auto-blip system. The inspected GT4 cockpit photograph shows a conventional open-top, flattened-rim competition wheel rather than a fixed-grip control-panel rim. No readout is visible on the wheel face; the cockpit instruments are separate. No wheel-mounted shift-light strip or lamps are visible in the inspected image. The photographed wheel is explicitly open-topped and the upper rim section is absent. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "round",
+          "display_value": "Round rim",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-09-12",
+          "confidence": "high",
+          "source_refs": [
+            "lotus.gt4.official-spec",
+            "lotus.gt4.cockpit-photo",
+            "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "supported-departure",
+        "matching_simulators": [],
+        "departing_simulators": [
+          "ac"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
       "finding_id": "lotus-renault-98t--transmission-forward-gears",
       "record_id": "lotus-renault-98t",
       "display_name": "Lotus Renault 98T",
@@ -1189,6 +1238,145 @@
         "departing_simulators": [],
         "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
         "next_action": "Find real-car evidence for manual blip."
+      }
+    },
+    {
+      "finding_id": "mazda-787b-1991--transmission-downshift-manual-blip",
+      "record_id": "mazda-787b-1991",
+      "display_name": "Mazda 787B",
+      "class": "Group C sports prototype",
+      "path": "/authentic_controls/transmission/downshift/manual_blip",
+      "field": "Manual blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "optional",
+        "display_value": "Optional",
+        "confidence": "high",
+        "source_refs": [
+          "mazda.official.787b-specification",
+          "tomlong.mazda-787b-driving",
+          "caranddriver.mazda-787b-transaxle",
+          "commons.mazda.787b-cockpit-detail",
+          "as-driven.repository.mazda-787b-record-scan"
+        ],
+        "primary_source_refs": [
+          "mazda.official.787b-specification"
+        ],
+        "basis": "Mazda specifies five speeds plus reverse, corroborated by the five-speed transaxle report. The exact 787B driving report describes its transaxle as fully synchronized. Direct driver testimony explicitly calls the gearbox H-pattern. Mazda specifies a triple-plate clutch and the car is an H-pattern manual; clutch control is required for the standing start. Direct driver testimony states that the clutch was used on every upshift. Direct driver testimony states that the clutch was used on every downshift. The fully synchronized construction makes a downshift blip useful but not required under the project's mechanical derivation. The direct account describes clutch-assisted upshifts, not an upshift blip procedure. No upshift automatic blip action is described. The reviewed sources establish clutch-assisted downshifts and a synchronized transaxle but no distinct downshift throttle-lift requirement. No downshift automatic cut procedure is described. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      "simulator_views": [
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-07",
+          "confidence": "high",
+          "source_refs": [
+            "mazda.official.787b-specification",
+            "tomlong.mazda-787b-driving",
+            "caranddriver.mazda-787b-transaxle",
+            "commons.mazda.787b.cockpit-detail",
+            "as-driven.repository.mazda-787b-record-scan",
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "departs-from-baseline",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-09-12",
+          "confidence": "high",
+          "source_refs": [
+            "as-driven.repository.mazda-787b-record-scan",
+            "mazda.official.787b-specification",
+            "tomlong.mazda-787b-driving",
+            "caranddriver.mazda-787b-transaxle",
+            "commons.mazda.787b.cockpit-detail",
+            "ac.local-live-mazda-787b-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "supported-departure",
+        "matching_simulators": [],
+        "departing_simulators": [
+          "pmr",
+          "ac"
+        ],
+        "basis": "The curated authentic baseline has high-confidence manufacturer or homologation support. Simulator values that differ are recorded departures from that baseline.",
+        "next_action": "Publish the finding with the cited real-car evidence and exact simulator versions."
+      }
+    },
+    {
+      "finding_id": "mazda-787b-1991--transmission-upshift-throttle-lift",
+      "record_id": "mazda-787b-1991",
+      "display_name": "Mazda 787B",
+      "class": "Group C sports prototype",
+      "path": "/authentic_controls/transmission/upshift/throttle_lift",
+      "field": "Upshift throttle",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "unknown",
+        "display_value": "Not established",
+        "confidence": "high",
+        "source_refs": [
+          "pmr.local-live-787b-controls.2.2.0"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "pmr",
+          "label": "Project Motor Racing",
+          "value": "not-required",
+          "display_value": "Not required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "2.2.0",
+          "verified_at": "2026-09-07",
+          "confidence": "high",
+          "source_refs": [
+            "mazda.official.787b-specification",
+            "tomlong.mazda-787b-driving",
+            "caranddriver.mazda-787b-transaxle",
+            "commons.mazda.787b.cockpit-detail",
+            "as-driven.repository.mazda-787b-record-scan",
+            "pmr.local-live-787b-controls.2.2.0"
+          ]
+        },
+        {
+          "simulator": "ac",
+          "label": "Assetto Corsa",
+          "value": "required",
+          "display_value": "Required",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "14923034",
+          "verified_at": "2026-09-12",
+          "confidence": "high",
+          "source_refs": [
+            "as-driven.repository.mazda-787b-record-scan",
+            "mazda.official.787b-specification",
+            "tomlong.mazda-787b-driving",
+            "caranddriver.mazda-787b-transaxle",
+            "commons.mazda.787b.cockpit-detail",
+            "ac.local-live-mazda-787b-controls.14923034"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "authentic-baseline-open",
+        "matching_simulators": [],
+        "departing_simulators": [],
+        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
+        "next_action": "Find real-car evidence for upshift throttle."
       }
     },
     {
@@ -2795,7 +2983,7 @@
           "tradeuniquecars.1989-sauber-mercedes-c9-review"
         ],
         "primary_source_refs": [],
-        "basis": "The direct review of an exact 1989 C9 states that “The C9 can’t be flatshifted, but clutchless upchanges are routine, although the clutch must be used for downshifting.” A car that cannot be flatshifted is one whose upchange needs the throttle released, so the lift is the driver’s. This is the procedure the review describes rather than an inference from construction, and it is a retrospective track review rather than a period team instruction, so it is not manufacturer or homologation material."
+        "basis": "The direct review of an exact 1989 C9 states that \u201cThe C9 can\u2019t be flatshifted, but clutchless upchanges are routine, although the clutch must be used for downshifting.\u201d A car that cannot be flatshifted is one whose upchange needs the throttle released, so the lift is the driver\u2019s. This is the procedure the review describes rather than an inference from construction, and it is a retrospective track review rather than a period team instruction, so it is not manufacturer or homologation material."
       },
       "simulator_views": [
         {

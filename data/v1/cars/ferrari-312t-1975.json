@@ -1,0 +1,267 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ferrari-312t-1975",
+  "identity": {
+    "display_name": "Ferrari 312T (1975)",
+    "manufacturer": "Ferrari",
+    "model": "312T",
+    "year": {
+      "from": 1975,
+      "to": 1975,
+      "label": "1975"
+    },
+    "class": "Formula One",
+    "real_world_identity_notes": "The exact AC package is ferrari_312t. The 1975 312T is Ferrari's transverse-gearbox Formula One car and is distinct from the earlier 312B3(T) and later 312T evolutions."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern; standing-start clutch use: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+      "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ferrari 312T"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ferrari_312t"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.ferrari-312t.20260911t033657981z-97cf6a84 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-312t.20260911t033657981z-97cf6a84 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312t-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-11",
+      "source_refs": [
+        "ferrari.312t.official",
+        "motorsportmagazine.1975-ferrari-312-b3t",
+        "ac.local-live-ferrari-312t-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Ferrari's official 312T history and a period technical report identify the car and its 1975 five-speed manual control arrangement; the local observation identifies the exact package."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ferrari.312t.official",
+          "motorsportmagazine.1975-ferrari-312-b3t",
+          "ac.local-live-ferrari-312t-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Ferrari's official 312T history and a period technical report identify the car and its 1975 five-speed manual control arrangement; the local observation identifies the exact package."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ferrari.312t.official",
+          "motorsportmagazine.1975-ferrari-312-b3t",
+          "ac.local-live-ferrari-312t-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Ferrari's technical summary gives five forward speeds plus reverse. The period report describes a short gear lever operating a gear gate; no paddle or sequential actuation is described for this 1975 configuration. The reviewed car is a manually actuated H-pattern five-speed; under the project's derivation rules a clutch is required to pull away from rest. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-312t-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-312t-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "ferrari.312t.official",
+          "motorsportmagazine.1975-ferrari-312-b3t"
+        ],
+        "confidence": "high",
+        "basis": "Ferrari's technical summary gives five forward speeds plus reverse. The period report describes a short gear lever operating a gear gate; no paddle or sequential actuation is described for this 1975 configuration. The reviewed car is a manually actuated H-pattern five-speed; under the project's derivation rules a clutch is required to pull away from rest. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

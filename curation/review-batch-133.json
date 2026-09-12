@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.17",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "honda-nsx-jp2-2003",
+      "bundle": "build/review-cases/issue-113/staged.json",
+      "display_name": "Honda NSX JP2 (2003)",
+      "class": "Grand Touring (JGTC)",
+      "manufacturer": "Honda",
+      "model": "NSX JP2",
+      "year": {
+        "from": 2003,
+        "to": 2003,
+        "label": "2003"
+      },
+      "real_world_identity_notes": "The PMR telemetry name is the 2003 Honda NSX JP2. The period JGTC entry identifies the base car as Honda NSX and specifies a Hewland six-speed sequential transmission; the exact local package remains separate from the real-car identity.",
+      "real_world_source_refs": [
+        "pmr.japanese-prototypes-pack",
+        "jgtc.2003.honda-nsx-team-spec"
+      ],
+      "confidence": "high",
+      "confidence_basis": "PMR's Japanese Prototypes Pack identifies the car as the 2003 Honda NSX JP2, and the period JGTC team specification independently identifies a Honda NSX with a six-speed sequential Hewland transmission.",
+      "identity_basis": "PMR's Japanese Prototypes Pack identifies the car as the 2003 Honda NSX JP2, and the period JGTC team specification independently identifies a Honda NSX with a six-speed sequential Hewland transmission.",
+      "specification_basis": "The period specification says six-speed sequential. A sequential competition gearbox is established, but the source does not explicitly distinguish a lever from paddles; sequential-stick is the conservative proposed control. The transmission is explicitly described as sequential. Manual blip is a downshift action and is not applicable to upshifts. Automatic blip is a downshift action and is not applicable to upshifts. Throttle lift is modeled only for upshifts. Automatic cut is modeled only for upshifts. The documented multi-plate clutch is the launch control for this manual competition transmission. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.nsx-jp2.20260911t210902090z-f2728267 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-nsx-jp2-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2003 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential stick; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; standing-start clutch use: required.",
+        "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/113",
+      "live_source_notes": "Guided-verification observation pmr.nsx-jp2.20260911t210902090z-f2728267 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering.",
+      "create_new_record": {
+        "staged_record_id": "nsx-jp2",
+        "basis": "PMR's Japanese Prototypes Pack identifies the car as the 2003 Honda NSX JP2, and the period JGTC team specification independently identifies a Honda NSX with a six-speed sequential Hewland transmission."
+      }
+    }
+  ]
+}

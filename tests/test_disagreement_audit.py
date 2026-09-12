@@ -36,6 +36,10 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         self.assertEqual(
             {
                 (
+                    "lotus-2-eleven-gt4",
+                    "/authentic_controls/steering/wheel_rim/shape",
+                ),
+                (
                     "volkswagen-virtus-200-tsi-2018",
                     "/authentic_controls/steering/wheel_rim/shape",
                 )
@@ -220,9 +224,9 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 21,
+                "authentic-baseline-open": 22,
                 "provisional-departure": 10,
-                "supported-departure": 14,
+                "supported-departure": 16,
             },
             self.checked_in["summary"]["by_status"],
         )
@@ -286,6 +290,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
             "lister-storm-gtm--transmission-downshift-manual-blip",
             "lotus-renault-98t--transmission-forward-gears",
             "maserati-mc12-gt1--transmission-downshift-manual-blip",
+            "mazda-787b-1991--transmission-upshift-throttle-lift",
             "mclaren-720s-gt3--transmission-standing-start-clutch",
             "mclaren-720s-gt3-evo--transmission-standing-start-clutch",
             "nissan-gt-r-nismo-gt3--transmission-standing-start-clutch",

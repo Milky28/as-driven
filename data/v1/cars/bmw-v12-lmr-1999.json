@@ -1,0 +1,212 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "bmw-v12-lmr-1999",
+  "identity": {
+    "display_name": "BMW V12 LMR (1999)",
+    "manufacturer": "BMW",
+    "model": "V12 LMR",
+    "year": {
+      "from": 1999,
+      "to": 1999,
+      "label": "1999"
+    },
+    "class": "LMP",
+    "real_world_identity_notes": "The PMR V12 LMR is the BMW/Williams 1999 Le Mans prototype, not the earlier BMW V12 LM."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "unknown",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential stick; shift pattern: sequential; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; standing-start clutch use: required; wheel-rim shape: d shaped; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+      "The reviewed real-car sources do not establish running-shift technique or cut and blip behavior; those baseline fields remain unknown.",
+      "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "V12 LMR"
+        },
+        {
+          "kind": "internal-id",
+          "value": "V12 LMR"
+        },
+        {
+          "kind": "class-id",
+          "value": "LMP"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.v12-lmr.20260911t211711545z-8f584a89 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.v12-lmr.20260911t211711545z-8f584a89 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-v12-lmr-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.v12-lmr.20260911t211711545z-8f584a89 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-v12-lmr-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.1.0",
+      "verified_at": "2026-09-11",
+      "source_refs": [
+        "pmr.bmw-v12-lmr",
+        "bmw-v12-lmr.history",
+        "alamy.2jnnetf-bmw-v12-lmr-cockpit",
+        "snaplap.bmw-v12-lmr-cockpit",
+        "pmr.local-live-v12-lmr-controls.2.2.1.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR identifies the exact car as BMW V12 LMR and the model's documented history identifies its 1999 debut and six-speed sequential Xtrac transmission."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.bmw-v12-lmr",
+          "bmw-v12-lmr.history",
+          "alamy.2jnnetf-bmw-v12-lmr-cockpit",
+          "snaplap.bmw-v12-lmr-cockpit",
+          "pmr.local-live-v12-lmr-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR identifies the exact car as BMW V12 LMR and the model's documented history identifies its 1999 debut and six-speed sequential Xtrac transmission."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.bmw-v12-lmr",
+          "bmw-v12-lmr.history",
+          "alamy.2jnnetf-bmw-v12-lmr-cockpit",
+          "snaplap.bmw-v12-lmr-cockpit",
+          "pmr.local-live-v12-lmr-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Both sources specify six forward speeds. Sequential manual is established; the reviewed sources do not explicitly document paddle actuation, so the conservative proposal is a sequential stick. The transmission is explicitly sequential. Downshift-only action. Modeled only for upshifts. The documented sequential manual racing transmission is not described as an automated launch system; a clutch is required to launch under the project's derivation rules. Reinspection of the supplied full cockpit photographs shows a D-shaped/flattened steering-wheel profile, not a circular rim. The images appear to depict the same later display/restored cockpit configuration, so this is a cautious photographed-configuration finding rather than two independent period confirmations. The visible wheel face contains spokes and controls but no integrated screen; the instruments are mounted on the dashboard behind the wheel. This is a direct observation of the supplied photographs. No rim-mounted shift-light strip or lamps are visible on the fully exposed wheel face in the supplied photographs; dashboard indicators are not counted as wheel shift lights. The photographed rim forms a continuous closed circumference rather than an open-top wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "pmr.local-live-v12-lmr-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-v12-lmr-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "pmr.bmw-v12-lmr",
+          "bmw-v12-lmr.history",
+          "alamy.2jnnetf-bmw-v12-lmr-cockpit",
+          "snaplap.bmw-v12-lmr-cockpit"
+        ],
+        "confidence": "high",
+        "basis": "Both sources specify six forward speeds. Sequential manual is established; the reviewed sources do not explicitly document paddle actuation, so the conservative proposal is a sequential stick. The transmission is explicitly sequential. Downshift-only action. Modeled only for upshifts. The documented sequential manual racing transmission is not described as an automated launch system; a clutch is required to launch under the project's derivation rules. Reinspection of the supplied full cockpit photographs shows a D-shaped/flattened steering-wheel profile, not a circular rim. The images appear to depict the same later display/restored cockpit configuration, so this is a cautious photographed-configuration finding rather than two independent period confirmations. The visible wheel face contains spokes and controls but no integrated screen; the instruments are mounted on the dashboard behind the wheel. This is a direct observation of the supplied photographs. No rim-mounted shift-light strip or lamps are visible on the fully exposed wheel face in the supplied photographs; dashboard indicators are not counted as wheel shift lights. The photographed rim forms a continuous closed circumference rather than an open-top wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

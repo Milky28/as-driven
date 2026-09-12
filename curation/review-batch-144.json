@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.28",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "mazda-787b-1991",
+      "bundle": "build/review-cases/issue-124/staged.json",
+      "display_name": "Mazda 787B",
+      "class": "Group C sports prototype",
+      "manufacturer": "Mazda",
+      "model": "787B",
+      "year": {
+        "from": 1991,
+        "to": 1991,
+        "label": "1991 Mazda 787B"
+      },
+      "real_world_identity_notes": "The AC package is the existing 1991 Le Mans-winning Mazda 787B record. The new cockpit evidence resolves the previously unknown real wheel topology; it does not change the existing gearbox and technique findings.",
+      "real_world_source_refs": [
+        "as-driven.repository.mazda-787b-record-scan",
+        "mazda.official.787b-specification",
+        "tomlong.mazda-787b-driving",
+        "caranddriver.mazda-787b-transaxle",
+        "commons.mazda.787b.cockpit-detail"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Mazda's official 787B specification, the direct driver account, the synchronized-transaxle report and the exact 1991 cockpit image all match the existing curated identity.",
+      "identity_basis": "Mazda's official 787B specification, the direct driver account, the synchronized-transaxle report and the exact 1991 cockpit image all match the existing curated identity.",
+      "specification_basis": "The official specification and transaxle report identify five forward speeds. The reviewed driving source describes the transaxle as fully synchronized. The direct driving account identifies an H-pattern manual gearbox. The car has a physical triple-plate clutch and H-pattern manual transmission; clutch operation is required to launch from rest. The direct driver account states clutch use on running upshifts. Manual blip is modeled as a downshift action. No upshift blip action applies to this model. The direct driver account states clutch use on running downshifts. Throttle lift is not a separately modeled downshift action here. No downshift cut action is documented. The established synchromesh construction makes manual rev matching useful but optional under the project's derivation. The full-resolution exact 787B cockpit image shows a continuous round three-spoke rim. The digital instruments are mounted on the dashboard ahead of the wheel, not in the rim. No wheel-mounted shift-light strip or lamps are visible on the exact cockpit image. The rim is closed and continuous. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "gearbox_type": "synchromesh",
+        "upshift": {
+          "clutch": "required",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "optional",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.mazda-787b.20260912t042222319z-2536234a refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-mazda-787b-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.mazda-787b.20260912t042222319z-2536234a directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-mazda-787b-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.mazda-787b.20260912t042222319z-2536234a directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-mazda-787b-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.mazda-787b.20260912t042222319z-2536234a directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-mazda-787b-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1991 Mazda 787B identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: optional; wheel-rim shape: round; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+        "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+        "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/124",
+      "live_source_notes": "Guided-verification observation ac.mazda-787b.20260912t042222319z-2536234a by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_mazda_787b', no declared version, data-acd sha256 a4173b0995b74d55419febe2b5de6da0b7f444510698520d6da4ef9fec85a3b6. This identifies the installed package, not the real car the record describes.",
+      "accept_from_drive": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights"
+      ],
+      "driver_summary": "5-speed H-pattern. Use the clutch to pull away. Lift for each upshift and use the clutch. A downshift blip is optional, but can help settle the car; use the clutch. The upshift lift is not established, so that much is the cautious default rather than this car's known technique. Simulator implementations differ on upshift lift, upshift cut, manual downshift blip; follow the selected game's USE row for those items."
+    }
+  ]
+}

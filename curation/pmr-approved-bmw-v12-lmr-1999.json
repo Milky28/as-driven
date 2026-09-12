@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.18",
+  "approved_at": "2026-09-11",
+  "record_id": "bmw-v12-lmr-1999",
+  "simulator": "pmr",
+  "telemetry_name": "V12 LMR",
+  "observed_game_version": "2.2.1.0",
+  "observed_through": "SimHub guided verification observation pmr.v12-lmr.20260911t211711545z-8f584a89",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "d-shaped",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1999 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "LMP",
+  "staged_record_id": "v12-lmr"
+}

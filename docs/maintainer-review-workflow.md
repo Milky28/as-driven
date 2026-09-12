@@ -43,6 +43,15 @@ The assistant should:
    `research-result.template.json` into `research-result.json` using traceable
    sources, then run `import-research 42 <result-path>`. An exact comparison may
    go straight to proposal preparation. Research only the submitted scope.
+   Complete research must include an explicit real-car cockpit-photo pass. Mark
+   the reviewed source with `evidence_kind: "cockpit-photo"` and reference it
+   from at least one wheel-rim claim. If a diligent search cannot locate a
+   usable exact-car cockpit image, record the attempted source with
+   `evidence_kind: "cockpit-photo-unavailable"`; unsupported wheel fields must
+   remain `not-established`, and the unavailable marker cannot support an
+   established or conflicting wheel claim. Simulator screenshots and
+   `in-game-observation` sources do not satisfy this gate. Import validation
+   enforces the requirement before a complete result can enter final review.
 3. Run `prepare-review 42` to create the proposal and validate its dry run.
    Present `final-review.md` and the preview record with a short explanation of
    changed advice, supporting sources, remaining unknowns, and disagreements.

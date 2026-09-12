@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.23",
+  "approved_at": "2026-09-11",
+  "record_id": "lotus-72d",
+  "simulator": "ac",
+  "telemetry_name": "Lotus 72D",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.lotus-72d.20260912t035653685z-334bdf06",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "throttle_lift": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 1972 Lotus Type 72D identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources."
+}

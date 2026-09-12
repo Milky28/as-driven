@@ -1,0 +1,263 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ferrari-f2004",
+  "identity": {
+    "display_name": "Ferrari F2004",
+    "manufacturer": "Ferrari",
+    "model": "F2004",
+    "year": {
+      "from": 2004,
+      "to": 2004,
+      "label": "2004"
+    },
+    "class": "Formula One",
+    "real_world_identity_notes": "The exact AC package is ks_ferrari_f2004. The F2004 used a seven-speed semi-automatic sequential gearbox; it is distinct from earlier Ferrari F1 cars with manual H-pattern controls."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 7,
+      "gearbox_type": "semi-automatic",
+      "shift_actuation": "sequential-paddles",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 7; gearbox construction: semi automatic; shift actuation: sequential paddles; shift pattern: sequential; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: not required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+      "The reviewed real-car sources do not establish cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ferrari F2004"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_ferrari_f2004"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-paddles",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.ferrari-f2004.20260911t034431038z-76215f96 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "not-applicable",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ac.ferrari-f2004.20260911t034431038z-76215f96 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f2004-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-11",
+      "source_refs": [
+        "corriere.f2004-technical-sheet",
+        "italiaspeed.f2004-technical-spec",
+        "wikipedia.f2004-2004-launch-clutch",
+        "ac.local-live-ferrari-f2004-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Contemporary technical specifications identify the 2004 Ferrari F1 car and its seven-speed semi-automatic sequential electronic transmission; the local observation identifies the exact AC package."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "corriere.f2004-technical-sheet",
+          "italiaspeed.f2004-technical-spec",
+          "wikipedia.f2004-2004-launch-clutch",
+          "ac.local-live-ferrari-f2004-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Contemporary technical specifications identify the 2004 Ferrari F1 car and its seven-speed semi-automatic sequential electronic transmission; the local observation identifies the exact AC package."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "corriere.f2004-technical-sheet",
+          "italiaspeed.f2004-technical-spec",
+          "wikipedia.f2004-2004-launch-clutch",
+          "ac.local-live-ferrari-f2004-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Both technical specifications state seven forward gears plus reverse. Both sources explicitly describe a semi-automatic electronically controlled gearbox. The sources describe sequential electronic control; the F2004 cockpit control is paddle-actuated rather than an H-pattern lever. Both sources explicitly use the sequential designation. The reviewed historical summary distinguishes the launch clutch from the semi-automatic running shifts and states that the driver used the clutch to launch. The electronically controlled sequential gearbox performs running gear changes without a driver-operated clutch input; the separate launch-clutch source is consistent with this distinction. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. The semi-automatic sequential gearbox performs running downshifts without a driver-operated clutch input; launch clutch use is a separate function. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-f2004-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-f2004-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "corriere.f2004-technical-sheet",
+          "italiaspeed.f2004-technical-spec",
+          "wikipedia.f2004-2004-launch-clutch"
+        ],
+        "confidence": "high",
+        "basis": "Both technical specifications state seven forward gears plus reverse. Both sources explicitly describe a semi-automatic electronically controlled gearbox. The sources describe sequential electronic control; the F2004 cockpit control is paddle-actuated rather than an H-pattern lever. Both sources explicitly use the sequential designation. The reviewed historical summary distinguishes the launch clutch from the semi-automatic running shifts and states that the driver used the clutch to launch. The electronically controlled sequential gearbox performs running gear changes without a driver-operated clutch input; the separate launch-clutch source is consistent with this distinction. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. The semi-automatic sequential gearbox performs running downshifts without a driver-operated clutch input; launch clutch use is a separate function. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

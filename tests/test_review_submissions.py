@@ -25,6 +25,7 @@ from as_driven_db.research_handoff import (
 )
 from as_driven_db.importers.observation import import_observation
 from as_driven_db.review_proposal import (
+    _bundle_reference,
     _dry_run_review_proposal,
     _candidate_source,
     _existing_authentic_control_decisions,
@@ -222,6 +223,7 @@ def existing_research_result(case_id: str) -> dict:
                 "url": "https://example.invalid/alfa-156-cockpit",
                 "archive_url": None,
                 "source_type": "secondary",
+                "evidence_kind": "cockpit-photo",
                 "published_or_updated_at": "1998-06-01",
                 "retrieved_at": "2026-09-04",
                 "reuse_status": "facts-only-review",
@@ -288,6 +290,7 @@ def research_result(case_id: str) -> dict:
                 "url": "https://example.invalid/public-test-car-2021",
                 "archive_url": None,
                 "source_type": "manufacturer",
+                "evidence_kind": "cockpit-photo",
                 "published_or_updated_at": "2021-01-01",
                 "retrieved_at": "2026-08-24",
                 "reuse_status": "facts-only-review",
@@ -326,7 +329,15 @@ def research_result(case_id: str) -> dict:
                 "confidence": "high",
                 "source_refs": ["example.public-test-car.2021"],
                 "basis": "The exact-car manufacturer page names the year.",
-            }
+            },
+            {
+                "path": "/authentic_controls/steering/wheel_rim/shape",
+                "finding": "not-established",
+                "proposed_value": "unknown",
+                "confidence": "low",
+                "source_refs": ["example.public-test-car.2021"],
+                "basis": "The reviewed cockpit-photo source does not resolve the rim shape.",
+            },
         ],
         "open_questions": [],
         "notes": "Ready for human review, not promotion.",
@@ -335,6 +346,7 @@ def research_result(case_id: str) -> dict:
 
 def completed_research_result(case_id: str) -> dict:
     completed = research_result(case_id)
+    existing_paths = {claim["path"] for claim in completed["claims"]}
     completed["claims"].extend(
         {
             "path": path,
@@ -345,6 +357,7 @@ def completed_research_result(case_id: str) -> dict:
             "basis": "The reviewed exact-car source does not establish this field.",
         }
         for path in CONTROL_PATHS
+        if path not in existing_paths
     )
     return completed
 
@@ -1179,21 +1192,76 @@ class ReviewSubmissionTests(unittest.TestCase):
                 import_research_result(ROOT, temp / "cases", 17, result_path)
             self.assertFalse((case_dir / "research-result.json").exists())
 
-    def test_review_proposal_dry_runs_without_changing_curated_data(self) -> None:
+    def test_complete_research_requires_a_cockpit_photo_review_marker(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
             case_dir = self.sync_test_case(temp)
-            generate_research_briefs(ROOT, temp / "cases", {17})
-            result_path = temp / "completed-research.json"
+            bad = research_result("github-example-project-17")
+            del bad["sources"][0]["evidence_kind"]
+            result_path = temp / "missing-cockpit-photo-marker.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "requires a real-car cockpit-photo",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
+    def test_complete_research_requires_a_wheel_claim_to_reference_the_photo(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            bad = research_result("github-example-project-17")
+            bad["claims"] = bad["claims"][:-1]
+            result_path = temp / "unreferenced-cockpit-photo.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "wheel-rim claim must reference the cockpit-photo",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
+    def test_cockpit_photo_unavailable_cannot_establish_a_wheel_control(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            case_dir = self.sync_test_case(temp)
+            bad = research_result("github-example-project-17")
+            bad["sources"][0]["evidence_kind"] = "cockpit-photo-unavailable"
+            bad["claims"][-1]["finding"] = "established"
+            bad["claims"][-1]["proposed_value"] = "round"
+            result_path = temp / "unavailable-cockpit-photo.json"
+            result_path.write_text(json.dumps(bad), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                ResearchHandoffError,
+                "cannot support established wheel claim",
+            ):
+                import_research_result(ROOT, temp / "cases", 17, result_path)
+            self.assertFalse((case_dir / "research-result.json").exists())
+
+    def test_review_proposal_dry_runs_without_changing_curated_data(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            repository = temp / "repository"
+            shutil.copytree(ROOT / "data", repository / "data")
+            shutil.copytree(ROOT / "curation", repository / "curation")
+            shutil.copytree(ROOT / "schema", repository / "schema")
+            cases = repository / "build" / "review-cases"
+            case_dir = self.sync_test_case_for_root(repository, cases)
+            generate_research_briefs(repository, cases, {17})
+            result_path = repository / "completed-research.json"
             completed = completed_research_result("github-example-project-17")
             result_path.write_text(
                 json.dumps(completed, indent=2) + "\n",
                 encoding="utf-8",
             )
-            import_research_result(ROOT, temp / "cases", 17, result_path)
+            import_research_result(repository, cases, 17, result_path)
             proposal = prepare_review_proposal(
-                ROOT,
-                temp / "cases",
+                repository,
+                cases,
                 17,
                 dataset_version="9.9.9",
             )
@@ -1232,8 +1300,25 @@ class ReviewSubmissionTests(unittest.TestCase):
             self.assertNotIn("archetype", preview)
             self.assertTrue((case_dir / "final-review.md").is_file())
             self.assertFalse(
-                (ROOT / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
+                (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").exists()
             )
+
+    def test_review_manifest_bundle_stays_relative_with_a_separate_validation_root(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            queue_root = temp / "checkout"
+            validation_root = temp / "validation-copy"
+            bundle = queue_root / "build" / "review-cases" / "issue-115" / "staged.json"
+            bundle.parent.mkdir(parents=True)
+            bundle.write_text("{}", encoding="utf-8")
+
+            reference = _bundle_reference(validation_root, bundle)
+
+            self.assertEqual(
+                "build/review-cases/issue-115/staged.json",
+                reference,
+            )
+            self.assertFalse(Path(reference).is_absolute())
 
     def test_exact_curated_comparison_can_prepare_an_audited_correction(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -1894,6 +1979,7 @@ class ReviewSubmissionTests(unittest.TestCase):
             "do not report a rim you could not see as a rim that cannot be decided",
             questions,
         )
+        self.assertIn("mandatory cockpit-photo pass", questions)
 
     def test_a_researched_case_can_still_ask_for_a_new_brief(self) -> None:
         # The brief gains questions over time. A case that completed research

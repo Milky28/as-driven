@@ -12758,6 +12758,998 @@
       "retrieved_at": "2026-09-10",
       "reuse_status": "permission-required",
       "notes": "All photo rights reserved by the photographer/auction house; this record describes only what is visible (a continuous, wood-rimmed, three-spoke wheel with a Ferrari badge at its centre, no rim-mounted display, and no rim-mounted shift lights) and does not reproduce the image itself. This is one specific, well-documented chassis rather than the exact chassis Kunos modeled, so the wheel-rim finding is treated as representative of the shared production cockpit rather than a chassis-exact match."
+    },
+    {
+      "source_id": "ferrari.312-f1-67.official",
+      "title": "Ferrari 312 F1-67",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/en-UG/history/garage/1967/312-f1-67",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari's 1967 312 F1-67 model history and technical summary. Technical data and model history: “312 F1-67” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/class. Manufacturer source; it does not settle the cockpit rim or driver technique."
+    },
+    {
+      "source_id": "ultimatecarpage.ferrari-312-67",
+      "title": "Ferrari 312/67 F1",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/spec/145/Ferrari-312-67-F1.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 1967 Ferrari 312/67 specification, including transmission description. Specifications / transmission: “5-speed manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Secondary specification page; used only for the manual five-speed description."
+    },
+    {
+      "source_id": "ac.local-live-ferrari-312-67-controls.14923034",
+      "title": "Live AC Ferrari 312/67 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/105",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ferrari_312_67', no declared version, data-acd sha256 c0b01216dcc1026b011b3d83e86e09c12002ab0f281627e3b8a6020cd301e78e. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ferrari_312_67",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "c0b01216dcc1026b011b3d83e86e09c12002ab0f281627e3b8a6020cd301e78e"
+        }
+      }
+    },
+    {
+      "source_id": "ferrari.312t.official",
+      "title": "Ferrari 312 T",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/en-CA/formula1/312-t",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari 312T Formula One model history and transmission summary. Technical specifications: “5-speed + reverse” Reviewed for /identity/display_name, /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. Manufacturer source; it does not settle the gate or running-shift technique."
+    },
+    {
+      "source_id": "motorsportmagazine.1975-ferrari-312-b3t",
+      "title": "The 1975 Ferrari 312 B3(T)",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/archive/article/november-1975/66/the-1975-ferrari-312-b3t/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period technical report on Ferrari's 1975 transversely mounted five-speed F1 gearbox family. Gearbox and cockpit description: “short stubby gear lever on the right operating a gear gate” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Cockpit description: “small thick-rimmed steering wheel” Reviewed for /authentic_controls/steering/wheel_rim/shape. Period report concerns the 1975 312B3(T) configuration and is used cautiously for the closely related 312T family; it does not settle the rim shape."
+    },
+    {
+      "source_id": "ac.local-live-ferrari-312t-controls.14923034",
+      "title": "Live AC Ferrari 312T guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/106",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ferrari-312t.20260911t033657981z-97cf6a84 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ferrari_312t', no declared version, data-acd sha256 28c092afafe214982c7b21867ed55329788501fe30227e750b67205a11766101. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ferrari_312t",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "28c092afafe214982c7b21867ed55329788501fe30227e750b67205a11766101"
+        }
+      }
+    },
+    {
+      "source_id": "ferrari.330-p4.official",
+      "title": "Ferrari 330 P4",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/en-RS/history/garage/1967/330-p4",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari's 1967 330 P4 model history. Model history: “330 P4” Reviewed for /identity/display_name, /identity/model, /identity/year, /identity/class. Manufacturer identity source; it does not settle all controls."
+    },
+    {
+      "source_id": "ultimatecarpage.ferrari-330-p4",
+      "title": "Ferrari 330 P4",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/spec/708/Ferrari-330-P4.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 1967 Ferrari 330 P4 specifications, including manual transmission and clutch description. Specifications / transmission: “5-speed manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Secondary specification page; clutch construction alone is not used to infer running technique."
+    },
+    {
+      "source_id": "ferrari.330-p4-daytona-history",
+      "title": "First, second and third at the 1967 Daytona 24 Hours",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/en-BW/magazine/articles/first-second-third-at-1967-daytona-24-hours",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari's account of the 330 P4 in the 1967 World Sports Prototype Championship. 1967 Daytona history: “330 P4” Reviewed for /identity/class, /identity/year. Manufacturer competition-history source."
+    },
+    {
+      "source_id": "ac.local-live-ferrari-330-p4-controls.14923034",
+      "title": "Live AC Ferrari 330 P4 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/107",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ferrari-330-p4.20260911t034045470z-40428c60 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ferrari_330_p4', no declared version, data-acd sha256 cb8caa388ed29f7afb6ee5f5ab6fad8fde4d8941f87162c8fcb1f398be99e6e3. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ferrari_330_p4",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "cb8caa388ed29f7afb6ee5f5ab6fad8fde4d8941f87162c8fcb1f398be99e6e3"
+        }
+      }
+    },
+    {
+      "source_id": "corriere.f2004-technical-sheet",
+      "title": "Ferrari F2004 technical sheet",
+      "publisher": "Corriere della Sera",
+      "url": "https://www.corriere.it/Primo_Piano/Sport/2004/01_Gennaio/26/scheda_ferrari.shtml",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Contemporary Ferrari F2004 technical specification. Transmission specification: “cambio longitudinale Ferrari, semiautomatico sequenziale a controllo elettronico, 7 marce più retromarcia” Reviewed for /identity/display_name, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Contemporary technical sheet; translated only for the structured proposal."
+    },
+    {
+      "source_id": "italiaspeed.f2004-technical-spec",
+      "title": "Ferrari F2004 technical specification",
+      "publisher": "ItaliaSpeed",
+      "url": "https://www.italiaspeed.com/new_models/new_models_2004/f2004/technical_specification.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 2004 F2004 gearbox and control specification. Gearbox: “7 gears plus reverse; semi-automatic sequential electronically controlled gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Independent contemporary specification corroborating the gearbox type and actuation."
+    },
+    {
+      "source_id": "wikipedia.f2004-2004-launch-clutch",
+      "title": "Ferrari F2004",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ferrari_F2004",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Historical summary of F2004 launch-clutch operation after automatic launch control restrictions. Development and operation section: “the driver had to use the clutch to launch the car” Reviewed for /authentic_controls/transmission/standing_start_clutch. Secondary historical summary used only for the standing-start clutch distinction; not used for running-shift construction."
+    },
+    {
+      "source_id": "ac.local-live-ferrari-f2004-controls.14923034",
+      "title": "Live AC Ferrari F2004 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/108",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ferrari-f2004.20260911t034431038z-76215f96 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ferrari_f2004', no declared version, data-acd sha256 f0e8be984ab15651401d2c580f190c233e032e979a337602209b7704dd8348ab. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ferrari_f2004",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "f0e8be984ab15651401d2c580f190c233e032e979a337602209b7704dd8348ab"
+        }
+      }
+    },
+    {
+      "source_id": "ultimatecarpage.ferrari-f40",
+      "title": "Ferrari F40",
+      "publisher": "Ultimatecarpage.com",
+      "url": "https://www.ultimatecarpage.com/spec/172/Ferrari-F40.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Road Ferrari F40 production period and transmission specification. Specifications: “1987-1992; 5-speed manual” Reviewed for /identity/display_name, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Road-car specification; distinct from F40 LM."
+    },
+    {
+      "source_id": "dkeng.ferrari-f40-press",
+      "title": "Ferrari F40 press information",
+      "publisher": "DK Engineering",
+      "url": "https://www.dkeng.co.uk/press/1338926480-9c910818f74f7c8aeec37022b96b1213.pdf",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Road F40 period description, including dogleg five-speed manual gearbox and clutch characteristics. Transmission description: “dogleg five-speed manual” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Specialist secondary source; used for gate layout only, not for unsupported technique claims."
+    },
+    {
+      "source_id": "ac.local-live-ferrari-f40-controls.14923034",
+      "title": "Live AC Ferrari F40 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/109",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ferrari-f40.20260911t035131721z-f35fe541 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ferrari_f40', no declared version, data-acd sha256 fb177c6d74bfa4b44e7cfa9ac54545e41a3f5bc265bd645db60a96c0e7a4b25c. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ferrari_f40",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "fb177c6d74bfa4b44e7cfa9ac54545e41a3f5bc265bd645db60a96c0e7a4b25c"
+        }
+      }
+    },
+    {
+      "source_id": "ferrari.gto-technical-spec-2024",
+      "title": "Ferrari GTO Legacy Tour technical specification",
+      "publisher": "Ferrari",
+      "url": "https://www.ferrari.com/content/dam/ferrari-fcom/old/pdf/CS_Ferrari_GTO_Legacy_Tour_2024_gbr.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Ferrari 288 GTO legacy technical specification, including five-speed manual transmission. 288 GTO technical specification: “5-speed manual gearbox” Reviewed for /identity/display_name, /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. Manufacturer legacy material."
+    },
+    {
+      "source_id": "fast-autos.ferrari-288-gto",
+      "title": "Ferrari 288 GTO",
+      "publisher": "Fast-Autos.net",
+      "url": "https://www.fast-autos.net/vehicles/Ferrari/1984/288_GTO/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 1984 Ferrari 288 GTO road-car controls and synchronized five-speed description. Transmission and interior specification: “fully synchronized 5-speed manual” Reviewed for /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Steering wheel description: “three-spoke leather steering wheel” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top. Secondary source; Ferrari's official material and this page disagree on clutch plate count, so clutch construction is not used as a technique premise."
+    },
+    {
+      "source_id": "ac.local-live-ferrari-gto-controls.14923034",
+      "title": "Live AC Ferrari GTO guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/110",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ferrari-gto.20260911t035552301z-ecf44ac3 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ferrari_288_gto', no declared version, data-acd sha256 6bec1c4853113b9d3560c8262afa1363993086b06943a2f2da33b13fa89a2d90. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ferrari_288_gto",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "6bec1c4853113b9d3560c8262afa1363993086b06943a2f2da33b13fa89a2d90"
+        }
+      }
+    },
+    {
+      "source_id": "fia.escort-rs1600-homologation-1605",
+      "title": "Ford Escort RS 1600 Group 2 homologation form 1605",
+      "publisher": "FIA Historic Database",
+      "url": "https://historicdb.fia.com/sites/default/files/car_attachment/1589596202/homologation_form_1605_group_2.pdf",
+      "source_type": "homologation",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: FIA Group 2 homologation form 1605 for the Ford Escort RS1600, including the period synchronized manual transmission and hydraulic clutch. Homologation form 1605, transmission and clutch sections: “4 forward synchronized ratios; hydraulic clutch” Reviewed for /identity/display_name, /identity/year, /identity/class, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation. Base homologation evidence; does not by itself settle the five-speed competition variant represented by every simulator package."
+    },
+    {
+      "source_id": "tech-racingcars.escort-rs1600-group2",
+      "title": "Ford Escort Mk I RS1600",
+      "publisher": "Tech Racing Cars",
+      "url": "https://tech-racingcars.wikidot.com/ford-escort-mk-i-rs1600",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Mk I Escort RS1600 Group 2 competition specifications and period gearbox options. Competition specification: “4 or 5 (ZF) speed manual gearbox” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Community research used to preserve the known four- versus five-speed variant uncertainty."
+    },
+    {
+      "source_id": "hrct.escort-rs1600-period-gearbox",
+      "title": "Category 2 RS1600",
+      "publisher": "Historic Rally Car Technology",
+      "url": "https://hrct.co.uk/category-2-rs1600/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Period-legal RS1600 competition gearbox options and engagement restrictions. Gearbox options: “period 5-speed ZF ... permitted” Reviewed for /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Competition reference; it establishes variant breadth, not the exact Kunos real-car build."
+    },
+    {
+      "source_id": "ac.local-live-ford-escort-rs1600-controls.14923034",
+      "title": "Live AC Ford Escort RS1600 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/111",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ford-escort-rs1600.20260911t035912782z-f4e12204 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ford_escort_mk1', no declared version, data-acd sha256 b281aadd2c81fe3d2cb84099f87abfddb41ae96fda4a8531ab6ce70bdfb88afb. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ford_escort_mk1",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "b281aadd2c81fe3d2cb84099f87abfddb41ae96fda4a8531ab6ce70bdfb88afb"
+        }
+      }
+    },
+    {
+      "source_id": "assettocorsa.official-car-list",
+      "title": "Assetto Corsa",
+      "publisher": "Kunos Simulazioni",
+      "url": "https://assettocorsa.gg/assetto-corsa/",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official Assetto Corsa vehicle list, used to confirm the simulator car family is represented in the title. Cars list: “Ford GT40” Reviewed for /identity/display_name, /identity/record_action. Simulator identity lead only; it does not establish the authentic car specification by itself."
+    },
+    {
+      "source_id": "igcd.assetto-corsa-vehicle-list",
+      "title": "Assetto Corsa vehicle list",
+      "publisher": "IGCD",
+      "url": "https://www.igcd.net/game.php?id=1000009050",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Independent Assetto Corsa vehicle catalog identifying the Ford GT40 entry as a 1966 car. Assetto Corsa vehicle entry: “1966 Ford GT40” Reviewed for /identity/display_name, /identity/year. Community catalog used for the year disambiguation; manufacturer and gearbox facts come from period sources."
+    },
+    {
+      "source_id": "motorsportmagazine.1966-ford-gt40-road-test",
+      "title": "On the road with the Ford GT40",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/archive/article/december-1966/37/on-the-road-with-the-ford-gt40/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Contemporary 1966 Ford GT40 road-test description, including the five-speed ZF gearbox and solid gear lever. Transmission and cockpit description: “5-speed ZF gearbox” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Contemporary period source; it does not settle the exact gate layout or wheel rim."
+    },
+    {
+      "source_id": "classicdriver.ford-gt40-4-7",
+      "title": "Ford GT40 4.7-litre",
+      "publisher": "Classic Driver",
+      "url": "https://www.classicdriver.com/en/article/ford-gt40-47-litre",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Typical Mk I GT40 period specification, including the ZF DS25 transaxle and five-speed layout. Technical description: “5-speed ZF DS25 transaxle” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. Secondary period-specification context; it is not used to claim a synchronized or dogbox construction."
+    },
+    {
+      "source_id": "ac.local-live-ford-gt40-controls.14923034",
+      "title": "Live AC Ford GT40 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/112",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.ford-gt40.20260911t040212905z-9500eb10 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ford_gt40', no declared version, data-acd sha256 ce6e7a25d47cf7a22171872930e08c0b53f0664c8a64391962b71af18012f1b0. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_ford_gt40",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "ce6e7a25d47cf7a22171872930e08c0b53f0664c8a64391962b71af18012f1b0"
+        }
+      }
+    },
+    {
+      "source_id": "pmr.japanese-prototypes-pack",
+      "title": "Japanese Prototypes Pack",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/dlc.php?dlc_id=pmr1PC_JPP",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official PMR pack listing for the 2003 Honda NSX JP2. Class 2 vehicle list: “2003 Honda NSX JP2” Reviewed for /identity/display_name, /identity/manufacturer, /identity/model, /identity/year, /identity/class. Simulator vehicle listing; it establishes the exact game identity, not every authentic control detail."
+    },
+    {
+      "source_id": "jgtc.2003.honda-nsx-team-spec",
+      "title": "2003 Team Information - Honda NSX",
+      "publisher": "JGTC.net",
+      "url": "https://supergt.net/wp-content/archive/classic/supergt.net/jgtc/race/2003/03team/03tm002.htm",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 2003 JGTC Honda NSX team specification, including transmission and clutch. Machine Specifications: “HEWLAND 6速シーケンシャル” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Machine Specifications: “AP Carbon 4plates” Reviewed for /authentic_controls/transmission/standing_start_clutch. Period competition specification; it does not settle running-shift clutch or blip technique."
+    },
+    {
+      "source_id": "pmr.local-live-nsx-jp2-controls.2.2.1.0",
+      "title": "Live PMR NSX JP2 guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/113",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.nsx-jp2.20260911t210902090z-f2728267 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "pmr.bmw-v12-lmr",
+      "title": "BMW V12 LMR",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/car.php?carIndex=62&country=AR&lang=es",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official PMR identity page and six-speed sequential description. Vehicle information: “BMW V12 LMR; 6-speed sequential” Reviewed for /identity/manufacturer, /identity/model, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_pattern. Official game page; simulator listing and specification lead."
+    },
+    {
+      "source_id": "bmw-v12-lmr.history",
+      "title": "BMW V12 LMR",
+      "publisher": "BMW Motorsport historical summary",
+      "url": "https://en.wikipedia.org/wiki/BMW_V12_LMR",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 1999 BMW V12 LMR identity, Xtrac six-speed sequential manual gearbox, and LMP context. Infobox and history: “1999; X-Trac; 6-speed; sequential manual” Reviewed for /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/shift_pattern. Secondary source used for the historical model and transmission context."
+    },
+    {
+      "source_id": "alamy.2jnnetf-bmw-v12-lmr-cockpit",
+      "title": "View into cockpit of historic racing car BMW V12 LMR",
+      "publisher": "Alamy / imageBROKER",
+      "url": "https://www.alamy.com/view-into-cockpit-of-historic-racing-car-bmw-v12-lmr-le-mans-for-24h-24-hours-race-in-90s-1999-with-dashboard-modern-steering-wheel-racing-steering-image478060367.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Alamy image 2JNNETF, photographed in Germany in 2017, showing the BMW V12 LMR cockpit and steering wheel. Image 2JNNETF, full cockpit photograph: “Image ID : 2JNNETF” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct visual observation: the wheel has a D-shaped/flattened profile rather than a circular rim, with no integrated display or visible rim-mounted shift-light array. The rim appears closed at the top in this photographed configuration. The photograph is a later museum/display configuration, so it is applied cautiously to the period baseline."
+    },
+    {
+      "source_id": "snaplap.bmw-v12-lmr-cockpit",
+      "title": "BMW V12 LMR - The Only Bavarian Car Which Won Le Mans",
+      "publisher": "SnapLap",
+      "url": "https://www.snaplap.net/bmw-v12-lmr/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: SnapLap article's embedded cockpit image captioned Cockpit of BMW V12 LMR and its technical specification. Embedded image captioned Cockpit of BMW V12 LMR: “Cockipt of BMW V12 LMR” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct visual observation: the embedded cockpit image shows the same D-shaped/flattened wheel profile, no integrated display, and no visible wheel-mounted shift-light array. It appears to be the same photographed/display configuration as the Alamy lead, so the two images are not treated as independent period evidence."
+    },
+    {
+      "source_id": "pmr.local-live-v12-lmr-controls.2.2.1.0",
+      "title": "Live PMR V12 LMR guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/114",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.v12-lmr.20260911t211711545z-8f584a89 by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "pmr.corvette-grand-sport-history",
+      "title": "1963 Chevrolet Corvette Grand Sport Comes to Project Motor Racing",
+      "publisher": "Project Motor Racing",
+      "url": "https://projectmotorracing.com/newsArticle.php?articleCode=ZmEwYTQyY2Zl&country=CH&lang=de",
+      "source_type": "official-simulator",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Official PMR history of the 1963 Corvette Grand Sport and its five-car origin. Vehicle history: “1963 Chevrolet Corvette Grand Sport; precisely five Grand Sports” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /identity/class. Official game history; it does not settle every control field."
+    },
+    {
+      "source_id": "corvette-action-center.1963-grand-sport",
+      "title": "1963 Grand Sport Corvette Specifications",
+      "publisher": "Corvette Action Center",
+      "url": "https://www.corvetteactioncenter.com/specs/c2/1963/grandsport/gsspecs.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Dedicated 1963 Grand Sport race-car specification, including gearbox and clutch. Drivetrain: “Four-speed manual; Single dry-plate” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch. The source does not specify the gate layout or running-shift technique."
+    },
+    {
+      "source_id": "rmsothebys.1963-corvette-grand-sport-003-cockpit",
+      "title": "1963 Chevrolet Corvette Grand Sport | The Monterey Auction 2026",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/auctions/mo26/lots/r0081-1963-chevrolet-corvette-grand-sport/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Chassis 003, one of the five 1963 Corvette Grand Sports; the lot gallery's interior photograph of the restored 1964 Sebring-specification cockpit. Interior cockpit image in the lot gallery; direct image https://cdn.rmsothebys.com/1/0/8/f/d/6/108fd61cda1caf0dbca6d44bc6e28bfb16df7e4d.webp: “Visual observation: the cockpit photograph shows a continuous circular three-spoke wheel, a visible manual lever, and three pedals.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct inspection of the original gallery image. The lot identifies chassis 003 and describes its restoration as returning the car to authentic 1964 Sebring specification. This is direct evidence for the photographed chassis/configuration, not an assertion that every Grand Sport component was identical."
+    },
+    {
+      "source_id": "pmr.local-live-corvette-grand-sport-controls.2.2.1.0",
+      "title": "Live PMR Corvette Grand Sport guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/115",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation pmr.corvette-grand-sport.20260911t212102865z-d95a183b by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "assettocorsa.countach-5000-qv-reference",
+      "title": "Assetto Corsa vehicle and DLC reference",
+      "publisher": "Assetto Corsa community reference",
+      "url": "https://de.wikipedia.org/wiki/Assetto_Corsa",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Reference identifying the AC Countach DLC variant as the 5000 Quattrovalvole. DLC vehicle list: “Lamborghini Countach 5000 Quattrovalvole” Reviewed for /identity/model, /identity/year. Used cautiously for variant identification; drivetrain facts are taken from the dedicated specification source."
+    },
+    {
+      "source_id": "lambocars.countach-25th-drivetrain",
+      "title": "Lamborghini Countach 25th Anniversario - Specs & Performance",
+      "publisher": "LamboCars",
+      "url": "https://www.lambocars.com/countach-25th-anniversary-specs-performance/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Countach family drivetrain description: ZF five-speed, all-synchromesh manual, hydraulically operated dry clutch. Drivetrain: “ZF five-speed + reverse manual all-synchromesh; Dry-single plate, hydraulically operated” Reviewed for /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch. The source is the closely related Countach 25th Anniversary drivetrain; it is used for the shared Countach manual gearbox family, not for trim-specific visual claims."
+    },
+    {
+      "source_id": "rmsothebys.1988-countach-5000-qv-cockpit",
+      "title": "1988 Lamborghini Countach 5000 Quattrovalvole by Bertone | Monaco 2024",
+      "publisher": "RM Sotheby's",
+      "url": "https://rmsothebys.com/auctions/mc24/lots/r0006-1988-lamborghini-countach-5000-quattrovalvole-by-bertone/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Individual 1988 Countach 5000 Quattrovalvole chassis ZA9C005A0JLA12395; the lot gallery's cockpit photograph showing the period road-car controls. Cockpit image in the lot gallery; direct image https://cdn.rmsothebys.com/0/d/2/0/a/d/0d20ad24d30d172abdb3b0c510d3e036ce8da904.webp: “Visual observation: the cockpit photograph shows a continuous circular three-spoke wheel, analog instruments, and a gated manual lever.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct inspection of the RM Sotheby's image. The lot identifies an individual 1988 5000 QV chassis and states it is one of 610 QV examples. The photographed wheel is evidence for that visible road-car configuration; exact applicability across the 1985-1988 family is retained at medium confidence."
+    },
+    {
+      "source_id": "ac.local-live-lamborghini-countach-controls.14923034",
+      "title": "Live AC Lamborghini Countach guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/116",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lamborghini-countach.20260911t212701555z-15d78051 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_lamborghini_countach', no declared version, data-acd sha256 8893ff7b68e4be84fdaec617e9d06f9652ef0f08463006f9b6d736bd3ae0bf97. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_lamborghini_countach",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "8893ff7b68e4be84fdaec617e9d06f9652ef0f08463006f9b6d736bd3ae0bf97"
+        }
+      }
+    },
+    {
+      "source_id": "lotuscars.2-eleven",
+      "title": "Lotus 2-Eleven - A track day dominator",
+      "publisher": "Lotus Cars",
+      "url": "https://www.lotuscars.com/en-GB/lotus-story/road-cars/2-eleven",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Lotus official model history, production period, standard 2-Eleven identity, and six-speed transmission. 2-Eleven statistics: “Year of production 2007-2010; Transmission 6-speed” Reviewed for /identity/manufacturer, /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. Manufacturer source; it does not settle the gate layout or driver technique."
+    },
+    {
+      "source_id": "lotus.2-eleven.service-notes",
+      "title": "Lotus Service Notes - 2-Eleven",
+      "publisher": "Lotus Cars",
+      "url": "https://lotus-center.vercel.app/files/s2-service.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Lotus service notes describing the 2-Eleven clutch and standard transmission hardware. 2-Eleven.F - Transmission: “uprated clutch cover assembly; uprated friction plate” Reviewed for /authentic_controls/transmission/standing_start_clutch. The notes establish a driver-operated clutch assembly but do not settle running-shift technique or the exact gate."
+    },
+    {
+      "source_id": "motortrend.2007-lotus-2-eleven-cockpit",
+      "title": "First Drive: Lotus 2-Eleven",
+      "publisher": "MotorTrend",
+      "url": "https://www.motortrend.com/reviews/lotus-2-eleven",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 2007 first-drive article for the standard Lotus 2-Eleven; the article's cockpit photograph of the tested car. Image 112_0702_04z lotus 2 eleven cockpit; direct image https://hips.hearstapps.com/mtg-prod/65ca30a6bcdb3c00084f5ff2/112-0702-04z-lotus-2-eleven-cockpit.jpg: “Visual observation: the cockpit photograph shows a continuous circular three-spoke wheel, a simple instrument cluster, and a manual lever.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Direct inspection of the MotorTrend cockpit image. The article identifies the first-drive car as a 2007 Lotus 2-Eleven and separately lists a six-speed manual transmission. The image does not show the pedal box clearly, so it is used only for visible wheel hardware."
+    },
+    {
+      "source_id": "ac.local-live-lotus-2-eleven-controls.14923034",
+      "title": "Live AC Lotus 2-Eleven guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/117",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lotus-2-eleven.20260911t213154255z-63b36525 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'lotus_2_eleven', no declared version, data-acd sha256 be9d771558246f799777d3794756601f3f87edda59d511bcf810983757908430. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "lotus_2_eleven",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "be9d771558246f799777d3794756601f3f87edda59d511bcf810983757908430"
+        }
+      }
+    },
+    {
+      "source_id": "lotus.gt4.official-spec",
+      "title": "The Lotus Sport 2-Eleven GT4 Supersport",
+      "publisher": "Lotus Sport",
+      "url": "https://autocatalogarchive.com/wp-content/uploads/2017/01/Lotus-2-Eleven-GT4-SS-2008.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: GT4 Supersport competition specification, transmission, clutch and shift systems. Technical specification, gearbox and gear shift layout: “Sequential 6-speed close ratio gearbox; push pull sequential with flat shift and auto blip systems; twin plate sintered clutch.” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/standing_start_clutch. Manufacturer competition specification; it does not establish every running-shift clutch detail."
+    },
+    {
+      "source_id": "lotus.gt4.cockpit-photo",
+      "title": "2011 Lotus 2-Eleven GT4 for sale",
+      "publisher": "Bring a Trailer",
+      "url": "https://bringatrailer.com/listing/2011-lotus-2-eleven-gt4/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Photo gallery for a GT4-prepared Lotus 2-Eleven, including the cockpit and steering wheel. Photo gallery cockpit image; wheel face and rim: “Visual observation: the photographed open-topped Sparco wheel is a conventional d-shaped rim with four front buttons and paddle controls behind it; no wheel-mounted display or shift-light strip is visible.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The listing identifies the car as a Lotus 2-Eleven GT4. The photographed wheel is treated as GT4 competition hardware, not standard 2-Eleven equipment."
+    },
+    {
+      "source_id": "ac.local-live-lotus-2-eleven-gt4-controls.14923034",
+      "title": "Live AC Lotus 2-Eleven GT4 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/118",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lotus-2-eleven-gt4.20260912t035231391z-39fd3295 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'lotus_2_eleven_gt4', no declared version, data-acd sha256 24dcc6dfe8a25a1991e5cdb8826e2f65c66dcf84dec0843984d2c0aa27fa64ea. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "lotus_2_eleven_gt4",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "24dcc6dfe8a25a1991e5cdb8826e2f65c66dcf84dec0843984d2c0aa27fa64ea"
+        }
+      }
+    },
+    {
+      "source_id": "lotus.type72.official",
+      "title": "Lotus Type 72",
+      "publisher": "Lotus Cars",
+      "url": "https://media.lotuscars.com/en/heritage-race-cars/lotus-type-72.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Type 72/72D identity, 1972 championship context and Hewland FG five-speed transmission. Transmission specification and Type 72D history: “Renamed the Type 72D; transmission: Hewland FG five-speed.” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type. Manufacturer heritage page; it does not specify the exact gate drawing or every driver technique."
+    },
+    {
+      "source_id": "hewland.fg.manual",
+      "title": "Maintenance Servicing of Hewland FT 200, FG 400, FGA & FGB Transaxle Gearbox Units",
+      "publisher": "Hewland Engineering",
+      "url": "https://hewlandclassic.com/assets/manuals/fg_400.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Hewland FG construction and selector components, used with the official Type 72 gearbox identification. Gearbox unit parts list and selector sections: “The manual identifies FG clutch rings, hubs, selector forks and selector rods; these are the face-dog racing gearbox components used for rapid manual selection.” Reviewed for /authentic_controls/transmission/gearbox_type. Component documentation establishes construction; it does not identify the individual restored car's current ratios."
+    },
+    {
+      "source_id": "motorsport.lotus72.cockpit",
+      "title": "The scintillating Lotus 72 gallery from our exclusive shoot",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/articles/single-seaters/f1/the-scintillating-lotus-72-gallery-from-our-exclusive-shoot/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Cockpit gallery including Lotus 72D chassis 72/D7 used during the 1972 title campaign. Gallery image Lotus-72-cockpit-2 and related cockpit views: “Visual observation: the cockpit shows a continuous conventional round three-spoke wheel and separate analog instruments; no wheel display, shift-light strip or open-top cutout is visible.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The page identifies the photographed car as 72/D7, an actual 1972 title-campaign chassis, so the wheel observation is applicable to this identity."
+    },
+    {
+      "source_id": "ac.local-live-lotus-72d-controls.14923034",
+      "title": "Live AC Lotus 72D guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/119",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lotus-72d.20260912t035653685z-334bdf06 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_lotus_72d', no declared version, data-acd sha256 adb5af5170306ece1b2a5b7e9c18b2f4775c83d39a2819e923dbed823d3a0171. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_lotus_72d",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "adb5af5170306ece1b2a5b7e9c18b2f4775c83d39a2819e923dbed823d3a0171"
+        }
+      }
+    },
+    {
+      "source_id": "lotus25.primotipo",
+      "title": "Lotus 25: Jim Clark: Monaco 1963…",
+      "publisher": "primotipo",
+      "url": "https://primotipo.com/2015/03/03/lotus-25-jim-clark-monaco-1963/",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Jim Clark's Lotus 25 cockpit photograph and period five-speed ZF gearbox identification. Opening cockpit photograph and accompanying caption: “Visual observation: the cockpit shows a continuous round leather-bound wheel, analog Smiths instruments and a separate right-hand manual gear lever; the caption identifies the five-speed ZF box.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/shift_actuation. The image is a period-specific Lotus 25 cockpit view; the photographed gate is not legible enough to classify as standard or dogleg."
+    },
+    {
+      "source_id": "zf.lotus.heritage",
+      "title": "70 Years of Lotus: Among Friends",
+      "publisher": "ZF",
+      "url": "https://www.zf.com/mobile/en/company/strategy/heritage_zf/stories/lotus02.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: ZF/Lotus gearbox heritage and Type 25 application. Lotus gearbox overview table and discussion: “ZF's Lotus overview lists the Type 25 among the Lotus cars using the ZF transmission family.” Reviewed for /identity/model, /authentic_controls/transmission/forward_gears. The source supports the ZF application but does not establish internal synchronizer construction for the exact chassis."
+    },
+    {
+      "source_id": "ac.local-live-lotus-type-25-controls.14923034",
+      "title": "Live AC Lotus Type 25 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/120",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lotus-type-25.20260912t040402248z-a50f7a4b by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_lotus_25', no declared version, data-acd sha256 7096b2e7ee21494a2743b9c9464ccee8c344b6abb49851ac194caeb096dcd9a7. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_lotus_25",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "7096b2e7ee21494a2743b9c9464ccee8c344b6abb49851ac194caeb096dcd9a7"
+        }
+      }
+    },
+    {
+      "source_id": "lotus49.zf.heritage",
+      "title": "70 Years of Lotus: Among Friends",
+      "publisher": "ZF",
+      "url": "https://www.zf.com/mobile/en/company/strategy/heritage_zf/stories/lotus02.html",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: ZF heritage overview listing the Lotus Type 49 application. Lotus gearbox overview table: “ZF's overview lists Type 49 among the Lotus Formula One applications.” Reviewed for /identity/model. Used with the period and Hewland sources to retain the model's documented gearbox variation."
+    },
+    {
+      "source_id": "lotus49.period-history",
+      "title": "Driving the Lotus 49: Grand Prix Crown Jewel",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/archive/article/august-2024/66/driving-the-lotus-49-grand-prix-crown-jewel/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Lotus 49 period history, cockpit and transmission context. Transmission discussion and cockpit section: “The article discusses the ZF gearbox as an early Type 49 issue and the preferred Hewland option; the cockpit uses a driver-operated lever.” Reviewed for /identity/real_world_identity_notes, /authentic_controls/transmission/shift_actuation. The article does not establish the exact first-gear side."
+    },
+    {
+      "source_id": "lotus49.cockpit-photo",
+      "title": "Lotus 49-cockpit",
+      "publisher": "William 74 / Flickr",
+      "url": "https://www.flickr.com/photos/williamdhopkins/3747267917",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Lotus 49 cockpit photograph showing the wheel and instrument panel. Full cockpit photograph: “Visual observation: the Lotus 49 has a conventional continuous round wheel with a separate analog instrument panel; no wheel display, shift-light strip or open-top cutout is visible.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The photo is specifically captioned Lotus 49 cockpit and is used only for visible hardware."
+    },
+    {
+      "source_id": "hewland.dg300.manual",
+      "title": "Hewland DG 300 manual",
+      "publisher": "Hewland Classic",
+      "url": "https://hewlandclassic.com/assets/manuals/dg_300.pdf",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Hewland DG300 construction and selector components used by the Type 49 racing installation. Gearbox components and selector sections: “The manual documents the DG300 clutch rings and selector mechanism, the face-dog racing construction used for rapid manual gear changes.” Reviewed for /authentic_controls/transmission/gearbox_type. Component manual establishes construction, not every restored-car ratio."
+    },
+    {
+      "source_id": "ac.local-live-lotus-type-49-controls.14923034",
+      "title": "Live AC Lotus Type 49 guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/121",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.lotus-type-49.20260912t040712276z-d8b967cf by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'lotus_49', no declared version, data-acd sha256 3956ef8db7ec41340fba231d7298f747d239d087382743e2229ebcade066e9b3. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "lotus_49",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "3956ef8db7ec41340fba231d7298f747d239d087382743e2229ebcade066e9b3"
+        }
+      }
+    },
+    {
+      "source_id": "maserati.250f.v12-history",
+      "title": "The 250F Maserati -- Part Three",
+      "publisher": "Motor Sport Magazine",
+      "url": "https://www.motorsportmagazine.com/archive/article/september-1986/31/the-250f-maserati-part-three/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 250F V12 development, chassis integration and five-speed transaxle. V12 development and transmission paragraphs: “The 60-degree V12 was fitted into the successful 250F chassis frame and mated to a five-speed transaxle.” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. Period technical history; it does not settle internal gearbox construction or gate layout."
+    },
+    {
+      "source_id": "maserati.250f.family-cockpit",
+      "title": "Maserati 250 F, Bj. 1958, Cockpit",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Maserati_250_F,_Bj._1958,_Cockpit_(2011-08-13_Sp).JPG",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Useful-resolution real 250F cockpit image used for the shared family wheel hardware; it is not used to distinguish six- versus twelve-cylinder transmission internals. Full-resolution cockpit photograph: “Visual observation: a conventional continuous wooden round wheel is in front of separate analog gauges; no wheel display, wheel shift-light strip or open-top cutout is visible.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Shared 250F cockpit hardware is applied conservatively to the V12 car; the photo is not treated as proof of its engine-specific gearbox."
+    },
+    {
+      "source_id": "maserati.250f.v12-photo",
+      "title": "Maserati 250F V12",
+      "publisher": "Ferraris and Other Things",
+      "url": "https://hyde1841.blogspot.com/2015/09/maserati-250f-v12.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Photographs of a 1957 Maserati 250F V12, including the cockpit/wheel area visible above the exposed engine bay. 1957 Maserati 250F V12 photograph with cockpit visible: “Visual observation: the V12 car retains the large conventional wooden round wheel architecture of the 250F family.” Reviewed for /authentic_controls/steering/wheel_rim/shape. The image is used for wheel-family continuity, not for unseen pedal or gearbox claims."
+    },
+    {
+      "source_id": "ac.local-live-maserati-250f-12-cylinder-controls.14923034",
+      "title": "Live AC Maserati 250F 12 cylinder guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/122",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_maserati_250f_12cyl', no declared version, data-acd sha256 3811683d50a8f58cbf69e18562edda0a4fa8ccc660ff199fa36bd3a42477926b. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_maserati_250f_12cyl",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "3811683d50a8f58cbf69e18562edda0a4fa8ccc660ff199fa36bd3a42477926b"
+        }
+      }
+    },
+    {
+      "source_id": "maserati.250f.technical-overview",
+      "title": "8W - What? - Maserati 250F",
+      "publisher": "FORIX / Autosport",
+      "url": "https://forix.autosport.com/8w/250f.html",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Standard Maserati 250F straight-six technical details and four-speed gearbox. Technical specification and engine/gearbox description: “The 250F overview identifies the in-line six-cylinder engine and a four-speed gearbox in unit with the engine.” Reviewed for /identity/model, /identity/year, /authentic_controls/transmission/forward_gears. Technical overview; it does not settle synchronizer construction."
+    },
+    {
+      "source_id": "maserati.250f.cockpit-controls",
+      "title": "Maserati 250F",
+      "publisher": "GP Replicas",
+      "url": "https://www.gpreplicas.org/50s-era/maserati-250f/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: 250F cockpit control description and period hardware images, including clutch pedal, four-speed lever and wooden wheel. Cockpit/control description and image: “The description places the clutch on the left, identifies a four-speed gearbox operated by a small lever, and describes a large wooden-rimmed steering wheel.” Reviewed for /authentic_controls/transmission/shift_actuation, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/steering/wheel_rim/shape. The page is a secondary model/technical reference; the visible wheel architecture is corroborated by the Wikimedia 250F cockpit image."
+    },
+    {
+      "source_id": "maserati.250f.family-cockpit-commons",
+      "title": "Maserati 250 F, Bj. 1958, Cockpit",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Maserati_250_F,_Bj._1958,_Cockpit_(2011-08-13_Sp).JPG",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Useful-resolution real 250F cockpit image used for visible wheel hardware. Full-resolution cockpit photograph: “Visual observation: a continuous wooden round wheel sits before separate analog gauges; no display, shift-light strip or open-top cutout is visible on the wheel.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. The exact engine variant is not claimed from this image; it establishes visible 250F-family wheel hardware."
+    },
+    {
+      "source_id": "ac.local-live-maserati-250f-6-cylinder-controls.14923034",
+      "title": "Live AC Maserati 250F 6 cylinder guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/123",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.maserati-250f-6-cylinder.20260912t041814562z-967bca56 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_maserati_250f_6cyl', no declared version, data-acd sha256 77c9a917e1fa43a0614a7b01f2dbb7b874964035b5bcd5c3126ea857ac271975. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_maserati_250f_6cyl",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "77c9a917e1fa43a0614a7b01f2dbb7b874964035b5bcd5c3126ea857ac271975"
+        }
+      }
+    },
+    {
+      "source_id": "commons.mazda.787b.cockpit-detail",
+      "title": "Mazda 787B No. 55 cockpit detail at Mazda Museum",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Mazda_787B_No._55_(cockpit_detail)_at_Mazda_Museum.jpg",
+      "source_type": "community-research",
+      "retrieved_at": "2026-09-11",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Full-resolution 1991 Le Mans-winning-specification Mazda 787B cockpit detail at the Mazda Museum. Full-resolution 3,916 x 2,202 cockpit-detail image: “Visual observation: the wheel is a continuous round three-spoke rim with no control-panel face, display, shift-light strip or open-top cutout; the digital instruments are mounted on the dashboard ahead of the wheel.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Exact 1991 Le Mans-winning-specification cockpit image; it resolves the real-car wheel fields that were previously unknown."
+    },
+    {
+      "source_id": "ac.local-live-mazda-787b-controls.14923034",
+      "title": "Live AC Mazda 787B guided-verification drive",
+      "publisher": "Local AC observation",
+      "url": "https://github.com/Milky28/as-driven/issues/124",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ac.mazda-787b.20260912t042222319z-2536234a by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_mazda_787b', no declared version, data-acd sha256 a4173b0995b74d55419febe2b5de6da0b7f444510698520d6da4ef9fec85a3b6. This identifies the installed package, not the real car the record describes.",
+      "implementation": {
+        "content_id": "ks_mazda_787b",
+        "author": null,
+        "declared_version": null,
+        "fingerprint": {
+          "scope": "data-acd",
+          "algorithm": "sha256",
+          "digest": "a4173b0995b74d55419febe2b5de6da0b7f444510698520d6da4ef9fec85a3b6"
+        }
+      }
+    },
+    {
+      "source_id": "24h-en-piste.panoz-esperante-gtr1-1998-45",
+      "title": "Panoz Esperante GTR-1 #45, 1998 24 Hours of Le Mans",
+      "publisher": "24h-en-piste",
+      "url": "https://www.24h-en-piste.com/en/AfficherDetails.php?Annee=1998&Numero=45&Type=Course",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Exact 1998 Le Mans Panoz Esperante GTR-1 #45, chassis 007, with race specification summary. Car identity and technical table: “PANOZ Esperante GTR-1; number 45; class LM GT1; Clutch AP 4 disques métal; Gear Box X-Trac séquentielle; 6 speeds.” Reviewed for /identity/display_name, /identity/class, /authentic_controls/transmission/forward_gears, /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern. The race summary establishes a physical AP four-disc metal clutch assembly, but does not say how the driver used the clutch for launch, upshifts, or downshifts and does not establish cut or blip behavior."
+    },
+    {
+      "source_id": "autoweek.panoz-esperante-gtr1-2016",
+      "title": "Twenty years later, the Esperante GTR-1 is still Stupefying",
+      "publisher": "Autoweek",
+      "url": "https://www.autoweek.com/news/a1847776/twenty-years-later-esperante-gtr-1-still-stupefying/",
+      "source_type": "secondary",
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Road-legal homologation-special article distinguishing its finished cockpit and ZF five-speed substitute from the racing siblings. Race-car comparison, paragraphs beginning 'This is the original GTR-1': “A high-performance ZF five-speed gearbox was sourced as a street-able substitute for the race cars' Xtrac six-speed sequential transmission.” Reviewed for /identity/real_world_identity_notes, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. Used to prevent applying the road car's visible cockpit and road gearbox to the race specification. Its description of careful rev-matching concerns the road-legal ZF car, not the race-car technique."
+    },
+    {
+      "source_id": "panoz.flickr-esperante-gtr1-interior-2015",
+      "title": "Original GTR-1 pre-restoration - interior 3",
+      "publisher": "Panoz LLC",
+      "url": "https://www.flickr.com/photos/panozllc/22099860012/in/album-72157659342646938",
+      "source_type": "manufacturer",
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Exact scope: Manufacturer Flickr album photo 22099860012, taken 24 June 2015, showing the interior of the Panoz Esperante GTR-1 Le Mans Homologation Special before restoration; direct image reviewed at https://live.staticflickr.com/5753/22099860012_7ccbc9f077_h.jpg. Photo 22099860012, full-resolution image, cockpit and center console: “Visual observation: the photographed road-legal car has a continuous round three-spoke wheel, analog instruments, a floor-mounted manual lever, and no visible wheel-integrated display or shift-light array.” Reviewed for /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top. This is the mandatory cockpit-photo pass. The image is clear enough to inspect, but the album identifies the photographed configuration as the Le Mans Homologation Special. Because Autoweek documents that the road car used a ZF five-speed substitute, the image is retained as a reviewed lead and is not used to establish the race car's wheel or shifter configuration."
+    },
+    {
+      "source_id": "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95",
+      "title": "Live AMS2 Panoz Esperante GTR-1 guided-verification drive",
+      "publisher": "Local AMS2 observation",
+      "url": "https://github.com/Milky28/as-driven/issues/125",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-12",
+      "reuse_status": "facts-only-review",
+      "notes": "Guided-verification observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 by Jason Kinslow; AMS2 1.6.9.95. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
     }
   ]
 }

@@ -243,6 +243,211 @@
         "level": "high",
         "basis": "Panoz's official history and the PMR page identify the Esperante GTR-1 as a 1997 GT1 race car; the FIA homologation form valid from April 1997 identifies Panoz GTR and records six ratios with a sequential gear-change gate."
       }
+    },
+    {
+      "simulator": "ams2",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Panoz Esperante GTR-1"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Panoz Esperante GTR-1"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT1"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "yes",
+        "wheel_rim_type": {
+          "normalized": "d-shaped",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS2 1.6.9.95 via guided verification observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "required",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation ams2.panoz-esperante-gtr-1.20260912t153546794z-e8935512 directly recorded this behavior or cockpit value in the simulator version 1.6.9.95; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+          ]
+        }
+      ],
+      "verified_game_version": "1.6.9.95",
+      "verified_at": "2026-09-12",
+      "source_refs": [
+        "fia.panoz-gtr-gt1-homologation-1997",
+        "panoz.official-esperante-gtr1-history-2015",
+        "wikipedia.elan-motorsport-panoz-gtr1",
+        "24h-en-piste.panoz-esperante-gtr1-1998-45",
+        "autoweek.panoz-esperante-gtr1-2016",
+        "panoz.flickr-esperante-gtr1-interior-2015",
+        "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The FIA homologation form is valid from 1 April 1997 and identifies Panoz GTR; Panoz's manufacturer history identifies the Esperante GTR-1 endurance program from 1997 onward; and the exact 1998 Le Mans entry page identifies a Panoz Esperante GTR-1 in LM GT1. These sources match the existing simulator-independent record and distinguish the adjacent road and Q9 configurations."
+      }
     }
   ],
   "provenance": {
@@ -317,8 +522,34 @@
         ],
         "confidence": "high",
         "basis": "The FIA ratio table lists six forward gears and PMR reports six-speed sequential. The FIA gear-change gate and technical summary both identify sequential construction/selection. The technical summary describes a manual sequential gearbox operated by a cockpit gear lever; the PMR observation reports sequential-stick. FIA explicitly records the gear-change gate as sequential. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/simulators/1/identities"
+        ],
+        "source_refs": [
+          "fia.panoz-gtr-gt1-homologation-1997",
+          "panoz.official-esperante-gtr1-history-2015",
+          "wikipedia.elan-motorsport-panoz-gtr1",
+          "24h-en-piste.panoz-esperante-gtr1-1998-45",
+          "autoweek.panoz-esperante-gtr1-2016",
+          "panoz.flickr-esperante-gtr1-interior-2015",
+          "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+        ],
+        "confidence": "high",
+        "basis": "The FIA homologation form is valid from 1 April 1997 and identifies Panoz GTR; Panoz's manufacturer history identifies the Esperante GTR-1 endurance program from 1997 onward; and the exact 1998 Le Mans entry page identifies a Panoz Esperante GTR-1 in LM GT1. These sources match the existing simulator-independent record and distinguish the adjacent road and Q9 configurations."
+      },
+      {
+        "paths": [
+          "/simulators/1/behavior"
+        ],
+        "source_refs": [
+          "ams2.local-live-panoz-esperante-gtr-1-controls.1.6.9.95"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
-  "updated_at": "2026-09-08"
+  "updated_at": "2026-09-12"
 }

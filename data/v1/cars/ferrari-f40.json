@@ -1,0 +1,279 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ferrari-f40",
+  "identity": {
+    "display_name": "Ferrari F40",
+    "manufacturer": "Ferrari",
+    "model": "F40",
+    "year": {
+      "from": 1987,
+      "to": 1992,
+      "label": "1987–1992"
+    },
+    "class": "Road car",
+    "real_world_identity_notes": "The exact AC package is ferrari_f40 and is the road-going Ferrari F40, not the separate F40 LM competition car already represented elsewhere."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern; standing-start clutch use: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable.",
+      "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior, selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ferrari F40"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ferrari_f40"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.ferrari-f40.20260911t035131721z-f35fe541 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "dogleg-h",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-f40.20260911t035131721z-f35fe541 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-f40-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-11",
+      "source_refs": [
+        "ultimatecarpage.ferrari-f40",
+        "dkeng.ferrari-f40-press",
+        "ac.local-live-ferrari-f40-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "The reviewed production specification identifies the road F40's 1987–1992 production and five-speed manual; the local observation identifies the exact road-car package."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ultimatecarpage.ferrari-f40",
+          "dkeng.ferrari-f40-press",
+          "ac.local-live-ferrari-f40-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "The reviewed production specification identifies the road F40's 1987–1992 production and five-speed manual; the local observation identifies the exact road-car package."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ultimatecarpage.ferrari-f40",
+          "dkeng.ferrari-f40-press",
+          "ac.local-live-ferrari-f40-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Both reviewed road-car sources describe a five-speed manual. A dogleg five-speed manual is an H-pattern lever-operated gearbox. The H-pattern manual arrangement requires a clutch to pull away from rest under the project's derivation rules. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-f40-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-f40-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "ultimatecarpage.ferrari-f40",
+          "dkeng.ferrari-f40-press"
+        ],
+        "confidence": "high",
+        "basis": "Both reviewed road-car sources describe a five-speed manual. A dogleg five-speed manual is an H-pattern lever-operated gearbox. The H-pattern manual arrangement requires a clutch to pull away from rest under the project's derivation rules. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

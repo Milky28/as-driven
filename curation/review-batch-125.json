@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.9",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "ferrari-312-67",
+      "bundle": "build/review-cases/issue-105/staged.json",
+      "display_name": "Ferrari 312/67",
+      "class": "Formula One",
+      "manufacturer": "Ferrari",
+      "model": "312 F1-67",
+      "year": {
+        "from": 1967,
+        "to": 1967,
+        "label": "1967"
+      },
+      "real_world_identity_notes": "The exact AC package is ks_ferrari_312_67. Ferrari's 312 F1-67 is the 1967 Formula One car; this is distinct from later 312B/312T variants.",
+      "real_world_source_refs": [
+        "ferrari.312-f1-67.official",
+        "ultimatecarpage.ferrari-312-67"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Ferrari's official history identifies the 1967 312 F1-67; the local observation identifies the exact simulator package and telemetry name.",
+      "identity_basis": "Ferrari's official history identifies the 1967 312 F1-67; the local observation identifies the exact simulator package and telemetry name.",
+      "specification_basis": "The period 312/67 specification is described as a five-speed manual. The source describes a manual five-speed; no paddle or sequential control is documented for this 1967 car, so the period manual control is proposed as an H-pattern with medium confidence. An H-pattern manual racing transmission requires a clutch to pull away from rest under the project's derivation rules; the source does not indicate an automated launch system. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Throttle-lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. No automatic blip system is documented for this period manual car; this is a cautious period-control proposal, not a claim that every restored car lacks one. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-312-67-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1967 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/downshift/automatic_blip",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern; standing-start clutch use: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift automatic_blip: no.",
+        "The reviewed real-car sources do not establish running-shift technique, selector pattern or wheel topology; those baseline fields remain unknown.",
+        "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/105",
+      "live_source_notes": "Guided-verification observation ac.ferrari-312-67.20260911t033237524z-9a5149e7 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_ferrari_312_67', no declared version, data-acd sha256 c0b01216dcc1026b011b3d83e86e09c12002ab0f281627e3b8a6020cd301e78e. This identifies the installed package, not the real car the record describes."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.22",
+  "approved_at": "2026-09-11",
+  "record_id": "lotus-2-eleven-gt4",
+  "simulator": "ac",
+  "telemetry_name": "Lotus 2-Eleven GT4",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.lotus-2-eleven-gt4.20260912t035231391z-39fd3295",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "throttle_lift": "not-required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "manual_blip": "not-required",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2008-2009 Lotus Sport 2-Eleven GT4 Supersport identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources."
+}

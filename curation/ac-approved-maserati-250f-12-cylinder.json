@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.26",
+  "approved_at": "2026-09-11",
+  "record_id": "maserati-250f-12-cylinder",
+  "simulator": "ac",
+  "telemetry_name": "Maserati 250F 12 cylinder",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1957 Maserati 250F T2 V12 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources."
+}

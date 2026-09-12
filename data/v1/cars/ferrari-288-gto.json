@@ -1,0 +1,216 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ferrari-288-gto",
+  "identity": {
+    "display_name": "Ferrari 288 GTO (1984–1985)",
+    "manufacturer": "Ferrari",
+    "model": "288 GTO",
+    "year": {
+      "from": 1984,
+      "to": 1985,
+      "label": "1984–1985"
+    },
+    "class": "Road car",
+    "real_world_identity_notes": "The exact AC package is ks_ferrari_288_gto. The Ferrari GTO telemetry name maps to the road 288 GTO, not the later 599 GTO or a generic Ferrari GTO label."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 5,
+      "gearbox_type": "synchromesh",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "required",
+        "throttle_lift": "required",
+        "automatic_cut": "no",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "optional",
+        "automatic_blip": "no"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "unknown",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: synchromesh; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: required; transmission upshift throttle_lift: required; transmission upshift automatic_cut: no; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: optional; transmission downshift automatic_blip: no; wheel-rim shape: round; integrated wheel display: no; conventional rim open-top section: no.",
+      "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Ferrari GTO"
+        },
+        {
+          "kind": "internal-id",
+          "value": "ks_ferrari_288_gto"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "no",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.ferrari-gto.20260911t035552301z-ecf44ac3 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.ferrari-gto.20260911t035552301z-ecf44ac3 refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation ac.ferrari-gto.20260911t035552301z-ecf44ac3 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-gto-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "dogleg-h",
+          "condition": "The guided observation ac.ferrari-gto.20260911t035552301z-ecf44ac3 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-ferrari-gto-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-11",
+      "source_refs": [
+        "ferrari.gto-technical-spec-2024",
+        "fast-autos.ferrari-288-gto",
+        "ac.local-live-ferrari-gto-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Ferrari's technical legacy material identifies the 288 GTO and its five-speed manual; the local package id disambiguates the AC content."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "ferrari.gto-technical-spec-2024",
+          "fast-autos.ferrari-288-gto",
+          "ac.local-live-ferrari-gto-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Ferrari's technical legacy material identifies the 288 GTO and its five-speed manual; the local package id disambiguates the AC content."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "ferrari.gto-technical-spec-2024",
+          "fast-autos.ferrari-288-gto",
+          "ac.local-live-ferrari-gto-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Both reviewed sources describe a five-speed manual. The secondary technical description explicitly calls the five-speed fully synchronized. A fully synchronized manual road gearbox is described; no sequential or paddle actuation is documented. The H-pattern manual road gearbox requires a clutch to pull away from rest under the project's derivation rules. The established synchromesh construction settles ordinary running-shift technique as clutch-required under the project's derivation rules. The road car is described as a conventional manual rather than an electronically managed shift system; no automatic cut is part of the documented control arrangement. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Synchromesh construction settles ordinary running-shift clutch technique as required. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The project's documented derivation for synchromesh records a manual downshift blip as optional: it eases the synchronizers but is not required for engagement. The documented road car is a conventional manual with no automatic throttle-blip system described. The reviewed source describes a conventional three-spoke leather steering wheel, supporting a round conventional rim rather than a GT-formula or open-top control face. The source describes a conventional road-car wheel and dash instrumentation, not a wheel-mounted display. A conventional three-spoke leather wheel is described; no open-top racing rim is documented. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/steering/wheel_rim/shift_lights."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-gto-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-ferrari-gto-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "ferrari.gto-technical-spec-2024",
+          "fast-autos.ferrari-288-gto"
+        ],
+        "confidence": "high",
+        "basis": "Both reviewed sources describe a five-speed manual. The secondary technical description explicitly calls the five-speed fully synchronized. A fully synchronized manual road gearbox is described; no sequential or paddle actuation is documented. The H-pattern manual road gearbox requires a clutch to pull away from rest under the project's derivation rules. The established synchromesh construction settles ordinary running-shift technique as clutch-required under the project's derivation rules. The road car is described as a conventional manual rather than an electronically managed shift system; no automatic cut is part of the documented control arrangement. Manual blip is a downshift action and is not applicable to the upshift field. Automatic blip is a downshift action and is not applicable to the upshift field. Synchromesh construction settles ordinary running-shift clutch technique as required. Throttle lift is modeled only for upshifts in this schema. Automatic cut is modeled only for upshifts in this schema. The project's documented derivation for synchromesh records a manual downshift blip as optional: it eases the synchronizers but is not required for engagement. The documented road car is a conventional manual with no automatic throttle-blip system described. The reviewed source describes a conventional three-spoke leather steering wheel, supporting a round conventional rim rather than a GT-formula or open-top control face. The source describes a conventional road-car wheel and dash instrumentation, not a wheel-mounted display. A conventional three-spoke leather wheel is described; no open-top racing rim is documented. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/steering/wheel_rim/shift_lights."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.23",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "lotus-72d",
+      "bundle": "build/review-cases/issue-119/staged.json",
+      "display_name": "Lotus 72D",
+      "class": "Formula One",
+      "manufacturer": "Lotus",
+      "model": "Type 72D",
+      "year": {
+        "from": 1972,
+        "to": 1972,
+        "label": "1972 Lotus Type 72D"
+      },
+      "real_world_identity_notes": "The AC Lotus 72D maps to the 1972 Team Lotus Formula One Type 72D, not the later road-going Elise Type 72D edition.",
+      "real_world_source_refs": [
+        "lotus.type72.official",
+        "hewland.fg.manual",
+        "motorsport.lotus72.cockpit"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Lotus's heritage specification names the Type 72 transmission as a Hewland FG five-speed and identifies the 72D as the 1972 Formula One car; the period-style cockpit source matches the submitted identity.",
+      "identity_basis": "Lotus's heritage specification names the Type 72 transmission as a Hewland FG five-speed and identifies the 72D as the 1972 Formula One car; the period-style cockpit source matches the submitted identity.",
+      "specification_basis": "Lotus specifies a Hewland FG five-speed. The car-specific source identifies the Hewland FG; Hewland's construction manual identifies its face-dog clutch rings and selector hardware. The five-speed manual racing box is operated by the visible driver gear lever rather than paddles; the gate itself is not legible enough to establish the exact pattern. An H-pattern driver-shifted racing gearbox requires declutching to pull away from rest under the project's derivation. A Hewland face-dog racing gearbox is driven with clutchless running upshifts; the clutch remains a launch control. Hewland's dog-engagement technique requires removing engine driving load during the change; this is the supported throttle-lift technique, not a simulator observation. The period manual FG installation has no documented electronic cut system; the reviewed sources describe mechanical driver unloading instead. Manual blip is a downshift action in this model. Automatic blip is not an upshift action for this gearbox. The dogbox construction permits the authentic running downshift without clutch operation when the driver matches the shaft speed. Throttle lift is modeled for upshift unloading, not as a downshift field here. No downshift cut action is documented for the mechanical FG installation. A dogbox does not synchronize engine speed; the driver must match revs for a clean running downshift. The period mechanical installation has no documented automatic blip system. The inspected 72/D7 cockpit photos show a conventional continuous round rim. The wheel has no readout; instruments are separate analog gauges. No wheel-mounted shift-light strip or lamps are visible. The photographed rim is a closed circular wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "simulator_overrides": [],
+      "confidence_notes": "The exact 1972 Lotus Type 72D identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_blip",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/automatic_cut",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: dogbox; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: required; transmission upshift automatic_cut: no; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: not required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: required; transmission downshift automatic_blip: no; wheel-rim shape: round; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+        "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+        "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/119",
+      "live_source_notes": "Guided-verification observation ac.lotus-72d.20260912t035653685z-334bdf06 by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_lotus_72d', no declared version, data-acd sha256 adb5af5170306ece1b2a5b7e9c18b2f4775c83d39a2819e923dbed823d3a0171. This identifies the installed package, not the real car the record describes."
+    }
+  ]
+}

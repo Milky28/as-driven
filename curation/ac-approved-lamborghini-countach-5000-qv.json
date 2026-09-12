@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.20",
+  "approved_at": "2026-09-11",
+  "record_id": "lamborghini-countach-5000-qv",
+  "simulator": "ac",
+  "telemetry_name": "Lamborghini Countach",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.lamborghini-countach.20260911t212701555z-15d78051",
+  "approved_controls": {
+    "forward_gears": 5,
+    "shift_actuation": "h-pattern",
+    "standing_start_clutch": "required",
+    "automatic_cut": "no",
+    "automatic_blip": "no",
+    "manual_blip": "optional",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no",
+    "running_shift_clutch": "required"
+  },
+  "confidence_notes": "The exact 1985-1988 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "staged_record_id": "lamborghini-countach"
+}

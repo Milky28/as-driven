@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.26",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "maserati-250f-12-cylinder",
+      "bundle": "build/review-cases/issue-122/staged.json",
+      "display_name": "Maserati 250F 12 cylinder",
+      "class": "Formula One",
+      "manufacturer": "Maserati",
+      "model": "250F T2 12C",
+      "year": {
+        "from": 1957,
+        "to": 1957,
+        "label": "1957 Maserati 250F T2 V12"
+      },
+      "real_world_identity_notes": "The AC package maps to Maserati's 1957 250F T2/V12 experimental Formula One specification, which used the 250F chassis family and a five-speed transaxle rather than the standard six-cylinder configuration.",
+      "real_world_source_refs": [
+        "maserati.250f.v12-history",
+        "maserati.250f.family-cockpit",
+        "maserati.250f.v12-photo"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The period Motor Sport history identifies the V12 250F development, its 250F chassis application and the five-speed transaxle; the AC package explicitly names the twelve-cylinder variant.",
+      "identity_basis": "The period Motor Sport history identifies the V12 250F development, its 250F chassis application and the five-speed transaxle; the AC package explicitly names the twelve-cylinder variant.",
+      "specification_basis": "The source explicitly states the V12 was mated to a five-speed transaxle. The 250F is a driver-operated manual transaxle with a period lever layout; the reviewed photos do not expose a legible gate, so confidence is deliberately low. The 250F family has a physical clutch and driver-operated manual transmission; the V12 retained the 250F chassis control arrangement. Manual blip is modeled as a downshift action. Automatic blip is modeled as a downshift action. Throttle lift is modeled for upshift technique here. No downshift cut action is documented. The V12 photograph and the full-resolution 250F cockpit image show the conventional large wooden round rim. The inspected wheel carries no display; gauges are separate. No wheel-mounted shift lights are visible. The photographed conventional rim is closed and continuous. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "required",
+          "condition": "The guided observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a refused the clutchless coast downshift and accepted the repeated downshift after the driver manually blipped in simulator version 14923034. This establishes simulator behavior, not the real car's gearbox construction or authentic blip requirement.",
+          "confidence": {
+            "level": "verified",
+            "basis": "The complete two-stage downshift test was observed live."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-250f-12-cylinder-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-250f-12-cylinder-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "no",
+          "condition": "The guided observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-250f-12-cylinder-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "required",
+          "condition": "The guided observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-maserati-250f-12-cylinder-controls.14923034"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 1957 Maserati 250F T2 V12 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/manual_blip"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; shift actuation: h pattern; standing-start clutch use: required; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; wheel-rim shape: round; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+        "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+        "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/122",
+      "live_source_notes": "Guided-verification observation ac.maserati-250f-12-cylinder.20260912t041233429z-fddb6c7a by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'ks_maserati_250f_12cyl', no declared version, data-acd sha256 3811683d50a8f58cbf69e18562edda0a4fa8ccc660ff199fa36bd3a42477926b. This identifies the installed package, not the real car the record describes."
+    }
+  ]
+}

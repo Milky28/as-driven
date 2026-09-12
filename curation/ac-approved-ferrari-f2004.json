@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.12",
+  "approved_at": "2026-09-11",
+  "record_id": "ferrari-f2004",
+  "simulator": "ac",
+  "telemetry_name": "Ferrari F2004",
+  "observed_game_version": "14923034",
+  "observed_through": "SimHub guided verification observation ac.ferrari-f2004.20260911t034431038z-76215f96",
+  "approved_controls": {
+    "forward_gears": 7,
+    "shift_actuation": "sequential-paddles",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "yes",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "not-applicable",
+    "running_shift_clutch": "not-required"
+  },
+  "confidence_notes": "The exact 2004 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources."
+}

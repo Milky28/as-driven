@@ -1,0 +1,204 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "lotus-2-eleven-gt4",
+  "identity": {
+    "display_name": "Lotus 2-Eleven GT4",
+    "manufacturer": "Lotus",
+    "model": "2-Eleven GT4",
+    "year": {
+      "from": 2008,
+      "to": 2009,
+      "label": "2008-2009 Lotus Sport 2-Eleven GT4 Supersport"
+    },
+    "class": "GT4 sports car",
+    "real_world_identity_notes": "The AC package maps to the Lotus Sport 2-Eleven GT4 Supersport competition specification, not the standard road/track 2-Eleven."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "sequential",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "not-required",
+        "automatic_blip": "yes"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "d-shaped",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "yes",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: sequential; shift actuation: sequential stick; shift pattern: sequential; standing-start clutch use: required; transmission upshift throttle_lift: not required; transmission upshift automatic_cut: yes; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: not required; transmission downshift automatic_blip: yes; wheel-rim shape: d shaped; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: yes.",
+      "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "ac",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Lotus 2-Eleven GT4"
+        },
+        {
+          "kind": "internal-id",
+          "value": "lotus_2_eleven_gt4"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "yes",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AC 14923034 via guided verification observation ac.lotus-2-eleven-gt4.20260912t035231391z-39fd3295 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation ac.lotus-2-eleven-gt4.20260912t035231391z-39fd3295 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation ac.lotus-2-eleven-gt4.20260912t035231391z-39fd3295 directly recorded this behavior or cockpit value in the simulator version 14923034; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+          ]
+        }
+      ],
+      "verified_game_version": "14923034",
+      "verified_at": "2026-09-12",
+      "source_refs": [
+        "lotus.gt4.official-spec",
+        "lotus.gt4.cockpit-photo",
+        "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Lotus Sport's competition specification identifies the GT4 Supersport as a 2009 SRO-eligible 2-Eleven with a six-speed sequential gearbox, flat shift and automatic blip; the AC package name and six-speed sequential behavior agree."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "lotus.gt4.official-spec",
+          "lotus.gt4.cockpit-photo",
+          "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Lotus Sport's competition specification identifies the GT4 Supersport as a 2009 SRO-eligible 2-Eleven with a six-speed sequential gearbox, flat shift and automatic blip; the AC package name and six-speed sequential behavior agree."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "lotus.gt4.official-spec",
+          "lotus.gt4.cockpit-photo",
+          "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Lotus specifies a six-speed close-ratio gearbox. Lotus specifies a sequential six-speed gearbox. The specification describes push-pull sequential operation and the cockpit photo shows a competition wheel/shift control; it does not justify changing the real-car actuation to a simulator paddle assumption. A sequential gearbox has sequential selection rather than an H gate. The competition specification identifies a physical twin-plate clutch; launch use is the supported standing-start conclusion. Lotus explicitly specifies flat shift operation. Flat-shift operation is the documented automatic torque-interruption behavior. Manual blip is a downshift action, not an upshift action. Automatic blip is specified for downshifts, not upshifts. Throttle-lift is modeled for upshift technique in this record. The specification documents flat shift for upshifts, not a downshift cut. The documented system provides automatic blip, so manual blip is not the authentic driver action. Lotus explicitly specifies an auto-blip system. The inspected GT4 cockpit photograph shows a conventional open-top, flattened-rim competition wheel rather than a fixed-grip control-panel rim. No readout is visible on the wheel face; the cockpit instruments are separate. No wheel-mounted shift-light strip or lamps are visible in the inspected image. The photographed wheel is explicitly open-topped and the upper rim section is absent. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "ac.local-live-lotus-2-eleven-gt4-controls.14923034"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_blip",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/manual_blip",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "lotus.gt4.official-spec",
+          "lotus.gt4.cockpit-photo"
+        ],
+        "confidence": "high",
+        "basis": "Lotus specifies a six-speed close-ratio gearbox. Lotus specifies a sequential six-speed gearbox. The specification describes push-pull sequential operation and the cockpit photo shows a competition wheel/shift control; it does not justify changing the real-car actuation to a simulator paddle assumption. A sequential gearbox has sequential selection rather than an H gate. The competition specification identifies a physical twin-plate clutch; launch use is the supported standing-start conclusion. Lotus explicitly specifies flat shift operation. Flat-shift operation is the documented automatic torque-interruption behavior. Manual blip is a downshift action, not an upshift action. Automatic blip is specified for downshifts, not upshifts. Throttle-lift is modeled for upshift technique in this record. The specification documents flat shift for upshifts, not a downshift cut. The documented system provides automatic blip, so manual blip is not the authentic driver action. Lotus explicitly specifies an auto-blip system. The inspected GT4 cockpit photograph shows a conventional open-top, flattened-rim competition wheel rather than a fixed-grip control-panel rim. No readout is visible on the wheel face; the cockpit instruments are separate. No wheel-mounted shift-light strip or lamps are visible in the inspected image. The photographed wheel is explicitly open-topped and the upper rim section is absent. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/downshift/clutch."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}

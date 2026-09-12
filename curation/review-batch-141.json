@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.25",
+  "approved_at": "2026-09-11",
+  "records": [
+    {
+      "record_id": "lotus-type-49",
+      "bundle": "build/review-cases/issue-121/staged.json",
+      "display_name": "Lotus Type 49",
+      "class": "Formula One",
+      "manufacturer": "Lotus",
+      "model": "Type 49",
+      "year": {
+        "from": 1967,
+        "to": 1969,
+        "label": "1967-1969 Lotus Type 49"
+      },
+      "real_world_identity_notes": "The AC Lotus Type 49 maps to the Cosworth DFV-powered 1967-1969 Formula One Type 49 family; early cars used ZF before the more durable Hewland installation, so this record retains the period family scope and names the Hewland evidence used for the represented racing setup.",
+      "real_world_source_refs": [
+        "lotus49.zf.heritage",
+        "lotus49.period-history",
+        "lotus49.cockpit-photo",
+        "hewland.dg300.manual"
+      ],
+      "confidence": "high",
+      "confidence_basis": "The reviewed Lotus 49 history identifies the model and its ZF-to-Hewland transmission transition; the cockpit image and official/technical sources match the submitted car.",
+      "identity_basis": "The reviewed Lotus 49 history identifies the model and its ZF-to-Hewland transmission transition; the cockpit image and official/technical sources match the submitted car.",
+      "specification_basis": "The Type 49 racing installation is documented as a five-speed manual/Hewland family box. The Hewland DG300 manual identifies face-dog clutch rings and selector components. The Type 49 uses a driver-operated lever; the visible cockpit is consistent with the manual H-pattern installation. An H-pattern driver-shifted racing gearbox requires declutching to launch from rest. Hewland dog engagement is driven with clutchless running upshifts. Driver unloading of the dog ring is the documented mechanical technique. No electronic cut system is documented for the period manual installation. Manual blip is a downshift action. Automatic blip is a downshift action and no such system is documented. The dogbox permits authentic running downshifts without clutch operation when the driver matches revs. Throttle lift is modeled for upshift unloading. No downshift cut action is documented. Dog engagement requires manual rev matching on the downshift. The period installation has no documented automatic blip system. The inspected Lotus 49 cockpit image shows a continuous round conventional rim. No readout is carried on the wheel. No wheel-mounted shift lights are visible. The rim is closed and continuous. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/shift_pattern.",
+      "control_overrides": {
+        "gearbox_type": "dogbox",
+        "upshift": {
+          "clutch": "not-required",
+          "throttle_lift": "required",
+          "automatic_cut": "no",
+          "manual_blip": "not-applicable",
+          "automatic_blip": "not-applicable"
+        },
+        "downshift": {
+          "clutch": "not-required",
+          "throttle_lift": "not-applicable",
+          "automatic_cut": "not-applicable",
+          "manual_blip": "required",
+          "automatic_blip": "no"
+        }
+      },
+      "simulator_overrides": [],
+      "confidence_notes": "The exact 1967-1969 Lotus Type 49 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/steering/wheel_rim/integrated_display",
+        "/authentic_controls/steering/wheel_rim/open_top",
+        "/authentic_controls/steering/wheel_rim/shape",
+        "/authentic_controls/steering/wheel_rim/shift_lights",
+        "/authentic_controls/transmission/downshift/automatic_blip",
+        "/authentic_controls/transmission/downshift/automatic_cut",
+        "/authentic_controls/transmission/downshift/clutch",
+        "/authentic_controls/transmission/downshift/manual_blip",
+        "/authentic_controls/transmission/downshift/throttle_lift",
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/gearbox_type",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/standing_start_clutch",
+        "/authentic_controls/transmission/upshift/automatic_blip",
+        "/authentic_controls/transmission/upshift/automatic_cut",
+        "/authentic_controls/transmission/upshift/clutch",
+        "/authentic_controls/transmission/upshift/manual_blip",
+        "/authentic_controls/transmission/upshift/throttle_lift"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 5; gearbox construction: dogbox; shift actuation: h pattern; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: required; transmission upshift automatic_cut: no; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift clutch: not required; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; transmission downshift manual_blip: required; transmission downshift automatic_blip: no; wheel-rim shape: round; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+        "The reviewed real-car sources do not establish selector pattern; those baseline fields remain unknown.",
+        "Assetto Corsa 14923034 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/121",
+      "live_source_notes": "Guided-verification observation ac.lotus-type-49.20260912t040712276z-d8b967cf by Jason Kinslow; AC 14923034. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering. Driven implementation: content id 'lotus_49', no declared version, data-acd sha256 3956ef8db7ec41340fba231d7298f747d239d087382743e2229ebcade066e9b3. This identifies the installed package, not the real car the record describes."
+    }
+  ]
+}

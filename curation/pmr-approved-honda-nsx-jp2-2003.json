@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.17",
+  "approved_at": "2026-09-11",
+  "record_id": "honda-nsx-jp2-2003",
+  "simulator": "pmr",
+  "telemetry_name": "NSX JP2",
+  "observed_game_version": "2.2.1.0",
+  "observed_through": "SimHub guided verification observation pmr.nsx-jp2.20260911t210902090z-f2728267",
+  "approved_controls": {
+    "forward_gears": 6,
+    "shift_actuation": "sequential-stick",
+    "shift_pattern": "sequential",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "no",
+    "wheel_rim_shape": "gt-formula",
+    "wheel_integrated_display": "yes",
+    "wheel_shift_lights": "yes",
+    "wheel_open_top": "not-applicable"
+  },
+  "confidence_notes": "The exact 2003 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "JP2",
+  "staged_record_id": "nsx-jp2"
+}

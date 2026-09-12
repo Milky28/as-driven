@@ -1,0 +1,231 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "chevrolet-corvette-grand-sport-1963",
+  "identity": {
+    "display_name": "Chevrolet Corvette Grand Sport (1963)",
+    "manufacturer": "Chevrolet",
+    "model": "Corvette Grand Sport",
+    "year": {
+      "from": 1963,
+      "to": 1963,
+      "label": "1963"
+    },
+    "class": "GT 60",
+    "real_world_identity_notes": "This is the five-car 1963 Corvette Grand Sport race project, not a later road-going Corvette Grand Sport trim or a continuation car."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "round",
+        "integrated_display": "no",
+        "shift_lights": "no",
+        "open_top": "no",
+        "source_label": "live-cockpit-observation",
+        "notes": "Observed from the cockpit during the guided drive."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 4; shift actuation: h pattern; transmission upshift manual_blip: not applicable; transmission upshift automatic_blip: not applicable; transmission downshift throttle_lift: not applicable; transmission downshift automatic_cut: not applicable; standing-start clutch use: required; wheel-rim shape: round; integrated wheel display: no; wheel shift lights: no; conventional rim open-top section: no.",
+      "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or selector pattern; those baseline fields remain unknown.",
+      "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Corvette Grand Sport"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Corvette Grand Sport"
+        },
+        {
+          "kind": "class-id",
+          "value": "GT 60"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.corvette-grand-sport.20260911t212102865z-d95a183b by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The guided observation pmr.corvette-grand-sport.20260911t212102865z-d95a183b directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.corvette-grand-sport.20260911t212102865z-d95a183b directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "standard-h",
+          "condition": "The guided observation pmr.corvette-grand-sport.20260911t212102865z-d95a183b directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.corvette-grand-sport.20260911t212102865z-d95a183b directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.1.0",
+      "verified_at": "2026-09-11",
+      "source_refs": [
+        "pmr.corvette-grand-sport-history",
+        "corvette-action-center.1963-grand-sport",
+        "rmsothebys.1963-corvette-grand-sport-003-cockpit",
+        "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "PMR's official history identifies the five original 1963 Grand Sports, and a dedicated specification source gives the race car's four-speed manual and single dry-plate clutch."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr.corvette-grand-sport-history",
+          "corvette-action-center.1963-grand-sport",
+          "rmsothebys.1963-corvette-grand-sport-003-cockpit",
+          "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "PMR's official history identifies the five original 1963 Grand Sports, and a dedicated specification source gives the race car's four-speed manual and single dry-plate clutch."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr.corvette-grand-sport-history",
+          "corvette-action-center.1963-grand-sport",
+          "rmsothebys.1963-corvette-grand-sport-003-cockpit",
+          "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "The dedicated specification says four-speed manual. A period front-mounted manual four-speed is an H-pattern manual; no sequential or paddle control is documented. Downshift-only action. Modeled only for upshifts. A manual four-speed with a single dry-plate clutch requires the clutch to launch from rest. The exact chassis 003 cockpit image shows a continuous circular three-spoke rim. Applicability is medium because the record represents the five-car Grand Sport project while the photograph is chassis 003. The fully visible wheel face has no integrated screen; the instruments are mounted in the dashboard behind it. No wheel-mounted shift-light strip or lamps are visible on the fully exposed wheel face in the exact chassis 003 photograph. The photographed rim forms a continuous closed circumference rather than an open-top wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-corvette-grand-sport-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/steering/wheel_rim/integrated_display",
+          "/authentic_controls/steering/wheel_rim/open_top",
+          "/authentic_controls/steering/wheel_rim/shape",
+          "/authentic_controls/steering/wheel_rim/shift_lights",
+          "/authentic_controls/transmission/downshift/automatic_cut",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "pmr.corvette-grand-sport-history",
+          "corvette-action-center.1963-grand-sport",
+          "rmsothebys.1963-corvette-grand-sport-003-cockpit"
+        ],
+        "confidence": "high",
+        "basis": "The dedicated specification says four-speed manual. A period front-mounted manual four-speed is an H-pattern manual; no sequential or paddle control is documented. Downshift-only action. Modeled only for upshifts. A manual four-speed with a single dry-plate clutch requires the clutch to launch from rest. The exact chassis 003 cockpit image shows a continuous circular three-spoke rim. Applicability is medium because the record represents the five-car Grand Sport project while the photograph is chassis 003. The fully visible wheel face has no integrated screen; the instruments are mounted in the dashboard behind it. No wheel-mounted shift-light strip or lamps are visible on the fully exposed wheel face in the exact chassis 003 photograph. The photographed rim forms a continuous closed circumference rather than an open-top wheel. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip."
+      }
+    ]
+  },
+  "updated_at": "2026-09-11"
+}
