@@ -2232,7 +2232,8 @@ class ReviewSubmissionTests(unittest.TestCase):
     def test_batch_preparation_and_promotion_share_one_dataset_version(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repository = Path(directory) / "repository"
-            cases, first_case_dir, _ = self.prepare_promotable_case(repository)
+            cases, first_case_dir, proposal = self.prepare_promotable_case(repository)
+            expected_version = proposal["dataset_version"]
 
             second_observation = observation()
             second_observation["observation_id"] = (
@@ -2285,25 +2286,25 @@ class ReviewSubmissionTests(unittest.TestCase):
             import_research_result(repository, cases, 18, result_path)
 
             prepared = prepare_review_batch(repository, cases, [17, 18])
-            self.assertEqual("0.6.9", prepared["dataset_version"])
+            self.assertEqual(expected_version, prepared["dataset_version"])
             for issue_number in (17, 18):
                 manifest = json.loads(
                     (cases / f"issue-{issue_number}" / "review-manifest.proposed.json")
                     .read_text(encoding="utf-8")
                 )
-                self.assertEqual("0.6.9", manifest["dataset_version"])
+                self.assertEqual(expected_version, manifest["dataset_version"])
 
             promoted = promote_review_batch(repository, cases, [17, 18], approved=True)
-            self.assertEqual("0.6.9", promoted["dataset_version"])
+            self.assertEqual(expected_version, promoted["dataset_version"])
             self.assertEqual(2, len(promoted["records"]))
             self.assertTrue(Path(promoted["manifest"]).is_file())
             batch = json.loads(Path(promoted["manifest"]).read_text(encoding="utf-8"))
-            self.assertEqual("0.6.9", batch["dataset_version"])
+            self.assertEqual(expected_version, batch["dataset_version"])
             self.assertEqual(2, len(batch["records"]))
             index = json.loads(
                 (repository / "data" / "v1" / "index.json").read_text(encoding="utf-8")
             )
-            self.assertEqual("0.6.9", index["dataset_version"])
+            self.assertEqual(expected_version, index["dataset_version"])
             self.assertTrue(
                 (repository / "data" / "v1" / "cars" / "public-test-car-2021.json").is_file()
             )
