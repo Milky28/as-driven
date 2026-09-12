@@ -24,7 +24,11 @@ from .review_feedback import (
     publication_next_step,
     publish_review_result,
 )
-from .review_promotion import promote_review_case
+from .review_promotion import (
+    prepare_review_batch,
+    promote_review_batch,
+    promote_review_case,
+)
 from .review_proposal import (
     generate_driver_summary_proposal,
     prepare_review_proposal,
@@ -140,6 +144,12 @@ class WorkbenchApplication:
             "repository_status": self.repository_status(),
             "counts": counts,
             "cases": cases,
+            "batch_candidates": [
+                item["issue"]
+                for item in cases
+                if item.get("state") in {"final-review", "manifest-review"}
+                and item.get("submission_type") != "existing-car-research"
+            ],
         }
 
     def case_detail(self, issue: int) -> dict[str, Any]:
@@ -367,6 +377,48 @@ class WorkbenchApplication:
             return {"action": action, "result": published}
         raise WorkbenchError(f"unsupported action {action!r}")
 
+    def perform_batch(self, action: str, payload: dict[str, Any]) -> dict[str, Any]:
+        issues = payload.get("issues")
+        if not isinstance(issues, list) or not issues or any(
+            isinstance(issue, bool) or not isinstance(issue, int) for issue in issues
+        ):
+            raise WorkbenchError("batch issues must be a non-empty list of integers")
+        if action == "prepare-batch":
+            for issue in issues:
+                allowed = set(
+                    (self.case_detail(issue)["summary"] or {}).get("allowed_actions") or []
+                )
+                if "prepare-review" not in allowed:
+                    raise WorkbenchError(
+                        f"prepare-batch is not available for issue #{issue}"
+                    )
+            result = prepare_review_batch(
+                self.root,
+                self.cases_directory,
+                issues,
+                dataset_version=payload.get("dataset_version"),
+            )
+            return {"action": action, "result": result}
+        if action == "promote-batch":
+            if payload.get("approved") is not True:
+                raise WorkbenchError("batch promotion requires explicit approval")
+            for issue in issues:
+                allowed = set(
+                    (self.case_detail(issue)["summary"] or {}).get("allowed_actions") or []
+                )
+                if "promote" not in allowed:
+                    raise WorkbenchError(
+                        f"promote-batch is not available for issue #{issue}"
+                    )
+            result = promote_review_batch(
+                self.root,
+                self.cases_directory,
+                issues,
+                approved=True,
+            )
+            return {"action": action, "result": result}
+        raise WorkbenchError(f"unsupported batch action {action!r}")
+
     def finalize(self, payload: dict[str, Any]) -> dict[str, Any]:
         if payload.get("run_tests") is not True:
             raise WorkbenchError("release finalization requires the full test gate")
@@ -401,7 +453,7 @@ textarea{font:inherit}.summary-editor{margin:18px 0;padding:16px;border:1px soli
 <body>
 <main class="shell">
   <header class="top"><div><div class="eyebrow">Local review tools</div><h1>As Driven <span style="color:var(--amber)">Maintainer Workbench</span></h1><div class="subtitle">Synchronize contributions, hand off research, inspect proposals, and cross explicit release gates. Nothing promotes or publishes merely because it appears here.</div></div><div class="dataset"><div class="label">Current dataset</div><strong id="dataset">Loading…</strong><div id="repoState" class="case-meta"></div></div></header>
-  <div class="toolbar"><button id="sync" class="primary">Sync GitHub submissions</button><button id="refresh">Refresh local queue</button><button id="finalize" class="ghost">Finalize dataset release + run tests</button></div>
+  <div class="toolbar"><button id="sync" class="primary">Sync GitHub submissions</button><button id="refresh">Refresh local queue</button><button id="prepareBatch" class="ghost">Prepare batch</button><button id="promoteBatch" class="danger">Promote batch</button><button id="finalize" class="ghost">Finalize dataset release + run tests</button></div>
   <div id="progress" class="progress" role="status" aria-live="polite" hidden></div>
   <section class="stats" id="stats"></section>
   <section class="layout"><aside class="queue"><div class="queue-head"><div class="label">Contribution queue</div><strong id="queueCount">0 cases</strong></div><div id="caseList" class="case-list"></div></aside><article class="detail" id="detail"><div class="empty"><div><strong>Select a contribution</strong><br>Its evidence, artifacts, and permitted next actions will appear here.</div></div></article></section>
@@ -452,6 +504,9 @@ const runActionWithResearchGuard=runAction;
 runAction=async function(action){const editor=$('#researchResultInput');if(editor&&editor.value!==editor.dataset.savedValue)return toast('Save or discard the research-result edit before another action.',true);return runActionWithResearchGuard(action)}
 async function importResearch(event){const file=event.target.files[0];if(!file)return;document.body.classList.add('busy');try{const parsed=JSON.parse(await file.text());await api(`/api/cases/${selected}/actions/import-research`,{method:'POST',body:JSON.stringify({research_result:parsed,replace:event.target.dataset.replace==='true'})});toast('Research result imported');await refresh()}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
 async function refreshLocalQueue(){document.body.classList.add('busy');try{const r=await api('/api/actions/refresh',{method:'POST',body:'{}'});renderSnapshot(r.snapshot);if(selected&&r.snapshot.cases.some(c=>c.issue===selected))await selectCase(selected,false);const imported=r.research_results.imported.length,errors=r.research_results.errors;if(errors.length)toast(`Found ${r.research_results.found} research result(s), but issue #${errors[0].issue} could not be imported: ${errors[0].error}`,true);else if(imported)toast(`Imported ${imported} completed research result${imported===1?'':'s'}`);else toast('Local queue is up to date')}catch(e){toast(e.message,true)}finally{document.body.classList.remove('busy')}}
+function batchIssues(){const suggested=(snapshot?.batch_candidates||[]).join(',');const raw=prompt('Issue numbers to include, separated by commas:',suggested);if(raw===null)return null;const issues=raw.split(',').map(value=>Number(value.trim())).filter(value=>Number.isInteger(value)&&value>0);if(!issues.length||new Set(issues).size!==issues.length){toast('Enter each positive issue number exactly once.',true);return null}return issues.sort((a,b)=>a-b)}
+async function runBatchAction(action){const issues=batchIssues();if(!issues)return;if(action==='promote-batch'&&!confirm(`Promote issues ${issues.join(', ')} as one dataset patch? Review every selected proposal first.`))return;const button=action==='prepare-batch'?$('#prepareBatch'):$('#promoteBatch');beginProgress(button,action==='prepare-batch'?'Preparing batch…':'Promoting batch…',action==='prepare-batch'?'Preparing one shared dataset version and dry-running every proposal.':'Promoting every selected proposal atomically as one dataset version.');try{const payload={issues};if(action==='promote-batch')payload.approved=true;const result=await api(`/api/actions/${action}`,{method:'POST',body:JSON.stringify(payload)});toast(action==='prepare-batch'?`Prepared ${issues.length} proposals for dataset ${result.result.dataset_version}`:`Promoted ${issues.length} proposals as dataset ${result.result.dataset_version}`);await refresh()}catch(e){toast(e.message,true)}finally{endProgress(button)}}
+$('#prepareBatch').onclick=()=>runBatchAction('prepare-batch');$('#promoteBatch').onclick=()=>runBatchAction('promote-batch');
 $('#refresh').onclick=refreshLocalQueue;$('#sync').onclick=async()=>{const button=$('#sync');let outcome='';let failed=false;beginProgress(button,'Syncing...','Downloading and classifying GitHub submissions.');try{const r=await api('/api/actions/sync',{method:'POST',body:'{}'});outcome=`Sync complete: ${r.processed} processed, ${r.skipped} unchanged.`;toast(outcome);await refresh(false)}catch(e){failed=true;outcome=`Sync failed: ${e.message}`;toast(e.message,true)}finally{endProgress(button,outcome,failed)}};$('#finalize').onclick=async()=>{if(!confirm('Finalize the dataset release: regenerate release-wide outputs, validate all current data, and run the full test suite? This checks the whole dataset, not only the selected contribution.'))return;const button=$('#finalize');let outcome='';let failed=false;beginProgress(button,'Finalizing dataset release...','Regenerating release-wide outputs, validating the full dataset, and running the full test suite. This can take a few minutes.');try{const r=await api('/api/actions/finalize',{method:'POST',body:JSON.stringify({run_tests:true})});outcome=`Complete: dataset ${r.dataset_version} finalized. Validation and the full test suite passed.`;toast(`Dataset ${r.dataset_version} finalized; tests passed`);await refresh()}catch(e){failed=true;outcome=finalizationFailure(e.message);toast(outcome,true)}finally{endProgress(button,outcome,failed)}};
 refresh(false).catch(e=>toast(e.message,true));
 </script>
@@ -555,6 +610,10 @@ def create_workbench_server(
                     return
                 if path == "/api/actions/finalize":
                     self._json(HTTPStatus.OK, application.finalize(payload))
+                    return
+                if path in {"/api/actions/prepare-batch", "/api/actions/promote-batch"}:
+                    action = path.rsplit("/", 1)[-1]
+                    self._json(HTTPStatus.OK, application.perform_batch(action, payload))
                     return
                 match = re.fullmatch(r"/api/cases/(\d+)/actions/([a-z-]+)", path)
                 if match:

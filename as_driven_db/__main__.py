@@ -18,7 +18,11 @@ from .research_handoff import (
     import_research_result,
 )
 from .review_proposal import prepare_review_proposal
-from .review_promotion import promote_review_case
+from .review_promotion import (
+    prepare_review_batch,
+    promote_review_batch,
+    promote_review_case,
+)
 from .review_feedback import ReviewFeedbackError, publish_review_result
 from .release_finalize import ReleaseFinalizeError, finalize_release
 from .release_changes import release_control_changes, render_release_control_changes
@@ -267,6 +271,28 @@ def _parser() -> argparse.ArgumentParser:
     review_prepare.add_argument(
         "--json", action="store_true", help="print proposal metadata as JSON"
     )
+    review_prepare_batch = submission_actions.add_parser(
+        "prepare-batch",
+        help="prepare several simulator contribution proposals for one dataset patch",
+    )
+    review_prepare_batch.add_argument(
+        "--issue",
+        type=int,
+        action="append",
+        required=True,
+        help="issue to include in the batch; may be repeated",
+    )
+    review_prepare_batch.add_argument("--root", type=Path, default=Path.cwd())
+    review_prepare_batch.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    review_prepare_batch.add_argument(
+        "--dataset-version",
+        help="proposed release version (default: increment the current patch version)",
+    )
+    review_prepare_batch.add_argument(
+        "--json", action="store_true", help="print batch proposal metadata as JSON"
+    )
     review_promote = submission_actions.add_parser(
         "promote",
         help="promote one explicitly approved final-review proposal",
@@ -283,6 +309,29 @@ def _parser() -> argparse.ArgumentParser:
     )
     review_promote.add_argument(
         "--json", action="store_true", help="print promotion metadata as JSON"
+    )
+    review_promote_batch = submission_actions.add_parser(
+        "promote-batch",
+        help="promote several reviewed simulator contributions as one dataset patch",
+    )
+    review_promote_batch.add_argument(
+        "--issue",
+        type=int,
+        action="append",
+        required=True,
+        help="manifest-review issue to include; may be repeated",
+    )
+    review_promote_batch.add_argument("--root", type=Path, default=Path.cwd())
+    review_promote_batch.add_argument(
+        "--cases-dir", type=Path, default=Path("build") / "review-cases"
+    )
+    review_promote_batch.add_argument(
+        "--approve",
+        action="store_true",
+        help="confirm that the maintainer reviewed every selected proposal",
+    )
+    review_promote_batch.add_argument(
+        "--json", action="store_true", help="print batch promotion metadata as JSON"
     )
     review_publish = submission_actions.add_parser(
         "publish-result",
@@ -735,6 +784,30 @@ def main(argv: list[str] | None = None) -> int:
                 print("No curated data was changed.")
             return 0
 
+        if args.submission_action == "prepare-batch":
+            try:
+                result = prepare_review_batch(
+                    root,
+                    cases_dir,
+                    args.issue,
+                    dataset_version=args.dataset_version,
+                )
+            except (ResearchHandoffError, ValueError, FileExistsError, KeyError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Prepared issues {', '.join(str(issue) for issue in result['issues'])} "
+                    f"as one dataset batch {result['dataset_version']}; "
+                    f"dry-run {result['dry_run']}."
+                )
+                for prepared in result["results"]:
+                    print(f"  Issue #{prepared['issue']}: {prepared['summary']}")
+                print("No curated data was changed.")
+            return 0
+
         if args.submission_action == "promote":
             try:
                 result = promote_review_case(
@@ -761,6 +834,32 @@ def main(argv: list[str] | None = None) -> int:
                     "Release finalization is still required. After the release batch, run:\n"
                     "  python -m as_driven_db review-submissions "
                     "finalize-release --test"
+                )
+            return 0
+
+        if args.submission_action == "promote-batch":
+            try:
+                result = promote_review_batch(
+                    root,
+                    cases_dir,
+                    args.issue,
+                    approved=args.approve,
+                )
+            except (ResearchHandoffError, ValueError, FileExistsError, KeyError) as exception:
+                print(f"ERROR: {exception}")
+                return 1
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"Promoted issues {', '.join(str(issue) for issue in result['issues'])} "
+                    f"as dataset {result['dataset_version']}."
+                )
+                print(f"  Manifest: {result['manifest']}")
+                print(f"  Registered {len(result['sources_added'])} candidate source(s).")
+                print(
+                    "Release finalization is still required. After the release batch, run:\n"
+                    "  python -m as_driven_db review-submissions finalize-release --test"
                 )
             return 0
 

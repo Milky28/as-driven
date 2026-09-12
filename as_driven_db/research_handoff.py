@@ -220,10 +220,10 @@ def _research_questions(staged: dict[str, Any]) -> list[str]:
         "Establish the exact real car: manufacturer, model, year/generation, racing specification, and class. Distinguish similarly named adjacent versions.",
         "Decide whether this belongs to an existing simulator-independent record or needs a new real-car record id. Treat the simulator name only as a research lead.",
         f"Find real-car evidence for forward gears, gearbox construction, actuation, and pattern. The simulator observation staged: {json.dumps({key: transmission.get(key) for key in ('forward_gears', 'gearbox_type', 'shift_actuation', 'shift_pattern')}, ensure_ascii=False)}.",
-        "Look for cockpit or interior photographs of the exact car. What the driver operates is a visual fact that written sources routinely omit: whether the shifter is a lever or paddles, and where first gear sits in the gate. A photograph showing the gate settles a dogleg, which prose describing the gearbox usually will not. Say what is visible in the image and no more, and never read a gate off a knob engraving alone unless the engraving is legible. If the engraving or the lever is too small to resolve, fetch the full-resolution image before deciding it cannot be read.",
+        "MANDATORY cockpit-photo pass: look for cockpit or interior photographs of the exact car and inspect a useful-resolution image before completing the result. What the driver operates is a visual fact that written sources routinely omit: whether the shifter is a lever or paddles, where first gear sits in the gate, and what wheel-rim hardware is actually present. A photograph showing the gate settles a dogleg, which prose describing the gearbox usually will not. Say what is visible in the image and no more, and never read a gate off a knob engraving alone unless the engraving is legible. If the engraving, lever, pedals, or wheel are too small to resolve, fetch the full-resolution original before deciding they cannot be read. Mark the reviewed source with evidence_kind=\"cockpit-photo\". If useful exact-car photographs remain unavailable after recording the retrieval attempts, mark the best reviewed lead evidence_kind=\"cockpit-photo-unavailable\", explain why in its notes, and leave unsupported wheel claims not-established.",
         "Establish whether a physical clutch control exists and what the driver uses for standing starts, running upshifts, and running downshifts. Do not infer pedal presence or launch technique merely from gearbox construction.",
         "Establish throttle-lift, automatic cut, manual blip, and automatic blip behavior where authoritative evidence actually states it. Simulator behavior is comparison evidence, not the real-car baseline.",
-        f"Establish the physical wheel-rim shape, integrated display, shift lights, and open-top construction. The observed simulator cockpit staged: {json.dumps(wheel, ensure_ascii=False)}.",
+        f"Establish the physical wheel-rim shape, integrated display, shift lights, and open-top construction from the mandatory cockpit-photo pass. The observed simulator cockpit staged: {json.dumps(wheel, ensure_ascii=False)}.",
         "The rim is decided from a photograph of it, not from the car's class, and in this order: does it have molded grips at 9 and 3 with a control face between them, so the hands stay put (gt-formula), or is it a continuous band gripped anywhere - and then is that band a circle (round) or flattened top or bottom (d-shaped)? A 1967 single-seater with a plain wooden rim is round.",
         "Two different things can stop you answering the rim, and only one of them is a finding. If the image is too small or too dark to see the grips, that is a problem with the image: fetch the full-resolution original rather than judging from a thumbnail, a search-result preview or a gallery tile, and look again before concluding anything. Return not-established only when a clear photograph still leaves it genuinely ambiguous - a flat so slight that either answer is defensible, which is a known and recurring case worth recording honestly. Do not report a rim you could not see as a rim that cannot be decided.",
         "For every field not present in the reviewed sources, return a not-established claim instead of converting absence into no.",
@@ -272,6 +272,7 @@ Research the real-world identity and authentic controls for this simulator obser
 - Say `not-established` when a reviewed source is silent. Absence is not evidence of `no`.
 - Keep real-car claims separate from the exact simulator version and implementation observed.
 - A photograph is a source like any other. Register it with its origin and date, describe what is visible rather than what it suggests, and prefer a manufacturer or team image of the exact specification over a period shot of a sister car.
+- A cockpit-photo pass is mandatory before `research_status: complete`. Mark each reviewed source with `evidence_kind: \"cockpit-photo\"`; if no useful exact-car image can be obtained after documenting the attempts, mark a reviewed lead `evidence_kind: \"cockpit-photo-unavailable\"` and leave unsupported wheel claims `not-established`.
 - Do not edit `data/v1`, `curation`, source registries, or the staged bundle. Write only the structured research result requested below.
 
 ## Case
@@ -322,7 +323,7 @@ Use only the exact JSON pointers below for `claims[].path`. Do not infer a path 
 
 Return one JSON object conforming to `schema/v1/submission-research-result.schema.json`. Start from `research-result.template.json` in this case directory and save the completed object as `research-result.json` in the same directory. The maintainer workbench discovers that file when its local queue is refreshed.
 
-Every established, conflicting, or negative field-level finding belongs in `claims`. `source_refs` must name candidate sources declared in `sources`. Every source object must include all schema-required fields, including `retrieved_at`. For a negative result, list the exact sources reviewed and explain what they cover without claiming their silence proves a negative. Use `research_status: complete` only when the evidence is adequate for final maintainer review; use `partial` or `blocked` otherwise.
+Every established, conflicting, or negative field-level finding belongs in `claims`. `source_refs` must name candidate sources declared in `sources`. Every source object must include all schema-required fields, including `retrieved_at`. For a negative result, list the exact sources reviewed and explain what they cover without claiming their silence proves a negative. A complete result must include a source marked `evidence_kind: \"cockpit-photo\"` or `evidence_kind: \"cockpit-photo-unavailable\"`, and at least one wheel-rim claim must reference that source. Use `research_status: complete` only when the evidence is adequate for final maintainer review; use `partial` or `blocked` otherwise.
 
 When reusing a `source_id` from the related curated-record leads, copy its `title`, `publisher`, `url`, and `source_type` exactly. Those registered values are canonical, including punctuation, accents, and capitalization.
 """
@@ -673,6 +674,36 @@ def validate_research_result(
                     )
             if path.startswith("/identity/"):
                 identity_claim_paths.add(path)
+
+    if result.get("research_status") == "complete":
+        photo_source_ids = {
+            source.get("source_id")
+            for source in sources or []
+            if isinstance(source, dict)
+            and source.get("evidence_kind")
+            in {"cockpit-photo", "cockpit-photo-unavailable"}
+        }
+        wheel_claims = [
+            claim
+            for claim in claims or []
+            if isinstance(claim, dict)
+            and str(claim.get("path") or "").startswith(
+                "/authentic_controls/steering/wheel_rim/"
+            )
+        ]
+        if not photo_source_ids:
+            errors.append(
+                f"{label}.sources: complete research requires a cockpit-photo or "
+                "cockpit-photo-unavailable source before wheel controls can be reviewed"
+            )
+        elif not any(
+            photo_source_ids.intersection(claim.get("source_refs", []))
+            for claim in wheel_claims
+        ):
+            errors.append(
+                f"{label}.claims: at least one wheel-rim claim must reference the "
+                "cockpit-photo review source"
+            )
 
     identity = result.get("identity")
     status = result.get("research_status")

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import json
 from pathlib import Path
 import re
@@ -73,6 +73,95 @@ def _merge_candidate_sources(
         known[source_id] = candidate
         added.append(source_id)
     return merged, added
+
+
+def _normalize_issue_numbers(issue_numbers: list[int]) -> list[int]:
+    normalized = sorted(set(issue_numbers))
+    if not normalized or any(issue < 1 for issue in normalized):
+        raise ResearchHandoffError("batch promotion requires positive issue numbers")
+    if len(normalized) != len(issue_numbers):
+        raise ResearchHandoffError("batch promotion received a duplicate issue number")
+    return normalized
+
+
+def _batch_case_context(
+    cases_directory: Path,
+    issue_numbers: list[int],
+) -> list[tuple[int, Path, dict[str, Any]]]:
+    contexts: list[tuple[int, Path, dict[str, Any]]] = []
+    for issue_number in _normalize_issue_numbers(issue_numbers):
+        case_directory = cases_directory / f"issue-{issue_number}"
+        case_path = case_directory / "case.json"
+        case = _read_json(case_path, "review case")
+        if case.get("classification") == "existing-car-research":
+            raise ResearchHandoffError(
+                f"issue #{issue_number} is existing-car research; batch promotion "
+                "currently supports simulator contribution cases only"
+            )
+        if case.get("state") not in {"final-review", "manifest-review"}:
+            raise ResearchHandoffError(
+                f"issue #{issue_number} is {case.get('state')!r}; batch preparation "
+                "requires final-review or manifest-review"
+            )
+        direct_comparison = (
+            case.get("classification") == "curated-identity-comparison"
+            and (case.get("research") or {}).get("required") is False
+            and (case.get("research") or {}).get("status") == "not-required"
+        )
+        if (case.get("research") or {}).get("status") != "complete" and not direct_comparison:
+            raise ResearchHandoffError(
+                f"issue #{issue_number} has no complete research result"
+            )
+        if case.get("state") == "manifest-review":
+            proposal = case.get("review_proposal") or {}
+            if proposal.get("status") != "ready" or proposal.get("dry_run") != "passed":
+                raise ResearchHandoffError(
+                    f"issue #{issue_number} has no ready proposal with a passed dry-run"
+                )
+        contexts.append((issue_number, case_directory, case))
+    return contexts
+
+
+def prepare_review_batch(
+    root: Path,
+    cases_directory: Path,
+    issue_numbers: list[int],
+    *,
+    dataset_version: str | None = None,
+) -> dict[str, Any]:
+    """Prepare several simulator contribution proposals for one release patch."""
+    issue_numbers = _normalize_issue_numbers(issue_numbers)
+    root = root.resolve()
+    cases_directory = cases_directory.resolve()
+    _batch_case_context(cases_directory, issue_numbers)
+    index = _read_json(root / "data" / "v1" / "index.json", "dataset index")
+    expected_version = _next_patch(index["dataset_version"])
+    proposed_version = dataset_version or expected_version
+    if proposed_version != expected_version:
+        raise ResearchHandoffError(
+            f"batch proposal must target the next dataset patch {expected_version!r}, "
+            f"not {proposed_version!r}"
+        )
+
+    # Imported here to keep the existing proposal/promoter modules acyclic.
+    from .review_proposal import prepare_review_proposal
+
+    prepared = [
+        prepare_review_proposal(
+            root,
+            cases_directory,
+            issue_number,
+            dataset_version=proposed_version,
+        )
+        for issue_number in issue_numbers
+    ]
+    return {
+        "issues": issue_numbers,
+        "dataset_version": proposed_version,
+        "state": "manifest-review",
+        "dry_run": "passed",
+        "results": prepared,
+    }
 
 
 def _require_portable_bundles(root: Path, manifest: dict[str, Any]) -> None:
@@ -254,6 +343,145 @@ def promote_review_case(
         "sources_added": added_sources,
         "written": [str(path) for path in written],
         "case": str(case_path),
+    }
+
+
+def promote_review_batch(
+    root: Path,
+    cases_directory: Path,
+    issue_numbers: list[int],
+    *,
+    approved: bool,
+) -> dict[str, Any]:
+    """Promote several explicitly approved simulator proposals as one patch."""
+    if not approved:
+        raise ResearchHandoffError(
+            "batch promotion requires explicit maintainer approval; review every "
+            "selected final-review.md and rerun with --approve"
+        )
+
+    root = root.resolve()
+    cases_directory = cases_directory.resolve()
+    issue_numbers = _normalize_issue_numbers(issue_numbers)
+    contexts = _batch_case_context(cases_directory, issue_numbers)
+    index = _read_json(root / "data" / "v1" / "index.json", "dataset index")
+    expected_version = _next_patch(index["dataset_version"])
+    source_proposals: list[dict[str, Any]] = []
+    entries: list[dict[str, Any]] = []
+    case_paths: list[Path] = []
+    for issue_number, case_directory, case in contexts:
+        if case.get("state") != "manifest-review":
+            raise ResearchHandoffError(
+                f"issue #{issue_number} is {case.get('state')!r}; batch promotion "
+                "requires manifest-review"
+            )
+        artifacts = case.get("artifacts") or {}
+        manifest = _read_json(
+            case_directory / artifacts["review_manifest_proposal"],
+            "review manifest proposal",
+        )
+        source_proposal = _read_json(
+            case_directory / artifacts["source_proposal"],
+            "source proposal",
+        )
+        if manifest.get("dataset_version") != expected_version:
+            raise ResearchHandoffError(
+                f"issue #{issue_number} targets dataset {manifest.get('dataset_version')!r}, "
+                f"but the current batch requires {expected_version!r}; run "
+                "prepare-batch again"
+            )
+        proposal_state = case.get("review_proposal") or {}
+        if proposal_state.get("dataset_version") != expected_version:
+            raise ResearchHandoffError(
+                f"issue #{issue_number} case metadata and manifest dataset versions differ"
+            )
+        if len(manifest.get("records", [])) != 1:
+            raise ResearchHandoffError(
+                f"issue #{issue_number} must contribute exactly one record to a batch"
+            )
+        source_proposals.append(source_proposal)
+        entries.extend(manifest["records"])
+        case_paths.append(case_directory / "case.json")
+
+    combined_manifest = {
+        "schema_version": "1.0.0",
+        "dataset_version": expected_version,
+        "approved_at": date.today().isoformat(),
+        "records": entries,
+    }
+    _require_portable_bundles(root, combined_manifest)
+
+    registry_path = root / "data" / "v1" / "sources.json"
+    index_path = root / "data" / "v1" / "index.json"
+    registry = _read_json(registry_path, "source registry")
+    merged_sources = registry
+    added_sources: list[str] = []
+    for source_proposal in source_proposals:
+        merged_sources, added = _merge_candidate_sources(merged_sources, source_proposal)
+        added_sources.extend(added)
+
+    curation_directory = root / "curation"
+    batch_path = _next_batch_path(curation_directory)
+    if batch_path.exists():
+        raise ResearchHandoffError(f"refusing to overwrite review batch {batch_path.name}")
+
+    # Exercise the complete multi-record promotion against a temporary copy
+    # before touching the real tree.
+    _dry_run(root, combined_manifest, merged_sources)
+
+    affected_paths: set[Path] = {
+        registry_path,
+        index_path,
+        batch_path,
+        *case_paths,
+    }
+    for entry in entries:
+        bundle = _read_json(root / entry["bundle"], "staged bundle")
+        simulator = bundle["simulator"]
+        affected_paths.add(root / "data" / "v1" / "cars" / f"{entry['record_id']}.json")
+        affected_paths.add(
+            curation_directory / f"{simulator}-approved-{entry['record_id']}.json"
+        )
+    snapshots = {
+        path: path.read_bytes() if path.exists() else None
+        for path in affected_paths
+    }
+    try:
+        _write_json(registry_path, merged_sources)
+        _write_json(batch_path, combined_manifest)
+        written = promote_observations(
+            combined_manifest,
+            root=root,
+            data_directory=root / "data" / "v1",
+            curation_directory=curation_directory,
+        )
+        promoted_at = _now()
+        for (issue_number, _case_directory, case), entry in zip(contexts, entries):
+            case["state"] = "promoted"
+            case["updated_at"] = promoted_at
+            case["review_proposal"].update(
+                {
+                    "status": "promoted",
+                    "promoted_at": promoted_at,
+                    "record_id": entry["record_id"],
+                    "manifest": batch_path.relative_to(root).as_posix(),
+                }
+            )
+            _write_json(cases_directory / f"issue-{issue_number}" / "case.json", case)
+    except Exception:
+        for path, content in snapshots.items():
+            _restore(path, content)
+        raise
+
+    written.extend([batch_path, *case_paths])
+    return {
+        "issues": issue_numbers,
+        "state": "promoted",
+        "dataset_version": expected_version,
+        "records": [entry["record_id"] for entry in entries],
+        "manifest": str(batch_path),
+        "sources_added": added_sources,
+        "written": [str(path) for path in written],
     }
 
 

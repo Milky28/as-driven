@@ -238,6 +238,13 @@
               "other"
             ]
           },
+          "evidence_kind": {
+            "type": "string",
+            "enum": [
+              "cockpit-photo",
+              "cockpit-photo-unavailable"
+            ]
+          },
           "published_or_updated_at": {
             "type": [
               "string",
