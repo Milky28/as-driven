@@ -7,6 +7,7 @@ explicit contracts, with compatibility checked by regression tests.
 
 # id: (product name, filter label, accepted compact game names)
 _REGISTRY = {
+    'ams1': ('Automobilista', 'AMS1', ('automobilista', 'automobilista1', 'ams', 'ams1')),
     'ams2': ('Automobilista 2', 'AMS2', ('automobilista2', 'ams2')),
     'ac': ('Assetto Corsa', 'AC', ('assettocorsa', 'ac')),
     'acc': ('Assetto Corsa Competizione', 'ACC', ('assettocorsacompetizione', 'acc')),

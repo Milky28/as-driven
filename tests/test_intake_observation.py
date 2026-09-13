@@ -350,6 +350,23 @@ class ObservationIntakeTests(unittest.TestCase):
                 receipt["unregistered_simulator"]["source_game_name"],
             )
 
+    def test_ams1_releases_an_old_draft_without_rewriting_it(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            payload = observation("F301")
+            payload["observation_id"] = "other.f301.20260913t043735646z-367b4bd4"
+            payload["simulator"] = "other"
+            payload["source_game_name"] = "Automobilista"
+            payload["game_version"] = "1.5.3"
+            path = self.write(temp, payload, "ams1.json")
+            original = path.read_bytes()
+            for _ in range(2):
+                receipt = intake_observation(ROOT, path, temp / "inbox")
+                self.assertEqual("ams1", receipt["released_simulator"])
+                self.assertEqual("new-identity", receipt["status"])
+                self.assertIsNone(receipt["unregistered_simulator"])
+                self.assertEqual(original, path.read_bytes())
+
     def test_a_registered_simulator_is_never_held(self) -> None:
         # The same payload under a registered id classifies on its identity as
         # usual, which is what registering a simulator has to release.

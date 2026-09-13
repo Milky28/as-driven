@@ -230,6 +230,17 @@ namespace AsDriven.Core.Tests
                     "canonicalises SimHub's Project Motor Racing name");
                 Equal("pmr", AsDrivenDatabase.CanonicalizeSimulator("PMR"),
                     "accepts the Project Motor Racing abbreviation");
+                foreach (string ams1Name in new[] { "Automobilista", "Automobilista 1", "AMS", "AMS1" })
+                {
+                    Equal("ams1", AsDrivenDatabase.CanonicalizeSimulator(ams1Name),
+                        "recognises original Automobilista exactly");
+                    Equal("unmatched", database.Match(ams1Name, "F301").MatchStatus,
+                        "offers an AMS1 contribution without guessing a curated car");
+                }
+                Equal("ams2", AsDrivenDatabase.CanonicalizeSimulator("Automobilista2"),
+                    "keeps AMS2 distinct from AMS1");
+                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("Automobilista3"),
+                    "does not match an unknown game by prefix");
                 Equal("gtr2", AsDrivenDatabase.CanonicalizeSimulator("SIMBINGTR2"),
                     "canonicalises SimHub's legacy GTR 2 plugin name");
                 Equal("gtr2", AsDrivenDatabase.CanonicalizeSimulator("GTR 2 - FIA GT Racing Game"),

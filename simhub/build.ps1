@@ -377,7 +377,7 @@ $versionProcessMethod = $pluginType.GetMethod(
 if ($null -eq $versionProcessMethod) {
     throw "VersionProcessNames is missing; the plugin can no longer report a simulator build."
 }
-foreach ($stamped in @("ams2", "ac", "acc", "raceroom")) {
+foreach ($stamped in @("ams1", "ams2", "ac", "acc", "raceroom")) {
     $names = [string[]]$versionProcessMethod.Invoke($null, @($stamped))
     if ($names.Count -lt 1) {
         throw "No version process is registered for '$stamped', so its drives would record an unknown build."

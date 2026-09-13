@@ -37,7 +37,7 @@
     },
     "simulator": {
       "enum": [
-        "ams2",
+        "ams1", "ams2",
         "iracing",
         "ac",
         "acc",
@@ -307,7 +307,7 @@
               "properties": {
                 "simulator": {
                   "enum": [
-                    "ams2",
+                    "ams1", "ams2",
                     "iracing",
                     "ac",
                     "acc",

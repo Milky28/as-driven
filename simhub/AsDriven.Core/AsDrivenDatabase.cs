@@ -305,6 +305,11 @@ namespace AsDriven.Core
             }
             string compact = new string(
                 gameName.Where(char.IsLetterOrDigit).ToArray()).ToLowerInvariant();
+            if (compact == "automobilista" || compact == "automobilista1"
+                || compact == "ams" || compact == "ams1")
+            {
+                return "ams1";
+            }
             if (compact == "automobilista2" || compact == "ams2")
             {
                 return "ams2";
@@ -1074,6 +1079,7 @@ namespace AsDriven.Core
         {
             switch (simulator)
             {
+                case "ams1": return "Automobilista";
                 case "ams2": return "Automobilista2";
                 case "iracing": return "iRacing";
                 case "ac": return "AssettoCorsa";
@@ -1094,6 +1100,7 @@ namespace AsDriven.Core
         {
             switch (simulator)
             {
+                case "ams1": return "Automobilista";
                 case "ams2": return "Automobilista 2";
                 case "iracing": return "iRacing";
                 case "ac": return "Assetto Corsa";
@@ -1111,6 +1118,7 @@ namespace AsDriven.Core
         {
             switch (simulator)
             {
+                case "ams1": return "AMS1";
                 case "ams2": return "AMS2";
                 case "iracing": return "iRacing";
                 case "ac": return "AC";

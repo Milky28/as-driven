@@ -154,6 +154,21 @@ file; the HQ Anniversary Patch version is recorded when its readme is present.
 If the session file is stale or unavailable, the generated token remains and
 must not be mapped or promoted by inference.
 
+## Automobilista (AMS1)
+
+Original Automobilista is registered as `ams1`, accepting the whole game names
+`Automobilista`, `Automobilista 1`, `AMS`, and `AMS1`. It stays distinct from AMS2.
+The client uses the running `AMS.exe` location to read Steam app 431600's build
+id: the installed executable reports a generic 2.0.0.0. Missing metadata remains
+unknown and requires the contributor to supply an exact version.
+
+The first held drive, issue #126, records `Automobilista`, exact car token
+`F301`, and contributor-supplied version 1.5.3. Its original JSON remains intact
+when intake releases it under AMS1. The draft reports no torque for that drive;
+this does not establish a simulator-wide limitation. No new telemetry exclusions
+are inferred from that single car, and automatic cut stays unknown for its drive.
+Registration does not establish which real car F301 represents.
+
 ## What registering does not do
 
 It does not promote anything by itself. Held observations rejoin the ordinary

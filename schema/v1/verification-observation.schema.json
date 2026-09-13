@@ -31,7 +31,7 @@
     "simulator": {
       "type": "string",
       "enum": [
-        "ams2",
+        "ams1", "ams2",
         "iracing",
         "ac",
         "acc",

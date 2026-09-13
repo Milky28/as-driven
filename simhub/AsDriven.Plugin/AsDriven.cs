@@ -1550,6 +1550,7 @@ namespace AsDriven.Plugin
 
         private static string SimulatorDisplayName(string simulator, string rawGameName)
         {
+            if (string.Equals(simulator, "ams1", StringComparison.Ordinal)) return "AMS1";
             if (string.Equals(simulator, "ams2", StringComparison.Ordinal)) return "AMS2";
             if (string.Equals(simulator, "iracing", StringComparison.Ordinal)) return "iRacing";
             if (string.Equals(simulator, "acc", StringComparison.Ordinal)) return "Assetto Corsa Competizione";
@@ -1582,6 +1583,7 @@ namespace AsDriven.Plugin
         {
             switch (simulator)
             {
+                case "ams1": return new[] { "AMS" };
                 case "ams2": return new[] { "AMS2AVX", "AMS2" };
                 case "ac": return new[] { "acs" };
                 case "acc": return new[] { "AC2-Win64-Shipping", "acc" };
@@ -1631,7 +1633,12 @@ namespace AsDriven.Plugin
                     {
                         string processPath = ResolveProcessPath(process);
                         string version;
-                        if (simulator == "ac")
+                        // AMS.exe reports a generic 2.0.0.0, not the game release.
+                        if (simulator == "ams1")
+                        {
+                            version = DetectSteamBuildId(processPath, "431600");
+                        }
+                        else if (simulator == "ac")
                         {
                             version = DetectSteamBuildId(processPath, "244210");
                         }
