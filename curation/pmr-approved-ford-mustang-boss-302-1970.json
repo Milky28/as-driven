@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.33",
+  "approved_at": "2026-09-15",
+  "record_id": "ford-mustang-boss-302-1970",
+  "simulator": "pmr",
+  "telemetry_name": "Mustang Boss 302",
+  "observed_game_version": "2.2.1.0",
+  "observed_through": "SimHub guided verification observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 1970 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "Historic USV8",
+  "staged_record_id": "mustang-boss-302"
+}

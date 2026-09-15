@@ -1,0 +1,246 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "dodge-challenger-usv8-2022",
+  "identity": {
+    "display_name": "Dodge Challenger (2022 USV8)",
+    "manufacturer": "Dodge",
+    "model": "Challenger",
+    "year": {
+      "label": "2022"
+    },
+    "class": "USV8",
+    "real_world_identity_notes": "The PMR USV8 entry is identified as a 2022 Dodge Challenger. Real Trans-Am class documentation supports a four-speed H-pattern baseline, but exact PMR wrapper applicability, gearbox construction, technique, and wheel hardware remain open."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 4; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required.",
+      "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Challenger"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Challenger"
+        },
+        {
+          "kind": "class-id",
+          "value": "USV8"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.challenger.20260915t151053100z-c3545d6f by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.challenger.20260915t151053100z-c3545d6f directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-challenger-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.challenger.20260915t151053100z-c3545d6f directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-challenger-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.challenger.20260915t151053100z-c3545d6f directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-challenger-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.challenger.20260915t151053100z-c3545d6f directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-challenger-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.challenger.20260915t151053100z-c3545d6f directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-challenger-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.challenger.20260915t151053100z-c3545d6f directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-challenger-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.1.0",
+      "verified_at": "2026-09-15",
+      "source_refs": [
+        "pmr-usv8-identity-132",
+        "transam-four-speed-hpattern-132",
+        "usv8-challenger-cockpit-pass-132",
+        "pmr.local-live-challenger-controls.2.2.1.0"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Official PMR material names the current USV8 Challenger, while real-world Trans-Am class documentation provides the conservative four-speed H-pattern control baseline."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr-usv8-identity-132",
+          "transam-four-speed-hpattern-132",
+          "usv8-challenger-cockpit-pass-132",
+          "pmr.local-live-challenger-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Official PMR material names the current USV8 Challenger, while real-world Trans-Am class documentation provides the conservative four-speed H-pattern control baseline."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr-usv8-identity-132",
+          "transam-four-speed-hpattern-132",
+          "usv8-challenger-cockpit-pass-132",
+          "pmr.local-live-challenger-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Real-world Trans-Am class documentation identifies four-speed gearboxes; exact PMR wrapper applicability remains a review gap. The class source explicitly documents H-pattern shift. H-pattern is established, but no exact gate image establishes a dogleg. An H-pattern manual requires clutch use to move off from rest under the project derivation rule. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "pmr.local-live-challenger-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-challenger-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "pmr-usv8-identity-132",
+          "transam-four-speed-hpattern-132",
+          "usv8-challenger-cockpit-pass-132"
+        ],
+        "confidence": "medium",
+        "basis": "Real-world Trans-Am class documentation identifies four-speed gearboxes; exact PMR wrapper applicability remains a review gap. The class source explicitly documents H-pattern shift. H-pattern is established, but no exact gate image establishes a dogleg. An H-pattern manual requires clutch use to move off from rest under the project derivation rule. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-15"
+}

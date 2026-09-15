@@ -215,8 +215,15 @@ def _curated_matches(root: Path, observation: dict[str, Any]) -> list[dict[str, 
                         "record_id": record["record_id"],
                         "kind": kind,
                         "value": value,
+                        "_classes": [item["value"] for item in simulator_entry["identities"]
+                                     if item["kind"] == "class-id"],
                     }
                 )
+    if len({item["record_id"] for item in matches}) > 1:
+        matches = [item for item in matches
+                   if identity.get("telemetry_class") in item["_classes"]]
+    for item in matches:
+        item.pop("_classes")
     return matches
 
 

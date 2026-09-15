@@ -12,46 +12,44 @@
       "label": "2001"
     },
     "class": "Formula 3 Brasil",
-    "real_world_identity_notes": "Seed identity follows the community sheet; exact chassis/season equivalence remains to be checked against a primary source."
+    "real_world_identity_notes": "Dallara F301, the older Dallara Formula 3 chassis used as the F3 Light car in Brazilian F3. Individual F301 cars could carry different engine or series configurations; the identity match here is the Reiza Automobilista F301 subtype, not a claim that every F301 carried identical ancillary hardware."
   },
   "authentic_controls": {
     "transmission": {
       "forward_gears": 5,
-      "gearbox_type": "sequential",
-      "shift_actuation": "sequential-stick",
-      "shift_pattern": "sequential",
+      "gearbox_type": "dogbox",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "unknown",
       "upshift": {
         "clutch": "not-required",
-        "throttle_lift": "not-required",
-        "automatic_cut": "yes",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
         "manual_blip": "not-applicable",
         "automatic_blip": "not-applicable"
       },
       "downshift": {
         "clutch": "not-required",
         "throttle_lift": "not-applicable",
-        "automatic_cut": "not-applicable",
-        "manual_blip": "not-required",
-        "automatic_blip": "yes"
+        "automatic_cut": "unknown",
+        "manual_blip": "required",
+        "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required"
     },
     "steering": {
       "wheel_rim": {
-        "shape": "gt-formula",
-        "diameter_mm": null,
-        "source_label": "live-cockpit-gt-style",
-        "notes": "Direct cockpit inspection established the rim category and display, shift-light, and open-top details.",
-        "integrated_display": "yes",
-        "shift_lights": "yes",
-        "open_top": "not-applicable"
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
       }
     },
     "notes": [
-      "Current guided AMS2 testing established move-off, running-shift technique, and cockpit controls with simulator assists disabled.",
-      "A clutch is required from rest.",
-      "The steering lock came from the AMS2 spreadsheet, which records what the simulator applies rather than what the real car was built with. It moves to the simulator layer, where that evidence belongs; no reviewed source establishes the real car's lock.",
-      "This record came from the original AMS2 spreadsheet import, where one claim covered the identity, the whole of authentic_controls and the simulator behaviour together. The car has since been driven, and the guided observation establishes those controls directly. The spreadsheet claim no longer reaches authentic_controls, because it describes what the simulator models and cannot settle what the real car had."
+      "The reviewed exact-scope sources establish transmission downshift clutch: not required; transmission downshift manual_blip: required; transmission downshift throttle_lift: not applicable; forward gears: 5; gearbox construction: dogbox; shift actuation: h pattern; standing-start clutch use: required; transmission upshift automatic_blip: not applicable; transmission upshift clutch: not required; transmission upshift manual_blip: not applicable.",
+      "The reviewed real-car sources do not establish selector pattern or wheel topology; those baseline fields remain unknown.",
+      "Automobilista 1.5.3 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
     ]
   },
   "simulators": [
@@ -91,7 +89,128 @@
         ],
         "steering_dor": 450
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded shift_actuation as sequential-stick; the reviewed real-car value is h-pattern. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded shift_pattern as sequential; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded throttle_lift as not-required; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded automatic_cut as yes; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "yes",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded automatic_blip as yes; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded manual_blip as not-required; the reviewed real-car value is required. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded wheel_rim_shape as gt-formula; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded wheel_integrated_display as yes; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded wheel_shift_lights as yes; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "not-applicable",
+          "condition": "The approved ams2 1.6.9.91 guided drive recorded wheel_open_top as not-applicable; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        }
+      ],
       "verified_game_version": "1.6.9.91",
       "verified_at": "2026-08-12",
       "source_refs": [
@@ -104,6 +223,162 @@
         "level": "verified",
         "basis": "Exact current-game identity, driving technique, and cockpit controls were directly tested through the guided workflow."
       }
+    },
+    {
+      "simulator": "ams1",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "F301"
+        },
+        {
+          "kind": "internal-id",
+          "value": "F301"
+        },
+        {
+          "kind": "class-id",
+          "value": "F301"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "no",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in AMS1 1.5.3 via guided verification observation other.f301.20260913t043735646z-367b4bd4 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/transmission/shift_actuation",
+          "value": "sequential-stick",
+          "condition": "The approved ams1 1.5.3 guided drive recorded shift_actuation as sequential-stick; the reviewed real-car value is h-pattern. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/shift_pattern",
+          "value": "sequential",
+          "condition": "The approved ams1 1.5.3 guided drive recorded shift_pattern as sequential; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The approved ams1 1.5.3 guided drive recorded throttle_lift as not-required; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_blip",
+          "value": "no",
+          "condition": "The approved ams1 1.5.3 guided drive recorded automatic_blip as no; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The approved ams1 1.5.3 guided drive recorded manual_blip as not-required; the reviewed real-car value is required. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The approved ams1 1.5.3 guided drive recorded wheel_rim_shape as gt-formula; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The approved ams1 1.5.3 guided drive recorded wheel_integrated_display as yes; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The approved ams1 1.5.3 guided drive recorded wheel_shift_lights as yes; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "not-applicable",
+          "condition": "The approved ams1 1.5.3 guided drive recorded wheel_open_top as not-applicable; the reviewed real-car value is unknown. This observation is confined to this simulator implementation.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Preserved from the existing approved guided observation."
+          },
+          "source_refs": [
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        }
+      ],
+      "verified_game_version": "1.5.3",
+      "verified_at": "2026-09-13",
+      "source_refs": [
+        "reiza.forum.f301-vs-f309",
+        "curitibaracing.f3-brasil.2013",
+        "hewland.mk9.manual",
+        "bat.dallara-f301.cockpit-21",
+        "formel3guide.dallara-f301",
+        "ams1.local-live-f301-controls.1.5.3"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "The Reiza Studios discussion identifies Automobilista F301 as the older Dallara chassis racing in Brazilian F3 and calls its class F3 Light. The independent Brazilian F3 technical article names Dallara F301 as F3 Light. The exact F301 cockpit listing inspected for this pass shows a TIPO F301/TELAIO No 035 plaque. Together these establish the Dallara F301 identity used by the submitted AMS1 subtype; they do not identify a particular real chassis number represented by the simulator."
+      }
     }
   ],
   "provenance": {
@@ -111,56 +386,97 @@
       {
         "paths": [
           "/identity",
-          "/simulators/0/behavior/steering_dor",
-          "/simulators/0/behavior"
+          "/simulators/1/identities"
         ],
         "source_refs": [
-          "ams2.coanda-sheet.v1.0.34"
+          "reiza.forum.f301-vs-f309",
+          "curitibaracing.f3-brasil.2013",
+          "hewland.mk9.manual",
+          "bat.dallara-f301.cockpit-21",
+          "formel3guide.dallara-f301",
+          "ams1.local-live-f301-controls.1.5.3"
         ],
         "confidence": "medium",
-        "basis": "Direct transcription and conservative normalization of the F301 row."
+        "basis": "The Reiza Studios discussion identifies Automobilista F301 as the older Dallara chassis racing in Brazilian F3 and calls its class F3 Light. The independent Brazilian F3 technical article names Dallara F301 as F3 Light. The exact F301 cockpit listing inspected for this pass shows a TIPO F301/TELAIO No 035 plaque. Together these establish the Dallara F301 identity used by the submitted AMS1 subtype; they do not identify a particular real chassis number represented by the simulator."
       },
       {
         "paths": [
-          "/simulators/0/identities/0"
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
         ],
         "source_refs": [
-          "simhub.local-ams2-identities.9.11.22"
+          "reiza.forum.f301-vs-f309",
+          "curitibaracing.f3-brasil.2013",
+          "hewland.mk9.manual",
+          "bat.dallara-f301.cockpit-21",
+          "formel3guide.dallara-f301",
+          "ams1.local-live-f301-controls.1.5.3"
         ],
-        "confidence": "verified",
-        "basis": "Exact CarId/CarModel value observed in SimHub's generated AMS2 car settings."
+        "confidence": "medium",
+        "basis": "The official Mk8/9 manual specifies non-synchronising face dogs. Under the project derivation rules, a dogbox does not require clutch use for ordinary upshifts or downshifts. The manufacturer manual establishes non-synchronising face dogs; the project derivation rule requires the driver to match revs for clean dog engagement, represented as a required manual blip on downshift. This model treats throttle lift as an upshift technique field; no separate downshift-lift control is applicable. The gearbox evidence is cited for the scoped shift mechanism, while no negative real-car claim is made about a driver’s throttle movement. The Reiza discussion identifies the F301 as five-speed; the exact F301 listing describes a five-speed transaxle; and the Hewland manual documents the Mk8/9 four- or five-forward-gear family. The F3 Light F301 is listed with a Hewland Mk9, and the manufacturer manual specifies non-synchronising face dogs. The project vocabulary normalizes that construction as dogbox. The F3 Light technical row explicitly says Hewland Mk9 in H, and the manufacturer manual specifies mechanically operated H-pattern selection. The established H-pattern gate requires a clutch for a standing start under the project derivation rules, independently of the dogbox’s clutchless shift capability. Automatic blip is modeled as a downshift function; it is not applicable to an upshift. This does not claim that the real car had or lacked an electronic throttle system. Non-synchronising face dogs establish the dogbox construction; ordinary upshifts therefore do not require clutch use under the project derivation rules. Manual blip is modeled as a downshift rev-matching technique and is not applicable to an upshift. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/throttle_lift."
       },
       {
         "paths": [
-          "/authentic_controls/transmission",
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
           "/authentic_controls/steering/wheel_rim"
         ],
         "source_refs": [
-          "ams2.local-live-f301-controls.1.6.9.91"
+          "ams1.local-live-f301-controls.1.5.3"
         ],
-        "confidence": "verified",
-        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash ab031f39."
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       },
       {
         "paths": [
-          "/simulators/0/identities",
-          "/simulators/0/behavior"
+          "/simulators/1/behavior"
         ],
         "source_refs": [
+          "ams1.local-live-f301-controls.1.5.3"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/downshift/throttle_lift",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_blip",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/manual_blip"
+        ],
+        "source_refs": [
+          "reiza.forum.f301-vs-f309",
+          "curitibaracing.f3-brasil.2013",
+          "hewland.mk9.manual",
+          "bat.dallara-f301.cockpit-21",
+          "formel3guide.dallara-f301"
+        ],
+        "confidence": "medium",
+        "basis": "The official Mk8/9 manual specifies non-synchronising face dogs. Under the project derivation rules, a dogbox does not require clutch use for ordinary upshifts or downshifts. The manufacturer manual establishes non-synchronising face dogs; the project derivation rule requires the driver to match revs for clean dog engagement, represented as a required manual blip on downshift. This model treats throttle lift as an upshift technique field; no separate downshift-lift control is applicable. The gearbox evidence is cited for the scoped shift mechanism, while no negative real-car claim is made about a driver’s throttle movement. The Reiza discussion identifies the F301 as five-speed; the exact F301 listing describes a five-speed transaxle; and the Hewland manual documents the Mk8/9 four- or five-forward-gear family. The F3 Light F301 is listed with a Hewland Mk9, and the manufacturer manual specifies non-synchronising face dogs. The project vocabulary normalizes that construction as dogbox. The F3 Light technical row explicitly says Hewland Mk9 in H, and the manufacturer manual specifies mechanically operated H-pattern selection. The established H-pattern gate requires a clutch for a standing start under the project derivation rules, independently of the dogbox’s clutchless shift capability. Automatic blip is modeled as a downshift function; it is not applicable to an upshift. This does not claim that the real car had or lacked an electronic throttle system. Non-synchronising face dogs establish the dogbox construction; ordinary upshifts therefore do not require clutch use under the project derivation rules. Manual blip is modeled as a downshift rev-matching technique and is not applicable to an upshift. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/open_top, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/shift_pattern, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/throttle_lift."
+      },
+      {
+        "paths": [
+          "/simulators/0"
+        ],
+        "source_refs": [
+          "ams2.coanda-sheet.v1.0.34",
+          "ams2.reiza-forum.extended-car-info",
+          "simhub.local-ams2-identities.9.11.22",
           "ams2.local-live-f301-controls.1.6.9.91"
         ],
         "confidence": "verified",
-        "basis": "Reviewed guided observation of the exact AMS2 1.6.9.91 identity; draft hash ab031f39."
+        "basis": "Preserved AMS2 identities, behavior and approved guided observations; differing values remain simulator overrides."
       }
     ]
   },
-  "archetype": {
-    "archetype_id": "stick-5-seq-clutch-start-flat-up-auto-blip",
-    "classification": "matches"
-  },
-  "notes": [
-    "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
-  ],
-  "updated_at": "2026-08-27",
-  "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift and blips the downshift itself, so once you are rolling the gearbox asks nothing of your feet."
+  "updated_at": "2026-09-15"
 }

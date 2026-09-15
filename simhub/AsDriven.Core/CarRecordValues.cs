@@ -18,6 +18,7 @@
         public string RecordId;
         public string DisplayName;
         public string CarClass;
+        public string[] SimulatorClasses;
         public int YearFrom;
         public string ShiftType;
         public string ShiftActuation;

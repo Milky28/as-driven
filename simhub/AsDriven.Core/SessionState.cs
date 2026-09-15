@@ -15,10 +15,11 @@ namespace AsDriven.Core
 
         public GuidanceSnapshot Current { get; private set; }
 
-        public bool Update(bool gameRunning, string gameName, string carIdentifier)
+        public bool Update(bool gameRunning, string gameName, string carIdentifier, string carClass = null)
         {
             string identityKey = (gameRunning ? "1" : "0") + "\u001f"
-                + (gameName ?? string.Empty) + "\u001f" + (carIdentifier ?? string.Empty);
+                + (gameName ?? string.Empty) + "\u001f" + (carIdentifier ?? string.Empty)
+                + "\u001f" + (carClass ?? string.Empty);
             if (identityKey == _lastIdentityKey)
             {
                 return false;
@@ -33,7 +34,7 @@ namespace AsDriven.Core
                 return true;
             }
 
-            GuidanceSnapshot next = _database.Match(gameName, carIdentifier);
+            GuidanceSnapshot next = _database.Match(gameName, carIdentifier, carClass);
             if (next.HasMatch)
             {
                 _popupRevision++;

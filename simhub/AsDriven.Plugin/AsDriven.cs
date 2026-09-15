@@ -523,7 +523,7 @@ namespace AsDriven.Plugin
                     session.Update(
                         data.GameRunning,
                         data.GameName ?? string.Empty,
-                        carIdentifier);
+                        carIdentifier, identity.CarClass);
                     return;
                 }
                 if (leavingPreview)
@@ -540,7 +540,7 @@ namespace AsDriven.Plugin
                 if (session.Update(
                     data.GameRunning,
                     data.GameName ?? string.Empty,
-                    carIdentifier))
+                    carIdentifier, identity.CarClass))
                 {
                     _current = session.Current;
                     if (ShouldRecordIdentity(_current.MatchStatus, data.GameName))

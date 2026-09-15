@@ -1,0 +1,246 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ford-mustang-boss-302-1970",
+  "identity": {
+    "display_name": "Ford Mustang Boss 302 (1970)",
+    "manufacturer": "Ford",
+    "model": "Mustang Boss 302",
+    "year": {
+      "label": "1970"
+    },
+    "class": "Historic USV8 / Trans-Am",
+    "real_world_identity_notes": "PMR identifies the Historic USV8 entry as the 1970 Ford Mustang Boss 302. Period Boss 302 evidence supports a conservative four-speed H-pattern baseline; race-specific gearbox construction, technique, and wheel hardware remain open."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 4,
+      "gearbox_type": "unknown",
+      "shift_actuation": "h-pattern",
+      "shift_pattern": "standard-h",
+      "upshift": {
+        "clutch": "unknown",
+        "throttle_lift": "unknown",
+        "automatic_cut": "unknown",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "unknown",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "unknown",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 4; shift actuation: h pattern; shift pattern: standard h; standing-start clutch use: required.",
+      "The reviewed real-car sources do not establish running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Mustang Boss 302"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Mustang Boss 302"
+        },
+        {
+          "kind": "class-id",
+          "value": "Historic USV8"
+        }
+      ],
+      "behavior": {
+        "shift_type": "h-pattern",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "round",
+          "integrated_display": "no",
+          "shift_lights": "no",
+          "open_top": "no",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "round",
+          "condition": "The guided observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mustang-boss-302.20260915t145348067z-cbfd0a4e directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.1.0",
+      "verified_at": "2026-09-15",
+      "source_refs": [
+        "pmr-v8-pack-identity-129",
+        "mustang-boss-302-1970-129",
+        "mustang-boss-302-cockpit-pass-129",
+        "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+      ],
+      "confidence": {
+        "level": "medium",
+        "basis": "Official PMR identity material names the entry, while an exact-model period racing reference documents four-speed manual transmission equipment."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr-v8-pack-identity-129",
+          "mustang-boss-302-1970-129",
+          "mustang-boss-302-cockpit-pass-129",
+          "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Official PMR identity material names the entry, while an exact-model period racing reference documents four-speed manual transmission equipment."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr-v8-pack-identity-129",
+          "mustang-boss-302-1970-129",
+          "mustang-boss-302-cockpit-pass-129",
+          "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "The exact-model racing reference documents a four-speed manual; exact PMR race-car applicability remains a review gap. The documented four-speed manual supports an H-pattern baseline. No exact race gate image establishes a dogleg, so the conventional period layout is retained as a low-confidence baseline. An H-pattern manual requires clutch use to move off from rest under the project derivation rule. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-mustang-boss-302-controls.2.2.1.0"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch"
+        ],
+        "source_refs": [
+          "pmr-v8-pack-identity-129",
+          "mustang-boss-302-1970-129",
+          "mustang-boss-302-cockpit-pass-129"
+        ],
+        "confidence": "medium",
+        "basis": "The exact-model racing reference documents a four-speed manual; exact PMR race-car applicability remains a review gap. The documented four-speed manual supports an H-pattern baseline. No exact race gate image establishes a dogleg, so the conventional period layout is retained as a low-confidence baseline. An H-pattern manual requires clutch use to move off from rest under the project derivation rule. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-15"
+}

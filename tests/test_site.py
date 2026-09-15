@@ -539,6 +539,7 @@ class SiteTests(unittest.TestCase):
                 {"id": "ac", "label": "Assetto Corsa"},
                 {"id": "acc", "label": "Assetto Corsa Competizione"},
                 {"id": "ac-evo", "label": "Assetto Corsa EVO"},
+                {"id": "ams1", "label": "Automobilista"},
                 {"id": "gtr2", "label": "GTR 2"},
                 {"id": "pmr", "label": "Project Motor Racing"},
                 {"id": "raceroom", "label": "RaceRoom Racing Experience"},

@@ -7,17 +7,17 @@ car records.
 
 ## What you'll notice
 
-- **More reviewed cars.** New Assetto Corsa classics and Project Motor Racing
-  entries include the Ferrari F40, Ford GT40, Lotus 49 and BMW V12 LMR.
-- Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
-  reviewed real-car evidence.
-- **Clearer guided shifts.** Each clutch-free shift test now puts the clutch
-  instruction in its heading and shows both instruction lines on the overlay.
-  Shift detection accounts for a resting throttle offset, and unmeasured
-  automatic cut or blip results are clearly labeled.
-- **Stronger contribution review.** Completed research records a real-car
-  cockpit-photo review, and same-simulator corrections reach the review path.
-  Maintainers can prepare and promote an approved batch as one dataset patch.
+- **PMR V8 Power Pack coverage.** Reviewed entries cover the new Historic
+  USV8, USV8 and AUS V8 Evo cars, plus the Falcon and Commodore COTF.
+- **Exact matching for both Camaros.** The plugin uses the reported class to
+  distinguish the historic and modern cars that both report `Camaro`.
+- **Easier installation.** A folder picker finds custom SimHub installations;
+  installation failures remain visible and save diagnostic details.
+- **Original Automobilista support.** AMS1 now has a distinct contribution and
+  guided-drive path. The F301 is reviewed, with each simulator’s controls kept distinct.
+
+Install the full plugin ZIP for class-aware matching; a database-only update
+will not add this capability to older SimHub clients.
 
 ## Install
 

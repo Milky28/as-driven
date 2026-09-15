@@ -9,6 +9,22 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.22.2 - 2026-09-15
+
+- Add all nine cars in PMR's September 15 V8 Power Pack, plus the 2013
+  Ford Falcon FG and Holden Commodore VF, reviewed against PMR 2.2.1.0.
+- Disambiguate repeated simulator names using exact telemetry classes, including
+  the Historic USV8 and USV8 Camaros. Refresh guidance on class-only changes.
+- Add original Automobilista registration and guided-contribution support.
+  Include F301 with its reviewed Hewland H-pattern dogbox baseline and retain
+  AMS1 and AMS2 sequential actuation as simulator-specific overrides.
+- Remove F301’s obsolete sequential archetype and contradictory summary;
+  unestablished real-car electronics and wheel details remain unknown.
+- Let manual installers select a custom SimHub folder and retain visible
+  diagnostic details when installation fails.
+- Ship dataset 0.6.42 with 337 reviewed cars. Install the full 0.22.2 package
+  for the class-aware matcher; older clients reject the repeated names.
+
 ## 0.22.1 - 2026-09-12
 
 - Add reviewed Assetto Corsa and Project Motor Racing records, including the

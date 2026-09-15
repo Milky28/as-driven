@@ -1,8 +1,8 @@
 {
   "audit": "simulator-disagreement-audit",
   "schema_version": "1.0.0",
-  "dataset_version": "0.6.29",
-  "generated_at": "2026-09-12",
+  "dataset_version": "0.6.42",
+  "generated_at": "2026-09-15",
   "policy": [
     "Only conflicting established simulator values are findings; an unknown beside a value is an evidence gap, not a disagreement.",
     "The authentic baseline remains separate from every simulator observation and is never rewritten by majority vote.",
@@ -10,10 +10,10 @@
     "Provisional departure means the simulator conflict is real but the authentic baseline needs stronger independent evidence before publication as a benchmark verdict."
   ],
   "summary": {
-    "cars_with_disagreements": 30,
-    "findings": 48,
+    "cars_with_disagreements": 31,
+    "findings": 49,
     "by_status": {
-      "authentic-baseline-open": 22,
+      "authentic-baseline-open": 23,
       "provisional-departure": 10,
       "supported-departure": 16
     },
@@ -21,7 +21,7 @@
       "cockpit-equipment": 4,
       "hardware-choice": 15,
       "launch-technique": 11,
-      "running-shift-technique": 18
+      "running-shift-technique": 19
     }
   },
   "findings": [
@@ -882,6 +882,69 @@
         ],
         "basis": "The curated baseline supplies a comparison answer, but this field does not yet have both high confidence and a registered manufacturer or homologation source. Treat the apparent departure as provisional.",
         "next_action": "Strengthen the real-car evidence for shifter before publishing a benchmark verdict."
+      }
+    },
+    {
+      "finding_id": "f301--transmission-downshift-automatic-blip",
+      "record_id": "f301",
+      "display_name": "F301",
+      "class": "Formula 3 Brasil",
+      "path": "/authentic_controls/transmission/downshift/automatic_blip",
+      "field": "Automatic blip",
+      "driver_impact": "running-shift-technique",
+      "priority": "high",
+      "authentic_baseline": {
+        "value": "unknown",
+        "display_value": "Not established",
+        "confidence": "medium",
+        "source_refs": [
+          "ams1.local-live-f301-controls.1.5.3"
+        ],
+        "primary_source_refs": [],
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      "simulator_views": [
+        {
+          "simulator": "ams2",
+          "label": "AMS2",
+          "value": "yes",
+          "display_value": "Yes",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "1.6.9.91",
+          "verified_at": "2026-08-12",
+          "confidence": "verified",
+          "source_refs": [
+            "ams2.coanda-sheet.v1.0.34",
+            "ams2.reiza-forum.extended-car-info",
+            "simhub.local-ams2-identities.9.11.22",
+            "ams2.local-live-f301-controls.1.6.9.91"
+          ]
+        },
+        {
+          "simulator": "ams1",
+          "label": "Automobilista",
+          "value": "no",
+          "display_value": "No",
+          "relationship_to_authentic": "baseline-open",
+          "verified_game_version": "1.5.3",
+          "verified_at": "2026-09-13",
+          "confidence": "medium",
+          "source_refs": [
+            "reiza.forum.f301-vs-f309",
+            "curitibaracing.f3-brasil.2013",
+            "hewland.mk9.manual",
+            "bat.dallara-f301.cockpit-21",
+            "formel3guide.dallara-f301",
+            "ams1.local-live-f301-controls.1.5.3"
+          ]
+        }
+      ],
+      "adjudication": {
+        "status": "authentic-baseline-open",
+        "matching_simulators": [],
+        "departing_simulators": [],
+        "basis": "The reviewed simulators establish conflicting values, but the authentic real-car value is not established. Research the real car before treating either simulator as the benchmark.",
+        "next_action": "Find real-car evidence for automatic blip."
       }
     },
     {

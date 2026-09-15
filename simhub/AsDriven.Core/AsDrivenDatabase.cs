@@ -58,14 +58,14 @@ namespace AsDriven.Core
             return all;
         }
 
-        private readonly Dictionary<string, CarRecordValues> _identities;
+        private readonly Dictionary<string, List<CarRecordValues>> _identities;
         private readonly Dictionary<string, CarRecordValues> _records;
 
         private AsDrivenDatabase(
             string dataDirectory,
             string datasetVersion,
             int recordCount,
-            Dictionary<string, CarRecordValues> identities,
+            Dictionary<string, List<CarRecordValues>> identities,
             Dictionary<string, CarRecordValues> records,
             CarCatalogEntry[] cars,
             SimulatorCoverage[] simulators)
@@ -109,7 +109,7 @@ namespace AsDriven.Core
             }
 
             JArray conventions = ConventionRules.Load(root);
-            var identities = new Dictionary<string, CarRecordValues>(StringComparer.Ordinal);
+            var identities = new Dictionary<string, List<CarRecordValues>>(StringComparer.Ordinal);
             var recordsBySimulator = new Dictionary<string, CarRecordValues>(StringComparer.Ordinal);
             var cars = new List<CarCatalogEntry>();
             int recordCount = 0;
@@ -216,7 +216,7 @@ namespace AsDriven.Core
             return coverage.ToArray();
         }
 
-        public GuidanceSnapshot Match(string rawGameName, string rawCarIdentifier)
+        public GuidanceSnapshot Match(string rawGameName, string rawCarIdentifier, string rawCarClass = null)
         {
             string simulator = CanonicalizeSimulator(rawGameName);
             if (simulator == null)
@@ -243,10 +243,16 @@ namespace AsDriven.Core
 
             foreach (string kind in MatchPriority)
             {
-                CarRecordValues entry;
-                if (_identities.TryGetValue(Key(simulator, kind, rawCarIdentifier), out entry))
+                List<CarRecordValues> candidates;
+                if (_identities.TryGetValue(Key(simulator, kind, rawCarIdentifier), out candidates))
                 {
-                    return entry.CreateSnapshot(rawGameName, rawCarIdentifier, kind);
+                    CarRecordValues entry = candidates.Count == 1 ? candidates[0]
+                        : candidates.SingleOrDefault(item => item.SimulatorClasses.Contains(rawCarClass));
+                    // A colliding name without its exact class must never fall
+                    // through to a lower-priority alias or an arbitrary car.
+                    return entry == null
+                        ? GuidanceSnapshot.Empty("unmatched", rawGameName, rawCarIdentifier, DatasetVersion)
+                        : entry.CreateSnapshot(rawGameName, rawCarIdentifier, kind);
                 }
             }
 
@@ -374,7 +380,7 @@ namespace AsDriven.Core
             JObject record,
             string recordPath,
             string datasetVersion,
-            Dictionary<string, CarRecordValues> identities,
+            Dictionary<string, List<CarRecordValues>> identities,
             Dictionary<string, CarRecordValues> records,
             List<CarCatalogEntry> cars,
             JArray conventions)
@@ -515,6 +521,9 @@ namespace AsDriven.Core
                         ? string.Empty
                         : string.Join(", ", sourceRefs.Values<string>().ToArray())
                 };
+                entry.SimulatorClasses = simulatorIdentities.OfType<JObject>()
+                    .Where(item => (string)item["kind"] == "class-id")
+                    .Select(item => (string)item["value"]).ToArray();
                 entry.ShiftType = DescribeShiftType(entry.GearCount, entry.ShiftActuation);
                 string recordKey = RecordKey(simulatorId, recordId);
                 if (records.ContainsKey(recordKey))
@@ -542,15 +551,21 @@ namespace AsDriven.Core
                         simulatorId, kind, simulatorIdentity, value, recordPath))
                     {
                         string key = Key(simulatorId, kind, expanded);
-                        CarRecordValues existing;
-                        if (identities.TryGetValue(key, out existing)
-                            && existing.RecordId != entry.RecordId)
+                        List<CarRecordValues> existing;
+                        if (!identities.TryGetValue(key, out existing))
+                        {
+                            existing = new List<CarRecordValues>();
+                            identities[key] = existing;
+                        }
+                        if (existing.Any(item => item.RecordId != entry.RecordId
+                            && (item.SimulatorClasses.Length == 0 || entry.SimulatorClasses.Length == 0
+                                || item.SimulatorClasses.Intersect(entry.SimulatorClasses).Any())))
                         {
                             throw new InvalidDataException(
                                 "Duplicate exact identity '" + expanded + "' for " + simulatorId
                                 + " (" + kind + ") in " + recordPath);
                         }
-                        identities[key] = entry;
+                        if (!existing.Any(item => item.RecordId == entry.RecordId)) existing.Add(entry);
                     }
                 }
             }

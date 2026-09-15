@@ -353,8 +353,8 @@ class ObservationIntakeTests(unittest.TestCase):
     def test_ams1_releases_an_old_draft_without_rewriting_it(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)
-            payload = observation("F301")
-            payload["observation_id"] = "other.f301.20260913t043735646z-367b4bd4"
+            payload = observation("Unreviewed AMS1 Car")
+            payload["observation_id"] = "other.unreviewed-ams1-car.20260913t043735646z-abcdef12"
             payload["simulator"] = "other"
             payload["source_game_name"] = "Automobilista"
             payload["game_version"] = "1.5.3"

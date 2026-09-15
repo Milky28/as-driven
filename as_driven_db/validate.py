@@ -43,7 +43,8 @@ DEPRECATED_WHEEL_RIM_SHAPES = {"gt-style", "prototype", "formula", "yoke", "othe
 # How each simulator spells an aero package, and the only kinds a match is ever
 # looked up by. AsDrivenDatabase.MatchPriority in the client is the same list;
 # class-id is deliberately absent from both, which is why dozens of records
-# share a class key without colliding.
+# share a class key without colliding. Disjoint class sets can disambiguate
+# repeated names; a class is never a standalone match.
 MATCHED_IDENTITY_KINDS = {
     "telemetry-name",
     "display-name",
@@ -989,7 +990,7 @@ def _validate_record_archetype(
 def _collect_identities(
     record: dict[str, Any],
     label: str,
-    claimed: dict[tuple[str, str, str], str],
+    claimed: dict[tuple[str, str, str], list[tuple[str, set[str]]]],
     errors: list[str],
 ) -> None:
     """Records every exact key this record claims, and reports a second claimant."""
@@ -999,6 +1000,7 @@ def _collect_identities(
         if not isinstance(simulator, dict):
             continue
         sim_name = simulator.get("simulator")
+        classes = set(_simulator_identity_values(simulator, "class-id"))
         for identity in simulator.get("identities", []) or []:
             if not isinstance(identity, dict):
                 continue
@@ -1015,8 +1017,11 @@ def _collect_identities(
                 continue
             for expanded in expansion:
                 key = (sim_name, kind, expanded)
-                owner = claimed.get(key)
-                if owner is not None and owner != record_id:
+                owners = claimed.get(key, [])
+                owner = next((name for name, other_classes in owners
+                              if name != record_id and (not classes or not other_classes
+                                                        or classes & other_classes)), None)
+                if owner is not None:
                     errors.append(
                         f"{label}: exact identity {expanded!r} ({sim_name}, {kind}) "
                         f"is already claimed by {owner}"
@@ -1033,7 +1038,7 @@ def _collect_identities(
                     )
                     continue
                 own.add(key)
-                claimed[key] = record_id
+                claimed.setdefault(key, []).append((record_id, classes))
 
 
 def validate_repository(root: Path) -> list[str]:
@@ -1126,7 +1131,7 @@ def validate_repository(root: Path) -> list[str]:
     # Every exact key a match can resolve to, expansions included. The client
     # throws on a duplicate while loading the database, so a collision that only
     # surfaced there would be a validated dataset that will not open.
-    claimed_identities: dict[tuple[str, str, str], str] = {}
+    claimed_identities: dict[tuple[str, str, str], list[tuple[str, set[str]]]] = {}
     for path in actual_paths:
         record = _load(path, errors)
         if record is None:

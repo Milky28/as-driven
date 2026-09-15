@@ -224,7 +224,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
         )
         self.assertEqual(
             {
-                "authentic-baseline-open": 22,
+                "authentic-baseline-open": 23,
                 "provisional-departure": 10,
                 "supported-departure": 16,
             },
@@ -282,6 +282,7 @@ class SimulatorDisagreementAuditTests(unittest.TestCase):
 
     def test_open_findings_do_not_inherit_a_simulator_answer(self) -> None:
         expected = {
+            "f301--transmission-downshift-automatic-blip",
             "bmw-m3-e46-gtr--steering-wheel-rim-shape",
             "bmw-m6-gt3--steering-wheel-rim-shift-lights",
             "chevrolet-corvette-c5-r--transmission-downshift-manual-blip",

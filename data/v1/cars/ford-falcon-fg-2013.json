@@ -1,0 +1,260 @@
+{
+  "$schema": "../../../schema/v1/car-record.schema.json",
+  "schema_version": "1.0.0",
+  "record_id": "ford-falcon-fg-2013",
+  "identity": {
+    "display_name": "Ford Falcon FG (2013)",
+    "manufacturer": "Ford",
+    "model": "Falcon FG",
+    "year": {
+      "label": "2013"
+    },
+    "class": "Australian V8 / Car of the Future",
+    "real_world_identity_notes": "PMR identifies this entry as the 2013 Ford Falcon FG. Official COTF and Albins evidence establishes a six-speed sequential dog-ring transaxle, manual stick actuation, and mandated upshift shift-cut behavior. Exact 2013 wheel hardware and detailed driver technique remain open."
+  },
+  "authentic_controls": {
+    "transmission": {
+      "forward_gears": 6,
+      "gearbox_type": "dogbox",
+      "shift_actuation": "sequential-stick",
+      "shift_pattern": "sequential",
+      "upshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-required",
+        "automatic_cut": "yes",
+        "manual_blip": "not-applicable",
+        "automatic_blip": "not-applicable"
+      },
+      "downshift": {
+        "clutch": "not-required",
+        "throttle_lift": "not-applicable",
+        "automatic_cut": "not-applicable",
+        "manual_blip": "required",
+        "automatic_blip": "unknown"
+      },
+      "standing_start_clutch": "required"
+    },
+    "steering": {
+      "wheel_rim": {
+        "shape": "unknown",
+        "integrated_display": "unknown",
+        "shift_lights": "unknown",
+        "open_top": "unknown",
+        "source_label": "real-car-research-not-established",
+        "notes": "Exact real-car wheel details were not established by the reviewed sources."
+      }
+    },
+    "notes": [
+      "The reviewed exact-scope sources establish forward gears: 6; gearbox construction: dogbox; shift actuation: sequential stick; shift pattern: sequential; standing-start clutch use: required; transmission upshift clutch: not required; transmission upshift throttle_lift: not required; transmission upshift automatic_cut: yes; transmission downshift clutch: not required; transmission downshift manual_blip: required.",
+      "The reviewed real-car sources do not establish wheel topology; those baseline fields remain unknown.",
+      "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+    ]
+  },
+  "simulators": [
+    {
+      "simulator": "pmr",
+      "identities": [
+        {
+          "kind": "telemetry-name",
+          "value": "Falcon FG COTF"
+        },
+        {
+          "kind": "internal-id",
+          "value": "Falcon FG COTF"
+        },
+        {
+          "kind": "class-id",
+          "value": "AUS V8"
+        }
+      ],
+      "behavior": {
+        "shift_type": "sequential-stick",
+        "auto_blip": "unknown",
+        "shift_cut": "unknown",
+        "wheel_rim_type": {
+          "normalized": "gt-formula",
+          "integrated_display": "yes",
+          "shift_lights": "yes",
+          "open_top": "not-applicable",
+          "source_label": "live-cockpit-observation"
+        },
+        "notes": [
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 by Jason Kinslow."
+        ]
+      },
+      "overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "yes",
+          "condition": "The guided observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "gt-formula",
+          "condition": "The guided observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "yes",
+          "condition": "The guided observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.falcon-fg-cotf.20260915t152458336z-5b76fa90 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources establish a different value, so this is a departure from the real car rather than a gap in the evidence.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "verified_game_version": "2.2.1.0",
+      "verified_at": "2026-09-15",
+      "source_refs": [
+        "pmr-falcon-fg-identity-136",
+        "supercars-cotf-dogbox-136",
+        "albins-st6-136",
+        "fg-2013-cockpit-pass-136",
+        "fg-2009-prototype-cockpit-photo-136",
+        "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+      ],
+      "confidence": {
+        "level": "high",
+        "basis": "Official PMR material identifies the 2013 Falcon FG, while Supercars and Albins technical sources establish the COTF transaxle and shift mechanism."
+      }
+    }
+  ],
+  "provenance": {
+    "claims": [
+      {
+        "paths": [
+          "/identity",
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr-falcon-fg-identity-136",
+          "supercars-cotf-dogbox-136",
+          "albins-st6-136",
+          "fg-2013-cockpit-pass-136",
+          "fg-2009-prototype-cockpit-photo-136",
+          "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Official PMR material identifies the 2013 Falcon FG, while Supercars and Albins technical sources establish the COTF transaxle and shift mechanism."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern"
+        ],
+        "source_refs": [
+          "pmr-falcon-fg-identity-136",
+          "supercars-cotf-dogbox-136",
+          "albins-st6-136",
+          "fg-2013-cockpit-pass-136",
+          "fg-2009-prototype-cockpit-photo-136",
+          "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "COTF and Albins sources establish the six-speed transaxle. The official COTF report discusses dog-ring wear in the control transaxle. The ST6 manufacturer documentation establishes sequential rod/cable activation and the COTF installation is the manual-stick system. The ST6 is documented as sequential. The six-speed sequential race transmission uses a driver-operated clutch for standing starts; no automatic launch system was established. The mandated shift-cut system is explicitly intended to reduce shift loads during rapid wide-open-throttle gear changes. The documented shift cut momentarily interrupts torque and supports wide-open-throttle upshifts. Official COTF documentation describes mandated shift-cut settings. Dog-ring race transmission construction supports clutchless downshift as the hardware baseline; exact driver technique remains reviewable. Dog-ring construction establishes the mechanism; manual rev matching is the derived downshift technique unless an automatic blip is separately established. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/upshift",
+          "/authentic_controls/transmission/downshift",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/steering/wheel_rim"
+        ],
+        "source_refs": [
+          "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-falcon-fg-cotf-controls.2.2.1.0"
+        ],
+        "confidence": "high",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
+      },
+      {
+        "paths": [
+          "/authentic_controls/transmission/downshift/clutch",
+          "/authentic_controls/transmission/downshift/manual_blip",
+          "/authentic_controls/transmission/forward_gears",
+          "/authentic_controls/transmission/gearbox_type",
+          "/authentic_controls/transmission/shift_actuation",
+          "/authentic_controls/transmission/shift_pattern",
+          "/authentic_controls/transmission/standing_start_clutch",
+          "/authentic_controls/transmission/upshift/automatic_cut",
+          "/authentic_controls/transmission/upshift/clutch",
+          "/authentic_controls/transmission/upshift/throttle_lift"
+        ],
+        "source_refs": [
+          "pmr-falcon-fg-identity-136",
+          "supercars-cotf-dogbox-136",
+          "albins-st6-136",
+          "fg-2013-cockpit-pass-136",
+          "fg-2009-prototype-cockpit-photo-136"
+        ],
+        "confidence": "high",
+        "basis": "COTF and Albins sources establish the six-speed transaxle. The official COTF report discusses dog-ring wear in the control transaxle. The ST6 manufacturer documentation establishes sequential rod/cable activation and the COTF installation is the manual-stick system. The ST6 is documented as sequential. The six-speed sequential race transmission uses a driver-operated clutch for standing starts; no automatic launch system was established. The mandated shift-cut system is explicitly intended to reduce shift loads during rapid wide-open-throttle gear changes. The documented shift cut momentarily interrupts torque and supports wide-open-throttle upshifts. Official COTF documentation describes mandated shift-cut settings. Dog-ring race transmission construction supports clutchless downshift as the hardware baseline; exact driver technique remains reviewable. Dog-ring construction establishes the mechanism; manual rev matching is the derived downshift technique unless an automatic blip is separately established. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      }
+    ]
+  },
+  "updated_at": "2026-09-15"
+}

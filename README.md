@@ -14,19 +14,16 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## New in 0.22.1
+## New in 0.22.2
 
-- **More reviewed cars.** New Assetto Corsa classics and Project Motor Racing
-  entries include the Ferrari F40, Ford GT40, Lotus 49 and BMW V12 LMR.
-- Establish round cockpit rims for the Ferrari 250 GTO and Mazda 787B from
-  reviewed real-car evidence.
-- **Clearer guided shifts.** Each clutch-free shift test now puts the clutch
-  instruction in its heading and shows both instruction lines on the overlay.
-  Shift detection accounts for a resting throttle offset, and unmeasured
-  automatic cut or blip results are clearly labeled.
-- **Stronger contribution review.** Completed research records a real-car
-  cockpit-photo review, and same-simulator corrections reach the review path.
-  Maintainers can prepare and promote an approved batch as one dataset patch.
+- **PMR V8 Power Pack coverage.** Reviewed entries cover the new Historic
+  USV8, USV8 and AUS V8 Evo cars, plus the Falcon and Commodore COTF.
+- **Exact matching for both Camaros.** The plugin uses the reported class to
+  distinguish the historic and modern cars that both report `Camaro`.
+- **Easier installation.** A folder picker finds custom SimHub installations;
+  installation failures remain visible and save diagnostic details.
+- **Original Automobilista support.** AMS1 now has a distinct contribution and
+  guided-drive path. The F301 is reviewed, with each simulator’s controls kept distinct.
 
 Download it from the
 [latest published release](https://github.com/Milky28/as-driven/releases/latest).
@@ -119,18 +116,19 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.6.29 contains 326 reviewed car records.
+Dataset 0.6.42 contains 337 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |
 | Automobilista 2 | 263 | not applicable |
 | Assetto Corsa | 46 | 14 |
-| Project Motor Racing | 35 | 16 |
+| Project Motor Racing | 46 | 16 |
 | Assetto Corsa Competizione | 18 | 18 |
 | RaceRoom Racing Experience | 10 | 3 |
 | Assetto Corsa EVO | 7 | 3 |
 | rFactor 2 | 5 | 0 |
 | GTR 2 | 2 | 2 |
+| Automobilista | 1 | 1 |
 <!-- release-facts:end -->
 
 Coverage is deepest in Automobilista 2, which is where the work started. The

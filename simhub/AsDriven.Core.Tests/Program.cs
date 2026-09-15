@@ -234,7 +234,7 @@ namespace AsDriven.Core.Tests
                 {
                     Equal("ams1", AsDrivenDatabase.CanonicalizeSimulator(ams1Name),
                         "recognises original Automobilista exactly");
-                    Equal("unmatched", database.Match(ams1Name, "F301").MatchStatus,
+                    Equal("unmatched", database.Match(ams1Name, "Unreviewed AMS1 Car").MatchStatus,
                         "offers an AMS1 contribution without guessing a curated car");
                 }
                 Equal("ams2", AsDrivenDatabase.CanonicalizeSimulator("Automobilista2"),
@@ -286,6 +286,23 @@ namespace AsDriven.Core.Tests
                 // same car "Lamborghini Huracan Super Trofeo EVO2", and both
                 // reach one record because the entries are separate identities
                 // rather than one spelling guessed at.
+                Equal("chevrolet-camaro-z28-1969", database.Match("ProjectMotorRacing", "Camaro", "Historic USV8").RecordId,
+                    "historic Camaro requires its exact class");
+                Equal("chevrolet-camaro-usv8-2022", database.Match("ProjectMotorRacing", "Camaro", "USV8").RecordId,
+                    "modern Camaro requires its exact class");
+                foreach (string carClass in new[] { null, "", "unknown", "usv8" })
+                    False(database.Match("ProjectMotorRacing", "Camaro", carClass).HasMatch,
+                        "ambiguous Camaro does not guess without an exact class");
+                Equal("f301", database.Match("Automobilista", "F301").RecordId,
+                    "matches the reviewed AMS1 F301");
+                Equal("sequential-stick", database.Match("Automobilista", "F301").ShiftActuation,
+                    "preserves AMS1 actuation over corrected real-car baseline");
+                var camaroSession = new SessionState(database);
+                camaroSession.Update(true, "ProjectMotorRacing", "Camaro", "Historic USV8");
+                True(camaroSession.Update(true, "ProjectMotorRacing", "Camaro", "USV8"),
+                    "class-only car changes refresh guidance");
+                Equal("chevrolet-camaro-usv8-2022", camaroSession.Current.RecordId,
+                    "class-only changes select the modern Camaro");
                 GuidanceSnapshot acEvo = database.Match(
                     "AssettoCorsaEvo", "Lamborghini Huracan ST EVO2");
                 True(acEvo.HasMatch, "matches the car Assetto Corsa EVO was driven in");

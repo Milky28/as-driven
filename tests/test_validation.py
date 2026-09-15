@@ -821,6 +821,12 @@ class ValidationTests(unittest.TestCase):
                 {"kind": "telemetry-name", "value": "Audi R8 LMS GT3"}
             )
             path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+            # Without a class qualifier, the collision remains invalid.
+            record["simulators"][0]["identities"] = [
+                item for item in record["simulators"][0]["identities"]
+                if item["kind"] != "class-id"
+            ]
+            path.write_text(json.dumps(record, indent=2), encoding="utf-8")
             errors = validate_repository(temp_root)
             self.assertTrue(
                 any("is already claimed by" in error for error in errors),

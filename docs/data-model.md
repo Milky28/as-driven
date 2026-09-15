@@ -382,3 +382,17 @@ Additive optional fields may ship in a minor schema revision. New required
 fields, changed meanings, or removed enum values require a new major schema
 directory and a migration tool. Dataset releases may advance independently of
 the schema.
+
+### Repeated names in different simulator classes
+
+Two records may share an exact simulator name or internal id only when both
+entries declare nonempty, disjoint `class-id` sets. The client and contribution
+intake use the exact telemetry class to disambiguate these collisions. Missing,
+unknown or differently cased classes produce no match. Class alone never
+identifies a car, and unique names retain their existing matching behavior.
+Switching class with an unchanged name refreshes the live guidance.
+
+Dataset 0.6.42 includes the PMR Historic USV8 and USV8 cars both named `Camaro`.
+SimHub users must install the full 0.22.2 package for this matching support;
+older clients reject the duplicate names. Other clients must implement this
+class disambiguation before consuming these entries.

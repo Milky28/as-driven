@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.37",
+  "approved_at": "2026-09-15",
+  "record_id": "chevrolet-camaro-usv8-2022",
+  "simulator": "pmr",
+  "telemetry_name": "Camaro",
+  "observed_game_version": "2.2.1.0",
+  "observed_through": "SimHub guided verification observation pmr.camaro.20260915t150528705z-064fb100",
+  "approved_controls": {
+    "forward_gears": 4,
+    "shift_actuation": "h-pattern",
+    "shift_pattern": "standard-h",
+    "standing_start_clutch": "required",
+    "automatic_cut": "unknown",
+    "automatic_blip": "unknown",
+    "wheel_rim_shape": "round",
+    "wheel_integrated_display": "no",
+    "wheel_shift_lights": "no",
+    "wheel_open_top": "no"
+  },
+  "confidence_notes": "The exact 2022 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "telemetry_class": "USV8",
+  "staged_record_id": "camaro"
+}
