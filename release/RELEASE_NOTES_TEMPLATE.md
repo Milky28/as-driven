@@ -9,6 +9,7 @@ car records.
 
 - **PMR V8 Power Pack coverage.** Reviewed entries cover the new Historic
   USV8, USV8 and AUS V8 Evo cars, plus the Falcon and Commodore COTF.
+  The Gen3 Camaro AU and Mustang AU use the corrected closed D-shaped wheel guidance.
 - **Exact matching for both Camaros.** The plugin uses the reported class to
   distinguish the historic and modern cars that both report `Camaro`.
 - **Easier installation.** A folder picker finds custom SimHub installations;

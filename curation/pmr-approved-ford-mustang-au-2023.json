@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "dataset_version": "0.6.41",
+  "dataset_version": "0.6.43",
   "approved_at": "2026-09-15",
   "record_id": "ford-mustang-au-2023",
   "simulator": "pmr",
   "telemetry_name": "Mustang AU",
   "observed_game_version": "2.2.1.0",
-  "observed_through": "SimHub guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a",
+  "observed_through": "SimHub guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71",
   "approved_controls": {
     "forward_gears": 6,
     "shift_actuation": "sequential-stick",
@@ -14,13 +14,45 @@
     "standing_start_clutch": "unknown",
     "automatic_cut": "yes",
     "automatic_blip": "unknown",
-    "wheel_rim_shape": "gt-formula",
+    "wheel_rim_shape": "d-shaped",
     "wheel_integrated_display": "no",
     "wheel_shift_lights": "no",
-    "wheel_open_top": "not-applicable"
+    "wheel_open_top": "no"
   },
   "confidence_notes": "The exact 2023 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
-  "scope_notes": "New season-specific identity reviewed from one public guided-drive submission and independent exact-year sources.",
+  "scope_notes": "Maintainer-authorized correction to the original PMR cockpit classification; all drive results and authentic controls retained.",
   "telemetry_class": "AUS V8 Evo",
-  "staged_record_id": "mustang-au"
+  "correction_history": [
+    {
+      "corrected_at": "2026-09-15",
+      "superseded_source_ref": "pmr-v8-pack-identity-135",
+      "replacement_source_ref": "pmr.local-live-mustang-au-controls.2.2.1.0.correction-2e17ed71",
+      "basis": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry.",
+      "behavior_changes": [
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/normalized",
+          "from": "gt-formula",
+          "to": "d-shaped"
+        },
+        {
+          "path": "/simulators/0/behavior/wheel_rim_type/open_top",
+          "from": "not-applicable",
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/steering/wheel_rim/open_top",
+          "from": "not-applicable",
+          "to": "no"
+        },
+        {
+          "path": "/simulators/0/overrides/authentic_controls/steering/wheel_rim/shape",
+          "from": "gt-formula",
+          "to": "d-shaped"
+        }
+      ],
+      "authentic_control_changes": [],
+      "removed_simulator_overrides": []
+    }
+  ],
+  "historical_notes": "Corrected from SimHub guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a through SimHub guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71: On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry."
 }

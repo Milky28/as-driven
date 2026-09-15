@@ -1,0 +1,437 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "0.6.43",
+  "approved_at": "2026-09-15",
+  "records": [
+    {
+      "record_id": "chevrolet-camaro-au-2023",
+      "bundle": "build/research-trials/gen3-wheel-correction/issue-134-staged.json",
+      "display_name": "Chevrolet Camaro AU (2023)",
+      "class": "AUS V8 EVO",
+      "manufacturer": "Chevrolet",
+      "model": "Camaro AU",
+      "year": {
+        "label": "2023"
+      },
+      "real_world_identity_notes": "PMR identifies this entry as the 2023 Chevrolet Camaro AU. Official Supercars documentation establishes the Gen3 six-speed manual sequential stick mechanism. Exact gearbox construction, shift technique, and final production wheel hardware remain open.",
+      "real_world_source_refs": [
+        "pmr-v8-pack-identity-134",
+        "supercars-gen3-stick-134",
+        "gen3-camaro-cockpit-pass-134"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The PMR V8 pack identifies the entry and official Supercars documentation describes the Gen3 six-speed manual sequential gear-change mechanism.",
+      "identity_basis": "The PMR V8 pack identifies the entry and official Supercars documentation describes the Gen3 six-speed manual sequential gear-change mechanism.",
+      "specification_basis": "Official Supercars documentation identifies a six-speed sequential transaxle. Official Supercars documentation confirms a manual sequential gear-change mechanism. The documented mechanism is sequential. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-camaro-au-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2023 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential stick; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "Maintainer-authorized correction to the original PMR cockpit classification; all drive results and authentic controls retained.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/134",
+      "live_source_notes": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry. Original observation: pmr.camaro-au.20260915t151643960z-491252fa. Original SHA-256: 1d82c31e1ec0b02796a6e7ce0a19ec2b1388c140b093957d6160f906f1525895. Corrected observation: pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2. Only /cockpit/wheel_rim/shape and /cockpit/wheel_rim/open_top changed, apart from the amendment identifier.",
+      "existing_record": {
+        "record_id": "chevrolet-camaro-au-2023",
+        "basis": "Exact identity retained from the promoted original guided drive."
+      },
+      "correct_existing_simulator": {
+        "basis": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry.",
+        "supersedes_source_ref": "pmr-v8-pack-identity-134",
+        "supersedes_observed_through": "SimHub guided verification observation pmr.camaro-au.20260915t151643960z-491252fa",
+        "corrected_behavior_paths": [
+          "/behavior/wheel_rim_type/normalized",
+          "/behavior/wheel_rim_type/open_top",
+          "/overrides/authentic_controls/steering/wheel_rim/open_top",
+          "/overrides/authentic_controls/steering/wheel_rim/shape"
+        ]
+      }
+    },
+    {
+      "record_id": "ford-mustang-au-2023",
+      "bundle": "build/research-trials/gen3-wheel-correction/issue-135-staged.json",
+      "display_name": "Ford Mustang AU (2023)",
+      "class": "AUS V8 EVO",
+      "manufacturer": "Ford",
+      "model": "Mustang AU",
+      "year": {
+        "label": "2023"
+      },
+      "real_world_identity_notes": "PMR identifies this entry as the 2023 Ford Mustang AU. Official Supercars documentation establishes the Gen3 six-speed manual sequential stick mechanism. Exact gearbox construction, shift technique, and final production wheel hardware remain open.",
+      "real_world_source_refs": [
+        "pmr-v8-pack-identity-135",
+        "supercars-gen3-stick-135",
+        "gen3-mustang-cockpit-pass-135"
+      ],
+      "confidence": "medium",
+      "confidence_basis": "The PMR V8 pack identifies the entry and official Supercars documentation describes the Gen3 six-speed manual sequential gear-change mechanism.",
+      "identity_basis": "The PMR V8 pack identifies the entry and official Supercars documentation describes the Gen3 six-speed manual sequential gear-change mechanism.",
+      "specification_basis": "Official Supercars documentation identifies a six-speed sequential transaxle. Official Supercars documentation confirms a manual sequential gear-change mechanism. The documented mechanism is sequential. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top.",
+      "control_overrides": {
+        "upshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "downshift": {
+          "clutch": "unknown",
+          "throttle_lift": "unknown",
+          "automatic_cut": "unknown",
+          "manual_blip": "unknown",
+          "automatic_blip": "unknown"
+        },
+        "standing_start_clutch": "unknown",
+        "wheel_rim": {
+          "shape": "unknown",
+          "integrated_display": "unknown",
+          "shift_lights": "unknown",
+          "open_top": "unknown",
+          "source_label": "real-car-research-not-established",
+          "notes": "Exact real-car wheel details were not established by the reviewed sources."
+        }
+      },
+      "simulator_overrides": [
+        {
+          "path": "/authentic_controls/steering/wheel_rim/integrated_display",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/open_top",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shape",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/steering/wheel_rim/shift_lights",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/automatic_cut",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/manual_blip",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/downshift/throttle_lift",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/standing_start_clutch",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/automatic_cut",
+          "value": "yes",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/manual_blip",
+          "value": "not-applicable",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        },
+        {
+          "path": "/authentic_controls/transmission/upshift/throttle_lift",
+          "value": "not-required",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "confidence": {
+            "level": "verified",
+            "basis": "Exact value preserved from the validated guided-drive observation."
+          },
+          "source_refs": [
+            "pmr.local-live-mustang-au-controls.2.2.1.0"
+          ]
+        }
+      ],
+      "confidence_notes": "The exact 2023 identity and established control fields come from the candidate authoritative sources. Fields absent from those sources remain unknown in the real-car baseline; the exact simulator values remain simulator-specific guided observations.",
+      "sourced_control_paths": [
+        "/authentic_controls/transmission/forward_gears",
+        "/authentic_controls/transmission/shift_actuation",
+        "/authentic_controls/transmission/shift_pattern"
+      ],
+      "control_notes": [
+        "The reviewed exact-scope sources establish forward gears: 6; shift actuation: sequential stick; shift pattern: sequential.",
+        "The reviewed real-car sources do not establish launch technique, running-shift technique, cut and blip behavior or wheel topology; those baseline fields remain unknown.",
+        "Project Motor Racing 2.2.1.0 behavior and cockpit values were directly observed and are preserved as simulator overrides where the real baseline is unknown."
+      ],
+      "scope_notes": "Maintainer-authorized correction to the original PMR cockpit classification; all drive results and authentic controls retained.",
+      "live_source_url": "https://github.com/Milky28/as-driven/issues/135",
+      "live_source_notes": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry. Original observation: pmr.mustang-au.20260915t152203276z-61f82a2a. Original SHA-256: 4648bf70e92bf4526820e721c48417b27f148eb4b8db317e1174ce75df948dfa. Corrected observation: pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71. Only /cockpit/wheel_rim/shape and /cockpit/wheel_rim/open_top changed, apart from the amendment identifier.",
+      "existing_record": {
+        "record_id": "ford-mustang-au-2023",
+        "basis": "Exact identity retained from the promoted original guided drive."
+      },
+      "correct_existing_simulator": {
+        "basis": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry.",
+        "supersedes_source_ref": "pmr-v8-pack-identity-135",
+        "supersedes_observed_through": "SimHub guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a",
+        "corrected_behavior_paths": [
+          "/behavior/wheel_rim_type/normalized",
+          "/behavior/wheel_rim_type/open_top",
+          "/overrides/authentic_controls/steering/wheel_rim/open_top",
+          "/overrides/authentic_controls/steering/wheel_rim/shape"
+        ]
+      }
+    }
+  ]
+}

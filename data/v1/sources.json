@@ -14309,6 +14309,30 @@
       "retrieved_at": "2026-09-15",
       "reuse_status": "facts-only-review",
       "notes": "Guided-verification observation pmr.mustang-au.20260915t152203276z-61f82a2a by Jason Kinslow; PMR 2.2.1.0. Summarize the confirmed move-off, gear count, cut/blip, and cockpit rim before registering."
+    },
+    {
+      "source_id": "pmr.local-live-camaro-au-controls.2.2.1.0.correction-90f902b2",
+      "title": "Live PMR Camaro AU guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/134",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-15",
+      "reuse_status": "facts-only-review",
+      "notes": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry. Original observation: pmr.camaro-au.20260915t151643960z-491252fa. Original SHA-256: 1d82c31e1ec0b02796a6e7ce0a19ec2b1388c140b093957d6160f906f1525895. Corrected observation: pmr.camaro-au.20260915t151643960z-491252fa-wheel-correction-90f902b2. Only /cockpit/wheel_rim/shape and /cockpit/wheel_rim/open_top changed, apart from the amendment identifier."
+    },
+    {
+      "source_id": "pmr.local-live-mustang-au-controls.2.2.1.0.correction-2e17ed71",
+      "title": "Live PMR Mustang AU guided-verification drive",
+      "publisher": "Local PMR observation",
+      "url": "https://github.com/Milky28/as-driven/issues/135",
+      "archive_url": null,
+      "source_type": "in-game-observation",
+      "published_or_updated_at": null,
+      "retrieved_at": "2026-09-15",
+      "reuse_status": "facts-only-review",
+      "notes": "On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry. Original observation: pmr.mustang-au.20260915t152203276z-61f82a2a. Original SHA-256: 4648bf70e92bf4526820e721c48417b27f148eb4b8db317e1174ce75df948dfa. Corrected observation: pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71. Only /cockpit/wheel_rim/shape and /cockpit/wheel_rim/open_top changed, apart from the amendment identifier."
     }
   ]
 }

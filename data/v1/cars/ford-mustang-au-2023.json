@@ -72,21 +72,22 @@
         "auto_blip": "unknown",
         "shift_cut": "yes",
         "wheel_rim_type": {
-          "normalized": "gt-formula",
+          "normalized": "d-shaped",
           "integrated_display": "no",
           "shift_lights": "no",
-          "open_top": "not-applicable",
+          "open_top": "no",
           "source_label": "live-cockpit-observation"
         },
         "notes": [
-          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a by Jason Kinslow."
+          "Observed live in PMR 2.2.1.0 via guided verification observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 by Jason Kinslow.",
+          "Correction superseding pmr-v8-pack-identity-135: On 2026-09-15 Jason Kinslow corrected his description of both PMR AUS V8 Evo wheels to a conventional closed rim with flat top and bottom. Under docs/data-model.md this is d-shaped with open_top no. This is a correction of the original cockpit classification, not a new drive or a change to the observed PMR 2.2.1.0 build. The inspected YTG Gen3 Mustang cockpit photo illustrates this rim topology but does not establish PMR rendering or the authentic baseline for either entry."
         ]
       },
       "overrides": [
         {
           "path": "/authentic_controls/steering/wheel_rim/integrated_display",
           "value": "no",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -97,8 +98,8 @@
         },
         {
           "path": "/authentic_controls/steering/wheel_rim/open_top",
-          "value": "not-applicable",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "value": "no",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -109,8 +110,8 @@
         },
         {
           "path": "/authentic_controls/steering/wheel_rim/shape",
-          "value": "gt-formula",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "value": "d-shaped",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -122,7 +123,7 @@
         {
           "path": "/authentic_controls/steering/wheel_rim/shift_lights",
           "value": "no",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -134,7 +135,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/automatic_cut",
           "value": "not-applicable",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -146,7 +147,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/manual_blip",
           "value": "not-required",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -158,7 +159,7 @@
         {
           "path": "/authentic_controls/transmission/downshift/throttle_lift",
           "value": "not-applicable",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -170,7 +171,7 @@
         {
           "path": "/authentic_controls/transmission/standing_start_clutch",
           "value": "not-required",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -182,7 +183,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/automatic_blip",
           "value": "not-applicable",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -194,7 +195,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/automatic_cut",
           "value": "yes",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -206,7 +207,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/manual_blip",
           "value": "not-applicable",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -218,7 +219,7 @@
         {
           "path": "/authentic_controls/transmission/upshift/throttle_lift",
           "value": "not-required",
-          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
+          "condition": "The guided observation pmr.mustang-au.20260915t152203276z-61f82a2a-wheel-correction-2e17ed71 directly recorded this behavior or cockpit value in the simulator version 2.2.1.0; the reviewed real-car sources did not establish the same value.",
           "confidence": {
             "level": "verified",
             "basis": "Exact value preserved from the validated guided-drive observation."
@@ -231,10 +232,11 @@
       "verified_game_version": "2.2.1.0",
       "verified_at": "2026-09-15",
       "source_refs": [
-        "pmr-v8-pack-identity-135",
         "supercars-gen3-stick-135",
         "gen3-mustang-cockpit-pass-135",
-        "pmr.local-live-mustang-au-controls.2.2.1.0"
+        "pmr.local-live-mustang-au-controls.2.2.1.0",
+        "pmr-v8-pack-identity-135",
+        "pmr.local-live-mustang-au-controls.2.2.1.0.correction-2e17ed71"
       ],
       "confidence": {
         "level": "medium",
@@ -246,8 +248,7 @@
     "claims": [
       {
         "paths": [
-          "/identity",
-          "/simulators/0/identities"
+          "/identity"
         ],
         "source_refs": [
           "pmr-v8-pack-identity-135",
@@ -289,16 +290,6 @@
       },
       {
         "paths": [
-          "/simulators/0/behavior"
-        ],
-        "source_refs": [
-          "pmr.local-live-mustang-au-controls.2.2.1.0"
-        ],
-        "confidence": "medium",
-        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
-      },
-      {
-        "paths": [
           "/authentic_controls/transmission/forward_gears",
           "/authentic_controls/transmission/shift_actuation",
           "/authentic_controls/transmission/shift_pattern"
@@ -310,6 +301,29 @@
         ],
         "confidence": "medium",
         "basis": "Official Supercars documentation identifies a six-speed sequential transaxle. Official Supercars documentation confirms a manual sequential gear-change mechanism. The documented mechanism is sequential. The reviewed sources did not establish the remaining technique and wheel fields, which stay unknown in the real-car baseline: /authentic_controls/transmission/gearbox_type, /authentic_controls/transmission/standing_start_clutch, /authentic_controls/transmission/upshift/clutch, /authentic_controls/transmission/upshift/throttle_lift, /authentic_controls/transmission/upshift/automatic_cut, /authentic_controls/transmission/upshift/manual_blip, /authentic_controls/transmission/upshift/automatic_blip, /authentic_controls/transmission/downshift/clutch, /authentic_controls/transmission/downshift/throttle_lift, /authentic_controls/transmission/downshift/automatic_cut, /authentic_controls/transmission/downshift/manual_blip, /authentic_controls/transmission/downshift/automatic_blip, /authentic_controls/steering/wheel_rim/shape, /authentic_controls/steering/wheel_rim/integrated_display, /authentic_controls/steering/wheel_rim/shift_lights, /authentic_controls/steering/wheel_rim/open_top."
+      },
+      {
+        "paths": [
+          "/simulators/0/identities"
+        ],
+        "source_refs": [
+          "pmr-v8-pack-identity-135",
+          "supercars-gen3-stick-135",
+          "gen3-mustang-cockpit-pass-135",
+          "pmr.local-live-mustang-au-controls.2.2.1.0.correction-2e17ed71"
+        ],
+        "confidence": "medium",
+        "basis": "The PMR V8 pack identifies the entry and official Supercars documentation describes the Gen3 six-speed manual sequential gear-change mechanism."
+      },
+      {
+        "paths": [
+          "/simulators/0/behavior"
+        ],
+        "source_refs": [
+          "pmr.local-live-mustang-au-controls.2.2.1.0.correction-2e17ed71"
+        ],
+        "confidence": "medium",
+        "basis": "Directly observed during the guided drive: move-off, shift clutch use, automatic cut and blip, and the cockpit rim."
       }
     ]
   },
