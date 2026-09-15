@@ -1,19 +1,61 @@
 param(
     [string]$SimHubInstallPath = "C:\Program Files (x86)\SimHub",
     [string]$PackagePath = (Join-Path $PSScriptRoot "dist\AsDriven"),
-    [switch]$ReplaceOverlayLayouts
+    [switch]$ReplaceOverlayLayouts,
+    [switch]$Interactive
 )
 
 $ErrorActionPreference = "Stop"
+trap {
+    # Automated callers still receive the original terminating error.
+    if (-not $Interactive) { throw $_ }
+    $failure = $_
+    Write-Host "Installation failed: $($failure.Exception.Message)" -ForegroundColor Red
+    $logPath = Join-Path ([System.IO.Path]::GetTempPath()) (
+        "AsDriven-install-error-" + [Guid]::NewGuid().ToString("N") + ".txt")
+    try {
+        @(
+            "SimHub folder: $SimHubInstallPath"
+            "Package folder: $PackagePath"
+            ($failure | Format-List * -Force | Out-String)
+            $failure.ScriptStackTrace
+        ) | Set-Content -LiteralPath $logPath -Encoding UTF8
+        Write-Host "Error details saved to: $logPath"
+        Write-Host "Include this file when reporting the installation problem."
+    }
+    catch { Write-Host "Could not save the error log: $($_.Exception.Message)" }
+    Write-Host "Press Enter to close this error window."
+    Read-Host | Out-Null
+    exit 1
+}
 $packageRoot = [System.IO.Path]::GetFullPath($PackagePath)
 $simHubRoot = [System.IO.Path]::GetFullPath($SimHubInstallPath)
 
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "AsDriven.Plugin.dll"))) {
     throw "The built As Driven package was not found: $packageRoot"
 }
-if (-not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe"))) {
+if ($Interactive -and -not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe") -PathType Leaf)) {
+    Add-Type -AssemblyName System.Windows.Forms
+    $picker = New-Object System.Windows.Forms.FolderBrowserDialog
+    try {
+        $picker.Description = "Select your existing SimHub folder (the folder containing SimHubWPF.exe)."
+        $picker.ShowNewFolderButton = $false
+        do {
+            Write-Host "SimHub was not found at: $simHubRoot"
+            if ($picker.ShowDialog() -ne [System.Windows.Forms.DialogResult]::OK) {
+                throw "Installation cancelled. No SimHub folder was selected; no files were installed."
+            }
+            $simHubRoot = [System.IO.Path]::GetFullPath($picker.SelectedPath)
+            $SimHubInstallPath = $simHubRoot
+            $picker.Description = "SimHubWPF.exe was not found. Select the folder containing SimHubWPF.exe, or Cancel."
+        } while (-not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe") -PathType Leaf))
+    }
+    finally { $picker.Dispose() }
+}
+if (-not (Test-Path -LiteralPath (Join-Path $simHubRoot "SimHubWPF.exe") -PathType Leaf)) {
     throw "The SimHub installation could not be verified: $simHubRoot"
 }
+Write-Host "Installing into SimHub folder: $simHubRoot"
 $targetExecutable = [System.IO.Path]::GetFullPath((Join-Path $simHubRoot "SimHubWPF.exe"))
 $defaultRoot = [System.IO.Path]::GetFullPath("C:\Program Files (x86)\SimHub")
 # The running process is asked where it was launched from so a SimHub installed

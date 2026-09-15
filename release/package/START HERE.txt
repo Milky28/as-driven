@@ -6,6 +6,8 @@ INSTALL
 1. Close SimHub.
 2. Double-click "Install As Driven.cmd".
 3. Approve the Windows administrator prompt.
+   If the default SimHub folder is not found, choose your existing SimHub folder
+   containing SimHubWPF.exe. Cancel stops installation without copying files.
 4. Start SimHub.
 5. Open Settings > Plugins, enable As Driven, and optionally pin it to the
    left menu.
@@ -42,6 +44,11 @@ diagnostics, contribution drafts, the installed database, and customized
 layouts are preserved by default.
 
 REPORT A PROBLEM
+
+If installation fails, the administrator window stays open with the actual
+error until you press Enter. It prints the path to an AsDriven-install-error-*.txt
+file in its temporary folder; include that file when reporting the problem.
+The opening reminder to close SimHub appears on every run and is not an error.
 
 Visit https://github.com/Milky28/as-driven/issues/new/choose and include the
 As Driven, dataset, SimHub, and simulator versions shown in the plugin.

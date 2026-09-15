@@ -15,13 +15,22 @@ change between releases.
 2. Close SimHub.
 3. Extract the ZIP.
 4. Double-click **Install As Driven.cmd** and approve the Windows administrator
-   prompt.
+   prompt. If SimHub is not found in its default location, select your existing
+   SimHub folder when prompted. It must contain `SimHubWPF.exe`; Cancel stops
+   installation without copying files.
 5. Start SimHub and enable **As Driven** under Settings > Plugins.
 6. Open Dash Studio and load the included As Driven overlay layout.
 
 `START HERE.txt` inside the ZIP repeats these steps. If you prefer PowerShell,
 `simhub/install.ps1` is the same installer and takes an optional
 `-SimHubInstallPath`.
+
+If installation fails, the administrator window stays open with the actual
+error until you press Enter. It also prints the location of an
+`AsDriven-install-error-*.txt` file in its temporary folder. Include that file
+when reporting a problem. The opening reminder to close SimHub appears on every
+run; it does not mean SimHub was detected. If administrator approval is declined,
+the launcher reports that it could not start the installer.
 
 ### The two warnings Windows shows
 
