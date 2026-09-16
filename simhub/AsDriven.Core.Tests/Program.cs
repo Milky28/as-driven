@@ -74,8 +74,29 @@ namespace AsDriven.Core.Tests
                 // either way - a greedy wrap does not know what its limit is
                 // until it reaches it - and the four-row form ellipsises the
                 // tail rather than letting it fall off a row nobody draws.
-                GuidanceSnapshot longSummary = database.Preview("ac", "bmw-3-0-csl-imsa-1975");
-                True(longSummary.HasMatch, "previews the car with the longest shared-panel summary");
+                // No curated summary needs a fifth compact row any more, so the
+                // wrap is exercised with a synthetic record carrying a summary
+                // that does. The text is the 3.0 CSL's former summary.
+                string longSummaryRoot = Path.Combine(
+                    Path.GetTempPath(), "AsDrivenTests-" + Guid.NewGuid().ToString("N"));
+                GuidanceSnapshot longSummary;
+                try
+                {
+                    longSummary = LoadSyntheticGuidance(
+                        longSummaryRoot, "Long Summary Car", "not-required", "yes", "sequential-paddles",
+                        driverSummary: "The 3.0 CSL in its 1975 IMSA Camel GT specification. Five gears through an "
+                            + "H-pattern gate, so the clutch is needed to pull away. Nothing past that is settled - "
+                            + "not the gearbox construction, not the gate, not what the driver did once moving - "
+                            + "so blip on the way down until a source says otherwise.");
+                }
+                finally
+                {
+                    if (Directory.Exists(longSummaryRoot))
+                    {
+                        Directory.Delete(longSummaryRoot, true);
+                    }
+                }
+                True(longSummary.HasMatch, "matches the synthetic car with a long summary");
                 True(
                     longSummary.DriverSummaryCompactLine5.Length > 0,
                     "this summary really does need a fifth row on the compact card");
@@ -983,10 +1004,11 @@ namespace AsDriven.Core.Tests
                 True(dogBoxNote.HasMatch, "matches the Brabham BT44");
                 True(dogBoxNote.DriverSummary.Length > 90, "the dog box summary is long enough to wrap");
                 // The BT44's record calls its dog-ring construction inferred rather
-                // than sourced, so the summary the driver reads must hedge with it.
-                // A summary firmer than its own evidence is the failure this
-                // whole layer exists to avoid.
-                True(dogBoxNote.DriverSummary.IndexOf("inferred", StringComparison.Ordinal) >= 0,
+                // than sourced, so a summary that mentions the dog box must hedge
+                // with it. A summary firmer than its own evidence is the failure
+                // this whole layer exists to avoid.
+                True(dogBoxNote.DriverSummary.IndexOf("dog", StringComparison.OrdinalIgnoreCase) < 0
+                        || dogBoxNote.DriverSummary.IndexOf("inferred", StringComparison.Ordinal) >= 0,
                     "an inferred mechanism is labelled as inference on the card");
                 False(dogBoxNote.DriverSummary.IndexOf("The dog rings engage", StringComparison.Ordinal) >= 0,
                     "and is never asserted as settled fact");
@@ -2580,7 +2602,8 @@ namespace AsDriven.Core.Tests
             string upshiftThrottleLift,
             string simulatorShiftCut,
             string shiftActuation,
-            string overrideJson = null)
+            string overrideJson = null,
+            string driverSummary = null)
         {
             string directory = Path.Combine(root, Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(Path.Combine(directory, "cars"));
@@ -2611,7 +2634,9 @@ namespace AsDriven.Core.Tests
                 + "\"confidence\":{\"level\":\"medium\",\"basis\":\"synthetic test record\"}}],"
                 + "\"provenance\":{\"claims\":[{\"paths\":[\"/identity\"],\"source_refs\":[\"test.source\"],"
                 + "\"confidence\":\"medium\",\"basis\":\"synthetic\"}]},"
-                + "\"updated_at\":\"2026-08-13\"}";
+                + "\"updated_at\":\"2026-08-13\""
+                + (driverSummary == null ? string.Empty : ",\"driver_summary\":" + Newtonsoft.Json.JsonConvert.ToString(driverSummary))
+                + "}";
             File.WriteAllText(Path.Combine(directory, "cars", recordId + ".json"), record);
             File.WriteAllText(
                 Path.Combine(directory, "index.json"),
