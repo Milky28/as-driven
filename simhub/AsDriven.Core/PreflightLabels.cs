@@ -144,6 +144,15 @@ namespace AsDriven.Core
         /// </summary>
         public static string Gate(string actuation, string pattern, string firstGearPosition)
         {
+            // A simulator override can disagree with the curated mechanism.
+            // Flag that conflict rather than presenting two incompatible setups.
+            string derivedGate = ShiftPatternRules.DerivedGate(actuation);
+            if ((actuation == "h-pattern" && ShiftPatternRules.IsDerivedGate(pattern))
+                || (derivedGate != null && pattern != "unknown"
+                    && !string.IsNullOrEmpty(pattern) && pattern != derivedGate))
+            {
+                return "Gate conflict - needs review";
+            }
             if (pattern == "dogleg-h")
             {
                 if (firstGearPosition == "down-left") { return "Dogleg gate - 1st down and left"; }

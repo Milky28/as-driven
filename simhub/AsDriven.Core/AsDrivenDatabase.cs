@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
 namespace AsDriven.Core
@@ -448,8 +449,7 @@ namespace AsDriven.Core
                     DisplayName = OptionalText(simulator, "display_name").Length > 0
                         ? OptionalText(simulator, "display_name")
                         : RequiredString(identity, "display_name", recordPath),
-                    YearFrom = OptionalInteger(
-                        RequiredObject(identity, "year", recordPath), "from"),
+                    YearFrom = ReadYearFrom(RequiredObject(identity, "year", recordPath)),
                     // The record carries one class, and for a car with no real
                     // racing category that value is whichever simulator groups
                     // it - "Vintage Cars Tier 1" is what AMS2 calls the Miura.
@@ -987,6 +987,20 @@ namespace AsDriven.Core
                 throw new InvalidDataException("Missing string '" + name + "' in " + path);
             }
             return result;
+        }
+
+        private static int ReadYearFrom(JObject year)
+        {
+            int from = OptionalInteger(year, "from");
+            if (from != 0)
+            {
+                return from;
+            }
+            // Reviewed identities may carry only a label, such as "1971" or
+            // "1967 Chaparral 2F". Do not mine car names or undated model labels.
+            Match match = Regex.Match(OptionalText(year, "label").Trim(),
+                @"^(18[0-9]{2}|19[0-9]{2}|20[0-9]{2}|2100)(?=$|[\s/\-\u2013\u2014])");
+            return match.Success ? int.Parse(match.Groups[1].Value) : 0;
         }
 
         private static int OptionalInteger(JObject value, string name)

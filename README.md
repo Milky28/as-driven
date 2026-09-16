@@ -23,6 +23,11 @@ or [improve an existing car's research](https://github.com/Milky28/as-driven/iss
   mirrored dogleg gate or a mod that shows the wrong shift pattern.
 - **Sourced contributions.** Researched contributions can now include a
   summary that is checked and reviewed with the rest of the car.
+- **Era themes for every dated car.** Cars whose year is only in their label,
+  such as the PMR Javelin and Chaparral 2F, now get their automatic era theme.
+- **Clear gate conflicts.** Where a car's shifter evidence disagrees, the card
+  says "Gate conflict - needs review" instead of mixing H-pattern and
+  sequential instructions.
 
 Download it from the
 [latest published release](https://github.com/Milky28/as-driven/releases/latest).

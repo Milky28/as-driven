@@ -23,6 +23,33 @@ namespace AsDriven.Core.Tests
                 string dataDirectory = Path.Combine(repositoryRoot, "data", "v1");
                 AsDrivenDatabase database = AsDrivenDatabase.Load(dataDirectory);
 
+                foreach (var conflict in new[] {
+                    new[] { "ac", "alfa-romeo-155-v6-ti-1993" },
+                    new[] { "pmr", "porsche-962c" } })
+                {
+                    GuidanceSnapshot conflictingGate = database.Preview(conflict[0], conflict[1]);
+                    True(conflictingGate.HasMatch, "loads the reported conflicting shifter record");
+                    Equal("Gate conflict - needs review", conflictingGate.ShifterGateLabel,
+                        "flags incompatible mechanism and gate evidence on " + conflict[1]);
+                }
+                Equal("Gate conflict - needs review",
+                    PreflightLabels.Gate("sequential-stick", "standard-h"),
+                    "also flags an H gate on a sequential mechanism");
+                Equal("Gate conflict - needs review",
+                    PreflightLabels.Gate("sequential-paddles", "dogleg-h"),
+                    "does not present a dogleg gate with paddles");
+
+                GuidanceSnapshot javelin = database.Preview("pmr", "amc-javelin-1971");
+                Equal(1971, javelin.YearFrom, "loads a reviewed year stored only as a label");
+                Equal(PopupPreferences.SeventiesTheme,
+                    PopupPreferences.ResolveTheme("auto", javelin.YearFrom),
+                    "PMR Javelin automatically receives its seventies theme");
+                GuidanceSnapshot chaparral = database.Preview("pmr", "chaparral-2f-1967");
+                Equal(1967, chaparral.YearFrom, "reads a year followed by specification text");
+                Equal(PopupPreferences.SixtiesTheme,
+                    PopupPreferences.ResolveTheme("auto", chaparral.YearFrom),
+                    "PMR Chaparral automatically receives its sixties theme");
+
                 // Convention guidance: what cars of a mechanism were usually
                 // driven like, offered only where the real car's own value is
                 // unknown. It is never an authentic claim, so the two rules
@@ -2347,6 +2374,20 @@ namespace AsDriven.Core.Tests
                     Path.GetTempPath(), "AsDrivenTests-" + Guid.NewGuid().ToString("N"));
                 try
                 {
+                    GuidanceSnapshot dated = LoadSyntheticGuidance(
+                        syntheticRoot, "Year precedence", "unknown", "no", "sequential-stick",
+                        yearJson: "{\"from\":1988,\"label\":\"1991 specification\"}");
+                    Equal(1988, dated.YearFrom, "explicit numeric start year takes precedence over label");
+                    foreach (string label in new[] { "unknown", "Sports 2000 specification", "1990s", "19900", "Early 1990s" })
+                    {
+                        GuidanceSnapshot undated = LoadSyntheticGuidance(
+                            syntheticRoot, "1967 car name", "unknown", "no", "sequential-stick",
+                            yearJson: new JObject { { "label", label } }.ToString());
+                        Equal(0, undated.YearFrom, "does not guess an exact year from " + label);
+                        Equal(PopupPreferences.ModernTheme,
+                            PopupPreferences.ResolveTheme("auto", undated.YearFrom),
+                            "unestablished start years retain the existing fallback");
+                    }
                     // An unverified upshift lift with no automatic cut must say so
                     // instead of silently omitting upshift guidance.
                     GuidanceSnapshot unverified = LoadSyntheticGuidance(
@@ -2603,7 +2644,8 @@ namespace AsDriven.Core.Tests
             string simulatorShiftCut,
             string shiftActuation,
             string overrideJson = null,
-            string driverSummary = null)
+            string driverSummary = null,
+            string yearJson = null)
         {
             string directory = Path.Combine(root, Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(Path.Combine(directory, "cars"));
@@ -2614,7 +2656,7 @@ namespace AsDriven.Core.Tests
                 + "\"record_id\":\"" + recordId + "\","
                 + "\"identity\":{\"display_name\":\"" + telemetryName + "\","
                 + "\"manufacturer\":\"Test\",\"model\":\"Test\","
-                + "\"year\":{\"label\":\"test\"},\"class\":\"TEST\"},"
+                + "\"year\":" + (yearJson ?? "{\"label\":\"test\"}") + ",\"class\":\"TEST\"},"
                 + "\"authentic_controls\":{\"transmission\":{"
                 + "\"forward_gears\":6,\"gearbox_type\":\"unknown\","
                 + "\"shift_actuation\":\"" + shiftActuation + "\",\"shift_pattern\":\"sequential\","

@@ -14,9 +14,14 @@ car records.
   mirrored dogleg gate or a mod that shows the wrong shift pattern.
 - **Sourced contributions.** Researched contributions can now include a
   summary that is checked and reviewed with the rest of the car.
+- **Era themes for every dated car.** Cars whose year is only in their label,
+  such as the PMR Javelin and Chaparral 2F, now get their automatic era theme.
+- **Clear gate conflicts.** Where a car's shifter evidence disagrees, the card
+  says "Gate conflict - needs review" instead of mixing H-pattern and
+  sequential instructions.
 
-No plugin behaviour changed. The full ZIP and the database-only package both
-deliver the new summaries.
+The database-only package delivers the new summaries. Install the full plugin
+ZIP for the era-theme and gate-conflict fixes.
 
 ## Install
 

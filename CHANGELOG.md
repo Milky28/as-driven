@@ -19,8 +19,15 @@ late in a Pacific evening carries the following day. Take the date from
   kept in `research/driver-summary-audit-2026-09.json`.
 - Let contribution research include a sourced driver summary that carries
   through review into the promoted record.
-- Ship dataset 0.7.0 with 337 reviewed cars. No plugin behaviour changes;
-  a database-only update also delivers the new summaries.
+- Fix automatic era themes and catalogue decade filters for cars whose reviewed
+  year is stored only in the year label, including the PMR V8 Power Pack
+  entries. Explicit numeric years keep precedence; undated labels keep the
+  existing fallback.
+- Flag conflicting shifter actuation and gate evidence on the overlay as a gate
+  conflict instead of presenting incompatible H-pattern and sequential
+  instructions together.
+- Ship dataset 0.7.0 with 337 reviewed cars. A database-only update delivers the
+  new summaries; install the full package for the era and gate fixes.
 
 ## 0.22.2 - 2026-09-15
 
