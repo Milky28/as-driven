@@ -940,11 +940,21 @@ namespace AsDriven.Core.Tests
                 Equal("Display not recorded", PreflightLabels.WheelFeatures("unknown", "no"),
                     "an unobserved modifier is never rendered as a no");
 
-                Equal("5-speed H-pattern", PreflightLabels.Shifter(5, "h-pattern"), "names the shifter");
-                Equal("6-speed paddles", PreflightLabels.Shifter(6, "sequential-paddles"), "names paddles");
-                Equal("5-speed sequential", PreflightLabels.Shifter(5, "sequential-stick"), "names a stick");
-                Equal("H-pattern", PreflightLabels.Shifter(0, "h-pattern"),
+                Equal("5-speed H-pattern", PreflightLabels.Shifter(5, "h-pattern", "unknown"), "names the shifter");
+                Equal("6-speed paddles", PreflightLabels.Shifter(6, "sequential-paddles", "unknown"), "names paddles");
+                Equal("5-speed sequential", PreflightLabels.Shifter(5, "sequential-stick", "unknown"), "names a stick");
+                Equal("H-pattern", PreflightLabels.Shifter(0, "h-pattern", "unknown"),
                     "omits the gear count when it is not known");
+                Equal("5-speed H-pattern (sync)",
+                    PreflightLabels.Shifter(5, "h-pattern", "synchromesh"),
+                    "names the construction that decides whether the blip is required");
+                Equal("5-speed H-pattern (dog)",
+                    PreflightLabels.Shifter(5, "h-pattern", "dogbox"),
+                    "abbreviates dog box, since the shifter cell clips rather than wraps");
+                Equal("6-speed paddles", PreflightLabels.Shifter(6, "sequential-paddles", "sequential"),
+                    "a sequential gearbox_type restates the paddle actuation, so it adds nothing");
+                Equal("shifter not recorded", PreflightLabels.Shifter(5, "unknown", "synchromesh"),
+                    "an unrecorded actuation is not dressed up with a construction");
 
                 Equal("Dogleg gate - 1st down and left",
                     PreflightLabels.Gate("h-pattern", "dogleg-h", "down-left"),
@@ -992,7 +1002,7 @@ namespace AsDriven.Core.Tests
                 GuidanceSnapshot dogBox = database.Match(
                     "Automobilista2", "Brabham BMW BT52 - High Downforce");
                 True(dogBox.HasMatch, "matches the Brabham dog box");
-                Equal("5-speed H-pattern", dogBox.ShifterLabel, "Brabham shifter");
+                Equal("5-speed H-pattern (dog)", dogBox.ShifterLabel, "Brabham shifter");
                 Equal("Clutch required", dogBox.LaunchLabel, "Brabham launch");
                 Equal("Lift the throttle", dogBox.UpshiftLabel, "Brabham upshift");
                 Equal("Blip - rev-match", dogBox.DownshiftLabel, "Brabham downshift");
@@ -2438,6 +2448,16 @@ namespace AsDriven.Core.Tests
                     False(
                         automatic.TechniqueSummary.Contains("not yet verified"),
                         "keeps an automatic gearbox silent about upshift throttle technique");
+
+                    // gearbox_type is parsed from the record, not just recognised
+                    // by PreflightLabels' own unit tests, and an override cannot
+                    // reach it because transmission overrides are not classified
+                    // by construction.
+                    GuidanceSnapshot dogboxCar = LoadSyntheticGuidance(
+                        syntheticRoot, "Dogbox Car", "required", "no", "h-pattern",
+                        gearboxType: "dogbox");
+                    Equal("6-speed H-pattern (dog)", dogboxCar.ShifterLabel,
+                        "reads gearbox_type from the record into the FIT line");
                 }
                 finally
                 {
@@ -2645,7 +2665,8 @@ namespace AsDriven.Core.Tests
             string shiftActuation,
             string overrideJson = null,
             string driverSummary = null,
-            string yearJson = null)
+            string yearJson = null,
+            string gearboxType = "unknown")
         {
             string directory = Path.Combine(root, Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(Path.Combine(directory, "cars"));
@@ -2658,7 +2679,7 @@ namespace AsDriven.Core.Tests
                 + "\"manufacturer\":\"Test\",\"model\":\"Test\","
                 + "\"year\":" + (yearJson ?? "{\"label\":\"test\"}") + ",\"class\":\"TEST\"},"
                 + "\"authentic_controls\":{\"transmission\":{"
-                + "\"forward_gears\":6,\"gearbox_type\":\"unknown\","
+                + "\"forward_gears\":6,\"gearbox_type\":\"" + gearboxType + "\","
                 + "\"shift_actuation\":\"" + shiftActuation + "\",\"shift_pattern\":\"sequential\","
                 + "\"upshift\":{\"clutch\":\"not-required\",\"throttle_lift\":\"" + upshiftThrottleLift + "\","
                 + "\"automatic_cut\":\"" + simulatorShiftCut + "\",\"manual_blip\":\"not-applicable\",\"automatic_blip\":\"not-applicable\"},"

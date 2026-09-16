@@ -22,6 +22,7 @@
         public int YearFrom;
         public string ShiftType;
         public string ShiftActuation;
+        public string GearboxType;
         public string ShiftPattern;
         public string FirstGearPosition;
         public int GearCount;

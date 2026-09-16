@@ -462,6 +462,7 @@ namespace AsDriven.Core
                             ? RequiredString(identity, "class", recordPath)
                             : string.Empty,
                     ShiftActuation = RequiredString(effectiveTransmission, "shift_actuation", recordPath),
+                    GearboxType = RequiredString(effectiveTransmission, "gearbox_type", recordPath),
                     ShiftPattern = RequiredString(effectiveTransmission, "shift_pattern", recordPath),
                     FirstGearPosition = OptionalState(effectiveTransmission, "first_gear_position"),
                     GearCount = OptionalInteger(effectiveTransmission, "forward_gears"),

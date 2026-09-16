@@ -117,7 +117,7 @@ namespace AsDriven.Core
             return displayKnown && lightsKnown ? ToneKnown : ToneUnknown;
         }
 
-        public static string Shifter(int gears, string actuation)
+        public static string Shifter(int gears, string actuation, string gearboxType)
         {
             string label;
             switch (actuation)
@@ -127,9 +127,37 @@ namespace AsDriven.Core
                 case "sequential-paddles": label = "paddles"; break;
                 case "automatic-lever": label = "automatic"; break;
                 case "direct-selection": label = "direct select"; break;
-                default: label = "shifter not recorded"; return label;
+                default: return "shifter not recorded";
             }
-            return gears > 0 ? gears + "-speed " + label : label;
+            string shifter = gears > 0 ? gears + "-speed " + label : label;
+            string construction = Construction(gearboxType);
+            return construction.Length > 0 ? shifter + " (" + construction + ")" : shifter;
+        }
+
+        /// <summary>
+        /// The word that names how the gears engage, shown only where it tells
+        /// the driver something the actuation label does not already say.
+        /// Synchromesh and a dog box are driven differently on a downshift -
+        /// see <see cref="Downshift"/> - which is why those two are named and
+        /// the rest are not: "sequential" or "automatic" gearbox_type values
+        /// restate the actuation word rather than adding to it.
+        ///
+        /// Abbreviated to "sync" and "dog" rather than spelled out. The FIT
+        /// row's shifter cell is a fixed-width Dash Studio text box that clips
+        /// rather than wraps or ellipsises on overflow, and a live drive
+        /// showed the spelled-out forms clipping mid-word at both packaged
+        /// sizes even before accounting for an 8-speed gear count, the
+        /// largest in the curated dataset. The settings-page primer defines
+        /// both abbreviations in full.
+        /// </summary>
+        private static string Construction(string gearboxType)
+        {
+            switch (gearboxType)
+            {
+                case "synchromesh": return "sync";
+                case "dogbox": return "dog";
+                default: return string.Empty;
+            }
         }
 
         public static string Gate(string actuation, string pattern)

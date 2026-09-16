@@ -316,3 +316,93 @@ behavior remained operational after the restart.
 
 Exit criterion: rollback-safe updates and clear distinction among authentic
 hardware, modeled behavior, and active session rules.
+
+## Phase 5 - gearbox primer and construction on the card
+
+Raised 2026-09-16. Two changes designed together so the card's terms and the
+guide's terms match: showing gearbox construction on the FIT line, and
+explaining what construction and gate terms mean to a driver who does not
+already know them.
+
+**Construction on the FIT line: done and live-verified.** `authentic_controls.transmission.gearbox_type`
+(`synchromesh`, `dogbox`, `sequential`, `semi-automatic`, `dual-clutch`,
+`automatic`, `direct-drive`, `unknown`) already carried this; no schema change
+was needed. `PreflightLabels.Shifter` now takes `gearbox_type` as a third
+argument and appends the construction in parenthesis - but only for
+`synchromesh` and `dogbox`. The other `gearbox_type` values restate what the
+shifter-actuation word already says (a paddle car whose `gearbox_type` is
+`sequential` gains nothing from being told so twice), so they add nothing to
+the FIT line. `AsDrivenDatabase.cs` now reads `gearbox_type` into
+`CarRecordValues`/`GuidanceSnapshot`, which it did not before. A collapsed
+"What do these terms mean?" glossary was added to the native settings page's
+Car browser tab (`AsDrivenSettingsControl.cs`), covering
+H-pattern/sequential/paddles, synchromesh, dog box, and what the card's
+construction term is derived from. It is static and has no telemetry
+dependency.
+
+The spelled-out forms - "(synchromesh)", "(dog box)" - clipped mid-word on a
+live Alfa Romeo 33 Stradale card at both Detailed and Compact sizes:
+`ShifterLabel` had never needed width-fit logic before (unlike the
+driver-summary and name text) because nothing bound to it had ever been this
+long, and the project's own text-fit test explicitly skips text bound by
+expression rather than drawn literally, so nothing caught it before a live
+drive did. `Construction()` now returns the abbreviations "sync" and "dog"
+instead, which fit comfortably even at eight forward gears - the most in the
+curated dataset - and the settings-page primer defines both in full. Reverified
+live on the same card after the change.
+
+Also not yet done: `as_driven_db/site.py`'s `shifter()` mirrors
+`PreflightLabels.Shifter` for the public catalog page by design (its module
+docstring says so) and was not updated in this pass, so the catalog and the
+in-sim card now disagree on this one line until it is.
+
+**The asterisk.** Per `docs/gearbox-construction-research.md`, a lot of
+`gearbox_type` values are inferred at `medium` confidence rather than stated
+outright at `high`/`verified`. The card must say which, or it overstates the
+evidence a driver is acting on. Decision: mark `gearbox_type` with an
+asterisk when the claim covering it is below `high`, and explain the marker
+once wherever the primer lives - not per car.
+
+The gap: the SimHub client currently reads only resolved
+`authentic_controls` values and one overall per-simulator confidence
+([GuidanceSnapshot.cs](../simhub/AsDriven.Core/GuidanceSnapshot.cs)); it has
+no per-field confidence. `provenance.claims[].paths` already ties a claim to
+the exact JSON Pointer it covers, and `as_driven_db/site.py` already resolves
+that lookup for the public catalog's evidence trail
+(`_provenance_label`, `site.py:667`). Decision: reuse that lookup rather than
+reimplement claim/path matching in C#. Concretely:
+
+1. Add a derived, tooling-written field alongside `gearbox_type` (name TBD,
+   e.g. `gearbox_type_confidence`, `$ref: #/$defs/confidenceLevel`) written by
+   `as_driven_db format-records` (or a new command) from the claim covering
+   `/authentic_controls/transmission/gearbox_type`. Never hand-authored -
+   authored data is the claim, this is computed from it, the same relationship
+   `archetypeClassification` already has to the fields it classifies.
+2. `as_driven_db validate` gains a check that the derived field matches what
+   the current claims resolve to, so it cannot go stale silently the way a
+   hand-maintained mirror could.
+3. `AsDrivenDatabase.cs` reads the new field (optional - absent on an older
+   dataset reads as `unknown`, matching how the reader already tolerates a
+   database published before `conventions.json` existed).
+4. `PreflightLabels.Shifter` takes the confidence and appends `*` when it is
+   below `high`.
+
+This is a mechanical, dataset-wide change once the tooling exists - the value
+already exists in every record's claims, nothing is remeasured - but it does
+touch the schema and regenerate a derived field across roughly 300 records,
+so it bumps `schema_version` or at least `dataset_version` and is done as its
+own reviewed batch, not folded into unrelated curation.
+
+**The primer.** A new, collapsed-by-default section on the native SimHub
+settings page (alongside the existing car-browser guidance cells in
+`AsDrivenSettingsControl.cs`), not a popup reachable mid-session. Static
+glossary content - H-pattern vs sequential vs paddle, synchromesh vs dog box
+and why the blip behaves differently, what the asterisk on the card means -
+with no telemetry dependency, so it renders the same whether or not a car is
+matched. Content follows `docs/convention-guidance.md`'s standard: mechanism
+consequences a driver can act on, never a damage claim the sims do not model.
+
+Exit criterion: a driver who does not know synchromesh from a dog box can
+read the primer once and then act on the FIT card's construction term and its
+asterisk without further explanation, and every existing FIT line still
+matches what the primer describes.

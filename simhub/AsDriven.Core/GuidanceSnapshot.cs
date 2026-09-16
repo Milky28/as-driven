@@ -16,6 +16,7 @@ namespace AsDriven.Core
         public int YearFrom { get; private set; }
         public string ShiftType { get; private set; }
         public string ShiftActuation { get; private set; }
+        public string GearboxType { get; private set; }
         public string ShiftPattern { get; private set; }
         public string FirstGearPosition { get; private set; }
         public int GearCount { get; private set; }
@@ -248,10 +249,12 @@ namespace AsDriven.Core
             get { return PreflightLabels.WheelFeatureTone(WheelIntegratedDisplay, WheelShiftLights); }
         }
 
-        /// <summary>Gear count and actuation, e.g. "5-speed H-pattern".</summary>
+        /// <summary>Gear count, actuation, and construction where it says
+        /// something the actuation does not, e.g. "5-speed H-pattern
+        /// (synchromesh)".</summary>
         public string ShifterLabel
         {
-            get { return PreflightLabels.Shifter(GearCount, ShiftActuation); }
+            get { return PreflightLabels.Shifter(GearCount, ShiftActuation, GearboxType); }
         }
 
         /// <summary>Where the gears sit, e.g. "Dogleg gate - 1st down and left".</summary>
@@ -361,6 +364,7 @@ namespace AsDriven.Core
                 YearFrom = values.YearFrom,
                 ShiftType = values.ShiftType,
                 ShiftActuation = values.ShiftActuation,
+                GearboxType = values.GearboxType,
                 ShiftPattern = values.ShiftPattern,
                 FirstGearPosition = values.FirstGearPosition,
                 GearCount = values.GearCount,
@@ -446,6 +450,7 @@ namespace AsDriven.Core
                 YearFrom = 0,
                 ShiftType = string.Empty,
                 ShiftActuation = string.Empty,
+                GearboxType = string.Empty,
                 ShiftPattern = string.Empty,
                 FirstGearPosition = string.Empty,
                 GearCount = 0,

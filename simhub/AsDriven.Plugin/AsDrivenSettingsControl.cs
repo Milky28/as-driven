@@ -1238,6 +1238,7 @@ namespace AsDriven.Plugin
                 Margin = new Thickness(0, 0, 0, 12),
                 MaxWidth = 900,
             });
+            panel.Children.Add(CreateGearboxPrimer());
             _previewStatus = new TextBlock
             {
                 FontSize = 14,
@@ -1580,6 +1581,62 @@ namespace AsDriven.Plugin
             Grid.SetColumn(border, column);
             parent.Children.Add(border);
             return value;
+        }
+
+        /// <summary>
+        /// A collapsed-by-default glossary for a driver who does not already
+        /// know a dog box from synchromesh, or an H-pattern from a sequential
+        /// stick. Static: it explains terms the FIT card uses, not any one
+        /// car's guidance, so it carries no telemetry dependency and reads the
+        /// same whether or not a car is matched.
+        ///
+        /// Kept to mechanism consequences a driver can act on, never a damage
+        /// claim - the same rule docs/driver-summaries.md sets for the card's
+        /// own free text, because this panel is teaching the same vocabulary.
+        /// </summary>
+        private static UIElement CreateGearboxPrimer()
+        {
+            var expander = new SHExpander
+            {
+                Header = "What do these terms mean?",
+                IsExpanded = false,
+                Margin = new Thickness(0, 0, 0, 14),
+            };
+            var content = new StackPanel { Margin = new Thickness(0, 10, 0, 0) };
+
+            Action<string, string> addTerm = (term, explanation) =>
+            {
+                content.Children.Add(new TextBlock
+                {
+                    Text = term,
+                    FontWeight = FontWeights.SemiBold,
+                    Margin = new Thickness(0, 0, 0, 2),
+                });
+                content.Children.Add(new TextBlock
+                {
+                    Text = explanation,
+                    TextWrapping = TextWrapping.Wrap,
+                    Opacity = 0.85,
+                    Margin = new Thickness(0, 0, 0, 12),
+                    MaxWidth = 820,
+                });
+            };
+
+            addTerm(
+                "H-pattern, sequential, and paddles",
+                "H-pattern: a lever moves through a gate to reach each gear directly, so a shift can go to any gear, in any order. Sequential stick and paddles both move through gears one at a time, in order - a stick worked by hand, paddles by the fingers - and neither can skip a gear or select one out of sequence.");
+            addTerm(
+                "Synchromesh - shown on the card as \"sync\"",
+                "The gearbox itself matches the shaft speeds as a gear engages. A downshift blip is never required on a synchromesh box - the synchroniser is doing that job - though blipping still makes the engagement smoother and is common technique regardless.");
+            addTerm(
+                "Dog box - shown on the card as \"dog\"",
+                "Gears engage by a direct mechanical interlock rather than through a synchroniser. A firm, decisive shift engages the dogs better than a hesitant one, and matching revs yourself on a downshift - the blip the USE band asks for - helps them engage cleanly instead of grinding.");
+            addTerm(
+                "The word in parenthesis on the FIT card",
+                "Where the FIT card names a car's gearbox construction - \"sync\" for synchromesh, \"dog\" for a dog box - that is this same fact, established for that specific car. It is shown only when it tells you something the shifter type does not already say: a sequential or paddle car's construction is not repeated here, because it does not change the technique the USE band already states.");
+
+            expander.Content = content;
+            return expander;
         }
 
         private UIElement CreateContributionTab()
