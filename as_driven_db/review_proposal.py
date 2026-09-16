@@ -1670,6 +1670,20 @@ def _prepare_record_proposal(
         # Adding or correcting a simulator must not erase reviewed record-wide
         # prose merely because the maintainer did not ask to regenerate it.
         manifest_entry["driver_summary"] = existing_record["driver_summary"]
+    else:
+        summary_claim = next(
+            (claim for claim in result["claims"]
+             if claim["path"] == "/driver_summary" and claim["finding"] == "established"),
+            None,
+        )
+        if summary_claim:
+            manifest_entry["driver_summary"] = summary_claim["proposed_value"]
+            manifest_entry.setdefault("additional_claims", []).append({
+                "paths": ["/driver_summary"],
+                "source_refs": list(summary_claim["source_refs"]),
+                "confidence": summary_claim["confidence"],
+                "basis": summary_claim["basis"],
+            })
     manifest = {
         "schema_version": "1.0.0",
         "dataset_version": proposed_version,
@@ -2004,6 +2018,17 @@ def generate_driver_summary_proposal(
     )
 
     generated_summary, disagreements = generate_driver_summary(current_preview)
+    # A research-written paragraph contains facts the control-only fallback
+    # cannot recreate. Reuse that sourced proposal on explicit regeneration.
+    if not research_amendment and artifacts.get("research_result"):
+        result = _read_json(case_directory / artifacts["research_result"], "research result")
+        errors = validate_research_result(root, case, result, "research result")
+        if errors:
+            raise ResearchHandoffError("; ".join(errors))
+        for claim in result["claims"]:
+            if claim["path"] == "/driver_summary" and claim["finding"] == "established":
+                generated_summary = claim["proposed_value"]
+                break
     existing_summary = manifest["records"][0].get("driver_summary")
     if driver_summary is not None:
         summary = " ".join(str(driver_summary).split())
@@ -2076,10 +2101,10 @@ def generate_driver_summary_proposal(
 
 ## Accuracy boundary
 
-- Derived from the reviewed authentic control baseline in the passed promotion preview
+- Check all prose against the reviewed values and cited sources in the passed promotion preview
 {disagreement_note}
-- Unknown values stay explicit and produce conservative driver advice
-- No gearbox construction, identity detail, or historical fact is inferred
+- Prefer useful car/class context or relevant technique that adds to FIT/USE; avoid filler
+- Historical, design, and class-era claims need their own cited evidence; controls do not establish them
 
 This text is now in the proposed manifest and the regenerated preview record. Review it in context before approving promotion.
 """,

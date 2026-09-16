@@ -6,7 +6,9 @@ Answer: which physical controls should I use, and how should I shift this car?
 The versioned JSON database is the source of truth; SimHub is one read-only
 client. Cover rim category, shifter actuation/pattern/gears, clutch technique,
 lift/cut/blipping, and optional steering DOR. General car specifications,
-driver aids, and unrelated electronics are out of scope.
+driver aids, and unrelated electronics are out of scope as structured fields.
+Evidence-backed design, history, category/era and useful driving context may be
+included in the optional driver summary.
 Steering DOR remains for compatibility; do not start new research for it or
 populate the real-car field from simulator settings.
 
@@ -27,7 +29,8 @@ populate the real-car field from simulator settings.
 - Overrides describe simulator differences or observations over an unknown
   baseline. Do not add overrides agreeing with the authentic value.
 - `driver_summary` is optional. Do not invent one to complete a record; follow
-  `docs/driver-summaries.md` and write manual summaries with the maintainer.
+  `docs/driver-summaries.md`. Research may draft supported car/class context for
+  maintainer review; preserve existing reviewed prose.
 - Preserve the checked-in coverage inventory when local inputs are absent.
   Refreshing it must not silently discard previously observed identities.
 

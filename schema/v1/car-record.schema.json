@@ -27,7 +27,7 @@
     },
     "provenance": { "$ref": "#/$defs/provenance" },
     "driver_summary": {
-      "description": "One short paragraph telling the driver what to do differently in this car, and why. It is the only free text the preflight overlay shows, so it must say something the Fit and Use rows do not already state: \"this is a dog box\" is already carried by the gearbox type, while \"rev-match every downshift or the dogs will not engage\" is the reason to read it. Optional. When absent the overlay shows no note panel at all rather than padding the card with restatement. Every claim in it must be supported by the record's own curated values or its cited sources.",
+      "description": "One short paragraph adding useful car-specific design, history, competition or class-era context, or relevant instructive technique beyond the Fit and Use rows. Generic simulator classes may share supported category and era context without claiming an exact real chassis. Optional when no supported useful information is available. Every material claim must be supported by the record values or cited sources; do not pad with row restatement or research-status caveats.",
       "type": "string",
       "minLength": 1,
       "maxLength": 520

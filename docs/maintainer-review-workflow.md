@@ -397,9 +397,12 @@ maintainer gate:
 At `manifest-review`, the workbench also offers **Generate driver summary**.
 It writes the draft into the proposed manifest, creates `driver-summary.md`,
 updates `final-review.md` and `preview-record.json`, and reruns the same temporary
-promotion validation. The draft uses only reviewed control values, keeps
-unknowns explicit, and points any cross-simulator technique disagreement back
-to the selected game's USE row. It never promotes automatically. Existing
+promotion validation. Contribution research should first draft useful sourced
+car history, design or class-era context, or instructive technique, following
+`docs/driver-summaries.md`. An optional established `/driver_summary` research
+claim flows through `prepare-review` into the manifest, provenance and preview.
+The deterministic generator only knows control values and simulator differences;
+it does not invent contextual facts. It never promotes automatically. Existing
 record-wide summary prose is preserved unless the maintainer explicitly asks to
 regenerate it.
 

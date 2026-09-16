@@ -302,6 +302,24 @@ These are deterministic research leads only: exact curated identity matches or d
 
 {questions}
 
+## Driver summary draft
+
+Follow `docs/driver-summaries.md`. Seek one useful car-specific story: design,
+history, competition context, or instructive technique that adds to FIT/USE.
+For fictional or generic simulator classes, describe the supported real-world
+category and era, typical construction and driving; share text across a genuine
+class/generation without claiming an exact real chassis. Prefer this supported
+context to leaving a generic class blank. Relevant technique is welcome when
+interesting or helpful. Avoid row restatement, stock advice, and research-status
+filler. Do not invent a story merely to fill the field.
+
+When supported, include one optional established `/driver_summary` claim whose
+`proposed_value` is the paragraph. Give sources, confidence, exact locators and a
+basis covering every material statement, including why class-wide facts apply.
+Read the source itself; a title or model name is not evidence. Omit the claim
+when unsupported. Preparation carries the draft into the manifest and preview
+for maintainer review, while preserving existing reviewed prose.
+
 ## Required control claim paths
 
 If `research_status` is `complete`, include an established or `not-established` claim for every path below. These are the material fields present in the staged observation.
@@ -433,6 +451,7 @@ def generate_research_brief(
     )
     claim_paths = sorted(_research_claim_schemas(root, research_schema))
     if case.get("submission_type") == "existing-car-research":
+        claim_paths.remove("/driver_summary")
         target_id = str((case.get("target_record") or {}).get("record_id") or "")
         record = _read_json(
             root / "data" / "v1" / "cars" / f"{target_id}.json",
@@ -594,6 +613,7 @@ def _research_claim_schemas(
             research_schema,
             identity_node["properties"][key],
         )
+    claims["/driver_summary"] = car_schema["properties"]["driver_summary"]
     return claims
 
 
@@ -636,7 +656,7 @@ def validate_research_result(
                 errors.append(
                     f"{label}.claims[{index}].path: unknown research field {path!r}"
                 )
-            elif path.startswith("/authentic_controls/") and "proposed_value" in claim:
+            elif (path.startswith("/authentic_controls/") or path == "/driver_summary") and "proposed_value" in claim:
                 proposed_value = claim["proposed_value"]
                 claim_types = claim_schema.get("type")
                 numeric_types = (
@@ -662,6 +682,15 @@ def validate_research_result(
                             f"{label}.claims[{index}].proposed_value",
                         )
                     )
+            if path == "/driver_summary":
+                text = claim.get("proposed_value")
+                limit = claim_schema["maxLength"]
+                if isinstance(text, str) and len(text) > limit:
+                    errors.append(f"{label}.claims[{index}]: driver summary exceeds {limit} characters")
+                if case.get("submission_type") == "existing-car-research":
+                    errors.append(f"{label}.claims[{index}]: edit existing-car summaries through the summary review action")
+                if claim.get("finding") != "established" or claim.get("confidence") == "unknown":
+                    errors.append(f"{label}.claims[{index}]: omit an unsupported driver summary")
             refs = claim.get("source_refs")
             if isinstance(refs, list):
                 unknown = sorted(set(refs) - known_sources)

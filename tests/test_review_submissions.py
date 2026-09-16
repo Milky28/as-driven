@@ -22,6 +22,7 @@ from as_driven_db.research_handoff import (
     discover_research_results,
     generate_research_briefs,
     import_research_result,
+    validate_research_result,
 )
 from as_driven_db.importers.observation import import_observation
 from as_driven_db.review_proposal import (
@@ -1677,6 +1678,35 @@ class ReviewSubmissionTests(unittest.TestCase):
         summary, disagreements = generate_driver_summary(record)
         self.assertEqual("", summary)
         self.assertEqual([], disagreements)
+
+    def test_researched_context_reaches_summary_preview_and_provenance(self) -> None:
+        result = completed_research_result("github-example-project-17")
+        text = "This one-make racer introduced the manufacturer's new customer racing programme."
+        source_id = result["sources"][0]["source_id"]
+        result["claims"].append({
+            "path": "/driver_summary", "finding": "established",
+            "proposed_value": text, "confidence": "high",
+            "source_refs": [source_id], "basis": "Manufacturer launch history, opening paragraph.",
+        })
+        result["sources"][0]["locators"].append({
+            "locator": "Launch history, opening paragraph", "quote": "",
+            "supports": ["/driver_summary"],
+        })
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory) / "repository"
+            with patch(__name__ + ".completed_research_result", return_value=result):
+                cases, case_dir, proposal = self.prepare_promotable_case(repository)
+            preview = json.loads(Path(proposal["preview_record"]).read_text(encoding="utf-8"))
+            self.assertEqual(text, preview["driver_summary"])
+            evidence = next(c for c in preview["provenance"]["claims"] if "/driver_summary" in c["paths"])
+            self.assertEqual([source_id], evidence["source_refs"])
+            self.assertIn(text, (case_dir / "final-review.md").read_text(encoding="utf-8"))
+            case = json.loads((case_dir / "case.json").read_text(encoding="utf-8"))
+            regenerated = generate_driver_summary_proposal(repository, cases, 17)
+            self.assertEqual(text, regenerated["summary"])
+            for bad_text in ("", 42, "x" * 521):
+                result["claims"][-1]["proposed_value"] = bad_text
+                self.assertTrue(validate_research_result(repository, case, result, "result"))
 
     def test_a_single_simulator_case_is_proposed_with_no_summary_at_all(self) -> None:
         """One simulator cannot disagree with itself, so there is nothing to draft.

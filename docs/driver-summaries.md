@@ -1,156 +1,81 @@
 # Driver summaries
 
-`driver_summary` is the one line of prose the preflight card shows a driver. It
-is optional, and a car that needs nothing said should say nothing.
+`driver_summary` is a short paragraph shown on the preflight card. FIT and USE
+already describe equipment and shifting requirements. The summary should add
+something useful, distinctive or interesting about this car.
 
-## What it is for
+## What to write
 
-The Fit and Use bands answer **what the car requires**. The summary answers
-**what a driver does about it, and why**.
+Prefer supported design, historical or competition context: why the car exists,
+what distinguishes it, or the real racing category and era it represents.
+Relevant technique is welcome when it explains something helpful or interesting,
+especially when no stronger contextual story is available. A particular gearbox
+quirk, launch procedure, or difference between permitted and advisable technique
+can earn its place. An ordinary five-speed road manual does not need its FIT and
+USE rows repeated as prose.
 
-That distinction is the whole point. Nearly every car in the dataset records
-`clutch: not-required` for running shifts, because that is what the simulator
-accepts. It is also what an experienced driver frequently ignores: a driver of a
-2005 GT1 car can bang each gear in and often chooses to clutch instead. The band
-can only ever say "no clutch needed", which is true and incomplete. The summary
-is where the rest goes.
+For generic or fictional simulator classes, describe the supported real-world
+category and era, typical construction and driving. A shared paragraph across a
+genuine class or generation is preferable to blanks. Distinguish class context
+from exact chassis identity: a class inspired by a Formula One era does not prove
+which real car each model depicts or which physical controls it has. Confirm
+changes between generations before sharing text. Historical rules are not claims
+that the simulator implements those rules.
 
-A summary earns its place when it carries one of three things.
+Keep an existing useful summary. Avoid generic praise, repeated controls,
+research-process caveats and filler such as "not established, so use it to be
+safe". If no supported useful information can be found, omit the optional field.
+Do not manufacture a story to meet a completeness target.
 
-**A named mechanism and what follows from it.** "Hewland FG400" or "three
-synchromesh gears and a crash first" tells a driver what they are handling, and
-the technique follows from it. A gear count and an actuation do not.
+## Evidence and wording
 
-**Permitted against advisable.** Where the car accepts something a driver would
-not choose, say so and say why. This is advisory rather than descriptive, and it
-is the only part of the record that is.
+Every material assertion needs cited support and correct applicability. Read the
+source text, not just its title. Record sources, exact locators, confidence and
+a falsifiable basis in the research/review packet. Prefer manufacturer, team,
+organiser, regulations or firsthand accounts. Label secondary evidence and fetch
+limits honestly. A name such as "Hybrid" does not establish a hybrid powertrain;
+a source saying engines were drawn by lot does not say whole cars were.
 
-**Where the simulator and the car part company.** The card marks the divergence
-with a row-level flag; the summary explains it in a sentence.
+Keep real-car facts separate from exact simulator observations. Do not use a
+summary to resolve an uncertain gearbox or identity by inference. Advice may
+explain a consequence of an established mechanism, but avoid claims that every
+unmatched downshift locks wheels or damages a gearbox. Actual damage claims and
+simulator damage modelling need evidence. Simulator-general advice belongs with
+the simulator, not in every car's summary.
 
-It should not restate the bands. "Six-speed sequential, no clutch needed" is
-already on the card twice.
+Lead with the interesting point, then explain its significance. No mandatory
+three-part template. Aim for a compact paragraph, normally around 200-300
+characters; the schema owns the hard limit. Check actual card wrapping before
+application. Shared class prose still needs a review of each member's scope.
 
-## House order
+## New contributions and generated proposals
 
-Three parts, in this order, so that a hundred summaries do not each invent a
-shape:
+The contribution research brief asks for an optional established
+`/driver_summary` claim in `research-result.json`, with the paragraph as
+`proposed_value`, source references, confidence and basis. Source locators should
+list `/driver_summary` among the paths they support. Omit unsupported drafts.
+The existing research validator checks the target type/length and references.
 
-1. **What it is** - the named unit or construction, in a clause.
-2. **What to do** - the technique that follows.
-3. **What to watch** - the caveat, divergence, or the thing that bites.
+`prepare-review` carries that sourced draft into the proposed manifest, provenance,
+preview and final review. Existing reviewed summaries are preserved when adding a
+simulator contribution. The researcher supplies the prose; the deterministic
+`generate_driver_summary` fallback cannot invent historical or class facts from
+control enums. Without a researched paragraph, it only drafts known simulator
+technique disagreements and otherwise leaves the field absent.
 
-Not every summary needs all three. The order holds for the parts that are there.
+The summary edit/generation action still supports explicit maintainer revisions
+and reruns the proposal dry run. Existing-car research amendments continue to use
+that explicit summary review action. New text is always a proposal, never
+permission to promote, overwrite reviewed prose or publish automatically.
 
-> Three-synchromesh gearbox: second, third and fourth have synchronisers and
-> first does not, on every Mini until September 1968. Blip to ease the
-> synchronised gears, and match revs yourself for any downshift into first.
+## Audit and review
 
-*What it is*, then *what to do*, then *what to watch*.
-
-## Advisory wording
-
-Advice may be firm. "Clutch the downshifts" is more useful than "you may wish to
-consider clutching". But what may be asserted depends on what kind of claim it
-is, and the two are not symmetric.
-
-**A handling consequence needs no per-car evidence.** Blipping a downshift to
-stop the driven wheels locking follows from the mechanism, the way "the synchros
-do the matching" does. Say it plainly.
-
-**A damage claim needs evidence.** "This will hurt the gearbox" must rest on
-something observed. By that standard the dataset can say it about almost
-nothing: across roughly 262 guided drives, the drive's damage outcome has never
-been recorded once, and exactly one car - the Mercedes-Benz Actros - recorded a
-gearbox that refused the gear outright. AMS2 does not appear to model dog-ring
-wear at all.
-
-**Never state damage the simulator does not model**, even where the real car
-would suffer for it. A driver instructed to protect a gearbox that cannot break
-is being told to drive around a problem that is not there. This is the same
-sim-and-real line the override layer draws.
-
-## Where simulator-general advice goes
-
-Advice true of every car in a simulator does not belong in a summary. Written
-into a hundred records it becomes a hundred copies free to drift apart, and it
-crowds out the car-specific thing the summary exists to say. Record it once
-against the simulator instead.
-
-A summary carries what is true of **this car**.
-
-## By equipment
-
-Counts are of curated records at dataset 0.4.32.
-
-### H-pattern, synchromesh (54 cars)
-
-The band says lift to upshift and treats the blip as optional. The summary says
-why it is optional: the synchronisers do the rev matching, so the blip eases
-them rather than engaging the gear. Worth adding where a particular box is
-weaker than the rest of the car, or where a gear is not synchronised at all.
-
-### H-pattern, dog box (10 cars)
-
-Dogs engage by impact. A firm, decisive movement is kinder than a hesitant one,
-and rev matching matters more than it does with synchronisers. Name the unit
-where a source gives one.
-
-### Sequential stick (58 cars)
-
-The largest gap in the dataset: 58 cars, four summaries. One gear at a time and
-no skipping. The box accepts a clutchless shift; whether a driver uses the
-clutch anyway is the real question, and depends on the car and the race length.
-Blip the downshift where the car does not do it for you - not to save the
-gearbox, but to keep the driven wheels from locking.
-
-### Paddle sequential (72 cars)
-
-Seventy-two cars, one summary. Say what the electronics do, so the driver knows
-what is being done for them: cut on the upshift, blip on the downshift. Then say
-what is still theirs - twenty-five of these still need a clutch to pull away. A
-paddle is a request rather than a command, and the box may refuse a downshift
-that would over-rev the engine.
-
-### Paddle semi-automatic (20 cars)
-
-The early Formula One pattern: the clutch is hydraulic and the driver only meets
-it at the start. The launch procedure is usually the whole story.
-
-### Paddle dual-clutch and automatic (10 cars)
-
-Road-derived boxes that may creep, may shift themselves, and may accept a manual
-override that is never required. Say which.
-
-## What the generator will and will not draft
-
-`generate_driver_summary` drafts a summary only where the record's simulators
-disagree about driver technique. That single case is the only thing it knows
-which the card cannot say in a row. Everywhere else it returns nothing, and the
-review artifact says so rather than offering text to accept.
-
-It used to always return a paragraph, assembled from the curated values: the gear
-count and actuation, then the launch, upshift and downshift technique. Every one
-of those is a Fit or Use row, so the paragraph was the card read back to the
-driver. Where the values were open it padded further, and five records shipped
-reading "not established, so use it to be safe" three times over - a summary whose
-every sentence buried its instruction inside a hedge.
-
-The cautious default for an open field is not the exception either. It is true of
-every car with an open field, so by the rule above it is recorded once rather
-than copied into a hundred records free to drift apart. The card already marks an
-open field "not established" on its own.
-
-All 285 records carried a summary when the field is optional by design, which is
-how the padding accumulated. Six were cleared on 2026-09-06 as pure generator
-output. A car with nothing to say says nothing, and the overlay shows no note
-panel at all.
-
-## Writing them
-
-Summaries are written per record with the maintainer, never generated in bulk.
-A shared sentence across several cars is fine where the cars genuinely share a
-story - seventeen Reiza cars have no real chassis to establish a gearbox from,
-and four Copa Truck entries run to one set of regulations - and misleading where
-they do not. Eleven category texts once covered seventy-five records, and two of
-them were wrong about the car they were printed on.
+Maintainer-authorized batches may prepare candidates, including shared class
+paragraphs. Keep candidates outside `data/v1` and retain originals, exact record
+IDs, sources, dispositions and unresolved issues. Coordinator review is required:
+passing schema and layout checks establishes neither factual accuracy nor
+editorial quality. Apply only after explicit review approval. An approved audit
+edits `driver_summary` in the records directly and keeps its evidence in a tracked
+research file: the previous text, the applied text, inspected sources, basis and
+open questions for every record. The September 2026 audit of all 337 records at
+dataset 0.6.43 is `research/driver-summary-audit-2026-09.json`.
