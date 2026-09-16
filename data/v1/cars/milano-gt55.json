@@ -284,6 +284,6 @@
       }
     ]
   },
-  "updated_at": "2026-08-27",
-  "driver_summary": "The Ferrari 550 GTS Maranello that Prodrive built for GT1, listed as Milano GT55 by AMS2 and GT Ferruccio 55 V12 by Assetto Corsa. Xtrac six-speed sequential with a flat-shift trigger, so an upshift needs no clutch. A downshift does: the 550 wants it every time, even though the simulator will take one without. Blip as you come down."
+  "updated_at": "2026-09-16",
+  "driver_summary": "Prodrive's GT1 Ferrari 550 GTS Maranello, called GT Ferruccio 55 V12 in Assetto Corsa. Its Xtrac sequential takes flat-shift upshifts, but the real car wants the clutch and a blip on every downshift, even where the sim does not."
 }

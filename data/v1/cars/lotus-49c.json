@@ -162,10 +162,10 @@
       }
     ]
   },
-  "driver_summary": "Hewland-Lotus five-speed - rev-match every downshift. The dog rings are inferred from Hewland's design approach rather than stated by a source, so one showing this gearbox was synchronised would make the blip optional.",
+  "driver_summary": "Jochen Rindt gave the Lotus 49 its final win at Monaco in 1970 in this 49C form. Like every 49 it used the Cosworth DFV as a stressed chassis member, and its Hewland gearbox wants a blip on every downshift.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

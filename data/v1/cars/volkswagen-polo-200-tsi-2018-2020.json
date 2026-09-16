@@ -338,6 +338,6 @@
       }
     ]
   },
-  "driver_summary": "Brazilian 1.0 200 TSI road car with a six-speed torque-converter automatic and paddle control. There is no clutch operation to manage; real-car cut and blip behavior remain unestablished, so follow the selected simulator's USE rows for those details.",
-  "updated_at": "2026-09-06"
+  "driver_summary": "Reiza's TSI Cup, made with Volkswagen Brasil and Acelerados, puts road-going Brazilian Polos and Virtuses on track. This 1.0 200 TSI Polo uses a six-speed torque-converter automatic with paddles, so there is no clutch to manage.",
+  "updated_at": "2026-09-16"
 }

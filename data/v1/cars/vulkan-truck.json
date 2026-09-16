@@ -156,7 +156,7 @@
       }
     ]
   },
-  "driver_summary": "Copa Truck regulations mandate a mechanically operated H-pattern manual: five racing gears plus a launch gear, and first is locked out, so pull away in second. Vulkan is not a championship manufacturer, so this is Reiza's own entry. Blip on downshifts to be safe.",
+  "driver_summary": "Vulkan is Reiza's own marque rather than a Copa Truck manufacturer. The real series replaced Formula Truck in 2017 with 1,000 hp trucks, and its rules require a lever-operated H-pattern manual.",
   "archetype": {
     "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
     "classification": "deviates",
@@ -179,5 +179,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

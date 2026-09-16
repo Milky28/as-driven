@@ -155,7 +155,7 @@
       }
     ]
   },
-  "driver_summary": "Copa Truck regulations mandate a mechanically operated H-pattern manual: five racing gears plus a launch gear. First is locked out, so pull away in second. Whether it engages by dogs or synchros is not stated, so blip on downshifts to be safe.",
+  "driver_summary": "Copa Truck replaced Formula Truck in 2017 and races 1,000 hp trucks from seven makes, Iveco among them. Its rules ban automated gearboxes and require a lever-operated H-pattern manual.",
   "archetype": {
     "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
     "classification": "deviates",
@@ -178,5 +178,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

@@ -168,10 +168,10 @@
       }
     ]
   },
-  "driver_summary": "Synchronised gearbox, so the blip eases the synchros but is not needed to engage the gear. Construction is inferred from a one-make series running the production Uno gearbox rather than stated by a source.",
+  "driver_summary": "Copa Uno grew from Brazil's 1992 one-make series for the Uno 1.6R. Greco Competicoes prepared the engines and allocated them by draw each round, making equal machinery a central part of the category's appeal.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

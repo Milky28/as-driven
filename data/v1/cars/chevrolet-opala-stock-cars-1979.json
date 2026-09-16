@@ -165,10 +165,10 @@
       }
     ]
   },
-  "driver_summary": "The source lists four- and five-speed floor-shift manuals without saying which this car used, and the drive found four. Synchronised is the ordinary reading of a road-derived manual, so the blip eases the synchros but the gear engages without it.",
+  "driver_summary": "The Opala helped launch Brazil's Stock Car championship in 1979. A familiar Chevrolet road-car name became the foundation of a national racing tradition that would later pass through the Omega, Vectra, Astra, Sonic and Cruze.",
   "archetype": {
     "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

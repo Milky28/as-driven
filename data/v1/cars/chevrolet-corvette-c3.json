@@ -165,10 +165,10 @@
       }
     ]
   },
-  "driver_summary": "The C3's four-speed came in wide-ratio M20, close-ratio M21 and heavy-duty M22 forms, and no source says which AMS2 models. Synchronised either way, so the blip eases the synchros but the gear engages without it.",
+  "driver_summary": "The C3's long bonnet and sculpted wings trace their shape to the Mako Shark II concept. That show-car influence gave the third-generation Corvette one of the most recognisable silhouettes in American sports cars.",
   "archetype": {
     "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

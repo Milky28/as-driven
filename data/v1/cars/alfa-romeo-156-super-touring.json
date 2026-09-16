@@ -339,6 +339,6 @@
       }
     ]
   },
-  "driver_summary": "Fit a sequential stick and clutch pedal. Use the clutch for a standing launch. Do not assume paddles, a wheel display, shift lights, a particular rim shape, throttle lift, clutchless racing shifts, ignition cut, or blipping technique. Those fields should remain unknown until an exact-period Nordauto cockpit image, onboard recording, driver statement, or engineering document resolves them.",
-  "updated_at": "2026-09-04"
+  "driver_summary": "Beneath its familiar saloon body, the 156 Superturismo moved its two-litre engine lower and farther back to improve weight distribution. A dry sump and six-speed sequential dog gearbox completed the racing package.",
+  "updated_at": "2026-09-16"
 }

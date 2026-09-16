@@ -161,10 +161,10 @@
       }
     ]
   },
-  "driver_summary": "Hewland FG400, most likely a dog box, so blip every downshift to be safe. Whether the gear needs it was never tested, and the dog-ring construction is inferred from Hewland's practice rather than named by a source.",
+  "driver_summary": "The BT44 was Gordon Murray's first Formula One design to win a Grand Prix, at Kyalami in 1974. It marks an early success in the career of a designer who later created championship-winning Brabhams.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25"
+  "updated_at": "2026-09-16"
 }

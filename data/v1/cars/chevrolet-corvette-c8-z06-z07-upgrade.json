@@ -147,6 +147,6 @@
     "archetype_id": "paddles-8-dualclutch-no-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
-  "driver_summary": "Road dual-clutch: it blips its own downshifts, cuts its own upshifts and needs no clutch to pull away. The paddles ask the box for a gear rather than telling it, and it can refuse one that would over-rev the engine."
+  "updated_at": "2026-09-16",
+  "driver_summary": "The Z07 package sharpens the Z06 for track driving: extra aerodynamic surfaces, specific suspension calibration, carbon-ceramic brakes and Michelin Cup 2 R tyres give the road car a stronger track focus."
 }

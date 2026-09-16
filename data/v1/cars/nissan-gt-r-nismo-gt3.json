@@ -288,6 +288,6 @@
       }
     ]
   },
-  "updated_at": "2026-09-06",
-  "driver_summary": "Paddle sequential that cuts the upshift and blips the downshift for you. Whether it needs a clutch to pull away was not established, so treat the start as unrecorded rather than clutch-free."
+  "updated_at": "2026-09-16",
+  "driver_summary": "The GT-R Nismo GT3 won the 2015 Bathurst 12 Hour outright. For 2018 Nismo lowered its engine about 150 mm with a dry sump and moved it 150 mm rearward for a lower centre of gravity."
 }

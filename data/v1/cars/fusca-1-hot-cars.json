@@ -168,10 +168,10 @@
       }
     ]
   },
-  "driver_summary": "Synchronised is the ordinary reading of a road-derived manual rather than a stated specification, so the blip eases it but should not be needed.",
+  "driver_summary": "Hot Cars, also known as Divisao 3, is a Brazilian historic touring series; AMS2 models it with two Fuscas, a Gol and a Passat. The Beetle's four-speed is fully synchronised, so a downshift blip is optional.",
   "archetype": {
     "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

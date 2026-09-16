@@ -163,10 +163,10 @@
       }
     ]
   },
-  "driver_summary": "It shifts itself. The sequential lever in the cockpit overrides the automatic box but is never required.",
+  "driver_summary": "Represents Robby Gordon's Stadium Super Trucks, raced since 2013: 600 hp V8 trucks with two or three gears chosen for the track. AMS2's version shifts itself; the lever only overrides it.",
   "archetype": {
     "classification": "no-archetype",
     "basis": "A different mechanism rather than a departure from one. Its nearest peer of the same actuation is seven fields away: three forward ratios against five or six, a gearbox that shifts itself, and no clutch fitted anywhere, so every field a clutch would touch is not-applicable. Nothing registered describes a car the driver neither clutches nor shifts."
   },
-  "updated_at": "2026-08-18"
+  "updated_at": "2026-09-16"
 }

@@ -153,6 +153,6 @@
     "archetype_id": "stick-4-seq-clutch-start-flat-up-no-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
-  "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift, and nothing blips the downshift, though the gear will engage unmatched. Blip anyway: it is the difference between the car settling into the corner and the driven wheels locking as you turn in."
+  "updated_at": "2026-09-16",
+  "driver_summary": "Represents Formula Ford-style entry-level racing, where drivers learn to work with mechanical grip. With no wings doing the work, tyres, suspension and the driver's feedback become central to finding speed."
 }

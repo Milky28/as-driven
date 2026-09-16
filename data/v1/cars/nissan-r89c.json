@@ -162,7 +162,7 @@
       }
     ]
   },
-  "driver_summary": "Nissan specifies a Hewland VGC five-speed, a racing dog box, so blip every downshift to be safe. The gearbox is established, but whether a blip is needed to engage the gear was never tested.",
+  "driver_summary": "Nissan's 1989 Group C car switched from March to a Lola-built chassis, with a twin-turbo 3.5-litre VRH35 V8 of over 800 PS. Its Hewland VGC five-speed is a racing dog box, so blip every downshift.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
     "classification": "deviates",
@@ -176,5 +176,5 @@
   "notes": [
     "'Nissan R89C - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-08-25"
+  "updated_at": "2026-09-16"
 }

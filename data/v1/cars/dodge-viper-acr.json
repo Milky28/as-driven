@@ -170,10 +170,10 @@
       }
     ]
   },
-  "driver_summary": "FCA specify a synchronised six-speed manual, so the blip eases the synchros but the gear engages without it.",
+  "driver_summary": "ACR stands for American Club Racer. During its launch programme, the 2016 Viper ACR with Extreme Aero set SCCA-certified production-car lap records at 13 US circuits, including Laguna Seca, Road Atlanta and VIR.",
   "archetype": {
     "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

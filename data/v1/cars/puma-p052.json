@@ -163,10 +163,10 @@
       }
     ]
   },
-  "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Construction is inferred from a road-derived manual rather than stated by a reviewed source.",
+  "driver_summary": "The P052 was the first car of the revived Puma marque after production ended in 1999: a mid-engined roadster on a steel tube chassis with a fibreglass body and a 120 cv 1.6-litre four.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-16"
+  "updated_at": "2026-09-16"
 }

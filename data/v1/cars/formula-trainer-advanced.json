@@ -153,6 +153,6 @@
     "archetype_id": "stick-4-seq-clutch-start-flat-up-no-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
-  "driver_summary": "Sequential stick, one gear at a time. The car cuts the upshift, and nothing blips the downshift, though the gear will engage unmatched. Blip anyway: it is the difference between the car settling into the corner and the driven wheels locking as you turn in."
+  "updated_at": "2026-09-16",
+  "driver_summary": "Reiza's fictional Formula Trainer represents Formula Ford-style entry-level racing. This Advanced version uses a four-speed sequential stick, even though AMS2 lets an H-shifter be mapped to it."
 }

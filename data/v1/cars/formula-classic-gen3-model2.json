@@ -154,6 +154,6 @@
     "archetype_id": "paddles-6-semiauto-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
-  "driver_summary": "Early paddle semi-automatic: the gearbox works its own clutch and yours is only for the start. It cuts the upshift and blips the downshift, so once you are away the pedals are throttle and brake."
+  "updated_at": "2026-09-16",
+  "driver_summary": "Represents early-1990s Formula One, when 3.5-litre naturally aspirated engines powered the grid and paddle-shift gearboxes began replacing manual levers. The class captures that changing mix of technology."
 }

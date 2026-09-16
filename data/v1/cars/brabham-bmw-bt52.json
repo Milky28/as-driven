@@ -167,10 +167,10 @@
       }
     ]
   },
-  "driver_summary": "Brabham/Hewland five-speed - rev-match every downshift. The dog rings are inferred from Hewland's design approach rather than stated by a source, so one showing this gearbox was synchronised would make the blip optional.",
+  "driver_summary": "The BT52 carried Nelson Piquet to the 1983 Formula One title, making him the first turbo-powered world champion. Gordon Murray's BMW-engined car was conceived and built in just six weeks.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

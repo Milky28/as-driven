@@ -163,10 +163,10 @@
       }
     ]
   },
-  "driver_summary": "The Gol GT 1.8 began with a four-speed and soon changed to a five-speed; the drive found the five. Synchronised is the ordinary reading of a road-derived manual rather than a stated specification, so the blip eases it but should not be needed.",
+  "driver_summary": "Launched in 1980, the Gol was Brazil's best-selling car for 27 straight years. This is the Gol GT 1.8, its first sporty version, which soon moved from a four-speed to the five-speed used here.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

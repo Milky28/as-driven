@@ -156,7 +156,7 @@
       }
     ]
   },
-  "driver_summary": "Reiza's own car, with no real-world chassis behind it, so there is nothing to establish the gearbox from. Blip on downshifts to be safe: nothing records whether the gear needs it.",
+  "driver_summary": "Represents early-1990s Formula One, when 3.5-litre naturally aspirated engines powered the grid and paddle-shift gearboxes began replacing manual levers. The class captures that changing mix of technology.",
   "archetype": {
     "archetype_id": "h-6-synchro-clutch-start-lift-up-blip-optional",
     "classification": "deviates",
@@ -179,5 +179,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-25"
+  "updated_at": "2026-09-16"
 }

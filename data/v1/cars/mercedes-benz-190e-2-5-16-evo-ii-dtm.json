@@ -202,10 +202,10 @@
       }
     ]
   },
-  "driver_summary": "Getrag five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
+  "driver_summary": "Mercedes built 502 road-going 190E 2.5-16 Evolution IIs in 1990 to homologate this DTM racer and its big adjustable rear wing. Its Getrag five-speed puts first on a dogleg, out of the racing plane.",
   "archetype": {
     "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

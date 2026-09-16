@@ -164,10 +164,10 @@
       }
     ]
   },
-  "driver_summary": "The Beetle transaxle is constant-mesh with balk-ring synchronisers on all four forward gears, so the blip eases the synchros but the gear engages without it.",
+  "driver_summary": "Copa Classic FL races Brazilian classics, pitting this Fusca against a Puma GTB, Gol and Passat in AMS2. The Beetle's four-speed transaxle is fully synchronised, so a downshift blip eases the synchros but is not needed.",
   "archetype": {
     "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

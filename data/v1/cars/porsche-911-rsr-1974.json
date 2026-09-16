@@ -330,10 +330,10 @@
       }
     ]
   },
-  "driver_summary": "Use the five-speed conventional H pattern with first up and left. Lift for upshifts; a downshift blip is optional in the authentic synchromesh transmission, although the reviewed AC implementations require it.",
+  "driver_summary": "The 1974 Carrera RSR 3.0 raced with a 330 bhp flat six and the Carrera RS five-speed, first up and left. A downshift blip is optional in the real synchromesh box, although the reviewed AC versions require one.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-27"
+  "updated_at": "2026-09-16"
 }

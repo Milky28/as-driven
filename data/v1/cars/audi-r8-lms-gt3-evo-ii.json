@@ -437,6 +437,6 @@
     "Low Downforce is an explicit inherited alias and was not separately live-tested.",
     "The wheel-rim shape was originally recorded as \"gt-style\". The separate \"gt-style\", \"formula\" and \"prototype\" values described the same rim: molded grips at 9 and 3 with a control face between them, usually carrying a display and rev lights. They are merged into \"gt-formula\". The rim was not observed again and nothing about the observation changed."
   ],
-  "updated_at": "2026-08-27",
-  "driver_summary": "The Audi R8 LMS GT3 Evo II, which Assetto Corsa lists as GT-M Aero V10 Evo2. Paddle sequential that asks for no clutch at any point: it gets away from rest, cuts the upshift and blips the downshift itself."
+  "updated_at": "2026-09-16",
+  "driver_summary": "The Evo II focused on making the R8 LMS easier to drive. More of its downforce came from the rear wing and less from the floor, reducing aerodynamic sensitivity under braking; air conditioning aided driver endurance."
 }

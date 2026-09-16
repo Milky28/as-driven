@@ -168,10 +168,10 @@
       }
     ]
   },
-  "driver_summary": "Motor Sport describes a five-speed synchromesh gearbox behind the 1.8 Zetec, so the blip eases the synchros but the gear engages without it.",
+  "driver_summary": "The G40 serves Ginetta's Junior Championship for 14-17-year-olds and the clubman G40 Cup. Its 1.8 Ford Zetec drives a five-speed synchromesh gearbox, so a downshift blip is optional rather than required.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

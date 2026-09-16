@@ -227,8 +227,8 @@
     "The generic AC title would collide with the existing 1997 record, but Kunos's own metadata describes the 1996 short-tail specification. Identity is resolved before behavior, so the H-pattern drive creates a separate real-car record rather than being recorded as a contradiction on the Longtail.",
     "The official AC cockpit is the current evidence for the round continuous rim without integrated display or shift lights; no reviewed real-car source independently specifies those wheel-electronics fields."
   ],
-  "updated_at": "2026-09-06",
-  "driver_summary": "1996 six-speed H-pattern car, not the 1997 sequential Longtail. AC requires the clutch to launch, a lift to upshift, and a manual blip to downshift; the real car's detailed technique is not yet sourced.",
+  "updated_at": "2026-09-16",
+  "driver_summary": "The F1 GTR won Le Mans outright in 1995. For 1996 McLaren strengthened its H-pattern manual, a weak point that year, before the 1997 Longtail switched to a sequential.",
   "archetype": {
     "classification": "no-archetype",
     "basis": "The real car is established only as a six-speed H-pattern manual. Gearbox construction, exact gate, and real clutch/lift/blip technique remain unknown, so assigning a technique archetype would turn gaps into claims."

@@ -168,10 +168,10 @@
       }
     ]
   },
-  "driver_summary": "The Seven is offered with a five-speed manual, a six-speed manual and a six-speed sequential; the drive selected the five-speed manual. Probably synchronised, so the blip eases it but should not be needed to engage the gear.",
+  "driver_summary": "The Seven design began at Lotus. Caterham bought the tooling, designs and exclusive rights in 1973, keeping the lightweight sports car in production and developing the family that includes this Supersport.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

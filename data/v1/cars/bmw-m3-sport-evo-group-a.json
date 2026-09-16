@@ -202,10 +202,10 @@
       }
     ]
   },
-  "driver_summary": "Getrag 265 five-speed with a dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight fore-and-aft line.",
+  "driver_summary": "The Sport Evolution was the final development of the road-going E30 M3, built in 1990 to support its racing programme. Just 600 examples were produced, with a larger 2.5-litre engine for this homologation special.",
   "archetype": {
     "archetype_id": "h-5-synchro-dogleg-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

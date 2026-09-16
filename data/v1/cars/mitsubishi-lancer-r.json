@@ -173,10 +173,10 @@
       }
     ]
   },
-  "driver_summary": "Probably a synchronised road-derived manual, so the downshift blip is technique rather than necessity. The reviewed reference covers the RS, not this car, so the construction is the ordinary reading.",
+  "driver_summary": "Brazil's Lancer Cup, billed as the world's first one-make Lancer series, ran this five-speed H-pattern R alongside the sequential RS before the R class was dropped.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

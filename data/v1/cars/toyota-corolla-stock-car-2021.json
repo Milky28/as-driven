@@ -352,10 +352,10 @@
       }
     ]
   },
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-16",
   "archetype": {
     "classification": "undetermined",
     "basis": "The exact real-car sources establish gearbox hardware but leave launch and running-shift technique unknown, so multiple registered control archetypes remain compatible."
   },
-  "driver_summary": "Stock car on a paddle semi-automatic: it cuts the upshift and blips the downshift for you. Whether it needs a clutch to pull away was not established by the drive, so treat the start as unrecorded rather than clutch-free."
+  "driver_summary": "The Corolla is Toyota's body in Brazil's Stock Car, which it joined in 2020. Underneath is the series' common platform, shared with Chevrolet's Cruze, with an Xtrac six-speed and paddle-shift system."
 }

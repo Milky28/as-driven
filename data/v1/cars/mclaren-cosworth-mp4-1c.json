@@ -167,10 +167,10 @@
       }
     ]
   },
-  "driver_summary": "Hewland FGA 400 - rev-match every downshift. The dog rings are inferred from Hewland's design approach rather than stated by a source, so one showing this gearbox was synchronised would make the blip optional.",
+  "driver_summary": "McLaren's MP4/1 was the first F1 car to race with a carbon-fibre composite chassis. In 1983 MP4/1C form, John Watson won at Long Beach from 22nd on the grid, the furthest back any F1 winner has started.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

@@ -436,7 +436,7 @@
       }
     ]
   },
-  "driver_summary": "Dogleg gate - first is down and left, outside the racing plane, so second through fifth fall in one straight line. The gate was seen in the cockpit; no reviewed source establishes the real car's gearbox.",
+  "driver_summary": "Sauber-Mercedes C9s finished first and second at Le Mans in 1989. The car's five-speed is a dog box; the simulators show a dogleg gate with first down and left, and second to fifth in one straight line.",
   "archetype": {
     "classification": "no-archetype",
     "basis": "The record matches h-5-dogbox-clutch-start-lift-up-blip-down in every field its evidence establishes except one: the exact-car review states the clutch must be used for downshifting, where that archetype has it not-required. The five-speed dog box is established by seven reviewed sources, and the downshift blip follows from it. The gate, first-gear position, upshift cut and downshift automatic blip are unknown, as the record's own research says, so they exclude nothing."
@@ -444,5 +444,5 @@
   "notes": [
     "'Sauber Mercedes C9 - Low Downforce' is an exact approved alias whose controls are inherited from the verified base; it has not been separately live-tested."
   ],
-  "updated_at": "2026-09-06"
+  "updated_at": "2026-09-16"
 }

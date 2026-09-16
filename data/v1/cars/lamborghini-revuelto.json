@@ -165,6 +165,6 @@
     "archetype_id": "paddles-8-dualclutch-no-clutch-start-flat-up-auto-blip",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25",
-  "driver_summary": "Road dual-clutch: it blips its own downshifts, cuts its own upshifts and needs no clutch to pull away. The paddles ask the box for a gear rather than telling it, and it can refuse one that would over-rev the engine."
+  "updated_at": "2026-09-16",
+  "driver_summary": "Launched in Lamborghini's 60th-anniversary year, the Revuelto is its first V12 plug-in hybrid: 1,015 CV from the V12 and three electric motors, through the first dual-clutch gearbox on a 12-cylinder Lamborghini."
 }

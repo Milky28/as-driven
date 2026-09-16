@@ -161,10 +161,10 @@
       }
     ]
   },
-  "driver_summary": "Hewland FG400, most likely a dog box, so blip every downshift to be safe. Whether the gear needs it was never tested, and the dog-ring construction is inferred from Hewland's practice rather than named by a source.",
+  "driver_summary": "Gordon Coppuck's M23 won 16 Grands Prix, carrying Emerson Fittipaldi to the 1974 title and James Hunt to the 1976 crown. Its Hewland FG400 is taken to be a dog box, so blip every downshift.",
   "archetype": {
     "archetype_id": "h-5-dogbox-clutch-start-lift-up-blip-down",
     "classification": "matches"
   },
-  "updated_at": "2026-08-25"
+  "updated_at": "2026-09-16"
 }

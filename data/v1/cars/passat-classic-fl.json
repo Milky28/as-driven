@@ -164,10 +164,10 @@
       }
     ]
   },
-  "driver_summary": "The Brazilian Passat gained its five-speed with the B2-derived improvements, and the drive found it. Synchronised is the ordinary reading of a road-derived manual rather than a stated specification, so the blip eases it but should not be needed.",
+  "driver_summary": "Volkswagen do Brasil built 676,819 Passat B1s between 1974 and 1988, adding B2-derived engines and a five-speed late in its life. This Copa Classic FL car uses that five-speed.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

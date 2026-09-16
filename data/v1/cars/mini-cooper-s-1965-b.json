@@ -164,10 +164,10 @@
       }
     ]
   },
-  "driver_summary": "Three-synchromesh gearbox: second, third and fourth have synchronisers and first does not, on every Mini until September 1968. Blip to ease the synchronised gears, and match revs yourself for any downshift into first.",
+  "driver_summary": "The Mini Cooper S won the Monte Carlo Rally in 1964 and 1965. Like every Mini until late 1968, its four-speed has no synchro on first, so match revs yourself for any downshift into first.",
   "archetype": {
     "archetype_id": "h-4-synchro-clutch-start-lift-up-blip-optional",
     "classification": "matches"
   },
-  "updated_at": "2026-08-17"
+  "updated_at": "2026-09-16"
 }

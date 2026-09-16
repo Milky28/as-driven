@@ -272,7 +272,7 @@
       }
     ]
   },
-  "driver_summary": "Probably a synchronised gearbox, so the blip eases the synchros but should not be needed to engage the gear. Synchromesh is the ordinary reading of a road-car manual of this period rather than a stated specification.",
+  "driver_summary": "Lamborghini credits the Miura with creating the mid-engined supercar, its V12 mounted transversely behind the driver. The 1971 P400 SV was the final version, with 385 hp from 3.9 litres; 763 Miuras were built.",
   "archetype": {
     "archetype_id": "h-5-synchro-clutch-start-lift-up-blip-optional",
     "classification": "deviates",
@@ -287,5 +287,5 @@
       }
     ]
   },
-  "updated_at": "2026-08-26"
+  "updated_at": "2026-09-16"
 }
