@@ -9,6 +9,19 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.22.3 - 2026-09-16
+
+- Rewrite the driver summaries for 325 of the 337 cars so each says something
+  worth knowing: history, design, or the real racing category and era a generic
+  simulator class represents, with technique kept where it genuinely helps.
+- Remove stock advice such as "blip on downshifts to be safe" and summary claims
+  the evidence did not support. Each change's sources and open questions are
+  kept in `research/driver-summary-audit-2026-09.json`.
+- Let contribution research include a sourced driver summary that carries
+  through review into the promoted record.
+- Ship dataset 0.7.0 with 337 reviewed cars. No plugin behaviour changes;
+  a database-only update also delivers the new summaries.
+
 ## 0.22.2 - 2026-09-15
 
 - Add all nine cars in PMR's September 15 V8 Power Pack, plus the 2013

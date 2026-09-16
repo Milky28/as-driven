@@ -7,18 +7,16 @@ car records.
 
 ## What you'll notice
 
-- **PMR V8 Power Pack coverage.** Reviewed entries cover the new Historic
-  USV8, USV8 and AUS V8 Evo cars, plus the Falcon and Commodore COTF.
-  The Gen3 Camaro AU and Mustang AU use the corrected closed D-shaped wheel guidance.
-- **Exact matching for both Camaros.** The plugin uses the reported class to
-  distinguish the historic and modern cars that both report `Camaro`.
-- **Easier installation.** A folder picker finds custom SimHub installations;
-  installation failures remain visible and save diagnostic details.
-- **Original Automobilista support.** AMS1 now has a distinct contribution and
-  guided-drive path. The F301 is reviewed, with each simulator’s controls kept distinct.
+- **Driver summaries worth reading.** Most cars now tell you something about
+  the car itself: why it was built, what it won, or which real era a generic
+  class represents, instead of repeating the Fit and Use rows.
+- **Technique where it matters.** Useful notes stay, such as the MP4/4's
+  mirrored dogleg gate or a mod that shows the wrong shift pattern.
+- **Sourced contributions.** Researched contributions can now include a
+  summary that is checked and reviewed with the rest of the car.
 
-Install the full plugin ZIP for class-aware matching; a database-only update
-will not add this capability to older SimHub clients.
+No plugin behaviour changed. The full ZIP and the database-only package both
+deliver the new summaries.
 
 ## Install
 

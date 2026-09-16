@@ -1,8 +1,8 @@
 {
   "$schema": "../../schema/v1/dataset-index.schema.json",
   "schema_version": "1.0.0",
-  "dataset_version": "0.6.43",
-  "released_at": "2026-09-15",
+  "dataset_version": "0.7.0",
+  "released_at": "2026-09-16",
   "records": [
     "cars/alfa-romeo-155-v6-ti-1993.json",
     "cars/alfa-romeo-156-super-touring.json",
