@@ -121,7 +121,7 @@ try {
         bundled_record_count = $recordCount
         tested_simhub_version = "9.12.6"
         tested_simulator = "Automobilista 2"
-        tested_simulator_version = "1.6.9.91"
+        tested_simulator_version = "1.6.9.95"
         generated_at = [DateTime]::UtcNow.ToString("o")
     }
     $manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (
@@ -167,7 +167,7 @@ try {
     $releaseNotes = $releaseNotes.Replace(
         "{{DATABASE_PACKAGE}}", "as-driven-db-$datasetVersion.zip")
     $releaseNotes = $releaseNotes.Replace("{{SIMHUB_VERSION}}", "9.12.6")
-    $releaseNotes = $releaseNotes.Replace("{{AMS2_VERSION}}", "1.6.9.91")
+    $releaseNotes = $releaseNotes.Replace("{{AMS2_VERSION}}", "1.6.9.95")
     $releaseNotes | Set-Content -LiteralPath $releaseNotesPath -Encoding UTF8
 
     $releaseMetadata = [ordered]@{
@@ -179,7 +179,7 @@ try {
         database_package = "as-driven-db-$datasetVersion.zip"
         database_sha256 = Get-ReleaseSha256 (Join-Path $outputRoot "as-driven-db-$datasetVersion.zip")
         tested_simhub_version = "9.12.6"
-        tested_ams2_version = "1.6.9.91"
+        tested_ams2_version = "1.6.9.95"
         release_notes = $releaseNotesName
         generated_at = [DateTime]::UtcNow.ToString("o")
     }

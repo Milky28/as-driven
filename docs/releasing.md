@@ -70,7 +70,7 @@ in public CI.
 4. Start SimHub 9.12.6 and confirm the plugin author, version, dataset version,
    and record total.
 5. Test idle preview and closing preview without a simulator running.
-6. In AMS2 1.6.9.91, test one matched and one unmatched car.
+6. In AMS2 1.6.9.95, test one matched and one unmatched car.
 7. Check the Detailed and Compact layouts at 100%, 125%, and 150% Windows
    scaling, including the longest car and technique strings.
 8. Save a guided verification draft and confirm it remains local.
