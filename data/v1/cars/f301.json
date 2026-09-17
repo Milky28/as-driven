@@ -34,7 +34,8 @@
         "manual_blip": "required",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "required"
+      "standing_start_clutch": "required",
+      "gearbox_type_confidence": "verified"
     },
     "steering": {
       "wheel_rim": {

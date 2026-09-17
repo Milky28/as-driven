@@ -6,6 +6,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from .gearbox_confidence import resolve_confidence as resolve_gearbox_type_confidence
 from .schema_validation import validate_instance
 from .simulators import (
     SIMULATORS, OBSERVING_SIMULATORS, SIMULATOR_GAME_NAMES, canonical_simulator,
@@ -592,6 +593,17 @@ def _validate_record(
                     for pointer in paths:
                         if not _resolve_pointer(record, pointer):
                             errors.append(f"{claim_label}: unresolved JSON Pointer {pointer!r}")
+
+    transmission = controls.get("transmission") if isinstance(controls, dict) else None
+    if isinstance(transmission, dict) and "gearbox_type_confidence" in transmission:
+        resolved = resolve_gearbox_type_confidence(record)
+        if transmission["gearbox_type_confidence"] != resolved:
+            errors.append(
+                f"{label}.authentic_controls.transmission.gearbox_type_confidence: "
+                f"{transmission['gearbox_type_confidence']!r} does not match what the "
+                f"record's claims resolve to ({resolved!r}); run "
+                "`python -m as_driven_db gearbox-type-confidence --apply`"
+            )
     return record_id
 
 
@@ -758,6 +770,13 @@ def _validate_approval_record_references(
 
 TRANSMISSION_POINTER = "/authentic_controls/transmission"
 
+# An archetype is "a named, evidenced bundle of control values"
+# (docs/archetypes.md) - what the mechanism is, not how well any one field of
+# it is established. A derived confidence field would otherwise fail every
+# archetype comparison it takes part in, since no archetype defines it and it
+# legitimately varies car to car within the same archetype.
+DERIVED_TRANSMISSION_FIELDS = {"gearbox_type_confidence"}
+
 
 def _flatten_transmission(transmission: Any) -> dict[str, Any]:
     """The transmission block as JSON Pointer paths into the record."""
@@ -767,6 +786,8 @@ def _flatten_transmission(transmission: Any) -> dict[str, Any]:
         if not isinstance(node, dict):
             return
         for key, value in node.items():
+            if key in DERIVED_TRANSMISSION_FIELDS:
+                continue
             path = f"{prefix}/{key}"
             if isinstance(value, dict):
                 walk(value, path)

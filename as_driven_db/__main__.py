@@ -28,6 +28,7 @@ from .release_finalize import ReleaseFinalizeError, finalize_release
 from .release_changes import release_control_changes, render_release_control_changes
 from .conventions import report as convention_report
 from .split_claims import apply as apply_claim_split, plan as plan_claim_split
+from .gearbox_confidence import apply as apply_gearbox_confidence, plan as plan_gearbox_confidence
 from .update_manifest import (
     DEFAULT_REPOSITORY as DEFAULT_RELEASE_REPOSITORY,
     UpdateManifestError,
@@ -133,6 +134,24 @@ def _parser() -> argparse.ArgumentParser:
         "--apply",
         action="store_true",
         help="write the split records instead of only reporting",
+    )
+
+    gearbox_confidence = subparsers.add_parser(
+        "gearbox-type-confidence",
+        help="derive transmission.gearbox_type_confidence from the claims that cover gearbox_type",
+    )
+    gearbox_confidence.add_argument("--root", type=Path, default=Path.cwd())
+    gearbox_confidence.add_argument(
+        "--record",
+        action="append",
+        default=[],
+        help="record id to update (repeat; default every record)",
+    )
+    gearbox_confidence.add_argument("--report", type=Path)
+    gearbox_confidence.add_argument(
+        "--apply",
+        action="store_true",
+        help="write the derived field instead of only reporting",
     )
 
     update_manifest = subparsers.add_parser(
@@ -535,6 +554,22 @@ def main(argv: list[str] | None = None) -> int:
             f"record(s) span both layers; {report['drive_only_authentic_halves']} "
             "authentic half/halves would stand on a guided drive alone "
             f"({report['by_confidence']})."
+        )
+        return 0
+
+    if args.command == "gearbox-type-confidence":
+        root = args.root.resolve()
+        report = plan_gearbox_confidence(root, args.record or None)
+        if args.report:
+            _write_json(args.report, report)
+            print(f"Wrote the plan to {args.report}")
+        if args.apply:
+            changed = apply_gearbox_confidence(root, args.record or None)
+            print(f"Updated gearbox_type_confidence in {len(changed)} record(s).")
+        print(
+            f"{report['records_to_update']} of {report['records_considered']} "
+            f"record(s) need an update; resolved confidence: "
+            f"{report['by_resolved_confidence']}."
         )
         return 0
 

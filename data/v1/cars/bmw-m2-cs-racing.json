@@ -33,7 +33,8 @@
         "manual_blip": "unknown",
         "automatic_blip": "unknown"
       },
-      "standing_start_clutch": "unknown"
+      "standing_start_clutch": "unknown",
+      "gearbox_type_confidence": "high"
     },
     "steering": {
       "wheel_rim": {

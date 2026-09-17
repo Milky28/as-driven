@@ -356,42 +356,51 @@ Also not yet done: `as_driven_db/site.py`'s `shifter()` mirrors
 docstring says so) and was not updated in this pass, so the catalog and the
 in-sim card now disagree on this one line until it is.
 
-**The asterisk.** Per `docs/gearbox-construction-research.md`, a lot of
-`gearbox_type` values are inferred at `medium` confidence rather than stated
-outright at `high`/`verified`. The card must say which, or it overstates the
-evidence a driver is acting on. Decision: mark `gearbox_type` with an
-asterisk when the claim covering it is below `high`, and explain the marker
-once wherever the primer lives - not per car.
+**The asterisk: done, not yet released.** Per `docs/gearbox-construction-research.md`,
+a lot of `gearbox_type` values are inferred at `medium` confidence rather
+than stated outright at `high`/`verified`. The card now says which.
 
-The gap: the SimHub client currently reads only resolved
-`authentic_controls` values and one overall per-simulator confidence
-([GuidanceSnapshot.cs](../simhub/AsDriven.Core/GuidanceSnapshot.cs)); it has
-no per-field confidence. `provenance.claims[].paths` already ties a claim to
-the exact JSON Pointer it covers, and `as_driven_db/site.py` already resolves
-that lookup for the public catalog's evidence trail
-(`_provenance_label`, `site.py:667`). Decision: reuse that lookup rather than
-reimplement claim/path matching in C#. Concretely:
+`transmission.gearbox_type_confidence` (`$ref: #/$defs/confidenceLevel`,
+optional and additive per `docs/data-model.md`'s schema-compatibility rule)
+is derived, never hand-authored, by `python -m as_driven_db
+gearbox-type-confidence --apply` (`as_driven_db/gearbox_confidence.py`),
+which walks `provenance.claims` for the claim(s) covering
+`/authentic_controls/transmission/gearbox_type` - exact match or an ancestor
+object claim like `/authentic_controls/transmission` both count, the deepest
+match wins, and where multiple claims independently corroborate the same
+value at the same depth the strongest of them is taken rather than the
+weakest, since more evidence is never a reason to report less confidence.
+`validate` fails if the stored field disagrees with what the claims
+currently resolve to. Applying it once across the full dataset resolved 78
+records `verified`, 194 `high`, 53 `medium`, and left exactly one -
+`chevrolet-corvette-c3-r-convertible`, a retired record with no real
+referent - `unknown` because no claim covers the field at all, the same
+answer its own `gearbox_type` value already gives.
 
-1. Add a derived, tooling-written field alongside `gearbox_type` (name TBD,
-   e.g. `gearbox_type_confidence`, `$ref: #/$defs/confidenceLevel`) written by
-   `as_driven_db format-records` (or a new command) from the claim covering
-   `/authentic_controls/transmission/gearbox_type`. Never hand-authored -
-   authored data is the claim, this is computed from it, the same relationship
-   `archetypeClassification` already has to the fields it classifies.
-2. `as_driven_db validate` gains a check that the derived field matches what
-   the current claims resolve to, so it cannot go stale silently the way a
-   hand-maintained mirror could.
-3. `AsDrivenDatabase.cs` reads the new field (optional - absent on an older
-   dataset reads as `unknown`, matching how the reader already tolerates a
-   database published before `conventions.json` existed).
-4. `PreflightLabels.Shifter` takes the confidence and appends `*` when it is
-   below `high`.
+One consequence this exposed: the archetype-matching machinery in
+`validate.py` (`_flatten_transmission`) compared every key under
+`transmission` against an archetype's definition, so the new field failed
+every archetype comparison it touched the moment it existed, on 300+
+records. An archetype is "a named, evidenced bundle of control values"
+(`docs/archetypes.md`) - what the mechanism is, not how well one field of it
+happens to be established for a particular car - so `gearbox_type_confidence`
+and any future field like it are now excluded from that comparison by name.
 
-This is a mechanical, dataset-wide change once the tooling exists - the value
-already exists in every record's claims, nothing is remeasured - but it does
-touch the schema and regenerate a derived field across roughly 300 records,
-so it bumps `schema_version` or at least `dataset_version` and is done as its
-own reviewed batch, not folded into unrelated curation.
+`AsDrivenDatabase.cs` reads the field from the record's authentic
+transmission block (never the per-simulator effective one - it describes
+evidence about the real car, not something a simulator override could
+change), defaulting to `unknown` when absent, matching how the reader
+already tolerates a database published before `conventions.json` existed.
+`PreflightLabels.Shifter` appends `*` to the construction word itself -
+`(sync*)`, `(dog*)` - when the confidence is anything other than `verified`
+or `high`; the settings-page primer explains what the marker means.
+
+Not yet done: this hasn't gone through a release, so `dataset_version` is
+unbumped and there's no changelog entry - `dataset_version` bumps and
+changelog entries are a release-time act (`docs/releasing.md`), not
+something to do from a feature branch. Also still open from the FIT-line
+change above: `as_driven_db/site.py`'s `shifter()` does not yet show
+construction or its confidence at all.
 
 **The primer.** A new, collapsed-by-default section on the native SimHub
 settings page (alongside the existing car-browser guidance cells in

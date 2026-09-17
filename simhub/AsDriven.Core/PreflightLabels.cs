@@ -117,7 +117,8 @@ namespace AsDriven.Core
             return displayKnown && lightsKnown ? ToneKnown : ToneUnknown;
         }
 
-        public static string Shifter(int gears, string actuation, string gearboxType)
+        public static string Shifter(
+            int gears, string actuation, string gearboxType, string gearboxTypeConfidence)
         {
             string label;
             switch (actuation)
@@ -131,7 +132,28 @@ namespace AsDriven.Core
             }
             string shifter = gears > 0 ? gears + "-speed " + label : label;
             string construction = Construction(gearboxType);
-            return construction.Length > 0 ? shifter + " (" + construction + ")" : shifter;
+            if (construction.Length == 0)
+            {
+                return shifter;
+            }
+            if (IsInferred(gearboxTypeConfidence))
+            {
+                construction += "*";
+            }
+            return shifter + " (" + construction + ")";
+        }
+
+        /// <summary>
+        /// Whether the construction is inferred rather than stated outright by
+        /// a source - the same question docs/gearbox-construction-research.md
+        /// asks of every gearbox_type value it settles. "high" and "verified"
+        /// read as stated; "medium", "low", "unknown", and an empty value from
+        /// a dataset published before gearbox_type_confidence existed all read
+        /// as inferred, since none of them is a source saying so outright.
+        /// </summary>
+        private static bool IsInferred(string gearboxTypeConfidence)
+        {
+            return gearboxTypeConfidence != "verified" && gearboxTypeConfidence != "high";
         }
 
         /// <summary>

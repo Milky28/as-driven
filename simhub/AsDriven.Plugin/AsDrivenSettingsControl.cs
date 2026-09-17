@@ -1634,6 +1634,9 @@ namespace AsDriven.Plugin
             addTerm(
                 "The word in parenthesis on the FIT card",
                 "Where the FIT card names a car's gearbox construction - \"sync\" for synchromesh, \"dog\" for a dog box - that is this same fact, established for that specific car. It is shown only when it tells you something the shifter type does not already say: a sequential or paddle car's construction is not repeated here, because it does not change the technique the USE band already states.");
+            addTerm(
+                "The asterisk after \"sync\" or \"dog\"",
+                "The construction is not always stated outright by a source. Where it is - a technical regulation or a manufacturer specification naming it - the card shows it plainly. Where it is instead worked out from related evidence, such as every homologated version of a gearbox sharing the same construction, the card marks it with an asterisk so you know it is the best available reading rather than a stated fact. Either way it is the record's real evidence, not a guess made up for the card.");
 
             expander.Content = content;
             return expander;

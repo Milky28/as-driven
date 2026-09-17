@@ -23,6 +23,7 @@
         public string ShiftType;
         public string ShiftActuation;
         public string GearboxType;
+        public string GearboxTypeConfidence;
         public string ShiftPattern;
         public string FirstGearPosition;
         public int GearCount;

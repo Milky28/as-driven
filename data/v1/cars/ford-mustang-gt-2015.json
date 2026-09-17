@@ -35,7 +35,8 @@
         "automatic_blip": "unknown"
       },
       "standing_start_clutch": "required",
-      "first_gear_position": "up-left"
+      "first_gear_position": "up-left",
+      "gearbox_type_confidence": "high"
     },
     "steering": {
       "wheel_rim": {

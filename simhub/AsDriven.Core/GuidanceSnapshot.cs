@@ -17,6 +17,7 @@ namespace AsDriven.Core
         public string ShiftType { get; private set; }
         public string ShiftActuation { get; private set; }
         public string GearboxType { get; private set; }
+        public string GearboxTypeConfidence { get; private set; }
         public string ShiftPattern { get; private set; }
         public string FirstGearPosition { get; private set; }
         public int GearCount { get; private set; }
@@ -250,11 +251,17 @@ namespace AsDriven.Core
         }
 
         /// <summary>Gear count, actuation, and construction where it says
-        /// something the actuation does not, e.g. "5-speed H-pattern
-        /// (synchromesh)".</summary>
+        /// something the actuation does not, e.g. "5-speed H-pattern (sync)".
+        /// Marked with an asterisk when the construction is inferred rather
+        /// than stated outright - see <see cref="PreflightLabels.Shifter"/>.
+        /// </summary>
         public string ShifterLabel
         {
-            get { return PreflightLabels.Shifter(GearCount, ShiftActuation, GearboxType); }
+            get
+            {
+                return PreflightLabels.Shifter(
+                    GearCount, ShiftActuation, GearboxType, GearboxTypeConfidence);
+            }
         }
 
         /// <summary>Where the gears sit, e.g. "Dogleg gate - 1st down and left".</summary>
@@ -365,6 +372,7 @@ namespace AsDriven.Core
                 ShiftType = values.ShiftType,
                 ShiftActuation = values.ShiftActuation,
                 GearboxType = values.GearboxType,
+                GearboxTypeConfidence = values.GearboxTypeConfidence,
                 ShiftPattern = values.ShiftPattern,
                 FirstGearPosition = values.FirstGearPosition,
                 GearCount = values.GearCount,
@@ -451,6 +459,7 @@ namespace AsDriven.Core
                 ShiftType = string.Empty,
                 ShiftActuation = string.Empty,
                 GearboxType = string.Empty,
+                GearboxTypeConfidence = string.Empty,
                 ShiftPattern = string.Empty,
                 FirstGearPosition = string.Empty,
                 GearCount = 0,

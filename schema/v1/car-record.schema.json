@@ -171,6 +171,10 @@
             "unknown"
           ]
         },
+        "gearbox_type_confidence": {
+          "description": "How well gearbox_type is established, derived from the provenance claim(s) that cover it - never hand-authored, and never a basis for promotion or review on its own. `python -m as_driven_db gearbox-type-confidence` computes it from `provenance.claims`; `validate` fails if it disagrees. Absent on a record that predates this field, which a consumer should read the same as `unknown`.",
+          "$ref": "#/$defs/confidenceLevel"
+        },
         "shift_actuation": {
           "type": "string",
           "enum": [

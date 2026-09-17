@@ -398,6 +398,12 @@ namespace AsDriven.Core
             // of this record.
             string conventionGuidance = ConventionRules.Resolve(conventions, controls);
             string conventionGuidanceShort = ConventionRules.ResolveShort(conventions, controls);
+            // Derived from the record's provenance claims, not from any
+            // simulator's view of the car, so it is read once here from the
+            // authentic block rather than the per-simulator effective one.
+            // Absent on a record published before this field existed, which
+            // reads the same as "unknown" - never as a stated confidence.
+            string gearboxTypeConfidence = OptionalState(transmission, "gearbox_type_confidence");
             JArray simulators = record["simulators"] as JArray;
             if (simulators == null || simulators.Count == 0)
             {
@@ -463,6 +469,7 @@ namespace AsDriven.Core
                             : string.Empty,
                     ShiftActuation = RequiredString(effectiveTransmission, "shift_actuation", recordPath),
                     GearboxType = RequiredString(effectiveTransmission, "gearbox_type", recordPath),
+                    GearboxTypeConfidence = gearboxTypeConfidence,
                     ShiftPattern = RequiredString(effectiveTransmission, "shift_pattern", recordPath),
                     FirstGearPosition = OptionalState(effectiveTransmission, "first_gear_position"),
                     GearCount = OptionalInteger(effectiveTransmission, "forward_gears"),
