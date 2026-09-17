@@ -144,8 +144,8 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(gate("h-pattern", "dogleg-h", None), "Dogleg gate, 1st outside the plane")
 
     def test_sequential_hardware_is_named_once(self) -> None:
-        self.assertEqual(shifter(6, "sequential-stick"), "6-speed sequential stick")
-        self.assertEqual(shifter(6, "sequential-paddles"), "6-speed paddle shift")
+        self.assertEqual(shifter(6, "sequential-stick", "sequential"), "6-speed sequential stick")
+        self.assertEqual(shifter(6, "sequential-paddles", "sequential"), "6-speed paddle shift")
         self.assertEqual(gate("sequential-stick", "sequential", None), "")
         self.assertEqual(gate("sequential-paddles", "sequential", None), "")
 
@@ -154,6 +154,39 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(cars["dodge-viper-gts-r"]["gate"], "")
         self.assertEqual(cars["dallara-sp1"]["shifter"], "6-speed paddle shift")
         self.assertEqual(cars["dallara-sp1"]["gate"], "")
+
+    def test_shifter_names_the_gearbox_construction_only_where_it_adds_something(
+        self,
+    ) -> None:
+        """Mirrors PreflightLabels.Shifter: only synchromesh and dogbox add a
+        parenthetical, abbreviated the same way the card is after a live
+        install showed the spelled-out forms clipping mid-word."""
+        self.assertEqual(shifter(5, "h-pattern", "synchromesh"), "5-speed H-pattern (sync)")
+        self.assertEqual(shifter(5, "h-pattern", "dogbox"), "5-speed H-pattern (dog)")
+        # Every other gearbox_type only restates the actuation word already on
+        # the line, so it must add nothing.
+        for gearbox_type in (
+            "sequential", "semi-automatic", "dual-clutch", "automatic",
+            "direct-drive", "unknown",
+        ):
+            self.assertEqual(
+                shifter(6, "sequential-paddles", gearbox_type), "6-speed paddle shift"
+            )
+
+        # The BMW's ams2 override switches the actuation to sequential-stick
+        # but the record's gearbox is still a dogbox, so both the real-car row
+        # and the simulator's departure keep naming it.
+        cars = {car["id"]: car for car in collect(ROOT)["cars"]}
+        bmw_car = cars["bmw-m3-e46-gtr"]
+        self.assertEqual(bmw_car["shifter"], "6-speed H-pattern (dog)")
+        ams2 = next(
+            simulator for simulator in bmw_car["simulators"] if simulator["id"] == "ams2"
+        )
+        shifter_diff = next(
+            item for item in ams2["differences"] if item["name"] == "Shifter"
+        )
+        self.assertEqual(shifter_diff["real"], "6-speed H-pattern (dog)")
+        self.assertEqual(shifter_diff["sim"], "6-speed sequential stick (dog)")
 
     def test_every_curated_car_reaches_the_page(self) -> None:
         payload = collect(ROOT)
@@ -315,7 +348,7 @@ class SiteTests(unittest.TestCase):
             simulator for simulator in bmw_car["simulators"]
             if simulator["id"] == "ams2"
         )
-        self.assertEqual(bmw_car["shifter"], "6-speed H-pattern")
+        self.assertEqual(bmw_car["shifter"], "6-speed H-pattern (dog)")
         self.assertEqual(bmw_car["gate"], "Standard gate, 1st up and left")
         self.assertEqual(
             [
@@ -323,7 +356,7 @@ class SiteTests(unittest.TestCase):
                 for item in bmw["differences"]
             ],
             [
-                ("Shifter", "6-speed H-pattern", "6-speed sequential stick"),
+                ("Shifter", "6-speed H-pattern (dog)", "6-speed sequential stick (dog)"),
                 (
                     "Selection pattern",
                     "Standard H-pattern",

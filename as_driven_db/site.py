@@ -42,6 +42,11 @@ ACTUATION = {
     "direct-selection": "direct select",
 }
 
+CONSTRUCTION = {
+    "synchromesh": "sync",
+    "dogbox": "dog",
+}
+
 RIM = {
     "round": "Round rim",
     "d-shaped": "D-shaped rim",
@@ -206,11 +211,22 @@ def simulator_cockpit(behavior: dict[str, Any]) -> list[str]:
     return facts
 
 
-def shifter(gears: Any, actuation: str) -> str:
+def shifter(gears: Any, actuation: str, gearbox_type: str) -> str:
+    """The FIT-line shifter label, mirroring PreflightLabels.Shifter.
+
+    The construction word is appended only for synchromesh and dog-box
+    gearboxes, and abbreviated ("sync" / "dog") rather than spelled out - a
+    live installed card clipped the spelled-out forms mid-word, so the
+    in-sim client uses the same short forms. Every other gearbox_type value
+    only restates the shift-actuation word already on the line, so it adds
+    nothing here either.
+    """
     label = ACTUATION.get(actuation)
     if label is None:
         return "Shifter not recorded"
-    return f"{gears}-speed {label}" if isinstance(gears, int) and gears > 0 else label
+    text = f"{gears}-speed {label}" if isinstance(gears, int) and gears > 0 else label
+    construction = CONSTRUCTION.get(gearbox_type)
+    return f"{text} ({construction})" if construction else text
 
 
 def gate(actuation: str, pattern: str, first_gear: str | None) -> str:
@@ -302,11 +318,11 @@ def _shift_instruction(action: tuple[str, str], clutch: str) -> tuple[str, str]:
 DIFFERENCE_FIELDS = {
     "/forward_gears": (
         "Gears",
-        lambda t: shifter(t["forward_gears"], t["shift_actuation"]),
+        lambda t: shifter(t["forward_gears"], t["shift_actuation"], t["gearbox_type"]),
     ),
     "/shift_actuation": (
         "Shifter",
-        lambda t: shifter(t["forward_gears"], t["shift_actuation"]),
+        lambda t: shifter(t["forward_gears"], t["shift_actuation"], t["gearbox_type"]),
     ),
     "/shift_pattern": (
         "Selection pattern",
@@ -645,7 +661,8 @@ def _simulator_view(
         ),
         "drive": {
             "shifter": shifter(
-                effective["forward_gears"], effective["shift_actuation"]
+                effective["forward_gears"], effective["shift_actuation"],
+                effective["gearbox_type"],
             ),
             "launch": drive_launch,
             "upshift": drive_upshift,
@@ -806,7 +823,10 @@ def _car(
         "name": identity["display_name"],
         "car_class": identity.get("class", ""),
         "year": identity.get("year", {}).get("label", ""),
-        "shifter": shifter(transmission["forward_gears"], transmission["shift_actuation"]),
+        "shifter": shifter(
+            transmission["forward_gears"], transmission["shift_actuation"],
+            transmission["gearbox_type"],
+        ),
         "gate": gate(
             transmission["shift_actuation"],
             transmission["shift_pattern"],
@@ -845,7 +865,8 @@ def _car(
         "simulators": simulator_views,
         "real_drive": {
             "shifter": shifter(
-                transmission["forward_gears"], transmission["shift_actuation"]
+                transmission["forward_gears"], transmission["shift_actuation"],
+                transmission["gearbox_type"],
             ),
             "launch": [launch_text, launch_tone],
             "upshift": list(
