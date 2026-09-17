@@ -9,6 +9,28 @@ last approval it closed. Approvals are stamped in UTC, so a release finished
 late in a Pacific evening carries the following day. Take the date from
 `data/v1/index.json` rather than from the clock, or the two disagree by a day.
 
+## 0.23.0 - 2026-09-17
+
+- Show the gearbox construction on the FIT line for synchromesh and dog-box
+  cars, since that is what decides whether a downshift needs a blip. A new
+  collapsed "What do these terms mean?" glossary on the settings page's Car
+  browser tab explains H-pattern, sequential, and paddle actuation alongside
+  synchromesh and dog box.
+- Mark an inferred gearbox construction with an asterisk instead of stating it
+  as fact. `gearbox_type_confidence` is derived from the provenance claims
+  that cover `gearbox_type`, applied across 336 of 337 cars, and `validate`
+  now catches a stored value drifting from what its claims resolve to.
+  `docs/gearbox-construction-research.md` and the settings-page primer explain
+  the marker.
+- Name the gearbox construction on the public catalog page's shifter line too,
+  matching the in-sim card's wording.
+- Clear formula-dirt's driver summary rather than keep the generic "blip on
+  downshifts to be safe" filler `docs/driver-summaries.md` discourages; no
+  supported real-world content was found for Reiza's own car.
+- Ship dataset 0.8.0 with 337 reviewed cars. A database-only update delivers
+  the confidence marker's data; install the full 0.23.0 package for the FIT
+  card and settings-page changes.
+
 ## 0.22.3 - 2026-09-16
 
 - Rewrite the driver summaries for 325 of the 337 cars so each says something

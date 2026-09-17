@@ -294,6 +294,8 @@ Nissan R89C - Low Downforce,Nissan R89C - Low Downforce,covered-exact,prototype,
 Oreca 07,Oreca 07,covered-exact,other,6,oreca-07,not-applicable,No verification needed; exact runtime identity is curated.,stored-car-file,,,Oreca 07.shcarsettings
 Oreca 07 - Low Downforce,Oreca 07 - Low Downforce,covered-exact,other,6,oreca-07,not-applicable,No verification needed; exact runtime identity is curated.,stored-car-file,,,Oreca 07 - Low Downforce.shcarsettings
 Panoz Esperante GTLM,Panoz Esperante GTLM,covered-exact,other,6,panoz-esperante-gtlm,not-applicable,No verification needed; exact runtime identity is curated.,stored-car-file,,,Panoz Esperante GTLM.shcarsettings
+Panoz Esperante GTR-1,Panoz Esperante GTR-1,covered-exact,other,,panoz-esperante-gtr-1,not-applicable,No verification needed; exact runtime identity is curated.,live-diagnostics,GT1,2026-09-12T15:34:44.8849562Z,
+Panoz Esperante GTR1,Panoz Esperante GTR1,full-guided-verification,other,,,independent-control-research-needed,Capture the current exact identity and complete the guided driving and cockpit review.,live-diagnostics,GT1,2026-09-12T18:32:22.0669123Z,
 Passat Classic B,Passat Classic B,covered-exact,other,,passat-classic-b,not-applicable,No verification needed; exact runtime identity is curated.,live-diagnostics,CopaClassicB,2026-08-14T18:14:00.4654641Z,
 Passat Classic FL,Passat Classic FL,covered-exact,other,,passat-classic-fl,not-applicable,No verification needed; exact runtime identity is curated.,live-diagnostics,CopaClassicFL,2026-08-14T18:55:54.0190969Z,
 Passat Hot Cars,Passat Hot Cars,covered-exact,other,,passat-hot-cars,not-applicable,No verification needed; exact runtime identity is curated.,live-diagnostics,Hot Cars,2026-08-16T03:39:01.1051713Z,

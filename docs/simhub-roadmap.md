@@ -351,12 +351,12 @@ instead, which fit comfortably even at eight forward gears - the most in the
 curated dataset - and the settings-page primer defines both in full. Reverified
 live on the same card after the change.
 
-Also not yet done: `as_driven_db/site.py`'s `shifter()` mirrors
-`PreflightLabels.Shifter` for the public catalog page by design (its module
-docstring says so) and was not updated in this pass, so the catalog and the
-in-sim card now disagree on this one line until it is.
+`as_driven_db/site.py`'s `shifter()` mirrors `PreflightLabels.Shifter` for the
+public catalog page by design (its module docstring says so); it now names the
+construction too, though not yet its confidence asterisk - the catalog and the
+in-sim card agree on the word but not yet on the marker.
 
-**The asterisk: done, not yet released.** Per `docs/gearbox-construction-research.md`,
+**The asterisk: done and released in 0.23.0.** Per `docs/gearbox-construction-research.md`,
 a lot of `gearbox_type` values are inferred at `medium` confidence rather
 than stated outright at `high`/`verified`. The card now says which.
 
@@ -371,8 +371,8 @@ match wins, and where multiple claims independently corroborate the same
 value at the same depth the strongest of them is taken rather than the
 weakest, since more evidence is never a reason to report less confidence.
 `validate` fails if the stored field disagrees with what the claims
-currently resolve to. Applying it once across the full dataset resolved 78
-records `verified`, 194 `high`, 53 `medium`, and left exactly one -
+currently resolve to. Applying it across the full dataset resolved 77
+records `verified`, 196 `high`, 63 `medium`, and left exactly one -
 `chevrolet-corvette-c3-r-convertible`, a retired record with no real
 referent - `unknown` because no claim covers the field at all, the same
 answer its own `gearbox_type` value already gives.
@@ -395,12 +395,9 @@ already tolerates a database published before `conventions.json` existed.
 `(sync*)`, `(dog*)` - when the confidence is anything other than `verified`
 or `high`; the settings-page primer explains what the marker means.
 
-Not yet done: this hasn't gone through a release, so `dataset_version` is
-unbumped and there's no changelog entry - `dataset_version` bumps and
-changelog entries are a release-time act (`docs/releasing.md`), not
-something to do from a feature branch. Also still open from the FIT-line
-change above: `as_driven_db/site.py`'s `shifter()` does not yet show
-construction or its confidence at all.
+Released in 0.23.0 / dataset 0.8.0. Still open: `as_driven_db/site.py`'s
+`shifter()` names the construction (see above) but does not yet show its
+confidence asterisk.
 
 **The primer.** A new, collapsed-by-default section on the native SimHub
 settings page (alongside the existing car-browser guidance cells in

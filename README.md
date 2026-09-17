@@ -14,20 +14,17 @@ and simulator-independent; the plugin is one client that reads it.
 [contribute a simulator observation](https://github.com/Milky28/as-driven/issues/new?template=simulator-observation.yml),
 or [improve an existing car's research](https://github.com/Milky28/as-driven/issues/new?template=existing-car-research.yml).
 
-## New in 0.22.3
+## New in 0.23.0
 
-- **Driver summaries worth reading.** Most cars now tell you something about
-  the car itself: why it was built, what it won, or which real era a generic
-  class represents, instead of repeating the Fit and Use rows.
-- **Technique where it matters.** Useful notes stay, such as the MP4/4's
-  mirrored dogleg gate or a mod that shows the wrong shift pattern.
-- **Sourced contributions.** Researched contributions can now include a
-  summary that is checked and reviewed with the rest of the car.
-- **Era themes for every dated car.** Cars whose year is only in their label,
-  such as the PMR Javelin and Chaparral 2F, now get their automatic era theme.
-- **Clear gate conflicts.** Where a car's shifter evidence disagrees, the card
-  says "Gate conflict - needs review" instead of mixing H-pattern and
-  sequential instructions.
+- **Gearbox construction on the FIT line.** Synchromesh and dog-box cars now
+  say so - "5-speed H-pattern (dog)" - since that is what decides whether a
+  downshift needs a blip. A new collapsed glossary on the settings page's Car
+  browser tab explains the terms.
+- **An asterisk for an inferred construction.** Where the construction was not
+  stated outright by a source, the card marks it "(dog*)" instead of stating
+  it as fact.
+- **The public catalog agrees with the card.** The catalog page's shifter line
+  now names the same construction the in-sim card does.
 
 Download it from the
 [latest published release](https://github.com/Milky28/as-driven/releases/latest).
@@ -120,7 +117,7 @@ you choose to share them. See [PRIVACY.md](PRIVACY.md).
 ## What it covers
 
 <!-- release-facts:start -->
-Dataset 0.7.0 contains 337 reviewed car records.
+Dataset 0.8.0 contains 337 reviewed car records.
 
 | Simulator | Records | Also curated for AMS2 |
 | --- | --- | --- |

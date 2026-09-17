@@ -1,13 +1,13 @@
 {
   "manifest": "ams2-exact-identity-coverage",
   "manifest_version": "0.1.0",
-  "generated_at": "2026-09-16",
-  "dataset_version": "0.7.0",
+  "generated_at": "2026-09-17",
+  "dataset_version": "0.8.0",
   "simhub_version": "9.11.22",
   "identity_sources": {
     "stored_car_files": "C:\\Program Files (x86)\\SimHub\\PluginsData\\Automobilista2\\Cars",
     "live_diagnostics_log": "C:\\Users\\jerky\\AppData\\Local\\SimHub\\AsDriven\\Diagnostics\\unmatched-identities.jsonl",
-    "live_identities_seen": 206,
+    "live_identities_seen": 208,
     "live_only_identities": [
       "ARC Camaro",
       "Brabham BMW BT52 - High Downforce",
@@ -120,6 +120,8 @@
       "Mitsubishi Lancer Evo10 RX",
       "Mitsubishi Lancer R",
       "Mitsubishi Lancer RS",
+      "Panoz Esperante GTR-1",
+      "Panoz Esperante GTR1",
       "Passat Classic B",
       "Passat Classic FL",
       "Passat Hot Cars",
@@ -167,19 +169,24 @@
     "A retired identity is never aliased onto its renamed record, because it cannot be verified in the certified build."
   ],
   "stats": {
-    "observed_identities": 370,
-    "curated_records": 307,
-    "covered_exact_identities": 355,
-    "uncovered_identities": 15,
-    "full_guided_verifications": 0,
+    "observed_identities": 372,
+    "curated_records": 337,
+    "covered_exact_identities": 356,
+    "uncovered_identities": 16,
+    "full_guided_verifications": 1,
     "dispositions": {
-      "covered-exact": 355,
+      "covered-exact": 356,
+      "full-guided-verification": 1,
       "out-of-scope": 1,
       "retired-identity": 7,
       "third-party-content": 7
     },
-    "full_verifications_by_family": {},
-    "full_verifications_by_research_readiness": {}
+    "full_verifications_by_family": {
+      "other": 1
+    },
+    "full_verifications_by_research_readiness": {
+      "independent-control-research-needed": 1
+    }
   },
   "entries": [
     {
@@ -4493,6 +4500,34 @@
       "simhub_max_gears": 6,
       "identity_file_modified_at": 1783202013.1253364,
       "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Panoz Esperante GTR-1",
+      "car_id": "Panoz Esperante GTR-1",
+      "identity_file": null,
+      "coverage_disposition": "covered-exact",
+      "family": "other",
+      "related_record_id": "panoz-esperante-gtr-1",
+      "recommended_action": "No verification needed; exact runtime identity is curated.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "GT1",
+      "live_observed_at": "2026-09-12T15:34:44.8849562Z",
+      "live_game_version": "1.6.9.95",
+      "research_readiness": "not-applicable"
+    },
+    {
+      "telemetry_name": "Panoz Esperante GTR1",
+      "car_id": "Panoz Esperante GTR1",
+      "identity_file": null,
+      "coverage_disposition": "full-guided-verification",
+      "family": "other",
+      "related_record_id": null,
+      "recommended_action": "Capture the current exact identity and complete the guided driving and cockpit review.",
+      "identity_source": "live-diagnostics",
+      "telemetry_class": "GT1",
+      "live_observed_at": "2026-09-12T18:32:22.0669123Z",
+      "live_game_version": "1.6.9.95",
+      "research_readiness": "independent-control-research-needed"
     },
     {
       "telemetry_name": "Passat Classic B",
