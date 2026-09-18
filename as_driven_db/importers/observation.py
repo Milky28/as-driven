@@ -375,6 +375,18 @@ def import_observation(
             )
         cut_state = "unknown"
         blip_state = "unknown"
+    if simulator == "lmu":
+        # SimHub's LMU throttle is unfiltered driver input, so a blip result
+        # can only describe the contributor's foot. Drafts held as `other`
+        # before registration still carry a blip answer; the cut reads torque
+        # and is kept.
+        if blip_state != "unknown":
+            review_notes.append(
+                "LMU automatic-blip result was degraded to unknown: SimHub's LMU "
+                "throttle value is unfiltered driver input, not the engine throttle "
+                "where the car's own blip appears."
+            )
+        blip_state = "unknown"
 
     rim = cockpit["wheel_rim"]
     # Drafts saved before the rim vocabulary was merged still carry the retired

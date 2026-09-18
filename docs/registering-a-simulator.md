@@ -169,6 +169,28 @@ this does not establish a simulator-wide limitation. No new telemetry exclusions
 are inferred from that single car, and automatic cut stays unknown for its drive.
 Registration does not establish which real car F301 represents.
 
+## Le Mans Ultimate (LMU)
+
+Le Mans Ultimate is registered as `lmu`, accepting the whole game names `LMU`
+(SimHub's name) and `Le Mans Ultimate`. It runs on rFactor 2's engine but stays
+a separate simulator: its cars, identities and versions are its own.
+
+`Le Mans Ultimate.exe` stamps the game release, so the client reads its file
+version (1.4.1.5 on 2026-09-18) rather than a Steam build id.
+
+SimHub reads LMU through its own shared-memory wrapper, not the rFactor 2 one,
+but that wrapper's `GD_Throttle` reads the same `mUnfilteredThrottle` field
+(checked in `RfactorReader.dll`, SimHub 9.12.7). This is a property of the reader
+rather than of one car, so it applies to the whole simulator immediately:
+automatic blip is unmeasurable, and the importer degrades a held draft's blip
+answer to `unknown` on release. The cut is different. The first drive, issue
+#140, recorded a shift-local torque interruption, so torque is published and
+the cut stays reviewable.
+
+That drive's `game_version` was entered by hand as `1.4150` while the client
+was treating LMU as `other`. The executable on the maintainer's PC reports
+1.4.1.5; settle which one is right during review, before promotion.
+
 ## What registering does not do
 
 It does not promote anything by itself. Held observations rejoin the ordinary

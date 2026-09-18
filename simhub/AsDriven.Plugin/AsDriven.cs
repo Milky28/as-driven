@@ -1558,6 +1558,7 @@ namespace AsDriven.Plugin
             if (string.Equals(simulator, "ac-rally", StringComparison.Ordinal)) return "Assetto Corsa Rally";
             if (string.Equals(simulator, "raceroom", StringComparison.Ordinal)) return "RaceRoom Racing Experience";
             if (string.Equals(simulator, "rfactor2", StringComparison.Ordinal)) return "rFactor 2";
+            if (string.Equals(simulator, "lmu", StringComparison.Ordinal)) return "Le Mans Ultimate";
             if (string.Equals(simulator, "pmr", StringComparison.Ordinal)) return "Project Motor Racing";
             if (string.Equals(simulator, "gtr2", StringComparison.Ordinal)) return "GTR 2";
             return string.IsNullOrWhiteSpace(rawGameName) ? "Simulator" : rawGameName;
@@ -1597,6 +1598,9 @@ namespace AsDriven.Plugin
                 // rFactor2.exe stamps 1.1.3.4; the dedicated server and mod
                 // mode carry the same version but are not the game.
                 case "rfactor2": return new[] { "rFactor2" };
+                // "Le Mans Ultimate.exe" stamps the game release (1.4.1.5 on
+                // 2026-09-18); the launcher and EAC bootstrapper are unversioned.
+                case "lmu": return new[] { "Le Mans Ultimate" };
                 // PMR's launcher executable reports the GIANTS runtime version
                 // rather than the game build, so its Steam content build is the
                 // reproducible value. GTR2.exe carries the game's 1.1 version.

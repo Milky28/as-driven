@@ -2024,7 +2024,7 @@ class ReviewSubmissionTests(unittest.TestCase):
             )
 
             (case_dir / "submission.json").write_text(
-                json.dumps({"source_game_name": "LeMansUltimate"}), encoding="utf-8"
+                json.dumps({"source_game_name": "rFactor"}), encoding="utf-8"
             )
             self.assertTrue(
                 _case_is_current(case_dir, issue, url),
@@ -2125,7 +2125,7 @@ class ReviewSubmissionTests(unittest.TestCase):
         payload = fixtures.observation("Unregistered Probe")
         payload["observation_id"] = "other.unregistered-probe.20260826t194202971z-890e7e57"
         payload["simulator"] = "other"
-        payload["source_game_name"] = "LeMansUltimate"
+        payload["source_game_name"] = "rFactor"
         bundle = import_observation(payload)
 
         with self.assertRaises(ValueError) as raised:
@@ -2134,7 +2134,7 @@ class ReviewSubmissionTests(unittest.TestCase):
                 {"record_id": bundle["record"]["record_id"]},
                 approved_at="2026-08-26",
             )
-        self.assertIn("LeMansUltimate", str(raised.exception))
+        self.assertIn("rFactor", str(raised.exception))
         self.assertNotIn("unnamed game", str(raised.exception))
 
     def test_a_closed_issue_keeps_its_case(self) -> None:

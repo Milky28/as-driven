@@ -333,20 +333,22 @@ class ObservationIntakeTests(unittest.TestCase):
             # Deliberately a game this project has not registered. RRRE stood
             # here until RaceRoom was registered, at which point this drive
             # started being released rather than held and the test was asserting
-            # something that had stopped being true.
+            # something that had stopped being true. LeMansUltimate replaced it
+            # and went the same way when LMU was registered; the original
+            # rFactor is deliberately never resolved.
             payload = observation("Held Probe Car")
             payload["observation_id"] = (
                 "other.held-probe-car.20260826t043236230z-67fbf819"
             )
             payload["simulator"] = "other"
-            payload["source_game_name"] = "LeMansUltimate"
+            payload["source_game_name"] = "rFactor"
             receipt = intake_observation(
                 ROOT, self.write(temp, payload, "held.json"), inbox
             )
             self.assertEqual("unregistered-simulator", receipt["status"])
             self.assertTrue(receipt["stored"], "the drive is kept, not discarded")
             self.assertEqual(
-                "LeMansUltimate",
+                "rFactor",
                 receipt["unregistered_simulator"]["source_game_name"],
             )
 
@@ -363,6 +365,25 @@ class ObservationIntakeTests(unittest.TestCase):
             for _ in range(2):
                 receipt = intake_observation(ROOT, path, temp / "inbox")
                 self.assertEqual("ams1", receipt["released_simulator"])
+                self.assertEqual("new-identity", receipt["status"])
+                self.assertIsNone(receipt["unregistered_simulator"])
+                self.assertEqual(original, path.read_bytes())
+
+    def test_lmu_releases_an_old_draft_without_rewriting_it(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            payload = observation("Lamborghini Iron Lynx 2024")
+            payload["observation_id"] = (
+                "other.lamborghini-iron-lynx-2024.20260918t055917684z-132eb8d7"
+            )
+            payload["simulator"] = "other"
+            payload["source_game_name"] = "LMU"
+            payload["game_version"] = "1.4150"
+            path = self.write(temp, payload, "lmu.json")
+            original = path.read_bytes()
+            for _ in range(2):
+                receipt = intake_observation(ROOT, path, temp / "inbox")
+                self.assertEqual("lmu", receipt["released_simulator"])
                 self.assertEqual("new-identity", receipt["status"])
                 self.assertIsNone(receipt["unregistered_simulator"])
                 self.assertEqual(original, path.read_bytes())
@@ -441,7 +462,7 @@ class ObservationIntakeTests(unittest.TestCase):
             payload = observation("Some Other Sim Car")
             payload["observation_id"] = "other.some-car.20260826t194202971z-890e7e54"
             payload["simulator"] = "other"
-            payload["source_game_name"] = "LeMansUltimate"
+            payload["source_game_name"] = "rFactor"
             receipt = intake_observation(
                 ROOT, self.write(temp, payload, "held.json"), temp / "inbox"
             )

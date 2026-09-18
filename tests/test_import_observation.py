@@ -273,6 +273,29 @@ class ImportObservationTests(unittest.TestCase):
                 for note in bundle["review_notes"])
         )
 
+    def test_lmu_degrades_a_held_blip_and_keeps_the_torque_cut(self) -> None:
+        observation = _clean_observation()
+        observation["simulator"] = "lmu"
+        observation["observation_id"] = "lmu.test-hypercar.20260918t055917684z-abcd1234"
+        observation["game_version"] = "1.4.1.5"
+        # A draft held as `other` before registration still answers the blip
+        # from SimHub's unfiltered pedal channel.
+        observation["tests"]["automatic_cut"] = "yes"
+        observation["tests"]["automatic_blip"] = "no"
+
+        bundle = import_observation(observation)
+        transmission = bundle["record"]["authentic_controls"]["transmission"]
+        behavior = bundle["record"]["simulators"][0]["behavior"]
+
+        self.assertEqual(transmission["downshift"]["automatic_blip"], "unknown")
+        self.assertEqual(behavior["auto_blip"], "unknown")
+        self.assertEqual(transmission["upshift"]["automatic_cut"], "yes")
+        self.assertEqual(behavior["shift_cut"], "yes")
+        self.assertTrue(
+            any("LMU automatic-blip result was degraded" in note
+                for note in bundle["review_notes"])
+        )
+
     def test_unknown_actuation_does_not_infer_gearbox(self) -> None:
         observation = _clean_observation()
         observation["cockpit"]["primary_shift_actuation"] = "unknown"

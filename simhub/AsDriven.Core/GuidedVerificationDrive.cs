@@ -1166,7 +1166,10 @@ namespace AsDriven.Core
                 return "GTR 2 publishes no usable throttle input through SimHub, so"
                     + " automatic blip stays unknown.";
             }
-            string summary = "SimHub's rFactor 2 throttle value is unfiltered driver input,"
+            string game = string.Equals(_simulator, "lmu", StringComparison.Ordinal)
+                ? "Le Mans Ultimate"
+                : "rFactor 2";
+            string summary = "SimHub's " + game + " throttle value is unfiltered driver input,"
                 + " not the filtered engine throttle where the car's own blip appears, so"
                 + " automatic blip stays unknown.";
             if (pedalSpike)

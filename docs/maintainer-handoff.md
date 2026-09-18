@@ -63,7 +63,9 @@ current dataset, the generated README coverage block for counts, and
   contains cars loaded here. See `docs/ams2-coverage-plan.md`.
 - Eight simulators are registered: 261 AMS2 entries, 21 AC, 18 ACC, 7 AC EVO,
   6 RaceRoom, 5 rFactor 2, 11 PMR and 2 GTR2 entries. `ac-rally` is reserved in
-  the enums and not wired into the client. PMR covers eleven GT and Group 5
+  the enums and not wired into the client. Le Mans Ultimate was registered as
+  `lmu` on 2026-09-18 with no curated entries yet; its first drive, issue #140,
+  releases into identity research. PMR covers eleven GT and Group 5
   cars, six of which it is the only simulator for. GTR2's HQ BMW M3 GTR and Chevrolet Corvette C5-R drives are also
   curated, using the exact `.CAR` identity resolved from the current
   telemetry-session header. A drive from an unregistered game is held rather

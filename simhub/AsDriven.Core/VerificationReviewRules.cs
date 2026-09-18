@@ -79,7 +79,13 @@ namespace AsDriven.Core
             // into GameData. A pedal spike can therefore only show that the
             // contributor touched the pedal; its presence or absence cannot
             // establish whether the car blipped automatically.
+            //
+            // SimHub's Le Mans Ultimate reader is separate code over LMU's own
+            // shared memory, but its GD_Throttle reads the same
+            // mUnfilteredThrottle field (checked in RfactorReader.dll, SimHub
+            // 9.12.7). That is a property of the reader, not of one car.
             return !string.Equals(simulator, "rfactor2", StringComparison.Ordinal)
+                && !string.Equals(simulator, "lmu", StringComparison.Ordinal)
                 && !string.Equals(simulator, "gtr2", StringComparison.Ordinal);
         }
 

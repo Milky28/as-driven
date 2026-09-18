@@ -318,6 +318,22 @@ namespace AsDriven.Core.Tests
                     "does not ask rFactor 2's unfiltered pedal channel to establish an engine-side blip");
                 True(VerificationReviewRules.AutomaticBlipIsMeasurable("ams2"),
                     "keeps automatic-blip review where SimHub publishes a usable throttle trace");
+                foreach (string lmuName in new[] { "LMU", "Le Mans Ultimate", "LeMansUltimate" })
+                {
+                    Equal("lmu", AsDrivenDatabase.CanonicalizeSimulator(lmuName),
+                        "recognises Le Mans Ultimate exactly");
+                    Equal("unmatched", database.Match(lmuName, "Lamborghini Iron Lynx 2024").MatchStatus,
+                        "offers an LMU contribution without guessing a curated car");
+                }
+                Equal(null, AsDrivenDatabase.CanonicalizeSimulator("Le Mans"),
+                    "does not match Le Mans Ultimate by prefix");
+                // SimHub's LMU reader maps GD_Throttle from mUnfilteredThrottle,
+                // the same driver-input field as its rFactor 2 reader.
+                False(VerificationReviewRules.AutomaticBlipIsMeasurable("lmu"),
+                    "does not ask LMU's unfiltered pedal channel to establish an engine-side blip");
+                // The first LMU drive recorded a shift-local torque interruption.
+                True(VerificationReviewRules.AutomaticCutIsMeasurable("lmu"),
+                    "keeps the LMU cut review, which its first drive answered");
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaRally"),
                     "does not resolve Rally, which nothing has been driven in");
                 Equal("acc", AsDrivenDatabase.CanonicalizeSimulator("AssettoCorsaCompetizione"),
@@ -1717,6 +1733,33 @@ namespace AsDriven.Core.Tests
                         rfactor2.Next();
                         Equal("unknown", rfactor2.GetResults().AutomaticBlip,
                             "preserves unknown for rFactor 2 automatic blip");
+                    }
+
+                    // LMU's SimHub reader uses the same unfiltered driver-input
+                    // field, so the same spike must not become a blip there,
+                    // and the explanation must name the game being driven.
+                    {
+                        GuidedVerificationDrive lmu = new GuidedVerificationDrive();
+                        lmu.Start(7, "lmu");
+                        lmu.AddSample(GuidedSample(now, 0, 0, 0, 1200, 0, 40, true));
+                        for (int guard = 0; guard < 40
+                            && lmu.GetSnapshot().Title != "Downshift without pedal input"; guard++)
+                        {
+                            lmu.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                            lmu.Next();
+                        }
+                        lmu.AddSample(GuidedSample(now, 4, 0, 0, 4000, 80, 100, true));
+                        lmu.AddSample(GuidedSample(
+                            now.AddMilliseconds(100), 4, 0, 62, 5200, 80, 210, true));
+                        lmu.AddSample(GuidedSample(
+                            now.AddMilliseconds(200), 3, 0, 0, 5200, 79, 90, true));
+                        lmu.AddSample(GuidedSample(
+                            now.AddMilliseconds(800), 3, 0, 0, 6000, 78, 90, true));
+                        True(lmu.GetSnapshot().Result.Contains("SimHub's Le Mans Ultimate throttle value"),
+                            "explains the LMU blip limit in LMU's own name");
+                        lmu.Next();
+                        Equal("unknown", lmu.GetResults().AutomaticBlip,
+                            "preserves unknown for LMU automatic blip");
                     }
 
                     // GTR 2 publishes no usable driver-throttle input. Starting

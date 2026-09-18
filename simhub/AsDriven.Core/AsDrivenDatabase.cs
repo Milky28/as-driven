@@ -362,6 +362,12 @@ namespace AsDriven.Core
             {
                 return "rfactor2";
             }
+            // Le Mans Ultimate runs on rFactor 2's engine but is its own game
+            // with its own car list; SimHub reports it as "LMU".
+            if (compact == "lmu" || compact == "lemansultimate")
+            {
+                return "lmu";
+            }
             if (compact == "projectmotorracing" || compact == "pmr")
             {
                 return "pmr";
@@ -1124,6 +1130,7 @@ namespace AsDriven.Core
                 case "ac-evo": return "AssettoCorsaEvo";
                 case "raceroom": return "RRRE";
                 case "rfactor2": return "RFactor2";
+                case "lmu": return "LMU";
                 case "pmr": return "ProjectMotorRacing";
                 case "gtr2": return "SIMBINGTR2";
                 default: return simulator;
@@ -1145,6 +1152,7 @@ namespace AsDriven.Core
                 case "ac-evo": return "Assetto Corsa EVO";
                 case "raceroom": return "RaceRoom Racing Experience";
                 case "rfactor2": return "rFactor 2";
+                case "lmu": return "Le Mans Ultimate";
                 case "pmr": return "Project Motor Racing";
                 case "gtr2": return "GTR 2 - FIA GT Racing Game";
                 default: return simulator;
@@ -1163,6 +1171,7 @@ namespace AsDriven.Core
                 case "ac-evo": return "AC EVO";
                 case "raceroom": return "RaceRoom";
                 case "rfactor2": return "rF2";
+                case "lmu": return "LMU";
                 case "pmr": return "PMR";
                 case "gtr2": return "GTR2";
                 default: return simulator;

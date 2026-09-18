@@ -15,6 +15,7 @@ _REGISTRY = {
     'ac-rally': ('Assetto Corsa Rally', 'AC Rally', ()),
     'raceroom': ('RaceRoom Racing Experience', 'RaceRoom', ('rrre', 'rrre64', 'raceroom', 'raceroomracingexperience', 'r3e')),
     'rfactor2': ('rFactor 2', 'rF2', ('rfactor2', 'rf2')),
+    'lmu': ('Le Mans Ultimate', 'LMU', ('lmu', 'lemansultimate')),
     'pmr': ('Project Motor Racing', 'PMR', ('projectmotorracing', 'pmr')),
     'gtr2': ('GTR 2', 'GTR2', ('simbingtr2', 'gtr2', 'gtr2fiagtracinggame')),
     'iracing': ('iRacing', 'iRacing', ('iracing',)),
