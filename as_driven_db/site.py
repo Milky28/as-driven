@@ -211,7 +211,9 @@ def simulator_cockpit(behavior: dict[str, Any]) -> list[str]:
     return facts
 
 
-def shifter(gears: Any, actuation: str, gearbox_type: str) -> str:
+def shifter(
+    gears: Any, actuation: str, gearbox_type: str, gearbox_type_confidence: str | None
+) -> str:
     """The FIT-line shifter label, mirroring PreflightLabels.Shifter.
 
     The construction word is appended only for synchromesh and dog-box
@@ -220,13 +222,32 @@ def shifter(gears: Any, actuation: str, gearbox_type: str) -> str:
     in-sim client uses the same short forms. Every other gearbox_type value
     only restates the shift-actuation word already on the line, so it adds
     nothing here either.
+
+    An inferred construction carries an asterisk, as on the card: anything
+    below "high" - including a missing confidence - is not a source stating
+    it outright.
     """
     label = ACTUATION.get(actuation)
     if label is None:
         return "Shifter not recorded"
     text = f"{gears}-speed {label}" if isinstance(gears, int) and gears > 0 else label
-    construction = CONSTRUCTION.get(gearbox_type)
-    return f"{text} ({construction})" if construction else text
+    # Direct selection never steps through the gears, so construction changes
+    # nothing the driver does.
+    construction = None if actuation == "direct-selection" else CONSTRUCTION.get(gearbox_type)
+    if not construction:
+        return text
+    if gearbox_type_confidence not in {"verified", "high"}:
+        construction += "*"
+    return f"{text} ({construction})"
+
+
+def _shifter_of(transmission: dict[str, Any]) -> str:
+    return shifter(
+        transmission["forward_gears"],
+        transmission["shift_actuation"],
+        transmission["gearbox_type"],
+        transmission.get("gearbox_type_confidence"),
+    )
 
 
 def gate(actuation: str, pattern: str, first_gear: str | None) -> str:
@@ -235,7 +256,7 @@ def gate(actuation: str, pattern: str, first_gear: str | None) -> str:
             return "Dogleg gate, 1st down and left"
         if first_gear == "down-right":
             return "Dogleg gate, 1st down and right"
-        return "Dogleg gate, 1st outside the plane"
+        return "Dogleg gate, 1st out of plane"
     if pattern == "standard-h":
         if first_gear == "up-right":
             return "Standard gate, 1st up and right"
@@ -318,11 +339,11 @@ def _shift_instruction(action: tuple[str, str], clutch: str) -> tuple[str, str]:
 DIFFERENCE_FIELDS = {
     "/forward_gears": (
         "Gears",
-        lambda t: shifter(t["forward_gears"], t["shift_actuation"], t["gearbox_type"]),
+        _shifter_of,
     ),
     "/shift_actuation": (
         "Shifter",
-        lambda t: shifter(t["forward_gears"], t["shift_actuation"], t["gearbox_type"]),
+        _shifter_of,
     ),
     "/shift_pattern": (
         "Selection pattern",
@@ -660,10 +681,7 @@ def _simulator_view(
             transmission, entry.get("overrides") or [], controls
         ),
         "drive": {
-            "shifter": shifter(
-                effective["forward_gears"], effective["shift_actuation"],
-                effective["gearbox_type"],
-            ),
+            "shifter": _shifter_of(effective),
             "launch": drive_launch,
             "upshift": drive_upshift,
             "downshift": drive_downshift,
@@ -823,10 +841,7 @@ def _car(
         "name": identity["display_name"],
         "car_class": identity.get("class", ""),
         "year": identity.get("year", {}).get("label", ""),
-        "shifter": shifter(
-            transmission["forward_gears"], transmission["shift_actuation"],
-            transmission["gearbox_type"],
-        ),
+        "shifter": _shifter_of(transmission),
         "gate": gate(
             transmission["shift_actuation"],
             transmission["shift_pattern"],
@@ -864,10 +879,7 @@ def _car(
         "unexplained_open_fields": open_fields,
         "simulators": simulator_views,
         "real_drive": {
-            "shifter": shifter(
-                transmission["forward_gears"], transmission["shift_actuation"],
-                transmission["gearbox_type"],
-            ),
+            "shifter": _shifter_of(transmission),
             "launch": [launch_text, launch_tone],
             "upshift": list(
                 _shift_instruction(
@@ -2369,6 +2381,8 @@ tr.detail > td {{ padding: 0 10px 14px; border-bottom: 1px solid var(--line); ba
   font-size: 13px; color: var(--muted);
 }}
 .legend .tone {{ margin-right: 7px; }}
+.legend-note {{ margin: 12px 0 0; max-width: 68ch; font-size: 13px; color: var(--muted); }}
+.legend-note strong {{ color: var(--ink); }}
 footer {{ margin-top: 26px; font-size: 13px; color: var(--faint); max-width: 68ch; }}
 footer p {{ margin: 0; }}
 .project-links {{ display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; }}
@@ -2515,6 +2529,11 @@ footer p {{ margin: 0; }}
   <span><span class="tone tone-optional">Your choice</span></span>
   <span><span class="tone tone-unknown">Not established</span></span>
 </div>
+<p class="legend-note"><strong>sync</strong> synchromesh: the gearbox matches
+shaft speeds itself, so a downshift blip is never required.
+<strong>dog</strong> dog box: gears engage by direct interlock, so matching revs
+on a downshift helps them engage cleanly. <strong>*</strong> the construction is
+worked out from related evidence rather than stated outright by a source.</p>
 
 <footer><p>Start with the real car, then choose a reviewed simulator to see the
 controls and technique to use. Simulator differences and evidence gaps stay in

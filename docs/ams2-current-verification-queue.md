@@ -289,7 +289,7 @@ only as prose. Until then the overlay derived the side from the pattern alone
 and told this car's driver first was down and left, which is the one thing about
 its gate that is not true. A dogleg establishes only that first sits outside the
 racing plane; the side is a separate observation, and a record that omits it now
-reads "1st outside the plane" rather than having a side assumed for it.
+reads "1st out of plane" rather than having a side assumed for it.
 
 Formula Classic Gen2 Model2 is the exception in its own class, corrected in
 dataset 0.3.38. It engages every gear immediately, up and down, with no lift, no

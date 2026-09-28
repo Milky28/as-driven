@@ -322,8 +322,10 @@ namespace AsDriven.Core.Tests
                 {
                     Equal("lmu", AsDrivenDatabase.CanonicalizeSimulator(lmuName),
                         "recognises Le Mans Ultimate exactly");
-                    Equal("unmatched", database.Match(lmuName, "Lamborghini Iron Lynx 2024").MatchStatus,
+                    Equal("unmatched", database.Match(lmuName, "Unreviewed LMU Car").MatchStatus,
                         "offers an LMU contribution without guessing a curated car");
+                    Equal("matched", database.Match(lmuName, "Lamborghini Iron Lynx 2024").MatchStatus,
+                        "matches LMU's first curated car by its exact identity");
                 }
                 Equal(null, AsDrivenDatabase.CanonicalizeSimulator("Le Mans"),
                     "does not match Le Mans Ultimate by prefix");
@@ -903,8 +905,12 @@ namespace AsDriven.Core.Tests
                     "names an open-top round rim");
                 Equal("Open-top D-shaped rim", PreflightLabels.WheelRim("d-shaped", "yes"),
                     "names an open-top D-shaped rim");
-                Equal("Round rim, top unknown", PreflightLabels.WheelRim("round", "unknown"),
+                Equal("Round, top unknown", PreflightLabels.WheelRim("round", "unknown"),
                     "does not hide an unrecorded open-top state");
+                Equal("D-shaped, top unknown", PreflightLabels.WheelRim("d-shaped", "unknown"),
+                    "keeps an unknown-top D-shaped rim inside the compact card");
+                Equal("6-speed direct select", PreflightLabels.Shifter(6, "direct-selection", "dogbox", "high"),
+                    "names no construction where the driver never steps through the gears");
                 Equal("Open-top rim (legacy)", PreflightLabels.WheelRim("yoke"), "labels a retired yoke value");
                 Equal("Rim not recorded", PreflightLabels.WheelRim("unknown"),
                     "says the rim was not recorded rather than inventing one");
@@ -987,7 +993,7 @@ namespace AsDriven.Core.Tests
                 Equal("Dogleg gate - 1st down and right",
                     PreflightLabels.Gate("h-pattern", "dogleg-h", "down-right"),
                     "follows the record when the gate is mirrored, as on the McLaren MP4/4");
-                Equal("Dogleg gate - 1st outside the plane",
+                Equal("Dogleg gate - 1st out of plane",
                     PreflightLabels.Gate("h-pattern", "dogleg-h", "unknown"),
                     "never assumes a dogleg puts first on the left");
                 Equal("Standard gate - 1st up and left", PreflightLabels.Gate("h-pattern", "standard-h"),
@@ -2526,6 +2532,8 @@ namespace AsDriven.Core.Tests
                     }
                 }
 
+                TestCardLabelsFitTheirBoxes(repositoryRoot);
+
                 Console.WriteLine("PASS: " + _assertions + " As Driven .NET assertions");
                 return 0;
             }
@@ -2643,6 +2651,134 @@ namespace AsDriven.Core.Tests
                 throw new InvalidOperationException(
                     label + ": expected '" + expected + "', got '" + actual + "'");
             }
+        }
+
+        /// <summary>
+        /// Every string PreflightLabels can put on the card, measured against
+        /// the box that draws it. Dash Studio clips overflowing text rather
+        /// than wrapping or ellipsising it, and these labels are bound by
+        /// expression, so the Python static text-fit test cannot see them. The
+        /// inputs come from the schema's own vocabularies, plus an empty and an
+        /// unrecognised value for an older or newer dataset, so a new value
+        /// is measured without this test having to learn about it. Gear
+        /// counts run to the most the curated data carries: the schema allows
+        /// twenty, and a two-digit H-pattern would not fit the compact card.
+        /// </summary>
+        private static void TestCardLabelsFitTheirBoxes(string repositoryRoot)
+        {
+            JObject schema = JObject.Parse(File.ReadAllText(
+                Path.Combine(repositoryRoot, "schema", "v1", "car-record.schema.json")));
+            JObject layout = JObject.Parse(File.ReadAllText(
+                Path.Combine(repositoryRoot, "simhub", "dash", "card-text-boxes.json")));
+            Func<string, string, string[]> vocabulary = (definition, property) =>
+                SchemaVocabulary(schema, definition, property);
+
+            string[] actuation = vocabulary("transmission", "shift_actuation");
+            string[] gearbox = vocabulary("transmission", "gearbox_type");
+            string[] confidence = vocabulary("transmission", "gearbox_type_confidence");
+            string[] pattern = vocabulary("transmission", "shift_pattern");
+            string[] firstGear = vocabulary("transmission", "first_gear_position");
+            string[] launch = vocabulary("transmission", "standing_start_clutch");
+            string[] clutch = vocabulary("shiftAction", "clutch");
+            string[] lift = vocabulary("shiftAction", "throttle_lift");
+            string[] blip = vocabulary("shiftAction", "manual_blip");
+            string[] state = SchemaVocabulary(schema, "state", null);
+            JObject rim = (JObject)schema["$defs"]["steering"]["properties"]["wheel_rim"];
+            string[] shape = EnumWithUnrecognised(rim["properties"]["shape"]);
+
+            int maxGears = Directory.GetFiles(
+                    Path.Combine(repositoryRoot, "data", "v1", "cars"), "*.json")
+                .Select(path => JObject.Parse(File.ReadAllText(path))
+                    .SelectToken("authentic_controls.transmission.forward_gears"))
+                .Where(token => token != null && token.Type == JTokenType.Integer)
+                .Max(token => (int)token);
+            int[] gears = Enumerable.Range(0, maxGears + 1).ToArray();
+
+            var labels = new Dictionary<string, IEnumerable<string>>
+            {
+                { "WheelRimLabel", from s in shape from o in state select PreflightLabels.WheelRim(s, o) },
+                { "WheelFeatureLabel", from d in state from l in state select PreflightLabels.WheelFeatures(d, l) },
+                {
+                    "ShifterLabel",
+                    from g in gears from a in actuation from t in gearbox from c in confidence
+                    select PreflightLabels.Shifter(g, a, t, c)
+                },
+                {
+                    "ShifterGateLabel",
+                    from a in actuation from p in pattern from f in firstGear
+                    select PreflightLabels.Gate(a, p, f)
+                },
+                { "LaunchLabel", launch.Select(value => PreflightLabels.Launch(value)) },
+                { "LaunchDetailLabel", launch.Select(value => PreflightLabels.LaunchDetail(value)) },
+                { "UpshiftLabel", from l in lift from c in state select PreflightLabels.Upshift(l, c) },
+                { "UpshiftClutchLabel", clutch.Select(value => PreflightLabels.RunningClutch(value)) },
+                { "DownshiftLabel", from b in blip from a in state select PreflightLabels.Downshift(b, a) },
+                { "DownshiftClutchLabel", clutch.Select(value => PreflightLabels.RunningClutch(value)) },
+            };
+
+            var measured = new HashSet<string>();
+            var clipped = new List<string>();
+            foreach (JProperty template in ((JObject)layout["templates"]).Properties())
+            {
+                foreach (JProperty box in ((JObject)template.Value).Properties())
+                {
+                    True(labels.ContainsKey(box.Name),
+                        "the card text test enumerates every bound label, including " + box.Name);
+                    measured.Add(box.Name);
+                    float width = (float)box.Value["width"];
+                    float size = (float)box.Value["font_size"];
+                    bool bold = (string)box.Value["font_weight"] == "Bold";
+                    // Collected rather than thrown one at a time, so a layout
+                    // change reports every string it clips in one run.
+                    clipped.AddRange(labels[box.Name].Distinct()
+                        .Where(text => !FitsSegoeUi(text, width, size, bold))
+                        .Select(text => template.Name + " " + box.Name + " '" + text + "' in "
+                            + width + "px at " + size + "px"));
+                }
+            }
+            True(clipped.Count == 0,
+                "every card label fits its box; clipped: " + string.Join("; ", clipped.ToArray()));
+            foreach (string name in labels.Keys)
+            {
+                True(measured.Contains(name), "the card still draws " + name);
+            }
+
+            // The measurement has to discriminate, not just pass: the spelled-out
+            // construction clipped mid-word on a live card at both overlay sizes
+            // before it was abbreviated.
+            foreach (string template in new[] { "detailed", "compact" })
+            {
+                JToken box = layout["templates"][template]["ShifterLabel"];
+                False(FitsSegoeUi("5-speed H-pattern (synchromesh)",
+                        (float)box["width"], (float)box["font_size"], true),
+                    "the live " + template + " clip of the spelled-out construction still measures as a clip");
+            }
+        }
+
+        private static string[] SchemaVocabulary(JObject schema, string definition, string property)
+        {
+            JToken node = schema["$defs"][definition];
+            if (property != null)
+            {
+                node = node["properties"][property];
+            }
+            string reference = (string)node["$ref"];
+            if (reference != null)
+            {
+                node = schema["$defs"][reference.Substring("#/$defs/".Length)];
+            }
+            return EnumWithUnrecognised(node);
+        }
+
+        private static string[] EnumWithUnrecognised(JToken node)
+        {
+            JArray values = (JArray)node["enum"];
+            True(values != null && values.Count > 0, "reads a schema vocabulary");
+            return values
+                .Select(value => value.Type == JTokenType.Null ? null : (string)value)
+                .Concat(new[] { null, string.Empty, "unrecognised-value" })
+                .Distinct()
+                .ToArray();
         }
 
         private static void AssertOverlayTextFits(GuidanceSnapshot snapshot, string label)

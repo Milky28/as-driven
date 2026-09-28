@@ -1,0 +1,161 @@
+{
+  "font": "Segoe UI",
+  "templates": {
+    "detailed": {
+      "DownshiftClutchLabel": {
+        "width": 182.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "DownshiftLabel": {
+        "width": 182.0,
+        "font_size": 14,
+        "font_weight": "Normal"
+      },
+      "LaunchDetailLabel": {
+        "width": 182.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "LaunchLabel": {
+        "width": 182.0,
+        "font_size": 14,
+        "font_weight": "Normal"
+      },
+      "ShifterGateLabel": {
+        "width": 239.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "ShifterLabel": {
+        "width": 239.0,
+        "font_size": 16,
+        "font_weight": "Bold"
+      },
+      "UpshiftClutchLabel": {
+        "width": 182.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "UpshiftLabel": {
+        "width": 182.0,
+        "font_size": 14,
+        "font_weight": "Normal"
+      },
+      "WheelFeatureLabel": {
+        "width": 239.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "WheelRimLabel": {
+        "width": 239.0,
+        "font_size": 16,
+        "font_weight": "Bold"
+      }
+    },
+    "compact": {
+      "DownshiftClutchLabel": {
+        "width": 123.33,
+        "font_size": 10.5,
+        "font_weight": "Normal"
+      },
+      "DownshiftLabel": {
+        "width": 123.33,
+        "font_size": 12,
+        "font_weight": "Normal"
+      },
+      "LaunchDetailLabel": {
+        "width": 123.33,
+        "font_size": 10.5,
+        "font_weight": "Normal"
+      },
+      "LaunchLabel": {
+        "width": 123.33,
+        "font_size": 12,
+        "font_weight": "Normal"
+      },
+      "ShifterGateLabel": {
+        "width": 163.0,
+        "font_size": 10.5,
+        "font_weight": "Normal"
+      },
+      "ShifterLabel": {
+        "width": 163.0,
+        "font_size": 13,
+        "font_weight": "Bold"
+      },
+      "UpshiftClutchLabel": {
+        "width": 123.33,
+        "font_size": 10.5,
+        "font_weight": "Normal"
+      },
+      "UpshiftLabel": {
+        "width": 123.33,
+        "font_size": 12,
+        "font_weight": "Normal"
+      },
+      "WheelFeatureLabel": {
+        "width": 163.0,
+        "font_size": 10.5,
+        "font_weight": "Normal"
+      },
+      "WheelRimLabel": {
+        "width": 163.0,
+        "font_size": 13,
+        "font_weight": "Bold"
+      }
+    },
+    "display": {
+      "DownshiftClutchLabel": {
+        "width": 202.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "DownshiftLabel": {
+        "width": 202.0,
+        "font_size": 14,
+        "font_weight": "Normal"
+      },
+      "LaunchDetailLabel": {
+        "width": 202.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "LaunchLabel": {
+        "width": 202.0,
+        "font_size": 14,
+        "font_weight": "Normal"
+      },
+      "ShifterGateLabel": {
+        "width": 269.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "ShifterLabel": {
+        "width": 269.0,
+        "font_size": 16,
+        "font_weight": "Bold"
+      },
+      "UpshiftClutchLabel": {
+        "width": 202.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "UpshiftLabel": {
+        "width": 202.0,
+        "font_size": 14,
+        "font_weight": "Normal"
+      },
+      "WheelFeatureLabel": {
+        "width": 269.0,
+        "font_size": 12.5,
+        "font_weight": "Normal"
+      },
+      "WheelRimLabel": {
+        "width": 269.0,
+        "font_size": 16,
+        "font_weight": "Bold"
+      }
+    }
+  }
+}

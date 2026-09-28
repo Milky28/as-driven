@@ -39,17 +39,21 @@ namespace AsDriven.Core
             return WheelRim(shape, "no");
         }
 
+        /// <summary>
+        /// The unknown-top forms drop "rim": "D-shaped rim, top unknown"
+        /// overflowed the compact card, which clips rather than wraps.
+        /// </summary>
         public static string WheelRim(string shape, string openTop)
         {
             switch (shape)
             {
                 case "round":
                     if (openTop == "yes") { return "Open-top round rim"; }
-                    if (openTop == "unknown") { return "Round rim, top unknown"; }
+                    if (openTop == "unknown") { return "Round, top unknown"; }
                     return "Round rim";
                 case "d-shaped":
                     if (openTop == "yes") { return "Open-top D-shaped rim"; }
-                    if (openTop == "unknown") { return "D-shaped rim, top unknown"; }
+                    if (openTop == "unknown") { return "D-shaped, top unknown"; }
                     return "D-shaped rim";
                 // The three retired values still render, so an older installed
                 // dataset shows the right words rather than "Unknown rim".
@@ -131,7 +135,11 @@ namespace AsDriven.Core
                 default: return "shifter not recorded";
             }
             string shifter = gears > 0 ? gears + "-speed " + label : label;
-            string construction = Construction(gearboxType);
+            // Direct selection never steps through the gears, so how they
+            // engage changes nothing the driver does.
+            string construction = actuation == "direct-selection"
+                ? string.Empty
+                : Construction(gearboxType);
             if (construction.Length == 0)
             {
                 return shifter;
@@ -207,7 +215,7 @@ namespace AsDriven.Core
             {
                 if (firstGearPosition == "down-left") { return "Dogleg gate - 1st down and left"; }
                 if (firstGearPosition == "down-right") { return "Dogleg gate - 1st down and right"; }
-                return "Dogleg gate - 1st outside the plane";
+                return "Dogleg gate - 1st out of plane";
             }
             if (pattern == "standard-h")
             {

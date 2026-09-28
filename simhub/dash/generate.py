@@ -731,7 +731,10 @@ def _fit_band(
     cell_width = (width - rail_width - 2) / 2
     icon_top = top + (height - icon_size) / 2
     text_left = cell_left + icon_size + 22
-    text_width = cell_width - icon_size - 30
+    # 6px short of the divider. At 8px, "8-speed sequential (sync*)" - a
+    # simulator override can put an H-pattern synchromesh car on a sequential
+    # stick - measured 0.1px over the compact cell.
+    text_width = cell_width - icon_size - 28
     compact = height <= 64
     head_top = top + 7 if compact else top + height / 2 - head_size - 3
     sub_top = top + 26 if compact else top + height / 2 + 2
@@ -1396,12 +1399,71 @@ def write_dashboards(output_directory: Path) -> list[Path]:
     return written
 
 
+# Checked in so the .NET tests, which run before the dashboards are generated,
+# can measure every label PreflightLabels can produce against the box that
+# draws it. Dash Studio clips overflowing text rather than wrapping or
+# ellipsising it, and these labels are bound by expression, so the static
+# text-fit test cannot see them.
+CARD_TEXT_BOXES = Path(__file__).with_name("card-text-boxes.json")
+
+
+def _walk_items(value: Any):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _walk_items(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _walk_items(child)
+
+
+def card_text_boxes() -> dict[str, Any]:
+    """The narrowest box each directly bound ``[AsDriven.*Label]`` is drawn in."""
+    templates: dict[str, Any] = {}
+    for spec in TEMPLATES:
+        variant = "detailed" if not spec.overlay else spec.key
+        boxes: dict[str, dict[str, Any]] = {}
+        for item in _walk_items(build_dashboard(overlay=spec.overlay, variant=variant)):
+            binding = ((item.get("Bindings") or {}).get("Text") or {}).get("Formula") or {}
+            expression = binding.get("Expression", "")
+            if not (expression.startswith("[AsDriven.") and expression.endswith("Label]")):
+                continue
+            prop = expression[len("[AsDriven."):-1]
+            if "[" in prop:
+                continue
+            box = {
+                "width": round(item["Width"], 2),
+                "font_size": item["FontSize"],
+                "font_weight": item["FontWeight"],
+            }
+            current = boxes.get(prop)
+            if current is None or box["width"] / box["font_size"] < current["width"] / current["font_size"]:
+                boxes[prop] = box
+        if boxes:
+            templates[spec.key] = dict(sorted(boxes.items()))
+    return {"font": "Segoe UI", "templates": templates}
+
+
+def write_card_text_boxes(path: Path = CARD_TEXT_BOXES) -> Path:
+    path.write_text(json.dumps(card_text_boxes(), indent=2) + "\n", encoding="utf-8")
+    return path
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate As Driven SimHub Dash Studio artifacts.")
-    parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--card-text-boxes", action="store_true",
+        help=f"rewrite {CARD_TEXT_BOXES.name} after a layout change",
+    )
     args = parser.parse_args()
-    for path in write_dashboards(args.output):
-        print(path)
+    if args.output is None and not args.card_text_boxes:
+        parser.error("pass --output, --card-text-boxes, or both")
+    if args.card_text_boxes:
+        print(write_card_text_boxes())
+    if args.output is not None:
+        for path in write_dashboards(args.output):
+            print(path)
     return 0
 
 

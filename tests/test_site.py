@@ -141,11 +141,11 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(gate("h-pattern", "dogleg-h", "down-left"), "Dogleg gate, 1st down and left")
         self.assertEqual(gate("h-pattern", "dogleg-h", "down-right"), "Dogleg gate, 1st down and right")
         # A dogleg establishes only that first sits outside the racing plane.
-        self.assertEqual(gate("h-pattern", "dogleg-h", None), "Dogleg gate, 1st outside the plane")
+        self.assertEqual(gate("h-pattern", "dogleg-h", None), "Dogleg gate, 1st out of plane")
 
     def test_sequential_hardware_is_named_once(self) -> None:
-        self.assertEqual(shifter(6, "sequential-stick", "sequential"), "6-speed sequential stick")
-        self.assertEqual(shifter(6, "sequential-paddles", "sequential"), "6-speed paddle shift")
+        self.assertEqual(shifter(6, "sequential-stick", "sequential", "high"), "6-speed sequential stick")
+        self.assertEqual(shifter(6, "sequential-paddles", "sequential", "high"), "6-speed paddle shift")
         self.assertEqual(gate("sequential-stick", "sequential", None), "")
         self.assertEqual(gate("sequential-paddles", "sequential", None), "")
 
@@ -161,8 +161,12 @@ class SiteTests(unittest.TestCase):
         """Mirrors PreflightLabels.Shifter: only synchromesh and dogbox add a
         parenthetical, abbreviated the same way the card is after a live
         install showed the spelled-out forms clipping mid-word."""
-        self.assertEqual(shifter(5, "h-pattern", "synchromesh"), "5-speed H-pattern (sync)")
-        self.assertEqual(shifter(5, "h-pattern", "dogbox"), "5-speed H-pattern (dog)")
+        self.assertEqual(
+            shifter(5, "h-pattern", "synchromesh", "high"), "5-speed H-pattern (sync)"
+        )
+        self.assertEqual(
+            shifter(5, "h-pattern", "dogbox", "verified"), "5-speed H-pattern (dog)"
+        )
         # Every other gearbox_type only restates the actuation word already on
         # the line, so it must add nothing.
         for gearbox_type in (
@@ -170,7 +174,8 @@ class SiteTests(unittest.TestCase):
             "direct-drive", "unknown",
         ):
             self.assertEqual(
-                shifter(6, "sequential-paddles", gearbox_type), "6-speed paddle shift"
+                shifter(6, "sequential-paddles", gearbox_type, "medium"),
+                "6-speed paddle shift",
             )
 
         # The BMW's ams2 override switches the actuation to sequential-stick
@@ -187,6 +192,45 @@ class SiteTests(unittest.TestCase):
         )
         self.assertEqual(shifter_diff["real"], "6-speed H-pattern (dog)")
         self.assertEqual(shifter_diff["sim"], "6-speed sequential stick (dog)")
+
+    def test_an_inferred_construction_carries_the_cards_asterisk(self) -> None:
+        """Mirrors PreflightLabels.Shifter: below "high" the construction was
+        worked out rather than stated, and a missing confidence from an older
+        dataset reads the same way. The page's key explains the marker."""
+        for confidence in ("medium", "low", "unknown", None):
+            self.assertEqual(
+                shifter(5, "h-pattern", "synchromesh", confidence),
+                "5-speed H-pattern (sync*)",
+            )
+            self.assertEqual(
+                shifter(6, "h-pattern", "dogbox", confidence), "6-speed H-pattern (dog*)"
+            )
+        # Direct selection never steps through the gears, so it names none.
+        self.assertEqual(
+            shifter(6, "direct-selection", "dogbox", "high"), "6-speed direct select"
+        )
+        # A construction that is never shown has nothing to mark.
+        self.assertEqual(
+            shifter(6, "sequential-paddles", "sequential", "medium"), "6-speed paddle shift"
+        )
+
+        payload = collect(ROOT)
+        for car in payload["cars"]:
+            record = json.loads(
+                (ROOT / "data" / "v1" / "cars" / f"{car['id']}.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            transmission = record["authentic_controls"]["transmission"]
+            if "(" not in car["shifter"]:
+                continue
+            with self.subTest(car=car["id"]):
+                self.assertEqual(
+                    car["shifter"].endswith("*)"),
+                    transmission.get("gearbox_type_confidence") not in {"verified", "high"},
+                )
+        page = build_site(ROOT)
+        self.assertIn("<strong>*</strong> the construction is", page)
 
     def test_every_curated_car_reaches_the_page(self) -> None:
         payload = collect(ROOT)

@@ -609,6 +609,21 @@ class SimHubDashTests(unittest.TestCase):
                     % (variant, item["Name"], text, estimated, item["Width"]),
                 )
 
+    def test_checked_in_card_text_boxes_match_the_layout(self):
+        """The .NET tests measure every PreflightLabels string against these
+        boxes, and run before the dashboards are generated, so the checked-in
+        copy must be the layout that actually ships. After a layout change,
+        run ``python simhub/dash/generate.py --card-text-boxes``."""
+        checked_in = json.loads(
+            self.generator.CARD_TEXT_BOXES.read_text(encoding="utf-8")
+        )
+        self.assertEqual(self.generator.card_text_boxes(), checked_in)
+        # Both overlay sizes draw the FIT and USE labels by expression, which
+        # is exactly what the static test above skips.
+        for template in ("detailed", "compact"):
+            self.assertIn("ShifterLabel", checked_in["templates"][template])
+            self.assertIn("DownshiftLabel", checked_in["templates"][template])
+
     def test_guided_drive_renders_each_prebroken_prompt_line(self):
         """Guided-drive prompts are dynamic, so both short lines need a box.
 
